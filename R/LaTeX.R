@@ -61,8 +61,7 @@ to_latex.huxtable <- function (ht, ...){
 
     colspec_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
     if (isTRUE(col_align == 'decimal')) colspec_valign_str <- 'S'
-    col_width <- col_width[mycol]
-    colspec_valign_str <- paste0(colspec_valign_str, '{', col_width,  '}')
+    colspec_valign_str <- paste0(colspec_valign_str, '{', col_width[mycol],  '}')
     colspec <- paste0(colspec, colspec_align_str, colspec_valign_str, ' ')
   }
   colspec <- paste0(colspec, '}')
