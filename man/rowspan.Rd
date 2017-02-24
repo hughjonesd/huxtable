@@ -13,7 +13,7 @@ set_rowspan(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{An integer vector or matrix of integers.}
+\item{value}{An integer vector or matrix of integers. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier.}
 

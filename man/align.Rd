@@ -13,7 +13,7 @@ set_align(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.}
+\item{value}{A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier.}
 

@@ -2,7 +2,7 @@
 TODO
 
 * testing for rowspan, colspan
-* should we use <- NULL to set to defaults? e.g. for colspan that wd be 1?
+* remove dependencies on tibble
 * heights - set per row!
 * escaping cell contents:
    - encoded_text_to_latex in tools may be helpful
@@ -12,16 +12,24 @@ TODO
 * sig figs and arbitrary formatC args
 * rotation
 * external placement (centering; on page)
-* set_* interface for dplyr-style pipelines
 * captions, notes and labels? maybe captions and labels, not notes
 * as_huxtable.ftable
 * "themes" i.e. standard setups for kinds of tables
-* easy syntax to alter cells by row, column, area or "where"... this could be a separate package...
+* easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
+  - columns should allow name1:name2 style syntax, maybe also starts_with & friends
+  - row names?
+  - row & column groups
+  - where(): could return a function that is called in place:
+    do_something(ht, cells = where(x > 6))
+  would become
+    if (is.function(cells)) cells <- cells(ht)
+  which then returns the relevant values, probably as a 2-column matrix (unusual form of indexing)
+
 
 BUGS
 * latex table width don't work
-* don't use default values like c('top', 'middle', 'bottom') unless you use match.arg to
-  get them!
+* colortbl doesn't work with multirow :-(
+
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?
 maybe make it an option

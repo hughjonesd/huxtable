@@ -1,12 +1,24 @@
 
 
-huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor')
+huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor',
+  'top_border', 'left_border', 'right_border', 'bottom_border') # think this makes sense...
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
 huxtable_table_attrs <- c('width')
 # list preserves different arg types:
-huxtable_default_attrs <- list(rowspan = 1, colspan = 1, align = 'center', valign = 'middle',
-    width = 1, col_width = NA, bgcolor = NA)
+huxtable_default_attrs <- list(
+  rowspan       = 1,
+  colspan       = 1,
+  align         = 'center',
+  valign        = 'middle',
+  width         = 1,
+  col_width     = NA,
+  bgcolor       = NA,
+  left_border   = 0,
+  right_border  = 0,
+  top_border    = 0,
+  bottom_border = 0
+  )
 
 
 make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', 'table'), check_fun = NULL,
@@ -44,7 +56,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       .(check_dims)
       .(check_values)
       .(extra_code)
-      attr(ht, attr_name)[] <- value
+      value[is.na(value)] <- huxtable_default_attrs[[.(attr_name)]]
+      attr(ht, .(attr_name))[] <- value
       ht
     }
   ))
@@ -127,7 +140,7 @@ make_getter_setters('width', 'table')
 NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
 
-#' @template getset-col
+#' @template getset-rowcol
 #' @templateVar attr_name col_width
 #' @templateVar rowcol col
 #' @templateVar attr_desc Column Widths
@@ -165,6 +178,71 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
 NULL
 make_getter_setters('bgcolor', 'cell')
 
+
+#' @template getset-cell
+#' @templateVar attr_name left_border
+#' @templateVar attr_desc Left Border
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
+#' border.
+#' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable set_left_border.huxtable
+#' @family borders
+NULL
+make_getter_setters('left_border', 'cell', check_fun = is.numeric)
+
+#' @template getset-cell
+#' @templateVar attr_name right_border
+#' @templateVar attr_desc Right Border
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
+#' border.
+#' @export right_border right_border<- set_right_border right_border.huxtable right_border<-.huxtable set_right_border.huxtable
+#' @family borders
+NULL
+make_getter_setters('right_border', 'cell', check_fun = is.numeric)
+
+#' @template getset-cell
+#' @templateVar attr_name top_border
+#' @templateVar attr_desc Top Border
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
+#' border.
+#' @export top_border top_border<- set_top_border top_border.huxtable top_border<-.huxtable set_top_border.huxtable
+#' @family borders
+NULL
+make_getter_setters('top_border', 'cell', check_fun = is.numeric)
+
+#' @template getset-cell
+#' @templateVar attr_name bottom_border
+#' @templateVar attr_desc Bottom Border
+#' @templateVar value_param_desc
+#' A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @export bottom_border bottom_border<- set_bottom_border bottom_border.huxtable bottom_border<-.huxtable set_bottom_border.huxtable
+#' @family borders
+NULL
+make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
+
+
+#' Set All Borders
+#'
+#' @inheritParams left_border
+#'
+#' @details This is a convenience function which sets left, right, top and bottom borders
+#' for the specified cells.
+#'
+#' @return The modified `ht` object.
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
+set_all_borders <- function(ht, row, col, value) UseMethod('set_all_borders')
+
+#' @export
+set_all_borders.huxtable <- function(ht, row, col, value) {
+  top_border(ht)[row, col] <- value
+  bottom_border(ht)[row, col] <- value
+  left_border(ht)[row, col] <- value
+  right_border(ht)[row, col] <- value
+  ht
+}
 
 # return matrix of whether cells are shadowed by rowspan from above or colspan from the left
 cell_shadows <- function(ht, row_or_col) {

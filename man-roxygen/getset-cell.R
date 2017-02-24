@@ -8,7 +8,7 @@
 #' set_<%= attr_name %>(ht, row, col, value)
 #'
 #' @param ht A huxtable.
-#' @param value <%= value_param_desc %>
+#' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default.
 #' @param row A row specifier.
 #' @param col A column specifier.
 #'

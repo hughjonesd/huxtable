@@ -60,6 +60,7 @@ cell_html <- function (ht, rn, cn) {
   cs <- colspan(ht)[rn,cn]
   if (isTRUE(rs > 1)) res <- paste0(res, ' rowspan="', rs ,'"')
   if (isTRUE(cs > 1)) res <- paste0(res, ' colspan="', cs ,'"')
+
   res<- paste0(res, ' style="')
   val <- valign(ht)[rn, cn]
   res <- paste0(res, 'vertical-align: ', val, '; ')
@@ -70,6 +71,14 @@ cell_html <- function (ht, rn, cn) {
     bgcolor <- paste(bgcolor, collapse = ', ')
     res <- paste0(res, 'background-color: rgb(', bgcolor, '); ')
   }
+  borders <- c(top_border(ht)[rn, cn], right_border(ht)[rn, cn], bottom_border(ht)[rn, cn],
+        left_border(ht)[rn, cn])
+  if (any(borders > 0)) {
+    borders <- paste(borders, 'px', sep = '', collapse = ' ')
+    res <- paste0(res, 'border-width:', borders, '; ')
+    res <- paste0(res, 'border-style: solid; ')
+  }
+
   res <- paste0(res, '">')
   res <- paste0(res, ht[rn, cn]) # eventually should be formatted!
   res <- paste0(res, '</td>\n')

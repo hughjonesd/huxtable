@@ -15,7 +15,7 @@ set_col_width(ht, col, value)
 
 \item{value}{A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.}
 
-\item{col}{A column specifier.}
+\item{col}{A col specifier.}
 }
 \value{
 For \code{col_width}, the \code{col_width} attribute. For \code{col_width<-}, the
