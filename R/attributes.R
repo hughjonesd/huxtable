@@ -49,7 +49,11 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     }
   ))
 
-  funs[[paste0('set_', attr_name)]] <- eval(bquote(
+  alt_setter <- paste0('set_', attr_name)
+  funs[[alt_setter]] <- eval(bquote(
+    function(ht, row, col, value) UseMethod(.(alt_setter))
+  ))
+  funs[[paste0(alt_setter, '.huxtable')]] <- eval(bquote(
     function(ht, row, col, value) {
       .(as.name(attr_name))(ht)[row, col] <- value
       ht
@@ -63,50 +67,15 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   NULL
 }
 
-make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
-
 
 #' @template getset
-#' @templatevar attr_name valign
-#' @templatevar attr_desc Vertical Alignment
-#' @templatevar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
-
-#' Get or set vertical alignment.
-#'
-#' @param ht A huxtable.
-#' @param value Vertical alignment for specific cells.
-#'
-#' @return A matrix of alignment values. For `valign`, these may be 'top', 'middle',
-#' 'bottom' or \code{NA}. For `align`, values may be 'left', 'center', 'middle' or \code{NA}.
-#' @export
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' valign(ht)[2,2] <- 'top'
-#' @name valign
+#' @templateVar attr_name valign
+#' @templateVar attr_desc Vertical Alignment
+#' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
+#' @export valign valign<- set_valign valign.huxtable valign<-.huxtable set_valign.huxtable
 NULL
 
-#' @export
-#' @name valign.huxtable
-#' @rdname valign
-NULL
-
-#' @export
-#' @name valign<-.huxtable
-#' @rdname valign
-NULL
-
-#' @export
-#' @name valign<-
-#' @rdname valign
-NULL
-
-
-#' @export
-#' @name set_valign
-#' @rdname valign
-NULL
-
+make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
 
 #' @export
 #' @rdname valign

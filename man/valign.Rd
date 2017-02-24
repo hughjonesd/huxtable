@@ -2,15 +2,17 @@
 % Please edit documentation in R/attributes.R
 \name{valign}
 \alias{valign}
-\alias{valign.huxtable}
-\alias{valign<-.huxtable}
 \alias{valign<-}
 \alias{set_valign}
 \alias{align}
 \alias{align<-}
 \alias{bgcolor<-}
-\title{Get or set vertical alignment.}
+\title{Get or Set Vertical Alignment}
 \usage{
+valign(ht)
+valign(ht) <- value
+set_valign(ht, row, col, value)
+
 align(ht)
 
 align(ht) <- value
@@ -20,16 +22,14 @@ bgcolor(ht) <- value
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{Vertical alignment for specific cells.}
+\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.}
+
+\item{row}{A row specifier.}
+
+\item{col}{A col specifier.}
 }
 \value{
-A matrix of alignment values. For `valign`, these may be 'top', 'middle',
-'bottom' or \code{NA}. For `align`, values may be 'left', 'center', 'middle' or \code{NA}.
-}
-\description{
-Get or set vertical alignment.
-}
-\examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
-valign(ht)[2,2] <- 'top'
+For \code{valign}, the \code{valign} attribute. For \code{valign<-}, the
+value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
+implementation detail of how R handles replacement functions). For \code{set_valign}, the \code{ht} object.
 }

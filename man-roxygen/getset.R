@@ -1,10 +1,11 @@
 
 
-#' @title Get or set <%= attr_desc %>
+#' @title Get or Set <%= attr_desc %>
 #'
-#' @usage <%= attr_name %>(ht)
-#' @usage <%= attr_name %>(ht) <- value
-#' @usage set_<%= attr_name %>(ht, row, col, value)
+#' @usage
+#' <%= attr_name %>(ht)
+#' <%= attr_name %>(ht) <- value
+#' set_<%= attr_name %>(ht, row, col, value)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %>
@@ -15,6 +16,5 @@
 #' value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 #' implementation detail of how R handles replacement functions). For \code{set_<%= attr_name %>}, the \code{ht} object.
 #'
-#' @export
-#'
+#' @aliases <%= attr_name %><- set_<%= attr_name %>
 #' @name <%= attr_name %>
