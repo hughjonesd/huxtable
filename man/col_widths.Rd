@@ -3,26 +3,22 @@
 \name{col_widths}
 \alias{col_widths}
 \alias{col_widths<-}
-\title{Get or Set Column Widths.}
+\alias{set_col_widths}
+\title{Get or Set Column Widths}
 \usage{
 col_widths(ht)
-
 col_widths(ht) <- value
+set_col_widths(ht, col, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{Column widths, a vector.
-If this is numeric it will be interpreted as a proportion of
-the table width. If it is character, it will be interpreted by CSS or LaTeX.}
+\item{value}{A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.}
+
+\item{col}{A column specifier.}
 }
 \value{
-A vector of column widths.
-}
-\description{
-Get or Set Column Widths.
-}
-\examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
-col_widths(ht) <- c(.3, .7)
+For \code{col_widths}, the \code{col_widths} attribute. For \code{col_widths<-}, the
+value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
+implementation detail of how R handles replacement functions). For \code{set_col_widths}, the \code{ht} object.
 }

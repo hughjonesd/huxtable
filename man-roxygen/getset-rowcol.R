@@ -5,7 +5,7 @@
 #' @usage
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
-#' set_<%= attr_name %>(ht, row, col, value)
+#' set_<%= attr_name %>(ht, <%= rowcol %>, value)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %>

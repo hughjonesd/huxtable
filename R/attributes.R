@@ -127,120 +127,43 @@ make_getter_setters('width', 'table')
 NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
 
+#' @template getset-col
+#' @templateVar attr_name col_widths
+#' @templateVar rowcol col
+#' @templateVar attr_desc Column Widths
+#' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.
+#' @export col_widths col_widths<- set_col_widths col_widths.huxtable col_widths<-.huxtable set_col_widths.huxtable
+NULL
+make_getter_setters('col_widths', 'col')
+
+#' @template getset-cell
+#' @templateVar attr_name rowspan
+#' @templateVar attr_desc Row Span
+#' @templateVar value_param_desc An integer vector or matrix of integers.
+#' @export rowspan rowspan<- set_rowspan rowspan.huxtable rowspan<-.huxtable set_rowspan.huxtable
+NULL
+make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
+    if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
+)
+
+#' @template getset-cell
+#' @templateVar attr_name colspan
+#' @templateVar attr_desc Column Span
+#' @templateVar value_param_desc An integer vector or matrix of integers.
+#' @export colspan colspan<- set_colspan colspan.huxtable colspan<-.huxtable set_colspan.huxtable
+NULL
+make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
+    if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
+)
 
 
-#' Get or Set Column Widths.
-#'
-#' @param ht A huxtable.
-#' @param value Column widths, a vector.
-#'   If this is numeric it will be interpreted as a proportion of
-#'   the table width. If it is character, it will be interpreted by CSS or LaTeX.
-#'
-#' @return A vector of column widths.
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' col_widths(ht) <- c(.3, .7)
-#' @export
-col_widths <- function(ht) UseMethod('col_widths')
-
-#' @export
-col_widths.huxtable <- function (ht) attr(ht, 'col_widths')
-
-#' @export
-#' @rdname col_widths
-`col_widths<-` <- function (ht, value) UseMethod('col_widths<-')
-
-#' @export
-`col_widths<-.huxtable` <- function (ht, value) {
-  stopifnot(length(value) == ncol(ht))
-  attr(ht, 'col_widths') <- value
-  ht
-}
-
-#' Get or Set Rowspan and Colspan.
-#'
-#' @param ht A huxtable.
-#' @param value How many rows or columns should the cell span.
-#'
-#' @return A numeric matrix of row or column spans. \code{NA} means 1, the default.
-#' @export
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' rowspan(ht)[1:2,1] <- 2
-rowspan <- function (ht) UseMethod('rowspan')
-
-#' @export
-rowspan.huxtable <- function (ht) attr(ht, 'rowspan')
-
-#' @export
-#' @rdname rowspan
-`rowspan<-` <- function (ht, value) UseMethod('rowspan<-')
-
-#' @export
-`rowspan<-.huxtable` <- function (ht, value) {
-  stopifnot(is.numeric(value))
-  if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
-  attr(ht, 'rowspan')[] <- value
-
-  # do we want to delete data that is shadowed by a row or colspan?
-  # advantage: represents 'truth', i.e. this output is invisible
-  # disadvantage: can't change rowspan repeatedly
-  # disadvantage: can't stop people putting data back in!
-  # maybe better not. Hard to manually maintain sanity. E.g. what if
-  # cell 2,1 has rowspan 2; then someone makes cell 1,1 have rowspan 2 also?
-
-  ht
-}
-
-#' @export
-#' @rdname rowspan
-colspan <- function (ht) UseMethod('colspan')
-
-#' @export
-colspan.huxtable <- function (ht) attr(ht, 'colspan')
-
-#' @export
-#' @rdname rowspan
-`colspan<-` <- function (ht, value) UseMethod('colspan<-')
-
-#' @export
-`colspan<-.huxtable` <- function (ht, value) {
-  stopifnot(is.numeric(value))
-  if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
-  attr(ht, 'colspan')[] <- value
-
-  ht
-}
-
-
-
-
-#' Get or Set Cell Background Color
-#'
-#' @param ht A huxtable.
-#' @param value Background color for the cell(s). NA is permissible
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' bgcolor(ht)[1:2,1] <- 'orange'
-#' @export
-bgcolor <- function (ht) UseMethod('bgcolor')
-
-#' @export
-bgcolor.huxtable <- function (ht) attr(ht, 'bgcolor')
-
-#' @export
-#' @rdname valign
-`bgcolor<-` <- function (ht, value) UseMethod('bgcolor<-')
-
-#' @export
-`bgcolor<-.huxtable` <- function (ht, value) {
-  attr(ht, 'bgcolor')[] <- value
-  ht
-}
-
+#' @template getset-cell
+#' @templateVar attr_name bgcolor
+#' @templateVar attr_desc Cell Background Color
+#' @templateVar value_param_desc A vector or matrix of R colors.
+#' @export bgcolor bgcolor<- set_bgcolor bgcolor.huxtable bgcolor<-.huxtable set_bgcolor.huxtable
+NULL
+make_getter_setters('bgcolor', 'cell')
 
 
 

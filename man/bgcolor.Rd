@@ -2,19 +2,25 @@
 % Please edit documentation in R/attributes.R
 \name{bgcolor}
 \alias{bgcolor}
+\alias{bgcolor<-}
+\alias{set_bgcolor}
 \title{Get or Set Cell Background Color}
 \usage{
 bgcolor(ht)
+bgcolor(ht) <- value
+set_bgcolor(ht, row, col, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{Background color for the cell(s). NA is permissible}
+\item{value}{A vector or matrix of R colors.}
+
+\item{row}{A row specifier.}
+
+\item{col}{A column specifier.}
 }
-\description{
-Get or Set Cell Background Color
-}
-\examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
-bgcolor(ht)[1:2,1] <- 'orange'
+\value{
+For \code{bgcolor}, the \code{bgcolor} attribute. For \code{bgcolor<-}, the
+value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
+implementation detail of how R handles replacement functions). For \code{set_bgcolor}, the \code{ht} object.
 }

@@ -4,14 +4,11 @@
 \alias{valign}
 \alias{valign<-}
 \alias{set_valign}
-\alias{bgcolor<-}
 \title{Get or Set Vertical Alignment}
 \usage{
 valign(ht)
 valign(ht) <- value
 set_valign(ht, row, col, value)
-
-bgcolor(ht) <- value
 }
 \arguments{
 \item{ht}{A huxtable.}
