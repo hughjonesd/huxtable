@@ -35,6 +35,7 @@ print_html <- function(ht, ...) {
 
 col_html <- function (ht, cn) {
   col_width <- col_width(ht)[cn]
+  if (is.numeric(col_width)) col_width <- paste0(col_width * 100, '%')
   res <- paste0('<col style="width: ', col_width ,';">')
   # print out <col>, <colgroup>, that kinda stuff
   res
