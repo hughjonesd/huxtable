@@ -3,26 +3,20 @@
 \name{width}
 \alias{width}
 \alias{width<-}
-\title{Get or Set Table Width.}
+\alias{set_width}
+\title{Get or Set Table Width}
 \usage{
 width(ht)
-
 width(ht) <- value
+set_width(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{Table width, a length-1 vector.
-If this is numeric it will be interpreted as a proportion of
-the containing element. If it is character, it will be interpreted by CSS or LaTeX.}
+\item{value}{A length-one vector. If numeric, it is treated as a proportion of the surrounding block width. If character, it must be a valid CSS or LaTeX width.}
 }
 \value{
-A single value.
-}
-\description{
-Get or Set Table Width.
-}
-\examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
-width(ht) <- 0.8
+For \code{width}, the \code{width} attribute. For \code{width<-}, the
+value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
+implementation detail of how R handles replacement functions). For \code{set_width}, the \code{ht} object.
 }

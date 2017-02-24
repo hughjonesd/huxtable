@@ -4,18 +4,12 @@
 \alias{valign}
 \alias{valign<-}
 \alias{set_valign}
-\alias{align}
-\alias{align<-}
 \alias{bgcolor<-}
 \title{Get or Set Vertical Alignment}
 \usage{
 valign(ht)
 valign(ht) <- value
 set_valign(ht, row, col, value)
-
-align(ht)
-
-align(ht) <- value
 
 bgcolor(ht) <- value
 }
@@ -26,7 +20,7 @@ bgcolor(ht) <- value
 
 \item{row}{A row specifier.}
 
-\item{col}{A col specifier.}
+\item{col}{A column specifier.}
 }
 \value{
 For \code{valign}, the \code{valign} attribute. For \code{valign<-}, the

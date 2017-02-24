@@ -50,6 +50,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   ))
 
   alt_setter <- paste0('set_', attr_name)
+
+  if (attr_type == 'cell') {
   funs[[alt_setter]] <- eval(bquote(
     function(ht, row, col, value) UseMethod(.(alt_setter))
   ))
@@ -59,6 +61,37 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       ht
     }
   ))
+  } else if (attr_type == 'row') {
+    funs[[alt_setter]] <- eval(bquote(
+      function(ht, row, value) UseMethod(.(alt_setter))
+    ))
+    funs[[paste0(alt_setter, '.huxtable')]] <- eval(bquote(
+      function(ht, row, value) {
+        .(as.name(attr_name))(ht)[row] <- value
+        ht
+      }
+    ))
+  } else if (attr_type == 'col') {
+    funs[[alt_setter]] <- eval(bquote(
+      function(ht, col, value) UseMethod(.(alt_setter))
+    ))
+    funs[[paste0(alt_setter, '.huxtable')]] <- eval(bquote(
+      function(ht, col, value) {
+        .(as.name(attr_name))(ht)[col] <- value
+        ht
+      }
+    ))
+  } else if (attr_type == 'table') {
+    funs[[alt_setter]] <- eval(bquote(
+      function(ht, value) UseMethod(.(alt_setter))
+    ))
+    funs[[paste0(alt_setter, '.huxtable')]] <- eval(bquote(
+      function(ht, value) {
+        .(as.name(attr_name))(ht) <- value
+        ht
+      }
+    ))
+  }
 
   lapply(names(funs), function (x) {
     assign(x, funs[[x]], envir = parent.frame(3)) # 3: 1 for function(x), 2 for lapply, 3 for the caller!
@@ -68,61 +101,32 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 }
 
 
-#' @template getset
+#' @template getset-cell
 #' @templateVar attr_name valign
 #' @templateVar attr_desc Vertical Alignment
 #' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
 #' @export valign valign<- set_valign valign.huxtable valign<-.huxtable set_valign.huxtable
 NULL
-
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
 
-#' @export
-#' @rdname valign
-align <- function (ht) UseMethod('align')
 
-#' @export
-align.huxtable <- function (ht) attr(ht, 'align')
+#' @template getset-table
+#' @templateVar attr_name width
+#' @templateVar attr_desc Table Width
+#' @templateVar value_param_desc
+#' A length-one vector. If numeric, it is treated as a proportion of the surrounding block width. If character, it must be a valid CSS or LaTeX width.
+#' @export width width<- set_width width.huxtable width<-.huxtable set_width.huxtable
+NULL
+make_getter_setters('width', 'table')
 
-#' @export
-#' @rdname valign
-`align<-` <- function (ht, value) UseMethod('align<-')
+#' @template getset-cell
+#' @templateVar attr_name align
+#' @templateVar attr_desc Alignment
+#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.
+#' @export align align<- set_align align.huxtable align<-.huxtable set_align.huxtable
+NULL
+make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
 
-#' @export
-`align<-.huxtable` <- function (ht, value = c('left', 'center', 'right', 'decimal')) {
-  stopifnot(all(na.omit(value) %in% c('left', 'center', 'right', 'decimal')))
-  attr(ht, 'align')[] <- value
-  ht
-}
-
-#' Get or Set Table Width.
-#'
-#' @param ht A huxtable.
-#' @param value Table width, a length-1 vector.
-#'   If this is numeric it will be interpreted as a proportion of
-#'   the containing element. If it is character, it will be interpreted by CSS or LaTeX.
-#'
-#' @return A single value.
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' width(ht) <- 0.8
-#' @export
-width <- function (ht) UseMethod('width')
-
-#' @export
-width.huxtable <- function (ht) attr(ht, 'width')
-
-#' @export
-#' @rdname width
-`width<-` <- function (ht, value) UseMethod('width<-')
-
-#' @export
-`width<-.huxtable` <- function (ht, value) {
-  stopifnot(length(value) == 1)
-  attr(ht, 'width') <- value
-  ht
-}
 
 
 #' Get or Set Column Widths.
