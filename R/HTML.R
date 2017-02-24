@@ -59,7 +59,7 @@ cell_html <- function (ht, rn, cn) {
   rs <- rowspan(ht)[rn,cn]
   cs <- colspan(ht)[rn,cn]
   if (isTRUE(rs > 1)) res <- paste0(res, ' rowspan="', rs ,'"')
-  if (isTRUE(cs > 1)) res <- paste0(res, ' colspan="', rs ,'"')
+  if (isTRUE(cs > 1)) res <- paste0(res, ' colspan="', cs ,'"')
   res<- paste0(res, ' style="')
   val <- valign(ht)[rn, cn]
   res <- paste0(res, 'vertical-align: ', val, '; ')
