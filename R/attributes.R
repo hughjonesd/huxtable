@@ -1,12 +1,12 @@
 
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor')
-huxtable_col_attrs <- c('col_widths')
+huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
 huxtable_table_attrs <- c('width')
 # list preserves different arg types:
 huxtable_default_attrs <- list(rowspan = 1, colspan = 1, align = 'center', valign = 'middle',
-    width = 1, col_widths = NA, bgcolor = NA)
+    width = 1, col_width = NA, bgcolor = NA)
 
 
 make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', 'table'), check_fun = NULL,
@@ -128,13 +128,13 @@ NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
 
 #' @template getset-col
-#' @templateVar attr_name col_widths
+#' @templateVar attr_name col_width
 #' @templateVar rowcol col
 #' @templateVar attr_desc Column Widths
 #' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.
-#' @export col_widths col_widths<- set_col_widths col_widths.huxtable col_widths<-.huxtable set_col_widths.huxtable
+#' @export col_width col_width<- set_col_width col_width.huxtable col_width<-.huxtable set_col_width.huxtable
 NULL
-make_getter_setters('col_widths', 'col')
+make_getter_setters('col_width', 'col')
 
 #' @template getset-cell
 #' @templateVar attr_name rowspan
@@ -164,8 +164,6 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
 #' @export bgcolor bgcolor<- set_bgcolor bgcolor.huxtable bgcolor<-.huxtable set_bgcolor.huxtable
 NULL
 make_getter_setters('bgcolor', 'cell')
-
-
 
 
 # return matrix of whether cells are shadowed by rowspan from above or colspan from the left

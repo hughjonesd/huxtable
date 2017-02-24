@@ -2,7 +2,7 @@
 title: "Untitled"
 author: "David Hugh-Jones"
 date: "20/02/2017"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup}
@@ -12,6 +12,9 @@ ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
 ht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)
 width(ht_orig) <- 0.25
 bgcolor(ht_orig) <- grey(.9)
+bgcolor(ht_orig)[,2] <- grey(.8)
+bgcolor(ht_orig)[c(2,4),2] <- grey(.9)
+bgcolor(ht_orig)[c(2,4),1] <- grey(.8)
 ht_orig
 ```
 
@@ -58,11 +61,11 @@ width(ht) <- 0.5
 ht
 ```
 
-Column widths:
+Column width:
 
 ```{r}
 ht <- ht_orig
-col_widths(ht) <- c(.2, .8)
+col_width(ht) <- c(.2, .8)
 ht
 ```
 

@@ -26,10 +26,10 @@ to_latex.huxtable <- function (ht, ...){
   tw <- width(ht)
   if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
   res <- paste0(res, '{', tw,'}')
-  col_widths <- col_widths(ht)
-  if (all(is.na(col_widths))) col_widths <- rep(1/ncol(ht), ncol(ht))
-  if (is.numeric(col_widths)) {
-    col_widths <- paste0(col_widths, '\\textwidth')
+  col_width <- col_width(ht)
+  if (all(is.na(col_width))) col_width <- rep(1/ncol(ht), ncol(ht))
+  if (is.numeric(col_width)) {
+    col_width <- paste0(col_width, '\\textwidth')
   }
   colspec <- '{'
   for (mycol in 1:ncol(ht)) {
@@ -61,7 +61,7 @@ to_latex.huxtable <- function (ht, ...){
 
     colspec_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
     if (isTRUE(col_align == 'decimal')) colspec_valign_str <- 'S'
-    col_width <- col_widths[mycol]
+    col_width <- col_width[mycol]
     colspec_valign_str <- paste0(colspec_valign_str, '{', col_width,  '}')
     colspec <- paste0(colspec, colspec_align_str, colspec_valign_str, ' ')
   }
