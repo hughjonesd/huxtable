@@ -11,7 +11,7 @@ library(huxtable)
 ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
 ht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)
 width(ht_orig) <- 0.25
-
+bgcolor(ht_orig) <- grey(.9)
 ht_orig
 ```
 
@@ -20,6 +20,14 @@ Alignment:
 ```{r}
 ht <- ht_orig
 align(ht)[,1] <- 'left'
+ht
+```
+
+Vertical alignment:
+
+```{r}
+ht <- ht_orig
+valign(ht)[,1] <- 'top'
 ht
 ```
 

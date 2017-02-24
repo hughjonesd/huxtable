@@ -23,14 +23,15 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 
   setter <- paste0(attr_name, '<-')
   funs[[setter]] <- eval(bquote(
-    function(ht) UseMethod(.(setter))
+    function(ht, value) UseMethod(.(setter))
   ))
 
   check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
   check_dims <- switch(attr_type,
-    cell  = quote(stopifnot(ncol(value) == ncol(ht) && nrow(value) == nrow(ht))),
-    row   = quote(stopifnot(length(value) == nrow(ht))),
-    col   = quote(stopifnot(length(value) == ncol(ht))),
+    # ** got rid of these, because we want to be flexible in how values are specified, as with R assignment in general
+    # cell  = quote(stopifnot(ncol(value) == ncol(ht) && nrow(value) == nrow(ht))),
+    # row   = quote(stopifnot(length(value) == nrow(ht))),
+    # col   = quote(stopifnot(length(value) == ncol(ht))),
     table = quote(stopifnot(length(value) == 1))
   )
   check_values <- if (! missing(check_values)) bquote(
@@ -44,6 +45,14 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       .(check_values)
       .(extra_code)
       attr(ht, attr_name)[] <- value
+      ht
+    }
+  ))
+
+  funs[[paste0('set_', attr_name)]] <- eval(bquote(
+    function(ht, row, col, value) {
+      .(as.name(attr_name))(ht)[row, col] <- value
+      ht
     }
   ))
 
@@ -53,6 +62,14 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 
   NULL
 }
+
+make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
+
+
+#' @template getset
+#' @templatevar attr_name valign
+#' @templatevar attr_desc Vertical Alignment
+#' @templatevar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
 
 #' Get or set vertical alignment.
 #'
@@ -69,24 +86,27 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #' @name valign
 NULL
 
-make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
-
-
-valign <- function (ht) UseMethod('valign')
-
 #' @export
-valign.huxtable <- function (ht) attr(ht, 'valign')
-
-#' @export
+#' @name valign.huxtable
 #' @rdname valign
-`valign<-` <- function (ht, value) UseMethod('valign<-')
+NULL
 
 #' @export
-`valign<-.huxtable` <- function (ht, value = c('top', 'middle', 'bottom')) {
-  stopifnot(all(na.omit(value) %in% c('top', 'middle', 'bottom')))
-  attr(ht, 'valign')[] <- value
-  ht
-}
+#' @name valign<-.huxtable
+#' @rdname valign
+NULL
+
+#' @export
+#' @name valign<-
+#' @rdname valign
+NULL
+
+
+#' @export
+#' @name set_valign
+#' @rdname valign
+NULL
+
 
 #' @export
 #' @rdname valign
@@ -251,20 +271,6 @@ bgcolor.huxtable <- function (ht) attr(ht, 'bgcolor')
 
 
 
-# DELETE
-# foo <- function(attr_name, mat = TRUE, bonus_expr) {
-#   check_expr <- if (mat) quote(
-#     stopifnot(ncol(value) == ncol(ht) && nrow(value) == nrow(ht))
-#   ) else quote(
-#     stopifnot(length(value) == ncol(ht))
-#   )
-#   bonus_expr <- substitute(bonus_expr)
-#   eval(bquote(function(ht, value){
-#     .(check_expr)
-#     stopifnot(.(bonus_expr))
-#     attr(ht, attr_name)[] <- value
-#   }))
-# }
 
 # return matrix of whether cells are shadowed by rowspan from above or colspan from the left
 cell_shadows <- function(ht, row_or_col) {
@@ -290,19 +296,4 @@ cell_shadowed <- function (ht, rn, cn, row_or_col = c('row', 'col')) {
   row_or_col <- match.arg(row_or_col)
   cell_shadows(ht, row_or_col)[rn, cn]
 }
-
-
-
-
-
-# attempt at alternative interface. We want some easy way to use
-# rows and cols in a dplyr::select style; or to do it by value?
-
-#' @export
-#' @rdname valign
-set_valign <- function (ht, rows, cols, value) {
-  valign(ht)[rows, cols] <- value
-  ht
-}
-
 

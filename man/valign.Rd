@@ -2,24 +2,20 @@
 % Please edit documentation in R/attributes.R
 \name{valign}
 \alias{valign}
+\alias{valign.huxtable}
+\alias{valign<-.huxtable}
 \alias{valign<-}
+\alias{set_valign}
 \alias{align}
 \alias{align<-}
 \alias{bgcolor<-}
-\alias{set_valign}
 \title{Get or set vertical alignment.}
 \usage{
-valign(ht)
-
-valign(ht) <- value
-
 align(ht)
 
 align(ht) <- value
 
 bgcolor(ht) <- value
-
-set_valign(ht, rows, cols, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
