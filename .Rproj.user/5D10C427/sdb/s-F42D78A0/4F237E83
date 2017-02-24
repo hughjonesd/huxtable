@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Untitled\"\nauthor: \"David Hugh-Jones\"\ndate: \"20/02/2017\"\noutput: html_document\n---\n\n```{r setup}\nknitr::opts_chunk$set(echo = TRUE)\nlibrary(huxtable)\nht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))\nht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)\nwidth(ht_orig) <- 0.25\n\nht_orig\n```\n\nAlignment:\n\n```{r}\nht <- ht_orig\nalign(ht)[,1] <- 'left'\nht\n```\n\nColumn span:\n\n```{r}\n\nht <- ht_orig\ncolspan(ht)[1,1] <- 2\nht        \n```\n\nRow span:\n\n```{r}\nht <- ht_orig\nht[1,1] <- 'A rather long block of text'\nrowspan(ht)[1,1] <- 2\nht        \n```\n\n\nTable width:\n\n```{r}\nht <- ht_orig\nwidth(ht) <- 0.5\nht\n```\n\nColumn widths:\n\n```{r}\nht <- ht_orig\ncol_widths(ht) <- c(.2, .8)\nht\n```\n\nBackground color:\n\n```{r}\nht <- ht_orig\nbgcolor(ht)[1,1] <- 'green'\nbgcolor(ht)[,2] <- rgb(.5, .5, .5)\nht\n```\n",
+    "created" : 1487876799422.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3857719614",
+    "id" : "4F237E83",
+    "lastKnownWriteTime" : 1487876995,
+    "last_content_update" : 1487876995547,
+    "path" : "~/huxtable/html-testing-doc.Rmd",
+    "project_path" : "html-testing-doc.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "last_setup_crc32" : "",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

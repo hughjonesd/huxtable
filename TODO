@@ -1,0 +1,87 @@
+
+TODO
+
+* testing for rowspan, colspan
+* should we use <- NULL to set to defaults? e.g. for colspan that wd be 1?
+* heights - set per row!
+* escaping cell contents:
+   - encoded_text_to_latex in tools may be helpful
+* padding, border, margin
+* cell font color; maybe also italic, bold; font-family
+* horiz align including on dec pt and for sig stars
+* sig figs and arbitrary formatC args
+* rotation
+* external placement (centering; on page)
+* set_* interface for dplyr-style pipelines
+* captions, notes and labels? maybe captions and labels, not notes
+* as_huxtable.ftable
+* "themes" i.e. standard setups for kinds of tables
+* easy syntax to alter cells by row, column, area or "where"... this could be a separate package...
+
+BUGS
+* latex table width don't work
+* don't use default values like c('top', 'middle', 'bottom') unless you use match.arg to
+  get them!
+QUESTIONS
+what to do about column names? what if we want multiple rows of column headings?
+maybe make it an option
+do we want to have a concept of 'headers' for repetition?
+
+
+# notes on latex tables
+=======================
+
+* Font color: use xcolor package
+* Cell color: use colortbl package
+* Rotation: use rotating
+* Merged cells: multirow
+* Horiz lines for partic cells: \cline{2-3} is for cells 2-3, after the relevant row
+* Vertical lines for partic cells: do e.g.
+\multicolumn{1}{xx|} before a line, where x is the horiz alignment (lcr)
+or
+\multicolumn{1}{|x|} for lines before and after
+
+* valign for particular cells seems hard; really easiest at table level
+* \midrule and \cmidrule are 'formal' compared to hline and cline
+* for aligning at decimal points, use dcolumn package
+* to turn text wrapping on, always use p,m and b for col specifications
+
+Useful guides:
+  http://www.andy-roberts.net/writing/latex/tables
+
+
+tabular is the basic environment; package 'array' extends it, allowing top/middle/bottom valigned text;
+
+\usepackage{array} at the start, how will this work with e.g. knitr? can we
+just put it before the table?
+
+Here's a basic table with vlines (in the colspec) and hlines between the rows:
+
+\begin{tabular}{ l | c || r | }
+\hline
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 \\
+\hline
+\end{tabular}
+
+to center the table itself surround it by \begin{center} and \end{center}
+NB: hux should have an option for where to put the whole table, obv!
+also \begin{tabular*} allows you specify width of whole table! (but this is getting
+complex...)
+
+For colspan, the cell shd be
+\multicolumn{num_cols}{alignment}{contents}
+align is l, c or r
+and you should suppress the non-existent cells and their &s
+
+For rowspan:
+The first thing you need to do is add \usepackage{multirow} to the preamble. This then provides the command needed for spanning rows: \multirow{num_rows}{width}{contents}. he arguments are pretty simple to deduce. With the width parameter, you can specify a fixed with if you wish, or, if you want the natural width (i.e., just wide enough to fit the contents of the column) then simply input an asterisk (*).
+
+For both:
+\multicolumn{3}{alignment}{\multirow{2}*{CONTENTS}}
+
+You can also use \begin{table} which can have captions etc.:
+See https://www.latex-tutorial.com/tutorials/beginners/latex-tables/
+and it mentions booktabs
+

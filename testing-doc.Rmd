@@ -1,0 +1,68 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "20/02/2017"
+output: html_document
+---
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
+ht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)
+width(ht_orig) <- 0.25
+
+ht_orig
+```
+
+Alignment:
+
+```{r}
+ht <- ht_orig
+align(ht)[,1] <- 'left'
+ht
+```
+
+Column span:
+
+```{r}
+
+ht <- ht_orig
+colspan(ht)[1,1] <- 2
+ht        
+```
+
+Row span:
+
+```{r}
+ht <- ht_orig
+ht[1,1] <- 'A rather long block of text'
+rowspan(ht)[1,1] <- 2
+ht        
+```
+
+
+Table width:
+
+```{r}
+ht <- ht_orig
+width(ht) <- 0.5
+ht
+```
+
+Column widths:
+
+```{r}
+ht <- ht_orig
+col_widths(ht) <- c(.2, .8)
+ht
+```
+
+Background color:
+
+```{r}
+ht <- ht_orig
+bgcolor(ht)[1,1] <- 'green'
+bgcolor(ht)[,2] <- rgb(.5, .5, .5)
+ht
+```
