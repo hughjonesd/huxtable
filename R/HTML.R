@@ -12,6 +12,7 @@
 #' to_html(ht)
 to_html <- function (ht, ...) UseMethod('to_html')
 
+#' @export
 to_html.huxtable <- function(ht, ...) {
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
