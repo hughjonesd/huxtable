@@ -15,7 +15,16 @@ to_html <- function (ht, ...) UseMethod('to_html')
 to_html.huxtable <- function(ht, ...) {
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
-  res <- paste0('<table class="huxtable" style="width: ', width, ';">\n')
+  mstring <- switch(position(ht),
+          left   = 'margin-left: 0%;',
+          right  = 'margin-right: 0%;',
+          center = 'margin-left: auto; margin-right: auto;'
+        )
+  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, '">\n')
+  if (! is.na(cap <- caption(ht))) {
+    cap <- paste0('<caption style="caption-side:', caption_pos(ht),'; text-align: center;">', cap, '</caption>')
+    res <- paste0(res, cap)
+  }
   cols_html <- sapply(1:ncol(ht), col_html, ht = ht)
   cols_html <- paste0(cols_html, collapse = '')
   res <- paste0(res, cols_html)

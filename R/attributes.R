@@ -4,7 +4,7 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor',
   'top_border', 'left_border', 'right_border', 'bottom_border') # think this makes sense...
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
-huxtable_table_attrs <- c('width')
+huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos')
 # list preserves different arg types:
 huxtable_default_attrs <- list(
   rowspan       = 1,
@@ -17,7 +17,10 @@ huxtable_default_attrs <- list(
   left_border   = 0,
   right_border  = 0,
   top_border    = 0,
-  bottom_border = 0
+  bottom_border = 0,
+  caption       = NA,
+  caption_pos   = 'top',
+  position      = 'center'
   )
 
 
@@ -219,7 +222,6 @@ make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 
-
 #' Set All Borders
 #'
 #' @inheritParams left_border
@@ -243,6 +245,37 @@ set_all_borders.huxtable <- function(ht, row, col, value) {
   right_border(ht)[row, col] <- value
   ht
 }
+
+
+#' @template getset-table
+#' @templateVar attr_name position
+#' @templateVar attr_desc Table Position
+#' @templateVar value_param_desc
+#' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
+#' @export position position<- set_position position.huxtable position<-.huxtable set_position.huxtable
+NULL
+make_getter_setters('position', 'table', check_values = c('left', 'center', 'right'))
+
+#' @template getset-table
+#' @templateVar attr_name caption_pos
+#' @templateVar attr_desc Caption Position
+#' @templateVar value_param_desc
+#' A length-one character vector which can be 'top', 'bottom' or \code{NA}.
+#' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable set_caption_pos.huxtable
+#' @seealso \code{\link{caption}}
+NULL
+make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
+
+#' @template getset-table
+#' @templateVar attr_name caption
+#' @templateVar attr_desc Caption
+#' @templateVar value_param_desc
+#' A length-one character vector. Set to \code{NA} for no caption.
+#' @export caption caption<- set_caption caption.huxtable caption<-.huxtable set_caption.huxtable
+#' @seealso \code{\link{caption_pos}}
+NULL
+make_getter_setters('caption', 'table', check_fun = is.character)
+
 
 # return matrix of whether cells are shadowed by rowspan from above or colspan from the left
 cell_shadows <- function(ht, row_or_col) {

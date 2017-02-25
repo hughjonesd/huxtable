@@ -2,17 +2,19 @@
 TODO
 
 * testing for rowspan, colspan
+* label (for latex only?)
+* make NAs be invisible (right?)... or allow some default?
+* think about how to set column formatting...
 * remove dependencies on tibble
 * heights - set per row!
 * escaping cell contents:
    - encoded_text_to_latex in tools may be helpful
-* padding, border, margin
+* padding, margin
 * cell font color; maybe also italic, bold; font-family
 * horiz align including on dec pt and for sig stars
 * sig figs and arbitrary formatC args
 * rotation
-* external placement (centering; on page)
-* captions, notes and labels? maybe captions and labels, not notes
+* more advanced positioning (floats?)
 * as_huxtable.ftable
 * "themes" i.e. standard setups for kinds of tables
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
@@ -28,7 +30,8 @@ TODO
 
 BUGS
 * latex table width don't work
-* colortbl doesn't work with multirow :-(
+* colored background not there on second row of multirow
+* vertical borders not visible on second row of multirow
 
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?

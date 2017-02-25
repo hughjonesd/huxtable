@@ -15,14 +15,30 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 
 #' @export
 to_latex.huxtable <- function (ht, ...){
-  # \begin{tabular}{ l | c || r | }
-  # \hline
-  # 1 & 2 & 3 \\
-  # 4 & 5 & 6 \\
-  # 7 & 8 & 9 \\
-  # \hline
-  # \end{tabular}
-  res <- '\\begin{tabularx}'
+  res <- ''
+
+  res <- paste0(res, '\\begin{table}[h]\n')
+  pos_text <- switch(position(ht),
+        left   = c('\\begin{raggedright}', '\\par\\end{raggedright}'),
+        center = c('\\begin{centering}',   '\\par\\end{centering}'),
+        right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}')
+  )
+  res <- paste0(res, pos_text[1], '\n')
+  if (! is.na(cap <- caption(ht)) & caption_pos(ht) == 'top') {
+    res <- paste0(res, '\\caption{', cap, '}\n')
+  }
+  # convenience function
+  # don't indent or pandoc may treat it as verbatim
+  res <- paste0(res, '
+\\let\\Oldarrayrulewidth\\relax
+\\newlength\\Oldarrayrulewidth
+\\providecommand{\\Cline}[2]{}
+\\renewcommand{\\Cline}[2]{%
+\\noalign{\\global\\setlength{\\Oldarrayrulewidth}{\\arrayrulewidth}}%
+\\noalign{\\global\\setlength{\\arrayrulewidth}{#1}}\\cline{#2}%
+\\noalign{\\global\\setlength{\\arrayrulewidth}{\\Oldarrayrulewidth}}}
+')
+  res <- paste0(res, '\\begin{tabularx}')
   tw <- width(ht)
   if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
   res <- paste0(res, '{', tw,'}')
@@ -69,48 +85,76 @@ to_latex.huxtable <- function (ht, ...){
 
   cell_shadows_row <- cell_shadows(ht, 'row')
   cell_shadows_col <- cell_shadows(ht, 'col')
+
+  borders <- top_border(ht)[1,]
+  res <- paste0(res, make_clines(borders))
   for (myrow in 1:nrow(ht)) {
     for (mycol in 1:ncol(ht)) {
       if (cell_shadows_col[myrow, mycol]) next
-
-      contents <- ht[myrow, mycol]
-      if (! is.na(cell_color <- bgcolor(ht)[myrow, mycol])) {
-        # \cellcolor[HTML]{AA0044}
-        cell_color <- as.vector(col2rgb(cell_color))
-        cell_color <- paste0(cell_color, collapse = ', ')
-        cell_color <- paste0(c('\\cellcolor[RGB]{', cell_color, '}'), collapse = '')
-        contents <- paste0(cell_color, ' ', contents)
-      }
-      if ((rs <- rowspan(ht)[myrow, mycol]) > 1) {
-        # the tcb switch may only work with v recent multirow
-        # ctb <- switch(valign(ht)[myrow, mycol],
-        #       top    = 't',
-        #       bottom = 'b',
-        #       middle = ,
-        #       'c')
-        # * is width, could be more specific
-        contents <- paste0('\\multirow{', rs,'}{*}{', contents,'}')
-      }
-      # must be this way round: multirow inside multicolumn
-      if ((cs <- colspan(ht)[myrow, mycol]) > 1) {
+      if (! cell_shadows_row[myrow, mycol]) {
+        contents <- ht[myrow, mycol]
+        if (! is.na(cell_color <- bgcolor(ht)[myrow, mycol])) {
+          cell_color <- as.vector(col2rgb(cell_color))
+          cell_color <- paste0(cell_color, collapse = ', ')
+          cell_color <- paste0(c('\\cellcolor[RGB]{', cell_color, '}'), collapse = '')
+          contents <- paste0(cell_color, ' ', contents)
+        }
+        if ((rs <- rowspan(ht)[myrow, mycol]) > 1) {
+          # the ctb switch may only work with v recent multirow
+          # ctb <- switch(valign(ht)[myrow, mycol],
+          #       top    = 't',
+          #       bottom = 'b',
+          #       middle = ,
+          #       'c')
+          # * is width, could be more specific
+          contents <- paste0('\\multirow{', rs,'}{*}{', contents,'}')
+        }
+        # must be this way round: multirow inside multicolumn
+        # always use multicolumn so as to allow vertical borders for specific cells
+        cs <- colspan(ht)[myrow, mycol]
         lcr <- switch(align(ht)[myrow, mycol],
               left   = 'l',
               right  = 'r',
               center = ,
               'c')
+        if (left_border(ht)[myrow, mycol] > 0) lcr <- paste0('|', lcr)
+        if (right_border(ht)[myrow, mycol] > 0) lcr <- paste0(lcr, '|')
         contents <- paste0('\\multicolumn{', cs,'}{', lcr ,'}{', contents,'}')
+        res <- paste0(res, contents)
       }
-      if (! cell_shadows_row[myrow, mycol]) res <- paste0(res, contents)
+
       real_col <- sum(colspan(ht)[myrow, 1:mycol]) # but will this fail when we have multirows?
       if (real_col < ncol(ht)) res <- paste0(res, ' & ')
-    }
+    } # next cell
     res <- paste0(res, ' \\tabularnewline\n')
-  }
+
+    # add top/bottom borders
+    this_bottom <- bottom_border(ht)[myrow,]
+    next_top <- if (myrow < nrow(ht)) top_border(ht)[myrow + 1,] else 0
+    borders <- pmax(this_bottom, next_top)
+    # don't print borders before a shadowed row:
+    if (myrow < nrow(ht)) borders[cell_shadows_row[myrow + 1,]] <- 0
+    if (any(borders > 0)) {
+      res <- paste0(res, make_clines(borders))
+    }
+  } # next row
 
   res <- paste0(res, '\\end{tabularx}\n')
+  if (! is.na(cap <- caption(ht)) & caption_pos(ht) == 'bottom') {
+    res <- paste0(res, '\\caption{', cap, '}\n')
+  }
+  res <- paste0(res, pos_text[2], '\n') # table positioning
+  res <- paste0(res, '\\end{table}\n')
   res
 }
 
+make_clines <- function(borders) {
+  cells <- seq_along(borders)
+  cells <- cells[borders > 0]
+  borders <- paste0(borders, 'pt')
+  paste0('\\Cline{', borders,'}{', cells, '-', cells, '}\n', collapse=' ')
+  #paste0('\\cline{', cells, '-', cells, '}\n', collapse=' ')
+}
 
 #' @export
 #'

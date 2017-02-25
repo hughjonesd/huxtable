@@ -1,24 +1,36 @@
 ---
-title: "Untitled"
+title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
-output: pdf_document
+output: 
+  pdf_document:
+    keep_tex: true
 ---
 
-```{r setup}
+```{r setup, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(huxtable)
+```
+
+# Basic usage:
+
+```{r}
 ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
 ht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)
 width(ht_orig) <- 0.25
-bgcolor(ht_orig) <- grey(.9)
-bgcolor(ht_orig)[,2] <- grey(.8)
-bgcolor(ht_orig)[c(2,4),2] <- grey(.9)
-bgcolor(ht_orig)[c(2,4),1] <- grey(.8)
+ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
 
-Alignment:
+# Table Position:
+
+```{r}
+ht <- ht_orig
+position(ht) <- 'left'
+ht
+```
+
+# Cell Alignment:
 
 ```{r}
 ht <- ht_orig
@@ -26,7 +38,7 @@ align(ht)[,1] <- 'left'
 ht
 ```
 
-Vertical alignment:
+# Vertical alignment:
 
 ```{r}
 ht <- ht_orig
@@ -34,7 +46,7 @@ valign(ht)[,1] <- 'top'
 ht
 ```
 
-Column span:
+# Column span:
 
 ```{r}
 
@@ -43,7 +55,7 @@ colspan(ht)[1,1] <- 2
 ht        
 ```
 
-Row span:
+# Row span:
 
 ```{r}
 ht <- ht_orig
@@ -53,7 +65,7 @@ ht
 ```
 
 
-Table width:
+# Table width:
 
 ```{r}
 ht <- ht_orig
@@ -61,19 +73,56 @@ width(ht) <- 0.5
 ht
 ```
 
-Column width:
+# Column width:
 
 ```{r}
 ht <- ht_orig
-col_width(ht) <- c(.2, .8)
+col_width(ht) <- c(.8, .2)
 ht
 ```
 
-Background color:
+# Borders:
+
+```{r}
+ht <- ht_orig
+ht <- set_all_borders(ht, 1:5, 1:2, 0)
+top_border(ht) <- c(2, 0, 0, 0, 1)
+bottom_border(ht)[5,] <- 2 
+ht
+```
+
+# Background color:
 
 ```{r}
 ht <- ht_orig
 bgcolor(ht)[1,1] <- 'green'
-bgcolor(ht)[,2] <- rgb(.5, .5, .5)
+bgcolor(ht)[,2] <- rgb(.8, .5, .5)
 ht
 ```
+
+# Background color, multirow:
+
+```{r}
+ht <- ht_orig
+bgcolor(ht)[1,1] <- 'green'
+rowspan(ht)[1,1] <- 2
+ht
+```
+
+# Caption:
+
+```{r}
+ht <- ht_orig
+caption(ht) <- 'A simple table'
+ht
+```
+
+# Caption below:
+
+```{r}
+ht <- ht_orig
+caption(ht) <- 'A simple table'
+caption_pos(ht) <- 'bottom'
+ht
+```
+
