@@ -42,4 +42,5 @@ to_html(ht)
 to_latex(ht)
 ```
 
-To see more details, look at [testing-doc.html](testing-doc.html).
+
+To see more details, look at [testing-doc.html](http://htmlpreview.github.io/?https://github.com/hughjonesd/huxtable/blob/master/testing-doc.html) or [testing-doc.pdf](testing-doc.pdf).
