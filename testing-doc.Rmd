@@ -105,11 +105,14 @@ ht
 ```
 
 
-# Text color:
+
+# Text color, bold, italic
 
 ```{r}
 ht <- ht_orig
 text_color(ht)[,2] <- 'red'
+bold(ht)[1,] <- TRUE
+italic(ht)[3,] <- TRUE
 ht
 ```
 

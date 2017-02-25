@@ -94,14 +94,24 @@ cell_html <- function (ht, rn, cn) {
   }
 
   res <- paste0(res, '">')
+
   contents <- clean_contents(ht, rn, cn, type = 'html')
 
+  span_css <- ''
   if (! is.na(text_color <- text_color(ht)[rn, cn])) {
     text_color <- as.vector(col2rgb(text_color))
     text_color <- paste(text_color, collapse = ', ')
     # use span not td style because color affects borders
-    contents <- paste0('<span style="color: rgb(', text_color, ');">', contents, '</span>')
+    span_css <- paste0(span_css, 'color: rgb(', text_color, '); ')
   }
+  if (bold(ht)[rn, cn]) {
+    span_css <- paste0(span_css, 'font-weight: bold; ')
+  }
+  if (italic(ht)[rn, cn]) {
+    span_css <- paste0(span_css, 'font-style: italic; ')
+  }
+  if (! (span_css == '')) contents <- paste0('<span style="', span_css, '">', contents, '</span>')
+
   res <- paste0(res, contents)
   res <- paste0(res, '</td>\n')
   res
