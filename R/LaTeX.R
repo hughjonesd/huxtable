@@ -15,7 +15,7 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 
 #' @export
 to_latex.huxtable <- function (ht, ...){
-  res <- ''
+  res <- '\\begingroup'
 
   res <- paste0(res, '\\begin{table}[h]\n')
   pos_text <- switch(position(ht),
@@ -92,13 +92,30 @@ to_latex.huxtable <- function (ht, ...){
     for (mycol in 1:ncol(ht)) {
       if (cell_shadows_col[myrow, mycol]) next
       if (! cell_shadows_row[myrow, mycol]) {
-        contents <- ht[myrow, mycol]
+
+        contents <- clean_contents(ht, myrow, mycol, type = 'latex')
+
         if (! is.na(cell_color <- bgcolor(ht)[myrow, mycol])) {
           cell_color <- as.vector(col2rgb(cell_color))
           cell_color <- paste0(cell_color, collapse = ', ')
-          cell_color <- paste0(c('\\cellcolor[RGB]{', cell_color, '}'), collapse = '')
+          cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
           contents <- paste0(cell_color, ' ', contents)
         }
+
+        if (! is.na(text_color <- text_color(ht)[myrow, mycol])) {
+          text_color <- as.vector(col2rgb(text_color))
+          text_color <- paste0(text_color, collapse = ', ')
+          contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents,'}')
+        }
+
+        if (bold(ht)[myrow, mycol]) {
+          contents <- paste0('\\textbf{', contents, '}')
+        }
+
+        if (italic(ht)[myrow, mycol]) {
+          contents <- paste0('\\textit{', contents, '}')
+        }
+
         if ((rs <- rowspan(ht)[myrow, mycol]) > 1) {
           # the ctb switch may only work with v recent multirow
           # ctb <- switch(valign(ht)[myrow, mycol],
@@ -109,6 +126,7 @@ to_latex.huxtable <- function (ht, ...){
           # * is width, could be more specific
           contents <- paste0('\\multirow{', rs,'}{*}{', contents,'}')
         }
+
         # must be this way round: multirow inside multicolumn
         # always use multicolumn so as to allow vertical borders for specific cells
         cs <- colspan(ht)[myrow, mycol]
@@ -119,9 +137,10 @@ to_latex.huxtable <- function (ht, ...){
               'c')
         if (left_border(ht)[myrow, mycol] > 0) lcr <- paste0('|', lcr)
         if (right_border(ht)[myrow, mycol] > 0) lcr <- paste0(lcr, '|')
+#        contents <- paste0('\\begingroup\\setlength\\tabcolsep{6pt}', contents, '\\endgroup')
         contents <- paste0('\\multicolumn{', cs,'}{', lcr ,'}{', contents,'}')
         res <- paste0(res, contents)
-      }
+      } # end 'if cell is unshadowed'
 
       real_col <- sum(colspan(ht)[myrow, 1:mycol]) # but will this fail when we have multirows?
       if (real_col < ncol(ht)) res <- paste0(res, ' & ')
@@ -145,6 +164,7 @@ to_latex.huxtable <- function (ht, ...){
   }
   res <- paste0(res, pos_text[2], '\n') # table positioning
   res <- paste0(res, '\\end{table}\n')
+  res <- paste0(res, '\\endgroup\n')
   res
 }
 

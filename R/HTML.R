@@ -53,7 +53,7 @@ col_html <- function (ht, cn) {
 
 row_html <- function (ht, rn) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>
-  res <- '<tr class="huxtable-row">\n'
+  res <- '<tr>\n'
   cells_html <- sapply(1:ncol(ht), cell_html, ht = ht, rn = rn)
   cells_html <- paste0(cells_html, collapse = '')
   res <- paste0(res, cells_html)
@@ -66,7 +66,7 @@ cell_html <- function (ht, rn, cn) {
   # we could reduce repetition a lot by doing this calculation once per call!
   if (cell_shadowed(ht, rn, cn, 'row')) return('')
   if (cell_shadowed(ht, rn, cn, 'col')) return('')
-  res <- '  <td class="huxtable-cell"'
+  res <- '  <td '
   rs <- rowspan(ht)[rn,cn]
   cs <- colspan(ht)[rn,cn]
   if (isTRUE(rs > 1)) res <- paste0(res, ' rowspan="', rs ,'"')
@@ -77,21 +77,32 @@ cell_html <- function (ht, rn, cn) {
   res <- paste0(res, 'vertical-align: ', val, '; ')
   al  <- align(ht)[rn, cn]
   res <- paste0(res, 'text-align: ', al, '; ')
-  if (! is.na(bgcolor <- bgcolor(ht)[rn, cn])) {
-    bgcolor <- as.vector(col2rgb(bgcolor))
-    bgcolor <- paste(bgcolor, collapse = ', ')
-    res <- paste0(res, 'background-color: rgb(', bgcolor, '); ')
-  }
+
+
   borders <- c(top_border(ht)[rn, cn], right_border(ht)[rn, cn], bottom_border(ht)[rn, cn],
-        left_border(ht)[rn, cn])
+    left_border(ht)[rn, cn])
   if (any(borders > 0)) {
     borders <- paste(borders, 'px', sep = '', collapse = ' ')
     res <- paste0(res, 'border-width:', borders, '; ')
     res <- paste0(res, 'border-style: solid; ')
   }
 
+  if (! is.na(bgcolor <- bgcolor(ht)[rn, cn])) {
+    bgcolor <- as.vector(col2rgb(bgcolor))
+    bgcolor <- paste(bgcolor, collapse = ', ')
+    res <- paste0(res, 'background-color: rgb(', bgcolor, '); ')
+  }
+
   res <- paste0(res, '">')
-  res <- paste0(res, ht[rn, cn]) # eventually should be formatted!
+  contents <- clean_contents(ht, rn, cn, type = 'html')
+
+  if (! is.na(text_color <- text_color(ht)[rn, cn])) {
+    text_color <- as.vector(col2rgb(text_color))
+    text_color <- paste(text_color, collapse = ', ')
+    # use span not td style because color affects borders
+    contents <- paste0('<span style="color: rgb(', text_color, ');">', contents, '</span>')
+  }
+  res <- paste0(res, contents)
   res <- paste0(res, '</td>\n')
   res
 }

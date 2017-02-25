@@ -1,27 +1,32 @@
 
 
-huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor',
-  'top_border', 'left_border', 'right_border', 'bottom_border') # think this makes sense...
+huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor', 'text_color',
+  'top_border', 'left_border', 'right_border', 'bottom_border',
+  'escape_contents', 'na_string', 'bold', 'italic')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
 huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos')
-# list preserves different arg types:
 huxtable_default_attrs <- list(
-  rowspan       = 1,
-  colspan       = 1,
-  align         = 'center',
-  valign        = 'middle',
-  width         = 1,
-  col_width     = NA,
-  bgcolor       = NA,
-  left_border   = 0,
-  right_border  = 0,
-  top_border    = 0,
-  bottom_border = 0,
-  caption       = NA,
-  caption_pos   = 'top',
-  position      = 'center'
-  )
+        rowspan         = 1,
+        colspan         = 1,
+        align           = 'center',
+        valign          = 'middle',
+        width           = 1,
+        col_width       = NA,
+        bgcolor         = NA,
+        text_color      = NA,
+        left_border     = 0,
+        right_border    = 0,
+        top_border      = 0,
+        bottom_border   = 0,
+        caption         = NA,
+        caption_pos     = 'top',
+        position        = 'center',
+        escape_contents = TRUE,
+        na_string       = '',
+        bold            = FALSE,
+        italic          = FALSE
+      )
 
 
 make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', 'table'), check_fun = NULL,
@@ -181,6 +186,14 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
 NULL
 make_getter_setters('bgcolor', 'cell')
 
+#' @template getset-cell
+#' @templateVar attr_name text_color
+#' @templateVar attr_desc Cell Text Color
+#' @templateVar value_param_desc A vector or matrix of R colors.
+#' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable set_text_color.huxtable
+NULL
+make_getter_setters('text_color', 'cell')
+
 
 #' @template getset-cell
 #' @templateVar attr_name left_border
@@ -245,6 +258,46 @@ set_all_borders.huxtable <- function(ht, row, col, value) {
   right_border(ht)[row, col] <- value
   ht
 }
+
+#' @template getset-cell
+#' @templateVar attr_name escape_contents
+#' @templateVar attr_desc Whether to Escape Cell Contents
+#' @templateVar value_param_desc
+#' A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTex escaped.
+#' @export escape_contents escape_contents<- set_escape_contents escape_contents.huxtable escape_contents<-.huxtable set_escape_contents.huxtable
+NULL
+make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
+
+
+#' @template getset-cell
+#' @templateVar attr_name na_string
+#' @templateVar attr_desc String to Use For NA
+#' @templateVar value_param_desc
+#' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
+#' @export na_string na_string<- set_na_string na_string.huxtable na_string<-.huxtable set_na_string.huxtable
+NULL
+make_getter_setters('na_string', 'cell', check_fun = is.character)
+
+
+#' @template getset-cell
+#' @templateVar attr_name bold
+#' @templateVar attr_desc Bold or Italic Cell Text
+#' @templateVar value_param_desc
+#' A logical vector or matrix
+#' @export bold bold<- set_bold bold.huxtable bold<-.huxtable set_bold.huxtable
+NULL
+make_getter_setters('bold', 'cell', check_fun = is.logical)
+
+
+#' @name italic
+#' @rdname bold
+#' @usage
+#' italic(ht)
+#' italic(ht) <- value
+#' set_italic(ht, row, col, value)
+#' @export italic italic<- set_italic italic.huxtable italic<-.huxtable set_italic.huxtable
+NULL
+make_getter_setters('italic', 'cell', check_fun = is.logical)
 
 
 #' @template getset-table

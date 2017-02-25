@@ -2,9 +2,10 @@
 title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
-output: 
+output:
+  html_document: default
   pdf_document:
-    keep_tex: true
+    keep_tex: yes
 ---
 
 ```{r setup, echo = FALSE}
@@ -29,6 +30,18 @@ ht <- ht_orig
 position(ht) <- 'left'
 ht
 ```
+
+
+# Replace NAs:
+
+```{r}
+ht <- ht_orig
+ht[2,1] <- NA
+ht
+na_string(ht) <- '--'
+ht
+```
+
 
 # Cell Alignment:
 
@@ -91,12 +104,21 @@ bottom_border(ht)[5,] <- 2
 ht
 ```
 
+
+# Text color:
+
+```{r}
+ht <- ht_orig
+text_color(ht)[,2] <- 'red'
+ht
+```
+
 # Background color:
 
 ```{r}
 ht <- ht_orig
 bgcolor(ht)[1,1] <- 'green'
-bgcolor(ht)[,2] <- rgb(.8, .5, .5)
+bgcolor(ht)[,2] <- rgb(.4, .7, .6)
 ht
 ```
 

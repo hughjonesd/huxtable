@@ -3,6 +3,7 @@
 #' @import tibble
 #' @import knitr
 #' @import rmarkdown
+#' @import xtable
 NULL
 
 
@@ -122,16 +123,18 @@ knit_print.huxtable <- function (x, options, ...) {
 
 # also print_html, print_latex?
 
+#' @export
 print.huxtable <- function(ht, ...) {
   cat(to_screen(ht, ...))
 }
 
+#' @export
 to_screen  <- function (ht, ...) UseMethod('to_screen')
+
+#' @export
 to_screen.huxtable <- function(ht, ...) {
 
 }
-
-
 
 
 #' @export
@@ -147,57 +150,16 @@ as.tbl.huxtable <- function (x) {
   x
 }
 
-#
-#
-# # interface
-#
-# library(tidyverse)
-# ht <- data_frame(a = letters[1:10], b = rnorm(10), c = sample(1:10), d = factor(rep(letters[1:2], 5)))
-# ht <- as_huxtable(ht)
-#
-# # one approach:
-# colspan(ht)[2,1] <- 2
-# colspan(ht)[2,1] # getter
-# valign(ht)[,'c'] <- 'top'
-# border(ht, 'bottom')[1:3,] <- 1
-# rowgroups(ht) <- list('Top' = 1:2, 'Bottom' = 3:10, 'Vowels' = c(1, 5, 9))
-# # we'd also like
-# colgroups(ht) <- list('Left' = c('a', 'b'))
-# # or even like `select`
-# colgroups(ht) <- list('Left' = a:b)
-#
-# # reminder; names(x)[2] <- 'two' works like
-# # `*tmp*` <- names(x)
-# # `*tmp*`[2] <- "two"
-# # names(x) <- `*tmp*`
-#
-# # a dplyr-like approach:
-# ht %>% border(rows(1:3), 1) %>% align(cols(c(2,4)), 'left')
-# # getters
-# ht %>% border(rows(1:3))
-# # area, with select-style names
-# ht %>% border(area(2:3, a:b))
-# # would be nice:
-# ht %>% border(even_rows(), 1)
-# # separate function to select contents?
-# ht %>% area(row_spec, col_spec) %>% set_xxx
-# # problem; how to 'unset' selected areas when an object is returned?
-# ht %>% area(1:2, 3:4) %>% do_stuff # should now return the whole ht object
-# ht %>% area(1:2, 3:4) %>% do_stuff %>% do_more_stuff # do_more_stuff only in the area()
-#
-# # it seems more natural to do
-# border(ht)[r, c] <- 'blah'
+clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
+  mytype <- match.arg(type)
+  contents <- ht[row, col]
+  if (is.na(contents)) contents <- na_string(ht)[row, col]
+  if (escape_contents(ht)[row, col]) {
+    # xtable::sanitize.numbers would do very little and is buggy
+    contents <-  xtable::sanitize(contents, type = mytype)
+  }
 
-# toy example. This works when you do e.g. reversed(tmp)[1, 1:2] <- c(20, 30)
-# reversed <- function(x) {
-#   dm <- dim(x)
-#   x[dm[1]:1 , dm[2]:1 ]
-# }
-#
-# `reversed<-` <- function(x, value) {
-#   dm <- dim(x)
-#   x[dm[1]:1 , dm[2]:1 ] <- value
-#   x
-# }
-#
+  contents
+}
+
 
