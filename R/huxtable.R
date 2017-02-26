@@ -1,28 +1,25 @@
 
-
-#' @import tibble
 #' @import knitr
 #' @import rmarkdown
 #' @import xtable
 NULL
 
 
-
-
 #' Create a huxtable
 #'
-#' @param ... Named list of values, as passed to \code{\link{data_frame}}.
+#' @param ... Named list of values, as for \code{\link{data.frame}}.
 #'
 #' @return An object of class 'huxtable'.
 #' @export
 #'
 #' @aliases hux
+#'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 #'
 #'
 huxtable <- function (...) {
-  ht <- tibble::data_frame(...)
+  ht <- data.frame(..., stringsAsFactors = FALSE)
   as_huxtable(ht)
 }
 
@@ -59,7 +56,7 @@ as_huxtable.default <- function (x, ...) {
     attr(x, att)[] <- huxtable_default_attrs[[att]] # [[ indexing matters here
   }
 
-  x <- tibble::as_tibble(x)
+  x <- as.data.frame(x)
   class(x) <- c('huxtable', class(x))
   x
 }
@@ -82,7 +79,9 @@ as_huxtable.table <- function(x, ...) {
 #'
 #' @examples
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  ss <- tibble::as_tibble(unclass(x))[i, j]
+  ss <- as.data.frame(unclass(x), stringsAsFactors = FALSE)[i, j, drop]
+  if (! missing(i) && is.character(i)) i <- which(rownames(ht) %in% i)
+  if (! missing(j) && is.character(j)) j <- which(colnames(ht) %in% j)
   for (att in huxtable_cell_attrs) {
     attr(ss, att) <- attr(x, att)[i, j, drop = drop]
   }
@@ -121,12 +120,11 @@ knit_print.huxtable <- function (x, options, ...) {
   }
 }
 
-# also print_html, print_latex?
 
-#' @export
-print.huxtable <- function(ht, ...) {
-  cat(to_screen(ht, ...))
-}
+#' #' @export
+#' print.huxtable <- function(ht, ...) {
+#'   cat(to_screen(ht, ...))
+#' }
 
 #' @export
 to_screen  <- function (ht, ...) UseMethod('to_screen')
@@ -134,20 +132,6 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #' @export
 to_screen.huxtable <- function(ht, ...) {
 
-}
-
-
-#' @export
-tbl_sum.huxtable <- function (x) {
-  paste0('A huxtable: ', dim_desc(x))
-}
-
-
-as.tbl.huxtable <- function (x) {
-  cl <- class(x)
-  htcl <- which(cl == 'huxtable')
-  class(x) <- class(x)[-(1:htcl)]
-  x
 }
 
 clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
