@@ -146,4 +146,49 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
   contents
 }
 
+# return matrix of cells displayed in a real 'cell position'
+display_cells <- function(ht) {
+  spans <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
+        rowspan = as.vector(rowspan(ht)), colspan = as.vector(colspan(ht)))
+  spans$display_row <- spans$row
+  spans$display_col <- spans$col
+  spans$shadowed <- FALSE
+  for (i in 1:nrow(spans)) {
+    if (spans$rowspan[i] == 1 & spans$colspan[i] == 1) next
+    dr <- spans$row[i]
+    dc <- spans$col[i]
+    spanned <- spans$row %in% dr:(dr + spans$rowspan[i] - 1) & spans$col %in% dc:(dc + spans$colspan[i] - 1)
+    spans[spanned, c('display_row', 'display_col')] <- c(dr, dc)
+    shadowed <- spanned & (1:nrow(spans)) != i
+    spans$shadowed[shadowed] <- TRUE
+  }
+  spans
+}
+
+# return matrix of whether cells are shadowed by a previous multirow/multicolumn cell
+cell_shadows <- function(ht, row_or_col) {
+  row_or_col <- match.arg(row_or_col,  c('row', 'col'))
+  spanfun  <- if (row_or_col == 'row') rowspan else colspan
+  indexfun <- if (row_or_col == 'row') col else row
+
+  spans <- spanfun(ht)
+  # for each cell, what is the row/col number of its 'shadow'?
+  coverage <- spans - 1 + indexfun(spans)
+  # what is the farthest cell covered so far in each row/col?
+  cum_coverage <- if (row_or_col == 'col') apply(coverage, 2, cummax) else
+    t(apply(coverage, 1, cummax))
+  # for each cell, is it within a shadow of something earlier?
+  covered <- indexfun(spans) < cum_coverage
+  covered <- if (row_or_col == 'col') cbind(FALSE,covered[, 1:(ncol(covered) - 1)]) else
+    rbind(FALSE, covered[1:(nrow(covered) - 1), ])
+  covered
+}
+
+# is a given cell 'shadowed'?
+cell_shadowed <- function (ht, rn, cn, row_or_col = c('row', 'col')) {
+  row_or_col <- match.arg(row_or_col)
+  cell_shadows(ht, row_or_col)[rn, cn]
+}
+
+
 

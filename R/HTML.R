@@ -54,7 +54,10 @@ col_html <- function (ht, cn) {
 row_html <- function (ht, rn) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>
   res <- '<tr>\n'
-  cells_html <- sapply(1:ncol(ht), cell_html, ht = ht, rn = rn)
+  cols_to_show <- 1:ncol(ht)
+  display_cells <- display_cells(ht) # speedup: make this call just once in parent
+  cols_to_show <- setdiff(cols_to_show, display_cells$col[display_cells$row == rn & display_cells$shadowed])
+  cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn)
   cells_html <- paste0(cells_html, collapse = '')
   res <- paste0(res, cells_html)
   res <- paste0(res, '</tr>\n')
@@ -62,10 +65,6 @@ row_html <- function (ht, rn) {
 }
 
 cell_html <- function (ht, rn, cn) {
-  # check if cell is shadowed by an earlier row/colspan.
-  # we could reduce repetition a lot by doing this calculation once per call!
-  if (cell_shadowed(ht, rn, cn, 'row')) return('')
-  if (cell_shadowed(ht, rn, cn, 'col')) return('')
   res <- '  <td '
   rs <- rowspan(ht)[rn,cn]
   cs <- colspan(ht)[rn,cn]
