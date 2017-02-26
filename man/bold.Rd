@@ -29,6 +29,3 @@ For \code{bold}, the \code{bold} attribute. For \code{bold<-}, the
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_bold}, the \code{ht} object.
 }
-\details{
-Similarly for \code{italic} and friends.
-}

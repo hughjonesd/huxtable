@@ -11,7 +11,7 @@ huxtable(...)
 hux(...)
 }
 \arguments{
-\item{...}{Named list of values, as passed to \code{\link{data_frame}}.}
+\item{...}{Named list of values, as for \code{\link{data.frame}}.}
 }
 \value{
 An object of class 'huxtable'.
