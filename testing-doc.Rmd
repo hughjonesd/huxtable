@@ -3,32 +3,39 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
 output:
-  html_document: default
   pdf_document:
+    includes:
+      in_header: placeins-header.tex
     keep_tex: yes
+  html_document: default
 ---
 
+
 ```{r setup, echo = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))
 library(huxtable)
+is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+
+fbr <- function() if (is_latex) knitr::asis_output('\\FloatBarrier')
+knitr::knit_hooks$set(
+  barrier = function(before, options, envir) {
+    if (! before) fbr()
+  }
+)
+knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)
+
 ```
 
-
-
-# Basic Usage:
+# Basic usage
 
 ```{r}
-ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
-ht_orig$b <- formatC(ht_orig$b,  format = 'f', digits = 0)
+ht_orig <- huxtable(a = c('Parsley', 'Sage', 'Rosemary', 'Thyme'), b = 10 ^ (2:5)) 
 width(ht_orig) <- 0.25
 ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
 
-
-
-# Table Position:
+# Table position:
 
 ```{r}
 ht <- ht_orig
@@ -36,62 +43,58 @@ position(ht) <- 'left'
 ht
 ```
 
-
-# Replace NAs:
-
-```{r}
-ht <- ht_orig
-ht[2,1] <- NA
-ht
-na_string(ht) <- '--'
-ht
-```
-
-# Cell Alignment:
+# Cell alignment
 
 ```{r}
 ht <- ht_orig
 align(ht)[,1] <- 'left'
 ht
+
 ```
 
-# Vertical Alignment:
+# Vertical alignment:
 
 ```{r}
 ht <- ht_orig
 valign(ht)[,1] <- 'top'
 ht
+
 ```
 
-# Column Span:
+# Column span:
 
 ```{r}
 
 ht <- ht_orig
+background_color(ht)[1,1] <- 'green'
 colspan(ht)[1,1] <- 2
-ht        
+ht   
+
 ```
 
-# Row Span:
+# Row span:
 
 ```{r}
 ht <- ht_orig
 ht[1,1] <- 'A rather long block of text'
+background_color(ht)[1,1] <- 'green'
 rowspan(ht)[1,1] <- 2
-ht        
+ht   
+
 ```
 
 
-# Row and Column Span:
+# Row and column span:
 
 ```{r}
 ht <- ht_orig
 ht[1,1] <- 'A rather long block of text'
+background_color(ht)[1,1] <- 'green'
 rowspan(ht)[1,1] <- 2
 colspan(ht)[1,1] <- 2
-ht        
-```
+ht   
 
+```
 
 # Table width:
 
@@ -99,27 +102,39 @@ ht
 ht <- ht_orig
 width(ht) <- 0.5
 ht
+
 ```
 
-# Column width:
+# Column width
 
 ```{r}
 ht <- ht_orig
 col_width(ht) <- c(.8, .2)
 ht
+
 ```
 
-# Borders:
+# Row height
 
 ```{r}
 ht <- ht_orig
-ht <- set_all_borders(ht, 1:5, 1:2, 0)
-top_border(ht) <- c(2, 0, 0, 0, 1)
-bottom_border(ht)[5,] <- 2 
+height(ht) <- 0.2; 
+if (! is_latex) height(ht) <- '100px' # need a specific height for row heights to work in HTML
+row_height(ht) <- c(.4, .2, .2, .2) * 0.2
 ht
+
 ```
 
+# Borders
 
+```{r}
+ht <- ht_orig
+ht <- set_all_borders(ht, 1:4, 1:2, 0)
+top_border(ht) <- c(2, 0, 0, 1)
+bottom_border(ht)[4,] <- 2 
+ht
+
+```
 
 # Text color, bold, italic, font size
 
@@ -130,61 +145,49 @@ bold(ht)[1,] <- TRUE
 italic(ht)[3,] <- TRUE
 font_size(ht)[2,] <- 14
 ht
+
 ```
 
-# Background color:
+# Replace NAs
 
 ```{r}
 ht <- ht_orig
-background_color(ht)[1,1] <- 'green'
-background_color(ht)[,2] <- rgb(.4, .7, .6)
+ht[2,1] <- NA
 ht
+na_string(ht) <- '--'
+ht
+
 ```
 
-# Background color, multirow:
+# Cell rotation
 
 ```{r}
 ht <- ht_orig
-background_color(ht)[1,1] <- 'green'
-rowspan(ht)[1,1] <- 2
+height(ht) <- 0.2 # necessary
+if (! is_latex) height(ht) <- '200px'
+# row_height(ht) <- c(.15, .4, .15, .15, .15)
+col_width(ht) <- c(.25, .75)
+rotation(ht)[,1] <- 90
 ht
+
 ```
 
-
-# Background color, multicolumn:
-
-```{r}
-ht <- ht_orig
-background_color(ht)[1,1] <- 'green'
-colspan(ht)[1,1] <- 2
-ht
-```
-
-# Background color, multicolumn and multirow:
-
-```{r}
-ht <- ht_orig
-background_color(ht)[1,1] <- 'green'
-colspan(ht)[1,1] <- 2
-rowspan(ht)[1,1] <- 2
-ht
-```
-
-
-# Caption:
+# Caption
 
 ```{r}
 ht <- ht_orig
 caption(ht) <- 'A simple table'
 ht
+
 ```
 
-# Caption below:
+# Caption below
 
 ```{r}
 ht <- ht_orig
 caption(ht) <- 'A simple table'
 caption_pos(ht) <- 'bottom'
 ht
+
 ```
 

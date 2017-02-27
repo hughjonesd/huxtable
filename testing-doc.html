@@ -124,9 +124,8 @@ $(document).ready(function () {
 
 
 <div id="basic-usage" class="section level1">
-<h1>Basic Usage:</h1>
-<pre class="r"><code>ht_orig &lt;- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
-ht_orig$b &lt;- formatC(ht_orig$b,  format = 'f', digits = 0)
+<h1>Basic usage</h1>
+<pre class="r"><code>ht_orig &lt;- huxtable(a = c('Parsley', 'Sage', 'Rosemary', 'Thyme'), b = 10 ^ (2:5)) 
 width(ht_orig) &lt;- 0.25
 ht_orig &lt;- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig</code></pre>
@@ -135,15 +134,7 @@ ht_orig</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -151,15 +142,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -167,16 +158,16 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="table-position" class="section level1">
-<h1>Table Position:</h1>
+<h1>Table position:</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 position(ht) &lt;- 'left'
 ht</code></pre>
@@ -185,15 +176,7 @@ ht</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -201,15 +184,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -217,111 +200,16 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
-</td>
-</tr>
-</table>
-</div>
-<div id="replace-nas" class="section level1">
-<h1>Replace NAs:</h1>
-<pre class="r"><code>ht &lt;- ht_orig
-ht[2,1] &lt;- NA
-ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
-</td>
-</tr>
-</table>
-<pre class="r"><code>na_string(ht) &lt;- '--'
-ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-–
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="cell-alignment" class="section level1">
-<h1>Cell Alignment:</h1>
+<h1>Cell alignment</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 align(ht)[,1] &lt;- 'left'
 ht</code></pre>
@@ -330,15 +218,7 @@ ht</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -346,15 +226,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -362,16 +242,16 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="vertical-alignment" class="section level1">
-<h1>Vertical Alignment:</h1>
+<h1>Vertical alignment:</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 valign(ht)[,1] &lt;- 'top'
 ht</code></pre>
@@ -380,15 +260,7 @@ ht</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -396,15 +268,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -412,46 +284,39 @@ d
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="column-span" class="section level1">
-<h1>Column Span:</h1>
+<h1>Column span:</h1>
 <pre class="r"><code>ht &lt;- ht_orig
+background_color(ht)[1,1] &lt;- 'green'
 colspan(ht)[1,1] &lt;- 2
-ht        </code></pre>
+ht   </code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
+<td colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
+Parsley
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -459,47 +324,40 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="row-span" class="section level1">
-<h1>Row Span:</h1>
+<h1>Row span:</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[1,1] &lt;- 'A rather long block of text'
+background_color(ht)[1,1] &lt;- 'green'
 rowspan(ht)[1,1] &lt;- 2
-ht        </code></pre>
+ht   </code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td rowspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<td rowspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
 A rather long block of text
 </td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -507,26 +365,27 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="row-and-column-span" class="section level1">
-<h1>Row and Column Span:</h1>
+<h1>Row and column span:</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[1,1] &lt;- 'A rather long block of text'
+background_color(ht)[1,1] &lt;- 'green'
 rowspan(ht)[1,1] &lt;- 2
 colspan(ht)[1,1] &lt;- 2
-ht        </code></pre>
+ht   </code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td rowspan="2" colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<td rowspan="2" colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
 A rather long block of text
 </td>
 </tr>
@@ -534,15 +393,7 @@ A rather long block of text
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -550,10 +401,10 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
@@ -568,15 +419,7 @@ ht</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -584,15 +427,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -600,16 +443,16 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="column-width" class="section level1">
-<h1>Column width:</h1>
+<h1>Column width</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 col_width(ht) &lt;- c(.8, .2)
 ht</code></pre>
@@ -618,15 +461,7 @@ ht</code></pre>
 <col style="width: 20%;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -634,15 +469,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -650,51 +485,87 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
+</table>
+</div>
+<div id="row-height" class="section level1">
+<h1>Row height</h1>
+<pre class="r"><code>ht &lt;- ht_orig
+height(ht) &lt;- 0.1; 
+if (! is_latex) height(ht) &lt;- '100px' # need a specific height for row heights to work in HTML
+row_height(ht) &lt;- c(.4, .2, .2, .2)
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;height: 100px;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr style="height: 40%;">
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Parsley
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+100
+</td>
+</tr>
+<tr style="height: 20%;">
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 1000
 </td>
 </tr>
+<tr style="height: 20%;">
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+10000
+</td>
+</tr>
+<tr style="height: 20%;">
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
 </table>
 </div>
 <div id="borders" class="section level1">
-<h1>Borders:</h1>
+<h1>Borders</h1>
 <pre class="r"><code>ht &lt;- ht_orig
-ht &lt;- set_all_borders(ht, 1:5, 1:2, 0)
-top_border(ht) &lt;- c(2, 0, 0, 0, 1)
-bottom_border(ht)[5,] &lt;- 2 
+ht &lt;- set_all_borders(ht, 1:4, 1:2, 0)
+top_border(ht) &lt;- c(2, 0, 0, 1)
+bottom_border(ht)[4,] &lt;- 2 
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; ">
-a
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; ">
-b
-</td>
-<td style="vertical-align: middle; text-align: center; ">
 100
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; ">
 10000
@@ -702,10 +573,10 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
@@ -723,162 +594,49 @@ ht</code></pre>
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="font-weight: bold; ">a</span>
+<span style="font-weight: bold; ">Parsley</span>
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); font-weight: bold; ">10</span>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="font-size:14pt; ">b</span>
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); font-size:14pt; ">100</span>
+<span style="color: rgb(255, 0, 0); font-weight: bold; ">100</span>
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="font-style: italic; ">c</span>
+<span style="font-size:14pt; ">Sage</span>
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); font-style: italic; ">100000</span>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); ">10000</span>
+<span style="color: rgb(255, 0, 0); font-size:14pt; ">1000</span>
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+<span style="font-style: italic; ">Rosemary</span>
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); ">1000</span>
+<span style="color: rgb(255, 0, 0); font-style: italic; ">10000</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="color: rgb(255, 0, 0); ">1e+05</span>
 </td>
 </tr>
 </table>
 </div>
-<div id="background-color" class="section level1">
-<h1>Background color:</h1>
+<div id="replace-nas" class="section level1">
+<h1>Replace NAs</h1>
 <pre class="r"><code>ht &lt;- ht_orig
-background_color(ht)[1,1] &lt;- 'green'
-background_color(ht)[,2] &lt;- rgb(.4, .7, .6)
+ht[2,1] &lt;- NA
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(102, 179, 153); ">
-10
-</td>
-</tr>
-<tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(102, 179, 153); ">
-100
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(102, 179, 153); ">
-100000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(102, 179, 153); ">
-10000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(102, 179, 153); ">
-1000
-</td>
-</tr>
-</table>
-</div>
-<div id="background-color-multirow" class="section level1">
-<h1>Background color, multirow:</h1>
-<pre class="r"><code>ht &lt;- ht_orig
-background_color(ht)[1,1] &lt;- 'green'
-rowspan(ht)[1,1] &lt;- 2
-ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td rowspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
-</td>
-</tr>
-</table>
-</div>
-<div id="background-color-multicolumn" class="section level1">
-<h1>Background color, multicolumn:</h1>
-<pre class="r"><code>ht &lt;- ht_orig
-background_color(ht)[1,1] &lt;- 'green'
-colspan(ht)[1,1] &lt;- 2
-ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
-a
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -886,15 +644,14 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -902,42 +659,37 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
-</div>
-<div id="background-color-multicolumn-and-multirow" class="section level1">
-<h1>Background color, multicolumn and multirow:</h1>
-<pre class="r"><code>ht &lt;- ht_orig
-background_color(ht)[1,1] &lt;- 'green'
-colspan(ht)[1,1] &lt;- 2
-rowspan(ht)[1,1] &lt;- 2
+<pre class="r"><code>na_string(ht) &lt;- '--'
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td rowspan="2" colspan="2" style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(0, 255, 0); ">
-a
-</td>
-</tr>
-<tr>
-</tr>
-<tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+100
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+–
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -945,16 +697,69 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
+</table>
+</div>
+<div id="cell-rotation" class="section level1">
+<h1>Cell rotation</h1>
+<pre class="r"><code>ht &lt;- ht_orig
+height(ht) &lt;- 0.2 # necessary
+# row_height(ht) &lt;- c(.15, .4, .15, .15, .15)
+col_width(ht) &lt;- c(.25, .75)
+rotation(ht)[,1] &lt;- 90
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;height: 20%;">
+<col style="width: 25%;">
+<col style="width: 75%;">
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<div style="transform: rotate(-90deg); white-space:nowrap;">
+Parsley
+</div>
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+100
+</td>
+</tr>
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<div style="transform: rotate(-90deg); white-space:nowrap;">
+Sage
+</div>
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<div style="transform: rotate(-90deg); white-space:nowrap;">
+Rosemary
+</div>
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<div style="transform: rotate(-90deg); white-space:nowrap;">
+Thyme
+</div>
+</td>
+<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="caption" class="section level1">
-<h1>Caption:</h1>
+<h1>Caption</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'A simple table'
 ht</code></pre>
@@ -966,15 +771,7 @@ A simple table
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -982,15 +779,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -998,16 +795,16 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
 </div>
 <div id="caption-below" class="section level1">
-<h1>Caption below:</h1>
+<h1>Caption below</h1>
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'A simple table'
 caption_pos(ht) &lt;- 'bottom'
@@ -1020,15 +817,7 @@ A simple table
 <col style="width: NA;">
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-a
-</td>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-10
-</td>
-</tr>
-<tr>
-<td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-b
+Parsley
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 100
@@ -1036,15 +825,15 @@ b
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-c
+Sage
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100000
+1000
 </td>
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-d
+Rosemary
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
 10000
@@ -1052,10 +841,10 @@ d
 </tr>
 <tr>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-e
+Thyme
 </td>
 <td style="vertical-align: middle; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-1000
+1e+05
 </td>
 </tr>
 </table>
