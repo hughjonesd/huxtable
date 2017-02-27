@@ -176,6 +176,8 @@ build_clines_for_row <- function(ht, row) {
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
+    # are we at the bottom of this dcell? If not, don't want to print its bottom border
+    if (row != drow + rowspan(ht)[drow, dcol] - 1) next
     bb <- bottom_border(ht)[drow, dcol]
     cs <- colspan(ht)[drow, dcol]
     this_bottom[dcol:(dcol - 1 + cs)] <- bb
@@ -186,6 +188,8 @@ build_clines_for_row <- function(ht, row) {
   for (i in seq_len(nrow(dcells_next_row))) {
     drow <- dcells_next_row[i, 'display_row']
     dcol <- dcells_next_row[i, 'display_col']
+    # are we at the top of this dcell? If not...
+    if (row + 1 != drow) next
     tb <- top_border(ht)[drow, dcol]
     cs <- colspan(ht)[drow, dcol]
     next_top[dcol:(dcol - 1 + cs)] <- tb

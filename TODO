@@ -29,9 +29,7 @@ TODO
 
 BUGS
 * latex table width don't work (and cell widths probably wrong)
-* colored background not there on second row of multirow
-* vertical borders not visible on second row of multirow
-* HTML borders fixed to black to avoid bleedover from specifying 'color'
+* coloring overwrites Clines in latex
 
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?
