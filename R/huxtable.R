@@ -159,7 +159,7 @@ display_cells <- function(ht) {
     dr <- spans$row[i]
     dc <- spans$col[i]
     spanned <- spans$row %in% dr:(dr + spans$rowspan[i] - 1) & spans$col %in% dc:(dc + spans$colspan[i] - 1)
-    spans[spanned, c('display_row', 'display_col')] <- c(dr, dc)
+    spans[spanned, c('display_row', 'display_col')] <- matrix(c(dr, dc), sum(spanned), 2, byrow = TRUE)
     shadowed <- spanned & (1:nrow(spans)) != i
     spans$shadowed[shadowed] <- TRUE
   }
