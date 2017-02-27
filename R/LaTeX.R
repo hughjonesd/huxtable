@@ -96,6 +96,7 @@ build_tabular <- function(ht) {
   res <- paste0(res, build_clines_for_row(ht, row = 0))
 
   for (myrow in 1:nrow(ht)) {
+    row_contents <- character(0)
     for (mycol in 1:ncol(ht)) {
       dcell <- display_cells[display_cells$row == myrow & display_cells$col == mycol,]
       drow <- dcell$display_row
@@ -130,14 +131,12 @@ build_tabular <- function(ht) {
         contents <- paste0('\\multicolumn{', cs,'}{', lb, lcr, rb ,'}{', contents,'}')
       }
 
-      res <- paste0(res, contents)
+      row_contents[mycol] <- contents
 
-      # logic is: don't add a & at very end. So e.g. if 2 multicols of 2, then we are at 4
-      # nb this should work for multirows too, because there we print out an empty multicolumn
-      real_col <- sum(colspan(ht)[myrow, 1:mycol])
-      if (real_col < ncol(ht)) res <- paste0(res, ' & ')
     } # next cell
-    res <- paste0(res, ' \\tabularnewline\n')
+    row_contents <- row_contents[nzchar(row_contents)] # if we've printed nothing, don't print an & for it
+    row_contents <- paste(row_contents, collapse = ' & ')
+    res <- paste0(res, row_contents, ' \\tabularnewline\n')
 
     # add top/bottom borders
     res <- paste0(res, build_clines_for_row(ht, myrow))
