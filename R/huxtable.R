@@ -162,7 +162,7 @@ display_cells <- function(ht) {
     shadowed <- spanned & (1:nrow(spans)) != i
     spans$shadowed[shadowed] <- TRUE
   }
-  spans
+  spans[, c('row', 'col', 'display_row', 'display_col', 'shadowed')]
 }
 
 # return matrix of whether cells are shadowed by a previous multirow/multicolumn cell
