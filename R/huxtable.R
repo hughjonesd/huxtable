@@ -29,12 +29,15 @@ hux <- huxtable
 
 #' Convert an object to a huxtable
 #'
-#' @param dfr
+#' @param x A suitable object. Methods exist for data frames, tables and matrices.
 #'
-#' @return
+#' @return An object of class \code{huxtable}.
 #' @export
 #'
 #' @examples
+#' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
+#' as_huxtable(dfr)
+#'
 as_huxtable <- function(x, ...) UseMethod('as_huxtable')
 
 #' @export
@@ -70,14 +73,17 @@ as_huxtable.table <- function(x, ...) {
 #' Subset a huxtable
 #'
 #' @param x A huxtable.
-#' @param i
-#' @param j
+#' @param i Rows to select.
+#' @param j Columns to select.
 #' @param drop Not used.
 #'
 #' @return A huxtable.
 #' @export
 #'
 #' @examples
+#' ht <- huxtable(a = 1:3, b = letters[1:3])
+#' rowspan(ht)[2,1] <- 2
+#' ht[1:2,]
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   ss <- as.data.frame(unclass(x), stringsAsFactors = FALSE)[i, j, drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(ht) %in% i)
@@ -94,8 +100,18 @@ as_huxtable.table <- function(x, ...) {
   for (att in huxtable_table_attrs) {
     attr(ss, att) <- attr(x, att)
   }
-
+  dcells <- display_cells(x)
+  # check for dcells where row > nrow(ss) or col > ncol(ss) and display_row, display_col are within ss
+  cut <- (dcells$row > nrow(ss) | dcells$col > ncol(ss)) & dcells$display_row <= nrow(ss) &
+        dcells$display_col <= ncol(ss)
+  if (any(cut)) warning('Some cells span subset; ')
   class(ss) <- class(x)
+  for (r in which(cut)) {
+    drow <- dcells$display_row[r]
+    dcol <- dcells$display_col[r]
+    colspan(ss)[drow, dcol] <- min(colspan(ss)[drow, dcol], ncol(ss) - dcol + 1)
+    rowspan(ss)[drow, dcol] <- min(rowspan(ss)[drow, dcol], nrow(ss) - drow + 1)
+  }
   ss
 }
 
@@ -139,7 +155,8 @@ to_screen.huxtable <- function(ht, ...) {
 
 clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
   mytype <- match.arg(type)
-  contents <- ht[row, col]
+  stopifnot(length(row) == 1 & length(col) == 1)
+  contents <- `[.data.frame`(ht, row, col) # just the data
   if (is.na(contents)) contents <- na_string(ht)[row, col]
   if (escape_contents(ht)[row, col]) {
     # xtable::sanitize.numbers would do very little and is buggy
