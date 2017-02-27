@@ -10,10 +10,13 @@ output:
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 library(huxtable)
 ```
 
-# Basic usage:
+
+
+# Basic Usage:
 
 ```{r}
 ht_orig <- huxtable(a = letters[1:5], b = 10 ^ sample(1:5))
@@ -22,6 +25,8 @@ width(ht_orig) <- 0.25
 ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
+
+
 
 # Table Position:
 
@@ -42,7 +47,6 @@ na_string(ht) <- '--'
 ht
 ```
 
-
 # Cell Alignment:
 
 ```{r}
@@ -51,7 +55,7 @@ align(ht)[,1] <- 'left'
 ht
 ```
 
-# Vertical alignment:
+# Vertical Alignment:
 
 ```{r}
 ht <- ht_orig
@@ -59,7 +63,7 @@ valign(ht)[,1] <- 'top'
 ht
 ```
 
-# Column span:
+# Column Span:
 
 ```{r}
 
@@ -68,12 +72,23 @@ colspan(ht)[1,1] <- 2
 ht        
 ```
 
-# Row span:
+# Row Span:
 
 ```{r}
 ht <- ht_orig
 ht[1,1] <- 'A rather long block of text'
 rowspan(ht)[1,1] <- 2
+ht        
+```
+
+
+# Row and Column Span:
+
+```{r}
+ht <- ht_orig
+ht[1,1] <- 'A rather long block of text'
+rowspan(ht)[1,1] <- 2
+colspan(ht)[1,1] <- 2
 ht        
 ```
 
@@ -106,13 +121,14 @@ ht
 
 
 
-# Text color, bold, italic
+# Text color, bold, italic, font size
 
 ```{r}
 ht <- ht_orig
 text_color(ht)[,2] <- 'red'
 bold(ht)[1,] <- TRUE
 italic(ht)[3,] <- TRUE
+font_size(ht)[2,] <- 14
 ht
 ```
 
@@ -120,8 +136,8 @@ ht
 
 ```{r}
 ht <- ht_orig
-bgcolor(ht)[1,1] <- 'green'
-bgcolor(ht)[,2] <- rgb(.4, .7, .6)
+background_color(ht)[1,1] <- 'green'
+background_color(ht)[,2] <- rgb(.4, .7, .6)
 ht
 ```
 
@@ -129,10 +145,31 @@ ht
 
 ```{r}
 ht <- ht_orig
-bgcolor(ht)[1,1] <- 'green'
+background_color(ht)[1,1] <- 'green'
 rowspan(ht)[1,1] <- 2
 ht
 ```
+
+
+# Background color, multicolumn:
+
+```{r}
+ht <- ht_orig
+background_color(ht)[1,1] <- 'green'
+colspan(ht)[1,1] <- 2
+ht
+```
+
+# Background color, multicolumn and multirow:
+
+```{r}
+ht <- ht_orig
+background_color(ht)[1,1] <- 'green'
+colspan(ht)[1,1] <- 2
+rowspan(ht)[1,1] <- 2
+ht
+```
+
 
 # Caption:
 
