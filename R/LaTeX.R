@@ -101,21 +101,28 @@ build_tabular <- function(ht) {
       dcell <- display_cells[display_cells$row == myrow & display_cells$col == mycol,]
       drow <- dcell$display_row
       dcol <- dcell$display_col
-      contents <- if (! dcell$shadowed) build_cell_contents(ht, myrow, mycol) else ''
+      # we print out contents for (a) unshadowed cells which are not multirow
+      # (b) shadowed cells which are in the last row (but first column) of a multirow
+      contents <- ''
+      rs <- rowspan(ht)[drow, dcol]
+      if (! dcell$shadowed && rs == 1) contents <- build_cell_contents(ht, myrow, mycol)
+      if (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol) contents <- build_cell_contents(ht, myrow, mycol)
 
       # print out cell_color and borders from display cell rather than actual cell
-      if (! is.na(cell_color <- bgcolor(ht)[drow, dcol])) {
+      # but only for left hand cells (which will be multicolumn{colspan} )
+      if (! is.na(cell_color <- bgcolor(ht)[drow, dcol]) && mycol == dcol) {
         cell_color <- as.vector(col2rgb(cell_color))
         cell_color <- paste0(cell_color, collapse = ', ')
         cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
         contents <- paste0(cell_color, ' ', contents)
       }
 
-      if (! dcell$shadowed && (rs <- rowspan(ht)[myrow, mycol]) > 1) {
+      # multirows are moved to last line...
+      if (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol) {
         # the ctb switch may only work with v recent multirow
         # ctb <- switch(valign(ht)[myrow, mycol], top = 't', bottom = 'b', middle = 'c')
         # * is 'standard width', could be more specific
-        contents <- paste0('\\multirow{', rs,'}{*}{', contents,'}')
+        contents <- paste0('\\multirow{-', rs,'}{*}{', contents,'}')
       }
 
       # must be this way round: multirow inside multicolumn
