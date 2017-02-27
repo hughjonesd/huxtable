@@ -12,7 +12,6 @@ TODO
 * horiz align including on dec pt and for sig stars
 * screen method
 * new version of latex: compute "real" details (border, cell, content) for each row?
-
 * rotation
 * more advanced positioning (floats?)
 * as_huxtable.ftable

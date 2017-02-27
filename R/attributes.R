@@ -5,28 +5,29 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_co
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
-huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos')
+huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos', 'tabular_environment')
 huxtable_default_attrs <- list(
-        rowspan          = 1,
-        colspan          = 1,
-        align            = 'center',
-        valign           = 'middle',
-        width            = 1,
-        col_width        = NA,
-        background_color = NA,
-        text_color       = NA,
-        left_border      = 0,
-        right_border     = 0,
-        top_border       = 0,
-        bottom_border    = 0,
-        caption          = NA,
-        caption_pos      = 'top',
-        position         = 'center',
-        escape_contents  = TRUE,
-        na_string        = '',
-        bold             = FALSE,
-        italic           = FALSE,
-        font_size        = NA
+        rowspan             = 1,
+        colspan             = 1,
+        align               = 'center',
+        valign              = 'middle',
+        width               = 1,
+        col_width           = NA,
+        background_color    = NA,
+        text_color          = NA,
+        left_border         = 0,
+        right_border        = 0,
+        top_border          = 0,
+        bottom_border       = 0,
+        caption             = NA,
+        caption_pos         = 'top',
+        position            = 'center',
+        tabular_environment = 'tabularx',
+        escape_contents     = TRUE,
+        na_string           = '',
+        bold                = FALSE,
+        italic              = FALSE,
+        font_size           = NA
       )
 
 
@@ -327,7 +328,7 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' @templateVar attr_desc Caption Position
 #' @templateVar value_param_desc
 #' A length-one character vector which can be 'top', 'bottom' or \code{NA}.
-#' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable set_caption_pos.huxtable
+#' @export tabular_environment tabular_environment<- set_tabular_environment tabular_environment.huxtable tabular_environment<-.huxtable set_tabular_environment.huxtable
 #' @seealso \code{\link{caption}}
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
@@ -342,4 +343,23 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
 NULL
 make_getter_setters('caption', 'table', check_fun = is.character)
 
+
+#' @template getset-table
+#' @templateVar attr_name position
+#' @templateVar attr_desc Table Position
+#' @templateVar value_param_desc
+#' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
+#' @export position position<- set_position position.huxtable position<-.huxtable set_position.huxtable
+NULL
+make_getter_setters('position', 'table', check_values = c('left', 'center', 'right'))
+
+#' @template getset-table
+#' @templateVar attr_name tabular_environment
+#' @templateVar attr_desc Tabular Environment
+#' @templateVar value_param_desc
+#' A length-one character vector. Set to \code{NA} for the default, 'tabularx'.
+#' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable set_caption_pos.huxtable
+#' @details Not all features are guaranteed to work if you set this to a non-default value.
+NULL
+make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 

@@ -46,10 +46,13 @@ to_latex.huxtable <- function (ht, ...){
 }
 
 build_tabular <- function(ht) {
-  res <- '\\begin{tabularx}'
-  tw <- width(ht)
-  if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
-  res <- paste0(res, '{', tw,'}')
+  tenv <- tabular_environment(ht)
+  res <- paste0('\\begin{', tenv, '}')
+  if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
+    tw <- width(ht)
+    if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
+    res <- paste0(res, '{', tw,'}')
+  }
 
   col_width <- col_width(ht)
   if (all(is.na(col_width))) col_width <- rep(1/ncol(ht), ncol(ht))

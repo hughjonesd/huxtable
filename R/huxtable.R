@@ -109,12 +109,13 @@ knit_print.huxtable <- function (x, options, ...) {
   if (of == 'pdf_document') {
     latex_deps <- list(
             rmarkdown::latex_dependency('array'),
-            rmarkdown::latex_dependency('tabularx'),
             rmarkdown::latex_dependency('siunitx'),
             rmarkdown::latex_dependency('xcolor', options = 'table'),
             rmarkdown::latex_dependency('multirow'),
             rmarkdown::latex_dependency('hhline')
           )
+    tenv <- tabular_environment(x)
+    if (tenv %in% c('tabularx', 'tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
   } else {
     return(knitr::asis_output(res))
