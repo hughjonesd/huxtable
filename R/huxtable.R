@@ -112,7 +112,8 @@ knit_print.huxtable <- function (x, options, ...) {
             rmarkdown::latex_dependency('tabularx'),
             rmarkdown::latex_dependency('siunitx'),
             rmarkdown::latex_dependency('xcolor', options = 'table'),
-            rmarkdown::latex_dependency('multirow')
+            rmarkdown::latex_dependency('multirow'),
+            rmarkdown::latex_dependency('hhline')
           )
     return(knitr::asis_output(res, meta = latex_deps))
   } else {
