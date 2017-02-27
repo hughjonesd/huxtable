@@ -2,17 +2,19 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
-  'escape_contents', 'na_string', 'bold', 'italic', 'font_size')
+  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation')
 huxtable_col_attrs <- c('col_width')
-huxtable_row_attrs <- c()
-huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos', 'tabular_environment')
+huxtable_row_attrs <- c('row_height')
+huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment')
 huxtable_default_attrs <- list(
         rowspan             = 1,
         colspan             = 1,
         align               = 'center',
         valign              = 'middle',
         width               = 1,
+        height              = NA,
         col_width           = NA,
+        row_height          = NA,
         background_color    = NA,
         text_color          = NA,
         left_border         = 0,
@@ -27,7 +29,8 @@ huxtable_default_attrs <- list(
         na_string           = '',
         bold                = FALSE,
         italic              = FALSE,
-        font_size           = NA
+        font_size           = NA,
+        rotation            = 0
       )
 
 
@@ -132,16 +135,6 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 NULL
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
 
-
-#' @template getset-table
-#' @templateVar attr_name width
-#' @templateVar attr_desc Table Width
-#' @templateVar value_param_desc
-#' A length-one vector. If numeric, it is treated as a proportion of the surrounding block width. If character, it must be a valid CSS or LaTeX width.
-#' @export width width<- set_width width.huxtable width<-.huxtable set_width.huxtable
-NULL
-make_getter_setters('width', 'table')
-
 #' @template getset-cell
 #' @templateVar attr_name align
 #' @templateVar attr_desc Alignment
@@ -154,10 +147,22 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 #' @templateVar attr_name col_width
 #' @templateVar rowcol col
 #' @templateVar attr_desc Column Widths
-#' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.
+#' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.
+#' @family row/column heights
 #' @export col_width col_width<- set_col_width col_width.huxtable col_width<-.huxtable set_col_width.huxtable
 NULL
 make_getter_setters('col_width', 'col')
+
+
+#' @template getset-rowcol
+#' @templateVar attr_name row_height
+#' @templateVar rowcol row
+#' @templateVar attr_desc Row Heights
+#' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table height (HTML) or text height (LaTeX). If character, they must be valid CSS or LaTeX lengths.
+#' @family row/column heights
+#' @export row_height row_height<- set_row_height row_height.huxtable row_height<-.huxtable set_row_height.huxtable
+NULL
+make_getter_setters('row_height', 'row')
 
 #' @template getset-cell
 #' @templateVar attr_name rowspan
@@ -312,6 +317,15 @@ NULL
 make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 
 
+#' @template getset-cell
+#' @templateVar attr_name rotation
+#' @templateVar attr_desc Cell Text Rotation
+#' @templateVar value_param_desc
+#' A numeric vector. 0 is normal direction, 90 is going up, etc.
+#' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable set_rotation.huxtable
+NULL
+make_getter_setters('rotation', 'cell', check_fun = is.numeric)
+
 
 
 #' @template getset-table
@@ -332,6 +346,28 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' @seealso \code{\link{caption}}
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
+
+
+#' @template getset-table
+#' @templateVar attr_name width
+#' @templateVar attr_desc Table Width
+#' @templateVar value_param_desc
+#' A length-one vector. If numeric, it is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is 100%.
+#' @export width width<- set_width width.huxtable width<-.huxtable set_width.huxtable
+#' @family table measurements
+NULL
+make_getter_setters('width', 'table')
+
+
+#' @template getset-table
+#' @templateVar attr_name height
+#' @templateVar attr_desc Table Height
+#' @templateVar value_param_desc
+#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.
+#' @export height height<- set_height height.huxtable height<-.huxtable set_height.huxtable
+#' @family table measurements
+NULL
+make_getter_setters('height', 'table')
 
 #' @template getset-table
 #' @templateVar attr_name caption

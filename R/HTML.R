@@ -21,7 +21,12 @@ to_html.huxtable <- function(ht, ...) {
           right  = 'margin-right: 0%;',
           center = 'margin-left: auto; margin-right: auto;'
         )
-  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, '">\n')
+  heightstring <- ''
+  if (! is.na(height <- height(ht))) {
+    if (is.numeric(height)) height <- paste0(height * 100, '%')
+    heightstring <- paste0('height: ', height, ';')
+  }
+  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, heightstring, '">\n')
   if (! is.na(cap <- caption(ht))) {
     cap <- paste0('<caption style="caption-side:', caption_pos(ht),'; text-align: center;">', cap, '</caption>')
     res <- paste0(res, cap)
@@ -53,7 +58,12 @@ col_html <- function (ht, cn) {
 
 row_html <- function (ht, rn) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>
-  res <- '<tr>\n'
+  style <- ''
+  if (! is.na(height <- row_height(ht)[rn])) {
+    if (is.numeric(height)) height <- paste0(round(height * 100, 1), '%')
+    style <- paste0(' style="height: ', height, ';"')
+  }
+  res <- paste0('<tr', style ,'>\n')
   cols_to_show <- 1:ncol(ht)
   display_cells <- display_cells(ht) # speedup: make this call just once in parent
   cols_to_show <- setdiff(cols_to_show, display_cells$col[display_cells$row == rn & display_cells$shadowed])
@@ -113,8 +123,13 @@ cell_html <- function (ht, rn, cn) {
   if (italic(ht)[rn, cn]) {
     span_css <- paste0(span_css, 'font-style: italic; ')
   }
+
   if (! (span_css == '')) contents <- paste0('<span style="', span_css, '">', contents, '</span>')
 
+  if ((rt <- rotation(ht)[rn, cn]) != 0) {
+    # note the minus sign
+    contents <- paste0('<div style="transform: rotate(-', rt,'deg); white-space:nowrap;">', contents, '</div>')
+  }
   res <- paste0(res, contents)
   res <- paste0(res, '</td>\n')
   res

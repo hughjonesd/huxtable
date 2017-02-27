@@ -109,6 +109,7 @@ knit_print.huxtable <- function (x, options, ...) {
   if (of == 'pdf_document') {
     latex_deps <- list(
             rmarkdown::latex_dependency('array'),
+            rmarkdown::latex_dependency('graphicx'),
             rmarkdown::latex_dependency('siunitx'),
             rmarkdown::latex_dependency('xcolor', options = 'table'),
             rmarkdown::latex_dependency('multirow'),

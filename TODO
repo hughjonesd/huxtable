@@ -1,8 +1,10 @@
 
 TODO
 
-* sig figs and arbitrary formatC args
+* sig figs and arbitrary formatC args (?)
+* auto cell align: left for text, decimal for numbers?
 * label (for latex only?)
+* set wrap to TRUE or FALSE (css: white-space:nowrap)
 * think about how to set column formatting...
 * heights - set per row!
 * padding, margin
@@ -30,7 +32,7 @@ TODO
 
 BUGS
 * latex table width don't work (and cell widths probably wrong)
-* hhline borders still not perfectly hidden e.g. with light colors
+* latex row height is of \\textheight when numeric, not % table height. Hard to fix
 
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?

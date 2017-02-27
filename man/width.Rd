@@ -20,3 +20,6 @@ For \code{width}, the \code{width} attribute. For \code{width<-}, the
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_width}, the \code{ht} object.
 }
+\seealso{
+Other table measurements: \code{\link{height}}
+}

@@ -13,7 +13,7 @@ set_col_width(ht, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector. If numeric, they are treated as proportions of the table width. If character, they must bevalid CSS or LaTeX lengths.}
+\item{value}{A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.}
 
 \item{col}{A col specifier.}
 }
@@ -21,4 +21,7 @@ set_col_width(ht, col, value)
 For \code{col_width}, the \code{col_width} attribute. For \code{col_width<-}, the
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_col_width}, the \code{ht} object.
+}
+\seealso{
+Other row/column heights: \code{\link{row_height}}
 }

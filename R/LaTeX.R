@@ -16,16 +16,19 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 #' @export
 to_latex.huxtable <- function (ht, ...){
   res <- build_tabular(ht)
-  # convenience function
-  # don't indent or pandoc may treat it as verbatim
-  res <- paste0('
-\\let\\Oldarrayrulewidth\\relax
-\\newlength\\Oldarrayrulewidth
-\\providecommand{\\Cline}[2]{}
-\\renewcommand{\\Cline}[2]{%
-\\noalign{\\global\\setlength{\\Oldarrayrulewidth}{\\arrayrulewidth}}%
-\\noalign{\\global\\setlength{\\arrayrulewidth}{#1}}\\cline{#2}%
-\\noalign{\\global\\setlength{\\arrayrulewidth}{\\Oldarrayrulewidth}}}', res)
+  if (! is.na(height <- height(ht))) {
+    if (is.numeric(height)) height <- paste0(height, '\\textheight')
+    res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
+  }
+#   # don't indent or pandoc may treat it as verbatim
+#   res <- paste0('
+# \\let\\Oldarrayrulewidth\\relax
+# \\newlength\\Oldarrayrulewidth
+# \\providecommand{\\Cline}[2]{}
+# \\renewcommand{\\Cline}[2]{%
+# \\noalign{\\global\\setlength{\\Oldarrayrulewidth}{\\arrayrulewidth}}%
+# \\noalign{\\global\\setlength{\\arrayrulewidth}{#1}}\\cline{#2}%
+# \\noalign{\\global\\setlength{\\arrayrulewidth}{\\Oldarrayrulewidth}}}', res)
 
   if (! is.na(cap <- caption(ht))) {
     cap <- paste0('\\caption{', cap, '}\n')
@@ -111,6 +114,11 @@ build_tabular <- function(ht) {
       rs <- rowspan(ht)[drow, dcol]
       if (! dcell$shadowed && rs == 1) contents <- build_cell_contents(ht, myrow, mycol)
       if (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol) contents <- build_cell_contents(ht, myrow, mycol)
+      # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
+      if (! is.na(row_height <- row_height(ht)[drow])) {
+        if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
+        contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
+      }
 
       # print out cell_color and borders from display cell rather than actual cell
       # but only for left hand cells (which will be multicolumn{colspan} )
@@ -175,12 +183,14 @@ build_cell_contents <- function(ht, row, col) {
     text_color <- latex_color(text_color)
     contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents,'}')
   }
-
   if (bold(ht)[row, col]) {
     contents <- paste0('\\textbf{', contents, '}')
   }
   if (italic(ht)[row, col]) {
     contents <- paste0('\\textit{', contents, '}')
+  }
+  if ((rt <- rotation(ht)[row, col]) != 0) {
+    contents <- paste0('\\rotatebox{', rt, '}{', contents, '}')
   }
 
   return(contents)
