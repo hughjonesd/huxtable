@@ -111,7 +111,7 @@ build_tabular <- function(ht) {
 
       # print out cell_color and borders from display cell rather than actual cell
       # but only for left hand cells (which will be multicolumn{colspan} )
-      if (! is.na(cell_color <- bgcolor(ht)[drow, dcol]) && mycol == dcol) {
+      if (! is.na(cell_color <- background_color(ht)[drow, dcol]) && mycol == dcol) {
         cell_color <- latex_color(cell_color)
         cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
         contents <- paste0(cell_color, ' ', contents)
@@ -198,7 +198,7 @@ build_clines_for_row <- function(ht, row) {
       this_bottom[dcol:dcell_right] <- bb
     }
     # Use color if we are in middle of display cell
-    if (row < dcell_bottom & ! is.na(color <- bgcolor(ht)[drow, dcol])) {
+    if (row < dcell_bottom & ! is.na(color <- background_color(ht)[drow, dcol])) {
       blank_line_color[dcol:dcell_right] <- latex_color(color)
     }
   }

@@ -86,7 +86,7 @@ cell_html <- function (ht, rn, cn) {
     res <- paste0(res, 'border-style: solid; ')
   }
 
-  if (! is.na(bgcolor <- bgcolor(ht)[rn, cn])) {
+  if (! is.na(bgcolor <- background_color(ht)[rn, cn])) {
     bgcolor <- as.vector(col2rgb(bgcolor))
     bgcolor <- paste(bgcolor, collapse = ', ')
     res <- paste0(res, 'background-color: rgb(', bgcolor, '); ')

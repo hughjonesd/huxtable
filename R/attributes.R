@@ -1,31 +1,31 @@
 
 
-huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'bgcolor', 'text_color',
+huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
   'escape_contents', 'na_string', 'bold', 'italic')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
 huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos')
 huxtable_default_attrs <- list(
-        rowspan         = 1,
-        colspan         = 1,
-        align           = 'center',
-        valign          = 'middle',
-        width           = 1,
-        col_width       = NA,
-        bgcolor         = NA,
-        text_color      = NA,
-        left_border     = 0,
-        right_border    = 0,
-        top_border      = 0,
-        bottom_border   = 0,
-        caption         = NA,
-        caption_pos     = 'top',
-        position        = 'center',
-        escape_contents = TRUE,
-        na_string       = '',
-        bold            = FALSE,
-        italic          = FALSE
+        rowspan          = 1,
+        colspan          = 1,
+        align            = 'center',
+        valign           = 'middle',
+        width            = 1,
+        col_width        = NA,
+        background_color = NA,
+        text_color       = NA,
+        left_border      = 0,
+        right_border     = 0,
+        top_border       = 0,
+        bottom_border    = 0,
+        caption          = NA,
+        caption_pos      = 'top',
+        position         = 'center',
+        escape_contents  = TRUE,
+        na_string        = '',
+        bold             = FALSE,
+        italic           = FALSE
       )
 
 
@@ -179,12 +179,12 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
 
 
 #' @template getset-cell
-#' @templateVar attr_name bgcolor
+#' @templateVar attr_name background_color
 #' @templateVar attr_desc Cell Background Color
 #' @templateVar value_param_desc A vector or matrix of R colors.
-#' @export bgcolor bgcolor<- set_bgcolor bgcolor.huxtable bgcolor<-.huxtable set_bgcolor.huxtable
+#' @export background_color background_color<- set_background_color background_color.huxtable background_color<-.huxtable set_background_color.huxtable
 NULL
-make_getter_setters('bgcolor', 'cell')
+make_getter_setters('background_color', 'cell')
 
 #' @template getset-cell
 #' @templateVar attr_name text_color
