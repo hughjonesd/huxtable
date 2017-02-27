@@ -103,6 +103,10 @@ cell_html <- function (ht, rn, cn) {
     # use span not td style because color affects borders
     span_css <- paste0(span_css, 'color: rgb(', text_color, '); ')
   }
+  if (! is.na(font_size <- font_size(ht)[rn, cn])) {
+    if (is.numeric(font_size)) font_size <- paste0(font_size, 'pt')
+    span_css <- paste0(span_css, 'font-size:', font_size, '; ')
+  }
   if (bold(ht)[rn, cn]) {
     span_css <- paste0(span_css, 'font-weight: bold; ')
   }

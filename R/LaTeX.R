@@ -163,10 +163,16 @@ build_tabular <- function(ht) {
 
 build_cell_contents <- function(ht, row, col) {
   contents <- clean_contents(ht, row, col, type = 'latex')
+  if (! is.na(font_size <- font_size(ht)[row, col])) {
+    font_size_pt <- paste0(font_size, 'pt')
+    line_space <- paste0(round(font_size * 1.2, 2), 'pt')
+    contents <- paste0('{\\fontsize{', font_size_pt, '}{', line_space, '}\\selectfont ', contents, '}')
+  }
   if (! is.na(text_color <- text_color(ht)[row, col])) {
     text_color <- latex_color(text_color)
     contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents,'}')
   }
+
   if (bold(ht)[row, col]) {
     contents <- paste0('\\textbf{', contents, '}')
   }

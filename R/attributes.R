@@ -2,7 +2,7 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
-  'escape_contents', 'na_string', 'bold', 'italic')
+  'escape_contents', 'na_string', 'bold', 'italic', 'font_size')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c()
 huxtable_table_attrs <- c('width', 'position', 'caption', 'caption_pos')
@@ -25,7 +25,8 @@ huxtable_default_attrs <- list(
         escape_contents  = TRUE,
         na_string        = '',
         bold             = FALSE,
-        italic           = FALSE
+        italic           = FALSE,
+        font_size        = NA
       )
 
 
@@ -298,6 +299,18 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' @export italic italic<- set_italic italic.huxtable italic<-.huxtable set_italic.huxtable
 NULL
 make_getter_setters('italic', 'cell', check_fun = is.logical)
+
+
+#' @template getset-cell
+#' @templateVar attr_name font_size
+#' @templateVar attr_desc Font Size
+#' @templateVar value_param_desc
+#' A numeric vector. This sets the font size in points.
+#' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable set_font_size.huxtable
+NULL
+make_getter_setters('font_size', 'cell', check_fun = is.numeric)
+
+
 
 
 #' @template getset-table

@@ -6,10 +6,12 @@ TODO
 * think about how to set column formatting...
 * heights - set per row!
 * padding, margin
+* allow column names to be put into table as option for hux, as_hux
+  - maybe row names?
 * testing!
-* font size
 * horiz align including on dec pt and for sig stars
 * screen method
+* new version of latex: compute "real" details (border, cell, content) for each row?
 
 * rotation
 * more advanced positioning (floats?)
@@ -29,7 +31,7 @@ TODO
 
 BUGS
 * latex table width don't work (and cell widths probably wrong)
-* coloring overwrites Clines in latex
+* hhline borders still not perfectly hidden e.g. with light colors
 
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?
