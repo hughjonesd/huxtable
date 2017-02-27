@@ -381,15 +381,6 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 
 
 #' @template getset-table
-#' @templateVar attr_name position
-#' @templateVar attr_desc Table Position
-#' @templateVar value_param_desc
-#' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
-#' @export position position<- set_position position.huxtable position<-.huxtable set_position.huxtable
-NULL
-make_getter_setters('position', 'table', check_values = c('left', 'center', 'right'))
-
-#' @template getset-table
 #' @templateVar attr_name tabular_environment
 #' @templateVar attr_desc Tabular Environment
 #' @templateVar value_param_desc

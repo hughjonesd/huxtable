@@ -13,7 +13,7 @@ set_row_height(ht, row, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector. If numeric, they are treated as proportions of the table height. If character, they must be valid CSS or LaTeX lengths.}
+\item{value}{A vector. If numeric, they are treated as proportions of the table height (HTML) or text height (LaTeX). If character, they must be valid CSS or LaTeX lengths.}
 
 \item{row}{A row specifier.}
 }
