@@ -5,12 +5,12 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_co
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
-huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment')
+huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label')
 huxtable_default_attrs <- list(
         rowspan             = 1,
         colspan             = 1,
         align               = 'center',
-        valign              = 'middle',
+        valign              = 'top',
         width               = 1,
         height              = NA,
         col_width           = NA,
@@ -25,6 +25,7 @@ huxtable_default_attrs <- list(
         caption_pos         = 'top',
         position            = 'center',
         tabular_environment = 'tabularx',
+        label               = NA,
         escape_contents     = TRUE,
         na_string           = '',
         bold                = FALSE,
@@ -353,6 +354,7 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
 #' @templateVar attr_desc Table Width
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, it is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is 100%.
+#'
 #' @export width width<- set_width width.huxtable width<-.huxtable set_width.huxtable
 #' @family table measurements
 NULL
@@ -364,6 +366,7 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_desc Table Height
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.
+#'
 #' @export height height<- set_height height.huxtable height<-.huxtable set_height.huxtable
 #' @family table measurements
 NULL
@@ -389,4 +392,15 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @details Not all features are guaranteed to work if you set this to a non-default value.
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
+
+
+#' @template getset-table
+#' @templateVar attr_name label
+#' @templateVar attr_desc Table Label
+#' @templateVar value_param_desc
+#' A length-one character vector to be used as a table label in LaTeX. Set to \code{NA}
+#' to remove the label.
+#' @export label label<- set_label label.huxtable label<-.huxtable set_label.huxtable
+NULL
+make_getter_setters('label', 'table', check_fun = is.character)
 

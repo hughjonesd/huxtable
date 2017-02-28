@@ -165,7 +165,6 @@ ht
 ht <- ht_orig
 height(ht) <- 0.2 # necessary
 if (! is_latex) height(ht) <- '200px'
-# row_height(ht) <- c(.15, .4, .15, .15, .15)
 col_width(ht) <- c(.25, .75)
 rotation(ht)[,1] <- 90
 ht
@@ -190,4 +189,16 @@ caption_pos(ht) <- 'bottom'
 ht
 
 ```
+
+# Label (LaTeX only)
+
+```{r}
+ht <- ht_orig
+caption(ht) <- 'Captions are required for labels to work'
+label(ht) <- 'tab:mytable'
+ht
+
+knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')
+```
+
 

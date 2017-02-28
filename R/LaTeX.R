@@ -30,10 +30,11 @@ to_latex.huxtable <- function (ht, ...){
 # \\noalign{\\global\\setlength{\\arrayrulewidth}{#1}}\\cline{#2}%
 # \\noalign{\\global\\setlength{\\arrayrulewidth}{\\Oldarrayrulewidth}}}', res)
 
-  if (! is.na(cap <- caption(ht))) {
-    cap <- paste0('\\caption{', cap, '}\n')
-    res <- if (caption_pos(ht) == 'top') paste0(cap, res) else paste0(res, cap)
-  }
+
+  cap <- if (! is.na(cap <- caption(ht))) paste0('\\caption{', cap, '}\n') else ''
+  lab <- if (! is.na(lab <- label(ht))) paste0('\\label{', lab, '}\n') else ''
+  if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
+  res <- if (caption_pos(ht) == 'top') paste0(cap, lab, res) else paste0(res, cap, lab)
 
   # table position
   pos_text <- switch(position(ht),
@@ -58,44 +59,28 @@ build_tabular <- function(ht) {
   }
 
   col_width <- col_width(ht)
-  if (all(is.na(col_width))) col_width <- rep(1/ncol(ht), ncol(ht))
-  if (is.numeric(col_width)) {
-    col_width <- paste0(col_width, '\\textwidth')
-  }
-  colspec <- '{'
+  col_width <- if (all(is.na(col_width))) rep(1, ncol(ht)) else if (is.numeric(col_width)) col_width * ncol(ht) else
+        col_width
+
+  colspec <- character(ncol(ht))
   for (mycol in 1:ncol(ht)) {
-    col_align <- align(ht)[,mycol]
-    if (length(unique(col_align)) > 1) warning('Cannot use multiple alignments in a single column in LaTeX, at column ',
-      mycol)
-    col_align <- col_align[1]
+    col_w <- col_width[mycol]
 
-    # colspec for tabularx is >{code}char{width}
-    # code is code to put first e.g. \raggedright
-    # char can be p, m or b
-    # width is e.g. 0.3\textwidth, but can also have various representations
-    # a good way to do % of table width is tabularx X type; then
-    # you can do
-    # >{\hsize=1.2\hsize}X; \hsize is 1 for evenly sized columns
-    # but, can't do vertical align easily using tabularx. Can do it with 'renewcommand'.
-
-    colspec_align_str <- switch(as.character(col_align),
-      left    = '>{\\raggedright}',
-      right   = '>{\\raggedleft}',
-      decimal = '>',
-      centre  = ,
-      '>{\\centering}')
-
+    hsize_redef <- if (! is.na(col_w) & is.numeric(col_w) & col_w != 1) paste0('\\hsize=', col_w, '\\hsize') else ''
     col_valign <- valign(ht)[,mycol]
     if (length(unique(col_valign)) > 1) warning(
-      'Cannot use multiple vertical alignments in a single column in LaTeX, at column ', mycol)
+      'In LaTeX, huxtable cannot currently use multiple vertical alignments in a single column.')
     col_valign <- col_valign[1]
+    col_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
+    col_char <- if (is.na(col_w) || is.numeric(col_w)) 'X' else paste0(col_valign_str, '{', col_w, '}')
+    if (col_valign != 'top' && col_char == 'X') warning(paste0(
+          'In LaTex, huxtable cannot currently combine vertical alignment != "top" and proportional column widths. ',
+          'Try specifying the column width in points ("100pt") or pixels ("50px").'))
+    colspec[mycol] <- paste0('>{', hsize_redef, '}', col_char)
 
-    colspec_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
-    if (isTRUE(col_align == 'decimal')) colspec_valign_str <- 'S'
-    colspec_valign_str <- paste0(colspec_valign_str, '{', col_width[mycol],  '}')
-    colspec <- paste0(colspec, colspec_align_str, colspec_valign_str, ' ')
   }
-  colspec <- paste0(colspec, '}')
+  colspec <- paste0(colspec, collapse = ' ')
+  colspec <- paste0('{', colspec, '}')
   res <- paste0(res, colspec, '\n')
 
   display_cells <- display_cells(ht)
@@ -144,6 +129,10 @@ build_tabular <- function(ht) {
       if (! dcell$shadowed || mycol == dcol) {
         cs <- colspan(ht)[drow, dcol]
         lcr <- switch(align(ht)[drow, dcol], left   = 'l', right  = 'r', center = 'c')
+        # pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', center = 'm')
+        # width_spec <- 'This is too hard if we have multicolumn cells...!'
+        # align_str <- switch(align(ht)[drow, dcol], left   = '\\raggedright', right  = '\\raggedleft',
+        #       center = '\\centering')
         # only add left borders if we haven't already added a right border!
         lb <- if (left_border(ht)[drow, dcol] > 0 && ! added_right_border) '|' else ''
         if (right_border(ht)[drow, dcol] > 0) {
@@ -154,6 +143,7 @@ build_tabular <- function(ht) {
           added_right_border <- FALSE
         }
         contents <- paste0('\\multicolumn{', cs,'}{', lb, lcr, rb ,'}{', contents,'}')
+        # contents <- paste0('\\multicolumn{', cs,'}{', lb, pmb, width_spec, rb ,'}{', align_str, contents,'}')
       }
 
       row_contents[mycol] <- contents

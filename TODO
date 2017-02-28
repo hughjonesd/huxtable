@@ -1,20 +1,23 @@
 
 TODO
 
-* sig figs and arbitrary formatC args (?)
-* auto cell align: left for text, decimal for numbers?
-* label (for latex only?)
+* [<- method. (And $, [[, and their setter variants)
+   - $ and [[]] extract one element or column; we can use the standard data.frame method
+   - [<- might be used with a second huxtable
+   - cbind, rbind also. For e.g. adding nice headers.
+* cbind, rbind methods
+
 * set wrap to TRUE or FALSE (css: white-space:nowrap)
-* think about how to set column formatting...
-* heights - set per row!
+* think about how to set column formatting...: sig figs and arbitrary formatC args (?)
+  - format() should be cell-level;
+  - what about when e.g. we have a column of numbers with a char title?
+  - problem is, at the moment, this autoconverts the numbers to character
+  - number_format?
 * padding, margin
 * allow column names to be put into table as option for hux, as_hux
   - maybe row names?
 * testing!
-* horiz align including on dec pt and for sig stars
 * screen method
-* new version of latex: compute "real" details (border, cell, content) for each row?
-* rotation
 * more advanced positioning (floats?)
 * as_huxtable.ftable
 * "themes" i.e. standard setups for kinds of tables
@@ -23,16 +26,25 @@ TODO
   - row names?
   - easy way to specify nrow(x), ncol(x)? How about last(1:3) and last() for default? cf. dplyr::nth
   - row & column groups
-  - where(): could return a function that is called in place:
+  - where(): could return a function that is called in place, something like...
+  where <- function(cond) eval(bquote(function(x) which(.(substitute(cond)), arr.ind = TRUE)))
     do_something(ht, cells = where(x > 6))
   would become
+    function(ht) which(ht > 6, arr.ind = TRUE)
+  to be called by
     if (is.function(cells)) cells <- cells(ht)
   which then returns the relevant values, probably as a 2-column matrix (unusual form of indexing)
 
 
 BUGS
 * latex table width don't work (and cell widths probably wrong)
+  - because you reset table spec to l/c/r in each 'multicolumn'?
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
+
+PUT OFF
+* auto cell align: left for text, decimal for numbers?
+  - decimal alignment doesn't work in HTML. LaTeX has dcolumn and/or siunitx... maybe skip
+* new version of latex code: compute "real" details (border, cell, content) for each row?
 
 QUESTIONS
 what to do about column names? what if we want multiple rows of column headings?
