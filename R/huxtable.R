@@ -104,7 +104,7 @@ as_huxtable.table <- function(x, ...) {
   # check for dcells where row > nrow(ss) or col > ncol(ss) and display_row, display_col are within ss
   cut <- (dcells$row > nrow(ss) | dcells$col > ncol(ss)) & dcells$display_row <= nrow(ss) &
         dcells$display_col <= ncol(ss)
-  if (any(cut)) warning('Some cells span subset; ')
+  if (any(cut)) warning('Some cells will be cut by subset')
   class(ss) <- class(x)
   for (r in which(cut)) {
     drow <- dcells$display_row[r]
@@ -114,6 +114,8 @@ as_huxtable.table <- function(x, ...) {
   }
   ss
 }
+
+
 
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
@@ -155,8 +157,8 @@ to_screen.huxtable <- function(ht, ...) {
 
 clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
   mytype <- match.arg(type)
-  stopifnot(length(row) == 1 & length(col) == 1)
-  contents <- `[.data.frame`(ht, row, col) # just the data
+  # stopifnot(length(row) == 1 & length(col) == 1)
+  contents <- ht[[row, col]] # just the data and just one element
   if (is.na(contents)) contents <- na_string(ht)[row, col]
   if (escape_contents(ht)[row, col]) {
     # xtable::sanitize.numbers would do very little and is buggy

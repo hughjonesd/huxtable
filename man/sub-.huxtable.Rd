@@ -9,6 +9,10 @@
 \arguments{
 \item{x}{A huxtable.}
 
+\item{i}{Rows to select.}
+
+\item{j}{Columns to select.}
+
 \item{drop}{Not used.}
 }
 \value{
@@ -16,4 +20,9 @@ A huxtable.
 }
 \description{
 Subset a huxtable
+}
+\examples{
+ht <- huxtable(a = 1:3, b = letters[1:3])
+rowspan(ht)[2,1] <- 2
+ht[1:2,]
 }

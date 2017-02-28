@@ -7,8 +7,16 @@
 as_huxtable(x, ...)
 }
 \arguments{
-\item{dfr}{}
+\item{x}{A suitable object. Methods exist for data frames, tables and matrices.}
+}
+\value{
+An object of class \code{huxtable}.
 }
 \description{
 Convert an object to a huxtable
+}
+\examples{
+dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
+as_huxtable(dfr)
+
 }
