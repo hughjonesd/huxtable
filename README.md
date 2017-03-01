@@ -7,24 +7,119 @@ library(huxtable)
 
 ht <- huxtable(a = 1:5, b = letters[1:5])
 align(ht)[,2] <- 'right'
-bgcolor(ht) <- 'yellow'
-border_bottom(ht) <- c(1, 0, 0, 0, 1)
-to_html(ht)
-to_latex(ht)
+background_color(ht) <- 'yellow'
+bottom_border(ht) <- c(1, 0, 0, 0, 1)
+cat(to_html(ht))
 ```
 
+<table class="huxtable" style="width: 100%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+1
+</td>
+<td style="vertical-align: top; text-align: right; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+a
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+2
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+b
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+3
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+c
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+4
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+d
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+5
+</td>
+<td style="vertical-align: top; text-align: right; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+e
+</td>
+</tr>
+</table>
 Or the same thing with a more dplyr-ish syntax:
 
 ``` r
 library(huxtable)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 
 ht <- huxtable(a = 1:5, b = letters[1:5]) %>% 
       set_align(1:5, 2, 'right') %>% 
-      set_bgcolor(1:5, 1:2, 'yellow') %>% 
-      set_border_bottom(1:5, 1:2, c(1, 0, 0, 0, 1))
+      set_background_color(1:5, 1:2, 'yellow') %>% 
+      set_bottom_border(1:5, 1:2, c(1, 0, 0, 0, 1))
 
-to_html(ht)
-to_latex(ht)
+cat(to_html(ht))
 ```
 
+<table class="huxtable" style="width: 100%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+1
+</td>
+<td style="vertical-align: top; text-align: right; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+a
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+2
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+b
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+3
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+c
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; background-color: rgb(255, 255, 0); ">
+4
+</td>
+<td style="vertical-align: top; text-align: right; background-color: rgb(255, 255, 0); ">
+d
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+5
+</td>
+<td style="vertical-align: top; text-align: right; border-width:0px 0px 1px 0px; border-style: solid; background-color: rgb(255, 255, 0); ">
+e
+</td>
+</tr>
+</table>
 To see more details, look at [testing-doc.html](http://htmlpreview.github.io/?https://github.com/hughjonesd/huxtable/blob/master/testing-doc.html) or [testing-doc.pdf](testing-doc.pdf).

@@ -16,30 +16,29 @@ knitr::opts_chunk$set(
 huxtable is a package for creating HTML and LaTeX tables. It provides similar 
 functionality to xtable, with a simple interface. Here's a quick example:
 
-```{r, eval = FALSE,  echo = TRUE}
+```{r, echo = TRUE, results = 'asis'}
 library(huxtable)
 
 ht <- huxtable(a = 1:5, b = letters[1:5])
 align(ht)[,2] <- 'right'
-bgcolor(ht) <- 'yellow'
-border_bottom(ht) <- c(1, 0, 0, 0, 1)
-to_html(ht)
-to_latex(ht)
+background_color(ht) <- 'yellow'
+bottom_border(ht) <- c(1, 0, 0, 0, 1)
+cat(to_html(ht))
 ```
 
 
 Or the same thing with a more dplyr-ish syntax:
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, echo = TRUE, results = 'asis'}
 library(huxtable)
+library(dplyr)
 
 ht <- huxtable(a = 1:5, b = letters[1:5]) %>% 
       set_align(1:5, 2, 'right') %>% 
-      set_bgcolor(1:5, 1:2, 'yellow') %>% 
-      set_border_bottom(1:5, 1:2, c(1, 0, 0, 0, 1))
+      set_background_color(1:5, 1:2, 'yellow') %>% 
+      set_bottom_border(1:5, 1:2, c(1, 0, 0, 0, 1))
 
-to_html(ht)
-to_latex(ht)
+cat(to_html(ht))
 ```
 
 
