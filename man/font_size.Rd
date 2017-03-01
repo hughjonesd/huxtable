@@ -24,3 +24,8 @@ For \code{font_size}, the \code{font_size} attribute. For \code{font_size<-}, th
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_font_size}, the \code{ht} object.
 }
+\seealso{
+Other formatting functions: \code{\link{bold}},
+  \code{\link{font}}, \code{\link{na_string}},
+  \code{\link{number_format}}, \code{\link{text_color}}
+}

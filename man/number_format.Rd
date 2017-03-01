@@ -41,3 +41,8 @@ number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
 
 ht
 }
+\seealso{
+Other formatting functions: \code{\link{bold}},
+  \code{\link{font_size}}, \code{\link{font}},
+  \code{\link{na_string}}, \code{\link{text_color}}
+}

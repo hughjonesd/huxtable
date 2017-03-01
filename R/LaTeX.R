@@ -180,6 +180,13 @@ build_cell_contents <- function(ht, row, col) {
   if (italic(ht)[row, col]) {
     contents <- paste0('\\textit{', contents, '}')
   }
+  if (! is.na(font <- font(ht)[row, col])) {
+    contents <- paste0('{\\fontfamily{', font, '}\\selectfont ', contents, '}')
+    # {
+    #   \fontfamily{anttlc}\selectfont
+    #   Some text in anttlc...
+    # }
+  }
   if ((rt <- rotation(ht)[row, col]) != 0) {
     contents <- paste0('\\rotatebox{', rt, '}{', contents, '}')
   }

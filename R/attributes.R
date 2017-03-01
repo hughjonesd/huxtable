@@ -2,7 +2,8 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
-  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format')
+  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
+  'font')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label')
@@ -32,7 +33,8 @@ huxtable_default_attrs <- list(
         italic              = FALSE,
         font_size           = NA,
         rotation            = 0,
-        number_format       = list(NA)
+        number_format       = list(NA),
+        font                = NA
       )
 
 
@@ -200,6 +202,7 @@ make_getter_setters('background_color', 'cell')
 #' @templateVar attr_desc Cell Text Color
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable set_text_color.huxtable
+#' @family formatting functions
 NULL
 make_getter_setters('text_color', 'cell')
 
@@ -284,6 +287,7 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @templateVar value_param_desc
 #' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
 #' @export na_string na_string<- set_na_string na_string.huxtable na_string<-.huxtable set_na_string.huxtable
+#' @family formatting functions
 NULL
 make_getter_setters('na_string', 'cell', check_fun = is.character)
 
@@ -293,6 +297,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar attr_desc Bold or Italic Cell Text
 #' @templateVar value_param_desc
 #' A logical vector or matrix
+#' @family formatting functions
 #' @export bold bold<- set_bold bold.huxtable bold<-.huxtable set_bold.huxtable
 NULL
 make_getter_setters('bold', 'cell', check_fun = is.logical)
@@ -314,6 +319,7 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' @templateVar attr_desc Font Size
 #' @templateVar value_param_desc
 #' A numeric vector. This sets the font size in points.
+#' @family formatting functions
 #' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable set_font_size.huxtable
 NULL
 make_getter_setters('font_size', 'cell', check_fun = is.numeric)
@@ -342,6 +348,7 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' To set number_format to a function, enclose the function in \code{list}.
 #' See the examples.
 #' @export number_format number_format<- set_number_format number_format.huxtable number_format<-.huxtable set_number_format.huxtable
+#' @family formatting functions
 #'
 #' @examples
 #' ht <- huxtable(a = rnorm(4), b = rnorm(4)*10^(5:8))
@@ -353,12 +360,25 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' ht
 NULL
 make_getter_setters('number_format', 'cell')
+
 # override the default
 `number_format<-.huxtable` <- function(ht, value) {
   if (is.atomic(value)) value[is.na(value)] <- huxtable_default_attrs[['number_format']]
   attr(ht, 'number_format')[] <- value
   ht
 }
+
+
+
+#' @template getset-cell
+#' @templateVar attr_name font
+#' @templateVar attr_desc Font
+#' @templateVar value_param_desc
+#' A character vector of font names. NB that LaTeX and HTML use different font names.
+#' @export font font<- set_font font.huxtable font<-.huxtable set_font.huxtable
+#' @family formatting functions
+NULL
+make_getter_setters('font', 'cell', check_fun = is.character)
 
 
 #' @template getset-table

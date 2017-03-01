@@ -123,6 +123,9 @@ cell_html <- function (ht, rn, cn) {
   if (italic(ht)[rn, cn]) {
     span_css <- paste0(span_css, 'font-style: italic; ')
   }
+  if (! is.na(font <- font(ht)[rn, cn])) {
+    span_css <- paste0(span_css, 'font-family: ', font, '; ')
+  }
 
   if (! (span_css == '')) contents <- paste0('<span style="', span_css, '">', contents, '</span>')
 

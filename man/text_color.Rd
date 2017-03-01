@@ -24,3 +24,8 @@ For \code{text_color}, the \code{text_color} attribute. For \code{text_color<-},
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_text_color}, the \code{ht} object.
 }
+\seealso{
+Other formatting functions: \code{\link{bold}},
+  \code{\link{font_size}}, \code{\link{font}},
+  \code{\link{na_string}}, \code{\link{number_format}}
+}
