@@ -144,6 +144,7 @@ text_color(ht)[,2] <- 'red'
 bold(ht)[1,] <- TRUE
 italic(ht)[3,] <- TRUE
 font_size(ht)[2,] <- 14
+font(ht)[4,] <- if (is_latex) 'phv' else 'times' 
 ht
 
 ```

@@ -588,6 +588,7 @@ text_color(ht)[,2] &lt;- 'red'
 bold(ht)[1,] &lt;- TRUE
 italic(ht)[3,] &lt;- TRUE
 font_size(ht)[2,] &lt;- 14
+font(ht)[4,] &lt;- if (is_latex) 'phv' else 'times' 
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
@@ -618,10 +619,10 @@ ht</code></pre>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-Thyme
+<span style="font-family: times; ">Thyme</span>
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-<span style="color: rgb(255, 0, 0); ">1e+05</span>
+<span style="color: rgb(255, 0, 0); font-family: times; ">1e+05</span>
 </td>
 </tr>
 </table>
@@ -721,7 +722,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-97.7485906625923
+100.210269738072
 </td>
 </tr>
 <tr>
@@ -729,7 +730,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-999.38
+999.34
 </td>
 </tr>
 <tr>
@@ -737,7 +738,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-009999.6979
+010000.6946
 </td>
 </tr>
 <tr>
@@ -745,7 +746,7 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-99,999.59
+99,999.94
 </td>
 </tr>
 </table>
@@ -901,6 +902,7 @@ caption(ht) &lt;- 'Captions are required for labels to work'
 label(ht) &lt;- 'tab:mytable'
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')</code></pre>
 <p>If this is LaTeX we can see a reference to table .</p>
+<p>NB: references may not work if knitting PDFs in Rstudio.</p>
 </div>
 
 

@@ -14,7 +14,6 @@ TODO
 ====
 * cbind, rbind methods
 * set wrap to TRUE or FALSE (css: white-space:nowrap)
-*  We probably do want fonts - to allow e.g. fixed width...
 * padding, margin
 * allow column names to be put into table as option for hux, as_hux
   - maybe row names?
