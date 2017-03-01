@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 .Rproj.user
+*.synctex.gz
+*.log
