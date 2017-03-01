@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
 output:
-  html_document: default
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: default
 ---
 
 
@@ -144,8 +144,8 @@ ht
 ```{r}
 ht <- ht_orig
 ht <- set_all_padding(ht, 1:4, 1:2, 0)
-left_padding(ht)[,1] <- 20
-right_padding(ht)[,2] <- 20
+left_padding(ht)[,1] <- 40
+right_padding(ht)[,2] <- 40
 top_padding(ht) <- 10
 bottom_padding(ht) <- 10
 ht
