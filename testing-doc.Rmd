@@ -212,5 +212,5 @@ label(ht) <- 'tab:mytable'
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')
 ```
 
-NB: references may not work if knitting PDFs in Rstudio.
+NB: references may not work if knitting PDFs in Rstudio. 
 
