@@ -5,7 +5,6 @@ BUGS
 * latex table width don't work (and cell widths probably wrong)
   - because you reset table spec to l/c/r in each 'multicolumn'?
 * border width in LaTeX
-* latex multirow is printing wrong contents
 * collapsing empty cells in HTML; use &nbsp;?
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
