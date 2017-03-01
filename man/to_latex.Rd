@@ -13,6 +13,8 @@ print_latex(ht, ...)
 \item{ht}{A huxtable.}
 
 \item{...}{}
+
+\item{tabular_only}{Return only the LaTeX tabular, not the surrounding float.}
 }
 \value{
 \code{to_latex} returns a string. \code{print_latex} prints the string and returns \code{NULL}.

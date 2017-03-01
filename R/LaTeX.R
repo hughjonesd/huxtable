@@ -3,6 +3,7 @@
 #' Create LaTeX Representing a Huxtable
 #'
 #' @param ht A huxtable.
+#' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
 #' @param ...
 #'
 #' @return \code{to_latex} returns a string. \code{print_latex} prints the string and returns \code{NULL}.
@@ -14,8 +15,9 @@
 to_latex <- function (ht, ...) UseMethod('to_latex')
 
 #' @export
-to_latex.huxtable <- function (ht, ...){
+to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- build_tabular(ht)
+  if (tabular_only) return(res)
   if (! is.na(height <- height(ht))) {
     if (is.numeric(height)) height <- paste0(height, '\\textheight')
     res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
