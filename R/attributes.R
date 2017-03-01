@@ -2,7 +2,7 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
-  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation')
+  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label')
@@ -31,7 +31,8 @@ huxtable_default_attrs <- list(
         bold                = FALSE,
         italic              = FALSE,
         font_size           = NA,
-        rotation            = 0
+        rotation            = 0,
+        number_format       = list(NA)
       )
 
 
@@ -327,6 +328,37 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 NULL
 make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 
+#' @template getset-cell
+#' @templateVar attr_name number_format
+#' @templateVar attr_desc Number Format
+#' @templateVar value_param_desc
+#' A vector or list which may be character, numeric or function. See below.
+#'
+#' @details
+#' If \code{value} is numeric, numbers will be rounded to that many digits. If \code{value} is
+#' character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
+#' function it will be applied to the cell contents.
+#' Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(a = c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
+#' To set number_format to a function, enclose the function in \code{list}.
+#' See the examples.
+#' @export number_format number_format<- set_number_format number_format.huxtable number_format<-.huxtable set_number_format.huxtable
+#'
+#' @examples
+#' ht <- huxtable(a = rnorm(4), b = rnorm(4)*10^(5:8))
+#' number_format(ht)[1,] <- 2
+#' number_format(ht)[2,] <- '%5.2f'
+#' number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
+#' number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
+#'
+#' ht
+NULL
+make_getter_setters('number_format', 'cell')
+# override the default
+`number_format<-.huxtable` <- function(ht, value) {
+  if (is.atomic(value)) value[is.na(value)] <- huxtable_default_attrs[['number_format']]
+  attr(ht, 'number_format')[] <- value
+  ht
+}
 
 
 #' @template getset-table

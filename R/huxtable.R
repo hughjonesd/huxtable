@@ -42,7 +42,7 @@ as_huxtable <- function(x, ...) UseMethod('as_huxtable')
 
 #' @export
 as_huxtable.default <- function (x, ...) {
-  for (att in huxtable_cell_attrs) {
+  for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, att) <- matrix(NA, nrow(x), ncol(x))
   }
   for (att in huxtable_col_attrs) {
@@ -54,7 +54,7 @@ as_huxtable.default <- function (x, ...) {
   for (att in huxtable_table_attrs) {
     attr(x, att) <- NA
   }
-
+  attr(x, 'number_format') <- matrix(list(NA), nrow(x), ncol(x))
   for (att in names(huxtable_default_attrs)) {
     attr(x, att)[] <- huxtable_default_attrs[[att]] # [[ indexing matters here
   }
@@ -202,7 +202,15 @@ to_screen.huxtable <- function(ht, ...) {
 clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
   mytype <- match.arg(type)
   # stopifnot(length(row) == 1 & length(col) == 1)
-  contents <- ht[[row, col]] # just the data and just one element
+  contents <- ht[[row, col]] # just the data and just one element.
+  # But we might want to allow more than one element; if so just use `[.data.frame`
+  if (! is.na(cnum <- as.numeric(contents))) {
+    nf <- number_format(ht)[[row, col]] # a list element
+    if (is.function(nf)) contents <- nf(cnum)
+    if (is.character(nf)) contents <- sprintf(nf, cnum)
+    if (is.numeric(nf)) contents <- formatC(round(cnum, nf), format = 'f', digits = nf)
+  }
+
   if (is.na(contents)) contents <- na_string(ht)[row, col]
   if (escape_contents(ht)[row, col]) {
     # xtable::sanitize.numbers would do very little and is buggy
