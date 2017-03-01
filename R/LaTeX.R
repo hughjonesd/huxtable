@@ -99,8 +99,7 @@ build_tabular <- function(ht) {
       # (b) shadowed cells which are in the last row (but first column) of a multirow
       contents <- ''
       rs <- rowspan(ht)[drow, dcol]
-      if (! dcell$shadowed && rs == 1) contents <- build_cell_contents(ht, myrow, mycol)
-      if (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol) contents <- build_cell_contents(ht, myrow, mycol)
+      if ((! dcell$shadowed && rs == 1) || (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol)) contents <- build_cell_contents(ht, drow, dcol)
       # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
       if (! is.na(row_height <- row_height(ht)[drow])) {
         if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
