@@ -194,6 +194,59 @@ is_hux <- is_huxtable
   NextMethod() # returns the object to be reassigned to x
 }
 
+
+#' Add Rows/Columns
+#'
+#' @param ... Vectors, matrices, data frames or huxtables.
+#' @param deparse.level Passed to \code{\link{cbind.data.frame}}
+#'
+#' @return A huxtable.
+#'
+#' @details
+#' Table-level attributes will be taken from the first argument. Row-level
+#' attributes will be taken from the first argument to \code{cbind}, and
+#' column-level attributes from the first argument to \code{rbind}.
+#'
+#' If the first argument to \code{cbind} is not a \code{huxtable}, then
+#' \code{cbind.huxtable} will not be called. To avoid this, do e.g.
+#' \code{cbind(hux(1:5), ht)}.
+#' @examples
+#' ht1 <- hux(a = 1:3, b = 1:3)
+#' bold(ht1) <- TRUE
+#' ht2 <- hux(d = letters[1:3])
+#' vec <- LETTERS[1:3]
+#' ht <- cbind(ht1, ht2, vec)
+#' ht
+#' bold(ht)
+#'
+#' wrong <- cbind(vec, ht)
+#' bold(wrong) # uh-oh
+#' right <- cbind(as_hux(vec), ht)
+#' bold(right)
+#' @export
+cbind.huxtable <- function(..., deparse.level = 1) {
+  Reduce(cbind2_hux, list(...))
+}
+
+cbind2_hux <- function(ht, x) {
+  x <- as_hux(x)
+  res <- as_hux(cbind.data.frame(ht, x))
+  for (att in huxtable_cell_attrs) {
+    attr(res, att) <- cbind(attr(ht, att), attr(x, att))
+  }
+  for (att in huxtable_col_attrs) {
+    attr(res, att) <- c(attr(ht, att), attr(x, att))
+  }
+  for (att in huxtable_row_attrs) {
+    attr(res, att) <- attr(ht, att)
+  }
+  for (att in huxtable_table_attrs) {
+    attr(res, att) <- attr(ht, att)
+  }
+  res
+}
+
+
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
   of <- rmarkdown::default_output_format(knitr::current_input())
