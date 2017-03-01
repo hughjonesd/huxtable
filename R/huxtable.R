@@ -230,17 +230,37 @@ cbind.huxtable <- function(..., deparse.level = 1) {
   Reduce(cbind2_hux, list(...))
 }
 
-cbind2_hux <- function(ht, x) {
+#' @export
+#' @rdname cbind.huxtable
+rbind.huxtable <- function(..., deparse.level = 1) {
+  Reduce(rbind2_hux, list(...))
+}
+
+cbind2_hux <- function(ht, x) bind2_hux(ht, x, 'cbind')
+rbind2_hux <- function(ht, x) bind2_hux(ht, x, 'rbind')
+
+bind2_hux <- function(ht, x, type) {
+  if (type=='rbind') {
+    if (is.vector(x) || is.factor(x)) x <- t(x)
+    if (is.vector(ht) || is.factor(ht)) ht <- t(ht)
+  }
   ht <- as_hux(ht)
   x <- as_hux(x)
-  res <- as_hux(cbind.data.frame(ht, x))
+  bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function(x,y){
+    rbind.data.frame(x, setNames(y, names(x)))
+  })
+  bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
+
+  res <- as_hux(bind_df(ht, x))
   for (att in huxtable_cell_attrs) {
-    attr(res, att) <- cbind(attr(ht, att), attr(x, att))
+    attr(res, att) <- bind_cells(attr(ht, att), attr(x, att))
   }
-  for (att in huxtable_col_attrs) {
+  join_attrs <- switch(type, 'cbind' = huxtable_col_attrs, 'rbind' = huxtable_row_attrs)
+  first_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
+  for (att in join_attrs) {
     attr(res, att) <- c(attr(ht, att), attr(x, att))
   }
-  for (att in huxtable_row_attrs) {
+  for (att in first_attrs) {
     attr(res, att) <- attr(ht, att)
   }
   for (att in huxtable_table_attrs) {
