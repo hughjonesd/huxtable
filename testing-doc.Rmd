@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
 output:
+  html_document: default
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: default
 ---
 
 
@@ -28,6 +28,8 @@ knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)
 
 # Basic usage
 
+## Creating a huxtable
+
 ```{r}
 ht_orig <- huxtable(a = c('Parsley', 'Sage', 'Rosemary', 'Thyme'), b = 10 ^ (2:5)) 
 width(ht_orig) <- 0.25
@@ -35,7 +37,7 @@ ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
 
-# Table position
+## Table position
 
 ```{r}
 ht <- ht_orig
@@ -43,7 +45,7 @@ position(ht) <- 'left'
 ht
 ```
 
-# Cell alignment
+## Cell alignment
 
 ```{r}
 ht <- ht_orig
@@ -52,7 +54,7 @@ ht
 
 ```
 
-# Vertical alignment
+## Vertical alignment
 
 ```{r}
 ht <- ht_orig
@@ -61,7 +63,7 @@ ht
 
 ```
 
-# Column span
+## Column span
 
 ```{r}
 
@@ -72,7 +74,7 @@ ht
 
 ```
 
-# Row span
+## Row span
 
 ```{r}
 ht <- ht_orig
@@ -84,7 +86,7 @@ ht
 ```
 
 
-# Row and column span
+## Row and column span
 
 ```{r}
 ht <- ht_orig
@@ -96,7 +98,7 @@ ht
 
 ```
 
-# Table width
+## Table width
 
 ```{r}
 ht <- ht_orig
@@ -105,7 +107,7 @@ ht
 
 ```
 
-# Column width
+## Column width
 
 ```{r}
 ht <- ht_orig
@@ -114,7 +116,7 @@ ht
 
 ```
 
-# Row height
+## Row height
 
 ```{r}
 ht <- ht_orig
@@ -125,7 +127,7 @@ ht
 
 ```
 
-# Borders
+## Borders
 
 ```{r}
 ht <- ht_orig
@@ -136,7 +138,7 @@ ht
 
 ```
 
-# Text color, bold, italic, font size
+## Text color, bold, italic, font size
 
 ```{r}
 ht <- ht_orig
@@ -149,7 +151,7 @@ ht
 
 ```
 
-# Replace NAs
+## Replace NAs
 
 ```{r}
 ht <- ht_orig
@@ -160,7 +162,43 @@ ht
 
 ```
 
-# Number formatting
+
+# Joining, subsetting and manipulating huxtables
+
+## Subsets
+
+```{r}
+ht <- ht_orig
+bottom_border(ht)[c(1,4),] <- 1
+background_color(ht)[1,] <- 'wheat'
+
+ht[1:3,1]
+```
+
+## Joining
+
+```{r}
+
+ht2 <- ht_orig
+italic(ht2) <- TRUE
+rbind(ht, ht2)
+cbind(ht, ht2)
+rbind(c("Oregano", 300), ht)
+```
+
+## Transpose
+
+```{r}
+colspan(ht)[1, 1] <- 2
+ht
+t(ht)
+```
+
+
+# Advanced usage
+
+
+## Number formatting
 
 ```{r}
 ht <- ht_orig
@@ -173,7 +211,7 @@ ht
 
 ```
 
-# Cell rotation
+## Cell rotation
 
 ```{r}
 ht <- ht_orig
@@ -185,7 +223,7 @@ ht
 
 ```
 
-# Caption
+## Caption
 
 ```{r}
 ht <- ht_orig
@@ -194,7 +232,7 @@ ht
 
 ```
 
-# Caption below
+## Caption below
 
 ```{r}
 ht <- ht_orig
@@ -204,7 +242,7 @@ ht
 
 ```
 
-# Label (LaTeX only)
+## Label (LaTeX only)
 
 ```{r}
 ht <- ht_orig

@@ -125,6 +125,8 @@ $(document).ready(function () {
 
 <div id="basic-usage" class="section level1">
 <h1>Basic usage</h1>
+<div id="creating-a-huxtable" class="section level2">
+<h2>Creating a huxtable</h2>
 <pre class="r"><code>ht_orig &lt;- huxtable(a = c('Parsley', 'Sage', 'Rosemary', 'Thyme'), b = 10 ^ (2:5)) 
 width(ht_orig) &lt;- 0.25
 ht_orig &lt;- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
@@ -166,8 +168,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="table-position" class="section level1">
-<h1>Table position</h1>
+<div id="table-position" class="section level2">
+<h2>Table position</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 position(ht) &lt;- 'left'
 ht</code></pre>
@@ -208,8 +210,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="cell-alignment" class="section level1">
-<h1>Cell alignment</h1>
+<div id="cell-alignment" class="section level2">
+<h2>Cell alignment</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 align(ht)[,1] &lt;- 'left'
 ht</code></pre>
@@ -250,8 +252,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="vertical-alignment" class="section level1">
-<h1>Vertical alignment</h1>
+<div id="vertical-alignment" class="section level2">
+<h2>Vertical alignment</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 valign(ht)[,1] &lt;- 'top'
 ht</code></pre>
@@ -292,8 +294,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="column-span" class="section level1">
-<h1>Column span</h1>
+<div id="column-span" class="section level2">
+<h2>Column span</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 background_color(ht)[1,1] &lt;- 'green'
 colspan(ht)[1,1] &lt;- 2
@@ -332,8 +334,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="row-span" class="section level1">
-<h1>Row span</h1>
+<div id="row-span" class="section level2">
+<h2>Row span</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[1,1] &lt;- 'A rather long block of text'
 background_color(ht)[1,1] &lt;- 'green'
@@ -373,8 +375,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="row-and-column-span" class="section level1">
-<h1>Row and column span</h1>
+<div id="row-and-column-span" class="section level2">
+<h2>Row and column span</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[1,1] &lt;- 'A rather long block of text'
 background_color(ht)[1,1] &lt;- 'green'
@@ -409,8 +411,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="table-width" class="section level1">
-<h1>Table width</h1>
+<div id="table-width" class="section level2">
+<h2>Table width</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 width(ht) &lt;- 0.5
 ht</code></pre>
@@ -451,8 +453,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="column-width" class="section level1">
-<h1>Column width</h1>
+<div id="column-width" class="section level2">
+<h2>Column width</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 col_width(ht) &lt;- c(.8, .2)
 ht</code></pre>
@@ -493,8 +495,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="row-height" class="section level1">
-<h1>Row height</h1>
+<div id="row-height" class="section level2">
+<h2>Row height</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 height(ht) &lt;- 0.2; 
 if (! is_latex) height(ht) &lt;- '100px' # need a specific height for row heights to work in HTML
@@ -537,8 +539,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="borders" class="section level1">
-<h1>Borders</h1>
+<div id="borders" class="section level2">
+<h2>Borders</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht &lt;- set_all_borders(ht, 1:4, 1:2, 0)
 top_border(ht) &lt;- c(2, 0, 0, 1)
@@ -581,8 +583,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="text-color-bold-italic-font-size" class="section level1">
-<h1>Text color, bold, italic, font size</h1>
+<div id="text-color-bold-italic-font-size" class="section level2">
+<h2>Text color, bold, italic, font size</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 text_color(ht)[,2] &lt;- 'red'
 bold(ht)[1,] &lt;- TRUE
@@ -627,8 +629,8 @@ ht</code></pre>
 </tr>
 </table>
 </div>
-<div id="replace-nas" class="section level1">
-<h1>Replace NAs</h1>
+<div id="replace-nas" class="section level2">
+<h2>Replace NAs</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[2,] &lt;- NA
 ht</code></pre>
@@ -705,8 +707,290 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="number-formatting" class="section level1">
-<h1>Number formatting</h1>
+</div>
+<div id="joining-subsetting-and-manipulating-huxtables" class="section level1">
+<h1>Joining, subsetting and manipulating huxtables</h1>
+<div id="subsets" class="section level2">
+<h2>Subsets</h2>
+<pre class="r"><code>ht &lt;- ht_orig
+bottom_border(ht)[c(1,4),] &lt;- 1
+background_color(ht)[1,] &lt;- 'wheat'
+
+ht[1:3,1]</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+</tr>
+</table>
+</div>
+<div id="joining" class="section level2">
+<h2>Joining</h2>
+<pre class="r"><code>ht2 &lt;- ht_orig
+italic(ht2) &lt;- TRUE
+rbind(ht, ht2)</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+100
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Parsley</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">100</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Sage</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">1000</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Rosemary</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">10000</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Thyme</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">1e+05</span>
+</td>
+</tr>
+</table>
+<pre class="r"><code>cbind(ht, ht2)</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+100
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Parsley</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">100</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1000
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Sage</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">1000</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+10000
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Rosemary</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">10000</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">Thyme</span>
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+<span style="font-style: italic; ">1e+05</span>
+</td>
+</tr>
+</table>
+<pre class="r"><code>rbind(c(&quot;Oregano&quot;, 300), ht)</code></pre>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, ri, value = c(100, 1000, 10000, 1e+05)):
+## invalid factor level, NA generated</code></pre>
+<table class="huxtable" style="width: 100%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; ">
+Oregano
+</td>
+<td style="vertical-align: top; text-align: center; ">
+300
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+</td>
+</tr>
+</table>
+</div>
+<div id="transpose" class="section level2">
+<h2>Transpose</h2>
+<pre class="r"><code>colspan(ht)[1, 1] &lt;- 2
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td colspan="2" style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
+</table>
+<pre class="r"><code>t(ht)</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td rowspan="2" style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; background-color: rgb(245, 222, 179); ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+Thyme
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+03
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+04
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
+1e+05
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="advanced-usage" class="section level1">
+<h1>Advanced usage</h1>
+<div id="number-formatting" class="section level2">
+<h2>Number formatting</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht[,2] &lt;- ht[,2] + rnorm(4)
 number_format(ht)[2,] &lt;- 2
@@ -722,7 +1006,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-100.210269738072
+99.5628013273985
 </td>
 </tr>
 <tr>
@@ -730,7 +1014,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-999.34
+1000.04
 </td>
 </tr>
 <tr>
@@ -738,7 +1022,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-010000.6946
+010000.2723
 </td>
 </tr>
 <tr>
@@ -746,13 +1030,13 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; ">
-99,999.94
+100,001.1
 </td>
 </tr>
 </table>
 </div>
-<div id="cell-rotation" class="section level1">
-<h1>Cell rotation</h1>
+<div id="cell-rotation" class="section level2">
+<h2>Cell rotation</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 height(ht) &lt;- 0.2 # necessary
 if (! is_latex) height(ht) &lt;- '300px'
@@ -804,8 +1088,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="caption" class="section level1">
-<h1>Caption</h1>
+<div id="caption" class="section level2">
+<h2>Caption</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'A simple table'
 ht</code></pre>
@@ -849,8 +1133,8 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="caption-below" class="section level1">
-<h1>Caption below</h1>
+<div id="caption-below" class="section level2">
+<h2>Caption below</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'A simple table'
 caption_pos(ht) &lt;- 'bottom'
@@ -895,14 +1179,15 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="label-latex-only" class="section level1">
-<h1>Label (LaTeX only)</h1>
+<div id="label-latex-only" class="section level2">
+<h2>Label (LaTeX only)</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'Captions are required for labels to work'
 label(ht) &lt;- 'tab:mytable'
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')</code></pre>
 <p>If this is LaTeX we can see a reference to table .</p>
 <p>NB: references may not work if knitting PDFs in Rstudio.</p>
+</div>
 </div>
 
 

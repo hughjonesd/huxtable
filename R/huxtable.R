@@ -269,6 +269,44 @@ bind2_hux <- function(ht, x, type) {
   res
 }
 
+#' Transpose a Huxtable
+#'
+#' @param x A huxtable.
+#'
+#' @return The transposed object.
+#' @export
+#'
+#' @details
+#' Row and column spans of \code{x} will be swapped, as will column widths and row heights,
+#' table width and height, and cell borders (bottom becomes right, etc.).
+#' Other attributes - in particular, alignment, vertical alignment and rotation - will be
+#' preserved.
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' bottom_border(ht)[3,] <- 1
+#' ht_trans <- t(ht)
+#' ht_trans
+t.huxtable <- function (x) {
+  res <- as_hux(NextMethod())
+  for (att in setdiff(huxtable_cell_attrs, c('colspan', 'rowspan', 'height', 'width',
+        'bottom_border', 'left_border', 'top_border', 'right_border'))) {
+    attr(res, att) <- t(attr(x, att))
+  }
+  attr(res, 'colspan') <- t(attr(x, 'rowspan'))
+  attr(res, 'rowspan') <- t(attr(x, 'colspan'))
+  attr(res, 'width')   <- attr(x, 'height')
+  attr(res, 'height')  <- attr(x, 'width')
+  attr(res, 'bottom_border') <- t(attr(x, 'right_border'))
+  attr(res, 'right_border') <- t(attr(x, 'bottom_border'))
+  attr(res, 'left_border') <- t(attr(x, 'top_border'))
+  attr(res, 'top_border') <- t(attr(x, 'left_border'))
+  row_height(res)      <- col_width(x)
+  col_width(res)       <- row_height(x)
+  for (att in huxtable_table_attrs) {
+    attr(res, att) <- attr(x, att)
+  }
+  res
+}
 
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
