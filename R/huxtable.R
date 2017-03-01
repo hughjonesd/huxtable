@@ -204,7 +204,7 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html'), ...) {
   # stopifnot(length(row) == 1 & length(col) == 1)
   contents <- ht[[row, col]] # just the data and just one element.
   # But we might want to allow more than one element; if so just use `[.data.frame`
-  if (! is.na(cnum <- as.numeric(contents))) {
+  if (! is.na(cnum <- suppressWarnings(as.numeric(contents)))) {
     nf <- number_format(ht)[[row, col]] # a list element
     if (is.function(nf)) contents <- nf(cnum)
     if (is.character(nf)) contents <- sprintf(nf, cnum)

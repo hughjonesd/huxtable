@@ -35,7 +35,7 @@ ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
 
-# Table position:
+# Table position
 
 ```{r}
 ht <- ht_orig
@@ -52,7 +52,7 @@ ht
 
 ```
 
-# Vertical alignment:
+# Vertical alignment
 
 ```{r}
 ht <- ht_orig
@@ -61,7 +61,7 @@ ht
 
 ```
 
-# Column span:
+# Column span
 
 ```{r}
 
@@ -72,7 +72,7 @@ ht
 
 ```
 
-# Row span:
+# Row span
 
 ```{r}
 ht <- ht_orig
@@ -84,7 +84,7 @@ ht
 ```
 
 
-# Row and column span:
+# Row and column span
 
 ```{r}
 ht <- ht_orig
@@ -96,7 +96,7 @@ ht
 
 ```
 
-# Table width:
+# Table width
 
 ```{r}
 ht <- ht_orig
@@ -152,9 +152,22 @@ ht
 
 ```{r}
 ht <- ht_orig
-ht[2,1] <- NA
+ht[2,] <- NA
 ht
 na_string(ht) <- '--'
+ht
+
+```
+
+# Number formatting
+
+```{r}
+ht <- ht_orig
+ht[,2] <- ht[,2] + rnorm(4)
+number_format(ht)[2,] <- 2
+number_format(ht)[3,] <- '%011.4f'
+number_format(ht)[4,] <- list(function(x) prettyNum(round(x, 3), big.mark = ','))
+
 ht
 
 ```
@@ -164,7 +177,7 @@ ht
 ```{r}
 ht <- ht_orig
 height(ht) <- 0.2 # necessary
-if (! is_latex) height(ht) <- '200px'
+if (! is_latex) height(ht) <- '300px'
 col_width(ht) <- c(.25, .75)
 rotation(ht)[,1] <- 90
 ht
@@ -196,9 +209,8 @@ ht
 ht <- ht_orig
 caption(ht) <- 'Captions are required for labels to work'
 label(ht) <- 'tab:mytable'
-ht
-
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')
 ```
 
+NB: references may not work if knitting PDFs in Rstudio.
 
