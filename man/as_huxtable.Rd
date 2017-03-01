@@ -2,9 +2,12 @@
 % Please edit documentation in R/huxtable.R
 \name{as_huxtable}
 \alias{as_huxtable}
+\alias{is_huxtable}
 \title{Convert an object to a huxtable}
 \usage{
 as_huxtable(x, ...)
+
+is_huxtable(x)
 }
 \arguments{
 \item{x}{A suitable object. Methods exist for data frames, tables and matrices.}

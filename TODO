@@ -1,10 +1,7 @@
 
 TODO
 
-* [<- method. (And $, [[, and their setter variants)
-   - $ and [[]] extract one element or column; we can use the standard data.frame method
-   - [<- might be used with a second huxtable
-   - cbind, rbind also. For e.g. adding nice headers.
+
 * cbind, rbind methods
 
 * set wrap to TRUE or FALSE (css: white-space:nowrap)
@@ -13,6 +10,15 @@ TODO
   - what about when e.g. we have a column of numbers with a char title?
   - problem is, at the moment, this autoconverts the numbers to character
   - number_format?
+  - amazingly, we can have a matrix of functions...!
+  mat_fns <- matrix(c(mean, median, median, mean), 2, 2)
+  mat_fns[[2,2]](1:5)
+  - not sure this is wise or safe, but it is apparently legit...
+  mat_fns[,2] <- c(min, max)
+
+  So:
+
+
 * padding, margin
 * allow column names to be put into table as option for hux, as_hux
   - maybe row names?
@@ -40,6 +46,8 @@ BUGS
 * latex table width don't work (and cell widths probably wrong)
   - because you reset table spec to l/c/r in each 'multicolumn'?
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
+* when inserting one hux into another, row heights/col widths may no longer make sense,
+  - because they are implicit proportions.
 
 PUT OFF
 * auto cell align: left for text, decimal for numbers?

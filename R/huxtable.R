@@ -69,6 +69,9 @@ as_huxtable.table <- function(x, ...) {
   as_huxtable(as.matrix(x, ...))
 }
 
+#' @export
+#' @rdname as_huxtable
+is_huxtable <- function(x) inherits(x, 'huxtable')
 
 #' Subset a huxtable
 #'
@@ -79,7 +82,14 @@ as_huxtable.table <- function(x, ...) {
 #'
 #' @return A huxtable.
 #' @export
-#'
+#' @rdname extract-methods
+#' @details
+#' \code{[} always returns a new huxtable object, while \code{$} and \code{[[} simply
+#' return a vector of data.
+#' For the replacement function, if \code{value} is a huxtable, then its cell attributes will be
+#' copied into \code{x}. In addition, if \code{nrow(value) == nrow(x)}, then column attributes
+#' will be copied into \code{x} as appropriate, and if  \code{ncol(value) == ncol(x)}, then
+#' row attributes will be copied.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
 #' rowspan(ht)[2,1] <- 2
@@ -116,6 +126,40 @@ as_huxtable.table <- function(x, ...) {
 }
 
 
+
+#' @param value A matrix, data frame, huxtable or similar object.
+#'
+#' @rdname extract-methods
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht2 <- huxtable(10:11, 12:13)
+#' bold(ht2) <- TRUE
+#' ht[2:3,] <- ht2
+#' bold(ht)
+#'
+`[<-.huxtable` <- function(x, i, j, value) {
+  if (! is_huxtable(value)) return(NextMethod())
+
+  if (! missing(i) && is.character(i)) i <- which(rownames(ht) %in% i)
+  if (! missing(j) && is.character(j)) j <- which(colnames(ht) %in% j)
+  for (att in huxtable_cell_attrs) {
+    attr(x, att)[i, j] <- attr(value, att)
+  }
+  if (nrow(value) == nrow(x)) {
+    for (att in huxtable_col_attrs) {
+      attr(x, att)[j] <- attr(value, att)
+    }
+  }
+  if (ncol(value) == ncol(x)) {
+    for (att in huxtable_row_attrs) {
+      attr(x, att)[i] <- attr(value, att)
+    }
+  }
+
+  NextMethod() # returns the object to be reassigned to x
+}
 
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
