@@ -96,6 +96,14 @@ cell_html <- function (ht, rn, cn) {
     res <- paste0(res, 'border-style: solid; ')
   }
 
+  padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
+    left_padding(ht)[rn, cn])
+  if (any( ! is.na(padding))) {
+    padding <- sapply(padding, function(x) if(is.numeric(x)) paste0(x, "px") else x)
+    padding <- paste(padding, collapse = ' ')
+    res <- paste0(res, 'padding: ', padding, '; ')
+  }
+
   if (! is.na(bgcolor <- background_color(ht)[rn, cn])) {
     bgcolor <- as.vector(col2rgb(bgcolor))
     bgcolor <- paste(bgcolor, collapse = ', ')
