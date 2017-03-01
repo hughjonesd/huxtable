@@ -247,7 +247,7 @@ bind2_hux <- function(ht, x, type) {
   ht <- as_hux(ht)
   x <- as_hux(x)
   bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function(x,y){
-    rbind.data.frame(x, setNames(y, names(x)))
+    rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
   bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
 
