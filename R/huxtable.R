@@ -231,6 +231,7 @@ cbind.huxtable <- function(..., deparse.level = 1) {
 }
 
 cbind2_hux <- function(ht, x) {
+  ht <- as_hux(ht)
   x <- as_hux(x)
   res <- as_hux(cbind.data.frame(ht, x))
   for (att in huxtable_cell_attrs) {
