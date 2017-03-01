@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-huxtable is a package for creating HTML and LaTeX tables. It provides similar functionality to xtable, with a simple interface. Here's a quick example:
+huxtable is a package for creating HTML and LaTeX tables. It provides similar functionality to xtable, with a simple interface. Here's a quick example. Github overrides styling when it parses HTML in README files, so to see it in its full glory, check out [the website](http://hughjonesd.github.io/huxtable).
 
 ``` r
 library(huxtable)
@@ -122,4 +122,3 @@ e
 </td>
 </tr>
 </table>
-To see more details, look at [testing-doc.html](http://htmlpreview.github.io/?https://github.com/hughjonesd/huxtable/blob/master/testing-doc.html) or [testing-doc.pdf](testing-doc.pdf).
