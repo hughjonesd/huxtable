@@ -26,7 +26,9 @@ to_html.huxtable <- function(ht, ...) {
     if (is.numeric(height)) height <- paste0(height * 100, '%')
     heightstring <- paste0('height: ', height, ';')
   }
-  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, heightstring, '">\n')
+  idstring <- ''
+  if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
+  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, heightstring,'"', idstring,'>\n')
   if (! is.na(cap <- caption(ht))) {
     cap <- paste0('<caption style="caption-side:', caption_pos(ht),'; text-align: center;">', cap, '</caption>')
     res <- paste0(res, cap)

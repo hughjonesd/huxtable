@@ -532,8 +532,7 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @templateVar attr_name label
 #' @templateVar attr_desc Table Label
 #' @templateVar value_param_desc
-#' A length-one character vector to be used as a table label in LaTeX. Set to \code{NA}
-#' to remove the label.
+#' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.
 #' @export label label<- set_label label.huxtable label<-.huxtable set_label.huxtable
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)
