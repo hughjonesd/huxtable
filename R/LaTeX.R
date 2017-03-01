@@ -144,6 +144,11 @@ build_tabular <- function(ht) {
           rb <- ''
           added_right_border <- FALSE
         }
+        # for padding, just use hspace
+        hpadding <- list(left = left_padding(ht)[drow, dcol], right = right_padding(ht)[drow, dcol])
+        hpadding <- lapply(hpadding, function(x) if (is.numeric(x) & ! is.na(x)) paste0(x, 'pt') else x)
+        hpadding <- lapply(hpadding, function(x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
+        contents <- paste0(hpadding$left, contents, hpadding$right)
         contents <- paste0('\\multicolumn{', cs,'}{', lb, lcr, rb ,'}{', contents,'}')
         # contents <- paste0('\\multicolumn{', cs,'}{', lb, pmb, width_spec, rb ,'}{', align_str, contents,'}')
       }
@@ -184,10 +189,6 @@ build_cell_contents <- function(ht, row, col) {
   }
   if (! is.na(font <- font(ht)[row, col])) {
     contents <- paste0('{\\fontfamily{', font, '}\\selectfont ', contents, '}')
-    # {
-    #   \fontfamily{anttlc}\selectfont
-    #   Some text in anttlc...
-    # }
   }
   if ((rt <- rotation(ht)[row, col]) != 0) {
     contents <- paste0('\\rotatebox{', rt, '}{', contents, '}')

@@ -282,7 +282,7 @@ set_all_borders.huxtable <- function(ht, row, col, value) {
 #' @templateVar attr_name left_padding
 #' @templateVar attr_desc Cell Padding
 #' @templateVar value_param_desc
-#' A vector or matrix. Numbers will be interpreted as pixels. Characters must be valid CSS or LaTeX lengths.
+#' A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
 #' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable set_left_padding.huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
