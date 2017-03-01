@@ -5,21 +5,32 @@
 NULL
 
 
-#' Create a huxtable
+#' Create and Test for Huxtable Objects
+#'
+#' \code{huxtable}, or \code{hux} for short, creates a huxtable object.
+#' \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
+#' \code{is_huxtable} and \code{is_hux} test if their argument is a huxtable.
 #'
 #' @param ... Named list of values, as for \code{\link{data.frame}}.
+#' @param col_names If \code{TRUE}, a first row of column names will be added to the huxtable.
+#' @param row_names If \code{TRUE}, a first column of row names, named "rownames", will be added to the huxtable.
+#' #' @param ... Named list of values, as for \code{\link{data.frame}}.
 #'
-#' @return An object of class 'huxtable'.
+#' @return An object of class \code{huxtable}.
 #' @export
-#'
-#' @aliases hux
 #'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-#'
-#'
-huxtable <- function (...) {
+huxtable <- function (..., col_names = FALSE, row_names = FALSE) {
   ht <- data.frame(..., stringsAsFactors = FALSE)
+
+  # order matters here. We want original rownames, not anything else.
+  cn <- colnames(ht)
+  if (row_names) cn <- c('', cn)
+  if (row_names) ht <- cbind(rownames = rownames(ht), ht, stringsAsFactors = FALSE)
+  if (col_names) ht <- rbind(cn, ht, stringsAsFactors = FALSE)
+
+
   as_huxtable(ht)
 }
 
@@ -27,18 +38,21 @@ huxtable <- function (...) {
 #' @rdname huxtable
 hux <- huxtable
 
-#' Convert an object to a huxtable
+
+#' @param x A suitable object. Conversion methods exist for data frames, tables, matrices and (most) vectors.
 #'
-#' @param x A suitable object. Methods exist for data frames, tables and matrices.
-#'
-#' @return An object of class \code{huxtable}.
 #' @export
 #'
 #' @examples
 #' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
 #' as_huxtable(dfr)
 #'
+#' @rdname huxtable
 as_huxtable <- function(x, ...) UseMethod('as_huxtable')
+
+#' @export
+#' @rdname huxtable
+as_hux <- as_huxtable
 
 #' @export
 as_huxtable.default <- function (x, ...) {
@@ -70,8 +84,27 @@ as_huxtable.table <- function(x, ...) {
 }
 
 #' @export
-#' @rdname as_huxtable
+as_huxtable.numeric <- function (x, ...) {
+  # use default otherwise matrix has class e.g. c('matrix', 'numeric') so we recurse
+  as_huxtable.default(as.matrix(x, ...))
+}
+
+#' @export
+as_huxtable.character <- as_huxtable.numeric
+
+#' @export
+as_huxtable.logical   <- as_huxtable.numeric
+
+#' @export
+as_huxtable.complex   <- as_huxtable.numeric
+
+#' @export
+#' @rdname huxtable
 is_huxtable <- function(x) inherits(x, 'huxtable')
+
+#' @export
+#' @rdname huxtable
+is_hux <- is_huxtable
 
 #' Subset a huxtable
 #'

@@ -3,24 +3,45 @@
 \name{huxtable}
 \alias{huxtable}
 \alias{hux}
-\alias{hux}
-\title{Create a huxtable}
+\alias{as_huxtable}
+\alias{as_hux}
+\alias{is_huxtable}
+\alias{is_hux}
+\title{Create and Test for Huxtable Objects}
 \usage{
-huxtable(...)
+huxtable(..., col_names = FALSE, row_names = FALSE)
 
-hux(...)
+hux(..., col_names = FALSE, row_names = FALSE)
+
+as_huxtable(x, ...)
+
+as_hux(x, ...)
+
+is_huxtable(x)
+
+is_hux(x)
 }
 \arguments{
 \item{...}{Named list of values, as for \code{\link{data.frame}}.}
+
+\item{col_names}{If \code{TRUE}, a first row of column names will be added to the huxtable.}
+
+\item{row_names}{If \code{TRUE}, a first column of row names, named "rownames", will be added to the huxtable.
+#' @param ... Named list of values, as for \code{\link{data.frame}}.}
+
+\item{x}{A suitable object. Conversion methods exist for data frames, tables, matrices and (most) vectors.}
 }
 \value{
-An object of class 'huxtable'.
+An object of class \code{huxtable}.
 }
 \description{
-Create a huxtable
+\code{huxtable}, or \code{hux} for short, creates a huxtable object.
+\code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
+\code{is_huxtable} and \code{is_hux} test if their argument is a huxtable.
 }
 \examples{
 ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-
+dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
+as_huxtable(dfr)
 
 }

@@ -13,6 +13,14 @@ BUGS
 TODO
 ====
 * cbind, rbind methods
+  - From Advanced R:
+  When implementing a matrix/array class, you should implement these methods: dim (gets you nrow
+  and ncol), t, dimnames (gets you rownames and colnames), dimnames<- (gets you colnames<-,
+  rownames<-), cbind, rbind.
+  - t() seems necessary; dimnames etc. not so much; dim also not required
+  - cbind won't dispatch if first element is a vector. Simplest thing is probably:
+  cbind(as_hux(1:5), ht) and have an as_hux method for vectors
+
 * set wrap to TRUE or FALSE (css: white-space:nowrap)
 * padding, margin
 * allow column names to be put into table as option for hux, as_hux
