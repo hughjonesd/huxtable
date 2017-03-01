@@ -30,7 +30,6 @@ huxtable <- function (..., col_names = FALSE, row_names = FALSE) {
   if (row_names) ht <- cbind(rownames = rownames(ht), ht, stringsAsFactors = FALSE)
   if (col_names) ht <- rbind(cn, ht, stringsAsFactors = FALSE)
 
-
   as_huxtable(ht)
 }
 
@@ -56,6 +55,7 @@ as_hux <- as_huxtable
 
 #' @export
 as_huxtable.default <- function (x, ...) {
+  x <- as.data.frame(x) # deletes attributes
   for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, att) <- matrix(NA, nrow(x), ncol(x))
   }
@@ -73,10 +73,12 @@ as_huxtable.default <- function (x, ...) {
     attr(x, att)[] <- huxtable_default_attrs[[att]] # [[ indexing matters here
   }
 
-  x <- as.data.frame(x)
   class(x) <- c('huxtable', class(x))
   x
 }
+
+#' @export
+as_huxtable.huxtable <- function(x, ...) x
 
 #' @export
 as_huxtable.table <- function(x, ...) {
