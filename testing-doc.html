@@ -375,42 +375,6 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="row-and-column-span" class="section level2">
-<h2>Row and column span</h2>
-<pre class="r"><code>ht &lt;- ht_orig
-ht[1,1] &lt;- 'A rather long block of text'
-background_color(ht)[1,1] &lt;- 'green'
-rowspan(ht)[1,1] &lt;- 2
-colspan(ht)[1,1] &lt;- 2
-ht   </code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td rowspan="2" colspan="2" style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(0, 255, 0); ">
-A rather long block of text
-</td>
-</tr>
-<tr>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-Rosemary
-</td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-10000
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-Thyme
-</td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-1e+05
-</td>
-</tr>
-</table>
-</div>
 <div id="table-width" class="section level2">
 <h2>Table width</h2>
 <pre class="r"><code>ht &lt;- ht_orig
@@ -505,7 +469,7 @@ ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;height: 100px;">
 <col style="width: NA;">
 <col style="width: NA;">
-<tr style="height: 8%;">
+<tr style="height: 6.7%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Parsley
 </td>
@@ -513,7 +477,7 @@ Parsley
 100
 </td>
 </tr>
-<tr style="height: 4%;">
+<tr style="height: 3.3%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Sage
 </td>
@@ -521,7 +485,7 @@ Sage
 1000
 </td>
 </tr>
-<tr style="height: 4%;">
+<tr style="height: 3.3%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Rosemary
 </td>
@@ -529,7 +493,7 @@ Rosemary
 10000
 </td>
 </tr>
-<tr style="height: 4%;">
+<tr style="height: 3.3%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Thyme
 </td>
@@ -754,6 +718,645 @@ Thyme
 </table>
 </div>
 </div>
+<div id="converting-other-objects-to-huxtables" class="section level1">
+<h1>Converting other objects to huxtables</h1>
+<pre class="r"><code>defaults &lt;- function(ht) {
+  bottom_border(ht)[1,] &lt;- 1
+  background_color(ht)[seq(1, nrow(ht), 2), ] &lt;- grey(.9)
+  ht
+}</code></pre>
+<pre class="r"><code>defaults(as_hux(letters[1:5]))</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+a
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+b
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+c
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+d
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+e
+</td>
+</tr>
+</table>
+<pre class="r"><code>defaults(as_hux(matrix(letters[1:10], 2)))</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+a
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+c
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+e
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+g
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+i
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+b
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+d
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+f
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+h
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+j
+</td>
+</tr>
+</table>
+<pre class="r"><code>data(mtcars)
+defaults(as_hux(mtcars[1:10,]))</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+21
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+160
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+110
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.9
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2.62
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+16.46
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+21
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+160
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+110
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.9
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2.875
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+17.02
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+22.8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+108
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+93
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.85
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2.32
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+18.61
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+21.4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+258
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+110
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.08
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.215
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+19.44
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+18.7
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+360
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+175
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.15
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.44
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+17.02
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+18.1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+225
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+105
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2.76
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.46
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+20.22
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+14.3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+360
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+245
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.21
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.57
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+15.84
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+24.4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+146.7
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+62
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.69
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.19
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+20
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+22.8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+140.8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+95
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.92
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3.15
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+22.9
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+19.2
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+167.6
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+123
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.92
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+3.44
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+18.3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+</tr>
+</table>
+<pre class="r"><code>car_table &lt;- xtabs(~ cyl + gear, mtcars)
+defaults(as_hux(car_table))</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+8
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+12
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+</tr>
+</table>
+<pre class="r"><code>car_ft &lt;- ftable(cyl ~ gear + vs, mtcars)
+defaults(as_hux(car_ft))</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+<pre><code>&lt;/td&gt;</code></pre>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+cyl
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+6
+</td>
+<td style="vertical-align: top; text-align: center; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+8
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+gear
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+vs
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+3
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+12
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+<pre><code>&lt;/td&gt;</code></pre>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+4
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+<pre><code>&lt;/td&gt;</code></pre>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+8
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+2
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+5
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; background-color: rgb(230, 230, 230); ">
+2
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+<pre><code>&lt;/td&gt;</code></pre>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+1
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+0
+</td>
+</tr>
+</table>
+</div>
 <div id="joining-subsetting-and-manipulating-huxtables" class="section level1">
 <h1>Joining, subsetting and manipulating huxtables</h1>
 <div id="subsets" class="section level2">
@@ -921,7 +1524,7 @@ Thyme
 <pre class="r"><code>rbind(c(&quot;Oregano&quot;, 300), ht)</code></pre>
 <pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, ri, value = c(100, 1000, 10000, 1e+05)):
 ## invalid factor level, NA generated</code></pre>
-<table class="huxtable" style="width: 100%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
@@ -1052,7 +1655,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-99.9904874525032
+100.629441448244
 </td>
 </tr>
 <tr>
@@ -1060,7 +1663,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-1000.40
+1000.08
 </td>
 </tr>
 <tr>
@@ -1068,7 +1671,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-009999.8618
+009999.5138
 </td>
 </tr>
 <tr>
@@ -1076,7 +1679,7 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-99,999.38
+99,999.7
 </td>
 </tr>
 </table>
@@ -1281,42 +1884,78 @@ Thyme
 <h2>Heights and padding</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 
-row_height(ht) &lt;- c(.4, .2, .2, .2)
-top_padding(ht) &lt;- 10
-bottom_padding(ht) &lt;- 20
+row_height(ht) &lt;- c(.2, .1, .1, .1)
+# top_padding(ht) &lt;- 10
+# bottom_padding(ht) &lt;- 20
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
-<tr style="height: 40%;">
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<tr style="height: 13.3%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Parsley
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100
 </td>
 </tr>
-<tr style="height: 20%;">
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<tr style="height: 6.7%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Sage
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 1000
 </td>
 </tr>
-<tr style="height: 20%;">
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<tr style="height: 6.7%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Rosemary
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 10000
 </td>
 </tr>
-<tr style="height: 20%;">
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<tr style="height: 6.7%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Thyme
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+1e+05
+</td>
+</tr>
+</table>
+</div>
+<div id="row-and-column-span" class="section level2">
+<h2>Row and column span</h2>
+<pre class="r"><code>ht &lt;- ht_orig
+ht[1,1] &lt;- 'A rather long block of text'
+background_color(ht)[1,1] &lt;- 'green'
+rowspan(ht)[1,1] &lt;- 2
+colspan(ht)[1,1] &lt;- 2
+ht   </code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td rowspan="2" colspan="2" style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(0, 255, 0); ">
+A rather long block of text
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 1e+05
 </td>
 </tr>

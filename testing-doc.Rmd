@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "20/02/2017"
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: null
 ---
 
 
@@ -86,17 +86,6 @@ ht
 ```
 
 
-## Row and column span
-
-```{r}
-ht <- ht_orig
-ht[1,1] <- 'A rather long block of text'
-background_color(ht)[1,1] <- 'green'
-rowspan(ht)[1,1] <- 2
-colspan(ht)[1,1] <- 2
-ht   
-
-```
 
 ## Table width
 
@@ -175,6 +164,36 @@ ht
 na_string(ht) <- '--'
 ht
 
+```
+
+# Converting other objects to huxtables
+
+```{r}
+defaults <- function(ht) {
+  bottom_border(ht)[1,] <- 1
+  background_color(ht)[seq(1, nrow(ht), 2), ] <- grey(.9)
+  ht
+}
+```
+
+```{r}
+defaults(as_hux(letters[1:5]))
+defaults(as_hux(matrix(letters[1:10], 2)))
+```
+
+```{r}
+data(mtcars)
+defaults(as_hux(mtcars[1:10,]))
+```
+
+```{r}
+car_table <- xtabs(~ cyl + gear, mtcars)
+defaults(as_hux(car_table))
+```
+
+```{r}
+car_ft <- ftable(cyl ~ gear + vs, mtcars)
+defaults(as_hux(car_ft))
 ```
 
 
@@ -281,5 +300,17 @@ row_height(ht) <- c(.2, .1, .1, .1)
 # top_padding(ht) <- 10
 # bottom_padding(ht) <- 20
 ht
+```
+
+## Row and column span
+
+```{r}
+ht <- ht_orig
+ht[1,1] <- 'A rather long block of text'
+background_color(ht)[1,1] <- 'green'
+rowspan(ht)[1,1] <- 2
+colspan(ht)[1,1] <- 2
+ht   
+
 ```
 

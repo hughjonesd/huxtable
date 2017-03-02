@@ -5,6 +5,7 @@ BUGS
 * latex table width don't work (and cell widths probably wrong)
   - because you reset table spec to l/c/r in each 'multicolumn'?
 * border width in LaTeX... not sure fixable.
+* col_names argument not passing from as_hux to hux
 * collapsing empty cells in HTML; use &nbsp;? but it doesn't always happen...
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
@@ -17,6 +18,7 @@ TODO
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * testing!
 * md method
+* way to set defaults
 * more advanced positioning (floats?)
 * "themes" i.e. standard setups for kinds of tables
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
