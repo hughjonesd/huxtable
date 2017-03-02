@@ -9,8 +9,6 @@ NULL
 #'
 #' \code{huxtable}, or \code{hux}, creates a huxtable object.
 #'
-#' \code{is_huxtable} and \code{is_hux} test if their argument is a huxtable.
-#'
 #' @param ... Named list of values, as for \code{\link{data.frame}}.
 #' @param col_names If \code{TRUE}, a first row of column names will be added to the huxtable.
 #' @param row_names If \code{TRUE}, a first column of row names, named "rownames", will be added to the huxtable.
@@ -82,9 +80,7 @@ as_huxtable.default <- function (x, ...) {
 as_huxtable.huxtable <- function(x, ...) x
 
 #' @export
-as_huxtable.table <- function(x, ...) {
-  as_huxtable(as.matrix(x), ...)
-}
+as_huxtable.table <- function(x, ...) as_huxtable(unclass(x), ...)
 
 #' @export
 as_huxtable.ftable <- function(x, ...) as_huxtable(format(x, quote = FALSE), ...)
