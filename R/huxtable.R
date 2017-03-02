@@ -54,7 +54,7 @@ as_hux <- as_huxtable
 
 #' @export
 as_huxtable.default <- function (x, ...) {
-  x <- as.data.frame(x) # deletes attributes
+  x <- as.data.frame(x)
   for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, att) <- matrix(NA, nrow(x), ncol(x))
   }
@@ -122,10 +122,11 @@ is_hux <- is_huxtable
 #' @details
 #' \code{[} always returns a new huxtable object, while \code{$} and \code{[[} simply
 #' return a vector of data.
-#' For the replacement function, if \code{value} is a huxtable, then its cell attributes will be
-#' copied into \code{x}. In addition, if \code{nrow(value) == nrow(x)}, then column attributes
+#' For the replacement function \code{[<-}, if \code{value} is a huxtable, then its cell properties will be
+#' copied into \code{x}. In addition, if \code{nrow(value) == nrow(x)}, then column properties
 #' will be copied into \code{x} as appropriate, and if  \code{ncol(value) == ncol(x)}, then
-#' row attributes will be copied.
+#' row properties will be copied.
+#' Replacement functions \code{$<-} and \code{[[<-} simply change the data without affecting other properties.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
 #' rowspan(ht)[2,1] <- 2
@@ -206,9 +207,9 @@ is_hux <- is_huxtable
 #' @return A huxtable.
 #'
 #' @details
-#' Table-level attributes will be taken from the first argument. Row-level
-#' attributes will be taken from the first argument to \code{cbind}, and
-#' column-level attributes from the first argument to \code{rbind}.
+#' Table-level properties will be taken from the first argument. Row-level
+#' properties will be taken from the first argument to \code{cbind}, and
+#' column-level properties from the first argument to \code{rbind}.
 #'
 #' If the first argument to \code{cbind} is not a \code{huxtable}, then
 #' \code{cbind.huxtable} will not be called. To avoid this, do e.g.
@@ -280,7 +281,7 @@ bind2_hux <- function(ht, x, type) {
 #' @details
 #' Row and column spans of \code{x} will be swapped, as will column widths and row heights,
 #' table width and height, and cell borders (bottom becomes right, etc.).
-#' Other attributes - in particular, alignment, vertical alignment and rotation - will be
+#' Other properties - in particular, alignment, vertical alignment and rotation - will be
 #' preserved.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)

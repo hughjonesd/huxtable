@@ -18,7 +18,7 @@ Transpose a Huxtable
 \details{
 Row and column spans of \code{x} will be swapped, as will column widths and row heights,
 table width and height, and cell borders (bottom becomes right, etc.).
-Other attributes - in particular, alignment, vertical alignment and rotation - will be
+Other properties - in particular, alignment, vertical alignment and rotation - will be
 preserved.
 }
 \examples{

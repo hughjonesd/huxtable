@@ -21,9 +21,9 @@ A huxtable.
 Add Rows/Columns
 }
 \details{
-Table-level attributes will be taken from the first argument. Row-level
-attributes will be taken from the first argument to \code{cbind}, and
-column-level attributes from the first argument to \code{rbind}.
+Table-level properties will be taken from the first argument. Row-level
+properties will be taken from the first argument to \code{cbind}, and
+column-level properties from the first argument to \code{rbind}.
 
 If the first argument to \code{cbind} is not a \code{huxtable}, then
 \code{cbind.huxtable} will not be called. To avoid this, do e.g.
