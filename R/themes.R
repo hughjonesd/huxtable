@@ -15,11 +15,14 @@
 #' @param header_row Logical: style first row differently?
 #' @param header_col Logical: style first column differently?
 #'
-#' @return The huxtable object.
+#' @return The huxtable object, appropriately styled.
 #' @name themes
 #'
 #' @examples
+#' ht <- huxtable(a = 1:5, b = 1:5)
+#' theme_striped(ht)
 NULL
+
 
 #' @export
 #' @rdname themes
@@ -30,6 +33,7 @@ theme_minimal <- function (ht, header_row = TRUE, header_col = TRUE) {
 
   ht
 }
+
 
 #' @export
 #' @rdname themes
@@ -52,6 +56,9 @@ theme_striped <- function (ht, stripe = grey(.9), header_row = TRUE, header_col 
   ht
 }
 
+
+#' @export
+#' @rdname themes
 theme_article <- function(ht, header_row = TRUE, header_col = TRUE) {
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
   top_border(ht)[1,] <- 1
