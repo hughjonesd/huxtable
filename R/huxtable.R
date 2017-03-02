@@ -5,16 +5,15 @@
 NULL
 
 
-#' Create and Test for Huxtable Objects
+#' Create a Huxtable
 #'
-#' \code{huxtable}, or \code{hux} for short, creates a huxtable object.
-#' \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
+#' \code{huxtable}, or \code{hux}, creates a huxtable object.
+#'
 #' \code{is_huxtable} and \code{is_hux} test if their argument is a huxtable.
 #'
 #' @param ... Named list of values, as for \code{\link{data.frame}}.
 #' @param col_names If \code{TRUE}, a first row of column names will be added to the huxtable.
 #' @param row_names If \code{TRUE}, a first column of row names, named "rownames", will be added to the huxtable.
-#' #' @param ... Named list of values, as for \code{\link{data.frame}}.
 #'
 #' @return An object of class \code{huxtable}.
 #' @export
@@ -38,10 +37,12 @@ huxtable <- function (..., col_names = FALSE, row_names = FALSE) {
 hux <- huxtable
 
 
-#' @param x A suitable object. Conversion methods exist for data frames, tables, matrices and (most) vectors.
+#' @param x An object to convert to a huxtable.
 #'
 #' @export
-#'
+#' @details
+#' \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
+#' Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 #' @examples
 #' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
 #' as_huxtable(dfr)
@@ -82,7 +83,7 @@ as_huxtable.huxtable <- function(x, ...) x
 
 #' @export
 as_huxtable.table <- function(x, ...) {
-  as_huxtable(as.matrix(x, ...))
+  as_huxtable(as.matrix(x), ...)
 }
 
 #' @export

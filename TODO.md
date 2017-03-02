@@ -16,7 +16,7 @@ TODO
 
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * testing!
-* screen method/md method
+* md method
 * more advanced positioning (floats?)
 * as_huxtable.ftable
 * "themes" i.e. standard setups for kinds of tables
