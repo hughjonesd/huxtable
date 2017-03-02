@@ -87,6 +87,10 @@ as_huxtable.table <- function(x, ...) {
 }
 
 #' @export
+as_huxtable.ftable <- function(x, ...) as_huxtable(format(x, quote = FALSE), ...)
+
+
+#' @export
 as_huxtable.numeric <- function (x, ...) {
   # use default otherwise matrix has class e.g. c('matrix', 'numeric') so we recurse
   as_huxtable.default(as.matrix(x, ...))

@@ -18,7 +18,6 @@ TODO
 * testing!
 * md method
 * more advanced positioning (floats?)
-* as_huxtable.ftable
 * "themes" i.e. standard setups for kinds of tables
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
