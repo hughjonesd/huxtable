@@ -587,43 +587,43 @@ Thyme
 <h2>Padding</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 ht &lt;- set_all_padding(ht, 1:4, 1:2, 0)
-left_padding(ht)[,1] &lt;- 20
-right_padding(ht)[,2] &lt;- 20
-top_padding(ht) &lt;- 10
-bottom_padding(ht) &lt;- 10
+left_padding(ht)[,1] &lt;- 40
+right_padding(ht)[,2] &lt;- 40
+top_padding(ht) &lt;- 20
+bottom_padding(ht) &lt;- 20
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 0px 10px 20px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 0px 20px 40px; ">
 Parsley
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 20px 10px 0px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 40px 20px 0px; ">
 100
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 0px 10px 20px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 0px 20px 40px; ">
 Sage
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 20px 10px 0px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 40px 20px 0px; ">
 1000
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 0px 10px 20px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 0px 20px 40px; ">
 Rosemary
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 20px 10px 0px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 40px 20px 0px; ">
 10000
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 0px 10px 20px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 0px 20px 40px; ">
 Thyme
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 20px 10px 0px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 20px 40px 20px 0px; ">
 1e+05
 </td>
 </tr>
@@ -1052,7 +1052,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-99.3372283723577
+99.9904874525032
 </td>
 </tr>
 <tr>
@@ -1060,7 +1060,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-999.62
+1000.40
 </td>
 </tr>
 <tr>
@@ -1068,7 +1068,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-009999.5426
+009999.8618
 </td>
 </tr>
 <tr>
@@ -1076,7 +1076,7 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-100,001.2
+99,999.38
 </td>
 </tr>
 </table>
@@ -1230,9 +1230,97 @@ Thyme
 <pre class="r"><code>ht &lt;- ht_orig
 caption(ht) &lt;- 'Captions are required for labels to work'
 label(ht) &lt;- 'tab:mytable'
-knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')</code></pre>
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;" id="tab:mytable">
+<caption style="caption-side:top; text-align: center;">
+Captions are required for labels to work
+</caption>
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+100
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+1e+05
+</td>
+</tr>
+</table>
+<pre class="r"><code>knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')</code></pre>
 <p>If this is LaTeX we can see a reference to table .</p>
 <p>NB: references may not work if knitting PDFs in Rstudio.</p>
+</div>
+</div>
+<div id="testing-corner-cases" class="section level1">
+<h1>Testing corner cases</h1>
+<div id="heights-and-padding" class="section level2">
+<h2>Heights and padding</h2>
+<pre class="r"><code>ht &lt;- ht_orig
+
+row_height(ht) &lt;- c(.4, .2, .2, .2)
+top_padding(ht) &lt;- 10
+bottom_padding(ht) &lt;- 20
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr style="height: 40%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+100
+</td>
+</tr>
+<tr style="height: 20%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+1000
+</td>
+</tr>
+<tr style="height: 20%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+10000
+</td>
+</tr>
+<tr style="height: 20%;">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 10px 4px 20px 4px; ">
+1e+05
+</td>
+</tr>
+</table>
 </div>
 </div>
 

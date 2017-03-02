@@ -62,7 +62,10 @@ row_html <- function (ht, rn) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>
   style <- ''
   if (! is.na(height <- row_height(ht)[rn])) {
-    if (is.numeric(height)) height <- paste0(round(height * 100, 1), '%')
+    if (is.numeric(height)) {
+      height <- height/sum(row_height(ht), na.omit = TRUE)
+      height <- paste0(round(height * 100, 1), '%')
+    }
     style <- paste0(' style="height: ', height, ';"')
   }
   res <- paste0('<tr', style ,'>\n')

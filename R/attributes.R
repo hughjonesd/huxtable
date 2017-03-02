@@ -167,8 +167,11 @@ make_getter_setters('col_width', 'col')
 #' @templateVar attr_name row_height
 #' @templateVar rowcol row
 #' @templateVar attr_desc Row Heights
-#' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table height (HTML) or text height (LaTeX). If character, they must be valid CSS or LaTeX lengths.
+#' @templateVar value_param_desc A vector.
 #' @family row/column heights
+#' @details
+#' If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
+#' treated as proportions of the text height (\\textheight).
 #' @export row_height row_height<- set_row_height row_height.huxtable row_height<-.huxtable set_row_height.huxtable
 NULL
 make_getter_setters('row_height', 'row')

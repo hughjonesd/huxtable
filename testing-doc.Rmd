@@ -7,7 +7,7 @@ output:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: default
+  html_document: null
 ---
 
 
@@ -263,8 +263,23 @@ ht
 ht <- ht_orig
 caption(ht) <- 'Captions are required for labels to work'
 label(ht) <- 'tab:mytable'
+ht
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')
 ```
 
 NB: references may not work if knitting PDFs in Rstudio. 
+
+
+# Testing corner cases
+
+## Heights and padding
+
+```{r}
+ht <- ht_orig
+
+row_height(ht) <- c(.2, .1, .1, .1)
+# top_padding(ht) <- 10
+# bottom_padding(ht) <- 20
+ht
+```
 

@@ -13,7 +13,7 @@ set_label(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector to be used as a table label in LaTeX. Set to \code{NA}}
+\item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.}
 }
 \value{
 For \code{label}, the \code{label} attribute. For \code{label<-}, the

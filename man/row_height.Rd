@@ -13,7 +13,7 @@ set_row_height(ht, row, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector. If numeric, they are treated as proportions of the table height (HTML) or text height (LaTeX). If character, they must be valid CSS or LaTeX lengths.}
+\item{value}{A vector.}
 
 \item{row}{A row specifier.}
 }
@@ -21,6 +21,10 @@ set_row_height(ht, row, value)
 For \code{row_height}, the \code{row_height} attribute. For \code{row_height<-}, the
 value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
 implementation detail of how R handles replacement functions). For \code{set_row_height}, the \code{ht} object.
+}
+\details{
+If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
+treated as proportions of the text height (\\textheight).
 }
 \seealso{
 Other row/column heights: \code{\link{col_width}}

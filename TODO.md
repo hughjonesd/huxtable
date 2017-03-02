@@ -41,6 +41,8 @@ PUT OFF
 * auto cell align: left for text, decimal for numbers?
   - decimal alignment doesn't work in HTML. LaTeX has dcolumn and/or siunitx... maybe skip
 * new version of latex code: compute "real" details (border, cell, content) for each row?
+* no need to have set_... methods be subclassable (so long as setters with <- are subclassable)
+* setting relative heights in LaTeX. Too complex; can't redefine array stretch.
 
 QUESTIONS
 =========
