@@ -4,8 +4,8 @@ BUGS
 ====
 * latex table width don't work (and cell widths probably wrong)
   - because you reset table spec to l/c/r in each 'multicolumn'?
-* border width in LaTeX
-* collapsing empty cells in HTML; use &nbsp;?
+* border width in LaTeX... not sure fixable.
+* collapsing empty cells in HTML; use &nbsp;? but it doesn't always happen...
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
@@ -14,8 +14,7 @@ BUGS
 TODO
 ====
 
-* set wrap to TRUE or FALSE (css: white-space:nowrap)
-* padding, margin
+* set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * testing!
 * screen method/md method
 * more advanced positioning (floats?)

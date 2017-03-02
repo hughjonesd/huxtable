@@ -18,20 +18,12 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- build_tabular(ht)
   if (tabular_only) return(res)
+
+
   if (! is.na(height <- height(ht))) {
     if (is.numeric(height)) height <- paste0(height, '\\textheight')
     res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
   }
-#   # don't indent or pandoc may treat it as verbatim
-#   res <- paste0('
-# \\let\\Oldarrayrulewidth\\relax
-# \\newlength\\Oldarrayrulewidth
-# \\providecommand{\\Cline}[2]{}
-# \\renewcommand{\\Cline}[2]{%
-# \\noalign{\\global\\setlength{\\Oldarrayrulewidth}{\\arrayrulewidth}}%
-# \\noalign{\\global\\setlength{\\arrayrulewidth}{#1}}\\cline{#2}%
-# \\noalign{\\global\\setlength{\\arrayrulewidth}{\\Oldarrayrulewidth}}}', res)
-
 
   cap <- if (! is.na(cap <- caption(ht))) paste0('\\caption{', cap, '}\n') else ''
   lab <- if (! is.na(lab <- label(ht))) paste0('\\label{', lab, '}\n') else ''
@@ -52,8 +44,10 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 }
 
 build_tabular <- function(ht) {
+
+  res <- '\\let\\huxlen\\relax\n\\newlength\\huxlen\n' # for calculating lengths
   tenv <- tabular_environment(ht)
-  res <- paste0('\\begin{', tenv, '}')
+  res <- paste0(res, '\\begin{', tenv, '}')
   if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
     tw <- width(ht)
     if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
@@ -91,16 +85,36 @@ build_tabular <- function(ht) {
   for (myrow in 1:nrow(ht)) {
     row_contents <- character(0)
     added_right_border <- FALSE
+
     for (mycol in 1:ncol(ht)) {
       dcell <- display_cells[display_cells$row == myrow & display_cells$col == mycol,]
       drow <- dcell$display_row
       dcol <- dcell$display_col
-      # we print out contents for (a) unshadowed cells which are not multirow
-      # (b) shadowed cells which are in the last row (but first column) of a multirow
+
       contents <- ''
       rs <- rowspan(ht)[drow, dcol]
-      if ((! dcell$shadowed && rs == 1) || (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol)) contents <- build_cell_contents(ht, drow, dcol)
+      end_row <- drow + rs - 1
+      bottom_left_multirow <- dcell$shadowed && myrow == end_row && mycol == dcol
+      # STRATEGY:
+      # - if not a shadowed cell, or if bottom left of a shadowed multirow,
+      #    - print content, including struts for padding and row height
+      #    - multirow goes upwards not downwards, to avoid content being overwritten by cell background
+      # - if a left hand cell (shadowed or not), print cell color and borders
+      if ((! dcell$shadowed && rs == 1) || bottom_left_multirow) {
+        contents <- build_cell_contents(ht, drow, dcol)
+
+        padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
+              bottom_padding(ht)[drow, dcol])
+        padding <- lapply(padding, function(x) if (is.numeric(x) & ! is.na(x)) paste0(x, 'pt') else x)
+        hpadding <- lapply(padding[1:2], function(x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
+        contents <- paste0(hpadding[1], contents, hpadding[2])
+        tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
+        bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
+        contents <- paste0(tpadding, contents, bpadding)
+      }
+
       # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
+      # not sure how this should interact with cell padding...
       if (! is.na(row_height <- row_height(ht)[drow])) {
         if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
         contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
@@ -114,20 +128,15 @@ build_tabular <- function(ht) {
         contents <- paste0(cell_color, ' ', contents)
       }
 
-      # multirows are moved to last line...
-      if (dcell$shadowed && drow + rs - 1  == myrow && dcol == mycol) {
+      if (bottom_left_multirow) {
         # the ctb switch may only work with v recent multirow
         # ctb <- switch(valign(ht)[myrow, mycol], top = 't', bottom = 'b', middle = 'c')
-        # * is 'standard width', could be more specific
+        # goes in [] as optional first argument
+        # * is 'standard width', could be more specific:
         contents <- paste0('\\multirow{-', rs,'}{*}{', contents,'}')
       }
 
-      # must be this way round: multirow inside multicolumn
-      # (a) if not a shadowed cell, put multicol round content;
-      # (b) if shadowed from directly above (ie. a left cell of a multirow/multicol group), use an empty multicol
-      # and add appropriate borders
-      # (c) otherwise do not print anything
-      if (! dcell$shadowed || mycol == dcol) {
+      if (mycol == dcol) {
         cs <- colspan(ht)[drow, dcol]
         lcr <- switch(align(ht)[drow, dcol], left   = 'l', right  = 'r', center = 'c')
         # pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', center = 'm')
@@ -143,14 +152,9 @@ build_tabular <- function(ht) {
           rb <- ''
           added_right_border <- FALSE
         }
-        # for padding, just use hspace
-        hpadding <- list(left = left_padding(ht)[drow, dcol], right = right_padding(ht)[drow, dcol])
-        hpadding <- lapply(hpadding, function(x) if (is.numeric(x) & ! is.na(x)) paste0(x, 'pt') else x)
-        hpadding <- lapply(hpadding, function(x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
-        contents <- paste0(hpadding$left, contents, hpadding$right)
         contents <- paste0('\\multicolumn{', cs,'}{', lb, lcr, rb ,'}{', contents,'}')
         # contents <- paste0('\\multicolumn{', cs,'}{', lb, pmb, width_spec, rb ,'}{', align_str, contents,'}')
-      }
+      } # if (left cells of multicol or non-shadowed cell)
 
       row_contents[mycol] <- contents
 

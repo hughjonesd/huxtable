@@ -322,7 +322,8 @@ knit_print.huxtable <- function (x, options, ...) {
             rmarkdown::latex_dependency('siunitx'),
             rmarkdown::latex_dependency('xcolor', options = 'table'),
             rmarkdown::latex_dependency('multirow'),
-            rmarkdown::latex_dependency('hhline')
+            rmarkdown::latex_dependency('hhline'),
+            rmarkdown::latex_dependency('calc')
           )
     tenv <- tabular_environment(x)
     if (tenv %in% c('tabularx', 'tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))

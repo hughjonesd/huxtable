@@ -146,8 +146,8 @@ ht <- ht_orig
 ht <- set_all_padding(ht, 1:4, 1:2, 0)
 left_padding(ht)[,1] <- 40
 right_padding(ht)[,2] <- 40
-top_padding(ht) <- 10
-bottom_padding(ht) <- 10
+top_padding(ht) <- 20
+bottom_padding(ht) <- 20
 ht
 
 ```
