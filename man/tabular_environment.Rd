@@ -16,9 +16,8 @@ set_tabular_environment(ht, value)
 \item{value}{A length-one character vector. Set to \code{NA} for the default, 'tabularx'.}
 }
 \value{
-For \code{tabular_environment}, the \code{tabular_environment} attribute. For \code{tabular_environment<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_tabular_environment}, the \code{ht} object.
+For \code{tabular_environment}, the \code{tabular_environment} attribute.
+For \code{set_tabular_environment}, the \code{ht} object.
 }
 \details{
 Not all features are guaranteed to work if you set this to a non-default value.

@@ -25,9 +25,8 @@ set_italic(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{bold}, the \code{bold} attribute. For \code{bold<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_bold}, the \code{ht} object.
+For \code{bold}, the \code{bold} attribute.
+For \code{set_bold}, the \code{ht} object.
 }
 \seealso{
 Other formatting functions: \code{\link{font_size}},

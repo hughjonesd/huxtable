@@ -16,7 +16,6 @@ set_label(ht, value)
 \item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.}
 }
 \value{
-For \code{label}, the \code{label} attribute. For \code{label<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_label}, the \code{ht} object.
+For \code{label}, the \code{label} attribute.
+For \code{set_label}, the \code{ht} object.
 }

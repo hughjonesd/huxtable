@@ -16,9 +16,8 @@ set_width(ht, value)
 \item{value}{A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is 100 per cent.}
 }
 \value{
-For \code{width}, the \code{width} attribute. For \code{width<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_width}, the \code{ht} object.
+For \code{width}, the \code{width} attribute.
+For \code{set_width}, the \code{ht} object.
 }
 \seealso{
 Other table measurements: \code{\link{height}}

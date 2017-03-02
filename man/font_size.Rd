@@ -20,9 +20,8 @@ set_font_size(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{font_size}, the \code{font_size} attribute. For \code{font_size<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_font_size}, the \code{ht} object.
+For \code{font_size}, the \code{font_size} attribute.
+For \code{set_font_size}, the \code{ht} object.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

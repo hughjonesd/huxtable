@@ -20,7 +20,6 @@ set_rotation(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{rotation}, the \code{rotation} attribute. For \code{rotation<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_rotation}, the \code{ht} object.
+For \code{rotation}, the \code{rotation} attribute.
+For \code{set_rotation}, the \code{ht} object.
 }

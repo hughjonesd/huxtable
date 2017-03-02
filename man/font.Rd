@@ -20,9 +20,8 @@ set_font(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{font}, the \code{font} attribute. For \code{font<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_font}, the \code{ht} object.
+For \code{font}, the \code{font} attribute.
+For \code{set_font}, the \code{ht} object.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

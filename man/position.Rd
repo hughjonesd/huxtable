@@ -16,7 +16,6 @@ set_position(ht, value)
 \item{value}{A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.}
 }
 \value{
-For \code{position}, the \code{position} attribute. For \code{position<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_position}, the \code{ht} object.
+For \code{position}, the \code{position} attribute.
+For \code{set_position}, the \code{ht} object.
 }

@@ -20,7 +20,6 @@ set_background_color(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{background_color}, the \code{background_color} attribute. For \code{background_color<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_background_color}, the \code{ht} object.
+For \code{background_color}, the \code{background_color} attribute.
+For \code{set_background_color}, the \code{ht} object.
 }

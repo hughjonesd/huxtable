@@ -20,9 +20,8 @@ set_number_format(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{number_format}, the \code{number_format} attribute. For \code{number_format<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_number_format}, the \code{ht} object.
+For \code{number_format}, the \code{number_format} attribute.
+For \code{set_number_format}, the \code{ht} object.
 }
 \details{
 If \code{value} is numeric, numbers will be rounded to that many digits. If \code{value} is

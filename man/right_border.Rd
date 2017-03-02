@@ -20,9 +20,8 @@ set_right_border(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{right_border}, the \code{right_border} attribute. For \code{right_border<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_right_border}, the \code{ht} object.
+For \code{right_border}, the \code{right_border} attribute.
+For \code{set_right_border}, the \code{ht} object.
 }
 \seealso{
 Other borders: \code{\link{bottom_border}},

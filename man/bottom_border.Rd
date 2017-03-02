@@ -20,9 +20,8 @@ set_bottom_border(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{bottom_border}, the \code{bottom_border} attribute. For \code{bottom_border<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_bottom_border}, the \code{ht} object.
+For \code{bottom_border}, the \code{bottom_border} attribute.
+For \code{set_bottom_border}, the \code{ht} object.
 }
 \seealso{
 Other borders: \code{\link{left_border}},

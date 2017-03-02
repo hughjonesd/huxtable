@@ -18,9 +18,8 @@ set_row_height(ht, row, value)
 \item{row}{A row specifier.}
 }
 \value{
-For \code{row_height}, the \code{row_height} attribute. For \code{row_height<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_row_height}, the \code{ht} object.
+For \code{row_height}, the \code{row_height} attribute.
+For \code{set_row_height}, the \code{ht} object.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are

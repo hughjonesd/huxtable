@@ -20,7 +20,6 @@ set_rowspan(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{rowspan}, the \code{rowspan} attribute. For \code{rowspan<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_rowspan}, the \code{ht} object.
+For \code{rowspan}, the \code{rowspan} attribute.
+For \code{set_rowspan}, the \code{ht} object.
 }

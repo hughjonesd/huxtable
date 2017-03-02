@@ -20,9 +20,8 @@ set_text_color(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{text_color}, the \code{text_color} attribute. For \code{text_color<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_text_color}, the \code{ht} object.
+For \code{text_color}, the \code{text_color} attribute.
+For \code{set_text_color}, the \code{ht} object.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

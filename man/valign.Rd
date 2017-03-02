@@ -20,7 +20,6 @@ set_valign(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{valign}, the \code{valign} attribute. For \code{valign<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_valign}, the \code{ht} object.
+For \code{valign}, the \code{valign} attribute.
+For \code{set_valign}, the \code{ht} object.
 }

@@ -20,7 +20,6 @@ set_align(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{align}, the \code{align} attribute. For \code{align<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_align}, the \code{ht} object.
+For \code{align}, the \code{align} attribute.
+For \code{set_align}, the \code{ht} object.
 }

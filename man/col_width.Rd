@@ -18,9 +18,8 @@ set_col_width(ht, col, value)
 \item{col}{A col specifier.}
 }
 \value{
-For \code{col_width}, the \code{col_width} attribute. For \code{col_width<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_col_width}, the \code{ht} object.
+For \code{col_width}, the \code{col_width} attribute.
+For \code{set_col_width}, the \code{ht} object.
 }
 \seealso{
 Other row/column heights: \code{\link{row_height}}

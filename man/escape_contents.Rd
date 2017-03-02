@@ -20,7 +20,6 @@ set_escape_contents(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{escape_contents}, the \code{escape_contents} attribute. For \code{escape_contents<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_escape_contents}, the \code{ht} object.
+For \code{escape_contents}, the \code{escape_contents} attribute.
+For \code{set_escape_contents}, the \code{ht} object.
 }

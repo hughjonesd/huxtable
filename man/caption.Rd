@@ -16,9 +16,8 @@ set_caption(ht, value)
 \item{value}{A length-one character vector. Set to \code{NA} for no caption.}
 }
 \value{
-For \code{caption}, the \code{caption} attribute. For \code{caption<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_caption}, the \code{ht} object.
+For \code{caption}, the \code{caption} attribute.
+For \code{set_caption}, the \code{ht} object.
 }
 \seealso{
 \code{\link{caption_pos}}

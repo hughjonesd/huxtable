@@ -20,9 +20,8 @@ set_na_string(ht, row, col, value)
 \item{col}{A column specifier.}
 }
 \value{
-For \code{na_string}, the \code{na_string} attribute. For \code{na_string<-}, the
-value of the right hand side (technically, the function itself returns the \code{ht} object, but this is an
-implementation detail of how R handles replacement functions). For \code{set_na_string}, the \code{ht} object.
+For \code{na_string}, the \code{na_string} attribute.
+For \code{set_na_string}, the \code{ht} object.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},
