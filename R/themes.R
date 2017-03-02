@@ -68,5 +68,7 @@ theme_article <- function(ht, header_row = TRUE, header_col = TRUE) {
     bold(ht)[1,] <- TRUE
   }
   if (header_col) bold(ht)[,1] <- TRUE
+
+  ht
 }
 
