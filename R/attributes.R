@@ -13,7 +13,7 @@ huxtable_default_attrs <- list(
         colspan             = 1,
         align               = 'center',
         valign              = 'top',
-        width               = 1,
+        width               = 0.5,
         height              = NA,
         col_width           = NA,
         row_height          = NA,
