@@ -1,13 +1,13 @@
 ---
 title: "Quick guide to functionality"
 author: "David Hugh-Jones"
-date: "20/02/2017"
+date: "2/03/2017"
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: null
 ---
 
 
@@ -128,20 +128,6 @@ ht
 ```
 
 
-## Padding
-
-```{r}
-ht <- ht_orig
-ht <- set_all_padding(ht, 1:4, 1:2, 0)
-left_padding(ht)[,1] <- 40
-right_padding(ht)[,2] <- 40
-top_padding(ht) <- 20
-bottom_padding(ht) <- 20
-ht
-
-```
-
-
 ## Text color, bold, italic, font size
 
 ```{r}
@@ -155,6 +141,21 @@ ht
 
 ```
 
+
+## Number formatting
+
+```{r}
+ht <- ht_orig
+ht[,2] <- ht[,2] + rnorm(4)
+number_format(ht)[2,] <- 2
+number_format(ht)[3,] <- '%011.4f'
+number_format(ht)[4,] <- list(function(x) prettyNum(round(x, 3), big.mark = ','))
+
+ht
+
+```
+
+
 ## Replace NAs
 
 ```{r}
@@ -165,6 +166,24 @@ na_string(ht) <- '--'
 ht
 
 ```
+
+
+## Quick themes
+
+```{r}
+ht <- ht_orig
+ht <- rbind(c("Herb", "Amount"), ht)
+theme_minimal(ht)
+```
+
+```{r}
+theme_striped(ht, header_col = FALSE)
+```
+
+```{r}
+theme_article(ht)
+```
+
 
 # Converting other objects to huxtables
 
@@ -229,18 +248,29 @@ t(ht)
 ```
 
 
-# Advanced usage
+# Advanced features
 
-
-## Number formatting
+## Printing on screen
 
 ```{r}
 ht <- ht_orig
-ht[,2] <- ht[,2] + rnorm(4)
-number_format(ht)[2,] <- 2
-number_format(ht)[3,] <- '%011.4f'
-number_format(ht)[4,] <- list(function(x) prettyNum(round(x, 3), big.mark = ','))
+# Basic data:
+print(ht)
 
+# Pretty print:
+print_screen(ht)
+```
+
+
+## Padding
+
+```{r}
+ht <- ht_orig
+ht <- set_all_padding(ht, 1:4, 1:2, 0)
+left_padding(ht)[,1] <- 40
+right_padding(ht)[,2] <- 40
+top_padding(ht) <- 20
+bottom_padding(ht) <- 20
 ht
 
 ```
@@ -257,6 +287,17 @@ ht
 
 ```
 
+
+## Border width
+
+```{r}
+ht <- ht_orig
+bottom_border(ht)[1,] <- 3
+ht
+
+```
+
+
 ## Caption
 
 ```{r}
@@ -265,6 +306,7 @@ caption(ht) <- 'A simple table'
 ht
 
 ```
+
 
 ## Caption below
 
@@ -276,7 +318,8 @@ ht
 
 ```
 
-## Label (LaTeX only)
+
+## Label
 
 ```{r}
 ht <- ht_orig
@@ -285,6 +328,7 @@ label(ht) <- 'tab:mytable'
 ht
 knitr::asis_output('If this is LaTeX we can see a reference to table \\ref{tab:mytable}.')
 ```
+
 
 NB: references may not work if knitting PDFs in Rstudio. 
 

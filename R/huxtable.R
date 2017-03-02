@@ -54,7 +54,7 @@ as_hux <- as_huxtable
 
 #' @export
 as_huxtable.default <- function (x, ...) {
-  x <- as.data.frame(x)
+  x <- as.data.frame(x, stringsAsFactors = FALSE)
   for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, att) <- matrix(NA, nrow(x), ncol(x))
   }

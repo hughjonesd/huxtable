@@ -38,7 +38,7 @@ huxtable_default_attrs <- list(
         italic              = FALSE,
         font_size           = NA,
         rotation            = 0,
-        number_format       = list(NA),
+        number_format       = list('%5.2f'),
         font                = NA
       )
 
