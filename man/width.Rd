@@ -13,7 +13,7 @@ set_width(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is 100 per cent.}
+\item{value}{A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default.}
 }
 \value{
 For \code{width}, the \code{width} attribute.

@@ -490,7 +490,7 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
 #' @templateVar attr_name width
 #' @templateVar attr_desc Table Width
 #' @templateVar value_param_desc
-#' A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is 100 per cent.
+#' A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default.
 #'
 #' @export width width<- set_width width.huxtable width<-.huxtable set_width.huxtable
 #' @family table measurements

@@ -37,8 +37,6 @@ An object of class \code{huxtable}.
 \code{huxtable}, or \code{hux}, creates a huxtable object.
 }
 \details{
-\code{is_huxtable} and \code{is_hux} test if their argument is a huxtable.
-
 \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 }

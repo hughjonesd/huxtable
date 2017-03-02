@@ -18,7 +18,7 @@ TODO
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * testing!
 * md method
-* way to set defaults
+* way to set defaults?
 * more advanced positioning (floats?)
 * "themes" i.e. standard setups for kinds of tables
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
