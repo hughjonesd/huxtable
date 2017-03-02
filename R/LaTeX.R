@@ -1,5 +1,12 @@
 
 
+#' @export
+#'
+#' @rdname to_latex
+print_latex <- function (ht, ...) {
+  cat(to_latex(ht, ...))
+}
+
 #' Create LaTeX Representing a Huxtable
 #'
 #' @param ht A huxtable.
@@ -284,9 +291,3 @@ compute_vertical_borders <- function (ht, row) {
 
 latex_color <- function (r_color) paste0(as.vector(col2rgb(r_color)), collapse = ', ')
 
-#' @export
-#'
-#' @rdname to_latex
-print_latex <- function (ht, ...) {
-  cat(to_latex(ht, ...))
-}
