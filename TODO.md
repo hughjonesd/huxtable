@@ -8,10 +8,6 @@ BUGS
   - you may be able to set it per row for horiz ones using arrayrulewidth...
 * col_names argument not passing from as_hux to hux
 * collapsing empty cells in HTML; use &nbsp;? but it doesn't always happen...
-* latex row height is of \\textheight when numeric, not % table height. Hard to fix
-* when inserting one hux into another, row heights/col widths may no longer make sense,
-  - because they are implicit proportions.
-
 
 TODO
 ====
@@ -46,7 +42,10 @@ PUT OFF
 * new version of latex code: compute "real" details (border, cell, content) for each row?
 * no need to have set_... methods be subclassable (so long as setters with <- are subclassable)
 * setting relative heights in LaTeX. Too complex; can't redefine array stretch.
-
+* latex row height is of \\textheight when numeric, not % table height. Hard to fix
+* when inserting one hux into another, row heights/col widths may no longer make sense,
+  - because they are implicit proportions.
+  
 QUESTIONS
 =========
 do we want to have a concept of 'headers' for repetition? Cf. longtable,  <th>

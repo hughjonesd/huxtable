@@ -123,6 +123,16 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))</code></pre>
+<pre class="r"><code>library(huxtable)
+is_latex &lt;- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+
+knitr::knit_hooks$set(
+  barrier = function(before, options, envir) {
+    if (! before &amp;&amp; is_latex) knitr::asis_output('\\FloatBarrier')
+  }
+)
+knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)</code></pre>
 <div id="basic-usage" class="section level1">
 <h1>Basic usage</h1>
 <div id="creating-a-huxtable" class="section level2">
@@ -610,7 +620,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-100.52
+100.48
 </td>
 </tr>
 <tr>
@@ -618,7 +628,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-1000.85
+999.45
 </td>
 </tr>
 <tr>
@@ -626,7 +636,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-009999.3802
+010000.3531
 </td>
 </tr>
 <tr>
@@ -634,7 +644,7 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-99,999.74
+100,000.2
 </td>
 </tr>
 </table>
@@ -2090,14 +2100,14 @@ Thyme
 <h2>Heights and padding</h2>
 <pre class="r"><code>ht &lt;- ht_orig
 
-row_height(ht) &lt;- c(.2, .1, .1, .1)
+row_height(ht) &lt;- c(.1, .05, .05, .05)
 # top_padding(ht) &lt;- 10
 # bottom_padding(ht) &lt;- 20
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
-<tr style="height: 13.3%;">
+<tr style="height: 8%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Parsley
 </td>
@@ -2105,7 +2115,7 @@ Parsley
 100.00
 </td>
 </tr>
-<tr style="height: 6.7%;">
+<tr style="height: 4%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Sage
 </td>
@@ -2113,7 +2123,7 @@ Sage
 1000.00
 </td>
 </tr>
-<tr style="height: 6.7%;">
+<tr style="height: 4%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Rosemary
 </td>
@@ -2121,7 +2131,7 @@ Rosemary
 10000.00
 </td>
 </tr>
-<tr style="height: 6.7%;">
+<tr style="height: 4%;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Thyme
 </td>

@@ -540,3 +540,54 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)
 
+
+# utility functions
+
+# return formatted contents, suitably escaped
+clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'markdown'), ...) {
+  mytype <- match.arg(type)
+  # stopifnot(length(row) == 1 & length(col) == 1)
+  contents <- ht[[row, col]] # just the data and just one element.
+  # But we might want to allow more than one element; if so just use `[.data.frame`
+  if (! is.na(cnum <- suppressWarnings(as.numeric(contents)))) {
+    nf <- number_format(ht)[[row, col]] # a list element
+    if (is.function(nf)) contents <- nf(cnum)
+    if (is.character(nf)) contents <- sprintf(nf, cnum)
+    if (is.numeric(nf)) contents <- formatC(round(cnum, nf), format = 'f', digits = nf)
+  }
+
+  if (is.na(contents)) contents <- na_string(ht)[row, col]
+  if (escape_contents(ht)[row, col] && type %in% c('latex', 'html')) {
+    # xtable::sanitize.numbers would do very little and is buggy
+    contents <-  xtable::sanitize(contents, type = mytype)
+  }
+
+  contents
+}
+
+# return data frame mapping real cell positions to cells displayed
+display_cells <- function(ht) {
+  dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
+    rowspan = as.vector(rowspan(ht)), colspan = as.vector(colspan(ht)))
+  dcells$display_row <- dcells$row
+  dcells$display_col <- dcells$col
+  dcells$shadowed <- FALSE
+
+  change_cols <- c('display_row', 'display_col', 'rowspan', 'colspan')
+  for (i in 1:nrow(dcells)) {
+    if (dcells$rowspan[i] == 1 && dcells$colspan[i] == 1) next
+    if (dcells$shadowed[i]) next
+
+    dr <- dcells$row[i]
+    dc <- dcells$col[i]
+    spanned <- dcells$row %in% dr:(dr + dcells$rowspan[i] - 1) & dcells$col %in% dc:(dc + dcells$colspan[i] - 1)
+    dcells[spanned, change_cols] <- matrix(as.numeric(dcells[i, change_cols]), sum(spanned), length(change_cols), byrow = TRUE)
+
+    shadowed <- spanned & (1:nrow(dcells)) != i
+    dcells$shadowed[shadowed] <- TRUE
+  }
+  dcells$end_row <- dcells$display_row + dcells$rowspan - 1
+  dcells$end_col <- dcells$display_col + dcells$colspan - 1
+
+  dcells
+}

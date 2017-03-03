@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: null
 ---
 
 
@@ -339,7 +339,7 @@ NB: references may not work if knitting PDFs in Rstudio.
 ```{r}
 ht <- ht_orig
 
-row_height(ht) <- c(.2, .1, .1, .1)
+row_height(ht) <- c(.1, .05, .05, .05)
 # top_padding(ht) <- 10
 # bottom_padding(ht) <- 20
 ht

@@ -99,8 +99,8 @@ build_tabular <- function(ht) {
       dcol <- dcell$display_col
 
       contents <- ''
-      rs <- rowspan(ht)[drow, dcol]
-      end_row <- drow + rs - 1
+      rs <- dcell$rowspan
+      end_row <- dcell$end_row
       bottom_left_multirow <- dcell$shadowed && myrow == end_row && mycol == dcol
       # STRATEGY:
       # - if not a shadowed cell, or if bottom left of a shadowed multirow,
@@ -144,7 +144,7 @@ build_tabular <- function(ht) {
       }
 
       if (mycol == dcol) {
-        cs <- colspan(ht)[drow, dcol]
+        cs <- dcell$colspan
         lcr <- switch(align(ht)[drow, dcol], left   = 'l', right  = 'r', center = 'c')
         # pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', center = 'm')
         # width_spec <- 'This is too hard if we have multicolumn cells...!'
@@ -213,37 +213,37 @@ build_clines_for_row <- function(ht, row) {
   # where a cell is shadowed, we don't want to add a top border (it'll go thru the middle)
   # bottom borders of a shadowed cell are fine, but come from the display cell.
   display_cells <- display_cells(ht)
-  dcells_this_row <- unique(display_cells[display_cells$row == row, c('display_row', 'display_col')])
+  dcells_this_row <- unique(display_cells[display_cells$row == row,])
   this_bottom <- rep(0, ncol(ht))
 
   blank_line_color <- rep(latex_color('white'), ncol(ht)) # white by default, I guess...
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
-    dcell_bottom <- drow + rowspan(ht)[drow, dcol] - 1
-    dcell_right <- dcol + colspan(ht)[drow, dcol] - 1
+    end_row <- dcells_this_row[i, 'end_row']
+    end_col  <- dcells_this_row[i, 'end_col']
     # Print bottom border if we are at bottom of the display cell
-    if (row == dcell_bottom) {
+    if (row == end_row) {
       bb <- bottom_border(ht)[drow, dcol]
-      this_bottom[dcol:dcell_right] <- bb
+      this_bottom[dcol:end_col] <- bb
     }
     # Use color if we are in middle of display cell
-    if (row < dcell_bottom & ! is.na(color <- background_color(ht)[drow, dcol])) {
-      blank_line_color[dcol:dcell_right] <- latex_color(color)
+    if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
+      blank_line_color[dcol:end_col] <- latex_color(color)
     }
   }
   blanks <- paste0('>{\\arrayrulecolor[RGB]{', blank_line_color ,'}}-')
 
-  dcells_next_row <- unique(display_cells[display_cells$row == row + 1, c('display_row', 'display_col')])
+  dcells_next_row <- unique(display_cells[display_cells$row == row + 1, ])
   next_top <- rep(0, ncol(ht))
   for (i in seq_len(nrow(dcells_next_row))) {
     drow <- dcells_next_row[i, 'display_row']
     dcol <- dcells_next_row[i, 'display_col']
+    end_col <- dcells_next_row[i, 'end_col']
     # are we at the top of this dcell? If not...
     if (row + 1 != drow) next
     tb <- top_border(ht)[drow, dcol]
-    cs <- colspan(ht)[drow, dcol]
-    next_top[dcol:(dcol - 1 + cs)] <- tb
+    next_top[dcol:end_col] <- tb
   }
   borders <- pmax(this_bottom, next_top) # the 'collapse' model
 
@@ -281,7 +281,7 @@ compute_vertical_borders <- function (ht, row) {
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
-    right_col <- dcol + colspan(ht)[drow, dcol] # don't deduct 1 because first rbs is always 0
+    right_col <- dcells_this_row[i, 'end_col'] - 1 # first rbs is always 0
     lbs[dcol] <- left_border(ht)[drow, dcol]
     rbs[right_col] <- right_border(ht)[drow, dcol]
   }

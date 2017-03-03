@@ -154,10 +154,8 @@ is_hux <- is_huxtable
   if (any(cut)) warning('Some cells will be cut by subset')
   class(ss) <- class(x)
   for (r in which(cut)) {
-    drow <- dcells$display_row[r]
-    dcol <- dcells$display_col[r]
-    colspan(ss)[drow, dcol] <- min(colspan(ss)[drow, dcol], ncol(ss) - dcol + 1)
-    rowspan(ss)[drow, dcol] <- min(rowspan(ss)[drow, dcol], nrow(ss) - drow + 1)
+    colspan(ss)[drow, dcol] <- min(dcells$colspan[r], ncol(ss) - dcells$display_col[r] + 1)
+    rowspan(ss)[drow, dcol] <- min(dcells$rowspan[r], nrow(ss) - dcells$display_row[r] + 1)
   }
   ss
 }
@@ -388,53 +386,7 @@ knit_print.huxtable <- function (x, options, ...) {
 }
 
 
-to_md <- function(ht, ...) UseMethod('to_md')
 
-
-to_md.huxtable <- function(ht, ...) {
-
-}
-
-
-clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen'), ...) {
-  mytype <- match.arg(type)
-  # stopifnot(length(row) == 1 & length(col) == 1)
-  contents <- ht[[row, col]] # just the data and just one element.
-  # But we might want to allow more than one element; if so just use `[.data.frame`
-  if (! is.na(cnum <- suppressWarnings(as.numeric(contents)))) {
-    nf <- number_format(ht)[[row, col]] # a list element
-    if (is.function(nf)) contents <- nf(cnum)
-    if (is.character(nf)) contents <- sprintf(nf, cnum)
-    if (is.numeric(nf)) contents <- formatC(round(cnum, nf), format = 'f', digits = nf)
-  }
-
-  if (is.na(contents)) contents <- na_string(ht)[row, col]
-  if (escape_contents(ht)[row, col] && type != 'screen') {
-    # xtable::sanitize.numbers would do very little and is buggy
-    contents <-  xtable::sanitize(contents, type = mytype)
-  }
-
-  contents
-}
-
-# return matrix of cells displayed in a real 'cell position'
-display_cells <- function(ht) {
-  spans <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
-        rowspan = as.vector(rowspan(ht)), colspan = as.vector(colspan(ht)))
-  spans$display_row <- spans$row
-  spans$display_col <- spans$col
-  spans$shadowed <- FALSE
-  for (i in 1:nrow(spans)) {
-    if (spans$rowspan[i] == 1 & spans$colspan[i] == 1) next
-    dr <- spans$row[i]
-    dc <- spans$col[i]
-    spanned <- spans$row %in% dr:(dr + spans$rowspan[i] - 1) & spans$col %in% dc:(dc + spans$colspan[i] - 1)
-    spans[spanned, c('display_row', 'display_col')] <- matrix(c(dr, dc), sum(spanned), 2, byrow = TRUE)
-    shadowed <- spanned & (1:nrow(spans)) != i
-    spans$shadowed[shadowed] <- TRUE
-  }
-  spans[, c('row', 'col', 'display_row', 'display_col', 'shadowed')]
-}
 
 
 

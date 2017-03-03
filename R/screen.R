@@ -26,15 +26,13 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 
   dc <- display_cells(ht)
   drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
-  dc$colspan <- colspan(ht)[drow_mat]
-  dc$rowspan <- rowspan(ht)[drow_mat]
   dc$contents <- apply(drow_mat, 1, function(rc) clean_contents(ht, rc[1], rc[2]))
   dc <- dc[order(dc$colspan),]
   border_chars   <- 3
 
   dc$widths <- nchar(dc$contents, type = 'width')
   # each extra row = 2 screen rows including border:
-  dc$widths <- ceiling(dc$widths/(2*dc$rowspan-1))
+  dc$widths <- ceiling(dc$widths/(2 * dc$rowspan - 1))
 
   # widths of actual columns, not including borders
   max_widths <- rep(0, ncol(ht))
@@ -47,7 +45,6 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
   }
 
   charmat         <- matrix(' ', 2 * nrow(ht) + 1, sum(max_widths) + (ncol(ht) + 1) * border_chars)
-  charmat_borders <- matrix(0, nrow(charmat), ncol(charmat))
   border_cells    <- matrix(0, nrow(charmat), ncol(charmat)) # 0 = not a border; 1 = no border; > 1 = border
   corner_cells    <- matrix(FALSE, nrow(charmat), ncol(charmat))
   for (r in 1:nrow(dc)) {
@@ -104,3 +101,12 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 
   result
 }
+
+
+to_md <- function(ht, ...) UseMethod('to_md')
+
+
+to_md.huxtable <- function(ht, ...) {
+  markd
+}
+

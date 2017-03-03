@@ -70,8 +70,8 @@ row_html <- function (ht, rn) {
   }
   res <- paste0('<tr', style ,'>\n')
   cols_to_show <- 1:ncol(ht)
-  display_cells <- display_cells(ht) # speedup: make this call just once in parent
-  cols_to_show <- setdiff(cols_to_show, display_cells$col[display_cells$row == rn & display_cells$shadowed])
+  dcells <- display_cells(ht) # speedup: make this call just once in parent
+  cols_to_show <- setdiff(cols_to_show, dcells$col[dcells$row == rn & dcells$shadowed])
   cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn)
   cells_html <- paste0(cells_html, collapse = '')
   res <- paste0(res, cells_html)
