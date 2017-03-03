@@ -16,6 +16,12 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.
 #'
 #' @export
+#' @family printing functions
+#' @examples
+#' ht <- huxtable(a = 1:5, b = 1:5)
+#' ht <- set_all_borders(ht, 1:5, 1:2, 1)
+#' print_screen(ht)
+#' print_screen(ht, borders = 'neither')
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 
@@ -120,6 +126,8 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @details
 #' Only \code{align} and \code{caption} properties are used. The markdown format is
 #' \code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
+#'
+#' @family printing functions
 #'
 #' @examples
 #' ht <- huxtable(a = 1:5, b = 1:5)

@@ -32,3 +32,7 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 ht <- huxtable(a = 1:5, b = 1:5)
 print_md(ht)
 }
+\seealso{
+Other printing functions: \code{\link{print_html}},
+  \code{\link{print_latex}}, \code{\link{print_screen}}
+}

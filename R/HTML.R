@@ -1,11 +1,20 @@
 
+
+#' @export
+#'
+#' @rdname to_html
+print_html <- function(ht, ...) cat(to_html(ht, ...))
+
+
 #' Create HTML Representing a Huxtable
 #'
 #' @param ht A huxtable.
-#' @param ...
+#' @param ... Arguments to pass to methods. Not currently used.
 #'
 #' @return \code{to_html} returns an HTML string. \code{print_html} prints the string and returns \code{NULL}.
 #' @export
+#'
+#' @family printing functions
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = letters[1:3])
@@ -13,7 +22,8 @@
 to_html <- function (ht, ...) UseMethod('to_html')
 
 #' @export
-to_html.huxtable <- function(ht, ...) {
+#' @rdname to_html
+to_html.huxtable <- function(ht) {
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),
@@ -43,12 +53,6 @@ to_html.huxtable <- function(ht, ...) {
   res
 }
 
-#' @export
-#'
-#' @rdname to_html
-print_html <- function(ht, ...) {
-  cat(to_html(ht, ...))
-}
 
 col_html <- function (ht, cn) {
   col_width <- col_width(ht)[cn]
@@ -57,6 +61,7 @@ col_html <- function (ht, cn) {
   # print out <col>, <colgroup>, that kinda stuff
   res
 }
+
 
 row_html <- function (ht, rn) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>

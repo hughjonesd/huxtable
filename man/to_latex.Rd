@@ -3,16 +3,19 @@
 \name{print_latex}
 \alias{print_latex}
 \alias{to_latex}
+\alias{to_latex.huxtable}
 \title{Create LaTeX Representing a Huxtable}
 \usage{
 print_latex(ht, ...)
 
 to_latex(ht, ...)
+
+\method{to_latex}{huxtable}(ht, tabular_only = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{...}{}
+\item{...}{Arguments to pass to methods.}
 
 \item{tabular_only}{Return only the LaTeX tabular, not the surrounding float.}
 }
@@ -25,4 +28,8 @@ Create LaTeX Representing a Huxtable
 \examples{
 ht <- huxtable(a = 1:3, b = letters[1:3])
 print_latex(ht)
+}
+\seealso{
+Other printing functions: \code{\link{print_html}},
+  \code{\link{print_md}}, \code{\link{print_screen}}
 }

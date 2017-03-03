@@ -29,3 +29,13 @@ Print a Huxtable on Screen
 \details{
 Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.
 }
+\examples{
+ht <- huxtable(a = 1:5, b = 1:5)
+ht <- set_all_borders(ht, 1:5, 1:2, 1)
+print_screen(ht)
+print_screen(ht, borders = 'neither')
+}
+\seealso{
+Other printing functions: \code{\link{print_html}},
+  \code{\link{print_latex}}, \code{\link{print_md}}
+}
