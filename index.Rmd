@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 
 Huxtable is a package for creating HTML and LaTeX tables. It provides similar 
-functionality to xtable, with a simple interface. Here's a quick example.
+functionality to xtable, but does a lot more, with a simpler interface. Here's a quick example.
 
 
 ```{r, echo = TRUE, results = 'asis'}
@@ -35,7 +35,7 @@ Or the same thing with a more dplyr-ish syntax:
 library(huxtable)
 library(dplyr)
 
-ht <- huxtable(a = 1:5, b = letters[1:5]) %>% 
+ht <- hux(a = 1:5, b = letters[1:5]) %>% 
       set_align(1:5, 2, 'right') %>% 
       set_background_color(1:5, 1:2, 'yellow') %>% 
       set_bottom_border(1:5, 1:2, c(1, 0, 0, 0, 1))

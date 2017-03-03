@@ -7,16 +7,16 @@ BUGS
 * border width in LaTeX... not sure fixable.
   - you may be able to set it per row for horiz ones using arrayrulewidth...
 * col_names argument not passing from as_hux to hux
-* collapsing empty cells in HTML; use &nbsp;? but it doesn't always happen...
 
 TODO
 ====
 
+* testing! test examples
+* docs: examples
 * rbind, cbind with copy_attributes parameter to copy attribs (which?) from next door...
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
-* testing! test examples
-* docs: examples
+* declare latex dependencies
 * way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
 * more advanced positioning (floats?)
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
