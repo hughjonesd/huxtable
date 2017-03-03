@@ -620,7 +620,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-99.55
+102.82
 </td>
 </tr>
 <tr>
@@ -628,7 +628,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-1000.44
+998.96
 </td>
 </tr>
 <tr>
@@ -636,7 +636,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-009999.6396
+009999.7818
 </td>
 </tr>
 <tr>
@@ -723,6 +723,57 @@ Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100000.00
+</td>
+</tr>
+</table>
+</div>
+<div id="pipe-style-with-magrittr" class="section level2">
+<h2>Pipe style with magrittr</h2>
+<pre class="r"><code>if (require('magrittr')) {
+ht &lt;- ht_orig
+ht %&gt;% 
+      set_all_borders(1:4, 1:2, 0)            %&gt;% 
+      set_top_border(1, 1:2, 1)               %&gt;% 
+      set_bold(1, 1:2, TRUE)                  %&gt;% 
+      set_background_color(1:4, 1:2, 'wheat') %&gt;% 
+      set_number_format(1:4, 1:2, '%03.1d')   %&gt;% 
+      set_align(1:4, 1, 'left')               %&gt;% 
+      set_align(1:4, 2, 'right')
+}</code></pre>
+<pre><code>## Loading required package: magrittr</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: left; border-width:1px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+<span style="font-weight: bold; ">Parsley</span>
+</td>
+<td style="vertical-align: top; text-align: right; border-width:1px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+<span style="font-weight: bold; ">100</span>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+Sage
+</td>
+<td style="vertical-align: top; text-align: right; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+1000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: right; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+10000
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: right; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
+100000
 </td>
 </tr>
 </table>

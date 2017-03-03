@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: null
 ---
 
 
@@ -166,6 +166,23 @@ ht
 
 ```
 
+## Pipe style with magrittr
+
+```{r}
+
+if (require('magrittr')) {
+ht <- ht_orig
+ht %>% 
+      set_all_borders(1:4, 1:2, 0)            %>% 
+      set_top_border(1, 1:2, 1)               %>% 
+      set_bold(1, 1:2, TRUE)                  %>% 
+      set_background_color(1:4, 1:2, 'wheat') %>% 
+      set_number_format(1:4, 1:2, '%03.1d')   %>% 
+      set_align(1:4, 1, 'left')               %>% 
+      set_align(1:4, 2, 'right')
+}
+
+```
 
 ## Quick themes
 
