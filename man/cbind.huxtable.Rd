@@ -5,14 +5,16 @@
 \alias{rbind.huxtable}
 \title{Add Rows/Columns}
 \usage{
-\method{cbind}{huxtable}(..., deparse.level = 1)
+\method{cbind}{huxtable}(..., deparse.level = 1, copy_cell_props = TRUE)
 
-\method{rbind}{huxtable}(..., deparse.level = 1)
+\method{rbind}{huxtable}(..., deparse.level = 1, copy_cell_props = TRUE)
 }
 \arguments{
 \item{...}{Vectors, matrices, data frames or huxtables.}
 
-\item{deparse.level}{Passed to \code{\link{cbind.data.frame}}}
+\item{deparse.level}{Passed to \code{\link{cbind.data.frame}}.}
+
+\item{copy_cell_props}{Cell properties to copy from neighbours (see below).}
 }
 \value{
 A huxtable.
@@ -21,25 +23,29 @@ A huxtable.
 Add Rows/Columns
 }
 \details{
-Table-level properties will be taken from the first argument. Row-level
-properties will be taken from the first argument to \code{cbind}, and
-column-level properties from the first argument to \code{rbind}.
+Table-level properties will be taken from the first argument which is a huxtable. So will
+row heights (for cbind) and column widths (for rbind).
 
-If the first argument to \code{cbind} is not a \code{huxtable}, then
-\code{cbind.huxtable} will not be called. To avoid this, do e.g.
-\code{cbind(hux(1:5), ht)}.
+If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector,
+then for rbind, cell properties and row heights will be copied to non-huxtables. For cbind,
+cell properties and column widths will be copied. Objects on the left or above get priority
+over those on the right or below.
+
+If \code{copy_cell_props} is \code{TRUE}, the default
+set of cell properties (everything but \code{colspan} and \code{rowspan}) will be copied.
+
+If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the
+default properties.
 }
 \examples{
-ht1 <- hux(a = 1:3, b = 1:3)
-bold(ht1) <- TRUE
-ht2 <- hux(d = letters[1:3])
+ht1 <- hux(a = 1:3, b = 4:6)
+ht2 <- hux(d = letters[1:3], e = letters[4:6])
+bold(ht1)[1,] <- TRUE
+bold(ht2) <- TRUE
 vec <- LETTERS[1:3]
-ht <- cbind(ht1, ht2, vec)
-ht
-bold(ht)
 
-wrong <- cbind(vec, ht)
-bold(wrong) # uh-oh
-right <- cbind(as_hux(vec), ht)
-bold(right)
+ht_out <- cbind(ht1, vec, ht2)
+ht_out
+bold(ht_out)
+bold(cbind(ht1, vec, ht2, copy_cell_props = FALSE))
 }
