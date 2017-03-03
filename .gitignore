@@ -7,3 +7,5 @@
 *.log
 *.dvi
 table-tester.*
+testing-doc.md
+testing-doc.tex

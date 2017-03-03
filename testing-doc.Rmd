@@ -11,15 +11,14 @@ output:
 ---
 
 
-```{r setup, echo = FALSE}
+```{r setup, echo = TRUE}
 knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))
 library(huxtable)
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 
-fbr <- function() if (is_latex) knitr::asis_output('\\FloatBarrier')
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {
-    if (! before) fbr()
+    if (! before && is_latex) knitr::asis_output('\\FloatBarrier')
   }
 )
 knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)

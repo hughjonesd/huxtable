@@ -335,18 +335,10 @@ knit_print.huxtable <- function (x, options, ...) {
   }
 }
 
-#' @export
+
 to_md <- function(ht, ...) UseMethod('to_md')
 
-#' Create Markdown Representing a Huxtable
-#'
-#' @param ht
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
+
 to_md.huxtable <- function(ht, ...) {
 
 }

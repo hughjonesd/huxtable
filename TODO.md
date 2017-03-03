@@ -18,11 +18,11 @@ TODO
 
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
-* testing!
+* testing! test examples
+* docs: examples
 * md method
-* way to set defaults?
+* way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
 * more advanced positioning (floats?)
-* "themes" i.e. standard setups for kinds of tables
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
   - row names?
