@@ -2,19 +2,28 @@
 % Please edit documentation in R/huxtable.R
 \name{add_colnames}
 \alias{add_colnames}
+\alias{add_colnames.huxtable}
 \alias{add_rownames}
+\alias{add_rownames.huxtable}
 \title{Add Column or Row Names}
 \usage{
 add_colnames(ht, ...)
 
+\method{add_colnames}{huxtable}(ht, rowname = NULL)
+
 add_rownames(ht, ...)
+
+\method{add_rownames}{huxtable}(ht, colname = "rownames",
+  preserve_rownames = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
+\item{rowname}{Optional row name for the new row of column names.}
+
 \item{colname}{Column name for the new column of row names.}
 
-\item{rowname}{Optional row name for the new row of column names.}
+\item{preserve_rownames}{Preserve existing row names.}
 }
 \value{
 The modified object.
@@ -23,17 +32,15 @@ The modified object.
 Add a first row of column names, or a first column of row names, to the huxtable.
 }
 \details{
-Column names will still be preserved as \code{colnames(ht)}. Row names will be preserved
-only if they are not automatic (not \code{1:nrow(ht)}), or if \code{rowname} is set.
-
 Note that \code{add_colnames} will change the mode of all columns to character.
+\code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
 }
 \examples{
 ht <- huxtable(a = 1:5, b = 1:5)
 add_rownames(ht)
 add_colnames(ht)
-add_rownames(add_colnames(ht)) # Rownames out by one
+add_rownames(add_colnames(ht)) # Out by 1
 add_colnames(add_rownames(ht)) # Better
-add_rownames(add_colnames(ht, '')) # Best
+add_colnames(add_rownames(ht, '')) # Alternatively
 
 }

@@ -10,8 +10,8 @@ NULL
 #' \code{huxtable}, or \code{hux}, creates a huxtable object.
 #'
 #' @param ... Named list of values, as for \code{\link{data.frame}}.
-#' @param add_colnames If \code{TRUE}, a first row of column names will be added to the huxtable.
-#' @param add_rownames If \code{TRUE}, a first column of row names will be added to the huxtable.
+#' @param add_colnames If \code{TRUE}, add a first row of column names to the huxtable.
+#' @param add_rownames If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.
 #'
 #' @return An object of class \code{huxtable}.
 #' @export
@@ -20,11 +20,7 @@ NULL
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
   ht <- data.frame(..., stringsAsFactors = FALSE)
-  ht <- as_huxtable(ht)
-
-  # order matters here. We want original rownames, not anything else.
-  if (add_colnames) ht <- add_colnames(ht, '')
-  if (add_rownames) ht <- add_rownames(ht)
+  ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
 
   ht
 }
@@ -52,7 +48,8 @@ as_huxtable <- function(x, ...) UseMethod('as_huxtable')
 as_hux <- as_huxtable
 
 #' @export
-as_huxtable.default <- function (x, ...) {
+#' @rdname huxtable
+as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, ...) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, att) <- matrix(NA, nrow(x), ncol(x))
@@ -72,6 +69,10 @@ as_huxtable.default <- function (x, ...) {
   }
 
   class(x) <- c('huxtable', class(x))
+
+  # order matters here. We want original rownames, not anything else.
+  if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE)
+  if (add_colnames) x <- add_colnames(x)
   x
 }
 
@@ -316,14 +317,14 @@ t.huxtable <- function (x) {
 #'
 #' Add a first row of column names, or a first column of row names, to the huxtable.
 #'
-#' Column names will still be preserved as \code{colnames(ht)}. Row names will be preserved
-#' only if they are not automatic (not \code{1:nrow(ht)}), or if \code{rowname} is set.
-#'
 #' Note that \code{add_colnames} will change the mode of all columns to character.
+
+#' \code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
 #'
 #' @param ht A huxtable.
 #' @param colname Column name for the new column of row names.
 #' @param rowname Optional row name for the new row of column names.
+#' @param preserve_rownames Preserve existing row names.
 #'
 #' @return The modified object.
 #' @export
@@ -332,13 +333,14 @@ t.huxtable <- function (x) {
 #' ht <- huxtable(a = 1:5, b = 1:5)
 #' add_rownames(ht)
 #' add_colnames(ht)
-#' add_rownames(add_colnames(ht)) # Rownames out by one
+#' add_rownames(add_colnames(ht)) # Out by 1
 #' add_colnames(add_rownames(ht)) # Better
-#' add_rownames(add_colnames(ht, '')) # Best
+#' add_colnames(add_rownames(ht, '')) # Alternatively
 #'
 add_colnames <- function (ht, ...) UseMethod('add_colnames')
 
 #' @export
+#' @rdname add_colnames
 add_colnames.huxtable <- function (ht, rowname = NULL) {
   cn <- colnames(ht)
   ht <- rbind(cn, ht)
@@ -352,9 +354,11 @@ add_colnames.huxtable <- function (ht, rowname = NULL) {
 add_rownames <- function (ht, ...) UseMethod('add_rownames')
 
 #' @export
-add_rownames.huxtable <- function (ht, colname = 'rownames') {
+#' @rdname add_colnames
+add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE) {
   ht <- cbind(rownames(ht), ht)
   colnames(ht)[1] <- colname
+  if (! preserve_rownames) rownames(ht) <- NULL
   ht
 }
 
