@@ -258,6 +258,9 @@ print(ht)
 
 # Pretty print:
 print_screen(ht)
+
+# Markdown:
+print_md(ht)
 ```
 
 
@@ -356,4 +359,6 @@ colspan(ht)[1,1] <- 2
 ht   
 
 ```
+
+
 

@@ -103,10 +103,86 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 }
 
 
+#' @export
+#' @rdname to_md
+print_md <- function(ht, ...) cat(to_md(ht, ...))
+
+
+#' Create Markdown Representing A Huxtable
+#'
+#' @param ht A huxtable
+#' @param max_width Max width in on-screen characters of the result
+#'
+#' @return \code{to_md} returns a string. \code{print_md} prints the string and returns
+#' \code{NULL}.
+#' @export
+#'
+#' @details
+#' Only \code{align} and \code{caption} properties are used. The markdown format is
+#' \code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
+#'
+#' @examples
+#' ht <- huxtable(a = 1:5, b = 1:5)
+#' print_md(ht)
 to_md <- function(ht, ...) UseMethod('to_md')
 
+#' @export
+#' @rdname to_md
+to_md.huxtable <- function(ht, max_width = 80) {
+  cw <- col_width(ht)
+  if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
+  cw <- floor(cw/sum(cw) * (max_width - ncol(ht) + 1))
+  width <- sum(cw) + ncol(ht) - 1
+  ncharw <- function(x) nchar(x, type = 'width')
+  dcells <- display_cells(ht)
+  if (any(dcells$shadowed)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
+  dcells <- dcells[! dcells$shadowed, ]
+  result <- strrep('-', width)
+  result <- paste0(result, '\n')
+  dcells$contents <- sapply(1:nrow(dcells), function (x) {
+    clean_contents(ht, dcells[x, 'display_row'], dcells[x, 'display_col'], 'markdown')
+  })
 
-to_md.huxtable <- function(ht, ...) {
-  markd
+  align <- align(ht)
+  if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
+        warning("Can't vary column alignment in markdown; using first row")
+  align <- align[1,]
+
+  # for every row:
+  #   print the first cw characters of display cells in that row
+  #   if there are any left over, start a new row
+  for (myrow in 1:nrow(ht)) {
+    row_chars <- rep('', ncol(ht))
+    dcr <- dcells[dcells$display_row == myrow,]
+    row_chars[ dcr$display_col ] <- dcr$contents
+    while(any(ncharw(row_chars) > 0)) {
+      for (i in 1:ncol(ht)) {
+        chunk <- substring(row_chars[i], 1, cw[i])
+        if ((extra <- cw[i] - ncharw(chunk)) > 0) {
+          chunk <- switch(align[i],
+            left = paste0(chunk, strrep(' ', extra)),
+            center = paste0(strrep(' ', floor(extra/2)), chunk, strrep(' ', ceiling(extra/2))),
+            right = paste0(strrep(' ', extra), chunk)
+          )
+        }
+        result <- paste0(result, chunk)
+        row_chars[i] <- substring(row_chars[i], cw[i] + 1)
+        result <- paste0(result, ' ')
+      }
+      result <- paste0(result, '\n')
+    }
+    if (myrow == 1) {
+      dash_row <- paste(strrep('-', cw), collapse = " ")
+      result <- paste0(result, dash_row, '\n')
+    } else {
+      result <- paste0(result, '\n') # extra blank line for row
+    }
+  }
+  result <- paste0(result, strrep('-', width), '\n')
+  if (! is.na(cap <- caption(ht))) result <- paste0(result, 'Table: ', cap, '\n')
+  result <- paste0(result, '\n')
+  result
 }
+
+
 
