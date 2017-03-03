@@ -1,4 +1,17 @@
 
+#' Huxtable: Simply Create LaTeX and HTML Tables
+#'
+#' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
+#' functionality to xtable, with a simpler interface.
+#'
+#' @details
+#'
+#' To create a huxtable object, use \code{\link{huxtable}} or \code{\link{as_huxtable}}.
+#'
+#' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website}.
+#' @name huxtable-package
+NULL
+
 #' @import knitr
 #' @import rmarkdown
 #' @import xtable
@@ -368,17 +381,9 @@ knit_print.huxtable <- function (x, options, ...) {
   call_name <- switch(of, pdf_document = 'to_latex', html_document = 'to_html', 'print')
   res <- do.call(call_name, list(ht=x))
   if (of == 'pdf_document') {
-    latex_deps <- list(
-            rmarkdown::latex_dependency('array'),
-            rmarkdown::latex_dependency('graphicx'),
-            rmarkdown::latex_dependency('siunitx'),
-            rmarkdown::latex_dependency('xcolor', options = 'table'),
-            rmarkdown::latex_dependency('multirow'),
-            rmarkdown::latex_dependency('hhline'),
-            rmarkdown::latex_dependency('calc')
-          )
+    latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
-    if (tenv %in% c('tabularx', 'tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
+    if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
   } else {
     return(knitr::asis_output(res))

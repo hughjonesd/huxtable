@@ -11,10 +11,12 @@ print_latex <- function (ht, ...) {
 #'
 #' @param ht A huxtable.
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
-#' @param ...
+#' @param ... Arguments to pass to methods.
 #'
 #' @return \code{to_latex} returns a string. \code{print_latex} prints the string and returns \code{NULL}.
 #' @export
+#'
+#' @family printing functions
 #'
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
@@ -22,7 +24,8 @@ print_latex <- function (ht, ...) {
 to_latex <- function (ht, ...) UseMethod('to_latex')
 
 #' @export
-to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
+#' @rdname to_latex
+to_latex.huxtable <- function (ht, tabular_only = FALSE){
   res <- build_tabular(ht)
   if (tabular_only) return(res)
 
@@ -48,6 +51,44 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- paste0('\\begin{table}[h]\n', res, '\\end{table}\n')
 
   return(res)
+}
+
+
+huxtable_latex_dependencies <- list(
+  rmarkdown::latex_dependency('array'),
+  rmarkdown::latex_dependency('graphicx'),
+  rmarkdown::latex_dependency('siunitx'),
+  rmarkdown::latex_dependency('xcolor', options = 'table'),
+  rmarkdown::latex_dependency('multirow'),
+  rmarkdown::latex_dependency('hhline'),
+  rmarkdown::latex_dependency('calc'),
+  rmarkdown::latex_dependency('tabularx')
+)
+
+#' Report LaTeX Dependencies
+#'
+#' Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
+#'
+#' @param quiet Suppress printing.
+#'
+#' @return A list of rmarkdown::latex_dependency objects, invisibly.
+#' @export
+#'
+#' @examples
+#' report_latex_dependencies()
+#'
+report_latex_dependencies <- function(quiet = FALSE) {
+  if (! quiet) {
+    report <- sapply(huxtable_latex_dependencies, function(ld) {
+      str <- paste0('\\usepackage{', ld$name, '}')
+      if (! is.null(ld$options)) {
+        str <- paste0(str, '[', paste(ld$options, collapse = ','), ']')
+      }
+      paste0(str, '\n')
+    })
+    cat(paste0(report, collapse = ''))
+  }
+  invisible((huxtable_latex_dependencies))
 }
 
 build_tabular <- function(ht) {
