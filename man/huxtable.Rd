@@ -9,9 +9,9 @@
 \alias{is_hux}
 \title{Create a Huxtable}
 \usage{
-huxtable(..., col_names = FALSE, row_names = FALSE)
+huxtable(..., add_colnames = FALSE, add_rownames = FALSE)
 
-hux(..., col_names = FALSE, row_names = FALSE)
+hux(..., add_colnames = FALSE, add_rownames = FALSE)
 
 as_huxtable(x, ...)
 
@@ -24,9 +24,9 @@ is_hux(x)
 \arguments{
 \item{...}{Named list of values, as for \code{\link{data.frame}}.}
 
-\item{col_names}{If \code{TRUE}, a first row of column names will be added to the huxtable.}
+\item{add_colnames}{If \code{TRUE}, a first row of column names will be added to the huxtable.}
 
-\item{row_names}{If \code{TRUE}, a first column of row names, named "rownames", will be added to the huxtable.}
+\item{add_rownames}{If \code{TRUE}, a first column of row names will be added to the huxtable.}
 
 \item{x}{An object to convert to a huxtable.}
 }
