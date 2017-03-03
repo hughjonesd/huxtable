@@ -87,7 +87,9 @@ report_latex_dependencies <- function(quiet = FALSE) {
       paste0(str, '\n')
     })
     cat(paste0(report, collapse = ''))
+    cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary)')
   }
+
   invisible((huxtable_latex_dependencies))
 }
 

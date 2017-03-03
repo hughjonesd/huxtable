@@ -16,7 +16,6 @@ TODO
 * rbind, cbind with copy_attributes parameter to copy attribs (which?) from next door...
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
-* declare latex dependencies
 * way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
 * more advanced positioning (floats?)
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
