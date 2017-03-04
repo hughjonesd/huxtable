@@ -149,8 +149,8 @@ is_hux <- is_huxtable
 #' ht[1:2,]
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   ss <- as.data.frame(unclass(x), stringsAsFactors = FALSE)[i, j, drop]
-  if (! missing(i) && is.character(i)) i <- which(rownames(ht) %in% i)
-  if (! missing(j) && is.character(j)) j <- which(colnames(ht) %in% j)
+  if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
+  if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
   for (att in huxtable_cell_attrs) {
     attr(ss, att) <- attr(x, att)[i, j, drop = drop]
   }
@@ -170,9 +170,13 @@ is_hux <- is_huxtable
   if (any(cut)) warning('Some cells will be cut by subset')
   class(ss) <- class(x)
   for (r in which(cut)) {
-    colspan(ss)[drow, dcol] <- min(dcells$colspan[r], ncol(ss) - dcells$display_col[r] + 1)
-    rowspan(ss)[drow, dcol] <- min(dcells$rowspan[r], nrow(ss) - dcells$display_row[r] + 1)
+    dcr <- dcells[r,]
+    if (all(dim(ss) >= c(dcr$row, dcr$col))) {
+      colspan(ss)[dcr$row, dcr$col] <- min(dcr$colspan, 1 + ncol(ss) - dcr$display_col)
+      rowspan(ss)[dcr$row, dcr$col] <- min(dcr$rowspan, 1 + nrow(ss) - dcr$display_row)
+    }
   }
+
   ss
 }
 
@@ -193,8 +197,8 @@ is_hux <- is_huxtable
 `[<-.huxtable` <- function(x, i, j, value) {
   if (! is_huxtable(value)) return(NextMethod())
 
-  if (! missing(i) && is.character(i)) i <- which(rownames(ht) %in% i)
-  if (! missing(j) && is.character(j)) j <- which(colnames(ht) %in% j)
+  if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
+  if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
   for (att in huxtable_cell_attrs) {
     attr(x, att)[i, j] <- attr(value, att)
   }
@@ -254,12 +258,14 @@ cbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
   bind_hux(..., type = 'cbind', copy_cell_props = copy_cell_props)
 }
 
+
 #' @export
 #' @rdname cbind.huxtable
 rbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
   force(copy_cell_props)
   bind_hux(..., type = 'rbind', copy_cell_props = copy_cell_props)
 }
+
 
 bind_hux <- function(..., type, copy_cell_props) {
   default_copy_attrs <- setdiff(huxtable_cell_attrs, c('colspan', 'rowspan'))
@@ -288,6 +294,7 @@ bind_hux <- function(..., type, copy_cell_props) {
   attr(res, 'from_real_hux') <- NULL
   res
 }
+
 
 bind2_hux <- function(ht, x, type, copy_cell_props) {
   ht_real_hux <- attr(ht, 'from_real_hux')
@@ -329,6 +336,7 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
   attr(res, 'from_real_hux') <- x_real_hux || ht_real_hux
   res
 }
+
 
 #' Transpose a Huxtable
 #'
@@ -384,6 +392,7 @@ t.huxtable <- function (x) {
 #' @param colname Column name for the new column of row names.
 #' @param rowname Optional row name for the new row of column names.
 #' @param preserve_rownames Preserve existing row names.
+#' @param ... Arguments passed to methods.
 #'
 #' @return The modified object.
 #' @export
