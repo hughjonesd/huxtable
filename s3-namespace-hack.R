@@ -9,7 +9,7 @@ register_s3_exports <- function() {
 
   for (attr in c(huxtable:::huxtable_cell_attrs, huxtable:::huxtable_col_attrs,
         huxtable:::huxtable_row_attrs, huxtable:::huxtable_table_attrs)) {
-    s3s <- c(attr, paste0('"', attr, '<-"'), paste0('set_', attr))
+    s3s <- c(attr, paste0('"', attr, '<-"'))
 
 
     f <- function (x) ! any(grepl(paste('S3method(', x), nsl, fixed = TRUE))
