@@ -4,6 +4,8 @@
 \alias{right_border}
 \alias{right_border<-}
 \alias{set_right_border}
+\alias{right_border.huxtable}
+\alias{right_border<-.huxtable}
 \title{Get or Set Right Border}
 \usage{
 right_border(ht)
@@ -22,6 +24,9 @@ set_right_border(ht, row, col, value)
 \value{
 For \code{right_border}, the \code{right_border} attribute.
 For \code{set_right_border}, the \code{ht} object.
+}
+\description{
+Functions to get or set the right border property of huxtable table cells.
 }
 \seealso{
 Other borders: \code{\link{bottom_border}},

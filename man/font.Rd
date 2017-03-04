@@ -4,6 +4,8 @@
 \alias{font}
 \alias{font<-}
 \alias{set_font}
+\alias{font.huxtable}
+\alias{font<-.huxtable}
 \title{Get or Set Font}
 \usage{
 font(ht)
@@ -22,6 +24,9 @@ set_font(ht, row, col, value)
 \value{
 For \code{font}, the \code{font} attribute.
 For \code{set_font}, the \code{ht} object.
+}
+\description{
+Functions to get or set the font property of huxtable table cells.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

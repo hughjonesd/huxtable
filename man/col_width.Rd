@@ -4,6 +4,8 @@
 \alias{col_width}
 \alias{col_width<-}
 \alias{set_col_width}
+\alias{col_width.huxtable}
+\alias{col_width<-.huxtable}
 \title{Get or Set Column Widths}
 \usage{
 col_width(ht)
@@ -20,6 +22,9 @@ set_col_width(ht, col, value)
 \value{
 For \code{col_width}, the \code{col_width} attribute.
 For \code{set_col_width}, the \code{ht} object.
+}
+\description{
+Functions to get or set the column widths property of huxtable cols.
 }
 \seealso{
 Other row/column heights: \code{\link{row_height}}

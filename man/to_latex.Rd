@@ -10,7 +10,7 @@ print_latex(ht, ...)
 
 to_latex(ht, ...)
 
-\method{to_latex}{huxtable}(ht, tabular_only = FALSE)
+\method{to_latex}{huxtable}(ht, tabular_only = FALSE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

@@ -19,6 +19,8 @@ add_rownames(ht, ...)
 \arguments{
 \item{ht}{A huxtable.}
 
+\item{...}{Arguments passed to methods.}
+
 \item{rowname}{Optional row name for the new row of column names.}
 
 \item{colname}{Column name for the new column of row names.}

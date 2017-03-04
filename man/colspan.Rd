@@ -4,6 +4,8 @@
 \alias{colspan}
 \alias{colspan<-}
 \alias{set_colspan}
+\alias{colspan.huxtable}
+\alias{colspan<-.huxtable}
 \title{Get or Set Column Span}
 \usage{
 colspan(ht)
@@ -22,4 +24,7 @@ set_colspan(ht, row, col, value)
 \value{
 For \code{colspan}, the \code{colspan} attribute.
 For \code{set_colspan}, the \code{ht} object.
+}
+\description{
+Functions to get or set the column span property of huxtable table cells.
 }

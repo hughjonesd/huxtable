@@ -4,6 +4,8 @@
 \alias{text_color}
 \alias{text_color<-}
 \alias{set_text_color}
+\alias{text_color.huxtable}
+\alias{text_color<-.huxtable}
 \title{Get or Set Cell Text Color}
 \usage{
 text_color(ht)
@@ -22,6 +24,9 @@ set_text_color(ht, row, col, value)
 \value{
 For \code{text_color}, the \code{text_color} attribute.
 For \code{set_text_color}, the \code{ht} object.
+}
+\description{
+Functions to get or set the cell text color property of huxtable table cells.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

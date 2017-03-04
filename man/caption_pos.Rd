@@ -4,6 +4,8 @@
 \alias{caption_pos}
 \alias{caption_pos<-}
 \alias{set_caption_pos}
+\alias{caption_pos.huxtable}
+\alias{caption_pos<-.huxtable}
 \title{Get or Set Caption Position}
 \usage{
 caption_pos(ht)
@@ -18,6 +20,9 @@ set_caption_pos(ht, value)
 \value{
 For \code{caption_pos}, the \code{caption_pos} attribute.
 For \code{set_caption_pos}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level caption position property of a huxtable.
 }
 \seealso{
 \code{\link{caption}}

@@ -4,6 +4,8 @@
 \alias{left_border}
 \alias{left_border<-}
 \alias{set_left_border}
+\alias{left_border.huxtable}
+\alias{left_border<-.huxtable}
 \title{Get or Set Left Border}
 \usage{
 left_border(ht)
@@ -22,6 +24,9 @@ set_left_border(ht, row, col, value)
 \value{
 For \code{left_border}, the \code{left_border} attribute.
 For \code{set_left_border}, the \code{ht} object.
+}
+\description{
+Functions to get or set the left border property of huxtable table cells.
 }
 \seealso{
 Other borders: \code{\link{bottom_border}},

@@ -4,6 +4,8 @@
 \alias{width}
 \alias{width<-}
 \alias{set_width}
+\alias{width.huxtable}
+\alias{width<-.huxtable}
 \title{Get or Set Table Width}
 \usage{
 width(ht)
@@ -18,6 +20,9 @@ set_width(ht, value)
 \value{
 For \code{width}, the \code{width} attribute.
 For \code{set_width}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level table width property of a huxtable.
 }
 \seealso{
 Other table measurements: \code{\link{height}}

@@ -4,6 +4,8 @@
 \alias{label}
 \alias{label<-}
 \alias{set_label}
+\alias{label.huxtable}
+\alias{label<-.huxtable}
 \title{Get or Set Table Label}
 \usage{
 label(ht)
@@ -18,4 +20,7 @@ set_label(ht, value)
 \value{
 For \code{label}, the \code{label} attribute.
 For \code{set_label}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level table label property of a huxtable.
 }

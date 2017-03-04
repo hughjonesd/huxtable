@@ -4,6 +4,8 @@
 \alias{top_border}
 \alias{top_border<-}
 \alias{set_top_border}
+\alias{top_border.huxtable}
+\alias{top_border<-.huxtable}
 \title{Get or Set Top Border}
 \usage{
 top_border(ht)
@@ -22,6 +24,9 @@ set_top_border(ht, row, col, value)
 \value{
 For \code{top_border}, the \code{top_border} attribute.
 For \code{set_top_border}, the \code{ht} object.
+}
+\description{
+Functions to get or set the top border property of huxtable table cells.
 }
 \seealso{
 Other borders: \code{\link{bottom_border}},

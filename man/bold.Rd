@@ -4,6 +4,25 @@
 \alias{bold}
 \alias{bold<-}
 \alias{set_bold}
+\alias{bold.huxtable}
+\alias{bold<-.huxtable}
+\alias{italic}
+\alias{italic<-}
+\alias{set_italic}
+\alias{italic.huxtable}
+\alias{italic<-.huxtable}
+\alias{italic<-<-}
+\alias{set_italic<-}
+\alias{italic.huxtable<-}
+\alias{italic<-.huxtable<-}
+\alias{set_italic.huxtable}
+\alias{italic.huxtable.huxtable}
+\alias{italic<-.huxtable.huxtable}
+\alias{italic<-<-.huxtable}
+\alias{set_italic<-.huxtable}
+\alias{italic.huxtable<-.huxtable}
+\alias{italic<-.huxtable<-.huxtable}
+\alias{set_set_italic}
 \alias{italic}
 \title{Get or Set Bold or Italic Cell Text}
 \usage{
@@ -27,6 +46,9 @@ set_italic(ht, row, col, value)
 \value{
 For \code{bold}, the \code{bold} attribute.
 For \code{set_bold}, the \code{ht} object.
+}
+\description{
+Functions to get or set the bold or italic cell text property of huxtable table cells.
 }
 \seealso{
 Other formatting functions: \code{\link{font_size}},

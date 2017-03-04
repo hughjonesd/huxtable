@@ -4,6 +4,8 @@
 \alias{align}
 \alias{align<-}
 \alias{set_align}
+\alias{align.huxtable}
+\alias{align<-.huxtable}
 \title{Get or Set Alignment}
 \usage{
 align(ht)
@@ -22,4 +24,7 @@ set_align(ht, row, col, value)
 \value{
 For \code{align}, the \code{align} attribute.
 For \code{set_align}, the \code{ht} object.
+}
+\description{
+Functions to get or set the alignment property of huxtable table cells.
 }

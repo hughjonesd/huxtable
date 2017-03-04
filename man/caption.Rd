@@ -4,6 +4,8 @@
 \alias{caption}
 \alias{caption<-}
 \alias{set_caption}
+\alias{caption.huxtable}
+\alias{caption<-.huxtable}
 \title{Get or Set Caption}
 \usage{
 caption(ht)
@@ -18,6 +20,9 @@ set_caption(ht, value)
 \value{
 For \code{caption}, the \code{caption} attribute.
 For \code{set_caption}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level caption property of a huxtable.
 }
 \seealso{
 \code{\link{caption_pos}}

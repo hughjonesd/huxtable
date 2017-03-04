@@ -13,9 +13,11 @@ to_md(ht, ...)
 \method{to_md}{huxtable}(ht, max_width = 80, ...)
 }
 \arguments{
-\item{ht}{A huxtable}
+\item{ht}{A huxtable.}
 
-\item{max_width}{Max width in on-screen characters of the result}
+\item{...}{Arguments passed to methods.}
+
+\item{max_width}{Max width in on-screen characters of the result.}
 }
 \value{
 \code{to_md} returns a string. \code{print_md} prints the string and returns

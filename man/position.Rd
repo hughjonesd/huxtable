@@ -4,6 +4,8 @@
 \alias{position}
 \alias{position<-}
 \alias{set_position}
+\alias{position.huxtable}
+\alias{position<-.huxtable}
 \title{Get or Set Table Position}
 \usage{
 position(ht)
@@ -18,4 +20,7 @@ set_position(ht, value)
 \value{
 For \code{position}, the \code{position} attribute.
 For \code{set_position}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level table position property of a huxtable.
 }

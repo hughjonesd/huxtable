@@ -4,6 +4,8 @@
 \alias{font_size}
 \alias{font_size<-}
 \alias{set_font_size}
+\alias{font_size.huxtable}
+\alias{font_size<-.huxtable}
 \title{Get or Set Font Size}
 \usage{
 font_size(ht)
@@ -22,6 +24,9 @@ set_font_size(ht, row, col, value)
 \value{
 For \code{font_size}, the \code{font_size} attribute.
 For \code{set_font_size}, the \code{ht} object.
+}
+\description{
+Functions to get or set the font size property of huxtable table cells.
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

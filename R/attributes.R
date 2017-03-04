@@ -252,10 +252,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value) UseMethod('set_all_borders')
-
-#' @export
-set_all_borders.huxtable <- function(ht, row, col, value) {
+set_all_borders <- function(ht, row, col, value) {
   top_border(ht)[row, col] <- value
   bottom_border(ht)[row, col] <- value
   left_border(ht)[row, col] <- value
@@ -264,53 +261,49 @@ set_all_borders.huxtable <- function(ht, row, col, value) {
 }
 
 
-#' @name padding
+#' @name left_padding
 #' @template getset-cell
 #' @templateVar attr_name left_padding
 #' @templateVar attr_desc Cell Padding
 #' @templateVar value_param_desc
 #' A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
-#' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable set_left_padding.huxtable
+#' @templateVar morealiases right_padding top_padding bottom_padding right_padding<-
+#' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
 
 
-#' @name left_padding
-#' @rdname padding
-#' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable set_left_padding.huxtable
-NULL
-
 #' @name right_padding
-#' @rdname padding
+#' @rdname left_padding
 #' @return Similarly for the other functions.
 #' @usage
 #' right_padding(ht)
 #' right_padding(ht) <- value
 #' set_right_padding(ht, row, col, value)
-#' @export right_padding right_padding<- set_right_padding right_padding.huxtable right_padding<-.huxtable set_right_padding.huxtable
+#' @export right_padding right_padding<- set_right_padding right_padding.huxtable right_padding<-.huxtable
 NULL
 
 #' @name bottom_padding
-#' @rdname padding
+#' @rdname left_padding
 #' @usage
 #' bottom_padding(ht)
 #' bottom_padding(ht) <- value
 #' set_bottom_padding(ht, row, col, value)
-#' @export bottom_padding bottom_padding<- set_bottom_padding bottom_padding.huxtable bottom_padding<-.huxtable set_bottom_padding.huxtable
-NULL
-
-#' @name top_padding
-#' @rdname padding
-#' @usage
-#' top_padding(ht)
-#' top_padding(ht) <- value
-#' set_top_padding(ht, row, col, value)
-#' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable set_top_padding.huxtable
+#' @export bottom_padding bottom_padding<- set_bottom_padding bottom_padding.huxtable bottom_padding<-.huxtable
 NULL
 
 #' @name top_padding
 #' @rdname left_padding
-#' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable set_top_padding.huxtable
+#' @usage
+#' top_padding(ht)
+#' top_padding(ht) <- value
+#' set_top_padding(ht, row, col, value)
+#' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
+NULL
+
+#' @name top_padding
+#' @rdname left_padding
+#' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
 NULL
 
 
@@ -367,7 +360,8 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar value_param_desc
 #' A logical vector or matrix
 #' @family formatting functions
-#' @export bold bold<- set_bold bold.huxtable bold<-.huxtable set_bold.huxtable
+#' @templateVar morealiases italic italic<- set_italic italic.huxtable italic<-.huxtable
+#' @export bold bold<- set_bold bold.huxtable bold<-.huxtable
 NULL
 make_getter_setters('bold', 'cell', check_fun = is.logical)
 
@@ -378,7 +372,7 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' italic(ht)
 #' italic(ht) <- value
 #' set_italic(ht, row, col, value)
-#' @export italic italic<- set_italic italic.huxtable italic<-.huxtable set_italic.huxtable
+#' @export italic italic<- set_italic italic.huxtable italic<-.huxtable
 NULL
 make_getter_setters('italic', 'cell', check_fun = is.logical)
 
@@ -389,7 +383,7 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' @templateVar value_param_desc
 #' A numeric vector. This sets the font size in points.
 #' @family formatting functions
-#' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable set_font_size.huxtable
+#' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable
 NULL
 make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 
@@ -399,7 +393,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' @templateVar attr_desc Cell Text Rotation
 #' @templateVar value_param_desc
 #' A numeric vector. 0 is normal direction, 90 is going up, etc.
-#' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable set_rotation.huxtable
+#' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable
 NULL
 make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 

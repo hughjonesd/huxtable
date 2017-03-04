@@ -4,6 +4,8 @@
 \alias{escape_contents}
 \alias{escape_contents<-}
 \alias{set_escape_contents}
+\alias{escape_contents.huxtable}
+\alias{escape_contents<-.huxtable}
 \title{Get or Set Whether to Escape Cell Contents}
 \usage{
 escape_contents(ht)
@@ -22,4 +24,7 @@ set_escape_contents(ht, row, col, value)
 \value{
 For \code{escape_contents}, the \code{escape_contents} attribute.
 For \code{set_escape_contents}, the \code{ht} object.
+}
+\description{
+Functions to get or set the whether to escape cell contents property of huxtable table cells.
 }

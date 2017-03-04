@@ -4,6 +4,8 @@
 \alias{rotation}
 \alias{rotation<-}
 \alias{set_rotation}
+\alias{rotation.huxtable}
+\alias{rotation<-.huxtable}
 \title{Get or Set Cell Text Rotation}
 \usage{
 rotation(ht)
@@ -22,4 +24,7 @@ set_rotation(ht, row, col, value)
 \value{
 For \code{rotation}, the \code{rotation} attribute.
 For \code{set_rotation}, the \code{ht} object.
+}
+\description{
+Functions to get or set the cell text rotation property of huxtable table cells.
 }

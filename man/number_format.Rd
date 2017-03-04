@@ -4,6 +4,8 @@
 \alias{number_format}
 \alias{number_format<-}
 \alias{set_number_format}
+\alias{number_format.huxtable}
+\alias{number_format<-.huxtable}
 \title{Get or Set Number Format}
 \usage{
 number_format(ht)
@@ -23,6 +25,9 @@ set_number_format(ht, row, col, value)
 For \code{number_format}, the \code{number_format} attribute.
 For \code{set_number_format}, the \code{ht} object.
 }
+\description{
+Functions to get or set the number format property of huxtable table cells.
+}
 \details{
 If \code{value} is numeric, numbers will be rounded to that many digits. If \code{value} is
 character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
@@ -37,8 +42,7 @@ number_format(ht)[1,] <- 2
 number_format(ht)[2,] <- '\%5.2f'
 number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
 number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
-
-ht
+print_screen(ht)
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

@@ -4,6 +4,8 @@
 \alias{row_height}
 \alias{row_height<-}
 \alias{set_row_height}
+\alias{row_height.huxtable}
+\alias{row_height<-.huxtable}
 \title{Get or Set Row Heights}
 \usage{
 row_height(ht)
@@ -20,6 +22,9 @@ set_row_height(ht, row, value)
 \value{
 For \code{row_height}, the \code{row_height} attribute.
 For \code{set_row_height}, the \code{ht} object.
+}
+\description{
+Functions to get or set the row heights property of huxtable rows.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are

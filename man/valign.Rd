@@ -4,6 +4,8 @@
 \alias{valign}
 \alias{valign<-}
 \alias{set_valign}
+\alias{valign.huxtable}
+\alias{valign<-.huxtable}
 \title{Get or Set Vertical Alignment}
 \usage{
 valign(ht)
@@ -22,4 +24,7 @@ set_valign(ht, row, col, value)
 \value{
 For \code{valign}, the \code{valign} attribute.
 For \code{set_valign}, the \code{ht} object.
+}
+\description{
+Functions to get or set the vertical alignment property of huxtable table cells.
 }

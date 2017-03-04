@@ -4,6 +4,8 @@
 \alias{rowspan}
 \alias{rowspan<-}
 \alias{set_rowspan}
+\alias{rowspan.huxtable}
+\alias{rowspan<-.huxtable}
 \title{Get or Set Row Span}
 \usage{
 rowspan(ht)
@@ -22,4 +24,7 @@ set_rowspan(ht, row, col, value)
 \value{
 For \code{rowspan}, the \code{rowspan} attribute.
 For \code{set_rowspan}, the \code{ht} object.
+}
+\description{
+Functions to get or set the row span property of huxtable table cells.
 }

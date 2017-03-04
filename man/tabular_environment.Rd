@@ -4,6 +4,8 @@
 \alias{tabular_environment}
 \alias{tabular_environment<-}
 \alias{set_tabular_environment}
+\alias{tabular_environment.huxtable}
+\alias{tabular_environment<-.huxtable}
 \title{Get or Set Tabular Environment}
 \usage{
 tabular_environment(ht)
@@ -18,6 +20,9 @@ set_tabular_environment(ht, value)
 \value{
 For \code{tabular_environment}, the \code{tabular_environment} attribute.
 For \code{set_tabular_environment}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level tabular environment property of a huxtable.
 }
 \details{
 Not all features are guaranteed to work if you set this to a non-default value.

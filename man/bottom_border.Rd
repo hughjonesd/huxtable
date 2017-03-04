@@ -4,6 +4,8 @@
 \alias{bottom_border}
 \alias{bottom_border<-}
 \alias{set_bottom_border}
+\alias{bottom_border.huxtable}
+\alias{bottom_border<-.huxtable}
 \title{Get or Set Bottom Border}
 \usage{
 bottom_border(ht)
@@ -22,6 +24,9 @@ set_bottom_border(ht, row, col, value)
 \value{
 For \code{bottom_border}, the \code{bottom_border} attribute.
 For \code{set_bottom_border}, the \code{ht} object.
+}
+\description{
+Functions to get or set the bottom border property of huxtable table cells.
 }
 \seealso{
 Other borders: \code{\link{left_border}},

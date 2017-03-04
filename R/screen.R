@@ -116,8 +116,9 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 
 #' Create Markdown Representing A Huxtable
 #'
-#' @param ht A huxtable
-#' @param max_width Max width in on-screen characters of the result
+#' @param ht        A huxtable.
+#' @param max_width Max width in on-screen characters of the result.
+#' @param ...       Arguments passed to methods.
 #'
 #' @return \code{to_md} returns a string. \code{print_md} prints the string and returns
 #' \code{NULL}.

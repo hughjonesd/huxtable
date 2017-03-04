@@ -4,6 +4,8 @@
 \alias{height}
 \alias{height<-}
 \alias{set_height}
+\alias{height.huxtable}
+\alias{height<-.huxtable}
 \title{Get or Set Table Height}
 \usage{
 height(ht)
@@ -18,6 +20,9 @@ set_height(ht, value)
 \value{
 For \code{height}, the \code{height} attribute.
 For \code{set_height}, the \code{ht} object.
+}
+\description{
+Functions to get or set the table-level table height property of a huxtable.
 }
 \seealso{
 Other table measurements: \code{\link{width}}
