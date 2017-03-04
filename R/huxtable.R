@@ -15,6 +15,9 @@ NULL
 #' @import knitr
 #' @import rmarkdown
 #' @import xtable
+#' @import stats
+#' @import grDevices
+#'
 NULL
 
 
