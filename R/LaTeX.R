@@ -25,7 +25,7 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 
 #' @export
 #' @rdname to_latex
-to_latex.huxtable <- function (ht, tabular_only = FALSE){
+to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- build_tabular(ht)
   if (tabular_only) return(res)
 
