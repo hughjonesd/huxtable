@@ -11,8 +11,13 @@ BUGS
 TODO
 ====
 
-* testing! test examples
-* docs: examples
+* testing!
+  - examples
+  - huge X by X table of features for corner cases!
+  - think about further tests...
+* docs: 
+  - examples (some via template)
+  - vignette
 * would be nice to have default align set for numeric cells? But problematic if we guess cell-by-cell.
   - could guess on table creation? But it's a bit DWIM
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?

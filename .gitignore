@@ -9,3 +9,4 @@
 table-tester.*
 testing-doc.md
 testing-doc.tex
+tests/testthat/*.rds
