@@ -3,15 +3,15 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: null
 ---
 
 
-```{r setup, echo = TRUE}
+```{r setup, echo = FALSE}
 knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))
 library(huxtable)
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
@@ -36,12 +36,16 @@ ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
 
-## Table position
+
+## Borders
 
 ```{r}
 ht <- ht_orig
-position(ht) <- 'left'
+ht <- set_all_borders(ht, 1:4, 1:2, 0)
+top_border(ht) <- c(2, 0, 0, 1)
+bottom_border(ht)[4,] <- 2 
 ht
+
 ```
 
 ## Cell alignment
@@ -57,7 +61,9 @@ ht
 
 ```{r}
 ht <- ht_orig
+row_height(ht) <- '50pt'
 valign(ht)[,1] <- 'top'
+valign(ht)[,2] <- 'bottom'
 ht
 
 ```
@@ -84,7 +90,13 @@ ht
 
 ```
 
+## Table position
 
+```{r}
+ht <- ht_orig
+position(ht) <- 'left'
+ht
+```
 
 ## Table width
 
@@ -115,18 +127,6 @@ ht
 
 ```
 
-## Borders
-
-```{r}
-ht <- ht_orig
-ht <- set_all_borders(ht, 1:4, 1:2, 0)
-top_border(ht) <- c(2, 0, 0, 1)
-bottom_border(ht)[4,] <- 2 
-ht
-
-```
-
-
 ## Text color, bold, italic, font size
 
 ```{r}
@@ -140,7 +140,6 @@ ht
 
 ```
 
-
 ## Number formatting
 
 ```{r}
@@ -153,7 +152,6 @@ number_format(ht)[4,] <- list(function(x) prettyNum(round(x, 3), big.mark = ',')
 ht
 
 ```
-
 
 ## Replace NAs
 
@@ -280,7 +278,6 @@ print_screen(ht)
 print_md(ht)
 ```
 
-
 ## Padding
 
 ```{r}
@@ -305,7 +302,6 @@ rotation(ht)[,1] <- 90
 ht
 
 ```
-
 
 ## Border width
 

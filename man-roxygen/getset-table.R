@@ -16,3 +16,4 @@
 #' @aliases <%= attr_name %><- set_<%= attr_name %>
 #' @name <%= attr_name %>
 
+

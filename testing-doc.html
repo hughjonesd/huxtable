@@ -123,16 +123,6 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))</code></pre>
-<pre class="r"><code>library(huxtable)
-is_latex &lt;- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
-
-knitr::knit_hooks$set(
-  barrier = function(before, options, envir) {
-    if (! before &amp;&amp; is_latex) knitr::asis_output('\\FloatBarrier')
-  }
-)
-knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)</code></pre>
 <div id="basic-usage" class="section level1">
 <h1>Basic usage</h1>
 <div id="creating-a-huxtable" class="section level2">
@@ -178,43 +168,45 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="table-position" class="section level2">
-<h2>Table position</h2>
+<div id="borders" class="section level2">
+<h2>Borders</h2>
 <pre class="r"><code>ht &lt;- ht_orig
-position(ht) &lt;- 'left'
+ht &lt;- set_all_borders(ht, 1:4, 1:2, 0)
+top_border(ht) &lt;- c(2, 0, 0, 1)
+bottom_border(ht)[4,] &lt;- 2 
 ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: 0%;">
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Parsley
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100.00
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
 Sage
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
 1000.00
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
 Rosemary
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
 10000.00
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Thyme
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100000.00
 </td>
 </tr>
@@ -265,40 +257,42 @@ Thyme
 <div id="vertical-alignment" class="section level2">
 <h2>Vertical alignment</h2>
 <pre class="r"><code>ht &lt;- ht_orig
+row_height(ht) &lt;- '50pt'
 valign(ht)[,1] &lt;- 'top'
+valign(ht)[,2] &lt;- 'bottom'
 ht</code></pre>
 <table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
-<tr>
+<tr style="height: 50pt;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Parsley
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: bottom; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100.00
 </td>
 </tr>
-<tr>
+<tr style="height: 50pt;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Sage
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: bottom; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 1000.00
 </td>
 </tr>
-<tr>
+<tr style="height: 50pt;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Rosemary
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: bottom; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 10000.00
 </td>
 </tr>
-<tr>
+<tr style="height: 50pt;">
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Thyme
 </td>
-<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: bottom; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 100000.00
 </td>
 </tr>
@@ -363,6 +357,48 @@ A rather long block of text
 </td>
 </tr>
 <tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+1000.00
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Rosemary
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+10000.00
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Thyme
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+100000.00
+</td>
+</tr>
+</table>
+</div>
+<div id="table-position" class="section level2">
+<h2>Table position</h2>
+<pre class="r"><code>ht &lt;- ht_orig
+position(ht) &lt;- 'left'
+ht</code></pre>
+<table class="huxtable" style="width: 25%; margin-left: 0%;">
+<col style="width: NA;">
+<col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Parsley
+</td>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+100.00
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Sage
+</td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
 1000.00
 </td>
@@ -513,50 +549,6 @@ Thyme
 </tr>
 </table>
 </div>
-<div id="borders" class="section level2">
-<h2>Borders</h2>
-<pre class="r"><code>ht &lt;- ht_orig
-ht &lt;- set_all_borders(ht, 1:4, 1:2, 0)
-top_border(ht) &lt;- c(2, 0, 0, 1)
-bottom_border(ht)[4,] &lt;- 2 
-ht</code></pre>
-<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;">
-<col style="width: NA;">
-<tr>
-<td style="vertical-align: top; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-Parsley
-</td>
-<td style="vertical-align: top; text-align: center; border-width:2px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-100.00
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
-Sage
-</td>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
-1000.00
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
-Rosemary
-</td>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
-10000.00
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-Thyme
-</td>
-<td style="vertical-align: top; text-align: center; border-width:1px 0px 2px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-100000.00
-</td>
-</tr>
-</table>
-</div>
 <div id="text-color-bold-italic-font-size" class="section level2">
 <h2>Text color, bold, italic, font size</h2>
 <pre class="r"><code>ht &lt;- ht_orig
@@ -620,7 +612,7 @@ ht</code></pre>
 Parsley
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-102.82
+99.22
 </td>
 </tr>
 <tr>
@@ -628,7 +620,7 @@ Parsley
 Sage
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-998.96
+1001.85
 </td>
 </tr>
 <tr>
@@ -636,7 +628,7 @@ Sage
 Rosemary
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-009999.7818
+010000.2162
 </td>
 </tr>
 <tr>
@@ -644,7 +636,7 @@ Rosemary
 Thyme
 </td>
 <td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; ">
-100,000.1
+99,999.38
 </td>
 </tr>
 </table>
@@ -783,7 +775,7 @@ Thyme
 <pre class="r"><code>ht &lt;- ht_orig
 ht &lt;- rbind(c(&quot;Herb&quot;, &quot;Amount&quot;), ht)
 theme_minimal(ht)</code></pre>
-<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
@@ -828,7 +820,7 @@ Thyme
 </tr>
 </table>
 <pre class="r"><code>theme_striped(ht, header_col = FALSE)</code></pre>
-<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
@@ -873,7 +865,7 @@ Thyme
 </tr>
 </table>
 <pre class="r"><code>theme_article(ht)</code></pre>
-<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
@@ -1723,14 +1715,14 @@ Thyme
 </tr>
 </table>
 <pre class="r"><code>rbind(c(&quot;Oregano&quot;, 300), ht)</code></pre>
-<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="width: 25%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
 <tr>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
 Oregano
 </td>
-<td style="vertical-align: top; text-align: center; padding: 4px 4px 4px 4px; ">
+<td style="vertical-align: top; text-align: center; border-width:1px 1px 1px 1px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(245, 222, 179); ">
 300.00
 </td>
 </tr>
