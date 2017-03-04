@@ -11,7 +11,7 @@ print_screen(ht, ...)
 to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, borders = c("both", "horizontal", "vertical",
-  "neither"))
+  "neither"), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

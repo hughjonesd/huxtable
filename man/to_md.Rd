@@ -10,7 +10,7 @@ print_md(ht, ...)
 
 to_md(ht, ...)
 
-\method{to_md}{huxtable}(ht, max_width = 80)
+\method{to_md}{huxtable}(ht, max_width = 80, ...)
 }
 \arguments{
 \item{ht}{A huxtable}

@@ -397,7 +397,7 @@ add_colnames <- function (ht, ...) UseMethod('add_colnames')
 
 #' @export
 #' @rdname add_colnames
-add_colnames.huxtable <- function (ht, rowname = NULL) {
+add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
   cn <- colnames(ht)
   ht <- rbind(cn, ht)
   colnames(ht) <- cn
@@ -411,7 +411,7 @@ add_rownames <- function (ht, ...) UseMethod('add_rownames')
 
 #' @export
 #' @rdname add_colnames
-add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE) {
+add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE, ...) {
   ht <- cbind(rownames(ht), ht)
   colnames(ht)[1] <- colname
   if (! preserve_rownames) rownames(ht) <- NULL
@@ -434,6 +434,8 @@ knit_print.huxtable <- function (x, options, ...) {
     return(knitr::asis_output(res))
   }
 }
+
+
 
 
 

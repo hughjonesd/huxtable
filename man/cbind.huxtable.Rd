@@ -48,4 +48,5 @@ ht_out <- cbind(ht1, vec, ht2)
 ht_out
 bold(ht_out)
 bold(cbind(ht1, vec, ht2, copy_cell_props = FALSE))
+
 }

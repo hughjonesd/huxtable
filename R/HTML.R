@@ -23,7 +23,7 @@ to_html <- function (ht, ...) UseMethod('to_html')
 
 #' @export
 #' @rdname to_html
-to_html.huxtable <- function(ht) {
+to_html.huxtable <- function(ht, ...) {
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),

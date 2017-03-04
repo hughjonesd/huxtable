@@ -27,7 +27,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither')) {
+to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), ...) {
   borders <- match.arg(borders)
 
   dc <- display_cells(ht)
@@ -136,7 +136,7 @@ to_md <- function(ht, ...) UseMethod('to_md')
 
 #' @export
 #' @rdname to_md
-to_md.huxtable <- function(ht, max_width = 80) {
+to_md.huxtable <- function(ht, max_width = 80, ...) {
   cw <- col_width(ht)
   if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
   cw <- floor(cw/sum(cw) * (max_width - ncol(ht) + 1))

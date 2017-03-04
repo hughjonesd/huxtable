@@ -10,7 +10,7 @@ print_html(ht, ...)
 
 to_html(ht, ...)
 
-\method{to_html}{huxtable}(ht)
+\method{to_html}{huxtable}(ht, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

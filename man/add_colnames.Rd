@@ -9,12 +9,12 @@
 \usage{
 add_colnames(ht, ...)
 
-\method{add_colnames}{huxtable}(ht, rowname = NULL)
+\method{add_colnames}{huxtable}(ht, rowname = NULL, ...)
 
 add_rownames(ht, ...)
 
 \method{add_rownames}{huxtable}(ht, colname = "rownames",
-  preserve_rownames = TRUE)
+  preserve_rownames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
