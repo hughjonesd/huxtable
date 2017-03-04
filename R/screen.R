@@ -9,6 +9,7 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param ht A huxtable.
 #' @param ... Passed on to \code{to_screen}.
 #' @param borders Print horizontal borders, vertical borders, both or neither. May be abbreviated.
+#' @param blank   Character to print for cell divisions with no border
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 #'
@@ -21,13 +22,14 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' ht <- huxtable(a = 1:5, b = 1:5)
 #' ht <- set_all_borders(ht, 1:5, 1:2, 1)
 #' print_screen(ht)
+#' print_screen(ht, blank = '+')
 #' print_screen(ht, borders = 'neither')
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), ...) {
+to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = ' ', ...) {
   borders <- match.arg(borders)
 
   dc <- display_cells(ht)
@@ -80,7 +82,7 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
       char_row <- char_row + 1
     }
 
-    bdr_idx_cols <- (start_char - 1):(start_char + total_width + 1)
+    bdr_idx_cols <- (start_char - 1):(start_char + total_width + 2)
     border_cells[drow * 2 - 1, bdr_idx_cols] <- pmax(border_cells[drow * 2 - 1, bdr_idx_cols],
       1 + top_border(ht)[drow, dcol])
     border_cells[end_row * 2 + 1, bdr_idx_cols] <- pmax(border_cells[end_row * 2 + 1, bdr_idx_cols],
@@ -90,11 +92,11 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
         1 + left_border(ht)[drow, dcol])
     border_cells[(drow * 2):(end_row * 2), start_char + total_width + 2] <-
       pmax(border_cells[(drow * 2):(end_row * 2), start_char + total_width + 2],
-        1 + left_border(ht)[drow, dcol])
+        1 + right_border(ht)[drow, dcol])
     corner_cells[drow * 2 + c(-1, 1), c(start_char - 1, start_char + total_width + 2)] <- TRUE
   }
 
-  charmat[border_cells > 0] <- ' '
+  charmat[border_cells > 0] <- blank
   if (borders %in% c('both', 'horizontal')) charmat[border_cells > 1 & row(charmat) %% 2]   <- '-'
   if (borders %in% c('both', 'vertical'))   charmat[border_cells > 1 & ! row(charmat) %% 2] <- '|'
   if (borders == 'vertical') charmat[border_cells > 1 & row(charmat) %% 2 & corner_cells] <- '|'
