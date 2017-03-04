@@ -13,10 +13,10 @@ TODO
 
 * testing! test examples
 * docs: examples
-* rbind, cbind with copy_attributes parameter to copy attribs (which?) from next door...
+* would be nice to have default align set for numeric cells? But problematic if we guess cell-by-cell.
+  - could guess on table creation? But it's a bit DWIM
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
-* way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
 * more advanced positioning (floats?)
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
@@ -44,7 +44,8 @@ PUT OFF
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
-  
+* way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
+
 QUESTIONS
 =========
 do we want to have a concept of 'headers' for repetition? Cf. longtable,  <th>
