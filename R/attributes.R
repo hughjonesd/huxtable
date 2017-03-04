@@ -124,6 +124,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #' @templateVar attr_name valign
 #' @templateVar attr_desc Vertical Alignment
 #' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
+#' @template getset-example
+#' @templateVar attr_val 'top'
 #' @export valign valign<- set_valign valign.huxtable valign<-.huxtable
 NULL
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
@@ -132,6 +134,8 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 #' @templateVar attr_name align
 #' @templateVar attr_desc Alignment
 #' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.
+#' @template getset-example
+#' @templateVar attr_val 'right'
 #' @export align align<- set_align align.huxtable align<-.huxtable
 NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
@@ -142,6 +146,9 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 #' @templateVar attr_desc Column Widths
 #' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.
 #' @family row/column heights
+#' @template getset-example
+#' @templateVar attr_val c(.2, .8)
+#' @templateVar extra print_screen(ht)
 #' @export col_width col_width<- set_col_width col_width.huxtable col_width<-.huxtable
 NULL
 make_getter_setters('col_width', 'col')
@@ -156,6 +163,8 @@ make_getter_setters('col_width', 'col')
 #' @details
 #' If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
 #' treated as proportions of the text height (\\textheight).
+#' @template getset-example
+#' @templateVar attr_val c(.2, .1, .1)
 #' @export row_height row_height<- set_row_height row_height.huxtable row_height<-.huxtable
 NULL
 make_getter_setters('row_height', 'row')
@@ -164,6 +173,10 @@ make_getter_setters('row_height', 'row')
 #' @templateVar attr_name rowspan
 #' @templateVar attr_desc Row Span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
+#' @template getset-example
+#' @templateVar subscript [1, 1]
+#' @templateVar attr_val 2
+#' @templateVar extra print_screen(ht, blank = '.')
 #' @export rowspan rowspan<- set_rowspan rowspan.huxtable rowspan<-.huxtable
 NULL
 make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
@@ -174,6 +187,10 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
 #' @templateVar attr_name colspan
 #' @templateVar attr_desc Column Span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
+#' @template getset-example
+#' @templateVar subscript [1, 1]
+#' @templateVar attr_val 2
+#' @templateVar extra print_screen(ht, blank = '.')
 #' @export colspan colspan<- set_colspan colspan.huxtable colspan<-.huxtable
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
@@ -185,6 +202,9 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
 #' @templateVar attr_name background_color
 #' @templateVar attr_desc Cell Background Color
 #' @templateVar value_param_desc A vector or matrix of R colors.
+#' @template getset-example
+#' @templateVar attr_val grey(.95)
+#' @family formatting functions
 #' @export background_color background_color<- set_background_color background_color.huxtable background_color<-.huxtable
 NULL
 make_getter_setters('background_color', 'cell')
@@ -193,8 +213,10 @@ make_getter_setters('background_color', 'cell')
 #' @templateVar attr_name text_color
 #' @templateVar attr_desc Cell Text Color
 #' @templateVar value_param_desc A vector or matrix of R colors.
-#' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val 'navy'
 #' @family formatting functions
+#' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable
 NULL
 make_getter_setters('text_color', 'cell')
 
@@ -202,40 +224,49 @@ make_getter_setters('text_color', 'cell')
 #' @template getset-cell
 #' @templateVar attr_name left_border
 #' @templateVar attr_desc Left Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
-#' border.
-#' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @template getset-example
+#' @templateVar attr_val 1
+#' @templateVar extra print_screen(ht)
 #' @family borders
+#' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable
 NULL
 make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 
 #' @template getset-cell
 #' @templateVar attr_name right_border
 #' @templateVar attr_desc Right Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
-#' border.
-#' @export right_border right_border<- set_right_border right_border.huxtable right_border<-.huxtable
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @template getset-example
+#' @templateVar attr_val 1
+#' @templateVar extra print_screen(ht)
 #' @family borders
+#' @export right_border right_border<- set_right_border right_border.huxtable right_border<-.huxtable
 NULL
 make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 
 #' @template getset-cell
 #' @templateVar attr_name top_border
 #' @templateVar attr_desc Top Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no
-#' border.
-#' @export top_border top_border<- set_top_border top_border.huxtable top_border<-.huxtable
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @template getset-example
+#' @templateVar attr_val 1
+#' @templateVar extra print_screen(ht)
 #' @family borders
+#' @export top_border top_border<- set_top_border top_border.huxtable top_border<-.huxtable
 NULL
 make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 
 #' @template getset-cell
 #' @templateVar attr_name bottom_border
 #' @templateVar attr_desc Bottom Border
-#' @templateVar value_param_desc
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @template getset-example
+#' @templateVar attr_val 1
+#' @templateVar extra print_screen(ht)
 #' A numeric vector or matrix giving border widths. Set to 0 for no border.
-#' @export bottom_border bottom_border<- set_bottom_border bottom_border.huxtable bottom_border<-.huxtable
 #' @family borders
+#' @export bottom_border bottom_border<- set_bottom_border bottom_border.huxtable bottom_border<-.huxtable
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 
@@ -268,6 +299,8 @@ set_all_borders <- function(ht, row, col, value) {
 #' @templateVar value_param_desc
 #' A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
 #' @templateVar morealiases right_padding top_padding bottom_padding right_padding<-
+#' @template getset-example
+#' @templateVar attr_val 20
 #' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
@@ -301,11 +334,6 @@ NULL
 #' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
 NULL
 
-#' @name top_padding
-#' @rdname left_padding
-#' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
-NULL
-
 
 #' Set All Padding
 #'
@@ -332,12 +360,15 @@ set_all_padding.huxtable <- function(ht, row, col, value) {
 }
 
 
-
 #' @template getset-cell
 #' @templateVar attr_name escape_contents
 #' @templateVar attr_desc Whether to Escape Cell Contents
 #' @templateVar value_param_desc
 #' A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTex escaped.
+#' @examples
+#' ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
+#' escape_contents(ht)[,2] <- FALSE
+#'
 #' @export escape_contents escape_contents<- set_escape_contents escape_contents.huxtable escape_contents<-.huxtable
 NULL
 make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
@@ -348,8 +379,11 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @templateVar attr_desc String to Use For NA
 #' @templateVar value_param_desc
 #' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
-#' @export na_string na_string<- set_na_string na_string.huxtable na_string<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val '--'
+#' @templateVar extra print_screen(ht)
 #' @family formatting functions
+#' @export na_string na_string<- set_na_string na_string.huxtable na_string<-.huxtable
 NULL
 make_getter_setters('na_string', 'cell', check_fun = is.character)
 
@@ -359,8 +393,11 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar attr_desc Bold or Italic Cell Text
 #' @templateVar value_param_desc
 #' A logical vector or matrix
-#' @family formatting functions
 #' @templateVar morealiases italic italic<- set_italic italic.huxtable italic<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val TRUE
+#' @templateVar extra print_screen(ht)
+#' @family formatting functions
 #' @export bold bold<- set_bold bold.huxtable bold<-.huxtable
 NULL
 make_getter_setters('bold', 'cell', check_fun = is.logical)
@@ -382,6 +419,8 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' @templateVar attr_desc Font Size
 #' @templateVar value_param_desc
 #' A numeric vector. This sets the font size in points.
+#' @template getset-example
+#' @templateVar attr_val 14
 #' @family formatting functions
 #' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable
 NULL
@@ -393,6 +432,11 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' @templateVar attr_desc Cell Text Rotation
 #' @templateVar value_param_desc
 #' A numeric vector. 0 is normal direction, 90 is going up, etc.
+#' @template getset-example
+#' @templateVar attr_val 90
+#' @details
+#' You will likely need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
+#' to achieve a nice result, in both HTML and LaTeX.
 #' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable
 NULL
 make_getter_setters('rotation', 'cell', check_fun = is.numeric)
@@ -404,7 +448,7 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' A vector or list which may be character, numeric or function. See below.
 #'
 #' @details
-#' If \code{value} is numeric, numbers will be rounded to that many digits. If \code{value} is
+#' If \code{value} is numeric, numbers will be rounded to that many decimal places.  If \code{value} is
 #' character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
 #' function it will be applied to the cell contents.
 #' Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(a = c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
@@ -438,8 +482,10 @@ make_getter_setters('number_format', 'cell')
 #' @templateVar attr_desc Font
 #' @templateVar value_param_desc
 #' A character vector of font names. NB that LaTeX and HTML use different font names.
-#' @export font font<- set_font font.huxtable font<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val 'times'
 #' @family formatting functions
+#' @export font font<- set_font font.huxtable font<-.huxtable
 NULL
 make_getter_setters('font', 'cell', check_fun = is.character)
 
@@ -449,6 +495,8 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 #' @templateVar attr_desc Table Position
 #' @templateVar value_param_desc
 #' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
+#' @template getset-example
+#' @templateVar attr_val 'right'
 #' @export position position<- set_position position.huxtable position<-.huxtable
 NULL
 make_getter_setters('position', 'table', check_values = c('left', 'center', 'right'))
@@ -457,7 +505,9 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption Position
 #' @templateVar value_param_desc
-#' A length-one character vector which can be 'top', 'bottom' or \code{NA}.
+#' A length-one character vector which can be 'top', 'bottom' or \code{NA} for the default.
+#' @template getset-example
+#' @templateVar attr_val 'top'
 #' @export tabular_environment tabular_environment<- set_tabular_environment tabular_environment.huxtable tabular_environment<-.huxtable
 #' @seealso \code{\link{caption}}
 NULL
@@ -469,9 +519,10 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
 #' @templateVar attr_desc Table Width
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default.
-#'
-#' @export width width<- set_width width.huxtable width<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val 0.8
 #' @family table measurements
+#' @export width width<- set_width width.huxtable width<-.huxtable
 NULL
 make_getter_setters('width', 'table')
 
@@ -481,9 +532,10 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_desc Table Height
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.
-#'
-#' @export height height<- set_height height.huxtable height<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val 0.4
 #' @family table measurements
+#' @export height height<- set_height height.huxtable height<-.huxtable
 NULL
 make_getter_setters('height', 'table')
 
@@ -493,6 +545,9 @@ make_getter_setters('height', 'table')
 #' @templateVar value_param_desc
 #' A length-one character vector. Set to \code{NA} for no caption.
 #' @export caption caption<- set_caption caption.huxtable caption<-.huxtable
+#' @template getset-example
+#' @templateVar attr_val 'An example table'
+#' @templateVar extra print_screen(ht, blank = '.')
 #' @seealso \code{\link{caption_pos}}
 NULL
 make_getter_setters('caption', 'table', check_fun = is.character)
@@ -503,8 +558,10 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @templateVar attr_desc Tabular Environment
 #' @templateVar value_param_desc
 #' A length-one character vector. Set to \code{NA} for the default, 'tabularx'.
+#' @template getset-example
+#' @templateVar attr_val 'longtable'
+#' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
 #' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable
-#' @details Not all features are guaranteed to work if you set this to a non-default value.
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 
@@ -514,6 +571,8 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @templateVar attr_desc Table Label
 #' @templateVar value_param_desc
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.
+#' @template getset-example
+#' @templateVar attr_val 'tab:mytable'
 #' @export label label<- set_label label.huxtable label<-.huxtable
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)

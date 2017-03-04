@@ -46,7 +46,7 @@ ht[1:2,] # generates a warning
 }
 ht <- huxtable(a = 1:3, b = 1:3)
 ht2 <- huxtable(10:11, 12:13)
-bold(ht2) <- FALSE
+bold(ht2) <- TRUE
 ht[2:3,] <- ht2
 ht
 bold(ht)

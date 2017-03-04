@@ -349,7 +349,6 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
 #' @param x A huxtable.
 #'
 #' @return The transposed object.
-#' @export
 #'
 #' @details
 #' Row and column spans of \code{x} will be swapped, as will column widths and row heights,
@@ -359,8 +358,9 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' bottom_border(ht)[3,] <- 1
-#' ht_trans <- t(ht)
-#' ht_trans
+#' t(ht)
+#'
+#' @export
 t.huxtable <- function (x) {
   res <- as_hux(NextMethod())
   for (att in setdiff(huxtable_cell_attrs, c('colspan', 'rowspan', 'height', 'width',
@@ -401,7 +401,6 @@ t.huxtable <- function (x) {
 #' @param ... Arguments passed to methods.
 #'
 #' @return The modified object.
-#' @export
 #'
 #' @examples
 #' ht <- huxtable(a = 1:5, b = 1:5)
@@ -411,6 +410,7 @@ t.huxtable <- function (x) {
 #' add_colnames(add_rownames(ht)) # Better
 #' add_colnames(add_rownames(ht, '')) # Alternatively
 #'
+#' @export
 add_colnames <- function (ht, ...) UseMethod('add_colnames')
 
 #' @export

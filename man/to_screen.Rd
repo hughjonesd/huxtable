@@ -11,7 +11,7 @@ print_screen(ht, ...)
 to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, borders = c("both", "horizontal", "vertical",
-  "neither"), ...)
+  "neither"), blank = " ", ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -19,6 +19,8 @@ to_screen(ht, ...)
 \item{...}{Passed on to \code{to_screen}.}
 
 \item{borders}{Print horizontal borders, vertical borders, both or neither. May be abbreviated.}
+
+\item{blank}{Character to print for cell divisions with no border}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
@@ -30,10 +32,13 @@ Print a Huxtable on Screen
 Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.
 }
 \examples{
-ht <- huxtable(a = 1:5, b = 1:5)
-ht <- set_all_borders(ht, 1:5, 1:2, 1)
+ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
+ht <- set_all_borders(ht, 1:6, 1:2, 1)
+right_border(ht)[,1] <- left_border(ht)[,2] <- 0
+align(ht)[1,] <- 'center'
 print_screen(ht)
-print_screen(ht, borders = 'neither')
+print_screen(ht, blank = '.')
+print_screen(ht, borders = 'horiz')
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},

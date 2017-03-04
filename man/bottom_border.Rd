@@ -28,6 +28,13 @@ For \code{set_bottom_border}, the \code{ht} object.
 \description{
 Functions to get or set the bottom border property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+bottom_border(ht) <-  1
+bottom_border(ht)
+print_screen(ht)
+}
 \seealso{
 Other borders: \code{\link{left_border}},
   \code{\link{right_border}}, \code{\link{top_border}}

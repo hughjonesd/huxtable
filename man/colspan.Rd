@@ -28,3 +28,10 @@ For \code{set_colspan}, the \code{ht} object.
 \description{
 Functions to get or set the column span property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+colspan(ht)[1, 1] <-  2
+colspan(ht)
+print_screen(ht, blank = '.')
+}

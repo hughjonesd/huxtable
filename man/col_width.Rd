@@ -26,6 +26,13 @@ For \code{set_col_width}, the \code{ht} object.
 \description{
 Functions to get or set the column widths property of huxtable cols.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+col_width(ht) <-  c(.2, .8)
+col_width(ht)
+print_screen(ht)
+}
 \seealso{
 Other row/column heights: \code{\link{row_height}}
 }

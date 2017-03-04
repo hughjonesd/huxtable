@@ -28,8 +28,16 @@ For \code{set_text_color}, the \code{ht} object.
 \description{
 Functions to get or set the cell text color property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+text_color(ht) <-  'navy'
+text_color(ht)
+
+}
 \seealso{
-Other formatting functions: \code{\link{bold}},
-  \code{\link{font_size}}, \code{\link{font}},
-  \code{\link{na_string}}, \code{\link{number_format}}
+Other formatting functions: \code{\link{background_color}},
+  \code{\link{bold}}, \code{\link{font_size}},
+  \code{\link{font}}, \code{\link{na_string}},
+  \code{\link{number_format}}
 }

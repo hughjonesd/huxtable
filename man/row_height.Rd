@@ -30,6 +30,13 @@ Functions to get or set the row heights property of huxtable rows.
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
 treated as proportions of the text height (\\textheight).
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+row_height(ht) <-  c(.2, .1, .1)
+row_height(ht)
+
+}
 \seealso{
 Other row/column heights: \code{\link{col_width}}
 }

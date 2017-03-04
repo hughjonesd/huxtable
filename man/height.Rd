@@ -24,6 +24,13 @@ For \code{set_height}, the \code{ht} object.
 \description{
 Functions to get or set the table-level table height property of a huxtable.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+height(ht) <-  0.4
+height(ht)
+
+}
 \seealso{
 Other table measurements: \code{\link{width}}
 }

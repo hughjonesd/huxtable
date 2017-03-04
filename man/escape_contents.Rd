@@ -28,3 +28,8 @@ For \code{set_escape_contents}, the \code{ht} object.
 \description{
 Functions to get or set the whether to escape cell contents property of huxtable table cells.
 }
+\examples{
+ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
+escape_contents(ht)[,2] <- FALSE
+
+}

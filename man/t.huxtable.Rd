@@ -24,6 +24,6 @@ preserved.
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
 bottom_border(ht)[3,] <- 1
-ht_trans <- t(ht)
-ht_trans
+t(ht)
+
 }

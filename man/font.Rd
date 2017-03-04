@@ -28,8 +28,16 @@ For \code{set_font}, the \code{ht} object.
 \description{
 Functions to get or set the font property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+font(ht) <-  'times'
+font(ht)
+
+}
 \seealso{
-Other formatting functions: \code{\link{bold}},
-  \code{\link{font_size}}, \code{\link{na_string}},
-  \code{\link{number_format}}, \code{\link{text_color}}
+Other formatting functions: \code{\link{background_color}},
+  \code{\link{bold}}, \code{\link{font_size}},
+  \code{\link{na_string}}, \code{\link{number_format}},
+  \code{\link{text_color}}
 }

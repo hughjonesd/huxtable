@@ -15,7 +15,7 @@ set_caption_pos(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector which can be 'top', 'bottom' or \code{NA}.}
+\item{value}{A length-one character vector which can be 'top', 'bottom' or \code{NA} for the default.}
 }
 \value{
 For \code{caption_pos}, the \code{caption_pos} attribute.
@@ -23,6 +23,13 @@ For \code{set_caption_pos}, the \code{ht} object.
 }
 \description{
 Functions to get or set the table-level caption position property of a huxtable.
+}
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+caption_pos(ht) <-  'top'
+caption_pos(ht)
+
 }
 \seealso{
 \code{\link{caption}}

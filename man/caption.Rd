@@ -24,6 +24,13 @@ For \code{set_caption}, the \code{ht} object.
 \description{
 Functions to get or set the table-level caption property of a huxtable.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+caption(ht) <-  'An example table'
+caption(ht)
+print_screen(ht, blank = '.')
+}
 \seealso{
 \code{\link{caption_pos}}
 }

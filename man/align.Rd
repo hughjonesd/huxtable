@@ -28,3 +28,10 @@ For \code{set_align}, the \code{ht} object.
 \description{
 Functions to get or set the alignment property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+align(ht) <-  'right'
+align(ht)
+
+}

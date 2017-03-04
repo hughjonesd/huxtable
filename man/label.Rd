@@ -24,3 +24,10 @@ For \code{set_label}, the \code{ht} object.
 \description{
 Functions to get or set the table-level table label property of a huxtable.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+label(ht) <-  'tab:mytable'
+label(ht)
+
+}

@@ -13,7 +13,7 @@ set_all_borders(ht, row, col, value)
 
 \item{col}{A column specifier.}
 
-\item{value}{A numeric vector or matrix giving border widths. Set to 0 for no}
+\item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
 }
 \value{
 The modified `ht` object.

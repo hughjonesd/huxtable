@@ -28,3 +28,10 @@ For \code{set_valign}, the \code{ht} object.
 \description{
 Functions to get or set the vertical alignment property of huxtable table cells.
 }
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+valign(ht) <-  'top'
+valign(ht)
+
+}

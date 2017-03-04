@@ -19,11 +19,13 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @export
 #' @family printing functions
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 1:5)
-#' ht <- set_all_borders(ht, 1:5, 1:2, 1)
+#' ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
+#' ht <- set_all_borders(ht, 1:6, 1:2, 1)
+#' right_border(ht)[,1] <- left_border(ht)[,2] <- 0
+#' align(ht)[1,] <- 'center'
 #' print_screen(ht)
-#' print_screen(ht, blank = '+')
-#' print_screen(ht, borders = 'neither')
+#' print_screen(ht, blank = '.')
+#' print_screen(ht, borders = 'horiz')
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 

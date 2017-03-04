@@ -29,7 +29,7 @@ For \code{set_number_format}, the \code{ht} object.
 Functions to get or set the number format property of huxtable table cells.
 }
 \details{
-If \code{value} is numeric, numbers will be rounded to that many digits. If \code{value} is
+If \code{value} is numeric, numbers will be rounded to that many decimal places.  If \code{value} is
 character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
 function it will be applied to the cell contents.
 Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(a = c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
@@ -45,7 +45,8 @@ number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
 print_screen(ht)
 }
 \seealso{
-Other formatting functions: \code{\link{bold}},
-  \code{\link{font_size}}, \code{\link{font}},
-  \code{\link{na_string}}, \code{\link{text_color}}
+Other formatting functions: \code{\link{background_color}},
+  \code{\link{bold}}, \code{\link{font_size}},
+  \code{\link{font}}, \code{\link{na_string}},
+  \code{\link{text_color}}
 }

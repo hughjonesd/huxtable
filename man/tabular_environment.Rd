@@ -25,5 +25,12 @@ For \code{set_tabular_environment}, the \code{ht} object.
 Functions to get or set the table-level tabular environment property of a huxtable.
 }
 \details{
-Not all features are guaranteed to work if you set this to a non-default value.
+No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
+}
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+tabular_environment(ht) <-  'longtable'
+tabular_environment(ht)
+
 }

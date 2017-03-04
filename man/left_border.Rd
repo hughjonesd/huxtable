@@ -15,7 +15,7 @@ set_left_border(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector or matrix giving border widths. Set to 0 for no}
+\item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier.}
 
@@ -27,6 +27,13 @@ For \code{set_left_border}, the \code{ht} object.
 }
 \description{
 Functions to get or set the left border property of huxtable table cells.
+}
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+left_border(ht) <-  1
+left_border(ht)
+print_screen(ht)
 }
 \seealso{
 Other borders: \code{\link{bottom_border}},

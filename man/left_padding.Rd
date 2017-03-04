@@ -27,7 +27,6 @@
 \alias{right_padding}
 \alias{bottom_padding}
 \alias{top_padding}
-\alias{top_padding}
 \title{Get or Set Cell Padding}
 \usage{
 left_padding(ht)
@@ -63,4 +62,11 @@ Similarly for the other functions.
 }
 \description{
 Functions to get or set the cell padding property of huxtable table cells.
+}
+\examples{
+
+ht <- huxtable(a = 1:3, b = 1:3)
+left_padding(ht) <-  20
+left_padding(ht)
+
 }
