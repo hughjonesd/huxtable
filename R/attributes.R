@@ -11,7 +11,7 @@ huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos
 huxtable_default_attrs <- list(
         rowspan             = 1,
         colspan             = 1,
-        align               = 'center',
+        align               = 'left',
         valign              = 'top',
         width               = 0.5,
         height              = NA,
