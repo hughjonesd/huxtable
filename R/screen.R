@@ -34,7 +34,7 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 
   dc <- display_cells(ht)
   drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
-  dc$contents <- apply(drow_mat, 1, function(rc) clean_contents(ht, rc[1], rc[2]))
+  dc$contents <- apply(drow_mat, 1, function(rc) clean_contents(ht, rc[1], rc[2], 'screen'))
   dc <- dc[order(dc$colspan),]
   border_chars   <- 3
 
