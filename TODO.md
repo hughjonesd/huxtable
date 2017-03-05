@@ -17,7 +17,7 @@ TODO
   - huge X by X table of features for corner cases!
   - think about further tests...
 * docs: 
-  - vignette
+  - vignette - HTML and PDF on web. Where to get help. Limitations.
 * refer to properties by column name
   - this means implementing  dimnames<- to set the same for properties (rownames & colnames then come for free)
 * set properties byrow with byrow = TRUE

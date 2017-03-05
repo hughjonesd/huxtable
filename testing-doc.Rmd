@@ -3,11 +3,11 @@ title: "Quick guide to functionality"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: null
 ---
 
 
@@ -373,5 +373,53 @@ ht
 
 ```
 
+# Huge table of cross-validation
+
+```{r}
+set_rowcol <- function(ht, fun, rc, value) {
+  ht[1, rc] <- ht[rc, 1] <- paste(deparse(substitute(fun)), '=', value)
+  ht <- fun(ht, rc, 1:ncol(ht), value)
+  ht <- fun(ht, 1:nrow(ht), rc, value)
+  ht
+}
+
+N <- 22
+megahux <- as_hux(matrix("", N, N))
+megahux[1:5,] <- 'Some text'
+megahux[6:10,] <- rnorm(5*N)
+megahux[11:15,] <- 'Some more text'
+megahux[18:22, ] <- rnorm(5*N)
+megahux[16:17, ] <- substring(stringi::stri_rand_lipsum(2*N), 0, 50)
+# for (col in c(2,7,12,17,22)) test_hux[,col] <- sample(test_hux[,col])
+
+
+megahux <- megahux                                %>% 
+      set_rowcol(set_valign, 1, 'top')              %>% 
+      set_rowcol(set_align, 2, 'left')              %>% 
+      set_rowcol(set_top_border, 3, 1)              %>% 
+      set_rowcol(set_bottom_border, 4, 2)           %>% 
+      set_rowcol(set_left_border, 5, 1)             %>% 
+      set_rowcol(set_right_border, 6, 1)            %>% 
+      set_rowcol(set_background_color, 9, 'wheat')  %>% 
+      set_rowcol(set_text_color, 10, 'red')         %>% 
+      set_rowcol(set_top_padding, 12, 20)           %>% 
+      set_rowcol(set_bottom_padding, 13, 20)        %>% 
+      set_rowcol(set_left_padding, 14, 20)          %>% 
+      set_rowcol(set_right_padding, 15, 20)         %>% 
+      set_rowcol(set_escape_contents, 16, FALSE)    %>%
+      set_rowcol(set_na_string, 17, 'N.a.')         %>%
+      set_rowcol(set_bold, 18, TRUE)                %>%
+      set_rowcol(set_italic, 19, TRUE)              %>%
+      set_rowcol(set_font_size, 20, 20)             %>%
+      set_rowcol(set_number_format, 21, '%9.6f')    %>%
+      set_rowcol(set_font, 22, 'times')
+
+colspan(megahux)[11, 4] <- 6
+rowspan(megahux)[4, 11] <- 6
+megahux[,16] <- megahux[16,] <- '<b>Non escaped HTML</b>'
+megahux[,17] <- megahux[17,] <- sample(c(1:10, rep(NA, 12)))
+
+megahux
+```
 
 
