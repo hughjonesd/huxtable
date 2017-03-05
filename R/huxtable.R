@@ -441,7 +441,7 @@ knit_print.huxtable <- function (x, options, ...) {
   of <- rmarkdown::default_output_format(knitr::current_input())
   of <- of$name
   # not sure if 'print' is the right default here...
-  call_name <- switch(of, pdf_document = 'to_latex', html_document = 'to_html', 'print')
+  call_name <- switch(of, pdf_document = 'to_latex', html_document = 'to_html', 'to_screen')
   res <- do.call(call_name, list(ht=x))
   if (of == 'pdf_document') {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
