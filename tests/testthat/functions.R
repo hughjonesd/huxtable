@@ -2,7 +2,8 @@
 # library(testthat)
 
 example_code_for_topic <- function (fname) {
-  path <- devtools::find_topic(paste0('huxtable::', fname))[1] # sometimes we get multiples!
+  path <- devtools::find_topic(fname)[1] # sometimes we get multiples!
+
   if (is.null(path)) stop('No help exists for ', fname)
   expath <- tempfile(paste0('test-example-', fname))
   tools::Rd2ex(path, expath, commentDontrun = TRUE, commentDonttest = TRUE)
@@ -16,6 +17,7 @@ code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds', pa
 
 # runs example and checks output & values haven't changed; optionally reset files if code has changed
 test_ex_same <- function(fname, reset_on_change = TRUE) {
+  if (Sys.getenv('R_TESTS') != 'unset') return(invisible())
   excode <- example_code_for_topic(fname)
   codepath <- code_path_for_topic(fname)
   if (file.exists(codepath)) {

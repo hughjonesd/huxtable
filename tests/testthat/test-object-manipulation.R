@@ -7,7 +7,7 @@ source('functions.R')
 
 ht <- huxtable(a = 1:3, b = 1:3)
 
-test_that('Object creation works', {
+test_that('Object creation examples unchanged', {
   test_ex_same('huxtable')
 })
 
