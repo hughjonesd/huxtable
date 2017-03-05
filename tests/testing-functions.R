@@ -11,7 +11,7 @@ example_code_for_topic <- function (fname) {
 }
 
 
-code_path_for_topic <- function (fname) file.path(test_path(), paste0(fname, '-example-code.rds'))
+code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds', paste0(fname, '-example-code.rds'))
 
 
 # runs example and checks output & values haven't changed; optionally reset files if code has changed
@@ -35,27 +35,31 @@ test_ex_same <- function(fname, reset_on_change = TRUE) {
   for (expr in excode) {
     out <- capture.output(res <- eval(expr, envir = exenv))
     rds_name <- paste0(fname, '-example-value-', i, '.rds')
-    fp <- file.path(testthat::test_path(), rds_name)
-    expect_equal_to_reference(res, fp, info = paste0('Expression changed value: ', deparse(expr, nlines = 1)))
+    fp <- file.path(testthat::test_path(), 'example-rds', rds_name)
+    expect_equal_to_reference(res, fp, info =
+          paste0('In "', fname, '", expression changed value: ', deparse(expr, nlines = 1)))
     rds_name <- paste0(fname, '-example-output-', i, '.rds')
-    fp <- file.path(testthat::test_path(), rds_name)
-    expect_equal_to_reference(out, fp, info = paste0('Expression changed output: ', deparse(expr, nlines = 1)))
+    fp <- file.path(testthat::test_path(), 'example-rds',rds_name)
+    expect_equal_to_reference(out, fp, info =
+          paste0('In "', fname, '", expression changed output: ', deparse(expr, nlines = 1)))
 
     i <- i + 1
   }
 }
 
 
-reset_example_test <- function (fname) {
+reset_example_test <- function (fnames) {
   devtools::load_all('.')
 
-  # get rid of output and code files
-  fs <- list.files(file.path(testthat::test_path()))
-  fs <- grep(paste0('^',fname, '-example-.*'), fs, value = TRUE)
-  fs <- file.path(testthat::test_path(), fs)
-  sapply(fs, file.remove)
-  remake_code_file(fname)
-  # rewrite code file
+  for (fname in fnames) {
+    # get rid of output and code files
+    fs <- list.files(file.path(testthat::test_path()))
+    fs <- grep(paste0('^',fname, '-example-.*'), fs, value = TRUE)
+    fs <- file.path(testthat::test_path(), fs)
+    sapply(fs, file.remove)
+    remake_code_file(fname)
+    # rewrite code file
+  }
 
   invisible()
 }
