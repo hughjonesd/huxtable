@@ -2,6 +2,7 @@
 
 S3method("[",huxtable)
 S3method("[<-",huxtable)
+S3method("dimnames<-",huxtable)
 S3method(add_colnames,huxtable)
 S3method(add_rownames,huxtable)
 S3method(as_huxtable,character)

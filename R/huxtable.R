@@ -89,6 +89,8 @@ as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, 
   # order matters here. We want original rownames, not anything else.
   if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE)
   if (add_colnames) x <- add_colnames(x)
+
+  x <- set_attr_dimnames(x)
   x
 }
 
@@ -182,6 +184,7 @@ is_hux <- is_huxtable
     }
   }
 
+  ss <- set_attr_dimnames(ss)
   ss
 }
 
@@ -219,7 +222,9 @@ is_hux <- is_huxtable
     }
   }
 
-  NextMethod() # returns the object to be reassigned to x
+  x <- NextMethod()
+  x <- set_attr_dimnames(x)
+  x
 }
 
 
@@ -343,6 +348,12 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
   res
 }
 
+#' @export
+`dimnames<-.huxtable` <- function(x, value) {
+  x <- NextMethod()
+  x <- set_attr_dimnames(x)
+  x
+}
 
 #' Transpose a Huxtable
 #'
@@ -435,6 +446,20 @@ add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames =
   ht <- cbind(rownames(ht), ht)
   colnames(ht)[1] <- colname
   if (! preserve_rownames) rownames(ht) <- NULL
+  ht
+}
+
+set_attr_dimnames <- function(ht) {
+  for (att in huxtable_cell_attrs) {
+    dimnames(attr(ht, att)) <- dimnames(ht)
+  }
+  for (att in huxtable_col_attrs) {
+    names(attr(ht, att)) <- dimnames(ht)[[2]]
+  }
+  for (att in huxtable_row_attrs) {
+    names(attr(ht, att)) <- dimnames(ht)[[1]]
+  }
+
   ht
 }
 
