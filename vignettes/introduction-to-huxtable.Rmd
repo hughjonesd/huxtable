@@ -17,8 +17,10 @@ is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 
 ```
 
+
+
 Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
-replacement for packages like xtable, which are useful but not always very user-friendly.
+replacement for packages like xtable, which is useful but not always very user-friendly.
 
 To create a table with huxtable, use the function `huxtable`, or `hux` for short.
 
@@ -40,11 +42,11 @@ Huxtables are simply data frames, along with some extra information on how to di
 they'll appear just like ordinary data frames. Notice that we've added the column names to the data frame itself.
 We're going to print them out, so it makes sense that they need to be part of the actual table.
 
-```{r}
+```{r, results = 'markup'}
 print(ht)
 ```
 
-To print them out using LaTeX or HTML, just call `print_latex` or `print_html`.
+To print them out using LaTeX or HTML, just call `print_latex` or `print_html`. 
 
 ```{r}
 if (is_latex) print_latex(ht) else print_html(ht)
@@ -126,10 +128,10 @@ cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
 
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
-cars_mpg <- cars_mpg         %>% 
-      huxtable::add_colnames() %>% 
-      huxtable::add_rownames(colname = 'car_name')
-
+cars_mpg <- cars_mpg %>% 
+      huxtable::add_rownames(colname = 'Car Name') %>% 
+      huxtable::add_colnames() 
+    
 
 print_out(cars_mpg[1:5,])
 ```
@@ -152,5 +154,36 @@ rowspan(cars_mpg)[20, 1] <- 14
 bottom_border(cars_mpg)[c(1, 13, 20)] <- 1
 right_border(cars_mpg)[,1] <- 1
 
-cars_mpg
+print_out(cars_mpg)
 ```
+
+## Number formatting
+
+You can change how huxtable formats numbers using `number_format`. Huxtable guesses whether your cell is a number
+based on its contents, not on the column type. Set `number_format` to a number of decimal places (for more advanced
+options, see the help files).
+
+```{r}
+number_format(cars_mpg) <- 0
+print_out(cars_mpg[1:7,])
+```
+
+## Quick themes
+
+Huxtable comes with predefined themes that change various parts of formatting:
+
+```{r}
+print_out(theme_minimal(cars_mpg[1:12,]))
+print_out(theme_striped(cars_mpg[13:19,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE))
+```
+
+
+## Printing on screen
+
+Lastly, you can print a huxtable on screen using `print_screen`. Borders, column and row spans and cell alignment are shown:
+
+```{r, results = 'markup'}
+
+print_screen(ht)
+```
+

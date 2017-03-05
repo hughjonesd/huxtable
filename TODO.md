@@ -6,20 +6,21 @@ BUGS
   - because you reset table spec to l/c/r in each 'multicolumn'?
 * border width in LaTeX... not sure fixable.
   - you may be able to set it per row for horiz ones using arrayrulewidth...
-* col_names argument not passing from as_hux to hux
+* may need to set border = 0 explicitly in HTML (e.g. for Firefox...) 
+* print_screen has very thin output when multi-rowspan cells used (see e.g. cars_mt in the vignette)
+* fake warning with [.huxtable due to stupid assumptions...
 
 TODO
 ====
 
 * testing!
-  - examples
   - huge X by X table of features for corner cases!
   - think about further tests...
 * docs: 
-  - examples (some via template)
   - vignette
-* would be nice to have default align set for numeric cells? But problematic if we guess cell-by-cell.
-  - could guess on table creation? But it's a bit DWIM
+* refer to properties by column name
+  - this means implementing  dimnames<- to set the same for properties (rownames & colnames then come for free)
+* set properties byrow with byrow = TRUE
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
