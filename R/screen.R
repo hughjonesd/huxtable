@@ -22,7 +22,7 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
 #' ht <- set_all_borders(ht, 1:6, 1:2, 1)
 #' right_border(ht)[,1] <- left_border(ht)[,2] <- 0
-#' align(ht)[1,] <- 'center'
+#' align(ht)[1,] <- 'left'
 #' print_screen(ht)
 #' print_screen(ht, blank = '.')
 #' print_screen(ht, borders = 'horiz')

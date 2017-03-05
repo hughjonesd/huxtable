@@ -37,11 +37,12 @@ To set number_format to a function, enclose the function in \code{list}.
 See the examples.
 }
 \examples{
-ht <- huxtable(a = rnorm(4), b = rnorm(4)*10^(5:8))
+ht <- huxtable(a = 10^(3:6) + (5 * 10^(-2:-5)), b = 10^(3:6) + (5* 10^(-2:-5)))
 number_format(ht)[1,] <- 2
 number_format(ht)[2,] <- '\%5.2f'
 number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
 number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
+ht
 print_screen(ht)
 }
 \seealso{
