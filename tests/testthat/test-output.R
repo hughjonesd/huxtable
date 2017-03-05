@@ -2,20 +2,20 @@
 context("Output")
 
 
+source('functions.R')
+
+
 test_that('LaTeX output examples unchanged', {
-  source(devtools::package_file('tests', 'testthat', 'functions.R'))
   test_ex_same('to_latex')
 })
 
 
 test_that('Markdown output examples unchanged', {
-  source(devtools::package_file('tests', 'testthat', 'functions.R'))
   test_ex_same('to_md')
 })
 
 
 test_that('HTML output examples unchanged', {
-  source(devtools::package_file('tests', 'testthat', 'functions.R'))
   test_ex_same('to_html')
 })
 

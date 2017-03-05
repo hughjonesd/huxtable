@@ -2,7 +2,7 @@
 # library(testthat)
 
 example_code_for_topic <- function (fname) {
-  path <- devtools::find_topic(fname)[1] # sometimes we get multiples!
+  path <- devtools::find_topic(paste0('huxtable::', fname))[1] # sometimes we get multiples!
   if (is.null(path)) stop('No help exists for ', fname)
   expath <- tempfile(paste0('test-example-', fname))
   tools::Rd2ex(path, expath, commentDontrun = TRUE, commentDonttest = TRUE)
