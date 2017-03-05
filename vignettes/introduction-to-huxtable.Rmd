@@ -1,0 +1,99 @@
+---
+title: "Introduction to Huxtable"
+author: "David Hugh-Jones"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Huxtable}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
+replacement for packages like xtable, which are useful but not always very user-friendly.
+
+To create a table with huxtable, use the function `huxtable`, or `hux` for short.
+
+```{r}
+library(huxtable)
+ht <- hux(Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), Salary = c(50000, 50000, 40000),
+      add_colnames = TRUE)
+```
+
+
+Or, if you already have your data in a data frame, use `as_hux`.
+
+```{r}
+data(mtcars)
+car_ht <- as_hux(mtcars, add_colnames = TRUE)
+```
+
+Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R,
+they'll appear just like ordinary data frames.
+
+```{r}
+print(ht)
+```
+
+If you evaluate them in a knitr document (like this one!) they print as tables, using HTML or LaTeX as appropriate.
+
+```{r}
+ht
+```
+
+The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and align the second row to the right:
+
+
+```{r}
+bold(ht)[1,] <- TRUE
+bottom_border(ht)[1,] <- TRUE
+align(ht)[,2] <- 'right'
+```
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))

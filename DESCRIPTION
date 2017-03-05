@@ -9,8 +9,11 @@ Description: Huxtable is a package for creating HTML and LaTeX tables. It provid
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.0.1
 URL: https://github.com/hughjonesd/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports: knitr, rmarkdown, xtable
+VignetteBuilder: knitr
