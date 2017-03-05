@@ -42,7 +42,7 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 
   dc$widths <- nchar(dc$contents, type = 'width')
   # each extra row = 2 screen rows including border:
-  dc$widths <- ceiling(dc$widths/(2 * dc$rowspan - 1))
+  dc$widths <- ceiling(dc$widths/(2 * dc$colspan - 1))
 
   # widths of actual columns, not including borders
   max_widths <- rep(0, ncol(ht))
