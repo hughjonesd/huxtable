@@ -1,7 +1,7 @@
 
 context("Attributes")
 
-source(devtools::package_file('tests', 'testing-functions.R'))
+source(devtools::package_file('tests', 'testthat', 'functions.R'))
 
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
 

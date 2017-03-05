@@ -1,7 +1,7 @@
 
 context("Output")
 
-source(devtools::package_file('tests', 'testing-functions.R'))
+source(devtools::package_file('tests', 'testthat', 'functions.R'))
 
 test_that('LaTeX output works', {
   test_ex_same('to_latex')

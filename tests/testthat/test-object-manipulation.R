@@ -1,7 +1,7 @@
 
 context("Object manipulation")
 
-source(devtools::package_file('tests', 'testing-functions.R'))
+source(devtools::package_file('tests', 'testthat', 'functions.R'))
 
 ht <- huxtable(a = 1:3, b = 1:3)
 

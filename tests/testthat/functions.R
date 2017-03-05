@@ -1,5 +1,5 @@
 
-library(testthat)
+# library(testthat)
 
 example_code_for_topic <- function (fname) {
   path <- devtools::find_topic(fname)[1] # sometimes we get multiples!
