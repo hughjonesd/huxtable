@@ -1,15 +1,16 @@
 
 context("Object manipulation")
 
-source(devtools::package_file('tests', 'testthat', 'functions.R'))
 
 ht <- huxtable(a = 1:3, b = 1:3)
 
 test_that('Object creation works', {
+  source(devtools::package_file('tests', 'testthat', 'functions.R'))
   test_ex_same('huxtable')
 })
 
 test_that('Object subsetting and replacement examples unchanged', {
+  source(devtools::package_file('tests', 'testthat', 'functions.R'))
   test_ex_same('extract-methods')
   test_ex_same('add_colnames')
   test_ex_same('cbind.huxtable')
