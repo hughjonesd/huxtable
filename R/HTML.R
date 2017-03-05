@@ -100,11 +100,10 @@ cell_html <- function (ht, rn, cn) {
 
   borders <- c(top_border(ht)[rn, cn], right_border(ht)[rn, cn], bottom_border(ht)[rn, cn],
     left_border(ht)[rn, cn])
-  if (any(borders > 0)) {
-    borders <- paste(borders, 'px', sep = '', collapse = ' ')
-    res <- paste0(res, 'border-width:', borders, '; ')
-    res <- paste0(res, 'border-style: solid; ')
-  }
+  borders <- paste(borders, 'px', sep = '', collapse = ' ')
+  res <- paste0(res, 'border-width:', borders, '; ')
+  res <- paste0(res, 'border-style: solid; ')
+
 
   padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
     left_padding(ht)[rn, cn])
