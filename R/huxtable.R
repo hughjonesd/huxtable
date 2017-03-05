@@ -170,19 +170,10 @@ is_hux <- is_huxtable
   for (att in huxtable_table_attrs) {
     attr(ss, att) <- attr(x, att)
   }
-  dcells <- display_cells(x)
-  # check for dcells where row > nrow(ss) or col > ncol(ss) and display_row, display_col are within ss
-  cut <- (dcells$row > nrow(ss) | dcells$col > ncol(ss)) & dcells$display_row <= nrow(ss) &
-        dcells$display_col <= ncol(ss)
-  if (any(cut)) warning('Some cells will be cut by subset')
+
   class(ss) <- class(x)
-  for (r in which(cut)) {
-    dcr <- dcells[r,]
-    if (all(dim(ss) >= c(dcr$row, dcr$col))) {
-      colspan(ss)[dcr$row, dcr$col] <- min(dcr$colspan, 1 + ncol(ss) - dcr$display_col)
-      rowspan(ss)[dcr$row, dcr$col] <- min(dcr$rowspan, 1 + nrow(ss) - dcr$display_row)
-    }
-  }
+  colspan(ss) <- pmin(colspan(ss), 1 + ncol(ss) - col(ss))
+  rowspan(ss) <- pmin(rowspan(ss), 1 + nrow(ss) - row(ss))
 
   ss <- set_attr_dimnames(ss)
   ss
