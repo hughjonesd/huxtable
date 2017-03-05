@@ -23,6 +23,6 @@ register_s3_exports <- function() {
 }
 
 cat("Sourcing functions from tests/testing-functions.R; tracing ")
-source('./tests/testing-functions.R')
+source('./tests/testthat/functions.R')
 library(devtools)
 trace(devtools::document, exit = register_s3_exports)
