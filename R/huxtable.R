@@ -153,7 +153,7 @@ is_hux <- is_huxtable
 #' ht[1:2,] # generates a warning
 #' }
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  ss <- as.data.frame(unclass(x), stringsAsFactors = FALSE)[i, j, drop]
+  ss <- as.data.frame(x)[i, j, drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
   if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
   for (att in huxtable_cell_attrs) {
@@ -372,11 +372,13 @@ t.huxtable <- function (x) {
   attr(res, 'width')   <- attr(x, 'height')
   attr(res, 'height')  <- attr(x, 'width')
   attr(res, 'bottom_border') <- t(attr(x, 'right_border'))
-  attr(res, 'right_border') <- t(attr(x, 'bottom_border'))
-  attr(res, 'left_border') <- t(attr(x, 'top_border'))
-  attr(res, 'top_border') <- t(attr(x, 'left_border'))
-  row_height(res)      <- col_width(x)
-  col_width(res)       <- row_height(x)
+  attr(res, 'right_border')  <- t(attr(x, 'bottom_border'))
+  attr(res, 'left_border')   <- t(attr(x, 'top_border'))
+  attr(res, 'top_border')    <- t(attr(x, 'left_border'))
+  row_height(res) <- col_width(x)
+  col_width(res)  <- row_height(x)
+  rownames(res)   <- colnames(x)
+  colnames(res)   <- rownames(x)
   for (att in huxtable_table_attrs) {
     attr(res, att) <- attr(x, att)
   }
