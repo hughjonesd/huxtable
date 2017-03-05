@@ -9,6 +9,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, echo = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(results = 'asis')
+is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+
+```
+
 Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
 replacement for packages like xtable, which are useful but not always very user-friendly.
 
@@ -25,75 +33,124 @@ Or, if you already have your data in a data frame, use `as_hux`.
 
 ```{r}
 data(mtcars)
-car_ht <- as_hux(mtcars, add_colnames = TRUE)
+car_ht <- as_hux(mtcars)
 ```
 
 Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R,
-they'll appear just like ordinary data frames.
+they'll appear just like ordinary data frames. Notice that we've added the column names to the data frame itself.
+We're going to print them out, so it makes sense that they need to be part of the actual table.
 
 ```{r}
 print(ht)
 ```
 
-If you evaluate them in a knitr document (like this one!) they print as tables, using HTML or LaTeX as appropriate.
+To print them out using LaTeX or HTML, just call `print_latex` or `print_html`.
 
 ```{r}
-ht
+if (is_latex) print_latex(ht) else print_html(ht)
 ```
 
 The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and align the second row to the right:
 
 
 ```{r}
-bold(ht)[1,] <- TRUE
-bottom_border(ht)[1,] <- TRUE
-align(ht)[,2] <- 'right'
+# Define a function that prints in the appropriate output format
+print_out <- if (is_latex) print_latex else print_html    
+
+bold(ht)[1,]           <- TRUE
+bottom_border(ht)[1,]  <- TRUE
+align(ht)[,2]        <- 'right'
+right_padding(ht)      <- 10
+left_padding(ht)       <- 10
+
+print_out(ht)
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+You set properties by assigning to the property name, just as you assign `names(x) <- new_names` in base R.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+Some properties, like `bold` and `bottom_border`, are cell-level. You can set them for individual cells in your
+data. For example, the line `bold(ht)[1,] <- TRUE` in the code above sets the `bold` property for the first row
+of the huxtable. And `align(ht)[,2] <- 'right'` sets the alignment for the second column.
 
-## Vignette Info
+In fact, `right_padding` and `left_padding` are also cell-level properties. But we set them for all cells at once. You can do that for any property - just do `property(ht) <- value`.
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+By contrast, `caption` is a table-level property. It only takes one value, which sets a table caption.
 
-## Styles
+```{r}
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+caption(ht) <- 'Employee table'
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+print_out(ht)
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+See the help files for a list of all properties you can set. Most properties work the same for LaTeX and HTML,
+though there are some exceptions.
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+## Pipe style syntax
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+If you prefer to use the `magrittr` pipe operator (`%>%`), then you can do that too using `set_property` functions:
 
-## More Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+```{r}
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+library(dplyr)
+ht %>% 
+      set_bold(1, 1:2, TRUE)          %>% 
+      set_bottom_border(1, 1:2, 1)    %>%
+      set_align(-1, 2, 'right')       %>%
+      set_right_padding(1:4, 1:2, 10) %>%
+      set_left_padding(1:4, 1:2, 10)  %>%
+      print_out
+
 ```
 
-Also a quote using `>`:
+To see the current properties of a huxtable, just use the properties function without the left arrow:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r, results = 'markup'}
+italic(ht)
+position(ht)
+bottom_border(ht)[1:2,] # first two rows
+```
+
+## Subsetting a huxtable
+
+You can subset, sort and generally data-wrangle a huxtable just like a normal data frame.
+
+```{r}
+
+automatics <- car_ht[car_ht$am == 1,]
+print_out(automatics[1:5,])
+
+cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
+
+cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
+
+cars_mpg <- cars_mpg         %>% 
+      huxtable::add_colnames() %>% 
+      huxtable::add_rownames(colname = 'car_name')
+
+
+print_out(cars_mpg[1:5,])
+```
+
+However, in general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder before adding column names to the data frame itself.
+
+## Colspan and rowspan
+
+As well as changing styling, you can let cells span multiple rows or columns.
+
+```{r}
+cars_mpg <- cbind(car_type = rep("", nrow(cars_mpg)), cars_mpg)
+cars_mpg$car_type[1] <- 'Four cylinders'
+cars_mpg$car_type[13] <- 'Six cylinders'
+cars_mpg$car_type[20] <- 'Eight cylinders'
+rowspan(cars_mpg)[1, 1] <- 12
+rowspan(cars_mpg)[13, 1] <- 7
+rowspan(cars_mpg)[20, 1] <- 14
+
+bottom_border(cars_mpg)[c(1, 13, 20)] <- 1
+right_border(cars_mpg)[,1] <- 1
+
+cars_mpg
+```
