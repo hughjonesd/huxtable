@@ -10,13 +10,12 @@ BUGS
 TODO
 ====
 
-* testing!
-  - huge X by X table of features for corner cases!
-  - think about further tests...
 * docs: 
   - vignette - HTML and PDF on web. Where to get help. Limitations.
-  - 
+  - index.Rmd; prettier, link to PDF version
 * set properties byrow with byrow = TRUE
+  - hard to get this right when setting subsets
+  - replacement of the new value takes place outside the `property<-` function
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
