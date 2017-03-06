@@ -125,19 +125,6 @@ $(document).ready(function () {
 
 
 <pre><code>## Warning: package 'knitr' was built under R version 3.3.2</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre><code>## 
-## Attaching package: 'huxtable'</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     add_rownames</code></pre>
 <p>Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a replacement for packages like xtable, which is useful but not always very user-friendly.</p>
 <p>To create a table with huxtable, use the function <code>huxtable</code>, or <code>hux</code> for short.</p>
 <pre class="r"><code>library(huxtable)
@@ -447,6 +434,7 @@ rowspan(cars_mpg)[20, 1] &lt;- 14
 
 cars_mpg &lt;- rbind(c('', 'List of cars', '', '', ''), cars_mpg)
 colspan(cars_mpg)[1, 2] &lt;- 4
+align(cars_mpg)[1, 2] &lt;- 'center'
 
 top_border(cars_mpg)[c(2, 14, 21),] &lt;- 1
 right_border(cars_mpg)[,1] &lt;- 1
@@ -461,7 +449,7 @@ cars_mpg</code></pre>
 <tr>
 <td style="vertical-align: top; text-align: left; border-width:0px 1px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 </td>
-<td colspan="4" style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td colspan="4" style="vertical-align: top; text-align: center; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 List of cars
 </td>
 </tr>
@@ -952,7 +940,7 @@ cars_mpg[1:7,]</code></pre>
 <tr>
 <td style="vertical-align: top; text-align: left; border-width:0px 1px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 </td>
-<td colspan="4" style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+<td colspan="4" style="vertical-align: top; text-align: center; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 List of cars
 </td>
 </tr>

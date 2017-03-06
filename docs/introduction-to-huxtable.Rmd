@@ -3,8 +3,8 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  pdf_document: null
   html_document: null
+  pdf_document: null
 ---
 
 ```{r setup, echo = FALSE}
