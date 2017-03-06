@@ -3,12 +3,12 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: null
   pdf_document: null
+  html_document: null
 ---
 
 ```{r setup, echo = FALSE}
-suppressPackageStartupMessages({
+suppressMessages({
   library(knitr)
   library(dplyr)
   library(huxtable)
@@ -19,7 +19,10 @@ is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 
 ```
 
+## About this document
 
+This is the introductory vignette for the R package 'huxtable'. A current version is available on the web in [HTML format]
+(https://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf). 
 
 Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
 replacement for packages like xtable, which is useful but not always very user-friendly.
@@ -97,7 +100,7 @@ If you prefer to use the `magrittr` pipe operator (`%>%`), then you can do that 
 
 ```{r}
 
-# after loading magrittr or dplyr:
+# First do library(magrittr) or library(dplyr):
 ht %>% 
       set_bold(1, 1:2, TRUE)          %>% 
       set_bottom_border(1, 1:2, 1)    %>%
@@ -127,7 +130,7 @@ cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg %>% 
-      add_rownames(colname = 'Car Name') %>% 
+      add_rownames(colname = 'Car name') %>% 
       add_colnames() 
 
 cars_mpg[1:5,]
@@ -153,7 +156,10 @@ colspan(cars_mpg)[1, 2] <- 4
 align(cars_mpg)[1, 2] <- 'center'
 
 top_border(cars_mpg)[c(2, 14, 21),] <- 1
+bottom_border(cars_mpg)[2, 2:5] <- 1
 right_border(cars_mpg)[,1] <- 1
+bold(cars_mpg)[,1] <- TRUE
+bold(cars_mpg)[1:2,] <- TRUE
 
 cars_mpg
 ```
@@ -187,3 +193,6 @@ Lastly, you can print a huxtable on screen using `print_screen`. Borders, column
 print_screen(ht)
 ```
 
+## For more information
+
+See the website at https://hughjonesd.github.io/huxtable or the github at https://github.com/hughjonesd/huxtable.
