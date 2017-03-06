@@ -472,7 +472,32 @@ knit_print.huxtable <- function (x, options, ...) {
 }
 
 
-
+#' Huxtable Logo
+#'
+#' @return The huxtable logo
+#' @export
+#'
+#' @examples
+#' print_screen(hux_logo())
+#'
+hux_logo <- function() {
+  logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
+  rowspan(logo)[1, 1] <- 2
+  colspan(logo)[2, 2] <- 2
+  logo <- set_all_borders(logo,,,1)
+  font_size(logo) <- 20
+  font_size(logo)[1, 2:3] <- 24
+  font_size(logo)[1, 1] <- 54
+  background_color(logo)[1, 1] <- '#e83abc'
+  background_color(logo)[1, 3] <- 'black'
+  text_color(logo)[1, 3] <- 'white'
+  width(logo) <- '140pt'
+  font(logo) <- 'Palatino,Palatino Linotype,"Palatino LT STD",Book Antiqua,Georgia,serif'
+  top_padding(logo)[1, 1] <- 5
+  bottom_padding(logo)[1, 1] <- 5
+  left_padding(logo)[1, 1] <- 10
+  logo
+}
 
 
 
