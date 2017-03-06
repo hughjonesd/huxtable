@@ -44,4 +44,4 @@ to_html(ht)
 ```
 
 
-To learn more, check out the vignette in [HTML] or [PDF] or the original [R Markdown](https://raw.githubusercontent.com/hughjonesd/huxtable/master/vignettes/introduction-to-huxtable.Rmd).
+To learn more, check out the vignette in [HTML](introduction-to-huxtable.html) or [PDF](introduction-to-huxtable.pdf) or the original [R Markdown](introduction-to-huxtable.Rmd).

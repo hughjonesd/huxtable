@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<title>Title</title>
+</head>
+
+<body>
+
+
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+library(huxtable)
+ht <- hux(Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), Salary = c(50000, 50000, 40000),
+      add_colnames = TRUE)
+bold(ht)[1,]           <- TRUE
+bottom_border(ht)[1,]  <- TRUE
+align(ht)[,2]        <- 'right'
+right_padding(ht)      <- 10
+left_padding(ht)       <- 10
+
+ht
+end.rcode-->
+
+
+To learn more, check out the vignette in <a href="introduction-to-huxtable.html">HTML</a> or <a href="introduction-to-huxtable.pdf">PDF</a> or the original <a href="introduction-to-huxtable.Rmd">R Markdown</a>.
+
+</body>
+</html>
