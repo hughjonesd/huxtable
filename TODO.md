@@ -6,7 +6,6 @@ BUGS
   - because you reset table spec to l/c/r in each 'multicolumn'?
 * border width in LaTeX... not sure fixable.
   - you may be able to set it per row for horiz ones using arrayrulewidth...
-* fake warning with [.huxtable due to stupid assumptions...
 
 TODO
 ====
@@ -16,10 +15,19 @@ TODO
   - think about further tests...
 * docs: 
   - vignette - HTML and PDF on web. Where to get help. Limitations.
+  - 
 * set properties byrow with byrow = TRUE
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
+* differentiate headers from content; don't change content to character;
+  - one poss is to keep the current (simple!) storage but to remember original types and to convert
+    back as needed
+  - or is there a data frame where types can be arbitrary?
+  - or bite the bullet and have separate components
+  - or store the data twice, once in the df and once separately on its own? (yuck)
+  - NB not nec true that headers are first X rows/cols exclusively!
+  - presumably they are always whole rows and columns, though.
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
   - row names?

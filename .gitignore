@@ -7,6 +7,7 @@
 *.log
 *.dvi
 table-tester.*
+.DS_Store
 testing-doc.md
 testing-doc.tex
 tests/testthat/*.rds

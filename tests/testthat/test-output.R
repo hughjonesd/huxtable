@@ -25,7 +25,6 @@ test_that('Screen output examples unchanged', {
 })
 
 test_that('Multi-rowspan screen output is sane', {
-  require('stringi')
   set.seed(27101975)
   ht <- hux(a = stringi::stri_rand_strings(10, 6), b = stringi::stri_rand_strings(10, 6))
   rowspan(ht)[1,1] <- 10
