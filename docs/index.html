@@ -114,7 +114,7 @@ main {
 
 
 <p>Huxtable is a package for creating HTML and LaTeX tables. It provides similar
-functionality to xtable, but does a lot more, with a simpler interface. Here's a quick example.
+functionality to xtable, but more, with a simpler interface. Here's a quick example.
 </p>
 
 <div class="source"><pre class="knitr r"><span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
@@ -155,7 +155,18 @@ functionality to xtable, but does a lot more, with a simpler interface. Here's a
 
 <p>To learn more, check out the vignette in <a href="introduction-to-huxtable.html">HTML</a> or <a href="introduction-to-huxtable.pdf">PDF</a> format, or the original <a href="introduction-to-huxtable.Rmd">R Markdown</a>.</p>
 
-<p>By the way, here's the code to generate the logo:
+<h3>Installation</h3>
+
+<p>At the moment, huxtable is only available from github:</p>
+
+<div class="chunk" id="install"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(devtools)</span>
+<span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">'hughjonesd/huxtable'</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+<h3>The logo</h3>
+<p>Here's the code to generate the logo at the top of the page.</p>
+
 <div class="chunk" id="logo"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(huxtable)</span>
 <span class="hl std">logo</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'h'</span><span class="hl std">,</span> <span class="hl num">NA</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'u'</span><span class="hl std">,</span> <span class="hl str">'table'</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'x'</span><span class="hl std">,</span> <span class="hl num">NA</span><span class="hl std">))</span>
 <span class="hl kwd">rowspan</span><span class="hl std">(logo)[</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2</span>
