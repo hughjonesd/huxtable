@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<title>Huxtable</title>
+
+
+<style type="text/css">
+p {
+  margin-top: 24pt;
+  margin-bottom: 12pt;
+
+}
+
+body {
+  background-color: #F3EC9F;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+main {
+  background-color: white;
+  border-radius: 10px;
+  max-width: 800px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5% 5% 5% 5%;
+}
+
+.source {
+  border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<main>
+
+<img src="logo.png" style="width: 200px; margin-left: auto;">
+
+
+<p>Huxtable is a package for creating HTML and LaTeX tables. It provides similar
+functionality to xtable, but does a lot more, with a simpler interface. Here's a quick example.
+</p>
+
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+library(huxtable)
+ht <- hux(
+        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
+        Salary = c(50000, 50000, 40000),
+        add_colnames = TRUE
+      )
+
+bold(ht)[1,]           <- TRUE
+bottom_border(ht)[1,]  <- TRUE
+align(ht)[,2]          <- 'right'
+right_padding(ht)      <- 10
+left_padding(ht)       <- 10
+width(ht)              <- 0.35
+
+ht
+end.rcode-->
+
+<p>To learn more, check out the vignette in <a href="introduction-to-huxtable.html">HTML</a> or <a href="introduction-to-huxtable.pdf">PDF</a> format, or the original <a href="introduction-to-huxtable.Rmd">R Markdown</a>.</p>
+
+</main>
+
+</body>
+</html>
