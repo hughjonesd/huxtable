@@ -35,8 +35,30 @@ main {
 
 <main>
 
+<!--
 <img src="logo.png" style="width: 200px; margin-left: auto;">
+-->
 
+<!--begin.rcode logo, echo = FALSE, results = 'asis'
+
+library(huxtable)
+logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
+rowspan(logo)[1, 1] <- 2
+colspan(logo)[2, 2] <- 2
+logo <- set_all_borders(logo,,,1)
+font_size(logo) <- 20
+font_size(logo)[1, 2:3] <- 24
+font_size(logo)[1, 1] <- 54
+background_color(logo)[1, 1] <- '#e83abc'
+background_color(logo)[1, 3] <- 'black'
+text_color(logo)[1, 3] <- 'white'
+width(logo) <- '140pt'
+font(logo) <- 'Palatino,Palatino Linotype,"Palatino LT STD",Book Antiqua,Georgia,serif'
+top_padding(logo)[1, 1] <- 5
+bottom_padding(logo)[1, 1] <- 5
+left_padding(logo)[1, 1] <- 10
+logo
+end.rcode-->
 
 <p>Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 functionality to xtable, but does a lot more, with a simpler interface. Here's a quick example.
@@ -44,7 +66,7 @@ functionality to xtable, but does a lot more, with a simpler interface. Here's a
 
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-library(huxtable)
+
 ht <- hux(
         Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
         Salary = c(50000, 50000, 40000),
@@ -61,7 +83,13 @@ width(ht)              <- 0.35
 ht
 end.rcode-->
 
+
 <p>To learn more, check out the vignette in <a href="introduction-to-huxtable.html">HTML</a> or <a href="introduction-to-huxtable.pdf">PDF</a> format, or the original <a href="introduction-to-huxtable.Rmd">R Markdown</a>.</p>
+
+<p>By the way, here's the code to generate the logo at the top of the page.</p>
+
+<!--begin.rcode logo, echo = TRUE, eval = FALSE
+end.rcode-->
 
 </main>
 
