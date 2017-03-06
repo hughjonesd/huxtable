@@ -8,9 +8,11 @@ output:
 ---
 
 ```{r setup, echo = FALSE}
-library(knitr)
-library(dplyr)
-library(huxtable)
+suppressPackageStartupMessages({
+  library(knitr)
+  library(dplyr)
+  library(huxtable)
+})
 
 # knitr::opts_chunk$set(results = 'asis')
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
@@ -148,6 +150,7 @@ rowspan(cars_mpg)[20, 1] <- 14
 
 cars_mpg <- rbind(c('', 'List of cars', '', '', ''), cars_mpg)
 colspan(cars_mpg)[1, 2] <- 4
+align(cars_mpg)[1, 2] <- 'center'
 
 top_border(cars_mpg)[c(2, 14, 21),] <- 1
 right_border(cars_mpg)[,1] <- 1

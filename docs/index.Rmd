@@ -23,9 +23,9 @@ library(huxtable)
 
 ht <- huxtable(a = 1:5, b = letters[1:5])
 align(ht)[,2] <- 'right'
-background_color(ht) <- 'yellow'
+background_color(ht) <- 'wheat'
 bottom_border(ht) <- c(1, 0, 0, 0, 1)
-cat(to_html(ht))
+to_html(ht)
 ```
 
 
@@ -37,8 +37,11 @@ library(dplyr)
 
 ht <- hux(a = 1:5, b = letters[1:5]) %>% 
       set_align(1:5, 2, 'right') %>% 
-      set_background_color(1:5, 1:2, 'yellow') %>% 
+      set_background_color(1, , 'wheat') %>% 
       set_bottom_border(1:5, 1:2, c(1, 0, 0, 0, 1))
 
-cat(to_html(ht))
+to_html(ht)
 ```
+
+
+To learn more, check out the vignette in [HTML] or [PDF] or the original [R Markdown](https://raw.githubusercontent.com/hughjonesd/huxtable/master/vignettes/introduction-to-huxtable.Rmd).
