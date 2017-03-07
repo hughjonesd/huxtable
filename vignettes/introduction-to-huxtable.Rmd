@@ -3,8 +3,11 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  pdf_document: null
   html_document: null
+  pdf_document:
+    includes:
+      in_header: placeins-header.tex
+    keep_tex: yes
 vignette: |
   %\VignetteIndexEntry{Introduction to Huxtable} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
@@ -15,8 +18,14 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 
-# knitr::opts_chunk$set(results = 'asis')
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+knitr::knit_hooks$set(
+  barrier = function(before, options, envir) {
+    if (! before && is_latex) knitr::asis_output('\\FloatBarrier')
+  }
+)
+
+# knitr::opts_chunk$set(results = 'asis')
 
 ```
 
@@ -51,7 +60,7 @@ Or, if you already have your data in a data frame, use `as_hux`.
 
 ```{r}
 data(mtcars)
-car_ht <- as_hux(mtcars)
+car_ht <- as_hux(mtcars, add_colnames = TRUE)
 ```
 
 Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R,
@@ -130,9 +139,21 @@ position(ht)
 bottom_border(ht)[1:2,] # first two rows
 ```
 
+## Number formatting
+
+You can change how huxtable formats numbers using `number_format`. Huxtable guesses whether your cell is a number
+based on its contents, not on the column type. Set `number_format` to a number of decimal places (for more advanced
+options, see the help files).
+
+```{r}
+number_format(car_ht) <- 0
+car_ht[1:5,]
+```
+
 ## Subsetting a huxtable
 
-You can subset, sort and generally data-wrangle a huxtable just like a normal data frame.
+You can subset, sort and generally data-wrangle a huxtable just like a normal data frame. Cell and 
+table properties will be carried over into subsets.
 
 ```{r}
 
@@ -141,8 +162,7 @@ cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg %>% 
-      add_rownames(colname = 'Car name') %>% 
-      add_colnames() 
+      add_rownames(colname = 'Car name') 
 
 cars_mpg[1:5,]
 ```
@@ -151,7 +171,8 @@ However, in general it is a good idea to prepare your data first, before styling
 
 ## Column and row spans
 
-As well as changing styling, you can let cells span multiple rows or columns.
+As well as changing styling, you can let cells span multiple rows or columns using the `colspan` and `rowspan`
+properties.
 
 ```{r}
 cars_mpg <- cbind(car_type = rep("", nrow(cars_mpg)), cars_mpg)
@@ -166,25 +187,16 @@ cars_mpg <- rbind(c('', 'List of cars', '', '', ''), cars_mpg)
 colspan(cars_mpg)[1, 2] <- 4
 align(cars_mpg)[1, 2] <- 'center'
 
-top_border(cars_mpg)[c(2, 14, 21),] <- 1
-bottom_border(cars_mpg)[2, 2:5] <- 1
-right_border(cars_mpg)[,1] <- 1
-bold(cars_mpg)[,1] <- TRUE
-bold(cars_mpg)[1:2,] <- TRUE
+# a little more formatting:
 
+cars_mpg <- set_all_padding(cars_mpg, , , 2)
+cars_mpg <- set_all_borders(cars_mpg, , , 1)
+col_width(cars_mpg) <- c(.4 , .3 , .1, .1, .1)
+
+if (is_latex) font_size(cars_mpg) <- 10
 cars_mpg
 ```
 
-## Number formatting
-
-You can change how huxtable formats numbers using `number_format`. Huxtable guesses whether your cell is a number
-based on its contents, not on the column type. Set `number_format` to a number of decimal places (for more advanced
-options, see the help files).
-
-```{r}
-number_format(cars_mpg) <- 0
-cars_mpg[1:7,]
-```
 
 ## Quick themes
 
