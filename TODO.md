@@ -2,18 +2,18 @@
 
 BUGS
 ====
-* latex table width don't work (and cell widths probably wrong)
-  - because you reset table spec to l/c/r in each 'multicolumn'?
+
 * border width in LaTeX... not sure fixable.
   - you may be able to set it per row for horiz ones using arrayrulewidth...
+* left/right cell padding doesn't work with multline tables
 
 TODO
 ====
 
+* set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * docs: 
   - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
 * simple `add_footnote_row` method?
-* set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * general set_properties() function: `set_properties(ht, row, col, font = 'times', align = 'left')`
