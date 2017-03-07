@@ -17,6 +17,7 @@ NULL
 #' @import xtable
 #' @import stats
 #' @import grDevices
+#' @import htmltools
 #'
 NULL
 
@@ -456,6 +457,7 @@ set_attr_dimnames <- function(ht) {
 
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
+  requireNamespace('htmltools', quietly = TRUE)
   of <- knitr::opts_knit$get('out.format')
   if (of == 'markdown') {
     of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
@@ -476,7 +478,9 @@ knit_print.huxtable <- function (x, options, ...) {
     if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
   } else if (of == 'html') {
-    return(structure(res, class = 'html'))
+    res <- knitr::asis_output(res)
+    class(res) <- c(class(res), 'html')
+    return(res)
   } else {
     return(knitr::asis_output(res))
   }
