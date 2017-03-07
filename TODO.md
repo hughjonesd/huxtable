@@ -12,12 +12,12 @@ TODO
 
 * docs: 
   - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
-* set properties byrow with byrow = TRUE
-  - hard to get this right when setting subsets
-  - replacement of the new value takes place outside the `property<-` function
+
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
+* general set_properties() function: `set_properties(ht, row, col, font = 'times', align = 'left')`
+* `borders()<-` shortcut?
 * differentiate headers from content; don't change content to character;
   - one poss is to keep the current (simple!) storage but to remember original types and to convert
     back as needed
@@ -53,7 +53,10 @@ PUT OFF
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
 * way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
-
+* set properties byrow with byrow = TRUE
+  - hard to get this right when setting subsets
+  - replacement of the new value takes place outside the `property<-` function
+  
 QUESTIONS
 =========
 do we want to have a concept of 'headers' for repetition? Cf. longtable,  <th>

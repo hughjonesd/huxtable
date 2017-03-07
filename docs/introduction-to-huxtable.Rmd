@@ -67,7 +67,7 @@ you can simply evaluate the hux. It will know what format to print itself in.
 ht
 ```
 
-The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and align the second row to the right:
+The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and right-align the second column:
 
 
 ```{r}
@@ -104,7 +104,7 @@ though there are some exceptions.
 
 ## Pipe style syntax
 
-If you prefer to use the `magrittr` pipe operator (`%>%`), then you can do that too using `set_property` functions:
+If you prefer to use the `magrittr` pipe operator (`%>%`), then you can use `set_property` functions:
 
 
 ```{r}
