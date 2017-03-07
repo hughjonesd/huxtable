@@ -18,5 +18,5 @@ knitr::opts_chunk$set(
 
 Huxtable is a package for creating HTML and LaTeX tables. It provides similar 
 functionality to xtable, but does more, with a simpler interface. To learn more
-check out [the website](http://hughjonesd.github.io/huxtable), or read the vignettte in
+check out [the website](http://hughjonesd.github.io/huxtable), or read the vignette in
 [HTML](http://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](http://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf).
