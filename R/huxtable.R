@@ -475,28 +475,33 @@ knit_print.huxtable <- function (x, options, ...) {
 
 #' Huxtable Logo
 #'
+#' @param latex Use LaTeX names for fonts.
 #' @return The huxtable logo
 #' @export
 #'
 #' @examples
 #' print_screen(hux_logo())
 #'
-hux_logo <- function() {
+hux_logo <- function(latex = FALSE) {
   logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
   rowspan(logo)[1, 1] <- 2
   colspan(logo)[2, 2] <- 2
-  logo <- set_all_borders(logo,,,1)
-  font_size(logo) <- 20
-  font_size(logo)[1, 2:3] <- 24
-  font_size(logo)[1, 1] <- 54
+  logo <- set_all_borders(logo, , ,1)
+  font_size(logo) <- if (latex) 12 else 20
+  font_size(logo)[1, 2:3] <- if (latex) 16 else 24
+  font_size(logo)[1, 1] <-  if (latex) 28 else 42
   background_color(logo)[1, 1] <- '#e83abc'
   background_color(logo)[1, 3] <- 'black'
   text_color(logo)[1, 3] <- 'white'
-  width(logo) <- '140pt'
-  font(logo) <- 'Palatino,Palatino Linotype,"Palatino LT STD",Book Antiqua,Georgia,serif'
-  top_padding(logo)[1, 1] <- 5
-  bottom_padding(logo)[1, 1] <- 5
-  left_padding(logo)[1, 1] <- 10
+  width(logo) <- if (latex) 0.25 else '60pt'
+  height(logo) <- if (latex) '48pt' else '60pt'
+  font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
+  if (latex) font(logo) <- 'ppl'
+  #set_all_padding(logo, , , 6)
+  top_padding(logo) <- 2
+  bottom_padding(logo) <- 2
+  #left_padding(logo)[1, 1] <- 10
+  position(logo) <- 'center'
   logo
 }
 
