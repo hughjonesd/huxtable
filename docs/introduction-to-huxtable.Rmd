@@ -5,6 +5,8 @@ date: '`r Sys.Date()`'
 output:
   pdf_document: null
   html_document: null
+vignette: |
+  %\VignetteIndexEntry{Introduction to Huxtable} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
@@ -28,7 +30,7 @@ huxtable::hux_logo(latex = is_latex)
 This is the introductory vignette for the R package 'huxtable'. A current version is available 
 on the web in [HTML](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf) format. 
 
-## Introduction
+## Getting started
 
 Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
 replacement for packages like xtable, which is useful but not always very user-friendly.

@@ -1,23 +1,36 @@
 ---
 title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Introduction to Huxtable}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+date: '`r Sys.Date()`'
+output:
+  pdf_document: null
+  html_document: null
+vignette: |
+  %\VignetteIndexEntry{Introduction to Huxtable} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
 
 library(knitr)
-knitr::opts_chunk$set(results = 'asis')
+library(dplyr)
+library(huxtable)
+
+# knitr::opts_chunk$set(results = 'asis')
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 
 ```
 
 
+```{r echo = FALSE}
+huxtable::hux_logo(latex = is_latex)
+```
+
+## About this document
+
+This is the introductory vignette for the R package 'huxtable'. A current version is available 
+on the web in [HTML](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf) format. 
+
+## Getting started
 
 Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
 replacement for packages like xtable, which is useful but not always very user-friendly.
@@ -26,8 +39,11 @@ To create a table with huxtable, use the function `huxtable`, or `hux` for short
 
 ```{r}
 library(huxtable)
-ht <- hux(Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), Salary = c(50000, 50000, 40000),
-      add_colnames = TRUE)
+ht <- hux(
+        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
+        Salary = c(50000, 50000, 40000),
+        add_colnames = TRUE
+      )
 ```
 
 
@@ -46,18 +62,17 @@ We're going to print them out, so it makes sense that they need to be part of th
 print(ht)
 ```
 
-To print them out using LaTeX or HTML, just call `print_latex` or `print_html`. 
+To print them out using LaTeX or HTML, just call `print_latex` or `print_html`. In knitr documents, like this one,
+you can simply evaluate the hux. It will know what format to print itself in.
 
 ```{r}
-if (is_latex) print_latex(ht) else print_html(ht)
+ht
 ```
 
-The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and align the second row to the right:
+The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and right-align the second column:
 
 
 ```{r}
-# Define a function that prints in the appropriate output format
-print_out <- if (is_latex) print_latex else print_html    
 
 bold(ht)[1,]           <- TRUE
 bottom_border(ht)[1,]  <- TRUE
@@ -65,7 +80,7 @@ align(ht)[,2]        <- 'right'
 right_padding(ht)      <- 10
 left_padding(ht)       <- 10
 
-print_out(ht)
+ht
 ```
 
 You set properties by assigning to the property name, just as you assign `names(x) <- new_names` in base R.
@@ -82,7 +97,7 @@ By contrast, `caption` is a table-level property. It only takes one value, which
 
 caption(ht) <- 'Employee table'
 
-print_out(ht)
+ht
 
 ```
 
@@ -91,19 +106,19 @@ though there are some exceptions.
 
 ## Pipe style syntax
 
-If you prefer to use the `magrittr` pipe operator (`%>%`), then you can do that too using `set_property` functions:
+If you prefer to use the `magrittr` pipe operator (`%>%`), then you can use `set_property` functions:
 
 
 ```{r}
 
-library(dplyr)
+# First do library(magrittr) or library(dplyr):
 ht %>% 
       set_bold(1, 1:2, TRUE)          %>% 
       set_bottom_border(1, 1:2, 1)    %>%
       set_align(-1, 2, 'right')       %>%
       set_right_padding(1:4, 1:2, 10) %>%
-      set_left_padding(1:4, 1:2, 10)  %>%
-      print_out
+      set_left_padding(1:4, 1:2, 10)
+  
 
 ```
 
@@ -121,24 +136,20 @@ You can subset, sort and generally data-wrangle a huxtable just like a normal da
 
 ```{r}
 
-automatics <- car_ht[car_ht$am == 1,]
-print_out(automatics[1:5,])
 
 cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
-
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg %>% 
-      huxtable::add_rownames(colname = 'Car Name') %>% 
-      huxtable::add_colnames() 
-    
+      add_rownames(colname = 'Car name') %>% 
+      add_colnames() 
 
-print_out(cars_mpg[1:5,])
+cars_mpg[1:5,]
 ```
 
 However, in general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder before adding column names to the data frame itself.
 
-## Colspan and rowspan
+## Column and row spans
 
 As well as changing styling, you can let cells span multiple rows or columns.
 
@@ -151,10 +162,17 @@ rowspan(cars_mpg)[1, 1] <- 12
 rowspan(cars_mpg)[13, 1] <- 7
 rowspan(cars_mpg)[20, 1] <- 14
 
-bottom_border(cars_mpg)[c(1, 13, 20)] <- 1
-right_border(cars_mpg)[,1] <- 1
+cars_mpg <- rbind(c('', 'List of cars', '', '', ''), cars_mpg)
+colspan(cars_mpg)[1, 2] <- 4
+align(cars_mpg)[1, 2] <- 'center'
 
-print_out(cars_mpg)
+top_border(cars_mpg)[c(2, 14, 21),] <- 1
+bottom_border(cars_mpg)[2, 2:5] <- 1
+right_border(cars_mpg)[,1] <- 1
+bold(cars_mpg)[,1] <- TRUE
+bold(cars_mpg)[1:2,] <- TRUE
+
+cars_mpg
 ```
 
 ## Number formatting
@@ -165,7 +183,7 @@ options, see the help files).
 
 ```{r}
 number_format(cars_mpg) <- 0
-print_out(cars_mpg[1:7,])
+cars_mpg[1:7,]
 ```
 
 ## Quick themes
@@ -173,8 +191,7 @@ print_out(cars_mpg[1:7,])
 Huxtable comes with predefined themes that change various parts of formatting:
 
 ```{r}
-print_out(theme_minimal(cars_mpg[1:12,]))
-print_out(theme_striped(cars_mpg[13:19,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE))
+theme_striped(cars_mpg[14:20,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE)
 ```
 
 
@@ -187,3 +204,6 @@ Lastly, you can print a huxtable on screen using `print_screen`. Borders, column
 print_screen(ht)
 ```
 
+## For more information
+
+See the website at https://hughjonesd.github.io/huxtable or the github at https://github.com/hughjonesd/huxtable.
