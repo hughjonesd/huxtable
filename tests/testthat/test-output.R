@@ -31,8 +31,8 @@ test_that('Multi-rowspan screen output is sane', {
 })
 
 test_that('Four spaces does not cause <pre><code> markup', {
-  skip('Waiting for knitr fix')
-  output <- rmarkdown::render('fourspace-html-test.Rmd')
+  #skip('Waiting for knitr fix')
+  output <- rmarkdown::render('fourspace-html-test.Rmd', quiet = TRUE)
   lines <- readLines(output)
   file.remove(output)
   expect_false(any(grepl('findme&lt;/td&gt;', lines)))
