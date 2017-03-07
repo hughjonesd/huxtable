@@ -4,7 +4,10 @@
 \alias{hux_logo}
 \title{Huxtable Logo}
 \usage{
-hux_logo()
+hux_logo(latex = FALSE)
+}
+\arguments{
+\item{latex}{Use LaTeX names for fonts.}
 }
 \value{
 The huxtable logo

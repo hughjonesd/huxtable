@@ -13,7 +13,6 @@
 NULL
 
 #' @import knitr
-#' @import htmltools
 #' @import rmarkdown
 #' @import xtable
 #' @import stats
