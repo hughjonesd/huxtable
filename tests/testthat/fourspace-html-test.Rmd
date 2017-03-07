@@ -1,0 +1,13 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "07/03/2017"
+output: html_document
+---
+
+```{r setup, echo = FALSE}
+library(huxtable)
+
+hux(a = "    findme")
+```
+
