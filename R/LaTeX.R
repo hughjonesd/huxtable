@@ -1,11 +1,15 @@
 
 
+default_table_width_unit <- '\\textwidth'
+
+
 #' @export
 #'
 #' @rdname to_latex
 print_latex <- function (ht, ...) {
   cat(to_latex(ht, ...))
 }
+
 
 #' Create LaTeX Representing a Huxtable
 #'
@@ -100,7 +104,7 @@ build_tabular <- function(ht) {
   res <- paste0(res, '\\begin{', tenv, '}')
   if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
     tw <- width(ht)
-    if (is.numeric(tw)) tw <- paste0(tw, '\\textwidth')
+    if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
     res <- paste0(res, '{', tw,'}')
   }
 
@@ -111,19 +115,12 @@ build_tabular <- function(ht) {
   colspec <- character(ncol(ht))
   for (mycol in 1:ncol(ht)) {
     col_w <- col_width[mycol]
-
     hsize_redef <- if (! is.na(col_w) & is.numeric(col_w) & col_w != 1) paste0('\\hsize=', col_w, '\\hsize') else ''
     col_valign <- valign(ht)[,mycol]
-    if (length(unique(col_valign)) > 1) warning(
-      'In LaTeX, huxtable cannot currently use multiple vertical alignments in a single column.')
     col_valign <- col_valign[1]
     col_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
     col_char <- if (is.na(col_w) || is.numeric(col_w)) 'X' else paste0(col_valign_str, '{', col_w, '}')
-    if (col_valign != 'top' && col_char == 'X') warning(paste0(
-          'In LaTex, huxtable cannot currently combine vertical alignment != "top" and proportional column widths. ',
-          'Try specifying the column width in points ("100pt") or pixels ("50px").'))
     colspec[mycol] <- paste0('>{', hsize_redef, '}', col_char)
-
   }
   colspec <- paste0(colspec, collapse = ' ')
   colspec <- paste0('{', colspec, '}')
@@ -188,22 +185,15 @@ build_tabular <- function(ht) {
 
       if (mycol == dcol) {
         cs <- dcell$colspan
-        lcr <- switch(align(ht)[drow, dcol], left   = 'l', right  = 'r', center = 'c')
-        # pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', center = 'm')
-        # width_spec <- 'This is too hard if we have multicolumn cells...!'
-        # align_str <- switch(align(ht)[drow, dcol], left   = '\\raggedright', right  = '\\raggedleft',
-        #       center = '\\centering')
+        pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
+        width_spec <- compute_width(ht, mycol, dcell$end_col)
+        align_str <- switch(align(ht)[drow, dcol], left   = '\\raggedright', right  = '\\raggedleft',
+               center = '\\centering')
         # only add left borders if we haven't already added a right border!
         lb <- if (left_border(ht)[drow, dcol] > 0 && ! added_right_border) '|' else ''
-        if (right_border(ht)[drow, dcol] > 0) {
-          rb <- '|'
-          added_right_border <- TRUE
-        } else {
-          rb <- ''
-          added_right_border <- FALSE
-        }
-        contents <- paste0('\\multicolumn{', cs,'}{', lb, lcr, rb ,'}{', contents,'}')
-        # contents <- paste0('\\multicolumn{', cs,'}{', lb, pmb, width_spec, rb ,'}{', align_str, contents,'}')
+        rb <- if ((added_right_border <- right_border(ht)[drow, dcol]) > 0) '|' else ''
+
+        contents <- paste0('\\multicolumn{', cs,'}{', lb, pmb, '{', width_spec, '}', rb ,'}{', align_str, contents,'}')
       } # if (left cells of multicol or non-shadowed cell)
 
       row_contents[mycol] <- contents
@@ -221,6 +211,36 @@ build_tabular <- function(ht) {
   res <- paste0(res, '\\end{tabularx}\n')
 
   return(res)
+}
+
+compute_width <- function(ht, start_col, end_col) {
+  table_width <- width(ht) # always defined, default is 0.5 (of \\textwidth)
+  if (! is.numeric(table_width)) {
+    table_unit  <- gsub('\\d', '', table_width)
+    table_width <- as.numeric(gsub('\\D', '', table_width))
+  } else {
+    table_unit <- default_table_width_unit
+  }
+
+  cw <- col_width(ht)[start_col:end_col]
+  if (is.character(cw)) {
+    # use calc for multiple character widths
+    # won't work if you mix in numerics
+    cw[is.na(cw)] <- paste0(1/ncol(ht), table_unit)
+    cw <- paste(cw, collapse = '+')
+  } else {
+    cw[is.na(cw)] <- 1/ncol(ht)
+    cw <- sum(cw)
+    cw <- cw * table_width
+    cw <- paste0(cw, table_unit)
+  }
+
+  if (end_col > start_col) {
+    # need to add some extra tabcolseps, one per column
+    cw <- paste(cw, '+', (end_col - start_col) * 2, '\\tabcolsep')
+  }
+
+  cw
 }
 
 build_cell_contents <- function(ht, row, col) {

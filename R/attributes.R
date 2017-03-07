@@ -42,7 +42,6 @@ huxtable_default_attrs <- list(
         font                = NA
       )
 
-
 make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', 'table'), check_fun = NULL,
   check_values = NULL, extra_code = NULL) {
   attr_type <- match.arg(attr_type)
