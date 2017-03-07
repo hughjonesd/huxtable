@@ -27,11 +27,11 @@ knitr::opts_chunk$set(echo = TRUE, barrier = TRUE)
 
 # Basic usage
 
+
 ## Creating a huxtable
 
 ```{r}
 ht_orig <- huxtable(a = c('Parsley', 'Sage', 'Rosemary', 'Thyme'), b = 10 ^ (2:5)) 
-width(ht_orig) <- 0.25
 ht_orig <- set_all_borders(ht_orig, 1:nrow(ht_orig), 1:ncol(ht_orig), 1)
 ht_orig
 ```
@@ -102,7 +102,7 @@ ht
 
 ```{r}
 ht <- ht_orig
-width(ht) <- 0.5
+width(ht) <- 1/3
 ht
 
 ```
