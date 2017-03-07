@@ -469,7 +469,7 @@ knit_print.huxtable <- function (x, options, ...) {
   if (of == 'pdf') of <- 'latex'
 
   call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
-  res <- do.call(call_name, list(ht=x))
+  res <- do.call(call_name, list(ht = x))
   if (of == 'latex') {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
