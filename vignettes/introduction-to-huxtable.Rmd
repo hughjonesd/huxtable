@@ -7,7 +7,6 @@ output:
   pdf_document:
     includes:
       in_header: placeins-header.tex
-    keep_tex: yes
 vignette: |
   %\VignetteIndexEntry{Introduction to Huxtable} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
