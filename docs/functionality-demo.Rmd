@@ -1,13 +1,13 @@
 ---
-title: "Quick guide to functionality"
+title: "Huxtable functionality demo/test"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: null
 ---
 
 
