@@ -98,33 +98,17 @@ report_latex_dependencies <- function(quiet = FALSE) {
 }
 
 build_tabular <- function(ht) {
-
-  res <- '\\let\\huxlen\\relax\n\\newlength\\huxlen\n' # for calculating lengths
-  tenv <- tabular_environment(ht)
-  res <- paste0(res, '\\begin{', tenv, '}')
-  if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
-    tw <- width(ht)
-    if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
-    res <- paste0(res, '{', tw,'}')
-  }
-
   col_width <- col_width(ht)
   col_width <- if (all(is.na(col_width))) rep(1, ncol(ht)) else if (is.numeric(col_width)) col_width * ncol(ht) else
         col_width
-
   colspec <- character(ncol(ht))
   for (mycol in 1:ncol(ht)) {
-    col_w <- col_width[mycol]
-    hsize_redef <- if (! is.na(col_w) & is.numeric(col_w) & col_w != 1) paste0('\\hsize=', col_w, '\\hsize') else ''
-    col_valign <- valign(ht)[,mycol]
-    col_valign <- col_valign[1]
-    col_valign_str <- switch(as.character(col_valign), middle = 'm', bottom = 'b', top = , 'p')
-    col_char <- if (is.na(col_w) || is.numeric(col_w)) 'X' else paste0(col_valign_str, '{', col_w, '}')
-    colspec[mycol] <- paste0('>{', hsize_redef, '}', col_char)
+    # col type will be redefined when valign is different:
+    colspec[mycol] <- paste0('p{', compute_width(ht, mycol, mycol), '}')
   }
   colspec <- paste0(colspec, collapse = ' ')
   colspec <- paste0('{', colspec, '}')
-  res <- paste0(res, colspec, '\n')
+  res <- paste0(colspec, '\n')
 
   display_cells <- display_cells(ht)
   res <- paste0(res, build_clines_for_row(ht, row = 0))
@@ -208,7 +192,15 @@ build_tabular <- function(ht) {
     res <- paste0(res, build_clines_for_row(ht, myrow))
   } # next row
 
-  res <- paste0(res, '\\end{tabularx}\n')
+  tenv <- tabular_environment(ht)
+  width_spec <- if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
+    tw <- width(ht)
+    if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
+    paste0('{', tw,'}')
+  } else {
+    ''
+  }
+  res <- paste0('\\begin{', tenv, '}', width_spec, res, '\\end{', tenv, '}\n')
 
   return(res)
 }
@@ -237,7 +229,7 @@ compute_width <- function(ht, start_col, end_col) {
 
   if (end_col > start_col) {
     # need to add some extra tabcolseps, one per column
-    cw <- paste(cw, '+', (end_col - start_col) * 2, '\\tabcolsep')
+    cw <- paste0(cw, '+', (end_col - start_col) * 2, '\\tabcolsep')
   }
 
   cw
