@@ -11,8 +11,7 @@ TODO
 ====
 
 * docs: 
-  - vignette - HTML and PDF on web. Where to get help. Limitations.
-  - index.Rmd; prettier, link to PDF version
+  - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
 * set properties byrow with byrow = TRUE
   - hard to get this right when setting subsets
   - replacement of the new value takes place outside the `property<-` function
