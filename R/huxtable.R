@@ -13,6 +13,7 @@
 NULL
 
 #' @import knitr
+#' @import htmltools
 #' @import rmarkdown
 #' @import xtable
 #' @import stats
@@ -466,6 +467,8 @@ knit_print.huxtable <- function (x, options, ...) {
     tenv <- tabular_environment(x)
     if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
+  } else if (of == 'html_document') {
+    return(htmltools::HTML(res))
   } else {
     return(knitr::asis_output(res))
   }
