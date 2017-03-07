@@ -12,7 +12,7 @@ TODO
 
 * docs: 
   - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
-
+* simple `add_footnote_row` method?
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
