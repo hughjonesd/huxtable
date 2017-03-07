@@ -456,16 +456,26 @@ set_attr_dimnames <- function(ht) {
 
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
-  of <- rmarkdown::default_output_format(knitr::current_input())
-  of <- of$name
-  # not sure if 'print' is the right default here...
-  call_name <- switch(of, pdf_document = 'to_latex', html_document = 'to_html', 'to_screen')
+  of <- knitr::opts_knit$get('out.format')
+  if (of == 'markdown') {
+    of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
+    if (is.null(of)) {
+      of <- rmarkdown::default_output_format(knitr::current_input())
+      of <- of$name
+      of <- sub('_.*', '', of)
+      if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
+    }
+  }
+  if (of == 'pdf') of <- 'latex'
+  call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
   res <- do.call(call_name, list(ht=x))
-  if (of == 'pdf_document') {
+  if (of == 'latex') {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
     if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
+  } else if (of == 'html') {
+    return(structure(res, class = 'html'))
   } else {
     return(knitr::asis_output(res))
   }
