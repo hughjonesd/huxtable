@@ -503,13 +503,14 @@ hux_logo <- function(latex = FALSE) {
   background_color(logo)[1, 1] <- '#e83abc'
   background_color(logo)[1, 3] <- 'black'
   text_color(logo)[1, 3] <- 'white'
-  width(logo) <- if (latex) 0.25 else '60pt'
-  height(logo) <- if (latex) '48pt' else '60pt'
+  width(logo) <- if (latex) 0.2 else '60pt'
+  height(logo) <- if (latex) '40pt' else '60pt'
   font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
   if (latex) font(logo) <- 'ppl'
   #set_all_padding(logo, , , 6)
   top_padding(logo) <- 2
   bottom_padding(logo) <- 2
+  col_width(logo) <- c(.4, .3, .3)
   #left_padding(logo)[1, 1] <- 10
   position(logo) <- 'center'
   logo
