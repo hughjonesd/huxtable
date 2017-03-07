@@ -17,7 +17,7 @@ code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds', pa
 
 # runs example and checks output & values haven't changed; optionally reset files if code has changed
 test_ex_same <- function(fname, reset_on_change = TRUE) {
-  if (Sys.getenv('R_TESTS') != 'unset') return(invisible())
+  if (! Sys.getenv('R_TESTS') == '') return(invisible())
   excode <- example_code_for_topic(fname)
   codepath <- code_path_for_topic(fname)
   if (file.exists(codepath)) {
