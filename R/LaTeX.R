@@ -142,13 +142,12 @@ build_tabular <- function(ht) {
         tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
         bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
         contents <- paste0(tpadding, contents, bpadding)
-      }
-
-      # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
-      # not sure how this should interact with cell padding...
-      if (! is.na(row_height <- row_height(ht)[drow])) {
-        if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
-        contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
+        # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
+        # not sure how this should interact with cell padding...
+        if (! is.na(row_height <- row_height(ht)[drow])) {
+          if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
+          contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
+        }
       }
 
       # print out cell_color and borders from display cell rather than actual cell

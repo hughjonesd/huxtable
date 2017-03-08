@@ -37,3 +37,8 @@ test_that('Four spaces does not cause <pre><code> markup', {
   file.remove(output)
   expect_false(any(grepl('findme&lt;/td&gt;', lines)))
 })
+
+test_that('Row heights do not screw up latex multicol', {
+  expect_silent(output <- rmarkdown::render('rowheight-multicol-test.Rmd', quiet = TRUE))
+  if (exists('output')) file.remove(output)
+})
