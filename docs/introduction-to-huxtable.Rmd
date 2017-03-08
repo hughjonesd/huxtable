@@ -150,6 +150,32 @@ number_format(car_ht) <- 0
 add_colnames(car_ht[1:5,])
 ```
 
+## Column width and cell wrapping
+
+You can set column widths using the `col_width` property:
+
+```{r}
+col_width(ht) <- c('30pt', '40pt')
+ht
+```
+
+Column widths are a per-column property. For example, `ht` has two columns so I used two values for the column widths.
+The row heights can be set using `row_height`. 
+
+By default, if a cell contains long contents, it will be stretched. Use the `wrap` property to allow cell contents
+to wrap over multiple lines:
+
+```{r}
+ht[4, 1] <- 'David Arthur Shrimpton Hugh-Jones'
+ht 
+```
+
+```{r}
+ht_wrapped <- ht
+wrap(ht_wrapped) <- TRUE
+ht_wrapped
+```
+
 ## Subsetting a huxtable
 
 You can subset, sort and generally data-wrangle a huxtable just like a normal data frame. Cell and 
