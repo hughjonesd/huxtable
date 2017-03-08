@@ -96,7 +96,8 @@ cell_html <- function (ht, rn, cn) {
   res <- paste0(res, 'vertical-align: ', val, '; ')
   al  <- align(ht)[rn, cn]
   res <- paste0(res, 'text-align: ', al, '; ')
-
+  wrap <- wrap(ht)[rn, cn]
+  res <- paste0(res, 'white-space: ', if (wrap) 'normal' else 'nowrap', '; ')
 
   borders <- c(top_border(ht)[rn, cn], right_border(ht)[rn, cn], bottom_border(ht)[rn, cn],
     left_border(ht)[rn, cn])
