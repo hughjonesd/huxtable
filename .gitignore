@@ -11,5 +11,5 @@ scratchpad*
 .DS_Store
 testing-doc.md
 testing-doc.tex
-tests/testthat/*.rds
+tests/testthat/example-rds/*.rds
 inst/doc
