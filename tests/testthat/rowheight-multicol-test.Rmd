@@ -1,0 +1,18 @@
+---
+title: "rowheight-multicol"
+author: "David Hugh-Jones"
+date: "08/03/2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(huxtable)
+ht <- hux(a = 1:2, b = 1:2)
+row_height(ht) <- c('50pt', '50pt')
+colspan(ht)[2, 1] <- 2
+ht
+```
