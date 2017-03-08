@@ -5,3 +5,6 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
+^tests/testthat/example-rds$
+logo\.xcf
+^doc$
