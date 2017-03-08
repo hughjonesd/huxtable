@@ -161,7 +161,7 @@ cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg %>% 
-      add_rownames(colname = 'Car name') 
+      huxtable::add_rownames(colname = 'Car name') 
 
 cars_mpg[1:5,]
 ```
