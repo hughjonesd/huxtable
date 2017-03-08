@@ -8,23 +8,16 @@ BUGS
   - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
   - presumably could also do it before/after the actual row
 * left/right cell padding doesn't work with multiline tables
+* R CMD CHECK only works when called like so:
+`RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/MacOS/pandoc R CMD check --as-cran huxtable_0.1.0.tar.gz` 
 
 TODO
 ====
 
-* set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
 * simple `add_footnote_row` method?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * general set_properties() function: `set_properties(ht, row, col, font = 'times', align = 'left')`
-* differentiate headers from content; don't change content to character;
-  - one poss is to keep the current (simple!) storage but to remember original types and to convert
-    back as needed
-  - or is there a data frame where types can be arbitrary?
-  - or bite the bullet and have separate components
-  - or store the data twice, once in the df and once separately on its own? (yuck)
-  - NB not nec true that headers are first X rows/cols exclusively!
-  - presumably they are always whole rows and columns, though.
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
   - row names?
@@ -60,6 +53,16 @@ PUT OFF
 * set properties byrow with byrow = TRUE
   - hard to get this right when setting subsets
   - replacement of the new value takes place outside the `property<-` function
+* differentiate headers from content; don't change content to character;
+  - this is interesting but hard
+  - one poss is to keep the current (simple!) storage but to remember original types and to convert
+    back as needed
+  - or is there a data frame where types can be arbitrary?
+  - or bite the bullet and have separate components
+  - or store the data twice, once in the df and once separately on its own? (yuck)
+  - NB not nec true that headers are first X rows/cols exclusively!
+  - presumably they are always whole rows and columns, though.
+  - advantage when cbinding, you could have an option to only cbind the data rows...
   
 QUESTIONS
 =========
