@@ -5,21 +5,18 @@ BUGS
 
 * border width in LaTeX... not sure fixable.
   - you may be able to set it per row for horiz ones using arrayrulewidth...
-* left/right cell padding doesn't work with multline tables
+  - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
+  - presumably could also do it before/after the actual row
+* left/right cell padding doesn't work with multiline tables
 
 TODO
 ====
 
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
-* `col_width`, `row_height` should be plural
-* `top_padding`, `top_border` should be `padding_top`, `border_top` etc.
-* docs: 
-  - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
 * simple `add_footnote_row` method?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * general set_properties() function: `set_properties(ht, row, col, font = 'times', align = 'left')`
-* `borders()<-` shortcut?
 * differentiate headers from content; don't change content to character;
   - one poss is to keep the current (simple!) storage but to remember original types and to convert
     back as needed
@@ -46,15 +43,20 @@ TODO
 
 PUT OFF
 =======
+* `col_width`, `row_height` should be plural. Not sure this is necessary.
+* `top_padding`, `top_border` should be `padding_top`, `border_top` etc.
+  - not sure if autocomplete is easier this way...
 * auto cell align: left for text, decimal for numbers?
   - decimal alignment doesn't work in HTML. LaTeX has dcolumn and/or siunitx... maybe skip
 * new version of latex code: compute "real" details (border, cell, content) for each row?
-* no need to have set_... methods be subclassable (so long as setters with <- are subclassable)
-* setting relative heights in LaTeX. Too complex; can't redefine array stretch.
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
 * way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
+* `borders()<-` shortcut
+  - can't really do this if you want to assign to particular subsets
+  - because that would call `borders(ht)` and what does that return?
+  - stick with `set_all_borders`
 * set properties byrow with byrow = TRUE
   - hard to get this right when setting subsets
   - replacement of the new value takes place outside the `property<-` function

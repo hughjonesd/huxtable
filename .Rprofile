@@ -22,9 +22,11 @@ register_s3_exports <- function() {
   writeLines(nsl, NAMESPACE)
 }
 
-cat("Sourcing functions from tests/testing-functions.R")
-source('./tests/testthat/functions.R')
-if (require(devtools)) {
-  cat('Tracing devtools::document to hack s3 exports in NAMESPACE')
-  trace(devtools::document, exit = register_s3_exports)
+if (interactive()) {
+  cat("Sourcing functions from tests/testthat/functions.R")
+  source('./tests/testthat/functions.R')
+  if (require(devtools)) {
+    cat('Tracing devtools::document to hack s3 exports in NAMESPACE')
+    trace(devtools::document, exit = register_s3_exports)
+  }
 }
