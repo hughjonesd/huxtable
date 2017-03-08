@@ -11,6 +11,8 @@ TODO
 ====
 
 * set wrap to TRUE or FALSE (css: white-space:nowrap) - use pmb style columns?
+* `col_width`, `row_height` should be plural
+* `top_padding`, `top_border` should be `padding_top`, `border_top` etc.
 * docs: 
   - vignette - Limitations. Big table of comparison with other packages (separate vignette?)
 * simple `add_footnote_row` method?
