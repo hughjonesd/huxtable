@@ -6,7 +6,8 @@
 *.synctex.gz
 *.log
 *.dvi
-table-tester.*
+table-tester*
+scratchpad*
 .DS_Store
 testing-doc.md
 testing-doc.tex
