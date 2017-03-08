@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2017-03-07" />
+<meta name="date" content="2017-03-08" />
 
 <title>Introduction to Huxtable</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Introduction to Huxtable</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2017-03-07</em></h4>
+<h4 class="date"><em>2017-03-08</em></h4>
 
 </div>
 
@@ -161,7 +161,7 @@ ht &lt;- hux(
       )</code></pre>
 <p>Or, if you already have your data in a data frame, use <code>as_hux</code>.</p>
 <pre class="r"><code>data(mtcars)
-car_ht &lt;- as_hux(mtcars, add_colnames = TRUE)</code></pre>
+car_ht &lt;- as_hux(mtcars)</code></pre>
 <p>Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R, they’ll appear just like ordinary data frames. Notice that we’ve added the column names to the data frame itself. We’re going to print them out, so it makes sense that they need to be part of the actual table.</p>
 <pre class="r"><code>print(ht)</code></pre>
 <pre><code>##           Employee Salary
@@ -366,7 +366,7 @@ David Hugh-Jones
 <h2>Number formatting</h2>
 <p>You can change how huxtable formats numbers using <code>number_format</code>. Huxtable guesses whether your cell is a number based on its contents, not on the column type. Set <code>number_format</code> to a number of decimal places (for more advanced options, see the help files).</p>
 <pre class="r"><code>number_format(car_ht) &lt;- 0
-car_ht[1:5,]</code></pre>
+add_colnames(car_ht[1:5,])</code></pre>
 <table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;">
 <col style="width: NA;">
@@ -554,6 +554,41 @@ carb
 1
 </td>
 </tr>
+<tr>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+19
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+8
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+360
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+175
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+3
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+3
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+17
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+0
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+3
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+2
+</td>
+</tr>
 </table>
 </div>
 <div id="subsetting-a-huxtable" class="section level2">
@@ -563,7 +598,8 @@ carb
 cars_mpg &lt;- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg &lt;- cars_mpg %&gt;% 
-      add_rownames(colname = 'Car name') 
+      huxtable::add_rownames(colname = 'Car name') %&gt;% 
+      huxtable::add_colnames()
 
 cars_mpg[1:5,]</code></pre>
 <table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
@@ -571,6 +607,20 @@ cars_mpg[1:5,]</code></pre>
 <col style="width: NA;">
 <col style="width: NA;">
 <col style="width: NA;">
+<tr>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+Car name
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+mpg
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+cyl
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
+am
+</td>
+</tr>
 <tr>
 <td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
 Datsun 710
@@ -627,20 +677,6 @@ Fiat 128
 1
 </td>
 </tr>
-<tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-Honda Civic
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-30
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-4
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">
-1
-</td>
-</tr>
 </table>
 <p>However, in general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the <code>cars_mpg</code> data by cylinder before adding column names to the data frame itself.</p>
 </div>
@@ -663,6 +699,7 @@ align(cars_mpg)[1, 2] &lt;- 'center'
 
 cars_mpg &lt;- set_all_padding(cars_mpg, , , 2)
 cars_mpg &lt;- set_all_borders(cars_mpg, , , 1)
+valign(cars_mpg)[1,] &lt;- 'top'
 col_width(cars_mpg) &lt;- c(.4 , .3 , .1, .1, .1)
 
 if (is_latex) font_size(cars_mpg) &lt;- 10
@@ -684,6 +721,20 @@ List of cars
 <td rowspan="12" style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Four cylinders
 </td>
+<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+Car name
+</td>
+<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+mpg
+</td>
+<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+cyl
+</td>
+<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+am
+</td>
+</tr>
+<tr>
 <td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Datsun 710
 </td>
@@ -838,6 +889,9 @@ Volvo 142E
 </td>
 </tr>
 <tr>
+<td rowspan="7" style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+Six cylinders
+</td>
 <td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Mazda RX4
 </td>
@@ -852,9 +906,6 @@ Mazda RX4
 </td>
 </tr>
 <tr>
-<td rowspan="7" style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-Six cylinders
-</td>
 <td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Mazda RX4 Wag
 </td>
@@ -939,6 +990,9 @@ Ferrari Dino
 </td>
 </tr>
 <tr>
+<td rowspan="14" style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
+Eight cylinders
+</td>
 <td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Hornet Sportabout
 </td>
@@ -953,9 +1007,6 @@ Hornet Sportabout
 </td>
 </tr>
 <tr>
-<td rowspan="14" style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-Eight cylinders
-</td>
 <td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
 Duster 360
 </td>
@@ -1137,20 +1188,6 @@ Maserati Bora
 1
 </td>
 </tr>
-<tr>
-<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-1
-</td>
-<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-mpg
-</td>
-<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-cyl
-</td>
-<td style="vertical-align: top; text-align: left; border-width:1px 1px 1px 1px; border-style: solid; padding: 2px 2px 2px 2px; ">
-am
-</td>
-</tr>
 </table>
 </div>
 <div id="quick-themes" class="section level2">
@@ -1168,100 +1205,100 @@ am
 Six cylinders
 </td>
 <td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+Mazda RX4
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+21
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+6
+</td>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+1
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 Mazda RX4 Wag
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 21
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 1
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 Hornet 4 Drive
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 21
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 0
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 Valiant
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 18
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 0
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 Merc 280
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 19
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 0
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 Merc 280C
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 18
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
 0
 </td>
 </tr>
 <tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 Ferrari Dino
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 20
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 6
 </td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 228, 196); ">
+<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
 1
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
-Hornet Sportabout
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
-19
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
-8
-</td>
-<td style="vertical-align: top; text-align: left; border-width:0px 0px 0px 0px; border-style: solid; padding: 2px 2px 2px 2px; background-color: rgb(255, 255, 255); ">
-0
 </td>
 </tr>
 </table>

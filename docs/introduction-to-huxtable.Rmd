@@ -18,6 +18,7 @@ library(dplyr)
 library(huxtable)
 
 is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+# is_latex <- TRUE
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {
     if (! before && is_latex) knitr::asis_output('\\FloatBarrier')
@@ -59,7 +60,7 @@ Or, if you already have your data in a data frame, use `as_hux`.
 
 ```{r}
 data(mtcars)
-car_ht <- as_hux(mtcars, add_colnames = TRUE)
+car_ht <- as_hux(mtcars)
 ```
 
 Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R,
@@ -146,7 +147,7 @@ options, see the help files).
 
 ```{r}
 number_format(car_ht) <- 0
-car_ht[1:5,]
+add_colnames(car_ht[1:5,])
 ```
 
 ## Subsetting a huxtable
@@ -161,7 +162,8 @@ cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg %>% 
-      huxtable::add_rownames(colname = 'Car name') 
+      huxtable::add_rownames(colname = 'Car name') %>% 
+      huxtable::add_colnames()
 
 cars_mpg[1:5,]
 ```
@@ -190,6 +192,7 @@ align(cars_mpg)[1, 2] <- 'center'
 
 cars_mpg <- set_all_padding(cars_mpg, , , 2)
 cars_mpg <- set_all_borders(cars_mpg, , , 1)
+valign(cars_mpg)[1,] <- 'top'
 col_width(cars_mpg) <- c(.4 , .3 , .1, .1, .1)
 
 if (is_latex) font_size(cars_mpg) <- 10
