@@ -2,7 +2,7 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
-  'top_padding', 'left_padding', 'right_padding', 'bottom_padding',
+  'top_padding', 'left_padding', 'right_padding', 'bottom_padding', 'wrap',
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
   'font')
 huxtable_col_attrs <- c('col_width')
@@ -27,6 +27,7 @@ huxtable_default_attrs <- list(
         right_padding       = 4,
         top_padding         = 4,
         bottom_padding      = 4,
+        wrap                = FALSE,
         caption             = NA,
         caption_pos         = 'top',
         position            = 'center',
@@ -357,6 +358,20 @@ set_all_padding.huxtable <- function(ht, row, col, value) {
   right_padding(ht)[row, col] <- value
   ht
 }
+
+
+#' @template getset-cell
+#' @templateVar attr_name wrap
+#' @templateVar attr_desc Cell Wrapping
+#' @templateVar value_param_desc
+#' A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default.
+#' @examples
+#' ht <- huxtable(a = rep('Some long text', 2))
+#' wrap(ht)[1,] <- TRUE
+#' print_html(ht)
+#' @export wrap wrap<- set_wrap wrap.huxtable wrap<-.huxtable
+NULL
+make_getter_setters('wrap', 'cell', check_fun = is.logical)
 
 
 #' @template getset-cell
