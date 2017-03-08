@@ -2,9 +2,9 @@
 output: github_document
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, results = 'asis'}
 library(huxtable)
-hux_logo()
+print_html(hux_logo())
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
