@@ -2,6 +2,10 @@
 output: github_document
 ---
 
+```{r, echo = FALSE}
+library(huxtable)
+hux_logo()
+```
 
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
 
@@ -17,6 +21,18 @@ knitr::opts_chunk$set(
 ```
 
 Huxtable is a package for creating HTML and LaTeX tables. It provides similar 
-functionality to xtable, but does more, with a simpler interface. To learn more
-check out [the website](http://hughjonesd.github.io/huxtable), or read the vignette in
+functionality to xtable, but does more, with a simpler interface. 
+
+# Installing
+
+To install from github: 
+
+```{r, eval = FALSE}
+install.packages('devtools')
+devtools::install_github('hughjonesd/huxtable')
+```
+
+# Learning more
+
+Check out [the website](http://hughjonesd.github.io/huxtable), or read the vignette in
 [HTML](http://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](http://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf).
