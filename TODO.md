@@ -8,8 +8,6 @@ BUGS
   - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
   - presumably could also do it before/after the actual row
 * left/right cell padding doesn't work with multiline tables
-* R CMD CHECK only works when called like so:
-`RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/MacOS/pandoc R CMD check --as-cran huxtable_0.1.0.tar.gz` 
 
 TODO
 ====
@@ -17,7 +15,6 @@ TODO
 * simple `add_footnote_row` method?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
-* general set_properties() function: `set_properties(ht, row, col, font = 'times', align = 'left')`
 * easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
   - columns should allow name1:name2 style syntax, maybe also starts_with & friends
   - row names?
