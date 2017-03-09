@@ -7,7 +7,7 @@ gdiff <- git2r::diff(tree(commits()[[1]]))
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
 
 v <- devtools::as.package('.')$version
-huxtar <- paste0('huxtable_', v, '.tar.gz')
+devtools::build()
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
       document = FALSE, check_version = TRUE)
 # system("R", args = c('CMD', 'CHECK', '--as-cran', huxtar),
@@ -30,8 +30,8 @@ if (length(chk$notes)) {
 newtag <- paste0('v', v, '-rc')
 tags <- tags()
 tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
-tags <- as.numeric(gsub(v, '', tags))
+tags <- as.numeric(gsub(newtag, '', tags))
 rc <- if (length(tags)) as.integer(max(tags) + 1) else 1L
 newtag <- paste0(newtag, rc)
-cat('Tagging current version as ', newtag)
+cat('\nTagging current version as: ', newtag)
 tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
