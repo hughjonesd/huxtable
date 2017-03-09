@@ -455,9 +455,19 @@ set_attr_dimnames <- function(ht) {
   ht
 }
 
+#' Guess Knitr Output Format
+#'
+#' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
+#'
+#' @return 'html', 'latex' or something else
 #' @export
-knit_print.huxtable <- function (x, options, ...) {
-  requireNamespace('htmltools', quietly = TRUE)
+#'
+#' @examples
+#' \dontrun{
+#' # in a knitr document
+#' guess_knitr_output_format()
+#' }
+guess_knitr_output_format <- function() {
   of <- knitr::opts_knit$get('out.format')
   if (of == 'markdown') {
     of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
@@ -469,6 +479,13 @@ knit_print.huxtable <- function (x, options, ...) {
     }
   }
   if (of == 'pdf') of <- 'latex'
+  of
+}
+
+#' @export
+knit_print.huxtable <- function (x, options, ...) {
+  requireNamespace('htmltools', quietly = TRUE)
+  of <- guess_knitr_output_format()
 
   call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
   res <- do.call(call_name, list(ht = x))
