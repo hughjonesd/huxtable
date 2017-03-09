@@ -6,7 +6,7 @@
 \alias{set_col_width}
 \alias{col_width.huxtable}
 \alias{col_width<-.huxtable}
-\title{Get or Set Column Widths}
+\title{Column Widths}
 \usage{
 col_width(ht)
 col_width(ht) <- value

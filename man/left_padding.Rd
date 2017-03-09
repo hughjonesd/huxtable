@@ -27,7 +27,7 @@
 \alias{right_padding}
 \alias{bottom_padding}
 \alias{top_padding}
-\title{Get or Set Cell Padding}
+\title{Cell Padding}
 \usage{
 left_padding(ht)
 left_padding(ht) <- value

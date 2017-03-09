@@ -6,7 +6,7 @@
 \alias{set_label}
 \alias{label.huxtable}
 \alias{label<-.huxtable}
-\title{Get or Set Table Label}
+\title{Table Label}
 \usage{
 label(ht)
 label(ht) <- value

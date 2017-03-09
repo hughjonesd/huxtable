@@ -6,7 +6,7 @@
 \alias{set_na_string}
 \alias{na_string.huxtable}
 \alias{na_string<-.huxtable}
-\title{Get or Set String to Use For NA}
+\title{String to Use For NA}
 \usage{
 na_string(ht)
 na_string(ht) <- value

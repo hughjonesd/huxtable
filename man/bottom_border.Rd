@@ -6,7 +6,7 @@
 \alias{set_bottom_border}
 \alias{bottom_border.huxtable}
 \alias{bottom_border<-.huxtable}
-\title{Get or Set Bottom Border}
+\title{Bottom Border}
 \usage{
 bottom_border(ht)
 bottom_border(ht) <- value

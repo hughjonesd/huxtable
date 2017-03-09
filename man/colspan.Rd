@@ -6,7 +6,7 @@
 \alias{set_colspan}
 \alias{colspan.huxtable}
 \alias{colspan<-.huxtable}
-\title{Get or Set Column Span}
+\title{Column Span}
 \usage{
 colspan(ht)
 colspan(ht) <- value

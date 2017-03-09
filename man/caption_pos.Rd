@@ -6,7 +6,7 @@
 \alias{set_caption_pos}
 \alias{caption_pos.huxtable}
 \alias{caption_pos<-.huxtable}
-\title{Get or Set Caption Position}
+\title{Caption Position}
 \usage{
 caption_pos(ht)
 caption_pos(ht) <- value

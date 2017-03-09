@@ -6,7 +6,7 @@
 \alias{set_top_border}
 \alias{top_border.huxtable}
 \alias{top_border<-.huxtable}
-\title{Get or Set Top Border}
+\title{Top Border}
 \usage{
 top_border(ht)
 top_border(ht) <- value

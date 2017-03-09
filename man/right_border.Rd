@@ -6,7 +6,7 @@
 \alias{set_right_border}
 \alias{right_border.huxtable}
 \alias{right_border<-.huxtable}
-\title{Get or Set Right Border}
+\title{Right Border}
 \usage{
 right_border(ht)
 right_border(ht) <- value

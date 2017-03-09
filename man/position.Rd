@@ -6,7 +6,7 @@
 \alias{set_position}
 \alias{position.huxtable}
 \alias{position<-.huxtable}
-\title{Get or Set Table Position}
+\title{Table Position}
 \usage{
 position(ht)
 position(ht) <- value

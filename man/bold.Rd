@@ -24,7 +24,7 @@
 \alias{italic<-.huxtable<-.huxtable}
 \alias{set_set_italic}
 \alias{italic}
-\title{Get or Set Bold or Italic Cell Text}
+\title{Bold or Italic Cell Text}
 \usage{
 bold(ht)
 bold(ht) <- value

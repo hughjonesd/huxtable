@@ -6,7 +6,7 @@
 \alias{set_escape_contents}
 \alias{escape_contents.huxtable}
 \alias{escape_contents<-.huxtable}
-\title{Get or Set Whether to Escape Cell Contents}
+\title{Whether to Escape Cell Contents}
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value

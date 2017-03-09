@@ -11,7 +11,7 @@ if (exists('morealiases')) {
 }
 %>
 
-#' @title Get or Set <%= attr_desc %>
+#' @title <%= attr_desc %>
 #'
 #' @description
 #' Functions to get or set the table-level <%= tolower(attr_desc) %> property of a huxtable.

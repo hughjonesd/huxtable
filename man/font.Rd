@@ -6,7 +6,7 @@
 \alias{set_font}
 \alias{font.huxtable}
 \alias{font<-.huxtable}
-\title{Get or Set Font}
+\title{Font}
 \usage{
 font(ht)
 font(ht) <- value

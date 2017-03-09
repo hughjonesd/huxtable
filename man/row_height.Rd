@@ -6,7 +6,7 @@
 \alias{set_row_height}
 \alias{row_height.huxtable}
 \alias{row_height<-.huxtable}
-\title{Get or Set Row Heights}
+\title{Row Heights}
 \usage{
 row_height(ht)
 row_height(ht) <- value

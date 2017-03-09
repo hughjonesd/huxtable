@@ -6,7 +6,7 @@
 \alias{set_text_color}
 \alias{text_color.huxtable}
 \alias{text_color<-.huxtable}
-\title{Get or Set Cell Text Color}
+\title{Cell Text Color}
 \usage{
 text_color(ht)
 text_color(ht) <- value

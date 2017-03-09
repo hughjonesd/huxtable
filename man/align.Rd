@@ -6,7 +6,7 @@
 \alias{set_align}
 \alias{align.huxtable}
 \alias{align<-.huxtable}
-\title{Get or Set Alignment}
+\title{Alignment}
 \usage{
 align(ht)
 align(ht) <- value

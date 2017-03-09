@@ -6,7 +6,7 @@
 \alias{set_rowspan}
 \alias{rowspan.huxtable}
 \alias{rowspan<-.huxtable}
-\title{Get or Set Row Span}
+\title{Row Span}
 \usage{
 rowspan(ht)
 rowspan(ht) <- value

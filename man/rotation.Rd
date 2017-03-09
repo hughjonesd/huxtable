@@ -6,7 +6,7 @@
 \alias{set_rotation}
 \alias{rotation.huxtable}
 \alias{rotation<-.huxtable}
-\title{Get or Set Cell Text Rotation}
+\title{Cell Text Rotation}
 \usage{
 rotation(ht)
 rotation(ht) <- value

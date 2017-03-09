@@ -6,7 +6,7 @@
 \alias{set_background_color}
 \alias{background_color.huxtable}
 \alias{background_color<-.huxtable}
-\title{Get or Set Cell Background Color}
+\title{Cell Background Color}
 \usage{
 background_color(ht)
 background_color(ht) <- value

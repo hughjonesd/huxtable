@@ -6,7 +6,7 @@
 \alias{set_caption}
 \alias{caption.huxtable}
 \alias{caption<-.huxtable}
-\title{Get or Set Caption}
+\title{Caption}
 \usage{
 caption(ht)
 caption(ht) <- value

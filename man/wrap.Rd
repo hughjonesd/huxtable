@@ -6,7 +6,7 @@
 \alias{set_wrap}
 \alias{wrap.huxtable}
 \alias{wrap<-.huxtable}
-\title{Get or Set Cell Wrapping}
+\title{Cell Wrapping}
 \usage{
 wrap(ht)
 wrap(ht) <- value
