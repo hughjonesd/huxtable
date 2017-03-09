@@ -13,9 +13,9 @@ chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.ap
 # system("R", args = c('CMD', 'CHECK', '--as-cran', huxtar),
 #      env = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'))
 if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
-  cat('R CMD CHECK errors:\n')
+  cat('\n\nR CMD CHECK errors:\n')
   cat(chk$errors)
-  cat('R CMD CHECK warnings:\n')
+  cat('\n\nR CMD CHECK warnings:\n')
   cat(chk$warnings)
   stop('Not tagging built release.')
 }
