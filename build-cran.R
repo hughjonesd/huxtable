@@ -30,7 +30,8 @@ if (length(chk$notes)) {
   if (! yn %in% c('Y', 'y')) stop('OK, stopping.')
 }
 
-newtag <- paste0('v', devtools::as.package('.')$version, '-rc')
+v <- devtools::as.package('.')$version
+newtag <- paste0('v', v, '-rc')
 tags <- tags()
 tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
 tags <- as.numeric(gsub(newtag, '', tags))
