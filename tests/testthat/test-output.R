@@ -27,7 +27,7 @@ test_that('Screen output examples unchanged', {
 test_that('Multi-rowspan screen output is sane', {
   ht <- hux(a = rep('aaaaaa', 10), b = rep('bbbbbb', 10))
   rowspan(ht)[1,1] <- 10
-  expect_equal_to_reference(to_screen(ht), file.path('example-rds/', 'multirow.rds'))
+  expect_equal_to_reference(to_screen(ht), file.path('example-rds', 'multirow.rds'))
 })
 
 test_that('Four spaces does not cause <pre><code> markup', {
