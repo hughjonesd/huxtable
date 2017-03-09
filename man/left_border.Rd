@@ -6,11 +6,26 @@
 \alias{set_left_border}
 \alias{left_border.huxtable}
 \alias{left_border<-.huxtable}
+\alias{right_border}
+\alias{top_border}
+\alias{bottom_border}
 \title{Left Border}
 \usage{
 left_border(ht)
 left_border(ht) <- value
 set_left_border(ht, row, col, value)
+
+right_border(ht)
+right_border(ht) <- value
+set_right_border(ht, row, col, value)
+
+top_border(ht)
+top_border(ht) <- value
+set_top_border(ht, row, col, value)
+
+bottom_border(ht)
+bottom_border(ht) <- value
+set_bottom_border(ht, row, col, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -24,6 +39,8 @@ set_left_border(ht, row, col, value)
 \value{
 For \code{left_border}, the \code{left_border} attribute.
 For \code{set_left_border}, the \code{ht} object.
+
+Similarly for the other functions.
 }
 \description{
 Functions to get or set the left border property of huxtable table cells.
@@ -34,8 +51,4 @@ ht <- huxtable(a = 1:3, b = 1:3)
 left_border(ht) <-  1
 left_border(ht)
 print_screen(ht)
-}
-\seealso{
-Other borders: \code{\link{bottom_border}},
-  \code{\link{right_border}}, \code{\link{top_border}}
 }

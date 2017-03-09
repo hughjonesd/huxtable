@@ -250,39 +250,35 @@ make_getter_setters('text_color', 'cell')
 NULL
 make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 
-#' @template getset-cell
-#' @templateVar attr_name right_border
-#' @templateVar attr_desc Right Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
-#' @template getset-example
-#' @templateVar attr_val 1
-#' @templateVar extra print_screen(ht)
-#' @family borders
+
+#' @name right_border
+#' @rdname left_border
+#' @usage
+#' right_border(ht)
+#' right_border(ht) <- value
+#' set_right_border(ht, row, col, value)
 #' @export right_border right_border<- set_right_border right_border.huxtable right_border<-.huxtable
 NULL
 make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 
-#' @template getset-cell
-#' @templateVar attr_name top_border
-#' @templateVar attr_desc Top Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
-#' @template getset-example
-#' @templateVar attr_val 1
-#' @templateVar extra print_screen(ht)
-#' @family borders
+
+#' @name top_border
+#' @rdname left_border
+#' @return Similarly for the other functions.
+#' @usage
+#' top_border(ht)
+#' top_border(ht) <- value
+#' set_top_border(ht, row, col, value)
 #' @export top_border top_border<- set_top_border top_border.huxtable top_border<-.huxtable
 NULL
 make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 
-#' @template getset-cell
-#' @templateVar attr_name bottom_border
-#' @templateVar attr_desc Bottom Border
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
-#' @template getset-example
-#' @templateVar attr_val 1
-#' @templateVar extra print_screen(ht)
-#' A numeric vector or matrix giving border widths. Set to 0 for no border.
-#' @family borders
+#' @name bottom_border
+#' @rdname left_border
+#' @usage
+#' bottom_border(ht)
+#' bottom_border(ht) <- value
+#' set_bottom_border(ht, row, col, value)
 #' @export bottom_border bottom_border<- set_bottom_border bottom_border.huxtable bottom_border<-.huxtable
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
