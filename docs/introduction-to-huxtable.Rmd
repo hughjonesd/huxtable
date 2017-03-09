@@ -3,15 +3,12 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
-vignette: >
-  %\VignetteIndexEntry{Introduction to Huxtable}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
-
+  html_document: null
+vignette: |
+  %\VignetteIndexEntry{Introduction to Huxtable} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
@@ -20,7 +17,7 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 
-is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+is_latex <- guess_knitr_output_format() == 'latex'
 # is_latex <- TRUE
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {

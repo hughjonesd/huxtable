@@ -14,7 +14,7 @@ output:
 ```{r setup, echo = FALSE}
 knitr::asis_output('', meta = rmarkdown::latex_dependency('placeins'))
 library(huxtable)
-is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
+is_latex <- guess_knitr_output_format() == 'latex'
 
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {
