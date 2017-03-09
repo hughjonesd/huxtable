@@ -2,7 +2,7 @@
 % Please edit documentation in R/huxtable.R
 \name{guess_knitr_output_format}
 \alias{guess_knitr_output_format}
-\title{Guess Knitr Output}
+\title{Guess Knitr Output Format}
 \usage{
 guess_knitr_output_format()
 }
