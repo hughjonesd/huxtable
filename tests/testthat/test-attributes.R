@@ -27,6 +27,7 @@ test_that("Table property getter/setter examples unchanged", {
 })
 
 test_that("Can refer to properties by colnames", {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   number_format(ht)[1,1] <- 3
   col_width(ht) <- c(.2, .6, .2)
   row_height(ht) <- rep(.2, 5)
@@ -35,9 +36,22 @@ test_that("Can refer to properties by colnames", {
 })
 
 test_that('Assignment to attributes preserves colnames', {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   tmp <- colnames(align(ht))
   align(ht) <- 'right'
   expect_equal(tmp, colnames(align(ht)))
   align(ht)[1,1] <- 'left'
   expect_equal(tmp, colnames(align(ht)))
+})
+
+test_that('Can use set_cell_properties', {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
+  ht <- set_cell_properties(ht, 1, 1, font = 'times', align = 'right')
+  expect_equivalent(font(ht)[1, 1], 'times')
+  expect_equivalent(align(ht)[1, 1], 'right')
+})
+
+test_that('set_cell_properties fails with bad arguments', {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
+  expect_error(ht <- set_cell_properties(ht, 1, 1, bad = 'no!'))
 })

@@ -119,6 +119,34 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   NULL
 }
 
+#' Set multiple cell properties
+#'
+#' @param ht A huxtable.
+#' @param row A row specification.
+#' @param col A column specification.
+#' @param ... Named list of property values.
+#'
+#' @return The modified huxtable object.
+#' @export
+#'
+#' @examples
+#' ht <- hux(a = 1:3, b = 1:3)
+#' ht <- set_cell_properties(ht, 1, 1, font = 'Palatino', font_size = 14)
+#' font(ht)
+#' font_size(ht)
+set_cell_properties <- function (ht, row, col, ...) {
+  props <- list(...)
+  if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
+        huxtable_cell_attrs), collapse = ', '))
+  for (pn in names(props)) {
+    pfun <- as.name(pn)
+    eval(bquote(
+        .(pfun)(ht)[row, col] <- props[[pn]]
+    ))
+  }
+
+  ht
+}
 
 #' @template getset-cell
 #' @templateVar attr_name valign
