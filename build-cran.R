@@ -11,7 +11,7 @@ for (f in list.files('vignettes', pattern = '.*\\.Rmd$')) {
   if (length(out) > 0) stop('vignettes and docs Rmd files differ, please fix!')
 }
 
-
+devtools::build_vignettes()
 devtools::build()
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
       document = FALSE, check_version = TRUE)
