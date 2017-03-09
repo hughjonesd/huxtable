@@ -20,6 +20,8 @@
 </td>
 </tr>
 </table>
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable)
+
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,6 +29,12 @@ Huxtable is a package for creating HTML and LaTeX tables. It provides similar fu
 
 Installing
 ==========
+
+To install from CRAN:
+
+``` r
+install.packages('huxtable')
+```
 
 To install from github:
 
