@@ -18,6 +18,7 @@ NULL
 #' @import stats
 #' @import grDevices
 #' @import htmltools
+#' @import lazyeval
 #'
 NULL
 

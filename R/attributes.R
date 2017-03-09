@@ -84,19 +84,20 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 
   if (attr_type == 'cell') {
   funs[[alt_setter]] <- eval(bquote(
-    function(ht, row, col, value = NULL, byrow = FALSE) {
+    function(ht, row, col, value, byrow = FALSE) {
       # how it should be: if you call set_font(ht, blah, value) then blah must return rows and columns
       # set_font(ht, blah, , value) - all columns, blah sets rows
       # set_font(ht, , blah, value) - all rows, blah sets cols
       rc <- list()
       if (missing(value)) {
         value <- col
-        rc <- get_cells_spec(ht, row)
+        if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
+        .(as.name(attr_name))(ht)[row] <- value
       } else {
         rc$row <- get_rc_spec(ht, row, 1)
         rc$col <- get_rc_spec(ht, col, 2)
+        .(as.name(attr_name))(ht)[rc$row, rc$col] <- value
       }
-      if (is.matrix(rc)) .(as.name(attr_name))(ht)[rc] <- value else .(as.name(attr_name))(ht)[rc$row, rc$col] <- value
 
       ht
     }
@@ -133,111 +134,6 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   NULL
 }
 
-get_rc_spec <- function (ht, obj, dimno) {
-  ndim <- dim(ht)[dimno]
-  if (missing(obj)) return(seq_len(ndim))
-  nl <- as.list(seq_len(ncol(ht)))
-  names(nl) <- colnames(ht)
-  obj <- eval(substitute(obj), nl, parent.frame())
-  if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
-}
-
-#' Return Every n Row or Column Numbers
-#'
-#' This is a convenience function to use in row or column specifications.
-#' In this context,
-#' \code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
-#' or columns of the huxtable.
-#'
-#' @param n A number (at least 1)
-#' @param from A number (at least 1)
-#'
-#' @details
-#' Technically, \code{every} returns a 2-argument function which can be called as
-#' \code{f(hux, dimension)}. See \code{\link{rowspecs}} for details.
-#'
-#' @export
-#'
-#' @examples
-#'
-#' ht <- huxtable(a = 1:10, b = 1:10)
-#' ht <- set_background_color(ht, every(3), 1:2, 'wheat')
-#' background_color(ht)
-every <- function(n, from = n) {
-  stopifnot(is.numeric(n))
-  stopifnot(n >= 1)
-  stopifnot(is.numeric(from))
-  stopifnot(from >= 1)
-  return(
-    function(ht, dimension) {
-      ndim <- dim(ht)[dimension]
-      if (ndim < from) return(numeric(0))
-      seq(from, ndim, n)
-    }
-  )
-}
-
-#' Return Even or Odd Columns
-#'
-#' These are convenience functions to use in row and column specifications.
-#'
-#' @param ht A huxtable object.
-#' @param dimension 1 for rows, 2 for columns.
-#' @details
-#'
-#' \code{evens(ht, 1)} returns even numbers up to \code{nrow(ht)}.
-#' \code{evens(ht, 2)} returns even numbers up to \code{ncol(ht)}.
-#' \code{odds} returns odd numbers in the same way.
-#'
-#' See \code{\link{rowspecs}} for more details.
-#'
-#' @seealso every
-#'
-#' @export
-#'
-#' @examples
-#' ht <- hux(a = 1:3, b = 1:3)
-#' ht <- set_align(ht, last(2), last(1), 'right')
-#' align(ht)
-evens <- every(2, from = 2)
-
-#' rdname evens
-#' @export
-odds  <- every(2, from = 1)
-
-#' Return the Last n Rows or Columns
-#'
-#' This is a convenience function to use in row and column specifications. In that context, it
-#' returns the last n row or column numbers of the huxtable.
-#' @param n
-#'
-#' @return
-#'
-#' @details
-#'
-#' Technically, \code{last} returns a two-argument function - see \code{\link{rowspecs}} for more details.
-#'
-#' @export
-#'
-#' @examples
-#' ht <- hux(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
-#' ht <- set_align(ht, last(2), last(1), 'right')
-#' align(ht)
-#'
-#' last(3)(ht, 1) # last 3 rows
-#' last(3)(ht, 2) # last 3 columns
-last <- function(n = 1) {
-  stopifnot(is.numeric(n))
-  stopifnot(n >= 1)
-  return(
-    function(ht, dimension) {
-      ndim <- dim(ht)[dimension]
-      if (ndim == 0) return(integer(0))
-      low <- max(1, ndim + 1 - n)
-      sort(ndim:low)
-    }
-  )
-}
 
 #' Set multiple cell properties
 #'
