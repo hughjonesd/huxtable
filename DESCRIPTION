@@ -5,13 +5,13 @@ Version: 0.1.0
 Author: David Hugh-Jones
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates HTML and LaTeX tables. Provides similar 
-  functionality to xtable, but does more, with a simpler interface.
+  functionality to 'xtable', but does more, with a simpler interface.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat, dplyr
 RoxygenNote: 6.0.1
-URL: https://github.com/hughjonesd/huxtable
+URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports: knitr, rmarkdown, xtable, devtools, htmltools  
 VignetteBuilder: knitr

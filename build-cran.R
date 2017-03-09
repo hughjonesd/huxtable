@@ -6,6 +6,11 @@ library(git2r)
 gdiff <- git2r::diff(tree(commits()[[1]]))
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
 
+for (f in list.files('vignettes', pattern = '.*\\.Rmd$')) {
+  out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
+  if (length(out) > 0) stop('vignettes and docs Rmd files differ, please fix!')
+}
+
 v <- devtools::as.package('.')$version
 devtools::build()
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),

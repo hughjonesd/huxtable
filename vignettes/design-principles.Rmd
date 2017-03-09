@@ -103,11 +103,12 @@ if (is_latex) ch2
 ```
 
 
+
 This comparison doesn't necessarily tell you the important stuff: how easy is the interface? Is the code
 currently maintained? I have not used all these packages, but my personal (and subjective) recommendations are:
 
 * `texreg` is very good for producing regression tables. It can cope with a huge variety of inputs.
-  Hopefully, with the advent of [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html), 
+  Hopefully, with the advent of [broom](https://CRAN.R-project.org/package=broom), 
   it will get easier for many packages to do this.
 * `ztable` seems to support a lot of functionality, though I haven't used it.
 * `xtable` is old, but reliable and widely available.
