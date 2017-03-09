@@ -3,8 +3,8 @@
 library(devtools)
 library(git2r)
 
-gdiff <- diff(repository('.'), as_char = TRUE)
-if (length(gdiff) > 0) stop('Working tree differs from index, please make commits!')
+gdiff <- git2r::diff(tree(commits()[[1]]))
+if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
 
 v <- devtools::as.package('.')$version
 huxtar <- paste0('huxtable_', v, '.tar.gz')
