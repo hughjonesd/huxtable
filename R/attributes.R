@@ -180,7 +180,10 @@ make_getter_setters('row_height', 'row')
 #' @export rowspan rowspan<- set_rowspan rowspan.huxtable rowspan<-.huxtable
 NULL
 make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
-    if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
+    {
+      if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
+      check_span_shadows(ht, 'row', value)
+    }
 )
 
 #' @template getset-cell
@@ -194,9 +197,23 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
 #' @export colspan colspan<- set_colspan colspan.huxtable colspan<-.huxtable
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
-    if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
+    {
+      if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
+      check_span_shadows(ht, 'col', value)
+    }
 )
 
+check_span_shadows <- function (ht, rc, value) {
+  value[is.na(value)] <- 1L
+  dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
+  candidates <- as.matrix(dcells[dcells$shadowed, c('row', 'col')])
+  problems <- value[candidates] # span of cells which would be shadowed;
+  if (any(problems > 1)) {
+    candidates <- candidates[problems > 1]
+    candidates <- paste(apply(candidates, 1, paste, collapse = ','), collapse = '; ')
+    stop('New rowspan/colspan would cut up existing multirow/multicol cells at ', candidates)
+  }
+}
 
 #' @template getset-cell
 #' @templateVar attr_name background_color
@@ -618,9 +635,9 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'ma
 }
 
 # return data frame mapping real cell positions to cells displayed
-display_cells <- function(ht) {
+display_cells <- function(ht, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
-    rowspan = as.vector(rowspan(ht)), colspan = as.vector(colspan(ht)))
+    rowspan = as.vector(new_rowspan), colspan = as.vector(new_colspan))
   dcells$display_row <- dcells$row
   dcells$display_col <- dcells$col
   dcells$shadowed <- FALSE
