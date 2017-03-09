@@ -4,8 +4,8 @@ Title: Simply Create LaTeX and HTML Tables
 Version: 0.1.0
 Author: David Hugh-Jones
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
-Description: Huxtable is a package for creating HTML and LaTeX tables. It provides similar 
-  functionality to xtable, with a simple interface.
+Description: Creates HTML and LaTeX tables. Provides similar 
+  functionality to xtable, but does more, with a simpler interface.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

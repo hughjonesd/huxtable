@@ -8,3 +8,6 @@
 ^tests/testthat/example-rds$
 logo\.xcf
 ^docs$
+^build-cran.Rscript$
+^man-roxygen$
+^TODO\.md$
