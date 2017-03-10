@@ -7,7 +7,7 @@
 last(n = 1)
 }
 \arguments{
-\item{n}{}
+\item{n}{Number of rows to return.}
 }
 \value{
 

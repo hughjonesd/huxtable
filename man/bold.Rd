@@ -32,7 +32,7 @@ set_bold(ht, row, col, value, byrow = FALSE)
 
 italic(ht)
 italic(ht) <- value
-set_italic(ht, row, col, value)
+set_italic(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

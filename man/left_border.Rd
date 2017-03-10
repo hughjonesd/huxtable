@@ -9,7 +9,22 @@
 \alias{right_border}
 \alias{top_border}
 \alias{bottom_border}
-\title{Left Border}
+\alias{right_border<-}
+\alias{top_border<-}
+\alias{bottom_border<-}
+\alias{right_border.huxtable}
+\alias{top_border.huxtable}
+\alias{bottom_border.huxtable}
+\alias{right_border<-.huxtable}
+\alias{top_border<-.huxtable}
+\alias{bottom_border<-.huxtable}
+\alias{set_right_border}
+\alias{set_top_border}
+\alias{set_bottom_border}
+\alias{right_border}
+\alias{top_border}
+\alias{bottom_border}
+\title{Borders}
 \usage{
 left_border(ht)
 left_border(ht) <- value
@@ -17,15 +32,15 @@ set_left_border(ht, row, col, value, byrow = FALSE)
 
 right_border(ht)
 right_border(ht) <- value
-set_right_border(ht, row, col, value)
+set_right_border(ht, row, col, value, byrow = FALSE)
 
 top_border(ht)
 top_border(ht) <- value
-set_top_border(ht, row, col, value)
+set_top_border(ht, row, col, value, byrow = FALSE)
 
 bottom_border(ht)
 bottom_border(ht) <- value
-set_bottom_border(ht, row, col, value)
+set_bottom_border(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -45,7 +60,7 @@ For \code{set_left_border}, the \code{ht} object.
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the left border property of huxtable table cells.
+Functions to get or set the borders property of huxtable table cells.
 }
 \examples{
 

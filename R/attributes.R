@@ -286,12 +286,12 @@ make_getter_setters('text_color', 'cell')
 
 #' @template getset-cell
 #' @templateVar attr_name left_border
-#' @templateVar attr_desc Left Border
+#' @templateVar attr_desc Borders
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @templateVar morealiases right_border top_border bottom_border
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
-#' @family borders
 #' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable
 NULL
 make_getter_setters('left_border', 'cell', check_fun = is.numeric)
@@ -302,7 +302,7 @@ make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 #' @usage
 #' right_border(ht)
 #' right_border(ht) <- value
-#' set_right_border(ht, row, col, value)
+#' set_right_border(ht, row, col, value, byrow = FALSE)
 #' @export right_border right_border<- set_right_border right_border.huxtable right_border<-.huxtable
 NULL
 make_getter_setters('right_border', 'cell', check_fun = is.numeric)
@@ -314,7 +314,7 @@ make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 #' @usage
 #' top_border(ht)
 #' top_border(ht) <- value
-#' set_top_border(ht, row, col, value)
+#' set_top_border(ht, row, col, value, byrow = FALSE)
 #' @export top_border top_border<- set_top_border top_border.huxtable top_border<-.huxtable
 NULL
 make_getter_setters('top_border', 'cell', check_fun = is.numeric)
@@ -324,7 +324,7 @@ make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 #' @usage
 #' bottom_border(ht)
 #' bottom_border(ht) <- value
-#' set_bottom_border(ht, row, col, value)
+#' set_bottom_border(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border bottom_border<- set_bottom_border bottom_border.huxtable bottom_border<-.huxtable
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
@@ -357,7 +357,7 @@ set_all_borders <- function(ht, row, col, value) {
 #' @templateVar attr_desc Cell Padding
 #' @templateVar value_param_desc
 #' A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
-#' @templateVar morealiases right_padding top_padding bottom_padding right_padding<-
+#' @templateVar morealiases right_padding top_padding bottom_padding
 #' @template getset-example
 #' @templateVar attr_val 20
 #' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable
@@ -371,7 +371,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' @usage
 #' right_padding(ht)
 #' right_padding(ht) <- value
-#' set_right_padding(ht, row, col, value)
+#' set_right_padding(ht, row, col, value, byrow = FALSE)
 #' @export right_padding right_padding<- set_right_padding right_padding.huxtable right_padding<-.huxtable
 NULL
 
@@ -380,7 +380,7 @@ NULL
 #' @usage
 #' bottom_padding(ht)
 #' bottom_padding(ht) <- value
-#' set_bottom_padding(ht, row, col, value)
+#' set_bottom_padding(ht, row, col, value, byrow = FALSE)
 #' @export bottom_padding bottom_padding<- set_bottom_padding bottom_padding.huxtable bottom_padding<-.huxtable
 NULL
 
@@ -389,32 +389,30 @@ NULL
 #' @usage
 #' top_padding(ht)
 #' top_padding(ht) <- value
-#' set_top_padding(ht, row, col, value)
+#' set_top_padding(ht, row, col, value, byrow = FALSE)
 #' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
 NULL
 
 
-#' Set All Padding
+#' @name set_all_padding
 #'
-#' @inheritParams left_padding
+#' @rdname left_padding
+#' @usage
+#' set_all_padding(ht, row, col, value, byrow = FALSE)
 #'
-#' @details This is a convenience function which sets left, right, top and bottom cell padding
+#' @details
+#' \code{set_all_padding} is a convenience function which sets left, right, top and bottom cell padding
 #' for the specified cells.
-#'
-#' @return The modified `ht` object.
-#' @export
 #'
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
-set_all_padding <- function(ht, row, col, value) UseMethod('set_all_padding')
-
 #' @export
-set_all_padding.huxtable <- function(ht, row, col, value) {
-  top_padding(ht)[row, col] <- value
-  bottom_padding(ht)[row, col] <- value
-  left_padding(ht)[row, col] <- value
-  right_padding(ht)[row, col] <- value
+set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
+  ht <- set_left_padding(ht, row, col, value, byrow)
+  ht <- set_top_padding(ht, row, col, value, byrow)
+  ht <- set_bottom_padding(ht, row, col, value, byrow)
+  ht <- set_right_padding(ht, row, col, value, byrow)
   ht
 }
 
@@ -481,7 +479,7 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' @usage
 #' italic(ht)
 #' italic(ht) <- value
-#' set_italic(ht, row, col, value)
+#' set_italic(ht, row, col, value, byrow = FALSE)
 #' @export italic italic<- set_italic italic.huxtable italic<-.huxtable
 NULL
 make_getter_setters('italic', 'cell', check_fun = is.logical)

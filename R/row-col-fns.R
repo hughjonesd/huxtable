@@ -53,12 +53,10 @@ odds  <- function(from = 1) every(2, ceiling((from - 1)/2) * 2 + 1)
 #'
 #' This is a convenience function to use in row and column specifications. In that context, it
 #' returns the last n row or column numbers of the huxtable.
-#' @param n
 #'
-#' @return
+#' @param n Number of rows to return.
 #'
 #' @details
-#'
 #' Technically, \code{last} returns a two-argument function - see \code{\link{rowspecs}} for more details.
 #'
 #' @export
@@ -99,7 +97,7 @@ last <- function(n = 1) {
 #'  \item Use \code{\link[=last]{last(n)}} to refer to the last n rows or columns.
 #'  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
 #'    for only odd ones.
-#'  \item Use \code{\link{every(n, from = m)}} to get every nth row/column starting at row/column m.
+#'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 #'  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
 #'    \code{TRUE}.
 #'}
@@ -141,7 +139,7 @@ NULL
 #' Return Array Indices Where Expression Is True
 #'
 #' This is a simple wrapper around \code{which(..., arr.ind = TRUE)}, for
-#' use in \code{\link{row-col-spec}} expressions.
+#' use in \code{\link[=rowspecs]{row specifications}}.
 #' @param expr An R expression
 #'
 #' @export
