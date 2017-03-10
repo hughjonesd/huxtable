@@ -60,8 +60,14 @@ test_that('set_properties works with row and column functions', {
 
 test_that('set_properties works with column ranges', {
   ht <- hux(a = 1:4, b = 1:4, c = 1:4, d = 1:4)
-  ht <- set_font(ht, ,b:d, 'times')
+  ht <- set_font(ht, , b:d, 'times')
   expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4 , 4, byrow = TRUE))
+})
+
+test_that('set_properties works with expressions in ht context', {
+  ht <- hux(a = 1:4, b = 1:4)
+  ht <- set_font(ht, a >= 2 & b <= 3, 1:2, 'times')
+  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4 , 2))
 })
 
 test_that('where() works as expected', {

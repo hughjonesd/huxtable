@@ -14,7 +14,7 @@
 #'
 #' @details
 #' Technically, \code{every} returns a 2-argument function which can be called as
-#' \code{f(hux, dimension)}. See \code{\link{row-col-specs}} for details.
+#' \code{f(hux, dimension)}. See \code{\link{rowspecs}} for details.
 #'
 #' @export
 #'
@@ -60,7 +60,7 @@ odds  <- function(from = 1) every(2, ceiling((from - 1)/2) * 2 + 1)
 #'
 #' @details
 #'
-#' Technically, \code{last} returns a two-argument function - see \code{\link{row-col-specs}} for more details.
+#' Technically, \code{last} returns a two-argument function - see \code{\link{rowspecs}} for more details.
 #'
 #' @export
 #'
@@ -122,9 +122,14 @@ last <- function(n = 1) {
 #' number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector of column indices.
 #' \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{last}} return
 #' functions for this purpose.
-#' @name row-col-specs
 #'
+#' @name rowspecs
 #'
+#' @examples
+#'
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_font(ht, a >= 2 & b <= 2, a:b, 'times')
+#' font(ht)
 NULL
 
 #' Return Array Indices Where Expression Is True
@@ -167,8 +172,15 @@ is_a_number <- function(x) {
 get_rc_spec <- function (ht, obj, dimno) {
   ndim <- dim(ht)[dimno]
   if (missing(obj)) return(seq_len(ndim))
-  nl <- as.list(seq_len(ncol(ht)))
-  names(nl) <- colnames(ht)
-  obj <- eval(lazyeval::expr_find(obj), nl, parent.frame())
+
+  if (dimno == 1) {
+    obj <- eval(lazyeval::expr_find(obj), ht, parent.frame())
+    if (is.logical(obj)) obj <- obj & ! is.na(obj)
+  } else {
+    nl <- as.list(seq_len(ncol(ht)))
+    names(nl) <- colnames(ht)
+    obj <- eval(lazyeval::expr_find(obj), nl, parent.frame())
+  }
+
   if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
 }

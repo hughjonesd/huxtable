@@ -81,22 +81,20 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   ))
 
   alt_setter <- paste0('set_', attr_name)
-
+  attr_symbol <- as.symbol(attr_name)
   if (attr_type == 'cell') {
   funs[[alt_setter]] <- eval(bquote(
     function(ht, row, col, value, byrow = FALSE) {
-      # how it should be: if you call set_font(ht, blah, value) then blah must return rows and columns
-      # set_font(ht, blah, , value) - all columns, blah sets rows
-      # set_font(ht, , blah, value) - all rows, blah sets cols
       rc <- list()
       if (missing(value)) {
-        value <- col
         if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
-        .(as.name(attr_name))(ht)[row] <- value
+        if (byrow) stop('byrow = TRUE makes no sense if `row` is a matrix')
+        value <- col
+        .(attr_symbol)(ht)[row] <- value
       } else {
         rc$row <- get_rc_spec(ht, row, 1)
         rc$col <- get_rc_spec(ht, col, 2)
-        .(as.name(attr_name))(ht)[rc$row, rc$col] <- value
+        .(attr_symbol)(ht)[rc$row, rc$col] <- value
       }
 
       ht
