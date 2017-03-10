@@ -150,7 +150,7 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
   dcells <- display_cells(ht)
   if (any(dcells$shadowed)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
   dcells <- dcells[! dcells$shadowed, ]
-  result <- strrep('-', width)
+  result <- str_rep('-', width)
   result <- paste0(result, '\n')
   dcells$contents <- sapply(1:nrow(dcells), function (x) {
     clean_contents(ht, dcells[x, 'display_row'], dcells[x, 'display_col'], 'markdown')
@@ -173,9 +173,9 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
         chunk <- substring(row_chars[i], 1, cw[i])
         if ((extra <- cw[i] - ncharw(chunk)) > 0) {
           chunk <- switch(align[i],
-            left = paste0(chunk, strrep(' ', extra)),
-            center = paste0(strrep(' ', floor(extra/2)), chunk, strrep(' ', ceiling(extra/2))),
-            right = paste0(strrep(' ', extra), chunk)
+            left = paste0(chunk, str_rep(' ', extra)),
+            center = paste0(str_rep(' ', floor(extra/2)), chunk, str_rep(' ', ceiling(extra/2))),
+            right = paste0(str_rep(' ', extra), chunk)
           )
         }
         result <- paste0(result, chunk)
@@ -185,17 +185,19 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
       result <- paste0(result, '\n')
     }
     if (myrow == 1) {
-      dash_row <- paste(strrep('-', cw), collapse = " ")
+      dash_row <- paste(str_rep('-', cw), collapse = " ")
       result <- paste0(result, dash_row, '\n')
     } else {
       result <- paste0(result, '\n') # extra blank line for row
     }
   }
-  result <- paste0(result, strrep('-', width), '\n')
+  result <- paste0(result, str_rep('-', width), '\n')
   if (! is.na(cap <- caption(ht))) result <- paste0(result, 'Table: ', cap, '\n')
   result <- paste0(result, '\n')
   result
 }
 
-
+str_rep <- function(x, times) {
+  paste0(rep(x, times), collapse = '')
+}
 

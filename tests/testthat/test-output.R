@@ -32,6 +32,7 @@ test_that('Multi-rowspan screen output is sane', {
 
 test_that('Four spaces does not cause <pre><code> markup', {
   #skip('Waiting for knitr fix')
+  skip_on_os('solaris')
   output <- rmarkdown::render('fourspace-html-test.Rmd', quiet = TRUE)
   lines <- readLines(output)
   file.remove(output)
@@ -39,6 +40,7 @@ test_that('Four spaces does not cause <pre><code> markup', {
 })
 
 test_that('Row heights do not screw up latex multicol', {
+  skip_on_os('solaris')
   expect_silent(output <- rmarkdown::render('rowheight-multicol-test.Rmd', quiet = TRUE))
   if (exists('output')) file.remove(output)
 })
