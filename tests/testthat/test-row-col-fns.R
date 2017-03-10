@@ -8,6 +8,7 @@ source('functions.R')
 test_that('Row/column function examples unchanged', {
   test_ex_same('every')
   test_ex_same('last')
+  test_ex_same('where')
 })
 
 test_that('last() works as expected', {

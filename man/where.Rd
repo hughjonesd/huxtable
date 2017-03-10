@@ -18,5 +18,7 @@ use in \code{\link{row-col-spec}} expressions.
 }
 \examples{
 ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)
-where(ht)
+where(ht > 2)
+where(is_a_number(ht))
+
 }

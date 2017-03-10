@@ -150,7 +150,9 @@ NULL
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)
-#' where(ht)
+#' where(ht > 2)
+#' where(is_a_number(ht))
+#'
 where <- function(expr) {which(expr, arr.ind = TRUE)}
 
 #' Does an Object Look Like a Number?
