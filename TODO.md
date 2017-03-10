@@ -16,9 +16,13 @@ TODO
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * word output?
-  - see if writing HTML does the trick
+  - probably using http://davidgohel.github.io/ReporteRs/articles/FlexTable.html
 * `huxreg` a la `texreg`, using `broom` and code from `model_table`
-
+* Better, longer documentation
+  - Section on rowspecs
+  - Use knitr more, it's precompiled
+  - List of all possible attributes
+  
 PUT OFF
 =======
 * `col_width`, `row_height` should be plural. Not sure this is necessary.
