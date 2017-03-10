@@ -51,7 +51,8 @@ test_that('guess_knitr_output_format() gets it right', {
   on.exit(sapply(out, function (x) if (file.exists(x)) file.remove(x)))
   expect_silent(out[1] <- knitr::knit('guess-output-format-test.Rhtml', quiet = TRUE))
   expect_silent(out[2] <- knitr::knit('guess-output-format-test.Rnw', quiet = TRUE))
-  for (fname in paste0('guess-output-format-test-Rmd-', c('html.Rmd', 'pdf.Rmd', 'pres.Rpres'))) {
+  for (fname in paste0('guess-output-format-test-Rmd-', c('html.Rmd', 'pdf.Rmd'))) {
     expect_silent(out[fname] <- rmarkdown::render(fname, quiet = TRUE, run_pandoc = FALSE))
   }
 })
+
