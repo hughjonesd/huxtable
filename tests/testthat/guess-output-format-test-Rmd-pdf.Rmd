@@ -1,0 +1,10 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r guess, error = FALSE}
+g <- guess_knitr_output_format()
+stopifnot(g == 'latex')
+cat('guess_knitr_output_format() returned ', g)
+```

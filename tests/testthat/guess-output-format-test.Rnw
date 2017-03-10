@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\begin{document}
+
+<<guess, error = FALSE>>=
+library(huxtable)
+g <- guess_knitr_output_format()
+stopifnot(g == 'latex')
+cat('guess_knitr_output_format() returned ', g)
+@
+
+
+\end{document}
