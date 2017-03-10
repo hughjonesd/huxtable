@@ -17,6 +17,9 @@ TODO
 * more advanced positioning (floats?)
 * word output?
   - probably using http://davidgohel.github.io/ReporteRs/articles/FlexTable.html
+  - ah... but you can't use within Rmarkdown, he says
+  - See https://github.com/davidgohel/ReporteRs/issues/68
+  - could still provide an asFlexTable method, though
 * `huxreg` a la `texreg`, using `broom` and code from `model_table`
 * Better, longer documentation
   - Section on rowspecs
