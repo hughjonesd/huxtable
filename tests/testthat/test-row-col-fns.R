@@ -84,6 +84,12 @@ test_that('where() works as expected', {
   expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
 })
 
+test_that('where() works with set_properties', {
+  ht <- hux(a = c(1, 0), b = c(0, 1))
+  ht <- set_font(ht, where(ht > 0), 'times')
+  expect_equivalent(font(ht), matrix(c('times', NA, NA, 'times'), 2, 2))
+})
+
 test_that('is_a_number() works as expected', {
   expect_false(is_a_number('foo'))
   expect_true(is_a_number(1.5))
