@@ -10,7 +10,7 @@
 \usage{
 colspan(ht)
 colspan(ht) <- value
-set_colspan(ht, row, col, value)
+set_colspan(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

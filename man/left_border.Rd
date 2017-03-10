@@ -13,7 +13,7 @@
 \usage{
 left_border(ht)
 left_border(ht) <- value
-set_left_border(ht, row, col, value)
+set_left_border(ht, row, col, value, byrow = FALSE)
 
 right_border(ht)
 right_border(ht) <- value

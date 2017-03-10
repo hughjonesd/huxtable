@@ -10,7 +10,7 @@
 \usage{
 rotation(ht)
 rotation(ht) <- value
-set_rotation(ht, row, col, value)
+set_rotation(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

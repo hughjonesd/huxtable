@@ -31,7 +31,7 @@
 \usage{
 left_padding(ht)
 left_padding(ht) <- value
-set_left_padding(ht, row, col, value)
+set_left_padding(ht, row, col, value, byrow = FALSE)
 
 right_padding(ht)
 right_padding(ht) <- value

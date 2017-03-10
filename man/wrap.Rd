@@ -10,7 +10,7 @@
 \usage{
 wrap(ht)
 wrap(ht) <- value
-set_wrap(ht, row, col, value)
+set_wrap(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

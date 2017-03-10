@@ -10,7 +10,7 @@
 \usage{
 text_color(ht)
 text_color(ht) <- value
-set_text_color(ht, row, col, value)
+set_text_color(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

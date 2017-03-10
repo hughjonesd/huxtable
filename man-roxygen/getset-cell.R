@@ -19,7 +19,7 @@ if (exists('morealiases')) {
 #' @usage
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
-#' set_<%= attr_name %>(ht, row, col, value)
+#' set_<%= attr_name %>(ht, row, col, value, byrow = FALSE)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default.

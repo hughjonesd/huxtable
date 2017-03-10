@@ -28,7 +28,7 @@
 \usage{
 bold(ht)
 bold(ht) <- value
-set_bold(ht, row, col, value)
+set_bold(ht, row, col, value, byrow = FALSE)
 
 italic(ht)
 italic(ht) <- value

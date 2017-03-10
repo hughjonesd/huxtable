@@ -10,7 +10,7 @@
 \usage{
 number_format(ht)
 number_format(ht) <- value
-set_number_format(ht, row, col, value)
+set_number_format(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

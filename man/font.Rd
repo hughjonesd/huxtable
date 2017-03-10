@@ -10,7 +10,7 @@
 \usage{
 font(ht)
 font(ht) <- value
-set_font(ht, row, col, value)
+set_font(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

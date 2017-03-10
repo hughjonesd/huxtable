@@ -10,7 +10,7 @@
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
-set_escape_contents(ht, row, col, value)
+set_escape_contents(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

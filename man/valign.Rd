@@ -10,7 +10,7 @@
 \usage{
 valign(ht)
 valign(ht) <- value
-set_valign(ht, row, col, value)
+set_valign(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

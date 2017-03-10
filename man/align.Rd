@@ -10,7 +10,7 @@
 \usage{
 align(ht)
 align(ht) <- value
-set_align(ht, row, col, value)
+set_align(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}

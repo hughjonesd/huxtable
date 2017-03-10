@@ -10,7 +10,7 @@
 \usage{
 na_string(ht)
 na_string(ht) <- value
-set_na_string(ht, row, col, value)
+set_na_string(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
