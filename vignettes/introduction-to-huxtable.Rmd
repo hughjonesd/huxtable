@@ -20,7 +20,7 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 
-is_latex <- guess_knitr_output_format() == 'latex'
+is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 # is_latex <- TRUE
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {
