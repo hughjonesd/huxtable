@@ -71,3 +71,7 @@ remake_code_file <- function (fname) {
   codepath <- code_path_for_topic(fname)
   saveRDS(deparse(excode), file = codepath)
 }
+
+skip_without_pandoc <- function () {
+  if (! rmarkdown::pandoc_available('1.12.3')) skip('Not testing, pandoc >= 1.12.3 is not available')
+}

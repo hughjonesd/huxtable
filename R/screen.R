@@ -198,6 +198,6 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
 }
 
 str_rep <- function(x, times) {
-  paste0(rep(x, times), collapse = '')
+  mapply(function (s, t) paste0(rep(s, t), collapse=''), x, times)
 }
 
