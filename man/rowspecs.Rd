@@ -4,10 +4,14 @@
 \alias{rowspecs}
 \title{Row and Column Specifications}
 \description{
+Row and Column Specifications
+}
+\section{The basics}{
+
+
 The \code{set_*} functions in huxtable all share arguments like
 \code{set_property(ht, row, col, value)}.
-}
-\details{
+
 You can treat \code{row} and \code{col} arguments just like arguments to \code{[} for a data frame.
 But there are a few extra tricks:
 
@@ -22,9 +26,36 @@ But there are a few extra tricks:
    \code{TRUE}.
 }
 }
-\examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-ht <- set_font(ht, a >= 2 & b <= 2, a:b, 'times')
+\section{The gory details}{
+
+
+Here is how the row and col arguments are parsed:
+
+\itemize{
+  \item Names in \code{col} get replaced by column indices, as in \code{\link[base]{subset}}.
+  \item Expressions in \code{row} get evaluated in the context of the huxtable object,
+    as in \code{\link[base]{subset}}.
+  \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
+    subsetting - see \code{\link[base]{Extract.data.frame}}.
+  \item If \code{row} or \code{col} is missing, all rows or columns are returned, as in standard subsetting.
+  \item If \code{row} or \code{col} is a function, it is called to give a set of column indices.
+}
+
+If \code{row} or \code{col} is a function, it is called with two arguments: the huxtable, and the dimension
+number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector of column indices.
+\code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{last}} return
+functions for this purpose.
+}
+
+\examples{
+ht <- huxtable(a = 1:5, b = 5:1)
+ht <- set_font(ht, a >= 2 & b >= 2, a:b, 'times')
 font(ht)
+ht <- set_font(ht, where(ht == 1), 'palatino')
+font(ht)
+ht <- set_font(ht, odds(), evens(), 'dingbats')
+font(ht)
+ht <- set_align(ht, every(3, from = 1), a:b, 'right')
+align(ht)
 }

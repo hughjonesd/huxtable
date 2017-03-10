@@ -43,7 +43,6 @@ every <- function(n, from = n) {
 
 #' @rdname every
 #' @export
-#' @examples
 evens <- function(from = 2) every(2, ceiling(from/2) * 2)
 
 #' @rdname every
@@ -86,6 +85,8 @@ last <- function(n = 1) {
 
 #' Row and Column Specifications
 #'
+#' @section The basics:
+#'
 #' The \code{set_*} functions in huxtable all share arguments like
 #' \code{set_property(ht, row, col, value)}.
 #'
@@ -104,7 +105,7 @@ last <- function(n = 1) {
 #'}
 #'
 #'
-#' @section The gory details
+#' @section The gory details:
 #'
 #' Here is how the row and col arguments are parsed:
 #'
@@ -114,8 +115,8 @@ last <- function(n = 1) {
 #'     as in \code{\link[base]{subset}}.
 #'   \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
 #'     subsetting - see \code{\link[base]{Extract.data.frame}}.
-#'   \item If \code{row} or \code{col} is a function, it gets called to give a set of column indices - see below.
 #'   \item If \code{row} or \code{col} is missing, all rows or columns are returned, as in standard subsetting.
+#'   \item If \code{row} or \code{col} is a function, it is called to give a set of column indices.
 #' }
 #'
 #' If \code{row} or \code{col} is a function, it is called with two arguments: the huxtable, and the dimension
@@ -126,10 +127,15 @@ last <- function(n = 1) {
 #' @name rowspecs
 #'
 #' @examples
-#'
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_font(ht, a >= 2 & b <= 2, a:b, 'times')
+#' ht <- huxtable(a = 1:5, b = 5:1)
+#' ht <- set_font(ht, a >= 2 & b >= 2, a:b, 'times')
 #' font(ht)
+#' ht <- set_font(ht, where(ht == 1), 'palatino')
+#' font(ht)
+#' ht <- set_font(ht, odds(), evens(), 'dingbats')
+#' font(ht)
+#' ht <- set_align(ht, every(3, from = 1), a:b, 'right')
+#' align(ht)
 NULL
 
 #' Return Array Indices Where Expression Is True
