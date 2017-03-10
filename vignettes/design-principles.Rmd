@@ -4,8 +4,7 @@ author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
   html_document: null
-  pdf_document:
-    keep_tex: yes
+  pdf_document: null
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}
   %\VignetteEngine{knitr::rmarkdown}
@@ -50,9 +49,9 @@ they have. The table is produced with huxtable, of course ;-)
 
 ```{r, echo = FALSE}
 
-library(huxtable)
-is_latex <- guess_knitr_output_format() == 'latex'
+is_latex <- knitr::opts_knit$get('rmarkdown.pandoc.to') == 'latex'
 
+library(huxtable)
 comp <- read.csv('comparison.csv', stringsAsFactors = FALSE, header = FALSE)
 
 ch <- as_hux(comp)
