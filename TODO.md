@@ -15,21 +15,9 @@ TODO
 * simple `add_footnote_row` method?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
-* easy syntax to alter cells by row, column, area or "where"... this could be a separate package:
-  - columns should allow name1:name2 style syntax, maybe also starts_with & friends
-  - row names?
-  - easy way to specify nrow(x), ncol(x)? How about last(1:3) and last() for default? cf. dplyr::nth
-  - row & column groups
-  - where(): could return a function that is called in place, something like...
-  where <- function(cond) eval(bquote(function(x) which(.(substitute(cond)), arr.ind = TRUE)))
-    do_something(ht, cells = where(x > 6))
-  would become
-    function(ht) which(ht > 6, arr.ind = TRUE)
-  to be called by
-    if (is.function(cells)) cells <- cells(ht)
-  which then returns the relevant values, probably as a 2-column matrix (unusual form of indexing)
-
-
+* word output?
+  - see if writing HTML does the trick
+* `huxreg` a la `texreg`, using `broom` and code from `model_table`
 
 PUT OFF
 =======
@@ -47,9 +35,6 @@ PUT OFF
   - can't really do this if you want to assign to particular subsets
   - because that would call `borders(ht)` and what does that return?
   - stick with `set_all_borders`
-* set properties byrow with byrow = TRUE
-  - hard to get this right when setting subsets
-  - replacement of the new value takes place outside the `property<-` function
 * differentiate headers from content; don't change content to character;
   - this is interesting but hard
   - one poss is to keep the current (simple!) storage but to remember original types and to convert
@@ -60,9 +45,8 @@ PUT OFF
   - NB not nec true that headers are first X rows/cols exclusively!
   - presumably they are always whole rows and columns, though.
   - advantage when cbinding, you could have an option to only cbind the data rows...
-  
-QUESTIONS
-=========
-do we want to have a concept of 'headers' for repetition? Cf. longtable,  <th>
+  - or subsetting, autoinclude header rows/cols
+  - seems a bit automagic 
+
 
 
