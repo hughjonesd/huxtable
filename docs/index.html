@@ -63,7 +63,7 @@
   font-weight: bold;
 }
 </style>
-<title>Huxtable</title>
+<title>Huxtable - an R package for writing LaTeX and HTML tables</title>
 
 
 <style type="text/css">
@@ -129,24 +129,24 @@ main {
 
 
 
-<p>Huxtable is a package for creating HTML and LaTeX tables. It provides similar
+<p>Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
 functionality to xtable, but more, with a simpler interface. Here's a quick example.
 </p>
 
-<div class="source"><pre class="knitr r"><span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
-        <span class="hl kwc">Employee</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'John Smith'</span><span class="hl std">,</span> <span class="hl str">'Jane Doe'</span><span class="hl std">,</span> <span class="hl str">'David Hugh-Jones'</span><span class="hl std">),</span>
-        <span class="hl kwc">Salary</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">40000</span><span class="hl std">),</span>
-        <span class="hl kwc">add_colnames</span> <span class="hl std">=</span> <span class="hl num">TRUE</span>
-      <span class="hl std">)</span>
+<div class="source"><pre class="knitr r">ht <- hux(
+        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
+        Salary = c(50000, 50000, 40000),
+        add_colnames = TRUE
+      )
 
-<span class="hl kwd">bold</span><span class="hl std">(ht)[</span><span class="hl num">1</span><span class="hl std">,]</span>           <span class="hl kwb">&lt;-</span> <span class="hl num">TRUE</span>
-<span class="hl kwd">bottom_border</span><span class="hl std">(ht)[</span><span class="hl num">1</span><span class="hl std">,]</span>  <span class="hl kwb">&lt;-</span> <span class="hl num">TRUE</span>
-<span class="hl kwd">align</span><span class="hl std">(ht)[,</span><span class="hl num">2</span><span class="hl std">]</span>          <span class="hl kwb">&lt;-</span> <span class="hl str">'right'</span>
-<span class="hl kwd">right_padding</span><span class="hl std">(ht)</span>      <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
-<span class="hl kwd">left_padding</span><span class="hl std">(ht)</span>       <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
-<span class="hl kwd">width</span><span class="hl std">(ht)</span>              <span class="hl kwb">&lt;-</span> <span class="hl num">0.35</span>
+bold(ht)[1,]           <- TRUE
+bottom_border(ht)[1,]  <- TRUE
+align(ht)[,2]          <- 'right'
+right_padding(ht)      <- 10
+left_padding(ht)       <- 10
+width(ht)              <- 0.35
 
-<span class="hl std">ht</span>
+ht
 </pre></div>
 <!--html_preserve--><table class="huxtable" style="width: 35%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><tr>
@@ -177,14 +177,14 @@ with other R packages to create tables.</p>
 
 <p>From CRAN:</p>
 
-<div class="chunk" id="CRAN"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">'huxtable'</span><span class="hl std">)</span>
+<div class="chunk" id="CRAN"><div class="rcode"><div class="source"><pre class="knitr r">install.packages('huxtable')
 </pre></div>
 </div></div>
 
 <p>Development version from github:</p>
 
-<div class="chunk" id="install"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(devtools)</span>
-<span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">'hughjonesd/huxtable'</span><span class="hl std">)</span>
+<div class="chunk" id="install"><div class="rcode"><div class="source"><pre class="knitr r">library(devtools)
+install_github('hughjonesd/huxtable')
 </pre></div>
 </div></div>
 

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Huxtable is a package for creating HTML and LaTeX tables. It provides similar 
+Huxtable is an R package for creating HTML and LaTeX tables. It provides similar 
 functionality to xtable, but does more, with a simpler interface. 
 
 # Installing

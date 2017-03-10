@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Huxtable</title>
+<title>Huxtable - an R package for writing LaTeX and HTML tables</title>
 
 
 <style type="text/css">
@@ -41,6 +41,9 @@ main {
 
 <!--begin.rcode logo, echo = FALSE, results = 'asis'
 
+
+knitr::opts_chunk$set(highlight = FALSE)
+
 library(huxtable)
 hux_logo()
 
@@ -62,7 +65,7 @@ end.rcode-->
 
 
 
-<p>Huxtable is a package for creating HTML and LaTeX tables. It provides similar
+<p>Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
 functionality to xtable, but more, with a simpler interface. Here's a quick example.
 </p>
 

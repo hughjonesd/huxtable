@@ -25,7 +25,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Huxtable is a package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface.
+Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface.
 
 Installing
 ==========
