@@ -32,9 +32,11 @@ set_bottom_border(ht, row, col, value)
 
 \item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{left_border}, the \code{left_border} attribute.

@@ -17,9 +17,11 @@ set_background_color(ht, row, col, value)
 
 \item{value}{A vector or matrix of R colors. Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{background_color}, the \code{background_color} attribute.

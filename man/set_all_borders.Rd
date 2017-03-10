@@ -9,9 +9,9 @@ set_all_borders(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
 
 \item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
 }

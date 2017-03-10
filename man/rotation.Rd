@@ -17,9 +17,11 @@ set_rotation(ht, row, col, value)
 
 \item{value}{A numeric vector. 0 is normal direction, 90 is going up, etc. Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{rotation}, the \code{rotation} attribute.

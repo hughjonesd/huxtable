@@ -9,9 +9,9 @@ set_all_padding(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
 
 \item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to \code{NA} to reset to the default.}
 }

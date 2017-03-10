@@ -17,9 +17,11 @@ set_escape_contents(ht, row, col, value)
 
 \item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTex escaped. Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} attribute.

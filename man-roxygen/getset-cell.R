@@ -23,8 +23,9 @@ if (exists('morealiases')) {
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default.
-#' @param row A row specifier.
-#' @param col A column specifier.
+#' @param row A row specifier. See \code{\link{rowspecs}} for details.
+#' @param col An optional column specifier.
+#' @param byrow If \code{TRUE}, fill in values by row rather than by column.
 #'
 #' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} attribute.
 #' For \code{set_<%= attr_name %>}, the \code{ht} object.

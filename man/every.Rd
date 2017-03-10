@@ -26,7 +26,7 @@ numbers starting from \code{from}.
 }
 \details{
 Technically, \code{every} returns a 2-argument function which can be called as
-\code{f(hux, dimension)}. See \code{\link{row-col-specs}} for details.
+\code{f(hux, dimension)}. See \code{\link{rowspecs}} for details.
 }
 \examples{
 ht <- huxtable(a = 1:10, b = 1:10)

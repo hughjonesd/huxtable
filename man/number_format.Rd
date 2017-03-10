@@ -17,9 +17,11 @@ set_number_format(ht, row, col, value)
 
 \item{value}{A vector or list which may be character, numeric or function. See below. Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{number_format}, the \code{number_format} attribute.

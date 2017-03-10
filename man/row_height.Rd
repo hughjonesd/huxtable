@@ -17,7 +17,7 @@ set_row_height(ht, row, value)
 
 \item{value}{A vector.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 }
 \value{
 For \code{row_height}, the \code{row_height} attribute.

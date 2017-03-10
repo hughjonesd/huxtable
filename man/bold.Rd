@@ -39,9 +39,11 @@ set_italic(ht, row, col, value)
 
 \item{value}{A logical vector or matrix Set to \code{NA} to reset to the default.}
 
-\item{row}{A row specifier.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
 For \code{bold}, the \code{bold} attribute.
