@@ -94,6 +94,10 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       } else {
         rc$row <- get_rc_spec(ht, row, 1)
         rc$col <- get_rc_spec(ht, col, 2)
+        if (byrow) {
+          nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
+          value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
+        }
         .(attr_symbol)(ht)[rc$row, rc$col] <- value
       }
 

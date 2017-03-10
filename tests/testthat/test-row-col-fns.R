@@ -70,6 +70,15 @@ test_that('set_properties works with expressions in ht context', {
   expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4 , 2))
 })
 
+test_that('set_properties works with expressions in ht context', {
+  ht <- hux(a = 1:2, b = 1:2)
+  ht <- set_font(ht, 1:2, 1:2, c('times', 'palatino'), byrow = TRUE)
+  expect_equivalent(font(ht), matrix(c('times', 'times', 'palatino', 'palatino'), 2, 2))
+  ht <- hux(a = 1:2, b = 1:2, d = 1:2)
+  ht <- set_font(ht, 2, 1:2, c('times', 'palatino'), byrow = TRUE)
+  expect_equivalent(font(ht), matrix(c(NA, 'times', NA, 'palatino', NA, NA), 2, 3))
+})
+
 test_that('where() works as expected', {
   dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
   expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
