@@ -17,7 +17,7 @@ code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds', pa
 
 # runs example and checks output & values haven't changed; optionally reset files if code has changed
 test_ex_same <- function(fname, reset_on_change = TRUE) {
-  if (! Sys.getenv('R_TESTS') == '') return(invisible())
+  skip_on_R_CMD_check()
   excode <- example_code_for_topic(fname)
   codepath <- code_path_for_topic(fname)
   if (file.exists(codepath)) {
@@ -66,12 +66,19 @@ reset_example_test <- function (fnames) {
   invisible()
 }
 
+
 remake_code_file <- function (fname) {
   excode <- example_code_for_topic(fname)
   codepath <- code_path_for_topic(fname)
   saveRDS(deparse(excode), file = codepath)
 }
 
+
 skip_without_pandoc <- function () {
   if (! rmarkdown::pandoc_available('1.12.3')) skip('Not testing, pandoc >= 1.12.3 is not available')
+}
+
+
+skip_on_R_CMD_check <- function() {
+  if (! Sys.getenv('R_TESTS') == '') skip('Not testing, code doesn\'t play well with R CMD check')
 }
