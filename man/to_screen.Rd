@@ -11,16 +11,17 @@ print_screen(ht, ...)
 to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, borders = c("both", "horizontal", "vertical",
-  "neither"), blank = " ", ...)
+  "neither"), blank = NULL, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{...}{Passed on to \code{to_screen}.}
 
-\item{borders}{Print horizontal borders, vertical borders, both or neither. May be abbreviated.}
+\item{borders}{Print 'horizontal' borders, 'vertical' borders, 'both' or 'neither'. May be abbreviated.}
 
-\item{blank}{Character to print for cell divisions with no border}
+\item{blank}{Character to print for cell divisions with no border. If \code{NULL}, print a space ' ' but don't print
+empty horizontal borders.}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.

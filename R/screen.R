@@ -8,8 +8,9 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #'
 #' @param ht A huxtable.
 #' @param ... Passed on to \code{to_screen}.
-#' @param borders Print horizontal borders, vertical borders, both or neither. May be abbreviated.
-#' @param blank   Character to print for cell divisions with no border
+#' @param borders Print 'horizontal' borders, 'vertical' borders, 'both' or 'neither'. May be abbreviated.
+#' @param blank   Character to print for cell divisions with no border. If \code{NULL}, print a space ' ' but don't print
+#'   empty horizontal borders.
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 #'
@@ -31,8 +32,10 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = ' ', ...) {
+to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, ...) {
   borders <- match.arg(borders)
+  collapse_horiz <- is.null(blank)
+  if (is.null(blank)) blank <- ' '
 
   dc <- display_cells(ht)
   drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
@@ -102,8 +105,12 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
   if (borders %in% c('both', 'horizontal')) charmat[border_cells > 1 & row(charmat) %% 2]   <- '-'
   if (borders %in% c('both', 'vertical'))   charmat[border_cells > 1 & ! row(charmat) %% 2] <- '|'
   if (borders == 'vertical') charmat[border_cells > 1 & row(charmat) %% 2 & corner_cells] <- '|'
-
+  if (collapse_horiz) {
+    empty_borders <- apply(border_cells, 1, function (x) all(x[ -c(1, ncol(charmat)) ] == 1))
+    charmat <- charmat[!empty_borders,]
+  }
   result <- apply(charmat, 1, paste0, collapse='')
+
   result <- paste0(result, collapse='\n')
   if (! is.na(cap <- caption(ht))) {
     result <- if (caption_pos(ht) == 'top') paste0(cap, '\n', result) else paste0(result, '\n', cap)
