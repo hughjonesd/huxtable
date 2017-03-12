@@ -650,7 +650,7 @@ NULL
 make_getter_setters('label', 'table', check_fun = is.character)
 
 
-# utility functions
+# utility functions-----------------------------------------------------------------------------------------------------
 
 # return formatted contents, suitably escaped
 clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'markdown'), ...) {
@@ -658,11 +658,10 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'ma
   # stopifnot(length(row) == 1 & length(col) == 1)
   contents <- ht[[row, col]] # just the data and just one element.
   # But we might want to allow more than one element; if so just use `[.data.frame`
-  if (! is.na(cnum <- suppressWarnings(as.numeric(contents)))) {
+  if (is_a_number(contents)) {
+    cnum <- as.numeric(contents)
     nf <- number_format(ht)[[row, col]] # a list element
-    if (is.function(nf)) contents <- nf(cnum)
-    if (is.character(nf)) contents <- sprintf(nf, cnum)
-    if (is.numeric(nf)) contents <- formatC(round(cnum, nf), format = 'f', digits = nf)
+    contents <- format_number(cnum, nf)
   }
 
   if (is.na(contents)) contents <- na_string(ht)[row, col]
@@ -672,6 +671,15 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'ma
   }
 
   contents
+}
+
+format_number <- function (num, nf) {
+  res <- num
+  if (is.function(nf)) res[] <- nf(num)
+  if (is.character(nf)) res[] <- sprintf(nf, num)
+  if (is.numeric(nf)) res[] <- formatC(round(num, nf), format = 'f', digits = nf)
+
+  res
 }
 
 # return data frame mapping real cell positions to cells displayed
