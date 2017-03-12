@@ -11,7 +11,10 @@ BUGS
 
 TODO
 ====
-
+* make huxtables work with filter and other dplyr methods? 
+  - NB they work ok with subset, and with dplyr::select
+* use is_a_number for huxtable properties where appropriate 
+  - create a failing test
 * simple `add_footnote_row` method?
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)

@@ -9,9 +9,6 @@ last(n = 1)
 \arguments{
 \item{n}{Number of rows to return.}
 }
-\value{
-
-}
 \description{
 This is a convenience function to use in row and column specifications. In that context, it
 returns the last n row or column numbers of the huxtable.
