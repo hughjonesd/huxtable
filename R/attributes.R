@@ -673,11 +673,13 @@ clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'ma
   contents
 }
 
+# can handle
 format_number <- function (num, nf) {
   res <- num
   if (is.function(nf)) res[] <- nf(num)
   if (is.character(nf)) res[] <- sprintf(nf, num)
   if (is.numeric(nf)) res[] <- formatC(round(num, nf), format = 'f', digits = nf)
+  res[is.na(num)] <- NA
 
   res
 }
