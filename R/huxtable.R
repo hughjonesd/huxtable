@@ -423,7 +423,7 @@ add_colnames <- function (ht, ...) UseMethod('add_colnames')
 #' @rdname add_colnames
 add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
   cn <- colnames(ht)
-  ht <- rbind(cn, ht)
+  ht <- rbind(cn, ht, copy_cell_props = FALSE)
   colnames(ht) <- cn
   if (! missing(rowname)) rownames(ht) <- c(rowname, rownames(ht)[1:(nrow(ht) - 1)])
   ht
@@ -436,7 +436,7 @@ add_rownames <- function (ht, ...) UseMethod('add_rownames')
 #' @export
 #' @rdname add_colnames
 add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE, ...) {
-  ht <- cbind(rownames(ht), ht)
+  ht <- cbind(rownames(ht), ht, copy_cell_props = FALSE)
   colnames(ht)[1] <- colname
   if (! preserve_rownames) rownames(ht) <- NULL
   ht
