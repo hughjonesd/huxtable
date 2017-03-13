@@ -36,7 +36,7 @@
 #' dfr$y <- dfr$a + rnorm(100)
 #' lm1 <- lm(y ~ a, dfr)
 #' lm2 <- lm(y ~ a + b, dfr)
-#' glm1 <- glm1(I(y > 0) ~ a, dfr, family = binomial)
+#' glm1 <- glm(I(y > 0) ~ a, dfr, family = binomial)
 #' huxreg(lm1, lm2, glm1)
 huxreg <- function (
         ...,
