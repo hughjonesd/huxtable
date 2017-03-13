@@ -57,18 +57,18 @@ odds  <- function(from = 1) every(2, ceiling((from - 1)/2) * 2 + 1)
 #' @param n Number of rows to return.
 #'
 #' @details
-#' Technically, \code{last} returns a two-argument function - see \code{\link{rowspecs}} for more details.
+#' Technically, \code{final} returns a two-argument function - see \code{\link{rowspecs}} for more details.
 #'
 #' @export
 #'
 #' @examples
 #' ht <- hux(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
-#' ht <- set_align(ht, last(2), last(1), 'right')
+#' ht <- set_align(ht, final(2), final(1), 'right')
 #' align(ht)
 #'
-#' last(3)(ht, 1) # last 3 rows
-#' last(3)(ht, 2) # last 3 columns
-last <- function(n = 1) {
+#' final(3)(ht, 1) # last 3 rows
+#' final(3)(ht, 2) # last 3 columns
+final <- function(n = 1) {
   stopifnot(is.numeric(n))
   stopifnot(n >= 1)
   return(
@@ -94,7 +94,7 @@ last <- function(n = 1) {
 #'\itemize{
 #'  \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, , 2:3)}
 #'    you could write \code{set_property(ht, , col2:col3)}.
-#'  \item Use \code{\link[=last]{last(n)}} to refer to the last n rows or columns.
+#'  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
 #'  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
 #'    for only odd ones.
 #'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
@@ -119,7 +119,7 @@ last <- function(n = 1) {
 #'
 #' If \code{row} or \code{col} is a function, it is called with two arguments: the huxtable, and the dimension
 #' number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector of column indices.
-#' \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{last}} return
+#' \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{final}} return
 #' functions for this purpose.
 #'
 #' @name rowspecs
