@@ -12,13 +12,9 @@
 #' @name huxtable-package
 NULL
 
-#' @import knitr
-#' @import rmarkdown
-#' @import xtable
 #' @import stats
 #' @import grDevices
-#' @import htmltools
-#' @import lazyeval
+
 #'
 NULL
 
@@ -456,7 +452,7 @@ set_attr_dimnames <- function(ht) {
   ht
 }
 
-
+#' @importFrom knitr knit_print
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
   requireNamespace('htmltools', quietly = TRUE)
