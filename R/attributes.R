@@ -653,7 +653,7 @@ make_getter_setters('label', 'table', check_fun = is.character)
 # utility functions-----------------------------------------------------------------------------------------------------
 
 # return formatted contents, suitably escaped
-clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'markdown'), ...) {
+clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
   mytype <- match.arg(type)
   # stopifnot(length(row) == 1 & length(col) == 1)
   contents <- ht[[row, col]] # just the data and just one element.
