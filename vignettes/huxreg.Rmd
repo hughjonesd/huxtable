@@ -64,7 +64,8 @@ diamond_regs
 ```
 
 Of course, we aren't limited to just changing names. We can also make our table prettier. Let's add the "article" theme,
-and a vertical stripe for background colour:
+and a vertical stripe for background colour, tweak a few details like font size, and add a caption. All of these are just 
+standard huxtable commands.
 
 ```{r}
 library(dplyr)
@@ -72,7 +73,9 @@ diamond_regs                                                         %>%
       theme_article                                                  %>% 
       set_background_color(1:nrow(diamond_regs), evens(), grey(.95)) %>% 
       set_font_size(final(), 1, 9)                                   %>% 
-      set_bold(final(), 1, FALSE)
+      set_bold(final(), 1, FALSE)                                    %>%
+      set_top_border(final(), 1, 1)                                  %>%
+      set_caption('Linear regressions of diamond prices')
 
 ```
 
@@ -105,7 +108,7 @@ huxreg('Price' = lm1, 'Log price' = lm3)
 
 To display a particular row of summary statistics, use the `statistics` parameter. This should be a character vector.
 Valid values are anything returned from your models by `broom::glance`. Another valid value is `"nobs"`, which 
-returns the number of observations from the regression. If the character vector has names, these will be used for
+returns the number of observations from the regression. If the `statistics` vector has names, these will be used for
 row headings:
 
 ```{r}
@@ -152,4 +155,9 @@ taken as a format to the base R `sprintf` function; if it is a function, the fun
 huxreg(lm1, lm3, number_format = 2)
 ```
 
+Lastly, if you want to bold all significant coefficients, set the parameter `bold_signif` to a maximum significance level:
+
+```{r}
+huxreg(lm1, lm3, bold_signif = 0.05)
+```
 

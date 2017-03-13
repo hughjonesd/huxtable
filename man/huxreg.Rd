@@ -26,6 +26,9 @@ huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
 \item{bold_signif}{Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 this behaviour.}
 
+\item{note}{Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
+significance stars. Set to \code{NULL} for no footnote.}
+
 \item{statistics}{Summary statistics to display.}
 
 \item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
@@ -48,4 +51,13 @@ If \code{...} is a named list, the names will be used for column headings. If th
 
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 use 'nobs' for the number of observations.
+}
+\examples{
+set.seed(27101975)
+dfr <- data.frame(a = rnorm(100), b = rnorm(100))
+dfr$y <- dfr$a + rnorm(100)
+lm1 <- lm(y ~ a, dfr)
+lm2 <- lm(y ~ a + b, dfr)
+glm1 <- glm1(I(y > 0) ~ a, dfr, family = binomial)
+huxreg(lm1, lm2, glm1)
 }

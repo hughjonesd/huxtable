@@ -566,15 +566,17 @@ diamond_regs</code></pre>
 </tr>
 </table>
 
-<p>Of course, we aren’t limited to just changing names. We can also make our table prettier. Let’s add the “article” theme, and a vertical stripe for background colour:</p>
+<p>Of course, we aren’t limited to just changing names. We can also make our table prettier. Let’s add the “article” theme, and a vertical stripe for background colour, tweak a few details like font size, and add a caption. All of these are just standard huxtable commands.</p>
 <pre class="r"><code>library(dplyr)
 diamond_regs                                                         %&gt;% 
       theme_article                                                  %&gt;% 
       set_background_color(1:nrow(diamond_regs), evens(), grey(.95)) %&gt;% 
       set_font_size(final(), 1, 9)                                   %&gt;% 
-      set_bold(final(), 1, FALSE)</code></pre>
+      set_bold(final(), 1, FALSE)                                    %&gt;%
+      set_top_border(final(), 1, 1)                                  %&gt;%
+      set_caption('Linear regressions of diamond prices')</code></pre>
 <table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+<caption style="caption-side:top; text-align: center;">Linear regressions of diamond prices</caption><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; "></span></td>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><span style="font-weight: bold; ">(1)</span></td>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(2)</span></td>
@@ -713,7 +715,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); ">53243.298</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-size:9pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</span></td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-size:9pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</span></td>
 </tr>
 </table>
 
@@ -892,7 +894,7 @@ diamond_regs                                                         %&gt;%
 </tr>
 </table>
 
-<p>To display a particular row of summary statistics, use the <code>statistics</code> parameter. This should be a character vector. Valid values are anything returned from your models by <code>broom::glance</code>. Another valid value is <code>&quot;nobs&quot;</code>, which returns the number of observations from the regression. If the character vector has names, these will be used for row headings:</p>
+<p>To display a particular row of summary statistics, use the <code>statistics</code> parameter. This should be a character vector. Valid values are anything returned from your models by <code>broom::glance</code>. Another valid value is <code>&quot;nobs&quot;</code>, which returns the number of observations from the regression. If the <code>statistics</code> vector has names, these will be used for row headings:</p>
 <pre class="r"><code>broom::glance(lm1)</code></pre>
 <pre><code>##   r.squared adj.r.squared    sigma statistic p.value df    logLik      AIC
 ## 1 0.8506755     0.8506699 1541.649  153634.8       0  3 -472488.4 944984.9
@@ -1394,6 +1396,69 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">AIC</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">944984.88</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">53243.30</td>
+</tr>
+<tr>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>
+</tr>
+</table>
+
+<p>Lastly, if you want to bold all significant coefficients, set the parameter <code>bold_signif</code> to a maximum significance level:</p>
+<pre class="r"><code>huxreg(lm1, lm3, bold_signif = 0.05)</code></pre>
+<table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">(2)</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">(Intercept)</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">4045.333 ***</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">7.313 ***</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(286.205)</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(0.074)</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">carat</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">7765.141 ***</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">1.971 ***</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(14.009)</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(0.004)</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">depth</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">-102.165 ***</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">-0.018 ***</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(4.635)</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><span style="font-weight: bold; ">(0.001)</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">N</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">53940</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">53940</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">R2</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">0.851</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">0.847</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">logLik</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">-472488.441</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">-26617.649</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">AIC</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">944984.882</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">53243.298</td>
 </tr>
 <tr>
   <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 4px 4px 4px 4px; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>

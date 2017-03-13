@@ -1,9 +1,4 @@
 
-# models can be a named list, names used for top row
-# same for sumstats and coefs?
-# have separate function remake_stars which works on columns?
-# alternative: you change number_formatting to always format all numbers; and
-# have a format_numbers property
 
 #' Create a Huxtable to Display Model Output
 #'
@@ -15,8 +10,8 @@
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
-#' @param note Footnote for bottom cell, which spans all columns. \code{%stars%} will be replaced by a note about
-#'   significance stars.
+#' @param note Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
+#'   significance stars. Set to \code{NULL} for no footnote.
 #' @param statistics Summary statistics to display.
 #' @param coefs Display only these coefficients. Overrules \code{omit_coef}.
 #' @param omit_coefs Omit these coefficients.
@@ -36,6 +31,13 @@
 #' @export
 #'
 #' @examples
+#' set.seed(27101975)
+#' dfr <- data.frame(a = rnorm(100), b = rnorm(100))
+#' dfr$y <- dfr$a + rnorm(100)
+#' lm1 <- lm(y ~ a, dfr)
+#' lm2 <- lm(y ~ a + b, dfr)
+#' glm1 <- glm1(I(y > 0) ~ a, dfr, family = binomial)
+#' huxreg(lm1, lm2, glm1)
 huxreg <- function (
         ...,
         error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
