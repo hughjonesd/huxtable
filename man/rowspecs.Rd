@@ -18,7 +18,7 @@ But there are a few extra tricks:
 \itemize{
  \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, , 2:3)}
    you could write \code{set_property(ht, , col2:col3)}.
- \item Use \code{\link[=last]{last(n)}} to refer to the last n rows or columns.
+ \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
    for only odd ones.
  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
@@ -44,7 +44,7 @@ Here is how the row and col arguments are parsed:
 
 If \code{row} or \code{col} is a function, it is called with two arguments: the huxtable, and the dimension
 number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector of column indices.
-\code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{last}} return
+\code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{final}} return
 functions for this purpose.
 }
 
