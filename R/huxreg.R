@@ -1,5 +1,4 @@
 
-
 #' Create a Huxtable to Display Model Output
 #'
 #' @param ... Models, or a single list of models.
@@ -200,7 +199,7 @@ make_ci <- function(tidied, ci_level) {
 
 
 has_builtin_ci <- function (x) {
-  objs <- sapply(class(x), function (y) try(getS3method('tidy', y), silent = TRUE))
+  objs <- sapply(class(x), function (y) try(utils::getS3method('tidy', y), silent = TRUE))
   obj <- Find(function(x) class(x) == 'function', objs)
   if (is.null(obj)) return(FALSE)
   argnames <- names(formals(obj))
@@ -225,46 +224,3 @@ make_error_cells <- function (tidied, error_style) {
 
   strings
 }
-
-make_stat_col <- function (tidied, stat_names) {
-  mysumstat <- rep(NA, length(my_stat_names))
-  names(mysumstat) <- my_stat_names
-  relevant_stats <- intersect(my_stat_names, names(sumstat))
-  mysumstat[relevant_stats] <- unlist(sumstat[,relevant_stats])
-  na_locs <- is.na(mysumstat)
-  mysumstat <- myformatC(mysumstat) # this kills NAs
-  mysumstat[na_locs] <- na_string
-  mysumstat
-}
-  # if (is.character(stars)) {
-  #   cutpoints <- c(0, 0.001, 0.01, 0.05, 1)
-  #   symbols   <- c(stars, '')
-  # } else {
-  #   cutpoints <- c(0, sort(stars), 1)
-  #   symbols   <- c(names(stars)[order(stars)], '')
-  # }
-  # mystars <- function(x) stats::symnum(x, cutpoints = cutpoints, symbols = symbols)
-  #
-  # make_coef <- function(tid) {
-  #   mycoef <- rep(NA, ncoefs)
-  #   names(mycoef) <- my_coefs
-  #   coefs_here <- tid$term[tid$term %in% my_coefs]
-  #   mycoef[coefs_here] <- tid$estimate[tid$term %in% my_coefs]
-  #   mycoef
-  # }
-
-
-
-
-  # take a list of objects
-  # tidy them
-  # select coefficients? Or do we let them just subset?
-  # select summary statistics
-  # make s.e.s, confidence intervals, t statistics and or p values
-  # set number_format appropriately
-  # print SEs or whatever either below coefs, or pasted with them (or maybe in next col?)
-  # add an automatic footnote
-  # no need to change coef names
-  # nor to do styling
-
-

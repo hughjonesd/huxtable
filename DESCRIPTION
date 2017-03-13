@@ -13,5 +13,5 @@ Suggests: testthat, dplyr, devtools, broom
 RoxygenNote: 6.0.1
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
-Imports: knitr, rmarkdown, xtable, htmltools, lazyeval 
+Imports: knitr, rmarkdown, xtable, htmltools, lazyeval, utils 
 VignetteBuilder: knitr
