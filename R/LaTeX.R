@@ -136,7 +136,7 @@ build_tabular <- function(ht) {
 
         padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
               bottom_padding(ht)[drow, dcol])
-        padding <- lapply(padding, function(x) if (is.numeric(x) & ! is.na(x)) paste0(x, 'pt') else x)
+        padding <- lapply(padding, function(x) if (is_a_number(x) & ! is.na(x)) paste0(x, 'pt') else x)
         hpadding <- lapply(padding[1:2], function(x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
         contents <- paste0(hpadding[1], contents, hpadding[2])
         tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')

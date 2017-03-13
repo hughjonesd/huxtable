@@ -55,3 +55,22 @@ test_that('set_cell_properties fails with bad arguments', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   expect_error(ht <- set_cell_properties(ht, 1, 1, bad = 'no!'))
 })
+
+test_that('can combine numbers and characters in number_format', {
+  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111))
+  number_format(ht)[1,] <- "%3.3f"
+  number_format(ht)[2,] <- 1
+  number_format(ht)[3,] <- list(function(x) ifelse(x > 0, '+', '-'))
+  expect_equivalent(huxtable:::clean_contents(ht, 1, 1), "1.111")
+  expect_equivalent(huxtable:::clean_contents(ht, 2, 1), "1.1")
+  expect_equivalent(huxtable:::clean_contents(ht, 3, 1), "+")
+})
+
+test_that('Can combine numbers and strings in padding', {
+  ht <- huxtable(a = 1, b = 1)
+  left_padding(ht)[1, 1] <- '10pt'
+  left_padding(ht)[1, 2] <- 17
+  expect_match(to_html(ht), '17pt', fixed = TRUE)
+  expect_match(to_latex(ht), '17pt', fixed = TRUE)
+})
+

@@ -109,7 +109,7 @@ cell_html <- function (ht, rn, cn) {
   padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
     left_padding(ht)[rn, cn])
   if (any( ! is.na(padding))) {
-    padding <- sapply(padding, function(x) if(is.numeric(x)) paste0(x, "px") else x)
+    padding <- sapply(padding, function(x) if(is_a_number(x)) paste0(x, "pt") else x)
     padding <- paste(padding, collapse = ' ')
     res <- paste0(res, 'padding: ', padding, '; ')
   }
