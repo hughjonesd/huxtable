@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2017-03-10" />
+<meta name="date" content="2017-03-13" />
 
 <title>Design Principles, Comparisons and Limitations</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Design Principles, Comparisons and Limitations</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2017-03-10</em></h4>
+<h4 class="date"><em>2017-03-13</em></h4>
 
 </div>
 
@@ -137,7 +137,7 @@ $(document).ready(function () {
 <h2>Comparing Huxtable With Other Packages</h2>
 <p>R has many different packages to create LaTeX and HTML tables. The table(s) below list those I know and the features they have. The table is produced with huxtable, of course ;-)</p>
 <table class="huxtable" style="width: 50%; margin-left: auto; margin-right: auto;">
-<col style="width: 60pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><tr style="height: 80pt;">
+<col style="width: 60pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><col style="width: 20pt;"><tr style="height: 80pt;">
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; "></span></div></td>
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">xtable</span></div></td>
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">formattable</span></div></td>
@@ -149,10 +149,12 @@ $(document).ready(function () {
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">ztable</span></div></td>
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">kable</span></div></td>
   <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">texreg</span></div></td>
-  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">tables</span></div></td>
-  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">DT</span></div></td>
-  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">pander</span></div></td>
-  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">huxtable</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">stargazer</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">tables</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">DT</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">pander</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">huxtable</span></div></td>
+  <td  style="vertical-align: middle; text-align: left; white-space: normal; border-width:0px 0px 1px 0px; border-style: solid; padding: 4px 4px 4px 4px; background-color: rgb(242, 242, 242); "><div style="transform: rotate(-270deg); white-space:nowrap;"><span style="font-weight: bold; ">ReporteRs</span></div></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "><span style="font-weight: bold; font-style: italic; ">HTML output</span></td>
@@ -170,6 +172,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Background color</td>
@@ -186,6 +190,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
@@ -203,6 +209,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
@@ -217,8 +225,10 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
@@ -237,6 +247,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
@@ -254,6 +266,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
@@ -269,8 +283,10 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">(Y)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
@@ -286,7 +302,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
@@ -303,7 +321,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
@@ -320,6 +340,8 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
@@ -336,8 +358,10 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
@@ -354,9 +378,11 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Background color</td>
@@ -373,7 +399,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Width and height</td>
@@ -390,7 +418,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Text formatting</td>
@@ -404,10 +434,12 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Borders</td>
@@ -421,10 +453,12 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">(Y)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">(Y)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Rotation</td>
@@ -441,7 +475,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Multicolumn/multirow</td>
@@ -455,10 +491,12 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">(Y)</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Alignment</td>
@@ -473,9 +511,11 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Numeric formatting</td>
@@ -490,9 +530,11 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Captions</td>
@@ -508,8 +550,10 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Format NA </td>
@@ -523,10 +567,12 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Long tables</td>
@@ -540,7 +586,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
@@ -558,12 +606,16 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "><span style="font-weight: bold; font-style: italic; ">Other features</span></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
@@ -594,7 +646,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Autocreate summary statistics</td>
@@ -608,7 +662,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
@@ -626,7 +682,9 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
@@ -642,9 +700,11 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
@@ -663,9 +723,13 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "><span style="font-weight: bold; font-style: italic; ">Other formats</span></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
@@ -695,8 +759,10 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Screen</td>
@@ -710,10 +776,12 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Excel</td>
@@ -731,12 +799,35 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+</tr>
+<tr style="height: 14pt;">
+  <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Word</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Y</td>
 </tr>
 <tr style="height: 14pt;">
   <td  style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">DocBook</td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Y</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
@@ -762,12 +853,14 @@ $(document).ready(function () {
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Via Javascript</td>
-  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Via markdown</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; ">Via Javascript</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); ">Via markdown</td>
+  <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: normal; border-width:1px 0px 0px 0px; border-style: solid; padding: 0px 0px 0px 0px; background-color: rgb(242, 242, 242); "></td>
 </tr>
 <tr style="height: 14pt;">
-  <td  colspan="15" style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 2px 0px; border-style: solid; padding: 0px 0px 0px 0px; "><span style="font-size:10pt; ">A (Y) means that there is limited support for the feature. 
+  <td  colspan="17" style="vertical-align: top; text-align: left; white-space: normal; border-width:1px 0px 2px 0px; border-style: solid; padding: 0px 0px 0px 0px; "><span style="font-size:10pt; ">A (Y) means that there is limited support for the feature. 
                     For example, multirow cells may only be supported in headers, or only horizontal
                     border lines may work.</span></td>
 </tr>
