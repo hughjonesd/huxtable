@@ -14,8 +14,6 @@ TODO
 * outer spacing for tables
 * make huxtables work with filter and other dplyr methods? 
   - NB they work ok with subset, and with dplyr::select
-* use is_a_number for huxtable properties where appropriate 
-  - create a failing test
 * simple `add_footnote_row` method?
 * decimal padding option for columns
   - good for huxreg
@@ -30,7 +28,7 @@ TODO
   - could still provide an asFlexTable method, though
 * Better, longer documentation
   - Section on rowspecs
-  - Use knitr more, it's precompiled
+  - Use dplyr more, it's precompiled
   - List of all possible attributes
   
 PUT OFF
