@@ -5,7 +5,7 @@
 \title{Create a Huxtable to Display Model Output}
 \usage{
 huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
-  error_position = c("same", "below", "right"), number_format = "\%.3f",
+  error_pos = c("below", "same", "right"), number_format = "\%.3f",
   ci_level = 0.95, stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05),
   bold_signif = NULL, note = "\%stars\%.", statistics = c(N = "nobs", R2 =
   "r.squared", "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
@@ -15,7 +15,7 @@ huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
 
 \item{error_style}{How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.}
 
-\item{error_position}{Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.}
+\item{error_pos}{Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.}
 
 \item{number_format}{Format for numbering. See \code{\link{number_format}} for details.}
 
