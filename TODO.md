@@ -11,11 +11,16 @@ BUGS
 
 TODO
 ====
+* outer spacing for tables
 * make huxtables work with filter and other dplyr methods? 
   - NB they work ok with subset, and with dplyr::select
 * use is_a_number for huxtable properties where appropriate 
   - create a failing test
 * simple `add_footnote_row` method?
+* decimal padding option for columns
+  - good for huxreg
+* use numeric_format on all numbers "found" in a cell; set to NA to do nothing.
+  - good for huxreg (confidence intervals, signif. stars etc.)
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * word output?
@@ -23,7 +28,6 @@ TODO
   - ah... but you can't use within Rmarkdown, he says
   - See https://github.com/davidgohel/ReporteRs/issues/68
   - could still provide an asFlexTable method, though
-* `huxreg` a la `texreg`, using `broom` and code from `model_table`
 * Better, longer documentation
   - Section on rowspecs
   - Use knitr more, it's precompiled
