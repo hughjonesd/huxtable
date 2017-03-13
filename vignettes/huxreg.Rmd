@@ -5,8 +5,10 @@ date: '`r Sys.Date()`'
 output:
   html_document: null
   pdf_document: null
-vignette: |
-  %\VignetteIndexEntry{Regression Tables with Huxreg}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
+vignette: >
+  %\VignetteIndexEntry{Regression Tables with Huxreg}  
+  %\VignetteEngine{knitr::rmarkdown}  
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
