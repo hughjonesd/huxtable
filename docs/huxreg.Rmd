@@ -1,0 +1,155 @@
+---
+title: "Regression Tables with huxreg"
+author: "David Hugh-Jones"
+date: '`r Sys.Date()`'
+output:
+  html_document: null
+  pdf_document: null
+vignette: |
+  %\VignetteIndexEntry{Regression Tables with Huxreg}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+
+
+```
+
+## Regression tables with `huxreg`
+
+From version 0.2, huxtable includes the function `huxreg` to build a table of regressions.
+
+`huxreg` can be called with a list of models. These models can be of any class which has a `tidy` method defined
+in the [broom](https://cran.r-project.org/?package=broom) package. The method should return a list of regression
+coefficients with names `term`, `estimate`, `std.error` and `p.value`. That covers most standard regression packages.
+
+Let's start by running some regressions to predict a diamond's price.
+
+```{r}
+data(diamonds, package = 'ggplot2')
+
+lm1 <- lm(price ~ carat + depth, diamonds)
+lm2 <- lm(price ~ depth + factor(color, ordered = FALSE), diamonds)
+lm3 <- lm(log(price) ~ carat + depth, diamonds)
+```
+
+Now, we call `huxreg` to display the regression output side by side.
+
+```{r}
+
+huxreg(lm1, lm2, lm3)
+```
+
+The basic output includes estimates, standard errors and summary statistics. 
+
+Some of those variable names are hard to read. We can change them by specifying a named list of variables in the
+`coefs` argument, like this:
+
+
+```{r}
+color_names <- paste0('factor(color, ordered = FALSE)', LETTERS[5:10])
+names(color_names) <- paste('Color:', LETTERS[5:10])
+
+huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_names))
+```
+
+Alternatively, since the output from `huxreg` is just a huxtable, we could just edit its contents directly before we
+print it:
+
+```{r}
+diamond_regs <- huxreg(lm1, lm2, lm3)
+diamond_regs[seq(8, 18, 2), 1] <- paste('Color:', LETTERS[5:10])
+diamond_regs
+```
+
+Of course, we aren't limited to just changing names. We can also make our table prettier. Let's add the "article" theme,
+and a vertical stripe for background colour:
+
+```{r}
+library(dplyr)
+diamond_regs                                                         %>% 
+      theme_article                                                  %>% 
+      set_background_color(1:nrow(diamond_regs), evens(), grey(.95)) %>% 
+      set_font_size(final(), 1, 9)                                   %>% 
+      set_bold(final(), 1, FALSE)
+
+```
+
+We could do more, like changing the `number_format` of N to not display decimals. But let's explore what else `huxreg` 
+itself can do. 
+
+By default, standard errors are shown below coefficient estimates. To display them in a column to the right, use
+`error_pos = 'right'`:
+
+```{r}
+huxreg(lm1, lm3, error_pos = 'right')
+```
+
+
+This will give column headings a column span of 2.
+
+To display standard errors in the same cell as estimates, use `error_pos = 'same'`:
+
+```{r}
+huxreg(lm1, lm3, error_pos = 'same')
+```
+
+
+You can change the default column headings by giving names to your models:
+
+```{r}
+huxreg('Price' = lm1, 'Log price' = lm3)
+```
+
+
+To display a particular row of summary statistics, use the `statistics` parameter. This should be a character vector.
+Valid values are anything returned from your models by `broom::glance`. Another valid value is `"nobs"`, which 
+returns the number of observations from the regression. If the character vector has names, these will be used for
+row headings:
+
+```{r}
+broom::glance(lm1)
+huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
+  'P value' = 'p.value'))
+```
+
+You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
+p values, using the `error_style` option:
+
+```{r}
+huxreg(lm1, lm3, error_style = 'statistic')
+huxreg(lm1, lm3, error_style = 'pvalue')
+```
+
+Or you can display confidence intervals using 'ci'. Use `ci_level` to set the confidence level for the interval:
+
+```{r}
+huxreg(lm1, lm3, error_style = 'ci') # default is .95
+huxreg(lm1, lm3, error_style = 'ci', ci_level = .99)
+```
+
+If you choose more than one `error_style` option, the second one will be shown in square brackets:
+
+```{r}
+huxreg(lm1, lm3, error_style = c('stderr', 'ci'))
+```
+
+To change the footnote, use `note`. If `note` contains the string `"%stars%"` it will be replaced by a description of the
+significance stars used. If you don't want a footnote, just set `note = NULL`.
+
+
+```{r}
+huxreg(lm1, lm3, note = 'Linear regressions on diamond price. %stars%.')
+```
+
+To change number formatting, set the `number_format` parameter. This works the same as the `number_format` property
+for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be
+taken as a format to the base R `sprintf` function; if it is a function, the function will be called to format the number. 
+`huxreg` tries to be smart and to format summary statistics like `nobs` as integers.
+
+```{r}
+huxreg(lm1, lm3, number_format = 2)
+```
+
+
