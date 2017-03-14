@@ -11,6 +11,8 @@ BUGS
 
 TODO
 ====
+* smarter website
+  - multiple examples
 * outer spacing for tables
   - CSS: table style: margin
   - LaTeX: \intextsep or just \vspace
@@ -37,9 +39,6 @@ PUT OFF
 * `col_width`, `row_height` should be plural. Not sure this is necessary.
 * `top_padding`, `top_border` should be `padding_top`, `border_top` etc.
   - not sure if autocomplete is easier this way...
-* auto cell align: left for text, decimal for numbers?
-  - decimal alignment doesn't work in HTML. LaTeX has dcolumn and/or siunitx... maybe skip
-* new version of latex code: compute "real" details (border, cell, content) for each row?
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
@@ -48,18 +47,7 @@ PUT OFF
   - can't really do this if you want to assign to particular subsets
   - because that would call `borders(ht)` and what does that return?
   - stick with `set_all_borders`
-* differentiate headers from content; don't change content to character;
-  - this is interesting but hard
-  - one poss is to keep the current (simple!) storage but to remember original types and to convert
-    back as needed
-  - or is there a data frame where types can be arbitrary?
-  - or bite the bullet and have separate components
-  - or store the data twice, once in the df and once separately on its own? (yuck)
-  - NB not nec true that headers are first X rows/cols exclusively!
-  - presumably they are always whole rows and columns, though.
-  - advantage when cbinding, you could have an option to only cbind the data rows...
-  - or subsetting, autoinclude header rows/cols
-  - seems a bit automagic 
+
 
 
 
