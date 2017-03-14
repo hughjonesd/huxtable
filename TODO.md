@@ -18,6 +18,7 @@ TODO
   - NB they work ok with subset, and with dplyr::select
   - idea:
 * simple `add_footnote_row` method?
+* Use strwrap in to_screen
 * decimal padding option for columns
   - good for huxreg
 * use numeric_format on all numbers "found" in a cell; set to NA to do nothing.
