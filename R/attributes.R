@@ -558,8 +558,11 @@ make_getter_setters('number_format', 'cell')
 #' in a column to align on the rightmost decimal point, set \code{pad_decimal} to '.' or whatever decimal
 #' you prefer to use.
 #' @examples
-#' vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad.")
-#' ht <- hux(Column1 = vals, Column2 = vals, add_colnames = TRUE)
+#' vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad this one.")
+#' ht <- hux(NotPadded = vals, Padded = vals, add_colnames = TRUE)
+#' number_format(ht)       <- 5
+#' align(ht)[1,]           <- 'center'
+#' align(ht)[2:6,]         <- 'right'
 #' pad_decimal(ht)[2:5, 2] <- '.'
 #' ht
 #' @export pad_decimal pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
