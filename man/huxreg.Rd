@@ -20,6 +20,9 @@ huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
 
 \item{number_format}{Format for numbering. See \code{\link{number_format}} for details.}
 
+\item{pad_decimal}{Character for decimal point; columns will be right-padded to align these.
+Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.}
+
 \item{ci_level}{Confidence level for intervals.}
 
 \item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use.}
@@ -35,9 +38,6 @@ significance stars. Set to \code{NULL} for no footnote.}
 \item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
 
 \item{omit_coefs}{Omit these coefficients.}
-
-\item{decimal_pad}{Character for decimal point; columns will be right-padded to align these.
-Set to \code{NA} to turn off padding. See \code{\link{decimal_pad}} for details.}
 }
 \value{
 A huxtable object.

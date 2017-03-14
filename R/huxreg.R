@@ -5,8 +5,8 @@
 #' @param error_style How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
 #' @param number_format Format for numbering. See \code{\link{number_format}} for details.
-#' @param decimal_pad Character for decimal point; columns will be right-padded to align these.
-#'   Set to \code{NA} to turn off padding. See \code{\link{decimal_pad}} for details.
+#' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
+#'   Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
 #' @param ci_level Confidence level for intervals.
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
