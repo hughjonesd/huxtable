@@ -48,7 +48,7 @@ as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
 
   dcells <- display_cells(x)
   dcells <- dcells[ ! dcells$shadowed, ]
-  # rot <- switch(as.character(rotation(ht)[drow, dcol]),
+  # rot <- switch(as.character(rotation(x)[drow, dcol]),
   #         '0'   = 'lrtb',
   #         '90'  = 'btlr',
   #         '270' = 'tbrl',
@@ -57,8 +57,8 @@ as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
   # cell_props$text.direction <- rot
   ft <- ReporteRs::FlexTable(numrow = nrow(x), numcol = ncol(x), header.columns = FALSE)
   for (hr in c(header_rows, footer_rows)) {
-    contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (x) {
-      clean_contents(ht, x[1], x[2], type = 'word')
+    contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
+      clean_contents(x, y[1], y[2], type = 'word')
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
 
@@ -75,10 +75,10 @@ as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
     ft <- add_cell(ft, x, dcells[j,], part, target_row)
   }
 
-  w <- width(ht)
+  w <- width(x)
   # rough guess at page width of 6 inches:
   if (is.numeric(w)) w <- w * 6 else warning('FlexTable can only deal with numeric width, ignoring width of: ', w)
-  if (! any(is.na(cw <- col_width(ht)))) {
+  if (! any(is.na(cw <- col_width(x)))) {
     if (is.numeric(cw)) ft <- ReporteRs::setFlexTableWidths(ft, cw * w) else
           warning('FlexTable can only deal with numeric col_width, ignoring col_width of: ', paste(cw, collapse=', '))
   }
