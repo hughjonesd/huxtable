@@ -59,21 +59,22 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
 
   ft <- ReporteRs::FlexTable(numrow = nrow(ht) - header_rows - footer_rows, numcol = ncol(ht), header.columns = FALSE)
 
+  contents <- clean_contents(ht, type = 'word')
   for (hr in c(hrows, frows)) {
-    contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
-      clean_contents(ht, y[1], y[2], type = 'word')
+    cell_contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
+      contents[y[1], y[2]]
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
     cell_props <- if (! is.na(td <- get_text_dir(ht, hr))) cellProperties(text.direction = td) else cellProperties()
     func <- if (hr %in% hrows) ReporteRs::addHeaderRow else ReporteRs::addFooterRow
-    ft <- func(ft, value = contents, colspan = colspans, cell.properties = cell_props)
+    ft <- func(ft, value = cell_contents, colspan = colspans, cell.properties = cell_props)
   }
 
   for (j in 1:nrow(dcells)) {
     drow <- dcells$display_row[j]
     dcol <- dcells$display_col[j]
     part <- if (drow %in% hrows) 'header' else if (drow %in% frows) 'footer' else 'body'
-    if (part == 'body') ft[drow - header_rows, dcol, to = part] <- clean_contents(ht, drow, dcol, 'word')
+    if (part == 'body') ft[drow - header_rows, dcol, to = part] <- contents[drow, dcol]
     ft <- format_cell(ft, ht, dcells[j,], part, header_rows, footer_rows)
   }
 

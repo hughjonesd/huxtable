@@ -45,7 +45,8 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
 
   dc <- display_cells(ht)
   drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
-  dc$contents <- apply(drow_mat, 1, function(rc) clean_contents(ht, rc[1], rc[2], 'screen'))
+  contents <- clean_contents(ht, type = 'screen')
+  dc$contents <- contents[drow_mat]
 
   dc <- dc[order(dc$colspan),]
   border_chars   <- 3
@@ -168,9 +169,8 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
   dcells <- dcells[! dcells$shadowed, ]
   result <- str_rep('-', width)
   result <- paste0(result, '\n')
-  dcells$contents <- sapply(1:nrow(dcells), function (x) {
-    clean_contents(ht, dcells[x, 'display_row'], dcells[x, 'display_col'], 'markdown')
-  })
+  contents <- clean_contents(ht, type = 'markdown')
+  dcells$contents <- contents[as.matrix(dcells[, c('display_row', 'display_col')])]
 
   align <- align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))

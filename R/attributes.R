@@ -4,7 +4,7 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_co
   'top_border', 'left_border', 'right_border', 'bottom_border',
   'top_padding', 'left_padding', 'right_padding', 'bottom_padding', 'wrap',
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
-  'font')
+  'font', 'pad_decimal')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label')
@@ -40,6 +40,7 @@ huxtable_default_attrs <- list(
         font_size           = NA,
         rotation            = 0,
         number_format       = list('%5.2f'),
+        pad_decimal         = NA,
         font                = NA
       )
 
@@ -198,7 +199,6 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 #' @export col_width col_width<- set_col_width col_width.huxtable col_width<-.huxtable
 NULL
 make_getter_setters('col_width', 'col')
-
 
 #' @template getset-rowcol
 #' @templateVar attr_name row_height
@@ -548,6 +548,26 @@ make_getter_setters('number_format', 'cell')
 }
 
 
+#' @template getset-cell
+#' @templateVar attr_name pad_decimal
+#' @templateVar attr_desc Decimal Padding
+#' @templateVar value_param_desc A vector of single characters. \code{NA} is the default of no padding.
+#' @details
+#' LaTeX and HTML both have no simple way to align columns on decimal points, especially when cells
+#' may contain non-mathematical content like significance stars. To right-pad cells
+#' in a column to align on the rightmost decimal point, set \code{pad_decimal} to '.' or whatever decimal
+#' you prefer to use.
+#' @examples
+#' vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad.")
+#' ht <- hux(Column1 = vals, Column2 = vals, add_colnames = TRUE)
+#' pad_decimal(ht)[2:5, 2] <- '.'
+#' ht
+#' @export pad_decimal pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
+NULL
+make_getter_setters('pad_decimal', 'col', extra_code = {
+  stopifnot(all(nchar(na.omit(value)) == 1))
+})
+
 
 #' @template getset-cell
 #' @templateVar attr_name font
@@ -652,22 +672,28 @@ make_getter_setters('label', 'table', check_fun = is.character)
 
 # utility functions-----------------------------------------------------------------------------------------------------
 
-# return formatted contents, suitably escaped
-clean_contents <- function(ht, row, col, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
+# return character matrix of formatted contents, suitably escaped
+clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
   mytype <- match.arg(type)
-  # stopifnot(length(row) == 1 & length(col) == 1)
-  contents <- ht[[row, col]] # just the data and just one element.
-  # But we might want to allow more than one element; if so just use `[.data.frame`
-  if (is_a_number(contents)) {
-    cnum <- as.numeric(contents)
-    nf <- number_format(ht)[[row, col]] # a list element
-    contents <- format_number(cnum, nf)
-  }
+  contents <- as.matrix(as.data.frame(ht))
 
-  if (is.na(contents)) contents <- na_string(ht)[row, col]
-  if (escape_contents(ht)[row, col] && type %in% c('latex', 'html')) {
-    # xtable::sanitize.numbers would do very little and is buggy
-    contents <-  xtable::sanitize(contents, type = mytype)
+  for (col in 1:ncol(contents)) {
+    for (row in 1:nrow(contents)) {
+      cell <- contents[row, col]
+      if (is_a_number(cell)) {
+        cell <- as.numeric(cell)
+        cell <- format_number(cell, number_format(ht)[[row, col]]) # a list element, double brackets needed
+      }
+      if (is.na(cell)) cell <- na_string(ht)[row, col]
+
+      contents[row, col] <- cell
+    }
+    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[,col])
+    if (type %in% c('latex', 'html')) {
+      # xtable::sanitize.numbers would do very little and is buggy
+      to_esc <- escape_contents(ht)[, col]
+      contents[to_esc, col] <-  xtable::sanitize(contents[to_esc, col], type)
+    }
   }
 
   contents
@@ -684,16 +710,29 @@ format_number <- function (num, nf) {
   res
 }
 
-decimal_pad <- function(col) {
-  regexpr('.*\\.', col) -> rex
-  pos <- attr(rex, 'match.length')
+decimal_pad <- function(col, pad_chars) {
+  # where pad_chars is NA we do not pad
+  orig_col  <- col
+  na_pad    <- is.na(pad_chars)
+  col       <- col[! na_pad]
+  pad_chars <- pad_chars[! na_pad]
+  if (length(col) == 0) return(orig_col)
+
+  find_pos  <- function(string, char) {
+    regex <- gregexpr(char, string, fixed = TRUE)[[1]]
+    regex[length(regex)]
+  }
+  pos <- mapply(find_pos, col, pad_chars)
   nchars <- nchar(col, type = 'width')
   # take the biggest distance from the decimal point
   pos[pos == -1L] <- nchars[pos == -1L] + 1
   chars_after_. <- nchars - pos
 
   pad_to <- max(chars_after_.) - chars_after_.
-  paste0(col, str_rep(' ', pad_to))
+  col <- paste0(col, str_rep(' ', pad_to))
+
+  orig_col[! na_pad] <- col
+  orig_col
 }
 
 # return data frame mapping real cell positions to cells displayed

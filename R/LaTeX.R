@@ -111,6 +111,7 @@ build_tabular <- function(ht) {
   res <- paste0(colspec, '\n')
 
   display_cells <- display_cells(ht)
+  all_contents  <- clean_contents(ht, type = 'latex')
   res <- paste0(res, build_clines_for_row(ht, row = 0))
 
   for (myrow in 1:nrow(ht)) {
@@ -132,7 +133,7 @@ build_tabular <- function(ht) {
       #    - multirow goes upwards not downwards, to avoid content being overwritten by cell background
       # - if a left hand cell (shadowed or not), print cell color and borders
       if ((! dcell$shadowed && rs == 1) || bottom_left_multirow) {
-        contents <- build_cell_contents(ht, drow, dcol)
+        contents <- build_cell_contents(ht, drow, dcol, all_contents[drow, dcol])
 
         padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
               bottom_padding(ht)[drow, dcol])
@@ -240,8 +241,7 @@ compute_width <- function(ht, start_col, end_col) {
   cw
 }
 
-build_cell_contents <- function(ht, row, col) {
-  contents <- clean_contents(ht, row, col, type = 'latex')
+build_cell_contents <- function(ht, row, col, contents) {
   if (! is.na(font_size <- font_size(ht)[row, col])) {
     font_size_pt <- paste0(font_size, 'pt')
     line_space <- paste0(round(font_size * 1.2, 2), 'pt')

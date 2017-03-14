@@ -4,7 +4,9 @@
 #' @param ... Models, or a single list of models.
 #' @param error_style How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
-#' @param number_format  Format for numbering. See \code{\link{number_format}} for details.
+#' @param number_format Format for numbering. See \code{\link{number_format}} for details.
+#' @param decimal_pad Character for decimal point; columns will be right-padded to align these.
+#'   Set to \code{NA} to turn off padding. See \code{\link{decimal_pad}} for details.
 #' @param ci_level Confidence level for intervals.
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
@@ -42,6 +44,7 @@ huxreg <- function (
         error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
         error_pos       = c('below', 'same', 'right'),
         number_format   = '%.3f',
+        pad_decimal     = '.',
         ci_level        = 0.95,
         stars           = c('***' = 0.001, '**' = 0.01, '*' = 0.05),
         bold_signif     = NULL,
@@ -159,6 +162,7 @@ huxreg <- function (
   if (error_pos == 'right') result <- set_colspan(result, 1, evens(), 2)
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'
+  pad_decimal(result)[-1, -1] <- pad_decimal
 
   if (! is.null(note)) {
     stars_note <- paste0(names(stars), ' p < ', stars, collapse = '; ')

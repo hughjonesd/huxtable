@@ -46,7 +46,8 @@ to_html.huxtable <- function(ht, ...) {
   cols_html <- sapply(1:ncol(ht), col_html, ht = ht)
   cols_html <- paste0(cols_html, collapse = '')
   res <- paste0(res, cols_html)
-  rows_html <- sapply(1:nrow(ht), row_html, ht = ht)
+  contents <- clean_contents(ht, type = 'html')
+  rows_html <- sapply(1:nrow(ht), row_html, ht = ht, contents)
   rows_html <- paste0(rows_html, collapse = '')
   res <- paste0(res, rows_html)
   res <- paste0(res, '</table>\n')
@@ -63,7 +64,7 @@ col_html <- function (ht, cn) {
 }
 
 
-row_html <- function (ht, rn) {
+row_html <- function (ht, rn, contents) {
   # print out <tr>, <td> or maybe <th> etc., then </tr>
   style <- ''
   if (! is.na(height <- row_height(ht)[rn])) {
@@ -77,14 +78,14 @@ row_html <- function (ht, rn) {
   cols_to_show <- 1:ncol(ht)
   dcells <- display_cells(ht) # speedup: make this call just once in parent
   cols_to_show <- setdiff(cols_to_show, dcells$col[dcells$row == rn & dcells$shadowed])
-  cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn)
+  cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn, contents)
   cells_html <- paste0(cells_html, collapse = '')
   res <- paste0(res, cells_html)
   res <- paste0(res, '</tr>\n')
   res
 }
 
-cell_html <- function (ht, rn, cn) {
+cell_html <- function (ht, rn, cn, contents) {
   res <- '  <td '
   rs <- rowspan(ht)[rn,cn]
   cs <- colspan(ht)[rn,cn]
@@ -122,7 +123,7 @@ cell_html <- function (ht, rn, cn) {
 
   res <- paste0(res, '">')
 
-  contents <- clean_contents(ht, rn, cn, type = 'html')
+  cell_contents <- contents[rn, cn]
 
   span_css <- ''
   if (! is.na(text_color <- text_color(ht)[rn, cn])) {
@@ -145,13 +146,14 @@ cell_html <- function (ht, rn, cn) {
     span_css <- paste0(span_css, 'font-family: ', font, '; ')
   }
 
-  if (! (span_css == '')) contents <- paste0('<span style="', span_css, '">', contents, '</span>')
+  if (! (span_css == '')) cell_contents <- paste0('<span style="', span_css, '">', cell_contents, '</span>')
 
   if ((rt <- rotation(ht)[rn, cn]) != 0) {
     # note the minus sign
-    contents <- paste0('<div style="transform: rotate(-', rt,'deg); white-space:nowrap;">', contents, '</div>')
+    cell_contents <- paste0('<div style="transform: rotate(-', rt,'deg); white-space:nowrap;">', cell_contents,
+          '</div>')
   }
-  res <- paste0(res, contents)
+  res <- paste0(res, cell_contents)
   res <- paste0(res, '</td>\n')
   res
 }
