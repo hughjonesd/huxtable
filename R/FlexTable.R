@@ -50,17 +50,18 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
   if (! requireNamespace('ReporteRs')) stop('as.FlexTable requires the ReporteRs package. To install, type:\n',
     'install.packages("ReporteRs")')
 
+  ht <- x
   hrows <- seq_len(header_rows)
-  frows <- seq_len(footer_rows) + nrow(x) - footer_rows
+  frows <- seq_len(footer_rows) + nrow(ht) - footer_rows
 
-  dcells <- display_cells(x)
+  dcells <- display_cells(ht)
   dcells <- dcells[ ! dcells$shadowed, ]
 
-  ft <- ReporteRs::FlexTable(numrow = nrow(x) - header_rows - footer_rows, numcol = ncol(x), header.columns = FALSE)
+  ft <- ReporteRs::FlexTable(numrow = nrow(ht) - header_rows - footer_rows, numcol = ncol(ht), header.columns = FALSE)
 
   for (hr in c(hrows, frows)) {
     contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
-      clean_contents(x, y[1], y[2], type = 'word')
+      clean_contents(ht, y[1], y[2], type = 'word')
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
     cell_props <- if (! is.na(td <- get_text_dir(ht, hr))) cellProperties(text.direction = td) else cellProperties()
@@ -73,13 +74,13 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
     dcol <- dcells$display_col[j]
     part <- if (drow %in% hrows) 'header' else if (drow %in% frows) 'footer' else 'body'
     if (part == 'body') ft[drow - header_rows, dcol, to = part] <- clean_contents(ht, drow, dcol, 'word')
-    ft <- format_cell(ft, x, dcells[j,], part, header_rows, footer_rows)
+    ft <- format_cell(ft, ht, dcells[j,], part, header_rows, footer_rows)
   }
 
-  w <- width(x)
+  w <- width(ht)
   # rough guess at page width of 6 inches:
   if (is.numeric(w)) w <- w * 6 else warning('FlexTable can only deal with numeric width, ignoring width of: ', w)
-  if (! any(is.na(cw <- col_width(x)))) {
+  if (! any(is.na(cw <- col_width(ht)))) {
     if (is.numeric(cw)) ft <- ReporteRs::setFlexTableWidths(ft, cw * w) else
           warning('FlexTable can only deal with numeric col_width, ignoring col_width of: ', paste(cw, collapse=', '))
   }
@@ -155,12 +156,11 @@ get_text_dir <- function (ht, row) {
   if (length(unique(rot)) > 1) warning('FlexTable cannot handle multiple rotation values per row')
   rot <- rot[1]
   rot <- switch(as.character(rot),
-    '0'   = 'lrtb',
+    '0'   = NA,
     '90'  = 'btlr',
     '270' = 'tbrl',
-    NA
+    {warning('FlexTable can only handle rotation of 0, 90 or 270'); NA}
   )
-  if (is.na(rot)) warning('FlexTable can only handle rotation of 0, 90 or 270')
 
   rot
 }
