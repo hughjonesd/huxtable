@@ -3,11 +3,11 @@ title: "Huxtable functionality demo/test"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: null
 ---
 
 
@@ -383,25 +383,25 @@ set_rowcol <- function(ht, fun, rc, value) {
   ht
 }
 
-N <- 22
+N <- 23
 megahux <- as_hux(matrix("", N, N))
 megahux[1:5,] <- 'Some text'
 megahux[6:10,] <- rnorm(5*N)
 megahux[11:15,] <- 'Some more text'
-megahux[18:22, ] <- rnorm(5*N)
+megahux[18:23, ] <- rnorm(6 * N)
 megahux[16:17, ] <- substring(stringi::stri_rand_lipsum(2*N), 0, 50)
 # for (col in c(2,7,12,17,22)) test_hux[,col] <- sample(test_hux[,col])
 
 
 megahux <- megahux                                %>% 
       set_rowcol(set_valign, 1, 'top')              %>% 
-      set_rowcol(set_align, 2, 'left')              %>% 
+      set_rowcol(set_align, 2, 'right')              %>% 
       set_rowcol(set_top_border, 3, 1)              %>% 
       set_rowcol(set_bottom_border, 4, 2)           %>% 
       set_rowcol(set_left_border, 5, 1)             %>% 
       set_rowcol(set_right_border, 6, 1)            %>% 
-      set_rowcol(set_background_color, 9, 'wheat')  %>% 
-      set_rowcol(set_text_color, 10, 'red')         %>% 
+      set_rowcol(set_background_color, 10, 'wheat')  %>% 
+      set_rowcol(set_text_color, 11, 'red')         %>% 
       set_rowcol(set_top_padding, 12, 20)           %>% 
       set_rowcol(set_bottom_padding, 13, 20)        %>% 
       set_rowcol(set_left_padding, 14, 20)          %>% 
@@ -412,16 +412,34 @@ megahux <- megahux                                %>%
       set_rowcol(set_italic, 19, TRUE)              %>%
       set_rowcol(set_font_size, 20, 20)             %>%
       set_rowcol(set_number_format, 21, '%9.6f')    %>%
-      set_rowcol(set_font, 22, 'times')
+      set_rowcol(set_font, 22, 'times')             %>% 
+      set_rowcol(set_wrap, 23, TRUE)
 
-colspan(megahux)[11, 4] <- 6
-rowspan(megahux)[4, 11] <- 6
-megahux[11,4] <- stringi::stri_rand_lipsum(1)
-megahux[4, 11] <- stringi::stri_rand_lipsum(1)
+colspan(megahux)[4, 5] <- 6
+rowspan(megahux)[5, 4] <- 6
+megahux[5,4] <- stringi::stri_rand_strings(1, 60)
+megahux[4, 5] <- stringi::stri_rand_strings(1, 60)
+wrap(megahux)[4, 5] <- wrap(megahux)[5, 4] <- TRUE
 megahux[,16] <- megahux[16,] <- '<b>Non escaped HTML</b>'
-megahux[,17] <- megahux[17,] <- sample(c(1:10, rep(NA, 12)))
+megahux[,17] <- megahux[17,] <- sample(c(1:10, rep(NA, 13)))
 
-megahux
+mh <- list()
+j <- 1
+for (row in list(2:11, 12:23)) for (col in list(2:3, 4:10, 11:16, 17:23)) {
+  mh[[j]] <- knitr::knit_print(megahux[c(1, row), c(1, col)])
+  j <- j + 1
+}
+
+mh[[1]]
+mh[[2]]
+mh[[3]]
+mh[[4]]
+mh[[5]]
+mh[[6]]
+mh[[7]]
+mh[[8]]
+
+
 ```
 
 
