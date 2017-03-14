@@ -96,10 +96,18 @@ as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, 
 as_huxtable.huxtable <- function(x, ...) x
 
 #' @export
-as_huxtable.table <- function(x, ...) as_huxtable(unclass(x), ...)
+as_huxtable.table <- function(x, add_colnames = TRUE, add_rownames = TRUE, ...) {
+  ht <- as_huxtable(unclass(x), add_colnames, add_rownames, ...)
+  number_format(ht) <- 0
+  ht
+}
 
 #' @export
-as_huxtable.ftable <- function(x, ...) as_huxtable(format(x, quote = FALSE), ...)
+as_huxtable.ftable <- function(x, ...) {
+  ht <- as_huxtable(format(x, quote = FALSE), ...)
+  number_format(ht) <- 0
+  ht
+}
 
 
 #' @export
