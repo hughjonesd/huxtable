@@ -55,22 +55,17 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
 
   dcells <- display_cells(x)
   dcells <- dcells[ ! dcells$shadowed, ]
-  # rot <- switch(as.character(rotation(x)[drow, dcol]),
-  #         '0'   = 'lrtb',
-  #         '90'  = 'btlr',
-  #         '270' = 'tbrl',
-  #         stop_here("FlexTable can only handle rotation of 0, 90 or 270")
-  #       )
-  # cell_props$text.direction <- rot
+
   ft <- ReporteRs::FlexTable(numrow = nrow(x) - header_rows - footer_rows, numcol = ncol(x), header.columns = FALSE)
+
   for (hr in c(hrows, frows)) {
     contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
       clean_contents(x, y[1], y[2], type = 'word')
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
-
+    cell_props <- if (! is.na(td <- get_text_dir(ht, hr))) cellProperties(text.direction = td) else cellProperties()
     func <- if (hr %in% hrows) ReporteRs::addHeaderRow else ReporteRs::addFooterRow
-    ft <- func(ft, value = contents, colspan = colspans)
+    ft <- func(ft, value = contents, colspan = colspans, cell.properties = cell_props)
   }
 
   for (j in 1:nrow(dcells)) {
@@ -134,15 +129,12 @@ format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
           vertical.align      = valign(ht)[drow, dcol]
   )
   if (! is.na(bgc <- background_color(ht)[drow, dcol])) cell_props$background.color <- bgc
-  rot <- switch(as.character(rotation(ht)[drow, dcol]),
-          '0'   = 'lrtb',
-          '90'  = 'btlr',
-          '270' = 'tbrl',
-          NA
-        )
-  if (is.na(rot)) warning('FlexTable can only handle rotation of 0, 90 or 270')
-  if (rot != 'lrtb' && part != 'header') warning('FlexTable can only set rotation of header rows')
-  cell_props$text.direction <- rot
+
+  # both this and the setHeaderRow call in the parent are necessary:
+  if (! is.na(rot <- get_text_dir(ht, drow))) {
+    cell_props$text.direction <- rot
+    if (part == 'body') warning('Cell rotation only works in header and footer cells')
+  }
   cellp_obj <- do.call(ReporteRs::cellProperties, cell_props)
   add_stuff(cellp_obj)
   add_stuff(ReporteRs::parProperties(text.align = align(ht)[drow, dcol]))
@@ -156,4 +148,19 @@ format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
   }
 
   ft
+}
+
+get_text_dir <- function (ht, row) {
+  rot <- rotation(ht)[row,]
+  if (length(unique(rot)) > 1) warning('FlexTable cannot handle multiple rotation values per row')
+  rot <- rot[1]
+  rot <- switch(as.character(rot),
+    '0'   = 'lrtb',
+    '90'  = 'btlr',
+    '270' = 'tbrl',
+    NA
+  )
+  if (is.na(rot)) warning('FlexTable can only handle rotation of 0, 90 or 270')
+
+  rot
 }
