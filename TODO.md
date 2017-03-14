@@ -21,6 +21,8 @@ TODO
 * Use strwrap in to_screen
 * decimal padding option for columns
   - good for huxreg
+  - but needs applying after clean_content;
+  - which means pregrabbing clean_content in the output methods
 * use numeric_format on all numbers "found" in a cell; set to NA to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
 * bordercolor would be useful for HTML or dark themes...

@@ -139,7 +139,7 @@ add_cell <- function(ft, ht, dc, part, target_row) {
   if (part == 'body') {
     cs <- dc$colspan
     rs <- dc$rowspan
-    if (cs > 1 & rs > 1) stophere('FlexTable cannot span both rows and columns')
+    if (cs > 1 & rs > 1) stop_here('FlexTable cannot span both rows and columns')
     if (cs > 1) ft <- ReporteRs::spanFlexTableColumns(ft, drow, dcol, dc$end_col)
     if (rs > 1) ft <- ReporteRs::spanFlexTableRows(ft, dcol, drow, dc$end_row)
   }
