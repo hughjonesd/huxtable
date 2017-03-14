@@ -70,7 +70,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   extra_code <- if (! missing(extra_code)) substitute(extra_code)
   funs[[paste0(setter, '.huxtable')]] <- eval(bquote(
     function(ht, value) {
-      .(check_fun)
+      if (! all(is.na(value))) .(check_fun)
       .(check_dims)
       .(check_values)
       .(extra_code)
