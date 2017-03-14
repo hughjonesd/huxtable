@@ -24,9 +24,12 @@ test_that('Screen output examples unchanged', {
   test_ex_same('to_screen')
 })
 
+
 test_that('FlexTable output examples unchanged', {
- test_ex_same('as.FlexTable.huxtable')
+  if (! requireNamespace('ReporteRs')) skip('ReporteRs not installed')
+  test_ex_same('as_FlexTable.huxtable')
 })
+
 
 test_that('Multi-rowspan screen output is sane', {
   ht <- hux(a = rep('aaaaaa', 10), b = rep('bbbbbb', 10))
