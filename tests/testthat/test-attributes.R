@@ -61,9 +61,9 @@ test_that('can combine numbers and characters in number_format', {
   number_format(ht)[1,] <- "%3.3f"
   number_format(ht)[2,] <- 1
   number_format(ht)[3,] <- list(function(x) ifelse(x > 0, '+', '-'))
-  expect_equivalent(huxtable:::clean_contents(ht, 1, 1), "1.111")
-  expect_equivalent(huxtable:::clean_contents(ht, 2, 1), "1.1")
-  expect_equivalent(huxtable:::clean_contents(ht, 3, 1), "+")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.111")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1.1")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "+")
 })
 
 test_that('Can combine numbers and strings in padding', {
@@ -74,3 +74,12 @@ test_that('Can combine numbers and strings in padding', {
   expect_match(to_latex(ht), '17pt', fixed = TRUE)
 })
 
+test_that('Decimal padding works', {
+  expect_identical(
+        huxtable:::decimal_pad(
+          c('do not pad.', '1.00532', '33', '33.6 *'),
+          c(NA, rep('.', 3))
+        ),
+        c('do not pad.', '1.00532', '33      ', '33.6 *  '))
+
+})
