@@ -11,6 +11,8 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param borders Print 'horizontal' borders, 'vertical' borders, 'both' or 'neither'. May be abbreviated.
 #' @param blank   Character to print for cell divisions with no border. If \code{NULL}, print a space ' ' but don't print
 #'   empty horizontal borders.
+#' @param colnames Whether or not to print colum names.
+#' @param colnames_color Color to print column names. Note: this won't work in RStudio.
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 #'
@@ -32,14 +34,19 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, ...) {
+to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, colnames = TRUE, colnames_color = 'blue', ...) {
   borders <- match.arg(borders)
   collapse_horiz <- is.null(blank)
   if (is.null(blank)) blank <- ' '
+  if (colnames) {
+    ht <- add_colnames(ht)
+  }
+  my_colour <- if (is.null(colnames_color)) identity else crayon::make_style(colnames_color)
 
   dc <- display_cells(ht)
   drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
   dc$contents <- apply(drow_mat, 1, function(rc) clean_contents(ht, rc[1], rc[2], 'screen'))
+
   dc <- dc[order(dc$colspan),]
   border_chars   <- 3
 
@@ -111,10 +118,12 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
   }
   result <- apply(charmat, 1, paste0, collapse='')
 
+  if (colnames) result[2 - collapse_horiz] <- my_colour(result[2 - collapse_horiz])
   result <- paste0(result, collapse='\n')
   if (! is.na(cap <- caption(ht))) {
     result <- if (caption_pos(ht) == 'top') paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
+  result <- paste0(result, '\n')
 
   result
 }

@@ -11,7 +11,7 @@ print_screen(ht, ...)
 to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, borders = c("both", "horizontal", "vertical",
-  "neither"), blank = NULL, ...)
+  "neither"), blank = NULL, colnames = TRUE, colnames_color = "blue", ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -22,6 +22,10 @@ to_screen(ht, ...)
 
 \item{blank}{Character to print for cell divisions with no border. If \code{NULL}, print a space ' ' but don't print
 empty horizontal borders.}
+
+\item{colnames}{Whether or not to print colum names.}
+
+\item{colnames_color}{Color to print column names. Note: this won't work in RStudio.}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.

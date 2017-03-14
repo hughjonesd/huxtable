@@ -476,7 +476,6 @@ knit_print.huxtable <- function (x, options, ...) {
 
 #' @export
 print.huxtable <- function(x, ...) {
-  if (! all(colnames(x) == x[1,])) x <- add_colnames(x) # too hacky?
   print_screen(x, ...)
 }
 
