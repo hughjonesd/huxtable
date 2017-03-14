@@ -1,6 +1,9 @@
 
 
-#' Convert a Huxtable to a FlexTable for Word/Powerpoint
+
+#' Convert a Huxtable for Word/Powerpoint
+#'
+#' Huxtables can be converted to \code{\link[ReporteRs]{FlexTable}} objects, for use in Word and Powerpoint documents.
 #'
 #' @param x A huxtable.
 #' @param header_rows How many rows to use as headers.
@@ -11,7 +14,8 @@
 #'
 #' @details
 #'
-#' Huxtable objects can be converted to \code{\link[ReporteRs]{FlexTable}} objects for use in Word documents.
+#' Note: you can't use ReporteRs Word output with R markdown word output. Instead you have to write the Word file
+#' yourself. See the ReporteRs documentation.
 #'
 #' Properties are supported, with the following exceptions:
 #' \itemize{
@@ -19,7 +23,7 @@
 #'   \item Rotation of 0, 90 or 270 is supported, only in header rows.
 #'   \item Non-numeric column widths and table widths are not supported. Table width is treated as a fraction of 6
 #'     inches.
-#'   \item Table height, row heights, captions and table position are not supported.
+#'   \item Table height, row heights, wrap, captions and table position are not supported.
 #' }
 #'
 #' @section Challenge:
@@ -86,6 +90,7 @@ as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
 
   ft
 }
+
 
 add_cell <- function(ft, ht, dc, part, target_row) {
   drow <- dc$display_row
