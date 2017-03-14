@@ -1,6 +1,5 @@
 
 
-
 #' Convert a Huxtable to a FlexTable for Word/Powerpoint
 #'
 #' @param x A huxtable.
@@ -37,7 +36,9 @@
 #' }
 #' @importFrom ReporteRs as.FlexTable
 #' @method as.FlexTable huxtable
+#' @aliases as.FlexTable
 #' @export
+#'
 as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
   if (! requireNamespace('ReporteRs')) stop('as.FlexTable requires the ReporteRs package. To install, type:\n',
     'install.packages("ReporteRs")')

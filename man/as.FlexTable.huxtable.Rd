@@ -2,6 +2,7 @@
 % Please edit documentation in R/FlexTable.R
 \name{as.FlexTable.huxtable}
 \alias{as.FlexTable.huxtable}
+\alias{as.FlexTable}
 \title{Convert a Huxtable to a FlexTable for Word/Powerpoint}
 \usage{
 \method{as.FlexTable}{huxtable}(x, header_rows = 1, footer_rows = 0, ...)
@@ -40,9 +41,10 @@ Try to say \code{as.FlexTable.huxtable} ten times without pausing.
 }
 
 \examples{
-if (requireNamespace('ReporteRs')) {
+if (require('ReporteRs')) {
   ht <- huxtable(a = 1:3, b = 1:3)
   ft <- as.FlexTable(ht)
+  ft
   my_doc <- docx()
   my_doc <- addFlexTable(my_doc, ft)
 }
