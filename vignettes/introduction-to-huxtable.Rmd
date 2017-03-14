@@ -153,6 +153,19 @@ number_format(car_ht) <- 0
 add_colnames(car_ht[1:5,])
 ```
 
+You can also align columns by decimal places. If you want to do this for a cell, just set the `pad_decimal` property
+to '.' (or whatever you use for a decimal point). 
+
+```{r}
+pointy_ht <- hux(c('Do not pad this.', 11.003, 300, 12.02, '12.1 **'))
+number_format(pointy_ht) <- 3
+pad_decimal(pointy_ht)[2:5] <- '.'
+align(pointy_ht)[2:5] <- 'right'
+pointy_ht
+```
+
+There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so `pad_decimal` works by right-padding cells with spaces. The output may look better if you use a fixed width font.
+
 ## Column width and cell wrapping
 
 You can set column widths using the `col_width` property:

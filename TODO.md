@@ -21,15 +21,12 @@ TODO
   - idea:
 * simple `add_footnote_row` method?
 * Use strwrap in to_screen
-* decimal padding option for columns
-  - good for huxreg
-  - but needs applying after clean_content;
-  - which means pregrabbing clean_content in the output methods
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
 * Better, longer documentation
+  - installation
   - Section on rowspecs
   - Use dplyr more, it's precompiled
   - List of all possible attributes
