@@ -38,7 +38,7 @@ to_html.huxtable <- function(ht, ...) {
   }
   idstring <- ''
   if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
-  res <- paste0('<table class="huxtable" style="width: ', width, '; ', mstring, heightstring,'"', idstring,'>\n')
+  res <- paste0('<table class="huxtable" style="margin-bottom: 12pt; width: ', width, '; ', mstring, heightstring,'"', idstring,'>\n')
   if (! is.na(cap <- caption(ht))) {
     cap <- paste0('<caption style="caption-side:', caption_pos(ht),'; text-align: center;">', cap, '</caption>')
     res <- paste0(res, cap)
