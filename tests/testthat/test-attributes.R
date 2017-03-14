@@ -81,5 +81,12 @@ test_that('Decimal padding works', {
           c(NA, rep('.', 3))
         ),
         c('do not pad.', '1.00532', '33      ', '33.6 *  '))
+})
 
+test_that('Can set attributes to NA', {
+  ht <- huxtable(a = 1:3, b = 1:3)
+  # expect no error
+  expect_error(caption(ht) <- NA, regexp = NA)
+  expect_error(font(ht) <- NA, regexp = NA)
+  expect_error(col_width(ht) <- NA, regexp = NA)
 })
