@@ -6,9 +6,9 @@ library(git2r)
 gdiff <- git2r::diff(tree(commits()[[1]]))
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
 
-for (f in list.files('vignettes', pattern = '.*\\.Rmd$')) {
+for (f in list.files('vignettes')) {
   out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
-  if (length(out) > 0) stop('vignettes and docs Rmd files differ, please fix!')
+  if (length(out) > 0) stop('vignettes and docs files differ, please fix!')
 }
 
 file.remove(list.files('inst/doc', full.names = TRUE))
