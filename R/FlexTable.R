@@ -46,12 +46,12 @@ as_FlexTable <- function(x, ...) UseMethod('as_FlexTable')
 
 #' @rdname as_FlexTable
 #' @export
-as_FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
+as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
   if (! requireNamespace('ReporteRs')) stop('as.FlexTable requires the ReporteRs package. To install, type:\n',
     'install.packages("ReporteRs")')
 
-  header_rows <- seq_len(header_rows)
-  footer_rows <- seq_len(footer_rows) + nrow(x) - footer_rows
+  hrows <- seq_len(header_rows)
+  frows <- seq_len(footer_rows) + nrow(x) - footer_rows
 
   dcells <- display_cells(x)
   dcells <- dcells[ ! dcells$shadowed, ]
@@ -62,24 +62,23 @@ as_FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
   #         stop_here("FlexTable can only handle rotation of 0, 90 or 270")
   #       )
   # cell_props$text.direction <- rot
-  ft <- ReporteRs::FlexTable(numrow = nrow(x), numcol = ncol(x), header.columns = FALSE)
-  for (hr in c(header_rows, footer_rows)) {
+  ft <- ReporteRs::FlexTable(numrow = nrow(x) - header_rows - footer_rows, numcol = ncol(x), header.columns = FALSE)
+  for (hr in c(hrows, frows)) {
     contents <- apply(dcells[dcells$display_row == hr, c('display_row', 'display_col')], 1, function (y) {
       clean_contents(x, y[1], y[2], type = 'word')
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
 
-    func <- if (hr %in% header_rows) ReporteRs::addHeaderRow else ReporteRs::addFooterRow
+    func <- if (hr %in% hrows) ReporteRs::addHeaderRow else ReporteRs::addFooterRow
     ft <- func(ft, value = contents, colspan = colspans)
   }
 
   for (j in 1:nrow(dcells)) {
     drow <- dcells$display_row[j]
-    part <- if (drow %in% header_rows) 'header' else
-          if (drow %in% footer_rows) 'footer' else 'body'
-    target_row <- if (part == 'header') drow else if (part == 'footer') drow - min(footer_rows) + 1 else
-          drow - max(header_rows)
-    ft <- add_cell(ft, x, dcells[j,], part, target_row)
+    dcol <- dcells$display_col[j]
+    part <- if (drow %in% hrows) 'header' else if (drow %in% frows) 'footer' else 'body'
+    if (part == 'body') ft[drow - header_rows, dcol, to = part] <- clean_contents(ht, drow, dcol, 'word')
+    ft <- format_cell(ft, x, dcells[j,], part, header_rows, footer_rows)
   }
 
   w <- width(x)
@@ -94,15 +93,19 @@ as_FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
 }
 
 
-add_cell <- function(ft, ht, dc, part, target_row) {
+format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
   drow <- dc$display_row
   dcol <- dc$display_col
 
   stop_here <- function(text) stop(text, ' in cell (', drow, ', ', dcol, ')')
 
+  target_row <- switch(part,
+          header = drow,
+          body   = drow - header_rows,
+          footer = drow - nrow(ht) + footer_rows
+        )
   force(ft)
   add_stuff <- function(value) ft[target_row, dcol, to = part] <<- value
-  if (part == 'body') add_stuff(clean_contents(ht, drow, dcol, 'word'))
 
   text_props <- list(
           font.weight = if (bold(ht)[drow, dcol]) 'bold' else 'normal',
