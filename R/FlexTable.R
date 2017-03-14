@@ -28,26 +28,28 @@
 #'
 #' @section Challenge:
 #'
-#' Try to say \code{as.FlexTable.huxtable} ten times without pausing.
+#' Try to say \code{as_FlexTable.huxtable} ten times without pausing.
 #'
 #' @examples
 #' if (require('ReporteRs')) {
 #'   ht <- huxtable(a = 1:3, b = 1:3)
-#'   ft <- as.FlexTable(ht)
+#'   ft <- as_FlexTable(ht)
 #'   ft
 #'   my_doc <- docx()
 #'   my_doc <- addFlexTable(my_doc, ft)
 #' }
-#' @importFrom ReporteRs as.FlexTable
-#' @method as.FlexTable huxtable
-#' @aliases as.FlexTable
+#' @aliases as_FlexTable.huxtable
 #' @export
 #'
-as.FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
+as_FlexTable <- function(x, ...) UseMethod('as_FlexTable')
+
+
+#' @rdname as_FlexTable
+#' @export
+as_FlexTable.huxtable <- function(x, header_rows = 1, footer_rows = 0, ...) {
   if (! requireNamespace('ReporteRs')) stop('as.FlexTable requires the ReporteRs package. To install, type:\n',
     'install.packages("ReporteRs")')
 
-  if (header_rows < 1) stop('Must have at least one header row')
   header_rows <- seq_len(header_rows)
   footer_rows <- seq_len(footer_rows) + nrow(x) - footer_rows
 

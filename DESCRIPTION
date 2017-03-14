@@ -9,9 +9,9 @@ Description: Creates HTML and LaTeX tables. Provides similar
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat, dplyr, devtools, broom, ggplot2
+Suggests: testthat, dplyr, devtools, broom, ggplot2, ReporteRs
 RoxygenNote: 6.0.1
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
-Imports: knitr, rmarkdown, xtable, htmltools, lazyeval, utils, ReporteRs
+Imports: knitr, rmarkdown, xtable, htmltools, lazyeval, utils
 VignetteBuilder: knitr
