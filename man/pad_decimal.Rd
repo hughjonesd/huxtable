@@ -37,10 +37,8 @@ in a column to align on the rightmost decimal point, set \code{pad_decimal} to '
 you prefer to use.
 }
 \examples{
-
-ht <- huxtable(a = 1:3, b = 1:3)
-pad_decimal(ht) <-  '.'
-pad_decimal(ht)
-ht[,2] <- c(1.0003, 5, "1.03 ***") 
-print_screen(ht)
+vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad.")
+ht <- hux(Column1 = vals, Column2 = vals, add_colnames = TRUE)
+pad_decimal(ht)[2:5, 2] <- '.'
+ht
 }

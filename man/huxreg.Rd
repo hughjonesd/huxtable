@@ -6,9 +6,10 @@
 \usage{
 huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
   error_pos = c("below", "same", "right"), number_format = "\%.3f",
-  ci_level = 0.95, stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05),
-  bold_signif = NULL, note = "\%stars\%.", statistics = c(N = "nobs", R2 =
-  "r.squared", "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
+  pad_decimal = ".", ci_level = 0.95, stars = c(`***` = 0.001, `**` =
+  0.01, `*` = 0.05), bold_signif = NULL, note = "\%stars\%.",
+  statistics = c(N = "nobs", R2 = "r.squared", "logLik", "AIC"),
+  coefs = NULL, omit_coefs = NULL)
 }
 \arguments{
 \item{...}{Models, or a single list of models.}
@@ -34,6 +35,9 @@ significance stars. Set to \code{NULL} for no footnote.}
 \item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
 
 \item{omit_coefs}{Omit these coefficients.}
+
+\item{decimal_pad}{Character for decimal point; columns will be right-padded to align these.
+Set to \code{NA} to turn off padding. See \code{\link{decimal_pad}} for details.}
 }
 \value{
 A huxtable object.
