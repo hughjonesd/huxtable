@@ -53,10 +53,6 @@ valign(ht)[,1] <- ht$a
 font_size(ht)[, 2] <- 16
 doc %<>% show_add(ht, 'Vertical alignment')
 
-ht <- hux('Long title' = 1:2, 'Long title 2' = 1:2, add_colnames = TRUE)
-rotation(ht)[1:2, ] <- 90
-doc %<>% show_add(ht, 'Rotation: trying top 2 rows')
-
 ht <- ht_orig
 ht <- set_all_borders(ht, , , 1)
 doc %<>% show_add(ht, 'Width: nothing specified')
@@ -100,4 +96,9 @@ colspan(ht)[2,1] <- 1
 rowspan(ht)[2,1] <- 2
 doc %<>% show_add(ht, 'Body rowspan')
 
-writeDoc(doc, file = 'flextable-test.docx')
+ht <- hux('Long title' = 1:4, 'Long title 2' = 1:4, add_colnames = TRUE)
+rotation(ht)[1:5, ] <- 90
+ft <- as_FlexTable(ht, header_rows = 2, footer_rows = 1)
+doc %<>% show_add(ft, 'Rotation: trying all rows, first 2 are headers, last is footer')
+
+writeDoc(doc, file = 'scripts/flextable-test.docx')
