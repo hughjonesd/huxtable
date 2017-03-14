@@ -8,7 +8,7 @@
 \usage{
 as_FlexTable(x, ...)
 
-\method{as_FlexTable}{huxtable}(x, header_rows = 1, footer_rows = 0, ...)
+\method{as_FlexTable}{huxtable}(x, header_rows = 0, footer_rows = 0, ...)
 }
 \arguments{
 \item{x}{A huxtable.}
