@@ -65,7 +65,8 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
       contents[y[1], y[2]]
     })
     colspans <- dcells$colspan[dcells$display_row == hr]
-    cell_props <- if (! is.na(td <- get_text_dir(ht, hr))) cellProperties(text.direction = td) else cellProperties()
+    cell_props <- if (! is.na(td <- get_text_dir(ht, hr))) ReporteRs::cellProperties(text.direction = td) else
+          ReporteRs::cellProperties()
     func <- if (hr %in% hrows) ReporteRs::addHeaderRow else ReporteRs::addFooterRow
     ft <- func(ft, value = cell_contents, colspan = colspans, cell.properties = cell_props)
   }
