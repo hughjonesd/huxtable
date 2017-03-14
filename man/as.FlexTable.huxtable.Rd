@@ -4,15 +4,14 @@
 \alias{as.FlexTable.huxtable}
 \title{Convert a Huxtable to a FlexTable for Word/Powerpoint}
 \usage{
-\method{as.FlexTable}{huxtable}(x, header_rows = 1,
-  footer_rows = numeric(0), ...)
+\method{as.FlexTable}{huxtable}(x, header_rows = 1, footer_rows = 0, ...)
 }
 \arguments{
-\item{x}{a huxtable.}
+\item{x}{A huxtable.}
 
-\item{header_rows}{Which rows to use as headers. Must be only the first n rows.}
+\item{header_rows}{How many rows to use as headers.}
 
-\item{footer_rows}{Which rows to use as footers. Must be only the last n rows.}
+\item{footer_rows}{How many rows to use as footers.}
 
 \item{...}{Not currently used.}
 }
@@ -28,7 +27,7 @@ Huxtable objects can be converted to \code{\link[ReporteRs]{FlexTable}} objects 
 Properties are supported, with the following exceptions:
 \itemize{
   \item Cells can span only multiple rows or multiple columns, but not both.
-  \item Rotation of 0, 90 or 270 is supported.
+  \item Rotation of 0, 90 or 270 is supported, only in header rows.
   \item Non-numeric column widths and table widths are not supported. Table width is treated as a fraction of 6
     inches.
   \item Table height, row heights, captions and table position are not supported.
@@ -41,7 +40,7 @@ Try to say \code{as.FlexTable.huxtable} ten times without pausing.
 }
 
 \examples{
-if (requireNameSpace('ReporteRs')) {
+if (requireNamespace('ReporteRs')) {
   ht <- huxtable(a = 1:3, b = 1:3)
   ft <- as.FlexTable(ht)
   my_doc <- docx()
