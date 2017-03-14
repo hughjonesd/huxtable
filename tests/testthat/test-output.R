@@ -45,9 +45,9 @@ test_that('Row heights do not screw up latex multicol', {
   if (exists('output')) file.remove(output)
 })
 
-test_that('Vignettes build without pandoc',
+test_that('Vignettes build without pandoc',{
   skip('Too hard to make file paths work in automated testing')
   with_mock(`rmarkdown::pandoc_available` = function (...) FALSE, {
     expect_error(rmarkdown::render('design-principles.Rmd'), regexp = NA) # expect no error
   })
-)
+})
