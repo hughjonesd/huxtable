@@ -564,7 +564,7 @@ make_getter_setters('number_format', 'cell')
 #' ht
 #' @export pad_decimal pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
 NULL
-make_getter_setters('pad_decimal', 'col', extra_code = {
+make_getter_setters('pad_decimal', 'cell', extra_code = {
   stopifnot(all(nchar(na.omit(value)) == 1))
 })
 
