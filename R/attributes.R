@@ -684,6 +684,18 @@ format_number <- function (num, nf) {
   res
 }
 
+decimal_pad <- function(col) {
+  regexpr('.*\\.', col) -> rex
+  pos <- attr(rex, 'match.length')
+  nchars <- nchar(col, type = 'width')
+  # take the biggest distance from the decimal point
+  pos[pos == -1L] <- nchars[pos == -1L] + 1
+  chars_after_. <- nchars - pos
+
+  pad_to <- max(chars_after_.) - chars_after_.
+  paste0(col, str_rep(' ', pad_to))
+}
+
 # return data frame mapping real cell positions to cells displayed
 display_cells <- function(ht, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
