@@ -24,11 +24,6 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * bordercolor would be useful for HTML or dark themes...
 * more advanced positioning (floats?)
-* word output?
-  - probably using http://davidgohel.github.io/ReporteRs/articles/FlexTable.html
-  - ah... but you can't use within Rmarkdown, he says
-  - See https://github.com/davidgohel/ReporteRs/issues/68
-  - could still provide an asFlexTable method, though
 * Better, longer documentation
   - Section on rowspecs
   - Use dplyr more, it's precompiled
