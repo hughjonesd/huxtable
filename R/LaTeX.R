@@ -106,9 +106,6 @@ report_latex_dependencies <- function(quiet = FALSE) {
 }
 
 build_tabular <- function(ht) {
-  col_width <- col_width(ht)
-  if (all(is.na(col_width))) col_width <- rep(1/ncol(ht), ncol(ht))
-  col_width[is_a_number(col_width)] <- as.numeric(col_width[is_a_number(col_width)]) * ncol(ht)
   colspec <- character(ncol(ht))
   for (mycol in 1:ncol(ht)) {
     # col type will be redefined when valign is different:
@@ -212,7 +209,7 @@ build_tabular <- function(ht) {
   tenv <- tabular_environment(ht)
   width_spec <- if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
     tw <- width(ht)
-    if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
+    if (is_a_number(tw)) tw <- paste0(tw, default_table_width_unit)
     paste0('{', tw,'}')
   } else {
     ''
@@ -224,28 +221,29 @@ build_tabular <- function(ht) {
 
 compute_width <- function(ht, start_col, end_col) {
   table_width <- width(ht) # always defined, default is 0.5 (of \\textwidth)
-  if (! is.numeric(table_width)) {
+  if (is_a_number(table_width)) {
+    table_unit  <- default_table_width_unit
+    table_width <- as.numeric(table_width)
+  } else {
     table_unit  <- gsub('\\d', '', table_width)
     table_width <- as.numeric(gsub('\\D', '', table_width))
-  } else {
-    table_unit <- default_table_width_unit
   }
 
   cw <- col_width(ht)[start_col:end_col]
-  if (! all(is_a_number(cw))) {
+  cw[is.na(cw)] <- 1/ncol(ht)
+  if (! all(nums <- is_a_number(cw))) {
     # use calc for multiple character widths
     # won't work if you mix in numerics
-    cw[is.na(cw)] <- paste0(1/ncol(ht), table_unit)
+    cw[nums] <- paste0(as.numeric(cw[nums]) * table_width, table_unit)
     cw <- paste(cw, collapse = '+')
   } else {
-    cw[is.na(cw)] <- 1/ncol(ht)
     cw <- sum(as.numeric(cw))
     cw <- cw * table_width
     cw <- paste0(cw, table_unit)
   }
 
   if (end_col > start_col) {
-    # need to add some extra tabcolseps, one per column
+    # need to add some extra tabcolseps, two per column
     cw <- paste0(cw, '+', (end_col - start_col) * 2, '\\tabcolsep')
   }
 
