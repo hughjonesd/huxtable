@@ -91,3 +91,65 @@ display_cells <- function(ht, new_rowspan = rowspan(ht), new_colspan = colspan(h
 
   dcells
 }
+
+
+#' Guess Knitr Output Format
+#'
+#' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
+#'
+#' @return 'html', 'latex' or something else
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # in a knitr document
+#' guess_knitr_output_format()
+#' }
+guess_knitr_output_format <- function() {
+  of <- knitr::opts_knit$get('out.format')
+  if (of == 'markdown') {
+    of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
+    if (is.null(of)) {
+      of <- rmarkdown::default_output_format(knitr::current_input())
+      of <- of$name
+      of <- sub('_.*', '', of)
+      if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
+    }
+  }
+  if (of == 'pdf') of <- 'latex'
+  of
+}
+
+
+#' Huxtable Logo
+#'
+#' @param latex Use LaTeX names for fonts.
+#' @return The huxtable logo
+#' @export
+#'
+#' @examples
+#' print_screen(hux_logo())
+#'
+hux_logo <- function(latex = FALSE) {
+  logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
+  rowspan(logo)[1, 1] <- 2
+  colspan(logo)[2, 2] <- 2
+  logo <- set_all_borders(logo, , ,1)
+  font_size(logo) <- if (latex) 12 else 20
+  font_size(logo)[1, 2:3] <- if (latex) 16 else 24
+  font_size(logo)[1, 1] <-  if (latex) 28 else 42
+  background_color(logo)[1, 1] <- '#e83abc'
+  background_color(logo)[1, 3] <- 'black'
+  text_color(logo)[1, 3] <- 'white'
+  width(logo) <- if (latex) 0.2 else '60pt'
+  height(logo) <- if (latex) '40pt' else '60pt'
+  font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
+  if (latex) font(logo) <- 'ppl'
+  #set_all_padding(logo, , , 6)
+  top_padding(logo) <- 2
+  bottom_padding(logo) <- 2
+  col_width(logo) <- c(.4, .3, .3)
+  #left_padding(logo)[1, 1] <- 10
+  position(logo) <- 'center'
+  logo
+}
