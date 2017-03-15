@@ -23,6 +23,7 @@ ht <- set_all_borders(ht, , , 1)
 background_color(ht)[1,] <- c('orange', 'yellow')
 background_color(ht)[2,] <- c('pink', 'green')
 # widths unset
+caption(ht) <- 'no width set'
 ht
 
 # widths only set
@@ -114,4 +115,38 @@ ht
 ht <- set_align(ht,,,byrow = TRUE, c('left', 'center', 'right'))
 caption(ht) <- 'same as above with left/center/right align'
 ht
+```
+
+```{r}
+ht <- hux(a = 1:2, b = 1:2 , c = 1:2, d = 1:2, e = 1:2)
+ht <- set_all_borders(ht, , , 1)
+
+wrap(ht)[1:2,] <- TRUE
+tabular_environment(ht) <- 'tabularx'
+caption(ht) <- 'Default position and width'
+ht
+
+position(ht) <- 'left'
+caption(ht) <- 'left position'
+ht
+
+position(ht) <- 'right'
+caption(ht) <- 'right position'
+ht
+
+width(ht) <- .25
+position(ht) <- 'left'
+caption(ht) <- 'width 1, left position'
+ht
+
+position(ht) <- 'center'
+caption(ht) <- 'width 1, center position'
+ht
+
+position(ht) <- 'right'
+caption(ht) <- 'width 1, right position'
+ht
+
+
+
 ```
