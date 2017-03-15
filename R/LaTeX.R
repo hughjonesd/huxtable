@@ -188,17 +188,12 @@ build_tabular <- function(ht) {
 
       if (mycol == dcol) { # first column of cell
         cs <- dcell$colspan
-        if (wrap(ht)[drow, dcol]) {
-          pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
-          width_spec <- compute_width(ht, mycol, dcell$end_col)
-          colspec <- paste0(pmb, '{', width_spec, '}')
-        } else {
-          colspec <- switch(align(ht)[drow, dcol], left   = 'l', center  = 'c', right = 'r')
-        }
+        pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
+        width_spec <- compute_width(ht, mycol, dcell$end_col)
+        colspec <- paste0(pmb, '{', width_spec, '}')
         # only add left borders if we haven't already added a right border!
         lb <- if (left_border(ht)[drow, dcol] > 0 && ! added_right_border) '|' else ''
         rb <- if ((added_right_border <- right_border(ht)[drow, dcol]) > 0) '|' else ''
-
         contents <- paste0('\\multicolumn{', cs,'}{', lb, colspec, rb ,'}{', contents,'}')
       } # if (first column of cell)
 
