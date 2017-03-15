@@ -15,9 +15,6 @@ TODO
 * outer spacing for tables
   - CSS: table style: margin
   - LaTeX: \intextsep or just \vspace
-* make huxtables work with filter, mutate and other dplyr methods? 
-  - NB they work ok with subset, and with dplyr::select
-  - idea:
 * simple `add_footnote_row` method?
 * Use strwrap in to_screen
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
