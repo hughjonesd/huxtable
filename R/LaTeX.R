@@ -33,13 +33,20 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- build_tabular(ht)
   if (tabular_only) return(res)
 
-
   if (! is.na(height <- height(ht))) {
     if (is.numeric(height)) height <- paste0(height, '\\textheight')
     res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
   }
 
-  cap <- if (! is.na(cap <- caption(ht))) paste0('\\caption{', cap, '}\n') else ''
+  cap <- if (! is.na(cap <- caption(ht))) {
+    cap_setup <- switch(position(ht),
+            left   = 'raggedright',
+            center = 'centering',
+            right  = 'raggedleft'
+          )
+    cap_setup <- paste0('\\captionsetup{justification=', cap_setup,',singlelinecheck=off}\n')
+    paste0(cap_setup, '\\caption{', cap, '}\n')
+  } else ''
   lab <- if (! is.na(lab <- label(ht))) paste0('\\label{', lab, '}\n') else ''
   if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
   res <- if (caption_pos(ht) == 'top') paste0(cap, lab, res) else paste0(res, cap, lab)
@@ -47,7 +54,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   # table position
   pos_text <- switch(position(ht),
     left   = c('\\begin{raggedright}', '\\par\\end{raggedright}'),
-    center = c('\\begin{centering}',   '\\par\\end{centering}'),
+    center = c('\\centering',   ''),
     right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}')
   )
   res <- paste0(pos_text[1], res, pos_text[2], '\n')
@@ -60,6 +67,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
 huxtable_latex_dependencies <- list(
   rmarkdown::latex_dependency('array'),
+  rmarkdown::latex_dependency('caption'),
   rmarkdown::latex_dependency('graphicx'),
   rmarkdown::latex_dependency('siunitx'),
   rmarkdown::latex_dependency('xcolor', options = 'table'),
