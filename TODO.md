@@ -7,7 +7,6 @@ BUGS
   - you may be able to set it per row for horiz ones using arrayrulewidth...
   - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
   - presumably could also do it before/after the actual row
-* left/right cell padding doesn't work with multiline tables
 
 TODO
 ====
