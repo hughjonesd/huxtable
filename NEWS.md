@@ -6,6 +6,7 @@
 * `evens()`, `odds()`, `every()`, `final()`, `where()`: convenience functions to select rows, columns and cells.
 * Exported function `guess_knitr_output_format`.
 * Export to Word/Powerpoint via `ReporteRs`.
+* Huxtable now supports dplyr verbs like `filter` and `select`.
 * Prevent overlapping row/colspans.
 
 # huxtable 0.1.0

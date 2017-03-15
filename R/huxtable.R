@@ -345,8 +345,119 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
   res
 }
 
+
+#' @importFrom dplyr filter_
 #' @export
-`dimnames<-.huxtable` <- function(x, value) {
+filter_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- as.data.frame(.data)
+  .data <- tibble::rownames_to_column(.data, 'filter.huxtable.rownames')
+  result <- NextMethod()
+  ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames,]
+}
+
+#' Dplyr Verbs for Huxtable
+#'
+#' Huxtable can be used with dplyr verbs \code{\link[dplyr]{select}}, \code{\link[dplyr]{rename}},
+#' \code{\link[dplyr]{slice}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{mutate}} and
+#' \code{\link[dplyr]{transmute}}. These will return huxtables. Other verbs like \code{\link[dplyr]{summarize}}
+#' will simply return data frames as normal.
+#'
+#' @param .data A huxtable.
+#' @param ...,.dots Arguments passed to \code{\link[dplyr]{mutate}}.
+#'
+#' @details
+#' If \code{mutate} creates new columns, and the argument \code{copy_cell_props} is missing or \code{TRUE}, then cell
+#' and column properties will be copied from existing columns to their left, if there are any. Otherwise, they will be the
+#' standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
+#'
+#' @rdname dplyr-verbs
+#' @aliases mutate
+#' @examples
+#' ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5)
+#' bold(ht)[c(1, 3), ] <- TRUE
+#' bold(ht)[, 1] <- TRUE
+#' ht2 <- dplyr::select(ht, b:c)
+#' ht2
+#' bold(ht2)
+#' ht3 <- dplyr::mutate(ht, x = a + b)
+#' ht3
+#' bold(ht3)
+#' ht4 <- dplyr::mutate(ht, x = a + b, copy_cell_props = FALSE)
+#' bold(ht4)
+#' @importFrom dplyr mutate_
+#' @export
+mutate_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- as.data.frame(.data)
+  copy_cell_props <- TRUE
+  if (! is.null(.dots$copy_cell_props)) copy_cell_props <- lazyeval::lazy_eval(.dots$copy_cell_props)
+  .dots <- .dots[setdiff(names(.dots), 'copy_cell_props')]
+  result <- NextMethod()
+  result <- as_hux(result)
+
+  for (att in c(huxtable_row_attrs, huxtable_table_attrs)) {
+    attr(result, att) <- attr(ht, att)
+  }
+
+  match_cols <- match(colnames(result), colnames(ht))
+  if (copy_cell_props) match_cols <- Reduce(function (x,y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
+  result_cols <- ! is.na(match_cols)
+  match_cols  <- na.omit(match_cols)
+
+  for (att in huxtable_cell_attrs) attr(result, att)[, result_cols] <- attr(ht, att)[, match_cols]
+  for (att in huxtable_col_attrs)  attr(result, att)[result_cols]  <- attr(ht, att)[match_cols]
+
+  result <- set_attr_dimnames(result)
+
+  result
+}
+
+
+#' @importFrom dplyr transmute_
+#' @export
+transmute_.huxtable <- mutate_.huxtable
+
+#' @importFrom dplyr arrange_
+#' @export
+arrange_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- tibble::rownames_to_column(.data, 'arrange.huxtable.rownames')
+  result <- NextMethod()
+  ht[match(.data$arrange.huxtable.rownames, result$arrange.huxtable.rownames),]
+}
+
+
+#' @importFrom dplyr slice_
+#' @export
+slice_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- tibble::rownames_to_column(.data, 'slice.huxtable.rownames')
+  result <- NextMethod()
+  ht[na.omit(match(.data$slice.huxtable.rownames, result$slice.huxtable.rownames)),]
+}
+
+
+#' @importFrom dplyr select_
+#' @export
+select_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
+  colnames(.data) <- colnames(ht)
+  result <- NextMethod()
+  ht <- ht[,na.omit(match(result[1,], colnames(ht)))]
+  colnames(ht) <- colnames(result)
+
+  ht
+}
+
+
+#' @importFrom dplyr rename_
+#' @export
+rename_.huxtable <- select_.huxtable
+
+#' @export
+`dimnames<-.huxtable` <- function (x, value) {
   x <- NextMethod()
   x <- set_attr_dimnames(x)
   x
@@ -390,6 +501,7 @@ t.huxtable <- function (x) {
   for (att in huxtable_table_attrs) {
     attr(res, att) <- attr(x, att)
   }
+
   res
 }
 
