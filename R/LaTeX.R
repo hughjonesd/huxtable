@@ -99,8 +99,8 @@ report_latex_dependencies <- function(quiet = FALSE) {
 
 build_tabular <- function(ht) {
   col_width <- col_width(ht)
-  col_width <- if (all(is.na(col_width))) rep(1, ncol(ht)) else if (is.numeric(col_width)) col_width * ncol(ht) else
-        col_width
+  if (all(is.na(col_width))) col_width <- rep(1/ncol(ht), ncol(ht))
+  col_width[is_a_number(col_width)] <- as.numeric(col_width[is_a_number(col_width)]) * ncol(ht)
   colspec <- character(ncol(ht))
   for (mycol in 1:ncol(ht)) {
     # col type will be redefined when valign is different:
@@ -137,12 +137,23 @@ build_tabular <- function(ht) {
 
         padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
               bottom_padding(ht)[drow, dcol])
-        padding <- lapply(padding, function(x) if (is_a_number(x) & ! is.na(x)) paste0(x, 'pt') else x)
-        hpadding <- lapply(padding[1:2], function(x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
-        contents <- paste0(hpadding[1], contents, hpadding[2])
+        padding <- lapply(padding, function(x) if (is_a_number(x)) paste0(x, 'pt') else x)
         tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
         bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
         contents <- paste0(tpadding, contents, bpadding)
+        if (wrap(ht)[drow, dcol]) {
+          width_spec <- compute_width(ht, mycol, dcell$end_col)
+          hpad_loss  <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('-',x) else '')
+          align_str <- switch(align(ht)[drow, dcol],
+                  left   = '\\raggedright',
+                  right  = '\\raggedleft',
+                  center = '\\centering'
+                )
+          contents   <- paste0('\\parbox[c]{', width_spec , hpad_loss[1], hpad_loss[2], '}{', align_str, contents, '}')
+        }
+        hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
+        contents <- paste0(hpadding[1], contents, hpadding[2])
+
         # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
         # not sure how this should interact with cell padding...
         if (! is.na(row_height <- row_height(ht)[drow])) {
@@ -167,24 +178,21 @@ build_tabular <- function(ht) {
         contents <- paste0('\\multirow{-', rs,'}{*}{', contents,'}')
       }
 
-      if (mycol == dcol) {
+      if (mycol == dcol) { # first column of cell
         cs <- dcell$colspan
         if (wrap(ht)[drow, dcol]) {
           pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
           width_spec <- compute_width(ht, mycol, dcell$end_col)
           colspec <- paste0(pmb, '{', width_spec, '}')
-          align_str <- switch(align(ht)[drow, dcol], left   = '\\raggedright', right  = '\\raggedleft',
-                 center = '\\centering')
         } else {
           colspec <- switch(align(ht)[drow, dcol], left   = 'l', center  = 'c', right = 'r')
-          align_str <- ''
         }
         # only add left borders if we haven't already added a right border!
         lb <- if (left_border(ht)[drow, dcol] > 0 && ! added_right_border) '|' else ''
         rb <- if ((added_right_border <- right_border(ht)[drow, dcol]) > 0) '|' else ''
 
-        contents <- paste0('\\multicolumn{', cs,'}{', lb, colspec, rb ,'}{', align_str, contents,'}')
-      } # if (left cells of multicol or non-shadowed cell)
+        contents <- paste0('\\multicolumn{', cs,'}{', lb, colspec, rb ,'}{', contents,'}')
+      } # if (first column of cell)
 
       row_contents[mycol] <- contents
 
@@ -221,14 +229,14 @@ compute_width <- function(ht, start_col, end_col) {
   }
 
   cw <- col_width(ht)[start_col:end_col]
-  if (is.character(cw)) {
+  if (! all(is_a_number(cw))) {
     # use calc for multiple character widths
     # won't work if you mix in numerics
     cw[is.na(cw)] <- paste0(1/ncol(ht), table_unit)
     cw <- paste(cw, collapse = '+')
   } else {
     cw[is.na(cw)] <- 1/ncol(ht)
-    cw <- sum(cw)
+    cw <- sum(as.numeric(cw))
     cw <- cw * table_width
     cw <- paste0(cw, table_unit)
   }
