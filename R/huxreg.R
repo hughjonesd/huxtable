@@ -120,8 +120,12 @@ huxreg <- function (
   }
 
   all_sumstats <- lapply(models, function(m) {
-    bg <- broom::glance(m)
-    x <- as.data.frame(rbind(nobs = nobs(m), t(bg)))
+    bg <- try(broom::glance(m), silent = TRUE)
+    bg <- if (class(bg) == 'try-error') {
+      warning('No `glance` method for model of class ', class(m)[1])
+      NULL
+    } else t(bg)
+    x <- as.data.frame(rbind(nobs = nobs(m), bg))
     x$stat  <- rownames(x)
     x$class <- c(class(nobs(m)), sapply(bg, class))
     x
