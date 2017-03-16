@@ -351,12 +351,13 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value, color = NULL, byrow = FALSE) {
-  byrow. <- byrow
-  ht <- set_top_border(ht, row, col, value, byrow = byrow.)
-  ht <- set_bottom_border(ht, row, col, value, byrow = byrow.)
-  ht <- set_left_border(ht, row, col, value, byrow = byrow.)
-  ht <- set_right_border(ht, row, col, value, byrow = byrow.)
+set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
+  mycall <- sys.call()
+  for (side in c('top', 'bottom', 'left', 'right')) {
+    fn <- as.symbol(paste0('set_', side, '_border'))
+    mycall[[1]] <- fn
+    ht <- eval(mycall)
+  }
 
   ht
 }
@@ -432,11 +433,12 @@ make_getter_setters('bottom_border_color', 'cell')
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
-  byrow. <- byrow
-  ht <- set_top_border_color(ht, row, col, value, byrow = byrow.)
-  ht <- set_bottom_border_color(ht, row, col, value, byrow = byrow.)
-  ht <- set_left_border_color(ht, row, col, value, byrow = byrow.)
-  ht <- set_right_border_color(ht, row, col, value, byrow = byrow.)
+  mycall <- sys.call()
+  for (side in c('top', 'bottom', 'left', 'right')) {
+    fn <- as.symbol(paste0('set_', side, '_border_color'))
+    mycall[[1]] <- fn
+    ht <- eval(mycall)
+  }
 
   ht
 }
@@ -510,10 +512,13 @@ NULL
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
-  ht <- set_left_padding(ht, row, col, value, byrow)
-  ht <- set_top_padding(ht, row, col, value, byrow)
-  ht <- set_bottom_padding(ht, row, col, value, byrow)
-  ht <- set_right_padding(ht, row, col, value, byrow)
+  mycall <- sys.call()
+  for (side in c('top', 'bottom', 'left', 'right')) {
+    fn <- as.symbol(paste0('set_', side, '_padding'))
+    mycall[[1]] <- fn
+    ht <- eval(mycall)
+  }
+
   ht
 }
 
