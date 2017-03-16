@@ -28,7 +28,7 @@ You can run this document yourself in RStudio. Click the button in the top right
 
 You'll also need to install huxtable, if you haven't already:
 
-```{r eval = FALSE, echo = TRUE}
+```{r, eval = FALSE, echo = TRUE}
 install.packages('huxtable')
 ```
 
