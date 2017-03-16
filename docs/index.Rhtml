@@ -12,9 +12,24 @@ p {
 }
 
 body {
-  background-color: #e1e1dd;
+  background-color: #E0DDD0;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+
+body:after {
+    content: ' ';
+    display: block;
+    background-attachment: fixed;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 200%;
+    z-index: -1;
+    background-image: url("mayhew.png");
+    opacity: 0.3;
+}
+
 main {
   background-color: white;
   border: 1px solid black;
@@ -34,10 +49,6 @@ main {
 <body>
 
 <main>
-
-<!--
-<img src="logo.png" style="width: 200px; margin-left: auto;">
--->
 
 <!--begin.rcode logo, echo = FALSE, results = 'asis'
 
