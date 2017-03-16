@@ -3,12 +3,15 @@
 \name{print_html}
 \alias{print_html}
 \alias{to_html}
+\alias{print_notebook}
 \alias{to_html.huxtable}
 \title{Create HTML Representing a Huxtable}
 \usage{
 print_html(ht, ...)
 
 to_html(ht, ...)
+
+print_notebook(ht, ...)
 
 \method{to_html}{huxtable}(ht, ...)
 }
@@ -19,9 +22,12 @@ to_html(ht, ...)
 }
 \value{
 \code{to_html} returns an HTML string. \code{print_html} prints the string and returns \code{NULL}.
+
+\code{print_notebook} prints HTML output suitable for use in an
+RStudio interactive notebook.
 }
 \description{
-Create HTML Representing a Huxtable
+These functions print or return an HTML table.
 }
 \examples{
 ht <- hux(a = 1:3, b = letters[1:3])

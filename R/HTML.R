@@ -3,10 +3,13 @@
 #' @export
 #'
 #' @rdname to_html
+#'
 print_html <- function(ht, ...) cat(to_html(ht, ...))
 
 
 #' Create HTML Representing a Huxtable
+#'
+#' These functions print or return an HTML table.
 #'
 #' @param ht A huxtable.
 #' @param ... Arguments to pass to methods. Not currently used.
@@ -20,6 +23,17 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #' ht <- hux(a = 1:3, b = letters[1:3])
 #' to_html(ht)
 to_html <- function (ht, ...) UseMethod('to_html')
+
+
+#' @export
+#'
+#' @rdname to_html
+#'
+#' @return \code{print_notebook} prints HTML output suitable for use in an
+#' RStudio interactive notebook.
+print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(to_html(ht)))
+
+
 
 #' @export
 #' @rdname to_html
