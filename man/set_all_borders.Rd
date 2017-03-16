@@ -4,7 +4,7 @@
 \alias{set_all_borders}
 \title{Set All Borders}
 \usage{
-set_all_borders(ht, row, col, value)
+set_all_borders(ht, row, col, value, color = NULL, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -14,18 +14,19 @@ set_all_borders(ht, row, col, value)
 \item{col}{An optional column specifier.}
 
 \item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
+
+\item{color}{A color specification. Set to \code{NA} to reset to the default.}
+
+\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-The modified `ht` object.
+The modified huxtable.
 }
 \description{
-Set All Borders
-}
-\details{
 This is a convenience function which sets left, right, top and bottom borders
-for the specified cells.
+and border colors for the specified cells.
 }
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
-ht <- set_all_borders(ht, 1:3, 1:2, 1)
+ht <- set_all_borders(ht, 1:3, 1:2, 1, color = 'red')
 }

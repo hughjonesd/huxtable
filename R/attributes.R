@@ -2,6 +2,7 @@
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
+  'top_border_color', 'left_border_color', 'right_border_color', 'bottom_border_color',
   'top_padding', 'left_padding', 'right_padding', 'bottom_padding', 'wrap',
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
   'font', 'pad_decimal')
@@ -23,6 +24,10 @@ huxtable_default_attrs <- list(
         right_border        = 0,
         top_border          = 0,
         bottom_border       = 0,
+        left_border_color   = NA,
+        right_border_color  = NA,
+        top_border_color    = NA,
+        bottom_border_color = NA,
         left_padding        = 4,
         right_padding       = 4,
         top_padding         = 4,
@@ -331,23 +336,98 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 
 #' Set All Borders
 #'
+#' This is a convenience function which sets left, right, top and bottom borders
+#' and border colors for the specified cells.
+#'
 #' @inheritParams left_border
+#' @param color A color specification. Set to \code{NA} to reset to the default.
 #'
-#' @details This is a convenience function which sets left, right, top and bottom borders
-#' for the specified cells.
-#'
-#' @return The modified `ht` object.
+#' @return The modified huxtable.
 #' @export
 #'
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value) {
-  top_border(ht)[row, col] <- value
-  bottom_border(ht)[row, col] <- value
-  left_border(ht)[row, col] <- value
-  right_border(ht)[row, col] <- value
+#' ht <- set_all_borders(ht, 1:3, 1:2, 1, color = 'red')
+set_all_borders <- function(ht, row, col, value, color = NULL, byrow = FALSE) {
+  byrow. <- byrow
+  ht <- set_top_border(ht, row, col, value, byrow = byrow.)
+  ht <- set_bottom_border(ht, row, col, value, byrow = byrow.)
+  ht <- set_left_border(ht, row, col, value, byrow = byrow.)
+  ht <- set_right_border(ht, row, col, value, byrow = byrow.)
+  if (! is.null(color)) {
+    ht <- set_top_border_color(ht, row, col, color, byrow = byrow.)
+    ht <- set_bottom_border_color(ht, row, col, color, byrow = byrow.)
+    ht <- set_left_border_color(ht, row, col, color, byrow = byrow.)
+    ht <- set_right_border_color(ht, row, col, color, byrow = byrow.)
+  }
+
   ht
+}
+
+
+get_all_borders <- function(ht, row, col) {
+  list(
+    left   = left_border(ht)[row, col],
+    right  = right_border(ht)[row, col],
+    top    = top_border(ht)[row, col],
+    bottom = bottom_border(ht)[row, col]
+  )
+}
+
+
+#' @template getset-cell
+#' @templateVar attr_name left_border_color
+#' @templateVar attr_desc Border Colors
+#' @templateVar value_param_desc A vector or matrix of colors. Set to \code{NA} for the default.
+#' @templateVar morealiases right_border_color top_border_color bottom_border_color
+#' @template getset-example
+#' @templateVar attr_val 'red'
+#' @export left_border_color left_border_color<- set_left_border_color left_border_color.huxtable left_border_color<-.huxtable
+#' @seealso set_all_borders
+NULL
+make_getter_setters('left_border_color', 'cell')
+
+
+#' @name right_border_color
+#' @rdname left_border_color
+#' @return Similarly for the other functions.
+#' @usage
+#' right_border_color(ht)
+#' right_border_color(ht) <- value
+#' set_right_border_color(ht, row, col, value, byrow = FALSE)
+#' @export right_border_color right_border_color<- set_right_border_color right_border_color.huxtable right_border_color<-.huxtable
+NULL
+make_getter_setters('right_border_color', 'cell')
+
+
+#' @name top_border_color
+#' @rdname left_border_color
+#' @usage
+#' top_border_color(ht)
+#' top_border_color(ht) <- value
+#' set_top_border_color(ht, row, col, value, byrow = FALSE)
+#' @export top_border_color top_border_color<- set_top_border_color top_border_color.huxtable top_border_color<-.huxtable
+NULL
+make_getter_setters('top_border_color', 'cell')
+
+#' @name bottom_border_color
+#' @rdname left_border_color
+#' @usage
+#' bottom_border_color(ht)
+#' bottom_border_color(ht) <- value
+#' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
+#' @export bottom_border_color bottom_border_color<- set_bottom_border_color bottom_border_color.huxtable bottom_border_color<-.huxtable
+NULL
+make_getter_setters('bottom_border_color', 'cell')
+
+
+get_all_border_colors <- function(ht, row, col) {
+  list(
+    left   = left_border_color(ht)[row, col],
+    right  = right_border_color(ht)[row, col],
+    top    = top_border_color(ht)[row, col],
+    bottom = bottom_border_color(ht)[row, col]
+  )
 }
 
 

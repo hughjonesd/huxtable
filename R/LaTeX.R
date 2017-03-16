@@ -189,8 +189,9 @@ build_tabular <- function(ht) {
         width_spec <- compute_width(ht, mycol, dcell$end_col)
         colspec <- paste0(pmb, '{', width_spec, '}')
         # only add left borders if we haven't already added a right border!
-        lb <- if (left_border(ht)[drow, dcol] > 0 && ! added_right_border) '|' else ''
-        rb <- if ((added_right_border <- right_border(ht)[drow, dcol]) > 0) '|' else ''
+        lb <- if (! added_right_border) v_border(ht, drow, dcol, 'left') else ''
+        rb <- v_border(ht, drow, dcol, 'right')
+        added_right_border <- rb != ''
         contents <- paste0('\\multicolumn{', cs,'}{', lb, colspec, rb ,'}{', contents,'}')
       } # if (first column of cell)
 
@@ -219,7 +220,8 @@ build_tabular <- function(ht) {
   return(res)
 }
 
-compute_width <- function(ht, start_col, end_col) {
+
+compute_width <- function (ht, start_col, end_col) {
   table_width <- width(ht) # always defined, default is 0.5 (of \\textwidth)
   if (is_a_number(table_width)) {
     table_unit  <- default_table_width_unit
@@ -283,7 +285,7 @@ build_clines_for_row <- function(ht, row) {
   # bottom borders of a shadowed cell are fine, but come from the display cell.
   display_cells <- display_cells(ht, all = TRUE)
   dcells_this_row <- unique(display_cells[display_cells$row == row,])
-  this_bottom <- rep(0, ncol(ht))
+  this_bottom <- rep('', ncol(ht))
 
   blank_line_color <- rep(latex_color('white'), ncol(ht)) # white by default, I guess...
   for (i in seq_len(nrow(dcells_this_row))) {
@@ -293,8 +295,7 @@ build_clines_for_row <- function(ht, row) {
     end_col  <- dcells_this_row[i, 'end_col']
     # Print bottom border if we are at bottom of the display cell
     if (row == end_row) {
-      bb <- bottom_border(ht)[drow, dcol]
-      this_bottom[dcol:end_col] <- bb
+      this_bottom[dcol:end_col] <- h_border(ht, drow, dcol, 'bottom')
     }
     # Use color if we are in middle of display cell
     if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
@@ -304,38 +305,29 @@ build_clines_for_row <- function(ht, row) {
   blanks <- paste0('>{\\arrayrulecolor[RGB]{', blank_line_color ,'}}-')
 
   dcells_next_row <- unique(display_cells[display_cells$row == row + 1, ])
-  next_top <- rep(0, ncol(ht))
+  next_top <- rep('', ncol(ht))
   for (i in seq_len(nrow(dcells_next_row))) {
     drow <- dcells_next_row[i, 'display_row']
     dcol <- dcells_next_row[i, 'display_col']
     end_col <- dcells_next_row[i, 'end_col']
     # are we at the top of this dcell? If not...
     if (row + 1 != drow) next
-    tb <- top_border(ht)[drow, dcol]
-    next_top[dcol:end_col] <- tb
+    next_top[dcol:end_col] <- h_border(ht, drow, dcol, 'top')
   }
-  borders <- pmax(this_bottom, next_top) # the 'collapse' model
+  borders <- this_bottom
+  borders[borders == ''] <- next_top
 
-  cells <- which(borders > 0)
-  if (any(borders > 0)) {
-    border_lines <- rep('>{\\arrayrulecolor{black}}-', ncol(ht))
-    hhlinechars <- ifelse(borders > 0, border_lines , blanks)
+  if (any(borders != '')) {
+    hhlinechars <- ifelse(borders != '', borders, blanks)
     # add in |.
     # For each hhlinechar (1 real column), look at above (and/or below?) left/right borders
-    # | placed at left of corresponding - for left border;
-    # at right of - for right border
-    vertlines <- rep('', ncol(ht) + 1)
-    borders <- compute_vertical_borders(ht, row)
-    vertlines[borders > 0] <- '>{\\arrayrulecolor{black}}|'
-
+    # | placed at left/right of corresponding - for left/right border;
+    vertlines <- compute_vertical_borders(ht, row)
     hhlinechars <- paste0(hhlinechars, vertlines[-1], collapse = '')
     hhlinechars <- paste0(vertlines[1], hhlinechars)
     hhline <- paste0('\\hhline{', hhlinechars ,'}\n')
     hhline <- paste0(hhline, '\\arrayrulecolor{black}\n') # don't let arrayrulecolor spill over
     return(hhline)
-    # clines don't play nicely with cell color
-    # borders <- paste0(borders, 'pt')
-    # return(paste0('\\Cline{', borders[cells],'}{', cells, '-', cells, '}\n', collapse=' '))
   } else {
     return('')
   }
@@ -345,18 +337,42 @@ compute_vertical_borders <- function (ht, row) {
   display_cells <- display_cells(ht, all = TRUE)
   dcells_this_row <- unique(display_cells[display_cells$row == row, c('display_row', 'display_col')])
 
-  lbs <- rep(0, ncol(ht) + 1)
-  rbs <- rep(0, ncol(ht) + 1)
+  lbs <- rep('', ncol(ht) + 1)
+  rbs <- rep('', ncol(ht) + 1)
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
     right_col <- dcells_this_row[i, 'end_col'] - 1 # first rbs is always 0
-    lbs[dcol] <- left_border(ht)[drow, dcol]
-    rbs[right_col] <- right_border(ht)[drow, dcol]
+    lbs[dcol] <- v_border(ht, drow, dcol, 'left')
+    rbs[right_col] <- v_border(ht, drow, dcol, 'right')
   }
+lbs[nzchar(lbs)] <- '|'
+rbs[nzchar(rbs)] <- '|'
 
-  pmax(lbs, rbs)
+  borders <- rbs # these take priority
+  borders[borders == ''] <- lbs
+  borders
 }
+
+
+v_border <- function (ht, drow, dcol, side) {
+  width <- get_all_borders(ht, drow, dcol)[side]
+  color <- get_all_border_colors(ht, drow, dcol)[side]
+  if (! width > 0 ) return('')
+  if (is.na(color)) return('|')
+  color <- latex_color(color)
+  paste0('!{\\color[RGB]{', color, '}\\vrule}')
+}
+
+h_border <- function (ht, drow, dcol, side) {
+  width <- get_all_borders(ht, drow, dcol)[side]
+  color <- get_all_border_colors(ht, drow, dcol)[side]
+  if (! width > 0 ) return('')
+  if (is.na(color)) color <- 'black' # the default
+  color <- latex_color(color)
+  paste0('>{\\arrayrulecolor[RGB]{', color, '}}-')
+}
+
 
 latex_color <- function (r_color) paste0(as.vector(col2rgb(r_color)), collapse = ', ')
 

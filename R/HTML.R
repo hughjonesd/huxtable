@@ -119,6 +119,12 @@ cell_html <- function (ht, rn, cn, contents) {
   res <- paste0(res, 'border-width:', borders, '; ')
   res <- paste0(res, 'border-style: solid; ')
 
+  bcols <- get_all_border_colors(ht, rn, cn)
+  bcols <- bcols[c('top', 'right', 'bottom', 'left')]
+  bcols <- na.omit(bcols)
+  bcols <- if (length(bcols)) paste0('border-', names(bcols), '-color: ', bcols, '; ', collapse = ' ') else ''
+  res <- paste0(res, bcols)
+
   padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
     left_padding(ht)[rn, cn])
   if (any( ! is.na(padding))) {

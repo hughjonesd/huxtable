@@ -55,16 +55,6 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
 # }
 
 
-get_all_borders <- function(ht, row, col) {
-  list(
-          left   = left_border(ht)[row, col],
-          right  = right_border(ht)[row, col],
-          top    = top_border(ht)[row, col],
-          bottom = bottom_border(ht)[row, col]
-        )
-}
-
-
 format_number <- function (num, nf) {
   res <- num
   if (is.function(nf)) res[] <- nf(num)
