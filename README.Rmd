@@ -11,6 +11,8 @@ print_html(hux_logo())
 
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
 
+[![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](http://cran.rstudio.com/web/packages/huxtable/index.html)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
