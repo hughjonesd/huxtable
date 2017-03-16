@@ -571,31 +571,3 @@ set_attr_dimnames <- function(ht) {
 
   ht
 }
-
-#' @importFrom knitr knit_print
-#' @export
-knit_print.huxtable <- function (x, options, ...) {
-  requireNamespace('htmltools', quietly = TRUE)
-  of <- guess_knitr_output_format()
-
-  call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
-  res <- do.call(call_name, list(ht = x))
-  if (of == 'latex') {
-    latex_deps <- report_latex_dependencies(quiet = TRUE)
-    tenv <- tabular_environment(x)
-    if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
-    return(knitr::asis_output(res, meta = latex_deps))
-  } else if (of == 'html') {
-    res <- knitr::asis_output(htmltools::htmlPreserve(res))
-    return(res)
-  } else {
-    return(knitr::asis_output(res))
-  }
-}
-
-
-#' @export
-print.huxtable <- function(x, ...) {
-  print_screen(x, ...)
-}
-
