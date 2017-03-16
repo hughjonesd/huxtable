@@ -31,10 +31,97 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' print_screen(ht, borders = 'horiz')
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
+#
+# to_screen2 <- function (ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, colnames = TRUE, colnames_color = 'blue', max_width = 80, ...) {
+#   borders <- match.arg(borders)
+#   collapse_horiz <- is.null(blank)
+#   if (is.null(blank)) blank <- ' '
+#   if (colnames) ht <- add_colnames(ht)
+#   my_colour <- if (is.null(colnames_color)) identity else crayon::make_style(colnames_color)
+#
+#   dc               <- display_cells(ht)
+#   dc <- dc[! dc$shadowed & ! duplicated(dc[,c('display_row', 'display_col')]),]
+#   drow_mat         <- as.matrix(dc[,c('display_row', 'display_col')])
+#   contents         <- clean_contents(ht, type = 'screen')
+#   dc$contents      <- contents[drow_mat]
+#   dc$wrap          <- wrap(ht)[drow_mat]
+#   dc$top_border    <- top_border(ht)[drow_mat]
+#   dc$bottom_border <- bottom_border(ht)[drow_mat]
+#   dc$left_border   <- left_border(ht)[drow_mat]
+#   dc$right_border  <- right_border(ht)[drow_mat]
+#   dc <- dc[order(dc$colspan),]
+#
+#   # this represents character widths on screen for each column
+#   # -3 because have to account for borders
+#   # pattern is:
+#   # BSCCCCCSBSCCCCSBSCCCSB
+#   # where B is border S is space C is cell content
+#   scr_w <- rep(floor(max_width/ncol(ht)) - 3, ncol(ht))
+#   scr_w <- pmax(0, scr_w)
+#   # allocate screen colwidths as follows:
+#   # for each column, find cells overlapping that column with colspan n
+#   # take the max of nowrap cells
+#   # if the sum of widths of the cols, + 3 per internal border, is less, increase it
+#   # if we hit max_width, exit the loop
+#   dcnw <- dc[! dc$wrap,]
+#   for (j in seq_along(nrow(dcnw))) {
+#     dcr <- dcnw[j,]
+#     cell_width <- nchar(dcr$contents, type = 'width')
+#     col_width <- sum(scr_w[dcr$display_col:dcr$end_col]) + 3 * (dcr$colspan - 1)
+#     if ((excess <- cell_width - colwidth) > 0) {
+#       scr_w[dcr$display_col:dcr$end_col] <- scr_w[dcr$display_col:dcr$end_col] +
+#             ceiling(excess/dcr$colspan)
+#       # 2 border cols take 2 chars, internal ones take 3 chars
+#       total_width <- sum(scr_w) + 4 + 3 * (ncol(dcr) - 1)
+#       if ((excess2 <- total_width - max_width) > 0) {
+#         scr_w[dcr$display_col:dcr$end_col] <- scr_w[dcr$display_col:dcr$end_col] -
+#               ceiling(excess2/dcr$colspan)
+#       }
+#     }
+#   }
+#
+#   char_widths <- interleave(scr_w, c(2, rep(3, length(scr_w) - 1), 2))
+#   for (row in 0:nrow(ht)) {
+#     dcr  <- dc[dc$display_row == row, ]
+#     dcr2 <- dc[dc$display_row == row + 1, ]
+#     border_segs <- rep(FALSE, ncol(ht))
+#     corner_segs <- rep(FALSE, ncol(ht) + 1)
+#     side_segs   <- rep(FALSE, ncol(ht) + 1)
+#     for (j in seq_along(nrow(dcr))) {
+#       if (dcr$bottom_border[j] > 0) border_segs[dcr$display_col[j]:dcr$end_col[j]] <- TRUE
+#       if (dcr$left_border[j] > 0) corner_segs[dcr$display_col[j]] <- TRUE
+#       if (dcr$right_border[j] > 0) corner_segs[dcr$end_col[j]] <- TRUE
+#     }
+#     for (j in seq_along(nrow(dcr2))){
+#       if (dcr2$top_border[j] > 0) border_segs[dcr2$display_col[j]:dcr2$end_col[j]] <- TRUE
+#       if (dcr2$left_border[j] > 0) {
+#         corner_segs[dcr2$display_col[j]] <- TRUE
+#         side_segs[dcr2$display_col[j]] <- TRUE
+#       }
+#       if (dcr2$right_border[j] > 0) {
+#         corner_segs[dcr2$end_col[j]] <- TRUE
+#         side_segs[dcr2$end_col[j]] <- TRUE
+#       }
+#     }
+#
+#
+#   }
+#
+#
+#
+#   # now, calculate each screen row:
+#   # border rows are easy
+#   # cell rows: nowrap cells are truncated to sum of widths + 3 per int border
+#   #            wrap cells are wrapped, and this creates a new screen row
+#   #            horiz borders are superimposed - we know where they are
+#
+#
+# }
+
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, colnames = TRUE, colnames_color = 'blue', ...) {
+to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, colnames = TRUE, colnames_color = 'blue', ...) {
   borders <- match.arg(borders)
   collapse_horiz <- is.null(blank)
   if (is.null(blank)) blank <- ' '
@@ -52,15 +139,13 @@ to_screen.huxtable <- function(ht, borders = c('both', 'horizontal', 'vertical',
   border_chars   <- 3
 
   dc$widths <- nchar(dc$contents, type = 'width')
-  # each extra row = 2 screen rows including border:
-  dc$widths <- ceiling(dc$widths/(2 * dc$colspan - 1))
 
   # widths of actual columns, not including borders
   max_widths <- rep(0, ncol(ht))
   for (r in 1:nrow(dc)) {
-    width <- dc$width[r]
-    cols <- with(dc[r,], display_col:(display_col + colspan - 1))
-    if (sum(max_widths[cols]) < width) {
+    width <- dc$widths[r]
+    cols <- with(dc[r,], display_col:end_col)
+    if (sum(max_widths[cols]) + border_chars * (dc$colspan[r] - 1) < width) {
       max_widths[cols] <- pmax(max_widths[cols], ceiling(width/dc$colspan[r]))
     }
   }

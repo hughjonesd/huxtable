@@ -38,6 +38,12 @@ test_that('Multi-rowspan screen output is sane', {
   expect_equal_to_reference(to_screen(ht), 'multirow.rds')
 })
 
+test_that('to_screen does not cut off multicols', {
+  ht <- hux(a = 1:2, b = 1:2)
+  ht[2,1] <- 'some very long long text'
+  colspan(ht)[2, 1] <- 2
+  expect_match(to_screen(ht), 'some very long long text', fixed = TRUE)
+})
 
 test_that('guess_knitr_output_format() gets it right', {
   out <- character(0)
