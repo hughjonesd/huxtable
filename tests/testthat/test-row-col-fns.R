@@ -85,16 +85,6 @@ test_that('set_* works with byrow', {
   expect_equivalent(font(ht), matrix(c('times', 'times', 'palatino', 'palatino'), 2, 2))
 })
 
-test_that('where() works as expected', {
-  dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
-  expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
-})
-
-test_that('where() works with set_*', {
-  ht <- hux(a = c(1, 0), b = c(0, 1))
-  ht <- set_font(ht, where(ht > 0), 'times')
-  expect_equivalent(font(ht), matrix(c('times', NA, NA, 'times'), 2, 2))
-})
 
 test_that('set_* works when col is missing', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
@@ -117,6 +107,35 @@ test_that('set_* works when row and col are missing', {
   ht5 <- set_font(ht, c('times', 'arial'), byrow = TRUE)
   expect_equivalent(font(ht5), matrix(c('times', 'times', 'arial', 'arial'), 2, 2))
 })
+
+
+test_that('all forms of set_all_* work as expected', {
+  ht <- hux(a = c(1, 0), b = c(0, 1))
+  ht2 <- set_all_borders(ht, 1)
+  expect_equivalent(top_border(ht2), matrix(1, 2, 2))
+  ht3 <- set_all_borders(ht, where(ht > 0), 1)
+  expect_equivalent(top_border(ht3), matrix(c(1, 0, 0, 1), 2, 2))
+  ht4 <- set_all_borders(ht, 1, 2, 1)
+  expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
+  ht5 <- set_all_borders(ht, 1, a:b, 1)
+  expect_equivalent(top_border(ht5), matrix(c(1, 0, 1, 0), 2, 2))
+  ht6 <- set_all_borders(ht, a == 0, a:b, 1)
+  expect_equivalent(top_border(ht6), matrix(c(0, 1, 0, 1), 2, 2))
+})
+
+
+test_that('where() works as expected', {
+  dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
+  expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
+})
+
+
+test_that('where() works with set_*', {
+  ht <- hux(a = c(1, 0), b = c(0, 1))
+  ht <- set_font(ht, where(ht > 0), 'times')
+  expect_equivalent(font(ht), matrix(c('times', NA, NA, 'times'), 2, 2))
+})
+
 
 test_that('is_a_number() works as expected', {
   expect_false(is_a_number('foo'))
