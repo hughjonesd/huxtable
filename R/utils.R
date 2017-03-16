@@ -178,11 +178,13 @@ knit_print.huxtable <- function (x, options, ...) {
 print.huxtable <- function(x, ...) {
   print_screen(x, ...)
 }
+
+
 #' Guess Knitr Output Format
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
 #'
-#' @return 'html', 'latex' or something else
+#' @return 'html', 'latex', or something else. If we are not in a knitr document, returns an empty string.
 #' @export
 #'
 #' @examples
@@ -192,10 +194,12 @@ print.huxtable <- function(x, ...) {
 #' }
 guess_knitr_output_format <- function() {
   of <- knitr::opts_knit$get('out.format')
-  if (of == 'markdown') {
+  if (is.null(of) || of == 'markdown') {
     of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
     if (is.null(of)) {
-      of <- rmarkdown::default_output_format(knitr::current_input())
+      knit_in <- knitr::current_input()
+      if (is.null(knit_in)) return('')
+      of <- rmarkdown::default_output_format(knit_in)
       of <- of$name
       of <- sub('_.*', '', of)
       if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
