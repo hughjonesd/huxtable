@@ -21,8 +21,6 @@
 </tr>
 </table>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Huxtable
-========
 
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable)
 
