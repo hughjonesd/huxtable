@@ -18,12 +18,13 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
 
       contents[row, col] <- cell
     }
-    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[,col])
     if (type %in% c('latex', 'html')) {
       # xtable::sanitize.numbers would do very little and is buggy
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  xtable::sanitize(contents[to_esc, col], type)
     }
+    # has to be after sanitization because we add &nbsp; for HTML
+    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[,col], type)
   }
 
   contents
@@ -74,7 +75,7 @@ format_number <- function (num, nf) {
   res
 }
 
-decimal_pad <- function(col, pad_chars) {
+decimal_pad <- function(col, pad_chars, type) {
   # where pad_chars is NA we do not pad
   orig_col  <- col
   na_pad    <- is.na(pad_chars)
@@ -93,6 +94,7 @@ decimal_pad <- function(col, pad_chars) {
   chars_after_. <- nchars - pos
 
   pad_to <- max(chars_after_.) - chars_after_.
+  pad_char <- if (type == 'html') '&nbsp;' else ' '
   col <- paste0(col, str_rep(' ', pad_to))
 
   orig_col[! na_pad] <- col

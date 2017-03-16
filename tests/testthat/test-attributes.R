@@ -76,11 +76,13 @@ test_that('Can combine numbers and strings in padding', {
 
 test_that('Decimal padding works', {
   expect_identical(
-        huxtable:::decimal_pad(
-          c('do not pad.', '1.00532', '33', '33.6 *'),
-          c(NA, rep('.', 3))
-        ),
-        c('do not pad.', '1.00532', '33      ', '33.6 *  '))
+          huxtable:::decimal_pad(
+            c('do not pad.', '1.00532', '33', '33.6 *'),
+            c(NA, rep('.', 3)),
+            type = 'screen'
+          ),
+          c('do not pad.', '1.00532', '33      ', '33.6 *  ')
+        )
 })
 
 test_that('Can set attributes to NA', {
