@@ -7,7 +7,8 @@
 #' In this context,
 #' \code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
 #' or columns of the huxtable. \code{evens(from)} and \code{odds(from)} return even and odd
-#' numbers starting from \code{from}.
+#' numbers starting from \code{from}. Called with no arguments, \code{every()} returns
+#' all rows or columns.
 #'
 #' @param n A number (at least 1)
 #' @param from A number (at least 1)
@@ -20,13 +21,13 @@
 #'
 #' @examples
 #' ht <- huxtable(a = 1:10, b = 1:10)
-#' ht <- set_background_color(ht, every(3), 1:2, 'wheat')
+#' ht <- set_background_color(ht, every(3), every(), 'wheat')
 #' ht <- set_align(ht, evens(), 1:2, 'right')
 #' ht <- set_align(ht, odds(5), 1:2, 'center')
 #' align(ht)
 #' background_color(ht)
 #'
-every <- function(n, from = n) {
+every <- function(n = 1, from = n) {
   stopifnot(is.numeric(n))
   stopifnot(n >= 1)
   stopifnot(is.numeric(from))

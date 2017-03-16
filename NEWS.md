@@ -10,6 +10,13 @@
 * Ability to set border colors.
 * Prevent overlapping row/colspans.
 
+## Breaking change
+
+* You can no longer call `set_property*` with empty arguments, e.g.
+  `set_font(ht, , 1:2, 'times')`, to set a property in all rows and columns 1:2. Instead,
+  write e.g. `set_font(ht, every(), 1:2, 'times')`; or `set_font(ht, 'times')` to set
+  a value in all rows and columns.
+
 # huxtable 0.1.0
 
 * Added a `NEWS.md` file to track changes to the package.

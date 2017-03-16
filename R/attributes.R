@@ -88,52 +88,56 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 
   alt_setter <- paste0('set_', attr_name)
   attr_symbol <- as.symbol(attr_name)
-  if (attr_type == 'cell') {
-  funs[[alt_setter]] <- eval(bquote(
-    function(ht, row, col, value, byrow = FALSE) {
-      rc <- list()
-      if (missing(value)) {
-        if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
-        if (byrow) stop('byrow = TRUE makes no sense if `row` is a matrix')
-        value <- col
-        .(attr_symbol)(ht)[row] <- value
-      } else {
-        rc$row <- get_rc_spec(ht, row, 1)
-        rc$col <- get_rc_spec(ht, col, 2)
-        if (byrow) {
-          nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
-          value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
-        }
-        .(attr_symbol)(ht)[rc$row, rc$col] <- value
-      }
+  funs[[alt_setter]] <- switch(attr_type,
+        cell = eval(bquote(
+          function(ht, row, col, value, byrow = FALSE) {
+            nargs <- nargs()
+            if (! missing(byrow)) nargs <- nargs - 1
+            if (nargs == 3) {
+              if (missing(value)) value <- col
+              if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
+              if (byrow) stop('byrow = TRUE makes no sense if `row` is a matrix')
+              .(attr_symbol)(ht)[row] <- value
+            } else {
+              if (nargs == 2) {
+                if (missing(value)) value <- row
+                row <- seq_len(nrow(ht))
+                col <- seq_len(ncol(ht))
+              }
+              rc <- list()
+              rc$row <- get_rc_spec(ht, row, 1)
+              rc$col <- get_rc_spec(ht, col, 2)
+              if (byrow) {
+                nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
+                value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
+              }
+              .(attr_symbol)(ht)[rc$row, rc$col] <- value
+            }
 
-      ht
-    }
-  ))
-  } else if (attr_type == 'row') {
-    funs[[alt_setter]] <- eval(bquote(
-      function(ht, row, value) {
-        row <- get_rc_spec(ht, row, 1)
-        .(as.name(attr_name))(ht)[row] <- value
-        ht
-      }
-    ))
-  } else if (attr_type == 'col') {
-    funs[[alt_setter]] <- eval(bquote(
-      function(ht, col, value) {
-        col <- get_rc_spec(ht, col, 2)
-        .(as.name(attr_name))(ht)[col] <- value
-        ht
-      }
-    ))
-  } else if (attr_type == 'table') {
-    funs[[alt_setter]] <- eval(bquote(
-      function(ht, value) {
-        .(as.name(attr_name))(ht) <- value
-        ht
-      }
-    ))
-  }
+            ht
+          }
+        )),
+        row = eval(bquote(
+          function(ht, row, value) {
+            row <- get_rc_spec(ht, row, 1)
+            .(as.name(attr_name))(ht)[row] <- value
+            ht
+          }
+        )),
+        col = eval(bquote(
+          function(ht, col, value) {
+            col <- get_rc_spec(ht, col, 2)
+            .(as.name(attr_name))(ht)[col] <- value
+            ht
+          }
+        )),
+        table = eval(bquote(
+          function(ht, value) {
+            .(as.name(attr_name))(ht) <- value
+            ht
+          }
+        ))
+  ) # end switch
 
   lapply(names(funs), function (x) {
     assign(x, funs[[x]], envir = parent.frame(3)) # 3: 1 for function(x), 2 for lapply, 3 for the caller!
@@ -337,29 +341,22 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' Set All Borders
 #'
 #' This is a convenience function which sets left, right, top and bottom borders
-#' and border colors for the specified cells.
+#' for the specified cells.
 #'
 #' @inheritParams left_border
-#' @param color A color specification. Set to \code{NA} to reset to the default.
 #'
 #' @return The modified huxtable.
 #' @export
 #'
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_borders(ht, 1:3, 1:2, 1, color = 'red')
+#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, color = NULL, byrow = FALSE) {
   byrow. <- byrow
   ht <- set_top_border(ht, row, col, value, byrow = byrow.)
   ht <- set_bottom_border(ht, row, col, value, byrow = byrow.)
   ht <- set_left_border(ht, row, col, value, byrow = byrow.)
   ht <- set_right_border(ht, row, col, value, byrow = byrow.)
-  if (! is.null(color)) {
-    ht <- set_top_border_color(ht, row, col, color, byrow = byrow.)
-    ht <- set_bottom_border_color(ht, row, col, color, byrow = byrow.)
-    ht <- set_left_border_color(ht, row, col, color, byrow = byrow.)
-    ht <- set_right_border_color(ht, row, col, color, byrow = byrow.)
-  }
 
   ht
 }
@@ -419,6 +416,30 @@ make_getter_setters('top_border_color', 'cell')
 #' @export bottom_border_color bottom_border_color<- set_bottom_border_color bottom_border_color.huxtable bottom_border_color<-.huxtable
 NULL
 make_getter_setters('bottom_border_color', 'cell')
+
+
+#' Set All Border Colors
+#'
+#' This is a convenience function which sets left, right, top and bottom border
+#' colors for the specified cells.
+#'
+#' @inheritParams left_border_color
+#'
+#' @return The modified huxtable.
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
+set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
+  byrow. <- byrow
+  ht <- set_top_border_color(ht, row, col, value, byrow = byrow.)
+  ht <- set_bottom_border_color(ht, row, col, value, byrow = byrow.)
+  ht <- set_left_border_color(ht, row, col, value, byrow = byrow.)
+  ht <- set_right_border_color(ht, row, col, value, byrow = byrow.)
+
+  ht
+}
 
 
 get_all_border_colors <- function(ht, row, col) {
