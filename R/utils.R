@@ -129,6 +129,28 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
 }
 
 
+#' Set Default Print Method
+#'
+#' You can change the default print method for huxtable objects. This
+#' allows you to print huxtables appropriately, in e.g. knitr documents, simply
+#' by evaluating the huxtable object.
+#'
+#' @param method Print method to use for huxtable objects.
+#'
+#' @return \code{NULL}
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # inside a knitr HTML document:
+#' set_print_method(print_html)
+#' }
+set_print_method <- function(method) {
+  if (is.character(method)) method <- eval(as.symbol(method))
+  print.huxtable <<- method
+  NULL
+}
+
 #' Guess Knitr Output Format
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.

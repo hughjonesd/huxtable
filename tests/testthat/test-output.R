@@ -55,4 +55,12 @@ test_that('guess_knitr_output_format() gets it right', {
   }
 })
 
+test_that('set_print_method() works', {
+  ht <- hux(a = 1:2, b = 1:2)
+  set_print_method(print_html)
+  expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
+  set_print_method(print_latex)
+  expect_match(capture.output(print(ht)), 'tabular', fixed = TRUE, all = FALSE)
+})
+
 
