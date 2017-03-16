@@ -54,8 +54,7 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
   hrows <- seq_len(header_rows)
   frows <- seq_len(footer_rows) + nrow(ht) - footer_rows
 
-  dcells <- display_cells(ht)
-  dcells <- dcells[ ! dcells$shadowed, ]
+  dcells <- display_cells(ht, all = FALSE)
 
   ft <- ReporteRs::FlexTable(numrow = nrow(ht) - header_rows - footer_rows, numcol = ncol(ht), header.columns = FALSE)
 

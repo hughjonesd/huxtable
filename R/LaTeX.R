@@ -115,7 +115,7 @@ build_tabular <- function(ht) {
   colspec <- paste0('{', colspec, '}')
   res <- paste0(colspec, '\n')
 
-  display_cells <- display_cells(ht)
+  display_cells <- display_cells(ht, all = TRUE)
   all_contents  <- clean_contents(ht, type = 'latex')
   res <- paste0(res, build_clines_for_row(ht, row = 0))
 
@@ -281,7 +281,7 @@ build_clines_for_row <- function(ht, row) {
   # add top/bottom borders
   # where a cell is shadowed, we don't want to add a top border (it'll go thru the middle)
   # bottom borders of a shadowed cell are fine, but come from the display cell.
-  display_cells <- display_cells(ht)
+  display_cells <- display_cells(ht, all = TRUE)
   dcells_this_row <- unique(display_cells[display_cells$row == row,])
   this_bottom <- rep(0, ncol(ht))
 
@@ -342,7 +342,7 @@ build_clines_for_row <- function(ht, row) {
 }
 
 compute_vertical_borders <- function (ht, row) {
-  display_cells <- display_cells(ht)
+  display_cells <- display_cells(ht, all = TRUE)
   dcells_this_row <- unique(display_cells[display_cells$row == row, c('display_row', 'display_col')])
 
   lbs <- rep(0, ncol(ht) + 1)

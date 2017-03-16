@@ -76,7 +76,7 @@ row_html <- function (ht, rn, contents) {
   }
   res <- paste0('<tr', style ,'>\n')
   cols_to_show <- 1:ncol(ht)
-  dcells <- display_cells(ht) # speedup: make this call just once in parent
+  dcells <- display_cells(ht, all = TRUE) # speedup: make this call just once in parent
   cols_to_show <- setdiff(cols_to_show, dcells$col[dcells$row == rn & dcells$shadowed])
   cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn, contents)
   cells_html <- paste0(cells_html, collapse = '')
@@ -100,12 +100,10 @@ cell_html <- function (ht, rn, cn, contents) {
   wrap <- wrap(ht)[rn, cn]
   res <- paste0(res, 'white-space: ', if (wrap) 'normal' else 'nowrap', '; ')
 
-  borders <- c(top_border(ht)[rn, cn], right_border(ht)[rn, cn], bottom_border(ht)[rn, cn],
-    left_border(ht)[rn, cn])
+  borders <- get_all_borders(ht, rn, cn)[c('top', 'right', 'bottom', 'left')]
   borders <- paste(borders, 'px', sep = '', collapse = ' ')
   res <- paste0(res, 'border-width:', borders, '; ')
   res <- paste0(res, 'border-style: solid; ')
-
 
   padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
     left_padding(ht)[rn, cn])

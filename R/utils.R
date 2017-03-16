@@ -29,6 +29,40 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
   contents
 }
 
+# compute_real_borders <- function (ht) {
+#   borders <- matrix(0, nrow(ht) + 1, ncol(ht) + 1)
+#   # borders[y, x] gives the border above row y and left of col x
+#   dcells <- display_cells(ht, all = FALSE)
+#   dcells <- dcells[!dcells$shadowed,]
+#   for (i in seq_along(nrow(dcells))) {
+#     dcr <- dcells[i,]
+#     pos <- list(
+#           left   = list(dcr$display_row:dcr$end_row, dcr$display_col),
+#           right  = list(dcr$display_row:dcr$end_row, dcr$end_col + 1),
+#           top    = list(dcr$display_row, dcr$display_col:dcr$end_col),
+#           bottom = list(dcr$end_row + 1, dcr$display_col:dcr$end_col)
+#         )
+#     bords <- get_all_borders(ht, dcr$display_row, dcr$display_col)
+#     bords <- bords[names(pos)] # safety
+#     f <- function(pos, bords) {
+#       borders[ pos[[1]], pos[[2]] ] <- pmax(borders[ pos[[1]], pos[[2]] ], bords)
+#     }
+#     mapply(f, pos, bords)
+#   }
+#
+#   borders
+# }
+
+
+get_all_borders <- function(ht, row, col) {
+  list(
+          left   = left_border(ht)[row, col],
+          right  = right_border(ht)[row, col],
+          top    = top_border(ht)[row, col],
+          bottom = bottom_border(ht)[row, col]
+        )
+}
+
 
 format_number <- function (num, nf) {
   res <- num
@@ -66,7 +100,7 @@ decimal_pad <- function(col, pad_chars) {
 }
 
 # return data frame mapping real cell positions to cells displayed
-display_cells <- function(ht, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
+display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
     rowspan = as.vector(new_rowspan), colspan = as.vector(new_colspan))
   dcells$display_row <- dcells$row
@@ -88,6 +122,8 @@ display_cells <- function(ht, new_rowspan = rowspan(ht), new_colspan = colspan(h
   }
   dcells$end_row <- dcells$display_row + dcells$rowspan - 1
   dcells$end_col <- dcells$display_col + dcells$colspan - 1
+
+  if (! all) dcells <- dcells[! dcells$shadowed, ]
 
   dcells
 }
