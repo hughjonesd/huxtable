@@ -114,7 +114,8 @@ cell_html <- function (ht, rn, cn, contents) {
   wrap <- wrap(ht)[rn, cn]
   res <- paste0(res, 'white-space: ', if (wrap) 'normal' else 'nowrap', '; ')
 
-  borders <- get_all_borders(ht, rn, cn)[c('top', 'right', 'bottom', 'left')]
+  borders <- get_all_borders(ht, rn, cn)
+  borders <- borders[c('top', 'right', 'bottom', 'left')]
   borders <- paste(borders, 'px', sep = '', collapse = ' ')
   res <- paste0(res, 'border-width:', borders, '; ')
   res <- paste0(res, 'border-style: solid; ')

@@ -150,3 +150,20 @@ ht
 
 
 ```
+
+A bit of space
+
+```{r}
+
+ht <- hux(c('some text', 'some more text'), c(NA, 'blah'))
+ht <- set_all_borders(ht, , , 1)
+ht <- set_all_borders(ht, 1, 1, 1, color = 'red')
+right_border_color(ht)[1,1] <- 'blue' 
+rowspan(ht)[1,1] <- 2
+ht
+
+
+```
+
+
+
