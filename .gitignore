@@ -6,8 +6,9 @@
 *.synctex.gz
 *.log
 *.dvi
-scratchpad*
 .DS_Store
-testing-doc.md
-testing-doc.tex
 inst/doc
+scripts/*.pdf
+scripts/*.tex
+scripts/*.html
+scripts/*.docx
