@@ -12,3 +12,18 @@ To create a huxtable object, use \code{\link{huxtable}} or \code{\link{as_huxtab
 
 For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website}.
 }
+\section{Package options}{
+
+
+\itemize{
+  \item \code{options('huxtable.print')} sets the print method for huxtable objects.
+}
+
+On the console, by default, huxtables print using the \code{\link{print_screen}} method. Within a knitr chunk,
+huxtables will automatically print using the appropriate method for the document,
+so that you can just write, e.g. \code{ht} rather than \code{print_html(ht)}.
+The \code{huxtable.print} option lets you control the default output of printing huxtables,
+in cases where this autodetection doesn't work: e.g. set
+\code{options(huxtable.print = print_html)}.
+}
+
