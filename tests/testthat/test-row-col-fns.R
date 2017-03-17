@@ -1,5 +1,5 @@
 
-context('Row and column functions')
+context('Row and column functions, set_* interface')
 
 
 source('functions.R')
@@ -122,6 +122,7 @@ test_that('all forms of set_all_* work as expected', {
   ht6 <- set_all_borders(ht, a == 0, a:b, 1)
   expect_equivalent(top_border(ht6), matrix(c(0, 1, 0, 1), 2, 2))
 })
+
 
 
 test_that('where() works as expected', {
