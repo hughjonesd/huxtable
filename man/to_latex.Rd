@@ -4,7 +4,7 @@
 \alias{print_latex}
 \alias{to_latex}
 \alias{to_latex.huxtable}
-\title{Create LaTeX Representing a Huxtable}
+\title{Create LaTeX representing a huxtable}
 \usage{
 print_latex(ht, ...)
 
@@ -23,7 +23,7 @@ to_latex(ht, ...)
 \code{to_latex} returns a string. \code{print_latex} prints the string and returns \code{NULL}.
 }
 \description{
-Create LaTeX Representing a Huxtable
+Create LaTeX representing a huxtable
 }
 \examples{
 ht <- huxtable(a = 1:3, b = letters[1:3])

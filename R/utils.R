@@ -155,7 +155,7 @@ print.huxtable <- function(x, ...) {
 }
 
 
-#' Guess Knitr Output Format
+#' Guess knitr output format
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
 #'
@@ -185,7 +185,7 @@ guess_knitr_output_format <- function() {
 }
 
 
-#' Huxtable Logo
+#' Huxtable logo
 #'
 #' @param latex Use LaTeX names for fonts.
 #' @return The huxtable logo

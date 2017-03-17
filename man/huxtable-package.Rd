@@ -2,7 +2,7 @@
 % Please edit documentation in R/huxtable.R
 \name{huxtable-package}
 \alias{huxtable-package}
-\title{Huxtable: Simply Create LaTeX and HTML Tables}
+\title{Huxtable: simply create LaTeX and HTML tables}
 \description{
 Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 functionality to xtable, with a simpler interface.

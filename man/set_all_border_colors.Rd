@@ -2,7 +2,7 @@
 % Please edit documentation in R/attributes.R
 \name{set_all_border_colors}
 \alias{set_all_border_colors}
-\title{Set All Border Colors}
+\title{Set all border colors}
 \usage{
 set_all_border_colors(ht, row, col, value, byrow = FALSE)
 }

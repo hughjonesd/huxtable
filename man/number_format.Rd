@@ -6,7 +6,7 @@
 \alias{set_number_format}
 \alias{number_format.huxtable}
 \alias{number_format<-.huxtable}
-\title{Number Format}
+\title{Number format}
 \usage{
 number_format(ht)
 number_format(ht) <- value

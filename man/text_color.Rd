@@ -6,7 +6,7 @@
 \alias{set_text_color}
 \alias{text_color.huxtable}
 \alias{text_color<-.huxtable}
-\title{Cell Text Color}
+\title{Text color}
 \usage{
 text_color(ht)
 text_color(ht) <- value
@@ -28,7 +28,7 @@ For \code{text_color}, the \code{text_color} attribute.
 For \code{set_text_color}, the \code{ht} object.
 }
 \description{
-Functions to get or set the cell text color property of huxtable table cells.
+Functions to get or set the text color property of huxtable table cells.
 }
 \examples{
 

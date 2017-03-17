@@ -5,7 +5,7 @@
 \alias{add_colnames.huxtable}
 \alias{add_rownames}
 \alias{add_rownames.huxtable}
-\title{Add Column or Row Names}
+\title{Add column or row names}
 \usage{
 add_colnames(ht, ...)
 

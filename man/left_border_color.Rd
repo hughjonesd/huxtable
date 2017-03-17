@@ -24,7 +24,7 @@
 \alias{right_border_color}
 \alias{top_border_color}
 \alias{bottom_border_color}
-\title{Border Colors}
+\title{Border colors}
 \usage{
 left_border_color(ht)
 left_border_color(ht) <- value

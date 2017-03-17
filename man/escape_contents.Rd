@@ -6,7 +6,7 @@
 \alias{set_escape_contents}
 \alias{escape_contents.huxtable}
 \alias{escape_contents<-.huxtable}
-\title{Whether to Escape Cell Contents}
+\title{Escape cell contents}
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
@@ -15,7 +15,7 @@ set_escape_contents(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTex escaped. Set to \code{NA} to reset to the default.}
+\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -28,7 +28,7 @@ For \code{escape_contents}, the \code{escape_contents} attribute.
 For \code{set_escape_contents}, the \code{ht} object.
 }
 \description{
-Functions to get or set the whether to escape cell contents property of huxtable table cells.
+Functions to get or set the escape cell contents property of huxtable table cells.
 }
 \examples{
 ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))

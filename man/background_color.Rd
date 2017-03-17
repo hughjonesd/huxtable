@@ -6,7 +6,7 @@
 \alias{set_background_color}
 \alias{background_color.huxtable}
 \alias{background_color<-.huxtable}
-\title{Cell Background Color}
+\title{Background color}
 \usage{
 background_color(ht)
 background_color(ht) <- value
@@ -28,7 +28,7 @@ For \code{background_color}, the \code{background_color} attribute.
 For \code{set_background_color}, the \code{ht} object.
 }
 \description{
-Functions to get or set the cell background color property of huxtable table cells.
+Functions to get or set the background color property of huxtable table cells.
 }
 \examples{
 

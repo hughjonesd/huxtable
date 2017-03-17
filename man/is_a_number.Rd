@@ -2,7 +2,7 @@
 % Please edit documentation in R/row-col-fns.R
 \name{is_a_number}
 \alias{is_a_number}
-\title{Does an Object Look Like a Number?}
+\title{Does an object look like a number?}
 \usage{
 is_a_number(x)
 }

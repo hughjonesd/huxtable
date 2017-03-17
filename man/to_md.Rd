@@ -4,7 +4,7 @@
 \alias{print_md}
 \alias{to_md}
 \alias{to_md.huxtable}
-\title{Create Markdown Representing A Huxtable}
+\title{Create Markdown representing a huxtable}
 \usage{
 print_md(ht, ...)
 
@@ -24,7 +24,7 @@ to_md(ht, ...)
 \code{NULL}.
 }
 \description{
-Create Markdown Representing A Huxtable
+Create Markdown representing a huxtable
 }
 \details{
 Only \code{align} and \code{caption} properties are used. The markdown format is

@@ -6,7 +6,7 @@
 \alias{set_height}
 \alias{height.huxtable}
 \alias{height<-.huxtable}
-\title{Table Height}
+\title{Table height}
 \usage{
 height(ht)
 height(ht) <- value

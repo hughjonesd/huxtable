@@ -3,7 +3,7 @@
 \name{mutate_.huxtable}
 \alias{mutate_.huxtable}
 \alias{mutate}
-\title{Dplyr Verbs for Huxtable}
+\title{Dplyr verbs for huxtable}
 \usage{
 \method{mutate_}{huxtable}(.data, ..., .dots)
 }

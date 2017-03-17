@@ -2,7 +2,7 @@
 % Please edit documentation in R/huxtable.R
 \name{t.huxtable}
 \alias{t.huxtable}
-\title{Transpose a Huxtable}
+\title{Transpose a huxtable}
 \usage{
 \method{t}{huxtable}(x)
 }
@@ -13,7 +13,7 @@
 The transposed object.
 }
 \description{
-Transpose a Huxtable
+Transpose a huxtable
 }
 \details{
 Row and column spans of \code{x} will be swapped, as will column widths and row heights,

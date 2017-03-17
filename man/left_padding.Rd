@@ -25,7 +25,7 @@
 \alias{bottom_padding}
 \alias{top_padding}
 \alias{set_all_padding}
-\title{Cell Padding}
+\title{Cell padding}
 \usage{
 left_padding(ht)
 left_padding(ht) <- value
@@ -89,9 +89,4 @@ ht <- huxtable(a = 1:3, b = 1:3)
 ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 left_padding(ht)
 right_padding(ht)
-}
-\seealso{
-set_all_padding
-
-set_left_padding
 }

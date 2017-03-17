@@ -24,7 +24,7 @@
 \alias{italic<-.huxtable<-.huxtable}
 \alias{set_set_italic}
 \alias{italic}
-\title{Bold or Italic Cell Text}
+\title{Cell text style}
 \usage{
 bold(ht)
 bold(ht) <- value
@@ -50,7 +50,7 @@ For \code{bold}, the \code{bold} attribute.
 For \code{set_bold}, the \code{ht} object.
 }
 \description{
-Functions to get or set the bold or italic cell text property of huxtable table cells.
+Functions to get or set the cell text style property of huxtable table cells.
 }
 \examples{
 

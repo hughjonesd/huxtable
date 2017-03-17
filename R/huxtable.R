@@ -1,5 +1,5 @@
 
-#' Huxtable: Simply Create LaTeX and HTML Tables
+#' Huxtable: simply create LaTeX and HTML tables
 #'
 #' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 #' functionality to xtable, with a simpler interface.
@@ -33,7 +33,7 @@ NULL
 NULL
 
 
-#' Create a Huxtable
+#' Create a huxtable
 #'
 #' \code{huxtable}, or \code{hux}, creates a huxtable object.
 #'
@@ -239,7 +239,7 @@ is_hux <- is_huxtable
 }
 
 
-#' Add Rows/Columns
+#' Combine rows or columns
 #'
 #' @param ... Vectors, matrices, data frames or huxtables.
 #' @param deparse.level Passed to \code{\link{cbind.data.frame}}.
@@ -370,7 +370,7 @@ filter_.huxtable <- function (.data, ..., .dots) {
   ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames,]
 }
 
-#' Dplyr Verbs for Huxtable
+#' Dplyr verbs for huxtable
 #'
 #' Huxtable can be used with dplyr verbs \code{\link[dplyr]{select}}, \code{\link[dplyr]{rename}},
 #' \code{\link[dplyr]{slice}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{mutate}} and
@@ -477,7 +477,7 @@ rename_.huxtable <- select_.huxtable
   x
 }
 
-#' Transpose a Huxtable
+#' Transpose a huxtable
 #'
 #' @param x A huxtable.
 #'
@@ -522,7 +522,7 @@ t.huxtable <- function (x) {
 
 
 
-#' Add Column or Row Names
+#' Add column or row names
 #'
 #' Add a first row of column names, or a first column of row names, to the huxtable.
 #'

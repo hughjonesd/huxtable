@@ -5,7 +5,7 @@
 \alias{to_html}
 \alias{print_notebook}
 \alias{to_html.huxtable}
-\title{Create HTML Representing a Huxtable}
+\title{Create HTML representing a huxtable}
 \usage{
 print_html(ht, ...)
 

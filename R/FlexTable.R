@@ -1,7 +1,7 @@
 
 
 
-#' Convert a Huxtable for Word/Powerpoint
+#' Convert a huxtable for Word/Powerpoint
 #'
 #' Huxtables can be converted to \code{\link[ReporteRs]{FlexTable}} objects, for use in Word and Powerpoint documents.
 #'

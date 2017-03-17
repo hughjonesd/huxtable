@@ -2,7 +2,7 @@
 % Please edit documentation in R/row-col-fns.R
 \name{where}
 \alias{where}
-\title{Return Array Indices Where Expression Is True}
+\title{Return array indices where expression is true}
 \usage{
 where(expr)
 }

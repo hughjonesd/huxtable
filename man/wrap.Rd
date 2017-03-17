@@ -6,7 +6,7 @@
 \alias{set_wrap}
 \alias{wrap.huxtable}
 \alias{wrap<-.huxtable}
-\title{Cell Wrapping}
+\title{Text wrapping}
 \usage{
 wrap(ht)
 wrap(ht) <- value
@@ -28,7 +28,7 @@ For \code{wrap}, the \code{wrap} attribute.
 For \code{set_wrap}, the \code{ht} object.
 }
 \description{
-Functions to get or set the cell wrapping property of huxtable table cells.
+Functions to get or set the text wrapping property of huxtable table cells.
 }
 \examples{
 ht <- huxtable(a = rep('Some long text', 2))

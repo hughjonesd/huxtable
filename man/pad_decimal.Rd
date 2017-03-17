@@ -6,7 +6,7 @@
 \alias{set_pad_decimal}
 \alias{pad_decimal.huxtable}
 \alias{pad_decimal<-.huxtable}
-\title{Decimal Padding}
+\title{Decimal padding}
 \usage{
 pad_decimal(ht)
 pad_decimal(ht) <- value

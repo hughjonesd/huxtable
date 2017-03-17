@@ -4,7 +4,7 @@
 \alias{as_FlexTable}
 \alias{as_FlexTable.huxtable}
 \alias{as_FlexTable.huxtable}
-\title{Convert a Huxtable for Word/Powerpoint}
+\title{Convert a huxtable for Word/Powerpoint}
 \usage{
 as_FlexTable(x, ...)
 

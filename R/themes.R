@@ -1,10 +1,10 @@
 
 
-#' Theme a Huxtable
+#' Theme a huxtable
 #'
 #' These functions quickly set default styles for a huxtable.
 #'
-#' \code{theme_minimal} is a minimal theme with a simple line under headers.
+#' \code{theme_basic} is a simple theme with a simple line under headers.
 #'
 #' \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 #'

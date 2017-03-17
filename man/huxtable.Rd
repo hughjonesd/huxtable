@@ -8,7 +8,7 @@
 \alias{as_huxtable.default}
 \alias{is_huxtable}
 \alias{is_hux}
-\title{Create a Huxtable}
+\title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = FALSE, add_rownames = FALSE)
 

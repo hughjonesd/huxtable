@@ -6,7 +6,7 @@
 \alias{set_width}
 \alias{width.huxtable}
 \alias{width<-.huxtable}
-\title{Table Width}
+\title{Table width}
 \usage{
 width(ht)
 width(ht) <- value

@@ -11,7 +11,7 @@ print_latex <- function (ht, ...) {
 }
 
 
-#' Create LaTeX Representing a Huxtable
+#' Create LaTeX representing a huxtable
 #'
 #' @param ht A huxtable.
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
@@ -77,33 +77,36 @@ huxtable_latex_dependencies <- list(
   rmarkdown::latex_dependency('tabularx')
 )
 
-#' Report LaTeX Dependencies
+#' Report LaTeX dependencies
 #'
 #' Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
 #'
 #' @param quiet Suppress printing.
+#' @param as_string Return dependencies as a string.
 #'
-#' @return A list of rmarkdown::latex_dependency objects, invisibly.
+#' @return If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;
+#'   otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 #' @export
 #'
 #' @examples
 #' report_latex_dependencies()
 #'
-report_latex_dependencies <- function(quiet = FALSE) {
+report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
+  report <- sapply(huxtable_latex_dependencies, function(ld) {
+    str <- paste0('\\usepackage{', ld$name, '}')
+    if (! is.null(ld$options)) {
+      str <- paste0(str, '[', paste(ld$options, collapse = ','), ']')
+    }
+    paste0(str, '\n')
+  })
   if (! quiet) {
-    report <- sapply(huxtable_latex_dependencies, function(ld) {
-      str <- paste0('\\usepackage{', ld$name, '}')
-      if (! is.null(ld$options)) {
-        str <- paste0(str, '[', paste(ld$options, collapse = ','), ']')
-      }
-      paste0(str, '\n')
-    })
     cat(paste0(report, collapse = ''))
     cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary)')
   }
 
-  invisible((huxtable_latex_dependencies))
+  if (as_string) paste0(report, collapse = '') else invisible((huxtable_latex_dependencies))
 }
+
 
 build_tabular <- function(ht) {
   colspec <- character(ncol(ht))

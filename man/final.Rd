@@ -2,7 +2,7 @@
 % Please edit documentation in R/row-col-fns.R
 \name{final}
 \alias{final}
-\title{Return the Last n Rows or Columns}
+\title{Return the last n rows or columns}
 \usage{
 final(n = 1)
 }

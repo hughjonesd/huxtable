@@ -4,7 +4,7 @@
 print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 
 
-#' Print a Huxtable on Screen
+#' Print a huxtable on screen
 #'
 #' @param ht A huxtable.
 #' @param ... Passed on to \code{to_screen}.
@@ -215,7 +215,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
 print_md <- function(ht, ...) cat(to_md(ht, ...))
 
 
-#' Create Markdown Representing A Huxtable
+#' Create Markdown representing a huxtable
 #'
 #' @param ht        A huxtable.
 #' @param max_width Max width in on-screen characters of the result.

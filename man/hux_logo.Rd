@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{hux_logo}
 \alias{hux_logo}
-\title{Huxtable Logo}
+\title{Huxtable logo}
 \usage{
 hux_logo(latex = FALSE)
 }
@@ -13,7 +13,7 @@ hux_logo(latex = FALSE)
 The huxtable logo
 }
 \description{
-Huxtable Logo
+Huxtable logo
 }
 \examples{
 print_screen(hux_logo())

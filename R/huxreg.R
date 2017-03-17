@@ -1,5 +1,5 @@
 
-#' Create a Huxtable to Display Model Output
+#' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models.
 #' @param error_style How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.

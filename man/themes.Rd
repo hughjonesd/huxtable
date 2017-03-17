@@ -30,7 +30,7 @@ The huxtable object, appropriately styled.
 These functions quickly set default styles for a huxtable.
 }
 \details{
-\code{theme_minimal} is a minimal theme with a simple line under headers.
+\code{theme_basic} is a simple theme with a simple line under headers.
 
 \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 

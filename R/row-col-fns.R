@@ -1,7 +1,7 @@
 
 
 
-#' Return Every n Row or Column Numbers
+#' Return every n row or column numbers
 #'
 #' This is a convenience function to use in row or column specifications.
 #' In this context,
@@ -50,7 +50,7 @@ evens <- function(from = 2) every(2, ceiling(from/2) * 2)
 #' @export
 odds  <- function(from = 1) every(2, ceiling((from - 1)/2) * 2 + 1)
 
-#' Return the Last n Rows or Columns
+#' Return the last n rows or columns
 #'
 #' This is a convenience function to use in row and column specifications. In that context, it
 #' returns the last n row or column numbers of the huxtable.
@@ -82,25 +82,29 @@ final <- function(n = 1) {
   )
 }
 
-#' Row and Column Specifications
+#' Row and column specifications
 #'
 #' @section The basics:
 #'
-#' The \code{set_*} functions in huxtable all share arguments like
-#' \code{set_property(ht, row, col, value)}.
+#' The \code{set_*} functions for cell properties all have arguments like this:
+#' \code{set_property(ht, row, col, value, byrow = FALSE)}.
 #'
-#' You can treat \code{row} and \code{col} arguments just like arguments to \code{[} for a data frame.
+#' You can treat \code{row} and \code{col} arguments like arguments to \code{[} for a data frame.
 #' But there are a few extra tricks:
 #'
 #'\itemize{
-#'  \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, , 2:3)}
-#'    you could write \code{set_property(ht, , col2:col3)}.
+#'  \item Write \code{set_property(ht, x)} to set the property to \code{x} for all cells.
+#'  \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, 1, 2:3, x)}
+#'    you can write \code{set_property(ht, 1, col2:col3, x)}.
 #'  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
 #'  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
 #'    for only odd ones.
 #'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
+#'    Use \code{every(1)} or just \code{every()} to get all rows or columns.
 #'  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
 #'    \code{TRUE}.
+#'  \item Omit both \code{row} and \code{col} arguments to set a property for all cells.
+#'  \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 #'}
 #'
 #'
@@ -109,19 +113,27 @@ final <- function(n = 1) {
 #' Here is how the row and col arguments are parsed:
 #'
 #' \itemize{
-#'   \item Names in \code{col} get replaced by column indices, as in \code{\link[base]{subset}}.
-#'   \item Expressions in \code{row} get evaluated in the context of the huxtable object,
-#'     as in \code{\link[base]{subset}}.
-#'   \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
-#'     subsetting - see \code{\link[base]{Extract.data.frame}}.
-#'   \item If \code{row} or \code{col} is missing, all rows or columns are returned, as in standard subsetting.
-#'   \item If \code{row} or \code{col} is a function, it is called to give a set of column indices.
+#'   \item If there are two arguments (excluding \code{byrow}) then the second argument is taken as the
+#'     value and is set for all rows and columns.
+#'   \item If there are three arguments, then the third argument is taken as the value, and
+#'     \code{row} must be a matrix with two columns. Each row of this matrix
+#'     gives the row, column indices of a single cell. This uses R's little known feature of
+#'     subsetting with matrices - see \code{\link[base]{Extract}}.
+#'   \item If there are four arguments:
+#'     \itemize{
+#'       \item Names in \code{col} get replaced by column indices, as in \code{\link[base]{subset}} or
+#'         dplyr's \code{\link[dplyr]{select}}.
+#'       \item Expressions in \code{row} get evaluated in the context of the huxtable object,
+#'         as in \code{\link[base]{subset}} or in dplyr's \code{\link[dplyr]{filter}}.
+#'       \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
+#'         subsetting.
+#'       \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,
+#'         and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
+#'         of column indices. \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{final}}
+#'        return functions for this purpose.
+#'     }
 #' }
 #'
-#' If \code{row} or \code{col} is a function, it is called with two arguments: the huxtable, and the dimension
-#' number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector of column indices.
-#' \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{final}} return
-#' functions for this purpose.
 #'
 #' @name rowspecs
 #'
@@ -137,7 +149,7 @@ final <- function(n = 1) {
 #' align(ht)
 NULL
 
-#' Return Array Indices Where Expression Is True
+#' Return array indices where expression is true
 #'
 #' This is a simple wrapper around \code{which(..., arr.ind = TRUE)}, for
 #' use in \code{\link[=rowspecs]{row specifications}}.
@@ -154,7 +166,7 @@ NULL
 #'
 where <- function(expr) {which(expr, arr.ind = TRUE)}
 
-#' Does an Object Look Like a Number?
+#' Does an object look like a number?
 #'
 #' A convenience function that returns \code{TRUE} if an object either is numeric or
 #' can be converted to a number. For data frames, it returns a matrix of the same

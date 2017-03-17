@@ -4,7 +4,7 @@
 \alias{print_screen}
 \alias{to_screen}
 \alias{to_screen.huxtable}
-\title{Print a Huxtable on Screen}
+\title{Print a huxtable on screen}
 \usage{
 print_screen(ht, ...)
 
@@ -31,7 +31,7 @@ empty horizontal borders.}
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 }
 \description{
-Print a Huxtable on Screen
+Print a huxtable on screen
 }
 \details{
 Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.

@@ -7,7 +7,7 @@
 print_html <- function(ht, ...) cat(to_html(ht, ...))
 
 
-#' Create HTML Representing a Huxtable
+#' Create HTML representing a huxtable
 #'
 #' These functions print or return an HTML table.
 #'

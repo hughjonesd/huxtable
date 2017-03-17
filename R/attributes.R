@@ -178,7 +178,7 @@ set_cell_properties <- function (ht, row, col, ...) {
 
 #' @template getset-cell
 #' @templateVar attr_name valign
-#' @templateVar attr_desc Vertical Alignment
+#' @templateVar attr_desc Vertical alignment
 #' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
 #' @template getset-example
 #' @templateVar attr_val 'top'
@@ -203,7 +203,7 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 #' @template getset-rowcol
 #' @templateVar attr_name col_width
 #' @templateVar rowcol col
-#' @templateVar attr_desc Column Widths
+#' @templateVar attr_desc Column widths
 #' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.
 #' @family row/column heights
 #' @template getset-example
@@ -216,7 +216,7 @@ make_getter_setters('col_width', 'col')
 #' @template getset-rowcol
 #' @templateVar attr_name row_height
 #' @templateVar rowcol row
-#' @templateVar attr_desc Row Heights
+#' @templateVar attr_desc Row heights
 #' @templateVar value_param_desc A vector.
 #' @family row/column heights
 #' @details
@@ -230,7 +230,7 @@ make_getter_setters('row_height', 'row')
 
 #' @template getset-cell
 #' @templateVar attr_name rowspan
-#' @templateVar attr_desc Row Span
+#' @templateVar attr_desc Row span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
 #' @template getset-example
 #' @templateVar subscript [1, 1]
@@ -247,7 +247,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
 
 #' @template getset-cell
 #' @templateVar attr_name colspan
-#' @templateVar attr_desc Column Span
+#' @templateVar attr_desc Column span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
 #' @template getset-example
 #' @templateVar subscript [1, 1]
@@ -276,7 +276,7 @@ check_span_shadows <- function (ht, rc, value) {
 
 #' @template getset-cell
 #' @templateVar attr_name background_color
-#' @templateVar attr_desc Cell Background Color
+#' @templateVar attr_desc Background color
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
@@ -289,7 +289,7 @@ make_getter_setters('background_color', 'cell')
 
 #' @template getset-cell
 #' @templateVar attr_name text_color
-#' @templateVar attr_desc Cell Text Color
+#' @templateVar attr_desc Text color
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
 #' @templateVar attr_val 'navy'
@@ -349,7 +349,7 @@ make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 
-#' Set All Borders
+#' Set all borders
 #'
 #' This is a convenience function which sets left, right, top and bottom borders
 #' for the specified cells.
@@ -389,7 +389,7 @@ get_all_borders <- function(ht, row, col) {
 
 #' @template getset-cell
 #' @templateVar attr_name left_border_color
-#' @templateVar attr_desc Border Colors
+#' @templateVar attr_desc Border colors
 #' @templateVar value_param_desc A vector or matrix of colors. Set to \code{NA} for the default.
 #' @templateVar morealiases right_border_color top_border_color bottom_border_color
 #' @template getset-example
@@ -435,7 +435,7 @@ NULL
 make_getter_setters('bottom_border_color', 'cell')
 
 
-#' Set All Border Colors
+#' Set all border colors
 #'
 #' This is a convenience function which sets left, right, top and bottom border
 #' colors for the specified cells.
@@ -477,7 +477,7 @@ get_all_border_colors <- function(ht, row, col) {
 #' @name left_padding
 #' @template getset-cell
 #' @templateVar attr_name left_padding
-#' @templateVar attr_desc Cell Padding
+#' @templateVar attr_desc Cell padding
 #' @templateVar value_param_desc
 #' A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
 #' @templateVar morealiases right_padding top_padding bottom_padding
@@ -485,7 +485,6 @@ get_all_border_colors <- function(ht, row, col) {
 #' @templateVar attr_val 20
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 10
-#' @seealso set_all_padding
 #' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
@@ -530,7 +529,6 @@ NULL
 #' \code{set_all_padding} is a convenience function which sets left, right, top and bottom cell padding
 #' for the specified cells.
 #'
-#' @seealso set_left_padding
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
@@ -553,7 +551,7 @@ set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
 
 #' @template getset-cell
 #' @templateVar attr_name wrap
-#' @templateVar attr_desc Cell Wrapping
+#' @templateVar attr_desc Text wrapping
 #' @templateVar value_param_desc
 #' A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default.
 #' @examples
@@ -571,9 +569,9 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 
 #' @template getset-cell
 #' @templateVar attr_name escape_contents
-#' @templateVar attr_desc Whether to Escape Cell Contents
+#' @templateVar attr_desc Escape cell contents
 #' @templateVar value_param_desc
-#' A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTex escaped.
+#' A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
 #' @examples
 #' ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
 #' escape_contents(ht)[,2] <- FALSE
@@ -587,7 +585,7 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 
 #' @template getset-cell
 #' @templateVar attr_name na_string
-#' @templateVar attr_desc String to Use For NA
+#' @templateVar attr_desc NA string
 #' @templateVar value_param_desc
 #' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
 #' @template getset-example
@@ -603,7 +601,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 
 #' @template getset-cell
 #' @templateVar attr_name bold
-#' @templateVar attr_desc Bold or Italic Cell Text
+#' @templateVar attr_desc Cell text style
 #' @templateVar value_param_desc
 #' A logical vector or matrix
 #' @templateVar morealiases italic italic<- set_italic italic.huxtable italic<-.huxtable
@@ -631,7 +629,7 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 
 #' @template getset-cell
 #' @templateVar attr_name font_size
-#' @templateVar attr_desc Font Size
+#' @templateVar attr_desc Font size
 #' @templateVar value_param_desc
 #' A numeric vector. This sets the font size in points.
 #' @template getset-example
@@ -646,7 +644,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 
 #' @template getset-cell
 #' @templateVar attr_name rotation
-#' @templateVar attr_desc Cell Text Rotation
+#' @templateVar attr_desc Text rotation
 #' @templateVar value_param_desc
 #' A numeric vector. Clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
 #' @template getset-example
@@ -662,7 +660,7 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 
 #' @template getset-cell
 #' @templateVar attr_name number_format
-#' @templateVar attr_desc Number Format
+#' @templateVar attr_desc Number format
 #' @templateVar value_param_desc
 #' A vector or list which may be character, numeric or function. See below.
 #'
@@ -701,7 +699,7 @@ make_getter_setters('number_format', 'cell')
 
 #' @template getset-cell
 #' @templateVar attr_name pad_decimal
-#' @templateVar attr_desc Decimal Padding
+#' @templateVar attr_desc Decimal padding
 #' @templateVar value_param_desc A vector of single characters. \code{NA} is the default of no padding.
 #' @details
 #' LaTeX and HTML both have no simple way to align columns on decimal points, especially when cells
@@ -742,7 +740,7 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 
 #' @template getset-table
 #' @templateVar attr_name position
-#' @templateVar attr_desc Table Position
+#' @templateVar attr_desc Table position
 #' @templateVar value_param_desc
 #' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
 #' @template getset-example
@@ -753,7 +751,7 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 
 #' @template getset-table
 #' @templateVar attr_name caption_pos
-#' @templateVar attr_desc Caption Position
+#' @templateVar attr_desc Caption position
 #' @templateVar value_param_desc
 #' A length-one character vector which can be 'top', 'bottom' or \code{NA} for the default.
 #' @template getset-example
@@ -766,7 +764,7 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
 
 #' @template getset-table
 #' @templateVar attr_name width
-#' @templateVar attr_desc Table Width
+#' @templateVar attr_desc Table width
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default.
 #' @template getset-example
@@ -779,7 +777,7 @@ make_getter_setters('width', 'table')
 
 #' @template getset-table
 #' @templateVar attr_name height
-#' @templateVar attr_desc Table Height
+#' @templateVar attr_desc Table height
 #' @templateVar value_param_desc
 #' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.
 #' @template getset-example
@@ -805,7 +803,7 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 
 #' @template getset-table
 #' @templateVar attr_name tabular_environment
-#' @templateVar attr_desc Tabular Environment
+#' @templateVar attr_desc Tabular environment
 #' @templateVar value_param_desc
 #' A length-one character vector. Set to \code{NA} for the default, 'tabularx'.
 #' @template getset-example
@@ -818,7 +816,7 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 
 #' @template getset-table
 #' @templateVar attr_name label
-#' @templateVar attr_desc Table Label
+#' @templateVar attr_desc Table label
 #' @templateVar value_param_desc
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.
 #' @template getset-example

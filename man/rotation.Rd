@@ -6,7 +6,7 @@
 \alias{set_rotation}
 \alias{rotation.huxtable}
 \alias{rotation<-.huxtable}
-\title{Cell Text Rotation}
+\title{Text rotation}
 \usage{
 rotation(ht)
 rotation(ht) <- value
@@ -28,7 +28,7 @@ For \code{rotation}, the \code{rotation} attribute.
 For \code{set_rotation}, the \code{ht} object.
 }
 \description{
-Functions to get or set the cell text rotation property of huxtable table cells.
+Functions to get or set the text rotation property of huxtable table cells.
 }
 \details{
 You will probably need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly

@@ -3,7 +3,7 @@
 \name{cbind.huxtable}
 \alias{cbind.huxtable}
 \alias{rbind.huxtable}
-\title{Add Rows/Columns}
+\title{Combine rows or columns}
 \usage{
 \method{cbind}{huxtable}(..., deparse.level = 1, copy_cell_props = TRUE)
 
@@ -20,7 +20,7 @@
 A huxtable.
 }
 \description{
-Add Rows/Columns
+Combine rows or columns
 }
 \details{
 Table-level properties will be taken from the first argument which is a huxtable. So will

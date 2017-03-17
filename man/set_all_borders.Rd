@@ -2,7 +2,7 @@
 % Please edit documentation in R/attributes.R
 \name{set_all_borders}
 \alias{set_all_borders}
-\title{Set All Borders}
+\title{Set all borders}
 \usage{
 set_all_borders(ht, row, col, value, byrow = FALSE)
 }

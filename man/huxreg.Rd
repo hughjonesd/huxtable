@@ -2,7 +2,7 @@
 % Please edit documentation in R/huxreg.R
 \name{huxreg}
 \alias{huxreg}
-\title{Create a Huxtable to Display Model Output}
+\title{Create a huxtable to display model output}
 \usage{
 huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
   error_pos = c("below", "same", "right"), number_format = "\%.3f",
@@ -43,7 +43,7 @@ significance stars. Set to \code{NULL} for no footnote.}
 A huxtable object.
 }
 \description{
-Create a Huxtable to Display Model Output
+Create a huxtable to display model output
 }
 \details{
 Models must have a \code{\link[broom]{tidy}} method defined, which should return 'term', 'estimate', 'std.error',

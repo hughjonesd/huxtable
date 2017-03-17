@@ -6,7 +6,7 @@
 \alias{set_na_string}
 \alias{na_string.huxtable}
 \alias{na_string<-.huxtable}
-\title{String to Use For NA}
+\title{NA string}
 \usage{
 na_string(ht)
 na_string(ht) <- value
@@ -28,7 +28,7 @@ For \code{na_string}, the \code{na_string} attribute.
 For \code{set_na_string}, the \code{ht} object.
 }
 \description{
-Functions to get or set the string to use for na property of huxtable table cells.
+Functions to get or set the na string property of huxtable table cells.
 }
 \examples{
 

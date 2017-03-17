@@ -2,15 +2,18 @@
 % Please edit documentation in R/LaTeX.R
 \name{report_latex_dependencies}
 \alias{report_latex_dependencies}
-\title{Report LaTeX Dependencies}
+\title{Report LaTeX dependencies}
 \usage{
-report_latex_dependencies(quiet = FALSE)
+report_latex_dependencies(quiet = FALSE, as_string = FALSE)
 }
 \arguments{
 \item{quiet}{Suppress printing.}
+
+\item{as_string}{Return dependencies as a string.}
 }
 \value{
-A list of rmarkdown::latex_dependency objects, invisibly.
+If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;
+  otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 }
 \description{
 Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.

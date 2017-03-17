@@ -6,7 +6,7 @@
 \alias{set_font_size}
 \alias{font_size.huxtable}
 \alias{font_size<-.huxtable}
-\title{Font Size}
+\title{Font size}
 \usage{
 font_size(ht)
 font_size(ht) <- value

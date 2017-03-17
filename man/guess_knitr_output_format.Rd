@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{guess_knitr_output_format}
 \alias{guess_knitr_output_format}
-\title{Guess Knitr Output Format}
+\title{Guess knitr output format}
 \usage{
 guess_knitr_output_format()
 }
