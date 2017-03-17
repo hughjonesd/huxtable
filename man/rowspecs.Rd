@@ -17,8 +17,6 @@ But there are a few extra tricks:
 
 \itemize{
  \item Write \code{set_property(ht, x)} to set the property to \code{x} for all cells.
- \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, 1, 2:3, x)}
-   you can write \code{set_property(ht, 1, col2:col3, x)}.
  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
    for only odd ones.
@@ -45,10 +43,6 @@ Here is how the row and col arguments are parsed:
     subsetting with matrices - see \code{\link[base]{Extract}}.
   \item If there are four arguments:
     \itemize{
-      \item Names in \code{col} get replaced by column indices, as in \code{\link[base]{subset}} or
-        dplyr's \code{\link[dplyr]{select}}.
-      \item Expressions in \code{row} get evaluated in the context of the huxtable object,
-        as in \code{\link[base]{subset}} or in dplyr's \code{\link[dplyr]{filter}}.
       \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
         subsetting.
       \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,

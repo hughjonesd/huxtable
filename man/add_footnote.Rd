@@ -4,7 +4,7 @@
 \alias{add_footnote}
 \title{Add a row with a footnote}
 \usage{
-add_footnote(ht, text, italic = FALSE, ...)
+add_footnote(ht, text, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
