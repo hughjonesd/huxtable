@@ -151,6 +151,10 @@ test_that('all forms of set_all_* work as expected', {
   expect_equivalent(top_border(ht3), matrix(c(1, 0, 0, 1), 2, 2))
   ht4 <- set_all_borders(ht, 1, 2, 1)
   expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
+  rownum <- 1
+  colnum <- 2
+  ht5 <- set_all_borders(ht, rownum, colnum, 1)
+  expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
 })
 
 
