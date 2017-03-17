@@ -199,14 +199,14 @@ guess_knitr_output_format <- function() {
 #' ht <- hux(a = 1:5, b = 1:5, d = 1:5)
 #' ht <- add_footnote(ht, '* this is a footnote')
 #' ht
-add_footnote <- function(ht, text, italic = FALSE, ...) {
-  nr <- nrow(ht)
+add_footnote <- function(ht, text, ...) {
+  nr <- nrow(ht) + 1
   nc <- ncol(ht)
   ht <- rbind(ht, rep('', nc), copy_cell_props = FALSE)
   ht[nr, 1] <- text
   colspan(ht)[nr, 1] <- nc
   ht <- set_all_borders(ht, nr, 1, 0)
-  set_top_border(ht, nr, 1, 1)
+  top_border(ht)[nr, 1] <- 1
   wrap(ht)[nr, 1] <- TRUE
   if (! missing(...)) ht <- set_cell_properties(ht, nr, 1, ...)
 
