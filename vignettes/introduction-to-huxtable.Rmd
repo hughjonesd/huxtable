@@ -450,7 +450,6 @@ Huxtable comes with some predefined themes for formatting.
 
 ```{r}
 theme_striped(cars_mpg[14:20,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE)
-theme_article(att_hux)
 ```
 
 
