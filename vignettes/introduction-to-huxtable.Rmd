@@ -11,9 +11,12 @@ output:
       in_header: placeins-header.tex
     toc: true
     toc_depth: 2
-vignette: |
-  %\VignetteIndexEntry{Introduction to Huxtable}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
+vignette: >
+  %\VignetteIndexEntry{Introduction to Huxtable}  
+  %\VignetteEngine{knitr::rmarkdown}  
+  \usepackage[utf8]{inputenc}
 ---
+
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
 

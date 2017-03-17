@@ -2,11 +2,11 @@
 title: "Regression Tables with huxreg"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
-output:
-  html_document: null
-  pdf_document: null
+output: 
+  html_document: default
+  pdf_document: default
 vignette: >
-  %\VignetteIndexEntry{Regression Tables with Huxreg}  
+  %\VignetteIndexEntry{Regression Tables with huxreg}  
   %\VignetteEngine{knitr::rmarkdown}  
   \usepackage[utf8]{inputenc}
 ---
@@ -119,6 +119,7 @@ huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squa
   'P value' = 'p.value'))
 ```
 
+
 You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
 p values, using the `error_style` option:
 
@@ -127,6 +128,7 @@ huxreg(lm1, lm3, error_style = 'statistic')
 huxreg(lm1, lm3, error_style = 'pvalue')
 ```
 
+
 Or you can display confidence intervals using 'ci'. Use `ci_level` to set the confidence level for the interval:
 
 ```{r}
@@ -134,19 +136,21 @@ huxreg(lm1, lm3, error_style = 'ci') # default is .95
 huxreg(lm1, lm3, error_style = 'ci', ci_level = .99)
 ```
 
+
 If you choose more than one `error_style` option, the second one will be shown in square brackets:
 
 ```{r}
 huxreg(lm1, lm3, error_style = c('stderr', 'ci'))
 ```
 
+
 To change the footnote, use `note`. If `note` contains the string `"%stars%"` it will be replaced by a description of the
 significance stars used. If you don't want a footnote, just set `note = NULL`.
-
 
 ```{r}
 huxreg(lm1, lm3, note = 'Linear regressions on diamond price. %stars%.')
 ```
+
 
 To change number formatting, set the `number_format` parameter. This works the same as the `number_format` property
 for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be
@@ -156,6 +160,7 @@ taken as a format to the base R `sprintf` function; if it is a function, the fun
 ```{r}
 huxreg(lm1, lm3, number_format = 2)
 ```
+
 
 Lastly, if you want to bold all significant coefficients, set the parameter `bold_signif` to a maximum significance level:
 

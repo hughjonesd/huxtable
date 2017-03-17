@@ -12,7 +12,21 @@ for (f in list.files('vignettes')) {
 }
 
 file.remove(list.files('inst/doc', full.names = TRUE))
-devtools::build_vignettes()
+setwd('vignettes')
+for (f in list.files(pattern = '*.Rmd')) {
+  output_fs <- rmarkdown::render(f, output_format = 'all')
+
+  r_code_f <- purl(f)
+  for (output_f in c(f, r_code_f, output_fs)) {
+    if (file.copy(output_f, file.path('..', 'inst', 'doc'))) {
+      if (output_f != f) file.remove(output_f)
+    } else {
+      warning("Could not copy output file ", output_f, ' to inst/doc')
+    }
+  }
+}
+setwd('..')
+
 devtools::build()
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
       document = FALSE, check_version = TRUE)
