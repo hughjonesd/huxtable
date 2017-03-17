@@ -9,6 +9,8 @@
 * Exported function `guess_knitr_output_format`.
 * Ability to set border colors.
 * Prevent overlapping row/colspans.
+* Expanded introduction and new vignette for `huxreg`.
+* Numerous bugs have been fixed and replaced with new, more advanced bugs.
 
 ## Breaking changes
 
