@@ -404,7 +404,7 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
     call[[1]] <- as.symbol(set_b)
     call[[2]] <- quote(ht)
     #call$value <- value
-    ht <- eval(call)
+    ht <- eval(call, list(ht = ht), parent.frame())
   }
 
   ht
