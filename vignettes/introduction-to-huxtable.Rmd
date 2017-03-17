@@ -3,14 +3,16 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
+  html_document: 
+    toc: true
+    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
-  html_document: null
-vignette: >
-  %\VignetteIndexEntry{Introduction to Huxtable} 
-  %\VignetteEngine{knitr::rmarkdown} 
-  \usepackage[utf8]{inputenc}
+    toc: true
+    toc_depth: 2
+vignette: |
+  %\VignetteIndexEntry{Introduction to Huxtable}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
@@ -27,121 +29,318 @@ knitr::knit_hooks$set(
   }
 )
 
-# knitr::opts_chunk$set(results = 'asis')
+if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 
 ```
 
 
-```{r echo = FALSE}
+```{r, echo = FALSE}
 huxtable::hux_logo(latex = is_latex)
 ```
 
+
+```{r, eval = FALSE, echo = FALSE}
+# PLAN
+# Make single document work in notebook format (maybe with minimal changes)
+# Installation
+# Dplyr examples
+# Examples with where and friends
+# Different kinds of output
+# Cookbook?
+# Limitations
+
+```
+
+
+# Introduction
+
 ## About this document
 
-This is the introductory vignette for the R package 'huxtable'. A current version is available 
-on the web in [HTML](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or [PDF](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf) format. 
+This is the introductory vignette for the R package 'huxtable', version `r packageVersion('huxtable')`. A current
+version is available on the web in [HTML](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.html) or 
+[PDF](https://hughjonesd.github.io/huxtable/introduction-to-huxtable.pdf) format.
+
+## Huxtable
+
+Huxtable is a package for creating *text tables*. It is powerful, but easy to use. It is meant to be a
+replacement for packages like xtable, which is useful but not always very user-friendly. Huxtable's features
+include:
+
+* Export to LaTeX, HTML, Word and Markdown
+* Easy integration with knitr and rmarkdown documents
+* Multirow and multicolumn cells
+* Fine-grained control over cell background, spacing, alignment, size and borders
+* Control over text font, style, size, colour, alignment, number format and rotation
+* Table manipulation using standard R subsetting, or dplyr functions like `filter` and `select`
+* Easy conditional formatting based on table contents
+* Quick table themes
+* Automatic creation of regression output tables with the `huxreg` function
+
+We will cover all of these features below.
+
+## Installation
+
+If you haven't already installed huxtable, you can do so from the R command line:
+
+```{r, eval = FALSE}
+install.packages('huxtable')
+```
+
 
 ## Getting started
 
-Huxtable is a package for writing LaTeX and HTML tables. It is powerful, but easy to use. It is meant to be a
-replacement for packages like xtable, which is useful but not always very user-friendly.
+A huxtable is a way of representing a table of text data in R. You already know that R can represent a
+table of data in a data frame. For example, if `mydata` is a data frame, then `mydata[1, 2]` represents the
+the data in row 1, column 2, and `mydata$start_time` is all the data in the column called `start_time`.
 
-To create a table with huxtable, use the function `huxtable`, or `hux` for short.
+A huxtable is just a data frame with some extra properties. So, if `myhux` is a huxtable, then `myhux[1, 2]`
+represents the data in row 1 column 2, as before. But this cell will also have some other properties - for
+example, the font size of the text, or the colour of the cell border.
+
+To create a table with huxtable, use the function `huxtable`, or `hux` for short. This works very much like
+`data.frame`.
 
 ```{r}
 library(huxtable)
 ht <- hux(
-        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
-        Salary = c(50000, 50000, 40000),
+        Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
+        Salary       = c(50000, 50000, 40000),
         add_colnames = TRUE
       )
 ```
 
 
-Or, if you already have your data in a data frame, use `as_hux`.
+If you already have your data in a data frame, you can convert it to a huxtable with `as_hux`.
 
 ```{r}
 data(mtcars)
 car_ht <- as_hux(mtcars)
 ```
 
-Huxtables are simply data frames, along with some extra information on how to display them. If you look at them in R,
-they'll appear just like ordinary data frames. Notice that we've added the column names to the data frame itself.
-We're going to print them out, so it makes sense that they need to be part of the actual table.
+
+If you look at a huxtable in R, it will print out a simple representation of the data. Notice that we've added the
+column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table.
 
 ```{r, results = 'markup'}
-print(ht)
+ht
 ```
 
-To print them out using LaTeX or HTML, just call `print_latex` or `print_html`. In knitr documents, like this one,
+To print a huxtable out using LaTeX or HTML, just call `print_latex` or `print_html`. In knitr documents, like this one,
 you can simply evaluate the hux. It will know what format to print itself in.
 
 ```{r}
 ht
 ```
 
-The default output is a very plain table. To customize it, you can set various properties. Let's make our table headings bold, draw a line under the header row, and right-align the second column:
 
+# Changing the look and feel
+
+## Huxtable properties
+
+The default output is a very plain table. Let's make it a bit smarter. We'll make the table headings bold, draw a line under the header row, right-align the second column, and add some horizontal space to the cells. 
+
+To do this, we need to set cell level properties. You set properties by assigning to the property name, just as you assign `names(x) <- new_names` in base R. The following commands assign the value 10 to the `right_padding` and
+`left_padding` properties, for all cells in `ht`:
 
 ```{r}
+right_padding(ht) <- 10
+left_padding(ht)  <- 10
+```
 
-bold(ht)[1,]           <- TRUE
-bottom_border(ht)[1,]  <- TRUE
-align(ht)[,2]        <- 'right'
-right_padding(ht)      <- 10
-left_padding(ht)       <- 10
 
+To assign properties to just some cells, you use subsetting, just as in base R. So, to make the first row of the
+table **bold** and give it a bottom border, we do:
+
+```{r}
+bold(ht)[1,]          <- TRUE
+bottom_border(ht)[1,] <- 1
+```
+
+
+And to right-align the second column, we do:
+
+```{r}
+align(ht)[,2] <- 'right'
+```
+
+
+We can also specify a column by name:
+
+```{r}
+align(ht)[,'Salary'] <- 'right'
+```
+
+
+After these changes, our table looks smarter:
+
+```{r}
 ht
 ```
 
-You set properties by assigning to the property name, just as you assign `names(x) <- new_names` in base R.
 
-Some properties, like `bold` and `bottom_border`, are cell-level. You can set them for individual cells in your
-data. For example, the line `bold(ht)[1,] <- TRUE` in the code above sets the `bold` property for the first row
-of the huxtable. And `align(ht)[,2] <- 'right'` sets the alignment for the second column.
-
-In fact, `right_padding` and `left_padding` are also cell-level properties. But we set them for all cells at once. You can do that for any property - just do `property(ht) <- value`.
-
-By contrast, `caption` is a table-level property. It only takes one value, which sets a table caption.
+So far, all these properties have been set at cell level. Different cells can have different alignment, text formatting
+and so on. By contrast, `caption` is a table-level property. It only takes one value, which sets a table caption.
 
 ```{r}
 
 caption(ht) <- 'Employee table'
-
 ht
 
 ```
 
-See the help files for a list of all properties you can set. Most properties work the same for LaTeX and HTML,
-though there are some exceptions.
+
+As well as cell properties and table properties, there is also one row property, row heights, and one column
+property, column widths.
+
+The table below shows a complete list of properties. Most properties work the same for LaTeX and HTML, though there are
+some exceptions. 
+
+```{r, echo = FALSE}
+sides <- c('left_', 'right_', 'top_', 'bottom_')
+props <- list()
+props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'pad_decimal', 'escape_contents', 'numeric_format', 'rotation'))
+
+props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', paste0(sides, 'border'),
+      paste0(sides, 'border_color'), paste0(sides, 'padding')))
+props[['Row']]    <- 'row_height'
+props[['Column']] <- 'col_width'
+props[['Table']]  <- sort(c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label'))
+
+maxl <- max(sapply(props, length))
+props <- lapply(props, function(x) c(x, rep('', maxl - length(x))))
+
+ss_font <- if (guess_knitr_output_format() == 'latex') 'cmhv' else 'arial'
+
+prop_hux <- hux(as.data.frame(props))                     %>% 
+      add_colnames                                        %>% 
+      {foo <- .; foo[1,] <- gsub('_', ' ', foo[1,]); foo} %>% 
+      set_font(-1, every(), ss_font)                      %>% 
+      set_bold(1, every(), TRUE)                          %>% 
+      set_width(0.9)                                      %>% 
+      set_background_color(every(), evens(), grey(.9))    %>% 
+      set_left_border(every(), 1, 1)                      %>% 
+      set_right_border(every(), final(), 1)               %>% 
+      set_top_border(1, every(), 1)                       %>% 
+      set_bottom_border(1, every(), 1)                    %>% 
+      set_bottom_border(final(), every(), 1)              %>% 
+      set_top_padding(2)                                  %>% 
+      set_bottom_padding(4)                               %>% 
+      set_caption('Huxtable properties')                  %>% 
+      set_position('left') %>% 
+      set_col_width(c(.2, .25, .15, .15, .25))
+
+prop_hux
+```
+
 
 ## Pipe style syntax
 
-If you prefer to use the `magrittr` pipe operator (`%>%`), then you can use `set_property` functions:
-
+If you prefer to use the `magrittr` pipe operator (`%>%`), then you can use `set_*` functions. These have the same
+name as the property, with `set_` prepended. They return the modified huxtable, so you can chain them together like 
+this:
 
 ```{r}
 
-# First do library(magrittr) or library(dplyr):
-ht %>% 
+library(dplyr)
+hux(
+        Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
+        Salary       = c(50000, 50000, 40000),
+        add_colnames = TRUE
+      )                               %>% 
       set_bold(1, 1:2, TRUE)          %>% 
       set_bottom_border(1, 1:2, 1)    %>%
       set_align(-1, 2, 'right')       %>%
-      set_right_padding(1:4, 1:2, 10) %>%
-      set_left_padding(1:4, 1:2, 10)
+      set_right_padding(10)           %>%
+      set_left_padding(10)            %>% 
+      set_caption('Employee table')
   
 
 ```
 
-To see the current properties of a huxtable, just use the properties function without the left arrow:
+
+`set_*` functions for cell properties are called like this: `set_xxx(ht, row, col, value)` or like this: `set_xxx(ht,
+value)`. If you use the second form, then the value is set for all cells. `set_*` functions for table properties are
+always called like `set_xxx(ht, value)`. We'll learn more about this interface in a moment.
+
+There are also three useful convenience functions:
+
+* `set_all_borders` sets left, right, top and bottom borders for selected cells;
+* `set_all_border_colors` sets left, right, top and bottom border colors;
+* `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content and the border).
+
+## Getting properties
+
+To get the current properties of a huxtable, just use the properties function without the left arrow:
 
 ```{r, results = 'markup'}
 italic(ht)
 position(ht)
-bottom_border(ht)[1:2,] # first two rows
 ```
 
-## Number formatting
+
+As before, you can use subsetting to get particular rows or columns:
+
+```{r, results = 'markup'}
+bottom_border(ht)[1:2,]
+bold(ht)[,'Salary']
+```
+
+
+
+# Editing content
+
+## Standard subsetting
+
+You can subset, sort and generally data-wrangle a huxtable just like a normal data frame. Cell and 
+table properties will be carried over into subsets.
+
+```{r}
+# Select columns by name:
+cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')] 
+# Order by number of cylinders:
+cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
+
+cars_mpg <- cars_mpg                          %>% 
+      huxtable::add_rownames(colname = 'Car') %>% 
+      huxtable::add_colnames()
+
+cars_mpg[1:5,]
+```
+
+
+## Using dplyr with huxtable
+
+You can also use `dplyr` functions:
+
+
+```{r}
+car_ht <- car_ht                                          %>%
+      huxtable::add_rownames(colname = 'Car')             %>%
+      slice(1:10)                                         %>% 
+      select(Car, mpg, cyl, hp)                           %>% 
+      arrange(hp)                                         %>% 
+      filter(cyl > 4)                                     %>% 
+      rename(MPG = mpg, Cylinders = cyl, Horsepower = hp) %>% 
+      mutate(kml = MPG/2.82)                               
+
+
+car_ht <- car_ht                               %>% 
+      set_number_format(1:7, 'kml', 2)         %>% 
+      set_col_width(c(.35, .15, .15, .15, .2)) %>% 
+      set_width(.6)                            %>% 
+      huxtable::add_colnames() 
+
+car_ht
+```
+
+
+In general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
+
+
+# More formatting 
+
+
+## Number format
 
 You can change how huxtable formats numbers using `number_format`. Huxtable guesses whether your cell is a number
 based on its contents, not on the column type. Set `number_format` to a number of decimal places (for more advanced
@@ -157,25 +356,33 @@ to '.' (or whatever you use for a decimal point).
 
 ```{r}
 pointy_ht <- hux(c('Do not pad this.', 11.003, 300, 12.02, '12.1 **'))
+pointy_ht <- set_all_borders(pointy_ht, 1)
+width(pointy_ht) <- .2
+
 number_format(pointy_ht) <- 3
 pad_decimal(pointy_ht)[2:5] <- '.'
-align(pointy_ht)[2:5] <- 'right'
+align(pointy_ht) <- 'right'
 pointy_ht
 ```
 
 There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so `pad_decimal` works by right-padding cells with spaces. The output may look better if you use a fixed width font.
 
-## Column width and cell wrapping
 
-You can set column widths using the `col_width` property:
+## Width and cell wrapping
+
+You can set table widths using the `width` property, and column widths using the `col_width` property. If you use
+numbers for these, they will be interpreted as proportions of the table width (or for `width`, a proportion of the
+width of the surrounding text). If you use character vectors, they must be valid CSS or LaTeX widths. The only
+unit both systems have in common is `pt` for points. 
 
 ```{r}
-col_width(ht) <- c('30pt', '40pt')
+width(ht) <- 0.35
+col_width(ht) <- c(.7, .3)
 ht
 ```
 
-Column widths are a per-column property. For example, `ht` has two columns so I used two values for the column widths.
-The row heights can be set using `row_height`. 
+
+It is best to set table width explicitly, then set column widths as proportions.
 
 By default, if a cell contains long contents, it will be stretched. Use the `wrap` property to allow cell contents
 to wrap over multiple lines:
@@ -191,30 +398,23 @@ wrap(ht_wrapped) <- TRUE
 ht_wrapped
 ```
 
-## Subsetting a huxtable
 
-You can subset, sort and generally data-wrangle a huxtable just like a normal data frame. Cell and 
-table properties will be carried over into subsets.
+## Adding row and column names
+
+Just like data frames, huxtables can have row and column names. Often, we want to add these to the final table.
+You can do this using either the `add_colnames`/`add_rownames` arguments to `as_huxtable`, or the functions of the same
+name. (Be aware that as of March 2017, these conflict with some deprecated `dplyr` functions.)
 
 ```{r}
-
-
-cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')]
-cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
-
-cars_mpg <- cars_mpg %>% 
+car_ht[1:4, 1:4]                                   %>% 
       huxtable::add_rownames(colname = 'Car name') %>% 
       huxtable::add_colnames()
-
-cars_mpg[1:5,]
 ```
 
-However, in general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder before adding column names to the data frame itself.
 
 ## Column and row spans
 
-As well as changing styling, you can let cells span multiple rows or columns using the `colspan` and `rowspan`
-properties.
+Huxtable cells can span multiple rows or columns, using the `colspan` and `rowspan` properties.
 
 ```{r}
 cars_mpg <- cbind(car_type = rep("", nrow(cars_mpg)), cars_mpg)
@@ -231,8 +431,8 @@ align(cars_mpg)[1, 2] <- 'center'
 
 # a little more formatting:
 
-cars_mpg <- set_all_padding(cars_mpg, , , 2)
-cars_mpg <- set_all_borders(cars_mpg, , , 1)
+cars_mpg <- set_all_padding(cars_mpg, 2)
+cars_mpg <- set_all_borders(cars_mpg, 1)
 valign(cars_mpg)[1,] <- 'top'
 col_width(cars_mpg) <- c(.4 , .3 , .1, .1, .1)
 
@@ -243,22 +443,129 @@ cars_mpg
 
 ## Quick themes
 
-Huxtable comes with predefined themes that change various parts of formatting:
+Huxtable comes with some predefined themes for formatting.
 
 ```{r}
 theme_striped(cars_mpg[14:20,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE)
+theme_article(att_hux)
 ```
 
 
-## Printing on screen
+# Selecting rows, columns and cells
+
+
+## Row and column functions
+
+If you use the `set_*` style functions, huxtable has some convenience functions for selecting rows and columns.
+
+To select all rows or all columns, use `every()` or `every(1)` in the row or column specification. (Mnemonic: set *every
+one* of the rows or columns.) To select just even-numbered rows or columns, use `evens()` or `odds()`. To select the
+last `n` rows or columns, use `final(n)`.
+
+With these functions it is easy to add striped backgrounds or outer borders to tables:
+
+```{r}
+car_ht %>% 
+      set_left_border(every(), 1, 1)           %>%    # left outer border   - every row, first column
+      set_right_border(every(), final(1), 1)   %>%    # right outer border  - every row, last column
+      set_top_border(1, every(), 1)            %>%    # top outer border    - first row, every column
+      set_bottom_border(final(1), every(1), 1) %>%    # bottom outer border - last row, every column
+      set_background_color(evens(), every(), 'wheat') # horizontal stripe   - even rows, all columns
+```
+
+
+Of course you could also just do `1:nrow(car_ht)`, but, in the middle of a dplyr pipe, you may not know exactly
+how many rows or columns you have. Also, these functions are easy to understand, whereas `seq(2, ncol(ht), 2)` is
+a bit complex.
+
+
+## Conditional formatting
+
+You may want to apply conditional formatting to cells, based on their contents. Suppose we want to display a table of correlations, and to highlight ones which are significant. We can use the `where()` function to select those cells.
+
+```{r}
+suppressPackageStartupMessages(library(Hmisc))
+data(attitude)
+att_corr <- rcorr(as.matrix(attitude))
+
+att_hux <- as_hux(att_corr$r)                                           %>% 
+      set_background_color(where(att_corr$P < 0.05), 'yellow')          %>% 
+      set_background_color(where(att_corr$P < 0.01), 'orange')          %>% 
+      set_text_color(where(row(att_corr$r) == col(att_corr$r)), 'grey') 
+
+
+att_hux <- att_hux                                                      %>% 
+      huxtable::add_rownames()                                          %>% 
+      huxtable::add_colnames()                                          %>%
+      set_caption('Correlations in attitudes among 30 departments')     %>% 
+      set_bold(1, every(), TRUE)                                        %>% 
+      set_bold(every(), 1, TRUE)                                        %>% 
+      set_all_borders(1)                                                %>% 
+      set_width(.8)
+
+att_hux
+
+```
+
+We have now seen three ways to call `set_*` functions in huxtable:
+
+* With four arguments, like `set_property(hux_object, rows, cols, value)`;
+* With two arguments, like `set_property(hux_object, value)` to set a property everywhere;
+* With three arguments, like `set_property(hux_object, where(condition), value)` to set a property for specific cells.
+
+The second argument of the three-argument version must return a 2-column matrix. Each row of the matrix gives one cell.
+`where()` does this for you: it takes a logical matrix argument and returns the rows and columns where a condition is
+`TRUE`.
+
+
+
+# Creating a regression table
+
+A common task for scientists is to create a table of regressions. The function `huxreg` does this for you. Here's a quick example:
+
+```{r}
+data(diamonds, package = 'ggplot2')
+
+lm1 <- lm(price ~ carat, diamonds)
+lm2 <- lm(price ~ depth, diamonds)
+lm3 <- lm(price ~ carat + depth, diamonds)
+
+huxreg(lm1, lm2, lm3)
+```
+
+For more information see the `huxreg` vignette, available online in
+[HTML](https://hughjonesd.github.io/huxtable/huxreg.html) or [PDF](https://hughjonesd.github.io/huxtable/huxreg.pdf) or
+in R via `vignette(huxreg)`.
+
+# Output to different formats
+
+If you use knitr and rmarkdown in RStudio, huxtable objects should automatically display in the appropriate format 
+(HTML or LaTeX). You need to have some LaTeX packages installed for huxtable to work. To find out what these are,
+you can call `report_latex_dependencies()`. This will print out and/or return a set of `usepackage{...}` statements.
+If you use Sweave or knitr without rmarkdown, you can use this function in your LaTeX preamble to load the packages
+you need.
+
+rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic,
+a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the 
+[ReporteRs package](https://cran.r-project.org/package=ReporteRs) from CRAN. You can then convert your huxtable objects
+to `FlexTable` objects and include them in Word documents. Almost all formatting should work. See the `ReporteRs` documentation and `?as_FlexTable` for more details.
+
+Sometimes you may want to select how huxtable objects are printed by default. For example, in an RStudio notebook
+(a .Rmd document with `output_format = html_notebook`), huxtable can't automatically work out what format to use, as of
+the time of writing. You can set it manually using `options(huxtable.print = print_notebook)` which prints out
+HTML in an appropriate format. 
 
 Lastly, you can print a huxtable on screen using `print_screen`. Borders, column and row spans and cell alignment are shown:
 
 ```{r, results = 'markup'}
-
 print_screen(ht)
 ```
 
-## For more information
 
-See the website at https://hughjonesd.github.io/huxtable or the github at https://github.com/hughjonesd/huxtable.
+If you need to output to another format, file an [issue request](https://github.com/hughjonesd/huxtable) on Github. 
+
+
+# End matter
+
+For more information, see the [website](https://hughjonesd.github.io/huxtable) or 
+[github](https://github.com/hughjonesd/huxtable).
