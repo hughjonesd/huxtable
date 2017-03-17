@@ -63,7 +63,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #   # if the sum of widths of the cols, + 3 per internal border, is less, increase it
 #   # if we hit max_width, exit the loop
 #   dcnw <- dc[! dc$wrap,]
-#   for (j in seq_along(nrow(dcnw))) {
+#   for (j in seq_len(nrow(dcnw))) {
 #     dcr <- dcnw[j,]
 #     cell_width <- nchar(dcr$contents, type = 'width')
 #     col_width <- sum(scr_w[dcr$display_col:dcr$end_col]) + 3 * (dcr$colspan - 1)
@@ -86,7 +86,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #     border_segs <- rep(FALSE, ncol(ht))
 #     corner_segs <- rep(FALSE, ncol(ht) + 1)
 #     side_segs   <- rep(FALSE, ncol(ht) + 1)
-#     for (j in seq_along(nrow(dcr))) {
+#     for (j in seq_len(nrow(dcr))) {
 #       if (dcr$bottom_border[j] > 0) border_segs[dcr$display_col[j]:dcr$end_col[j]] <- TRUE
 #       if (dcr$left_border[j] > 0) corner_segs[dcr$display_col[j]] <- TRUE
 #       if (dcr$right_border[j] > 0) corner_segs[dcr$end_col[j]] <- TRUE

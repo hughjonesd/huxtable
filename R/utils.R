@@ -35,7 +35,7 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
 #   # borders[y, x] gives the border above row y and left of col x
 #   dcells <- display_cells(ht, all = FALSE)
 #   dcells <- dcells[!dcells$shadowed,]
-#   for (i in seq_along(nrow(dcells))) {
+#   for (i in seq_len(nrow(dcells))) {
 #     dcr <- dcells[i,]
 #     pos <- list(
 #           left   = list(dcr$display_row:dcr$end_row, dcr$display_col),
