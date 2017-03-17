@@ -29,5 +29,5 @@ ht <- huxtable(a = 1:3, b = 1:3)
 ht <- set_all_borders(ht, 1:3, 1:2, 1)
 }
 \seealso{
-left_border
+\code{\link{left_border}}
 }

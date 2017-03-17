@@ -80,5 +80,5 @@ ht5 <- set_left_border_color(ht, where(ht == 1), 'red')
 left_border_color(ht5)
 }
 \seealso{
-set_all_border_colors
+\code{\link{set_all_border_colors}}
 }

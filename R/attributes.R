@@ -208,6 +208,7 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
 
+
 #' @template getset-rowcol
 #' @templateVar attr_name col_width
 #' @templateVar rowcol col
@@ -817,7 +818,7 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val 'longtable'
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
-#' @export tabular_environment tabular_environment<- set_tabular_environment
+#' @export tabular_environment tabular_environment<- set_tabular_environment tabular_environment.huxtable tabular_environment<-.huxtable
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 

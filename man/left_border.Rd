@@ -80,5 +80,5 @@ ht5 <- set_left_border(ht, where(ht == 1), 1)
 left_border(ht5)
 }
 \seealso{
-set_all_borders
+\code{\link{set_all_borders}}
 }
