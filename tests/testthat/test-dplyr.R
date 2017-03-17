@@ -47,3 +47,12 @@ test_that('mutate and transmute work', {
   expect_equivalent(bold(ht4)[,1], c(FALSE, FALSE, FALSE))
   expect_equivalent(bold(ht4)[,2], c(TRUE, FALSE, FALSE))
 })
+
+
+test_that('set_all_* works with magrittr pipe', {
+  ht_orig <- hux(a = 1:2, b = 1:2)
+  expect_silent(ht2 <- ht_orig %>% set_font('times'))
+  expect_silent(ht3 <- ht_orig %>% set_all_borders(1))
+  expect_equivalent(font(ht2), matrix('times', 2, 2))
+  expect_equivalent(top_border(ht3), matrix(1, 2, 2))
+})

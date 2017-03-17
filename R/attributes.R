@@ -364,7 +364,9 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
+  force(ht)
   mycall <- sys.call()
+  mycall[[2]] <- as.name('ht')
   for (side in c('top', 'bottom', 'left', 'right')) {
     fn <- as.symbol(paste0('set_', side, '_border'))
     mycall[[1]] <- fn
@@ -449,7 +451,9 @@ make_getter_setters('bottom_border_color', 'cell')
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
+  force(ht)
   mycall <- sys.call()
+  mycall[[2]] <- as.name('ht')
   for (side in c('top', 'bottom', 'left', 'right')) {
     fn <- as.symbol(paste0('set_', side, '_border_color'))
     mycall[[1]] <- fn
@@ -534,7 +538,9 @@ NULL
 #' right_padding(ht)
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
+  force(ht)
   mycall <- sys.call()
+  mycall[[2]] <- as.name('ht')
   for (side in c('top', 'bottom', 'left', 'right')) {
     fn <- as.symbol(paste0('set_', side, '_padding'))
     mycall[[1]] <- fn
