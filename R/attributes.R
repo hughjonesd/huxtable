@@ -171,14 +171,16 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #' font(ht)
 #' font_size(ht)
 set_cell_properties <- function (ht, row, col, ...) {
+
   props <- list(...)
   if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
         huxtable_cell_attrs), collapse = ', '))
-  for (pn in names(props)) {
-    pfun <- as.name(pn)
-    eval(bquote(
-        .(pfun)(ht)[row, col] <- props[[pn]]
-    ))
+  call <- match.call(expand.dots = FALSE)
+  call[['...']] <- NULL
+  for (prop_name in names(props)) {
+    call[[1]] <- as.symbol(paste0('set_', prop_name))
+    call$value <- props[[prop_name]]
+    ht <- eval(call, list(ht = ht), parent.frame())
   }
 
   ht
@@ -397,13 +399,28 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
-  force(ht)
-  mycall <- sys.call()
-  mycall[[2]] <- as.name('ht')
-  for (side in c('top', 'bottom', 'left', 'right')) {
-    fn <- as.symbol(paste0('set_', side, '_border'))
-    mycall[[1]] <- fn
-    ht <- eval(mycall)
+  call <- sys.call()
+  for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border')) {
+    call[[1]] <- as.symbol(set_b)
+    call[[2]] <- quote(ht)
+    #call$value <- value
+    ht <- eval(call)
+  }
+
+  ht
+}
+
+
+set_cell_properties <- function (ht, row, col, ...) {
+  props <- list(...)
+  if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
+    huxtable_cell_attrs), collapse = ', '))
+  call <- match.call(expand.dots = FALSE)
+  call[['...']] <- NULL
+  for (prop_name in names(props)) {
+    call[[1]] <- as.symbol(paste0('set_', prop_name))
+    call$value <- props[[prop_name]]
+    ht <- eval(call, list(ht = ht), parent.frame())
   }
 
   ht

@@ -46,9 +46,13 @@ test_that('Assignment to attributes preserves colnames', {
 
 test_that('Can use set_cell_properties', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
-  ht <- set_cell_properties(ht, 1, 1, font = 'times', align = 'right')
-  expect_equivalent(font(ht)[1, 1], 'times')
-  expect_equivalent(align(ht)[1, 1], 'right')
+  ht2 <- set_cell_properties(ht, 1, 1, font = 'times', align = 'right')
+  expect_equivalent(font(ht2)[1, 1], 'times')
+  expect_equivalent(align(ht2)[1, 1], 'right')
+  r <- 2
+  c <- 1
+  ht3 <- set_cell_properties(ht, r, c, bold = TRUE)
+  expect_equivalent(bold(ht3)[2,1], TRUE)
 })
 
 test_that('set_cell_properties fails with bad arguments', {
