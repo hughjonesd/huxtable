@@ -4,7 +4,7 @@
 \alias{every}
 \alias{evens}
 \alias{odds}
-\title{Return Every n row or column numbers}
+\title{Return every n row or column numbers}
 \usage{
 every(n = 1, from = n)
 
