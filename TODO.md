@@ -12,7 +12,6 @@ TODO
 ====
 * smarter website
   - multiple examples
-* simple `add_footnote` method?
 * `set_outer_borders` ?
 * Use strwrap in to_screen (and don't count wrap cells for width)
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
