@@ -18,11 +18,7 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * more advanced positioning (floats?)
   - LaTeX: float string
-* Better, longer documentation
-  - installation
-  - Section on rowspecs
-  - Use dplyr more, it's precompiled
-  - List of all possible attributes
+
   
 PUT OFF
 =======
