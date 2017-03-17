@@ -314,7 +314,7 @@ make_getter_setters('text_color', 'cell')
 #' @templateVar attr_desc Borders
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
-#' @seealso set_all_borders
+#' @seealso \code{\link{set_all_borders}}
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
@@ -367,7 +367,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @return The modified huxtable.
 #' @export
 #'
-#' @seealso left_border
+#' @seealso \code{\link{left_border}}
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
@@ -403,7 +403,7 @@ get_all_borders <- function(ht, row, col) {
 #' @template getset-example
 #' @templateVar attr_val 'red'
 #' @export left_border_color left_border_color<- set_left_border_color left_border_color.huxtable left_border_color<-.huxtable
-#' @seealso set_all_border_colors
+#' @seealso \code{\link{set_all_border_colors}}
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'blue'
 NULL
@@ -451,7 +451,7 @@ make_getter_setters('bottom_border_color', 'cell')
 #' @inheritParams left_border_color
 #'
 #' @return The modified huxtable.
-#' @seealso left_border_color
+#' @seealso \code{\link{left_border_color}}
 #'
 #' @export
 #'
@@ -764,7 +764,7 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' A length-one character vector which can be 'top', 'bottom' or \code{NA} for the default.
 #' @template getset-example
 #' @templateVar attr_val 'top'
-#' @export tabular_environment tabular_environment<- set_tabular_environment tabular_environment.huxtable tabular_environment<-.huxtable
+#' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable
 #' @seealso \code{\link{caption}}
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
@@ -817,9 +817,10 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val 'longtable'
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
-#' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable
+#' @export tabular_environment tabular_environment<- set_tabular_environment
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
+
 
 
 #' @template getset-table
