@@ -318,7 +318,7 @@ build_clines_for_row <- function(ht, row) {
     next_top[dcol:end_col] <- h_border(ht, drow, dcol, 'top')
   }
   borders <- this_bottom
-  borders[borders == ''] <- next_top
+  borders[borders == ''] <- next_top[borders == '']
 
   if (any(borders != '')) {
     hhlinechars <- ifelse(borders != '', borders, blanks)
