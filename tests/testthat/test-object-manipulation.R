@@ -55,5 +55,14 @@ test_that('add_colnames works with as_hux for matrices', {
 })
 
 
+test_that('add_footnote works', {
+  ht_orig <- hux(a = 1:2, b = 1:2)
+  ht_orig <- add_footnote(ht_orig, 'Some footnote text', italic = TRUE)
+  expect_equivalent(nrow(ht_orig), 3)
+  expect_equivalent(colspan(ht_orig)[3,1], ncol(ht_orig))
+  expect_true(italic(ht_orig)[3,1])
+
+})
+
 
 
