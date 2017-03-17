@@ -94,8 +94,6 @@ final <- function(n = 1) {
 #'
 #'\itemize{
 #'  \item Write \code{set_property(ht, x)} to set the property to \code{x} for all cells.
-#'  \item In \code{col} you can use column names in ranges, so instead of \code{set_property(ht, 1, 2:3, x)}
-#'    you can write \code{set_property(ht, 1, col2:col3, x)}.
 #'  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
 #'  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
 #'    for only odd ones.
@@ -121,10 +119,6 @@ final <- function(n = 1) {
 #'     subsetting with matrices - see \code{\link[base]{Extract}}.
 #'   \item If there are four arguments:
 #'     \itemize{
-#'       \item Names in \code{col} get replaced by column indices, as in \code{\link[base]{subset}} or
-#'         dplyr's \code{\link[dplyr]{select}}.
-#'       \item Expressions in \code{row} get evaluated in the context of the huxtable object,
-#'         as in \code{\link[base]{subset}} or in dplyr's \code{\link[dplyr]{filter}}.
 #'       \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
 #'         subsetting.
 #'       \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,
@@ -192,14 +186,14 @@ get_rc_spec <- function (ht, obj, dimno) {
   ndim <- dim(ht)[dimno]
   if (missing(obj)) return(seq_len(ndim))
 
-  if (dimno == 1) {
-    obj <- eval(lazyeval::expr_find(obj), ht, parent.frame())
-    if (is.logical(obj)) obj <- obj & ! is.na(obj)
-  } else {
-    nl <- as.list(seq_len(ncol(ht)))
-    names(nl) <- colnames(ht)
-    obj <- eval(lazyeval::expr_find(obj), nl, parent.frame())
-  }
+  # if (dimno == 1) {
+  #   obj <- eval(lazyeval::expr_find(obj), ht, parent.frame())
+  #   if (is.logical(obj)) obj <- obj & ! is.na(obj)
+  # } else {
+  #   nl <- as.list(seq_len(ncol(ht)))
+  #   names(nl) <- colnames(ht)
+  #   obj <- eval(lazyeval::expr_find(obj), nl, parent.frame())
+  # }
 
   if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
 }

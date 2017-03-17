@@ -34,7 +34,35 @@ test_that('every(), evens and odds work as expected', {
 
 })
 
-test_that('set_properties works with cell functions', {
+
+test_that('Can use set_cell_properties', {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
+  ht2 <- set_cell_properties(ht, 1, 1, font = 'times', align = 'right')
+  expect_equivalent(font(ht2)[1, 1], 'times')
+  expect_equivalent(align(ht2)[1, 1], 'right')
+  r <- 2
+  c <- 1
+  ht3 <- set_cell_properties(ht, r, c, bold = TRUE)
+  expect_equivalent(bold(ht3)[2,1], TRUE)
+
+})
+
+
+test_that('set_cell_properties fails with bad arguments', {
+  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
+  expect_error(ht <- set_cell_properties(ht, 1, 1, bad = 'no!'))
+})
+
+
+test_that('set_* works with variables as rows/cols', {
+  ht <- hux(a = 1:2, b = 1:2)
+  rownum <- 2
+  colnum <- 1
+  ht2 <- set_bold(ht, rownum, colnum, TRUE)
+  expect_equivalent(bold(ht2), matrix(c(FALSE, TRUE, FALSE, FALSE), 2, 2))
+})
+
+test_that('set_* works with cell functions', {
   ht <- hux(a = 1:4, b = 1:4)
   ht <- set_font(ht, evens(), 1:2, 'times')
   ht <- set_font(ht, odds(), 1:2, 'palatino')
@@ -49,7 +77,7 @@ test_that('set_properties works with cell functions', {
 })
 
 
-test_that('set_properties works with row and column functions', {
+test_that('set_* works with row and column functions', {
   ht <- hux(a = 1:4, b = 1:4)
   ht <- set_col_width(ht, evens(), '20pt')
   ht <- set_col_width(ht, odds(), '40pt')
@@ -59,13 +87,15 @@ test_that('set_properties works with row and column functions', {
   expect_equivalent(row_height(ht), rep(c('30pt', '15pt'), 2))
 })
 
-test_that('set_properties works with column ranges', {
+test_that('set_* works with column ranges', {
+  skip('Feature postponed until I understand deep magic')
   ht <- hux(a = 1:4, b = 1:4, c = 1:4, d = 1:4)
   ht <- set_font(ht, every(1), b:d, 'times')
   expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4 , 4, byrow = TRUE))
 })
 
-test_that('set_properties works with expressions in ht context', {
+test_that('set_* works with expressions in ht context', {
+  skip('Feature postponed until I understand deep magic')
   ht <- hux(a = 1:4, b = 1:4)
   ht <- set_font(ht, a >= 2 & b <= 3, 1:2, 'times')
   expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4 , 2))
@@ -121,10 +151,6 @@ test_that('all forms of set_all_* work as expected', {
   expect_equivalent(top_border(ht3), matrix(c(1, 0, 0, 1), 2, 2))
   ht4 <- set_all_borders(ht, 1, 2, 1)
   expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
-  ht5 <- set_all_borders(ht, 1, a:b, 1)
-  expect_equivalent(top_border(ht5), matrix(c(1, 0, 1, 0), 2, 2))
-  ht6 <- set_all_borders(ht, a == 0, a:b, 1)
-  expect_equivalent(top_border(ht6), matrix(c(0, 1, 0, 1), 2, 2))
 })
 
 

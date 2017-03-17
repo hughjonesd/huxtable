@@ -491,8 +491,8 @@ data(attitude)
 att_corr <- corr.test(as.matrix(attitude))
 
 att_hux <- as_hux(att_corr$r)                                           %>% 
-      set_background_color(where(att_corr$p < 0.05), 'yellow')          %>% 
-      set_background_color(where(att_corr$p < 0.01), 'orange')          %>% 
+      set_background_color(where(att_corr$p < 0.05), 'yellow')          %>% # selects cells with p < 0.05
+      set_background_color(where(att_corr$p < 0.01), 'orange')          %>% # selects cells with p < 0.01
       set_text_color(where(row(att_corr$r) == col(att_corr$r)), 'grey') 
 
 
@@ -518,6 +518,22 @@ We have now seen three ways to call `set_*` functions in huxtable:
 The second argument of the three-argument version must return a 2-column matrix. Each row of the matrix gives one cell.
 `where()` does this for you: it takes a logical matrix argument and returns the rows and columns where a condition is
 `TRUE`.
+
+`set_*` functions have one more optional argument, the `byrow` argument, which is `FALSE` by default. Use this when you
+are setting a pattern of property values for many cells and want to specify a pattern by row:
+
+```{r}
+
+color_demo <- matrix('text', 7, 7)
+rainbow <- c('red', 'orange', 'yellow', 'green', 'blue', 'turquoise', 'violet')
+color_demo <- as_hux(color_demo)                  %>% 
+      set_text_color(rainbow)                     %>% # text in columns
+      set_background_color(rainbow, byrow = TRUE) %>% # background color in rows
+      set_all_borders(1)                          %>% 
+      set_all_border_colors('white')
+color_demo
+
+```
 
 
 
