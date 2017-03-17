@@ -47,6 +47,13 @@ test_that('Column names are not uglified', {
   expect_match(to_screen(ht), 'A long column name', fixed = TRUE, all = FALSE)
 })
 
+test_that('add_colnames works with as_hux for matrices', {
+  mat <- matrix(1:4, 2, 2, dimnames = list(letters[1:2], LETTERS[1:2]))
+  ht <- as_hux(mat, add_colnames = TRUE, add_rownames = TRUE)
+  expect_equivalent(ht[1, 2:3], colnames(mat))
+  expect_equivalent(ht$rownames[2:3], rownames(mat))
+})
+
 
 
 
