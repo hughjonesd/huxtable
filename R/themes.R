@@ -26,7 +26,7 @@ NULL
 
 #' @export
 #' @rdname themes
-theme_minimal <- function (ht, header_row = TRUE, header_col = TRUE) {
+theme_basic <- function (ht, header_row = TRUE, header_col = TRUE) {
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
   if (header_row) bottom_border(ht)[1,] <- 1
   if (header_col) right_border(ht)[,1] <- 1

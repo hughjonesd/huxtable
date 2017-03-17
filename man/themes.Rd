@@ -2,12 +2,12 @@
 % Please edit documentation in R/themes.R
 \name{themes}
 \alias{themes}
-\alias{theme_minimal}
+\alias{theme_basic}
 \alias{theme_striped}
 \alias{theme_article}
-\title{Theme a Huxtable}
+\title{Theme a huxtable}
 \usage{
-theme_minimal(ht, header_row = TRUE, header_col = TRUE)
+theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
 theme_striped(ht, stripe = grey(0.9), header_row = TRUE,
   header_col = TRUE)
