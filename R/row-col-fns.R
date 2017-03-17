@@ -133,7 +133,7 @@ final <- function(n = 1) {
 #'
 #' @examples
 #' ht <- huxtable(a = 1:5, b = 5:1)
-#' ht <- set_font(ht, a >= 2 & b >= 2, a:b, 'times')
+#' ht <- set_font(ht, 2:4, 1:2, 'times')
 #' font(ht)
 #' ht <- set_font(ht, where(ht == 1), 'palatino')
 #' font(ht)
