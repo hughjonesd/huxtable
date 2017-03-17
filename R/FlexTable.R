@@ -123,7 +123,6 @@ format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
           padding.top    = pad['t'],
           padding.right  = pad['r'],
           border.style   = 'solid',
-          border.color   = 'black',
           border.bottom.width = bottom_border(ht)[drow, dcol],
           border.left.width   = left_border(ht)[drow, dcol],
           border.top.width    = top_border(ht)[drow, dcol],
@@ -131,7 +130,10 @@ format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
           vertical.align      = valign(ht)[drow, dcol]
   )
   if (! is.na(bgc <- background_color(ht)[drow, dcol])) cell_props$background.color <- bgc
-
+  bcolors <- get_all_border_colors(ht, drow, dcol)
+  for (side in c('bottom', 'left', 'top', 'right')) if (! is.na(bcolors[[side]])) {
+    cell_props[[paste0('border.', side, '.color')]] <- bcolors[[side]]
+  }
   # both this and the setHeaderRow call in the parent are necessary:
   if (! is.na(rot <- get_text_dir(ht, drow))) {
     cell_props$text.direction <- rot

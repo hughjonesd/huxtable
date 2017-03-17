@@ -26,6 +26,11 @@ left_border(ht)[1,1]  <- 1
 right_border(ht)[2,2] <- 1
 doc %<>% show_add(ht, 'Borders: second top should be thicker')
 
+ht <- set_all_border_colors(ht, 1:2, 1, 'blue')
+ht <- set_all_border_colors(ht, 2:3, 2, 'red')
+doc %<>% show_add(ht, 'Border colors: left/top blue, bottom/right red')
+
+
 top_padding(ht)[1,]     <- 10
 left_padding(ht)[2, ]   <- 10
 right_padding(ht)[2, 2] <- 10
