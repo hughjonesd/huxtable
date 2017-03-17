@@ -486,13 +486,13 @@ a bit complex.
 You may want to apply conditional formatting to cells, based on their contents. Suppose we want to display a table of correlations, and to highlight ones which are significant. We can use the `where()` function to select those cells.
 
 ```{r}
-suppressPackageStartupMessages(library(Hmisc))
+library(psych)
 data(attitude)
-att_corr <- rcorr(as.matrix(attitude))
+att_corr <- corr.test(as.matrix(attitude))
 
 att_hux <- as_hux(att_corr$r)                                           %>% 
-      set_background_color(where(att_corr$P < 0.05), 'yellow')          %>% 
-      set_background_color(where(att_corr$P < 0.01), 'orange')          %>% 
+      set_background_color(where(att_corr$p < 0.05), 'yellow')          %>% 
+      set_background_color(where(att_corr$p < 0.01), 'orange')          %>% 
       set_text_color(where(row(att_corr$r) == col(att_corr$r)), 'grey') 
 
 
