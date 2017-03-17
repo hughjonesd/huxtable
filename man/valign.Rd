@@ -6,7 +6,7 @@
 \alias{set_valign}
 \alias{valign.huxtable}
 \alias{valign<-.huxtable}
-\title{Vertical Alignment}
+\title{Vertical alignment}
 \usage{
 valign(ht)
 valign(ht) <- value
