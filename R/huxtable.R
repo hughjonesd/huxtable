@@ -448,7 +448,7 @@ slice_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- tibble::rownames_to_column(.data, 'slice.huxtable.rownames')
   result <- NextMethod()
-  ht[na.omit(match(.data$slice.huxtable.rownames, result$slice.huxtable.rownames)),]
+  ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)),]
 }
 
 
