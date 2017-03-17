@@ -106,6 +106,10 @@ test_that('set_* works when row and col are missing', {
   expect_equivalent(font(ht4), matrix(c('times', 'times', 'arial', 'arial'), 2, 2))
   ht5 <- set_font(ht, c('times', 'arial'), byrow = TRUE)
   expect_equivalent(font(ht5), matrix(c('times', 'times', 'arial', 'arial'), 2, 2))
+  ht6 <- set_col_width(ht, c(.6, .4))
+  expect_equivalent(col_width(ht6), c(.6, .4))
+  ht7 <- set_row_height(ht, c(.6, .4))
+  expect_equivalent(row_height(ht7), c(.6, .4))
 })
 
 

@@ -119,6 +119,10 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
         )),
         row = eval(bquote(
           function(ht, row, value) {
+            if (nargs() == 2) {
+              if (missing(value)) value <- row
+              row <- seq_len(nrow(ht))
+            }
             row <- get_rc_spec(ht, row, 1)
             .(as.name(attr_name))(ht)[row] <- value
             ht
@@ -126,6 +130,10 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
         )),
         col = eval(bquote(
           function(ht, col, value) {
+            if (nargs() == 2) {
+              if (missing(value)) value <- col
+              col <- seq_len(ncol(ht))
+            }
             col <- get_rc_spec(ht, col, 2)
             .(as.name(attr_name))(ht)[col] <- value
             ht
