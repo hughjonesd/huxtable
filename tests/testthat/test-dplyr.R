@@ -18,17 +18,17 @@ test_that('select and rename work', {
 })
 
 test_that('slice, filter and arrange work', {
-  ht <- hux(a = 1:3, b = 3:1)
-  row_height(ht) <- c(.7,.2, .1)
+  ht <- hux(a = 1:4, b = c(1,3,4,2))
+  row_height(ht) <- c(.4,.2, .1, .3)
 
   ht2 <- dplyr::slice(ht, 1:2)
   expect_identical(ht2, ht[1:2,])
 
   ht3 <- dplyr::arrange(ht, b)
-  expect_identical(ht3, ht[3:1,])
+  expect_identical(ht3, ht[c(1,4,2,3),])
 
   ht4 <- dplyr::filter(ht, a <= 2, b <= 2)
-  expect_identical(ht4, ht[2,])
+  expect_identical(ht4, ht[1,])
 })
 
 test_that('mutate and transmute work', {

@@ -438,7 +438,7 @@ arrange_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- tibble::rownames_to_column(.data, 'arrange.huxtable.rownames')
   result <- NextMethod()
-  ht[match(.data$arrange.huxtable.rownames, result$arrange.huxtable.rownames),]
+  ht[match(result$arrange.huxtable.rownames, .data$arrange.huxtable.rownames),]
 }
 
 
