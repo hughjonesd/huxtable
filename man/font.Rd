@@ -36,6 +36,16 @@ ht <- huxtable(a = 1:3, b = 1:3)
 font(ht) <-  'times'
 font(ht)
 
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_font(ht, 'times')
+font(ht2)
+ht3 <- set_font(ht, a > 1, a:b, 'times')
+font(ht3)
+ht4 <- set_font(ht, a > 1, a:b, c('times', 'arial'), byrow = TRUE)
+font(ht4)
+ht5 <- set_font(ht, where(ht == 1), 'times')
+font(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

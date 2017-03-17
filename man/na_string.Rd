@@ -35,7 +35,18 @@ Functions to get or set the string to use for na property of huxtable table cell
 ht <- huxtable(a = 1:3, b = 1:3)
 na_string(ht) <-  '--'
 na_string(ht)
+ht[2,2] <- NA 
 print_screen(ht)
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_na_string(ht, '--')
+na_string(ht2)
+ht3 <- set_na_string(ht, a > 1, a:b, '--')
+na_string(ht3)
+ht4 <- set_na_string(ht, a > 1, a:b, c('--', ''), byrow = TRUE)
+na_string(ht4)
+ht5 <- set_na_string(ht, where(ht == 1), '--')
+na_string(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

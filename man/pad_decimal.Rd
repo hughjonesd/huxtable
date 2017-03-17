@@ -37,11 +37,20 @@ in a column to align on the rightmost decimal point, set \code{pad_decimal} to '
 you prefer to use.
 }
 \examples{
-vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad this one.")
-ht <- hux(NotPadded = vals, Padded = vals, add_colnames = TRUE)
-number_format(ht)       <- 5
-align(ht)[1,]           <- 'center'
-align(ht)[2:6,]         <- 'right'
-pad_decimal(ht)[2:5, 2] <- '.'
+vals <- c(1.00035, 22, "2.34 *", "(11.5 - 22.3)", "Do not pad this row.")
+ht <- hux(NotPadded = vals, Padded = vals)
+number_format(ht)       <- '\%2.6g'
+align(ht)[1:5,]         <- 'right'
+pad_decimal(ht)[1:4, 2] <- '.'
 ht
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_pad_decimal(ht, '.')
+pad_decimal(ht2)
+ht3 <- set_pad_decimal(ht, a > 1, a:b, '.')
+pad_decimal(ht3)
+ht4 <- set_pad_decimal(ht, a > 1, a:b, c('.', NA), byrow = TRUE)
+pad_decimal(ht4)
+ht5 <- set_pad_decimal(ht, where(ht == 1), '.')
+pad_decimal(ht5)
 }

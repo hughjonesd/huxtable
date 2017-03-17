@@ -46,6 +46,16 @@ number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
 number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
 ht
 print_screen(ht)
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_number_format(ht, 2)
+number_format(ht2)
+ht3 <- set_number_format(ht, a > 1, a:b, 2)
+number_format(ht3)
+ht4 <- set_number_format(ht, a > 1, a:b, c(2, 3), byrow = TRUE)
+number_format(ht4)
+ht5 <- set_number_format(ht, where(ht == 1), 2)
+number_format(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

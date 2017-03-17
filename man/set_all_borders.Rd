@@ -4,7 +4,7 @@
 \alias{set_all_borders}
 \title{Set All Borders}
 \usage{
-set_all_borders(ht, row, col, value, color = NULL, byrow = FALSE)
+set_all_borders(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -27,4 +27,7 @@ for the specified cells.
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
 ht <- set_all_borders(ht, 1:3, 1:2, 1)
+}
+\seealso{
+left_border
 }

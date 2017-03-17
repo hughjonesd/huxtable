@@ -182,6 +182,8 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
 #' @template getset-example
 #' @templateVar attr_val 'top'
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'bottom'
 #' @export valign valign<- set_valign valign.huxtable valign<-.huxtable
 NULL
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
@@ -192,6 +194,8 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 #' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.
 #' @template getset-example
 #' @templateVar attr_val 'right'
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'left'
 #' @export align align<- set_align align.huxtable align<-.huxtable
 NULL
 make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
@@ -276,6 +280,8 @@ check_span_shadows <- function (ht, rc, value) {
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'yellow'
 #' @family formatting functions
 #' @export background_color background_color<- set_background_color background_color.huxtable background_color<-.huxtable
 NULL
@@ -287,6 +293,8 @@ make_getter_setters('background_color', 'cell')
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
 #' @templateVar attr_val 'navy'
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'red'
 #' @family formatting functions
 #' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable
 NULL
@@ -298,9 +306,12 @@ make_getter_setters('text_color', 'cell')
 #' @templateVar attr_desc Borders
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
+#' @seealso set_all_borders
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 2
 #' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable
 NULL
 make_getter_setters('left_border', 'cell', check_fun = is.numeric)
@@ -308,6 +319,7 @@ make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 
 #' @name right_border
 #' @rdname left_border
+#' @return Similarly for the other functions.
 #' @usage
 #' right_border(ht)
 #' right_border(ht) <- value
@@ -319,7 +331,6 @@ make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 
 #' @name top_border
 #' @rdname left_border
-#' @return Similarly for the other functions.
 #' @usage
 #' top_border(ht)
 #' top_border(ht) <- value
@@ -348,6 +359,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @return The modified huxtable.
 #' @export
 #'
+#' @seealso left_border
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
@@ -381,7 +393,9 @@ get_all_borders <- function(ht, row, col) {
 #' @template getset-example
 #' @templateVar attr_val 'red'
 #' @export left_border_color left_border_color<- set_left_border_color left_border_color.huxtable left_border_color<-.huxtable
-#' @seealso set_all_borders
+#' @seealso set_all_border_colors
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'blue'
 NULL
 make_getter_setters('left_border_color', 'cell')
 
@@ -427,6 +441,8 @@ make_getter_setters('bottom_border_color', 'cell')
 #' @inheritParams left_border_color
 #'
 #' @return The modified huxtable.
+#' @seealso left_border_color
+#'
 #' @export
 #'
 #' @examples
@@ -463,6 +479,9 @@ get_all_border_colors <- function(ht, row, col) {
 #' @templateVar morealiases right_padding top_padding bottom_padding
 #' @template getset-example
 #' @templateVar attr_val 20
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 10
+#' @seealso set_all_padding
 #' @export left_padding left_padding<- set_left_padding left_padding.huxtable left_padding<-.huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
@@ -507,9 +526,12 @@ NULL
 #' \code{set_all_padding} is a convenience function which sets left, right, top and bottom cell padding
 #' for the specified cells.
 #'
+#' @seealso set_left_padding
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
+#' left_padding(ht)
+#' right_padding(ht)
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
   mycall <- sys.call()
@@ -532,6 +554,10 @@ set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
 #' ht <- huxtable(a = rep('Some long text', 2))
 #' wrap(ht)[1,] <- TRUE
 #' print_html(ht)
+#' @template getset-rowspec-example
+#' @templateVar attr_val TRUE
+#' @templateVar attr_val2 FALSE
+#'
 #' @export wrap wrap<- set_wrap wrap.huxtable wrap<-.huxtable
 NULL
 make_getter_setters('wrap', 'cell', check_fun = is.logical)
@@ -545,7 +571,9 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @examples
 #' ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
 #' escape_contents(ht)[,2] <- FALSE
-#'
+#' @template getset-rowspec-example
+#' @templateVar attr_val TRUE
+#' @templateVar attr_val2 FALSE
 #' @export escape_contents escape_contents<- set_escape_contents escape_contents.huxtable escape_contents<-.huxtable
 NULL
 make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
@@ -558,7 +586,9 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
 #' @template getset-example
 #' @templateVar attr_val '--'
-#' @templateVar extra print_screen(ht)
+#' @templateVar extra ht[2,2] <- NA ## print_screen(ht)
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 ''
 #' @family formatting functions
 #' @export na_string na_string<- set_na_string na_string.huxtable na_string<-.huxtable
 NULL
@@ -574,6 +604,8 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val TRUE
 #' @templateVar extra print_screen(ht)
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 FALSE
 #' @family formatting functions
 #' @export bold bold<- set_bold bold.huxtable bold<-.huxtable
 NULL
@@ -598,6 +630,8 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' A numeric vector. This sets the font size in points.
 #' @template getset-example
 #' @templateVar attr_val 14
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 12
 #' @family formatting functions
 #' @export font_size font_size<- set_font_size font_size.huxtable font_size<-.huxtable
 NULL
@@ -611,8 +645,10 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' A numeric vector. Clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
 #' @template getset-example
 #' @templateVar attr_val 90
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 270
 #' @details
-#' You will likely need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
+#' You will probably need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
 #' to achieve a nice result, in both HTML and LaTeX.
 #' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable
 NULL
@@ -642,6 +678,9 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
 #' ht
 #' print_screen(ht)
+#' @template getset-rowspec-example
+#' @templateVar attr_val 2
+#' @templateVar attr_val2 3
 NULL
 make_getter_setters('number_format', 'cell')
 
@@ -664,13 +703,15 @@ make_getter_setters('number_format', 'cell')
 #' in a column to align on the rightmost decimal point, set \code{pad_decimal} to '.' or whatever decimal
 #' you prefer to use.
 #' @examples
-#' vals <- c(1.00035, 22, "22.34 *", "(11.5 - 22.3)", "Do not pad this one.")
-#' ht <- hux(NotPadded = vals, Padded = vals, add_colnames = TRUE)
-#' number_format(ht)       <- 5
-#' align(ht)[1,]           <- 'center'
-#' align(ht)[2:6,]         <- 'right'
-#' pad_decimal(ht)[2:5, 2] <- '.'
+#' vals <- c(1.00035, 22, "2.34 *", "(11.5 - 22.3)", "Do not pad this row.")
+#' ht <- hux(NotPadded = vals, Padded = vals)
+#' number_format(ht)       <- '%2.6g'
+#' align(ht)[1:5,]         <- 'right'
+#' pad_decimal(ht)[1:4, 2] <- '.'
 #' ht
+#' @template getset-rowspec-example
+#' @templateVar attr_val '.'
+#' @templateVar attr_val2 NA
 #' @export pad_decimal pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
 NULL
 make_getter_setters('pad_decimal', 'cell', extra_code = {
@@ -685,6 +726,8 @@ make_getter_setters('pad_decimal', 'cell', extra_code = {
 #' A character vector of font names. NB that LaTeX and HTML use different font names.
 #' @template getset-example
 #' @templateVar attr_val 'times'
+#' @template getset-rowspec-example
+#' @templateVar attr_val2 'arial'
 #' @family formatting functions
 #' @export font font<- set_font font.huxtable font<-.huxtable
 NULL

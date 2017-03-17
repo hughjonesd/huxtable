@@ -31,7 +31,7 @@ For \code{set_rotation}, the \code{ht} object.
 Functions to get or set the cell text rotation property of huxtable table cells.
 }
 \details{
-You will likely need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
+You will probably need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
 to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{
@@ -40,4 +40,14 @@ ht <- huxtable(a = 1:3, b = 1:3)
 rotation(ht) <-  90
 rotation(ht)
 
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_rotation(ht, 90)
+rotation(ht2)
+ht3 <- set_rotation(ht, a > 1, a:b, 90)
+rotation(ht3)
+ht4 <- set_rotation(ht, a > 1, a:b, c(90, 270), byrow = TRUE)
+rotation(ht4)
+ht5 <- set_rotation(ht, where(ht == 1), 90)
+rotation(ht5)
 }

@@ -34,4 +34,14 @@ Functions to get or set the cell wrapping property of huxtable table cells.
 ht <- huxtable(a = rep('Some long text', 2))
 wrap(ht)[1,] <- TRUE
 print_html(ht)
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_wrap(ht, TRUE)
+wrap(ht2)
+ht3 <- set_wrap(ht, a > 1, a:b, TRUE)
+wrap(ht3)
+ht4 <- set_wrap(ht, a > 1, a:b, c(TRUE, FALSE), byrow = TRUE)
+wrap(ht4)
+ht5 <- set_wrap(ht, where(ht == 1), TRUE)
+wrap(ht5)
 }

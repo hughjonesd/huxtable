@@ -34,4 +34,13 @@ Functions to get or set the whether to escape cell contents property of huxtable
 ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
 escape_contents(ht)[,2] <- FALSE
 
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_escape_contents(ht, TRUE)
+escape_contents(ht2)
+ht3 <- set_escape_contents(ht, a > 1, a:b, TRUE)
+escape_contents(ht3)
+ht4 <- set_escape_contents(ht, a > 1, a:b, c(TRUE, FALSE), byrow = TRUE)
+escape_contents(ht4)
+ht5 <- set_escape_contents(ht, where(ht == 1), TRUE)
+escape_contents(ht5)
 }

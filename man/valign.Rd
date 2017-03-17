@@ -36,4 +36,14 @@ ht <- huxtable(a = 1:3, b = 1:3)
 valign(ht) <-  'top'
 valign(ht)
 
+
+ht <- huxtable(a = 1:3, b = 3:1)
+ht2 <- set_valign(ht, 'top')
+valign(ht2)
+ht3 <- set_valign(ht, a > 1, a:b, 'top')
+valign(ht3)
+ht4 <- set_valign(ht, a > 1, a:b, c('top', 'bottom'), byrow = TRUE)
+valign(ht4)
+ht5 <- set_valign(ht, where(ht == 1), 'top')
+valign(ht5)
 }
