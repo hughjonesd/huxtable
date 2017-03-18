@@ -186,14 +186,5 @@ get_rc_spec <- function (ht, obj, dimno) {
   ndim <- dim(ht)[dimno]
   if (missing(obj)) return(seq_len(ndim))
 
-  # if (dimno == 1) {
-  #   obj <- eval(lazyeval::expr_find(obj), ht, parent.frame())
-  #   if (is.logical(obj)) obj <- obj & ! is.na(obj)
-  # } else {
-  #   nl <- as.list(seq_len(ncol(ht)))
-  #   names(nl) <- colnames(ht)
-  #   obj <- eval(lazyeval::expr_find(obj), nl, parent.frame())
-  # }
-
   if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
 }
