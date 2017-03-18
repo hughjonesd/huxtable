@@ -61,6 +61,6 @@ ht <- set_font(ht, where(ht == 1), 'palatino')
 font(ht)
 ht <- set_font(ht, odds(), evens(), 'dingbats')
 font(ht)
-ht <- set_align(ht, every(3, from = 1), a:b, 'right')
+ht <- set_align(ht, 2:3, 1:2, c('right', 'center'), byrow = TRUE)
 align(ht)
 }
