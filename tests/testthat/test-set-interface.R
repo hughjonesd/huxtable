@@ -54,12 +54,15 @@ test_that('set_cell_properties fails with bad arguments', {
 })
 
 
-test_that('set_* works with variables as rows/cols', {
-  ht <- hux(a = 1:2, b = 1:2)
+test_that('set_* works with variables as arguments', {
+  ht_orig <- hux(a = 1:2, b = 1:2)
   rownum <- 2
   colnum <- 1
-  ht2 <- set_bold(ht, rownum, colnum, TRUE)
+  ht2 <- set_bold(ht_orig, rownum, colnum, TRUE)
   expect_equivalent(bold(ht2), matrix(c(FALSE, TRUE, FALSE, FALSE), 2, 2))
+  boldness <- TRUE
+  ht3 <- set_bold(ht_orig, 1:2, 1:2, boldness)
+  expect_equivalent(bold(ht3), matrix(TRUE, 2, 2))
 })
 
 test_that('set_* works with cell functions', {
@@ -142,6 +145,15 @@ test_that('set_* works when row and col are missing', {
   expect_equivalent(row_height(ht7), c(.6, .4))
 })
 
+test_that('set_* works with row and col "empty"', {
+  ht_orig <- hux(a = c(1, 0), b = c(0, 1))
+  ht2 <- set_font(ht_orig, 1, ,'times')
+  expect_equivalent(font(ht2), matrix(c('times', NA), 2, 2))
+  ht3 <- set_font(ht_orig, , 1,'times')
+  expect_equivalent(font(ht3), matrix(c('times', 'times', NA, NA), 2, 2))
+  ht4 <- set_font(ht_orig, , ,'times')
+  expect_equivalent(font(ht4), matrix('times', 2, 2))
+})
 
 test_that('all forms of set_all_* work as expected', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
@@ -154,7 +166,10 @@ test_that('all forms of set_all_* work as expected', {
   rownum <- 1
   colnum <- 2
   ht5 <- set_all_borders(ht, rownum, colnum, 1)
-  expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
+  expect_equivalent(top_border(ht5), matrix(c(0, 0, 1, 0), 2, 2))
+  border_size <- 2
+  ht6 <- set_all_borders(ht, border_size)
+  expect_equivalent(top_border(ht6), matrix(border_size, 2, 2))
 })
 
 
