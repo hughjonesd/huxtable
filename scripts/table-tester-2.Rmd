@@ -1,0 +1,260 @@
+---
+title: "Huxtable table demo"
+author: "David Hugh-Jones"
+date: "2/03/2017"
+output:
+  pdf_document:
+    keep_tex: yes
+    includes:
+      in_header: placeins-header.tex
+  html_document: default
+---
+
+
+```{r setup, echo = FALSE}
+
+library(huxtable)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+
+make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
+  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
+  for (i in seq_len(ncol -2)) {
+    ht <- cbind(ht, rep(more_text[i], nrow))
+  }
+  ht <- set_all_borders(ht, every(), every(), 1)
+  ht <- set_background_color(ht, odds(), every(), 'orange')
+  ht <- set_background_color(ht, evens(), every(), 'green')
+  ht
+}
+
+long <- 'A rather long row of text which goes on...'
+
+```
+
+# Width and colwidth
+
+```{r}
+ht <- make()
+caption(ht) <- 'both unset'
+ht
+
+width(ht) <- 0.2
+caption(ht) <- 'width 0.2'
+ht
+
+width(ht) <- NA
+col_width(ht) <- c(.7, .3)
+caption(ht) <- 'col\\_width .7, .3'
+ht
+
+width(ht) <- 0.2
+caption(ht) <- 'width 0.2, col\\_width .7, .3'
+ht
+
+```
+
+\FloatBarrier
+
+# Position and width (and caption)
+
+```{r}
+ht <- make()
+caption(ht) <- 'both unset'
+ht
+
+position(ht) <- 'left'
+caption(ht) <- 'left pos'
+ht
+
+position(ht) <- 'right'
+caption(ht) <- 'right pos'
+ht
+
+width(ht) <- .8
+position(ht) <- 'left'
+caption(ht) <- 'width .8, left pos'
+ht
+
+position(ht) <- 'right'
+caption(ht) <- 'width .8, right pos'
+ht
+
+```
+
+\FloatBarrier
+
+# Col_width and align
+
+```{r}
+ht <- make(nrow = 3)
+ht <- set_align(ht, c('left', 'center', 'right'))
+caption(ht) <- 'Align by row: l/c/r, col\\_width unset'
+ht
+
+col_width(ht) <- c(.2, .8)
+caption(ht) <- 'Align by row: l/c/r, col\\_width .2, .8'
+```
+
+\FloatBarrier
+
+# Align and wrap
+
+```{r}
+ht <- make(nrow = 3, text1 = long, text2 = long)
+wrap(ht)[,1] <- TRUE
+ht <- set_align(ht, c('left', 'center', 'right'))
+caption(ht) <- 'Align by row: l/c/r, wrap TRUE on left'
+ht
+```
+
+\FloatBarrier
+
+# Valign and wrap
+
+```{r}
+ht <- make(nrow = 2, ncol = 4, text1 = long, more_text = c(long, long))
+ht <- set_valign(ht, c(NA, 'top', 'middle', 'bottom'), byrow = TRUE)
+wrap(ht)[1,] <- TRUE
+wrap(ht)[,1] <- TRUE
+caption(ht) <- 'valign in columns 2-4: t/m/b; wrap TRUE at top (and bot left)'
+ht
+```
+
+\FloatBarrier
+
+# Colwidth and wrap
+
+```{r}
+ht <- make(text1 = long, text2 = long)
+wrap(ht)[1,] <- TRUE
+col_width(ht) <- c(.8, .2)
+caption(ht) <- 'wrap TRUE at top, col\\_width .8, .2'
+ht
+```
+
+\FloatBarrier
+
+# Width and wrap
+
+```{r}
+ht <- make()
+width(ht) <- .2
+wrap(ht)[1,] <- TRUE
+caption(ht) <- 'wrap TRUE at top, width .2'
+ht
+```
+
+\FloatBarrier
+
+# Padding and wrap
+
+```{r}
+ht <- make(nrow = 4, text1 = long, text2 = long)
+wrap(ht)[,1] <- TRUE
+left_padding(ht)[1,] <- 12
+right_padding(ht)[2,] <- 12
+top_padding(ht)[3,] <- 12
+bottom_padding(ht)[4,] <- 12
+caption(ht) <- 'wrap TRUE on left; padding by row l/r/t/b'
+ht
+```
+
+\FloatBarrier
+
+# Padding and colwidth
+
+```{r}
+ht <- make(nrow = 4, text1 = long, text2 = long)
+col_width(ht) <- c(.2, .8)
+left_padding(ht)[1,] <- 12
+right_padding(ht)[2,] <- 12
+top_padding(ht)[3,] <- 12
+bottom_padding(ht)[4,] <- 12
+caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap FALSE'
+ht
+
+wrap(ht) <- TRUE
+caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap TRUE'
+ht
+```
+
+\FloatBarrier
+
+# Font and wrap
+
+```{r}
+ht <- make(nrow = 4, text1 = long, text2 = long)
+wrap(ht)[,1] <- TRUE
+font(ht)[1,] <- 'cmr'
+bold(ht)[2:3,] <- TRUE
+italic(ht)[3:4,] <- TRUE
+caption(ht) <- 'wrap TRUE on left, font cmr at top, then bold/both/italic'
+ht
+```
+
+\FloatBarrier
+
+# Multirow and wrap
+
+```{r}
+ht <- make(text1 = long)
+wrap(ht)[,1] <- TRUE
+rowspan(ht)[1,1] <- 2
+rowspan(ht)[1,2] <- 2
+caption(ht) <- 'multirow cells, wrap TRUE on left'
+```
+
+\FloatBarrier
+
+# Multirow and multicol
+
+```{r}
+ht <- make(text1 = long, nrow = 3)
+colspan(ht)[1,1] <- 2
+rowspan(ht)[2,1] <- 2
+caption(ht) <- 'multirow cells and multicol cells'
+ht
+```
+
+\FloatBarrier
+
+# Border color left and right/top and bottom
+
+```{r}
+ht <- make()
+left_border_color(ht)[,2] <- 'red'
+caption(ht) <- 'Left border of col 2: red'
+ht
+
+ht <- make()
+top_border_color(ht)[2,] <- 'red'
+caption(ht) <- 'Top border of row 2: red'
+ht
+```
+
+\FloatBarrier
+
+# Multirow, multicol and border color
+
+```{r}
+ht <- make(nrow = 5)
+background_color(ht) <- 'white'
+colspan(ht)[1,1] <- 2
+rowspan(ht)[2,1] <-2
+colspan(ht)[4,1] <- 2
+rowspan(ht)[4,1] <- 2
+left_border_color(ht) <- 'yellow'
+right_border_color(ht) <- 'green'
+top_border_color(ht) <- 'blue'
+# bottom_border_color(ht) <- 'red'
+caption(ht) <- 'multirow, multicol and border color (l yellow r green t blue b unset)'
+ht
+```
+
+
+
+
