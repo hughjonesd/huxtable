@@ -148,16 +148,17 @@ build_tabular <- function(ht) {
         padding <- lapply(padding, function(x) if (is_a_number(x)) paste0(x, 'pt') else x)
         tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
         bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
-        contents <- paste0(tpadding, contents, bpadding)
+        align_str <- switch(align(ht)[drow, dcol],
+          left   = '\\raggedright ',
+          right  = '\\raggedleft ',
+          center = '\\centering '
+        )
+        contents <- paste0(tpadding, align_str, contents, bpadding)
         if (wrap(ht)[drow, dcol]) {
           width_spec <- compute_width(ht, mycol, dcell$end_col)
           hpad_loss  <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('-',x) else '')
-          align_str <- switch(align(ht)[drow, dcol],
-                  left   = '\\raggedright',
-                  right  = '\\raggedleft',
-                  center = '\\centering'
-                )
-          contents   <- paste0('\\parbox[c]{', width_spec , hpad_loss[1], hpad_loss[2], '}{', align_str, contents, '}')
+
+          contents   <- paste0('\\parbox[c]{', width_spec , hpad_loss[1], hpad_loss[2], '}{', contents, '}')
         }
         hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
         contents <- paste0(hpadding[1], contents, hpadding[2])
@@ -179,9 +180,6 @@ build_tabular <- function(ht) {
       }
 
       if (bottom_left_multirow) {
-        # the ctb switch may only work with v recent multirow
-        # ctb <- switch(valign(ht)[myrow, mycol], top = 't', bottom = 'b', middle = 'c')
-        # goes in [] as optional first argument
         # * is 'standard width', could be more specific:
         contents <- paste0('\\multirow{-', rs,'}{*}{', contents,'}')
       }
@@ -196,7 +194,7 @@ build_tabular <- function(ht) {
         rb <- v_border(ht, drow, dcol, 'right')
         added_right_border <- rb != ''
         contents <- paste0('\\multicolumn{', cs,'}{', lb, colspec, rb ,'}{', contents,'}')
-      } # if (first column of cell)
+      }
 
       row_contents[mycol] <- contents
 
@@ -349,8 +347,8 @@ compute_vertical_borders <- function (ht, row) {
     lbs[dcol] <- v_border(ht, drow, dcol, 'left')
     rbs[right_col] <- v_border(ht, drow, dcol, 'right')
   }
-lbs[nzchar(lbs)] <- '|'
-rbs[nzchar(rbs)] <- '|'
+  lbs[nzchar(lbs)] <- '|' # HACK
+  rbs[nzchar(rbs)] <- '|'
 
   borders <- rbs # these take priority
   borders[borders == ''] <- lbs
