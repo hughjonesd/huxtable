@@ -171,7 +171,6 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #' font(ht)
 #' font_size(ht)
 set_cell_properties <- function (ht, row, col, ...) {
-
   props <- list(...)
   if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
         huxtable_cell_attrs), collapse = ', '))
@@ -185,6 +184,7 @@ set_cell_properties <- function (ht, row, col, ...) {
 
   ht
 }
+
 
 #' @template getset-cell
 #' @templateVar attr_name valign
@@ -404,22 +404,6 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
     call[[1]] <- as.symbol(set_b)
     call[[2]] <- quote(ht)
     #call$value <- value
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
-}
-
-
-set_cell_properties <- function (ht, row, col, ...) {
-  props <- list(...)
-  if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
-    huxtable_cell_attrs), collapse = ', '))
-  call <- match.call(expand.dots = FALSE)
-  call[['...']] <- NULL
-  for (prop_name in names(props)) {
-    call[[1]] <- as.symbol(paste0('set_', prop_name))
-    call$value <- props[[prop_name]]
     ht <- eval(call, list(ht = ht), parent.frame())
   }
 
