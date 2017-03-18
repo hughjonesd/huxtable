@@ -7,6 +7,19 @@ BUGS
   - you may be able to set it per row for horiz ones using arrayrulewidth...
   - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
   - presumably could also do it before/after the actual row
+  - maybe using vborder you can set a width to the vrule; but will this work with hhline?
+* nowrap cells
+  - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
+  - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
+  - if we use l/c/r, then table position goes wonky when cells expand; worse, background colors
+    can be messed up in previous cells which expected the table not to expand!
+  - need to respect valign (which p/m/b does for wrapped cells). But what is valign for a nowrap cell?
+  - cells should expand to match nowrap width by default
+  - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
+    colour and position. 
+    - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
+* top border is overwritten after row 1 in latex
+* LaTeX fonts not working
 
 TODO
 ====
@@ -29,10 +42,7 @@ PUT OFF
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
 * way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
-* `borders()<-` shortcut
-  - can't really do this if you want to assign to particular subsets
-  - because that would call `borders(ht)` and what does that return?
-  - stick with `set_all_borders`
+
 
 
 
