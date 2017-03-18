@@ -291,7 +291,7 @@ check_span_shadows <- function (ht, rc, value) {
   candidates <- as.matrix(dcells[dcells$shadowed, c('row', 'col')])
   problems <- value[candidates] # span of cells which would be shadowed;
   if (any(problems > 1)) {
-    candidates <- candidates[problems > 1]
+    candidates <- candidates[problems > 1, , drop = FALSE]
     candidates <- paste(apply(candidates, 1, paste, collapse = ','), collapse = '; ')
     stop('New rowspan/colspan would cut up existing multirow/multicol cells at ', candidates)
   }
