@@ -428,6 +428,10 @@ get_all_borders <- function(ht, row, col) {
 #' @templateVar morealiases right_border_color top_border_color bottom_border_color
 #' @template getset-example
 #' @templateVar attr_val 'red'
+#' @details
+#' Both LaTeX and HTML collapse borders. If results are not what you expected, try setting the
+#' adjoining border of the previous cell to width 0 (e.g. for a left border color, unset the right border
+#' of the cell on the left).
 #' @seealso \code{\link{set_all_border_colors}}
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'blue'
@@ -870,10 +874,15 @@ make_getter_setters('height', 'table')
 #' @templateVar attr_desc Caption
 #' @templateVar value_param_desc
 #' A length-one character vector. Set to \code{NA} for no caption.
+#' @details
+#' Captions are not escaped. See the example for a workaround.
 #' @template getset-example
 #' @templateVar attr_val 'An example table'
 #' @templateVar extra print_screen(ht, blank = '.')
 #' @seealso \code{\link{caption_pos}}
+#' @examples
+#' ht <- hux(a = 1:2, b = 1:2)
+#' caption(ht) <- xtable::sanitize('Make $$$ with us', type = 'latex') # escape caption characters
 #' @export caption caption<- set_caption caption.huxtable caption<-.huxtable
 #' @S3method caption huxtable
 #' @S3method caption<- huxtable
