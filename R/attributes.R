@@ -495,19 +495,18 @@ make_getter_setters('bottom_border_color', 'cell')
 #'
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
+#' ht <- set_all_border_colors(ht, 'red')
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
-  force(ht)
-  mycall <- sys.call()
-  mycall[[2]] <- as.name('ht')
-  for (side in c('top', 'bottom', 'left', 'right')) {
-    fn <- as.symbol(paste0('set_', side, '_border_color'))
-    mycall[[1]] <- fn
-    ht <- eval(mycall)
+  call <- sys.call()
+  for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border_color')) {
+    call[[1]] <- as.symbol(set_b)
+    call[[2]] <- quote(ht)
+    ht <- eval(call, list(ht = ht), parent.frame())
   }
 
   ht
 }
+
 
 
 get_all_border_colors <- function(ht, row, col) {
@@ -590,17 +589,17 @@ NULL
 #' right_padding(ht)
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
-  force(ht)
-  mycall <- sys.call()
-  mycall[[2]] <- as.name('ht')
-  for (side in c('top', 'bottom', 'left', 'right')) {
-    fn <- as.symbol(paste0('set_', side, '_padding'))
-    mycall[[1]] <- fn
-    ht <- eval(mycall)
+  call <- sys.call()
+  for (set_p in paste0('set_', c('top', 'bottom', 'left', 'right'), '_padding')) {
+    call[[1]] <- as.symbol(set_p)
+    call[[2]] <- quote(ht)
+    #call$value <- value
+    ht <- eval(call, list(ht = ht), parent.frame())
   }
 
   ht
 }
+
 
 
 #' @template getset-cell
