@@ -157,8 +157,12 @@ build_tabular <- function(ht) {
         if (wrap(ht)[drow, dcol]) {
           width_spec <- compute_width(ht, mycol, dcell$end_col)
           hpad_loss  <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('-',x) else '')
-
-          contents   <- paste0('\\parbox[c]{', width_spec , hpad_loss[1], hpad_loss[2], '}{', contents, '}')
+          # reverse of what you think. 'b' aligns the *bottom* of the text with the baseline
+          # this doesn't really work for short text!
+          ctb <- switch(valign(ht)[drow, dcol], top = 'b', middle = 'c', bottom = 't')
+          contents   <- paste0('\\parbox[', ctb,']{', width_spec , hpad_loss[1], hpad_loss[2], '}{', contents, '}')
+        } else {
+          contents <- paste0('\\mbox{', contents, '}')
         }
         hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
         contents <- paste0(hpadding[1], contents, hpadding[2])
