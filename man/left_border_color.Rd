@@ -62,6 +62,11 @@ Similarly for the other functions.
 \description{
 Functions to get or set the border colors property of huxtable table cells.
 }
+\details{
+Both LaTeX and HTML collapse borders. If results are not what you expected, try setting the
+adjoining border of the previous cell to width 0 (e.g. for a left border color, unset the right border
+of the cell on the left).
+}
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)

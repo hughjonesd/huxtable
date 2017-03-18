@@ -24,12 +24,17 @@ For \code{set_caption}, the \code{ht} object.
 \description{
 Functions to get or set the table-level caption property of a huxtable.
 }
+\details{
+Captions are not escaped. See the example for a workaround.
+}
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
 caption(ht) <-  'An example table'
 caption(ht)
 print_screen(ht, blank = '.')
+ht <- hux(a = 1:2, b = 1:2)
+caption(ht) <- xtable::sanitize('Make $$$ with us', type = 'latex') # escape caption characters
 }
 \seealso{
 \code{\link{caption_pos}}
