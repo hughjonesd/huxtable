@@ -161,8 +161,6 @@ build_tabular <- function(ht) {
           # this doesn't really work for short text!
           ctb <- switch(valign(ht)[drow, dcol], top = 'b', middle = 'c', bottom = 't')
           contents   <- paste0('\\parbox[', ctb,']{', width_spec , hpad_loss[1], hpad_loss[2], '}{', contents, '}')
-        } else {
-          contents <- paste0('\\mbox{', contents, '}')
         }
         hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('\\hspace*{', x ,'}') else '')
         contents <- paste0(hpadding[1], contents, hpadding[2])
@@ -190,9 +188,13 @@ build_tabular <- function(ht) {
 
       if (mycol == dcol) { # first column of cell
         cs <- dcell$colspan
-        pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
-        width_spec <- compute_width(ht, mycol, dcell$end_col)
-        colspec <- paste0(pmb, '{', width_spec, '}')
+        colspec <- if (wrap(ht)[drow, dcol]) {
+          pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
+          width_spec <- compute_width(ht, mycol, dcell$end_col)
+          paste0(pmb, '{', width_spec, '}')
+        } else {
+          switch(align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
+        }s
         # only add left borders if we haven't already added a right border!
         lb <- if (! added_right_border) v_border(ht, drow, dcol, 'left') else ''
         rb <- v_border(ht, drow, dcol, 'right')
