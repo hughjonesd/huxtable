@@ -26,7 +26,7 @@ colors for the specified cells.
 }
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
-ht <- set_all_borders(ht, 1:3, 1:2, 1)
+ht <- set_all_border_colors(ht, 'red')
 }
 \seealso{
 \code{\link{left_border_color}}

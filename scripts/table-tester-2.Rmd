@@ -113,14 +113,19 @@ ht
 
 \FloatBarrier
 
-# Valign and wrap
+# Valign, row height and wrap
 
 ```{r}
-ht <- make(nrow = 2, ncol = 4, text1 = long, more_text = c(long, long))
-ht <- set_valign(ht, c(NA, 'top', 'middle', 'bottom'), byrow = TRUE)
+ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text' , 'text'))
+ht <- set_valign(ht, c('top', 'top', 'middle', 'bottom'), byrow = TRUE)
 wrap(ht)[1,] <- TRUE
 wrap(ht)[,1] <- TRUE
-caption(ht) <- 'valign in columns 2-4: t/m/b; wrap TRUE at top (and bot left)'
+width(ht) <- .6
+caption(ht) <- 'valign in columns 1-4: t/t/m/b; wrap TRUE at top (and bot left)'
+ht
+
+row_height(ht) <- rep('4\\baselineskip', 2)
+caption(ht) <- 'valign in columns 1-4: t/t/m/b; wrap TRUE at top (and bot left); row heights 4\\\\baselineskip'
 ht
 ```
 
@@ -184,15 +189,17 @@ ht
 
 \FloatBarrier
 
-# Font and wrap
+# Text and wrap
 
 ```{r}
-ht <- make(nrow = 4, text1 = long, text2 = long)
+ht <- make(nrow = 6, text1 = long, text2 = long)
 wrap(ht)[,1] <- TRUE
-font(ht)[1,] <- 'cmr'
+font(ht)[1,] <- 'lmss'
 bold(ht)[2:3,] <- TRUE
 italic(ht)[3:4,] <- TRUE
-caption(ht) <- 'wrap TRUE on left, font cmr at top, then bold/both/italic'
+text_color(ht)[5,] <- 'yellow'
+font_size(ht)[6,] <- 14
+caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yellow/big'
 ht
 ```
 
