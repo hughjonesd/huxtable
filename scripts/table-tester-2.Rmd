@@ -104,10 +104,11 @@ caption(ht) <- 'Align by row: l/c/r, col\\_width .2, .8'
 # Align and wrap
 
 ```{r}
-ht <- make(nrow = 3, text1 = long, text2 = long)
+ht <- make(nrow = 4, text1 = long, text2 = long)
+ht[2:4,2] <- 'Shorter text'
 wrap(ht)[,1] <- TRUE
-ht <- set_align(ht, c('left', 'center', 'right'))
-caption(ht) <- 'Align by row: l/c/r, wrap TRUE on left'
+ht <- set_align(ht, c('left', 'left', 'center', 'right'))
+caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left'
 ht
 ```
 

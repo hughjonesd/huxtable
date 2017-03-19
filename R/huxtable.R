@@ -8,7 +8,8 @@
 #'
 #' To create a huxtable object, use \code{\link{huxtable}} or \code{\link{as_huxtable}}.
 #'
-#' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website}.
+#' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
+#' read the vignette with \code{vignette('huxtable')}.
 #'
 #' @section Package options:
 #'

@@ -194,6 +194,9 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' @templateVar attr_val 'top'
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'bottom'
+#' @details
+#' Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link{row_height}}
+#' may help.
 #' @export valign valign<- set_valign valign.huxtable valign<-.huxtable
 #' @S3method valign huxtable
 #' @S3method valign<- huxtable
@@ -220,6 +223,10 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 #' @templateVar rowcol col
 #' @templateVar attr_desc Column widths
 #' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.
+#' @details
+#' In LaTeX, if you specify a column width, but set `wrap` to `FALSE` and have cells which
+#' overrun, then you may have problems with table position and with background colours in other cells.
+#' The workaround is to adjust the width, so that your cells no longer overrun.
 #' @family row/column heights
 #' @template getset-example
 #' @templateVar attr_val c(.2, .8)

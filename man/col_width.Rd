@@ -26,6 +26,11 @@ For \code{set_col_width}, the \code{ht} object.
 \description{
 Functions to get or set the column widths property of huxtable cols.
 }
+\details{
+In LaTeX, if you specify a column width, but set `wrap` to `FALSE` and have cells which
+overrun, then you may have problems with table position and with background colours in other cells.
+The workaround is to adjust the width, so that your cells no longer overrun.
+}
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)

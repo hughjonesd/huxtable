@@ -57,7 +57,7 @@ ht
 
 ```{r}
 ht <- make()
-caption('both unset')
+caption(ht) <- 'both unset'
 ht
 
 position(ht) <- 'left'
