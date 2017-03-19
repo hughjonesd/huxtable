@@ -194,7 +194,7 @@ build_tabular <- function(ht) {
           paste0(pmb, '{', width_spec, '}')
         } else {
           switch(align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
-        }s
+        }
         # only add left borders if we haven't already added a right border!
         lb <- if (! added_right_border) v_border(ht, drow, dcol, 'left') else ''
         rb <- v_border(ht, drow, dcol, 'right')
