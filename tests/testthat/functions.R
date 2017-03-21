@@ -81,5 +81,4 @@ skip_without_pandoc <- function () {
 
 skip_on_R_CMD_check <- function() {
   if (! Sys.getenv('R_TESTS') == '') skip('Not testing, code doesn\'t play well with R CMD check')
-  if (Sys.getenv('CODECOV') == '1') skip('Not testing, code doesn\'t play well with codecov')
 }
