@@ -11,4 +11,4 @@ r_packages:
   - covr
 
 after_success:
-  - R_TESTS=1 Rscript -e 'library(covr); codecov()'
+  - Rscript -e 'library(covr); codecov()'
