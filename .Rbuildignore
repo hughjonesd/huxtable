@@ -1,5 +1,6 @@
 ^packrat/
 ^\.Rprofile$
+^\.lintr$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$

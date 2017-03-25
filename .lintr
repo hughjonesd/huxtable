@@ -1,0 +1,2 @@
+linters: with_defaults(line_length_linter(120), single_quotes_linter=NULL)
+exclusions: list("inst/doc/huxreg.R" , "inst/doc/design-principles.R", "inst/doc/huxtable.R")
