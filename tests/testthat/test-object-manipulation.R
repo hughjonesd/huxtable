@@ -20,7 +20,7 @@ test_that('Object subsetting and replacement examples unchanged', {
 
 test_that('Subsetting preserves rownames', {
   rownames(ht) <- letters[1:3]
-  expect_equal(rownames(ht[1:2,]), letters[1:2])
+  expect_equal(rownames(ht[1:2, ]), letters[1:2])
 })
 
 test_that('Subsetting cuts colspan', {
@@ -59,10 +59,6 @@ test_that('add_footnote works', {
   ht_orig <- hux(a = 1:2, b = 1:2)
   ht_orig <- add_footnote(ht_orig, 'Some footnote text', italic = TRUE)
   expect_equivalent(nrow(ht_orig), 3)
-  expect_equivalent(colspan(ht_orig)[3,1], ncol(ht_orig))
-  expect_true(italic(ht_orig)[3,1])
-
+  expect_equivalent(colspan(ht_orig)[3, 1], ncol(ht_orig))
+  expect_true(italic(ht_orig)[3, 1])
 })
-
-
-

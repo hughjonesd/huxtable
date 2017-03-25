@@ -3,4 +3,3 @@ library(huxtable)
 
 
 test_check("huxtable")
-

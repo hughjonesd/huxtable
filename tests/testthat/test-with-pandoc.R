@@ -6,7 +6,6 @@ source('functions.R')
 
 
 test_that('Four spaces does not cause <pre><code> markup', {
-  #skip('Waiting for knitr fix')
   skip_without_pandoc()
   on.exit(if (exists('output')) file.remove(output))
   output <- rmarkdown::render('fourspace-html-test.Rmd', quiet = TRUE)

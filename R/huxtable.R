@@ -331,18 +331,18 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
     if (! x_real_hux) {
       for (att in ccp) {
         attr(x, att)[] <- if (type == 'cbind') attr(ht, att)[, ncol(ht)] else
-          matrix(attr(ht, att)[nrow(ht),], nrow(x), ncol(x), byrow = TRUE)
+          matrix(attr(ht, att)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
       }
     }
     if (! ht_real_hux && x_real_hux) {
       for (att in ccp) {
-        attr(ht, att)[] <- if (type == 'cbind') attr(x, att)[,1] else
-          matrix(attr(x, att)[1,], nrow(ht), ncol(ht), byrow = TRUE)
+        attr(ht, att)[] <- if (type == 'cbind') attr(x, att)[, 1] else
+          matrix(attr(x, att)[1, ], nrow(ht), ncol(ht), byrow = TRUE)
       }
     }
   }
 
-  bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function(x,y){
+  bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function(x, y){
     rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
   bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
@@ -368,7 +368,7 @@ filter_.huxtable <- function (.data, ..., .dots) {
   .data <- as.data.frame(.data)
   .data <- tibble::rownames_to_column(.data, 'filter.huxtable.rownames')
   result <- NextMethod()
-  ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames,]
+  ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames, ]
 }
 
 #' Dplyr verbs for huxtable
@@ -416,7 +416,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   }
 
   match_cols <- match(colnames(result), colnames(ht))
-  if (copy_cell_props) match_cols <- Reduce(function (x,y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
+  if (copy_cell_props) match_cols <- Reduce(function (x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
   result_cols <- ! is.na(match_cols)
   match_cols  <- na.omit(match_cols)
 
@@ -439,7 +439,7 @@ arrange_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- tibble::rownames_to_column(.data, 'arrange.huxtable.rownames')
   result <- NextMethod()
-  ht[match(result$arrange.huxtable.rownames, .data$arrange.huxtable.rownames),]
+  ht[match(result$arrange.huxtable.rownames, .data$arrange.huxtable.rownames), ]
 }
 
 
@@ -449,7 +449,7 @@ slice_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- tibble::rownames_to_column(.data, 'slice.huxtable.rownames')
   result <- NextMethod()
-  ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)),]
+  ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)), ]
 }
 
 
@@ -460,7 +460,7 @@ select_.huxtable <- function (.data, ..., .dots) {
   .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
   colnames(.data) <- colnames(ht)
   result <- NextMethod()
-  ht <- ht[,na.omit(match(result[1,], colnames(ht)))]
+  ht <- ht[, na.omit(match(result[1, ], colnames(ht)))]
   colnames(ht) <- colnames(result)
 
   ht

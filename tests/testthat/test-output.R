@@ -34,13 +34,13 @@ test_that('FlexTable output examples unchanged', {
 
 test_that('Multi-rowspan screen output is sane', {
   ht <- hux(a = rep('aaaaaa', 10), b = rep('bbbbbb', 10))
-  rowspan(ht)[1,1] <- 10
+  rowspan(ht)[1, 1] <- 10
   expect_equal_to_reference(to_screen(ht), 'multirow.rds')
 })
 
 test_that('to_screen does not cut off multicols', {
   ht <- hux(a = 1:2, b = 1:2)
-  ht[2,1] <- 'some very long long text'
+  ht[2, 1] <- 'some very long long text'
   colspan(ht)[2, 1] <- 2
   expect_match(to_screen(ht), 'some very long long text', fixed = TRUE)
 })
@@ -64,5 +64,3 @@ test_that('set_print_method() works', {
   options(huxtable.print = 'print_html')
   expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
 })
-
-

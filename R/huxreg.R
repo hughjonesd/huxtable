@@ -73,23 +73,22 @@ huxreg <- function (
   if (! missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
   if (! missing(coefs)) {
     if (! all(coefs %in% my_coefs)) stop('Unrecognized coefficient names: ',
-          paste(setdiff(coefs, my_coefs), collapse=', '))
+          paste(setdiff(coefs, my_coefs), collapse = ', '))
     my_coefs <- coefs
   }
   coef_names <- names_or(my_coefs, my_coefs)
-  ncoefs <- length(my_coefs)
 
   tidied <- lapply(tidied, merge, x = data.frame(term = my_coefs, stringsAsFactors = FALSE), all.x = TRUE, by = 'term',
         sort = FALSE)
   tidied <- lapply(tidied, function (x) x[match(my_coefs, x$term), ])
   tidied <- lapply(tidied, function(x) {
     numcols <- sapply(x, is.numeric)
-    x[,numcols] <- sapply(x[,numcols], format_number, number_format)
+    x[, numcols] <- sapply(x[, numcols], format_number, number_format)
     x
   })
   if (! is.null(stars)) tidied <- lapply(tidied, function (x) {
     stars_arg <- c(0, stars, ' ' = 1)
-    x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate),], paste(estimate, symnum(as.numeric(p.value),
+    x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ], paste(estimate, symnum(as.numeric(p.value),
           cutpoints = stars_arg, symbols = names(stars_arg)[-1], na = ' ')))
     x
   })
@@ -134,11 +133,11 @@ huxreg <- function (
   stat_names <- unique(unlist(lapply(all_sumstats, function (x) x$stat)))
   if (! is.null(statistics)) {
     if (! all(statistics %in% stat_names)) stop('Unrecognized statistics:',
-      paste(setdiff(statistics, stat_names)), collapse=', ')
+      paste(setdiff(statistics, stat_names)), collapse = ', ')
     stat_names <- statistics
   }
   sumstats <- lapply(all_sumstats, merge, x = data.frame(stat = stat_names), by = 'stat', all.x = TRUE, sort = FALSE)
-  sumstats <- lapply(sumstats, function (x) x[match(stat_names, x$stat),])
+  sumstats <- lapply(sumstats, function (x) x[match(stat_names, x$stat), ])
   ss_classes <- lapply(sumstats, function (x) x$class)
   sumstats <- lapply(sumstats, function (x) x$V1)
   sumstats <- Reduce(cbind, sumstats)
@@ -151,7 +150,7 @@ huxreg <- function (
   if (error_pos == 'right') {
     sumstats2 <- as_hux(matrix('', nrow(sumstats), ncol(sumstats) * 2))
     for (i in seq_len(ncol(sumstats))) {
-      sumstats2[, i*2-1] <- sumstats[, i]
+      sumstats2[, i * 2 - 1] <- sumstats[, i]
     }
     sumstats <- sumstats2
   }
@@ -198,7 +197,7 @@ bracket2 <- function (x) if (length(x) > 0) paste0('[', x, ']') else character(0
 
 
 make_ci <- function(tidied, ci_level) {
-  a <- c((1 - ci_level)/2, 1 - (1 - ci_level)/2)
+  a <- c( (1 - ci_level) / 2, 1 - (1 - ci_level) / 2)
   fac <- stats::qnorm(a)
   ci <- tidied$estimate + tidied$std.error %o% fac
   colnames(ci) <- c('conf.low', 'conf.high')
@@ -225,8 +224,8 @@ make_error_cells <- function (tidied, error_style) {
   strings <- sapply(error_style, function (x) eval(bquote(
     .(x)(tidied)
   )))
-  strings[,1] <- bracket(strings[,1])
-  strings[,-1] <- bracket2(strings[,-1])
+  strings[, 1] <- bracket(strings[, 1])
+  strings[, -1] <- bracket2(strings[, -1])
   strings <- apply(strings, 1, paste, collapse = ' ')
   strings[is.na(tidied$estimate)] <- NA
 

@@ -410,7 +410,6 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
   for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border')) {
     call[[1]] <- as.symbol(set_b)
     call[[2]] <- quote(ht)
-    #call$value <- value
     ht <- eval(call, list(ht = ht), parent.frame())
   }
 
@@ -600,7 +599,6 @@ set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
   for (set_p in paste0('set_', c('top', 'bottom', 'left', 'right'), '_padding')) {
     call[[1]] <- as.symbol(set_p)
     call[[2]] <- quote(ht)
-    #call$value <- value
     ht <- eval(call, list(ht = ht), parent.frame())
   }
 
@@ -926,4 +924,3 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @S3method label<- huxtable
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)
-

@@ -12,7 +12,7 @@ test_that('Row/column function examples unchanged', {
 })
 
 test_that('final() works as expected', {
-  dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5 , e = 1:5)
+  dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
   expect_equivalent(final(2)(dfr, 1), 4:5)
   expect_equivalent(final(2)(dfr, 2), 3:4)
   expect_equivalent(final(6)(dfr, 1), 1:5)
@@ -20,7 +20,7 @@ test_that('final() works as expected', {
 
 
 test_that('every(), evens and odds work as expected', {
-  dfr <- data.frame(a = 1:7, b = 1:7, d = 1:7 , e = 1:7)
+  dfr <- data.frame(a = 1:7, b = 1:7, d = 1:7, e = 1:7)
   expect_equivalent(every(3, from = 1)(dfr, 1), c(1, 4, 7))
   expect_equivalent(every(3, from = 1)(dfr, 2), c(1, 4))
   expect_equivalent(evens()(dfr, 1), c(2, 4, 6))
@@ -43,7 +43,7 @@ test_that('Can use set_cell_properties', {
   r <- 2
   c <- 1
   ht3 <- set_cell_properties(ht, r, c, bold = TRUE)
-  expect_equivalent(bold(ht3)[2,1], TRUE)
+  expect_equivalent(bold(ht3)[2, 1], TRUE)
 
 })
 
@@ -75,7 +75,7 @@ test_that('set_* works with cell functions', {
   ht <- set_font(ht, every(1), odds(), 'palatino')
   expect_equivalent(font(ht), matrix(c('palatino', 'times'), 4, 2, byrow = TRUE))
   ht <- hux(a = 1:4, b = 1:4)
-  ht <- set_font(ht, every(3, from = 1), every(1),'times')
+  ht <- set_font(ht, every(3, from = 1), every(1), 'times')
   expect_equivalent(font(ht), matrix(c('times', NA, NA, 'times'), 4, 2))
 })
 
@@ -94,14 +94,14 @@ test_that('set_* works with column ranges', {
   skip('Feature postponed until I understand deep magic')
   ht <- hux(a = 1:4, b = 1:4, c = 1:4, d = 1:4)
   ht <- set_font(ht, every(1), b:d, 'times')
-  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4 , 4, byrow = TRUE))
+  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4, 4, byrow = TRUE))
 })
 
 test_that('set_* works with expressions in ht context', {
   skip('Feature postponed until I understand deep magic')
   ht <- hux(a = 1:4, b = 1:4)
   ht <- set_font(ht, a >= 2 & b <= 3, 1:2, 'times')
-  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4 , 2))
+  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4, 2))
 })
 
 test_that('set_* works with byrow', {
@@ -147,11 +147,11 @@ test_that('set_* works when row and col are missing', {
 
 test_that('set_* works with row and col "empty"', {
   ht_orig <- hux(a = c(1, 0), b = c(0, 1))
-  ht2 <- set_font(ht_orig, 1, ,'times')
+  ht2 <- set_font(ht_orig, 1, , 'times')
   expect_equivalent(font(ht2), matrix(c('times', NA), 2, 2))
-  ht3 <- set_font(ht_orig, , 1,'times')
+  ht3 <- set_font(ht_orig, , 1, 'times')
   expect_equivalent(font(ht3), matrix(c('times', 'times', NA, NA), 2, 2))
-  ht4 <- set_font(ht_orig, , ,'times')
+  ht4 <- set_font(ht_orig, , , 'times')
   expect_equivalent(font(ht4), matrix('times', 2, 2))
 })
 

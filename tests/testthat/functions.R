@@ -1,6 +1,4 @@
 
-# library(testthat)
-
 example_code_for_topic <- function (fname) {
   path <- devtools::find_topic(fname)[1] # sometimes we get multiples!
 
@@ -32,7 +30,6 @@ test_ex_same <- function(fname, reset_on_change = TRUE) {
   }
 
   exenv <- new.env()
-  exres <- list()
   i <- 1
   for (expr in excode) {
     out <- capture.output(res <- eval(expr, envir = exenv))
@@ -81,4 +78,6 @@ skip_without_pandoc <- function () {
 
 skip_on_R_CMD_check <- function() {
   if (! Sys.getenv('R_TESTS') == '') skip('Not testing, code doesn\'t play well with R CMD check')
+  if (! Sys.getenv('COVERAGE') == '') skip('Not testing, code doesn\'t play well with R CMD check')
+
 }

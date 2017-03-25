@@ -52,9 +52,10 @@ to_html.huxtable <- function(ht, ...) {
   }
   idstring <- ''
   if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
-  res <- paste0('<table class="huxtable" style="border-collapse: collapse; width: ', width, '; ', mstring, heightstring,'"', idstring,'>\n')
+  res <- paste0('<table class="huxtable" style="border-collapse: collapse; width: ', width, '; ', mstring,
+        heightstring, '"', idstring,'>\n')
   if (! is.na(cap <- caption(ht))) {
-    cap <- paste0('<caption style="caption-side:', caption_pos(ht),'; text-align: center;">', cap, '</caption>')
+    cap <- paste0('<caption style="caption-side:', caption_pos(ht), '; text-align: center;">', cap, '</caption>')
     res <- paste0(res, cap)
   }
   cols_html <- sapply(1:ncol(ht), col_html, ht = ht)
@@ -72,7 +73,7 @@ to_html.huxtable <- function(ht, ...) {
 col_html <- function (ht, cn) {
   col_width <- col_width(ht)[cn]
   if (is.numeric(col_width)) col_width <- paste0(col_width * 100, '%')
-  res <- paste0('<col style="width: ', col_width ,';">')
+  res <- paste0('<col style="width: ', col_width, ';">')
   # print out <col>, <colgroup>, that kinda stuff
   res
 }
@@ -83,12 +84,12 @@ row_html <- function (ht, rn, contents) {
   style <- ''
   if (! is.na(height <- row_height(ht)[rn])) {
     if (is.numeric(height)) {
-      height <- height/sum(row_height(ht), na.omit = TRUE)
+      height <- height / sum(row_height(ht), na.omit = TRUE)
       height <- paste0(round(height * 100, 1), '%')
     }
     style <- paste0(' style="height: ', height, ';"')
   }
-  res <- paste0('<tr', style ,'>\n')
+  res <- paste0('<tr', style, '>\n')
   cols_to_show <- 1:ncol(ht)
   dcells <- display_cells(ht, all = TRUE) # speedup: make this call just once in parent
   cols_to_show <- setdiff(cols_to_show, dcells$col[dcells$row == rn & dcells$shadowed])
@@ -101,12 +102,12 @@ row_html <- function (ht, rn, contents) {
 
 cell_html <- function (ht, rn, cn, contents) {
   res <- '  <td '
-  rs <- rowspan(ht)[rn,cn]
-  cs <- colspan(ht)[rn,cn]
-  if (isTRUE(rs > 1)) res <- paste0(res, ' rowspan="', rs ,'"')
-  if (isTRUE(cs > 1)) res <- paste0(res, ' colspan="', cs ,'"')
+  rs <- rowspan(ht)[rn, cn]
+  cs <- colspan(ht)[rn, cn]
+  if (isTRUE(rs > 1)) res <- paste0(res, ' rowspan="', rs, '"')
+  if (isTRUE(cs > 1)) res <- paste0(res, ' colspan="', cs, '"')
 
-  res<- paste0(res, ' style="')
+  res <- paste0(res, ' style="')
   val <- valign(ht)[rn, cn]
   res <- paste0(res, 'vertical-align: ', val, '; ')
   al  <- align(ht)[rn, cn]
@@ -167,14 +168,12 @@ cell_html <- function (ht, rn, cn, contents) {
 
   if (! (span_css == '')) cell_contents <- paste0('<span style="', span_css, '">', cell_contents, '</span>')
 
-  if ((rt <- rotation(ht)[rn, cn]) != 0) {
+  if ( (rt <- rotation(ht)[rn, cn]) != 0) {
     # note the minus sign
-    cell_contents <- paste0('<div style="transform: rotate(-', rt,'deg); white-space:nowrap;">', cell_contents,
+    cell_contents <- paste0('<div style="transform: rotate(-', rt, 'deg); white-space:nowrap;">', cell_contents,
           '</div>')
   }
   res <- paste0(res, cell_contents)
   res <- paste0(res, '</td>\n')
   res
 }
-
-

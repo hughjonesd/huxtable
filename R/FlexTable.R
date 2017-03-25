@@ -75,7 +75,7 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
     dcol <- dcells$display_col[j]
     part <- if (drow %in% hrows) 'header' else if (drow %in% frows) 'footer' else 'body'
     if (part == 'body') ft[drow - header_rows, dcol, to = part] <- contents[drow, dcol]
-    ft <- format_cell(ft, ht, dcells[j,], part, header_rows, footer_rows)
+    ft <- format_cell(ft, ht, dcells[j, ], part, header_rows, footer_rows)
   }
 
   w <- width(ht)
@@ -83,7 +83,7 @@ as_FlexTable.huxtable <- function(x, header_rows = 0, footer_rows = 0, ...) {
   if (is.numeric(w)) w <- w * 6 else warning('FlexTable can only deal with numeric width, ignoring width of: ', w)
   if (! any(is.na(cw <- col_width(ht)))) {
     if (is.numeric(cw)) ft <- ReporteRs::setFlexTableWidths(ft, cw * w) else
-          warning('FlexTable can only deal with numeric col_width, ignoring col_width of: ', paste(cw, collapse=', '))
+          warning('FlexTable can only deal with numeric col_width, ignoring col_width of: ', paste(cw, collapse = ', '))
   }
 
   ft
@@ -155,7 +155,7 @@ format_cell <- function(ft, ht, dc, part, header_rows, footer_rows) {
 }
 
 get_text_dir <- function (ht, row) {
-  rot <- rotation(ht)[row,]
+  rot <- rotation(ht)[row, ]
   if (length(unique(rot)) > 1) warning('FlexTable cannot handle multiple rotation values per row')
   rot <- rot[1]
   rot <- switch(as.character(rot),

@@ -120,7 +120,8 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL, colnames = TRUE, colnames_color = 'blue', ...) {
+to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical', 'neither'), blank = NULL,
+      colnames = TRUE, colnames_color = 'blue', ...) {
   borders <- match.arg(borders)
   collapse_horiz <- is.null(blank)
   if (is.null(blank)) blank <- ' '
@@ -130,11 +131,11 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
   my_colour <- if (is.null(colnames_color)) identity else crayon::make_style(colnames_color)
 
   dc <- display_cells(ht, all = FALSE)
-  drow_mat <- as.matrix(dc[,c('display_row', 'display_col')])
+  drow_mat <- as.matrix(dc[, c('display_row', 'display_col')])
   contents <- clean_contents(ht, type = 'screen')
   dc$contents <- contents[drow_mat]
 
-  dc <- dc[order(dc$colspan),]
+  dc <- dc[order(dc$colspan), ]
   border_chars   <- 3
 
   dc$widths <- nchar(dc$contents, type = 'width')
@@ -143,9 +144,9 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
   max_widths <- rep(0, ncol(ht))
   for (r in 1:nrow(dc)) {
     width <- dc$widths[r]
-    cols <- with(dc[r,], display_col:end_col)
+    cols <- with(dc[r, ], display_col:end_col)
     if (sum(max_widths[cols]) + border_chars * (dc$colspan[r] - 1) < width) {
-      max_widths[cols] <- pmax(max_widths[cols], ceiling(width/dc$colspan[r]))
+      max_widths[cols] <- pmax(max_widths[cols], ceiling(width / dc$colspan[r]))
     }
   }
 
@@ -153,7 +154,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
   border_cells    <- matrix(0, nrow(charmat), ncol(charmat)) # 0 = not a border; 1 = no border; > 1 = border
   corner_cells    <- matrix(FALSE, nrow(charmat), ncol(charmat))
   for (r in 1:nrow(dc)) {
-    dcr     <- dc[r,]
+    dcr     <- dc[r, ]
     drow    <- dcr$display_row
     dcol    <- dcr$display_col
     end_col <- dcol + dcr$colspan - 1
@@ -162,7 +163,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
     # content
     chars       <- strsplit(dcr$contents, '')[[1]]
     char_row    <- drow * 2
-    total_width <- sum(max_widths[dcol:end_col]) + border_chars*(dcr$colspan - 1) # include internal borders
+    total_width <- sum(max_widths[dcol:end_col]) + border_chars * (dcr$colspan - 1) # include internal borders
     start_char  <- sum(max_widths[seq_len(dcol - 1)]) + border_chars * dcol
     while (length(chars) > 0) {
       idx      <- 1:min(total_width, length(chars))
@@ -170,7 +171,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
       char_idx <- switch(align(ht)[drow, dcol],
               left  = start_char + idx,
               right = start_char + space + idx,
-              center = start_char + floor(space/2) + idx
+              center = start_char + floor(space / 2) + idx
             )
       charmat[char_row, char_idx ] <- chars[idx]
       chars <- chars[-idx]
@@ -185,7 +186,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
     border_cells[(drow * 2):(end_row * 2), start_char - 1] <-
             pmax(border_cells[(drow * 2):(end_row * 2), start_char - 1], 1 + bord$left)
     border_cells[(drow * 2):(end_row * 2), start_char + total_width + 2] <-
-          pmax(border_cells[(drow * 2):(end_row * 2), start_char + total_width + 2],1 + bord$right)
+          pmax(border_cells[(drow * 2):(end_row * 2), start_char + total_width + 2], 1 + bord$right)
     corner_cells[drow * 2 + c(-1, 1), c(start_char - 1, start_char + total_width + 2)] <- TRUE
   }
 
@@ -195,12 +196,12 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
   if (borders == 'vertical') charmat[border_cells > 1 & row(charmat) %% 2 & corner_cells] <- '|'
   if (collapse_horiz) {
     empty_borders <- apply(border_cells, 1, function (x) all(x[ -c(1, ncol(charmat)) ] == 1))
-    charmat <- charmat[!empty_borders,]
+    charmat <- charmat[ !empty_borders, ]
   }
   result <- apply(charmat, 1, paste0, collapse='')
 
   if (colnames) result[2 - collapse_horiz] <- my_colour(result[2 - collapse_horiz])
-  result <- paste0(result, collapse='\n')
+  result <- paste0(result, collapse = '\n')
   if (! is.na(cap <- caption(ht))) {
     result <- if (caption_pos(ht) == 'top') paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
@@ -241,7 +242,7 @@ to_md <- function(ht, ...) UseMethod('to_md')
 to_md.huxtable <- function(ht, max_width = 80, ...) {
   cw <- col_width(ht)
   if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
-  cw <- floor(cw/sum(cw) * (max_width - ncol(ht) + 1))
+  cw <- floor(cw / sum(cw) * (max_width - ncol(ht) + 1))
   width <- sum(cw) + ncol(ht) - 1
   ncharw <- function(x) nchar(x, type = 'width')
   dcells <- display_cells(ht, all = FALSE)
@@ -255,22 +256,22 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
   align <- align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
         warning("Can't vary column alignment in markdown; using first row")
-  align <- align[1,]
+  align <- align[1, ]
 
   # for every row:
   #   print the first cw characters of display cells in that row
   #   if there are any left over, start a new row
   for (myrow in 1:nrow(ht)) {
     row_chars <- rep('', ncol(ht))
-    dcr <- dcells[dcells$display_row == myrow,]
+    dcr <- dcells[dcells$display_row == myrow, ]
     row_chars[ dcr$display_col ] <- dcr$contents
     while(any(ncharw(row_chars) > 0)) {
       for (i in 1:ncol(ht)) {
         chunk <- substring(row_chars[i], 1, cw[i])
-        if ((extra <- cw[i] - ncharw(chunk)) > 0) {
+        if ( (extra <- cw[i] - ncharw(chunk)) > 0) {
           chunk <- switch(align[i],
             left = paste0(chunk, str_rep(' ', extra)),
-            center = paste0(str_rep(' ', floor(extra/2)), chunk, str_rep(' ', ceiling(extra/2))),
+            center = paste0(str_rep(' ', floor(extra / 2)), chunk, str_rep(' ', ceiling(extra / 2))),
             right = paste0(str_rep(' ', extra), chunk)
           )
         }
@@ -294,6 +295,5 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
 }
 
 str_rep <- function(x, times) {
-  mapply(function (s, t) paste0(rep(s, t), collapse=''), x, times)
+  mapply(function (s, t) paste0(rep(s, t), collapse = ''), x, times)
 }
-

@@ -4,7 +4,7 @@
 
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
-  mytype <- match.arg(type)
+  type <- match.arg(type)
   contents <- as.matrix(as.data.frame(ht))
 
   for (col in 1:ncol(contents)) {
@@ -24,7 +24,7 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
       contents[to_esc, col] <-  xtable::sanitize(contents[to_esc, col], type)
     }
     # has to be after sanitization because we add &nbsp; for HTML
-    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[,col], type)
+    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[, col], type)
   }
 
   contents
@@ -107,7 +107,8 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
     dr <- dcells$row[i]
     dc <- dcells$col[i]
     spanned <- dcells$row %in% dr:(dr + dcells$rowspan[i] - 1) & dcells$col %in% dc:(dc + dcells$colspan[i] - 1)
-    dcells[spanned, change_cols] <- matrix(as.numeric(dcells[i, change_cols]), sum(spanned), length(change_cols), byrow = TRUE)
+    dcells[spanned, change_cols] <- matrix(as.numeric(dcells[i, change_cols]), sum(spanned), length(change_cols),
+          byrow = TRUE)
 
     shadowed <- spanned & (1:nrow(dcells)) != i
     dcells$shadowed[shadowed] <- TRUE
@@ -226,7 +227,7 @@ hux_logo <- function(latex = FALSE) {
   logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
   rowspan(logo)[1, 1] <- 2
   colspan(logo)[2, 2] <- 2
-  logo <- set_all_borders(logo, , ,1)
+  logo <- set_all_borders(logo, , , 1)
   font_size(logo) <- if (latex) 12 else 20
   font_size(logo)[1, 2:3] <- if (latex) 16 else 24
   font_size(logo)[1, 1] <-  if (latex) 28 else 42
@@ -237,11 +238,9 @@ hux_logo <- function(latex = FALSE) {
   height(logo) <- if (latex) '40pt' else '60pt'
   font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
   if (latex) font(logo) <- 'ppl'
-  #set_all_padding(logo, , , 6)
   top_padding(logo) <- 2
   bottom_padding(logo) <- 2
   col_width(logo) <- c(.4, .3, .3)
-  #left_padding(logo)[1, 1] <- 10
   position(logo) <- 'center'
   logo
 }

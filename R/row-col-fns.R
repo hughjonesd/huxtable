@@ -48,7 +48,7 @@ evens <- function(from = 2) every(2, ceiling(from/2) * 2)
 
 #' @rdname every
 #' @export
-odds  <- function(from = 1) every(2, ceiling((from - 1)/2) * 2 + 1)
+odds  <- function(from = 1) every(2, ceiling( (from - 1)/2) * 2 + 1)
 
 #' Return the last n rows or columns
 #'
@@ -158,7 +158,7 @@ NULL
 #' where(ht > 2)
 #' where(is_a_number(ht))
 #'
-where <- function(expr) {which(expr, arr.ind = TRUE)}
+where <- function(expr) which(expr, arr.ind = TRUE)
 
 #' Does an object look like a number?
 #'
