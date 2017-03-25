@@ -45,12 +45,13 @@ theme_striped <- function (ht, stripe = grey(.9), header_row = TRUE, header_col 
   if (header_row) {
     background_color(ht)[1, ] <- 'black'
     text_color(ht)[1, ]       <- 'white'
+    ht <- set_all_border_colors(ht, 1, every(), 'white')
     bold(ht)[1, ]             <- TRUE
   }
   if (header_col) {
     background_color(ht)[, 1] <- 'black'
     text_color(ht)[, 1]       <- 'white'
-    border_color(ht)[, 1]     <- 'white'
+    ht <- set_all_border_colors(ht, every(), 1, 'white')
     bold(ht)[, 1]             <- TRUE
   }
 
