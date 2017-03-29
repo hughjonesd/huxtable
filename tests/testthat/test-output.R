@@ -5,6 +5,20 @@ context("Output")
 source('functions.R')
 
 
+validate_markdown <- function(md_string, output_format = 'html_document') {
+  force(output_format)
+  on.exit({
+    if (exists('tf')) file.remove(tf)
+    if (exists('ht')) file.remove(ht)
+  })
+  td <- tempdir()
+  tf <- tempfile(pattern = 'markdown-example', fileext = '.md', tmpdir = td)
+  cat(md_string, file = tf)
+  expect_error(ht <- rmarkdown::render(tf, output_format = output_format, output_file = NULL, output_dir = td,
+    intermediates_dir = td, clean = TRUE, quiet = TRUE), regexp = NA) # no error
+}
+
+
 test_that('LaTeX output examples unchanged', {
   test_ex_same('to_latex')
 })
@@ -25,10 +39,30 @@ test_that('Screen output examples unchanged', {
 })
 
 
-test_that('FlexTable output examples unchanged', {
-  skip('Output too screwed up, perhaps by Java references')
-  if (! requireNamespace('ReporteRs')) skip('ReporteRs not installed')
-  test_ex_same('as_FlexTable.huxtable')
+test_that('to_md produces valid markdown', {
+  skip_without_pandoc()
+  ht <- hux(a = 1:5, b = 1:5)
+  md <- to_md(ht)
+  validate_markdown(md)
+  ht <- set_all_borders(ht, 1)
+  md <- to_md(ht)
+  validate_markdown(md)
+})
+
+
+test_that('to_md keeps to max_width', {
+  ht <- hux(a = paste(sample(LETTERS), collapse = '...'), b = 1:26)
+  for (mw in 2:12 * 10) {
+    md <- to_md(ht, max_width = mw)
+    lines <- strsplit(md, '\n', fixed = TRUE)[[1]]
+    expect_true(all(nchar(lines, type = 'width') <= mw))
+  }
+})
+
+
+test_that('hux_logo works', {
+  expect_error(hux_logo(), regexp = NA)
+  expect_error(hux_logo(latex = TRUE), regexp = NA)
 })
 
 
@@ -38,12 +72,14 @@ test_that('Multi-rowspan screen output is sane', {
   expect_equal_to_reference(to_screen(ht), 'multirow.rds')
 })
 
+
 test_that('to_screen does not cut off multicols', {
   ht <- hux(a = 1:2, b = 1:2)
   ht[2, 1] <- 'some very long long text'
   colspan(ht)[2, 1] <- 2
   expect_match(to_screen(ht), 'some very long long text', fixed = TRUE)
 })
+
 
 test_that('guess_knitr_output_format() gets it right', {
   out <- character(0)
@@ -54,6 +90,7 @@ test_that('guess_knitr_output_format() gets it right', {
     expect_silent(out[fname] <- rmarkdown::render(fname, quiet = TRUE, run_pandoc = FALSE))
   }
 })
+
 
 test_that('set_print_method() works', {
   ht <- hux(a = 1:2, b = 1:2)
