@@ -163,8 +163,8 @@ is_hux <- is_huxtable
 #' return a vector of data.
 #' For the replacement function \code{[<-}, if \code{value} is a huxtable, then its cell properties will be
 #' copied into \code{x}. In addition, if \code{nrow(value) == nrow(x)}, then column properties
-#' will be copied into \code{x} as appropriate, and if  \code{ncol(value) == ncol(x)}, then
-#' row properties will be copied.
+#' will be copied into the replaced columns of \code{x}, and if  \code{ncol(value) == ncol(x)}, then
+#' row properties will be copied into the replaced rows.
 #' Replacement functions \code{$<-} and \code{[[<-} simply change the data without affecting other properties.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
