@@ -573,8 +573,8 @@ NULL
 #' top_padding(ht) <- value
 #' set_top_padding(ht, row, col, value, byrow = FALSE)
 #' @export top_padding top_padding<- set_top_padding top_padding.huxtable top_padding<-.huxtable
-#' @S3method bottom_padding huxtable
-#' @S3method bottom_padding<- huxtable
+#' @S3method top_padding huxtable
+#' @S3method top_padding<- huxtable
 NULL
 
 
