@@ -93,11 +93,12 @@ huxtable_latex_dependencies <- list(
 #'
 report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   report <- sapply(huxtable_latex_dependencies, function(ld) {
-    str <- paste0('\\usepackage{', ld$name, '}')
+    str <- '\\usepackage'
     if (! is.null(ld$options)) {
       str <- paste0(str, '[', paste(ld$options, collapse = ','), ']')
     }
-    paste0(str, '\n')
+    str <- paste0(str, '{', ld$name, '}\n')
+    str
   })
   if (! quiet) {
     cat(paste0(report, collapse = ''))
