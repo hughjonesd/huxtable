@@ -124,9 +124,10 @@ huxreg <- function (
       warning('No `glance` method for model of class ', class(m)[1])
       NULL
     } else t(bg)
-    x <- as.data.frame(rbind(nobs = nobs(m), bg))
+    nobs <- nobs(m, use.fallback = TRUE)
+    x <- as.data.frame(rbind(nobs = nobs, bg))
     x$stat  <- rownames(x)
-    x$class <- c(class(nobs(m)), sapply(bg, class))
+    x$class <- c(class(nobs), sapply(bg, class))
     x
   })
 
