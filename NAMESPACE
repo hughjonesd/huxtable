@@ -3,6 +3,7 @@
 S3method("$<-",huxtable)
 S3method("[",huxtable)
 S3method("[<-",huxtable)
+S3method("[[<-",huxtable)
 S3method("align<-",huxtable)
 S3method("background_color<-",huxtable)
 S3method("bold<-",huxtable)
