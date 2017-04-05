@@ -152,16 +152,19 @@ test_that('Can delete columns from a huxtable by setting it to `NULL`', {
   expect_equivalent(font(ht3), matrix(NA, 2, 1))
   expect_equivalent(col_width(ht3), NA)
 
-  # this kind of subsetting doesn't seem to work in R <= 3.2.5
-  # ht4 <- hux(a = 1:2, b = 1:2, c = 1:2)
-  # expect_silent(ht4[ c('a', 'b')] <- NULL)
-  # expect_equivalent(font(ht4), matrix(NA, 2, 1))
-  # expect_equivalent(col_width(ht4), NA)
+  # this kind of subsetting doesn't seem to work in earlier Rs
+  if (getRversion() < R_system_version('3.3.3')) {
+    ht4 <- hux(a = 1:2, b = 1:2, c = 1:2)
+    expect_silent(ht4[ c('a', 'b')] <- NULL)
+    expect_equivalent(font(ht4), matrix(NA, 2, 1))
+    expect_equivalent(col_width(ht4), NA)
 
-  ht5 <- hux(a = 1:2, b = 1:2, c = 1:2)
-  expect_silent(ht5[ , c('a', 'b')] <- NULL)
-  expect_equivalent(font(ht5), matrix(NA, 2, 1))
-  expect_equivalent(col_width(ht5), NA)
+    ht5 <- hux(a = 1:2, b = 1:2, c = 1:2)
+    expect_silent(ht5[ , c('a', 'b')] <- NULL)
+    expect_equivalent(font(ht5), matrix(NA, 2, 1))
+    expect_equivalent(col_width(ht5), NA)
+  }
+
 })
 
 
