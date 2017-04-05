@@ -14,15 +14,9 @@
 #' @section Package options:
 #'
 #' \itemize{
-#'   \item \code{options('huxtable.print')} sets the print method for huxtable objects.
+#'   \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link{print.huxtable}}.
 #' }
 #'
-#' On the console, by default, huxtables print using the \code{\link{print_screen}} method. Within a knitr chunk,
-#' huxtables will automatically print using the appropriate method for the document,
-#' so that you can just write, e.g. \code{ht} rather than \code{print_html(ht)}.
-#' The \code{huxtable.print} option lets you control the default output of printing huxtables,
-#' in cases where this autodetection doesn't work: e.g. set
-#' \code{options(huxtable.print = print_html)}.
 #'
 #' @name huxtable-package
 NULL

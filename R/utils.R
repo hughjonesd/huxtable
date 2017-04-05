@@ -147,7 +147,24 @@ knit_print.huxtable <- function (x, options, ...) {
 options(huxtable.print = print_screen)
 
 
+#' Default print method for huxtables
+#'
+#' By default huxtables are printed using \code{\link{print_screen}}. In certain cases, for example
+#' in Sweave documents, it may be
+#' useful to change this. You can do so by setting \code{options(huxtable.print)}.
+#' @param x A huxtable.
+#' @param ... Options passed to other methods.
+#'
+#' @return
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' # to print LaTeX output:
+#' options(huxtable.print = print_latex)
+#' # to print huxtables like data frames:
+#' options(huxtable.print = function(x, ...) print(as.data.frame(x)))
+#' }
 print.huxtable <- function(x, ...) {
   meth <- getOption('huxtable.print', default = print_screen)
   if (is.character(meth)) meth <- eval(as.symbol(meth))
