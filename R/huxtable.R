@@ -546,10 +546,11 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   result <- NextMethod()
   result <- as_hux(result)
 
-  for (att in c(huxtable_row_attrs, huxtable_table_attrs)) {
-    attr(result, att) <- attr(ht, att)
-  }
+  for (att in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, att) <- attr(ht, att)
 
+  # unlike in extract-methods we can't assume that new columns are on the right: transmute can reorder them
+  # columns may even be reordered by e.g. a=NULL,...,a=new_value
+  # so: all columns with an old name get the old attributes. New columns get copied attributes maybe.
   match_cols <- match(colnames(result), colnames(ht))
   if (copy_cell_props) match_cols <- Reduce(function (x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
   result_cols <- ! is.na(match_cols)
