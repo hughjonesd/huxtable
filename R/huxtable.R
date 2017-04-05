@@ -70,7 +70,7 @@ hux <- huxtable
 #' as_huxtable(dfr)
 #'
 #' @rdname huxtable
-as_huxtable <- function(x, ...) UseMethod('as_huxtable')
+as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 
 #' @export
 #' @rdname huxtable
@@ -108,10 +108,10 @@ as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, 
 }
 
 #' @export
-as_huxtable.huxtable <- function(x, ...) x
+as_huxtable.huxtable <- function (x, ...) x
 
 #' @export
-as_huxtable.table <- function(x, add_colnames = TRUE, add_rownames = TRUE, ...) {
+as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...) {
   ht <- as_huxtable(unclass(x), add_colnames, add_rownames, ...)
   number_format(ht) <- 0
   ht
@@ -142,7 +142,7 @@ as_huxtable.complex   <- as_huxtable.numeric
 
 #' @export
 #' @rdname huxtable
-is_huxtable <- function(x) inherits(x, 'huxtable')
+is_huxtable <- function (x) inherits(x, 'huxtable')
 
 #' @export
 #' @rdname huxtable
@@ -276,7 +276,7 @@ is_hux <- is_huxtable
 #' bold(cbind(ht1, vec, ht2, copy_cell_props = FALSE))
 #'
 #' @export
-cbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
+cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   force(copy_cell_props)
   bind_hux(..., type = 'cbind', copy_cell_props = copy_cell_props)
 }
@@ -284,13 +284,13 @@ cbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
 
 #' @export
 #' @rdname cbind.huxtable
-rbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
+rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   force(copy_cell_props)
   bind_hux(..., type = 'rbind', copy_cell_props = copy_cell_props)
 }
 
 
-bind_hux <- function(..., type, copy_cell_props) {
+bind_hux <- function (..., type, copy_cell_props) {
   default_copy_attrs <- setdiff(huxtable_cell_attrs, c('colspan', 'rowspan'))
   if (isTRUE(copy_cell_props)) copy_cell_props <- default_copy_attrs
   objs <- list(...)
@@ -307,7 +307,7 @@ bind_hux <- function(..., type, copy_cell_props) {
     x
   })
 
-  f <- function(ht, x) bind2_hux(ht, x, type, copy_cell_props = copy_cell_props)
+  f <- function (ht, x) bind2_hux(ht, x, type, copy_cell_props = copy_cell_props)
   res <- Reduce(f, objs)
 
   daddy <- Find(is_hux, objs)
@@ -319,11 +319,11 @@ bind_hux <- function(..., type, copy_cell_props) {
 }
 
 
-bind2_hux <- function(ht, x, type, copy_cell_props) {
+bind2_hux <- function (ht, x, type, copy_cell_props) {
   ht_real_hux <- attr(ht, 'from_real_hux')
   x_real_hux  <- attr(x, 'from_real_hux')
 
-  ht <- as_hux(ht) # resets attributes
+  ht <- as_hux(ht)
   x  <- as_hux(x)
   ccp <- intersect(copy_cell_props, huxtable_cell_attrs)
 
@@ -342,7 +342,7 @@ bind2_hux <- function(ht, x, type, copy_cell_props) {
     }
   }
 
-  bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function(x, y){
+  bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function (x, y) {
     rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
   bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
