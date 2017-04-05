@@ -408,16 +408,9 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function (x, y) {
     rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
-  bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
 
   res <- as_hux(bind_df(ht, x))
-  for (att in huxtable_cell_attrs) {
-    attr(res, att) <- bind_cells(attr(ht, att), attr(x, att))
-  }
-  join_attrs <- switch(type, 'cbind' = huxtable_col_attrs, 'rbind' = huxtable_row_attrs)
-  for (att in join_attrs) {
-    attr(res, att) <- c(attr(ht, att), attr(x, att))
-  }
+  res <- merge_props(res, ht, x, type = type, copy_cell_props = is.character(copy_cell_props))
 
   attr(res, 'from_real_hux') <- x_real_hux || ht_real_hux
   res
@@ -448,7 +441,8 @@ delete_props <- function (res, idx, type = c('cols', 'rows')) {
 }
 
 
-merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_cell_props = TRUE) {
+# returns res with properties created from 'first' and 'second' huxtables
+merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_cell_props = FALSE) {
   type <- match.arg(type)
   # if second is not a huxtable, make it a huxtable; and if ccp is TRUE, copy properties over:
   #  - cell properties copied L-R from last col (cbind) or T-B from last row (rbind)
