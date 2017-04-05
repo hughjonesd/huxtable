@@ -29,8 +29,6 @@ NULL
 
 #' @import stats
 #' @import grDevices
-
-#'
 NULL
 
 
@@ -54,6 +52,7 @@ huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
   ht
 }
 
+
 #' @export
 #' @rdname huxtable
 hux <- huxtable
@@ -72,29 +71,31 @@ hux <- huxtable
 #' @rdname huxtable
 as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 
+
 #' @export
 #' @rdname huxtable
 as_hux <- as_huxtable
+
 
 #' @export
 #' @rdname huxtable
 as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, ...) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
-  for (att in setdiff(huxtable_cell_attrs, 'number_format')) {
-    attr(x, att) <- matrix(NA, nrow(x), ncol(x))
+  for (a in setdiff(huxtable_cell_attrs, 'number_format')) {
+    attr(x, a) <- matrix(NA, nrow(x), ncol(x))
   }
-  for (att in huxtable_col_attrs) {
-    attr(x, att) <- rep(NA, ncol(x))
+  for (a in huxtable_col_attrs) {
+    attr(x, a) <- rep(NA, ncol(x))
   }
-  for (att in huxtable_row_attrs) {
-    attr(x, att) <- rep(NA, nrow(x))
+  for (a in huxtable_row_attrs) {
+    attr(x, a) <- rep(NA, nrow(x))
   }
-  for (att in huxtable_table_attrs) {
-    attr(x, att) <- NA
+  for (a in huxtable_table_attrs) {
+    attr(x, a) <- NA
   }
   attr(x, 'number_format') <- matrix(list(NA), nrow(x), ncol(x))
-  for (att in names(huxtable_default_attrs)) {
-    attr(x, att)[] <- huxtable_default_attrs[[att]] # [[ indexing matters here
+  for (a in names(huxtable_default_attrs)) {
+    attr(x, a)[] <- huxtable_default_attrs[[a]] # [[ indexing matters here
   }
 
   class(x) <- c('huxtable', class(x))
@@ -152,7 +153,7 @@ is_hux <- is_huxtable
 #'
 #' @param x A huxtable.
 #' @param i Rows to select.
-#' @param j Columns to select.
+#' @param j,name Columns to select.
 #' @param drop Not used.
 #'
 #' @return A huxtable.
@@ -162,9 +163,9 @@ is_hux <- is_huxtable
 #' \code{[} always returns a new huxtable object, while \code{$} and \code{[[} simply
 #' return a vector of data.
 #' For the replacement function \code{[<-}, if \code{value} is a huxtable, then its cell properties will be
-#' copied into \code{x}. In addition, if \code{nrow(value) == nrow(x)}, then column properties
-#' will be copied into the replaced columns of \code{x}, and if  \code{ncol(value) == ncol(x)}, then
-#' row properties will be copied into the replaced rows.
+#' copied into \code{x}. In addition, if \code{value} fills up an entire column, then column properties
+#' will be copied into the replaced columns of \code{x}, and if it fills up an entire row, then
+#' row properties will be copied into the replaced rows of \code{x}.
 #' Replacement functions \code{$<-} and \code{[[<-} simply change the data without affecting other properties.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
@@ -179,17 +180,17 @@ is_hux <- is_huxtable
   ss <- as.data.frame(x)[i, j, drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
   if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
-  for (att in huxtable_cell_attrs) {
-    attr(ss, att) <- attr(x, att)[i, j, drop = drop]
+  for (a in huxtable_cell_attrs) {
+    attr(ss, a) <- attr(x, a)[i, j, drop = drop]
   }
-  for (att in huxtable_col_attrs) {
-    attr(ss, att) <- attr(x, att)[j]
+  for (a in huxtable_col_attrs) {
+    attr(ss, a) <- attr(x, a)[j]
   }
-  for (att in huxtable_row_attrs) {
-    attr(ss, att) <- attr(x, att)[i]
+  for (a in huxtable_row_attrs) {
+    attr(ss, a) <- attr(x, a)[i]
   }
-  for (att in huxtable_table_attrs) {
-    attr(ss, att) <- attr(x, att)
+  for (a in huxtable_table_attrs) {
+    attr(ss, a) <- attr(x, a)
   }
 
   class(ss) <- class(x)
@@ -256,8 +257,6 @@ is_hux <- is_huxtable
 }
 
 
-#' @param name See \code{\link{Extract.data.frame}}.
-#'
 #' @rdname extract-methods
 #' @export
 `$<-.huxtable` <- function (x, name, value) {
@@ -375,7 +374,7 @@ bind_hux <- function (..., type, copy_cell_props) {
 
   daddy <- Find(is_hux, objs)
   first_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
-  for (att in c(first_attrs, huxtable_table_attrs)) attr(res, att) <- attr(daddy, att)
+  for (a in c(first_attrs, huxtable_table_attrs)) attr(res, a) <- attr(daddy, a)
 
   attr(res, 'from_real_hux') <- NULL
   res
@@ -392,15 +391,15 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
 
   if (is.character(ccp)) {
     if (! x_real_hux) {
-      for (att in ccp) {
-        attr(x, att)[] <- if (type == 'cbind') attr(ht, att)[, ncol(ht)] else
-          matrix(attr(ht, att)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
+      for (a in ccp) {
+        attr(x, a)[] <- if (type == 'cbind') attr(ht, a)[, ncol(ht)] else
+          matrix(attr(ht, a)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
       }
     }
     if (! ht_real_hux && x_real_hux) {
-      for (att in ccp) {
-        attr(ht, att)[] <- if (type == 'cbind') attr(x, att)[, 1] else
-          matrix(attr(x, att)[1, ], nrow(ht), ncol(ht), byrow = TRUE)
+      for (a in ccp) {
+        attr(ht, a)[] <- if (type == 'cbind') attr(x, a)[, 1] else
+          matrix(attr(x, a)[1, ], nrow(ht), ncol(ht), byrow = TRUE)
       }
     }
   }
@@ -410,7 +409,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   })
 
   res <- as_hux(bind_df(ht, x))
-  res <- merge_props(res, ht, x, type = type, copy_cell_props = is.character(copy_cell_props))
+  res <- merge_props(res, ht, x, type = type, copy_cell_props = copy_cell_props)
 
   attr(res, 'from_real_hux') <- x_real_hux || ht_real_hux
   res
@@ -450,40 +449,39 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
   #  - col  properties copied from last col (cbind)
   if (! is_huxtable(second)) {
     second <- as_hux(second)
-    if (isTRUE(copy_cell_props)) {
-      cell_attrs_to_copy <- setdiff(huxtable_cell_attrs, c('colspan', 'rowspan'))
-      for (att in cell_attrs_to_copy) {
-        attr(second, att)[] <- if (type == 'cbind') attr(first, att)[, ncol(first)] else
-              matrix(attr(first, att)[nrow(first), ], nrow(second), ncol(second), byrow = TRUE)
+    if (is.character(copy_cell_props)) {
+      for (a in copy_cell_props) {
+        attr(second, a)[] <- if (type == 'cbind') attr(first, a)[, ncol(first)] else
+              matrix(attr(first, a)[nrow(first), ], nrow(second), ncol(second), byrow = TRUE)
       }
-      if (type == 'rbind') for (att in huxtable_row_attrs) {
-        attr(second, att) <- rep(attr(first, att)[nrow(first)], nrow(second))
+      if (type == 'rbind') for (a in huxtable_row_attrs) {
+        attr(second, a) <- rep(attr(first, a)[nrow(first)], nrow(second))
       }
-      if (type == 'cbind') for (att in huxtable_col_attrs) {
-        attr(second, att) <- rep(attr(first, att)[ncol(first)], ncol(second))
+      if (type == 'cbind') for (a in huxtable_col_attrs) {
+        attr(second, a) <- rep(attr(first, a)[ncol(first)], ncol(second))
       }
     }
   }
-  # c or rbind first and second's properties into res, as follows:
+  # c- or rbind first and second's properties into res, as follows:
   #  - first gets priority for table properties;
-  #  - all cell properties are just c or rbinded
+  #  - all cell properties are just c- or rbinded
   #  - row properties are concatenated if type=='rbind', otherwise they are from `first`
   #  - col properties are concatenated if type=='cbind', otherwise they are from `first`
 
-  for (att in huxtable_table_attrs) {
-    attr(res, att) <- attr(first, att)
+  for (a in huxtable_table_attrs) {
+    attr(res, a) <- attr(first, a)
   }
   bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
-  for (att in huxtable_cell_attrs) {
-    attr(res, att) <- bind_cells(attr(first, att), attr(second, att))
+  for (a in huxtable_cell_attrs) {
+    attr(res, a) <- bind_cells(attr(first, a), attr(second, a))
   }
   join_attrs  <- switch(type, 'cbind' = huxtable_col_attrs, 'rbind' = huxtable_row_attrs)
   first_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
-  for (att in join_attrs) {
-    attr(res, att) <- c(attr(first, att), attr(second, att))
+  for (a in join_attrs) {
+    attr(res, a) <- c(attr(first, a), attr(second, a))
   }
-  for (att in first_attrs) {
-    attr(res, att) <- attr(first, att)
+  for (a in first_attrs) {
+    attr(res, a) <- attr(first, a)
   }
 
   res
@@ -540,7 +538,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   result <- NextMethod()
   result <- as_hux(result)
 
-  for (att in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, att) <- attr(ht, att)
+  for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 
   # unlike in extract-methods we can't assume that new columns are on the right: transmute can reorder them
   # columns may even be reordered by e.g. a=NULL,...,a=new_value
@@ -550,8 +548,8 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   result_cols <- ! is.na(match_cols)
   match_cols  <- na.omit(match_cols)
 
-  for (att in huxtable_cell_attrs) attr(result, att)[, result_cols] <- attr(ht, att)[, match_cols]
-  for (att in huxtable_col_attrs)  attr(result, att)[result_cols]  <- attr(ht, att)[match_cols]
+  for (a in huxtable_cell_attrs) attr(result, a)[, result_cols] <- attr(ht, a)[, match_cols]
+  for (a in huxtable_col_attrs)  attr(result, a)[result_cols]  <- attr(ht, a)[match_cols]
 
   result <- set_attr_dimnames(result)
 
@@ -627,9 +625,9 @@ rename_.huxtable <- select_.huxtable
 #' @export
 t.huxtable <- function (x) {
   res <- as_hux(NextMethod())
-  for (att in setdiff(huxtable_cell_attrs, c('colspan', 'rowspan', 'height', 'width',
+  for (a in setdiff(huxtable_cell_attrs, c('colspan', 'rowspan', 'height', 'width',
         'bottom_border', 'left_border', 'top_border', 'right_border'))) {
-    attr(res, att) <- t(attr(x, att))
+    attr(res, a) <- t(attr(x, a))
   }
   attr(res, 'colspan') <- t(attr(x, 'rowspan'))
   attr(res, 'rowspan') <- t(attr(x, 'colspan'))
@@ -643,8 +641,8 @@ t.huxtable <- function (x) {
   col_width(res)  <- row_height(x)
   rownames(res)   <- colnames(x)
   colnames(res)   <- rownames(x)
-  for (att in huxtable_table_attrs) {
-    attr(res, att) <- attr(x, att)
+  for (a in huxtable_table_attrs) {
+    attr(res, a) <- attr(x, a)
   }
 
   res
@@ -704,14 +702,14 @@ add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames =
 }
 
 set_attr_dimnames <- function(ht) {
-  for (att in huxtable_cell_attrs) {
-    dimnames(attr(ht, att)) <- dimnames(ht)
+  for (a in huxtable_cell_attrs) {
+    dimnames(attr(ht, a)) <- dimnames(ht)
   }
-  for (att in huxtable_col_attrs) {
-    names(attr(ht, att)) <- dimnames(ht)[[2]]
+  for (a in huxtable_col_attrs) {
+    names(attr(ht, a)) <- dimnames(ht)[[2]]
   }
-  for (att in huxtable_row_attrs) {
-    names(attr(ht, att)) <- dimnames(ht)[[1]]
+  for (a in huxtable_row_attrs) {
+    names(attr(ht, a)) <- dimnames(ht)[[1]]
   }
 
   ht
