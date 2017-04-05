@@ -215,30 +215,93 @@ is_hux <- is_huxtable
 #' ht
 #' bold(ht)
 #'
-`[<-.huxtable` <- function(x, i, j, value) {
-  if (! is_huxtable(value)) return(NextMethod())
+`[<-.huxtable` <- function (x, i, j, value) {
+  res <- as.data.frame(NextMethod())
 
-  if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
-  if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
-  for (att in huxtable_cell_attrs) {
-    attr(x, att)[i, j] <- attr(value, att)
+  if (ncol(res) < ncol(x)) {
+    stopifnot(is.null(value))
+    # could be ht[,'foo'] <- NULL or ht['foo'] <- NULL so this is safest:
+    idx <- which(! colnames(x) %in% colnames(res))
+    res <- delete_props(res, idx, type = 'cols')
   }
-  if (nrow(value) == nrow(x)) {
-    for (att in huxtable_col_attrs) {
-      attr(x, att)[j] <- attr(value, att)
+  if (ncol(res) > ncol(x)) {
+    # Assumption: extra columns are on the right. Note that we may ALSO have more rows
+    res <- merge_props(res, x, res[seq_len(nrow(x)), seq(ncol(x) + 1, ncol(res))], type = 'cbind')
+  }
+  if (nrow(res) > nrow(x)) {
+    # we may have already given res the appropriate attributes above; if so use them since x has too few cols
+    first <- if (ncol(res) > ncol(x)) res[seq_len(nrow(x)),] else x
+    res <- merge_props(res, first, res[seq(nrow(x) + 1, nrow(res)), ], type = 'rbind')
+  }
+
+  if (is_huxtable(value)) {
+    if (! missing(i)) i <- if (is.character(i)) which(rownames(res) %in% i) else if (is.logical(i)) which(i) else i
+    if (! missing(j)) j <- if (is.character(j)) which(colnames(res) %in% j) else if (is.logical(j)) which(j) else j
+    for (a in huxtable_cell_attrs) {
+      val <- attr(value, a)
+      val <- matrix(val, nrow(res[i, j, drop = FALSE]), ncol(res[i, j, drop = FALSE]), byrow = TRUE)
+      attr(res, a)[i, j] <- val
+    }
+    if (missing(i) || identical(i, seq_len(nrow(res)))) {
+      for (a in huxtable_col_attrs) attr(res, a)[j] <- attr(value, a)
+    }
+    if (missing(j) || identical(j, seq_len(ncol(res)))) {
+      for (a in huxtable_row_attrs) attr(res, a)[i] <- attr(value, a)
     }
   }
-  if (ncol(value) == ncol(x)) {
-    for (att in huxtable_row_attrs) {
-      attr(x, att)[i] <- attr(value, att)
-    }
-  }
 
-  x <- NextMethod()
-  x <- set_attr_dimnames(x)
-  x
+  res <- set_attr_dimnames(res)
+  class(res) <- class(x)
+  return(res)
 }
 
+
+#' @param name See \code{\link{Extract.data.frame}}.
+#'
+#' @rdname extract-methods
+#' @export
+`$<-.huxtable` <- function (x, name, value) {
+  res <- as.data.frame(NextMethod())
+
+  if (ncol(res) < ncol(x)) {
+    stopifnot(is.null(value))
+    idx <- if (is.character(name)) match(name, colnames(x)) else name
+    res <- delete_props(res, idx, type = 'cols')
+  }
+  if (ncol(res) > ncol(x)) {
+    res <- merge_props(res, x, res[, seq(ncol(x) + 1, ncol(res))], type = 'cbind')
+  }
+
+  res <- set_attr_dimnames(res)
+  class(res) <- class(x)
+  res
+}
+
+
+#' @rdname extract-methods
+#' @export
+`[[<-.huxtable` <- function (x, i, j, value) {
+  res <- as.data.frame(NextMethod())
+  # [[<- can be called with one or two indexes. The 2 index form doesn't extend columns, but does extend rows.
+  # It can't delete either rows or columns though.
+  # The one-index form only extends columns. It can also delete columns.
+  if (ncol(res) < ncol(x)) {
+    stopifnot(is.null(value))
+    idx <- if (is.character(i)) match(i, colnames(x)) else i
+    res <- delete_props(res, idx, type = 'cols')
+  }
+  if (ncol(res) > ncol(x)) {
+    # Assumption: extra columns are on the right
+    res <- merge_props(res, x, res[, seq(ncol(x) + 1, ncol(res))], type = 'cbind')
+  }
+  if (nrow(res) > nrow(x)) {
+    res <- merge_props(res, x, res[seq(nrow(x) + 1, nrow(res)), ], type = 'rbind')
+  }
+
+  res <- set_attr_dimnames(res)
+  class(res) <- class(x)
+  res
+}
 
 #' Combine rows or columns
 #'
@@ -249,8 +312,8 @@ is_hux <- is_huxtable
 #' @return A huxtable.
 #'
 #' @details
-#' Table-level properties will be taken from the first argument which is a huxtable. So will
-#' row heights (for cbind) and column widths (for rbind).
+#' Table properties will be taken from the first argument which is a huxtable. So will
+#' row properties (for cbind) and column properties (for rbind).
 #'
 #' If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector of cell properties,
 #' then for rbind, the named cell properties and row heights will be copied to non-huxtables. For cbind,
@@ -357,6 +420,78 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   }
 
   attr(res, 'from_real_hux') <- x_real_hux || ht_real_hux
+  res
+}
+
+
+delete_props <- function (res, idx, type = c('cols', 'rows')) {
+  if (is.logical(idx)) idx <- which(idx)
+  type <- match.arg(type)
+
+  if (type == 'cols') {
+    for (a in huxtable_col_attrs) {
+      attr(res, a) <- attr(res, a)[ -idx]
+    }
+    for (a in huxtable_cell_attrs) {
+      attr(res, a) <- attr(res, a)[ , -idx, drop = FALSE]
+    }
+  } else {
+    for (a in huxtable_row_attrs) {
+      attr(res, a) <- attr(res, a)[ -idx]
+    }
+    for (a in huxtable_cell_attrs) {
+      attr(res, a) <- attr(res, a)[-idx, , drop = FALSE]
+    }
+  }
+
+  res
+}
+
+
+merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_cell_props = TRUE) {
+  type <- match.arg(type)
+  # if second is not a huxtable, make it a huxtable; and if ccp is TRUE, copy properties over:
+  #  - cell properties copied L-R from last col (cbind) or T-B from last row (rbind)
+  #  - row  properties copied from last row (rbind)
+  #  - col  properties copied from last col (cbind)
+  if (! is_huxtable(second)) {
+    second <- as_hux(second)
+    if (isTRUE(copy_cell_props)) {
+      cell_attrs_to_copy <- setdiff(huxtable_cell_attrs, c('colspan', 'rowspan'))
+      for (att in cell_attrs_to_copy) {
+        attr(second, att)[] <- if (type == 'cbind') attr(first, att)[, ncol(first)] else
+              matrix(attr(first, att)[nrow(first), ], nrow(second), ncol(second), byrow = TRUE)
+      }
+      if (type == 'rbind') for (att in huxtable_row_attrs) {
+        attr(second, att) <- rep(attr(first, att)[nrow(first)], nrow(second))
+      }
+      if (type == 'cbind') for (att in huxtable_col_attrs) {
+        attr(second, att) <- rep(attr(first, att)[ncol(first)], ncol(second))
+      }
+    }
+  }
+  # c or rbind first and second's properties into res, as follows:
+  #  - first gets priority for table properties;
+  #  - all cell properties are just c or rbinded
+  #  - row properties are concatenated if type=='rbind', otherwise they are from `first`
+  #  - col properties are concatenated if type=='cbind', otherwise they are from `first`
+
+  for (att in huxtable_table_attrs) {
+    attr(res, att) <- attr(first, att)
+  }
+  bind_cells <- switch(type, 'cbind' = cbind, 'rbind' = rbind)
+  for (att in huxtable_cell_attrs) {
+    attr(res, att) <- bind_cells(attr(first, att), attr(second, att))
+  }
+  join_attrs  <- switch(type, 'cbind' = huxtable_col_attrs, 'rbind' = huxtable_row_attrs)
+  first_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
+  for (att in join_attrs) {
+    attr(res, att) <- c(attr(first, att), attr(second, att))
+  }
+  for (att in first_attrs) {
+    attr(res, att) <- attr(first, att)
+  }
+
   res
 }
 
