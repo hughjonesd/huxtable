@@ -28,7 +28,7 @@ for (f in list.files(pattern = '*.Rmd')) {
 setwd('..')
 
 # autobuilds:
-chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc', vignettes = FALSE),
+chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
       document = FALSE, check_version = TRUE)
 if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
   cat('\n\nR CMD CHECK errors:\n')
