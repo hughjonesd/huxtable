@@ -163,7 +163,7 @@ huxreg <- function (
   mod_names <- c('', mod_names)
   result <- rbind(mod_names, cols, sumstats, copy_cell_props = FALSE)
   colnames(result) <- mod_names # may fail
-  if (error_pos == 'right') result <- set_colspan(result, 1, evens(), 2)
+  if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'
   pad_decimal(result)[-1, -1] <- pad_decimal
