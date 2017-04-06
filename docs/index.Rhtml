@@ -3,6 +3,13 @@
 <head>
 <title>Huxtable - an R package for writing LaTeX and HTML tables</title>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $("#example-container").tabs();
+  } );
+</script>
 
 <style type="text/css">
 p {
@@ -38,7 +45,6 @@ body:after {
 main {
   background-color: white;
   border: 1px solid grey;
-  /*border-radius: 3px;*/
   max-width: 1000px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -47,8 +53,84 @@ main {
   padding: 5% 5% 5% 5%;
 }
 
+
 .source {
   background-color: #FFFA98;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  border: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+
+.ui-tabs .source {
+  position: relative;
+  top: 15px;
+}
+
+
+pre.knitr {
+  margin-top: 0px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.ui-tabs {
+  position: relative;
+  top: 15px;
+  width: 100%;
+  padding-bottom: 20px;
+  border-collapse: collapse;
+}
+
+
+.ui-tabs .ui-tabs-nav {
+  list-style: none;
+  overflow: hidden;
+  z-index: 1000;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  background: white;
+  width: 100%;
+}
+
+
+.ui-tabs .ui-tabs-nav li {
+  position: relative;
+  float: left;
+  width: 25%;
+  line-height: 30px;
+  background: white;
+  border-radius: 3px 3px 0px 0px;
+  border: 1px solid grey;
+  box-sizing: border-box;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  font-weight: normal;
+  padding: 5px 10px;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+  border-bottom-width: 0;
+}
+
+.ui-tabs .ui-tabs-panel {
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  height: 450px;
+  overflow: scroll;
 }
 
 </style>
@@ -84,9 +166,17 @@ end.rcode-->
 
 
 <p>Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
-functionality to xtable, but more, with a simpler interface. Here's a quick example.
+functionality to xtable, but more, with a simpler interface. Here are some quick examples:
 </p>
 
+<div id="example-container">
+<ul>
+  <li><a href="#ex-simple">Simple table</a></li>
+  <li><a href="#ex-pipe">Pipe interface</a></li>
+  <li><a href="#ex-condformat">Conditional formatting</a></li>
+  <li><a href="#ex-huxreg">Table of regressions</a></li>
+</ul>
+<div class="example" id="ex-simple">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
 
@@ -97,7 +187,7 @@ ht <- hux(
       )
 
 bold(ht)[1,]           <- TRUE
-bottom_border(ht)[1,]  <- TRUE
+bottom_border(ht)[1,]  <- 1
 align(ht)[,2]          <- 'right'
 right_padding(ht)      <- 10
 left_padding(ht)       <- 10
@@ -105,6 +195,61 @@ width(ht)              <- 0.35
 
 ht
 end.rcode-->
+</div>
+
+<div class="example" id="ex-pipe">
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+library(magrittr)
+ht <- hux(
+        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
+        Salary = c(50000, 50000, 40000),
+        add_colnames = TRUE
+      )
+
+ht                                        %>%
+      set_bold(1, everywhere, TRUE)       %>%
+      set_bottom_border(1, everywhere, 1) %>%
+      set_align(everywhere, 2, 'right')   %>%
+      set_right_padding(10)               %>%
+      set_left_padding(10)                %>%
+      set_width(0.35)
+
+end.rcode-->
+</div>
+
+<div class="example" id="ex-condformat">
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+library(psych)
+data(attitude)
+att_corr <- corr.test(as.matrix(attitude))
+
+as_hux(att_corr$r)                                                             %>%
+      set_background_color(where(att_corr$p < 0.05), 'yellow')                 %>%
+      set_background_color(where(att_corr$p < 0.01), 'orange')                 %>%
+      set_background_color(where(row(att_corr$p) == col(att_corr$p)), 'white') %>%
+      huxtable::add_rownames(colname = '')                                     %>%
+      huxtable::add_colnames()                                                 %>%
+      set_all_borders(1)
+
+end.rcode-->
+</div>
+
+<div class="example" id="ex-huxreg">
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+data(diamonds, package = 'ggplot2')
+
+lm1 <- lm(price ~ carat, diamonds)
+lm2 <- lm(price ~ depth, diamonds)
+lm3 <- lm(price ~ carat + depth, diamonds)
+
+huxreg(lm1, lm2, lm3)
+end.rcode-->
+</div>
+</div>
+
 
 
 <p>To learn more, check out the vignette in <a href="introduction-to-huxtable.html">HTML</a> or <a href="introduction-to-huxtable.pdf">PDF</a> format, or the original <a href="introduction-to-huxtable.Rmd">R Markdown</a>. Or,
@@ -132,8 +277,10 @@ end.rcode-->
 <p>Huxtable could stand for "Happy User Xtable", or if you prefer, "Hyped Up Xtable", or for Germans maybe
 "Html Und teX Table".</p>
 
-<h3>The logo</h3>
-<p>The logo above was also generated by a huxtable, using <code>hux_logo()</code>.</p>
+<h3>Trivia</h3>
+<p>The logo above was also generated by a huxtable, using <code>hux_logo()</code>.
+The web page background is a statistical table from Mayhew's
+<i>London Labour and the London Poor</i>, a classic of Victorian social science.</p>
 
 </main>
 
