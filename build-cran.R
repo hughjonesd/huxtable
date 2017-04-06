@@ -19,7 +19,7 @@ for (f in list.files(pattern = '*.Rmd')) {
   r_code_f <- knitr::purl(f)
   for (output_f in c(f, r_code_f, output_fs)) {
     if (file.copy(output_f, file.path('..', 'inst', 'doc'))) {
-      if (output_f != f) file.remove(output_f)
+      # if (output_f != f) file.remove(output_f)
     } else {
       warning("Could not copy output file ", output_f, ' to inst/doc')
     }
@@ -27,8 +27,8 @@ for (f in list.files(pattern = '*.Rmd')) {
 }
 setwd('..')
 
-devtools::build()
-chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
+# autobuilds:
+chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc', vignettes = FALSE),
       document = FALSE, check_version = TRUE)
 if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
   cat('\n\nR CMD CHECK errors:\n')
