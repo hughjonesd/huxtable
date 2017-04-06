@@ -1,4 +1,4 @@
-# huxtable 0.1.0.9000
+# huxtable 0.2.0
 
 * New `huxreg` function to convert a list of models to a huxtable.
 * New set_* interface allowing column ranges, expressions a la `subset`, and filling in values by row.
