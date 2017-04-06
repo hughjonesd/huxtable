@@ -41,7 +41,7 @@ if (length(chk$notes)) {
   cat('R CMD CHECK notes:\n')
   cat(chk$notes)
   cat('\nTag this version? y[n]')
-  yn <- readLines(con="stdin", 1)
+  yn <- if (interactive()) readline() else readLines(con="stdin", 1)
   if (! yn %in% c('Y', 'y')) stop('OK, stopping.')
 }
 
