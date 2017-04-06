@@ -155,7 +155,6 @@ options(huxtable.print = print_screen)
 #' @param x A huxtable.
 #' @param ... Options passed to other methods.
 #'
-#' @return
 #' @export
 #'
 #' @examples
