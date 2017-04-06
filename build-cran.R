@@ -3,13 +3,24 @@
 library(devtools)
 library(git2r)
 
+
+# Check git is up to date -----------------------------------------------------------------------------------------
+
+
 gdiff <- git2r::diff(tree(commits()[[1]]))
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
+
+
+# Check vignette files are same in vignettes and docs -------------------------------------------------------------
+
 
 for (f in list.files('vignettes')) {
   out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
   if (length(out) > 0) stop('vignettes and docs files differ, please fix!')
 }
+
+
+# Build all kinds of vignettes in inst/doc ------------------------------------------------------------------------
 
 file.remove(list.files('inst/doc', full.names = TRUE))
 setwd('vignettes')
@@ -27,7 +38,10 @@ for (f in list.files(pattern = '*.Rmd')) {
 }
 setwd('..')
 
-# autobuilds:
+
+# Run R CMD check -------------------------------------------------------------------------------------------------
+
+
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
       document = FALSE, check_version = TRUE)
 if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
@@ -37,6 +51,7 @@ if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
   cat(chk$warnings)
   stop('Not tagging built release.')
 }
+
 if (length(chk$notes)) {
   cat('R CMD CHECK notes:\n')
   cat(chk$notes)
@@ -44,6 +59,10 @@ if (length(chk$notes)) {
   yn <- if (interactive()) readline() else readLines(con="stdin", 1)
   if (! yn %in% c('Y', 'y')) stop('OK, stopping.')
 }
+
+
+# Tag new version -------------------------------------------------------------------------------------------------
+
 
 v <- devtools::as.package('.')$version
 newtag <- paste0('v', v, '-rc')
