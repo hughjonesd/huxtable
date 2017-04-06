@@ -4,7 +4,8 @@
 * New set_* interface allowing column ranges, expressions a la `subset`, and filling in values by row.
 * Replacement methods `$<-`, `[<-` and `[[<-` now work better.
 * New function `set_cell_properties` to set multiple properties on cells.
-* `evens()`, `odds()`, `every()`, `final()`, `where()`: convenience functions to select rows, columns and cells.
+* `evens`, `odds`, `everywhere`, `every(n, from)`, `final(n)`, `where(cond)`: 
+  convenience functions to select rows, columns and cells.
 * Export to Word/Powerpoint via `ReporteRs`.
 * Huxtable now supports dplyr verbs like `filter` and `select`.
 * Exported function `guess_knitr_output_format`.

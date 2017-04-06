@@ -6,26 +6,28 @@
 #' This is a convenience function to use in row or column specifications.
 #' In this context,
 #' \code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
-#' or columns of the huxtable. \code{evens(from)} and \code{odds(from)} return even and odd
-#' numbers starting from \code{from}. Called with no arguments, \code{every()} returns
-#' all rows or columns.
+#' or columns of the huxtable. \code{evens} and \code{odds} return even and odd
+#' numbers, i.e. they are equivalent to \code{every(2, 2)} and \code{every(2, 1)} respectively.
+#' \code{everywhere} returns all rows or columns, equivalently to \code{every(1)}.
 #'
 #' @param n A number (at least 1)
 #' @param from A number (at least 1)
+#' @param ht An object with a \code{dim} attribute like a matrix or data frame.
+#' @param dimension Number of the dimension to use.
 #'
 #' @details
-#' Technically, \code{every} returns a 2-argument function which can be called as
-#' \code{f(hux, dimension)}. See \code{\link{rowspecs}} for details.
+#' Technically, \code{every} returns a 2-argument function which can be called like
+#' \code{f(ht, dimension)}. See \code{\link{rowspecs}} for details.
 #'
 #' @export
 #'
 #' @examples
 #' ht <- huxtable(a = 1:10, b = 1:10)
-#' ht <- set_background_color(ht, every(3), every(), 'wheat')
-#' ht <- set_align(ht, evens(), 1:2, 'right')
-#' ht <- set_align(ht, odds(5), 1:2, 'center')
-#' align(ht)
+#' ht <- set_background_color(ht, every(3), everywhere, 'wheat')
 #' background_color(ht)
+#' ht <- set_align(ht, evens, 1:2, 'right')
+#' ht <- set_align(ht, odds, 1:2, 'center')
+#' align(ht)
 #'
 every <- function(n = 1, from = n) {
   stopifnot(is.numeric(n))
@@ -41,14 +43,17 @@ every <- function(n = 1, from = n) {
   )
 }
 
+#' @rdname every
+#' @export
+everywhere <- every(1, 1)
 
 #' @rdname every
 #' @export
-evens <- function(from = 2) every(2, ceiling(from/2) * 2)
+evens <- every(2, 2)
 
 #' @rdname every
 #' @export
-odds  <- function(from = 1) every(2, ceiling( (from - 1)/2) * 2 + 1)
+odds  <- every(2, 1)
 
 #' Return the last n rows or columns
 #'
@@ -93,15 +98,16 @@ final <- function(n = 1) {
 #' But there are a few extra tricks:
 #'
 #'\itemize{
-#'  \item Write \code{set_property(ht, x)} to set the property to \code{x} for all cells.
+#'  \item Write \code{set_property(ht, x)}, omitting \code{row} and \code{col}, to set
+#'    the property to \code{x} for all cells.
+#'  \item Use \code{\link{everywhere}} to refer to all rows or all columns.
 #'  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
-#'  \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
+#'  \item Use \code{\link{evens}} to get only even rows/columns and \code{\link{odds}}
 #'    for only odd ones.
 #'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 #'    Use \code{every(1)} or just \code{every()} to get all rows or columns.
 #'  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
 #'    \code{TRUE}.
-#'  \item Omit both \code{row} and \code{col} arguments to set a property for all cells.
 #'  \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 #'}
 #'
@@ -137,7 +143,7 @@ final <- function(n = 1) {
 #' font(ht)
 #' ht <- set_font(ht, where(ht == 1), 'palatino')
 #' font(ht)
-#' ht <- set_font(ht, odds(), evens(), 'dingbats')
+#' ht <- set_font(ht, odds, evens, 'dingbats')
 #' font(ht)
 #' ht <- set_align(ht, 2:3, 1:2, c('right', 'center'), byrow = TRUE)
 #' align(ht)

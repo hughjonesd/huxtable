@@ -73,7 +73,7 @@ standard huxtable commands.
 library(dplyr)
 diamond_regs                                                         %>% 
       theme_article                                                  %>% 
-      set_background_color(1:nrow(diamond_regs), evens(), grey(.95)) %>% 
+      set_background_color(1:nrow(diamond_regs), evens, grey(.95)) %>% 
       set_font_size(final(), 1, 9)                                   %>% 
       set_bold(final(), 1, FALSE)                                    %>%
       set_top_border(final(), 1, 1)                                  %>%

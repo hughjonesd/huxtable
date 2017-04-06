@@ -25,9 +25,9 @@ make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more tex
   for (i in seq_len(ncol -2)) {
     ht <- cbind(ht, rep(more_text[i], nrow))
   }
-  ht <- set_all_borders(ht, every(), every(), 1)
-  ht <- set_background_color(ht, odds(), every(), 'orange')
-  ht <- set_background_color(ht, evens(), every(), 'green')
+  ht <- set_all_borders(ht, 1)
+  ht <- set_background_color(ht, odds, everywhere, 'orange')
+  ht <- set_background_color(ht, evens, everywhere, 'green')
   ht
 }
 

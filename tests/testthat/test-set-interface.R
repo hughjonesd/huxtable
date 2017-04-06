@@ -23,15 +23,12 @@ test_that('every(), evens and odds work as expected', {
   dfr <- data.frame(a = 1:7, b = 1:7, d = 1:7, e = 1:7)
   expect_equivalent(every(3, from = 1)(dfr, 1), c(1, 4, 7))
   expect_equivalent(every(3, from = 1)(dfr, 2), c(1, 4))
-  expect_equivalent(evens()(dfr, 1), c(2, 4, 6))
-  expect_equivalent(evens()(dfr, 2), c(2, 4))
-  expect_equivalent(odds()(dfr, 1), c(1, 3, 5, 7))
-  expect_equivalent(odds()(dfr, 2), c(1, 3))
-  expect_equivalent(odds(2)(dfr, 1), c(3, 5, 7))
-  expect_equivalent(odds(3)(dfr, 1), c(3, 5, 7))
-  expect_equivalent(evens(2)(dfr, 1), c(2, 4, 6))
-  expect_equivalent(evens(3)(dfr, 1), c(4, 6))
-
+  expect_equivalent(evens(dfr, 1), c(2, 4, 6))
+  expect_equivalent(evens(dfr, 2), c(2, 4))
+  expect_equivalent(odds(dfr, 1), c(1, 3, 5, 7))
+  expect_equivalent(odds(dfr, 2), c(1, 3))
+  expect_equivalent(everywhere(dfr, 1), 1:7)
+  expect_equivalent(everywhere(dfr, 2), 1:4)
 })
 
 
@@ -67,12 +64,12 @@ test_that('set_* works with variables as arguments', {
 
 test_that('set_* works with cell functions', {
   ht <- hux(a = 1:4, b = 1:4)
-  ht <- set_font(ht, evens(), 1:2, 'times')
-  ht <- set_font(ht, odds(), 1:2, 'palatino')
+  ht <- set_font(ht, evens, 1:2, 'times')
+  ht <- set_font(ht, odds, 1:2, 'palatino')
   expect_equivalent(font(ht), matrix(c('palatino', 'times'), 4, 2))
   ht <- hux(a = 1:4, b = 1:4)
-  ht <- set_font(ht, every(1), evens(), 'times')
-  ht <- set_font(ht, every(1), odds(), 'palatino')
+  ht <- set_font(ht, every(1), evens, 'times')
+  ht <- set_font(ht, every(1), odds, 'palatino')
   expect_equivalent(font(ht), matrix(c('palatino', 'times'), 4, 2, byrow = TRUE))
   ht <- hux(a = 1:4, b = 1:4)
   ht <- set_font(ht, every(3, from = 1), every(1), 'times')
@@ -82,10 +79,10 @@ test_that('set_* works with cell functions', {
 
 test_that('set_* works with row and column functions', {
   ht <- hux(a = 1:4, b = 1:4)
-  ht <- set_col_width(ht, evens(), '20pt')
-  ht <- set_col_width(ht, odds(), '40pt')
-  ht <- set_row_height(ht, evens(), '15pt')
-  ht <- set_row_height(ht, odds(), '30pt')
+  ht <- set_col_width(ht, evens, '20pt')
+  ht <- set_col_width(ht, odds, '40pt')
+  ht <- set_row_height(ht, evens, '15pt')
+  ht <- set_row_height(ht, odds, '30pt')
   expect_equivalent(col_width(ht), c('40pt', '20pt'))
   expect_equivalent(row_height(ht), rep(c('30pt', '15pt'), 2))
 })
@@ -93,7 +90,7 @@ test_that('set_* works with row and column functions', {
 test_that('set_* works with column ranges', {
   skip('Feature postponed until I understand deep magic')
   ht <- hux(a = 1:4, b = 1:4, c = 1:4, d = 1:4)
-  ht <- set_font(ht, every(1), b:d, 'times')
+  ht <- set_font(ht, everywhere, b:d, 'times')
   expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4, 4, byrow = TRUE))
 })
 

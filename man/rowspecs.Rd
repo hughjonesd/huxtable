@@ -16,15 +16,16 @@ You can treat \code{row} and \code{col} arguments like arguments to \code{[} for
 But there are a few extra tricks:
 
 \itemize{
- \item Write \code{set_property(ht, x)} to set the property to \code{x} for all cells.
+ \item Write \code{set_property(ht, x)}, omitting \code{row} and \code{col}, to set
+   the property to \code{x} for all cells.
+ \item Use \code{\link{everywhere}} to refer to all rows or all columns.
  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
- \item Use \code{\link[=evens]{evens()}} to get only even rows/columns and \code{\link[=odds]{odds()}}
+ \item Use \code{\link{evens}} to get only even rows/columns and \code{\link{odds}}
    for only odd ones.
  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
    Use \code{every(1)} or just \code{every()} to get all rows or columns.
  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
    \code{TRUE}.
- \item Omit both \code{row} and \code{col} arguments to set a property for all cells.
  \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 }
 }
@@ -59,7 +60,7 @@ ht <- set_font(ht, 2:4, 1:2, 'times')
 font(ht)
 ht <- set_font(ht, where(ht == 1), 'palatino')
 font(ht)
-ht <- set_font(ht, odds(), evens(), 'dingbats')
+ht <- set_font(ht, odds, evens, 'dingbats')
 font(ht)
 ht <- set_align(ht, 2:3, 1:2, c('right', 'center'), byrow = TRUE)
 align(ht)

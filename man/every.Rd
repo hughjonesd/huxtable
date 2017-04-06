@@ -2,39 +2,46 @@
 % Please edit documentation in R/row-col-fns.R
 \name{every}
 \alias{every}
+\alias{everywhere}
 \alias{evens}
 \alias{odds}
 \title{Return every n row or column numbers}
 \usage{
 every(n = 1, from = n)
 
-evens(from = 2)
+everywhere(ht, dimension)
 
-odds(from = 1)
+evens(ht, dimension)
+
+odds(ht, dimension)
 }
 \arguments{
 \item{n}{A number (at least 1)}
 
 \item{from}{A number (at least 1)}
+
+\item{ht}{An object with a \code{dim} attribute like a matrix or data frame.}
+
+\item{dimension}{Number of the dimension to use.}
 }
 \description{
 This is a convenience function to use in row or column specifications.
 In this context,
 \code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
-or columns of the huxtable. \code{evens(from)} and \code{odds(from)} return even and odd
-numbers starting from \code{from}. Called with no arguments, \code{every()} returns
-all rows or columns.
+or columns of the huxtable. \code{evens} and \code{odds} return even and odd
+numbers, i.e. they are equivalent to \code{every(2, 2)} and \code{every(2, 1)} respectively.
+\code{everywhere} returns all rows or columns, equivalently to \code{every(1)}.
 }
 \details{
-Technically, \code{every} returns a 2-argument function which can be called as
-\code{f(hux, dimension)}. See \code{\link{rowspecs}} for details.
+Technically, \code{every} returns a 2-argument function which can be called like
+\code{f(ht, dimension)}. See \code{\link{rowspecs}} for details.
 }
 \examples{
 ht <- huxtable(a = 1:10, b = 1:10)
-ht <- set_background_color(ht, every(3), every(), 'wheat')
-ht <- set_align(ht, evens(), 1:2, 'right')
-ht <- set_align(ht, odds(5), 1:2, 'center')
-align(ht)
+ht <- set_background_color(ht, every(3), everywhere, 'wheat')
 background_color(ht)
+ht <- set_align(ht, evens, 1:2, 'right')
+ht <- set_align(ht, odds, 1:2, 'center')
+align(ht)
 
 }

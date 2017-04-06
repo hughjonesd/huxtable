@@ -2,11 +2,13 @@
 title: "Regression Tables with huxreg"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
-output:
-  html_document: null
-  pdf_document: null
-vignette: |
-  %\VignetteIndexEntry{Regression Tables with Huxreg}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
+output: 
+  html_document: default
+  pdf_document: default
+vignette: >
+  %\VignetteIndexEntry{Regression Tables with huxreg}  
+  %\VignetteEngine{knitr::rmarkdown}  
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
@@ -64,15 +66,18 @@ diamond_regs
 ```
 
 Of course, we aren't limited to just changing names. We can also make our table prettier. Let's add the "article" theme,
-and a vertical stripe for background colour:
+and a vertical stripe for background colour, tweak a few details like font size, and add a caption. All of these are just 
+standard huxtable commands.
 
 ```{r}
 library(dplyr)
 diamond_regs                                                         %>% 
       theme_article                                                  %>% 
-      set_background_color(1:nrow(diamond_regs), evens(), grey(.95)) %>% 
+      set_background_color(1:nrow(diamond_regs), evens, grey(.95)) %>% 
       set_font_size(final(), 1, 9)                                   %>% 
-      set_bold(final(), 1, FALSE)
+      set_bold(final(), 1, FALSE)                                    %>%
+      set_top_border(final(), 1, 1)                                  %>%
+      set_caption('Linear regressions of diamond prices')
 
 ```
 
@@ -105,7 +110,7 @@ huxreg('Price' = lm1, 'Log price' = lm3)
 
 To display a particular row of summary statistics, use the `statistics` parameter. This should be a character vector.
 Valid values are anything returned from your models by `broom::glance`. Another valid value is `"nobs"`, which 
-returns the number of observations from the regression. If the character vector has names, these will be used for
+returns the number of observations from the regression. If the `statistics` vector has names, these will be used for
 row headings:
 
 ```{r}
@@ -113,6 +118,7 @@ broom::glance(lm1)
 huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
   'P value' = 'p.value'))
 ```
+
 
 You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
 p values, using the `error_style` option:
@@ -122,6 +128,7 @@ huxreg(lm1, lm3, error_style = 'statistic')
 huxreg(lm1, lm3, error_style = 'pvalue')
 ```
 
+
 Or you can display confidence intervals using 'ci'. Use `ci_level` to set the confidence level for the interval:
 
 ```{r}
@@ -129,19 +136,21 @@ huxreg(lm1, lm3, error_style = 'ci') # default is .95
 huxreg(lm1, lm3, error_style = 'ci', ci_level = .99)
 ```
 
+
 If you choose more than one `error_style` option, the second one will be shown in square brackets:
 
 ```{r}
 huxreg(lm1, lm3, error_style = c('stderr', 'ci'))
 ```
 
+
 To change the footnote, use `note`. If `note` contains the string `"%stars%"` it will be replaced by a description of the
 significance stars used. If you don't want a footnote, just set `note = NULL`.
-
 
 ```{r}
 huxreg(lm1, lm3, note = 'Linear regressions on diamond price. %stars%.')
 ```
+
 
 To change number formatting, set the `number_format` parameter. This works the same as the `number_format` property
 for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be
@@ -152,4 +161,10 @@ taken as a format to the base R `sprintf` function; if it is a function, the fun
 huxreg(lm1, lm3, number_format = 2)
 ```
 
+
+Lastly, if you want to bold all significant coefficients, set the parameter `bold_signif` to a maximum significance level:
+
+```{r}
+huxreg(lm1, lm3, bold_signif = 0.05)
+```
 
