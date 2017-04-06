@@ -125,7 +125,7 @@ If you look at a huxtable in R, it will print out a simple representation of the
 column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table.
 
 ```{r, results = 'markup'}
-ht
+print_screen(ht)
 ```
 
 To print a huxtable out using LaTeX or HTML, just call `print_latex` or `print_html`. In knitr documents, like this one,
@@ -351,7 +351,7 @@ options, see the help files).
 
 ```{r}
 number_format(car_ht) <- 0
-add_colnames(car_ht[1:5,])
+car_ht[1:5,]
 ```
 
 You can also align columns by decimal places. If you want to do this for a cell, just set the `pad_decimal` property
