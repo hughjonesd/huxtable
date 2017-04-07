@@ -243,7 +243,7 @@ hux_logo <- function(latex = FALSE) {
   logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
   rowspan(logo)[1, 1] <- 2
   colspan(logo)[2, 2] <- 2
-  logo <- set_all_borders(logo, , , 1)
+  logo <- set_all_borders(logo, 1)
   font_size(logo) <- if (latex) 12 else 20
   font_size(logo)[1, 2:3] <- if (latex) 16 else 24
   font_size(logo)[1, 1] <-  if (latex) 28 else 42

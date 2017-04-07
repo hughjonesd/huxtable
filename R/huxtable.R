@@ -225,7 +225,7 @@ is_hux <- is_huxtable
   }
   if (nrow(res) > nrow(x)) {
     # we may have already given res the appropriate attributes above; if so use them since x has too few cols
-    first <- if (ncol(res) > ncol(x)) res[seq_len(nrow(x)),] else x
+    first <- if (ncol(res) > ncol(x)) res[seq_len(nrow(x)), ] else x
     res <- merge_props(res, first, res[seq(nrow(x) + 1, nrow(res)), ], type = 'rbind')
   }
 
@@ -419,7 +419,7 @@ delete_props <- function (res, idx, type = c('cols', 'rows')) {
       attr(res, a) <- attr(res, a)[ -idx]
     }
     for (a in huxtable_cell_attrs) {
-      attr(res, a) <- attr(res, a)[ , -idx, drop = FALSE]
+      attr(res, a) <- attr(res, a)[, -idx, drop = FALSE]
     }
   } else {
     for (a in huxtable_row_attrs) {

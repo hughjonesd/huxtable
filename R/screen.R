@@ -198,7 +198,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
     empty_borders <- apply(border_cells, 1, function (x) all(x[ -c(1, ncol(charmat)) ] == 1))
     charmat <- charmat[ !empty_borders, ]
   }
-  result <- apply(charmat, 1, paste0, collapse='')
+  result <- apply(charmat, 1, paste0, collapse = '')
 
   if (colnames) result[2 - collapse_horiz] <- my_colour(result[2 - collapse_horiz])
   result <- paste0(result, collapse = '\n')
@@ -265,7 +265,7 @@ to_md.huxtable <- function(ht, max_width = 80, ...) {
     row_chars <- rep('', ncol(ht))
     dcr <- dcells[dcells$display_row == myrow, ]
     row_chars[ dcr$display_col ] <- dcr$contents
-    while(any(ncharw(row_chars) > 0)) {
+    while (any(ncharw(row_chars) > 0)) {
       for (i in 1:ncol(ht)) {
         chunk <- substring(row_chars[i], 1, cw[i])
         if ( (extra <- cw[i] - ncharw(chunk)) > 0) {

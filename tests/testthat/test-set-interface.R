@@ -144,11 +144,11 @@ test_that('set_* works when row and col are missing', {
 
 test_that('set_* works with row and col "empty"', {
   ht_orig <- hux(a = c(1, 0), b = c(0, 1))
-  ht2 <- set_font(ht_orig, 1, , 'times')
+  ht2 <- set_font(ht_orig, 1, everywhere, 'times')
   expect_equivalent(font(ht2), matrix(c('times', NA), 2, 2))
-  ht3 <- set_font(ht_orig, , 1, 'times')
+  ht3 <- set_font(ht_orig, everywhere, 1, 'times')
   expect_equivalent(font(ht3), matrix(c('times', 'times', NA, NA), 2, 2))
-  ht4 <- set_font(ht_orig, , , 'times')
+  ht4 <- set_font(ht_orig, 'times')
   expect_equivalent(font(ht4), matrix('times', 2, 2))
 })
 

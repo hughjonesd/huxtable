@@ -41,7 +41,7 @@ theme_basic <- function (ht, header_row = TRUE, header_col = TRUE) {
 theme_striped <- function (ht, stripe = grey(.9), header_row = TRUE, header_col = TRUE) {
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
   background_color(ht)[seq(1, nrow(ht), 2), ] <- 'white'
-  if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2),] <- stripe
+  if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2), ] <- stripe
   if (header_row) {
     background_color(ht)[1, ] <- 'black'
     text_color(ht)[1, ]       <- 'white'

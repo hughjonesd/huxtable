@@ -53,7 +53,7 @@ to_html.huxtable <- function(ht, ...) {
   idstring <- ''
   if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
   res <- paste0('<table class="huxtable" style="border-collapse: collapse; width: ', width, '; ', mstring,
-        heightstring, '"', idstring,'>\n')
+        heightstring, '"', idstring, '>\n')
   if (! is.na(cap <- caption(ht))) {
     cap <- paste0('<caption style="caption-side:', caption_pos(ht), '; text-align: center;">', cap, '</caption>')
     res <- paste0(res, cap)
@@ -130,7 +130,7 @@ cell_html <- function (ht, rn, cn, contents) {
   padding <- list(top_padding(ht)[rn, cn], right_padding(ht)[rn, cn], bottom_padding(ht)[rn, cn],
     left_padding(ht)[rn, cn])
   if (any( ! is.na(padding))) {
-    padding <- sapply(padding, function(x) if(is_a_number(x)) paste0(x, "pt") else x)
+    padding <- sapply(padding, function(x) if (is_a_number(x)) paste0(x, "pt") else x)
     padding <- paste(padding, collapse = ' ')
     res <- paste0(res, 'padding: ', padding, '; ')
   }

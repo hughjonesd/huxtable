@@ -19,7 +19,7 @@ test_ex_same <- function(fname, reset_on_change = TRUE) {
   excode <- example_code_for_topic(fname)
   codepath <- code_path_for_topic(fname)
   if (file.exists(codepath)) {
-    comp <- compare(deparse(excode), readRDS(codepath))
+    comp <- testthat::compare(deparse(excode), readRDS(codepath))
     if (! comp$equal) {
       warning('Example code for ', fname, ' changed')
       if (reset_on_change) reset_example_test(fname)
@@ -38,7 +38,7 @@ test_ex_same <- function(fname, reset_on_change = TRUE) {
     expect_equal_to_reference(res, fp, info =
           paste0('In "', fname, '", expression changed value: ', deparse(expr, nlines = 1)))
     rds_name <- paste0(fname, '-example-output-', i, '.rds')
-    fp <- file.path(testthat::test_path(), 'example-rds',rds_name)
+    fp <- file.path(testthat::test_path(), 'example-rds', rds_name)
     expect_equal_to_reference(out, fp, info =
           paste0('In "', fname, '", expression changed output: ', deparse(expr, nlines = 1)))
 
@@ -53,7 +53,7 @@ reset_example_test <- function (fnames) {
   for (fname in fnames) {
     # get rid of output and code files
     fs <- list.files(file.path(testthat::test_path()))
-    fs <- grep(paste0('^',fname, '-example-.*'), fs, value = TRUE)
+    fs <- grep(paste0('^', fname, '-example-.*'), fs, value = TRUE)
     fs <- file.path(testthat::test_path(), fs)
     sapply(fs, file.remove)
     remake_code_file(fname)
