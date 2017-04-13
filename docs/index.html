@@ -278,7 +278,9 @@ ht
 </div>
 
 <div class="example" id="ex-pipe">
-<div class="source"><pre class="knitr r">library(magrittr)
+<div class="source"><pre class="knitr r"># requires version 0.2 from github
+
+library(magrittr)
 ht <- hux(
         Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
         Salary = c(50000, 50000, 40000),
@@ -315,7 +317,9 @@ ht                                        %>%
 </div>
 
 <div class="example" id="ex-condformat">
-<div class="source"><pre class="knitr r">library(psych)
+<div class="source"><pre class="knitr r"># requires version 0.2 from github
+
+library(psych)
 data(attitude)
 att_corr <- corr.test(as.matrix(attitude))
 
@@ -413,7 +417,9 @@ as_hux(att_corr$r)                                                             %
 </div>
 
 <div class="example" id="ex-huxreg">
-<div class="source"><pre class="knitr r">data(diamonds, package = 'ggplot2')
+<div class="source"><pre class="knitr r"># requires version 0.2 from github
+
+data(diamonds, package = 'ggplot2')
 
 lm1 <- lm(price ~ carat, diamonds)
 lm2 <- lm(price ~ depth, diamonds)
