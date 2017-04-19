@@ -29,3 +29,12 @@ test_that('huxreg confidence intervals work', {
   mn <- nnet::multinom(I(y > 0) ~ a, dfr, trace = FALSE)
   expect_silent(hr <- huxreg(lm1, lm2, glm1, mn, error_style = "ci", statistics = c('r.squared')))
 })
+
+test_that('huxreg works with single coefficient', {
+  set.seed(27101975)
+  dfr <- data.frame(a = rnorm(100), b = rnorm(100))
+  dfr$y <- dfr$a + rnorm(100)
+  lm1 <- lm(y ~ a, dfr)
+  lm2 <- lm(y ~ a + b, dfr)
+  expect_error(huxreg(lm1, lm2, coefs = 'a'), regexp = NA)
+})

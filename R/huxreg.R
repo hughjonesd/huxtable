@@ -220,11 +220,10 @@ make_error_cells <- function (tidied, error_style) {
   statistic <- function (td) td$statistic
   pvalue    <- function (td) td$p.value
   ci        <- function (td) paste(td$conf.low, ' -- ', td$conf.high)
-  error_style <- lapply(error_style, as.symbol)
-  #error_style     = c('stderr', 'ci', 'statistic', 'pvalue', 'stars'),
-  strings <- sapply(error_style, function (x) eval(bquote(
-    .(x)(tidied)
-  )))
+  error_funs <- lapply(error_style, as.symbol)
+  strings <- lapply(error_funs, function (x) eval(bquote(.(x)(tidied))))
+  names(strings) <- error_style
+  strings <- do.call(cbind, strings)
   strings[, 1] <- bracket(strings[, 1])
   strings[, -1] <- bracket2(strings[, -1])
   strings <- apply(strings, 1, paste, collapse = ' ')
