@@ -22,21 +22,21 @@ for (f in list.files('vignettes')) {
 
 # Build all kinds of vignettes in inst/doc ------------------------------------------------------------------------
 
-file.remove(list.files('inst/doc', full.names = TRUE))
-setwd('vignettes')
-for (f in list.files(pattern = '*.Rmd')) {
-  output_fs <- rmarkdown::render(f, output_format = 'all')
-
-  r_code_f <- knitr::purl(f)
-  for (output_f in c(f, r_code_f, output_fs)) {
-    if (file.copy(output_f, file.path('..', 'inst', 'doc'))) {
-      if (output_f != f) file.remove(output_f)
-    } else {
-      warning("Could not copy output file ", output_f, ' to inst/doc')
-    }
-  }
-}
-setwd('..')
+# file.remove(list.files('inst/doc', full.names = TRUE))
+# setwd('vignettes')
+# for (f in list.files(pattern = '*.Rmd')) {
+#   output_fs <- rmarkdown::render(f, output_format = 'all')
+#
+#   r_code_f <- knitr::purl(f)
+#   for (output_f in c(f, r_code_f, output_fs)) {
+#     if (file.copy(output_f, file.path('..', 'inst', 'doc'))) {
+#       if (output_f != f) file.remove(output_f)
+#     } else {
+#       warning("Could not copy output file ", output_f, ' to inst/doc')
+#     }
+#   }
+# }
+# setwd('..')
 
 
 # Run R CMD check -------------------------------------------------------------------------------------------------
