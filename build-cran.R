@@ -30,7 +30,7 @@ for (f in list.files(pattern = '*.Rmd')) {
   r_code_f <- knitr::purl(f)
   for (output_f in c(f, r_code_f, output_fs)) {
     if (file.copy(output_f, file.path('..', 'inst', 'doc'))) {
-      # if (output_f != f) file.remove(output_f)
+      if (output_f != f) file.remove(output_f)
     } else {
       warning("Could not copy output file ", output_f, ' to inst/doc')
     }
