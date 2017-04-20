@@ -80,8 +80,12 @@ huxreg <- function (
 
   tidied <- lapply(tidied, merge, x = data.frame(term = my_coefs, stringsAsFactors = FALSE), all.x = TRUE, by = 'term',
         sort = FALSE)
-  tidied <- lapply(tidied, function (x) x[match(my_coefs, x$term), ])
-  tidied <- lapply(tidied, function(x) {
+  tidied <- lapply(tidied, function (x) {
+    x$term[! is.na(match(x$term, my_coefs))] <- coef_names[match(x$term, my_coefs)]
+    x <- x[match(unique(coef_names), x$term), ]
+  })
+  coef_names <- unique(coef_names)
+  tidied <- lapply(tidied, function (x) {
     numcols <- sapply(x, is.numeric)
     x[, numcols] <- sapply(x[, numcols], format_number, number_format)
     x
