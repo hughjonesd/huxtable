@@ -51,7 +51,8 @@ Models must have a \code{\link[broom]{tidy}} method defined, which should return
 calculate confidence intervals itself, using a normal approximation.
 
 If \code{...} is a named list, the names will be used for column headings. If the \code{coef} and/or
- \code{statistics} vectors have names, these will be used for row headings.
+ \code{statistics} vectors have names, these will be used for row headings. If different values of \code{coef}
+ have the same name, the corresponding rows will be merged in the output.
 
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 use 'nobs' for the number of observations.
