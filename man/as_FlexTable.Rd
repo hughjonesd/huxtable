@@ -45,11 +45,13 @@ Try to say \code{as_FlexTable.huxtable} ten times without pausing.
 }
 
 \examples{
+\donttest{
 if (require('ReporteRs')) {
   ht <- huxtable(a = 1:3, b = 1:3)
   ft <- as_FlexTable(ht)
   ft
   my_doc <- docx()
   my_doc <- addFlexTable(my_doc, ft)
+}
 }
 }
