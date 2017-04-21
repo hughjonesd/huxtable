@@ -51,17 +51,18 @@ main {
   margin-left: auto;
   margin-right: auto;
   padding: 5% 5% 5% 5%;
+  box-shadow: 5px 5px 5px #7D5777;
 }
 
 
 .source {
-  background-color: #FFFA98;
+  /*background-color: #FFFA98;*/
   margin-bottom: 20px;
   margin-top: 0px;
-  border: 0px;
+  border: 1px solid black;
   margin-left: 10px;
   margin-right: 10px;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 
@@ -141,9 +142,6 @@ pre.knitr {
 
 <!--begin.rcode logo, echo = FALSE, results = 'asis'
 
-
-knitr::opts_chunk$set(highlight = FALSE)
-
 library(huxtable)
 hux_logo()
 
@@ -179,7 +177,6 @@ functionality to xtable, but more, with a simpler interface. Here are some quick
 <div class="example" id="ex-simple">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-
 ht <- hux(
         Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
         Salary = c(50000, 50000, 40000),
@@ -199,8 +196,6 @@ end.rcode-->
 
 <div class="example" id="ex-pipe">
 <!--begin.rcode echo = TRUE, results = 'asis'
-
-# requires version 0.2 from github
 
 library(magrittr)
 ht <- hux(
@@ -223,8 +218,6 @@ end.rcode-->
 <div class="example" id="ex-condformat">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-# requires version 0.2 from github
-
 library(psych)
 data(attitude)
 att_corr <- corr.test(as.matrix(attitude))
@@ -242,8 +235,6 @@ end.rcode-->
 
 <div class="example" id="ex-huxreg">
 <!--begin.rcode echo = TRUE, results = 'asis'
-
-# requires version 0.2 from github
 
 data(diamonds, package = 'ggplot2')
 
