@@ -22,4 +22,6 @@ hr
 
 font(hr)[-1, -1] <- 'cmtt'
 hr
+
+huxreg(lm1, lm2, glm1, number_format = 5)
 ```
