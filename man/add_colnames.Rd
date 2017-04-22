@@ -35,6 +35,7 @@ Add a first row of column names, or a first column of row names, to the huxtable
 }
 \details{
 Note that \code{add_colnames} will change the mode of all columns to character.
+
 \code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
 }
 \examples{
