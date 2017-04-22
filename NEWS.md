@@ -1,3 +1,5 @@
+# huxtable 0.2.0.9000
+
 # huxtable 0.2.0
 
 * New `huxreg` function to convert a list of models to a huxtable.
