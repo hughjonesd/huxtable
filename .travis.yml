@@ -7,3 +7,7 @@ r:
   - oldrel
   - release
   - devel
+matrix:
+  include:
+  - pandoc: false
+    r: release
