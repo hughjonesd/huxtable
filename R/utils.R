@@ -84,7 +84,7 @@ decimal_pad <- function(col, pad_chars, type) {
   chars_after_. <- nchars - pos
 
   pad_to <- max(chars_after_.) - chars_after_.
-  pad_char <- if (type == 'html') '&nbsp;' else ' '
+  pad_char <- switch(type, 'html' = '&nbsp;', 'latex' = '~', ' ')
   col <- paste0(col, str_rep(pad_char, pad_to))
 
   orig_col[! na_pad] <- col
