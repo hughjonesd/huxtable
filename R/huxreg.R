@@ -112,6 +112,7 @@ huxreg <- function (
   cols <- lapply(tidied, function (mod) coef_col(mod$estimate, mod$error_cell))
   cols <- Reduce(cbind, cols)
   cols <- hux(cols)
+  number_format(cols) <- number_format
   if (! is.null(bold_signif)) {
     bold_cols <- lapply(tidied, function (mod) mod$p.value <= bold_signif)
     bold_cols <- switch(error_pos,
