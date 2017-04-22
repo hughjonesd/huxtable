@@ -82,6 +82,7 @@ test_that('to_screen does not cut off multicols', {
 
 
 test_that('guess_knitr_output_format() gets it right', {
+  skip_without_pandoc()
   out <- character(0)
   on.exit(sapply(out, function (x) if (file.exists(x)) file.remove(x)))
   expect_silent(out[1] <- knitr::knit('guess-output-format-test.Rhtml', quiet = TRUE))
