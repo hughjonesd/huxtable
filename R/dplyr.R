@@ -68,7 +68,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' Huxtable can be used with dplyr verbs \code{\link[dplyr]{select}}, \code{\link[dplyr]{rename}},
 #' \code{\link[dplyr]{slice}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{mutate}} and
 #' \code{\link[dplyr]{transmute}}. These will return huxtables. Other verbs like \code{\link[dplyr]{summarize}}
-#' will simply return data frames as normal.
+#' will simply return data frames as normal. \code{mutate} has an extra option, detailed below.
 #'
 #' @param .data A huxtable.
 #' @param ... Arguments passed to \code{\link[dplyr]{mutate}}.
@@ -80,7 +80,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
 #'
 #' @rdname dplyr-verbs
-#' @aliases mutate
+#' @aliases mutate dplyr-verbs
 #' @examples
 #' ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5)
 #' bold(ht)[c(1, 3), ] <- TRUE

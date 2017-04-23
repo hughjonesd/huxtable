@@ -3,6 +3,7 @@
 \name{mutate.huxtable}
 \alias{mutate.huxtable}
 \alias{mutate}
+\alias{dplyr-verbs}
 \title{Dplyr verbs for huxtable}
 \usage{
 \method{mutate}{huxtable}(.data, ..., copy_cell_props = TRUE)
@@ -18,7 +19,7 @@
 Huxtable can be used with dplyr verbs \code{\link[dplyr]{select}}, \code{\link[dplyr]{rename}},
 \code{\link[dplyr]{slice}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{mutate}} and
 \code{\link[dplyr]{transmute}}. These will return huxtables. Other verbs like \code{\link[dplyr]{summarize}}
-will simply return data frames as normal.
+will simply return data frames as normal. \code{mutate} has an extra option, detailed below.
 }
 \details{
 If \code{mutate} creates new columns, and the argument \code{copy_cell_props} is missing or \code{TRUE}, then cell
