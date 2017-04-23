@@ -11,3 +11,5 @@ matrix:
   include:
   - pandoc: false
     r: release
+  - r_github_packages: tidyverse/dplyr
+    r: release
