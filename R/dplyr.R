@@ -9,6 +9,8 @@ filter_.huxtable <- function (.data, ..., .dots) {
   ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames, ]
 }
 
+#' @export filter
+NULL
 
 #' @importFrom dplyr filter
 #' @export
