@@ -136,8 +136,7 @@ cell_html <- function (ht, rn, cn, contents) {
   }
 
   if (! is.na(bgcolor <- background_color(ht)[rn, cn])) {
-    bgcolor <- as.vector(col2rgb(bgcolor))
-    bgcolor <- paste(bgcolor, collapse = ', ')
+    bgcolor <- format_color(bgcolor)
     res <- paste0(res, 'background-color: rgb(', bgcolor, '); ')
   }
 
@@ -147,8 +146,7 @@ cell_html <- function (ht, rn, cn, contents) {
 
   span_css <- ''
   if (! is.na(text_color <- text_color(ht)[rn, cn])) {
-    text_color <- as.vector(col2rgb(text_color))
-    text_color <- paste(text_color, collapse = ', ')
+    text_color <- format_color(text_color)
     # use span not td style because color affects borders
     span_css <- paste0(span_css, 'color: rgb(', text_color, '); ')
   }

@@ -30,6 +30,10 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
   contents
 }
 
+
+format_color <- function (r_color) paste0(as.vector(col2rgb(r_color)), collapse = ', ')
+
+
 # compute_real_borders <- function (ht) {
 #   borders <- matrix(0, nrow(ht) + 1, ncol(ht) + 1)
 #   # borders[y, x] gives the border above row y and left of col x

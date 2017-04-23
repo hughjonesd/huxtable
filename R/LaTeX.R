@@ -177,7 +177,7 @@ build_tabular <- function(ht) {
       # print out cell_color and borders from display cell rather than actual cell
       # but only for left hand cells (which will be multicolumn{colspan} )
       if (! is.na(cell_color <- background_color(ht)[drow, dcol]) && mycol == dcol) {
-        cell_color <- latex_color(cell_color)
+        cell_color <- format_color(cell_color)
         cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
         contents <- paste0(cell_color, ' ', contents)
       }
@@ -267,7 +267,7 @@ build_cell_contents <- function(ht, row, col, contents) {
     contents <- paste0('{\\fontsize{', font_size_pt, '}{', line_space, '}\\selectfont ', contents, '}')
   }
   if (! is.na(text_color <- text_color(ht)[row, col])) {
-    text_color <- latex_color(text_color)
+    text_color <- format_color(text_color)
     contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents, '}')
   }
   if (bold(ht)[row, col]) {
@@ -295,7 +295,7 @@ build_clines_for_row <- function(ht, row) {
   dcells_this_row <- unique(display_cells[display_cells$row == row, ])
   this_bottom <- rep('', ncol(ht))
 
-  blank_line_color <- rep(latex_color('white'), ncol(ht)) # white by default, I guess...
+  blank_line_color <- rep(format_color('white'), ncol(ht)) # white by default, I guess...
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
@@ -307,7 +307,7 @@ build_clines_for_row <- function(ht, row) {
     }
     # Use color if we are in middle of display cell
     if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
-      blank_line_color[dcol:end_col] <- latex_color(color)
+      blank_line_color[dcol:end_col] <- format_color(color)
     }
   }
   blanks <- paste0('>{\\arrayrulecolor[RGB]{', blank_line_color, '}}-')
@@ -368,7 +368,7 @@ v_border <- function (ht, drow, dcol, side) {
   color <- get_all_border_colors(ht, drow, dcol)[side]
   if (! width > 0 ) return('')
   if (is.na(color)) return('|')
-  color <- latex_color(color)
+  color <- format_color(color)
   paste0('!{\\color[RGB]{', color, '}\\vrule}')
 }
 
@@ -377,9 +377,6 @@ h_border <- function (ht, drow, dcol, side) {
   color <- get_all_border_colors(ht, drow, dcol)[side]
   if (! width > 0 ) return('')
   if (is.na(color)) color <- 'black' # the default
-  color <- latex_color(color)
+  color <- format_color(color)
   paste0('>{\\arrayrulecolor[RGB]{', color, '}}-')
 }
-
-
-latex_color <- function (r_color) paste0(as.vector(col2rgb(r_color)), collapse = ', ')

@@ -21,10 +21,6 @@
 #' @name huxtable-package
 NULL
 
-#' @import stats
-#' @import grDevices
-NULL
-
 
 #' Create a huxtable
 #'
