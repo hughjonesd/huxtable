@@ -22,6 +22,10 @@
 NULL
 
 
+#' @importFrom stats na.omit setNames
+NULL
+
+
 #' Create a huxtable
 #'
 #' \code{huxtable}, or \code{hux}, creates a huxtable object.
