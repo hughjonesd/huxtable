@@ -31,7 +31,7 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
 }
 
 
-format_color <- function (r_color) paste0(as.vector(col2rgb(r_color)), collapse = ', ')
+format_color <- function (r_color) paste0(as.vector(grDevices::col2rgb(r_color)), collapse = ', ')
 
 
 # compute_real_borders <- function (ht) {
