@@ -9,7 +9,7 @@
 \usage{
 theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
-theme_striped(ht, stripe = grey(0.9), header_row = TRUE,
+theme_striped(ht, stripe = grDevices::grey(0.9), header_row = TRUE,
   header_col = TRUE)
 
 theme_article(ht, header_row = TRUE, header_col = TRUE)
