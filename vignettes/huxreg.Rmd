@@ -16,7 +16,7 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(huxtable)
-
+#test
 is_latex <- guess_knitr_output_format() == 'latex'
 knitr::knit_hooks$set(
   barrier = function(before, options, envir) {
