@@ -1,4 +1,7 @@
-# huxtable 0.2.0.9000
+# huxtable 0.2.1
+
+* Compatibility with dplyr 0.6.0.
+* Use ~ for decimal padding in LaTeX.
 
 # huxtable 0.2.0
 
