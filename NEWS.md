@@ -1,5 +1,7 @@
 # huxtable 0.2.1.9000
 
+* New borders argument for huxreg, gives borders in sensible places.
+
 # huxtable 0.2.1
 
 * Compatibility with dplyr 0.6.0.
