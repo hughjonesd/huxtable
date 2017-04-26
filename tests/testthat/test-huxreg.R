@@ -80,3 +80,17 @@ test_that('huxreg borders argument works', {
   hr2 <- huxreg(lm1, lm2, borders = FALSE)
   expect_equivalent(bottom_border(hr2)[, 2], rep(0, nrow(hr2)))
 })
+
+test_that('huxreg stars printed correctly', {
+  set.seed(27101975)
+  dfr <- data.frame(y = rnorm(20), a = rnorm(20))
+  dfr$y <- dfr$y + dfr$a + rnorm(20, 0, 4)
+  dfr$z <- dfr$a + rnorm(20, 0, 1)
+  lm1 <- lm(y ~ a, dfr)
+  lm2 <- lm(z ~ a, dfr)
+  number_regex <- '\\s*(\\d|\\.)+\\s*'
+  expect_match(huxreg(lm1)[[4, 2]], number_regex)
+  expect_match(huxreg(lm1, stars = c('@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
+  expect_match(huxreg(lm1, stars = c('@' = 0.1, 'wrong' = 0.05))[[4, 2]], paste0(number_regex, '@\\s*'))
+  expect_match(huxreg(lm2)[[4, 2]], paste0(number_regex, '\\*\\*\\*\\s*'))
+})
