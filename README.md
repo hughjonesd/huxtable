@@ -1,11 +1,4 @@
 
-    ## 
-    ## Attaching package: 'huxtable'
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     filter
-
 <table class="huxtable" style="border-collapse: collapse; width: 60pt; margin-left: auto; margin-right: auto;height: 60pt;">
 <col style="width: 40%;">
 <col style="width: 30%;">
