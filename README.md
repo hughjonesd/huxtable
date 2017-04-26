@@ -23,13 +23,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <br>
 
-[![CRAN Status Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable)
-
-[![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
-
-[![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable)
-
-[![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
+[![CRAN Status Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable) [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable) [![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable) [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
 Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface.
 
