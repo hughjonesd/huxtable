@@ -1,3 +1,7 @@
+# huxtable 0.2.2
+
+* Fix a bug that could lead to wrong significance stars in `huxreg`
+
 # huxtable 0.2.1
 
 * Compatibility with dplyr 0.6.0.
