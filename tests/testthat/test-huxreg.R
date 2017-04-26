@@ -80,5 +80,6 @@ test_that('huxreg stars printed correctly', {
   expect_match(huxreg(lm1)[[4, 2]], number_regex)
   expect_match(huxreg(lm1, stars = c('@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
   expect_match(huxreg(lm1, stars = c('@' = 0.1, 'wrong' = 0.05))[[4, 2]], paste0(number_regex, '@\\s*'))
+  expect_match(huxreg(lm1, stars = c('wrong' = 0.05, '@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
   expect_match(huxreg(lm2)[[4, 2]], paste0(number_regex, '\\*\\*\\*\\s*'))
 })
