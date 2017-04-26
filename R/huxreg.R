@@ -94,7 +94,7 @@ huxreg <- function (
     x
   })
   if (! is.null(stars)) tidied <- lapply(tidied, function (x) {
-    stars_arg <- c(0, stars, ' ' = 1)
+    stars_arg <- c(0, sort(stars), ' ' = 1)
     x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ], paste(estimate, symnum(as.numeric(p.value),
           cutpoints = stars_arg, symbols = names(stars_arg)[-1], na = ' ')))
     x
