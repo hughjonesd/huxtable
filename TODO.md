@@ -31,7 +31,6 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * more advanced positioning (floats?)
   - LaTeX: float string
-* Add borders argument for huxreg
 * Easy way to set defaults
   
 PUT OFF

@@ -7,9 +7,9 @@
 huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
   error_pos = c("below", "same", "right"), number_format = "\%.3f",
   pad_decimal = ".", ci_level = 0.95, stars = c(`***` = 0.001, `**` =
-  0.01, `*` = 0.05), bold_signif = NULL, note = "\%stars\%.",
-  statistics = c(N = "nobs", R2 = "r.squared", "logLik", "AIC"),
-  coefs = NULL, omit_coefs = NULL)
+  0.01, `*` = 0.05), bold_signif = NULL, borders = TRUE,
+  note = "\%stars\%.", statistics = c(N = "nobs", R2 = "r.squared",
+  "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
 }
 \arguments{
 \item{...}{Models, or a single list of models.}
@@ -29,6 +29,8 @@ Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
 
 \item{bold_signif}{Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 this behaviour.}
+
+\item{borders}{Logical: add horizontal borders in appropriate places?}
 
 \item{note}{Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
 significance stars. Set to \code{NULL} for no footnote.}
