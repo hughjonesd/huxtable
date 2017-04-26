@@ -23,8 +23,7 @@ BUGS
 
 TODO
 ====
-* smarter website
-  - multiple examples
+
 * `set_outer_borders` ?
 * huxreg format_error argument so you could do e.g. '(%stderr) [%ci.low to %ci.high]'?
 * Use strwrap in to_screen (and don't count wrap cells for width)
@@ -32,7 +31,8 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * more advanced positioning (floats?)
   - LaTeX: float string
-
+* Add borders argument for huxreg
+* Easy way to set defaults
   
 PUT OFF
 =======
