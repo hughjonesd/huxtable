@@ -14,3 +14,4 @@ logo\.xcf
 ^man-roxygen$
 ^TODO\.md$
 ^codecov\.yml$
+^run-covr\.R$
