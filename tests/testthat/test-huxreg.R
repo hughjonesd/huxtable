@@ -69,6 +69,7 @@ test_that('huxreg number_format works correctly', {
   expect_match(to_screen(hr2), paste0('\\D', sprintf('%5.3f', coef(lm1)[2]),'\\D'))
 })
 
+
 test_that('huxreg borders argument works', {
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(100), a = rnorm(100), b = rnorm(100), d = rnorm(100))
@@ -81,6 +82,7 @@ test_that('huxreg borders argument works', {
   expect_equivalent(bottom_border(hr2)[, 2], rep(0, nrow(hr2)))
 })
 
+
 test_that('huxreg stars printed correctly', {
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(20), a = rnorm(20))
@@ -92,5 +94,6 @@ test_that('huxreg stars printed correctly', {
   expect_match(huxreg(lm1)[[4, 2]], number_regex)
   expect_match(huxreg(lm1, stars = c('@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
   expect_match(huxreg(lm1, stars = c('@' = 0.1, 'wrong' = 0.05))[[4, 2]], paste0(number_regex, '@\\s*'))
+  expect_match(huxreg(lm1, stars = c('wrong' = 0.05, '@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
   expect_match(huxreg(lm2)[[4, 2]], paste0(number_regex, '\\*\\*\\*\\s*'))
 })
