@@ -13,3 +13,4 @@ logo\.xcf
 ^build-cran.R$
 ^man-roxygen$
 ^TODO\.md$
+^codecov\.yml$
