@@ -1,4 +1,11 @@
 
+    ## 
+    ## Attaching package: 'huxtable'
+
+    ## The following object is masked from 'package:stats':
+    ## 
+    ##     filter
+
 <table class="huxtable" style="border-collapse: collapse; width: 60pt; margin-left: auto; margin-right: auto;height: 60pt;">
 <col style="width: 40%;">
 <col style="width: 30%;">
@@ -28,6 +35,8 @@
 [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable)
 
 [![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable)
+
+[![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
 Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface.
 
