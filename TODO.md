@@ -32,6 +32,11 @@ TODO
 * more advanced positioning (floats?)
   - LaTeX: float string
 * Easy way to set defaults
+* insert_row and insert_column methods, to wrap `cbind`, `rbind`. Cf. `append`.
+  - `after` and `span` arguments
+* A FAQ, including:
+  - my table isn't in the centre with position(ht) <- 'left'!
+    - try setting the width
   
 PUT OFF
 =======
