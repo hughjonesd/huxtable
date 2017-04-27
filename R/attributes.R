@@ -340,6 +340,9 @@ make_getter_setters('text_color', 'cell')
 #' @templateVar attr_desc Borders
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
+#' @details
+#' Currently in LaTeX, border widths are ignored: a border can only be present (if \code{value} > 0) or
+#'absent.
 #' @seealso \code{\link{set_all_borders}}
 #' @template getset-example
 #' @templateVar attr_val 1

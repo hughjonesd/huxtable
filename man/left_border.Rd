@@ -62,6 +62,10 @@ Similarly for the other functions.
 \description{
 Functions to get or set the borders property of huxtable table cells.
 }
+\details{
+Currently in LaTeX, border widths are ignored: a border can only be present (if \code{value} > 0) or
+absent.
+}
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
