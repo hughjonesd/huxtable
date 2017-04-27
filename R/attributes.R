@@ -824,6 +824,9 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 #' @templateVar attr_desc Table position
 #' @templateVar value_param_desc
 #' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
+#' @details
+#' If your tables are too far to the right under LaTeX, try setting their \code{\link{width}}
+#' explicitly.
 #' @template getset-example
 #' @templateVar attr_val 'right'
 #' @export position position<- set_position position.huxtable position<-.huxtable
