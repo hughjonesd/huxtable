@@ -20,6 +20,7 @@ matrix:
     os: linux
   - r: release
     os: osx
+    osx_image: xcode8.3
     before_install:
       - tlmgr install titling
     brew_packages: openssl pandoc
