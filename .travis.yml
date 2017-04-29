@@ -12,19 +12,10 @@ matrix:
   include:
   - pandoc: false
     r: release
-    os: linux
   - r_github_packages:
     - tidyverse/dplyr
     - jimhester/covr
     r: release
-    os: linux
-  - r: release
-    os: osx
-    osx_image: xcode8.1
-    sudo: true
-    before_install:
-      - sudo tlmgr install titling
-    brew_packages: openssl pandoc
 
 after_success:
   - Rscript run-covr.R
