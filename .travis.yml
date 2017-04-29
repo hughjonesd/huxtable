@@ -10,7 +10,7 @@ r:
 os:
   - osx
   - linux
-disable_homebrew: true
+brew_packages: openssl
 r_github_packages: jimhester/covr
 matrix:
   include:
