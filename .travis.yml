@@ -7,12 +7,6 @@ r:
   - oldrel
   - release
   - devel
-os:
-  - osx
-  - linux
-before_install:
-  - tlmgr install titling
-brew_packages: openssl pandoc
 r_github_packages: jimhester/covr
 matrix:
   include:
@@ -24,9 +18,12 @@ matrix:
     - jimhester/covr
     r: release
     os: linux
-  exclude:
-    - r: oldrel
-      os: osx
+  - r: release
+    os: linux
+    before_install:
+      - tlmgr install titling
+    brew_packages: openssl pandoc
+
 after_success:
   - Rscript run-covr.R
 
