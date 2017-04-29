@@ -19,7 +19,7 @@ matrix:
     r: release
     os: linux
   - r: release
-    os: linux
+    os: osx
     before_install:
       - tlmgr install titling
     brew_packages: openssl pandoc
