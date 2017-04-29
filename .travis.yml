@@ -7,6 +7,10 @@ r:
   - oldrel
   - release
   - devel
+os:
+  - osx
+  - linux
+disable_homebrew: true
 r_github_packages: jimhester/covr
 matrix:
   include:
