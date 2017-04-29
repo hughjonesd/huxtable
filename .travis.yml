@@ -10,7 +10,9 @@ r:
 os:
   - osx
   - linux
-brew_packages: openssl
+before_install:
+  - tlmgr install titling
+brew_packages: openssl pandoc
 r_github_packages: jimhester/covr
 matrix:
   include:
