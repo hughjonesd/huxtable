@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "29/04/2017"
+header-includes:
+- \usepackage{tabulary}
+output: 
+  pdf_document: 
+    keep_tex: yes
+---
+
+This prints the tabularx dependency in the header, but omits the tabulary dependency.
+
+```{r setup, results='asis'}
+library(knitr)
+knitr::asis_output("HELLO", meta = list(rmarkdown::latex_dependency('tabularx')))
+# knitr::asis_output("HELLO")
+```

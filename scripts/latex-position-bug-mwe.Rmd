@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "27/04/2017"
+output: 
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup}
+library(huxtable)
+ht <- hux(
+Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
+Salary = c(50000, 50000, 40000),
+Age = c(42, 57, 29),
+Sex = c('Male','Female','Male'),
+HouseNo = c(132,87,56),
+Present = c("Yes","Yes","No"),
+add_colnames = TRUE
+)
+position(ht) = "center"
+# workaround:
+# width(ht) = 0.75
+top_border(ht)[1,]=5
+bottom_border(ht)[1,]=1
+bottom_border(ht)[4,]=3
+ht
+```
+
+
