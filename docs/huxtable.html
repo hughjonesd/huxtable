@@ -4,14 +4,14 @@
 
 <head>
 
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2017-04-23" />
+<meta name="date" content="2017-05-04" />
 
 <title>Introduction to Huxtable</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Introduction to Huxtable</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2017-04-23</em></h4>
+<h4 class="date"><em>2017-05-04</em></h4>
 
 </div>
 
@@ -172,7 +172,7 @@ $(document).ready(function () {
 <h1>Introduction</h1>
 <div id="about-this-document" class="section level2">
 <h2>About this document</h2>
-<p>This is the introductory vignette for the R package ‘huxtable’, version 0.2.0.9000. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
+<p>This is the introductory vignette for the R package ‘huxtable’, version 0.2.2.9000. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
 </div>
 <div id="huxtable" class="section level2">
 <h2>Huxtable</h2>
@@ -218,7 +218,7 @@ car_ht &lt;- as_hux(mtcars)</code></pre>
 ##    David Hugh-Jones   40000.00</code></pre>
 <p>To print a huxtable out using LaTeX or HTML, just call <code>print_latex</code> or <code>print_html</code>. In knitr documents, like this one, you can simply evaluate the hux. It will know what format to print itself in.</p>
 <pre class="r"><code>ht</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Employee</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Salary</td>
@@ -256,7 +256,7 @@ bottom_border(ht)[1,] &lt;- 1</code></pre>
 <pre class="r"><code>align(ht)[,'Salary'] &lt;- 'right'</code></pre>
 <p>After these changes, our table looks smarter:</p>
 <pre class="r"><code>ht</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Employee</span></td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Salary</span></td>
@@ -278,7 +278,7 @@ bottom_border(ht)[1,] &lt;- 1</code></pre>
 <p>So far, all these properties have been set at cell level. Different cells can have different alignment, text formatting and so on. By contrast, <code>caption</code> is a table-level property. It only takes one value, which sets a table caption.</p>
 <pre class="r"><code>caption(ht) &lt;- 'Employee table'
 ht</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side:top; text-align: center;">Employee table</caption><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Employee</span></td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Salary</span></td>
@@ -440,14 +440,14 @@ hux(
       )                               %&gt;% 
       set_bold(1, 1:2, TRUE)          %&gt;% 
       set_bottom_border(1, 1:2, 1)    %&gt;%
-      set_align(-1, 2, 'right')       %&gt;%
+      set_align(1:3, 2, 'right')      %&gt;%
       set_right_padding(10)           %&gt;%
       set_left_padding(10)            %&gt;% 
       set_caption('Employee table')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side:top; text-align: center;">Employee table</caption><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Employee</span></td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Salary</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; "><span style="font-weight: bold; ">Salary</span></td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; ">John Smith</td>
@@ -459,7 +459,7 @@ hux(
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; ">David Hugh-Jones</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; ">40000.00</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 10pt 4pt 10pt; ">40000.00</td>
 </tr>
 </table>
 
@@ -507,7 +507,7 @@ cars_mpg &lt;- cars_mpg                          %&gt;%
       huxtable::add_colnames()
 
 cars_mpg[1:5,]</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Car</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">mpg</td>
@@ -774,7 +774,7 @@ ht_wrapped</code></pre>
 <pre class="r"><code>as_hux(mtcars[1:4, 1:4])                           %&gt;% 
       huxtable::add_rownames(colname = 'Car name') %&gt;% 
       huxtable::add_colnames()</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Car name</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">mpg</td>
@@ -837,7 +837,7 @@ col_width(cars_mpg) &lt;- c(.4 , .3 , .1, .1, .1)
 
 if (is_latex) font_size(cars_mpg) &lt;- 10
 cars_mpg</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: 40%;"><col style="width: 30%;"><col style="width: 10%;"><col style="width: 10%;"><col style="width: 10%;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1px 1px 1px 1px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; "></td>
   <td  colspan="4" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1px 1px 1px 1px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">List of cars</td>
@@ -1050,7 +1050,7 @@ cars_mpg</code></pre>
 <h2>Quick themes</h2>
 <p>Huxtable comes with some predefined themes for formatting.</p>
 <pre class="r"><code>theme_striped(cars_mpg[14:20,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: 40%;"><col style="width: 30%;"><col style="width: 10%;"><col style="width: 10%;"><col style="width: 10%;"><tr>
   <td  rowspan="7" style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 255); ">Six cylinders</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 255); ">Mazda RX4</td>
@@ -1285,7 +1285,20 @@ att_hux</code></pre>
 <li>With two arguments, like <code>set_property(hux_object, value)</code> to set a property everywhere;</li>
 <li>With three arguments, like <code>set_property(hux_object, where(condition), value)</code> to set a property for specific cells.</li>
 </ul>
-<p>The second argument of the three-argument version must return a 2-column matrix. Each row of the matrix gives one cell. <code>where()</code> does this for you: it takes a logical matrix argument and returns the rows and columns where a condition is <code>TRUE</code>.</p>
+<p>The second argument of the three-argument version must return a 2-column matrix. Each row of the matrix gives one cell. <code>where()</code> does this for you: it takes a logical matrix argument and returns the rows and columns where a condition is <code>TRUE</code>. It’s easiest to show this with an example:</p>
+<pre class="r"><code>m &lt;- matrix(c('dog', 'cat', 'dog', 'dog', 'cat', 'cat', 'cat', 'dog'), 4, 2)
+m</code></pre>
+<pre><code>##      [,1]  [,2] 
+## [1,] &quot;dog&quot; &quot;cat&quot;
+## [2,] &quot;cat&quot; &quot;cat&quot;
+## [3,] &quot;dog&quot; &quot;cat&quot;
+## [4,] &quot;dog&quot; &quot;dog&quot;</code></pre>
+<pre class="r"><code>where(m == 'dog')</code></pre>
+<pre><code>##      row col
+## [1,]   1   1
+## [2,]   3   1
+## [3,]   4   1
+## [4,]   4   2</code></pre>
 <p><code>set_*</code> functions have one more optional argument, the <code>byrow</code> argument, which is <code>FALSE</code> by default. Use this when you are setting a pattern of property values for many cells and want to specify a pattern by row:</p>
 <pre class="r"><code>color_demo &lt;- matrix('text', 7, 7)
 rainbow &lt;- c('red', 'orange', 'yellow', 'green', 'blue', 'turquoise', 'violet')
@@ -1295,7 +1308,7 @@ color_demo &lt;- as_hux(color_demo)                  %&gt;%
       set_all_borders(1)                          %&gt;% 
       set_all_border_colors('white')
 color_demo</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1px 1px 1px 1px; border-style: solid; border-top-color: white;  border-right-color: white;  border-bottom-color: white;  border-left-color: white; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 0, 0); "><span style="color: rgb(255, 0, 0); ">text</span></td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1px 1px 1px 1px; border-style: solid; border-top-color: white;  border-right-color: white;  border-bottom-color: white;  border-left-color: white; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 165, 0); "><span style="color: rgb(255, 0, 0); ">text</span></td>
@@ -1373,12 +1386,12 @@ lm2 &lt;- lm(price ~ depth, diamonds)
 lm3 &lt;- lm(price ~ carat + depth, diamonds)
 
 huxreg(lm1, lm2, lm3)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; width: 75%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1411,10 +1424,10 @@ huxreg(lm1, lm2, lm3)</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-102.165 ***</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(11.990)&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(4.635)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(11.990)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(4.635)&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">N</td>
@@ -1435,10 +1448,10 @@ huxreg(lm1, lm2, lm3)</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-472488.441&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">AIC</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">945466.532&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1047550.862&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">944984.882&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">AIC</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">945466.532&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1047550.862&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0px 0px 1px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">944984.882&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>
