@@ -55,7 +55,10 @@ to_html.huxtable <- function(ht, ...) {
   res <- paste0('<table class="huxtable" style="border-collapse: collapse; width: ', width, '; ', mstring,
         heightstring, '"', idstring, '>\n')
   if (! is.na(cap <- caption(ht))) {
-    cap <- paste0('<caption style="caption-side:', caption_pos(ht), '; text-align: center;">', cap, '</caption>')
+    vpos <- if (grepl('top', caption_pos(ht))) 'top' else 'bottom'
+    hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))
+    if (! hpos %in% c('left', 'center', 'right')) hpos <- position(ht)
+    cap <- paste0('<caption style="caption-side:', vpos, '; text-align:', hpos, '">', cap, '</caption>')
     res <- paste0(res, cap)
   }
   cols_html <- sapply(1:ncol(ht), col_html, ht = ht)

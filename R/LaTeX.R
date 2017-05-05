@@ -39,7 +39,9 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   }
 
   cap <- if (! is.na(cap <- caption(ht))) {
-    cap_setup <- switch(position(ht),
+    hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))
+    if (! hpos %in% c('left', 'center', 'right')) hpos <- position(ht)
+    cap_setup <- switch(hpos,
             left   = 'raggedright',
             center = 'centering',
             right  = 'raggedleft'
@@ -49,7 +51,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   } else ''
   lab <- if (! is.na(lab <- label(ht))) paste0('\\label{', lab, '}\n') else ''
   if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
-  res <- if (caption_pos(ht) == 'top') paste0(cap, lab, res) else paste0(res, cap, lab)
+  res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, res) else paste0(res, cap, lab)
 
   # table position
   pos_text <- switch(position(ht),

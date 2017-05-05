@@ -839,15 +839,19 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption position
 #' @templateVar value_param_desc
-#' A length-one character vector which can be 'top', 'bottom' or \code{NA} for the default.
+#' A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter', 'bottomright', or \code{NA} for the default.
+#' @details
+#' If \code{caption_pos} is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
+#' will be determined by the huxtable's \code{\link{position}}.
 #' @template getset-example
-#' @templateVar attr_val 'top'
+#' @templateVar attr_val 'bottom'
 #' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable
 #' @S3method caption_pos huxtable
 #' @S3method caption_pos<- huxtable
 #' @seealso \code{\link{caption}}
 NULL
-make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom'))
+make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topright',
+      'bottomleft', 'bottomcenter', 'bottomright'))
 
 
 #' @template getset-table

@@ -203,7 +203,7 @@ to_screen.huxtable <- function (ht, borders = c('both', 'horizontal', 'vertical'
   if (colnames) result[2 - collapse_horiz] <- my_colour(result[2 - collapse_horiz])
   result <- paste0(result, collapse = '\n')
   if (! is.na(cap <- caption(ht))) {
-    result <- if (caption_pos(ht) == 'top') paste0(cap, '\n', result) else paste0(result, '\n', cap)
+    result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
   result <- paste0(result, '\n')
 
