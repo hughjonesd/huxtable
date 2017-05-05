@@ -1,6 +1,7 @@
 # huxtable 0.2.2.9000
 
 * New borders argument for huxreg, gives borders in sensible places.
+* Allow more flexible caption positioning.
 
 # huxtable 0.2.2
 
