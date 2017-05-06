@@ -2,10 +2,11 @@
 
 * New borders argument for huxreg, gives borders in sensible places.
 * Allow more flexible caption positioning.
+* New `set_default_properties` function to set default properties for new huxtables.
 
 # huxtable 0.2.2
 
-* Fix a bug that could lead to wrong significance stars in `huxreg`
+* Fix a bug that could lead to wrong significance stars in `huxreg`.
 
 # huxtable 0.2.1
 

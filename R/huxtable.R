@@ -88,8 +88,8 @@ as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, 
     attr(x, a) <- NA
   }
   attr(x, 'number_format') <- matrix(list(NA), nrow(x), ncol(x))
-  for (a in names(huxtable_default_attrs)) {
-    attr(x, a)[] <- huxtable_default_attrs[[a]] # [[ indexing matters here
+  for (a in names(huxtable_env$huxtable_default_attrs)) {
+    attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]]  # [[ indexing matters here
   }
 
   class(x) <- c('huxtable', class(x))
