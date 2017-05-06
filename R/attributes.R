@@ -165,7 +165,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #'
 #' @return A list of the previous property values, invisibly.
 #' @export
-#' @seealso get_default_properties
+#' @seealso \code{\link{get_default_properties}}
 #' @examples
 #' old <- set_default_properties(left_border = 1)
 #' hux(a = 1:2, b = 1:2)
@@ -193,7 +193,7 @@ set_default_properties <- function(...) {
 #' @examples
 #' get_default_properties('bold')
 #' get_default_properties()
-#' @seealso set_default_properties
+#' @seealso \code{\link{set_default_properties}}
 get_default_properties <- function (names = NULL) {
   if (is.null(names)) names <- names(huxtable_env$huxtable_default_attrs)
   if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(

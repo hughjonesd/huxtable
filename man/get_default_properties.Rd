@@ -20,5 +20,5 @@ get_default_properties('bold')
 get_default_properties()
 }
 \seealso{
-set_default_properties
+\code{\link{set_default_properties}}
 }

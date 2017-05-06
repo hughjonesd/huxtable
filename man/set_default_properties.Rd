@@ -21,5 +21,5 @@ hux(a = 1:2, b = 1:2)
 set_default_properties(old)
 }
 \seealso{
-get_default_properties
+\code{\link{get_default_properties}}
 }
