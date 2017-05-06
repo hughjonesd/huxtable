@@ -4,6 +4,7 @@ author: "David Hugh-Jones"
 date: "29/04/2017"
 header-includes:
 - \usepackage{tabulary}
+- \usepackage{xcolor}
 output: 
   pdf_document: 
     keep_tex: yes

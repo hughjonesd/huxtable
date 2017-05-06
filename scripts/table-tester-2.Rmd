@@ -85,6 +85,19 @@ ht
 
 ```
 
+
+# Caption_pos
+
+```{r, results = 'asis'}
+for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomcenter', 'bottomright', 'bottom')) {
+  ht <- make(nrow = 1) 
+  caption(ht) <- paste0('caption\\_pos: ', pos)
+  caption_pos(ht) <- pos
+  print_latex(ht)
+}
+
+```
+
 \FloatBarrier
 
 # Col_width and align
