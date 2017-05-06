@@ -15,7 +15,7 @@ set_caption_pos(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter',}
+\item{value}{A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter', 'bottomright', or \code{NA} for the default.}
 }
 \value{
 For \code{caption_pos}, the \code{caption_pos} attribute.
