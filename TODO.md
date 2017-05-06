@@ -46,7 +46,6 @@ PUT OFF
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
-* way to set defaults? Maybe just export huxtable_default_attrs or have a huxtable_default()<- method
 
 
 
