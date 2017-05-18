@@ -1,8 +1,9 @@
-# huxtable 0.2.2.9000
+# huxtable 0.3.0
 
 * New borders argument for huxreg, gives borders in sensible places.
-* Allow more flexible caption positioning.
+* Allow more flexible caption positioning with `caption_pos`.
 * New `set_default_properties` function to set default properties for new huxtables.
+* Fix compatibility with dplyr 0.6.0.
 
 # huxtable 0.2.2
 
