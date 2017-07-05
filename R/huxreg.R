@@ -141,8 +141,9 @@ huxreg <- function (
 
   stat_names <- unique(unlist(lapply(all_sumstats, function (x) x$stat)))
   if (! is.null(statistics)) {
-    if (! all(statistics %in% stat_names)) stop('Unrecognized statistics:',
-      paste(setdiff(statistics, stat_names)), collapse = ', ')
+    if (! all(statistics %in% stat_names)) stop('Unrecognized statistics: ',
+          paste(setdiff(statistics, stat_names), collapse = ', '), 
+          '\nTry setting "statistics" explicitly in the call to huxreg()')
     stat_names <- statistics
   }
   sumstats <- lapply(all_sumstats, merge, x = data.frame(stat = stat_names), by = 'stat', all.x = TRUE, sort = FALSE)
