@@ -31,7 +31,6 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * more advanced positioning (floats?)
   - LaTeX: float string
-* Easy way to set defaults
 * insert_row and insert_column methods, to wrap `cbind`, `rbind`. Cf. `append`.
   - `after` and `span` arguments
 * A FAQ, including:

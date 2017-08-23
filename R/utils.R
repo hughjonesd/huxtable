@@ -98,7 +98,7 @@ decimal_pad <- function(col, pad_chars, type) {
 # return data frame mapping real cell positions to cells displayed
 display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
-    rowspan = as.vector(new_rowspan), colspan = as.vector(new_colspan))
+        rowspan = as.vector(new_rowspan), colspan = as.vector(new_colspan))
   dcells$display_row <- dcells$row
   dcells$display_col <- dcells$col
   dcells$shadowed <- FALSE
