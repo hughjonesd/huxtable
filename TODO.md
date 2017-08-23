@@ -31,8 +31,6 @@ TODO
   - good for huxreg (confidence intervals, signif. stars etc.)
 * more advanced positioning (floats?)
   - LaTeX: float string
-* insert_row and insert_column methods, to wrap `cbind`, `rbind`. Cf. `append`.
-  - `after` and `span` arguments
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
