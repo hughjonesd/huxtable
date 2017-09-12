@@ -3,18 +3,16 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: 
-    toc: true
-    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
-    toc: true
+    toc: yes
     toc_depth: 2
-vignette: >
-  %\VignetteIndexEntry{Introduction to Huxtable}  
-  %\VignetteEngine{knitr::rmarkdown}  
-  \usepackage[utf8]{inputenc}
+  html_document:
+    toc: yes
+    toc_depth: 2
+vignette: |
+  %\VignetteIndexEntry{Introduction to Huxtable}   %\VignetteEngine{knitr::rmarkdown}   \usepackage[utf8]{inputenc}
 ---
 
 
@@ -122,7 +120,8 @@ car_ht <- as_hux(mtcars)
 
 
 If you look at a huxtable in R, it will print out a simple representation of the data. Notice that we've added the
-column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table.
+column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table. **NB:** This means that row 1 of your data will be row 2 of the huxtable, and the
+column names of your data will be the new row 1.
 
 ```{r, results = 'markup'}
 print_screen(ht)
@@ -339,6 +338,21 @@ car_ht
 
 In general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
 
+## Functions to insert rows, columns and footnotes
+
+Huxtable has three convenience functions for adding a row or column to your table: `insert_row`, `insert_column`
+and `add_footnote`. 
+
+`insert_row` and `insert_column` let you add a single row or column. The `after` parameter specifies where in the table
+to do the insertion, i.e. after what row or column number.
+
+`add_footnote` adds a single row at the bottom, which spans the whole table and has a border above.
+
+```{r}
+ht <- insert_row(ht, 'Hadley Wickham', '100000', after = 3)
+ht <- add_footnote(ht, 'DHJ deserves a pay rise')
+ht
+```
 
 # More formatting 
 
@@ -369,6 +383,23 @@ pointy_ht
 ```
 
 There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so `pad_decimal` works by right-padding cells with spaces. The output may look better if you use a fixed width font.
+
+## Escaping HTML or LaTeX
+
+By default, HTML or LaTeX code will be escaped:
+
+```{r}
+code_ht <- if (is_latex) hux('Here is some maths: $a^b$') else 
+      hux('The code for a copyright symbol is &copy;')
+code_ht
+```
+
+To avoid this, set `escape_contents` to `FALSE`.
+
+```{r}
+escape_contents(code_ht)[1, 1] <- FALSE
+code_ht
+```
 
 
 ## Width and cell wrapping
