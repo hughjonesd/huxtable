@@ -5,9 +5,9 @@
 \alias{insert_row}
 \title{Insert a row or column}
 \usage{
-insert_column(ht, ..., after = 0)
+insert_column(ht, ..., after = 0, copy_cell_props = TRUE)
 
-insert_row(ht, ..., after = 0)
+insert_row(ht, ..., after = 0, copy_cell_props = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -15,6 +15,8 @@ insert_row(ht, ..., after = 0)
 \item{...}{Cell contents.}
 
 \item{after}{Insert the row/column after this position. 0 (the default) inserts as the first row/column.}
+
+\item{copy_cell_props}{Copy cell properties from the previous row or column (if after > 0). See \code{\link{cbind.huxtable}}.}
 }
 \value{
 The modified huxtable

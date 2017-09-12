@@ -212,6 +212,7 @@ guess_knitr_output_format <- function() {
 #' @param ht A huxtable.
 #' @param ... Cell contents.
 #' @param after Insert the row/column after this position. 0 (the default) inserts as the first row/column.
+#' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See \code{\link{cbind.huxtable}}.
 #'
 #' @return The modified huxtable
 #' @export
@@ -222,7 +223,7 @@ guess_knitr_output_format <- function() {
 #' ht
 #' ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
 #' ht
-insert_column <- function (ht, ..., after = 0) {
+insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
   stopifnot(is.numeric(after))
   stopifnot(after <= ncol(ht) && after >= 0)
   ht1 <- NULL
@@ -234,7 +235,7 @@ insert_column <- function (ht, ..., after = 0) {
     ht2 <- ht[, seq(after + 1, ncol(ht), 1)]
   }
   to_insert <- c(...)
-  res <- if (! is.null(ht1)) cbind(ht1, to_insert) else to_insert
+  res <- if (! is.null(ht1)) cbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
   res <- if (! is.null(ht2)) cbind(res, ht2) else res
 
   res
@@ -244,7 +245,7 @@ insert_column <- function (ht, ..., after = 0) {
 #' @rdname insert_column
 #'
 #' @export
-insert_row <- function (ht, ..., after = 0) {
+insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
   stopifnot(is.numeric(after))
   stopifnot(after <= nrow(ht) && after >= 0)
   ht1 <- NULL
@@ -256,7 +257,7 @@ insert_row <- function (ht, ..., after = 0) {
     ht2 <- ht[seq(after + 1, nrow(ht), 1), ]
   }
   to_insert <- c(...)
-  res <- if (! is.null(ht1)) rbind(ht1, to_insert) else to_insert
+  res <- if (! is.null(ht1)) rbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
   res <- if (! is.null(ht2)) rbind(res, ht2) else res
 
   res
