@@ -112,6 +112,23 @@ col_width(ht) <- c(.2, .8)
 caption(ht) <- 'Align by row: l/c/r, col\\_width .2, .8'
 ```
 
+# Different kinds of floats
+
+```{r}
+ht <- make()
+latex_float(ht) <- 't'
+caption(ht) <- 'latex\\_float t, top of page'
+ht
+
+latex_float(ht) <- 'b'
+caption(ht) <- 'latex\\_float b, bottom of page'
+ht
+
+latex_float(ht) <- 'h'
+caption(ht) <- 'latex\\_float h, here'
+ht
+```
+
 \FloatBarrier
 
 # Align and wrap
