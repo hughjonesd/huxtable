@@ -8,23 +8,25 @@ source('functions.R')
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
 
 
-test_that("Cell property getter/setter examples unchanged", {
-  for (attr in huxtable_cell_attrs) {
-    test_ex_same(attr)
-  }
-})
 
-test_that("Row/col getter/setter examples unchanged", {
-  for (attr in c(huxtable_col_attrs, huxtable_row_attrs)) {
+for (attr in huxtable_cell_attrs) {
+  test_that(paste("Cell property attr", attr, "examples unchanged"), {
     test_ex_same(attr)
-  }
-})
+  })
+}
 
-test_that("Table property getter/setter examples unchanged", {
-  for (attr in huxtable_table_attrs) {
+for (attr in c(huxtable_col_attrs, huxtable_row_attrs)) {
+  test_that(paste("Row/col property", attr, "examples unchanged"), {
     test_ex_same(attr)
-  }
-})
+  })
+}
+
+
+for (attr in huxtable_table_attrs) {
+    test_that(paste("Table property", attr, "examples unchanged"), {
+    test_ex_same(attr)
+  })
+}
 
 test_that("Can refer to properties by colnames", {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
