@@ -25,9 +25,8 @@ a single row.
 }
 \examples{
 ht <- hux(1:5, 1:5, 1:5)
-ht <- insert_row(ht, "a", "b", "c")
-ht <- insert_row(ht, 6, 6, 6, after = 6)
+ht <- insert_row(ht, 2.5, 2.5, 2.5, after = 2)
 ht
-ht <- insert_column(ht, "d", 1, 2, 3, 4, 5, 6, after = 3)
+ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
 ht
 }

@@ -218,10 +218,9 @@ guess_knitr_output_format <- function() {
 #'
 #' @examples
 #' ht <- hux(1:5, 1:5, 1:5)
-#' ht <- insert_row(ht, "a", "b", "c")
-#' ht <- insert_row(ht, 6, 6, 6, after = 6)
+#' ht <- insert_row(ht, 2.5, 2.5, 2.5, after = 2)
 #' ht
-#' ht <- insert_column(ht, "d", 1, 2, 3, 4, 5, 6, after = 3)
+#' ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
 #' ht
 insert_column <- function (ht, ..., after = 0) {
   stopifnot(is.numeric(after))
@@ -232,11 +231,11 @@ insert_column <- function (ht, ..., after = 0) {
     ht1 <- ht[, seq(1, after, 1)]
   }
   if (after < ncol(ht)) {
-    ht2 <- ht[, seq(after, ncol(ht), 1)]
+    ht2 <- ht[, seq(after + 1, ncol(ht), 1)]
   }
-  to_insert <- hux(c(...))
-  res <- if (! is.null(ht2)) cbind(to_insert, ht2) else to_insert
-  res <- if (! is.null(ht1)) cbind(ht1, res) else res
+  to_insert <- c(...)
+  res <- if (! is.null(ht1)) cbind(ht1, to_insert) else to_insert
+  res <- if (! is.null(ht2)) cbind(res, ht2) else res
 
   res
 }
@@ -253,12 +252,12 @@ insert_row <- function (ht, ..., after = 0) {
   if (after > 0) {
     ht1 <- ht[seq(1, after, 1), ]
   }
-  if (after < ncol(ht)) {
-    ht2 <- ht[seq(after, nrow(ht), 1), ]
+  if (after < nrow(ht)) {
+    ht2 <- ht[seq(after + 1, nrow(ht), 1), ]
   }
-  to_insert <- hux(...)
-  res <- if (! is.null(ht2)) rbind(to_insert, ht2) else to_insert
-  res <- if (! is.null(ht1)) rbind(ht1, res) else res
+  to_insert <- c(...)
+  res <- if (! is.null(ht1)) rbind(ht1, to_insert) else to_insert
+  res <- if (! is.null(ht2)) rbind(res, ht2) else res
 
   res
 }
