@@ -384,6 +384,23 @@ pointy_ht
 
 There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so `pad_decimal` works by right-padding cells with spaces. The output may look better if you use a fixed width font.
 
+## Escaping HTML or LaTeX
+
+By default, HTML or LaTeX code will be escaped:
+
+```{r}
+code_ht <- if (is_latex) hux('Here is some maths: $a^b$') else 
+      hux('The code for a copyright symbol is &copy;')
+code_ht
+```
+
+To avoid this, set `escape_contents` to `FALSE`.
+
+```{r}
+escape_contents(code_ht)[1, 1] <- FALSE
+code_ht
+```
+
 
 ## Width and cell wrapping
 
