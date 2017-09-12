@@ -34,7 +34,8 @@ The modified object.
 Add a first row of column names, or a first column of row names, to the huxtable.
 }
 \details{
-Note that \code{add_colnames} will change the mode of all columns to character.
+Note that \code{add_colnames} will change the mode of all columns to character. Also note that it will
+move your rows down by one: what was row 1 will now be row 2, and the column names will now be row 1.
 
 \code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
 }

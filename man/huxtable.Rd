@@ -41,6 +41,9 @@ An object of class \code{huxtable}.
 \code{huxtable}, or \code{hux}, creates a huxtable object.
 }
 \details{
+If you use \code{add_colnames} or \code{add_rownames}, be aware that these will shift your rows and columns
+along by one: your old row/column 1 will now be row/column 2, etc.
+
 \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 }
