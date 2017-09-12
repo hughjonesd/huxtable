@@ -3,12 +3,10 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: default
   pdf_document: default
-vignette: >
-  %\VignetteIndexEntry{Design Principles, Comparisons and Limitations} 
-  %\VignetteEngine{knitr::rmarkdown} 
-  \usepackage[utf8]{inputenc}
+  html_document: default
+vignette: |
+  %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  %\VignetteEngine{knitr::rmarkdown}  \usepackage[utf8]{inputenc}
 ---
 
 
