@@ -63,6 +63,7 @@ top_border(ch)[subsections, ] <- 1
 bold(ch)[subsections, 1] <- TRUE
 italic(ch)[subsections, 1] <- TRUE
 background_color(ch)[, seq(3, ncol(ch), 2)] <- grey(.95)
+background_color(ch)[, 2] <- 'lightpink'
 rotation(ch)[1,] <- 270
 valign(ch)[1,] <- 'middle'
 align(ch)[-1, -1] <- 'center'

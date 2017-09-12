@@ -1,38 +1,39 @@
-,xtable,formattable,ascii,kableExtra,condformat,htmlTable,Hmisc::latex,ztable,kable,texreg,stargazer,tables,DT,pander,huxtable,ReporteRs,pixiedust
+,huxtable,xtable,formattable,ascii,kableExtra,condformat,htmlTable,Hmisc::latex,ztable,kable,texreg,stargazer,tables,DT,pander,ReporteRs,pixiedust
 HTML output,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,,Y
-Background color,,Y,Y,,Y,Y,,Y,,,,,,,Y,Y,Y
-Width and height,,Y,Y,(Y),,,,,,,,,,,Y,Y,Y
-Text formatting,,Y,Y,(Y),,,,(Y),,(Y),Y,,,Y,Y,Y,Y
-Borders,,,,,,Y,,Y,,,,,,,Y,Y,Y
-Rotation,,,,,,,,,,,,,,,Y,Y,Y
-Multicolumn/multirow,,,Y,,,Y,(Y),Y,,,(Y),(Y),,,Y,Y,Y
-Alignment,,,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y,Y
-Numeric formatting,,Y,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y,Y
-Captions,Y,,Y,,,,Y,Y,Y,,,,Y,Y,Y,Y,Y
-Format NA ,,,Y,,,,Y,,,,,Y,,Y,Y,Y,Y
-LaTeX output,Y,,(Y),Y,Y,?,Y,Y,Y,Y,Y,Y,,Y,Y,,Y
-Background color,,,Y,,Y,,,,,,,,,,Y,,Y
-Width and height,Y,,Y,(Y),,,,,,,,,,,Y,,Y
-Text formatting,,,Y,(Y),,,,(Y),,(Y),Y,,,Y,Y,,Y
-Borders,(Y),,,,,,(Y),Y,,,,(Y),,,Y,,Y
-Rotation,Y,,,,,,,,,,,,,,Y,,Y
-Multicolumn/multirow,,,Y,,,,(Y),Y,,,(Y),,,,Y,,Y
-Alignment,Y,,Y,,,,Y,Y,Y,,Y,Y,,Y,Y,,Y
-Numeric formatting,Y,,Y,,,,Y,Y,Y,,Y,Y,,Y,Y,,Y
-Captions,Y,,Y,,,,Y,Y,Y,,,,,Y,Y,,Y
-Format NA ,,,Y,,,,Y,,,,,Y,,Y,Y,,Y
-Long tables,Y,,,,,,Y,Y,,,,Y,,,,,Y
-Labels,Y,,,,,,Y,Y,,,Y,Y,,,Y,,Y
+Background color,Y,,Y,Y,,Y,Y,,Y,,,,,,,Y,Y
+Width and height,Y,,Y,Y,(Y),,,,,,,,,,,Y,Y
+Text formatting,Y,,Y,Y,(Y),,,,(Y),,(Y),Y,,,Y,Y,Y
+Borders,Y,,,,,,Y,,Y,,,,,,,Y,Y
+Rotation,Y,,,,,,,,,,,,,,,Y,Y
+Multicolumn/multirow,Y,,,Y,,,Y,(Y),Y,,,(Y),(Y),,,Y,Y
+Alignment,Y,,,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y
+Numeric formatting,Y,,Y,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y
+Captions,Y,Y,,Y,,,,Y,Y,Y,,,,Y,Y,Y,Y
+Format NA ,Y,,,Y,,,,Y,,,,,Y,,Y,Y,Y
+LaTeX output,Y,Y,,(Y),Y,Y,?,Y,Y,Y,Y,Y,Y,,Y,,Y
+Background color,Y,,,Y,,Y,,,,,,,,,,,Y
+Width and height,Y,Y,,Y,(Y),,,,,,,,,,,,Y
+Text formatting,Y,,,Y,(Y),,,,(Y),,(Y),Y,,,Y,,Y
+Borders,Y,(Y),,,,,,(Y),Y,,,,(Y),,,,Y
+Rotation,Y,Y,,,,,,,,,,,,,,,Y
+Multicolumn/multirow,Y,,,Y,,,,(Y),Y,,,(Y),,,,,Y
+Alignment,Y,Y,,Y,,,,Y,Y,Y,,Y,Y,,Y,,Y
+Numeric formatting,Y,Y,,Y,,,,Y,Y,Y,,Y,Y,,Y,,Y
+Captions,Y,Y,,Y,,,,Y,Y,Y,,,,,Y,,Y
+Format NA ,Y,,,Y,,,,Y,,,,,Y,,Y,,Y
+Long tables,,Y,,,,,,Y,Y,,,,Y,,,,Y
+Labels,Y,Y,,,,,,Y,Y,,,Y,Y,,,,Y
 Other features,,,,,,,,,,,,,,,,,
-Conditional formats,,Y,,,Y,,,,,,,,,,Y,,
-Autocreate summary statistics,,,,,,,,,,,,Y,,,,,
-Dynamic HTML widgets,,Y,,,,,,,,,,,Y,,,,
-Create tables from model objects,Y,,Y,,,,,Y,,Y,Y,,,,Y,,
-Add footnotes,,,,Y,,,,,,,,,,,,,
+Conditional formats,Y,,Y,,,Y,,,,,,,,,,,
+Autocreate summary statistics,,,,,,,,,,,,,Y,,,,
+Dynamic HTML widgets,,,Y,,,,,,,,,,,Y,,,
+Create tables from model objects,Y,Y,,Y,,,,,Y,,Y,Y,,,,,
+dplyr compatible,Y,,,,,,,,,,,,,,,,
+Add footnotes,,,,,Y,,,,,,,,,,,,
 Other formats,,,,,,,,,,,,,,,,,
-Markdown,,,,,,,,,Y,,,,,Y,Y,,Y
-Screen,,,,,,,,,,,Y,,,,Y,,Y
-Excel,,,,,Y,,,,,,,,,,,,
+Markdown,Y,,,,,,,,,Y,,,,,Y,,Y
+Screen,Y,,,,,,,,,,,Y,,,,,Y
+Excel,,,,,,Y,,,,,,,,,,,
 Word,,,,,,,,,,,,,,,,Y,(Y)
-DocBook,,,Y,,,,,,,,,,,,,,
-Notes,,,,Via markdown,,,HTML via external translator,,,,,,Via Javascript,Via markdown,,,
+DocBook,,,,Y,,,,,,,,,,,,,
+Notes,,,,,Via markdown,,,HTML via external translator,,,,,,Via Javascript,Via markdown,,
