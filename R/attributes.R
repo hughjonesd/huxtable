@@ -8,7 +8,8 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_co
   'font', 'pad_decimal')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
-huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label')
+huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label',
+  'latex_float')
 
 huxtable_env <- new.env()
 huxtable_env$huxtable_default_attrs <- list(
@@ -40,6 +41,7 @@ huxtable_env$huxtable_default_attrs <- list(
         position            = 'center',
         tabular_environment = 'tabularx',
         label               = NA,
+        latex_float         = 'h',
         escape_contents     = TRUE,
         na_string           = '',
         bold                = FALSE,
@@ -981,3 +983,20 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @S3method label<- huxtable
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)
+
+
+#' @template getset-table
+#' @templateVar attr_name latex_float
+#' @templateVar attr_desc Float position for LaTeX
+#' @templateVar value_param_desc
+#' A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} for the default, 'h'.
+#' @template getset-example
+#' @templateVar attr_val 'tab:mytable'
+#' @details Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
+#' floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
+#' \code{float} package.
+#' @export latex_float latex_float<- set_latex_float latex_float.huxtable latex_float<-.huxtable
+#' @S3method latex_float huxtable
+#' @S3method latex_float<- huxtable
+NULL
+make_getter_setters('latex_float', 'table', check_fun = is.character)

@@ -61,7 +61,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   )
   res <- paste0(pos_text[1], res, pos_text[2], '\n')
 
-  res <- paste0('\\begin{table}[h]\n', res, '\\end{table}\n')
+  res <- paste0('\\begin{table}[', latex_float(ht), ']\n', res, '\\end{table}\n')
 
   return(res)
 }
