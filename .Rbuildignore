@@ -11,6 +11,7 @@ logo\.xcf
 ^docs$
 ^scripts
 ^build-cran.R$
+^build-website.R$
 ^man-roxygen$
 ^TODO\.md$
 ^codecov\.yml$
