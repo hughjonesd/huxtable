@@ -200,13 +200,13 @@ some exceptions.
 ```{r, echo = FALSE}
 sides <- c('left_', 'right_', 'top_', 'bottom_')
 props <- list()
-props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'pad_decimal', 'escape_contents', 'numeric_format', 'rotation'))
+props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'pad_decimal', 'escape_contents', 'number_format', 'rotation'))
 
 props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', paste0(sides, 'border'),
       paste0(sides, 'border_color'), paste0(sides, 'padding')))
 props[['Row']]    <- 'row_height'
 props[['Column']] <- 'col_width'
-props[['Table']]  <- sort(c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label'))
+props[['Table']]  <- sort(c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label', 'latex_float'))
 
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep('', maxl - length(x))))
@@ -422,7 +422,7 @@ By default, if a cell contains long contents, it will be stretched. Use the `wra
 to wrap over multiple lines:
 
 ```{r}
-ht[4, 1] <- 'David Arthur Shrimpton Hugh-Jones'
+ht[5, 1] <- 'David Arthur Shrimpton Hugh-Jones'
 ht 
 ```
 
@@ -559,16 +559,19 @@ m
 where(m == 'dog') # m is equal to 'dog' in cells (1, 1), (3, 1), (4, 1) and (4, 2):
 ```
 
-`set_*` functions have one more optional argument, the `byrow` argument, which is `FALSE` by default. Use this when you
-are setting a pattern of property values for many cells and want to specify a pattern by row:
+`set_*` functions have one more optional argument, the `byrow` argument, which is `FALSE` by default. If you set a
+single pattern for many cells, you may want the pattern to fill the matrix by column or by row. The default fills the
+pattern in going down columns. If you set `byrow = TRUE`, the pattern goes across rows instead. (This is a bit
+confusing: typically, `byrow = TRUE` means that the *columns* will all look the same. But it works the same way as the
+`byrow` argument to `matrix()`.)
 
 ```{r}
 
 color_demo <- matrix('text', 7, 7)
 rainbow <- c('red', 'orange', 'yellow', 'green', 'blue', 'turquoise', 'violet')
 color_demo <- as_hux(color_demo)                  %>% 
-      set_text_color(rainbow)                     %>% # text in columns
-      set_background_color(rainbow, byrow = TRUE) %>% # background color in rows
+      set_text_color(rainbow)                     %>% # text rainbow goes down columns
+      set_background_color(rainbow, byrow = TRUE) %>% # background color rainbow goes along rows
       set_all_borders(1)                          %>% 
       set_all_border_colors('white')
 color_demo
