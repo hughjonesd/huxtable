@@ -1,6 +1,7 @@
 # huxtable 0.3.1.9000
 
 * React gracefully to lack of p values in `huxreg`.
+* New `set_outer_borders` function to set borders round a rectangle of cells
 
 # huxtable 0.3.1
 

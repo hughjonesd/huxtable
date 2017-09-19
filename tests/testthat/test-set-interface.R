@@ -169,7 +169,22 @@ test_that('all forms of set_all_* work as expected', {
   expect_equivalent(top_border(ht6), matrix(border_size, 2, 2))
 })
 
+test_that('set_outer_borders() works as expected', {
+  ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
+  check_borders <- function (ht) {
+    expect_equivalent(top_border(ht2), matrix(c(0, 0, 0, 0, 1, 0, 0, 1, 0)), 3, 3)
+    expect_equivalent(bottom_border(ht2), matrix(c(0, 0, 0, 0, 0, 1, 0, 0, 1)), 3, 3)
+    expect_equivalent(left_border(ht2), matrix(c(0, 0, 0, 0, 1, 1, 0, 0, 0)), 3, 3)
+    expect_equivalent(right_border(ht2), matrix(c(0, 0, 0, 0, 0, 0, 0, 1, 1)), 3, 3)
+  }
+  ht2 <- set_outer_borders(ht, 2:3, 2:3, 1)
+  check_borders(ht2)
+  ht3 <- set_outer_borders(ht, c(F, T, T), c(F, T, T), 1)
+  check_borders(ht3)
+  ht4 <- set_outer_borders(ht, 2:3, c("b", "c"), 1)
+  check_borders(ht4)
+})
 
 test_that('where() works as expected', {
   dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)

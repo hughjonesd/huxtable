@@ -453,7 +453,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @return The modified huxtable.
 #' @export
 #'
-#' @seealso \code{\link{left_border}}
+#' @seealso \code{\link{left_border}}, \code{\link{set_outer_borders}}
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1:3, 1:2, 1)
@@ -464,6 +464,43 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
     call[[2]] <- quote(ht)
     ht <- eval(call, list(ht = ht), parent.frame())
   }
+
+  ht
+}
+
+
+#' Set outer borders round a rectangle of cells
+#'
+#' This is a convenience function to set a border round the top,
+#' bottom, left and right of a group of cells.
+#'
+#' @param ht A huxtable
+#' @param row A set of rows. See below.
+#' @param col A set of columns.
+#' @param value A numeric value for the border width. Set to 0 for no border.
+#'
+#' @return The modified huxtable.
+#' @details
+#' Only standard R subsetting may be used for \code{row} and \code{col}. That is,
+#' logical, numeric or character indices are allowed, but not the tricks in \code{\link{rowspecs}}.
+#'
+#' @export
+#'
+#' @seealso \code{\link{left_border}}, \code{\link{set_all_borders}}
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_outer_borders(ht, 2:3, 1:2, 1)
+#' ht
+set_outer_borders <- function(ht, row, col, value) {
+  if (is.character(row)) row <- rownames(ht) %in% row
+  if (is.logical(row)) row <- which(row)
+  if (is.character(col)) col <- colnames(ht) %in% col
+  if (is.logical(col)) col <- which(col)
+
+  left_border(ht)[row, min(col)]    <- value
+  right_border(ht)[row, max(col)]   <- value
+  top_border(ht)[min(row), col]     <- value
+  bottom_border(ht)[max(row), col]  <- value
 
   ht
 }

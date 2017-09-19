@@ -24,7 +24,6 @@ BUGS
 TODO
 ====
 
-* `set_outer_borders` ?
 * huxreg format_error argument so you could do e.g. '(%stderr) [%ci.low to %ci.high]'?
 * Use strwrap in to_screen (and don't count wrap cells for width)
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
