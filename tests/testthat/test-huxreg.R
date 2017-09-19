@@ -97,3 +97,8 @@ test_that('huxreg stars printed correctly', {
   expect_match(huxreg(lm1, stars = c('wrong' = 0.05, '@' = 0.1))[[4, 2]], paste0(number_regex, '@\\s*'))
   expect_match(huxreg(lm2)[[4, 2]], paste0(number_regex, '\\*\\*\\*\\s*'))
 })
+
+test_that('huxreg works for models without tidy p values', {
+  expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1|Species), data = iris), statistics = 'nobs'),
+        'p values')
+})

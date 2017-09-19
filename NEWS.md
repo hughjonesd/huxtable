@@ -1,3 +1,7 @@
+# huxtable 0.3.1.9000
+
+* React gracefully to lack of p values in `huxreg`.
+
 # huxtable 0.3.1
 
 * New convenience functions `insert_row` and `insert_column`.

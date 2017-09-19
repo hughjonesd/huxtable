@@ -93,12 +93,18 @@ huxreg <- function (
     x[, numcols] <- sapply(x[, numcols], format_number, number_format)
     x
   })
-  if (! is.null(stars)) tidied <- lapply(tidied, function (x) {
-    stars_arg <- c(0, sort(stars), ' ' = 1)
-    x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ], paste(estimate, symnum(as.numeric(p.value),
-          cutpoints = stars_arg, symbols = names(stars_arg)[-1], na = ' ')))
-    x
-  })
+  if (! is.null(stars)) {
+    tidied <- lapply(tidied, function (x) {
+      stars_arg <- c(0, sort(stars), ' ' = 1)
+      if (is.null(x$p.value)) {
+        warning("tidy() does not return p values for models of class ", class(x)[1], "; significance stars not printed")
+        return (x)
+      }
+      x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ], paste(estimate, symnum(as.numeric(p.value),
+            cutpoints = stars_arg, symbols = names(stars_arg)[-1], na = ' ')))
+      x
+    })
+  }
 
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- make_error_cells(x, error_style)
@@ -142,7 +148,7 @@ huxreg <- function (
   stat_names <- unique(unlist(lapply(all_sumstats, function (x) x$stat)))
   if (! is.null(statistics)) {
     if (! all(statistics %in% stat_names)) stop('Unrecognized statistics: ',
-          paste(setdiff(statistics, stat_names), collapse = ', '), 
+          paste(setdiff(statistics, stat_names), collapse = ', '),
           '\nTry setting "statistics" explicitly in the call to huxreg()')
     stat_names <- statistics
   }
