@@ -189,8 +189,8 @@ is_a_number <- function(x) {
 
 
 get_rc_spec <- function (ht, obj, dimno) {
-  ndim <- dim(ht)[dimno]
-  if (missing(obj)) return(seq_len(ndim))
+  dim_length <- dim(ht)[dimno]
+  if (missing(obj)) return(seq_len(dim_length))
 
   if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
 }
