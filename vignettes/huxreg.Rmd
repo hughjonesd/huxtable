@@ -129,6 +129,14 @@ huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squa
 ```
 
 
+By default, `huxreg` displays significance stars. You can alter the symbols used and significance levels 
+with the `stars` parameter, or set `stars = NULL` to turn off significance stars completely.
+
+```{r}
+huxreg(lm1, lm3, stars = c(`*` = 0.1, `**` = 0.05, `***` = 0.01)) # a little boastful?
+huxreg(lm1, lm3, stars = NULL) 
+```
+
 You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
 p values, using the `error_style` option:
 
