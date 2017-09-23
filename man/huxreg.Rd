@@ -25,7 +25,7 @@ Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
 
 \item{ci_level}{Confidence level for intervals.}
 
-\item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use.}
+\item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.}
 
 \item{bold_signif}{Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 this behaviour.}

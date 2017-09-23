@@ -8,7 +8,7 @@
 #' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
 #'   Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
 #' @param ci_level Confidence level for intervals.
-#' @param stars Levels for p value stars. Names of \code{stars} are symbols to use.
+#' @param stars Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
 #' @param borders Logical: add horizontal borders in appropriate places?
