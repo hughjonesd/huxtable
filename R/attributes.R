@@ -315,8 +315,7 @@ make_getter_setters('row_height', 'row')
 #' @S3method rowspan huxtable
 #' @S3method rowspan<- huxtable
 NULL
-make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
-    {
+make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
       check_span_shadows(ht, 'row', value)
     }
@@ -334,8 +333,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code =
 #' @S3method colspan huxtable
 #' @S3method colspan<- huxtable
 NULL
-make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code =
-    {
+make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
       check_span_shadows(ht, 'col', value)
     }

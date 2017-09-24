@@ -60,13 +60,13 @@ test_that('huxreg number_format works correctly', {
   lm1 <- lm(y ~ a, dfr)
   lm2 <- lm(y ~ b, dfr)
   hr <- huxreg(lm1, lm2, number_format = 4)
-  expect_equal(number_format(hr)[4,2], list(4))
-  expect_equal(number_format(hr)[9,2], list(4))
-  expect_match(to_screen(hr), paste0('\\D', round(coef(lm1)[2], 4) ,'\\D'))
+  expect_equal(number_format(hr)[4, 2], list(4))
+  expect_equal(number_format(hr)[9, 2], list(4))
+  expect_match(to_screen(hr), paste0('\\D', round(coef(lm1)[2], 4), '\\D'))
   hr2 <- huxreg(lm1, lm2, number_format = '%5.3f')
-  expect_equal(number_format(hr2)[4,2], list('%5.3f'))
-  expect_equal(number_format(hr2)[9,2], list('%5.3f'))
-  expect_match(to_screen(hr2), paste0('\\D', sprintf('%5.3f', coef(lm1)[2]),'\\D'))
+  expect_equal(number_format(hr2)[4, 2], list('%5.3f'))
+  expect_equal(number_format(hr2)[9, 2], list('%5.3f'))
+  expect_match(to_screen(hr2), paste0('\\D', sprintf('%5.3f', coef(lm1)[2]), '\\D'))
 })
 
 
@@ -99,6 +99,6 @@ test_that('huxreg stars printed correctly', {
 })
 
 test_that('huxreg works for models without tidy p values', {
-  expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1|Species), data = iris), statistics = 'nobs'),
+  expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris), statistics = 'nobs'),
         'p values')
 })

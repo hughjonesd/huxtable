@@ -87,9 +87,9 @@ test_that('Can set attributes to NA', {
 
 test_that('Can set default attributes', {
   old <- set_default_properties(bold = TRUE)
-  expect_equivalent(bold(hux(a=1)), matrix(TRUE, 1, 1))
+  expect_equivalent(bold(hux(a = 1)), matrix(TRUE, 1, 1))
   set_default_properties(old)
-  expect_equivalent(bold(hux(a=1)), matrix(FALSE, 1, 1))
+  expect_equivalent(bold(hux(a = 1)), matrix(FALSE, 1, 1))
 })
 
 test_that('Can get default attributes', {
