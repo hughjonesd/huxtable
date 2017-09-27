@@ -16,8 +16,7 @@
 
 * New convenience functions `insert_row` and `insert_column`.
 * `latex_float` property allows you to change positioning in LaTeX.
-
-(Semantic versioning fail: this should have been 0.4.0.)
+* (Semantic versioning fail: this should have been 0.4.0.)
 
 # huxtable 0.3.0
 

@@ -25,14 +25,19 @@ TODO
 ====
 
 * huxreg format_error argument so you could do e.g. '(%stderr) [%ci.low to %ci.high]'?
-* Use strwrap in to_screen (and don't count wrap cells for width)
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
   - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
-  
+* Add optional bold/color/bgcolor/italic using `crayon` in to_screen?
+* headers property?
+  - header rows and columns could be addressed using 3 argument `set_` syntax;
+  - headers would be copied (by default?) when you subset huxtables
+  - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
+    (except for RTL languages?)
+
 PUT OFF
 =======
 * `col_width`, `row_height` should be plural. Not sure this is necessary.
