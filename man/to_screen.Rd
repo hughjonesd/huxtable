@@ -11,8 +11,8 @@ print_screen(ht, ...)
 to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, blank = " ",
-  min_width = ceiling(getOption("width")/4), max_width = Inf,
-  colnames = TRUE, ...)
+  min_width = ceiling(getOption("width")/6), max_width = Inf,
+  compact = (blank == " "), colnames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -25,7 +25,9 @@ to_screen(ht, ...)
 
 \item{max_width}{Maximum width in on-screen characters of the result. Overrides \code{min_width}.}
 
-\item{colnames}{Whether or not to print colum names.}
+\item{compact}{Logical. To save space, don't print lines for empty horizontal borders.}
+
+\item{colnames}{Logical. Whether or not to print colum names.}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.

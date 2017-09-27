@@ -11,7 +11,8 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param blank   Character to print for cell divisions with no border.
 #' @param min_width Minimum width in on-screen characters of the result.
 #' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
-#' @param colnames Whether or not to print colum names.
+#' @param compact Logical. To save space, don't print lines for empty horizontal borders.
+#' @param colnames Logical. Whether or not to print colum names.
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 #'
@@ -33,7 +34,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #' @export
 #' @rdname to_screen
 to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 6), max_width = Inf,
-      colnames = TRUE, ...) {
+      compact = (blank == ' '), colnames = TRUE, ...) {
   charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
         min_width = min_width, max_width = max_width)
   charmat <- charmat_data$charmat
@@ -74,6 +75,10 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- '-'
     if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- '-'
+  }
+  if (compact) {
+    empty_borders <- apply(charmat, 1, function (x) all(x == blank))
+    charmat <- charmat[ - intersect(border_rows, which(empty_borders)), ]
   }
 
   result <- paste((apply(charmat, 1, paste0, collapse='')), collapse='\n')

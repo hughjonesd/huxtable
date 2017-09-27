@@ -6,7 +6,8 @@
 * New `set_outer_borders` function to set borders round a rectangle of cells.
 * `to_screen` and `to_md` now respect `wrap` and `col_widths` properties.
 * Screen and markdown wrap respect word boundaries.
-* `to_screen` and `to_md` gain a `min_width` argument; `to_md` gains a logical `header` argument.
+* `to_screen` and `to_md` gain a `min_width` argument; `to_md` gains a logical `header` argument; `to_screen` gains
+  a `compact` argument replacing `blank = NULL`.
 
 ## Breaking changes
 
