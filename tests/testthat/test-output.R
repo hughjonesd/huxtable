@@ -50,15 +50,28 @@ test_that('to_md produces valid markdown', {
 })
 
 
-test_that('to_md keeps to max_width', {
-  ht <- hux(a = paste(sample(LETTERS), collapse = '...'), b = 1:26)
+test_that('to_md and to_screen keep to max_width', {
+  ht <- hux(a = paste(sample(LETTERS), collapse = '...'), b = 1:2)
   for (mw in 2:12 * 10) {
-    md <- to_md(ht, max_width = mw)
-    lines <- strsplit(md, '\n', fixed = TRUE)[[1]]
-    expect_true(all(nchar(lines, type = 'width') <= mw))
+    for (func in list(to_md, to_screen)) {
+      output <- func(ht, max_width = mw)
+      lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
+      expect_true(all(nchar(lines, type = 'width') <= mw))
+    }
   }
 })
 
+
+test_that('to_md and to_screen keep to min_width', {
+  ht <- hux(a = 'foo', b = 'bar')
+  for (mw in c(2, 10, 20)) {
+    for (func in list(to_md, to_screen)) {
+      output <- func(ht, max_width = mw)
+      lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
+      expect_true(all(nchar(lines, type = 'width') <= mw))
+    }
+  }
+})
 
 test_that('hux_logo works', {
   expect_error(hux_logo(), regexp = NA)
