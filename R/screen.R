@@ -136,9 +136,9 @@ to_md.huxtable <- function(ht, max_width = 80, header = TRUE, ...) {
 # function to calculate text column widths, wrap huxtable text accordingly, and return a matrix of characters, without
 # borders
 character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v, max_widths = Inf) {
-  dc <- huxtable:::display_cells(ht, all = FALSE)
+  dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
-  contents <- huxtable:::clean_contents(ht, type = 'screen')
+  contents <- clean_contents(ht, type = 'screen')
   drow_mat <- as.matrix(dc[, c('display_row', 'display_col')])
   dc$contents <- contents[drow_mat]
 

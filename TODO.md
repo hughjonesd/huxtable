@@ -28,6 +28,7 @@ TODO
 * Use strwrap in to_screen (and don't count wrap cells for width)
 * use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
+  - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
