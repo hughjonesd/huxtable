@@ -1,7 +1,13 @@
+
+
 # huxtable 0.3.1.9000
 
 * React gracefully to lack of p values in `huxreg`.
-* New `set_outer_borders` function to set borders round a rectangle of cells
+* New `set_outer_borders` function to set borders round a rectangle of cells.
+* `to_screen` and `to_md` now respect `wrap` property.
+* Screen and markdown wrap respect word boundaries
+* Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
+* `to_md` gains a `header` argument.
 
 # huxtable 0.3.1
 

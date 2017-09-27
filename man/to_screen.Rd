@@ -10,22 +10,16 @@ print_screen(ht, ...)
 
 to_screen(ht, ...)
 
-\method{to_screen}{huxtable}(ht, borders = c("both", "horizontal", "vertical",
-  "neither"), blank = NULL, colnames = TRUE, colnames_color = "blue", ...)
+\method{to_screen}{huxtable}(ht, blank = " ", colnames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{...}{Passed on to \code{to_screen}.}
 
-\item{borders}{Print 'horizontal' borders, 'vertical' borders, 'both' or 'neither'. May be abbreviated.}
-
-\item{blank}{Character to print for cell divisions with no border. If \code{NULL}, print a space ' ' but don't print
-empty horizontal borders.}
+\item{blank}{Character to print for cell divisions with no border.}
 
 \item{colnames}{Whether or not to print colum names.}
-
-\item{colnames_color}{Color to print column names. Note: this won't work in RStudio.}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
@@ -43,7 +37,6 @@ right_border(ht)[,1] <- left_border(ht)[,2] <- 0
 align(ht)[1,] <- 'left'
 print_screen(ht)
 print_screen(ht, blank = '.')
-print_screen(ht, borders = 'horiz')
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},
