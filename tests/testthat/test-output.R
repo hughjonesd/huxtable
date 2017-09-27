@@ -66,9 +66,11 @@ test_that('to_md and to_screen keep to min_width', {
   ht <- hux(a = 'foo', b = 'bar')
   for (mw in c(2, 10, 20)) {
     for (func in list(to_md, to_screen)) {
-      output <- func(ht, max_width = mw)
+      output <- func(ht, min_width = mw)
       lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
-      expect_true(all(nchar(lines, type = 'width') <= mw))
+      lines <- lines[nchar(lines) > 0] # empty lines after table itself
+      lines <- lines[ ! grepl('Column names', lines)]
+      expect_true(all(nchar(lines, type = 'width') >= mw ))
     }
   }
 })
