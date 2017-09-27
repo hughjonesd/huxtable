@@ -19,9 +19,8 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
       contents[row, col] <- cell
     }
     if (type %in% c('latex', 'html')) {
-      # xtable::sanitize.numbers would do very little and is buggy
       to_esc <- escape_contents(ht)[, col]
-      contents[to_esc, col] <-  xtable::sanitize(contents[to_esc, col], type)
+      contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
     # has to be after sanitization because we add &nbsp; for HTML
     contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[, col], type)
@@ -69,6 +68,52 @@ format_number <- function (num, nf) {
   res
 }
 
+
+
+#' Sanitize table elements
+#'
+#' This is copied over from \code{\link[xtable]{sanitize}}.
+#'
+#' @param str A character object.
+#' @param type \code{"latex"} or \code{"html"}.
+#'
+#' @return The sanitized character object.
+#' @export
+#'
+#' @examples
+#' foo <- 'Make $$$ with us'
+#' sanitize(foo, type = 'latex')
+sanitize <- function (str, type = "latex")
+{
+  if (type == "latex") {
+    result <- str
+    result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
+    result <- gsub("$", "\\$", result, fixed = TRUE)
+    result <- gsub(">", "$>$", result, fixed = TRUE)
+    result <- gsub("<", "$<$", result, fixed = TRUE)
+    result <- gsub("|", "$|$", result, fixed = TRUE)
+    result <- gsub("{", "\\{", result, fixed = TRUE)
+    result <- gsub("}", "\\}", result, fixed = TRUE)
+    result <- gsub("%", "\\%", result, fixed = TRUE)
+    result <- gsub("&", "\\&", result, fixed = TRUE)
+    result <- gsub("_", "\\_", result, fixed = TRUE)
+    result <- gsub("#", "\\#", result, fixed = TRUE)
+    result <- gsub("^", "\\verb|^|", result, fixed = TRUE)
+    result <- gsub("~", "\\~{}", result, fixed = TRUE)
+    result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
+      result, fixed = TRUE)
+    return(result)
+  }
+  else {
+    result <- str
+    result <- gsub("&", "&amp;", result, fixed = TRUE)
+    result <- gsub(">", "&gt;", result, fixed = TRUE)
+    result <- gsub("<", "&lt;", result, fixed = TRUE)
+    return(result)
+  }
+}
+
+
 decimal_pad <- function(col, pad_chars, type) {
   # where pad_chars is NA we do not pad
   orig_col  <- col
@@ -94,6 +139,7 @@ decimal_pad <- function(col, pad_chars, type) {
   orig_col[! na_pad] <- col
   orig_col
 }
+
 
 # return data frame mapping real cell positions to cells displayed
 display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
