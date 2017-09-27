@@ -10,7 +10,7 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param ... Passed on to \code{to_screen}.
 #' @param blank   Character to print for cell divisions with no border.
 #' @param min_width Minimum width in on-screen characters of the result.
-#' @param max_width Maximum width in on-screen characters of the result.
+#' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
 #' @param colnames Whether or not to print colum names.
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
@@ -101,7 +101,7 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @param ht        A huxtable.
 #' @param header    Logical. Print the first row as a header?
 #' @param min_width Minimum width in on-screen characters of the result.
-#' @param max_width Maximum width in on-screen characters of the result.
+#' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
 #' @param ...       Arguments passed to methods.
 #'
 #' @return \code{to_md} returns a string. \code{print_md} prints the string and returns

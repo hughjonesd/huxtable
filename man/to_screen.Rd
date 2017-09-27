@@ -23,7 +23,7 @@ to_screen(ht, ...)
 
 \item{min_width}{Minimum width in on-screen characters of the result.}
 
-\item{max_width}{Maximum width in on-screen characters of the result.}
+\item{max_width}{Maximum width in on-screen characters of the result. Overrides \code{min_width}.}
 
 \item{colnames}{Whether or not to print colum names.}
 }
