@@ -38,6 +38,7 @@ to_screen.huxtable <- function (ht, blank = ' ', colnames = TRUE, ...) {
   border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
   dc <- display_cells(ht, all = FALSE)
+  # the three for loops below ensure that borders are collapsed correctly without regard to order
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
     drow <- dcell$display_row
@@ -49,8 +50,24 @@ to_screen.huxtable <- function (ht, blank = ' ', colnames = TRUE, ...) {
     charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- blank
     charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- blank
     charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- blank
+  }
+  for (r in seq_len(nrow(dc))) {
+    dcell <- dc[r, ]
+    drow <- dcell$display_row
+    dcol <- dcell$display_col
+    end_row <- dcell$end_row + 1 # carry on to next row/col
+    end_col <- dcell$end_col + 1
+    bdrs <- get_all_borders(ht, drow, dcol)
     if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- '|'
     if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- '|'
+  }
+  for (r in seq_len(nrow(dc))) {
+    dcell <- dc[r, ]
+    drow <- dcell$display_row
+    dcol <- dcell$display_col
+    end_row <- dcell$end_row + 1 # carry on to next row/col
+    end_col <- dcell$end_col + 1
+    bdrs <- get_all_borders(ht, drow, dcol)
     if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- '-'
     if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- '-'
   }
