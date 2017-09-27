@@ -144,7 +144,9 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
 
   widths <- rep(3, ncol(ht))
   content_widths <- ncharw(dc$contents)
-  max_word_widths <- sapply(lapply(strsplit(dc$contents, "\\s"), ncharw), max)
+  max_word_widths <- sapply(lapply(strsplit(dc$contents, "\\s"), ncharw), function (x) {
+    if (length(x) > 0) max(x) else 0 # return 0 for empty cells
+  })
   for (r in seq_len(nrow(dc))) {
     width <- if (wrap(ht)[ dc$display_row[r], dc$display_col[r] ]) max_word_widths[r] else content_widths[r]
     cols <- seq(dc$display_col[r], dc$end_col[r])
