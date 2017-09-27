@@ -32,7 +32,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 4), max_width = Inf,
+to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 6), max_width = Inf,
       colnames = TRUE, ...) {
   charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
         min_width = min_width, max_width = max_width)
