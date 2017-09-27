@@ -182,6 +182,16 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     end_col <- dcell$end_col
     width <- sum(widths[col:end_col])
     strings <- strwrap(dcell$contents, width = width + 1) # for the + 1 see ?strwrap
+    # some strings may still be longer than width,
+    strings <- unlist(lapply(strings, function (x) {
+      while (any(ncharw(x) > width)) {
+        lx <- length(x)
+        last <- x[lx]
+        last <- c(substring(last, 1, width), substring(last, width + 1))
+        x[lx:(lx+1)] <- last
+      }
+      x
+    }))
     strings <- str_pad(strings, align(ht)[ dcell$display_row, dcell$display_col ], width)
     dc$strings[[r]] <- strings
   }
