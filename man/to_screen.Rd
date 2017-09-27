@@ -10,7 +10,9 @@ print_screen(ht, ...)
 
 to_screen(ht, ...)
 
-\method{to_screen}{huxtable}(ht, blank = " ", colnames = TRUE, ...)
+\method{to_screen}{huxtable}(ht, blank = " ",
+  min_width = ceiling(getOption("width")/4), max_width = Inf,
+  colnames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -18,6 +20,10 @@ to_screen(ht, ...)
 \item{...}{Passed on to \code{to_screen}.}
 
 \item{blank}{Character to print for cell divisions with no border.}
+
+\item{min_width}{Minimum width in on-screen characters of the result.}
+
+\item{max_width}{Maximum width in on-screen characters of the result.}
 
 \item{colnames}{Whether or not to print colum names.}
 }

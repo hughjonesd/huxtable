@@ -4,15 +4,20 @@
 
 * React gracefully to lack of p values in `huxreg`.
 * New `set_outer_borders` function to set borders round a rectangle of cells.
-* `to_screen` and `to_md` now respect `wrap` property.
-* Screen and markdown wrap respect word boundaries
+* `to_screen` and `to_md` now respect `wrap` and `col_widths` properties.
+* Screen and markdown wrap respect word boundaries.
+* `to_screen` and `to_md` gain a `min_width` argument; `to_md` gains a logical `header` argument.
+
+## Breaking changes
+
 * Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
-* `to_md` gains a `header` argument.
 
 # huxtable 0.3.1
 
 * New convenience functions `insert_row` and `insert_column`.
 * `latex_float` property allows you to change positioning in LaTeX.
+
+(Semantic versioning fail: this should have been 0.4.0.)
 
 # huxtable 0.3.0
 

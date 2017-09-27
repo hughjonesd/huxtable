@@ -9,6 +9,8 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param ht A huxtable.
 #' @param ... Passed on to \code{to_screen}.
 #' @param blank   Character to print for cell divisions with no border.
+#' @param min_width Minimum width in on-screen characters of the result.
+#' @param max_width Maximum width in on-screen characters of the result.
 #' @param colnames Whether or not to print colum names.
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
@@ -30,8 +32,10 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function (ht, blank = ' ', colnames = TRUE, ...) {
-  charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1)
+to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 4), max_width = Inf,
+      colnames = TRUE, ...) {
+  charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
+        min_width = min_width, max_width = max_width)
   charmat <- charmat_data$charmat
   border_rows <- charmat_data$border_rows
   border_cols <- charmat_data$border_cols
@@ -95,8 +99,9 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' Create Markdown representing a huxtable
 #'
 #' @param ht        A huxtable.
-#' @param max_width Max width in on-screen characters of the result.
 #' @param header    Logical. Print the first row as a header?
+#' @param min_width Minimum width in on-screen characters of the result.
+#' @param max_width Maximum width in on-screen characters of the result.
 #' @param ...       Arguments passed to methods.
 #'
 #' @return \code{to_md} returns a string. \code{print_md} prints the string and returns
@@ -117,20 +122,15 @@ to_md <- function(ht, ...) UseMethod('to_md')
 
 #' @export
 #' @rdname to_md
-to_md.huxtable <- function(ht, max_width = 80, header = TRUE, ...) {
+to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4, max_width = 80,...) {
   if (any(colspan(ht) > 1 | rowspan(ht) > 1)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
-
   align <- align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
     warning("Can't vary column alignment in markdown; using first row")
   ht <- set_align(ht, align[1, ], byrow = TRUE)
 
-  cw <- col_width(ht)
-  if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
-  cw <- floor(cw / sum(cw) * (max_width - ncol(ht) + 1))
-
   charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1, outer_border_v = 1,
-        max_widths = cw)
+        min_width = min_width, max_width = max_width)
   charmat <- charmat_data$charmat
   border_rows <- charmat_data$border_rows
   border_cols <- charmat_data$border_cols
@@ -152,14 +152,20 @@ to_md.huxtable <- function(ht, max_width = 80, header = TRUE, ...) {
 
 # function to calculate text column widths, wrap huxtable text accordingly, and return a matrix of characters, without
 # borders
-character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v, max_widths = Inf) {
+character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v,
+      min_width, max_width = Inf) {
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
   contents <- clean_contents(ht, type = 'screen')
   drow_mat <- as.matrix(dc[, c('display_row', 'display_col')])
   dc$contents <- contents[drow_mat]
+  cw <- col_width(ht)
+  if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
+  cw <- cw / sum(cw)
 
-  widths <- rep(3, ncol(ht))
+  min_widths <- ceiling(min_width * cw)
+  widths <- min_widths
+
   content_widths <- ncharw(dc$contents)
   max_word_widths <- sapply(lapply(strsplit(dc$contents, "\\s"), ncharw), function (x) {
     if (length(x) > 0) max(x) else 0 # return 0 for empty cells
@@ -173,6 +179,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     }
   }
 
+  max_widths <- floor(cw * (max_width - 2 * outer_border_h - (ncol(ht) - 1) * inner_border_h))
   widths <- pmin(widths, max_widths)
 
   dc$strings <- vector(nrow(dc), mode = 'list')
