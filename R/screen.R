@@ -84,7 +84,7 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
   if (colnames) {
-    result <- paste0(result, '\n\n', 'Column names: ', paste(colnames(ht), collapse = ', '))
+    result <- paste0(result, '\n\n', 'Column names: ', paste(colnames(ht), collapse = ', '), '\n')
   }
 
   result
