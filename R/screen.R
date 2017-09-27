@@ -78,7 +78,7 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
   }
   if (compact) {
     empty_borders <- apply(charmat, 1, function (x) all(x == blank))
-    charmat <- charmat[ - intersect(border_rows, which(empty_borders)), ]
+    charmat <- charmat[ - intersect(border_rows, which(empty_borders)), , drop = FALSE]
   }
 
   result <- paste((apply(charmat, 1, paste0, collapse='')), collapse='\n')
