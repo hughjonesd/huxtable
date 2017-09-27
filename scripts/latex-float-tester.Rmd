@@ -1,0 +1,262 @@
+---
+title: "Huxtable table demo"
+author: "David Hugh-Jones"
+date: "2/03/2017"
+output:
+  pdf_document:
+    keep_tex: yes
+  html_document: default
+---
+
+
+```{r setup, echo = FALSE}
+
+library(huxtable)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+
+make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
+  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
+  for (i in seq_len(ncol -2)) {
+    ht <- cbind(ht, rep(more_text[i], nrow))
+  }
+  ht <- set_all_borders(ht, 1)
+  ht <- set_background_color(ht, odds, everywhere, 'orange')
+  ht <- set_background_color(ht, evens, everywhere, 'green')
+  ht
+}
+
+long <- 'A rather long row of text which goes on...'
+
+```
+
+# Different kinds of floats
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor.
+
+# Here we called ht with float t:
+
+
+```{r}
+ht <- make(nrow = 15)
+latex_float(ht) <- 't'
+caption(ht) <- 'latex\\_float t, top of page'
+ht
+```
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+# Here we called ht with float b:
+
+```{r}
+latex_float(ht) <- 'b'
+caption(ht) <- 'latex\\_float b, bottom of page'
+ht
+```
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+# The next table should be right here, with float h:
+
+```{r}
+latex_float(ht) <- 'h'
+caption(ht) <- 'latex\\_float h, here'
+ht
+```
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+
+# The next table should definitely be here, with float h!:
+
+```{r}
+latex_float(ht) <- 'h!'
+caption(ht) <- 'latex\\_float h!, really here'
+ht
+```
+
+
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+# Somewhere there should be a page of floats:
+
+```{r}
+ht <- ht[1:10,]
+latex_float(ht) <- 'p'
+caption(ht) <- 'latex\\_float p, page of 2 floats'
+ht
+ht
+```
+
+Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent
+maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor. Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero
+torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in
+condimentum, habitasse, lobortis blandit tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus
+mauris ac. Laoreet potenti cras sociosqu dolor Lorem ipsum dolor sit amet, in condimentum, habitasse, lobortis blandit
+tortor. Torquent magna aptent, libero torquent maximus, volutpat libero tellus mauris ac. Laoreet potenti cras sociosqu
+dolor
+
+
