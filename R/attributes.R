@@ -980,7 +980,7 @@ make_getter_setters('height', 'table')
 #' @seealso \code{\link{caption_pos}}
 #' @examples
 #' ht <- hux(a = 1:2, b = 1:2)
-#' caption(ht) <- xtable::sanitize('Make $$$ with us', type = 'latex') # escape caption characters
+#' caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
 #' @export caption caption<- set_caption caption.huxtable caption<-.huxtable
 #' @S3method caption huxtable
 #' @S3method caption<- huxtable

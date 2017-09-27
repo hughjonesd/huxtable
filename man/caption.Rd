@@ -34,7 +34,7 @@ caption(ht) <-  'An example table'
 caption(ht)
 print_screen(ht, blank = '.')
 ht <- hux(a = 1:2, b = 1:2)
-caption(ht) <- xtable::sanitize('Make $$$ with us', type = 'latex') # escape caption characters
+caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
 }
 \seealso{
 \code{\link{caption_pos}}
