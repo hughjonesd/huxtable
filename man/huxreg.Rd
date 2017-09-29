@@ -35,7 +35,7 @@ this behaviour.}
 \item{note}{Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
 significance stars. Set to \code{NULL} for no footnote.}
 
-\item{statistics}{Summary statistics to display.}
+\item{statistics}{Summary statistics to display. Set to \code{NULL} to show all available statistics.}
 
 \item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
 
@@ -57,7 +57,8 @@ If \code{...} is a named list, the names will be used for column headings. If th
  have the same name, the corresponding rows will be merged in the output.
 
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
-use 'nobs' for the number of observations.
+use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
+will be used. To use no columns, set \code{statistics = character(0)}.
 }
 \examples{
 set.seed(27101975)
