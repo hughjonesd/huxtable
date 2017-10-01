@@ -31,8 +31,6 @@ TODO
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
-* Add optional bold/color/bgcolor/italic using `crayon` in to_screen?
-  - crayon support is coming to rstudio
 * headers property?
   - header rows and columns could be addressed using 3 argument `set_` syntax;
   - headers would be copied (by default?) when you subset huxtables

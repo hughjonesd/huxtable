@@ -13,11 +13,14 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
 #' @param compact Logical. To save space, don't print lines for empty horizontal borders.
 #' @param colnames Logical. Whether or not to print colum names.
+#' @param color Logical. Whether to print the huxtable in color (requires the \code{crayon} package).
 #'
 #' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
 #'
 #' @details
-#' Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.
+#' \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown. If the \code{crayon}
+#' package is installed, output will be colorized (and contents bolded or italicized) by default;
+#' this will work in recent daily builds of RStudio as of October 2017.
 #'
 #' @export
 #' @family printing functions
@@ -34,9 +37,13 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #' @export
 #' @rdname to_screen
 to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 6), max_width = Inf,
-      compact = (blank == ' '), colnames = TRUE, ...) {
+      compact = (blank == ' '), colnames = TRUE, color = requireNamespace('crayon', quietly = TRUE), ...) {
+  if (color && ! requireNamespace('crayon', quietly = TRUE)) {
+    warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon"`')
+    color <- FALSE
+  }
   charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
-        min_width = min_width, max_width = max_width)
+        min_width = min_width, max_width = max_width, color = color)
   charmat <- charmat_data$charmat
   border_rows <- charmat_data$border_rows
   border_cols <- charmat_data$border_cols
@@ -56,6 +63,14 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- blank
     charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- blank
   }
+
+  bcs <- get_all_border_colors(ht, drop = FALSE) # list of four matrices
+  bcols <- unique(na.omit(unlist(bcs)))
+  bst <- if (color) lapply(bcols, crayon::make_style) else lapply(bcols, function (x) return(identity))
+  names(bst) <- bcols
+  bcs <- lapply(bcs, function (mx) {mx[is.na(mx)] <- 'no_color'; mx})
+  bst$no_color <- identity
+
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
     drow <- dcell$display_row
@@ -63,8 +78,10 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     end_row <- dcell$end_row + 1 # carry on to next row/col
     end_col <- dcell$end_col + 1
     bdrs <- get_all_borders(ht, drow, dcol)
-    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- '|'
-    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- '|'
+    style_left  <- bst[[ bcs$left[drow, dcol] ]]
+    style_right <- bst[[ bcs$right[drow, dcol] ]]
+    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('|')
+    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('|')
   }
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
@@ -73,15 +90,19 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     end_row <- dcell$end_row + 1 # carry on to next row/col
     end_col <- dcell$end_col + 1
     bdrs <- get_all_borders(ht, drow, dcol)
-    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- '-'
-    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- '-'
+    style_top    <- bst[[ bcs$top[drow, dcol] ]]
+    style_bottom <- bst[[ bcs$bottom[drow, dcol] ]]
+    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- style_top('-')
+    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- style_bottom('-')
   }
   if (compact) {
     empty_borders <- apply(charmat, 1, function (x) all(x == blank))
-    charmat <- charmat[ - intersect(border_rows, which(empty_borders)), , drop = FALSE]
+    empty_borders <- intersect(border_rows, which(empty_borders))
+    # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
+    if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
   }
 
-  result <- paste((apply(charmat, 1, paste0, collapse='')), collapse='\n')
+  result <- paste((apply(charmat, 1, paste0, collapse = '')), collapse = '\n')
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c('left', 'center', 'right')
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
@@ -158,7 +179,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
 # function to calculate text column widths, wrap huxtable text accordingly, and return a matrix of characters, without
 # borders
 character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v,
-      min_width, max_width = Inf) {
+      min_width, max_width = Inf, color = FALSE) {
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
   contents <- clean_contents(ht, type = 'screen')
@@ -210,7 +231,6 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   dc$text_height <- sapply(dc$strings, length)
   dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x)))
 
-
   # row heights as widths: start at 0 and increase it if its too little, sharing equally among relevant cols
   dc <- dc[order(dc$rowspan),]
   heights <- rep(1, nrow(ht))
@@ -221,7 +241,6 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
       heights[rows] <- pmax(heights[rows], ceiling(dcell$text_height / dcell$rowspan))
     }
   }
-
 
   border_widths <- c(outer_border_h, rep(inner_border_h, ncol(ht) - 1), outer_border_h)
   # width of outer border, then cells + following border:
@@ -240,12 +259,31 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     string_letters <- unlist(strsplit(dcell$strings[[1]], ''))
     drow <- dcell$display_row
     dcol <- dcell$display_col
+    style <- if (color) make_cell_style(ht, drow, dcol) else identity
     rows <- seq(starting_rows[drow], starting_rows[drow] + dcell$text_height - 1)
     cols <- seq(starting_cols[dcol], starting_cols[dcol] + dcell$text_width - 1)
-    charmat[rows, cols] <- matrix(string_letters, length(rows), length(cols), byrow = TRUE)
+    charmat[rows, cols] <- matrix(style(string_letters), length(rows), length(cols), byrow = TRUE)
   }
 
   list(charmat = charmat, border_rows = border_rows, border_cols = border_cols)
+}
+
+
+make_cell_style <- function (ht, row, col) {
+  tc         <- text_color(ht)[row, col]
+  bgc        <- background_color(ht)[row, col]
+  bold       <- bold(ht)[row, col]
+  italic     <- italic(ht)[row, col]
+
+  maybe_combine_style <- function (style, style2) if (is.null(style)) style2 else crayon::combine_styles(style, style2)
+  style <- NULL
+  if (bold) style <- crayon::bold
+  if (italic) style <- maybe_combine_style(style, crayon::italic)
+  if (! is.na(tc)) style <- maybe_combine_style(style, crayon::make_style(tc))
+  if (! is.na(bgc)) style <- maybe_combine_style(style, crayon::make_style(bgc, bg = TRUE))
+  if (is.null(style)) style <- identity
+
+  style
 }
 
 

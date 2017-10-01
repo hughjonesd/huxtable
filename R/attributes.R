@@ -601,13 +601,12 @@ set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
 }
 
 
-
-get_all_border_colors <- function(ht, row, col) {
+get_all_border_colors <- function(ht, row, col, drop = TRUE) {
   list(
-    left   = left_border_color(ht)[row, col],
-    right  = right_border_color(ht)[row, col],
-    top    = top_border_color(ht)[row, col],
-    bottom = bottom_border_color(ht)[row, col]
+    left   = left_border_color(ht)[row, col, drop = drop],
+    right  = right_border_color(ht)[row, col, drop = drop],
+    top    = top_border_color(ht)[row, col, drop = drop],
+    bottom = bottom_border_color(ht)[row, col, drop = drop]
   )
 }
 

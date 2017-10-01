@@ -12,7 +12,8 @@ to_screen(ht, ...)
 
 \method{to_screen}{huxtable}(ht, blank = " ",
   min_width = ceiling(getOption("width")/6), max_width = Inf,
-  compact = (blank == " "), colnames = TRUE, ...)
+  compact = (blank == " "), colnames = TRUE,
+  color = requireNamespace("crayon", quietly = TRUE), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -28,6 +29,8 @@ to_screen(ht, ...)
 \item{compact}{Logical. To save space, don't print lines for empty horizontal borders.}
 
 \item{colnames}{Logical. Whether or not to print colum names.}
+
+\item{color}{Logical. Whether to print the huxtable in color (requires the \code{crayon} package).}
 }
 \value{
 \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
@@ -36,7 +39,9 @@ to_screen(ht, ...)
 Print a huxtable on screen
 }
 \details{
-Only \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown.
+\code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown. If the \code{crayon}
+package is installed, output will be colorized (and contents bolded or italicized) by default;
+this will work in recent daily builds of RStudio as of October 2017.
 }
 \examples{
 ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
