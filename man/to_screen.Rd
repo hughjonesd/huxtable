@@ -13,7 +13,7 @@ to_screen(ht, ...)
 \method{to_screen}{huxtable}(ht, blank = " ",
   min_width = ceiling(getOption("width")/6), max_width = Inf,
   compact = (blank == " "), colnames = TRUE,
-  color = requireNamespace("crayon", quietly = TRUE), ...)
+  color = getOption("huxtable.color_screen", default = TRUE), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

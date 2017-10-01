@@ -195,6 +195,7 @@ knit_print.huxtable <- function (x, options, ...) {
 
 
 options(huxtable.print = print_screen)
+options(huxtable.color_screen = requireNamespace('crayon', quietly = TRUE))
 
 
 #' Default print method for huxtables

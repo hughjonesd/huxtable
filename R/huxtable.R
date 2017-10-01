@@ -15,6 +15,9 @@
 #'
 #' \itemize{
 #'   \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link{print.huxtable}}.
+#'   \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
+#'   will be printed in color on screen.
+#'
 #' }
 #'
 #'

@@ -37,7 +37,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #' @export
 #' @rdname to_screen
 to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 6), max_width = Inf,
-      compact = (blank == ' '), colnames = TRUE, color = requireNamespace('crayon', quietly = TRUE), ...) {
+      compact = (blank == ' '), colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
   if (color && ! requireNamespace('crayon', quietly = TRUE)) {
     warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon"`')
     color <- FALSE
