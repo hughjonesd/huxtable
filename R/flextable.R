@@ -57,7 +57,8 @@ as_flextable.huxtable <- function(x, ...) {
   if (! requireNamespace('flextable')) stop('as_flextable requires the flextable package. To install, type:\n',
     'install.packages("flextable")')
 
-  ft <- flextable::flextable(as.data.frame(x))
+  cc <- clean_contents(ht, type = 'word')
+  ft <- flextable::flextable(as.data.frame(cc))
   if (is.numeric(rh <- row_height(x))) ft <- flextable::height(ft, height = rh)
   if (is.numeric(cw <- col_width(x)))  ft <- flextable::width(ft, width = cw)
 
@@ -81,15 +82,14 @@ as_flextable.huxtable <- function(x, ...) {
             padding.right  = right_padding(x)[drow, dcol],
             padding.top    = top_padding(x)[drow, dcol]
           )
+    bcols <- get_all_border_colors(x, drow, dcol)
+    bdrs  <- get_all_borders(x, drow, dcol)
+    bcols[is.na(bcols)] <- 'black'
     ft <- flextable::border(ft, i = drow, j = dcol,
-            border.bottom = officer::fp_border(color = bottom_border_color(x)[drow, dcol], style = 'solid',
-              width = bottom_border(x)[drow, dcol]),
-            border.left   = officer::fp_border(color = left_border_color(x)[drow, dcol],   style = 'solid',
-              width = left_border(x)[drow, dcol]),
-            border.right  = officer::fp_border(color = right_border_color(x)[drow, dcol],  style = 'solid',
-              width = right_border(x)[drow, dcol]),
-            border.top    = officer::fp_border(color = top_border_color(x)[drow, dcol],    style = 'solid',
-              width = top_border(x)[drow, dcol])
+            border.bottom = officer::fp_border(color = bcols$bottom, width = bdrs$bottom),
+            border.left   = officer::fp_border(color = bcols$left,   width = bdrs$left),
+            border.right  = officer::fp_border(color = bcols$right,  width = bdrs$right),
+            border.top    = officer::fp_border(color = bcols$top,    width = bdrs$top)
           )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]
