@@ -40,9 +40,6 @@ TODO
 
 PUT OFF
 =======
-* `col_width`, `row_height` should be plural. Not sure this is necessary.
-* `top_padding`, `top_border` should be `padding_top`, `border_top` etc.
-  - not sure if autocomplete is easier this way...
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.
