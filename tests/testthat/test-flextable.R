@@ -1,5 +1,5 @@
 
-context('FlexTable conversion')
+context('flextable conversion')
 
 
 source('functions.R')
