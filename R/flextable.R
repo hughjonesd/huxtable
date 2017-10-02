@@ -57,7 +57,7 @@ as_flextable.huxtable <- function(x, ...) {
   if (! requireNamespace('flextable')) stop('as_flextable requires the flextable package. To install, type:\n',
     'install.packages("flextable")')
 
-  cc <- clean_contents(ht, type = 'word')
+  cc <- clean_contents(x, type = 'word')
   ft <- flextable::flextable(as.data.frame(cc))
   if (is.numeric(rh <- row_height(x))) ft <- flextable::height(ft, height = rh)
   if (is.numeric(cw <- col_width(x)))  ft <- flextable::width(ft, width = cw)
