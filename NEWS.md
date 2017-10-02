@@ -14,6 +14,8 @@
 ## Breaking changes
 
 * Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
+* `as_FlexTable` is deprecated and calls `as_flextable` with a warning. `header_rows` and `footer_rows` 
+  arguments are ignored. If you need this feature, tell me.
 
 # huxtable 0.3.1
 
