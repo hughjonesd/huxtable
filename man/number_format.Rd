@@ -34,7 +34,7 @@ Functions to get or set the number format property of huxtable table cells.
 If \code{value} is numeric, numbers will be rounded to that many decimal places.  If \code{value} is
 character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
 function it will be applied to the cell contents.
-Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(a = c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
+Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
 To set number_format to a function, enclose the function in \code{list}.
 See the examples.
 }

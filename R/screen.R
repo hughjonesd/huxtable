@@ -57,11 +57,8 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     dcol <- dcell$display_col
     end_row <- dcell$end_row + 1 # carry on to next row/col
     end_col <- dcell$end_col + 1
-    bdrs <- get_all_borders(ht, drow, dcol)
-    charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- blank
-    charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- blank
-    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- blank
-    charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- blank
+    charmat[ border_rows[drow]:border_rows[end_row], border_cols[c(dcol, end_col)] ]    <- blank
+    charmat[ border_rows[c(drow, end_row)], border_cols[dcol]:border_cols[end_col] ]     <- blank
   }
 
   bcs <- get_all_border_colors(ht, drop = FALSE) # list of four matrices
