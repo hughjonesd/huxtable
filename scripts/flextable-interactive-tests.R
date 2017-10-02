@@ -1,17 +1,17 @@
 
-library(ReporteRs)
+library(flextable)
 library(magrittr)
 library(huxtable)
 
 show_add <- function(doc, ht, message) {
-  if (is_hux(ht)) ft <- as_FlexTable(ht)
+  if (is_hux(ht)) ft <- as_flextable(ht)
   print(ft)
-  doc <- addParagraph(doc, pot(paste0("\n\n", message, "\n"), textProperties(font.weight = 'bold')))
-  doc <- addFlexTable(doc, ft)
+  doc <- officer::body_add_par(doc, paste0("\n\n", message, "\n"))
+  doc <- flextable::body_add_flextable(doc, ft)
   doc
 }
 
-doc <- docx()
+doc <- officer::read_docx()
 ht_orig <- huxtable(a = c('Foo', 'Bar', 'Baz'), b = 2:4)
 
 ht <- ht_orig
@@ -80,30 +80,33 @@ text_color(ht)[, 1] <- 'blue'
 text_color(ht)[, 2] <- 'red'
 doc %<>% show_add(ht, 'Text color')
 
-ht <- hux(Head1 = LETTERS[1:3], Head2 = letters[1:3], Head3 = 1:3, add_colnames = TRUE)
-ft <- as_FlexTable(ht, header_rows = 1)
-doc %<>% show_add(ft, 'Single header row')
-colspan(ht)[1, 1] <- 3
-ft <- as_FlexTable(ht, header_rows = 1)
-doc %<>% show_add(ft, 'Single header row with colspan')
-ft <- as_FlexTable(ht, header_rows = 2)
-doc %<>% show_add(ft, 'Two header rows with colspan')
-ht[4, 1] <- 'A footnote'
-colspan(ht)[4, 1] <- 3
-ft <- as_FlexTable(ht, header_rows = 1, footer_rows = 1)
-doc %<>% show_add(ft, 'Header and footer with colspan')
+# ht <- hux(Head1 = LETTERS[1:3], Head2 = letters[1:3], Head3 = 1:3, add_colnames = TRUE)
+# ft <- as_flextable(ht, header_rows = 1)
+# doc %<>% show_add(ft, 'Single header row')
+# colspan(ht)[1, 1] <- 3
+# ft <- as_flextable(ht, header_rows = 1)
+# doc %<>% show_add(ft, 'Single header row with colspan')
+# ft <- as_flextable(ht, header_rows = 2)
+# doc %<>% show_add(ft, 'Two header rows with colspan')
+# ht[4, 1] <- 'A footnote'
+# colspan(ht)[4, 1] <- 3
+# ft <- as_flextable(ht, header_rows = 1, footer_rows = 1)
+# doc %<>% show_add(ft, 'Header and footer with colspan')
 
 ht <- ht_orig
-ht <- set_all_borders(ht, , , 1)
+ht <- set_all_borders(ht, 1)
 colspan(ht)[2,1] <- 2
 doc %<>% show_add(ht, 'Body colspan')
 colspan(ht)[2,1] <- 1
 rowspan(ht)[2,1] <- 2
 doc %<>% show_add(ht, 'Body rowspan')
+colspan(ht)[2,1] <- 2
+rowspan(ht)[2,1] <- 2
+doc %<>% show_add(ht, 'Body row and colspan')
 
 ht <- hux('Long title' = 1:4, 'Long title 2' = 1:4, add_colnames = TRUE)
 rotation(ht)[1:5, ] <- 90
-ft <- as_FlexTable(ht, header_rows = 2, footer_rows = 1)
-doc %<>% show_add(ft, 'Rotation: trying all rows, first 2 are headers, last is footer')
+ft <- as_flextable(ht)
+doc %<>% show_add(ft, 'Rotation: trying all rows')
 
-writeDoc(doc, file = 'scripts/flextable-test.docx')
+print(doc, target = 'scripts/flextable-test.docx')
