@@ -25,7 +25,7 @@ TODO
 ====
 
 * huxreg format_error argument so you could do e.g. '(%stderr) [%ci.low to %ci.high]'?
-* use numeric_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
+* use number_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
   - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
 * A FAQ, including:

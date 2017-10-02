@@ -9,6 +9,7 @@
 * `to_screen` and `to_md` gain a `min_width` argument; `to_md` gains a logical `header` argument; `to_screen` gains
   a `compact` argument replacing `blank = NULL`.
 * On screen colour and bold support, if the `crayon` package is installed. New `huxtable.color_screen` option.
+* Move from `ReporteRs` to `officer` and `flextable`. No more `RJava` horror.
 
 ## Breaking changes
 
