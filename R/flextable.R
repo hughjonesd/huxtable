@@ -99,8 +99,6 @@ as_flextable.huxtable <- function(x, ...) {
       rot <- 0
     }
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
-
-
   }
 
   ft
