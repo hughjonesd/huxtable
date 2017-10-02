@@ -24,13 +24,14 @@ BUGS
 TODO
 ====
 
-* huxreg format_error argument so you could do e.g. '(%stderr) [%ci.low to %ci.high]'?
 * use number_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
   - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
+  - my numbers have been formatted
+    - use number_format
 * headers property?
   - header rows and columns could be addressed using 3 argument `set_` syntax;
   - headers would be copied (by default?) when you subset huxtables

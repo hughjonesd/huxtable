@@ -4,17 +4,16 @@
 \alias{huxreg}
 \title{Create a huxtable to display model output}
 \usage{
-huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
-  error_pos = c("below", "same", "right"), number_format = "\%.3f",
-  pad_decimal = ".", ci_level = 0.95, stars = c(`***` = 0.001, `**` =
-  0.01, `*` = 0.05), bold_signif = NULL, borders = TRUE,
-  note = "\%stars\%.", statistics = c(N = "nobs", R2 = "r.squared",
-  "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
+huxreg(..., error_format = "({statistic})", error_pos = c("below", "same",
+  "right"), number_format = "\%.3f", pad_decimal = ".", ci_level = NULL,
+  stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05), bold_signif = NULL,
+  borders = TRUE, note = "\%stars\%.", statistics = c(N = "nobs", R2 =
+  "r.squared", "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
 }
 \arguments{
 \item{...}{Models, or a single list of models.}
 
-\item{error_style}{How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.}
+\item{error_format}{How to display uncertainty in estimates. See below. Overrides \code{error_style}.}
 
 \item{error_pos}{Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.}
 
@@ -23,7 +22,7 @@ huxreg(..., error_style = c("stderr", "ci", "statistic", "pvalue"),
 \item{pad_decimal}{Character for decimal point; columns will be right-padded to align these.
 Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.}
 
-\item{ci_level}{Confidence level for intervals.}
+\item{ci_level}{Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.}
 
 \item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.}
 
@@ -59,6 +58,12 @@ If \code{...} is a named list, the names will be used for column headings. If th
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
 will be used. To use no columns, set \code{statistics = character(0)}.
+
+\code{error_format} is a string to be interpreted by \code{\link[glue]{glue}}. Terms in parentheses will be
+replaced by computed values. You can use any columns returned
+by \code{tidy}: typical columns include \code{statistic}, \code{p.value}, \code{std.error}, as well as \code{conf.low}
+and \code{conf.high} if you have set \code{ci_level}. For example, to show confidence intervals, you
+could do \code{error_format = "{conf.low} to {conf.high}"}
 }
 \examples{
 set.seed(27101975)

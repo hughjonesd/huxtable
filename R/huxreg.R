@@ -2,12 +2,12 @@
 #' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models.
-#' @param error_style How to display uncertainty in estimates. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
+#' @param error_format How to display uncertainty in estimates. See below. Overrides \code{error_style}.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
 #' @param number_format Format for numbering. See \code{\link{number_format}} for details.
 #' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
 #'   Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
-#' @param ci_level Confidence level for intervals.
+#' @param ci_level Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
@@ -31,6 +31,12 @@
 #' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
 #' will be used. To use no columns, set \code{statistics = character(0)}.
 #'
+#' \code{error_format} is a string to be interpreted by \code{\link[glue]{glue}}. Terms in parentheses will be
+#' replaced by computed values. You can use any columns returned
+#' by \code{tidy}: typical columns include \code{statistic}, \code{p.value}, \code{std.error}, as well as \code{conf.low}
+#' and \code{conf.high} if you have set \code{ci_level}. For example, to show confidence intervals, you
+#' could do \code{error_format = "{conf.low} to {conf.high}"}
+#'
 #' @return A huxtable object.
 #' @export
 #'
@@ -44,11 +50,11 @@
 #' huxreg(lm1, lm2, glm1)
 huxreg <- function (
         ...,
-        error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
+        error_format    = '({statistic})',
         error_pos       = c('below', 'same', 'right'),
         number_format   = '%.3f',
         pad_decimal     = '.',
-        ci_level        = 0.95,
+        ci_level        = NULL,
         stars           = c('***' = 0.001, '**' = 0.01, '*' = 0.05),
         bold_signif     = NULL,
         borders         = TRUE,
@@ -62,8 +68,6 @@ huxreg <- function (
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
   mod_names <- names_or(models, bracket(seq_along(models)))
-  if (missing(error_style)) error_style <- 'stderr'
-  error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
   error_pos <- match.arg(error_pos)
 
   tidy_with_ci <- function (obj) {
@@ -71,7 +75,7 @@ huxreg <- function (
     tidied <- broom::tidy(obj) # should return 'estimate' and 'std.error'
     cbind(tidied, make_ci(tidied[, c('estimate', 'std.error')], ci_level))
   }
-  tidied <- lapply(models, if ('ci' %in% error_style) tidy_with_ci else broom::tidy)
+  tidied <- lapply(models, if (is.null(ci_level)) broom::tidy else tidy_with_ci)
 
   my_coefs <- unique(unlist(lapply(tidied, function (x) x$term)))
   if (! missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
@@ -108,13 +112,15 @@ huxreg <- function (
   }
 
   tidied <- lapply(tidied, function (x) {
-    x$error_cell <- make_error_cells(x, error_style)
+    x$error_cell <- glue::glue_data(.x = x, error_format)
+    x$error_cell[is.na(x$estimate)] <- ''
+    x$estimate[is.na(x$estimate)] <- ''
     x
   })
 
   # now we cbind the models
   coef_col <- switch(error_pos,
-    same  = function (est, se) ifelse(is.na(est), NA, paste(est, se)),
+    same  = paste,
     below = interleave,
     right = cbind
   )
@@ -231,22 +237,4 @@ has_builtin_ci <- function (x) {
   if (is.null(obj)) return(FALSE)
   argnames <- names(formals(obj))
   all(c('conf.int', 'conf.level') %in% argnames)
-}
-
-
-make_error_cells <- function (tidied, error_style) {
-  stderr    <- function (td) td$std.error
-  statistic <- function (td) td$statistic
-  pvalue    <- function (td) td$p.value
-  ci        <- function (td) paste(td$conf.low, ' -- ', td$conf.high)
-  error_funs <- lapply(error_style, as.symbol)
-  strings <- lapply(error_funs, function (x) eval(bquote(.(x)(tidied))))
-  names(strings) <- error_style
-  strings <- do.call(cbind, strings)
-  strings[, 1] <- bracket(strings[, 1])
-  strings[, -1] <- bracket2(strings[, -1])
-  strings <- apply(strings, 1, paste, collapse = ' ')
-  strings[is.na(tidied$estimate)] <- NA
-
-  strings
 }

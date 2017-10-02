@@ -27,7 +27,8 @@ test_that('huxreg confidence intervals work', {
   glm1 <- glm(I(y > 0) ~ a, dfr, family = binomial)
   library(nnet)
   mn <- nnet::multinom(I(y > 0) ~ a, dfr, trace = FALSE)
-  expect_silent(hr <- huxreg(lm1, lm2, glm1, mn, error_style = "ci", statistics = c('r.squared')))
+  expect_silent(huxreg(lm1, lm2, glm1, mn, error_format = "{conf.low}-{conf.high}", statistics = c('r.squared'),
+        ci_level = 0.95))
 })
 
 test_that('huxreg works with single coefficient', {

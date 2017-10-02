@@ -10,12 +10,15 @@
   a `compact` argument replacing `blank = NULL`.
 * On screen colour and bold support, if the `crayon` package is installed. New `huxtable.color_screen` option.
 * Move from `ReporteRs` to `officer` and `flextable`. No more `RJava` horror.
+* New `error_format` argument to `huxreg` for flexible control over uncertainty estimates.
+
 
 ## Breaking changes
 
 * Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
 * `as_FlexTable` is deprecated and calls `as_flextable` with a warning. `header_rows` and `footer_rows` 
   arguments are ignored. If you need this feature, tell me.
+* `error_format` replaces `error_style` in `huxreg`. Set `ci_level` to a number to calculate confidence intervals.
 
 # huxtable 0.3.1
 
