@@ -138,34 +138,27 @@ huxreg(lm1, lm3, stars = NULL)
 ```
 
 You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
-p values, using the `error_style` option:
+p values, using the `error_format` option. Any column from `tidy` can be used by putting it in curly brackets:
 
 ```{r}
-huxreg(lm1, lm3, error_style = 'statistic')
-huxreg(lm1, lm3, error_style = 'pvalue')
+huxreg(lm1, lm3, error_format = '({statistic})')
+huxreg(lm1, lm3, error_format = '({p.value})')
 ```
 
 
-Or you can display confidence intervals using 'ci'. Use `ci_level` to set the confidence level for the interval:
+Or you can display confidence intervals. Use `ci_level` to set the confidence level for the interval, then 
+use `{conf.low}` and `{conf.high}` in `error_format`:
 
 ```{r}
-huxreg(lm1, lm3, error_style = 'ci') # default is .95
-huxreg(lm1, lm3, error_style = 'ci', ci_level = .99)
+huxreg(lm1, lm3, ci_level = .99, error_format = '{conf.low} to {conf.high}')
 ```
 
 
-If you choose more than one `error_style` option, the second one will be shown in square brackets:
-
-```{r}
-huxreg(lm1, lm3, error_style = c('stderr', 'ci'))
-```
-
-
-To change the footnote, use `note`. If `note` contains the string `"%stars%"` it will be replaced by a description of the
+To change the footnote, use `note`. If `note` contains the string `"{stars}"` it will be replaced by a description of the
 significance stars used. If you don't want a footnote, just set `note = NULL`.
 
 ```{r}
-huxreg(lm1, lm3, note = 'Linear regressions on diamond price. %stars%.')
+huxreg(lm1, lm3, note = 'Linear regressions on diamond price. {stars}.')
 ```
 
 
