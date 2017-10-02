@@ -12,7 +12,7 @@
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
 #' @param borders Logical: add horizontal borders in appropriate places?
-#' @param note Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
+#' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 #'   significance stars. Set to \code{NULL} for no footnote.
 #' @param statistics Summary statistics to display. Set to \code{NULL} to show all available statistics.
 #' @param coefs Display only these coefficients. Overrules \code{omit_coef}.
@@ -58,7 +58,7 @@ huxreg <- function (
         stars           = c('***' = 0.001, '**' = 0.01, '*' = 0.05),
         bold_signif     = NULL,
         borders         = TRUE,
-        note            = '%stars%.',
+        note            = '{stars}.',
         statistics      = c('N' = 'nobs', 'R2' = 'r.squared', 'logLik', 'AIC'),
         coefs           = NULL,
         omit_coefs      = NULL
@@ -193,10 +193,10 @@ huxreg <- function (
   pad_decimal(result)[-1, -1] <- pad_decimal
 
   if (! is.null(note)) {
-    stars_note <- paste0(names(stars), ' p < ', stars, collapse = '; ')
-    note <- gsub('%stars%', stars_note, note)
-    result <- rbind(result, c(note, rep('', ncol(result) - 1)))
-    result <- set_colspan(result, final(), 1, ncol(result))
+    stars <- paste0(names(stars), ' p < ', stars, collapse = '; ')
+    note <- gsub('%stars%', stars, note)
+    note <- glue::glue(note)
+    result <- add_footnote(result, note)
     result <- set_wrap(result, final(), 1, TRUE)
     result <- set_align(result, final(), 1, 'left')
     result <- set_bottom_border(result, final(), everywhere, 0)

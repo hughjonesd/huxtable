@@ -7,7 +7,7 @@
 huxreg(..., error_format = "({statistic})", error_pos = c("below", "same",
   "right"), number_format = "\%.3f", pad_decimal = ".", ci_level = NULL,
   stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05), bold_signif = NULL,
-  borders = TRUE, note = "\%stars\%.", statistics = c(N = "nobs", R2 =
+  borders = TRUE, note = "{stars}.", statistics = c(N = "nobs", R2 =
   "r.squared", "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
 }
 \arguments{
@@ -31,7 +31,7 @@ this behaviour.}
 
 \item{borders}{Logical: add horizontal borders in appropriate places?}
 
-\item{note}{Footnote for bottom cell, which spans all columns. \code{\%stars\%} will be replaced by a note about
+\item{note}{Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 significance stars. Set to \code{NULL} for no footnote.}
 
 \item{statistics}{Summary statistics to display. Set to \code{NULL} to show all available statistics.}
