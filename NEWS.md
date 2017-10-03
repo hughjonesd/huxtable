@@ -18,8 +18,10 @@
 * Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
 * `as_FlexTable` is deprecated and calls `as_flextable` with a warning. `header_rows` and `footer_rows` 
   arguments are ignored. If you need this feature, tell me.
-* `error_format` replaces `error_style` in `huxreg`. Set `ci_level` to a number to calculate confidence intervals.
-* Use `{stars}` not `%stars%` to display significance levels in `huxreg`'s `note` argument.
+* In `huxreg`:
+  - `ci_level` is `NULL` by default. Set it to a number to calculate confidence intervals.
+  - `error_style` is deprecated with a warning in favour of `error_format`.
+  - Use `{stars}` not `%stars%` to display significance levels in the `note` argument.
 
 # huxtable 0.3.1
 

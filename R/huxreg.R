@@ -2,7 +2,8 @@
 #' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models.
-#' @param error_format How to display uncertainty in estimates. See below. Overrides \code{error_style}.
+#' @param error_format How to display uncertainty in estimates. See below.
+#' @param error_style Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
 #' @param number_format Format for numbering. See \code{\link{number_format}} for details.
 #' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
@@ -51,6 +52,7 @@
 huxreg <- function (
         ...,
         error_format    = '({statistic})',
+        error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
         error_pos       = c('below', 'same', 'right'),
         number_format   = '%.3f',
         pad_decimal     = '.',
@@ -69,6 +71,7 @@ huxreg <- function (
   if (inherits(models[[1]], 'list')) models <- models[[1]]
   mod_names <- names_or(models, bracket(seq_along(models)))
   error_pos <- match.arg(error_pos)
+  if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
 
   tidy_with_ci <- function (obj) {
     if (has_builtin_ci(obj)) return(broom::tidy(obj, conf.int = TRUE, conf.level = ci_level))
@@ -111,6 +114,16 @@ huxreg <- function (
     })
   }
 
+  if (! missing(error_style)) {
+    formats <- list(stderr = '{std.error}', ci = '{conf.low} -- {conf.high}', statistic = '{statistic}',
+          pvalue = '{p.value}')
+    lbra <- rep('[', length(error_style))
+    rbra <- rep(']', length(error_style))
+    lbra[1] <- '('
+    rbra[1] <- ')'
+    error_format <- paste(lbra, formats[error_style], rbra, sep = '', collapse = ' ')
+    warning(glue::glue("`error_style` is deprecated, please use `error_format = \"{error_format}\"` instead."))
+  }
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- glue::glue_data(.x = x, error_format)
     x$error_cell[is.na(x$estimate)] <- ''
