@@ -77,8 +77,8 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     style_left  <- bst[[ bcs$left[drow, dcol] ]]
     style_right <- bst[[ bcs$right[drow, dcol] ]]
-    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('|')
-    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('|')
+    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('│')
+    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('│')
   }
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
@@ -89,11 +89,11 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     style_top    <- bst[[ bcs$top[drow, dcol] ]]
     style_bottom <- bst[[ bcs$bottom[drow, dcol] ]]
-    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- style_top('-')
-    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- style_bottom('-')
+    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- style_top('─')
+    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- style_bottom('─')
   }
   if (compact) {
-    empty_borders <- apply(charmat, 1, function (x) all(x == blank))
+    empty_borders <- apply(charmat, 1, function (x) all(x == blank | x == '│'))
     empty_borders <- intersect(border_rows, which(empty_borders))
     # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
     if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
