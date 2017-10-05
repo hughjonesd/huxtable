@@ -3,9 +3,7 @@
 BUGS
 ====
 
-* border width in LaTeX... not sure fixable.
-  - presumably could also do it before/after the actual row
-  - maybe using vborder you can set a width to the vrule; but will this work with hhline?
+* pad_decimal of huxreg fails with significance stars in on_screen (but not HTML or TeX)
 * nowrap cells
   - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
   - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
@@ -16,7 +14,6 @@ BUGS
   - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
     colour and position. 
     - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
-* top border is overwritten after row 1 in latex
 * LaTeX fonts not working
 
 TODO
@@ -35,6 +32,9 @@ TODO
   - headers would be copied (by default?) when you subset huxtables
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
+* proper collapsing of borders and border_colors, used by to_screen and to_latex
+* make \booktabs or similar work
+* If possible, make variable width horizontal borders in latex work (it can work ok if background colour is unset)
 
 PUT OFF
 =======

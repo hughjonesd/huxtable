@@ -4,9 +4,9 @@ author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
   pdf_document:
-    keep_tex: yes
     includes:
       in_header: placeins-header.tex
+    keep_tex: yes
   html_document: default
 ---
 
@@ -326,6 +326,20 @@ left_border(ht)[2, 1] <- 6
 left_border(ht)[2, 2] <- 1
 right_border(ht)[2, 1] <- 4
 right_border_color(ht)[2, 1] <- 'red'
-caption(ht) <- 'Left borders second col should be thicker. At present right_border has priority'
+caption(ht) <- 'Left borders second col should be thicker. At present right\\_border has priority'
 ht
 ```
+
+# Border width and multirow/col
+
+```{r}
+ht <- make(nrow = 3)
+rowspan(ht)[1, 1] <- 2
+colspan(ht)[3, 1] <- 2
+right_border(ht)[1, ] <- 4
+bottom_border(ht)[1, ] <- 4
+caption(ht) <- 'Bottom border of top cell should be thicker. In TeX this will continue across row.'
+ht
+```
+
+

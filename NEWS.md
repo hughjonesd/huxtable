@@ -3,6 +3,7 @@
 # huxtable 0.3.1.9000
 
 * LaTeX implements different thicknesses for vertical and horizontal borders (but only one horizontal thickness per row).
+* LaTeX border colors now collapse nicely: set colors override unset ones.
 * React gracefully to lack of p values in `huxreg`.
 * New `set_outer_borders` function to set borders round a rectangle of cells.
 * `to_screen` and `to_md` now respect `wrap` and `col_widths` properties.
