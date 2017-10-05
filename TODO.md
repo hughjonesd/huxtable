@@ -4,8 +4,6 @@ BUGS
 ====
 
 * border width in LaTeX... not sure fixable.
-  - you may be able to set it per row for horiz ones using arrayrulewidth...
-  - yes, just call \global\setlength{\arrayrulewidth}{12pt} before/after the hhline
   - presumably could also do it before/after the actual row
   - maybe using vborder you can set a width to the vrule; but will this work with hhline?
 * nowrap cells

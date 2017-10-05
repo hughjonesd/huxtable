@@ -2,6 +2,7 @@
 
 # huxtable 0.3.1.9000
 
+* LaTeX implements different thicknesses for vertical and horizontal borders (but only one horizontal thickness per row).
 * React gracefully to lack of p values in `huxreg`.
 * New `set_outer_borders` function to set borders round a rectangle of cells.
 * `to_screen` and `to_md` now respect `wrap` and `col_widths` properties.
@@ -18,6 +19,7 @@
 * Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
 * `as_FlexTable` is deprecated and calls `as_flextable` with a warning. `header_rows` and `footer_rows` 
   arguments are ignored. If you need this feature, tell me.
+* HTML border sizes are now set in points, not pixels.
 * In `huxreg`:
   - `ci_level` is `NULL` by default. Set it to a number to calculate confidence intervals.
   - `error_style` is deprecated with a warning in favour of `error_format`.

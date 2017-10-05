@@ -294,5 +294,38 @@ ht
 ```
 
 
+\FloatBarrier
+
+# Horizontal border width
+
+```{r}
+
+ht <- make(nrow = 2)
+ht <- set_all_borders(ht, .5)
+caption(ht) <- 'Border .5 px'
+ht
+
+ht <- make(nrow = 2)
+bottom_border(ht)[1, ] <- 2
+top_border(ht)[2, ] <- 4 # should win out
+caption(ht) <- 'Bottom border of first row 4px'
+ht
+
+top_border(ht)[2, 2] <- 1 
+caption(ht) <- 'Bottom border of first row first column 4pt; second column 1pt. Gives warning'
+ht
+
+```
 
 
+# Vertical border width
+
+```{r}
+ht <- make(nrow = 2)
+left_border(ht)[2, 1] <- 6
+left_border(ht)[2, 2] <- 1
+right_border(ht)[2, 1] <- 4
+right_border_color(ht)[2, 1] <- 'red'
+caption(ht) <- 'Left borders second col should be thicker. At present right_border has priority'
+ht
+```

@@ -120,7 +120,7 @@ cell_html <- function (ht, rn, cn, contents) {
 
   borders <- get_all_borders(ht, rn, cn)
   borders <- borders[c('top', 'right', 'bottom', 'left')]
-  borders <- paste(borders, 'px', sep = '', collapse = ' ')
+  borders <- paste(borders, 'pt', sep = '', collapse = ' ')
   res <- paste0(res, 'border-width:', borders, '; ')
   res <- paste0(res, 'border-style: solid; ')
 

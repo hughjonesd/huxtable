@@ -45,7 +45,7 @@ set_bottom_border(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector or matrix giving border widths. Set to 0 for no border. Set to \code{NA} to reset to the default.}
+\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -63,8 +63,8 @@ Similarly for the other functions.
 Functions to get or set the borders property of huxtable table cells.
 }
 \details{
-Currently in LaTeX, border widths are ignored: a border can only be present (if \code{value} > 0) or
-absent.
+Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
+can only be present (if \code{value > 0}) or absent.
 }
 \examples{
 

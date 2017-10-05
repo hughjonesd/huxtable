@@ -385,11 +385,11 @@ make_getter_setters('text_color', 'cell')
 #' @template getset-cell
 #' @templateVar attr_name left_border
 #' @templateVar attr_desc Borders
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths. Set to 0 for no border.
+#' @templateVar value_param_desc A numeric vector or matrix giving border widths in points. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
 #' @details
-#' Currently in LaTeX, border widths are ignored: a border can only be present (if \code{value} > 0) or
-#'absent.
+#' Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
+#' can only be present (if \code{value > 0}) or absent.
 #' @seealso \code{\link{set_all_borders}}
 #' @template getset-example
 #' @templateVar attr_val 1

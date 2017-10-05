@@ -298,6 +298,7 @@ build_clines_for_row <- function(ht, row) {
   this_bottom <- rep('', ncol(ht))
 
   blank_line_color <- rep(format_color('white'), ncol(ht)) # white by default, I guess...
+  line_widths <- rep(0, ncol(ht))
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
@@ -306,6 +307,7 @@ build_clines_for_row <- function(ht, row) {
     # Print bottom border if we are at bottom of the display cell
     if (row == end_row) {
       this_bottom[dcol:end_col] <- h_border(ht, drow, dcol, 'bottom')
+      line_widths[dcol:end_col] <- bottom_border(ht)[drow, dcol]
     }
     # Use color if we are in middle of display cell
     if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
@@ -323,6 +325,7 @@ build_clines_for_row <- function(ht, row) {
     # are we at the top of this dcell? If not...
     if (row + 1 != drow) next
     next_top[dcol:end_col] <- h_border(ht, drow, dcol, 'top')
+    line_widths[dcol:end_col] <- pmax(line_widths[dcol:end_col], top_border(ht)[drow, dcol])
   }
   borders <- this_bottom
   borders[borders == ''] <- next_top[borders == '']
@@ -336,7 +339,12 @@ build_clines_for_row <- function(ht, row) {
     hhlinechars <- paste0(hhlinechars, vertlines[-1], collapse = '')
     hhlinechars <- paste0(vertlines[1], hhlinechars)
     hhline <- paste0('\\hhline{', hhlinechars, '}\n')
+    if (length(unique(line_widths[line_widths != 0])) > 1) warning(
+          'LaTeX cannot deal with multiple border widths in a row, using the maximum')
+    width <- max(line_widths)
     hhline <- paste0(hhline, '\\arrayrulecolor{black}\n') # don't let arrayrulecolor spill over
+    hhline <- paste0('\\noalign{\\global\\arrayrulewidth=', width ,'pt}\n', hhline,
+      '\\noalign{\\global\\arrayrulewidth=1pt}\n')
     return(hhline)
   } else {
     return('')
@@ -369,9 +377,9 @@ v_border <- function (ht, drow, dcol, side) {
   width <- get_all_borders(ht, drow, dcol)[side]
   color <- get_all_border_colors(ht, drow, dcol)[side]
   if (! width > 0 ) return('')
-  if (is.na(color)) return('|')
+  if (is.na(color)) color <- 'black'
   color <- format_color(color)
-  paste0('!{\\color[RGB]{', color, '}\\vrule}')
+  paste0('!{\\color[RGB]{', color, '}\\vrule width ', width, 'pt}')
 }
 
 h_border <- function (ht, drow, dcol, side) {
