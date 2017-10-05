@@ -80,6 +80,30 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('\u2502')
     if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('\u2502')
   }
+  blank_at <- function(rows, cols) charmat[rows, cols] %in% c('\u2500', blank) # blank or horizontal row
+  no_horiz_at <- function(rows, cols) charmat[rows, cols] %in% c('\u2502', blank) # blank or vertical row
+  box_chars <- function (row, dcol, end_col) {
+    # if our existing start and end character have a vertical (i.e. not blank or pure horizontal)
+    # then replace them with a connector.
+    # connector depends on the top, bottom, left and right borders, which need to be computed.
+  }
+  box_chars <- function (row, dcol, end_col) {
+    bc <- border_cols[dcol]:border_cols[end_col]
+    chars <- charmat[ border_rows[row], bc]
+    chars[chars == ' '] <- rep('\u2500', sum(chars == ' '))
+    existing <- ! blank_at(border_rows[row], bc)
+    xes <- matrix(c('\u250c', '\u252c', '\u2510', '\u251c', '\u253c', '\u2524', '\u2514', '\u2534', '\u2518'),
+          3, 3, byrow = TRUE)
+    xes <- if(row == 1 || blank_at(border_rows[row] - 1, bc[1])) xes[1, ] else
+          if (row == nrow(ht) + 1 || blank_at(border_rows[row] + 1, bc[1])) xes[3, ] else
+          xes[2, ]
+    # we want to put a left/right corner if there is no further/previous row.
+    xes[1] <- if (dcol == 1 || no_horiz_at(row, border_cols[dcol] - 1)) xes[1] else xes[2]
+    xes[2] <- if (end_col == ncol(ht) + 1 || no_horiz_at(row, border_cols[end_col] + 1)) xes[3] else xes[2]
+    xes <- xes[c(1, rep(2, length(chars) - 1))]
+    if (any(existing)) chars[existing] <- xes[existing]
+    chars
+  }
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
     drow <- dcell$display_row
@@ -89,11 +113,13 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     style_top    <- bst[[ bcs$top[drow, dcol] ]]
     style_bottom <- bst[[ bcs$bottom[drow, dcol] ]]
-    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]    <- style_top('\u2500')
-    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ] <- style_bottom('\u2500')
+    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ] <-
+          style_top(box_chars(drow, dcol, end_col))
+    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ] <-
+          style_bottom(box_chars(end_row, dcol, end_col))
   }
   if (compact) {
-    empty_borders <- apply(charmat, 1, function (x) all(x == blank | x == '│'))
+    empty_borders <- apply(charmat, 1, function (x) all(x == blank | x == '\u2502'))
     empty_borders <- intersect(border_rows, which(empty_borders))
     # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
     if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
