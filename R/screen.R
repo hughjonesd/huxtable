@@ -89,8 +89,8 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     style_top    <- bst[[ bcs$top[drow, dcol] ]]
     style_bottom <- bst[[ bcs$bottom[drow, dcol] ]]
-    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]     <- style_top('─')
-    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ]  <- style_bottom('─')
+    if (bdrs$top > 0)    charmat[ border_rows[drow], border_cols[dcol]:border_cols[end_col] ]    <- style_top('\u2500')
+    if (bdrs$bottom > 0) charmat[ border_rows[end_row], border_cols[dcol]:border_cols[end_col] ] <- style_bottom('\u2500')
   }
   if (compact) {
     empty_borders <- apply(charmat, 1, function (x) all(x == blank | x == '│'))
