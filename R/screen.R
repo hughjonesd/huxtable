@@ -77,8 +77,8 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
     bdrs <- get_all_borders(ht, drow, dcol)
     style_left  <- bst[[ bcs$left[drow, dcol] ]]
     style_right <- bst[[ bcs$right[drow, dcol] ]]
-    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('│')
-    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('│')
+    if (bdrs$left > 0)   charmat[ border_rows[drow]:border_rows[end_row], border_cols[dcol] ]     <- style_left('\u2502')
+    if (bdrs$right > 0)  charmat[ border_rows[drow]:border_rows[end_row], border_cols[end_col] ]  <- style_right('\u2502')
   }
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
