@@ -36,6 +36,63 @@ format_color <- function (r_color, default = 'white') {
 }
 
 
+# returns two rows(+1),cols(+1) arrays of border widths
+collapsed_borders <- function (ht) {
+  lb <- rb <- matrix(0, nrow(ht), ncol(ht))
+  tb <- bb <- matrix(0, nrow(ht), ncol(ht))
+
+  dc <- display_cells(ht, all = TRUE)
+  for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
+    dcell <- dc[dc$row == i & dc$col ==j, ]
+    drow <- dcell$display_row
+    dcol <- dcell$display_col
+    # if we're in top row, set top border; bottom row set bb etc.
+    if (i == drow)          tb[i, j] <- top_border(ht)[drow, dcol]
+    if (i == dcell$end_row) bb[i, j] <- bottom_border(ht)[drow, dcol]
+    if (j == dcol)          lb[i, j] <- left_border(ht)[drow, dcol]
+    if (j == dcell$end_col) rb[i, j] <- right_border(ht)[drow, dcol]
+  }
+  lb <- cbind(lb, 0)
+  rb <- cbind(0, rb)
+  tb <- rbind(tb, 0)
+  bb <- rbind(0, bb)
+  result <- list()
+  result$vert <- pmax(lb, rb)
+  result$horiz <- pmax(tb, bb)
+
+  result
+}
+
+# returns two rows(+1),cols(+1) arrays of border colors. right and top borders have priority.
+# A border of 0 can still have a color.
+collapsed_border_colors <- function (ht) {
+  lb <- rb <- matrix(NA, nrow(ht), ncol(ht))
+  tb <- bb <- matrix(NA, nrow(ht), ncol(ht))
+
+  dc <- display_cells(ht, all = TRUE)
+  for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
+    dcell <- dc[dc$row == i & dc$col ==j, ]
+    drow <- dcell$display_row
+    dcol <- dcell$display_col
+    # if we're in top row, set top border; bottom row set bb etc.
+    if (i == drow)          tb[i, j] <- top_border_color(ht)[drow, dcol]
+    if (i == dcell$end_row) bb[i, j] <- bottom_border_color(ht)[drow, dcol]
+    if (j == dcol)          lb[i, j] <- left_border_color(ht)[drow, dcol]
+    if (j == dcell$end_col) rb[i, j] <- right_border_color(ht)[drow, dcol]
+  }
+  lb <- cbind(lb, NA)
+  rb <- cbind(NA, rb)
+  tb <- rbind(tb, NA)
+  bb <- rbind(NA, bb)
+  result <- list()
+  result$vert <- rb
+  result$vert[is.na(rb)] <- lb[is.na(rb)]
+  result$horiz <- bb
+  result$horiz[is.na(bb)] <- tb[is.na(bb)]
+
+  result
+}
+
 # compute_real_borders <- function (ht) {
 #   borders <- matrix(0, nrow(ht) + 1, ncol(ht) + 1)
 #   # borders[y, x] gives the border above row y and left of col x
