@@ -199,8 +199,8 @@ build_tabular <- function(ht) {
           switch(align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
         }
         # only add left borders if we haven't already added a right border!
-        lb <- if (! added_right_border) v_border(ht, drow, dcol, 'left') else ''
-        rb <- v_border(ht, drow, dcol, 'right')
+        lb <- if (! added_right_border) v_border(ht, myrow, mycol, 'left') else ''
+        rb <- v_border(ht, myrow, mycol, 'right')
         added_right_border <- rb != ''
         contents <- paste0('\\multicolumn{', cs, '}{', lb, colspec, rb, '}{', contents, '}')
       }
@@ -357,64 +357,30 @@ build_clines_for_row <- function(ht, row) {
 # row can be 0 for the top line.
 # returns an ncol(ht) + 1 string array
 compute_vertical_borders <- function (ht, row) {
-  display_cells <- display_cells(ht, all = TRUE)
-  dcells_above  <- display_cells[display_cells$row == row,]
-  if (row < nrow(ht)) dcells_below  <- display_cells[display_cells$row == row + 1,]
-
-  borders <- rep('', ncol(ht) + 1)
-  for (j in seq_len(1 + ncol(ht)) - 1) { # from 0 to total number of columns
-    # if above left cell ends here or above right cell starts here, we consider their border
-    above_left <- dcells_above[dcells_above$col == j & dcells_above$end_col == j, ]
-    above_right <- dcells_above[dcells_above$col == j + 1 & dcells_above$display_col == j + 1, ]
-    # below_left <- dcells_below[dcells_below$col == j, ]
-    # below_right <- dcells_below[dcells_below$col == j + 1, ]
-    width <- 0
-    color <- NA
-    if (nrow(above_left) > 0) {
-      width <- max(width, right_border(ht)[above_left$display_row, above_left$display_col])
-      color <- right_border_color(ht)[above_left$display_row, above_left$display_col]
-    }
-    if (nrow(above_right) > 0) {
-      width <- max(width, left_border(ht)[above_right$display_row, above_right$display_col])
-      if (is.na(color)) color <- left_border_color(ht)[above_right$display_row, above_right$display_col]
-    }
-    if (width > 0) {
-      color <- format_color(color, default = 'black')
-      borders[j + 1] <- paste0('>{\\arrayrulecolor[RGB]{', color, '}\\global\\arrayrulewidth=', width, 'pt}|')
-    }
-  }
+  # if we are at the top line, then we'll assume we want the same vertical borders as on the first line below.
+  if (row == 0) row <- 1
+  b_widths <- collapsed_borders(ht)$vert[row, ]
+  b_cols   <- collapsed_border_colors(ht)$vert[row, ]
+  borders <- sapply(seq_along(b_widths), function (x){
+    if (b_widths[x] == 0 ) return('')
+    my_col <- format_color(b_cols[x], default = 'black')
+    tex_glue('>{\\arrayrulecolor[RGB]{<< my_col >>}\\global\\arrayrulewidth=<< b_widths[x] >>pt}|')
+  })
 
   return(borders)
 }
 
 
 
-v_border <- function (ht, drow, dcol, side) {
-  width <- get_all_borders(ht, drow, dcol)[[side]]
-  color <- get_all_border_colors(ht, drow, dcol)[[side]]
-  # hack to make vertical borders collapse nicely. Right borders have precedence if both colors are set.
-  if (side == 'left' && dcol > 1) {
-    dcells <- display_cells(ht, all = TRUE)
-    dcell <- dcells[dcells$row == drow & dcells$col == dcol - 1,]
-    if (nrow(dcell) > 0) {
-      width <- max(width, right_border(ht)[dcell$display_row, dcell$display_col])
-      color2 <- right_border_color(ht)[dcell$display_row, dcell$display_col]
-      if (! is.na(color2)) color <- color2
-    }
-  }
-  if (side == 'right' && dcol < ncol(ht)) {
-    dcells <- display_cells(ht, all = TRUE)
-    dcell <- dcells[dcells$row == drow & dcells$col == dcol + 1,]
-    if (nrow(dcell) > 0) {
-      width <- max(width, left_border(ht)[dcell$display_row, dcell$display_col])
-      if (is.na(color)) color <- left_border_color(ht)[dcell$display_row, dcell$display_col]
-    }
-  }
-  if (! width > 0 ) return('')
+v_border <- function (ht, row, col, side) {
+  if (side == 'right') col <- col + 1
+  width <- collapsed_borders(ht)$vert[row, col]
+  color <- collapsed_border_colors(ht)$vert[row, col]
   color <- format_color(color, default = 'black')
 
-  paste0('!{\\color[RGB]{', color, '}', '\\vrule width ', width, 'pt}')
+  tex_glue('!{\\color[RGB]{<< color >>}\\vrule width << width >>pt}')
 }
+
 
 h_border <- function (ht, drow, dcol, side, width) {
   # width <- get_all_borders(ht, drow, dcol)[side] # don't use this as we can't
@@ -423,3 +389,6 @@ h_border <- function (ht, drow, dcol, side, width) {
   color <- format_color(color, default = 'black')
   paste0('>{\\arrayrulecolor[RGB]{', color, '}\\global\\arrayrulewidth=', width, 'pt}-')
 }
+
+# this has to have the ... argument as it's (???) evaluated in the parent frame
+tex_glue <- function (...) glue::glue(..., .open = '<<', .close = '>>', .envir = parent.frame())
