@@ -10,17 +10,14 @@ print_screen(ht, ...)
 
 to_screen(ht, ...)
 
-\method{to_screen}{huxtable}(ht, blank = " ",
-  min_width = ceiling(getOption("width")/6), max_width = Inf,
-  compact = (blank == " "), colnames = TRUE,
+\method{to_screen}{huxtable}(ht, min_width = ceiling(getOption("width")/6),
+  max_width = Inf, compact = TRUE, colnames = TRUE,
   color = getOption("huxtable.color_screen", default = TRUE), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{...}{Passed on to \code{to_screen}.}
-
-\item{blank}{Character to print for cell divisions with no border.}
 
 \item{min_width}{Minimum width in on-screen characters of the result.}
 
@@ -49,7 +46,6 @@ ht <- set_all_borders(ht, 1:6, 1:2, 1)
 right_border(ht)[,1] <- left_border(ht)[,2] <- 0
 align(ht)[1,] <- 'left'
 print_screen(ht)
-print_screen(ht, blank = '.')
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},

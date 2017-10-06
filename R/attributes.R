@@ -310,7 +310,7 @@ make_getter_setters('row_height', 'row')
 #' @template getset-example
 #' @templateVar subscript [1, 1]
 #' @templateVar attr_val 2
-#' @templateVar extra print_screen(ht, blank = '.')
+#' @templateVar extra print_screen(ht)
 #' @export rowspan rowspan<- set_rowspan rowspan.huxtable rowspan<-.huxtable
 #' @S3method rowspan huxtable
 #' @S3method rowspan<- huxtable
@@ -328,7 +328,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @template getset-example
 #' @templateVar subscript [1, 1]
 #' @templateVar attr_val 2
-#' @templateVar extra print_screen(ht, blank = '.')
+#' @templateVar extra print_screen(ht)
 #' @export colspan colspan<- set_colspan colspan.huxtable colspan<-.huxtable
 #' @S3method colspan huxtable
 #' @S3method colspan<- huxtable
@@ -975,7 +975,7 @@ make_getter_setters('height', 'table')
 #' Captions are not escaped. See the example for a workaround.
 #' @template getset-example
 #' @templateVar attr_val 'An example table'
-#' @templateVar extra print_screen(ht, blank = '.')
+#' @templateVar extra print_screen(ht)
 #' @seealso \code{\link{caption_pos}}
 #' @examples
 #' ht <- hux(a = 1:2, b = 1:2)

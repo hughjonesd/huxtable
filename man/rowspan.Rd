@@ -35,5 +35,5 @@ Functions to get or set the row span property of huxtable table cells.
 ht <- huxtable(a = 1:3, b = 1:3)
 rowspan(ht)[1, 1] <-  2
 rowspan(ht)
-print_screen(ht, blank = '.')
+print_screen(ht)
 }

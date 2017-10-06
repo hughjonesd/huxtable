@@ -8,7 +8,6 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #'
 #' @param ht A huxtable.
 #' @param ... Passed on to \code{to_screen}.
-#' @param blank   Character to print for cell divisions with no border.
 #' @param min_width Minimum width in on-screen characters of the result.
 #' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
 #' @param compact Logical. To save space, don't print lines for empty horizontal borders.
@@ -30,14 +29,13 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' right_border(ht)[,1] <- left_border(ht)[,2] <- 0
 #' align(ht)[1,] <- 'left'
 #' print_screen(ht)
-#' print_screen(ht, blank = '.')
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('width') / 6), max_width = Inf,
-      compact = (blank == ' '), colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
+to_screen.huxtable <- function (ht, min_width = ceiling(getOption('width') / 6), max_width = Inf,
+      compact = TRUE, colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
   if (color && ! requireNamespace('crayon', quietly = TRUE)) {
     warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon"`')
     color <- FALSE
@@ -103,7 +101,7 @@ to_screen.huxtable <- function (ht, blank = ' ', min_width = ceiling(getOption('
 
   if (compact) {
     empty_borders <- apply(charmat, 1, function (x)
-          all(grepl(blank, x, fixed = TRUE) | grepl('\u2502', x, fixed = TRUE)))
+          all(grepl(' ', x, fixed = TRUE) | grepl('\u2502', x, fixed = TRUE)))
     empty_borders <- intersect(border_rows, which(empty_borders))
     # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
     if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]

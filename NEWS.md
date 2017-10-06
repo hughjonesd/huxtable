@@ -18,7 +18,7 @@
 
 ## Breaking changes
 
-* Removed options `collapse`, `borders` and `colname_color` from `to_screen`.
+* Removed options `collapse`, `borders`, `blank` and `colname_color` from `to_screen`/`print_screen`.
 * `as_FlexTable` is deprecated and calls `as_flextable` with a warning. `header_rows` and `footer_rows` 
   arguments are ignored. If you need this feature, tell me.
 * HTML border sizes are now set in points, not pixels.
