@@ -85,13 +85,13 @@ test_that('Can set attributes to NA', {
   expect_error(col_width(ht) <- NA, regexp = NA)
 })
 
-test_that('Can set default attributes', {
+test_that('Can set default properties', {
   old <- set_default_properties(bold = TRUE)
   expect_equivalent(bold(hux(a = 1)), matrix(TRUE, 1, 1))
   set_default_properties(old)
   expect_equivalent(bold(hux(a = 1)), matrix(FALSE, 1, 1))
 })
 
-test_that('Can get default attributes', {
+test_that('Can get default properties', {
   expect_equivalent(get_default_properties('bold'), FALSE)
 })
