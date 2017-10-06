@@ -288,56 +288,37 @@ build_cell_contents <- function(ht, row, col, contents) {
   return(contents)
 }
 
+# row can be from "0" for the top; up to nrow
 build_clines_for_row <- function(ht, row) {
-  # row can be from "0" for the top; up to nrow
-  # add top/bottom borders
   # where a cell is shadowed, we don't want to add a top border (it'll go thru the middle)
   # bottom borders of a shadowed cell are fine, but come from the display cell.
   display_cells <- display_cells(ht, all = TRUE)
   dcells_this_row <- unique(display_cells[display_cells$row == row, ])
-  this_bottom <- rep('', ncol(ht))
 
   blank_line_color <- rep(format_color('white'), ncol(ht)) # white by default, I guess...
-  # let's figure out the vertical line width right now, as the maximum of all non shadowed cells
-  # that border this row
-  top_cells <- display_cells[display_cells$end_row == row & ! display_cells$shadowed,]
-  bottom_cells <- display_cells[display_cells$display_row == row + 1 & ! display_cells$shadowed,]
-  top_widths <- bottom_border(ht)[top_cells$display_row, top_cells$display_col]
-  bottom_widths <- top_border(ht)[bottom_cells$display_row, bottom_cells$display_col]
-  for (vec in list(top_widths, bottom_widths)) if (length(unique(vec[vec > 0])) > 1) warning(
-          'LaTeX cannot deal with multiple border widths in a row. Using the maximum width')
-  width <- max(top_widths, bottom_widths, 0) # avoid "no non-missing" complaint
   for (i in seq_len(nrow(dcells_this_row))) {
     drow <- dcells_this_row[i, 'display_row']
     dcol <- dcells_this_row[i, 'display_col']
     end_row <- dcells_this_row[i, 'end_row']
     end_col  <- dcells_this_row[i, 'end_col']
-    # Print bottom border if we are at bottom of the display cell
-    if (row == end_row) {
-      this_bottom[dcol:end_col] <- h_border(ht, drow, dcol, 'bottom', width)
-    }
     # Use color if we are in middle of display cell
     if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
       blank_line_color[dcol:end_col] <- format_color(color)
     }
   }
 
-  dcells_next_row <- unique(display_cells[display_cells$row == row + 1, ])
-  next_top <- rep('', ncol(ht))
-  for (i in seq_len(nrow(dcells_next_row))) {
-    drow <- dcells_next_row[i, 'display_row']
-    dcol <- dcells_next_row[i, 'display_col']
-    end_col <- dcells_next_row[i, 'end_col']
-    # are we at the top of this dcell? If not...
-    if (row + 1 != drow) next
-    next_top[dcol:end_col] <- h_border(ht, drow, dcol, 'top', width)
-  }
-  borders <- this_bottom
-  borders[borders == ''] <- next_top[borders == '']
-
-  blanks <- paste0('>{\\arrayrulecolor[RGB]{', blank_line_color, '}\\global\\arrayrulewidth=', width, 'pt}-')
-  if (any(borders != '')) {
-    hhlinechars <- ifelse(borders != '', borders, blanks)
+  widths <- collapsed_borders(ht)$horiz[row + 1,]
+  if (all(widths == 0)) {
+    return('')
+  } else {
+    width <- max(widths)
+    if (! all(widths[widths > 0] == width)) warning("Multiple widths in a single border, using max")
+    colors <- collapsed_border_colors(ht)$horiz[row + 1, ]
+    colors <- sapply(colors, format_color, default = 'black')
+    hhlinechars <- sapply(seq_along(widths), function (x) {
+      col <- if (widths[x] > 0) colors[x] else blank_line_color[x]
+      paste0('>{\\arrayrulecolor[RGB]{', col, '}\\global\\arrayrulewidth=', width, 'pt}-')
+    })
     vertlines <- compute_vertical_borders(ht, row)
     hhlinechars <- paste0(hhlinechars, vertlines[-1], collapse = '')
     hhlinechars <- paste0(vertlines[1], hhlinechars)
@@ -345,8 +326,6 @@ build_clines_for_row <- function(ht, row) {
     hhline <- paste0(hhline, '\\arrayrulecolor{black}\n') # don't let arrayrulecolor spill over
 
     return(hhline)
-  } else {
-    return('')
   }
 }
 
