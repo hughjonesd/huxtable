@@ -32,7 +32,6 @@ TODO
   - headers would be copied (by default?) when you subset huxtables
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
-* proper collapsing of borders and border_colors, used by to_screen and to_latex
 * make \booktabs or similar work
 * If possible, make variable width horizontal borders in latex work (it can work ok if background colour is unset)
 

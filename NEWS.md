@@ -13,6 +13,7 @@
 * On screen colour and bold support, if the `crayon` package is installed. New `huxtable.color_screen` option.
 * Move from `ReporteRs` to `officer` and `flextable`. No more `RJava` horror.
 * New `error_format` argument to `huxreg` for flexible control over uncertainty estimates.
+* Infrastructure improvements: slightly less ugly code in screen.R and LaTeX.R
 
 
 ## Breaking changes
