@@ -57,6 +57,7 @@ rc <- if (length(tags)) as.integer(max(tags) + 1) else 1L
 newtag <- paste0(newtag, rc)
 cat('\nTagging current version as: ', newtag, '\n')
 tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
+system2('git', c('push', '--tags'))
 
 # Build package
 
