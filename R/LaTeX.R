@@ -261,26 +261,19 @@ compute_width <- function (ht, start_col, end_col) {
 
 build_cell_contents <- function(ht, row, col, contents) {
   if (! is.na(font_size <- font_size(ht)[row, col])) {
-    font_size_pt <- paste0(font_size, 'pt')
-    line_space <- paste0(round(font_size * 1.2, 2), 'pt')
-    contents <- tex_glue('{\\fontsize{<< font_size_pt >>}{<< line_space >>}\\selectfont << contents >>}')
+    line_space <- round(font_size * 1.2, 2)
+    contents <- tex_glue('{\\fontsize{<< font_size >>pt}{<< line_space >>pt}\\selectfont << contents >>}')
   }
   if (! is.na(text_color <- text_color(ht)[row, col])) {
     text_color <- format_color(text_color)
     contents <- tex_glue('\\textcolor[RGB]{<< text_color >>}{<< contents >>}')
   }
-  if (bold(ht)[row, col]) {
-    contents <- tex_glue('\\textbf{<< contents >>}')
-  }
-  if (italic(ht)[row, col]) {
-    contents <- tex_glue('\\textit{<< contents >>}')
-  }
+  if (bold(ht)[row, col])   contents <- tex_glue('\\textbf{<< contents >>}')
+  if (italic(ht)[row, col]) contents <- tex_glue('\\textit{<< contents >>}')
   if (! is.na(font <- font(ht)[row, col])) {
     contents <- tex_glue('{\\fontfamily{<< font >>}\\selectfont << contents >>}')
   }
-  if ( (rt <- rotation(ht)[row, col]) != 0) {
-    contents <- tex_glue('\\rotatebox{<< rt >>}{<< contents >>}')
-  }
+  if ( (rt <- rotation(ht)[row, col]) != 0) contents <- tex_glue('\\rotatebox{<< rt >>}{<< contents >>}')
 
   return(contents)
 }
