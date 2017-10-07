@@ -26,6 +26,7 @@
   - `ci_level` is `NULL` by default. Set it to a number to calculate confidence intervals.
   - `error_style` is deprecated with a warning in favour of `error_format`.
   - Use `{stars}` not `%stars%` to display significance levels in the `note` argument.
+  - `borders` becomes a number specifying border width. Set to 0 for no borders.
 
 # huxtable 0.3.1
 
