@@ -296,6 +296,26 @@ ht
 
 \FloatBarrier
 
+# Borders on and off
+
+
+```{r}
+ht <- make(nrow = 2)
+ht <- set_all_borders(ht, 1)
+top_border(ht)[1, ] <- 0
+caption(ht) <- 'No top border'
+ht
+
+left_border(ht)[, 1] <- 0
+caption(ht) <- 'No left/top border'
+ht
+
+right_border(ht)[, 1] <- 0
+caption(ht) <- 'No left/right border of left col, no top border of top row'
+ht
+```
+
+
 # Horizontal border width
 
 ```{r}

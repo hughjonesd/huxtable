@@ -199,8 +199,8 @@ build_tabular <- function(ht) {
           switch(align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
         }
         # only add left borders if we haven't already added a right border!
-        lb <- if (! added_right_border) v_border(ht, myrow, mycol, 'left') else ''
-        rb <- v_border(ht, myrow, mycol, 'right')
+        lb <- if (! added_right_border) v_border(ht, myrow, mycol) else ''
+        rb <- v_border(ht, myrow, mycol + 1)
         added_right_border <- rb != ''
         contents <- paste0('\\multicolumn{', cs, '}{', lb, colspec, rb, '}{', contents, '}')
       }
@@ -293,17 +293,15 @@ build_clines_for_row <- function(ht, row) {
   # where a cell is shadowed, we don't want to add a top border (it'll go thru the middle)
   # bottom borders of a shadowed cell are fine, but come from the display cell.
   display_cells <- display_cells(ht, all = TRUE)
-  dcells_this_row <- unique(display_cells[display_cells$row == row, ])
+  display_cells <- display_cells[display_cells$row == row, ]
 
-  blank_line_color <- rep(format_color('white'), ncol(ht)) # white by default, I guess...
-  for (i in seq_len(nrow(dcells_this_row))) {
-    drow <- dcells_this_row[i, 'display_row']
-    dcol <- dcells_this_row[i, 'display_col']
-    end_row <- dcells_this_row[i, 'end_row']
-    end_col  <- dcells_this_row[i, 'end_col']
+  blank_line_color <- rep(NA, ncol(ht)) # white by default, I guess...
+  for (i in seq_len(nrow(display_cells))) {
+    dc <- display_cells[i, ]
     # Use color if we are in middle of display cell
-    if (row < end_row & ! is.na(color <- background_color(ht)[drow, dcol])) {
-      blank_line_color[dcol:end_col] <- format_color(color)
+    if (row < dc$end_row) {
+      col <- background_color(ht)[dc$display_row, dc$display_col]
+      blank_line_color[dc$display_col:dc$end_col] <- format_color(col, default = 'white')
     }
   }
 
@@ -317,13 +315,13 @@ build_clines_for_row <- function(ht, row) {
     colors <- sapply(colors, format_color, default = 'black')
     hhlinechars <- sapply(seq_along(widths), function (x) {
       col <- if (widths[x] > 0) colors[x] else blank_line_color[x]
-      paste0('>{\\arrayrulecolor[RGB]{', col, '}\\global\\arrayrulewidth=', width, 'pt}-')
+      tex_glue('>{\\arrayrulecolor[RGB]{<< col >>}\\global\\arrayrulewidth=<< width >>pt}-')
     })
     vertlines <- compute_vertical_borders(ht, row)
+
     hhlinechars <- paste0(hhlinechars, vertlines[-1], collapse = '')
-    hhlinechars <- paste0(vertlines[1], hhlinechars)
-    hhline <- paste0('\\hhline{', hhlinechars, '}\n')
-    hhline <- paste0(hhline, '\\arrayrulecolor{black}\n') # don't let arrayrulecolor spill over
+    hhline <- paste0(vertlines[1], hhlinechars)
+    hhline <- tex_glue('\\hhline{<< hhlinechars >>}\n\\arrayrulecolor{black}\n')
 
     return(hhline)
   }
@@ -350,9 +348,7 @@ compute_vertical_borders <- function (ht, row) {
 }
 
 
-
-v_border <- function (ht, row, col, side) {
-  if (side == 'right') col <- col + 1
+v_border <- function (ht, row, col) {
   width <- collapsed_borders(ht)$vert[row, col]
   color <- collapsed_border_colors(ht)$vert[row, col]
   color <- format_color(color, default = 'black')
@@ -360,14 +356,6 @@ v_border <- function (ht, row, col, side) {
   tex_glue('!{\\color[RGB]{<< color >>}\\vrule width << width >>pt}')
 }
 
-
-h_border <- function (ht, drow, dcol, side, width) {
-  # width <- get_all_borders(ht, drow, dcol)[side] # don't use this as we can't
-  if (! width > 0 ) return('')
-  color <- get_all_border_colors(ht, drow, dcol)[side]
-  color <- format_color(color, default = 'black')
-  paste0('>{\\arrayrulecolor[RGB]{', color, '}\\global\\arrayrulewidth=', width, 'pt}-')
-}
 
 # this has to have the ... argument as it's (???) evaluated in the parent frame
 tex_glue <- function (...) glue::glue(..., .open = '<<', .close = '>>', .envir = parent.frame())
