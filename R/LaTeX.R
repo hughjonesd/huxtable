@@ -35,7 +35,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
   if (! is.na(height <- height(ht))) {
     if (is.numeric(height)) height <- paste0(height, '\\textheight')
-    res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
+    res <- tex_glue('\\resizebox*{!}{<< height >>}{\n<< res >>\n}')
   }
 
   cap <- if (! is.na(cap <- caption(ht))) {
@@ -46,10 +46,9 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
             center = 'centering',
             right  = 'raggedleft'
           )
-    cap_setup <- paste0('\\captionsetup{justification=', cap_setup, ',singlelinecheck=off}\n')
-    paste0(cap_setup, '\\caption{', cap, '}\n')
+    tex_glue('\\captionsetup{justification=<< cap_setup >>,singlelinecheck=off}\n\\caption{<< cap >>}\n')
   } else ''
-  lab <- if (! is.na(lab <- label(ht))) paste0('\\label{', lab, '}\n') else ''
+  lab <- if (! is.na(lab <- label(ht))) tex_glue('\\label{<< lab >>}\n') else ''
   if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
   res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, res) else paste0(res, cap, lab)
 
@@ -61,7 +60,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   )
   res <- paste0(pos_text[1], res, pos_text[2], '\n')
 
-  res <- paste0('\\begin{table}[', latex_float(ht), ']\n', res, '\\end{table}\n')
+  res <- tex_glue('\\begin{table}[<< latex_float(ht) >>]\n<< res >>\\end{table}\n')
 
   return(res)
 }
@@ -95,12 +94,13 @@ huxtable_latex_dependencies <- list(
 #'
 report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   report <- sapply(huxtable_latex_dependencies, function(ld) {
-    str <- '\\usepackage'
+    package_str <- '\\usepackage'
     if (! is.null(ld$options)) {
-      str <- paste0(str, '[', paste(ld$options, collapse = ','), ']')
+      options_str <- paste(ld$options, collapse = ',')
+      package_str <- tex_glue('<< package_str >>[<< options_str >>]')
     }
-    str <- paste0(str, '{', ld$name, '}\n')
-    str
+    package_str <- tex_glue('<< package_str >>{<< ld$name >>}\n')
+    package_str
   })
   if (! quiet) {
     cat(paste0(report, collapse = ''))
@@ -112,14 +112,9 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 
 
 build_tabular <- function(ht) {
-  colspec <- character(ncol(ht))
-  for (mycol in 1:ncol(ht)) {
-    # col type will be redefined when valign is different:
-    colspec[mycol] <- paste0('p{', compute_width(ht, mycol, mycol), '}')
-  }
+  colspec <- sapply(seq_len(ncol(ht)), function (mycol) tex_glue('p{<< compute_width(ht, mycol, mycol) >>}'))
   colspec <- paste0(colspec, collapse = ' ')
-  colspec <- paste0('{', colspec, '}')
-  res <- paste0(colspec, '\n')
+  res <- tex_glue('{<< colspec >>}\n')
 
   display_cells <- display_cells(ht, all = TRUE)
   all_contents  <- clean_contents(ht, type = 'latex')
@@ -149,8 +144,8 @@ build_tabular <- function(ht) {
         padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
               bottom_padding(ht)[drow, dcol])
         padding <- lapply(padding, function(x) if (is_a_number(x)) paste0(x, 'pt') else x)
-        tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
-        bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
+        tpadding <- if (is.na(padding[3])) '' else tex_glue('\\rule{0pt}{\\baselineskip+<< padding[3] >>}')
+        bpadding <- if (is.na(padding[4])) '' else tex_glue('\\rule[-<< padding[4] >>]{0pt}{<< padding[4] >>}')
         align_str <- switch(align(ht)[drow, dcol],
           left   = '\\raggedright ',
           right  = '\\raggedleft ',
@@ -163,16 +158,17 @@ build_tabular <- function(ht) {
           # reverse of what you think. 'b' aligns the *bottom* of the text with the baseline
           # this doesn't really work for short text!
           ctb <- switch(valign(ht)[drow, dcol], top = 'b', middle = 'c', bottom = 't')
-          contents   <- paste0('\\parbox[', ctb, ']{', width_spec, hpad_loss[1], hpad_loss[2], '}{', contents, '}')
+          contents   <- tex_glue(
+                '\\parbox[<< ctb >>]{<< width_spec >><< hpad_loss[1] >><< hpad_loss[2] >>}{<< contents >>}')
         }
-        hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('\\hspace*{', x, '}') else '')
+        hpadding <- lapply(padding[1:2], function (x) if (! is.na(x)) tex_glue('\\hspace*{<< x >>}') else '')
         contents <- paste0(hpadding[1], contents, hpadding[2])
 
         # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
         # not sure how this should interact with cell padding...
         if (! is.na(row_height <- row_height(ht)[drow])) {
-          if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
-          contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
+          if (is.numeric(row_height)) row_height <- tex_glue('<< row_height >>\\textheight')
+          contents <- tex_glue('<< contents >>\\rule{0pt}{<< row_height >>}')
         }
       }
 
@@ -180,13 +176,13 @@ build_tabular <- function(ht) {
       # but only for left hand cells (which will be multicolumn{colspan} )
       if (! is.na(cell_color <- background_color(ht)[drow, dcol]) && mycol == dcol) {
         cell_color <- format_color(cell_color)
-        cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
-        contents <- paste0(cell_color, ' ', contents)
+        cell_color <- tex_glue('\\cellcolor[RGB]{<< cell_color >>}')
+        contents <- tex_glue('<< cell_color >> << contents >>')
       }
 
       if (bottom_left_multirow) {
         # * is 'standard width', could be more specific:
-        contents <- paste0('\\multirow{-', rs, '}{*}{', contents, '}')
+        contents <- tex_glue('\\multirow{-<< rs >>}{*}{<< contents >>}')
       }
 
       if (mycol == dcol) { # first column of cell
@@ -194,7 +190,7 @@ build_tabular <- function(ht) {
         colspec <- if (wrap(ht)[drow, dcol]) {
           pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
           width_spec <- compute_width(ht, mycol, dcell$end_col)
-          paste0(pmb, '{', width_spec, '}')
+          tex_glue('<< pmb >>{<< width_spec >>}')
         } else {
           switch(align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
         }
@@ -202,7 +198,7 @@ build_tabular <- function(ht) {
         lb <- if (! added_right_border) v_border(ht, myrow, mycol) else ''
         rb <- v_border(ht, myrow, mycol + 1)
         added_right_border <- rb != ''
-        contents <- paste0('\\multicolumn{', cs, '}{', lb, colspec, rb, '}{', contents, '}')
+        contents <- tex_glue('\\multicolumn{<< cs >>}{<< lb >><< colspec >><< rb >>}{<< contents >>}')
       }
 
       row_contents[mycol] <- contents
@@ -211,7 +207,7 @@ build_tabular <- function(ht) {
     row_contents <- row_contents[nzchar(row_contents)] # if we've printed nothing, don't print an & for it
     row_contents <- paste(row_contents, collapse = ' & ')
     # the 0.5pt avoids nasty pale lines through colored multirow cells
-    res <- paste0(res, row_contents, ' \\tabularnewline[-0.5pt]\n')
+    res <- tex_glue('<< res >><< row_contents >> \\tabularnewline[-0.5pt]\n')
 
     # add top/bottom borders
     res <- paste0(res, build_clines_for_row(ht, myrow))
@@ -221,11 +217,11 @@ build_tabular <- function(ht) {
   width_spec <- if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
     tw <- width(ht)
     if (is_a_number(tw)) tw <- paste0(tw, default_table_width_unit)
-    paste0('{', tw, '}')
+    tex_glue('{<< tw >>}')
   } else {
     ''
   }
-  res <- paste0('\\begin{', tenv, '}', width_spec, res, '\\end{', tenv, '}\n')
+  res <- tex_glue('\\begin{<< tenv >>}<< width_spec >><< res >>\\end{<< tenv >>}\n')
 
   return(res)
 }
@@ -256,7 +252,8 @@ compute_width <- function (ht, start_col, end_col) {
 
   if (end_col > start_col) {
     # need to add some extra tabcolseps, two per column
-    cw <- paste0(cw, '+', (end_col - start_col) * 2, '\\tabcolsep')
+    extra_seps <- (end_col - start_col) * 2
+    cw <- tex_glue('<< cw >>+<< extra_seps >>\\tabcolsep')
   }
 
   cw
@@ -266,23 +263,23 @@ build_cell_contents <- function(ht, row, col, contents) {
   if (! is.na(font_size <- font_size(ht)[row, col])) {
     font_size_pt <- paste0(font_size, 'pt')
     line_space <- paste0(round(font_size * 1.2, 2), 'pt')
-    contents <- paste0('{\\fontsize{', font_size_pt, '}{', line_space, '}\\selectfont ', contents, '}')
+    contents <- tex_glue('{\\fontsize{<< font_size_pt >>}{<< line_space >>}\\selectfont << contents >>}')
   }
   if (! is.na(text_color <- text_color(ht)[row, col])) {
     text_color <- format_color(text_color)
-    contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents, '}')
+    contents <- tex_glue('\\textcolor[RGB]{<< text_color >>}{<< contents >>}')
   }
   if (bold(ht)[row, col]) {
-    contents <- paste0('\\textbf{', contents, '}')
+    contents <- tex_glue('\\textbf{<< contents >>}')
   }
   if (italic(ht)[row, col]) {
-    contents <- paste0('\\textit{', contents, '}')
+    contents <- tex_glue('\\textit{<< contents >>}')
   }
   if (! is.na(font <- font(ht)[row, col])) {
-    contents <- paste0('{\\fontfamily{', font, '}\\selectfont ', contents, '}')
+    contents <- tex_glue('{\\fontfamily{<< font >>}\\selectfont << contents >>}')
   }
   if ( (rt <- rotation(ht)[row, col]) != 0) {
-    contents <- paste0('\\rotatebox{', rt, '}{', contents, '}')
+    contents <- tex_glue('\\rotatebox{<< rt >>}{<< contents >>}')
   }
 
   return(contents)
