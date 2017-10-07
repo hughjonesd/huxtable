@@ -309,10 +309,9 @@ build_clines_for_row <- function(ht, row) {
     })
     vertlines <- compute_vertical_borders(ht, row)
 
-    hhlinechars <- paste0(hhlinechars, vertlines[-1], collapse = '')
-    hhline <- paste0(vertlines[1], hhlinechars)
-    hhline <- tex_glue('\\hhline{<< hhlinechars >>}\n\\arrayrulecolor{black}\n')
-
+    hhline <- paste0(hhlinechars, vertlines[-1], collapse = '')
+    hhline <- paste0(vertlines[1], hhline)
+    hhline <- tex_glue('\n\n\\hhline{<< hhline >>}\n\\arrayrulecolor{black}\n')
     return(hhline)
   }
 }
