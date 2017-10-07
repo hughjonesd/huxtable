@@ -196,7 +196,7 @@ build_tabular <- function(ht) {
         }
         # only add left borders if we haven't already added a right border!
         lb <- if (! added_right_border) v_border(ht, myrow, mycol) else ''
-        rb <- v_border(ht, myrow, mycol + 1)
+        rb <- v_border(ht, myrow, dcell$end_col + 1) # we need to put the end column here
         added_right_border <- rb != ''
         contents <- tex_glue('\\multicolumn{<< cs >>}{<< lb >><< colspec >><< rb >>}{<< contents >>}')
       }
@@ -336,7 +336,7 @@ compute_vertical_borders <- function (ht, row) {
   return(borders)
 }
 
-
+# uses "real" border numbers in "ncol + 1 space"
 v_border <- function (ht, row, col) {
   width <- collapsed_borders(ht)$vert[row, col]
   color <- collapsed_border_colors(ht)$vert[row, col]
