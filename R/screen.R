@@ -37,7 +37,8 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 to_screen.huxtable <- function (ht, min_width = ceiling(getOption('width') / 6), max_width = Inf,
       compact = TRUE, colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
   if (color && ! requireNamespace('crayon', quietly = TRUE)) {
-    warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon"`')
+    warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon")`.
+      To avoid seeing this message in future, set `options(huxtable.color_screen = FALSE)`.')
     color <- FALSE
   }
   charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
