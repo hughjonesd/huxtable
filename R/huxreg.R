@@ -12,7 +12,7 @@
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
-#' @param borders Logical: add horizontal borders in appropriate places?
+#' @param borders Thickness of horizontal borders in appropriate places. Set to 0 for no borders.
 #' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 #'   significance stars. Set to \code{NULL} for no footnote.
 #' @param statistics Summary statistics to display. Set to \code{NULL} to show all available statistics.
@@ -59,7 +59,7 @@ huxreg <- function (
         ci_level        = NULL,
         stars           = c('***' = 0.001, '**' = 0.01, '*' = 0.05),
         bold_signif     = NULL,
-        borders         = TRUE,
+        borders         = 0.4,
         note            = '{stars}.',
         statistics      = c('N' = 'nobs', 'R2' = 'r.squared', 'logLik', 'AIC'),
         coefs           = NULL,
@@ -198,7 +198,7 @@ huxreg <- function (
   if (error_pos == 'right') mod_names <- interleave(mod_names, '')
   mod_names <- c('', mod_names)
   result <- rbind(mod_names, cols, sumstats, copy_cell_props = FALSE)
-  if (isTRUE(borders)) result <- set_bottom_border(result, c(1, 1 + nrow(cols), nrow(result)), everywhere, 1)
+  result <- set_bottom_border(result, c(1, 1 + nrow(cols), nrow(result)), everywhere, borders)
   colnames(result) <- mod_names # may fail
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
