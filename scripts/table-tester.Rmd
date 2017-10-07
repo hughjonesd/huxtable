@@ -11,249 +11,37 @@ output:
 ---
 
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, warning = FALSE}
 
-library(huxtable)
+
+suppressPackageStartupMessages(library(huxtable))
+suppressPackageStartupMessages(library(dplyr)) 
+
+
 knitr::opts_chunk$set(echo = FALSE)
-```
 
-
-```{r}
-
-make <- function(nrow = 2, text1 = 'Some text', text2 = 'Some more text') {
-  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
-  
-  ht <- set_all_borders(ht, every(), every(), 1)
-  background_color(ht)[1,] <- c('orange', 'yellow')
-  background_color(ht)[2,] <- c('pink', 'green')
-  ht
+hux_logo <- function(latex = FALSE) {
+  logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
+  rowspan(logo)[1, 1] <- 2
+  colspan(logo)[2, 2] <- 2
+  logo <- set_all_borders(logo, 0.5)
+  font_size(logo) <- if (latex) 11 else 20
+  font_size(logo)[1, 2:3] <- if (latex) 14 else 24
+  font_size(logo)[1, 1] <-  if (latex) 24 else 42
+  background_color(logo)[1, 1] <- '#e83abc'
+  background_color(logo)[1, 3] <- 'black'
+  text_color(logo)[1, 3] <- 'white'
+  width(logo) <- if (latex) '0.21\\textwidth' else '60pt'
+  height(logo) <- if (latex) '45pt' else '60pt'
+  font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
+  if (latex) font(logo) <- 'ppl'
+  top_padding(logo) <- 2
+  bottom_padding(logo) <- 2
+  bottom_padding(logo)[2, 2] <- 1
+  align(logo)[2, 2] <- 'center'
+  col_width(logo) <- c(.4, .3, .3)
+  position(logo) <- 'center'
+  logo
 }
-
+hux_logo(latex = TRUE)
 ```
-
-# Width and colwidth
-
-```{r}
-ht <- make()
-caption(ht) <- 'both unset'
-ht
-
-width(ht) <- 0.2
-caption(ht) <- 'width 0.2'
-ht
-
-width(ht) <- NA
-col_width(ht) <- c(.7, .3)
-caption(ht) <- 'col_width .7, .3'
-ht
-
-width(ht) <- 0.2
-caption(ht) <- 'width 0.2, col_width .7, .3'
-ht
-
-```
-
-# Position and width
-
-```{r}
-ht <- make()
-caption(ht) <- 'both unset'
-ht
-
-position(ht) <- 'left'
-caption(ht) <- 'left pos'
-ht
-
-position(ht) <- 'right'
-caption(ht) <- 'right pos'
-ht
-
-width(ht) <- .3
-position(ht) <- 'left'
-caption(ht) <- 'width .3, left pos'
-ht
-
-position(ht) <- 'right'
-caption(ht) <- 'width .3, right pos'
-ht
-
-```
-
-\FloatBarrier
-
-# Caption and position
-
-# Colwidth and align
-# Align and wrap
-# Colwidth and wrap
-# Width and wrap
-# Padding and wrap
-# Padding and colwidth
-
-
-# Multirow and wrap
-# Multirow and multicol
-# Multirow and border color
-# Multicol and border color
-
-
-
-```{r}
-ht <- hux(a = rep('some rather long text', 2), b = rep('bar', 2))
-
-ht <- set_all_borders(ht, every(), every(), 1)
-background_color(ht)[1,] <- c('orange', 'yellow')
-background_color(ht)[2,] <- c('pink', 'green')
-# widths unset
-caption(ht) <- 'no width set'
-ht
-
-# widths only set
-col_width(ht) <- c(.8, .2)
-caption(ht) <- xtable::sanitize('col_width .8, .2', type = 'latex')
-ht
-
-# table width also set
-width(ht) <- 0.8
-caption(ht) <- 'colwidth .8, .2; table width 0.8'
-ht
-
-# table width set to point value!
-width(ht) <- '140pt'
-caption(ht) <- 'colwidth .8, .2; table width 140pt'
-ht
-
-# multicolumn
-colspan(ht)[2,1] <- 2
-# caption(ht) <- 'colwidth .8, .2; table width 140pt; multicol'
-ht
-
-# widths as values
-col_width(ht) <- c('30pt', '70pt')
-caption(ht) <- 'colwidth 30pt, 70pt; table width 140pt; multicol'
-ht
-
-```
-
-```{r}
-ht <- hux(a = rep('some rather long text', 2), b = rep('Some more long text', 2))
-
-ht <- set_all_borders(ht, every(), every(), 1)
-background_color(ht)[1,] <- c('orange', 'yellow')
-background_color(ht)[2,] <- c('pink', 'green')
-
-colspan(ht)[2, 1] <- 1
-align(ht)[1, 1]  <- 'right'
-align(ht)[1, 2]  <- 'left'
-align(ht)[2, 1] <- 'center'
-align(ht)[2, 2] <- NA
-caption(ht) <- 'Varying align(): top row: right, left; bottom row: center, NA'
-ht
-```
-
-```{r}
-ht <- hux(a = rep('Some rather long text', 4), b = c('top', 'middle', 'bottom', 'NA'))
-col_width(ht) <- c('50pt', '100pt')
-ht <- set_all_borders(ht, every(), every(), 1)
-background_color(ht)[c(1,3),] <- c('orange', 'yellow')
-background_color(ht)[c(2,4),] <- c('pink', 'green')
-valign(ht)[1, ]  <- 'top'
-valign(ht)[2, ]  <- 'middle'
-valign(ht)[3, ]  <- 'bottom'
-valign(ht)[4, ]  <- NA
-caption(ht) <- 'Varying valign()'
-ht
-
-
-ht <- hux(a = rep('Some rather long text', 4), b = rep('some rather long text', 4), c = 'short')
-col_width(ht) <- c('50pt', '50pt', '50pt')
-ht <- set_all_borders(ht, , , 1)
-background_color(ht)[c(1,3),] <- c('orange', 'yellow')
-background_color(ht)[c(2,4),] <- c('pink', 'green')
-caption(ht) <- 'wrap()'
-wrap(ht)[,1] <- TRUE
-ht
-
-left_padding(ht)[1,] <- 15
-right_padding(ht)[2,] <- 15
-top_padding(ht)[3,] <- 15
-bottom_padding(ht)[4,] <- 15
-caption(ht) <- 'wrap + extra padding (left/right/top/bottom)'
-ht
-
-col_width(ht) <- c(.3, .3, .4)
-caption(ht) <- 'as above but numeric col\\_width'
-ht
-
-wrap(ht)[,2] <- TRUE
-align(ht)[,2] <- 'right'
-caption(ht) <- 'as above with left/right align'
-ht
-
-val <- rep('Some text', 4)
-ht <- hux(a = val, b = val, c = val) 
-ht <- set_all_borders(ht, , , 1)
-background_color(ht)[c(1,3),] <- c('orange', 'yellow')
-background_color(ht)[c(2,4),] <- c('pink', 'green')
-left_padding(ht)[1,] <- 15
-right_padding(ht)[2,] <- 15
-top_padding(ht)[3,] <- 15
-bottom_padding(ht)[4,] <- 15
-caption(ht) <- 'padding (left/right/top/bottom) but no wrap'
-ht
-
-ht <- set_align(ht,,,byrow = TRUE, c('left', 'center', 'right'))
-caption(ht) <- 'same as above with left/center/right align'
-ht
-```
-
-```{r}
-ht <- hux(a = 1:2, b = 1:2 , c = 1:2, d = 1:2, e = 1:2)
-ht <- set_all_borders(ht, , , 1)
-
-wrap(ht)[1:2,] <- TRUE
-tabular_environment(ht) <- 'tabularx'
-caption(ht) <- 'Default position and width'
-ht
-
-position(ht) <- 'left'
-caption(ht) <- 'left position'
-ht
-
-position(ht) <- 'right'
-caption(ht) <- 'right position'
-ht
-
-width(ht) <- .25
-position(ht) <- 'left'
-caption(ht) <- 'width 1, left position'
-ht
-
-position(ht) <- 'center'
-caption(ht) <- 'width 1, center position'
-ht
-
-position(ht) <- 'right'
-caption(ht) <- 'width 1, right position'
-ht
-
-
-
-```
-
-A bit of space
-
-```{r}
-
-ht <- hux(c('some text', 'some more text'), c(NA, 'blah'))
-ht <- set_all_borders(ht, , , 1)
-ht <- set_all_border_colors(ht, 1, 1, 'red')
-right_border_color(ht)[1,1] <- 'blue' 
-rowspan(ht)[1,1] <- 2
-ht
-
-
-```
-
-
-

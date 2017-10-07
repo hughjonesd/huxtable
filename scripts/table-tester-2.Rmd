@@ -362,10 +362,15 @@ caption(ht) <- 'Bottom border of top cell should be thicker. In TeX this will co
 ht
 ```
 
-# Huxreg
+# Huxreg 
 
 ```{r}
 huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
+
 ```
 
+# hux_logo
 
+```{r}
+hux_logo(latex = TRUE)
+```
