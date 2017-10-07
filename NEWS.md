@@ -1,6 +1,7 @@
 
+# huxtable 1.0.0.9000
 
-# huxtable 0.3.1.9000
+# huxtable 1.0.0
 
 * LaTeX implements different thicknesses for vertical and horizontal borders (but only one horizontal thickness per row).
 * LaTeX border colors now collapse nicely: set colors override unset ones.
