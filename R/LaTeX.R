@@ -205,8 +205,8 @@ build_tabular <- function(ht) {
 
     } # next cell
     row_contents <- row_contents[nzchar(row_contents)] # if we've printed nothing, don't print an & for it
-    row_contents <- paste(row_contents, collapse = ' & ')
-    # the 0.5pt avoids nasty pale lines through colored multirow cells
+    row_contents <- paste(row_contents, collapse = ' & \n')
+    # should reduce nasty pale lines through colored multirow cells:
     res <- tex_glue('<< res >><< row_contents >> \\tabularnewline[-0.5pt]\n')
 
     # add top/bottom borders
