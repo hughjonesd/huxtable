@@ -1,0 +1,15 @@
+---
+title: "huxreg pad_decimal fail mwe"
+author: "David Hugh-Jones"
+date: "05/10/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+huxreg(lm(iris$Sepal.Width ~ iris$Sepal.Length)) -> tmp
+tmp
+```
