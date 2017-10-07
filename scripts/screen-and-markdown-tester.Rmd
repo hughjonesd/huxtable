@@ -135,7 +135,7 @@ bold(ht2)[c(2,4), 1] <- TRUE
 italic(ht2)[3:4, 1] <- TRUE
 text_color(ht2)[c(2, 4), 2] <- 'red'
 background_color(ht2)[3:4, 2] <- 'green'
-print_screen(ht2)
+ht2
 
 catn('# Border colours')
 ht2 <- set_all_borders(ht2, 1)
@@ -144,7 +144,7 @@ right_border_color(ht2)[1, 1]  <- 'green'
 top_border_color(ht2)[1, 1]    <- 'purple'
 bottom_border_color(ht2)[1, 1] <- 'blue'
 ht2[1, 1] <- 'multicoloured borders?'
-print_screen(ht2)
+ht2
 
 ```
 
