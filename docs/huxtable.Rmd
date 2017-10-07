@@ -3,18 +3,18 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
+  html_document:
+    toc: yes
+    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
     toc: yes
     toc_depth: 2
-  html_document:
-    toc: yes
-    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Introduction to Huxtable}   
   %\VignetteEngine{knitr::rmarkdown}   
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 

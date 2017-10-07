@@ -79,7 +79,7 @@ and a vertical stripe for background colour, tweak a few details like font size,
 standard huxtable commands.
 
 ```{r}
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 diamond_regs                                                         %>% 
       theme_article                                                  %>% 
       set_background_color(1:nrow(diamond_regs), evens, grey(.95)) %>% 

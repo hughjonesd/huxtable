@@ -3,8 +3,8 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
   %\VignetteEngine{knitr::rmarkdown}  
@@ -124,8 +124,9 @@ Some people love LaTeX. Other people think they have to use it to be "scientific
 this is all too common in my field.) Personally, I can tolerate it at a distance. It's certainly not
 easy to produce LaTeX code combining a wide variety of table features. Current limitations of huxtable include:
 
-* You can't change border width - any value above 0 just means there is a border present.
+* You can't change horizontal border widths within a single line.
 * Table width may be unpredictable and your text may spill over. Adjust on a trial and error basis.
+* If table position is problematic, check that your table is wide enough, and set `width()` if necessary.
 * Vertical alignment is unlikely to work as you might expect.
 
 Some of these may be fixed... at some point!
