@@ -14,7 +14,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Introduction to Huxtable}   
   %\VignetteEngine{knitr::rmarkdown}   
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 

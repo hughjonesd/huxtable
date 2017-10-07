@@ -8,7 +8,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
   %\VignetteEngine{knitr::rmarkdown}  
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 

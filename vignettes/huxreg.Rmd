@@ -10,7 +10,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Regression Tables with huxreg}  
   %\VignetteEngine{knitr::rmarkdown}  
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
