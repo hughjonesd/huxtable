@@ -19,3 +19,10 @@ test_that('Row heights do not screw up latex multicol', {
   on.exit(if (exists('output')) file.remove(output))
   expect_silent(output <- rmarkdown::render('rowheight-multicol-test.Rmd', quiet = TRUE))
 })
+
+
+test_that('table-tester-2.Rmd can be rendered OK', {
+  skip_without_pandoc()
+  on.exit(if (exists('output')) file.remove(output))
+  expect_silent(output <- rmarkdown::render('table-tester-2.Rmd', quiet = TRUE))
+})
