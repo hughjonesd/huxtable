@@ -285,13 +285,12 @@ build_clines_for_row <- function(ht, row) {
   display_cells <- display_cells(ht, all = TRUE)
   display_cells <- display_cells[display_cells$row == row, ]
 
-  blank_line_color <- rep(NA, ncol(ht)) # white by default, I guess...
+  blank_line_color <- rep('white', ncol(ht)) # this will be used if we have a border of 0 after a positive border
   for (i in seq_len(nrow(display_cells))) {
     dc <- display_cells[i, ]
     # Use color if we are in middle of display cell
     if (row < dc$end_row) {
-      col <- background_color(ht)[dc$display_row, dc$display_col]
-      blank_line_color[dc$display_col:dc$end_col] <- format_color(col, default = 'white')
+      blank_line_color[dc$display_col:dc$end_col] <- background_color(ht)[dc$display_row, dc$display_col]
     }
   }
 
@@ -303,6 +302,7 @@ build_clines_for_row <- function(ht, row) {
     if (! all(widths[widths > 0] == width)) warning("Multiple widths in a single border, using max")
     colors <- collapsed_border_colors(ht)$horiz[row + 1, ]
     colors <- sapply(colors, format_color, default = 'black')
+    blank_line_color <- sapply(blank_line_color, format_color, default = 'white')
     hhlinechars <- sapply(seq_along(widths), function (x) {
       col <- if (widths[x] > 0) colors[x] else blank_line_color[x]
       tex_glue('>{\\arrayrulecolor[RGB]{<< col >>}\\global\\arrayrulewidth=<< width >>pt}-')

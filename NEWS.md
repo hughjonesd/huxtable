@@ -1,6 +1,8 @@
 
 # huxtable 1.0.0.9000
 
+* Bugfix: LaTeX failed when horizontal border of 0 followed positive horizontal border on same line.
+
 # huxtable 1.0.0
 
 * LaTeX implements different thicknesses for vertical and horizontal borders (but only one horizontal thickness per row).
