@@ -17,6 +17,7 @@ test_that('select and rename work', {
   expect_equivalent(bold(ht3), bold(ht))
 })
 
+
 test_that('slice, filter, arrange and pull work', {
   ht <- hux(a = 1:4, b = c(1, 3, 4, 2))
   row_height(ht) <- c(.4, .2, .1, .3)
@@ -33,6 +34,7 @@ test_that('slice, filter, arrange and pull work', {
   vec <- dplyr::pull(ht, a)
   expect_identical(vec, ht$a)
 })
+
 
 test_that('mutate and transmute work', {
   ht <- hux(a = 1:3, b = 1:3)
