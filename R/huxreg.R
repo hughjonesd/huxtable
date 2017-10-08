@@ -24,9 +24,9 @@
 #' 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 #' calculate confidence intervals itself, using a normal approximation.
 #'
-#' If \code{...} is a named list, the names will be used for column headings. If the \code{coef} and/or
-#'  \code{statistics} vectors have names, these will be used for row headings. If different values of \code{coef}
-#'  have the same name, the corresponding rows will be merged in the output.
+#' If \code{...} is a named list, the names will be used for column headings. Otherwise column headings will be
+#' automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be used for row
+#' headings. If different values of \code{coef} have the same name, the corresponding rows will be merged in the output.
 #'
 #' Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 #' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
@@ -69,7 +69,7 @@ huxreg <- function (
         'install.packages("broom")')
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
-  mod_names <- names_or(models, bracket(seq_along(models)))
+  mod_names <- names_or(models, paste("Model ", seq_along(models)))
   error_pos <- match.arg(error_pos)
   if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
 
@@ -199,7 +199,7 @@ huxreg <- function (
   mod_names <- c('', mod_names)
   result <- rbind(mod_names, cols, sumstats, copy_cell_props = FALSE)
   result <- set_bottom_border(result, c(1, 1 + nrow(cols), nrow(result)), everywhere, borders)
-  colnames(result) <- mod_names # may fail
+  colnames(result) <- make.names(mod_names)
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'

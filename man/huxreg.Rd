@@ -54,9 +54,9 @@ Models must have a \code{\link[broom]{tidy}} method defined, which should return
 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 calculate confidence intervals itself, using a normal approximation.
 
-If \code{...} is a named list, the names will be used for column headings. If the \code{coef} and/or
- \code{statistics} vectors have names, these will be used for row headings. If different values of \code{coef}
- have the same name, the corresponding rows will be merged in the output.
+If \code{...} is a named list, the names will be used for column headings. Otherwise column headings will be
+automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be used for row
+headings. If different values of \code{coef} have the same name, the corresponding rows will be merged in the output.
 
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
