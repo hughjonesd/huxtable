@@ -335,6 +335,11 @@ top_border(ht)[2, 2] <- 1
 caption(ht) <- 'Bottom border of first row first column 4pt; second column 1pt. Gives warning'
 ht
 
+bottom_border(ht)[1, 2] <- 0
+top_border(ht)[2, 2] <- 0
+caption(ht) <- 'Bottom border of first row first column 4pt; second column 0pt. Should work.'
+ht
+
 ```
 
 

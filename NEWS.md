@@ -2,6 +2,7 @@
 # huxtable 1.0.0.9000
 
 * Bugfix: LaTeX failed when horizontal border of 0 followed positive horizontal border on same line.
+  - This is kind of a bodge but will work OK if cells have white backgrounds.
 
 # huxtable 1.0.0
 
