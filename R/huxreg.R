@@ -200,7 +200,7 @@ huxreg <- function (
   mod_col_headings <- c('', mod_col_headings)
   result <- rbind(mod_col_headings, cols, sumstats, copy_cell_props = FALSE)
   result <- set_bottom_border(result, c(1, 1 + nrow(cols), nrow(result)), everywhere, borders)
-  colnames(result) <- c('', names_or(models, paste0("model", seq_along(models))))
+  colnames(result) <- c('names', names_or(models, paste0("model", seq_along(models))))
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'

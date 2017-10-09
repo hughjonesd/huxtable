@@ -99,7 +99,16 @@ test_that('huxreg stars printed correctly', {
   expect_match(huxreg(lm2)[[4, 2]], paste0(number_regex, '\\*\\*\\*\\s*'))
 })
 
+
 test_that('huxreg works for models without tidy p values', {
   expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris), statistics = 'nobs'),
         'p values')
+})
+
+
+test_that('huxreg column names are legitimate', {
+  hr1 <- huxreg(lm(Sepal.Width ~ Sepal.Length, data = iris), lm(Sepal.Width ~ Sepal.Length, data = iris))
+  cn <- colnames(hr1)
+
+  expect_identical(cn, make.names(cn))
 })
