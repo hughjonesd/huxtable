@@ -235,9 +235,7 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
 #' @importFrom knitr knit_print
 #' @export
 knit_print.huxtable <- function (x, options, ...) {
-  requireNamespace('htmltools', quietly = TRUE)
   of <- guess_knitr_output_format()
-
   call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
   res <- do.call(call_name, list(ht = x))
   if (of == 'latex') {
