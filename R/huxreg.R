@@ -1,7 +1,7 @@
 
 #' Create a huxtable to display model output
 #'
-#' @param ... Models, or a single list of models.
+#' @param ... Models, or a single list of models. Names will be used as column headings.
 #' @param error_format How to display uncertainty in estimates. See below.
 #' @param error_style Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
@@ -24,9 +24,10 @@
 #' 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 #' calculate confidence intervals itself, using a normal approximation.
 #'
-#' If \code{...} is a named list, the names will be used for column headings. Otherwise column headings will be
-#' automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be used for row
-#' headings. If different values of \code{coef} have the same name, the corresponding rows will be merged in the output.
+#' If \code{...} has names or contains a single named list, the names will be used for column headings. Otherwise column
+#' headings will be automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be
+#' used for row headings. If different values of \code{coef} have the same name, the corresponding rows will be merged
+#' in the output.
 #'
 #' Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 #' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
@@ -69,7 +70,7 @@ huxreg <- function (
         'install.packages("broom")')
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
-  mod_names <- names_or(models, paste("Model ", seq_along(models)))
+  mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
   error_pos <- match.arg(error_pos)
   if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
 
@@ -195,11 +196,11 @@ huxreg <- function (
         copy_cell_props = FALSE)
   sumstats <- cbind(names_or(stat_names, stat_names), sumstats, copy_cell_props = FALSE)
 
-  if (error_pos == 'right') mod_names <- interleave(mod_names, '')
-  mod_names <- c('', mod_names)
-  result <- rbind(mod_names, cols, sumstats, copy_cell_props = FALSE)
+  if (error_pos == 'right') mod_col_headings <- interleave(mod_col_headings, '')
+  mod_col_headings <- c('', mod_col_headings)
+  result <- rbind(mod_col_headings, cols, sumstats, copy_cell_props = FALSE)
   result <- set_bottom_border(result, c(1, 1 + nrow(cols), nrow(result)), everywhere, borders)
-  colnames(result) <- make.names(mod_names)
+  colnames(result) <- c('', names_or(models, paste0("model", seq_along(models))))
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'
@@ -227,12 +228,6 @@ names_or <- function (obj, alts) {
 
 
 interleave <- function (a, b) ifelse(seq_len(length(a) * 2) %% 2, rep(a, each = 2), rep(b, each = 2))
-
-
-bracket <-  function (x) if (length(x) > 0) paste0('(', x, ')') else character(0)
-
-
-bracket2 <- function (x) if (length(x) > 0) paste0('[', x, ']') else character(0)
 
 
 make_ci <- function(tidied, ci_level) {
