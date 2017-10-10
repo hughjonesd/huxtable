@@ -18,8 +18,9 @@
 \description{
 Huxtable can be used with dplyr verbs \code{\link[dplyr]{select}}, \code{\link[dplyr]{rename}},
 \code{\link[dplyr]{slice}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{mutate}} and
-\code{\link[dplyr]{transmute}}. These will return huxtables. Other verbs like \code{\link[dplyr]{summarize}}
-will simply return data frames as normal. \code{mutate} has an extra option, detailed below.
+\code{\link[dplyr]{transmute}}. These will return huxtables. Other verbs like \code{\link[dplyr]{summarize}} will
+simply return data frames as normal; \code{\link[dplyr]{pull}} will return a vector. \code{mutate} has an extra
+option, detailed below.
 }
 \details{
 If \code{mutate} creates new columns, and the argument \code{copy_cell_props} is missing or \code{TRUE}, then cell
