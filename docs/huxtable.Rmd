@@ -266,11 +266,12 @@ hux(
 `set_xxx(ht, value)`. If you use the second form, then the value is set for all cells. 
 `set_*` functions for table properties are always called like `set_xxx(ht, value)`. We'll learn more about this interface in a moment.
 
-There are also three useful convenience functions:
+There are also four useful convenience functions:
 
 * `set_all_borders` sets left, right, top and bottom borders for selected cells;
 * `set_all_border_colors` sets left, right, top and bottom border colors;
-* `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content and the border).
+* `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content and the border);
+* `set_outer_borders` sets the outer borders of a square group of cells.
 
 ## Getting properties
 
@@ -498,15 +499,13 @@ If you use the `set_*` style functions, huxtable has some convenience functions 
 To select all rows, or all columns, use `everywhere` in the row or column specification. To select just even or odd-numbered rows or columns, use `evens` or `odds`. To select the last `n` rows or columns, use `final(n)`.
 To select every *n*th row, use `every(n)` and to do this starting from row *m* use `every(n, from = m)`.
 
-With these functions it is easy to add striped backgrounds or outer borders to tables:
+With these functions it is easy to add striped backgrounds to tables:
 
 ```{r}
-car_ht %>% 
-      set_left_border(everywhere, 1, 1)           %>%    # left outer border   - every row, first column
-      set_right_border(everywhere, final(1), 1)   %>%    # right outer border  - every row, last column
-      set_top_border(1, everywhere, 1)            %>%    # top outer border    - first row, every column
-      set_bottom_border(final(1), everywhere, 1)  %>%    # bottom outer border - last row, every column
-      set_background_color(evens, everywhere, 'wheat')   # horizontal stripe   - even rows, all columns
+car_ht                                                 %>% 
+      set_background_color(evens, everywhere, 'wheat') %>% 
+      set_background_color(odds, everywhere, grey(.9)) %>% 
+      set_bold(1, everywhere, TRUE)
 ```
 
 
@@ -610,15 +609,17 @@ you need.
 
 rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic,
 a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the 
-[ReporteRs package](https://cran.r-project.org/package=ReporteRs) from CRAN. You can then convert your huxtable objects
-to `FlexTable` objects and include them in Word documents. Almost all formatting should work. See the `ReporteRs` documentation and `?as_FlexTable` for more details.
+[flextable package](https://cran.r-project.org/package=flextable) from CRAN. You can then convert your huxtable objects
+to `flextable` objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the `flextable` and `officer` documentation and `?as_flextable` for more details.
 
 Sometimes you may want to select how huxtable objects are printed by default. For example, in an RStudio notebook
 (a .Rmd document with `output_format = html_notebook`), huxtable can't automatically work out what format to use, as of
 the time of writing. You can set it manually using `options(huxtable.print = print_notebook)` which prints out
 HTML in an appropriate format. 
 
-Lastly, you can print a huxtable on screen using `print_screen`. Borders, column and row spans and cell alignment are shown:
+Lastly, you can print a huxtable on screen using `print_screen`. Borders, column and row spans and cell alignment are
+shown. If the [crayon](https://cran.r-project.org/package=crayon) package is installed, and your terminal or R
+IDE supports it, border, text and background colours are also displayed.
 
 ```{r, results = 'markup'}
 print_screen(ht)
