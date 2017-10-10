@@ -4,7 +4,7 @@
 \alias{huxreg}
 \title{Create a huxtable to display model output}
 \usage{
-huxreg(..., error_format = "({statistic})", error_style = c("stderr", "ci",
+huxreg(..., error_format = "({std.error})", error_style = c("stderr", "ci",
   "statistic", "pvalue"), error_pos = c("below", "same", "right"),
   number_format = "\%.3f", pad_decimal = ".", ci_level = NULL,
   stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05), bold_signif = NULL,
@@ -12,7 +12,7 @@ huxreg(..., error_format = "({statistic})", error_style = c("stderr", "ci",
   "r.squared", "logLik", "AIC"), coefs = NULL, omit_coefs = NULL)
 }
 \arguments{
-\item{...}{Models, or a single list of models.}
+\item{...}{Models, or a single list of models. Names will be used as column headings.}
 
 \item{error_format}{How to display uncertainty in estimates. See below.}
 
@@ -54,9 +54,10 @@ Models must have a \code{\link[broom]{tidy}} method defined, which should return
 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 calculate confidence intervals itself, using a normal approximation.
 
-If \code{...} is a named list, the names will be used for column headings. Otherwise column headings will be
-automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be used for row
-headings. If different values of \code{coef} have the same name, the corresponding rows will be merged in the output.
+If \code{...} has names or contains a single named list, the names will be used for column headings. Otherwise column
+headings will be automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be
+used for row headings. If different values of \code{coef} have the same name, the corresponding rows will be merged
+in the output.
 
 Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
 use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
