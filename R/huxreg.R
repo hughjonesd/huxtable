@@ -52,7 +52,7 @@
 #' huxreg(lm1, lm2, glm1)
 huxreg <- function (
         ...,
-        error_format    = '({statistic})',
+        error_format    = '({stderr})',
         error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
         error_pos       = c('below', 'same', 'right'),
         number_format   = '%.3f',
