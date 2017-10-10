@@ -46,7 +46,7 @@ NULL
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
-  if (getRversion() > '3.3.0') df_args$fix.empty.names = FALSE
+  if (getRversion() >= '3.3.0') df_args$fix.empty.names = FALSE
   ht <- do.call(data.frame, df_args)
   ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
 
