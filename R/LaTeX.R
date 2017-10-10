@@ -342,7 +342,8 @@ v_border <- function (ht, row, col) {
   color <- collapsed_border_colors(ht)$vert[row, col]
   color <- format_color(color, default = 'black')
 
-  tex_glue('!{\\color[RGB]{<< color >>}\\vrule width << width >>pt}')
+  # much faster than tex_glue
+  paste0('!{\\color[RGB]{', color ,'}\\vrule width ', width, 'pt}')
 }
 
 
