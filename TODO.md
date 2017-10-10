@@ -22,6 +22,7 @@ TODO
 * `print_latex` is slooow on big tables, see e.g. design-principles.Rmd
   - revert `tex_glue` changes, it is 40x slower than paste0
   - memoize collapsed_borders
+  - make collapsed_* take a single row/col combo! Or, call them only once!
 * `set_outer_borders` should work with `everywhere` and friends.
   - write a function that returns the relevant border indices
   - use that to set top/bot/l/r borders in a square
