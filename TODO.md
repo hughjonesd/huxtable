@@ -15,14 +15,12 @@ BUGS
     colour and position. 
     - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
 * LaTeX fonts not working
+* horiz border 4, then 0 in one line leaves white gap in LaTeX. Fixable by using a more appropriate blank_line_color?
 
 TODO
 ====
 
-* `print_latex` is slooow on big tables, see e.g. design-principles.Rmd
-  - revert `tex_glue` changes, it is 40x slower than paste0
-  - memoize collapsed_borders
-  - make collapsed_* take a single row/col combo! Or, call them only once!
+* rewrite LaTeX for speed, vectorizing and putting bits in appropriately
 * `set_outer_borders` should work with `everywhere` and friends.
   - write a function that returns the relevant border indices
   - use that to set top/bot/l/r borders in a square
