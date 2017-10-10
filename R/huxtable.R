@@ -45,7 +45,7 @@ NULL
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
-  ht <- data.frame(..., stringsAsFactors = FALSE)
+  ht <- data.frame(..., stringsAsFactors = FALSE, check.names = FALSE, fix.empty.names = FALSE)
   ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
 
   ht
