@@ -207,13 +207,14 @@ huxreg <- function (
   pad_decimal(result)[-1, -1] <- pad_decimal
 
   if (! is.null(note)) {
-    stars <- if (! is.null(stars)) paste0(names(stars), ' p < ', stars, collapse = '; ') else ''
+    stars <- if (is.null(stars)) '' else paste0(names(stars), ' p < ', stars, collapse = '; ')
     note <- gsub('%stars%', stars, note)
     note <- glue::glue(note)
     result <- add_footnote(result, note)
     result <- set_wrap(result, final(), 1, TRUE)
     result <- set_align(result, final(), 1, 'left')
     result <- set_bottom_border(result, final(), everywhere, 0)
+    result <- set_top_border(result, final(), everywhere, borders)
   }
 
   result
