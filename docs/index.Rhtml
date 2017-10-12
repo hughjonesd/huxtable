@@ -135,8 +135,17 @@ pre.knitr {
   border-left: 1px solid grey;
   border-right: 1px solid grey;
   border-bottom: 1px solid grey;
-  height: 450px;
+  height: 470px;
   overflow: scroll;
+}
+
+#ex-condformat table {
+  font-size: 0.8em;
+}
+
+
+#ex-huxreg table {
+  font-size: 0.75em;
 }
 
 </style>
@@ -243,9 +252,9 @@ end.rcode-->
 
 data(diamonds, package = 'ggplot2')
 
-lm1 <- lm(price ~ carat, diamonds)
-lm2 <- lm(price ~ depth, diamonds)
-lm3 <- lm(price ~ carat + depth, diamonds)
+lm1 <- lm(log(price) ~ carat, diamonds)
+lm2 <- lm(log(price) ~ depth, diamonds)
+lm3 <- lm(log(price) ~ carat + depth, diamonds)
 
 huxreg(lm1, lm2, lm3)
 end.rcode-->

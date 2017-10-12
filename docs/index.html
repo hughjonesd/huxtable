@@ -197,8 +197,17 @@ pre.knitr {
   border-left: 1px solid grey;
   border-right: 1px solid grey;
   border-bottom: 1px solid grey;
-  height: 450px;
+  height: 470px;
   overflow: scroll;
+}
+
+#ex-condformat table {
+  font-size: 0.8em;
+}
+
+
+#ex-huxreg table {
+  font-size: 0.75em;
 }
 
 </style>
@@ -421,9 +430,9 @@ functionality to xtable, but more, with a simpler interface. Here are some quick
 <div class="example" id="ex-huxreg">
 <div class="source"><pre class="knitr r"><span class="hl kwd">data</span><span class="hl std">(diamonds,</span> <span class="hl kwc">package</span> <span class="hl std">=</span> <span class="hl str">'ggplot2'</span><span class="hl std">)</span>
 
-<span class="hl std">lm1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(price</span> <span class="hl opt">~</span> <span class="hl std">carat, diamonds)</span>
-<span class="hl std">lm2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(price</span> <span class="hl opt">~</span> <span class="hl std">depth, diamonds)</span>
-<span class="hl std">lm3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(price</span> <span class="hl opt">~</span> <span class="hl std">carat</span> <span class="hl opt">+</span> <span class="hl std">depth, diamonds)</span>
+<span class="hl std">lm1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(</span><span class="hl kwd">log</span><span class="hl std">(price)</span> <span class="hl opt">~</span> <span class="hl std">carat, diamonds)</span>
+<span class="hl std">lm2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(</span><span class="hl kwd">log</span><span class="hl std">(price)</span> <span class="hl opt">~</span> <span class="hl std">depth, diamonds)</span>
+<span class="hl std">lm3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(</span><span class="hl kwd">log</span><span class="hl std">(price)</span> <span class="hl opt">~</span> <span class="hl std">carat</span> <span class="hl opt">+</span> <span class="hl std">depth, diamonds)</span>
 
 <span class="hl kwd">huxreg</span><span class="hl std">(lm1, lm2, lm3)</span>
 </pre></div>
@@ -436,39 +445,39 @@ functionality to xtable, but more, with a simpler interface. Here are some quick
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-2256.361 ***</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">5763.668 ***</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">4045.333 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">6.215 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.749 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.313 ***</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(-172.830)&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(7.783)&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(14.134)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.003)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.188)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.074)&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">carat</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7756.426 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1.970 ***</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7765.141 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1.971 ***</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(551.408)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.004)&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(554.282)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.004)&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">depth</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-29.650 *&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-102.165 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.001&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-0.018 ***</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(-2.473)&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(-22.041)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.003)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.001)&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">N</td>
@@ -478,24 +487,24 @@ functionality to xtable, but more, with a simpler interface. Here are some quick
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.849&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.000&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">logLik</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-472730.266&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-523772.431&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-472488.441&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-26728.969&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-77321.478&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-26617.649&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">AIC</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">945466.532&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1047550.862&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">944984.882&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53463.939&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">154648.956&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:1pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0.4pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>
 </tr>
 </table>
 <!--/html_preserve-->
