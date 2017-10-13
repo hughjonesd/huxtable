@@ -174,7 +174,8 @@ decimal_pad <- function(col, pad_chars, type) {
   chars_after_. <- nchars - pos
 
   pad_to <- max(chars_after_.) - chars_after_.
-  pad_char <- switch(type, 'html' = '&nbsp;', 'latex' = '~', ' ')
+  # use non-breaking space on screen also
+  pad_char <- switch(type, 'html' = '&nbsp;', 'latex' = '~', 'screen' = '\u00a0', ' ')
   col <- paste0(col, str_rep(pad_char, pad_to))
 
   orig_col[! na_pad] <- col
