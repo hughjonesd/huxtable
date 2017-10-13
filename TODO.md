@@ -3,7 +3,7 @@
 BUGS
 ====
 
-* pad_decimal of huxreg fails with significance stars and/or brackets in on_screen (but not HTML or TeX)
+* pad_decimal only works when cells are right-aligned
 * nowrap cells
   - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
   - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
@@ -20,6 +20,9 @@ BUGS
 TODO
 ====
 
+* use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
+  bottom line is border?
+  - not sure we can change colours halfway through though
 * table of descriptive statistics?
 * `huxreg`-style function in `texreg` package
 * rewrite LaTeX for speed, vectorizing and putting bits in appropriately

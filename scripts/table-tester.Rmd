@@ -5,8 +5,6 @@ date: "2/03/2017"
 output:
   pdf_document:
     keep_tex: yes
-    includes:
-      in_header: placeins-header.tex
   html_document: default
 ---
 
@@ -20,13 +18,9 @@ suppressPackageStartupMessages(library(dplyr))
 
 knitr::opts_chunk$set(echo = FALSE)
 
-ht <- hux(a = rep("LEFT CONTENT", 2), b = rep("RIGHT CONTENT", 2))
-background_color(ht) <- 'red'
-bottom_border(ht)[1, 1] <- 4
-bottom_border(ht)[1, 2] <- 0
-top_border(ht)[2, 2] <- 0
-caption(ht) <- 'Bottom border of first row first column 4pt; second column 0pt. Should work.'
-ht
-
+huxtable(c("1.0", "(1.0)", "1.00")) %>% set_pad_decimal('.') %>% set_font('cmtt') -> ht
+set_align(ht, 'right')
+set_align(ht, 'left')
+set_align(ht, 'center')
 
 ```
