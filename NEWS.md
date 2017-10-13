@@ -1,14 +1,14 @@
 
 # huxtable 1.0.0.9000
 
-* Bugfix: LaTeX failed when horizontal border of 0 followed positive horizontal border on same line.
-  - This is kind of a bodge but will work OK if cells have white backgrounds.
-* Bugfix: flextable didn't like huxreg's syntactically invalid column names.
+* No more ugly autocreated column names.
 * Allow huxtable to have invalid or empty column names in general.
 * LaTeX should now be *much* faster on large tables.
 * `set_outer_borders` now accepts the same row/column arguments as other `set_` functions.
-* LaTeX can now handle horizontal borders which don't cross the entire table. (But not varying
+* Better handling in LaTeX of horizontal borders which don't cross the entire table. (But not varying
   positive border widths....)
+* Bugfix: flextable didn't like huxreg's syntactically invalid column names.
+* Allow, but silently change, English spelling of 'centre' in `align`, `position` and `caption_pos`
 
 # huxtable 1.0.0
 

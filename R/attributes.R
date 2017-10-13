@@ -264,7 +264,8 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 #' @S3method align huxtable
 #' @S3method align<- huxtable
 NULL
-make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'right'))
+make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'centre', 'right'),
+      extra_code = value[value == 'centre'] <- 'center')
 
 
 #' @template getset-rowcol
@@ -924,7 +925,8 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 #' @S3method position huxtable
 #' @S3method position<- huxtable
 NULL
-make_getter_setters('position', 'table', check_values = c('left', 'center', 'right'))
+make_getter_setters('position', 'table', check_values = c('left', 'center', 'centre', 'right'),
+      extra_code = value[value == 'centre'] <- 'center')
 
 #' @template getset-table
 #' @templateVar attr_name caption_pos
@@ -941,8 +943,11 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'rig
 #' @S3method caption_pos<- huxtable
 #' @seealso \code{\link{caption}}
 NULL
-make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topright',
-      'bottomleft', 'bottomcenter', 'bottomright'))
+make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topcentre',
+      'topright', 'bottomleft', 'bottomcenter', 'bottomcentre', 'bottomright'), extra_code = {
+        value[value == 'topcentre'] <- 'topcenter'
+        value[value == 'bottomcentre'] <- 'bottomcenter'
+      })
 
 
 #' @template getset-table

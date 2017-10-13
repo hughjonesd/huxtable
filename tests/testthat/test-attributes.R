@@ -75,8 +75,9 @@ test_that('Decimal padding works', {
             c(NA, rep('.', 3)),
             type = 'screen'
           ),
-          c('do not pad.', '1.00532', '33      ', '33.6 *  ')
+          c('do not pad.', '1.00532', '33\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0', '33.6 *\u00a0\u00a0')
         )
+  # the characters are non-breaking spaces
 })
 
 
@@ -144,4 +145,18 @@ test_that('collapsed_border_colors works', {
   cbc <- huxtable:::collapsed_border_colors(ht)
   expect_equivalent(cbc$vert, matrix(c(NA, NA, 'blue', NA, NA, 'blue'), 2, 3, byrow = TRUE))
   expect_equivalent(cbc$horiz, matrix(c(NA, NA, NA, NA, 'purple', 'purple'), 3, 2, byrow = TRUE))
+})
+
+
+test_that('align, position and caption_pos change "centre" to "center"', {
+  ht <- hux(1)
+  align(ht) <- 'centre'
+  expect_equivalent(align(ht), matrix('center', 1, 1))
+
+  position(ht) <- 'centre'
+  expect_equivalent(position(ht), 'center')
+  caption_pos(ht) <- 'topcentre'
+  expect_equivalent(caption_pos(ht), 'topcenter')
+  caption_pos(ht) <- 'bottomcentre'
+  expect_equivalent(caption_pos(ht), 'bottomcenter')
 })
