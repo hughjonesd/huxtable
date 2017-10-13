@@ -37,7 +37,6 @@ TODO
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
 * make \booktabs or similar work
-* If possible, make variable width horizontal borders in latex work (it can work ok if background colour is unset)
 * classes to represent borders and/or text styles? 
   - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
   - and `set_text(ht, text(10, 'black', 'italic'))`
