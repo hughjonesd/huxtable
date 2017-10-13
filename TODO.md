@@ -14,8 +14,8 @@ BUGS
   - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
     colour and position. 
     - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
-* LaTeX fonts not working
-* horiz border 4, then 0 in one line leaves white gap in LaTeX. Fixable by using a more appropriate blank_line_color?
+* LaTeX fonts not working [is this actually true?]
+
 
 TODO
 ====
@@ -42,7 +42,7 @@ TODO
   - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
   - and `set_text(ht, text(10, 'black', 'italic'))`
   - might not add much value compared to `set_properties`...?
-* dotted borders with LaTeX package?
+* dotted borders with LaTeX package? See https://tex.stackexchange.com/questions/20140/can-a-table-include-a-horizontal-dashed-line
 * special-case single horizontal lines across whole table?
 
 PUT OFF

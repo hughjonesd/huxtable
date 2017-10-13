@@ -286,13 +286,11 @@ build_clines_for_row <- function(ht, row, collapsed_borders, cb_colors) {
   display_cells <- display_cells(ht, all = TRUE)
   display_cells <- display_cells[display_cells$row == row, ]
 
-  blank_line_color <- rep('white', ncol(ht)) # this will be used if we have a border of 0 after a positive border
+  blank_line_color <- rep('white', ncol(ht)) # never now used
   for (i in seq_len(nrow(display_cells))) {
     dc <- display_cells[i, ]
-    # Use color if we are in middle of display cell
-    if (row < dc$end_row) {
+    # Use color if we are in middle of display cell, also if we are at end and after a +ve border
       blank_line_color[dc$display_col:dc$end_col] <- background_color(ht)[dc$display_row, dc$display_col]
-    }
   }
 
   widths <- collapsed_borders$horiz[row + 1,]

@@ -7,6 +7,8 @@
 * Allow huxtable to have invalid or empty column names in general.
 * LaTeX should now be *much* faster on large tables.
 * `set_outer_borders` now accepts the same row/column arguments as other `set_` functions.
+* LaTeX can now handle horizontal borders which don't cross the entire table. (But not varying
+  positive border widths....)
 
 # huxtable 1.0.0
 
