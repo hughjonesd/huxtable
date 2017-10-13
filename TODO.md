@@ -42,6 +42,8 @@ TODO
   - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
   - and `set_text(ht, text(10, 'black', 'italic'))`
   - might not add much value compared to `set_properties`...?
+* dotted borders with LaTeX package?
+* special-case single horizontal lines across whole table?
 
 PUT OFF
 =======
