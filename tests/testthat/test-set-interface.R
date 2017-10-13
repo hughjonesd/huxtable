@@ -173,10 +173,10 @@ test_that('set_outer_borders() works as expected', {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
   check_borders <- function (ht) {
-    expect_equivalent(top_border(ht2), matrix(c(0, 0, 0, 0, 1, 0, 0, 1, 0)), 3, 3)
-    expect_equivalent(bottom_border(ht2), matrix(c(0, 0, 0, 0, 0, 1, 0, 0, 1)), 3, 3)
-    expect_equivalent(left_border(ht2), matrix(c(0, 0, 0, 0, 1, 1, 0, 0, 0)), 3, 3)
-    expect_equivalent(right_border(ht2), matrix(c(0, 0, 0, 0, 0, 0, 0, 1, 1)), 3, 3)
+    expect_equivalent(top_border(ht), matrix(c(0, 0, 0, 0, 1, 0, 0, 1, 0)), 3, 3)
+    expect_equivalent(bottom_border(ht), matrix(c(0, 0, 0, 0, 0, 1, 0, 0, 1)), 3, 3)
+    expect_equivalent(left_border(ht), matrix(c(0, 0, 0, 0, 1, 1, 0, 0, 0)), 3, 3)
+    expect_equivalent(right_border(ht), matrix(c(0, 0, 0, 0, 0, 0, 0, 1, 1)), 3, 3)
   }
   ht2 <- set_outer_borders(ht, 2:3, 2:3, 1)
   check_borders(ht2)
@@ -184,6 +184,27 @@ test_that('set_outer_borders() works as expected', {
   check_borders(ht3)
   ht4 <- set_outer_borders(ht, 2:3, c("b", "c"), 1)
   check_borders(ht4)
+})
+
+test_that('set_outer_borders() works with non-standard/empty position arguments', {
+  ht <- hux(a = 1:2, b = 1:2)
+
+  ht2 <- set_outer_borders(ht, 1)
+  ht3 <- set_outer_borders(ht, everywhere, everywhere, 1)
+  for (h in list(ht2, ht3)) {
+    expect_equivalent(top_border(h), matrix(c(1, 0, 1, 0), 2, 2))
+    expect_equivalent(bottom_border(h), matrix(c(0, 1, 0, 1), 2, 2))
+    expect_equivalent(left_border(h), matrix(c(1, 1, 0, 0), 2, 2))
+    expect_equivalent(right_border(h), matrix(c(0, 0, 1, 1), 2, 2))
+  }
+  ht4 <- set_outer_borders(ht, where(ht > 1.5), 1)
+  ht5 <- set_outer_borders(ht, evens, everywhere, 1)
+  for (h in list(ht4, ht5)) {
+    expect_equivalent(top_border(h), matrix(c(0, 1, 0, 1), 2, 2))
+    expect_equivalent(bottom_border(h), matrix(c(0, 1, 0, 1), 2, 2))
+    expect_equivalent(left_border(h), matrix(c(0, 1, 0, 0), 2, 2))
+    expect_equivalent(right_border(h), matrix(c(0, 0, 0, 1), 2, 2))
+  }
 })
 
 test_that('where() works as expected', {

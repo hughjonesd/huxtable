@@ -9,9 +9,9 @@ set_outer_borders(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable}
 
-\item{row}{A set of rows. See below.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
-\item{col}{A set of columns.}
+\item{col}{A column specifier.}
 
 \item{value}{A numeric value for the border width. Set to 0 for no border.}
 }
@@ -22,14 +22,11 @@ The modified huxtable.
 This is a convenience function to set a border round the top,
 bottom, left and right of a group of cells.
 }
-\details{
-Only standard R subsetting may be used for \code{row} and \code{col}. That is,
-logical, numeric or character indices are allowed, but not the tricks in \code{\link{rowspecs}}.
-}
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
-ht <- set_outer_borders(ht, 2:3, 1:2, 1)
-ht
+set_outer_borders(ht, 1)
+set_outer_borders(ht, 2:3, 1:2, 1)
+
 }
 \seealso{
 \code{\link{left_border}}, \code{\link{set_all_borders}}

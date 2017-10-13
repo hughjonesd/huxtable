@@ -20,10 +20,9 @@ BUGS
 TODO
 ====
 
+* table of descriptive statistics?
+* `huxreg`-style function in `texreg` package
 * rewrite LaTeX for speed, vectorizing and putting bits in appropriately
-* `set_outer_borders` should work with `everywhere` and friends.
-  - write a function that returns the relevant border indices
-  - use that to set top/bot/l/r borders in a square
 * use number_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
   - good for huxreg (confidence intervals, signif. stars etc.)
   - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
@@ -39,6 +38,10 @@ TODO
     (except for RTL languages?)
 * make \booktabs or similar work
 * If possible, make variable width horizontal borders in latex work (it can work ok if background colour is unset)
+* classes to represent borders and/or text styles? 
+  - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
+  - and `set_text(ht, text(10, 'black', 'italic'))`
+  - might not add much value compared to `set_properties`...?
 
 PUT OFF
 =======

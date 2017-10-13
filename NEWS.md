@@ -4,8 +4,9 @@
 * Bugfix: LaTeX failed when horizontal border of 0 followed positive horizontal border on same line.
   - This is kind of a bodge but will work OK if cells have white backgrounds.
 * Bugfix: flextable didn't like huxreg's syntactically invalid column names.
-* Bugfix: allow huxtable to have invalid or empty column names in general.
+* Allow huxtable to have invalid or empty column names in general.
 * LaTeX should now be *much* faster on large tables.
+* `set_outer_borders` now accepts the same row/column arguments as other `set_` functions.
 
 # huxtable 1.0.0
 
