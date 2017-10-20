@@ -8,7 +8,7 @@
 * Better handling in LaTeX of horizontal borders which don't cross the entire table. (But not varying
   positive border widths....)
 * Bugfix: flextable didn't like huxreg's syntactically invalid column names.
-* Allow, but silently change, English spelling of 'centre' in `align`, `position` and `caption_pos`
+* Accept, but silently change, English spelling of 'centre' in `align`, `position` and `caption_pos`.
 
 # huxtable 1.0.0
 

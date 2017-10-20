@@ -3,7 +3,7 @@
 BUGS
 ====
 
-* pad_decimal only works when cells are right-aligned
+* captions shortened in to_screen
 * nowrap cells
   - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
   - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
@@ -49,6 +49,8 @@ TODO
 
 PUT OFF
 =======
+* pad_decimal only works when cells are right-aligned
+  - not sure having it work on left aligned cells would add much value?
 * set_bold causes right border to be out by 1 on screen
   - actually this is a font issue with the default RStudio font. Works fine with menlo.
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
