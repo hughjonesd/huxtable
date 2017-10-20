@@ -77,10 +77,12 @@ test_that('huxreg borders argument works', {
   dfr$y <- dfr$y + dfr$a
   lm1 <- lm(y ~ a, dfr)
   lm2 <- lm(y ~ b, dfr)
-  hr <- huxreg(lm1, lm2, borders = .7)
-  expect_equivalent(bottom_border(hr)[, 2], c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .7, 0))
-  hr2 <- huxreg(lm1, lm2, borders = FALSE)
-  expect_equivalent(bottom_border(hr2)[, 2], rep(0, nrow(hr2)))
+  hr <- huxreg(lm1, lm2, borders = .7, outer_borders = .8)
+  expect_equivalent(unname(bottom_border(hr)[, 2]), c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0))
+  expect_equivalent(unname(top_border(hr)[, 2]), c(.8, rep(0, 11)))
+  hr2 <- huxreg(lm1, lm2, borders = 0, outer_borders = 0)
+  expect_equivalent(unname(bottom_border(hr2)), matrix(0, nrow(hr2), ncol(hr2)))
+  expect_equivalent(unname(top_border(hr2)), matrix(0, nrow(hr2), ncol(hr2)))
 })
 
 

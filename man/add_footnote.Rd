@@ -4,12 +4,14 @@
 \alias{add_footnote}
 \title{Add a row with a footnote}
 \usage{
-add_footnote(ht, text, ...)
+add_footnote(ht, text, border = 0.8, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{text}{Text for the footnote.}
+
+\item{border}{Width of the footnote's top border. Set to 0 for no border.}
 
 \item{...}{Other properties, passed to \code{\link{set_cell_properties}} for the footnote cell.}
 }
@@ -18,7 +20,7 @@ The modified huxtable
 }
 \description{
 This adds a single row at the bottom. The first cell contains the footnote; it spans
-the entire table and has a border above only.
+all table columns and has an optional border above.
 }
 \examples{
 ht <- hux(a = 1:5, b = 1:5, d = 1:5)

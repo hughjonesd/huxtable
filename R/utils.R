@@ -353,9 +353,10 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' Add a row with a footnote
 #'
 #' This adds a single row at the bottom. The first cell contains the footnote; it spans
-#' the entire table and has a border above only.
+#' all table columns and has an optional border above.
 #' @param ht A huxtable.
 #' @param text Text for the footnote.
+#' @param border Width of the footnote's top border. Set to 0 for no border.
 #' @param ... Other properties, passed to \code{\link{set_cell_properties}} for the footnote cell.
 #'
 #' @return The modified huxtable
@@ -365,14 +366,16 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' ht <- hux(a = 1:5, b = 1:5, d = 1:5)
 #' ht <- add_footnote(ht, '* this is a footnote')
 #' ht
-add_footnote <- function(ht, text, ...) {
+add_footnote <- function(ht, text, border = 0.8, ...) {
   nr <- nrow(ht) + 1
   nc <- ncol(ht)
   ht <- rbind(ht, rep('', nc), copy_cell_props = FALSE)
   ht[nr, 1] <- text
   colspan(ht)[nr, 1] <- nc
-  ht <- set_all_borders(ht, nr, 1, 0)
-  top_border(ht)[nr, 1] <- 1
+  ht <- set_left_border(ht, nr, 1, 0)
+  ht <- set_right_border(ht, nr, 1, 0)
+  ht <- set_bottom_border(ht, nr, 1, 0)
+  ht <- set_top_border(ht, nr, 1, border)
   wrap(ht)[nr, 1] <- TRUE
   if (! missing(...)) ht <- set_cell_properties(ht, nr, 1, ...)
 
