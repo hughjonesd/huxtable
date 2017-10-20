@@ -1,5 +1,5 @@
 
-# huxtable 1.0.0.9000
+# huxtable 1.1.0
 
 * No more ugly autocreated column names.
 * Allow huxtable to have invalid or empty column names in general.
