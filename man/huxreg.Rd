@@ -35,6 +35,8 @@ this behaviour.}
 
 \item{borders}{Thickness of inner horizontal borders. Set to 0 for no borders.}
 
+\item{outer_borders}{Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.}
+
 \item{note}{Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 significance stars. Set to \code{NULL} for no footnote.}
 
@@ -43,8 +45,6 @@ significance stars. Set to \code{NULL} for no footnote.}
 \item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
 
 \item{omit_coefs}{Omit these coefficients.}
-
-\item{borders}{Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.}
 }
 \value{
 A huxtable object.

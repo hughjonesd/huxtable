@@ -13,7 +13,7 @@
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
 #' @param borders Thickness of inner horizontal borders. Set to 0 for no borders.
-#' @param borders Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.
+#' @param outer_borders Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.
 #' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 #'   significance stars. Set to \code{NULL} for no footnote.
 #' @param statistics Summary statistics to display. Set to \code{NULL} to show all available statistics.
