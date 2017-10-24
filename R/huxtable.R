@@ -26,6 +26,7 @@ NULL
 
 
 #' @importFrom stats na.omit setNames
+#' @import assert_that
 NULL
 
 
@@ -45,6 +46,7 @@ NULL
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
+  assert_that(is.flag(add_colnames), is.flag(add_rownames))
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
   if (getRversion() >= '3.3.0') df_args$fix.empty.names = FALSE
   ht <- do.call(data.frame, df_args)
@@ -81,6 +83,7 @@ as_hux <- as_huxtable
 #' @export
 #' @rdname huxtable
 as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, ...) {
+  assert_that(is.flag(add_colnames), is.flag(add_rownames))
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   for (a in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, a) <- matrix(NA, nrow(x), ncol(x))
@@ -341,6 +344,7 @@ is_hux <- is_huxtable
 #' @export
 cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   force(copy_cell_props)
+  assert_that(is.flag(copy_cell_props) || is.character(copy_cell_props))
   bind_hux(..., type = 'cbind', copy_cell_props = copy_cell_props)
 }
 
@@ -349,6 +353,7 @@ cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 #' @rdname cbind.huxtable
 rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   force(copy_cell_props)
+  assert_that(is.flag(copy_cell_props) || is.character(copy_cell_props))
   bind_hux(..., type = 'rbind', copy_cell_props = copy_cell_props)
 }
 
@@ -564,10 +569,11 @@ add_colnames <- function (ht, ...) UseMethod('add_colnames')
 #' @export
 #' @rdname add_colnames
 add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
+  assert_that(missing(rowname) || is.null(rowname) || is.string(rowname))
   cn <- colnames(ht)
   ht <- rbind(cn, ht, copy_cell_props = FALSE)
   colnames(ht) <- cn
-  if (! missing(rowname)) rownames(ht) <- c(rowname, rownames(ht)[1:(nrow(ht) - 1)])
+  if (! is.null(rowname)) rownames(ht) <- c(rowname, rownames(ht)[1:(nrow(ht) - 1)])
   ht
 }
 
@@ -580,6 +586,7 @@ add_rownames <- function (ht, ...) UseMethod('add_rownames')
 #' @export
 #' @rdname add_colnames
 add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE, ...) {
+  assert_that(is.string(colname))
   ht <- cbind(rownames(ht), ht, copy_cell_props = FALSE)
   colnames(ht)[1] <- colname
   if (! preserve_rownames) rownames(ht) <- NULL
