@@ -3,6 +3,7 @@
 
 * New `outer_borders` argument for `huxreg`. This changes default behaviour slightly.
 * New `border` argument for `add_footnote` to choose width of footnote's top border.
+* Added guard assertions to many exported functions.
 
 # huxtable 1.1.0
 
