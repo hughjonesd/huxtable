@@ -2,6 +2,9 @@
 
 # utility functions-----------------------------------------------------------------------------------------------------
 
+#' @import assertthat
+NULL
+
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
   type <- match.arg(type)
@@ -311,8 +314,9 @@ guess_knitr_output_format <- function() {
 #' ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
 #' ht
 insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
-  stopifnot(is.numeric(after))
-  stopifnot(after <= ncol(ht) && after >= 0)
+  # is.count would complain about 0
+  assert_that(is.scalar(after), is.number(after), after >= 0, after <= ncol(ht))
+
   ht1 <- NULL
   ht2 <- NULL
   if (after > 0) {
@@ -333,8 +337,9 @@ insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #'
 #' @export
 insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
-  stopifnot(is.numeric(after))
-  stopifnot(after <= nrow(ht) && after >= 0)
+  # is.count would complain about 0
+  assert_that(is.scalar(after), is.number(after), after >= 0, after <= nrow(ht))
+
   ht1 <- NULL
   ht2 <- NULL
   if (after > 0) {
@@ -392,6 +397,7 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 #' print_screen(hux_logo())
 #'
 hux_logo <- function(latex = FALSE) {
+  assert_that(is.flag(latex))
   logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
   rowspan(logo)[1, 1] <- 2
   colspan(logo)[2, 2] <- 2
