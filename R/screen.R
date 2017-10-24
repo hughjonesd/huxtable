@@ -125,11 +125,15 @@ to_screen.huxtable <- function (
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c('left', 'center', 'right')
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
-    if (ncharw(cap) < ncol(charmat)) cap <- str_pad(cap, hpos, ncol(charmat))
+    if (ncharw(cap) > max_width) cap <- strwrap(cap, max_width)
+    cap <- paste0(str_pad(cap, hpos, ncol(charmat)), collapse = '\n')
     result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
   if (colnames) {
-    result <- paste0(result, '\n\n', 'Column names: ', paste(colnames(ht), collapse = ', '), '\n')
+    colnames_text <- paste0('Column names: ', paste(colnames(ht), collapse = ', '))
+    colnames_text <- strwrap(colnames_text, max_width)
+    colnames_text <- paste0(colnames_text, collapse = '\n')
+    result <- paste0(result, '\n\n', colnames_text, '\n')
   }
 
   result

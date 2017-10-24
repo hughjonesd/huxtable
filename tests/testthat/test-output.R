@@ -52,6 +52,7 @@ test_that('to_md produces valid markdown', {
 
 test_that('to_md and to_screen keep to max_width', {
   ht <- hux(a = paste(sample(LETTERS), collapse = '...'), b = 1:2)
+
   for (mw in 2:12 * 10) {
     for (func in list(to_md, to_screen)) {
       output <- func(ht, max_width = mw)
@@ -59,6 +60,12 @@ test_that('to_md and to_screen keep to max_width', {
       expect_true(all(nchar(lines, type = 'width') <= mw))
     }
   }
+
+  caption(ht) <- 'a very very very long caption'
+  output <- to_screen(ht, max_width = 15)
+  lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
+  expect_true(all(nchar(lines, type = 'width') <= 15))
+  # we don't test to_md for captions for to_md because I don't think markdown can handle multiline captions
 })
 
 
