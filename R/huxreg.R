@@ -1,4 +1,7 @@
 
+#' @import assertthat
+NULL
+
 #' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models. Names will be used as column headings.
@@ -70,7 +73,10 @@ huxreg <- function (
       ) {
   if (! requireNamespace('broom', quietly = TRUE)) stop('huxreg requires the "broom" package. To install, type:\n',
         'install.packages("broom")')
-  if (! missing(bold_signif)) stopifnot(is.numeric(bold_signif))
+  if (! missing(bold_signif)) assert_that(is.number(bold_signif))
+  if (! missing(ci_level)) assert_that(is.number(ci_level))
+  assert_that(is.numeric(stars))
+  assert_that(is.string(pad_decimal))
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
