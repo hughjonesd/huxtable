@@ -4,6 +4,7 @@
 * New `outer_borders` argument for `huxreg`. This changes default behaviour slightly.
 * New `border` argument for `add_footnote` to choose width of footnote's top border.
 * Added guard assertions to many exported functions.
+* Bugfix: captions and colnames are wrapped in to_screen to respect max_width.
 
 # huxtable 1.1.0
 
