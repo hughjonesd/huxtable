@@ -1,4 +1,6 @@
 
+#' @import assertthat
+NULL
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
@@ -70,12 +72,12 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     function(ht, value) UseMethod(.(setter))
   ))
 
-  check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
+  check_fun <- if (! missing(check_fun)) bquote(assert_that(.(check_fun)(value)))
   check_dims <- switch(attr_type,
     table = quote(stopifnot(length(value) == 1))
   )
   check_values <- if (! missing(check_values)) bquote(
-    stopifnot(all(na.omit(value) %in% .(check_values)))
+    assert_that(all(na.omit(value) %in% .(check_values)))
   )
   extra_code <- if (! missing(extra_code)) substitute(extra_code)
   funs[[paste0(setter, '.huxtable')]] <- eval(bquote(
