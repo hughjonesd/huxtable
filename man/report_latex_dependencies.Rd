@@ -7,9 +7,9 @@
 report_latex_dependencies(quiet = FALSE, as_string = FALSE)
 }
 \arguments{
-\item{quiet}{Suppress printing.}
+\item{quiet}{Logical: suppress printing.}
 
-\item{as_string}{Return dependencies as a string.}
+\item{as_string}{Logical: return dependencies as a string.}
 }
 \value{
 If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;

@@ -1,5 +1,9 @@
 
 
+#' @import assertthat
+NULL
+
+
 default_table_width_unit <- '\\textwidth'
 
 
@@ -30,6 +34,7 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 #' @export
 #' @rdname to_latex
 to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
+  assert_that(is.flag(tabular_only))
   res <- build_tabular(ht)
   if (tabular_only) return(res)
 
@@ -82,8 +87,8 @@ huxtable_latex_dependencies <- list(
 #'
 #' Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
 #'
-#' @param quiet Suppress printing.
-#' @param as_string Return dependencies as a string.
+#' @param quiet Logical: suppress printing.
+#' @param as_string Logical: return dependencies as a string.
 #'
 #' @return If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;
 #'   otherwise a list of rmarkdown::latex_dependency objects, invisibly.
@@ -93,6 +98,8 @@ huxtable_latex_dependencies <- list(
 #' report_latex_dependencies()
 #'
 report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
+  assert_that(is.flag(quiet), is.flag(as_string))
+
   report <- sapply(huxtable_latex_dependencies, function(ld) {
     package_str <- '\\usepackage'
     if (! is.null(ld$options)) {
