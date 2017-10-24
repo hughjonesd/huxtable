@@ -1,4 +1,6 @@
 
+#' @import assertthat
+NULL
 
 
 #' Return every n row or column numbers
@@ -30,10 +32,8 @@
 #' align(ht)
 #'
 every <- function(n = 1, from = n) {
-  stopifnot(is.numeric(n))
-  stopifnot(n >= 1)
-  stopifnot(is.numeric(from))
-  stopifnot(from >= 1)
+  assert_that(is.count(n), is.count(from))
+
   return(
     function(ht, dimension) {
       ndim <- dim(ht)[dimension]
@@ -75,8 +75,8 @@ odds  <- every(2, 1)
 #' final(3)(ht, 1) # last 3 rows
 #' final(3)(ht, 2) # last 3 columns
 final <- function(n = 1) {
-  stopifnot(is.numeric(n))
-  stopifnot(n >= 1)
+  assert_that(is.count(n))
+
   return(
     function(ht, dimension) {
       ndim <- dim(ht)[dimension]
