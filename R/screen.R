@@ -1,4 +1,8 @@
 
+
+#' @import assertthat
+NULL
+
 #' @export
 #' @rdname to_screen
 print_screen <- function(ht, ...) cat(to_screen(ht, ...))
@@ -36,11 +40,13 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 #' @rdname to_screen
 to_screen.huxtable <- function (ht, min_width = ceiling(getOption('width') / 6), max_width = Inf,
       compact = TRUE, colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
+  assert_that(is.number(min_width), is.number(max_width), is.flag(compact), is.flag(colnames), is.flag(color))
   if (color && ! requireNamespace('crayon', quietly = TRUE)) {
     warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon")`.
       To avoid seeing this message in future, set `options(huxtable.color_screen = FALSE)`.')
     color <- FALSE
   }
+
   charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
         min_width = min_width, max_width = max_width, color = color)
   charmat <- charmat_data$charmat
@@ -154,7 +160,8 @@ to_md <- function(ht, ...) UseMethod('to_md')
 
 #' @export
 #' @rdname to_md
-to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4, max_width = 80,...) {
+to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4, max_width = 80, ...) {
+  assert_that(is.flag(header), is.number(min_width), is.number(max_width))
   if (any(colspan(ht) > 1 | rowspan(ht) > 1)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
   align <- align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
