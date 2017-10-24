@@ -75,7 +75,7 @@ huxreg <- function (
         'install.packages("broom")')
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
-  assert_that(is.numeric(stars))
+  assert_that(is.null(stars) || is.numeric(stars))
   assert_that(is.string(pad_decimal))
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
