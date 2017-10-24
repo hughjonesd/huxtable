@@ -70,6 +70,7 @@ huxreg <- function (
       ) {
   if (! requireNamespace('broom', quietly = TRUE)) stop('huxreg requires the "broom" package. To install, type:\n',
         'install.packages("broom")')
+  if (! missing(bold_signif)) stopifnot(is.numeric(bold_signif))
   models <- list(...)
   if (inherits(models[[1]], 'list')) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
