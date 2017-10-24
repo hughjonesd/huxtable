@@ -38,12 +38,19 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 #' @export
 #' @rdname to_screen
-to_screen.huxtable <- function (ht, min_width = ceiling(getOption('width') / 6), max_width = Inf,
-      compact = TRUE, colnames = TRUE, color = getOption('huxtable.color_screen', default = TRUE), ...) {
+to_screen.huxtable <- function (
+        ht,
+        min_width = ceiling(getOption('width') / 6),
+        max_width = Inf,
+        compact   = TRUE,
+        colnames  = TRUE,
+        color     = getOption('huxtable.color_screen', default = TRUE),
+        ...
+      ) {
   assert_that(is.number(min_width), is.number(max_width), is.flag(compact), is.flag(colnames), is.flag(color))
   if (color && ! requireNamespace('crayon', quietly = TRUE)) {
-    warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon")`.
-      To avoid seeing this message in future, set `options(huxtable.color_screen = FALSE)`.')
+    warning('Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages("crayon")`.',
+          'To avoid seeing this message in future, set `options(huxtable.color_screen = FALSE)`.')
     color <- FALSE
   }
 
@@ -118,7 +125,7 @@ to_screen.huxtable <- function (ht, min_width = ceiling(getOption('width') / 6),
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c('left', 'center', 'right')
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
-    cap <- str_pad(cap, hpos, ncol(charmat))
+    if (ncharw(cap) < ncol(charmat)) cap <- str_pad(cap, hpos, ncol(charmat))
     result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
   if (colnames) {

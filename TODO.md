@@ -3,7 +3,6 @@
 BUGS
 ====
 
-* captions shortened in to_screen
 * nowrap cells
   - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
   - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
