@@ -26,7 +26,7 @@ NULL
 
 
 #' @importFrom stats na.omit setNames
-#' @import assert_that
+#' @import assertthat
 NULL
 
 
