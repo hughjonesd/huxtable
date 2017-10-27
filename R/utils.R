@@ -291,7 +291,7 @@ guess_knitr_output_format <- function() {
       if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
     }
   }
-  if (of == 'pdf') of <- 'latex'
+  if (of %in% c('beamer', 'pdf')) of <- 'latex'
   of
 }
 
