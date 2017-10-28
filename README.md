@@ -25,7 +25,7 @@
 
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable) [![Travis-CI Build Status](https://travis-ci.org/hughjonesd/huxtable.svg?branch=master)](https://travis-ci.org/hughjonesd/huxtable) [![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable) [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
-Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface. Huxtable includes a `huxreg()` function for quick creation of regression tables.
+Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more, with a simpler interface. Huxtable includes a `huxreg()` function for quick creation of regression tables, and allows output to Microsoft Word or Powerpoint using the [`officer` package](https://cran.r-project.org/package=officer).
 
 Installing
 ==========
