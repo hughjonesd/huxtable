@@ -5,7 +5,8 @@ Version: 1.1.0.9000
 Author: David Hugh-Jones
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates HTML and LaTeX tables. Provides similar 
-  functionality to 'xtable', but does more, with a simpler interface.
+  functionality to 'xtable', but does more, with a simpler interface. Includes
+  a 'huxreg' function for quick creation of regression tables.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

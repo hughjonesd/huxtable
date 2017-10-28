@@ -28,7 +28,8 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
 Huxtable is an R package for creating HTML and LaTeX tables. It provides similar 
-functionality to xtable, but does more, with a simpler interface. 
+functionality to xtable, but does more, with a simpler interface. Huxtable includes
+a `huxreg()` function for quick creation of regression tables.
 
 # Installing
 
