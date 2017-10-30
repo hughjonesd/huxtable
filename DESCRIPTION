@@ -3,6 +3,7 @@ Type: Package
 Title: Simply Create LaTeX and HTML Tables
 Version: 1.1.0.9000
 Author: David Hugh-Jones
+Date: 2017-10-30
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates HTML and LaTeX tables. Provides similar 
   functionality to 'xtable', but does more, with a simpler interface. Includes
@@ -17,3 +18,8 @@ URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports: knitr, rmarkdown, htmltools, lazyeval, utils, dplyr, tibble, glue, assertthat
 VignetteBuilder: knitr
+Authors@R: 
+    person(given = "David",
+           family = "Hugh-Jones",
+           role = "aut",
+           email = "davidhughjones@gmail.com")
