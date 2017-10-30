@@ -5,10 +5,18 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: /index.html
-    - text: "News"
-      href: "news/"
+    - text: Articles
+      menu:
+      - text: Introduction to Huxtable
+        href: /huxtable.html
+      - text: Design Principles, Comparisons and Limitations
+        href: /design-principles.html
+      - text: Regression Tables with huxreg
+        href: /huxreg.html
     - text: "Reference"
-      href: "reference/"
+      href: reference/
+    - text: "News"
+      href: news/index.html
 
 reference:
   - title: "Package information"
