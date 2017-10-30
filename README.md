@@ -46,4 +46,4 @@ devtools::install_github('hughjonesd/huxtable')
 Learning more
 =============
 
-Check out [the website](http://hughjonesd.github.io/huxtable), or read the vignette in [HTML](http://hughjonesd.github.io/huxtable/huxtable.html) or [PDF](http://hughjonesd.github.io/huxtable/huxtable.pdf).
+Check out [the website](https://hughjonesd.github.io/huxtable), read the [documentation](https://hughjonesd.github.io/huxtable/reference/index.html) or read the vignette in [HTML](https://hughjonesd.github.io/huxtable/huxtable.html) or [PDF](https://hughjonesd.github.io/huxtable/huxtable.pdf).
