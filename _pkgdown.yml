@@ -23,10 +23,9 @@ reference:
       - add_colnames
       - add_footnote
       - add_rownames
-      - as_huxtable
       - cbind.huxtable
-      - insert_column
       - huxtable
+      - insert_column
       - mutate
       - t.huxtable
   - title: "Size and position"
@@ -72,8 +71,8 @@ reference:
     contents:
     - align
     - background_color
-    - escape_contents
     - colspan
+    - escape_contents
     - rotation
     - rowspan
     - valign
