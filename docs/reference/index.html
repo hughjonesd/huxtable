@@ -96,16 +96,60 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-package-information" class="hasAnchor"><a href="#section-package-information" class="anchor"></a>Package information</h2>
+            <p class="section-desc"><p>Basic information about the package</p></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
+            <p><code><a href="huxtable-package.html">huxtable-package</a></code> </p>
+          </td>
+          <td><p>Huxtable: simply create LaTeX and HTML tables</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-creating-and-manipulating-huxtables" class="hasAnchor"><a href="#section-creating-and-manipulating-huxtables" class="anchor"></a>Creating and manipulating huxtables</h2>
+            <p class="section-desc"><p>Functions to create, subset and work with huxtables.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="huxtable.html">huxtable</a></code> <code><a href="huxtable.html">hux</a></code> <code><a href="huxtable.html">as_huxtable</a></code> <code><a href="huxtable.html">as_hux</a></code> <code><a href="huxtable.html">is_huxtable</a></code> <code><a href="huxtable.html">is_hux</a></code> </p>
+          </td>
+          <td><p>Create a huxtable</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="cbind.huxtable.html">cbind</a></code> <code><a href="cbind.huxtable.html">rbind</a></code> </p>
+          </td>
+          <td><p>Combine rows or columns</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="extract-methods.html">[.huxtable</a></code> </p>
+          </td>
+          <td><p>Subset a huxtable</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="t.huxtable.html">t</a></code> </p>
+          </td>
+          <td><p>Transpose a huxtable</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="add_colnames.html">add_colnames</a></code> <code><a href="add_colnames.html">add_rownames</a></code> </p>
           </td>
           <td><p>Add column or row names</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="insert_column.html">insert_column</a></code> <code><a href="insert_column.html">insert_row</a></code> </p>
+          </td>
+          <td><p>Insert a row or column</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -115,15 +159,29 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="align.html">align</a></code> <code><a href="align.html">align<-</a></code> <code><a href="align.html">set_align</a></code> </p>
+            <p><code><a href="filter.html">filter</a></code> </p>
           </td>
-          <td><p>Alignment</p></td>
+          <td><p>Pointless documentation</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="as_flextable.html">as_FlexTable</a></code> <code><a href="as_flextable.html">as_flextable</a></code> </p>
+            <p><code><a href="dplyr-verbs.html">mutate</a></code> </p>
           </td>
-          <td><p>Convert a huxtable for Word/Powerpoint</p></td>
+          <td><p>Dplyr verbs for huxtable</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-display-properties" class="hasAnchor"><a href="#section-display-properties" class="anchor"></a>Display properties</h2>
+            <p class="section-desc"><p>Functions to change the display properties of huxtable tables, rows, columns and cells.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="align.html">align</a></code> <code><a href="align.html">align<-</a></code> <code><a href="align.html">set_align</a></code> </p>
+          </td>
+          <td><p>Alignment</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -151,12 +209,6 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="cbind.huxtable.html">cbind</a></code> <code><a href="cbind.huxtable.html">rbind</a></code> </p>
-          </td>
-          <td><p>Combine rows or columns</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="col_width.html">col_width</a></code> <code><a href="col_width.html">col_width<-</a></code> <code><a href="col_width.html">set_col_width</a></code> </p>
           </td>
           <td><p>Column widths</p></td>
@@ -169,39 +221,9 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="dplyr-verbs.html">mutate</a></code> </p>
-          </td>
-          <td><p>Dplyr verbs for huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="escape_contents.html">escape_contents</a></code> <code><a href="escape_contents.html">escape_contents<-</a></code> <code><a href="escape_contents.html">set_escape_contents</a></code> </p>
           </td>
           <td><p>Escape cell contents</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="every.html">every</a></code> <code><a href="every.html">everywhere</a></code> <code><a href="every.html">evens</a></code> <code><a href="every.html">odds</a></code> </p>
-          </td>
-          <td><p>Return every n row or column numbers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="extract-methods.html">[.huxtable</a></code> </p>
-          </td>
-          <td><p>Subset a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="filter.html">filter</a></code> </p>
-          </td>
-          <td><p>Pointless documentation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="final.html">final</a></code> </p>
-          </td>
-          <td><p>Return the last n rows or columns</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -217,57 +239,9 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="get_default_properties.html">get_default_properties</a></code> </p>
-          </td>
-          <td><p>Get default huxtable properties</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="guess_knitr_output_format.html">guess_knitr_output_format</a></code> </p>
-          </td>
-          <td><p>Guess knitr output format</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="height.html">height</a></code> <code><a href="height.html">height<-</a></code> <code><a href="height.html">set_height</a></code> </p>
           </td>
           <td><p>Table height</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hux_logo.html">hux_logo</a></code> </p>
-          </td>
-          <td><p>Huxtable logo</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxreg.html">huxreg</a></code> </p>
-          </td>
-          <td><p>Create a huxtable to display model output</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxtable-package.html">huxtable-package</a></code> </p>
-          </td>
-          <td><p>Huxtable: simply create LaTeX and HTML tables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxtable.html">huxtable</a></code> <code><a href="huxtable.html">hux</a></code> <code><a href="huxtable.html">as_huxtable</a></code> <code><a href="huxtable.html">as_hux</a></code> <code><a href="huxtable.html">is_huxtable</a></code> <code><a href="huxtable.html">is_hux</a></code> </p>
-          </td>
-          <td><p>Create a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="insert_column.html">insert_column</a></code> <code><a href="insert_column.html">insert_row</a></code> </p>
-          </td>
-          <td><p>Insert a row or column</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is_a_number.html">is_a_number</a></code> </p>
-          </td>
-          <td><p>Does an object look like a number?</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -325,18 +299,6 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="print.huxtable.html">print</a></code> </p>
-          </td>
-          <td><p>Default print method for huxtables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="report_latex_dependencies.html">report_latex_dependencies</a></code> </p>
-          </td>
-          <td><p>Report LaTeX dependencies</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="rotation.html">rotation</a></code> <code><a href="rotation.html">rotation<-</a></code> <code><a href="rotation.html">set_rotation</a></code> </p>
           </td>
           <td><p>Text rotation</p></td>
@@ -352,18 +314,6 @@
             <p><code><a href="rowspan.html">rowspan</a></code> <code><a href="rowspan.html">rowspan<-</a></code> <code><a href="rowspan.html">set_rowspan</a></code> </p>
           </td>
           <td><p>Row span</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rowspecs.html">rowspecs</a></code> </p>
-          </td>
-          <td><p>Row and column specifications</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sanitize.html">sanitize</a></code> </p>
-          </td>
-          <td><p>Sanitize table elements</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -397,12 +347,6 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="t.huxtable.html">t</a></code> </p>
-          </td>
-          <td><p>Transpose a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="tabular_environment.html">tabular_environment</a></code> <code><a href="tabular_environment.html">tabular_environment<-</a></code> <code><a href="tabular_environment.html">set_tabular_environment</a></code> </p>
           </td>
           <td><p>Tabular environment</p></td>
@@ -415,10 +359,36 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="themes.html">theme_basic</a></code> <code><a href="themes.html">theme_striped</a></code> <code><a href="themes.html">theme_article</a></code> </p>
+            <p><code><a href="valign.html">valign</a></code> <code><a href="valign.html">valign<-</a></code> <code><a href="valign.html">set_valign</a></code> </p>
           </td>
-          <td><p>Theme a huxtable</p></td>
+          <td><p>Vertical alignment</p></td>
         </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="width.html">width</a></code> <code><a href="width.html">width<-</a></code> <code><a href="width.html">set_width</a></code> </p>
+          </td>
+          <td><p>Table width</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="wrap.html">wrap</a></code> <code><a href="wrap.html">wrap<-</a></code> <code><a href="wrap.html">set_wrap</a></code> </p>
+          </td>
+          <td><p>Text wrapping</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_default_properties.html">get_default_properties</a></code> </p>
+          </td>
+          <td><p>Get default huxtable properties</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-output" class="hasAnchor"><a href="#section-output" class="anchor"></a>Output</h2>
+            <p class="section-desc"><p>Ways to output huxtables to LaTeX, HTML, Word, markdown or on-screen.</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="to_html.html">print_html</a></code> <code><a href="to_html.html">to_html</a></code> <code><a href="to_html.html">print_notebook</a></code> </p>
@@ -445,27 +415,105 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="valign.html">valign</a></code> <code><a href="valign.html">valign<-</a></code> <code><a href="valign.html">set_valign</a></code> </p>
+            <p><code><a href="print.huxtable.html">print</a></code> </p>
           </td>
-          <td><p>Vertical alignment</p></td>
+          <td><p>Default print method for huxtables</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="as_flextable.html">as_FlexTable</a></code> <code><a href="as_flextable.html">as_flextable</a></code> </p>
+          </td>
+          <td><p>Convert a huxtable for Word/Powerpoint</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="guess_knitr_output_format.html">guess_knitr_output_format</a></code> </p>
+          </td>
+          <td><p>Guess knitr output format</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="report_latex_dependencies.html">report_latex_dependencies</a></code> </p>
+          </td>
+          <td><p>Report LaTeX dependencies</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-themes" class="hasAnchor"><a href="#section-themes" class="anchor"></a>Themes</h2>
+            <p class="section-desc"><p>Quick ways to set multiple display properties for huxtables</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="themes.html">theme_basic</a></code> <code><a href="themes.html">theme_striped</a></code> <code><a href="themes.html">theme_article</a></code> </p>
+          </td>
+          <td><p>Theme a huxtable</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-row-specs" class="hasAnchor"><a href="#section-row-specs" class="anchor"></a>Row specs</h2>
+            <p class="section-desc"><p>Ways to specify rows and columns in <code>set_</code> functions</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="rowspecs.html">rowspecs</a></code> </p>
+          </td>
+          <td><p>Row and column specifications</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="every.html">every</a></code> <code><a href="every.html">everywhere</a></code> <code><a href="every.html">evens</a></code> <code><a href="every.html">odds</a></code> </p>
+          </td>
+          <td><p>Return every n row or column numbers</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="final.html">final</a></code> </p>
+          </td>
+          <td><p>Return the last n rows or columns</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="where.html">where</a></code> </p>
           </td>
           <td><p>Return array indices where expression is true</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
+            <p class="section-desc"><p>Other functions</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="huxreg.html">huxreg</a></code> </p>
+          </td>
+          <td><p>Create a huxtable to display model output</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="width.html">width</a></code> <code><a href="width.html">width<-</a></code> <code><a href="width.html">set_width</a></code> </p>
+            <p><code><a href="hux_logo.html">hux_logo</a></code> </p>
           </td>
-          <td><p>Table width</p></td>
+          <td><p>Huxtable logo</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="wrap.html">wrap</a></code> <code><a href="wrap.html">wrap<-</a></code> <code><a href="wrap.html">set_wrap</a></code> </p>
+            <p><code><a href="is_a_number.html">is_a_number</a></code> </p>
           </td>
-          <td><p>Text wrapping</p></td>
+          <td><p>Does an object look like a number?</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sanitize.html">sanitize</a></code> </p>
+          </td>
+          <td><p>Sanitize table elements</p></td>
         </tr>
       </tbody>
       </table>
@@ -475,7 +523,13 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-package-information">Package information</a></li>
+      <li><a href="#section-creating-and-manipulating-huxtables">Creating and manipulating huxtables</a></li>
+      <li><a href="#section-display-properties">Display properties</a></li>
+      <li><a href="#section-output">Output</a></li>
+      <li><a href="#section-themes">Themes</a></li>
+      <li><a href="#section-row-specs">Row specs</a></li>
+      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
     </ul>
   </div>
 </div>

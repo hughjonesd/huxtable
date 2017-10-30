@@ -9,3 +9,62 @@ navbar:
       href: "news/"
     - text: "Reference"
       href: "reference/"
+
+reference:
+  - title: "Package information"
+    desc: Basic information about the package
+    contents:
+      - huxtable-package
+  - title: "Creating and manipulating huxtables"
+    desc: >
+      Functions to create, subset and work with huxtables.
+    contents:
+      - huxtable
+      - cbind.huxtable
+      - "[.huxtable"
+      - as_huxtable
+      - t.huxtable
+      - add_colnames
+      - add_rownames
+      - insert_column
+      - add_footnote
+      - filter
+      - mutate
+  - title: "Display properties"
+    desc: >
+      Functions to change the display properties of huxtable tables, rows,
+      columns and cells.
+    contents:
+      - starts_with("set_")
+      - get_default_properties
+  - title: "Output"
+    desc: >
+      Ways to output huxtables to LaTeX, HTML, Word, markdown or on-screen.
+    contents:
+      - starts_with("to_")
+      - starts_with("print_")
+      - print.huxtable
+      - as_FlexTable
+      - guess_knitr_output_format
+      - report_latex_dependencies
+  - title: "Themes"
+    desc: Quick ways to set multiple display properties for huxtables
+    contents:
+      - starts_with("theme_")
+  - title: "Row specs"
+    desc: Ways to specify rows and columns in `set_` functions
+    contents:
+      - rowspecs
+      - every
+      - evens
+      - final
+      - odds
+      - everywhere
+      - where
+  - title: "Miscellaneous"
+    desc: Other functions
+    contents:
+      - huxreg
+      - hux_logo
+      - is_a_number
+      - sanitize
