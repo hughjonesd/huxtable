@@ -21,5 +21,5 @@ VignetteBuilder: knitr
 Authors@R: 
     person(given = "David",
            family = "Hugh-Jones",
-           role = "aut",
+           role = c("aut", "cre"),
            email = "davidhughjones@gmail.com")
