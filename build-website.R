@@ -9,4 +9,7 @@ for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
 }
 
 knitr::knit("docs/index.Rhtml", "docs/index.html")
+pkgdown::build_reference()
+pkgdown::build_reference_index()
+pkgdown::build_news()
 message("Now commit and push to github")
