@@ -4,15 +4,15 @@ navbar:
   left:
     - text: "Home"
       icon: fa-home
-      href: /index.html
+      href: index.html
     - text: Articles
       menu:
       - text: Introduction to Huxtable
-        href: /huxtable.html
+        href: huxtable.html
       - text: Design Principles, Comparisons and Limitations
-        href: /design-principles.html
+        href: design-principles.html
       - text: Regression Tables with huxreg
-        href: /huxreg.html
+        href: huxreg.html
     - text: "Reference"
       href: reference/
     - text: "News"
