@@ -72,8 +72,8 @@ reference:
     contents:
     - align
     - background_color
-    - escape_contents
     - colspan
+    - escape_contents
     - rotation
     - rowspan
     - valign
