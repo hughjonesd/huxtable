@@ -30,13 +30,61 @@ reference:
       - add_footnote
       - filter
       - mutate
-  - title: "Display properties"
-    desc: >
-      Functions to change the display properties of huxtable tables, rows,
-      columns and cells.
+  - title: "Table-level properties"
+    desc: Table-level properties of huxtables
     contents:
-      - starts_with("set_")
-      - get_default_properties
+      - caption
+      - latex_float
+      - tabular_environment
+      - label
+  - title: "Size and position"
+    desc: Size and position properties of huxtables.
+    contents:
+      - width
+      - height
+      - col_width
+      - row_height
+      - position
+      - caption_pos
+  - title: "Text properties"
+    desc: Functions to change the properties of text in table cells.
+    contents:
+      - font
+      - italic
+      - bold
+      - font_size
+      - text_color
+      - number_format
+      - pad_decimal
+      - na_string
+  - title: "Borders and padding"
+    desc: Functions to alter borders, border colors and cell padding.
+    contents:
+      - starts_with("left_")
+      - starts_with("right_")
+      - starts_with("bottom_")
+      - starts_with("top_")
+      - set_outer_borders
+      - set_all_borders
+      - set_all_border_colors
+      - set_all_padding
+  - title: "Cell properties"
+    desc: Other cell-level properties.
+    contents:
+    - rotation
+    - align
+    - valign
+    - rowspan
+    - colspan
+    - escape_contents
+    - background_color
+    - wrap
+  - title: "Property manipulation"
+    desc: Generic ways to manipulate huxtable properties.
+    contents:
+    - set_cell_properties
+    - set_default_properties
+    - get_default_properties
   - title: "Output"
     desc: >
       Ways to output huxtables to LaTeX, HTML, Word, markdown or on-screen.
