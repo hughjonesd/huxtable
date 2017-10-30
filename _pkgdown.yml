@@ -1,0 +1,11 @@
+navbar:
+  title: "huxtable"
+  type: inverse
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: /index.html
+    - text: "News"
+      href: "news/"
+    - text: "Reference"
+      href: "reference/"

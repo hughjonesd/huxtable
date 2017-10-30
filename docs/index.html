@@ -295,7 +295,15 @@ functionality to xtable, but more, with a simpler interface. Here are some quick
 
 <div class="example" id="ex-pipe">
 <div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(magrittr)</span>
-<span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'magrittr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:testthat':
+## 
+##     equals, is_less_than, not
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
         <span class="hl kwc">Employee</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'John Smith'</span><span class="hl std">,</span> <span class="hl str">'Jane Doe'</span><span class="hl std">,</span> <span class="hl str">'David Hugh-Jones'</span><span class="hl std">),</span>
         <span class="hl kwc">Salary</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">40000</span><span class="hl std">),</span>
         <span class="hl kwc">add_colnames</span> <span class="hl std">=</span> <span class="hl num">TRUE</span>
