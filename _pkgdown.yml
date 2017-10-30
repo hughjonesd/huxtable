@@ -17,102 +17,101 @@ reference:
       - huxtable-package
   - title: "Creating and manipulating huxtables"
     desc: >
-      Functions to create, subset and work with huxtables.
+      Functions to create, subset and work with huxtables
     contents:
-      - huxtable
-      - cbind.huxtable
       - "[.huxtable"
-      - as_huxtable
-      - t.huxtable
       - add_colnames
-      - add_rownames
-      - insert_column
       - add_footnote
-      - filter
+      - add_rownames
+      - as_huxtable
+      - cbind.huxtable
+      - insert_column
+      - huxtable
       - mutate
+      - t.huxtable
+  - title: "Size and position"
+    desc: Size and position properties of huxtables
+    contents:
+      - col_width
+      - height
+      - position
+      - row_height
+      - width
   - title: "Table-level properties"
-    desc: Table-level properties of huxtables
+    desc: Other table-level properties of huxtables
     contents:
       - caption
+      - caption_pos
+      - label
       - latex_float
       - tabular_environment
-      - label
-  - title: "Size and position"
-    desc: Size and position properties of huxtables.
-    contents:
-      - width
-      - height
-      - col_width
-      - row_height
-      - position
-      - caption_pos
   - title: "Text properties"
-    desc: Functions to change the properties of text in table cells.
+    desc: Functions to change the properties of text in table cells
     contents:
-      - font
-      - italic
       - bold
+      - font
       - font_size
-      - text_color
+      - italic
       - number_format
-      - pad_decimal
       - na_string
+      - pad_decimal
+      - text_color
   - title: "Borders and padding"
-    desc: Functions to alter borders, border colors and cell padding.
+    desc: Functions to alter borders, border colors and cell padding
     contents:
       - starts_with("left_")
       - starts_with("right_")
       - starts_with("bottom_")
       - starts_with("top_")
-      - set_outer_borders
       - set_all_borders
       - set_all_border_colors
       - set_all_padding
+      - set_outer_borders
   - title: "Cell properties"
-    desc: Other cell-level properties.
+    desc: Other cell-level properties
     contents:
-    - rotation
     - align
-    - valign
-    - rowspan
-    - colspan
-    - escape_contents
     - background_color
+    - escape_contents
+    - colspan
+    - rotation
+    - rowspan
+    - valign
     - wrap
   - title: "Property manipulation"
-    desc: Generic ways to manipulate huxtable properties.
+    desc: Generic ways to manipulate huxtable properties
     contents:
+    - get_default_properties
     - set_cell_properties
     - set_default_properties
-    - get_default_properties
   - title: "Output"
     desc: >
-      Ways to output huxtables to LaTeX, HTML, Word, markdown or on-screen.
+      Functions to outut huxtables to LaTeX, HTML, Word, markdown or on-screen
     contents:
-      - starts_with("to_")
-      - starts_with("print_")
-      - print.huxtable
       - as_FlexTable
       - guess_knitr_output_format
+      - starts_with("print_")
+      - print.huxtable
       - report_latex_dependencies
+      - starts_with("to_")
   - title: "Themes"
-    desc: Quick ways to set multiple display properties for huxtables
+    desc: Quick ways to theme a huxtable
     contents:
       - starts_with("theme_")
   - title: "Row specs"
     desc: Ways to specify rows and columns in `set_` functions
     contents:
-      - rowspecs
-      - every
       - evens
+      - every
+      - everywhere
       - final
       - odds
-      - everywhere
+      - rowspecs
       - where
   - title: "Miscellaneous"
     desc: Other functions
     contents:
-      - huxreg
       - hux_logo
+      - huxreg
       - is_a_number
       - sanitize
