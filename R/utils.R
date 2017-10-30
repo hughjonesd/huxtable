@@ -279,6 +279,13 @@ print.huxtable <- function(x, ...) {
 #' guess_knitr_output_format()
 #' }
 guess_knitr_output_format <- function() {
+  # this is on hold until I'm sure I want 'markdown' to be interpreted as HTML
+  # if (utils::packageVersion('knitr') >= '1.17.8') {
+  #   # delegate to knitr
+  #   if (knitr::is_latex_output()) return('latex')
+  #   if (knitr::is_html_output()) return('html')
+  #   return('')
+  # }
   of <- knitr::opts_knit$get('out.format')
   if (is.null(of) || of == 'markdown') {
     of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
