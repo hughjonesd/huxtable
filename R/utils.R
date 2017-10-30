@@ -287,11 +287,14 @@ guess_knitr_output_format <- function() {
       if (is.null(knit_in)) return('')
       of <- rmarkdown::default_output_format(knit_in)
       of <- of$name
-      of <- sub('_.*', '', of)
-      if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
     }
   }
+  if (of == 'tufte_handout') of <- 'latex'
+  if (of == 'tufte_html') of <- 'html'
+  of <- sub('_.*', '', of)
+  if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
   if (of %in% c('beamer', 'pdf')) of <- 'latex'
+
   of
 }
 
