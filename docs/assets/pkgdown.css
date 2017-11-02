@@ -20,26 +20,12 @@ body > .container {
   padding-top: 60px;
   min-height: calc(100vh);
   flex-direction: column;
+  max-width: 1000px;
 }
 
 body > .container .row {
   flex: 1;
 }
-
-@media (min-width: 768px) {
-.my-custom-container{
-    width:600px;
-}}
-
-@media (min-width: 992px) {
-.my-custom-container{
-    width:720px;
-}}
-
-@media (min-width: 1200px) {
-.my-custom-container{
-    width:1000px;
-}}
 
 footer {
   margin-top: 45px;
