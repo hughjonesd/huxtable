@@ -125,4 +125,6 @@ reference:
 
 template:
   path: docs/pkgdown-templates
-  
+  assets: docs/assets
+  default_assets: false
+
