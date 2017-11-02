@@ -122,3 +122,7 @@ reference:
       - huxreg
       - is_a_number
       - sanitize
+
+template:
+  path: docs/pkgdown-templates
+  

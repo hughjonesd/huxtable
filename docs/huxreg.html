@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2017-10-22" />
+<meta name="date" content="2017-11-02" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2017-10-22</em></h4>
+<h4 class="date"><em>2017-11-02</em></h4>
 
 </div>
 
@@ -567,8 +567,9 @@ diamond_regs</code></pre>
 </table>
 
 <p>Of course, we aren’t limited to just changing names. We can also make our table prettier. Let’s add the “article” theme, and a vertical stripe for background colour, tweak a few details like font size, and add a caption. All of these are just standard huxtable commands.</p>
-<pre class="r"><code>suppressPackageStartupMessages(library(dplyr))
-diamond_regs                                                         %&gt;% 
+<pre class="r"><code>suppressPackageStartupMessages(library(dplyr))</code></pre>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.4.2</code></pre>
+<pre class="r"><code>diamond_regs                                                         %&gt;% 
       theme_article                                                  %&gt;% 
       set_background_color(1:nrow(diamond_regs), evens, grey(.95)) %&gt;% 
       set_font_size(final(), 1, 9)                                   %&gt;% 

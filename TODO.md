@@ -19,6 +19,10 @@ BUGS
 TODO
 ====
 
+* way to address a particular subset of a matrix, e.g.
+  - ht %>% area(1:3, 4:6) %>% set_this(TRUE) %>% set_border_color('red')
+  - presumably this returns the ht with some attribute appropriately set, analogous to groups in a tibble
+  - also this should be a separate package! 
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
   bottom line is border?
   - not sure we can change colours halfway through though
