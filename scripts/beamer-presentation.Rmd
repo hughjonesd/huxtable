@@ -1,0 +1,27 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "27/10/2017"
+output: 
+  beamer_presentation
+---
+
+```{r table1hux, echo = FALSE }
+  cat("out.format ", knitr::opts_knit$get('out.format'))
+  
+  cat("rmarkdown.pandoc.to ", knitr::opts_knit$get('rmarkdown.pandoc.to'))
+  
+      knit_in <- knitr::current_input()
+      if (! is.null(knit_in)) {
+        of <- rmarkdown::default_output_format(knit_in)
+        of <- of$name
+        cat("rmarkdown::default_output_format ", of)
+      }
+    
+
+
+library(huxtable)
+      cat(guess_knitr_output_format())
+
+
+```

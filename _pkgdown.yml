@@ -122,9 +122,3 @@ reference:
       - huxreg
       - is_a_number
       - sanitize
-
-template:
-  path: docs/pkgdown-templates
-  assets: docs/assets
-  default_assets: false
-
