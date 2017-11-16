@@ -156,7 +156,7 @@ pre.knitr {
 
 <!--begin.rcode logo, echo = FALSE, results = 'asis'
 
-suppressPackageStartupMessages(library(huxtable))
+suppressPackageStartupMessages(suppressWarnings(library(huxtable)))
 hux_logo()
 
 end.rcode-->
@@ -182,7 +182,10 @@ end.rcode-->
 
 
 <p>Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
-functionality to xtable, but more, with a simpler interface. Here are some quick examples:
+functionality to xtable, but more, with a simpler interface. Features include control over text styling,
+number format, background color, borders, padding
+and alignment. Cells can span multiple rows and/or columns. Tables can be manipulated with standard R subsetting or
+<code>dplyr</code> functions.Here are some quick examples:
 </p>
 
 <div id="example-container">
