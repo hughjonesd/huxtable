@@ -3,7 +3,7 @@ output: github_document
 ---
 
 ```{r, echo = FALSE, results = 'asis'}
-suppressPackageStartupMessages(library(huxtable))
+suppressPackageStartupMessages(suppressWarnings(library(huxtable)))
 print_html(hux_logo())
 
 ```
