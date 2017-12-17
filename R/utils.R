@@ -430,3 +430,7 @@ hux_logo <- function(latex = FALSE) {
   position(logo) <- 'center'
   logo
 }
+
+
+
+
