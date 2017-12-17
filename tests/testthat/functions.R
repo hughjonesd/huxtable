@@ -76,8 +76,7 @@ skip_without_pandoc <- function () {
 }
 
 
-skip_on_R_CMD_check <- function() {
-  if (! Sys.getenv('R_TESTS') == '') skip('Not testing, code doesn\'t play well with R CMD check')
-  if (! Sys.getenv('COVERAGE') == '') skip('Not testing, code doesn\'t play well with R CMD check')
-
+skip_on_R_CMD_check <- function () {
+  skip_if(exists('we_are_in_R_CMD_check'), 'Not testing, code doesn\'t play well with R CMD check')
+  skip_if(Sys.getenv('COVERAGE') != '', 'Not testing, code doesn\'t play well with R CMD check')
 }
