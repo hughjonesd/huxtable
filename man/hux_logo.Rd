@@ -10,7 +10,7 @@ hux_logo(latex = FALSE)
 \item{latex}{Use LaTeX names for fonts.}
 }
 \value{
-The huxtable logo
+The huxtable logo.
 }
 \description{
 Huxtable logo

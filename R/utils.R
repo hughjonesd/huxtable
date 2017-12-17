@@ -400,7 +400,7 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 #' Huxtable logo
 #'
 #' @param latex Use LaTeX names for fonts.
-#' @return The huxtable logo
+#' @return The huxtable logo.
 #' @export
 #'
 #' @examples
