@@ -242,7 +242,7 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' @templateVar attr_desc Vertical alignment
 #' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
 #' @template getset-example
-#' @templateVar attr_val 'top'
+#' @templateVar attr_val 'bottom'
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'bottom'
 #' @details
