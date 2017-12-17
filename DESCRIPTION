@@ -3,7 +3,7 @@ Type: Package
 Title: Simply Create LaTeX and HTML Tables
 Version: 1.2.0
 Author: David Hugh-Jones [aut, cre]
-Date: 2017-10-30
+Date: 2017-12-17
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates HTML and LaTeX tables. Provides similar 
   functionality to 'xtable', but does more, with a simpler interface. Includes
