@@ -432,5 +432,65 @@ hux_logo <- function(latex = FALSE) {
 }
 
 
+#' Quickly create a PDF, HTML or Word document showing one or more R objects.
+#'
+#' @param ... One or more huxtables or R objects with an \code{as_huxtable} method.
+#' @param file File path for the output.
+#' @param borders Border width for members of \code{...} that are not huxtables.
+#'
+#' @return Invisible \code{NULL}.
+#'
+#' @details Objects in \code{...} will be converted to huxtables, with borders added.
+#'
+#' @examples
+#' \dontrun{
+#' m <- matrix(1:4, 2, 2)
+#' dfr <- data.frame(a = 1:5, b = 1:5)
+#' quick_pdf(m, dfr)
+#' quick_html(m, dfr)
+#' quick_docx(m, dfr)
+#' }
+#' @name quick-output
+NULL
+
+
+#' @rdname quick-output
+#' @export
+quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
+  latex_file <- tempfile(fileext = ".tex")
+  sink(latex_file)
+  tryCatch({
+      cat('\\documentclass{article}\n')
+      report_latex_dependencies()
+      cat('\n\\begin{document}')
+      objs <- list(...)
+      lapply(objs, function (obj) {
+        if (! inherits(obj, 'huxtable')) {
+          obj <- as_huxtable(obj)
+          obj <- set_all_borders(obj, borders)
+        }
+        cat('\n\n')
+        print_latex(obj)
+        cat('\n\n')
+      })
+      cat('\n\\end{document}')
+    },
+    error = identity,
+    finally = {sink()}
+  )
+  # we do this because using tempfile on its own is fucked up by the double slash.
+  if (! file.copy(latex_file, '.', overwrite = TRUE)) stop('Could not copy tex file to current directory.')
+  latex_file <- basename(latex_file)
+  tools::texi2pdf(latex_file, clean = TRUE)
+  pdf_file <- sub('\\.tex$', '.pdf', latex_file)
+  if (! file.remove(latex_file)) warning('Could not remove intermediate TeX file "', latex_file,
+        '" from current working directory.')
+  if (! file.exists(pdf_file)) stop('Could not find pdf file output from texi2pdf in current working directory.')
+  if (! file.rename(pdf_file, file)) stop('Could not move pdf file to ', file, '. The pdf file remains at "', pdf_file,
+        '" in the current working directory.')
+
+  invisible(NULL)
+}
+
 
 
