@@ -362,17 +362,8 @@ ht
 
 ## Number format
 
-You can change how huxtable formats numbers using `number_format`. Huxtable guesses whether your cell is a number
-based on its contents, not on the column type. Set `number_format` to a number of decimal places (for more advanced
-options, see the help files).
-
-```{r}
-number_format(car_ht) <- 0
-car_ht[1:5,]
-```
-
-You can also align columns by decimal places. If you want to do this for a cell, just set the `pad_decimal` property
-to '.' (or whatever you use for a decimal point). 
+You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number of decimal places (for more advanced options, see the help files). This
+affects all numbers, or number-like substrings within your cells.
 
 ```{r}
 pointy_ht <- hux(c('Do not pad this.', 11.003, 300, 12.02, '12.1 **'))
@@ -380,7 +371,14 @@ pointy_ht <- set_all_borders(pointy_ht, 1)
 width(pointy_ht) <- .2
 
 number_format(pointy_ht) <- 3
-pad_decimal(pointy_ht)[2:5] <- '.'
+pointy_ht
+```
+
+You can also align columns by decimal places. If you want to do this for a cell, just set the `pad_decimal` property
+to '.' (or whatever you use for a decimal point). 
+
+```{r}
+pad_decimal(pointy_ht)[2:5, ] <- '.' # not the first row
 align(pointy_ht) <- 'right'
 pointy_ht
 ```
