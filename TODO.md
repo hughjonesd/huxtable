@@ -19,7 +19,6 @@ BUGS
 TODO
 ====
 
-* `quick_pdf/html/word` functions to print a (hux)table to a pdf/HTML/word document
 * way to address a particular subset of a matrix, e.g.
   - ht %>% area(1:3, 4:6) %>% set_this(TRUE) %>% set_border_color('red')
   - presumably this returns the ht with some attribute appropriately set, analogous to groups in a tibble
