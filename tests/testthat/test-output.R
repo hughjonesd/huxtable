@@ -124,3 +124,23 @@ test_that('set_print_method() works', {
   options(huxtable.print = 'print_html')
   expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
 })
+
+
+test_that('Quick output functions work', {
+  ht <- hux(a = 1:2, b = 1:2)
+  m <- matrix(1:4, 2, 2)
+  dfr <- data.frame(a = 1:5, b = 1:5)
+
+  tf <- tempfile()
+  expect_error(quick_pdf(m, dfr, ht, file = tf), regexp = NA)
+  expect_true(file.exists(tf))
+
+  tf <- tempfile()
+  expect_error(quick_html(m, dfr, ht, file = tf), regexp = NA)
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = '.docx')
+  expect_error(quick_docx(m, dfr, ht, file = tf), regexp = NA)
+  expect_true(file.exists(tf))
+
+})
