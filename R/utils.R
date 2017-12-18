@@ -432,7 +432,7 @@ hux_logo <- function(latex = FALSE) {
 }
 
 
-#' Quickly create a PDF, HTML or Word document showing one or more R objects.
+#' Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.
 #'
 #' @param ... One or more huxtables or R objects with an \code{as_huxtable} method.
 #' @param file File path for the output.
@@ -457,20 +457,16 @@ NULL
 #' @rdname quick-output
 #' @export
 quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
+  hts <- huxtableize(list(...), borders)
   latex_file <- tempfile(fileext = ".tex")
   sink(latex_file)
   tryCatch({
       cat('\\documentclass{article}\n')
       report_latex_dependencies()
       cat('\n\\begin{document}')
-      objs <- list(...)
-      lapply(objs, function (obj) {
-        if (! inherits(obj, 'huxtable')) {
-          obj <- as_huxtable(obj)
-          obj <- set_all_borders(obj, borders)
-        }
+      lapply(hts, function (ht) {
         cat('\n\n')
-        print_latex(obj)
+        print_latex(ht)
         cat('\n\n')
       })
       cat('\n\\end{document}')
@@ -492,5 +488,48 @@ quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
   invisible(NULL)
 }
 
+#' @rdname quick-output
+#' @export
+quick_html <- function (..., file = "huxtable-output.html", borders = 0.4) {
+  hts <- huxtableize(list(...), borders)
+  sink(file)
+  cat('<!DOCTYPE html><html><body>')
+  tryCatch({
+    lapply(hts, function (ht) {
+      cat('<p>&nbsp;</p>')
+      print_html(ht)
+      cat('\n\n')
+    })
+    cat('</body></html>')
+  },
+    error = identity,
+    finally = {sink()}
+  )
 
+  invisible(NULL)
+}
 
+#' @rdname quick-output
+#' @export
+quick_docx <- function (..., file = "huxtable-output.docx", borders = 0.4) {
+  hts <- huxtableize(list(...), borders)
+  my_doc <- officer::read_docx()
+  for (ht in hts) {
+    ft <- as_flextable(ht)
+    my_doc <- flextable::body_add_flextable(my_doc, ft)
+    my_doc <- officer::body_add_par(my_doc, " ")
+  }
+  print(my_doc, target = file)
+
+  invisible(NULL)
+}
+
+huxtableize <- function (obj_list, borders) {
+  lapply(obj_list, function (obj) {
+    if (! inherits(obj, 'huxtable')) {
+      obj <- as_huxtable(obj)
+      obj <- set_all_borders(obj, borders)
+    }
+    obj
+  })
+}

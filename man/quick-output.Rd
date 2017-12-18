@@ -3,9 +3,15 @@
 \name{quick-output}
 \alias{quick-output}
 \alias{quick_pdf}
-\title{Quickly create a PDF, HTML or Word document showing one or more R objects.}
+\alias{quick_html}
+\alias{quick_docx}
+\title{Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.}
 \usage{
 quick_pdf(..., file = "huxtable-output.pdf", borders = 0.4)
+
+quick_html(..., file = "huxtable-output.html", borders = 0.4)
+
+quick_docx(..., file = "huxtable-output.docx", borders = 0.4)
 }
 \arguments{
 \item{...}{One or more huxtables or R objects with an \code{as_huxtable} method.}
@@ -18,7 +24,7 @@ quick_pdf(..., file = "huxtable-output.pdf", borders = 0.4)
 Invisible \code{NULL}.
 }
 \description{
-Quickly create a PDF, HTML or Word document showing one or more R objects.
+Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.
 }
 \details{
 Objects in \code{...} will be converted to huxtables, with borders added.
