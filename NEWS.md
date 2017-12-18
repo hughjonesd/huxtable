@@ -1,4 +1,8 @@
 
+# huxtable 1.2.0.9000
+
+* New `quick_html`, `quick_pdf` and `quick_docx` functions to print table-like objects in a document.
+
 # huxtable 1.2.0
 
 * New `outer_borders` argument for `huxreg`. This changes default behaviour slightly.
