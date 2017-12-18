@@ -106,11 +106,7 @@ huxreg <- function (
     x <- x[match(unique(coef_names), x$term), ]
   })
   coef_names <- unique(coef_names)
-  tidied <- lapply(tidied, function (x) {
-    numcols <- sapply(x, is.numeric)
-    x[, numcols] <- sapply(x[, numcols], format_number, number_format)
-    x
-  })
+
   if (! is.null(stars)) {
     tidied <- lapply(tidied, function (x) {
       stars_arg <- c(0, sort(stars), ' ' = 1)

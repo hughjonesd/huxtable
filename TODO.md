@@ -20,7 +20,7 @@ TODO
 ====
 
 * way to address a particular subset of a matrix, e.g.
-  - ht %>% area(1:3, 4:6) %>% set_this(TRUE) %>% set_border_color('red')
+  - ht %>% area(1:3, 4:6) %>% set_italic(TRUE) %>% set_border_color('red')
   - presumably this returns the ht with some attribute appropriately set, analogous to groups in a tibble
   - also this should be a separate package! 
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
@@ -29,9 +29,6 @@ TODO
 * table of descriptive statistics?
 * `huxreg`-style function in `texreg` package
 * rewrite LaTeX for speed, vectorizing and putting bits in appropriately
-* use number_format on all numbers "found" in a cell; set to NA or -1 to do nothing.
-  - good for huxreg (confidence intervals, signif. stars etc.)
-  - default should be NA, and this should leave numbers alone, so that e.g. ints remain as ints
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width

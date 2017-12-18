@@ -16,7 +16,7 @@ Suggests: testthat, devtools, broom, ggplot2, officer, flextable, psych, nnet, c
 RoxygenNote: 6.0.1
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
-Imports: knitr, rmarkdown, htmltools, lazyeval, utils, dplyr, tibble, glue, assertthat
+Imports: knitr, rmarkdown, htmltools, lazyeval, utils, dplyr, tibble, glue, assertthat, stringr
 VignetteBuilder: knitr
 Authors@R: 
     person(given = "David",

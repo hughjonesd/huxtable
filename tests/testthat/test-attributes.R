@@ -48,7 +48,7 @@ test_that('Assignment to attributes preserves colnames', {
 
 
 
-test_that('can combine numbers and characters in number_format', {
+test_that('Can combine numbers and characters in number_format', {
   ht <- huxtable(a = c(1.11111, 1.11111, 1.11111))
   number_format(ht)[1, ] <- "%3.3f"
   number_format(ht)[2, ] <- 1
@@ -58,6 +58,15 @@ test_that('can combine numbers and characters in number_format', {
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "+")
 })
 
+
+test_that('number_format works on cells with multiple numbers', {
+  ht <- huxtable(a = "1 2.3556, some text; -33 -44.8908")
+  number_format(ht)[1, 1] <- 1
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.0 2.4, some text; -33.0 -44.9")
+  number_format(ht)[1, 1] <- '%3.3f'
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.000 2.356, some text; -33.000 -44.891")
+  number_format(ht)[1, 1] <- list(function(x) ifelse(x > 0, '+', '-'))
+})
 
 test_that('Can combine numbers and strings in padding', {
   ht <- huxtable(a = 1, b = 1)

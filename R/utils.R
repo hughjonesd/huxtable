@@ -13,13 +13,10 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
   for (col in 1:ncol(contents)) {
     for (row in 1:nrow(contents)) {
       cell <- contents[row, col]
-      if (is_a_number(cell)) {
-        cell <- as.numeric(cell)
-        cell <- format_number(cell, number_format(ht)[[row, col]]) # a list element, double brackets needed
-      }
+      num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
+      if (! is.na(cell)) cell <- format_numbers(cell, num_fmt)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
-
-      contents[row, col] <- cell
+      contents[row, col] <- as.character(cell)
     }
     if (type %in% c('latex', 'html')) {
       to_esc <- escape_contents(ht)[, col]
@@ -101,15 +98,18 @@ collapsed_border_colors <- function (ht) {
   result
 }
 
+# find each numeric substring, and replace it:
+format_numbers <- function (string, num_fmt) {
+  if (! is.function(num_fmt) && is.na(num_fmt)) return(string) # ! is.function avoids a warning if num_fmt is a function
 
-format_number <- function (num, nf) {
-  res <- num
-  if (is.function(nf)) res[] <- nf(num)
-  if (is.character(nf)) res[] <- sprintf(nf, num)
-  if (is.numeric(nf)) res[] <- formatC(round(num, nf), format = 'f', digits = nf)
-  res[is.na(num)] <- NA
-
-  res
+  format_numeral <- if (is.function(num_fmt)) num_fmt else
+        if (is.character(num_fmt)) function (numeral) sprintf(num_fmt, numeral) else
+        if (is.numeric(num_fmt)) function (numeral) formatC(round(numeral, num_fmt), format = 'f',
+          digits = num_fmt) else
+        stop('Unrecognized type of number_format: should be function, character or integer. See ?number_format')
+  # Optional minus, then any number of digits followed by an optional decimal point
+  # which is assumed to be "." (?Sys.setlocale suggests this is a reasonable assumption)
+  stringr::str_replace_all(string, '-?\\d+(\\.\\d+)?', function (x) format_numeral(as.numeric(x)))
 }
 
 
