@@ -210,6 +210,7 @@ align(ht)[,2]          <- 'right'
 right_padding(ht)      <- 10
 left_padding(ht)       <- 10
 width(ht)              <- 0.35
+number_format(ht)      <- 2
 
 ht
 end.rcode-->
@@ -231,7 +232,8 @@ ht                                        %>%
       set_align(everywhere, 2, 'right')   %>%
       set_right_padding(10)               %>%
       set_left_padding(10)                %>%
-      set_width(0.35)
+      set_width(0.35)                     %>%
+      set_number_format(2)
 
 end.rcode-->
 </div>
@@ -249,7 +251,8 @@ as_hux(att_corr$r)                                                             %
       set_background_color(where(row(att_corr$p) == col(att_corr$p)), 'white') %>%
       huxtable::add_rownames(colname = '')                                     %>%
       huxtable::add_colnames()                                                 %>%
-      set_all_borders(1)
+      set_all_borders(1)                                                       %>%
+      set_number_format(2)
 
 end.rcode-->
 </div>
