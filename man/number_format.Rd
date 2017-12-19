@@ -31,12 +31,22 @@ For \code{set_number_format}, the \code{ht} object.
 Functions to get or set the number format property of huxtable table cells.
 }
 \details{
-If \code{value} is numeric, numbers will be rounded to that many decimal places.  If \code{value} is
+Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
+followed by
+numerals, followed by an optional decimal point and further numerals). If \code{value} is numeric,
+numbers will be rounded to that many decimal places.  If \code{value} is
 character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
-function it will be applied to the cell contents.
-Number format is applied to any cells that look like numbers (as judged by \code{\link{as.numeric}}), not just to numeric cells. This allows you to do e.g. \code{ht <- huxtable(c('Salary', 35000, 32000, 40000))} and still format numbers correctly.
+function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
+will be unchanged.
+
+The default value is "%5.3g" which rounds numbers if they have more than 3 significant
+digits, and which may use an exponent for large numbers.
+
 To set number_format to a function, enclose the function in \code{list}.
 See the examples.
+
+Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
+numbers in their entirety. The default value was "%5.2f".
 }
 \examples{
 ht <- huxtable(a = 10^(3:6) + (5 * 10^(-2:-5)), b = 10^(3:6) + (5* 10^(-2:-5)))
@@ -46,6 +56,10 @@ number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
 number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
 ht
 print_screen(ht)
+ht_bands <- huxtable("10000 Maniacs")
+ht_bands # probably not what you want
+number_format(ht_bands) <- NA
+ht_bands
 
 ht <- huxtable(a = 1:3, b = 3:1)
 ht2 <- set_number_format(ht, 2)
