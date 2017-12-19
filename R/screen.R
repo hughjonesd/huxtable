@@ -129,7 +129,7 @@ to_screen.huxtable <- function (
     cap <- paste0(str_pad(cap, hpos, ncol(charmat)), collapse = '\n')
     result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
-  if (colnames) {
+  if (colnames && any(nchar(colnames(ht)) > 0)) {
     colnames_text <- paste0('Column names: ', paste(colnames(ht), collapse = ', '))
     colnames_text <- strwrap(colnames_text, max_width)
     colnames_text <- paste0(colnames_text, collapse = '\n')
