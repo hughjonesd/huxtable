@@ -7,8 +7,9 @@
 
 * `number_format` now applies to any number-like substrings in cells. This means you can include e.g.
   significance stars in a cell and still use `number_format` to format the content.
-* If `number_format` is NA, numbers are unchanged. This is now the default, so 
-  e.g. as_hux(matrix(1:4, 2, 2)) now shows 1, 2, 3, 4 rather than 1.00, 2.00, 3.00, 4.00
+* If `number_format` is NA, numbers are unchanged. 
+* Default value of `number_format` has changed from "%5.2f" to "%5.3g", which plays nicer with integers
+  but may surprise you by using scientific format for large numbers.
 
 # huxtable 1.2.0
 
