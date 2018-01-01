@@ -1,7 +1,7 @@
 
-# huxtable 1.2.0.9000
+# huxtable 2.0.0
 
-* New `quick_html`, `quick_pdf` and `quick_docx` functions to print table-like objects in a document.
+* New `quick_html`, `quick_pdf` and `quick_docx` functions to print table-like objects to a new document.
 * `to_screen` only shows colnames if there are any non-zero-length column names.
 
 ## Breaking changes
