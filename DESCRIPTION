@@ -8,7 +8,7 @@ Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates HTML and LaTeX tables. Provides similar 
   functionality to 'xtable', but does more, with a simpler interface. Includes
   a 'huxreg' function for quick creation of regression tables. Allows export to
-  Microsoft Word or Powerpoint using the 'officer' package.
+  Microsoft Word or PowerPoint using the 'officer' package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
