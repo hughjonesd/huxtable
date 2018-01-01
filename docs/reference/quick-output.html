@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Huxtable logo — hux_logo • huxtable</title>
+<title>Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera. — quick-output • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -97,36 +97,53 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Huxtable logo</h1>
+    <h1>Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.</h1>
     </div>
 
     
-    <p>Huxtable logo</p>
+    <p>Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.</p>
     
 
-    <pre class="usage"><span class='fu'>hux_logo</span>(<span class='kw'>latex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>quick_pdf</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.pdf"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
+
+<span class='fu'>quick_html</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.html"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
+
+<span class='fu'>quick_docx</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.docx"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>latex</th>
-      <td><p>Use LaTeX names for fonts.</p></td>
+      <th>...</th>
+      <td><p>One or more huxtables or R objects with an <code>as_huxtable</code> method.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>File path for the output.</p></td>
+    </tr>
+    <tr>
+      <th>borders</th>
+      <td><p>Border width for members of <code>...</code> that are not huxtables.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The huxtable logo.</p>
+    <p>Invisible <code>NULL</code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Objects in <code>...</code> will be converted to huxtables, with borders added.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='fu'>hux_logo</span>())</div><div class='output co'>#&gt; ┌────────┬───────┬───────┐
-#&gt; │ h      │ u     │ x     │
-#&gt; │        ├───────┴───────┤
-#&gt; │        │   table       │
-#&gt; └────────┴───────────────┘</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)
+<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
+<span class='fu'>quick_pdf</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
+<span class='fu'>quick_html</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
+<span class='fu'>quick_docx</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -134,6 +151,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

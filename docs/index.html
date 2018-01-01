@@ -299,7 +299,15 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
 
 <div class="example" id="ex-pipe">
 <div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(magrittr)</span>
-<span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'magrittr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:git2r':
+## 
+##     add
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
         <span class="hl kwc">Employee</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'John Smith'</span><span class="hl std">,</span> <span class="hl str">'Jane Doe'</span><span class="hl std">,</span> <span class="hl str">'David Hugh-Jones'</span><span class="hl std">),</span>
         <span class="hl kwc">Salary</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">50000</span><span class="hl std">,</span> <span class="hl num">40000</span><span class="hl std">),</span>
         <span class="hl kwc">add_colnames</span> <span class="hl std">=</span> <span class="hl num">TRUE</span>
@@ -446,9 +454,9 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
 <!--html_preserve--><table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    3)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -493,7 +501,7 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.398e-7.000&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -511,7 +519,7 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
 </tr>
 </table>
 <!--/html_preserve-->
@@ -524,7 +532,20 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
 read the <a href="design-principles.html">design principles</a> behind huxtable, including a comparison
 with other R packages to create tables.</p>
 
-<h3>Huxtable 1.0.0 released!</h3>
+
+<h3>News</h3>
+
+<h4>January 3, 2018: Huxtable 2.0.0 released</h4>
+
+<p>The major version bump marks a change in how numbers are shown. Numeric formatting
+via <code>number_format</code>
+now applies to any number found in a cell, even if there are non-numeric characters. This
+means that e.g. cells like "2.71 (1.4) <sup>**</sup>" will have both numbers formatted.
+</p>
+<p>There are also new <code>quick_pdf</code>, <code>quick_html</code> and <code>quick_docx</code>
+functions, for quick output of data frames or similar objects in different formats.</p>
+
+<h4>October 2017: Huxtable 1.0.0 released!</h4>
 
 <p>New features include:</p>
 <ul>

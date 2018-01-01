@@ -277,7 +277,20 @@ end.rcode-->
 read the <a href="design-principles.html">design principles</a> behind huxtable, including a comparison
 with other R packages to create tables.</p>
 
-<h3>Huxtable 1.0.0 released!</h3>
+
+<h3>News</h3>
+
+<h4>January 3, 2018: Huxtable 2.0.0 released</h4>
+
+<p>The major version bump marks a change in how numbers are shown. Numeric formatting
+via <code>number_format</code>
+now applies to any number found in a cell, even if there are non-numeric characters. This
+means that e.g. cells like "2.71 (1.4) <sup>**</sup>" will have both numbers formatted.
+</p>
+<p>There are also new <code>quick_pdf</code>, <code>quick_html</code> and <code>quick_docx</code>
+functions, for quick output of data frames or similar objects in different formats.</p>
+
+<h4>October 2017: Huxtable 1.0.0 released!</h4>
 
 <p>New features include:</p>
 <ul>

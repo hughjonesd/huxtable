@@ -6,7 +6,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>All news • huxtable</title>
 
 <!-- jquery -->
@@ -38,10 +37,9 @@
   </head>
 
   <body>
-    <main>
-       <div class="container template-news">
-          <header>
-          <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container template-news">
+      <header>
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -93,10 +91,10 @@
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-          
-          </header>
+      
+      </header>
 
-          <div class="row">
+      <div class="row">
 
   <div class="col-md-9">
     <div class="page-header">
@@ -104,9 +102,28 @@
     </div>
 
     <div class="contents">
-    <div id="huxtable-1-1-0-9000" class="section level1">
+    <div id="huxtable-2-0-0" class="section level1">
 <h1 class="hasAnchor">
-<a href="#huxtable-1-1-0-9000" class="anchor"></a>huxtable 1.1.0.9000</h1>
+<a href="#huxtable-2-0-0" class="anchor"></a>huxtable 2.0.0</h1>
+<ul>
+<li>New <code>quick_html</code>, <code>quick_pdf</code> and <code>quick_docx</code> functions to print table-like objects to a new document.</li>
+<li>
+<code>to_screen</code> only shows colnames if there are any non-zero-length column names.</li>
+</ul>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>
+<code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
+<li>If <code>number_format</code> is NA, numbers are unchanged.</li>
+<li>Default value of <code>number_format</code> has changed from “%5.2f” to “%5.3g”, which plays nicer with integers but may surprise you by using scientific format for large numbers.</li>
+</ul>
+</div>
+</div>
+    <div id="huxtable-1-2-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#huxtable-1-2-0" class="anchor"></a>huxtable 1.2.0</h1>
 <ul>
 <li>New <code>outer_borders</code> argument for <code>huxreg</code>. This changes default behaviour slightly.</li>
 <li>New <code>border</code> argument for <code>add_footnote</code> to choose width of footnote’s top border.</li>
@@ -146,9 +163,9 @@
 <li>New <code>error_format</code> argument to <code>huxreg</code> for flexible control over uncertainty estimates.</li>
 <li>Infrastructure improvements: slightly less ugly code in screen.R and LaTeX.R.</li>
 </ul>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Removed options <code>collapse</code>, <code>borders</code>, <code>blank</code> and <code>colname_color</code> from <code>to_screen</code>/<code>print_screen</code>.</li>
 <li>
@@ -218,9 +235,9 @@
 <li>Expanded introduction and new vignette for <code>huxreg</code>.</li>
 <li>Numerous bugs have been fixed and replaced with new, more advanced bugs.</li>
 </ul>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>theme_minimal</code> has been renamed <code>theme_basic</code> to avoid a name clash with <code>ggplot2</code>.</li>
@@ -242,7 +259,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#huxtable-1-1-0-9000">1.1.0.9000</a></li>
+        <li><a href="#huxtable-2-0-0">2.0.0</a></li>
+        <li><a href="#huxtable-1-2-0">1.2.0</a></li>
         <li><a href="#huxtable-1-1-0">1.1.0</a></li>
         <li><a href="#huxtable-1-0-0">1.0.0</a></li>
         <li><a href="#huxtable-0-3-1">0.3.1</a></li>
@@ -257,8 +275,8 @@
 
 </div>
 
-          <footer>
-          <div class="copyright">
+      <footer>
+      <div class="copyright">
   <p>Developed by David Hugh-Jones.</p>
 </div>
 
@@ -266,8 +284,8 @@
   <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
 </div>
 
-          </footer>
-       </div>
-    </main>
+      </footer>
+   </div>
+
   </body>
 </html>
