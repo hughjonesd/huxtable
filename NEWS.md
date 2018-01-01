@@ -2,6 +2,20 @@ Note that huxtable attempts to follow semantic versioning (https://semver.org). 
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 
+# huxtable 4.2.0.9000
+ 
+* Bugfix: `wrap=TRUE` caused squeezed text in RTF.
+
+## Important 
+
+* TeX code was getting escaped by pandoc. To avoid this, if possible, huxtable now
+  adds fenced code blocks round latex tables (see 
+  https://pandoc.org/MANUAL.html#extension-raw_attribute). You must add
+  
+    md_extensions: +raw_attribue
+
+  to your YAML header for this to work, and you will need a recent (> 2.0.0) version of Pandoc.
+  
 # huxtable 4.2.0
 
 * More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.
