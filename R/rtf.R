@@ -52,8 +52,6 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html
   # the O'Reilly guide is also very helpful
-  # not yet working:
-  # wrap
 
   assert_that(inherits(fc_tables, 'rtfFCTables'))
   color_index <- function (color) {
@@ -126,7 +124,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   valign_def[rotation(ht) == 90] <- '\\cltxbtlr'
   valign_def[rotation(ht) == 270] <- '\\cltxtbrl'
 
-  wrap_def <- ifelse(wrap(ht), '\\clFitText ', '')
+  wrap_def <- ifelse(wrap(ht), '', '\\clNoWrap')
   pad_def <- sprintf('\\clpadfl3\\clpadl%d \\clpadft3\\clpadt%d \\clpadfb3\\clpadb%d \\clpadfr3\\clpadr%d ',
         left_padding(ht)   * 20,
         top_padding(ht)    * 20,
