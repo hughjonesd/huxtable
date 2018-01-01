@@ -176,7 +176,7 @@ $(document).ready(function () {
 <h1>Introduction</h1>
 <div id="about-this-document" class="section level2">
 <h2>About this document</h2>
-<p>This is the introductory vignette for the R package ‘huxtable’, version 1.2.0.9000. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
+<p>This is the introductory vignette for the R package ‘huxtable’, version 2.0.0. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
 </div>
 <div id="huxtable" class="section level2">
 <h2>Huxtable</h2>
@@ -1239,13 +1239,8 @@ cars_mpg</code></pre>
 <div id="conditional-formatting" class="section level2">
 <h2>Conditional formatting</h2>
 <p>You may want to apply conditional formatting to cells, based on their contents. Suppose we want to display a table of correlations, and to highlight ones which are significant. We can use the <code>where()</code> function to select those cells.</p>
-<pre class="r"><code>library(psych)</code></pre>
-<pre><code>## 
-## Attaching package: 'psych'</code></pre>
-<pre><code>## The following object is masked from 'package:git2r':
-## 
-##     lookup</code></pre>
-<pre class="r"><code>data(attitude)
+<pre class="r"><code>library(psych)
+data(attitude)
 att_corr &lt;- corr.test(as.matrix(attitude))
 
 att_hux &lt;- as_hux(att_corr$r)                                           %&gt;% 
