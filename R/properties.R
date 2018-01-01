@@ -670,7 +670,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' to achieve a nice result, in both HTML and LaTeX.
 #' @export rotation rotation<- set_rotation
 NULL
-make_getter_setters('rotation', 'cell', check_fun = is.numeric)
+make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {value <- value %% 360})
 
 #' @template getset-cell
 #' @templateVar attr_name number_format
