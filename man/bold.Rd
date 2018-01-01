@@ -4,22 +4,22 @@
 \alias{bold}
 \alias{bold<-}
 \alias{set_bold}
-\alias{set_bold_by}
+\alias{map_bold}
 \alias{italic}
 \alias{italic<-}
 \alias{set_italic}
-\alias{set_italic_by}
+\alias{map_italic}
 \title{Cell text style}
 \usage{
 bold(ht)
 bold(ht) <- value
 set_bold(ht, row, col, value, byrow = FALSE)
-set_bold_by(ht, row, col, fn)
+map_bold(ht, row, col, fn)
 
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value, byrow = FALSE)
-set_italic_by(ht, row, col, fn)
+map_italic(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -38,7 +38,7 @@ Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 }
 \value{
 For \code{bold}, the \code{bold} property.
-For \code{set_bold} and \code{set_bold_by}, the modified huxtable.
+For \code{set_bold} and \code{map_bold}, the modified huxtable.
 
 Similarly for \code{italic} and friends.
 }

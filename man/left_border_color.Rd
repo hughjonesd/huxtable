@@ -4,7 +4,7 @@
 \alias{left_border_color}
 \alias{left_border_color<-}
 \alias{set_left_border_color}
-\alias{set_left_border_color_by}
+\alias{map_left_border_color}
 \alias{right_border_color}
 \alias{top_border_color}
 \alias{bottom_border_color}
@@ -14,30 +14,30 @@
 \alias{set_right_border_color}
 \alias{set_top_border_color}
 \alias{set_bottom_border_color}
-\alias{set_right_border_color_by}
-\alias{set_top_border_color_by}
-\alias{set_bottom_border_color_by}
+\alias{map_right_border_color}
+\alias{map_top_border_color}
+\alias{map_bottom_border_color}
 \title{Border colors}
 \usage{
 left_border_color(ht)
 left_border_color(ht) <- value
 set_left_border_color(ht, row, col, value, byrow = FALSE)
-set_left_border_color_by(ht, row, col, fn)
+map_left_border_color(ht, row, col, fn)
 
 right_border_color(ht)
 right_border_color(ht) <- value
 set_right_border_color(ht, row, col, value, byrow = FALSE)
-set_right_border_color_by(ht, row, col, fn)
+map_right_border_color(ht, row, col, fn)
 
 top_border_color(ht)
 top_border_color(ht) <- value
 set_top_border_color(ht, row, col, value, byrow = FALSE)
-set_top_border_color_by(ht, row, col, fn)
+map_top_border_color(ht, row, col, fn)
 
 bottom_border_color(ht)
 bottom_border_color(ht) <- value
 set_bottom_border_color(ht, row, col, value, byrow = FALSE)
-set_bottom_border_color_by(ht, row, col, fn)
+map_bottom_border_color(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -56,7 +56,7 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 }
 \value{
 For \code{left_border_color}, the \code{left_border_color} property.
-For \code{set_left_border_color} and \code{set_left_border_color_by}, the modified huxtable.
+For \code{set_left_border_color} and \code{map_left_border_color}, the modified huxtable.
 
 Similarly for the other functions.
 }

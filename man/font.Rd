@@ -4,13 +4,13 @@
 \alias{font}
 \alias{font<-}
 \alias{set_font}
-\alias{set_font_by}
+\alias{map_font}
 \title{Font}
 \usage{
 font(ht)
 font(ht) <- value
 set_font(ht, row, col, value, byrow = FALSE)
-set_font_by(ht, row, col, fn)
+map_font(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 }
 \value{
 For \code{font}, the \code{font} property.
-For \code{set_font} and \code{set_font_by}, the modified huxtable.
+For \code{set_font} and \code{map_font}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{font} property of huxtable cells.

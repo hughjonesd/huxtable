@@ -4,13 +4,13 @@
 \alias{rotation}
 \alias{rotation<-}
 \alias{set_rotation}
-\alias{set_rotation_by}
+\alias{map_rotation}
 \title{Text rotation}
 \usage{
 rotation(ht)
 rotation(ht) <- value
 set_rotation(ht, row, col, value, byrow = FALSE)
-set_rotation_by(ht, row, col, fn)
+map_rotation(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{0}.}
 }
 \value{
 For \code{rotation}, the \code{rotation} property.
-For \code{set_rotation} and \code{set_rotation_by}, the modified huxtable.
+For \code{set_rotation} and \code{map_rotation}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{text rotation} property of huxtable cells.

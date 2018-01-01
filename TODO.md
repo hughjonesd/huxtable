@@ -9,19 +9,6 @@ Priority changes
 
 * Update website from website-4.3-changes branch
 
-* `set_xxx_by`:
-  - simple interface round e.g. `colorRamp`?
-  - maybe merge into `set_xxx`?
-    - Advantages: 
-       - no code duplication; 
-       - less long set_bottom_border_style_by names;
-       - only need to change one thing when moving to `by`;
-       - `map_xxx` already communicates what's going on
-    - Disadvantages:
-       - set_xxx becomes huge multiplexing beast;
-       - existing style communicates intent;
-       - better error messages if you do e.g. `set_font(ht, some_fun)` instead of `some_fun()`
-
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
 
@@ -53,7 +40,6 @@ Priority changes
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back
 
-* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
 
 Changes for 5.0
 ===============
@@ -62,6 +48,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 (and work with others?)
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
+
+* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
 
 * Fix problem of different classes in padding, col_widths etc. (5.0)
   - Bring back is_a_number
@@ -80,6 +68,7 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - maybe having a single class for borders
   - so you could do e.g. `set_borders(ht, 1:2, 1:2, border("all", 1, "red", "solid"))
   - first arg could be lrtb, all, outer, vert, horiz, inner
+  - similarly for padding: `set_padding(ht, 1:2, 1:2, pad("all", 2))
 
 * Text class also? (5.0)
   - and `set_text(ht, text(10, 'black', 'italic', 'cmss'))`

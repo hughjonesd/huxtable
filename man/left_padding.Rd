@@ -4,7 +4,7 @@
 \alias{left_padding}
 \alias{left_padding<-}
 \alias{set_left_padding}
-\alias{set_left_padding_by}
+\alias{map_left_padding}
 \alias{right_padding}
 \alias{top_padding}
 \alias{bottom_padding}
@@ -14,30 +14,30 @@
 \alias{set_right_padding}
 \alias{set_top_padding}
 \alias{set_bottom_padding}
-\alias{set_right_padding_by}
-\alias{set_top_padding_by}
-\alias{set_bottom_padding_by}
+\alias{map_right_padding}
+\alias{map_top_padding}
+\alias{map_bottom_padding}
 \title{Cell padding}
 \usage{
 left_padding(ht)
 left_padding(ht) <- value
 set_left_padding(ht, row, col, value, byrow = FALSE)
-set_left_padding_by(ht, row, col, fn)
+map_left_padding(ht, row, col, fn)
 
 right_padding(ht)
 right_padding(ht) <- value
 set_right_padding(ht, row, col, value, byrow = FALSE)
-set_right_padding_by(ht, row, col, fn)
+map_right_padding(ht, row, col, fn)
 
 top_padding(ht)
 top_padding(ht) <- value
 set_top_padding(ht, row, col, value, byrow = FALSE)
-set_top_padding_by(ht, row, col, fn)
+map_top_padding(ht, row, col, fn)
 
 bottom_padding(ht)
 bottom_padding(ht) <- value
 set_bottom_padding(ht, row, col, value, byrow = FALSE)
-set_bottom_padding_by(ht, row, col, fn)
+map_bottom_padding(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -56,7 +56,7 @@ Set to \code{NA} to reset to the default, which is \code{4}.}
 }
 \value{
 For \code{left_padding}, the \code{left_padding} property.
-For \code{set_left_padding} and \code{set_left_padding_by}, the modified huxtable.
+For \code{set_left_padding} and \code{map_left_padding}, the modified huxtable.
 
 Similarly for the other functions.
 }

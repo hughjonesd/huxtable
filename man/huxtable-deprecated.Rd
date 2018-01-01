@@ -4,7 +4,7 @@
 \alias{pad_decimal}
 \alias{pad_decimal<-}
 \alias{set_pad_decimal}
-\alias{set_pad_decimal_by}
+\alias{map_pad_decimal}
 \alias{where}
 \alias{is_a_number}
 \alias{huxtable-deprecated}
@@ -18,5 +18,5 @@ To replace \code{pad_decimal} use \code{\link[=align]{align()}}, e.g. \code{alig
 To replace \code{is_a_number} use e.g. \code{! is.na(as.numeric(x))}
 
 To replace the 3 argument form of \code{set_xxx} functions, use
-\code{\link[=mapping-functions]{set_xxx_by}}.
+\code{\link[=mapping-functions]{map_xxx}}.
 }

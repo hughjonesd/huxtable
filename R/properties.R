@@ -24,7 +24,7 @@ huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos
 #' @evalNamespace make_exports(huxtable_col_attrs)
 #' @evalNamespace make_exports(huxtable_row_attrs)
 #' @evalNamespace make_exports(huxtable_table_attrs)
-#' @evalNamespace make_exports(huxtable_cell_attrs, with_by = TRUE)
+#' @evalNamespace make_exports(huxtable_cell_attrs, with_map = TRUE)
 NULL
 
 huxtable_env <- new.env()
@@ -111,8 +111,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     }
   ))
 
-  alt_setter <- paste0('set_', attr_name)
-  set_by_fun <- paste0('set_', attr_name, '_by')
+  alt_setter  <- sprintf('set_%s', attr_name)
+  mapping_fun <- sprintf('map_%s', attr_name)
   attr_symbol <- as.symbol(attr_name)
 
   funs[[alt_setter]] <- switch(attr_type,
@@ -125,8 +125,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
               if (missing(value)) value <- col
               if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
               if (byrow) stop('`byrow = TRUE` makes no sense if `row` is a matrix')
-              .Deprecated(msg = c('The 3 argument form of set_* functions is deprecated.\n',
-                     'Use set_*_by instead.\n'), package = 'huxtable')
+              .Deprecated(msg = c('The 3 argument form of `set_xxx` functions is deprecated.\n',
+                     'Use `map_xxx` instead.\n'), package = 'huxtable')
               .(attr_symbol)(ht)[row] <- value
             } else {
               if (nargs == 2) {
@@ -177,7 +177,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
         ))
   ) # end switch
 
-  funs[[set_by_fun]] <- eval(bquote(
+  funs[[mapping_fun]] <- eval(bquote(
     function (ht, row, col, fn) {
       assert_that(is_huxtable(ht))
       nargs <- nargs()
@@ -300,7 +300,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @rdname rowspan
 #' @templateVar attr_name colspan
 #' @template cell-property-usage
-#' @aliases colspan<- set_colspan set_colspan_by
+#' @aliases colspan<- set_colspan map_colspan
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop(
@@ -714,7 +714,7 @@ make_getter_setters('number_format', 'cell')
 }
 
 
-#' @aliases pad_decimal<- set_pad_decimal set_pad_decimal_by
+#' @aliases pad_decimal<- set_pad_decimal map_pad_decimal
 #' @rdname huxtable-deprecated
 #' @name pad_decimal
 #' @details

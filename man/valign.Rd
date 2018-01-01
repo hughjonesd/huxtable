@@ -4,13 +4,13 @@
 \alias{valign}
 \alias{valign<-}
 \alias{set_valign}
-\alias{set_valign_by}
+\alias{map_valign}
 \title{Vertical alignment}
 \usage{
 valign(ht)
 valign(ht) <- value
 set_valign(ht, row, col, value, byrow = FALSE)
-set_valign_by(ht, row, col, fn)
+map_valign(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{"top"}.}
 }
 \value{
 For \code{valign}, the \code{valign} property.
-For \code{set_valign} and \code{set_valign_by}, the modified huxtable.
+For \code{set_valign} and \code{map_valign}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{vertical alignment} property of huxtable cells.

@@ -4,13 +4,13 @@
 \alias{escape_contents}
 \alias{escape_contents<-}
 \alias{set_escape_contents}
-\alias{set_escape_contents_by}
+\alias{map_escape_contents}
 \title{Escape cell contents}
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
 set_escape_contents(ht, row, col, value, byrow = FALSE)
-set_escape_contents_by(ht, row, col, fn)
+map_escape_contents(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} property.
-For \code{set_escape_contents} and \code{set_escape_contents_by}, the modified huxtable.
+For \code{set_escape_contents} and \code{map_escape_contents}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{escape cell contents} property of huxtable cells.

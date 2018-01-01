@@ -623,22 +623,22 @@ For example, let's apply a text color to cars based on their horsepower:
 
 ```{r}
 
-car_ht %>% set_text_color_by(everywhere, 4, 
-  map_ranges(c(120, 200), c('black', 'red', 'orange'))
+car_ht %>% map_text_color(everywhere, 4, 
+  by_ranges(c(120, 200), c('black', 'red', 'orange'))
 )
 
 ```
 
-`map_ranges` is a *mapping function*. It divides its input into ranges and outputs colours based on that, a bit like
+`by_ranges` is a *mapping function*. It divides its input into ranges and outputs colours based on that, a bit like
 the base R function `cut`.
 
 You can also apply properties for cells that match a string, using the function `map_matches`:
 
 ```{r}
-car_ht %>% set_bold_by(map_matches('Mazda' = TRUE))
+car_ht %>% map_bold(by_regex('Mazda' = TRUE))
 ```
 
-See the help pages for other mapping functions.
+There is a `map_xxx` function for each property `xxx`. See the help pages for other mapping functions.
 
 # Creating a regression table
 

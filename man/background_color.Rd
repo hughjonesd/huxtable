@@ -4,13 +4,13 @@
 \alias{background_color}
 \alias{background_color<-}
 \alias{set_background_color}
-\alias{set_background_color_by}
+\alias{map_background_color}
 \title{Background color}
 \usage{
 background_color(ht)
 background_color(ht) <- value
 set_background_color(ht, row, col, value, byrow = FALSE)
-set_background_color_by(ht, row, col, fn)
+map_background_color(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 }
 \value{
 For \code{background_color}, the \code{background_color} property.
-For \code{set_background_color} and \code{set_background_color_by}, the modified huxtable.
+For \code{set_background_color} and \code{map_background_color}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{background color} property of huxtable cells.

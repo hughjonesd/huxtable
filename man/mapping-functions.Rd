@@ -10,28 +10,29 @@ The modified huxtable.
 This help page explains how to set properties differently for cells, depending on their contents.
 }
 \details{
-For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{  set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
+For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{  map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
 }
 
-Or you can use red text for a particular value:\preformatted{  hxtbl \%>\% set_text_color_by(map_values("Warning" = "red"))
+Or you can use red text for a particular value:\preformatted{  hxtbl \%>\% map_text_color(by_values("Warning" = "red"))
 }
 
-There is a \code{set_xxx_by} function for each huxtable cell property. The syntax is:\preformatted{  set_xxx_by(ht, row, col, fn)
+There is a \code{map_xxx} function for each huxtable cell property. The syntax is:\preformatted{  map_xxx(ht, row, col, fn)
 }
 
 where \code{xxx} is the property name.
 
 \code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details. To set properties
-for the whole table, you can omit \code{row} and \code{col}:\preformatted{  set_xxx_by(ht, fn)
+for the whole table, you can omit \code{row} and \code{col}:\preformatted{  map_xxx(ht, fn)
 }
 
 The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
 \itemize{
-\item To set property values for cells with specific contents, use \code{\link[=map_values]{map_values()}}.
-\item To set property values for cells within a numeric range, use \code{\link[=map_ranges]{map_ranges()}}.
-\item To set property values for cells by quantiles, use \code{\link[=map_quantiles]{map_quantiles()}} or \code{\link[=map_equal_groups]{map_equal_groups()}}.
-\item To set property values for cells that match a string or regular expression, use \code{\link[=map_matches]{map_matches()}}.
-\item For a more general solution, use \code{\link[=map_function]{map_function()}} or \code{\link[=map_cases]{map_cases()}}.
+\item To set property values for cells with specific contents, use \code{\link[=by_values]{by_values()}}.
+\item To set property values for cells within a numeric range, use \code{\link[=by_ranges]{by_ranges()}}.
+\item To set property values for cells by quantiles, use \code{\link[=by_quantiles]{by_quantiles()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.
+\item To set property values for cells that match a string or regular expression, use \code{\link[=by_regex]{by_regex()}}.
+\item To map numeric values to a colorspace, use \code{\link[=by_colorspace]{by_colorspace()}}.
+\item For a more general solution, use \code{\link[=by_function]{by_function()}} or \code{\link[=by_cases]{by_cases()}}.
 }
 }
 \section{Technical details}{
@@ -46,7 +47,7 @@ of a correlation matrix with low p values:\preformatted{  data(attitudes)
   # att_corr has components r (correlations) and p (p values)
 
   corr_hux <- as_hux(att_corr$r)
-  map_p_value <- function (ht, rows, cols, current) {
+  by_p_value <- function (ht, rows, cols, current) {
      result <- current
      pvals <- att_corr$p[rows, cols]
      result[pvals < 0.01] <- 'red'
@@ -58,7 +59,7 @@ of a correlation matrix with low p values:\preformatted{  data(attitudes)
 
 \examples{
 ht <- hux(c("OK", "Warning", "Error"))
-ht <- set_text_color_by(ht, map_values(
+ht <- map_text_color(ht, by_values(
         OK      = "green",
         Warning = "orange",
         Error   = "red"
@@ -66,18 +67,18 @@ ht <- set_text_color_by(ht, map_values(
 ht
 
 ht <- hux(rnorm(5), rnorm(5), rnorm(5))
-set_background_color_by(ht, map_ranges(
+map_background_color(ht, by_ranges(
         c(-1, 1),
         c("blue", "yellow", "red")
       ))
-set_background_color_by(ht,
-      map_equal_groups(2, c("red", "green")))
+map_background_color(ht,
+      by_equal_groups(2, c("red", "green")))
 
 ht <- hux(
         Coef = c(3.5, 2.4, 1.3),
         Pval = c(0.04, 0.01, 0.07),
         add_colnames = TRUE
       )
-set_bold_by(ht, everywhere, "Pval",
-      map_ranges(0.05, c(TRUE, FALSE)))
+map_bold(ht, everywhere, "Pval",
+      by_ranges(0.05, c(TRUE, FALSE)))
 }

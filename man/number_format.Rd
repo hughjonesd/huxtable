@@ -4,13 +4,13 @@
 \alias{number_format}
 \alias{number_format<-}
 \alias{set_number_format}
-\alias{set_number_format_by}
+\alias{map_number_format}
 \title{Number format}
 \usage{
 number_format(ht)
 number_format(ht) <- value
 set_number_format(ht, row, col, value, byrow = FALSE)
-set_number_format_by(ht, row, col, fn)
+map_number_format(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Note that setting to \code{NA} does not reset to the default.}
 }
 \value{
 For \code{number_format}, the \code{number_format} property.
-For \code{set_number_format} and \code{set_number_format_by}, the modified huxtable.
+For \code{set_number_format} and \code{map_number_format}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{number format} property of huxtable cells.

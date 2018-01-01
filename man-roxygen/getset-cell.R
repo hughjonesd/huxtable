@@ -8,7 +8,7 @@ if (exists('morealiases')) {
   more_alias_str <- c(outer(morealiases, c('', '<-'), paste0))
   more_alias_str <- c(more_alias_str,
         sprintf('set_%s', morealiases),
-        sprintf('set_%s_by', morealiases))
+        sprintf('map_%s', morealiases))
   more_alias_str <- paste(more_alias_str, collapse = ' ')
 }
 
@@ -26,7 +26,7 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
 #' set_<%= attr_name %>(ht, row, col, value, byrow = FALSE)
-#' set_<%= attr_name %>_by(ht, row, col, fn)
+#' map_<%= attr_name %>(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %>
@@ -41,8 +41,8 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
-#' For `set_<%= attr_name %>` and `set_<%= attr_name %>_by`, the modified huxtable.
+#' For `set_<%= attr_name %>` and `map_<%= attr_name %>`, the modified huxtable.
 #'
-#' @aliases <%= attr_name %><- set_<%= attr_name %> set_<%= attr_name %>_by <%= more_alias_str %>
+#' @aliases <%= attr_name %><- set_<%= attr_name %> map_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>
 

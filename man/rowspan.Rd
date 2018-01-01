@@ -4,22 +4,22 @@
 \alias{rowspan}
 \alias{rowspan<-}
 \alias{set_rowspan}
-\alias{set_rowspan_by}
+\alias{map_rowspan}
 \alias{colspan}
 \alias{colspan<-}
 \alias{set_colspan}
-\alias{set_colspan_by}
+\alias{map_colspan}
 \title{Row and column span}
 \usage{
 rowspan(ht)
 rowspan(ht) <- value
 set_rowspan(ht, row, col, value, byrow = FALSE)
-set_rowspan_by(ht, row, col, fn)
+map_rowspan(ht, row, col, fn)
 
 colspan(ht)
 colspan(ht) <- value
 set_colspan(ht, row, col, value, byrow = FALSE)
-set_colspan_by(ht, row, col, fn)
+map_colspan(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -38,7 +38,7 @@ Set to \code{NA} to reset to the default, which is \code{1}.}
 }
 \value{
 For \code{rowspan}, the \code{rowspan} property.
-For \code{set_rowspan} and \code{set_rowspan_by}, the modified huxtable.
+For \code{set_rowspan} and \code{map_rowspan}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{row and column span} property of huxtable cells.

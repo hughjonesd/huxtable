@@ -4,13 +4,13 @@
 \alias{wrap}
 \alias{wrap<-}
 \alias{set_wrap}
-\alias{set_wrap_by}
+\alias{map_wrap}
 \title{Text wrapping}
 \usage{
 wrap(ht)
 wrap(ht) <- value
 set_wrap(ht, row, col, value, byrow = FALSE)
-set_wrap_by(ht, row, col, fn)
+map_wrap(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 }
 \value{
 For \code{wrap}, the \code{wrap} property.
-For \code{set_wrap} and \code{set_wrap_by}, the modified huxtable.
+For \code{set_wrap} and \code{map_wrap}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{text wrapping} property of huxtable cells.

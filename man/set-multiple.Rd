@@ -3,31 +3,31 @@
 \name{set-multiple}
 \alias{set-multiple}
 \alias{set_all_borders}
-\alias{set_all_borders_by}
+\alias{map_all_borders}
 \alias{set_all_border_colors}
-\alias{set_all_border_colors_by}
+\alias{map_all_border_colors}
 \alias{set_all_border_styles}
-\alias{set_all_border_styles_by}
+\alias{map_all_border_styles}
 \alias{set_all_padding}
-\alias{set_all_padding_by}
+\alias{map_all_padding}
 \alias{set_outer_borders}
 \title{Set left, right, top and bottom properties}
 \usage{
 set_all_borders(ht, row, col, value, byrow = FALSE)
 
-set_all_borders_by(ht, row, col, fn)
+map_all_borders(ht, row, col, fn)
 
 set_all_border_colors(ht, row, col, value, byrow = FALSE)
 
-set_all_border_colors_by(ht, row, col, fn)
+map_all_border_colors(ht, row, col, fn)
 
 set_all_border_styles(ht, row, col, value, byrow = FALSE)
 
-set_all_border_styles_by(ht, row, col, fn)
+map_all_border_styles(ht, row, col, fn)
 
 set_all_padding(ht, row, col, value, byrow = FALSE)
 
-set_all_padding_by(ht, row, col, fn)
+map_all_padding(ht, row, col, fn)
 
 set_outer_borders(ht, row, col, value)
 }

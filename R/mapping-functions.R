@@ -10,19 +10,19 @@ NULL
 #' For example, in a table of p-values, you could bold cells where p < 0.05:
 #'
 #' ```
-#'   set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
+#'   map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
 #' ```
 #'
 #'  Or you can use red text for a particular value:
 #'
 #' ```
-#'   hxtbl %>% set_text_color_by(map_values("Warning" = "red"))
+#'   hxtbl %>% map_text_color(by_values("Warning" = "red"))
 #' ```
 #'
-#' There is a `set_xxx_by` function for each huxtable cell property. The syntax is:
+#' There is a `map_xxx` function for each huxtable cell property. The syntax is:
 #'
 #' ```
-#'   set_xxx_by(ht, row, col, fn)
+#'   map_xxx(ht, row, col, fn)
 #' ```
 #'
 #' where `xxx` is the property name.
@@ -31,16 +31,17 @@ NULL
 #' for the whole table, you can omit `row` and `col`:
 #'
 #' ```
-#'   set_xxx_by(ht, fn)
+#'   map_xxx(ht, fn)
 #' ```
 #'
 #' The `fn` argument is a *mapping function* which maps cell contents to property values.
 #'
-#' * To set property values for cells with specific contents, use [map_values()].
-#' * To set property values for cells within a numeric range, use [map_ranges()].
-#' * To set property values for cells by quantiles, use [map_quantiles()] or [map_equal_groups()].
-#' * To set property values for cells that match a string or regular expression, use [map_matches()].
-#' * For a more general solution, use [map_function()] or [map_cases()].
+#' * To set property values for cells with specific contents, use [by_values()].
+#' * To set property values for cells within a numeric range, use [by_ranges()].
+#' * To set property values for cells by quantiles, use [by_quantiles()] or [by_equal_groups()].
+#' * To set property values for cells that match a string or regular expression, use [by_regex()].
+#' * To map numeric values to a colorspace, use [by_colorspace()].
+#' * For a more general solution, use [by_function()] or [by_cases()].
 #'
 #' @section Technical details:
 #'
@@ -57,14 +58,14 @@ NULL
 #'   # att_corr has components r (correlations) and p (p values)
 #'
 #'   corr_hux <- as_hux(att_corr$r)
-#'   map_p_value <- function (ht, rows, cols, current) {
+#'   by_p_value <- function (ht, rows, cols, current) {
 #'      result <- current
 #'      pvals <- att_corr$p[rows, cols]
 #'      result[pvals < 0.01] <- 'red'
 #'      result[pvals < 0.05] <- 'orange'
 #'      result
 #'   }
-#   set_background_color_by(corr_hux, map_p_value)
+#   map_background_color(corr_hux, by_p_value)
 #' ```
 #'
 #'
@@ -72,7 +73,7 @@ NULL
 #'
 #' @examples
 #' ht <- hux(c("OK", "Warning", "Error"))
-#' ht <- set_text_color_by(ht, map_values(
+#' ht <- map_text_color(ht, by_values(
 #'         OK      = "green",
 #'         Warning = "orange",
 #'         Error   = "red"
@@ -80,20 +81,20 @@ NULL
 #' ht
 #'
 #' ht <- hux(rnorm(5), rnorm(5), rnorm(5))
-#' set_background_color_by(ht, map_ranges(
+#' map_background_color(ht, by_ranges(
 #'         c(-1, 1),
 #'         c("blue", "yellow", "red")
 #'       ))
-#' set_background_color_by(ht,
-#'       map_equal_groups(2, c("red", "green")))
+#' map_background_color(ht,
+#'       by_equal_groups(2, c("red", "green")))
 #'
 #' ht <- hux(
 #'         Coef = c(3.5, 2.4, 1.3),
 #'         Pval = c(0.04, 0.01, 0.07),
 #'         add_colnames = TRUE
 #'       )
-#' set_bold_by(ht, everywhere, "Pval",
-#'       map_ranges(0.05, c(TRUE, FALSE)))
+#' map_bold(ht, everywhere, "Pval",
+#'       by_ranges(0.05, c(TRUE, FALSE)))
 #' @name mapping-functions
 NULL
 
@@ -104,7 +105,7 @@ NULL
 #'   `name` will have the property set to `value`. If there is a single unnamed argument,
 #'   this is the default value for unmatched cells. More than one unnamed argument is an error.
 #'
-#' @return A function for use in `set_***_by` functions.
+#' @return A function for use in `map_***` functions.
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
@@ -113,11 +114,11 @@ NULL
 #'
 #' @examples
 #' ht <- hux(letters[1:3])
-#' set_background_color_by(ht,
-#'       map_values(a = "red", c = "yellow"))
-#' set_background_color_by(ht,
-#'       map_values(a = "red", c = "yellow", "green"))
-map_values <- function (...) {
+#' map_background_color(ht,
+#'       by_values(a = "red", c = "yellow"))
+#' map_background_color(ht,
+#'       by_values(a = "red", c = "yellow", "green"))
+by_values <- function (...) {
   vals <- c(...)
   named_vals <- vals[names(vals) != '']
   targets <- names(named_vals)
@@ -139,7 +140,7 @@ map_values <- function (...) {
 
 #' Map numeric ranges to cell properties
 #'
-#' `map_ranges` sets property values for cells falling within different numeric ranges.
+#' `by_ranges` sets property values for cells falling within different numeric ranges.
 #'
 #' @param breaks A vector of numbers in increasing order.
 #' @param values A vector of property values. `length(values)` should be one greater than
@@ -152,7 +153,7 @@ map_values <- function (...) {
 #' @details
 #' Non-numeric cells are unchanged.
 #'
-#' @inherit map_values return
+#' @inherit by_values return
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
@@ -161,31 +162,31 @@ map_values <- function (...) {
 #'
 #' @examples
 #' ht <- huxtable(c(1, 3, 5))
-#' ht <- set_background_color_by(ht,
-#'       map_ranges(c(2, 4),
+#' ht <- map_background_color(ht,
+#'       by_ranges(c(2, 4),
 #'         c("red", "yellow", "blue")
 #'       ))
 #' ht
-#' set_background_color_by(ht,
-#'       map_ranges(
+#' map_background_color(ht,
+#'       by_ranges(
 #'         c(2, 4),
 #'         "pink",
 #'         extend = FALSE
 #'       ))
 #'
-#' set_background_color_by(ht,
-#'       map_ranges(
+#' map_background_color(ht,
+#'       by_ranges(
 #'         c(1, 5),
 #'         c("red", "yellow", "green"),
 #'         right = TRUE
 #'       ))
-#' set_background_color_by(ht,
-#'       map_ranges(
+#' map_background_color(ht,
+#'       by_ranges(
 #'         c(1, 5),
 #'         c("red", "yellow", "green"),
 #'         right = FALSE
 #'       ))
-map_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
+by_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(breaks))
   assert_that(all(breaks == sort(breaks)))
   if (extend) breaks <- c(-Inf, breaks, Inf)
@@ -211,33 +212,33 @@ map_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
 #'
 #' These functions split cell values by quantiles. Non-numeric cells are ignored.
 #'
-#' @inheritParams map_ranges
+#' @inheritParams by_ranges
 #' @param quantiles Vector of quantiles.
 #' @param values Vector of values. `length(values)` should be one greater than `length(quantiles)`,
 #'   or one less if `extend = FALSE`.
 #'
 #' @details
-#' `map_equal_groups(n, values)` is a shortcut for `map_quantiles(seq(1/n, 1 - 1/n, 1/n), values)`.
+#' `by_equal_groups(n, values)` is a shortcut for `by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)`.
 #' @family mapping functions
 #' @seealso [mapping-functions]
-#' @inherit map_values return
+#' @inherit by_values return
 #' @export
 #'
 #' @examples
 #' ht <- hux(rnorm(5), rnorm(5))
 #'
-#' set_background_color_by(ht,
-#'       map_quantiles(
+#' map_background_color(ht,
+#'       by_quantiles(
 #'         c(0.2, 0.8),
 #'         c("red", "white", "green")
 #'       ))
 #'
-#' set_background_color_by(ht,
-#'       map_equal_groups(
+#' map_background_color(ht,
+#'       by_equal_groups(
 #'         3,
 #'         c("red", "yellow", "green")
 #'       ))
-map_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE) {
+by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0))
   assert_that(all(quantiles == sort(quantiles)))
   force(extend)
@@ -247,7 +248,7 @@ map_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE) {
     vals <- as.matrix(ht)[rows, cols]
     vals <- suppressWarnings(as.numeric(vals))
     q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
-    rf <- map_ranges(q_breaks, values, right = right, extend = extend)
+    rf <- by_ranges(q_breaks, values, right = right, extend = extend)
     rf(ht, rows, cols, current)
   }
 
@@ -257,10 +258,10 @@ map_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE) {
 
 #' @param n Number of equal-sized groups. `length(values)` should equal `n`.
 #'
-#' @rdname map_quantiles
+#' @rdname by_quantiles
 #' @export
-map_equal_groups <- function (n, values) {
-  map_quantiles(seq(1/n, 1 - 1/n, 1/n), values)
+by_equal_groups <- function (n, values) {
+  by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)
 }
 
 
@@ -274,18 +275,18 @@ map_equal_groups <- function (n, values) {
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
-#' @inherit map_values return
+#' @inherit by_values return
 #' @export
 #'
 #' @examples
 #' ht <- hux("The cat sat", "on the", "mat")
-#' set_bold_by(ht, map_matches('at' = TRUE))
-#' set_bold_by(ht, map_matches('a.*a' = TRUE))
-#' set_bold_by(ht, map_matches(
+#' map_bold(ht, by_regex('at' = TRUE))
+#' map_bold(ht, by_regex('a.*a' = TRUE))
+#' map_bold(ht, by_regex(
 #'         'the' = TRUE,
 #'         .grepl_args = list(ignore.case = TRUE)
 #'       ))
-map_matches <- function(..., .grepl_args = list()) {
+by_regex <- function(..., .grepl_args = list()) {
   vals <- c(...)
   named_vals <- vals[names(vals) != '']
   patterns <- names(named_vals)
@@ -316,31 +317,31 @@ map_matches <- function(..., .grepl_args = list()) {
 #' @param na_color Color to return for `NA` values. Use `NA` to set to the default.
 #'
 #' @details
-#' `map_to_colors` requires the "scales" package.
+#' `by_colorspace` requires the "scales" package.
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
-#' @inherit map_values return
+#' @inherit by_values return
 #' @export
 #'
 #' @examples
 #'
 #' if (requireNamespace("scales")) {
 #'   ht <- as_hux(matrix(rnorm(25), 5, 5))
-#'   set_background_color_by(ht,
-#'           map_to_colors("red", "yellow", "blue"))
+#'   map_background_color(ht,
+#'           by_colorspace("red", "yellow", "blue"))
 #' }
-map_to_colors <- function (..., range = NULL, na_color = NA) {
-  assert_package('map_colorspace', 'scales')
+by_colorspace <- function (..., range = NULL, na_color = NA) {
+  assert_package('by_colorspace', 'scales')
   palette <- c(...)
 
-  map_function(scales::col_numeric(palette, domain = range, na.color = na_color))
+  by_function(scales::col_numeric(palette, domain = range, na.color = na_color))
 }
 
 
 #' Map cell contents to cell properties using a function or scale
 #'
-#' This creates a simple wrapper around a function for use in `set_xxx_by`.
+#' This creates a simple wrapper around a function for use in `map_xxx`.
 #' Useful functions include scales and palettes from the `scales` package.
 #'
 #' @param inner_fn A one-argument function which maps cell values to property values.
@@ -350,28 +351,20 @@ map_to_colors <- function (..., range = NULL, na_color = NA) {
 #' affects the `mode` of cell data.
 #' @family mapping functions
 #' @seealso [mapping-functions]
-#' @inherit map_values return
+#' @inherit by_values return
 #' @export
 #'
 #' @examples
 #' ht <- as_hux(matrix(runif(20), 5, 4))
 #'
-#' set_text_color_by(ht, map_function(grey))
+#' map_background_color(ht, by_function(grey))
 #'
 #' if (requireNamespace('scales')) {
-#'   set_background_color_by(ht, map_function(
-#'         scales::col_numeric(
-#'           c('red', 'orange', 'yellow'),
-#'           domain = NULL
-#'         )))
-#' }
-#'
-#' if (requireNamespace('scales')) {
-#'   set_text_color_by(ht, map_function(
+#'   map_text_color(ht, by_function(
 #'           scales::seq_gradient_pal()
 #'         ))
 #' }
-map_function <- function (inner_fn) {
+by_function <- function (inner_fn) {
   assert_that(is.function(inner_fn))
   wrapper_fn <- function (ht, rows, cols, current) {
     res <- current
@@ -400,22 +393,22 @@ map_function <- function (inner_fn) {
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
-#' @inherit map_values return
+#' @inherit by_values return
 #' @export
 #'
 #' @examples
 #' if (requireNamespace('dplyr')) {
 #'   ht <- hux(rnorm(5), rnorm(5), letters[1:5])
 #'
-#'   set_background_color_by(ht, map_cases(
+#'   map_background_color(ht, by_cases(
 #'           . == "a" ~ "red",
 #'           . %in% letters ~ "green",
 #'           . < 0 ~ "pink"
 #'         ))
 #' }
-map_cases <- function (..., skip_na = TRUE) {
+by_cases <- function (..., skip_na = TRUE) {
   assert_that(is.flag(skip_na))
-  assert_package('map_cases', 'dplyr')
+  assert_package('by_cases', 'dplyr')
   # turn into character strings so they don't capture local information yet
   cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
 

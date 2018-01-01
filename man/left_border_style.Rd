@@ -4,7 +4,7 @@
 \alias{left_border_style}
 \alias{left_border_style<-}
 \alias{set_left_border_style}
-\alias{set_left_border_style_by}
+\alias{map_left_border_style}
 \alias{right_border_style}
 \alias{top_border_style}
 \alias{bottom_border_style}
@@ -14,30 +14,30 @@
 \alias{set_right_border_style}
 \alias{set_top_border_style}
 \alias{set_bottom_border_style}
-\alias{set_right_border_style_by}
-\alias{set_top_border_style_by}
-\alias{set_bottom_border_style_by}
+\alias{map_right_border_style}
+\alias{map_top_border_style}
+\alias{map_bottom_border_style}
 \title{Border styles}
 \usage{
 left_border_style(ht)
 left_border_style(ht) <- value
 set_left_border_style(ht, row, col, value, byrow = FALSE)
-set_left_border_style_by(ht, row, col, fn)
+map_left_border_style(ht, row, col, fn)
 
 right_border_style(ht)
 right_border_style(ht) <- value
 set_right_border_style(ht, row, col, value, byrow = FALSE)
-set_right_border_style_by(ht, row, col, fn)
+map_right_border_style(ht, row, col, fn)
 
 top_border_style(ht)
 top_border_style(ht) <- value
 set_top_border_style(ht, row, col, value, byrow = FALSE)
-set_top_border_style_by(ht, row, col, fn)
+map_top_border_style(ht, row, col, fn)
 
 bottom_border_style(ht)
 bottom_border_style(ht) <- value
 set_bottom_border_style(ht, row, col, value, byrow = FALSE)
-set_bottom_border_style_by(ht, row, col, fn)
+map_bottom_border_style(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -56,7 +56,7 @@ Set to \code{NA} to reset to the default, which is \code{"solid"}.}
 }
 \value{
 For \code{left_border_style}, the \code{left_border_style} property.
-For \code{set_left_border_style} and \code{set_left_border_style_by}, the modified huxtable.
+For \code{set_left_border_style} and \code{map_left_border_style}, the modified huxtable.
 
 Similarly for the other functions.
 }

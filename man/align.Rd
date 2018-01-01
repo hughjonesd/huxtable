@@ -4,13 +4,13 @@
 \alias{align}
 \alias{align<-}
 \alias{set_align}
-\alias{set_align_by}
+\alias{map_align}
 \title{Alignment}
 \usage{
 align(ht)
 align(ht) <- value
 set_align(ht, row, col, value, byrow = FALSE)
-set_align_by(ht, row, col, fn)
+map_align(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{"left"}.}
 }
 \value{
 For \code{align}, the \code{align} property.
-For \code{set_align} and \code{set_align_by}, the modified huxtable.
+For \code{set_align} and \code{map_align}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{alignment} property of huxtable cells.

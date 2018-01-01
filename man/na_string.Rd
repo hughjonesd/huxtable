@@ -4,13 +4,13 @@
 \alias{na_string}
 \alias{na_string<-}
 \alias{set_na_string}
-\alias{set_na_string_by}
+\alias{map_na_string}
 \title{NA string}
 \usage{
 na_string(ht)
 na_string(ht) <- value
 set_na_string(ht, row, col, value, byrow = FALSE)
-set_na_string_by(ht, row, col, fn)
+map_na_string(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{""}.}
 }
 \value{
 For \code{na_string}, the \code{na_string} property.
-For \code{set_na_string} and \code{set_na_string_by}, the modified huxtable.
+For \code{set_na_string} and \code{map_na_string}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{na string} property of huxtable cells.

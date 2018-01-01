@@ -4,7 +4,7 @@
 \alias{left_border}
 \alias{left_border<-}
 \alias{set_left_border}
-\alias{set_left_border_by}
+\alias{map_left_border}
 \alias{right_border}
 \alias{top_border}
 \alias{bottom_border}
@@ -14,30 +14,30 @@
 \alias{set_right_border}
 \alias{set_top_border}
 \alias{set_bottom_border}
-\alias{set_right_border_by}
-\alias{set_top_border_by}
-\alias{set_bottom_border_by}
+\alias{map_right_border}
+\alias{map_top_border}
+\alias{map_bottom_border}
 \title{Borders}
 \usage{
 left_border(ht)
 left_border(ht) <- value
 set_left_border(ht, row, col, value, byrow = FALSE)
-set_left_border_by(ht, row, col, fn)
+map_left_border(ht, row, col, fn)
 
 right_border(ht)
 right_border(ht) <- value
 set_right_border(ht, row, col, value, byrow = FALSE)
-set_right_border_by(ht, row, col, fn)
+map_right_border(ht, row, col, fn)
 
 top_border(ht)
 top_border(ht) <- value
 set_top_border(ht, row, col, value, byrow = FALSE)
-set_top_border_by(ht, row, col, fn)
+map_top_border(ht, row, col, fn)
 
 bottom_border(ht)
 bottom_border(ht) <- value
 set_bottom_border(ht, row, col, value, byrow = FALSE)
-set_bottom_border_by(ht, row, col, fn)
+map_bottom_border(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -56,7 +56,7 @@ Set to \code{NA} to reset to the default, which is \code{0}.}
 }
 \value{
 For \code{left_border}, the \code{left_border} property.
-For \code{set_left_border} and \code{set_left_border_by}, the modified huxtable.
+For \code{set_left_border} and \code{map_left_border}, the modified huxtable.
 
 Similarly for the other functions.
 }

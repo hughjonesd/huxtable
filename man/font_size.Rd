@@ -4,13 +4,13 @@
 \alias{font_size}
 \alias{font_size<-}
 \alias{set_font_size}
-\alias{set_font_size_by}
+\alias{map_font_size}
 \title{Font size}
 \usage{
 font_size(ht)
 font_size(ht) <- value
 set_font_size(ht, row, col, value, byrow = FALSE)
-set_font_size_by(ht, row, col, fn)
+map_font_size(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -29,7 +29,7 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 }
 \value{
 For \code{font_size}, the \code{font_size} property.
-For \code{set_font_size} and \code{set_font_size_by}, the modified huxtable.
+For \code{set_font_size} and \code{map_font_size}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{font size} property of huxtable cells.
