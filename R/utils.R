@@ -482,8 +482,12 @@ quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
   if (! file.remove(latex_file)) warning('Could not remove intermediate TeX file "', latex_file,
         '" from current working directory.')
   if (! file.exists(pdf_file)) stop('Could not find pdf file output from texi2pdf in current working directory.')
-  if (! file.rename(pdf_file, file)) stop('Could not move pdf file to ', file, '. The pdf file remains at "', pdf_file,
-        '" in the current working directory.')
+  if (file.copy(pdf_file, file)) {
+    file.remove(pdf_file)
+  } else {
+    stop('Could not copy pdf file to ', file, '. The pdf file remains at "', pdf_file,
+      '" in the current working directory.')
+  }
 
   invisible(NULL)
 }
