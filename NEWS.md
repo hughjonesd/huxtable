@@ -1,4 +1,9 @@
 
+
+# huxtable 2.0.0.9000
+
+* Fix `quick_pdf` error when moving output across filesystems.
+
 # huxtable 2.0.0
 
 * New `quick_html`, `quick_pdf` and `quick_docx` functions to print table-like objects to a new document.
