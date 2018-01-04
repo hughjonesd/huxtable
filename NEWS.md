@@ -1,6 +1,6 @@
 
 
-# huxtable 2.0.0.9000
+# huxtable 2.0.1
 
 * Fix `quick_pdf` error when moving output across filesystems.
 
