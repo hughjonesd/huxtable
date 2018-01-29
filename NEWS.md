@@ -1,6 +1,6 @@
 # huxtable 2.0.1.9000
 
-
+* Don't apply `number_format` to exponents in scientific notation.
 
 # huxtable 2.0.1
 

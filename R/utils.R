@@ -109,7 +109,9 @@ format_numbers <- function (string, num_fmt) {
         stop('Unrecognized type of number_format: should be function, character or integer. See ?number_format')
   # Optional minus, then any number of digits followed by an optional decimal point
   # which is assumed to be "." (?Sys.setlocale suggests this is a reasonable assumption)
-  stringr::str_replace_all(string, '-?\\d+(\\.\\d+)?', function (x) format_numeral(as.numeric(x)))
+  # the first bracketed expression (?<!\\d(e|E)) is a negative lookbehind assertion
+  # that we don't have a digit followed by e or E i.e. it should avoid formatting exponents
+  stringr::str_replace_all(string, '(?<!\\d(e|E))-?\\d+(\\.\\d+)?', function (x) format_numeral(as.numeric(x)))
 }
 
 
