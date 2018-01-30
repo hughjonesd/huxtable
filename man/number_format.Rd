@@ -33,20 +33,23 @@ Functions to get or set the number format property of huxtable table cells.
 \details{
 Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
 followed by
-numerals, followed by an optional decimal point and further numerals). If \code{value} is numeric,
+numerals, followed by an optional decimal point and further numerals). The exception is exponents in
+scientific notation; huxtable attempts to detect and ignore these.
+
+If \code{value} is numeric,
 numbers will be rounded to that many decimal places.  If \code{value} is
 character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
 function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
 will be unchanged.
 
-The default value is "%5.3g" which rounds numbers if they have more than 3 significant
+The default value is "\%5.3g" which rounds numbers if they have more than 3 significant
 digits, and which may use an exponent for large numbers.
 
 To set number_format to a function, enclose the function in \code{list}.
 See the examples.
 
 Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
-numbers in their entirety. The default value was "%5.2f".
+numbers in their entirety. The default value was "\%5.2f".
 }
 \examples{
 ht <- huxtable(a = 10^(3:6) + (5 * 10^(-2:-5)), b = 10^(3:6) + (5* 10^(-2:-5)))

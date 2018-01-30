@@ -836,7 +836,10 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' @details
 #' Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
 #' followed by
-#' numerals, followed by an optional decimal point and further numerals). If \code{value} is numeric,
+#' numerals, followed by an optional decimal point and further numerals). The exception is exponents in
+#' scientific notation; huxtable attempts to detect and ignore these.
+#'
+#' If \code{value} is numeric,
 #' numbers will be rounded to that many decimal places.  If \code{value} is
 #' character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
 #' function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
