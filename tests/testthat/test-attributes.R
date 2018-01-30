@@ -66,16 +66,18 @@ test_that('number_format works on cells with multiple numbers', {
   number_format(ht)[1, 1] <- '%3.3f'
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.000 2.356, some text; -33.000 -44.891")
   number_format(ht)[1, 1] <- list(function(x) ifelse(x > 0, '+', '-'))
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "+ +, some text; - -")
 })
 
 
 test_that('number_format does not apply to exponents in scientific notation', {
-  ht <- huxtable(c("1.12e3", "1.12E3", "1.12A3"))
+  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e17", "1.12A3"))
   number_format(ht) <- 4
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.1200e3")
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1.1200E3")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "1.1200e17")
   # the next is not scientific notation so both numbers should be affected
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "1.1200A3.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "1.1200A3.0000")
 })
 
 
