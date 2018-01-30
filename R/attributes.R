@@ -842,14 +842,14 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
 #' will be unchanged.
 #'
-#' The default value is "%5.3g" which rounds numbers if they have more than 3 significant
+#' The default value is "\%5.3g" which rounds numbers if they have more than 3 significant
 #' digits, and which may use an exponent for large numbers.
 #'
 #' To set number_format to a function, enclose the function in \code{list}.
 #' See the examples.
 #'
 #' Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
-#' numbers in their entirety. The default value was "%5.2f".
+#' numbers in their entirety. The default value was "\%5.2f".
 #'
 #' @family formatting functions
 #'
