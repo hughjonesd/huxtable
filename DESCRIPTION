@@ -1,7 +1,7 @@
 Package: huxtable
 Type: Package
 Title: Simply Create LaTeX and HTML Tables
-Version: 2.0.1.9000
+Version: 2.0.2
 Author: David Hugh-Jones [aut, cre]
 Date: 2018-01-04
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
