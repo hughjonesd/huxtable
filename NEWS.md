@@ -1,5 +1,7 @@
 # huxtable 2.0.2.9000
 
+# huxtable 2.0.2.9000
+
 # huxtable 2.0.2
 
 * Don't apply `number_format` to exponents in scientific notation.
