@@ -3,7 +3,8 @@
 # huxtable 2.0.2
 
 * Don't apply `number_format` to exponents in scientific notation.
-* Second attempt to fix `quick_pdf` for CRAN.
+* Second attempt to fix `quick_pdf` and friends for CRAN: confirm manually, or fail, if a file
+  argument is not explicitly specified.
 * Turn off some tests on CRAN, as they fail there but not elsewhere.
 
 # huxtable 2.0.1
