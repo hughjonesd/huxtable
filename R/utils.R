@@ -465,6 +465,7 @@ NULL
 #' @rdname quick-output
 #' @export
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4) {
+  force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
   # You can't use normalizePath with a non-existent file, so the below doesn't work:
@@ -491,7 +492,9 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   pdf_file <- sub('\\.tex$', '.pdf', basename(latex_file))
   if (! file.exists(pdf_file)) stop('Could not find texi2pdf output file "', pdf_file, '"')
   if (! file.remove(latex_file)) warning('Could not remove intermediate TeX file "', latex_file, '"')
-  if (file.copy(pdf_file, file)) {
+  # we overwrite existing files. If no explicit `file` argument was specified, confirm() has
+  # already checked if this is OK, or has failed in non-interactive sessions:
+  if (file.copy(pdf_file, file, overwrite = TRUE)) {
     file.remove(pdf_file)
   } else {
     stop('Could not copy pdf file to ', file, '. The pdf file remains at "', pdf_file, '"')
@@ -504,6 +507,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
 #' @rdname quick-output
 #' @export
 quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4) {
+  force(file)
   hts <- huxtableize(list(...), borders)
   sink(file)
   cat('<!DOCTYPE html><html><body>')
@@ -526,6 +530,7 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
 #' @rdname quick-output
 #' @export
 quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4) {
+  force(file)
   hts <- huxtableize(list(...), borders)
   my_doc <- officer::read_docx()
   for (ht in hts) {
@@ -554,7 +559,7 @@ confirm <- function (file) {
   if (! interactive()) stop('Please specify a `file` argument for non-interactive use of quick_xxx functions.')
   if (file.exists(file)) {
     answer <- readline(paste0('File "', file, '" already exists. Overwrite? [yN]'))
-    if (! answer %in% c('y', 'Y')) stop('Not overwriting.')
+    if (! answer %in% c('y', 'Y')) stop('OK, stopping.')
   }
   file
 }
