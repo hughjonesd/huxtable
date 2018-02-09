@@ -446,6 +446,10 @@ hux_logo <- function(latex = FALSE) {
 #'
 #' @details Objects in \code{...} will be converted to huxtables, with borders added.
 #'
+#' If \sQuote{file} is not specified, the default file path is "huxtable-output.xxx" in
+#' the working directory. If the session is interactive, you'll be asked to confirm any
+#' overwrite; if the session is not interactive, the command will fail.
+#'
 #' @examples
 #' \dontrun{
 #' m <- matrix(1:4, 2, 2)
@@ -460,7 +464,7 @@ NULL
 
 #' @rdname quick-output
 #' @export
-quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
+quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4) {
   hts <- huxtableize(list(...), borders)
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
   # You can't use normalizePath with a non-existent file, so the below doesn't work:
@@ -496,9 +500,10 @@ quick_pdf <- function (..., file = "huxtable-output.pdf", borders = 0.4) {
   invisible(NULL)
 }
 
+
 #' @rdname quick-output
 #' @export
-quick_html <- function (..., file = "huxtable-output.html", borders = 0.4) {
+quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4) {
   hts <- huxtableize(list(...), borders)
   sink(file)
   cat('<!DOCTYPE html><html><body>')
@@ -517,9 +522,10 @@ quick_html <- function (..., file = "huxtable-output.html", borders = 0.4) {
   invisible(NULL)
 }
 
+
 #' @rdname quick-output
 #' @export
-quick_docx <- function (..., file = "huxtable-output.docx", borders = 0.4) {
+quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4) {
   hts <- huxtableize(list(...), borders)
   my_doc <- officer::read_docx()
   for (ht in hts) {
@@ -532,6 +538,7 @@ quick_docx <- function (..., file = "huxtable-output.docx", borders = 0.4) {
   invisible(NULL)
 }
 
+
 huxtableize <- function (obj_list, borders) {
   lapply(obj_list, function (obj) {
     if (! inherits(obj, 'huxtable')) {
@@ -540,4 +547,14 @@ huxtableize <- function (obj_list, borders) {
     }
     obj
   })
+}
+
+
+confirm <- function (file) {
+  if (! interactive()) stop('Please specify a `file` argument for non-interactive use of quick_xxx functions.')
+  if (file.exists(file)) {
+    answer <- readline(paste0('File "', file, '" already exists. Overwrite? [yN]'))
+    if (! answer %in% c('y', 'Y')) stop('Not overwriting.')
+  }
+  file
 }

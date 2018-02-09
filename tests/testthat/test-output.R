@@ -144,3 +144,10 @@ test_that('Quick output functions work', {
   expect_true(file.exists(tf))
 
 })
+
+
+test_that('Quick output functions stop if called non-interactively with no `file` argument', {
+  ht <- hux(a = 1:2, b = 1:2)
+  expect_error(quick_pdf(ht))
+  expect_false(file.exists('huxtable-output.pdf'))
+})

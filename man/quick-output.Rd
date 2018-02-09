@@ -7,11 +7,11 @@
 \alias{quick_docx}
 \title{Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.}
 \usage{
-quick_pdf(..., file = "huxtable-output.pdf", borders = 0.4)
+quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4)
 
-quick_html(..., file = "huxtable-output.html", borders = 0.4)
+quick_html(..., file = confirm("huxtable-output.html"), borders = 0.4)
 
-quick_docx(..., file = "huxtable-output.docx", borders = 0.4)
+quick_docx(..., file = confirm("huxtable-output.docx"), borders = 0.4)
 }
 \arguments{
 \item{...}{One or more huxtables or R objects with an \code{as_huxtable} method.}
@@ -28,6 +28,10 @@ Quickly create a PDF, HTML or Word document showing matrices, data frames, et ce
 }
 \details{
 Objects in \code{...} will be converted to huxtables, with borders added.
+
+If \sQuote{file} is not specified, the default file path is "huxtable-output.xxx" in
+the working directory. If the session is interactive, you'll be asked to confirm any
+overwrite; if the session is not interactive, the command will fail.
 }
 \examples{
 \dontrun{

@@ -31,7 +31,6 @@ test_that('table-tester-2.Rmd renders without errors in LaTeX', {
 })
 
 
-
 test_that('table-tester-2.Rmd renders without errors in HTML', {
   skip_without_pandoc()
   skip_on_cran()
