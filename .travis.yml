@@ -4,10 +4,12 @@ language: R
 sudo: false
 cache: packages
 r:
-  - oldrel
+#  - oldrel
   - release
   - devel
 r_github_packages: jimhester/covr
+env:
+  - CACHE_VERSION=standard
 matrix:
   include:
   - pandoc: false
@@ -16,7 +18,8 @@ matrix:
     - tidyverse/dplyr
     - jimhester/covr
     r: release
-
+    env:
+      - CACHE_VERSION=github_dplyr
 after_success:
   - Rscript run-covr.R
 
