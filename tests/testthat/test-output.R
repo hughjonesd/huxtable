@@ -131,18 +131,17 @@ test_that('Quick output functions work', {
   m <- matrix(1:4, 2, 2)
   dfr <- data.frame(a = 1:5, b = 1:5)
 
-  tf <- tempfile()
+  tf <- tempfile(fileext = '.pdf')
   expect_error(quick_pdf(m, dfr, ht, file = tf), regexp = NA)
   expect_true(file.exists(tf))
 
-  tf <- tempfile()
+  tf <- tempfile(fileext = '.htm')
   expect_error(quick_html(m, dfr, ht, file = tf), regexp = NA)
   expect_true(file.exists(tf))
 
   tf <- tempfile(fileext = '.docx')
   expect_error(quick_docx(m, dfr, ht, file = tf), regexp = NA)
   expect_true(file.exists(tf))
-
 })
 
 
