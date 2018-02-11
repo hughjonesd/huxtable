@@ -470,7 +470,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
   # You can't use normalizePath with a non-existent file, so the below doesn't work:
   # latex_file <- normalizePath(tempfile(fileext = ".tex"), mustWork = TRUE)
-  clean_tmp_dir <- normalizePath(tempdir())
+  clean_tmp_dir <- normalizePath(tempdir(), mustWork = TRUE)
   latex_file <- tempfile(tmpdir = clean_tmp_dir, fileext = ".tex")
   sink(latex_file)
   tryCatch({
