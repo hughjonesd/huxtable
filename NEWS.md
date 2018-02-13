@@ -5,6 +5,7 @@
 * Second attempt to fix `quick_pdf` and friends for CRAN: confirm overwrites manually, 
   or fail, if a file argument is not explicitly specified.
 * Turn off some tests on CRAN, as they fail there but not elsewhere.
+* Add pointless quote marks in Description and Title. I don't make the rules.
 
 # huxtable 2.0.1
 
