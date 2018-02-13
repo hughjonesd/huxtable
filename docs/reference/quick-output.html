@@ -104,11 +104,11 @@
     <p>Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.</p>
     
 
-    <pre class="usage"><span class='fu'>quick_pdf</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.pdf"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
+    <pre class="usage"><span class='fu'>quick_pdf</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>confirm</span>(<span class='st'>"huxtable-output.pdf"</span>), <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
 
-<span class='fu'>quick_html</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.html"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
+<span class='fu'>quick_html</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>confirm</span>(<span class='st'>"huxtable-output.html"</span>), <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
 
-<span class='fu'>quick_docx</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"huxtable-output.docx"</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</pre>
+<span class='fu'>quick_docx</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>confirm</span>(<span class='st'>"huxtable-output.docx"</span>), <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -134,6 +134,9 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Objects in <code>...</code> will be converted to huxtables, with borders added.</p>
+<p>If &#8216;file&#8217; is not specified, the default file path is "huxtable-output.xxx" in
+the working directory. If the session is interactive, you'll be asked to confirm any
+overwrite; if the session is not interactive, the command will fail.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

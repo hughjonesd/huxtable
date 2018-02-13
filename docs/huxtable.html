@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-01-01" />
+<meta name="date" content="2018-02-13" />
 
 <title>Introduction to Huxtable</title>
 
@@ -121,7 +121,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Introduction to Huxtable</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-01-01</em></h4>
+<h4 class="date"><em>2018-02-13</em></h4>
 
 </div>
 
@@ -156,7 +156,9 @@ $(document).ready(function () {
 <li><a href="#conditional-formatting">Conditional formatting</a></li>
 </ul></li>
 <li><a href="#creating-a-regression-table">Creating a regression table</a></li>
-<li><a href="#output-to-different-formats">Output to different formats</a></li>
+<li><a href="#output-to-different-formats">Output to different formats</a><ul>
+<li><a href="#quick-output">Quick output</a></li>
+</ul></li>
 <li><a href="#end-matter">End matter</a></li>
 </ul>
 </div>
@@ -176,7 +178,7 @@ $(document).ready(function () {
 <h1>Introduction</h1>
 <div id="about-this-document" class="section level2">
 <h2>About this document</h2>
-<p>This is the introductory vignette for the R package ‘huxtable’, version 2.0.0. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
+<p>This is the introductory vignette for the R package ‘huxtable’, version 3.0.0. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
 </div>
 <div id="huxtable" class="section level2">
 <h2>Huxtable</h2>
@@ -957,13 +959,13 @@ cars_mpg</code></pre>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">0</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">Fiat X    1   -9</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">Fiat X    1-    9</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; "> 27.3</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">4</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">1</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">Porsche   914   -2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">Porsche   914-    2</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">   26</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">4</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:1pt 1pt 1pt 1pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 2pt 2pt 2pt 2pt; ">1</td>
@@ -1529,7 +1531,7 @@ huxreg(lm1, lm2, lm3)</code></pre>
 <div id="output-to-different-formats" class="section level1">
 <h1>Output to different formats</h1>
 <p>If you use knitr and rmarkdown in RStudio, huxtable objects should automatically display in the appropriate format (HTML or LaTeX). You need to have some LaTeX packages installed for huxtable to work. To find out what these are, you can call <code>report_latex_dependencies()</code>. This will print out and/or return a set of <code>usepackage{...}</code> statements. If you use Sweave or knitr without rmarkdown, you can use this function in your LaTeX preamble to load the packages you need.</p>
-<p>rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic, a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the <a href="https://cran.r-project.org/package=flextable">flextable package</a> from CRAN. You can then convert your huxtable objects to <code>flextable</code> objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the <code>flextable</code> and <code>officer</code> documentation and <code>?as_flextable</code> for more details.</p>
+<p>Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic, a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the <a href="https://cran.r-project.org/package=flextable">flextable package</a> from CRAN. You can then convert your huxtable objects to <code>flextable</code> objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the <code>flextable</code> and <code>officer</code> documentation and <code>?as_flextable</code> for more details.</p>
 <p>Sometimes you may want to select how huxtable objects are printed by default. For example, in an RStudio notebook (a .Rmd document with <code>output_format = html_notebook</code>), huxtable can’t automatically work out what format to use, as of the time of writing. You can set it manually using <code>options(huxtable.print = print_notebook)</code> which prints out HTML in an appropriate format.</p>
 <p>Lastly, you can print a huxtable on screen using <code>print_screen</code>. Borders, column and row spans and cell alignment are shown. If the <a href="https://cran.r-project.org/package=crayon">crayon</a> package is installed, and your terminal or R IDE supports it, border, text and background colours are also displayed.</p>
 <pre class="r"><code>print_screen(ht)</code></pre>
@@ -1545,6 +1547,12 @@ huxreg(lm1, lm2, lm3)</code></pre>
 ## 
 ## Column names: Employee, Salary</code></pre>
 <p>If you need to output to another format, file an <a href="https://github.com/hughjonesd/huxtable">issue request</a> on Github.</p>
+<div id="quick-output" class="section level2">
+<h2>Quick output</h2>
+<p>Sometimes you quickly want to get your data into a Word, HTML or PDF document. To do this you can use the <code>quick_docx</code>, <code>quick_html</code> and <code>quick_pdf</code> functions. These are called with one or more huxtable objects, or objects which can be turned into a huxtable such as data frames. A new document of the appropriate type will be created. By default the file will be in the current directory under the name e.g. <code>huxtable-output.pdf</code>. If the file already exists, you’ll be asked to confirm the overwrite. For non-interactive use, you must specify a filename yourself explicitly – this keeps you from accidentally trashing your files.</p>
+<pre class="r"><code>quick_pdf(mtcars) 
+quick_pdf(mtcars, file = 'motorcars data.pdf')</code></pre>
+</div>
 </div>
 <div id="end-matter" class="section level1">
 <h1>End matter</h1>

@@ -362,8 +362,8 @@ ht
 
 ## Number format
 
-You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number of decimal places (for more advanced options, see the help files). This
-affects all numbers, or number-like substrings within your cells.
+You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number of decimal places 
+(for more advanced options, see the help files). This affects all numbers, or number-like substrings within your cells.
 
 ```{r}
 pointy_ht <- hux(c('Do not pad this.', 11.003, 300, 12.02, '12.1 **'))
@@ -608,7 +608,7 @@ you can call `report_latex_dependencies()`. This will print out and/or return a 
 If you use Sweave or knitr without rmarkdown, you can use this function in your LaTeX preamble to load the packages
 you need.
 
-rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic,
+Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic,
 a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the 
 [flextable package](https://cran.r-project.org/package=flextable) from CRAN. You can then convert your huxtable objects
 to `flextable` objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the `flextable` and `officer` documentation and `?as_flextable` for more details.
@@ -629,6 +629,19 @@ print_screen(ht)
 
 If you need to output to another format, file an [issue request](https://github.com/hughjonesd/huxtable) on Github. 
 
+## Quick output
+
+Sometimes you quickly want to get your data into a Word, HTML or PDF document. To do this you can use the `quick_docx`,
+`quick_html` and `quick_pdf` functions. These are called with one or more huxtable objects, or objects which can
+be turned into a huxtable such as data frames. A new document of the appropriate type will be created. By
+default the file will be in the current directory under the name e.g. `huxtable-output.pdf`. If the file already exists,
+you'll be asked to confirm the overwrite. For non-interactive use, you must specify a filename yourself
+explicitly -- this keeps you from accidentally trashing your files. 
+
+```{r, eval = FALSE}
+quick_pdf(mtcars) 
+quick_pdf(mtcars, file = 'motorcars data.pdf')
+```
 
 # End matter
 
