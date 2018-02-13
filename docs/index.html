@@ -77,7 +77,6 @@
 p {
   margin-top: 24pt;
   margin-bottom: 12pt;
-
 }
 
 a {
@@ -171,7 +170,7 @@ pre.knitr {
 .ui-tabs .ui-tabs-nav li {
   position: relative;
   float: left;
-  width: 25%;
+  width: 20%;
   line-height: 30px;
   background: white;
   border-radius: 3px 3px 0px 0px;
@@ -187,6 +186,7 @@ pre.knitr {
   color: black;
   font-weight: normal;
   padding: 5px 10px;
+  font-size: 0.8em
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -249,7 +249,7 @@ pre.knitr {
 functionality to xtable, but more, with a simpler interface. Features include control over text styling,
 number format, background color, borders, padding
 and alignment. Cells can span multiple rows and/or columns. Tables can be manipulated with standard R subsetting or
-<code>dplyr</code> functions.Here are some quick examples:
+<code>dplyr</code> functions. Here are some quick examples:
 </p>
 
 <div id="example-container">
@@ -258,6 +258,7 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
   <li><a href="#ex-pipe">Pipe interface</a></li>
   <li><a href="#ex-condformat">Conditional formatting</a></li>
   <li><a href="#ex-huxreg">Table of regressions</a></li>
+  <li><a href="#ex-quick">Quick document</a></li>
 </ul>
 <div class="example" id="ex-simple">
 <div class="source"><pre class="knitr r"><span class="hl std">ht</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">hux</span><span class="hl std">(</span>
@@ -516,6 +517,16 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
 </table>
 <!--/html_preserve-->
 </div>
+
+<div class="example" id="ex-quick">
+<div class="source"><pre class="knitr r"><span class="hl kwd">quick_pdf</span><span class="hl std">(mtcars)</span>
+<span class="hl kwd">quick_docx</span><span class="hl std">(mtcars)</span>
+<span class="hl kwd">quick_pdf</span><span class="hl std">(mtcars)</span>
+<span class="hl com"># Files are produced in the current working directory.</span>
+</pre></div>
+
+</div>
+
 </div>
 
 

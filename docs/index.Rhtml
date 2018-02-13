@@ -15,7 +15,6 @@
 p {
   margin-top: 24pt;
   margin-bottom: 12pt;
-
 }
 
 a {
@@ -109,7 +108,7 @@ pre.knitr {
 .ui-tabs .ui-tabs-nav li {
   position: relative;
   float: left;
-  width: 25%;
+  width: 20%;
   line-height: 30px;
   background: white;
   border-radius: 3px 3px 0px 0px;
@@ -125,6 +124,7 @@ pre.knitr {
   color: black;
   font-weight: normal;
   padding: 5px 10px;
+  font-size: 0.8em
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -185,7 +185,7 @@ end.rcode-->
 functionality to xtable, but more, with a simpler interface. Features include control over text styling,
 number format, background color, borders, padding
 and alignment. Cells can span multiple rows and/or columns. Tables can be manipulated with standard R subsetting or
-<code>dplyr</code> functions.Here are some quick examples:
+<code>dplyr</code> functions. Here are some quick examples:
 </p>
 
 <div id="example-container">
@@ -194,6 +194,7 @@ and alignment. Cells can span multiple rows and/or columns. Tables can be manipu
   <li><a href="#ex-pipe">Pipe interface</a></li>
   <li><a href="#ex-condformat">Conditional formatting</a></li>
   <li><a href="#ex-huxreg">Table of regressions</a></li>
+  <li><a href="#ex-quick">Quick document</a></li>
 </ul>
 <div class="example" id="ex-simple">
 <!--begin.rcode echo = TRUE, results = 'asis'
@@ -269,6 +270,18 @@ lm3 <- lm(log(price) ~ carat + depth, diamonds)
 huxreg(lm1, lm2, lm3)
 end.rcode-->
 </div>
+
+<div class="example" id="ex-quick">
+<!--begin.rcode echo = TRUE, eval = FALSE, results = 'asis'
+
+quick_pdf(mtcars)
+quick_docx(mtcars)
+quick_pdf(mtcars)
+# Files are produced in the current working directory.
+
+end.rcode-->
+</div>
+
 </div>
 
 
