@@ -1,4 +1,3 @@
-# huxtable 2.0.2.9000
 
 # huxtable 2.0.2
 
