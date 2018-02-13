@@ -1,14 +1,14 @@
 Package: huxtable
 Type: Package
-Title: Simply Create LaTeX and HTML Tables
+Title: Simply Create 'LaTeX' and 'HTML' Tables
 Version: 2.0.2
 Author: David Hugh-Jones [aut, cre]
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
-Description: Creates HTML and LaTeX tables. Provides similar 
+Description: Creates 'HTML' and 'LaTeX' tables. Provides similar 
   functionality to 'xtable', but does more, with a simpler interface. Allows export to
-  Microsoft Word or PowerPoint using the 'officer' package. Includes  a 'huxreg' function 
-  for creation of regression tables, and 'quick_*' one-liner commands to print data as Word, 
-  PDF or HTML. 
+  'Microsoft Word' or 'PowerPoint' using the 'officer' package. Includes  a 'huxreg' function 
+  for creation of regression tables, and 'quick_*' one-liner commands to print data as 'Word', 
+  'PDF' or 'HTML'. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
