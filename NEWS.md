@@ -1,6 +1,6 @@
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
-increments reflect backwards-incompatible API changes.
+increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 # huxtable 3.0.0
 * Second attempt to fix `quick_pdf` and friends for CRAN: confirm overwrites manually, 
