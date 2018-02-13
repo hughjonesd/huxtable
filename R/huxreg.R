@@ -111,7 +111,8 @@ huxreg <- function (
     tidied <- lapply(tidied, function (x) {
       stars_arg <- c(0, sort(stars), ' ' = 1)
       if (is.null(x$p.value)) {
-        warning("tidy() does not return p values for models of class ", class(x)[1], "; significance stars not printed.")
+        warning("tidy() does not return p values for models of class ", class(x)[1],
+              "; significance stars not printed.")
         return (x)
       }
       x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ], paste(estimate, symnum(as.numeric(p.value),

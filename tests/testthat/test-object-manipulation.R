@@ -74,7 +74,6 @@ test_that('Subset assignment of hux into hux preserves attributes', {
 
 
 test_that('Column names are not uglified', {
-  # skip('Can\'t solve this one at the moment.')
   ht <- hux('A long column name' = 1:3, 'Another name' = 1:3, add_colnames = TRUE)
   expect_match(to_screen(ht), 'A long column name', fixed = TRUE, all = FALSE)
   ht <- hux('A long column name' = 1:3, 'Another name' = 1:3, add_colnames = FALSE)

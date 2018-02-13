@@ -300,7 +300,7 @@ build_clines_for_row <- function(ht, row, collapsed_borders, cb_colors) {
       blank_line_color[dc$display_col:dc$end_col] <- background_color(ht)[dc$display_row, dc$display_col]
   }
 
-  widths <- collapsed_borders$horiz[row + 1,]
+  widths <- collapsed_borders$horiz[row + 1, ]
   if (all(widths == 0)) {
     return('')
   } else {
@@ -348,6 +348,5 @@ v_border <- function (ht, row, col, collapsed_borders, cb_colors) {
   color <- cb_colors$vert[row, col]
   color <- format_color(color, default = 'black')
 
-  paste0('!{\\color[RGB]{', color ,'}\\vrule width ', width, 'pt}')
+  paste0('!{\\color[RGB]{', color, '}\\vrule width ', width, 'pt}')
 }
-

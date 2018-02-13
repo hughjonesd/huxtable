@@ -43,9 +43,9 @@ collapsed_borders <- function (ht) {
 
   dc <- display_cells(ht, all = TRUE)
   # provides large speedup:
-  dc <- as.matrix(dc[,c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
+  dc <- as.matrix(dc[, c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
   for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
-    dcell <- dc[ dc[,'row'] == i & dc[,'col'] == j, ]
+    dcell <- dc[ dc[, 'row'] == i & dc[, 'col'] == j, ]
     drow <- dcell['display_row']
     dcol <- dcell['display_col']
     # if we're in top row, set top border; bottom row set bb etc.
@@ -74,9 +74,9 @@ collapsed_border_colors <- function (ht) {
 
   dc <- display_cells(ht, all = TRUE)
   # provides large speedup:
-  dc <- as.matrix(dc[,c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
+  dc <- as.matrix(dc[, c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
   for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
-    dcell <- dc[ dc[, 'row'] == i & dc[,'col'] ==j, ]
+    dcell <- dc[ dc[, 'row'] == i & dc[, 'col'] == j, ]
     drow <- dcell['display_row']
     dcol <- dcell['display_col']
     # if we're in top row, set top border; bottom row set bb etc.
@@ -131,8 +131,7 @@ format_numbers <- function (string, num_fmt) {
 #' @examples
 #' foo <- 'Make $$$ with us'
 #' sanitize(foo, type = 'latex')
-sanitize <- function (str, type = "latex")
-{
+sanitize <- function (str, type = "latex") {
   if (type == "latex") {
     result <- str
     result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)

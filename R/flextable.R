@@ -69,10 +69,12 @@ as_flextable.huxtable <- function(x, ...) {
   rots <- list('0' = 'lrtb', '90' = 'btlr', '270' = 'tbrl')
   dcells <- display_cells(x, all = FALSE)
   for (r in seq_len(nrow(dcells))) {
-    dcell <- dcells[r,]
+    dcell <- dcells[r, ]
     drow <- dcell$display_row
     dcol <- dcell$display_col
-    if (dcell$colspan > 1 || dcell$rowspan > 1) ft <- flextable::merge_at(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col)
+    if (dcell$colspan > 1 || dcell$rowspan > 1) {
+      ft <- flextable::merge_at(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col)
+    }
     if (bold(x)[drow, dcol]) ft <- flextable::bold(ft, i = drow, j = dcol)
     if (italic(x)[drow, dcol]) ft <- flextable::italic(ft, i = drow, j = dcol)
     if (! is.na(fs <- font_size(x)[drow, dcol])) ft <- flextable::fontsize(ft, i = drow, j = dcol, size = fs)

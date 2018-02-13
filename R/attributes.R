@@ -880,7 +880,6 @@ make_getter_setters('number_format', 'cell')
 # override the default
 `number_format<-.huxtable` <- function(ht, value) {
   stopifnot(all(sapply(value, function (x) is.numeric(x) || is.character(x) || is.function(x) || is.na(x) )))
-  # if (is.atomic(value) || is.list(value)) value[is.na(value)] <- huxtable_env$huxtable_default_attrs[['number_format']]
   attr(ht, 'number_format')[] <- value
   ht
 }

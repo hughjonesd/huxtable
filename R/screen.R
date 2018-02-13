@@ -64,8 +64,8 @@ to_screen.huxtable <- function (
   borders <- collapsed_borders(ht)
   border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
   # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
-  index_rows <- lapply(seq_len(nrow(ht)), function (x) seq(border_rows[x], border_rows[x+1] - 1))
-  index_cols <- lapply(seq_len(ncol(ht)), function (x) seq(border_cols[x], border_cols[x+1] - 1))
+  index_rows <- lapply(seq_len(nrow(ht)), function (x) seq(border_rows[x], border_rows[x + 1] - 1))
+  index_cols <- lapply(seq_len(ncol(ht)), function (x) seq(border_cols[x], border_cols[x + 1] - 1))
   # borders$vert is row, col+1; $horiz is row+1, col
   for (i in seq_len(nrow(ht) + 1)) for (j in seq_len(ncol(ht) + 1)) {
     if (i <= nrow(ht)) {
@@ -121,7 +121,7 @@ to_screen.huxtable <- function (
     if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
   }
 
-  result <- paste((apply(charmat, 1, paste0, collapse = '')), collapse = '\n')
+  result <- paste(apply(charmat, 1, paste0, collapse = ''), collapse = '\n')
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c('left', 'center', 'right')
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
@@ -192,7 +192,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
     charmat[border_rows[2], - omit_cols ] <- '-'
   }
 
-  result <- paste((apply(charmat, 1, paste0, collapse='')), collapse='\n')
+  result <- paste(apply(charmat, 1, paste0, collapse = ''), collapse = '\n')
   result <- paste0(result, '\n\n')
   if (! is.na(cap <- caption(ht))) result <- paste0(result, 'Table: ', cap, '\n')
 
@@ -245,7 +245,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
         lx <- length(x)
         last <- x[lx]
         last <- c(substring(last, 1, width), substring(last, width + 1))
-        x[lx:(lx+1)] <- last
+        x[lx:(lx + 1)] <- last
       }
       x
     }))
@@ -256,7 +256,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x)))
 
   # row heights as widths: start at 0 and increase it if its too little, sharing equally among relevant cols
-  dc <- dc[order(dc$rowspan),]
+  dc <- dc[order(dc$rowspan), ]
   heights <- rep(1, nrow(ht))
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]

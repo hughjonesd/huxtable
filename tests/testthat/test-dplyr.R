@@ -55,7 +55,7 @@ test_that('mutate, mutate_ and transmute work', {
   expect_silent(ht5 <- dplyr::mutate(ht, a = NULL))
   expect_equivalent(dim(font(ht5)), c(3, 1))
 
-  ht6 <- dplyr::mutate_(ht, .dots = list(x = quote(a+b)))
+  ht6 <- dplyr::mutate_(ht, .dots = list(x = quote(a + b)))
   expect_equivalent(ht6$x, c(2, 4, 6))
   expect_equivalent(bold(ht6)[, 3], c(TRUE, FALSE, FALSE))
 })

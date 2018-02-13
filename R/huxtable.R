@@ -48,7 +48,7 @@ NULL
 huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
   assert_that(is.flag(add_colnames), is.flag(add_rownames))
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
-  if (R.version$major >= 3 & R.version$minor >= 3) df_args$fix.empty.names = FALSE
+  if (R.version$major >= 3 & R.version$minor >= 3) df_args$fix.empty.names <- FALSE
   ht <- do.call(data.frame, df_args)
   ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
 
