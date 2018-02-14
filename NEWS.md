@@ -6,9 +6,15 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 
 # huxtable 3.0.0
+
 * Second attempt to fix `quick_pdf` and friends for CRAN: confirm overwrites manually, 
   or fail, if a file argument is not explicitly specified. 
 * Add pointless quote marks in Description and Title. I don't make the rules.
+
+## Breaking changes
+
+* `quick_xxx` functions without an explicit `file` argument throw an error if called non-interactively,
+  and prompt before overwriting files if called interactively.
 
 # huxtable 2.0.2
 

@@ -102,7 +102,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
             if (nargs == 3) {
               if (missing(value)) value <- col
               if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
-              if (byrow) stop('byrow = TRUE makes no sense if `row` is a matrix')
+              if (byrow) stop('`byrow = TRUE` makes no sense if `row` is a matrix')
               .(attr_symbol)(ht)[row] <- value
             } else {
               if (nargs == 2) {
