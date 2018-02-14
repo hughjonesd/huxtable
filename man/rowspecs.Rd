@@ -62,7 +62,7 @@ ht <- huxtable(a = 1:5, b = 5:1)
 
 set_bold(ht, 2:4, 1:2, TRUE)
 set_bold(ht, odds, evens, TRUE)
-set_bold(ht, everywhere, matches('[aeiou]'), TRUE)
+set_bold(ht, everywhere, tidyselect::matches('[aeiou]'), TRUE)
 
 set_bold(ht, where(ht == 1), TRUE)
 
