@@ -28,12 +28,15 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
 Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more,
-with a simpler interface. Features include control over text styling, number format, background color, borders, padding
-and alignment. Cells can span multiple rows and/or columns. Tables can be manipulated with standard R subsetting or
-`dplyr` functions. Huxtable includes a `huxreg()` function for quick creation of regression tables, and allows output to
-Microsoft Word or Powerpoint using the `officer` package. The `quick_pdf()`, `quick_docx()` and
-`quick_html()` commands provide one-liners to print data frames or similar objects into a new 
-document.
+with a simpler interface. Features include:
+
+* Control over text styling, number format, background colour, borders, padding and alignment.
+* Table cells can span multiple rows and/or columns.
+* Table manipulation via standard R subsetting, or using `dplyr`. 
+* `huxreg()` function for quick creation of regression tables.
+* Output to Microsoft Word or Powerpoint using the `officer` package. 
+* `quick_pdf()`, `quick_docx()` and `quick_html()` one-liners to print data frames into a new document.
+* Formatted table display in the R console, including borders, colour, and text styles.
 
 # Installing
 
@@ -43,11 +46,11 @@ To install from CRAN:
 install.packages('huxtable')
 ```
 
-To install from github: 
+To install the latest version from github: 
 
 ```{r, eval = FALSE}
-install.packages('devtools')
-devtools::install_github('hughjonesd/huxtable')
+install.packages('remotes')
+remotes::install_github('hughjonesd/huxtable')
 ```
 
 # Learning more
