@@ -1,5 +1,6 @@
 
 #' @import assertthat
+#' @import tidyselect
 NULL
 
 
@@ -192,5 +193,11 @@ get_rc_spec <- function (ht, obj, dimno) {
   dim_length <- dim(ht)[dimno]
   if (missing(obj)) return(seq_len(dim_length))
 
-  if (is.function(obj)) return(obj(ht, dimno)) else return(obj)
+  result <- if (dimno == 2) {
+    tidyselect::with_vars(colnames(ht), if (is.function(obj)) obj(ht, dimno) else obj)
+  } else {
+    if (is.function(obj)) obj(ht, dimno) else obj
+  }
+
+  result
 }
