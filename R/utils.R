@@ -316,19 +316,25 @@ guess_knitr_output_format <- function() {
 #' @param ... Cell contents.
 #' @param after Insert the row/column after this position. 0 (the default) inserts as the first row/column.
 #' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See \code{\link{cbind.huxtable}}.
-#'
+#' @details
+#' In \code{insert_column} only, you can use a column name for \code{after}.
 #' @return The modified huxtable
 #' @export
 #'
 #' @examples
-#' ht <- hux(1:5, 1:5, 1:5)
-#' ht <- insert_row(ht, 2.5, 2.5, 2.5, after = 2)
-#' ht
-#' ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
-#' ht
+#' ht <- hux(a = 1:5, b = 1:5, c = 1:5)
+#' insert_row(ht, 2.5, 2.5, 2.5, after = 2)
+#' insert_column(ht, 5:1)
+#' insert_column(ht, 5:1, after = 3)
+#' insert_column(ht, 5:1, after = "b")
 insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
   # is.count would complain about 0
-  assert_that(is.scalar(after), is.number(after), after >= 0, after <= ncol(ht))
+  assert_that(is.scalar(after), is.number(after) || is.string(after))
+  if (is.number(after)) assert_that(after >= 0, after <= ncol(ht))
+  if (is.string(after)) {
+    assert_that(has_name(ht, after))
+    after <- match(after, colnames(ht))
+  }
 
   ht1 <- NULL
   ht2 <- NULL

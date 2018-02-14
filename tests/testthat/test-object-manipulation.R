@@ -138,6 +138,13 @@ test_that('insert_column and insert_row work', {
   expect_false(bold(ht)[1, 2])
 })
 
+test_that('insert_column works with column names', {
+  ht_orig <- hux(a = 1:2, b = 1:2)
+  ht <- insert_column(ht_orig, 8, 9, after = "a")
+  expect_equivalent(ncol(ht), 3)
+  expect_equivalent(ht[, 2], huxtable(8:9))
+})
+
 test_that('Can add a column to a huxtable using standard replacement methods', {
   ht <- hux(a = 1:2, b = 1:2)
   expect_silent(ht$c <- 1:2)

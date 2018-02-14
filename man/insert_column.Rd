@@ -25,10 +25,13 @@ The modified huxtable
 These convenience functions wrap \code{cbind} or \code{rbind} for huxtables to insert
 a single row.
 }
+\details{
+In \code{insert_column} only, you can use a column name for \code{after}.
+}
 \examples{
-ht <- hux(1:5, 1:5, 1:5)
-ht <- insert_row(ht, 2.5, 2.5, 2.5, after = 2)
-ht
-ht <- insert_column(ht, 1, 2, 2.5, 3, 4, 5, after = 3)
-ht
+ht <- hux(a = 1:5, b = 1:5, c = 1:5)
+insert_row(ht, 2.5, 2.5, 2.5, after = 2)
+insert_column(ht, 5:1)
+insert_column(ht, 5:1, after = 3)
+insert_column(ht, 5:1, after = "b")
 }
