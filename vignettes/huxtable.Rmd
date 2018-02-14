@@ -151,6 +151,12 @@ right_padding(ht) <- 10
 left_padding(ht)  <- 10
 ```
 
+Similarly, we can set the `number_format` property to change how numbers are displayed in 
+cells:
+
+```{r}
+number_format(ht) <- 2    # 2 decimal places
+```
 
 To assign properties to just some cells, you use subsetting, just as in base R. So, to make the first row of the
 table **bold** and give it a bottom border, we do:
@@ -390,15 +396,15 @@ There is currently no true way to align cells by the decimal point in HTML, and 
 By default, HTML or LaTeX code will be escaped:
 
 ```{r}
-code_ht <- if (is_latex) hux('Here is some maths: $a^b$') else 
-      hux('The code for a copyright symbol is &copy;')
+code_ht <- if (is_latex) hux(c('Some maths', '$a^b$')) else 
+      hux(c('Copyright symbol', '&copy;'))
 code_ht
 ```
 
-To avoid this, set `escape_contents` to `FALSE`.
+To avoid this, set the `escape_contents` property to `FALSE`.
 
 ```{r}
-escape_contents(code_ht)[1, 1] <- FALSE
+escape_contents(code_ht)[2, 1] <- FALSE
 code_ht
 ```
 
@@ -423,12 +429,8 @@ By default, if a cell contains long contents, it will be stretched. Use the `wra
 to wrap over multiple lines:
 
 ```{r}
-ht[5, 1] <- 'David Arthur Shrimpton Hugh-Jones'
-ht 
-```
-
-```{r}
 ht_wrapped <- ht
+ht_wrapped[5, 1] <- 'David Arthur Shrimpton Hugh-Jones'
 wrap(ht_wrapped) <- TRUE
 ht_wrapped
 ```
@@ -437,8 +439,9 @@ ht_wrapped
 ## Adding row and column names
 
 Just like data frames, huxtables can have row and column names. Often, we want to add these to the final table.
-You can do this using either the `add_colnames`/`add_rownames` arguments to `as_huxtable`, or the functions of the same
-name. (Be aware that as of March 2017, these conflict with some deprecated `dplyr` functions.)
+You can do this using either the `add_colnames`/`add_rownames` arguments to `as_huxtable`, or the
+`add_colnames()`/`add_rownames()` functions. (Note that earlier versions of `dplyr` used to have functions with the
+same name.)
 
 ```{r}
 as_hux(mtcars[1:4, 1:4])                           %>% 
@@ -510,6 +513,16 @@ car_ht                                                 %>%
 Of course you could also just do `1:nrow(car_ht)`, but, in the middle of a dplyr pipe, you may not know exactly
 how many rows or columns you have. Also, these functions make your code easy to read.
 
+You can also use `dplyr` functions like `starts_with()`, `contains()`, and `matches()` to specify columns by column 
+name. For a full list of these functions, see `?select_helpers`.
+
+```{r}
+car_ht %>% set_background_color(everywhere, starts_with('C'), 'orange')
+car_ht %>% set_italic(everywhere, matches('[aeiou]'), TRUE)
+```
+
+Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
+
 Lastly, remember that you can set a property for every cell by simply omitting the `row` and `col` arguments, like this:
 `set_background_color(ht, 'orange')`.
 
@@ -572,8 +585,8 @@ confusing: typically, `byrow = TRUE` means that the *columns* will all look the 
 color_demo <- matrix('text', 7, 7)
 rainbow <- c('red', 'orange', 'yellow', 'green', 'blue', 'turquoise', 'violet')
 color_demo <- as_hux(color_demo)                  %>% 
-      set_text_color(rainbow)                     %>% # text rainbow goes down columns
-      set_background_color(rainbow, byrow = TRUE) %>% # background color rainbow goes along rows
+      set_text_color(rainbow)                     %>% # text rainbow down columns
+      set_background_color(rainbow, byrow = TRUE) %>% # background color rainbow along rows
       set_all_borders(1)                          %>% 
       set_all_border_colors('white')
 color_demo
@@ -598,7 +611,7 @@ huxreg(lm1, lm2, lm3)
 
 For more information see the `huxreg` vignette, available online in
 [HTML](https://hughjonesd.github.io/huxtable/huxreg.html) or [PDF](https://hughjonesd.github.io/huxtable/huxreg.pdf) or
-in R via `vignette(huxreg)`.
+in R via `vignette('huxreg')`.
 
 # Output to different formats
 
@@ -629,7 +642,7 @@ print_screen(ht)
 
 If you need to output to another format, file an [issue request](https://github.com/hughjonesd/huxtable) on Github. 
 
-## Quick output
+## Quick output commands
 
 Sometimes you quickly want to get your data into a Word, HTML or PDF document. To do this you can use the `quick_docx`,
 `quick_html` and `quick_pdf` functions. These are called with one or more huxtable objects, or objects which can
