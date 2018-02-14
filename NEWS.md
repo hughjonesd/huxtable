@@ -6,6 +6,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 # huxtable 2.0.2.9000
 
 * dplyr select helpers now work inside set_* column specifications: e.g. set_bold(ht, 1:3, matches("ab"), TRUE)
+* Column names can now be used for the `after` argument to `insert_column`.
 * Second attempt to fix `quick_pdf` and friends for CRAN: confirm overwrites manually, 
   or fail, if a file argument is not explicitly specified. 
 * Add pointless quote marks in Description and Title. I don't make the rules.
