@@ -470,6 +470,7 @@ NULL
 #' @rdname quick-output
 #' @export
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4) {
+  assert_that(is.number(borders))
   force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
@@ -512,6 +513,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
 #' @rdname quick-output
 #' @export
 quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4) {
+  assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
   sink(file)
@@ -535,6 +537,7 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
 #' @rdname quick-output
 #' @export
 quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4) {
+  assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
   my_doc <- officer::read_docx()
