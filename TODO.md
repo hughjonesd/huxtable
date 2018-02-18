@@ -35,7 +35,8 @@ TODO
   - my numbers have been formatted
     - use number_format
 * headers property?
-  - header rows and columns could be addressed using 3 argument `set_` syntax;
+  - header rows and columns could be addressed using 3 argument `set_` syntax; e.g. a headers() function returning a 
+    matrix
   - headers would be copied (by default?) when you subset huxtables
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
