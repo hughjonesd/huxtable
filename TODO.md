@@ -19,6 +19,23 @@ BUGS
 TODO
 ====
 
+* simple interface for borders even when there are multiple spans. E.g.
+```
+ht <- hux(1:2, 3:4)
+rowspan(ht)[1, 1] <- 2
+bottom_border(ht)[2, ] <- 1
+```
+should work, whereas now it doesn't put a border below column 1.
+Possibilities:
+```
+set_border_at(ht, below, above, left, right, value)
+```
+where one of below/above/left/right must be specified.
+Underlying model options: keep the same as now. Simple, but it breaks if you call e.g. `rowspan`
+after calling `set_border_at`. Or, store borders in a new way, e.g. in a (nrow+1) x ncol array
+for horiz borders, nrow x (ncol + 1) for vertical ones. Then everything works and you avoid
+a huge amount of conversion hassle. You could then deprecate the old interface while
+translating calls into the new version. (OK, the conversion hassle still exists...)
 * way to address a particular subset of a matrix, e.g.
   - ht %>% area(1:3, 4:6) %>% set_italic(TRUE) %>% set_border_color('red')
   - presumably this returns the ht with some attribute appropriately set, analogous to groups in a tibble
