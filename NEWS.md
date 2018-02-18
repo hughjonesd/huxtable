@@ -10,6 +10,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * `quick_*` functions: when the `file` argument is not explicitly specified, confirm overwrites manually, or fail 
   if called non-interactively.
 * Add pointless quote marks in Description and Title... I don't make the rules.
+* Don't apply number_format to negative exponents (e.g. 1.12e-3).
 
 ## Breaking changes
 

@@ -71,13 +71,14 @@ test_that('number_format works on cells with multiple numbers', {
 
 
 test_that('number_format does not apply to exponents in scientific notation', {
-  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e17", "1.12A3"))
+  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e17", "1.12e-3", "1.12A3"))
   number_format(ht) <- 4
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.1200e3")
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1.1200E3")
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "1.1200e17")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "1.1200e-3")
   # the next is not scientific notation so both numbers should be affected
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "1.1200A3.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[5, 1], "1.1200A3.0000")
 })
 
 
