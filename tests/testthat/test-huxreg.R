@@ -114,3 +114,12 @@ test_that('huxreg column names are legitimate', {
 
   expect_identical(cn, make.names(cn))
 })
+
+
+test_that('can pass broom::tidy arguments to huxreg', {
+  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+  glm1 <- glm(I(Sepal.Width > 3) ~ Sepal.Length, data = iris, family = binomial)
+  expect_silent(huxreg(glm1, tidy_args = list(exponentiate = TRUE), statistics = "nobs"))
+  expect_silent(huxreg(lm1, glm1, tidy_args = list(list(), list(exponentiate = TRUE)), statistics = "nobs"))
+  expect_silent(huxreg(lm1, glm1, tidy_args = list(exponentiate = FALSE), statistics = "nobs"))
+})

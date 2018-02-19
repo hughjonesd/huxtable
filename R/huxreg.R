@@ -12,6 +12,8 @@ NULL
 #' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
 #'   Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
 #' @param ci_level Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.
+#' @param tidy_args List of arguments to pass to \code{\link[broom]{tidy}}. You can also pass a list of lists;
+#'   if so, the nth element will be used for the nth column.
 #' @param stars Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
 #'   this behaviour.
@@ -62,6 +64,7 @@ huxreg <- function (
         number_format   = '%.3f',
         pad_decimal     = '.',
         ci_level        = NULL,
+        tidy_args       = NULL,
         stars           = c('***' = 0.001, '**' = 0.01, '*' = 0.05),
         bold_signif     = NULL,
         borders         = 0.4,
@@ -82,13 +85,23 @@ huxreg <- function (
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
   error_pos <- match.arg(error_pos)
   if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
+  if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) tidy_args <- rep(list(tidy_args), length(models))
 
-  tidy_with_ci <- function (obj) {
-    if (has_builtin_ci(obj)) return(broom::tidy(obj, conf.int = TRUE, conf.level = ci_level))
-    tidied <- broom::tidy(obj) # should return 'estimate' and 'std.error'
+  my_tidy <- function (n, ci_level = NULL) {
+    args <- if (! is.null(tidy_args)) tidy_args[[n]] else list()
+    args$x <- models[[n]]
+    if (! is.null(ci_level)) {
+      args$conf.int <- TRUE
+      args$conf.level <- ci_level
+    }
+    do.call(broom::tidy, args)
+  }
+  tidy_with_ci <- function (n) {
+    if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
+    tidied <- my_tidy(n) # should return 'estimate' and 'std.error'
     cbind(tidied, make_ci(tidied[, c('estimate', 'std.error')], ci_level))
   }
-  tidied <- lapply(models, if (is.null(ci_level)) broom::tidy else tidy_with_ci)
+  tidied <- lapply(seq_along(models), if (is.null(ci_level)) my_tidy else tidy_with_ci)
 
   my_coefs <- unique(unlist(lapply(tidied, function (x) x$term)))
   if (! missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
