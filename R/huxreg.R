@@ -36,7 +36,7 @@ NULL
 #' in the output.
 #'
 #' Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
-#' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns of from \code{glance}
+#' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance}
 #' will be used. To use no columns, set \code{statistics = character(0)}.
 #'
 #' \code{error_format} is a string to be interpreted by \code{\link[glue]{glue}}. Terms in parentheses will be
