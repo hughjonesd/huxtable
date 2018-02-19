@@ -11,6 +11,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   if called non-interactively.
 * Add pointless quote marks in Description and Title... I don't make the rules.
 * Don't apply number_format to negative exponents (e.g. 1.12e-3).
+* New `tidy_args` argument to huxreg allows per-model customization of the call to `tidy`.
 
 ## Breaking changes
 
