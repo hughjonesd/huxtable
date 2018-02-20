@@ -19,6 +19,14 @@ BUGS
 TODO
 ====
 
+* use tidyselect::vars_select for columns in set_ interface
+  - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
+  - Downside: can't use logical vectors for columns (without some strong trickery); 
+    misleading because you can't do e.g. set_bold(ht, 1, a, b, c, TRUE)
+  - One possibility would be to allow the above. If so we'd have to 
+    take nargs (as now) and change the nargs == 4 to nargs >= 4. 
+    The downside of that is there's no clear division between rows and columns.
+  - 
 * simple interface for borders even when there are multiple spans. E.g.
 ```
 ht <- hux(1:2, 3:4)
