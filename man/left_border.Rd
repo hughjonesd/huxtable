@@ -74,14 +74,10 @@ left_border(ht)
 print_screen(ht)
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_left_border(ht, 1)
-left_border(ht2)
-ht3 <- set_left_border(ht, 1:2, 1, 1)
-left_border(ht3)
-ht4 <- set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
-left_border(ht4)
-ht5 <- set_left_border(ht, where(ht == 1), 1)
-left_border(ht5)
+set_left_border(ht, 1)
+set_left_border(ht, 1:2, 1, 1)
+set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
+set_left_border(ht, where(ht == 1), 1)
 }
 \seealso{
 \code{\link{set_all_borders}}

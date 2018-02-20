@@ -218,9 +218,9 @@ get_default_properties <- function (names = NULL) {
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 1:3)
-#' ht <- set_cell_properties(ht, 1, 1, font = 'Palatino', font_size = 14)
-#' font(ht)
-#' font_size(ht)
+#' ht <- set_cell_properties(ht, 1, 1, italic = TRUE, text_color = 'red')
+#' text_color(ht)
+#' ht
 set_cell_properties <- function (ht, row, col, ...) {
   props <- list(...)
   if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
@@ -260,7 +260,7 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 #' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.
 #' @template getset-example
 #' @templateVar attr_val 'right'
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'left'
 #' @export align align<- set_align align.huxtable align<-.huxtable
 #' @S3method align huxtable
@@ -360,7 +360,7 @@ check_span_shadows <- function (ht, rc, value) {
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'yellow'
 #' @family formatting functions
 #' @export background_color background_color<- set_background_color background_color.huxtable background_color<-.huxtable
@@ -374,8 +374,8 @@ make_getter_setters('background_color', 'cell')
 #' @templateVar attr_desc Text color
 #' @templateVar value_param_desc A vector or matrix of R colors.
 #' @template getset-example
-#' @templateVar attr_val 'navy'
-#' @template getset-rowspec-example
+#' @templateVar attr_val 'blue'
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'red'
 #' @family formatting functions
 #' @export text_color text_color<- set_text_color text_color.huxtable text_color<-.huxtable
@@ -397,7 +397,7 @@ make_getter_setters('text_color', 'cell')
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 2
 #' @export left_border left_border<- set_left_border left_border.huxtable left_border<-.huxtable
 #' @S3method left_border huxtable
@@ -457,7 +457,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @seealso \code{\link{left_border}}, \code{\link{set_outer_borders}}
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_borders(ht, 1:3, 1:2, 1)
+#' set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
   call <- sys.call()
   for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border')) {
@@ -537,7 +537,7 @@ get_all_borders <- function(ht, row, col) {
 #' adjoining border of the previous cell to width 0 (e.g. for a left border color, unset the right border
 #' of the cell on the left).
 #' @seealso \code{\link{set_all_border_colors}}
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'blue'
 #' @export left_border_color left_border_color<- set_left_border_color left_border_color.huxtable left_border_color<-.huxtable
 #' @S3method left_border_color huxtable
@@ -769,7 +769,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val TRUE
 #' @templateVar extra print_screen(ht)
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
 #' @export bold bold<- set_bold bold.huxtable bold<-.huxtable
@@ -868,7 +868,7 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' ht_bands # probably not what you want
 #' number_format(ht_bands) <- NA
 #' ht_bands
-#' @template getset-rowspec-example
+#' @template getset-visible-rowspec-example
 #' @templateVar attr_val 2
 #' @templateVar attr_val2 3
 #' @export number_format number_format<- set_number_format number_format.huxtable number_format<-.huxtable

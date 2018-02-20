@@ -60,14 +60,10 @@ bold(ht)
 print_screen(ht)
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_bold(ht, TRUE)
-bold(ht2)
-ht3 <- set_bold(ht, 1:2, 1, TRUE)
-bold(ht3)
-ht4 <- set_bold(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
-bold(ht4)
-ht5 <- set_bold(ht, where(ht == 1), TRUE)
-bold(ht5)
+set_bold(ht, TRUE)
+set_bold(ht, 1:2, 1, TRUE)
+set_bold(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
+set_bold(ht, where(ht == 1), TRUE)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

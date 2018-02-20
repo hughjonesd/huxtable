@@ -38,12 +38,8 @@ align(ht)
 
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_align(ht, 'right')
-align(ht2)
-ht3 <- set_align(ht, 1:2, 1, 'right')
-align(ht3)
-ht4 <- set_align(ht, 1:2, 1:2, c('right', 'left'), byrow = TRUE)
-align(ht4)
-ht5 <- set_align(ht, where(ht == 1), 'right')
-align(ht5)
+set_align(ht, 'right')
+set_align(ht, 1:2, 1, 'right')
+set_align(ht, 1:2, 1:2, c('right', 'left'), byrow = TRUE)
+set_align(ht, where(ht == 1), 'right')
 }

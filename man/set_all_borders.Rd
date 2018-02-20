@@ -26,7 +26,7 @@ for the specified cells.
 }
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
-ht <- set_all_borders(ht, 1:3, 1:2, 1)
+set_all_borders(ht, 1:3, 1:2, 1)
 }
 \seealso{
 \code{\link{left_border}}, \code{\link{set_outer_borders}}

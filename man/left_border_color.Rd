@@ -75,14 +75,10 @@ left_border_color(ht)
 
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_left_border_color(ht, 'red')
-left_border_color(ht2)
-ht3 <- set_left_border_color(ht, 1:2, 1, 'red')
-left_border_color(ht3)
-ht4 <- set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
-left_border_color(ht4)
-ht5 <- set_left_border_color(ht, where(ht == 1), 'red')
-left_border_color(ht5)
+set_left_border_color(ht, 'red')
+set_left_border_color(ht, 1:2, 1, 'red')
+set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
+set_left_border_color(ht, where(ht == 1), 'red')
 }
 \seealso{
 \code{\link{set_all_border_colors}}

@@ -38,14 +38,10 @@ background_color(ht)
 
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_background_color(ht, grey(.95))
-background_color(ht2)
-ht3 <- set_background_color(ht, 1:2, 1, grey(.95))
-background_color(ht3)
-ht4 <- set_background_color(ht, 1:2, 1:2, c(grey(.95), 'yellow'), byrow = TRUE)
-background_color(ht4)
-ht5 <- set_background_color(ht, where(ht == 1), grey(.95))
-background_color(ht5)
+set_background_color(ht, grey(.95))
+set_background_color(ht, 1:2, 1, grey(.95))
+set_background_color(ht, 1:2, 1:2, c(grey(.95), 'yellow'), byrow = TRUE)
+set_background_color(ht, where(ht == 1), grey(.95))
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

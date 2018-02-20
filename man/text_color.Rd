@@ -33,19 +33,15 @@ Functions to get or set the text color property of huxtable table cells.
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
-text_color(ht) <-  'navy'
+text_color(ht) <-  'blue'
 text_color(ht)
 
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_text_color(ht, 'navy')
-text_color(ht2)
-ht3 <- set_text_color(ht, 1:2, 1, 'navy')
-text_color(ht3)
-ht4 <- set_text_color(ht, 1:2, 1:2, c('navy', 'red'), byrow = TRUE)
-text_color(ht4)
-ht5 <- set_text_color(ht, where(ht == 1), 'navy')
-text_color(ht5)
+set_text_color(ht, 'blue')
+set_text_color(ht, 1:2, 1, 'blue')
+set_text_color(ht, 1:2, 1:2, c('blue', 'red'), byrow = TRUE)
+set_text_color(ht, where(ht == 1), 'blue')
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

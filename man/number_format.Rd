@@ -65,14 +65,10 @@ number_format(ht_bands) <- NA
 ht_bands
 
 ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_number_format(ht, 2)
-number_format(ht2)
-ht3 <- set_number_format(ht, 1:2, 1, 2)
-number_format(ht3)
-ht4 <- set_number_format(ht, 1:2, 1:2, c(2, 3), byrow = TRUE)
-number_format(ht4)
-ht5 <- set_number_format(ht, where(ht == 1), 2)
-number_format(ht5)
+set_number_format(ht, 2)
+set_number_format(ht, 1:2, 1, 2)
+set_number_format(ht, 1:2, 1:2, c(2, 3), byrow = TRUE)
+set_number_format(ht, where(ht == 1), 2)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

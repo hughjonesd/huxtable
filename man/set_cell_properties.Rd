@@ -23,7 +23,7 @@ Set multiple cell properties
 }
 \examples{
 ht <- hux(a = 1:3, b = 1:3)
-ht <- set_cell_properties(ht, 1, 1, font = 'Palatino', font_size = 14)
-font(ht)
-font_size(ht)
+ht <- set_cell_properties(ht, 1, 1, italic = TRUE, text_color = 'red')
+text_color(ht)
+ht
 }
