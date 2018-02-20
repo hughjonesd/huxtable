@@ -24,6 +24,10 @@ For \code{set_label}, the \code{ht} object.
 \description{
 Functions to get or set the table-level table label property of a huxtable.
 }
+\details{
+LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
+in \href{http://bookdown.org}{bookdown}.
+}
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)

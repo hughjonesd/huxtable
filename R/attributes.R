@@ -1044,6 +1044,9 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.
 #' @template getset-example
 #' @templateVar attr_val 'tab:mytable'
+#' @details
+#' LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
+#' in \href{http://bookdown.org}{bookdown}.
 #' @export label label<- set_label label.huxtable label<-.huxtable
 #' @S3method label huxtable
 #' @S3method label<- huxtable
