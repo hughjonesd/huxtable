@@ -624,7 +624,11 @@ you need.
 Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables are rather basic,
 a lot of formatting will be lost. If you want to create Word or Powerpoint documents directly, install the 
 [flextable package](https://cran.r-project.org/package=flextable) from CRAN. You can then convert your huxtable objects
-to `flextable` objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the `flextable` and `officer` documentation and `?as_flextable` for more details.
+to `flextable` objects and include them in Word or Powerpoint documents. Almost all formatting should work. See the `flextable` and `officer` documentation and `?as_flextable` for more details. 
+
+Similarly, to create formatted reports in Excel, install the 
+[openxlsx package](https://cran.r-project.org/package=openxlsx). You can then use `as_Workbook` to convert your 
+huxtables to Workbook objects, and save them using `openxlsx::saveWorkbook`.
 
 Sometimes you may want to select how huxtable objects are printed by default. For example, in an RStudio notebook
 (a .Rmd document with `output_format = html_notebook`), huxtable can't automatically work out what format to use, as of
@@ -645,11 +649,11 @@ If you need to output to another format, file an [issue request](https://github.
 ## Quick output commands
 
 Sometimes you quickly want to get your data into a Word, HTML or PDF document. To do this you can use the `quick_docx`,
-`quick_html` and `quick_pdf` functions. These are called with one or more huxtable objects, or objects which can
-be turned into a huxtable such as data frames. A new document of the appropriate type will be created. By
+`quick_html`, `quick_pdf` and `quick_xlsx` functions. These are called with one or more huxtable objects, or objects
+which can be turned into a huxtable such as data frames. A new document of the appropriate type will be created. By
 default the file will be in the current directory under the name e.g. `huxtable-output.pdf`. If the file already exists,
-you'll be asked to confirm the overwrite. For non-interactive use, you must specify a filename yourself
-explicitly -- this keeps you from accidentally trashing your files. 
+you'll be asked to confirm the overwrite. For non-interactive use, you must specify a filename yourself explicitly --
+this keeps you from accidentally trashing your files.
 
 ```{r, eval = FALSE}
 quick_pdf(mtcars) 
