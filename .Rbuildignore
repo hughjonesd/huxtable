@@ -15,5 +15,6 @@ logo\.xcf
 ^build-website.R$
 ^man-roxygen$
 ^TODO\.md$
+^new-colspec-ideas\.md$
 ^codecov\.yml$
 ^run-covr\.R$
