@@ -5,6 +5,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 2.0.2.9000
 
+* Output to Excel workbooks using the `openxlsx` package.
+* New `quick_xlsx` function.
 * dplyr select helpers now work inside `set_*` column specifications: e.g. set_bold(ht, 1:3, matches("ab"), TRUE)
 * Column names can now be used for the `after` argument to `insert_column`.
 * `quick_*` functions: when the `file` argument is not explicitly specified, confirm overwrites manually, or fail 

@@ -565,6 +565,24 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
 }
 
 
+#' @rdname quick-output
+#' @export
+quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4) {
+  assert_that(is.number(borders))
+  force(file)
+  hts <- huxtableize(list(...), borders)
+  wb <- openxlsx::createWorkbook()
+  ix <- 0
+  for (ht in hts) {
+    ix <- ix + 1
+    wb <- as_Workbook(ht, Workbook = wb, sheet = paste("sheet", ix))
+  }
+  saveWorkbook(wb, file = file, overwrite = TRUE)
+
+  invisible(NULL)
+}
+
+
 huxtableize <- function (obj_list, borders) {
   lapply(obj_list, function (obj) {
     if (! inherits(obj, 'huxtable')) {
