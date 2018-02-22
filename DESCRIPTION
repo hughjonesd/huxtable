@@ -39,6 +39,7 @@ Suggests:
     lme4,
     nnet,
     officer,
+    openxlsx,
     psych,
     testthat
 VignetteBuilder: knitr

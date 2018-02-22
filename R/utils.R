@@ -6,7 +6,7 @@
 NULL
 
 # return character matrix of formatted contents, suitably escaped
-clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word'), ...) {
+clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)
   contents <- as.matrix(as.data.frame(ht))
 
@@ -222,6 +222,14 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
   if (! all) dcells <- dcells[! dcells$shadowed, ]
 
   dcells
+}
+
+
+get_caption_hpos <- function (ht) {
+  hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))
+  if (! hpos %in% c('left', 'center', 'right')) hpos <- position(ht)
+
+  hpos
 }
 
 

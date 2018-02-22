@@ -44,8 +44,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   }
 
   cap <- if (! is.na(cap <- caption(ht))) {
-    hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))
-    if (! hpos %in% c('left', 'center', 'right')) hpos <- position(ht)
+    hpos <- get_caption_hpos(ht)
     cap_setup <- switch(hpos,
             left   = 'raggedright',
             center = 'centering',
