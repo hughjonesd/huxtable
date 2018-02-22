@@ -189,7 +189,8 @@ decimal_pad <- function(col, pad_chars, type) {
 }
 
 
-# return data frame mapping real cell positions to cells displayed
+# return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
+# cells, including those shadowed by others.
 display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   dcells <- data.frame(row = rep(1:nrow(ht), ncol(ht)), col = rep(1:ncol(ht), each = nrow(ht)),
         rowspan = as.vector(new_rowspan), colspan = as.vector(new_colspan))
