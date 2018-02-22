@@ -49,6 +49,16 @@ test_that('Widths and alignment work', {
 })
 
 
+test_that('Captions work', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  caption(hx) <- 'Caption here'
+  for (pos in c('top', 'topleft', 'topcentre', 'topright', 'bottom', 'bottomleft', 'bottomcentre', 'bottomright')) {
+    caption_pos(hx) <- pos
+    expect_silent(as_Workbook(hx))
+  }
+})
+
+
 test_that('Can add to an existing workbook', {
   hx <- huxtable(a = 1:3, b = 4:6)
   wb <- openxlsx::createWorkbook()
