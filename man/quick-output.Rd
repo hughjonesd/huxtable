@@ -6,7 +6,7 @@
 \alias{quick_html}
 \alias{quick_docx}
 \alias{quick_xlsx}
-\title{Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.}
+\title{Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.}
 \usage{
 quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4)
 
@@ -27,7 +27,7 @@ quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4)
 Invisible \code{NULL}.
 }
 \description{
-Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.
+Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.
 }
 \details{
 Objects in \code{...} will be converted to huxtables, with borders added.
@@ -43,5 +43,6 @@ dfr <- data.frame(a = 1:5, b = 1:5)
 quick_pdf(m, dfr)
 quick_html(m, dfr)
 quick_docx(m, dfr)
+quick_xlsx(m, dfr)
 }
 }

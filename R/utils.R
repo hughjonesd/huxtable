@@ -454,7 +454,7 @@ hux_logo <- function(latex = FALSE) {
 }
 
 
-#' Quickly create a PDF, HTML or Word document showing matrices, data frames, et cetera.
+#' Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.
 #'
 #' @param ... One or more huxtables or R objects with an \code{as_huxtable} method.
 #' @param file File path for the output.
@@ -475,6 +475,7 @@ hux_logo <- function(latex = FALSE) {
 #' quick_pdf(m, dfr)
 #' quick_html(m, dfr)
 #' quick_docx(m, dfr)
+#' quick_xlsx(m, dfr)
 #' }
 #' @name quick-output
 NULL
