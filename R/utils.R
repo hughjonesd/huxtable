@@ -578,7 +578,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
     ix <- ix + 1
     wb <- as_Workbook(ht, Workbook = wb, sheet = paste("sheet", ix))
   }
-  saveWorkbook(wb, file = file, overwrite = TRUE)
+  openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
 
   invisible(NULL)
 }

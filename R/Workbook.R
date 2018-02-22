@@ -49,7 +49,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
         'install.packages("openxlsx")')
 
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
-  addWorksheet(wb, sheet)
+  openxlsx::addWorksheet(wb, sheet)
 
   contents <- clean_contents(ht, type = 'excel')
   contents <- as.data.frame(contents)
@@ -62,13 +62,13 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   top_cap <- write_caption && ! is.na(cap) && grepl("top", cap_pos)
   cap_row <- if (top_cap) 1 else nrow(ht) + 1
   if (write_caption && ! is.na(cap)) {
-    writeData(wb, sheet, x = cap, startRow = cap_row)
-    cap_style <- createStyle(halign = get_caption_hpos(ht))
-    addStyle(wb, sheet, style = cap_style, rows = cap_row, cols = seq_len(ncol(ht)),
+    openxlsx::writeData(wb, sheet, x = cap, startRow = cap_row)
+    cap_style <- openxlsx::createStyle(halign = get_caption_hpos(ht))
+    openxlsx::addStyle(wb, sheet, style = cap_style, rows = cap_row, cols = seq_len(ncol(ht)),
       gridExpand = TRUE)
-    mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
+    openxlsx::mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
   }
-  writeData(wb, sheet, contents, colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none',
+  openxlsx::writeData(wb, sheet, contents, colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none',
         startRow = if (top_cap) 2 else 1)
 
   dcells <- display_cells(ht, all = FALSE)
@@ -96,7 +96,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     border_style <- cut(unlist(borders), c(-1, 0, 0.5, 1, 2, Inf), labels = FALSE)
     border_style <- c("none", "hair", "thin", "medium", "thick")[border_style]
     va           <- valign(ht)[drow, dcol]
-    style <- createStyle(
+    style <- openxlsx::createStyle(
             fontName       = null_args$ft,
             fontSize       = null_args$fs,
             fontColour     = null_args$tc,
@@ -114,20 +114,22 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     workbook_rows <- seq(drow, dcell$end_row)
     workbook_cols <- seq(dcol, dcell$end_col)
     if (top_cap) workbook_rows <- workbook_rows + 1
-    addStyle(wb, sheet, style = style, rows = workbook_rows, cols = workbook_cols,
+    openxlsx::addStyle(wb, sheet, style = style, rows = workbook_rows, cols = workbook_cols,
           gridExpand = TRUE)
-    if (dcell$rowspan > 1 || dcell$colspan > 1) mergeCells(wb, sheet, cols = workbook_cols, rows = workbook_rows)
+    if (dcell$rowspan > 1 || dcell$colspan > 1) openxlsx::mergeCells(wb, sheet, cols = workbook_cols,
+          rows = workbook_rows)
   }
 
   if (is.numeric(cw <- col_width(ht))) {
     basic_width <- 20 * ncol(ht)
-    setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * width(ht) * basic_width)
+    openxlsx::setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * width(ht) * basic_width)
   }
   if (is.numeric(rh <- row_height(ht))) {
     table_height <- height(ht)
     if (is.na(table_height) || ! is.numeric(table_height)) table_height <- 1
     basic_height <- 30 * nrow(ht)
-    setRowHeights(wb, sheet, rows = seq_len(nrow(ht)), heights = rh * basic_height * table_height)
+    openxlsx::setRowHeights(wb, sheet, rows = seq_len(nrow(ht)), heights = rh * basic_height * table_height)
   }
+
   return(wb)
 }
