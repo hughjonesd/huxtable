@@ -357,7 +357,7 @@ check_span_shadows <- function (ht, rc, value) {
 #' @template getset-cell
 #' @templateVar attr_name background_color
 #' @templateVar attr_desc Background color
-#' @templateVar value_param_desc A vector or matrix of R colors.
+#' @templateVar value_param_desc A character vector or matrix of valid R color names.
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
 #' @template getset-visible-rowspec-example
@@ -372,7 +372,7 @@ make_getter_setters('background_color', 'cell')
 #' @template getset-cell
 #' @templateVar attr_name text_color
 #' @templateVar attr_desc Text color
-#' @templateVar value_param_desc A vector or matrix of R colors.
+#' @templateVar value_param_desc A character vector or matrix of valid R color names.
 #' @template getset-example
 #' @templateVar attr_val 'blue'
 #' @template getset-visible-rowspec-example

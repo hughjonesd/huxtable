@@ -15,7 +15,7 @@ set_text_color(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector or matrix of R colors. Set to \code{NA} to reset to the default.}
+\item{value}{A character vector or matrix of valid R color names. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
