@@ -1,6 +1,6 @@
 Type: Package
 Package: huxtable
-Title: Simply Create LaTeX and HTML Tables
+Title: Easily Create and Style Tables for LaTeX, HTML and Other Formats
 Version: 3.0.0
 Authors@R:
     person(given = "David",
@@ -9,11 +9,11 @@ Authors@R:
            email = "davidhughjones@gmail.com")
 Author: David Hugh-Jones [aut, cre]
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
-Description: Creates HTML and LaTeX tables. Provides similar 
-  functionality to 'xtable', but does more, with a simpler interface. Allows export to
-  'Microsoft Word' or 'PowerPoint' using the 'officer' package. Includes  a 'huxreg' function 
-  for creation of regression tables, and 'quick_*' one-liner commands to print data as Word, 
-  PDF or HTML documents. 
+Description: Like 'xtable', creates styled tables. Export to HTML, LaTeX, 'Word', 
+  'Excel', 'PowerPoint' and other formats. Simple, modern interface to manipulate 
+  borders, size, position, captions, colours, text styles and number formatting.
+  Includes  a 'huxreg' function for creation of regression tables, and 'quick_*' 
+  one-liners to print data to a new document.
 License: MIT + file LICENSE
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
