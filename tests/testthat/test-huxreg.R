@@ -31,6 +31,17 @@ test_that('huxreg confidence intervals work', {
         ci_level = 0.95))
 })
 
+test_that('huxreg confidence intervals work when tidy c.i.s not available', {
+  set.seed(27101975)
+  library(nlme)
+  data(Orthodont, package = 'nlme')
+  # method ML avoids a warning in broom::glance
+  fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~ 1, method = 'ML')
+  expect_silent(huxreg(fm1, tidy_args = list(effects = 'fixed'), statistics = 'nobs', ci_level = 0.95,
+        error_format = '({conf.low}-{conf.high})'))
+
+})
+
 test_that('huxreg works with single coefficient', {
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
