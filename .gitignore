@@ -1,4 +1,5 @@
 .Rproj.user/**
+revdep/**
 .Rhistory
 .RData
 .Ruserdata
