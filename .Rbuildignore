@@ -19,3 +19,4 @@ logo\.xcf
 ^new-colspec-ideas\.md$
 ^codecov\.yml$
 ^run-covr\.R$
+^appveyor\.yml$
