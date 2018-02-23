@@ -1,7 +1,7 @@
 Type: Package
 Package: huxtable
 Title: Easily Create and Style Tables for LaTeX, HTML and Other Formats
-Version: 3.0.0
+Version: 3.0.0.9000
 Authors@R:
     person(given = "David",
            family = "Hugh-Jones",
@@ -17,7 +17,7 @@ Description: Like 'xtable', creates styled tables. Export to HTML, LaTeX, 'Word'
 License: MIT + file LICENSE
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
-Imports: 
+Imports:
     assertthat,
     dplyr,
     glue,
@@ -29,7 +29,7 @@ Imports:
     tibble,
     tidyselect,
     utils
-Suggests: 
+Suggests:
     broom,
     covr,
     crayon,
