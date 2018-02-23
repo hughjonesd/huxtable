@@ -4,6 +4,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 3.0.0.9000
 
+* Bugfixes for number_format
+
 # huxtable 3.0.0
 
 * Output to Excel workbooks using the `openxlsx` package.
