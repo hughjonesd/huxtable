@@ -95,6 +95,7 @@ test_that('number_format works with various interesting cases', {
   expect_equivalent(huxtable:::format_numbers('1.1234e121 3', '%.3f'), '1.123e121 3.000')
   # this is pretty brutal:
   expect_equivalent(huxtable:::format_numbers('-1.1e3-1.2e3', '%.3f'), '-1.100e3-1.200e3')
+  expect_equivalent(huxtable:::format_numbers('-1.1e-3-1.2e3', '%.3f'), '-1.100e-3-1.200e3')
 
 })
 
