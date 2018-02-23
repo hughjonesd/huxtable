@@ -1,9 +1,8 @@
-# huxtable 3.0.0.9000
-
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 3.0.0.9000
 
 # huxtable 3.0.0
 
