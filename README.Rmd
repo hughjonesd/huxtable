@@ -35,8 +35,8 @@ with a simpler interface. Features include:
 * Table cells can span multiple rows and/or columns.
 * Table manipulation via standard R subsetting, or using `dplyr`. 
 * `huxreg()` function for quick creation of regression tables.
-* Output to Microsoft Word or Powerpoint using the `officer` package. 
-* `quick_pdf()`, `quick_docx()` and `quick_html()` one-liners to print data frames into a new document.
+* Output to Microsoft Word, Excel or Powerpoint using the `officer` and `openxlsx` packages. 
+* `quick_pdf()`, `quick_docx()`, `quick_html()` and `quick_xlsx()` one-liners to print data frames into a new document.
 * Formatted table display in the R console, including borders, colour, and text styles.
 
 # Installing
