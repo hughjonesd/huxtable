@@ -21,6 +21,19 @@ build_script:
 test_script:
   - travis-tool.sh run_tests
 
+environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1
+
+  matrix:
+  - R_VERSION: release
+    R_ARCH: x64
+  - R_VERSION: stable
+  - R_VERSION: patched
+
+matrix:
+  - fast_finish: true
+
 on_failure:
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
@@ -43,3 +56,13 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+notifications:
+  - provider: Email
+    to:
+      - davidhughjones@gmail.com
+    subject: 'r-appveyor build {{status}}'
+    message: "https://ci.appveyor.com/project/hughjonesd/huxtable"
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
