@@ -3,7 +3,7 @@ Note that huxtable attempts to follow semantic versioning (https://semver.org). 
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 
-# huxtable 2.0.2.9000
+# huxtable 3.0.0
 
 * Output to Excel workbooks using the `openxlsx` package.
 * New `quick_xlsx` function.
