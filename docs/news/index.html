@@ -102,13 +102,28 @@
     </div>
 
     <div class="contents">
-    <div id="huxtable-3-0-0" class="section level1">
+    <div id="huxtable-2-0-2-9000" class="section level1">
 <h1 class="hasAnchor">
-<a href="#huxtable-3-0-0" class="anchor"></a>huxtable 3.0.0</h1>
+<a href="#huxtable-2-0-2-9000" class="anchor"></a>huxtable 2.0.2.9000</h1>
 <ul>
-<li>Second attempt to fix <code>quick_pdf</code> and friends for CRAN: confirm overwrites manually, or fail, if a file argument is not explicitly specified.</li>
-<li>Add pointless quote marks in Description and Title. I don’t make the rules.</li>
+<li>Output to Excel workbooks using the <code>openxlsx</code> package.</li>
+<li>New <code>quick_xlsx</code> function.</li>
+<li>dplyr select helpers now work inside <code>set_*</code> column specifications: e.g. set_bold(ht, 1:3, matches(“ab”), TRUE)</li>
+<li>Column names can now be used for the <code>after</code> argument to <code>insert_column</code>.</li>
+<li>
+<code>quick_*</code> functions: when the <code>file</code> argument is not explicitly specified, confirm overwrites manually, or fail if called non-interactively.</li>
+<li>Add pointless quote marks in Description and Title… I don’t make the rules.</li>
+<li>Don’t apply number_format to negative exponents (e.g. 1.12e-3).</li>
+<li>New <code>tidy_args</code> argument to huxreg allows per-model customization of the call to <code>tidy</code>.</li>
 </ul>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>
+<code>quick_xxx</code> functions without an explicit <code>file</code> argument throw an error if called non-interactively, and prompt before overwriting files if called interactively.</li>
+</ul>
+</div>
 </div>
     <div id="huxtable-2-0-2" class="section level1">
 <h1 class="hasAnchor">
@@ -133,9 +148,9 @@
 <li>
 <code>to_screen</code> only shows colnames if there are any non-zero-length column names.</li>
 </ul>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
@@ -186,9 +201,9 @@
 <li>New <code>error_format</code> argument to <code>huxreg</code> for flexible control over uncertainty estimates.</li>
 <li>Infrastructure improvements: slightly less ugly code in screen.R and LaTeX.R.</li>
 </ul>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Removed options <code>collapse</code>, <code>borders</code>, <code>blank</code> and <code>colname_color</code> from <code>to_screen</code>/<code>print_screen</code>.</li>
 <li>
@@ -258,9 +273,9 @@
 <li>Expanded introduction and new vignette for <code>huxreg</code>.</li>
 <li>Numerous bugs have been fixed and replaced with new, more advanced bugs.</li>
 </ul>
-<div id="breaking-changes-2" class="section level2">
+<div id="breaking-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-3" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
 <code>theme_minimal</code> has been renamed <code>theme_basic</code> to avoid a name clash with <code>ggplot2</code>.</li>
@@ -282,7 +297,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#huxtable-3-0-0">3.0.0</a></li>
+        <li><a href="#huxtable-2-0-2-9000">2.0.2.9000</a></li>
         <li><a href="#huxtable-2-0-2">2.0.2</a></li>
         <li><a href="#huxtable-2-0-1">2.0.1</a></li>
         <li><a href="#huxtable-2-0-0">2.0.0</a></li>

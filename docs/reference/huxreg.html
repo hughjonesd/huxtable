@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -106,10 +107,10 @@
     <pre class="usage"><span class='fu'>huxreg</span>(<span class='no'>...</span>, <span class='kw'>error_format</span> <span class='kw'>=</span> <span class='st'>"({std.error})"</span>, <span class='kw'>error_style</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"stderr"</span>, <span class='st'>"ci"</span>,
   <span class='st'>"statistic"</span>, <span class='st'>"pvalue"</span>), <span class='kw'>error_pos</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"below"</span>, <span class='st'>"same"</span>, <span class='st'>"right"</span>),
   <span class='kw'>number_format</span> <span class='kw'>=</span> <span class='st'>"%.3f"</span>, <span class='kw'>pad_decimal</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>), <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>outer_borders</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>note</span> <span class='kw'>=</span> <span class='st'>"{stars}."</span>,
-  <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>, <span class='kw'>R2</span> <span class='kw'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>, <span class='st'>"AIC"</span>),
-  <span class='kw'>coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>omit_coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>tidy_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>),
+  <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>outer_borders</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
+  <span class='kw'>note</span> <span class='kw'>=</span> <span class='st'>"{stars}."</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>, <span class='kw'>R2</span> <span class='kw'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>,
+  <span class='st'>"AIC"</span>), <span class='kw'>coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>omit_coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -142,6 +143,11 @@ Set to <code>NA</code> to turn off padding. See <code><a href='pad_decimal.html'
     <tr>
       <th>ci_level</th>
       <td><p>Confidence level for intervals. Set to <code>NULL</code> to not calculate confidence intervals.</p></td>
+    </tr>
+    <tr>
+      <th>tidy_args</th>
+      <td><p>List of arguments to pass to <code><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>tidy</a></code>. You can also pass a list of lists;
+if so, the nth element will be used for the nth column.</p></td>
     </tr>
     <tr>
       <th>stars</th>
@@ -193,7 +199,7 @@ headings will be automatically created. If the <code>coef</code> and/or <code>st
 used for row headings. If different values of <code>coef</code> have the same name, the corresponding rows will be merged
 in the output.</p>
 <p>Each element of <code>statistics</code> should be a column name from <code><a href='http://www.rdocumentation.org/packages/broom/topics/glance'>glance</a></code>. You can also
-use 'nobs' for the number of observations. If <code>statistics</code> is <code>NULL</code> then all columns of from <code>glance</code>
+use 'nobs' for the number of observations. If <code>statistics</code> is <code>NULL</code> then all columns from <code>glance</code>
 will be used. To use no columns, set <code>statistics = character(0)</code>.
     <code>error_format</code> is a string to be interpreted by <code><a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue</a></code>. Terms in parentheses will be
 replaced by computed values. You can use any columns returned
@@ -210,17 +216,17 @@ could do <code>error_format = "{conf.low} to {conf.high}"</code></p>
 <span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>y</span> ~ <span class='no'>a</span> + <span class='no'>b</span>, <span class='no'>dfr</span>)
 <span class='no'>glm1</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='fu'>I</span>(<span class='no'>y</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) ~ <span class='no'>a</span>, <span class='no'>dfr</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
 <span class='fu'>huxreg</span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>glm1</span>)</div><div class='output co'>#&gt; ───────────────────────────────────────────────────────────
-#&gt;                     (1)            (2)            (3)      
+#&gt;                     ( 1)           ( 2)          ( 3)      
 #&gt;               ─────────────────────────────────────────────
-#&gt;   (Intercept)      0.109          0.116        -0.172      
+#&gt;   (Intercept)       0.109          0.116        -0.172     
 #&gt;                   (0.098)        (0.098)       (0.231)     
 #&gt;   a                1.011 ***      1.012 ***     1.449 ***  
 #&gt;                   (0.109)        (0.109)       (0.338)     
-#&gt;   b                              -0.112                    
+#&gt;   b                               -0.112                   
 #&gt;                                  (0.103)                   
 #&gt;               ─────────────────────────────────────────────
 #&gt;   N              100            100           100          
-#&gt;   R2               0.468          0.474                    
+#&gt;   R 2              0.468          0.474                    
 #&gt;   logLik        -138.740       -138.135       -55.501      
 #&gt;   AIC            283.481        284.270       115.001      
 #&gt; ───────────────────────────────────────────────────────────

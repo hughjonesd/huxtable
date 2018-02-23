@@ -93,14 +93,16 @@ reference:
     - set_default_properties
   - title: "Output"
     desc: >
-      Functions to outut huxtables to LaTeX, HTML, Word, markdown or on-screen
+      Functions to outut huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen
     contents:
       - as_FlexTable
+      - as_Workbook
       - guess_knitr_output_format
       - starts_with("print_")
       - print.huxtable
       - report_latex_dependencies
       - starts_with("to_")
+      - starts_with("quick")
   - title: "Themes"
     desc: Quick ways to theme a huxtable
     contents:

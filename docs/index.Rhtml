@@ -277,6 +277,7 @@ end.rcode-->
 quick_pdf(mtcars)
 quick_docx(mtcars)
 quick_pdf(mtcars)
+quick_xlsx(mtcars)
 # Files are produced in the current working directory.
 
 end.rcode-->
@@ -292,6 +293,19 @@ with other R packages to create tables.</p>
 
 
 <h3>News</h3>
+
+<h4>February 23, 2018: Huxtable 3.0.0 released</h4>
+
+<p>The major version bump marks a (small) change in the <code>quick_xxx</code> function
+API: if called without an explicit <code>file</code> argument, these functions will
+fail when called non-interactively, and will prompt before overwriting files if called
+interactively. This prevents nasty surprises.</p>
+
+<p>Excel output is now supported using the <a href="https://github.com/awalker89/openxlsx">openxlsx</a> package. Those working in a corporate environment can now create formatted spreadsheets to
+make the pointy-haired boss happy.</p>
+
+<p>You can now select columns using dplyr-style select helpers like <code>matches()</code> and
+<code>starts_with()</code> in <code>set_*</code> functions.</p>
 
 <h4>January 3, 2018: Huxtable 2.0.0 released</h4>
 
