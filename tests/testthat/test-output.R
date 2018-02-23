@@ -14,8 +14,8 @@ validate_markdown <- function(md_string, output_format = 'html_document') {
   td <- tempdir()
   tf <- tempfile(pattern = 'markdown-example', fileext = '.md', tmpdir = td)
   cat(md_string, file = tf)
-  expect_error(ht <- rmarkdown::render(tf, output_format = output_format, output_file = NULL, output_dir = td,
-    intermediates_dir = td, clean = TRUE, quiet = TRUE), regexp = NA) # no error
+  expect_silent(ht <- rmarkdown::render(tf, output_format = output_format, output_file = NULL, output_dir = td,
+    intermediates_dir = td, clean = TRUE, quiet = TRUE)) # no error
 }
 
 
@@ -83,8 +83,8 @@ test_that('to_md and to_screen keep to min_width', {
 })
 
 test_that('hux_logo works', {
-  expect_error(hux_logo(), regexp = NA)
-  expect_error(hux_logo(latex = TRUE), regexp = NA)
+  expect_silent(hux_logo())
+  expect_silent(hux_logo(latex = TRUE))
 })
 
 
@@ -132,15 +132,19 @@ test_that('Quick output functions work', {
   dfr <- data.frame(a = 1:5, b = 1:5)
 
   tf <- tempfile(fileext = '.pdf')
-  expect_error(quick_pdf(m, dfr, ht, file = tf), regexp = NA)
+  expect_silent(quick_pdf(m, dfr, ht, file = tf))
   expect_true(file.exists(tf))
 
   tf <- tempfile(fileext = '.htm')
-  expect_error(quick_html(m, dfr, ht, file = tf), regexp = NA)
+  expect_silent(quick_html(m, dfr, ht, file = tf))
   expect_true(file.exists(tf))
 
   tf <- tempfile(fileext = '.docx')
-  expect_error(quick_docx(m, dfr, ht, file = tf), regexp = NA)
+  expect_silent(quick_docx(m, dfr, ht, file = tf))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = '.xlsx')
+  expect_silent(quick_xlsx(m, dfr, ht, file = tf))
   expect_true(file.exists(tf))
 })
 
