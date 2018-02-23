@@ -107,13 +107,15 @@ format_numbers <- function (string, num_fmt) {
         if (is.numeric(num_fmt)) function (numeral) formatC(round(numeral, num_fmt), format = 'f',
           digits = num_fmt) else
         stop('Unrecognized type of number_format: should be function, character or integer. See ?number_format')
-  # Optional minus, then any number of digits followed by an optional decimal point
-  # which is assumed to be "." (?Sys.setlocale suggests this is a reasonable assumption)
-  # the first bracketed expression (?<!\\d(e|E)?) is a negative lookbehind assertion
-  # that we don't have a digit followed by e or E i.e. it should avoid formatting exponents
-  # we use 0 or more e/E characters to avoid matching substrings of an exponent e.g.
-  # 5e12 must not match the "12" but should also not match the "2"
-  stringr::str_replace_all(string, '(?<!\\d(e|E)?-?)-?\\d+(\\.\\d+)?', function (x) format_numeral(as.numeric(x)))
+  # Breakdown:
+  # -?(\\d*\\.)?\\d+         Optional minus sign, followed by optional digits and decimal point,
+  #                          followed by one or more digits. Matches "1", "1.1", ".1", "-1", "-1.1", "-.1"
+  # (?<! ... )               But not if all of this comes straight after ...
+  # \\d(e|E)-?\\d{1,3}       a digit, an e or E, an optional minus, and 0 to 3 more digits.
+  #                          We'd like to have \d* here but you can't have unbounded-length regexes.
+  #                          The up to 3 digits rules out exponents with up to 1000 zeros, so we should
+  #                          be good...
+  stringr::str_replace_all(string,  '(?<!\\d(e|E)-?\\d{0,3})-?(\\d*\\.)?\\d+', function (x) format_numeral(as.numeric(x)))
 }
 
 

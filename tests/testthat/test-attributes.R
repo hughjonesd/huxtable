@@ -39,11 +39,11 @@ test_that("Can refer to properties by colnames", {
 
 test_that('Assignment to attributes preserves colnames', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
-  tmp <- colnames(align(ht))
+  cn <- colnames(align(ht))
   align(ht) <- 'right'
-  expect_equal(tmp, colnames(align(ht)))
+  expect_equal(cn, colnames(align(ht)))
   align(ht)[1, 1] <- 'left'
-  expect_equal(tmp, colnames(align(ht)))
+  expect_equal(cn, colnames(align(ht)))
 })
 
 
@@ -78,10 +78,25 @@ test_that('number_format does not apply to exponents in scientific notation', {
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "1.1200e17")
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "1.1200e-3")
   # the next is not scientific notation so both numbers should be affected
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[5, 1], "1.1200A3.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[6, 1], "1.1200e3 4.8000 and 5.6000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[5, 1], '1.1200A3.0000')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[6, 1], '1.1200e3 4.8000 and 5.6000')
 })
 
+
+test_that('number_format works with various interesting cases', {
+  expect_equivalent(huxtable:::format_numbers('1.1234', '%.3f'), '1.123')
+  expect_equivalent(huxtable:::format_numbers('1', '%.3f'), '1.000')
+  expect_equivalent(huxtable:::format_numbers('1 2 3', '%.3f'), '1.000 2.000 3.000')
+  expect_equivalent(huxtable:::format_numbers('1 -2 -3.1 -.4 .5', '%.3f'), '1.000 -2.000 -3.100 -0.400 0.500')
+  expect_equivalent(huxtable:::format_numbers('1.1234-1.1234', '%.3f'), '1.123-1.123')
+  expect_equivalent(huxtable:::format_numbers('1.1234e-2', '%.3f'), '1.123e-2')
+  expect_equivalent(huxtable:::format_numbers('1.1234e-12', '%.3f'), '1.123e-12')
+  expect_equivalent(huxtable:::format_numbers('1.1234e121', '%.3f'), '1.123e121')
+  expect_equivalent(huxtable:::format_numbers('1.1234e121 3', '%.3f'), '1.123e121 3.000')
+  # this is pretty brutal:
+  expect_equivalent(huxtable:::format_numbers('-1.1e3-1.2e3', '%.3f'), '-1.100e3-1.200e3')
+
+})
 
 test_that('Can combine numbers and strings in padding', {
   ht <- huxtable(a = 1, b = 1)
