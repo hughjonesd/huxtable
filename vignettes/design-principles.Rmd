@@ -88,8 +88,8 @@ if (is_latex) {
   position(ch) <- 'left'
   font_size(ch) <- 10
   font_size(ch)[c(last - 1, last), 1] <- 8
-  ch1 <- ch[,1:8]
-  ch2 <- ch[,c(1, 9:15)]
+  ch1 <- ch[, 1:8]
+  ch2 <- ch[, c(1, 9:ncol(ch))]
   caption(ch1) <- 'Comparison table, part 1'
   caption(ch2) <- 'Comparison table, part 2'
 } else {
