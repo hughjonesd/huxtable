@@ -2,6 +2,8 @@
 
 # script to rebuild website files
 
+install.packages('huxtable') # so that the website is always synced with cran. This affects e.g. versions
+
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   message("Rendering ", f)
   rmarkdown::render(f, output_format = "html_document")
