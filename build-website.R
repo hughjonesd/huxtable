@@ -1,8 +1,21 @@
 #!/usr/local/bin/Rscript
 
+
 # script to rebuild website files
 
-install.packages('huxtable') # so that the website is always synced with cran. This affects e.g. versions
+# replace the below with the tag you want:
+version_tag <- "v3.0.0-rc1"
+
+library(git2r)
+repo <- repository()
+if (! version_tag %in% (nms <- names(tags()))) stop("version_tag must be one of", nms)
+# we will build from this version:
+tag_obj <- tags()[[version_tag]]
+checkout(tag_obj)
+detach('package:git2r') # stops it interfering with psych functions
+devtools::install()
+# checkout master again so our changes in docs will apply to that branch
+git2r::checkout(repo, "master")
 
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   message("Rendering ", f)
@@ -14,4 +27,9 @@ knitr::knit("docs/index.Rhtml", "docs/index.html")
 pkgdown::build_reference()
 pkgdown::build_reference_index()
 pkgdown::build_news()
-message("Now commit and push to github. Don't forget to reinstall the dev version!")
+
+library(git2r)
+add(repo, "docs/*")
+commit(repo, message = paste("Updating website for version tag", version_tag))
+
+
