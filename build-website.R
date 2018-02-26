@@ -26,13 +26,13 @@ for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
 knitr::knit("docs/index.Rhtml", "docs/index.html")
 
 # back to the tagged version to build the reference with pkgdown
-git2r::checkout(repo, tag_obj)
+git2r::checkout(tag_obj)
 pkgdown::build_reference()
 pkgdown::build_reference_index()
 pkgdown::build_news()
 
 library(git2r)
-add(repo, "docs/*")
-pkgdown_commit <- commit(repo, message = paste("Updating website for version tag", version_tag))
+git2r::stash(repo, untracked = TRUE)
+git2r::checkout(repo, "master")
 merge(repo, pkgdown_commit)
 
