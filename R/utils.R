@@ -237,8 +237,38 @@ get_caption_hpos <- function (ht) {
 }
 
 
+#' Printing within knitr.
+#'
+#' @param x A huxtable.
+#' @param options Not used.
+#' @param ... Not used.
+#'
+#' @details
+#' knitr calls \code{\link[knitr]{knit_print}} on objects when they are printed in a knitr (or RMarkdown) document.
+#' The default method for \code{huxtable} objects guesses the appropriate output format and
+#' prints itself out appropriately.
+#'
+#' \code{huxtable} also defines a \code{knit_print} method for \code{data.frame}s. This converts the data frame
+#' to a huxtable, themes it using \code{\link{theme_plain}} and prints it. To turn this behaviour off, set
+#' \code{options(huxtable.knit_print_df = FALSE)}. To change the theme, set
+#' \code{options("huxtable.knit_print_df_theme")} to a one-argument function which should return the huxtable.
+#'
 #' @importFrom knitr knit_print
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' # in your knitr document
+#' mytheme <- function (ht) {
+#'   ht <- set_all_borders(ht, 0.4)
+#'   ht <- set_all_border_colors(ht, "darkgreen")
+#'   ht <- set_background_color(ht, evens, odds, "salmon")
+#'   ht
+#' }
+#'
+#' options(huxtable.knit_print_df_theme = mytheme)
+#' data.frame(a = 1:5, b = 1:5) # groovy!
+#' }
 knit_print.huxtable <- function (x, options, ...) {
   of <- guess_knitr_output_format()
   call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
@@ -259,6 +289,7 @@ knit_print.huxtable <- function (x, options, ...) {
 # see zzz.R
 #' @importFrom knitr knit_print
 #' @export
+#' @rdname knit_print.huxtable
 knit_print.data.frame <- function(x, options, ...) {
   if (! isTRUE(getOption('huxtable.knit_print_df', TRUE))) {
     NextMethod()
