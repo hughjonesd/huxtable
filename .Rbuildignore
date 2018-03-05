@@ -1,5 +1,5 @@
 ^packrat/
-^revdep/$
+^revdep/
 ^\.Rprofile$
 ^\.lintr$
 ^.*\.Rproj$
@@ -20,3 +20,4 @@ logo\.xcf
 ^codecov\.yml$
 ^run-covr\.R$
 ^appveyor\.yml$
+
