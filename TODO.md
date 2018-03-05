@@ -5,8 +5,6 @@
 TODO
 ====
 * Surely, add_colnames = TRUE for data frames by default.
-* Add a options(huxtable.knit_print_data_frames) to automatically huxify data frames: `knit_print(as_hux(df)))`
-* Maybe for this and for `knit_print`, set a nice default theme: outer borders, stripes, bold first row...
 
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)

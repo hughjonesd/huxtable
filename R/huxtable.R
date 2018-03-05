@@ -1,28 +1,5 @@
 
-#' Huxtable: simply create LaTeX and HTML tables
-#'
-#' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
-#' functionality to xtable, with a simpler interface.
-#'
-#' @details
-#'
-#' To create a huxtable object, use \code{\link{huxtable}} or \code{\link{as_huxtable}}.
-#'
-#' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
-#' read the vignette with \code{vignette('huxtable')}.
-#'
-#' @section Package options:
-#'
-#' \itemize{
-#'   \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link{print.huxtable}}.
-#'   \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
-#'   will be printed in color on screen.
-#'
-#' }
-#'
-#'
-#' @name huxtable-package
-NULL
+# basic huxtable creation and manipulation-----------------------------------------------------------------------------
 
 
 #' @importFrom stats na.omit setNames

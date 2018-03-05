@@ -1,0 +1,41 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "05/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(magrittr)
+
+options(huxtable.knit_print_df = FALSE)
+library(huxtable)
+mydf <- data.frame(a = 1:5, b = 1:5)
+```
+
+This should print as a standard data frame:
+
+```{r}
+mydf
+```
+
+This should be a nice hux:
+
+```{r}
+options(huxtable.knit_print_df = TRUE)
+mydf
+```
+
+The next one should be a colourful hux:
+
+```{r}
+mytheme <- function (ht) {
+  ht %>% set_all_border_colors("green") %>% set_all_borders(0.4) %>% set_background_color(evens, odds, "pink")
+}
+options(huxtable.knit_print_df_theme = mytheme)
+
+mydf
+
+```

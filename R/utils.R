@@ -5,6 +5,8 @@
 #' @import assertthat
 NULL
 
+
+
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)
@@ -254,9 +256,20 @@ knit_print.huxtable <- function (x, options, ...) {
   }
 }
 
+# see zzz.R
+#' @importFrom knitr knit_print
+#' @export
+knit_print.data.frame <- function(x, options, ...) {
+  if (! isTRUE(getOption('huxtable.knit_print_df', TRUE))) {
+    NextMethod()
+  } else {
+    ht <- as_hux(x, add_colnames = TRUE)
+    df_theme <- getOption('huxtable.knit_print_df_theme', theme_plain)
+    ht <- df_theme(ht)
 
-options(huxtable.print = print_screen)
-options(huxtable.color_screen = requireNamespace('crayon', quietly = TRUE))
+    knit_print(ht) # we are now hopping down the class hierarchy, so do this rather than NextMethod()
+  }
+}
 
 
 #' Default print method for huxtables

@@ -4,7 +4,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 3.0.0.9000
 
-* Bugfixes for number_format
+* Bugfixes for `number_format`.
+* New `theme_plain` theme.
+* Now provides `knit_print.data.frame` methods, defaulting to `theme_plain`.
 
 # huxtable 3.0.0
 
