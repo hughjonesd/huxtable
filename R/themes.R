@@ -30,7 +30,7 @@ NULL
 #' @rdname themes
 theme_plain <- function(ht){
   ht <- set_outer_borders(ht, 0.4)
-  ht <- set_background_color(ht, evens, everywhere, grey(0.95))
+  ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
   ht <- set_bold(ht, 1, everywhere, TRUE)
   ht <- set_bottom_border(ht, 1, everywhere, 0.4)
 
