@@ -106,7 +106,7 @@ final <- function(n = 1) {
 #'    for only odd ones.
 #'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 #'  \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
-#'    specify columns (but not rows). See \code{\link[dplyr]{select_helpers}} for a full list.
+#'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
 #'  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
 #'    \code{TRUE}.
 #'  \item Set \code{byrow = TRUE} to set properties by row rather than by column.
