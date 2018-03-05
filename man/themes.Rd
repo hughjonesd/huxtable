@@ -2,11 +2,14 @@
 % Please edit documentation in R/themes.R
 \name{themes}
 \alias{themes}
+\alias{theme_plain}
 \alias{theme_basic}
 \alias{theme_striped}
 \alias{theme_article}
 \title{Theme a huxtable}
 \usage{
+theme_plain(ht)
+
 theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
 theme_striped(ht, stripe = grDevices::grey(0.9), header_row = TRUE,
@@ -30,7 +33,9 @@ The huxtable object, appropriately styled.
 These functions quickly set default styles for a huxtable.
 }
 \details{
-\code{theme_basic} is a simple theme with a simple line under headers.
+\code{theme_plain} is a simple theme with a bold header, a grey striped background, and an outer border.
+
+\code{theme_basic} just adds a border for header rows and/or columns.
 
 \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 

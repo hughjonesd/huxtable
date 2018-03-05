@@ -4,7 +4,9 @@
 #'
 #' These functions quickly set default styles for a huxtable.
 #'
-#' \code{theme_basic} is a simple theme with a simple line under headers.
+#' \code{theme_plain} is a simple theme with a bold header, a grey striped background, and an outer border.
+#'
+#' \code{theme_basic} just adds a border for header rows and/or columns.
 #'
 #' \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 #'
@@ -23,6 +25,17 @@
 #' theme_striped(ht)
 NULL
 
+
+#' @export
+#' @rdname themes
+theme_plain <- function(ht){
+  ht <- set_outer_borders(ht, 0.4)
+  ht <- set_background_color(ht, evens, everywhere, grey(0.95))
+  ht <- set_bold(ht, 1, everywhere, TRUE)
+  ht <- set_bottom_border(ht, 1, everywhere, 0.4)
+
+  ht
+}
 
 #' @export
 #' @rdname themes
