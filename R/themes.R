@@ -33,6 +33,10 @@ theme_plain <- function(ht){
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
   ht <- set_bold(ht, 1, everywhere, TRUE)
   ht <- set_bottom_border(ht, 1, everywhere, 0.4)
+  ht <- set_left_padding(ht, 10)
+  ht <- set_right_padding(ht, 10)
+  ht <- set_top_padding(ht, 6)
+  ht <- set_bottom_padding(ht, 6)
 
   ht
 }
