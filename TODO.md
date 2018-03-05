@@ -1,23 +1,12 @@
 
 
-BUGS
-====
-
-* nowrap cells
-  - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
-  - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
-  - if we use l/c/r, then table position goes wonky when cells expand; worse, background colors
-    can be messed up in previous cells which expected the table not to expand!
-  - need to respect valign (which p/m/b does for wrapped cells). But what is valign for a nowrap cell?
-  - cells should expand to match nowrap width by default
-  - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
-    colour and position. 
-    - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
-* LaTeX fonts not working [is this actually true?]
 
 
 TODO
 ====
+* Surely, add_colnames = TRUE for data frames by default.
+* Add a options(huxtable.knit_print_data_frames) to automatically huxify data frames: `knit_print(as_hux(df)))`
+* Maybe for this and for `knit_print`, set a nice default theme: outer borders, stripes, bold first row...
 
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
@@ -26,7 +15,7 @@ TODO
   - One possibility would be to allow the above. If so we'd have to 
     take nargs (as now) and change the nargs == 4 to nargs >= 4. 
     The downside of that is there's no clear division between rows and columns.
-  - 
+  - See the new-colspec-ideas.md file for more thoughts
 * simple interface for borders even when there are multiple spans. E.g.
 ```
 ht <- hux(1:2, 3:4)
@@ -73,6 +62,22 @@ translating calls into the new version. (OK, the conversion hassle still exists.
 * dotted borders with LaTeX package? See https://tex.stackexchange.com/questions/20140/can-a-table-include-a-horizontal-dashed-line
 * special-case single horizontal lines across whole table?
 
+
+
+BUGS
+====
+
+* nowrap cells
+  - if we use raw content in p/m/b, content wraps, then padding fails (only left pads top line, right pads bottom)
+  - if we use mbox in p/m/b content doesn't wrap, but cells don't expand
+  - if we use l/c/r, then table position goes wonky when cells expand; worse, background colors
+    can be messed up in previous cells which expected the table not to expand!
+  - need to respect valign (which p/m/b does for wrapped cells). But what is valign for a nowrap cell?
+  - cells should expand to match nowrap width by default
+  - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
+    colour and position. 
+    - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
+* LaTeX fonts not working [is this actually true?]
 PUT OFF
 =======
 * pad_decimal only works when cells are right-aligned
