@@ -5,6 +5,7 @@
 TODO
 ====
 * Surely, add_colnames = TRUE for data frames by default.
+  - Upgrade path: as an option but FALSE by default, then TRUE...
 
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
