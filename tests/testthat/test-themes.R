@@ -10,6 +10,7 @@ test_that('Themes work', {
   expect_error(theme_basic(ht), regexp = NA)
   expect_error(theme_article(ht), regexp = NA)
   expect_error(theme_striped(ht), regexp = NA)
+  expect_error(theme_plain(ht), regexp = NA)
 })
 
 
