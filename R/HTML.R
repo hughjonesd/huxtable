@@ -52,8 +52,8 @@ to_html.huxtable <- function(ht, ...) {
   }
   idstring <- ''
   if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
-  res <- paste0('<table class="huxtable" style="border-collapse: collapse; margin-bottom: 1.5em; width: ', width, '; ', mstring,
-        heightstring, '"', idstring, '>\n')
+  res <- paste0('<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: ',
+        width, '; ', mstring, heightstring, '"', idstring, '>\n')
   if (! is.na(cap <- caption(ht))) {
     vpos <- if (grepl('top', caption_pos(ht))) 'top' else 'bottom'
     hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))

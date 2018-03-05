@@ -7,6 +7,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfixes for `number_format`.
 * New `theme_plain` theme.
 * Now provides `knit_print.data.frame` methods, defaulting to `theme_plain`.
+* Tweak top and bottom margins for HTML tables.
 
 # huxtable 3.0.0
 
