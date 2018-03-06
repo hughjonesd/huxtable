@@ -2,7 +2,9 @@
 title: "Untitled"
 author: "David Hugh-Jones"
 date: "05/03/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,13 +14,14 @@ library(magrittr)
 
 options(huxtable.knit_print_df = FALSE)
 library(huxtable)
-mydf <- data.frame(a = 1:5, b = 1:5)
+mydf <- data.frame(a = 1:5, b = letters[1:5], long = stringi::stri_rand_strings(5, sample(25, 5)), d = rnorm(5))
+
 ```
 
 This should print as a standard data frame:
 
 ```{r}
-mydf
+mydf 
 ```
 
 This should be a nice hux:

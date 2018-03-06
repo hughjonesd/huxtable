@@ -23,7 +23,7 @@ huxtable_env$huxtable_default_attrs <- list(
         height              = NA,
         col_width           = NA,
         row_height          = NA,
-        background_color    = NA,
+        background_color    = 'white',
         text_color          = NA,
         left_border         = 0,
         right_border        = 0,
@@ -97,6 +97,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   funs[[alt_setter]] <- switch(attr_type,
         cell = eval(bquote(
           function(ht, row, col, value, byrow = FALSE) {
+            assert_that(is_huxtable(ht))
             nargs <- nargs()
             if (! missing(byrow)) nargs <- nargs - 1
             if (nargs == 3) {

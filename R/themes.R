@@ -37,6 +37,7 @@ theme_plain <- function(ht){
   ht <- set_right_padding(ht, 10)
   ht <- set_top_padding(ht, 6)
   ht <- set_bottom_padding(ht, 6)
+  ht <- set_align(ht, 'left')
 
   ht
 }
