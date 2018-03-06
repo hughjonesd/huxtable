@@ -1,5 +1,5 @@
 
-<table class="huxtable" style="border-collapse: collapse; width: 60pt; margin-left: auto; margin-right: auto;height: 60pt;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 60pt; margin-left: auto; margin-right: auto;height: 60pt;">
 <col style="width: 40%;">
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -30,6 +30,7 @@ Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
 -   Control over text styling, number format, background colour, borders, padding and alignment.
 -   Table cells can span multiple rows and/or columns.
 -   Table manipulation via standard R subsetting, or using `dplyr`.
+-   Automatic formatting for knitr/rmarkdown documents.
 -   `huxreg()` function for quick creation of regression tables.
 -   Output to Microsoft Word, Excel or Powerpoint using the `officer` and `openxlsx` packages.
 -   `quick_pdf()`, `quick_docx()`, `quick_html()` and `quick_xlsx()` one-liners to print data frames into a new document.
