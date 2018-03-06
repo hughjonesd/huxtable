@@ -183,10 +183,10 @@ decimal_pad <- function(col, pad_chars, type) {
   pos[pos == -1L] <- nchars[pos == -1L] + 1
   chars_after_. <- nchars - pos
 
-  pad_to <- max(chars_after_.) - chars_after_.
+  pad_n_spaces <- max(chars_after_.) - chars_after_.
   # use non-breaking space on screen also
   pad_char <- switch(type, 'html' = '&nbsp;', 'latex' = '~', 'screen' = '\u00a0', ' ')
-  col <- paste0(col, str_rep(pad_char, pad_to))
+  col <- paste0(col, str_rep(pad_char, pad_n_spaces))
 
   orig_col[! na_pad] <- col
   orig_col
