@@ -27,11 +27,11 @@ as_FlexTable <- function(x, ...) {
 #' `as_FlexTable` is deprecated and calls `as_flextable` with a warning.
 #'
 #' Properties are supported, with the following exceptions:
-#' \itemize{
-#'   \item Rotation of 0, 90 or 270 is supported.
-#'   \item Non-numeric column widths and row heights are not supported.
-#'   \item Table height, wrap, captions and table position are not supported.
-#' }
+
+#' * Rotation of 0, 90 or 270 is supported.
+#' * Non-numeric column widths and row heights are not supported.
+#' * Table height, wrap, captions and table position are not supported.
+#
 #'
 #' @section Challenge:
 #'

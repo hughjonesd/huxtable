@@ -13,23 +13,16 @@
 #'
 #' @section Package options:
 #'
-#' \itemize{
-#'
-#'   \item `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
-#'     [huxtable()] and [as_huxtable()]. If it is unset, `add_colnames` defaults to
-#'     `FALSE`; in a future release, the default will become `TRUE`.
-#'
-#'   \item `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].
-#'   \item `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
+#' * `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
+#'   [huxtable()] and [as_huxtable()]. If it is unset, `add_colnames` defaults to
+#'   `FALSE`; in a future release, the default will become `TRUE`.
+#' * `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].
+#' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
 #'   will be printed in color on screen.
-#'
-#'   \item `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
+#' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
 #'   pretty-printed using huxtable.
-#'
-#'   \item `options('huxtable.knit_print_df_theme')`. A one-argument function applied to theme the huxtableized
+#' * `options('huxtable.knit_print_df_theme')`. A one-argument function applied to theme the huxtableized
 #'   data frame before printing in knitr. Defaults to [theme_plain()].
-#'
-#' }
 #'
 #'
 #' @name huxtable-package
@@ -45,7 +38,7 @@ NULL
     huxtable.color_screen        = getOption('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
   )
 
-  if (is.null(getOption("huxtable.add_colnames"))) packageStartupMessage(
+  if (is.null(getOption('huxtable.add_colnames'))) packageStartupMessage(
           'By default, add_colnames = FALSE in huxtable and as_huxtable.default.\n',
           'This will change in a future release. To suppress this message, \n',
           'set `options("huxtable.add_colnames")` to TRUE or FALSE.'

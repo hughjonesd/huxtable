@@ -38,6 +38,7 @@ Properties are supported with the following exceptions:
 \item Cell padding.
 \item Table position.
 }
+
 Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link[=width]{width()}} and
 \code{\link[=height]{height()}} are treated as scaling factors.
 

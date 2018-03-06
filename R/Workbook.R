@@ -18,12 +18,11 @@ NULL
 #' Use [openxlsx::saveWorkbook()] to save the resulting object to an Excel file.
 #'
 #' Properties are supported with the following exceptions:
-#' \itemize{
-#'   \item Non-numeric column widths and row heights, table width and height.
-#'   \item Decimal padding.
-#'   \item Cell padding.
-#'   \item Table position.
-#' }
+#' * Non-numeric column widths and row heights, table width and height.
+#' * Decimal padding.
+#' * Cell padding.
+#' * Table position.
+#'
 #' Huxtable tries to guess appropriate widths and height for rows and columns; numeric [width()] and
 #' [height()] are treated as scaling factors.
 #'
