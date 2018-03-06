@@ -4,8 +4,12 @@
 
 TODO
 ====
-* Surely, add_colnames = TRUE for data frames by default.
-  - Upgrade path: as an option but FALSE by default, then TRUE...
+* After e.g. June, set huxtable.add_colnames to TRUE by default (and still print the warning). After Sept
+  turn off the warning.
+
+* Better handling of number formatting. 
+  - hux() and/or as_hux() could recognize certain formats as numeric.
+  - Has to be done before add_colnames
 
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)

@@ -17,6 +17,11 @@ read the vignette with \code{vignette('huxtable')}.
 
 
 \itemize{
+
+  \item \code{options('huxtable.add_colnames')} sets the default value for \code{add_colnames} in
+    \code{\link{huxtable}} and \code{\link{as_huxtable}}. If it is unset, \code{add_colnames} defaults to
+    \code{FALSE}; in a future release, the default will become \code{TRUE}.
+
   \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link{print.huxtable}}.
   \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
   will be printed in color on screen.
@@ -26,6 +31,7 @@ read the vignette with \code{vignette('huxtable')}.
 
   \item \code{options('huxtable.knit_print_df_theme')}. A one-argument function applied to theme the huxtableized
   data frame before printing in knitr. Defaults to \code{\link{theme_plain}}.
+
 }
 }
 

@@ -10,16 +10,19 @@
 \alias{is_hux}
 \title{Create a huxtable}
 \usage{
-huxtable(..., add_colnames = FALSE, add_rownames = FALSE)
+huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_rownames = FALSE)
 
-hux(..., add_colnames = FALSE, add_rownames = FALSE)
+hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_rownames = FALSE)
 
 as_huxtable(x, ...)
 
 as_hux(x, ...)
 
-\method{as_huxtable}{default}(x, add_colnames = FALSE, add_rownames = FALSE,
-  ...)
+\method{as_huxtable}{default}(x,
+  add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_rownames = FALSE, ...)
 
 is_huxtable(x)
 
@@ -43,6 +46,9 @@ An object of class \code{huxtable}.
 \details{
 If you use \code{add_colnames} or \code{add_rownames}, be aware that these will shift your rows and columns
 along by one: your old row/column 1 will now be row/column 2, etc.
+
+\code{add_colnames} currently defaults to \code{FALSE}, but this will change in future. You can set
+the default globally by setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
 
 \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.

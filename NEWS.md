@@ -8,6 +8,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `theme_plain` theme.
 * Now provides `knit_print.data.frame` methods, defaulting to `theme_plain`.
 * Tweak top and bottom margins for HTML tables.
+* The default value for `add_colnames` is going to become `TRUE`. At present it remains `FALSE`. A warning about
+  this is printed when the package is loaded. Set `options("huxtable.add_colnames")` to `TRUE` or `FALSE` to 
+  set the default and avoid the warning.
 
 # huxtable 3.0.0
 

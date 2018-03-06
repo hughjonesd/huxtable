@@ -20,12 +20,16 @@ NULL
 #' @details
 #' If you use \code{add_colnames} or \code{add_rownames}, be aware that these will shift your rows and columns
 #' along by one: your old row/column 1 will now be row/column 2, etc.
+#'
+#' \code{add_colnames} currently defaults to \code{FALSE}, but this will change in future. You can set
+#' the default globally by setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-huxtable <- function (..., add_colnames = FALSE, add_rownames = FALSE) {
+huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE) {
   assert_that(is.flag(add_colnames), is.flag(add_rownames))
+
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
-  if (R.version$major >= 3 & R.version$minor >= 3) df_args$fix.empty.names <- FALSE
+  if (R.version$major >= 3 && R.version$minor >= 3) df_args$fix.empty.names <- FALSE
   ht <- do.call(data.frame, df_args)
   ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
 
@@ -59,7 +63,12 @@ as_hux <- as_huxtable
 
 #' @export
 #' @rdname huxtable
-as_huxtable.default <- function (x, add_colnames = FALSE, add_rownames = FALSE, ...) {
+as_huxtable.default <- function (
+        x,
+        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_rownames = FALSE,
+        ...
+      ) {
   assert_that(is.flag(add_colnames), is.flag(add_rownames))
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   for (a in setdiff(huxtable_cell_attrs, 'number_format')) {
