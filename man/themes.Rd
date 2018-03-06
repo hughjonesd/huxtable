@@ -8,7 +8,7 @@
 \alias{theme_article}
 \title{Theme a huxtable}
 \usage{
-theme_plain(ht)
+theme_plain(ht, position = "left")
 
 theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
@@ -19,6 +19,8 @@ theme_article(ht, header_row = TRUE, header_col = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable object.}
+
+\item{position}{'left', 'centre' or 'right'}
 
 \item{header_row}{Logical: style first row differently?}
 

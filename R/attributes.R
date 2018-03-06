@@ -847,7 +847,8 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' will be unchanged.
 #'
 #' The default value is "\%5.3g" which rounds numbers if they have more than 3 significant
-#' digits, and which may use an exponent for large numbers.
+#' digits, and which may use an exponent for large numbers. Note that setting \code{value} to \code{NA} does not
+#' reset to the default.
 #'
 #' To set number_format to a function, enclose the function in \code{list}.
 #' See the examples.

@@ -14,7 +14,7 @@ library(magrittr)
 
 options(huxtable.knit_print_df = FALSE)
 library(huxtable)
-mydf <- data.frame(a = 1:5, b = letters[1:5], long = stringi::stri_rand_strings(5, sample(25, 5)), d = rnorm(5))
+mydf <- data.frame(`Heading 1` = 1:5, foo = letters[1:5], short = rnorm(5))
 
 ```
 
@@ -41,4 +41,20 @@ options(huxtable.knit_print_df_theme = mytheme)
 
 mydf
 
+```
+
+Back to plain theme
+
+```{r}
+
+options(huxtable.knit_print_df_theme = NULL)
+
+mydf$date <- as.character(as.Date(rep("2005-01-12", 5)))
+mydf$integer <- 1L:5L
+mydf$has_nums <- paste(letters[1:5], 1:5, letters[5:1])
+mydf$long <- substr(stringi::stri_rand_lipsum(5), 1, sample(20:50, 5))
+mydf
+
+# compare with basic default
+as_hux(mydf, add_colnames = TRUE) %>% set_all_borders(0.4) %>% set_position('left')
 ```

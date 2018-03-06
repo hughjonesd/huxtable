@@ -6,6 +6,8 @@ TODO
 ====
 * After e.g. June, set huxtable.add_colnames to TRUE by default (and still print the warning). After Sept
   turn off the warning.
+  
+* Better centring of tables and handling of width. Maybe push \resizebox
 
 * Better handling of number formatting. 
   - hux() and/or as_hux() could recognize certain formats as numeric.
