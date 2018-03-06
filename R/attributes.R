@@ -23,7 +23,7 @@ huxtable_env$huxtable_default_attrs <- list(
         height              = NA,
         col_width           = NA,
         row_height          = NA,
-        background_color    = 'white',
+        background_color    = NA,
         text_color          = NA,
         left_border         = 0,
         right_border        = 0,

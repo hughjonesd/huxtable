@@ -184,7 +184,7 @@ build_tabular <- function(ht) {
       if (! is.na(cell_color <- background_color(ht)[drow, dcol]) && mycol == dcol) {
         cell_color <- format_color(cell_color)
         cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
-        contents <- paste0(cell_color, ' ', contents)
+        contents <- paste0(cell_color, '', contents)
       }
 
       if (bottom_left_multirow) {

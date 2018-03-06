@@ -11,7 +11,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
 * Bugfixes for `number_format`.
 * Tweak top and bottom margins for HTML tables.
-* Set default background color to white to avoid a LaTeX bug with padding.
+* LaTeX bugfix: background colors were printing an extra space
 
 # huxtable 3.0.0
 
