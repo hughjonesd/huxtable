@@ -226,7 +226,7 @@ huxreg <- function (
   align(result)[1, ]    <- 'center'
   align(result)[-1, -1] <- 'right'
   pad_decimal(result)[-1, -1] <- pad_decimal
-
+  number_format(result)[, 1]  <- NA
   if (! is.null(note)) {
     stars <- if (is.null(stars)) '' else paste0(names(stars), ' p < ', stars, collapse = '; ')
     note <- gsub('%stars%', stars, note)
