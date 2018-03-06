@@ -2,12 +2,9 @@
 % Please edit documentation in R/utils.R
 \name{knit_print.huxtable}
 \alias{knit_print.huxtable}
-\alias{knit_print.data.frame}
-\title{Printing within knitr.}
+\title{Print a huxtable within knitr}
 \usage{
 \method{knit_print}{huxtable}(x, options, ...)
-
-\method{knit_print}{data.frame}(x, options, ...)
 }
 \arguments{
 \item{x}{A huxtable.}
@@ -17,29 +14,13 @@
 \item{...}{Not used.}
 }
 \description{
-Printing within knitr.
+Print a huxtable within knitr
 }
 \details{
 knitr calls \code{\link[knitr]{knit_print}} on objects when they are printed in a knitr (or RMarkdown) document.
 The default method for \code{huxtable} objects guesses the appropriate output format and
 prints itself out appropriately.
-
-\code{huxtable} also defines a \code{knit_print} method for \code{data.frame}s. This converts the data frame
-to a huxtable, themes it using \code{\link{theme_plain}} and prints it. To turn this behaviour off, set
-\code{options(huxtable.knit_print_df = FALSE)}. To change the theme, set
-\code{options("huxtable.knit_print_df_theme")} to a one-argument function which should return the huxtable.
 }
-\examples{
-\dontrun{
-# in your knitr document
-mytheme <- function (ht) {
-  ht <- set_all_borders(ht, 0.4)
-  ht <- set_all_border_colors(ht, "darkgreen")
-  ht <- set_background_color(ht, evens, odds, "salmon")
-  ht
-}
-
-options(huxtable.knit_print_df_theme = mytheme)
-data.frame(a = 1:5, b = 1:5) # groovy!
-}
+\seealso{
+Other knit_print: \code{\link{knit_print.data.frame}}
 }
