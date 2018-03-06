@@ -80,5 +80,5 @@ set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
 set_left_border(ht, where(ht == 1), 1)
 }
 \seealso{
-\code{\link{set_all_borders}}
+\code{\link[=set_all_borders]{set_all_borders()}}
 }

@@ -12,7 +12,7 @@
 \arguments{
 \item{...}{Vectors, matrices, data frames or huxtables.}
 
-\item{deparse.level}{Passed to \code{\link{cbind.data.frame}}.}
+\item{deparse.level}{Passed to \code{\link[=cbind.data.frame]{cbind.data.frame()}}.}
 
 \item{copy_cell_props}{Cell properties to copy from neighbours (see below).}
 }

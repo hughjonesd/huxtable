@@ -164,13 +164,13 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 
 #' Set default huxtable properties
 #'
-#' Defaults are used for new huxtables, and also when a property is set to \code{NA}.
+#' Defaults are used for new huxtables, and also when a property is set to `NA`.
 #'
 #' @param ... Properties specified by name, or a single named list.
 #'
 #' @return A list of the previous property values, invisibly.
 #' @export
-#' @seealso \code{\link{get_default_properties}}
+#' @seealso [get_default_properties()]
 #' @examples
 #' old <- set_default_properties(left_border = 1)
 #' hux(a = 1:2, b = 1:2)
@@ -190,7 +190,7 @@ set_default_properties <- function(...) {
 
 #' Get default huxtable properties
 #'
-#' @param names Vector of property names. If \code{NULL}, all properties are returned.
+#' @param names Vector of property names. If `NULL`, all properties are returned.
 #'
 #' @return List of default properties.
 #' @export
@@ -198,7 +198,7 @@ set_default_properties <- function(...) {
 #' @examples
 #' get_default_properties('bold')
 #' get_default_properties()
-#' @seealso \code{\link{set_default_properties}}
+#' @seealso [set_default_properties()]
 get_default_properties <- function (names = NULL) {
   if (is.null(names)) names <- names(huxtable_env$huxtable_default_attrs)
   if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
@@ -241,13 +241,13 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' @template getset-cell
 #' @templateVar attr_name valign
 #' @templateVar attr_desc Vertical alignment
-#' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
+#' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or `NA`.
 #' @template getset-example
 #' @templateVar attr_val 'bottom'
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'bottom'
 #' @details
-#' Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link{row_height}}
+#' Vertical alignment may not work for short text in LaTeX. Defining row heights with [row_height()]
 #' may help.
 #' @export valign valign<- set_valign valign.huxtable valign<-.huxtable
 #' @S3method valign huxtable
@@ -258,7 +258,7 @@ make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c
 #' @template getset-cell
 #' @templateVar attr_name align
 #' @templateVar attr_desc Alignment
-#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}.
+#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or `NA`.
 #' @template getset-example
 #' @templateVar attr_val 'right'
 #' @template getset-visible-rowspec-example
@@ -297,8 +297,8 @@ make_getter_setters('col_width', 'col')
 #' @templateVar value_param_desc A vector.
 #' @family row/column heights
 #' @details
-#' If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
-#' treated as proportions of the text height (\\textheight).
+#' If character, `value` must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
+#' treated as proportions of the text height (\\\\textheight).
 #' @template getset-example
 #' @templateVar attr_val c(.2, .1, .1)
 #' @export row_height row_height<- set_row_height row_height.huxtable row_height<-.huxtable
@@ -312,6 +312,7 @@ make_getter_setters('row_height', 'row')
 #' @templateVar attr_desc Row span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
 #' @template getset-example
+#' @noMd
 #' @templateVar subscript [1, 1]
 #' @templateVar attr_val 2
 #' @templateVar extra print_screen(ht)
@@ -330,6 +331,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @templateVar attr_desc Column span
 #' @templateVar value_param_desc An integer vector or matrix of integers.
 #' @template getset-example
+#' @noMd
 #' @templateVar subscript [1, 1]
 #' @templateVar attr_val 2
 #' @templateVar extra print_screen(ht)
@@ -393,8 +395,8 @@ make_getter_setters('text_color', 'cell')
 #' @templateVar morealiases right_border top_border bottom_border
 #' @details
 #' Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
-#' can only be present (if \code{value > 0}) or absent.
-#' @seealso \code{\link{set_all_borders}}
+#' can only be present (if `value > 0`) or absent.
+#' @seealso [set_all_borders()]
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
@@ -455,7 +457,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' @return The modified huxtable.
 #' @export
 #'
-#' @seealso \code{\link{left_border}}, \code{\link{set_outer_borders}}
+#' @seealso [left_border()], [set_outer_borders()]
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' set_all_borders(ht, 1:3, 1:2, 1)
@@ -477,14 +479,14 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
 #' bottom, left and right of a group of cells.
 #'
 #' @param ht A huxtable
-#' @param row A row specifier. See \code{\link{rowspecs}} for details.
+#' @param row A row specifier. See [rowspecs()] for details.
 #' @param col A column specifier.
 #' @param value A numeric value for the border width. Set to 0 for no border.
 #'
 #' @return The modified huxtable.
 #' @export
 #'
-#' @seealso \code{\link{left_border}}, \code{\link{set_all_borders}}
+#' @seealso [left_border()], [set_all_borders()]
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' set_outer_borders(ht, 1)
@@ -529,7 +531,7 @@ get_all_borders <- function(ht, row, col) {
 #' @template getset-cell
 #' @templateVar attr_name left_border_color
 #' @templateVar attr_desc Border colors
-#' @templateVar value_param_desc A vector or matrix of colors. Set to \code{NA} for the default.
+#' @templateVar value_param_desc A vector or matrix of colors. Set to `NA` for the default.
 #' @templateVar morealiases right_border_color top_border_color bottom_border_color
 #' @template getset-example
 #' @templateVar attr_val 'red'
@@ -537,7 +539,7 @@ get_all_borders <- function(ht, row, col) {
 #' Both LaTeX and HTML collapse borders. If results are not what you expected, try setting the
 #' adjoining border of the previous cell to width 0 (e.g. for a left border color, unset the right border
 #' of the cell on the left).
-#' @seealso \code{\link{set_all_border_colors}}
+#' @seealso [set_all_border_colors()]
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'blue'
 #' @export left_border_color left_border_color<- set_left_border_color left_border_color.huxtable left_border_color<-.huxtable
@@ -594,7 +596,7 @@ make_getter_setters('bottom_border_color', 'cell')
 #' @inheritParams left_border_color
 #'
 #' @return The modified huxtable.
-#' @seealso \code{\link{left_border_color}}
+#' @seealso [left_border_color()]
 #'
 #' @export
 #'
@@ -683,7 +685,7 @@ NULL
 #' set_all_padding(ht, row, col, value, byrow = FALSE)
 #'
 #' @details
-#' \code{set_all_padding} is a convenience function which sets left, right, top and bottom cell padding
+#' `set_all_padding` is a convenience function which sets left, right, top and bottom cell padding
 #' for the specified cells.
 #'
 #' @examples
@@ -709,7 +711,7 @@ set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
 #' @templateVar attr_name wrap
 #' @templateVar attr_desc Text wrapping
 #' @templateVar value_param_desc
-#' A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default.
+#' A logical vector or matrix. If `TRUE`, long cell contents will be wrapped into multiple lines. Set to `NA` for the default.
 #' @examples
 #' ht <- huxtable(a = rep('Some long text', 2))
 #' wrap(ht)[1,] <- TRUE
@@ -729,7 +731,7 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @templateVar attr_name escape_contents
 #' @templateVar attr_desc Escape cell contents
 #' @templateVar value_param_desc
-#' A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
+#' A logical vector or matrix. If `TRUE`, cell contents will be HTML or LaTeX escaped.
 #' @examples
 #' ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
 #' escape_contents(ht)[,2] <- FALSE
@@ -747,9 +749,10 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @templateVar attr_name na_string
 #' @templateVar attr_desc NA string
 #' @templateVar value_param_desc
-#' A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA".
+#' A character string. This will be used to replace NA values in the display. Set to `NA` for the default, which is the empty string. To get literal "NA", set to "NA".
 #' @template getset-example
 #' @templateVar attr_val '--'
+#' @noMd
 #' @templateVar extra ht[2,2] <- NA ## print_screen(ht)
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 ''
@@ -820,7 +823,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 270
 #' @details
-#' You will probably need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
+#' You will probably need to set [col_width()] and [row_height()] explicitly
 #' to achieve a nice result, in both HTML and LaTeX.
 #' @export rotation rotation<- set_rotation rotation.huxtable rotation<-.huxtable
 #' @S3method rotation huxtable
@@ -840,20 +843,20 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' numerals, followed by an optional decimal point and further numerals). The exception is exponents in
 #' scientific notation; huxtable attempts to detect and ignore these.
 #'
-#' If \code{value} is numeric,
-#' numbers will be rounded to that many decimal places.  If \code{value} is
-#' character, it will be taken as an argument to \code{\link{sprintf}}. If \code{value} is a
-#' function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
+#' If `value` is numeric,
+#' numbers will be rounded to that many decimal places.  If `value` is
+#' character, it will be taken as an argument to [sprintf()]. If `value` is a
+#' function it will be applied to the numbers and should return a string. If `value` is `NA`, then numbers
 #' will be unchanged.
 #'
 #' The default value is "\%5.3g" which rounds numbers if they have more than 3 significant
-#' digits, and which may use an exponent for large numbers. Note that setting \code{value} to \code{NA} does not
+#' digits, and which may use an exponent for large numbers. Note that setting `value` to `NA` does not
 #' reset to the default.
 #'
-#' To set number_format to a function, enclose the function in \code{list}.
+#' To set number_format to a function, enclose the function in `list`.
 #' See the examples.
 #'
-#' Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
+#' Versions of huxtable before 2.0.0 applied `number_format` only to cells that looked like
 #' numbers in their entirety. The default value was "\%5.2f".
 #'
 #' @family formatting functions
@@ -890,12 +893,12 @@ make_getter_setters('number_format', 'cell')
 #' @template getset-cell
 #' @templateVar attr_name pad_decimal
 #' @templateVar attr_desc Decimal padding
-#' @templateVar value_param_desc A vector of single characters. \code{NA} is the default of no padding.
+#' @templateVar value_param_desc A vector of single characters. `NA` is the default of no padding.
 #' @details
 #' LaTeX and HTML both have no simple way to align columns on decimal points, especially when cells
 #' may contain non-mathematical content like significance stars. To right-pad cells
-#' in a column to align on the rightmost decimal point, set \code{pad_decimal} to '.' or whatever decimal
-#' you prefer to use. Note that this will only work for cells with \code{\link{align}} set to \code{'right'}.
+#' in a column to align on the rightmost decimal point, set `pad_decimal` to '.' or whatever decimal
+#' you prefer to use. Note that this will only work for cells with [align()] set to `'right'`.
 #' @examples
 #' vals <- c(1.00035, 22, "2.34 *", "(11.5 - 22.3)", "Do not pad this row.")
 #' ht <- hux(NotPadded = vals, Padded = vals)
@@ -936,9 +939,9 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 #' @templateVar attr_name position
 #' @templateVar attr_desc Table position
 #' @templateVar value_param_desc
-#' A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.
+#' A length-one character vector which may be 'left', 'center', 'right' or `NA`.
 #' @details
-#' If your tables are too far to the right under LaTeX, try setting their \code{\link{width}}
+#' If your tables are too far to the right under LaTeX, try setting their [width()]
 #' explicitly.
 #' @template getset-example
 #' @templateVar attr_val 'right'
@@ -953,16 +956,16 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'cen
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption position
 #' @templateVar value_param_desc
-#' A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter', 'bottomright', or \code{NA} for the default.
+#' A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter', 'bottomright', or `NA` for the default.
 #' @details
-#' If \code{caption_pos} is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
-#' will be determined by the huxtable's \code{\link{position}}.
+#' If `caption_pos` is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
+#' will be determined by the huxtable's [position()].
 #' @template getset-example
 #' @templateVar attr_val 'bottom'
 #' @export caption_pos caption_pos<- set_caption_pos caption_pos.huxtable caption_pos<-.huxtable
 #' @S3method caption_pos huxtable
 #' @S3method caption_pos<- huxtable
-#' @seealso \code{\link{caption}}
+#' @seealso [caption()]
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topcentre',
       'topright', 'bottomleft', 'bottomcenter', 'bottomcentre', 'bottomright'), extra_code = {
@@ -975,7 +978,7 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 't
 #' @templateVar attr_name width
 #' @templateVar attr_desc Table width
 #' @templateVar value_param_desc
-#' A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default.
+#' A length-one vector. If numeric, `value` is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default.
 #' @template getset-example
 #' @templateVar attr_val 0.8
 #' @family table measurements
@@ -990,7 +993,7 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_name height
 #' @templateVar attr_desc Table height
 #' @templateVar value_param_desc
-#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.
+#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default, which is to leave height unset.
 #' @template getset-example
 #' @templateVar attr_val 0.4
 #' @family table measurements
@@ -1004,13 +1007,13 @@ make_getter_setters('height', 'table')
 #' @templateVar attr_name caption
 #' @templateVar attr_desc Caption
 #' @templateVar value_param_desc
-#' A length-one character vector. Set to \code{NA} for no caption.
+#' A length-one character vector. Set to `NA` for no caption.
 #' @details
 #' Captions are not escaped. See the example for a workaround.
 #' @template getset-example
 #' @templateVar attr_val 'An example table'
 #' @templateVar extra print_screen(ht)
-#' @seealso \code{\link{caption_pos}}
+#' @seealso [caption_pos()]
 #' @examples
 #' ht <- hux(a = 1:2, b = 1:2)
 #' caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
@@ -1025,7 +1028,7 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @templateVar attr_name tabular_environment
 #' @templateVar attr_desc Tabular environment
 #' @templateVar value_param_desc
-#' A length-one character vector. Set to \code{NA} for the default, 'tabularx'.
+#' A length-one character vector. Set to `NA` for the default, 'tabularx'.
 #' @template getset-example
 #' @templateVar attr_val 'longtable'
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
@@ -1043,7 +1046,7 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @templateVar attr_name label
 #' @templateVar attr_desc Table label
 #' @templateVar value_param_desc
-#' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.
+#' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to `NA` to remove any label.
 #' @template getset-example
 #' @templateVar attr_val 'tab:mytable'
 #' @details
@@ -1060,12 +1063,12 @@ make_getter_setters('label', 'table', check_fun = is.character)
 #' @templateVar attr_name latex_float
 #' @templateVar attr_desc Float position for LaTeX
 #' @templateVar value_param_desc
-#' A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} for the default, 'h'.
+#' A length-one character vector, used by LaTeX for positioning the float. Set to `NA` for the default, 'h'.
 #' @template getset-example
 #' @templateVar attr_val 'tab:mytable'
 #' @details Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
 #' floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
-#' \code{float} package.
+#' `float` package.
 #' @export latex_float latex_float<- set_latex_float latex_float.huxtable latex_float<-.huxtable
 #' @S3method latex_float huxtable
 #' @S3method latex_float<- huxtable

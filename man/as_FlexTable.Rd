@@ -22,19 +22,19 @@ as_flextable(x, ...)
 an object of class flextable.
 }
 \description{
-Huxtables can be converted to \code{\link[flextable]{flextable}} objects, for use in Word and Powerpoint documents.
+Huxtables can be converted to \code{\link[flextable:flextable]{flextable::flextable()}} objects, for use in Word and Powerpoint documents.
 }
 \details{
 Note: you can't use flextable Word output within rmarkdown. Instead you have to write the Word file
-yourself. See \code{\link[officer]{read_docx}}.
+yourself. See \code{\link[officer:read_docx]{officer::read_docx()}}.
 
 \code{as_FlexTable} is deprecated and calls \code{as_flextable} with a warning.
 
 Properties are supported, with the following exceptions:
 \itemize{
-  \item Rotation of 0, 90 or 270 is supported.
-  \item Non-numeric column widths and row heights are not supported.
-  \item Table height, wrap, captions and table position are not supported.
+\item Rotation of 0, 90 or 270 is supported.
+\item Non-numeric column widths and row heights are not supported.
+\item Table height, wrap, captions and table position are not supported.
 }
 }
 \section{Challenge}{

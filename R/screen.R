@@ -11,17 +11,17 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' Print a huxtable on screen
 #'
 #' @param ht A huxtable.
-#' @param ... Passed on to \code{to_screen}.
+#' @param ... Passed on to `to_screen`.
 #' @param min_width Minimum width in on-screen characters of the result.
-#' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
+#' @param max_width Maximum width in on-screen characters of the result. Overrides `min_width`.
 #' @param compact Logical. To save space, don't print lines for empty horizontal borders.
 #' @param colnames Logical. Whether or not to print colum names.
-#' @param color Logical. Whether to print the huxtable in color (requires the \code{crayon} package).
+#' @param color Logical. Whether to print the huxtable in color (requires the `crayon` package).
 #'
-#' @return \code{to_screen} returns a string. \code{print_screen} prints the string and returns \code{NULL}.
+#' @return `to_screen` returns a string. `print_screen` prints the string and returns `NULL`.
 #'
 #' @details
-#' \code{colspan}, \code{rowspan}, \code{align} and \code{caption} properties are shown. If the \code{crayon}
+#' `colspan`, `rowspan`, `align` and `caption` properties are shown. If the `crayon`
 #' package is installed, output will be colorized (and contents bolded or italicized) by default;
 #' this will work in recent daily builds of RStudio as of October 2017.
 #'
@@ -150,16 +150,16 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @param ht        A huxtable.
 #' @param header    Logical. Print the first row as a header?
 #' @param min_width Minimum width in on-screen characters of the result.
-#' @param max_width Maximum width in on-screen characters of the result. Overrides \code{min_width}.
+#' @param max_width Maximum width in on-screen characters of the result. Overrides `min_width`.
 #' @param ...       Arguments passed to methods.
 #'
-#' @return \code{to_md} returns a string. \code{print_md} prints the string and returns
-#' \code{NULL}.
+#' @return `to_md` returns a string. `print_md` prints the string and returns
+#' `NULL`.
 #' @export
 #'
 #' @details
-#' Only \code{align} and \code{caption} properties are used. The markdown format is
-#' \code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
+#' Only `align` and `caption` properties are used. The markdown format is
+#' `multiline_tables`, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
 #'
 #' @family printing functions
 #'

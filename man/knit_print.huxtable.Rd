@@ -17,7 +17,7 @@
 Print a huxtable within knitr
 }
 \details{
-knitr calls \code{\link[knitr]{knit_print}} on objects when they are printed in a knitr (or RMarkdown) document.
+knitr calls \code{\link[knitr:knit_print]{knitr::knit_print()}} on objects when they are printed in a knitr (or RMarkdown) document.
 The default method for \code{huxtable} objects guesses the appropriate output format and
 prints itself out appropriately.
 }

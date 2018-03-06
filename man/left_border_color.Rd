@@ -81,5 +81,5 @@ set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
 set_left_border_color(ht, where(ht == 1), 'red')
 }
 \seealso{
-\code{\link{set_all_border_colors}}
+\code{\link[=set_all_border_colors]{set_all_border_colors()}}
 }

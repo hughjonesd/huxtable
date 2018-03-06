@@ -14,7 +14,7 @@ This is a convenience function to use in row and column specifications. In that 
 returns the last n row or column numbers of the huxtable.
 }
 \details{
-Technically, \code{final} returns a two-argument function - see \code{\link{rowspecs}} for more details.
+Technically, \code{final} returns a two-argument function - see \link{rowspecs} for more details.
 }
 \examples{
 ht <- hux(a = 1:5, b = 1:5, d = 1:5, e = 1:5)

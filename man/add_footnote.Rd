@@ -13,7 +13,7 @@ add_footnote(ht, text, border = 0.8, ...)
 
 \item{border}{Width of the footnote's top border. Set to 0 for no border.}
 
-\item{...}{Other properties, passed to \code{\link{set_cell_properties}} for the footnote cell.}
+\item{...}{Other properties, passed to \code{\link[=set_cell_properties]{set_cell_properties()}} for the footnote cell.}
 }
 \value{
 The modified huxtable

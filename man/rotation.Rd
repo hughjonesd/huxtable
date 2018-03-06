@@ -31,7 +31,7 @@ For \code{set_rotation}, the \code{ht} object.
 Functions to get or set the text rotation property of huxtable table cells.
 }
 \details{
-You will probably need to set \code{\link{col_width}} and \code{\link{row_height}} explicitly
+You will probably need to set \code{\link[=col_width]{col_width()}} and \code{\link[=row_height]{row_height()}} explicitly
 to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{

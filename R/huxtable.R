@@ -9,20 +9,20 @@ NULL
 
 #' Create a huxtable
 #'
-#' \code{huxtable}, or \code{hux}, creates a huxtable object.
+#' `huxtable`, or `hux`, creates a huxtable object.
 #'
-#' @param ... Named list of values, as for \code{\link{data.frame}}.
-#' @param add_colnames If \code{TRUE}, add a first row of column names to the huxtable.
-#' @param add_rownames If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.
+#' @param ... Named list of values, as for [data.frame()].
+#' @param add_colnames If `TRUE`, add a first row of column names to the huxtable.
+#' @param add_rownames If `TRUE`, add a first column of row names, named 'rownames', to the huxtable.
 #'
-#' @return An object of class \code{huxtable}.
+#' @return An object of class `huxtable`.
 #' @export
 #' @details
-#' If you use \code{add_colnames} or \code{add_rownames}, be aware that these will shift your rows and columns
+#' If you use `add_colnames` or `add_rownames`, be aware that these will shift your rows and columns
 #' along by one: your old row/column 1 will now be row/column 2, etc.
 #'
-#' \code{add_colnames} currently defaults to \code{FALSE}, but this will change in future. You can set
-#' the default globally by setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
+#' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
+#' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE) {
@@ -46,7 +46,7 @@ hux <- huxtable
 #'
 #' @export
 #' @details
-#' \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
+#' `as_huxtable` and `as_hux` convert an object to a huxtable.
 #' Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 #' @examples
 #' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
@@ -150,13 +150,13 @@ is_hux <- is_huxtable
 #' @export
 #' @rdname extract-methods
 #' @details
-#' \code{[} always returns a new huxtable object, while \code{$} and \code{[[} simply
+#' `[` always returns a new huxtable object, while `$` and `[[` simply
 #' return a vector of data.
-#' For the replacement function \code{[<-}, if \code{value} is a huxtable, then its cell properties will be
-#' copied into \code{x}. In addition, if \code{value} fills up an entire column, then column properties
-#' will be copied into the replaced columns of \code{x}, and if it fills up an entire row, then
-#' row properties will be copied into the replaced rows of \code{x}.
-#' Replacement functions \code{$<-} and \code{[[<-} simply change the data without affecting other properties.
+#' For the replacement function `[<-`, if `value` is a huxtable, then its cell properties will be
+#' copied into `x`. In addition, if `value` fills up an entire column, then column properties
+#' will be copied into the replaced columns of `x`, and if it fills up an entire row, then
+#' row properties will be copied into the replaced rows of `x`.
+#' Replacement functions `$<-` and `[[<-` simply change the data without affecting other properties.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
 #' ht[1:2,]
@@ -295,7 +295,7 @@ is_hux <- is_huxtable
 #' Combine rows or columns
 #'
 #' @param ... Vectors, matrices, data frames or huxtables.
-#' @param deparse.level Passed to \code{\link{cbind.data.frame}}.
+#' @param deparse.level Passed to [cbind.data.frame()].
 #' @param copy_cell_props Cell properties to copy from neighbours (see below).
 #'
 #' @return A huxtable.
@@ -304,15 +304,15 @@ is_hux <- is_huxtable
 #' Table properties will be taken from the first argument which is a huxtable. So will
 #' row properties (for cbind) and column properties (for rbind).
 #'
-#' If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector of cell properties,
+#' If some of the inputs are not huxtables, and `copy_cell_props` is a character vector of cell properties,
 #' then for rbind, the named cell properties and row heights will be copied to non-huxtables. For cbind,
 #' the named cell properties and column widths will be copied. Objects on the left or above get priority
 #' over those on the right or below.
 #'
-#' If \code{copy_cell_props} is \code{TRUE}, the default
-#' set of cell properties (everything but \code{colspan} and \code{rowspan}) will be copied.
+#' If `copy_cell_props` is `TRUE`, the default
+#' set of cell properties (everything but `colspan` and `rowspan`) will be copied.
 #'
-#' If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the
+#' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the
 #' default properties.
 #'
 #' @examples
@@ -487,7 +487,7 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
 #' @return The transposed object.
 #'
 #' @details
-#' Row and column spans of \code{x} will be swapped, as will column widths and row heights,
+#' Row and column spans of `x` will be swapped, as will column widths and row heights,
 #' table width and height, and cell borders (bottom becomes right, etc.).
 #' Other properties - in particular, alignment, vertical alignment and rotation - will be
 #' preserved.
@@ -527,10 +527,10 @@ t.huxtable <- function (x) {
 #'
 #' Add a first row of column names, or a first column of row names, to the huxtable.
 #'
-#' Note that \code{add_colnames} will change the mode of all columns to character. Also note that it will
+#' Note that `add_colnames` will change the mode of all columns to character. Also note that it will
 #' move your rows down by one: what was row 1 will now be row 2, and the column names will now be row 1.
 #'
-#' \code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
+#' `add_colnames` preserves column names. `add_rownames` only preserves them if asked to.
 #'
 #' @param ht A huxtable.
 #' @param colname Column name for the new column of row names.

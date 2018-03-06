@@ -12,7 +12,7 @@ as_FlexTable <- function(x, ...) {
 
 #' Convert a huxtable for Word/Powerpoint
 #'
-#' Huxtables can be converted to \code{\link[flextable]{flextable}} objects, for use in Word and Powerpoint documents.
+#' Huxtables can be converted to [flextable::flextable()] objects, for use in Word and Powerpoint documents.
 #'
 #' @param x A huxtable.
 #' @param ... Not used.
@@ -22,9 +22,9 @@ as_FlexTable <- function(x, ...) {
 #' @details
 #'
 #' Note: you can't use flextable Word output within rmarkdown. Instead you have to write the Word file
-#' yourself. See \code{\link[officer]{read_docx}}.
+#' yourself. See [officer::read_docx()].
 #'
-#' \code{as_FlexTable} is deprecated and calls \code{as_flextable} with a warning.
+#' `as_FlexTable` is deprecated and calls `as_flextable` with a warning.
 #'
 #' Properties are supported, with the following exceptions:
 #' \itemize{
@@ -35,7 +35,7 @@ as_FlexTable <- function(x, ...) {
 #'
 #' @section Challenge:
 #'
-#' Try to say \code{as_flextable.huxtable} ten times without pausing.
+#' Try to say `as_flextable.huxtable` ten times without pausing.
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 1:3)

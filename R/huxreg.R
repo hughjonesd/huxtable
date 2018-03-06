@@ -8,41 +8,41 @@ NULL
 #' @param error_format How to display uncertainty in estimates. See below.
 #' @param error_style Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
-#' @param number_format Format for numbering. See \code{\link{number_format}} for details.
+#' @param number_format Format for numbering. See [number_format()] for details.
 #' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
-#'   Set to \code{NA} to turn off padding. See \code{\link{pad_decimal}} for details.
-#' @param ci_level Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.
-#' @param tidy_args List of arguments to pass to \code{\link[broom]{tidy}}. You can also pass a list of lists;
+#'   Set to `NA` to turn off padding. See [pad_decimal()] for details.
+#' @param ci_level Confidence level for intervals. Set to `NULL` to not calculate confidence intervals.
+#' @param tidy_args List of arguments to pass to [broom::tidy()]. You can also pass a list of lists;
 #'   if so, the nth element will be used for the nth column.
-#' @param stars Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.
-#' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use \code{NULL} to turn off
+#' @param stars Levels for p value stars. Names of `stars` are symbols to use. Set to `NULL` to not show stars.
+#' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use `NULL` to turn off
 #'   this behaviour.
 #' @param borders Thickness of inner horizontal borders. Set to 0 for no borders.
 #' @param outer_borders Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.
 #' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
-#'   significance stars. Set to \code{NULL} for no footnote.
-#' @param statistics Summary statistics to display. Set to \code{NULL} to show all available statistics.
-#' @param coefs Display only these coefficients. Overrules \code{omit_coef}.
+#'   significance stars. Set to `NULL` for no footnote.
+#' @param statistics Summary statistics to display. Set to `NULL` to show all available statistics.
+#' @param coefs Display only these coefficients. Overrules `omit_coef`.
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details
-#' Models must have a \code{\link[broom]{tidy}} method defined, which should return 'term', 'estimate', 'std.error',
-#' 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
+#' Models must have a [broom::tidy()] method defined, which should return 'term', 'estimate', 'std.error',
+#' 'statistic' and 'p.value'. If the `tidy` method does not have a `conf.int` option, `huxreg` will
 #' calculate confidence intervals itself, using a normal approximation.
 #'
-#' If \code{...} has names or contains a single named list, the names will be used for column headings. Otherwise column
-#' headings will be automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be
-#' used for row headings. If different values of \code{coef} have the same name, the corresponding rows will be merged
+#' If `...` has names or contains a single named list, the names will be used for column headings. Otherwise column
+#' headings will be automatically created. If the `coef` and/or `statistics` vectors have names, these will be
+#' used for row headings. If different values of `coef` have the same name, the corresponding rows will be merged
 #' in the output.
 #'
-#' Each element of \code{statistics} should be a column name from \code{\link[broom]{glance}}. You can also
-#' use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance}
-#' will be used. To use no columns, set \code{statistics = character(0)}.
+#' Each element of `statistics` should be a column name from [broom::glance()]. You can also
+#' use 'nobs' for the number of observations. If `statistics` is `NULL` then all columns from `glance`
+#' will be used. To use no columns, set `statistics = character(0)`.
 #'
-#' \code{error_format} is a string to be interpreted by \code{\link[glue]{glue}}. Terms in parentheses will be
+#' `error_format` is a string to be interpreted by [glue::glue()]. Terms in parentheses will be
 #' replaced by computed values. You can use any columns returned
-#' by \code{tidy}: typical columns include \code{statistic}, \code{p.value}, \code{std.error}, as well as \code{conf.low}
-#' and \code{conf.high} if you have set \code{ci_level}. For example, to show confidence intervals, you
+#' by `tidy`: typical columns include `statistic`, `p.value`, `std.error`, as well as `conf.low`
+#' and `conf.high` if you have set `ci_level`. For example, to show confidence intervals, you
 #' could do \code{error_format = "{conf.low} to {conf.high}"}
 #'
 #' @return A huxtable object.

@@ -11,6 +11,6 @@
 \description{
 This pointless piece of documentation exists to satisfy R CMD check, due to
 a complicated and boring issue involving \code{stats::filter}, \code{dplyr::filter}
-and the mysterious workings of the NAMESPACE file. See \code{\link{mutate.huxtable}}
+and the mysterious workings of the NAMESPACE file. See \code{\link[=mutate.huxtable]{mutate.huxtable()}}
 for details about using dplyr with huxtable.
 }

@@ -124,10 +124,10 @@ format_numbers <- function (string, num_fmt) {
 
 #' Sanitize table elements
 #'
-#' This is copied over from \code{\link[xtable]{sanitize}}.
+#' This is copied over from [xtable::sanitize()].
 #'
 #' @param str A character object.
-#' @param type \code{"latex"} or \code{"html"}.
+#' @param type `"latex"` or `"html"`.
 #'
 #' @return The sanitized character object.
 #' @export
@@ -244,8 +244,8 @@ get_caption_hpos <- function (ht) {
 #' @param ... Not used.
 #'
 #' @details
-#' knitr calls \code{\link[knitr]{knit_print}} on objects when they are printed in a knitr (or RMarkdown) document.
-#' The default method for \code{huxtable} objects guesses the appropriate output format and
+#' knitr calls [knitr::knit_print()] on objects when they are printed in a knitr (or RMarkdown) document.
+#' The default method for `huxtable` objects guesses the appropriate output format and
 #' prints itself out appropriately.
 #'
 #' @family knit_print
@@ -274,10 +274,10 @@ knit_print.huxtable <- function (x, options, ...) {
 #' @inherit knit_print.huxtable params
 #'
 #' @details
-#' \code{huxtable} defines a \code{knit_print} method for \code{data.frame}s. This converts the data frame
-#' to a huxtable, with \code{add_colnames = TRUE}, themes it using \code{\link{theme_plain}} and prints it.
-#' To turn this behaviour off, set \code{options(huxtable.knit_print_df = FALSE)}. To change the theme, set
-#' \code{options("huxtable.knit_print_df_theme")} to a one-argument function which should return the huxtable.
+#' `huxtable` defines a `knit_print` method for `data.frame`s. This converts the data frame
+#' to a huxtable, with `add_colnames = TRUE`, themes it using [theme_plain()] and prints it.
+#' To turn this behaviour off, set `options(huxtable.knit_print_df = FALSE)`. To change the theme, set
+#' `options("huxtable.knit_print_df_theme")` to a one-argument function which should return the huxtable.
 #'
 #' @importFrom knitr knit_print
 #' @export
@@ -334,9 +334,9 @@ smart_hux_from_df <- function(dfr) {
 
 #' Default print method for huxtables
 #'
-#' By default huxtables are printed using \code{\link{print_screen}}. In certain cases, for example
+#' By default huxtables are printed using [print_screen()]. In certain cases, for example
 #' in Sweave documents, it may be
-#' useful to change this. You can do so by setting \code{options(huxtable.print)}.
+#' useful to change this. You can do so by setting `options(huxtable.print)`.
 #' @param x A huxtable.
 #' @param ... Options passed to other methods.
 #'
@@ -398,14 +398,14 @@ guess_knitr_output_format <- function() {
 
 #' Insert a row or column
 #'
-#' These convenience functions wrap \code{cbind} or \code{rbind} for huxtables to insert
+#' These convenience functions wrap `cbind` or `rbind` for huxtables to insert
 #' a single row.
 #' @param ht A huxtable.
 #' @param ... Cell contents.
 #' @param after Insert the row/column after this position. 0 (the default) inserts as the first row/column.
-#' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See \code{\link{cbind.huxtable}}.
+#' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See [cbind.huxtable()].
 #' @details
-#' In \code{insert_column} only, you can use a column name for \code{after}.
+#' In `insert_column` only, you can use a column name for `after`.
 #' @return The modified huxtable
 #' @export
 #'
@@ -469,7 +469,7 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' @param ht A huxtable.
 #' @param text Text for the footnote.
 #' @param border Width of the footnote's top border. Set to 0 for no border.
-#' @param ... Other properties, passed to \code{\link{set_cell_properties}} for the footnote cell.
+#' @param ... Other properties, passed to [set_cell_properties()] for the footnote cell.
 #'
 #' @return The modified huxtable
 #' @export
@@ -531,13 +531,13 @@ hux_logo <- function(latex = FALSE) {
 
 #' Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.
 #'
-#' @param ... One or more huxtables or R objects with an \code{as_huxtable} method.
+#' @param ... One or more huxtables or R objects with an `as_huxtable` method.
 #' @param file File path for the output.
-#' @param borders Border width for members of \code{...} that are not huxtables.
+#' @param borders Border width for members of `...` that are not huxtables.
 #'
-#' @return Invisible \code{NULL}.
+#' @return Invisible `NULL`.
 #'
-#' @details Objects in \code{...} will be converted to huxtables, with borders added.
+#' @details Objects in `...` will be converted to huxtables, with borders added.
 #'
 #' If \sQuote{file} is not specified, the default file path is "huxtable-output.xxx" in
 #' the working directory. If the session is interactive, you'll be asked to confirm any

@@ -34,7 +34,7 @@ numbers, i.e. they are equivalent to \code{every(2, 2)} and \code{every(2, 1)} r
 }
 \details{
 Technically, \code{every} returns a 2-argument function which can be called like
-\code{f(ht, dimension)}. See \code{\link{rowspecs}} for details.
+\code{f(ht, dimension)}. See \link{rowspecs} for details.
 }
 \examples{
 ht <- huxtable(a = 1:10, b = 1:10)

@@ -5,17 +5,17 @@ NULL
 
 #' Convert a huxtable for Excel
 #'
-#' If the \code{openxlsx} package is installed, Huxtables can be converted to
-#' \code{\link[openxlsx]{openxlsx}} Worbook objects, for use in Excel documents.
+#' If the `openxlsx` package is installed, Huxtables can be converted to
+#' [openxlsx::openxlsx()] Worbook objects, for use in Excel documents.
 #'
 #' @param ht A huxtable.
-#' @param Workbook An existing \code{Workbook} object. By default, a new workbook will be created.
+#' @param Workbook An existing `Workbook` object. By default, a new workbook will be created.
 #' @param sheet Name for the worksheet where the huxtable will be created.
-#' @param write_caption If \code{TRUE}, print any caption in the row above or below the table.
+#' @param write_caption If `TRUE`, print any caption in the row above or below the table.
 #' @param ... Not used.
 #'
 #' @details
-#' Use \code{\link[openxlsx]{saveWorkbook}} to save the resulting object to an Excel file.
+#' Use [openxlsx::saveWorkbook()] to save the resulting object to an Excel file.
 #'
 #' Properties are supported with the following exceptions:
 #' \itemize{
@@ -24,12 +24,12 @@ NULL
 #'   \item Cell padding.
 #'   \item Table position.
 #' }
-#' Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link{width}} and
-#' \code{\link{height}} are treated as scaling factors.
+#' Huxtable tries to guess appropriate widths and height for rows and columns; numeric [width()] and
+#' [height()] are treated as scaling factors.
 #'
-#' Contents are only stored as numbers if a whole column is numeric as defined by \code{\link{is_a_number}};
+#' Contents are only stored as numbers if a whole column is numeric as defined by [is_a_number()];
 #' otherwise they are stored as text.
-#' @return An object of class \code{Workbook}.
+#' @return An object of class `Workbook`.
 #' @export
 #'
 #' @examples

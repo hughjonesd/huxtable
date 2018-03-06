@@ -9,7 +9,7 @@ set_outer_borders(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \code{\link[=rowspecs]{rowspecs()}} for details.}
 
 \item{col}{A column specifier.}
 
@@ -29,5 +29,5 @@ set_outer_borders(ht, 2:3, 1:2, 1)
 
 }
 \seealso{
-\code{\link{left_border}}, \code{\link{set_all_borders}}
+\code{\link[=left_border]{left_border()}}, \code{\link[=set_all_borders]{set_all_borders()}}
 }

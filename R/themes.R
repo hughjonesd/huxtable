@@ -4,13 +4,13 @@
 #'
 #' These functions quickly set default styles for a huxtable.
 #'
-#' \code{theme_plain} is a simple theme with a bold header, a grey striped background, and an outer border.
+#' `theme_plain` is a simple theme with a bold header, a grey striped background, and an outer border.
 #'
-#' \code{theme_basic} just adds a border for header rows and/or columns.
+#' `theme_basic` just adds a border for header rows and/or columns.
 #'
-#' \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
+#' `theme_striped` uses different backgrounds for alternate rows, and for headers.
 #'
-#' \code{theme_article} is similar to the style of many scientific journals.
+#' `theme_article` is similar to the style of many scientific journals.
 #' It sets horizontal lines above and below the table.
 #'
 #' @param ht A huxtable object.

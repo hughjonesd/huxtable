@@ -14,7 +14,7 @@ A matrix of row and column indices of cells where \code{expr} is \code{TRUE}.
 }
 \description{
 This is a simple wrapper around \code{which(..., arr.ind = TRUE)}, for
-use in \code{\link[=rowspecs]{row specifications}}.
+use in \link[=rowspecs]{row specifications}.
 }
 \examples{
 ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)

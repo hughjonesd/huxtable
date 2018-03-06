@@ -25,7 +25,7 @@ For \code{set_position}, the \code{ht} object.
 Functions to get or set the table-level table position property of a huxtable.
 }
 \details{
-If your tables are too far to the right under LaTeX, try setting their \code{\link{width}}
+If your tables are too far to the right under LaTeX, try setting their \code{\link[=width]{width()}}
 explicitly.
 }
 \examples{

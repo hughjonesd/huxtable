@@ -14,7 +14,7 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #' @param ht A huxtable.
 #' @param ... Arguments to pass to methods. Not currently used.
 #'
-#' @return \code{to_html} returns an HTML string. \code{print_html} prints the string and returns \code{NULL}.
+#' @return `to_html` returns an HTML string. `print_html` prints the string and returns `NULL`.
 #' @export
 #'
 #' @family printing functions
@@ -29,7 +29,7 @@ to_html <- function (ht, ...) UseMethod('to_html')
 #'
 #' @rdname to_html
 #'
-#' @return \code{print_notebook} prints HTML output suitable for use in an
+#' @return `print_notebook` prints HTML output suitable for use in an
 #' RStudio interactive notebook.
 print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(to_html(ht)))
 

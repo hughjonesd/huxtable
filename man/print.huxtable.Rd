@@ -12,7 +12,7 @@
 \item{...}{Options passed to other methods.}
 }
 \description{
-By default huxtables are printed using \code{\link{print_screen}}. In certain cases, for example
+By default huxtables are printed using \code{\link[=print_screen]{print_screen()}}. In certain cases, for example
 in Sweave documents, it may be
 useful to change this. You can do so by setting \code{options(huxtable.print)}.
 }

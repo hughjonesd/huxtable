@@ -29,5 +29,5 @@ ht <- huxtable(a = 1:3, b = 1:3)
 ht <- set_all_border_colors(ht, 'red')
 }
 \seealso{
-\code{\link{left_border_color}}
+\code{\link[=left_border_color]{left_border_color()}}
 }

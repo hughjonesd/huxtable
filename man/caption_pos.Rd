@@ -26,7 +26,7 @@ Functions to get or set the table-level caption position property of a huxtable.
 }
 \details{
 If \code{caption_pos} is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
-will be determined by the huxtable's \code{\link{position}}.
+will be determined by the huxtable's \code{\link[=position]{position()}}.
 }
 \examples{
 
@@ -36,5 +36,5 @@ caption_pos(ht)
 
 }
 \seealso{
-\code{\link{caption}}
+\code{\link[=caption]{caption()}}
 }

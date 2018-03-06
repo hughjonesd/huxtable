@@ -16,7 +16,7 @@ insert_row(ht, ..., after = 0, copy_cell_props = TRUE)
 
 \item{after}{Insert the row/column after this position. 0 (the default) inserts as the first row/column.}
 
-\item{copy_cell_props}{Copy cell properties from the previous row or column (if after > 0). See \code{\link{cbind.huxtable}}.}
+\item{copy_cell_props}{Copy cell properties from the previous row or column (if after > 0). See \code{\link[=cbind.huxtable]{cbind.huxtable()}}.}
 }
 \value{
 The modified huxtable

@@ -12,8 +12,8 @@ report_latex_dependencies(quiet = FALSE, as_string = FALSE)
 \item{as_string}{Logical: return dependencies as a string.}
 }
 \value{
-If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;
-  otherwise a list of rmarkdown::latex_dependency objects, invisibly.
+If \code{as_string} is \code{TRUE}, a string of "\usepackage\{...\}" statements;
+otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 }
 \description{
 Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.

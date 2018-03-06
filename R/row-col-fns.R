@@ -7,19 +7,19 @@ NULL
 #'
 #' This is a convenience function to use in row or column specifications.
 #' In this context,
-#' \code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
-#' or columns of the huxtable. \code{evens} and \code{odds} return even and odd
-#' numbers, i.e. they are equivalent to \code{every(2, 2)} and \code{every(2, 1)} respectively.
-#' \code{everywhere} returns all rows or columns, equivalently to \code{every(1)}.
+#' `every(n, from)` will return `from, from + n, ...,` up to the number of rows
+#' or columns of the huxtable. `evens` and `odds` return even and odd
+#' numbers, i.e. they are equivalent to `every(2, 2)` and `every(2, 1)` respectively.
+#' `everywhere` returns all rows or columns, equivalently to `every(1)`.
 #'
 #' @param n A number (at least 1)
 #' @param from A number (at least 1)
-#' @param ht An object with a \code{dim} attribute like a matrix or data frame.
+#' @param ht An object with a `dim` attribute like a matrix or data frame.
 #' @param dimension Number of the dimension to use.
 #'
 #' @details
-#' Technically, \code{every} returns a 2-argument function which can be called like
-#' \code{f(ht, dimension)}. See \code{\link{rowspecs}} for details.
+#' Technically, `every` returns a 2-argument function which can be called like
+#' `f(ht, dimension)`. See [rowspecs] for details.
 #'
 #' @export
 #'
@@ -63,7 +63,7 @@ odds  <- every(2, 1)
 #' @param n Number of rows to return.
 #'
 #' @details
-#' Technically, \code{final} returns a two-argument function - see \code{\link{rowspecs}} for more details.
+#' Technically, `final` returns a two-argument function - see [rowspecs] for more details.
 #'
 #' @export
 #'
@@ -91,52 +91,43 @@ final <- function(n = 1) {
 #'
 #' @section The basics:
 #'
-#' The \code{set_*} functions for cell properties all have arguments like this:
-#' \code{set_property(ht, row, col, value, byrow = FALSE)}.
+#' The `set_*` functions for cell properties all have arguments like this:
+#' `set_property(ht, row, col, value, byrow = FALSE)`.
 #'
-#' You can treat \code{row} and \code{col} arguments like arguments to \code{[} for a data frame.
+#' You can treat `row` and `col` arguments like arguments to [data frame subsetting][base:Extract.data.frame].
 #' But there are a few extra tricks:
 #'
-#'\itemize{
-#'  \item Write \code{set_property(ht, x)}, omitting \code{row} and \code{col}, to set
-#'    the property to \code{x} for all cells.
-#'  \item Use \code{\link{everywhere}} to refer to all rows or all columns.
-#'  \item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
-#'  \item Use \code{\link{evens}} to get only even rows/columns and \code{\link{odds}}
-#'    for only odd ones.
-#'  \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
-#'  \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
-#'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
-#'  \item Use \code{\link[=where]{where(cond)}}, and omit the \code{col} argument, to get cells where \code{cond} is
-#'    \code{TRUE}.
-#'  \item Set \code{byrow = TRUE} to set properties by row rather than by column.
-#'}
+#' * Write `set_property(ht, x)`, omitting `row` and `col`, to set the property to `x` for all cells.
+#' * Use [everywhere()] to refer to all rows or all columns.
+#' * Use [=final::final(n)()] to refer to the last n rows or columns.
+#' * Use [evens()] to get only even rows/columns and [odds()] for only odd ones.
+#' * Use [=every::every(n, from = m)()] to get every nth row/column starting at row/column m.
+#' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
+#'    specify columns (but not rows). See [tidyselect::select_helpers()] for a full list.
+#' * Use [=where::where(cond)()], and omit the `col` argument, to get cells where `cond` is `TRUE`.
+#' * Set `byrow = TRUE` to set properties by row rather than by column.
 #'
 #'
 #' @section The gory details:
 #'
-#' How the row and col arguments are parsed depends on the number of arguments passed to the \code{set_*}
+#' How the row and col arguments are parsed depends on the number of arguments passed to the `set_*`
 #' function.
 #'
-#' \itemize{
-#'   \item If there are two arguments (excluding \code{byrow}) then the second argument is taken as the
+
+#' * If there are two arguments (excluding `byrow`) then the second argument is taken as the
 #'     value and is set for all rows and columns.
-#'   \item If there are three arguments, then the third argument is taken as the value, and
-#'     \code{row} must be a matrix with two columns. Each row of this matrix
+#' * If there are three arguments, then the third argument is taken as the value, and
+#'     `row` must be a matrix with two columns. Each row of this matrix
 #'     gives the row, column indices of a single cell. This uses R's little known feature of
-#'     subsetting with matrices - see \code{\link[base]{Extract}}.
-#'   \item If there are four arguments:
-#'     \itemize{
-#'       \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
-#'         subsetting. \code{col} will be evaluated in a special context provided by \code{\link[tidyselect]{with_vars}}
+#'     subsetting with matrices - see [base::Extract()].
+#' * If there are four arguments:
+#'     * If `row` or `col` is numeric, character or logical, it is evaluated just as in standard
+#'         subsetting. `col` will be evaluated in a special context provided by [tidyselect::with_vars()]
 #'         to allow the use of dplyr functions.
-#'       \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,
-#'         and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
-#'         of column indices. \code{\link{evens}}, \code{\link{odds}}, \code{\link{every}} and \code{\link{final}}
+#'     * If `row` or `col` is a function,it is called with two arguments: the huxtable,
+#'        and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
+#'        of column indices. [evens()], [odds()], [every()] and [final()]
 #'        return functions for this purpose.
-#'     }
-#' }
-#'
 #'
 #' @name rowspecs
 #'
@@ -155,13 +146,13 @@ NULL
 
 #' Return array indices where expression is true
 #'
-#' This is a simple wrapper around \code{which(..., arr.ind = TRUE)}, for
-#' use in \code{\link[=rowspecs]{row specifications}}.
+#' This is a simple wrapper around `which(..., arr.ind = TRUE)`, for
+#' use in [row specifications][rowspecs].
 #' @param expr An R expression
 #'
 #' @export
 #'
-#' @return A matrix of row and column indices of cells where \code{expr} is \code{TRUE}.
+#' @return A matrix of row and column indices of cells where `expr` is `TRUE`.
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)
@@ -172,12 +163,12 @@ where <- function(expr) which(expr, arr.ind = TRUE)
 
 #' Does an object look like a number?
 #'
-#' A convenience function that returns \code{TRUE} if an object either is numeric or
+#' A convenience function that returns `TRUE` if an object either is numeric or
 #' can be converted to a number. For data frames, it returns a matrix of the same
 #' dimensions as the data frame.
 #' @param x An object.
 #'
-#' @return A logical object with the same dimensions as \code{x}.
+#' @return A logical object with the same dimensions as `x`.
 #' @export
 #'
 #' @examples

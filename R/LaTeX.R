@@ -21,7 +21,7 @@ print_latex <- function (ht, ...) {
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
 #' @param ... Arguments to pass to methods.
 #'
-#' @return \code{to_latex} returns a string. \code{print_latex} prints the string and returns \code{NULL}.
+#' @return `to_latex` returns a string. `print_latex` prints the string and returns `NULL`.
 #' @export
 #'
 #' @family printing functions
@@ -89,7 +89,7 @@ huxtable_latex_dependencies <- list(
 #' @param quiet Logical: suppress printing.
 #' @param as_string Logical: return dependencies as a string.
 #'
-#' @return If \code{as_string} is \code{TRUE}, a string of "\\usepackage{...}" statements;
+#' @return If `as_string` is `TRUE`, a string of "\\usepackage\\{...\\}" statements;
 #'   otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 #' @export
 #'

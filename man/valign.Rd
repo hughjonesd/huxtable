@@ -31,7 +31,7 @@ For \code{set_valign}, the \code{ht} object.
 Functions to get or set the vertical alignment property of huxtable table cells.
 }
 \details{
-Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link{row_height}}
+Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link[=row_height]{row_height()}}
 may help.
 }
 \examples{

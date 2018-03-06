@@ -34,7 +34,7 @@ Functions to get or set the decimal padding property of huxtable table cells.
 LaTeX and HTML both have no simple way to align columns on decimal points, especially when cells
 may contain non-mathematical content like significance stars. To right-pad cells
 in a column to align on the rightmost decimal point, set \code{pad_decimal} to '.' or whatever decimal
-you prefer to use. Note that this will only work for cells with \code{\link{align}} set to \code{'right'}.
+you prefer to use. Note that this will only work for cells with \code{\link[=align]{align()}} set to \code{'right'}.
 }
 \examples{
 vals <- c(1.00035, 22, "2.34 *", "(11.5 - 22.3)", "Do not pad this row.")

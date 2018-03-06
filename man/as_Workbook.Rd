@@ -26,22 +26,22 @@ An object of class \code{Workbook}.
 }
 \description{
 If the \code{openxlsx} package is installed, Huxtables can be converted to
-\code{\link[openxlsx]{openxlsx}} Worbook objects, for use in Excel documents.
+\code{\link[openxlsx:openxlsx]{openxlsx::openxlsx()}} Worbook objects, for use in Excel documents.
 }
 \details{
-Use \code{\link[openxlsx]{saveWorkbook}} to save the resulting object to an Excel file.
+Use \code{\link[openxlsx:saveWorkbook]{openxlsx::saveWorkbook()}} to save the resulting object to an Excel file.
 
 Properties are supported with the following exceptions:
 \itemize{
-  \item Non-numeric column widths and row heights, table width and height.
-  \item Decimal padding.
-  \item Cell padding.
-  \item Table position.
+\item Non-numeric column widths and row heights, table width and height.
+\item Decimal padding.
+\item Cell padding.
+\item Table position.
 }
-Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link{width}} and
-\code{\link{height}} are treated as scaling factors.
+Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link[=width]{width()}} and
+\code{\link[=height]{height()}} are treated as scaling factors.
 
-Contents are only stored as numbers if a whole column is numeric as defined by \code{\link{is_a_number}};
+Contents are only stored as numbers if a whole column is numeric as defined by \code{\link[=is_a_number]{is_a_number()}};
 otherwise they are stored as text.
 }
 \examples{

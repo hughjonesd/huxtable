@@ -8,7 +8,7 @@ Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 functionality to xtable, with a simpler interface.
 }
 \details{
-To create a huxtable object, use \code{\link{huxtable}} or \code{\link{as_huxtable}}.
+To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\link[=as_huxtable]{as_huxtable()}}.
 
 For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 read the vignette with \code{vignette('huxtable')}.
@@ -18,19 +18,19 @@ read the vignette with \code{vignette('huxtable')}.
 
 \itemize{
 
-  \item \code{options('huxtable.add_colnames')} sets the default value for \code{add_colnames} in
-    \code{\link{huxtable}} and \code{\link{as_huxtable}}. If it is unset, \code{add_colnames} defaults to
-    \code{FALSE}; in a future release, the default will become \code{TRUE}.
+\item \code{options('huxtable.add_colnames')} sets the default value for \code{add_colnames} in
+\code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. If it is unset, \code{add_colnames} defaults to
+\code{FALSE}; in a future release, the default will become \code{TRUE}.
 
-  \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link{print.huxtable}}.
-  \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
-  will be printed in color on screen.
+\item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link[=print.huxtable]{print.huxtable()}}.
+\item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
+will be printed in color on screen.
 
-  \item \code{options('huxtable.knit_print_df')}. If \code{TRUE} (the default), data frames in knitr will be
-  pretty-printed using huxtable.
+\item \code{options('huxtable.knit_print_df')}. If \code{TRUE} (the default), data frames in knitr will be
+pretty-printed using huxtable.
 
-  \item \code{options('huxtable.knit_print_df_theme')}. A one-argument function applied to theme the huxtableized
-  data frame before printing in knitr. Defaults to \code{\link{theme_plain}}.
+\item \code{options('huxtable.knit_print_df_theme')}. A one-argument function applied to theme the huxtableized
+data frame before printing in knitr. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
 
 }
 }
