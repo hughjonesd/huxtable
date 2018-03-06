@@ -9,7 +9,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   set the default and avoid the warning.
 * New `theme_plain` theme.
 * Now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
-* Bugfixes for `number_format`.
+* Bugfixes for `number_format` and `huxreg`.
 * Tweak top and bottom margins for HTML tables.
 * LaTeX bugfix: background colors were printing an extra space
 
