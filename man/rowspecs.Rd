@@ -12,19 +12,21 @@ Row and column specifications
 The \code{set_*} functions for cell properties all have arguments like this:
 \code{set_property(ht, row, col, value, byrow = FALSE)}.
 
-You can treat \code{row} and \code{col} arguments like arguments for \code{\link[=[.data.frame]{data frame subsetting}}.
+You can treat \code{row} and \code{col} arguments like arguments for \link[=[.data.frame]{data frame subsetting}.
 But there are a few extra tricks:
 \itemize{
 \item Write \code{set_property(ht, x)}, omitting \code{row} and \code{col}, to set the property to \code{x} for all cells.
-\item Use \code{\link{everywhere}} to refer to all rows or all columns.
-\item Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
-\item Use \code{\link{evens}} to get only even rows/columns and \code{\link{odds}} for only odd ones.
+\item Use \code{everywhere} to refer to all rows or all columns.
+\item Use \code{final(n)} to refer to the last n rows or columns.
+\item Use \code{evens} to get only even rows/columns and \code{odds} for only odd ones.
 \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
-specify columns (but not rows). See \code{\link[tidyselect:select_helpers]{tidyselect::select_helpers()}} for a full list.
+specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
 \item Use \code{\link[=where]{where(condition)}}, and omit the \code{col} argument, to get cells where \code{condition} is \code{TRUE}.
 \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 }
+
+[=[.data.frame]: R:=[.data.frame
 }
 
 \section{The gory details}{
