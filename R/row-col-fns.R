@@ -98,15 +98,14 @@ final <- function(n = 1) {
 #' But there are a few extra tricks:
 #'
 #' * Write `set_property(ht, x)`, omitting `row` and `col`, to set the property to `x` for all cells.
-#' * Use [everywhere()] to refer to all rows or all columns.
-#' * Use [=final::final(n)()] to refer to the last n rows or columns.
-#' * Use [evens()] to get only even rows/columns and [odds()] for only odd ones.
-#' * Use [=every::every(n, from = m)()] to get every nth row/column starting at row/column m.
+#' * Use [`everywhere`][everywhere] to refer to all rows or all columns.
+#' * Use \code{\link[=final]{final(n)}} to refer to the last n rows or columns.
+#' * Use [`evens`][evens] to get only even rows/columns and [`odds`][odds] for only odd ones.
+#' * Use \code{\link[=every(n, from = m)]{every}} to get every nth row/column starting at row/column m.
 #' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
 #'    specify columns (but not rows). See [tidyselect::select_helpers()] for a full list.
-#' * Use [=where::where(cond)()], and omit the `col` argument, to get cells where `cond` is `TRUE`.
+#' * Use \code{\link[=where]{where(condition)}}, and omit the `col` argument, to get cells where `condition` is `TRUE`.
 #' * Set `byrow = TRUE` to set properties by row rather than by column.
-#'
 #'
 #' @section The gory details:
 #'

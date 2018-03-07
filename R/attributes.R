@@ -993,7 +993,7 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_name height
 #' @templateVar attr_desc Table height
 #' @templateVar value_param_desc
-#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default, which is to leave height unset.
+#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default, which is to leave height unset.
 #' @template getset-example
 #' @templateVar attr_val 0.4
 #' @family table measurements

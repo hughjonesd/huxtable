@@ -89,7 +89,7 @@ huxtable_latex_dependencies <- list(
 #' @param quiet Logical: suppress printing.
 #' @param as_string Logical: return dependencies as a string.
 #'
-#' @return If `as_string` is `TRUE`, a string of "\\usepackage\\{...\\}" statements;
+#' @return If `as_string` is `TRUE`, a string of "\\\\usepackage\\{...\\}" statements;
 #'   otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 #' @export
 #'
