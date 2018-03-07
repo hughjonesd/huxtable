@@ -4,14 +4,14 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 3.0.0.9000
 
-* The default value for `add_colnames` is going to become `TRUE`. At present it remains `FALSE`. A warning about
-  this is printed when the package is loaded. Set `options("huxtable.add_colnames")` to `TRUE` or `FALSE` to 
-  set the default and avoid the warning.
+* The default value for `add_colnames` is going to become `TRUE`. At present it remains `FALSE`. Set 
+  `options("huxtable.add_colnames")` to `TRUE` or `FALSE` to set the default and avoid warnings in future.
 * New `theme_plain` theme.
-* Now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
+* huxtable now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
 * Bugfixes for `number_format` and `huxreg`.
 * Tweak top and bottom margins for HTML tables.
-* LaTeX bugfix: background colors were printing an extra space
+* LaTeX bugfix: background colors were printing an extra space.
+* Screen bugfix: misaligned decimal points.
 
 # huxtable 3.0.0
 

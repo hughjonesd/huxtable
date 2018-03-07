@@ -15,7 +15,7 @@ sanitize(str, type = "latex")
 The sanitized character object.
 }
 \description{
-This is copied over from \code{\link[xtable:sanitize]{xtable::sanitize()}}.
+This is copied over from \code{xtable::sanitize()}.
 }
 \examples{
 foo <- 'Make $$$ with us'

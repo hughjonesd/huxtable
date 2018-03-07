@@ -124,7 +124,7 @@ format_numbers <- function (string, num_fmt) {
 
 #' Sanitize table elements
 #'
-#' This is copied over from [xtable::sanitize()].
+#' This is copied over from `xtable::sanitize()`.
 #'
 #' @param str A character object.
 #' @param type `"latex"` or `"html"`.

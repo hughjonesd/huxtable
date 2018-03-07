@@ -37,10 +37,6 @@ NULL
     huxtable.knit_print_df_theme = getOption('huxtable.knit_print_df_theme', theme_plain),
     huxtable.color_screen        = getOption('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
   )
-
-  if (is.null(getOption('huxtable.add_colnames'))) packageStartupMessage(
-          'By default, add_colnames = FALSE in huxtable and as_huxtable.default.\n',
-          'This will change in a future release. To suppress this message, \n',
-          'set `options("huxtable.add_colnames")` to TRUE or FALSE.'
-        )
 }
+
+
