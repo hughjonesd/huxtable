@@ -41,7 +41,7 @@ to_screen  <- function (ht, ...) UseMethod('to_screen')
 to_screen.huxtable <- function (
         ht,
         min_width = ceiling(getOption('width') / 6),
-        max_width = Inf,
+        max_width = getOption('width', Inf),
         compact   = TRUE,
         colnames  = TRUE,
         color     = getOption('huxtable.color_screen', default = TRUE),
