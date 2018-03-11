@@ -4,8 +4,7 @@
 
 TODO
 ====
-* After e.g. June, set huxtable.add_colnames to TRUE by default (and still print the warning). After Sept
-  turn off the warning.
+* After e.g. June, set huxtable.add_colnames to TRUE by default.
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 

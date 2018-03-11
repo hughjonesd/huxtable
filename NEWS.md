@@ -11,7 +11,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfixes for `number_format` and `huxreg`.
 * Tweak top and bottom margins for HTML tables.
 * LaTeX bugfix: background colors were printing an extra space.
-* Screen bugfix: misaligned decimal points.
+* Screen bugfixes:
+  - set max_width to screen width (thanks @jacob-long)
+  - misaligned decimal points
 
 # huxtable 3.0.0
 
