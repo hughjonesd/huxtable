@@ -14,6 +14,10 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Screen bugfixes:
   - set max_width to screen width (thanks @jacob-long)
   - misaligned decimal points
+  
+## Breaking changes 
+
+* Default value of `number_format` has changed from "%5.3g" to "%.3g", which no longer space-pads numbers.
 
 # huxtable 3.0.0
 

@@ -50,7 +50,7 @@ huxtable_env$huxtable_default_attrs <- list(
         italic              = FALSE,
         font_size           = NA,
         rotation            = 0,
-        number_format       = list('%5.3g'),
+        number_format       = list('%.3g'),
         pad_decimal         = NA,
         font                = NA
       )
