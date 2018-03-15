@@ -179,7 +179,7 @@ huxreg <- function (
       NULL
     } else t(bg)
     nobs <- nobs(m, use.fallback = TRUE)
-    x <- as.data.frame(rbind(nobs = nobs, bg))
+    x <- as.data.frame(rbind(nobs = nobs, bg), stringsAsFactors = FALSE)
     colnames(x) <- 'value' # some glance objects have a rowname
     x$stat  <- rownames(x)
     x$class <- c(class(nobs), sapply(bg, class))
