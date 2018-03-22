@@ -65,3 +65,12 @@ test_that('Can add to an existing workbook', {
   expect_silent(wb <- as_Workbook(hx, Workbook = wb))
   expect_silent(as_Workbook(hx, Workbook = wb, sheet = 'Another sheet'))
 })
+
+test_that('Works for single-column huxtables with and without row names', {
+  hx <- huxtable(1, 2, 3)
+  wb <- openxlsx::createWorkbook()
+  expect_silent(wb <- as_Workbook(hx, Workbook = wb))
+  hx <- huxtable(a = 1, b = 2, c = 3)
+  wb <- openxlsx::createWorkbook()
+  expect_silent(wb <- as_Workbook(hx, Workbook = wb))
+})

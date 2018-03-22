@@ -177,7 +177,11 @@ where <- function(expr) which(expr, arr.ind = TRUE)
 #' ht <- hux(a = 1:3, b = 1:3, add_colnames = TRUE)
 #' is_a_number(ht)
 is_a_number <- function(x) {
-  if (is.data.frame(x)) sapply(x, is_a_number) else ! is.na(suppressWarnings(as.numeric(x)))
+  if (is.data.frame(x)) {
+    res <- sapply(x, is_a_number)
+    dim(res) <- dim(x)
+    return(res)
+  } else return(! is.na(suppressWarnings(as.numeric(x))))
 }
 
 
