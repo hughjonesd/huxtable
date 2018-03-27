@@ -9,6 +9,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `theme_plain` theme.
 * huxtable now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
 * Bugfixes for `number_format` and `huxreg`.
+* `quick_*` functions now automatically open documents if used interactively. Use `open = FALSE` to
+  avoid.
 * Tweak top and bottom margins for HTML tables.
 * LaTeX bugfix: background colors were printing an extra space.
 * Screen bugfixes:

@@ -534,6 +534,7 @@ hux_logo <- function(latex = FALSE) {
 #' @param ... One or more huxtables or R objects with an `as_huxtable` method.
 #' @param file File path for the output.
 #' @param borders Border width for members of `...` that are not huxtables.
+#' @param open Logical. Automatically open the resulting file?
 #'
 #' @return Invisible `NULL`.
 #'
@@ -558,7 +559,8 @@ NULL
 
 #' @rdname quick-output
 #' @export
-quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4) {
+quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
@@ -595,13 +597,15 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     stop('Could not copy pdf file to ', file, '. The pdf file remains at "', pdf_file, '"')
   }
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4) {
+quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -619,13 +623,15 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
     finally = {sink()}
   )
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4) {
+quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -637,13 +643,15 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   }
   print(my_doc, target = file)
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4) {
+quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -655,6 +663,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
   }
   openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
@@ -674,7 +683,17 @@ confirm <- function (file) {
   if (! interactive()) stop('Please specify a `file` argument for non-interactive use of quick_xxx functions.')
   if (file.exists(file)) {
     answer <- readline(paste0('File "', file, '" already exists. Overwrite? [yN]'))
-    if (! answer %in% c('y', 'Y')) stop('OK, stopping.')
+    if (! answer %in% c('y', 'Y')) stop('OK, stopping')
   }
   file
+}
+
+auto_open <- function (path) {
+  sysname <- Sys.info()['sysname']
+  switch(sysname,
+    Darwin  = system2("open", path),
+    Windows = system2("start", path),
+    Linux   = system2("xdg-open", path),
+    warning('Could not determine OS to open document automatically')
+    )
 }

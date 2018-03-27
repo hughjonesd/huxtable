@@ -8,13 +8,17 @@
 \alias{quick_xlsx}
 \title{Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.}
 \usage{
-quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4)
+quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
+  open = interactive())
 
-quick_html(..., file = confirm("huxtable-output.html"), borders = 0.4)
+quick_html(..., file = confirm("huxtable-output.html"), borders = 0.4,
+  open = interactive())
 
-quick_docx(..., file = confirm("huxtable-output.docx"), borders = 0.4)
+quick_docx(..., file = confirm("huxtable-output.docx"), borders = 0.4,
+  open = interactive())
 
-quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4)
+quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
+  open = interactive())
 }
 \arguments{
 \item{...}{One or more huxtables or R objects with an \code{as_huxtable} method.}
@@ -22,6 +26,8 @@ quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4)
 \item{file}{File path for the output.}
 
 \item{borders}{Border width for members of \code{...} that are not huxtables.}
+
+\item{open}{Logical. Automatically open the resulting file?}
 }
 \value{
 Invisible \code{NULL}.
