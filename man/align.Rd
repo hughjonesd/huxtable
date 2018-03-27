@@ -6,6 +6,7 @@
 \alias{set_align}
 \alias{align.huxtable}
 \alias{align<-.huxtable}
+\alias{pad_decimal}
 \title{Alignment}
 \usage{
 align(ht)
@@ -15,7 +16,7 @@ set_align(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'left', 'center', 'right' or \code{NA}. Set to \code{NA} to reset to the default.}
+\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character. Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -29,6 +30,10 @@ For \code{set_align}, the \code{ht} object.
 }
 \description{
 Functions to get or set the alignment property of huxtable table cells.
+}
+\details{
+This sets the horizontal alignment of the cell. If \code{value} is a single character (e.g.
+a decimal point), then the cell is aligned on this character.
 }
 \examples{
 

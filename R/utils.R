@@ -6,6 +6,8 @@
 NULL
 
 
+ncharw <- function (x) nchar(x, type = 'width')
+
 
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
@@ -24,8 +26,12 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
-    # has to be after sanitization because we add &nbsp; for HTML
-    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[, col], type)
+    # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
+    # later we can just use align for this:
+    pad_chars <- pad_decimal(ht)[, col]
+    align_pad   <- ncharw(align(ht)[, col]) == 1
+    pad_chars[align_pad] <- align(ht)[align_pad, col]
+    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
   }
 
   contents
@@ -318,7 +324,7 @@ smart_hux_from_df <- function(dfr) {
   ht <- as_hux(dfr, add_colnames = TRUE)
   number_format(ht)[-1, ! numeric_cols]                  <- NA
   number_format(ht)[1, ]                                 <- NA
-  pad_decimal(ht)[-1, numeric_cols]                      <- '.'
+  align(ht)[-1, numeric_cols]                            <- '.'
   number_format(ht)[-1, integer_cols]                    <- 0
   wrap(ht)[-1, col_nchars > 15]                          <- TRUE
   align(ht)[, numeric_cols | integer_cols | date_cols]   <- 'right'

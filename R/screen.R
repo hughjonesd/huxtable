@@ -314,9 +314,6 @@ make_cell_style <- function (ht, row, col) {
 }
 
 
-ncharw <- function (x) nchar(x, type = 'width')
-
-
 str_pad <- function (strings, align, strlen) {
   stencils <- rep(str_rep(' ', strlen), length(strings))
 

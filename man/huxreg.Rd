@@ -6,9 +6,9 @@
 \usage{
 huxreg(..., error_format = "({std.error})", error_style = c("stderr", "ci",
   "statistic", "pvalue"), error_pos = c("below", "same", "right"),
-  number_format = "\%.3f", pad_decimal = ".", ci_level = NULL,
-  tidy_args = NULL, stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05),
-  bold_signif = NULL, borders = 0.4, outer_borders = 0.8,
+  number_format = "\%.3f", align = ".", pad_decimal = ".",
+  ci_level = NULL, tidy_args = NULL, stars = c(`***` = 0.001, `**` = 0.01,
+  `*` = 0.05), bold_signif = NULL, borders = 0.4, outer_borders = 0.8,
   note = "{stars}.", statistics = c(N = "nobs", R2 = "r.squared", "logLik",
   "AIC"), coefs = NULL, omit_coefs = NULL)
 }
@@ -23,8 +23,9 @@ huxreg(..., error_format = "({std.error})", error_style = c("stderr", "ci",
 
 \item{number_format}{Format for numbering. See \code{\link[=number_format]{number_format()}} for details.}
 
-\item{pad_decimal}{Character for decimal point; columns will be right-padded to align these.
-Set to \code{NA} to turn off padding. See \code{\link[=pad_decimal]{pad_decimal()}} for details.}
+\item{align}{Alignment for table cells. Set to a single character to align on this character.}
+
+\item{pad_decimal}{Deprecated in favour of \code{align}.}
 
 \item{ci_level}{Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.}
 

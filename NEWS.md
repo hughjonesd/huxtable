@@ -13,6 +13,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   avoid.
 * Tweak top and bottom margins for HTML tables.
 * LaTeX bugfix: background colors were printing an extra space.
+* `pad_decimal` is deprecated in favour of `align(ht) <- "."`.
 * Screen bugfixes:
   - set max_width to screen width (thanks @jacob-long)
   - misaligned decimal points

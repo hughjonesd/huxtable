@@ -9,8 +9,8 @@ NULL
 #' @param error_style Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.
 #' @param error_pos Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.
 #' @param number_format Format for numbering. See [number_format()] for details.
-#' @param pad_decimal Character for decimal point; columns will be right-padded to align these.
-#'   Set to `NA` to turn off padding. See [pad_decimal()] for details.
+#' @param align Alignment for table cells. Set to a single character to align on this character.
+#' @param pad_decimal Deprecated in favour of `align`.
 #' @param ci_level Confidence level for intervals. Set to `NULL` to not calculate confidence intervals.
 #' @param tidy_args List of arguments to pass to [broom::tidy()]. You can also pass a list of lists;
 #'   if so, the nth element will be used for the nth column.
@@ -62,6 +62,7 @@ huxreg <- function (
         error_style     = c('stderr', 'ci', 'statistic', 'pvalue'),
         error_pos       = c('below', 'same', 'right'),
         number_format   = '%.3f',
+        align           = '.',
         pad_decimal     = '.',
         ci_level        = NULL,
         tidy_args       = NULL,
@@ -224,8 +225,9 @@ huxreg <- function (
   colnames(result) <- c('names', names_or(models, paste0("model", seq_along(models))))
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
-  align(result)[-1, -1] <- 'right'
-  pad_decimal(result)[-1, -1] <- pad_decimal
+  align(result)[-1, -1] <- align
+  # automatically gives deprecation warning
+  if (! missing(pad_decimal)) pad_decimal(result)[-1, -1] <- pad_decimal
   number_format(result)[, 1]  <- NA
   number_format(result)[1, ]  <- NA
   if (! is.null(note)) {
