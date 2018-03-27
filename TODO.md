@@ -81,7 +81,7 @@ BUGS
   - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
     colour and position. 
     - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
-* LaTeX fonts not working [is this actually true?]
+
 PUT OFF
 =======
 * pad_decimal only works when cells are right-aligned
