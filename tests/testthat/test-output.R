@@ -124,6 +124,7 @@ expect_outputs_unchanged <- function (hx, idx) {
   expect_known_value(to_latex(hx),  file = paste0(file, "-latex.rds"),  info = info)
 }
 
+
 test_that('various outputs unchanged', {
   hx <- hux(
           int  = 1:3,
@@ -150,7 +151,7 @@ test_that('various outputs unchanged', {
           stringsAsFactors  = FALSE,
           KEEP.OUT.ATTRS   = FALSE
         )
-
+  RNGversion("3.3.0")
   set.seed(271075L) # expect_unchanged is useless if we always pick new variations
   for (i in sample(nrow(variations), 300)) {
     props <- as.list(variations[i,])
