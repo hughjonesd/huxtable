@@ -7,6 +7,10 @@
 \alias{align.huxtable}
 \alias{align<-.huxtable}
 \alias{pad_decimal}
+\alias{pad_decimal<-}
+\alias{set_pad_decimal}
+\alias{pad_decimal.huxtable}
+\alias{pad_decimal<-.huxtable}
 \title{Alignment}
 \usage{
 align(ht)
