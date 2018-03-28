@@ -113,7 +113,7 @@ cell_html <- function (ht, rn, cn, contents) {
   res <- paste0(res, ' style="')
   val <- valign(ht)[rn, cn]
   res <- paste0(res, 'vertical-align: ', val, '; ')
-  al  <- align(ht)[rn, cn]
+  al  <- real_align(ht)[rn, cn]
   res <- paste0(res, 'text-align: ', al, '; ')
   wrap <- wrap(ht)[rn, cn]
   res <- paste0(res, 'white-space: ', if (wrap) 'normal' else 'nowrap', '; ')

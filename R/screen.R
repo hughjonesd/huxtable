@@ -174,7 +174,7 @@ to_md <- function(ht, ...) UseMethod('to_md')
 to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4, max_width = 80, ...) {
   assert_that(is.flag(header), is.number(min_width), is.number(max_width))
   if (any(colspan(ht) > 1 | rowspan(ht) > 1)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
-  align <- align(ht)
+  align <- real_align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
     warning("Can't vary column alignment in markdown; using first row")
   ht <- set_align(ht, align[1, ], byrow = TRUE)
@@ -252,7 +252,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
       }
       x
     }))
-    strings <- str_pad(strings, align(ht)[ dcell$display_row, dcell$display_col ], width)
+    strings <- str_pad(strings, real_align(ht)[ dcell$display_row, dcell$display_col ], width)
     dc$strings[[r]] <- strings
   }
   dc$text_height <- sapply(dc$strings, length)

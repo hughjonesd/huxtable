@@ -243,6 +243,14 @@ get_caption_hpos <- function (ht) {
 }
 
 
+real_align <- function(ht) {
+  al <- align(ht)
+  al[! al %in% c('left', 'center', 'right')] <- 'right'
+
+  al
+}
+
+
 #' Print a huxtable within knitr
 #'
 #' @param x A huxtable.

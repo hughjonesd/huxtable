@@ -104,7 +104,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
             borderColour   = border_colors,
             borderStyle    = border_style,
             fgFill         = null_args$bgc, # bgFill is "for conditional formatting only"
-            halign         = align(ht)[drow, dcol],
+            halign         = real_align(ht)[drow, dcol],
             valign         = switch(va, middle = 'center', va),
             textDecoration = c("bold", "italic")[c(bold(ht)[drow, dcol], italic(ht)[drow, dcol])],
             wrapText       = wrap(ht)[drow, dcol],
