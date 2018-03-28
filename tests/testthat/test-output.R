@@ -117,7 +117,7 @@ test_that('guess_knitr_output_format() gets it right', {
 
 expect_outputs_unchanged <- function (hx, idx) {
   info <- paste0("Index i = ", idx)
-  file <- file.path("example-rds", paste0("various-outputs-", idx))
+  file <- file.path(test_path(), "example-rds", paste0("various-outputs-", idx))
   expect_known_value(to_screen(hx), file = paste0(file, "-screen.rds"), info = info)
   expect_known_value(to_md(hx),     file = paste0(file, "-md.rds"),     info = info)
   expect_known_value(to_html(hx),   file = paste0(file, "-html.rds"),   info = info)
@@ -126,6 +126,7 @@ expect_outputs_unchanged <- function (hx, idx) {
 
 
 test_that('various outputs unchanged', {
+  skip_on_R_CMD_check()
   hx <- hux(
           int  = 1:3,
           real = 1:3 + 0.005,
