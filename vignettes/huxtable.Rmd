@@ -208,7 +208,7 @@ some exceptions.
 ```{r, echo = FALSE}
 sides <- c('left_', 'right_', 'top_', 'bottom_')
 props <- list()
-props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'pad_decimal', 'escape_contents', 'number_format', 'rotation'))
+props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'escape_contents', 'number_format', 'rotation'))
 
 props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', paste0(sides, 'border'),
       paste0(sides, 'border_color'), paste0(sides, 'padding')))
@@ -380,16 +380,16 @@ number_format(pointy_ht) <- 3
 pointy_ht
 ```
 
-You can also align columns by decimal places. If you want to do this for a cell, just set the `pad_decimal` property
+You can also align columns by decimal places. If you want to do this for a cell, just set the `align` property
 to '.' (or whatever you use for a decimal point). 
 
 ```{r}
-pad_decimal(pointy_ht)[2:5, ] <- '.' # not the first row
-align(pointy_ht) <- 'right'
+align(pointy_ht)[2:5, ] <- '.' # not the first row
 pointy_ht
 ```
 
-There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so `pad_decimal` works by right-padding cells with spaces. The output may look better if you use a fixed width font.
+There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so this works by right-padding cells with spaces. The output may look better 
+if you use a fixed width font.
 
 ## Escaping HTML or LaTeX
 
