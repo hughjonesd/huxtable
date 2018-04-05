@@ -114,8 +114,15 @@ test_that('huxreg stars printed correctly', {
 
 
 test_that('huxreg works for models without tidy p values', {
-  expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris), statistics = 'nobs'),
-        'p values')
+  expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris),
+        statistics = 'nobs'), 'p values')
+})
+
+
+test_that('huxreg works when nobs not available', {
+  m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
+  ct <- lmtest::coeftest(m)
+  expect_warning(huxreg(ct, statistics = NULL), 'No `glance` method')
 })
 
 
