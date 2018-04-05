@@ -75,6 +75,7 @@ huxreg <- function (
         coefs           = NULL,
         omit_coefs      = NULL
       ) {
+  # prepare parameters
   if (! requireNamespace('broom', quietly = TRUE)) stop('huxreg requires the "broom" package. To install, type:\n',
         'install.packages("broom")')
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
@@ -88,6 +89,7 @@ huxreg <- function (
   if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
   if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) tidy_args <- rep(list(tidy_args), length(models))
 
+  # create list of tidy data frames, possibly with confidence intervals
   my_tidy <- function (n, ci_level = NULL) {
     args <- if (! is.null(tidy_args)) tidy_args[[n]] else list()
     args$x <- models[[n]]
@@ -104,6 +106,7 @@ huxreg <- function (
   }
   tidied <- lapply(seq_along(models), if (is.null(ci_level)) my_tidy else tidy_with_ci)
 
+  # select coefficients
   my_coefs <- unique(unlist(lapply(tidied, function (x) x$term)))
   if (! missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
   if (! missing(coefs)) {
@@ -113,6 +116,7 @@ huxreg <- function (
   }
   coef_names <- names_or(my_coefs, my_coefs)
 
+  # select appropriate rows
   tidied <- lapply(tidied, merge, x = data.frame(term = my_coefs, stringsAsFactors = FALSE), all.x = TRUE, by = 'term',
         sort = FALSE)
   tidied <- lapply(tidied, function (x) {
@@ -121,6 +125,7 @@ huxreg <- function (
   })
   coef_names <- unique(coef_names)
 
+  # add stars to estimates
   if (! is.null(stars)) {
     tidied <- lapply(tidied, function (x) {
       stars_arg <- c(0, sort(stars), ' ' = 1)
@@ -135,6 +140,7 @@ huxreg <- function (
     })
   }
 
+  # create error cells
   if (! missing(error_style)) {
     formats <- list(stderr = '{std.error}', ci = '{conf.low} -- {conf.high}', statistic = '{statistic}',
           pvalue = '{p.value}')
@@ -152,7 +158,7 @@ huxreg <- function (
     x
   })
 
-  # now we cbind the models
+  # cbind tidy data into a single data frame
   coef_col <- switch(error_pos,
     same  = paste,
     below = interleave,
@@ -160,8 +166,10 @@ huxreg <- function (
   )
   cols <- lapply(tidied, function (mod) coef_col(mod$estimate, mod$error_cell))
   cols <- Reduce(cbind, cols)
-  cols <- hux(cols)
-  number_format(cols) <- number_format
+
+  # make the data frame a huxtable
+  coef_hux <- hux(cols)
+  number_format(coef_hux) <- number_format
   if (! is.null(bold_signif)) {
     bold_cols <- lapply(tidied, function (mod) mod$p.value <= bold_signif)
     bold_cols <- switch(error_pos,
@@ -170,16 +178,17 @@ huxreg <- function (
       right = lapply(bold_cols, function (x) cbind(x, x))
     )
     bold_cols <- Reduce(cbind, bold_cols)
-    bold(cols) <- bold_cols
+    bold(coef_hux) <- bold_cols
   }
 
+  # create list of summary statistics
   all_sumstats <- lapply(models, function(m) {
     bg <- try(broom::glance(m), silent = TRUE)
     bg <- if (class(bg) == 'try-error') {
       warning('No `glance` method for model of class ', class(m)[1])
       NULL
     } else t(bg)
-    nobs <- nobs(m, use.fallback = TRUE)
+    nobs <- tryCatch(nobs(m, use.fallback = TRUE), error = function (e) NA)
     x <- as.data.frame(rbind(nobs = nobs, bg), stringsAsFactors = FALSE)
     colnames(x) <- 'value' # some glance objects have a rowname
     x$stat  <- rownames(x)
@@ -187,6 +196,7 @@ huxreg <- function (
     x
   })
 
+  # select summary statistics and cbind into a single data frame
   stat_names <- unique(unlist(lapply(all_sumstats, function (x) x$stat)))
   if (! is.null(statistics)) {
     if (! all(statistics %in% stat_names)) stop('Unrecognized statistics: ',
@@ -201,6 +211,7 @@ huxreg <- function (
   sumstats <- Reduce(cbind, sumstats)
   ss_classes <- Reduce(cbind, ss_classes)
 
+  # create huxtable of summary statistics
   sumstats <- hux(sumstats)
   number_format(sumstats) <- number_format
   number_format(sumstats)[ss_classes == 'integer'] <- 0
@@ -212,16 +223,17 @@ huxreg <- function (
     }
     sumstats <- sumstats2
   }
-  cols <- cbind(if (error_pos == 'below') interleave(coef_names, '') else coef_names, cols,
+  coef_hux <- cbind(if (error_pos == 'below') interleave(coef_names, '') else coef_names, coef_hux,
         copy_cell_props = FALSE)
   sumstats <- cbind(names_or(stat_names, stat_names), sumstats, copy_cell_props = FALSE)
 
+  # create single huxtable from coefficients and summary statistics
   if (error_pos == 'right') mod_col_headings <- interleave(mod_col_headings, '')
   mod_col_headings <- c('', mod_col_headings)
-  result <- rbind(mod_col_headings, cols, sumstats, copy_cell_props = FALSE)
+  result <- rbind(mod_col_headings, coef_hux, sumstats, copy_cell_props = FALSE)
   result <- set_bottom_border(result, final(), everywhere, outer_borders)
   result <- set_top_border(result, 1, everywhere, outer_borders)
-  result <- set_bottom_border(result, c(1, nrow(cols) + 1), -1, borders)
+  result <- set_bottom_border(result, c(1, nrow(coef_hux) + 1), -1, borders)
   colnames(result) <- c('names', names_or(models, paste0("model", seq_along(models))))
   if (error_pos == 'right') result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- 'center'
@@ -230,6 +242,8 @@ huxreg <- function (
   if (! missing(pad_decimal)) pad_decimal(result)[-1, -1] <- pad_decimal
   number_format(result)[, 1]  <- NA
   number_format(result)[1, ]  <- NA
+
+  # add a table note
   if (! is.null(note)) {
     stars <- if (is.null(stars)) '' else paste0(names(stars), ' p < ', stars, collapse = '; ')
     note <- gsub('%stars%', stars, note)
@@ -239,7 +253,7 @@ huxreg <- function (
     result <- set_align(result, final(), 1, 'left')
   }
 
-  result
+  return(result)
 }
 
 
