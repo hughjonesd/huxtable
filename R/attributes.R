@@ -50,7 +50,7 @@ huxtable_env$huxtable_default_attrs <- list(
         italic              = FALSE,
         font_size           = NA,
         rotation            = 0,
-        number_format       = list('%5.3g'),
+        number_format       = list('%.3g'),
         pad_decimal         = NA,
         font                = NA
       )
@@ -255,19 +255,28 @@ set_cell_properties <- function (ht, row, col, ...) {
 NULL
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
 
+
+check_align_value <- function (x) {
+  x <- na.omit(x)
+  is.character(x) && all(x %in% c('left', 'centre', 'center', 'right') | ncharw(x) == 1)
+}
+
+
 #' @template getset-cell
 #' @templateVar attr_name align
 #' @templateVar attr_desc Alignment
-#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' or `NA`.
+#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' , `NA` or a single character.
 #' @template getset-example
 #' @templateVar attr_val 'right'
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'left'
+#' @details This sets the horizontal alignment of the cell. If `value` is a single character (e.g.
+#' a decimal point), then the cell is aligned on this character.
 #' @export align align<- set_align align.huxtable align<-.huxtable
 #' @S3method align huxtable
 #' @S3method align<- huxtable
 NULL
-make_getter_setters('align', 'cell', check_fun = is.character, check_values = c('left', 'center', 'centre', 'right'),
+make_getter_setters('align', 'cell', check_fun = check_align_value,
       extra_code = value[value == 'centre'] <- 'center')
 
 
@@ -290,6 +299,7 @@ make_getter_setters('align', 'cell', check_fun = is.character, check_values = c(
 NULL
 make_getter_setters('col_width', 'col')
 
+
 #' @template getset-rowcol
 #' @templateVar attr_name row_height
 #' @templateVar rowcol row
@@ -306,6 +316,7 @@ make_getter_setters('col_width', 'col')
 #' @S3method row_height<- huxtable
 NULL
 make_getter_setters('row_height', 'row')
+
 
 #' @template getset-cell
 #' @templateVar attr_name rowspan
@@ -326,6 +337,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
     }
 )
 
+
 #' @template getset-cell
 #' @templateVar attr_name colspan
 #' @templateVar attr_desc Column span
@@ -345,6 +357,7 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
     }
 )
 
+
 check_span_shadows <- function (ht, rc, value) {
   value[is.na(value)] <- 1L
   dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
@@ -356,6 +369,7 @@ check_span_shadows <- function (ht, rc, value) {
     stop('New rowspan/colspan would cut up existing multirow/multicol cells at ', candidates)
   }
 }
+
 
 #' @template getset-cell
 #' @templateVar attr_name background_color
@@ -371,6 +385,7 @@ check_span_shadows <- function (ht, rc, value) {
 #' @S3method background_color<- huxtable
 NULL
 make_getter_setters('background_color', 'cell')
+
 
 #' @template getset-cell
 #' @templateVar attr_name text_color
@@ -890,31 +905,16 @@ make_getter_setters('number_format', 'cell')
 }
 
 
-#' @template getset-cell
-#' @templateVar attr_name pad_decimal
-#' @templateVar attr_desc Decimal padding
-#' @templateVar value_param_desc A vector of single characters. `NA` is the default of no padding.
-#' @details
-#' LaTeX and HTML both have no simple way to align columns on decimal points, especially when cells
-#' may contain non-mathematical content like significance stars. To right-pad cells
-#' in a column to align on the rightmost decimal point, set `pad_decimal` to '.' or whatever decimal
-#' you prefer to use. Note that this will only work for cells with [align()] set to `'right'`.
-#' @examples
-#' vals <- c(1.00035, 22, "2.34 *", "(11.5 - 22.3)", "Do not pad this row.")
-#' ht <- hux(NotPadded = vals, Padded = vals)
-#' number_format(ht)       <- '%2.6g'
-#' align(ht)[1:5,]         <- 'right'
-#' pad_decimal(ht)[1:4, 2] <- '.'
-#' ht
-#' @template getset-rowspec-example
-#' @templateVar attr_val '.'
-#' @templateVar attr_val2 NA
+#' @name pad_decimal
+#' @aliases pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
+#' @rdname align
 #' @export pad_decimal pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
 #' @S3method pad_decimal huxtable
 #' @S3method pad_decimal<- huxtable
 NULL
 make_getter_setters('pad_decimal', 'cell', extra_code = {
   stopifnot(all(nchar(na.omit(value)) == 1))
+  warning('pad_decimal is deprecated. Instead, use e.g. align(x) <- "."')
 })
 
 

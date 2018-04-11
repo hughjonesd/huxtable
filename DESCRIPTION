@@ -38,6 +38,7 @@ Suggests:
     ggplot2,
     lazyeval,
     lme4,
+    lmtest,
     nnet,
     officer,
     openxlsx,

@@ -87,19 +87,6 @@ test_that('set_* works with row and column functions', {
   expect_equivalent(row_height(ht), rep(c('30pt', '15pt'), 2))
 })
 
-test_that('set_* works with column ranges', {
-  skip('Feature postponed until I understand deep magic')
-  ht <- hux(a = 1:4, b = 1:4, c = 1:4, d = 1:4)
-  ht <- set_font(ht, everywhere, b:d, 'times')
-  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', 'times'), 4, 4, byrow = TRUE))
-})
-
-test_that('set_* works with expressions in ht context', {
-  skip('Feature postponed until I understand deep magic')
-  ht <- hux(a = 1:4, b = 1:4)
-  ht <- set_font(ht, a >= 2 & b <= 3, 1:2, 'times')
-  expect_equivalent(font(ht), matrix(c(NA, 'times', 'times', NA), 4, 2))
-})
 
 test_that('set_* works with byrow', {
   ht <- hux(a = 1:2, b = 1:2)

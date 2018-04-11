@@ -1,0 +1,20 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "28/03/2018"
+output: 
+  pdf_document:
+    keep_tex: true
+---
+
+
+```{r}
+library(huxtable)
+
+tmp <- hux(a = 1.2345)
+tmp
+
+align(tmp) <- "."
+tmp
+
+```

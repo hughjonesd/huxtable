@@ -1,10 +1,12 @@
 
 
-# utility functions-----------------------------------------------------------------------------------------------------
+# utility functions---------------------------------------------------------------------------------
 
 #' @import assertthat
 NULL
 
+
+ncharw <- function (x) nchar(x, type = 'width')
 
 
 # return character matrix of formatted contents, suitably escaped
@@ -24,8 +26,12 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
-    # has to be after sanitization because we add &nbsp; for HTML
-    contents[, col] <- decimal_pad(contents[, col], pad_decimal(ht)[, col], type)
+    # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
+    # later we can just use align for this:
+    pad_chars <- pad_decimal(ht)[, col]
+    align_pad   <- ncharw(align(ht)[, col]) == 1
+    pad_chars[align_pad] <- align(ht)[align_pad, col]
+    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
   }
 
   contents
@@ -237,6 +243,14 @@ get_caption_hpos <- function (ht) {
 }
 
 
+real_align <- function(ht) {
+  al <- align(ht)
+  al[! al %in% c('left', 'center', 'right')] <- 'right'
+
+  al
+}
+
+
 #' Print a huxtable within knitr
 #'
 #' @param x A huxtable.
@@ -318,7 +332,7 @@ smart_hux_from_df <- function(dfr) {
   ht <- as_hux(dfr, add_colnames = TRUE)
   number_format(ht)[-1, ! numeric_cols]                  <- NA
   number_format(ht)[1, ]                                 <- NA
-  pad_decimal(ht)[-1, numeric_cols]                      <- '.'
+  align(ht)[-1, numeric_cols]                            <- '.'
   number_format(ht)[-1, integer_cols]                    <- 0
   wrap(ht)[-1, col_nchars > 15]                          <- TRUE
   align(ht)[, numeric_cols | integer_cols | date_cols]   <- 'right'
@@ -534,6 +548,7 @@ hux_logo <- function(latex = FALSE) {
 #' @param ... One or more huxtables or R objects with an `as_huxtable` method.
 #' @param file File path for the output.
 #' @param borders Border width for members of `...` that are not huxtables.
+#' @param open Logical. Automatically open the resulting file?
 #'
 #' @return Invisible `NULL`.
 #'
@@ -558,7 +573,8 @@ NULL
 
 #' @rdname quick-output
 #' @export
-quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4) {
+quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
@@ -595,13 +611,15 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     stop('Could not copy pdf file to ', file, '. The pdf file remains at "', pdf_file, '"')
   }
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4) {
+quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -619,13 +637,15 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
     finally = {sink()}
   )
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4) {
+quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -637,13 +657,15 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   }
   print(my_doc, target = file)
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
 
 #' @rdname quick-output
 #' @export
-quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4) {
+quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
+      open = interactive()) {
   assert_that(is.number(borders))
   force(file)
   hts <- huxtableize(list(...), borders)
@@ -655,6 +677,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
   }
   openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
 
+  if (open) auto_open(file)
   invisible(NULL)
 }
 
@@ -674,7 +697,17 @@ confirm <- function (file) {
   if (! interactive()) stop('Please specify a `file` argument for non-interactive use of quick_xxx functions.')
   if (file.exists(file)) {
     answer <- readline(paste0('File "', file, '" already exists. Overwrite? [yN]'))
-    if (! answer %in% c('y', 'Y')) stop('OK, stopping.')
+    if (! answer %in% c('y', 'Y')) stop('OK, stopping')
   }
   file
+}
+
+auto_open <- function (path) {
+  sysname <- Sys.info()['sysname']
+  switch(sysname,
+    Darwin  = system2("open", path),
+    Windows = system2("start", path),
+    Linux   = system2("xdg-open", path),
+    warning('Could not determine OS to open document automatically')
+    )
 }

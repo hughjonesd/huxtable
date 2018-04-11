@@ -4,8 +4,7 @@
 
 TODO
 ====
-* After e.g. June, set huxtable.add_colnames to TRUE by default (and still print the warning). After Sept
-  turn off the warning.
+* After e.g. June, set huxtable.add_colnames to TRUE by default.
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 
@@ -82,13 +81,9 @@ BUGS
   - basic choice is: nowrap cells overrun if content too long; or they expand, but can mess up background
     colour and position. 
     - the first issue will happen more often, but the fix is more obvious to the user (wider table!)
-* LaTeX fonts not working [is this actually true?]
+
 PUT OFF
 =======
-* pad_decimal only works when cells are right-aligned
-  - not sure having it work on left aligned cells would add much value?
-* set_bold causes right border to be out by 1 on screen
-  - actually this is a font issue with the default RStudio font. Works fine with menlo.
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix
 * when inserting one hux into another, row heights/col widths may no longer make sense,
   - because they are implicit proportions.

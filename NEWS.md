@@ -9,9 +9,19 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `theme_plain` theme.
 * huxtable now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
 * Bugfixes for `number_format` and `huxreg`.
+* `quick_*` functions now automatically open documents if used interactively. Use `open = FALSE` to
+  avoid.
 * Tweak top and bottom margins for HTML tables.
 * LaTeX bugfix: background colors were printing an extra space.
-* Screen bugfix: misaligned decimal points.
+* `pad_decimal` is deprecated in favour of `align(ht) <- "."`.
+* `huxreg` continues with a warning if `statistics` are unavailable for some models
+* Screen bugfixes:
+  - set max_width to screen width (thanks @jacob-long)
+  - misaligned decimal points
+  
+## Breaking changes 
+
+* Default value of `number_format` has changed from "%5.3g" to "%.3g", which no longer space-pads numbers.
 
 # huxtable 3.0.0
 

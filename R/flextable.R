@@ -80,7 +80,7 @@ as_flextable.huxtable <- function(x, ...) {
     if (! is.na(fs <- font_size(x)[drow, dcol])) ft <- flextable::fontsize(ft, i = drow, j = dcol, size = fs)
     if (! is.na(tc <- text_color(x)[drow, dcol])) ft <- flextable::color(ft, i = drow, j = dcol, color = tc)
     if (! is.na(bgc <- background_color(x)[drow, dcol])) ft <- flextable::bg(ft, i = drow, j = dcol, bg = bgc)
-    ft <- flextable::align(ft, i = drow, j = dcol, align = align(x)[drow, dcol])
+    ft <- flextable::align(ft, i = drow, j = dcol, align = real_align(x)[drow, dcol])
 
     ft <- flextable::padding(ft, i = drow, j = dcol,
             padding.bottom = bottom_padding(x)[drow, dcol],
