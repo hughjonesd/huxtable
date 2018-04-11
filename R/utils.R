@@ -116,14 +116,14 @@ format_numbers <- function (string, num_fmt) {
           digits = num_fmt) else
         stop('Unrecognized type of number_format: should be function, character or integer. See ?number_format')
   # Breakdown:
-  # -?(\\d*\\.)?\\d+         Optional minus sign, followed by optional digits and decimal point,
-  #                          followed by one or more digits. Matches "1", "1.1", ".1", "-1", "-1.1", "-.1"
-  # (?<! ... )               But not if all of this comes straight after ...
-  # \\d(e|E)-?\\d{1,3}       a digit, an e or E, an optional minus, and 0 to 3 more digits.
-  #                          We'd like to have \d* here but you can't have unbounded-length regexes.
-  #                          The up to 3 digits rules out exponents with up to 1000 zeros, so we should
-  #                          be good...
-  stringr::str_replace_all(string,  '(?<!\\d(e|E)-?\\d{0,3})-?(\\d*\\.)?\\d+', function (x) format_numeral(as.numeric(x)))
+  # -?                    optional minus sign
+  # [0-9]*                followed by any number of digits
+  # \\.?                  optionally followed by a decimal
+  # [0-9]+                which may also be followed by any number of digits
+  # ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
+  #                       along with (optionally) a sign preceding the digits
+  #                       specifying the level of the exponent.
+  stringr::str_replace_all(string,  '-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?', function (x) format_numeral(as.numeric(x)))
 }
 
 

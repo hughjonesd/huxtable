@@ -70,16 +70,18 @@ test_that('number_format works on cells with multiple numbers', {
 })
 
 
-test_that('number_format does not apply to exponents in scientific notation', {
+test_that('number_format treats scientific notation equivalently to sprintf', {
   ht <- huxtable(c("1.12e3", "1.12E3", "1.12e17", "1.12e-3", "1.12A3", "1.12e3 4.8 and 5.6"))
   number_format(ht) <- 4
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.1200e3")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1.1200E3")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "1.1200e17")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "1.1200e-3")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1120.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1120.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1],
+                    "112000000000000000.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "0.0011")
   # the next is not scientific notation so both numbers should be affected
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[5, 1], '1.1200A3.0000')
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[6, 1], '1.1200e3 4.8000 and 5.6000')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[6, 1], '1120.0000 4.8000 and 5.6000')
+
 })
 
 
@@ -89,13 +91,13 @@ test_that('number_format works with various interesting cases', {
   expect_equivalent(huxtable:::format_numbers('1 2 3', '%.3f'), '1.000 2.000 3.000')
   expect_equivalent(huxtable:::format_numbers('1 -2 -3.1 -.4 .5', '%.3f'), '1.000 -2.000 -3.100 -0.400 0.500')
   expect_equivalent(huxtable:::format_numbers('1.1234-1.1234', '%.3f'), '1.123-1.123')
-  expect_equivalent(huxtable:::format_numbers('1.1234e-2', '%.3f'), '1.123e-2')
-  expect_equivalent(huxtable:::format_numbers('1.1234e-12', '%.3f'), '1.123e-12')
-  expect_equivalent(huxtable:::format_numbers('1.1234e121', '%.3f'), '1.123e121')
-  expect_equivalent(huxtable:::format_numbers('1.1234e121 3', '%.3f'), '1.123e121 3.000')
+  expect_equivalent(huxtable:::format_numbers('1.1234e-2', '%.3f'), '0.011')
+  expect_equivalent(huxtable:::format_numbers('1.1234e-12', '%.3f'), '0.000')
+  expect_equivalent(huxtable:::format_numbers('1.1234e121', '%.3f'), '11233999999999999368836333730386280641849353844710083437140130805029068123436912520539364725319602837794365889814441492480.000')
+  expect_equivalent(huxtable:::format_numbers('1.1234e121 3', '%.3f'), "11233999999999999368836333730386280641849353844710083437140130805029068123436912520539364725319602837794365889814441492480.000 3.000")
   # this is pretty brutal:
-  expect_equivalent(huxtable:::format_numbers('-1.1e3-1.2e3', '%.3f'), '-1.100e3-1.200e3')
-  expect_equivalent(huxtable:::format_numbers('-1.1e-3-1.2e3', '%.3f'), '-1.100e-3-1.200e3')
+  expect_equivalent(huxtable:::format_numbers('-1.1e3-1.2e3', '%.3f'), "-1100.000-1200.000")
+  expect_equivalent(huxtable:::format_numbers('-1.1e-3-1.2e3', '%.3f'), "-0.001-1200.000")
 
 })
 
