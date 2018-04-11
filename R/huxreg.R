@@ -207,7 +207,7 @@ huxreg <- function (
     if (! all(statistics %in% stat_names)) warning('Unrecognized statistics: ',
           paste(setdiff(statistics, stat_names), collapse = ', '),
           '\nTry setting "statistics" explicitly in the call to huxreg()')
-    stat_names <- intersect(statistics, stat_names)
+    stat_names <- statistics[statistics %in% stat_names] # intersect would remove names
   }
   sumstats <- lapply(all_sumstats, merge, x = data.frame(stat = stat_names), by = 'stat', all.x = TRUE, sort = FALSE)
   sumstats <- lapply(sumstats, function (x) x[match(stat_names, x$stat), ])

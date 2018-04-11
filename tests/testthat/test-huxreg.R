@@ -97,6 +97,12 @@ test_that('huxreg borders argument works', {
 })
 
 
+test_that('huxreg statistics names shown in output', {
+  m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
+  expect_match(to_screen(huxreg(m, statistics = c(foo = 'nobs'))), 'foo')
+})
+
+
 test_that('huxreg stars printed correctly', {
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(20), a = rnorm(20))
