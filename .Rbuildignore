@@ -20,4 +20,4 @@ logo\.xcf
 ^codecov\.yml$
 ^run-covr\.R$
 ^appveyor\.yml$
-
+^delete-appveyor-cache\.sh$
