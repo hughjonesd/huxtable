@@ -22,7 +22,7 @@ NULL
 #' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 #'   significance stars. Set to `NULL` for no footnote.
 #' @param statistics Summary statistics to display. Set to `NULL` to show all available statistics.
-#' @param coefs Display only these coefficients. Overrules `omit_coef`.
+#' @param coefs Display only these coefficients. Overrules `omit_coefs`.
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details

@@ -46,7 +46,7 @@ significance stars. Set to \code{NULL} for no footnote.}
 
 \item{statistics}{Summary statistics to display. Set to \code{NULL} to show all available statistics.}
 
-\item{coefs}{Display only these coefficients. Overrules \code{omit_coef}.}
+\item{coefs}{Display only these coefficients. Overrules \code{omit_coefs}.}
 
 \item{omit_coefs}{Omit these coefficients.}
 }
