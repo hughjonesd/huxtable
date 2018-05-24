@@ -39,6 +39,7 @@ Suggests:
     lazyeval,
     lme4,
     lmtest,
+    nlme,
     nnet,
     officer,
     openxlsx,
