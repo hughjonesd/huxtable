@@ -11,12 +11,15 @@ as_FlexTable(x, ...)
 
 as_flextable(x, ...)
 
-\method{as_flextable}{huxtable}(x, ...)
+\method{as_flextable}{huxtable}(x, colnames_to_header = FALSE, ...)
 }
 \arguments{
 \item{x}{A huxtable.}
 
 \item{...}{Not used.}
+
+\item{colnames_to_header}{Use huxtable column names as the header. If \code{FALSE}, the flextable
+will contain only a body and no header.}
 }
 \value{
 an object of class flextable.

@@ -15,6 +15,8 @@ as_FlexTable <- function(x, ...) {
 #' Huxtables can be converted to [flextable::flextable()] objects, for use in Word and Powerpoint documents.
 #'
 #' @param x A huxtable.
+#' @param colnames_to_header Use huxtable column names as the header. If \code{FALSE}, the flextable
+#'    will contain only a body and no header.
 #' @param ... Not used.
 #'
 #' @return an object of class flextable.
@@ -53,7 +55,7 @@ as_flextable <- function(x, ...) UseMethod('as_flextable')
 
 #' @rdname as_flextable
 #' @export
-as_flextable.huxtable <- function(x, ...) {
+as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   if (! requireNamespace('flextable')) stop('as_flextable requires the flextable package. To install, type:\n',
     'install.packages("flextable")')
 
@@ -61,7 +63,7 @@ as_flextable.huxtable <- function(x, ...) {
   cc <- as.data.frame(cc)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
-
+  if (! colnames_to_header) ft <- flextable::delete_part(ft, 'header')
 
   if (is.numeric(rh <- row_height(x))) ft <- flextable::height(ft, height = rh)
   if (is.numeric(cw <- col_width(x)))  ft <- flextable::width(ft, width = cw)

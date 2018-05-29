@@ -22,6 +22,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 ## Breaking changes 
 
 * Default value of `number_format` has changed from "%5.3g" to "%.3g", which no longer space-pads numbers.
+* `as_flextable` now does not print column names in the header. This matches the standard
+  huxtable behaviour whereby headers are "just another row/column". To get the old behaviour, 
+  use `colnames_to_header = TRUE`.
 
 # huxtable 3.0.0
 

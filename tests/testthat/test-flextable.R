@@ -32,3 +32,10 @@ test_that('Borders work', {
   right_border(hx)[, 2]  <- 1
   expect_error(as_flextable(hx), regexp = NA)
 })
+
+
+test_that('colnames_to_header argument', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  expect_error(as_flextable(hx, colnames_to_header = FALSE), regexp = NA)
+  expect_error(as_flextable(hx, colnames_to_header = TRUE), regexp = NA)
+})
