@@ -282,7 +282,10 @@ make_ci <- function(tidied, ci_level) {
 
 
 has_builtin_ci <- function (x) {
-  objs <- sapply(class(x), function (y) try(utils::getS3method('tidy', y), silent = TRUE))
+  objs <- sapply(class(x), function (y) {
+    try(utils::getS3method('tidy', y,
+        envir = getNamespace('broom')), silent = TRUE)
+  })
   obj <- Find(function(x) class(x) == 'function', objs)
   if (is.null(obj)) return(FALSE)
   argnames <- names(formals(obj))

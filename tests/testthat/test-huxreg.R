@@ -7,6 +7,16 @@ test_that('huxreg examples unchanged', {
 })
 
 
+test_that('has_builtin_ci works', {
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
+  expect_true(huxtable:::has_builtin_ci(lm1))
+  library(nlme)
+  data(Orthodont, package = 'nlme')
+  fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~ 1, method = 'ML')
+  expect_false(huxtable:::has_builtin_ci(fm1))
+})
+
+
 test_that('huxreg copes with different models', {
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
