@@ -52,6 +52,15 @@ test_that('huxreg confidence intervals work when tidy c.i.s not available', {
 
 })
 
+
+test_that('huxreg error_style usage', {
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
+  expect_warning(hr <- huxreg(lm1, error_style = 'stderr'), '`error_style` is deprecated')
+  hr2 <- huxreg(lm1, error_format = '({std.error})')
+  expect_identical(hr, hr2)
+})
+
+
 test_that('huxreg works with single coefficient', {
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -60,6 +69,7 @@ test_that('huxreg works with single coefficient', {
   lm2 <- lm(y ~ a + b, dfr)
   expect_error(huxreg(lm1, lm2, coefs = 'a'), regexp = NA)
 })
+
 
 test_that('huxreg merges coefficients with same names', {
   set.seed(27101975)
@@ -72,6 +82,21 @@ test_that('huxreg merges coefficients with same names', {
   lm4 <- lm(y ~ b + d, dfr)
   ht2 <- huxreg(lm3, lm4, coefs = c('name' = 'a', 'name' = 'b', 'd'))
   expect_equal(sum(ht2[[1]] == 'name'), 1)
+})
+
+
+test_that('huxreg bold_signif works', {
+  lm1 <- lm(Petal.Length ~ Sepal.Length, iris)
+  expect_silent(hr1 <- huxreg(lm1, bold_signif = 0.05))
+  expect_identical(unname(bold(hr1)), matrix(c(rep(FALSE, 11), rep(TRUE, 4), rep(FALSE, 5)), 10, 2))
+})
+
+
+test_that('huxreg error_pos works', {
+  lm1 <- lm(Petal.Length ~ Sepal.Length, iris)
+  lm2 <- lm(Sepal.Width ~ Sepal.Length, iris)
+  expect_silent(hr1 <- huxreg(lm1, lm2, error_pos = 'right'))
+  expect_equal(ncol(hr1), 5)
 })
 
 
