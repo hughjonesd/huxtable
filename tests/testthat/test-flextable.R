@@ -34,6 +34,29 @@ test_that('Borders work', {
 })
 
 
+test_that('background colour works', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  background_color(hx)[1:2,] <- 'yellow'
+  expect_silent(as_flextable(hx))
+})
+
+
+test_that('merged cells work', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  colspan(hx)[1, 1] <- 2
+  rowspan(hx)[2, 1] <- 2
+  expect_silent(as_flextable(hx))
+})
+
+
+test_that('row heights and column widths work', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  row_height(hx) <- c(.5, .25, .25)
+  col_width(hx) <- c(.6, .4)
+  expect_silent(as_flextable(hx))
+})
+
+
 test_that('colnames_to_header argument', {
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_error(as_flextable(hx, colnames_to_header = FALSE), regexp = NA)
