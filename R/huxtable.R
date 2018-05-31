@@ -11,7 +11,8 @@ NULL
 #'
 #' `huxtable`, or `hux`, creates a huxtable object.
 #'
-#' @param ... Named list of values, as for [data.frame()].
+#' @param ... For `huxtable`, named list of values as in [data.frame()]. For `as_huxtable`,
+#'   extra arguments.
 #' @param add_colnames If `TRUE`, add a first row of column names to the huxtable.
 #' @param add_rownames If `TRUE`, add a first column of row names, named 'rownames', to the huxtable.
 #'

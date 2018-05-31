@@ -29,7 +29,8 @@ is_huxtable(x)
 is_hux(x)
 }
 \arguments{
-\item{...}{Named list of values, as for \code{\link[=data.frame]{data.frame()}}.}
+\item{...}{For \code{huxtable}, named list of values as in \code{\link[=data.frame]{data.frame()}}. For \code{as_huxtable},
+extra arguments.}
 
 \item{add_colnames}{If \code{TRUE}, add a first row of column names to the huxtable.}
 
