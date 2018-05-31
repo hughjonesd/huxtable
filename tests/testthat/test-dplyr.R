@@ -58,6 +58,11 @@ test_that('mutate, mutate_ and transmute work', {
   ht6 <- dplyr::mutate_(ht, .dots = list(x = quote(a + b)))
   expect_equivalent(ht6$x, c(2, 4, 6))
   expect_equivalent(bold(ht6)[, 3], c(TRUE, FALSE, FALSE))
+
+  ht7 <- dplyr::mutate_(ht, .dots = list(x = quote(a + b), copy_cell_props = FALSE))
+  expect_equivalent(ht7$x, c(2, 4, 6))
+  expect_equivalent(bold(ht7)[, 3], c(FALSE, FALSE, FALSE))
+  expect_identical(names(ht7), c('a', 'b', 'x'))
 })
 
 

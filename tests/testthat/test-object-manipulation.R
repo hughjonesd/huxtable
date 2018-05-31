@@ -90,6 +90,7 @@ test_that('Huxtables can be transposed', {
   expect_equivalent(caption(trans), 'A caption')
 })
 
+
 test_that('add_colnames works with as_hux for matrices', {
   mat <- matrix(1:4, 2, 2, dimnames = list(letters[1:2], LETTERS[1:2]))
   ht <- as_hux(mat, add_colnames = TRUE, add_rownames = TRUE)
@@ -105,6 +106,7 @@ test_that('add_footnote works', {
   expect_equivalent(colspan(ht_orig)[3, 1], ncol(ht_orig))
   expect_true(italic(ht_orig)[3, 1])
 })
+
 
 test_that('insert_column and insert_row work', {
   ht_orig <- hux(a = 1:2, b = 1:2)
@@ -137,6 +139,7 @@ test_that('insert_column works with column names', {
   expect_equivalent(ncol(ht), 3)
   expect_equivalent(ht[, 2], huxtable(8:9))
 })
+
 
 test_that('Can add a column to a huxtable using standard replacement methods', {
   ht <- hux(a = 1:2, b = 1:2)
