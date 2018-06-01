@@ -103,8 +103,8 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     valign <- valign(x)[drow, dcol]
     if (valign == 'middle') valign <- 'center'
     if (! (rot %in% names(rots))) {
-      warning("flextable can only handle rotation of 0, 90 or 270")
-      rot <- 0
+      warning('flextable can only handle rotation of 0, 90 or 270')
+      rot <- '0'
     }
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
   }

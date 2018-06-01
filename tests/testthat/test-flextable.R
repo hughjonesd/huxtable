@@ -62,3 +62,12 @@ test_that('colnames_to_header argument', {
   expect_error(as_flextable(hx, colnames_to_header = FALSE), regexp = NA)
   expect_error(as_flextable(hx, colnames_to_header = TRUE), regexp = NA)
 })
+
+
+test_that('rotation works', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  rotation(hx)[1, 1] <- 90
+  expect_silent(as_flextable(hx))
+  rotation(hx)[1, 1] <- 45
+  expect_warning(as_flextable(hx), "can only handle rotation")
+})
