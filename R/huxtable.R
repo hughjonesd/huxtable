@@ -106,6 +106,11 @@ as_huxtable.huxtable <- function (x, ...) x
 as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...) {
   ht <- as_huxtable(unclass(x), add_colnames, add_rownames, ...)
   number_format(ht) <- 0
+  if (add_rownames) {
+    ht[1, 1] <- ""
+    number_format(ht)[, 1] <- NA
+  }
+  if (add_colnames) number_format(ht)[1, ] <- NA
   ht
 }
 

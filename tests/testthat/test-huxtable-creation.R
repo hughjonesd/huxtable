@@ -52,6 +52,15 @@ test_that('create huxtable from table', {
   expect_is(ht, 'huxtable')
   expect_equivalent(ht[[1]][ -1 ], rownames(tbl))
   expect_equivalent(unlist(ht[1, -1]), colnames(tbl))
+  expect_equivalent(ht[[1, 1]], "") # check no "rownames" in top left
+})
+
+
+test_that('as_hux.table does not use number_format on rownames', {
+  tbl <- table(c(3.5, 3.5, 4.5, 4.5), c(1.5, 1.5, 2.5, 2.5))
+  ht <- as_hux(tbl)
+  expect_match(to_screen(ht, colnames = FALSE), "3\\.5")
+  expect_match(to_screen(ht, colnames = FALSE), "1\\.5")
 })
 
 
