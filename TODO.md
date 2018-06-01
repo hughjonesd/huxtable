@@ -1,9 +1,7 @@
 
-
-
-
 TODO
 ====
+
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
   
 * Better centring of tables and handling of width. Maybe push \resizebox
@@ -20,6 +18,7 @@ TODO
     take nargs (as now) and change the nargs == 4 to nargs >= 4. 
     The downside of that is there's no clear division between rows and columns.
   - See the new-colspec-ideas.md file for more thoughts
+  
 * simple interface for borders even when there are multiple spans. E.g.
 ```
 ht <- hux(1:2, 3:4)
@@ -37,35 +36,45 @@ after calling `set_border_at`. Or, store borders in a new way, e.g. in a (nrow+1
 for horiz borders, nrow x (ncol + 1) for vertical ones. Then everything works and you avoid
 a huge amount of conversion hassle. You could then deprecate the old interface while
 translating calls into the new version. (OK, the conversion hassle still exists...)
+
 * way to address a particular subset of a matrix, e.g.
   - ht %>% area(1:3, 4:6) %>% set_italic(TRUE) %>% set_border_color('red')
   - presumably this returns the ht with some attribute appropriately set, analogous to groups in a tibble
   - also this should be a separate package! 
+  
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
   bottom line is border?
   - not sure we can change colours halfway through though
+  
 * table of descriptive statistics?
+
 * `huxreg`-style function in `texreg` package
+
 * rewrite LaTeX for speed, vectorizing and putting bits in appropriately
+
 * A FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
   - my numbers have been formatted
     - use number_format
+    
 * headers property?
   - header rows and columns could be addressed using 3 argument `set_` syntax; e.g. a headers() function returning a 
     matrix
   - headers would be copied (by default?) when you subset huxtables
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
+    
 * make \booktabs or similar work
+
 * classes to represent borders and/or text styles? 
   - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
   - and `set_text(ht, text(10, 'black', 'italic'))`
   - might not add much value compared to `set_properties`...?
+  
 * dotted borders with LaTeX package? See https://tex.stackexchange.com/questions/20140/can-a-table-include-a-horizontal-dashed-line
-* special-case single horizontal lines across whole table?
 
+* special-case single horizontal lines across whole table?
 
 
 BUGS

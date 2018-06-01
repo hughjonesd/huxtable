@@ -311,10 +311,11 @@ knit_print.huxtable <- function (x, options, ...) {
 #' }
 knit_print.data.frame <- function(x, options, ...) {
   if (! isTRUE(getOption('huxtable.knit_print_df', TRUE))) {
-    NextMethod()
+    NextMethod() # probably calls knit_print.default
   } else {
     ht <- smart_hux_from_df(x)
     df_theme <- getOption('huxtable.knit_print_df_theme', theme_plain)
+    assert_that(is.function(df_theme))
     ht <- df_theme(ht)
     knit_print(ht) # we are now hopping down the class hierarchy, so do this rather than NextMethod()
   }

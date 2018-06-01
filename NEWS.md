@@ -4,11 +4,16 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 3.0.0.9000
 
+* New `theme_plain` theme.
+* huxtable now provides `knit_print.data.frame` methods. This 
+  means that bare data frames will be pretty-printed via huxtable if the package is loaded. 
+  - Set `options("huxtable.knit_print_df")` to `FALSE` if you don't want this.
+  - By default data frames are printed using the `theme_plain` theme. Set
+    options("huxtable.knit_print_df_theme") to a different one-argument function if you want to 
+    use a different theme.
 * The default value for `add_colnames` is going to become `TRUE`. At present it remains `FALSE`. Set 
   `options("huxtable.add_colnames")` to `TRUE` or `FALSE` to set the default and avoid warnings in
   future.
-* New `theme_plain` theme.
-* huxtable now provides `knit_print.data.frame` methods, using `theme_plain` by default. 
 * `quick_*` functions now automatically open documents if used interactively. Use `open = FALSE` to
   avoid.
 * Tweak top and bottom margins for HTML tables.

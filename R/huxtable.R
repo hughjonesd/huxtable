@@ -24,6 +24,7 @@ NULL
 #'
 #' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
 #' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
+#'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE) {
