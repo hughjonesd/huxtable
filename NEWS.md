@@ -17,7 +17,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 ## Bugfixes
 
-* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`.
+* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`, `as_flextable`
 * LaTeX bugfix: background colors were printing an extra space.
 * Bugfix: `huxreg` was never using built-in confidence intervals.
 * Screen bugfixes:

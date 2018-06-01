@@ -5,7 +5,7 @@
 #'
 #' @export
 as_FlexTable <- function(x, ...) {
-  warning("as_FlexTable is deprecated; redirecting to as_flextable")
+  .Deprecated('as_flextable')
   as_flextable(x, ...)
 }
 

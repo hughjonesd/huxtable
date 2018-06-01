@@ -71,3 +71,10 @@ test_that('rotation works', {
   rotation(hx)[1, 1] <- 45
   expect_warning(as_flextable(hx), "can only handle rotation")
 })
+
+
+test_that('as_FlexTable gives warning', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  expect_warning(ft <- as_FlexTable(hx), 'deprecated')
+  expect_is(ft, 'flextable')
+})
