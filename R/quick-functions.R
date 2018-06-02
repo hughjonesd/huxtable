@@ -1,7 +1,7 @@
 
 # functions for quick export to output formats------------------------------------------------------
 
-#' @import asserthat
+#' @import assertthat
 NULL
 
 
