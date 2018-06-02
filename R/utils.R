@@ -326,28 +326,20 @@ knit_print.data.frame <- function(x, options, ...) {
   }
 }
 
-# could become public; or could become part of as_hux (in which case need to drop the recursion!)
-# but NB: 2 ideas, 1 is that e.g. integers etc. should have appropriate defaults; the other is making ideal
-# widths etc. which is much more of an "art"
+
 smart_hux_from_df <- function(dfr) {
-  numeric_cols <- sapply(dfr, function (col) any(c("numeric", "complex") %in% class(col)))
-  integer_cols <- sapply(dfr, function (col) "integer" %in% class(col))
-  date_cols <- sapply(dfr, function (col) "Date" %in% class(col))
   col_nchars <- sapply(dfr, function (col) max(nchar(as.character(col), type = "width")))
 
-  ht <- as_hux(dfr, add_colnames = TRUE)
-  number_format(ht)[-1, ! numeric_cols]                  <- NA
-  number_format(ht)[1, ]                                 <- NA
-  align(ht)[-1, numeric_cols]                            <- '.'
-  number_format(ht)[-1, integer_cols]                    <- 0
-  wrap(ht)[-1, col_nchars > 15]                          <- TRUE
-  align(ht)[, numeric_cols | integer_cols | date_cols]   <- 'right'
+  ht <- as_hux(dfr, add_colnames = TRUE, autoformat = TRUE)
+
+  wrap(ht)[-1, col_nchars > 15] <- TRUE
   width <- sum(col_nchars) / 90
-  width(ht)                                              <- min(1, max(0.2, width))
+  width(ht) <- min(1, max(0.2, width))
   # this did not seem to improve on LaTeX's own attempts
   # prop_widths  <- col_nchars/sum(col_nchars)
   # equal_widths <- rep(1/ncol(ht), ncol(ht))
-  #col_width(ht)                                          <- round((prop_widths * .75 + equal_widths * .25), 2)
+  # col_width(ht) <- round((prop_widths * .75 + equal_widths * .25), 2)
+
   ht
 }
 
