@@ -90,11 +90,9 @@ diamond_regs                                                         %>%
 
 ```
 
-We could do more, like changing the `number_format` of N to not display decimals. But let's explore what else `huxreg` 
-itself can do. 
 
-By default, standard errors are shown below coefficient estimates. To display them in a column to the right, use
-`error_pos = 'right'`:
+By default, standard errors are shown below coefficient estimates. To display them in a column to
+the right, use `error_pos = 'right'`:
 
 ```{r}
 huxreg(lm1, lm3, error_pos = 'right')
@@ -117,10 +115,10 @@ huxreg('Price' = lm1, 'Log price' = lm3)
 ```
 
 
-To display a particular row of summary statistics, use the `statistics` parameter. This should be a character vector.
-Valid values are anything returned from your models by `broom::glance`. Another valid value is `"nobs"`, which 
-returns the number of observations from the regression. If the `statistics` vector has names, these will be used for
-row headings:
+To display a particular row of summary statistics, use the `statistics` parameter. This should be a
+character vector. Valid values are anything returned from your models by `broom::glance`. Another
+valid value is `"nobs"`, which returns the number of observations from the regression. If the
+`statistics` vector has names, these will be used for row headings:
 
 ```{r}
 broom::glance(lm1)
@@ -137,8 +135,9 @@ huxreg(lm1, lm3, stars = c(`*` = 0.1, `**` = 0.05, `***` = 0.01)) # a little boa
 huxreg(lm1, lm3, stars = NULL) 
 ```
 
-You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or
-p values, using the `error_format` option. Any column from `tidy` can be used by putting it in curly brackets:
+You aren't limited to displaying standard errors of the estimates. If you prefer, you can display t
+statistics or p values, using the `error_format` option. Any column from `tidy` can be used by
+putting it in curly brackets:
 
 ```{r}
 huxreg(lm1, lm3, error_format = '({statistic})')
@@ -162,17 +161,19 @@ huxreg(lm1, lm3, note = 'Linear regressions on diamond price. {stars}.')
 ```
 
 
-To change number formatting, set the `number_format` parameter. This works the same as the `number_format` property
-for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be
-taken as a format to the base R `sprintf` function; if it is a function, the function will be called to format the number. 
-`huxreg` tries to be smart and to format summary statistics like `nobs` as integers.
+To change number formatting, set the `number_format` parameter. This works the same as the
+`number_format` property for a huxtable - if it is numeric, numbers will be rounded to that many
+decimal places; if it is character, it will be taken as a format to the base R `sprintf` function;
+if it is a function, the function will be called to format the number. `huxreg` tries to be smart
+and to format summary statistics like `nobs` as integers.
 
 ```{r}
 huxreg(lm1, lm3, number_format = 2)
 ```
 
 
-Lastly, if you want to bold all significant coefficients, set the parameter `bold_signif` to a maximum significance level:
+Lastly, if you want to bold all significant coefficients, set the parameter `bold_signif` to a
+maximum significance level:
 
 ```{r}
 huxreg(lm1, lm3, bold_signif = 0.05)

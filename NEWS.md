@@ -22,8 +22,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - By default data frames are printed using the `theme_plain` theme. Set
     options("huxtable.knit_print_df_theme") to a different one-argument function if you want to 
     use a different theme.
-* huxtable now automatically guesses alignment and number format based on column type. Set
-  `options("huxtable.autoformat")` to `FALSE` if you don't want this.
+* The new `autoformat` argument lets [huxtable()] and [as_huxtable()] automatically choose alignment 
+  and number format based on column type. Set `options("huxtable.autoformat")` to `FALSE` to turn 
+  off this feature by default.
 * The default value of `number_format` has changed from "%5.3g" to "%.3g", which no longer space-pads numbers.
 * `as_flextable` now does not print column names in the header. This matches the standard
   huxtable behaviour whereby headers are "just another row/column". To get the old behaviour, 
