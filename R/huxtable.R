@@ -15,6 +15,7 @@ NULL
 #'   extra arguments.
 #' @param add_colnames If `TRUE`, add a first row of column names to the huxtable.
 #' @param add_rownames If `TRUE`, add a first column of row names, named 'rownames', to the huxtable.
+#' @param autoformat If `TRUE`, automatically format columns by type. See below.
 #'
 #' @return An object of class `huxtable`.
 #' @export
@@ -25,15 +26,30 @@ NULL
 #' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
 #' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
 #'
+#' @section Automatic formatting:
+#'
+#' If `autoformat` is `TRUE`, then columns will have [number_format()] and [align()] properties
+#' set automatically, as follows:
+#'
+#' * Integer columns will have `number_format` set to 0.
+#' * Other numeric columns will have `number_format` set to `"%.3g"`.
+#' * All other columns will have `number_format` set to `NA` (no formatting).
+#' * All numeric, `Date` and date-time (i.e. `POSIXct` and `POSIXlt`) columns will be right-aligned.
+#' * Other columns will be left aligned.
+#'
+#' You can change these defaults by editing `options("huxtable.autoformat_number_format")` and
+#' `options("huxtable.autoformat_align")`. See [huxtable-package] for more details.
+#'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE) {
-  assert_that(is.flag(add_colnames), is.flag(add_rownames))
+huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE, autoformat = getOption('huxtable.autoformat', TRUE)) {
+  assert_that(is.flag(add_colnames), is.flag(add_rownames), is.flag(autoformat))
 
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
   if (R.version$major >= 3 && R.version$minor >= 3) df_args$fix.empty.names <- FALSE
   ht <- do.call(data.frame, df_args)
-  ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames)
+  ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames,
+        autoformat = autoformat)
 
   ht
 }
@@ -69,9 +85,10 @@ as_huxtable.default <- function (
         x,
         add_colnames = getOption("huxtable.add_colnames", FALSE),
         add_rownames = FALSE,
+        autoformat   = getOption("huxtable.autoformat", TRUE),
         ...
       ) {
-  assert_that(is.flag(add_colnames), is.flag(add_rownames))
+  assert_that(is.flag(add_colnames), is.flag(add_rownames), is.flag(autoformat))
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   for (a in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, a) <- matrix(NA, nrow(x), ncol(x))
@@ -92,6 +109,16 @@ as_huxtable.default <- function (
 
   class(x) <- c('huxtable', class(x))
 
+  if (autoformat) {
+    dfn <- getOption('huxtable.autoformat_number_format', list())
+    dfa <- getOption('huxtable.autoformat_align', list())
+
+    for (cn in seq_along(ncol(x))) {
+      number_format(x)[, cn] <- dfn[[ class(x[, cn]) ]] %||% NA
+      align(x)[, cn]         <- dfa[[ class(x[, cn]) ]] %||% NA
+    }
+  }
+
   # order matters here. We want original rownames, not anything else.
   if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE)
   if (add_colnames) x <- add_colnames(x)
@@ -100,8 +127,10 @@ as_huxtable.default <- function (
   x
 }
 
+
 #' @export
 as_huxtable.huxtable <- function (x, ...) x
+
 
 #' @export
 as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...) {
@@ -114,6 +143,7 @@ as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...)
   if (add_colnames) number_format(ht)[1, ] <- NA
   ht
 }
+
 
 #' @export
 as_huxtable.ftable <- function(x, ...) {

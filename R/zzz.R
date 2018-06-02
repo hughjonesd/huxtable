@@ -1,4 +1,7 @@
 
+# package documentation and onLoad function --------------------------------------------------------
+
+
 #' Huxtable: simply create LaTeX and HTML tables
 #'
 #' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
@@ -21,21 +24,42 @@
 #'   will be printed in color on screen.
 #' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
 #'   pretty-printed using huxtable.
-#' * `options('huxtable.knit_print_df_theme')`. A one-argument function applied to theme the huxtableized
-#'   data frame before printing in knitr. Defaults to [theme_plain()].
+#' * `options('huxtable.knit_print_df_theme')`. A one-argument function applied to theme the
+#'   huxtableized data frame before printing in knitr. Defaults to [theme_plain()].
+#' * `options('huxtable.autoformat')` sets the default value for `autoformat` in [huxtable()] and
+#'   [as_huxtable()]. It defaults to `TRUE`.
+#' * `options('huxtable.autoformat_format_number')` and `options('huxtable.autoformat_align')` are
+#'   lists. The list names are base R classes. [huxtable()] with `autoformat = TRUE` will set
+#'   `number_format()` and `align()` for data columns according to the corresponding list values.
 #'
+#'  For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
+#'  something like `list(..., Date = "center", ...)`.
 #'
 #' @name huxtable-package
 NULL
 
-# onLoad function ------------------------------------------------------------------------------------------------------
 
 .onLoad <- function(libname, pkgname) {
   options(
-    huxtable.print               = getOption('huxtable.print', print_screen),
-    huxtable.knit_print_df       = getOption('huxtable.knit_print_df', TRUE),
-    huxtable.knit_print_df_theme = getOption('huxtable.knit_print_df_theme', theme_plain),
-    huxtable.color_screen        = getOption('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
+    huxtable.print                    = getOption('huxtable.print', print_screen),
+    huxtable.knit_print_df            = getOption('huxtable.knit_print_df', TRUE),
+    huxtable.knit_print_df_theme      = getOption('huxtable.knit_print_df_theme', theme_plain),
+    huxtable.color_screen             = getOption('huxtable.color_screen', requireNamespace('crayon',
+          quietly = TRUE)),
+    huxtable.autoformat               = getOption('huxtable.autoformat', TRUE),
+    huxtable.autoformat_number_format = getOption('huxtable.autoformat_number_format', list(
+            integer = 0,
+            numeric = "%.3g",
+            complex = "%.3g"
+          )),
+    huxtable.autoformat_align         = getOption('huxtable.autoformat_align', list(
+            integer = "right",
+            numeric = "right",
+            complex = "right",
+            Date    = "right",
+            POSIXct = "right",
+            POSIXlt = "right"
+          ))
   )
 }
 

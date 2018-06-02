@@ -11,10 +11,10 @@
 \title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE)
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
 
 hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE)
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
 
 as_huxtable(x, ...)
 
@@ -22,7 +22,8 @@ as_hux(x, ...)
 
 \method{as_huxtable}{default}(x,
   add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, ...)
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE),
+  ...)
 
 is_huxtable(x)
 
@@ -35,6 +36,8 @@ extra arguments.}
 \item{add_colnames}{If \code{TRUE}, add a first row of column names to the huxtable.}
 
 \item{add_rownames}{If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.}
+
+\item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
 
 \item{x}{An object to convert to a huxtable.}
 }

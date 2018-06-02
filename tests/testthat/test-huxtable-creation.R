@@ -30,6 +30,32 @@ test_that('create huxtable from data frame', {
 })
 
 
+test_that('autoformat', {
+  dfr <- data.frame(
+          character = letters[1:3],
+          integer   = 1:3,
+          numeric   = c(1.5, 2.5, 3.5),
+          complex   = 1:3 + 1i,
+          Date      = as.Date(rep("2001/01/01", 3)),
+          POSIXct   = as.POSIXct(Sys.time()),
+          POSIXlt   = as.POSIXlt(Sys.time())
+        )
+  ht <- as_hux(dfr, autoformat = TRUE, add_colnames = TRUE)
+  for (x in c("character", "Date", "POSIXct", "POSIXlt")) {
+    expect_equivalent(number_format(ht)[2, x], NA)
+  }
+  for (x in c("numeric", "complex")) {
+    expect_equivalent(number_format(ht)[2, x], "%.3g")
+  }
+  expect_equivalent(number_format(ht)[2, "integer"], 0)
+  expect_equivalent(number_format(ht)[1, ], rep(NA, ncol(dfr)))
+  for (x in c("integer", "numeric", "complex", "Date", "POSIXct", "POSIXlt")) {
+    expect_equivalent(align(ht)[2, x], "right")
+  }
+  for (x in c("character"))
+})
+
+
 test_that('create huxtable from matrix', {
   m <- matrix(1:8, 4, 2)
   expect_silent(ht <- as_hux(m))
