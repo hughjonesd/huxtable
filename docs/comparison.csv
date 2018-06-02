@@ -1,13 +1,13 @@
 ,huxtable,xtable,formattable,ascii,kableExtra,condformat,htmlTable,Hmisc::latex,ztable,kable,texreg,stargazer,tables,DT,pander,officer,pixiedust
 HTML output,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,,Y
 Background color,Y,,Y,Y,,Y,Y,,Y,,,,,,,Y,Y
-Width and height,Y,,Y,Y,(Y),,,,,,,,,Y,,Y,Y
+Width and height,Y,,Y,Y,(Y),,,,,,,,,,,Y,Y
 Text formatting,Y,,Y,Y,(Y),,,,(Y),,(Y),Y,,,Y,Y,Y
-Borders,Y,,,,,,Y,,Y,,,,,Y,,Y,Y
+Borders,Y,,,,,,Y,,Y,,,,,,,Y,Y
 Rotation,Y,,,,,,,,,,,,,,,Y,Y
-Multicolumn/multirow,Y,,,Y,,,Y,(Y),Y,,,(Y),(Y),(Y),,Y,Y
+Multicolumn/multirow,Y,,,Y,,,Y,(Y),Y,,,(Y),(Y),,,Y,Y
 Alignment,Y,,,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y
-Numeric formatting,Y,,Y,Y,,,Y,Y,Y,Y,,Y,Y,Y,Y,Y,Y
+Numeric formatting,Y,,Y,Y,,,Y,Y,Y,Y,,Y,Y,,Y,Y,Y
 Captions,Y,Y,,Y,,,,Y,Y,Y,,,,Y,Y,Y,Y
 Format NA ,Y,,,Y,,,,Y,,,,,Y,,Y,Y,Y
 LaTeX output,Y,Y,,(Y),Y,Y,?,Y,Y,Y,Y,Y,Y,,Y,,Y
