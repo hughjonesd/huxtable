@@ -28,7 +28,7 @@
 #'   huxtableized data frame before printing in knitr. Defaults to [theme_plain()].
 #' * `options('huxtable.autoformat')` sets the default value for `autoformat` in [huxtable()] and
 #'   [as_huxtable()]. It defaults to `TRUE`.
-#' * `options('huxtable.autoformat_format_number')` and `options('huxtable.autoformat_align')` are
+#' * `options('huxtable.autoformat_number_format')` and `options('huxtable.autoformat_align')` are
 #'   lists. The list names are base R classes. [huxtable()] with `autoformat = TRUE` will set
 #'   `number_format()` and `align()` for data columns according to the corresponding list values.
 #'

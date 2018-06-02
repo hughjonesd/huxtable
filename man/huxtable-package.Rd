@@ -28,7 +28,7 @@ pretty-printed using huxtable.
 huxtableized data frame before printing in knitr. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
 \item \code{options('huxtable.autoformat')} sets the default value for \code{autoformat} in \code{\link[=huxtable]{huxtable()}} and
 \code{\link[=as_huxtable]{as_huxtable()}}. It defaults to \code{TRUE}.
-\item \code{options('huxtable.autoformat_format_number')} and \code{options('huxtable.autoformat_align')} are
+\item \code{options('huxtable.autoformat_number_format')} and \code{options('huxtable.autoformat_align')} are
 lists. The list names are base R classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set
 \code{number_format()} and \code{align()} for data columns according to the corresponding list values.
 }
