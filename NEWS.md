@@ -2,7 +2,7 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable 3.0.0.9000
+# huxtable 4.0.0
 
 * New `theme_plain` theme.
 * The default value for `add_colnames` is going to become `TRUE`. At present it remains `FALSE`. Set 
