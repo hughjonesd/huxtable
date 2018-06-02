@@ -6,14 +6,21 @@ library(glue)
 
 setwd('~/huxtable')
 
-# Check git is up to date -----------------------------------------------------------------------------------------
+# Check version number is up to date----------------------------------------------------------------
 
+v <- devtools::as.package('.')$version
+if (grepl(v, "9000")) stop('Still using development version, please fix in DESCRIPTION!')
+
+
+# Check git is up to date --------------------------------------------------------------------------
 
 gdiff <- git2r::diff(tree(commits()[[1]]))
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
 
 
-# Check vignette files are same in vignettes and docs -------------------------------------------------------------
+
+
+# Check vignette files are same in vignettes and docs ----------------------------------------------
 
 
 for (f in list.files('vignettes')) {
@@ -23,7 +30,7 @@ for (f in list.files('vignettes')) {
 
 
 
-# Run R CMD check -------------------------------------------------------------------------------------------------
+# Run R CMD check ----------------------------------------------------------------------------------
 
 # this automatically builds the package
 chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
@@ -45,10 +52,10 @@ if (length(chk$notes)) {
 }
 
 
-# Tag new version -------------------------------------------------------------------------------------------------
+# Tag new version ----------------------------------------------------------------------------------
 
 
-v <- devtools::as.package('.')$version
+
 newtag <- paste0('v', v, '-rc')
 tags <- tags()
 tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
