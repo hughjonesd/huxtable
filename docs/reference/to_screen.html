@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -109,7 +110,7 @@
 
 <span class='co'># S3 method for huxtable</span>
 <span class='fu'>to_screen</span>(<span class='no'>ht</span>, <span class='kw'>min_width</span> <span class='kw'>=</span> <span class='fu'>ceiling</span>(<span class='fu'>getOption</span>(<span class='st'>"width"</span>)/<span class='fl'>6</span>),
-  <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>compact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"width"</span>, <span class='fl'>Inf</span>), <span class='kw'>compact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.color_screen"</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -169,15 +170,15 @@ this will work in recent daily builds of RStudio as of October 2017.</p>
 <span class='fu'>print_screen</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; ┌───────────────────┐
 #&gt; │ a         b       │
 #&gt; ├───────────────────┤
-#&gt; │ 1.00      1.00    │
+#&gt; │       1         1 │
 #&gt; ├───────────────────┤
-#&gt; │ 2.00      2.00    │
+#&gt; │       2         2 │
 #&gt; ├───────────────────┤
-#&gt; │ 3.00      3.00    │
+#&gt; │       3         3 │
 #&gt; ├───────────────────┤
-#&gt; │ 4.00      4.00    │
+#&gt; │       4         4 │
 #&gt; ├───────────────────┤
-#&gt; │ 5.00      5.00    │
+#&gt; │       5         5 │
 #&gt; └───────────────────┘
 #&gt; 
 #&gt; Column names: a, b</div></pre>

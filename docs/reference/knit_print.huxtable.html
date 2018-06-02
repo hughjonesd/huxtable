@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert a row or column — insert_column • huxtable</title>
+<title>Print a huxtable within knitr — knit_print.huxtable • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -97,88 +97,54 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert a row or column</h1>
+    <h1>Print a huxtable within knitr</h1>
     </div>
 
     
-    <p>These convenience functions wrap <code>cbind</code> or <code>rbind</code> for huxtables to insert
-a single row.</p>
+    <p>Print a huxtable within knitr</p>
     
 
-    <pre class="usage"><span class='fu'>insert_column</span>(<span class='no'>ht</span>, <span class='no'>...</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>insert_row</span>(<span class='no'>ht</span>, <span class='no'>...</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for huxtable</span>
+<span class='fu'>knit_print</span>(<span class='no'>x</span>, <span class='no'>options</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ht</th>
+      <th>x</th>
       <td><p>A huxtable.</p></td>
     </tr>
     <tr>
+      <th>options</th>
+      <td><p>Not used.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Cell contents.</p></td>
-    </tr>
-    <tr>
-      <th>after</th>
-      <td><p>Insert the row/column after this position. 0 (the default) inserts as the first row/column.</p></td>
-    </tr>
-    <tr>
-      <th>copy_cell_props</th>
-      <td><p>Copy cell properties from the previous row or column (if after &gt; 0). See <code><a href='cbind.huxtable.html'>cbind.huxtable()</a></code>.</p></td>
+      <td><p>Not used.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The modified huxtable</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>In <code>insert_column</code> only, you can use a column name for <code>after</code>.</p>
+    <p>knitr calls <code><a href='http://www.rdocumentation.org/packages/knitr/topics/knit_print'>knitr::knit_print()</a></code> on objects when they are printed in a knitr (or RMarkdown) document.
+The default method for <code>huxtable</code> objects guesses the appropriate output format and
+prints itself out appropriately.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other knit_print: <code><a href='knit_print.data.frame.html'>knit_print.data.frame</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-<span class='fu'>insert_row</span>(<span class='no'>ht</span>, <span class='fl'>2.5</span>, <span class='fl'>2.5</span>, <span class='fl'>2.5</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt;       1       1       1  
-#&gt;       2       2       2  
-#&gt;       2       2       2  
-#&gt;       3       3       3  
-#&gt;       4       4       4  
-#&gt;       5       5       5  
-#&gt; 
-#&gt; Column names: a, b, c</div><div class='input'><span class='fu'>insert_column</span>(<span class='no'>ht</span>, <span class='fl'>5</span>:<span class='fl'>1</span>)</div><div class='output co'>#&gt;      5      1      1      1  
-#&gt;      4      2      2      2  
-#&gt;      3      3      3      3  
-#&gt;      2      4      4      4  
-#&gt;      1      5      5      5  
-#&gt; 
-#&gt; Column names: V1, a, b, c</div><div class='input'><span class='fu'>insert_column</span>(<span class='no'>ht</span>, <span class='fl'>5</span>:<span class='fl'>1</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt;      1      1      1      5  
-#&gt;      2      2      2      4  
-#&gt;      3      3      3      3  
-#&gt;      4      4      4      2  
-#&gt;      5      5      5      1  
-#&gt; 
-#&gt; Column names: a, b, c, V1</div><div class='input'><span class='fu'>insert_column</span>(<span class='no'>ht</span>, <span class='fl'>5</span>:<span class='fl'>1</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"b"</span>)</div><div class='output co'>#&gt;      1      1      5      1  
-#&gt;      2      2      4      2  
-#&gt;      3      3      3      3  
-#&gt;      4      4      2      4  
-#&gt;      5      5      1      5  
-#&gt; 
-#&gt; Column names: a, b, V1, c</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

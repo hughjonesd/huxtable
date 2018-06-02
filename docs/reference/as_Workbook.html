@@ -102,7 +102,7 @@
 
     
     <p>If the <code>openxlsx</code> package is installed, Huxtables can be converted to
-<code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/openxlsx'>openxlsx</a></code> Worbook objects, for use in Excel documents.</p>
+<code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/openxlsx'>openxlsx::openxlsx()</a></code> Worbook objects, for use in Excel documents.</p>
     
 
     <pre class="usage"><span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
@@ -142,15 +142,16 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Use <code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/saveWorkbook'>saveWorkbook</a></code> to save the resulting object to an Excel file.</p>
+    <p>Use <code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/saveWorkbook'>openxlsx::saveWorkbook()</a></code> to save the resulting object to an Excel file.</p>
 <p>Properties are supported with the following exceptions:</p><ul>
 <li><p>Non-numeric column widths and row heights, table width and height.</p></li>
 <li><p>Decimal padding.</p></li>
 <li><p>Cell padding.</p></li>
 <li><p>Table position.</p></li>
-</ul><p>Huxtable tries to guess appropriate widths and height for rows and columns; numeric <code><a href='width.html'>width</a></code> and
-<code><a href='height.html'>height</a></code> are treated as scaling factors.</p>
-<p>Contents are only stored as numbers if a whole column is numeric as defined by <code><a href='is_a_number.html'>is_a_number</a></code>;
+</ul>
+    <p>Huxtable tries to guess appropriate widths and height for rows and columns; numeric <code><a href='width.html'>width()</a></code> and
+<code><a href='height.html'>height()</a></code> are treated as scaling factors.</p>
+<p>Contents are only stored as numbers if a whole column is numeric as defined by <code><a href='is_a_number.html'>is_a_number()</a></code>;
 otherwise they are stored as text.</p>
     
 

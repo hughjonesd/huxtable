@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -103,16 +104,20 @@
     <p><code>huxtable</code>, or <code>hux</code>, creates a huxtable object.</p>
     
 
-    <pre class="usage"><span class='fu'>huxtable</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>huxtable</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))
 
-<span class='fu'>hux</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>hux</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))
 
 <span class='fu'>as_huxtable</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='fu'>as_hux</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>as_huxtable</span>(<span class='no'>x</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='fu'>as_huxtable</span>(<span class='no'>x</span>,
+  <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>),
   <span class='no'>...</span>)
 
 <span class='fu'>is_huxtable</span>(<span class='no'>x</span>)
@@ -124,7 +129,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Named list of values, as for <code>data.frame</code>.</p></td>
+      <td><p>For <code>huxtable</code>, named list of values as in <code>data.frame()</code>. For <code>as_huxtable</code>,
+extra arguments.</p></td>
     </tr>
     <tr>
       <th>add_colnames</th>
@@ -133,6 +139,10 @@
     <tr>
       <th>add_rownames</th>
       <td><p>If <code>TRUE</code>, add a first column of row names, named 'rownames', to the huxtable.</p></td>
+    </tr>
+    <tr>
+      <th>autoformat</th>
+      <td><p>If <code>TRUE</code>, automatically format columns by type. See below.</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -148,6 +158,8 @@
 
     <p>If you use <code>add_colnames</code> or <code>add_rownames</code>, be aware that these will shift your rows and columns
 along by one: your old row/column 1 will now be row/column 2, etc.
+    <code>add_colnames</code> currently defaults to <code>FALSE</code>, but this will change in future. You can set
+the default globally by setting <code>options("huxtable.add_colnames")</code> to <code>TRUE</code> or <code>FALSE</code>.
     <code>as_huxtable</code> and <code>as_hux</code> convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.</p>
     
@@ -155,11 +167,11 @@ Conversion methods exist for data frames, tables, ftables, matrices and (most) v
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>huxtable</span>(<span class='kw'>column1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>column2</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>])
 <span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>as_huxtable</span>(<span class='no'>dfr</span>)</div><div class='output co'>#&gt;   1.00      a        
-#&gt;   2.00      b        
-#&gt;   3.00      c        
-#&gt;   4.00      d        
-#&gt;   5.00      e        
+<span class='fu'>as_huxtable</span>(<span class='no'>dfr</span>)</div><div class='output co'>#&gt;         1   a        
+#&gt;         2   b        
+#&gt;         3   c        
+#&gt;         4   d        
+#&gt;         5   e        
 #&gt; 
 #&gt; Column names: a, b</div><div class='input'>
 </div></pre>

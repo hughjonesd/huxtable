@@ -117,7 +117,7 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A character string. This will be used to replace NA values in the display. Set to <code>NA</code> for the default, which is the empty string. To get literal "NA", set to "NA". Set to <code>NA</code> to reset to the default.</p></td>
+      <td><p>A character string. This will be used to replace NA values in the display. Set to `NA` for the default, which is the empty string. To get literal "NA", set to "NA". Set to <code>NA</code> to reset to the default.</p></td>
     </tr>
     <tr>
       <th>row</th>
@@ -154,9 +154,9 @@ For <code>set_na_string</code>, the <code>ht</code> object.</p>
 #&gt; 1 "--" "--"
 #&gt; 2 "--" "--"
 #&gt; 3 "--" "--"</div><div class='input'><span class='no'>ht</span>[<span class='fl'>2</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
-<span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   1         1        
-#&gt;   2         --       
-#&gt;   3         3        
+<span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;         1         1  
+#&gt;         2        --  
+#&gt;         3         3  
 #&gt; 
 #&gt; Column names: a, b</div><div class='input'>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)

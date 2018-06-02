@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -100,10 +101,10 @@
     </div>
 
     
-    <p>Huxtable can be used with dplyr verbs <code><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/select.html'>rename</a></code>,
-<code><a href='http://dplyr.tidyverse.org/reference/slice.html'>slice</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code> and
-<code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></code>. These will return huxtables. Other verbs like <code><a href='http://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></code> will
-simply return data frames as normal; <code><a href='http://dplyr.tidyverse.org/reference/pull.html'>pull</a></code> will return a vector. <code>mutate</code> has an extra
+    <p>Huxtable can be used with dplyr verbs <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::rename()</a></code>,
+<code><a href='http://dplyr.tidyverse.org/reference/slice.html'>dplyr::slice()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/arrange.html'>dplyr::arrange()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> and
+<code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::transmute()</a></code>. These will return huxtables. Other verbs like <code><a href='http://dplyr.tidyverse.org/reference/summarise.html'>dplyr::summarize()</a></code> will
+simply return data frames as normal; <code><a href='http://dplyr.tidyverse.org/reference/pull.html'>dplyr::pull()</a></code> will return a vector. <code>mutate</code> has an extra
 option, detailed below.</p>
     
 
@@ -119,7 +120,7 @@ option, detailed below.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>.</p></td>
+      <td><p>Arguments passed to <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>.</p></td>
     </tr>
     <tr>
       <th>copy_cell_props</th>
@@ -139,11 +140,11 @@ standard defaults. Row and table properties, and properties of cells in existing
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>), ] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>ht</span>, <span class='no'>b</span>:<span class='no'>c</span>)
-<span class='no'>ht2</span></div><div class='output co'>#&gt;   1.00      1.00     
-#&gt;   2.00      2.00     
-#&gt;   3.00      3.00     
-#&gt;   4.00      4.00     
-#&gt;   5.00      5.00     
+<span class='no'>ht2</span></div><div class='output co'>#&gt;         1         1  
+#&gt;         2         2  
+#&gt;         3         3  
+#&gt;         4         4  
+#&gt;         5         5  
 #&gt; 
 #&gt; Column names: b, c</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;       b     c
 #&gt; 1  TRUE  TRUE
@@ -151,11 +152,11 @@ standard defaults. Row and table properties, and properties of cells in existing
 #&gt; 3  TRUE  TRUE
 #&gt; 4 FALSE FALSE
 #&gt; 5 FALSE FALSE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)
-<span class='no'>ht3</span></div><div class='output co'>#&gt;   1.00    1.00    1.00    1.00    2.00   
-#&gt;   2.00    2.00    2.00    2.00    4.00   
-#&gt;   3.00    3.00    3.00    3.00    6.00   
-#&gt;   4.00    4.00    4.00    4.00    8.00   
-#&gt;   5.00    5.00    5.00    5.00    10.00  
+<span class='no'>ht3</span></div><div class='output co'>#&gt;     1     1     1     1     2  
+#&gt;     2     2     2     2     4  
+#&gt;     3     3     3     3     6  
+#&gt;     4     4     4     4     8  
+#&gt;     5     5     5     5    10  
 #&gt; 
 #&gt; Column names: a, b, c, d, x</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht3</span>)</div><div class='output co'>#&gt;      a     b     c     d     x
 #&gt; 1 TRUE  TRUE  TRUE  TRUE  TRUE

@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -107,7 +108,7 @@ functionality to xtable, with a simpler interface.</p>
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>To create a huxtable object, use <code><a href='huxtable.html'>huxtable</a></code> or <code><a href='huxtable.html'>as_huxtable</a></code>.</p>
+    <p>To create a huxtable object, use <code><a href='huxtable.html'>huxtable()</a></code> or <code><a href='huxtable.html'>as_huxtable()</a></code>.</p>
 <p>For more information, see <a href='https://hughjonesd.github.io/huxtable/'>the website</a> or
 read the vignette with <code><a href='../articles/huxtable.html'>vignette('huxtable')</a></code>.</p>
     
@@ -115,10 +116,24 @@ read the vignette with <code><a href='../articles/huxtable.html'>vignette('huxta
 
     
     <ul>
-<li><p><code>options('huxtable.print')</code> sets the print method for huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable</a></code>.</p></li>
+<li><p><code>options('huxtable.add_colnames')</code> sets the default value for <code>add_colnames</code> in
+<code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='huxtable.html'>as_huxtable()</a></code>. If it is unset, <code>add_colnames</code> defaults to
+<code>FALSE</code>; in a future release, the default will become <code>TRUE</code>.</p></li>
+<li><p><code>options('huxtable.print')</code> sets the print method for huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable()</a></code>.</p></li>
 <li><p><code>options('huxtable.color_screen')</code>. If <code>TRUE</code> and package <code>crayon</code> is available, huxtables
-  will be printed in color on screen.</p></li>
+will be printed in color on screen.</p></li>
+<li><p><code>options('huxtable.knit_print_df')</code>. If <code>TRUE</code> (the default), data frames in knitr will be
+pretty-printed using huxtable.</p></li>
+<li><p><code>options('huxtable.knit_print_df_theme')</code>. A one-argument function applied to theme the
+huxtableized data frame before printing in knitr. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
+<li><p><code>options('huxtable.autoformat')</code> sets the default value for <code>autoformat</code> in <code><a href='huxtable.html'>huxtable()</a></code> and
+<code><a href='huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
+<li><p><code>options('huxtable.autoformat_number_format')</code> and <code>options('huxtable.autoformat_align')</code> are
+lists. The list names are base R classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set
+<code><a href='number_format.html'>number_format()</a></code> and <code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values.</p></li>
 </ul>
+    <p>For example, to center-align <code>Date</code> objects you could set <code>"huxtable.autoformat_align"</code> to
+something like <code>list(..., Date = "center", ...)</code>.</p>
     
 
   </div>

@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -53,15 +53,10 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +66,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -145,9 +146,9 @@ For <code>set_colspan</code>, the <code>ht</code> object.</p>
 <span class='fu'>colspan</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   a b
 #&gt; 1 2 1
 #&gt; 2 1 1
-#&gt; 3 1 1</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   1.00               
-#&gt;   2.00      2.00     
-#&gt;   3.00      3.00     
+#&gt; 3 1 1</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;                1     
+#&gt;         2         2  
+#&gt;         3         3  
 #&gt; 
 #&gt; Column names: a, b</div></pre>
   </div>

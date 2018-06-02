@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-02-26" />
+<meta name="date" content="2018-06-02" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -121,7 +121,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-02-26</em></h4>
+<h4 class="date"><em>2018-06-02</em></h4>
 
 </div>
 
@@ -138,12 +138,12 @@ lm2 &lt;- lm(price ~ depth + factor(color, ordered = FALSE), diamonds)
 lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
 <p>Now, we call <code>huxreg</code> to display the regression output side by side.</p>
 <pre class="r"><code>huxreg(lm1, lm2, lm3)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    3)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -184,7 +184,7 @@ lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">factor(color, ordered = FALSE)E</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142  &nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -260,7 +260,7 @@ lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.032&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -278,7 +278,7 @@ lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
@@ -288,12 +288,12 @@ lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
 names(color_names) &lt;- paste('Color:', LETTERS[5:10])
 
 huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_names))</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    3)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Carat</td>
@@ -322,7 +322,7 @@ huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_name
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Color: E</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142  &nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -398,7 +398,7 @@ huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_name
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.032&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -416,7 +416,7 @@ huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_name
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
@@ -424,12 +424,12 @@ huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_name
 <pre class="r"><code>diamond_regs &lt;- huxreg(lm1, lm2, lm3)
 diamond_regs[seq(8, 18, 2), 1] &lt;- paste('Color:', LETTERS[5:10])
 diamond_regs</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    3)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -470,7 +470,7 @@ diamond_regs</code></pre>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Color: E</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142  &nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -546,7 +546,7 @@ diamond_regs</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.032&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -564,7 +564,7 @@ diamond_regs</code></pre>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
@@ -577,12 +577,12 @@ diamond_regs                                                         %&gt;%
       set_bold(final(), 1, FALSE)                                    %&gt;%
       set_top_border(final(), 1, 1)                                  %&gt;%
       set_caption('Linear regressions of diamond prices')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <caption style="caption-side:top; text-align:center">Linear regressions of diamond prices</caption><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; "></span></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); "><span style="font-weight: bold; ">(    1)</span></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">(    2)</span></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); "><span style="font-weight: bold; ">(    3)</span></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); "><span style="font-weight: bold; ">(1)</span></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">(2)</span></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); "><span style="font-weight: bold; ">(3)</span></td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">(Intercept)</span></td>
@@ -623,7 +623,7 @@ diamond_regs                                                         %&gt;%
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">Color: E</span></td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142  &nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-95.142&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -699,7 +699,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">R    2</span></td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">R2</span></td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.032&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -717,18 +717,17 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-size:9pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</span></td>
+  <td  colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-width:1pt 0pt 1pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "><span style="font-size:9pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</span></td>
 </tr>
 </table>
 
-<p>We could do more, like changing the <code>number_format</code> of N to not display decimals. But let’s explore what else <code>huxreg</code> itself can do.</p>
 <p>By default, standard errors are shown below coefficient estimates. To display them in a column to the right, use <code>error_pos = 'right'</code>:</p>
 <pre class="r"><code>huxreg(lm1, lm3, error_pos = 'right')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -759,7 +758,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -780,18 +779,18 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>This will give column headings a column span of 2.</p>
 <p>To display standard errors in the same cell as estimates, use <code>error_pos = 'same'</code>:</p>
 <pre class="r"><code>huxreg(lm1, lm3, error_pos = 'same')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -814,7 +813,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;</td>
 </tr>
@@ -829,13 +828,13 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>You can change the default column headings by giving names to your models:</p>
 <pre class="r"><code>huxreg('Price' = lm1, 'Log price' = lm3)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Price</td>
@@ -877,7 +876,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -892,7 +891,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
@@ -904,11 +903,11 @@ diamond_regs                                                         %&gt;%
 ## 1 945020.5 128191108498       53937</code></pre>
 <pre class="r"><code>huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
   'P value' = 'p.value'))</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -961,17 +960,17 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.000&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>By default, <code>huxreg</code> displays significance stars. You can alter the symbols used and significance levels with the <code>stars</code> parameter, or set <code>stars = NULL</code> to turn off significance stars completely.</p>
 <pre class="r"><code>huxreg(lm1, lm3, stars = c(`*` = 0.1, `**` = 0.05, `***` = 0.01)) # a little boastful?</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1009,7 +1008,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1024,16 +1023,16 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">* p &lt;   0.1; ** p &lt;  0.05; *** p &lt;  0.01.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.01;  ** p &lt; 0.05;  * p &lt; 0.1.</td>
 </tr>
 </table>
 
 <pre class="r"><code>huxreg(lm1, lm3, stars = NULL) </code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1071,7 +1070,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;</td>
 </tr>
@@ -1092,11 +1091,11 @@ diamond_regs                                                         %&gt;%
 
 <p>You aren’t limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or p values, using the <code>error_format</code> option. Any column from <code>tidy</code> can be used by putting it in curly brackets:</p>
 <pre class="r"><code>huxreg(lm1, lm3, error_format = '({statistic})')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1134,7 +1133,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1149,79 +1148,16 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <pre class="r"><code>huxreg(lm1, lm3, error_format = '({p.value})')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">4045.333 ***&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.313 ***&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2.810e-45)&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">carat</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7765.141 ***&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1.971 ***&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">depth</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-102.165 ***&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-0.018 ***&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(3.486e-107)</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2.419e-50)</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">N</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">logLik</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-472488.441&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-26617.649&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">AIC</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">944984.882&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
-</tr>
-</table>
-
-<p>Or you can display confidence intervals. Use <code>ci_level</code> to set the confidence level for the interval, then use <code>{conf.low}</code> and <code>{conf.high}</code> in <code>error_format</code>:</p>
-<pre class="r"><code>huxreg(lm1, lm3, ci_level = .99, error_format = '{conf.low} to {conf.high}')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
-<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1230,7 +1166,70 @@ diamond_regs                                                         %&gt;%
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">3308.117 to 4782.549&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">carat</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7765.141 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1.971 ***</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">depth</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-102.165 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-0.018 ***</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(0.000)&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">N</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">logLik</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-472488.441&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-26617.649&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">AIC</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">944984.882&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
+</tr>
+</table>
+
+<p>Or you can display confidence intervals. Use <code>ci_level</code> to set the confidence level for the interval, then use <code>{conf.low}</code> and <code>{conf.high}</code> in <code>error_format</code>:</p>
+<pre class="r"><code>huxreg(lm1, lm3, ci_level = .99, error_format = '{conf.low} to {conf.high}')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">4045.333 ***</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.313 ***</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">3308.091 to 4782.576&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7.123 to 7.502&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -1240,7 +1239,7 @@ diamond_regs                                                         %&gt;%
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7729.055 to 7801.226&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">7729.054 to 7801.228&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1.962 to 1.981&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -1250,7 +1249,7 @@ diamond_regs                                                         %&gt;%
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-114.105 to -90.226&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-114.105 to -90.225&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">-0.021 to -0.015&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
@@ -1259,7 +1258,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1274,17 +1273,17 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>To change the footnote, use <code>note</code>. If <code>note</code> contains the string <code>&quot;{stars}&quot;</code> it will be replaced by a description of the significance stars used. If you don’t want a footnote, just set <code>note = NULL</code>.</p>
 <pre class="r"><code>huxreg(lm1, lm3, note = 'Linear regressions on diamond price. {stars}.')</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1322,7 +1321,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1337,17 +1336,17 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Linear regressions on diamond price. *** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">Linear regressions on diamond price.  *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>To change number formatting, set the <code>number_format</code> parameter. This works the same as the <code>number_format</code> property for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be taken as a format to the base R <code>sprintf</code> function; if it is a function, the function will be called to format the number. <code>huxreg</code> tries to be smart and to format summary statistics like <code>nobs</code> as integers.</p>
 <pre class="r"><code>huxreg(lm1, lm3, number_format = 2)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1385,7 +1384,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.85&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.85&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1400,17 +1399,17 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.30&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 
 <p>Lastly, if you want to bold all significant coefficients, set the parameter <code>bold_signif</code> to a maximum significance level:</p>
 <pre class="r"><code>huxreg(lm1, lm3, bold_signif = 0.05)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">
 <col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
   <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "></td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    1)</td>
-  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(    2)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(1)</td>
+  <td  style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.8pt 0pt 0.4pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(2)</td>
 </tr>
 <tr>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">(Intercept)</td>
@@ -1448,7 +1447,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53940&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R    2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">R2</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.851&nbsp;&nbsp;&nbsp;&nbsp;</td>
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">0.847&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
@@ -1463,7 +1462,7 @@ diamond_regs                                                         %&gt;%
   <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.8pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">53243.298&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">*** p &lt; 0.001; ** p &lt;  0.01; * p &lt;  0.05.</td>
+  <td  colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-width:0pt 0pt 0pt 0pt; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; "> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</td>
 </tr>
 </table>
 

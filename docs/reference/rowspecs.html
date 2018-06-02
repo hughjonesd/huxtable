@@ -110,21 +110,19 @@
     
     <p>The <code>set_*</code> functions for cell properties all have arguments like this:
 <code>set_property(ht, row, col, value, byrow = FALSE)</code>.</p>
-<p>You can treat <code>row</code> and <code>col</code> arguments like arguments to <code>[</code> for a data frame.
+<p>You can treat <code>row</code> and <code>col</code> arguments like arguments for data frame subsetting.
 But there are a few extra tricks:</p><ul>
-<li><p>Write <code>set_property(ht, x)</code>, omitting <code>row</code> and <code>col</code>, to set
-   the property to <code>x</code> for all cells.</p></li>
-<li><p>Use <code><a href='every.html'>everywhere</a></code> to refer to all rows or all columns.</p></li>
+<li><p>Write <code>set_property(ht, x)</code>, omitting <code>row</code> and <code>col</code>, to set the property to <code>x</code> for all cells.</p></li>
+<li><p>Use <code>everywhere</code> to refer to all rows or all columns.</p></li>
 <li><p>Use <code><a href='final.html'>final(n)</a></code> to refer to the last n rows or columns.</p></li>
-<li><p>Use <code><a href='every.html'>evens</a></code> to get only even rows/columns and <code><a href='every.html'>odds</a></code>
-   for only odd ones.</p></li>
+<li><p>Use <code>evens</code> to get only even rows/columns and <code>odds</code> for only odd ones.</p></li>
 <li><p>Use <code><a href='every.html'>every(n, from = m)</a></code> to get every nth row/column starting at row/column m.</p></li>
 <li><p>Use <code>dplyr</code> functions like <code>starts_with</code>, <code>contains</code> and <code>matches</code> to
-   specify columns (but not rows). See <code><a href='http://dplyr.tidyverse.org/reference/select_helpers.html'>select_helpers</a></code> for a full list.</p></li>
-<li><p>Use <code><a href='where.html'>where(cond)</a></code>, and omit the <code>col</code> argument, to get cells where <code>cond</code> is
-   <code>TRUE</code>.</p></li>
+specify columns (but not rows). See <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>select_helpers</a></code> for a full list.</p></li>
+<li><p>Use <code><a href='where.html'>where(condition)</a></code>, and omit the <code>col</code> argument, to get cells where <code>condition</code> is <code>TRUE</code>.</p></li>
 <li><p>Set <code>byrow = TRUE</code> to set properties by row rather than by column.</p></li>
 </ul>
+    <p>[=[.data.frame]: R:=[.data.frame</p>
     
     <h2 class="hasAnchor" id="the-gory-details"><a class="anchor" href="#the-gory-details"></a>The gory details</h2>
 
@@ -132,19 +130,19 @@ But there are a few extra tricks:</p><ul>
     <p>How the row and col arguments are parsed depends on the number of arguments passed to the <code>set_*</code>
 function.</p><ul>
 <li><p>If there are two arguments (excluding <code>byrow</code>) then the second argument is taken as the
-    value and is set for all rows and columns.</p></li>
+value and is set for all rows and columns.</p></li>
 <li><p>If there are three arguments, then the third argument is taken as the value, and
-    <code>row</code> must be a matrix with two columns. Each row of this matrix
-    gives the row, column indices of a single cell. This uses R's little known feature of
-    subsetting with matrices - see <code><a href='http://www.rdocumentation.org/packages/base/topics/Extract'>Extract</a></code>.</p></li>
+<code>row</code> must be a matrix with two columns. Each row of this matrix
+gives the row, column indices of a single cell. This uses R's little known feature of
+subsetting with matrices - see <code><a href='http://www.rdocumentation.org/packages/base/topics/Extract'>base::Extract()</a></code>.</p></li>
 <li><p>If there are four arguments:</p><ul>
 <li><p>If <code>row</code> or <code>col</code> is numeric, character or logical, it is evaluated just as in standard
-        subsetting. <code>col</code> will be evaluated in a special context provided by <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/poke_vars'>with_vars</a></code>
-        to allow the use of dplyr functions.</p></li>
+subsetting. <code>col</code> will be evaluated in a special context provided by <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/poke_vars'>tidyselect::with_vars()</a></code>
+to allow the use of dplyr functions.</p></li>
 <li><p>If <code>row</code> or <code>col</code> is a function,it is called with two arguments: the huxtable,
-        and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
-        of column indices. <code><a href='every.html'>evens</a></code>, <code><a href='every.html'>odds</a></code>, <code><a href='every.html'>every</a></code> and <code><a href='final.html'>final</a></code>
-       return functions for this purpose.</p></li>
+and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
+of column indices. <code><a href='every.html'>evens()</a></code>, <code><a href='every.html'>odds()</a></code>, <code><a href='every.html'>every()</a></code> and <code><a href='final.html'>final()</a></code>
+return functions for this purpose.</p></li>
 </ul></li>
 </ul>
     
@@ -152,43 +150,43 @@ function.</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>1</span>)
 
-<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
+<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>odds</span>, <span class='no'>evens</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
+#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>odds</span>, <span class='no'>evens</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>everywhere</span>, <span class='kw pkg'>tidyselect</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>matches</a></span>(<span class='st'>'[aeiou]'</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
-#&gt; 
-#&gt; Column names: a, b</div><div class='input'>
-<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
+#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>everywhere</span>, <span class='kw pkg'>tidyselect</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>matches</a></span>(<span class='st'>'[aeiou]'</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
 #&gt; 
 #&gt; Column names: a, b</div><div class='input'>
-<span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>))</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
+<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1         5        
-#&gt;   2         4        
-#&gt;   3         3        
-#&gt;   4         2        
-#&gt;   5         1        
+#&gt; Column names: a, b</div><div class='input'>
+<span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>))</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
+#&gt; 
+#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+#&gt;         2         4  
+#&gt;         3         3  
+#&gt;         4         2  
+#&gt;         5         1  
 #&gt; 
 #&gt; Column names: a, b</div></pre>
   </div>

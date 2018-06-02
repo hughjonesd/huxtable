@@ -294,6 +294,25 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>June 2, 2018: Huxtable 4.0.0 released</h4>
+
+<p>This release brings some changes. The most important are:</p>
+
+<ul>
+<li>Huxtable automatically pretty-prints data frames within <code>knitr</code> documents.</li>
+<li>Column alignment and number format is assigned automatically for different data types.</li>
+</ul>
+
+<p>These are breaking changes, so you can set options to go back to the old behaviour.</p>
+
+<p>One other change is being introduced gradually: <code>add_colnames</code> will be set to
+<code>TRUE</code> by default in a future release. To future-proof your code, you can enable this
+behaviour by setting <code>options(huxtable.add_colnames = TRUE)</code>.
+
+<p>Other changes include a new <code>theme_plain</code> theme; automatically opening documents created by <code>quick_pdf</code> and
+friends; and several bugfixes. Please
+report any bugs in the <a href="https://github.com/hughjonesd/huxtable/issues">usual place</a>.</p>
+
 <h4>February 23, 2018: Huxtable 3.0.0 released</h4>
 
 <p>The major version bump marks a (small) change in the <code>quick_xxx</code> function

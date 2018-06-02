@@ -146,10 +146,10 @@ numerals, followed by an optional decimal point and further numerals). The excep
 scientific notation; huxtable attempts to detect and ignore these.</p>
 <p>If <code>value</code> is numeric,
 numbers will be rounded to that many decimal places.  If <code>value</code> is
-character, it will be taken as an argument to <code>sprintf</code>. If <code>value</code> is a
+character, it will be taken as an argument to <code>sprintf()</code>. If <code>value</code> is a
 function it will be applied to the numbers and should return a string. If <code>value</code> is <code>NA</code>, then numbers
-will be unchanged.</p>
-<p>The default value is "%5.3g" which rounds numbers if they have more than 3 significant
+will be unchanged. Note that setting <code>value</code> to <code>NA</code> does not reset to the default.</p>
+<p>The default value is "%.3g" which rounds numbers if they have more than 3 significant
 digits, and which may use an exponent for large numbers.</p>
 <p>To set number_format to a function, enclose the function in <code>list</code>.
 See the examples.</p>
@@ -170,35 +170,35 @@ numbers in their entirety. The default value was "%5.2f".</p>
 <span class='fu'>number_format</span>(<span class='no'>ht</span>)[<span class='fl'>2</span>,] <span class='kw'>&lt;-</span> <span class='st'>'%5.2f'</span>
 <span class='fu'>number_format</span>(<span class='no'>ht</span>)[<span class='fl'>3</span>,] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>prettyNum</span>(<span class='no'>x</span>, <span class='kw'>big.mark</span> <span class='kw'>=</span> <span class='st'>','</span>))
 <span class='fu'>number_format</span>(<span class='no'>ht</span>)[<span class='fl'>4</span>,] <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>function</span>(<span class='no'>x</span>) <span class='kw'>if</span>(<span class='no'>x</span><span class='kw'>&gt;</span><span class='fl'>0</span>) <span class='st'>'+'</span> <span class='kw'>else</span> <span class='st'>'-'</span>)
-<span class='no'>ht</span></div><div class='output co'>#&gt;   1000.05    1000.05   
+<span class='no'>ht</span></div><div class='output co'>#&gt;    1000.05    1000.05  
 #&gt;   10000.00   10000.00  
-#&gt;   1e+05      1e+05     
-#&gt;   +          +         
+#&gt;   1e+05      1e+05     
+#&gt;       +          +     
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   1000.05    1000.05   
+#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;    1000.05    1000.05  
 #&gt;   10000.00   10000.00  
-#&gt;   1e+05      1e+05     
-#&gt;   +          +         
+#&gt;   1e+05      1e+05     
+#&gt;       +          +     
 #&gt; 
 #&gt; Column names: a, b</div><div class='input'><span class='no'>ht_bands</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"10000 Maniacs"</span>)
-<span class='no'>ht_bands</span> <span class='co'># probably not what you want</span></div><div class='output co'>#&gt;   1e+04 Maniacs   </div><div class='input'><span class='fu'>number_format</span>(<span class='no'>ht_bands</span>) <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='no'>ht_bands</span> <span class='co'># probably not what you want</span></div><div class='output co'>#&gt;   10000 Maniacs   </div><div class='input'><span class='fu'>number_format</span>(<span class='no'>ht_bands</span>) <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
 <span class='no'>ht_bands</span></div><div class='output co'>#&gt;   10000 Maniacs   </div><div class='input'>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)
-<span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;   1.00      3.00     
-#&gt;   2.00      2.00     
-#&gt;   3.00      1.00     
+<span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;      1.00      3.00  
+#&gt;      2.00      2.00  
+#&gt;      3.00      1.00  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;   1.00      3        
-#&gt;   2.00      2        
-#&gt;   3         1        
+#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;      1.00         3  
+#&gt;      2.00         2  
+#&gt;         3         1  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   1.00      3.000    
-#&gt;   2.00      2.000    
-#&gt;   3         1        
+#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      1.00     3.000  
+#&gt;      2.00     2.000  
+#&gt;         3         1  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt;   1.00      3        
-#&gt;   2         2        
-#&gt;   3         1.00     
+#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_number_format</span>(<span class='no'>ht</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt;      1.00         3  
+#&gt;         2         2  
+#&gt;         3      1.00  
 #&gt; 
 #&gt; Column names: a, b</div></pre>
   </div>
