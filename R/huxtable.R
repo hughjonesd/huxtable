@@ -613,8 +613,11 @@ add_colnames <- function (ht, ...) UseMethod('add_colnames')
 #' @export
 #' @rdname add_colnames
 add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
-  assert_that(missing(rowname) || is.null(rowname) || is.string(rowname))
+  if (! missing(rowname)) assert_that(is.null(rowname) || is.string(rowname))
   cn <- colnames(ht)
+  dateish_cols <- which(sapply(ht, function (x) class(x)[1] %in% c("Date", "POSIXct", "POSIXlt")))
+  for (col in dateish_cols) ht[[col]] <- as.character(ht[[col]]) # avoids autoconversion by c(),
+                                                                  # which uses as.numeric
   ht <- rbind(cn, ht, copy_cell_props = FALSE)
   number_format(ht)[1, ] <- NA
   colnames(ht) <- cn

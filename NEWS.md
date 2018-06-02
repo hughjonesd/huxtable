@@ -16,13 +16,13 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 ## Bugfixes
 
-* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`, `as_flextable`
+* Bugfix: Date and datetime columns were converted to numbers by `add_colnames`.
 * LaTeX bugfix: background colors were printing an extra space.
-* Bugfix: `huxreg` was never using built-in confidence intervals.
+* `huxreg` was never using built-in confidence intervals.
 * Screen bugfixes:
   - set max_width to screen width (thanks @jacob-long)
   - misaligned decimal points
-
+* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`, `as_flextable`.
   
 ## Breaking changes 
 

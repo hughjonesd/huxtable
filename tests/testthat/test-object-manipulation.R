@@ -99,6 +99,20 @@ test_that('add_colnames works with as_hux for matrices', {
 })
 
 
+test_that('add_colnames does not screw up dates and similar', {
+  date_str <- rep("2015/05/05 12:00", 2)
+  dfr <- data.frame(
+          date    = as.Date(date_str),
+          POSIXct = as.POSIXct(date_str),
+          POSIXlt = as.POSIXlt(date_str)
+        )
+  ht <- as_hux(dfr, add_colnames = TRUE)
+  ht2 <- add_colnames(as_hux(dfr, add_colnames = FALSE))
+  for (h in list(ht, ht2)) for (col in colnames(dfr)) {
+    expect_match(to_screen(h[, col]), "2015-05-05")
+  }
+})
+
 test_that('add_footnote works', {
   ht_orig <- hux(a = 1:2, b = 1:2)
   ht_orig <- add_footnote(ht_orig, 'Some footnote text', italic = TRUE)

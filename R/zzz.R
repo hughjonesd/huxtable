@@ -53,9 +53,9 @@ NULL
             complex = "%.3g"
           )),
     huxtable.autoformat_align         = getOption('huxtable.autoformat_align', list(
-            integer = "right",
             numeric = getOption("OutDec", "."),
             complex = getOption("OutDec", "."),
+            integer = "right",
             Date    = "right",
             POSIXct = "right",
             POSIXlt = "right"
