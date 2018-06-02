@@ -49,7 +49,7 @@ test_that('Assignment to attributes preserves colnames', {
 
 
 test_that('Can combine numbers and characters in number_format', {
-  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111))
+  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111), autoformat = FALSE)
   number_format(ht)[1, ] <- "%3.3f"
   number_format(ht)[2, ] <- 1
   number_format(ht)[3, ] <- list(function(x) ifelse(x > 0, '+', '-'))

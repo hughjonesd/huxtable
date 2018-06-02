@@ -46,7 +46,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   }
   .dots <- .dots[setdiff(names(.dots), 'copy_cell_props')]
   result <- NextMethod()
-  result <- as_hux(result)
+  result <- as_hux(result, autoformat = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 
@@ -104,7 +104,7 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
   .data <- as.data.frame(.data)
 
   result <- NextMethod()
-  result <- as_hux(result)
+  result <- as_hux(result, autoformat = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 

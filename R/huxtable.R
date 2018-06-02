@@ -34,15 +34,26 @@ NULL
 #' * Integer columns will have `number_format` set to 0.
 #' * Other numeric columns will have `number_format` set to `"%.3g"`.
 #' * All other columns will have `number_format` set to `NA` (no formatting).
-#' * All numeric, `Date` and date-time (i.e. `POSIXct` and `POSIXlt`) columns will be right-aligned.
+#' * Integer, `Date` and date-time (i.e. `POSIXct` and `POSIXlt`) columns will be right-aligned.
+#' * Other numeric columns will be aligned on `options("OutDec")`, usually `"."`.
 #' * Other columns will be left aligned.
+#'
 #'
 #' You can change these defaults by editing `options("huxtable.autoformat_number_format")` and
 #' `options("huxtable.autoformat_align")`. See [huxtable-package] for more details.
 #'
+#' Automatic alignment also applies to column headers if `add_colnames` is `TRUE`; headers of
+#' columns aligned on a decimal point will be right-aligned. Automatic number formatting does not
+#' apply to column headers.
+#'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-huxtable <- function (..., add_colnames = getOption("huxtable.add_colnames", FALSE), add_rownames = FALSE, autoformat = getOption('huxtable.autoformat', TRUE)) {
+huxtable <- function (
+        ...,
+        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_rownames = FALSE,
+        autoformat   = getOption('huxtable.autoformat', TRUE)
+      ) {
   assert_that(is.flag(add_colnames), is.flag(add_rownames), is.flag(autoformat))
 
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
@@ -109,19 +120,31 @@ as_huxtable.default <- function (
 
   class(x) <- c('huxtable', class(x))
 
+  col_classes <- sapply(x, function (col) class(col)[1])
   if (autoformat) {
     dfn <- getOption('huxtable.autoformat_number_format', list())
-    dfa <- getOption('huxtable.autoformat_align', list())
-
-    for (cn in seq_along(ncol(x))) {
-      number_format(x)[, cn] <- dfn[[ class(x[, cn]) ]] %||% NA
-      align(x)[, cn]         <- dfa[[ class(x[, cn]) ]] %||% NA
+    for (cn in seq_len(ncol(x))) {
+      # double [[ matters for getting underlying object; also want only most specific class:
+      cls <- col_classes[cn]
+      number_format(x)[, cn] <- dfn[[cls]] %||% NA
     }
   }
 
   # order matters here. We want original rownames, not anything else.
   if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE)
   if (add_colnames) x <- add_colnames(x)
+  # this bit comes after add_colnames so that column headers also get aligned:
+  if (autoformat) {
+    dfa <- getOption('huxtable.autoformat_align', list())
+    for (cn in seq_len(ncol(x))) {
+      cls <- col_classes[cn]
+      autoal <- dfa[[cls]] %||% NA
+      align(x)[, cn] <- autoal
+      if (add_colnames && ! autoal %in% c("left", "right", "center", "centre", NA)) {
+        align(x)[1, cn] <- "right"
+      }
+    }
+  }
 
   x <- set_attr_dimnames(x)
   x
@@ -135,12 +158,10 @@ as_huxtable.huxtable <- function (x, ...) x
 #' @export
 as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...) {
   ht <- as_huxtable(unclass(x), add_colnames, add_rownames, ...)
-  number_format(ht) <- 0
   if (add_rownames) {
     ht[1, 1] <- ""
-    number_format(ht)[, 1] <- NA
   }
-  if (add_colnames) number_format(ht)[1, ] <- NA
+
   ht
 }
 
@@ -414,8 +435,8 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   ht_real_hux <- attr(ht, 'from_real_hux')
   x_real_hux  <- attr(x, 'from_real_hux')
 
-  ht <- as_hux(ht)
-  x  <- as_hux(x)
+  ht <- as_hux(ht, autoformat = FALSE, add_colnames = FALSE)
+  x  <- as_hux(x, autoformat = FALSE, add_colnames = FALSE)
   ccp <- intersect(copy_cell_props, huxtable_cell_attrs)
 
   if (is.character(ccp)) {
@@ -437,7 +458,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
     rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
 
-  res <- as_hux(bind_df(ht, x))
+  res <- as_hux(bind_df(ht, x), autoformat = FALSE, add_colnames = FALSE)
   res <- merge_props(res, ht, x, type = type, copy_cell_props = copy_cell_props)
 
   attr(res, 'from_real_hux') <- x_real_hux || ht_real_hux
@@ -477,7 +498,7 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
   #  - row  properties copied from last row (rbind)
   #  - col  properties copied from last col (cbind)
   if (! is_huxtable(second)) {
-    second <- as_hux(second)
+    second <- as_hux(second, add_colnames = FALSE, autoformat = FALSE)
     if (is.character(copy_cell_props)) {
       for (a in copy_cell_props) {
         attr(second, a)[] <- if (type == 'cbind') attr(first, a)[, ncol(first)] else
@@ -535,7 +556,7 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
 #'
 #' @export
 t.huxtable <- function (x) {
-  res <- as_hux(NextMethod())
+  res <- as_hux(NextMethod(), add_colnames = FALSE, autoformat = FALSE)
   for (a in setdiff(huxtable_cell_attrs, c('colspan', 'rowspan', 'height', 'width',
         'bottom_border', 'left_border', 'top_border', 'right_border'))) {
     attr(res, a) <- t(attr(x, a))
@@ -595,8 +616,10 @@ add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
   assert_that(missing(rowname) || is.null(rowname) || is.string(rowname))
   cn <- colnames(ht)
   ht <- rbind(cn, ht, copy_cell_props = FALSE)
+  number_format(ht)[1, ] <- NA
   colnames(ht) <- cn
   if (! is.null(rowname)) rownames(ht) <- c(rowname, rownames(ht)[1:(nrow(ht) - 1)])
+
   ht
 }
 
@@ -611,8 +634,10 @@ add_rownames <- function (ht, ...) UseMethod('add_rownames')
 add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames = TRUE, ...) {
   assert_that(is.string(colname))
   ht <- cbind(rownames(ht), ht, copy_cell_props = FALSE)
+  number_format(ht)[, 1] <- NA
   colnames(ht)[1] <- colname
   if (! preserve_rownames) rownames(ht) <- NULL
+
   ht
 }
 
@@ -621,6 +646,7 @@ add_rownames.huxtable <- function (ht, colname = 'rownames', preserve_rownames =
 `dimnames<-.huxtable` <- function (x, value) {
   x <- NextMethod()
   x <- set_attr_dimnames(x)
+
   x
 }
 

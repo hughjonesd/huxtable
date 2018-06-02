@@ -41,6 +41,7 @@ test_that('autoformat', {
           POSIXlt   = as.POSIXlt(Sys.time())
         )
   ht <- as_hux(dfr, autoformat = TRUE, add_colnames = TRUE)
+
   for (x in c("character", "Date", "POSIXct", "POSIXlt")) {
     expect_equivalent(number_format(ht)[2, x], NA)
   }
@@ -48,11 +49,19 @@ test_that('autoformat', {
     expect_equivalent(number_format(ht)[2, x], "%.3g")
   }
   expect_equivalent(number_format(ht)[2, "integer"], 0)
+
   expect_equivalent(number_format(ht)[1, ], rep(NA, ncol(dfr)))
-  for (x in c("integer", "numeric", "complex", "Date", "POSIXct", "POSIXlt")) {
-    expect_equivalent(align(ht)[2, x], "right")
+
+  for (x in c("integer", "Date", "POSIXct", "POSIXlt")) {
+    # column heading alignment same:
+    expect_equivalent(align(ht)[1:2, x], rep("right", 2))
   }
-  for (x in c("character"))
+  for (x in c("numeric", "complex")) {
+    expect_equivalent(align(ht)[2, x], getOption("OutDec"))
+    # headings right aligned:
+    expect_equivalent(align(ht)[1, x], "right")
+  }
+  expect_equivalent(align(ht)[1:2, "character"], rep("left", 2))
 })
 
 
