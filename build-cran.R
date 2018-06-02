@@ -14,9 +14,9 @@ if (grepl(v, "9000")) stop('Still using development version, please fix in DESCR
 
 # Check git is up to date --------------------------------------------------------------------------
 
-gdiff <- git2r::diff(tree(commits()[[1]]))
+gdiff <- git2r::diff(repository())
 if (length(gdiff) > 0) stop('Working tree differs from last commit, please make commits!')
-
+# nb this may fail for some reason
 
 
 
