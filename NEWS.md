@@ -14,16 +14,6 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * `pad_decimal` is deprecated in favour of `align(ht) <- "."`.
 * `huxreg` continues with a warning if `statistics` are unavailable for some models.
 
-## Bugfixes
-
-* Bugfix: Date and datetime columns were converted to numbers by `add_colnames`.
-* LaTeX bugfix: background colors were printing an extra space.
-* `huxreg` was never using built-in confidence intervals.
-* Screen bugfixes:
-  - set max_width to screen width (thanks @jacob-long)
-  - misaligned decimal points
-* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`, `as_flextable`.
-  
 ## Breaking changes 
 
 * huxtable now provides `knit_print.data.frame` methods. This 
@@ -38,6 +28,17 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * `as_flextable` now does not print column names in the header. This matches the standard
   huxtable behaviour whereby headers are "just another row/column". To get the old behaviour, 
   use `colnames_to_header = TRUE`.
+  
+## Bugfixes
+
+* Bugfix: Date and datetime columns were converted to numbers by `add_colnames`.
+* LaTeX bugfix: background colors were printing an extra space.
+* `huxreg` was never using built-in confidence intervals.
+* Screen bugfixes:
+  - set max_width to screen width (thanks @jacob-long)
+  - misaligned decimal points
+* Various bugfixes for `number_format`, `huxreg`, `as_hux.table`, `as_flextable`.
+  
 
 # huxtable 3.0.0
 
