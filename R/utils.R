@@ -8,6 +8,11 @@ NULL
 
 ncharw <- function (x) nchar(x, type = 'width')
 
+# pinched from rlang
+`%||%` <- function (x, y) {
+  if (is.null(x)) y else x
+}
+
 
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
