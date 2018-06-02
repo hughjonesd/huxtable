@@ -1,0 +1,33 @@
+---
+title: "Basic data frame output: huxtable compared with other formats"
+author: "David Hugh-Jones"
+date: "02/06/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Base R
+
+```{r base-knitr}
+head(mtcars)
+head(iris)
+```
+
+## With kable
+
+```{r knitr-kable}
+knitr::kable(head(mtcars))
+knitr::kable(head(iris))
+```
+
+
+## With huxtable
+
+```{r knitr-huxtable}
+library(huxtable)
+head(mtcars)
+head(iris)
+```

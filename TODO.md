@@ -6,10 +6,6 @@ TODO
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 
-* Better handling of number formatting. 
-  - hux() and/or as_hux() could recognize certain formats as numeric.
-  - Has to be done before add_colnames
-
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
   - Downside: can't use logical vectors for columns (without some strong trickery); 
