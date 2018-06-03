@@ -14,6 +14,7 @@ output:
 ```{r setup, echo = FALSE}
 
 library(huxtable)
+options(huxtable.use_resizebox_for_width = TRUE)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 

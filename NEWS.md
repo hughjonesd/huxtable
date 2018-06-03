@@ -4,6 +4,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.0.9000
 
+* Option `huxtable.latex_use_resizebox_for_width` forces LaTeX huxtables to their defined
+  preferred width using `\resizebox`. This defaults to `FALSE` for the moment.
 
 # huxtable 4.0.0
 

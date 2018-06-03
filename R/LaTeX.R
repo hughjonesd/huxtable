@@ -38,9 +38,13 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- build_tabular(ht)
   if (tabular_only) return(res)
 
-  if (! is.na(height <- height(ht))) {
+  if (r4w <- use_resizebox_for_width() || ! is.na(height(ht))) {
+    height <- height(ht)
+    if (is.na(height)) height <- '!'
     if (is.numeric(height)) height <- paste0(height, '\\textheight')
-    res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
+    width <- if (r4w) width(ht) else '!'
+    if (is.numeric(width)) width <- paste0(width, default_table_width_unit)
+    res <- paste0('\\resizebox*{', width ,'}{', height, '}{\n', res, '\n}')
   }
 
   cap <- if (! is.na(cap <- caption(ht))) {
@@ -81,6 +85,7 @@ huxtable_latex_dependencies <- list(
   rmarkdown::latex_dependency('calc'),
   rmarkdown::latex_dependency('tabularx')
 )
+
 
 #' Report LaTeX dependencies
 #'
@@ -222,6 +227,7 @@ build_tabular <- function(ht) {
 
   tenv <- tabular_environment(ht)
   width_spec <- if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
+    # if use_resizebox_for_width is TRUE we still do this as tabularx needs an entry:
     tw <- width(ht)
     if (is_a_number(tw)) tw <- paste0(tw, default_table_width_unit)
     paste0('{', tw, '}')
@@ -232,6 +238,9 @@ build_tabular <- function(ht) {
 
   return(res)
 }
+
+
+use_resizebox_for_width <- function () getOption('huxtable.use_resizebox_for_width', FALSE)
 
 
 compute_width <- function (ht, start_col, end_col) {
@@ -266,6 +275,7 @@ compute_width <- function (ht, start_col, end_col) {
   cw
 }
 
+
 build_cell_contents <- function(ht, row, col, contents) {
   if (! is.na(font_size <- font_size(ht)[row, col])) {
     line_space <- round(font_size * 1.2, 2)
@@ -284,6 +294,7 @@ build_cell_contents <- function(ht, row, col, contents) {
 
   return(contents)
 }
+
 
 # row can be from "0" for the top; up to nrow
 build_clines_for_row <- function(ht, row, collapsed_borders, cb_colors) {
@@ -340,6 +351,7 @@ compute_vertical_borders <- function (ht, row, collapsed_borders, cb_colors) {
 
   return(borders)
 }
+
 
 # uses "real" border numbers in "ncol + 1 space"
 v_border <- function (ht, row, col, collapsed_borders, cb_colors) {
