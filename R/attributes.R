@@ -200,7 +200,7 @@ set_default_properties <- function(...) {
 #' get_default_properties()
 #' @seealso [set_default_properties()]
 get_default_properties <- function (names = NULL) {
-  if (is.null(names)) names <- names(huxtable_env$huxtable_default_attrs)
+  names <- names %||% names(huxtable_env$huxtable_default_attrs)
   if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
       'Unrecognized property name(s): ', paste(unrec, collapse = ', '),
         '; to see all names, use get_default_properties()')

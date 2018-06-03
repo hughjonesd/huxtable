@@ -302,13 +302,15 @@ make_cell_style <- function (ht, row, col) {
   bold       <- bold(ht)[row, col]
   italic     <- italic(ht)[row, col]
 
-  maybe_combine_style <- function (style, style2) if (is.null(style)) style2 else crayon::combine_styles(style, style2)
+  maybe_combine_style <- function (style, style2) {
+    if (is.null(style)) style2 else crayon::combine_styles(style, style2)
+  }
   style <- NULL
   if (bold) style <- crayon::bold
   if (italic) style <- maybe_combine_style(style, crayon::italic)
   if (! is.na(tc)) style <- maybe_combine_style(style, crayon::make_style(tc))
   if (! is.na(bgc)) style <- maybe_combine_style(style, crayon::make_style(bgc, bg = TRUE))
-  if (is.null(style)) style <- identity
+  style <- style %||% identity
 
   style
 }
