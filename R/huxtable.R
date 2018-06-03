@@ -19,25 +19,17 @@ NULL
 #'
 #' @return An object of class `huxtable`.
 #' @export
-#' @details
-#' If you use `add_colnames` or `add_rownames`, be aware that these will shift your rows and columns
-#' along by one: your old row/column 1 will now be row/column 2, etc.
-#'
-#' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
-#' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
-#'
 #' @section Automatic formatting:
 #'
 #' If `autoformat` is `TRUE`, then columns will have [number_format()] and [align()] properties
 #' set automatically, as follows:
 #'
 #' * Integer columns will have `number_format` set to 0.
-#' * Other numeric columns will have `number_format` set to `"%.3g"`.
+#' * Other numeric columns will have `number_format` set to \code{"\%.3g"}.
 #' * All other columns will have `number_format` set to `NA` (no formatting).
 #' * Integer, `Date` and date-time (i.e. `POSIXct` and `POSIXlt`) columns will be right-aligned.
 #' * Other numeric columns will be aligned on `options("OutDec")`, usually `"."`.
 #' * Other columns will be left aligned.
-#'
 #'
 #' You can change these defaults by editing `options("huxtable.autoformat_number_format")` and
 #' `options("huxtable.autoformat_align")`. See [huxtable-package] for more details.
@@ -45,6 +37,14 @@ NULL
 #' Automatic alignment also applies to column headers if `add_colnames` is `TRUE`; headers of
 #' columns aligned on a decimal point will be right-aligned. Automatic number formatting does not
 #' apply to column headers.
+#'
+#' @details
+#' If you use `add_colnames` or `add_rownames`, be aware that these will shift your rows and columns
+#' along by one: your old row/column 1 will now be row/column 2, etc.
+#'
+#' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
+#' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
+#'
 #'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])

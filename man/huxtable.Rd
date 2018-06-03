@@ -57,6 +57,28 @@ the default globally by setting \code{options("huxtable.add_colnames")} to \code
 \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 }
+\section{Automatic formatting}{
+
+
+If \code{autoformat} is \code{TRUE}, then columns will have \code{\link[=number_format]{number_format()}} and \code{\link[=align]{align()}} properties
+set automatically, as follows:
+\itemize{
+\item Integer columns will have \code{number_format} set to 0.
+\item Other numeric columns will have \code{number_format} set to \code{"\%.3g"}.
+\item All other columns will have \code{number_format} set to \code{NA} (no formatting).
+\item Integer, \code{Date} and date-time (i.e. \code{POSIXct} and \code{POSIXlt}) columns will be right-aligned.
+\item Other numeric columns will be aligned on \code{options("OutDec")}, usually \code{"."}.
+\item Other columns will be left aligned.
+}
+
+You can change these defaults by editing \code{options("huxtable.autoformat_number_format")} and
+\code{options("huxtable.autoformat_align")}. See \link{huxtable-package} for more details.
+
+Automatic alignment also applies to column headers if \code{add_colnames} is \code{TRUE}; headers of
+columns aligned on a decimal point will be right-aligned. Automatic number formatting does not
+apply to column headers.
+}
+
 \examples{
 ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
 dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
