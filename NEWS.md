@@ -2,6 +2,9 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 4.0.0.9000
+
+
 # huxtable 4.0.0
 
 * New `theme_plain` theme.
@@ -22,7 +25,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - By default data frames are printed using the `theme_plain` theme. Set
     options("huxtable.knit_print_df_theme") to a different one-argument function if you want to 
     use a different theme.
-* The new `autoformat` argument lets [huxtable()] and [as_huxtable()] automatically choose alignment 
+* The new `autoformat` argument lets `huxtable()` and `as_huxtable()` automatically choose alignment 
   and number format based on column type. Set `options("huxtable.autoformat")` to `FALSE` to turn 
   off this feature by default.
 * The default value of `number_format` has changed from "%5.3g" to "%.3g", which no longer space-pads numbers.

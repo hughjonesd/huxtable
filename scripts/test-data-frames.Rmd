@@ -1,5 +1,5 @@
 ---
-title: "Basic data frame output: huxtable compared with other formats"
+title: "data frames in knitr with huxtable"
 author: "David Hugh-Jones"
 date: "02/06/2018"
 output: html_document
@@ -9,25 +9,32 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Base R
+### Base R
 
 ```{r base-knitr}
-head(mtcars)
 head(iris)
 ```
 
-## With kable
-
-```{r knitr-kable}
-knitr::kable(head(mtcars))
-knitr::kable(head(iris))
-```
-
-
-## With huxtable
+### With huxtable
 
 ```{r knitr-huxtable}
-library(huxtable)
-head(mtcars)
+suppressPackageStartupMessages(library(huxtable))
 head(iris)
 ```
+
+### Turning it off
+
+```{r knitr-no-huxtable}
+options(huxtable.knit_print_df = FALSE)
+head(iris)
+```
+
+### Alternatives
+
+#### printr
+
+```{r printr}
+library(printr)
+head(iris)
+```
+
