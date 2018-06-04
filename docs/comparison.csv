@@ -1,5 +1,5 @@
-,huxtable,xtable,formattable,ascii,kableExtra,condformat,htmlTable,Hmisc::latex,ztable,kable,texreg,stargazer,tables,DT,pander,officer,pixiedust
-HTML output,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,,Y
+,huxtable,xtable,formattable,ascii,kableExtra,condformat,htmlTable,Hmisc::latex,ztable,kable,texreg,stargazer,tables,DT,pander,flextable,pixiedust
+HTML output,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
 Background color,Y,,Y,Y,,Y,Y,,Y,,,,,,,Y,Y
 Width and height,Y,,Y,Y,(Y),,,,,,,,,,,Y,Y
 Text formatting,Y,,Y,Y,(Y),,,,(Y),,(Y),Y,,,Y,Y,Y
@@ -24,12 +24,12 @@ Format NA ,Y,,,Y,,,,Y,,,,,Y,,Y,,Y
 Long tables,,Y,,,,,,Y,Y,,,,Y,,,,Y
 Labels,Y,Y,,,,,,Y,Y,,,Y,Y,,,,Y
 Other features,,,,,,,,,,,,,,,,,
-Conditional formats,Y,,Y,,,Y,,,,,,,,,,,
+Conditional formats,Y,,Y,,,Y,,,,,,,,,,Y,
 Autocreate summary statistics,,,,,,,,,,,,,Y,,,,
 Dynamic HTML widgets,,,Y,,,,,,,,,,,Y,,,
-Create tables from model objects,Y,Y,,Y,,,,,Y,,Y,Y,,,,,
+Create tables from model objects,Y,Y,,Y,,,,,Y,,Y,Y,,,,Y,
 dplyr compatible,Y,,,,,,,,,,,,,,,,
-Add footnotes,(Y),,,,Y,,,,,,,,,,,,
+Add footnotes,(Y),,,,Y,,,,,,,,,,,Y,
 Other formats,,,,,,,,,,,,,,,,,
 Markdown,Y,,,,,,,,,Y,,,,,Y,,Y
 Screen,Y,,,,,,,,,,,Y,,,,,Y
