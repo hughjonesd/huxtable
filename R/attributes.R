@@ -155,7 +155,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   ) # end switch
 
   lapply(names(funs), function (x) {
-    assign(x, funs[[x]], envir = parent.frame(3)) # 3: 1 for function(x), 2 for lapply, 3 for the caller!
+    assign(x, funs[[x]], envir = getNamespace('huxtable'))
   })
 
   NULL
