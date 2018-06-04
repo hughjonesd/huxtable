@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +100,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,494 +108,490 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;4.0.0</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-package-information" class="hasAnchor"><a href="#section-package-information" class="anchor"></a>Package information</h2>
-            <p class="section-desc"><p>Basic information about the package</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxtable-package.html">huxtable-package</a></code> </p>
-          </td>
-          <td><p>Huxtable: simply create LaTeX and HTML tables</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-creating-and-manipulating-huxtables" class="hasAnchor"><a href="#section-creating-and-manipulating-huxtables" class="anchor"></a>Creating and manipulating huxtables</h2>
-            <p class="section-desc"><p>Functions to create, subset and work with huxtables</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="extract-methods.html">[.huxtable</a></code> </p>
-          </td>
-          <td><p>Subset a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_colnames.html">add_colnames</a></code> <code><a href="add_colnames.html">add_rownames</a></code> </p>
-          </td>
-          <td><p>Add column or row names</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_footnote.html">add_footnote</a></code> </p>
-          </td>
-          <td><p>Add a row with a footnote</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cbind.huxtable.html">cbind</a></code> <code><a href="cbind.huxtable.html">rbind</a></code> </p>
-          </td>
-          <td><p>Combine rows or columns</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxtable.html">huxtable</a></code> <code><a href="huxtable.html">hux</a></code> <code><a href="huxtable.html">as_huxtable</a></code> <code><a href="huxtable.html">as_hux</a></code> <code><a href="huxtable.html">is_huxtable</a></code> <code><a href="huxtable.html">is_hux</a></code> </p>
-          </td>
-          <td><p>Create a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="insert_column.html">insert_column</a></code> <code><a href="insert_column.html">insert_row</a></code> </p>
-          </td>
-          <td><p>Insert a row or column</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dplyr-verbs.html">mutate</a></code> </p>
-          </td>
-          <td><p>Dplyr verbs for huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="t.huxtable.html">t</a></code> </p>
-          </td>
-          <td><p>Transpose a huxtable</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-size-and-position" class="hasAnchor"><a href="#section-size-and-position" class="anchor"></a>Size and position</h2>
-            <p class="section-desc"><p>Size and position properties of huxtables</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="col_width.html">col_width</a></code> <code><a href="col_width.html">col_width<-</a></code> <code><a href="col_width.html">set_col_width</a></code> </p>
-          </td>
-          <td><p>Column widths</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="height.html">height</a></code> <code><a href="height.html">height<-</a></code> <code><a href="height.html">set_height</a></code> </p>
-          </td>
-          <td><p>Table height</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="position.html">position</a></code> <code><a href="position.html">position<-</a></code> <code><a href="position.html">set_position</a></code> </p>
-          </td>
-          <td><p>Table position</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="row_height.html">row_height</a></code> <code><a href="row_height.html">row_height<-</a></code> <code><a href="row_height.html">set_row_height</a></code> </p>
-          </td>
-          <td><p>Row heights</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="width.html">width</a></code> <code><a href="width.html">width<-</a></code> <code><a href="width.html">set_width</a></code> </p>
-          </td>
-          <td><p>Table width</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-table-level-properties" class="hasAnchor"><a href="#section-table-level-properties" class="anchor"></a>Table-level properties</h2>
-            <p class="section-desc"><p>Other table-level properties of huxtables</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="caption.html">caption</a></code> <code><a href="caption.html">caption<-</a></code> <code><a href="caption.html">set_caption</a></code> </p>
-          </td>
-          <td><p>Caption</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="caption_pos.html">caption_pos</a></code> <code><a href="caption_pos.html">caption_pos<-</a></code> <code><a href="caption_pos.html">set_caption_pos</a></code> </p>
-          </td>
-          <td><p>Caption position</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="label.html">label</a></code> <code><a href="label.html">label<-</a></code> <code><a href="label.html">set_label</a></code> </p>
-          </td>
-          <td><p>Table label</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="latex_float.html">latex_float</a></code> <code><a href="latex_float.html">latex_float<-</a></code> <code><a href="latex_float.html">set_latex_float</a></code> </p>
-          </td>
-          <td><p>Float position for LaTeX</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tabular_environment.html">tabular_environment</a></code> <code><a href="tabular_environment.html">tabular_environment<-</a></code> <code><a href="tabular_environment.html">set_tabular_environment</a></code> </p>
-          </td>
-          <td><p>Tabular environment</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-text-properties" class="hasAnchor"><a href="#section-text-properties" class="anchor"></a>Text properties</h2>
-            <p class="section-desc"><p>Functions to change the properties of text in table cells</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="bold.html">bold</a></code> <code><a href="bold.html">bold<-</a></code> <code><a href="bold.html">set_bold</a></code> <code><a href="bold.html">italic</a></code> <code><a href="bold.html">italic<-</a></code> <code><a href="bold.html">set_italic</a></code> </p>
-          </td>
-          <td><p>Cell text style</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="font.html">font</a></code> <code><a href="font.html">font<-</a></code> <code><a href="font.html">set_font</a></code> </p>
-          </td>
-          <td><p>Font</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="font_size.html">font_size</a></code> <code><a href="font_size.html">font_size<-</a></code> <code><a href="font_size.html">set_font_size</a></code> </p>
-          </td>
-          <td><p>Font size</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="number_format.html">number_format</a></code> <code><a href="number_format.html">number_format<-</a></code> <code><a href="number_format.html">set_number_format</a></code> </p>
-          </td>
-          <td><p>Number format</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="na_string.html">na_string</a></code> <code><a href="na_string.html">na_string<-</a></code> <code><a href="na_string.html">set_na_string</a></code> </p>
-          </td>
-          <td><p>NA string</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="align.html">align</a></code> <code><a href="align.html">align<-</a></code> <code><a href="align.html">set_align</a></code> </p>
-          </td>
-          <td><p>Alignment</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="text_color.html">text_color</a></code> <code><a href="text_color.html">text_color<-</a></code> <code><a href="text_color.html">set_text_color</a></code> </p>
-          </td>
-          <td><p>Text color</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-borders-and-padding" class="hasAnchor"><a href="#section-borders-and-padding" class="anchor"></a>Borders and padding</h2>
-            <p class="section-desc"><p>Functions to alter borders, border colors and cell padding</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="left_border_color.html">left_border_color</a></code> <code><a href="left_border_color.html">left_border_color<-</a></code> <code><a href="left_border_color.html">set_left_border_color</a></code> <code><a href="left_border_color.html">right_border_color</a></code> <code><a href="left_border_color.html">right_border_color<-</a></code> <code><a href="left_border_color.html">set_right_border_color</a></code> <code><a href="left_border_color.html">top_border_color</a></code> <code><a href="left_border_color.html">top_border_color<-</a></code> <code><a href="left_border_color.html">set_top_border_color</a></code> <code><a href="left_border_color.html">bottom_border_color</a></code> <code><a href="left_border_color.html">bottom_border_color<-</a></code> <code><a href="left_border_color.html">set_bottom_border_color</a></code> </p>
-          </td>
-          <td><p>Border colors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="left_border.html">left_border</a></code> <code><a href="left_border.html">left_border<-</a></code> <code><a href="left_border.html">set_left_border</a></code> <code><a href="left_border.html">right_border</a></code> <code><a href="left_border.html">right_border<-</a></code> <code><a href="left_border.html">set_right_border</a></code> <code><a href="left_border.html">top_border</a></code> <code><a href="left_border.html">top_border<-</a></code> <code><a href="left_border.html">set_top_border</a></code> <code><a href="left_border.html">bottom_border</a></code> <code><a href="left_border.html">bottom_border<-</a></code> <code><a href="left_border.html">set_bottom_border</a></code> </p>
-          </td>
-          <td><p>Borders</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="left_padding.html">left_padding</a></code> <code><a href="left_padding.html">left_padding<-</a></code> <code><a href="left_padding.html">set_left_padding</a></code> <code><a href="left_padding.html">right_padding</a></code> <code><a href="left_padding.html">right_padding<-</a></code> <code><a href="left_padding.html">set_right_padding</a></code> <code><a href="left_padding.html">bottom_padding</a></code> <code><a href="left_padding.html">bottom_padding<-</a></code> <code><a href="left_padding.html">set_bottom_padding</a></code> <code><a href="left_padding.html">top_padding</a></code> <code><a href="left_padding.html">top_padding<-</a></code> <code><a href="left_padding.html">set_top_padding</a></code> <code><a href="left_padding.html">set_all_padding</a></code> </p>
-          </td>
-          <td><p>Cell padding</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_all_borders.html">set_all_borders</a></code> </p>
-          </td>
-          <td><p>Set all borders</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_all_border_colors.html">set_all_border_colors</a></code> </p>
-          </td>
-          <td><p>Set all border colors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_outer_borders.html">set_outer_borders</a></code> </p>
-          </td>
-          <td><p>Set outer borders round a rectangle of cells</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-cell-properties" class="hasAnchor"><a href="#section-cell-properties" class="anchor"></a>Cell properties</h2>
-            <p class="section-desc"><p>Other cell-level properties</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="align.html">align</a></code> <code><a href="align.html">align<-</a></code> <code><a href="align.html">set_align</a></code> </p>
-          </td>
-          <td><p>Alignment</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="background_color.html">background_color</a></code> <code><a href="background_color.html">background_color<-</a></code> <code><a href="background_color.html">set_background_color</a></code> </p>
-          </td>
-          <td><p>Background color</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="colspan.html">colspan</a></code> <code><a href="colspan.html">colspan<-</a></code> <code><a href="colspan.html">set_colspan</a></code> </p>
-          </td>
-          <td><p>Column span</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="escape_contents.html">escape_contents</a></code> <code><a href="escape_contents.html">escape_contents<-</a></code> <code><a href="escape_contents.html">set_escape_contents</a></code> </p>
-          </td>
-          <td><p>Escape cell contents</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rotation.html">rotation</a></code> <code><a href="rotation.html">rotation<-</a></code> <code><a href="rotation.html">set_rotation</a></code> </p>
-          </td>
-          <td><p>Text rotation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rowspan.html">rowspan</a></code> <code><a href="rowspan.html">rowspan<-</a></code> <code><a href="rowspan.html">set_rowspan</a></code> </p>
-          </td>
-          <td><p>Row span</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="valign.html">valign</a></code> <code><a href="valign.html">valign<-</a></code> <code><a href="valign.html">set_valign</a></code> </p>
-          </td>
-          <td><p>Vertical alignment</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="wrap.html">wrap</a></code> <code><a href="wrap.html">wrap<-</a></code> <code><a href="wrap.html">set_wrap</a></code> </p>
-          </td>
-          <td><p>Text wrapping</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-property-manipulation" class="hasAnchor"><a href="#section-property-manipulation" class="anchor"></a>Property manipulation</h2>
-            <p class="section-desc"><p>Generic ways to manipulate huxtable properties</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_default_properties.html">get_default_properties</a></code> </p>
-          </td>
-          <td><p>Get default huxtable properties</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_cell_properties.html">set_cell_properties</a></code> </p>
-          </td>
-          <td><p>Set multiple cell properties</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_default_properties.html">set_default_properties</a></code> </p>
-          </td>
-          <td><p>Set default huxtable properties</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-output" class="hasAnchor"><a href="#section-output" class="anchor"></a>Output</h2>
-            <p class="section-desc"><p>Functions to outut huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="as_flextable.html">as_FlexTable</a></code> <code><a href="as_flextable.html">as_flextable</a></code> </p>
-          </td>
-          <td><p>Convert a huxtable for Word/Powerpoint</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="as_Workbook.html">as_Workbook</a></code> </p>
-          </td>
-          <td><p>Convert a huxtable for Excel</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="guess_knitr_output_format.html">guess_knitr_output_format</a></code> </p>
-          </td>
-          <td><p>Guess knitr output format</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_html.html">print_html</a></code> <code><a href="to_html.html">to_html</a></code> <code><a href="to_html.html">print_notebook</a></code> </p>
-          </td>
-          <td><p>Create HTML representing a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_latex.html">print_latex</a></code> <code><a href="to_latex.html">to_latex</a></code> </p>
-          </td>
-          <td><p>Create LaTeX representing a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_md.html">print_md</a></code> <code><a href="to_md.html">to_md</a></code> </p>
-          </td>
-          <td><p>Create Markdown representing a huxtable</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_screen.html">print_screen</a></code> <code><a href="to_screen.html">to_screen</a></code> </p>
-          </td>
-          <td><p>Print a huxtable on screen</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="print.huxtable.html">print</a></code> </p>
-          </td>
-          <td><p>Default print method for huxtables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="report_latex_dependencies.html">report_latex_dependencies</a></code> </p>
-          </td>
-          <td><p>Report LaTeX dependencies</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="quick-output.html">quick_pdf</a></code> <code><a href="quick-output.html">quick_html</a></code> <code><a href="quick-output.html">quick_docx</a></code> <code><a href="quick-output.html">quick_xlsx</a></code> </p>
-          </td>
-          <td><p>Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-themes" class="hasAnchor"><a href="#section-themes" class="anchor"></a>Themes</h2>
-            <p class="section-desc"><p>Quick ways to theme a huxtable</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="themes.html">theme_plain</a></code> <code><a href="themes.html">theme_basic</a></code> <code><a href="themes.html">theme_striped</a></code> <code><a href="themes.html">theme_article</a></code> </p>
-          </td>
-          <td><p>Theme a huxtable</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-row-specs" class="hasAnchor"><a href="#section-row-specs" class="anchor"></a>Row specs</h2>
-            <p class="section-desc"><p>Ways to specify rows and columns in <code>set_</code> functions</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="every.html">every</a></code> <code><a href="every.html">everywhere</a></code> <code><a href="every.html">evens</a></code> <code><a href="every.html">odds</a></code> </p>
-          </td>
-          <td><p>Return every n row or column numbers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="final.html">final</a></code> </p>
-          </td>
-          <td><p>Return the last n rows or columns</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rowspecs.html">rowspecs</a></code> </p>
-          </td>
-          <td><p>Row and column specifications</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="where.html">where</a></code> </p>
-          </td>
-          <td><p>Return array indices where expression is true</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
-            <p class="section-desc"><p>Other functions</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hux_logo.html">hux_logo</a></code> </p>
-          </td>
-          <td><p>Huxtable logo</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="huxreg.html">huxreg</a></code> </p>
-          </td>
-          <td><p>Create a huxtable to display model output</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is_a_number.html">is_a_number</a></code> </p>
-          </td>
-          <td><p>Does an object look like a number?</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sanitize.html">sanitize</a></code> </p>
-          </td>
-          <td><p>Sanitize table elements</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-package-information" class="hasAnchor"><a href="#section-package-information" class="anchor"></a>Package information</h2>
+          <p class="section-desc"><p>Basic information about the package</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="huxtable-package.html">huxtable-package</a></code> </p>
+        </td>
+        <td><p>Huxtable: simply create LaTeX and HTML tables</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-creating-and-manipulating-huxtables" class="hasAnchor"><a href="#section-creating-and-manipulating-huxtables" class="anchor"></a>Creating and manipulating huxtables</h2>
+          <p class="section-desc"><p>Functions to create, subset and work with huxtables</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="extract-methods.html">`[`(<i>&lt;huxtable&gt;</i>)</a></code> <code><a href="extract-methods.html">`[<-`(<i>&lt;huxtable&gt;</i>)</a></code> <code><a href="extract-methods.html">`$<-`(<i>&lt;huxtable&gt;</i>)</a></code> <code><a href="extract-methods.html">`[[<-`(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Subset a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add_colnames.html">add_colnames()</a></code> <code><a href="add_colnames.html">add_rownames()</a></code> </p>
+        </td>
+        <td><p>Add column or row names</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add_footnote.html">add_footnote()</a></code> </p>
+        </td>
+        <td><p>Add a row with a footnote</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cbind.huxtable.html">cbind(<i>&lt;huxtable&gt;</i>)</a></code> <code><a href="cbind.huxtable.html">rbind(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Combine rows or columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="huxtable.html">huxtable()</a></code> <code><a href="huxtable.html">hux()</a></code> <code><a href="huxtable.html">as_huxtable()</a></code> <code><a href="huxtable.html">as_hux()</a></code> <code><a href="huxtable.html">is_huxtable()</a></code> <code><a href="huxtable.html">is_hux()</a></code> </p>
+        </td>
+        <td><p>Create a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="insert_column.html">insert_column()</a></code> <code><a href="insert_column.html">insert_row()</a></code> </p>
+        </td>
+        <td><p>Insert a row or column</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dplyr-verbs.html">mutate(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Dplyr verbs for huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="t.huxtable.html">t(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Transpose a huxtable</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-size-and-position" class="hasAnchor"><a href="#section-size-and-position" class="anchor"></a>Size and position</h2>
+          <p class="section-desc"><p>Size and position properties of huxtables</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="col_width.html">col_width()</a></code> <code><a href="col_width.html">`col_width<-`()</a></code> <code><a href="col_width.html">set_col_width()</a></code> </p>
+        </td>
+        <td><p>Column widths</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="height.html">height()</a></code> <code><a href="height.html">`height<-`()</a></code> <code><a href="height.html">set_height()</a></code> </p>
+        </td>
+        <td><p>Table height</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="position.html">position()</a></code> <code><a href="position.html">`position<-`()</a></code> <code><a href="position.html">set_position()</a></code> </p>
+        </td>
+        <td><p>Table position</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="row_height.html">row_height()</a></code> <code><a href="row_height.html">`row_height<-`()</a></code> <code><a href="row_height.html">set_row_height()</a></code> </p>
+        </td>
+        <td><p>Row heights</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="width.html">width()</a></code> <code><a href="width.html">`width<-`()</a></code> <code><a href="width.html">set_width()</a></code> </p>
+        </td>
+        <td><p>Table width</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-table-level-properties" class="hasAnchor"><a href="#section-table-level-properties" class="anchor"></a>Table-level properties</h2>
+          <p class="section-desc"><p>Other table-level properties of huxtables</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="caption.html">caption()</a></code> <code><a href="caption.html">`caption<-`()</a></code> <code><a href="caption.html">set_caption()</a></code> </p>
+        </td>
+        <td><p>Caption</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="caption_pos.html">caption_pos()</a></code> <code><a href="caption_pos.html">`caption_pos<-`()</a></code> <code><a href="caption_pos.html">set_caption_pos()</a></code> </p>
+        </td>
+        <td><p>Caption position</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="label.html">label()</a></code> <code><a href="label.html">`label<-`()</a></code> <code><a href="label.html">set_label()</a></code> </p>
+        </td>
+        <td><p>Table label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="latex_float.html">latex_float()</a></code> <code><a href="latex_float.html">`latex_float<-`()</a></code> <code><a href="latex_float.html">set_latex_float()</a></code> </p>
+        </td>
+        <td><p>Float position for LaTeX</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tabular_environment.html">tabular_environment()</a></code> <code><a href="tabular_environment.html">`tabular_environment<-`()</a></code> <code><a href="tabular_environment.html">set_tabular_environment()</a></code> </p>
+        </td>
+        <td><p>Tabular environment</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-text-properties" class="hasAnchor"><a href="#section-text-properties" class="anchor"></a>Text properties</h2>
+          <p class="section-desc"><p>Functions to change the properties of text in table cells</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="bold.html">bold()</a></code> <code><a href="bold.html">`bold<-`()</a></code> <code><a href="bold.html">set_bold()</a></code> <code><a href="bold.html">italic()</a></code> <code><a href="bold.html">`italic<-`()</a></code> <code><a href="bold.html">set_italic()</a></code> </p>
+        </td>
+        <td><p>Cell text style</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="font.html">font()</a></code> <code><a href="font.html">`font<-`()</a></code> <code><a href="font.html">set_font()</a></code> </p>
+        </td>
+        <td><p>Font</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="font_size.html">font_size()</a></code> <code><a href="font_size.html">`font_size<-`()</a></code> <code><a href="font_size.html">set_font_size()</a></code> </p>
+        </td>
+        <td><p>Font size</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="number_format.html">number_format()</a></code> <code><a href="number_format.html">`number_format<-`()</a></code> <code><a href="number_format.html">set_number_format()</a></code> </p>
+        </td>
+        <td><p>Number format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="na_string.html">na_string()</a></code> <code><a href="na_string.html">`na_string<-`()</a></code> <code><a href="na_string.html">set_na_string()</a></code> </p>
+        </td>
+        <td><p>NA string</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="align.html">align()</a></code> <code><a href="align.html">`align<-`()</a></code> <code><a href="align.html">set_align()</a></code> </p>
+        </td>
+        <td><p>Alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="text_color.html">text_color()</a></code> <code><a href="text_color.html">`text_color<-`()</a></code> <code><a href="text_color.html">set_text_color()</a></code> </p>
+        </td>
+        <td><p>Text color</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-borders-and-padding" class="hasAnchor"><a href="#section-borders-and-padding" class="anchor"></a>Borders and padding</h2>
+          <p class="section-desc"><p>Functions to alter borders, border colors and cell padding</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="left_border.html">left_border()</a></code> <code><a href="left_border.html">`left_border<-`()</a></code> <code><a href="left_border.html">set_left_border()</a></code> <code><a href="left_border.html">right_border()</a></code> <code><a href="left_border.html">`right_border<-`()</a></code> <code><a href="left_border.html">set_right_border()</a></code> <code><a href="left_border.html">top_border()</a></code> <code><a href="left_border.html">`top_border<-`()</a></code> <code><a href="left_border.html">set_top_border()</a></code> <code><a href="left_border.html">bottom_border()</a></code> <code><a href="left_border.html">`bottom_border<-`()</a></code> <code><a href="left_border.html">set_bottom_border()</a></code> </p>
+        </td>
+        <td><p>Borders</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="left_border_color.html">left_border_color()</a></code> <code><a href="left_border_color.html">`left_border_color<-`()</a></code> <code><a href="left_border_color.html">set_left_border_color()</a></code> <code><a href="left_border_color.html">right_border_color()</a></code> <code><a href="left_border_color.html">`right_border_color<-`()</a></code> <code><a href="left_border_color.html">set_right_border_color()</a></code> <code><a href="left_border_color.html">top_border_color()</a></code> <code><a href="left_border_color.html">`top_border_color<-`()</a></code> <code><a href="left_border_color.html">set_top_border_color()</a></code> <code><a href="left_border_color.html">bottom_border_color()</a></code> <code><a href="left_border_color.html">`bottom_border_color<-`()</a></code> <code><a href="left_border_color.html">set_bottom_border_color()</a></code> </p>
+        </td>
+        <td><p>Border colors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="left_padding.html">left_padding()</a></code> <code><a href="left_padding.html">`left_padding<-`()</a></code> <code><a href="left_padding.html">set_left_padding()</a></code> <code><a href="left_padding.html">right_padding()</a></code> <code><a href="left_padding.html">`right_padding<-`()</a></code> <code><a href="left_padding.html">set_right_padding()</a></code> <code><a href="left_padding.html">bottom_padding()</a></code> <code><a href="left_padding.html">`bottom_padding<-`()</a></code> <code><a href="left_padding.html">set_bottom_padding()</a></code> <code><a href="left_padding.html">top_padding()</a></code> <code><a href="left_padding.html">`top_padding<-`()</a></code> <code><a href="left_padding.html">set_top_padding()</a></code> <code><a href="left_padding.html">set_all_padding()</a></code> </p>
+        </td>
+        <td><p>Cell padding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_all_borders.html">set_all_borders()</a></code> </p>
+        </td>
+        <td><p>Set all borders</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_all_border_colors.html">set_all_border_colors()</a></code> </p>
+        </td>
+        <td><p>Set all border colors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_outer_borders.html">set_outer_borders()</a></code> </p>
+        </td>
+        <td><p>Set outer borders round a rectangle of cells</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-cell-properties" class="hasAnchor"><a href="#section-cell-properties" class="anchor"></a>Cell properties</h2>
+          <p class="section-desc"><p>Other cell-level properties</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="align.html">align()</a></code> <code><a href="align.html">`align<-`()</a></code> <code><a href="align.html">set_align()</a></code> </p>
+        </td>
+        <td><p>Alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="background_color.html">background_color()</a></code> <code><a href="background_color.html">`background_color<-`()</a></code> <code><a href="background_color.html">set_background_color()</a></code> </p>
+        </td>
+        <td><p>Background color</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="colspan.html">colspan()</a></code> <code><a href="colspan.html">`colspan<-`()</a></code> <code><a href="colspan.html">set_colspan()</a></code> </p>
+        </td>
+        <td><p>Column span</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="escape_contents.html">escape_contents()</a></code> <code><a href="escape_contents.html">`escape_contents<-`()</a></code> <code><a href="escape_contents.html">set_escape_contents()</a></code> </p>
+        </td>
+        <td><p>Escape cell contents</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rotation.html">rotation()</a></code> <code><a href="rotation.html">`rotation<-`()</a></code> <code><a href="rotation.html">set_rotation()</a></code> </p>
+        </td>
+        <td><p>Text rotation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rowspan.html">rowspan()</a></code> <code><a href="rowspan.html">`rowspan<-`()</a></code> <code><a href="rowspan.html">set_rowspan()</a></code> </p>
+        </td>
+        <td><p>Row span</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="valign.html">valign()</a></code> <code><a href="valign.html">`valign<-`()</a></code> <code><a href="valign.html">set_valign()</a></code> </p>
+        </td>
+        <td><p>Vertical alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wrap.html">wrap()</a></code> <code><a href="wrap.html">`wrap<-`()</a></code> <code><a href="wrap.html">set_wrap()</a></code> </p>
+        </td>
+        <td><p>Text wrapping</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-property-manipulation" class="hasAnchor"><a href="#section-property-manipulation" class="anchor"></a>Property manipulation</h2>
+          <p class="section-desc"><p>Generic ways to manipulate huxtable properties</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="get_default_properties.html">get_default_properties()</a></code> </p>
+        </td>
+        <td><p>Get default huxtable properties</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_cell_properties.html">set_cell_properties()</a></code> </p>
+        </td>
+        <td><p>Set multiple cell properties</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_default_properties.html">set_default_properties()</a></code> </p>
+        </td>
+        <td><p>Set default huxtable properties</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-output" class="hasAnchor"><a href="#section-output" class="anchor"></a>Output</h2>
+          <p class="section-desc"><p>Functions to outut huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="as_flextable.html">as_FlexTable()</a></code> <code><a href="as_flextable.html">as_flextable()</a></code> </p>
+        </td>
+        <td><p>Convert a huxtable for Word/Powerpoint</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as_Workbook.html">as_Workbook()</a></code> </p>
+        </td>
+        <td><p>Convert a huxtable for Excel</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="guess_knitr_output_format.html">guess_knitr_output_format()</a></code> </p>
+        </td>
+        <td><p>Guess knitr output format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_html.html">print_html()</a></code> <code><a href="to_html.html">to_html()</a></code> <code><a href="to_html.html">print_notebook()</a></code> </p>
+        </td>
+        <td><p>Create HTML representing a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_latex.html">print_latex()</a></code> <code><a href="to_latex.html">to_latex()</a></code> </p>
+        </td>
+        <td><p>Create LaTeX representing a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_md.html">print_md()</a></code> <code><a href="to_md.html">to_md()</a></code> </p>
+        </td>
+        <td><p>Create Markdown representing a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_screen.html">print_screen()</a></code> <code><a href="to_screen.html">to_screen()</a></code> </p>
+        </td>
+        <td><p>Print a huxtable on screen</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.huxtable.html">print(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Default print method for huxtables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report_latex_dependencies.html">report_latex_dependencies()</a></code> </p>
+        </td>
+        <td><p>Report LaTeX dependencies</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="quick-output.html">quick_pdf()</a></code> <code><a href="quick-output.html">quick_html()</a></code> <code><a href="quick-output.html">quick_docx()</a></code> <code><a href="quick-output.html">quick_xlsx()</a></code> </p>
+        </td>
+        <td><p>Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-themes" class="hasAnchor"><a href="#section-themes" class="anchor"></a>Themes</h2>
+          <p class="section-desc"><p>Quick ways to theme a huxtable</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="themes.html">theme_plain()</a></code> <code><a href="themes.html">theme_basic()</a></code> <code><a href="themes.html">theme_striped()</a></code> <code><a href="themes.html">theme_article()</a></code> </p>
+        </td>
+        <td><p>Theme a huxtable</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-row-specs" class="hasAnchor"><a href="#section-row-specs" class="anchor"></a>Row specs</h2>
+          <p class="section-desc"><p>Ways to specify rows and columns in <code>set_</code> functions</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="every.html">every()</a></code> <code><a href="every.html">everywhere()</a></code> <code><a href="every.html">evens()</a></code> <code><a href="every.html">odds()</a></code> </p>
+        </td>
+        <td><p>Return every n row or column numbers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="final.html">final()</a></code> </p>
+        </td>
+        <td><p>Return the last n rows or columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rowspecs.html">rowspecs</a></code> </p>
+        </td>
+        <td><p>Row and column specifications</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="where.html">where()</a></code> </p>
+        </td>
+        <td><p>Return array indices where expression is true</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
+          <p class="section-desc"><p>Other functions</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="hux_logo.html">hux_logo()</a></code> </p>
+        </td>
+        <td><p>Huxtable logo</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="huxreg.html">huxreg()</a></code> </p>
+        </td>
+        <td><p>Create a huxtable to display model output</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_a_number.html">is_a_number()</a></code> </p>
+        </td>
+        <td><p>Does an object look like a number?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sanitize.html">sanitize()</a></code> </p>
+        </td>
+        <td><p>Sanitize table elements</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -609,11 +619,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
