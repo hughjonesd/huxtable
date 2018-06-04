@@ -126,7 +126,7 @@ cell_html <- function (ht, rn, cn, contents) {
 
   bcols <- get_all_border_colors(ht, rn, cn)
   bcols <- bcols[c('top', 'right', 'bottom', 'left')]
-  bcols <- na.omit(bcols)
+  bcols <- bcols[ ! is.na(bcols) ]
   bcols <- if (length(bcols)) paste0('border-', names(bcols), '-color: ', bcols, '; ', collapse = ' ') else ''
   res <- paste0(res, bcols)
 
