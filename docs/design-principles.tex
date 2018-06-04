@@ -81,7 +81,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-06-04}
+  \date{2018-06-02}
 
 \usepackage{array}
 \usepackage{caption}
@@ -104,8 +104,7 @@ or
 \href{http://hughjonesd.github.io/huxtable/design-principles.pdf}{PDF}
 formats.
 
-\hypertarget{design-principles}{%
-\subsection{Design principles}\label{design-principles}}
+\subsection{Design principles}\label{design-principles}
 
 I wrote this package because I wanted a simple way to create tables in
 my LaTeX documents. At the same time, I wanted to be able to output HTML
@@ -141,9 +140,8 @@ The package makes no attempt to output beautiful HTML or LaTeX source
 code. In fact, in the case of LaTeX, it's pretty ugly. The approach is
 ``do what it takes to get the job done''.
 
-\hypertarget{comparing-huxtable-with-other-packages}{%
 \subsection{Comparing Huxtable With Other
-Packages}\label{comparing-huxtable-with-other-packages}}
+Packages}\label{comparing-huxtable-with-other-packages}
 
 R has many different packages to create LaTeX and HTML tables. The
 table(s) below list those I know and the features they have. The table
@@ -508,8 +506,7 @@ is produced with huxtable, of course ;-)
 \end{tabularx}
 
 }\par\end{raggedright}
-\end{table}
-\begin{table}[h]
+\end{table}\begin{table}[h]
 \begin{raggedright}\captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 2}
 \resizebox*{!}{0.95\textheight}{
@@ -523,7 +520,7 @@ is produced with huxtable, of course ;-)
 \multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont tables}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}} & 
 \multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont DT}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}} & 
 \multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont pander}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}} & 
-\multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont flextable}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}} & 
+\multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont officer}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}} & 
 \multicolumn{1}{m{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\parbox[c]{36pt-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedright \rotatebox{270}{\textbf{{\fontsize{10pt}{12pt}\selectfont pixiedust}}}\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}\rule{0pt}{20pt}}\tabularnewline[-0.5pt]
 
 
@@ -538,7 +535,7 @@ is produced with huxtable, of course ;-)
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
-\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
+\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}}\tabularnewline[-0.5pt]
 \multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0pt}p{120pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{120pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\raggedright {\fontsize{10pt}{12pt}\selectfont Background color}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
@@ -821,7 +818,7 @@ is produced with huxtable, of course ;-)
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
-\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
+\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}}\tabularnewline[-0.5pt]
 \multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0pt}p{120pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{120pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\raggedright {\fontsize{10pt}{12pt}\selectfont Autocreate summary statistics}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
@@ -854,7 +851,7 @@ is produced with huxtable, of course ;-)
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
-\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
+\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}}\tabularnewline[-0.5pt]
 \multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0pt}p{120pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{120pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\raggedright {\fontsize{10pt}{12pt}\selectfont dplyr compatible}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
@@ -876,7 +873,7 @@ is produced with huxtable, of course ;-)
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
-\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont Y}\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
+\multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}} & 
 \multicolumn{1}{p{36pt}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{0pt}\parbox[b]{36pt-0pt-0pt}{\rule{0pt}{\baselineskip+0pt}\centering {\fontsize{10pt}{12pt}\selectfont }\rule[-0pt]{0pt}{0pt}}\hspace*{0pt}\rule{0pt}{10pt}}\tabularnewline[-0.5pt]
 
 
@@ -1020,8 +1017,7 @@ are:
   present.
 \end{itemize}
 
-\hypertarget{limitations}{%
-\subsection{Limitations}\label{limitations}}
+\subsection{Limitations}\label{limitations}
 
 Some people love LaTeX. Other people think they have to use it to be
 ``scientific''. (Sadly, this is all too common in my field.) Personally,
