@@ -42,13 +42,20 @@ translating calls into the new version. (OK, the conversion hassle still exists.
   bottom line is border?
   - not sure we can change colours halfway through though
   
-* table of descriptive statistics?
+* table of descriptive statistics? Maybe a separate package.
+
+* facilities for re-writing a table in an existing document. 
+  - you'd need a way to identify the table (perhaps an automatic `id` table-level property, automatically set to a random
+  number)
+  - you might also want to overwrite the contents without affecting the style. (Or certain aspects of the style? E.g. bold for
+  significance stars, may be data dependent.)
+  - this may be a separate package.
 
 * `huxreg`-style function in `texreg` package
 
 * rewrite LaTeX for speed, vectorizing and putting bits in appropriately
 
-* A FAQ, including:
+* a FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width
   - my numbers have been formatted
