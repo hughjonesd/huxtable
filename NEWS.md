@@ -4,6 +4,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.0.9000
 
+* Documentation bugfixes
+* Bugfix: `to_html`
 
 # huxtable 4.0.0
 

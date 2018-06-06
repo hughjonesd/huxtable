@@ -478,8 +478,10 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
   call <- sys.call()
-  for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border')) {
-    call[[1]] <- as.symbol(set_b)
+  border_calls <- list(quote(huxtable::set_top_border), quote(huxtable::set_bottom_border),
+        quote(huxtable::set_left_border), quote(huxtable::set_right_border))
+  for (bc in border_calls) {
+    call[[1]] <- bc
     call[[2]] <- quote(ht)
     ht <- eval(call, list(ht = ht), parent.frame())
   }
@@ -620,8 +622,10 @@ make_getter_setters('bottom_border_color', 'cell')
 #' ht <- set_all_border_colors(ht, 'red')
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
   call <- sys.call()
-  for (set_b in paste0('set_', c('top', 'bottom', 'left', 'right'), '_border_color')) {
-    call[[1]] <- as.symbol(set_b)
+  border_color_calls <- list(quote(huxtable::set_top_border_color), quote(huxtable::set_bottom_border_color),
+    quote(huxtable::set_left_border_color), quote(huxtable::set_right_border_color))
+  for (bcc in border_color_calls) {
+    call[[1]] <- bcc
     call[[2]] <- quote(ht)
     ht <- eval(call, list(ht = ht), parent.frame())
   }
@@ -711,8 +715,10 @@ NULL
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
   call <- sys.call()
-  for (set_p in paste0('set_', c('top', 'bottom', 'left', 'right'), '_padding')) {
-    call[[1]] <- as.symbol(set_p)
+  padding_calls <- list(quote(huxtable::set_top_padding), quote(huxtable::set_bottom_padding),
+    quote(huxtable::set_left_padding), quote(huxtable::set_right_padding))
+  for (pc in padding_calls) {
+    call[[1]] <- pc
     call[[2]] <- quote(ht)
     ht <- eval(call, list(ht = ht), parent.frame())
   }

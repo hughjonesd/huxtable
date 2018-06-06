@@ -113,6 +113,7 @@ test_that('set_* works when col is missing', {
   expect_error(set_font(ht, where(ht > 0), 'times', byrow = TRUE)) # hard to interpret
 })
 
+
 test_that('set_* works when row and col are missing', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht, 'times')
@@ -129,6 +130,7 @@ test_that('set_* works when row and col are missing', {
   expect_equivalent(row_height(ht7), c(.6, .4))
 })
 
+
 test_that('set_* works with row and col "empty"', {
   ht_orig <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht_orig, 1, everywhere, 'times')
@@ -138,6 +140,7 @@ test_that('set_* works with row and col "empty"', {
   ht4 <- set_font(ht_orig, 'times')
   expect_equivalent(font(ht4), matrix('times', 2, 2))
 })
+
 
 test_that('all forms of set_all_* work as expected', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
@@ -158,6 +161,23 @@ test_that('all forms of set_all_* work as expected', {
   expect_equivalent(top_border(ht7), matrix(1, 2, 2))
 })
 
+
+test_that('set_all_* functions work when huxtable is not attached', {
+  # NB as written this test can only be run from the command line; detach call silently fails
+  library(huxtable)
+  detach(package:huxtable)
+  ht <- huxtable::hux(a = c(1, 0), b = c(0, 1))
+  expect_silent(ht2 <- huxtable::set_all_borders(ht, 1))
+  expect_silent(ht3 <- huxtable::set_all_border_colors(ht, 'red'))
+  expect_silent(ht4 <- huxtable::set_all_padding(ht, 1))
+  library(huxtable) # we reattach before these tests, or we have problems with unavailable methods
+  expect_equivalent(top_border(ht2), matrix(1, 2, 2))
+  expect_equivalent(top_border_color(ht3), matrix('red', 2, 2))
+  expect_equivalent(top_padding(ht4), matrix(1, 2, 2))
+
+})
+
+
 test_that('set_outer_borders() works as expected', {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
@@ -176,6 +196,7 @@ test_that('set_outer_borders() works as expected', {
   ht5 <- set_outer_borders(ht, 2:3, dplyr::matches('b|c'), 1) # testthat has a `matches` function
   check_borders(ht5)
 })
+
 
 test_that('set_outer_borders() works with non-standard/empty position arguments', {
   ht <- hux(a = 1:2, b = 1:2)
@@ -197,6 +218,7 @@ test_that('set_outer_borders() works with non-standard/empty position arguments'
     expect_equivalent(right_border(h), matrix(c(0, 0, 0, 1), 2, 2))
   }
 })
+
 
 test_that('where() works as expected', {
   dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
