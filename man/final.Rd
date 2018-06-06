@@ -18,7 +18,7 @@ Technically, \code{final} returns a two-argument function - see \link{rowspecs} 
 }
 \examples{
 ht <- hux(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
-ht <- set_align(ht, final(2), final(1), 'right')
+ht <- set_align(ht, final(2), final(1), 'left')
 align(ht)
 
 final(3)(ht, 1) # last 3 rows
