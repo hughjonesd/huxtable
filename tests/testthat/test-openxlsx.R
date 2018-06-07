@@ -66,6 +66,7 @@ test_that('Can add to an existing workbook', {
   expect_silent(as_Workbook(hx, Workbook = wb, sheet = 'Another sheet'))
 })
 
+
 test_that('Works for single-column huxtables with and without row names', {
   hx <- huxtable(1, 2, 3)
   wb <- openxlsx::createWorkbook()
@@ -73,4 +74,22 @@ test_that('Works for single-column huxtables with and without row names', {
   hx <- huxtable(a = 1, b = 2, c = 3)
   wb <- openxlsx::createWorkbook()
   expect_silent(wb <- as_Workbook(hx, Workbook = wb))
+})
+
+
+test_that('Data written in appropriate format', {
+  hx <- huxtable(a = 1:2 + 0.5, b = -1:-2 + 0.5, d = letters[1:2], add_colnames = TRUE)
+  wb <- as_Workbook(hx)
+  expect_silent(openxlsx::saveWorkbook(wb, file = 'test-xlsx.xlsx', overwrite = TRUE))
+  dfr <- openxlsx::read.xlsx('test-xlsx.xlsx')
+  expect_equivalent(class(dfr[[1]]), 'numeric')
+  expect_equivalent(class(dfr[[2]]), 'numeric')
+  expect_equivalent(class(dfr[[3]]), 'character')
+  expect_equal(dfr[[1]], 1:2 + 0.5)
+  expect_equal(dfr[[2]], -1:-2 + 0.5)
+  expect_equal(dfr[[3]], letters[1:2])
+})
+
+teardown({
+  if (file.exists('test-xlsx.xlsx')) file.remove('test-xlsx.xlsx')
 })

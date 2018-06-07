@@ -50,11 +50,6 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   openxlsx::addWorksheet(wb, sheet)
 
-  contents <- clean_contents(ht, type = 'excel')
-  contents <- as.data.frame(contents)
-  numbers <- is_a_number(ht) # a matrix
-  num_cols <- which(apply(numbers, 2, all))
-  for (co in num_cols) contents[[co]] <- as.numeric(contents[[co]])
 
   cap <- caption(ht)
   cap_pos <- caption_pos(ht)
@@ -67,14 +62,22 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
       gridExpand = TRUE)
     openxlsx::mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
   }
-  openxlsx::writeData(wb, sheet, contents, colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none',
-        startRow = if (top_cap) 2 else 1)
 
+  contents <- clean_contents(ht, type = 'excel') # character matrix
   dcells <- display_cells(ht, all = FALSE)
   for (r in seq_len(nrow(dcells))) {
     dcell <- dcells[r, ]
     drow <- dcell$display_row
     dcol <- dcell$display_col
+
+    workbook_rows <- seq(drow, dcell$end_row)
+    workbook_cols <- seq(dcol, dcell$end_col)
+    cell_contents <- contents[drow, dcol]
+    if (is_a_number(cell_contents)) cell_contents <- as.numeric(cell_contents)
+    if (top_cap) workbook_rows <- workbook_rows + 1
+
+    openxlsx::writeData(wb, sheet, cell_contents, startRow = min(workbook_rows), startCol = dcol,
+          colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
 
     null_args <- list()
     null_args$tc <- text_color(ht)[drow, dcol]
@@ -85,8 +88,8 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     null_args <- lapply(null_args, function (x) if (is.na(x)) NULL else x)
     nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
     format_zero <- format_numbers(0, nf)
-    num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else if (is_a_number(ht[[drow, dcol]])) 'NUMBER' else
-          'GENERAL'
+    num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else
+          if (is.numeric(cell_contents)) 'NUMBER' else 'GENERAL'
     borders <- get_all_borders(ht, drow, dcol) # list of numerics
     border_char <- names(borders)
     border_colors <- get_all_border_colors(ht, drow, dcol)
@@ -110,9 +113,6 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
             wrapText       = wrap(ht)[drow, dcol],
             textRotation   = rotation(ht)[drow, dcol]
           )
-    workbook_rows <- seq(drow, dcell$end_row)
-    workbook_cols <- seq(dcol, dcell$end_col)
-    if (top_cap) workbook_rows <- workbook_rows + 1
     openxlsx::addStyle(wb, sheet, style = style, rows = workbook_rows, cols = workbook_cols,
           gridExpand = TRUE)
     if (dcell$rowspan > 1 || dcell$colspan > 1) openxlsx::mergeCells(wb, sheet, cols = workbook_cols,
