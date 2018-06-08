@@ -49,6 +49,16 @@ test_that('Widths and alignment work', {
 })
 
 
+test_that('Non-numeric colwidths and widths do not fail', {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  col_width(hx) <- c(.7, .3)
+  width(hx) <- '200px'
+  expect_silent(as_Workbook(hx))
+  col_width(hx) <- c('50px', '150px')
+  expect_silent(as_Workbook(hx))
+})
+
+
 test_that('Captions work', {
   hx <- huxtable(a = 1:3, b = 4:6)
   caption(hx) <- 'Caption here'
