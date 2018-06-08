@@ -7,6 +7,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Improved formatting in Excel output.
 * Bugfix: `to_html` printing e.g. "left-border: NA;" in cell CSS.
 * Bugfix: `set_all_*` not working when huxtable is not attached.
+* Bugfix: `as_Workbook` failing with non-numeric `width`.
+* Bugfix: `hux_logo` was using multiple fonts, fails with Excel output.
 * Documentation bugfixes.
 
 # huxtable 4.0.0

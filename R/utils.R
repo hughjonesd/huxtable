@@ -529,7 +529,7 @@ hux_logo <- function(latex = FALSE) {
   text_color(logo)[1, 3] <- 'white'
   width(logo) <- if (latex) '0.21\\textwidth' else '60pt'
   height(logo) <- if (latex) '45pt' else '60pt'
-  font(logo) <- 'Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif'
+  font(logo) <- 'Palatino'
   if (latex) font(logo) <- 'ppl'
   top_padding(logo) <- 2
   bottom_padding(logo) <- 2
