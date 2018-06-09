@@ -2,6 +2,8 @@
 TODO
 ====
 
+* Add format methods with output = 'latex', 'screen' etc. as an alternative to `to_latex` and friends?
+
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
   
 * Better centring of tables and handling of width. Maybe push \resizebox
