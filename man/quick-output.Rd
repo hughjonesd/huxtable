@@ -6,7 +6,7 @@
 \alias{quick_html}
 \alias{quick_docx}
 \alias{quick_xlsx}
-\title{Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.}
+\title{Quickly print objects to a PDF, HTML, Word or Excel document.}
 \usage{
 quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
   open = interactive())
@@ -33,14 +33,15 @@ quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
 Invisible \code{NULL}.
 }
 \description{
-Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.
+These functions use huxtable to print objects to an output document. They are useful
+as one-liners for data reporting.
 }
 \details{
 Objects in \code{...} will be converted to huxtables, with borders added.
 
-If \sQuote{file} is not specified, the default file path is "huxtable-output.xxx" in
-the working directory. If the session is interactive, you'll be asked to confirm any
-overwrite; if the session is not interactive, the command will fail.
+If \sQuote{file} is not specified, the command will fail in non-interactive sessions. In
+interactive sessions, the default file path is "huxtable-output.xxx" in the working directory;
+if this already exists, you will be asked to confirm manually before proceeding.
 }
 \examples{
 \dontrun{

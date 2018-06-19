@@ -5,7 +5,10 @@
 NULL
 
 
-#' Quickly create a PDF, HTML, Word or Excel document showing matrices, data frames, et cetera.
+#' Quickly print objects to a PDF, HTML, Word or Excel document.
+#'
+#' These functions use huxtable to print objects to an output document. They are useful
+#' as one-liners for data reporting.
 #'
 #' @param ... One or more huxtables or R objects with an `as_huxtable` method.
 #' @param file File path for the output.
@@ -16,9 +19,9 @@ NULL
 #'
 #' @details Objects in `...` will be converted to huxtables, with borders added.
 #'
-#' If \sQuote{file} is not specified, the default file path is "huxtable-output.xxx" in
-#' the working directory. If the session is interactive, you'll be asked to confirm any
-#' overwrite; if the session is not interactive, the command will fail.
+#' If \sQuote{file} is not specified, the command will fail in non-interactive sessions. In
+#' interactive sessions, the default file path is "huxtable-output.xxx" in the working directory;
+#' if this already exists, you will be asked to confirm manually before proceeding.
 #'
 #' @examples
 #' \dontrun{
@@ -38,8 +41,10 @@ NULL
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
   open = interactive()) {
   assert_that(is.number(borders))
+  assert_that(is.flag(open))
   force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
+
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
   # You can't use normalizePath with a non-existent file, so the below doesn't work:
   # latex_file <- normalizePath(tempfile(fileext = ".tex"), mustWork = TRUE)
@@ -83,8 +88,10 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
 quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4,
   open = interactive()) {
   assert_that(is.number(borders))
+  assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+
   sink(file)
   cat('<!DOCTYPE html><html><body>')
   tryCatch({
@@ -109,8 +116,10 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
 quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4,
   open = interactive()) {
   assert_that(is.number(borders))
+  assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+
   my_doc <- officer::read_docx()
   for (ht in hts) {
     ft <- as_flextable(ht)
@@ -129,8 +138,10 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
 quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
   open = interactive()) {
   assert_that(is.number(borders))
+  assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+
   wb <- openxlsx::createWorkbook()
   ix <- 0
   for (ht in hts) {
