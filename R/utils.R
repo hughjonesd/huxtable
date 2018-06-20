@@ -352,6 +352,7 @@ smart_hux_from_df <- function(dfr) {
 #' @param x A huxtable.
 #' @param ... Options passed to other methods.
 #'
+#' @return `print` prints the huxtable and returns `NULL` invisibly.
 #' @export
 #'
 #' @examples
@@ -366,6 +367,24 @@ print.huxtable <- function(x, ...) {
   if (is.character(meth)) meth <- eval(as.symbol(meth))
 
   meth(x, ...)
+}
+
+
+#' @rdname print.huxtable
+#' @param output One of `"html"`, `"latex"`, `"md"` or `"screen"`
+#'
+#' @return `format` returns a string representation from [to_latex()], [to_html()] etc.
+#' @export
+#'
+#' @examples
+#' ht <- hux(a = 1:3, b = 4:6)
+#' format(ht, output = 'screen')
+#' format(ht, output = 'md')
+format.huxtable <- function(x, ..., output) {
+  assert_that(is.string(output))
+  assert_that(output %in% c('latex', 'html', 'md', 'screen'))
+  fn <- paste0('to_', output)
+  do.call(fn, list(ht = x, ...))
 }
 
 

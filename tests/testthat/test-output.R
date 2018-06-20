@@ -103,6 +103,15 @@ test_that('to_screen does not cut off multicols', {
 })
 
 
+test_that('format.huxtable works', {
+  ht <- hux(a = 1:3, b = 1:3)
+  for (output in c('latex', 'html', 'md', 'screen')) {
+    direct_call <- paste0('to_', output)
+    expect_identical(do.call(direct_call, list(ht)), format(ht, output = output))
+  }
+})
+
+
 test_that('guess_knitr_output_format() gets it right', {
   skip_without_pandoc()
   out <- character(0)
@@ -162,6 +171,7 @@ test_that('various outputs unchanged', {
   }
 })
 
+
 test_that('set_print_method() works', {
   ht <- hux(a = 1:2, b = 1:2)
   oo <- options(huxtable.print = print_html)
@@ -173,38 +183,3 @@ test_that('set_print_method() works', {
   options(oo)
 })
 
-
-test_that('Quick output functions work', {
-  ht <- hux(a = 1:2, b = 1:2)
-  m <- matrix(1:4, 2, 2)
-  dfr <- data.frame(a = 1:5, b = 1:5)
-
-  tf <- tempfile(fileext = '.htm')
-  expect_silent(quick_html(m, dfr, ht, file = tf))
-  expect_true(file.exists(tf))
-
-  tf <- tempfile(fileext = '.docx')
-  expect_silent(quick_docx(m, dfr, ht, file = tf))
-  expect_true(file.exists(tf))
-
-  tf <- tempfile(fileext = '.xlsx')
-  expect_silent(quick_xlsx(m, dfr, ht, file = tf))
-  expect_true(file.exists(tf))
-})
-
-test_that('quick_pdf works', {
-  skip_on_appveyor()
-  ht <- hux(a = 1:2, b = 1:2)
-  m <- matrix(1:4, 2, 2)
-  dfr <- data.frame(a = 1:5, b = 1:5)
-  tf <- tempfile(fileext = '.pdf')
-  expect_silent(quick_pdf(m, dfr, ht, file = tf))
-  expect_true(file.exists(tf))
-})
-
-
-test_that('Quick output functions stop if called non-interactively with no `file` argument', {
-  ht <- hux(a = 1:2, b = 1:2)
-  expect_error(quick_html(ht))
-  expect_false(file.exists('huxtable-output.html'))
-})

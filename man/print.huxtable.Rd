@@ -2,14 +2,24 @@
 % Please edit documentation in R/utils.R
 \name{print.huxtable}
 \alias{print.huxtable}
+\alias{format.huxtable}
 \title{Default print method for huxtables}
 \usage{
 \method{print}{huxtable}(x, ...)
+
+\method{format}{huxtable}(x, ..., output)
 }
 \arguments{
 \item{x}{A huxtable.}
 
 \item{...}{Options passed to other methods.}
+
+\item{output}{One of \code{"html"}, \code{"latex"}, \code{"md"} or \code{"screen"}}
+}
+\value{
+Prints the huxtable and returns \code{NULL} invisibly.
+
+A string representation from \code{\link[=to_latex]{to_latex()}}, \code{\link[=to_html]{to_html()}} etc.
 }
 \description{
 By default huxtables are printed using \code{\link[=print_screen]{print_screen()}}. In certain cases, for example
@@ -23,4 +33,7 @@ options(huxtable.print = print_latex)
 # to print huxtables like data frames:
 options(huxtable.print = function(x, ...) print(as.data.frame(x)))
 }
+ht <- hux(a = 1:3, b = 4:6)
+format(ht, output = 'screen')
+format(ht, output = 'md')
 }
