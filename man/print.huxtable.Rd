@@ -17,9 +17,9 @@
 \item{output}{One of \code{"html"}, \code{"latex"}, \code{"md"} or \code{"screen"}}
 }
 \value{
-Prints the huxtable and returns \code{NULL} invisibly.
+\code{print} prints the huxtable and returns \code{NULL} invisibly.
 
-A string representation from \code{\link[=to_latex]{to_latex()}}, \code{\link[=to_html]{to_html()}} etc.
+\code{format} returns a string representation from \code{\link[=to_latex]{to_latex()}}, \code{\link[=to_html]{to_html()}} etc.
 }
 \description{
 By default huxtables are printed using \code{\link[=print_screen]{print_screen()}}. In certain cases, for example
