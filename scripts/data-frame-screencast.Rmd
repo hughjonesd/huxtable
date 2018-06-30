@@ -1,0 +1,32 @@
+---
+title: "Pretty printing data frames with huxtable"
+author: "David Hugh-Jones"
+date: "22/06/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+```
+
+## A data frame with huxtable
+
+```{r}
+head(mtcars)
+```
+
+## Adding more options
+
+```{r}
+library(magrittr)
+mtcars %>% 
+  head() %>% 
+  as_hux(add_colnames = TRUE) %>% 
+  theme_plain() %>% 
+  set_italic(everywhere, evens, TRUE) %>% 
+  set_caption("Some Motor Car Data")
+
+```
+
+For more information see [the website](hughjonesd.github.io/huxtable).
