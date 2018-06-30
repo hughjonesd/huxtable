@@ -10,6 +10,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: `set_all_*` not working when huxtable is not attached.
 * Bugfix: `as_Workbook` failing with non-numeric `width`.
 * Bugfix: `hux_logo` was using multiple fonts, fails with Excel output.
+* Bugfix: `as_flextable` borders not working in cells with colspan > 1.
 * Documentation bugfixes.
 * Compatibility with broom 5.0.0 - thanks @alexpghayes
 

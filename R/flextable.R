@@ -93,7 +93,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     bcols <- get_all_border_colors(x, drow, dcol)
     bdrs  <- get_all_borders(x, drow, dcol)
     bcols[is.na(bcols)] <- 'black'
-    ft <- flextable::border(ft, i = drow, j = dcol,
+    ft <- flextable::border(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
             border.bottom = officer::fp_border(color = bcols$bottom, width = bdrs$bottom),
             border.left   = officer::fp_border(color = bcols$left,   width = bdrs$left),
             border.right  = officer::fp_border(color = bcols$right,  width = bdrs$right),
