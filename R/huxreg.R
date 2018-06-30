@@ -189,7 +189,7 @@ huxreg <- function (
   # create list of summary statistics
   all_sumstats <- lapply(models, function(m) {
     bg <- try(broom::glance(m), silent = TRUE)
-    bg <- if (class(bg) == 'try-error') {
+    bg <- if (inherits(bg, 'try-error')) {
       warning('No `glance` method for model of class ', class(m)[1])
       NULL
     } else t(bg)
