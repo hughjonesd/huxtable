@@ -5,12 +5,13 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 # huxtable 4.0.0.9000
 
 * Improved formatting in Excel output.
-* New `format` method, calls `to_xxx` functions.
+* New `format` method which returns the result of `to_html`, `to_latex` etc. as appropriate.
 * Bugfix: `to_html` printing e.g. "left-border: NA;" in cell CSS.
 * Bugfix: `set_all_*` not working when huxtable is not attached.
 * Bugfix: `as_Workbook` failing with non-numeric `width`.
 * Bugfix: `hux_logo` was using multiple fonts, fails with Excel output.
 * Documentation bugfixes.
+* Compatibility with broom 5.0.0 - thanks @alexpghayes
 
 # huxtable 4.0.0
 

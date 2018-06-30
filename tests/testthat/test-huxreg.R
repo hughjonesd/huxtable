@@ -2,6 +2,10 @@
 
 context('huxreg')
 
+
+source('functions.R')
+
+
 test_that('huxreg examples unchanged', {
   test_ex_same('huxreg')
 })

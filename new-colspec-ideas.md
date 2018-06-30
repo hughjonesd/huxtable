@@ -46,5 +46,9 @@ all_cols(text_matches("blah")) # any col, ditto
 # class; or if they simply returned a nrow x ncol logical matrix, you could use & and | directly;
 # then spec could call `which(arr.ind=T)` on the result.
  
-
+# could the same interface be used to set things by value (e.g. red/orange/grey for p < 0.01/0.05/other)?
+# requires a general interface where you can have vector values for the property;
+# these are then applied to different subsets of the selected cells, which
+# might be picked out by column or row, as now, or by something else
+ 
 ```
