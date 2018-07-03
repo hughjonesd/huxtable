@@ -2,6 +2,9 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 4.0.1.9000
+
+
 # huxtable 4.0.1
 
 * Improved formatting in Excel output.
