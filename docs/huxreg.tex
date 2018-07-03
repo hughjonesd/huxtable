@@ -113,15 +113,16 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Regression Tables with huxreg}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{David Hugh-Jones}
-  \preauthor{\centering\large\emph}
+    \author{David Hugh-Jones}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-06-04}
+    \date{2018-07-03}
 
 \usepackage{placeins}
 \usepackage{pmboxdraw}
@@ -894,12 +895,45 @@ names, these will be used for row headings:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##   r.squared adj.r.squared    sigma statistic p.value df    logLik      AIC
-## 1 0.8506755     0.8506699 1541.649  153634.8       0  3 -472488.4 944984.9
-##        BIC     deviance df.residual
-## 1 945020.5 128191108498       53937
-\end{verbatim}
+\begin{table}[h]
+\begin{raggedright}\begin{tabularx}{1\textwidth}{p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth}}
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{r.squared}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{adj.r.squared}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{sigma}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{statistic}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{p.value}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{df}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{logLik}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{AIC}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{BIC}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{deviance}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{df.residual}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft 0.851\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft 0.851\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1.54e+03\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1.54e+05\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft -4.72e+05\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft 9.45e+05\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft 9.45e+05\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\rule{0pt}{\baselineskip+4pt}\raggedleft 1.28e+11\rule[-4pt]{0pt}{4pt}}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 53937\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\end{tabularx}
+\par\end{raggedright}
+\end{table}
 
 \begin{Shaded}
 \begin{Highlighting}[]

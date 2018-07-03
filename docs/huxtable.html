@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-06-04" />
+<meta name="date" content="2018-07-03" />
 
 <title>Introduction to Huxtable</title>
 
@@ -92,6 +92,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -121,7 +124,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Introduction to Huxtable</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-06-04</em></h4>
+<h4 class="date"><em>2018-07-03</em></h4>
 
 </div>
 
@@ -168,12 +171,12 @@ $(document).ready(function () {
 
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 60pt; margin-left: auto; margin-right: auto;height: 60pt;">
 <col style="width: 40%;"><col style="width: 30%;"><col style="width: 30%;"><tr>
-  <td  rowspan="2" style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; background-color: rgb(232, 58, 188); "><span style="font-size:42pt; font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; ">h</span></td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; "><span style="font-size:24pt; font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; ">u</span></td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; background-color: rgb(0, 0, 0); "><span style="color: rgb(255, 255, 255); font-size:24pt; font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; ">x</span></td>
+  <td  rowspan="2" style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; background-color: rgb(232, 58, 188); "><span style="font-size:42pt; font-family: Palatino; ">h</span></td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; "><span style="font-size:24pt; font-family: Palatino; ">u</span></td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 2pt 4pt; background-color: rgb(0, 0, 0); "><span style="color: rgb(255, 255, 255); font-size:24pt; font-family: Palatino; ">x</span></td>
 </tr>
 <tr>
-  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 1pt 4pt; "><span style="font-size:20pt; font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif; ">table</span></td>
+  <td  colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-width:0.5pt 0.5pt 0.5pt 0.5pt; border-style: solid; padding: 2pt 4pt 1pt 4pt; "><span style="font-size:20pt; font-family: Palatino; ">table</span></td>
 </tr>
 </table>
 
@@ -181,7 +184,7 @@ $(document).ready(function () {
 <h1>Introduction</h1>
 <div id="about-this-document" class="section level2">
 <h2>About this document</h2>
-<p>This is the introductory vignette for the R package ‘huxtable’, version 4.0.0.9000. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
+<p>This is the introductory vignette for the R package ‘huxtable’, version 4.0.1. A current version is available on the web in <a href="https://hughjonesd.github.io/huxtable/huxtable.html">HTML</a> or <a href="https://hughjonesd.github.io/huxtable/huxtable.pdf">PDF</a> format.</p>
 </div>
 <div id="huxtable" class="section level2">
 <h2>Huxtable</h2>
@@ -1689,13 +1692,100 @@ huxreg(lm1, lm2, lm3)</code></pre>
 <h2>Automatic pretty-printing of data frames</h2>
 <p>If you load huxtable within a knitr document, it will automatically format data frames for you by installing a <code>knit_print.data_frame</code> command.</p>
 <pre class="r"><code>head(mtcars)</code></pre>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 32.2222222222222%; margin-left: 0%;">
+<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">mpg</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">cyl</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">disp</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">hp</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">drat</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">wt</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">qsec</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">vs</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">am</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">gear</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0.4pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">carb</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">21&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">6</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">160</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">110</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3.9&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">2.62</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">16.5</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">4</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">21&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">6</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">160</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">110</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3.9&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">2.88</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">17&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">4</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">22.8</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">108</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">93</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3.85</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">2.32</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">18.6</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">21.4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">6</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">258</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">110</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3.08</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3.21</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">19.4</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">1</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">18.7</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">8</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">360</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">175</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3.15</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3.44</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">17&nbsp;&nbsp;</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">2</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">18.1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">6</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">225</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">105</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">2.76</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3.46</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">20.2</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">3</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; ">1</td>
+</tr>
+</table>
+
 <p>If you don’t want this (e.g. if you want to use <code>knitr::kable</code> or the <a href="https://cran.r-project.org/web/packages/printr/vignettes/printr.html">printr package</a>, then you can turn it off like this:</p>
 <pre class="r"><code>options(huxtable.knit_print_df = FALSE)
 

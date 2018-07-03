@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
       </span>
     </div>
 
@@ -115,10 +115,21 @@
       
     </div>
 
-    <div id="huxtable-4-0-0-9000" class="section level1">
+    <div id="huxtable-4-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#huxtable-4-0-0-9000" class="anchor"></a>huxtable 4.0.0.9000<small> Unreleased </small>
+<a href="#huxtable-4-0-1" class="anchor"></a>huxtable 4.0.1<small> 2018-07-03 </small>
 </h1>
+<ul>
+<li>Improved formatting in Excel output.</li>
+<li>New <code>format</code> method which returns the result of <code>to_html</code>, <code>to_latex</code> etc. as appropriate.</li>
+<li>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</li>
+<li>Bugfix: <code>set_all_*</code> not working when huxtable is not attached.</li>
+<li>Bugfix: <code>as_Workbook</code> failing with non-numeric <code>width</code>.</li>
+<li>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel output.</li>
+<li>Bugfix: <code>as_flextable</code> borders not working in cells with colspan &gt; 1.</li>
+<li>Documentation bugfixes.</li>
+<li>Compatibility with broom 5.0.0 - thanks <a href='http://github.com/alexpghayes'>@alexpghayes</a></li>
+</ul>
 </div>
     <div id="huxtable-4-0-0" class="section level1">
 <h1 class="page-header">
@@ -370,7 +381,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#huxtable-4-0-0-9000">4.0.0.9000</a></li>
+        <li><a href="#huxtable-4-0-1">4.0.1</a></li>
         <li><a href="#huxtable-4-0-0">4.0.0</a></li>
         <li><a href="#huxtable-3-0-0">3.0.0</a></li>
         <li><a href="#huxtable-2-0-2">2.0.2</a></li>
