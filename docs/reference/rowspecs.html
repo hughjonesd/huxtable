@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Row and column specifications — rowspecs" />
+
+<meta property="og:description" content="This help page describes how to use the row and col arguments in set_* functions." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,15 +111,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Row and column specifications</h1>
+    
+    <div class="hidden name"><code>rowspecs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
-    <p>Row and column specifications</p>
+    <p>This help page describes how to use the <code>row</code> and <code>col</code> arguments in <code>set_*</code> functions.</p>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="the-basics"><a class="anchor" href="#the-basics"></a>The basics</h2>
@@ -110,8 +131,10 @@
     
     <p>The <code>set_*</code> functions for cell properties all have arguments like this:
 <code>set_property(ht, row, col, value, byrow = FALSE)</code>.</p>
-<p>You can treat <code>row</code> and <code>col</code> arguments like arguments for data frame subsetting.
-But there are a few extra tricks:</p><ul>
+<p>You can treat <code>row</code> and <code>col</code> arguments like arguments for
+data frame subsetting. For example, you can use <code>row = 1:3</code> to get the
+first three rows, <code>col = "salary"</code> to specify the column named "salary", or <code>row = ht$salary &gt;= 50000</code> to specify rows where a condition is true.</p>
+<p>There are also a few extra tricks you can use:</p><ul>
 <li><p>Write <code>set_property(ht, x)</code>, omitting <code>row</code> and <code>col</code>, to set the property to <code>x</code> for all cells.</p></li>
 <li><p>Use <code>everywhere</code> to refer to all rows or all columns.</p></li>
 <li><p>Use <code><a href='final.html'>final(n)</a></code> to refer to the last n rows or columns.</p></li>
@@ -210,11 +233,14 @@ return functions for this purpose.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

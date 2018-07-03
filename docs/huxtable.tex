@@ -113,15 +113,16 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Introduction to Huxtable}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{David Hugh-Jones}
-  \preauthor{\centering\large\emph}
+    \author{David Hugh-Jones}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-06-04}
+    \date{2018-07-03}
 
 \usepackage{placeins}
 \usepackage{pmboxdraw}
@@ -176,7 +177,7 @@
 \subsection{About this document}\label{about-this-document}
 
 This is the introductory vignette for the R package `huxtable', version
-4.0.0.9000. A current version is available on the web in
+4.0.1. A current version is available on the web in
 \href{https://hughjonesd.github.io/huxtable/huxtable.html}{HTML} or
 \href{https://hughjonesd.github.io/huxtable/huxtable.pdf}{PDF} format.
 
@@ -2234,15 +2235,100 @@ format data frames for you by installing a
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
-\end{verbatim}
+\begin{table}[h]
+\begin{raggedright}\begin{tabularx}{0.322222222222222\textwidth}{p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth} p{0.0292929292929293\textwidth}}
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{mpg}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{cyl}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{disp}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{hp}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{drat}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{wt}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{qsec}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{vs}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{am}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{gear}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft \textbf{carb}\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 21~~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 6\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 160\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 110\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.9~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 2.62\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 16.5\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 21~~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 6\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 160\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 110\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.9~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 2.88\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 17~~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 22.8\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 108\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 93\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.85\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 2.32\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 18.6\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 21.4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 6\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 258\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 110\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.08\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.21\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 19.4\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 18.7\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 8\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 360\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 175\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.15\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.44\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 17~~\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\cellcolor[RGB]{242, 242, 242}\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 2\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+\multicolumn{1}{!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 18.1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 6\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 225\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 105\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 2.76\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3.46\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 20.2\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 0\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 3\rule[-4pt]{0pt}{4pt}\hspace*{4pt}} & 
+\multicolumn{1}{r!{\color[RGB]{0, 0, 0}\vrule width 0.4pt}}{\hspace*{4pt}\rule{0pt}{\baselineskip+4pt}\raggedleft 1\rule[-4pt]{0pt}{4pt}\hspace*{4pt}}\tabularnewline[-0.5pt]
+
+
+\hhline{>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|>{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}->{\arrayrulecolor[RGB]{0, 0, 0}\global\arrayrulewidth=0.4pt}|}
+\arrayrulecolor{black}
+\end{tabularx}
+\par\end{raggedright}
+\end{table}
 
 \FloatBarrier
 

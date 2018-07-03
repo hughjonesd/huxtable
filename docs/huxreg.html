@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-06-04" />
+<meta name="date" content="2018-07-03" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -92,6 +92,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -121,7 +124,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-06-04</em></h4>
+<h4 class="date"><em>2018-07-03</em></h4>
 
 </div>
 
@@ -897,10 +900,35 @@ diamond_regs                                                         %&gt;%
 
 <p>To display a particular row of summary statistics, use the <code>statistics</code> parameter. This should be a character vector. Valid values are anything returned from your models by <code>broom::glance</code>. Another valid value is <code>&quot;nobs&quot;</code>, which returns the number of observations from the regression. If the <code>statistics</code> vector has names, these will be used for row headings:</p>
 <pre class="r"><code>broom::glance(lm1)</code></pre>
-<pre><code>##   r.squared adj.r.squared    sigma statistic p.value df    logLik      AIC
-## 1 0.8506755     0.8506699 1541.649  153634.8       0  3 -472488.4 944984.9
-##        BIC     deviance df.residual
-## 1 945020.5 128191108498       53937</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%;">
+<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">r.squared</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">adj.r.squared</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">sigma</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">statistic</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">p.value</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">df</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">logLik</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">AIC</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">BIC</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">deviance</span></td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0.4pt 0.4pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; "><span style="font-weight: bold; ">df.residual</span></td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0.4pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0.851</td>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0.851</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1.54e+03</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1.54e+05</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">0</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">3</td>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">-4.72e+05</td>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">9.45e+05</td>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">9.45e+05</td>
+  <td  style="vertical-align: top; text-align: right; white-space: normal; border-width:0pt 0pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">1.28e+11</td>
+  <td  style="vertical-align: top; text-align: right; white-space: nowrap; border-width:0pt 0.4pt 0.4pt 0pt; border-style: solid; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); ">53937</td>
+</tr>
+</table>
+
 <pre class="r"><code>huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
   'P value' = 'p.value'))</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;">

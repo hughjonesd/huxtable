@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Default print method for huxtables — print.huxtable" />
+
+<meta property="og:description" content="By default huxtables are printed using print_screen(). In certain cases, for example
+in Sweave documents, it may be
+useful to change this. You can do so by setting options(huxtable.print)." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +105,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,22 +113,29 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Default print method for huxtables</h1>
+    
+    <div class="hidden name"><code>print.huxtable.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>By default huxtables are printed using <code><a href='to_screen.html'>print_screen()</a></code>. In certain cases, for example
 in Sweave documents, it may be
 useful to change this. You can do so by setting <code>options(huxtable.print)</code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for huxtable</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for huxtable</span>
+<span class='fu'>format</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>output</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -120,7 +146,16 @@ useful to change this. You can do so by setting <code>options(huxtable.print)</c
       <th>...</th>
       <td><p>Options passed to other methods.</p></td>
     </tr>
+    <tr>
+      <th>output</th>
+      <td><p>One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code> or <code>"screen"</code></p></td>
+    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>print</code> prints the huxtable and returns <code>NULL</code> invisibly.</p>
+<p><code>format</code> returns a string representation from <code><a href='to_latex.html'>to_latex()</a></code>, <code><a href='to_html.html'>to_html()</a></code> etc.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -129,13 +164,16 @@ useful to change this. You can do so by setting <code>options(huxtable.print)</c
 <span class='fu'>options</span>(<span class='kw'>huxtable.print</span> <span class='kw'>=</span> <span class='no'>print_latex</span>)
 <span class='co'># to print huxtables like data frames:</span>
 <span class='fu'>options</span>(<span class='kw'>huxtable.print</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>...</span>) <span class='fu'>print</span>(<span class='fu'>as.data.frame</span>(<span class='no'>x</span>)))
-<span class='co'># }</span></pre>
+<span class='co'># }</span><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
+<span class='fu'>format</span>(<span class='no'>ht</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>'screen'</span>)</div><div class='output co'>#&gt; [1] "        1         4  \n        2         5  \n        3         6  \n\nColumn names: a, b\n"</div><div class='input'><span class='fu'>format</span>(<span class='no'>ht</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>'md'</span>)</div><div class='output co'>#&gt; [1] "-----------------------\n          1          4 \n----------- -----------\n          2          5 \n                       \n          3          6 \n-----------------------\n\n"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -148,11 +186,14 @@ useful to change this. You can do so by setting <code>options(huxtable.print)</c
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
