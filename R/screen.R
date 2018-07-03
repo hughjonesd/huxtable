@@ -1,6 +1,7 @@
 
 
 #' @import assertthat
+#' @importFrom stats na.omit
 NULL
 
 #' @export

@@ -1,5 +1,8 @@
 
 #' @importFrom dplyr filter_
+#' @importFrom stats na.omit
+NULL
+
 #' @export
 filter_.huxtable <- function (.data, ..., .dots) {
   ht <- .data

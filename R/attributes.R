@@ -1,5 +1,6 @@
 
 #' @import assertthat
+#' @importFrom stats na.omit
 NULL
 
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
