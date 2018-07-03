@@ -40,3 +40,4 @@ row_height(ht)
 \seealso{
 Other row/column heights: \code{\link{col_width}}
 }
+\concept{row/column heights}

@@ -41,3 +41,4 @@ print_screen(ht)
 \seealso{
 Other row/column heights: \code{\link{row_height}}
 }
+\concept{row/column heights}

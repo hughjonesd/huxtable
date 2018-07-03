@@ -43,3 +43,4 @@ print_md(ht)
 Other printing functions: \code{\link{print_html}},
   \code{\link{print_latex}}, \code{\link{print_screen}}
 }
+\concept{printing functions}

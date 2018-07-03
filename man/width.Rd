@@ -34,3 +34,4 @@ width(ht)
 \seealso{
 Other table measurements: \code{\link{height}}
 }
+\concept{table measurements}

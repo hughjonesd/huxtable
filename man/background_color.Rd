@@ -49,3 +49,4 @@ Other formatting functions: \code{\link{bold}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
+\concept{formatting functions}

@@ -6,6 +6,10 @@ TODO
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 
+* Way to set properties by value (or by an arbitrary variable). E.g.
+  `set_xxx_by(ht, row, col, values, ...)`
+  where `...` is interpreted as in `cut` or `cut2` or `recode`
+
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
   - Downside: can't use logical vectors for columns (without some strong trickery); 
@@ -78,6 +82,7 @@ translating calls into the new version. (OK, the conversion hassle still exists.
 * dotted borders with LaTeX package? See https://tex.stackexchange.com/questions/20140/can-a-table-include-a-horizontal-dashed-line
 
 * special-case single horizontal lines across whole table?
+
 
 
 BUGS

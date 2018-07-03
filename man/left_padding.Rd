@@ -21,9 +21,6 @@
 \alias{set_right_padding}
 \alias{set_top_padding}
 \alias{set_bottom_padding}
-\alias{right_padding}
-\alias{bottom_padding}
-\alias{top_padding}
 \alias{set_all_padding}
 \title{Cell padding}
 \usage{

@@ -53,3 +53,4 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
+\concept{formatting functions}

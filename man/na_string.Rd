@@ -15,7 +15,7 @@ set_na_string(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character string. This will be used to replace NA values in the display. Set to `NA` for the default, which is the empty string. To get literal "NA", set to "NA". Set to \code{NA} to reset to the default.}
+\item{value}{A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA". Set to \code{NA} to reset to the default.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -54,3 +54,4 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{font}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
+\concept{formatting functions}

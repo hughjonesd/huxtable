@@ -23,7 +23,6 @@
 \alias{italic.huxtable<-.huxtable}
 \alias{italic<-.huxtable<-.huxtable}
 \alias{set_set_italic}
-\alias{italic}
 \title{Cell text style}
 \usage{
 bold(ht)
@@ -71,3 +70,4 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
+\concept{formatting functions}

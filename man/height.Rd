@@ -15,7 +15,7 @@ set_height(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.}
+\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.}
 }
 \value{
 For \code{height}, the \code{height} attribute.
@@ -34,3 +34,4 @@ height(ht)
 \seealso{
 Other table measurements: \code{\link{width}}
 }
+\concept{table measurements}

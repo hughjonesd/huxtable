@@ -21,9 +21,6 @@
 \alias{set_right_border_color}
 \alias{set_top_border_color}
 \alias{set_bottom_border_color}
-\alias{right_border_color}
-\alias{top_border_color}
-\alias{bottom_border_color}
 \title{Border colors}
 \usage{
 left_border_color(ht)

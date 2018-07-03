@@ -76,3 +76,4 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{font}}, \code{\link{na_string}},
   \code{\link{text_color}}
 }
+\concept{formatting functions}

@@ -21,9 +21,6 @@
 \alias{set_right_border}
 \alias{set_top_border}
 \alias{set_bottom_border}
-\alias{right_border}
-\alias{top_border}
-\alias{bottom_border}
 \title{Borders}
 \usage{
 left_border(ht)
