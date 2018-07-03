@@ -28,7 +28,7 @@ Functions to get or set the row heights property of huxtable rows.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
-treated as proportions of the text height (\\textheight).
+treated as proportions of the text height (\code{\\textheight}).
 }
 \examples{
 

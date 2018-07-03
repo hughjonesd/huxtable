@@ -4,7 +4,7 @@
 \alias{rowspecs}
 \title{Row and column specifications}
 \description{
-Row and column specifications
+This help page describes how to use the \code{row} and \code{col} arguments in \code{set_*} functions.
 }
 \section{The basics}{
 
@@ -12,8 +12,11 @@ Row and column specifications
 The \code{set_*} functions for cell properties all have arguments like this:
 \code{set_property(ht, row, col, value, byrow = FALSE)}.
 
-You can treat \code{row} and \code{col} arguments like arguments for \link[=[.data.frame]{data frame subsetting}.
-But there are a few extra tricks:
+You can treat \code{row} and \code{col} arguments like arguments for
+\link[=[.data.frame]{data frame subsetting}. For example, you can use \code{row = 1:3} to get the
+first three rows, \code{col = "salary"} to specify the column named "salary", or \code{row = ht$salary >= 50000} to specify rows where a condition is true.
+
+There are also a few extra tricks you can use:
 \itemize{
 \item Write \code{set_property(ht, x)}, omitting \code{row} and \code{col}, to set the property to \code{x} for all cells.
 \item Use \code{everywhere} to refer to all rows or all columns.

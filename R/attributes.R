@@ -309,7 +309,7 @@ make_getter_setters('col_width', 'col')
 #' @family row/column heights
 #' @details
 #' If character, `value` must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
-#' treated as proportions of the text height (\\\\textheight).
+#' treated as proportions of the text height (`\\textheight`).
 #' @template getset-example
 #' @templateVar attr_val c(.2, .1, .1)
 #' @export row_height row_height<- set_row_height row_height.huxtable row_height<-.huxtable
@@ -999,7 +999,7 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_name height
 #' @templateVar attr_desc Table height
 #' @templateVar value_param_desc
-#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\\\\textheight) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default, which is to leave height unset.
+#' A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (`\\textheight`) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to `NA` for the default, which is to leave height unset.
 #' @template getset-example
 #' @templateVar attr_val 0.4
 #' @family table measurements

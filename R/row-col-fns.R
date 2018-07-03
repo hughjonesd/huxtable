@@ -89,13 +89,18 @@ final <- function(n = 1) {
 
 #' Row and column specifications
 #'
+#' This help page describes how to use the `row` and `col` arguments in `set_*` functions.
 #' @section The basics:
 #'
 #' The `set_*` functions for cell properties all have arguments like this:
 #' `set_property(ht, row, col, value, byrow = FALSE)`.
 #'
-#' You can treat `row` and `col` arguments like arguments for \link[=[.data.frame]{data frame subsetting}.
-#' But there are a few extra tricks:
+#' You can treat `row` and `col` arguments like arguments for
+#' \link[=[.data.frame]{data frame subsetting}. For example, you can use `row = 1:3` to get the
+#' first three rows, `col = "salary"` to specify the column named "salary", or `row = ht$salary >=
+#' 50000` to specify rows where a condition is true.
+#'
+#' There are also a few extra tricks you can use:
 #'
 #' * Write `set_property(ht, x)`, omitting `row` and `col`, to set the property to `x` for all cells.
 #' * Use `everywhere` to refer to all rows or all columns.
