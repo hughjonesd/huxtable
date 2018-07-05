@@ -154,9 +154,10 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
           }
         ))
   ) # end switch
-
+  hux_ns <- getNamespace('huxtable')
   lapply(names(funs), function (x) {
-    assign(x, funs[[x]], envir = getNamespace('huxtable'))
+    environment(funs[[x]]) <- hux_ns
+    assign(x, funs[[x]], envir = hux_ns)
   })
 
   NULL
