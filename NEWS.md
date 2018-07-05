@@ -4,7 +4,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.1.9000
 
-* Bugfix: property accessors had the wrong environment. Thanks to Joris Heys.
+* Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
 
 # huxtable 4.0.1
 
