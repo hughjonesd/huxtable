@@ -11,10 +11,12 @@
 \title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
+  TRUE))
 
 hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
+  TRUE))
 
 as_huxtable(x, ...)
 
@@ -22,8 +24,8 @@ as_hux(x, ...)
 
 \method{as_huxtable}{default}(x,
   add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE),
-  ...)
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
+  TRUE), ...)
 
 is_huxtable(x)
 

@@ -5,9 +5,11 @@
 \alias{rbind.huxtable}
 \title{Combine rows or columns}
 \usage{
-\method{cbind}{huxtable}(..., deparse.level = 1, copy_cell_props = TRUE)
+\method{cbind}{huxtable}(..., deparse.level = 1,
+  copy_cell_props = TRUE)
 
-\method{rbind}{huxtable}(..., deparse.level = 1, copy_cell_props = TRUE)
+\method{rbind}{huxtable}(..., deparse.level = 1,
+  copy_cell_props = TRUE)
 }
 \arguments{
 \item{...}{Vectors, matrices, data frames or huxtables.}
