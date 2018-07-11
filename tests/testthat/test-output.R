@@ -47,6 +47,10 @@ test_that('to_md produces valid markdown', {
   ht <- set_all_borders(ht, 1)
   md <- to_md(ht)
   validate_markdown(md)
+  ht <- set_caption(ht, "Some caption")
+  md <- to_md(ht)
+  validate_markdown(md)
+  expect_match(md, "Some caption", fixed = TRUE)
 })
 
 
@@ -65,7 +69,7 @@ test_that('to_md and to_screen keep to max_width', {
   output <- to_screen(ht, max_width = 15)
   lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
   expect_true(all(nchar(lines, type = 'width') <= 15))
-  # we don't test to_md for captions for to_md because I don't think markdown can handle multiline captions
+  # we don't test captions for to_md because I don't think markdown can handle multiline captions
 })
 
 
@@ -81,6 +85,20 @@ test_that('to_md and to_screen keep to min_width', {
     }
   }
 })
+
+
+test_that('to_md warns on unimplemented features', {
+  ht <- hux(a = 1:2, b = 1:2)
+  colspan(ht)[1, 1] <- 2
+  expect_warning(to_md(ht), "colspan")
+  colspan(ht)[1, 1] <- 1
+  rowspan(ht)[1, 1] <- 2
+  expect_warning(to_md(ht), "rowspan")
+  rowspan(ht)[1, 1] <- 1
+  align(ht)[1, ] <- c("left", "right")
+  expect_warning(to_md(ht), "align")
+})
+
 
 test_that('hux_logo works', {
   expect_silent(hux_logo())
