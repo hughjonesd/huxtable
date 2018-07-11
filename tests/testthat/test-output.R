@@ -54,6 +54,14 @@ test_that('to_md produces valid markdown', {
 })
 
 
+test_that('to_screen gives warning with colour if crayon not installed', {
+  ht <- hux(a = 1:2)
+  with_mock(requireNamespace = function (...) FALSE, {
+    expect_warning(to_screen(ht, color = TRUE), "crayon")
+  })
+})
+
+
 test_that('to_md and to_screen keep to max_width', {
   ht <- hux(a = paste(sample(LETTERS), collapse = '...'), b = 1:2)
 
