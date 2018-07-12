@@ -162,7 +162,7 @@ NULL
 #' Combine rows or columns
 #'
 #' @param ... Vectors, matrices, data frames or huxtables.
-#' @param deparse.level Passed to [cbind.data.frame()].
+#' @param deparse.level Unused.
 #' @param copy_cell_props Cell properties to copy from neighbours (see below).
 #'
 #' @return A huxtable.
@@ -171,16 +171,16 @@ NULL
 #' Table properties will be taken from the first argument which is a huxtable. So will
 #' row properties (for cbind) and column properties (for rbind).
 #'
-#' If some of the inputs are not huxtables, and `copy_cell_props` is a character vector of cell properties,
-#' then for rbind, the named cell properties and row heights will be copied to non-huxtables. For cbind,
-#' the named cell properties and column widths will be copied. Objects on the left or above get priority
-#' over those on the right or below.
+#' If some of the inputs are not huxtables, and `copy_cell_props` is a character vector of cell
+#' properties, then the named cell properties will be copied to non-huxtables. Objects on the left
+#' or above get priority over those on the right or below. These properties may also include
+#' `"row_height"` (for rbind) or `"col_width"` (for cbind). Numeric row heights and column widths
+#' will be rescaled to 1.
 #'
-#' If `copy_cell_props` is `TRUE`, the default
-#' set of cell properties (everything but `colspan` and `rowspan`) will be copied.
+#' If `copy_cell_props` is `TRUE`, the default set of cell properties (everything but `colspan` and
+#' `rowspan`, including row heights/column widths) will be copied.
 #'
-#' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the
-#' default properties.
+#' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the default properties.
 #'
 #' @examples
 #' ht1 <- hux(a = 1:3, b = 4:6)
@@ -212,7 +212,10 @@ rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 
 
 bind_hux <- function (..., type, copy_cell_props) {
-  default_copy_attrs <- setdiff(huxtable_cell_attrs, c('colspan', 'rowspan'))
+  default_copy_attrs <- c(
+          setdiff(huxtable_cell_attrs, c('colspan', 'rowspan')),
+          switch(type, rbind = 'row_height', cbind = 'col_width')
+        )
   if (isTRUE(copy_cell_props)) copy_cell_props <- default_copy_attrs
   objs <- list(...)
   arg_names <- names(sapply(substitute(list(...))[-1], deparse))
@@ -232,8 +235,8 @@ bind_hux <- function (..., type, copy_cell_props) {
   res <- Reduce(f, objs)
 
   daddy <- Find(is_hux, objs)
-  first_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
-  for (a in c(first_attrs, huxtable_table_attrs)) attr(res, a) <- attr(daddy, a)
+  unchanged_attrs <- switch(type, 'cbind' = huxtable_row_attrs, 'rbind' = huxtable_col_attrs)
+  for (a in c(unchanged_attrs, huxtable_table_attrs)) attr(res, a) <- attr(daddy, a)
 
   attr(res, 'from_real_hux') <- NULL
   res
@@ -254,11 +257,23 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
         attr(x, a)[] <- if (type == 'cbind') attr(ht, a)[, ncol(ht)] else
           matrix(attr(ht, a)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
       }
+      if ('row_height' %in% copy_cell_props && type == 'rbind') {
+        attr(x, 'row_height') <- attr(ht, 'row_height')[nrow(ht)]
+      }
+      if ('col_width' %in% copy_cell_props && type == 'cbind') {
+        attr(x, 'col_width') <- attr(ht, 'col_width')[ncol(ht)]
+      }
     }
     if (! ht_real_hux && x_real_hux) {
       for (a in ccp) {
         attr(ht, a)[] <- if (type == 'cbind') attr(x, a)[, 1] else
           matrix(attr(x, a)[1, ], nrow(ht), ncol(ht), byrow = TRUE)
+      }
+      if ('row_height' %in% copy_cell_props && type == 'rbind') {
+        attr(ht, 'row_height') <- attr(x, 'row_height')[1]
+      }
+      if ('col_width' %in% copy_cell_props && type == 'cbind') {
+        attr(ht, 'col_width') <- attr(x, 'col_width')[1]
       }
     }
   }
@@ -309,7 +324,8 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
   if (! is_huxtable(second)) {
     second <- as_hux(second, add_colnames = FALSE, autoformat = FALSE)
     if (is.character(copy_cell_props)) {
-      for (a in copy_cell_props) {
+      ccp <- intersect(copy_cell_props, huxtable_cell_attrs)
+      for (a in ccp) {
         attr(second, a)[] <- if (type == 'cbind') attr(first, a)[, ncol(first)] else
           matrix(attr(first, a)[nrow(first), ], nrow(second), ncol(second), byrow = TRUE)
       }
@@ -341,6 +357,14 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
   }
   for (a in first_attrs) {
     attr(res, a) <- attr(first, a)
+  }
+
+  # numeric row/col heights are rescaled to add to 1
+  for (rh_cw in c('row_height', 'col_width')) {
+    if (is.numeric(attr(res, rh_cw))) {
+      values <- attr(res, rh_cw)
+      attr(res, rh_cw) <- values/sum(values)
+    }
   }
 
   res
