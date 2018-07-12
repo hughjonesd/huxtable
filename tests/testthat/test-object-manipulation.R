@@ -96,9 +96,23 @@ test_that('rbind and cbind work and copy properties', {
   ht_cbind <- cbind(ht, 1:2, copy_cell_props = "bold")
   expect_equivalent(italic(ht_cbind)[, 3], c(FALSE, FALSE))
   expect_equivalent(bold(ht_cbind)[, 3], c(TRUE, TRUE))
-
-
 })
+
+
+test_that('rbind and cbind make numeric row_height/col_width sum to 1', {
+  ht <- hux(1:2, 1:2)
+  ht2 <- hux(1:2, 1:2)
+  row_height(ht) <- c(.5, .5)
+  row_height(ht2) <- c(.5, .5)
+  col_width(ht) <- c(.5, .5)
+  col_width(ht2) <- c(.5, .5)
+
+  ht_cbind <- cbind(ht, ht2)
+  expect_equivalent(col_width(ht_cbind), rep(.25, 4))
+  ht_rbind <- rbind(ht, ht2)
+  expect_equivalent(row_height(ht_rbind), rep(.25, 4))
+})
+
 
 test_that('Column names are not uglified', {
   ht <- hux('A long column name' = 1:3, 'Another name' = 1:3, add_colnames = TRUE)
