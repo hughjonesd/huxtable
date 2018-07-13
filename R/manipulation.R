@@ -252,7 +252,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   ccp <- intersect(copy_cell_props, huxtable_cell_attrs)
 
   if (is.character(ccp)) {
-    if (! x_real_hux) {
+    if (! x_real_hux  && nrow(x) > 0 && ncol(x) > 0) {
       for (a in ccp) {
         attr(x, a)[] <- if (type == 'cbind') attr(ht, a)[, ncol(ht)] else
           matrix(attr(ht, a)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
@@ -264,7 +264,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
         attr(x, 'col_width') <- attr(ht, 'col_width')[ncol(ht)]
       }
     }
-    if (! ht_real_hux && x_real_hux) {
+    if (! ht_real_hux && x_real_hux && nrow(ht) > 0 && ncol(ht) > 0) {
       for (a in ccp) {
         attr(ht, a)[] <- if (type == 'cbind') attr(x, a)[, 1] else
           matrix(attr(x, a)[1, ], nrow(ht), ncol(ht), byrow = TRUE)

@@ -195,6 +195,7 @@ test_that('insert_column and insert_row work', {
   expect_false(bold(ht)[1, 2])
 })
 
+
 test_that('insert_column works with column names', {
   ht_orig <- hux(a = 1:2, b = 1:2)
   ht <- insert_column(ht_orig, 8, 9, after = "a")
@@ -283,4 +284,35 @@ test_that('Can add row(s) to a huxtable by standard replacement methods', {
   expect_silent(ht3[3:4, 3] <- 1) # new rows and columns simultaneously
   expect_equivalent(as.data.frame(ht3[3:4, ]), data.frame(rep(NA_real_, 2), rep(NA_real_, 2), rep(1, 2)))
   expect_equivalent(dim(font(ht3)), c(4, 3))
+})
+
+
+test_that('cbind and rbind work with 0-dimension objects', {
+  ht <- hux(a = 1:2, b = 1:2)
+  expect_silent(ht_nrow0 <- ht[FALSE, ])
+  expect_silent(ht_ncol0 <- ht[, FALSE])
+
+  expect_silent(res <- cbind(ht, ht_ncol0))
+  expect_equivalent(dim(res), c(2, 2))
+  expect_silent(res <- cbind(ht_ncol0, ht))
+  expect_equivalent(dim(res), c(2, 2))
+
+  expect_silent(res <- rbind(ht, ht_nrow0))
+  expect_equivalent(dim(res), c(2, 2))
+  expect_silent(res <- rbind(ht_nrow0, ht))
+  expect_equivalent(dim(res), c(2, 2))
+
+  mx <- matrix(1:4, 2, 2)
+  mx_nrow0 <- mx[FALSE, ]
+  mx_ncol0 <- mx[, FALSE]
+
+  expect_silent(res <- cbind(ht, mx_ncol0))
+  expect_equivalent(dim(res), c(2, 2))
+  expect_silent(res <- cbind(mx_ncol0, ht))
+  expect_equivalent(dim(res), c(2, 2))
+
+  expect_silent(res <- rbind(ht, mx_nrow0))
+  expect_equivalent(dim(res), c(2, 2))
+  expect_silent(res <- rbind(mx_nrow0, ht))
+  expect_equivalent(dim(res), c(2, 2))
 })
