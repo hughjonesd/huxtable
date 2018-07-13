@@ -6,7 +6,7 @@ TODO
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 
-* rescale numeric row_height and col_width when subsetting?
+* rescale numeric row_height and col_width when subsetting, as now under rbind/cbind?
 
 * Way to set properties by value (or by an arbitrary variable). E.g.
   `set_xxx_by(ht, row, col, values, ...)`

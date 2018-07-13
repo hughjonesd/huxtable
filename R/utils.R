@@ -19,8 +19,8 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
   type <- match.arg(type)
   contents <- as.matrix(as.data.frame(ht))
 
-  for (col in 1:ncol(contents)) {
-    for (row in 1:nrow(contents)) {
+  for (col in seq_len(ncol(contents))) {
+    for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
       if (! is.na(cell)) cell <- format_numbers(cell, num_fmt)
@@ -204,6 +204,20 @@ decimal_pad <- function(col, pad_chars, type) {
 }
 
 
+check_positive_dims <- function (ht) {
+  if (nrow(ht) < 1) {
+    warning("huxtable has zero rows")
+    return(FALSE)
+  }
+  if (ncol(ht) < 1) {
+    warning("huxtable has zero columns")
+    return(FALSE)
+  }
+
+  return(TRUE)
+}
+
+
 # return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
 # cells, including those shadowed by others.
 display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
@@ -215,7 +229,8 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
         )
   dcells$display_row <- dcells$row
   dcells$display_col <- dcells$col
-  dcells$shadowed <- FALSE
+  dcells$shadowed <- rep(FALSE, nrow(dcells))
+  if (nrow(dcells) == 0) return(dcells)
 
   change_cols <- c('display_row', 'display_col', 'rowspan', 'colspan')
   for (i in 1:nrow(dcells)) {

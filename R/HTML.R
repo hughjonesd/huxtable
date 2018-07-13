@@ -38,6 +38,7 @@ print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(t
 #' @export
 #' @rdname to_html
 to_html.huxtable <- function(ht, ...) {
+  check_positive_dims(ht)
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),
@@ -61,11 +62,11 @@ to_html.huxtable <- function(ht, ...) {
     cap <- paste0('<caption style="caption-side:', vpos, '; text-align:', hpos, '">', cap, '</caption>')
     res <- paste0(res, cap)
   }
-  cols_html <- sapply(1:ncol(ht), col_html, ht = ht)
+  cols_html <- sapply(seq_len(ncol(ht)), col_html, ht = ht)
   cols_html <- paste0(cols_html, collapse = '')
   res <- paste0(res, cols_html)
   contents <- clean_contents(ht, type = 'html')
-  rows_html <- sapply(1:nrow(ht), row_html, ht = ht, contents)
+  rows_html <- sapply(seq_len(nrow(ht)), row_html, ht = ht, contents)
   rows_html <- paste0(rows_html, collapse = '')
   res <- paste0(res, rows_html)
   res <- paste0(res, '</table>\n')
@@ -93,7 +94,7 @@ row_html <- function (ht, rn, contents) {
     style <- paste0(' style="height: ', height, ';"')
   }
   res <- paste0('<tr', style, '>\n')
-  cols_to_show <- 1:ncol(ht)
+  cols_to_show <- seq_len(ncol(ht))
   dcells <- display_cells(ht, all = TRUE) # speedup: make this call just once in parent
   cols_to_show <- setdiff(cols_to_show, dcells$col[dcells$row == rn & dcells$shadowed])
   cells_html <- sapply(cols_to_show, cell_html, ht = ht, rn = rn, contents)

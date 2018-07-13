@@ -7,6 +7,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
 * Bugfix: row heights and column widths weren't being copied with cbind/rbind.
+* Bugfix: make 0-row or 0-column huxtable output work, usually with a warning.
 
 
 # huxtable 4.0.1

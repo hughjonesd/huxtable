@@ -129,6 +129,21 @@ test_that('to_screen does not cut off multicols', {
 })
 
 
+test_that('output works with zero-dimension huxtables', {
+  h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
+  expect_silent(to_screen(h_nrow0))
+  expect_warning(to_md(h_nrow0), "row")
+  expect_warning(to_html(h_nrow0), "row")
+  expect_warning(to_latex(h_nrow0), "row")
+
+  h_ncol0 <- hux(a = 1:2)[, FALSE]
+  expect_silent(to_screen(h_ncol0))
+  expect_warning(to_md(h_ncol0), "col")
+  expect_warning(to_html(h_ncol0), "col")
+  expect_warning(to_latex(h_ncol0), "col")
+})
+
+
 test_that('format.huxtable works', {
   ht <- hux(a = 1:3, b = 1:3)
   for (output in c('latex', 'html', 'md', 'screen')) {
@@ -147,6 +162,18 @@ test_that('guess_knitr_output_format() gets it right', {
   for (fname in paste0('guess-output-format-test-Rmd-', c('html.Rmd', 'pdf.Rmd'))) {
     expect_silent(out[fname] <- rmarkdown::render(fname, quiet = TRUE, run_pandoc = FALSE))
   }
+})
+
+
+test_that('set_print_method() works', {
+  ht <- hux(a = 1:2, b = 1:2)
+  oo <- options(huxtable.print = print_html)
+  expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
+  options(huxtable.print = print_latex)
+  expect_match(capture.output(print(ht)), 'tabular', fixed = TRUE, all = FALSE)
+  options(huxtable.print = 'print_html')
+  expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
+  options(oo)
 })
 
 
@@ -196,16 +223,3 @@ test_that('various outputs unchanged', {
     expect_outputs_unchanged(hx_set, i)
   }
 })
-
-
-test_that('set_print_method() works', {
-  ht <- hux(a = 1:2, b = 1:2)
-  oo <- options(huxtable.print = print_html)
-  expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
-  options(huxtable.print = print_latex)
-  expect_match(capture.output(print(ht)), 'tabular', fixed = TRUE, all = FALSE)
-  options(huxtable.print = 'print_html')
-  expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
-  options(oo)
-})
-

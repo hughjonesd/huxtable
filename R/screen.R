@@ -55,74 +55,78 @@ to_screen.huxtable <- function (
     color <- FALSE
   }
 
-  charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
-        min_width = min_width, max_width = max_width, color = color)
-  charmat <- charmat_data$charmat
-  border_rows <- charmat_data$border_rows
-  border_cols <- charmat_data$border_cols
-  border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
+  if (ncol(ht) > 0 && nrow(ht) > 0) {
+    charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
+          min_width = min_width, max_width = max_width, color = color)
+    charmat <- charmat_data$charmat
+    border_rows <- charmat_data$border_rows
+    border_cols <- charmat_data$border_cols
+    border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
-  borders <- collapsed_borders(ht)
-  border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
-  # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
-  index_rows <- lapply(seq_len(nrow(ht)), function (x) seq(border_rows[x], border_rows[x + 1] - 1))
-  index_cols <- lapply(seq_len(ncol(ht)), function (x) seq(border_cols[x], border_cols[x + 1] - 1))
-  # borders$vert is row, col+1; $horiz is row+1, col
-  for (i in seq_len(nrow(ht) + 1)) for (j in seq_len(ncol(ht) + 1)) {
-    if (i <= nrow(ht)) {
-      ir <- index_rows[[i]]
-      # has a line above:
-      border_mat[ ir, border_cols[j] ]     <- border_mat[ ir, border_cols[j] ]     + 1L * (borders$vert[i, j] > 0)
-      # has a line below:
-      border_mat[ ir + 1, border_cols[j] ] <- border_mat[ ir + 1, border_cols[j] ] + 2L * (borders$vert[i, j] > 0)
-    }
-    if (j <= ncol(ht)) {
-      ic <- index_cols[[j]]
-      # on right:
-      border_mat[ border_rows[i], ic ]    <- border_mat[ border_rows[i], ic ]     + 4L * (borders$horiz[i, j] > 0)
-      # on left:
-      border_mat[ border_rows[i], ic + 1] <- border_mat[ border_rows[i], ic + 1 ] + 8L * (borders$horiz[i, j] > 0)
-    }
-  }
-
-  pipe_chars <- c(NA,
-        '\u2502', '\u2502', '\u2502', '\u2500',
-        '\u250c', '\u2514', '\u251c', '\u2500',
-        '\u2510', '\u2518', '\u2524', '\u2500',
-        '\u252c', '\u2534', '\u253c')
-  border_mat[] <- pipe_chars[border_mat]
-  charmat[ ! is.na(border_mat) ] <- border_mat[ ! is.na(border_mat) ]
-
-  if (color) {
-    bcolors <- collapsed_border_colors(ht)
-    unique_cols <- unique(na.omit(unlist(bcolors)))
-    col_funs <- lapply(unique_cols, crayon::make_style)
-    names(col_funs) <- unique_cols
+    borders <- collapsed_borders(ht)
+    border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
+    # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
+    index_rows <- lapply(seq_len(nrow(ht)), function (x) seq(border_rows[x], border_rows[x + 1] - 1))
+    index_cols <- lapply(seq_len(ncol(ht)), function (x) seq(border_cols[x], border_cols[x + 1] - 1))
+    # borders$vert is row, col+1; $horiz is row+1, col
     for (i in seq_len(nrow(ht) + 1)) for (j in seq_len(ncol(ht) + 1)) {
       if (i <= nrow(ht)) {
-        # colour vertical borders:
         ir <- index_rows[[i]]
-        color_fun <- col_funs[[ bcolors$vert[i, j] ]]
-        if (! is.na(bcolors$vert[i, j])) charmat[ ir, border_cols[j] ] <- color_fun(charmat[ ir, border_cols[j] ])
+        # has a line above:
+        border_mat[ ir, border_cols[j] ]     <- border_mat[ ir, border_cols[j] ]     + 1L * (borders$vert[i, j] > 0)
+        # has a line below:
+        border_mat[ ir + 1, border_cols[j] ] <- border_mat[ ir + 1, border_cols[j] ] + 2L * (borders$vert[i, j] > 0)
       }
       if (j <= ncol(ht)) {
-        # horizontal borders:
-        ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1) # rows extend a little bit to cover ends
-        color_fun <- col_funs[[ bcolors$horiz[i, j] ]]
-        if (! is.na(bcolors$horiz[i, j])) charmat[ border_rows[i], ic ] <- color_fun(charmat[ border_rows[i], ic ])
+        ic <- index_cols[[j]]
+        # on right:
+        border_mat[ border_rows[i], ic ]    <- border_mat[ border_rows[i], ic ]     + 4L * (borders$horiz[i, j] > 0)
+        # on left:
+        border_mat[ border_rows[i], ic + 1] <- border_mat[ border_rows[i], ic + 1 ] + 8L * (borders$horiz[i, j] > 0)
       }
     }
-  }
 
-  if (compact) {
-    empty_borders <- apply(charmat, 1, function (x)
-          all(grepl(' ', x, fixed = TRUE) | grepl('\u2502', x, fixed = TRUE)))
-    empty_borders <- intersect(border_rows, which(empty_borders))
-    # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
-    if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
-  }
+    pipe_chars <- c(NA,
+          '\u2502', '\u2502', '\u2502', '\u2500',
+          '\u250c', '\u2514', '\u251c', '\u2500',
+          '\u2510', '\u2518', '\u2524', '\u2500',
+          '\u252c', '\u2534', '\u253c')
+    border_mat[] <- pipe_chars[border_mat]
+    charmat[ ! is.na(border_mat) ] <- border_mat[ ! is.na(border_mat) ]
 
-  result <- paste(apply(charmat, 1, paste0, collapse = ''), collapse = '\n')
+    if (color) {
+      bcolors <- collapsed_border_colors(ht)
+      unique_cols <- unique(na.omit(unlist(bcolors)))
+      col_funs <- lapply(unique_cols, crayon::make_style)
+      names(col_funs) <- unique_cols
+      for (i in seq_len(nrow(ht) + 1)) for (j in seq_len(ncol(ht) + 1)) {
+        if (i <= nrow(ht)) {
+          # colour vertical borders:
+          ir <- index_rows[[i]]
+          color_fun <- col_funs[[ bcolors$vert[i, j] ]]
+          if (! is.na(bcolors$vert[i, j])) charmat[ ir, border_cols[j] ] <- color_fun(charmat[ ir, border_cols[j] ])
+        }
+        if (j <= ncol(ht)) {
+          # horizontal borders:
+          ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1) # rows extend a little bit to cover ends
+          color_fun <- col_funs[[ bcolors$horiz[i, j] ]]
+          if (! is.na(bcolors$horiz[i, j])) charmat[ border_rows[i], ic ] <- color_fun(charmat[ border_rows[i], ic ])
+        }
+      }
+    }
+
+    if (compact) {
+      empty_borders <- apply(charmat, 1, function (x)
+            all(grepl(' ', x, fixed = TRUE) | grepl('\u2502', x, fixed = TRUE)))
+      empty_borders <- intersect(border_rows, which(empty_borders))
+      # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
+      if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
+    }
+
+    result <- paste(apply(charmat, 1, paste0, collapse = ''), collapse = '\n')
+  } else { # 0-nrow or 0-ncol huxtable
+    result <- glue::glue('<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>')
+  }
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c('left', 'center', 'right')
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
@@ -130,6 +134,8 @@ to_screen.huxtable <- function (
     cap <- paste0(str_pad(cap, hpos, ncol(charmat)), collapse = '\n')
     result <- if (grepl('top', caption_pos(ht))) paste0(cap, '\n', result) else paste0(result, '\n', cap)
   }
+
+
   if (colnames && any(nchar(colnames(ht)) > 0)) {
     colnames_text <- paste0('Column names: ', paste(colnames(ht), collapse = ', '))
     colnames_text <- strwrap(colnames_text, max_width)
@@ -174,6 +180,9 @@ to_md <- function(ht, ...) UseMethod('to_md')
 #' @rdname to_md
 to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4, max_width = 80, ...) {
   assert_that(is.flag(header), is.number(min_width), is.number(max_width))
+  if (! check_positive_dims(ht)) {
+    return("")
+  }
   if (any(colspan(ht) > 1 | rowspan(ht) > 1)) warning("Markdown cannot handle cells with colspan/rowspan > 1")
   align <- real_align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))

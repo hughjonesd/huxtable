@@ -118,6 +118,7 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 
 
 build_tabular <- function(ht) {
+  if (! check_positive_dims(ht)) return('')
   colspec <- sapply(seq_len(ncol(ht)), function (mycol) paste0('p{', compute_width(ht, mycol, mycol), '}'))
   colspec <- paste0(colspec, collapse = ' ')
   res <- paste0('{', colspec, '}\n')
@@ -128,11 +129,11 @@ build_tabular <- function(ht) {
   cb_colors         <- collapsed_border_colors(ht)
   res <- paste0(res, build_clines_for_row(ht, row = 0, collapsed_borders, cb_colors))
 
-  for (myrow in 1:nrow(ht)) {
+  for (myrow in seq_len(nrow(ht))) {
     row_contents <- character(0)
     added_right_border <- FALSE
 
-    for (mycol in 1:ncol(ht)) {
+    for (mycol in seq_len(ncol(ht))) {
       dcell <- display_cells[display_cells$row == myrow & display_cells$col == mycol, ]
       drow <- dcell$display_row
       dcol <- dcell$display_col
