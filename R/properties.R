@@ -11,8 +11,8 @@ huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_co
   'font', 'pad_decimal')
 huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
-huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label',
-  'latex_float')
+huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos',
+  'tabular_environment', 'label', 'latex_float')
 
 huxtable_env <- new.env()
 huxtable_env$huxtable_default_attrs <- list(

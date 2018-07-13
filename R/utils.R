@@ -132,7 +132,6 @@ format_numbers <- function (string, num_fmt) {
 }
 
 
-
 #' Sanitize table elements
 #'
 #' This is copied over from `xtable::sanitize()`.

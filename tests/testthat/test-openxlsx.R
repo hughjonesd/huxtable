@@ -87,6 +87,15 @@ test_that('Works for single-column huxtables with and without row names', {
 })
 
 
+test_that('Works for zero-dimension huxtables', {
+  h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
+  h_ncol0 <- hux(a = 1:2)[, FALSE]
+
+  expect_silent(as_Workbook(h_nrow0))
+  expect_silent(as_Workbook(h_ncol0))
+})
+
+
 test_that('Data written in appropriate format', {
   hx <- huxtable(a = 1:2 + 0.5, b = -1:-2 + 0.5, d = letters[1:2], add_colnames = TRUE)
   wb <- as_Workbook(hx)

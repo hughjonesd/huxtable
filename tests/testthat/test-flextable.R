@@ -78,3 +78,12 @@ test_that('as_FlexTable gives warning', {
   expect_warning(ft <- as_FlexTable(hx), 'deprecated')
   expect_is(ft, 'flextable')
 })
+
+
+test_that('0-row/0-column huxtables work', {
+  h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
+  h_ncol0 <- hux(a = 1:2)[, FALSE]
+  skip("0-length tables don't work in flextable yet")
+  expect_warning(as_flextable(h_nrow0), "row")
+  expect_warning(as_flextable(h_ncol0), "col")
+})
