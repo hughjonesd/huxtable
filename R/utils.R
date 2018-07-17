@@ -14,11 +14,8 @@ ncharw <- function (x) nchar(x, type = 'width')
 }
 
 
-<<<<<<< HEAD
-=======
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
-register_s3_method <- function (pkg, generic, class = 'huxtable')
-{
+register_s3_method <- function (pkg, generic, class = 'huxtable') {
   assert_that(is.string(pkg), is.string(generic))
   fun <- get(paste0(generic, '.', class), envir = parent.frame())
 
@@ -31,7 +28,6 @@ register_s3_method <- function (pkg, generic, class = 'huxtable')
 }
 
 
->>>>>>> dplyr-to-suggest
 assert_package <- function (fun, package) {
   if (! requireNamespace(package, quietly = TRUE)) stop(glue::glue(
         '{fun} requires the "{package}" package. To install, type:\n',
