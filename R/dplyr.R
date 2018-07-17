@@ -7,7 +7,7 @@ NULL
 filter_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
-  .data <- tibble::rownames_to_column(.data, 'filter.huxtable.rownames')
+  .data$filter.huxtable.rownames <- rownames(.data)
   result <- NextMethod()
   ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames, ]
 }
@@ -113,7 +113,7 @@ transmute_.huxtable <- mutate_.huxtable
 arrange_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
-  .data <- tibble::rownames_to_column(.data, 'arrange.huxtable.rownames')
+  .data$arrange.huxtable.rownames <- rownames(.data)
   result <- NextMethod()
   ht[match(result$arrange.huxtable.rownames, .data$arrange.huxtable.rownames), ]
 }
@@ -129,7 +129,7 @@ transmute.huxtable <- mutate.huxtable
 slice_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
-  .data <- tibble::rownames_to_column(.data, 'slice.huxtable.rownames')
+  .data$slice.huxtable.rownames <- rownames(.data)
   result <- NextMethod()
   ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)), ]
 }

@@ -25,7 +25,6 @@ Imports:
     knitr,
     rmarkdown,
     stringr,
-    tibble,
     tidyselect,
     utils
 Suggests:
