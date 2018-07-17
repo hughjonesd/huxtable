@@ -14,6 +14,13 @@ ncharw <- function (x) nchar(x, type = 'width')
 }
 
 
+assert_package <- function (fun, package) {
+  if (! requireNamespace(package, quietly = TRUE)) stop(glue::glue(
+        '{fun} requires the "{package}" package. To install, type:\n',
+        'install.packages("{package}")'))
+}
+
+
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)

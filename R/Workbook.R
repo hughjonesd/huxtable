@@ -42,14 +42,11 @@ as_Workbook <- function (ht, ...) UseMethod('as_Workbook')
 #' @export
 #' @rdname as_Workbook
 as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write_caption = TRUE, ...) {
+  assert_package('as_Workbook', 'openxlsx')
   assert_that(is.string(sheet))
-  if (! requireNamespace('openxlsx', quietly = TRUE)) stop(
-        'as_Workbook requires the "openxlsx" package. To install, type:\n',
-        'install.packages("openxlsx")')
 
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   openxlsx::addWorksheet(wb, sheet)
-
 
   cap <- caption(ht)
   cap_pos <- caption_pos(ht)
