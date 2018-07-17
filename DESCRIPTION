@@ -20,13 +20,8 @@ URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
-    dplyr,
     glue,
-    htmltools,
-    knitr,
-    rmarkdown,
     stringr,
-    tibble,
     tidyselect,
     utils
 Suggests:
@@ -34,8 +29,10 @@ Suggests:
     covr,
     crayon,
     devtools,
+    dplyr,
     flextable,
     ggplot2,
+    knitr,
     lazyeval,
     lme4,
     lmtest,
@@ -44,6 +41,7 @@ Suggests:
     officer,
     openxlsx,
     psych,
+    rmarkdown,
     testthat
 VignetteBuilder: knitr
 Encoding: UTF-8

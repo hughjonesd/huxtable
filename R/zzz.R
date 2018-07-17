@@ -61,6 +61,27 @@ NULL
             POSIXlt = "right"
           ))
   )
+
+  if (requireNamespace('dplyr', quietly = TRUE)) {
+    register_s3_method('dplyr', 'arrange')
+    register_s3_method('dplyr', 'arrange_')
+    register_s3_method('dplyr', 'filter')
+    register_s3_method('dplyr', 'filter_')
+    register_s3_method('dplyr', 'mutate')
+    register_s3_method('dplyr', 'mutate_')
+    register_s3_method('dplyr', 'rename')
+    register_s3_method('dplyr', 'rename_')
+    register_s3_method('dplyr', 'select')
+    register_s3_method('dplyr', 'select_')
+    register_s3_method('dplyr', 'slice')
+    register_s3_method('dplyr', 'slice_')
+    register_s3_method('dplyr', 'transmute')
+    register_s3_method('dplyr', 'transmute_')
+  }
+  if (requireNamespace('knitr', quietly = TRUE)) {
+    register_s3_method('knitr', 'knit_print')
+    register_s3_method('knitr', 'knit_print', class = 'data.frame')
+  }
 }
 
 

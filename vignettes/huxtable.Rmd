@@ -646,6 +646,8 @@ turn it off like this:
 options(huxtable.knit_print_df = FALSE)
 
 head(mtcars) # back to normal
+
+options(huxtable.knit_print_df = TRUE)
 ```
 
 ## Using huxtables in knitr and rmarkdown
