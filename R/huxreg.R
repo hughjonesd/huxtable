@@ -76,8 +76,7 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   # prepare parameters
-  if (! requireNamespace('broom', quietly = TRUE)) stop('huxreg requires the "broom" package. To install, type:\n',
-        'install.packages("broom")')
+  assert_package('huxreg', 'broom')
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))

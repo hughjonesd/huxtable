@@ -56,8 +56,7 @@ as_flextable <- function(x, ...) UseMethod('as_flextable')
 #' @rdname as_flextable
 #' @export
 as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
-  if (! requireNamespace('flextable')) stop('as_flextable requires the flextable package. To install, type:\n',
-    'install.packages("flextable")')
+  assert_package('as_flextable', 'flextable')
 
   cc <- clean_contents(x, type = 'word')
   cc <- as.data.frame(cc)
