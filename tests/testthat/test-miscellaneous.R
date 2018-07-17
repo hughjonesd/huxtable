@@ -37,6 +37,7 @@ test_dplyr_methods <- function () {
 
 
 test_knitr_methods <- function () {
+  huxtable:::.onLoad(system.file(package = 'huxtable'), 'huxtable')
   knitr_methods <- getNamespaceInfo('knitr', 'S3methods')
   knitr_methods <- as.data.frame(knitr_methods[, 1:2])
   names(knitr_methods) <- c('generic', 'class')
@@ -55,8 +56,10 @@ test_that('.onLoad gets methods registered if namespace not loaded', {
 
 
 test_that('.onLoad gets S3 methods registered if packages loaded', {
+  tryCatch(unloadNamespace('dplyr'), error = function (e) skip("Couldn't unload dplyr namespace"))
   library(dplyr)
   test_dplyr_methods()
+  tryCatch(unloadNamespace('knitr'), error = function (e) skip("Couldn't unload knitr namespace"))
   library(knitr)
   test_knitr_methods()
 })
