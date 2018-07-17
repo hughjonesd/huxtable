@@ -15,16 +15,16 @@ ncharw <- function (x) nchar(x, type = 'width')
 
 
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
-register_s3_method <- function (pkg, generic)
+register_s3_method <- function (pkg, generic, class = 'huxtable')
 {
   assert_that(is.string(pkg), is.string(generic))
-  fun <- get(paste0(generic, '.huxtable'), envir = parent.frame())
+  fun <- get(paste0(generic, '.', class), envir = parent.frame())
 
   if (pkg %in% loadedNamespaces()) {
-    registerS3method(generic, 'huxtable', fun, envir = asNamespace(pkg))
+    registerS3method(generic, class, fun, envir = asNamespace(pkg))
   }
   setHook(packageEvent(pkg, 'onLoad'), function(...) {
-    registerS3method(generic, 'huxtable', fun, envir = asNamespace(pkg))
+    registerS3method(generic, class, fun, envir = asNamespace(pkg))
   })
 }
 

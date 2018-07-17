@@ -21,9 +21,6 @@ BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
     glue,
-    htmltools,
-    knitr,
-    rmarkdown,
     stringr,
     tidyselect,
     utils
@@ -35,6 +32,7 @@ Suggests:
     dplyr,
     flextable,
     ggplot2,
+    knitr,
     lazyeval,
     lme4,
     lmtest,
@@ -43,6 +41,7 @@ Suggests:
     officer,
     openxlsx,
     psych,
+    rmarkdown,
     testthat
 VignetteBuilder: knitr
 Encoding: UTF-8

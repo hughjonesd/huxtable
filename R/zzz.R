@@ -78,6 +78,10 @@ NULL
     register_s3_method('dplyr', 'transmute')
     register_s3_method('dplyr', 'transmute_')
   }
+  if (requireNamespace('knitr', quietly = TRUE)) {
+    register_s3_method('knitr', 'knit_print')
+    register_s3_method('knitr', 'knit_print', class = 'data.frame')
+  }
 }
 
 
