@@ -71,15 +71,15 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
 
 huxtable_latex_dependencies <- list(
-  rmarkdown::latex_dependency('array'),
-  rmarkdown::latex_dependency('caption'),
-  rmarkdown::latex_dependency('graphicx'),
-  rmarkdown::latex_dependency('siunitx'),
-  rmarkdown::latex_dependency('xcolor', options = 'table'),
-  rmarkdown::latex_dependency('multirow'),
-  rmarkdown::latex_dependency('hhline'),
-  rmarkdown::latex_dependency('calc'),
-  rmarkdown::latex_dependency('tabularx')
+  list(name = 'array'),
+  list(name = 'caption'),
+  list(name = 'graphicx'),
+  list(name = 'siunitx'),
+  list(name = 'xcolor', options = 'table'),
+  list(name = 'multirow'),
+  list(name = 'hhline'),
+  list(name = 'calc'),
+  list(name = 'tabularx')
 )
 
 #' Report LaTeX dependencies
@@ -113,7 +113,15 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
     cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary)')
   }
 
-  if (as_string) paste0(report, collapse = '') else invisible(huxtable_latex_dependencies)
+  if (as_string) {
+    return(paste0(report, collapse = ''))
+  } else {
+    assert_package('report_latex_dependencies', 'rmarkdown')
+    huxtable_latex_dependencies <- lapply(huxtable_latex_dependencies, function (x) {
+      rmarkdown::latex_dependency(x$name, options = x$options)
+    })
+    return(invisible(huxtable_latex_dependencies))
+  }
 }
 
 
