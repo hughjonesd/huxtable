@@ -2,7 +2,11 @@
 title: "Pretty printing data frames with huxtable"
 author: "David Hugh-Jones"
 date: "22/06/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
