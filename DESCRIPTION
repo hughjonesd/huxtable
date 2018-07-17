@@ -20,7 +20,6 @@ URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
-    dplyr,
     glue,
     htmltools,
     knitr,
@@ -34,6 +33,7 @@ Suggests:
     covr,
     crayon,
     devtools,
+    dplyr,
     flextable,
     ggplot2,
     lazyeval,

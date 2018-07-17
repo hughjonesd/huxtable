@@ -4,6 +4,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.1.9000
 
+* dplyr has moved to Suggests:, lowering the dependency load considerably. dplyr verbs are still
+  supported if the package is installed.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
 * Bugfix: row heights and column widths weren't being copied with cbind/rbind.

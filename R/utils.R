@@ -14,6 +14,21 @@ ncharw <- function (x) nchar(x, type = 'width')
 }
 
 
+# pinched from HMS. Registers the method or sets a hook to register it on load of other package
+register_s3_method <- function (pkg, generic)
+{
+  assert_that(is.string(pkg), is.string(generic))
+  fun <- get(paste0(generic, '.huxtable'), envir = parent.frame())
+
+  if (pkg %in% loadedNamespaces()) {
+    registerS3method(generic, 'huxtable', fun, envir = asNamespace(pkg))
+  }
+  setHook(packageEvent(pkg, 'onLoad'), function(...) {
+    registerS3method(generic, 'huxtable', fun, envir = asNamespace(pkg))
+  })
+}
+
+
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)

@@ -14,7 +14,7 @@
 \arguments{
 \item{...}{Vectors, matrices, data frames or huxtables.}
 
-\item{deparse.level}{Passed to \code{\link[=cbind.data.frame]{cbind.data.frame()}}.}
+\item{deparse.level}{Unused.}
 
 \item{copy_cell_props}{Cell properties to copy from neighbours (see below).}
 }
@@ -28,16 +28,16 @@ Combine rows or columns
 Table properties will be taken from the first argument which is a huxtable. So will
 row properties (for cbind) and column properties (for rbind).
 
-If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector of cell properties,
-then for rbind, the named cell properties and row heights will be copied to non-huxtables. For cbind,
-the named cell properties and column widths will be copied. Objects on the left or above get priority
-over those on the right or below.
+If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector of cell
+properties, then the named cell properties will be copied to non-huxtables. Objects on the left
+or above get priority over those on the right or below. These properties may also include
+\code{"row_height"} (for rbind) or \code{"col_width"} (for cbind). Numeric row heights and column widths
+will be rescaled to 1.
 
-If \code{copy_cell_props} is \code{TRUE}, the default
-set of cell properties (everything but \code{colspan} and \code{rowspan}) will be copied.
+If \code{copy_cell_props} is \code{TRUE}, the default set of cell properties (everything but \code{colspan} and
+\code{rowspan}, including row heights/column widths) will be copied.
 
-If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the
-default properties.
+If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the default properties.
 }
 \examples{
 ht1 <- hux(a = 1:3, b = 4:6)

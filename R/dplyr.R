@@ -1,9 +1,9 @@
 
-#' @importFrom dplyr filter_
+
 #' @importFrom stats na.omit
 NULL
 
-#' @export
+
 filter_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -12,27 +12,11 @@ filter_.huxtable <- function (.data, ..., .dots) {
   ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames, ]
 }
 
-#' Pointless documentation
-#'
-#' This pointless piece of documentation exists to satisfy R CMD check, due to
-#' a complicated and boring issue involving `stats::filter`, `dplyr::filter`
-#' and the mysterious workings of the NAMESPACE file. See [mutate.huxtable()]
-#' for details about using dplyr with huxtable.
-#'
-#' @param .data Data
-#' @param ... Other args
-#' @name filter
-#' @export filter
-NULL
 
-#' @importFrom dplyr filter
-#' @export
 filter.huxtable <- function(.data, ...) {}
 body(filter.huxtable) <- body(filter_.huxtable)
 
 
-#' @importFrom dplyr mutate_
-#' @export
 mutate_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -100,8 +84,6 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' bold(ht3)
 #' ht4 <- dplyr::mutate(ht, x = a + b, copy_cell_props = FALSE)
 #' bold(ht4)
-#' @importFrom dplyr mutate
-#' @export
 mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -125,13 +107,9 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
 }
 
 
-#' @importFrom dplyr transmute_
-#' @export
 transmute_.huxtable <- mutate_.huxtable
 
 
-#' @importFrom dplyr arrange_
-#' @export
 arrange_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -141,19 +119,13 @@ arrange_.huxtable <- function (.data, ..., .dots) {
 }
 
 
-#' @importFrom dplyr arrange
-#' @export
 arrange.huxtable <- function(.data, ...) {}
 body(arrange.huxtable) <- body(arrange_.huxtable)
 
 
-#' @importFrom dplyr transmute
-#' @export
 transmute.huxtable <- mutate.huxtable
 
 
-#' @importFrom dplyr slice_
-#' @export
 slice_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -163,14 +135,10 @@ slice_.huxtable <- function (.data, ..., .dots) {
 }
 
 
-#' @importFrom dplyr slice
-#' @export
 slice.huxtable <- function (.data, ...) {}
 body(slice.huxtable) <- body(slice_.huxtable)
 
 
-#' @importFrom dplyr select_
-#' @export
 select_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
@@ -183,17 +151,11 @@ select_.huxtable <- function (.data, ..., .dots) {
 }
 
 
-#' @importFrom dplyr select
-#' @export
 select.huxtable <- function(.data, ...) {}
 body(select.huxtable) <- body(select_.huxtable)
 
 
-#' @importFrom dplyr rename_
-#' @export
 rename_.huxtable <- select_.huxtable
 
 
-#' @importFrom dplyr rename
-#' @export
 rename.huxtable <- select.huxtable
