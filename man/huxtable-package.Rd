@@ -20,12 +20,16 @@ read the vignette with \code{vignette('huxtable')}.
 \code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. If it is unset, \code{add_colnames} defaults to
 \code{FALSE}; in a future release, the default will become \code{TRUE}.
 \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link[=print.huxtable]{print.huxtable()}}.
+\item \code{options('huxtable.knitr_output_format')} overrides the default output format when huxtable
+objects are printed by knitr. Set to "html", "latex", "md" or "screen". If \code{NULL} (the default),
+huxtable guesses the format using \code{\link[=guess_knitr_output_format]{guess_knitr_output_format()}}.
 \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
 will be printed in color on screen.
 \item \code{options('huxtable.knit_print_df')}. If \code{TRUE} (the default), data frames in knitr will be
 pretty-printed using huxtable.
-\item \code{options('huxtable.knit_print_df_theme')}. A one-argument function applied to theme the
-huxtableized data frame before printing in knitr. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
+\item \code{options('huxtable.knit_print_df_theme')}. A function applied to data frames
+before printing in knitr. The function should take one argument (a data frame) and return a
+huxtable. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
 \item \code{options('huxtable.autoformat')} sets the default value for \code{autoformat} in \code{\link[=huxtable]{huxtable()}} and
 \code{\link[=as_huxtable]{as_huxtable()}}. It defaults to \code{TRUE}.
 \item \code{options('huxtable.autoformat_number_format')} and \code{options('huxtable.autoformat_align')} are

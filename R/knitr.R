@@ -15,8 +15,13 @@
 #'
 #' @family knit_print
 knit_print.huxtable <- function (x, options, ...) {
-  of <- guess_knitr_output_format() # runs assert_package for knitr
-  call_name <- switch(of, latex = 'to_latex', html = 'to_html', 'to_screen')
+  # guess... runs assert_package for knitr
+  of <- getOption('huxtable.knitr_output_format', guess_knitr_output_format())
+  call_name <- switch(of, latex = 'to_latex', html = 'to_html', md = 'to_md', {
+    warning(glue::glue('Unrecognized output format "{of}". Using "to_screen" to print huxtables.',
+          'Set options("huxtable.knitr_output_format") manually to "latex", "html" or "md".'))
+    'to_screen'
+  })
   res <- do.call(call_name, list(ht = x))
   if (of == 'latex') {
     latex_deps <- report_latex_dependencies(quiet = TRUE)

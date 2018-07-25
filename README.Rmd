@@ -55,6 +55,24 @@ install.packages('remotes')
 remotes::install_github('hughjonesd/huxtable')
 ```
 
+# Examples
+
+```{r, echo = FALSE}
+options(huxtable.knitr_output_format = "html")
+```
+
+Standard style:
+
+```{r, code = readLines('docs/example-basic.R')}
+
+```
+
+Tidyverse style:
+
+```{r, code = readLines('docs/example-tidyverse.R')}
+
+```
+
 # Learning more
 
 Check out [the website](https://hughjonesd.github.io/huxtable), read the

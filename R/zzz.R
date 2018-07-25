@@ -20,12 +20,16 @@
 #'   [huxtable()] and [as_huxtable()]. If it is unset, `add_colnames` defaults to
 #'   `FALSE`; in a future release, the default will become `TRUE`.
 #' * `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].
+#' * `options('huxtable.knitr_output_format')` overrides the default output format when huxtable
+#'   objects are printed by knitr. Set to "html", "latex", "md" or "screen". If `NULL` (the default),
+#'   huxtable guesses the format using [guess_knitr_output_format()].
 #' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
-#'   will be printed in color on screen.
+#'    will be printed in color on screen.
 #' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
 #'   pretty-printed using huxtable.
-#' * `options('huxtable.knit_print_df_theme')`. A one-argument function applied to theme the
-#'   huxtableized data frame before printing in knitr. Defaults to [theme_plain()].
+#' * `options('huxtable.knit_print_df_theme')`. A function applied to data frames
+#'    before printing in knitr. The function should take one argument (a data frame) and return a
+#'    huxtable. Defaults to [theme_plain()].
 #' * `options('huxtable.autoformat')` sets the default value for `autoformat` in [huxtable()] and
 #'   [as_huxtable()]. It defaults to `TRUE`.
 #' * `options('huxtable.autoformat_number_format')` and `options('huxtable.autoformat_align')` are
