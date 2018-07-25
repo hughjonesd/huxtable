@@ -73,6 +73,8 @@ Tidyverse style:
 
 ```
 
+&nbsp;
+
 # Learning more
 
 Check out [the website](https://hughjonesd.github.io/huxtable), read the
