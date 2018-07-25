@@ -7,7 +7,6 @@ r:
   - oldrel
   - release
   - devel
-r_github_packages: jimhester/covr
 env:
   - CACHE_VERSION=standard
 matrix:
@@ -16,7 +15,6 @@ matrix:
     r: release
   - r_github_packages:
     - tidyverse/dplyr
-    - jimhester/covr
     r: release
     env:
       - CACHE_VERSION=github_dplyr
