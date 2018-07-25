@@ -57,8 +57,7 @@ to_html.huxtable <- function(ht, ...) {
         width, '; ', mstring, heightstring, '"', idstring, '>\n')
   if (! is.na(cap <- caption(ht))) {
     vpos <- if (grepl('top', caption_pos(ht))) 'top' else 'bottom'
-    hpos <- sub('.*(left|center|right)', '\\1', caption_pos(ht))
-    if (! hpos %in% c('left', 'center', 'right')) hpos <- position(ht)
+    hpos <- get_caption_hpos(ht)
     cap <- paste0('<caption style="caption-side:', vpos, '; text-align:', hpos, '">', cap, '</caption>')
     res <- paste0(res, cap)
   }
@@ -70,6 +69,7 @@ to_html.huxtable <- function(ht, ...) {
   rows_html <- paste0(rows_html, collapse = '')
   res <- paste0(res, rows_html)
   res <- paste0(res, '</table>\n')
+
   res
 }
 
@@ -77,8 +77,9 @@ to_html.huxtable <- function(ht, ...) {
 col_html <- function (ht, cn) {
   col_width <- col_width(ht)[cn]
   if (is.numeric(col_width)) col_width <- paste0(col_width * 100, '%')
-  res <- paste0('<col style="width: ', col_width, ';">')
-  # print out <col>, <colgroup>, that kinda stuff
+  style <- if (is.na(col_width)) '' else paste0(' style="width: ', col_width, ';"')
+  res <- paste0('<col', style, '>')
+
   res
 }
 

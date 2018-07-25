@@ -14,6 +14,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfixes for 0-row or 0-column huxtables:
   - Output works, usually with a warning.
   - cbind and rbind work.
+* Bugfix: HTML cols were printed with width: NA
 
 
 # huxtable 4.0.1
