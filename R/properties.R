@@ -14,6 +14,21 @@ huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos',
   'tabular_environment', 'label', 'latex_float')
 
+make_namespace_S3_entries <- function (accessors) {
+    entries <- lapply(accessors, function (getter) {
+    setter <- paste0('"', getter, '<-"')
+    paste0('S3method(', c(getter, setter), ', huxtable)')
+  })
+
+  unlist(entries)
+}
+
+#' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
+#' @evalNamespace make_namespace_S3_entries(huxtable_col_attrs)
+#' @evalNamespace make_namespace_S3_entries(huxtable_row_attrs)
+#' @evalNamespace make_namespace_S3_entries(huxtable_table_attrs)
+NULL
+
 huxtable_env <- new.env()
 huxtable_env$huxtable_default_attrs <- list(
         rowspan             = 1,
@@ -252,8 +267,6 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' Vertical alignment may not work for short text in LaTeX. Defining row heights with [row_height()]
 #' may help.
 #' @export valign valign<- set_valign
-#' @S3method valign huxtable
-#' @S3method valign<- huxtable
 NULL
 make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
 
@@ -275,8 +288,6 @@ check_align_value <- function (x) {
 #' @details This sets the horizontal alignment of the cell. If `value` is a single character (e.g.
 #' a decimal point), then the cell is aligned on this character.
 #' @export align align<- set_align
-#' @S3method align huxtable
-#' @S3method align<- huxtable
 NULL
 make_getter_setters('align', 'cell', check_fun = check_align_value,
       extra_code = value[value == 'centre'] <- 'center')
@@ -296,8 +307,6 @@ make_getter_setters('align', 'cell', check_fun = check_align_value,
 #' @templateVar attr_val c(.2, .8)
 #' @templateVar extra print_screen(ht)
 #' @export col_width col_width<- set_col_width
-#' @S3method col_width huxtable
-#' @S3method col_width<- huxtable
 NULL
 make_getter_setters('col_width', 'col')
 
@@ -314,8 +323,6 @@ make_getter_setters('col_width', 'col')
 #' @template getset-example
 #' @templateVar attr_val c(.2, .1, .1)
 #' @export row_height row_height<- set_row_height
-#' @S3method row_height huxtable
-#' @S3method row_height<- huxtable
 NULL
 make_getter_setters('row_height', 'row')
 
@@ -330,8 +337,6 @@ make_getter_setters('row_height', 'row')
 #' @templateVar attr_val 2
 #' @templateVar extra print_screen(ht)
 #' @export rowspan rowspan<- set_rowspan
-#' @S3method rowspan huxtable
-#' @S3method rowspan<- huxtable
 NULL
 make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
@@ -350,8 +355,6 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @templateVar attr_val 2
 #' @templateVar extra print_screen(ht)
 #' @export colspan colspan<- set_colspan
-#' @S3method colspan huxtable
-#' @S3method colspan<- huxtable
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
@@ -383,8 +386,6 @@ check_span_shadows <- function (ht, rc, value) {
 #' @templateVar attr_val2 'yellow'
 #' @family formatting functions
 #' @export background_color background_color<- set_background_color
-#' @S3method background_color huxtable
-#' @S3method background_color<- huxtable
 NULL
 make_getter_setters('background_color', 'cell')
 
@@ -399,8 +400,6 @@ make_getter_setters('background_color', 'cell')
 #' @templateVar attr_val2 'red'
 #' @family formatting functions
 #' @export text_color text_color<- set_text_color
-#' @S3method text_color huxtable
-#' @S3method text_color<- huxtable
 NULL
 make_getter_setters('text_color', 'cell')
 
@@ -420,8 +419,6 @@ make_getter_setters('text_color', 'cell')
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 2
 #' @export left_border left_border<- set_left_border
-#' @S3method left_border huxtable
-#' @S3method left_border<- huxtable
 NULL
 make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 
@@ -434,8 +431,6 @@ make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 #' right_border(ht) <- value
 #' set_right_border(ht, row, col, value, byrow = FALSE)
 #' @export right_border right_border<- set_right_border
-#' @S3method right_border huxtable
-#' @S3method right_border<- huxtable
 NULL
 make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 
@@ -447,8 +442,6 @@ make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 #' top_border(ht) <- value
 #' set_top_border(ht, row, col, value, byrow = FALSE)
 #' @export top_border top_border<- set_top_border
-#' @S3method top_border huxtable
-#' @S3method top_border<- huxtable
 NULL
 make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 
@@ -459,8 +452,6 @@ make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 #' bottom_border(ht) <- value
 #' set_bottom_border(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border bottom_border<- set_bottom_border
-#' @S3method bottom_border huxtable
-#' @S3method bottom_border<- huxtable
 NULL
 make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 
@@ -562,8 +553,6 @@ get_all_borders <- function(ht, row, col) {
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 'blue'
 #' @export left_border_color left_border_color<- set_left_border_color
-#' @S3method left_border_color huxtable
-#' @S3method left_border_color<- huxtable
 NULL
 make_getter_setters('left_border_color', 'cell')
 
@@ -576,8 +565,6 @@ make_getter_setters('left_border_color', 'cell')
 #' right_border_color(ht) <- value
 #' set_right_border_color(ht, row, col, value, byrow = FALSE)
 #' @export right_border_color right_border_color<- set_right_border_color
-#' @S3method right_border_color huxtable
-#' @S3method right_border_color<- huxtable
 NULL
 make_getter_setters('right_border_color', 'cell')
 
@@ -589,8 +576,6 @@ make_getter_setters('right_border_color', 'cell')
 #' top_border_color(ht) <- value
 #' set_top_border_color(ht, row, col, value, byrow = FALSE)
 #' @export top_border_color top_border_color<- set_top_border_color
-#' @S3method top_border_color huxtable
-#' @S3method top_border_color<- huxtable
 NULL
 make_getter_setters('top_border_color', 'cell')
 
@@ -601,8 +586,6 @@ make_getter_setters('top_border_color', 'cell')
 #' bottom_border_color(ht) <- value
 #' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border_color bottom_border_color<- set_bottom_border_color
-#' @S3method bottom_border_color huxtable
-#' @S3method bottom_border_color<- huxtable
 NULL
 make_getter_setters('bottom_border_color', 'cell')
 
@@ -658,8 +641,6 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 10
 #' @export left_padding left_padding<- set_left_padding
-#' @S3method left_padding huxtable
-#' @S3method left_padding<- huxtable
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
 
@@ -672,8 +653,6 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' right_padding(ht) <- value
 #' set_right_padding(ht, row, col, value, byrow = FALSE)
 #' @export right_padding right_padding<- set_right_padding
-#' @S3method right_padding huxtable
-#' @S3method right_padding<- huxtable
 NULL
 
 #' @name bottom_padding
@@ -683,8 +662,6 @@ NULL
 #' bottom_padding(ht) <- value
 #' set_bottom_padding(ht, row, col, value, byrow = FALSE)
 #' @export bottom_padding bottom_padding<- set_bottom_padding
-#' @S3method bottom_padding huxtable
-#' @S3method bottom_padding<- huxtable
 NULL
 
 #' @name top_padding
@@ -694,8 +671,6 @@ NULL
 #' top_padding(ht) <- value
 #' set_top_padding(ht, row, col, value, byrow = FALSE)
 #' @export top_padding top_padding<- set_top_padding
-#' @S3method top_padding huxtable
-#' @S3method top_padding<- huxtable
 NULL
 
 
@@ -744,8 +719,6 @@ set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
 #' @templateVar attr_val2 FALSE
 #'
 #' @export wrap wrap<- set_wrap
-#' @S3method wrap huxtable
-#' @S3method wrap<- huxtable
 NULL
 make_getter_setters('wrap', 'cell', check_fun = is.logical)
 
@@ -762,8 +735,6 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
 #' @export escape_contents escape_contents<- set_escape_contents
-#' @S3method escape_contents huxtable
-#' @S3method escape_contents<- huxtable
 NULL
 make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 
@@ -781,8 +752,6 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @templateVar attr_val2 ''
 #' @family formatting functions
 #' @export na_string na_string<- set_na_string
-#' @S3method na_string huxtable
-#' @S3method na_string<- huxtable
 NULL
 make_getter_setters('na_string', 'cell', check_fun = is.character)
 
@@ -800,8 +769,6 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
 #' @export bold bold<- set_bold
-#' @S3method bold huxtable
-#' @S3method bold<- huxtable
 NULL
 make_getter_setters('bold', 'cell', check_fun = is.logical)
 
@@ -813,8 +780,6 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' italic(ht) <- value
 #' set_italic(ht, row, col, value, byrow = FALSE)
 #' @export italic italic<- set_italic
-#' @S3method italic huxtable
-#' @S3method italic<- huxtable
 NULL
 make_getter_setters('italic', 'cell', check_fun = is.logical)
 
@@ -830,8 +795,6 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' @templateVar attr_val2 12
 #' @family formatting functions
 #' @export font_size font_size<- set_font_size
-#' @S3method font_size huxtable
-#' @S3method font_size<- huxtable
 NULL
 make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 
@@ -849,8 +812,6 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' You will probably need to set [col_width()] and [row_height()] explicitly
 #' to achieve a nice result, in both HTML and LaTeX.
 #' @export rotation rotation<- set_rotation
-#' @S3method rotation huxtable
-#' @S3method rotation<- huxtable
 NULL
 make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 
@@ -899,8 +860,6 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 #' @templateVar attr_val 2
 #' @templateVar attr_val2 3
 #' @export number_format number_format<- set_number_format
-#' @S3method number_format huxtable
-#' @S3method number_format<- huxtable
 NULL
 make_getter_setters('number_format', 'cell')
 
@@ -916,8 +875,6 @@ make_getter_setters('number_format', 'cell')
 #' @aliases pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
 #' @rdname align
 #' @export pad_decimal pad_decimal<- set_pad_decimal
-#' @S3method pad_decimal huxtable
-#' @S3method pad_decimal<- huxtable
 NULL
 make_getter_setters('pad_decimal', 'cell', extra_code = {
   stopifnot(all(nchar(na.omit(value)) == 1))
@@ -936,8 +893,6 @@ make_getter_setters('pad_decimal', 'cell', extra_code = {
 #' @templateVar attr_val2 'arial'
 #' @family formatting functions
 #' @export font font<- set_font
-#' @S3method font huxtable
-#' @S3method font<- huxtable
 NULL
 make_getter_setters('font', 'cell', check_fun = is.character)
 
@@ -953,8 +908,6 @@ make_getter_setters('font', 'cell', check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val 'right'
 #' @export position position<- set_position
-#' @S3method position huxtable
-#' @S3method position<- huxtable
 NULL
 make_getter_setters('position', 'table', check_values = c('left', 'center', 'centre', 'right'),
       extra_code = value[value == 'centre'] <- 'center')
@@ -969,10 +922,8 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'cen
 #' will be determined by the huxtable's [position()].
 #' @template getset-example
 #' @templateVar attr_val 'bottom'
-#' @export caption_pos caption_pos<- set_caption_pos
-#' @S3method caption_pos huxtable
-#' @S3method caption_pos<- huxtable
 #' @seealso [caption()]
+#' @export caption_pos caption_pos<- set_caption_pos
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topcentre',
       'topright', 'bottomleft', 'bottomcenter', 'bottomcentre', 'bottomright'), extra_code = {
@@ -990,8 +941,6 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 't
 #' @templateVar attr_val 0.8
 #' @family table measurements
 #' @export width width<- set_width
-#' @S3method width huxtable
-#' @S3method width<- huxtable
 NULL
 make_getter_setters('width', 'table')
 
@@ -1005,8 +954,6 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_val 0.4
 #' @family table measurements
 #' @export height height<- set_height
-#' @S3method height huxtable
-#' @S3method height<- huxtable
 NULL
 make_getter_setters('height', 'table')
 
@@ -1025,8 +972,6 @@ make_getter_setters('height', 'table')
 #' ht <- hux(a = 1:2, b = 1:2)
 #' caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
 #' @export caption caption<- set_caption
-#' @S3method caption huxtable
-#' @S3method caption<- huxtable
 NULL
 make_getter_setters('caption', 'table', check_fun = is.character)
 
@@ -1040,8 +985,6 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @templateVar attr_val 'longtable'
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
 #' @export tabular_environment tabular_environment<- set_tabular_environment
-#' @S3method tabular_environment huxtable
-#' @S3method tabular_environment<- huxtable
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 
@@ -1060,8 +1003,6 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
 #' in \href{http://bookdown.org}{bookdown}.
 #' @export label label<- set_label
-#' @S3method label huxtable
-#' @S3method label<- huxtable
 NULL
 make_getter_setters('label', 'table', check_fun = is.character)
 
@@ -1077,7 +1018,5 @@ make_getter_setters('label', 'table', check_fun = is.character)
 #' floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
 #' `float` package.
 #' @export latex_float latex_float<- set_latex_float
-#' @S3method latex_float huxtable
-#' @S3method latex_float<- huxtable
 NULL
 make_getter_setters('latex_float', 'table', check_fun = is.character)
