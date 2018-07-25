@@ -7,14 +7,17 @@
 #' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 #' functionality to xtable, with a simpler interface.
 #'
-#' @details
-#'
 #' To create a huxtable object, use [huxtable()] or [as_huxtable()].
 #'
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 #' read the vignette with `vignette('huxtable')`.
 #'
-#' @section Package options:
+#' @seealso huxtable-options
+#' @name huxtable-package
+NULL
+
+
+#' Package options
 #'
 #' * `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
 #'   [huxtable()] and [as_huxtable()]. If it is unset, `add_colnames` defaults to
@@ -35,13 +38,10 @@
 #' * `options('huxtable.autoformat_number_format')` and `options('huxtable.autoformat_align')` are
 #'   lists. The list names are base R classes. [huxtable()] with `autoformat = TRUE` will set
 #'   `number_format()` and `align()` for data columns according to the corresponding list values.
-#'
-#'  For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
-#'  something like `list(..., Date = "center", ...)`.
-#'
-#' @name huxtable-package
+#'   For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
+#'   something like `list(..., Date = "center", ...)`.
+#' @name huxtable-options
 NULL
-
 
 .onLoad <- function(libname, pkgname) {
   options(
