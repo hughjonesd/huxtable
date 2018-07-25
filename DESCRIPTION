@@ -21,7 +21,7 @@ BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
     glue,
-    stringr,
+    stringr (>= 1.2.0),
     tidyselect,
     utils
 Suggests:
