@@ -11,19 +11,23 @@ env:
   - CACHE_VERSION=standard
 matrix:
   include:
+# check it can build without pandoc
   - pandoc: false
     r: release
+# check it can build with latest dplyr
   - r_github_packages:
     - tidyverse/dplyr
     r: release
     env:
       - CACHE_VERSION=github_dplyr
+# run tests without Suggested packages
   - install:
     - R -e 'install.packages(c("knitr", "rmarkdown", "devtools", "testthat"))'
     - R -e 'devtools::install_deps(deps = c("Imports", "Depends", "LinkingTo"))'
-    r: release
+    r: devel
     r_build_args: --no-build-vignettes
     r_check_args: --no-vignettes --no-examples
+    warnings_are_errors: false
     env:
       - CACHE_VERSION=no_suggests
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
