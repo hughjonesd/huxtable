@@ -20,6 +20,7 @@ matrix:
       - CACHE_VERSION=github_dplyr
   - install:
     - R -e 'install.packages("devtools")'
+    - R -e 'install.packages("knitr")'
     - R -e 'devtools::install_deps(dep = c("Depends", "Imports", "LinkingTo"))'
     r: release
     env:
