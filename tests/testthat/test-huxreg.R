@@ -12,6 +12,7 @@ test_that('huxreg examples unchanged', {
 
 test_that('has_builtin_ci works', {
   skip_if_not_installed('broom')
+  skip_if_not_installed('nlme')
 
   lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
   expect_true(huxtable:::has_builtin_ci(lm1))
@@ -37,6 +38,7 @@ test_that('huxreg copes with different models', {
 
 test_that('huxreg confidence intervals work', {
   skip_if_not_installed('broom')
+  skip_if_not_installed('nnet')
 
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -52,6 +54,7 @@ test_that('huxreg confidence intervals work', {
 
 test_that('huxreg confidence intervals work when tidy c.i.s not available', {
   skip_if_not_installed('broom')
+  skip_if_not_installed('nlme')
 
   set.seed(27101975)
   library(nlme)
@@ -185,6 +188,7 @@ test_that('huxreg stars printed correctly', {
 
 test_that('huxreg works for models without tidy p values', {
   skip_if_not_installed('broom')
+  skip_if_not_installed('lme4')
 
   expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris),
         statistics = 'nobs'), 'p values')
@@ -193,6 +197,7 @@ test_that('huxreg works for models without tidy p values', {
 
 test_that('huxreg works when nobs not available', {
   skip_if_not_installed('broom')
+  skip_if_not_installed('lmtest')
 
   m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   ct <- lmtest::coeftest(m)
