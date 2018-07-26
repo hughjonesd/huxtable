@@ -2,11 +2,7 @@
 context("Attributes")
 
 
-source('functions.R')
-
-
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
-
 
 
 for (attr in huxtable_cell_attrs) {

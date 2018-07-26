@@ -1,8 +1,6 @@
 
+
 context('openxlsx conversion')
-
-
-source('functions.R')
 
 
 test_that('Simple conversion works', {

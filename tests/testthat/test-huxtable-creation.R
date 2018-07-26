@@ -2,9 +2,6 @@
 context('huxtable creation')
 
 
-source('functions.R')
-
-
 test_that('Object creation examples unchanged', {
   test_ex_same('huxtable')
 })

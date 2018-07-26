@@ -2,9 +2,6 @@
 context('Test output using pandoc')
 
 
-source('functions.R')
-
-
 test_that('Four spaces does not cause <pre><code> markup', {
   skip_without_pandoc()
   skip_on_cran()

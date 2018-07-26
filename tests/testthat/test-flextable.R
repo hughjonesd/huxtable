@@ -2,9 +2,6 @@
 context('flextable conversion')
 
 
-source('functions.R')
-
-
 test_that('Simple conversion works', {
   skip_if_not_installed('flextable')
 

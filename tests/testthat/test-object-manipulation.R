@@ -2,9 +2,6 @@
 context("Object manipulation")
 
 
-source('functions.R')
-
-
 test_that('Object subsetting and replacement examples unchanged', {
   test_ex_same('extract-methods')
   test_ex_same('add_colnames')

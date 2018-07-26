@@ -3,10 +3,6 @@
 context('huxreg')
 
 
-source('functions.R')
-
-
-
 test_that('huxreg examples unchanged', {
   skip_if_not_installed('broom')
 

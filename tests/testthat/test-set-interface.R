@@ -2,9 +2,6 @@
 context('Row and column functions, set_* interface')
 
 
-source('functions.R')
-
-
 test_that('Row/column function examples unchanged', {
   test_ex_same('every')
   test_ex_same('final')

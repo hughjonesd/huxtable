@@ -3,8 +3,6 @@
 context("knit_print")
 
 
-source('functions.R')
-
 test_that("Can turn on and off printing of data frames", {
 
   expect_huxish <- function (dfr, bool) {

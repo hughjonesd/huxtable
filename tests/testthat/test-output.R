@@ -2,9 +2,6 @@
 context("Output")
 
 
-source('functions.R')
-
-
 validate_markdown <- function(md_string, output_format = 'html_document') {
   force(output_format)
   on.exit({
