@@ -24,7 +24,7 @@ matrix:
     r: release
     env:
       - CACHE_VERSION=no_suggests
-      - _R_CHECK_FORCE_SUGGESTS_=""
+      - _R_CHECK_FORCE_SUGGESTS_=FALSE
 after_success:
   - Rscript run-covr.R
 
