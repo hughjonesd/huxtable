@@ -18,7 +18,10 @@ matrix:
   - r_github_packages:
     - tidyverse/dplyr
     - tidyverse/broom
+    - bbolker/broom.mixed
     - tidyverse/tidyselect
+    - tidyverse/stringr
+    - hadley/assertthat
     - davidgohel/flextable
     - davidgohel/officer
     - yihui/knitr
