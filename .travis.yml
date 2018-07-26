@@ -19,10 +19,11 @@ matrix:
     env:
       - CACHE_VERSION=github_dplyr
   - install:
-    - R -e 'install.packages(c("knitr", "rmarkdown", "devtools", "testthat", "broom"))'
+    - R -e 'install.packages(c("knitr", "rmarkdown", "devtools", "testthat"))'
     - R -e 'devtools::install_deps(deps = c("Imports", "Depends", "LinkingTo"))'
     r: release
-    script: echo "Make me a cache!"
+    r_build_args: --no-build-vignettes
+    r_check_args: --no-vignettes
     env:
       - CACHE_VERSION=no_suggests
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
