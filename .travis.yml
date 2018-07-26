@@ -18,10 +18,13 @@ matrix:
     r: release
     env:
       - CACHE_VERSION=github_dplyr
-  - install: R -e 'devtools::install_deps(dep = c("Depends", "Imports", "LinkingTo"))'
+  - install:
+    - R -e 'install.packages("devtools")'
+    - R -e 'devtools::install_deps(dep = c("Depends", "Imports", "LinkingTo"))'
     r: release
     env:
       - CACHE_VERSION=no_suggests
+      - _R_CHECK_FORCE_SUGGESTS_=""
 after_success:
   - Rscript run-covr.R
 
