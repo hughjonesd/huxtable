@@ -23,7 +23,7 @@ matrix:
     - R -e 'devtools::install_deps(deps = c("Imports", "Depends", "LinkingTo"))'
     r: release
     r_build_args: --no-build-vignettes
-    r_check_args: --no-vignettes
+    r_check_args: --no-vignettes --no-examples
     env:
       - CACHE_VERSION=no_suggests
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
