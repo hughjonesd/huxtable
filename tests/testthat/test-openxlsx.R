@@ -4,8 +4,6 @@ context('openxlsx conversion')
 
 
 test_that('Simple conversion works', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_silent(wb <- as_Workbook(hx))
   expect_is(wb, 'Workbook')
@@ -13,8 +11,6 @@ test_that('Simple conversion works', {
 
 
 test_that('Text properties work', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   font(hx)[1, 1] <- 'Times New Roman'
   font_size(hx)[1, 2] <- 14
@@ -27,8 +23,6 @@ test_that('Text properties work', {
 
 
 test_that('Borders work', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   top_border(hx)[1, ]    <- 1
   bottom_border(hx)[1, ] <- 2
@@ -39,8 +33,6 @@ test_that('Borders work', {
 
 
 test_that('Widths and alignment work', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   col_width(hx) <- c(.7, .3)
   width(hx) <- .9
@@ -56,8 +48,6 @@ test_that('Widths and alignment work', {
 
 
 test_that('Non-numeric colwidths and widths do not fail', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   col_width(hx) <- c(.7, .3)
   width(hx) <- '200px'
@@ -68,8 +58,6 @@ test_that('Non-numeric colwidths and widths do not fail', {
 
 
 test_that('Captions work', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   caption(hx) <- 'Caption here'
   for (pos in c('top', 'topleft', 'topcentre', 'topright', 'bottom', 'bottomleft', 'bottomcentre', 'bottomright')) {
@@ -80,8 +68,6 @@ test_that('Captions work', {
 
 
 test_that('Can add to an existing workbook', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:3, b = 4:6)
   wb <- openxlsx::createWorkbook()
   expect_silent(wb <- as_Workbook(hx, Workbook = wb))
@@ -90,8 +76,6 @@ test_that('Can add to an existing workbook', {
 
 
 test_that('Works for single-column huxtables with and without row names', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(1, 2, 3)
   wb <- openxlsx::createWorkbook()
   expect_silent(wb <- as_Workbook(hx, Workbook = wb))
@@ -102,8 +86,6 @@ test_that('Works for single-column huxtables with and without row names', {
 
 
 test_that('Works for zero-dimension huxtables', {
-  skip_if_not_installed('openxlsx')
-
   h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
   h_ncol0 <- hux(a = 1:2)[, FALSE]
 
@@ -113,8 +95,6 @@ test_that('Works for zero-dimension huxtables', {
 
 
 test_that('Data written in appropriate format', {
-  skip_if_not_installed('openxlsx')
-
   hx <- huxtable(a = 1:2 + 0.5, b = -1:-2 + 0.5, d = letters[1:2], add_colnames = TRUE)
   wb <- as_Workbook(hx)
   expect_silent(openxlsx::saveWorkbook(wb, file = 'test-xlsx.xlsx', overwrite = TRUE))
