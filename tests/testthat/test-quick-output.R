@@ -3,6 +3,9 @@ context('quick_xxx functions')
 
 
 test_that('Quick output functions work', {
+  skip_if_not_installed('openxlsx')
+  skip_if_not_installed('flextable')
+
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
   dfr <- data.frame(a = 1:5, b = 1:5)
@@ -19,6 +22,7 @@ test_that('Quick output functions work', {
   expect_silent(quick_xlsx(m, dfr, ht, file = tf))
   expect_true(file.exists(tf))
 })
+
 
 test_that('quick_pdf works', {
   skip_on_appveyor()

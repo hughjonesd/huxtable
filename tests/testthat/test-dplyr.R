@@ -1,7 +1,7 @@
 
 
 context('dplyr functions')
-
+skip_if_not_installed('dplyr')
 
 test_that('select and rename work', {
   ht <- hux(a = 1:2, b = 1:2, c = 1:2, d = 1:2)

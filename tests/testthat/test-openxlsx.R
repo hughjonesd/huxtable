@@ -3,6 +3,7 @@
 context('openxlsx conversion')
 skip_if_not_installed('openxlsx')
 
+
 test_that('Simple conversion works', {
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_silent(wb <- as_Workbook(hx))
