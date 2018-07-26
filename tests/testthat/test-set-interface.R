@@ -154,7 +154,8 @@ test_that('all forms of set_all_* work as expected', {
   border_size <- 2
   ht6 <- set_all_borders(ht, border_size)
   expect_equivalent(top_border(ht6), matrix(border_size, 2, 2))
-  ht7 <- set_all_borders(ht, 1:2, dplyr::matches('a|b'), 1)
+
+  ht7 <- set_all_borders(ht, 1:2, tidyselect::matches('a|b'), 1)
   expect_equivalent(top_border(ht7), matrix(1, 2, 2))
 })
 
