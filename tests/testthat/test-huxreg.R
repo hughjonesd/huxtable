@@ -5,20 +5,17 @@ context('huxreg')
 
 source('functions.R')
 
-skip_without_broom <- function () {
-  if (! requireNamespace("broom", quietly = TRUE)) skip("broom not installed, skipping")
-}
 
 
 test_that('huxreg examples unchanged', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   test_ex_same('huxreg')
 })
 
 
 test_that('has_builtin_ci works', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
   expect_true(huxtable:::has_builtin_ci(lm1))
@@ -30,7 +27,7 @@ test_that('has_builtin_ci works', {
 
 
 test_that('huxreg copes with different models', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -43,7 +40,7 @@ test_that('huxreg copes with different models', {
 
 
 test_that('huxreg confidence intervals work', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -58,7 +55,7 @@ test_that('huxreg confidence intervals work', {
 })
 
 test_that('huxreg confidence intervals work when tidy c.i.s not available', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   library(nlme)
@@ -72,7 +69,7 @@ test_that('huxreg confidence intervals work when tidy c.i.s not available', {
 
 
 test_that('huxreg error_style usage', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
   expect_warning(hr <- huxreg(lm1, error_style = 'stderr'), '`error_style` is deprecated')
@@ -82,7 +79,7 @@ test_that('huxreg error_style usage', {
 
 
 test_that('huxreg works with single coefficient', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -94,7 +91,7 @@ test_that('huxreg works with single coefficient', {
 
 
 test_that('huxreg merges coefficients with same names', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(100), a = rnorm(100), b = rnorm(100), d = rnorm(100))
@@ -110,7 +107,7 @@ test_that('huxreg merges coefficients with same names', {
 
 
 test_that('huxreg bold_signif works', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   lm1 <- lm(Petal.Length ~ Sepal.Length, iris)
   expect_silent(hr1 <- huxreg(lm1, bold_signif = 0.05))
@@ -119,7 +116,7 @@ test_that('huxreg bold_signif works', {
 
 
 test_that('huxreg error_pos works', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   lm1 <- lm(Petal.Length ~ Sepal.Length, iris)
   lm2 <- lm(Sepal.Width ~ Sepal.Length, iris)
@@ -129,7 +126,7 @@ test_that('huxreg error_pos works', {
 
 
 test_that('huxreg number_format works correctly', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(100), a = rnorm(100), b = rnorm(100), d = rnorm(100))
@@ -148,7 +145,7 @@ test_that('huxreg number_format works correctly', {
 
 
 test_that('huxreg borders argument works', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(100), a = rnorm(100), b = rnorm(100), d = rnorm(100))
@@ -165,7 +162,7 @@ test_that('huxreg borders argument works', {
 
 
 test_that('huxreg statistics names shown in output', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   expect_match(to_screen(huxreg(m, statistics = c(foo = 'nobs'))), 'foo')
@@ -173,7 +170,7 @@ test_that('huxreg statistics names shown in output', {
 
 
 test_that('huxreg stars printed correctly', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   set.seed(27101975)
   dfr <- data.frame(y = rnorm(20), a = rnorm(20))
@@ -191,7 +188,7 @@ test_that('huxreg stars printed correctly', {
 
 
 test_that('huxreg works for models without tidy p values', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris),
         statistics = 'nobs'), 'p values')
@@ -199,7 +196,7 @@ test_that('huxreg works for models without tidy p values', {
 
 
 test_that('huxreg works when nobs not available', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   ct <- lmtest::coeftest(m)
@@ -208,7 +205,7 @@ test_that('huxreg works when nobs not available', {
 
 
 test_that('huxreg column names are legitimate', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   hr1 <- huxreg(lm(Sepal.Width ~ Sepal.Length, data = iris), lm(Sepal.Width ~ Sepal.Length, data = iris))
   cn <- colnames(hr1)
@@ -218,7 +215,7 @@ test_that('huxreg column names are legitimate', {
 
 
 test_that('can pass broom::tidy arguments to huxreg', {
-  skip_without_broom()
+  skip_if_not_installed('broom')
 
   lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
   glm1 <- glm(I(Sepal.Width > 3) ~ Sepal.Length, data = iris, family = binomial)
