@@ -1,6 +1,6 @@
 
 context('flextable conversion')
-
+skip_if_not_installed('flextable')
 
 test_that('Simple conversion works', {
   hx <- huxtable(a = 1:3, b = 4:6)
