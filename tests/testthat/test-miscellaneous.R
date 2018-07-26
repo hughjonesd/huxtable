@@ -48,6 +48,9 @@ test_knitr_methods <- function () {
 
 # can be run via devtools::test, but not automatically from RStudio
 test_that('.onLoad gets methods registered if namespace not loaded', {
+  skip_if_not_installed('dplyr')
+  skip_if_not_installed('knitr')
+
   tryCatch(unloadNamespace('dplyr'), error = function (e) skip("Couldn't unload dplyr namespace"))
   test_dplyr_methods()
   tryCatch(unloadNamespace('knitr'), error = function (e) skip("Couldn't unload knitr namespace"))
