@@ -58,7 +58,10 @@ test_that('.onLoad gets methods registered if namespace not loaded', {
 })
 
 
-test_that('.onLoad gets S3 methods registered if packages loaded', {
+test_that('.onLoad gets S3 methods registered if namespace loaded', {
+  skip_if_not_installed('dplyr')
+  skip_if_not_installed('knitr')
+
   tryCatch(unloadNamespace('dplyr'), error = function (e) skip("Couldn't unload dplyr namespace"))
   library(dplyr)
   test_dplyr_methods()
