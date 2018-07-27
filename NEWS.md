@@ -16,6 +16,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - cbind and rbind work.
 * Bugfix: HTML cols were printed with 'width: NA'
 * Documentation tweaks.
+* Nicer error messages when rbinding objects with different numbers of rows.
 
 
 # huxtable 4.0.1
