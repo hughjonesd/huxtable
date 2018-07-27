@@ -279,6 +279,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   }
 
   bind_df <- switch(type, 'cbind' = cbind.data.frame, 'rbind' = function (x, y) {
+    if(ncol(x) != ncol(y)) stop('Can\'t rbind objects as they have different numbers of columns')
     rbind.data.frame(x, setNames(y, names(x)), stringsAsFactors = FALSE)
   })
 
