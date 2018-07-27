@@ -44,27 +44,31 @@ NULL
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  options(
-    huxtable.print                    = getOption('huxtable.print', print_screen),
-    huxtable.knit_print_df            = getOption('huxtable.knit_print_df', TRUE),
-    huxtable.knit_print_df_theme      = getOption('huxtable.knit_print_df_theme', theme_plain),
-    huxtable.color_screen             = getOption('huxtable.color_screen', requireNamespace('crayon',
-          quietly = TRUE)),
-    huxtable.autoformat               = getOption('huxtable.autoformat', TRUE),
-    huxtable.autoformat_number_format = getOption('huxtable.autoformat_number_format', list(
-            integer = 0,
-            numeric = "%.3g",
-            complex = "%.3g"
-          )),
-    huxtable.autoformat_align         = getOption('huxtable.autoformat_align', list(
-            numeric = getOption("OutDec", "."),
-            complex = getOption("OutDec", "."),
-            integer = "right",
-            Date    = "right",
-            POSIXct = "right",
-            POSIXlt = "right"
-          ))
-  )
+
+  set_default_option <- function (opt, value) {
+    ol <- list(getOption(opt, value))
+    names(ol) <- opt
+    options(ol)
+  }
+
+  set_default_option('huxtable.print', print_screen)
+  set_default_option('huxtable.knit_print_df', TRUE)
+  set_default_option('huxtable.knit_print_df_theme', theme_plain)
+  set_default_option('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
+  set_default_option('huxtable.autoformat', TRUE)
+  set_default_option('huxtable.autoformat_number_format', list(
+          integer = 0,
+          numeric = "%.3g",
+          complex = "%.3g"
+        ))
+  set_default_option('huxtable.autoformat_align', list(
+          numeric = getOption('OutDec', '.'),
+          complex = getOption('OutDec', '.'),
+          integer = 'right',
+          Date    = 'right',
+          POSIXct = 'right',
+          POSIXlt = 'right'
+        ))
 
   if (requireNamespace('dplyr', quietly = TRUE)) {
     register_s3_method('dplyr', 'arrange')
