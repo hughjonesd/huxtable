@@ -12,6 +12,8 @@ TODO
   `set_xxx_by(ht, row, col, values, ...)`
   where `...` is interpreted as in `cut` or `cut2` or `recode`
 
+* Add broom.mixed dependency when it comes out.
+
 * use tidyselect::vars_select for columns in set_ interface
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
   - Downside: can't use logical vectors for columns (without some strong trickery); 
