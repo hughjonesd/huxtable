@@ -49,14 +49,17 @@ test_that('huxreg confidence intervals work', {
 
 test_that('huxreg confidence intervals work when tidy c.i.s not available', {
   skip_if_not_installed('nlme')
+  if (packageVersion('broom') >= '0.7.0') skip_if_not_installed('broom.mixed')
 
   set.seed(27101975)
   library(nlme)
   data(Orthodont, package = 'nlme')
   # method ML avoids a warning in broom::glance
   fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~ 1, method = 'ML')
-  expect_silent(huxreg(fm1, tidy_args = list(effects = 'fixed'), statistics = 'nobs', ci_level = 0.95,
-        error_format = '({conf.low}-{conf.high})'))
+  expect_silent(
+          huxreg(fm1, tidy_args = list(effects = 'fixed'), statistics = 'nobs', ci_level = 0.95,
+          error_format = '({conf.low}-{conf.high})')
+        )
 
 })
 
