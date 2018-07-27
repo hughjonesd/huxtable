@@ -10,10 +10,12 @@
 #'
 #' @details
 #' knitr calls [knitr::knit_print()] on objects when they are printed in a knitr (or RMarkdown) document.
-#' The default method for `huxtable` objects guesses the appropriate output format and
-#' prints itself out appropriately.
+#' The method for `huxtable` objects guesses the appropriate output format and
+#' prints itself out appropriately. You can override the output format by setting
+#' `options("huxtable.knitr_output_format")`.
 #'
 #' @family knit_print
+#' @seealso huxtable-options
 knit_print.huxtable <- function (x, options, ...) {
   # guess... runs assert_package for knitr
   of <- getOption('huxtable.knitr_output_format', guess_knitr_output_format())
@@ -50,6 +52,7 @@ knit_print.huxtable <- function (x, options, ...) {
 #' `options("huxtable.knit_print_df_theme")` to a one-argument function which should return the huxtable.
 #'
 #' @family knit_print
+#' @seealso huxtable-options
 #' @examples
 #' \dontrun{
 #' # in your knitr document

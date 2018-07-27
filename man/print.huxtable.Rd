@@ -24,7 +24,7 @@
 \description{
 By default huxtables are printed using \code{\link[=print_screen]{print_screen()}}. In certain cases, for example
 in Sweave documents, it may be
-useful to change this. You can do so by setting \code{options(huxtable.print)}.
+useful to change this. You can do so by setting \code{options("huxtable.print")}.
 }
 \examples{
 \dontrun{
@@ -36,4 +36,7 @@ options(huxtable.print = function(x, ...) print(as.data.frame(x)))
 ht <- hux(a = 1:3, b = 4:6)
 format(ht, output = 'screen')
 format(ht, output = 'md')
+}
+\seealso{
+huxtable-options
 }

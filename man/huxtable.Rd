@@ -87,3 +87,6 @@ dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
 as_huxtable(dfr)
 
 }
+\seealso{
+huxtable-options
+}

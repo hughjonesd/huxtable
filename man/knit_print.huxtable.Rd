@@ -18,10 +18,13 @@ Print a huxtable within knitr
 }
 \details{
 knitr calls \code{\link[knitr:knit_print]{knitr::knit_print()}} on objects when they are printed in a knitr (or RMarkdown) document.
-The default method for \code{huxtable} objects guesses the appropriate output format and
-prints itself out appropriately.
+The method for \code{huxtable} objects guesses the appropriate output format and
+prints itself out appropriately. You can override the output format by setting
+\code{options("huxtable.knitr_output_format")}.
 }
 \seealso{
+huxtable-options
+
 Other knit_print: \code{\link{knit_print.data.frame}}
 }
 \concept{knit_print}

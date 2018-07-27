@@ -313,13 +313,14 @@ smart_hux_from_df <- function(dfr) {
 #'
 #' By default huxtables are printed using [print_screen()]. In certain cases, for example
 #' in Sweave documents, it may be
-#' useful to change this. You can do so by setting `options(huxtable.print)`.
+#' useful to change this. You can do so by setting `options("huxtable.print")`.
 #' @param x A huxtable.
 #' @param ... Options passed to other methods.
 #'
 #' @return `print` prints the huxtable and returns `NULL` invisibly.
 #' @export
 #'
+#' @seealso huxtable-options
 #' @examples
 #' \dontrun{
 #' # to print LaTeX output:
