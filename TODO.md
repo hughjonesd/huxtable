@@ -6,6 +6,8 @@ TODO
   
 * Better centring of tables and handling of width. Maybe push \resizebox
 
+* Tidy LaTeX and HTML output by not spitting out colors etc. when defaults will do.
+
 * rescale numeric row_height and col_width when subsetting, as now under rbind/cbind?
 
 * Way to set properties by value (or by an arbitrary variable). E.g.
