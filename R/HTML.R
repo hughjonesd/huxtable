@@ -46,39 +46,36 @@ to_html.huxtable <- function(ht, ...) {
           right  = 'margin-right: 0%;',
           center = 'margin-left: auto; margin-right: auto;'
         )
-  heightstring <- ''
-  if (! is.na(height <- height(ht))) {
+
+  heightstring <- if (! is.na(height <- height(ht))) {
     if (is.numeric(height)) height <- paste0(height * 100, '%')
-    heightstring <- paste0('height: ', height, ';')
-  }
-  idstring <- ''
-  if (! is.na(label <- label(ht))) idstring <- paste0(' id="', label, '"')
-  res <- paste0('<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: ',
-        width, '; ', mstring, heightstring, '"', idstring, '>\n')
+    heightstring <- sprintf('height: %s;', height)
+  } else ''
+  idstring <- if (! is.na(label <- label(ht))) sprintf('id="%s"', label) else ''
+  res <- sprintf(
+        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s" %s>\n',
+        width, mstring, heightstring, idstring)
   if (! is.na(cap <- caption(ht))) {
     vpos <- if (grepl('top', caption_pos(ht))) 'top' else 'bottom'
     hpos <- get_caption_hpos(ht)
-    cap <- paste0('<caption style="caption-side:', vpos, '; text-align:', hpos, '">', cap, '</caption>')
+    cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos, cap)
     res <- paste0(res, cap)
   }
-  cols_html <- sapply(seq_len(ncol(ht)), col_html, ht = ht)
+
+  col_widths <- col_width(ht)
+  # NAs become empty strings
+  empty_cw <- is.na(col_widths)
+  if (is.numeric(col_widths)) col_widths <- paste0(col_widths * 100, '%')
+  col_widths <- sprintf(' style="width: %s"', col_widths)
+  col_widths[empty_cw] <- ''
+  cols_html <- sprintf('<col%s>', col_widths)
   cols_html <- paste0(cols_html, collapse = '')
   res <- paste0(res, cols_html)
+
   contents <- clean_contents(ht, type = 'html')
   rows_html <- sapply(seq_len(nrow(ht)), row_html, ht = ht, contents)
   rows_html <- paste0(rows_html, collapse = '')
-  res <- paste0(res, rows_html)
-  res <- paste0(res, '</table>\n')
-
-  res
-}
-
-
-col_html <- function (ht, cn) {
-  col_width <- col_width(ht)[cn]
-  if (is.numeric(col_width)) col_width <- paste0(col_width * 100, '%')
-  style <- if (is.na(col_width)) '' else paste0(' style="width: ', col_width, ';"')
-  res <- paste0('<col', style, '>')
+  res <- paste0(res, rows_html, '</table>\n')
 
   res
 }
