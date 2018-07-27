@@ -4,7 +4,6 @@ language: R
 sudo: false
 cache: packages
 r:
-  - 3.3
   - oldrel
   - release
   - devel
