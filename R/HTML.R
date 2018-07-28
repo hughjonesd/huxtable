@@ -92,7 +92,7 @@ to_html.huxtable <- function(ht, ...) {
   border_width <- blank_where(border_width, no_borders)
 
   format_bc <- function (pos, col) {
-    x <- sprintf(' border-%s-color: rgb(%s);', pos, Vectorize(format_color)(col))
+    x <- sprintf(' border-%s-color: rgb(%s);', pos, format_color(col))
     blank_where(x, is.na(col))
   }
   border_color <- paste0(
@@ -111,7 +111,7 @@ to_html.huxtable <- function(ht, ...) {
         )
 
   bg_color <- background_color(ht)
-  bg_color <- Vectorize(format_color)(bg_color) # NA becomes white, as it happens
+  bg_color <- format_color(bg_color) # NA becomes white, as it happens
   bg_color <- sprintf(' background-color: rgb(%s);', bg_color)
   bg_color <- blank_where(bg_color, is.na(background_color(ht)))
 
@@ -138,7 +138,7 @@ to_html.huxtable <- function(ht, ...) {
 
 
   color <- text_color(ht)
-  color <- Vectorize(format_color)(color)
+  color <- format_color(color)
   color_span <- sprintf('<span style="color: rgb(%s);">', color)
   color_span <- blank_where(color_span, is.na(text_color(ht)))
   color_span_end <- rep('</span>', length(color))
