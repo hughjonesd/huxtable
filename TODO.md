@@ -2,6 +2,8 @@
 TODO
 ====
 
+* collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
+
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
 
 * Work on documentation of properties:

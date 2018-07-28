@@ -85,21 +85,30 @@ to_html.huxtable <- function(ht, ...) {
   align   <- sprintf(' text-align: %s;', real_align(ht))
   wrap    <- sprintf(' white-space: %s;', ifelse(wrap(ht), 'normal', 'nowrap'))
 
+  cb <- collapsed_borders(ht)
+  top_border <- cb$horiz[ -nrow(cb$vert), , drop = FALSE]
+  bottom_border <- cb$horiz[ -1, , drop = FALSE]
+  left_border <- cb$vert[, -ncol(cb$vert), drop = FALSE]
+  right_border <- cb$vert[, -1, drop = FALSE]
   border_width <- sprintf(' border-style: solid; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
-        top_border(ht), right_border(ht), bottom_border(ht), left_border(ht))
-  no_borders <- top_border(ht) == 0 & right_border(ht) == 0 & bottom_border(ht) == 0 &
-        left_border(ht) == 0
+        top_border, right_border, bottom_border, left_border)
+  no_borders <- top_border == 0 & right_border == 0 & bottom_border == 0 & left_border == 0
   border_width <- blank_where(border_width, no_borders)
 
   format_bc <- function (pos, col) {
     x <- sprintf(' border-%s-color: rgb(%s);', pos, format_color(col))
     blank_where(x, is.na(col))
   }
+  cbc <- collapsed_border_colors(ht)
+  top_bc <- cbc$horiz[ -nrow(cbc$vert), , drop = FALSE]
+  bottom_bc <- cbc$horiz[ -1, , drop = FALSE]
+  left_bc <- cbc$vert[ , -ncol(cbc$vert), drop = FALSE]
+  right_bc <- cbc$vert[ , -1 , drop = FALSE]
   border_color <- paste0(
-          format_bc('top', top_border_color(ht)),
-          format_bc('right', right_border_color(ht)),
-          format_bc('bottom', bottom_border_color(ht)),
-          format_bc('left', left_border_color(ht))
+          format_bc('top', top_bc),
+          format_bc('right', right_bc),
+          format_bc('bottom', bottom_bc),
+          format_bc('left', left_bc)
         )
 
   add_pts <- function (x) if (is.numeric(x)) sprintf('%.4gpt', x) else x
@@ -135,7 +144,6 @@ to_html.huxtable <- function(ht, ...) {
   rot_div <- blank_where(rot_div, rot == 0)
   rot_div_end <- rep('</div>', length(rot_div))
   rot_div_end <- blank_where(rot_div_end, rot == 0)
-
 
   color <- text_color(ht)
   color <- format_color(color)
