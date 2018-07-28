@@ -12,6 +12,8 @@
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 #' read the vignette with `vignette('huxtable')`.
 #'
+#' To report a bug, or suggest an enhancement, visit \href{https://github.com/hughjonesd/huxtable/issues}{github}.
+#'
 #' @seealso huxtable-options
 #' @name huxtable-package
 NULL
