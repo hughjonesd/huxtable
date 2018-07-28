@@ -253,8 +253,10 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
   dcells$shadowed <- rep(FALSE, nrow(dcells))
 
   change_cols <- c('display_row', 'display_col', 'rowspan', 'colspan')
+  shadow_rows <- seq_len(nrow(dcells))
+  shadow_rows <- shadow_rows[dcells$rowspan > 1 | dcells$colspan > 1]
   for (i in seq_len(nrow(dcells))) {
-    if (dcells$rowspan[i] == 1 && dcells$colspan[i] == 1) next
+    # if (dcells$rowspan[i] == 1 && dcells$colspan[i] == 1) next
     if (dcells$shadowed[i]) next
 
     dr <- dcells$row[i]

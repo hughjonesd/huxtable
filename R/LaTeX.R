@@ -143,7 +143,7 @@ build_tabular <- function(ht) {
     added_right_border <- FALSE
 
     for (mycol in seq_len(ncol(ht))) {
-      dcell <- display_cells[display_cells$row == myrow & display_cells$col == mycol, ]
+      dcell <- display_cells[myrow + (mycol - 1) * nrow(ht), ] # speed
       drow <- dcell$display_row
       dcol <- dcell$display_col
 

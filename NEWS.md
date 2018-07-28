@@ -8,6 +8,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   load considerably. dplyr verbs are still supported. huxtable gives an informative warning if 
   packages are not installed when needed.
 * HTML code has been rewritten to be faster: up to 10x improvement, especially for long tables.
+* Up to 2x speedup in LaTeX code.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
