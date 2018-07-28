@@ -16,6 +16,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - Output works, usually with a warning.
   - cbind and rbind work.
 * Bugfix: HTML cols were printed with 'width: NA'.
+* Bugfix: HTML tables with position "right" weren't right-aligned
 * Documentation tweaks.
 * Nicer error messages when rbinding objects with different numbers of rows.
 

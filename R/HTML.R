@@ -42,8 +42,8 @@ to_html.huxtable <- function(ht, ...) {
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),
-          left   = 'margin-left: 0%;',
-          right  = 'margin-right: 0%;',
+          left   = 'margin-left: 0%; margin-right: auto;',
+          right  = 'margin-left: auto; margin-right: 0%;',
           center = 'margin-left: auto; margin-right: auto;'
         )
 
