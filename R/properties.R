@@ -803,7 +803,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' @templateVar attr_name rotation
 #' @templateVar attr_desc Text rotation
 #' @templateVar value_param_desc
-#' A numeric vector. Clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
+#' A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
 #' @template getset-example
 #' @templateVar attr_val 90
 #' @template getset-rowspec-example
