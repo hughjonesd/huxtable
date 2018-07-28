@@ -3,6 +3,10 @@ TODO
 ====
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
+
+* Work on documentation of properties:
+  - Clarify how defaults work (maybe automate from huxtable_default_attrs?)
+  - Say more about what some of them do
   
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
