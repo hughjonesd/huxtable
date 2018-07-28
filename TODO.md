@@ -9,6 +9,9 @@ TODO
   - Say more about what some of them do
   
 * Generic insert_rows, insert_cols which just do an rbind (for any object)? 
+  - Probably insert_rows too close to insert_row? Or just change the interface to
+    work with objects that have dimensions (and maybe then change name to reflect > 1 row, and
+    deprecate insert_row. add_rows?).
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
