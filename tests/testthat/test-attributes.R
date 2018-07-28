@@ -109,14 +109,6 @@ test_that('number_format works with various interesting cases', {
 
 })
 
-test_that('Can combine numbers and strings in padding', {
-  ht <- huxtable(a = 1, b = 1)
-  left_padding(ht)[1, 1] <- '10pt'
-  left_padding(ht)[1, 2] <- 17
-  expect_match(to_html(ht), '17pt', fixed = TRUE)
-  expect_match(to_latex(ht), '17pt', fixed = TRUE)
-})
-
 
 test_that('Decimal padding works', {
   expect_identical(

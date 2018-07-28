@@ -3,11 +3,11 @@ title: "Huxtable table demo"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
+  html_document: default
   pdf_document:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-  html_document: default
 ---
 
 
@@ -276,6 +276,18 @@ ht
 
 \FloatBarrier
 
+# Text and border color
+
+```{r}
+ht <- make()
+ht <- set_all_border_colors(ht, everywhere, 1, 'red')
+text_color(ht) <- 'blue'
+caption(ht) <- 'text color blue. Col 1 border color set to red'
+ht
+```
+
+\FloatBarrier
+
 # Multirow, multicol and border color
 
 ```{r}
@@ -289,7 +301,7 @@ left_border_color(ht) <- 'yellow'
 right_border_color(ht) <- 'green'
 top_border_color(ht) <- 'blue'
 # bottom_border_color(ht) <- 'red'
-caption(ht) <- 'multirow, multicol and border color (l yellow r green t blue b unset)'
+caption(ht) <- 'multirow, multicol and border color (left: yellow; right: green; top: blue; bottom unset)'
 ht
 ```
 

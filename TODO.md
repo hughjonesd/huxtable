@@ -4,9 +4,12 @@ TODO
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
   
-* Better centring of tables and handling of width. Maybe push \resizebox
+* Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
-* Tidy LaTeX and HTML output by not spitting out colors etc. when defaults will do.
+* Tidy LaTeX output by not spitting out colors etc. when defaults will do.
+
+* Handle border colors in a "pre-collapsed" way to get round CSS oddities; as with borders, you have
+  the same nrow+1 x ncol,nrow x ncol+1 arrays of values and the "last one set wins"
 
 * rescale numeric row_height and col_width when subsetting, as now under rbind/cbind?
 

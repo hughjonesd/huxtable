@@ -285,6 +285,7 @@ get_caption_hpos <- function (ht) {
 
 
 real_align <- function(ht) {
+  # align(ht) can be e.g. "." for aligning on a decimal point
   al <- align(ht)
   al[! al %in% c('left', 'center', 'right')] <- 'right'
 
