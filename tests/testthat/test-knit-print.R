@@ -4,13 +4,14 @@ context("knit_print")
 
 
 test_that("Can turn on and off printing of data frames", {
-
+  # NB this all may fail if rmarkdown is loaded; rmarkdown defines knit_print.data.frame :-(
   expect_huxish <- function (dfr, bool) {
     oo <- options(huxtable.knitr_output_format = "screen")
-    tmp <- knitr::knit_print(dfr)
+    tmp <- capture.output(knitr::knit_print(dfr))
     expect_identical(any(grepl("Column names", tmp)), bool)
     options(oo)
   }
+  # should be on by default, this tests that...
   dfr <- data.frame(a = 1:3, b = 1:3)
   expect_huxish(dfr, TRUE)
   oo <- options(huxtable.knit_print_df = FALSE)

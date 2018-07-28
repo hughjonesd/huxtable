@@ -22,6 +22,8 @@ suppressPackageStartupMessages(library(huxtable))
 head(iris)
 ```
 
+And in an inline chunk: `r head(iris)`.
+
 ### Turning it off
 
 ```{r knitr-no-huxtable}
