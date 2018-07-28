@@ -6,6 +6,11 @@ TODO
   
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
+* Replace latex_float by float and use the CSS float property on the table (deals with text flow)?
+  - As with label, this means different things; also has different values, so
+    if you set float() your code wouldn't work in both HTML and TeX...
+  - Tricky. Of course many things don't work identically between HTML and TeX.
+
 * Tidy LaTeX output by not spitting out colors etc. when defaults will do.
 
 * Handle border colors in a "pre-collapsed" way to get round CSS oddities; as with borders, you have
