@@ -5,8 +5,12 @@ context('Fuzzy tests')
 expect_outputs_unchanged <- function (hx, idx) {
   info <- paste0("Index i = ", idx)
   file <- file.path(test_path(), "example-rds", paste0("various-outputs-", idx))
-  expect_known_value(to_screen(hx), file = paste0(file, "-screen.rds"), info = info)
-  expect_known_value(to_md(hx),     file = paste0(file, "-md.rds"),     info = info)
+  # setting the width avoids problems that command line and RStudio tests have different
+  # options(width)
+  expect_known_value(to_screen(hx, min_width = 20, max_width = 80),
+        file = paste0(file, "-screen.rds"), info = info)
+  expect_known_value(to_md(hx, min_width = 20, max_width = 80), file = paste0(file, "-md.rds"),
+        info = info)
   expect_known_value(to_html(hx),   file = paste0(file, "-html.rds"),   info = info)
   expect_known_value(to_latex(hx),  file = paste0(file, "-latex.rds"),  info = info)
 }

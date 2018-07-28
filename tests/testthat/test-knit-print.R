@@ -14,12 +14,9 @@ test_that("Can turn on and off printing of data frames", {
   dfr <- data.frame(a = 1:3, b = 1:3)
   expect_huxish(dfr, TRUE)
   oo <- options(huxtable.knit_print_df = FALSE)
-  dfr <- data.frame(a = 1:3, b = 1:3)
   expect_huxish(dfr, FALSE)
   options(huxtable.knit_print_df = TRUE)
-  dfr <- data.frame(a = 1:3, b = 1:3)
   expect_huxish(dfr, TRUE)
-
   options(oo)
 })
 
