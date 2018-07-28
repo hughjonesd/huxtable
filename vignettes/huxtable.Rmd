@@ -250,14 +250,14 @@ hux(
         Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
         Salary       = c(50000, 50000, 40000),
         add_colnames = TRUE
-      )                               %>% 
+      )                               %>%
+      set_right_padding(10)           %>%
+      set_left_padding(10)            %>% 
       set_bold(1, 1:2, TRUE)          %>% 
       set_bottom_border(1, 1:2, 1)    %>%
       set_align(1:4, 2, 'right')      %>%
-      set_right_padding(10)           %>%
-      set_left_padding(10)            %>% 
+      set_number_format(2)            %>% 
       set_caption('Employee table')
-  
 
 ```
 
@@ -351,14 +351,17 @@ table properties will be carried over into subsets.
 
 ```{r}
 # Select columns by name:
-cars_mpg <- car_ht[, c('mpg', 'cyl', 'am')] 
+cars_mpg <- car_ht[, c("mpg", "cyl", "am")] 
 # Order by number of cylinders:
 cars_mpg <- cars_mpg[order(cars_mpg$cyl),]
 
 cars_mpg <- cars_mpg                          %>% 
-      huxtable::add_rownames(colname = 'Car') %>% 
-      huxtable::add_colnames()
+      huxtable::add_rownames(colname = "Car") %>% 
+      huxtable::add_colnames()                %>%
+      set_right_border(0.4)                   %>% 
+      set_right_border_color("grey")
 
+# Show the first 5 rows:
 cars_mpg[1:5,]
 ```
 
@@ -370,7 +373,7 @@ You can also use `dplyr` functions to edit a huxtable:
 
 ```{r}
 car_ht <- car_ht                                          %>%
-      huxtable::add_rownames(colname = 'Car')             %>%
+      huxtable::add_rownames(colname = "Car")             %>%
       slice(1:10)                                         %>% 
       select(Car, mpg, cyl, hp)                           %>% 
       arrange(hp)                                         %>% 
@@ -380,10 +383,12 @@ car_ht <- car_ht                                          %>%
 
 
 car_ht <- car_ht                               %>% 
-      set_number_format(1:7, 'kml', 2)         %>% 
+      set_number_format(1:7, "kml", 2)         %>% 
       set_col_width(c(.35, .15, .15, .15, .2)) %>% 
       set_width(.6)                            %>% 
-      huxtable::add_colnames() 
+      huxtable::add_colnames()                 %>% 
+      set_right_border(0.4)                    %>% 
+      set_right_border_color("grey")
 
 car_ht
 ```
@@ -401,8 +406,8 @@ where in the table to do the insertion, i.e. after what row or column number.
 and has a border above.
 
 ```{r}
-ht <- insert_row(ht, 'Hadley Wickham', '100000', after = 3)
-ht <- add_footnote(ht, 'DHJ deserves a pay rise')
+ht <- insert_row(ht, "Hadley Wickham", "100000", after = 3)
+ht <- add_footnote(ht, "DHJ deserves a pay rise")
 ht
 ```
 
@@ -417,7 +422,7 @@ cells that are numbers: it works on any numbers within the cells. So, for exampl
 a cell like "12.00001 (3.0003)", `number_format` will affect both the numbers
 
 ```{r}
-pointy_ht <- hux(c('Column heading', 11.003, 300, 12.02, '12.1 **', 'mean 11.7 (se 2.3)')) %>% 
+pointy_ht <- hux(c("Column heading", 11.003, 300, 12.02, "12.1 **", "mean 11.7 (se 2.3)")) %>% 
     set_all_borders(1)
 
 number_format(pointy_ht) <- 3
@@ -428,7 +433,7 @@ You can also align columns by decimal places. If you want to do this for a cell,
 to '.' (or whatever you use for a decimal point). 
 
 ```{r}
-align(pointy_ht)[2:5, ] <- '.' # not the first row
+align(pointy_ht)[2:5, ] <- "." # not the first row
 pointy_ht
 ```
 
@@ -447,7 +452,7 @@ turn this off with `autoformat = FALSE`:
 ```{r}
 
 my_data <- data.frame(
-        Employee           = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
+        Employee           = c("John Smith", "Jane Doe", "David Hugh-Jones"), 
         Salary             = c(50000L, 50000L, 40000L),
         Performance_rating = c(8.9, 9.2, 7.8)  
       )
@@ -461,8 +466,8 @@ as_huxtable(my_data, add_colnames = TRUE, autoformat = FALSE) # no automatic for
 By default, HTML or LaTeX code will be escaped:
 
 ```{r}
-code_ht <- if (is_latex) hux(c('Some maths', '$a^b$')) else 
-      hux(c('Copyright symbol', '&copy;'))
+code_ht <- if (is_latex) hux(c("Some maths", "$a^b$")) else 
+      hux(c("Copyright symbol", "&copy;"))
 code_ht
 ```
 
@@ -495,7 +500,7 @@ to wrap over multiple lines:
 
 ```{r}
 ht_wrapped <- ht
-ht_wrapped[5, 1] <- 'David Arthur Shrimpton Hugh-Jones'
+ht_wrapped[5, 1] <- "David Arthur Shrimpton Hugh-Jones"
 wrap(ht_wrapped) <- TRUE
 ht_wrapped
 ```
@@ -510,7 +515,7 @@ same name.)
 
 ```{r}
 as_hux(mtcars[1:4, 1:4])                           %>% 
-      huxtable::add_rownames(colname = 'Car name') %>% 
+      huxtable::add_rownames(colname = "Car name") %>% 
       huxtable::add_colnames()
 ```
 
@@ -526,24 +531,24 @@ how many rows the cell covers. Here, we'll add some row and column headings to t
 ```{r}
 cars_mpg <- cbind(cylinders = cars_mpg$cyl, cars_mpg)
 table(cars_mpg$cylinders) # how many rows for each group?
-cars_mpg$cylinders[1]   <- ''
-cars_mpg$cylinders[2]   <- 'Four cylinders'
-cars_mpg$cylinders[13]  <- 'Six cylinders'
-cars_mpg$cylinders[20]  <- 'Eight cylinders'
+cars_mpg$cylinders[1]   <- ""
+cars_mpg$cylinders[2]   <- "Four cylinders"
+cars_mpg$cylinders[13]  <- "Six cylinders"
+cars_mpg$cylinders[20]  <- "Eight cylinders"
 
 rowspan(cars_mpg)[2, 1]  <- 11
 rowspan(cars_mpg)[13, 1] <- 7
 rowspan(cars_mpg)[20, 1] <- 14
 
-cars_mpg <- rbind(c('List of cars', '', '', '', ''), cars_mpg)
+cars_mpg <- rbind(c("List of cars", "", "", "", ""), cars_mpg)
 colspan(cars_mpg)[1, 1] <- 5
-align(cars_mpg)[1, 1] <- 'center'
+align(cars_mpg)[1, 1] <- "center"
 
 # a little more formatting:
 
 cars_mpg <- set_all_padding(cars_mpg, 2)
 cars_mpg <- set_all_borders(cars_mpg, 1)
-valign(cars_mpg)[1,] <- 'top'
+valign(cars_mpg)[1,] <- "top"
 col_width(cars_mpg) <- c(.4 , .3 , .1, .1, .1)
 number_format(cars_mpg)[, 4:5] <- 0
 bold(cars_mpg)[1:2, ] <- TRUE
@@ -558,7 +563,7 @@ cars_mpg
 Huxtable comes with some predefined themes for formatting.
 
 ```{r}
-theme_striped(cars_mpg[14:20,], stripe = 'bisque1', header_col = FALSE, header_row = FALSE)
+theme_plain(car_ht)
 ```
 
 
@@ -576,7 +581,7 @@ With these functions it is easy to add striped backgrounds to tables:
 
 ```{r}
 car_ht                                                 %>% 
-      set_background_color(evens, everywhere, 'wheat') %>% 
+      set_background_color(evens, everywhere, "wheat") %>% 
       set_background_color(odds, everywhere, grey(.9)) %>% 
       set_bold(1, everywhere, TRUE)
 ```
@@ -589,8 +594,8 @@ You can also use `dplyr` functions like `starts_with()`, `contains()`, and `matc
 name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
-car_ht %>% set_background_color(everywhere, starts_with('C'), 'orange')
-car_ht %>% set_italic(everywhere, matches('[aeiou]'), TRUE)
+car_ht %>% set_background_color(everywhere, starts_with("C"), "orange")
+car_ht %>% set_italic(everywhere, matches("[aeiou]"), TRUE)
 ```
 
 Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
@@ -610,10 +615,10 @@ att_corr <- corr.test(as.matrix(attitude))
 
 att_hux <- as_hux(att_corr$r)                                           %>% 
       # selects cells with p < 0.05:
-      set_background_color(where(att_corr$p < 0.05), 'yellow')          %>% 
+      set_background_color(where(att_corr$p < 0.05), "yellow")          %>% 
       # selects cells with p < 0.01:
-      set_background_color(where(att_corr$p < 0.01), 'orange')          %>% 
-      set_text_color(where(row(att_corr$r) == col(att_corr$r)), 'grey') 
+      set_background_color(where(att_corr$p < 0.01), "orange")          %>% 
+      set_text_color(where(row(att_corr$r) == col(att_corr$r)), "grey") 
 
 
 att_hux <- att_hux                                                      %>% 
@@ -693,7 +698,7 @@ If you load huxtable within a knitr document, it will automatically format data 
 installing a `knit_print.data_frame` command.
 
 
-```{r, echo = FALSE}
+```{r, include = FALSE}
 options(huxtable.knit_print_df = TRUE)
 ```
 
