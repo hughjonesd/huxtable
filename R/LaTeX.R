@@ -35,36 +35,37 @@ to_latex <- function (ht, ...) UseMethod('to_latex')
 #' @rdname to_latex
 to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   assert_that(is.flag(tabular_only))
-  res <- build_tabular(ht)
-  if (tabular_only) return(res)
-
-  if (! is.na(height <- height(ht))) {
-    if (is.numeric(height)) height <- paste0(height, '\\textheight')
-    res <- paste0('\\resizebox*{!}{', height, '}{\n', res, '\n}')
-  }
-
-  cap <- if (! is.na(cap <- caption(ht))) {
-    hpos <- get_caption_hpos(ht)
-    cap_setup <- switch(hpos,
-            left   = 'raggedright',
-            center = 'centering',
-            right  = 'raggedleft'
-          )
-    paste0('\\captionsetup{justification=', cap_setup, ',singlelinecheck=off}\n\\caption{', cap, '}\n')
-  } else ''
-  lab <- if (is.na(lab <- label(ht))) '' else paste0('\\label{', lab, '}\n')
-  if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
-  res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, res) else paste0(res, cap, lab)
+  tabular <- build_tabular(ht)
+  if (tabular_only) return(tabular)
 
   # table position
   pos_text <- switch(position(ht),
-    left   = c('\\begin{raggedright}', '\\par\\end{raggedright}'),
-    center = c('\\centering',   ''),
-    right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}')
+    left   = c('\\begin{raggedright}', '\\par\\end{raggedright}\n'),
+    center = c('\\centering',   '\n'),
+    right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}\n')
   )
-  res <- paste0(pos_text[1], res, pos_text[2], '\n')
 
-  res <- paste0('\\begin{table}[', latex_float(ht), ']\n', res, '\\end{table}\n')
+  resize_box <- if (is.na(height <- height(ht))) c('', '') else {
+    if (is.numeric(height)) height <- sprintf('%.3g\\textheight', height)
+    c(sprintf('\\resizebox*{!}{%s}{', height), '}')
+  }
+
+  cap <- if (is.na(cap <- caption(ht))) '' else {
+    hpos <- get_caption_hpos(ht)
+    cap_setup <- switch(hpos,
+      left   = 'raggedright',
+      center = 'centering',
+      right  = 'raggedleft'
+    )
+    sprintf('\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n', cap_setup, cap)
+  }
+  lab <- if (is.na(lab <- label(ht))) '' else sprintf('\\label{%s}\n', lab)
+  if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
+  res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, tabular) else paste0(tabular, cap, lab)
+
+  begin_table <- sprintf('\\begin{table}[%s]\n', latex_float(ht))
+  res <- paste0(begin_table, pos_text[1], resize_box[1], res,
+        resize_box[2], pos_text[2], '\\end{table}\n')
 
   return(res)
 }
