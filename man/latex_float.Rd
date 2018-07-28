@@ -27,12 +27,12 @@ Functions to get or set the table-level float position for latex property of a h
 \details{
 Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
 floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
-\code{float} package.
+TeX \code{float} package.
 }
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
-latex_float(ht) <-  'tab:mytable'
+latex_float(ht) <-  'h'
 latex_float(ht)
 
 }

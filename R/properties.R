@@ -1013,10 +1013,10 @@ make_getter_setters('label', 'table', check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector, used by LaTeX for positioning the float. Set to `NA` for the default, 'h'.
 #' @template getset-example
-#' @templateVar attr_val 'tab:mytable'
+#' @templateVar attr_val 'h'
 #' @details Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
 #' floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
-#' `float` package.
+#' TeX `float` package.
 #' @export latex_float latex_float<- set_latex_float
 NULL
 make_getter_setters('latex_float', 'table', check_fun = is.character)
