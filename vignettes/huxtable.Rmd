@@ -3,12 +3,12 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
+  html_document:
+    toc: yes
+    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
-    toc: yes
-    toc_depth: 2
-  html_document:
     toc: yes
     toc_depth: 2
 vignette: >
@@ -70,8 +70,9 @@ Huxtable is a package for creating *text tables*. It is powerful, but easy to us
 replacement for packages like xtable, which is useful but not always very user-friendly. Huxtable's features
 include:
 
-* Export to LaTeX, HTML, Word and Markdown
+* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel and Markdown
 * Easy integration with knitr and rmarkdown documents
+* Formatted on-screen display
 * Multirow and multicolumn cells
 * Fine-grained control over cell background, spacing, alignment, size and borders
 * Control over text font, style, size, colour, alignment, number format and rotation
@@ -147,8 +148,9 @@ The default output is a very plain table. Let's make it a bit smarter. We'll mak
 bold, draw a line under the header row, and add some horizontal space to the cells. We also need to
 change that default number formatting to look less scientific.
 
-To do this, we need to set cell level properties. You set properties by assigning to the property name, just as you assign `names(x) <- new_names` in base R. The following commands assign the value 
-10 to the `right_padding` and `left_padding` properties, for all cells in `ht`:
+To do this, we need to set some **properties** on the table cells. You set properties by assigning
+to the property name, just as you assign `names(x) <- new_names` in base R. The following commands
+assign the value 10 to the `right_padding` and `left_padding` properties, for all cells in `ht`:
 
 ```{r}
 right_padding(ht) <- 10
@@ -162,7 +164,7 @@ cells:
 number_format(ht) <- 2    # 2 decimal places
 ```
 
-To assign properties to just some cells, you use subsetting, just as in base R. So, to make the
+To assign properties to just some cells, you use subsetting, as in base R. So, to make the
 first row of the table **bold** and give it a bottom border, we do:
 
 ```{r}
@@ -189,8 +191,8 @@ ht
 ```
 
 
-As well as cell properties and table properties, there is also one row property, row heights, and
-one column property, column widths.
+As well as cell properties and table properties, there is also one row property, `row_height`, and
+one column property, `col_width`.
 
 The table below shows a complete list of properties. Most properties work the same for LaTeX and
 HTML, though there are some exceptions.
@@ -236,8 +238,8 @@ prop_hux
 ## Tidyverse syntax
 
 If you prefer a tidyverse style of code, using the pipe operator `%>%`, then you can use `set_*`
-functions. These have the same name as the property, with `set_` prepended. For example, to set
-the `bold` property, you use the `set_bold` function.
+functions to set properties. These have the same name as the property, with `set_` prepended. For 
+example, to set the `bold` property, you use the `set_bold` function.
 
 `set_*` functions return the modified huxtable, so you can chain them together like this:
 
@@ -269,7 +271,8 @@ There are also four useful convenience functions:
 
 * `set_all_borders` sets left, right, top and bottom borders for selected cells;
 * `set_all_border_colors` sets left, right, top and bottom border colors;
-* `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content and the border);
+* `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content
+   and the border);
 * `set_outer_borders` sets an outer border around a rectangle of cells.
 
 ## Getting properties
@@ -281,19 +284,67 @@ italic(ht)
 position(ht)
 ```
 
-
 As before, you can use subsetting to get particular rows or columns:
 
 ```{r, results = 'markup'}
 bottom_border(ht)[1:2,]
-bold(ht)[,'Salary']
 ```
-
 
 
 # Editing content
 
-## Standard subsetting
+
+## Changing text in a huxtable
+
+You can treat a huxtable just like a data frame. If you want to change data in a cell, assign to
+that cell:
+
+```{r}
+ht[3, 1] <- 'Jane Jones'
+ht
+```
+
+To add a column, do, e.g.:
+
+```{r}
+ht_with_roles <- ht
+ht_with_roles$Role <- c("Role", "Admin", "CEO", "Dogsbody")
+ht_with_roles
+```
+
+There are two things to notice here:
+
+* When we added the column, we included the column name explicitly in the data so it would be
+  printed out.
+* The third column doesn't have the properties we set on the first two columns, like the bold first
+  row and the underlining.
+
+If we want new columns to have the properties from their neighbours, we can use `cbind`, a base R
+function that binds columns together. When you `cbind` huxtable objects, by default, cell properties
+are copied over from their neighbours:
+
+```{r}
+ht_with_roles <- cbind(ht, c("Role", "Admin", "CEO", "Dogsbody"))
+ht_with_roles
+```
+
+`rbind` works the same way:
+
+```{r}
+rbind(ht, c("Yihui Xie", 100000))
+```
+
+Notice how Yihui's salary has got the same number formatting as the other employees. That's because
+cell properties for the new row were copied from the row above.
+
+If you want to avoid this behaviour, use `copy_cell_props = FALSE`:
+
+```{r}
+rbind(ht, c("Yihui Xie", 100000), copy_cell_props = FALSE)
+```
+
+
+## Data manipulation the base R way
 
 You can subset, sort and generally data-wrangle a huxtable just like a normal data frame. Cell and 
 table properties will be carried over into subsets.
@@ -312,7 +363,7 @@ cars_mpg[1:5,]
 ```
 
 
-## Using dplyr with huxtable
+## Data manipulation the dplyr way
 
 You can also use `dplyr` functions to edit a huxtable:
 
@@ -337,8 +388,8 @@ car_ht <- car_ht                               %>%
 car_ht
 ```
 
-
-In general it is a good idea to prepare your data first, before styling it. For example, it was easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
+In general it is a good idea to prepare your data first, before styling it. For example, it was
+easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
 
 ## Functions to insert rows, columns and footnotes
 
@@ -355,16 +406,19 @@ ht <- add_footnote(ht, 'DHJ deserves a pay rise')
 ht
 ```
 
-# More formatting 
 
+# More formatting 
 
 ## Number format
 
-You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number of decimal places 
-(for more advanced options, see the help files). This affects all numbers, or number-like substrings within your cells.
+You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number
+of decimal places (for more advanced options, see the help files). This doesn't just affect 
+cells that are numbers: it works on any numbers within the cells. So, for example, if you have 
+a cell like "12.00001 (3.0003)", `number_format` will affect both the numbers
 
 ```{r}
-pointy_ht <- hux(c('Do not pad this.', 11.003, 300, 12.02, '12.1 **')) %>% set_all_borders(1)
+pointy_ht <- hux(c('Column heading', 11.003, 300, 12.02, '12.1 **', 'mean 11.7 (se 2.3)')) %>% 
+    set_all_borders(1)
 
 number_format(pointy_ht) <- 3
 pointy_ht
@@ -378,7 +432,8 @@ align(pointy_ht)[2:5, ] <- '.' # not the first row
 pointy_ht
 ```
 
-There is currently no true way to align cells by the decimal point in HTML, and only limited possibilities in TeX, so this works by right-padding cells with spaces. The output may look better 
+There is currently no true way to align cells by the decimal point in HTML, and only limited
+possibilities in TeX, so this works by right-padding cells with spaces. The output may look better
 if you use a fixed width font.
 
 ## Automatic formatting
@@ -462,20 +517,27 @@ as_hux(mtcars[1:4, 1:4])                           %>%
 
 ## Column and row spans
 
-Huxtable cells can span multiple rows or columns, using the `colspan` and `rowspan` properties.
+Sometimes you want a single cell to spread over more than one row or column: for example, if you
+want a heading that covers several different rows.
+You can do this using the `colspan` and `rowspan` properties. If you know HTML tables, then 
+these will be familiar to you. `colspan` sets how many columns the cell covers, and `rowspan` sets
+how many rows the cell covers. Here, we'll add some row and column headings to the `mtcars` dataset:
 
 ```{r}
-cars_mpg <- cbind(car_type = rep("", nrow(cars_mpg)), cars_mpg)
-cars_mpg$car_type[1] <- 'Four cylinders'
-cars_mpg$car_type[13] <- 'Six cylinders'
-cars_mpg$car_type[20] <- 'Eight cylinders'
-rowspan(cars_mpg)[1, 1] <- 12
+cars_mpg <- cbind(cylinders = cars_mpg$cyl, cars_mpg)
+table(cars_mpg$cylinders) # how many rows for each group?
+cars_mpg$cylinders[1]   <- ''
+cars_mpg$cylinders[2]   <- 'Four cylinders'
+cars_mpg$cylinders[13]  <- 'Six cylinders'
+cars_mpg$cylinders[20]  <- 'Eight cylinders'
+
+rowspan(cars_mpg)[2, 1]  <- 11
 rowspan(cars_mpg)[13, 1] <- 7
 rowspan(cars_mpg)[20, 1] <- 14
 
-cars_mpg <- rbind(c('', 'List of cars', '', '', ''), cars_mpg)
-colspan(cars_mpg)[1, 2] <- 4
-align(cars_mpg)[1, 2] <- 'center'
+cars_mpg <- rbind(c('List of cars', '', '', '', ''), cars_mpg)
+colspan(cars_mpg)[1, 1] <- 5
+align(cars_mpg)[1, 1] <- 'center'
 
 # a little more formatting:
 
@@ -689,13 +751,13 @@ If you need to output to another format, file an
 
 ## Quick output commands
 
-Sometimes you quickly want to get your data into a Word, HTML or PDF document. To do this you can
-use the `quick_docx`, `quick_html`, `quick_pdf` and `quick_xlsx` functions. These are called with
-one or more huxtable objects, or objects which can be turned into a huxtable such as data frames. A
-new document of the appropriate type will be created. By default the file will be in the current
-directory under the name e.g. `huxtable-output.pdf`. If the file already exists, you'll be asked to
-confirm the overwrite. For non-interactive use, you must specify a filename yourself explicitly --
-this keeps you from accidentally trashing your files.
+Sometimes you quickly want to get your data into a Word, Excel, HTML or PDF document. To do this you
+can use the `quick_docx`, `quick_xlsx`, `quick_html` and `quick_pdf` functions. These are called
+with one or more huxtable objects, or objects which can be turned into a huxtable such as data
+frames. A new document of the appropriate type will be created and opened. By default the file will
+be in the current directory under the name e.g. `huxtable-output.pdf`. If the file already exists,
+you'll be asked to confirm the overwrite. For non-interactive use, you must specify a filename
+yourself explicitly -- this keeps you from accidentally trashing your files.
 
 ```{r, eval = FALSE}
 quick_pdf(mtcars) 
