@@ -17,7 +17,7 @@ matrix:
 # check it can build with latest github of important packages
   - r_github_packages:
     - tidyverse/dplyr
-    - tidyverse/broom
+    - tidymodels/broom
     - bbolker/broom.mixed
     - tidyverse/tidyselect
     - tidyverse/stringr

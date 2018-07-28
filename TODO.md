@@ -8,6 +8,8 @@ TODO
   - Clarify how defaults work (maybe automate from huxtable_default_attrs?)
   - Say more about what some of them do
   
+* Generic insert_rows, insert_cols which just do an rbind (for any object)? 
+
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
 * Replace latex_float by float and use the CSS float property on the table (deals with text flow)?
