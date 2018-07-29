@@ -357,7 +357,8 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @export colspan colspan<- set_colspan
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
-      if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop('rowspan would extend beyond bottom of table')
+      if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop(
+            'colspan would extend beyond right edge of table')
       check_span_shadows(ht, 'col', value)
     }
 )
@@ -367,9 +368,9 @@ check_span_shadows <- function (ht, rc, value) {
   value[is.na(value)] <- 1L
   dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
   candidates <- as.matrix(dcells[dcells$shadowed, c('row', 'col')])
-  problems <- value[candidates] # span of cells which would be shadowed;
-  if (any(problems > 1)) {
-    candidates <- candidates[problems > 1, , drop = FALSE]
+  problems <- value[candidates] > 1 # span of cells which would be shadowed;
+  if (any(problems)) {
+    candidates <- candidates[problems, , drop = FALSE]
     candidates <- paste(apply(candidates, 1, paste, collapse = ','), collapse = '; ')
     stop('New rowspan/colspan would cut up existing multirow/multicol cells at ', candidates)
   }

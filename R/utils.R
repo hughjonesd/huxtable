@@ -248,39 +248,61 @@ check_positive_dims <- function (ht) {
 
 # return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
 # cells, including those shadowed by others.
-display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
-  dcells <- data.frame(
-          row     = rep(seq_len(nrow(ht)), ncol(ht)),
-          col     = rep(seq_len(ncol(ht)), each = nrow(ht)),
-          rowspan = as.vector(new_rowspan),
-          colspan = as.vector(new_colspan)
-        )
-  dcells$display_row <- dcells$row
-  dcells$display_col <- dcells$col
-  dcells$shadowed <- rep(FALSE, nrow(dcells))
+# columns are row, col (of real cell);
+# shadowed if cell is covered by another, the 'display cell'; if not, it is its own 'display cell'
+# display_row, display_col, rowspan, colspan of 'display cell';
+# end_row, end_col end of that display cell.
+#
+# PLAN:
+# start with four matrices dispr, dispc, endr, endc of row(ht) and col(ht)
+# for each cell with colspan/rowspan > 1, set dispr/c to its row/col for its 'display area'
+# and set endr, endc to the bottom right cell for its display area
+# shadowed is dispr != r or dispc != c
+# c() the results down the data frame columns;
+#
+# QUESTION: what if there are overlapping areas? Shouldn't that always be avoided?
 
-  change_cols <- c('display_row', 'display_col', 'rowspan', 'colspan')
-  shadow_rows <- seq_len(nrow(dcells))
-  shadow_rows <- shadow_rows[dcells$rowspan > 1 | dcells$colspan > 1]
-  for (i in seq_len(nrow(dcells))) {
-    # if (dcells$rowspan[i] == 1 && dcells$colspan[i] == 1) next
-    if (dcells$shadowed[i]) next
-
-    dr <- dcells$row[i]
-    dc <- dcells$col[i]
-    spanned <- dcells$row %in% dr:(dr + dcells$rowspan[i] - 1) & dcells$col %in% dc:(dc + dcells$colspan[i] - 1)
-    dcells[spanned, change_cols] <- matrix(as.numeric(dcells[i, change_cols]), sum(spanned), length(change_cols),
-          byrow = TRUE)
-
-    shadowed <- spanned & (1:nrow(dcells)) != i
-    dcells$shadowed[shadowed] <- TRUE
+display_cells <- function (ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
+  rowspan <- new_rowspan
+  colspan <- new_colspan
+  display_row <- end_row <- row <- row(ht)
+  display_col <- end_col <- col <- col(ht)
+  displayers <- rowspan > 1 | colspan > 1
+  touched <- shadowed <- matrix(FALSE, nrow(ht), ncol(ht))
+  for (idx in which(displayers)) {
+    rr <- row[idx]
+    cc <- col[idx]
+    end_r   <- rr + rowspan[idx] - 1
+    end_c   <- cc + colspan[idx] - 1
+    da_rows <- seq(rr, end_r)
+    da_cols <- seq(cc, end_c)
+    if (any(touched[da_rows, da_cols])) stop(glue::glue('Overlapping multirow/multicolumn cells in',
+          ' [{da_rows}, {da_cols}] of huxtable'))
+    display_row[da_rows, da_cols] <- rr
+    display_col[da_rows, da_cols] <- cc
+    rowspan[da_rows, da_cols] <- rowspan[idx]
+    colspan[da_rows, da_cols] <- colspan[idx]
+    end_row[da_rows, da_cols] <- end_r
+    end_col[da_rows, da_cols] <- end_c
+    shadowed[da_rows, da_cols] <- TRUE
+    touched[da_rows, da_cols]  <- TRUE
+    shadowed[rr, cc] <- FALSE
   }
-  dcells$end_row <- dcells$display_row + dcells$rowspan - 1
-  dcells$end_col <- dcells$display_col + dcells$colspan - 1
 
+  dcells <- data.frame(
+          row         = c(row),
+          col         = c(col),
+          rowspan     = c(rowspan),
+          colspan     = c(colspan),
+          display_row = c(display_row),
+          display_col = c(display_col),
+          shadowed    = c(shadowed),
+          end_row     = c(end_row),
+          end_col     = c(end_col)
+        )
   if (! all) dcells <- dcells[! dcells$shadowed, ]
 
-  dcells
+  return(dcells)
 }
 
 
