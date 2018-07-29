@@ -204,6 +204,7 @@ build_tabular <- function(ht) {
 
   dim(all_contents) <- dim(ht)
 
+  real_align <- real_align(ht)
   ## UNREFORMED BIT
   ## contents are empty except for contents of the *bottom* left of a 'display area' (including 1x1)
   ##   - we can get an array of these with dcells[, c('display_col', 'end_row')] of unshadowed cells
@@ -243,7 +244,7 @@ build_tabular <- function(ht) {
         padding <- lapply(padding, function(x) if (is_a_number(x)) paste0(x, 'pt') else x)
         tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
         bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
-        align_str <- switch(real_align(ht)[drow, dcol],
+        align_str <- switch(real_align[drow, dcol],
           left   = '\\raggedright ',
           right  = '\\raggedleft ',
           center = '\\centering '
@@ -288,7 +289,7 @@ build_tabular <- function(ht) {
           width_spec <- compute_width(ht, mycol, dcell$end_col)
           paste0(pmb, '{', width_spec, '}')
         } else {
-          switch(real_align(ht)[drow, dcol], left = 'l', center = 'c', right = 'r')
+          switch(real_align[drow, dcol], left = 'l', center = 'c', right = 'r')
         }
         # only add left borders if we haven't already added a right border!
         lb <- if (! added_right_border) v_border(ht, myrow, mycol, collapsed_borders, cb_colors) else ''
