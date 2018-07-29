@@ -7,8 +7,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
   if a needed package is not installed.
-* HTML code has been rewritten to be faster: up to 10x improvement, especially for long tables.
-* Up to 2x speedup in LaTeX code.
+* Code rewrites for better performance:
+  - HTML up to 10x faster
+  - LaTeX up to 2x faster
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
