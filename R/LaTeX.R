@@ -136,7 +136,48 @@ build_tabular <- function(ht) {
   all_contents      <- clean_contents(ht, type = 'latex')
   collapsed_borders <- collapsed_borders(ht)
   cb_colors         <- collapsed_border_colors(ht)
-  res <- paste0(res, build_clines_for_row(ht, row = 0, collapsed_borders, cb_colors))
+
+  ## CALCULATE HHLINES
+  #  Done for n+1 rows including "row 0" at the top
+  horiz_b <- collapsed_borders$horiz
+  hb_maxes <- apply(horiz_b, 1, max)
+  if (any(horiz_b > 0 & horiz_b < hb_maxes[row(horiz_b)])) warning(
+        'Multiple horizontal border widths in a single row; using the maximum.')
+  horiz_b <- ifelse(horiz_b == 0, horiz_b, hb_maxes[row(horiz_b)])
+  hb_colors <- format_color(cb_colors$horiz, default = 'black')
+
+  # background colors come from shadowing cells
+  dc_pos_matrix <- as.matrix(display_cells[, c('display_row', 'display_col')])
+  bg_colors <- background_color(ht)[dc_pos_matrix]
+  bg_colors <- c(rep(NA, ncol(horiz_b)), bg_colors) # or, should this be taken from the row below?
+  bg_colors <- format_color(bg_colors, default = 'white')
+  hhline_colors <- ifelse(horiz_b > 0, hb_colors ,bg_colors)
+  hhlines_horiz <- paste0('>{\\arrayrulecolor[RGB]{', hhline_colors, '}\\global\\arrayrulewidth=',
+        horiz_b, 'pt}-')
+  dim(hhlines_horiz) <- dim(horiz_b)
+  no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
+  hhlines_horiz[no_hborder_in_row] <- ''
+
+  vert_b <- collapsed_borders$vert # nrow X ncol + 1
+  vert_b <- rbind(vert_b[1,], vert_b) # we checked positive dims; row 1 exists
+  vert_bc <- cb_colors$vert
+  vert_bc <- rbind(vert_bc[1,], vert_bc)
+  vert_bc <- format_color(vert_bc)
+  hhlines_vert <- rep('', length(vert_b))
+  hhlines_vert <- ifelse(vert_b == 0, '', sprintf(
+        '>{\\arrayrulecolor[RGB]{%s}\\global\\arrayrulewidth=%spt}|', vert_bc, vert_b))
+  dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1)
+
+  # interleave vertical and horizontal lines like: |-|-|-|
+  hhlines <- cbind(hhlines_horiz, hhlines_vert)
+  hhlines <- matrix('', nrow(hhlines_horiz), ncol(hhlines_horiz) + ncol(hhlines_vert))
+  hhlines[, seq(2, ncol(hhlines), 2)] <- hhlines_horiz
+  hhlines[, seq(1, ncol(hhlines), 2)] <- hhlines_vert
+
+  hhlines <- apply(hhlines, 1, paste0, collapse = '')
+  # XX surround in hhline{} and add a reset for the arrayrulecolor
+  hhlines <- sprintf('\n\n\\hhline{%s}\n\\arrayrulecolor{black}\n', hhlines)
+  res <- paste0(res, hhlines[1])
 
   for (myrow in seq_len(nrow(ht))) {
     row_contents <- character(0)
@@ -227,7 +268,7 @@ build_tabular <- function(ht) {
     res <- paste0(res, row_contents, '\\tabularnewline[-0.5pt]\n')
 
     # add top/bottom borders
-    res <- paste0(res, build_clines_for_row(ht, myrow, collapsed_borders, cb_colors))
+    res <- paste0(res, hhlines[1 + myrow])
   } # next row
 
   tenv <- tabular_environment(ht)
@@ -295,61 +336,6 @@ build_cell_contents <- function(ht, row, col, contents) {
   return(contents)
 }
 
-# row can be from "0" for the top; up to nrow
-build_clines_for_row <- function(ht, row, collapsed_borders, cb_colors) {
-  # where a cell is shadowed, we don't want to add a top border (it'll go thru the middle)
-  # bottom borders of a shadowed cell are fine, but come from the display cell.
-  display_cells <- display_cells(ht, all = TRUE)
-  display_cells <- display_cells[display_cells$row == row, ]
-
-  blank_line_color <- rep('white', ncol(ht)) # never now used
-  for (i in seq_len(nrow(display_cells))) {
-    dc <- display_cells[i, ]
-    # Use color if we are in middle of display cell, also if we are at end and after a +ve border
-      blank_line_color[dc$display_col:dc$end_col] <- background_color(ht)[dc$display_row, dc$display_col]
-  }
-
-  widths <- collapsed_borders$horiz[row + 1, ]
-  if (all(widths == 0)) {
-    return('')
-  } else {
-    width <- max(widths)
-    if (! all(widths[widths > 0] == width)) warning("Multiple widths in a single border, using max")
-    colors <- cb_colors$horiz[row + 1, ]
-    colors <- sapply(colors, format_color, default = 'black')
-    blank_line_color <- sapply(blank_line_color, format_color, default = 'white')
-    hhlinechars <- sapply(seq_along(widths), function (x) {
-      col <- if (widths[x] > 0) colors[x] else blank_line_color[x]
-      paste0('>{\\arrayrulecolor[RGB]{', col, '}\\global\\arrayrulewidth=', width, 'pt}-')
-    })
-    vertlines <- compute_vertical_borders(ht, row, collapsed_borders, cb_colors)
-
-    hhline <- paste0(hhlinechars, vertlines[-1], collapse = '')
-    hhline <- paste0(vertlines[1], hhline)
-    hhline <- paste0('\n\n\\hhline{', hhline, '}\n\\arrayrulecolor{black}\n')
-    return(hhline)
-  }
-}
-
-
-# these are inserted into the hhline. They have to have the same arrayrulewidth as the
-# left/right borders of the cell above and below. That is, arrayrulewidth = max(right of above_left,
-# left of above_right, right of below_left, left of below_right).
-# row can be 0 for the top line.
-# returns an ncol(ht) + 1 string array
-compute_vertical_borders <- function (ht, row, collapsed_borders, cb_colors) {
-  # if we are at the top line, then we'll assume we want the same vertical borders as on the first line below.
-  if (row == 0) row <- 1
-  b_widths <- collapsed_borders$vert[row, ]
-  b_cols   <- cb_colors$vert[row, ]
-  borders <- sapply(seq_along(b_widths), function (x){
-    if (b_widths[x] == 0 ) return('')
-    my_col <- format_color(b_cols[x], default = 'black')
-    paste0('>{\\arrayrulecolor[RGB]{', my_col, '}\\global\\arrayrulewidth=', b_widths[x], 'pt}|')
-  })
-
-  return(borders)
-}
 
 # uses "real" border numbers in "ncol + 1 space"
 v_border <- function (ht, row, col, collapsed_borders, cb_colors) {
