@@ -17,7 +17,7 @@ test_that('Subsetting preserves rownames', {
 })
 
 
-test_that('Subsetting cuts colspan', {
+test_that('Subsetting cuts rowspan and colspan', {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   rowspan(ht)[1, 1] <- 3
   colspan(ht)[1, 2] <- 2
@@ -27,10 +27,23 @@ test_that('Subsetting cuts colspan', {
 })
 
 
-test_that('Spans can\'t be overwritten', {
+test_that('Multirow/multicol cells cannot shadow other multirow/multicol cells', {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   colspan(ht)[1, 2] <- 2
   expect_error(colspan(ht)[1, 1] <- 2)
+
+  # going diagonally
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  colspan(ht)[1, 2] <- 2
+  rowspan(ht)[1, 2] <- 2
+  expect_error(colspan(ht)[2, 1] <- 2)
+})
+
+
+test_that('Subsetting works with multirow/multicolumn cells', {
+  ht <- hux(a = 1:3, b = 1:3)
+  rowspan(ht)[1, 1] <- 2
+  expect_silent(ht[c(1,3), ])
 })
 
 
