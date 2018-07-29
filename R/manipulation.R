@@ -51,8 +51,11 @@ NULL
   }
 
   class(ss) <- class(x)
-  colspan(ss) <- pmin(colspan(ss), 1 + ncol(ss) - col(ss))
-  rowspan(ss) <- pmin(rowspan(ss), 1 + nrow(ss) - row(ss))
+
+  # we don't use `colspan<-` because this immediately triggers a `check_span_shadows`
+  # which will error if the `rowspan` is not yet correct
+  attr(ss, 'colspan') <- pmin(colspan(ss), 1 + ncol(ss) - col(ss))
+  attr(ss, 'rowspan') <- pmin(rowspan(ss), 1 + nrow(ss) - row(ss))
 
   ss <- set_attr_dimnames(ss)
   ss
