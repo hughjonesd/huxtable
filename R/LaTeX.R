@@ -133,6 +133,7 @@ build_tabular <- function(ht) {
   res <- paste0('{', colspec, '}\n')
 
   display_cells     <- display_cells(ht, all = TRUE)
+  dc_pos_matrix <- as.matrix(display_cells[, c('display_row', 'display_col')])
   all_contents      <- clean_contents(ht, type = 'latex')
   collapsed_borders <- collapsed_borders(ht)
   cb_colors         <- collapsed_border_colors(ht)
@@ -147,9 +148,8 @@ build_tabular <- function(ht) {
   hb_colors <- format_color(cb_colors$horiz, default = 'black')
 
   # background colors come from shadowing cells
-  dc_pos_matrix <- as.matrix(display_cells[, c('display_row', 'display_col')])
   bg_colors <- background_color(ht)[dc_pos_matrix]
-  bg_colors <- c(rep(NA, ncol(horiz_b)), bg_colors) # or, should this be taken from the row below?
+  bg_colors <- c(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from the row below?
   bg_colors <- format_color(bg_colors, default = 'white')
   hhline_colors <- ifelse(horiz_b > 0, hb_colors ,bg_colors)
   hhlines_horiz <- paste0('>{\\arrayrulecolor[RGB]{', hhline_colors, '}\\global\\arrayrulewidth=',
@@ -175,10 +175,38 @@ build_tabular <- function(ht) {
   hhlines[, seq(1, ncol(hhlines), 2)] <- hhlines_vert
 
   hhlines <- apply(hhlines, 1, paste0, collapse = '')
-  # XX surround in hhline{} and add a reset for the arrayrulecolor
   hhlines <- sprintf('\n\n\\hhline{%s}\n\\arrayrulecolor{black}\n', hhlines)
   res <- paste0(res, hhlines[1])
 
+  ## BUILD CELL CONTENTS
+  fs <- font_size(ht)
+  line_space <- round(fs * 1.2, 2)
+  all_contents <- ifelse(! is.na(fs),
+        sprintf('{\\fontsize{%.4gpt}{%.4gpt}\\selectfont %s}' , fs, line_space, all_contents),
+        all_contents)
+
+  tc <- text_color(ht)
+  tcf <- format_color(tc)
+  all_contents <- ifelse(! is.na(tc),
+        sprintf('\\textcolor[RGB]{%s}{%s}', tcf, all_contents),
+        all_contents)
+
+  all_contents <- ifelse(bold(ht),   sprintf('\\textbf{%s}', all_contents), all_contents)
+  all_contents <- ifelse(italic(ht), sprintf('\\textit{%s}', all_contents), all_contents)
+
+  font <- font(ht)
+  all_contents <- ifelse(! is.na(font),
+        sprintf('{\\fontfamily{%s}\\selectfont %s}', font, all_contents),
+        all_contents)
+
+  rt <- rotation(ht)
+  all_contents <- ifelse(rt != 0,
+        sprintf('\\rotatebox{%.4g}{%s}', rt, all_contents),
+        all_contents)
+
+  dim(all_contents) <- dim(ht)
+
+  ## UNREFORMED BIT
   for (myrow in seq_len(nrow(ht))) {
     row_contents <- character(0)
     added_right_border <- FALSE
@@ -198,7 +226,7 @@ build_tabular <- function(ht) {
       #    - multirow goes upwards not downwards, to avoid content being overwritten by cell background
       # - if a left hand cell (shadowed or not), print cell color and borders
       if ( (! dcell$shadowed && rs == 1) || bottom_left_multirow) {
-        contents <- build_cell_contents(ht, drow, dcol, all_contents[drow, dcol])
+        contents <- all_contents[drow, dcol]
 
         padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
               bottom_padding(ht)[drow, dcol])
