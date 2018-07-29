@@ -39,6 +39,12 @@ print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(t
 #' @rdname to_html
 to_html.huxtable <- function(ht, ...) {
   check_positive_dims(ht)
+
+  blank_where <- function (text, cond) {
+    text[cond] <- ''
+    text
+  }
+
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),
@@ -47,18 +53,20 @@ to_html.huxtable <- function(ht, ...) {
           center = 'margin-left: auto; margin-right: auto;'
         )
 
-  heightstring <- if (! is.na(height <- height(ht))) {
+  height <- height(ht)
+  heightstring <- blank_where({
     if (is.numeric(height)) height <- paste0(height * 100, '%')
     sprintf('height: %s;', height)
-  } else ''
-  idstring <- if (! is.na(label <- label(ht))) sprintf('id="%s"', label) else ''
+  }, is.na(height))
+  idstring <- blank_where(sprintf(' id="%s"', label(ht)), is.na(label(ht)))
   table_start <- sprintf(
-        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s" %s>\n',
+        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s"%s>\n',
         width, mstring, heightstring, idstring)
   if (! is.na(cap <- caption(ht))) {
     vpos <- if (grepl('top', caption_pos(ht))) 'top' else 'bottom'
     hpos <- get_caption_hpos(ht)
-    cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos, cap)
+    cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos,
+          cap)
     table_start <- paste0(table_start, cap)
   }
 
@@ -66,15 +74,10 @@ to_html.huxtable <- function(ht, ...) {
   # NAs become empty strings
   empty_cw <- is.na(col_widths)
   if (is.numeric(col_widths)) col_widths <- paste0(col_widths * 100, '%')
-  col_widths <- sprintf(' style="width: %s"', col_widths)
-  col_widths[empty_cw] <- ''
-  cols_html <- sprintf('<col%s>', col_widths)
+  cols_html <- sprintf(' style="width: %s"', col_widths)
+  cols_html <- blank_where(cols_html, empty_cw)
+  cols_html <- sprintf('<col%s>', cols_html)
   cols_html <- paste0(cols_html, collapse = '')
-
-  blank_where <- function (text, cond) {
-    text[cond] <- ''
-    text
-  }
 
   rowspan <- rowspan(ht)
   rowspan <- blank_where(sprintf(' rowspan="%s"', rowspan), rowspan == 1)
