@@ -40,11 +40,6 @@ print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(t
 to_html.huxtable <- function(ht, ...) {
   check_positive_dims(ht)
 
-  blank_where <- function (text, cond) {
-    text[cond] <- ''
-    text
-  }
-
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),

@@ -8,9 +8,16 @@ NULL
 
 ncharw <- function (x) nchar(x, type = 'width')
 
+
 # pinched from rlang
 `%||%` <- function (x, y) {
   if (is.null(x)) y else x
+}
+
+
+blank_where <- function (text, cond) {
+  text[cond] <- ''
+  text
 }
 
 
