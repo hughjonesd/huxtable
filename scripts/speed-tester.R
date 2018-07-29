@@ -20,6 +20,10 @@ mbs <- try(readRDS('mbs.Rds'))
 if (inherits(mbs, 'try-error')) mbs <- list()
 hv <- as.character(packageVersion('huxtable'))
 hv  <- paste0('huxtable-', hv)
-if (grepl('9000', hv)) hv <- paste0(hv, '-', git2r::commit()$sha)
+if (grepl('9000', hv)) {
+  sha <- substr(git2r::commits(n=1)[[1]]$sha, 1, 8)
+  hv <- paste0(hv, '-', sha)
+}
+
 mbs[[hv]] <- microbenchmark(to_latex(ht), to_latex(ht_long), to_latex(ht_wide), times = 20)
 saveRDS(mbs, 'mbs.Rds')

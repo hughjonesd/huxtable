@@ -35,7 +35,7 @@ long <- 'A rather long row of text which goes on...'
 
 ```{r}
 ht <- make()
-ht <- hux("My text") # really minimal
+# ht <- hux("My text") # really minimal
 caption(ht) <- 'both unset'
 ht
 
