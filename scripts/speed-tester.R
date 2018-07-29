@@ -2,6 +2,7 @@
 library(huxtable)
 library(magrittr)
 library(microbenchmark)
+library(git2r)
 
 ht <- as_hux(matrix(1:20, 4, 5))
 ht %<>%
@@ -17,6 +18,8 @@ ht_wide <- ht[, rep(1:5, 10)]
 
 mbs <- try(readRDS('mbs.Rds'))
 if (inherits(mbs, 'try-error')) mbs <- list()
-hv  <- paste0('huxtable-', as.character(packageVersion('huxtable')))
+hv <- as.character(packageVersion('huxtable'))
+hv  <- paste0('huxtable-', hv)
+if (grepl('9000', hv)) hv <- paste0(hv, '-', git2r::commit()$sha)
 mbs[[hv]] <- microbenchmark(to_latex(ht), to_latex(ht_long), to_latex(ht_wide), times = 20)
 saveRDS(mbs, 'mbs.Rds')
