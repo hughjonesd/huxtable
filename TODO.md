@@ -4,6 +4,8 @@ TODO
 
 * collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
 
+* Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind?
+
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
 
 * Work on documentation of properties:
@@ -13,7 +15,7 @@ TODO
 * Generic insert_rows, insert_cols which just do an rbind (for any object)? 
   - Probably insert_rows too close to insert_row? Or just change the interface to
     work with objects that have dimensions (and maybe then change name to reflect > 1 row, and
-    deprecate insert_row. add_rows?).
+    deprecate insert_row. add_rows?)
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 

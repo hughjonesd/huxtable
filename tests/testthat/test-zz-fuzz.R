@@ -68,7 +68,7 @@ test_that('Some random outputs are validated by W3C', {
     fact = factor(letters[4:6])
   )
   # here we do randomize
-  for (i in sample(nrow(variations), 20)) {
+  for (i in sample(nrow(variations), 10)) {
     props <- as.list(variations[i,])
     props$ht <- hx
     hx_set <- do.call("set_cell_properties", props)
@@ -76,8 +76,8 @@ test_that('Some random outputs are validated by W3C', {
       "<head><meta charset=\"utf-8\"><title>huxtable table validation</title></head>",
       "<body>\n", to_html(hx_set), "\n</body></html>")
     response <- httr::POST("http://validator.w3.org/nu/?out=json", body = webpage,
-          content_type("text/html"))
-    response <- content(response, "parsed")
+          httr::content_type("text/html"))
+    response <- httr::content(response, "parsed")
     errors   <- Filter(function (x) x$type == 'error', response$messages)
     warnings <- Filter(function (x) x$type == 'warnings', response$messages)
     valid <- length(errors) == 0

@@ -5,8 +5,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 # huxtable 4.0.1.9000
 
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
-  load considerably. dplyr verbs are still supported. huxtable gives an informative warning if 
-  packages are not installed when needed.
+  load considerably. All the functionality is still present. huxtable gives an informative warning 
+  if a needed package is not installed.
 * HTML code has been rewritten to be faster: up to 10x improvement, especially for long tables.
 * Up to 2x speedup in LaTeX code.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
