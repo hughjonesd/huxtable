@@ -4,6 +4,10 @@ TODO
 
 * collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
 
+* Rename clean_contents and export it? 
+  - Conceivably, people might want to override some individual
+    cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
+
 * Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind?
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
