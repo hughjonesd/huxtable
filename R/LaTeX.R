@@ -345,25 +345,6 @@ compute_width <- function (ht, start_col, end_col) {
   cw
 }
 
-build_cell_contents <- function(ht, row, col, contents) {
-  if (! is.na(font_size <- font_size(ht)[row, col])) {
-    line_space <- round(font_size * 1.2, 2)
-    contents <- paste0('{\\fontsize{', font_size, 'pt}{', line_space, 'pt}\\selectfont ', contents, '}')
-  }
-  if (! is.na(text_color <- text_color(ht)[row, col])) {
-    text_color <- format_color(text_color)
-    contents <- paste0('\\textcolor[RGB]{', text_color, '}{', contents, '}')
-  }
-  if (bold(ht)[row, col])   contents <- paste0('\\textbf{', contents, '}')
-  if (italic(ht)[row, col]) contents <- paste0('\\textit{', contents, '}')
-  if (! is.na(font <- font(ht)[row, col])) {
-    contents <- paste0('{\\fontfamily{', font, '}\\selectfont ', contents, '}')
-  }
-  if ( (rt <- rotation(ht)[row, col]) != 0) contents <- paste0('\\rotatebox{', rt, '}{', contents, '}')
-
-  return(contents)
-}
-
 
 # uses "real" border numbers in "ncol + 1 space"
 v_border <- function (ht, row, col, collapsed_borders, cb_colors) {
