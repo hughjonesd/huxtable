@@ -181,32 +181,42 @@ build_tabular <- function(ht) {
   ## BUILD CELL CONTENTS
   fs <- font_size(ht)
   line_space <- round(fs * 1.2, 2)
-  all_contents <- ifelse(! is.na(fs),
-        sprintf('{\\fontsize{%.4gpt}{%.4gpt}\\selectfont %s}' , fs, line_space, all_contents),
-        all_contents)
+  has_fs <- ! is.na(fs)
+  all_contents[has_fs] <- sprintf('{\\fontsize{%.4gpt}{%.4gpt}\\selectfont %s}' ,
+        fs[has_fs], line_space[has_fs], all_contents[has_fs])
 
   tc <- text_color(ht)
   tcf <- format_color(tc)
-  all_contents <- ifelse(! is.na(tc),
-        sprintf('\\textcolor[RGB]{%s}{%s}', tcf, all_contents),
-        all_contents)
+  has_tc <- ! is.na(tc)
+  all_contents[has_tc] <- sprintf('\\textcolor[RGB]{%s}{%s}', tcf[has_tc], all_contents[has_tc])
 
-  all_contents <- ifelse(bold(ht),   sprintf('\\textbf{%s}', all_contents), all_contents)
-  all_contents <- ifelse(italic(ht), sprintf('\\textit{%s}', all_contents), all_contents)
+  all_contents[bold(ht)]   <- sprintf('\\textbf{%s}', all_contents[bold(ht)])
+  all_contents[italic(ht)] <- sprintf('\\textit{%s}', all_contents[italic(ht)])
 
   font <- font(ht)
-  all_contents <- ifelse(! is.na(font),
-        sprintf('{\\fontfamily{%s}\\selectfont %s}', font, all_contents),
-        all_contents)
+  has_font <- ! is.na(font)
+  all_contents[has_font] <- sprintf('{\\fontfamily{%s}\\selectfont %s}', font[has_font],
+        all_contents[has_font])
 
   rt <- rotation(ht)
-  all_contents <- ifelse(rt != 0,
-        sprintf('\\rotatebox{%.4g}{%s}', rt, all_contents),
-        all_contents)
+  has_rt <- rt != 0
+  all_contents[has_rt] <- sprintf('\\rotatebox{%.4g}{%s}', rt[has_rt], all_contents[has_rt])
 
   dim(all_contents) <- dim(ht)
 
   ## UNREFORMED BIT
+  ## contents are empty except for contents of the *bottom* left of a 'display area' (including 1x1)
+  ##   - we can get an array of these with dcells[, c('display_col', 'end_row')] of unshadowed cells
+  ##   - contents have padding, alignment, wrap and row_height TeX added
+  ## cell colors and borders are added to left hand row of a 'display area'; these come
+  ##   from the colors and borders of the 'display cell'
+  ## 'multirow' is added to bottom left of a 'display area' if it has > 1 rowspan
+  ##
+  ## for each row:
+  ##   get rid of empty cells
+  ##   paste row together, collapsed with &; add '\\tabularnewline[-0.5pt]\n'
+  ##
+  ## add hhlines below each row (including "row 0")
   for (myrow in seq_len(nrow(ht))) {
     row_contents <- character(0)
     added_right_border <- FALSE
