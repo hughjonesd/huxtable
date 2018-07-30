@@ -398,118 +398,12 @@ build_tabular <- function(ht) {
 
   res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
   return(res)
-
-  ## OLD STUFF -----------------
-  for (myrow in seq_len(nrow(ht))) {
-    row_contents <- character(0)
-    added_right_border <- FALSE
-
-    for (mycol in seq_len(ncol(ht))) {
-      dcell <- display_cells[myrow + (mycol - 1) * nrow(ht), ] # speed
-      drow <- dcell$display_row
-      dcol <- dcell$display_col
-
-      contents <- ''
-      rs <- dcell$rowspan
-      end_row <- dcell$end_row
-      bottom_left_multirow <- dcell$shadowed && myrow == end_row && mycol == dcol
-      # STRATEGY:
-      # - if not a shadowed cell, or if bottom left of a shadowed multirow,
-      #    - print content, including struts for padding and row height
-      #    - multirow goes upwards not downwards, to avoid content being overwritten by cell background
-      # - if a left hand cell (shadowed or not), print cell color and borders
-      if ( (! dcell$shadowed && rs == 1) || bottom_left_multirow) {
-        contents <- all_contents[drow, dcol]
-
-        padding <- list(left_padding(ht)[drow, dcol], right_padding(ht)[drow, dcol], top_padding(ht)[drow, dcol],
-              bottom_padding(ht)[drow, dcol])
-        padding <- lapply(padding, function(x) if (is_a_number(x)) paste0(x, 'pt') else x)
-        tpadding <- if (is.na(padding[3])) '' else paste0('\\rule{0pt}{\\baselineskip+', padding[3], '}')
-        bpadding <- if (is.na(padding[4])) '' else paste0('\\rule[-', padding[4], ']{0pt}{', padding[4], '}')
-        align_str <- switch(real_align[drow, dcol],
-          left   = '\\raggedright ',
-          right  = '\\raggedleft ',
-          center = '\\centering '
-        )
-        contents <- paste0(tpadding, align_str, contents, bpadding)
-        if (wrap(ht)[drow, dcol]) {
-          width_spec <- compute_width(ht, mycol, dcell$end_col)
-          hpad_loss  <- lapply(padding[1:2], function (x) if (! is.na(x)) paste0('-', x) else '')
-          # reverse of what you think. 'b' aligns the *bottom* of the text with the baseline
-          # this doesn't really work for short text!
-          ctb <- switch(valign(ht)[drow, dcol], top = 'b', middle = 'c', bottom = 't')
-          contents   <- paste0('\\parbox[', ctb, ']{', width_spec, hpad_loss[1], hpad_loss[2], '}{', contents, '}')
-        }
-        hpadding <- lapply(padding[1:2], function (x) if (is.na(x)) '' else paste0('\\hspace*{', x, '}'))
-        contents <- paste0(hpadding[1], contents, hpadding[2])
-
-        # to create row height, we add invisible \rule{0pt}. So, these heights are minimums.
-        # not sure how this should interact with cell padding...
-        if (! is.na(row_height <- row_height(ht)[drow])) {
-          if (is.numeric(row_height)) row_height <- paste0(row_height, '\\textheight')
-          contents <- paste0(contents, '\\rule{0pt}{', row_height, '}')
-        }
-      }
-
-      # print out cell_color and borders from display cell rather than actual cell
-      # but only for left hand cells (which will be multicolumn{colspan} )
-      if (! is.na(cell_color <- background_color(ht)[drow, dcol]) && mycol == dcol) {
-        cell_color <- format_color(cell_color)
-        cell_color <- paste0('\\cellcolor[RGB]{', cell_color, '}')
-        contents <- paste0(cell_color, '', contents)
-      }
-
-      if (bottom_left_multirow) {
-        # * is 'standard width', could be more specific:
-        contents <- paste0('\\multirow{-', rs, '}{*}{', contents, '}')
-      }
-
-      if (mycol == dcol) { # first column of cell
-
-        cs <- dcell$colspan
-        colspec <- if (wrap(ht)[drow, dcol]) {
-          pmb <- switch(valign(ht)[drow, dcol], top   = 'p', bottom  = 'b', middle = 'm')
-          width_spec <- compute_width(ht, mycol, dcell$end_col)
-          paste0(pmb, '{', width_spec, '}')
-        } else {
-          switch(real_align[drow, dcol], left = 'l', center = 'c', right = 'r')
-        }
-        # only add left borders if we haven't already added a right border!
-        lb <- if (! added_right_border) v_border(ht, myrow, mycol, collapsed_borders, cb_colors) else ''
-        rb <- v_border(ht, myrow, dcell$end_col + 1, collapsed_borders, cb_colors) # we need to put the end column here
-        added_right_border <- rb != ''
-        contents <- paste0('\\multicolumn{', cs, '}{', lb, colspec, rb, '}{', contents, '}')
-      }
-
-      row_contents[mycol] <- contents
-
-    } # next cell
-    row_contents <- row_contents[nzchar(row_contents)] # if we've printed nothing, don't print an & for it
-    row_contents <- paste(row_contents, collapse = ' & \n')
-    # should reduce nasty pale lines through colored multirow cells:
-    res <- paste0(res, row_contents, '\\tabularnewline[-0.5pt]\n')
-
-    # add top/bottom borders
-    res <- paste0(res, hhlines[1 + myrow])
-  } # next row
-
-  tenv <- tabular_environment(ht)
-  width_spec <- if (tenv %in% c('tabularx', 'tabular*', 'tabulary')) {
-    tw <- width(ht)
-    if (is_a_number(tw)) tw <- paste0(tw, default_table_width_unit)
-    paste0('{', tw, '}')
-  } else {
-    ''
-  }
-  res <- paste0('\\begin{',  tenv, '}', width_spec, res, '\\end{', tenv, '}\n')
-
-  return(res)
 }
 
 
 compute_width <- function (ht, start_col, end_col) {
   table_width <- width(ht) # always defined, default is 0.5 (of \\textwidth)
-  if (is_a_number(table_width)) {
+  if (is.numeric(table_width)) {
     table_unit  <- default_table_width_unit
     table_width <- as.numeric(table_width)
   } else {
@@ -519,15 +413,12 @@ compute_width <- function (ht, start_col, end_col) {
 
   cw <- col_width(ht)[start_col:end_col]
   cw[is.na(cw)] <- 1 / ncol(ht)
-  if (! all(nums <- is_a_number(cw))) {
-    # use calc for multiple character widths
-    # won't work if you mix in numerics
-    cw[nums] <- paste0(as.numeric(cw[nums]) * table_width, table_unit)
-    cw <- paste(cw, collapse = '+')
+  cw <- if (! is.numeric(cw)) {
+    paste(cw, collapse = '+')
   } else {
     cw <- sum(as.numeric(cw))
     cw <- cw * table_width
-    cw <- paste0(cw, table_unit)
+    paste0(cw, table_unit)
   }
 
   if (end_col > start_col) {
@@ -537,14 +428,4 @@ compute_width <- function (ht, start_col, end_col) {
   }
 
   cw
-}
-
-
-# uses "real" border numbers in "ncol + 1 space"
-v_border <- function (ht, row, col, collapsed_borders, cb_colors) {
-  width <- collapsed_borders$vert[row, col]
-  color <- cb_colors$vert[row, col]
-  color <- format_color(color, default = 'black')
-
-  paste0('!{\\color[RGB]{', color, '}\\vrule width ', width, 'pt}')
 }
