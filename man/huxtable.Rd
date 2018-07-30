@@ -4,11 +4,7 @@
 \alias{huxtable}
 \alias{hux}
 \alias{tribble_hux}
-\alias{as_huxtable}
-\alias{as_hux}
 \alias{as_huxtable.default}
-\alias{is_huxtable}
-\alias{is_hux}
 \title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
@@ -23,32 +19,20 @@ tribble_hux(..., add_colnames = getOption("huxtable.add_colnames",
   FALSE), add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE))
 
-as_huxtable(x, ...)
-
-as_hux(x, ...)
-
 \method{as_huxtable}{default}(x,
   add_colnames = getOption("huxtable.add_colnames", FALSE),
   add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
   TRUE), ...)
-
-is_huxtable(x)
-
-is_hux(x)
 }
 \arguments{
-\item{...}{For \code{huxtable}, named list of values as in \code{\link[=data.frame]{data.frame()}}. For \code{as_huxtable},
-extra arguments.}
+\item{...}{For \code{huxtable}, named list of values as in \code{\link[=data.frame]{data.frame()}}.
+For \code{tribble_hux}, data values as in \code{\link[tibble:tribble]{tibble::tribble()}}.}
 
 \item{add_colnames}{If \code{TRUE}, add a first row of column names to the huxtable.}
 
 \item{add_rownames}{If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.}
 
 \item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
-
-\item{x}{An object to convert to a huxtable.}
-
-\item{...}{For \code{tribble_hux}, passed on to \code{\link[tibble:tribble]{tibble::tribble()}}.}
 }
 \value{
 An object of class \code{huxtable}.
@@ -65,9 +49,6 @@ the default globally by setting \code{options("huxtable.add_colnames")} to \code
 
 \code{tribble_hux} is a simple wrapper around \code{\link[tibble:tribble]{tibble::tribble()}} which lets you create data
 in a readable format.
-
-\code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
-Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 }
 \section{Automatic formatting}{
 
@@ -100,10 +81,7 @@ tribble_hux(
     "David Hugh-Jones", 50000,
     add_colnames = TRUE
 )
-dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
-as_huxtable(dfr)
-
 }
 \seealso{
-huxtable-options
+\link{huxtable-options}
 }

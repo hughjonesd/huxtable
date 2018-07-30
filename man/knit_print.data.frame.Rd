@@ -37,7 +37,7 @@ data.frame(a = 1:5, b = 1:5) # groovy!
 }
 }
 \seealso{
-huxtable-options
+\link{huxtable-options}
 
 Other knit_print: \code{\link{knit_print.huxtable}}
 }

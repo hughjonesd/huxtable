@@ -9,8 +9,8 @@ NULL
 #'
 #' `huxtable`, or `hux`, creates a huxtable object.
 #'
-#' @param ... For `huxtable`, named list of values as in [data.frame()]. For `as_huxtable`,
-#'   extra arguments.
+#' @param ... For `huxtable`, named list of values as in [data.frame()].
+#'   For `tribble_hux`, data values as in [tibble::tribble()].
 #' @param add_colnames If `TRUE`, add a first row of column names to the huxtable.
 #' @param add_rownames If `TRUE`, add a first column of row names, named 'rownames', to the huxtable.
 #' @param autoformat If `TRUE`, automatically format columns by type. See below.
@@ -43,7 +43,7 @@ NULL
 #' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
 #' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
 #'
-#' @seealso huxtable-options
+#' @seealso [huxtable-options]
 #'
 #' @examples
 #' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
@@ -70,9 +70,6 @@ huxtable <- function (
 hux <- huxtable
 
 
-
-#' @param ... For `tribble_hux`, passed on to [tibble::tribble()].
-#'
 #' @export
 #' @details
 #' `tribble_hux` is a simple wrapper around [tibble::tribble()] which lets you create data
@@ -97,22 +94,32 @@ tribble_hux <- function (...,
 }
 
 
-#' @param x An object to convert to a huxtable.
+#' Convert objects to huxtables
+#'
+#' `as_huxtable` or `as_hux` converts an object to a huxtable.
+#' Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
+#' `is_hux[table]` tests if an object is a huxtable.
+#'
+#' @param x Object to convert.
+#' @param ... Arguments passed on to [huxtable()].
+#' @inheritParams huxtable
+#'
+#' @return An object of class "huxtable".
 #'
 #' @export
-#' @details
-#' `as_huxtable` and `as_hux` convert an object to a huxtable.
-#' Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
 #' @examples
 #' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
 #' as_huxtable(dfr)
-#'
-#' @rdname huxtable
+#' mx <- matrix(letters[1:12], 4, 3)
+#' as_huxtable(mx)
+#' library(stats)
+#' tbl <- table(Wool = warpbreaks$wool, Tension = warpbreaks$tension)
+#' as_huxtable(tbl) # adds row and column names by default
 as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 
 
 #' @export
-#' @rdname huxtable
+#' @rdname as_huxtable
 as_hux <- as_huxtable
 
 
@@ -216,9 +223,9 @@ as_huxtable.logical   <- as_huxtable.numeric
 as_huxtable.complex   <- as_huxtable.numeric
 
 #' @export
-#' @rdname huxtable
+#' @rdname as_huxtable
 is_huxtable <- function (x) inherits(x, 'huxtable')
 
 #' @export
-#' @rdname huxtable
+#' @rdname as_huxtable
 is_hux <- is_huxtable

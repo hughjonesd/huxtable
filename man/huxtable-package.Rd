@@ -16,5 +16,5 @@ read the vignette with \code{vignette('huxtable')}.
 To report a bug, or suggest an enhancement, visit \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 }
 \seealso{
-huxtable-options
+\link{huxtable-options}
 }

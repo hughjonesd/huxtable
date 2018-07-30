@@ -38,5 +38,5 @@ format(ht, output = 'screen')
 format(ht, output = 'md')
 }
 \seealso{
-huxtable-options
+\link{huxtable-options}
 }

@@ -23,7 +23,7 @@ prints itself out appropriately. You can override the output format by setting
 \code{options("huxtable.knitr_output_format")}.
 }
 \seealso{
-huxtable-options
+\link{huxtable-options}
 
 Other knit_print: \code{\link{knit_print.data.frame}}
 }

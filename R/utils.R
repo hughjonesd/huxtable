@@ -351,7 +351,7 @@ smart_hux_from_df <- function(dfr) {
 #' @return `print` prints the huxtable and returns `NULL` invisibly.
 #' @export
 #'
-#' @seealso huxtable-options
+#' @seealso [huxtable-options]
 #' @examples
 #' \dontrun{
 #' # to print LaTeX output:

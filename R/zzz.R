@@ -14,7 +14,7 @@
 #'
 #' To report a bug, or suggest an enhancement, visit \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 #'
-#' @seealso huxtable-options
+#' @seealso [huxtable-options]
 #' @name huxtable-package
 NULL
 
