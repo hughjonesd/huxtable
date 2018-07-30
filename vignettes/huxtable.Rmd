@@ -42,20 +42,6 @@ if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 huxtable::hux_logo(latex = is_latex)
 ```
 
-
-```{r, eval = FALSE, echo = FALSE}
-# PLAN
-# Make single document work in notebook format (maybe with minimal changes)
-# Installation
-# Dplyr examples
-# Examples with where and friends
-# Different kinds of output
-# Cookbook?
-# Limitations
-
-```
-
-
 # Introduction
 
 ## About this document
@@ -122,6 +108,17 @@ data(mtcars)
 car_ht <- as_hux(mtcars)
 ```
 
+You can input your data row-by-row using the `tribble_hux` function. This can be more readable:
+
+```{r}
+tribble_hux(
+  ~Employee,          ~Salary,
+  "John Smith",       50000,
+  "Jane Doe",         50000,
+  "David Hugh-Jones", 40000,
+  add_colnames = TRUE
+)
+```
 
 If you look at a huxtable in R, it will print out a simple representation of the data. Notice that we've added the
 column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table. **NB:** This means that row 1 of your data will be row 2 of the huxtable, and the
