@@ -88,8 +88,6 @@ translating calls into the new version. (OK, the conversion hassle still exists.
 
 * `huxreg`-style function in `texreg` package
 
-* rewrite LaTeX for speed, vectorizing and putting bits in appropriately
-
 * a FAQ, including:
   - my table isn't in the centre with position(ht) <- 'left'!
     - try setting the width

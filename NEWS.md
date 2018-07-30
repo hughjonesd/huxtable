@@ -11,8 +11,6 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Code rewrites for better performance and maintainability:
   - HTML is up to 10x faster.
   - LaTeX is up to 4x faster.
-* The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths has
-  been removed. If you want a number, set a number and not a string.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
@@ -22,6 +20,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - cbind and rbind work.
 * Bugfix: HTML cols were printed with 'width: NA'.
 * Bugfix: width, col_width etc. can be reset to a number after setting them to a string.
+  - The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths 
+    has been removed. If you want a number, set a number and not a string.
 * Bugfix: HTML tables with position "right" weren't right-aligned.
 * Documentation tweaks.
 * Nicer error messages when rbinding objects with different numbers of rows.
