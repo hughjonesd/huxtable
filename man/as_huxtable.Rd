@@ -3,6 +3,7 @@
 \name{as_huxtable}
 \alias{as_huxtable}
 \alias{as_hux}
+\alias{as_huxtable.default}
 \alias{is_huxtable}
 \alias{is_hux}
 \title{Convert objects to huxtables}
@@ -10,6 +11,11 @@
 as_huxtable(x, ...)
 
 as_hux(x, ...)
+
+\method{as_huxtable}{default}(x,
+  add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
+  TRUE), ...)
 
 is_huxtable(x)
 
@@ -19,6 +25,12 @@ is_hux(x)
 \item{x}{Object to convert.}
 
 \item{...}{Arguments passed on to \code{\link[=huxtable]{huxtable()}}.}
+
+\item{add_colnames}{If \code{TRUE}, add a first row of column names to the huxtable.}
+
+\item{add_rownames}{If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.}
+
+\item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
 }
 \value{
 An object of class "huxtable".

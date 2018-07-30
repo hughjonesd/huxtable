@@ -4,7 +4,6 @@
 \alias{huxtable}
 \alias{hux}
 \alias{tribble_hux}
-\alias{as_huxtable.default}
 \title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
@@ -18,11 +17,6 @@ hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
 tribble_hux(..., add_colnames = getOption("huxtable.add_colnames",
   FALSE), add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE))
-
-\method{as_huxtable}{default}(x,
-  add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
-  TRUE), ...)
 }
 \arguments{
 \item{...}{For \code{huxtable}, named list of values as in \code{\link[=data.frame]{data.frame()}}.

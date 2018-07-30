@@ -124,7 +124,7 @@ as_hux <- as_huxtable
 
 
 #' @export
-#' @rdname huxtable
+#' @rdname as_huxtable
 as_huxtable.default <- function (
         x,
         add_colnames = getOption("huxtable.add_colnames", FALSE),
