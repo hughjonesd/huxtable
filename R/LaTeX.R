@@ -181,7 +181,7 @@ build_tabular <- function(ht) {
   vert_b <- rbind(vert_b[1,], vert_b) # we checked positive dims; row 1 exists
   vert_bc <- cbc$vert
   vert_bc <- rbind(vert_bc[1,], vert_bc)
-  vert_bc <- format_color(vert_bc)
+  vert_bc <- format_color(vert_bc, default = 'black')
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
   hhlines_vert[has_vert_b] <- sprintf('>{\\arrayrulecolor[RGB]{%s}\\global\\arrayrulewidth=%spt}|',
