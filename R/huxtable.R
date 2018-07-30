@@ -70,6 +70,33 @@ huxtable <- function (
 hux <- huxtable
 
 
+
+#' @param ... For `tribble_hux`, passed on to [tibble::tribble()].
+#'
+#' @export
+#' @details
+#' `tribble_hux` is a simple wrapper around [tibble::tribble()] which lets you create data
+#' in a readable format.
+#'
+#' @rdname huxtable
+#' @examples
+#' tribble_hux(
+#'   ~ Name,             ~ Salary,
+#'     "John Smith",       50000,
+#'     "Jane Doe",         50000,
+#'     "David Hugh-Jones", 50000,
+#'     add_colnames = TRUE
+#' )
+tribble_hux <- function (...,
+        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_rownames = FALSE,
+        autoformat   = getOption('huxtable.autoformat', TRUE)
+      ) {
+  as_hux(tibble::tribble(...), add_colnames = add_colnames, add_rownames = FALSE,
+        autoformat = autoformat)
+}
+
+
 #' @param x An object to convert to a huxtable.
 #'
 #' @export

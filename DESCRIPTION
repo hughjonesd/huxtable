@@ -22,6 +22,7 @@ Imports:
     assertthat,
     glue,
     stringr (>= 1.2.0),
+    tibble,
     tidyselect,
     utils
 Suggests:

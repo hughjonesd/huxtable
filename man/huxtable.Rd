@@ -3,6 +3,7 @@
 \name{huxtable}
 \alias{huxtable}
 \alias{hux}
+\alias{tribble_hux}
 \alias{as_huxtable}
 \alias{as_hux}
 \alias{as_huxtable.default}
@@ -17,6 +18,10 @@ huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
 hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
   add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
   TRUE))
+
+tribble_hux(..., add_colnames = getOption("huxtable.add_colnames",
+  FALSE), add_rownames = FALSE,
+  autoformat = getOption("huxtable.autoformat", TRUE))
 
 as_huxtable(x, ...)
 
@@ -42,6 +47,8 @@ extra arguments.}
 \item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
 
 \item{x}{An object to convert to a huxtable.}
+
+\item{...}{For \code{tribble_hux}, passed on to \code{\link[tibble:tribble]{tibble::tribble()}}.}
 }
 \value{
 An object of class \code{huxtable}.
@@ -55,6 +62,9 @@ along by one: your old row/column 1 will now be row/column 2, etc.
 
 \code{add_colnames} currently defaults to \code{FALSE}, but this will change in future. You can set
 the default globally by setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
+
+\code{tribble_hux} is a simple wrapper around \code{\link[tibble:tribble]{tibble::tribble()}} which lets you create data
+in a readable format.
 
 \code{as_huxtable} and \code{as_hux} convert an object to a huxtable.
 Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
@@ -83,6 +93,13 @@ apply to column headers.
 
 \examples{
 ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
+tribble_hux(
+  ~ Name,             ~ Salary,
+    "John Smith",       50000,
+    "Jane Doe",         50000,
+    "David Hugh-Jones", 50000,
+    add_colnames = TRUE
+)
 dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
 as_huxtable(dfr)
 

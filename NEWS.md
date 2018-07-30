@@ -4,12 +4,15 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.1.9000
 
+* New `tribble_hux` function wrapping `tibble::tribble()` for readable data input.
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
   if a needed package is not installed.
 * Code rewrites for better performance:
   - HTML up to 10x faster
   - LaTeX up to 2x faster
+* The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths has
+  been removed.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.

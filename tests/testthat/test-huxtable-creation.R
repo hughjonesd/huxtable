@@ -17,6 +17,23 @@ test_that('create huxtable using hux[table]()', {
 })
 
 
+test_that('create huxtable using tribble_hux()', {
+  for (addc in c(TRUE, FALSE)) {
+    expect_silent(ht <- tribble_hux(
+      ~a, ~b,
+      1, 'a',
+      2, 'b',
+      3, 'c',
+      add_colnames = addc
+    ))
+    expect_is(ht, 'huxtable')
+    expect_equal(nrow(ht), 3 + addc)
+    expect_equal(ncol(ht), 2)
+    expect_equivalent(colnames(ht), c('a', 'b'))
+  }
+})
+
+
 test_that('create huxtable from data frame', {
   dfr <- data.frame(a = 1:3, b = 1:3)
   expect_silent(ht <- as_hux(dfr))
