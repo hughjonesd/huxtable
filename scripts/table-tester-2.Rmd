@@ -291,6 +291,13 @@ ht
 # Multirow, multicol and border color
 
 ```{r}
+ht <- make(nrow = 2)
+ht <- set_all_border_colors(ht, 'blue')
+caption(ht) <- 'All borders blue'
+ht
+```
+
+```{r}
 ht <- make(nrow = 5)
 background_color(ht) <- 'white'
 colspan(ht)[1,1] <- 2
