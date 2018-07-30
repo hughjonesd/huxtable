@@ -104,6 +104,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       .(extra_code)
       value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[.(attr_name)]]
       attr(ht, .(attr_name))[] <- value
+      mode(attr(ht, .(attr_name))) <- mode(value)
       ht
     }
   ))

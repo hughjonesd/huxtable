@@ -42,7 +42,20 @@ test_that('Assignment to attributes preserves colnames', {
   expect_equal(cn, colnames(align(ht)))
 })
 
-
+test_that('Can assign numeric to width, col_width etc. after assigning character', {
+  ht <- huxtable(letters[1:3])
+  width(ht) <- '300pt'
+  width(ht) <- 0.5
+  expect_type(width(ht), 'double')
+  col_width(ht) <- paste(1:3, '\\textwidth')
+  col_width(ht) <- rep(1/3, 3)
+  expect_type(col_width(ht), 'double')
+  number_format(ht) <- '%.3f'
+  number_format(ht) <- 2L
+  nf <- number_format(ht)
+  expect_type(nf[1, 1][[1]], 'integer')
+  expect_equivalent(dim(nf), dim(ht))
+})
 
 test_that('Can combine numbers and characters in number_format', {
   ht <- huxtable(a = c(1.11111, 1.11111, 1.11111), autoformat = FALSE)
