@@ -181,11 +181,14 @@ build_tabular <- function(ht) {
   vert_b <- rbind(vert_b[1,], vert_b) # we checked positive dims; row 1 exists
   vert_bc <- cbc$vert
   vert_bc <- rbind(vert_bc[1,], vert_bc)
+  has_vert_bc <- ! is.na(vert_bc)
   vert_bc <- format_color(vert_bc, default = 'black')
+  vert_bc_tex <- rep('', length(vert_bc))
+  vert_bc_tex[has_vert_bc] <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc[has_vert_bc])
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
-  hhlines_vert[has_vert_b] <- sprintf('>{\\arrayrulecolor[RGB]{%s}\\global\\arrayrulewidth=%spt}|',
-        vert_bc[has_vert_b],
+  hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}|',
+        vert_bc_tex[has_vert_b],
         vert_b[has_vert_b])
   dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1)
 
