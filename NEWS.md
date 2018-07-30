@@ -8,9 +8,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
   if a needed package is not installed.
-* Code rewrites for better performance:
-  - HTML up to 10x faster
-  - LaTeX up to 2x faster
+* Code rewrites for better performance and maintainability:
+  - HTML is up to 10x faster.
+  - LaTeX is up to 4x faster.
 * The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths has
   been removed.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.

@@ -25,11 +25,11 @@ if (grepl('9000', hv)) {
   hv <- paste0(hv, '-', sha)
 }
 
-mbs[[hv]] <- microbenchmark(
+mbs[[hv]] <- summary(microbenchmark(
         to_latex(ht), to_latex(ht_long), to_latex(ht_wide),
         to_html(ht), to_html(ht_long), to_html(ht_wide),
-        as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
-        as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
+        # as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
+        # as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
         times = 20
-      )
+      ))
 saveRDS(mbs, 'mbs.Rds')
