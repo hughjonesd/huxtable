@@ -27,6 +27,7 @@ matrix:
     - yihui/knitr
     - rstudio/rmarkdown
     r: release
+    cache: false
     env:
       - CACHE_VERSION=github_packages
 # run tests without Suggested packages
