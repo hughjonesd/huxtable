@@ -169,6 +169,11 @@ where <- function(expr) which(expr, arr.ind = TRUE)
 #'
 #' @details To replace `is_a_number` use e.g. `! is.na(as.numeric(x))`
 #' @export
+#' @name is_a_number
+NULL
+
+# documenting the NULL object above stops roxygen trying to print a usage section
+# which causes R CMD check to throw a wobbly
 is_a_number <- function(x) {
   if (is.data.frame(x)) {
     res <- sapply(x, is_a_number)

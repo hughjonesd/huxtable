@@ -7,18 +7,11 @@
 \alias{is_a_number}
 \alias{huxtable-deprecated}
 \title{Deprecated functions}
-\usage{
-is_a_number(x)
-
-pad_decimal(ht)
-pad_decimal(ht) <- value
-set_pad_decimal(ht, row, col, value, byrow = FALSE)
-}
 \description{
 These functions are deprecated and will be removed in future versions of huxtable.
 }
 \details{
-To replace \code{pad_decimal} use e.g. \code{\link[=align]{align()}} e.g. \code{align(ht) <- "."}.
+To replace \code{pad_decimal} use \code{\link[=align]{align()}}, e.g. \code{align(ht) <- "."}.
 
 To replace \code{is_a_number} use e.g. \code{! is.na(as.numeric(x))}
 }

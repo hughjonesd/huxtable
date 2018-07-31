@@ -911,9 +911,10 @@ make_getter_setters('number_format', 'cell')
 }
 
 
-#' @name pad_decimal
+
 #' @aliases pad_decimal<- set_pad_decimal
 #' @rdname huxtable-deprecated
+#' @name pad_decimal
 #' @details
 #' To replace `pad_decimal` use [align()], e.g. `align(ht) <- "."`.
 #' @export pad_decimal pad_decimal<- set_pad_decimal

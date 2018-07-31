@@ -49,12 +49,6 @@ NULL
 #'
 #' These functions are deprecated and will be removed in future versions of huxtable.
 #'
-#' @usage
-#' pad_decimal(ht)
-#' pad_decimal(ht) <- value
-#' set_pad_decimal(ht, row, col, value, byrow = FALSE)
-#'
-#'
 #' @name huxtable-deprecated
 NULL
 
