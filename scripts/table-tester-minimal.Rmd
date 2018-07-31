@@ -35,14 +35,17 @@ long <- 'A rather long row of text which goes on...'
 
 ```{r}
 ht <- make()
-# ht <- hux("My text") # really minimal
-ht <- hux(a = c("Cell 1.1", "Cell 2.1"), b = c("Cell 1.2", "Cell 2.2"))
+ht <- hux("My text") # really minimal
+# ht <- hux(a = c("Cell 1.1", "Cell 2.1"), b = c("Cell 1.2", "Cell 2.2"))
+# 
+# ht <- set_all_borders(ht, 1)
+# ht <- set_all_border_colors(ht, 'black')
+# right_border_color(ht) <- 'red'
+# left_border_color(ht) <- 'green'
+# colspan(ht)[1,1]<-2
+# ht
 
-ht <- set_all_borders(ht, 1)
-ht <- set_all_border_colors(ht, 'black')
-right_border_color(ht) <- 'red'
-left_border_color(ht) <- 'green'
-colspan(ht)[1,1]<-2
-ht
+hux_logo()
+
 
 ```
