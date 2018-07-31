@@ -4,16 +4,18 @@
 \alias{hux_logo}
 \title{Huxtable logo}
 \usage{
-hux_logo(latex = FALSE)
+hux_logo(latex = FALSE, html = FALSE)
 }
 \arguments{
-\item{latex}{Use LaTeX names for fonts.}
+\item{latex}{Style for LaTeX.}
+
+\item{html}{Style for HTML.}
 }
 \value{
 The huxtable logo.
 }
 \description{
-Huxtable logo
+Returns a randomized huxtable logo, inspired by Mondrian.
 }
 \examples{
 print_screen(hux_logo())

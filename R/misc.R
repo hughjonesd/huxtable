@@ -216,34 +216,38 @@ sanitize <- function (str, type = "latex") {
 
 #' Huxtable logo
 #'
-#' @param latex Use LaTeX names for fonts.
+#' Returns a randomized huxtable logo, inspired by Mondrian.
+#'
+#' @param latex Style for LaTeX.
+#' @param html  Style for HTML.
 #' @return The huxtable logo.
 #' @export
 #'
 #' @examples
 #' print_screen(hux_logo())
 #'
-hux_logo <- function(latex = FALSE) {
+hux_logo <- function(latex = FALSE, html = FALSE) {
   assert_that(is.flag(latex))
 
-  blank <- if (latex) '' else '&nbsp;'
+  blank <- if (html) '&nbsp;' else ''
   squares <- rep(blank, 36)
   letter_squares <- sort(sample(36, 8))
   squares[letter_squares] <- strsplit('huxtable', '')[[1]]
   mx <- matrix(squares, 6, 6, byrow = TRUE)
   letter_squares <- which(mx != blank) # back in vertical space
-  h_square <- which(mx == "h")
+  h_square <- which(mx == 'h')
 
   mondrian <- as_hux(mx)
+  escape_contents(mondrian) <- FALSE
+  align(mondrian) <- 'centre'
   font(mondrian) <- 'Arial'
   if (latex) font(mondrian) <- 'cmss'
-  escape_contents(mondrian) <- FALSE
-  mondrian <- set_all_borders(mondrian, 1.2)
+  mondrian <- set_all_borders(mondrian, if (html) 2 else 1.2)
   mondrian <- set_all_padding(mondrian, 0)
-
+  mondrian <- set_all_border_colors(mondrian, 'black')
   background_color(mondrian)[sample(36, 8)] <- sample(c('red', 'blue', 'yellow'), 8, replace = TRUE)
   bold(mondrian)[h_square] <- TRUE
-  italic(mondrian)[sample(36, 6)] <- TRUE
+
   colspan_ok <- setdiff(1:30, letter_squares - 6)
   colspan2 <- rep(- 6, 2)
   for (i in 1:2) {
@@ -254,7 +258,7 @@ hux_logo <- function(latex = FALSE) {
   # -7 to avoid being top-left of any letter_squares (as we may get 2x2 cells)
   # also avoid breaking colspans
   rowspan_ok <- setdiff(1:36, c(1:6*6, letter_squares - 1, letter_squares - 7, colspan2 - 1,
-        colspan2 + 5, colspan2 + 6))
+        colspan2 + 5, colspan2 + 6, colspan2))
   rowspan2 <- rep(- 1, 3)
   for (i in 1:3) {
     rowspan2[i] <- sample(rowspan_ok, 1)
@@ -264,10 +268,12 @@ hux_logo <- function(latex = FALSE) {
   colspan(mondrian)[colspan2] <- 2
   rowspan(mondrian)[rowspan2] <- 2
 
-  if (! latex) {
+  if (html) {
     mondrian <- set_all_padding(mondrian, 2)
-    width(mondrian)  <- '100pt'
-    height(mondrian) <- '100pt'
+    width(mondrian)  <- '120pt'
+    height(mondrian) <- '120pt'
+    col_width(mondrian)  <- '20pt'
+    row_height(mondrian) <- '20pt'
   }
 
   mondrian
