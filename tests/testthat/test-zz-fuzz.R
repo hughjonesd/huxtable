@@ -34,44 +34,61 @@ variations <- expand.grid(
   KEEP.OUT.ATTRS   = FALSE
 )
 
+
+hx_raw <- hux(
+  int  = 1:3,
+  real = 1:3 + 0.005,
+  char = letters[1:3],
+  date = as.Date(1:3, origin = "1970-01-01"),
+  fact = factor(letters[4:6])
+)
+
+add_props <- function(hx, row) {
+  props <- as.list(row)
+  props$ht <- hx
+  hx_set <- do.call("set_cell_properties", props)
+
+  return(hx_set)
+}
+
 test_that('various outputs unchanged', {
   skip_on_R_CMD_check()
-  hx <- hux(
-    int  = 1:3,
-    real = 1:3 + 0.005,
-    char = letters[1:3],
-    date = as.Date(1:3, origin = "1970-01-01"),
-    fact = factor(letters[4:6])
-  )
 
   RNGversion("3.3.0")
   set.seed(271075L) # expect_unchanged is useless if we always pick new variations
   for (i in sample(nrow(variations), 300)) {
-    props <- as.list(variations[i,])
-    props$ht <- hx
-    hx_set <- do.call("set_cell_properties", props)
+    hx_set <- add_props(hx_raw, variations[i,])
     expect_outputs_unchanged(hx_set, i)
   }
 })
 
 
-test_that('Some random outputs are validated by W3C', {
+test_that('Some random TeX outputs compile', {
+  skip_on_R_CMD_check()
+
+  on.exit({
+    try(file.remove(pdf_out), silent = TRUE)
+  })
+  pdf_out <- character(0)
+  for (i in sample(nrow(variations), 10)) {
+    hx_set <- add_props(hx_raw, variations[i,])
+    pdf_out[as.character(i)] <- pdfo <- sprintf('tex-check-%d.pdf', i)
+    expect_error(quick_pdf(hx_set, file = pdfo, open = FALSE),
+          regexp = NA,
+          info = list(index = i))
+    expect_true(file.exists(pdfo), info = list(index = i))
+  }
+})
+
+
+test_that('Some random HTML outputs are validated by W3C', {
   skip_on_R_CMD_check()
   skip_if_not_installed('httr')
   library(httr)
 
-  hx <- hux(
-    int  = 1:3,
-    real = 1:3 + 0.005,
-    char = letters[1:3],
-    date = as.Date(1:3, origin = "1970-01-01"),
-    fact = factor(letters[4:6])
-  )
   # here we do randomize
   for (i in sample(nrow(variations), 10)) {
-    props <- as.list(variations[i,])
-    props$ht <- hx
-    hx_set <- do.call("set_cell_properties", props)
+    hx_set <- add_props(hx_raw, variations[i,])
     webpage <- paste0("<!DOCTYPE html><html lang=\"en\">",
       "<head><meta charset=\"utf-8\"><title>huxtable table validation</title></head>",
       "<body>\n", to_html(hx_set), "\n</body></html>")
