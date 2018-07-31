@@ -703,7 +703,7 @@ options(huxtable.knit_print_df = TRUE)
 head(mtcars)
 ```
 
-If you don't want this (e.g. if you want to use `knitr::kable` or the [printr package](https://cran.r-project.org/web/packages/printr/vignettes/printr.html), then you can
+If you don't want this (e.g. if you want to use `knitr::kable` or the [printr package](https://cran.r-project.org/package=printr/vignettes/printr.html), then you can
 turn it off like this:
 
 ```{r}
