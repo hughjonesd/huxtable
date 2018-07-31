@@ -4,14 +4,15 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.0.1.9000
 
-* New `tribble_hux` function wrapping `tibble::tribble()` for readable data input.
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
   if a needed package is not installed.
 * Code rewrites for better performance and maintainability:
   - HTML is up to 10x faster.
   - LaTeX is up to 4x faster.
+* Documentation improvements.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
+* New `tribble_hux` function wrapping `tibble::tribble()` for readable data input.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * LaTeX: at points where borders cross, priority is given to the horizontal border color.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
@@ -24,7 +25,6 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths 
     has been removed. If you want a number, set a number and not a string.
 * Bugfix: HTML tables with position "right" weren't right-aligned.
-* Documentation tweaks.
 * Nicer error messages when rbinding objects with different numbers of rows.
 * Vignette improvements.
 

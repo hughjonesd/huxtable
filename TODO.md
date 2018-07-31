@@ -12,9 +12,7 @@ TODO
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default.
 
-* Work on documentation of properties:
-  - Clarify how defaults work (maybe automate from huxtable_default_attrs?)
-  - Say more about what some of them do
+* Rework documentation to use more inheritance less templates.
   
 * Generic insert_rows, insert_cols which just do an rbind (for any object)? 
   - Probably insert_rows too close to insert_row? Or just change the interface to
@@ -57,16 +55,8 @@ rowspan(ht)[1, 1] <- 2
 bottom_border(ht)[2, ] <- 1
 ```
 should work, whereas now it doesn't put a border below column 1.
-Possibilities:
-```
-set_border_at(ht, below, above, left, right, value)
-```
-where one of below/above/left/right must be specified.
-Underlying model options: keep the same as now. Simple, but it breaks if you call e.g. `rowspan`
-after calling `set_border_at`. Or, store borders in a new way, e.g. in a (nrow+1) x ncol array
-for horiz borders, nrow x (ncol + 1) for vertical ones. Then everything works and you avoid
-a huge amount of conversion hassle. You could then deprecate the old interface while
-translating calls into the new version. (OK, the conversion hassle still exists...)
+Store borders & colors the way collapsed_borders reports them; override default getter/setters to so that rows and columns refer to "real positions". 
+
 
 * way to address a particular subset of a matrix, e.g.
   - ht %>% area(1:3, 4:6) %>% set_italic(TRUE) %>% set_border_color('red')
