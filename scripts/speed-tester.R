@@ -16,7 +16,7 @@ ht
 ht_long <- ht[rep(1:4, 10), ]
 ht_wide <- ht[, rep(1:5, 10)]
 
-mbs <- try(readRDS('mbs.Rds'))
+mbs <- try(readRDS('scripts/mbs.Rds'))
 if (inherits(mbs, 'try-error')) mbs <- list()
 hv <- as.character(packageVersion('huxtable'))
 hv  <- paste0('huxtable-', hv)
@@ -28,8 +28,8 @@ if (grepl('9000', hv)) {
 mbs[[hv]] <- summary(microbenchmark(
         to_latex(ht), to_latex(ht_long), to_latex(ht_wide),
         to_html(ht), to_html(ht_long), to_html(ht_wide),
-        # as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
-        # as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
+        as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
+        as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
         times = 20
       ))
 saveRDS(mbs, 'scripts/mbs.Rds')

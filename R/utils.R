@@ -79,66 +79,56 @@ format_color <- function (r_color, default = 'white') {
 
 # returns two rows(+1),cols(+1) arrays of border widths
 collapsed_borders <- function (ht) {
-  lb <- rb <- matrix(0, nrow(ht), ncol(ht))
-  tb <- bb <- matrix(0, nrow(ht), ncol(ht))
+  result <- do_collapse(ht, get_all_borders, default = 0)
+  result$vert <- pmax(result$left, result$right)
+  result$horiz <- pmax(result$top, result$bottom)
 
-  dc <- display_cells(ht, all = TRUE)
-  # provides large speedup:
-  dc <- as.matrix(dc[, c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
-  for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
-    dcell <- dc[ dc[, 'row'] == i & dc[, 'col'] == j, ]
-    drow <- dcell['display_row']
-    dcol <- dcell['display_col']
-    # if we're in top row, set top border; bottom row set bb etc.
-    if (i == drow)          tb[i, j] <- top_border(ht)[drow, dcol]
-    if (i == dcell['end_row']) bb[i, j] <- bottom_border(ht)[drow, dcol]
-    if (j == dcol)          lb[i, j] <- left_border(ht)[drow, dcol]
-    if (j == dcell['end_col']) rb[i, j] <- right_border(ht)[drow, dcol]
-  }
-  lb <- cbind(lb, 0)
-  rb <- cbind(0, rb)
-  tb <- rbind(tb, 0)
-  bb <- rbind(0, bb)
-  result <- list()
-  result$vert <- pmax(lb, rb)
-  result$horiz <- pmax(tb, bb)
-
-  result
+  result[c('vert', 'horiz')]
 }
 
 
 # returns two rows(+1),cols(+1) arrays of border colors. right and top borders have priority.
 # A border of 0 can still have a color.
 collapsed_border_colors <- function (ht) {
-  lb <- rb <- matrix(NA, nrow(ht), ncol(ht))
-  tb <- bb <- matrix(NA, nrow(ht), ncol(ht))
+  result <- do_collapse(ht, get_all_border_colors, default = NA)
+  result$vert <- result$right
+  result$vert[is.na(result$right)] <- result$left[is.na(result$right)]
+  result$horiz <- result$bottom
+  result$horiz[is.na(result$bottom)] <- result$top[is.na(result$bottom)]
 
+  result[c('vert', 'horiz')]
+}
+
+
+do_collapse <- function(ht, prop_fun, default) {
+  res <- list()
+  res$top <- res$left <- res$right <- res$bottom <- matrix(default, nrow(ht), ncol(ht))
   dc <- display_cells(ht, all = TRUE)
   # provides large speedup:
   dc <- as.matrix(dc[, c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
-  for (i in seq_len(nrow(ht))) for (j in seq_len(ncol(ht))) {
-    dcell <- dc[ dc[, 'row'] == i & dc[, 'col'] == j, ]
-    drow <- dcell['display_row']
-    dcol <- dcell['display_col']
-    # if we're in top row, set top border; bottom row set bb etc.
-    if (i == drow)          tb[i, j] <- top_border_color(ht)[drow, dcol]
-    if (i == dcell['end_row']) bb[i, j] <- bottom_border_color(ht)[drow, dcol]
-    if (j == dcol)          lb[i, j] <- left_border_color(ht)[drow, dcol]
-    if (j == dcell['end_col']) rb[i, j] <- right_border_color(ht)[drow, dcol]
+  dc_idx <- dc[, c('display_row', 'display_col')]
+  dc_map <- matrix(seq_len(nrow(ht) * ncol(ht)), nrow(ht), ncol(ht))
+  dc_map <- dc_map[dc_idx]
+
+  at <- list()
+  at$left <- dc[,'col'] == dc[,'display_col']
+  at$right <- dc[,'col'] == dc[,'end_col']
+  at$top <- dc[,'row'] == dc[,'display_row']
+  at$bottom <- dc[,'row'] == dc[,'end_row']
+
+  properties <- prop_fun(ht)
+  for(side in names(at)) {
+    at_side <- at[[side]]
+    res[[side]][ at_side ] <- properties[[side]][dc_map][at_side]
   }
-  lb <- cbind(lb, NA)
-  rb <- cbind(NA, rb)
-  tb <- rbind(tb, NA)
-  bb <- rbind(NA, bb)
-  result <- list()
-  result$vert <- rb
-  result$vert[is.na(rb)] <- lb[is.na(rb)]
-  result$horiz <- bb
-  result$horiz[is.na(bb)] <- tb[is.na(bb)]
 
-  result
+  res$left <- cbind(res$left, default)
+  res$right <- cbind(default, res$right)
+  res$top <- rbind(res$top, default)
+  res$bottom <- rbind(default, res$bottom)
+
+  return(res)
 }
-
 
 # find each numeric substring, and replace it:
 format_numbers <- function (string, num_fmt) {
