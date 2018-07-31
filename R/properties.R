@@ -912,7 +912,7 @@ make_getter_setters('number_format', 'cell')
 
 
 #' @name pad_decimal
-#' @aliases pad_decimal<- set_pad_decimal pad_decimal.huxtable pad_decimal<-.huxtable
+#' @aliases pad_decimal<- set_pad_decimal
 #' @rdname align
 #' @export pad_decimal pad_decimal<- set_pad_decimal
 NULL
