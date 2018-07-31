@@ -4,9 +4,6 @@
 \alias{align}
 \alias{align<-}
 \alias{set_align}
-\alias{pad_decimal}
-\alias{pad_decimal<-}
-\alias{set_pad_decimal}
 \title{Alignment}
 \usage{
 align(ht)

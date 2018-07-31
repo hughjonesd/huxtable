@@ -164,23 +164,11 @@ NULL
 #'
 where <- function(expr) which(expr, arr.ind = TRUE)
 
-#' Does an object look like a number?
+
+#' @rdname huxtable-deprecated
 #'
-#' A convenience function that returns `TRUE` if an object either is numeric or
-#' can be converted to a number. For data frames, it returns a matrix of the same
-#' dimensions as the data frame.
-#' @param x An object.
-#'
-#' @return A logical object with the same dimensions as `x`.
+#' @details To replace `is_a_number` use e.g. `! is.na(as.numeric(x))`
 #' @export
-#'
-#' @examples
-#'
-#' is_a_number(1.0)
-#' is_a_number("1.0")
-#' is_a_number("a")
-#' ht <- hux(a = 1:3, b = 1:3, add_colnames = TRUE)
-#' is_a_number(ht)
 is_a_number <- function(x) {
   if (is.data.frame(x)) {
     res <- sapply(x, is_a_number)

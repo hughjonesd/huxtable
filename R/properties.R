@@ -913,12 +913,14 @@ make_getter_setters('number_format', 'cell')
 
 #' @name pad_decimal
 #' @aliases pad_decimal<- set_pad_decimal
-#' @rdname align
+#' @rdname huxtable-deprecated
+#' @details
+#' To replace `pad_decimal` use [align()], e.g. `align(ht) <- "."`.
 #' @export pad_decimal pad_decimal<- set_pad_decimal
 NULL
 make_getter_setters('pad_decimal', 'cell', extra_code = {
   stopifnot(all(nchar(na.omit(value)) == 1))
-  warning('pad_decimal is deprecated. Instead, use e.g. align(x) <- "."')
+  .Deprecated(msg = "'pad_decimal' is deprecated.\nUse e.g. 'align(x) <- \".\"' instead.")
 })
 
 

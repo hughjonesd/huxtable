@@ -45,6 +45,19 @@ NULL
 #' @name huxtable-options
 NULL
 
+#' Deprecated functions
+#'
+#' These functions are deprecated and will be removed in future versions of huxtable.
+#'
+#' @usage
+#' pad_decimal(ht)
+#' pad_decimal(ht) <- value
+#' set_pad_decimal(ht, row, col, value, byrow = FALSE)
+#'
+#'
+#' @name huxtable-deprecated
+NULL
+
 .onLoad <- function(libname, pkgname) {
 
   set_default_option <- function (opt, value) {

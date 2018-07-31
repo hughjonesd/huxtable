@@ -27,7 +27,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: HTML tables with position "right" weren't right-aligned.
 * Nicer error messages when rbinding objects with different numbers of rows.
 * Vignette improvements.
-
+* `is_a_number` is deprecated.
 
 # huxtable 4.0.1
 
