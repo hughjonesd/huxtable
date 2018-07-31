@@ -5,6 +5,70 @@
 NULL
 
 
+#' Insert one matrix into another.
+#'
+#' These functions combine two matrix-like objects and return the result.
+#'
+#' @param x A matrix-like object, e.g. a huxtable
+#' @param y Matrix or vector to be inserted into `x`
+#' @param after Row or column after which `y` is inserted. Can be 0. Can be a row or column name.
+#'   By default, inserts `y` after the end of `x`.
+#' @param ... Arguments passed to [rbind()] or [cbind()]
+#'
+#' @return For `add_rows`, the result of `rbind(x[1:after,], y, x[-(1:after),]`. For `add_columns`
+#'   the same but with columns. `after = 0` and `after = nrow(x)` or `ncol(x)` are handled correctly.
+#' @export
+#'
+#' @details
+#' For `huxtable` objects, arguments in `...` can include `copy_cell_props`.
+#'
+#' You cannot insert data frames into huxtables using this method, because you can't
+#' `cbind` huxtables and data frames. (See the "Dispatch" section in [cbind()] for details of why
+#' not.)
+#'
+#' @seealso [insert_row()] and [insert_column()].
+#'
+#' @examples
+#' ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
+#' ht2 <- hux('Gooseberry', 2.10)
+#' add_rows(ht, ht2)
+#' add_rows(ht, ht2, after = 1)
+#' mx <- matrix(c('Sugar', '50%', '60%', 'Weight (g)', 300, 250), 3, 2)
+#' add_columns(ht, mx, after = 'Jam')
+add_rows <- function (x, y, after = nrow(x), ...) {
+  add_row_cols(x, y, after, dimno = 1, ...)
+}
+
+
+#' @export
+#' @rdname add_rows
+#' @examples
+#' ht <- hux(a = 1:3, b = 1:3)
+#' ht2 <- hux(d = letters[1:3])
+#' add_columns(ht, ht2, after = "a")
+add_columns <- function (x, y, after = ncol(x), ...) {
+  add_row_cols(x, y, after, dimno = 2, ...)
+}
+
+
+add_row_cols <- function (x, y, after, dimno, ...) {
+  dims <- dim(x)
+  end_idx <- dims[dimno]
+  assert_that(is.numeric(dims))
+  if (is.character(after)) {
+    after <- match(after, dimnames(x)[[dimno]])
+  }
+  assert_that(is.number(after), after >= 0, after <= end_idx)
+
+  second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
+  if (dimno == 1) {
+    rbind(x[seq_len(after),], y, x[second_idxes,], ...)
+  } else {
+    cbind(x[, seq_len(after)], y, x[, second_idxes], ...)
+  }
+}
+
+
 #' Insert a row or column
 #'
 #' These convenience functions wrap `cbind` or `rbind` for huxtables to insert
@@ -16,6 +80,7 @@ NULL
 #' @details
 #' In `insert_column` only, you can use a column name for `after`.
 #' @return The modified huxtable
+#' @seealso [add_rows()] and [add_cols()], which are more general.
 #' @export
 #'
 #' @examples

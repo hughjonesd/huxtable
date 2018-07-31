@@ -18,6 +18,7 @@ TODO
   - Probably insert_rows too close to insert_row? Or just change the interface to
     work with objects that have dimensions (and maybe then change name to reflect > 1 row, and
     deprecate insert_row. add_rows?)
+  - Should be able to make tibble::add_row work.
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 

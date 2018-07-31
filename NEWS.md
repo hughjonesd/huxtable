@@ -7,12 +7,14 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
   if a needed package is not installed.
-* Code rewrites for better performance and maintainability:
-  - HTML is up to 10x faster.
-  - LaTeX is up to 4x faster.
+* Code rewrites for better performance and maintainability: HTML is up to 10x faster,
+  LaTeX is up to 4x faster.
 * Documentation improvements.
-* New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * New `tribble_hux` function wrapping `tibble::tribble()` for readable data input.
+* New `add_rows` and `add_columns` functions to insert one or more rows into the middle of a
+  huxtable.
+* New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
+
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * LaTeX: at points where borders cross, priority is given to the horizontal border color.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
