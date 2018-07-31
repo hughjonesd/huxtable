@@ -26,7 +26,7 @@ NULL
 #' `cbind` huxtables and data frames. (See the "Dispatch" section in [cbind()] for details of why
 #' not.)
 #'
-#' @seealso [insert_row()] and [insert_column()].
+#' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
 #'
 #' @examples
 #' ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
@@ -80,7 +80,7 @@ add_row_cols <- function (x, y, after, dimno, ...) {
 #' @details
 #' In `insert_column` only, you can use a column name for `after`.
 #' @return The modified huxtable
-#' @seealso [add_rows()] and [add_cols()], which are more general.
+#' @seealso [add_rows()] and [add_columns()], which are more general.
 #' @export
 #'
 #' @examples

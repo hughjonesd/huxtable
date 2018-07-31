@@ -45,5 +45,5 @@ ht2 <- hux(d = letters[1:3])
 add_columns(ht, ht2, after = "a")
 }
 \seealso{
-\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}.
+\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert multiple values into a single row.
 }
