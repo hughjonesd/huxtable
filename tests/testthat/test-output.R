@@ -106,7 +106,8 @@ test_that('to_md warns on unimplemented features', {
 
 
 test_that('hux_logo works', {
-  expect_silent(hux_logo())
+  # there's randomization, so:
+  for (i in 1:20) expect_silent(hux_logo())
   expect_silent(hux_logo(latex = TRUE))
 })
 

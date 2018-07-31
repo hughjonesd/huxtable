@@ -225,27 +225,52 @@ sanitize <- function (str, type = "latex") {
 #'
 hux_logo <- function(latex = FALSE) {
   assert_that(is.flag(latex))
-  logo <- hux(c('h', NA), c('u', 'table'), c('x', NA))
-  rowspan(logo)[1, 1] <- 2
-  colspan(logo)[2, 2] <- 2
-  logo <- set_all_borders(logo, 0.5)
-  font_size(logo) <- if (latex) 11 else 20
-  font_size(logo)[1, 2:3] <- if (latex) 14 else 24
-  font_size(logo)[1, 1] <-  if (latex) 24 else 42
-  background_color(logo)[1, 1] <- '#e83abc'
-  background_color(logo)[1, 3] <- 'black'
-  text_color(logo)[1, 3] <- 'white'
-  width(logo) <- if (latex) '0.21\\textwidth' else '60pt'
-  height(logo) <- if (latex) '45pt' else '60pt'
-  font(logo) <- 'Palatino'
-  if (latex) font(logo) <- 'ppl'
-  top_padding(logo) <- 2
-  bottom_padding(logo) <- 2
-  bottom_padding(logo)[2, 2] <- 1
-  align(logo)[2, 2] <- 'center'
-  col_width(logo) <- c(.4, .3, .3)
-  position(logo) <- 'center'
-  logo
+
+  blank <- if (latex) '' else '&nbsp;'
+  squares <- rep(blank, 36)
+  letter_squares <- sort(sample(36, 8))
+  squares[letter_squares] <- strsplit('huxtable', '')[[1]]
+  mx <- matrix(squares, 6, 6, byrow = TRUE)
+  letter_squares <- which(mx != blank) # back in vertical space
+  h_square <- which(mx == "h")
+
+  mondrian <- as_hux(mx)
+  font(mondrian) <- 'Arial'
+  if (latex) font(mondrian) <- 'cmss'
+  escape_contents(mondrian) <- FALSE
+  mondrian <- set_all_borders(mondrian, 1.2)
+  mondrian <- set_all_padding(mondrian, 0)
+
+  background_color(mondrian)[sample(36, 8)] <- sample(c('red', 'blue', 'yellow'), 8, replace = TRUE)
+  bold(mondrian)[h_square] <- TRUE
+  italic(mondrian)[sample(36, 6)] <- TRUE
+  colspan_ok <- setdiff(1:30, letter_squares - 6)
+  colspan2 <- rep(- 6, 2)
+  for (i in 1:2) {
+    colspan2[i] <- sample(colspan_ok, 1)
+    colspan_ok  <- setdiff(colspan_ok, c(colspan2 - 6, colspan2 + 6))
+  }
+
+  # -7 to avoid being top-left of any letter_squares (as we may get 2x2 cells)
+  # also avoid breaking colspans
+  rowspan_ok <- setdiff(1:36, c(1:6*6, letter_squares - 1, letter_squares - 7, colspan2 - 1,
+        colspan2 + 5, colspan2 + 6))
+  rowspan2 <- rep(- 1, 3)
+  for (i in 1:3) {
+    rowspan2[i] <- sample(rowspan_ok, 1)
+    rowspan_ok <- setdiff(rowspan_ok, c(rowspan2 - 1, rowspan2 + 1))
+  }
+
+  colspan(mondrian)[colspan2] <- 2
+  rowspan(mondrian)[rowspan2] <- 2
+
+  if (! latex) {
+    mondrian <- set_all_padding(mondrian, 2)
+    width(mondrian)  <- '100pt'
+    height(mondrian) <- '100pt'
+  }
+
+  mondrian
 }
 
 

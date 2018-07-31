@@ -14,7 +14,6 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `add_rows` and `add_columns` functions to insert one or more rows into the middle of a
   huxtable.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
-
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
 * LaTeX: at points where borders cross, priority is given to the horizontal border color.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
@@ -30,6 +29,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Nicer error messages when rbinding objects with different numbers of rows.
 * Vignette improvements.
 * `is_a_number` is deprecated.
+* ... and a cool new randomized `hux_logo()` ;-)
 
 # huxtable 4.0.1
 
