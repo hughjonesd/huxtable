@@ -4,8 +4,6 @@
 \alias{background_color}
 \alias{background_color<-}
 \alias{set_background_color}
-\alias{background_color.huxtable}
-\alias{background_color<-.huxtable}
 \title{Background color}
 \usage{
 background_color(ht)

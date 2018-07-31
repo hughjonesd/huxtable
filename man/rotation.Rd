@@ -4,8 +4,6 @@
 \alias{rotation}
 \alias{rotation<-}
 \alias{set_rotation}
-\alias{rotation.huxtable}
-\alias{rotation<-.huxtable}
 \title{Text rotation}
 \usage{
 rotation(ht)

@@ -4,9 +4,9 @@
 \alias{rowspan}
 \alias{rowspan<-}
 \alias{set_rowspan}
-\alias{rowspan.huxtable}
-\alias{rowspan<-.huxtable}
 \alias{colspan}
+\alias{colspan<-}
+\alias{set_colspan}
 \title{Row and column span}
 \usage{
 rowspan(ht)

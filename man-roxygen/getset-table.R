@@ -5,7 +5,7 @@
 more_alias_str <- ''
 if (exists('morealiases')) {
   morealiases <- strsplit(morealiases, ' ')[[1]]
-  more_alias_str <- c(outer(morealiases, c('', '<-', '.huxtable', '<-.huxtable'), paste0))
+  more_alias_str <- c(outer(morealiases, c('', '<-'), paste0))
   more_alias_str <- c(more_alias_str, paste0('set_', morealiases))
   more_alias_str <- paste(more_alias_str, collapse = ' ')
 }
@@ -32,7 +32,7 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
 #' For \code{set_<%= attr_name %>}, the \code{ht} object.
 #'
-#' @aliases <%= attr_name %><- set_<%= attr_name %> <%= attr_name %>.huxtable <%= attr_name %><-.huxtable <%= more_alias_str %>
+#' @aliases <%= attr_name %><- set_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>
 
 

@@ -4,8 +4,6 @@
 \alias{na_string}
 \alias{na_string<-}
 \alias{set_na_string}
-\alias{na_string.huxtable}
-\alias{na_string<-.huxtable}
 \title{NA string}
 \usage{
 na_string(ht)

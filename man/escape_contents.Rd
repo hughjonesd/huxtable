@@ -4,8 +4,6 @@
 \alias{escape_contents}
 \alias{escape_contents<-}
 \alias{set_escape_contents}
-\alias{escape_contents.huxtable}
-\alias{escape_contents<-.huxtable}
 \title{Escape cell contents}
 \usage{
 escape_contents(ht)

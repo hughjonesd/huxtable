@@ -4,8 +4,6 @@
 \alias{wrap}
 \alias{wrap<-}
 \alias{set_wrap}
-\alias{wrap.huxtable}
-\alias{wrap<-.huxtable}
 \title{Text wrapping}
 \usage{
 wrap(ht)

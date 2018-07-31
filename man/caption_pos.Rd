@@ -4,8 +4,6 @@
 \alias{caption_pos}
 \alias{caption_pos<-}
 \alias{set_caption_pos}
-\alias{caption_pos.huxtable}
-\alias{caption_pos<-.huxtable}
 \title{Caption position}
 \usage{
 caption_pos(ht)

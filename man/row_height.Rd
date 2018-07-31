@@ -4,8 +4,6 @@
 \alias{row_height}
 \alias{row_height<-}
 \alias{set_row_height}
-\alias{row_height.huxtable}
-\alias{row_height<-.huxtable}
 \title{Row heights}
 \usage{
 row_height(ht)

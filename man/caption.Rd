@@ -4,8 +4,6 @@
 \alias{caption}
 \alias{caption<-}
 \alias{set_caption}
-\alias{caption.huxtable}
-\alias{caption<-.huxtable}
 \title{Caption}
 \usage{
 caption(ht)

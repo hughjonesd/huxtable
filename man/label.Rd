@@ -4,8 +4,6 @@
 \alias{label}
 \alias{label<-}
 \alias{set_label}
-\alias{label.huxtable}
-\alias{label<-.huxtable}
 \title{Table label}
 \usage{
 label(ht)

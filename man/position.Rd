@@ -4,8 +4,6 @@
 \alias{position}
 \alias{position<-}
 \alias{set_position}
-\alias{position.huxtable}
-\alias{position<-.huxtable}
 \title{Table position}
 \usage{
 position(ht)

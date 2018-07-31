@@ -4,8 +4,6 @@
 \alias{valign}
 \alias{valign<-}
 \alias{set_valign}
-\alias{valign.huxtable}
-\alias{valign<-.huxtable}
 \title{Vertical alignment}
 \usage{
 valign(ht)

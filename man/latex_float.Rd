@@ -4,8 +4,6 @@
 \alias{latex_float}
 \alias{latex_float<-}
 \alias{set_latex_float}
-\alias{latex_float.huxtable}
-\alias{latex_float<-.huxtable}
 \title{Float position for LaTeX}
 \usage{
 latex_float(ht)

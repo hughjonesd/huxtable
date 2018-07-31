@@ -356,6 +356,7 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' colspan(ht)
 #' colspan(ht) <- value
 #' set_colspan(ht, row, col, value, byrow = FALSE)
+#' @aliases colspan<- set_colspan
 #' @export colspan colspan<- set_colspan
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {

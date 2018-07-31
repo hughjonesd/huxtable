@@ -4,8 +4,6 @@
 \alias{number_format}
 \alias{number_format<-}
 \alias{set_number_format}
-\alias{number_format.huxtable}
-\alias{number_format<-.huxtable}
 \title{Number format}
 \usage{
 number_format(ht)

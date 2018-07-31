@@ -4,8 +4,6 @@
 \alias{font}
 \alias{font<-}
 \alias{set_font}
-\alias{font.huxtable}
-\alias{font<-.huxtable}
 \title{Font}
 \usage{
 font(ht)

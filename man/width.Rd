@@ -4,8 +4,6 @@
 \alias{width}
 \alias{width<-}
 \alias{set_width}
-\alias{width.huxtable}
-\alias{width<-.huxtable}
 \title{Table width}
 \usage{
 width(ht)

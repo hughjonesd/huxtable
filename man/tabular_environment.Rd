@@ -4,8 +4,6 @@
 \alias{tabular_environment}
 \alias{tabular_environment<-}
 \alias{set_tabular_environment}
-\alias{tabular_environment.huxtable}
-\alias{tabular_environment<-.huxtable}
 \title{Tabular environment}
 \usage{
 tabular_environment(ht)

@@ -4,8 +4,6 @@
 \alias{text_color}
 \alias{text_color<-}
 \alias{set_text_color}
-\alias{text_color.huxtable}
-\alias{text_color<-.huxtable}
 \title{Text color}
 \usage{
 text_color(ht)

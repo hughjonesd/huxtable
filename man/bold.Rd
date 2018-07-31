@@ -4,12 +4,8 @@
 \alias{bold}
 \alias{bold<-}
 \alias{set_bold}
-\alias{bold.huxtable}
-\alias{bold<-.huxtable}
 \alias{italic}
 \alias{italic<-}
-\alias{italic.huxtable}
-\alias{italic<-.huxtable}
 \alias{set_italic}
 \title{Cell text style}
 \usage{

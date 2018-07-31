@@ -4,8 +4,6 @@
 \alias{align}
 \alias{align<-}
 \alias{set_align}
-\alias{align.huxtable}
-\alias{align<-.huxtable}
 \alias{pad_decimal}
 \alias{pad_decimal<-}
 \alias{set_pad_decimal}
