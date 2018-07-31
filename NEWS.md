@@ -1,9 +1,11 @@
-# huxtable 4.1.0.9000
-
-
-
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
+
+
+# huxtable 4.1.0.9000
+
+* More speedups: LaTeX 2-3x faster
+
 
 # huxtable 4.1.0
 
