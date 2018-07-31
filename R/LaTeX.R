@@ -164,6 +164,7 @@ build_tabular <- function(ht) {
   if (any(horiz_b > 0 & horiz_b < hb_maxes[row(horiz_b)])) warning(
         'Multiple horizontal border widths in a single row; using the maximum.')
   horiz_b <- ifelse(horiz_b == 0, horiz_b, hb_maxes[row(horiz_b)])
+  has_hb_color <- ! is.na(cbc$horiz)
   hb_colors <- format_color(cbc$horiz, default = 'black')
 
   # background colors come from shadowing cells
@@ -171,8 +172,10 @@ build_tabular <- function(ht) {
   bg_colors <- c(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from the row below?
   bg_colors <- format_color(bg_colors, default = 'white')
   hhline_colors <- ifelse(horiz_b > 0, hb_colors ,bg_colors)
-  hhlines_horiz <- paste0('>{\\arrayrulecolor[RGB]{', hhline_colors, '}\\global\\arrayrulewidth=',
-        horiz_b, 'pt}-')
+  hhline_colors_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', hhline_colors)
+  # if we do this, color bleeds from previous vertical borders (via the v_border of the hhline)
+  # hhline_colors_tex[horiz_b > 0 & ! has_hb_color] <- ''
+  hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}-', hhline_colors_tex, horiz_b)
   dim(hhlines_horiz) <- dim(horiz_b)
   no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
   hhlines_horiz[no_hborder_in_row] <- ''
