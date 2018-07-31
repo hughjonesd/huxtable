@@ -163,17 +163,25 @@ build_tabular <- function(ht) {
   hb_maxes <- apply(horiz_b, 1, max)
   if (any(horiz_b > 0 & horiz_b < hb_maxes[row(horiz_b)])) warning(
         'Multiple horizontal border widths in a single row; using the maximum.')
-  horiz_b <- ifelse(horiz_b == 0, horiz_b, hb_maxes[row(horiz_b)])
-  has_hb_color <- ! is.na(cbc$horiz)
+  # even if a cell's own border is 0, it still needs a "border" the right width,
+  # matching its background color.
+  # decide now if border will be printed in foreground or background color:
+  has_own_border <- horiz_b > 0
+  # set border widths to the row maximum:
+  horiz_b[] <- hb_maxes[row(horiz_b)]
   hb_colors <- format_color(cbc$horiz, default = 'black')
+
 
   # background colors come from shadowing cells
   bg_colors <- background_color(ht)[dc_map]
-  bg_colors <- c(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from the row below?
+  dim(bg_colors) <- dim(ht)
+  # add a top row for the first hhline
+  bg_colors <- rbind(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from cells below?
   bg_colors <- format_color(bg_colors, default = 'white')
-  hhline_colors <- ifelse(horiz_b > 0, hb_colors ,bg_colors)
+  hhline_colors <- ifelse(has_own_border, hb_colors ,bg_colors)
   hhline_colors_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', hhline_colors)
   # if we do this, color bleeds from previous vertical borders (via the v_border of the hhline)
+  # has_hb_color <- ! is.na(cbc$horiz)
   # hhline_colors_tex[horiz_b > 0 & ! has_hb_color] <- ''
   hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}-', hhline_colors_tex, horiz_b)
   dim(hhlines_horiz) <- dim(horiz_b)
@@ -209,7 +217,6 @@ build_tabular <- function(ht) {
   dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1)
 
   # interleave vertical and horizontal lines like: |-|-|-|
-  hhlines <- cbind(hhlines_horiz, hhlines_vert)
   hhlines <- matrix('', nrow(hhlines_horiz), ncol(hhlines_horiz) + ncol(hhlines_vert))
   hhlines[, seq(2, ncol(hhlines), 2)] <- hhlines_horiz
   hhlines[, seq(1, ncol(hhlines), 2)] <- hhlines_vert
@@ -395,7 +402,7 @@ build_tabular <- function(ht) {
 
   content_rows <- apply(contents, 1, function (x) {
     x <- x[nchar(x) > 0]
-    row <- paste(x, collapse = ' & ')
+    row <- paste(x, collapse = ' &\n')
     paste(row, '\\tabularnewline[-0.5pt]')
   })
 
