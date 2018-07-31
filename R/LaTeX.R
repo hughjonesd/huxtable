@@ -383,9 +383,10 @@ build_tabular <- function(ht) {
         )
 
   ## MULTIROW ---------------------
-  rowspan_blm <- rowspan(ht)[blm_idx]
+  rowspan_blm <- rowspan(ht)[dc_map][blm_idx]
+  vert_adj_blm <- sprintf('%dex', 0) # start printing on the top row
   # * is 'standard width', could be more specific?
-  multirow_blm_tex <- sprintf('\\multirow{-%s}{*}{', rowspan_blm)
+  multirow_blm_tex <- sprintf('\\multirow{-%s}{*}[%s]{', rowspan_blm, vert_adj_blm)
   multirow[blm_idx] <- multirow_blm_tex
 
   closer <- function (x) ifelse(nchar(x) > 0, '}', '')
