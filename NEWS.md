@@ -1,8 +1,9 @@
 
+
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable 4.0.1.9000
+# huxtable 4.1.0
 
 * dplyr, knitr, rmarkdown and some other packages have moved to "Suggests:", lowering the dependency
   load considerably. All the functionality is still present. huxtable gives an informative warning 
