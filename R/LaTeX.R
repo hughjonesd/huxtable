@@ -146,12 +146,13 @@ build_tabular <- function(ht) {
   dc_map <- matrix(1:length(contents), nrow(ht), ncol(ht))
   # dc_map gives the display cells corresponding to real cells, in as.vector(cell_contents) space
   dc_map <- c(dc_map[dc_pos_matrix])
-  dc_idx <- ! display_cells$shadowed
-  left_idx   <- display_cells$col == display_cells$display_col
-  bottom_idx <- display_cells$row == display_cells$end_row
+  dc_idx       <- ! display_cells$shadowed
+  left_idx     <- display_cells$col == display_cells$display_col
+  right_idx    <- display_cells$col == display_cells$end_col
+  bottom_idx   <- display_cells$row == display_cells$end_row
   multirow_idx <- display_cells$rowspan > 1
-  bl_idx <-  bottom_idx & left_idx
-  blm_idx <- bl_idx & multirow_idx
+  bl_idx       <-  bottom_idx & left_idx
+  blm_idx      <- bl_idx & multirow_idx
   # lh_dc (bl_dc) gives the display cells corresponding to (bottom) left cells
   bl_dc <- dc_map[bl_idx]
   lh_dc <- dc_map[left_idx]
@@ -334,26 +335,29 @@ build_tabular <- function(ht) {
   # these are nrow x ncol + 1
   bord <- cb$vert
   bcol <- cbc$vert
-  has_bcol <- ! is.na(bcol) # if defined as black, then we print it. Otherwise not.
+  has_bord <- ! is.na(bord)
+  has_bcol <- ! is.na(bcol) # if *defined* as black, then we print it. Otherwise not.
   bcol <- format_color(bcol, default = 'black')
+  bord_tex <- rep('', length(bord))
   bcol_tex <- rep('', length(bcol))
   bcol_tex[has_bcol] <- sprintf('\\color[RGB]{%s}', bcol[has_bcol])
-  bord_tex <- sprintf('!{%s\\vrule width %.4gpt}', bcol_tex, bord)
+  bord_tex[has_bord] <- sprintf('!{%s\\vrule width %.4gpt}', bcol_tex[has_bord], bord[has_bord])
   dim(bord_tex) <- dim(cb$vert)
   # the first column is the left border of the left-most cell.
   # subsequent columns become the right border of all cells.
   lborders <- matrix('', nrow(contents), ncol(contents))
   lborders[, 1] <- bord_tex[, 1]
   rborders <- bord_tex[, - 1]
-  lborders_lhdc <- lborders[lh_dc]
-  rborders_lhdc <- rborders[lh_dc]
+  # lborders and rborders are already in 'correct' positions, as calculated by collapsed_borders
+  # we need to have only the rborders that correspond to a display area's right hand border;
+  # these should go in the left hand cell position with the other stuff!
 
   # all left hand cells have borders
   multicol[left_idx] <- sprintf('\\multicolumn{%d}{%s%s%s}{',
           colspan_lhdc,
-          lborders_lhdc,
+          lborders[left_idx],
           colspec_lhdc,
-          rborders_lhdc
+          rborders[right_idx]
         )
 
   ## MULTIROW ---------------------
