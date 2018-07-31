@@ -40,6 +40,7 @@ print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(t
 to_html.huxtable <- function(ht, ...) {
   check_positive_dims(ht)
 
+  ## TABLE START ----------
   width <- width(ht)
   if (is.numeric(width)) width <- paste0(width * 100, '%')
   mstring <- switch(position(ht),
@@ -65,6 +66,7 @@ to_html.huxtable <- function(ht, ...) {
     table_start <- paste0(table_start, cap)
   }
 
+  # COLUMN TAGS -----------
   col_widths <- col_width(ht)
   # NAs become empty strings
   empty_cw <- is.na(col_widths)
@@ -73,6 +75,9 @@ to_html.huxtable <- function(ht, ...) {
   cols_html <- blank_where(cols_html, empty_cw)
   cols_html <- sprintf('<col%s>', cols_html)
   cols_html <- paste0(cols_html, collapse = '')
+
+  ## CELLS ----------------
+  display_cells <- display_cells(ht)
 
   rowspan <- rowspan(ht)
   rowspan <- blank_where(sprintf(' rowspan="%s"', rowspan), rowspan == 1)
@@ -83,11 +88,13 @@ to_html.huxtable <- function(ht, ...) {
   align   <- sprintf(' text-align: %s;', real_align(ht))
   wrap    <- sprintf(' white-space: %s;', ifelse(wrap(ht), 'normal', 'nowrap'))
 
-  cb <- collapsed_borders(ht)
-  top_border <- cb$horiz[ -nrow(cb$vert), , drop = FALSE]
-  bottom_border <- cb$horiz[ -1, , drop = FALSE]
-  left_border <- cb$vert[, -ncol(cb$vert), drop = FALSE]
-  right_border <- cb$vert[, -1, drop = FALSE]
+  # collapsed_borders() are in "real cell" position. But we just want to grab the original data
+  # and apply it?
+  # cb <- collapsed_borders(ht)
+  top_border    <- top_border(ht)
+  bottom_border <- bottom_border(ht)
+  left_border   <- left_border(ht)
+  right_border  <- right_border(ht)
   border_width <- sprintf(' border-style: solid; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
         top_border, right_border, bottom_border, left_border)
   no_borders <- top_border == 0 & right_border == 0 & bottom_border == 0 & left_border == 0
@@ -97,11 +104,11 @@ to_html.huxtable <- function(ht, ...) {
     x <- sprintf(' border-%s-color: rgb(%s);', pos, format_color(col))
     blank_where(x, is.na(col))
   }
-  cbc <- collapsed_border_colors(ht)
-  top_bc <- cbc$horiz[ -nrow(cbc$vert), , drop = FALSE]
-  bottom_bc <- cbc$horiz[ -1, , drop = FALSE]
-  left_bc <- cbc$vert[ , -ncol(cbc$vert), drop = FALSE]
-  right_bc <- cbc$vert[ , -1 , drop = FALSE]
+  # cbc <- collapsed_border_colors(ht)
+  top_bc    <- top_border_color(ht)
+  bottom_bc <- bottom_border_color(ht)
+  left_bc   <- left_border_color(ht)
+  right_bc  <- right_border_color(ht)
   border_color <- paste0(
           format_bc('top', top_bc),
           format_bc('right', right_bc),
@@ -152,7 +159,7 @@ to_html.huxtable <- function(ht, ...) {
 
   cells_html <- paste0(td, rot_div, color_span, contents, color_span_end, rot_div_end,
         rep('</td>\n', length(td)))
-  cells_html <- blank_where(cells_html, display_cells(ht)$shadowed)
+  cells_html <- blank_where(cells_html, display_cells$shadowed)
 
   # add in row tags
   dim(cells_html) <- dim(ht)
@@ -162,7 +169,7 @@ to_html.huxtable <- function(ht, ...) {
     row_heights <- 100 * row_heights / sum(row_heights)
     row_heights <- sprintf('%.3g%%', row_heights) # %3g prints max 1 decimal place
   }
-  row_heights <- sprintf('style="height: %s;"', row_heights)
+  row_heights <- sprintf(' style="height: %s;"', row_heights)
   row_heights <- blank_where(row_heights, is.na(row_height(ht)))
   tr <- sprintf('<tr%s>\n', row_heights)
   cells_html <- paste0(tr, cells_html, rep('</tr>\n', length(tr)))
