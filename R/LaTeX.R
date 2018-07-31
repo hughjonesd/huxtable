@@ -180,15 +180,27 @@ build_tabular <- function(ht) {
   no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
   hhlines_horiz[no_hborder_in_row] <- ''
 
+  # vertical borders in hhlines are an n+1 x n+1 matrix of "corner dots"
   vert_b <- cb$vert # nrow X ncol + 1
   # we add an extra row to match the nrow+1 hhlines
   vert_b <- rbind(vert_b[1,], vert_b) # we checked positive dims; row 1 exists
-  vert_bc <- cbc$vert
-  vert_bc <- rbind(vert_bc[1,], vert_bc)
-  has_vert_bc <- ! is.na(vert_bc)
+  # vertical dots should have colour from, in order of preference:
+  # (a) left horiz border; (b) right horiz border; (c) lower vert border; (d) upper vert border
+  # We use lower borders first on the theory that the "top of a square" matters more
+  # even if a colour is undefined, we treat it as black so long as there is a positive-length border
+  vert_bc <- cbind(NA, cbc$horiz) # horiz border color on left
+  no_left_hb <- cbind(0, cb$horiz) == 0
+  no_lr_hb <- no_left_hb & cbind(cb$horiz, 0) == 0
+  no_lrb_b <- no_lr_hb & rbind(cb$vert, 0) == 0
+  vert_bc[no_left_hb] <- cbind(cbc$horiz, NA)[no_left_hb]  # horiz border color on right
+  vert_bc[no_lr_hb] <- rbind(cbc$vert, NA)[no_lr_hb] # vert border color below
+  vert_bc[no_lrb_b] <- rbind(NA, cbc$vert)[no_lrb_b] # vert border color above
+  # if it's still NA, no border on any side had a defined colour
+  # At the moment we reset to black. Otherwise maybe we "bleed" along the row from much earlier.
   vert_bc <- format_color(vert_bc, default = 'black')
   vert_bc_tex <- rep('', length(vert_bc))
-  vert_bc_tex[has_vert_bc] <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc[has_vert_bc])
+  vert_bc_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc)
+
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
   hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}|',

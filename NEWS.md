@@ -13,6 +13,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   - LaTeX is up to 4x faster.
 * New option "huxtable.knitr_output_format" to override the default output format in knitr documents.
 * Numeric row heights and column widths are rescaled to 1 when huxtables are cbinded/rbinded.
+* LaTeX: at points where borders cross, priority is given to the horizontal border color.
 * Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.
 * Bugfix: row heights and column widths weren't being copied with cbind/rbind.
 * Bugfixes for 0-row or 0-column huxtables:
