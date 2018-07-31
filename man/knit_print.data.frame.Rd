@@ -19,6 +19,8 @@ Print data frames in knitr using huxtable
 \details{
 \code{huxtable} defines a \code{knit_print} method for \code{data.frame}s. This converts the data frame
 to a huxtable, with \code{add_colnames = TRUE}, themes it using \code{\link[=theme_plain]{theme_plain()}} and prints it.
+It also tries to set a few intelligent defaults, e.g. wrapping long columns and setting
+an appropriate width.
 To turn this behaviour off, set \code{options(huxtable.knit_print_df = FALSE)}. To change the theme, set
 \code{options("huxtable.knit_print_df_theme")} to a one-argument function which should return the huxtable.
 }

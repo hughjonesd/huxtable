@@ -48,6 +48,8 @@ knit_print.huxtable <- function (x, options, ...) {
 #' @details
 #' `huxtable` defines a `knit_print` method for `data.frame`s. This converts the data frame
 #' to a huxtable, with `add_colnames = TRUE`, themes it using [theme_plain()] and prints it.
+#' It also tries to set a few intelligent defaults, e.g. wrapping long columns and setting
+#' an appropriate width.
 #' To turn this behaviour off, set `options(huxtable.knit_print_df = FALSE)`. To change the theme, set
 #' `options("huxtable.knit_print_df_theme")` to a one-argument function which should return the huxtable.
 #'
