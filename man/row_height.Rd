@@ -20,11 +20,11 @@ set_row_height(ht, row, value)
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 }
 \value{
-For \code{row_height}, the \code{row_height} attribute.
+For \code{row_height}, the \code{row_height} property.
 For \code{set_row_height}, the \code{ht} object.
 }
 \description{
-Functions to get or set the row heights property of huxtable rows.
+Functions to get or set the \emph{row heights} property of huxtable rows.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are

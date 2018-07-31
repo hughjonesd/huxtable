@@ -6,16 +6,22 @@
 \alias{set_rowspan}
 \alias{rowspan.huxtable}
 \alias{rowspan<-.huxtable}
-\title{Row span}
+\alias{colspan}
+\title{Row and column span}
 \usage{
 rowspan(ht)
 rowspan(ht) <- value
 set_rowspan(ht, row, col, value, byrow = FALSE)
+
+colspan(ht)
+colspan(ht) <- value
+set_colspan(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{An integer vector or matrix of integers. Set to \code{NA} to reset to the default.}
+\item{value}{An integer vector or matrix. Set to \code{NA} to reset to the default, which is
+\code{1}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,16 +30,22 @@ set_rowspan(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{rowspan}, the \code{rowspan} attribute.
+For \code{rowspan}, the \code{rowspan} property.
 For \code{set_rowspan}, the \code{ht} object.
 }
 \description{
-Functions to get or set the row span property of huxtable table cells.
+Functions to get or set the \emph{row and column span} property of huxtable cells.
+}
+\details{
+The rowspan and colspan of a cell determine its height and width, in rows and columns.
+A cell with rowspan of 2 covers the cell directly below it. A cell with rowspan of 2
+and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 }
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
 rowspan(ht)[1, 1] <-  2
 rowspan(ht)
-print_screen(ht)
+ht <- set_all_borders(ht, 1) 
+ht
 }

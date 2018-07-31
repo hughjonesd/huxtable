@@ -142,7 +142,8 @@ collapsed_border_colors <- function (ht) {
 
 # find each numeric substring, and replace it:
 format_numbers <- function (string, num_fmt) {
-  if (! is.function(num_fmt) && is.na(num_fmt)) return(string) # ! is.function avoids a warning if num_fmt is a function
+  # ! is.function avoids a warning if num_fmt is a function:
+  if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
   format_numeral <- if (is.function(num_fmt)) num_fmt else
         if (is.character(num_fmt)) function (numeral) sprintf(num_fmt, numeral) else
@@ -351,7 +352,8 @@ smart_hux_from_df <- function(dfr) {
 #' @return `print` prints the huxtable and returns `NULL` invisibly.
 #' @export
 #'
-#' @seealso [huxtable-options]
+#' @seealso To change how huxtables are printed within `knitr`, see
+#'   `options("huxtable.knitr_output_format")` in [huxtable-options]
 #' @examples
 #' \dontrun{
 #' # to print LaTeX output:

@@ -42,7 +42,8 @@ set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector or matrix of colors. Set to \code{NA} for the default. Set to \code{NA} to reset to the default.}
+\item{value}{A vector or matrix of colors. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -51,31 +52,48 @@ set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{left_border_color}, the \code{left_border_color} attribute.
+For \code{left_border_color}, the \code{left_border_color} property.
 For \code{set_left_border_color}, the \code{ht} object.
 
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the border colors property of huxtable table cells.
+Functions to get or set the \emph{border colors} property of huxtable cells.
 }
 \details{
-Both LaTeX and HTML collapse borders. If results are not what you expected, try setting the
-adjoining border of the previous cell to width 0 (e.g. for a left border color, unset the right border
-of the cell on the left).
+Huxtable collapses borders and border colors. Right borders take priority over left borders, and
+top borders take priority over bottom borders.
 }
+\section{Note}{
+
+huxtable currently sets borders on specific cells. This can lead to surprising behaviour when
+cells span multiple rows or columns: see the example. This behaviour may be improved in a future
+release.
+}
+
 \examples{
-
-ht <- huxtable(a = 1:3, b = 1:3)
-left_border_color(ht) <-  'red'
-left_border_color(ht)
-
-
 ht <- huxtable(a = 1:3, b = 3:1)
+ht <- set_all_borders(ht, 1)
 set_left_border_color(ht, 'red')
 set_left_border_color(ht, 1:2, 1, 'red')
 set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
 set_left_border_color(ht, where(ht == 1), 'red')
+# When cells span multiple rows:
+ht <- tribble_hux(
+  ~Col1,                   ~Col2,
+  "Cell 1,1 spans 2 rows", "Cell 1,2",
+  "Cell 2,1 is invisible", "Cell 2,2"
+)
+rowspan(ht)[1, 1] <- 2
+ht
+bottom_border(ht)[2, ] <- 1
+bottom_border_color(ht)[2, ] <- 'red'
+# Cell 1, 1 does not have a border set:
+ht
+# Fixed:
+bottom_border(ht)[1, 1] <- 1
+bottom_border_color(ht)[1, 1] <- 'red'
+ht
 }
 \seealso{
 \code{\link[=set_all_border_colors]{set_all_border_colors()}}

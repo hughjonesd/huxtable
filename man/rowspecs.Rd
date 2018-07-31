@@ -2,7 +2,7 @@
 % Please edit documentation in R/row-col-fns.R
 \name{rowspecs}
 \alias{rowspecs}
-\title{Row and column specifications}
+\title{Different ways to select rows and columns}
 \description{
 This help page describes how to use the \code{row} and \code{col} arguments in \code{set_*} functions.
 }

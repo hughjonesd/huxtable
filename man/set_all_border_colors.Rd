@@ -13,7 +13,8 @@ set_all_border_colors(ht, row, col, value, byrow = FALSE)
 
 \item{col}{An optional column specifier.}
 
-\item{value}{A vector or matrix of colors. Set to \code{NA} for the default. Set to \code{NA} to reset to the default.}
+\item{value}{A vector or matrix of colors. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }

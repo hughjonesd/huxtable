@@ -15,7 +15,8 @@ set_wrap(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default. Set to \code{NA} to reset to the default.}
+\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default. Set to \code{NA} to reset to the default, which is
+\code{FALSE}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_wrap(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{wrap}, the \code{wrap} attribute.
+For \code{wrap}, the \code{wrap} property.
 For \code{set_wrap}, the \code{ht} object.
 }
 \description{
-Functions to get or set the text wrapping property of huxtable table cells.
+Functions to get or set the \emph{text wrapping} property of huxtable cells.
 }
 \examples{
 ht <- huxtable(a = rep('Some long text', 2))

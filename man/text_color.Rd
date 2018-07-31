@@ -15,7 +15,8 @@ set_text_color(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix of valid R color names. Set to \code{NA} to reset to the default.}
+\item{value}{A character vector or matrix of valid R colors. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,14 @@ set_text_color(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{text_color}, the \code{text_color} attribute.
+For \code{text_color}, the \code{text_color} property.
 For \code{set_text_color}, the \code{ht} object.
 }
 \description{
-Functions to get or set the text color property of huxtable table cells.
+Functions to get or set the \emph{text color} property of huxtable cells.
+}
+\details{
+Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"} or \code{rgb(1, 0, 0)}.
 }
 \examples{
 

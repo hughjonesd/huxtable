@@ -15,14 +15,15 @@ set_latex_float(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} for the default, 'h'.}
+\item{value}{A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} to reset to the default, which is
+\code{"h"}.}
 }
 \value{
-For \code{latex_float}, the \code{latex_float} attribute.
+For \code{latex_float}, the \code{latex_float} property.
 For \code{set_latex_float}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level float position for latex property of a huxtable.
+Functions to get or set the table-level \emph{float position for latex} property of a huxtable.
 }
 \details{
 Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of

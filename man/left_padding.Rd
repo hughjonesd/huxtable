@@ -49,18 +49,19 @@ set_all_padding(ht, row, col, value, byrow = FALSE)
 
 \item{col}{An optional column specifier.}
 
-\item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to \code{NA} to reset to the default.}
+\item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to \code{NA} to reset to the default, which is
+\code{4}.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{left_padding}, the \code{left_padding} attribute.
+For \code{left_padding}, the \code{left_padding} property.
 For \code{set_left_padding}, the \code{ht} object.
 
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the cell padding property of huxtable table cells.
+Functions to get or set the \emph{cell padding} property of huxtable cells.
 }
 \details{
 \code{set_all_padding} is a convenience function which sets left, right, top and bottom cell padding

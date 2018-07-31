@@ -15,7 +15,8 @@ set_escape_contents(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped. Set to \code{NA} to reset to the default.}
+\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped. Set to \code{NA} to reset to the default, which is
+\code{TRUE}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_escape_contents(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{escape_contents}, the \code{escape_contents} attribute.
+For \code{escape_contents}, the \code{escape_contents} property.
 For \code{set_escape_contents}, the \code{ht} object.
 }
 \description{
-Functions to get or set the escape cell contents property of huxtable table cells.
+Functions to get or set the \emph{escape cell contents} property of huxtable cells.
 }
 \examples{
 ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))

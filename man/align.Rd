@@ -20,7 +20,8 @@ set_align(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character. Set to \code{NA} to reset to the default.}
+\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character. Set to \code{NA} to reset to the default, which is
+\code{"left"}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -29,11 +30,11 @@ set_align(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{align}, the \code{align} attribute.
+For \code{align}, the \code{align} property.
 For \code{set_align}, the \code{ht} object.
 }
 \description{
-Functions to get or set the alignment property of huxtable table cells.
+Functions to get or set the \emph{alignment} property of huxtable cells.
 }
 \details{
 This sets the horizontal alignment of the cell. If \code{value} is a single character (e.g.

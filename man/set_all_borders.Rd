@@ -13,7 +13,8 @@ set_all_borders(ht, row, col, value, byrow = FALSE)
 
 \item{col}{An optional column specifier.}
 
-\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default.}
+\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default, which is
+\code{0}.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
@@ -24,9 +25,32 @@ The modified huxtable.
 This is a convenience function which sets left, right, top and bottom borders
 for the specified cells.
 }
+\section{Note}{
+
+huxtable currently sets borders on specific cells. This can lead to surprising behaviour when
+cells span multiple rows or columns: see the example. This behaviour may be improved in a future
+release.
+}
+
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
 set_all_borders(ht, 1:3, 1:2, 1)
+# When cells span multiple rows:
+ht <- tribble_hux(
+  ~Col1,                   ~Col2,
+  "Cell 1,1 spans 2 rows", "Cell 1,2",
+  "Cell 2,1 is invisible", "Cell 2,2"
+)
+rowspan(ht)[1, 1] <- 2
+ht
+bottom_border(ht)[2, ] <- 1
+bottom_border_color(ht)[2, ] <- 'red'
+# Cell 1, 1 does not have a border set:
+ht
+# Fixed:
+bottom_border(ht)[1, 1] <- 1
+bottom_border_color(ht)[1, 1] <- 'red'
+ht
 }
 \seealso{
 \code{\link[=left_border]{left_border()}}, \code{\link[=set_outer_borders]{set_outer_borders()}}

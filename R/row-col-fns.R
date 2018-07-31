@@ -87,7 +87,7 @@ final <- function(n = 1) {
   )
 }
 
-#' Row and column specifications
+#' Different ways to select rows and columns
 #'
 #' This help page describes how to use the `row` and `col` arguments in `set_*` functions.
 #' @section The basics:

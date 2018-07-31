@@ -15,7 +15,8 @@ set_na_string(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character string. This will be used to replace NA values in the display. Set to \code{NA} for the default, which is the empty string. To get literal "NA", set to "NA". Set to \code{NA} to reset to the default.}
+\item{value}{A character string. This will be used to replace NA values in the display. Set to \code{NA} to reset to the default, which is
+\code{""}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_na_string(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{na_string}, the \code{na_string} attribute.
+For \code{na_string}, the \code{na_string} property.
 For \code{set_na_string}, the \code{ht} object.
 }
 \description{
-Functions to get or set the na string property of huxtable table cells.
+Functions to get or set the \emph{na string} property of huxtable cells.
 }
 \examples{
 

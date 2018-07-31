@@ -15,7 +15,8 @@ set_font_size(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector. This sets the font size in points. Set to \code{NA} to reset to the default.}
+\item{value}{A numeric vector. This sets the font size in points. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_font_size(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{font_size}, the \code{font_size} attribute.
+For \code{font_size}, the \code{font_size} property.
 For \code{set_font_size}, the \code{ht} object.
 }
 \description{
-Functions to get or set the font size property of huxtable table cells.
+Functions to get or set the \emph{font size} property of huxtable cells.
 }
 \examples{
 

@@ -15,7 +15,8 @@ set_valign(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}. Set to \code{NA} to reset to the default.}
+\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}. Set to \code{NA} to reset to the default, which is
+\code{"top"}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_valign(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{valign}, the \code{valign} attribute.
+For \code{valign}, the \code{valign} property.
 For \code{set_valign}, the \code{ht} object.
 }
 \description{
-Functions to get or set the vertical alignment property of huxtable table cells.
+Functions to get or set the \emph{vertical alignment} property of huxtable cells.
 }
 \details{
 Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link[=row_height]{row_height()}}

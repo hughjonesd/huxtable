@@ -17,22 +17,20 @@ NULL
 #' @export
 #' @rdname extract-methods
 #' @details
-#' `[` always returns a new huxtable object, while `$` and `[[` simply
-#' return a vector of data.
+#' `[` always returns a huxtable, while `$` and `[[`
+#' return the underlying data.
+#'
 #' For the replacement function `[<-`, if `value` is a huxtable, then its cell properties will be
 #' copied into `x`. In addition, if `value` fills up an entire column, then column properties
 #' will be copied into the replaced columns of `x`, and if it fills up an entire row, then
 #' row properties will be copied into the replaced rows of `x`.
-#' Replacement functions `$<-` and `[[<-` simply change the data without affecting other properties.
+#'
+#' Replacement functions `$<-` and `[[<-` change the data without affecting any properties.
 #' @examples
 #' ht <- huxtable(a = 1:3, b = letters[1:3])
 #' ht[1:2,]
 #' ht[,1]
 #' ht$a
-#' \dontrun{
-#' rowspan(ht)[2,1] <- 2
-#' ht[1:2,] # generates a warning
-#' }
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   ss <- as.data.frame(x)[i, j, drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
@@ -387,8 +385,9 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
 #' Other properties - in particular, alignment, vertical alignment and rotation - will be
 #' preserved.
 #' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- huxtable(a = 1:3, b = letters[1:3], autoformat = FALSE)
 #' bottom_border(ht)[3,] <- 1
+#' ht
 #' t(ht)
 #'
 #' @export

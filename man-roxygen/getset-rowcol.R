@@ -14,7 +14,7 @@ if (exists('morealiases')) {
 #' @title <%= attr_desc %>
 #'
 #' @description
-#' Functions to get or set the <%= tolower(attr_desc) %> property of huxtable <%= rowcol %>s.
+#' Functions to get or set the *<%= tolower(attr_desc) %>* property of huxtable <%= rowcol %>s.
 #'
 #' @usage
 #' <%= attr_name %>(ht)
@@ -25,7 +25,7 @@ if (exists('morealiases')) {
 #' @param value <%= value_param_desc %>
 #' @param <%= rowcol %> A <%= rowcol %> specifier. See \code{\link{rowspecs}} for details.
 #'
-#' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} attribute.
+#' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
 #' For \code{set_<%= attr_name %>}, the \code{ht} object.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> <%= attr_name %>.huxtable <%= attr_name %><-.huxtable <%= more_alias_str %>

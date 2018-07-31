@@ -15,14 +15,15 @@ set_height(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\code{\\textheight}) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} for the default, which is to leave height unset.}
+\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\code{\\textheight}) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 }
 \value{
-For \code{height}, the \code{height} attribute.
+For \code{height}, the \code{height} property.
 For \code{set_height}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level table height property of a huxtable.
+Functions to get or set the table-level \emph{table height} property of a huxtable.
 }
 \examples{
 

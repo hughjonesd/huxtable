@@ -15,14 +15,15 @@ set_position(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector which may be 'left', 'center', 'right' or \code{NA}.}
+\item{value}{A length-one character vector which may be 'left', 'center' or 'right'. Set to \code{NA} to reset to the default, which is
+\code{"center"}.}
 }
 \value{
-For \code{position}, the \code{position} attribute.
+For \code{position}, the \code{position} property.
 For \code{set_position}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level table position property of a huxtable.
+Functions to get or set the table-level \emph{table position} property of a huxtable.
 }
 \details{
 If your tables are too far to the right under LaTeX, try setting their \code{\link[=width]{width()}}

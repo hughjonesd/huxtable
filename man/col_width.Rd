@@ -20,11 +20,11 @@ set_col_width(ht, col, value)
 \item{col}{A col specifier. See \code{\link{rowspecs}} for details.}
 }
 \value{
-For \code{col_width}, the \code{col_width} attribute.
+For \code{col_width}, the \code{col_width} property.
 For \code{set_col_width}, the \code{ht} object.
 }
 \description{
-Functions to get or set the column widths property of huxtable cols.
+Functions to get or set the \emph{column widths} property of huxtable cols.
 }
 \details{
 In LaTeX, if you specify a column width, but set \code{wrap} to \code{FALSE} and have cells which
@@ -36,7 +36,7 @@ The workaround is to adjust the width, so that your cells no longer overrun.
 ht <- huxtable(a = 1:3, b = 1:3)
 col_width(ht) <-  c(.2, .8)
 col_width(ht)
-print_screen(ht)
+
 }
 \seealso{
 Other row/column heights: \code{\link{row_height}}

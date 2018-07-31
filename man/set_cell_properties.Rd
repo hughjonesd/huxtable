@@ -13,7 +13,7 @@ set_cell_properties(ht, row, col, ...)
 
 \item{col}{A column specification.}
 
-\item{...}{Named list of property values.}
+\item{...}{Named list of cell properties.}
 }
 \value{
 The modified huxtable object.

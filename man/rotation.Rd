@@ -15,7 +15,8 @@ set_rotation(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc. Set to \code{NA} to reset to the default.}
+\item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc. Set to \code{NA} to reset to the default, which is
+\code{0}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -24,11 +25,11 @@ set_rotation(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{rotation}, the \code{rotation} attribute.
+For \code{rotation}, the \code{rotation} property.
 For \code{set_rotation}, the \code{ht} object.
 }
 \description{
-Functions to get or set the text rotation property of huxtable table cells.
+Functions to get or set the \emph{text rotation} property of huxtable cells.
 }
 \details{
 You will probably need to set \code{\link[=col_width]{col_width()}} and \code{\link[=row_height]{row_height()}} explicitly

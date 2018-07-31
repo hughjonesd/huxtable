@@ -15,20 +15,21 @@ set_number_format(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector or list which may be character, numeric or function. See below. Set to \code{NA} to reset to the default.}
-
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{value}{A character or integer vector, or a list containing a function, or \code{NA}. Note
+that setting to \code{NA} does not reset to the default.}
 }
 \value{
-For \code{number_format}, the \code{number_format} attribute.
+For \code{number_format}, the \code{number_format} property.
 For \code{set_number_format}, the \code{ht} object.
 }
 \description{
-Functions to get or set the number format property of huxtable table cells.
+Functions to get or set the \emph{number format} property of huxtable cells.
 }
 \details{
 Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
@@ -36,33 +37,53 @@ followed by
 numerals, followed by an optional decimal point and further numerals). The exception is exponents in
 scientific notation; huxtable attempts to detect and ignore these.
 
-If \code{value} is numeric,
-numbers will be rounded to that many decimal places.  If \code{value} is
-character, it will be taken as an argument to \code{\link[=sprintf]{sprintf()}}. If \code{value} is a
-function it will be applied to the numbers and should return a string. If \code{value} is \code{NA}, then numbers
-will be unchanged. Note that setting \code{value} to \code{NA} does not reset to the default.
+If \code{value} is
+\itemize{
+\item numeric, numbers will be rounded to that many decimal places;
+\item character, it will be taken as an argument to \code{\link[=sprintf]{sprintf()}};
+\item a function, the function will be applied to the numbers;
+\item \code{NA}, then numbers will not be formatted (except maybe by conversion with \code{as.character}).
+}
 
-The default value is "\%.3g" which rounds numbers if they have more than 3 significant
-digits, and which may use an exponent for large numbers.
+Note that if your cells are of type numeric, a number format of \code{NA} doesn't guarantee you get
+back what you typed in, since R's default conversion may apply scientific notation and
+rounding.
 
-To set number_format to a function, enclose the function in \code{list}.
-See the examples.
+The default value is "\%.3g", which rounds numbers if they have more than 3 significant
+digits, and which may use scientific notation for large numbers.
+
+To set number_format to a function, enclose the function in \code{list}. The function should
+take one argument and return a string.
 
 Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
 numbers in their entirety. The default value was "\%5.2f".
 }
 \examples{
-ht <- huxtable(a = 10^(3:6) + (5 * 10^(-2:-5)), b = 10^(3:6) + (5* 10^(-2:-5)))
-number_format(ht)[1,] <- 2
-number_format(ht)[2,] <- '\%5.2f'
-number_format(ht)[3,] <- list(function(x) prettyNum(x, big.mark = ','))
-number_format(ht)[4,] <- list(function(x) if(x>0) '+' else '-')
+ht <- huxtable(
+  number_format = c("Default", "NA", "2", "\\"\%5.2f\\"", "Pretty", "Sign"),
+  a = rep(1000, 6),
+  b = rep(1000.005, 6),
+  c = rep(0.0001, 6),
+  d = rep(-1, 6),
+  e = rep("3.2 (s.e. 1.4)", 6),
+  add_colnames = TRUE
+)
+number_format(ht)[3, -1] <- NA
+number_format(ht)[4, -1] <- 2
+number_format(ht)[5, -1] <- '\%5.2f'
+number_format(ht)[6, -1] <- list(function(x) prettyNum(x, big.mark = ',', scientific = FALSE))
+number_format(ht)[7, -1] <- list(function(x) if(x>0) '+' else '-')
+right_border(ht) <- 1
+bottom_border(ht)[1, ] <- 1
 ht
-print_screen(ht)
-ht_bands <- huxtable("10000 Maniacs")
-ht_bands # probably not what you want
+
+ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
+# probably not what you want:
+ht_bands
 number_format(ht_bands) <- NA
 ht_bands
+# alternatively:
+huxtable("10000 Maniacs", autoformat = TRUE)
 
 ht <- huxtable(a = 1:3, b = 3:1)
 set_number_format(ht, 2)

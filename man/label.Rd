@@ -15,14 +15,15 @@ set_label(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to remove any label.}
+\item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to reset to the default, which is
+\code{NA}.}
 }
 \value{
-For \code{label}, the \code{label} attribute.
+For \code{label}, the \code{label} property.
 For \code{set_label}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level table label property of a huxtable.
+Functions to get or set the table-level \emph{table label} property of a huxtable.
 }
 \details{
 LaTeX table labels typically start with "tab:", and they must do so if you want table numbering

@@ -2,24 +2,35 @@
 % Please edit documentation in R/properties.R
 \name{set_default_properties}
 \alias{set_default_properties}
-\title{Set default huxtable properties}
+\alias{get_default_properties}
+\title{Default huxtable properties}
 \usage{
 set_default_properties(...)
+
+get_default_properties(names = NULL)
 }
 \arguments{
 \item{...}{Properties specified by name, or a single named list.}
+
+\item{names}{Vector of property names. If \code{NULL}, all properties are returned.}
 }
 \value{
-A list of the previous property values, invisibly.
+For \code{set_default_properties}, a list of the previous property values, invisibly.
+
+For \code{get_default_properties}, a list of the current defaults.
 }
 \description{
 Defaults are used for new huxtables, and also when a property is set to \code{NA}.
+}
+\details{
+Note that \code{autoformat = TRUE} in \code{\link[=huxtable]{huxtable()}} overrides some defaults.
 }
 \examples{
 old <- set_default_properties(left_border = 1)
 hux(a = 1:2, b = 1:2)
 set_default_properties(old)
+get_default_properties('bold')
 }
 \seealso{
-\code{\link[=get_default_properties]{get_default_properties()}}
+Options for autoformat in \link{huxtable-options}.
 }

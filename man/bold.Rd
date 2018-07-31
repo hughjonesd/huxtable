@@ -8,21 +8,9 @@
 \alias{bold<-.huxtable}
 \alias{italic}
 \alias{italic<-}
-\alias{set_italic}
 \alias{italic.huxtable}
 \alias{italic<-.huxtable}
-\alias{italic<-<-}
-\alias{set_italic<-}
-\alias{italic.huxtable<-}
-\alias{italic<-.huxtable<-}
-\alias{set_italic.huxtable}
-\alias{italic.huxtable.huxtable}
-\alias{italic<-.huxtable.huxtable}
-\alias{italic<-<-.huxtable}
-\alias{set_italic<-.huxtable}
-\alias{italic.huxtable<-.huxtable}
-\alias{italic<-.huxtable<-.huxtable}
-\alias{set_set_italic}
+\alias{set_italic}
 \title{Cell text style}
 \usage{
 bold(ht)
@@ -36,7 +24,8 @@ set_italic(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix Set to \code{NA} to reset to the default.}
+\item{value}{A logical vector or matrix Set to \code{NA} to reset to the default, which is
+\code{FALSE}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -45,11 +34,13 @@ set_italic(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{bold}, the \code{bold} attribute.
+For \code{bold}, the \code{bold} property.
 For \code{set_bold}, the \code{ht} object.
+
+Similarly for \code{italic} and friends.
 }
 \description{
-Functions to get or set the cell text style property of huxtable table cells.
+Functions to get or set the \emph{cell text style} property of huxtable cells.
 }
 \examples{
 

@@ -42,7 +42,8 @@ set_bottom_border(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default.}
+\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default, which is
+\code{0}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -51,18 +52,25 @@ set_bottom_border(ht, row, col, value, byrow = FALSE)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 }
 \value{
-For \code{left_border}, the \code{left_border} attribute.
+For \code{left_border}, the \code{left_border} property.
 For \code{set_left_border}, the \code{ht} object.
 
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the borders property of huxtable table cells.
+Functions to get or set the \emph{borders} property of huxtable cells.
 }
 \details{
 Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
 can only be present (if \code{value > 0}) or absent.
 }
+\section{Note}{
+
+huxtable currently sets borders on specific cells. This can lead to surprising behaviour when
+cells span multiple rows or columns: see the example. This behaviour may be improved in a future
+release.
+}
+
 \examples{
 
 ht <- huxtable(a = 1:3, b = 1:3)
@@ -75,6 +83,22 @@ set_left_border(ht, 1)
 set_left_border(ht, 1:2, 1, 1)
 set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
 set_left_border(ht, where(ht == 1), 1)
+# When cells span multiple rows:
+ht <- tribble_hux(
+  ~Col1,                   ~Col2,
+  "Cell 1,1 spans 2 rows", "Cell 1,2",
+  "Cell 2,1 is invisible", "Cell 2,2"
+)
+rowspan(ht)[1, 1] <- 2
+ht
+bottom_border(ht)[2, ] <- 1
+bottom_border_color(ht)[2, ] <- 'red'
+# Cell 1, 1 does not have a border set:
+ht
+# Fixed:
+bottom_border(ht)[1, 1] <- 1
+bottom_border_color(ht)[1, 1] <- 'red'
+ht
 }
 \seealso{
 \code{\link[=set_all_borders]{set_all_borders()}}

@@ -38,5 +38,6 @@ format(ht, output = 'screen')
 format(ht, output = 'md')
 }
 \seealso{
-\link{huxtable-options}
+To change how huxtables are printed within \code{knitr}, see
+\code{options("huxtable.knitr_output_format")} in \link{huxtable-options}
 }
