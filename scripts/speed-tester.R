@@ -28,9 +28,9 @@ if (grepl('9000', hv)) {
 mbs[[hv]] <- summary(microbenchmark(
         to_latex(ht), to_latex(ht_long), to_latex(ht_wide),
         to_html(ht), to_html(ht_long), to_html(ht_wide),
-        to_screen(ht), to_screen(ht_long), to_screen(ht_wide),
-        as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
-        as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
+        to_screen(ht), to_screen(ht_long), # to_screen(ht_wide), # hangs
+        # as_flextable(ht), as_flextable(ht_long), as_flextable(ht_wide),
+        # as_Workbook(ht), as_Workbook(ht_long), as_Workbook(ht_wide),
         times = 20
       ))
 saveRDS(mbs, 'scripts/mbs.Rds')
