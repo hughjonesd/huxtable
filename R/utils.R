@@ -106,7 +106,7 @@ do_collapse <- function(ht, prop_fun, default) {
   dc <- display_cells(ht, all = TRUE)
   # provides large speedup:
   dc <- as.matrix(dc[, c('row', 'col', 'display_row', 'display_col', 'end_row', 'end_col')])
-  dc_idx <- dc[, c('display_row', 'display_col')]
+  dc_idx <- dc[, c('display_row', 'display_col'), drop = FALSE]
   dc_map <- matrix(seq_len(nrow(ht) * ncol(ht)), nrow(ht), ncol(ht))
   dc_map <- dc_map[dc_idx]
 
@@ -119,7 +119,7 @@ do_collapse <- function(ht, prop_fun, default) {
   properties <- prop_fun(ht)
   for(side in names(at)) {
     at_side <- at[[side]]
-    res[[side]][ at_side ] <- properties[[side]][dc_map][at_side]
+    res[[side]][at_side] <- properties[[side]][dc_map][at_side]
   }
 
   res$left <- cbind(res$left, default)

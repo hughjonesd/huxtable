@@ -141,6 +141,15 @@ test_that('output works with zero-dimension huxtables', {
   expect_warning(to_latex(h_ncol0), "col")
 })
 
+test_that('output works with 1x1 huxtables', {
+  h_1x1 <- hux(a = 1, add_colnames = FALSE)
+
+  expect_silent(to_screen(h_1x1))
+  expect_silent(to_md(h_1x1))
+  expect_silent(to_html(h_1x1))
+  expect_silent(to_latex(h_1x1))
+})
+
 
 test_that('format.huxtable works', {
   ht <- hux(a = 1:3, b = 1:3)
