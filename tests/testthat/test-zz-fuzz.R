@@ -15,6 +15,7 @@ expect_outputs_unchanged <- function (hx, idx) {
   expect_known_value(to_latex(hx),  file = paste0(file, "-latex.rds"),  info = info)
 }
 
+
 variations <- expand.grid(
   align             = c('left', 'right', 'centre', '.'),
   background_color  = c('red', grey(.6), NA),
@@ -34,7 +35,6 @@ variations <- expand.grid(
   KEEP.OUT.ATTRS   = FALSE
 )
 
-
 hx_raw <- hux(
   int  = 1:3,
   real = 1:3 + 0.005,
@@ -43,6 +43,7 @@ hx_raw <- hux(
   fact = factor(letters[4:6])
 )
 
+
 add_props <- function(hx, row) {
   props <- as.list(row)
   props$ht <- hx
@@ -50,6 +51,7 @@ add_props <- function(hx, row) {
 
   return(hx_set)
 }
+
 
 test_that('various outputs unchanged', {
   skip_on_R_CMD_check()
@@ -63,20 +65,47 @@ test_that('various outputs unchanged', {
 })
 
 
-test_that('Some random TeX outputs compile', {
+test_that('Some random outputs compile', {
   skip_on_R_CMD_check()
 
+  n_tests <- get0('N_OUTPUT_TESTS', envir = globalenv(), ifnotfound = 10)
+
+  outfiles <- character(n_tests * 3)
   on.exit({
-    try(file.remove(pdf_out), silent = TRUE)
+    try(file.remove(outfiles), silent = TRUE)
   })
-  pdf_out <- character(0)
-  for (i in sample(nrow(variations), 10)) {
-    hx_set <- add_props(hx_raw, variations[i,])
-    pdf_out[as.character(i)] <- pdfo <- sprintf('tex-check-%d.pdf', i)
-    expect_error(quick_pdf(hx_set, file = pdfo, open = FALSE),
-          regexp = NA,
-          info = list(index = i))
-    expect_true(file.exists(pdfo), info = list(index = i))
+
+  sample_rows <- sample(nrow(variations), n_tests * 3)
+  for (i in seq_len(n_tests)) {
+    sr <- sample_rows[i]
+    hx_set <- add_props(hx_raw, variations[sr,])
+    pdfo <- sprintf('pdf-check-%d.pdf', sr)
+    outfiles[i] <- pdfo
+    expect_error(quick_pdf(hx_set, file = pdfo, open = FALSE), regexp = NA, info = list(index = sr))
+    expect_true(file.exists(pdfo), info = list(index = sr))
+  }
+
+  skip_if_not_installed('openxlsx')
+
+  for (i in seq(n_tests + 1, 2 * n_tests)) {
+    sr <- sample_rows[i]
+    hx_set <- add_props(hx_raw, variations[sr,])
+    xlsxo <- sprintf('xlsx-check-%d.xlsx', sr)
+    outfiles[i] <- xlsxo
+    expect_error(quick_xlsx(hx_set, file = xlsxo, open = FALSE), regexp = NA, info = list(index = sr))
+    expect_true(file.exists(xlsxo), info = list(index = sr))
+  }
+
+  skip_if_not_installed('flextable')
+
+  for (i in seq(2 * n_tests + 1, 3 * n_tests)) {
+    sr <- sample_rows[i]
+    hx_set <- add_props(hx_raw, variations[sr,])
+    docxo <- sprintf('docx-check-%d.docx', sr)
+    outfiles[i] <- docxo
+    expect_error(quick_docx(hx_set, file = docxo, open = FALSE), regexp = NA,
+          info = list(index = sr))
+    expect_true(file.exists(docxo), info = list(index = sr))
   }
 })
 
