@@ -27,6 +27,7 @@ Imports:
     utils
 Suggests:
     broom,
+    broom.mixed,
     covr,
     crayon,
     devtools,
@@ -50,3 +51,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
+Remotes: tidymodels/modelgenerics, tidymodels/broom, bbolker/broom.mixed

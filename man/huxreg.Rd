@@ -29,7 +29,7 @@ huxreg(..., error_format = "({std.error})", error_style = c("stderr",
 
 \item{ci_level}{Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.}
 
-\item{tidy_args}{List of arguments to pass to \code{\link[broom:tidy]{broom::tidy()}}. You can also pass a list of lists;
+\item{tidy_args}{List of arguments to pass to \code{\link[modelgenerics:tidy]{modelgenerics::tidy()}}. You can also pass a list of lists;
 if so, the nth element will be used for the nth column.}
 
 \item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use. Set to \code{NULL} to not show stars.}
@@ -57,7 +57,7 @@ A huxtable object.
 Create a huxtable to display model output
 }
 \details{
-Models must have a \code{\link[broom:tidy]{broom::tidy()}} method defined, which should return 'term', 'estimate', 'std.error',
+Models must have a \code{tidy} method defined, which should return 'term', 'estimate', 'std.error',
 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 calculate confidence intervals itself, using a normal approximation.
 
@@ -66,7 +66,7 @@ headings will be automatically created. If the \code{coef} and/or \code{statisti
 used for row headings. If different values of \code{coef} have the same name, the corresponding rows will be merged
 in the output.
 
-Each element of \code{statistics} should be a column name from \code{\link[broom:glance]{broom::glance()}}. You can also
+Each element of \code{statistics} should be a column name from \code{\link[modelgenerics:glance]{modelgenerics::glance()}}. You can also
 use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance}
 will be used. To use no columns, set \code{statistics = character(0)}.
 

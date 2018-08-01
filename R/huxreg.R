@@ -12,7 +12,7 @@ NULL
 #' @param align Alignment for table cells. Set to a single character to align on this character.
 #' @param pad_decimal Deprecated in favour of `align`.
 #' @param ci_level Confidence level for intervals. Set to `NULL` to not calculate confidence intervals.
-#' @param tidy_args List of arguments to pass to [broom::tidy()]. You can also pass a list of lists;
+#' @param tidy_args List of arguments to pass to [modelgenerics::tidy()]. You can also pass a list of lists;
 #'   if so, the nth element will be used for the nth column.
 #' @param stars Levels for p value stars. Names of `stars` are symbols to use. Set to `NULL` to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use `NULL` to turn off
@@ -26,7 +26,7 @@ NULL
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details
-#' Models must have a [broom::tidy()] method defined, which should return 'term', 'estimate', 'std.error',
+#' Models must have a `tidy` method defined, which should return 'term', 'estimate', 'std.error',
 #' 'statistic' and 'p.value'. If the `tidy` method does not have a `conf.int` option, `huxreg` will
 #' calculate confidence intervals itself, using a normal approximation.
 #'
@@ -35,7 +35,7 @@ NULL
 #' used for row headings. If different values of `coef` have the same name, the corresponding rows will be merged
 #' in the output.
 #'
-#' Each element of `statistics` should be a column name from [broom::glance()]. You can also
+#' Each element of `statistics` should be a column name from [modelgenerics::glance()]. You can also
 #' use 'nobs' for the number of observations. If `statistics` is `NULL` then all columns from `glance`
 #' will be used. To use no columns, set `statistics = character(0)`.
 #'
@@ -76,7 +76,10 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   # prepare parameters
-  assert_package('huxreg', 'broom')
+  if (! requireNamespace('broom.mixed', quietly = TRUE)) {
+    assert_package('huxreg', 'broom')
+  }
+
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
@@ -96,7 +99,7 @@ huxreg <- function (
       args$conf.int <- TRUE
       args$conf.level <- ci_level
     }
-    do.call(broom::tidy, args)
+    do.call(modelgenerics::tidy, args)
   }
   tidy_with_ci <- function (n) {
     if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
@@ -187,7 +190,7 @@ huxreg <- function (
 
   # create list of summary statistics
   all_sumstats <- lapply(models, function(m) {
-    bg <- try(broom::glance(m), silent = TRUE)
+    bg <- try(modelgenerics::glance(m), silent = TRUE)
     bg <- if (inherits(bg, 'try-error')) {
       warning('No `glance` method for model of class ', class(m)[1])
       NULL
@@ -282,10 +285,14 @@ make_ci <- function(tidied, ci_level) {
 
 has_builtin_ci <- function (x) {
   objs <- sapply(class(x), function (y) {
-    try(utils::getS3method('tidy', y,
-        envir = getNamespace('broom')), silent = TRUE)
+    try({
+      res <- utils::getS3method('tidy', y, optional = TRUE, envir = getNamespace('broom'))
+      if (is.null(res)) res <- utils::getS3method('tidy', y, optional = FALSE,
+            envir = getNamespace('broom.mixed'))
+      res
+    }, silent = TRUE)
   })
-  obj <- Find(function(x) class(x) == 'function', objs)
+  obj <- Find(function(x) inherits(x, 'function'), objs)
   if (is.null(obj)) return(FALSE)
   argnames <- names(formals(obj))
   all(c('conf.int', 'conf.level') %in% argnames)
