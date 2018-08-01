@@ -6,6 +6,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 * More speedups: LaTeX 2-3x faster
 * Bugfix: LaTeX didn't compile when height and caption were both set
+* New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 
 # huxtable 4.1.0
 

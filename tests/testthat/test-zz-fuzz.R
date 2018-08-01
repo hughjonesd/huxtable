@@ -70,12 +70,12 @@ test_that('Some random outputs compile', {
 
   n_tests <- get0('N_OUTPUT_TESTS', envir = globalenv(), ifnotfound = 10)
 
-  outfiles <- character(n_tests * 3)
+  outfiles <- character(n_tests * 4)
   on.exit({
     try(file.remove(outfiles), silent = TRUE)
   })
 
-  sample_rows <- sample(nrow(variations), n_tests * 3)
+  sample_rows <- sample(nrow(variations), n_tests * 4)
   for (i in seq_len(n_tests)) {
     sr <- sample_rows[i]
     hx_set <- add_props(hx_raw, variations[sr,])
@@ -106,6 +106,17 @@ test_that('Some random outputs compile', {
     expect_error(quick_docx(hx_set, file = docxo, open = FALSE), regexp = NA,
           info = list(index = sr))
     expect_true(file.exists(docxo), info = list(index = sr))
+  }
+
+
+  for (i in seq(3 * n_tests + 1, 4 * n_tests)) {
+    sr <- sample_rows[i]
+    hx_set <- add_props(hx_raw, variations[sr,])
+    pptxo <- sprintf('pptx-check-%d.pptx', sr)
+    outfiles[i] <- pptxo
+    expect_error(quick_pptx(hx_set, file = pptxo, open = FALSE), regexp = NA,
+      info = list(index = sr))
+    expect_true(file.exists(pptxo), info = list(index = sr))
   }
 })
 
