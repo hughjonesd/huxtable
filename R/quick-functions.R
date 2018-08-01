@@ -5,7 +5,7 @@
 NULL
 
 
-#' Quickly print objects to a PDF, HTML, Word or Excel document.
+#' Quickly print objects to a PDF, HTML, or Microsoft Office document.
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -31,6 +31,7 @@ NULL
 #' quick_html(m, dfr)
 #' quick_docx(m, dfr)
 #' quick_xlsx(m, dfr)
+#' quick_pptx(m, dfr)
 #' }
 #' @name quick-output
 NULL
@@ -132,6 +133,26 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   invisible(NULL)
 }
 
+#' @rdname quick-output
+#' @export
+quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0.4,
+  open = interactive()) {
+  assert_that(is.number(borders))
+  assert_that(is.flag(open))
+  force(file)
+  hts <- huxtableize(list(...), borders)
+
+  my_pptx <- officer::read_pptx()
+  for (ht in hts) {
+    ft <- as_flextable(ht)
+    my_pptx <- officer::add_slide(my_pptx, layout = "Title and Content", master = "Office Theme")
+    my_pptx <- flextable::ph_with_flextable(my_pptx, ft)
+  }
+  print(my_pptx, target = file)
+
+  if (open) auto_open(file)
+  invisible(NULL)
+}
 
 #' @rdname quick-output
 #' @export
