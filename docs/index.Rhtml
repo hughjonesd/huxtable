@@ -190,7 +190,7 @@ ht <- hux('<a href = "huxtable.html">Introduction</a>',
       '<a href = "https://github.com/hughjonesd/huxtable">Github</a>',
       '<a href = "https://github.com/hughjonesd/huxtable/issues">Bugs</a>')
 escape_contents(ht) <- FALSE
-right_border(ht)[,1:4] <- 1
+right_border(ht)[,1:4] <- 2
 width(ht) <- .8
 align(ht) <- 'center'
 ht
@@ -198,10 +198,11 @@ end.rcode-->
 
 
 
-<p>Huxtable is an R package for creating HTML and LaTeX tables. It provides similar
-functionality to xtable, but more, with a simpler interface. Features include control over text styling,
+<p>Huxtable is an R package to create LaTeX and HTML tables, with a friendly, modern interface.
+Features include control over text styling,
 number format, background color, borders, padding
-and alignment. Cells can span multiple rows and/or columns. Tables can be manipulated with standard R subsetting or
+and alignment. Cells can span multiple rows and/or columns.
+Tables can be manipulated with standard R subsetting or
 <code>dplyr</code> functions. Here are some quick examples:
 </p>
 
@@ -222,7 +223,7 @@ ht <- hux(
       )
 
 bold(ht)[1,]           <- TRUE
-bottom_border(ht)[1,]  <- 1
+bottom_border(ht)[1,]  <- 2
 align(ht)[,2]          <- 'right'
 right_padding(ht)      <- 10
 left_padding(ht)       <- 10
@@ -245,7 +246,7 @@ ht <- hux(
 
 ht                                        %>%
       set_bold(1, everywhere, TRUE)       %>%
-      set_bottom_border(1, everywhere, 1) %>%
+      set_bottom_border(1, everywhere, 2) %>%
       set_align(everywhere, 2, 'right')   %>%
       set_right_padding(10)               %>%
       set_left_padding(10)                %>%
@@ -264,11 +265,11 @@ att_corr <- corr.test(as.matrix(attitude))
 
 as_hux(att_corr$r)                                                             %>%
       set_background_color(where(att_corr$p < 0.05), 'yellow')                 %>%
-      set_background_color(where(att_corr$p < 0.01), 'orange')                 %>%
+      set_background_color(where(att_corr$p < 0.01), 'red')                    %>%
       set_background_color(where(row(att_corr$p) == col(att_corr$p)), 'white') %>%
       huxtable::add_rownames(colname = '')                                     %>%
       huxtable::add_colnames()                                                 %>%
-      set_all_borders(1)                                                       %>%
+      set_all_borders(2)                                                       %>%
       set_number_format(2)
 
 end.rcode-->
