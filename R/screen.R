@@ -56,6 +56,7 @@ to_screen.huxtable <- function (
   }
 
   all_colnames <- colnames(ht)
+  last_ht_col <- orig_ncol <- ncol(ht)
   if (ncol(ht) > 0 && nrow(ht) > 0) {
     charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
           min_width = min_width, max_width = max_width, color = color)
@@ -63,7 +64,6 @@ to_screen.huxtable <- function (
     border_rows <- charmat_data$border_rows
     border_cols <- charmat_data$border_cols
     last_ht_col    <- charmat_data$last_ht_col
-    orig_ncol <- ncol(ht)
     ht <- ht[, seq_len(last_ht_col)]
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
