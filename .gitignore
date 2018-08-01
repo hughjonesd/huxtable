@@ -1,5 +1,9 @@
 .Rproj.user/**
 revdep/**
+tests/testthat/*.pdf
+tests/testthat/*.xlsx
+tests/testthat/*.docx
+tests/testthat/*.pptx
 .Rhistory
 .RData
 .Ruserdata
