@@ -38,6 +38,8 @@ test_that('Screen output examples unchanged', {
 
 test_that('to_md produces valid markdown', {
   skip_without_pandoc()
+  skip_if_not_installed('rmarkdown')
+
   ht <- hux(a = 1:5, b = 1:5)
   md <- to_md(ht)
   validate_markdown(md)
@@ -107,7 +109,7 @@ test_that('to_md warns on unimplemented features', {
 
 test_that('hux_logo works', {
   # there's randomization, so:
-  for (i in 1:20) expect_silent(hux_logo())
+  for (i in 1:100) expect_silent(hux_logo())
   expect_silent(hux_logo(latex = TRUE))
 })
 
@@ -162,6 +164,9 @@ test_that('format.huxtable works', {
 
 test_that('guess_knitr_output_format() gets it right', {
   skip_without_pandoc()
+  skip_if_not_installed('knitr')
+  skip_if_not_installed('rmarkdown')
+
   out <- character(0)
   on.exit(sapply(out, function (x) if (file.exists(x)) file.remove(x)))
   expect_silent(out[1] <- knitr::knit('guess-output-format-test.Rhtml', quiet = TRUE))

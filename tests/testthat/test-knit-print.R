@@ -2,6 +2,7 @@
 
 context("knit_print")
 
+skip_if_not_installed('knitr')
 
 test_that("Can turn on and off printing of data frames", {
   # NB this all may fail if rmarkdown is loaded; rmarkdown defines knit_print.data.frame :-(
