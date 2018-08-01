@@ -55,12 +55,16 @@ to_screen.huxtable <- function (
     color <- FALSE
   }
 
+  all_colnames <- colnames(ht)
   if (ncol(ht) > 0 && nrow(ht) > 0) {
     charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
           min_width = min_width, max_width = max_width, color = color)
     charmat <- charmat_data$charmat
     border_rows <- charmat_data$border_rows
     border_cols <- charmat_data$border_cols
+    last_ht_col    <- charmat_data$last_ht_col
+    orig_ncol <- ncol(ht)
+    ht <- ht[, seq_len(last_ht_col)]
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
     borders <- collapsed_borders(ht)
@@ -136,12 +140,14 @@ to_screen.huxtable <- function (
   }
 
 
-  if (colnames && any(nchar(colnames(ht)) > 0)) {
-    colnames_text <- paste0('Column names: ', paste(colnames(ht), collapse = ', '))
+  if (colnames && any(nchar(all_colnames) > 0)) {
+    colnames_text <- paste0('Column names: ', paste(all_colnames, collapse = ', '))
     colnames_text <- strwrap(colnames_text, max_width)
     colnames_text <- paste0(colnames_text, collapse = '\n')
     result <- paste0(result, '\n\n', colnames_text, '\n')
   }
+  if (last_ht_col < orig_ncol) result <- glue::glue(
+        '{result}\n{last_ht_col}/{orig_ncol} columns shown.\n')
 
   result
 }
@@ -189,11 +195,16 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
     warning("Can't vary column alignment in markdown; using first row")
   ht <- set_align(ht, align[1, ], byrow = TRUE)
 
-  charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1, outer_border_v = 1,
-        min_width = min_width, max_width = max_width)
+  charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1,
+        outer_border_v = 1, min_width = min_width, max_width = max_width)
   charmat <- charmat_data$charmat
   border_rows <- charmat_data$border_rows
   border_cols <- charmat_data$border_cols
+  last_ht_col <- charmat_data$last_ht_col
+  if (last_ht_col < ncol(ht)) warning(glue::glue(
+          "Couldn't print whole table in max_width = {max_width} characters.\n",
+          "Printing {last_ht_col}/{ncol(ht)} columns."
+        ))
   # if you have a header, you need a whole line of dashes. Otherwise just to indicate columns
   dash_cols <- if (header) seq_len(ncol(charmat)) else - (border_cols)
   charmat[c(1, nrow(charmat)), dash_cols] <- '-'
@@ -214,6 +225,8 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
 # borders
 character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v,
       min_width, max_width = Inf, color = FALSE) {
+  if (ncol(ht) == 0) stop("Couldn't display any columns in less than max_width characters.")
+
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
   contents <- clean_contents(ht, type = 'screen')
@@ -240,6 +253,12 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   }
 
   max_widths <- floor(cw * (max_width - 2 * outer_border_h - (ncol(ht) - 1) * inner_border_h))
+  if (any(max_widths < 4)) {
+    # out of space, try with fewer columns
+    # assumption here is that we need say 4 characters for anything sensible
+    return(character_matrix(ht[, -ncol(ht)], inner_border_h, inner_border_v, outer_border_h,
+          outer_border_v, min_width, max_width, color))
+  }
   widths <- pmin(widths, max_widths)
 
   dc$strings <- vector(nrow(dc), mode = 'list')
@@ -302,7 +321,12 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     charmat[rows, cols] <- matrix(style(string_letters), length(rows), length(cols), byrow = TRUE)
   }
 
-  list(charmat = charmat, border_rows = border_rows, border_cols = border_cols)
+  list(
+          charmat     = charmat,
+          border_rows = border_rows,
+          border_cols = border_cols,
+          last_ht_col = ncol(ht)
+        )
 }
 
 
