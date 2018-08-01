@@ -1,6 +1,5 @@
 
 #' @import assertthat
-#' @importFrom modelgenerics tidy glance
 NULL
 
 #' Create a huxtable to display model output
@@ -100,7 +99,7 @@ huxreg <- function (
       args$conf.int <- TRUE
       args$conf.level <- ci_level
     }
-    do.call(broom::tidy, args)
+    do.call(modelgenerics::tidy, args)
   }
   tidy_with_ci <- function (n) {
     if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
@@ -191,7 +190,7 @@ huxreg <- function (
 
   # create list of summary statistics
   all_sumstats <- lapply(models, function(m) {
-    bg <- try(broom::glance(m), silent = TRUE)
+    bg <- try(modelgenerics::glance(m), silent = TRUE)
     bg <- if (inherits(bg, 'try-error')) {
       warning('No `glance` method for model of class ', class(m)[1])
       NULL
@@ -286,10 +285,14 @@ make_ci <- function(tidied, ci_level) {
 
 has_builtin_ci <- function (x) {
   objs <- sapply(class(x), function (y) {
-    try(utils::getS3method('tidy', y,
-        envir = getNamespace('broom')), silent = TRUE)
+    try({
+      res <- utils::getS3method('tidy', y, optional = TRUE, envir = getNamespace('broom'))
+      if (is.null(res)) res <- utils::getS3method('tidy', y, optional = FALSE,
+            envir = getNamespace('broom.mixed'))
+      res
+    }, silent = TRUE)
   })
-  obj <- Find(function(x) class(x) == 'function', objs)
+  obj <- Find(function(x) inherits(x, 'function'), objs)
   if (is.null(obj)) return(FALSE)
   argnames <- names(formals(obj))
   all(c('conf.int', 'conf.level') %in% argnames)
