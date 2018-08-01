@@ -38,13 +38,6 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   tabular <- build_tabular(ht)
   if (tabular_only) return(tabular)
 
-  # table position
-  pos_text <- switch(position(ht),
-    left   = c('\\begin{raggedright}', '\\par\\end{raggedright}\n'),
-    center = c('\\centering',   '\n'),
-    right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}\n')
-  )
-
   resize_box <- if (is.na(height <- height(ht))) c('', '') else {
     if (is.numeric(height)) height <- sprintf('%.3g\\textheight', height)
     c(sprintf('\\resizebox*{!}{%s}{', height), '}')
@@ -61,11 +54,18 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   }
   lab <- if (is.na(lab <- label(ht))) '' else sprintf('\\label{%s}\n', lab)
   if (nzchar(lab) && ! nzchar(cap)) warning('No caption set: LaTeX table labels may not work as expected.')
-  res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, tabular) else paste0(tabular, cap, lab)
+
+  pos_text <- switch(position(ht),
+    left   = c('\\begin{raggedright}', '\\par\\end{raggedright}\n'),
+    center = c('\\centering',   '\n'),
+    right  = c('\\begin{raggedleft}',  '\\par\\end{raggedleft}\n')
+  )
 
   begin_table <- sprintf('\\begin{table}[%s]\n', latex_float(ht))
-  res <- paste0(begin_table, pos_text[1], resize_box[1], res,
-        resize_box[2], pos_text[2], '\\end{table}\n')
+
+  res <- paste0(resize_box[1], tabular, resize_box[2])
+  res <- if (grepl('top', caption_pos(ht))) paste0(cap, lab, res) else paste0(res, cap, lab)
+  res <- paste0(begin_table, pos_text[1], res, pos_text[2], '\\end{table}\n')
 
   return(res)
 }
