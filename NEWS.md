@@ -4,8 +4,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.1.0.9000
 
-* More speedups: LaTeX 2-3x faster
-* Bugfix: LaTeX didn't compile when height and caption were both set
+* More speedups: LaTeX 2-3x faster.
+* Bugfix: LaTeX didn't compile when height and caption were both set.
+* Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 
 # huxtable 4.1.0
