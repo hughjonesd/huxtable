@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
       </span>
     </div>
 
@@ -125,7 +125,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>knit_print.data.frame</span>(<span class='no'>x</span>, <span class='no'>options</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for data.frame</span>
+<span class='fu'>knit_print</span>(<span class='no'>x</span>, <span class='no'>options</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,15 +149,12 @@
 
     <p><code>huxtable</code> defines a <code>knit_print</code> method for <code>data.frame</code>s. This converts the data frame
 to a huxtable, with <code>add_colnames = TRUE</code>, themes it using <code><a href='themes.html'>theme_plain()</a></code> and prints it.
-It also tries to set a few intelligent defaults, e.g. wrapping long columns and setting
-an appropriate width.
 To turn this behaviour off, set <code>options(huxtable.knit_print_df = FALSE)</code>. To change the theme, set
 <code>options("huxtable.knit_print_df_theme")</code> to a one-argument function which should return the huxtable.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='huxtable-options.html'>huxtable-options</a></p>
-<p>Other knit_print: <code><a href='knit_print.huxtable.html'>knit_print.huxtable</a></code></p></div>
+    <div class='dont-index'><p>Other knit_print: <code><a href='knit_print.huxtable.html'>knit_print.huxtable</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

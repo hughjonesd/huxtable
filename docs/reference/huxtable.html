@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.0.9000</span>
       </span>
     </div>
 
@@ -126,24 +126,32 @@
     </div>
 
     <pre class="usage"><span class='fu'>huxtable</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
-  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>,
-  <span class='fl'>TRUE</span>))
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))
 
 <span class='fu'>hux</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
-  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>,
-  <span class='fl'>TRUE</span>))
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))
 
-<span class='fu'>tribble_hux</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>,
-  <span class='fl'>FALSE</span>), <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))</pre>
+<span class='fu'>as_huxtable</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>as_hux</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>as_huxtable</span>(<span class='no'>x</span>,
+  <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>),
+  <span class='no'>...</span>)
+
+<span class='fu'>is_huxtable</span>(<span class='no'>x</span>)
+
+<span class='fu'>is_hux</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>For <code>huxtable</code>, named list of values as in <code>data.frame()</code>.
-For <code>tribble_hux</code>, data values as in <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tribble'>tibble::tribble()</a></code>.</p></td>
+      <td><p>For <code>huxtable</code>, named list of values as in <code>data.frame()</code>. For <code>as_huxtable</code>,
+extra arguments.</p></td>
     </tr>
     <tr>
       <th>add_colnames</th>
@@ -157,6 +165,10 @@ For <code>tribble_hux</code>, data values as in <code><a href='http://www.rdocum
       <th>autoformat</th>
       <td><p>If <code>TRUE</code>, automatically format columns by type. See below.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>An object to convert to a huxtable.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -169,8 +181,8 @@ For <code>tribble_hux</code>, data values as in <code><a href='http://www.rdocum
 along by one: your old row/column 1 will now be row/column 2, etc.</p>
 <p><code>add_colnames</code> currently defaults to <code>FALSE</code>, but this will change in future. You can set
 the default globally by setting <code>options("huxtable.add_colnames")</code> to <code>TRUE</code> or <code>FALSE</code>.</p>
-<p><code>tribble_hux</code> is a simple wrapper around <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tribble'>tibble::tribble()</a></code> which lets you create data
-in a readable format.</p>
+<p><code>as_huxtable</code> and <code>as_hux</code> convert an object to a huxtable.
+Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.</p>
     
     <h2 class="hasAnchor" id="automatic-formatting"><a class="anchor" href="#automatic-formatting"></a>Automatic formatting</h2>
 
@@ -190,25 +202,18 @@ set automatically, as follows:</p><ul>
 columns aligned on a decimal point will be right-aligned. Automatic number formatting does not
 apply to column headers.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='huxtable-options.html'>huxtable-options</a></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>huxtable</span>(<span class='kw'>column1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>column2</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>])
-<span class='fu'>tribble_hux</span>(
-  ~ <span class='no'>Name</span>,             ~ <span class='no'>Salary</span>,
-    <span class='st'>"John Smith"</span>,       <span class='fl'>50000</span>,
-    <span class='st'>"Jane Doe"</span>,         <span class='fl'>50000</span>,
-    <span class='st'>"David Hugh-Jones"</span>, <span class='fl'>50000</span>,
-    <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt;   Name                Salary  
-#&gt;   John Smith           5e+04  
-#&gt;   Jane Doe             5e+04  
-#&gt;   David Hugh-Jones     5e+04  
+<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>as_huxtable</span>(<span class='no'>dfr</span>)</div><div class='output co'>#&gt;         1   a        
+#&gt;         2   b        
+#&gt;         3   c        
+#&gt;         4   d        
+#&gt;         5   e        
 #&gt; 
-#&gt; Column names: Name, Salary</div></pre>
+#&gt; Column names: a, b</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -220,8 +225,6 @@ apply to column headers.</p>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#automatic-formatting">Automatic formatting</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
