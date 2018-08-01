@@ -39,6 +39,7 @@ matrix:
     env:
       - CACHE_VERSION=no_suggests
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
+      - _R_CHECK_RD_XREFS_=FALSE
 after_success:
   - Rscript run-covr.R
 
