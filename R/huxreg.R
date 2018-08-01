@@ -76,6 +76,7 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   # prepare parameters
+  assert_package('huxreg', 'modelgenerics')
   if (! requireNamespace('broom.mixed', quietly = TRUE)) {
     assert_package('huxreg', 'broom')
   }
