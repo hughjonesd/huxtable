@@ -3,12 +3,12 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
-  %\VignetteEngine{knitr::rmarkdown}  
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}  
 ---
 
 
@@ -52,7 +52,7 @@ they have. The table is produced with huxtable, of course ;-)
 
 suppressPackageStartupMessages(library(huxtable))
 is_latex <- guess_knitr_output_format() == 'latex'
-
+is_latex <- TRUE
 comp <- read.csv('comparison.csv', stringsAsFactors = FALSE, header = FALSE)
 
 ch <- as_hux(comp)

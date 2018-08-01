@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0.9000</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@
 
     <div class="ref-description">
     
-    <p>Functions to get or set the column widths property of huxtable cols.</p>
+    <p>Functions to get or set the <em>column widths</em> property of huxtable cols.</p>
     
     </div>
 
@@ -148,7 +148,7 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>col_width</code>, the <code>col_width</code> attribute.
+    <p>For <code>col_width</code>, the <code>col_width</code> property.
 For <code>set_col_width</code>, the <code>ht</code> object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -167,11 +167,8 @@ The workaround is to adjust the width, so that your cells no longer overrun.</p>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
 <span class='fu'>col_width</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='fu'>c</span>(<span class='fl'>.2</span>, <span class='fl'>.8</span>)
 <span class='fu'>col_width</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   a   b 
-#&gt; 0.2 0.8 </div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;     1              1  
-#&gt;     2              2  
-#&gt;     3              3  
-#&gt; 
-#&gt; Column names: a, b</div></pre>
+#&gt; 0.2 0.8 </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

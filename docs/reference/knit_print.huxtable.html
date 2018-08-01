@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0.9000</span>
       </span>
     </div>
 
@@ -125,8 +125,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for huxtable</span>
-<span class='fu'>knit_print</span>(<span class='no'>x</span>, <span class='no'>options</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>knit_print.huxtable</span>(<span class='no'>x</span>, <span class='no'>options</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,12 +147,14 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>knitr calls <code><a href='http://www.rdocumentation.org/packages/knitr/topics/knit_print'>knitr::knit_print()</a></code> on objects when they are printed in a knitr (or RMarkdown) document.
-The default method for <code>huxtable</code> objects guesses the appropriate output format and
-prints itself out appropriately.</p>
+The method for <code>huxtable</code> objects guesses the appropriate output format and
+prints itself out appropriately. You can override the output format by setting
+<code>options("huxtable.knitr_output_format")</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other knit_print: <code><a href='knit_print.data.frame.html'>knit_print.data.frame</a></code></p></div>
+    <div class='dont-index'><p><a href='huxtable-options.html'>huxtable-options</a></p>
+<p>Other knit_print: <code><a href='knit_print.data.frame.html'>knit_print.data.frame</a></code></p></div>
     
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guess knitr output format — guess_knitr_output_format • huxtable</title>
+<title>Package options — huxtable-options • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,31 @@
 
 
 
-<meta property="og:title" content="Guess knitr output format — guess_knitr_output_format" />
+<meta property="og:title" content="Package options — huxtable-options" />
 
-<meta property="og:description" content="Convenience function which tries to guess the ultimate output from knitr and rmarkdown." />
+<meta property="og:description" content="
+options('huxtable.add_colnames') sets the default value for add_colnames in
+huxtable() and as_huxtable(). If it is unset, add_colnames defaults to
+FALSE; in a future release, the default will become TRUE.
+options('huxtable.print') sets the print method for huxtable objects. See print.huxtable().
+options('huxtable.knitr_output_format') overrides the default output format when huxtable
+objects are printed by knitr. Set to &quot;html&quot;, &quot;latex&quot;, &quot;md&quot; or &quot;screen&quot;. If NULL (the default),
+huxtable guesses the format using guess_knitr_output_format().
+options('huxtable.color_screen'). If TRUE and package crayon is available, huxtables
+will be printed in color on screen.
+options('huxtable.knit_print_df'). If TRUE (the default), data frames in knitr will be
+pretty-printed using huxtable.
+options('huxtable.knit_print_df_theme'). A function applied to data frames
+before printing in knitr. The function should take one argument (a data frame) and return a
+huxtable. Defaults to theme_plain().
+options('huxtable.autoformat') sets the default value for autoformat in huxtable() and
+as_huxtable(). It defaults to TRUE.
+options('huxtable.autoformat_number_format') and options('huxtable.autoformat_align') are
+lists. The list names are base R classes. huxtable() with autoformat = TRUE will set
+number_format() and align() for data columns according to the corresponding list values.
+For example, to center-align Date objects you could set &quot;huxtable.autoformat_align&quot; to
+something like list(..., Date = &quot;center&quot;, ...).
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,38 +136,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Guess knitr output format</h1>
+    <h1>Package options</h1>
     
-    <div class="hidden name"><code>guess_knitr_output_format.Rd</code></div>
+    <div class="hidden name"><code>huxtable-options.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convenience function which tries to guess the ultimate output from knitr and rmarkdown.</p>
+    <ul>
+<li><p><code>options('huxtable.add_colnames')</code> sets the default value for <code>add_colnames</code> in
+<code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='as_huxtable.html'>as_huxtable()</a></code>. If it is unset, <code>add_colnames</code> defaults to
+<code>FALSE</code>; in a future release, the default will become <code>TRUE</code>.</p></li>
+<li><p><code>options('huxtable.print')</code> sets the print method for huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable()</a></code>.</p></li>
+<li><p><code>options('huxtable.knitr_output_format')</code> overrides the default output format when huxtable
+objects are printed by knitr. Set to "html", "latex", "md" or "screen". If <code>NULL</code> (the default),
+huxtable guesses the format using <code><a href='guess_knitr_output_format.html'>guess_knitr_output_format()</a></code>.</p></li>
+<li><p><code>options('huxtable.color_screen')</code>. If <code>TRUE</code> and package <code>crayon</code> is available, huxtables
+will be printed in color on screen.</p></li>
+<li><p><code>options('huxtable.knit_print_df')</code>. If <code>TRUE</code> (the default), data frames in knitr will be
+pretty-printed using huxtable.</p></li>
+<li><p><code>options('huxtable.knit_print_df_theme')</code>. A function applied to data frames
+before printing in knitr. The function should take one argument (a data frame) and return a
+huxtable. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
+<li><p><code>options('huxtable.autoformat')</code> sets the default value for <code>autoformat</code> in <code><a href='huxtable.html'>huxtable()</a></code> and
+<code><a href='as_huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
+<li><p><code>options('huxtable.autoformat_number_format')</code> and <code>options('huxtable.autoformat_align')</code> are
+lists. The list names are base R classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set
+<code><a href='number_format.html'>number_format()</a></code> and <code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values.
+For example, to center-align <code>Date</code> objects you could set <code>"huxtable.autoformat_align"</code> to
+something like <code>list(..., Date = "center", ...)</code>.</p></li>
+</ul>
     
     </div>
 
-    <pre class="usage"><span class='fu'>guess_knitr_output_format</span>()</pre>
         
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>'html', 'latex', or something else. If we are not in a knitr document, returns an empty string.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># in a knitr document</span>
-<span class='fu'>guess_knitr_output_format</span>()
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

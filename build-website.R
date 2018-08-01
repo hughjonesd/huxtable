@@ -9,8 +9,11 @@ for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   rmarkdown::render(f, output_format = "pdf_document")
 }
 
-knitr::knit("docs/index.Rhtml", "docs/index.html")
-pkgdown::build_reference()
+setwd('docs')
+knitr::knit("index.Rhtml", "index.html")
+setwd('..')
+
 pkgdown::build_reference_index()
+pkgdown::build_reference()
 pkgdown::build_news()
 message("Now commit and push to github. Don't forget to reinstall the dev version!")

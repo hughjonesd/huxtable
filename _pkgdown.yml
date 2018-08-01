@@ -23,6 +23,7 @@ reference:
     desc: Basic information about the package
     contents:
       - huxtable-package
+      - huxtable-options
   - title: "Creating and manipulating huxtables"
     desc: >
       Functions to create, subset and work with huxtables
@@ -33,7 +34,9 @@ reference:
       - add_rownames
       - cbind.huxtable
       - huxtable
+      - as_huxtable
       - insert_column
+      - add_rows
       - mutate
       - t.huxtable
   - title: "Size and position"
@@ -100,6 +103,8 @@ reference:
       - guess_knitr_output_format
       - starts_with("print_")
       - print.huxtable
+      - knit_print.huxtable
+      - knit_print.data.frame
       - report_latex_dependencies
       - starts_with("to_")
       - starts_with("quick")

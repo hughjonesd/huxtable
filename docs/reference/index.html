@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0.9000</span>
       </span>
     </div>
 
@@ -135,6 +135,12 @@
           <p><code><a href="huxtable-package.html">huxtable-package</a></code> </p>
         </td>
         <td><p>Huxtable: simply create LaTeX and HTML tables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="huxtable-options.html">huxtable-options</a></code> </p>
+        </td>
+        <td><p>Package options</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -170,9 +176,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="huxtable.html">huxtable()</a></code> <code><a href="huxtable.html">hux()</a></code> <code><a href="huxtable.html">as_huxtable()</a></code> <code><a href="huxtable.html">as_hux()</a></code> <code><a href="huxtable.html">is_huxtable()</a></code> <code><a href="huxtable.html">is_hux()</a></code> </p>
+          <p><code><a href="huxtable.html">huxtable()</a></code> <code><a href="huxtable.html">hux()</a></code> <code><a href="huxtable.html">tribble_hux()</a></code> </p>
         </td>
         <td><p>Create a huxtable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as_huxtable.html">as_huxtable()</a></code> <code><a href="as_huxtable.html">as_hux()</a></code> <code><a href="as_huxtable.html">is_huxtable()</a></code> <code><a href="as_huxtable.html">is_hux()</a></code> </p>
+        </td>
+        <td><p>Convert objects to huxtables</p></td>
       </tr><tr>
         
         <td>
@@ -182,7 +194,13 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dplyr-verbs.html">mutate(<i>&lt;huxtable&gt;</i>)</a></code> </p>
+          <p><code><a href="add_rows.html">add_rows()</a></code> <code><a href="add_rows.html">add_columns()</a></code> </p>
+        </td>
+        <td><p>Insert one matrix into another.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dplyr-verbs.html">mutate.huxtable()</a></code> </p>
         </td>
         <td><p>Dplyr verbs for huxtable</p></td>
       </tr><tr>
@@ -308,9 +326,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="align.html">align()</a></code> <code><a href="align.html">`align<-`()</a></code> <code><a href="align.html">set_align()</a></code> </p>
+          <p><code><a href="huxtable-deprecated.html">pad_decimal</a></code> </p>
         </td>
-        <td><p>Alignment</p></td>
+        <td><p>Deprecated functions</p></td>
       </tr><tr>
         
         <td>
@@ -384,9 +402,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="colspan.html">colspan()</a></code> <code><a href="colspan.html">`colspan<-`()</a></code> <code><a href="colspan.html">set_colspan()</a></code> </p>
+          <p><code><a href="rowspan.html">rowspan()</a></code> <code><a href="rowspan.html">`rowspan<-`()</a></code> <code><a href="rowspan.html">set_rowspan()</a></code> <code><a href="rowspan.html">colspan()</a></code> <code><a href="rowspan.html">`colspan<-`()</a></code> <code><a href="rowspan.html">set_colspan()</a></code> </p>
         </td>
-        <td><p>Column span</p></td>
+        <td><p>Row and column span</p></td>
       </tr><tr>
         
         <td>
@@ -399,12 +417,6 @@
           <p><code><a href="rotation.html">rotation()</a></code> <code><a href="rotation.html">`rotation<-`()</a></code> <code><a href="rotation.html">set_rotation()</a></code> </p>
         </td>
         <td><p>Text rotation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rowspan.html">rowspan()</a></code> <code><a href="rowspan.html">`rowspan<-`()</a></code> <code><a href="rowspan.html">set_rowspan()</a></code> </p>
-        </td>
-        <td><p>Row span</p></td>
       </tr><tr>
         
         <td>
@@ -428,21 +440,15 @@
       <tr>
         
         <td>
-          <p><code><a href="get_default_properties.html">get_default_properties()</a></code> </p>
+          <p><code><a href="set_default_properties.html">set_default_properties()</a></code> <code><a href="set_default_properties.html">get_default_properties()</a></code> </p>
         </td>
-        <td><p>Get default huxtable properties</p></td>
+        <td><p>Default huxtable properties</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="set_cell_properties.html">set_cell_properties()</a></code> </p>
         </td>
         <td><p>Set multiple cell properties</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_default_properties.html">set_default_properties()</a></code> </p>
-        </td>
-        <td><p>Set default huxtable properties</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -502,6 +508,18 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="knit_print.huxtable.html">knit_print.huxtable()</a></code> </p>
+        </td>
+        <td><p>Print a huxtable within knitr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="knit_print.data.frame.html">knit_print.data.frame()</a></code> </p>
+        </td>
+        <td><p>Print data frames in knitr using huxtable</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="report_latex_dependencies.html">report_latex_dependencies()</a></code> </p>
         </td>
         <td><p>Report LaTeX dependencies</p></td>
@@ -550,7 +568,7 @@
         <td>
           <p><code><a href="rowspecs.html">rowspecs</a></code> </p>
         </td>
-        <td><p>Row and column specifications</p></td>
+        <td><p>Different ways to select rows and columns</p></td>
       </tr><tr>
         
         <td>
@@ -580,9 +598,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="is_a_number.html">is_a_number()</a></code> </p>
+          <p><code><a href="huxtable-deprecated.html">pad_decimal</a></code> </p>
         </td>
-        <td><p>Does an object look like a number?</p></td>
+        <td><p>Deprecated functions</p></td>
       </tr><tr>
         
         <td>
