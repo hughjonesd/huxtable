@@ -31,7 +31,7 @@ matrix:
       - CACHE_VERSION=github_packages
 # run tests without Suggested packages
   - install:
-    - R -e 'install.packages(c("knitr", "rmarkdown", "devtools", "testthat"))'
+    - R -e 'install.packages(c("devtools", "testthat"))'
     - R -e 'devtools::install_deps(deps = c("Imports", "Depends", "LinkingTo"))'
     r: devel
     r_build_args: --no-build-vignettes
