@@ -106,12 +106,18 @@ test_that('Row heights do not screw up LaTeX multicol', {
 
 test_that('Various Rmd files render without errors', {
   skip_on_cran()
-  skip_if_not_installed('broom') # for huxreg
+  skip_if_not_installed('broom') # for huxreg, also skips on travis no-suggests where no vignettes
 
-  rmd_files <- file.path('vignettes', c('huxtable.Rmd', 'huxreg.Rmd', 'design-principles.Rmd'))
-  rmd_files <- system.file(rmd_files, package = 'huxtable')
-  rmd_files <- c(rmd_files, 'table-tester-2.Rmd')
-  for (f in rmd_files) {
+  rmd_filenames <- c('huxtable.Rmd', 'huxreg.Rmd', 'design-principles.Rmd')
+  # this system.file may be devtools' patched version; these file paths are used in devtools::test:
+  rmd_paths <- system.file('vignettes', rmd_filenames, package = 'huxtable')
+  # one of these is used in R CMD check:
+#  if (! utils::file_test('-f', rmd_paths[1])) rmd_paths <-
+#        base::system.file('inst', 'doc', rmd_filenames, package = 'huxtable')
+  if (! utils::file_test('-f', rmd_paths[1])) rmd_paths <-
+        base::system.file('doc', rmd_filenames, package = 'huxtable')
+  rmd_paths <- c(rmd_paths, 'table-tester-2.Rmd')
+  for (f in rmd_paths) {
     test_render(f, 'pdf_document')
     test_render(f, 'html_document')
   }
