@@ -108,7 +108,7 @@ test_that('Various Rmd files render without errors', {
   skip_on_cran()
   skip_if_not_installed('broom') # for huxreg, also skips on travis no-suggests where no vignettes
 
-  rmd_filenames <- c('huxtable.Rmd', 'huxreg.Rmd', 'design-principles.Rmd')
+  rmd_filenames <- c('huxtable.Rmd', 'huxreg.Rmd')
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
   rmd_paths <- system.file('vignettes', rmd_filenames, package = 'huxtable')
   # should work in R CMD check (but doesn't on travis or within RStudio):
