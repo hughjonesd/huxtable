@@ -4,12 +4,16 @@ TODO
 
 * manual vertical/horizontal adjustment in LaTeX?
 
-
-
-
-
-TODO
-====
+* Prepare for broom 0.7.0:
+  - Create a new branch using git rebase --no-ff off the modelgenerics branch. (You need the
+    "reverted" merges.)
+  - Merge this branch into master.
+  - Strategy is: only Import: modelgenerics; suggest all other broom packages; in huxreg,
+    requireNamespace for all those packages, without warning if they aren't installed (expect maybe
+    broom itself?); then just call modelgenerics::tidy. This should automatically delegate to
+    packages that have registered a tidy method.
+  - broom.mixed packages may have effects = "fixed" argument, but you could let the user do that
+    with tidy_args
 
 * Fix problem of different classes in padding, col_widths etc.
   - Bring back is_a_number
