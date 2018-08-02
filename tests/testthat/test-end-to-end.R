@@ -108,14 +108,11 @@ test_that('Various Rmd files render without errors', {
   skip_on_cran()
   skip_if_not_installed('broom') # for huxreg, also skips on travis no-suggests where no vignettes
 
-  rmd_filenames <- c('huxtable.Rmd', 'huxreg.Rmd')
+  rmd_filenames <- c('huxtable.Rmd', 'huxreg.Rmd') # design-principles needs a CSV file, so we skip
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
   rmd_paths <- system.file('vignettes', rmd_filenames, package = 'huxtable')
-  # should work in R CMD check (but doesn't on travis or within RStudio):
   if (! utils::file_test('-f', rmd_paths[1])) rmd_paths <-
-        base::system.file('doc', rmd_filenames, package = 'huxtable')
-  # OK, I give up:
-  if (! utils::file_test('-f', rmd_paths[1])) rmd_paths <- character(0)
+         base::system.file('doc', rmd_filenames, package = 'huxtable')
   rmd_paths <- c(rmd_paths, 'table-tester-2.Rmd')
   for (f in rmd_paths) {
     test_render(f, 'pdf_document')
