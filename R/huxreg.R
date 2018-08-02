@@ -76,15 +76,7 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   # prepare parameters
-<<<<<<< HEAD
-  assert_package('huxreg', 'modelgenerics')
-  if (! requireNamespace('broom.mixed', quietly = TRUE)) {
-    assert_package('huxreg', 'broom')
-  }
-
-=======
   assert_package('huxreg', 'broom')
->>>>>>> parent of 9b17ee6... Merge branch 'modelgenerics' to deal with upcoming broom/modelgenerics transition
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
