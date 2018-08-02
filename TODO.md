@@ -2,7 +2,14 @@
 TODO
 ====
 
-* Put temporary test artefacts (not the ones for comparisons) in their own dir which github ignores
+* manual vertical/horizontal adjustment in LaTeX?
+
+
+
+
+
+TODO
+====
 
 * Fix problem of different classes in padding, col_widths etc.
   - Bring back is_a_number
@@ -19,7 +26,6 @@ TODO
   For vertical lines || or #
   See https://tex.stackexchange.com/questions/152101/how-to-draw-two-hline-and-two-vertical-line
   and https://tex.stackexchange.com/questions/130818/how-to-draw-a-double-hline-in-a-table-without-interrupting-vertical-lines
-  Needs a `border_style` or something
 
 * collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
 
