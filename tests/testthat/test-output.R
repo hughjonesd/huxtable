@@ -2,20 +2,6 @@
 context("Output")
 
 
-validate_markdown <- function(md_string, output_format = 'html_document') {
-  force(output_format)
-  on.exit({
-    if (exists('tf')) file.remove(tf)
-    if (exists('ht')) file.remove(ht)
-  })
-  td <- tempdir()
-  tf <- tempfile(pattern = 'markdown-example', fileext = '.md', tmpdir = td)
-  cat(md_string, file = tf)
-  expect_silent(ht <- rmarkdown::render(tf, output_format = output_format, output_file = NULL, output_dir = td,
-    intermediates_dir = td, clean = TRUE, quiet = TRUE)) # no error
-}
-
-
 test_that('LaTeX output examples unchanged', {
   test_ex_same('to_latex')
 })
@@ -36,21 +22,7 @@ test_that('Screen output examples unchanged', {
 })
 
 
-test_that('to_md produces valid markdown', {
-  skip_without_pandoc()
-  skip_if_not_installed('rmarkdown')
 
-  ht <- hux(a = 1:5, b = 1:5)
-  md <- to_md(ht)
-  validate_markdown(md)
-  ht <- set_all_borders(ht, 1)
-  md <- to_md(ht)
-  validate_markdown(md)
-  ht <- set_caption(ht, "Some caption")
-  md <- to_md(ht)
-  validate_markdown(md)
-  expect_match(md, "Some caption", fixed = TRUE)
-})
 
 
 test_that('to_screen gives warning with colour if crayon not installed', {
@@ -158,21 +130,6 @@ test_that('format.huxtable works', {
   for (output in c('latex', 'html', 'md', 'screen')) {
     direct_call <- paste0('to_', output)
     expect_identical(do.call(direct_call, list(ht)), format(ht, output = output))
-  }
-})
-
-
-test_that('guess_knitr_output_format() gets it right', {
-  skip_without_pandoc()
-  skip_if_not_installed('knitr')
-  skip_if_not_installed('rmarkdown')
-
-  out <- character(0)
-  on.exit(sapply(out, function (x) if (file.exists(x)) file.remove(x)))
-  expect_silent(out[1] <- knitr::knit('guess-output-format-test.Rhtml', quiet = TRUE))
-  expect_silent(out[2] <- knitr::knit('guess-output-format-test.Rnw', quiet = TRUE))
-  for (fname in paste0('guess-output-format-test-Rmd-', c('html.Rmd', 'pdf.Rmd'))) {
-    expect_silent(out[fname] <- rmarkdown::render(fname, quiet = TRUE, run_pandoc = FALSE))
   }
 })
 

@@ -1,0 +1,16 @@
+\documentclass{article}
+
+<<deps, results = 'asis', echo = FALSE>>=
+library(huxtable)
+report_latex_dependencies()
+@
+
+\begin{document}
+
+<<test-ht, echo = FALSE>>=
+
+hux(a = 1:3, b = 1:3)
+
+@
+
+\end{document}
