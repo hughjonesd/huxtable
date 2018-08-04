@@ -55,6 +55,10 @@ TODO
   - As with label, this means different things; also has different values, so
     if you set float() your code wouldn't work in both HTML and TeX...
   - Tricky. Of course many things don't work identically between HTML and TeX.
+  - The wrapfig package defines \wraptable which lets text wrap around. It doesn't play nicely
+    with floats anyway, so one option is to have a single float() for all the TeX possibilities.
+  - Alternatively you have e.g. `wraparound()`, and keep `latex_float()` separate.
+  - You can combine options between HTML float (left/right) and wrapfig float.
 
 * Tidy LaTeX output by not spitting out colors etc. when defaults will do.
 

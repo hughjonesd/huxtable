@@ -111,7 +111,8 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   })
   if (! quiet) {
     cat(paste0(report, collapse = ''))
-    cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary)')
+    cat('% These are LaTeX packages. You can install them using your LaTex management software.')
+    cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary).')
   }
 
   if (as_string) {
