@@ -92,12 +92,9 @@ to_html.huxtable <- function(ht, ...) {
   # and apply it?
   # cb <- collapsed_borders(ht)
   borders    <- get_all_borders(ht)
-  top_border_style    <- top_border_style(ht)
-  bottom_border_style <- bottom_border_style(ht)
-  left_border_style   <- left_border_style(ht)
-  right_border_style  <- right_border_style(ht)
+  border_styles    <- get_all_border_styles(ht)
   border_width <- sprintf(' border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
-        top_border_style, right_border_style, bottom_border_style, left_border_style,
+        border_styles$top, border_styles$right, border_styles$bottom, border_styles$left,
         borders$top, borders$right, borders$bottom, borders$left)
   no_borders <- borders$top == 0 & borders$right == 0 & borders$bottom == 0 & borders$left == 0
   border_width <- blank_where(border_width, no_borders)
