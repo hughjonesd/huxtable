@@ -50,10 +50,10 @@ huxtable_env$huxtable_default_attrs <- list(
         right_border_color  = NA,
         top_border_color    = NA,
         bottom_border_color = NA,
-        left_border_style   = 'single',
-        right_border_style  = 'single',
-        top_border_style    = 'single',
-        bottom_border_style = 'single',
+        left_border_style   = 'solid',
+        right_border_style  = 'solid',
+        top_border_style    = 'solid',
+        bottom_border_style = 'solid',
         left_padding        = 4,
         right_padding       = 4,
         top_padding         = 4,
@@ -657,15 +657,15 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' @template getset-cell
 #' @templateVar attr_name left_border_style
 #' @templateVar attr_desc Border styles
-#' @templateVar value_param_desc A character vector or matrix of styles, which may be "single",
-#'   "double", or "dotted".
+#' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", or "dotted".
 #' @templateVar morealiases right_border_style top_border_style bottom_border_style
-#' @templateVar attr_val 'single'
+#' @templateVar attr_val 'solid'
 #' @details
 #' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 #' top borders take priority over bottom borders.
 #'
-#' Border styles only apply if the border width is greater than 0.
+#' Border styles only apply if the border width is greater than 0. In HTML, you will need to set
+#' a width of at least 3 to get a double border.
 #'
 #' @templateVar attr_val2 'double'
 #' @export left_border_style left_border_style<- set_left_border_style
@@ -674,12 +674,12 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' ht <- set_all_borders(ht, 1)
 #' set_left_border_style(ht, 'double')
 #' set_left_border_style(ht, 1:2, 1, 'double')
-#' set_left_border_style(ht, 1:2, 1:2, c('single', 'double'), byrow = TRUE)
+#' set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
 #' set_left_border_style(ht, where(ht == 1), 'double')
 #' @template border-warning
 #'
 NULL
-make_getter_setters('left_border_style', 'cell', check_values = c('single', 'double', 'dotted'))
+make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
 
 
 #' @name right_border_style
@@ -691,7 +691,7 @@ make_getter_setters('left_border_style', 'cell', check_values = c('single', 'dou
 #' set_right_border_style(ht, row, col, value, byrow = FALSE)
 #' @export right_border_style right_border_style<- set_right_border_style
 NULL
-make_getter_setters('right_border_style', 'cell', check_values = c('single', 'double', 'dotted'))
+make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
 
 
 #' @name top_border_style
@@ -702,7 +702,7 @@ make_getter_setters('right_border_style', 'cell', check_values = c('single', 'do
 #' set_top_border_style(ht, row, col, value, byrow = FALSE)
 #' @export top_border_style top_border_style<- set_top_border_style
 NULL
-make_getter_setters('top_border_style', 'cell', check_values = c('single', 'double', 'dotted'))
+make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
 
 
 #' @name bottom_border_style
@@ -713,7 +713,7 @@ make_getter_setters('top_border_style', 'cell', check_values = c('single', 'doub
 #' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border_style bottom_border_style<- set_bottom_border_style
 NULL
-make_getter_setters('bottom_border_style', 'cell', check_values = c('single', 'double', 'dotted'))
+make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
 
 
 get_all_border_styles <- function(ht, row, col) {
