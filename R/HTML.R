@@ -95,7 +95,12 @@ to_html.huxtable <- function(ht, ...) {
   bottom_border <- bottom_border(ht)
   left_border   <- left_border(ht)
   right_border  <- right_border(ht)
-  border_width <- sprintf(' border-style: solid; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
+  top_border_style    <- top_border_style(ht)
+  bottom_border_style <- bottom_border_style(ht)
+  left_border_style   <- left_border_style(ht)
+  right_border_style  <- right_border_style(ht)
+  border_width <- sprintf(' border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
+        top_border_style, right_border_style, bottom_border_style, left_border_style,
         top_border, right_border, bottom_border, left_border)
   no_borders <- top_border == 0 & right_border == 0 & bottom_border == 0 & left_border == 0
   border_width <- blank_where(border_width, no_borders)
