@@ -91,18 +91,15 @@ to_html.huxtable <- function(ht, ...) {
   # collapsed_borders() are in "real cell" position. But we just want to grab the original data
   # and apply it?
   # cb <- collapsed_borders(ht)
-  top_border    <- top_border(ht)
-  bottom_border <- bottom_border(ht)
-  left_border   <- left_border(ht)
-  right_border  <- right_border(ht)
+  borders    <- get_all_borders(ht)
   top_border_style    <- top_border_style(ht)
   bottom_border_style <- bottom_border_style(ht)
   left_border_style   <- left_border_style(ht)
   right_border_style  <- right_border_style(ht)
   border_width <- sprintf(' border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
         top_border_style, right_border_style, bottom_border_style, left_border_style,
-        top_border, right_border, bottom_border, left_border)
-  no_borders <- top_border == 0 & right_border == 0 & bottom_border == 0 & left_border == 0
+        borders$top, borders$right, borders$bottom, borders$left)
+  no_borders <- borders$top == 0 & borders$right == 0 & borders$bottom == 0 & borders$left == 0
   border_width <- blank_where(border_width, no_borders)
 
   format_bc <- function (pos, col) {
