@@ -140,10 +140,16 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 install_latex_dependencies <- function () {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), 'name')
+  ld <- setdiff(ld, c('graphicx', 'calc', 'array'))
+  message('Trying to install packages: ', paste(ld, collapse = ', '))
+  message('If this fails, try running the following on the command line ',
+        '(you may need admin permissions):')
+  message('  tlmgr install ', paste(ld, collapse = ' '))
   if (requireNamespace('tinytex', quietly = TRUE)) {
     tinytex::tlmgr_install(ld)
   } else {
     warning('R package tinytex not found, trying to install packages directly with tlmgr')
+    message(paste('tlmgr', 'install', ld))
     invisible(system2('tlmgr', c('install', ld)))
   }
 }

@@ -76,6 +76,7 @@ test_that('install/report_latex_dependencies run', {
 
   expect_silent(packages <- report_latex_dependencies(quiet = TRUE))
   packages <- vapply(packages, `[[`, character(1), 'name')
+  packages <- setdiff(packages, c('graphicx', 'calc', 'array'))
   with_mock(
     `tinytex::tlmgr_install` = function(...) return(c(...)),
     expect_error(x <- install_latex_dependencies(), regexp = NA)
