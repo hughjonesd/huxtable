@@ -113,7 +113,8 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   })
   if (! quiet) {
     cat(paste0(report, collapse = ''))
-    cat('% These are LaTeX packages. You can install them using your LaTex management software.')
+    cat('% These are LaTeX packages. You can install them using your LaTex management software,\n')
+    cat('% or by running `huxtable::install_latex_dependencies()` from within R.\n')
     cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary).')
   }
 
