@@ -46,7 +46,8 @@ Suggests:
     openxlsx,
     psych,
     rmarkdown,
-    testthat
+    testthat,
+    tinytex
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

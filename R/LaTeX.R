@@ -127,6 +127,24 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 }
 
 
+#' @export
+#' @rdname report_latex_dependencies
+#' @details
+#' `install_latex_dependencies` is a utility function to install the LaTeX packages
+#' that huxtable requires. It calls [tinytex::tlmgr_install()] if possible,
+#' or `tlmgr install` directly.
+install_latex_dependencies <- function () {
+  ld <- report_latex_dependencies(quiet = TRUE)
+  ld <- vapply(ld, `[[`, character(1), 'name')
+  if (requireNamespace('tinytex', quietly = TRUE)) {
+    tinytex::tlmgr_install(ld)
+  } else {
+    warning('R package tinytex not found, trying to install packages directly with tlmgr')
+    invisible(system2('tlmgr', c('install', ld)))
+  }
+}
+
+
 build_tabular <- function(ht) {
   if (! check_positive_dims(ht)) return('')
 

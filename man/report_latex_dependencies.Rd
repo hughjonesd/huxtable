@@ -2,9 +2,12 @@
 % Please edit documentation in R/LaTeX.R
 \name{report_latex_dependencies}
 \alias{report_latex_dependencies}
+\alias{install_latex_dependencies}
 \title{Report LaTeX dependencies}
 \usage{
 report_latex_dependencies(quiet = FALSE, as_string = FALSE)
+
+install_latex_dependencies()
 }
 \arguments{
 \item{quiet}{Logical: suppress printing.}
@@ -17,6 +20,11 @@ otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 }
 \description{
 Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
+}
+\details{
+\code{install_latex_dependencies} is a utility function to install the LaTeX packages
+that huxtable requires. It calls \code{\link[tinytex:tlmgr_install]{tinytex::tlmgr_install()}} if possible,
+or \code{tlmgr install} directly.
 }
 \examples{
 report_latex_dependencies()
