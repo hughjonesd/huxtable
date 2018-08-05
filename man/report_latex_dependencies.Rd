@@ -3,7 +3,7 @@
 \name{report_latex_dependencies}
 \alias{report_latex_dependencies}
 \alias{install_latex_dependencies}
-\title{Report LaTeX dependencies}
+\title{Tools for LaTeX dependencies}
 \usage{
 report_latex_dependencies(quiet = FALSE, as_string = FALSE)
 
@@ -19,9 +19,9 @@ If \code{as_string} is \code{TRUE}, a string of "\\usepackage\{...\}" statements
 otherwise a list of rmarkdown::latex_dependency objects, invisibly.
 }
 \description{
-Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
-}
-\details{
+\code{report_latex_dependencies} prints out and/or returns a list of LaTeX dependencies for adding
+to a LaTeX preamble.
+
 \code{install_latex_dependencies} is a utility function to install the LaTeX packages
 that huxtable requires. It calls \code{\link[tinytex:tlmgr_install]{tinytex::tlmgr_install()}} if possible,
 or \code{tlmgr install} directly.

@@ -83,15 +83,17 @@ huxtable_latex_dependencies <- list(
   list(name = 'tabularx')
 )
 
-#' Report LaTeX dependencies
+#' Tools for LaTeX dependencies
 #'
-#' Prints out and returns a list of LaTeX dependencies for adding to a LaTeX preamble.
+#' `report_latex_dependencies` prints out and/or returns a list of LaTeX dependencies for adding
+#' to a LaTeX preamble.
 #'
 #' @param quiet Logical: suppress printing.
 #' @param as_string Logical: return dependencies as a string.
 #'
-#' @return If `as_string` is `TRUE`, a string of "\\\\usepackage\\{...\\}" statements;
-#'   otherwise a list of rmarkdown::latex_dependency objects, invisibly.
+#' @return If `as_string` is `TRUE`, `report_latex_dependencies` returns a string of
+#'   "\\\\usepackage\\{...\\}" statements; otherwise it returns a list of
+#'   rmarkdown::latex_dependency objects, invisibly.
 #' @export
 #'
 #' @examples
@@ -127,12 +129,13 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 }
 
 
-#' @export
-#' @rdname report_latex_dependencies
-#' @details
+#' Tools for LaTeX dependencies
+#'
 #' `install_latex_dependencies` is a utility function to install the LaTeX packages
 #' that huxtable requires. It calls [tinytex::tlmgr_install()] if possible,
 #' or `tlmgr install` directly.
+#' @export
+#' @rdname report_latex_dependencies
 install_latex_dependencies <- function () {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), 'name')
