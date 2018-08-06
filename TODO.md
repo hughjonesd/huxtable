@@ -2,7 +2,16 @@
 TODO
 ====
 
+* Find a way to setup some LaTeX commands of your own (using latex_dependency?)
+  - then you can have a short version of vrule and hrule for borders
+  - like renewcommand but local? or OK if the command is defined for the first time?
+  - \providecommand is what you want. It is ignored if command is already
+    defined, so you want to use unique command names
+
+* Consider move to tabu package? Looks easy for dashed lines...
+
 * manual vertical/horizontal adjustment in LaTeX?
+  - doesn't seem possible in multicol
 
 * Prepare for broom 0.7.0:
   - Create a new branch using git rebase --no-ff off the modelgenerics branch. (You need the
