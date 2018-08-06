@@ -657,7 +657,7 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' @template getset-cell
 #' @templateVar attr_name left_border_style
 #' @templateVar attr_desc Border styles
-#' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", or "dotted".
+#' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
 #' @templateVar morealiases right_border_style top_border_style bottom_border_style
 #' @templateVar attr_val 'solid'
 #' @details
@@ -679,7 +679,8 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' @template border-warning
 #'
 NULL
-make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
+make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
 
 
 #' @name right_border_style
@@ -691,7 +692,8 @@ make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'doub
 #' set_right_border_style(ht, row, col, value, byrow = FALSE)
 #' @export right_border_style right_border_style<- set_right_border_style
 NULL
-make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
+make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
 
 
 #' @name top_border_style
@@ -702,8 +704,8 @@ make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'dou
 #' set_top_border_style(ht, row, col, value, byrow = FALSE)
 #' @export top_border_style top_border_style<- set_top_border_style
 NULL
-make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
-
+make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
 
 #' @name bottom_border_style
 #' @rdname left_border_style
@@ -713,8 +715,8 @@ make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'doubl
 #' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border_style bottom_border_style<- set_bottom_border_style
 NULL
-make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dotted'))
-
+make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
 
 get_all_border_styles <- function(ht, row, col) {
   list(
