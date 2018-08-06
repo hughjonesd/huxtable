@@ -89,14 +89,20 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
             padding.right  = right_padding(x)[drow, dcol],
             padding.top    = top_padding(x)[drow, dcol]
           )
-    bcols <- get_all_border_colors(x, drow, dcol)
     bdrs  <- get_all_borders(x, drow, dcol)
+    bcols <- get_all_border_colors(x, drow, dcol)
+    bst   <- get_all_border_styles(x, drow, dcol)
+    bst[bst == 'double'] <- 'solid'
     bcols[is.na(bcols)] <- 'black'
     ft <- flextable::border(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
-            border.bottom = officer::fp_border(color = bcols$bottom, width = bdrs$bottom),
-            border.left   = officer::fp_border(color = bcols$left,   width = bdrs$left),
-            border.right  = officer::fp_border(color = bcols$right,  width = bdrs$right),
-            border.top    = officer::fp_border(color = bcols$top,    width = bdrs$top)
+            border.bottom = officer::fp_border(color = bcols$bottom, width = bdrs$bottom,
+              style = bst$bottom),
+            border.left   = officer::fp_border(color = bcols$left,   width = bdrs$left,
+              style = bst$left),
+            border.right  = officer::fp_border(color = bcols$right,  width = bdrs$right,
+              style = bst$right),
+            border.top    = officer::fp_border(color = bcols$top,    width = bdrs$top,
+              style = bst$top),
           )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]
