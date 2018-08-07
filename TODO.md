@@ -4,6 +4,8 @@ TODO
 
 (5.0) means API change, consider for version 5.0
 
+* `quick_tex` command? But why not just use `print_latex`? Just for the self-contained document?
+
 * Find a way to setup some LaTeX commands of your own (using latex_dependency?)
   - then you can have a short version of vrule and hrule for borders
   - like renewcommand but local? or OK if the command is defined for the first time?
@@ -20,7 +22,6 @@ TODO
   - concealing which cell has the colspan could make it harder to target changes on to the
     relevant cell - which suggests that such changes should actually "hit" if they affect any
     cell in the merged range (5.0)
->>>>>>> 4a9a75e... TODO changes
 
 * manual vertical/horizontal adjustment in LaTeX?
   - doesn't seem possible in multicol
