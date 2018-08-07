@@ -180,11 +180,11 @@ install_latex_dependencies <- function () {
         '(you may need admin permissions):')
   message('  tlmgr install ', paste(ld, collapse = ' '))
   if (requireNamespace('tinytex', quietly = TRUE)) {
-    tinytex::tlmgr_install(ld)
+    tinytex::tlmgr_install(ld) == 0
   } else {
     warning('R package tinytex not found, trying to install packages directly with tlmgr')
     message(paste('tlmgr', 'install', ld))
-    invisible(system2('tlmgr', c('install', ld)))
+    system2('tlmgr', c('install', ld)) == 0
   }
 }
 
