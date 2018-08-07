@@ -88,7 +88,8 @@ huxtable_latex_dependencies <- list(
 #' `report_latex_dependencies` prints out and/or returns a list of LaTeX dependencies for adding
 #' to a LaTeX preamble.
 #'
-#' @param quiet Logical: suppress printing.
+#' @param quiet Logical. For `report_latex_dependencies`, suppress printing of dependencies.
+#'   For `check_latex_dependencies`, suppress messages.
 #' @param as_string Logical: return dependencies as a string.
 #'
 #' @return If `as_string` is `TRUE`, `report_latex_dependencies` returns a string of
@@ -129,12 +130,45 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   }
 }
 
+#' Tools for LaTeX dependencies
+#'
+#' `check_latex_dependencies` checks whether the required LaTeX packages are installed.
+#' @rdname report_latex_dependencies
+#' @export
+#' @return `check_latex_dependencies()` returns `TRUE` or `FALSE`.
+#' @examples
+#' check_latex_dependencies()
+check_latex_dependencies <- function (quiet = FALSE) {
+  ld <- report_latex_dependencies(quiet = TRUE)
+  ld <- vapply(ld, `[[`, character(1), 'name')
+  ld <- setdiff(ld, c('graphicx', 'calc', 'array'))
+  if (requireNamespace('tinytex', quietly = TRUE)) {
+    pkgs <- tinytex::tl_pkgs()
+  } else {
+    warning('R package tinytex not found, trying to check packages directly with tlmgr')
+    pkgs <- system2('tlmgr', c('info',  '--list', '--only-installed', '--data', 'name'),
+          stdout = TRUE)
+    pkgs <- gsub('[.].*', '', pkgs)
+  }
+  if (all(ld %in% pkgs)) {
+    if (! quiet) message('All LaTeX packages found.')
+    return(TRUE)
+  } else {
+    missing_pkgs <- setdiff(ld, pkgs)
+    if (! quiet) message('The following LaTeX packages were not found:\n',
+          paste(missing_pkgs, collapse = ', '), '\n',
+          'Install them using your latex package manager or via install_latex_dependencies().')
+    return(FALSE)
+  }
+}
+
 
 #' Tools for LaTeX dependencies
 #'
 #' `install_latex_dependencies` is a utility function to install the LaTeX packages
 #' that huxtable requires. It calls [tinytex::tlmgr_install()] if possible,
 #' or `tlmgr install` directly.
+#' @return `install_latex_dependencies` returns `TRUE` if `tlmgr` returns 0.
 #' @export
 #' @rdname report_latex_dependencies
 install_latex_dependencies <- function () {
