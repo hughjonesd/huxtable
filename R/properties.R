@@ -728,6 +728,36 @@ get_all_border_styles <- function(ht, row, col) {
 }
 
 
+#' Set all border styles
+#'
+#' This is a convenience function which sets left, right, top and bottom border
+#' styles for the specified cells.
+#'
+#' @inheritParams left_border_style
+#'
+#' @return The modified huxtable.
+#' @seealso [left_border_style()]
+#'
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_all_border_styles(ht, 'double')
+set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
+  call <- sys.call()
+  border_style_calls <- list(
+        quote(huxtable::set_top_border_style), quote(huxtable::set_bottom_border_style),
+        quote(huxtable::set_left_border_style), quote(huxtable::set_right_border_style))
+  for (bcc in border_style_calls) {
+    call[[1]] <- bcc
+    call[[2]] <- quote(ht)
+    ht <- eval(call, list(ht = ht), parent.frame())
+  }
+
+  ht
+}
+
+
 #' @name left_padding
 #' @template getset-cell
 #' @templateVar attr_name left_padding
