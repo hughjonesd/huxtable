@@ -93,8 +93,8 @@ huxtable_latex_dependencies <- list(
 #' @param as_string Logical: return dependencies as a string.
 #'
 #' @return If `as_string` is `TRUE`, `report_latex_dependencies` returns a string of
-#'   "\\\\usepackage\\{...\\}" statements; otherwise it returns a list of
-#'   rmarkdown::latex_dependency objects, invisibly.
+#'   `"\\\\usepackage\\{...\\}"` statements; otherwise it returns a list of
+#'   `rmarkdown::latex_dependency` objects, invisibly.
 #' @export
 #'
 #' @examples
@@ -171,6 +171,11 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #' @return `install_latex_dependencies` returns `TRUE` if `tlmgr` returns 0.
 #' @export
 #' @rdname report_latex_dependencies
+#' @examples
+#'
+#' \dontrun{
+#'   install_latex_dependencies()
+#' }
 install_latex_dependencies <- function () {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), 'name')

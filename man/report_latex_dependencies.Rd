@@ -20,8 +20,8 @@ For \code{check_latex_dependencies}, suppress messages.}
 }
 \value{
 If \code{as_string} is \code{TRUE}, \code{report_latex_dependencies} returns a string of
-"\\usepackage\{...\}" statements; otherwise it returns a list of
-rmarkdown::latex_dependency objects, invisibly.
+\code{"\\\\usepackage\\{...\\}"} statements; otherwise it returns a list of
+\code{rmarkdown::latex_dependency} objects, invisibly.
 
 \code{check_latex_dependencies()} returns \code{TRUE} or \code{FALSE}.
 
@@ -41,4 +41,8 @@ or \code{tlmgr install} directly.
 report_latex_dependencies()
 
 check_latex_dependencies()
+
+\dontrun{
+  install_latex_dependencies()
+}
 }
