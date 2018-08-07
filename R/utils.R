@@ -99,6 +99,20 @@ collapsed_border_colors <- function (ht) {
   result[c('vert', 'horiz')]
 }
 
+# returns two rows(+1),cols(+1) arrays of border styles. Non-"solid" styles have priority;
+# if two styles are non-"solid" then right and top has priority
+# A border of 0 can still have a style.
+collapsed_border_styles <- function (ht) {
+  result <- do_collapse(ht, get_all_border_styles, default = "solid")
+  result$vert <- result$right
+  result$vert[result$right == "solid"] <- result$left[result$right == "solid"]
+  result$horiz <- result$bottom
+  result$horiz[result$bottom == "solid"] <- result$top[result$bottom == "solid"]
+
+  result[c('vert', 'horiz')]
+}
+
+
 
 do_collapse <- function(ht, prop_fun, default) {
   res <- list()
