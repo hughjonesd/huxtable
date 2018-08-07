@@ -78,8 +78,27 @@ test_that('install/report_latex_dependencies run', {
   packages <- vapply(packages, `[[`, character(1), 'name')
   packages <- setdiff(packages, c('graphicx', 'calc', 'array'))
   with_mock(
-    `tinytex::tlmgr_install` = function(...) return(c(...)),
+    `tinytex::tlmgr_install` = function (...) return(0),
     expect_error(x <- install_latex_dependencies(), regexp = NA)
   )
-  expect_true(all(packages %in% x))
+  expect_true(x)
+})
+
+
+test_that('check_latex_dependencies runs correctly', {
+  skip_if_not_installed('tinytex')
+
+  with_mock(
+    `tinytex::tl_pkgs` = function (...) return(character(0)), {
+    expect_false(check_latex_dependencies(quiet = TRUE))
+    expect_message(check_latex_dependencies(quiet = FALSE), regexp = 'not found')
+  })
+
+  ld <- report_latex_dependencies(quiet = TRUE)
+  ld <- vapply(ld, `[[`, character(1), 'name')
+  with_mock(
+    `tinytex::tl_pkgs` = function (...) return(ld), {
+      expect_true(check_latex_dependencies(quiet = TRUE))
+      expect_message(check_latex_dependencies(quiet = FALSE), regexp = 'All LaTeX packages found')
+    })
 })
