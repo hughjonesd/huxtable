@@ -34,8 +34,8 @@ set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix of styles, which may be "single",
-\code{"single"}.}
+\item{value}{A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted". Set to \code{NA} to reset to the default, which is
+\code{"solid"}.}
 
 \item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
 
@@ -56,7 +56,8 @@ Functions to get or set the \emph{border styles} property of huxtable cells.
 Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 top borders take priority over bottom borders.
 
-Border styles only apply if the border width is greater than 0.
+Border styles only apply if the border width is greater than 0. In HTML, you will need to set
+a width of at least 3 to get a double border.
 }
 \section{Note}{
 
@@ -70,7 +71,7 @@ ht <- huxtable(a = 1:3, b = 3:1)
 ht <- set_all_borders(ht, 1)
 set_left_border_style(ht, 'double')
 set_left_border_style(ht, 1:2, 1, 'double')
-set_left_border_style(ht, 1:2, 1:2, c('single', 'double'), byrow = TRUE)
+set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
 set_left_border_style(ht, where(ht == 1), 'double')
 # When cells span multiple rows:
 ht <- tribble_hux(
