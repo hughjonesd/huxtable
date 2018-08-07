@@ -22,9 +22,9 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @return `to_screen` returns a string. `print_screen` prints the string and returns `NULL`.
 #'
 #' @details
-#' `colspan`, `rowspan`, `align` and `caption` properties are shown. If the `crayon`
-#' package is installed, output will be colorized (and contents bolded or italicized) by default;
-#' this will work in recent daily builds of RStudio as of October 2017.
+#' `colspan`, `rowspan`, `align` and `caption` properties are shown. So are borders (but not border
+#' styles). If the `crayon` package is installed, output will be colorized (and contents bolded or
+#' italicized) by default; this will work in recent daily builds of RStudio as of October 2017.
 #'
 #' @export
 #' @family printing functions
