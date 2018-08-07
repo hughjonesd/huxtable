@@ -8,6 +8,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: LaTeX didn't compile when height and caption were both set.
 * Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
+* New `left/right/top/bottom_border_style` to set "solid", "double", "dotted" or "dashed" borders.
 
 # huxtable 4.1.0
 
