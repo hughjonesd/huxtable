@@ -141,6 +141,7 @@ build_tabular <- function(ht) {
   width_spec <- apply(start_end_cols, 1, function (x) compute_width(ht, x[1], x[2]))
   cb <- collapsed_borders(ht)
   cbc <- collapsed_border_colors(ht)
+  cbs <- collapsed_border_styles(ht)
 
   ## PREPARE INDICES -----------
   dc_pos_matrix <- as.matrix(display_cells[, c('display_row', 'display_col')])
@@ -171,7 +172,7 @@ build_tabular <- function(ht) {
   # set border widths to the row maximum:
   horiz_b[] <- hb_maxes[row(horiz_b)]
   hb_colors <- format_color(cbc$horiz, default = 'black')
-
+  hb_chars <- ifelse(cbs$horiz == 'double', '=', '-')
 
   # background colors come from shadowing cells
   bg_colors <- background_color(ht)[dc_map]
@@ -184,7 +185,8 @@ build_tabular <- function(ht) {
   # if we do this, color bleeds from previous vertical borders (via the v_border of the hhline)
   # has_hb_color <- ! is.na(cbc$horiz)
   # hhline_colors_tex[horiz_b > 0 & ! has_hb_color] <- ''
-  hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}-', hhline_colors_tex, horiz_b)
+  hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}%s', hhline_colors_tex, horiz_b,
+        hb_chars)
   dim(hhlines_horiz) <- dim(horiz_b)
   no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
   hhlines_horiz[no_hborder_in_row] <- ''
@@ -192,7 +194,8 @@ build_tabular <- function(ht) {
   # vertical borders in hhlines are an n+1 x n+1 matrix of "corner dots"
   vert_b <- cb$vert # nrow X ncol + 1
   # we add an extra row to match the nrow+1 hhlines
-  vert_b <- rbind(vert_b[1,], vert_b) # we checked positive dims; row 1 exists
+  vert_b <- rbind(vert_b[1, ], vert_b) # we checked positive dims; row 1 exists
+  vert_bs <- rbind(cbs$vert[1, ], cbs$vert)
   # vertical dots should have colour from, in order of preference:
   # (a) left horiz border; (b) right horiz border; (c) lower vert border; (d) upper vert border
   # We use lower borders first on the theory that the "top of a square" matters more
@@ -210,12 +213,47 @@ build_tabular <- function(ht) {
   vert_bc_tex <- rep('', length(vert_bc))
   vert_bc_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc)
 
+
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
-  hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}|',
+
+  vert_b_double <- vert_bs == 'double'
+  has_horiz_b <- cbind(horiz_b[, 1], horiz_b) > 0
+  horiz_b_double <- has_horiz_b & cbind(cbs$horiz[, 1], cbs$horiz) == 'double'
+
+  vert_bchars <- rep('', length(vert_bc))
+  # Put in | when you have a single meets no border; or when a single meets a double;
+  # Put in || where a double meets no border;
+  # Put in :: (later, special stuff) where a double meets a double;
+  # Otherwise, leave them blank
+  vert_bchars[! vert_b_double & ! has_horiz_b]  <- '|'
+  vert_bchars[! vert_b_double & horiz_b_double] <- '|'
+  vert_bchars[vert_b_double & ! has_horiz_b]    <- '||'
+  vert_bchars[vert_b_double & horiz_b_double]   <- '::'
+
+  # corners where you have double-meets double. This creates an "open" style where nothing
+  # crosses. # would be better but seems not to work with \arrayrulecolor?
+  # |t:   :t:   :t|
+  # |:    ::     :|
+  # |b:   :b:   :b|
+  dim(vert_bchars) <- c(nrow(horiz_b), ncol(horiz_b) + 1) # n+1 x n+1
+  vbc_nr <- nrow(vert_bchars)
+  vbc_nc <- ncol(vert_bchars)
+  vert_bchars[1, 1]      <- sub('::', '|t:', vert_bchars[1, 1])
+  vert_bchars[1, vbc_nc] <- sub('::', ':t|', vert_bchars[1, vbc_nc])
+  vert_bchars[1, ]       <- sub('::', ':t:', vert_bchars[1, ])
+  vert_bchars[vbc_nr, 1]      <- sub('::', '|b:', vert_bchars[vbc_nr, 1])
+  vert_bchars[vbc_nr, vbc_nc] <- sub('::', ':b|', vert_bchars[vbc_nr, vbc_nc])
+  vert_bchars[vbc_nr, ]       <- sub('::', ':b:', vert_bchars[vbc_nr, ])
+  vert_bchars[, 1] <- sub('::', '|:', vert_bchars[, 1])
+  vert_bchars[, vbc_nc] <- sub('::', ':|', vert_bchars[, vbc_nc])
+
+  hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}%s',
         vert_bc_tex[has_vert_b],
-        vert_b[has_vert_b])
-  dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1)
+        vert_b[has_vert_b],
+        vert_bchars[has_vert_b])
+  hhlines_vert[vert_bchars == ''] <- ''
+  dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1) # n+1 x n+1
 
   # interleave vertical and horizontal lines like: |-|-|-|
   hhlines <- matrix('', nrow(hhlines_horiz), ncol(hhlines_horiz) + ncol(hhlines_vert))
@@ -360,11 +398,13 @@ build_tabular <- function(ht) {
   bcol <- cbc$vert
   has_bord <- ! is.na(bord)
   has_bcol <- ! is.na(bcol) # if *defined* as black, then we print it. Otherwise not.
+  bs_double <- cbs$vert == 'double'
   bcol <- format_color(bcol, default = 'black')
   bord_tex <- rep('', length(bord))
   bcol_tex <- rep('', length(bcol))
   bcol_tex[has_bcol] <- sprintf('\\color[RGB]{%s}', bcol[has_bcol])
   bord_tex[has_bord] <- sprintf('!{%s\\vrule width %.4gpt}', bcol_tex[has_bord], bord[has_bord])
+  bord_tex[bs_double] <- paste0(bord_tex[bs_double], bord_tex[bs_double])
   dim(bord_tex) <- dim(cb$vert)
   # the first column is the left border of the left-most cell.
   # subsequent columns become the right border of all cells.
