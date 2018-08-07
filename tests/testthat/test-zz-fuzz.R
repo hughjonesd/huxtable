@@ -25,6 +25,7 @@ variations <- expand.grid(
   italic            = c(TRUE, FALSE),
   left_border       = c(0, 1, 2),
   left_border_color = c('red', grey(.6)),
+  left_border_style = c('double', 'dotted', 'dashed'),
   left_padding      = c(0, 4),
   number_format     = c("%3.1g", NA),
   rotation          = c(0, 90),
