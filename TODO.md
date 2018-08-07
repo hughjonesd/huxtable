@@ -2,6 +2,19 @@
 TODO
 ====
 
+(5.0) means API change, consider for version 5.0
+
+* Use 
+
+* `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
+
+* `merge_cells` as a different way to specify colspan/rowspan:
+  - `ht <- merge_cells(ht, rows, cols) with maybe some dplyr-like syntax for cols?
+  - warn if more than one cell has content (ncharw > 0), otherwise use content from that cell
+  - concealing which cell has the colspan could make it harder to target changes on to the
+    relevant cell - which suggests that such changes should actually "hit" if they affect any
+    cell in the merged range (5.0)
+
 * manual vertical/horizontal adjustment in LaTeX?
 
 * Prepare for broom 0.7.0:
@@ -15,7 +28,7 @@ TODO
   - broom.mixed packages may have effects = "fixed" argument, but you could let the user do that
     with tidy_args
 
-* Fix problem of different classes in padding, col_widths etc.
+* Fix problem of different classes in padding, col_widths etc. (5.0)
   - Bring back is_a_number
   - Make everything a list-matrix
   - Or introduce explicit units with a character representation
@@ -23,6 +36,7 @@ TODO
   - Units can have a LaTeX and HTML representation
   - Of course that depends on the context, so maybe the function is like
     format(unit, context) where context might be 'HTML-width' or something
+  - could still use characters ("5pt", "10%") in API, they would be internally converted
 
 * manual vertical/horizontal adjustment in LaTeX?
 
@@ -37,17 +51,11 @@ TODO
   - Conceivably, people might want to override some individual
     cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
 
-* Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind?
+* Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind? (5.0)
 
-* After e.g. June, set huxtable.add_colnames to TRUE by default.
+* After e.g. June, set huxtable.add_colnames to TRUE by default (5.0).
 
 * Rework documentation to use more inheritance less templates.
-  
-* Generic insert_rows, insert_cols which just do an rbind (for any object)? 
-  - Probably insert_rows too close to insert_row? Or just change the interface to
-    work with objects that have dimensions (and maybe then change name to reflect > 1 row, and
-    deprecate insert_row. add_rows?)
-  - Should be able to make tibble::add_row work.
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
