@@ -76,16 +76,16 @@ to_screen.huxtable <- function (
     for (i in seq_len(nrow(ht) + 1)) for (j in seq_len(ncol(ht) + 1)) {
       if (i <= nrow(ht)) {
         ir <- index_rows[[i]]
-        # has a line above:
+        # 1: has a line above:
         border_mat[ ir, border_cols[j] ]     <- border_mat[ ir, border_cols[j] ]     + 1L * (borders$vert[i, j] > 0)
-        # has a line below:
+        # 2: has a line below:
         border_mat[ ir + 1, border_cols[j] ] <- border_mat[ ir + 1, border_cols[j] ] + 2L * (borders$vert[i, j] > 0)
       }
       if (j <= ncol(ht)) {
         ic <- index_cols[[j]]
-        # on right:
+        # 4: a line on right:
         border_mat[ border_rows[i], ic ]    <- border_mat[ border_rows[i], ic ]     + 4L * (borders$horiz[i, j] > 0)
-        # on left:
+        # 8: a line on left:
         border_mat[ border_rows[i], ic + 1] <- border_mat[ border_rows[i], ic + 1 ] + 8L * (borders$horiz[i, j] > 0)
       }
     }
