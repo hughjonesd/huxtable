@@ -217,43 +217,20 @@ build_tabular <- function(ht) {
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
 
-  vert_b_double <- vert_bs == 'double'
   has_horiz_b <- cbind(horiz_b[, 1], horiz_b) > 0
-  horiz_b_double <- has_horiz_b & cbind(cbs$horiz[, 1], cbs$horiz) == 'double'
 
   vert_bchars <- rep('', length(vert_bc))
-  # Put in | when you have a single meets no border; or when a single meets a double;
+  # Put in | when you have a single meets no border;
   # Put in || where a double meets no border;
-  # Put in :: (later, special stuff) where a double meets a double;
   # Otherwise, leave them blank
-  vert_bchars[! vert_b_double & ! has_horiz_b]  <- '|'
-  vert_bchars[! vert_b_double & horiz_b_double] <- '|'
-  vert_bchars[vert_b_double & ! has_horiz_b]    <- '||'
-  vert_bchars[vert_b_double & horiz_b_double]   <- '::'
-
-  # corners where you have double-meets double. This creates an "open" style where nothing
-  # crosses. # would be better but seems not to work with \arrayrulecolor?
-  # |t:   :t:   :t|
-  # |:    ::     :|
-  # |b:   :b:   :b|
-  dim(vert_bchars) <- c(nrow(horiz_b), ncol(horiz_b) + 1) # n+1 x n+1
-  vbc_nr <- nrow(vert_bchars)
-  vbc_nc <- ncol(vert_bchars)
-  vert_bchars[1, 1]      <- sub('::', '|t:', vert_bchars[1, 1])
-  vert_bchars[1, vbc_nc] <- sub('::', ':t|', vert_bchars[1, vbc_nc])
-  vert_bchars[1, ]       <- sub('::', ':t:', vert_bchars[1, ])
-  vert_bchars[vbc_nr, 1]      <- sub('::', '|b:', vert_bchars[vbc_nr, 1])
-  vert_bchars[vbc_nr, vbc_nc] <- sub('::', ':b|', vert_bchars[vbc_nr, vbc_nc])
-  vert_bchars[vbc_nr, ]       <- sub('::', ':b:', vert_bchars[vbc_nr, ])
-  vert_bchars[, 1] <- sub('::', '|:', vert_bchars[, 1])
-  vert_bchars[, vbc_nc] <- sub('::', ':|', vert_bchars[, vbc_nc])
+  vert_bchars[! vert_bs == 'double' & ! has_horiz_b]  <- '|'
+  vert_bchars[vert_bs == 'double' & ! has_horiz_b]    <- '||'
 
   hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}%s',
         vert_bc_tex[has_vert_b],
         vert_b[has_vert_b],
         vert_bchars[has_vert_b])
   hhlines_vert[vert_bchars == ''] <- ''
-  dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1) # n+1 x n+1
 
   # interleave vertical and horizontal lines like: |-|-|-|
   hhlines <- matrix('', nrow(hhlines_horiz), ncol(hhlines_horiz) + ncol(hhlines_vert))
