@@ -78,6 +78,8 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 #' check_latex_dependencies()
 #' }
 check_latex_dependencies <- function (quiet = FALSE) {
+  assert_that(is.flag(quiet))
+
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), 'name')
   ld <- setdiff(ld, c('graphicx', 'calc', 'array'))
