@@ -12,7 +12,7 @@
   copy_cell_props = TRUE)
 }
 \arguments{
-\item{...}{Vectors, matrices, data frames or huxtables.}
+\item{...}{Vectors, matrices, or huxtables.}
 
 \item{deparse.level}{Unused.}
 
@@ -38,6 +38,9 @@ If \code{copy_cell_props} is \code{TRUE}, the default set of cell properties (ev
 \code{rowspan}, including row heights/column widths) will be copied.
 
 If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the default properties.
+
+NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+call \code{\link[=cbind.data.frame]{cbind.data.frame()}} instead of the huxtable-specific code.
 }
 \examples{
 ht1 <- hux(a = 1:3, b = 4:6)

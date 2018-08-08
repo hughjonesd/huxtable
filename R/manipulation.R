@@ -162,7 +162,7 @@ NULL
 
 #' Combine rows or columns
 #'
-#' @param ... Vectors, matrices, data frames or huxtables.
+#' @param ... Vectors, matrices, or huxtables.
 #' @param deparse.level Unused.
 #' @param copy_cell_props Cell properties to copy from neighbours (see below).
 #'
@@ -182,6 +182,10 @@ NULL
 #' `rowspan`, including row heights/column widths) will be copied.
 #'
 #' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the default properties.
+#'
+#' NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+#' call [cbind.data.frame()] instead of the huxtable-specific code.
+#'
 #'
 #' @examples
 #' ht1 <- hux(a = 1:3, b = 4:6)
