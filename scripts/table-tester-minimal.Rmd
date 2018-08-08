@@ -11,6 +11,7 @@ output:
 ```{r setup, echo = FALSE}
 
 library(huxtable)
+library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -35,31 +36,34 @@ long <- 'A rather long row of text which goes on...'
 
 ```{r}
 # ht <- make()
-ht <- hux(a = 1:3, b = 1:3, d = 1:3) 
-ht <- set_all_borders(ht, 1.5)
+foo <- 1:6
+ht <- hux(a = foo, b = foo, d = foo, e = foo)
+# ht %>% set_all_borders(1) %>% set_top_border_style('dashed') %>% set_left_border_style('dashed')
+ht %>% 
+      set_all_borders(1) %>% 
+      set_left_border_color('red') %>% 
+      set_right_border_color('red') %>% 
+      set_bottom_border_style(1, everywhere, 'double') %>% 
+      set_bottom_border_style(2, everywhere, 'solid')  %>% 
+      set_bottom_border(3, 1, 0)              %>%
+      set_top_border(4, 1, 0)                 %>% 
+      set_left_border_style(everywhere, c(1,4), 'double')   %>% 
+      set_left_border_style(everywhere, 2, 'solid')    %>% 
+      set_left_border(everywhere, 3, 0)                %>% 
+      set_right_border(everywhere, 2, 0) %>% 
+      set_bottom_border_style(6, everywhere, 'double') %>% 
+      set_bottom_border(5, 4, 0) %>% 
+      set_top_border(6, 4, 0) %>% 
+      set_bottom_border(4, 3, 0) %>% 
+      set_top_border(5, 3, 0) -> ht
 
-left_border_color(ht) <- 'green'
-right_border_color(ht) <- 'green'
-
-left_border_style(ht)[, 1] <- "double"
-left_border_style(ht)[, 2] <- "solid"
-right_border_style(ht)[, 1] <- "solid"
-left_border(ht)[, 3] <- 0
-right_border(ht)[, 2] <- 0
-
-top_border_style(ht)[1, ] <- "double"
-top_border_style(ht)[2, ] <- "solid"
-bottom_border_style(ht)[1, ] <- "solid"
-top_border(ht)[3, ] <- 0
-bottom_border(ht)[2, ] <- 0
-ht
-
-ht2 <- as_hux(matrix(1:25, 5, 5))
-ht2 <- set_all_borders(ht2, 1)
-ht2 <- set_all_border_colors(ht2, 'red')
-ht2[2:4, 2:4] <- ht
-
-ht2
+ht[4:5, 3:4]
 
 
+# hux(a = 1:2, b = 1:2) %>% 
+#         set_all_borders(1) %>% 
+#        set_top_border(1, 1, 0) %>% 
+#        set_top_border(2, 2, 0) %>% 
+#         set_bottom_border(1, 2, 0)
+  
 ```
