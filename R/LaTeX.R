@@ -81,6 +81,7 @@ huxtable_latex_dependencies <- list(
   list(name = 'hhline'),
   list(name = 'calc'),
   list(name = 'tabularx')
+  #list(name = 'arydshln')
 )
 
 #' Report LaTeX dependencies
@@ -213,16 +214,17 @@ build_tabular <- function(ht) {
   vert_bc_tex <- rep('', length(vert_bc))
   vert_bc_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc)
 
-
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
 
-  has_horiz_b <- cbind(horiz_b[, 1], horiz_b) > 0
+  # here we want the real borders, not the row maxes of `horiz_b`:
+  has_horiz_b <- cbind(cb$horiz[, 1], cb$horiz) > 0
 
   vert_bchars <- rep('', length(vert_bc))
   # Put in | when you have a single meets no border;
   # Put in || where a double meets no border;
   # Otherwise, leave them blank
+  # PROBLEM: if you have no border on L, you don't get a horizontal line (of the right colour)
   vert_bchars[! vert_bs == 'double' & ! has_horiz_b]  <- '|'
   vert_bchars[vert_bs == 'double' & ! has_horiz_b]    <- '||'
 
@@ -231,6 +233,7 @@ build_tabular <- function(ht) {
         vert_b[has_vert_b],
         vert_bchars[has_vert_b])
   hhlines_vert[vert_bchars == ''] <- ''
+  dim(hhlines_vert) <- c(nrow(horiz_b), ncol(horiz_b) + 1) # n+1 x n+1
 
   # interleave vertical and horizontal lines like: |-|-|-|
   hhlines <- matrix('', nrow(hhlines_horiz), ncol(hhlines_horiz) + ncol(hhlines_vert))
