@@ -391,14 +391,19 @@ ht
 
 ```{r}
 ht <- make(nrow = 5, ncol = 5, more_text = c('more', 'more', 'more'))
+ht <- set_all_borders(ht, 3)
 left_border_style(ht)[, 1] <- 'double'
+right_border_style(ht)[, 1] <- 'dotted'
 left_border_style(ht)[, 2] <- 'dotted'
+right_border_style(ht)[, 2] <- 'dashed'
 left_border_style(ht)[, 3] <- 'dashed'
 left_border(ht)[, 4] <- 0
 right_border(ht)[, 3] <- 0
 left_border_style(ht)[, 5] <- 'double'
 top_border_style(ht)[1, ] <- 'double'
+bottom_border_style(ht)[1, ] <- 'dotted'
 top_border_style(ht)[2, ] <- 'dotted'
+bottom_border_style(ht)[2, ] <- 'dashed'
 top_border_style(ht)[3, ] <- 'dashed'
 top_border(ht)[4, ] <- 0
 bottom_border(ht)[3, ] <- 0
@@ -422,18 +427,23 @@ ht
 left_border_color(ht) <- NA
 top_border_color(ht) <- NA
 
-bottom_border(ht)[2, 3] <- 0
-top_border(ht)[3, 3]    <- 0
-bottom_border(ht)[1, 4] <- 0
-top_border(ht)[2, 4]    <- 0
 
-ht <- set_left_border(ht, where(row(ht) == col(ht)), 0)
-ht <- set_right_border(ht, where(row(ht) == col(ht) + 1), 0)
+ht2 <- ht
+bottom_border(ht2)[2, 3] <- 0
+top_border(ht2)[3, 3]    <- 0
+bottom_border(ht2)[1, 4] <- 0
+top_border(ht2)[2, 4]    <- 0
 
+ht2 <- set_left_border(ht2, where(row(ht2) == col(ht2)), 0)
+ht2 <- set_right_border(ht2, where(row(ht2) == col(ht2) + 1), 0)
 
-caption(ht) <- 'Varying borders'
+caption(ht2) <- 'Varying borders within rows/cols'
+ht2
+
+ht <- set_left_border(ht, 3:7)
+ht <- set_bottom_border(ht, 3:7, byrow = TRUE)
+caption(ht) <- 'Varying border widths'
 ht
-
 ```
 
 

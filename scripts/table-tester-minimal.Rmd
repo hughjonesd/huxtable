@@ -43,6 +43,7 @@ ht %>%
       set_all_borders(1) %>% 
       set_left_border_color('red') %>% 
       set_right_border_color('red') %>% 
+      set_top_border_color(everywhere, 2:3, 'orange') %>% 
       set_bottom_border_style(1, everywhere, 'double') %>% 
       set_bottom_border_style(2, everywhere, 'solid')  %>% 
       set_bottom_border(3, 1, 0)              %>%
@@ -57,8 +58,8 @@ ht %>%
       set_bottom_border(4, 3, 0) %>% 
       set_top_border(5, 3, 0) -> ht
 
-ht[4:5, 3:4]
-
+# ht[4:5, 3:4]
+ht
 
 # hux(a = 1:2, b = 1:2) %>% 
 #         set_all_borders(1) %>% 
