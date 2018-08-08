@@ -4,17 +4,17 @@ TODO
 
 (5.0) means API change, consider for version 5.0
 
-* Find a way to setup some LaTeX commands of your own (using latex_dependency?)
-  - then you can have a short version of vrule and hrule for borders
-  - like renewcommand but local? or OK if the command is defined for the first time?
-  - \providecommand is what you want. It is ignored if command is already
-    defined, so you want to use unique command names
-    
 * Consider move to tabu package? Looks easy for dashed lines...
 
 * border styles:
   - Use arydshln in LaTeX?
-  - Bug: single horizontal borders "start" too late after double vertical border joins thems
+  - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
+  - Bug: HTML borders aren't precollapsed, should they be? But see next.
+
+* Border API rework:
+  - different set of commands
+  - stored internally in vert/horiz arrays
+  - always precollapsed
 
 * `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
 
