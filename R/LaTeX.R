@@ -233,11 +233,12 @@ build_tabular <- function(ht) {
   has_pad_bldc <- lapply(pad_bldc, Negate(is.na))
   pad_bldc <- lapply(pad_bldc, function (x) if (is.numeric(x)) sprintf('%.4gpt', x) else x)
   tpad_tex_bldc <- rep('', length(pad_bldc$top))
-  tpad_tex_bldc[has_pad_bldc$top] <- sprintf('\\rule{0pt}{\\baselineskip+%s}',
-        pad_bldc$top[has_pad_bldc$top])
+  # tpad_tex_bldc[has_pad_bldc$top] <- sprintf('\\rule{0pt}{\\baselineskip+%s}',
+  #       pad_bldc$top[has_pad_bldc$top])
+  tpad_tex_bldc[has_pad_bldc$top] <- sprintf('\\huxtpad{%s}', pad_bldc$top[has_pad_bldc$top])
   bpad_tex_bldc <- rep('', length(pad_bldc$bottom))
   bpad_vals_bldc <- pad_bldc$bottom[has_pad_bldc$bottom]
-  bpad_tex_bldc[has_pad_bldc$bottom] <- sprintf('\\rule[-%s]{0pt}{%s}', bpad_vals_bldc, bpad_vals_bldc)
+  bpad_tex_bldc[has_pad_bldc$bottom] <- sprintf('\\huxbpad{%s}', bpad_vals_bldc)
   align_tex_key <- c('left' = '\\raggedright ', 'right' = '\\raggedleft ', 'center' = '\\centering ')
   align_tex_bldc <- align_tex_key[align_bldc]
   inner_cell_bldc <- paste0(tpad_tex_bldc, align_tex_bldc, inner_cell_bldc, bpad_tex_bldc)
@@ -395,6 +396,8 @@ build_tabular <- function(ht) {
   commands <- '
     \\providecommand{\\huxb}[2][0,0,0]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
     \\providecommand{\\huxvb}[2][0,0,0]{\\color[RGB]{#1}\\vrule width #2pt}
+    \\providecommand{\\huxtpad}[1]{\\rule{0pt}{\\baselineskip+#1}}
+    \\providecommand{\\huxbpad}[1]{\\rule[-#1]{0pt}{#1}}
   '
   # use like \huxb[color]{width} in >{} sections
   res <- paste0(commands, tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
