@@ -53,7 +53,6 @@ ht
 ```
 
 
-
 # Position and width (and caption)
 
 ```{r}
@@ -94,7 +93,6 @@ for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomce
 ```
 
 
-
 # Col_width and align
 
 ```{r}
@@ -125,7 +123,6 @@ ht
 ```
 
 
-
 # Align and wrap
 
 ```{r}
@@ -136,7 +133,6 @@ ht <- set_align(ht, c('left', 'left', 'center', 'right'))
 caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left'
 ht
 ```
-
 
 
 # Valign, row height and wrap
@@ -156,7 +152,6 @@ ht
 ```
 
 
-
 # Colwidth and wrap
 
 ```{r}
@@ -168,7 +163,6 @@ ht
 ```
 
 
-
 # Width and wrap
 
 ```{r}
@@ -178,7 +172,6 @@ wrap(ht)[1,] <- TRUE
 caption(ht) <- 'wrap TRUE at top, width .2'
 ht
 ```
-
 
 
 # Padding and wrap
@@ -193,7 +186,6 @@ bottom_padding(ht)[4,] <- 12
 caption(ht) <- 'wrap TRUE on left; padding by row l/r/t/b'
 ht
 ```
-
 
 
 # Padding and colwidth
@@ -214,7 +206,6 @@ ht
 ```
 
 
-
 # Text and wrap
 
 ```{r}
@@ -230,7 +221,6 @@ ht
 ```
 
 
-
 # Multirow and wrap
 
 ```{r}
@@ -242,7 +232,6 @@ caption(ht) <- 'multirow cells, wrap TRUE on left'
 ```
 
 
-
 # Multirow and multicol
 
 ```{r}
@@ -252,7 +241,6 @@ rowspan(ht)[2,1] <- 2
 caption(ht) <- 'multirow cells and multicol cells'
 ht
 ```
-
 
 
 # Border color left and right/top and bottom
@@ -270,8 +258,25 @@ ht
 ```
 
 
+# Text and border color
+
+```{r}
+ht <- make()
+ht <- set_all_border_colors(ht, everywhere, 1, 'red')
+text_color(ht) <- 'blue'
+caption(ht) <- 'text color blue. Col 1 border color set to red'
+ht
+```
+
 
 # Multirow, multicol and border color
+
+```{r}
+ht <- make(nrow = 2)
+ht <- set_all_border_colors(ht, 'blue')
+caption(ht) <- 'All borders blue'
+ht
+```
 
 ```{r}
 ht <- make(nrow = 5)
@@ -284,10 +289,9 @@ left_border_color(ht) <- 'yellow'
 right_border_color(ht) <- 'green'
 top_border_color(ht) <- 'blue'
 # bottom_border_color(ht) <- 'red'
-caption(ht) <- 'multirow, multicol and border color (l yellow r green t blue b unset)'
+caption(ht) <- 'multirow, multicol and border color (left: yellow; right: green; top: blue; bottom unset)'
 ht
 ```
-
 
 
 
@@ -361,6 +365,57 @@ bottom_border(ht)[1, ] <- 4
 caption(ht) <- 'Bottom border of top cell should be thicker. In TeX this will continue across row.'
 ht
 ```
+
+
+# Border style
+
+```{r}
+ht <- make(nrow = 5, ncol = 5, more_text = c('more', 'more', 'more'))
+left_border_style(ht)[, 1] <- 'double'
+left_border_style(ht)[, 2] <- 'dotted'
+left_border_style(ht)[, 3] <- 'dashed'
+left_border(ht)[, 4] <- 0
+right_border(ht)[, 3] <- 0
+left_border_style(ht)[, 5] <- 'double'
+top_border_style(ht)[1, ] <- 'double'
+top_border_style(ht)[2, ] <- 'dotted'
+top_border_style(ht)[3, ] <- 'dashed'
+top_border(ht)[4, ] <- 0
+bottom_border(ht)[3, ] <- 0
+top_border_style(ht)[5, ] <- 'double'
+caption(ht) <- 'Border styles: double, dotted, dashed, none, double, single'
+ht
+
+left_border_color(ht) <- 'blue'
+caption(ht) <- 'Same with blue vert borders'
+ht
+
+top_border_color(ht) <- 'red'
+left_border_color(ht) <- NA
+caption(ht) <- 'Same with red horiz borders'
+ht
+
+left_border_color(ht) <- 'blue'
+caption(ht) <- 'Blue and red borders'
+ht
+
+left_border_color(ht) <- NA
+top_border_color(ht) <- NA
+
+bottom_border(ht)[2, 3] <- 0
+top_border(ht)[3, 3]    <- 0
+bottom_border(ht)[1, 4] <- 0
+top_border(ht)[2, 4]    <- 0
+
+ht <- set_left_border(ht, where(row(ht) == col(ht)), 0)
+ht <- set_right_border(ht, where(row(ht) == col(ht) + 1), 0)
+
+
+caption(ht) <- 'Varying borders'
+ht
+
+```
+
 
 # Huxreg 
 

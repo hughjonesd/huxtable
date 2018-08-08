@@ -386,6 +386,57 @@ caption(ht) <- 'Bottom border of top cell should be thicker. In TeX this will co
 ht
 ```
 
+
+# Border style
+
+```{r}
+ht <- make(nrow = 5, ncol = 5, more_text = c('more', 'more', 'more'))
+left_border_style(ht)[, 1] <- 'double'
+left_border_style(ht)[, 2] <- 'dotted'
+left_border_style(ht)[, 3] <- 'dashed'
+left_border(ht)[, 4] <- 0
+right_border(ht)[, 3] <- 0
+left_border_style(ht)[, 5] <- 'double'
+top_border_style(ht)[1, ] <- 'double'
+top_border_style(ht)[2, ] <- 'dotted'
+top_border_style(ht)[3, ] <- 'dashed'
+top_border(ht)[4, ] <- 0
+bottom_border(ht)[3, ] <- 0
+top_border_style(ht)[5, ] <- 'double'
+caption(ht) <- 'Border styles: double, dotted, dashed, none, double, single'
+ht
+
+left_border_color(ht) <- 'blue'
+caption(ht) <- 'Same with blue vert borders'
+ht
+
+top_border_color(ht) <- 'red'
+left_border_color(ht) <- NA
+caption(ht) <- 'Same with red horiz borders'
+ht
+
+left_border_color(ht) <- 'blue'
+caption(ht) <- 'Blue and red borders'
+ht
+
+left_border_color(ht) <- NA
+top_border_color(ht) <- NA
+
+bottom_border(ht)[2, 3] <- 0
+top_border(ht)[3, 3]    <- 0
+bottom_border(ht)[1, 4] <- 0
+top_border(ht)[2, 4]    <- 0
+
+ht <- set_left_border(ht, where(row(ht) == col(ht)), 0)
+ht <- set_right_border(ht, where(row(ht) == col(ht) + 1), 0)
+
+
+caption(ht) <- 'Varying borders'
+ht
+
+```
+
+
 # Huxreg 
 
 ```{r}
