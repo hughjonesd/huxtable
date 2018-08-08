@@ -130,11 +130,6 @@ build_tabular <- function(ht) {
   hhline_colors[has_own_border] <- hb_colors[has_own_border]
   hhline_colors_tex <- sprintf('[%s]', hhline_colors)
   hhline_colors_tex[has_own_border & hb_default] <- ''
-  # if we do this, color bleeds from previous vertical borders (via the v_border of the hhline)
-  # has_hb_color <- ! is.na(cbc$horiz)
-  # hhline_colors_tex[horiz_b > 0 & ! has_hb_color] <- ''
-  # hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}%s', hhline_colors_tex, horiz_b,
-  #      hb_chars)
   hhlines_horiz <- sprintf('>{\\huxb%s{%.4g}}%s', hhline_colors_tex, horiz_b, hb_chars)
   dim(hhlines_horiz) <- dim(horiz_b)
   no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
@@ -330,8 +325,9 @@ build_tabular <- function(ht) {
   bcol <- format_color(bcol, default = 'black')
   bord_tex <- rep('', length(bord))
   bcol_tex <- rep('', length(bcol))
-  bcol_tex[has_bcol] <- sprintf('\\color[RGB]{%s}', bcol[has_bcol])
-  bord_tex[has_bord] <- sprintf('!{%s\\vrule width %.4gpt}', bcol_tex[has_bord], bord[has_bord])
+  bcol_tex[has_bcol] <- sprintf('[%s]', bcol[has_bcol])
+  # bord_tex[has_bord] <- sprintf('!{%s\\vrule width %.4gpt}', bcol_tex[has_bord], bord[has_bord])
+  bord_tex[has_bord] <- sprintf('!{\\huxvb%s{%.4g}}', bcol_tex[has_bord], bord[has_bord])
   bord_tex[bs_double] <- paste0(bord_tex[bs_double], bord_tex[bs_double])
   dim(bord_tex) <- dim(cb$vert)
   # the first column is the left border of the left-most cell.
@@ -398,6 +394,7 @@ build_tabular <- function(ht) {
 
   commands <- '
     \\providecommand{\\huxb}[2][0,0,0]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
+    \\providecommand{\\huxvb}[2][0,0,0]{\\color[RGB]{#1}\\vrule width #2pt}
   '
   # use like \huxb[color]{width} in >{} sections
   res <- paste0(commands, tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
