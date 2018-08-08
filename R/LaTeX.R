@@ -116,6 +116,7 @@ build_tabular <- function(ht) {
   has_own_border <- horiz_b > 0
   # set border widths to the row maximum:
   horiz_b[] <- hb_maxes[row(horiz_b)]
+  hb_default <- is.na(cbc$horiz)
   hb_colors <- format_color(cbc$horiz, default = 'black')
   hb_chars <- ifelse(cbs$horiz == 'double', '=', '-')
 
@@ -125,13 +126,16 @@ build_tabular <- function(ht) {
   # add a top row for the first hhline
   bg_colors <- rbind(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from cells below?
   bg_colors <- format_color(bg_colors, default = 'white')
-  hhline_colors <- ifelse(has_own_border, hb_colors ,bg_colors)
-  hhline_colors_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', hhline_colors)
+  hhline_colors <- bg_colors
+  hhline_colors[has_own_border] <- hb_colors[has_own_border]
+  hhline_colors_tex <- sprintf('[%s]', hhline_colors)
+  hhline_colors_tex[has_own_border & hb_default] <- ''
   # if we do this, color bleeds from previous vertical borders (via the v_border of the hhline)
   # has_hb_color <- ! is.na(cbc$horiz)
   # hhline_colors_tex[horiz_b > 0 & ! has_hb_color] <- ''
-  hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}%s', hhline_colors_tex, horiz_b,
-        hb_chars)
+  # hhlines_horiz <- sprintf('>{%s\\global\\arrayrulewidth=%.4gpt}%s', hhline_colors_tex, horiz_b,
+  #      hb_chars)
+  hhlines_horiz <- sprintf('>{\\huxb%s{%.4g}}%s', hhline_colors_tex, horiz_b, hb_chars)
   dim(hhlines_horiz) <- dim(horiz_b)
   no_hborder_in_row <- hb_maxes[row(hhlines_horiz)] == 0
   hhlines_horiz[no_hborder_in_row] <- ''
@@ -154,10 +158,10 @@ build_tabular <- function(ht) {
   vert_bc[no_lrb_b] <- rbind(NA, cbc$vert)[no_lrb_b] # vert border color above
   # if it's still NA, no border on any side had a defined colour
   # At the moment we reset to black. Otherwise maybe we "bleed" along the row from much earlier.
+  vert_bc_na <- is.na(vert_bc)
   vert_bc <- format_color(vert_bc, default = 'black')
   vert_bc_tex <- rep('', length(vert_bc))
-  vert_bc_tex <- sprintf('\\arrayrulecolor[RGB]{%s}', vert_bc)
-
+  vert_bc_tex[! vert_bc_na] <- sprintf('[%s]', vert_bc[! vert_bc_na])
   hhlines_vert <- rep('', length(vert_b))
   has_vert_b <- vert_b > 0
 
@@ -172,7 +176,7 @@ build_tabular <- function(ht) {
   vert_bchars[! vert_bs == 'double' & ! has_horiz_b]  <- '|'
   vert_bchars[vert_bs == 'double' & ! has_horiz_b]    <- '||'
 
-  hhlines_vert[has_vert_b] <- sprintf('>{%s\\global\\arrayrulewidth=%spt}%s',
+  hhlines_vert[has_vert_b] <- sprintf('>{\\huxb%s{%.4g}}%s',
         vert_bc_tex[has_vert_b],
         vert_b[has_vert_b],
         vert_bchars[has_vert_b])
@@ -354,6 +358,7 @@ build_tabular <- function(ht) {
   multirow_blm_tex <- sprintf('\\multirow{-%s}{*}[%s]{', rowspan_blm, vert_adj_blm)
   multirow[blm_idx] <- multirow_blm_tex
 
+  ## FINAL ASSEMBLY----------------
   closer <- function (x) ifelse(nchar(x) > 0, '}', '')
 
   contents <- paste0(
@@ -391,7 +396,11 @@ build_tabular <- function(ht) {
   colspec_top <- paste0(colspec_top, collapse = ' ')
   colspec_top <- sprintf('{%s}\n', colspec_top)
 
-  res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
+  commands <- '
+    \\providecommand{\\huxb}[2][0,0,0]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
+  '
+  # use like \huxb[color]{width} in >{} sections
+  res <- paste0(commands, tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
   return(res)
 }
 
