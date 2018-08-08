@@ -40,7 +40,9 @@ or \code{tlmgr install} directly.
 \examples{
 report_latex_dependencies()
 
+\dontrun{
 check_latex_dependencies()
+}
 
 \dontrun{
   install_latex_dependencies()

@@ -87,7 +87,6 @@ test_that('install/report_latex_dependencies run', {
 
 test_that('check_latex_dependencies runs correctly', {
   skip_if_not_installed('tinytex')
-  skip_on_appveyor() # has no TeX but does install tinytex
 
   with_mock(
     `tinytex::tl_pkgs` = function (...) return(character(0)), {

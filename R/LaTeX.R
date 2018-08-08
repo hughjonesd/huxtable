@@ -138,7 +138,9 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 #' @export
 #' @return `check_latex_dependencies()` returns `TRUE` or `FALSE`.
 #' @examples
+#' \dontrun{
 #' check_latex_dependencies()
+#' }
 check_latex_dependencies <- function (quiet = FALSE) {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), 'name')
