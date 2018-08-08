@@ -213,6 +213,21 @@ test_that('collapsed_border_colors works', {
 })
 
 
+test_that('collapsed_border_styles works', {
+  ht <- hux(a = 1:2, b = 1:2)
+  left_border_style(ht)[1, 2] <- 'dashed'
+  top_border_style(ht)[2, 1] <- 'double'
+  cbs <- huxtable:::collapsed_border_styles(ht)
+  expect_type(cbs, 'list')
+  vert <- matrix('solid', 2, 3)
+  vert[1, 2] <- 'dashed'
+  horiz <- matrix('solid', 3, 2)
+  horiz[2, 1] <- 'double'
+  expect_equivalent(cbs$vert, vert)
+  expect_equivalent(cbs$horiz, horiz)
+})
+
+
 test_that('align, position and caption_pos change "centre" to "center"', {
   ht <- hux(1)
   align(ht) <- 'centre'
