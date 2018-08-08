@@ -9,8 +9,8 @@ merge_cells(ht, row, col)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier. See \link{rowspecs} for details. Note that both \code{row} and \code{col} must be
-specified.}
+\item{row}{A row specifier. See \code{\link{rowspecs}} for details. Only the minimum and maximum
+of \code{row} and \code{col} are used.}
 
 \item{col}{A column specifier.}
 }
@@ -24,4 +24,9 @@ Merge ranges of cells
 \code{merge_cells(ht, c(min_row, max_row), c(min_col, max_col))} is equivalent to\preformatted{  colspan(ht)[min_row, min_col] <- max_col - min_col + 1
   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
 }
+}
+\examples{
+ht <- hux(a = 1:3, b = 1:3)
+ht <- set_all_borders(ht, 1)
+merge_cells(ht, 1:2, 1:2)
 }
