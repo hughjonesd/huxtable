@@ -219,6 +219,26 @@ test_that('set_outer_borders() works with non-standard/empty position arguments'
 })
 
 
+test_that('merge_cells() works as expected', {
+  ht <- hux(a = 1:3, b = 1:3)
+  expect_silent(ht2 <- merge_cells(ht, 1, 1:2))
+  expect_silent(ht2 <- merge_cells(ht2, 2:3, 1))
+  expect_equivalent(colspan(ht2), matrix(c(2, 1, 1, 1, 1, 1), 3, 2))
+  expect_equivalent(rowspan(ht2), matrix(c(1, 2, 1, 1, 1, 1), 3, 2))
+
+  expect_silent(ht3 <- merge_cells(ht, 1, everywhere))
+  expect_equivalent(colspan(ht3), matrix(c(2, 1, 1, 1, 1, 1), 3, 2))
+
+  expect_silent(ht4 <- merge_cells(ht, 1:2, 1:2))
+  expect_equivalent(colspan(ht4), matrix(c(2, 1, 1, 1, 1, 1), 3, 2))
+  expect_equivalent(rowspan(ht4), matrix(c(2, 1, 1, 1, 1, 1), 3, 2))
+
+  expect_silent(ht5 <- merge_cells(ht, c(1, 3), 1))
+  expect_equivalent(rowspan(ht5), matrix(c(3, 1, 1, 1, 1, 1), 3, 2))
+
+})
+
+
 test_that('where() works as expected', {
   dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
   expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))

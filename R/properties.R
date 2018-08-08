@@ -372,6 +372,38 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
 )
 
 
+#' Merge ranges of cells
+#'
+#' @param ht A huxtable.
+#' @param row A row specifier. See [rowspecs] for details. Note that both `row` and `col` must be
+#'   specified.
+#' @param col A column specifier.
+#'
+#' @details
+#' `merge_cells(ht, c(min_row, max_row), c(min_col, max_col))` is equivalent to
+#' ```
+#'   colspan(ht)[min_row, min_col] <- max_col - min_col + 1
+#'   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
+#' ```
+#' @return The `ht` object.
+#'
+#' @export
+#'
+#' @examples
+merge_cells <- function (ht, row, col) {
+  assert_that(is_huxtable(ht))
+  row <- get_rc_spec(ht, row, 1)
+  col <- get_rc_spec(ht, col, 1)
+  mr <- min(row)
+  mc <- min(col)
+  cs <- diff(range(col)) + 1
+  rs <- diff(range(row)) + 1
+  colspan(ht)[mr, mc] <- cs
+  rowspan(ht)[mr, mc] <- rs
+
+  ht
+}
+
 check_span_shadows <- function (ht, rc, value) {
   value[is.na(value)] <- 1L
   dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
