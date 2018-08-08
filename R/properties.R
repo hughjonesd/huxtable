@@ -375,8 +375,8 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
 #' Merge ranges of cells
 #'
 #' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details. Note that both `row` and `col` must be
-#'   specified.
+#' @param row A row specifier. See \code{\link{rowspecs}} for details. Both `row` and `col` must be
+#'   specified; only the minimum and maximum are used.
 #' @param col A column specifier.
 #'
 #' @details
@@ -516,16 +516,7 @@ make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
 #' set_all_borders(ht, 1:3, 1:2, 1)
 #' @template border-warning
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
-  call <- sys.call()
-  border_calls <- list(quote(huxtable::set_top_border), quote(huxtable::set_bottom_border),
-        quote(huxtable::set_left_border), quote(huxtable::set_right_border))
-  for (bc in border_calls) {
-    call[[1]] <- bc
-    call[[2]] <- quote(ht)
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
+  recall_ltrb(ht, 'border')
 }
 
 
@@ -553,6 +544,8 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
 #' set_outer_borders(ht, 1:2, 1:2, 1)
 #'
 set_outer_borders <- function(ht, row, col, value) {
+  assert_that(is_huxtable(ht))
+
   if (missing(col) && missing(value)) {
     value <- row
     row <- seq_len(nrow(ht))
@@ -663,16 +656,7 @@ make_getter_setters('bottom_border_color', 'cell')
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_border_colors(ht, 'red')
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
-  call <- sys.call()
-  border_color_calls <- list(quote(huxtable::set_top_border_color), quote(huxtable::set_bottom_border_color),
-    quote(huxtable::set_left_border_color), quote(huxtable::set_right_border_color))
-  for (bcc in border_color_calls) {
-    call[[1]] <- bcc
-    call[[2]] <- quote(ht)
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
+  recall_ltrb(ht, 'border_color')
 }
 
 
@@ -781,17 +765,7 @@ get_all_border_styles <- function(ht, row, col) {
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' ht <- set_all_border_styles(ht, 'double')
 set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
-  call <- sys.call()
-  border_style_calls <- list(
-        quote(huxtable::set_top_border_style), quote(huxtable::set_bottom_border_style),
-        quote(huxtable::set_left_border_style), quote(huxtable::set_right_border_style))
-  for (bcc in border_style_calls) {
-    call[[1]] <- bcc
-    call[[2]] <- quote(ht)
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
+  recall_ltrb(ht, 'border_style')
 }
 
 
@@ -857,16 +831,7 @@ NULL
 #' right_padding(ht)
 #' @export
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
-  call <- sys.call()
-  padding_calls <- list(quote(huxtable::set_top_padding), quote(huxtable::set_bottom_padding),
-    quote(huxtable::set_left_padding), quote(huxtable::set_right_padding))
-  for (pc in padding_calls) {
-    call[[1]] <- pc
-    call[[2]] <- quote(ht)
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
+  recall_ltrb(ht, 'padding')
 }
 
 

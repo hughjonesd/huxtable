@@ -21,6 +21,19 @@ blank_where <- function (text, cond) {
 }
 
 
+recall_ltrb <- function(ht, prop) {
+  call <- sys.call(sys.parent(1))
+  call_names <- parse(text = paste0('huxtable::set_', c('left_', 'top_', 'right_', 'bottom_'), prop))
+  for (cn in call_names) {
+    call[[1]] <- cn
+    call[[2]] <- quote(ht)
+    ht <- eval(call, list(ht = ht), parent.frame(2L)) # = sys.frame(sys.parent(1)) i.e. caller of orig
+  }
+
+  ht
+}
+
+
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
 register_s3_method <- function (pkg, generic, class = 'huxtable') {
   assert_that(is.string(pkg), is.string(generic))
@@ -99,6 +112,7 @@ collapsed_border_colors <- function (ht) {
   result[c('vert', 'horiz')]
 }
 
+
 # returns two rows(+1),cols(+1) arrays of border styles. Non-"solid" styles have priority;
 # if two styles are non-"solid" then right and top has priority
 # A border of 0 can still have a style.
@@ -111,7 +125,6 @@ collapsed_border_styles <- function (ht) {
 
   result[c('vert', 'horiz')]
 }
-
 
 
 do_collapse <- function(ht, prop_fun, default) {
@@ -143,6 +156,7 @@ do_collapse <- function(ht, prop_fun, default) {
 
   return(res)
 }
+
 
 # find each numeric substring, and replace it:
 format_numbers <- function (string, num_fmt) {
