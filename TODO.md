@@ -49,9 +49,6 @@ TODO
     format(unit, context) where context might be 'HTML-width' or something
   - could still use characters ("5pt", "10%") in API, they would be internally converted
 
-* manual vertical/horizontal adjustment in LaTeX?
-
-  
 * collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
 
 * Rename clean_contents and export it? 
