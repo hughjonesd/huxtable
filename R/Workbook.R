@@ -92,8 +92,13 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     border_colors <- get_all_border_colors(ht, drow, dcol)
     border_colors <- unlist(border_colors[border_char])
     border_colors[is.na(border_colors)] <- getOption('openxlsx.borderColour', 'black')
-    border_style <- cut(unlist(borders), c(-1, 0, 0.5, 1, 2, Inf), labels = FALSE)
-    border_style <- c("none", "hair", "thin", "medium", "thick")[border_style]
+    border_styles <- get_all_border_styles(ht, drow, dcol)
+    border_styles <- unlist(border_styles[border_char])
+    border_styles[border_styles == "solid"] <- as.character(cut(
+            unlist(borders[border_styles == "solid"]),
+            c(-1, 0, 0.5, 1, 2, Inf),
+            labels = c("none", "hair", "thin", "medium", "thick")
+          ))
     va           <- valign(ht)[drow, dcol]
     style <- openxlsx::createStyle(
             fontName       = null_args$ft,
@@ -102,7 +107,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
             numFmt         = num_fmt,
             border         = border_char,
             borderColour   = border_colors,
-            borderStyle    = border_style,
+            borderStyle    = border_styles,
             fgFill         = null_args$bgc, # bgFill is "for conditional formatting only"
             halign         = real_align(ht)[drow, dcol],
             valign         = switch(va, middle = 'center', va),

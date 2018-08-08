@@ -4,8 +4,6 @@ TODO
 
 (5.0) means API change, consider for version 5.0
 
-* `quick_tex` command? But why not just use `print_latex`? Just for the self-contained document?
-
 * Find a way to setup some LaTeX commands of your own (using latex_dependency?)
   - then you can have a short version of vrule and hrule for borders
   - like renewcommand but local? or OK if the command is defined for the first time?
@@ -13,6 +11,10 @@ TODO
     defined, so you want to use unique command names
     
 * Consider move to tabu package? Looks easy for dashed lines...
+
+* border styles:
+  - Use arydshln in LaTeX?
+  - Bug: single horizontal borders "start" too late after double vertical border joins thems
 
 * `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
 
@@ -49,11 +51,7 @@ TODO
 
 * manual vertical/horizontal adjustment in LaTeX?
 
-* double lines? For horizontal you just write = instead of -
-  For vertical lines || or #
-  See https://tex.stackexchange.com/questions/152101/how-to-draw-two-hline-and-two-vertical-line
-  and https://tex.stackexchange.com/questions/130818/how-to-draw-a-double-hline-in-a-table-without-interrupting-vertical-lines
-
+  
 * collapsed_border_xxx should return left, right, top, bottom rather than vert, horiz?
 
 * Rename clean_contents and export it? 

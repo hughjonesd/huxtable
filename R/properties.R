@@ -6,6 +6,7 @@ NULL
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
   'top_border_color', 'left_border_color', 'right_border_color', 'bottom_border_color',
+  'top_border_style', 'left_border_style', 'right_border_style', 'bottom_border_style',
   'top_padding', 'left_padding', 'right_padding', 'bottom_padding', 'wrap',
   'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
   'font', 'pad_decimal')
@@ -49,6 +50,10 @@ huxtable_env$huxtable_default_attrs <- list(
         right_border_color  = NA,
         top_border_color    = NA,
         bottom_border_color = NA,
+        left_border_style   = 'solid',
+        right_border_style  = 'solid',
+        top_border_style    = 'solid',
+        bottom_border_style = 'solid',
         left_padding        = 4,
         right_padding       = 4,
         top_padding         = 4,
@@ -646,6 +651,115 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
     top    = top_border_color(ht)[row, col, drop = drop],
     bottom = bottom_border_color(ht)[row, col, drop = drop]
   )
+}
+
+
+#' @template getset-cell
+#' @templateVar attr_name left_border_style
+#' @templateVar attr_desc Border styles
+#' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
+#' @templateVar morealiases right_border_style top_border_style bottom_border_style
+#' @templateVar attr_val 'solid'
+#' @details
+#' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
+#' top borders take priority over bottom borders.
+#'
+#' Border styles only apply if the border width is greater than 0.
+#'
+#' @section Quirks:
+#'
+#' * In HTML, you will need to set a width of at least 3 to get a double border.
+#' * Only "solid" and "double" styles are currently implemented in LaTeX.
+#'
+#' @templateVar attr_val2 'double'
+#' @export left_border_style left_border_style<- set_left_border_style
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 3:1)
+#' ht <- set_all_borders(ht, 1)
+#' set_left_border_style(ht, 'double')
+#' set_left_border_style(ht, 1:2, 1, 'double')
+#' set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
+#' set_left_border_style(ht, where(ht == 1), 'double')
+#' @template border-warning
+#'
+NULL
+make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
+
+
+#' @name right_border_style
+#' @rdname left_border_style
+#' @return Similarly for the other functions.
+#' @usage
+#' right_border_style(ht)
+#' right_border_style(ht) <- value
+#' set_right_border_style(ht, row, col, value, byrow = FALSE)
+#' @export right_border_style right_border_style<- set_right_border_style
+NULL
+make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
+
+
+#' @name top_border_style
+#' @rdname left_border_style
+#' @usage
+#' top_border_style(ht)
+#' top_border_style(ht) <- value
+#' set_top_border_style(ht, row, col, value, byrow = FALSE)
+#' @export top_border_style top_border_style<- set_top_border_style
+NULL
+make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
+
+#' @name bottom_border_style
+#' @rdname left_border_style
+#' @usage
+#' bottom_border_style(ht)
+#' bottom_border_style(ht) <- value
+#' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
+#' @export bottom_border_style bottom_border_style<- set_bottom_border_style
+NULL
+make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
+      'dotted'))
+
+
+get_all_border_styles <- function(ht, row, col) {
+  list(
+    left   = left_border_style(ht)[row, col],
+    right  = right_border_style(ht)[row, col],
+    top    = top_border_style(ht)[row, col],
+    bottom = bottom_border_style(ht)[row, col]
+  )
+}
+
+
+#' Set all border styles
+#'
+#' This is a convenience function which sets left, right, top and bottom border
+#' styles for the specified cells.
+#'
+#' @inheritParams left_border_style
+#'
+#' @return The modified huxtable.
+#' @seealso [left_border_style()]
+#'
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = 1:3)
+#' ht <- set_all_border_styles(ht, 'double')
+set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
+  call <- sys.call()
+  border_style_calls <- list(
+        quote(huxtable::set_top_border_style), quote(huxtable::set_bottom_border_style),
+        quote(huxtable::set_left_border_style), quote(huxtable::set_right_border_style))
+  for (bcc in border_style_calls) {
+    call[[1]] <- bcc
+    call[[2]] <- quote(ht)
+    ht <- eval(call, list(ht = ht), parent.frame())
+  }
+
+  ht
 }
 
 

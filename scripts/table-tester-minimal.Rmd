@@ -11,6 +11,7 @@ output:
 ```{r setup, echo = FALSE}
 
 library(huxtable)
+library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -34,18 +35,35 @@ long <- 'A rather long row of text which goes on...'
 
 
 ```{r}
-ht <- make()
-ht <- hux("My text") # really minimal
-# ht <- hux(a = c("Cell 1.1", "Cell 2.1"), b = c("Cell 1.2", "Cell 2.2"))
-# 
-# ht <- set_all_borders(ht, 1)
-# ht <- set_all_border_colors(ht, 'black')
-# right_border_color(ht) <- 'red'
-# left_border_color(ht) <- 'green'
-# colspan(ht)[1,1]<-2
-# ht
+# ht <- make()
+foo <- 1:6
+ht <- hux(a = foo, b = foo, d = foo, e = foo)
+# ht %>% set_all_borders(1) %>% set_top_border_style('dashed') %>% set_left_border_style('dashed')
+ht %>% 
+      set_all_borders(1) %>% 
+      set_left_border_color('red') %>% 
+      set_right_border_color('red') %>% 
+      set_bottom_border_style(1, everywhere, 'double') %>% 
+      set_bottom_border_style(2, everywhere, 'solid')  %>% 
+      set_bottom_border(3, 1, 0)              %>%
+      set_top_border(4, 1, 0)                 %>% 
+      set_left_border_style(everywhere, c(1,4), 'double')   %>% 
+      set_left_border_style(everywhere, 2, 'solid')    %>% 
+      set_left_border(everywhere, 3, 0)                %>% 
+      set_right_border(everywhere, 2, 0) %>% 
+      set_bottom_border_style(6, everywhere, 'double') %>% 
+      set_bottom_border(5, 4, 0) %>% 
+      set_top_border(6, 4, 0) %>% 
+      set_bottom_border(4, 3, 0) %>% 
+      set_top_border(5, 3, 0) -> ht
 
-hux_logo()
+ht[4:5, 3:4]
 
 
+# hux(a = 1:2, b = 1:2) %>% 
+#         set_all_borders(1) %>% 
+#        set_top_border(1, 1, 0) %>% 
+#        set_top_border(2, 2, 0) %>% 
+#         set_bottom_border(1, 2, 0)
+  
 ```

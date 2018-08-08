@@ -168,11 +168,12 @@ test_that('set_all_* functions work when huxtable is not attached', {
   expect_silent(ht2 <- huxtable::set_all_borders(ht, 1))
   expect_silent(ht3 <- huxtable::set_all_border_colors(ht, 'red'))
   expect_silent(ht4 <- huxtable::set_all_padding(ht, 1))
+  expect_silent(ht5 <- huxtable::set_all_border_styles(ht, 'double'))
   library(huxtable) # we reattach before these tests, or we have problems with unavailable methods
   expect_equivalent(top_border(ht2), matrix(1, 2, 2))
   expect_equivalent(top_border_color(ht3), matrix('red', 2, 2))
   expect_equivalent(top_padding(ht4), matrix(1, 2, 2))
-
+  expect_equivalent(top_border_style(ht5), matrix('double', 2, 2))
 })
 
 

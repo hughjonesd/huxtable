@@ -33,6 +33,7 @@ as_FlexTable <- function(x, ...) {
 #' * Rotation of 0, 90 or 270 is supported.
 #' * Non-numeric column widths and row heights are not supported.
 #' * Table height, wrap, captions and table position are not supported.
+#' * Border style "double" is not supported and becomes "solid".
 #
 #'
 #' @section Challenge:
@@ -89,14 +90,21 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
             padding.right  = right_padding(x)[drow, dcol],
             padding.top    = top_padding(x)[drow, dcol]
           )
-    bcols <- get_all_border_colors(x, drow, dcol)
+    bnames <- c('top', 'left', 'bottom', 'right')
     bdrs  <- get_all_borders(x, drow, dcol)
+    bcols <- get_all_border_colors(x, drow, dcol)
+    bst   <- get_all_border_styles(x, drow, dcol)
+    bst[bst == 'double'] <- 'solid'
     bcols[is.na(bcols)] <- 'black'
+    fp_borders <- lapply(bnames, function (x)
+      officer::fp_border(color = bcols[[x]], width = bdrs[[x]], style = bst[[x]])
+    )
+    names(fp_borders) <- bnames
     ft <- flextable::border(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
-            border.bottom = officer::fp_border(color = bcols$bottom, width = bdrs$bottom),
-            border.left   = officer::fp_border(color = bcols$left,   width = bdrs$left),
-            border.right  = officer::fp_border(color = bcols$right,  width = bdrs$right),
-            border.top    = officer::fp_border(color = bcols$top,    width = bdrs$top)
+            border.bottom = fp_borders$bottom,
+            border.left   = fp_borders$left,
+            border.right  = fp_borders$right,
+            border.top    = fp_borders$top
           )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]

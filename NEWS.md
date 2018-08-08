@@ -9,6 +9,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 * New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
+* New `left/right/top/bottom_border_style` to set "solid", "double", "dotted" or "dashed" borders.
+  (At present, LaTeX only allows "solid" or "double".)
 
 # huxtable 4.1.0
 
