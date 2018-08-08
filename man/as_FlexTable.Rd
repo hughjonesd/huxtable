@@ -37,6 +37,7 @@ Properties are supported, with the following exceptions:
 \item Rotation of 0, 90 or 270 is supported.
 \item Non-numeric column widths and row heights are not supported.
 \item Table height, wrap, captions and table position are not supported.
+\item Border style "double" is not supported and becomes "solid".
 }
 }
 \section{Challenge}{

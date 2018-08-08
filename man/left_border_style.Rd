@@ -56,9 +56,16 @@ Functions to get or set the \emph{border styles} property of huxtable cells.
 Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 top borders take priority over bottom borders.
 
-Border styles only apply if the border width is greater than 0. In HTML, you will need to set
-a width of at least 3 to get a double border.
+Border styles only apply if the border width is greater than 0.
 }
+\section{Quirks}{
+
+\itemize{
+\item In HTML, you will need to set a width of at least 3 to get a double border.
+\item Only "solid" and "double" styles are currently implemented in LaTeX.
+}
+}
+
 \section{Note}{
 
 huxtable currently sets borders on specific cells. This can lead to surprising behaviour when

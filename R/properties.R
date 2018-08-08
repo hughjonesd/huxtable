@@ -664,8 +664,12 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 #' top borders take priority over bottom borders.
 #'
-#' Border styles only apply if the border width is greater than 0. In HTML, you will need to set
-#' a width of at least 3 to get a double border.
+#' Border styles only apply if the border width is greater than 0.
+#'
+#' @section Quirks:
+#'
+#' * In HTML, you will need to set a width of at least 3 to get a double border.
+#' * Only "solid" and "double" styles are currently implemented in LaTeX.
 #'
 #' @templateVar attr_val2 'double'
 #' @export left_border_style left_border_style<- set_left_border_style
@@ -717,6 +721,7 @@ make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'doubl
 NULL
 make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
       'dotted'))
+
 
 get_all_border_styles <- function(ht, row, col) {
   list(
