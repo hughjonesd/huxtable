@@ -185,83 +185,6 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 }
 
 
-#' Default huxtable properties
-#'
-#' Defaults are used for new huxtables, and also when a property is set to `NA`.
-#'
-#' @param ... Properties specified by name, or a single named list.
-#'
-#' @return For `set_default_properties`, a list of the previous property values, invisibly.
-#' @details
-#' Note that `autoformat = TRUE` in [huxtable()] overrides some defaults.
-#' @export
-#' @seealso Options for autoformat in [huxtable-options].
-#' @examples
-#' old <- set_default_properties(left_border = 1)
-#' hux(a = 1:2, b = 1:2)
-#' set_default_properties(old)
-set_default_properties <- function(...) {
-  defaults <- list(...)
-  if (is.list(defaults[[1]]) && is.null(names(defaults))) defaults <- defaults[[1]]
-
-  if (length(unrec <- setdiff(names(defaults), names(huxtable_env$huxtable_default_attrs))) > 0)
-        stop('Unrecognized huxtable property name(s): ', paste(unrec, collapse = ', '),
-          '; to see all names, use get_default_properties()')
-  old <- huxtable_env$huxtable_default_attrs[names(defaults)]
-  huxtable_env$huxtable_default_attrs[names(defaults)] <- defaults
-
-  invisible(old)
-}
-
-#' Get default huxtable properties
-#'
-#' @param names Vector of property names. If `NULL`, all properties are returned.
-#'
-#' @return For `get_default_properties`, a list of the current defaults.
-#' @export
-#'
-#' @examples
-#' get_default_properties('bold')
-#' @rdname set_default_properties
-get_default_properties <- function (names = NULL) {
-  names <- names %||% names(huxtable_env$huxtable_default_attrs)
-  if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
-      'Unrecognized property name(s): ', paste(unrec, collapse = ', '),
-        '; to see all names, use get_default_properties()')
-  huxtable_env$huxtable_default_attrs[names]
-}
-
-#' Set multiple cell properties
-#'
-#' @param ht A huxtable.
-#' @param row A row specification.
-#' @param col A column specification.
-#' @param ... Named list of cell properties.
-#'
-#' @return The modified huxtable object.
-#' @export
-#'
-#' @examples
-#' ht <- hux(a = 1:3, b = 1:3)
-#' ht <- set_cell_properties(ht, 1, 1, italic = TRUE, text_color = 'red')
-#' text_color(ht)
-#' ht
-set_cell_properties <- function (ht, row, col, ...) {
-  props <- list(...)
-  if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
-        huxtable_cell_attrs), collapse = ', '))
-  call <- match.call(expand.dots = FALSE)
-  call[['...']] <- NULL
-  for (prop_name in names(props)) {
-    call[[1]] <- as.symbol(paste0('set_', prop_name))
-    call$value <- props[[prop_name]]
-    ht <- eval(call, list(ht = ht), parent.frame())
-  }
-
-  ht
-}
-
-
 #' @template getset-cell
 #' @templateVar attr_name valign
 #' @templateVar attr_desc Vertical alignment
@@ -372,52 +295,6 @@ make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
 )
 
 
-#' Merge ranges of cells
-#'
-#' @param ht A huxtable.
-#' @param row A row specifier. See \code{\link{rowspecs}} for details. Only the minimum and maximum
-#' of `row` and `col` are used.
-#' @param col A column specifier.
-#'
-#' @details
-#' `merge_cells(ht, c(min_row, max_row), c(min_col, max_col))` is equivalent to
-#' ```
-#'   colspan(ht)[min_row, min_col] <- max_col - min_col + 1
-#'   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
-#' ```
-#' @return The `ht` object.
-#'
-#' @export
-#'
-#' @examples
-#' ht <- hux(a = 1:3, b = 1:3)
-#' ht <- set_all_borders(ht, 1)
-#' merge_cells(ht, 1:2, 1:2)
-merge_cells <- function (ht, row, col) {
-  assert_that(is_huxtable(ht))
-
-  if (missing(col)) {
-    if (! is.matrix(row)) stop(
-          'No columns specified, but `row` argument did not evaluate to a matrix')
-    # 2-matrix of row, col vectors
-    col <- seq(min(row[, 2]), max(row[, 2]))
-    row <- seq(min(row[, 1]), max(row[, 1]))
-  }
-  row <- get_rc_spec(ht, row, 1)
-  col <- get_rc_spec(ht, col, 2)
-  if (is.logical(row)) row <- which(row)
-  if (is.logical(col)) col <- which(col)
-
-  mr <- min(row)
-  mc <- min(col)
-  cs <- diff(range(col)) + 1
-  rs <- diff(range(row)) + 1
-  colspan(ht)[mr, mc] <- cs
-  rowspan(ht)[mr, mc] <- rs
-
-  ht
-}
-
 check_span_shadows <- function (ht, rc, value) {
   value[is.na(value)] <- 1L
   dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
@@ -479,7 +356,8 @@ make_getter_setters('text_color', 'cell')
 #' @template border-warning
 #' @export left_border left_border<- set_left_border
 NULL
-make_getter_setters('left_border', 'cell', check_fun = is.numeric)
+for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_setters(val, 'cell',
+      check_fun = is.numeric)
 
 
 #' @name right_border
@@ -491,7 +369,6 @@ make_getter_setters('left_border', 'cell', check_fun = is.numeric)
 #' set_right_border(ht, row, col, value, byrow = FALSE)
 #' @export right_border right_border<- set_right_border
 NULL
-make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 
 
 #' @name top_border
@@ -502,7 +379,7 @@ make_getter_setters('right_border', 'cell', check_fun = is.numeric)
 #' set_top_border(ht, row, col, value, byrow = FALSE)
 #' @export top_border top_border<- set_top_border
 NULL
-make_getter_setters('top_border', 'cell', check_fun = is.numeric)
+
 
 #' @name bottom_border
 #' @rdname left_border
@@ -512,87 +389,6 @@ make_getter_setters('top_border', 'cell', check_fun = is.numeric)
 #' set_bottom_border(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border bottom_border<- set_bottom_border
 NULL
-make_getter_setters('bottom_border', 'cell', check_fun = is.numeric)
-
-#' Set all borders
-#'
-#' This is a convenience function which sets left, right, top and bottom borders
-#' for the specified cells.
-#'
-#' @inheritParams left_border
-#'
-#' @return The modified huxtable.
-#' @export
-#'
-#' @seealso [left_border()], [set_outer_borders()]
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' set_all_borders(ht, 1:3, 1:2, 1)
-#' @template border-warning
-set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'border')
-}
-
-
-#' Set outer borders round a rectangle of cells
-#'
-#' This is a convenience function to set a border round the top,
-#' bottom, left and right of a group of cells.
-#'
-#' @param ht A huxtable
-#' @param row A row specifier. See [rowspecs()] for details.
-#' @param col A column specifier.
-#' @param value A numeric value for the border width. Set to 0 for no border.
-#'
-#' @return The modified huxtable.
-#' @export
-#'
-#' @seealso [left_border()], [set_all_borders()]
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' set_outer_borders(ht, 1)
-#' set_outer_borders(ht, 2:3, 1:2, 1)
-#'
-#' # Problems with colspan:
-#' rowspan(ht)[2, 1] <- 2
-#' set_outer_borders(ht, 1:2, 1:2, 1)
-#'
-set_outer_borders <- function(ht, row, col, value) {
-  assert_that(is_huxtable(ht))
-
-  if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else if (missing(value)) {
-    value <- col
-    if (!is.matrix(row)) stop("No columns specified, but `row` argument did not evaluate to a matrix")
-    # row is a 2-matrix of row, col vectors;
-    col <- seq(min(row[, 2]), max(row[, 2]))
-    row <- seq(min(row[, 1]), max(row[, 1]))
-  }
-  row <- get_rc_spec(ht, row, 1)
-  col <- get_rc_spec(ht, col, 2)
-  if (is.logical(row)) row <- which(row)
-  if (is.logical(col)) col <- which(col)
-
-  left_border(ht)[row, min(col)]    <- value
-  right_border(ht)[row, max(col)]   <- value
-  top_border(ht)[min(row), col]     <- value
-  bottom_border(ht)[max(row), col]  <- value
-
-  ht
-}
-
-
-get_all_borders <- function(ht, row, col) {
-  list(
-    left   = left_border(ht)[row, col],
-    right  = right_border(ht)[row, col],
-    top    = top_border(ht)[row, col],
-    bottom = bottom_border(ht)[row, col]
-  )
-}
 
 
 #' @template getset-cell
@@ -618,7 +414,8 @@ get_all_borders <- function(ht, row, col) {
 #' @template border-warning
 #'
 NULL
-make_getter_setters('left_border_color', 'cell')
+for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_getter_setters(val,
+  'cell')
 
 
 #' @name right_border_color
@@ -630,7 +427,6 @@ make_getter_setters('left_border_color', 'cell')
 #' set_right_border_color(ht, row, col, value, byrow = FALSE)
 #' @export right_border_color right_border_color<- set_right_border_color
 NULL
-make_getter_setters('right_border_color', 'cell')
 
 
 #' @name top_border_color
@@ -641,7 +437,7 @@ make_getter_setters('right_border_color', 'cell')
 #' set_top_border_color(ht, row, col, value, byrow = FALSE)
 #' @export top_border_color top_border_color<- set_top_border_color
 NULL
-make_getter_setters('top_border_color', 'cell')
+
 
 #' @name bottom_border_color
 #' @rdname left_border_color
@@ -651,37 +447,6 @@ make_getter_setters('top_border_color', 'cell')
 #' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border_color bottom_border_color<- set_bottom_border_color
 NULL
-make_getter_setters('bottom_border_color', 'cell')
-
-
-#' Set all border colors
-#'
-#' This is a convenience function which sets left, right, top and bottom border
-#' colors for the specified cells.
-#'
-#' @inheritParams left_border_color
-#'
-#' @return The modified huxtable.
-#' @seealso [left_border_color()]
-#'
-#' @export
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_border_colors(ht, 'red')
-set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'border_color')
-}
-
-
-get_all_border_colors <- function(ht, row, col, drop = TRUE) {
-  list(
-    left   = left_border_color(ht)[row, col, drop = drop],
-    right  = right_border_color(ht)[row, col, drop = drop],
-    top    = top_border_color(ht)[row, col, drop = drop],
-    bottom = bottom_border_color(ht)[row, col, drop = drop]
-  )
-}
 
 
 #' @template getset-cell
@@ -713,8 +478,8 @@ get_all_border_colors <- function(ht, row, col, drop = TRUE) {
 #' @template border-warning
 #'
 NULL
-make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
-      'dotted'))
+for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_getter_setters(val,
+      'cell', check_values = c('solid', 'double', 'dashed', 'dotted'))
 
 
 #' @name right_border_style
@@ -726,8 +491,6 @@ make_getter_setters('left_border_style', 'cell', check_values = c('solid', 'doub
 #' set_right_border_style(ht, row, col, value, byrow = FALSE)
 #' @export right_border_style right_border_style<- set_right_border_style
 NULL
-make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
-      'dotted'))
 
 
 #' @name top_border_style
@@ -738,8 +501,7 @@ make_getter_setters('right_border_style', 'cell', check_values = c('solid', 'dou
 #' set_top_border_style(ht, row, col, value, byrow = FALSE)
 #' @export top_border_style top_border_style<- set_top_border_style
 NULL
-make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
-      'dotted'))
+
 
 #' @name bottom_border_style
 #' @rdname left_border_style
@@ -749,38 +511,6 @@ make_getter_setters('top_border_style', 'cell', check_values = c('solid', 'doubl
 #' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 #' @export bottom_border_style bottom_border_style<- set_bottom_border_style
 NULL
-make_getter_setters('bottom_border_style', 'cell', check_values = c('solid', 'double', 'dashed',
-      'dotted'))
-
-
-get_all_border_styles <- function(ht, row, col) {
-  list(
-    left   = left_border_style(ht)[row, col],
-    right  = right_border_style(ht)[row, col],
-    top    = top_border_style(ht)[row, col],
-    bottom = bottom_border_style(ht)[row, col]
-  )
-}
-
-
-#' Set all border styles
-#'
-#' This is a convenience function which sets left, right, top and bottom border
-#' styles for the specified cells.
-#'
-#' @inheritParams left_border_style
-#'
-#' @return The modified huxtable.
-#' @seealso [left_border_style()]
-#'
-#' @export
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_border_styles(ht, 'double')
-set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'border_style')
-}
 
 
 #' @name left_padding
@@ -809,6 +539,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' @export right_padding right_padding<- set_right_padding
 NULL
 
+
 #' @name bottom_padding
 #' @rdname left_padding
 #' @usage
@@ -818,6 +549,7 @@ NULL
 #' @export bottom_padding bottom_padding<- set_bottom_padding
 NULL
 
+
 #' @name top_padding
 #' @rdname left_padding
 #' @usage
@@ -826,28 +558,6 @@ NULL
 #' set_top_padding(ht, row, col, value, byrow = FALSE)
 #' @export top_padding top_padding<- set_top_padding
 NULL
-
-
-#' @name set_all_padding
-#'
-#' @rdname left_padding
-#' @usage
-#' set_all_padding(ht, row, col, value, byrow = FALSE)
-#'
-#' @details
-#' `set_all_padding` is a convenience function which sets left, right, top and bottom cell padding
-#' for the specified cells.
-#'
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
-#' left_padding(ht)
-#' right_padding(ht)
-#' @export
-set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'padding')
-}
-
 
 
 #' @template getset-cell
@@ -1028,13 +738,13 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric)
 NULL
 make_getter_setters('number_format', 'cell')
 
+
 # override the default
 `number_format<-.huxtable` <- function(ht, value) {
   stopifnot(all(sapply(value, function (x) is.numeric(x) || is.character(x) || is.function(x) || is.na(x) )))
   attr(ht, 'number_format')[] <- value
   ht
 }
-
 
 
 #' @aliases pad_decimal<- set_pad_decimal
