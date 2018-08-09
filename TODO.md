@@ -4,7 +4,7 @@ TODO
 
 (5.0) means API change, consider for version 5.0
 
-* Consider move to tabu package? Looks easy for dashed lines...
+* Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
 * border styles:
   - Use arydshln in LaTeX?
@@ -14,7 +14,9 @@ TODO
 * Border API rework:
   - different set of commands
   - stored internally in vert/horiz arrays
-  - always precollapsed
+  - always precollapsed by definition
+
+* Don't set \cellcolor when background_color is NA
 
 * `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
 
@@ -130,6 +132,8 @@ Store borders & colors the way collapsed_borders reports them; override default 
     - try setting the width
   - my numbers have been formatted
     - use number_format
+  - LaTeX output isn't working
+    - have you tried `check_latex_dependencies`?
     
 * headers property?
   - header rows and columns could be addressed using 3 argument `set_` syntax; e.g. a headers() function returning a 
