@@ -18,12 +18,10 @@ TODO
 
 * `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
 
-* `merge_cells` as a different way to specify colspan/rowspan:
-  - `ht <- merge_cells(ht, rows, cols) with maybe some dplyr-like syntax for cols?
-  - warn if more than one cell has content (ncharw > 0), otherwise use content from that cell
-  - concealing which cell has the colspan could make it harder to target changes on to the
-    relevant cell - which suggests that such changes should actually "hit" if they affect any
-    cell in the merged range (5.0)
+* Changes to a shadowed cell should be redirected to the shadowing cell (5.0), or generally
+  affect the merged cell (e.g. borders will work for the relevant area, assuming they are not
+  between two merged cells)
+  - This fits with the "merge_cells" idea
 
 * manual vertical/horizontal adjustment in LaTeX?
   - doesn't seem possible in multicol
@@ -56,6 +54,9 @@ TODO
     cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
 
 * Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind? (5.0)
+
+* Could S4 classes work to cbind data frames? Probably not, or hella complex and requires
+  reworking internals: https://stackoverflow.com/questions/47967264/dispatch-of-rbind-and-cbind-for-a-data-frame
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default (5.0).
 

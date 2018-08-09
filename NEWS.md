@@ -8,10 +8,12 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Simplify LaTeX output using our own LaTeX commands.
 * Bugfix: LaTeX didn't compile when height and caption were both set.
 * Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
-* New `quick_pptx` function to print data frames and huxtables into Powerpoint.
-* New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
 * New `left/right/top/bottom_border_style` to set "solid", "double", "dotted" or "dashed" borders.
   (At present, LaTeX only allows "solid" or "double".)
+* New `merge_cells` function provides an alternative interface to `colspan` and `rowspan`.
+* New `quick_pptx` function to print data frames and huxtables into Powerpoint.
+* New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
+
 
 # huxtable 4.1.0
 
