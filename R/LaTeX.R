@@ -32,6 +32,7 @@ print_latex <- function (ht, ...) {
 #' print_latex(ht)
 to_latex <- function (ht, ...) UseMethod('to_latex')
 
+
 #' @export
 #' @rdname to_latex
 to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
@@ -290,6 +291,7 @@ build_tabular <- function(ht) {
   has_bg_color_lhdc <- ! is.na(bg_color_lhdc)
   bg_color_lhdc <- format_color(bg_color_lhdc)
   bg_color_lhdc <- sprintf('\\cellcolor[RGB]{%s}', bg_color_lhdc)
+  bg_color_lhdc[! has_bg_color_lhdc] <- '' # NAs don't have a \cellcolor instruction
   bg_color[left_idx] <- bg_color_lhdc
 
 
