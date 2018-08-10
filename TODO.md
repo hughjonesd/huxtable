@@ -5,7 +5,6 @@ TODO
 Must be before 4.2.0
 ====================
 
-* Fix collapse for HTML border styles, otherwise it is hard to use.
 
 Others
 ======
