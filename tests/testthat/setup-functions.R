@@ -1,4 +1,6 @@
 
+options(width = 80) # keeps to_screen examples unchanged
+
 example_code_for_topic <- function (fname) {
   path <- devtools::find_topic(fname)[1] # sometimes we get multiples!
 
