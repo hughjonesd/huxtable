@@ -11,12 +11,10 @@ TODO
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? But see next.
 
-* Border API rework:
+* Border API rework (5.0)
   - different set of commands
   - stored internally in vert/horiz arrays
   - always precollapsed by definition
-
-* Don't set \cellcolor when background_color is NA
 
 * `ascii_hux` which converts markdown-like markup into a table with borders and colspans?
 
