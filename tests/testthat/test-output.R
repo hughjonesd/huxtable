@@ -1,5 +1,5 @@
 
-context("Output")
+context("Printing to various formats")
 
 
 test_that('LaTeX output examples unchanged', {
@@ -20,9 +20,6 @@ test_that('HTML output examples unchanged', {
 test_that('Screen output examples unchanged', {
   test_ex_same('to_screen')
 })
-
-
-
 
 
 test_that('to_screen gives warning with colour if crayon not installed', {
@@ -143,4 +140,14 @@ test_that('set_print_method() works', {
   options(huxtable.print = 'print_html')
   expect_match(capture.output(print(ht)), '<table', fixed = TRUE, all = FALSE)
   options(oo)
+})
+
+
+test_that('HTML gives warnings for double borders not wide enough', {
+  ht <- hux(a = 1)
+  top_border(ht) <- 2
+  top_border_style(ht) <- 'double'
+  expect_warning(to_html(ht), 'double')
+  top_border(ht) <- 3
+  expect_silent(to_html(ht))
 })
