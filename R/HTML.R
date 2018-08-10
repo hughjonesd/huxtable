@@ -93,6 +93,9 @@ to_html.huxtable <- function(ht, ...) {
   # cb <- collapsed_borders(ht)
   borders    <- get_all_borders(ht)
   border_styles    <- get_all_border_styles(ht)
+  if (any(unlist(borders) > 0 & unlist(borders) < 3) & unlist(border_styles) == 'double') {
+    warning('border_style set to "double" but border less than 3 points')
+  }
   border_width <- sprintf(' border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;',
         border_styles$top, border_styles$right, border_styles$bottom, border_styles$left,
         borders$top, borders$right, borders$bottom, borders$left)
