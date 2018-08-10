@@ -2,6 +2,14 @@
 TODO
 ====
 
+Must be before 4.2.0
+====================
+
+* Fix collapse for HTML border styles, otherwise it is hard to use.
+
+Others
+======
+
 (5.0) means API change, consider for version 5.0
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
