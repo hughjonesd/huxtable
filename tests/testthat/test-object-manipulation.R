@@ -243,6 +243,21 @@ test_that('add_rows and add_columns work', {
 })
 
 
+test_that('add_columns and add_rows work with data frames', {
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
+  bold(ht) <- TRUE
+  dfr <- data.frame(a = 1:2, b = 1:2)
+  expect_silent(res <- add_rows(ht, dfr))
+  expect_equivalent(nrow(res), 4)
+  expect_equivalent(bold(res)[3, 1], TRUE)
+
+  dfr <- data.frame(c = 1:2, d = 1:2)
+  expect_silent(res <- add_columns(ht, dfr))
+  expect_equivalent(ncol(res), 4)
+  expect_equivalent(bold(res)[1, 3], TRUE)
+})
+
+
 test_that('Can add a column to a huxtable using standard replacement methods', {
   ht <- hux(a = 1:2, b = 1:2)
   expect_silent(ht$c <- 1:2)

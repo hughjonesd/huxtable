@@ -6,6 +6,144 @@
 NULL
 
 
+#' Insert one matrix into another.
+#'
+#' These functions combine two matrix-like objects and return the result.
+#'
+#' @param x A matrix-like object, e.g. a huxtable
+#' @param y Matrix or vector to be inserted into `x`
+#' @param after Row or column after which `y` is inserted. Can be 0. Can be a row or column name.
+#'   By default, inserts `y` after the end of `x`.
+#' @param ... Arguments passed to [rbind()] or [cbind()]
+#'
+#' @return For `add_rows`, the result of `rbind(x[1:after,], y, x[-(1:after),]`. For `add_columns`
+#'   the same but with columns. `after = 0` and `after = nrow(x)` or `ncol(x)` are handled correctly.
+#' @export
+#'
+#' @details
+#' For `huxtable` objects, arguments in `...` can include `copy_cell_props`.
+#'
+#' Data frames will be converted to huxtables before passing to `cbind`/`rbind`.
+#'
+#' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
+#'
+#' @examples
+#' ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
+#' ht2 <- hux('Gooseberry', 2.10)
+#' add_rows(ht, ht2)
+#' add_rows(ht, ht2, after = 1)
+#' mx <- matrix(c('Sugar', '50%', '60%', 'Weight (g)', 300, 250), 3, 2)
+#' add_columns(ht, mx, after = 'Jam')
+add_rows <- function (x, y, after = nrow(x), ...) {
+  add_row_cols(x, y, after, dimno = 1, ...)
+}
+
+
+#' @export
+#' @rdname add_rows
+#' @examples
+#' ht <- hux(a = 1:3, b = 1:3)
+#' ht2 <- hux(d = letters[1:3])
+#' add_columns(ht, ht2, after = "a")
+add_columns <- function (x, y, after = ncol(x), ...) {
+  add_row_cols(x, y, after, dimno = 2, ...)
+}
+
+
+add_row_cols <- function (x, y, after, dimno, ...) {
+  if (is_hux(x) && is.data.frame(y)) {
+    y <- as_hux(y)
+    attr(y, 'from_real_hux') <- FALSE
+  }
+  if (is_hux(y) && is.data.frame(x)) {
+    x <- as_hux(x)
+    attr(x, 'from_real_hux') <- FALSE
+  }
+  dims <- dim(x)
+  end_idx <- dims[dimno]
+  assert_that(is.numeric(dims))
+  if (is.character(after)) {
+    after <- match(after, dimnames(x)[[dimno]])
+  }
+  assert_that(is.number(after), after >= 0, after <= end_idx)
+
+  second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
+  if (dimno == 1) {
+    rbind(x[seq_len(after),], y, x[second_idxes,], ...)
+  } else {
+    cbind(x[, seq_len(after)], y, x[, second_idxes], ...)
+  }
+}
+
+
+#' Insert a row or column
+#'
+#' These convenience functions wrap `cbind` or `rbind` for huxtables to insert
+#' a single row.
+#' @param ht A huxtable.
+#' @param ... Cell contents.
+#' @param after Insert the row/column after this position. 0 (the default) inserts as the first row/column.
+#' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See [cbind.huxtable()].
+#' @details
+#' In `insert_column` only, you can use a column name for `after`.
+#' @return The modified huxtable
+#' @seealso [add_rows()] and [add_columns()], which are more general.
+#' @export
+#'
+#' @examples
+#' ht <- hux(a = 1:5, b = 1:5, c = 1:5)
+#' insert_row(ht, 2.5, 2.5, 2.5, after = 2)
+#' insert_column(ht, 5:1)
+#' insert_column(ht, 5:1, after = 3)
+#' insert_column(ht, 5:1, after = "b")
+insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
+  # is.count would complain about 0
+  assert_that(is.scalar(after), is.number(after) || is.string(after))
+  if (is.number(after)) assert_that(after >= 0, after <= ncol(ht))
+  if (is.string(after)) {
+    assert_that(has_name(ht, after))
+    after <- match(after, colnames(ht))
+  }
+
+  ht1 <- NULL
+  ht2 <- NULL
+  if (after > 0) {
+    ht1 <- ht[, seq(1, after, 1)]
+  }
+  if (after < ncol(ht)) {
+    ht2 <- ht[, seq(after + 1, ncol(ht), 1)]
+  }
+  to_insert <- c(...)
+  res <- if (! is.null(ht1)) cbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
+  res <- if (! is.null(ht2)) cbind(res, ht2) else res
+
+  res
+}
+
+
+#' @rdname insert_column
+#'
+#' @export
+insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
+  # is.count would complain about 0
+  assert_that(is.scalar(after), is.number(after), after >= 0, after <= nrow(ht))
+
+  ht1 <- NULL
+  ht2 <- NULL
+  if (after > 0) {
+    ht1 <- ht[seq(1, after, 1), ]
+  }
+  if (after < nrow(ht)) {
+    ht2 <- ht[seq(after + 1, nrow(ht), 1), ]
+  }
+  to_insert <- c(...)
+  res <- if (! is.null(ht1)) rbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
+  res <- if (! is.null(ht2)) rbind(res, ht2) else res
+
+  res
+}
+
+
 #' Subset a huxtable
 #'
 #' @param x A huxtable.
@@ -32,7 +170,7 @@ NULL
 #' ht[,1]
 #' ht$a
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  ss <- as.data.frame(x)[i, j, drop]
+  ss <- as.data.frame(x)[i, j, drop = drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
   if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
   for (a in huxtable_cell_attrs) {
@@ -60,7 +198,6 @@ NULL
 }
 
 
-
 #' @param value A matrix, data frame, huxtable or similar object.
 #'
 #' @rdname extract-methods
@@ -78,7 +215,7 @@ NULL
   res <- as.data.frame(NextMethod())
 
   if (ncol(res) < ncol(x)) {
-    stopifnot(is.null(value))
+    assert_that(is.null(value))
     # could be ht[,'foo'] <- NULL or ht['foo'] <- NULL so this is safest:
     idx <- which(! colnames(x) %in% colnames(res))
     res <- delete_props(res, idx, type = 'cols')
@@ -184,7 +321,8 @@ NULL
 #' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the default properties.
 #'
 #' NB: You cannot bind huxtables with data frames, since the R method dispatch will always
-#' call [cbind.data.frame()] instead of the huxtable-specific code.
+#' call the data frame method instead of the huxtable-specific code. For a solution, see
+#' [add_columns()].
 #'
 #'
 #' @examples
@@ -232,7 +370,7 @@ bind_hux <- function (..., type, copy_cell_props) {
       if (! is.null(arg_names) && nzchar(arg_names[idx])) colnames(x) <- arg_names[idx]
       if (type == 'rbind') x <- t(x)
     }
-    attr(x, 'from_real_hux') <- is_hux(x)
+    if (is.null(attr(x, 'from_real_hux'))) attr(x, 'from_real_hux') <- is_hux(x)
     x
   })
 

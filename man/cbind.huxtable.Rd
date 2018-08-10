@@ -40,7 +40,8 @@ If \code{copy_cell_props} is \code{TRUE}, the default set of cell properties (ev
 If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the default properties.
 
 NB: You cannot bind huxtables with data frames, since the R method dispatch will always
-call \code{\link[=cbind.data.frame]{cbind.data.frame()}} instead of the huxtable-specific code.
+call the data frame method instead of the huxtable-specific code. For a solution, see
+\code{\link[=add_columns]{add_columns()}}.
 }
 \examples{
 ht1 <- hux(a = 1:3, b = 4:6)
