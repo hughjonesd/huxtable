@@ -12,7 +12,8 @@ example_code_for_topic <- function (fname) {
 }
 
 
-code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds', paste0(fname, '-example-code.rds'))
+code_path_for_topic <- function (fname) file.path(test_path(), 'example-rds',
+      paste0(fname, '-example-code.rds'))
 
 
 # runs example and checks output & values haven't changed; optionally reset files if code has changed
