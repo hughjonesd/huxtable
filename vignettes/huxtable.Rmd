@@ -199,8 +199,9 @@ sides <- c('left_', 'right_', 'top_', 'bottom_')
 props <- list()
 props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'escape_contents', 'number_format', 'rotation'))
 
-props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', paste0(sides, 'border'),
-      paste0(sides, 'border_color'), paste0(sides, 'padding')))
+props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', 
+      paste0(sides, 'border'), paste0(sides, 'border_color'), paste0(sides, 'border_style'), 
+      paste0(sides, 'padding')))
 props[['Row']]    <- 'row_height'
 props[['Column']] <- 'col_width'
 props[['Table']]  <- sort(c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label', 'latex_float'))
@@ -264,10 +265,11 @@ this: `set_xxx(ht, value)`. If you use the second form, then the value is set fo
 functions for table properties are always called like `set_xxx(ht, value)`. We'll learn more about
 this interface in a moment.
 
-There are also four useful convenience functions:
+There are also some useful convenience functions:
 
 * `set_all_borders` sets left, right, top and bottom borders for selected cells;
 * `set_all_border_colors` sets left, right, top and bottom border colors;
+* `set_all_border_styles` sets left, right, top and bottom border styles;
 * `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content
    and the border);
 * `set_outer_borders` sets an outer border around a rectangle of cells.
