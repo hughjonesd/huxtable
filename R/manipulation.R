@@ -51,11 +51,12 @@ add_columns <- function (x, y, after = ncol(x), ...) {
 
 
 add_row_cols <- function (x, y, after, dimno, ...) {
-  if (is_hux(x) && is.data.frame(y)) {
+  just_a_data_frame <- function (obj) inherits(obj, 'data.frame', which = TRUE) == 1
+  if (is_hux(x) && just_a_data_frame(y)) {
     y <- as_hux(y)
     attr(y, 'from_real_hux') <- FALSE
   }
-  if (is_hux(y) && is.data.frame(x)) {
+  if (is_hux(y) && just_a_data_frame(x)) {
     x <- as_hux(x)
     attr(x, 'from_real_hux') <- FALSE
   }
