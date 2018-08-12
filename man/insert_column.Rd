@@ -36,5 +36,5 @@ insert_column(ht, 5:1, after = 3)
 insert_column(ht, 5:1, after = "b")
 }
 \seealso{
-\code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which are more general.
+\code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.
 }

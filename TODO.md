@@ -11,6 +11,8 @@ Others
 
 (5.0) means API change, consider for version 5.0
 
+* Implement `dplyr::bind_rows` and `bind_cols`?
+
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
 * border styles:

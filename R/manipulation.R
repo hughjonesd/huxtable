@@ -23,8 +23,6 @@ NULL
 #' @details
 #' For `huxtable` objects, arguments in `...` can include `copy_cell_props`.
 #'
-#' Data frames will be converted to huxtables before passing to `cbind`/`rbind`.
-#'
 #' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
 #'
 #' @examples
@@ -88,7 +86,7 @@ add_row_cols <- function (x, y, after, dimno, ...) {
 #' @details
 #' In `insert_column` only, you can use a column name for `after`.
 #' @return The modified huxtable
-#' @seealso [add_rows()] and [add_columns()], which are more general.
+#' @seealso [add_rows()] and [add_columns()], which insert multiple rows/columns at once.
 #' @export
 #'
 #' @examples

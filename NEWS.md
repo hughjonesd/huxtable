@@ -13,6 +13,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `merge_cells` function provides an alternative interface to `colspan` and `rowspan`.
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 * New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
+* `add_rows` and `add_columns` now accept data frames as arguments.
 
 
 # huxtable 4.1.0

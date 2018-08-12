@@ -28,8 +28,6 @@ These functions combine two matrix-like objects and return the result.
 }
 \details{
 For \code{huxtable} objects, arguments in \code{...} can include \code{copy_cell_props}.
-
-Data frames will be converted to huxtables before passing to \code{cbind}/\code{rbind}.
 }
 \examples{
 ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
