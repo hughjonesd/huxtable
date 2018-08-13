@@ -67,11 +67,9 @@ add_row_cols <- function (x, y, after, dimno, ...) {
   assert_that(is.number(after), after >= 0, after <= end_idx)
 
   second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
-  if (dimno == 1) {
-    rbind(x[seq_len(after),], y, x[second_idxes,], ...)
-  } else {
-    cbind(x[, seq_len(after)], y, x[, second_idxes], ...)
-  }
+  fn <- if (dimno == 1) rbind else cbind
+
+  fn(x[seq_len(after), ], y, x[second_idxes, ], ...)
 }
 
 
@@ -506,7 +504,7 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
   for (rh_cw in c('row_height', 'col_width')) {
     if (is.numeric(attr(res, rh_cw))) {
       values <- attr(res, rh_cw)
-      attr(res, rh_cw) <- values/sum(values)
+      attr(res, rh_cw) <- values / sum(values)
     }
   }
 

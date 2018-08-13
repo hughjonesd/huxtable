@@ -90,7 +90,6 @@ to_html.huxtable <- function(ht, ...) {
 
   # collapsed_borders() are in "real cell" position. But we just want to grab the original data
   # and apply it?
-  # cb <- collapsed_borders(ht)
   borders    <- get_all_borders(ht)
   border_styles    <- get_all_border_styles(ht)
   if (length(unlist(borders)) > 0 && any(unlist(borders) > 0 & unlist(borders) < 3 &
@@ -107,7 +106,6 @@ to_html.huxtable <- function(ht, ...) {
     x <- sprintf(' border-%s-color: rgb(%s);', pos, format_color(col))
     blank_where(x, is.na(col))
   }
-  # cbc <- collapsed_border_colors(ht)
   top_bc    <- top_border_color(ht)
   bottom_bc <- bottom_border_color(ht)
   left_bc   <- left_border_color(ht)

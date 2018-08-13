@@ -33,7 +33,7 @@ test_that('Borders work', {
 
 test_that('background colour works', {
   hx <- huxtable(a = 1:3, b = 4:6)
-  background_color(hx)[1:2,] <- 'yellow'
+  background_color(hx)[1:2, ] <- 'yellow'
   expect_silent(as_flextable(hx))
 })
 

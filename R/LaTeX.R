@@ -197,7 +197,7 @@ build_tabular <- function(ht) {
   fs_bldc <- font_size(ht)[bl_dc]
   line_space_bldc <- round(fs_bldc * 1.2, 2)
   has_fs_bldc <- ! is.na(fs_bldc)
-  inner_cell_bldc[has_fs_bldc] <- sprintf('{\\fontsize{%.4gpt}{%.4gpt}\\selectfont %s}' ,
+  inner_cell_bldc[has_fs_bldc] <- sprintf('{\\fontsize{%.4gpt}{%.4gpt}\\selectfont %s}',
         fs_bldc[has_fs_bldc], line_space_bldc[has_fs_bldc], inner_cell_bldc[has_fs_bldc])
 
   tc_bldc <- text_color(ht)[bl_dc]
@@ -270,7 +270,7 @@ build_tabular <- function(ht) {
     rep('', sum(dc_idx))
   } else {
     # bl_to_dc for matrices:
-    start_end_rows_bldc <- display_cells[dc_map, c('display_row', 'end_row')][bl_idx,]
+    start_end_rows_bldc <- display_cells[dc_map, c('display_row', 'end_row')][bl_idx, ]
     row_seqs_bldc <- apply(start_end_rows_bldc, 1, function (x) seq(x[1], x[2]))
     rh_bldc <- sapply(row_seqs_bldc, function (x) {
       rh <- row_height[x]

@@ -138,13 +138,13 @@ do_collapse <- function(ht, prop_fun, default) {
   dc_map <- dc_map[dc_idx]
 
   at <- list()
-  at$left <- dc[,'col'] == dc[,'display_col']
-  at$right <- dc[,'col'] == dc[,'end_col']
-  at$top <- dc[,'row'] == dc[,'display_row']
-  at$bottom <- dc[,'row'] == dc[,'end_row']
+  at$left   <- dc[, 'col'] == dc[, 'display_col']
+  at$right  <- dc[, 'col'] == dc[, 'end_col']
+  at$top    <- dc[, 'row'] == dc[, 'display_row']
+  at$bottom <- dc[, 'row'] == dc[, 'end_row']
 
   properties <- prop_fun(ht)
-  for(side in names(at)) {
+  for (side in names(at)) {
     at_side <- at[[side]]
     res[[side]][at_side] <- properties[[side]][dc_map][at_side]
   }
@@ -296,10 +296,6 @@ smart_hux_from_df <- function(dfr) {
   wrap(ht)[-1, col_nchars > 15] <- TRUE
   width <- sum(col_nchars) / 90
   width(ht) <- min(1, max(0.2, width))
-  # this did not seem to improve on LaTeX's own attempts
-  # prop_widths  <- col_nchars/sum(col_nchars)
-  # equal_widths <- rep(1/ncol(ht), ncol(ht))
-  # col_width(ht) <- round((prop_widths * .75 + equal_widths * .25), 2)
 
   ht
 }

@@ -60,7 +60,7 @@ test_that('various outputs unchanged', {
   RNGversion("3.3.0")
   set.seed(271075L) # expect_unchanged is useless if we always pick new variations
   for (i in sample(nrow(variations), 300)) {
-    hx_set <- add_props(hx_raw, variations[i,])
+    hx_set <- add_props(hx_raw, variations[i, ])
     expect_outputs_unchanged(hx_set, i)
   }
 })
@@ -79,7 +79,7 @@ test_that('Some random outputs compile', {
   sample_rows <- sample(nrow(variations), n_tests * 4)
   for (i in seq_len(n_tests)) {
     sr <- sample_rows[i]
-    hx_set <- add_props(hx_raw, variations[sr,])
+    hx_set <- add_props(hx_raw, variations[sr, ])
     pdfo <- sprintf('pdf-check-%d.pdf', sr)
     outfiles[i] <- pdfo
     expect_error(quick_pdf(hx_set, file = pdfo, open = FALSE), regexp = NA, info = list(index = sr))
@@ -90,7 +90,7 @@ test_that('Some random outputs compile', {
 
   for (i in seq(n_tests + 1, 2 * n_tests)) {
     sr <- sample_rows[i]
-    hx_set <- add_props(hx_raw, variations[sr,])
+    hx_set <- add_props(hx_raw, variations[sr, ])
     xlsxo <- sprintf('xlsx-check-%d.xlsx', sr)
     outfiles[i] <- xlsxo
     expect_error(quick_xlsx(hx_set, file = xlsxo, open = FALSE), regexp = NA, info = list(index = sr))
@@ -101,7 +101,7 @@ test_that('Some random outputs compile', {
 
   for (i in seq(2 * n_tests + 1, 3 * n_tests)) {
     sr <- sample_rows[i]
-    hx_set <- add_props(hx_raw, variations[sr,])
+    hx_set <- add_props(hx_raw, variations[sr, ])
     docxo <- sprintf('docx-check-%d.docx', sr)
     outfiles[i] <- docxo
     expect_error(quick_docx(hx_set, file = docxo, open = FALSE), regexp = NA,
@@ -112,7 +112,7 @@ test_that('Some random outputs compile', {
 
   for (i in seq(3 * n_tests + 1, 4 * n_tests)) {
     sr <- sample_rows[i]
-    hx_set <- add_props(hx_raw, variations[sr,])
+    hx_set <- add_props(hx_raw, variations[sr, ])
     pptxo <- sprintf('pptx-check-%d.pptx', sr)
     outfiles[i] <- pptxo
     expect_error(quick_pptx(hx_set, file = pptxo, open = FALSE), regexp = NA,
@@ -129,7 +129,7 @@ test_that('Some random HTML outputs are validated by W3C', {
 
   # here we do randomize
   for (i in sample(nrow(variations), 10)) {
-    hx_set <- add_props(hx_raw, variations[i,])
+    hx_set <- add_props(hx_raw, variations[i, ])
     webpage <- paste0("<!DOCTYPE html><html lang=\"en\">",
       "<head><meta charset=\"utf-8\"><title>huxtable table validation</title></head>",
       "<body>\n", to_html(hx_set), "\n</body></html>")

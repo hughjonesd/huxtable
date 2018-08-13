@@ -68,7 +68,7 @@ test_that('Can knit .Rhtml files to HTML', {
   on.exit(try(file.remove(output_files), silent = TRUE))
   for (i in seq_along(in_files)) {
     expect_error(
-      output_files[i] <- knitr::knit(in_files[i], output = output_files[i], quiet = TRUE) ,
+      output_files[i] <- knitr::knit(in_files[i], output = output_files[i], quiet = TRUE),
       regexp = NA
     )
     expect_true(file.exists(output_files[i]))
@@ -119,4 +119,3 @@ test_that('Various Rmd files render without errors', {
     test_render(f, 'html_document')
   }
 })
-

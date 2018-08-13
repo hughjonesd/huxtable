@@ -43,7 +43,7 @@ test_that('Multirow/multicol cells cannot shadow other multirow/multicol cells',
 test_that('Subsetting works with multirow/multicolumn cells', {
   ht <- hux(a = 1:3, b = 1:3)
   rowspan(ht)[1, 1] <- 2
-  expect_silent(ht[c(1,3), ])
+  expect_silent(ht[c(1, 3), ])
 })
 
 
@@ -227,11 +227,11 @@ test_that('add_rows and add_columns work', {
   hx2 <- hux(3:4, 5:6)
   for (obj in list(mx, hx2)) {
     expect_silent(res <- add_rows(ht, obj))
-    expect_equivalent(res[[4,2]], 6)
+    expect_equivalent(res[[4, 2]], 6)
     expect_equivalent(nrow(res), 4)
     expect_silent(res <- add_rows(ht, obj, after = 1))
     expect_equivalent(nrow(res), 4)
-    expect_equivalent(res[[3,2]], 6)
+    expect_equivalent(res[[3, 2]], 6)
     expect_silent(res <- add_columns(ht, obj, after = "a"))
     expect_equivalent(ncol(res), 4)
     expect_equivalent(res[[1, 2]], 3)

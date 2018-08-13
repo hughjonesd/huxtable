@@ -49,7 +49,7 @@ test_that('Can assign numeric to width, col_width etc. after assigning character
   width(ht) <- 0.5
   expect_type(width(ht), 'double')
   row_height(ht) <- paste0(1:3, 'em')
-  row_height(ht) <- rep(1/3, 3)
+  row_height(ht) <- rep(1 / 3, 3)
   expect_type(row_height(ht), 'double')
   number_format(ht) <- '%.3f'
   number_format(ht) <- 2L

@@ -100,5 +100,3 @@ NULL
     register_s3_method('knitr', 'knit_print', class = 'data.frame')
   }
 }
-
-

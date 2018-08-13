@@ -126,7 +126,7 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 
   # -7 to avoid being top-left of any letter_squares (as we may get 2x2 cells)
   # also avoid breaking colspans
-  rowspan_ok <- setdiff(1:36, c(1:6*6, letter_squares - 1, letter_squares - 7, colspan2 - 1,
+  rowspan_ok <- setdiff(1:36, c(1:6 * 6, letter_squares - 1, letter_squares - 7, colspan2 - 1,
         colspan2 + 5, colspan2 + 6, colspan2))
   rowspan2 <- rep(- 1, 3)
   for (i in 1:3) {

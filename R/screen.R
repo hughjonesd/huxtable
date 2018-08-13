@@ -128,7 +128,8 @@ to_screen.huxtable <- function (
     }
 
     result <- paste(apply(charmat, 1, paste0, collapse = ''), collapse = '\n')
-  } else { # 0-nrow or 0-ncol huxtable
+  } else {
+    # 0-nrow or 0-ncol huxtable
     result <- glue::glue('<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>')
   }
   if (! is.na(cap <- caption(ht))) {

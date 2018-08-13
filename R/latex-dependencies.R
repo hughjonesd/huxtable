@@ -15,7 +15,6 @@ huxtable_latex_dependencies <- list(
   list(name = 'hhline'),
   list(name = 'calc'),
   list(name = 'tabularx')
-  #list(name = 'arydshln')
 )
 
 
