@@ -67,9 +67,12 @@ add_row_cols <- function (x, y, after, dimno, ...) {
   assert_that(is.number(after), after >= 0, after <= end_idx)
 
   second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
-  fn <- if (dimno == 1) rbind else cbind
-
-  fn(x[seq_len(after), ], y, x[second_idxes, ], ...)
+  # for some reason `fn <- if (dimno==1) rbind else cbind` causes trouble...
+  if (dimno == 1) {
+    rbind(x[seq_len(after), ], y, x[second_idxes, ], ...)
+  } else {
+    cbind(x[, seq_len(after)], y, x[, second_idxes], ...)
+  }
 }
 
 
