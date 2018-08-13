@@ -21,6 +21,7 @@ BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
     glue,
+    memoise,
     stats,
     stringr (>= 1.2.0),
     tibble,

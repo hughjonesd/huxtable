@@ -120,7 +120,8 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
             labels = c("none", "hair", "thin", "medium", "thick")
           ))
     va           <- valign(ht)[drow, dcol]
-    style <- openxlsx::createStyle(
+
+    style <- memoised_style(
             fontName       = null_args$ft,
             fontSize       = null_args$fs,
             fontColour     = null_args$tc,
@@ -154,4 +155,8 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   }
 
   return(wb)
+}
+
+if (requireNamespace('openxlsx', quietly = TRUE)) {
+  memoised_style <- memoise::memoise(openxlsx::createStyle)
 }
