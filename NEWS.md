@@ -4,7 +4,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.1.0.9000
 
-* More speedups: LaTeX 2-3x faster.
+* More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.
 * Simplify LaTeX output using our own LaTeX commands.
 * Bugfix: LaTeX didn't compile when height and caption were both set.
 * Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
@@ -14,6 +14,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 * New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
 * `add_rows` and `add_columns` now accept data frames as arguments.
+* Tweaks to documentation.
 
 
 # huxtable 4.1.0
