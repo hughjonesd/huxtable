@@ -28,16 +28,24 @@ NULL
 #'
 #' Contents are only stored as numbers if a whole column is numeric as defined by [is_a_number()];
 #' otherwise they are stored as text.
+#'
 #' @return An object of class `Workbook`.
 #' @export
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 1:3)
 #' wb <- as_Workbook(ht)
+#'
 #' \dontrun{
 #' openxlsx::saveWorkbook(wb, "my-excel-file.xlsx")
 #' }
+#'
+#' # multiple sheets in a single workbook:
+#' wb <- openxlsx::createWorkbook()
+#' wb <- as_Workbook(ht, Workbook = wb, sheet = 'sheet1')
+#' wb <- as_Workbook(hux('Another', 'huxtable'), Workbook = wb, sheet = 'sheet2')
 as_Workbook <- function (ht, ...) UseMethod('as_Workbook')
+
 
 #' @export
 #' @rdname as_Workbook
