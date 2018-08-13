@@ -4,6 +4,7 @@ tests/testthat/*.pdf
 tests/testthat/*.xlsx
 tests/testthat/*.docx
 tests/testthat/*.pptx
+tests/testthat/*.aux
 tests/testthat/temp-artefacts/**
 .Rhistory
 .RData
