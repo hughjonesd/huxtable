@@ -99,4 +99,9 @@ NULL
     register_s3_method('knitr', 'knit_print')
     register_s3_method('knitr', 'knit_print', class = 'data.frame')
   }
+
+
+  if (requireNamespace('openxlsx', quietly = TRUE)) {
+    memoised_style <<- memoise::memoise(openxlsx::createStyle)
+  }
 }
