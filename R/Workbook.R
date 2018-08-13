@@ -61,6 +61,31 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   }
 
   contents <- clean_contents(ht, type = 'excel') # character matrix
+
+  nr <- nrow(contents)
+  contents <- as.data.frame(contents, stringsAsFactors = FALSE)
+  is_a_number_mx <- is_a_number(contents)
+  # for each column we go down it. If everything remaining is one type, we insert it. Otherwise
+  # we insert the cell.
+  for (j in seq_len(ncol(contents))) {
+    col_contents <- contents[[j]]
+    for (i in seq_len(nr)) {
+      is_a_number_col <- is_a_number_mx[i:nr, j]
+      if (all(is_a_number_col) || all(! is_a_number_col)) {
+        insert <- col_contents[i:nr]
+        if (all(is_a_number_col)) insert <- as.numeric(insert)
+        openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
+              colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
+        break # to the next column
+      } else {
+        insert <- col_contents[i]
+        if (is_a_number_col[1]) insert <- as.numeric(insert)
+        openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
+            colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
+      }
+    }
+  }
+
   dcells <- display_cells(ht, all = FALSE)
   for (r in seq_len(nrow(dcells))) {
     dcell <- dcells[r, ]
@@ -73,8 +98,8 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     if (is_a_number(cell_contents)) cell_contents <- as.numeric(cell_contents)
     if (top_cap) workbook_rows <- workbook_rows + 1
 
-    openxlsx::writeData(wb, sheet, cell_contents, startRow = min(workbook_rows), startCol = dcol,
-          colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
+    # openxlsx::writeData(wb, sheet, cell_contents, startRow = min(workbook_rows), startCol = dcol,
+    #       colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
 
     null_args <- list()
     null_args$tc <- text_color(ht)[drow, dcol]

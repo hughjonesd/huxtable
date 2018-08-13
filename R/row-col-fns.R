@@ -175,6 +175,7 @@ NULL
 # which causes R CMD check to throw a wobbly
 is_a_number <- function(x) {
   if (is.data.frame(x)) {
+    if (nrow(x) == 0) return(matrix(FALSE, 0 , ncol(x)))
     res <- sapply(x, is_a_number)
     dim(res) <- dim(x)
     return(res)
