@@ -53,9 +53,6 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   assert_package('as_Workbook', 'openxlsx')
   assert_that(is.string(sheet))
 
-  if (! exists('memoised_createStyle')) {
-    memoised_createStyle <<- memoise::memoise(openxlsx::createStyle)
-  }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   openxlsx::addWorksheet(wb, sheet)
 
@@ -168,3 +165,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   return(wb)
 }
 
+
+if (requireNamespace('openxlsx', quietly = TRUE)) {
+  memoised_createStyle <- memoise::memoise(openxlsx::createStyle)
+}
