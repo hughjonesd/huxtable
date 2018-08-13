@@ -94,12 +94,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
 
     workbook_rows <- seq(drow, dcell$end_row)
     workbook_cols <- seq(dcol, dcell$end_col)
-    cell_contents <- contents[drow, dcol]
-    if (is_a_number(cell_contents)) cell_contents <- as.numeric(cell_contents)
     if (top_cap) workbook_rows <- workbook_rows + 1
-
-    # openxlsx::writeData(wb, sheet, cell_contents, startRow = min(workbook_rows), startCol = dcol,
-    #       colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
 
     null_args <- list()
     null_args$tc <- text_color(ht)[drow, dcol]
@@ -111,7 +106,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
     format_zero <- format_numbers(0, nf)
     num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else
-          if (is.numeric(cell_contents)) 'NUMBER' else 'GENERAL'
+          if (is.numeric(contents[drow, dcol])) 'NUMBER' else 'GENERAL'
     borders <- get_all_borders(ht, drow, dcol) # list of numerics
     border_char <- names(borders)
     border_colors <- get_all_border_colors(ht, drow, dcol)
