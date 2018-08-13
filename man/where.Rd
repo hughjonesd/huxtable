@@ -19,6 +19,5 @@ use in \link[=rowspecs]{row specifications}.
 \examples{
 ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)
 where(ht > 2)
-where(is_a_number(ht))
 
 }
