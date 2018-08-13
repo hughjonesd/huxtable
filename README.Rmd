@@ -37,7 +37,7 @@ with a simpler interface. Features include:
 * Automatic formatting for knitr/rmarkdown documents.
 * `huxreg()` function for quick creation of regression tables.
 * Output to Microsoft Word, Excel or Powerpoint using the `officer` and `openxlsx` packages. 
-* `quick_pdf()`, `quick_docx()`, `quick_html()` and `quick_xlsx()` one-liners to print data frames into a new document.
+* Quick one-liners to print data frames into a new PDF, HTML page or Microsoft document.
 * Formatted table display in the R console, including borders, colour, and text styles.
 
 # Installing
