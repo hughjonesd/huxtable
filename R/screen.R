@@ -269,7 +269,9 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     width <- sum(widths[col:end_col])
     # strwrap treats non-breaking spaces differently than breaking spaces; this can fuck things up
     # with decimal padding. So all END spaces become non-breaking.
-    while (! identical(new <- gsub('( |\u00a0)$', '\u00a0', dcell$contents), dcell$contents)) dcell$contents <- new
+    while (! identical(new <- gsub('( |\u00a0)$', '\u00a0', dcell$contents), dcell$contents)) {
+      dcell$contents <- new
+    }
     strings <- strwrap(dcell$contents, width = width + 1) # for the + 1 see ?strwrap
     # some strings may still be longer than width,
     strings <- unlist(lapply(strings, function (x) {
