@@ -53,6 +53,9 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   assert_package('as_Workbook', 'openxlsx')
   assert_that(is.string(sheet))
 
+  if (! exists('memoised_createStyle')) {
+    memoised_createStyle <<- memoise::memoise(openxlsx::createStyle)
+  }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   openxlsx::addWorksheet(wb, sheet)
 
@@ -129,7 +132,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
           ))
     va           <- valign(ht)[drow, dcol]
 
-    style <- memoised_style(
+    style <- memoised_createStyle(
             fontName       = null_args$ft,
             fontSize       = null_args$fs,
             fontColour     = null_args$tc,
@@ -165,4 +168,3 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   return(wb)
 }
 
-memoised_style <- function(...) stop('This code should never be called from user code.')
