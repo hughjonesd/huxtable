@@ -167,8 +167,4 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
 
 
 memoised_createStyle <- function (...) stop('This code should never be called.\n',
-    '(If you just installed openxlsx, try reloading huxtable.')
-
-if (requireNamespace('openxlsx', quietly = TRUE)) {
-  memoised_createStyle <- memoise::memoise(openxlsx::createStyle)
-}
+    '(If you just installed openxlsx, try unloading and reloading huxtable.)')
