@@ -60,7 +60,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   assert_package('as_flextable', 'flextable')
 
   cc <- clean_contents(x, type = 'word')
-  cc <- as.data.frame(cc)
+  cc <- as.data.frame(cc, stringsAsFactors = FALSE)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
   if (! colnames_to_header) ft <- flextable::delete_part(ft, 'header')
