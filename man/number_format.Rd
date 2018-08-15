@@ -27,7 +27,7 @@ For \code{number_format}, the \code{number_format} property.
 For \code{set_number_format}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{number format} property of huxtable cells.
+Functions to get or set the *number format* property of huxtable cells.
 }
 \details{
 Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
@@ -95,4 +95,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{font}}, \code{\link{na_string}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

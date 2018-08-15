@@ -7,16 +7,13 @@
 \title{Create a huxtable}
 \usage{
 huxtable(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
-  TRUE))
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
 
 hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
-  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat",
-  TRUE))
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
 
-tribble_hux(..., add_colnames = getOption("huxtable.add_colnames",
-  FALSE), add_rownames = FALSE,
-  autoformat = getOption("huxtable.autoformat", TRUE))
+tribble_hux(..., add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_rownames = FALSE, autoformat = getOption("huxtable.autoformat", TRUE))
 }
 \arguments{
 \item{...}{For \code{huxtable}, named list of values as in \code{\link[=data.frame]{data.frame()}}.

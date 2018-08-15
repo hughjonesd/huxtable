@@ -21,7 +21,7 @@ For \code{height}, the \code{height} property.
 For \code{set_height}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{table height} property of a huxtable.
+Functions to get or set the table-level *table height* property of a huxtable.
 }
 \examples{
 
@@ -33,4 +33,3 @@ height(ht)
 \seealso{
 Other table measurements: \code{\link{width}}
 }
-\concept{table measurements}

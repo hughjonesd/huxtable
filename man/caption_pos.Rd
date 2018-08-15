@@ -21,7 +21,7 @@ For \code{caption_pos}, the \code{caption_pos} property.
 For \code{set_caption_pos}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{caption position} property of a huxtable.
+Functions to get or set the table-level *caption position* property of a huxtable.
 }
 \details{
 If \code{caption_pos} is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')

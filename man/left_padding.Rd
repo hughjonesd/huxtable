@@ -13,6 +13,9 @@
 \alias{set_right_padding}
 \alias{set_top_padding}
 \alias{set_bottom_padding}
+\alias{right_padding}
+\alias{bottom_padding}
+\alias{top_padding}
 \title{Cell padding}
 \usage{
 left_padding(ht)
@@ -50,7 +53,7 @@ For \code{set_left_padding}, the \code{ht} object.
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the \emph{cell padding} property of huxtable cells.
+Functions to get or set the *cell padding* property of huxtable cells.
 }
 \examples{
 

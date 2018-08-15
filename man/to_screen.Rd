@@ -10,11 +10,9 @@ print_screen(ht, ...)
 
 to_screen(ht, ...)
 
-\method{to_screen}{huxtable}(ht,
-  min_width = ceiling(getOption("width")/6),
-  max_width = getOption("width", Inf), compact = TRUE,
-  colnames = TRUE, color = getOption("huxtable.color_screen", default =
-  TRUE), ...)
+\method{to_screen}{huxtable}(ht, min_width = ceiling(getOption("width")/6),
+  max_width = getOption("width", Inf), compact = TRUE, colnames = TRUE,
+  color = getOption("huxtable.color_screen", default = TRUE), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -53,4 +51,3 @@ print_screen(ht)
 Other printing functions: \code{\link{print_html}},
   \code{\link{print_latex}}, \code{\link{print_md}}
 }
-\concept{printing functions}

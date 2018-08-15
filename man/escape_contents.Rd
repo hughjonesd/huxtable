@@ -27,7 +27,7 @@ For \code{escape_contents}, the \code{escape_contents} property.
 For \code{set_escape_contents}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{escape cell contents} property of huxtable cells.
+Functions to get or set the *escape cell contents* property of huxtable cells.
 }
 \examples{
 ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))

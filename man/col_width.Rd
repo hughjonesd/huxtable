@@ -22,7 +22,7 @@ For \code{col_width}, the \code{col_width} property.
 For \code{set_col_width}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{column widths} property of huxtable cols.
+Functions to get or set the *column widths* property of huxtable cols.
 }
 \details{
 In LaTeX, if you specify a column width, but set \code{wrap} to \code{FALSE} and have cells which
@@ -39,4 +39,3 @@ col_width(ht)
 \seealso{
 Other row/column heights: \code{\link{row_height}}
 }
-\concept{row/column heights}

@@ -27,7 +27,7 @@ For \code{na_string}, the \code{na_string} property.
 For \code{set_na_string}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{na string} property of huxtable cells.
+Functions to get or set the *na string* property of huxtable cells.
 }
 \examples{
 
@@ -53,4 +53,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{font}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

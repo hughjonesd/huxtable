@@ -7,6 +7,7 @@
 \alias{italic}
 \alias{italic<-}
 \alias{set_italic}
+\alias{italic}
 \title{Cell text style}
 \usage{
 bold(ht)
@@ -36,7 +37,7 @@ For \code{set_bold}, the \code{ht} object.
 Similarly for \code{italic} and friends.
 }
 \description{
-Functions to get or set the \emph{cell text style} property of huxtable cells.
+Functions to get or set the *cell text style* property of huxtable cells.
 }
 \examples{
 
@@ -57,4 +58,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

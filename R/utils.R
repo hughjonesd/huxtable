@@ -58,29 +58,31 @@ assert_package <- function (fun, package) {
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)
-  contents <- as.matrix(as.data.frame(ht))
+  contents <- as.matrix(as.data.frame(ht), mode = 'character')
 
   for (col in seq_len(ncol(contents))) {
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      if (! is.na(cell)) cell <- format_numbers(cell, num_fmt)
-      if (is.na(cell)) cell <- na_string(ht)[row, col]
+      cell <- format_numbers(cell, num_fmt)
       contents[row, col] <- as.character(cell)
     }
-    if (type %in% c('latex', 'html')) {
-      to_esc <- escape_contents(ht)[, col]
-      contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
-    }
-    # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
-    # later we can just use align for this:
-    pad_chars <- pad_decimal(ht)[, col]
+  }
+  contents[is.na(contents)] <- na_string(ht)
+
+  if (type %in% c('latex', 'html')) {
+    to_esc <- escape_contents(ht)
+    contents[to_esc, ] <- sanitize(contents[to_esc, ], type)
+  }
+  # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
+  # later we can just use align for this:
+
+  pad_chars <- pad_decimal(ht)
+  for (col in seq_len(ncol(contents))) {
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
-    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
   }
-
-  contents
+  decimal_pad(contents, pad_chars, type)
 }
 
 

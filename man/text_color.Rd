@@ -27,7 +27,7 @@ For \code{text_color}, the \code{text_color} property.
 For \code{set_text_color}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{text color} property of huxtable cells.
+Functions to get or set the *text color* property of huxtable cells.
 }
 \details{
 Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"} or \code{rgb(1, 0, 0)}.
@@ -51,4 +51,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{font}}, \code{\link{na_string}},
   \code{\link{number_format}}
 }
-\concept{formatting functions}

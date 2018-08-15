@@ -27,7 +27,7 @@ For \code{valign}, the \code{valign} property.
 For \code{set_valign}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{vertical alignment} property of huxtable cells.
+Functions to get or set the *vertical alignment* property of huxtable cells.
 }
 \details{
 Vertical alignment may not work for short text in LaTeX. Defining row heights with \code{\link[=row_height]{row_height()}}

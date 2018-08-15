@@ -21,7 +21,7 @@ For \code{width}, the \code{width} property.
 For \code{set_width}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{table width} property of a huxtable.
+Functions to get or set the table-level *table width* property of a huxtable.
 }
 \examples{
 
@@ -33,4 +33,3 @@ width(ht)
 \seealso{
 Other table measurements: \code{\link{height}}
 }
-\concept{table measurements}
