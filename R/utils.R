@@ -58,16 +58,19 @@ assert_package <- function (fun, package) {
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
   type <- match.arg(type)
-  contents <- as.matrix(as.data.frame(ht))
+  contents <- as.matrix(as.data.frame(ht), mode = 'character')
 
   for (col in seq_len(ncol(contents))) {
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      if (! is.na(cell)) cell <- format_numbers(cell, num_fmt)
-      if (is.na(cell)) cell <- na_string(ht)[row, col]
+      cell <- format_numbers(cell, num_fmt)
       contents[row, col] <- as.character(cell)
     }
+  }
+  contents[is.na(contents)] <- na_string(ht)
+
+  for (col in seq_len(ncol(contents))) {
     if (type %in% c('latex', 'html')) {
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
@@ -77,10 +80,8 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
     pad_chars <- pad_decimal(ht)[, col]
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
-    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
   }
-
-  contents
+  decimal_pad(contents, pad_chars, type)
 }
 
 
