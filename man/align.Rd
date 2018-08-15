@@ -27,7 +27,7 @@ For \code{align}, the \code{align} property.
 For \code{set_align}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{alignment} property of huxtable cells.
+Functions to get or set the *alignment* property of huxtable cells.
 }
 \details{
 This sets the horizontal alignment of the cell. If \code{value} is a single character (e.g.

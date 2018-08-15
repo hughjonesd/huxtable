@@ -27,7 +27,7 @@ For \code{wrap}, the \code{wrap} property.
 For \code{set_wrap}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{text wrapping} property of huxtable cells.
+Functions to get or set the *text wrapping* property of huxtable cells.
 }
 \examples{
 ht <- huxtable(a = rep('Some long text', 2))

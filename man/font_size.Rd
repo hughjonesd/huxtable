@@ -27,7 +27,7 @@ For \code{font_size}, the \code{font_size} property.
 For \code{set_font_size}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{font size} property of huxtable cells.
+Functions to get or set the *font size* property of huxtable cells.
 }
 \examples{
 
@@ -52,4 +52,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

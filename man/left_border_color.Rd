@@ -13,6 +13,9 @@
 \alias{set_right_border_color}
 \alias{set_top_border_color}
 \alias{set_bottom_border_color}
+\alias{right_border_color}
+\alias{top_border_color}
+\alias{bottom_border_color}
 \title{Border colors}
 \usage{
 left_border_color(ht)
@@ -50,7 +53,7 @@ For \code{set_left_border_color}, the \code{ht} object.
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the \emph{border colors} property of huxtable cells.
+Functions to get or set the *border colors* property of huxtable cells.
 }
 \details{
 Huxtable collapses borders and border colors. Right borders take priority over left borders, and

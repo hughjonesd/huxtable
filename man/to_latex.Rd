@@ -33,4 +33,3 @@ print_latex(ht)
 Other printing functions: \code{\link{print_html}},
   \code{\link{print_md}}, \code{\link{print_screen}}
 }
-\concept{printing functions}

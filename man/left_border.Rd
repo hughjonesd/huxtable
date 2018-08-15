@@ -13,6 +13,9 @@
 \alias{set_right_border}
 \alias{set_top_border}
 \alias{set_bottom_border}
+\alias{right_border}
+\alias{top_border}
+\alias{bottom_border}
 \title{Borders}
 \usage{
 left_border(ht)
@@ -50,7 +53,7 @@ For \code{set_left_border}, the \code{ht} object.
 Similarly for the other functions.
 }
 \description{
-Functions to get or set the \emph{borders} property of huxtable cells.
+Functions to get or set the *borders* property of huxtable cells.
 }
 \details{
 Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths

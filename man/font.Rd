@@ -27,7 +27,7 @@ For \code{font}, the \code{font} property.
 For \code{set_font}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{font} property of huxtable cells.
+Functions to get or set the *font* property of huxtable cells.
 }
 \examples{
 
@@ -52,4 +52,3 @@ Other formatting functions: \code{\link{background_color}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

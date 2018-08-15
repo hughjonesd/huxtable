@@ -27,7 +27,7 @@ For \code{background_color}, the \code{background_color} property.
 For \code{set_background_color}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{background color} property of huxtable cells.
+Functions to get or set the *background color* property of huxtable cells.
 }
 \examples{
 
@@ -48,4 +48,3 @@ Other formatting functions: \code{\link{bold}},
   \code{\link{na_string}}, \code{\link{number_format}},
   \code{\link{text_color}}
 }
-\concept{formatting functions}

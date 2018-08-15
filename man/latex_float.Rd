@@ -21,7 +21,7 @@ For \code{latex_float}, the \code{latex_float} property.
 For \code{set_latex_float}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{float position for latex} property of a huxtable.
+Functions to get or set the table-level *float position for latex* property of a huxtable.
 }
 \details{
 Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of

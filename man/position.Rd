@@ -21,7 +21,7 @@ For \code{position}, the \code{position} property.
 For \code{set_position}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{table position} property of a huxtable.
+Functions to get or set the table-level *table position* property of a huxtable.
 }
 \details{
 If your tables are too far to the right under LaTeX, try setting their \code{\link[=width]{width()}}

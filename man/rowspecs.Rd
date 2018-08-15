@@ -28,6 +28,8 @@ specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for
 \item Use \code{\link[=where]{where(condition)}}, and omit the \code{col} argument, to get cells where \code{condition} is \code{TRUE}.
 \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 }
+
+[=[.data.frame]: R:=[.data.frame
 }
 
 \section{The gory details}{

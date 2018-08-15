@@ -34,7 +34,7 @@ For \code{rowspan}, the \code{rowspan} property.
 For \code{set_rowspan}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{row and column span} property of huxtable cells.
+Functions to get or set the *row and column span* property of huxtable cells.
 }
 \details{
 The rowspan and colspan of a cell determine its height and width, in rows and columns.

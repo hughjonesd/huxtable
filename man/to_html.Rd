@@ -37,4 +37,3 @@ to_html(ht)
 Other printing functions: \code{\link{print_latex}},
   \code{\link{print_md}}, \code{\link{print_screen}}
 }
-\concept{printing functions}

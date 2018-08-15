@@ -27,7 +27,7 @@ For \code{rotation}, the \code{rotation} property.
 For \code{set_rotation}, the \code{ht} object.
 }
 \description{
-Functions to get or set the \emph{text rotation} property of huxtable cells.
+Functions to get or set the *text rotation* property of huxtable cells.
 }
 \details{
 You will probably need to set \code{\link[=col_width]{col_width()}} and \code{\link[=row_height]{row_height()}} explicitly

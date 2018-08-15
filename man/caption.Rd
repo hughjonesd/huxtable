@@ -21,7 +21,7 @@ For \code{caption}, the \code{caption} property.
 For \code{set_caption}, the \code{ht} object.
 }
 \description{
-Functions to get or set the table-level \emph{caption} property of a huxtable.
+Functions to get or set the table-level *caption* property of a huxtable.
 }
 \details{
 Captions are not escaped. See the example for a workaround.

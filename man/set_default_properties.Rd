@@ -21,6 +21,8 @@ For \code{get_default_properties}, a list of the current defaults.
 }
 \description{
 Defaults are used for new huxtables, and also when a property is set to \code{NA}.
+
+Get default huxtable properties
 }
 \details{
 Note that \code{autoformat = TRUE} in \code{\link[=huxtable]{huxtable()}} overrides some defaults.
