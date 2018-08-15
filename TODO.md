@@ -9,9 +9,10 @@ Must be before 4.2.0
 Others
 ======
 
-* Use more purrr and rlang features, as we depend on these packages anyway
-
 (5.0) means API change, consider for version 5.0
+
+* Use more purrr and rlang features, as we depend on these packages anyway
+  - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
 
 * Implement `dplyr::bind_rows` and `bind_cols`?
 

@@ -160,28 +160,28 @@ do_collapse <- function(ht, prop_fun, default) {
 
 
 # Format numeral generics
-numeral_formatter <- function (x, numeral) {
-  UseMethod("numeral_formatter")
+numeral_formatter <- function (x) {
+  UseMethod('numeral_formatter')
 }
 
 
-numeral_formatter.default <- function (x, numeral) {
+numeral_formatter.default <- function (x) {
   stop('Unrecognized number_format. Please use a number, string or function.')
 }
 
 
 # If we are a function then return output from the function
-numeral_formatter.function <- function (x, numeral) {
+numeral_formatter.function <- function (x) {
   return(x)
 }
 
 
-numeral_formatter.character <- function (x, numeral) {
+numeral_formatter.character <- function (x) {
   return(function(numeral) sprintf(x, numeral))
 }
 
 
-numeral_formatter.numeric <- function (x, numeral) {
+numeral_formatter.numeric <- function (x) {
   return(function(numeral) formatC(round(numeral, x), format = 'f', digits = x))
 }
 
@@ -191,7 +191,7 @@ format_numbers <- function (string, num_fmt) {
   # ! is.function avoids a warning if num_fmt is a function:
   if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
-  format_numeral <- numeral_formatter(num_fmt, string)
+  format_numeral <- numeral_formatter(num_fmt)
   # Breakdown:
   # -?                    optional minus sign
   # [0-9]*                followed by any number of digits
