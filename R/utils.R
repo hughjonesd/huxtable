@@ -158,16 +158,39 @@ do_collapse <- function(ht, prop_fun, default) {
 }
 
 
+# Format numeral generics
+numeral_formatter <- function(x, numeral) {
+  UseMethod("numeral_formatter")
+}
+
+
+numeral_formatter.default <- function(x, numeral) {
+  stop('Unrecognized type of numeral_formatter')
+}
+
+
+# If we are a function then return output from the function
+numeral_formatter.function <- function(x, numeral) {
+  return(x)
+}
+
+
+numeral_formatter.character <- function(x, numeral) {
+  return(function(numeral) sprintf(x, numeral))
+}
+
+
+numeral_formatter.numeric <- function(x, numeral) {
+  return(function(numeral) formatC(round(numeral, x), format = 'f', digits = x))
+}
+
+
 # find each numeric substring, and replace it:
 format_numbers <- function (string, num_fmt) {
   # ! is.function avoids a warning if num_fmt is a function:
   if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
-  format_numeral <- if (is.function(num_fmt)) num_fmt else
-        if (is.character(num_fmt)) function (numeral) sprintf(num_fmt, numeral) else
-        if (is.numeric(num_fmt)) function (numeral) formatC(round(numeral, num_fmt), format = 'f',
-          digits = num_fmt) else
-        stop('Unrecognized type of number_format: should be function, character or integer. See ?number_format')
+  format_numeral <- numeral_formatter(num_fmt, string)
   # Breakdown:
   # -?                    optional minus sign
   # [0-9]*                followed by any number of digits
