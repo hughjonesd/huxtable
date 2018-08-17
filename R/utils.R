@@ -64,10 +64,14 @@ clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', '
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      if (! is.na(cell)) cell <- format_numbers(cell, num_fmt)
+      cell <- format_numbers(cell, num_fmt)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
       contents[row, col] <- as.character(cell)
     }
+  }
+  contents[is.na(contents)] <- na_string(ht)
+
+  for (col in seq_len(ncol(contents))) {
     if (type %in% c('latex', 'html')) {
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
@@ -187,6 +191,8 @@ numeral_formatter.numeric <- function (x) {
 
 # find each numeric substring, and replace it:
 format_numbers <- function (string, num_fmt) {
+  if (is.na(string)) return(NA_character_)
+
   # ! is.function avoids a warning if num_fmt is a function:
   if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
