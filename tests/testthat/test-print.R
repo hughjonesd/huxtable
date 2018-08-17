@@ -66,13 +66,13 @@ test_that('to_md and to_screen keep to min_width', {
 test_that('to_md warns on unimplemented features', {
   ht <- hux(a = 1:2, b = 1:2)
   colspan(ht)[1, 1] <- 2
-  expect_warning(to_md(ht), "colspan")
+  expect_warning(to_md(ht), 'colspan')
   colspan(ht)[1, 1] <- 1
   rowspan(ht)[1, 1] <- 2
-  expect_warning(to_md(ht), "rowspan")
+  expect_warning(to_md(ht), 'rowspan')
   rowspan(ht)[1, 1] <- 1
-  align(ht)[1, ] <- c("left", "right")
-  expect_warning(to_md(ht), "align")
+  align(ht)[1, ] <- c('left', 'right')
+  expect_warning(to_md(ht), 'align')
 })
 
 

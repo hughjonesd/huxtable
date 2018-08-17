@@ -1,5 +1,5 @@
 
-context("Attributes")
+context('Attributes')
 
 
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
@@ -7,25 +7,26 @@ ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
 
 for (attr in huxtable_cell_attrs) {
   if (attr == 'pad_decimal') next
-  test_that(paste("Cell property attr", attr, "examples unchanged"), {
+  test_that(paste('Cell property attr', attr, 'examples unchanged'), {
     test_ex_same(attr)
   })
 }
 
 for (attr in c(huxtable_col_attrs, huxtable_row_attrs)) {
-  test_that(paste("Row/col property", attr, "examples unchanged"), {
+  test_that(paste('Row/col property', attr, 'examples unchanged'), {
     test_ex_same(attr)
   })
 }
 
 
 for (attr in huxtable_table_attrs) {
-    test_that(paste("Table property", attr, "examples unchanged"), {
+    test_that(paste('Table property', attr, 'examples unchanged'), {
     test_ex_same(attr)
   })
 }
 
-test_that("Can refer to properties by colnames", {
+
+test_that('Can refer to properties by colnames', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   number_format(ht)[1, 1] <- 3
   col_width(ht) <- c(.2, .6, .2)
@@ -33,6 +34,7 @@ test_that("Can refer to properties by colnames", {
   expect_equal(number_format(ht)[1, 'a'], list(3))
   expect_equivalent(col_width(ht)['a'], .2)
 })
+
 
 test_that('Assignment to attributes preserves colnames', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
@@ -42,6 +44,7 @@ test_that('Assignment to attributes preserves colnames', {
   align(ht)[1, 1] <- 'left'
   expect_equal(cn, colnames(align(ht)))
 })
+
 
 test_that('Can assign numeric to width, col_width etc. after assigning character', {
   ht <- huxtable(letters[1:3])
@@ -58,40 +61,52 @@ test_that('Can assign numeric to width, col_width etc. after assigning character
   expect_equivalent(dim(nf), dim(ht))
 })
 
+
+test_that('na_string works', {
+  ht <- huxtable(a = c(1, 2, NA), b = c(NA, 1, 2))
+  na_string(ht) <- 'foo'
+  na_string(ht)[3, 1] <- 'bar'
+  expect_silent(cc <- huxtable:::clean_contents(ht))
+
+  expect_match(cc[1, 2], 'foo')
+  expect_match(cc[3, 1], 'bar')
+})
+
 test_that('Can combine numbers and characters in number_format', {
-  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111), autoformat = FALSE)
-  number_format(ht)[1, ] <- "%3.3f"
+  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111, 1.11111), autoformat = FALSE)
+  number_format(ht)[1, ] <- '%3.3f'
   number_format(ht)[2, ] <- 1
   number_format(ht)[3, ] <- list(function(x) ifelse(x > 0, '+', '-'))
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.111")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1.1")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], "+")
+  number_format(ht)[4, ] <- NA
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], '1.111')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], '1.1')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1], '+')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], '1.11111')
 })
 
 
 test_that('number_format works on cells with multiple numbers', {
-  ht <- huxtable(a = "1 2.3556, some text; -33 -44.8908")
+  ht <- huxtable(a = '1 2.3556, some text; -33 -44.8908')
   number_format(ht)[1, 1] <- 1
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.0 2.4, some text; -33.0 -44.9")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], '1.0 2.4, some text; -33.0 -44.9')
   number_format(ht)[1, 1] <- '%3.3f'
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1.000 2.356, some text; -33.000 -44.891")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], '1.000 2.356, some text; -33.000 -44.891')
   number_format(ht)[1, 1] <- list(function(x) ifelse(x > 0, '+', '-'))
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "+ +, some text; - -")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], '+ +, some text; - -')
 })
 
 
 test_that('number_format treats scientific notation equivalently to sprintf', {
-  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e7", "1.12e-3", "1.12A3", "1.12e3 4.8 and 5.6"))
+  ht <- huxtable(c('1.12e3', '1.12E3', '1.12e7', '1.12e-3', '1.12A3', '1.12e3 4.8 and 5.6'))
   number_format(ht) <- 4
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], "1120.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], "1120.0000")
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[1, 1], '1120.0000')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[2, 1], '1120.0000')
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[3, 1],
-                    "11200000.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], "0.0011")
+                    '11200000.0000')
+  expect_equivalent(huxtable:::clean_contents(ht, 'latex')[4, 1], '0.0011')
   # the next is not scientific notation so both numbers should be affected
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[5, 1], '1.1200A3.0000')
   expect_equivalent(huxtable:::clean_contents(ht, 'latex')[6, 1], '1120.0000 4.8000 and 5.6000')
-
 })
 
 
@@ -138,10 +153,10 @@ test_that('Decimal padding works', {
 
 
 test_that('Can pad with align; pad_decimal gives warning', {
-  ht <- hux(a = c("1.5", "2.5"))
+  ht <- hux(a = c('1.5', '2.5'))
   ht2 <- ht
-  expect_silent(align(ht) <- ".")
-  expect_warning(pad_decimal(ht2) <- ".", "deprecated")
+  expect_silent(align(ht) <- '.')
+  expect_warning(pad_decimal(ht2) <- '.', 'deprecated')
   expect_identical(huxtable:::clean_contents(ht), huxtable:::clean_contents(ht2))
 })
 
