@@ -10,7 +10,7 @@
 \title{Quickly print objects to a PDF, HTML, or Microsoft Office document.}
 \usage{
 quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
-  open = interactive())
+  open = interactive(), width = NULL, height = NULL)
 
 quick_html(..., file = confirm("huxtable-output.html"), borders = 0.4,
   open = interactive())
@@ -32,6 +32,10 @@ quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
 \item{borders}{Border width for members of \code{...} that are not huxtables.}
 
 \item{open}{Logical. Automatically open the resulting file?}
+
+\item{width}{String passed to the LaTeX \code{geometry} package's \code{paperwidth} option.}
+
+\item{height}{String passed to the LaTeX \code{geometry} package's \code{paperheight} option.}
 }
 \value{
 Invisible \code{NULL}.

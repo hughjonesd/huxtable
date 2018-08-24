@@ -38,10 +38,12 @@ NULL
 
 
 #' @rdname quick-output
+#' @param width String passed to the LaTeX `geometry` package's `paperwidth` option.
+#' @param height String passed to the LaTeX `geometry` package's `paperheight` option.
 #' @export
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
-  open = interactive()) {
-  assert_that(is.number(borders))
+  open = interactive(), width = NULL, height = NULL) {
+  assert_that(is.number(borders), is.string(width) || is.null(width), is.string(height) || is.null(height))
   assert_that(is.flag(open))
   force(file) # ensures confirm() is called before any other files are created.
   hts <- huxtableize(list(...), borders)
@@ -55,6 +57,14 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   tryCatch({
     cat('\\documentclass{article}\n')
     report_latex_dependencies()
+    if (! is.null(width) || ! is.null(height)) {
+      dim_string <- character(2)
+      dim_string[1] <- if (is.null(width)) '' else sprintf('paperwidth=%s', width)
+      dim_string[2] <- if (is.null(height)) '' else sprintf('paperheight=%s', height)
+      dim_string = paste(dim_string, collapse = ',')
+      cat(sprintf('\\usepackage[%s]{geometry}\n', dim_string))
+    }
+    cat('\\pagenumbering{gobble}\n')
     cat('\n\\begin{document}')
     lapply(hts, function (ht) {
       cat('\n\n')
