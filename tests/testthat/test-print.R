@@ -76,6 +76,20 @@ test_that('to_md warns on unimplemented features', {
 })
 
 
+test_that('to_md prints bold and italic', {
+  long_strings <- paste0(letters, letters, letters, letters, letters, collapse = '')
+  short_strings <- c('bold', 'both', 'italic')
+  long_strings <- paste0(short_strings, long_strings)
+  ht <- hux(a = short_strings, b = long_strings)
+  bold(ht)[1:2, 1:2] <- TRUE
+  italic(ht)[2:3, 1:2] <- TRUE
+  expect_silent(res <- to_md(ht))
+  expect_match(res, regexp = '\\*italic\\*.*\\*italic.*\\*')
+  expect_match(res, regexp = '\\*\\*bold\\*\\*.*\\*\\*bold.*\\*\\*')
+  expect_match(res, regexp = '\\*\\*\\*both\\*\\*\\*.*\\*\\*\\*both.*\\*\\*\\*')
+
+})
+
 test_that('hux_logo works', {
   # there's randomization, so:
   for (i in 1:100) expect_silent(hux_logo())

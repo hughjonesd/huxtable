@@ -234,13 +234,6 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   drow_mat <- as.matrix(dc[, c('display_row', 'display_col')])
 
   dc$contents <- contents[drow_mat]
-  if (markdown) {
-    bold <- bold(ht)[drow_mat]
-    italic <- italic(ht)[drow_mat]
-    dc$contents[bold] <- paste0('**', dc$contents[bold], '**')
-    dc$contents[italic] <- paste0('*', dc$contents[italic], '*')
-  }
-
   cw <- col_width(ht)
   if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
   cw <- cw / sum(cw)
@@ -262,9 +255,10 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   }
 
   max_widths <- floor(cw * (max_width - 2 * outer_border_h - (ncol(ht) - 1) * inner_border_h))
-  if (any(max_widths < 4)) {
+  if (any(max_widths < 8)) {
     # out of space, try with fewer columns
-    # assumption here is that we need say 4 characters for anything sensible
+    # assumption here is that we need say 2 characters for anything sensible; and could have
+    # bold+italic which adds *** before and after!
     return(character_matrix(ht[, -ncol(ht)], inner_border_h, inner_border_v, outer_border_h,
           outer_border_v, min_width, max_width, color, markdown = markdown))
   }
@@ -276,29 +270,37 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     col <- dcell$display_col
     end_col <- dcell$end_col
     width <- sum(widths[col:end_col])
+    md_bold <- markdown && bold(ht)[dcell$display_row, dcell$display_col]
+    md_italic <- markdown && italic(ht)[dcell$display_row, dcell$display_col]
+    eff_width <- width
+    if (md_bold) eff_width <- eff_width - 4
+    if (md_italic) eff_width <- eff_width - 2
     # strwrap treats non-breaking spaces differently than breaking spaces; this can fuck things up
     # with decimal padding. So all END spaces become non-breaking.
     while (! identical(new <- gsub('( |\u00a0)$', '\u00a0', dcell$contents), dcell$contents)) {
       dcell$contents <- new
     }
-    strings <- strwrap(dcell$contents, width = width + 1) # for the + 1 see ?strwrap
-    # some strings may still be longer than width,
+    strings <- strwrap(dcell$contents, width = eff_width + 1) # for the + 1 see ?strwrap
+    # some strings may still be longer than width:
     strings <- unlist(lapply(strings, function (x) {
-      while (any(ncharw(x) > width)) {
+      while (any(ncharw(x) > eff_width)) {
         lx <- length(x)
         last <- x[lx]
-        last <- c(substring(last, 1, width), substring(last, width + 1))
+        last <- c(substring(last, 1, eff_width), substring(last, eff_width + 1))
         x[lx:(lx + 1)] <- last
       }
       x
     }))
+    if (md_bold) strings <- paste0('**', strings, '**')
+    if (md_italic) strings <- paste0('*', strings, '*')
     strings <- str_pad(strings, real_align(ht)[ dcell$display_row, dcell$display_col ], width)
     dc$strings[[r]] <- strings
   }
+
   dc$text_height <- sapply(dc$strings, length)
   dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x)))
 
-  # row heights as widths: start at 0 and increase it if its too little, sharing equally among relevant cols
+  # row heights as widths: start at 0 and increase it if it's too little, sharing equally among relevant cols
   dc <- dc[order(dc$rowspan), ]
   heights <- rep(1, nrow(ht))
   for (r in seq_len(nrow(dc))) {
