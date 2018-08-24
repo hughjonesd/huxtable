@@ -6,6 +6,7 @@
 \alias{theme_basic}
 \alias{theme_striped}
 \alias{theme_article}
+\alias{theme_mondrian}
 \title{Theme a huxtable}
 \usage{
 theme_plain(ht, position = "left")
@@ -16,17 +17,23 @@ theme_striped(ht, stripe = grDevices::grey(0.9), header_row = TRUE,
   header_col = TRUE)
 
 theme_article(ht, header_row = TRUE, header_col = TRUE)
+
+theme_mondrian(ht, prop_colored = 0.1, font = "Arial")
 }
 \arguments{
 \item{ht}{A huxtable object.}
 
-\item{position}{'left', 'centre' or 'right'}
+\item{position}{'left', 'center' or 'right'}
 
 \item{header_row}{Logical: style first row differently?}
 
 \item{header_col}{Logical: style first column differently?}
 
 \item{stripe}{Background colour for alternate rows}
+
+\item{prop_colored}{Roughly what proportion of cells should have a primary-color background?}
+
+\item{font}{Font to use. For LaTeX, try \code{"cmss"}.}
 }
 \value{
 The huxtable object, appropriately styled.
@@ -43,6 +50,9 @@ These functions quickly set default styles for a huxtable.
 
 \code{theme_article} is similar to the style of many scientific journals.
 It sets horizontal lines above and below the table.
+
+\code{theme_mondrian} mimics the style of a Mondrian painting, with black borders and randomized
+colors.
 }
 \examples{
 ht <- huxtable(a = 1:5, b = 1:5)

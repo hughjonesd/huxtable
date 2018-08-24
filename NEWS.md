@@ -6,14 +6,16 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 * More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.
 * Simplify LaTeX output using our own LaTeX commands.
-* Bugfix: LaTeX didn't compile when height and caption were both set.
-* Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * New `border_style` properties to set "solid", "double", "dotted" or "dashed" borders.
   (At present, LaTeX only allows "solid" or "double".)
 * New `merge_cells` function provides an alternative interface to `colspan` and `rowspan`.
 * New `quick_pptx` function to print data frames and huxtables into Powerpoint.
 * New `install_latex_dependencies` and `check_latex_dependencies` utility functions.
 * `add_rows` and `add_columns` now accept data frames as arguments.
+* New `theme_mondrian` theme :-D
+* Enhancement: `print_md` now handles **bold** and *italic* cells.
+* Bugfix: LaTeX didn't compile when height and caption were both set.
+* Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * Tweaks to documentation.
 
 
