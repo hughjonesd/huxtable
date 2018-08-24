@@ -59,7 +59,7 @@ to_screen.huxtable <- function (
   last_ht_col <- orig_ncol <- ncol(ht)
   if (ncol(ht) > 0 && nrow(ht) > 0) {
     charmat_data <- character_matrix(ht, inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
-          min_width = min_width, max_width = max_width, color = color)
+          min_width = min_width, max_width = max_width, color = color, markdown = FALSE)
     charmat <- charmat_data$charmat
     border_rows <- charmat_data$border_rows
     border_cols <- charmat_data$border_cols
@@ -197,7 +197,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
   ht <- set_align(ht, align[1, ], byrow = TRUE)
 
   charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1,
-        outer_border_v = 1, min_width = min_width, max_width = max_width)
+        outer_border_v = 1, min_width = min_width, max_width = max_width, markdown = TRUE)
   charmat <- charmat_data$charmat
   border_rows <- charmat_data$border_rows
   border_cols <- charmat_data$border_cols
@@ -225,14 +225,22 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption('width') / 4
 # function to calculate text column widths, wrap huxtable text accordingly, and return a matrix of characters, without
 # borders
 character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v,
-      min_width, max_width = Inf, color = FALSE) {
+      min_width, max_width = Inf, color = FALSE, markdown) {
   if (ncol(ht) == 0) stop("Couldn't display any columns in less than max_width characters.")
 
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
   contents <- clean_contents(ht, type = 'screen')
   drow_mat <- as.matrix(dc[, c('display_row', 'display_col')])
+
   dc$contents <- contents[drow_mat]
+  if (markdown) {
+    bold <- bold(ht)[drow_mat]
+    italic <- italic(ht)[drow_mat]
+    dc$contents[bold] <- paste0('**', dc$contents[bold], '**')
+    dc$contents[italic] <- paste0('*', dc$contents[italic], '*')
+  }
+
   cw <- col_width(ht)
   if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
   cw <- cw / sum(cw)
@@ -258,7 +266,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     # out of space, try with fewer columns
     # assumption here is that we need say 4 characters for anything sensible
     return(character_matrix(ht[, -ncol(ht)], inner_border_h, inner_border_v, outer_border_h,
-          outer_border_v, min_width, max_width, color))
+          outer_border_v, min_width, max_width, color, markdown = markdown))
   }
   widths <- pmin(widths, max_widths)
 
