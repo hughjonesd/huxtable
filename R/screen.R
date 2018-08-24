@@ -291,8 +291,8 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
       }
       x
     }))
-    if (md_bold) strings <- paste0('**', strings, '**')
-    if (md_italic) strings <- paste0('*', strings, '*')
+    if (md_bold) strings[ncharw(strings) > 0] <- paste0('**', strings[ncharw(strings) > 0], '**')
+    if (md_italic) strings[ncharw(strings) > 0] <- paste0('*', strings[ncharw(strings) > 0], '*')
     strings <- str_pad(strings, real_align(ht)[ dcell$display_row, dcell$display_col ], width)
     dc$strings[[r]] <- strings
   }
