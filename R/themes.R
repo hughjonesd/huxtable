@@ -113,8 +113,6 @@ theme_mondrian <- function(ht, prop_colored = 0.1, font = 'Arial') {
   colored <- sample.int(ncells, size = ceiling(ncells * prop_colored), replace = FALSE)
   colors <- sample(c('red', 'blue', 'yellow'), length(colored), replace = TRUE)
   background_color(ht)[colored] <- colors
-  col_width(ht)  <- 1 / ncol(ht)
-  row_height(ht) <- 1 / nrow(ht)
   font(ht) <- font
 
   ht
