@@ -108,7 +108,6 @@ theme_mondrian <- function(ht, prop_colored = 0.1, font = 'Arial') {
 
   ht <- set_all_borders(ht, 2)
   ht <- set_all_border_colors(ht, 'black')
-  colored <- runif(nrow(ht) * ncol(ht)) <= prop_colored
   ncells <- nrow(ht) * ncol(ht)
   colored <- sample.int(ncells, size = ceiling(ncells * prop_colored), replace = FALSE)
   colors <- sample(c('red', 'blue', 'yellow'), length(colored), replace = TRUE)
