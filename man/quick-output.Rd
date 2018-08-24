@@ -33,9 +33,11 @@ quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
 
 \item{open}{Logical. Automatically open the resulting file?}
 
-\item{width}{String passed to the LaTeX \code{geometry} package's \code{paperwidth} option.}
+\item{width}{String passed to the LaTeX \code{geometry} package's \code{paperwidth} option. Use \code{NULL} for
+the default width.}
 
-\item{height}{String passed to the LaTeX \code{geometry} package's \code{paperheight} option.}
+\item{height}{String passed to \code{geometry}'s \code{paperheight} option. Use \code{NULL} for the default
+height.}
 }
 \value{
 Invisible \code{NULL}.

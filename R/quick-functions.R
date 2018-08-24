@@ -38,8 +38,10 @@ NULL
 
 
 #' @rdname quick-output
-#' @param width String passed to the LaTeX `geometry` package's `paperwidth` option.
-#' @param height String passed to the LaTeX `geometry` package's `paperheight` option.
+#' @param width String passed to the LaTeX `geometry` package's `paperwidth` option. Use `NULL` for
+#'   the default width.
+#' @param height String passed to `geometry`'s `paperheight` option. Use `NULL` for the default
+#'   height.
 #' @export
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
   open = interactive(), width = NULL, height = NULL) {

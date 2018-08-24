@@ -39,6 +39,25 @@ test_that('quick_pdf works', {
 })
 
 
+test_that('quick_pdf works with height and width options', {
+  skip_on_appveyor()
+  ht <- hux(a = 1:2, b = 1:2)
+  m <- matrix(1:4, 2, 2)
+  dfr <- data.frame(a = 1:5, b = 1:5)
+
+  tf <- tempfile(fileext = '.pdf')
+  expect_silent(quick_pdf(m, dfr, ht, file = tf, height = '4in'))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = '.pdf')
+  expect_silent(quick_pdf(m, dfr, ht, file = tf, width = '4in'))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = '.pdf')
+  expect_silent(quick_pdf(m, dfr, ht, file = tf, height = '4in', width = '4in'))
+  expect_true(file.exists(tf))
+})
+
 test_that('Quick output functions stop if called non-interactively with no `file` argument', {
   skip_if(interactive())
 
