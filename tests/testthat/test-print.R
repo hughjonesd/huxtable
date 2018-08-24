@@ -42,9 +42,9 @@ test_that('to_md and to_screen keep to max_width', {
   }
 
   caption(ht) <- 'a very very very long caption'
-  output <- to_screen(ht, max_width = 15)
+  output <- to_screen(ht, max_width = 18)
   lines <- strsplit(output, '\n', fixed = TRUE)[[1]]
-  expect_true(all(nchar(lines, type = 'width') <= 15))
+  expect_true(all(nchar(lines, type = 'width') <= 18))
   # we don't test captions for to_md because I don't think markdown can handle multiline captions
 })
 
@@ -77,17 +77,35 @@ test_that('to_md warns on unimplemented features', {
 
 
 test_that('to_md prints bold and italic', {
-  long_strings <- paste0(letters, letters, letters, letters, letters, collapse = '')
   short_strings <- c('bold', 'both', 'italic')
-  long_strings <- paste0(short_strings, long_strings)
+  long_strings <- strrep(toupper(short_strings), 40)
   ht <- hux(a = short_strings, b = long_strings)
   bold(ht)[1:2, 1:2] <- TRUE
   italic(ht)[2:3, 1:2] <- TRUE
   expect_silent(res <- to_md(ht))
-  expect_match(res, regexp = '\\*italic\\*.*\\*italic.*\\*')
-  expect_match(res, regexp = '\\*\\*bold\\*\\*.*\\*\\*bold.*\\*\\*')
-  expect_match(res, regexp = '\\*\\*\\*both\\*\\*\\*.*\\*\\*\\*both.*\\*\\*\\*')
+  expect_match(res, regexp = '\\*italic\\*')
+  expect_match(res, regexp = '\\*\\*bold\\*\\*')
+  expect_match(res, regexp = '\\*\\*\\*both\\*\\*\\*')
 
+  res <- strsplit(res, '\\n')[[1]]
+
+  # any strings with ITALIC should have * at start and end
+  italic <- stringr::str_match(res, '(.)[ITALIC]{0,6}(ITALIC)+[ITALIC]{0,6}(.)')
+  italic <- stats::na.omit(italic)
+  expect_true(all(italic[, 2] == '*'))
+  expect_true(all(italic[, 4] == '*'))
+
+  # any strings with BOTH should have *** at start and end
+  both <- stringr::str_match(res, '(...)[BOTH]{0,4}(BOTH)+[BOTH]{0,4}(...)')
+  both <- stats::na.omit(both)
+  expect_true(all(both[, 2] == '***'))
+  expect_true(all(both[, 4] == '***'))
+
+  # any strings with BOLD should have ** at start and end
+  bold <- stringr::str_match(res, '(..)[BOLD]{0,4}(BOLD)+[BOLD]{0,4}(..)')
+  bold <- stats::na.omit(bold)
+  expect_true(all(bold[, 2] == '**'))
+  expect_true(all(bold[, 4] == '**'))
 })
 
 test_that('hux_logo works', {

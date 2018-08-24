@@ -67,6 +67,8 @@ Others
 
 * Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind? (5.0)
 
+* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
+
 * Could S4 classes work to cbind data frames? Probably not, or hella complex and requires
   reworking internals: https://stackoverflow.com/questions/47967264/dispatch-of-rbind-and-cbind-for-a-data-frame
 
