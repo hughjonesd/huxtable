@@ -18,6 +18,8 @@ Others
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
+* Methods for R packages like janitor (tabyl) or glimpse?
+
 * border styles:
   - Use arydshln in LaTeX?
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
@@ -138,7 +140,7 @@ Store borders & colors the way collapsed_borders reports them; override default 
 * `huxreg`-style function in `texreg` package
 
 * a FAQ, including:
-  - my table isn't in the centre with position(ht) <- 'left'!
+  - my table isn't in the centre with position(ht) <- 'center'!
     - try setting the width
   - my numbers have been formatted
     - use number_format
@@ -151,12 +153,13 @@ Store borders & colors the way collapsed_borders reports them; override default 
   - headers would be copied (by default?) when you subset huxtables
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
+  - headers would be repeated after page breaks, and in HTML would use <th> style for column headers
     
 * make \booktabs or similar work
 
 * classes to represent borders and/or text styles? 
   - so you can do something like `set_left_border(ht, border(1, 'red', 'solid'))`
-  - and `set_text(ht, text(10, 'black', 'italic'))`
+  - and `set_text(ht, text(10, 'black', 'italic', 'cmss'))`
   - might not add much value compared to `set_properties`...?
   
 * dotted borders with LaTeX package? See https://tex.stackexchange.com/questions/20140/can-a-table-include-a-horizontal-dashed-line
