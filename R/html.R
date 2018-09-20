@@ -147,8 +147,14 @@ to_html.huxtable <- function(ht, ...) {
   rot <- rotation(ht)
   rot <- (rot %% 360) * -1 # HTML goes anticlockwise
   rot_div <- sprintf('<div style="transform: rotate(%.4gdeg); white-space: nowrap;">', rot)
-  rot_div <- blank_where(rot_div, rot == 0)
+  # special-case straight up/down to be handled by writing-mode.
+  # this will probably break on non-LTR text, but before it was hard to use anyway.
+  rot_div[rot == -270] <- sprintf('<div style="writing-mode: vertical-rl;">')
+  rot_div[rot == -90]  <- sprintf(
+        '<div style="writing-mode: vertical-rl; transform: rotate(180deg);">')
+
   rot_div_end <- rep('</div>', length(rot_div))
+  rot_div <- blank_where(rot_div, rot == 0)
   rot_div_end <- blank_where(rot_div_end, rot == 0)
 
   color <- text_color(ht)

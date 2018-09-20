@@ -14,6 +14,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * `add_rows` and `add_columns` now accept data frames as arguments.
 * New `theme_mondrian` theme :-D
 * Enhancement: `print_md` now handles **bold** and *italic* cells.
+* Use CSS writing-mode where possible for text rotation. Note that this may break on non-LTR 
+  languages. If this affects you, please file an issue.
 * Bugfix: LaTeX didn't compile when height and caption were both set.
 * Bugfix: `print_screen` and `print_md` would hang with a wide huxtable.
 * Tweaks to documentation.
