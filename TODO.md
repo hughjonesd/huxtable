@@ -18,6 +18,8 @@ Others
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
+* Consider CSS writing-mode for cell rotation?
+
 * Methods for R packages like janitor (tabyl) or glimpse?
 
 * border styles:
