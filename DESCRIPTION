@@ -40,7 +40,6 @@ Suggests:
     lazyeval,
     lme4,
     lmtest,
-    modelgenerics,
     nlme,
     nnet,
     officer,
