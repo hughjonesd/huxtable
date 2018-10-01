@@ -21,7 +21,7 @@ The huxtable logo.
 Returns a randomized huxtable logo, inspired by Mondrian.
 }
 \details{
-Run \code{hux_hex} if you wish to produce a hex logo.
+All modern packages should have a hex logo. Run \code{hux_hex} if you wish to produce one.
 }
 \examples{
 print_screen(hux_logo())

@@ -16,6 +16,7 @@ ncharw <- function (x) nchar(x, type = 'width')
 
 
 blank_where <- function (text, cond) {
+  stopifnot(length(text) == length(cond))
   text[cond] <- ''
   text
 }
@@ -257,6 +258,7 @@ check_positive_dims <- function (ht) {
 
 # return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
 # cells, including those shadowed by others.
+# data frame is ordered by row then column, i.e. the same as 1-based indexing into a matrix
 # columns are row, col (of real cell);
 # shadowed if cell is covered by another, the 'display cell'; if not, it is its own 'display cell';
 # display_row, display_col, rowspan, colspan, end_row, end_col of the display cell.
