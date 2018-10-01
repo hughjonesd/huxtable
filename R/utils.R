@@ -126,11 +126,11 @@ collapsed_border_colors <- function (ht) {
 # if two styles are non-"solid" then right and top has priority
 # A border of 0 can still have a style.
 collapsed_border_styles <- function (ht) {
-  result <- do_collapse(ht, get_all_border_styles, default = "solid")
+  result <- do_collapse(ht, get_all_border_styles, default = 'solid')
   result$vert <- result$right
-  result$vert[result$right == "solid"] <- result$left[result$right == "solid"]
+  result$vert[result$right == 'solid'] <- result$left[result$right == 'solid']
   result$horiz <- result$bottom
-  result$horiz[result$bottom == "solid"] <- result$top[result$bottom == "solid"]
+  result$horiz[result$bottom == 'solid'] <- result$top[result$bottom == 'solid']
 
   result[c('vert', 'horiz')]
 }
@@ -233,8 +233,12 @@ decimal_pad <- function(col, pad_chars, type) {
   chars_after_. <- nchars - pos
 
   pad_n_spaces <- max(chars_after_.) - chars_after_.
-  # use non-breaking space on screen also
-  pad_char <- switch(type, 'html' = '&nbsp;', 'latex' = '~', 'screen' = '\u00a0', ' ')
+  pad_char <- switch(type,
+        'html'   = '&nbsp;',
+        'latex'  = '~',
+        'screen' = '\u00a0', # screen non-breaking space
+        'rtf'    = '\\~',
+        ' ')
   col <- paste0(col, str_rep(pad_char, pad_n_spaces))
 
   orig_col[! na_pad] <- col
