@@ -6,7 +6,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 * More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.
 * Simplify LaTeX output using our own LaTeX commands.
-* RTF support with `print_rtf` and `to_rtf`.
+* RTF support: `print_rtf`, `to_rtf` and `quick_rtf` functions.
 * New `border_style` properties to set "solid", "double", "dotted" or "dashed" borders.
   (At present, LaTeX only allows "solid" or "double".)
 * New `merge_cells` function provides an alternative interface to `colspan` and `rowspan`.
