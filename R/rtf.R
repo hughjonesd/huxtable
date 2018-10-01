@@ -42,11 +42,10 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
   # and http://www.pindari.com/rtf3.html
   #
   # TODO: font, padding;
-  # need to escape backslashes
   # how to handle width
   # row_height and height
   # multiple col- and rowspan together may not work (perhaps need to override background colors?)
-  # wrap
+  # wrap (maybe replace spaces with nbsp?)
   if (is.null(add_color_table)) add_color_table <-
         any(! is.na(background_color(ht))) ||
         any(! is.na(text_color(ht))) ||

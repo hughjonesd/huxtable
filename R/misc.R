@@ -39,46 +39,55 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 
 
 
-#' Sanitize table elements
+#' Escape text for various formats
 #'
-#' This is copied over from `xtable::sanitize()`.
+#' This escapes a string for LaTeX, HTML or RTF.
 #'
 #' @param str A character object.
-#' @param type `"latex"` or `"html"`.
+#' @param type `"latex"`, `"html"` or `"rtf"`.
 #'
 #' @return The sanitized character object.
+#'
+#' @details
+#' HTML and LaTeX code was copied over from `xtable::sanitize()`.
+#'
 #' @export
 #'
 #' @examples
 #' foo <- 'Make $$$ with us'
 #' sanitize(foo, type = 'latex')
-sanitize <- function (str, type = "latex") {
-  if (type == "latex") {
-    result <- str
-    result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
-    result <- gsub("$", "\\$", result, fixed = TRUE)
-    result <- gsub(">", "$>$", result, fixed = TRUE)
-    result <- gsub("<", "$<$", result, fixed = TRUE)
-    result <- gsub("|", "$|$", result, fixed = TRUE)
-    result <- gsub("{", "\\{", result, fixed = TRUE)
-    result <- gsub("}", "\\}", result, fixed = TRUE)
-    result <- gsub("%", "\\%", result, fixed = TRUE)
-    result <- gsub("&", "\\&", result, fixed = TRUE)
-    result <- gsub("_", "\\_", result, fixed = TRUE)
-    result <- gsub("#", "\\#", result, fixed = TRUE)
-    result <- gsub("^", "\\verb|^|", result, fixed = TRUE)
-    result <- gsub("~", "\\~{}", result, fixed = TRUE)
-    result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
+sanitize <- function (str, type = c('latex', 'html', 'rtf')) {
+  type <- match.arg(type)
+  result <- str
+
+  if (type == 'latex') {
+    result <- gsub('\\\\', 'SANITIZE.BACKSLASH', result)
+    result <- gsub('$', '\\$', result, fixed = TRUE)
+    result <- gsub('>', '$>$', result, fixed = TRUE)
+    result <- gsub('<', '$<$', result, fixed = TRUE)
+    result <- gsub('|', '$|$', result, fixed = TRUE)
+    result <- gsub('{', '\\{', result, fixed = TRUE)
+    result <- gsub('}', '\\}', result, fixed = TRUE)
+    result <- gsub('%', '\\%', result, fixed = TRUE)
+    result <- gsub('&', '\\&', result, fixed = TRUE)
+    result <- gsub('_', '\\_', result, fixed = TRUE)
+    result <- gsub('#', '\\#', result, fixed = TRUE)
+    result <- gsub('^', '\\verb|^|', result, fixed = TRUE)
+    result <- gsub('~', '\\~{}', result, fixed = TRUE)
+    result <- gsub('SANITIZE.BACKSLASH', '$\\backslash$',
       result, fixed = TRUE)
-    return(result)
   }
-  else {
-    result <- str
-    result <- gsub("&", "&amp;", result, fixed = TRUE)
-    result <- gsub(">", "&gt;", result, fixed = TRUE)
-    result <- gsub("<", "&lt;", result, fixed = TRUE)
-    return(result)
+  else if (type == 'html'){
+    result <- gsub('&', '&amp;', result, fixed = TRUE)
+    result <- gsub('>', '&gt;', result, fixed = TRUE)
+    result <- gsub('<', '&lt;', result, fixed = TRUE)
+  } else {
+    result <- gsub('\\', '\\\\', result, fixed = TRUE)
+    result <- gsub('{', '\\{', result, fixed = TRUE)
+    result <- gsub('}', '\\}', result, fixed = TRUE)
   }
+
+  return(result)
 }
 
 

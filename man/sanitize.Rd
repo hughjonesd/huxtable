@@ -2,20 +2,23 @@
 % Please edit documentation in R/misc.R
 \name{sanitize}
 \alias{sanitize}
-\title{Sanitize table elements}
+\title{Escape text for various formats}
 \usage{
-sanitize(str, type = "latex")
+sanitize(str, type = c("latex", "html", "rtf"))
 }
 \arguments{
 \item{str}{A character object.}
 
-\item{type}{\code{"latex"} or \code{"html"}.}
+\item{type}{\code{"latex"}, \code{"html"} or \code{"rtf"}.}
 }
 \value{
 The sanitized character object.
 }
 \description{
-This is copied over from \code{xtable::sanitize()}.
+This escapes a string for LaTeX, HTML or RTF.
+}
+\details{
+HTML and LaTeX code was copied over from \code{xtable::sanitize()}.
 }
 \examples{
 foo <- 'Make $$$ with us'

@@ -77,7 +77,7 @@ clean_contents <- function(
   contents[is.na(contents)] <- na_string(ht)
 
   for (col in seq_len(ncol(contents))) {
-    if (type %in% c('latex', 'html')) {
+    if (type %in% c('latex', 'html', 'rtf')) {
       to_esc <- escape_contents(ht)[, col]
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
