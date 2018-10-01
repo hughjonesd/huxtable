@@ -9,7 +9,6 @@ default_table_width_unit <- '\\textwidth'
 
 
 #' @export
-#'
 #' @rdname to_latex
 print_latex <- function (ht, ...) {
   cat(to_latex(ht, ...))

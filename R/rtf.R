@@ -1,9 +1,7 @@
 
 
 #' @export
-#'
 #' @rdname to_rtf
-#'
 print_rtf <- function(ht, ...) cat(to_rtf(ht, ...))
 
 
@@ -37,6 +35,8 @@ print_rtf <- function(ht, ...) cat(to_rtf(ht, ...))
 to_rtf <- function (ht, ...) UseMethod('to_rtf')
 
 
+#' @export
+#' @rdname to_rtf
 to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html

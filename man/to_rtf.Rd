@@ -3,11 +3,15 @@
 \name{print_rtf}
 \alias{print_rtf}
 \alias{to_rtf}
+\alias{to_rtf.huxtable}
 \title{These functions print or return an RTF table.}
 \usage{
 print_rtf(ht, ...)
 
 to_rtf(ht, ...)
+
+\method{to_rtf}{huxtable}(ht, add_color_table = NULL,
+  add_font_table = NULL, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
