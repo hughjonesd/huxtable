@@ -7,7 +7,8 @@
 \alias{quick_docx}
 \alias{quick_pptx}
 \alias{quick_xlsx}
-\title{Quickly print objects to a PDF, HTML, or Microsoft Office document.}
+\alias{quick_rtf}
+\title{Quickly print objects to a PDF, HTML, Microsoft Office or RTF document.}
 \usage{
 quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
   open = interactive(), width = NULL, height = NULL)
@@ -22,6 +23,9 @@ quick_pptx(..., file = confirm("huxtable-output.pptx"), borders = 0.4,
   open = interactive())
 
 quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
+  open = interactive())
+
+quick_rtf(..., file = confirm("huxtable-output.rtf"), borders = 0.4,
   open = interactive())
 }
 \arguments{

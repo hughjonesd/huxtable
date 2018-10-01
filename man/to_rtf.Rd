@@ -4,7 +4,7 @@
 \alias{print_rtf}
 \alias{to_rtf}
 \alias{to_rtf.huxtable}
-\title{These functions print or return an RTF table.}
+\title{Create RTF representing a huxtable}
 \usage{
 print_rtf(ht, fc_tables = rtf_fc_tables(ht), ...)
 
@@ -17,24 +17,25 @@ to_rtf(ht, ...)
 
 \item{fc_tables}{See \code{\link[=rtf_fc_tables]{rtf_fc_tables()}}.}
 
-\item{...}{Arguments to pass to methods. Not currently used.}
+\item{...}{Arguments to pass to methods.}
 }
 \value{
-\code{to_rtf} returns a string representing an RTF table. \code{print_rtf} prints the string and
-returns \code{NULL}.
+\code{to_rtf} returns a string representing an RTF table. The \code{fc_tables} attribute of the
+returned string will contain the \code{fc_tables} object that was passed in (or that was autocreated
+if none was passed). \code{print_rtf} prints the string and returns \code{NULL}.
 }
 \description{
-These functions print or return an RTF table.
+These functions print or return an RTF character string.
 }
 \details{
-RTF files use a single per-document table for colors, and one for fonts.  If you are printing
-multiple huxtables in a document, you need to:
-\itemize{
+RTF files use a single per-document table for colors, and one for fonts. If you are printing
+multiple huxtables in a document, you need to make sure that the font and color table is
+set up correctly and that the RTF tables refer to them correctly.
+\enumerate{
 \item Prepare all the huxtables;
 \item Call \code{\link[=rtf_fc_tables]{rtf_fc_tables()}}, passing in all the huxtables;
 \item Print the \code{rtfFCTables} object in the RTF document header;
-\item Pass in the \code{rtfFCTables} to each call to \code{print_rtf}, so that fonts and colors
-refer to the correct table items.
+\item Pass in the \code{rtfFCTables} object to each call to \code{print_rtf}.
 }
 }
 \section{Limitations}{
@@ -42,6 +43,8 @@ refer to the correct table items.
 \itemize{
 \item \code{\link[=col_width]{col_width()}} can only be numeric or "pt".
 \item \code{\link[=rotation]{rotation()}} can only be 90 or 270 (i.e. text going up or down).
+\item rmarkdown's \code{rtf_document} can't yet print out customized color tables, so custom fonts
+and colors won't work in this context.
 }
 }
 

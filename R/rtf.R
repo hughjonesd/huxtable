@@ -7,30 +7,35 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 }
 
 
-#' These functions print or return an RTF table.
+#' Create RTF representing a huxtable
+#'
+#' These functions print or return an RTF character string.
 #'
 #' @param ht A huxtable.
 #' @param fc_tables See [rtf_fc_tables()].
-#' @param ... Arguments to pass to methods. Not currently used.
+#' @param ... Arguments to pass to methods.
 #'
-#' @return `to_rtf` returns a string representing an RTF table. `print_rtf` prints the string and
-#'   returns `NULL`.
+#' @return `to_rtf` returns a string representing an RTF table. The `fc_tables` attribute of the
+#'   returned string will contain the `fc_tables` object that was passed in (or that was autocreated
+#'   if none was passed). `print_rtf` prints the string and returns `NULL`.
 #' @export
 #'
 #' @details
-#' RTF files use a single per-document table for colors, and one for fonts.  If you are printing
-#' multiple huxtables in a document, you need to:
+#' RTF files use a single per-document table for colors, and one for fonts. If you are printing
+#' multiple huxtables in a document, you need to make sure that the font and color table is
+#' set up correctly and that the RTF tables refer to them correctly.
 #'
-#' * Prepare all the huxtables;
-#' * Call [rtf_fc_tables()], passing in all the huxtables;
-#' * Print the `rtfFCTables` object in the RTF document header;
-#' * Pass in the `rtfFCTables` to each call to `print_rtf`, so that fonts and colors
-#'   refer to the correct table items.
+#' 1. Prepare all the huxtables;
+#' 2. Call [rtf_fc_tables()], passing in all the huxtables;
+#' 3. Print the `rtfFCTables` object in the RTF document header;
+#' 4. Pass in the `rtfFCTables` object to each call to `print_rtf`.
 #'
 #' @section Limitations:
 #'
 #' * [col_width()] can only be numeric or "pt".
 #' * [rotation()] can only be 90 or 270 (i.e. text going up or down).
+#' * rmarkdown's `rtf_document` can't yet print out customized color tables, so custom fonts
+#'   and colors won't work in this context.
 #'
 #' @family printing functions
 #'
@@ -55,8 +60,8 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   assert_that(inherits(fc_tables, 'rtfFCTables'))
   color_index <- function (color) {
     res <- match(color, fc_tables$colors)
-    if (any(is.na(res) & ! is.na(color))) warning('Color not found in color table ',
-          '(did you change colors after calling `rtf_fc_tables`?)')
+    if (any(is.na(res) & ! is.na(color))) warning('Color not found in color table.\n',
+          '(Did you change colors after calling `rtf_fc_tables`?)')
     res
   }
 
@@ -102,11 +107,6 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   bdr_def_top    <- bdr_def_horiz[ - nrow(bdr_def_horiz), , drop = FALSE]
   bdr_def_bottom <- bdr_def_horiz[ -1, , drop = FALSE]
 
-  # bdr_def_left   <- paste0('\\brsp', left_padding(ht) * 20, ' ', bdr_def_left)
-  # bdr_def_right  <- paste0('\\brsp', right_padding(ht) * 20, ' ', bdr_def_right)
-  # bdr_def_top    <- paste0('\\brsp', top_padding(ht) * 20, ' ', bdr_def_top)
-  # bdr_def_bottom <- paste0('\\brsp', bottom_padding(ht) * 20, ' ', bdr_def_bottom)
-
   bdr_def_left   <- blank_where(bdr_def_left, cb$vert[, - ncol(cb$vert), drop = FALSE] == 0)
   bdr_def_right  <- blank_where(bdr_def_right, cb$vert[, -1, drop = FALSE] == 0)
   bdr_def_top    <- blank_where(bdr_def_top, cb$horiz[ - nrow(cb$horiz), , drop = FALSE] == 0)
@@ -128,21 +128,32 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   valign_def[rotation(ht) == 90] <- '\\cltxbtlr'
   valign_def[rotation(ht) == 270] <- '\\cltxtbrl'
 
-  text_width_twips <- 6 * 1440 # 6 inches
+  pad_def <- sprintf('\\clpadl%d \\clpadt%d \\clpadb%d \\clpadr%d ',
+        left_padding(ht)   * 20,
+        top_padding(ht)    * 20,
+        bottom_padding(ht) * 20,
+        right_padding(ht)  * 20)
+
+  table_width <- width(ht)
+  if (! is.numeric(table_width)) {
+    warning('to_rtf can only handle numeric table width')
+    table_width <- 0.5
+  }
+  text_width_twips <- 6 * 72 * 20 # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips
   col_width <- col_width(ht)
   col_width <- if (is.numeric(col_width)) {
-    col_width * text_width_twips
+    col_width * text_width_twips * table_width
   } else if (all(grepl('pt', col_width))) {
     as.numeric(sub('((\\d|\\.)+).*', '\\1', col_width)) * 20
   } else {
     if (! all(is.na(col_width))) warning('to_rtf can only handle numeric or "pt" col_width')
-    rep(1/ncol(ht) * text_width_twips, ncol(ht))
+    rep(1/ncol(ht) * text_width_twips * table_width, ncol(ht))
   }
-  col_width <- cumsum(col_width) # \cellx specifies the position of the RH cell edge
-  cellx_def <- sprintf('\\cellx%d ', col_width)
+  right_edges <- cumsum(col_width) # \cellx specifies the position of the RH cell edge
+  cellx_def <- sprintf('\\cellx%d ', right_edges)
 
   # cellx_def has to go along rows:
-  cellx <- paste0(merge_def, bdr_def, bg_def, valign_def, rep(cellx_def, each = nrow(ht)))
+  cellx <- paste0(merge_def, bdr_def, bg_def, valign_def, pad_def, rep(cellx_def, each = nrow(ht)))
 
   dim(cellx) <- dim(ht)
 
@@ -158,8 +169,8 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   ft <- font(ht)
   findex <-  match(ft[! is.na(ft)], fc_tables$fonts) - 1
-  if (any(is.na(findex))) warning('Font not found in font table ',
-        '(did you change a font after calling `rtf_fc_table`?)')
+  if (any(is.na(findex))) warning('Font not found in font table.\n',
+        '(Did you change a font after calling `rtf_fc_table`?)')
   cells[! is.na(ft)] <- paste0('{\\f', findex, ' ', cells[! is.na(ft)], '}')
 
   align_map <- c('left' = '\\ql', 'center' = '\\qc', 'right' = '\\qr')
@@ -174,6 +185,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = '\n')
+  attr(result, 'fc_tables') <- fc_tables
 
   return(result)
 }

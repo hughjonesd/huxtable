@@ -5,7 +5,7 @@
 NULL
 
 
-#' Quickly print objects to a PDF, HTML, or Microsoft Office document.
+#' Quickly print objects to a PDF, HTML, Microsoft Office or RTF document.
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -169,7 +169,7 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
 #' @rdname quick-output
 #' @export
 quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
-  open = interactive()) {
+      open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -182,6 +182,33 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
     wb <- as_Workbook(ht, Workbook = wb, sheet = paste("sheet", ix))
   }
   openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
+
+  if (open) auto_open(file)
+  invisible(NULL)
+}
+
+#' @rdname quick-output
+#' @export
+quick_rtf <- function (..., file = confirm('huxtable-output.rtf'), borders = 0.4,
+      open = interactive()) {
+  assert_that(is.number(borders))
+  assert_that(is.flag(open))
+  force(file)
+  hts <- huxtableize(list(...), borders)
+
+  fc_tbls <- rtf_fc_tables(hts)
+
+  sink(file)
+  tryCatch({
+    cat('\\rtf1\\ansi\\deff0\n')
+    print(fc_tbls)
+    cat('\n\n\n')
+    lapply(hts, print_rtf)
+    cat('\n\n\n}')
+  },
+    error = identity,
+    finally = {sink()}
+  )
 
   if (open) auto_open(file)
   invisible(NULL)
