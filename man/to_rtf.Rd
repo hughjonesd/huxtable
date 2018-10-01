@@ -6,23 +6,18 @@
 \alias{to_rtf.huxtable}
 \title{These functions print or return an RTF table.}
 \usage{
-print_rtf(ht, ...)
+print_rtf(ht, fc_tables = rtf_fc_tables(ht), ...)
 
 to_rtf(ht, ...)
 
-\method{to_rtf}{huxtable}(ht, add_color_table = NULL,
-  add_font_table = NULL, ...)
+\method{to_rtf}{huxtable}(ht, fc_tables = rtf_fc_tables(ht), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
+\item{fc_tables}{See \code{\link[=rtf_fc_tables]{rtf_fc_tables()}}.}
+
 \item{...}{Arguments to pass to methods. Not currently used.}
-
-\item{add_color_table}{Add a "colortbl" element to the RTF string. If \code{NULL} (the default), only
-add a color table if any text, background or border colors are set.}
-
-\item{add_font_table}{Add a "fonttbl" element to the RTF string.  If \code{NULL} (the default), only
-add a font table if any fonts are set.}
 }
 \value{
 \code{to_rtf} returns a string representing an RTF table. \code{print_rtf} prints the string and
@@ -32,8 +27,15 @@ returns \code{NULL}.
 These functions print or return an RTF table.
 }
 \details{
-If color/font tables are not added, they will instead be returned as
-\code{"color_table"}/\code{"font_table"} attributes of the string.
+RTF files use a single per-document table for colors, and one for fonts.  If you are printing
+multiple huxtables in a document, you need to:
+\itemize{
+\item Prepare all the huxtables;
+\item Call \code{\link[=rtf_fc_tables]{rtf_fc_tables()}}, passing in all the huxtables;
+\item Print the \code{rtfFCTables} object in the RTF document header;
+\item Pass in the \code{rtfFCTables} to each call to \code{print_rtf}, so that fonts and colors
+refer to the correct table items.
+}
 }
 \section{Limitations}{
 

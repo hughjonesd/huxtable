@@ -2,16 +2,15 @@
 
 #' @export
 #' @rdname to_rtf
-print_rtf <- function(ht, ...) cat(to_rtf(ht, ...))
+print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
+  cat(to_rtf(ht, fc_tables, ...))
+}
 
 
 #' These functions print or return an RTF table.
 #'
 #' @param ht A huxtable.
-#' @param add_color_table Add a "colortbl" element to the RTF string. If `NULL` (the default), only
-#'   add a color table if any text, background or border colors are set.
-#' @param add_font_table Add a "fonttbl" element to the RTF string.  If `NULL` (the default), only
-#'   add a font table if any fonts are set.
+#' @param fc_tables See [rtf_fc_tables()].
 #' @param ... Arguments to pass to methods. Not currently used.
 #'
 #' @return `to_rtf` returns a string representing an RTF table. `print_rtf` prints the string and
@@ -19,8 +18,14 @@ print_rtf <- function(ht, ...) cat(to_rtf(ht, ...))
 #' @export
 #'
 #' @details
-#' If color/font tables are not added, they will instead be returned as
-#' `"color_table"`/`"font_table"` attributes of the string.
+#' RTF files use a single per-document table for colors, and one for fonts.  If you are printing
+#' multiple huxtables in a document, you need to:
+#'
+#' * Prepare all the huxtables;
+#' * Call [rtf_fc_tables()], passing in all the huxtables;
+#' * Print the `rtfFCTables` object in the RTF document header;
+#' * Pass in the `rtfFCTables` to each call to `print_rtf`, so that fonts and colors
+#'   refer to the correct table items.
 #'
 #' @section Limitations:
 #'
@@ -37,53 +42,29 @@ to_rtf <- function (ht, ...) UseMethod('to_rtf')
 
 #' @export
 #' @rdname to_rtf
-to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, ...) {
+to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html
   #
-  # TODO: font, padding;
-  # how to handle width
+  # TODO:
+  # how to handle table width
   # row_height and height
   # multiple col- and rowspan together may not work (perhaps need to override background colors?)
   # wrap (maybe replace spaces with nbsp?)
-  # do color tables better when there are multiple tables in the document. (But is it worth it?)
   #
-  if (is.null(add_color_table)) add_color_table <-
-        any(! is.na(background_color(ht))) ||
-        any(! is.na(text_color(ht))) ||
-        any(! is.na(unlist(collapsed_border_colors(ht))))
-  if (is.null(add_font_table)) add_font_table <- any(! is.na(font(ht)))
-  assert_that(is.flag(add_color_table), is.flag(add_font_table))
+  assert_that(inherits(fc_tables, 'rtfFCTables'))
+  color_index <- function (color) {
+    res <- match(color, fc_tables$colors)
+    if (any(is.na(res) & ! is.na(color))) warning('Color not found in color table ',
+          '(did you change colors after calling `rtf_fc_tables`?)')
+    res
+  }
 
-  cc <- clean_contents(ht, type = "rtf")
-
-  # cell borders go before \cellx, e.g.:
-  # \clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs
-  # per-cell, add stuff to cellx_width to create full cell spec;
   cb  <- collapsed_borders(ht)
   cbc <- collapsed_border_colors(ht)
   cbs <- collapsed_border_styles(ht)
   bgc <- background_color(ht)
-  bgc[is.na(bgc)] <- 'white'
-
-  ## MAKE COLOR TABLE -----
-  ucolors <- unique(c(cbc$vert, cbc$horiz, bgc))
-  ucolors_str <- ucolors
-  ucolors_str[is.na(ucolors_str)] <- 'black' # we made backgrounds white before
-  ucolors_str <- grDevices::col2rgb(ucolors_str)
-  ucolors_str <- apply(ucolors_str, 2, function (x) {
-    sprintf('\\red%d\\green%d\\blue%d', x[1], x[2], x[3])
-  })
-  color_tbl <- paste0(ucolors_str, ';', collapse = '')
-  color_tbl <- paste0('{\\colortbl;', color_tbl, '}\n')
-
-  ## MAKE FONT TABLE ----
-  font_tbl <- ''
-  if (any(! is.na(font(ht)))) {
-    fonts <- unique(font(ht))
-    font_tbl_body <- paste0('\\f', seq(0, along = fonts), '\\f', fonts, ';}', collapse = '\n')
-    font_tbl <- paste('{\\fonttbl', font_tbl_body , '}', sep = '\n')
-  }
+  tc <- text_color(ht)
 
   ## MAKE CELLX DEFINITIONS ----
 
@@ -104,8 +85,10 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
         )
   bdr_style_vert  <- bdr_style_map[cbs$vert]
   bdr_style_horiz <- bdr_style_map[cbs$horiz]
-  bdr_color_vert  <- sprintf('\\brdrcf%d', match(cbc$vert, ucolors))
-  bdr_color_horiz <- sprintf('\\brdrcf%d', match(cbc$horiz, ucolors))
+  bdr_color_vert  <- sprintf('\\brdrcf%d', color_index(cbc$vert))
+  bdr_color_horiz <- sprintf('\\brdrcf%d', color_index(cbc$horiz))
+  bdr_color_vert <- blank_where(bdr_color_vert, is.na(cbc$vert))
+  bdr_color_horiz <- blank_where(bdr_color_horiz, is.na(cbc$horiz))
 
   # these are matrices (horiz = nr+1 * nc, vert = nr * nc+1).
   # For cell (i, j), top and left are i, j; right is i, j+1; bottom is i+1,j; in respective matrices
@@ -119,19 +102,24 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
   bdr_def_top    <- bdr_def_horiz[ - nrow(bdr_def_horiz), , drop = FALSE]
   bdr_def_bottom <- bdr_def_horiz[ -1, , drop = FALSE]
 
-  bdr_def_left   <- paste0('\\clbrdrl', bdr_def_left)
-  bdr_def_right  <- paste0('\\clbrdrr', bdr_def_right)
-  bdr_def_top    <- paste0('\\clbrdrt', bdr_def_top)
-  bdr_def_bottom <- paste0('\\clbrdrb', bdr_def_bottom)
+  # bdr_def_left   <- paste0('\\brsp', left_padding(ht) * 20, ' ', bdr_def_left)
+  # bdr_def_right  <- paste0('\\brsp', right_padding(ht) * 20, ' ', bdr_def_right)
+  # bdr_def_top    <- paste0('\\brsp', top_padding(ht) * 20, ' ', bdr_def_top)
+  # bdr_def_bottom <- paste0('\\brsp', bottom_padding(ht) * 20, ' ', bdr_def_bottom)
 
   bdr_def_left   <- blank_where(bdr_def_left, cb$vert[, - ncol(cb$vert), drop = FALSE] == 0)
   bdr_def_right  <- blank_where(bdr_def_right, cb$vert[, -1, drop = FALSE] == 0)
   bdr_def_top    <- blank_where(bdr_def_top, cb$horiz[ - nrow(cb$horiz), , drop = FALSE] == 0)
   bdr_def_bottom <- blank_where(bdr_def_bottom, cb$horiz[ -1, , drop = FALSE] == 0)
 
+  bdr_def_left   <- paste0('\\clbrdrl', bdr_def_left)
+  bdr_def_right  <- paste0('\\clbrdrr', bdr_def_right)
+  bdr_def_top    <- paste0('\\clbrdrt', bdr_def_top)
+  bdr_def_bottom <- paste0('\\clbrdrb', bdr_def_bottom)
+
   bdr_def <- paste0(bdr_def_top, bdr_def_left, bdr_def_bottom, bdr_def_right)
 
-  bg_def <- sprintf('\\clcbpat%d', match(bgc, ucolors))
+  bg_def <- sprintf('\\clcbpat%d', color_index(bgc))
   bg_def <- blank_where(bg_def, is.na(bgc))
 
   valign_map <- c(top = '\\clvertalt', middle = '\\clvertalc', bottom = '\\clvertalb')
@@ -159,11 +147,21 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
   dim(cellx) <- dim(ht)
 
   ## MAKE CELL CONTENTS ----
-  cells <- cc
+  cc <- clean_contents(ht, type = 'rtf')
+  cells <- paste0('{', cc, '}')
   cells[bold(ht)] <- paste0('\\b ', cells[bold(ht)], '\\b0')
   cells[italic(ht)] <- paste0('\\i ', cells[italic(ht)], '\\i0')
   fs <- ceiling(font_size(ht) * 2) # 'half-points', must be integer
   cells[! is.na(fs)] <- paste0('{\\fs', fs[! is.na(fs)], ' ', cells[! is.na(fs)], '}')
+  cells[! is.na(tc)] <- paste0('{\\cf', match(tc[! is.na(tc)], fc_tables$colors), ' ',
+        cells[! is.na(tc)], '}')
+
+  ft <- font(ht)
+  findex <-  match(ft[! is.na(ft)], fc_tables$fonts) - 1
+  if (any(is.na(findex))) warning('Font not found in font table ',
+        '(did you change a font after calling `rtf_fc_table`?)')
+  cells[! is.na(ft)] <- paste0('{\\f', findex, ' ', cells[! is.na(ft)], '}')
+
   align_map <- c('left' = '\\ql', 'center' = '\\qc', 'right' = '\\qr')
   cells <- paste0(align_map[real_align(ht)], cells)
   cells <- paste0('\\pard\\intbl', cells, '\\cell')
@@ -172,36 +170,97 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
   ## CREATE ROWS ----
   cellx_rows <- apply(cellx, 1, paste0, collapse = '\n')
   cell_content_rows <- apply(cells, 1, paste0, collapse = '\n')
-  # the braces keep the colortbl and fonttbl local
   rows <- paste0('{\n\\trowd\n', cellx_rows, cell_content_rows, '\n\\row\n}\n')
 
-  ## EVERYTHING TOGETHER ----
+  ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = '\n')
-  if (add_color_table) result <- paste0(color_tbl, result) else attr(result, 'color_table') <- color_tbl
-  if (add_font_table)  result <- paste0(font_tbl, result)  else attr(result, 'font_table') <- font_tbl
 
   return(result)
-  # each row starts \trowd and ends \row
-  # column widths are in twips, 1 twip = 1/20pt = 1/1440 inch
-  # defined after \trowd like:
-  # \cellxWIDTH
-  # \cellxWIDTH...
-  # cell borders go before \cellx, e.g.:
-  #
-  # \clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs
-  #  \cellx1000
-  #
-  #  That's top,left,bottom,right.
-  #
-  #  Borders are \brdrs (single), \brdrth (double thickness), \brdrdb (double), \brdrdot, \brdrdash,
-  #  \brdrhair (very thin?) or \brdrwN where N is border width in twips!!!
-  #  \brdrcfN is color of border (index into \colortbl...!)
-  #
-  #  \brspN is cell padding in twips...
-  #
+}
 
 
-  #
-  # font needs a "font table", should one provide one's own
+#' Create RTF font and color tables
+#'
+#' @param ... One or more objects of class `huxtable`.
+#' @param extra_fonts Extra fonts to include. These will be first in the fonts table.
+#' @param extra_colors Extra colors to include, as R color names.
+#'
+#' @return An object of class `rtfFCTables`. This is a list containing two items: `"fonts"`
+#' is a character vector of unique font names; `"colors"` is a character vector of unique color
+#' names.
+#'
+#' @details
+#' RTF documents have a single table of fonts, and a table of colors, in the RTF header. To
+#' create font and color tables for multiple huxtables, use this command. You can `print` the
+#' returned object in the RTF header. Pass it to [print_rtf()] or [to_rtf()] to ensure that
+#' huxtables print out the correct colour references.
+#' @export
+#'
+#' @examples
+#'
+#' # Printing multiple huxtables
+#' ht <- huxtable("Blue with red border")
+#' ht <- set_all_borders(ht, 1)
+#' ht <- set_all_border_colors(ht, "red")
+#' background_color(ht) <- "blue"
+#'
+#' ht2 <- huxtable("Dark green text")
+#' text_color(ht2) <- "darkgreen"
+#' fc_tbls <- rtf_fc_tables(ht, ht2)
+#'
+#' # In the document header:
+#' print(fc_tbls)
+#'
+#' # In the document body:
+#' print_rtf(ht, fc_tables = fc_tbls)
+#' print_rtf(ht2, fc_tables = fc_tbls)
+rtf_fc_tables <- function (..., extra_fonts = 'Times', extra_colors = character(0)) {
+  hts <- list(...)
+  assert_that(all(sapply(hts, is_huxtable)))
 
+  fonts <- unlist(lapply(hts, function (ht) font(ht)))
+  fonts <- unique(c(extra_fonts, fonts))
+  fonts <- stats::na.omit(fonts)
+
+  colors <- unlist(lapply(hts, function (ht) {
+    c(text_color(ht), background_color(ht), unlist(collapsed_border_colors(ht)))
+  }))
+  colors <- unique(c(extra_colors, colors))
+  colors <- stats::na.omit(colors)
+
+  result <- list()
+  result$fonts <- fonts
+  result$colors <- colors
+  class(result) <- 'rtfFCTables'
+
+  result
+}
+
+
+font_table_string <- function (x) {
+  font_tbl_body <- ''
+  font_tbl_body <- paste0('  {\\f', seq(0, along = x$fonts), ' ', x$fonts, ';}', collapse = '\n')
+  paste('{\\fonttbl', font_tbl_body , '}', sep = '\n')
+}
+
+
+color_table_string <- function (x) {
+  colors_str <- grDevices::col2rgb(x$colors)
+  colors_str <- apply(colors_str, 2, function (clr) {
+    sprintf('\\red%d\\green%d\\blue%d', clr[1], clr[2], clr[3])
+  })
+  color_tbl <- paste0(colors_str, ';', collapse = '')
+  color_tbl <- paste0('{\\colortbl;', color_tbl, '}\n')
+
+  return(color_tbl)
+}
+
+
+format.rtfFCTables <- function (x, ...) {
+  paste(font_table_string(x), color_table_string(x), sep = '\n')
+}
+
+
+print.rtfFCTables <- function (x, ...) {
+  cat(format(x, ...))
 }
