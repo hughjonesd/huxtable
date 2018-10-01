@@ -46,6 +46,8 @@ to_rtf.huxtable <- function (ht, add_color_table = NULL, add_font_table = NULL, 
   # row_height and height
   # multiple col- and rowspan together may not work (perhaps need to override background colors?)
   # wrap (maybe replace spaces with nbsp?)
+  # do color tables better when there are multiple tables in the document. (But is it worth it?)
+  #
   if (is.null(add_color_table)) add_color_table <-
         any(! is.na(background_color(ht))) ||
         any(! is.na(text_color(ht))) ||
