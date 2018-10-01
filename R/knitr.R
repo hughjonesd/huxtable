@@ -24,6 +24,7 @@ knit_print.huxtable <- function (x, options, ...) {
         html   = 'to_html',
         md     = 'to_md',
         screen = 'to_screen',
+        rtf    = 'to_rtf',
         { # default
         warning(glue::glue(
             'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
@@ -91,7 +92,8 @@ knit_print.data.frame <- function(x, options, ...) {
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
 #'
-#' @return 'html', 'latex', or something else. If we are not in a knitr document, returns an empty string.
+#' @return 'html', 'latex', or something else. If we are not in a knitr document, returns an empty
+#'   string.
 #' @export
 #'
 #' @examples
