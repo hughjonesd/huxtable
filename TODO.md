@@ -18,8 +18,17 @@ Others
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
+* Rotation should be between 0 and 360 (right?)
+
 * Methods for R packages like janitor (tabyl) or glimpse?
 
+* to_rtf (started)
+
+* as_datatable for DT::renderDT()?
+  - Useful if you want to add the slick features of DT to your work
+  - has format* functions for number_format
+  - formatStyle can deal with bold, text_color, background_color, font_size et al.
+  - also styleInterval and styleEqual are fun to look at
 * border styles:
   - Use arydshln in LaTeX?
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them

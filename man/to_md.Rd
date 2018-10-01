@@ -41,6 +41,7 @@ print_md(ht)
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},
-  \code{\link{print_latex}}, \code{\link{print_screen}}
+  \code{\link{print_latex}}, \code{\link{print_rtf}},
+  \code{\link{print_screen}}
 }
 \concept{printing functions}

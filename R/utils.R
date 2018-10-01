@@ -56,7 +56,11 @@ assert_package <- function (fun, package) {
 
 
 # return character matrix of formatted contents, suitably escaped
-clean_contents <- function(ht, type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel'), ...) {
+clean_contents <- function(
+        ht,
+        type = c('latex', 'html', 'screen', 'markdown', 'word', 'excel', 'rtf'),
+        ...
+      ) {
   type <- match.arg(type)
   contents <- as.matrix(as.data.frame(ht))
 

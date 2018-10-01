@@ -51,6 +51,7 @@ print_screen(ht)
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},
-  \code{\link{print_latex}}, \code{\link{print_md}}
+  \code{\link{print_latex}}, \code{\link{print_md}},
+  \code{\link{print_rtf}}
 }
 \concept{printing functions}
