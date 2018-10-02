@@ -10,7 +10,7 @@ Authors@R:
 Author: David Hugh-Jones [aut, cre]
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Like 'xtable', creates styled tables. Export to HTML, LaTeX, 'Word', 
-  'Excel', 'PowerPoint' and other formats. Simple, modern interface to manipulate 
+  'Excel', 'PowerPoint' and RTF. Simple, modern interface to manipulate 
   borders, size, position, captions, colours, text styles and number formatting.
   Table cells can span multiple rows and/or columns.
   Includes  a 'huxreg' function for creation of regression tables, and 'quick_*' 

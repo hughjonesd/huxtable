@@ -57,6 +57,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   #   - row_height, col_width
   #   - align, valign, border*,  background_color, escape_contents, rowspan, colspan, rotation
   #   - font, font_size, bold, italic, text_color, na_string, number_format, align="."
+  #   - multiple tables
   # not yet working:
   # padding
   # wrap
