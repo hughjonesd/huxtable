@@ -16,14 +16,14 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #' @param ... Arguments to pass to methods.
 #'
 #' @return `to_rtf` returns a string representing an RTF table. The `fc_tables` attribute of the
-#'   returned string will contain the `fc_tables` object that was passed in (or that was autocreated
-#'   if none was passed). `print_rtf` prints the string and returns `NULL`.
+#'   returned string will contain the `fc_tables` object that was passed in (or autocreated).
+#'   `print_rtf` prints the string and returns `NULL`.
 #' @export
 #'
 #' @details
 #' RTF files use a single per-document table for colors, and one for fonts. If you are printing
 #' multiple huxtables in a document, you need to make sure that the font and color table is
-#' set up correctly and that the RTF tables refer to them correctly.
+#' set up correctly and that the RTF tables refer back to them. See [rtf_fc_tables()].
 #'
 #' 1. Prepare all the huxtables;
 #' 2. Call [rtf_fc_tables()], passing in all the huxtables;
@@ -32,10 +32,11 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #'
 #' @section Limitations:
 #'
-#' * [col_width()] can only be numeric or "pt".
-#' * [rotation()] can only be 90 or 270 (i.e. text going up or down).
 #' * rmarkdown's `rtf_document` can't yet print out customized color tables, so custom fonts
 #'   and colors won't work in this context.
+#' * [col_width()] and [width()] can only be numeric or "pt".
+#' * If [col_width()] or [width()] is set, cell contents will always wrap.
+#' * [rotation()] can only be 90 or 270 (i.e. text going up or down).
 #'
 #' @family printing functions
 #'
@@ -51,11 +52,14 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html
   #
-  # TODO:
-  # how to handle table width
-  # row_height and height
-  # multiple col- and rowspan together may not work (perhaps need to override background colors?)
-  # wrap (maybe replace spaces with nbsp?)
+  # working:
+  #   - caption, caption_pos, width, position, height
+  #   - row_height, col_width
+  #   - align, valign, border*,  background_color, escape_contents, rowspan, colspan, rotation
+  #   - font, font_size, bold, italic, text_color, na_string, number_format, align="."
+  # not yet working:
+  # padding
+  # wrap
   #
   assert_that(inherits(fc_tables, 'rtfFCTables'))
   color_index <- function (color) {
@@ -128,6 +132,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   valign_def[rotation(ht) == 90] <- '\\cltxbtlr'
   valign_def[rotation(ht) == 270] <- '\\cltxtbrl'
 
+  wrap_def <- ifelse(wrap(ht), '\\clFitText ', '')
   pad_def <- sprintf('\\clpadl%d \\clpadt%d \\clpadb%d \\clpadr%d ',
         left_padding(ht)   * 20,
         top_padding(ht)    * 20,
@@ -135,25 +140,31 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
         right_padding(ht)  * 20)
 
   table_width <- width(ht)
-  if (! is.numeric(table_width)) {
-    warning('to_rtf can only handle numeric table width')
-    table_width <- 0.5
-  }
-  text_width_twips <- 6 * 72 * 20 # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips
   col_width <- col_width(ht)
+
   col_width <- if (is.numeric(col_width)) {
-    col_width * text_width_twips * table_width
+    col_width
   } else if (all(grepl('pt', col_width))) {
     as.numeric(sub('((\\d|\\.)+).*', '\\1', col_width)) * 20
   } else {
     if (! all(is.na(col_width))) warning('to_rtf can only handle numeric or "pt" col_width')
-    rep(1/ncol(ht) * text_width_twips * table_width, ncol(ht))
+    rep(1/ncol(ht), ncol(ht))
   }
-  right_edges <- cumsum(col_width) # \cellx specifies the position of the RH cell edge
+
+  if (! is.numeric(table_width)) {
+    warning('to_rtf can only handle numeric table width')
+    table_width <- get_default_properties('width')[[1]]
+  }
+  text_width_twips <- 6 * 72 * 20 # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips
+  col_width <- col_width * text_width_twips * table_width
+  # \cellx specifies the position of the RH cell edge:
+  right_edges <- ceiling(cumsum(col_width))
+
   cellx_def <- sprintf('\\cellx%d ', right_edges)
 
   # cellx_def has to go along rows:
-  cellx <- paste0(merge_def, bdr_def, bg_def, valign_def, pad_def, rep(cellx_def, each = nrow(ht)))
+  cellx <- paste0(merge_def, bdr_def, bg_def, valign_def, wrap_def, pad_def,
+        rep(cellx_def, each = nrow(ht)))
 
   dim(cellx) <- dim(ht)
 
@@ -181,10 +192,36 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   ## CREATE ROWS ----
   cellx_rows <- apply(cellx, 1, paste0, collapse = '\n')
   cell_content_rows <- apply(cells, 1, paste0, collapse = '\n')
-  rows <- paste0('{\n\\trowd\n', cellx_rows, cell_content_rows, '\n\\row\n}\n')
+
+  row_align_map <- c('left' = '\\trql ', 'center' = '\\trqc ', 'right' = '\\trqr ')
+  row_align <- row_align_map[position(ht)]
+
+  rh <- row_height(ht)
+  table_height <- height(ht)
+  row_heights <- ''
+  if (any(! is.na(rh)) || ! is.na(table_height)) {
+    if (! is.numeric(rh) && ! all(is.na(rh))) warning('to_rtf can only handle numeric row_height.')
+    if (! is.numeric(table_height) && ! is.na(table_height)) warning(
+          'to_rtf can only handle numeric table height.')
+    if (! is.numeric(table_height) || is.na(table_height)) table_height <- 0.33
+    page_height <- 10 * 72 * 20 # 10 inches in twips
+    if (any(is.na(as.numeric(rh)))) rh <- rep(1/nrow(ht), nrow(ht))
+    rh <- ceiling(rh * page_height * table_height)
+    row_heights <- sprintf('\\trrh%d ', rh)
+  }
+  rows <- paste0('{\n\\trowd\n', row_align, row_heights, cellx_rows, cell_content_rows, '\n\\row\n}\n')
+
+  ## CAPTION ----
+
+  caption <- caption(ht)
+  cap_align <- align_map[get_caption_hpos(ht)]
+  caption_par <- if (is.na(caption)) '' else sprintf('{\\pard %s {%s} \\par}', cap_align, caption)
+
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = '\n')
+  result <- if (grepl('top', caption_pos(ht))) paste(caption_par, result, sep = '\n') else paste(
+        result, caption_par, sep = '\n')
   attr(result, 'fc_tables') <- fc_tables
 
   return(result)
