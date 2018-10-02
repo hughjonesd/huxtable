@@ -196,11 +196,11 @@ quick_rtf <- function (..., file = confirm('huxtable-output.rtf'), borders = 0.4
   force(file)
   hts <- huxtableize(list(...), borders)
 
-  fc_tbls <- rtf_fc_tables(hts)
+  fc_tbls <- do.call(rtf_fc_tables, hts)
 
   sink(file)
   tryCatch({
-    cat('\\rtf1\\ansi\\deff0\n')
+    cat('{\\rtf1\\ansi\\deff0\n')
     print(fc_tbls)
     cat('\n\n\n')
     lapply(hts, print_rtf)
