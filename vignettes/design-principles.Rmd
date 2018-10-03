@@ -27,7 +27,7 @@ I also wanted to be able to represent arbitrary data, like a table of descriptiv
 The idea behind huxtable is to store data in a normal data frame, along with properties that describe how
 to display the data, at cell, column, row or table level. Operations on the data frame work as normal, and
 they also affect the display properties. Then, the data can be output in an appropriate format. At the moment,
-those formats are LaTeX, HTML, Markdown, Word/Excel/Powerpoint, and on-screen pretty printing. More could be added.
+those formats are LaTeX, HTML, Markdown, Word/Excel/Powerpoint, RTF and on-screen pretty printing. More could be added.
 
 Another design choice was to have separate functions per feature. Many existing packages use a single 
 function with a large number of options. For instance, `print.xtable` in the `xtable` package 

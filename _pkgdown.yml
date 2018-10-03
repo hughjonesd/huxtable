@@ -84,6 +84,7 @@ reference:
     - background_color
     - colspan
     - escape_contents
+    - merge_cells
     - rotation
     - rowspan
     - valign
@@ -106,6 +107,7 @@ reference:
       - knit_print.huxtable
       - knit_print.data.frame
       - report_latex_dependencies
+      - rtf_fc_tables
       - starts_with("to_")
       - starts_with("quick")
   - title: "Themes"
