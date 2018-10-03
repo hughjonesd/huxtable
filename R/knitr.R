@@ -29,7 +29,7 @@ knit_print.huxtable <- function (x, options, ...) {
         warning(glue::glue(
             'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
             'Set options("huxtable.knitr_output_format") manually to ',
-            '"latex", "html", "md" or "screen.'))
+            '"latex", "html", "rtf", "md" or "screen".'))
           'to_screen'
         })
   res <- do.call(call_name, list(ht = x))
@@ -41,6 +41,8 @@ knit_print.huxtable <- function (x, options, ...) {
   } else if (of == 'html') {
     res <- knitr::asis_output(htmlPreserve(res))
     return(res)
+  } else if (of == 'rtf') {
+    return(knitr::raw_output(res))
   } else {
     return(knitr::asis_output(res))
   }

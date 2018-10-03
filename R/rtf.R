@@ -35,8 +35,8 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #' * rmarkdown's `rtf_document` can't yet print out customized color tables, so custom fonts
 #'   and colors won't work in this context.
 #' * [col_width()] and [width()] can only be numeric or "pt".
-#' * If [col_width()] or [width()] is set, cell contents will always wrap.
-#' * [rotation()] can only be 90 or 270 (i.e. text going up or down).
+#' * [wrap()] has no effect: cell contents always wrap.
+#' * [rotation()] can only be 90 or 270, i.e. text going up or down.
 #'
 #' @family printing functions
 #'
@@ -51,17 +51,10 @@ to_rtf <- function (ht, ...) UseMethod('to_rtf')
 to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html
-  #
-  # working:
-  #   - caption, caption_pos, width, position, height
-  #   - row_height, col_width
-  #   - align, valign, border*,  background_color, escape_contents, rowspan, colspan, rotation
-  #   - font, font_size, bold, italic, text_color, na_string, number_format, align="."
-  #   - multiple tables
+  # the O'Reilly guide is also very helpful
   # not yet working:
-  # padding
   # wrap
-  #
+
   assert_that(inherits(fc_tables, 'rtfFCTables'))
   color_index <- function (color) {
     res <- match(color, fc_tables$colors)
@@ -134,7 +127,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   valign_def[rotation(ht) == 270] <- '\\cltxtbrl'
 
   wrap_def <- ifelse(wrap(ht), '\\clFitText ', '')
-  pad_def <- sprintf('\\clpadl%d \\clpadt%d \\clpadb%d \\clpadr%d ',
+  pad_def <- sprintf('\\clpadfl3\\clpadl%d \\clpadft3\\clpadt%d \\clpadfb3\\clpadb%d \\clpadfr3\\clpadr%d ',
         left_padding(ht)   * 20,
         top_padding(ht)    * 20,
         bottom_padding(ht) * 20,
