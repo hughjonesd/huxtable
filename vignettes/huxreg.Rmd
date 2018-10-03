@@ -5,6 +5,7 @@ date: '`r Sys.Date()`'
 output: 
   html_document: default
   pdf_document:
+    md_extensions: +raw_attribute
     includes:
       in_header: placeins-header.tex
 vignette: >
