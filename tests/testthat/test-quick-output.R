@@ -2,7 +2,7 @@
 context('quick_xxx functions')
 
 
-test_that('Quick output functions work', {
+test_that('Quick output functions create files', {
   skip_if_not_installed('openxlsx')
   skip_if_not_installed('flextable')
 
@@ -24,6 +24,10 @@ test_that('Quick output functions work', {
 
   tf <- tempfile(fileext = '.pptx')
   expect_silent(quick_pptx(m, dfr, ht, file = tf, open = FALSE))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = '.rtf')
+  expect_silent(quick_rtf(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
 })
 

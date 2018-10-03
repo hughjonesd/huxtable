@@ -13,6 +13,7 @@ expect_outputs_unchanged <- function (hx, idx) {
         info = info)
   expect_known_value(to_html(hx),   file = paste0(file, "-html.rds"),   info = info)
   expect_known_value(to_latex(hx),  file = paste0(file, "-latex.rds"),  info = info)
+  expect_known_value(to_rtf(hx),  file = paste0(file, "-rtf.rds"),  info = info)
 }
 
 
@@ -108,7 +109,6 @@ test_that('Some random outputs compile', {
           info = list(index = sr))
     expect_true(file.exists(docxo), info = list(index = sr))
   }
-
 
   for (i in seq(3 * n_tests + 1, 4 * n_tests)) {
     sr <- sample_rows[i]
