@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Cell padding — left_padding" />
 
-<meta property="og:description" content="Functions to get or set the cell padding property of huxtable table cells." />
+<meta property="og:description" content="Functions to get or set the cell padding property of huxtable cells." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@
 
     <div class="ref-description">
     
-    <p>Functions to get or set the cell padding property of huxtable table cells.</p>
+    <p>Functions to get or set the <em>cell padding</em> property of huxtable cells.</p>
     
     </div>
 
@@ -139,9 +139,7 @@
 
 <span class='fu'>top_padding</span>(<span class='no'>ht</span>)
 <span class='fu'>top_padding</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_top_padding</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>set_all_padding</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>set_top_padding</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,6 +147,11 @@
     <tr>
       <th>ht</th>
       <td><p>A huxtable.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to <code>NA</code> to reset to the default, which is
+<code>4</code>.</p></td>
     </tr>
     <tr>
       <th>row</th>
@@ -159,10 +162,6 @@
       <td><p>An optional column specifier.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to <code>NA</code> to reset to the default.</p></td>
-    </tr>
-    <tr>
       <th>byrow</th>
       <td><p>If <code>TRUE</code>, fill in values by row rather than by column.</p></td>
     </tr>
@@ -170,14 +169,9 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>left_padding</code>, the <code>left_padding</code> attribute.
+    <p>For <code>left_padding</code>, the <code>left_padding</code> property.
 For <code>set_left_padding</code>, the <code>ht</code> object.</p>
 <p>Similarly for the other functions.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>set_all_padding</code> is a convenience function which sets left, right, top and bottom cell padding
-for the specified cells.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -206,15 +200,7 @@ for the specified cells.</p>
 <span class='fu'>left_padding</span>(<span class='no'>ht5</span>)</div><div class='output co'>#&gt;    a  b
 #&gt; 1 20  4
 #&gt; 2  4  4
-#&gt; 3  4 20</div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>set_all_padding</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='st'>"20px"</span>)
-<span class='fu'>left_padding</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   a      b     
-#&gt; 1 "20px" "20px"
-#&gt; 2 "20px" "20px"
-#&gt; 3 "20px" "20px"</div><div class='input'><span class='fu'>right_padding</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   a      b     
-#&gt; 1 "20px" "20px"
-#&gt; 2 "20px" "20px"
-#&gt; 3 "20px" "20px"</div></pre>
+#&gt; 3  4 20</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -222,8 +208,6 @@ for the specified cells.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

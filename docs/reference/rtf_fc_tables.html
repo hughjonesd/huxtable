@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Caption — caption • huxtable</title>
+<title>Create RTF font and color tables — rtf_fc_tables • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Caption — caption" />
+<meta property="og:title" content="Create RTF font and color tables — rtf_fc_tables" />
 
-<meta property="og:description" content="Functions to get or set the table-level caption property of a huxtable." />
+<meta property="og:description" content="Create RTF font and color tables" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,60 +114,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Caption</h1>
+    <h1>Create RTF font and color tables</h1>
     
-    <div class="hidden name"><code>caption.Rd</code></div>
+    <div class="hidden name"><code>rtf_fc_tables.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the table-level <em>caption</em> property of a huxtable.</p>
+    <p>Create RTF font and color tables</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>caption</span>(<span class='no'>ht</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_caption</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
+    <pre class="usage"><span class='fu'>rtf_fc_tables</span>(<span class='no'>...</span>, <span class='kw'>extra_fonts</span> <span class='kw'>=</span> <span class='st'>"Times"</span>, <span class='kw'>extra_colors</span> <span class='kw'>=</span> <span class='fu'>character</span>(<span class='fl'>0</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
+      <th>...</th>
+      <td><p>One or more objects of class <code>huxtable</code>.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A length-one character vector. Set to <code>NA</code> to reset to the default, which is
-<code>NA</code>.</p></td>
+      <th>extra_fonts</th>
+      <td><p>Extra fonts to include. These will be first in the fonts table.</p></td>
+    </tr>
+    <tr>
+      <th>extra_colors</th>
+      <td><p>Extra colors to include, as R color names.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>caption</code>, the <code>caption</code> property.
-For <code>set_caption</code>, the <code>ht</code> object.</p>
+    <p>An object of class <code>rtfFCTables</code>. This is a list containing two items: <code>"fonts"</code>
+is a character vector of unique font names; <code>"colors"</code> is a character vector of unique color
+names.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Captions are not escaped. See the example for a workaround.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='caption_pos.html'>caption_pos()</a></code></p></div>
+    <p>RTF documents have a single table of fonts, and a table of colors, in the RTF header. To
+create font and color tables for multiple huxtables, use this command. You can <code>print</code> the
+returned object in the RTF header. Pass it to <code><a href='to_rtf.html'>print_rtf()</a></code> or <code><a href='to_rtf.html'>to_rtf()</a></code> to ensure that
+huxtables print out the correct colour references.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'An example table'</span>
-<span class='fu'>caption</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "An example table"</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   An example table   
-#&gt;         1         1  
-#&gt;         2         2  
-#&gt;         3         3  
-#&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='sanitize.html'>sanitize</a></span>(<span class='st'>'Make $$$ with us'</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'latex'</span>) <span class='co'># escape caption characters</span></div></pre>
+<span class='co'># Printing multiple huxtables</span>
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Blue with red border"</span>)
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>ht</span>, <span class='fl'>1</span>)
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span>(<span class='no'>ht</span>, <span class='st'>"red"</span>)
+<span class='fu'><a href='background_color.html'>background_color</a></span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='st'>"blue"</span>
+
+<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Dark green text"</span>)
+<span class='fu'><a href='text_color.html'>text_color</a></span>(<span class='no'>ht2</span>) <span class='kw'>&lt;-</span> <span class='st'>"darkgreen"</span>
+<span class='no'>fc_tbls</span> <span class='kw'>&lt;-</span> <span class='fu'>rtf_fc_tables</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>)
+
+<span class='co'># In the document header:</span>
+<span class='fu'>print</span>(<span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; {\fonttbl
+#&gt;   {\f0 Times;}
+#&gt; }
+#&gt; {\colortbl;\red0\green0\blue255;\red255\green0\blue0;\red0\green100\blue0;}</div><div class='input'>
+<span class='co'># In the document body:</span>
+<span class='fu'><a href='to_rtf.html'>print_rtf</a></span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; 
+#&gt; {
+#&gt; \trowd
+#&gt; \trqc \clbrdrt\brdrs\brdrw20\brdrcf2\clbrdrl\brdrs\brdrw20\brdrcf2\clbrdrb\brdrs\brdrw20\brdrcf2\clbrdrr\brdrs\brdrw20\brdrcf2\clcbpat1\clvertalt\clpadfl3\clpadl80 \clpadft3\clpadt80 \clpadfb3\clpadb80 \clpadfr3\clpadr80 \cellx4320 \pard\intbl\ql{Blue with red border}\cell
+#&gt; \row
+#&gt; }</div><div class='input'><span class='fu'><a href='to_rtf.html'>print_rtf</a></span>(<span class='no'>ht2</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; 
+#&gt; {
+#&gt; \trowd
+#&gt; \trqc \clbrdrt\clbrdrl\clbrdrb\clbrdrr\clvertalt\clpadfl3\clpadl80 \clpadft3\clpadt80 \clpadfb3\clpadb80 \clpadfr3\clpadr80 \cellx4320 \pard\intbl\ql{\cf3 {Dark green text}}\cell
+#&gt; \row
+#&gt; }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -177,8 +196,6 @@ For <code>set_caption</code>, the <code>ht</code> object.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

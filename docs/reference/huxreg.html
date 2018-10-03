@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Create a huxtable to display model output — huxreg" />
+
+<meta property="og:description" content="Create a huxtable to display model output" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,25 +111,29 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a huxtable to display model output</h1>
+    
+    <div class="hidden name"><code>huxreg.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Create a huxtable to display model output</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>huxreg</span>(<span class='no'>...</span>, <span class='kw'>error_format</span> <span class='kw'>=</span> <span class='st'>"({std.error})"</span>, <span class='kw'>error_style</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"stderr"</span>, <span class='st'>"ci"</span>,
-  <span class='st'>"statistic"</span>, <span class='st'>"pvalue"</span>), <span class='kw'>error_pos</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"below"</span>, <span class='st'>"same"</span>, <span class='st'>"right"</span>),
+    <pre class="usage"><span class='fu'>huxreg</span>(<span class='no'>...</span>, <span class='kw'>error_format</span> <span class='kw'>=</span> <span class='st'>"({std.error})"</span>, <span class='kw'>error_style</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"stderr"</span>,
+  <span class='st'>"ci"</span>, <span class='st'>"statistic"</span>, <span class='st'>"pvalue"</span>), <span class='kw'>error_pos</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"below"</span>, <span class='st'>"same"</span>, <span class='st'>"right"</span>),
   <span class='kw'>number_format</span> <span class='kw'>=</span> <span class='st'>"%.3f"</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>pad_decimal</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tidy_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
-  <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>), <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>outer_borders</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>note</span> <span class='kw'>=</span> <span class='st'>"{stars}."</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>, <span class='kw'>R2</span> <span class='kw'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>,
-  <span class='st'>"AIC"</span>), <span class='kw'>coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>omit_coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tidy_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span>
+  <span class='fl'>0.01</span>, <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>), <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
+  <span class='kw'>outer_borders</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>note</span> <span class='kw'>=</span> <span class='st'>"{stars}."</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>,
+  <span class='kw'>R2</span> <span class='kw'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>, <span class='st'>"AIC"</span>), <span class='kw'>coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>omit_coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -203,8 +224,8 @@ used for row headings. If different values of <code>coef</code> have the same na
 in the output.</p>
 <p>Each element of <code>statistics</code> should be a column name from <code><a href='http://www.rdocumentation.org/packages/broom/topics/glance'>broom::glance()</a></code>. You can also
 use 'nobs' for the number of observations. If <code>statistics</code> is <code>NULL</code> then all columns from <code>glance</code>
-will be used. To use no columns, set <code>statistics = character(0)</code>.
-    <code>error_format</code> is a string to be interpreted by <code><a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue::glue()</a></code>. Terms in parentheses will be
+will be used. To use no columns, set <code>statistics = character(0)</code>.</p>
+<p><code>error_format</code> is a string to be interpreted by <code><a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue::glue()</a></code>. Terms in parentheses will be
 replaced by computed values. You can use any columns returned
 by <code>tidy</code>: typical columns include <code>statistic</code>, <code>p.value</code>, <code>std.error</code>, as well as <code>conf.low</code>
 and <code>conf.high</code> if you have set <code>ci_level</code>. For example, to show confidence intervals, you
@@ -258,11 +279,14 @@ could do <code>error_format = "{conf.low} to {conf.high}"</code></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

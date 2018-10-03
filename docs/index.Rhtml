@@ -314,6 +314,22 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>October 3, 2018: Huxtable 4.2.0 released</h4>
+
+<p>This minor point release adds a few features and bugfixes.</p>
+<ul>
+<li>LaTeX rendering should again be 2-3 times faster, <code>as_Workbook</code> should be faster too.
+<li>Simplify LaTeX output by creating and using our own LaTeX commands. Please report any bugs!</li>
+<li>RTF support: new <code>print_rtf</code>, <code>to_rtf</code> and <code>quick_rtf</code> functions<li>
+<li>New <code>border_style</code> properties to set "solid", "double", "dotted" or "dashed" borders.
+  (At present, LaTeX only allows "solid" or "double".)
+<li>New `quick_pptx` function to print data frames and huxtables into Powerpoint.</li>
+<li>There's a new <code>theme_mondrian</code> theme :-D
+* Use CSS writing-mode where possible for text rotation. Note that this may break on non-LTR
+  languages. If this affects you, please file an issue.
+</ul>
+
+
 <h4>August 1, 2018: Huxtable 4.1.0 released</h4>
 
 <p>This minor point release focuses on bugfixes, speed and maintainability.

@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-08-01" />
+<meta name="date" content="2018-10-03" />
 
 <title>Design Principles, Comparisons and Limitations</title>
 
@@ -124,7 +124,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Design Principles, Comparisons and Limitations</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-08-01</em></h4>
+<h4 class="date"><em>2018-10-03</em></h4>
 
 </div>
 
@@ -133,7 +133,7 @@ $(document).ready(function () {
 <div id="design-principles" class="section level2">
 <h2>Design principles</h2>
 <p>I wrote this package because I wanted a simple way to create tables in my LaTeX documents. At the same time, I wanted to be able to output HTML or Markdown for use in RStudio. And, I wanted to be able to edit tables intuitively using standard R features. My typical use case is creating tables of regression outputs, but I also wanted to be able to represent arbitrary data, like a table of descriptive statistics or of plain text.</p>
-<p>The idea behind huxtable is to store data in a normal data frame, along with properties that describe how to display the data, at cell, column, row or table level. Operations on the data frame work as normal, and they also affect the display properties. Then, the data can be output in an appropriate format. At the moment, those formats are LaTeX, HTML, Markdown and on-screen pretty printing, but more could be added.</p>
+<p>The idea behind huxtable is to store data in a normal data frame, along with properties that describe how to display the data, at cell, column, row or table level. Operations on the data frame work as normal, and they also affect the display properties. Then, the data can be output in an appropriate format. At the moment, those formats are LaTeX, HTML, Markdown, Word/Excel/Powerpoint, RTF and on-screen pretty printing. More could be added.</p>
 <p>Another design choice was to have separate functions per feature. Many existing packages use a single function with a large number of options. For instance, <code>print.xtable</code> in the <code>xtable</code> package has 34 options, and <code>texreg</code> in the <code>texreg</code> package has 41. Having one function per feature should make life easier for the end user. It should also lead to clearer code: each function starts with a valid huxtable, changes one thing, and returns a valid huxtable.</p>
 <p>The output formats are very different, and decisions have to be made as to what any package will support. My background is more in HTML. This is reflected in some of the huxtable properties, like per-cell borders and padding. The package tries to keep output reasonably similar between LaTeX and HTML, but there are inevitably some differences and limitations (see below). For Markdown and on-screen output, obviously, only a few basic properties are supported.</p>
 <p>The package makes no attempt to output beautiful HTML or LaTeX source code. In fact, in the case of LaTeX, it’s pretty ugly. The approach is “do what it takes to get the job done”.</p>
@@ -143,44 +143,44 @@ $(document).ready(function () {
 <p>R has many different packages to create LaTeX and HTML tables. The table(s) below list those I know and the features they have. The table is produced with huxtable, of course ;-)</p>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
 <col style="width: 60pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><tr style="height: 80pt;">
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;"></div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 182, 193); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">huxtable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">xtable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">formattable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">ascii</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">kableExtra</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">condformat</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">htmlTable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">Hmisc::latex</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">ztable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">kable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">texreg</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">stargazer</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">tables</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">DT</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">pander</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">flextable</div></td>
-<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="transform: rotate(-270deg); white-space: nowrap;">pixiedust</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;"></div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 182, 193); font-weight: bold;"><div style="writing-mode: vertical-rl;">huxtable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">xtable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">formattable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">ascii</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">kableExtra</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">condformat</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">htmlTable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">Hmisc::latex</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">ztable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">kable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">texreg</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">stargazer</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">tables</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">DT</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">pander</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">flextable</div></td>
+<td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;">pixiedust</div></td>
 </tr>
 <tr style="height: 14pt;">
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">HTML output</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">HTML output</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
 </tr>
 <tr style="height: 14pt;">
 <td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Background color</td>
@@ -383,24 +383,24 @@ $(document).ready(function () {
 <td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Y</td>
 </tr>
 <tr style="height: 14pt;">
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">LaTeX output</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">(Y)</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">?</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">LaTeX output</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">(Y)</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">?</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Y</td>
 </tr>
 <tr style="height: 14pt;">
 <td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Background color</td>
@@ -643,24 +643,24 @@ $(document).ready(function () {
 <td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Y</td>
 </tr>
 <tr style="height: 14pt;">
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Other features</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Other features</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
 </tr>
 <tr style="height: 14pt;">
 <td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Conditional formats</td>
@@ -783,24 +783,24 @@ $(document).ready(function () {
 <td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
 </tr>
 <tr style="height: 14pt;">
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Other formats</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Other formats</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
 </tr>
 <tr style="height: 14pt;">
 <td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 0pt 0pt 0pt;">Markdown</td>
@@ -923,27 +923,47 @@ $(document).ready(function () {
 <td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
 </tr>
 <tr style="height: 14pt;">
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Notes</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Via markdown</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">HTML via external translator</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Via Javascript</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Via markdown</td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 0pt 0pt 0pt;">RTF</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);">Y</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; padding: 0pt 0pt 0pt 0pt;"></td>
 </tr>
 <tr style="height: 14pt;">
-<td colspan="18" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid; border-width: 1pt 0pt 2pt 0pt; padding: 0pt 0pt 0pt 0pt; font-size: 10pt;">A (Y) means that there is limited support for the feature. 
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-style: italic;">Notes</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 182, 193);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Via markdown</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">HTML via external translator</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);">Via Javascript</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;">Via markdown</td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 0pt 0pt 0pt 0pt;"></td>
+</tr>
+<tr style="height: 14pt;">
+<td colspan="18" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 2pt 0pt; padding: 0pt 0pt 0pt 0pt; font-size: 10pt;">A (Y) means that there is limited support for the feature. 
                     For example, multirow cells may only be supported in headers, or only horizontal
                     border lines may work.</td>
 </tr>

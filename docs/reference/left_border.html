@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Borders — left_border" />
 
-<meta property="og:description" content="Functions to get or set the borders property of huxtable table cells." />
+<meta property="og:description" content="Functions to get or set the borders property of huxtable cells." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@
 
     <div class="ref-description">
     
-    <p>Functions to get or set the borders property of huxtable table cells.</p>
+    <p>Functions to get or set the <em>borders</em> property of huxtable cells.</p>
     
     </div>
 
@@ -150,7 +150,8 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to <code>NA</code> to reset to the default.</p></td>
+      <td><p>A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to <code>NA</code> to reset to the default, which is
+<code>0</code>.</p></td>
     </tr>
     <tr>
       <th>row</th>
@@ -168,7 +169,7 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>left_border</code>, the <code>left_border</code> attribute.
+    <p>For <code>left_border</code>, the <code>left_border</code> property.
 For <code>set_left_border</code>, the <code>ht</code> object.</p>
 <p>Similarly for the other functions.</p>
     
@@ -177,9 +178,16 @@ For <code>set_left_border</code>, the <code>ht</code> object.</p>
     <p>Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
 can only be present (if <code>value &gt; 0</code>) or absent.</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    
+    <p>huxtable currently sets borders on specific cells. This can lead to surprising behaviour when
+cells span multiple rows or columns: see the example. This behaviour may be improved in a future
+release.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='set_all_borders.html'>set_all_borders()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='set-multiple.html'>set_all_borders()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -211,7 +219,31 @@ can only be present (if <code>value &gt; 0</code>) or absent.</p>
 #&gt;         2         2  
 #&gt;         3 │       1  
 #&gt; 
-#&gt; Column names: a, b</div></pre>
+#&gt; Column names: a, b</div><div class='input'><span class='co'># When cells span multiple rows:</span>
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>tribble_hux</a></span>(
+  ~<span class='no'>Col1</span>,                   ~<span class='no'>Col2</span>,
+  <span class='st'>"Cell 1,1 spans 2 rows"</span>, <span class='st'>"Cell 1,2"</span>,
+  <span class='st'>"Cell 2,1 is invisible"</span>, <span class='st'>"Cell 2,2"</span>
+)
+<span class='fu'><a href='rowspan.html'>rowspan</a></span>(<span class='no'>ht</span>)[<span class='fl'>1</span>, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>2</span>
+<span class='no'>ht</span></div><div class='output co'>#&gt;   Cell 1,1 spans 2 rows   Cell 1,2  
+#&gt;                           Cell 2,2  
+#&gt; 
+#&gt; Column names: Col1, Col2</div><div class='input'><span class='fu'>bottom_border</span>(<span class='no'>ht</span>)[<span class='fl'>2</span>, ] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+<span class='fu'><a href='left_border_color.html'>bottom_border_color</a></span>(<span class='no'>ht</span>)[<span class='fl'>2</span>, ] <span class='kw'>&lt;-</span> <span class='st'>'red'</span>
+<span class='co'># Cell 1, 1 does not have a border set:</span>
+<span class='no'>ht</span></div><div class='output co'>#&gt;   Cell 1,1 spans 2 rows   Cell 1,2  
+#&gt;                           Cell 2,2  
+#&gt;                         ────────────
+#&gt; 
+#&gt; Column names: Col1, Col2</div><div class='input'><span class='co'># Fixed:</span>
+<span class='fu'>bottom_border</span>(<span class='no'>ht</span>)[<span class='fl'>1</span>, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+<span class='fu'><a href='left_border_color.html'>bottom_border_color</a></span>(<span class='no'>ht</span>)[<span class='fl'>1</span>, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='st'>'red'</span>
+<span class='no'>ht</span></div><div class='output co'>#&gt;   Cell 1,1 spans 2 rows   Cell 1,2  
+#&gt;                           Cell 2,2  
+#&gt; ────────────────────────────────────
+#&gt; 
+#&gt; Column names: Col1, Col2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -221,6 +253,8 @@ can only be present (if <code>value &gt; 0</code>) or absent.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

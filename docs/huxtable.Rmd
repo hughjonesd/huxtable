@@ -39,7 +39,7 @@ if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 
 
 ```{r, echo = FALSE}
-huxtable::hux_logo(latex = is_latex)
+huxtable::hux_logo(latex = is_latex, html = ! is_latex)
 ```
 
 # Introduction
@@ -56,7 +56,7 @@ Huxtable is a package for creating *text tables*. It is powerful, but easy to us
 replacement for packages like xtable, which is useful but not always very user-friendly. Huxtable's features
 include:
 
-* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel and Markdown
+* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel, Microsoft Powerpoint, RTF and Markdown
 * Easy integration with knitr and rmarkdown documents
 * Formatted on-screen display
 * Multirow and multicolumn cells
@@ -199,8 +199,9 @@ sides <- c('left_', 'right_', 'top_', 'bottom_')
 props <- list()
 props[['Cell_Text']] <- sort(c('font', 'text_color', 'wrap', 'bold', 'italic', 'font', 'font_size', 'na_string', 'escape_contents', 'number_format', 'rotation'))
 
-props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', paste0(sides, 'border'),
-      paste0(sides, 'border_color'), paste0(sides, 'padding')))
+props[['Cell']] <- sort(c('align', 'valign', 'rowspan', 'colspan', 'background_color', 
+      paste0(sides, 'border'), paste0(sides, 'border_color'), paste0(sides, 'border_style'), 
+      paste0(sides, 'padding')))
 props[['Row']]    <- 'row_height'
 props[['Column']] <- 'col_width'
 props[['Table']]  <- sort(c('width', 'height', 'position', 'caption', 'caption_pos', 'tabular_environment', 'label', 'latex_float'))
@@ -264,10 +265,11 @@ this: `set_xxx(ht, value)`. If you use the second form, then the value is set fo
 functions for table properties are always called like `set_xxx(ht, value)`. We'll learn more about
 this interface in a moment.
 
-There are also four useful convenience functions:
+There are also some useful convenience functions:
 
 * `set_all_borders` sets left, right, top and bottom borders for selected cells;
 * `set_all_border_colors` sets left, right, top and bottom border colors;
+* `set_all_border_styles` sets left, right, top and bottom border styles;
 * `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content
    and the border);
 * `set_outer_borders` sets an outer border around a rectangle of cells.
@@ -517,28 +519,34 @@ as_hux(mtcars[1:4, 1:4])                           %>%
 ```
 
 
-## Column and row spans
+## Merging cells
 
 Sometimes you want a single cell to spread over more than one row or column: for example, if you
 want a heading that covers several different rows.
-You can do this using the `colspan` and `rowspan` properties. If you know HTML tables, then 
-these will be familiar to you. `colspan` sets how many columns the cell covers, and `rowspan` sets
-how many rows the cell covers. Here, we'll add some row and column headings to the `mtcars` dataset:
+
+You can do this by calling `merge_cells(ht, rows, cols)`. `rows` and `cols` should be a contiguous
+sequence of numbers. The rectangle of cells `ht[rows, cols]` will be merged. 
+
+When cells in a rectangle are merged, all cells apart from the top left one are hidden, along with
+any properties they have. So if you want to set cell properties, you have to target the top left 
+cell.
+
+Here, we'll add some row and column headings to the `mtcars` dataset:
 
 ```{r}
 cars_mpg <- cbind(cylinders = cars_mpg$cyl, cars_mpg)
-table(cars_mpg$cylinders) # how many rows for each group?
 cars_mpg$cylinders[1]   <- ""
 cars_mpg$cylinders[2]   <- "Four cylinders"
 cars_mpg$cylinders[13]  <- "Six cylinders"
 cars_mpg$cylinders[20]  <- "Eight cylinders"
 
-rowspan(cars_mpg)[2, 1]  <- 11
-rowspan(cars_mpg)[13, 1] <- 7
-rowspan(cars_mpg)[20, 1] <- 14
+cars_mpg <- cars_mpg %>%  
+  merge_cells(2:12, 1) %>% 
+  merge_cells(13:19, 1) %>% 
+  merge_cells(20:33, 1)
 
 cars_mpg <- rbind(c("List of cars", "", "", "", ""), cars_mpg)
-colspan(cars_mpg)[1, 1] <- 5
+cars_mpg <- merge_cells(cars_mpg, 1, 1:5)
 align(cars_mpg)[1, 1] <- "center"
 
 # a little more formatting:
@@ -552,6 +560,14 @@ bold(cars_mpg)[1:2, ] <- TRUE
 bold(cars_mpg)[, 1] <- TRUE
 if (is_latex) font_size(cars_mpg) <- 10
 cars_mpg
+```
+
+`merge_cells` works by setting the top left cell's `colspan` and `rowspan` properties. If you know HTML tables, then 
+these will be familiar to you. `colspan` sets how many columns the cell covers, and `rowspan` sets
+how many rows the cell covers. If you prefer, you can set these directly:
+
+```{r, eval = FALSE}
+colspan(cars_mpg)[1, 1] <- 5
 ```
 
 
@@ -717,10 +733,11 @@ options(huxtable.knit_print_df = TRUE)
 ## Using huxtables in knitr and rmarkdown
 
 If you use knitr and rmarkdown in RStudio, huxtable objects should automatically display in the
-appropriate format (HTML or LaTeX). You need to have some LaTeX packages installed for huxtable to
-work. To find out what these are, you can call `report_latex_dependencies()`. This will print out
-and/or return a set of `usepackage{...}` statements. If you use Sweave or knitr without rmarkdown,
-you can use this function in your LaTeX preamble to load the packages you need.
+appropriate format (HTML, LaTeX or RTF). You need to have some LaTeX packages installed for huxtable
+to work in LaTeX. To find out what these are, you can call `report_latex_dependencies()`. This will
+print out and/or return a set of `usepackage{...}` statements. If you use Sweave or knitr without
+rmarkdown, you can use this function in your LaTeX preamble to load the packages you need. You can
+also automatically install these packages using `install_latex_dependencies()`.
 
 Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables
 are rather basic, a lot of formatting will be lost. If you want to create Word or Powerpoint
@@ -753,13 +770,28 @@ If you need to output to another format, file an
 
 ## Quick output commands
 
-Sometimes you quickly want to get your data into a Word, Excel, HTML or PDF document. To do this you
-can use the `quick_docx`, `quick_xlsx`, `quick_html` and `quick_pdf` functions. These are called
-with one or more huxtable objects, or objects which can be turned into a huxtable such as data
-frames. A new document of the appropriate type will be created and opened. By default the file will
-be in the current directory under the name e.g. `huxtable-output.pdf`. If the file already exists,
-you'll be asked to confirm the overwrite. For non-interactive use, you must specify a filename
-yourself explicitly -- this keeps you from accidentally trashing your files.
+Sometimes you quickly want to get your data into a document. To
+do this you can use huxtable functions starting with `quick_`, shown below.
+
+```{r, echo = FALSE}
+quick_commands <- hux(
+        Command = paste0("<code>", 
+          c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", "quick_rtf"), 
+          "</code>"),
+        Output = c("PDF document", "Word document", "HTML web page", "Excel spreadsheet", 
+          "Powerpoint presentation", "RTF document"),
+        add_colnames = TRUE
+      )
+escape_contents(quick_commands) <- FALSE
+
+theme_plain(quick_commands)
+```
+
+These are called with one or more huxtable objects (or objects which can be turned into a huxtable,
+such as data frames). A new document of the appropriate type will be created and opened. By default
+the file will be in the current directory, under a name like e.g. `huxtable-output.pdf`. If the file
+already exists, you'll be asked to confirm the overwrite. For non-interactive use, you must specify
+a filename yourself explicitly. This keeps you from accidentally trashing your files.
 
 ```{r, eval = FALSE}
 quick_pdf(mtcars) 

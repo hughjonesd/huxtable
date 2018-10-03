@@ -62,7 +62,7 @@ functionality to xtable, with a simpler interface." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
       </span>
     </div>
 
@@ -130,32 +130,14 @@ functionality to xtable, with a simpler interface.</p>
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>To create a huxtable object, use <code><a href='huxtable.html'>huxtable()</a></code> or <code><a href='huxtable.html'>as_huxtable()</a></code>.</p>
+    <p>To create a huxtable object, use <code><a href='huxtable.html'>huxtable()</a></code> or <code><a href='as_huxtable.html'>as_huxtable()</a></code>.</p>
 <p>For more information, see <a href='https://hughjonesd.github.io/huxtable/'>the website</a> or
 read the vignette with <code><a href='../articles/huxtable.html'>vignette('huxtable')</a></code>.</p>
+<p>To report a bug, or suggest an enhancement, visit <a href='https://github.com/hughjonesd/huxtable/issues'>github</a>.</p>
     
-    <h2 class="hasAnchor" id="package-options"><a class="anchor" href="#package-options"></a>Package options</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    
-    <ul>
-<li><p><code>options('huxtable.add_colnames')</code> sets the default value for <code>add_colnames</code> in
-<code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='huxtable.html'>as_huxtable()</a></code>. If it is unset, <code>add_colnames</code> defaults to
-<code>FALSE</code>; in a future release, the default will become <code>TRUE</code>.</p></li>
-<li><p><code>options('huxtable.print')</code> sets the print method for huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable()</a></code>.</p></li>
-<li><p><code>options('huxtable.color_screen')</code>. If <code>TRUE</code> and package <code>crayon</code> is available, huxtables
-will be printed in color on screen.</p></li>
-<li><p><code>options('huxtable.knit_print_df')</code>. If <code>TRUE</code> (the default), data frames in knitr will be
-pretty-printed using huxtable.</p></li>
-<li><p><code>options('huxtable.knit_print_df_theme')</code>. A one-argument function applied to theme the
-huxtableized data frame before printing in knitr. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
-<li><p><code>options('huxtable.autoformat')</code> sets the default value for <code>autoformat</code> in <code><a href='huxtable.html'>huxtable()</a></code> and
-<code><a href='huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
-<li><p><code>options('huxtable.autoformat_number_format')</code> and <code>options('huxtable.autoformat_align')</code> are
-lists. The list names are base R classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set
-<code><a href='number_format.html'>number_format()</a></code> and <code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values.</p></li>
-</ul>
-    <p>For example, to center-align <code>Date</code> objects you could set <code>"huxtable.autoformat_align"</code> to
-something like <code>list(..., Date = "center", ...)</code>.</p>
+    <div class='dont-index'><p><a href='huxtable-options.html'>huxtable-options</a></p></div>
     
 
   </div>
@@ -165,7 +147,7 @@ something like <code>list(..., Date = "center", ...)</code>.</p>
       
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#package-options">Package options</a></li>
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

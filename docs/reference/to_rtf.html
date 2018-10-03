@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Caption — caption • huxtable</title>
+<title>Create RTF representing a huxtable — print_rtf • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Caption — caption" />
+<meta property="og:title" content="Create RTF representing a huxtable — print_rtf" />
 
-<meta property="og:description" content="Functions to get or set the table-level caption property of a huxtable." />
+<meta property="og:description" content="These functions print or return an RTF character string." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,20 +114,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Caption</h1>
+    <h1>Create RTF representing a huxtable</h1>
     
-    <div class="hidden name"><code>caption.Rd</code></div>
+    <div class="hidden name"><code>to_rtf.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the table-level <em>caption</em> property of a huxtable.</p>
+    <p>These functions print or return an RTF character string.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>caption</span>(<span class='no'>ht</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_caption</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
+    <pre class="usage"><span class='fu'>print_rtf</span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span>(<span class='no'>ht</span>), <span class='no'>...</span>)
+
+<span class='fu'>to_rtf</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for huxtable</span>
+<span class='fu'>to_rtf</span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span>(<span class='no'>ht</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,37 +140,58 @@
       <td><p>A huxtable.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A length-one character vector. Set to <code>NA</code> to reset to the default, which is
-<code>NA</code>.</p></td>
+      <th>fc_tables</th>
+      <td><p>See <code><a href='rtf_fc_tables.html'>rtf_fc_tables()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments to pass to methods.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>caption</code>, the <code>caption</code> property.
-For <code>set_caption</code>, the <code>ht</code> object.</p>
+    <p><code>to_rtf</code> returns a string representing an RTF table. The <code>fc_tables</code> attribute of the
+returned string will contain the <code>fc_tables</code> object that was passed in (or autocreated).
+<code>print_rtf</code> prints the string and returns <code>NULL</code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Captions are not escaped. See the example for a workaround.</p>
+    <p>RTF files use a single per-document table for colors, and one for fonts. If you are printing
+multiple huxtables in a document, you need to make sure that the font and color table is
+set up correctly and that the RTF tables refer back to them. See <code><a href='rtf_fc_tables.html'>rtf_fc_tables()</a></code>.</p><ol>
+<li><p>Prepare all the huxtables;</p></li>
+<li><p>Call <code><a href='rtf_fc_tables.html'>rtf_fc_tables()</a></code>, passing in all the huxtables;</p></li>
+<li><p>Print the <code>rtfFCTables</code> object in the RTF document header;</p></li>
+<li><p>Pass in the <code>rtfFCTables</code> object to each call to <code>print_rtf</code>.</p></li>
+</ol>
+    
+    <h2 class="hasAnchor" id="limitations"><a class="anchor" href="#limitations"></a>Limitations</h2>
+
+    
+    <ul>
+<li><p>rmarkdown's <code>rtf_document</code> can't yet print out customized color tables, so custom fonts
+and colors won't work in this context.</p></li>
+<li><p><code><a href='col_width.html'>col_width()</a></code> and <code><a href='width.html'>width()</a></code> can only be numeric or "pt".</p></li>
+<li><p><code><a href='wrap.html'>wrap()</a></code> has no effect: cell contents always wrap.</p></li>
+<li><p><code><a href='rotation.html'>rotation()</a></code> can only be 90 or 270, i.e. text going up or down.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='caption_pos.html'>caption_pos()</a></code></p></div>
+    <div class='dont-index'><p>Other printing functions: <code><a href='to_html.html'>print_html</a></code>,
+  <code><a href='to_latex.html'>print_latex</a></code>, <code><a href='to_md.html'>print_md</a></code>,
+  <code><a href='to_screen.html'>print_screen</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'An example table'</span>
-<span class='fu'>caption</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "An example table"</div><div class='input'><span class='fu'><a href='to_screen.html'>print_screen</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   An example table   
-#&gt;         1         1  
-#&gt;         2         2  
-#&gt;         3         3  
-#&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='sanitize.html'>sanitize</a></span>(<span class='st'>'Make $$$ with us'</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'latex'</span>) <span class='co'># escape caption characters</span></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>])
+<span class='fu'>to_rtf</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "\n{\n\\trowd\n\\trqc \\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx2160 \n\\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx4320 \\pard\\intbl\\qr{1}\\cell\n\\pard\\intbl\\ql{a}\\cell\n\\row\n}\n\n{\n\\trowd\n\\trqc \\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx2160 \n\\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx4320 \\pard\\intbl\\qr{2}\\cell\n\\pard\\intbl\\ql{b}\\cell\n\\row\n}\n\n{\n\\trowd\n\\trqc \\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx2160 \n\\clbrdrt\\clbrdrl\\clbrdrb\\clbrdrr\\clvertalt\\clpadfl3\\clpadl80 \\clpadft3\\clpadt80 \\clpadfb3\\clpadb80 \\clpadfr3\\clpadr80 \\cellx4320 \\pard\\intbl\\qr{3}\\cell\n\\pard\\intbl\\ql{c}\\cell\n\\row\n}\n"
+#&gt; attr(,"fc_tables")
+#&gt; {\fonttbl
+#&gt;   {\f0 Times;}
+#&gt; }
+#&gt; {\colortbl;;}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -177,6 +201,8 @@ For <code>set_caption</code>, the <code>ht</code> object.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#limitations">Limitations</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

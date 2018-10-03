@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Float position for LaTeX — latex_float" />
+
+<meta property="og:description" content="Functions to get or set the table-level float position for latex property of a huxtable." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -39,7 +51,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -47,21 +59,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
+    Home
   </a>
-</li>
-<li>
-  <a href="../articles/huxtable.html">Get Started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,12 +82,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="../huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../articles/huxreg.html">Regression Tables with huxreg</a>
+      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+    </li>
+    <li>
+      <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -86,6 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -93,21 +111,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Float position for LaTeX</h1>
+    
+    <div class="hidden name"><code>latex_float.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
-    <p>Functions to get or set the table-level float position for latex property of a huxtable.</p>
+    <p>Functions to get or set the table-level <em>float position for latex</em> property of a huxtable.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>latex_float</span>(<span class='no'>ht</span>)
 <span class='fu'>latex_float</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
 <span class='fu'>set_latex_float</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -116,27 +138,28 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A length-one character vector, used by LaTeX for positioning the float. Set to <code>NA</code> for the default, 'h'.</p></td>
+      <td><p>A length-one character vector, used by LaTeX for positioning the float. Set to <code>NA</code> to reset to the default, which is
+<code>"h"</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>latex_float</code>, the <code>latex_float</code> attribute.
+    <p>For <code>latex_float</code>, the <code>latex_float</code> property.
 For <code>set_latex_float</code>, the <code>ht</code> object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
 floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
-<code>float</code> package.</p>
+TeX <code>float</code> package.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>latex_float</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'tab:mytable'</span>
-<span class='fu'>latex_float</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "tab:mytable"</div><div class='input'>
+<span class='fu'>latex_float</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'h'</span>
+<span class='fu'>latex_float</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "h"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -160,11 +183,14 @@ floats. See LaTeX documentation for more details. If you use 'H' (definitely her
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

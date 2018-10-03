@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
       </span>
     </div>
 
@@ -115,6 +115,29 @@
       
     </div>
 
+    <div id="huxtable-4-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#huxtable-4-2-0" class="anchor"></a>huxtable 4.2.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.</li>
+<li>Simplify LaTeX output using our own LaTeX commands.</li>
+<li>RTF support: new <code>print_rtf</code>, <code>to_rtf</code> and <code>quick_rtf</code> functions.</li>
+<li>New <code>border_style</code> properties to set “solid”, “double”, “dotted” or “dashed” borders. (At present, LaTeX only allows “solid” or “double”.)</li>
+<li>New <code>merge_cells</code> function, an alternative interface to <code>colspan</code> and <code>rowspan</code>.</li>
+<li>New <code>quick_pptx</code> function to print data frames and huxtables into Powerpoint.</li>
+<li>New <code>install_latex_dependencies</code> and <code>check_latex_dependencies</code> utility functions.</li>
+<li>
+<code>add_rows</code> and <code>add_columns</code> now accept data frames as arguments.</li>
+<li>New <code>theme_mondrian</code> theme :-D</li>
+<li>Enhancement: <code>print_md</code> now handles <strong>bold</strong> and <em>italic</em> cells.</li>
+<li>Enhancement: <code>quick_pdf</code> has new <code>width</code> and <code>height</code> options to change paper size.</li>
+<li>Use CSS writing-mode where possible for text rotation. Note that this may break on non-LTR languages. If this affects you, please file an issue.</li>
+<li>Bugfix: LaTeX didn’t compile when height and caption were both set.</li>
+<li>Bugfix: <code>print_screen</code> and <code>print_md</code> would hang with a wide huxtable.</li>
+<li>Tweaks to documentation.</li>
+</ul>
+</div>
     <div id="huxtable-4-1-0" class="section level1">
 <h1 class="page-header">
 <a href="#huxtable-4-1-0" class="anchor"></a>huxtable 4.1.0<small> 2018-07-31 </small>
@@ -410,6 +433,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#huxtable-4-2-0">4.2.0</a></li>
         <li><a href="#huxtable-4-1-0">4.1.0</a></li>
         <li><a href="#huxtable-4-0-1">4.0.1</a></li>
         <li><a href="#huxtable-4-0-0">4.0.0</a></li>
