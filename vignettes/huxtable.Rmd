@@ -56,7 +56,7 @@ Huxtable is a package for creating *text tables*. It is powerful, but easy to us
 replacement for packages like xtable, which is useful but not always very user-friendly. Huxtable's features
 include:
 
-* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel and Markdown
+* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel, Microsoft Powerpoint, RTF and Markdown
 * Easy integration with knitr and rmarkdown documents
 * Formatted on-screen display
 * Multirow and multicolumn cells
@@ -733,11 +733,11 @@ options(huxtable.knit_print_df = TRUE)
 ## Using huxtables in knitr and rmarkdown
 
 If you use knitr and rmarkdown in RStudio, huxtable objects should automatically display in the
-appropriate format (HTML or LaTeX). You need to have some LaTeX packages installed for huxtable to
-work. To find out what these are, you can call `report_latex_dependencies()`. This will print out
-and/or return a set of `usepackage{...}` statements. If you use Sweave or knitr without rmarkdown,
-you can use this function in your LaTeX preamble to load the packages you need. You can also
-automatically install these packages using `install_latex_dependencies()`.
+appropriate format (HTML, LaTeX or RTF). You need to have some LaTeX packages installed for huxtable
+to work in LaTeX. To find out what these are, you can call `report_latex_dependencies()`. This will
+print out and/or return a set of `usepackage{...}` statements. If you use Sweave or knitr without
+rmarkdown, you can use this function in your LaTeX preamble to load the packages you need. You can
+also automatically install these packages using `install_latex_dependencies()`.
 
 Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables
 are rather basic, a lot of formatting will be lost. If you want to create Word or Powerpoint
@@ -770,16 +770,16 @@ If you need to output to another format, file an
 
 ## Quick output commands
 
-Sometimes you quickly want to get your data into a Word, Excel, Powerpoint, HTML or PDF document. To
+Sometimes you quickly want to get your data into a document. To
 do this you can use huxtable functions starting with `quick_`, shown below.
 
 ```{r, echo = FALSE}
 quick_commands <- hux(
         Command = paste0("<code>", 
-          c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx"), 
+          c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", "quick_rtf"), 
           "</code>"),
         Output = c("PDF document", "Word document", "HTML web page", "Excel spreadsheet", 
-          "Powerpoint presentation"),
+          "Powerpoint presentation", "RTF document"),
         add_colnames = TRUE
       )
 escape_contents(quick_commands) <- FALSE
@@ -789,9 +789,9 @@ theme_plain(quick_commands)
 
 These are called with one or more huxtable objects (or objects which can be turned into a huxtable,
 such as data frames). A new document of the appropriate type will be created and opened. By default
-the file will be in the current directory under the name e.g. `huxtable-output.pdf`. If the file
+the file will be in the current directory, under a name like e.g. `huxtable-output.pdf`. If the file
 already exists, you'll be asked to confirm the overwrite. For non-interactive use, you must specify
-a filename yourself explicitly -- this keeps you from accidentally trashing your files.
+a filename yourself explicitly. This keeps you from accidentally trashing your files.
 
 ```{r, eval = FALSE}
 quick_pdf(mtcars) 
