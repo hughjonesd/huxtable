@@ -1,6 +1,9 @@
+
+
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 4.2.0.9000
 
 # huxtable 4.2.0
 
