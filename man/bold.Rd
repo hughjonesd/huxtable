@@ -4,6 +4,7 @@
 \alias{bold}
 \alias{bold<-}
 \alias{set_bold}
+\alias{set_bold_by}
 \alias{italic}
 \alias{italic<-}
 \alias{set_italic}
@@ -12,6 +13,7 @@
 bold(ht)
 bold(ht) <- value
 set_bold(ht, row, col, value, byrow = FALSE)
+set_bold_by(ht, row, col, fn)
 
 italic(ht)
 italic(ht) <- value
@@ -28,6 +30,8 @@ set_italic(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{bold}, the \code{bold} property.

@@ -15,6 +15,7 @@ huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos',
   'tabular_environment', 'label', 'latex_float')
 
+
 make_namespace_S3_entries <- function (accessors) {
     entries <- lapply(accessors, function (getter) {
     setter <- paste0('"', getter, '<-"')
@@ -24,6 +25,7 @@ make_namespace_S3_entries <- function (accessors) {
   unlist(entries)
 }
 
+
 make_exports <- function (properties, with_by = FALSE) {
   fun_templates <- c('%s', '"%s<-"', 'set_%s')
   if (with_by) fun_templates <- c(fun_templates, 'set_%s_by')
@@ -31,6 +33,7 @@ make_exports <- function (properties, with_by = FALSE) {
 
   paste0('export(', funs ,')')
 }
+
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
 #' @evalNamespace make_namespace_S3_entries(huxtable_col_attrs)

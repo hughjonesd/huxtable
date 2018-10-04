@@ -4,11 +4,13 @@
 \alias{escape_contents}
 \alias{escape_contents<-}
 \alias{set_escape_contents}
+\alias{set_escape_contents_by}
 \title{Escape cell contents}
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
 set_escape_contents(ht, row, col, value, byrow = FALSE)
+set_escape_contents_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_escape_contents(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} property.

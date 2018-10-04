@@ -4,11 +4,13 @@
 \alias{text_color}
 \alias{text_color<-}
 \alias{set_text_color}
+\alias{set_text_color_by}
 \title{Text color}
 \usage{
 text_color(ht)
 text_color(ht) <- value
 set_text_color(ht, row, col, value, byrow = FALSE)
+set_text_color_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_text_color(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{text_color}, the \code{text_color} property.

@@ -20,7 +20,9 @@ Set properties for cells that match a string or regular expression
 }
 \examples{
 ht <- hux("The cat sat", "on the", "mat")
-set_bold_by(ht, by_matching('[Tt]he' = TRUE))
+set_bold_by(ht, by_matching('at' = TRUE))
+set_bold_by(ht, by_matching('a.*a' = TRUE))
+set_bold_by(ht, by_matching('the' = TRUE, .grepl_args = list(ignore.case = TRUE)))
 }
 \seealso{
 \link{set-by}

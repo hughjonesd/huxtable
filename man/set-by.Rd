@@ -2,12 +2,15 @@
 % Please edit documentation in R/set_by.R
 \name{set-by}
 \alias{set-by}
-\title{Set properties by huxtable values}
+\title{Set properties by cell contents}
+\value{
+The modified huxtable.
+}
 \description{
-This help page explains how to set properties according to the values in your table.
+This help page explains how to set properties differently for cells, depending on their contents.
 }
 \details{
-For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{pval_hux \%>\% set_bold_by(by_range(0.05, c(TRUE, FALSE)))
+For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{set_bold_by(pval_hux, by_range(0.05, c(TRUE, FALSE)))
 }
 
 Or you can use red text for a particular value:\preformatted{hxtbl \%>\% set_text_color_by(by_value("Warning" = "red"))
@@ -16,16 +19,17 @@ Or you can use red text for a particular value:\preformatted{hxtbl \%>\% set_tex
 There is a \code{set_xxx_by} function for each huxtable cell property. The syntax is:\preformatted{set_xxx_by(ht, row, col, fn)
 }
 
-Here, \code{row} and \code{col} specify a range of rows and columns. See \link{rowspecs} for details.
+Here, \code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details.
 
 To set properties for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
 }
 
-Use the \code{fn} argument to set properties in different ways.
+Use the \code{fn} argument to set property value in different ways.
 \itemize{
-\item To set a property for cells with a specific value, use \code{\link[=by_value]{by_value()}}.
-\item To set a property for cells in a numeric range, use \code{\link[=by_range]{by_range()}}.
-\item To set a property for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_size]{by_equal_size()}}.
+\item To set a property value for cells with a specific value, use \code{\link[=by_value]{by_value()}}.
+\item To set a property value for cells within a numeric range, use \code{\link[=by_range]{by_range()}}.
+\item To set a property value for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_size]{by_equal_size()}}.
+\item To set a property value for cells that match a string or regular expression, use \code{\link[=by_matching]{by_matching()}}.
 }
 }
 \section{Technical details}{
@@ -38,7 +42,6 @@ property values for \code{ht[rows, cols]}. It should return the new property val
 }
 
 \examples{
-
 ht <- hux(c("OK", "Warning", "Error"))
 ht <- set_text_color_by(ht, by_value(OK = "green", Warning = "orange", Error = "red"))
 ht

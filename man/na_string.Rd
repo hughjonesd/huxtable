@@ -4,11 +4,13 @@
 \alias{na_string}
 \alias{na_string<-}
 \alias{set_na_string}
+\alias{set_na_string_by}
 \title{NA string}
 \usage{
 na_string(ht)
 na_string(ht) <- value
 set_na_string(ht, row, col, value, byrow = FALSE)
+set_na_string_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_na_string(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{na_string}, the \code{na_string} property.

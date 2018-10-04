@@ -24,6 +24,7 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
 #' set_<%= attr_name %>(ht, row, col, value, byrow = FALSE)
+#' set_<%= attr_name %>_by(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default, which is
@@ -31,10 +32,11 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @param row A row specifier. See \code{\link{rowspecs}} for details.
 #' @param col An optional column specifier.
 #' @param byrow If \code{TRUE}, fill in values by row rather than by column.
+#' @param fn A "by" function. See \code{\link{set-by}} for details.
 #'
 #' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
 #' For \code{set_<%= attr_name %>}, the \code{ht} object.
 #'
-#' @aliases <%= attr_name %><- set_<%= attr_name %> <%= more_alias_str %>
+#' @aliases <%= attr_name %><- set_<%= attr_name %> set_<%= attr_name %>_by <%= more_alias_str %>
 #' @name <%= attr_name %>
 

@@ -1,13 +1,15 @@
 
+#' @import assertthat
+NULL
 
-#' Set properties by huxtable values
+#' Set properties by cell contents
 #'
-#' This help page explains how to set properties according to the values in your table.
+#' This help page explains how to set properties differently for cells, depending on their contents.
 #'
 #' For example, in a table of p-values, you could bold cells where p < 0.05:
 #'
 #' ```
-#' pval_hux %>% set_bold_by(by_range(0.05, c(TRUE, FALSE)))
+#' set_bold_by(pval_hux, by_range(0.05, c(TRUE, FALSE)))
 #' ```
 #'
 #'  Or you can use red text for a particular value:
@@ -22,7 +24,7 @@
 #' set_xxx_by(ht, row, col, fn)
 #' ```
 #'
-#' Here, `row` and `col` specify a range of rows and columns. See [rowspecs] for details.
+#' Here, `row` and `col` specify ranges of rows and columns. See [rowspecs] for details.
 #'
 #' To set properties for the whole table, you can omit `row` and `col`:
 #'
@@ -30,11 +32,12 @@
 #' set_xxx_by(ht, fn)
 #' ```
 #'
-#' Use the `fn` argument to set properties in different ways.
+#' Use the `fn` argument to set property value in different ways.
 #'
-#' * To set a property for cells with a specific value, use [by_value()].
-#' * To set a property for cells in a numeric range, use [by_range()].
-#' * To set a property for cells by quantiles, use [by_quantile()] or [by_equal_size()].
+#' * To set a property value for cells with a specific value, use [by_value()].
+#' * To set a property value for cells within a numeric range, use [by_range()].
+#' * To set a property value for cells by quantiles, use [by_quantile()] or [by_equal_size()].
+#' * To set a property value for cells that match a string or regular expression, use [by_matching()].
 #'
 #' @section Technical details:
 #'
@@ -45,8 +48,9 @@
 #'
 #' @name set-by
 #'
-#' @examples
+#' @return The modified huxtable.
 #'
+#' @examples
 #' ht <- hux(c("OK", "Warning", "Error"))
 #' ht <- set_text_color_by(ht, by_value(OK = "green", Warning = "orange", Error = "red"))
 #' ht
@@ -178,7 +182,7 @@ by_quantile <- function (quantiles, values, right = TRUE) {
   qr_fun <- function (ht, rows, cols, current) {
     vals <- as.matrix(ht)[rows, cols]
     vals <- suppressWarnings(as.numeric(vals))
-    q_breaks <- quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
+    q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
     rf <- by_range(q_breaks, values, right = right, extend = TRUE)
     rf(ht, rows, cols, current)
   }

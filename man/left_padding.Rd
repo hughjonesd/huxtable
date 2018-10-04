@@ -4,6 +4,7 @@
 \alias{left_padding}
 \alias{left_padding<-}
 \alias{set_left_padding}
+\alias{set_left_padding_by}
 \alias{right_padding}
 \alias{top_padding}
 \alias{bottom_padding}
@@ -18,6 +19,7 @@
 left_padding(ht)
 left_padding(ht) <- value
 set_left_padding(ht, row, col, value, byrow = FALSE)
+set_left_padding_by(ht, row, col, fn)
 
 right_padding(ht)
 right_padding(ht) <- value
@@ -42,6 +44,8 @@ set_top_padding(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{left_padding}, the \code{left_padding} property.

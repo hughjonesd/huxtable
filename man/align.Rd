@@ -4,11 +4,13 @@
 \alias{align}
 \alias{align<-}
 \alias{set_align}
+\alias{set_align_by}
 \title{Alignment}
 \usage{
 align(ht)
 align(ht) <- value
 set_align(ht, row, col, value, byrow = FALSE)
+set_align_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_align(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{align}, the \code{align} property.

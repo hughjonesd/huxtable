@@ -4,6 +4,7 @@
 \alias{rowspan}
 \alias{rowspan<-}
 \alias{set_rowspan}
+\alias{set_rowspan_by}
 \alias{colspan}
 \alias{colspan<-}
 \alias{set_colspan}
@@ -12,6 +13,7 @@
 rowspan(ht)
 rowspan(ht) <- value
 set_rowspan(ht, row, col, value, byrow = FALSE)
+set_rowspan_by(ht, row, col, fn)
 
 colspan(ht)
 colspan(ht) <- value
@@ -28,6 +30,8 @@ set_colspan(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{rowspan}, the \code{rowspan} property.

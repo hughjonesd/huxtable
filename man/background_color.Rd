@@ -4,11 +4,13 @@
 \alias{background_color}
 \alias{background_color<-}
 \alias{set_background_color}
+\alias{set_background_color_by}
 \title{Background color}
 \usage{
 background_color(ht)
 background_color(ht) <- value
 set_background_color(ht, row, col, value, byrow = FALSE)
+set_background_color_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_background_color(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{background_color}, the \code{background_color} property.

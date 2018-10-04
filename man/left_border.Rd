@@ -4,6 +4,7 @@
 \alias{left_border}
 \alias{left_border<-}
 \alias{set_left_border}
+\alias{set_left_border_by}
 \alias{right_border}
 \alias{top_border}
 \alias{bottom_border}
@@ -18,6 +19,7 @@
 left_border(ht)
 left_border(ht) <- value
 set_left_border(ht, row, col, value, byrow = FALSE)
+set_left_border_by(ht, row, col, fn)
 
 right_border(ht)
 right_border(ht) <- value
@@ -42,6 +44,8 @@ set_bottom_border(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{left_border}, the \code{left_border} property.

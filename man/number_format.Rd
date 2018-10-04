@@ -4,11 +4,13 @@
 \alias{number_format}
 \alias{number_format<-}
 \alias{set_number_format}
+\alias{set_number_format_by}
 \title{Number format}
 \usage{
 number_format(ht)
 number_format(ht) <- value
 set_number_format(ht, row, col, value, byrow = FALSE)
+set_number_format_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -18,6 +20,8 @@ set_number_format(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 
 \item{value}{A character or integer vector, or a list containing a function, or \code{NA}. Note
 that setting to \code{NA} does not reset to the default.}

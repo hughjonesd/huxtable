@@ -4,11 +4,13 @@
 \alias{rotation}
 \alias{rotation<-}
 \alias{set_rotation}
+\alias{set_rotation_by}
 \title{Text rotation}
 \usage{
 rotation(ht)
 rotation(ht) <- value
 set_rotation(ht, row, col, value, byrow = FALSE)
+set_rotation_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_rotation(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{rotation}, the \code{rotation} property.

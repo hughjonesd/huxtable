@@ -4,11 +4,13 @@
 \alias{font}
 \alias{font<-}
 \alias{set_font}
+\alias{set_font_by}
 \title{Font}
 \usage{
 font(ht)
 font(ht) <- value
 set_font(ht, row, col, value, byrow = FALSE)
+set_font_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_font(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{font}, the \code{font} property.

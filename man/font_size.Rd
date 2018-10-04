@@ -4,11 +4,13 @@
 \alias{font_size}
 \alias{font_size<-}
 \alias{set_font_size}
+\alias{set_font_size_by}
 \title{Font size}
 \usage{
 font_size(ht)
 font_size(ht) <- value
 set_font_size(ht, row, col, value, byrow = FALSE)
+set_font_size_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_font_size(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{font_size}, the \code{font_size} property.

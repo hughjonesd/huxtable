@@ -4,11 +4,13 @@
 \alias{wrap}
 \alias{wrap<-}
 \alias{set_wrap}
+\alias{set_wrap_by}
 \title{Text wrapping}
 \usage{
 wrap(ht)
 wrap(ht) <- value
 set_wrap(ht, row, col, value, byrow = FALSE)
+set_wrap_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -21,6 +23,8 @@ set_wrap(ht, row, col, value, byrow = FALSE)
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+
+\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
 }
 \value{
 For \code{wrap}, the \code{wrap} property.
