@@ -16,6 +16,9 @@ Others
   - allow use of `scales::col_numeric` and friends for smooth colours?
   - just needs a wrapper function I think
   - then probably have your own simple interface round `col_numeric`/`col_quantile`
+  - maybe change `ranges` etc. to `by_range`, `by_value` and so on?
+  - and maybe have a `case_when` variant, `by_case`
+  - tests!
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
