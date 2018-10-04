@@ -76,3 +76,11 @@ test_that('by_matching', {
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, NA, NA, NA), 2, 2))
 })
 
+
+test_that('by_function', {
+  m <- matrix(1:4/4, 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_function(grey)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(grey(1:4/4), 2, 2))
+})
