@@ -5,7 +5,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.2.0.9000
 
-* New `set_xxx_by` functions to set properties according to table values. 
+* New `set_xxx_by` functions to set properties according to cell values. 
 * Bugfix: `wrap=TRUE` caused squeezed text in RTF.
 
 

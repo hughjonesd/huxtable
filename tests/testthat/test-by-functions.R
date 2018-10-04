@@ -1,6 +1,7 @@
 
 context('by functions')
 
+
 test_that('by_value', {
   m <- matrix(letters[1:4], 2, 2)
   ct <- matrix(NA, 2, 2)

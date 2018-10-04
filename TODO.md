@@ -8,17 +8,13 @@ Priority changes
 ================
 
 * `set_xxx_by`:
-  - allow use of `scales::col_numeric` and friends for smooth colours?
-  - just needs a wrapper function I think
-  - then probably have your own simple interface round `col_numeric`/`col_quantile`
+  - simple interface round e.g. `colorRamp`?
   - Maybe have a `case_when` variant, `by_case`, maybe using a `.` to represent the relevant hux
   - end-to-end tests of `set_xxx_by` functions
   - `set_all_borders_by` and friends? ... lordy
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
-
-* Implement `dplyr::bind_rows` and `bind_cols`?
 
 * Methods for R packages like janitor (tabyl) or glimpse?
 
@@ -134,6 +130,8 @@ Bugs
 
 Possibles
 =========
+
+* Implement `dplyr::bind_rows` and `bind_cols`?
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
