@@ -20,6 +20,18 @@ left_border_color(ht)
 left_border_color(ht) <- value
 set_left_border_color(ht, row, col, value, byrow = FALSE)
 set_left_border_color_by(ht, row, col, fn)
+
+right_border_color(ht)
+right_border_color(ht) <- value
+set_right_border_color(ht, row, col, value, byrow = FALSE)
+
+top_border_color(ht)
+top_border_color(ht) <- value
+set_top_border_color(ht, row, col, value, byrow = FALSE)
+
+bottom_border_color(ht)
+bottom_border_color(ht) <- value
+set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -86,18 +98,3 @@ ht
 \seealso{
 \code{\link[=set_all_border_colors]{set_all_border_colors()}}
 }
-@usage
-right_border_color(ht)
-right_border_color(ht) <- value
-set_right_border_color(ht, row, col, value, byrow = FALSE)
-set_right_border_color_by(ht, row, col, fn)
-@usage
-top_border_color(ht)
-top_border_color(ht) <- value
-set_top_border_color(ht, row, col, value, byrow = FALSE)
-set_top_border_color_by(ht, row, col, fn)
-@usage
-bottom_border_color(ht)
-bottom_border_color(ht) <- value
-set_bottom_border_color(ht, row, col, value, byrow = FALSE)
-set_bottom_border_color_by(ht, row, col, fn)

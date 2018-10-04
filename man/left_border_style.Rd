@@ -20,6 +20,18 @@ left_border_style(ht)
 left_border_style(ht) <- value
 set_left_border_style(ht, row, col, value, byrow = FALSE)
 set_left_border_style_by(ht, row, col, fn)
+
+right_border_style(ht)
+right_border_style(ht) <- value
+set_right_border_style(ht, row, col, value, byrow = FALSE)
+
+top_border_style(ht)
+top_border_style(ht) <- value
+set_top_border_style(ht, row, col, value, byrow = FALSE)
+
+bottom_border_style(ht)
+bottom_border_style(ht) <- value
+set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -93,18 +105,3 @@ bottom_border(ht)[1, 1] <- 1
 bottom_border_color(ht)[1, 1] <- 'red'
 ht
 }
-@usage
-right_border_style(ht)
-right_border_style(ht) <- value
-set_right_border_style(ht, row, col, value, byrow = FALSE)
-set_right_border_style_by(ht, row, col, fn)
-@usage
-left_border_style(ht)
-left_border_style(ht) <- value
-set_left_border_style(ht, row, col, value, byrow = FALSE)
-set_left_border_style_by(ht, row, col, fn)
-@usage
-bottom_border_style(ht)
-bottom_border_style(ht) <- value
-set_bottom_border_style(ht, row, col, value, byrow = FALSE)
-set_bottom_border_style_by(ht, row, col, fn)

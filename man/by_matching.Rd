@@ -7,9 +7,7 @@
 by_matching(..., .grepl_args = list())
 }
 \arguments{
-\item{...}{A list of name-value pairs. The names are regular expressions. If there is a single
-unnamed argument, this is the default value for unmatched cells. More than one unnamed argument
-is an error.}
+\item{...}{A list of name-value pairs. The names are regular expressions.}
 
 \item{.grepl_args}{A list of arguments to pass to \code{\link[=grepl]{grepl()}}. Useful options
 include \code{fixed}, \code{perl} and \code{ignore.case}.}

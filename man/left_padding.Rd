@@ -20,6 +20,18 @@ left_padding(ht)
 left_padding(ht) <- value
 set_left_padding(ht, row, col, value, byrow = FALSE)
 set_left_padding_by(ht, row, col, fn)
+
+right_padding(ht)
+right_padding(ht) <- value
+set_right_padding(ht, row, col, value, byrow = FALSE)
+
+bottom_padding(ht)
+bottom_padding(ht) <- value
+set_bottom_padding(ht, row, col, value, byrow = FALSE)
+
+top_padding(ht)
+top_padding(ht) <- value
+set_top_padding(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -61,18 +73,3 @@ left_padding(ht4)
 ht5 <- set_left_padding(ht, where(ht == 1), 20)
 left_padding(ht5)
 }
-@usage
-right_padding(ht)
-right_padding(ht) <- value
-set_right_padding(ht, row, col, value, byrow = FALSE)
-set_right_padding_by(ht, row, col, fn)
-@usage
-bottom_padding(ht)
-bottom_padding(ht) <- value
-set_bottom_padding(ht, row, col, value, byrow = FALSE)
-set_bottom_padding_by(ht, row, col, fn)
-@usage
-top_padding(ht)
-top_padding(ht) <- value
-set_top_padding(ht, row, col, value, byrow = FALSE)
-set_top_padding_by(ht, row, col, fn)

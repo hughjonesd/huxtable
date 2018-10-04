@@ -35,16 +35,6 @@ make_exports <- function (properties, with_by = FALSE) {
 }
 
 
-make_usage <- function (fun_name) {
-  c(
-    '@usage',
-    sprintf('%s(ht)', fun_name),
-    sprintf('%s(ht) <- value', fun_name),
-    sprintf('set_%s(ht, row, col, value, byrow = FALSE)', fun_name),
-    sprintf('set_%s_by(ht, row, col, fn)', fun_name)
-  )
-}
-
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
 #' @evalNamespace make_namespace_S3_entries(huxtable_col_attrs)
 #' @evalNamespace make_namespace_S3_entries(huxtable_row_attrs)
@@ -403,19 +393,28 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_
 #' @name right_border
 #' @rdname left_border
 #' @return Similarly for the other functions.
-#' @evalRd make_usage('right_border')
+#' @usage
+#' right_border(ht)
+#' right_border(ht) <- value
+#' set_right_border(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name top_border
 #' @rdname left_border
-#' @evalRd make_usage('top_border')
+#' @usage
+#' top_border(ht)
+#' top_border(ht) <- value
+#' set_top_border(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name bottom_border
 #' @rdname left_border
-#' @evalRd make_usage('bottom_border')
+#' @usage
+#' bottom_border(ht)
+#' bottom_border(ht) <- value
+#' set_bottom_border(ht, row, col, value, byrow = FALSE)
 NULL
 
 
@@ -448,19 +447,28 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_g
 #' @name right_border_color
 #' @rdname left_border_color
 #' @return Similarly for the other functions.
-#' @evalRd make_usage('right_border_color')
+#' @usage
+#' right_border_color(ht)
+#' right_border_color(ht) <- value
+#' set_right_border_color(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name top_border_color
 #' @rdname left_border_color
-#' @evalRd make_usage('top_border_color')
+#' @usage
+#' top_border_color(ht)
+#' top_border_color(ht) <- value
+#' set_top_border_color(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name bottom_border_color
 #' @rdname left_border_color
-#' @evalRd make_usage('bottom_border_color')
+#' @usage
+#' bottom_border_color(ht)
+#' bottom_border_color(ht) <- value
+#' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
 NULL
 
 
@@ -499,19 +507,28 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_g
 #' @name right_border_style
 #' @rdname left_border_style
 #' @return Similarly for the other functions.
-#' @evalRd make_usage('right_border_style')
+#' @usage
+#' right_border_style(ht)
+#' right_border_style(ht) <- value
+#' set_right_border_style(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name top_border_style
 #' @rdname left_border_style
-#' @evalRd make_usage('left_border_style')
+#' @usage
+#' top_border_style(ht)
+#' top_border_style(ht) <- value
+#' set_top_border_style(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name bottom_border_style
 #' @rdname left_border_style
-#' @evalRd make_usage('bottom_border_style')
+#' @usage
+#' bottom_border_style(ht)
+#' bottom_border_style(ht) <- value
+#' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
 NULL
 
 
@@ -533,19 +550,28 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' @name right_padding
 #' @rdname left_padding
 #' @return Similarly for the other functions.
-#' @evalRd make_usage('right_padding')
+#' @usage
+#' right_padding(ht)
+#' right_padding(ht) <- value
+#' set_right_padding(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name bottom_padding
 #' @rdname left_padding
-#' @evalRd make_usage('bottom_padding')
+#' @usage
+#' bottom_padding(ht)
+#' bottom_padding(ht) <- value
+#' set_bottom_padding(ht, row, col, value, byrow = FALSE)
 NULL
 
 
 #' @name top_padding
 #' @rdname left_padding
-#' @evalRd make_usage('top_padding')
+#' @usage
+#' top_padding(ht)
+#' top_padding(ht) <- value
+#' set_top_padding(ht, row, col, value, byrow = FALSE)
 NULL
 
 
@@ -615,7 +641,10 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 
 #' @name italic
 #' @rdname bold
-#' @evalRd make_usage('italic')
+#' @usage
+#' italic(ht)
+#' italic(ht) <- value
+#' set_italic(ht, row, col, value, byrow = FALSE)
 #' @return
 #' Similarly for \code{italic} and friends.
 NULL
