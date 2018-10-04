@@ -11,6 +11,12 @@ Others
 
 (5.0) means API change, consider for version 5.0
 
+
+* `set_xxx_by`:
+  - allow use of `scales::col_numeric` and friends for smooth colours?
+  - just needs a wrapper function I think
+  - then probably have your own simple interface round `col_numeric`/`col_quantile`
+
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
 
@@ -18,12 +24,7 @@ Others
 
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
 
-* Rotation should be between 0 and 360 (right?)
-
 * Methods for R packages like janitor (tabyl) or glimpse?
-
-* to_rtf:
-  - maybe provide a bridge to the "rtf" package?
 
 * as_datatable for DT::renderDT()?
   - Useful if you want to add the slick features of DT to your work
@@ -104,10 +105,6 @@ Others
   the same nrow+1 x ncol,nrow x ncol+1 arrays of values and the "last one set wins"
 
 * rescale numeric row_height and col_width when subsetting, as now under rbind/cbind?
-
-* Way to set properties by value (or by an arbitrary variable). E.g.
-  `set_xxx_by(ht, row, col, values, ...)`
-  where `...` is interpreted as in `cut` or `cut2` or `recode`
 
 * Add broom.mixed dependency when it comes out.
 

@@ -4,8 +4,10 @@ Note that huxtable attempts to follow semantic versioning (https://semver.org). 
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 # huxtable 4.2.0.9000
- 
+
+* New `set_xxx_by` functions to set properties according to table values. 
 * Bugfix: `wrap=TRUE` caused squeezed text in RTF.
+
 
 # huxtable 4.2.0
 
