@@ -25,7 +25,7 @@ set_background_color_by(ht, by_value(a = "red", c = "yellow", "green"))
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_quantile}},
-  \code{\link{by_range}}
+Other `by` functions: \code{\link{by_matching}},
+  \code{\link{by_quantile}}, \code{\link{by_range}}
 }
 \concept{`by` functions}

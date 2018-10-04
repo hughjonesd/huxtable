@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_by.R
 \name{by_range}
 \alias{by_range}
-\title{Set properties by numeric intervals}
+\title{Set properties by numeric ranges}
 \usage{
 by_range(breaks, values, right = FALSE, extend = TRUE)
 }
@@ -22,7 +22,10 @@ put them in the lower group.}
 A function for use in \code{set_***_by} functions.
 }
 \description{
-Set properties by numeric intervals
+\code{by_range} sets property values for cells falling within different numeric ranges.
+}
+\details{
+Non-numeric cells are unchanged.
 }
 \examples{
 ht <- huxtable(c(1, 3, 5))
@@ -36,7 +39,7 @@ set_background_color_by(ht, by_range(c(1, 5), c("red", "yellow", "green"), right
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_quantile}},
-  \code{\link{by_value}}
+Other `by` functions: \code{\link{by_matching}},
+  \code{\link{by_quantile}}, \code{\link{by_value}}
 }
 \concept{`by` functions}

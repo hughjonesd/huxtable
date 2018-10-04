@@ -98,7 +98,9 @@ by_value <- function (...) {
 }
 
 
-#' Set properties by numeric intervals
+#' Set properties by numeric ranges
+#'
+#' `by_range` sets property values for cells falling within different numeric ranges.
 #'
 #' @param breaks A vector of numbers in increasing order.
 #' @param values A vector of property values. `length(values)` should be one greater than
@@ -107,6 +109,9 @@ by_value <- function (...) {
 #'   put them in the lower group.
 #' @param extend Extend `breaks` to `c(-Inf, breaks, Inf)`, i.e. include numbers outside the range.
 #'  `TRUE` by default.
+#'
+#' @details
+#' Non-numeric cells are unchanged.
 #'
 #' @inherit by_value return
 #'
@@ -182,13 +187,47 @@ by_quantile <- function (quantiles, values, right = TRUE) {
 }
 
 
-
 #' @param n Number of equal-sized groups. `length(values)` should equal `n`.
 #'
 #' @rdname by_quantile
 #' @export
-#' @examples
-#' ht <
 by_equal_size <- function (n, values) {
   by_quantile(seq(1/n, 1 - 1/n, 1/n), values)
+}
+
+
+#' Set properties for cells that match a string or regular expression
+#'
+#' @param ... A list of name-value pairs. The names are regular expressions.
+#' @param .grepl_args A list of arguments to pass to [grepl()]. Useful options
+#'   include `fixed`, `perl` and `ignore.case`.
+#'
+#' @family `by` functions
+#' @seealso [set-by]
+#' @inherit by_value return
+#' @export
+#'
+#' @examples
+#' ht <- hux("The cat sat", "on the", "mat")
+#' set_bold_by(ht, by_matching('at' = TRUE))
+#' set_bold_by(ht, by_matching('a.*a' = TRUE))
+#' set_bold_by(ht, by_matching('the' = TRUE, .grepl_args = list(ignore.case = TRUE)))
+by_matching <- function(..., .grepl_args = list()) {
+  vals <- c(...)
+  patterns <- names(vals)
+
+  matching_fun <- function (ht, rows, cols, current) {
+    res <- current
+    if (length(default) > 0) res[] <- default
+    my_args <- .grepl_args
+    for (pt in patterns) {
+      my_args$pattern <- pt
+      my_args$x <- as.matrix(ht)[rows, cols]
+      matches <- do.call(grepl, my_args)
+      res[matches] <- vals[[pt]]
+    }
+    res
+  }
+
+  return(matching_fun)
 }

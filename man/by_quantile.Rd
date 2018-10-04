@@ -32,12 +32,11 @@ These functions split cell values by quantiles. Non-numeric cells are ignored.
 ht <- hux(rnorm(5), rnorm(5))
 set_background_color_by(ht, by_quantile(c(0.2, 0.8), c("red", "white", "green")))
 set_background_color_by(ht, by_equal_size(3, c("red", "yellow", "green")))
-ht <
 }
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_range}},
-  \code{\link{by_value}}
+Other `by` functions: \code{\link{by_matching}},
+  \code{\link{by_range}}, \code{\link{by_value}}
 }
 \concept{`by` functions}
