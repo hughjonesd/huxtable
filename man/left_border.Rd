@@ -20,18 +20,6 @@ left_border(ht)
 left_border(ht) <- value
 set_left_border(ht, row, col, value, byrow = FALSE)
 set_left_border_by(ht, row, col, fn)
-
-right_border(ht)
-right_border(ht) <- value
-set_right_border(ht, row, col, value, byrow = FALSE)
-
-top_border(ht)
-top_border(ht) <- value
-set_top_border(ht, row, col, value, byrow = FALSE)
-
-bottom_border(ht)
-bottom_border(ht) <- value
-set_bottom_border(ht, row, col, value, byrow = FALSE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -99,3 +87,18 @@ ht
 \seealso{
 \code{\link[=set_all_borders]{set_all_borders()}}
 }
+@usage
+right_border(ht)
+right_border(ht) <- value
+set_right_border(ht, row, col, value, byrow = FALSE)
+set_right_border_by(ht, row, col, fn)
+@usage
+top_border(ht)
+top_border(ht) <- value
+set_top_border(ht, row, col, value, byrow = FALSE)
+set_top_border_by(ht, row, col, fn)
+@usage
+bottom_border(ht)
+bottom_border(ht) <- value
+set_bottom_border(ht, row, col, value, byrow = FALSE)
+set_bottom_border_by(ht, row, col, fn)
