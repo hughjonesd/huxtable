@@ -6,7 +6,9 @@ more_alias_str <- ''
 if (exists('morealiases')) {
   morealiases <- strsplit(morealiases, ' ')[[1]]
   more_alias_str <- c(outer(morealiases, c('', '<-'), paste0))
-  more_alias_str <- c(more_alias_str, paste0('set_', morealiases))
+  more_alias_str <- c(more_alias_str,
+        sprintf('set_%s', morealiases),
+        sprintf('set_%s_by', morealiases))
   more_alias_str <- paste(more_alias_str, collapse = ' ')
 }
 

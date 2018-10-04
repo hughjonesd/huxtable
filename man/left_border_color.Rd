@@ -14,6 +14,9 @@
 \alias{set_right_border_color}
 \alias{set_top_border_color}
 \alias{set_bottom_border_color}
+\alias{set_right_border_color_by}
+\alias{set_top_border_color_by}
+\alias{set_bottom_border_color_by}
 \title{Border colors}
 \usage{
 left_border_color(ht)
@@ -24,14 +27,17 @@ set_left_border_color_by(ht, row, col, fn)
 right_border_color(ht)
 right_border_color(ht) <- value
 set_right_border_color(ht, row, col, value, byrow = FALSE)
+set_right_border_color_by(ht, row, col, fn)
 
 top_border_color(ht)
 top_border_color(ht) <- value
 set_top_border_color(ht, row, col, value, byrow = FALSE)
+set_top_border_color_by(ht, row, col, fn)
 
 bottom_border_color(ht)
 bottom_border_color(ht) <- value
 set_bottom_border_color(ht, row, col, value, byrow = FALSE)
+set_bottom_border_color_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}

@@ -14,6 +14,9 @@
 \alias{set_right_border}
 \alias{set_top_border}
 \alias{set_bottom_border}
+\alias{set_right_border_by}
+\alias{set_top_border_by}
+\alias{set_bottom_border_by}
 \title{Borders}
 \usage{
 left_border(ht)
@@ -24,14 +27,17 @@ set_left_border_by(ht, row, col, fn)
 right_border(ht)
 right_border(ht) <- value
 set_right_border(ht, row, col, value, byrow = FALSE)
+set_right_border_by(ht, row, col, fn)
 
 top_border(ht)
 top_border(ht) <- value
 set_top_border(ht, row, col, value, byrow = FALSE)
+set_top_border_by(ht, row, col, fn)
 
 bottom_border(ht)
 bottom_border(ht) <- value
 set_bottom_border(ht, row, col, value, byrow = FALSE)
+set_bottom_border_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}

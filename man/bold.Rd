@@ -8,6 +8,7 @@
 \alias{italic}
 \alias{italic<-}
 \alias{set_italic}
+\alias{set_italic_by}
 \title{Cell text style}
 \usage{
 bold(ht)
@@ -18,6 +19,7 @@ set_bold_by(ht, row, col, fn)
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value, byrow = FALSE)
+set_italic_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}

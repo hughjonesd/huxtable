@@ -318,7 +318,8 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' colspan(ht)
 #' colspan(ht) <- value
 #' set_colspan(ht, row, col, value, byrow = FALSE)
-#' @aliases colspan<- set_colspan
+#' set_colspan_by(ht, row, col, fn)
+#' @aliases colspan<- set_colspan set_colspan_by
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop(
@@ -397,6 +398,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_
 #' right_border(ht)
 #' right_border(ht) <- value
 #' set_right_border(ht, row, col, value, byrow = FALSE)
+#' set_right_border_by(ht, row, col, fn)
 NULL
 
 
@@ -406,6 +408,7 @@ NULL
 #' top_border(ht)
 #' top_border(ht) <- value
 #' set_top_border(ht, row, col, value, byrow = FALSE)
+#' set_top_border_by(ht, row, col, fn)
 NULL
 
 
@@ -415,6 +418,7 @@ NULL
 #' bottom_border(ht)
 #' bottom_border(ht) <- value
 #' set_bottom_border(ht, row, col, value, byrow = FALSE)
+#' set_bottom_border_by(ht, row, col, fn)
 NULL
 
 
@@ -451,6 +455,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_g
 #' right_border_color(ht)
 #' right_border_color(ht) <- value
 #' set_right_border_color(ht, row, col, value, byrow = FALSE)
+#' set_right_border_color_by(ht, row, col, fn)
 NULL
 
 
@@ -460,6 +465,7 @@ NULL
 #' top_border_color(ht)
 #' top_border_color(ht) <- value
 #' set_top_border_color(ht, row, col, value, byrow = FALSE)
+#' set_top_border_color_by(ht, row, col, fn)
 NULL
 
 
@@ -469,6 +475,7 @@ NULL
 #' bottom_border_color(ht)
 #' bottom_border_color(ht) <- value
 #' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
+#' set_bottom_border_color_by(ht, row, col, fn)
 NULL
 
 
@@ -511,6 +518,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_g
 #' right_border_style(ht)
 #' right_border_style(ht) <- value
 #' set_right_border_style(ht, row, col, value, byrow = FALSE)
+#' set_right_border_style_by(ht, row, col, fn)
 NULL
 
 
@@ -520,6 +528,7 @@ NULL
 #' top_border_style(ht)
 #' top_border_style(ht) <- value
 #' set_top_border_style(ht, row, col, value, byrow = FALSE)
+#' set_top_border_style_by(ht, row, col, fn)
 NULL
 
 
@@ -529,6 +538,7 @@ NULL
 #' bottom_border_style(ht)
 #' bottom_border_style(ht) <- value
 #' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
+#' set_bottom_border_style_by(ht, row, col, fn)
 NULL
 
 
@@ -554,6 +564,7 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' right_padding(ht)
 #' right_padding(ht) <- value
 #' set_right_padding(ht, row, col, value, byrow = FALSE)
+#' set_right_padding_by(ht, row, col, fn)
 NULL
 
 
@@ -563,6 +574,7 @@ NULL
 #' bottom_padding(ht)
 #' bottom_padding(ht) <- value
 #' set_bottom_padding(ht, row, col, value, byrow = FALSE)
+#' set_bottom_padding_by(ht, row, col, fn)
 NULL
 
 
@@ -572,6 +584,7 @@ NULL
 #' top_padding(ht)
 #' top_padding(ht) <- value
 #' set_top_padding(ht, row, col, value, byrow = FALSE)
+#' set_top_padding_by(ht, row, col, fn)
 NULL
 
 
@@ -645,6 +658,7 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' italic(ht)
 #' italic(ht) <- value
 #' set_italic(ht, row, col, value, byrow = FALSE)
+#' set_italic_by(ht, row, col, fn)
 #' @return
 #' Similarly for \code{italic} and friends.
 NULL
@@ -754,7 +768,7 @@ make_getter_setters('number_format', 'cell')
 }
 
 
-#' @aliases pad_decimal<- set_pad_decimal
+#' @aliases pad_decimal<- set_pad_decimal set_pad_decimal_by
 #' @rdname huxtable-deprecated
 #' @name pad_decimal
 #' @details

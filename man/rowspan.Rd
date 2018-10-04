@@ -8,6 +8,7 @@
 \alias{colspan}
 \alias{colspan<-}
 \alias{set_colspan}
+\alias{set_colspan_by}
 \title{Row and column span}
 \usage{
 rowspan(ht)
@@ -18,6 +19,7 @@ set_rowspan_by(ht, row, col, fn)
 colspan(ht)
 colspan(ht) <- value
 set_colspan(ht, row, col, value, byrow = FALSE)
+set_colspan_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}

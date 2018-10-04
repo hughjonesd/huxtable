@@ -14,6 +14,9 @@
 \alias{set_right_padding}
 \alias{set_top_padding}
 \alias{set_bottom_padding}
+\alias{set_right_padding_by}
+\alias{set_top_padding_by}
+\alias{set_bottom_padding_by}
 \title{Cell padding}
 \usage{
 left_padding(ht)
@@ -24,14 +27,17 @@ set_left_padding_by(ht, row, col, fn)
 right_padding(ht)
 right_padding(ht) <- value
 set_right_padding(ht, row, col, value, byrow = FALSE)
+set_right_padding_by(ht, row, col, fn)
 
 bottom_padding(ht)
 bottom_padding(ht) <- value
 set_bottom_padding(ht, row, col, value, byrow = FALSE)
+set_bottom_padding_by(ht, row, col, fn)
 
 top_padding(ht)
 top_padding(ht) <- value
 set_top_padding(ht, row, col, value, byrow = FALSE)
+set_top_padding_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
