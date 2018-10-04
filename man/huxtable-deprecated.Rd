@@ -4,7 +4,6 @@
 \alias{pad_decimal}
 \alias{pad_decimal<-}
 \alias{set_pad_decimal}
-\alias{set_pad_decimal_by}
 \alias{is_a_number}
 \alias{huxtable-deprecated}
 \title{Deprecated functions}

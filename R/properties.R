@@ -324,8 +324,11 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 
 #' @name colspan
 #' @rdname rowspan
-#' @evalRd make_usage('colspan')
-#' @aliases colspan<- set_colspan set_colspan_by
+#' @usage
+#' colspan(ht)
+#' colspan(ht) <- value
+#' set_colspan(ht, row, col, value, byrow = FALSE)
+#' @aliases colspan<- set_colspan
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop(
@@ -722,7 +725,7 @@ make_getter_setters('number_format', 'cell')
 }
 
 
-#' @aliases pad_decimal<- set_pad_decimal set_pad_decimal_by
+#' @aliases pad_decimal<- set_pad_decimal
 #' @rdname huxtable-deprecated
 #' @name pad_decimal
 #' @details
@@ -832,6 +835,9 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
+
+
+
 
 
 #' @template getset-table
