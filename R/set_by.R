@@ -36,7 +36,7 @@ NULL
 #'
 #' * To set a property value for cells with a specific value, use [by_value()].
 #' * To set a property value for cells within a numeric range, use [by_range()].
-#' * To set a property value for cells by quantiles, use [by_quantile()] or [by_equal_size()].
+#' * To set a property value for cells by quantiles, use [by_quantile()] or [by_equal_groups()].
 #' * To set a property value for cells that match a string or regular expression, use [by_matching()].
 #'
 #' @section Technical details:
@@ -57,7 +57,7 @@ NULL
 #'
 #' ht <- hux(rnorm(5), rnorm(5), rnorm(5))
 #' set_background_color_by(ht, by_range(c(-1, 1), c("blue", "yellow", "red")))
-#' set_background_color_by(ht, by_equal_size(2, c("red", "green")))
+#' set_background_color_by(ht, by_equal_groups(2, c("red", "green")))
 #'
 #' ht <- hux(Coef = c(3.5, 2.4, 1.3), Pval = c(0.04, 0.01, 0.07), add_colnames = TRUE)
 #' set_bold_by(ht, everywhere, "Pval", by_range(0.05, c(TRUE, FALSE)))
@@ -136,7 +136,7 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(breaks))
   assert_that(all(breaks == sort(breaks)))
   if (extend) breaks <- c(-Inf, breaks, Inf)
-  assert_that(length(values) == length(breaks) - 1)
+  assert_that(length(values) == length(breaks) - 1, msg = '`values` is wrong length')
   force(right)
 
   ranges_fun <- function(ht, rows, cols, current) {
@@ -160,10 +160,11 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
 #'
 #' @inheritParams by_range
 #' @param quantiles Vector of quantiles.
-#' @param values Vector of values. `length(values)` should be one greater than `length(quantiles)`.
+#' @param values Vector of values. `length(values)` should be one greater than `length(quantiles)`,
+#'   or one less if `extend = FALSE`.
 #'
 #' @details
-#' `by_equal_size(n, values)` is a shortcut for `by_quantile(seq(1/n, 1 - 1/n, 1/n), values)`.
+#' `by_equal_groups(n, values)` is a shortcut for `by_quantile(seq(1/n, 1 - 1/n, 1/n), values)`.
 #' @family `by` functions
 #' @seealso [set-by]
 #' @inherit by_value return
@@ -172,18 +173,18 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
 #' @examples
 #' ht <- hux(rnorm(5), rnorm(5))
 #' set_background_color_by(ht, by_quantile(c(0.2, 0.8), c("red", "white", "green")))
-#' set_background_color_by(ht, by_equal_size(3, c("red", "yellow", "green")))
-by_quantile <- function (quantiles, values, right = TRUE) {
-  assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0),
-      all(quantiles == sort(quantiles)))
-  assert_that(length(values) == length(quantiles) + 1)
+#' set_background_color_by(ht, by_equal_groups(3, c("red", "yellow", "green")))
+by_quantile <- function (quantiles, values, right = FALSE, extend = TRUE) {
+  assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0))
+  assert_that(all(quantiles == sort(quantiles)))
+  force(extend)
   force(right)
 
   qr_fun <- function (ht, rows, cols, current) {
     vals <- as.matrix(ht)[rows, cols]
     vals <- suppressWarnings(as.numeric(vals))
     q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
-    rf <- by_range(q_breaks, values, right = right, extend = TRUE)
+    rf <- by_range(q_breaks, values, right = right, extend = extend)
     rf(ht, rows, cols, current)
   }
 
@@ -195,7 +196,7 @@ by_quantile <- function (quantiles, values, right = TRUE) {
 #'
 #' @rdname by_quantile
 #' @export
-by_equal_size <- function (n, values) {
+by_equal_groups <- function (n, values) {
   by_quantile(seq(1/n, 1 - 1/n, 1/n), values)
 }
 

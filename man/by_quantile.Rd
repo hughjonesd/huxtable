@@ -2,20 +2,24 @@
 % Please edit documentation in R/set_by.R
 \name{by_quantile}
 \alias{by_quantile}
-\alias{by_equal_size}
+\alias{by_equal_groups}
 \title{Set properties by quantile groups}
 \usage{
-by_quantile(quantiles, values, right = TRUE)
+by_quantile(quantiles, values, right = FALSE, extend = TRUE)
 
-by_equal_size(n, values)
+by_equal_groups(n, values)
 }
 \arguments{
 \item{quantiles}{Vector of quantiles.}
 
-\item{values}{Vector of values. \code{length(values)} should be one greater than \code{length(quantiles)}.}
+\item{values}{Vector of values. \code{length(values)} should be one greater than \code{length(quantiles)},
+or one less if \code{extend = FALSE}.}
 
 \item{right}{Intervals are closed on the right. I.e. if values are exactly equal to a \code{break},
 put them in the lower group.}
+
+\item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers outside the range.
+\code{TRUE} by default.}
 
 \item{n}{Number of equal-sized groups. \code{length(values)} should equal \code{n}.}
 }
@@ -26,12 +30,12 @@ A function for use in \code{set_***_by} functions.
 These functions split cell values by quantiles. Non-numeric cells are ignored.
 }
 \details{
-\code{by_equal_size(n, values)} is a shortcut for \code{by_quantile(seq(1/n, 1 - 1/n, 1/n), values)}.
+\code{by_equal_groups(n, values)} is a shortcut for \code{by_quantile(seq(1/n, 1 - 1/n, 1/n), values)}.
 }
 \examples{
 ht <- hux(rnorm(5), rnorm(5))
 set_background_color_by(ht, by_quantile(c(0.2, 0.8), c("red", "white", "green")))
-set_background_color_by(ht, by_equal_size(3, c("red", "yellow", "green")))
+set_background_color_by(ht, by_equal_groups(3, c("red", "yellow", "green")))
 }
 \seealso{
 \link{set-by}
