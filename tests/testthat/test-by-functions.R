@@ -1,0 +1,78 @@
+
+context('by functions')
+
+test_that('by_value', {
+  m <- matrix(letters[1:4], 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_value(a = 1, b = 2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 2, NA, NA), 2, 2))
+  expect_equivalent(f(m, 1, 1:2, ct[1, 1:2, drop = FALSE]), matrix(c(1, NA), 1, 2))
+  expect_equivalent(f(m, 1:2, 1, ct[1:2, 1, drop = FALSE]), matrix(c(1, 2), 2, 1))
+  expect_equivalent(f(m, 1, 1, ct[1, 1, drop = FALSE]), matrix(1, 1, 1))
+
+  f <- by_value(a = 1, b = 2, 3)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 2, 3, 3), 2, 2))
+
+  expect_error(by_value(a = 1, b = 2, 3, 4), 'unnamed')
+})
+
+
+test_that('by_range', {
+  m <- matrix(c(1, 3, 5, 7), 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_range(breaks = c(2, 6), values = c('low', 'middle', 'high'))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c('low', 'middle', 'middle', 'high'), 2, 2))
+
+  f <- by_range(breaks = c(2, 6), values = 'middle', extend = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, 'middle', 'middle', NA), 2, 2))
+
+  expect_error(by_range(breaks = c(2, 6), values = c('middle', 'extra'), extend = FALSE),
+        'length')
+  expect_error(by_range(breaks = c(2, 6), values = c('middle', 'notenough'), extend = TRUE),
+        'length')
+
+  f <- by_range(breaks = 3, values = c('low', 'high'), right = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c('low', 'low', 'high', 'high'), 2, 2))
+  f <- by_range(breaks = 3, values = c('low', 'high'), right = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c('low', 'high', 'high', 'high'), 2, 2))
+})
+
+
+test_that('by_quantile', {
+  m <- matrix(1:4, 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_quantile(1:3/4, c('1st', '2nd', '3rd', '4th'))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c('1st', '2nd', '3rd', '4th'), 2, 2))
+
+  f <- by_quantile(1:3/4, c('2nd', '3rd'), extend = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, '2nd', '3rd', NA), 2, 2))
+
+  expect_error(by_quantile(c(.5, .25, .75), rep('foo', 4)))
+  expect_error(by_quantile(-1, rep('foo', 2)))
+  expect_error(by_quantile(2, rep('foo', 2)))
+
+  f <- by_equal_groups(4, c('1st', '2nd', '3rd', '4th'))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c('1st', '2nd', '3rd', '4th'), 2, 2))
+})
+
+
+test_that('by_matching', {
+  m <- matrix(c('the cat', 'sat', 'on', 'THE MAT'), 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_matching('at' = 1)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 1, NA, NA), 2, 2))
+
+  f <- by_matching('at' = 1, .grepl_args = list(ignore.case = TRUE))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 1, NA, 1), 2, 2))
+
+  f <- by_matching('at' = 1, .grepl_args = list(fixed = TRUE))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 1, NA, NA), 2, 2))
+
+  f <- by_matching('t.*\\s.*at' = 1)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, NA, NA, NA), 2, 2))
+})
+
