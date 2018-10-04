@@ -32,7 +32,7 @@ NULL
 #' set_xxx_by(ht, fn)
 #' ```
 #'
-#' Use the `fn` argument to set property value in different ways.
+#' Use the `fn` argument to set property values in different ways.
 #'
 #' * To set a property value for cells with a specific value, use [by_value()].
 #' * To set a property value for cells within a numeric range, use [by_range()].

@@ -24,7 +24,7 @@ Here, \code{row} and \code{col} specify ranges of rows and columns. See \link{ro
 To set properties for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
 }
 
-Use the \code{fn} argument to set property value in different ways.
+Use the \code{fn} argument to set property values in different ways.
 \itemize{
 \item To set a property value for cells with a specific value, use \code{\link[=by_value]{by_value()}}.
 \item To set a property value for cells within a numeric range, use \code{\link[=by_range]{by_range()}}.
