@@ -73,12 +73,16 @@ ht <- tribble_hux(
   "Cell 1,1 spans 2 rows", "Cell 1,2",
   "Cell 2,1 is invisible", "Cell 2,2"
 )
+
 rowspan(ht)[1, 1] <- 2
 ht
+
 bottom_border(ht)[2, ] <- 1
 bottom_border_color(ht)[2, ] <- 'red'
+
 # Cell 1, 1 does not have a border set:
 ht
+
 # Fixed:
 bottom_border(ht)[1, 1] <- 1
 bottom_border_color(ht)[1, 1] <- 'red'
