@@ -202,7 +202,9 @@ by_equal_size <- function (n, values) {
 
 #' Set properties for cells that match a string or regular expression
 #'
-#' @param ... A list of name-value pairs. The names are regular expressions.
+#' @param ... A list of name-value pairs. The names are regular expressions. If there is a single
+#'   unnamed argument, this is the default value for unmatched cells. More than one unnamed argument
+#'   is an error.
 #' @param .grepl_args A list of arguments to pass to [grepl()]. Useful options
 #'   include `fixed`, `perl` and `ignore.case`.
 #'
@@ -218,7 +220,10 @@ by_equal_size <- function (n, values) {
 #' set_bold_by(ht, by_matching('the' = TRUE, .grepl_args = list(ignore.case = TRUE)))
 by_matching <- function(..., .grepl_args = list()) {
   vals <- c(...)
-  patterns <- names(vals)
+  named_vals <- vals[names(vals) != '']
+  patterns <- names(named_vals)
+  default <- vals[names(vals) == '']
+  if (length(default) > 1) stop('At most one element of `...` can be unnamed')
 
   matching_fun <- function (ht, rows, cols, current) {
     res <- current
@@ -228,7 +233,7 @@ by_matching <- function(..., .grepl_args = list()) {
       my_args$pattern <- pt
       my_args$x <- as.matrix(ht)[rows, cols]
       matches <- do.call(grepl, my_args)
-      res[matches] <- vals[[pt]]
+      res[matches] <- named_vals[[pt]]
     }
     res
   }
