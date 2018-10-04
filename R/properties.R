@@ -207,7 +207,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
       rc$row <- get_rc_spec(ht, row, 1)
       rc$col <- get_rc_spec(ht, col, 2)
 
-      current <- .(as.name(attr_name))(ht)[rc$row, rc$col]
+      current <- .(as.name(attr_name))(ht)[rc$row, rc$col, drop = FALSE]
       .(as.name(attr_name))(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
 
       ht

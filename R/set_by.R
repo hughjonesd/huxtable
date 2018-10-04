@@ -43,7 +43,8 @@ NULL
 #'
 #' The `fn` argument to `set_xxx_by` must be a function that takes four arguments: the
 #' original huxtable `ht`, a numeric vector of `rows`, a numeric vector of `cols`, and the `current`
-#' property values for `ht[rows, cols]`. It should return the new property values. Run e.g.
+#' property values for `ht[rows, cols]`, as a matrix. It should return the new property values for
+#' `ht[rows, cols]`, as a matrix. Run e.g.
 #' `by_value(1:3, letters[1:3])` to see an example.
 #'
 #' @name set-by

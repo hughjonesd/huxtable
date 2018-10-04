@@ -28,7 +28,7 @@ Use the \code{fn} argument to set property values in different ways.
 \itemize{
 \item To set a property value for cells with a specific value, use \code{\link[=by_value]{by_value()}}.
 \item To set a property value for cells within a numeric range, use \code{\link[=by_range]{by_range()}}.
-\item To set a property value for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_size]{by_equal_size()}}.
+\item To set a property value for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.
 \item To set a property value for cells that match a string or regular expression, use \code{\link[=by_matching]{by_matching()}}.
 }
 }
@@ -37,7 +37,8 @@ Use the \code{fn} argument to set property values in different ways.
 
 The \code{fn} argument to \code{set_xxx_by} must be a function that takes four arguments: the
 original huxtable \code{ht}, a numeric vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current}
-property values for \code{ht[rows, cols]}. It should return the new property values. Run e.g.
+property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for
+\code{ht[rows, cols]}, as a matrix. Run e.g.
 \code{by_value(1:3, letters[1:3])} to see an example.
 }
 
@@ -48,7 +49,7 @@ ht
 
 ht <- hux(rnorm(5), rnorm(5), rnorm(5))
 set_background_color_by(ht, by_range(c(-1, 1), c("blue", "yellow", "red")))
-set_background_color_by(ht, by_equal_size(2, c("red", "green")))
+set_background_color_by(ht, by_equal_groups(2, c("red", "green")))
 
 ht <- hux(Coef = c(3.5, 2.4, 1.3), Pval = c(0.04, 0.01, 0.07), add_colnames = TRUE)
 set_bold_by(ht, everywhere, "Pval", by_range(0.05, c(TRUE, FALSE)))
