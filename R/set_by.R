@@ -2,7 +2,7 @@
 #' @import assertthat
 NULL
 
-#' Set cell properties to vary by cell contents
+#' How to set cell properties variably by cell contents
 #'
 #' This help page explains how to set properties differently for cells, depending on their contents.
 #'

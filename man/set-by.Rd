@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_by.R
 \name{set-by}
 \alias{set-by}
-\title{Set cell properties to vary by cell contents}
+\title{How to set cell properties variably by cell contents}
 \value{
 The modified huxtable.
 }
