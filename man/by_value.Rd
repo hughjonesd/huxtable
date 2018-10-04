@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_by.R
 \name{by_value}
 \alias{by_value}
-\title{Set properties by specific values}
+\title{Set cell properties by cell values}
 \usage{
 by_value(...)
 }
@@ -15,7 +15,7 @@ this is the default value for unmatched cells. More than one unnamed argument is
 A function for use in \code{set_***_by} functions.
 }
 \description{
-Set properties by specific values
+Set cell properties by cell values
 }
 \examples{
 ht <- hux(letters[1:3])
@@ -25,7 +25,8 @@ set_background_color_by(ht, by_value(a = "red", c = "yellow", "green"))
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_matching}},
-  \code{\link{by_quantile}}, \code{\link{by_range}}
+Other `by` functions: \code{\link{by_function}},
+  \code{\link{by_matching}}, \code{\link{by_quantile}},
+  \code{\link{by_range}}
 }
 \concept{`by` functions}

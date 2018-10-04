@@ -3,7 +3,7 @@
 \name{by_quantile}
 \alias{by_quantile}
 \alias{by_equal_groups}
-\title{Set properties by quantile groups}
+\title{Set cell properties by quantile groups}
 \usage{
 by_quantile(quantiles, values, right = FALSE, extend = TRUE)
 
@@ -40,7 +40,8 @@ set_background_color_by(ht, by_equal_groups(3, c("red", "yellow", "green")))
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_matching}},
-  \code{\link{by_range}}, \code{\link{by_value}}
+Other `by` functions: \code{\link{by_function}},
+  \code{\link{by_matching}}, \code{\link{by_range}},
+  \code{\link{by_value}}
 }
 \concept{`by` functions}

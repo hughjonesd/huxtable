@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_by.R
 \name{by_range}
 \alias{by_range}
-\title{Set properties by numeric ranges}
+\title{Set cell properties by numeric ranges}
 \usage{
 by_range(breaks, values, right = FALSE, extend = TRUE)
 }
@@ -39,7 +39,8 @@ set_background_color_by(ht, by_range(c(1, 5), c("red", "yellow", "green"), right
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_matching}},
-  \code{\link{by_quantile}}, \code{\link{by_value}}
+Other `by` functions: \code{\link{by_function}},
+  \code{\link{by_matching}}, \code{\link{by_quantile}},
+  \code{\link{by_value}}
 }
 \concept{`by` functions}

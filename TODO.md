@@ -12,7 +12,7 @@ Priority changes
   - just needs a wrapper function I think
   - then probably have your own simple interface round `col_numeric`/`col_quantile`
   - Maybe have a `case_when` variant, `by_case`, maybe using a `.` to represent the relevant hux
-  - tests!
+  - end-to-end tests of `set_xxx_by` functions
   - `set_all_borders_by` and friends? ... lordy
 
 * Use more purrr and rlang features, as we depend on these packages anyway

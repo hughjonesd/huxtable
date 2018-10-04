@@ -2,7 +2,7 @@
 #' @import assertthat
 NULL
 
-#' Set properties by cell contents
+#' Set cell properties to vary by cell contents
 #'
 #' This help page explains how to set properties differently for cells, depending on their contents.
 #'
@@ -66,7 +66,7 @@ NULL
 
 
 
-#' Set properties by specific values
+#' Set cell properties by cell values
 #'
 #' @param ... Name-value pairs like `name = value`. Cells where contents are equal to
 #'   `name` will have the property set to `value`. If there is a single unnamed argument,
@@ -90,7 +90,7 @@ by_value <- function (...) {
   default <- vals[names(vals) == '']
   if (length(default) > 1) stop('At most one element of `...` can be unnamed')
 
-  values_fun <- function (ht, rows, cols, current) {
+  values_fn <- function (ht, rows, cols, current) {
     res <- current
     if (length(default) > 0) res[] <- default
     for (tg in targets) {
@@ -99,11 +99,11 @@ by_value <- function (...) {
     res
   }
 
-  return(values_fun)
+  return(values_fn)
 }
 
 
-#' Set properties by numeric ranges
+#' Set cell properties by numeric ranges
 #'
 #' `by_range` sets property values for cells falling within different numeric ranges.
 #'
@@ -140,7 +140,7 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
   assert_that(length(values) == length(breaks) - 1, msg = '`values` is wrong length')
   force(right)
 
-  ranges_fun <- function(ht, rows, cols, current) {
+  ranges_fn <- function(ht, rows, cols, current) {
     res <- current
     mx <- as.matrix(ht)[rows, cols]
     # avoid "NAs introduced by coercion"
@@ -151,11 +151,11 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
     res
   }
 
-  ranges_fun
+  ranges_fn
 }
 
 
-#' Set properties by quantile groups
+#' Set cell properties by quantile groups
 #'
 #' These functions split cell values by quantiles. Non-numeric cells are ignored.
 #'
@@ -181,7 +181,7 @@ by_quantile <- function (quantiles, values, right = FALSE, extend = TRUE) {
   force(extend)
   force(right)
 
-  qr_fun <- function (ht, rows, cols, current) {
+  qr_fn <- function (ht, rows, cols, current) {
     vals <- as.matrix(ht)[rows, cols]
     vals <- suppressWarnings(as.numeric(vals))
     q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
@@ -189,7 +189,7 @@ by_quantile <- function (quantiles, values, right = FALSE, extend = TRUE) {
     rf(ht, rows, cols, current)
   }
 
-  qr_fun
+  qr_fn
 }
 
 
@@ -202,7 +202,7 @@ by_equal_groups <- function (n, values) {
 }
 
 
-#' Set properties for cells that match a string or regular expression
+#' Set cell properties that match a string or regular expression
 #'
 #' @param ... A list of name-value pairs. The names are regular expressions. If there is a single
 #'   unnamed argument, this is the default value for unmatched cells. More than one unnamed argument
@@ -227,7 +227,7 @@ by_matching <- function(..., .grepl_args = list()) {
   default <- vals[names(vals) == '']
   if (length(default) > 1) stop('At most one element of `...` can be unnamed')
 
-  matching_fun <- function (ht, rows, cols, current) {
+  matching_fn <- function (ht, rows, cols, current) {
     res <- current
     if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
@@ -240,5 +240,44 @@ by_matching <- function(..., .grepl_args = list()) {
     res
   }
 
-  return(matching_fun)
+  return(matching_fn)
+}
+
+
+
+#' Set cell properties using a function or scale
+#'
+#' This creates a simple wrapper around a function for use in `set_xxx_by`.
+#' Useful functions include scales and palettes from the `scales` package.
+#'
+#' @param inner_fn A one-argument function which maps cell values to property values.
+#'
+#' @family `by` functions
+#' @seealso [set-by]
+#' @inherit by_value return
+#' @export
+#'
+#' @examples
+#' ht <- huxtable(runif(5), runif(5), runif(5), runif(5))
+#'
+#' set_text_color_by(ht, by_function(grey))
+#'
+#' if (requireNamespace('scales')) {
+#'   set_background_color_by(ht, by_function(
+#'         scales::col_numeric(c('red', 'orange', 'yellow'), domain = NULL)
+#'   ))
+#' }
+#'
+#' if (requireNamespace('scales')) {
+#'   set_text_color_by(ht, by_function( scales::seq_gradient_pal() ))
+#' }
+by_function <- function (inner_fn) {
+  assert_that(is.function(inner_fn))
+  wrapper_fn <- function (ht, rows, cols, current) {
+    res <- current
+    res[] <- inner_fn(as.matrix(ht)[rows, cols])
+    res
+  }
+
+  return(wrapper_fn)
 }

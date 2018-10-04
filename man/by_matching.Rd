@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_by.R
 \name{by_matching}
 \alias{by_matching}
-\title{Set properties for cells that match a string or regular expression}
+\title{Set cell properties that match a string or regular expression}
 \usage{
 by_matching(..., .grepl_args = list())
 }
@@ -18,7 +18,7 @@ include \code{fixed}, \code{perl} and \code{ignore.case}.}
 A function for use in \code{set_***_by} functions.
 }
 \description{
-Set properties for cells that match a string or regular expression
+Set cell properties that match a string or regular expression
 }
 \examples{
 ht <- hux("The cat sat", "on the", "mat")
@@ -29,7 +29,8 @@ set_bold_by(ht, by_matching('the' = TRUE, .grepl_args = list(ignore.case = TRUE)
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_quantile}},
-  \code{\link{by_range}}, \code{\link{by_value}}
+Other `by` functions: \code{\link{by_function}},
+  \code{\link{by_quantile}}, \code{\link{by_range}},
+  \code{\link{by_value}}
 }
 \concept{`by` functions}
