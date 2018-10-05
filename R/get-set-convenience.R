@@ -60,9 +60,10 @@ get_default_properties <- function (names = NULL) {
 #'
 #' @param ht A huxtable.
 #' @param value Value(s) to set. Set to `NA` to reset to the default.
-#' @param row A row specifier. See \code{\link{rowspecs}} for details.
+#' @param row A row specifier. See [rowspecs].
 #' @param col An optional column specifier.
 #' @param byrow If \code{TRUE}, fill in values by row rather than by column.
+#' @param fn A mapping function. See [set-by].
 #'
 #' @return The modified huxtable.
 #' @name set-multiple
@@ -78,6 +79,12 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
   recall_ltrb(ht, 'border')
 }
 
+#' @rdname set-multiple
+#' @export
+set_all_borders_by <- function (ht, row, col, fn) {
+  recall_ltrb(ht, 'border_by')
+}
+
 
 #' @rdname set-multiple
 #' @export
@@ -85,6 +92,12 @@ set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
 #' ht <- set_all_border_colors(ht, 'red')
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
   recall_ltrb(ht, 'border_color')
+}
+
+#' @rdname set-multiple
+#' @export
+set_all_border_colors_by <- function (ht, row, col, fn) {
+  recall_ltrb(ht, 'border_color_by')
 }
 
 
@@ -96,6 +109,12 @@ set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
   recall_ltrb(ht, 'border_style')
 }
 
+#' @rdname set-multiple
+#' @export
+set_all_border_styles_by <- function (ht, row, col, fn) {
+  recall_ltrb(ht, 'border_style_by')
+}
+
 
 #' @rdname set-multiple
 #' @export
@@ -103,6 +122,13 @@ set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
   recall_ltrb(ht, 'padding')
+}
+
+
+#' @rdname set-multiple
+#' @export
+set_all_padding_by <- function (ht, row, col, fn) {
+  recall_ltrb(ht, 'padding_by')
 }
 
 

@@ -160,6 +160,34 @@ test_that('all forms of set_all_* work as expected', {
 })
 
 
+test_that('set_all_*_by', {
+  ht <- huxtable(1:5, 5:1)
+
+  ht2 <- set_all_borders_by(ht, by_range(3, c(0, 1)))
+  expect_equivalent(left_border(ht2), 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(right_border(ht2), 1 * (as.matrix(ht2) >= 3))
+
+  ht3 <- set_all_border_colors_by(ht, by_range(3, c('red', 'black')))
+  expected <- matrix(ifelse(as.matrix(ht) >= 3, 'black', 'red'), 5, 2)
+  expect_equivalent(left_border_color(ht3), expected)
+  expect_equivalent(right_border_color(ht3), expected)
+
+  ht4 <- set_all_border_styles_by(ht, by_range(3, c('solid', 'double')))
+  expected <- matrix(ifelse(as.matrix(ht) >= 3, 'double', 'solid'), 5, 2)
+  expect_equivalent(left_border_style(ht4), expected)
+  expect_equivalent(right_border_style(ht4), expected)
+
+  ht5 <- set_all_padding_by(ht, by_range(3, c(0, 10)))
+  expect_equivalent(left_padding(ht5), 10 * (as.matrix(ht) >= 3))
+  expect_equivalent(right_padding(ht5), 10 * (as.matrix(ht) >= 3))
+
+  ht6 <- set_all_borders_by(ht, 1:2, 1:2, by_range(3, c(2, 4)))
+  expected <- matrix(c(2, 2, 0, 0, 0, 4, 4, 0, 0, 0), 5, 2)
+  expect_equivalent(left_border(ht6), expected)
+  expect_equivalent(right_border(ht6), expected)
+})
+
+
 test_that('set_all_* functions work when huxtable is not attached', {
   # NB as written this test can only be run from the command line; detach call silently fails
   library(huxtable)

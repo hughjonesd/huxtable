@@ -22,9 +22,9 @@ blank_where <- function (text, cond) {
 }
 
 
-recall_ltrb <- function(ht, prop) {
+recall_ltrb <- function(ht, suffix) {
   call <- sys.call(sys.parent(1))
-  call_names <- parse(text = paste0('huxtable::set_', c('left_', 'top_', 'right_', 'bottom_'), prop))
+  call_names <- parse(text = paste0('huxtable::set_', c('left_', 'top_', 'right_', 'bottom_'), suffix))
   for (cn in call_names) {
     call[[1]] <- cn
     call[[2]] <- quote(ht)

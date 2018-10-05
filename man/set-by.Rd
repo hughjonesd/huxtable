@@ -19,9 +19,10 @@ Or you can use red text for a particular value:\preformatted{hxtbl \%>\% set_tex
 There is a \code{set_xxx_by} function for each huxtable cell property. The syntax is:\preformatted{set_xxx_by(ht, row, col, fn)
 }
 
-Here, \code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details.
+where \code{xxx} is the property name.
 
-To set properties for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
+\code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details. To set properties
+for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
 }
 
 The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
@@ -36,11 +37,9 @@ The \code{fn} argument is a \emph{mapping function} which maps cell contents to 
 \section{Technical details}{
 
 
-The \code{fn} argument to \code{set_xxx_by} must be a function that takes four arguments: the
-original huxtable \code{ht}, a numeric vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current}
-property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for
-\code{ht[rows, cols]}, as a matrix. Run e.g.
-\code{by_value(1:3, letters[1:3])} to see an example.
+\code{fn} must be a function taking four arguments: the (entire) original huxtable \code{ht}, a numeric
+vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current} property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for \code{ht[rows, cols]}, as a matrix.
+Examine the output of e.g. \code{by_value(1:3, letters[1:3])} to see an example.
 }
 
 \examples{

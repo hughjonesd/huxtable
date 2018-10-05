@@ -24,9 +24,10 @@ NULL
 #' set_xxx_by(ht, row, col, fn)
 #' ```
 #'
-#' Here, `row` and `col` specify ranges of rows and columns. See [rowspecs] for details.
+#' where `xxx` is the property name.
 #'
-#' To set properties for the whole table, you can omit `row` and `col`:
+#' `row` and `col` specify ranges of rows and columns. See [rowspecs] for details. To set properties
+#' for the whole table, you can omit `row` and `col`:
 #'
 #' ```
 #' set_xxx_by(ht, fn)
@@ -42,11 +43,10 @@ NULL
 #'
 #' @section Technical details:
 #'
-#' The `fn` argument to `set_xxx_by` must be a function that takes four arguments: the
-#' original huxtable `ht`, a numeric vector of `rows`, a numeric vector of `cols`, and the `current`
-#' property values for `ht[rows, cols]`, as a matrix. It should return the new property values for
-#' `ht[rows, cols]`, as a matrix. Run e.g.
-#' `by_value(1:3, letters[1:3])` to see an example.
+#' `fn` must be a function taking four arguments: the (entire) original huxtable `ht`, a numeric
+#' vector of `rows`, a numeric vector of `cols`, and the `current` property values for `ht[rows,
+#' cols]`, as a matrix. It should return the new property values for `ht[rows, cols]`, as a matrix.
+#' Examine the output of e.g. `by_value(1:3, letters[1:3])` to see an example.
 #'
 #' @name set-by
 #'
