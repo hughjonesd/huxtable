@@ -29,8 +29,8 @@ set_bold_by(ht, by_matching('the' = TRUE, .grepl_args = list(ignore.case = TRUE)
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_case_when}},
+Other mapping functions: \code{\link{by_case_when}},
   \code{\link{by_function}}, \code{\link{by_quantile}},
   \code{\link{by_range}}, \code{\link{by_value}}
 }
-\concept{`by` functions}
+\concept{mapping functions}

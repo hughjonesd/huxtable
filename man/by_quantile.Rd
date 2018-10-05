@@ -40,8 +40,8 @@ set_background_color_by(ht, by_equal_groups(3, c("red", "yellow", "green")))
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_case_when}},
+Other mapping functions: \code{\link{by_case_when}},
   \code{\link{by_function}}, \code{\link{by_matching}},
   \code{\link{by_range}}, \code{\link{by_value}}
 }
-\concept{`by` functions}
+\concept{mapping functions}

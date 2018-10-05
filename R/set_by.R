@@ -32,12 +32,13 @@ NULL
 #' set_xxx_by(ht, fn)
 #' ```
 #'
-#' Use the `fn` argument to set property values in different ways.
+#' The `fn` argument is a *mapping function* which maps cell contents to property values.
 #'
-#' * To set a property value for cells with a specific value, use [by_value()].
-#' * To set a property value for cells within a numeric range, use [by_range()].
-#' * To set a property value for cells by quantiles, use [by_quantile()] or [by_equal_groups()].
-#' * To set a property value for cells that match a string or regular expression, use [by_matching()].
+#' * To set property values for cells with specific contents, use [by_value()].
+#' * To set property values for cells within a numeric range, use [by_range()].
+#' * To set property values for cells by quantiles, use [by_quantile()] or [by_equal_groups()].
+#' * To set property values for cells that match a string or regular expression, use [by_matching()].
+#' * For a more general solution, use [by_function()] or [by_case_when()].
 #'
 #' @section Technical details:
 #'
@@ -74,7 +75,7 @@ NULL
 #'
 #' @return A function for use in `set_***_by` functions.
 #'
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #'
 #' @export
@@ -120,7 +121,7 @@ by_value <- function (...) {
 #'
 #' @inherit by_value return
 #'
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #'
 #' @export
@@ -166,7 +167,7 @@ by_range <- function (breaks, values, right = FALSE, extend = TRUE) {
 #'
 #' @details
 #' `by_equal_groups(n, values)` is a shortcut for `by_quantile(seq(1/n, 1 - 1/n, 1/n), values)`.
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #' @inherit by_value return
 #' @export
@@ -210,7 +211,7 @@ by_equal_groups <- function (n, values) {
 #' @param .grepl_args A list of arguments to pass to [grepl()]. Useful options
 #'   include `fixed`, `perl` and `ignore.case`.
 #'
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #' @inherit by_value return
 #' @export
@@ -255,7 +256,7 @@ by_matching <- function(..., .grepl_args = list()) {
 #' @details
 #' The argument of `inner_fn` will be `as.matrix(ht[row, col])`. Be aware how matrix conversion
 #' affects the `mode` of cell data.
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #' @inherit by_value return
 #' @export
@@ -301,7 +302,7 @@ by_function <- function (inner_fn) {
 #' `case_when` returns `NA` when no formula LHS is matched. By default this leaves the old property
 #' value unchanged. To avoid this, set a default in the last formula: `TRUE ~ default`.
 #'
-#' @family `by` functions
+#' @family mapping functions
 #' @seealso [set-by]
 #' @inherit by_value return
 #' @export
@@ -319,13 +320,14 @@ by_function <- function (inner_fn) {
 by_case_when <- function (..., skip_na = TRUE) {
   assert_that(is.flag(skip_na))
   assert_package('by_case_when', 'dplyr')
+  # turn into character strings so they don't capture local information yet
   cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
 
   case_fn <- function (ht, rows, cols, current) {
     res <- current
     myenv <- new.env()
     assign('.',  as.matrix(ht[rows, cols]), envir = myenv)
-    cases <- lapply(cases, as.formula, env = myenv)
+    cases <- lapply(cases, stats::as.formula, env = myenv)
     vals <- dplyr::case_when(!!! cases)
     res[] <- vals
     if (skip_na) res[is.na(vals)] <- current[is.na(vals)]

@@ -38,8 +38,8 @@ if (requireNamespace('scales')) {
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_case_when}},
+Other mapping functions: \code{\link{by_case_when}},
   \code{\link{by_matching}}, \code{\link{by_quantile}},
   \code{\link{by_range}}, \code{\link{by_value}}
 }
-\concept{`by` functions}
+\concept{mapping functions}

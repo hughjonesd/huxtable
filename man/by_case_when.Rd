@@ -23,7 +23,7 @@ Within the formulas, the variable \code{.} will refer to the content of \code{ht
 by \code{as.matrix}).
 
 \code{case_when} returns \code{NA} when no formula LHS is matched. By default this leaves the old property
-value unchanged. To avoid this, use a default value: \code{TRUE ~ default}.
+value unchanged. To avoid this, set a default in the last formula: \code{TRUE ~ default}.
 }
 \examples{
 if (requireNamespace('dplyr')) {
@@ -39,8 +39,8 @@ if (requireNamespace('dplyr')) {
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_function}},
+Other mapping functions: \code{\link{by_function}},
   \code{\link{by_matching}}, \code{\link{by_quantile}},
   \code{\link{by_range}}, \code{\link{by_value}}
 }
-\concept{`by` functions}
+\concept{mapping functions}

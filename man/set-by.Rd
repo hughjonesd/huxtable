@@ -24,12 +24,13 @@ Here, \code{row} and \code{col} specify ranges of rows and columns. See \link{ro
 To set properties for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
 }
 
-Use the \code{fn} argument to set property values in different ways.
+The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
 \itemize{
-\item To set a property value for cells with a specific value, use \code{\link[=by_value]{by_value()}}.
-\item To set a property value for cells within a numeric range, use \code{\link[=by_range]{by_range()}}.
-\item To set a property value for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.
-\item To set a property value for cells that match a string or regular expression, use \code{\link[=by_matching]{by_matching()}}.
+\item To set property values for cells with specific contents, use \code{\link[=by_value]{by_value()}}.
+\item To set property values for cells within a numeric range, use \code{\link[=by_range]{by_range()}}.
+\item To set property values for cells by quantiles, use \code{\link[=by_quantile]{by_quantile()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.
+\item To set property values for cells that match a string or regular expression, use \code{\link[=by_matching]{by_matching()}}.
+\item For a more general solution, use \code{\link[=by_function]{by_function()}} or \code{\link[=by_case_when]{by_case_when()}}.
 }
 }
 \section{Technical details}{
