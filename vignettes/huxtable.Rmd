@@ -564,7 +564,7 @@ cars_mpg
 
 `merge_cells` works by setting the top left cell's `colspan` and `rowspan` properties. If you know HTML tables, then 
 these will be familiar to you. `colspan` sets how many columns the cell covers, and `rowspan` sets
-how many rows the cell covers. If you prefer, you can set these directly:
+how many rows the cell covers. You can also set these directly:
 
 ```{r, eval = FALSE}
 colspan(cars_mpg)[1, 1] <- 5
@@ -594,7 +594,7 @@ With these functions it is easy to add striped backgrounds to tables:
 
 ```{r}
 car_ht                                                 %>% 
-      set_background_color(evens, everywhere, "wheat") %>% 
+      set_background_color(evens, everywhere, "salmon") %>% 
       set_background_color(odds, everywhere, grey(.9)) %>% 
       set_bold(1, everywhere, TRUE)
 ```
@@ -608,7 +608,6 @@ name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
 car_ht %>% set_background_color(everywhere, starts_with("C"), "orange")
-car_ht %>% set_italic(everywhere, matches("[aeiou]"), TRUE)
 ```
 
 Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
@@ -617,58 +616,9 @@ Lastly, remember that you can set a property for every cell by simply omitting t
 `set_background_color(ht, 'orange')`.
 
 
-## Conditional formatting
-
-You may want to apply conditional formatting to cells, based on their contents. Suppose we want to display a table of correlations, and to highlight ones which are significant. We can use the `where()` function to select those cells.
-
-```{r}
-library(psych)
-data(attitude)
-att_corr <- corr.test(as.matrix(attitude))
-
-att_hux <- as_hux(att_corr$r)                                           %>% 
-      # selects cells with p < 0.05:
-      set_background_color(where(att_corr$p < 0.05), "yellow")          %>% 
-      # selects cells with p < 0.01:
-      set_background_color(where(att_corr$p < 0.01), "orange")          %>% 
-      set_text_color(where(row(att_corr$r) == col(att_corr$r)), "grey") 
-
-
-att_hux <- att_hux                                                      %>% 
-      huxtable::add_rownames()                                          %>% 
-      huxtable::add_colnames()                                          %>%
-      set_caption('Correlations in attitudes among 30 departments')     %>% 
-      set_bold(1, everywhere, TRUE)                                     %>% 
-      set_bold(everywhere, 1, TRUE)                                     %>% 
-      set_all_borders(1)                                                %>%
-      set_number_format(2)                                              %>% 
-      set_position('left')
-
-att_hux
-
-```
-
-We have now seen three ways to call `set_*` functions in huxtable:
-
-* With four arguments, like `set_property(hux_object, rows, cols, value)`;
-* With two arguments, like `set_property(hux_object, value)` to set a property everywhere;
-* With three arguments, like `set_property(hux_object, where(condition), value)` to set a property for specific cells.
-
-The second argument of the three-argument version must return a 2-column matrix. Each row of the matrix gives one cell.
-`where()` does this for you: it takes a logical matrix argument and returns the rows and columns where a condition is
-`TRUE`. It's easiest to show this with an example:
-
-```{r}
-m <- matrix(c('dog', 'cat', 'dog', 'dog', 'cat', 'cat', 'cat', 'dog'), 4, 2)
-m
-where(m == 'dog') # m is equal to 'dog' in cells (1, 1), (3, 1), (4, 1) and (4, 2):
-```
-
 `set_*` functions have one more optional argument, the `byrow` argument, which is `FALSE` by default. If you set a
-single pattern for many cells, you may want the pattern to fill the matrix by column or by row. The default fills the
-pattern in going down columns. If you set `byrow = TRUE`, the pattern goes across rows instead. (This is a bit
-confusing: typically, `byrow = TRUE` means that the *columns* will all look the same. But it works the same way as the
-`byrow` argument to `matrix()`.)
+single pattern for many cells, you may want the pattern to fill the matrix by column or by row. The default sets the
+pattern going down the columns. If you set `byrow = TRUE`, the pattern goes across rows instead. 
 
 ```{r}
 
@@ -684,6 +634,32 @@ color_demo
 ```
 
 
+
+## Conditional formatting
+
+You may want to apply conditional formatting to cells, based on their contents. 
+
+For example, let's apply a text color to cars with a lot of horsepower:
+
+```{r}
+
+car_ht %>% set_text_color_by(everywhere, 4, 
+  by_range(c(120, 200), c('black', 'red', 'orange'))
+)
+
+```
+
+`by_range` is a *mapping function*. It divides its input into ranges and outputs colours based on that, a bit like
+the base R function `cut`.
+
+You can also apply properties for cells that match a string, using the function `by_matching`. 
+Here, we bold the Mazda cars:
+
+```{r}
+car_ht %>% set_bold_by(by_matching('Mazda' = TRUE))
+```
+
+See the help pages for other mapping functions.
 
 # Creating a regression table
 
