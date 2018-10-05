@@ -231,9 +231,9 @@ by_matching <- function(..., .grepl_args = list()) {
     res <- current
     if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
+    my_args$x <- as.matrix(ht)[rows, cols]
     for (pt in patterns) {
       my_args$pattern <- pt
-      my_args$x <- as.matrix(ht)[rows, cols]
       matches <- do.call(grepl, my_args)
       res[matches] <- named_vals[[pt]]
     }
@@ -252,6 +252,9 @@ by_matching <- function(..., .grepl_args = list()) {
 #'
 #' @param inner_fn A one-argument function which maps cell values to property values.
 #'
+#' @details
+#' The argument of `inner_fn` will be `as.matrix(ht[row, col])`. Be aware how matrix conversion
+#' affects the `mode` of cell data.
 #' @family `by` functions
 #' @seealso [set-by]
 #' @inherit by_value return
@@ -275,9 +278,59 @@ by_function <- function (inner_fn) {
   assert_that(is.function(inner_fn))
   wrapper_fn <- function (ht, rows, cols, current) {
     res <- current
-    res[] <- inner_fn(as.matrix(ht)[rows, cols])
+    res[] <- inner_fn(as.matrix(ht[rows, cols]))
     res
   }
 
   return(wrapper_fn)
+}
+
+
+#' Set cell properties by cases
+#'
+#' This function uses [dplyr::case_when()] to set cell properties.
+#'
+#' @param ... A list of two-sided formulas interpreted by `case_when`.
+#' @param skip_na Where `case_when` returns `NA`, leave the value unchanged. Otherwise, `NA` will
+#'   normally reset the property value to the default.
+#'
+#' @details
+#' Within the formulas, the variable `.` will refer to the content of `ht[rows, cols]` (converted
+#' by `as.matrix`).
+#'
+#' `case_when` returns `NA` when no formula LHS is matched. By default this leaves the old property
+#' value unchanged. To avoid this, set a default in the last formula: `TRUE ~ default`.
+#'
+#' @family `by` functions
+#' @seealso [set-by]
+#' @inherit by_value return
+#' @export
+#'
+#' @examples
+#' if (requireNamespace('dplyr')) {
+#'   ht <- hux(rnorm(5), rnorm(5), letters[1:5])
+#'
+#'   set_background_color_by(ht, by_case_when(
+#'       . == "a" ~ "red",
+#'       . %in% letters ~ "green",
+#'       . < 0 ~ "pink"
+#'   ))
+#' }
+by_case_when <- function (..., skip_na = TRUE) {
+  assert_that(is.flag(skip_na))
+  assert_package('by_case_when', 'dplyr')
+  cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
+
+  case_fn <- function (ht, rows, cols, current) {
+    res <- current
+    myenv <- new.env()
+    assign('.',  as.matrix(ht[rows, cols]), envir = myenv)
+    cases <- lapply(cases, as.formula, env = myenv)
+    vals <- dplyr::case_when(!!! cases)
+    res[] <- vals
+    if (skip_na) res[is.na(vals)] <- current[is.na(vals)]
+    res
+  }
+
+  return(case_fn)
 }

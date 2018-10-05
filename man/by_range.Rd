@@ -39,8 +39,8 @@ set_background_color_by(ht, by_range(c(1, 5), c("red", "yellow", "green"), right
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_function}},
-  \code{\link{by_matching}}, \code{\link{by_quantile}},
-  \code{\link{by_value}}
+Other `by` functions: \code{\link{by_case_when}},
+  \code{\link{by_function}}, \code{\link{by_matching}},
+  \code{\link{by_quantile}}, \code{\link{by_value}}
 }
 \concept{`by` functions}

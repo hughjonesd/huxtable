@@ -85,3 +85,17 @@ test_that('by_function', {
   f <- by_function(grey)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(grey(1:4/4), 2, 2))
 })
+
+
+test_that('by_case_when', {
+  skip_if_not_installed('dplyr')
+
+  m <- matrix(1:6, 3, 2)
+  ct <- matrix("default", 3, 2)
+
+  f <- by_case_when(. < 1.5 ~ "small", . == 2 ~ "two", . %in% 3:4 ~ "middle")
+  expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c("small", "two", "middle", "middle", "default", "default"), 3, 2))
+
+  f <- by_case_when(. < 1.5 ~ "small", . == 2 ~ "two", . %in% 3:4 ~ "middle", skip_na = FALSE)
+  expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c("small", "two", "middle", "middle", NA, NA), 3, 2))
+})

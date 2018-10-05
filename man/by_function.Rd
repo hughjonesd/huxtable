@@ -16,6 +16,10 @@ A function for use in \code{set_***_by} functions.
 This creates a simple wrapper around a function for use in \code{set_xxx_by}.
 Useful functions include scales and palettes from the \code{scales} package.
 }
+\details{
+The argument of \code{inner_fn} will be \code{as.matrix(ht[row, col])}. Be aware how matrix conversion
+affects the \code{mode} of cell data.
+}
 \examples{
 ht <- huxtable(runif(5), runif(5), runif(5), runif(5))
 
@@ -34,8 +38,8 @@ if (requireNamespace('scales')) {
 \seealso{
 \link{set-by}
 
-Other `by` functions: \code{\link{by_matching}},
-  \code{\link{by_quantile}}, \code{\link{by_range}},
-  \code{\link{by_value}}
+Other `by` functions: \code{\link{by_case_when}},
+  \code{\link{by_matching}}, \code{\link{by_quantile}},
+  \code{\link{by_range}}, \code{\link{by_value}}
 }
 \concept{`by` functions}

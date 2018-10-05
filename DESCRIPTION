@@ -46,6 +46,7 @@ Suggests:
     openxlsx,
     psych,
     rmarkdown,
+    scales,
     testthat,
     tinytex
 VignetteBuilder: knitr
