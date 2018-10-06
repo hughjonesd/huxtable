@@ -3,7 +3,7 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document:
+  html_vignette:
     toc: yes
     toc_depth: 2
   pdf_document:
@@ -200,14 +200,12 @@ prop_hux <- hux(as.data.frame(props))                     %>%
       add_colnames                                        %>% 
       {foo <- .; foo[1,] <- gsub('_', ' ', foo[1,]); foo} %>% 
       set_font(-1, everywhere, ss_font)                   %>% 
+      set_font_size( 10)                                  %>% 
       set_bold(1, everywhere, TRUE)                       %>% 
       set_width(0.9)                                      %>% 
-      set_background_color(everywhere, evens, grey(.9))   %>% 
-      set_left_border(everywhere, 1, 1)                   %>% 
-      set_right_border(everywhere, final(), 1)            %>% 
-      set_top_border(1, everywhere, 1)                    %>% 
+      set_background_color(-1, evens, grey(.9))           %>% 
+      set_outer_borders(1)                                %>% 
       set_bottom_border(1, everywhere, 1)                 %>% 
-      set_bottom_border(final(), everywhere, 1)           %>% 
       set_top_padding(2)                                  %>% 
       set_bottom_padding(4)                               %>% 
       set_caption('Huxtable properties')                  %>% 
@@ -311,6 +309,40 @@ rbind(ht, c("Yihui Xie", 100000))
 Notice how Yihui's salary has got the same number formatting as the other employees. That's because
 cell properties for the new row were copied from the row above.
 
+Sometimes, you would like to insert rows or columns in the middle of
+a table. You can do this with rbind, but it is not very convenient:
+
+```{r}
+
+to_insert <- hux(
+        Role  = c("Admin", "CEO", "Dogsbody"),
+        Hired = as.Date(c("2015-01-01", "2008-06-05", "2012-07-31")),
+        add_colnames = TRUE
+      ) %>% 
+      set_bold(1, 1:2, TRUE) %>% 
+      set_bottom_border(1, 1:2, TRUE)
+
+cbind(ht[, 1], to_insert, ht[, 2:ncol(ht)])
+```
+
+It's more elegant to use huxtable's `add_columns` function:
+
+```{r}
+
+add_columns(ht, to_insert, after = 1)
+
+```
+
+The `after` argument says where the second object should be inserted. 
+`after` can also be a column name:
+
+```{r}
+
+add_columns(ht, to_insert, after = "Employee")
+
+```
+
+The function `add_rows` works in the same way.
 
 ## Editing content the base R way
 
@@ -358,22 +390,6 @@ theme_plain(car_ht)
 
 In general it is a good idea to prepare your data first, before styling it. For example, it was
 easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
-
-## Functions to insert rows, columns and footnotes
-
-Huxtable has three convenience functions for adding a row or column to your table: `insert_row`,
-`insert_column` and `add_footnote`.
-`insert_row` and `insert_column` let you add a single row or column. The `after` parameter specifies
-where in the table to do the insertion, i.e. after what row or column number.
-`add_footnote` adds a single cell in a new row at the bottom. The cell spans the whole table row,
-and has a border above.
-
-```{r}
-ht <- insert_row(ht, "Hadley Wickham", "100000", after = 3)
-ht <- add_footnote(ht, "DHJ deserves a pay rise")
-ht
-```
-
 
 # More formatting 
 
