@@ -49,10 +49,6 @@ Priority changes
   - broom.mixed packages may have effects = "fixed" argument, but you could let the user do that
     with tidy_args
   - Add broom.mixed dependency when it comes out.
-    
-* Rework documentation to use more inheritance less templates.
-  - Break into small templates for e.g. usage sections, aliases
-  - Use evalRd where necessary
 
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back

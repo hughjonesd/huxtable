@@ -24,7 +24,7 @@ set_italic_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix
+\item{value}{A logical vector or matrix. \code{TRUE} for bold/italic.
 
 Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 

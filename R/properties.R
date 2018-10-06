@@ -588,7 +588,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar attr_name bold
 #' @templateVar attr_desc Cell text style
 #' @templateVar value_param_desc
-#' A logical vector or matrix. `TRUE` for bold/italic, `FALSE` for plain.
+#' A logical vector or matrix. `TRUE` for bold/italic.
 #' @templateVar morealiases italic
 #' @template getset-example
 #' @templateVar attr_val TRUE

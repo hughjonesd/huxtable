@@ -6,7 +6,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 # huxtable 4.2.0.9000
 
 * New `set_xxx_by` functions to set properties variably by cell values.
-* Functions for setting properties variably: `by_values`, `by_range`, `by_quantile` etc.
+* Functions for setting properties variably: `map_values`, `map_ranges`, `map_quantiles` etc.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
 * Improvements to the vignette.
 
