@@ -19,11 +19,6 @@
 \alias{set_bottom_border_color_by}
 \title{Border colors}
 \usage{
-left_border_color(ht)
-left_border_color(ht) <- value
-set_left_border_color(ht, row, col, value, byrow = FALSE)
-set_left_border_color_by(ht, row, col, fn)
-
 right_border_color(ht)
 right_border_color(ht) <- value
 set_right_border_color(ht, row, col, value, byrow = FALSE)

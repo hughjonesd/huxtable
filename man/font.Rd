@@ -6,12 +6,6 @@
 \alias{set_font}
 \alias{set_font_by}
 \title{Font}
-\usage{
-font(ht)
-font(ht) <- value
-set_font(ht, row, col, value, byrow = FALSE)
-set_font_by(ht, row, col, fn)
-}
 \arguments{
 \item{ht}{A huxtable.}
 

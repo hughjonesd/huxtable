@@ -6,12 +6,6 @@
 \alias{set_text_color}
 \alias{set_text_color_by}
 \title{Text color}
-\usage{
-text_color(ht)
-text_color(ht) <- value
-set_text_color(ht, row, col, value, byrow = FALSE)
-set_text_color_by(ht, row, col, fn)
-}
 \arguments{
 \item{ht}{A huxtable.}
 

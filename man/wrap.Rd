@@ -6,12 +6,6 @@
 \alias{set_wrap}
 \alias{set_wrap_by}
 \title{Text wrapping}
-\usage{
-wrap(ht)
-wrap(ht) <- value
-set_wrap(ht, row, col, value, byrow = FALSE)
-set_wrap_by(ht, row, col, fn)
-}
 \arguments{
 \item{ht}{A huxtable.}
 

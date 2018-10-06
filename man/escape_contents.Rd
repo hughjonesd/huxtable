@@ -6,12 +6,6 @@
 \alias{set_escape_contents}
 \alias{set_escape_contents_by}
 \title{Escape cell contents}
-\usage{
-escape_contents(ht)
-escape_contents(ht) <- value
-set_escape_contents(ht, row, col, value, byrow = FALSE)
-set_escape_contents_by(ht, row, col, fn)
-}
 \arguments{
 \item{ht}{A huxtable.}
 

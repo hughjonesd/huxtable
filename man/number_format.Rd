@@ -6,12 +6,6 @@
 \alias{set_number_format}
 \alias{set_number_format_by}
 \title{Number format}
-\usage{
-number_format(ht)
-number_format(ht) <- value
-set_number_format(ht, row, col, value, byrow = FALSE)
-set_number_format_by(ht, row, col, fn)
-}
 \arguments{
 \item{ht}{A huxtable.}
 

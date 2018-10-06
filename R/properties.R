@@ -316,11 +316,8 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 
 #' @name colspan
 #' @rdname rowspan
-#' @usage
-#' colspan(ht)
-#' colspan(ht) <- value
-#' set_colspan(ht, row, col, value, byrow = FALSE)
-#' set_colspan_by(ht, row, col, fn)
+#' @templateVar attr_name colspan
+#' @template cell-property-usage
 #' @aliases colspan<- set_colspan set_colspan_by
 NULL
 make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
@@ -396,31 +393,22 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_
 #' @name right_border
 #' @rdname left_border
 #' @return Similarly for the other functions.
-#' @usage
-#' right_border(ht)
-#' right_border(ht) <- value
-#' set_right_border(ht, row, col, value, byrow = FALSE)
-#' set_right_border_by(ht, row, col, fn)
+#' @templateVar attr_name right_border
+#' @template cell-property-usage
 NULL
 
 
 #' @name top_border
 #' @rdname left_border
-#' @usage
-#' top_border(ht)
-#' top_border(ht) <- value
-#' set_top_border(ht, row, col, value, byrow = FALSE)
-#' set_top_border_by(ht, row, col, fn)
+#' @templateVar attr_name right_border
+#' @template cell-property-usage
 NULL
 
 
 #' @name bottom_border
 #' @rdname left_border
-#' @usage
-#' bottom_border(ht)
-#' bottom_border(ht) <- value
-#' set_bottom_border(ht, row, col, value, byrow = FALSE)
-#' set_bottom_border_by(ht, row, col, fn)
+#' @templateVar attr_name bottom_border
+#' @template cell-property-usage
 NULL
 
 
@@ -452,40 +440,32 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_g
 #' @name right_border_color
 #' @rdname left_border_color
 #' @return Similarly for the other functions.
-#' @usage
-#' right_border_color(ht)
-#' right_border_color(ht) <- value
-#' set_right_border_color(ht, row, col, value, byrow = FALSE)
-#' set_right_border_color_by(ht, row, col, fn)
+#' @templateVar attr_name right_border_color
+#' @template cell-property-usage
 NULL
 
 
 #' @name top_border_color
 #' @rdname left_border_color
-#' @usage
-#' top_border_color(ht)
-#' top_border_color(ht) <- value
-#' set_top_border_color(ht, row, col, value, byrow = FALSE)
-#' set_top_border_color_by(ht, row, col, fn)
+#' @templateVar attr_name top_border_color
+#' @template cell-property-usage
 NULL
 
 
 #' @name bottom_border_color
 #' @rdname left_border_color
-#' @usage
-#' bottom_border_color(ht)
-#' bottom_border_color(ht) <- value
-#' set_bottom_border_color(ht, row, col, value, byrow = FALSE)
-#' set_bottom_border_color_by(ht, row, col, fn)
+#' @templateVar attr_name bottom_border_color
+#' @template cell-property-usage
 NULL
 
 
-#' @template getset-cell
 #' @templateVar attr_name left_border_style
 #' @templateVar attr_desc Border styles
 #' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
 #' @templateVar morealiases right_border_style top_border_style bottom_border_style
 #' @templateVar attr_val 'solid'
+#' @template getset-cell
+#' @template cell-property-usage
 #' @details
 #' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 #' top borders take priority over bottom borders.
@@ -514,31 +494,22 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_g
 #' @name right_border_style
 #' @rdname left_border_style
 #' @return Similarly for the other functions.
-#' @usage
-#' right_border_style(ht)
-#' right_border_style(ht) <- value
-#' set_right_border_style(ht, row, col, value, byrow = FALSE)
-#' set_right_border_style_by(ht, row, col, fn)
+#' @templateVar attr_name right_border_style
+#' @template cell-property-usage
 NULL
 
 
 #' @name top_border_style
 #' @rdname left_border_style
-#' @usage
-#' top_border_style(ht)
-#' top_border_style(ht) <- value
-#' set_top_border_style(ht, row, col, value, byrow = FALSE)
-#' set_top_border_style_by(ht, row, col, fn)
+#' @templateVar attr_name top_border_style
+#' @template cell-property-usage
 NULL
 
 
 #' @name bottom_border_style
 #' @rdname left_border_style
-#' @usage
-#' bottom_border_style(ht)
-#' bottom_border_style(ht) <- value
-#' set_bottom_border_style(ht, row, col, value, byrow = FALSE)
-#' set_bottom_border_style_by(ht, row, col, fn)
+#' @templateVar attr_name bottom_border_style
+#' @template cell-property-usage
 NULL
 
 
@@ -560,31 +531,22 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 #' @name right_padding
 #' @rdname left_padding
 #' @return Similarly for the other functions.
-#' @usage
-#' right_padding(ht)
-#' right_padding(ht) <- value
-#' set_right_padding(ht, row, col, value, byrow = FALSE)
-#' set_right_padding_by(ht, row, col, fn)
+#' @templateVar attr_name right_padding
+#' @template cell-property-usage
 NULL
 
 
 #' @name bottom_padding
 #' @rdname left_padding
-#' @usage
-#' bottom_padding(ht)
-#' bottom_padding(ht) <- value
-#' set_bottom_padding(ht, row, col, value, byrow = FALSE)
-#' set_bottom_padding_by(ht, row, col, fn)
+#' @templateVar attr_name bottom_padding
+#' @template cell-property-usage
 NULL
 
 
 #' @name top_padding
 #' @rdname left_padding
-#' @usage
-#' top_padding(ht)
-#' top_padding(ht) <- value
-#' set_top_padding(ht, row, col, value, byrow = FALSE)
-#' set_top_padding_by(ht, row, col, fn)
+#' @templateVar attr_name top_padding
+#' @template cell-property-usage
 NULL
 
 
@@ -654,11 +616,8 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 
 #' @name italic
 #' @rdname bold
-#' @usage
-#' italic(ht)
-#' italic(ht) <- value
-#' set_italic(ht, row, col, value, byrow = FALSE)
-#' set_italic_by(ht, row, col, fn)
+#' @templateVar attr_name italic
+#' @template cell-property-usage
 #' @return
 #' Similarly for \code{italic} and friends.
 NULL

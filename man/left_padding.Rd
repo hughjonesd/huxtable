@@ -19,11 +19,6 @@
 \alias{set_bottom_padding_by}
 \title{Cell padding}
 \usage{
-left_padding(ht)
-left_padding(ht) <- value
-set_left_padding(ht, row, col, value, byrow = FALSE)
-set_left_padding_by(ht, row, col, fn)
-
 right_padding(ht)
 right_padding(ht) <- value
 set_right_padding(ht, row, col, value, byrow = FALSE)
