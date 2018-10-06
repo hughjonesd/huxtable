@@ -5,7 +5,7 @@
 #'
 #' @export
 as_FlexTable <- function(x, ...) {
-  .Deprecated('as_flextable')
+  .Deprecated(new = 'as_flextable', package = 'huxtable')
   as_flextable(x, ...)
 }
 
