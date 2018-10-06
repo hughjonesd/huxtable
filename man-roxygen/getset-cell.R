@@ -22,6 +22,11 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @description
 #' Functions to get or set the *<%= tolower(attr_desc) %>* property of huxtable cells.
 #'
+#' @usage
+#' <%= attr_name %>(ht)
+#' <%= attr_name %>(ht) <- value
+#' set_<%= attr_name %>(ht, row, col, value, byrow = FALSE)
+#' set_<%= attr_name %>_by(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %> Set to `NA` to reset to the default, which is

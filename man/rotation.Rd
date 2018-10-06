@@ -6,6 +6,12 @@
 \alias{set_rotation}
 \alias{set_rotation_by}
 \title{Text rotation}
+\usage{
+rotation(ht)
+rotation(ht) <- value
+set_rotation(ht, row, col, value, byrow = FALSE)
+set_rotation_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 

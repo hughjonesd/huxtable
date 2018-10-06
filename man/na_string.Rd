@@ -6,6 +6,12 @@
 \alias{set_na_string}
 \alias{set_na_string_by}
 \title{NA string}
+\usage{
+na_string(ht)
+na_string(ht) <- value
+set_na_string(ht, row, col, value, byrow = FALSE)
+set_na_string_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 

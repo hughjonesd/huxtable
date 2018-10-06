@@ -45,6 +45,7 @@ NULL
 #' @name huxtable-options
 NULL
 
+
 #' Deprecated functions
 #'
 #' These functions are deprecated and will be removed in future versions of huxtable.
@@ -53,6 +54,7 @@ NULL
 #' \code{\link[=mapping-functions]{set_xxx_by}}.
 #' @name huxtable-deprecated
 NULL
+
 
 .onLoad <- function(libname, pkgname) {
 

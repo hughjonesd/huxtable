@@ -6,6 +6,12 @@
 \alias{set_align}
 \alias{set_align_by}
 \title{Alignment}
+\usage{
+align(ht)
+align(ht) <- value
+set_align(ht, row, col, value, byrow = FALSE)
+set_align_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 

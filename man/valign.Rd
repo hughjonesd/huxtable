@@ -6,6 +6,12 @@
 \alias{set_valign}
 \alias{set_valign_by}
 \title{Vertical alignment}
+\usage{
+valign(ht)
+valign(ht) <- value
+set_valign(ht, row, col, value, byrow = FALSE)
+set_valign_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 

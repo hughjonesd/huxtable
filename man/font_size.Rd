@@ -6,6 +6,12 @@
 \alias{set_font_size}
 \alias{set_font_size_by}
 \title{Font size}
+\usage{
+font_size(ht)
+font_size(ht) <- value
+set_font_size(ht, row, col, value, byrow = FALSE)
+set_font_size_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 
