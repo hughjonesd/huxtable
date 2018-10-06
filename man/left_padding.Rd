@@ -42,8 +42,9 @@ set_bottom_padding_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to \code{NA} to reset to the default, which is
-\code{4}.}
+\item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
+
+Set to \code{NA} to reset to the default, which is \code{4}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

@@ -42,8 +42,9 @@ set_bottom_border_color_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector or matrix of colors. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\item{value}{A vector or matrix of colors.
+
+Set to \code{NA} to reset to the default, which is \code{NA}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

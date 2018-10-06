@@ -42,8 +42,9 @@ set_bottom_border_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default, which is
-\code{0}.}
+\item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border.
+
+Set to \code{NA} to reset to the default, which is \code{0}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

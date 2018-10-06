@@ -15,8 +15,9 @@ set_align_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character. Set to \code{NA} to reset to the default, which is
-\code{"left"}.}
+\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character.
+
+Set to \code{NA} to reset to the default, which is \code{"left"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

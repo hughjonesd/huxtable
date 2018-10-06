@@ -16,7 +16,8 @@ set_wrap_by(ht, row, col, fn)
 \item{ht}{A huxtable.}
 
 \item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
-\code{FALSE}.}
+
+Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

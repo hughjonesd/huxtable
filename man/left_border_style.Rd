@@ -42,8 +42,9 @@ set_bottom_border_style_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted". Set to \code{NA} to reset to the default, which is
-\code{"solid"}.}
+\item{value}{A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
+
+Set to \code{NA} to reset to the default, which is \code{"solid"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

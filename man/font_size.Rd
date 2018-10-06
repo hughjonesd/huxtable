@@ -15,8 +15,9 @@ set_font_size_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector. This sets the font size in points. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\item{value}{A numeric vector. This sets the font size in points.
+
+Set to \code{NA} to reset to the default, which is \code{NA}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

@@ -15,8 +15,9 @@ set_number_format_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{(Not shown - overwritten by the below.) Set to \code{NA} to reset to the default, which is
-\code{"\%.3g"}.}
+\item{value}{A character or integer vector, or a list containing a function, or \code{NA}.
+
+Note that setting to \code{NA} does not reset to the default.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
@@ -25,9 +26,6 @@ set_number_format_by(ht, row, col, fn)
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character or integer vector, or a list containing a function, or \code{NA}. Note
-that setting to \code{NA} does not reset to the default.}
 }
 \value{
 For \code{number_format}, the \code{number_format} property.

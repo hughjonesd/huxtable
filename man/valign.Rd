@@ -15,8 +15,9 @@ set_valign_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}. Set to \code{NA} to reset to the default, which is
-\code{"top"}.}
+\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
+
+Set to \code{NA} to reset to the default, which is \code{"top"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

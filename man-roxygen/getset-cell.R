@@ -29,8 +29,12 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' set_<%= attr_name %>_by(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
-#' @param value <%= value_param_desc %> Set to `NA` to reset to the default, which is
-#'   `<%= default_property %>`.
+#' @param value <%= value_param_desc %>
+#'   <% if (! exists('NA_does_not_reset')) {%>
+#'   Set to `NA` to reset to the default, which is `<%= default_property %>`.
+#'   <% } else { %>
+#'   Note that setting to `NA` does not reset to the default.
+#'   <% } %>
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param byrow If `TRUE`, fill in values by row rather than by column.

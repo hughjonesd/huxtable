@@ -588,7 +588,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar attr_name bold
 #' @templateVar attr_desc Cell text style
 #' @templateVar value_param_desc
-#' A logical vector or matrix
+#' A logical vector or matrix. `TRUE` for bold/italic, `FALSE` for plain.
 #' @templateVar morealiases italic
 #' @template getset-example
 #' @templateVar attr_val TRUE
@@ -644,9 +644,8 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #' @template getset-cell
 #' @templateVar attr_name number_format
 #' @templateVar attr_desc Number format
-#' @templateVar value_param_desc (Not shown - overwritten by the below.)
-#' @param value A character or integer vector, or a list containing a function, or \code{NA}. Note
-#'   that setting to \code{NA} does not reset to the default.
+#' @templateVar value_param_desc A character or integer vector, or a list containing a function, or \code{NA}.
+#' @templateVar NA_does_not_reset TRUE
 #' @details
 #' Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
 #' followed by

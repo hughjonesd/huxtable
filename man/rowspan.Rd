@@ -24,8 +24,9 @@ set_colspan_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{An integer vector or matrix. Set to \code{NA} to reset to the default, which is
-\code{1}.}
+\item{value}{An integer vector or matrix.
+
+Set to \code{NA} to reset to the default, which is \code{1}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

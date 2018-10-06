@@ -15,8 +15,9 @@ set_rotation_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc. Set to \code{NA} to reset to the default, which is
-\code{0}.}
+\item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
+
+Set to \code{NA} to reset to the default, which is \code{0}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

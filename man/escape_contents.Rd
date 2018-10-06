@@ -15,8 +15,9 @@ set_escape_contents_by(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped. Set to \code{NA} to reset to the default, which is
-\code{TRUE}.}
+\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
+
+Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
