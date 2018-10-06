@@ -29,12 +29,30 @@ Non-numeric cells are unchanged.
 }
 \examples{
 ht <- huxtable(c(1, 3, 5))
-ht <- set_background_color_by(ht, map_ranges(c(2, 4), c("red", "yellow", "blue")))
+ht <- set_background_color_by(ht,
+      map_ranges(c(2, 4),
+        c("red", "yellow", "blue")
+      ))
 ht
-set_background_color_by(ht, map_ranges(c(2, 4), "pink", extend = FALSE))
+set_background_color_by(ht,
+      map_ranges(
+        c(2, 4),
+        "pink",
+        extend = FALSE
+      ))
 
-set_background_color_by(ht, map_ranges(c(1, 5), c("red", "yellow", "green"), right = TRUE))
-set_background_color_by(ht, map_ranges(c(1, 5), c("red", "yellow", "green"), right = FALSE))
+set_background_color_by(ht,
+      map_ranges(
+        c(1, 5),
+        c("red", "yellow", "green"),
+        right = TRUE
+      ))
+set_background_color_by(ht,
+      map_ranges(
+        c(1, 5),
+        c("red", "yellow", "green"),
+        right = FALSE
+      ))
 }
 \seealso{
 \link{mapping-functions}

@@ -19,8 +19,10 @@ Map specific cell values to cell properties
 }
 \examples{
 ht <- hux(letters[1:3])
-set_background_color_by(ht, map_values(a = "red", c = "yellow"))
-set_background_color_by(ht, map_values(a = "red", c = "yellow", "green"))
+set_background_color_by(ht,
+      map_values(a = "red", c = "yellow"))
+set_background_color_by(ht,
+      map_values(a = "red", c = "yellow", "green"))
 }
 \seealso{
 \link{mapping-functions}

@@ -42,7 +42,7 @@ set_outer_borders(ht, row, col, value)
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A mapping function. See \link{set-by}.}
+\item{fn}{A mapping function. See \link{mapping-functions}.}
 }
 \value{
 The modified huxtable.

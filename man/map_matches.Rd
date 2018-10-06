@@ -24,7 +24,10 @@ Map cells matching a string or regex to cell properties
 ht <- hux("The cat sat", "on the", "mat")
 set_bold_by(ht, map_matches('at' = TRUE))
 set_bold_by(ht, map_matches('a.*a' = TRUE))
-set_bold_by(ht, map_matches('the' = TRUE, .grepl_args = list(ignore.case = TRUE)))
+set_bold_by(ht, map_matches(
+        'the' = TRUE,
+        .grepl_args = list(ignore.case = TRUE)
+      ))
 }
 \seealso{
 \link{mapping-functions}

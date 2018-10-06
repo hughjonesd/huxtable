@@ -34,8 +34,18 @@ These functions split cell values by quantiles. Non-numeric cells are ignored.
 }
 \examples{
 ht <- hux(rnorm(5), rnorm(5))
-set_background_color_by(ht, map_quantiles(c(0.2, 0.8), c("red", "white", "green")))
-set_background_color_by(ht, map_equal_groups(3, c("red", "yellow", "green")))
+
+set_background_color_by(ht,
+      map_quantiles(
+        c(0.2, 0.8),
+        c("red", "white", "green")
+      ))
+
+set_background_color_by(ht,
+      map_equal_groups(
+        3,
+        c("red", "yellow", "green")
+      ))
 }
 \seealso{
 \link{mapping-functions}

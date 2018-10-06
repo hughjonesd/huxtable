@@ -11,6 +11,16 @@ Priority changes
 
 * `set_xxx_by`:
   - simple interface round e.g. `colorRamp`?
+  - maybe merge into `set_xxx`?
+    - Advantages: 
+       - no code duplication; 
+       - less long set_bottom_border_style_by names;
+       - only need to change one thing when moving to `by`;
+       - `map_xxx` already communicates what's going on
+    - Disadvantages:
+       - set_xxx becomes huge multiplexing beast;
+       - existing style communicates intent;
+       - better error messages if you do e.g. `set_font(ht, some_fun)` instead of `some_fun()`
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 

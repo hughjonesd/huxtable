@@ -17,5 +17,6 @@ To replace \code{pad_decimal} use \code{\link[=align]{align()}}, e.g. \code{alig
 
 To replace \code{is_a_number} use e.g. \code{! is.na(as.numeric(x))}
 
-To replace the 3 argument form of \code{set_xxx} functions, use \code{\link[=set-by]{set_xxx_by}}.
+To replace the 3 argument form of \code{set_xxx} functions, use
+\code{\link[=mapping-functions]{set_xxx_by}}.
 }

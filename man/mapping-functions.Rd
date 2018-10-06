@@ -10,19 +10,19 @@ The modified huxtable.
 This help page explains how to set properties differently for cells, depending on their contents.
 }
 \details{
-For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
+For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{  set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
 }
 
-Or you can use red text for a particular value:\preformatted{hxtbl \%>\% set_text_color_by(map_values("Warning" = "red"))
+Or you can use red text for a particular value:\preformatted{  hxtbl \%>\% set_text_color_by(map_values("Warning" = "red"))
 }
 
-There is a \code{set_xxx_by} function for each huxtable cell property. The syntax is:\preformatted{set_xxx_by(ht, row, col, fn)
+There is a \code{set_xxx_by} function for each huxtable cell property. The syntax is:\preformatted{  set_xxx_by(ht, row, col, fn)
 }
 
 where \code{xxx} is the property name.
 
 \code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details. To set properties
-for the whole table, you can omit \code{row} and \code{col}:\preformatted{set_xxx_by(ht, fn)
+for the whole table, you can omit \code{row} and \code{col}:\preformatted{  set_xxx_by(ht, fn)
 }
 
 The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
@@ -41,29 +41,43 @@ The \code{fn} argument is a \emph{mapping function} which maps cell contents to 
 vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current} property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for \code{ht[rows, cols]}, as a matrix.
 
 Here's an example. Suppose we want to highlight cells
-of a correlation matrix with low p values:\preformatted{data(attitudes)
-att_corr <- psych::corr.test(attitudes) # has components r (correlations) and p (p values)
+of a correlation matrix with low p values:\preformatted{  data(attitudes)
+  att_corr <- psych::corr.test(attitudes)
+  # att_corr has components r (correlations) and p (p values)
 
-corr_hux <- as_hux(att_corr$r)
-map_p_value <- function (ht, rows, cols, current) {
-   result <- current
-   pvals <- att_corr$p[rows, cols]
-   result[pvals < 0.01] <- 'red'
-   result[pvals < 0.05] <- 'orange'
-   result
-}
+  corr_hux <- as_hux(att_corr$r)
+  map_p_value <- function (ht, rows, cols, current) {
+     result <- current
+     pvals <- att_corr$p[rows, cols]
+     result[pvals < 0.01] <- 'red'
+     result[pvals < 0.05] <- 'orange'
+     result
+  }
 }
 }
 
 \examples{
 ht <- hux(c("OK", "Warning", "Error"))
-ht <- set_text_color_by(ht, map_values(OK = "green", Warning = "orange", Error = "red"))
+ht <- set_text_color_by(ht, map_values(
+        OK      = "green",
+        Warning = "orange",
+        Error   = "red"
+      ))
 ht
 
 ht <- hux(rnorm(5), rnorm(5), rnorm(5))
-set_background_color_by(ht, map_ranges(c(-1, 1), c("blue", "yellow", "red")))
-set_background_color_by(ht, map_equal_groups(2, c("red", "green")))
+set_background_color_by(ht, map_ranges(
+        c(-1, 1),
+        c("blue", "yellow", "red")
+      ))
+set_background_color_by(ht,
+      map_equal_groups(2, c("red", "green")))
 
-ht <- hux(Coef = c(3.5, 2.4, 1.3), Pval = c(0.04, 0.01, 0.07), add_colnames = TRUE)
-set_bold_by(ht, everywhere, "Pval", map_ranges(0.05, c(TRUE, FALSE)))
+ht <- hux(
+        Coef = c(3.5, 2.4, 1.3),
+        Pval = c(0.04, 0.01, 0.07),
+        add_colnames = TRUE
+      )
+set_bold_by(ht, everywhere, "Pval",
+      map_ranges(0.05, c(TRUE, FALSE)))
 }

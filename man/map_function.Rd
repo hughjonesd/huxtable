@@ -21,18 +21,22 @@ The argument of \code{inner_fn} will be \code{as.matrix(ht[row, col])}. Be aware
 affects the \code{mode} of cell data.
 }
 \examples{
-ht <- huxtable(runif(5), runif(5), runif(5), runif(5))
+ht <- as_hux(matrix(runif(20), 5, 4))
 
 set_text_color_by(ht, map_function(grey))
 
 if (requireNamespace('scales')) {
   set_background_color_by(ht, map_function(
-        scales::col_numeric(c('red', 'orange', 'yellow'), domain = NULL)
-  ))
+        scales::col_numeric(
+          c('red', 'orange', 'yellow'),
+          domain = NULL
+        )))
 }
 
 if (requireNamespace('scales')) {
-  set_text_color_by(ht, map_function( scales::seq_gradient_pal() ))
+  set_text_color_by(ht, map_function(
+          scales::seq_gradient_pal()
+        ))
 }
 }
 \seealso{

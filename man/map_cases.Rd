@@ -30,10 +30,10 @@ if (requireNamespace('dplyr')) {
   ht <- hux(rnorm(5), rnorm(5), letters[1:5])
 
   set_background_color_by(ht, map_cases(
-      . == "a" ~ "red",
-      . \%in\% letters ~ "green",
-      . < 0 ~ "pink"
-  ))
+          . == "a" ~ "red",
+          . \%in\% letters ~ "green",
+          . < 0 ~ "pink"
+        ))
 }
 }
 \seealso{
