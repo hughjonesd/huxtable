@@ -63,7 +63,7 @@ get_default_properties <- function (names = NULL) {
 #' @param row A row specifier. See [rowspecs].
 #' @param col An optional column specifier.
 #' @param byrow If \code{TRUE}, fill in values by row rather than by column.
-#' @param fn A mapping function. See [set-by].
+#' @param fn A mapping function. See [mapping-functions].
 #'
 #' @return The modified huxtable.
 #' @name set-multiple

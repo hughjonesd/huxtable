@@ -10,19 +10,19 @@ NULL
 #' For example, in a table of p-values, you could bold cells where p < 0.05:
 #'
 #' ```
-#' set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
+#'   set_bold_by(pval_hux, map_ranges(0.05, c(TRUE, FALSE)))
 #' ```
 #'
 #'  Or you can use red text for a particular value:
 #'
 #' ```
-#' hxtbl %>% set_text_color_by(map_values("Warning" = "red"))
+#'   hxtbl %>% set_text_color_by(map_values("Warning" = "red"))
 #' ```
 #'
 #' There is a `set_xxx_by` function for each huxtable cell property. The syntax is:
 #'
 #' ```
-#' set_xxx_by(ht, row, col, fn)
+#'   set_xxx_by(ht, row, col, fn)
 #' ```
 #'
 #' where `xxx` is the property name.
@@ -31,7 +31,7 @@ NULL
 #' for the whole table, you can omit `row` and `col`:
 #'
 #' ```
-#' set_xxx_by(ht, fn)
+#'   set_xxx_by(ht, fn)
 #' ```
 #'
 #' The `fn` argument is a *mapping function* which maps cell contents to property values.
@@ -52,18 +52,19 @@ NULL
 #' of a correlation matrix with low p values:
 #'
 #' ```
-#' data(attitudes)
-#' att_corr <- psych::corr.test(attitudes) # has components r (correlations) and p (p values)
+#'   data(attitudes)
+#'   att_corr <- psych::corr.test(attitudes)
+#'   # att_corr has components r (correlations) and p (p values)
 #'
-#' corr_hux <- as_hux(att_corr$r)
-#' map_p_value <- function (ht, rows, cols, current) {
-#'    result <- current
-#'    pvals <- att_corr$p[rows, cols]
-#'    result[pvals < 0.01] <- 'red'
-#'    result[pvals < 0.05] <- 'orange'
-#'    result
-#' }
-# set_background_color_by(corr_hux, map_p_value)
+#'   corr_hux <- as_hux(att_corr$r)
+#'   map_p_value <- function (ht, rows, cols, current) {
+#'      result <- current
+#'      pvals <- att_corr$p[rows, cols]
+#'      result[pvals < 0.01] <- 'red'
+#'      result[pvals < 0.05] <- 'orange'
+#'      result
+#'   }
+#   set_background_color_by(corr_hux, map_p_value)
 #' ```
 #'
 #'
@@ -71,15 +72,28 @@ NULL
 #'
 #' @examples
 #' ht <- hux(c("OK", "Warning", "Error"))
-#' ht <- set_text_color_by(ht, map_values(OK = "green", Warning = "orange", Error = "red"))
+#' ht <- set_text_color_by(ht, map_values(
+#'         OK      = "green",
+#'         Warning = "orange",
+#'         Error   = "red"
+#'       ))
 #' ht
 #'
 #' ht <- hux(rnorm(5), rnorm(5), rnorm(5))
-#' set_background_color_by(ht, map_ranges(c(-1, 1), c("blue", "yellow", "red")))
-#' set_background_color_by(ht, map_equal_groups(2, c("red", "green")))
+#' set_background_color_by(ht, map_ranges(
+#'         c(-1, 1),
+#'         c("blue", "yellow", "red")
+#'       ))
+#' set_background_color_by(ht,
+#'       map_equal_groups(2, c("red", "green")))
 #'
-#' ht <- hux(Coef = c(3.5, 2.4, 1.3), Pval = c(0.04, 0.01, 0.07), add_colnames = TRUE)
-#' set_bold_by(ht, everywhere, "Pval", map_ranges(0.05, c(TRUE, FALSE)))
+#' ht <- hux(
+#'         Coef = c(3.5, 2.4, 1.3),
+#'         Pval = c(0.04, 0.01, 0.07),
+#'         add_colnames = TRUE
+#'       )
+#' set_bold_by(ht, everywhere, "Pval",
+#'       map_ranges(0.05, c(TRUE, FALSE)))
 #' @name mapping-functions
 NULL
 
@@ -99,8 +113,10 @@ NULL
 #'
 #' @examples
 #' ht <- hux(letters[1:3])
-#' set_background_color_by(ht, map_values(a = "red", c = "yellow"))
-#' set_background_color_by(ht, map_values(a = "red", c = "yellow", "green"))
+#' set_background_color_by(ht,
+#'       map_values(a = "red", c = "yellow"))
+#' set_background_color_by(ht,
+#'       map_values(a = "red", c = "yellow", "green"))
 map_values <- function (...) {
   vals <- c(...)
   named_vals <- vals[names(vals) != '']
@@ -145,12 +161,30 @@ map_values <- function (...) {
 #'
 #' @examples
 #' ht <- huxtable(c(1, 3, 5))
-#' ht <- set_background_color_by(ht, map_ranges(c(2, 4), c("red", "yellow", "blue")))
+#' ht <- set_background_color_by(ht,
+#'       map_ranges(c(2, 4),
+#'         c("red", "yellow", "blue")
+#'       ))
 #' ht
-#' set_background_color_by(ht, map_ranges(c(2, 4), "pink", extend = FALSE))
+#' set_background_color_by(ht,
+#'       map_ranges(
+#'         c(2, 4),
+#'         "pink",
+#'         extend = FALSE
+#'       ))
 #'
-#' set_background_color_by(ht, map_ranges(c(1, 5), c("red", "yellow", "green"), right = TRUE))
-#' set_background_color_by(ht, map_ranges(c(1, 5), c("red", "yellow", "green"), right = FALSE))
+#' set_background_color_by(ht,
+#'       map_ranges(
+#'         c(1, 5),
+#'         c("red", "yellow", "green"),
+#'         right = TRUE
+#'       ))
+#' set_background_color_by(ht,
+#'       map_ranges(
+#'         c(1, 5),
+#'         c("red", "yellow", "green"),
+#'         right = FALSE
+#'       ))
 map_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(breaks))
   assert_that(all(breaks == sort(breaks)))
@@ -191,8 +225,18 @@ map_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
 #'
 #' @examples
 #' ht <- hux(rnorm(5), rnorm(5))
-#' set_background_color_by(ht, map_quantiles(c(0.2, 0.8), c("red", "white", "green")))
-#' set_background_color_by(ht, map_equal_groups(3, c("red", "yellow", "green")))
+#'
+#' set_background_color_by(ht,
+#'       map_quantiles(
+#'         c(0.2, 0.8),
+#'         c("red", "white", "green")
+#'       ))
+#'
+#' set_background_color_by(ht,
+#'       map_equal_groups(
+#'         3,
+#'         c("red", "yellow", "green")
+#'       ))
 map_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0))
   assert_that(all(quantiles == sort(quantiles)))
@@ -237,7 +281,10 @@ map_equal_groups <- function (n, values) {
 #' ht <- hux("The cat sat", "on the", "mat")
 #' set_bold_by(ht, map_matches('at' = TRUE))
 #' set_bold_by(ht, map_matches('a.*a' = TRUE))
-#' set_bold_by(ht, map_matches('the' = TRUE, .grepl_args = list(ignore.case = TRUE)))
+#' set_bold_by(ht, map_matches(
+#'         'the' = TRUE,
+#'         .grepl_args = list(ignore.case = TRUE)
+#'       ))
 map_matches <- function(..., .grepl_args = list()) {
   vals <- c(...)
   named_vals <- vals[names(vals) != '']
@@ -279,18 +326,22 @@ map_matches <- function(..., .grepl_args = list()) {
 #' @export
 #'
 #' @examples
-#' ht <- huxtable(runif(5), runif(5), runif(5), runif(5))
+#' ht <- as_hux(matrix(runif(20), 5, 4))
 #'
 #' set_text_color_by(ht, map_function(grey))
 #'
 #' if (requireNamespace('scales')) {
 #'   set_background_color_by(ht, map_function(
-#'         scales::col_numeric(c('red', 'orange', 'yellow'), domain = NULL)
-#'   ))
+#'         scales::col_numeric(
+#'           c('red', 'orange', 'yellow'),
+#'           domain = NULL
+#'         )))
 #' }
 #'
 #' if (requireNamespace('scales')) {
-#'   set_text_color_by(ht, map_function( scales::seq_gradient_pal() ))
+#'   set_text_color_by(ht, map_function(
+#'           scales::seq_gradient_pal()
+#'         ))
 #' }
 map_function <- function (inner_fn) {
   assert_that(is.function(inner_fn))
@@ -329,10 +380,10 @@ map_function <- function (inner_fn) {
 #'   ht <- hux(rnorm(5), rnorm(5), letters[1:5])
 #'
 #'   set_background_color_by(ht, map_cases(
-#'       . == "a" ~ "red",
-#'       . %in% letters ~ "green",
-#'       . < 0 ~ "pink"
-#'   ))
+#'           . == "a" ~ "red",
+#'           . %in% letters ~ "green",
+#'           . < 0 ~ "pink"
+#'         ))
 #' }
 map_cases <- function (..., skip_na = TRUE) {
   assert_that(is.flag(skip_na))
