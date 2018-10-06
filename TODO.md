@@ -7,20 +7,10 @@ TODO
 Priority changes
 ================
 
+* Update website from website-4.3-changes branch
+
 * `set_xxx_by`:
-  - maybe deprecate `where`... 
-    - there are cases where it is easier to use than the `by` interface.
-    - but not many
   - simple interface round e.g. `colorRamp`?
-  - don't have `by` variants, but instead just interpret `value` when
-    it is a function? 
-    - grammar makes more sense, no need to repeat
-    - less code duplication
-    - OTOH, it overloads `set_xxx` with more meanings
-    - but, not easy to mistakenly put in the right kind of function
-    
-    
-    
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
@@ -36,7 +26,7 @@ Priority changes
 * border styles:
   - Use arydshln in LaTeX?
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
-  - Bug: HTML borders aren't precollapsed, should they be? But see next.
+  - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
 
 * Prepare for broom 0.7.0 and generics:
   - Create a new branch using git rebase --no-ff off the modelgenerics branch. (You need the
@@ -54,8 +44,8 @@ Priority changes
   - Break into small templates for e.g. usage sections, aliases
   - Use evalRd where necessary
 
-* `huxreg`-style function in `texreg` package
-  - Now the matrixreg change has gone in you could do that
+* `huxtablereg` function in `texreg` package
+  - Waiting for texreg guys to get back
 
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
 
