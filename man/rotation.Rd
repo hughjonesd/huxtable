@@ -12,17 +12,17 @@
 \item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc. Set to \code{NA} to reset to the default, which is
 \code{0}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{rotation}, the \code{rotation} property.
-For \code{set_rotation}, the \code{ht} object.
+For \code{set_rotation} and \code{set_rotation_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{text rotation} property of huxtable cells.

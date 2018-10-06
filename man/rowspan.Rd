@@ -22,17 +22,17 @@ set_colspan_by(ht, row, col, fn)
 \item{value}{An integer vector or matrix. Set to \code{NA} to reset to the default, which is
 \code{1}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{rowspan}, the \code{rowspan} property.
-For \code{set_rowspan}, the \code{ht} object.
+For \code{set_rowspan} and \code{set_rowspan_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{row and column span} property of huxtable cells.

@@ -18,7 +18,7 @@ set_latex_float(ht, value)
 }
 \value{
 For \code{latex_float}, the \code{latex_float} property.
-For \code{set_latex_float}, the \code{ht} object.
+For \code{set_latex_float}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{float position for latex} property of a huxtable.

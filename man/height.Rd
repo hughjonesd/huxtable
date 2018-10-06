@@ -18,7 +18,7 @@ set_height(ht, value)
 }
 \value{
 For \code{height}, the \code{height} property.
-For \code{set_height}, the \code{ht} object.
+For \code{set_height}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{table height} property of a huxtable.

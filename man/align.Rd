@@ -12,17 +12,17 @@
 \item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character. Set to \code{NA} to reset to the default, which is
 \code{"left"}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{align}, the \code{align} property.
-For \code{set_align}, the \code{ht} object.
+For \code{set_align} and \code{set_align_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{alignment} property of huxtable cells.

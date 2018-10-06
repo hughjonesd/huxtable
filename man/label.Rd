@@ -18,7 +18,7 @@ set_label(ht, value)
 }
 \value{
 For \code{label}, the \code{label} property.
-For \code{set_label}, the \code{ht} object.
+For \code{set_label}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{table label} property of a huxtable.

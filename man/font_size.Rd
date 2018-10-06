@@ -12,17 +12,17 @@
 \item{value}{A numeric vector. This sets the font size in points. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{font_size}, the \code{font_size} property.
-For \code{set_font_size}, the \code{ht} object.
+For \code{set_font_size} and \code{set_font_size_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{font size} property of huxtable cells.

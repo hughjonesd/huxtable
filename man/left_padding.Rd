@@ -19,20 +19,25 @@
 \alias{set_bottom_padding_by}
 \title{Cell padding}
 \usage{
+left_padding(ht)
+left_padding(ht) <- value
+set_left_padding(ht, row, col, value, byrow = FALSE)
+set_left_padding_by(ht, row, col, fn)
+
 right_padding(ht)
 right_padding(ht) <- value
 set_right_padding(ht, row, col, value, byrow = FALSE)
 set_right_padding_by(ht, row, col, fn)
 
-bottom_padding(ht)
-bottom_padding(ht) <- value
-set_bottom_padding(ht, row, col, value, byrow = FALSE)
-set_bottom_padding_by(ht, row, col, fn)
-
 top_padding(ht)
 top_padding(ht) <- value
 set_top_padding(ht, row, col, value, byrow = FALSE)
 set_top_padding_by(ht, row, col, fn)
+
+bottom_padding(ht)
+bottom_padding(ht) <- value
+set_bottom_padding(ht, row, col, value, byrow = FALSE)
+set_bottom_padding_by(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -40,17 +45,17 @@ set_top_padding_by(ht, row, col, fn)
 \item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points. Set to \code{NA} to reset to the default, which is
 \code{4}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{left_padding}, the \code{left_padding} property.
-For \code{set_left_padding}, the \code{ht} object.
+For \code{set_left_padding} and \code{set_left_padding_by}, the modified huxtable.
 
 Similarly for the other functions.
 }

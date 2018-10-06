@@ -18,7 +18,7 @@ set_position(ht, value)
 }
 \value{
 For \code{position}, the \code{position} property.
-For \code{set_position}, the \code{ht} object.
+For \code{set_position}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{table position} property of a huxtable.

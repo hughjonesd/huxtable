@@ -18,7 +18,7 @@ set_width(ht, value)
 }
 \value{
 For \code{width}, the \code{width} property.
-For \code{set_width}, the \code{ht} object.
+For \code{set_width}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{table width} property of a huxtable.

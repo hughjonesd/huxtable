@@ -12,17 +12,17 @@
 \item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped. Set to \code{NA} to reset to the default, which is
 \code{TRUE}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} property.
-For \code{set_escape_contents}, the \code{ht} object.
+For \code{set_escape_contents} and \code{set_escape_contents_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{escape cell contents} property of huxtable cells.

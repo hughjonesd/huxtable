@@ -45,17 +45,17 @@ set_bottom_border_style_by(ht, row, col, fn)
 \item{value}{A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted". Set to \code{NA} to reset to the default, which is
 \code{"solid"}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{left_border_style}, the \code{left_border_style} property.
-For \code{set_left_border_style}, the \code{ht} object.
+For \code{set_left_border_style} and \code{set_left_border_style_by}, the modified huxtable.
 
 Similarly for the other functions.
 }

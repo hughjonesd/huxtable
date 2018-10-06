@@ -15,11 +15,11 @@ set_row_height(ht, row, value)
 
 \item{value}{A vector.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 }
 \value{
 For \code{row_height}, the \code{row_height} property.
-For \code{set_row_height}, the \code{ht} object.
+For \code{set_row_height}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{row heights} property of huxtable rows.

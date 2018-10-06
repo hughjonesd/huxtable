@@ -9,20 +9,20 @@
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines. Set to \code{NA} for the default. Set to \code{NA} to reset to the default, which is
+\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
 \code{FALSE}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{wrap}, the \code{wrap} property.
-For \code{set_wrap}, the \code{ht} object.
+For \code{set_wrap} and \code{set_wrap_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{text wrapping} property of huxtable cells.

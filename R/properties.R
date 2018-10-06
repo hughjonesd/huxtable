@@ -3,6 +3,7 @@
 #' @importFrom stats na.omit
 NULL
 
+
 huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
   'top_border', 'left_border', 'right_border', 'bottom_border',
   'top_border_color', 'left_border_color', 'right_border_color', 'bottom_border_color',
@@ -14,25 +15,6 @@ huxtable_col_attrs <- c('col_width')
 huxtable_row_attrs <- c('row_height')
 huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos',
   'tabular_environment', 'label', 'latex_float')
-
-
-make_namespace_S3_entries <- function (accessors) {
-    entries <- lapply(accessors, function (getter) {
-    setter <- paste0('"', getter, '<-"')
-    paste0('S3method(', c(getter, setter), ', huxtable)')
-  })
-
-  unlist(entries)
-}
-
-
-make_exports <- function (properties, with_by = FALSE) {
-  fun_templates <- c('%s', '"%s<-"', 'set_%s')
-  if (with_by) fun_templates <- c(fun_templates, 'set_%s_by')
-  funs <- c(outer(fun_templates, properties, sprintf))
-
-  paste0('export(', funs ,')')
-}
 
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
@@ -382,9 +364,10 @@ make_getter_setters('text_color', 'cell')
 #' @template getset-example
 #' @templateVar attr_val 1
 #' @templateVar extra print_screen(ht)
-#' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 2
+#' @template getset-visible-rowspec-example
 #' @template border-warning
+#' @template cell-property-usage
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_setters(val, 'cell',
       check_fun = is.numeric)
@@ -400,7 +383,7 @@ NULL
 
 #' @name top_border
 #' @rdname left_border
-#' @templateVar attr_name right_border
+#' @templateVar attr_name top_border
 #' @template cell-property-usage
 NULL
 
@@ -431,6 +414,7 @@ NULL
 #' set_left_border_color(ht, 1:2, 1, 'red')
 #' set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
 #' @template border-warning
+#' @template cell-property-usage
 #'
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_getter_setters(val,
@@ -485,7 +469,7 @@ NULL
 #' set_left_border_style(ht, 1:2, 1, 'double')
 #' set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
 #' @template border-warning
-#'
+#' @template cell-property-usage
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_getter_setters(val,
       'cell', check_values = c('solid', 'double', 'dashed', 'dotted'))
@@ -524,6 +508,7 @@ NULL
 #' @templateVar attr_val 20
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 10
+#' @template cell-property-usage
 NULL
 for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
 
@@ -536,16 +521,16 @@ for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter
 NULL
 
 
-#' @name bottom_padding
+#' @name top_padding
 #' @rdname left_padding
-#' @templateVar attr_name bottom_padding
+#' @templateVar attr_name top_padding
 #' @template cell-property-usage
 NULL
 
 
-#' @name top_padding
+#' @name bottom_padding
 #' @rdname left_padding
-#' @templateVar attr_name top_padding
+#' @templateVar attr_name bottom_padding
 #' @template cell-property-usage
 NULL
 
@@ -554,7 +539,8 @@ NULL
 #' @templateVar attr_name wrap
 #' @templateVar attr_desc Text wrapping
 #' @templateVar value_param_desc
-#' A logical vector or matrix. If `TRUE`, long cell contents will be wrapped into multiple lines. Set to `NA` for the default.
+#' A logical vector or matrix. If `TRUE`, long cell contents will be wrapped into multiple lines.
+#' Set to `NA` for the default.
 #' @examples
 #' ht <- huxtable(a = rep('Some long text', 2))
 #' wrap(ht)[1,] <- TRUE
@@ -610,6 +596,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
+#' @template cell-property-usage
 NULL
 make_getter_setters('bold', 'cell', check_fun = is.logical)
 
@@ -652,6 +639,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' to achieve a nice result, in both HTML and LaTeX.
 NULL
 make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {value <- value %% 360})
+
 
 #' @template getset-cell
 #' @templateVar attr_name number_format
@@ -750,6 +738,7 @@ make_getter_setters('pad_decimal', 'cell', extra_code = {
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 'arial'
 #' @family formatting functions
+#' @template cell-property-usage
 NULL
 make_getter_setters('font', 'cell', check_fun = is.character)
 
@@ -838,9 +827,6 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
 NULL
 make_getter_setters('tabular_environment', 'table', check_fun = is.character)
-
-
-
 
 
 #' @template getset-table

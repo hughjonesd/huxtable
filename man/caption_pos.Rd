@@ -18,7 +18,7 @@ set_caption_pos(ht, value)
 }
 \value{
 For \code{caption_pos}, the \code{caption_pos} property.
-For \code{set_caption_pos}, the \code{ht} object.
+For \code{set_caption_pos}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{caption position} property of a huxtable.

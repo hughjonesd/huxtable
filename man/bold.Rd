@@ -11,6 +11,11 @@
 \alias{set_italic_by}
 \title{Cell text style}
 \usage{
+bold(ht)
+bold(ht) <- value
+set_bold(ht, row, col, value, byrow = FALSE)
+set_bold_by(ht, row, col, fn)
+
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value, byrow = FALSE)
@@ -22,17 +27,17 @@ set_italic_by(ht, row, col, fn)
 \item{value}{A logical vector or matrix Set to \code{NA} to reset to the default, which is
 \code{FALSE}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{bold}, the \code{bold} property.
-For \code{set_bold}, the \code{ht} object.
+For \code{set_bold} and \code{set_bold_by}, the modified huxtable.
 
 Similarly for \code{italic} and friends.
 }

@@ -18,7 +18,7 @@ set_caption(ht, value)
 }
 \value{
 For \code{caption}, the \code{caption} property.
-For \code{set_caption}, the \code{ht} object.
+For \code{set_caption}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{caption} property of a huxtable.

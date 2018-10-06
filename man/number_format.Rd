@@ -9,20 +9,23 @@
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{value}{(Not shown - overwritten by the below.) Set to \code{NA} to reset to the default, which is
+\code{"\%.3g"}.}
+
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
 \item{value}{A character or integer vector, or a list containing a function, or \code{NA}. Note
 that setting to \code{NA} does not reset to the default.}
 }
 \value{
 For \code{number_format}, the \code{number_format} property.
-For \code{set_number_format}, the \code{ht} object.
+For \code{set_number_format} and \code{set_number_format_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{number format} property of huxtable cells.

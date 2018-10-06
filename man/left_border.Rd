@@ -19,15 +19,20 @@
 \alias{set_bottom_border_by}
 \title{Borders}
 \usage{
-right_border(ht)
-right_border(ht) <- value
-set_right_border(ht, row, col, value, byrow = FALSE)
-set_right_border_by(ht, row, col, fn)
+left_border(ht)
+left_border(ht) <- value
+set_left_border(ht, row, col, value, byrow = FALSE)
+set_left_border_by(ht, row, col, fn)
 
 right_border(ht)
 right_border(ht) <- value
 set_right_border(ht, row, col, value, byrow = FALSE)
 set_right_border_by(ht, row, col, fn)
+
+top_border(ht)
+top_border(ht) <- value
+set_top_border(ht, row, col, value, byrow = FALSE)
+set_top_border_by(ht, row, col, fn)
 
 bottom_border(ht)
 bottom_border(ht) <- value
@@ -40,17 +45,17 @@ set_bottom_border_by(ht, row, col, fn)
 \item{value}{A numeric vector or matrix giving border widths in points. Set to 0 for no border. Set to \code{NA} to reset to the default, which is
 \code{0}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{left_border}, the \code{left_border} property.
-For \code{set_left_border}, the \code{ht} object.
+For \code{set_left_border} and \code{set_left_border_by}, the modified huxtable.
 
 Similarly for the other functions.
 }

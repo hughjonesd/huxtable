@@ -6,23 +6,29 @@
 \alias{set_font}
 \alias{set_font_by}
 \title{Font}
+\usage{
+font(ht)
+font(ht) <- value
+set_font(ht, row, col, value, byrow = FALSE)
+set_font_by(ht, row, col, fn)
+}
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{value}{A character vector of font names. NB that LaTeX and HTML use different font names. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{font}, the \code{font} property.
-For \code{set_font}, the \code{ht} object.
+For \code{set_font} and \code{set_font_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{font} property of huxtable cells.

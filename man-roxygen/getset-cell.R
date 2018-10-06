@@ -22,18 +22,17 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @description
 #' Functions to get or set the *<%= tolower(attr_desc) %>* property of huxtable cells.
 #'
-#' @template cell-property-usage
 #'
 #' @param ht A huxtable.
-#' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default, which is
-#'   \code{<%= default_property %>}.
-#' @param row A row specifier. See \code{\link{rowspecs}} for details.
+#' @param value <%= value_param_desc %> Set to `NA` to reset to the default, which is
+#'   `<%= default_property %>`.
+#' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
-#' @param byrow If \code{TRUE}, fill in values by row rather than by column.
-#' @param fn A "by" function. See \code{\link{set-by}} for details.
+#' @param byrow If `TRUE`, fill in values by row rather than by column.
+#' @param fn A mapping function. See [mapping-functions] for details.
 #'
-#' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
-#' For \code{set_<%= attr_name %>}, the \code{ht} object.
+#' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
+#' For `set_<%= attr_name %>` and `set_<%= attr_name %>_by`, the modified huxtable.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> set_<%= attr_name %>_by <%= more_alias_str %>
 #' @name <%= attr_name %>

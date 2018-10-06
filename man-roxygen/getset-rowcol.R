@@ -23,10 +23,10 @@ if (exists('morealiases')) {
 #'
 #' @param ht A huxtable.
 #' @param value <%= value_param_desc %>
-#' @param <%= rowcol %> A <%= rowcol %> specifier. See \code{\link{rowspecs}} for details.
+#' @param <%= rowcol %> A <%= rowcol %> specifier. See [rowspecs] for details.
 #'
-#' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
-#' For \code{set_<%= attr_name %>}, the \code{ht} object.
+#' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
+#' For `set_<%= attr_name %>`, the modified huxtable.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>

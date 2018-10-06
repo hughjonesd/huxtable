@@ -12,17 +12,17 @@
 \item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}. Set to \code{NA} to reset to the default, which is
 \code{"top"}.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
 
-\item{fn}{A "by" function. See \code{\link{set-by}} for details.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 For \code{valign}, the \code{valign} property.
-For \code{set_valign}, the \code{ht} object.
+For \code{set_valign} and \code{set_valign_by}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{vertical alignment} property of huxtable cells.

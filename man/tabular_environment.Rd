@@ -18,7 +18,7 @@ set_tabular_environment(ht, value)
 }
 \value{
 For \code{tabular_environment}, the \code{tabular_environment} property.
-For \code{set_tabular_environment}, the \code{ht} object.
+For \code{set_tabular_environment}, the modified huxtable.
 }
 \description{
 Functions to get or set the table-level \emph{tabular environment} property of a huxtable.

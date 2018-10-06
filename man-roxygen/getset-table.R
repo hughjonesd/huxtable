@@ -26,11 +26,11 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' set_<%= attr_name %>(ht, value)
 #'
 #' @param ht A huxtable.
-#' @param value <%= value_param_desc %> Set to \code{NA} to reset to the default, which is
-#'   \code{<%= default_property %>}.
+#' @param value <%= value_param_desc %> Set to `NA` to reset to the default, which is
+#'   `<%= default_property %>`.
 #'
-#' @return For \code{<%= attr_name %>}, the \code{<%= attr_name %>} property.
-#' For \code{set_<%= attr_name %>}, the \code{ht} object.
+#' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
+#' For `set_<%= attr_name %>`, the modified huxtable.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>
