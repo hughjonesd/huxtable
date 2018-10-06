@@ -45,6 +45,4 @@ ht3 <- set_wrap(ht, 1:2, 1, TRUE)
 wrap(ht3)
 ht4 <- set_wrap(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
 wrap(ht4)
-ht5 <- set_wrap(ht, where(ht == 1), TRUE)
-wrap(ht5)
 }

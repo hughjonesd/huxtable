@@ -44,6 +44,4 @@ ht3 <- set_escape_contents(ht, 1:2, 1, TRUE)
 escape_contents(ht3)
 ht4 <- set_escape_contents(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
 escape_contents(ht4)
-ht5 <- set_escape_contents(ht, where(ht == 1), TRUE)
-escape_contents(ht5)
 }

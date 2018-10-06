@@ -48,8 +48,6 @@ ht3 <- set_na_string(ht, 1:2, 1, '--')
 na_string(ht3)
 ht4 <- set_na_string(ht, 1:2, 1:2, c('--', ''), byrow = TRUE)
 na_string(ht4)
-ht5 <- set_na_string(ht, where(ht == 1), '--')
-na_string(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

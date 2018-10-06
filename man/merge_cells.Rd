@@ -24,9 +24,6 @@ Merge a range of cells
 \code{merge_cells(ht, c(min_row, max_row), c(min_col, max_col))} is equivalent to\preformatted{  colspan(ht)[min_row, min_col] <- max_col - min_col + 1
   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
 }
-
-There is no way to merge cells that do not form a rectangle, so e.g.
-\code{merge_cells(ht, where(ht > 0))} will usually have unexpected results.
 }
 \examples{
 ht <- hux(a = 1:3, b = 1:3)

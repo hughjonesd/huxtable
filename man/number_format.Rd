@@ -91,7 +91,6 @@ ht <- huxtable(a = 1:3, b = 3:1)
 set_number_format(ht, 2)
 set_number_format(ht, 1:2, 1, 2)
 set_number_format(ht, 1:2, 1:2, c(2, 3), byrow = TRUE)
-set_number_format(ht, where(ht == 1), 2)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

@@ -47,8 +47,6 @@ ht3 <- set_font(ht, 1:2, 1, 'times')
 font(ht3)
 ht4 <- set_font(ht, 1:2, 1:2, c('times', 'arial'), byrow = TRUE)
 font(ht4)
-ht5 <- set_font(ht, where(ht == 1), 'times')
-font(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

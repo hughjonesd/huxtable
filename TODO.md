@@ -8,10 +8,19 @@ Priority changes
 ================
 
 * `set_xxx_by`:
+  - maybe deprecate `where`... 
+    - there are cases where it is easier to use than the `by` interface.
+    - but not many
   - simple interface round e.g. `colorRamp`?
-  - Maybe have a `case_when` variant, `by_case`, maybe using a `.` to represent the relevant hux
-  - end-to-end tests of `set_xxx_by` functions
-  - `set_all_borders_by` and friends? ... lordy
+  - don't have `by` variants, but instead just interpret `value` when
+    it is a function? 
+    - grammar makes more sense, no need to repeat
+    - less code duplication
+    - OTOH, it overloads `set_xxx` with more meanings
+    - but, not easy to mistakenly put in the right kind of function
+    
+    
+    
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 

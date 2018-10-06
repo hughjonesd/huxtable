@@ -8,6 +8,11 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `set_xxx_by` functions to set properties variably by cell values.
 * Functions for setting properties variably: `by_values`, `by_range`, `by_quantile` etc.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
+* Improvements to the vignette.
+
+## Deprecated
+
+* The 3 argument form of `set_xxx` functions is deprecated. Use `set_xxx_by` instead.
 
 # huxtable 4.2.0
 

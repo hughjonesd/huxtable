@@ -109,7 +109,6 @@ final <- function(n = 1) {
 #' * Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 #' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
 #'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
-#' * Use \code{\link[=where]{where(condition)}}, and omit the `col` argument, to get cells where `condition` is `TRUE`.
 #' * Set `byrow = TRUE` to set properties by row rather than by column.
 #'
 #' @section The gory details:
@@ -119,10 +118,6 @@ final <- function(n = 1) {
 #'
 #' * If there are two arguments (excluding `byrow`) then the second argument is taken as the
 #'     value and is set for all rows and columns.
-#' * If there are three arguments, then the third argument is taken as the value, and
-#'     `row` must be a matrix with two columns. Each row of this matrix
-#'     gives the row, column indices of a single cell. This uses R's little known feature of
-#'     subsetting with matrices - see [base::Extract()].
 #' * If there are four arguments:
 #'     * If `row` or `col` is numeric, character or logical, it is evaluated just as in standard
 #'         subsetting. `col` will be evaluated in a special context provided by [tidyselect::with_vars()]
@@ -141,38 +136,27 @@ final <- function(n = 1) {
 #' set_bold(ht, odds, evens, TRUE)
 #' set_bold(ht, everywhere, tidyselect::matches('[aeiou]'), TRUE)
 #'
-#' set_bold(ht, where(ht == 1), TRUE)
-#'
 #' set_text_color(ht, 2:3, 1:2, c('red', 'blue'))
 #' set_text_color(ht, 2:3, 1:2, c('red', 'blue'), byrow = TRUE)
 NULL
 
-#' Return array indices where expression is true
-#'
-#' This is a simple wrapper around `which(..., arr.ind = TRUE)`, for
-#' use in [row specifications][rowspecs].
-#' @param expr An R expression
-#'
-#' @export
-#'
-#' @return A matrix of row and column indices of cells where `expr` is `TRUE`.
-#'
-#' @examples
-#' ht <- hux(a = 1:3, b = 4:6, add_colnames = TRUE)
-#' where(ht > 2)
-#'
-where <- function(expr) which(expr, arr.ind = TRUE)
-
-
+#' @name where
 #' @rdname huxtable-deprecated
-#'
+#' @export
+NULL
+# documenting the NULL object stops roxygen trying to print a usage section
+# which causes R CMD check to throw a wobbly
+where <- function(expr) {
+  .Deprecated(package = 'huxtable')
+  which(expr, arr.ind = TRUE)
+}
+
+
+#' @name is_a_number
+#' @rdname huxtable-deprecated
 #' @details To replace `is_a_number` use e.g. `! is.na(as.numeric(x))`
 #' @export
-#' @name is_a_number
 NULL
-
-# documenting the NULL object above stops roxygen trying to print a usage section
-# which causes R CMD check to throw a wobbly
 is_a_number <- function(x) {
   if (is.data.frame(x)) {
     if (nrow(x) == 0) return(matrix(FALSE, 0, ncol(x)))

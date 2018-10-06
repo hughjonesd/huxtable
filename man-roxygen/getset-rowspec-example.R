@@ -8,5 +8,4 @@
 #' <%= attr_name %>(ht3)
 #' ht4 <- set_<%= attr_name %>(ht, 1:2, 1:2, c(<%= attr_val %>, <%= attr_val2 %>), byrow = TRUE)
 #' <%= attr_name %>(ht4)
-#' ht5 <- set_<%= attr_name %>(ht, where(ht == 1), <%= attr_val %>)
-#' <%= attr_name %>(ht5)
+

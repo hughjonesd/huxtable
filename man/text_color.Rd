@@ -47,7 +47,6 @@ ht <- huxtable(a = 1:3, b = 3:1)
 set_text_color(ht, 'blue')
 set_text_color(ht, 1:2, 1, 'blue')
 set_text_color(ht, 1:2, 1:2, c('blue', 'red'), byrow = TRUE)
-set_text_color(ht, where(ht == 1), 'blue')
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

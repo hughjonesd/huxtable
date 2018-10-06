@@ -51,6 +51,4 @@ ht3 <- set_rotation(ht, 1:2, 1, 90)
 rotation(ht3)
 ht4 <- set_rotation(ht, 1:2, 1:2, c(90, 270), byrow = TRUE)
 rotation(ht4)
-ht5 <- set_rotation(ht, where(ht == 1), 90)
-rotation(ht5)
 }

@@ -84,7 +84,6 @@ ht <- huxtable(a = 1:3, b = 3:1)
 set_left_border(ht, 1)
 set_left_border(ht, 1:2, 1, 1)
 set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
-set_left_border(ht, where(ht == 1), 1)
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

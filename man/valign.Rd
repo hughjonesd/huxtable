@@ -51,6 +51,4 @@ ht3 <- set_valign(ht, 1:2, 1, 'bottom')
 valign(ht3)
 ht4 <- set_valign(ht, 1:2, 1:2, c('bottom', 'bottom'), byrow = TRUE)
 valign(ht4)
-ht5 <- set_valign(ht, where(ht == 1), 'bottom')
-valign(ht5)
 }

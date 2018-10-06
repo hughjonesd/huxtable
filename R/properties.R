@@ -143,6 +143,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
               if (missing(value)) value <- col
               if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
               if (byrow) stop('`byrow = TRUE` makes no sense if `row` is a matrix')
+              .Deprecated(msg = c('The 3 argument form of set_* functions is deprecated.\n',
+                     'Use set_*_by instead.\n'), package = 'huxtable')
               .(attr_symbol)(ht)[row] <- value
             } else {
               if (nargs == 2) {
@@ -440,7 +442,6 @@ NULL
 #' set_left_border_color(ht, 'red')
 #' set_left_border_color(ht, 1:2, 1, 'red')
 #' set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
-#' set_left_border_color(ht, where(ht == 1), 'red')
 #' @template border-warning
 #'
 NULL
@@ -503,7 +504,6 @@ NULL
 #' set_left_border_style(ht, 'double')
 #' set_left_border_style(ht, 1:2, 1, 'double')
 #' set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
-#' set_left_border_style(ht, where(ht == 1), 'double')
 #' @template border-warning
 #'
 NULL

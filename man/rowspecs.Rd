@@ -25,7 +25,6 @@ There are also a few extra tricks you can use:
 \item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
 \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
 specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
-\item Use \code{\link[=where]{where(condition)}}, and omit the \code{col} argument, to get cells where \code{condition} is \code{TRUE}.
 \item Set \code{byrow = TRUE} to set properties by row rather than by column.
 }
 }
@@ -38,10 +37,6 @@ function.
 \itemize{
 \item If there are two arguments (excluding \code{byrow}) then the second argument is taken as the
 value and is set for all rows and columns.
-\item If there are three arguments, then the third argument is taken as the value, and
-\code{row} must be a matrix with two columns. Each row of this matrix
-gives the row, column indices of a single cell. This uses R's little known feature of
-subsetting with matrices - see \code{\link[base:Extract]{base::Extract()}}.
 \item If there are four arguments:
 \itemize{
 \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
@@ -61,8 +56,6 @@ ht <- huxtable(a = 1:5, b = 5:1)
 set_bold(ht, 2:4, 1:2, TRUE)
 set_bold(ht, odds, evens, TRUE)
 set_bold(ht, everywhere, tidyselect::matches('[aeiou]'), TRUE)
-
-set_bold(ht, where(ht == 1), TRUE)
 
 set_text_color(ht, 2:3, 1:2, c('red', 'blue'))
 set_text_color(ht, 2:3, 1:2, c('red', 'blue'), byrow = TRUE)

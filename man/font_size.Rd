@@ -47,8 +47,6 @@ ht3 <- set_font_size(ht, 1:2, 1, 14)
 font_size(ht3)
 ht4 <- set_font_size(ht, 1:2, 1:2, c(14, 12), byrow = TRUE)
 font_size(ht4)
-ht5 <- set_font_size(ht, where(ht == 1), 14)
-font_size(ht5)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

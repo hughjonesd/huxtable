@@ -89,7 +89,6 @@ ht <- set_all_borders(ht, 1)
 set_left_border_style(ht, 'double')
 set_left_border_style(ht, 1:2, 1, 'double')
 set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
-set_left_border_style(ht, where(ht == 1), 'double')
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

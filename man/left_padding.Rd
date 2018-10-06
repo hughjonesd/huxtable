@@ -76,6 +76,4 @@ ht3 <- set_left_padding(ht, 1:2, 1, 20)
 left_padding(ht3)
 ht4 <- set_left_padding(ht, 1:2, 1:2, c(20, 10), byrow = TRUE)
 left_padding(ht4)
-ht5 <- set_left_padding(ht, where(ht == 1), 20)
-left_padding(ht5)
 }

@@ -79,7 +79,6 @@ ht <- set_all_borders(ht, 1)
 set_left_border_color(ht, 'red')
 set_left_border_color(ht, 1:2, 1, 'red')
 set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
-set_left_border_color(ht, where(ht == 1), 'red')
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

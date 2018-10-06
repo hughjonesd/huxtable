@@ -219,8 +219,6 @@ set_cell_properties <- function (ht, row, col, ...) {
 #'   colspan(ht)[min_row, min_col] <- max_col - min_col + 1
 #'   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
 #' ```
-#' There is no way to merge cells that do not form a rectangle, so e.g.
-#' `merge_cells(ht, where(ht > 0))` will usually have unexpected results.
 #' @return The `ht` object.
 #'
 #' @export
@@ -232,6 +230,7 @@ merge_cells <- function (ht, row, col) {
   assert_that(is_huxtable(ht))
 
   if (missing(col)) {
+    .Deprecated('Using merge_cells without a `col` argument is deprecated.', package = 'huxtable')
     if (! is.matrix(row)) stop(
       'No columns specified, but `row` argument did not evaluate to a matrix')
     # 2-matrix of row, col vectors

@@ -49,6 +49,7 @@ NULL
 #'
 #' These functions are deprecated and will be removed in future versions of huxtable.
 #'
+#' To replace the 3 argument form of `set_xxx` functions, use \code{\link[=set-by]{set_xxx_by}}.
 #' @name huxtable-deprecated
 NULL
 

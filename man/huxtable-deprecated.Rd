@@ -5,6 +5,7 @@
 \alias{pad_decimal<-}
 \alias{set_pad_decimal}
 \alias{set_pad_decimal_by}
+\alias{where}
 \alias{is_a_number}
 \alias{huxtable-deprecated}
 \title{Deprecated functions}
@@ -15,4 +16,6 @@ These functions are deprecated and will be removed in future versions of huxtabl
 To replace \code{pad_decimal} use \code{\link[=align]{align()}}, e.g. \code{align(ht) <- "."}.
 
 To replace \code{is_a_number} use e.g. \code{! is.na(as.numeric(x))}
+
+To replace the 3 argument form of \code{set_xxx} functions, use \code{\link[=set-by]{set_xxx_by}}.
 }

@@ -5,10 +5,9 @@ context('Row and column functions, set_* interface')
 test_that('Row/column function examples unchanged', {
   test_ex_same('every')
   test_ex_same('final')
-  test_ex_same('where')
 })
 
-test_that('final() works as expected', {
+test_that('final', {
   dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
   expect_equivalent(final(2)(dfr, 1), 4:5)
   expect_equivalent(final(2)(dfr, 2), 3:4)
@@ -16,7 +15,7 @@ test_that('final() works as expected', {
 })
 
 
-test_that('every(), evens and odds work as expected', {
+test_that('every(), evens and odds', {
   dfr <- data.frame(a = 1:7, b = 1:7, d = 1:7, e = 1:7)
   expect_equivalent(every(3, from = 1)(dfr, 1), c(1, 4, 7))
   expect_equivalent(every(3, from = 1)(dfr, 2), c(1, 4))
@@ -29,7 +28,7 @@ test_that('every(), evens and odds work as expected', {
 })
 
 
-test_that('Can use set_cell_properties', {
+test_that('set_cell_properties', {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   ht2 <- set_cell_properties(ht, 1, 1, font = 'times', align = 'right')
   expect_equivalent(font(ht2)[1, 1], 'times')
@@ -100,7 +99,7 @@ test_that('set_* works with byrow', {
 })
 
 
-test_that('set_* works when col is missing', {
+test_that('set_*: 3 argument form', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht, where(ht > 0), value = 'times')
   expect_equivalent(font(ht2), matrix(c('times', NA, NA, 'times'), 2, 2))
@@ -111,7 +110,7 @@ test_that('set_* works when col is missing', {
 })
 
 
-test_that('set_* works when row and col are missing', {
+test_that('set_*: 2 argument form', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht, 'times')
   expect_equivalent(font(ht2), matrix('times', 2, 2))
@@ -139,7 +138,7 @@ test_that('set_* works with row and col "empty"', {
 })
 
 
-test_that('all forms of set_all_* work as expected', {
+test_that('set_all_*', {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_all_borders(ht, 1)
   expect_equivalent(top_border(ht2), matrix(1, 2, 2))
@@ -163,25 +162,25 @@ test_that('all forms of set_all_* work as expected', {
 test_that('set_all_*_by', {
   ht <- huxtable(1:5, 5:1)
 
-  ht2 <- set_all_borders_by(ht, by_range(3, c(0, 1)))
+  ht2 <- set_all_borders_by(ht, map_ranges(3, c(0, 1)))
   expect_equivalent(left_border(ht2), 1 * (as.matrix(ht2) >= 3))
   expect_equivalent(right_border(ht2), 1 * (as.matrix(ht2) >= 3))
 
-  ht3 <- set_all_border_colors_by(ht, by_range(3, c('red', 'black')))
+  ht3 <- set_all_border_colors_by(ht, map_ranges(3, c('red', 'black')))
   expected <- matrix(ifelse(as.matrix(ht) >= 3, 'black', 'red'), 5, 2)
   expect_equivalent(left_border_color(ht3), expected)
   expect_equivalent(right_border_color(ht3), expected)
 
-  ht4 <- set_all_border_styles_by(ht, by_range(3, c('solid', 'double')))
+  ht4 <- set_all_border_styles_by(ht, map_ranges(3, c('solid', 'double')))
   expected <- matrix(ifelse(as.matrix(ht) >= 3, 'double', 'solid'), 5, 2)
   expect_equivalent(left_border_style(ht4), expected)
   expect_equivalent(right_border_style(ht4), expected)
 
-  ht5 <- set_all_padding_by(ht, by_range(3, c(0, 10)))
+  ht5 <- set_all_padding_by(ht, map_ranges(3, c(0, 10)))
   expect_equivalent(left_padding(ht5), 10 * (as.matrix(ht) >= 3))
   expect_equivalent(right_padding(ht5), 10 * (as.matrix(ht) >= 3))
 
-  ht6 <- set_all_borders_by(ht, 1:2, 1:2, by_range(3, c(2, 4)))
+  ht6 <- set_all_borders_by(ht, 1:2, 1:2, map_ranges(3, c(2, 4)))
   expected <- matrix(c(2, 2, 0, 0, 0, 4, 4, 0, 0, 0), 5, 2)
   expect_equivalent(left_border(ht6), expected)
   expect_equivalent(right_border(ht6), expected)
@@ -205,7 +204,7 @@ test_that('set_all_* functions work when huxtable is not attached', {
 })
 
 
-test_that('set_outer_borders() works as expected', {
+test_that('set_outer_borders', {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
   check_borders <- function (ht) {
@@ -247,7 +246,7 @@ test_that('set_outer_borders() works with non-standard/empty position arguments'
 })
 
 
-test_that('merge_cells() works as expected', {
+test_that('merge_cells', {
   ht <- hux(a = 1:3, b = 1:3)
   expect_silent(ht2 <- merge_cells(ht, 1, 1:2))
   expect_silent(ht2 <- merge_cells(ht2, 2:3, 1))
@@ -267,7 +266,7 @@ test_that('merge_cells() works as expected', {
 })
 
 
-test_that('where() works as expected', {
+test_that('where', {
   dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
   expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
 })
@@ -280,7 +279,7 @@ test_that('where() works with set_*', {
 })
 
 
-test_that('is_a_number() works as expected', {
+test_that('is_a_number', {
   expect_false(is_a_number('foo'))
   expect_true(is_a_number(1.5))
   expect_true(is_a_number('1.5'))
