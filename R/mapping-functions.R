@@ -309,6 +309,34 @@ map_matches <- function(..., .grepl_args = list()) {
 }
 
 
+#' Map numeric cell contents smoothly to colors
+#'
+#' @param ... Colors
+#' @param range Numeric endpoints. If `NULL`, these are determined from the data.
+#' @param na_color Color to return for `NA` values. Use `NA` to set to the default.
+#'
+#' @details
+#' `map_to_colors` requires the "scales" package.
+#'
+#' @family mapping functions
+#' @seealso [mapping-functions]
+#' @inherit map_values return
+#' @export
+#'
+#' @examples
+#'
+#' if (requireNamespace("scales")) {
+#'   ht <- as_hux(matrix(rnorm(25), 5, 5))
+#'   set_background_color_by(ht,
+#'           map_to_colors("red", "yellow", "blue"))
+#' }
+map_to_colors <- function (..., range = NULL, na_color = NA) {
+  assert_package('map_colorspace', 'scales')
+  palette <- c(...)
+
+  map_function(scales::col_numeric(palette, domain = range, na.color = na_color))
+}
+
 
 #' Map cell contents to cell properties using a function or scale
 #'

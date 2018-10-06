@@ -44,6 +44,7 @@ if (requireNamespace('scales')) {
 
 Other mapping functions: \code{\link{map_cases}},
   \code{\link{map_matches}}, \code{\link{map_quantiles}},
-  \code{\link{map_ranges}}, \code{\link{map_values}}
+  \code{\link{map_ranges}}, \code{\link{map_to_colors}},
+  \code{\link{map_values}}
 }
 \concept{mapping functions}

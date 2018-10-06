@@ -59,6 +59,7 @@ set_background_color_by(ht,
 
 Other mapping functions: \code{\link{map_cases}},
   \code{\link{map_function}}, \code{\link{map_matches}},
-  \code{\link{map_quantiles}}, \code{\link{map_values}}
+  \code{\link{map_quantiles}}, \code{\link{map_to_colors}},
+  \code{\link{map_values}}
 }
 \concept{mapping functions}

@@ -29,6 +29,7 @@ set_background_color_by(ht,
 
 Other mapping functions: \code{\link{map_cases}},
   \code{\link{map_function}}, \code{\link{map_matches}},
-  \code{\link{map_quantiles}}, \code{\link{map_ranges}}
+  \code{\link{map_quantiles}}, \code{\link{map_ranges}},
+  \code{\link{map_to_colors}}
 }
 \concept{mapping functions}
