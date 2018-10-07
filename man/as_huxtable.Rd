@@ -50,7 +50,7 @@ library(stats)
 tbl <- table(Wool = warpbreaks$wool, Tension = warpbreaks$tension)
 as_huxtable(tbl) # adds row and column names by default
 
-# adding rownames.
-as_hux(mtcars[1:5,], add_colnames = TRUE, add_rownames = "Cars")
+# adding rownames:
+as_hux(mtcars[1:3,], add_colnames = TRUE, add_rownames = "Car")
 
 }

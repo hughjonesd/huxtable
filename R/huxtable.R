@@ -118,7 +118,7 @@ tribble_hux <- function (...,
 #' as_huxtable(tbl) # adds row and column names by default
 #'
 #' # adding rownames:
-#' as_hux(mtcars[1:5,], add_colnames = TRUE, add_rownames = "Cars")
+#' as_hux(mtcars[1:3,], add_colnames = TRUE, add_rownames = "Car")
 #'
 as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 

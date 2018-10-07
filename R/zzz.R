@@ -12,7 +12,10 @@
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 #' read the vignette with `vignette('huxtable')`.
 #'
-#' To report a bug, or suggest an enhancement, visit \href{https://github.com/hughjonesd/huxtable/issues}{github}.
+#' See [huxtable-FAQ] for frequently asked questions.
+#'
+#' To report a bug, or suggest an enhancement, visit
+#' \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 #'
 #' @seealso [huxtable-options]
 #' @name huxtable-package
@@ -62,7 +65,7 @@ NULL
 #' Numbers in my cells look weird!
 #'
 #' * You can change numeric formatting using [number_format()]. Base R options like
-#'   ["scipen"][pkg::options()] usually have no effect.
+#'   ["scipen"][base::options()] usually have no effect.
 #'
 #' I ran `caption(ht) <- "Something"` and got an error message:
 #'

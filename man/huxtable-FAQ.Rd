@@ -18,7 +18,7 @@ using your system's LaTeX management application. Or you can try \code{install_l
 Numbers in my cells look weird!
 \itemize{
 \item You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options like
-\link[pkg:options]{"scipen"} usually have no effect.
+\link[base:options]{"scipen"} usually have no effect.
 }
 
 I ran \code{caption(ht) <- "Something"} and got an error message:\preformatted{Error in UseMethod("caption<-") :
