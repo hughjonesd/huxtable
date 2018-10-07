@@ -21,7 +21,12 @@ Priority changes
   - has format* functions for number_format
   - formatStyle can deal with bold, text_color, background_color, font_size et al.
   - also styleInterval and styleEqual are fun to look at
-  
+
+* cell spacing?
+  - this allows natural gaps between borders; see e.g. economist
+    forecaster tables.
+  - an alternative is to have small empty cells, but that's a hack
+
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
@@ -41,14 +46,29 @@ Priority changes
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back
 
-
+* Look at perl's Latex::Table and how they do it
+  - autouses 'p{5cm}' column for cols with > 30 chars in a cell
+  - for captions above table, try
+  \setlength{\abovecaptionskip}{0pt}
+  \setlength{\belowcaptionskip}{10pt}
+  - they have nice coloured themes which are the same bar the colour
+  
 Changes for 5.0
 ===============
 
 One Q: if these changes are that radical, should it be "huxtable2" or even some other name
 (and work with others?)
 
+* Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
+  borders and less intense headers
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
+  - check that tabu can handle multirow and multicol with background colors
+  - also check https://tex.stackexchange.com/questions/48280/longtabu-and-floats-wrong-table-breaks-on-pages-with-floats
+  - move to tabu for easier sizing, description of vertical lines and vertical padding;
+  - continue to use hhline for horiz non-dashed lines;
+  - use tabucline for horiz dashed lines; always merge when possible, and if not 
+    (ie if color/width changes), warn that lines will "step" down the page
+    
 
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
 
@@ -118,6 +138,8 @@ Bugs
 
 Possibles
 =========
+
+* Rotate whole table using "rotating" package (for PDF) and what for HTML?
 
 * Implement `dplyr::bind_rows` and `bind_cols`?
 

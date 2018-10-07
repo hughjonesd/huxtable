@@ -36,6 +36,7 @@ NULL
 #'
 #' The `fn` argument is a *mapping function* which maps cell contents to property values.
 #'
+#' * To set property values in "stripes" by rows or by columns, use [by_rows()] and [by_cols()].
 #' * To set property values for cells with specific contents, use [by_values()].
 #' * To set property values for cells within a numeric range, use [by_ranges()].
 #' * To set property values for cells by quantiles, use [by_quantiles()] or [by_equal_groups()].
@@ -138,6 +139,56 @@ by_values <- function (...) {
 }
 
 
+#' Set cell properties by row or column
+#'
+#' `by_rows` and `by_cols` set properties in horizontal or vertical "stripes".
+#'
+#' @param ... One or more cell property values.
+#' @param from Numeric. Row or column to start at.
+#'
+#' @inherit by_values return
+#' @family mapping functions
+#' @seealso [mapping-functions]
+#' @export
+#'
+#' @examples
+#' ht <- as_hux(matrix(rnorm(25), 5, 5))
+#' map_background_color(ht,
+#'       by_rows('forestgreen', '#E0E0E0'))
+#' map_background_color(ht,
+#'       by_cols('forestgreen', '#E0E0E0'))
+by_rows <- function (..., from = 1) {
+  vals <- c(...)
+  assert_that(is.count(from))
+
+  row_fn <- function (ht, rows, cols, current) {
+    res <- current
+    assert_that(from <= nrow(res))
+    res[seq(from, nrow(res)), ] <- rep(vals, length.out = nrow(res) - from + 1)
+    res
+  }
+
+  return(row_fn)
+}
+
+
+#'@rdname by_cols
+by_cols <- function (..., from = 1) {
+  vals <- c(...)
+
+  col_fn <- function (ht, rows, cols, current) {
+    res <- current
+    assert_that(from <= ncol(res))
+    lout <- ncol(res) - from + 1
+    vals <- matrix(rep(vals, length.out = lout), ncol = lout, nrow = nrow(res), byrow = TRUE)
+    res[, seq(from, ncol(res))] <- vals
+    res
+  }
+
+  return(col_fn)
+}
+
+
 #' Map numeric ranges to cell properties
 #'
 #' `by_ranges` sets property values for cells falling within different numeric ranges.
@@ -154,7 +205,6 @@ by_values <- function (...) {
 #' Non-numeric cells are unchanged.
 #'
 #' @inherit by_values return
-#'
 #' @family mapping functions
 #' @seealso [mapping-functions]
 #'

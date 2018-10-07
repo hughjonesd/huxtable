@@ -27,6 +27,7 @@ for the whole table, you can omit \code{row} and \code{col}:\preformatted{  map_
 
 The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
 \itemize{
+\item To set property values in "stripes" by rows or by columns, use \code{\link[=by_rows]{by_rows()}} and \code{\link[=by_cols]{by_cols()}}.
 \item To set property values for cells with specific contents, use \code{\link[=by_values]{by_values()}}.
 \item To set property values for cells within a numeric range, use \code{\link[=by_ranges]{by_ranges()}}.
 \item To set property values for cells by quantiles, use \code{\link[=by_quantiles]{by_quantiles()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.

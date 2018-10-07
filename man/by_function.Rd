@@ -37,6 +37,6 @@ if (requireNamespace('scales')) {
 Other mapping functions: \code{\link{by_cases}},
   \code{\link{by_colorspace}}, \code{\link{by_quantiles}},
   \code{\link{by_ranges}}, \code{\link{by_regex}},
-  \code{\link{by_values}}
+  \code{\link{by_rows}}, \code{\link{by_values}}
 }
 \concept{mapping functions}
