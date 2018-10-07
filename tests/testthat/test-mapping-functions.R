@@ -78,6 +78,19 @@ test_that('by_regex', {
 })
 
 
+test_that('by_colorspace', {
+  skip_if_not_installed('scales')
+
+  m <- matrix(c(0, 0.3, 0.6, 1), 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_colorspace('red', 'blue')
+  myscale <- scales::col_numeric(c('red', 'blue'), domain = NULL)
+  expected <- matrix(myscale(c(0, 0.3, 0.6, 1)), 2, 2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), expected)
+})
+
+
 test_that('by_function', {
   m <- matrix(1:4/4, 2, 2)
   ct <- matrix(NA, 2, 2)
