@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-10-03" />
+<meta name="date" content="2018-10-07" />
 
 <title>Design Principles, Comparisons and Limitations</title>
 
@@ -124,12 +124,12 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Design Principles, Comparisons and Limitations</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-10-03</em></h4>
+<h4 class="date"><em>2018-10-07</em></h4>
 
 </div>
 
 
-<p>This document briefly describes the design of huxtable, and compares it with other R packages for creating tables. A current version is on the web in <a href="http://hughjonesd.github.io/huxtable/design-principles.html">HTML</a> or <a href="http://hughjonesd.github.io/huxtable/design-principles.pdf">PDF</a> formats.</p>
+<p>This document briefly describes the design of <a href="https://hughjonesd.github.io/huxtable">huxtable</a>, and compares it with other R packages for creating tables. A current version is on the web in <a href="http://hughjonesd.github.io/huxtable/design-principles.html">HTML</a> or <a href="http://hughjonesd.github.io/huxtable/design-principles.pdf">PDF</a> formats.</p>
 <div id="design-principles" class="section level2">
 <h2>Design principles</h2>
 <p>I wrote this package because I wanted a simple way to create tables in my LaTeX documents. At the same time, I wanted to be able to output HTML or Markdown for use in RStudio. And, I wanted to be able to edit tables intuitively using standard R features. My typical use case is creating tables of regression outputs, but I also wanted to be able to represent arbitrary data, like a table of descriptive statistics or of plain text.</p>
@@ -141,8 +141,8 @@ $(document).ready(function () {
 <div id="comparing-huxtable-with-other-packages" class="section level2">
 <h2>Comparing Huxtable With Other Packages</h2>
 <p>R has many different packages to create LaTeX and HTML tables. The table(s) below list those I know and the features they have. The table is produced with huxtable, of course ;-)</p>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
-<col style="width: 60pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><tr style="height: 80pt;">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 700pt; margin-left: auto; margin-right: auto; ">
+<col style="width: 60pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><tr style="height: 80pt;">
 <td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"><div style="writing-mode: vertical-rl;"></div></td>
 <td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 182, 193); font-weight: bold;"><div style="writing-mode: vertical-rl;">huxtable</div></td>
 <td style="vertical-align: middle; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;"><div style="writing-mode: vertical-rl;">xtable</div></td>
