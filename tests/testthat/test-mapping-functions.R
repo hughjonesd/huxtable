@@ -19,6 +19,21 @@ test_that('by_values', {
 })
 
 
+test_that('by_rows/by_cols', {
+  m <- matrix(NA, 2, 2)
+  ct <- matrix(NA, 2, 2)
+
+  f <- by_rows(1:2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(1:2, 2, 2))
+  f <- by_rows(1:2, from = 2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, 1, NA, 1), 2, 2))
+
+  f <- by_cols(1:2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(1:2, 2, 2, byrow = TRUE))
+  f <- by_cols(1:2, from = 2)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, 1, NA, 1), 2, 2, byrow = TRUE))
+})
+
 test_that('by_ranges', {
   m <- matrix(c(1, 3, 5, 7), 2, 2)
   ct <- matrix(NA, 2, 2)
