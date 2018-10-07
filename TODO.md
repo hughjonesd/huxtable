@@ -21,7 +21,6 @@ Priority changes
   - also styleInterval and styleEqual are fun to look at
   
 * border styles:
-  - Use arydshln in LaTeX?
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
 
@@ -171,6 +170,8 @@ Possibles
 
 Put off or abandoned
 ====================
+
+* Use arydshln in LaTeX? Seems incompatible with hhline
 
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix.
 
