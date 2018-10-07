@@ -21,8 +21,11 @@ NULL
 #' @param outer_borders Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.
 #' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 #'   significance stars. Set to `NULL` for no footnote.
-#' @param statistics Summary statistics to display. Set to `NULL` to show all available statistics.
-#' @param coefs Display only these coefficients. Overrules `omit_coefs`.
+#' @param statistics A vector of summary statistics to display. Set to `NULL` to show all available
+#'   statistics. To change display names, name the `statistics` vector:
+#'   `c("Displayed title" = "statistic_name", ...)`
+#' @param coefs A vector of coefficients to display. Overrules `omit_coefs`. To change display names,
+#'   name the `coef` vector: `c("Displayed title" = "coefficient_name", ...)`
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details
@@ -30,20 +33,22 @@ NULL
 #' 'statistic' and 'p.value'. If the `tidy` method does not have a `conf.int` option, `huxreg` will
 #' calculate confidence intervals itself, using a normal approximation.
 #'
-#' If `...` has names or contains a single named list, the names will be used for column headings. Otherwise column
-#' headings will be automatically created. If the `coef` and/or `statistics` vectors have names, these will be
-#' used for row headings. If different values of `coef` have the same name, the corresponding rows will be merged
-#' in the output.
+#' If `...` has names or contains a single named list, the names will be used for column headings.
+#' Otherwise column headings will be automatically created.
 #'
-#' Each element of `statistics` should be a column name from [broom::glance()]. You can also
-#' use 'nobs' for the number of observations. If `statistics` is `NULL` then all columns from `glance`
-#' will be used. To use no columns, set `statistics = character(0)`.
+#' If the `coef` and/or `statistics` vectors have names, these will be used for row headings. If
+#' different values of `coef` have the same name, the corresponding rows will be merged in the
+#' output.
+#'
+#' `statistics` should be column names from [broom::glance()]. You can also use `'nobs'` for the
+#' number of observations. If `statistics` is `NULL` then all columns from `glance` will be used. To
+#' use no columns, set `statistics = character(0)`.
 #'
 #' `error_format` is a string to be interpreted by [glue::glue()]. Terms in parentheses will be
 #' replaced by computed values. You can use any columns returned
 #' by `tidy`: typical columns include `statistic`, `p.value`, `std.error`, as well as `conf.low`
 #' and `conf.high` if you have set `ci_level`. For example, to show confidence intervals, you
-#' could do \code{error_format = "{conf.low} to {conf.high}"}
+#' could write \code{error_format = "{conf.low} to {conf.high}"}.
 #'
 #' @return A huxtable object.
 #' @export

@@ -44,9 +44,12 @@ this behaviour.}
 \item{note}{Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
 significance stars. Set to \code{NULL} for no footnote.}
 
-\item{statistics}{Summary statistics to display. Set to \code{NULL} to show all available statistics.}
+\item{statistics}{A vector of summary statistics to display. Set to \code{NULL} to show all available
+statistics. To change display names, name the \code{statistics} vector:
+\code{c("Displayed title" = "statistic_name", ...)}}
 
-\item{coefs}{Display only these coefficients. Overrules \code{omit_coefs}.}
+\item{coefs}{A vector of coefficients to display. Overrules \code{omit_coefs}. To change display names,
+name the \code{coef} vector: \code{c("Displayed title" = "coefficient_name", ...)}}
 
 \item{omit_coefs}{Omit these coefficients.}
 }
@@ -61,20 +64,22 @@ Models must have a \code{\link[broom:tidy]{broom::tidy()}} method defined, which
 'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 calculate confidence intervals itself, using a normal approximation.
 
-If \code{...} has names or contains a single named list, the names will be used for column headings. Otherwise column
-headings will be automatically created. If the \code{coef} and/or \code{statistics} vectors have names, these will be
-used for row headings. If different values of \code{coef} have the same name, the corresponding rows will be merged
-in the output.
+If \code{...} has names or contains a single named list, the names will be used for column headings.
+Otherwise column headings will be automatically created.
 
-Each element of \code{statistics} should be a column name from \code{\link[broom:glance]{broom::glance()}}. You can also
-use 'nobs' for the number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance}
-will be used. To use no columns, set \code{statistics = character(0)}.
+If the \code{coef} and/or \code{statistics} vectors have names, these will be used for row headings. If
+different values of \code{coef} have the same name, the corresponding rows will be merged in the
+output.
+
+\code{statistics} should be column names from \code{\link[broom:glance]{broom::glance()}}. You can also use \code{'nobs'} for the
+number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance} will be used. To
+use no columns, set \code{statistics = character(0)}.
 
 \code{error_format} is a string to be interpreted by \code{\link[glue:glue]{glue::glue()}}. Terms in parentheses will be
 replaced by computed values. You can use any columns returned
 by \code{tidy}: typical columns include \code{statistic}, \code{p.value}, \code{std.error}, as well as \code{conf.low}
 and \code{conf.high} if you have set \code{ci_level}. For example, to show confidence intervals, you
-could do \code{error_format = "{conf.low} to {conf.high}"}
+could write \code{error_format = "{conf.low} to {conf.high}"}.
 }
 \examples{
 set.seed(27101975)

@@ -2,6 +2,7 @@
 % Please edit documentation in R/zzz.R
 \name{huxtable-options}
 \alias{huxtable-options}
+\alias{huxtable_options}
 \title{Package options}
 \description{
 \itemize{

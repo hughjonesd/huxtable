@@ -7,6 +7,8 @@ TODO
 Priority changes
 ================
 
+* Easy way not to have `rownames` when you do add_rownames in as_hux.
+
 * Update website from website-4.3-changes branch
 
 * Use more purrr and rlang features, as we depend on these packages anyway
@@ -98,14 +100,7 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
     The downside of that is there's no clear division between rows and columns.
   - See the new-colspec-ideas.md file for more thoughts
 
-* a FAQ, including:
-  - my table isn't in the centre with position(ht) <- 'center'!
-    - try setting the width
-  - my numbers have been formatted
-    - use number_format
-  - LaTeX output isn't working
-    - have you tried `check_latex_dependencies`?
-    
+
 Bugs
 ====
 

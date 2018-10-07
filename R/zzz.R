@@ -16,6 +16,7 @@
 #'
 #' @seealso [huxtable-options]
 #' @name huxtable-package
+#' @aliases huxtable_package
 NULL
 
 
@@ -43,6 +44,54 @@ NULL
 #'   For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
 #'   something like `list(..., Date = "center", ...)`.
 #' @name huxtable-options
+#' @aliases huxtable_options
+NULL
+
+
+
+#' Frequently Asked Questions
+#'
+#' A FAQ of common issues.
+#'
+#' LaTeX output isn't working.
+#'
+#' * Have you installed the LaTeX packages you need? LaTeX packages are different from R packages.
+#'   Run `check_latex_dependencies()` to find out if you are missing any. Then install them
+#'   using your system's LaTeX management application. Or you can try `install_latex_dependencies()`.
+#'
+#' Numbers in my cells look weird!
+#'
+#' * You can change numeric formatting using [number_format()]. Base R options like
+#'   ["scipen"][pkg::options()] usually have no effect.
+#'
+#' I ran `caption(ht) <- "Something"` and got an error message:
+#'
+#' ```
+#' Error in UseMethod("caption<-") :
+#' no applicable method for 'caption<-' applied to an object of class "c('huxtable', 'data.frame')"
+#' ```
+#'
+#' * You may have loaded another package with a `caption` method, e.g. "xtable". Try loading
+#'   huxtable after xtable.
+#'
+#' My tables aren't centered correctly (LaTeX).
+#'
+#' * Try adjusting `width(ht)`.
+#'
+#'
+#' I have another problem.
+#'
+#' * If you think it's a bug - i.e. a problem with the software - please report it to
+#'   https://github.com/hughjonesd/huxtable/issues. Otherwise, ask a question on
+#'   [StackOverflow](https://stackoverflow.com) or https://community.rstudio.com. That
+#'   way, other people will benefit from the answers you get.
+#'
+#' Can I email you directly?
+#'
+#' * I'd rather you asked on a public website. If you then email me a link, I may be able to help.
+#'
+#' @name huxtable-FAQ
+#' @aliases huxtable_FAQ
 NULL
 
 
