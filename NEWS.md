@@ -8,6 +8,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `map_xxx` functions to set properties variably by cell values.
 * Functions for mapping properties variably: `by_values`, `by_ranges`, `by_quantiles` etc.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
+* In `huxtable()` and friends, `add_rownames = "Colname"` now sets the name for the new column.
 * Improvements to the vignette.
 
 ## Deprecated

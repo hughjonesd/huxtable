@@ -24,7 +24,8 @@ For \code{tribble_hux}, data values as in \code{\link[tibble:tribble]{tibble::tr
 
 \item{add_colnames}{If \code{TRUE}, add a first row of column names to the huxtable.}
 
-\item{add_rownames}{If \code{TRUE}, add a first column of row names, named 'rownames', to the huxtable.}
+\item{add_rownames}{If \code{TRUE} or a character string, add a first column of row names
+to the huxtable. The string gives the name for the new column (or \code{"rownames"} for \code{TRUE}).}
 
 \item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
 }

@@ -12,7 +12,8 @@ NULL
 #' @param ... For `huxtable`, named list of values as in [data.frame()].
 #'   For `tribble_hux`, data values as in [tibble::tribble()].
 #' @param add_colnames If `TRUE`, add a first row of column names to the huxtable.
-#' @param add_rownames If `TRUE`, add a first column of row names, named 'rownames', to the huxtable.
+#' @param add_rownames If `TRUE` or a character string, add a first column of row names
+#'   to the huxtable. The string gives the name for the new column (or `"rownames"` for `TRUE`).
 #' @param autoformat If `TRUE`, automatically format columns by type. See below.
 #'
 #' @return An object of class `huxtable`.
@@ -115,6 +116,10 @@ tribble_hux <- function (...,
 #' library(stats)
 #' tbl <- table(Wool = warpbreaks$wool, Tension = warpbreaks$tension)
 #' as_huxtable(tbl) # adds row and column names by default
+#'
+#' # adding rownames:
+#' as_hux(mtcars[1:5,], add_colnames = TRUE, add_rownames = "Cars")
+#'
 as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 
 
@@ -132,8 +137,11 @@ as_huxtable.default <- function (
         autoformat   = getOption("huxtable.autoformat", TRUE),
         ...
       ) {
-  assert_that(is.flag(add_colnames), is.flag(add_rownames), is.flag(autoformat))
+  assert_that(is.flag(add_colnames), is.flag(add_rownames) || is.character(add_rownames),
+        is.flag(autoformat))
+
   x <- as.data.frame(x, stringsAsFactors = FALSE)
+
   for (a in setdiff(huxtable_cell_attrs, 'number_format')) {
     attr(x, a) <- matrix(NA, nrow(x), ncol(x))
   }
@@ -147,6 +155,7 @@ as_huxtable.default <- function (
     attr(x, a) <- NA
   }
   attr(x, 'number_format') <- matrix(list(NA), nrow(x), ncol(x))
+
   for (a in names(huxtable_env$huxtable_default_attrs)) {
     attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]]  # [[ indexing matters here
   }
@@ -164,7 +173,13 @@ as_huxtable.default <- function (
   }
 
   # order matters here. We want original rownames, not anything else.
-  if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE)
+  if (is.character(add_rownames)) {
+    rownames_colname <- add_rownames
+    add_rownames <- TRUE
+  } else {
+    rownames_colname <- "rownames"
+  }
+  if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE, colname = rownames_colname)
   if (add_colnames) x <- add_colnames(x)
   # this bit comes after add_colnames so that column headers also get aligned:
   if (autoformat) {
