@@ -60,6 +60,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
   borders and less intense headers
+
+* Change `header_col` to default to `FALSE` in themes.
   
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
   - check that tabu can handle multirow and multicol with background colors
