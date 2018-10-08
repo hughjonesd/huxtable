@@ -581,6 +581,7 @@ seen `theme_plain`. Other options include `theme_basic` and (for fun) `theme_mon
 theme_mondrian(car_ht)
 ```
 
+The ["themes" vignette](themes.html) shows all the available themes.
 
 # Selecting rows, columns and cells
 
@@ -654,9 +655,7 @@ lm3 <- lm(price ~ carat + depth, diamonds)
 huxreg(lm1, lm2, lm3)
 ```
 
-For more information see the `huxreg` vignette, available online in
-[HTML](https://hughjonesd.github.io/huxtable/huxreg.html) or [PDF](https://hughjonesd.github.io/huxtable/huxreg.pdf) or
-in R via `vignette('huxreg')`.
+For more information see the ["huxreg" vignette](huxreg.`r if (is_latex) "pdf" else "html"`).
 
 # Output to different formats
 

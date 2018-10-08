@@ -13,6 +13,9 @@
 #' `theme_article` is similar to the style of many scientific journals.
 #'   It sets horizontal lines above and below the table.
 #'
+#'  `theme_grey`, `theme_blue`, `theme_orange` and `theme_green` use white borders and subtle
+#'    horizontal stripes.
+#'
 #' `theme_mondrian` mimics the style of a Mondrian painting, with black borders and randomized
 #'   colors.
 #'

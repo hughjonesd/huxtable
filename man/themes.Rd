@@ -63,6 +63,9 @@ These functions quickly set default styles for a huxtable.
 \code{theme_article} is similar to the style of many scientific journals.
 It sets horizontal lines above and below the table.
 
+\code{theme_grey}, \code{theme_blue}, \code{theme_orange} and \code{theme_green} use white borders and subtle
+horizontal stripes.
+
 \code{theme_mondrian} mimics the style of a Mondrian painting, with black borders and randomized
 colors.
 }

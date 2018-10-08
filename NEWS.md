@@ -12,6 +12,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `map_xxx` functions to set properties variably by cell values.
 * Functions for mapping properties variably: `by_rows`, `by_values`, `by_ranges`,
   `by_quantiles` etc.
+* New grey, blue, green and orange themes.
 * New `tidy_override` function to override p values etc. in `huxreg`.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
 * Enhancement: left- and right-aligned captions are now set above the table in LaTeX,
