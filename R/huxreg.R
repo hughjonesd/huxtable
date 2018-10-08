@@ -1,5 +1,6 @@
 
 #' @import assertthat
+#' @importFrom stats nobs
 NULL
 
 #' Create a huxtable to display model output
@@ -305,16 +306,24 @@ has_builtin_ci <- function (x) {
   all(c("conf.int", "conf.level") %in% argnames)
 }
 
+#' @importFrom broom tidy
+#' @export
+broom::tidy
+
+#' @importFrom broom glance
+#' @export
+broom::glance
 
 #' Override a model's `tidy` output
 #'
 #' Use `tidy_override` to provide your own p values, confidence intervals
 #' etc. for a model.
 #'
-#' @param x A model with methods for [broom::tidy()] and/or [broom::glance()].
+#' @param x A model with methods for [broom::tidy()] and/or [broom::glance()]
 #' @param ... Columns of data for `tidy`
 #' @param glance A list of summary statistics for `glance`
 #' @param extend Logical: allow adding new statistics?
+#' @param nobs,object,x,... Arguments to methods.
 #'
 #' @return An object of class "tidy_override". When `tidy` and `glance` are called
 #' on this, it will return results from the underlying model, replacing some
@@ -347,6 +356,7 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
 }
 
 #' @export
+#' @rdname tidy_override
 tidy.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
@@ -361,6 +371,7 @@ tidy.tidy_override <- function (x, ...) {
 }
 
 #' @export
+#' @rdname tidy_override
 glance.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
@@ -375,4 +386,5 @@ glance.tidy_override <- function (x, ...) {
 }
 
 #' @export
-nobs.tidy_override <- function (object, ...) nobs(x$model)
+#' @rdname tidy_override
+nobs.tidy_override <- function (object, ...) nobs(object$model)

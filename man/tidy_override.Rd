@@ -2,18 +2,29 @@
 % Please edit documentation in R/huxreg.R
 \name{tidy_override}
 \alias{tidy_override}
+\alias{tidy.tidy_override}
+\alias{glance.tidy_override}
+\alias{nobs.tidy_override}
 \title{Override a model's \code{tidy} output}
 \usage{
 tidy_override(x, ..., glance = list(), extend = FALSE)
+
+\method{tidy}{tidy_override}(x, ...)
+
+\method{glance}{tidy_override}(x, ...)
+
+\method{nobs}{tidy_override}(object, ...)
 }
 \arguments{
-\item{x}{A model with methods for \code{\link[broom:tidy]{broom::tidy()}} and/or \code{\link[broom:glance]{broom::glance()}}.}
+\item{x}{A model with methods for \code{\link[broom:tidy]{broom::tidy()}} and/or \code{\link[broom:glance]{broom::glance()}}}
 
 \item{...}{Columns of data for \code{tidy}}
 
 \item{glance}{A list of summary statistics for \code{glance}}
 
 \item{extend}{Logical: allow adding new statistics?}
+
+\item{nobs, object, x, ...}{Arguments to methods.}
 }
 \value{
 An object of class "tidy_override". When \code{tidy} and \code{glance} are called
