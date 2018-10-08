@@ -14,7 +14,7 @@ matrix:
 # check it can build without pandoc
   - pandoc: false
     r: release
-    name: no-pandoc
+    name: no-pandoc-release
 # check it can build with latest github of important packages
   - r_github_packages:
     - tidyverse/dplyr
@@ -27,8 +27,8 @@ matrix:
     - davidgohel/officer
     - yihui/knitr
     - rstudio/rmarkdown
-    r: release
-    name: github-packages
+    r: devel
+    name: github-packages-devel
     env:
       - CACHE_VERSION=github_packages
 # run tests without Suggested packages
@@ -38,6 +38,7 @@ matrix:
     r: devel
     r_build_args: --no-build-vignettes
     r_check_args: --no-vignettes --no-examples --ignore-vignettes
+    name: no-suggests-devel
     env:
       - CACHE_VERSION=no_suggests
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
