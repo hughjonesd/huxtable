@@ -655,7 +655,7 @@ lm3 <- lm(price ~ carat + depth, diamonds)
 huxreg(lm1, lm2, lm3)
 ```
 
-For more information see the ["huxreg" vignette](huxreg.`r if (is_latex) "pdf" else "html"`).
+For more information see the ["huxreg" vignette](huxreg.html).
 
 # Output to different formats
 
