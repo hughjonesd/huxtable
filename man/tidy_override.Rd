@@ -16,15 +16,15 @@ tidy_override(x, ..., glance = list(), extend = FALSE)
 \method{nobs}{tidy_override}(object, ...)
 }
 \arguments{
-\item{x}{A model with methods for \code{\link[broom:tidy]{broom::tidy()}} and/or \code{\link[broom:glance]{broom::glance()}}}
+\item{x}{A model with methods defined for \code{\link[broom:tidy]{broom::tidy()}} and/or \code{\link[broom:glance]{broom::glance()}}.}
 
-\item{...}{Columns of data for \code{tidy}}
+\item{...}{Columns of statistics for \code{tidy}.}
 
-\item{glance}{A list of summary statistics for \code{glance}}
+\item{glance}{A list of summary statistics for \code{glance}.}
 
 \item{extend}{Logical: allow adding new statistics?}
 
-\item{nobs, object, x, ...}{Arguments to methods.}
+\item{object}{A \code{tidy_override} object.}
 }
 \value{
 An object of class "tidy_override". When \code{tidy} and \code{glance} are called

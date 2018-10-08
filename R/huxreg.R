@@ -319,11 +319,11 @@ broom::glance
 #' Use `tidy_override` to provide your own p values, confidence intervals
 #' etc. for a model.
 #'
-#' @param x A model with methods for [broom::tidy()] and/or [broom::glance()]
-#' @param ... Columns of data for `tidy`
-#' @param glance A list of summary statistics for `glance`
+#' @param x A model with methods defined for [broom::tidy()] and/or [broom::glance()].
+#' @param ... Columns of statistics for `tidy`.
+#' @param glance A list of summary statistics for `glance`.
 #' @param extend Logical: allow adding new statistics?
-#' @param nobs,object,x,... Arguments to methods.
+#' @param object A `tidy_override` object.
 #'
 #' @return An object of class "tidy_override". When `tidy` and `glance` are called
 #' on this, it will return results from the underlying model, replacing some
