@@ -41,16 +41,25 @@ may help.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 valign(jams) <-  'bottom'
 valign(jams)
 
 
 data(jams)
-jams <- as_hux(jams)
 
-jams2 <- set_valign(jams, 'bottom')
+jams2 <- set_valign(jams,
+      'bottom')
 valign(jams2)
-jams3 <- set_valign(jams, 1:2, 1, 'bottom')
+
+jams3 <- set_valign(jams,
+      2:3, 1, 'bottom')
 valign(jams3)
+
+jams4 <- map_valign(jams,
+      by_rows(
+        'bottom',
+        'bottom')
+      )
+valign(jams4)
 }

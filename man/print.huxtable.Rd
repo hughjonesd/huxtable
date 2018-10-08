@@ -32,7 +32,6 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
   options(huxtable.print = print_latex)
 }
 data(jams)
-jams <- as_hux(jams)
 
 format(jams, output = 'screen')
 format(jams, output = 'md')

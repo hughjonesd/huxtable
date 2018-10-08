@@ -30,7 +30,7 @@ explicitly.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 position(jams) <-  'right'
 position(jams)
 

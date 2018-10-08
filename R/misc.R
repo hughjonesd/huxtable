@@ -19,7 +19,7 @@ NULL
 #'
 #' @examples
 #' data(jams)
-#' jams <- as_hux(jams)
+#'
 #' jams <- add_footnote(jams,
 #'       '* subject to availability')
 #' jams
@@ -210,7 +210,6 @@ print.huxtable <- function(x, ...) {
 #'
 #' @examples
 #' data(jams)
-#' jams <- as_hux(jams)
 #'
 #' format(jams, output = 'screen')
 #' format(jams, output = 'md')

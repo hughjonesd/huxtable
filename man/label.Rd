@@ -30,7 +30,7 @@ in \href{http://bookdown.org}{bookdown}.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 label(jams) <-  'tab:mytable'
 label(jams)
 

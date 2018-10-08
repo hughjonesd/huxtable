@@ -48,16 +48,22 @@ Functions to get or set the \emph{cell text style} property of huxtable cells.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 bold(jams) <-  TRUE
 bold(jams)
-print_screen(ht)
+
 
 data(jams)
-jams <- as_hux(jams)
 
-set_bold(jams, TRUE)
-set_bold(jams, 1:2, 1, TRUE)
+set_bold(jams,
+      TRUE)
+set_bold(jams,
+      2:3, 1, TRUE)
+map_bold(jams,
+      by_rows(
+        TRUE,
+        FALSE
+      ))
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

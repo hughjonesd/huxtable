@@ -77,16 +77,22 @@ release.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 left_border(jams) <-  1
 left_border(jams)
-print_screen(ht)
+jams
 
 data(jams)
-jams <- as_hux(jams)
 
-set_left_border(jams, 1)
-set_left_border(jams, 1:2, 1, 1)
+set_left_border(jams,
+      1)
+set_left_border(jams,
+      2:3, 1, 1)
+map_left_border(jams,
+      by_rows(
+        1,
+        0
+      ))
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

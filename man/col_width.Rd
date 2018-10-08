@@ -32,7 +32,7 @@ The workaround is to adjust the width, so that your cells no longer overrun.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 col_width(jams) <-  c(.2, .8)
 col_width(jams)
 

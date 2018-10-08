@@ -24,7 +24,7 @@ all table columns and has an optional border above.
 }
 \examples{
 data(jams)
-jams <- as_hux(jams)
+
 jams <- add_footnote(jams,
       '* subject to availability')
 jams

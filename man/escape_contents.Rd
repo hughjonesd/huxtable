@@ -47,10 +47,19 @@ escape_contents(ht)[,2] <- FALSE
 
 
 data(jams)
-jams <- as_hux(jams)
 
-jams2 <- set_escape_contents(jams, TRUE)
+jams2 <- set_escape_contents(jams,
+      TRUE)
 escape_contents(jams2)
-jams3 <- set_escape_contents(jams, 1:2, 1, TRUE)
+
+jams3 <- set_escape_contents(jams,
+      2:3, 1, TRUE)
 escape_contents(jams3)
+
+jams4 <- map_escape_contents(jams,
+      by_rows(
+        TRUE,
+        FALSE)
+      )
+escape_contents(jams4)
 }

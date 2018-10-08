@@ -287,7 +287,7 @@ make_getter_setters('row_height', 'row')
 #' @noMd
 #' @templateVar subscript [1, 1]
 #' @templateVar attr_val 2
-#' @templateVar extra ht <- set_all_borders(ht, 1) ## ht
+#' @templateVar extra jams <- set_all_borders(jams, 1) ## jams
 NULL
 make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
       if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
@@ -363,8 +363,8 @@ make_getter_setters('text_color', 'cell')
 #' @seealso [set_all_borders()]
 #' @template getset-example
 #' @templateVar attr_val 1
-#' @templateVar extra print_screen(ht)
-#' @templateVar attr_val2 2
+#' @templateVar extra jams
+#' @templateVar attr_val2 0
 #' @template getset-visible-rowspec-example
 #' @template border-warning
 #' @template cell-property-usage
@@ -592,7 +592,7 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @template getset-example
 #' @templateVar attr_val '--'
 #' @noMd
-#' @templateVar extra ht[2,2] <- NA ## print_screen(ht)
+#' @templateVar extra jams[2,2] <- NA ## jams
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 ''
 #' @family formatting functions
@@ -608,7 +608,6 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @templateVar morealiases italic
 #' @template getset-example
 #' @templateVar attr_val TRUE
-#' @templateVar extra print_screen(ht)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
@@ -706,28 +705,31 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #'         e = rep("3.2 (s.e. 1.4)", 6),
 #'         add_colnames = TRUE
 #'       )
+#'
 #' number_format(ht)[3, -1] <- NA
 #' number_format(ht)[4, -1] <- 2
 #' number_format(ht)[5, -1] <- '%5.2f'
+#'
 #' number_format(ht)[6, -1] <- list(
 #'         function(x)
 #'           prettyNum(x, big.mark = ',',
 #'                 scientific = FALSE)
 #'       )
+#'
 #' number_format(ht)[7, -1] <- list(
 #'         function(x) if (x > 0) '+' else '-'
 #'       )
+#'
 #' right_border(ht) <- 1
 #' bottom_border(ht)[1, ] <- 1
+#'
 #' ht
 #'
 #' ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
 #' # probably not what you want:
 #' ht_bands
-#'
-#' number_format(ht_bands) <- NA
-#' ht_bands
-#'
+#' # fixed:
+#' set_number_format(ht_bands, NA)
 #' # alternatively:
 #' huxtable("10000 Maniacs", autoformat = TRUE)
 #'
@@ -796,9 +798,14 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'cen
 #' @details
 #' If `caption_pos` is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
 #' will be determined by the huxtable's [position()].
-#' @template getset-example
-#' @templateVar attr_val 'bottom'
 #' @seealso [caption()]
+#' @examples
+#' data(jams)
+#'
+#' caption(jams) <- "Price list"
+#' jams
+#' caption_pos(jams) <- "top"
+#' jams
 NULL
 make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topcentre',
       'topright', 'bottomleft', 'bottomcenter', 'bottomcentre', 'bottomright'), extra_code = {
@@ -839,12 +846,10 @@ make_getter_setters('height', 'table')
 #' Captions are not escaped. See the example for a workaround.
 #' @template getset-example
 #' @templateVar attr_val 'An example table'
-#' @templateVar extra print_screen(ht)
+#' @templateVar extra jams
 #' @seealso [caption_pos()]
 #' @examples
 #'
-#' data(jams)
-#' jams <- as_hux(jams)
 #' # escape caption characters:
 #' caption(jams) <- sanitize(
 #'       'Make $$$ with jam',

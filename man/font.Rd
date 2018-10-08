@@ -37,18 +37,27 @@ Functions to get or set the \emph{font} property of huxtable cells.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 font(jams) <-  'times'
 font(jams)
 
 
 data(jams)
-jams <- as_hux(jams)
 
-jams2 <- set_font(jams, 'times')
+jams2 <- set_font(jams,
+      'times')
 font(jams2)
-jams3 <- set_font(jams, 1:2, 1, 'times')
+
+jams3 <- set_font(jams,
+      2:3, 1, 'times')
 font(jams3)
+
+jams4 <- map_font(jams,
+      by_rows(
+        'times',
+        'arial')
+      )
+font(jams4)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

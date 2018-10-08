@@ -18,6 +18,6 @@ Technically, \code{final} returns a two-argument function - see \link{rowspecs} 
 }
 \examples{
 data(jams)
-jams <- as_hux(jams)
+
 set_bold(jams, final(2), final(1), TRUE)
 }

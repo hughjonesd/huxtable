@@ -40,16 +40,22 @@ Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"}
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 text_color(jams) <-  'blue'
 text_color(jams)
 
 
 data(jams)
-jams <- as_hux(jams)
 
-set_text_color(jams, 'blue')
-set_text_color(jams, 1:2, 1, 'blue')
+set_text_color(jams,
+      'blue')
+set_text_color(jams,
+      2:3, 1, 'blue')
+map_text_color(jams,
+      by_rows(
+        'blue',
+        'red'
+      ))
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

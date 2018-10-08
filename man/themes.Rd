@@ -56,8 +56,6 @@ colors.
 }
 \examples{
 data(jams)
-jams <- as_hux(jams,
-      add_colnames = TRUE)
 
 theme_striped(jams)
 theme_plain(jams)

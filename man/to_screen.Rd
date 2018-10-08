@@ -44,8 +44,6 @@ italicized) by default; this will work in recent daily builds of RStudio as of O
 }
 \examples{
 data(jams)
-jams <- as_hux(jams,
-      add_colnames = TRUE)
 
 bottom_border(jams)[1, 1:2] <- 1
 bold(jams)[1, 1:2] <- TRUE

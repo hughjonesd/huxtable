@@ -29,13 +29,11 @@ Captions are not escaped. See the example for a workaround.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 caption(jams) <-  'An example table'
 caption(jams)
-print_screen(ht)
+jams
 
-data(jams)
-jams <- as_hux(jams)
 # escape caption characters:
 caption(jams) <- sanitize(
       'Make $$$ with jam',

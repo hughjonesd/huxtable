@@ -41,16 +41,25 @@ to achieve a nice result, in both HTML and LaTeX.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 rotation(jams) <-  90
 rotation(jams)
 
 
 data(jams)
-jams <- as_hux(jams)
 
-jams2 <- set_rotation(jams, 90)
+jams2 <- set_rotation(jams,
+      90)
 rotation(jams2)
-jams3 <- set_rotation(jams, 1:2, 1, 90)
+
+jams3 <- set_rotation(jams,
+      2:3, 1, 90)
 rotation(jams3)
+
+jams4 <- map_rotation(jams,
+      by_rows(
+        90,
+        270)
+      )
+rotation(jams4)
 }

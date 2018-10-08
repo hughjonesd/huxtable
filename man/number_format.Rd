@@ -78,37 +78,46 @@ ht <- huxtable(
         e = rep("3.2 (s.e. 1.4)", 6),
         add_colnames = TRUE
       )
+
 number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
 number_format(ht)[5, -1] <- '\%5.2f'
+
 number_format(ht)[6, -1] <- list(
         function(x)
           prettyNum(x, big.mark = ',',
                 scientific = FALSE)
       )
+
 number_format(ht)[7, -1] <- list(
         function(x) if (x > 0) '+' else '-'
       )
+
 right_border(ht) <- 1
 bottom_border(ht)[1, ] <- 1
+
 ht
 
 ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
 # probably not what you want:
 ht_bands
-
-number_format(ht_bands) <- NA
-ht_bands
-
+# fixed:
+set_number_format(ht_bands, NA)
 # alternatively:
 huxtable("10000 Maniacs", autoformat = TRUE)
 
 
 data(jams)
-jams <- as_hux(jams)
 
-set_number_format(jams, 2)
-set_number_format(jams, 1:2, 1, 2)
+set_number_format(jams,
+      2)
+set_number_format(jams,
+      2:3, 1, 2)
+map_number_format(jams,
+      by_rows(
+        2,
+        3
+      ))
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

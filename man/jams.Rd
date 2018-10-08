@@ -4,11 +4,11 @@
 \name{jams}
 \alias{jams}
 \title{Prices of 3 jams}
-\format{A data frame with 3 rows and 2 columns ("Type" and "Price").}
+\format{A data frame with 4 rows and 2 columns ("Type" and "Price").}
 \usage{
 jams
 }
 \description{
-A dataset of jams.
+A huxtable of jams.
 }
 \keyword{datasets}

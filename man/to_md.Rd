@@ -37,8 +37,6 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 }
 \examples{
 data(jams)
-jams <- as_hux(jams,
-      add_colnames = TRUE)
 
 print_md(jams)
 }

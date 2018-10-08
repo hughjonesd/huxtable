@@ -31,7 +31,7 @@ TeX \code{float} package.
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 latex_float(jams) <-  'h'
 latex_float(jams)
 

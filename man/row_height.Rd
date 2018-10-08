@@ -31,7 +31,7 @@ treated as proportions of the text height (\code{\\textheight}).
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 row_height(jams) <-  c(.2, .1, .1)
 row_height(jams)
 

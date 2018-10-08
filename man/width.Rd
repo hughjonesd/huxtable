@@ -26,7 +26,7 @@ Functions to get or set the table-level \emph{table width} property of a huxtabl
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 width(jams) <-  0.8
 width(jams)
 

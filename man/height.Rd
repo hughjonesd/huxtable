@@ -26,7 +26,7 @@ Functions to get or set the table-level \emph{table height} property of a huxtab
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 height(jams) <-  0.4
 height(jams)
 

@@ -70,7 +70,7 @@ odds  <- every(2, 1)
 #'
 #' @examples
 #' data(jams)
-#' jams <- as_hux(jams)
+#'
 #' set_bold(jams, final(2), final(1), TRUE)
 final <- function(n = 1) {
   assert_that(is.count(n))
@@ -129,8 +129,6 @@ final <- function(n = 1) {
 #'
 #' @examples
 #' data(jams)
-#' jams <- as_hux(jams,
-#'       add_colnames = TRUE)
 #'
 #' set_bold(jams, 2:4, 1:2, TRUE)
 #' set_background_color(jams, evens, everywhere,

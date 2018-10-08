@@ -29,7 +29,7 @@ No features are guaranteed to work if you set this to a non-default value. Use a
 \examples{
 
 data(jams)
-jams <- as_hux(jams)
+
 tabular_environment(jams) <-  'longtable'
 tabular_environment(jams)
 

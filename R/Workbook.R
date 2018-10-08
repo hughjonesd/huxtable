@@ -34,8 +34,6 @@ NULL
 #'
 #' @examples
 #' data(jams)
-#' jams <- as_hux(jams,
-#'       add_colnames = TRUE)
 #' wb <- as_Workbook(jams)
 #'
 #' \dontrun{
