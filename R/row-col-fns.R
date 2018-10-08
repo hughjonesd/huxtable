@@ -143,7 +143,6 @@ NULL
 # documenting the NULL object stops roxygen trying to print a usage section
 # which causes R CMD check to throw a wobbly
 where <- function(expr) {
-  .Deprecated(package = "huxtable")
   which(expr, arr.ind = TRUE)
 }
 

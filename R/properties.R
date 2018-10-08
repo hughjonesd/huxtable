@@ -125,8 +125,8 @@ make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "
               if (missing(value)) value <- col
               if (! is.matrix(row)) stop("No columns specified, but `row` argument did not evaluate to a matrix")
               if (byrow) stop("`byrow = TRUE` makes no sense if `row` is a matrix")
-              .Deprecated(msg = c("The 3 argument form of `set_xxx` functions is deprecated.\n",
-                     "Use `map_xxx` instead.\n"), package = "huxtable")
+              # .Deprecated(msg = c("The 3 argument form of `set_xxx` functions is deprecated.\n",
+              #       "Use `map_xxx` instead.\n"), package = "huxtable")
               .(attr_symbol)(ht)[row] <- value
             } else {
               if (nargs == 2) {
