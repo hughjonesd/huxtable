@@ -80,15 +80,11 @@ left_border(jams) <-  1
 left_border(jams)
 jams
 
-set_left_border(jams,
-      1)
+set_left_border(jams, 1)
 set_left_border(jams,
       2:3, 1, 1)
 map_left_border(jams,
-      by_rows(
-        1,
-        0
-      ))
+      by_rows(1, 0))
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

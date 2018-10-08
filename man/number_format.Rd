@@ -107,15 +107,11 @@ set_number_format(ht_bands, NA)
 huxtable("10000 Maniacs", autoformat = TRUE)
 
 
-set_number_format(jams,
-      2)
+set_number_format(jams, 2)
 set_number_format(jams,
       2:3, 1, 2)
 map_number_format(jams,
-      by_rows(
-        2,
-        3
-      ))
+      by_rows(2, 3))
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

@@ -51,15 +51,11 @@ bold(jams) <-  TRUE
 bold(jams)
 
 
-set_bold(jams,
-      TRUE)
+set_bold(jams, TRUE)
 set_bold(jams,
       2:3, 1, TRUE)
 map_bold(jams,
-      by_rows(
-        TRUE,
-        FALSE
-      ))
+      by_rows(TRUE, FALSE))
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

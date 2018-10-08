@@ -40,15 +40,11 @@ background_color(jams) <-  grey(.95)
 background_color(jams)
 
 
-set_background_color(jams,
-      grey(.95))
+set_background_color(jams, grey(.95))
 set_background_color(jams,
       2:3, 1, grey(.95))
 map_background_color(jams,
-      by_rows(
-        grey(.95),
-        "yellow"
-      ))
+      by_rows(grey(.95), "yellow"))
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},
