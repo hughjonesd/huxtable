@@ -81,6 +81,13 @@ by \code{tidy}: typical columns include \code{statistic}, \code{p.value}, \code{
 and \code{conf.high} if you have set \code{ci_level}. For example, to show confidence intervals, you
 could write \code{error_format = "{conf.low} to {conf.high}"}.
 }
+\section{Fixing p values manually}{
+
+
+To manually insert your own p values, confidence intervals etc., see
+\code{\link[=tidy_override]{tidy_override()}}.
+}
+
 \examples{
 
 lm1 <- lm(mpg ~ cyl, mtcars)
@@ -89,4 +96,5 @@ glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
       family = binomial)
 
 huxreg(lm1, lm2, glm1)
+
 }

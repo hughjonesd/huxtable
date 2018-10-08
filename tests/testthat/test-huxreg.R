@@ -197,3 +197,23 @@ test_that("can pass broom::tidy arguments to huxreg", {
   expect_silent(huxreg(lm1, glm1, tidy_args = list(list(), list(exponentiate = TRUE)), statistics = "nobs"))
   expect_silent(huxreg(lm1, glm1, tidy_args = list(exponentiate = FALSE), statistics = "nobs"))
 })
+
+
+test_that("tidy_override", {
+  skip_if_not_installed("broom")
+
+  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+
+  fakes <- c(0.0001, 0.048)
+  fixed_lm1 <- tidy_override(lm1, p.value = fakes, glance = list(r.squared = 0.95))
+  expect_equivalent(broom::tidy(fixed_lm1)$p.value, fakes)
+  expect_equivalent(broom::glance(fixed_lm1)$r.squared, 0.95)
+
+  lm1_newcol <- tidy_override(lm1, foo = 1:2, glance = list(bar = 1))
+  expect_error(broom::tidy(lm1_newcol), "not found")
+  expect_error(broom::glance(lm1_newcol), "not found")
+
+  lm1_newcol <- tidy_override(lm1, foo = 1:2, glance = list(bar = 1), extend = TRUE)
+  expect_equivalent(broom::tidy(lm1_newcol)$foo, 1:2)
+  expect_equivalent(broom::glance(lm1_newcol)$bar, 1)
+})

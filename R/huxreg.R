@@ -50,6 +50,11 @@ NULL
 #' and `conf.high` if you have set `ci_level`. For example, to show confidence intervals, you
 #' could write \code{error_format = "{conf.low} to {conf.high}"}.
 #'
+#' @section Fixing p values manually:
+#'
+#' To manually insert your own p values, confidence intervals etc., see
+#' [tidy_override()].
+#'
 #' @return A huxtable object.
 #' @export
 #'
@@ -61,6 +66,7 @@ NULL
 #'       family = binomial)
 #'
 #' huxreg(lm1, lm2, glm1)
+#'
 huxreg <- function (
         ...,
         error_format    = "({std.error})",
@@ -95,6 +101,8 @@ huxreg <- function (
 
   # create list of tidy data frames, possibly with confidence intervals
   my_tidy <- function (n, ci_level = NULL) {
+    # pre-tidied models are returned as is
+    if (class(models[[n]])[[1]] == "tbl_df") return(models[[n]])
     args <- if (! is.null(tidy_args)) tidy_args[[n]] else list()
     args$x <- models[[n]]
     if (! is.null(ci_level)) {
@@ -295,3 +303,75 @@ has_builtin_ci <- function (x) {
   argnames <- names(formals(obj))
   all(c("conf.int", "conf.level") %in% argnames)
 }
+
+
+#' Override a model's `tidy` output
+#'
+#' Use `tidy_override` to provide your own p values, confidence intervals
+#' etc. for a model.
+#'
+#' @param x A model with methods for [broom::tidy()] and/or [broom::glance()].
+#' @param ... Columns of data for `tidy`
+#' @param glance A list of summary statistics for `glance`
+#' @param extend Logical: allow adding new statistics?
+#'
+#' @return An object of class "tidy_override". When `tidy` and `glance` are called
+#' on this, it will return results from the underlying model, replacing some
+#' columns with your own data.
+#' @export
+#'
+#' @examples
+#' if (! requireNamespace("broom")) {
+#'   stop("Please install 'broom' to run this example.")
+#' }
+#'
+#' lm1 <- lm(mpg ~ cyl, mtcars)
+#' fixed_lm1 <- tidy_override(lm1,
+#'       p.value = c(.04, .12),
+#'       glance = list(r.squared = 0.99))
+#'
+#' broom::tidy(fixed_lm1)
+#'
+#' cbind(huxreg(fixed_lm1), huxreg(lm1))
+tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
+  assert_that(is.flag(extend), is.list(glance))
+  tidy_cols <- list(...)
+  structure(list(
+          model = x,
+          tidy_cols = tidy_cols,
+          glance_elems = glance,
+          extend = extend
+        ),
+        class = "tidy_override")
+}
+
+#' @export
+tidy.tidy_override <- function (x, ...) {
+  assert_package("tidy.tidy_override", "broom")
+
+  tidied <- broom::tidy(x$model)
+  for (cn in names(x$tidy_cols)) {
+    if (! x$extend && ! cn %in% names(tidied)) stop(glue::glue(
+          "Column \"{cn}\" not found in results of `tidy()`"))
+    tidied[[cn]] <- x$tidy[[cn]]
+  }
+
+  return(tidied)
+}
+
+#' @export
+glance.tidy_override <- function (x, ...) {
+  assert_package("tidy.tidy_override", "broom")
+
+  sumstats <- broom::glance(x$model)
+  for (elem in names(x$glance_elems)) {
+    if (! x$extend && ! elem %in% names(sumstats)) stop(glue::glue(
+          "Element \"{elem}\" not found in results of `glance()`"))
+    sumstats[[elem]] <- x$glance_elems[[elem]]
+  }
+
+  return(sumstats)
+}
+
+#' @export
+nobs.tidy_override <- function (object, ...) nobs(x$model)
