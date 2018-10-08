@@ -106,7 +106,7 @@ test_that("Row heights do not screw up LaTeX multicol", {
 
 test_that("Various Rmd files render without errors", {
   skip_on_cran()
-  skip_if_not_installed("broom") # for huxreg, also skips on travis no-suggests where no vignettes
+  skip_if_not_installed("flextable") # skips on travis no-suggests where no vignettes
 
   rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd") # design-principles needs a CSV file, so we skip
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
