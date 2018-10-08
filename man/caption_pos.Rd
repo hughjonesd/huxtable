@@ -29,9 +29,10 @@ will be determined by the huxtable's \code{\link[=position]{position()}}.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-caption_pos(ht) <-  'bottom'
-caption_pos(ht)
+data(jams)
+jams <- as_hux(jams)
+caption_pos(jams) <-  'bottom'
+caption_pos(jams)
 
 }
 \seealso{

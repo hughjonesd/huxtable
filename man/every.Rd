@@ -38,10 +38,11 @@ Technically, \code{every} returns a 2-argument function which can be called like
 }
 \examples{
 ht <- huxtable(a = 1:10, b = 1:10)
-ht <- set_background_color(ht, every(3), everywhere, 'wheat')
-background_color(ht)
-ht <- set_align(ht, evens, 1:2, 'right')
-ht <- set_align(ht, odds, 1:2, 'center')
-align(ht)
+set_background_color(ht,
+      evens, everywhere,
+      "grey95")
+set_background_color(ht,
+      every(3), everywhere,
+      "grey95")
 
 }

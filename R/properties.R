@@ -411,8 +411,9 @@ NULL
 #' ht <- huxtable(a = 1:3, b = 3:1)
 #' ht <- set_all_borders(ht, 1)
 #' set_left_border_color(ht, 'red')
-#' set_left_border_color(ht, 1:2, 1, 'red')
-#' set_left_border_color(ht, 1:2, 1:2, c('red', 'blue'), byrow = TRUE)
+#' set_left_border_color(ht,
+#'       1:2, 1, 'red')
+#'
 #' @template border-warning
 #' @template cell-property-usage
 #'
@@ -466,8 +467,9 @@ NULL
 #' ht <- huxtable(a = 1:3, b = 3:1)
 #' ht <- set_all_borders(ht, 1)
 #' set_left_border_style(ht, 'double')
-#' set_left_border_style(ht, 1:2, 1, 'double')
-#' set_left_border_style(ht, 1:2, 1:2, c('solid', 'double'), byrow = TRUE)
+#' set_left_border_style(ht, 1:2, 1,
+#'       'double')
+#'
 #' @template border-warning
 #' @template cell-property-usage
 NULL
@@ -542,9 +544,15 @@ NULL
 #' A logical vector or matrix. If `TRUE`, long cell contents will be wrapped into multiple lines.
 #' Set to `NA` for the default.
 #' @examples
-#' ht <- huxtable(a = rep('Some long text', 2))
-#' wrap(ht)[1,] <- TRUE
-#' print_html(ht)
+#' ht <- huxtable(paste(
+#'       rep("Some long text.", 20),
+#'       collapse = " "))
+#' width(ht) <- 0.2
+#' wrap(ht) <- TRUE
+#' \dontrun{
+#'   quick_html(ht)
+#' }
+#'
 #' @template getset-rowspec-example
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
@@ -559,8 +567,16 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @templateVar value_param_desc
 #' A logical vector or matrix. If `TRUE`, cell contents will be HTML or LaTeX escaped.
 #' @examples
-#' ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
+#' ht <- huxtable(
+#'         Exponent = 2:4,
+#'         Example  = paste0('$x^', 2:4, '$'),
+#'         add_colnames = TRUE
+#'       )
 #' escape_contents(ht)[,2] <- FALSE
+#' \dontrun{
+#'   quick_pdf(ht)
+#' }
+#'
 #' @template getset-rowspec-example
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
@@ -675,19 +691,32 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #'
 #' @examples
 #' ht <- huxtable(
-#'   number_format = c("Default", "NA", "2", "\"%5.2f\"", "Pretty", "Sign"),
-#'   a = rep(1000, 6),
-#'   b = rep(1000.005, 6),
-#'   c = rep(0.0001, 6),
-#'   d = rep(-1, 6),
-#'   e = rep("3.2 (s.e. 1.4)", 6),
-#'   add_colnames = TRUE
-#' )
+#'         number_format = c(
+#'           "Default",
+#'           "NA",
+#'           "2",
+#'           "'%5.2f'",
+#'           "Pretty",
+#'           "Sign"
+#'         ),
+#'         a = rep(1000, 6),
+#'         b = rep(1000.005, 6),
+#'         c = rep(0.0001, 6),
+#'         d = rep(-1, 6),
+#'         e = rep("3.2 (s.e. 1.4)", 6),
+#'         add_colnames = TRUE
+#'       )
 #' number_format(ht)[3, -1] <- NA
 #' number_format(ht)[4, -1] <- 2
 #' number_format(ht)[5, -1] <- '%5.2f'
-#' number_format(ht)[6, -1] <- list(function(x) prettyNum(x, big.mark = ',', scientific = FALSE))
-#' number_format(ht)[7, -1] <- list(function(x) if(x>0) '+' else '-')
+#' number_format(ht)[6, -1] <- list(
+#'         function(x)
+#'           prettyNum(x, big.mark = ',',
+#'                 scientific = FALSE)
+#'       )
+#' number_format(ht)[7, -1] <- list(
+#'         function(x) if (x > 0) '+' else '-'
+#'       )
 #' right_border(ht) <- 1
 #' bottom_border(ht)[1, ] <- 1
 #' ht
@@ -695,10 +724,13 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #' ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
 #' # probably not what you want:
 #' ht_bands
+#'
 #' number_format(ht_bands) <- NA
 #' ht_bands
+#'
 #' # alternatively:
 #' huxtable("10000 Maniacs", autoformat = TRUE)
+#'
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val 2
 #' @templateVar attr_val2 3
@@ -810,8 +842,13 @@ make_getter_setters('height', 'table')
 #' @templateVar extra print_screen(ht)
 #' @seealso [caption_pos()]
 #' @examples
-#' ht <- hux(a = 1:2, b = 1:2)
-#' caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
+#'
+#' data(jams)
+#' jams <- as_hux(jams)
+#' # escape caption characters:
+#' caption(jams) <- sanitize(
+#'       'Make $$$ with jam',
+#'       type = 'latex')
 NULL
 make_getter_setters('caption', 'table', check_fun = is.character)
 

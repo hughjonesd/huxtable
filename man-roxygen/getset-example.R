@@ -4,7 +4,8 @@
 <% if (! exists('subscript')) subscript <- '' %>
 #' @examples
 #'
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' <%= attr_name %>(ht)<%= subscript %> <-  <%= attr_val %>
-#' <%= attr_name %>(ht)
+#' data(jams)
+#' jams <- as_hux(jams)
+#' <%= attr_name %>(jams)<%= subscript %> <-  <%= attr_val %>
+#' <%= attr_name %>(jams)
 #' <%= if (exists('extra')) gsub('## *', '\n#\' ', extra) %>

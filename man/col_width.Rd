@@ -31,9 +31,10 @@ The workaround is to adjust the width, so that your cells no longer overrun.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-col_width(ht) <-  c(.2, .8)
-col_width(ht)
+data(jams)
+jams <- as_hux(jams)
+col_width(jams) <-  c(.2, .8)
+col_width(jams)
 
 }
 \seealso{

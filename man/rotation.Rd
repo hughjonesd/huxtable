@@ -40,16 +40,17 @@ to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-rotation(ht) <-  90
-rotation(ht)
+data(jams)
+jams <- as_hux(jams)
+rotation(jams) <-  90
+rotation(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_rotation(ht, 90)
-rotation(ht2)
-ht3 <- set_rotation(ht, 1:2, 1, 90)
-rotation(ht3)
-ht4 <- set_rotation(ht, 1:2, 1:2, c(90, 270), byrow = TRUE)
-rotation(ht4)
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_rotation(jams, 90)
+rotation(jams2)
+jams3 <- set_rotation(jams, 1:2, 1, 90)
+rotation(jams3)
 }

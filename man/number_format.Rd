@@ -63,19 +63,32 @@ numbers in their entirety. The default value was "\%5.2f".
 }
 \examples{
 ht <- huxtable(
-  number_format = c("Default", "NA", "2", "\\"\%5.2f\\"", "Pretty", "Sign"),
-  a = rep(1000, 6),
-  b = rep(1000.005, 6),
-  c = rep(0.0001, 6),
-  d = rep(-1, 6),
-  e = rep("3.2 (s.e. 1.4)", 6),
-  add_colnames = TRUE
-)
+        number_format = c(
+          "Default",
+          "NA",
+          "2",
+          "'\%5.2f'",
+          "Pretty",
+          "Sign"
+        ),
+        a = rep(1000, 6),
+        b = rep(1000.005, 6),
+        c = rep(0.0001, 6),
+        d = rep(-1, 6),
+        e = rep("3.2 (s.e. 1.4)", 6),
+        add_colnames = TRUE
+      )
 number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
 number_format(ht)[5, -1] <- '\%5.2f'
-number_format(ht)[6, -1] <- list(function(x) prettyNum(x, big.mark = ',', scientific = FALSE))
-number_format(ht)[7, -1] <- list(function(x) if(x>0) '+' else '-')
+number_format(ht)[6, -1] <- list(
+        function(x)
+          prettyNum(x, big.mark = ',',
+                scientific = FALSE)
+      )
+number_format(ht)[7, -1] <- list(
+        function(x) if (x > 0) '+' else '-'
+      )
 right_border(ht) <- 1
 bottom_border(ht)[1, ] <- 1
 ht
@@ -83,15 +96,19 @@ ht
 ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
 # probably not what you want:
 ht_bands
+
 number_format(ht_bands) <- NA
 ht_bands
+
 # alternatively:
 huxtable("10000 Maniacs", autoformat = TRUE)
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_number_format(ht, 2)
-set_number_format(ht, 1:2, 1, 2)
-set_number_format(ht, 1:2, 1:2, c(2, 3), byrow = TRUE)
+
+data(jams)
+jams <- as_hux(jams)
+
+set_number_format(jams, 2)
+set_number_format(jams, 1:2, 1, 2)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

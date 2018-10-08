@@ -29,8 +29,9 @@ in \href{http://bookdown.org}{bookdown}.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-label(ht) <-  'tab:mytable'
-label(ht)
+data(jams)
+jams <- as_hux(jams)
+label(jams) <-  'tab:mytable'
+label(jams)
 
 }

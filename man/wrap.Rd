@@ -35,15 +35,21 @@ For \code{set_wrap} and \code{map_wrap}, the modified huxtable.
 Functions to get or set the \emph{text wrapping} property of huxtable cells.
 }
 \examples{
-ht <- huxtable(a = rep('Some long text', 2))
-wrap(ht)[1,] <- TRUE
-print_html(ht)
+ht <- huxtable(paste(
+      rep("Some long text.", 20),
+      collapse = " "))
+width(ht) <- 0.2
+wrap(ht) <- TRUE
+\dontrun{
+  quick_html(ht)
+}
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_wrap(ht, TRUE)
-wrap(ht2)
-ht3 <- set_wrap(ht, 1:2, 1, TRUE)
-wrap(ht3)
-ht4 <- set_wrap(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
-wrap(ht4)
+
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_wrap(jams, TRUE)
+wrap(jams2)
+jams3 <- set_wrap(jams, 1:2, 1, TRUE)
+wrap(jams3)
 }

@@ -54,12 +54,12 @@ NULL
 #' @export
 #'
 #' @examples
-#' set.seed(27101975)
-#' dfr <- data.frame(a = rnorm(100), b = rnorm(100))
-#' dfr$y <- dfr$a + rnorm(100)
-#' lm1 <- lm(y ~ a, dfr)
-#' lm2 <- lm(y ~ a + b, dfr)
-#' glm1 <- glm(I(y > 0) ~ a, dfr, family = binomial)
+#'
+#' lm1 <- lm(mpg ~ cyl, mtcars)
+#' lm2 <- lm(mpg ~ cyl + hp, mtcars)
+#' glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
+#'       family = binomial)
+#'
 #' huxreg(lm1, lm2, glm1)
 huxreg <- function (
         ...,

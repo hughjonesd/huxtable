@@ -30,8 +30,9 @@ TeX \code{float} package.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-latex_float(ht) <-  'h'
-latex_float(ht)
+data(jams)
+jams <- as_hux(jams)
+latex_float(jams) <-  'h'
+latex_float(jams)
 
 }

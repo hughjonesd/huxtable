@@ -35,14 +35,22 @@ For \code{set_escape_contents} and \code{map_escape_contents}, the modified huxt
 Functions to get or set the \emph{escape cell contents} property of huxtable cells.
 }
 \examples{
-ht <- huxtable(Exponent = 2:4, Example = paste0('$x^', 2:4, '$'))
+ht <- huxtable(
+        Exponent = 2:4,
+        Example  = paste0('$x^', 2:4, '$'),
+        add_colnames = TRUE
+      )
 escape_contents(ht)[,2] <- FALSE
+\dontrun{
+  quick_pdf(ht)
+}
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_escape_contents(ht, TRUE)
-escape_contents(ht2)
-ht3 <- set_escape_contents(ht, 1:2, 1, TRUE)
-escape_contents(ht3)
-ht4 <- set_escape_contents(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
-escape_contents(ht4)
+
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_escape_contents(jams, TRUE)
+escape_contents(jams2)
+jams3 <- set_escape_contents(jams, 1:2, 1, TRUE)
+escape_contents(jams3)
 }

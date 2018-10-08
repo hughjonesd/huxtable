@@ -40,13 +40,15 @@ a decimal point), then the cell is aligned on this character.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-align(ht) <-  'right'
-align(ht)
+data(jams)
+jams <- as_hux(jams)
+align(jams) <-  'right'
+align(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_align(ht, 'right')
-set_align(ht, 1:2, 1, 'right')
-set_align(ht, 1:2, 1:2, c('right', 'left'), byrow = TRUE)
+data(jams)
+jams <- as_hux(jams)
+
+set_align(jams, 'right')
+set_align(jams, 1:2, 1, 'right')
 }

@@ -24,11 +24,13 @@ Map numeric cell contents smoothly to colors
 }
 \examples{
 
-if (requireNamespace("scales")) {
-  ht <- as_hux(matrix(rnorm(25), 5, 5))
-  map_background_color(ht,
-          by_colorspace("red", "yellow", "blue"))
+if (! requireNamespace("scales")) {
+  stop("Please install the scales package to run this example")
 }
+ht <- as_hux(matrix(rnorm(25), 5, 5))
+map_background_color(ht,
+      by_colorspace("red", "yellow", "blue"))
+
 }
 \seealso{
 \link{mapping-functions}

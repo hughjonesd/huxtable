@@ -37,6 +37,7 @@ bold(ht2)
 ht3 <- dplyr::mutate(ht, x = a + b)
 ht3
 bold(ht3)
-ht4 <- dplyr::mutate(ht, x = a + b, copy_cell_props = FALSE)
+ht4 <- dplyr::mutate(ht, x = a + b,
+      copy_cell_props = FALSE)
 bold(ht4)
 }

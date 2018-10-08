@@ -36,18 +36,19 @@ Functions to get or set the \emph{font} property of huxtable cells.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-font(ht) <-  'times'
-font(ht)
+data(jams)
+jams <- as_hux(jams)
+font(jams) <-  'times'
+font(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_font(ht, 'times')
-font(ht2)
-ht3 <- set_font(ht, 1:2, 1, 'times')
-font(ht3)
-ht4 <- set_font(ht, 1:2, 1:2, c('times', 'arial'), byrow = TRUE)
-font(ht4)
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_font(jams, 'times')
+font(jams2)
+jams3 <- set_font(jams, 1:2, 1, 'times')
+font(jams3)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

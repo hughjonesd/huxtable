@@ -33,17 +33,24 @@ NULL
 #' @export
 #'
 #' @examples
-#' ht <- hux(a = 1:3, b = 1:3)
-#' wb <- as_Workbook(ht)
+#' data(jams)
+#' jams <- as_hux(jams,
+#'       add_colnames = TRUE)
+#' wb <- as_Workbook(jams)
 #'
 #' \dontrun{
-#' openxlsx::saveWorkbook(wb, "my-excel-file.xlsx")
+#'   openxlsx::saveWorkbook(wb,
+#'         "my-excel-file.xlsx")
 #' }
 #'
 #' # multiple sheets in a single workbook:
 #' wb <- openxlsx::createWorkbook()
-#' wb <- as_Workbook(ht, Workbook = wb, sheet = 'sheet1')
-#' wb <- as_Workbook(hux('Another', 'huxtable'), Workbook = wb, sheet = 'sheet2')
+#' wb <- as_Workbook(jams,
+#'       Workbook = wb, sheet = 'sheet1')
+#' wb <- as_Workbook(
+#'       hux('Another', 'huxtable'),
+#'       Workbook = wb,
+#'       sheet = 'sheet2')
 as_Workbook <- function (ht, ...) UseMethod('as_Workbook')
 
 

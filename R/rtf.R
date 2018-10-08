@@ -41,8 +41,10 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #' @family printing functions
 #'
 #' @examples
-#' ht <- hux(a = 1:3, b = letters[1:3])
-#' to_rtf(ht)
+#' data(jams)
+#' jams <- as_hux(jams)
+#'
+#' print_rtf(jams)
 to_rtf <- function (ht, ...) UseMethod('to_rtf')
 
 
@@ -239,7 +241,8 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
 #'
 #' @examples
 #'
-#' # Printing multiple huxtables
+#' # Printing multiple huxtables:
+#'
 #' ht <- huxtable("Blue with red border")
 #' ht <- set_all_borders(ht, 1)
 #' ht <- set_all_border_colors(ht, "red")
@@ -247,6 +250,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
 #'
 #' ht2 <- huxtable("Dark green text")
 #' text_color(ht2) <- "darkgreen"
+#'
 #' fc_tbls <- rtf_fc_tables(ht, ht2)
 #'
 #' # In the document header:

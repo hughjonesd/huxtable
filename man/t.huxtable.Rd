@@ -22,7 +22,11 @@ Other properties - in particular, alignment, vertical alignment and rotation - w
 preserved.
 }
 \examples{
-ht <- huxtable(a = 1:3, b = letters[1:3], autoformat = FALSE)
+ht <- huxtable(
+        a = 1:3,
+        b = letters[1:3],
+        autoformat = FALSE
+      )
 bottom_border(ht)[3,] <- 1
 ht
 t(ht)

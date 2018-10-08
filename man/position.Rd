@@ -29,8 +29,9 @@ explicitly.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-position(ht) <-  'right'
-position(ht)
+data(jams)
+jams <- as_hux(jams)
+position(jams) <-  'right'
+position(jams)
 
 }

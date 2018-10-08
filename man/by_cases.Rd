@@ -26,15 +26,17 @@ by \code{as.matrix}).
 value unchanged. To avoid this, set a default in the last formula: \code{TRUE ~ default}.
 }
 \examples{
-if (requireNamespace('dplyr')) {
-  ht <- hux(rnorm(5), rnorm(5), letters[1:5])
-
-  map_background_color(ht, by_cases(
-          . == "a" ~ "red",
-          . \%in\% letters ~ "green",
-          . < 0 ~ "pink"
-        ))
+if (! requireNamespace('dplyr')) {
+  stop("Please install the 'dplyr' package to run this example")
 }
+
+ht <- hux(runif(5), letters[1:5])
+
+map_background_color(ht, by_cases(
+        . == "a" ~ "red",
+        . \%in\% letters ~ "green",
+        . < 0.5 ~ "pink"
+      ))
 }
 \seealso{
 \link{mapping-functions}

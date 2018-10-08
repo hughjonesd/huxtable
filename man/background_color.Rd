@@ -36,15 +36,17 @@ Functions to get or set the \emph{background color} property of huxtable cells.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-background_color(ht) <-  grey(.95)
-background_color(ht)
+data(jams)
+jams <- as_hux(jams)
+background_color(jams) <-  grey(.95)
+background_color(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_background_color(ht, grey(.95))
-set_background_color(ht, 1:2, 1, grey(.95))
-set_background_color(ht, 1:2, 1:2, c(grey(.95), 'yellow'), byrow = TRUE)
+data(jams)
+jams <- as_hux(jams)
+
+set_background_color(jams, grey(.95))
+set_background_color(jams, 1:2, 1, grey(.95))
 }
 \seealso{
 Other formatting functions: \code{\link{bold}},

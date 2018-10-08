@@ -40,16 +40,17 @@ may help.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-valign(ht) <-  'bottom'
-valign(ht)
+data(jams)
+jams <- as_hux(jams)
+valign(jams) <-  'bottom'
+valign(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_valign(ht, 'bottom')
-valign(ht2)
-ht3 <- set_valign(ht, 1:2, 1, 'bottom')
-valign(ht3)
-ht4 <- set_valign(ht, 1:2, 1:2, c('bottom', 'bottom'), byrow = TRUE)
-valign(ht4)
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_valign(jams, 'bottom')
+valign(jams2)
+jams3 <- set_valign(jams, 1:2, 1, 'bottom')
+valign(jams3)
 }

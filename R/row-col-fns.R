@@ -25,11 +25,12 @@ NULL
 #'
 #' @examples
 #' ht <- huxtable(a = 1:10, b = 1:10)
-#' ht <- set_background_color(ht, every(3), everywhere, 'wheat')
-#' background_color(ht)
-#' ht <- set_align(ht, evens, 1:2, 'right')
-#' ht <- set_align(ht, odds, 1:2, 'center')
-#' align(ht)
+#' set_background_color(ht,
+#'       evens, everywhere,
+#'       "grey95")
+#' set_background_color(ht,
+#'       every(3), everywhere,
+#'       "grey95")
 #'
 every <- function(n = 1, from = n) {
   assert_that(is.count(n), is.count(from))
@@ -68,12 +69,9 @@ odds  <- every(2, 1)
 #' @export
 #'
 #' @examples
-#' ht <- hux(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
-#' ht <- set_align(ht, final(2), final(1), 'left')
-#' align(ht)
-#'
-#' final(3)(ht, 1) # last 3 rows
-#' final(3)(ht, 2) # last 3 columns
+#' data(jams)
+#' jams <- as_hux(jams)
+#' set_bold(jams, final(2), final(1), TRUE)
 final <- function(n = 1) {
   assert_that(is.count(n))
 
@@ -130,14 +128,18 @@ final <- function(n = 1) {
 #' @name rowspecs
 #'
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 5:1)
+#' data(jams)
+#' jams <- as_hux(jams,
+#'       add_colnames = TRUE)
 #'
-#' set_bold(ht, 2:4, 1:2, TRUE)
-#' set_bold(ht, odds, evens, TRUE)
-#' set_bold(ht, everywhere, tidyselect::matches('[aeiou]'), TRUE)
+#' set_bold(jams, 2:4, 1:2, TRUE)
+#' set_background_color(jams, evens, everywhere,
+#'       "grey95")
+#' set_bold(jams, everywhere,
+#'       tidyselect::matches("yp"), TRUE)
 #'
-#' set_text_color(ht, 2:3, 1:2, c('red', 'blue'))
-#' set_text_color(ht, 2:3, 1:2, c('red', 'blue'), byrow = TRUE)
+#' set_text_color(jams, 2:4, 1:2,
+#'       c("red", "violetred", "purple"))
 NULL
 
 #' @name where

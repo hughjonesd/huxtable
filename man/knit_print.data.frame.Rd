@@ -29,13 +29,20 @@ To turn this behaviour off, set \code{options(huxtable.knit_print_df = FALSE)}. 
 # in your knitr document
 mytheme <- function (ht) {
   ht <- set_all_borders(ht, 0.4)
-  ht <- set_all_border_colors(ht, "darkgreen")
-  ht <- set_background_color(ht, evens, odds, "salmon")
+  ht <- set_all_border_colors(ht,
+        "darkgreen")
+  ht <- set_background_color(ht,
+        evens, odds, "salmon")
   ht
 }
 
-options(huxtable.knit_print_df_theme = mytheme)
-data.frame(a = 1:5, b = 1:5) # groovy!
+options(huxtable.knit_print_df_theme
+      = mytheme)
+# groovy!
+data.frame(
+        a = 1:5,
+        b = 1:5
+      )
 }
 }
 \seealso{

@@ -18,9 +18,11 @@ NULL
 #' @export
 #'
 #' @examples
-#' ht <- hux(a = 1:5, b = 1:5, d = 1:5)
-#' ht <- add_footnote(ht, '* this is a footnote')
-#' ht
+#' data(jams)
+#' jams <- as_hux(jams)
+#' jams <- add_footnote(jams,
+#'       '* subject to availability')
+#' jams
 add_footnote <- function(ht, text, border = 0.8, ...) {
   nr <- nrow(ht) + 1
   nc <- ncol(ht)
@@ -54,8 +56,8 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 #' @export
 #'
 #' @examples
-#' foo <- 'Make $$$ with us'
-#' sanitize(foo, type = 'latex')
+#' txt <- 'Make $$$ with us'
+#' sanitize(txt, type = 'latex')
 sanitize <- function (str, type = c('latex', 'html', 'rtf')) {
   type <- match.arg(type)
   result <- str
@@ -189,10 +191,8 @@ hux_hex <- function () {
 #'   `options("huxtable.knitr_output_format")` in [huxtable-options]
 #' @examples
 #' \dontrun{
-#' # to print LaTeX output:
-#' options(huxtable.print = print_latex)
-#' # to print huxtables like data frames:
-#' options(huxtable.print = function(x, ...) print(as.data.frame(x)))
+#'   # to print LaTeX output:
+#'   options(huxtable.print = print_latex)
 #' }
 print.huxtable <- function(x, ...) {
   meth <- getOption('huxtable.print', default = print_screen)
@@ -209,9 +209,11 @@ print.huxtable <- function(x, ...) {
 #' @export
 #'
 #' @examples
-#' ht <- hux(a = 1:3, b = 4:6)
-#' format(ht, output = 'screen')
-#' format(ht, output = 'md')
+#' data(jams)
+#' jams <- as_hux(jams)
+#'
+#' format(jams, output = 'screen')
+#' format(jams, output = 'md')
 format.huxtable <- function(x, ..., output) {
   assert_that(is.string(output))
   assert_that(output %in% c('latex', 'html', 'md', 'screen'))

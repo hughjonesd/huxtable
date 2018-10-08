@@ -30,15 +30,21 @@ These functions combine two matrix-like objects and return the result.
 For \code{huxtable} objects, arguments in \code{...} can include \code{copy_cell_props}.
 }
 \examples{
-ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
+ht <- hux(
+        Jam = c('Raspberry', 'Plum'),
+        Price = c(1.90, 1.80),
+        add_colnames = TRUE
+      )
+
 ht2 <- hux('Gooseberry', 2.10)
 add_rows(ht, ht2)
 add_rows(ht, ht2, after = 1)
-mx <- matrix(c('Sugar', '50\%', '60\%', 'Weight (g)', 300, 250), 3, 2)
+
+mx <- matrix(
+      c('Sugar', '50\%', '60\%',
+      'Weight (g)', 300, 250),
+      3, 2)
 add_columns(ht, mx, after = 'Jam')
-ht <- hux(a = 1:3, b = 1:3)
-ht2 <- hux(d = letters[1:3])
-add_columns(ht, ht2, after = "a")
 }
 \seealso{
 \code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert multiple values into a single row.

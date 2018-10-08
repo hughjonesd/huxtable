@@ -107,6 +107,12 @@ NULL
 #' @name huxtable-deprecated
 NULL
 
+#' Prices of 3 jams
+#'
+#' A dataset of jams.
+#'
+#' @format A data frame with 3 rows and 2 columns ("Type" and "Price").
+"jams"
 
 .onLoad <- function(libname, pkgname) {
 

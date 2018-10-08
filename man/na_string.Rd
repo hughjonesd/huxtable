@@ -36,19 +36,20 @@ Functions to get or set the \emph{na string} property of huxtable cells.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-na_string(ht) <-  '--'
-na_string(ht)
+data(jams)
+jams <- as_hux(jams)
+na_string(jams) <-  '--'
+na_string(jams)
 ht[2,2] <- NA 
 print_screen(ht)
 
-ht <- huxtable(a = 1:3, b = 3:1)
-ht2 <- set_na_string(ht, '--')
-na_string(ht2)
-ht3 <- set_na_string(ht, 1:2, 1, '--')
-na_string(ht3)
-ht4 <- set_na_string(ht, 1:2, 1:2, c('--', ''), byrow = TRUE)
-na_string(ht4)
+data(jams)
+jams <- as_hux(jams)
+
+jams2 <- set_na_string(jams, '--')
+na_string(jams2)
+jams3 <- set_na_string(jams, 1:2, 1, '--')
+na_string(jams3)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

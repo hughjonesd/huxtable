@@ -74,7 +74,7 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 #' @return `check_latex_dependencies()` returns `TRUE` or `FALSE`.
 #' @examples
 #' \dontrun{
-#' check_latex_dependencies()
+#'   check_latex_dependencies()
 #' }
 check_latex_dependencies <- function (quiet = FALSE) {
   assert_that(is.flag(quiet))

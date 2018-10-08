@@ -7,7 +7,18 @@ TODO
 Priority changes
 ================
 
-* Easy way not to have `rownames` when you do add_rownames in as_hux.
+* Mapping functions:
+  - docs should warn about as.matrix and conversion
+  - consistent policy on NA results
+  - deprecate byrow in favour of by_rows()
+  
+* Examples to use a simple dataset like pots of jam.
+
+* Way to edit p values/ cis in huxreg?
+  - One possibility is `tidy_override(modelx, ...)` which has a `tidy` method. `...` args
+    replace columns in the underlying output from `tidy.original_object`.
+
+* `fill=xxx` option for filling `insert_row` etc. 
 
 * Update website from website-4.3-changes branch
 

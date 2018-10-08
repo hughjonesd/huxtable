@@ -59,12 +59,14 @@ if this already exists, you will be asked to confirm manually before proceeding.
 }
 \examples{
 \dontrun{
-m <- matrix(1:4, 2, 2)
-dfr <- data.frame(a = 1:5, b = 1:5)
-quick_pdf(m, dfr)
-quick_html(m, dfr)
-quick_docx(m, dfr)
-quick_xlsx(m, dfr)
-quick_pptx(m, dfr)
+  data(jams)
+  m <- matrix(1:4, 2, 2)
+
+  quick_pdf(m, jams)
+  quick_html(m, jams)
+  quick_docx(m, jams)
+  quick_xlsx(m, jams)
+  quick_pptx(m, jams)
+  quick_rtf(m, jams)
 }
 }

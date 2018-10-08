@@ -76,15 +76,17 @@ release.
 
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-left_border(ht) <-  1
-left_border(ht)
+data(jams)
+jams <- as_hux(jams)
+left_border(jams) <-  1
+left_border(jams)
 print_screen(ht)
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_left_border(ht, 1)
-set_left_border(ht, 1:2, 1, 1)
-set_left_border(ht, 1:2, 1:2, c(1, 2), byrow = TRUE)
+data(jams)
+jams <- as_hux(jams)
+
+set_left_border(jams, 1)
+set_left_border(jams, 1:2, 1, 1)
 # When cells span multiple rows:
 ht <- tribble_hux(
   ~Col1,                   ~Col2,

@@ -23,7 +23,9 @@ This adds a single row at the bottom. The first cell contains the footnote; it s
 all table columns and has an optional border above.
 }
 \examples{
-ht <- hux(a = 1:5, b = 1:5, d = 1:5)
-ht <- add_footnote(ht, '* this is a footnote')
-ht
+data(jams)
+jams <- as_hux(jams)
+jams <- add_footnote(jams,
+      '* subject to availability')
+jams
 }

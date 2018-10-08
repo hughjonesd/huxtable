@@ -36,7 +36,8 @@ knit_print.huxtable <- function (x, options, ...) {
   if (of == 'latex') {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
-    if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
+    if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps,
+          list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
   } else if (of == 'html') {
     res <- knitr::asis_output(htmlPreserve(res))
@@ -68,13 +69,20 @@ knit_print.huxtable <- function (x, options, ...) {
 #' # in your knitr document
 #' mytheme <- function (ht) {
 #'   ht <- set_all_borders(ht, 0.4)
-#'   ht <- set_all_border_colors(ht, "darkgreen")
-#'   ht <- set_background_color(ht, evens, odds, "salmon")
+#'   ht <- set_all_border_colors(ht,
+#'         "darkgreen")
+#'   ht <- set_background_color(ht,
+#'         evens, odds, "salmon")
 #'   ht
 #' }
 #'
-#' options(huxtable.knit_print_df_theme = mytheme)
-#' data.frame(a = 1:5, b = 1:5) # groovy!
+#' options(huxtable.knit_print_df_theme
+#'       = mytheme)
+#' # groovy!
+#' data.frame(
+#'         a = 1:5,
+#'         b = 1:5
+#'       )
 #' }
 knit_print.data.frame <- function(x, options, ...) {
   if (! isTRUE(getOption('huxtable.knit_print_df', TRUE))) {

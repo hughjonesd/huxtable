@@ -50,9 +50,10 @@ and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-rowspan(ht)[1, 1] <-  2
-rowspan(ht)
+data(jams)
+jams <- as_hux(jams)
+rowspan(jams)[1, 1] <-  2
+rowspan(jams)
 ht <- set_all_borders(ht, 1) 
 ht
 }

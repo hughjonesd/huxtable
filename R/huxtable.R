@@ -47,7 +47,11 @@ NULL
 #' @seealso [huxtable-options]
 #'
 #' @examples
-#' ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
+#' ht <- huxtable(
+#'         column1 = 1:5,
+#'         column2 = letters[1:5]
+#'       )
+#' ht
 huxtable <- function (
         ...,
         add_colnames = getOption("huxtable.add_colnames", FALSE),
@@ -109,16 +113,24 @@ tribble_hux <- function (...,
 #'
 #' @export
 #' @examples
-#' dfr <- data.frame(a = 1:5, b = letters[1:5], stringsAsFactors = FALSE)
+#' dfr <- data.frame(
+#'         a = 1:5,
+#'         b = letters[1:5],
+#'         stringsAsFactors = FALSE
+#'       )
 #' as_huxtable(dfr)
 #' mx <- matrix(letters[1:12], 4, 3)
 #' as_huxtable(mx)
 #' library(stats)
-#' tbl <- table(Wool = warpbreaks$wool, Tension = warpbreaks$tension)
+#' tbl <- table(
+#'         Wool    = warpbreaks$wool,
+#'         Tension = warpbreaks$tension
+#'       )
 #' as_huxtable(tbl) # adds row and column names by default
 #'
 #' # adding rownames:
-#' as_hux(mtcars[1:3,], add_colnames = TRUE, add_rownames = "Car")
+#' as_hux(mtcars[1:3,], add_colnames = TRUE,
+#'       add_rownames = "Car")
 #'
 as_huxtable <- function (x, ...) UseMethod('as_huxtable')
 
@@ -229,18 +241,23 @@ as_huxtable.numeric <- function (x, ...) {
   as_huxtable.default(as.matrix(x), ...)
 }
 
+
 #' @export
 as_huxtable.character <- as_huxtable.numeric
+
 
 #' @export
 as_huxtable.logical   <- as_huxtable.numeric
 
+
 #' @export
 as_huxtable.complex   <- as_huxtable.numeric
+
 
 #' @export
 #' @rdname as_huxtable
 is_huxtable <- function (x) inherits(x, 'huxtable')
+
 
 #' @export
 #' @rdname as_huxtable

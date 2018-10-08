@@ -41,7 +41,7 @@ or \code{tlmgr install} directly.
 report_latex_dependencies()
 
 \dontrun{
-check_latex_dependencies()
+  check_latex_dependencies()
 }
 
 \dontrun{

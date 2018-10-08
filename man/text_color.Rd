@@ -39,15 +39,17 @@ Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"}
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-text_color(ht) <-  'blue'
-text_color(ht)
+data(jams)
+jams <- as_hux(jams)
+text_color(jams) <-  'blue'
+text_color(jams)
 
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_text_color(ht, 'blue')
-set_text_color(ht, 1:2, 1, 'blue')
-set_text_color(ht, 1:2, 1:2, c('blue', 'red'), byrow = TRUE)
+data(jams)
+jams <- as_hux(jams)
+
+set_text_color(jams, 'blue')
+set_text_color(jams, 1:2, 1, 'blue')
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

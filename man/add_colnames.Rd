@@ -40,11 +40,20 @@ move your rows down by one: what was row 1 will now be row 2, and the column nam
 \code{add_colnames} preserves column names. \code{add_rownames} only preserves them if asked to.
 }
 \examples{
-ht <- huxtable(a = 1:5, b = 1:5)
+ht <- huxtable(
+        First  = rnorm(5),
+        Second = rnorm(5)
+      )
 add_rownames(ht)
 add_colnames(ht)
-add_rownames(add_colnames(ht)) # Out by 1
-add_colnames(add_rownames(ht)) # Better
-add_colnames(add_rownames(ht, '')) # Alternatively
+
+# Out by 1:
+add_rownames(add_colnames(ht))
+
+# Better:
+add_colnames(add_rownames(ht))
+
+# Alternatively:
+add_colnames(add_rownames(ht, ''))
 
 }

@@ -30,9 +30,10 @@ treated as proportions of the text height (\code{\\textheight}).
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-row_height(ht) <-  c(.2, .1, .1)
-row_height(ht)
+data(jams)
+jams <- as_hux(jams)
+row_height(jams) <-  c(.2, .1, .1)
+row_height(jams)
 
 }
 \seealso{

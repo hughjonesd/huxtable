@@ -43,11 +43,16 @@ styles). If the \code{crayon} package is installed, output will be colorized (an
 italicized) by default; this will work in recent daily builds of RStudio as of October 2017.
 }
 \examples{
-ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
-ht <- set_all_borders(ht, 1:6, 1:2, 1)
-right_border(ht)[,1] <- left_border(ht)[,2] <- 0
-align(ht)[1,] <- 'left'
-print_screen(ht)
+data(jams)
+jams <- as_hux(jams,
+      add_colnames = TRUE)
+
+bottom_border(jams)[1, 1:2] <- 1
+bold(jams)[1, 1:2] <- TRUE
+jams <- map_text_color(jams,
+      by_regex("berry" = "red"))
+
+print_screen(jams)
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},

@@ -187,7 +187,8 @@ set_outer_borders <- function(ht, row, col, value) {
 #'
 #' @examples
 #' ht <- hux(a = 1:3, b = 1:3)
-#' ht <- set_cell_properties(ht, 1, 1, italic = TRUE, text_color = 'red')
+#' ht <- set_cell_properties(ht, 1, 1,
+#'       italic = TRUE, text_color = 'red')
 #' text_color(ht)
 #' ht
 set_cell_properties <- function (ht, row, col, ...) {

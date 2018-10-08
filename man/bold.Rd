@@ -47,15 +47,17 @@ Functions to get or set the \emph{cell text style} property of huxtable cells.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-bold(ht) <-  TRUE
-bold(ht)
+data(jams)
+jams <- as_hux(jams)
+bold(jams) <-  TRUE
+bold(jams)
 print_screen(ht)
 
-ht <- huxtable(a = 1:3, b = 3:1)
-set_bold(ht, TRUE)
-set_bold(ht, 1:2, 1, TRUE)
-set_bold(ht, 1:2, 1:2, c(TRUE, FALSE), byrow = TRUE)
+data(jams)
+jams <- as_hux(jams)
+
+set_bold(jams, TRUE)
+set_bold(jams, 1:2, 1, TRUE)
 }
 \seealso{
 Other formatting functions: \code{\link{background_color}},

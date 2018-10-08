@@ -44,15 +44,18 @@ row properties will be copied into the replaced rows of \code{x}.
 Replacement functions \code{$<-} and \code{[[<-} change the data without affecting any properties.
 }
 \examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
-ht[1:2,]
-ht[,1]
+ht <- huxtable(
+        a = 1:3,
+        b = letters[1:3]
+      )
+
+ht[1:2, ]
+ht[, 1]
 ht$a
 ht <- huxtable(a = 1:3, b = 1:3)
 ht2 <- huxtable(10:11, 12:13)
 bold(ht2) <- TRUE
 ht[2:3,] <- ht2
 ht
-bold(ht)
 
 }

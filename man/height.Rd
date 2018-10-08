@@ -25,9 +25,10 @@ Functions to get or set the table-level \emph{table height} property of a huxtab
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-height(ht) <-  0.4
-height(ht)
+data(jams)
+jams <- as_hux(jams)
+height(jams) <-  0.4
+height(jams)
 
 }
 \seealso{

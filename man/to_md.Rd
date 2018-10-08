@@ -36,8 +36,11 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 \code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
 }
 \examples{
-ht <- huxtable(a = 1:5, b = 1:5)
-print_md(ht)
+data(jams)
+jams <- as_hux(jams,
+      add_colnames = TRUE)
+
+print_md(jams)
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},

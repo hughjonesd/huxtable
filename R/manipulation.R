@@ -26,11 +26,20 @@ NULL
 #' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
 #'
 #' @examples
-#' ht <- hux(Jam = c('Blackberry', 'Strawberry'), Price = c(1.90, 1.80), add_colnames = TRUE)
+#' ht <- hux(
+#'         Jam = c('Raspberry', 'Plum'),
+#'         Price = c(1.90, 1.80),
+#'         add_colnames = TRUE
+#'       )
+#'
 #' ht2 <- hux('Gooseberry', 2.10)
 #' add_rows(ht, ht2)
 #' add_rows(ht, ht2, after = 1)
-#' mx <- matrix(c('Sugar', '50%', '60%', 'Weight (g)', 300, 250), 3, 2)
+#'
+#' mx <- matrix(
+#'       c('Sugar', '50%', '60%',
+#'       'Weight (g)', 300, 250),
+#'       3, 2)
 #' add_columns(ht, mx, after = 'Jam')
 add_rows <- function (x, y, after = nrow(x), ...) {
   add_row_cols(x, y, after, dimno = 1, ...)
@@ -39,10 +48,6 @@ add_rows <- function (x, y, after = nrow(x), ...) {
 
 #' @export
 #' @rdname add_rows
-#' @examples
-#' ht <- hux(a = 1:3, b = 1:3)
-#' ht2 <- hux(d = letters[1:3])
-#' add_columns(ht, ht2, after = "a")
 add_columns <- function (x, y, after = ncol(x), ...) {
   add_row_cols(x, y, after, dimno = 2, ...)
 }
@@ -92,7 +97,9 @@ add_row_cols <- function (x, y, after, dimno, ...) {
 #'
 #' @examples
 #' ht <- hux(a = 1:5, b = 1:5, c = 1:5)
-#' insert_row(ht, 2.5, 2.5, 2.5, after = 2)
+#' insert_row(ht, 2.5, 2.5, 2.5,
+#'       after = 2)
+#'
 #' insert_column(ht, 5:1)
 #' insert_column(ht, 5:1, after = 3)
 #' insert_column(ht, 5:1, after = "b")
@@ -165,9 +172,13 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #'
 #' Replacement functions `$<-` and `[[<-` change the data without affecting any properties.
 #' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3])
-#' ht[1:2,]
-#' ht[,1]
+#' ht <- huxtable(
+#'         a = 1:3,
+#'         b = letters[1:3]
+#'       )
+#'
+#' ht[1:2, ]
+#' ht[, 1]
 #' ht$a
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   ss <- as.data.frame(x)[i, j, drop = drop]
@@ -209,7 +220,6 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' bold(ht2) <- TRUE
 #' ht[2:3,] <- ht2
 #' ht
-#' bold(ht)
 #'
 `[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
@@ -327,15 +337,17 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #'
 #' @examples
 #' ht1 <- hux(a = 1:3, b = 4:6)
-#' ht2 <- hux(d = letters[1:3], e = letters[4:6])
-#' bold(ht1)[1,] <- TRUE
+#' ht2 <- hux(
+#'         d = letters[1:3],
+#'         e = letters[4:6]
+#'       )
+#' bold(ht1)[1, ] <- TRUE
 #' bold(ht2) <- TRUE
 #' vec <- LETTERS[1:3]
 #'
-#' ht_out <- cbind(ht1, vec, ht2)
-#' ht_out
-#' bold(ht_out)
-#' bold(cbind(ht1, vec, ht2, copy_cell_props = FALSE))
+#' cbind(ht1, vec, ht2)
+#' cbind(ht1, vec, ht2,
+#'       copy_cell_props = FALSE)
 #'
 #' @export
 cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
@@ -527,7 +539,11 @@ merge_props <- function (res, first, second, type = c('cbind', 'rbind'), copy_ce
 #' Other properties - in particular, alignment, vertical alignment and rotation - will be
 #' preserved.
 #' @examples
-#' ht <- huxtable(a = 1:3, b = letters[1:3], autoformat = FALSE)
+#' ht <- huxtable(
+#'         a = 1:3,
+#'         b = letters[1:3],
+#'         autoformat = FALSE
+#'       )
 #' bottom_border(ht)[3,] <- 1
 #' ht
 #' t(ht)
@@ -577,12 +593,21 @@ t.huxtable <- function (x) {
 #' @return The modified object.
 #'
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 1:5)
+#' ht <- huxtable(
+#'         First  = rnorm(5),
+#'         Second = rnorm(5)
+#'       )
 #' add_rownames(ht)
 #' add_colnames(ht)
-#' add_rownames(add_colnames(ht)) # Out by 1
-#' add_colnames(add_rownames(ht)) # Better
-#' add_colnames(add_rownames(ht, '')) # Alternatively
+#'
+#' # Out by 1:
+#' add_rownames(add_colnames(ht))
+#'
+#' # Better:
+#' add_colnames(add_rownames(ht))
+#'
+#' # Alternatively:
+#' add_colnames(add_rownames(ht, ''))
 #'
 #' @export
 add_colnames <- function (ht, ...) UseMethod('add_colnames')

@@ -24,8 +24,31 @@
 #' @name themes
 #'
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 1:5)
-#' theme_striped(ht)
+#' data(jams)
+#' jams <- as_hux(jams,
+#'       add_colnames = TRUE)
+#'
+#' theme_striped(jams)
+#' theme_plain(jams)
+#' theme_basic(jams)
+#' theme_article(jams)
+#' theme_mondrian(jams)
+#' \dontrun{
+#'   quick_pdf(
+#'           theme_striped(jams),
+#'           theme_plain(jams),
+#'           theme_basic(jams),
+#'           theme_article(jams),
+#'           theme_mondrian(jams)
+#'         )
+#'   quick_html(
+#'           theme_striped(jams),
+#'           theme_plain(jams),
+#'           theme_basic(jams),
+#'           theme_article(jams),
+#'           theme_mondrian(jams)
+#'         )
+#' }
 NULL
 
 

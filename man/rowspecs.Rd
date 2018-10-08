@@ -51,12 +51,16 @@ return functions for this purpose.
 }
 
 \examples{
-ht <- huxtable(a = 1:5, b = 5:1)
+data(jams)
+jams <- as_hux(jams,
+      add_colnames = TRUE)
 
-set_bold(ht, 2:4, 1:2, TRUE)
-set_bold(ht, odds, evens, TRUE)
-set_bold(ht, everywhere, tidyselect::matches('[aeiou]'), TRUE)
+set_bold(jams, 2:4, 1:2, TRUE)
+set_background_color(jams, evens, everywhere,
+      "grey95")
+set_bold(jams, everywhere,
+      tidyselect::matches("yp"), TRUE)
 
-set_text_color(ht, 2:3, 1:2, c('red', 'blue'))
-set_text_color(ht, 2:3, 1:2, c('red', 'blue'), byrow = TRUE)
+set_text_color(jams, 2:4, 1:2,
+      c("red", "violetred", "purple"))
 }

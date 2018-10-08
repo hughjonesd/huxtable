@@ -20,9 +20,9 @@ A function for use in \code{map_***} functions.
 \examples{
 ht <- as_hux(matrix(rnorm(25), 5, 5))
 map_background_color(ht,
-      by_rows('forestgreen', '#E0E0E0'))
+      by_rows('green', 'grey'))
 map_background_color(ht,
-      by_cols('forestgreen', '#E0E0E0'))
+      by_cols('green', 'grey'))
 }
 \seealso{
 \link{mapping-functions}

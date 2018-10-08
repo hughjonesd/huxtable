@@ -51,7 +51,9 @@ ht <- hux(a = 1:3, b = 1:3)
 ft <- as_flextable(ht)
 \dontrun{
   my_doc <- officer::read_docx()
-  my_doc <- flextable::body_add_flextable(my_doc, ft)
-  print(my_doc, target = "path/to/my_doc.docx")
+  my_doc <- flextable::body_add_flextable(
+        my_doc, ft)
+  print(my_doc, target =
+        "path/to/my_doc.docx")
 }
 }

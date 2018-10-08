@@ -154,9 +154,9 @@ by_values <- function (...) {
 #' @examples
 #' ht <- as_hux(matrix(rnorm(25), 5, 5))
 #' map_background_color(ht,
-#'       by_rows('forestgreen', '#E0E0E0'))
+#'       by_rows('green', 'grey'))
 #' map_background_color(ht,
-#'       by_cols('forestgreen', '#E0E0E0'))
+#'       by_cols('green', 'grey'))
 by_rows <- function (..., from = 1) {
   vals <- c(...)
   assert_that(is.count(from))
@@ -213,11 +213,12 @@ by_cols <- function (..., from = 1) {
 #'
 #' @examples
 #' ht <- huxtable(c(1, 3, 5))
-#' ht <- map_background_color(ht,
-#'       by_ranges(c(2, 4),
+#' map_background_color(ht,
+#'       by_ranges(
+#'         c(2, 4),
 #'         c("red", "yellow", "blue")
 #'       ))
-#' ht
+#'
 #' map_background_color(ht,
 #'       by_ranges(
 #'         c(2, 4),
@@ -331,11 +332,15 @@ by_equal_groups <- function (n, values) {
 #'
 #' @examples
 #' ht <- hux("The cat sat", "on the", "mat")
+#'
 #' map_bold(ht, by_regex('at' = TRUE))
 #' map_bold(ht, by_regex('a.*a' = TRUE))
+#'
 #' map_bold(ht, by_regex(
 #'         'the' = TRUE,
-#'         .grepl_args = list(ignore.case = TRUE)
+#'         .grepl_args = list(
+#'           ignore.case = TRUE
+#'         )
 #'       ))
 by_regex <- function(..., .grepl_args = list()) {
   vals <- c(...)
@@ -377,11 +382,13 @@ by_regex <- function(..., .grepl_args = list()) {
 #'
 #' @examples
 #'
-#' if (requireNamespace("scales")) {
-#'   ht <- as_hux(matrix(rnorm(25), 5, 5))
-#'   map_background_color(ht,
-#'           by_colorspace("red", "yellow", "blue"))
+#' if (! requireNamespace("scales")) {
+#'   stop("Please install the scales package to run this example")
 #' }
+#' ht <- as_hux(matrix(rnorm(25), 5, 5))
+#' map_background_color(ht,
+#'       by_colorspace("red", "yellow", "blue"))
+#'
 by_colorspace <- function (..., range = NULL, na_color = NA) {
   assert_package('by_colorspace', 'scales')
   palette <- c(...)
@@ -408,7 +415,8 @@ by_colorspace <- function (..., range = NULL, na_color = NA) {
 #' @examples
 #' ht <- as_hux(matrix(runif(20), 5, 4))
 #'
-#' map_background_color(ht, by_function(grey))
+#' map_background_color(ht,
+#'       by_function(grey))
 #'
 #' if (requireNamespace('scales')) {
 #'   map_text_color(ht, by_function(
@@ -448,15 +456,17 @@ by_function <- function (inner_fn) {
 #' @export
 #'
 #' @examples
-#' if (requireNamespace('dplyr')) {
-#'   ht <- hux(rnorm(5), rnorm(5), letters[1:5])
-#'
-#'   map_background_color(ht, by_cases(
-#'           . == "a" ~ "red",
-#'           . %in% letters ~ "green",
-#'           . < 0 ~ "pink"
-#'         ))
+#' if (! requireNamespace('dplyr')) {
+#'   stop("Please install the 'dplyr' package to run this example")
 #' }
+#'
+#' ht <- hux(runif(5), letters[1:5])
+#'
+#' map_background_color(ht, by_cases(
+#'         . == "a" ~ "red",
+#'         . %in% letters ~ "green",
+#'         . < 0.5 ~ "pink"
+#'       ))
 by_cases <- function (..., skip_na = TRUE) {
   assert_that(is.flag(skip_na))
   assert_package('by_cases', 'dplyr')

@@ -26,7 +26,10 @@ to_latex(ht, ...)
 Create LaTeX representing a huxtable
 }
 \examples{
-ht <- huxtable(a = 1:3, b = letters[1:3])
+ht <- huxtable(
+        a = 1:3,
+        b = letters[1:3]
+      )
 print_latex(ht)
 }
 \seealso{

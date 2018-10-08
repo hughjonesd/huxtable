@@ -50,8 +50,10 @@ and colors won't work in this context.
 }
 
 \examples{
-ht <- hux(a = 1:3, b = letters[1:3])
-to_rtf(ht)
+data(jams)
+jams <- as_hux(jams)
+
+print_rtf(jams)
 }
 \seealso{
 Other printing functions: \code{\link{print_html}},

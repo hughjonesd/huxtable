@@ -29,11 +29,16 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @export
 #' @family printing functions
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
-#' ht <- set_all_borders(ht, 1:6, 1:2, 1)
-#' right_border(ht)[,1] <- left_border(ht)[,2] <- 0
-#' align(ht)[1,] <- 'left'
-#' print_screen(ht)
+#' data(jams)
+#' jams <- as_hux(jams,
+#'       add_colnames = TRUE)
+#'
+#' bottom_border(jams)[1, 1:2] <- 1
+#' bold(jams)[1, 1:2] <- TRUE
+#' jams <- map_text_color(jams,
+#'       by_regex("berry" = "red"))
+#'
+#' print_screen(jams)
 to_screen  <- function (ht, ...) UseMethod('to_screen')
 
 
@@ -178,8 +183,11 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @family printing functions
 #'
 #' @examples
-#' ht <- huxtable(a = 1:5, b = 1:5)
-#' print_md(ht)
+#' data(jams)
+#' jams <- as_hux(jams,
+#'       add_colnames = TRUE)
+#'
+#' print_md(jams)
 to_md <- function(ht, ...) UseMethod('to_md')
 
 

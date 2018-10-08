@@ -28,14 +28,14 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
 }
 \examples{
 \dontrun{
-# to print LaTeX output:
-options(huxtable.print = print_latex)
-# to print huxtables like data frames:
-options(huxtable.print = function(x, ...) print(as.data.frame(x)))
+  # to print LaTeX output:
+  options(huxtable.print = print_latex)
 }
-ht <- hux(a = 1:3, b = 4:6)
-format(ht, output = 'screen')
-format(ht, output = 'md')
+data(jams)
+jams <- as_hux(jams)
+
+format(jams, output = 'screen')
+format(jams, output = 'md')
 }
 \seealso{
 To change how huxtables are printed within \code{knitr}, see

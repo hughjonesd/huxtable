@@ -28,12 +28,18 @@ Captions are not escaped. See the example for a workaround.
 }
 \examples{
 
-ht <- huxtable(a = 1:3, b = 1:3)
-caption(ht) <-  'An example table'
-caption(ht)
+data(jams)
+jams <- as_hux(jams)
+caption(jams) <-  'An example table'
+caption(jams)
 print_screen(ht)
-ht <- hux(a = 1:2, b = 1:2)
-caption(ht) <- sanitize('Make $$$ with us', type = 'latex') # escape caption characters
+
+data(jams)
+jams <- as_hux(jams)
+# escape caption characters:
+caption(jams) <- sanitize(
+      'Make $$$ with jam',
+      type = 'latex')
 }
 \seealso{
 \code{\link[=caption_pos]{caption_pos()}}
