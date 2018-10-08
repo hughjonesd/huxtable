@@ -2,6 +2,7 @@
 % Please edit documentation in R/mapping-functions.R
 \name{mapping-functions}
 \alias{mapping-functions}
+\alias{mapping_functions}
 \title{How to set cell properties variably by cell contents}
 \value{
 The modified huxtable.

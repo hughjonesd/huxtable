@@ -6,14 +6,18 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 # huxtable 4.2.0.9000
 
 * New `map_xxx` functions to set properties variably by cell values.
-* Functions for mapping properties variably: `by_values`, `by_ranges`, `by_quantiles` etc.
+* Functions for mapping properties variably: `by_rows`, `by_values`, `by_ranges`,
+  `by_quantiles` etc.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
-* In `huxtable()` and friends, `add_rownames = "Colname"` now sets the name for the new column.
-* Improvements to the vignette.
+* Enhancement: in `huxtable()` and friends, `add_rownames = "Colname"` now 
+  sets the name for the new column.
+* Improvements to the vignette and help files.
+
 
 ## Deprecated
 
-* The 3 argument form of `set_xxx` functions is deprecated. Use `set_xxx_by` instead.
+* The 3 argument form of `set_xxx` functions is deprecated. Use `map_xxx` instead.
+* Argument `byrow` is soft-deprecated. Use `by_cols` instead.
 
 # huxtable 4.2.0
 

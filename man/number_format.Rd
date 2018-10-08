@@ -23,9 +23,9 @@ Note that setting to \code{NA} does not reset to the default.}
 
 \item{col}{An optional column specifier.}
 
-\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
-
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{byrow}{Logical: set values along rows. Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{number_format}, the \code{number_format} property.

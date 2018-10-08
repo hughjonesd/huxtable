@@ -2,6 +2,7 @@
 % Please edit documentation in R/get-set-convenience.R
 \name{set-multiple}
 \alias{set-multiple}
+\alias{set_multiple}
 \alias{set_all_borders}
 \alias{map_all_borders}
 \alias{set_all_border_colors}
@@ -34,15 +35,15 @@ set_outer_borders(ht, row, col, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier. See \link{rowspecs}.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{value}{Value(s) to set. Set to \code{NA} to reset to the default.}
 
-\item{byrow}{If \code{TRUE}, fill in values by row rather than by column.}
+\item{byrow}{Logical: set values along rows. Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 
-\item{fn}{A mapping function. See \link{mapping-functions}.}
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 The modified huxtable.

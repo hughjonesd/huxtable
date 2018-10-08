@@ -58,15 +58,12 @@ get_default_properties <- function (names = NULL) {
 #' These are convenience functions which set left, right, top and bottom properties
 #' simultaneously for the specified cells.
 #'
-#' @param ht A huxtable.
+#' @inherit left_border params
 #' @param value Value(s) to set. Set to `NA` to reset to the default.
-#' @param row A row specifier. See [rowspecs].
-#' @param col An optional column specifier.
-#' @param byrow If \code{TRUE}, fill in values by row rather than by column.
-#' @param fn A mapping function. See [mapping-functions].
 #'
 #' @return The modified huxtable.
 #' @name set-multiple
+#' @aliases set_multiple
 NULL
 
 

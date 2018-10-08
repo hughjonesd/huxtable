@@ -97,6 +97,7 @@ NULL
 #' map_bold(ht, everywhere, "Pval",
 #'       by_ranges(0.05, c(TRUE, FALSE)))
 #' @name mapping-functions
+#' @aliases mapping_functions
 NULL
 
 

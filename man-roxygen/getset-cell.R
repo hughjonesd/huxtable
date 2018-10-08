@@ -37,8 +37,8 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #'   <% } %>
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
-#' @param byrow If `TRUE`, fill in values by row rather than by column.
 #' @param fn A mapping function. See [mapping-functions] for details.
+#' @param byrow Logical: set values along rows. Deprecated. Use [by_cols()] instead.
 #'
 #' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
 #' For `set_<%= attr_name %>` and `map_<%= attr_name %>`, the modified huxtable.
