@@ -14,7 +14,8 @@ huxtable_latex_dependencies <- list(
   list(name = 'multirow'),
   list(name = 'hhline'),
   list(name = 'calc'),
-  list(name = 'tabularx')
+  list(name = 'tabularx'),
+  list(name = 'threeparttable')
 )
 
 
