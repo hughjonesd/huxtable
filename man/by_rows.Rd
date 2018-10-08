@@ -2,9 +2,12 @@
 % Please edit documentation in R/mapping-functions.R
 \name{by_rows}
 \alias{by_rows}
+\alias{by_cols}
 \title{Set cell properties by row or column}
 \usage{
 by_rows(..., from = 1)
+
+by_cols(..., from = 1)
 }
 \arguments{
 \item{...}{One or more cell property values.}

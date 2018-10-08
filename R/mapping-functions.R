@@ -172,8 +172,8 @@ by_rows <- function (..., from = 1) {
 }
 
 
-#' @rdname by_cols
 #' @export
+#' @rdname by_rows
 by_cols <- function (..., from = 1) {
   vals <- c(...)
 
