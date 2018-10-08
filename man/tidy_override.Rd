@@ -18,7 +18,8 @@ tidy_override(x, ..., glance = list(), extend = FALSE)
 \arguments{
 \item{x}{A model with methods defined for \code{\link[broom:tidy]{broom::tidy()}} and/or \code{\link[broom:glance]{broom::glance()}}.}
 
-\item{...}{Columns of statistics for \code{tidy}.}
+\item{...}{In \code{tidy_override}, columns of statistics to replace \code{tidy} output. In
+\code{tidy} and \code{glance} methods, arguments passed on to the underlying model.}
 
 \item{glance}{A list of summary statistics for \code{glance}.}
 

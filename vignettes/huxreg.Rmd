@@ -163,8 +163,7 @@ huxreg(lm1, lm3, note = 'Linear regressions on diamond price. {stars}.')
 
 To change number formatting, set the `number_format` parameter. This works the same as the
 `number_format` property for a huxtable - if it is numeric, numbers will be rounded to that many
-decimal places; if it is character, it will be taken as a format to the base R `sprintf` function;
-if it is a function, the function will be called to format the number. `huxreg` tries to be smart
+decimal places; if it is character, it will be taken as a format to the base R `sprintf` function. `huxreg` tries to be smart
 and to format summary statistics like `nobs` as integers.
 
 ```{r}
@@ -179,3 +178,27 @@ maximum significance level:
 huxreg(lm1, lm3, bold_signif = 0.05)
 ```
 
+## Altering data
+
+Sometimes, you want to report different statistics for a model. For example, you might want to
+use robust standard errors.
+
+One way to do this is to pass a `tidy`-able test object into `huxreg`. The function `coeftest` in
+the "lmtest" package has `tidy` methods defined:
+
+```{r}
+library(lmtest)
+library(sandwich)
+lm_robust <- coeftest(lm1, vcov = vcovHC)
+huxreg("Normal SEs" = lm1, "Robust SEs" = lm_robust)
+```
+
+If that is not possible, you can compute statistics yourself and add them to your model using the
+`tidy_override` function:
+
+```{r}
+lm_fixed <- tidy_override(lm1, p.value = c(0.5, 0.2, 0.06))
+huxreg("Normal p values" = lm1, "Supplied p values" = lm_fixed)
+```
+
+You can override any statistics returned by `tidy` or `glance`.

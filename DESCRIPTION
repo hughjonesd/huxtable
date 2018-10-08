@@ -46,6 +46,7 @@ Suggests:
     openxlsx,
     psych,
     rmarkdown,
+    sandwich,
     scales,
     testthat,
     tinytex

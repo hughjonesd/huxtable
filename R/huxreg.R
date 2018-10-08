@@ -320,7 +320,8 @@ broom::glance
 #' etc. for a model.
 #'
 #' @param x A model with methods defined for [broom::tidy()] and/or [broom::glance()].
-#' @param ... Columns of statistics for `tidy`.
+#' @param ... In `tidy_override`, columns of statistics to replace `tidy` output. In
+#'   `tidy` and `glance` methods, arguments passed on to the underlying model.
 #' @param glance A list of summary statistics for `glance`.
 #' @param extend Logical: allow adding new statistics?
 #' @param object A `tidy_override` object.
@@ -360,7 +361,7 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
 tidy.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
-  tidied <- broom::tidy(x$model)
+  tidied <- broom::tidy(x$model, ...)
   for (cn in names(x$tidy_cols)) {
     if (! x$extend && ! cn %in% names(tidied)) stop(glue::glue(
           "Column \"{cn}\" not found in results of `tidy()`"))
@@ -375,7 +376,7 @@ tidy.tidy_override <- function (x, ...) {
 glance.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
-  sumstats <- broom::glance(x$model)
+  sumstats <- broom::glance(x$model, ...)
   for (elem in names(x$glance_elems)) {
     if (! x$extend && ! elem %in% names(sumstats)) stop(glue::glue(
           "Element \"{elem}\" not found in results of `glance()`"))
