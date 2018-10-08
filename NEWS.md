@@ -13,6 +13,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Functions for mapping properties variably: `by_rows`, `by_values`, `by_ranges`,
   `by_quantiles` etc.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
+* Enhancement: left- and right-aligned captions are now set above the table in LaTeX,
+    using the "threeparttable" package.
 * Enhancement: in `huxtable()` and friends, `add_rownames = "Colname"` now 
   sets the name for the new column.
 * Improvements to the vignette and help files.
@@ -20,7 +22,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 ## Deprecated
 
-* The 3 argument form of `set_xxx` functions is deprecated. Use `map_xxx` instead.
+* The 3 argument form of `set_xxx` functions is deprecated, as is the `where` function.
+  Use `map_xxx` instead.
 * Argument `byrow` is soft-deprecated. Use `by_cols` instead.
 
 # huxtable 4.2.0
