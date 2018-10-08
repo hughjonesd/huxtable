@@ -18,6 +18,7 @@ Description: Like 'xtable', creates styled tables. Export to HTML, LaTeX, 'Word'
 License: MIT + file LICENSE
 URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
+Depends: R (>= 2.10)
 Imports:
     assertthat,
     glue,

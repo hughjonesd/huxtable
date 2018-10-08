@@ -50,8 +50,6 @@ and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 }
 \examples{
 
-data(jams)
-
 rowspan(jams)[1, 1] <-  2
 rowspan(jams)
 jams <- set_all_borders(jams, 1) 

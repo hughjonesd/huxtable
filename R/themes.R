@@ -24,7 +24,6 @@
 #' @name themes
 #'
 #' @examples
-#' data(jams)
 #'
 #' theme_striped(jams)
 #' theme_plain(jams)

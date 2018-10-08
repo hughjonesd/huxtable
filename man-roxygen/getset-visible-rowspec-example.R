@@ -2,8 +2,6 @@
 
 #' @examples
 #'
-#' data(jams)
-#'
 #' set_<%= attr_name %>(jams,
 #'       <%= attr_val %>)
 #' set_<%= attr_name %>(jams,

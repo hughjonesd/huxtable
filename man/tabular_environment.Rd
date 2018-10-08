@@ -28,8 +28,6 @@ No features are guaranteed to work if you set this to a non-default value. Use a
 }
 \examples{
 
-data(jams)
-
 tabular_environment(jams) <-  'longtable'
 tabular_environment(jams)
 

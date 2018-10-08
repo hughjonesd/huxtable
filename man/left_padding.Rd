@@ -65,13 +65,9 @@ Functions to get or set the \emph{cell padding} property of huxtable cells.
 }
 \examples{
 
-data(jams)
-
 left_padding(jams) <-  20
 left_padding(jams)
 
-
-data(jams)
 
 jams2 <- set_left_padding(jams,
       20)

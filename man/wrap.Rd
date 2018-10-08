@@ -45,8 +45,6 @@ wrap(ht) <- TRUE
 }
 
 
-data(jams)
-
 jams2 <- set_wrap(jams,
       TRUE)
 wrap(jams2)

@@ -33,7 +33,6 @@ NULL
 #' @export
 #'
 #' @examples
-#' data(jams)
 #' wb <- as_Workbook(jams)
 #'
 #' \dontrun{

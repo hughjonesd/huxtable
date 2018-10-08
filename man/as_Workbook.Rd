@@ -46,7 +46,6 @@ Contents are only stored as numbers if a whole column is numeric as defined by \
 otherwise they are stored as text.
 }
 \examples{
-data(jams)
 wb <- as_Workbook(jams)
 
 \dontrun{

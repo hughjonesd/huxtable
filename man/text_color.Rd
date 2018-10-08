@@ -39,13 +39,9 @@ Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"}
 }
 \examples{
 
-data(jams)
-
 text_color(jams) <-  'blue'
 text_color(jams)
 
-
-data(jams)
 
 set_text_color(jams,
       'blue')

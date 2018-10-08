@@ -28,8 +28,6 @@ If \code{caption_pos} is 'top' or 'bottom', then the horizontal position ('left'
 will be determined by the huxtable's \code{\link[=position]{position()}}.
 }
 \examples{
-data(jams)
-
 caption(jams) <- "Price list"
 jams
 caption_pos(jams) <- "top"

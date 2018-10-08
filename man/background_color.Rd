@@ -36,13 +36,9 @@ Functions to get or set the \emph{background color} property of huxtable cells.
 }
 \examples{
 
-data(jams)
-
 background_color(jams) <-  grey(.95)
 background_color(jams)
 
-
-data(jams)
 
 set_background_color(jams,
       grey(.95))

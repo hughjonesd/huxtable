@@ -43,8 +43,6 @@ styles). If the \code{crayon} package is installed, output will be colorized (an
 italicized) by default; this will work in recent daily builds of RStudio as of October 2017.
 }
 \examples{
-data(jams)
-
 bottom_border(jams)[1, 1:2] <- 1
 bold(jams)[1, 1:2] <- TRUE
 jams <- map_text_color(jams,

@@ -29,8 +29,6 @@ in \href{http://bookdown.org}{bookdown}.
 }
 \examples{
 
-data(jams)
-
 label(jams) <-  'tab:mytable'
 label(jams)
 

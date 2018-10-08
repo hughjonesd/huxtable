@@ -51,8 +51,6 @@ return functions for this purpose.
 }
 
 \examples{
-data(jams)
-
 set_bold(jams, 2:4, 1:2, TRUE)
 set_background_color(jams, evens, everywhere,
       "grey95")

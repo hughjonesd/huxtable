@@ -25,7 +25,6 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#'   data(jams)
 #'   m <- matrix(1:4, 2, 2)
 #'
 #'   quick_pdf(m, jams)

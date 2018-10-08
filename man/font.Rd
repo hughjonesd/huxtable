@@ -36,13 +36,9 @@ Functions to get or set the \emph{font} property of huxtable cells.
 }
 \examples{
 
-data(jams)
-
 font(jams) <-  'times'
 font(jams)
 
-
-data(jams)
 
 jams2 <- set_font(jams,
       'times')

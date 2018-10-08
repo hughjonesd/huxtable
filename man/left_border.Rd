@@ -76,13 +76,9 @@ release.
 
 \examples{
 
-data(jams)
-
 left_border(jams) <-  1
 left_border(jams)
 jams
-
-data(jams)
 
 set_left_border(jams,
       1)

@@ -28,8 +28,6 @@ Captions are not escaped. See the example for a workaround.
 }
 \examples{
 
-data(jams)
-
 caption(jams) <-  'An example table'
 caption(jams)
 jams

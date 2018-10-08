@@ -46,8 +46,6 @@ escape_contents(ht)[,2] <- FALSE
 }
 
 
-data(jams)
-
 jams2 <- set_escape_contents(jams,
       TRUE)
 escape_contents(jams2)

@@ -29,8 +29,6 @@ explicitly.
 }
 \examples{
 
-data(jams)
-
 position(jams) <-  'right'
 position(jams)
 

@@ -18,8 +18,6 @@ NULL
 #' @export
 #'
 #' @examples
-#' data(jams)
-#'
 #' jams <- add_footnote(jams,
 #'       '* subject to availability')
 #' jams
@@ -209,7 +207,6 @@ print.huxtable <- function(x, ...) {
 #' @export
 #'
 #' @examples
-#' data(jams)
 #'
 #' format(jams, output = 'screen')
 #' format(jams, output = 'md')

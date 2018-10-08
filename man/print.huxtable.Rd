@@ -31,7 +31,6 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
   # to print LaTeX output:
   options(huxtable.print = print_latex)
 }
-data(jams)
 
 format(jams, output = 'screen')
 format(jams, output = 'md')

@@ -107,8 +107,6 @@ set_number_format(ht_bands, NA)
 huxtable("10000 Maniacs", autoformat = TRUE)
 
 
-data(jams)
-
 set_number_format(jams,
       2)
 set_number_format(jams,

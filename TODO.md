@@ -12,8 +12,6 @@ Priority changes
   - consistent policy on NA results
   - deprecate byrow in favour of by_rows()
   
-* Examples to use a simple dataset like pots of jam.
-
 * Way to edit p values/ cis in huxreg?
   - One possibility is `tidy_override(modelx, ...)` which has a `tidy` method. `...` args
     replace columns in the underlying output from `tidy.original_object`.
@@ -72,6 +70,7 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
   borders and less intense headers
+  
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
   - check that tabu can handle multirow and multicol with background colors
   - also check https://tex.stackexchange.com/questions/48280/longtabu-and-floats-wrong-table-breaks-on-pages-with-floats

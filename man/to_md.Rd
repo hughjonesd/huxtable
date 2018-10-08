@@ -36,8 +36,6 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 \code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
 }
 \examples{
-data(jams)
-
 print_md(jams)
 }
 \seealso{

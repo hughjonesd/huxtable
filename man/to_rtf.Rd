@@ -50,7 +50,6 @@ and colors won't work in this context.
 }
 
 \examples{
-data(jams)
 
 print_rtf(jams)
 }

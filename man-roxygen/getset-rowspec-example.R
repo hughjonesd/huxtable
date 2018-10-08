@@ -1,8 +1,6 @@
 # Documentation template for attribute examples
 #' @examples
 #'
-#' data(jams)
-#'
 #' jams2 <- set_<%= attr_name %>(jams,
 #'       <%= attr_val %>)
 #' <%= attr_name %>(jams2)

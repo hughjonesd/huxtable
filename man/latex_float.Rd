@@ -30,8 +30,6 @@ TeX \code{float} package.
 }
 \examples{
 
-data(jams)
-
 latex_float(jams) <-  'h'
 latex_float(jams)
 

@@ -55,7 +55,6 @@ It sets horizontal lines above and below the table.
 colors.
 }
 \examples{
-data(jams)
 
 theme_striped(jams)
 theme_plain(jams)

@@ -800,8 +800,6 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'cen
 #' will be determined by the huxtable's [position()].
 #' @seealso [caption()]
 #' @examples
-#' data(jams)
-#'
 #' caption(jams) <- "Price list"
 #' jams
 #' caption_pos(jams) <- "top"

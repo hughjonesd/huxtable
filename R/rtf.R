@@ -41,7 +41,6 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #' @family printing functions
 #'
 #' @examples
-#' data(jams)
 #'
 #' print_rtf(jams)
 to_rtf <- function (ht, ...) UseMethod('to_rtf')

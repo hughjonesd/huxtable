@@ -17,7 +17,5 @@ returns the last n row or column numbers of the huxtable.
 Technically, \code{final} returns a two-argument function - see \link{rowspecs} for more details.
 }
 \examples{
-data(jams)
-
 set_bold(jams, final(2), final(1), TRUE)
 }

@@ -31,8 +31,6 @@ The workaround is to adjust the width, so that your cells no longer overrun.
 }
 \examples{
 
-data(jams)
-
 col_width(jams) <-  c(.2, .8)
 col_width(jams)
 

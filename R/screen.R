@@ -29,8 +29,6 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @export
 #' @family printing functions
 #' @examples
-#' data(jams)
-#'
 #' bottom_border(jams)[1, 1:2] <- 1
 #' bold(jams)[1, 1:2] <- TRUE
 #' jams <- map_text_color(jams,
@@ -181,8 +179,6 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @family printing functions
 #'
 #' @examples
-#' data(jams)
-#'
 #' print_md(jams)
 to_md <- function(ht, ...) UseMethod('to_md')
 
