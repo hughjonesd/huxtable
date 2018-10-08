@@ -3,6 +3,10 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 5.0.0 branch
+
+* `fill=xxx` option for filling `insert_row` etc.
+
 # huxtable 4.2.0.9000
 
 * New `map_xxx` functions to set properties variably by cell values.

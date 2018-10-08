@@ -16,8 +16,6 @@ Priority changes
   - One possibility is `tidy_override(modelx, ...)` which has a `tidy` method. `...` args
     replace columns in the underlying output from `tidy.original_object`.
 
-* `fill=xxx` option for filling `insert_row` etc. 
-
 * Update website from website-4.3-changes branch
 
 * Use more purrr and rlang features, as we depend on these packages anyway
@@ -57,9 +55,6 @@ Priority changes
 
 * Look at perl's Latex::Table and how they do it
   - autouses 'p{5cm}' column for cols with > 30 chars in a cell
-  - for captions above table, try
-  \setlength{\abovecaptionskip}{0pt}
-  \setlength{\belowcaptionskip}{10pt}
   - they have nice coloured themes which are the same bar the colour
   
 Changes for 5.0
