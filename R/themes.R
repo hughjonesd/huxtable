@@ -30,20 +30,21 @@
 #' theme_basic(jams)
 #' theme_article(jams)
 #' theme_mondrian(jams)
+#' theme_grey(jams)
+#' theme_blue(jams)
+#' theme_orange(jams)
+#' theme_green(jams)
 #' \dontrun{
 #'   quick_pdf(
 #'           theme_striped(jams),
 #'           theme_plain(jams),
 #'           theme_basic(jams),
 #'           theme_article(jams),
-#'           theme_mondrian(jams)
-#'         )
-#'   quick_html(
-#'           theme_striped(jams),
-#'           theme_plain(jams),
-#'           theme_basic(jams),
-#'           theme_article(jams),
-#'           theme_mondrian(jams)
+#'           theme_mondrian(jams),
+#'           theme_grey(jams),
+#'           theme_blue(jams),
+#'           theme_orange(jams),
+#'           theme_green(jams)
 #'         )
 #' }
 NULL
@@ -102,9 +103,74 @@ theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, 
 }
 
 
+theme_maker <- function (
+        col1,
+        col2,
+        border_color = "white",
+        header_color = col1,
+        header_text = NA
+      ) {
+  function (ht, header_row = TRUE, header_col = TRUE) {
+    ht <- set_all_borders(ht, 1)
+    ht <- set_all_border_colors(ht, border_color)
+    ht <- map_background_color(ht, by_rows(col1, col2))
+    if (header_row) {
+      bold(ht)[1, ]             <- TRUE
+      background_color(ht)[1, ] <- header_color
+      text_color(ht)[1, ]       <- header_text
+    }
+    if (header_col) {
+      bold(ht)[, 1]             <- TRUE
+      background_color(ht)[, 1] <- header_color
+      text_color(ht)[, 1]       <- header_text
+    }
+
+    ht
+  }
+}
+
+
 #' @export
 #' @rdname themes
-theme_article <- function(ht, header_row = TRUE, header_col = TRUE) {
+theme_grey <- theme_maker(
+        col1         = grDevices::grey(.9),
+        col2         = grDevices::grey(.95),
+        header_color = grDevices::grey(.8)
+      )
+
+
+#' @export
+#' @rdname themes
+theme_blue <- theme_maker(
+        col1         = "#A9CCE3",
+        col2         = "#D4E6F1",
+        header_color = "#5499C7",
+        header_text  = "white"
+      )
+
+
+#' @export
+#' @rdname themes
+theme_orange <- theme_maker(
+        col1         = "#F5CBA7",
+        col2         = "#FAE5D3",
+        header_color = "#D0D3D4"
+      )
+
+
+#' @export
+#' @rdname themes
+theme_green <- theme_maker(
+        col1         = "#C8E6C9",
+        col2         = "#A5D6A7",
+        header_color = "#4CAF50",
+        header_text  = "white"
+      )
+
+
+#' @export
+#' @rdname themes
+theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
@@ -124,7 +190,7 @@ theme_article <- function(ht, header_row = TRUE, header_col = TRUE) {
 #' @rdname themes
 #' @param prop_colored Roughly what proportion of cells should have a primary-color background?
 #' @param font Font to use. For LaTeX, try `"cmss"`.
-theme_mondrian <- function(ht, prop_colored = 0.1, font = "Arial") {
+theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
   assert_that(is.number(prop_colored), prop_colored >= 0, prop_colored <= 1)
 
   ht <- set_all_borders(ht, 2)

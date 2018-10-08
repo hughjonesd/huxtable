@@ -5,6 +5,10 @@
 \alias{theme_plain}
 \alias{theme_basic}
 \alias{theme_striped}
+\alias{theme_grey}
+\alias{theme_blue}
+\alias{theme_orange}
+\alias{theme_green}
 \alias{theme_article}
 \alias{theme_mondrian}
 \title{Theme a huxtable}
@@ -15,6 +19,14 @@ theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
 theme_striped(ht, stripe = grDevices::grey(0.9), header_row = TRUE,
   header_col = TRUE)
+
+theme_grey(ht, header_row = TRUE, header_col = TRUE)
+
+theme_blue(ht, header_row = TRUE, header_col = TRUE)
+
+theme_orange(ht, header_row = TRUE, header_col = TRUE)
+
+theme_green(ht, header_row = TRUE, header_col = TRUE)
 
 theme_article(ht, header_row = TRUE, header_col = TRUE)
 
@@ -61,20 +73,21 @@ theme_plain(jams)
 theme_basic(jams)
 theme_article(jams)
 theme_mondrian(jams)
+theme_grey(jams)
+theme_blue(jams)
+theme_orange(jams)
+theme_green(jams)
 \dontrun{
   quick_pdf(
           theme_striped(jams),
           theme_plain(jams),
           theme_basic(jams),
           theme_article(jams),
-          theme_mondrian(jams)
-        )
-  quick_html(
-          theme_striped(jams),
-          theme_plain(jams),
-          theme_basic(jams),
-          theme_article(jams),
-          theme_mondrian(jams)
+          theme_mondrian(jams),
+          theme_grey(jams),
+          theme_blue(jams),
+          theme_orange(jams),
+          theme_green(jams)
         )
 }
 }
