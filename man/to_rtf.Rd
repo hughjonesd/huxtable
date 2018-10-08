@@ -41,8 +41,8 @@ set up correctly and that the RTF tables refer back to them. See \code{\link[=rt
 \section{Limitations}{
 
 \itemize{
-\item rmarkdown's \code{rtf_document} can't yet print out customized color tables, so custom fonts
-and colors won't work in this context.
+\item rmarkdown"s \code{rtf_document} can"t yet print out customized color tables, so custom fonts
+and colors won"t work in this context.
 \item \code{\link[=col_width]{col_width()}} and \code{\link[=width]{width()}} can only be numeric or "pt".
 \item \code{\link[=wrap]{wrap()}} has no effect: cell contents always wrap.
 \item \code{\link[=rotation]{rotation()}} can only be 90 or 270, i.e. text going up or down.

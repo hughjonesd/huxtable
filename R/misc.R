@@ -19,12 +19,12 @@ NULL
 #'
 #' @examples
 #' jams <- add_footnote(jams,
-#'       '* subject to availability')
+#'       "* subject to availability")
 #' jams
 add_footnote <- function(ht, text, border = 0.8, ...) {
   nr <- nrow(ht) + 1
   nc <- ncol(ht)
-  ht <- rbind(ht, rep('', nc), copy_cell_props = FALSE)
+  ht <- rbind(ht, rep("", nc), copy_cell_props = FALSE)
   ht[nr, 1] <- text
   colspan(ht)[nr, 1] <- nc
   ht <- set_left_border(ht, nr, 1, 0)
@@ -54,37 +54,37 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 #' @export
 #'
 #' @examples
-#' txt <- 'Make $$$ with us'
-#' sanitize(txt, type = 'latex')
-sanitize <- function (str, type = c('latex', 'html', 'rtf')) {
+#' txt <- "Make $$$ with us"
+#' sanitize(txt, type = "latex")
+sanitize <- function (str, type = c("latex", "html", "rtf")) {
   type <- match.arg(type)
   result <- str
 
-  if (type == 'latex') {
-    result <- gsub('\\\\', 'SANITIZE.BACKSLASH', result)
-    result <- gsub('$', '\\$', result, fixed = TRUE)
-    result <- gsub('>', '$>$', result, fixed = TRUE)
-    result <- gsub('<', '$<$', result, fixed = TRUE)
-    result <- gsub('|', '$|$', result, fixed = TRUE)
-    result <- gsub('{', '\\{', result, fixed = TRUE)
-    result <- gsub('}', '\\}', result, fixed = TRUE)
-    result <- gsub('%', '\\%', result, fixed = TRUE)
-    result <- gsub('&', '\\&', result, fixed = TRUE)
-    result <- gsub('_', '\\_', result, fixed = TRUE)
-    result <- gsub('#', '\\#', result, fixed = TRUE)
-    result <- gsub('^', '\\verb|^|', result, fixed = TRUE)
-    result <- gsub('~', '\\~{}', result, fixed = TRUE)
-    result <- gsub('SANITIZE.BACKSLASH', '$\\backslash$',
+  if (type == "latex") {
+    result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
+    result <- gsub("$", "\\$", result, fixed = TRUE)
+    result <- gsub(">", "$>$", result, fixed = TRUE)
+    result <- gsub("<", "$<$", result, fixed = TRUE)
+    result <- gsub("|", "$|$", result, fixed = TRUE)
+    result <- gsub("{", "\\{", result, fixed = TRUE)
+    result <- gsub("}", "\\}", result, fixed = TRUE)
+    result <- gsub("%", "\\%", result, fixed = TRUE)
+    result <- gsub("&", "\\&", result, fixed = TRUE)
+    result <- gsub("_", "\\_", result, fixed = TRUE)
+    result <- gsub("#", "\\#", result, fixed = TRUE)
+    result <- gsub("^", "\\verb|^|", result, fixed = TRUE)
+    result <- gsub("~", "\\~{}", result, fixed = TRUE)
+    result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
       result, fixed = TRUE)
   }
-  else if (type == 'html'){
-    result <- gsub('&', '&amp;', result, fixed = TRUE)
-    result <- gsub('>', '&gt;', result, fixed = TRUE)
-    result <- gsub('<', '&lt;', result, fixed = TRUE)
+  else if (type == "html"){
+    result <- gsub("&", "&amp;", result, fixed = TRUE)
+    result <- gsub(">", "&gt;", result, fixed = TRUE)
+    result <- gsub("<", "&lt;", result, fixed = TRUE)
   } else {
-    result <- gsub('\\', '\\\\', result, fixed = TRUE)
-    result <- gsub('{', '\\{', result, fixed = TRUE)
-    result <- gsub('}', '\\}', result, fixed = TRUE)
+    result <- gsub("\\", "\\\\", result, fixed = TRUE)
+    result <- gsub("{", "\\{", result, fixed = TRUE)
+    result <- gsub("}", "\\}", result, fixed = TRUE)
   }
 
   return(result)
@@ -106,25 +106,25 @@ sanitize <- function (str, type = c('latex', 'html', 'rtf')) {
 hux_logo <- function(latex = FALSE, html = FALSE) {
   assert_that(is.flag(latex))
 
-  blank <- if (html) '&nbsp;' else ''
+  blank <- if (html) "&nbsp;" else ""
   squares <- rep(blank, 36)
   letter_squares <- sort(sample(36, 8))
-  squares[letter_squares] <- strsplit('huxtable', '')[[1]]
+  squares[letter_squares] <- strsplit("huxtable", "")[[1]]
   mx <- matrix(squares, 6, 6, byrow = TRUE)
   letter_squares <- which(mx != blank) # back in vertical space
-  h_square <- which(mx == 'h')
+  h_square <- which(mx == "h")
 
   mondrian <- as_hux(mx)
   escape_contents(mondrian) <- FALSE
-  align(mondrian) <- 'centre'
-  font(mondrian) <- 'Arial'
-  if (latex) font(mondrian) <- 'cmss'
+  align(mondrian) <- "centre"
+  font(mondrian) <- "Arial"
+  if (latex) font(mondrian) <- "cmss"
   mondrian <- set_all_borders(mondrian, if (html) 2 else 1.2)
   mondrian <- set_all_padding(mondrian, 0)
-  mondrian <- set_all_border_colors(mondrian, 'black')
+  mondrian <- set_all_border_colors(mondrian, "black")
   bg_cells <- sample(36, 8)
-  background_color(mondrian)[bg_cells] <- sample(c('red', 'blue', 'yellow'), 8, replace = TRUE)
-  text_color(mondrian)[bg_cells] <- 'white'
+  background_color(mondrian)[bg_cells] <- sample(c("red", "blue", "yellow"), 8, replace = TRUE)
+  text_color(mondrian)[bg_cells] <- "white"
   bold(mondrian)[h_square] <- TRUE
 
   colspan_ok <- setdiff(1:30, letter_squares - 6)
@@ -149,10 +149,10 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 
   if (html) {
     mondrian <- set_all_padding(mondrian, 2)
-    width(mondrian)  <- '120pt'
-    height(mondrian) <- '120pt'
-    col_width(mondrian)  <- '20pt'
-    row_height(mondrian) <- '20pt'
+    width(mondrian)  <- "120pt"
+    height(mondrian) <- "120pt"
+    col_width(mondrian)  <- "20pt"
+    row_height(mondrian) <- "20pt"
   }
 
   mondrian
@@ -165,11 +165,11 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 #' @details
 #' All modern packages should have a hex logo. Run `hux_hex` if you wish to produce one.
 hux_hex <- function () {
-  hell_no <- hux(c('We don\'t', 'stinkin\''), c('need no', 'hexes'))
+  hell_no <- hux(c("We don't", "stinkin'"), c("need no", "hexes"))
   hell_no <- set_all_borders(hell_no, 1)
-  hell_no <- set_all_border_colors(hell_no, 'red')
-  background_color(hell_no) <- 'black'
-  text_color(hell_no) <- 'red'
+  hell_no <- set_all_border_colors(hell_no, "red")
+  background_color(hell_no) <- "black"
+  text_color(hell_no) <- "red"
 
   hell_no
 }
@@ -193,7 +193,7 @@ hux_hex <- function () {
 #'   options(huxtable.print = print_latex)
 #' }
 print.huxtable <- function(x, ...) {
-  meth <- getOption('huxtable.print', default = print_screen)
+  meth <- getOption("huxtable.print", default = print_screen)
   if (is.character(meth)) meth <- eval(as.symbol(meth))
 
   meth(x, ...)
@@ -208,11 +208,11 @@ print.huxtable <- function(x, ...) {
 #'
 #' @examples
 #'
-#' format(jams, output = 'screen')
-#' format(jams, output = 'md')
+#' format(jams, output = "screen")
+#' format(jams, output = "md")
 format.huxtable <- function(x, ..., output) {
   assert_that(is.string(output))
-  assert_that(output %in% c('latex', 'html', 'md', 'screen'))
-  fn <- paste0('to_', output)
+  assert_that(output %in% c("latex", "html", "md", "screen"))
+  fn <- paste0("to_", output)
   do.call(fn, list(ht = x, ...))
 }

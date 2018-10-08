@@ -24,13 +24,13 @@ For \code{set_latex_float}, the modified huxtable.
 Functions to get or set the table-level \emph{float position for latex} property of a huxtable.
 }
 \details{
-Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
-floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
+Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
+floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
 TeX \code{float} package.
 }
 \examples{
 
-latex_float(jams) <-  'h'
+latex_float(jams) <-  "h"
 latex_float(jams)
 
 }

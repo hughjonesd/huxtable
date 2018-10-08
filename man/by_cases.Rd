@@ -26,7 +26,7 @@ by \code{as.matrix}).
 value unchanged. To avoid this, set a default in the last formula: \code{TRUE ~ default}.
 }
 \examples{
-if (! requireNamespace('dplyr')) {
+if (! requireNamespace("dplyr")) {
   stop("Please install the 'dplyr' package to run this example")
 }
 

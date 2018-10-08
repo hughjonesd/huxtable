@@ -1,8 +1,8 @@
 
-context('Themes')
+context("Themes")
 
 
-test_that('Themes work', {
+test_that("Themes work", {
   ht <- huxtable(a = 1:5, b = 1:5)
   expect_error(theme_basic(ht), regexp = NA)
   expect_error(theme_article(ht), regexp = NA)
@@ -12,10 +12,10 @@ test_that('Themes work', {
 })
 
 
-test_that('Themes work with options', {
+test_that("Themes work with options", {
   ht <- huxtable(a = 1:5, b = 1:5)
   expect_error(theme_basic(ht, header_row = FALSE, header_col = FALSE), regexp = NA)
-  expect_error(theme_striped(ht, stripe = 'purple', header_row = FALSE, header_col = FALSE),
+  expect_error(theme_striped(ht, stripe = "purple", header_row = FALSE, header_col = FALSE),
         regexp = NA)
   expect_error(theme_article(ht, header_row = FALSE, header_col = FALSE), regexp = NA)
   expect_error(theme_mondrian(ht, prop_colored = 0.5), regexp = NA)

@@ -6,16 +6,16 @@ NULL
 
 
 huxtable_latex_dependencies <- list(
-  list(name = 'array'),
-  list(name = 'caption'),
-  list(name = 'graphicx'),
-  list(name = 'siunitx'),
-  list(name = 'xcolor', options = 'table'),
-  list(name = 'multirow'),
-  list(name = 'hhline'),
-  list(name = 'calc'),
-  list(name = 'tabularx'),
-  list(name = 'threeparttable')
+  list(name = "array"),
+  list(name = "caption"),
+  list(name = "graphicx"),
+  list(name = "siunitx"),
+  list(name = "xcolor", options = "table"),
+  list(name = "multirow"),
+  list(name = "hhline"),
+  list(name = "calc"),
+  list(name = "tabularx"),
+  list(name = "threeparttable")
 )
 
 
@@ -40,25 +40,25 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   assert_that(is.flag(quiet), is.flag(as_string))
 
   report <- sapply(huxtable_latex_dependencies, function(ld) {
-    package_str <- '\\usepackage'
+    package_str <- "\\usepackage"
     if (! is.null(ld$options)) {
-      options_str <- paste(ld$options, collapse = ',')
-      package_str <- paste0(package_str, '[', options_str, ']')
+      options_str <- paste(ld$options, collapse = ",")
+      package_str <- paste0(package_str, "[", options_str, "]")
     }
-    package_str <- paste0(package_str, '{', ld$name, '}\n')
+    package_str <- paste0(package_str, "{", ld$name, "}\n")
     package_str
   })
   if (! quiet) {
-    cat(paste0(report, collapse = ''))
-    cat('% These are LaTeX packages. You can install them using your LaTex management software,\n')
-    cat('% or by running `huxtable::install_latex_dependencies()` from within R.\n')
-    cat('% Other packages may be required if you use non-standard tabulars (e.g. tabulary).')
+    cat(paste0(report, collapse = ""))
+    cat("% These are LaTeX packages. You can install them using your LaTex management software,\n")
+    cat("% or by running `huxtable::install_latex_dependencies()` from within R.\n")
+    cat("% Other packages may be required if you use non-standard tabulars (e.g. tabulary).")
   }
 
   if (as_string) {
-    return(paste0(report, collapse = ''))
+    return(paste0(report, collapse = ""))
   } else {
-    assert_package('report_latex_dependencies', 'rmarkdown')
+    assert_package("report_latex_dependencies", "rmarkdown")
     huxtable_latex_dependencies <- lapply(huxtable_latex_dependencies, function (x) {
       rmarkdown::latex_dependency(x$name, options = x$options)
     })
@@ -81,24 +81,24 @@ check_latex_dependencies <- function (quiet = FALSE) {
   assert_that(is.flag(quiet))
 
   ld <- report_latex_dependencies(quiet = TRUE)
-  ld <- vapply(ld, `[[`, character(1), 'name')
-  ld <- setdiff(ld, c('graphicx', 'calc', 'array'))
-  if (requireNamespace('tinytex', quietly = TRUE)) {
+  ld <- vapply(ld, `[[`, character(1), "name")
+  ld <- setdiff(ld, c("graphicx", "calc", "array"))
+  if (requireNamespace("tinytex", quietly = TRUE)) {
     pkgs <- tinytex::tl_pkgs()
   } else {
-    warning('R package tinytex not found, trying to check packages directly with tlmgr')
-    pkgs <- system2('tlmgr', c('info',  '--list', '--only-installed', '--data', 'name'),
+    warning("R package tinytex not found, trying to check packages directly with tlmgr")
+    pkgs <- system2("tlmgr", c("info",  "--list", "--only-installed", "--data", "name"),
       stdout = TRUE)
-    pkgs <- gsub('[.].*', '', pkgs)
+    pkgs <- gsub("[.].*", "", pkgs)
   }
   if (all(ld %in% pkgs)) {
-    if (! quiet) message('All LaTeX packages found.')
+    if (! quiet) message("All LaTeX packages found.")
     return(TRUE)
   } else {
     missing_pkgs <- setdiff(ld, pkgs)
-    if (! quiet) message('The following LaTeX packages were not found:\n',
-      paste(missing_pkgs, collapse = ', '), '\n',
-      'Install them using your latex package manager or via install_latex_dependencies().')
+    if (! quiet) message("The following LaTeX packages were not found:\n",
+      paste(missing_pkgs, collapse = ", "), "\n",
+      "Install them using your latex package manager or via install_latex_dependencies().")
     return(FALSE)
   }
 }
@@ -119,17 +119,17 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #' }
 install_latex_dependencies <- function () {
   ld <- report_latex_dependencies(quiet = TRUE)
-  ld <- vapply(ld, `[[`, character(1), 'name')
-  ld <- setdiff(ld, c('graphicx', 'calc', 'array'))
-  message('Trying to install packages: ', paste(ld, collapse = ', '))
-  message('If this fails, try running the following on the command line ',
-    '(you may need admin permissions):')
-  message('  tlmgr install ', paste(ld, collapse = ' '))
-  if (requireNamespace('tinytex', quietly = TRUE)) {
+  ld <- vapply(ld, `[[`, character(1), "name")
+  ld <- setdiff(ld, c("graphicx", "calc", "array"))
+  message("Trying to install packages: ", paste(ld, collapse = ", "))
+  message("If this fails, try running the following on the command line ",
+    "(you may need admin permissions):")
+  message("  tlmgr install ", paste(ld, collapse = " "))
+  if (requireNamespace("tinytex", quietly = TRUE)) {
     tinytex::tlmgr_install(ld) == 0
   } else {
-    warning('R package tinytex not found, trying to install packages directly with tlmgr')
-    message(paste('tlmgr', 'install', ld))
-    system2('tlmgr', c('install', ld)) == 0
+    warning("R package tinytex not found, trying to install packages directly with tlmgr")
+    message(paste("tlmgr", "install", ld))
+    system2("tlmgr", c("install", ld)) == 0
   }
 }

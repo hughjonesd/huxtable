@@ -1,5 +1,5 @@
 
-context('Fuzzy tests')
+context("Fuzzy tests")
 
 
 expect_outputs_unchanged <- function (hx, idx) {
@@ -18,20 +18,20 @@ expect_outputs_unchanged <- function (hx, idx) {
 
 
 variations <- expand.grid(
-  align             = c('left', 'right', 'centre', '.'),
-  background_color  = c('red', grey(.6), NA),
+  align             = c("left", "right", "centre", "."),
+  background_color  = c("red", grey(.6), NA),
   bold              = c(TRUE, FALSE),
   escape_contents   = c(TRUE, FALSE),
   font_size         = c(8, 10),
   italic            = c(TRUE, FALSE),
   left_border       = c(0, 1, 2),
-  left_border_color = c('red', grey(.6)),
-  left_border_style = c('double', 'dotted', 'dashed'),
+  left_border_color = c("red", grey(.6)),
+  left_border_style = c("double", "dotted", "dashed"),
   left_padding      = c(0, 4),
   number_format     = c("%3.1g", NA),
   rotation          = c(0, 90),
-  text_color        = c('red', grey(.6)),
-  valign            = c('top', 'middle', 'bottom'),
+  text_color        = c("red", grey(.6)),
+  valign            = c("top", "middle", "bottom"),
   wrap              = c(TRUE, FALSE),
   stringsAsFactors  = FALSE,
   KEEP.OUT.ATTRS   = FALSE
@@ -55,7 +55,7 @@ add_props <- function(hx, row) {
 }
 
 
-test_that('various outputs unchanged', {
+test_that("various outputs unchanged", {
   skip_on_R_CMD_check()
 
   RNGversion("3.3.0")
@@ -67,10 +67,10 @@ test_that('various outputs unchanged', {
 })
 
 
-test_that('Some random outputs compile', {
+test_that("Some random outputs compile", {
   skip_on_R_CMD_check()
 
-  n_tests <- get0('N_OUTPUT_TESTS', envir = globalenv(), ifnotfound = 10)
+  n_tests <- get0("N_OUTPUT_TESTS", envir = globalenv(), ifnotfound = 10)
 
   outfiles <- character(n_tests * 4)
   on.exit({
@@ -81,29 +81,29 @@ test_that('Some random outputs compile', {
   for (i in seq_len(n_tests)) {
     sr <- sample_rows[i]
     hx_set <- add_props(hx_raw, variations[sr, ])
-    pdfo <- sprintf('pdf-check-%d.pdf', sr)
+    pdfo <- sprintf("pdf-check-%d.pdf", sr)
     outfiles[i] <- pdfo
     expect_error(quick_pdf(hx_set, file = pdfo, open = FALSE), regexp = NA, info = list(index = sr))
     expect_true(file.exists(pdfo), info = list(index = sr))
   }
 
-  skip_if_not_installed('openxlsx')
+  skip_if_not_installed("openxlsx")
 
   for (i in seq(n_tests + 1, 2 * n_tests)) {
     sr <- sample_rows[i]
     hx_set <- add_props(hx_raw, variations[sr, ])
-    xlsxo <- sprintf('xlsx-check-%d.xlsx', sr)
+    xlsxo <- sprintf("xlsx-check-%d.xlsx", sr)
     outfiles[i] <- xlsxo
     expect_error(quick_xlsx(hx_set, file = xlsxo, open = FALSE), regexp = NA, info = list(index = sr))
     expect_true(file.exists(xlsxo), info = list(index = sr))
   }
 
-  skip_if_not_installed('flextable')
+  skip_if_not_installed("flextable")
 
   for (i in seq(2 * n_tests + 1, 3 * n_tests)) {
     sr <- sample_rows[i]
     hx_set <- add_props(hx_raw, variations[sr, ])
-    docxo <- sprintf('docx-check-%d.docx', sr)
+    docxo <- sprintf("docx-check-%d.docx", sr)
     outfiles[i] <- docxo
     expect_error(quick_docx(hx_set, file = docxo, open = FALSE), regexp = NA,
           info = list(index = sr))
@@ -113,7 +113,7 @@ test_that('Some random outputs compile', {
   for (i in seq(3 * n_tests + 1, 4 * n_tests)) {
     sr <- sample_rows[i]
     hx_set <- add_props(hx_raw, variations[sr, ])
-    pptxo <- sprintf('pptx-check-%d.pptx', sr)
+    pptxo <- sprintf("pptx-check-%d.pptx", sr)
     outfiles[i] <- pptxo
     expect_error(quick_pptx(hx_set, file = pptxo, open = FALSE), regexp = NA,
       info = list(index = sr))
@@ -122,9 +122,9 @@ test_that('Some random outputs compile', {
 })
 
 
-test_that('Some random HTML outputs are validated by W3C', {
+test_that("Some random HTML outputs are validated by W3C", {
   skip_on_R_CMD_check()
-  skip_if_not_installed('httr')
+  skip_if_not_installed("httr")
   library(httr)
 
   # here we do randomize
@@ -136,8 +136,8 @@ test_that('Some random HTML outputs are validated by W3C', {
     response <- httr::POST("http://validator.w3.org/nu/?out=json", body = webpage,
           httr::content_type("text/html"))
     response <- httr::content(response, "parsed")
-    errors   <- Filter(function (x) x$type == 'error', response$messages)
-    warnings <- Filter(function (x) x$type == 'warnings', response$messages)
+    errors   <- Filter(function (x) x$type == "error", response$messages)
+    warnings <- Filter(function (x) x$type == "warnings", response$messages)
     valid <- length(errors) == 0
     expect_true(valid, info = list(index = i, errors = errors, warnings = warnings))
   }

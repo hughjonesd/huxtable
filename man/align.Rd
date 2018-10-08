@@ -15,7 +15,7 @@ map_align(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'left', 'center', 'right' , \code{NA} or a single character.
+\item{value}{A character vector or matrix which may be "left", "center", "right" , \code{NA} or a single character.
 
 Set to \code{NA} to reset to the default, which is \code{"left"}.}
 
@@ -40,17 +40,17 @@ a decimal point), then the cell is aligned on this character.
 }
 \examples{
 
-align(jams) <-  'right'
+align(jams) <-  "right"
 align(jams)
 
 
 set_align(jams,
-      'right')
+      "right")
 set_align(jams,
-      2:3, 1, 'right')
+      2:3, 1, "right")
 map_align(jams,
       by_rows(
-        'right',
-        'left'
+        "right",
+        "left"
       ))
 }

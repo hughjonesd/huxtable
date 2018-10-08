@@ -43,12 +43,12 @@ NULL
 #' # multiple sheets in a single workbook:
 #' wb <- openxlsx::createWorkbook()
 #' wb <- as_Workbook(jams,
-#'       Workbook = wb, sheet = 'sheet1')
+#'       Workbook = wb, sheet = "sheet1")
 #' wb <- as_Workbook(
-#'       hux('Another', 'huxtable'),
+#'       hux("Another", "huxtable"),
 #'       Workbook = wb,
-#'       sheet = 'sheet2')
-as_Workbook <- function (ht, ...) UseMethod('as_Workbook')
+#'       sheet = "sheet2")
+as_Workbook <- function (ht, ...) UseMethod("as_Workbook")
 
 
 memo_env <- new.env()
@@ -56,10 +56,10 @@ memo_env <- new.env()
 #' @export
 #' @rdname as_Workbook
 as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write_caption = TRUE, ...) {
-  assert_package('as_Workbook', 'openxlsx')
+  assert_package("as_Workbook", "openxlsx")
   assert_that(is.string(sheet))
 
-  if (! exists('memoised_createStyle', where = memo_env)) {
+  if (! exists("memoised_createStyle", where = memo_env)) {
     memo_env$memoised_createStyle <- memoise::memoise(openxlsx::createStyle)
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
@@ -77,7 +77,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     openxlsx::mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
   }
 
-  contents <- clean_contents(ht, type = 'excel') # character matrix
+  contents <- clean_contents(ht, type = "excel") # character matrix
 
   nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)
@@ -92,13 +92,13 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
         insert <- col_contents[i:nr]
         if (all(is_a_number_col)) insert <- as.numeric(insert)
         openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
-              colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
+              colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none")
         break # to the next column
       } else {
         insert <- col_contents[i]
         if (is_a_number_col[1]) insert <- as.numeric(insert)
         openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
-            colNames = FALSE, rowNames = FALSE, borders = 'none', borderStyle = 'none')
+            colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none")
       }
     }
   }
@@ -123,12 +123,12 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
     format_zero <- format_numbers(0, nf)
     num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else
-          if (is.numeric(contents[drow, dcol])) 'NUMBER' else 'GENERAL'
+          if (is.numeric(contents[drow, dcol])) "NUMBER" else "GENERAL"
     borders <- get_all_borders(ht, drow, dcol) # list of numerics
     border_char <- names(borders)
     border_colors <- get_all_border_colors(ht, drow, dcol)
     border_colors <- unlist(border_colors[border_char])
-    border_colors[is.na(border_colors)] <- getOption('openxlsx.borderColour', 'black')
+    border_colors[is.na(border_colors)] <- getOption("openxlsx.borderColour", "black")
     border_styles <- get_all_border_styles(ht, drow, dcol)
     border_styles <- unlist(border_styles[border_char])
     border_styles[border_styles == "solid"] <- as.character(cut(
@@ -148,7 +148,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
             borderStyle    = border_styles,
             fgFill         = null_args$bgc, # bgFill is "for conditional formatting only"
             halign         = real_align(ht)[drow, dcol],
-            valign         = switch(va, middle = 'center', va),
+            valign         = switch(va, middle = "center", va),
             textDecoration = c("bold", "italic")[c(bold(ht)[drow, dcol], italic(ht)[drow, dcol])],
             wrapText       = wrap(ht)[drow, dcol],
             textRotation   = rotation(ht)[drow, dcol]

@@ -52,8 +52,8 @@ of a correlation matrix with low p values:\preformatted{  data(attitudes)
   by_p_value <- function (ht, rows, cols, current) {
      result <- current
      pvals <- att_corr$p[rows, cols]
-     result[pvals < 0.01] <- 'red'
-     result[pvals < 0.05] <- 'orange'
+     result[pvals < 0.01] <- "red"
+     result[pvals < 0.05] <- "orange"
      result
   }
 }

@@ -1,50 +1,50 @@
 
-context('huxtable creation')
+context("huxtable creation")
 
 
-test_that('Object creation examples unchanged', {
-  test_ex_same('huxtable')
+test_that("Object creation examples unchanged", {
+  test_ex_same("huxtable")
 })
 
 
-test_that('create huxtable using hux[table]()', {
+test_that("create huxtable using hux[table]()", {
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3))
   expect_silent(ht2 <- hux(a = 1:3, b = 1:3))
-  expect_is(ht, 'huxtable')
+  expect_is(ht, "huxtable")
   expect_equal(ncol(ht), 2)
   expect_equal(nrow(ht), 3)
   expect_identical(ht, ht2)
 })
 
 
-test_that('create huxtable using tribble_hux()', {
+test_that("create huxtable using tribble_hux()", {
   for (addc in c(TRUE, FALSE)) {
     expect_silent(ht <- tribble_hux(
       ~a, ~b,
-      1, 'a',
-      2, 'b',
-      3, 'c',
+      1, "a",
+      2, "b",
+      3, "c",
       add_colnames = addc
     ))
-    expect_is(ht, 'huxtable')
+    expect_is(ht, "huxtable")
     expect_equal(nrow(ht), 3 + addc)
     expect_equal(ncol(ht), 2)
-    expect_equivalent(colnames(ht), c('a', 'b'))
+    expect_equivalent(colnames(ht), c("a", "b"))
   }
 })
 
 
-test_that('create huxtable from data frame', {
+test_that("create huxtable from data frame", {
   dfr <- data.frame(a = 1:3, b = 1:3)
   expect_silent(ht <- as_hux(dfr))
   expect_silent(ht2 <- as_huxtable(dfr))
-  expect_is(ht, 'huxtable')
+  expect_is(ht, "huxtable")
   expect_identical(ht, huxtable(a = 1:3, b = 1:3))
   expect_identical(ht, ht2)
 })
 
 
-test_that('autoformat', {
+test_that("autoformat", {
   dfr <- data.frame(
           character = letters[1:3],
           integer   = 1:3,
@@ -79,13 +79,13 @@ test_that('autoformat', {
 })
 
 
-test_that('create huxtable from matrix', {
+test_that("create huxtable from matrix", {
   m <- matrix(1:8, 4, 2)
   expect_silent(ht <- as_hux(m))
 })
 
 
-test_that('create huxtable from vector', {
+test_that("create huxtable from vector", {
   v <- letters[1:5]
   expect_silent(ht <- as_hux(v))
   expect_equal(nrow(ht), length(v))
@@ -95,17 +95,17 @@ test_that('create huxtable from vector', {
 })
 
 
-test_that('create huxtable from table', {
+test_that("create huxtable from table", {
   tbl <- table(mtcars$gear, mtcars$cyl)
   expect_silent(ht <- as_hux(tbl))
-  expect_is(ht, 'huxtable')
+  expect_is(ht, "huxtable")
   expect_equivalent(ht[[1]][ -1 ], rownames(tbl))
   expect_equivalent(unlist(ht[1, -1]), colnames(tbl))
   expect_equivalent(ht[[1, 1]], "") # check no "rownames" in top left
 })
 
 
-test_that('as_hux.table does not use number_format on rownames', {
+test_that("as_hux.table does not use number_format on rownames", {
   tbl <- table(c(3.5, 3.5, 4.5, 4.5), c(1.5, 1.5, 2.5, 2.5))
   ht <- as_hux(tbl)
   expect_match(to_screen(ht, colnames = FALSE), "3\\.5")
@@ -113,7 +113,7 @@ test_that('as_hux.table does not use number_format on rownames', {
 })
 
 
-test_that('create huxtable from ftable', {
+test_that("create huxtable from ftable", {
   ft <- ftable(mtcars[c("cyl", "vs", "gear")])
   expect_silent(ht <- as_hux(ft))
   # the below tests current implementation, where we have separate rows/columns for column and

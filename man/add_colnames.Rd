@@ -54,6 +54,6 @@ add_rownames(add_colnames(ht))
 add_colnames(add_rownames(ht))
 
 # Alternatively:
-add_colnames(add_rownames(ht, ''))
+add_colnames(add_rownames(ht, ""))
 
 }

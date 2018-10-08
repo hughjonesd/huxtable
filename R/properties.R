@@ -4,17 +4,17 @@
 NULL
 
 
-huxtable_cell_attrs <- c('align', 'valign', 'rowspan', 'colspan', 'background_color', 'text_color',
-  'top_border', 'left_border', 'right_border', 'bottom_border',
-  'top_border_color', 'left_border_color', 'right_border_color', 'bottom_border_color',
-  'top_border_style', 'left_border_style', 'right_border_style', 'bottom_border_style',
-  'top_padding', 'left_padding', 'right_padding', 'bottom_padding', 'wrap',
-  'escape_contents', 'na_string', 'bold', 'italic', 'font_size', 'rotation', 'number_format',
-  'font', 'pad_decimal')
-huxtable_col_attrs <- c('col_width')
-huxtable_row_attrs <- c('row_height')
-huxtable_table_attrs <- c('width', 'height', 'position', 'caption', 'caption_pos',
-  'tabular_environment', 'label', 'latex_float')
+huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_color", "text_color",
+  "top_border", "left_border", "right_border", "bottom_border",
+  "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
+  "top_border_style", "left_border_style", "right_border_style", "bottom_border_style",
+  "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
+  "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
+  "font", "pad_decimal")
+huxtable_col_attrs <- c("col_width")
+huxtable_row_attrs <- c("row_height")
+huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
+  "tabular_environment", "label", "latex_float")
 
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
@@ -31,8 +31,8 @@ huxtable_env <- new.env()
 huxtable_env$huxtable_default_attrs <- list(
         rowspan             = 1,
         colspan             = 1,
-        align               = 'left',
-        valign              = 'top',
+        align               = "left",
+        valign              = "top",
         width               = 0.5,
         height              = NA,
         col_width           = NA,
@@ -47,33 +47,33 @@ huxtable_env$huxtable_default_attrs <- list(
         right_border_color  = NA,
         top_border_color    = NA,
         bottom_border_color = NA,
-        left_border_style   = 'solid',
-        right_border_style  = 'solid',
-        top_border_style    = 'solid',
-        bottom_border_style = 'solid',
+        left_border_style   = "solid",
+        right_border_style  = "solid",
+        top_border_style    = "solid",
+        bottom_border_style = "solid",
         left_padding        = 4,
         right_padding       = 4,
         top_padding         = 4,
         bottom_padding      = 4,
         wrap                = FALSE,
         caption             = NA,
-        caption_pos         = 'top',
-        position            = 'center',
-        tabular_environment = 'tabularx',
+        caption_pos         = "top",
+        position            = "center",
+        tabular_environment = "tabularx",
         label               = NA,
-        latex_float         = 'h',
+        latex_float         = "h",
         escape_contents     = TRUE,
-        na_string           = '',
+        na_string           = "",
         bold                = FALSE,
         italic              = FALSE,
         font_size           = NA,
         rotation            = 0,
-        number_format       = list('%.3g'),
+        number_format       = list("%.3g"),
         pad_decimal         = NA,
         font                = NA
       )
 
-make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', 'table'), check_fun = NULL,
+make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "table"), check_fun = NULL,
   check_values = NULL, extra_code = NULL) {
   attr_type <- match.arg(attr_type)
   funs <- list()
@@ -81,11 +81,11 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
   funs[[attr_name]] <- eval(bquote(
     function(ht) UseMethod(.(attr_name))
   ))
-  funs[[paste0(attr_name, '.huxtable')]] <- eval(bquote(
+  funs[[paste0(attr_name, ".huxtable")]] <- eval(bquote(
     function(ht) attr(ht, .(attr_name))
   ))
 
-  setter <- paste0(attr_name, '<-')
+  setter <- paste0(attr_name, "<-")
   funs[[setter]] <- eval(bquote(
     function(ht, value) UseMethod(.(setter))
   ))
@@ -98,7 +98,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     assert_that(all(na.omit(value) %in% .(check_values)))
   )
   extra_code <- if (! missing(extra_code)) substitute(extra_code)
-  funs[[paste0(setter, '.huxtable')]] <- eval(bquote(
+  funs[[paste0(setter, ".huxtable")]] <- eval(bquote(
     function(ht, value) {
       if (! all(is.na(value))) .(check_fun)
       .(check_dims)
@@ -111,8 +111,8 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     }
   ))
 
-  alt_setter  <- sprintf('set_%s', attr_name)
-  mapping_fun <- sprintf('map_%s', attr_name)
+  alt_setter  <- sprintf("set_%s", attr_name)
+  mapping_fun <- sprintf("map_%s", attr_name)
   attr_symbol <- as.symbol(attr_name)
 
   funs[[alt_setter]] <- switch(attr_type,
@@ -123,10 +123,10 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
             if (! missing(byrow)) nargs <- nargs - 1
             if (nargs == 3) {
               if (missing(value)) value <- col
-              if (! is.matrix(row)) stop('No columns specified, but `row` argument did not evaluate to a matrix')
-              if (byrow) stop('`byrow = TRUE` makes no sense if `row` is a matrix')
-              .Deprecated(msg = c('The 3 argument form of `set_xxx` functions is deprecated.\n',
-                     'Use `map_xxx` instead.\n'), package = 'huxtable')
+              if (! is.matrix(row)) stop("No columns specified, but `row` argument did not evaluate to a matrix")
+              if (byrow) stop("`byrow = TRUE` makes no sense if `row` is a matrix")
+              .Deprecated(msg = c("The 3 argument form of `set_xxx` functions is deprecated.\n",
+                     "Use `map_xxx` instead.\n"), package = "huxtable")
               .(attr_symbol)(ht)[row] <- value
             } else {
               if (nargs == 2) {
@@ -198,7 +198,7 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
     }
   ))
 
-  hux_ns <- getNamespace('huxtable')
+  hux_ns <- getNamespace("huxtable")
   lapply(names(funs), function (x) {
     environment(funs[[x]]) <- hux_ns
     assign(x, funs[[x]], envir = hux_ns)
@@ -211,37 +211,37 @@ make_getter_setters <- function(attr_name, attr_type = c('cell', 'row', 'col', '
 #' @template getset-cell
 #' @templateVar attr_name valign
 #' @templateVar attr_desc Vertical alignment
-#' @templateVar value_param_desc A character vector or matrix which may be 'top', 'middle', 'bottom' or `NA`.
+#' @templateVar value_param_desc A character vector or matrix which may be "top", "middle", "bottom" or `NA`.
 #' @template getset-example
-#' @templateVar attr_val 'bottom'
+#' @templateVar attr_val "bottom"
 #' @template getset-rowspec-example
-#' @templateVar attr_val2 'bottom'
+#' @templateVar attr_val2 "bottom"
 #' @details
 #' Vertical alignment may not work for short text in LaTeX. Defining row heights with [row_height()]
 #' may help.
 NULL
-make_getter_setters('valign', 'cell', check_fun = is.character, check_values = c('top', 'middle', 'bottom'))
+make_getter_setters("valign", "cell", check_fun = is.character, check_values = c("top", "middle", "bottom"))
 
 
 check_align_value <- function (x) {
   x <- na.omit(x)
-  is.character(x) && all(x %in% c('left', 'centre', 'center', 'right') | ncharw(x) == 1)
+  is.character(x) && all(x %in% c("left", "centre", "center", "right") | ncharw(x) == 1)
 }
 
 
 #' @template getset-cell
 #' @templateVar attr_name align
 #' @templateVar attr_desc Alignment
-#' @templateVar value_param_desc A character vector or matrix which may be 'left', 'center', 'right' , `NA` or a single character.
+#' @templateVar value_param_desc A character vector or matrix which may be "left", "center", "right" , `NA` or a single character.
 #' @template getset-example
-#' @templateVar attr_val 'right'
+#' @templateVar attr_val "right"
 #' @template getset-visible-rowspec-example
-#' @templateVar attr_val2 'left'
+#' @templateVar attr_val2 "left"
 #' @details This sets the horizontal alignment of the cell. If `value` is a single character (e.g.
 #' a decimal point), then the cell is aligned on this character.
 NULL
-make_getter_setters('align', 'cell', check_fun = check_align_value,
-      extra_code = value[value == 'centre'] <- 'center')
+make_getter_setters("align", "cell", check_fun = check_align_value,
+      extra_code = value[value == "centre"] <- "center")
 
 
 #' @template getset-rowcol
@@ -257,7 +257,7 @@ make_getter_setters('align', 'cell', check_fun = check_align_value,
 #' @template getset-example
 #' @templateVar attr_val c(.2, .8)
 NULL
-make_getter_setters('col_width', 'col')
+make_getter_setters("col_width", "col")
 
 
 #' @template getset-rowcol
@@ -272,7 +272,7 @@ make_getter_setters('col_width', 'col')
 #' @template getset-example
 #' @templateVar attr_val c(.2, .1, .1)
 NULL
-make_getter_setters('row_height', 'row')
+make_getter_setters("row_height", "row")
 
 
 #' @template getset-cell
@@ -289,9 +289,9 @@ make_getter_setters('row_height', 'row')
 #' @templateVar attr_val 2
 #' @templateVar extra jams <- set_all_borders(jams, 1) ## jams
 NULL
-make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
-      if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop('rowspan would extend beyond bottom of table')
-      check_span_shadows(ht, 'row', value)
+make_getter_setters("rowspan", "cell", check_fun = is.numeric, extra_code = {
+      if (any(na.omit( row(ht) + value - 1 > nrow(ht) ))) stop("rowspan would extend beyond bottom of table")
+      check_span_shadows(ht, "row", value)
     }
 )
 
@@ -302,23 +302,23 @@ make_getter_setters('rowspan', 'cell', check_fun = is.numeric, extra_code = {
 #' @template cell-property-usage
 #' @aliases colspan<- set_colspan map_colspan
 NULL
-make_getter_setters('colspan', 'cell', check_fun = is.numeric, extra_code = {
+make_getter_setters("colspan", "cell", check_fun = is.numeric, extra_code = {
       if (any(na.omit( col(ht) + value - 1 > ncol(ht) ))) stop(
-            'colspan would extend beyond right edge of table')
-      check_span_shadows(ht, 'col', value)
+            "colspan would extend beyond right edge of table")
+      check_span_shadows(ht, "col", value)
     }
 )
 
 
 check_span_shadows <- function (ht, rc, value) {
   value[is.na(value)] <- 1L
-  dcells <- if (rc == 'row') display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
-  candidates <- as.matrix(dcells[dcells$shadowed, c('row', 'col')])
+  dcells <- if (rc == "row") display_cells(ht, new_rowspan = value) else display_cells(ht, new_colspan = value)
+  candidates <- as.matrix(dcells[dcells$shadowed, c("row", "col")])
   problems <- value[candidates] > 1 # span of cells which would be shadowed;
   if (any(problems)) {
     candidates <- candidates[problems, , drop = FALSE]
-    candidates <- paste(apply(candidates, 1, paste, collapse = ','), collapse = '; ')
-    stop('New rowspan/colspan would cut up existing multirow/multicol cells at ', candidates)
+    candidates <- paste(apply(candidates, 1, paste, collapse = ","), collapse = "; ")
+    stop("New rowspan/colspan would cut up existing multirow/multicol cells at ", candidates)
   }
 }
 
@@ -330,10 +330,10 @@ check_span_shadows <- function (ht, rc, value) {
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
 #' @template getset-visible-rowspec-example
-#' @templateVar attr_val2 'yellow'
+#' @templateVar attr_val2 "yellow"
 #' @family formatting functions
 NULL
-make_getter_setters('background_color', 'cell')
+make_getter_setters("background_color", "cell")
 
 
 #' @template getset-cell
@@ -343,12 +343,12 @@ make_getter_setters('background_color', 'cell')
 #' @details
 #' Colors can be in any format understood by R, e.g. `"red"`, `"#FF0000"` or `rgb(1, 0, 0)`.
 #' @template getset-example
-#' @templateVar attr_val 'blue'
+#' @templateVar attr_val "blue"
 #' @template getset-visible-rowspec-example
-#' @templateVar attr_val2 'red'
+#' @templateVar attr_val2 "red"
 #' @family formatting functions
 NULL
-make_getter_setters('text_color', 'cell')
+make_getter_setters("text_color", "cell")
 
 
 #' @template getset-cell
@@ -369,7 +369,7 @@ make_getter_setters('text_color', 'cell')
 #' @template border-warning
 #' @template cell-property-usage
 NULL
-for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border')) make_getter_setters(val, 'cell',
+for (val in paste0(c("left", "right", "top", "bottom"), "_border")) make_getter_setters(val, "cell",
       check_fun = is.numeric)
 
 
@@ -400,26 +400,26 @@ NULL
 #' @templateVar attr_desc Border colors
 #' @templateVar value_param_desc A vector or matrix of colors.
 #' @templateVar morealiases right_border_color top_border_color bottom_border_color
-#' @templateVar attr_val 'red'
+#' @templateVar attr_val "red"
 #' @details
 #' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 #' top borders take priority over bottom borders.
 #'
 #' @seealso [set_all_border_colors()]
-#' @templateVar attr_val2 'blue'
+#' @templateVar attr_val2 "blue"
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 3:1)
 #' ht <- set_all_borders(ht, 1)
-#' set_left_border_color(ht, 'red')
+#' set_left_border_color(ht, "red")
 #' set_left_border_color(ht,
-#'       1:2, 1, 'red')
+#'       1:2, 1, "red")
 #'
 #' @template border-warning
 #' @template cell-property-usage
 #'
 NULL
-for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_color')) make_getter_setters(val,
-  'cell')
+for (val in paste0(c("left", "right", "top", "bottom"), "_border_color")) make_getter_setters(val,
+  "cell")
 
 
 #' @name right_border_color
@@ -448,7 +448,7 @@ NULL
 #' @templateVar attr_desc Border styles
 #' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
 #' @templateVar morealiases right_border_style top_border_style bottom_border_style
-#' @templateVar attr_val 'solid'
+#' @templateVar attr_val "solid"
 #' @template getset-cell
 #' @template cell-property-usage
 #' @details
@@ -462,19 +462,19 @@ NULL
 #' * In HTML, you will need to set a width of at least 3 to get a double border.
 #' * Only "solid" and "double" styles are currently implemented in LaTeX.
 #'
-#' @templateVar attr_val2 'double'
+#' @templateVar attr_val2 "double"
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 3:1)
 #' ht <- set_all_borders(ht, 1)
-#' set_left_border_style(ht, 'double')
+#' set_left_border_style(ht, "double")
 #' set_left_border_style(ht, 1:2, 1,
-#'       'double')
+#'       "double")
 #'
 #' @template border-warning
 #' @template cell-property-usage
 NULL
-for (val in paste0(c('left', 'right', 'top', 'bottom'), '_border_style')) make_getter_setters(val,
-      'cell', check_values = c('solid', 'double', 'dashed', 'dotted'))
+for (val in paste0(c("left", "right", "top", "bottom"), "_border_style")) make_getter_setters(val,
+      "cell", check_values = c("solid", "double", "dashed", "dotted"))
 
 
 #' @name right_border_style
@@ -512,7 +512,7 @@ NULL
 #' @templateVar attr_val2 10
 #' @template cell-property-usage
 NULL
-for (val in paste0(c('left', 'right', 'top', 'bottom'), '_padding')) make_getter_setters(val, 'cell')
+for (val in paste0(c("left", "right", "top", "bottom"), "_padding")) make_getter_setters(val, "cell")
 
 
 #' @name right_padding
@@ -558,7 +558,7 @@ NULL
 #' @templateVar attr_val2 FALSE
 #'
 NULL
-make_getter_setters('wrap', 'cell', check_fun = is.logical)
+make_getter_setters("wrap", "cell", check_fun = is.logical)
 
 
 #' @template getset-cell
@@ -569,7 +569,7 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @examples
 #' ht <- huxtable(
 #'         Exponent = 2:4,
-#'         Example  = paste0('$x^', 2:4, '$'),
+#'         Example  = paste0("$x^", 2:4, "$"),
 #'         add_colnames = TRUE
 #'       )
 #' escape_contents(ht)[,2] <- FALSE
@@ -581,7 +581,7 @@ make_getter_setters('wrap', 'cell', check_fun = is.logical)
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
 NULL
-make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
+make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 
 
 #' @template getset-cell
@@ -590,14 +590,14 @@ make_getter_setters('escape_contents', 'cell', check_fun = is.logical)
 #' @templateVar value_param_desc
 #' A character string. This will be used to replace NA values in the display.
 #' @template getset-example
-#' @templateVar attr_val '--'
+#' @templateVar attr_val "--"
 #' @noMd
 #' @templateVar extra jams[2,2] <- NA ## jams
 #' @template getset-rowspec-example
-#' @templateVar attr_val2 ''
+#' @templateVar attr_val2 ""
 #' @family formatting functions
 NULL
-make_getter_setters('na_string', 'cell', check_fun = is.character)
+make_getter_setters("na_string", "cell", check_fun = is.character)
 
 
 #' @template getset-cell
@@ -613,7 +613,7 @@ make_getter_setters('na_string', 'cell', check_fun = is.character)
 #' @family formatting functions
 #' @template cell-property-usage
 NULL
-make_getter_setters('bold', 'cell', check_fun = is.logical)
+make_getter_setters("bold", "cell", check_fun = is.logical)
 
 
 #' @name italic
@@ -623,7 +623,7 @@ make_getter_setters('bold', 'cell', check_fun = is.logical)
 #' @return
 #' Similarly for \code{italic} and friends.
 NULL
-make_getter_setters('italic', 'cell', check_fun = is.logical)
+make_getter_setters("italic", "cell", check_fun = is.logical)
 
 
 #' @template getset-cell
@@ -637,7 +637,7 @@ make_getter_setters('italic', 'cell', check_fun = is.logical)
 #' @templateVar attr_val2 12
 #' @family formatting functions
 NULL
-make_getter_setters('font_size', 'cell', check_fun = is.numeric)
+make_getter_setters("font_size", "cell", check_fun = is.numeric)
 
 
 #' @template getset-cell
@@ -653,7 +653,7 @@ make_getter_setters('font_size', 'cell', check_fun = is.numeric)
 #' You will probably need to set [col_width()] and [row_height()] explicitly
 #' to achieve a nice result, in both HTML and LaTeX.
 NULL
-make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {value <- value %% 360})
+make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {value <- value %% 360})
 
 
 #' @template getset-cell
@@ -694,7 +694,7 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #'           "Default",
 #'           "NA",
 #'           "2",
-#'           "'%5.2f'",
+#'           "\"%5.2f\"",
 #'           "Pretty",
 #'           "Sign"
 #'         ),
@@ -708,16 +708,16 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #'
 #' number_format(ht)[3, -1] <- NA
 #' number_format(ht)[4, -1] <- 2
-#' number_format(ht)[5, -1] <- '%5.2f'
+#' number_format(ht)[5, -1] <- "%5.2f"
 #'
 #' number_format(ht)[6, -1] <- list(
 #'         function(x)
-#'           prettyNum(x, big.mark = ',',
+#'           prettyNum(x, big.mark = ",",
 #'                 scientific = FALSE)
 #'       )
 #'
 #' number_format(ht)[7, -1] <- list(
-#'         function(x) if (x > 0) '+' else '-'
+#'         function(x) if (x > 0) "+" else "-"
 #'       )
 #'
 #' right_border(ht) <- 1
@@ -737,13 +737,13 @@ make_getter_setters('rotation', 'cell', check_fun = is.numeric, extra_code = {va
 #' @templateVar attr_val 2
 #' @templateVar attr_val2 3
 NULL
-make_getter_setters('number_format', 'cell')
+make_getter_setters("number_format", "cell")
 
 
 # override the default
 `number_format<-.huxtable` <- function(ht, value) {
   stopifnot(all(sapply(value, function (x) is.numeric(x) || is.character(x) || is.function(x) || is.na(x) )))
-  attr(ht, 'number_format')[] <- value
+  attr(ht, "number_format")[] <- value
   ht
 }
 
@@ -754,10 +754,10 @@ make_getter_setters('number_format', 'cell')
 #' @details
 #' To replace `pad_decimal` use [align()], e.g. `align(ht) <- "."`.
 NULL
-make_getter_setters('pad_decimal', 'cell', extra_code = {
+make_getter_setters("pad_decimal", "cell", extra_code = {
   stopifnot(all(nchar(na.omit(value)) == 1))
-  .Deprecated(msg = "'pad_decimal' is deprecated.\nUse e.g. 'align(x) <- \".\"' instead.",
-        package = 'huxtable')
+  .Deprecated(msg = "`pad_decimal` is deprecated.\nUse e.g. `align(x) <- \".\"`` instead.",
+        package = "huxtable")
 })
 
 
@@ -767,37 +767,37 @@ make_getter_setters('pad_decimal', 'cell', extra_code = {
 #' @templateVar value_param_desc
 #' A character vector of font names. NB that LaTeX and HTML use different font names.
 #' @template getset-example
-#' @templateVar attr_val 'times'
+#' @templateVar attr_val "times"
 #' @template getset-rowspec-example
-#' @templateVar attr_val2 'arial'
+#' @templateVar attr_val2 "arial"
 #' @family formatting functions
 #' @template cell-property-usage
 NULL
-make_getter_setters('font', 'cell', check_fun = is.character)
+make_getter_setters("font", "cell", check_fun = is.character)
 
 
 #' @template getset-table
 #' @templateVar attr_name position
 #' @templateVar attr_desc Table position
 #' @templateVar value_param_desc
-#' A length-one character vector which may be 'left', 'center' or 'right'.
+#' A length-one character vector which may be "left", "center" or "right".
 #' @details
 #' If your tables are too far to the right under LaTeX, try setting their [width()]
 #' explicitly.
 #' @template getset-example
-#' @templateVar attr_val 'right'
+#' @templateVar attr_val "right"
 NULL
-make_getter_setters('position', 'table', check_values = c('left', 'center', 'centre', 'right'),
-      extra_code = value[value == 'centre'] <- 'center')
+make_getter_setters("position", "table", check_values = c("left", "center", "centre", "right"),
+      extra_code = value[value == "centre"] <- "center")
 
 #' @template getset-table
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption position
 #' @templateVar value_param_desc
-#' A length-one character vector, one of 'top', 'bottom', 'topleft', 'topcenter', 'topright', 'bottomleft', 'bottomcenter', 'bottomright'.
+#' A length-one character vector, one of "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter", "bottomright".
 #' @details
-#' If `caption_pos` is 'top' or 'bottom', then the horizontal position ('left', 'center' or 'right')
-#' will be determined by the huxtable's [position()].
+#' If `caption_pos` is "top" or "bottom", then the horizontal position ("left", "center" or "right")
+#' will be determined by the huxtable"s [position()].
 #' @seealso [caption()]
 #' @examples
 #' caption(jams) <- "Price list"
@@ -805,10 +805,10 @@ make_getter_setters('position', 'table', check_values = c('left', 'center', 'cen
 #' caption_pos(jams) <- "top"
 #' jams
 NULL
-make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 'topleft', 'topcenter', 'topcentre',
-      'topright', 'bottomleft', 'bottomcenter', 'bottomcentre', 'bottomright'), extra_code = {
-        value[value == 'topcentre'] <- 'topcenter'
-        value[value == 'bottomcentre'] <- 'bottomcenter'
+make_getter_setters("caption_pos", "table", check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
+      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"), extra_code = {
+        value[value == "topcentre"] <- "topcenter"
+        value[value == "bottomcentre"] <- "bottomcenter"
       })
 
 
@@ -821,7 +821,7 @@ make_getter_setters('caption_pos', 'table', check_values = c('top', 'bottom', 't
 #' @templateVar attr_val 0.8
 #' @family table measurements
 NULL
-make_getter_setters('width', 'table')
+make_getter_setters("width", "table")
 
 
 #' @template getset-table
@@ -833,7 +833,7 @@ make_getter_setters('width', 'table')
 #' @templateVar attr_val 0.4
 #' @family table measurements
 NULL
-make_getter_setters('height', 'table')
+make_getter_setters("height", "table")
 
 #' @template getset-table
 #' @templateVar attr_name caption
@@ -843,17 +843,17 @@ make_getter_setters('height', 'table')
 #' @details
 #' Captions are not escaped. See the example for a workaround.
 #' @template getset-example
-#' @templateVar attr_val 'An example table'
+#' @templateVar attr_val "An example table"
 #' @templateVar extra jams
 #' @seealso [caption_pos()]
 #' @examples
 #'
 #' # escape caption characters:
 #' caption(jams) <- sanitize(
-#'       'Make $$$ with jam',
-#'       type = 'latex')
+#'       "Make $$$ with jam",
+#'       type = "latex")
 NULL
-make_getter_setters('caption', 'table', check_fun = is.character)
+make_getter_setters("caption", "table", check_fun = is.character)
 
 
 #' @template getset-table
@@ -862,10 +862,10 @@ make_getter_setters('caption', 'table', check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector.
 #' @template getset-example
-#' @templateVar attr_val 'longtable'
+#' @templateVar attr_val "longtable"
 #' @details No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
 NULL
-make_getter_setters('tabular_environment', 'table', check_fun = is.character)
+make_getter_setters("tabular_environment", "table", check_fun = is.character)
 
 
 #' @template getset-table
@@ -874,12 +874,12 @@ make_getter_setters('tabular_environment', 'table', check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML.
 #' @template getset-example
-#' @templateVar attr_val 'tab:mytable'
+#' @templateVar attr_val "tab:mytable"
 #' @details
 #' LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
 #' in \href{http://bookdown.org}{bookdown}.
 NULL
-make_getter_setters('label', 'table', check_fun = is.character)
+make_getter_setters("label", "table", check_fun = is.character)
 
 
 #' @template getset-table
@@ -888,9 +888,9 @@ make_getter_setters('label', 'table', check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector, used by LaTeX for positioning the float.
 #' @template getset-example
-#' @templateVar attr_val 'h'
-#' @details Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
-#' floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
+#' @templateVar attr_val "h"
+#' @details Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
+#' floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
 #' TeX `float` package.
 NULL
-make_getter_setters('latex_float', 'table', check_fun = is.character)
+make_getter_setters("latex_float", "table", check_fun = is.character)

@@ -67,7 +67,7 @@ ht <- huxtable(
           "Default",
           "NA",
           "2",
-          "'\%5.2f'",
+          "\\"\%5.2f\\"",
           "Pretty",
           "Sign"
         ),
@@ -81,16 +81,16 @@ ht <- huxtable(
 
 number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
-number_format(ht)[5, -1] <- '\%5.2f'
+number_format(ht)[5, -1] <- "\%5.2f"
 
 number_format(ht)[6, -1] <- list(
         function(x)
-          prettyNum(x, big.mark = ',',
+          prettyNum(x, big.mark = ",",
                 scientific = FALSE)
       )
 
 number_format(ht)[7, -1] <- list(
-        function(x) if (x > 0) '+' else '-'
+        function(x) if (x > 0) "+" else "-"
       )
 
 right_border(ht) <- 1

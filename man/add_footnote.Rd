@@ -24,6 +24,6 @@ all table columns and has an optional border above.
 }
 \examples{
 jams <- add_footnote(jams,
-      '* subject to availability')
+      "* subject to availability")
 jams
 }

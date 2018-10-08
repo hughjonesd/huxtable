@@ -31,20 +31,20 @@ For \code{huxtable} objects, arguments in \code{...} can include \code{copy_cell
 }
 \examples{
 ht <- hux(
-        Jam = c('Raspberry', 'Plum'),
+        Jam = c("Raspberry", "Plum"),
         Price = c(1.90, 1.80),
         add_colnames = TRUE
       )
 
-ht2 <- hux('Gooseberry', 2.10)
+ht2 <- hux("Gooseberry", 2.10)
 add_rows(ht, ht2)
 add_rows(ht, ht2, after = 1)
 
 mx <- matrix(
-      c('Sugar', '50\%', '60\%',
-      'Weight (g)', 300, 250),
+      c("Sugar", "50\%", "60\%",
+      "Weight (g)", 300, 250),
       3, 2)
-add_columns(ht, mx, after = 'Jam')
+add_columns(ht, mx, after = "Jam")
 }
 \seealso{
 \code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert multiple values into a single row.

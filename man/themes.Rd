@@ -23,7 +23,7 @@ theme_mondrian(ht, prop_colored = 0.1, font = "Arial")
 \arguments{
 \item{ht}{A huxtable object.}
 
-\item{position}{'left', 'center' or 'right'}
+\item{position}{"left", "center" or "right"}
 
 \item{header_row}{Logical: style first row differently?}
 

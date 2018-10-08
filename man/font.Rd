@@ -36,22 +36,22 @@ Functions to get or set the \emph{font} property of huxtable cells.
 }
 \examples{
 
-font(jams) <-  'times'
+font(jams) <-  "times"
 font(jams)
 
 
 jams2 <- set_font(jams,
-      'times')
+      "times")
 font(jams2)
 
 jams3 <- set_font(jams,
-      2:3, 1, 'times')
+      2:3, 1, "times")
 font(jams3)
 
 jams4 <- map_font(jams,
       by_rows(
-        'times',
-        'arial')
+        "times",
+        "arial")
       )
 font(jams4)
 }

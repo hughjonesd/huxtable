@@ -7,7 +7,7 @@
 guess_knitr_output_format()
 }
 \value{
-'html', 'latex', or something else. If we are not in a knitr document, returns an empty
+"html", "latex", or something else. If we are not in a knitr document, returns an empty
 string.
 }
 \description{

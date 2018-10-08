@@ -77,9 +77,9 @@ release.
 \examples{
 ht <- huxtable(a = 1:3, b = 3:1)
 ht <- set_all_borders(ht, 1)
-set_left_border_color(ht, 'red')
+set_left_border_color(ht, "red")
 set_left_border_color(ht,
-      1:2, 1, 'red')
+      1:2, 1, "red")
 
 # When cells span multiple rows:
 ht <- tribble_hux(

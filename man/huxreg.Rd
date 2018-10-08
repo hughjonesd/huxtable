@@ -17,9 +17,9 @@ huxreg(..., error_format = "({std.error})", error_style = c("stderr",
 
 \item{error_format}{How to display uncertainty in estimates. See below.}
 
-\item{error_style}{Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.}
+\item{error_style}{Deprecated. One or more of "stderr", "ci" (confidence interval), "statistic" or "pvalue".}
 
-\item{error_pos}{Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.}
+\item{error_pos}{Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.}
 
 \item{number_format}{Format for numbering. See \code{\link[=number_format]{number_format()}} for details.}
 
@@ -60,8 +60,8 @@ A huxtable object.
 Create a huxtable to display model output
 }
 \details{
-Models must have a \code{\link[broom:tidy]{broom::tidy()}} method defined, which should return 'term', 'estimate', 'std.error',
-'statistic' and 'p.value'. If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
+Models must have a \code{\link[broom:tidy]{broom::tidy()}} method defined, which should return "term", "estimate", "std.error",
+"statistic" and "p.value". If the \code{tidy} method does not have a \code{conf.int} option, \code{huxreg} will
 calculate confidence intervals itself, using a normal approximation.
 
 If \code{...} has names or contains a single named list, the names will be used for column headings.
@@ -71,7 +71,7 @@ If the \code{coef} and/or \code{statistics} vectors have names, these will be us
 different values of \code{coef} have the same name, the corresponding rows will be merged in the
 output.
 
-\code{statistics} should be column names from \code{\link[broom:glance]{broom::glance()}}. You can also use \code{'nobs'} for the
+\code{statistics} should be column names from \code{\link[broom:glance]{broom::glance()}}. You can also use \code{"nobs"} for the
 number of observations. If \code{statistics} is \code{NULL} then all columns from \code{glance} will be used. To
 use no columns, set \code{statistics = character(0)}.
 

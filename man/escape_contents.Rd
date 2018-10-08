@@ -37,7 +37,7 @@ Functions to get or set the \emph{escape cell contents} property of huxtable cel
 \examples{
 ht <- huxtable(
         Exponent = 2:4,
-        Example  = paste0('$x^', 2:4, '$'),
+        Example  = paste0("$x^", 2:4, "$"),
         add_colnames = TRUE
       )
 escape_contents(ht)[,2] <- FALSE

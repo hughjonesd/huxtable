@@ -18,31 +18,31 @@
 #' @seealso [huxtable-options]
 knit_print.huxtable <- function (x, options, ...) {
   # guess... runs assert_package for knitr
-  of <- getOption('huxtable.knitr_output_format', guess_knitr_output_format())
+  of <- getOption("huxtable.knitr_output_format", guess_knitr_output_format())
   call_name <- switch(of,
-        latex  = 'to_latex',
-        html   = 'to_html',
-        md     = 'to_md',
-        screen = 'to_screen',
-        rtf    = 'to_rtf',
+        latex  = "to_latex",
+        html   = "to_html",
+        md     = "to_md",
+        screen = "to_screen",
+        rtf    = "to_rtf",
         { # default
         warning(glue::glue(
             'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
             'Set options("huxtable.knitr_output_format") manually to ',
             '"latex", "html", "rtf", "md" or "screen".'))
-          'to_screen'
+          "to_screen"
         })
   res <- do.call(call_name, list(ht = x))
-  if (of == 'latex') {
+  if (of == "latex") {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
-    if (tenv %in% c('tabulary', 'longtable')) latex_deps <- c(latex_deps,
+    if (tenv %in% c("tabulary", "longtable")) latex_deps <- c(latex_deps,
           list(rmarkdown::latex_dependency(tenv)))
     return(knitr::asis_output(res, meta = latex_deps))
-  } else if (of == 'html') {
+  } else if (of == "html") {
     res <- knitr::asis_output(htmlPreserve(res))
     return(res)
-  } else if (of == 'rtf') {
+  } else if (of == "rtf") {
     return(knitr::raw_output(res))
   } else {
     return(knitr::asis_output(res))
@@ -85,11 +85,11 @@ knit_print.huxtable <- function (x, options, ...) {
 #'       )
 #' }
 knit_print.data.frame <- function(x, options, ...) {
-  if (! isTRUE(getOption('huxtable.knit_print_df', TRUE))) {
+  if (! isTRUE(getOption("huxtable.knit_print_df", TRUE))) {
     NextMethod() # probably calls knit_print.default
   } else {
     ht <- smart_hux_from_df(x)
-    df_theme <- getOption('huxtable.knit_print_df_theme', theme_plain)
+    df_theme <- getOption("huxtable.knit_print_df_theme", theme_plain)
     assert_that(is.function(df_theme))
     ht <- df_theme(ht)
     # we are now jumping down the class hierarchy, so do this rather than NextMethod():
@@ -102,7 +102,7 @@ knit_print.data.frame <- function(x, options, ...) {
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
 #'
-#' @return 'html', 'latex', or something else. If we are not in a knitr document, returns an empty
+#' @return "html", "latex", or something else. If we are not in a knitr document, returns an empty
 #'   string.
 #' @export
 #'
@@ -113,29 +113,29 @@ knit_print.data.frame <- function(x, options, ...) {
 #' }
 guess_knitr_output_format <- function() {
   # this is on hold until I'm sure I want 'markdown' to be interpreted as HTML
-  # if (utils::packageVersion('knitr') >= '1.17.8') {
+  # if (utils::packageVersion("knitr") >= "1.17.8") {
   #   # delegate to knitr
-  #   if (knitr::is_latex_output()) return('latex')
-  #   if (knitr::is_html_output()) return('html')
-  #   return('')
+  #   if (knitr::is_latex_output()) return("latex")
+  #   if (knitr::is_html_output()) return("html")
+  #   return("")
   # }
-  assert_package('guess_knitr_output_format', 'knitr')
-  assert_package('guess_knitr_output_format', 'rmarkdown')
-  of <- knitr::opts_knit$get('out.format')
-  if (is.null(of) || of == 'markdown') {
-    of <- knitr::opts_knit$get('rmarkdown.pandoc.to')
+  assert_package("guess_knitr_output_format", "knitr")
+  assert_package("guess_knitr_output_format", "rmarkdown")
+  of <- knitr::opts_knit$get("out.format")
+  if (is.null(of) || of == "markdown") {
+    of <- knitr::opts_knit$get("rmarkdown.pandoc.to")
     if (is.null(of)) {
       knit_in <- knitr::current_input()
-      if (is.null(knit_in)) return('')
+      if (is.null(knit_in)) return("")
       of <- rmarkdown::default_output_format(knit_in)
       of <- of$name
     }
   }
-  if (of == 'tufte_handout') of <- 'latex'
-  if (of == 'tufte_html') of <- 'html'
-  of <- sub('_.*', '', of)
-  if (of %in% c('ioslides', 'revealjs', 'slidy')) of <- 'html'
-  if (of %in% c('beamer', 'pdf')) of <- 'latex'
+  if (of == "tufte_handout") of <- "latex"
+  if (of == "tufte_html") of <- "html"
+  of <- sub("_.*", "", of)
+  if (of %in% c("ioslides", "revealjs", "slidy")) of <- "html"
+  if (of %in% c("beamer", "pdf")) of <- "latex"
 
   of
 }

@@ -59,8 +59,8 @@ of cells. Behaviour is undefined unless \code{row} and \code{col} specify contig
 \examples{
 ht <- huxtable(a = 1:3, b = 1:3)
 set_all_borders(ht, 1:3, 1:2, 1)
-ht <- set_all_border_colors(ht, 'red')
-ht <- set_all_border_styles(ht, 'double')
+ht <- set_all_border_colors(ht, "red")
+ht <- set_all_border_styles(ht, "double")
 ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 ht2 <- huxtable(a = 1:3, b = 1:3)
 set_outer_borders(ht2, 1)

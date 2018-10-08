@@ -32,8 +32,8 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
   options(huxtable.print = print_latex)
 }
 
-format(jams, output = 'screen')
-format(jams, output = 'md')
+format(jams, output = "screen")
+format(jams, output = "md")
 }
 \seealso{
 To change how huxtables are printed within \code{knitr}, see

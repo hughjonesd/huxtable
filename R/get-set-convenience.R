@@ -23,10 +23,8 @@ NULL
 set_default_properties <- function(...) {
   defaults <- list(...)
   if (is.list(defaults[[1]]) && is.null(names(defaults))) defaults <- defaults[[1]]
+  check_recognized_properties(names(defaults))
 
-  if (length(unrec <- setdiff(names(defaults), names(huxtable_env$huxtable_default_attrs))) > 0)
-    stop('Unrecognized huxtable property name(s): ', paste(unrec, collapse = ', '),
-      '; to see all names, use get_default_properties()')
   old <- huxtable_env$huxtable_default_attrs[names(defaults)]
   huxtable_env$huxtable_default_attrs[names(defaults)] <- defaults
 
@@ -42,16 +40,21 @@ set_default_properties <- function(...) {
 #' @export
 #'
 #' @examples
-#' get_default_properties('bold')
+#' get_default_properties("bold")
 #' @rdname set_default_properties
 get_default_properties <- function (names = NULL) {
   names <- names %||% names(huxtable_env$huxtable_default_attrs)
-  if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
-    'Unrecognized property name(s): ', paste(unrec, collapse = ', '),
-    '; to see all names, use get_default_properties()')
+  check_recognized_properties(names)
+
   huxtable_env$huxtable_default_attrs[names]
 }
 
+
+check_recognized_properties <- function (names) {
+  if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
+    "Unrecognized property name(s): ", paste(unrec, collapse = ", "),
+    "; to see all names, use get_default_properties()")
+}
 
 #' Set left, right, top and bottom properties
 #'
@@ -73,43 +76,43 @@ NULL
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' set_all_borders(ht, 1:3, 1:2, 1)
 set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'set_%s_border')
+  recall_ltrb(ht, "set_%s_border")
 }
 
 #' @rdname set-multiple
 #' @export
 map_all_borders <- function (ht, row, col, fn) {
-  recall_ltrb(ht, 'map_%s_border')
+  recall_ltrb(ht, "map_%s_border")
 }
 
 
 #' @rdname set-multiple
 #' @export
 #' @examples
-#' ht <- set_all_border_colors(ht, 'red')
+#' ht <- set_all_border_colors(ht, "red")
 set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'set_%s_border_color')
+  recall_ltrb(ht, "set_%s_border_color")
 }
 
 #' @rdname set-multiple
 #' @export
 map_all_border_colors <- function (ht, row, col, fn) {
-  recall_ltrb(ht, 'map_%s_border_color')
+  recall_ltrb(ht, "map_%s_border_color")
 }
 
 
 #' @rdname set-multiple
 #' @export
 #' @examples
-#' ht <- set_all_border_styles(ht, 'double')
+#' ht <- set_all_border_styles(ht, "double")
 set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'set_%s_border_style')
+  recall_ltrb(ht, "set_%s_border_style")
 }
 
 #' @rdname set-multiple
 #' @export
 map_all_border_styles <- function (ht, row, col, fn) {
-  recall_ltrb(ht, 'map_%s_border_style')
+  recall_ltrb(ht, "map_%s_border_style")
 }
 
 
@@ -118,14 +121,14 @@ map_all_border_styles <- function (ht, row, col, fn) {
 #' @examples
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
-  recall_ltrb(ht, 'set_%s_padding')
+  recall_ltrb(ht, "set_%s_padding")
 }
 
 
 #' @rdname set-multiple
 #' @export
 map_all_padding <- function (ht, row, col, fn) {
-  recall_ltrb(ht, 'map_%s_padding')
+  recall_ltrb(ht, "map_%s_padding")
 }
 
 
@@ -185,17 +188,17 @@ set_outer_borders <- function(ht, row, col, value) {
 #' @examples
 #' ht <- hux(a = 1:3, b = 1:3)
 #' ht <- set_cell_properties(ht, 1, 1,
-#'       italic = TRUE, text_color = 'red')
+#'       italic = TRUE, text_color = "red")
 #' text_color(ht)
 #' ht
 set_cell_properties <- function (ht, row, col, ...) {
   props <- list(...)
-  if (! all(names(props) %in% huxtable_cell_attrs)) stop('Unrecognized properties: ', paste(setdiff(names(props),
-    huxtable_cell_attrs), collapse = ', '))
+  if (! all(names(props) %in% huxtable_cell_attrs)) stop("Unrecognized properties: ", paste(setdiff(names(props),
+    huxtable_cell_attrs), collapse = ", "))
   call <- match.call(expand.dots = FALSE)
-  call[['...']] <- NULL
+  call[["..."]] <- NULL
   for (prop_name in names(props)) {
-    call[[1]] <- as.symbol(paste0('set_', prop_name))
+    call[[1]] <- as.symbol(paste0("set_", prop_name))
     call$value <- props[[prop_name]]
     ht <- eval(call, list(ht = ht), parent.frame())
   }
@@ -228,9 +231,9 @@ merge_cells <- function (ht, row, col) {
   assert_that(is_huxtable(ht))
 
   if (missing(col)) {
-    .Deprecated('Using merge_cells without a `col` argument is deprecated.', package = 'huxtable')
+    .Deprecated("Using merge_cells without a `col` argument is deprecated.", package = "huxtable")
     if (! is.matrix(row)) stop(
-      'No columns specified, but `row` argument did not evaluate to a matrix')
+      "No columns specified, but `row` argument did not evaluate to a matrix")
     # 2-matrix of row, col vectors
     col <- seq(min(row[, 2]), max(row[, 2]))
     row <- seq(min(row[, 1]), max(row[, 1]))

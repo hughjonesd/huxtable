@@ -15,7 +15,7 @@ map_valign(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be 'top', 'middle', 'bottom' or \code{NA}.
+\item{value}{A character vector or matrix which may be "top", "middle", "bottom" or \code{NA}.
 
 Set to \code{NA} to reset to the default, which is \code{"top"}.}
 
@@ -40,22 +40,22 @@ may help.
 }
 \examples{
 
-valign(jams) <-  'bottom'
+valign(jams) <-  "bottom"
 valign(jams)
 
 
 jams2 <- set_valign(jams,
-      'bottom')
+      "bottom")
 valign(jams2)
 
 jams3 <- set_valign(jams,
-      2:3, 1, 'bottom')
+      2:3, 1, "bottom")
 valign(jams3)
 
 jams4 <- map_valign(jams,
       by_rows(
-        'bottom',
-        'bottom')
+        "bottom",
+        "bottom")
       )
 valign(jams4)
 }

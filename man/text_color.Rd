@@ -39,18 +39,18 @@ Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"}
 }
 \examples{
 
-text_color(jams) <-  'blue'
+text_color(jams) <-  "blue"
 text_color(jams)
 
 
 set_text_color(jams,
-      'blue')
+      "blue")
 set_text_color(jams,
-      2:3, 1, 'blue')
+      2:3, 1, "blue")
 map_text_color(jams,
       by_rows(
-        'blue',
-        'red'
+        "blue",
+        "red"
       ))
 }
 \seealso{

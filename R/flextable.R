@@ -5,7 +5,7 @@
 #'
 #' @export
 as_FlexTable <- function(x, ...) {
-  .Deprecated(new = 'as_flextable', package = 'huxtable')
+  .Deprecated(new = "as_flextable", package = "huxtable")
   as_flextable(x, ...)
 }
 
@@ -53,24 +53,24 @@ as_FlexTable <- function(x, ...) {
 #' @aliases as_flextable.huxtable
 #' @export
 #'
-as_flextable <- function(x, ...) UseMethod('as_flextable')
+as_flextable <- function(x, ...) UseMethod("as_flextable")
 
 
 #' @rdname as_flextable
 #' @export
 as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
-  assert_package('as_flextable', 'flextable')
+  assert_package("as_flextable","flextable")
 
-  cc <- clean_contents(x, type = 'word')
+  cc <- clean_contents(x, type = "word")
   cc <- as.data.frame(cc, stringsAsFactors = FALSE)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
-  if (! colnames_to_header) ft <- flextable::delete_part(ft, 'header')
+  if (! colnames_to_header) ft <- flextable::delete_part(ft, "header")
 
   if (is.numeric(rh <- row_height(x))) ft <- flextable::height(ft, height = rh)
   if (is.numeric(cw <- col_width(x)))  ft <- flextable::width(ft, width = cw)
 
-  rots <- list('0' = 'lrtb', '90' = 'btlr', '270' = 'tbrl')
+  rots <- list("0" = "lrtb", "90" = "btlr", "270" = "tbrl")
   dcells <- display_cells(x, all = FALSE)
   for (r in seq_len(nrow(dcells))) {
     dcell <- dcells[r, ]
@@ -92,12 +92,12 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
             padding.right  = right_padding(x)[drow, dcol],
             padding.top    = top_padding(x)[drow, dcol]
           )
-    bnames <- c('top', 'left', 'bottom', 'right')
+    bnames <- c("top", "left", "bottom", "right")
     bdrs  <- get_all_borders(x, drow, dcol)
     bcols <- get_all_border_colors(x, drow, dcol)
     bst   <- get_all_border_styles(x, drow, dcol)
-    bst[bst == 'double'] <- 'solid'
-    bcols[is.na(bcols)] <- 'black'
+    bst[bst == "double"] <- "solid"
+    bcols[is.na(bcols)] <- "black"
     fp_borders <- lapply(bnames, function (x)
       officer::fp_border(color = bcols[[x]], width = bdrs[[x]], style = bst[[x]])
     )
@@ -110,10 +110,10 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
           )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]
-    if (valign == 'middle') valign <- 'center'
+    if (valign == "middle") valign <- "center"
     if (! (rot %in% names(rots))) {
-      warning('flextable can only handle rotation of 0, 90 or 270')
-      rot <- '0'
+      warning("flextable can only handle rotation of 0, 90 or 270")
+      rot <- "0"
     }
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
   }

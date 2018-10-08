@@ -28,14 +28,14 @@ Captions are not escaped. See the example for a workaround.
 }
 \examples{
 
-caption(jams) <-  'An example table'
+caption(jams) <-  "An example table"
 caption(jams)
 jams
 
 # escape caption characters:
 caption(jams) <- sanitize(
-      'Make $$$ with jam',
-      type = 'latex')
+      "Make $$$ with jam",
+      type = "latex")
 }
 \seealso{
 \code{\link[=caption_pos]{caption_pos()}}

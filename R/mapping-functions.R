@@ -62,8 +62,8 @@ NULL
 #'   by_p_value <- function (ht, rows, cols, current) {
 #'      result <- current
 #'      pvals <- att_corr$p[rows, cols]
-#'      result[pvals < 0.01] <- 'red'
-#'      result[pvals < 0.05] <- 'orange'
+#'      result[pvals < 0.01] <- "red"
+#'      result[pvals < 0.05] <- "orange"
 #'      result
 #'   }
 #   map_background_color(corr_hux, by_p_value)
@@ -122,10 +122,10 @@ NULL
 #'       by_values(a = "red", c = "yellow", "green"))
 by_values <- function (...) {
   vals <- c(...)
-  named_vals <- vals[names(vals) != '']
+  named_vals <- vals[names(vals) != ""]
   targets <- names(named_vals)
-  default <- vals[names(vals) == '']
-  if (length(default) > 1) stop('At most one element of `...` can be unnamed')
+  default <- vals[names(vals) == ""]
+  if (length(default) > 1) stop("At most one element of `...` can be unnamed")
 
   values_fn <- function (ht, rows, cols, current) {
     res <- current
@@ -155,9 +155,9 @@ by_values <- function (...) {
 #' @examples
 #' ht <- as_hux(matrix(rnorm(25), 5, 5))
 #' map_background_color(ht,
-#'       by_rows('green', 'grey'))
+#'       by_rows("green", "grey"))
 #' map_background_color(ht,
-#'       by_cols('green', 'grey'))
+#'       by_cols("green", "grey"))
 by_rows <- function (..., from = 1) {
   vals <- c(...)
   assert_that(is.count(from))
@@ -243,7 +243,7 @@ by_ranges <- function (breaks, values, right = FALSE, extend = TRUE) {
   assert_that(is.numeric(breaks))
   assert_that(all(breaks == sort(breaks)))
   if (extend) breaks <- c(-Inf, breaks, Inf)
-  assert_that(length(values) == length(breaks) - 1, msg = '`values` is wrong length')
+  assert_that(length(values) == length(breaks) - 1, msg = "`values` is wrong length")
   force(right)
 
   ranges_fn <- function(ht, rows, cols, current) {
@@ -334,21 +334,21 @@ by_equal_groups <- function (n, values) {
 #' @examples
 #' ht <- hux("The cat sat", "on the", "mat")
 #'
-#' map_bold(ht, by_regex('at' = TRUE))
-#' map_bold(ht, by_regex('a.*a' = TRUE))
+#' map_bold(ht, by_regex("at" = TRUE))
+#' map_bold(ht, by_regex("a.*a" = TRUE))
 #'
 #' map_bold(ht, by_regex(
-#'         'the' = TRUE,
+#'         "the" = TRUE,
 #'         .grepl_args = list(
 #'           ignore.case = TRUE
 #'         )
 #'       ))
 by_regex <- function(..., .grepl_args = list()) {
   vals <- c(...)
-  named_vals <- vals[names(vals) != '']
+  named_vals <- vals[names(vals) != ""]
   patterns <- names(named_vals)
-  default <- vals[names(vals) == '']
-  if (length(default) > 1) stop('At most one element of `...` can be unnamed')
+  default <- vals[names(vals) == ""]
+  if (length(default) > 1) stop("At most one element of `...` can be unnamed")
 
   matching_fn <- function (ht, rows, cols, current) {
     res <- current
@@ -391,7 +391,7 @@ by_regex <- function(..., .grepl_args = list()) {
 #'       by_colorspace("red", "yellow", "blue"))
 #'
 by_colorspace <- function (..., range = NULL, na_color = NA) {
-  assert_package('by_colorspace', 'scales')
+  assert_package("by_colorspace", "scales")
   palette <- c(...)
 
   by_function(scales::col_numeric(palette, domain = range, na.color = na_color))
@@ -419,7 +419,7 @@ by_colorspace <- function (..., range = NULL, na_color = NA) {
 #' map_background_color(ht,
 #'       by_function(grey))
 #'
-#' if (requireNamespace('scales')) {
+#' if (requireNamespace("scales")) {
 #'   map_text_color(ht, by_function(
 #'           scales::seq_gradient_pal()
 #'         ))
@@ -457,7 +457,7 @@ by_function <- function (inner_fn) {
 #' @export
 #'
 #' @examples
-#' if (! requireNamespace('dplyr')) {
+#' if (! requireNamespace("dplyr")) {
 #'   stop("Please install the 'dplyr' package to run this example")
 #' }
 #'
@@ -470,14 +470,14 @@ by_function <- function (inner_fn) {
 #'       ))
 by_cases <- function (..., skip_na = TRUE) {
   assert_that(is.flag(skip_na))
-  assert_package('by_cases', 'dplyr')
+  assert_package("by_cases", "dplyr")
   # turn into character strings so they don't capture local information yet
   cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
 
   case_fn <- function (ht, rows, cols, current) {
     res <- current
     myenv <- new.env()
-    assign('.',  as.matrix(ht[rows, cols]), envir = myenv)
+    assign(".",  as.matrix(ht[rows, cols]), envir = myenv)
     cases <- lapply(cases, stats::as.formula, env = myenv)
     vals <- dplyr::case_when(!!! cases)
     res[] <- vals

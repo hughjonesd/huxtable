@@ -47,7 +47,7 @@ set_background_color(jams,
 map_background_color(jams,
       by_rows(
         grey(.95),
-        'yellow'
+        "yellow"
       ))
 }
 \seealso{

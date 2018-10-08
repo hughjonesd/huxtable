@@ -13,7 +13,7 @@ set_position(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector which may be 'left', 'center' or 'right'. Set to \code{NA} to reset to the default, which is
+\item{value}{A length-one character vector which may be "left", "center" or "right". Set to \code{NA} to reset to the default, which is
 \code{"center"}.}
 }
 \value{
@@ -29,7 +29,7 @@ explicitly.
 }
 \examples{
 
-position(jams) <-  'right'
+position(jams) <-  "right"
 position(jams)
 
 }

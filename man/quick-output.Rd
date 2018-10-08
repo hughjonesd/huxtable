@@ -37,10 +37,10 @@ quick_rtf(..., file = confirm("huxtable-output.rtf"), borders = 0.4,
 
 \item{open}{Logical. Automatically open the resulting file?}
 
-\item{width}{String passed to the LaTeX \code{geometry} package's \code{paperwidth} option. Use \code{NULL} for
+\item{width}{String passed to the LaTeX \code{geometry} package"s \code{paperwidth} option. Use \code{NULL} for
 the default width.}
 
-\item{height}{String passed to \code{geometry}'s \code{paperheight} option. Use \code{NULL} for the default
+\item{height}{String passed to \code{geometry}"s \code{paperheight} option. Use \code{NULL} for the default
 height.}
 }
 \value{

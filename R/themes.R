@@ -51,8 +51,8 @@ NULL
 
 #' @export
 #' @rdname themes
-#' @param position 'left', 'center' or 'right'
-theme_plain <- function(ht, position = 'left'){
+#' @param position "left", "center" or "right"
+theme_plain <- function(ht, position = "left"){
   ht <- set_outer_borders(ht, 0.4)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
   ht <- set_bold(ht, 1, everywhere, TRUE)
@@ -61,6 +61,7 @@ theme_plain <- function(ht, position = 'left'){
 
   ht
 }
+
 
 #' @export
 #' @rdname themes
@@ -82,18 +83,18 @@ theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, 
   assert_that(is.flag(header_row), is.flag(header_col))
 
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
-  background_color(ht)[seq(1, nrow(ht), 2), ] <- 'white'
+  background_color(ht)[seq(1, nrow(ht), 2), ] <- "white"
   if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2), ] <- stripe
   if (header_row) {
-    background_color(ht)[1, ] <- 'black'
-    text_color(ht)[1, ]       <- 'white'
-    ht <- set_all_border_colors(ht, 1, every(), 'white')
+    background_color(ht)[1, ] <- "black"
+    text_color(ht)[1, ]       <- "white"
+    ht <- set_all_border_colors(ht, 1, every(), "white")
     bold(ht)[1, ]             <- TRUE
   }
   if (header_col) {
-    background_color(ht)[, 1] <- 'black'
-    text_color(ht)[, 1]       <- 'white'
-    ht <- set_all_border_colors(ht, every(), 1, 'white')
+    background_color(ht)[, 1] <- "black"
+    text_color(ht)[, 1]       <- "white"
+    ht <- set_all_border_colors(ht, every(), 1, "white")
     bold(ht)[, 1]             <- TRUE
   }
 
@@ -123,14 +124,14 @@ theme_article <- function(ht, header_row = TRUE, header_col = TRUE) {
 #' @rdname themes
 #' @param prop_colored Roughly what proportion of cells should have a primary-color background?
 #' @param font Font to use. For LaTeX, try `"cmss"`.
-theme_mondrian <- function(ht, prop_colored = 0.1, font = 'Arial') {
+theme_mondrian <- function(ht, prop_colored = 0.1, font = "Arial") {
   assert_that(is.number(prop_colored), prop_colored >= 0, prop_colored <= 1)
 
   ht <- set_all_borders(ht, 2)
-  ht <- set_all_border_colors(ht, 'black')
+  ht <- set_all_border_colors(ht, "black")
   ncells <- nrow(ht) * ncol(ht)
   colored <- sample.int(ncells, size = ceiling(ncells * prop_colored), replace = FALSE)
-  colors <- sample(c('red', 'blue', 'yellow'), length(colored), replace = TRUE)
+  colors <- sample(c("red", "blue", "yellow"), length(colored), replace = TRUE)
   background_color(ht)[colored] <- colors
   font(ht) <- font
 

@@ -39,9 +39,9 @@ NULL
 
 
 #' @rdname quick-output
-#' @param width String passed to the LaTeX `geometry` package's `paperwidth` option. Use `NULL` for
+#' @param width String passed to the LaTeX `geometry` package"s `paperwidth` option. Use `NULL` for
 #'   the default width.
-#' @param height String passed to `geometry`'s `paperheight` option. Use `NULL` for the default
+#' @param height String passed to `geometry`"s `paperheight` option. Use `NULL` for the default
 #'   height.
 #' @export
 quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
@@ -52,44 +52,44 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   hts <- huxtableize(list(...), borders)
 
   # on my Mac, tempdir() gets a double slash in the path, which screws up texi2pdf.
-  # You can't use normalizePath with a non-existent file, so the below doesn't work:
+  # You can"t use normalizePath with a non-existent file, so the below doesn"t work:
   # latex_file <- normalizePath(tempfile(fileext = ".tex"), mustWork = TRUE)
   clean_tmp_dir <- normalizePath(tempdir(), mustWork = TRUE)
   latex_file <- tempfile(tmpdir = clean_tmp_dir, fileext = ".tex")
   sink(latex_file)
   tryCatch({
-    cat('\\documentclass{article}\n')
+    cat("\\documentclass{article}\n")
     report_latex_dependencies()
     if (! is.null(width) || ! is.null(height)) {
       dim_string <- character(2)
-      dim_string[1] <- if (is.null(width)) '' else sprintf('paperwidth=%s', width)
-      dim_string[2] <- if (is.null(height)) '' else sprintf('paperheight=%s', height)
-      dim_string = paste(dim_string, collapse = ',')
-      cat(sprintf('\\usepackage[%s]{geometry}\n', dim_string))
+      dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
+      dim_string[2] <- if (is.null(height)) "" else sprintf("paperheight=%s", height)
+      dim_string = paste(dim_string, collapse = ",")
+      cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
     }
-    cat('\\pagenumbering{gobble}\n')
-    cat('\n\\begin{document}')
+    cat("\\pagenumbering{gobble}\n")
+    cat("\n\\begin{document}")
     lapply(hts, function (ht) {
-      cat('\n\n')
+      cat("\n\n")
       print_latex(ht)
-      cat('\n\n')
+      cat("\n\n")
     })
-    cat('\n\\end{document}')
+    cat("\n\\end{document}")
   },
     error = identity,
     finally = {sink()}
   )
 
   tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
-  pdf_file <- sub('\\.tex$', '.pdf', basename(latex_file))
-  if (! file.exists(pdf_file)) stop('Could not find texi2pdf output file "', pdf_file, '"')
-  if (! file.remove(latex_file)) warning('Could not remove intermediate TeX file "', latex_file, '"')
+  pdf_file <- sub("\\.tex$", ".pdf", basename(latex_file))
+  if (! file.exists(pdf_file)) stop("Could not find texi2pdf output file '", pdf_file, "'")
+  if (! file.remove(latex_file)) warning("Could not remove intermediate TeX file '", latex_file, "'")
   # we overwrite existing files. If no explicit `file` argument was specified, confirm() has
   # already checked if this is OK, or has failed in non-interactive sessions:
   if (file.copy(pdf_file, file, overwrite = TRUE)) {
     file.remove(pdf_file)
   } else {
-    stop('Could not copy pdf file to ', file, '. The pdf file remains at "', pdf_file, '"')
+    stop("Could not copy pdf file to ", file, ". The pdf file remains at '", pdf_file, "'")
   }
 
   if (open) auto_open(file)
@@ -107,14 +107,14 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
   hts <- huxtableize(list(...), borders)
 
   sink(file)
-  cat('<!DOCTYPE html><html><body>')
+  cat("<!DOCTYPE html><html><body>")
   tryCatch({
     lapply(hts, function (ht) {
-      cat('<p>&nbsp;</p>')
+      cat("<p>&nbsp;</p>")
       print_html(ht)
-      cat('\n\n')
+      cat("\n\n")
     })
-    cat('</body></html>')
+    cat("</body></html>")
   },
     error = identity,
     finally = {sink()}
@@ -190,7 +190,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
 
 #' @rdname quick-output
 #' @export
-quick_rtf <- function (..., file = confirm('huxtable-output.rtf'), borders = 0.4,
+quick_rtf <- function (..., file = confirm("huxtable-output.rtf"), borders = 0.4,
       open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
@@ -201,11 +201,11 @@ quick_rtf <- function (..., file = confirm('huxtable-output.rtf'), borders = 0.4
 
   sink(file)
   tryCatch({
-    cat('{\\rtf1\\ansi\\deff0\n')
+    cat("{\\rtf1\\ansi\\deff0\n")
     print(fc_tbls)
-    cat('\n\n\n')
+    cat("\n\n\n")
     lapply(hts, print_rtf)
-    cat('\n\n\n}')
+    cat("\n\n\n}")
   },
     error = identity,
     finally = {sink()}
@@ -218,7 +218,7 @@ quick_rtf <- function (..., file = confirm('huxtable-output.rtf'), borders = 0.4
 
 huxtableize <- function (obj_list, borders) {
   lapply(obj_list, function (obj) {
-    if (! inherits(obj, 'huxtable')) {
+    if (! inherits(obj, "huxtable")) {
       obj <- as_huxtable(obj)
       obj <- set_all_borders(obj, borders)
     }
@@ -228,20 +228,20 @@ huxtableize <- function (obj_list, borders) {
 
 
 confirm <- function (file) {
-  if (! interactive()) stop('Please specify a `file` argument for non-interactive use of quick_xxx functions.')
+  if (! interactive()) stop("Please specify a `file` argument for non-interactive use of quick_xxx functions.")
   if (file.exists(file)) {
-    answer <- readline(paste0('File "', file, '" already exists. Overwrite? [yN]'))
-    if (! answer %in% c('y', 'Y')) stop('OK, stopping')
+    answer <- readline(paste0("File '", file, "' already exists. Overwrite? [yN]"))
+    if (! answer %in% c("y", "Y")) stop("OK, stopping")
   }
   file
 }
 
 auto_open <- function (path) {
-  sysname <- Sys.info()['sysname']
+  sysname <- Sys.info()["sysname"]
   switch(sysname,
     Darwin  = system2("open", path),
     Windows = system2("start", path),
     Linux   = system2("xdg-open", path),
-    warning('Could not determine OS to open document automatically')
+    warning("Could not determine OS to open document automatically")
   )
 }

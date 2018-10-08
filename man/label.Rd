@@ -29,7 +29,7 @@ in \href{http://bookdown.org}{bookdown}.
 }
 \examples{
 
-label(jams) <-  'tab:mytable'
+label(jams) <-  "tab:mytable"
 label(jams)
 
 }
