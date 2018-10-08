@@ -28,8 +28,7 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/huxtable?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/huxtable)
 [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
 
-Huxtable is an R package for creating HTML and LaTeX tables. It provides similar functionality to xtable, but does more,
-with a simpler interface. Features include:
+Huxtable is an R package to create styled tables in multiple output formats, with a friendly, modern interface. Features include:
 
 * Control over text styling, number format, background colour, borders, padding and alignment.
 * Table cells can span multiple rows and/or columns.

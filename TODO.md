@@ -21,7 +21,6 @@ Priority changes
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
 
-* Methods for R packages like janitor (tabyl) or glimpse?
 
 * as_datatable for DT::renderDT()?
   - Useful if you want to add the slick features of DT to your work
@@ -73,6 +72,7 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - continue to use hhline for horiz non-dashed lines;
   - use tabucline for horiz dashed lines; always merge when possible, and if not 
     (ie if color/width changes), warn that lines will "step" down the page
+
     
 
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
@@ -193,6 +193,11 @@ Possibles
 Put off or abandoned
 ====================
 
+
+* Methods for R packages?
+  - janitor::tabyl is just a data frame, no useful information available
+  - tibble::glimpse prints stuff and returns the original
+  
 * Use arydshln in LaTeX? Seems incompatible with hhline
 
 * latex row height is of \\textheight when numeric, not % table height. Hard to fix.
