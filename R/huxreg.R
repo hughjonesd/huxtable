@@ -52,8 +52,9 @@ NULL
 #'
 #' @section Fixing p values manually:
 #'
-#' To manually insert your own p values, confidence intervals etc., see
-#' [tidy_override()].
+#' If you wish to use e.g. robust standard errors, you can pass results from e.g.
+#' [lmtest::coeftest()] into `huxreg`, since these objects have `tidy` methods.
+#' Alternatively, to manually insert your own statistics, see [tidy_override()].
 #'
 #' @return A huxtable object.
 #' @export

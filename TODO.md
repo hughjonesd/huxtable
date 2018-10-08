@@ -12,10 +12,6 @@ Priority changes
   - consistent policy on NA results
   - deprecate byrow in favour of by_rows()
   
-* Way to edit p values/ cis in huxreg?
-  - One possibility is `tidy_override(modelx, ...)` which has a `tidy` method. `...` args
-    replace columns in the underlying output from `tidy.original_object`.
-
 * Update website from website-4.3-changes branch
 
 * Use more purrr and rlang features, as we depend on these packages anyway

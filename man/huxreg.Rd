@@ -84,8 +84,9 @@ could write \code{error_format = "{conf.low} to {conf.high}"}.
 \section{Fixing p values manually}{
 
 
-To manually insert your own p values, confidence intervals etc., see
-\code{\link[=tidy_override]{tidy_override()}}.
+If you wish to use e.g. robust standard errors, you can pass results from e.g.
+\code{\link[lmtest:coeftest]{lmtest::coeftest()}} into \code{huxreg}, since these objects have \code{tidy} methods.
+Alternatively, to manually insert your own statistics, see \code{\link[=tidy_override]{tidy_override()}}.
 }
 
 \examples{
