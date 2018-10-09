@@ -2,6 +2,8 @@
 
 #' Create huxtable of descriptive statistics
 #'
+#' `skim_hux` uses [skimr::skim()] to create a table of descriptive statistics.
+#'
 #' @param x A data frame or skimmable object.
 #' @param ... Not currently used.
 #'
@@ -17,7 +19,6 @@
 #' skim_hux(iris)
 skim_hux <- function (x, ...) {
   assert_package("skim_hux", "skimr")
-  assert_package("skim_hux", "dplyr")
 
   current <- skimr::get_skimmers()
   skimr::skim_with_defaults()
@@ -41,7 +42,6 @@ skim_hux <- function (x, ...) {
   x <- x[sort(c(seq_len(nrow(x)), new_type_idx)), ] # duplicate first rows with new type
   new_type_idx <- which(! duplicated(x$type)) # recalculate indexes
 
-  old_colnames <- colnames(x)
   new_colnames <- gsub("_", " ", colnames(x))
   new_colnames <- sapply(new_colnames, title_case)
 

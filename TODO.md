@@ -7,6 +7,13 @@ TODO
 Priority changes
 ================
 
+* table of descriptive statistics using `skimr`:
+  - change it to have P0...P100 in the same place as top_counts
+  - i.e use skim_to_list, order them correctly
+  - think if this is even a good idea and people shouldn't just DIY with
+    `skim_to_wide`?
+  - tests
+
 * Mapping functions:
   - docs should warn about as.matrix and conversion
   - consistent policy on NA results
@@ -166,7 +173,6 @@ Possibles
   bottom line is border?
   - not sure we can change colours halfway through though
   
-* table of descriptive statistics? Maybe a separate package.
 
 * facilities for re-writing a table in an existing document. 
   - you'd need a way to identify the table (perhaps an automatic `id` table-level property, automatically set to a random

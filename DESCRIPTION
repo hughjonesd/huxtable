@@ -47,6 +47,7 @@ Suggests:
     psych,
     rmarkdown,
     sandwich,
+    skimr,
     scales,
     testthat,
     tinytex

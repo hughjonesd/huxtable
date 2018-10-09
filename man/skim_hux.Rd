@@ -15,7 +15,7 @@ skim_hux(x, ...)
 A pre-formatted huxtable.
 }
 \description{
-Create huxtable of descriptive statistics
+\code{skim_hux} uses \code{\link[skimr:skim]{skimr::skim()}} to create a table of descriptive statistics.
 }
 \examples{
 if (! requireNamespace("skimr")) {
