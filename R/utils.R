@@ -52,7 +52,7 @@ register_s3_method <- function (pkg, generic, class = "huxtable") {
 
 assert_package <- function (fun, package) {
   if (! requireNamespace(package, quietly = TRUE)) stop(glue::glue(
-        "{fun} requires the \"{package}\" package. To install, type:\n",
+        "`{fun}` requires the \"{package}\" package. To install, type:\n",
         "install.packages(\"{package}\")"))
 }
 
