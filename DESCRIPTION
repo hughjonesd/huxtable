@@ -29,6 +29,7 @@ Imports:
     tidyselect,
     utils
 Suggests:
+    broom.mixed,
     covr,
     crayon,
     devtools,
