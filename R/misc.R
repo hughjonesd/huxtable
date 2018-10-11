@@ -159,20 +159,19 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 }
 
 
+#' @export
+#' @rdname huxtable-deprecated
+hux_hex <- function () {
+  .Deprecated("hex_hux")
+}
+
 
 #' @export
-#' @rdname hux_logo
-#' @details
-#' All modern packages should have a hex logo. Run `hux_hex` if you wish to produce one.
-hux_hex <- function () {
-  hell_no <- hux(c("We don't", "stinkin'"), c("need no", "hexes"))
-  hell_no <- set_all_borders(hell_no, 1)
-  hell_no <- set_all_border_colors(hell_no, "red")
-  background_color(hell_no) <- "black"
-  text_color(hell_no) <- "red"
-
-  hell_no
+#' @rdname huxtable-deprecated
+hex_hux <- function () {
+  .Deprecated("hux_hex")
 }
+
 
 #' Default print method for huxtables
 #'

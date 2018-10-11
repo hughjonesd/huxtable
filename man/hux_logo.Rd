@@ -2,12 +2,9 @@
 % Please edit documentation in R/misc.R
 \name{hux_logo}
 \alias{hux_logo}
-\alias{hux_hex}
 \title{Huxtable logo}
 \usage{
 hux_logo(latex = FALSE, html = FALSE)
-
-hux_hex()
 }
 \arguments{
 \item{latex}{Style for LaTeX.}
@@ -19,9 +16,6 @@ The huxtable logo.
 }
 \description{
 Returns a randomized huxtable logo, inspired by Mondrian.
-}
-\details{
-All modern packages should have a hex logo. Run \code{hux_hex} if you wish to produce one.
 }
 \examples{
 print_screen(hux_logo())
