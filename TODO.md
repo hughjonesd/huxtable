@@ -7,12 +7,6 @@ TODO
 Priority changes
 ================
 
-* table of descriptive statistics using `skimr`:
-  - change it to have P0...P100 in the same place as top_counts
-  - i.e use skim_to_list, order them correctly
-  - think if this is even a good idea and people shouldn't just DIY with
-    `skim_to_wide`?
-  - tests
 
 * Mapping functions:
   - docs should warn about as.matrix and conversion
@@ -120,6 +114,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - arbitrary rows or columns can be headers; presumably the "relevant" header is the next one to the left/top
     (except for RTL languages?)
   - headers would be repeated after page breaks, and in HTML would use <th> style for column headers
+  - maybe headers might have a numeric level rather than simple TRUE or FALSE. Then you could have different styles for
+    different levels.
 
 * use tidyselect::vars_select for columns in set_ interface (5.0)
   - Advantage: more consistent with dplyr, allows e.g. set_bold(ht, 1, a:b, TRUE)
@@ -149,7 +145,13 @@ Bugs
 Possibles
 =========
 
-* Rotate whole table using "rotating" package (for PDF) and what for HTML?
+
+* `col_to_headers` which would take a column, sort by unique values, and replace the column with a rowspan-merged header?
+  - might relate to a `headers` flag, if we allow header rows to be in the middle of data
+  - perhaps have a method for data frames (which outputs a huxtable)
+  - maybe allow multiple columns
+
+* Rotate whole table using "rotating" package (for PDF) and what for HTML (simple CSS rotation on table element, probably)?
 
 * Implement `dplyr::bind_rows` and `bind_cols`?
 
@@ -197,6 +199,9 @@ Possibles
 Put off or abandoned
 ====================
 
+* table of descriptive statistics using `skimr`:
+  - think if this is even a good idea and people shouldn't just DIY with
+    `skim_to_wide`? Yeah, maybe not
 
 * Methods for R packages?
   - janitor::tabyl is just a data frame, no useful information available
