@@ -4,10 +4,13 @@
 \alias{by_function}
 \title{Map cell contents to cell properties using a function or scale}
 \usage{
-by_function(inner_fn)
+by_function(inner_fn, ignore_na = TRUE)
 }
 \arguments{
 \item{inner_fn}{A one-argument function which maps cell values to property values.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.

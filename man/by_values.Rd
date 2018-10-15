@@ -4,12 +4,15 @@
 \alias{by_values}
 \title{Map specific cell values to cell properties}
 \usage{
-by_values(...)
+by_values(..., ignore_na = TRUE)
 }
 \arguments{
 \item{...}{Name-value pairs like \code{name = value}. Cells where contents are equal to
 \code{name} will have the property set to \code{value}. If there is a single unnamed argument,
 this is the default value for unmatched cells. More than one unnamed argument is an error.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.

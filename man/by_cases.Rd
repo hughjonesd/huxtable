@@ -4,13 +4,13 @@
 \alias{by_cases}
 \title{Map cell contents to properties using \code{case_when}}
 \usage{
-by_cases(..., skip_na = TRUE)
+by_cases(..., ignore_na = TRUE)
 }
 \arguments{
 \item{...}{A list of two-sided formulas interpreted by \code{case_when}.}
 
-\item{skip_na}{Where \code{case_when} returns \code{NA}, leave the value unchanged. Otherwise, \code{NA} will
-normally reset the property value to the default.}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.
@@ -22,8 +22,8 @@ This function uses \code{\link[dplyr:case_when]{dplyr::case_when()}} to set cell
 Within the formulas, the variable \code{.} will refer to the content of \code{ht[rows, cols]} (converted
 by \code{as.matrix}).
 
-\code{case_when} returns \code{NA} when no formula LHS is matched. By default this leaves the old property
-value unchanged. To avoid this, set a default in the last formula: \code{TRUE ~ default}.
+\code{case_when} returns \code{NA} when no formula LHS is matched. To avoid this, set a default in the last
+formula: \code{TRUE ~ default}.
 }
 \examples{
 if (! requireNamespace("dplyr")) {

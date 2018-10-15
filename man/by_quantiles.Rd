@@ -5,9 +5,10 @@
 \alias{by_equal_groups}
 \title{Map numeric quantiles to cell properties}
 \usage{
-by_quantiles(quantiles, values, right = FALSE, extend = TRUE)
+by_quantiles(quantiles, values, right = FALSE, extend = TRUE,
+  ignore_na = TRUE)
 
-by_equal_groups(n, values)
+by_equal_groups(n, values, ignore_na = TRUE)
 }
 \arguments{
 \item{quantiles}{Vector of quantiles.}
@@ -15,11 +16,15 @@ by_equal_groups(n, values)
 \item{values}{Vector of values. \code{length(values)} should be one greater than \code{length(quantiles)},
 or one less if \code{extend = FALSE}.}
 
-\item{right}{Intervals are closed on the right. I.e. if values are exactly equal to a \code{break},
-put them in the lower group.}
+\item{right}{If \code{TRUE}, intervals are closed on the right, i.e. if values are exactly equal to a
+\code{break}, they go in the lower group. Otherwise, intervals are closed on the left, so equal
+values go in the higher group. \code{FALSE} by default.}
 
-\item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers outside the range.
-\code{TRUE} by default.}
+\item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers below and above the
+outermost breaks. \code{TRUE} by default.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 
 \item{n}{Number of equal-sized groups. \code{length(values)} should equal \code{n}.}
 }
@@ -30,7 +35,8 @@ A function for use in \code{map_***} functions.
 These functions split cell values by quantiles. Non-numeric cells are ignored.
 }
 \details{
-\code{by_equal_groups(n, values)} is a shortcut for \code{by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)}.
+\code{by_equal_groups(n, values)} splits the data into \code{n} equal-sized groups (i.e. it is a shortcut
+for \code{by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)}).
 }
 \examples{
 ht <- hux(rnorm(5), rnorm(5))

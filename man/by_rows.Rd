@@ -5,14 +5,17 @@
 \alias{by_cols}
 \title{Set cell properties by row or column}
 \usage{
-by_rows(..., from = 1)
+by_rows(..., from = 1, ignore_na = TRUE)
 
-by_cols(..., from = 1)
+by_cols(..., from = 1, ignore_na = TRUE)
 }
 \arguments{
 \item{...}{One or more cell property values.}
 
 \item{from}{Numeric. Row or column to start at.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.

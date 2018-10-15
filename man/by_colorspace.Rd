@@ -4,14 +4,17 @@
 \alias{by_colorspace}
 \title{Map numeric cell contents smoothly to colors}
 \usage{
-by_colorspace(..., range = NULL, na_color = NA)
+by_colorspace(..., range = NULL, na_color = NA, ignore_na = TRUE)
 }
 \arguments{
 \item{...}{Colors}
 
 \item{range}{Numeric endpoints. If \code{NULL}, these are determined from the data.}
 
-\item{na_color}{Color to return for \code{NA} values. Use \code{NA} to set to the default.}
+\item{na_color}{Color to return for \code{NA} values. Can be \code{NA} itself.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.
@@ -25,7 +28,7 @@ Map numeric cell contents smoothly to colors
 \examples{
 
 if (! requireNamespace("scales")) {
-  stop("Please install the scales package to run this example")
+  stop("Please install the \\"scales\\" package to run this example")
 }
 ht <- as_hux(matrix(rnorm(25), 5, 5))
 map_background_color(ht,

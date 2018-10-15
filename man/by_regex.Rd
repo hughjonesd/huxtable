@@ -4,7 +4,7 @@
 \alias{by_regex}
 \title{Map cells matching a string or regex to cell properties}
 \usage{
-by_regex(..., .grepl_args = list())
+by_regex(..., .grepl_args = list(), ignore_na = TRUE)
 }
 \arguments{
 \item{...}{A list of name-value pairs. The names are regular expressions. If there is a single
@@ -13,6 +13,9 @@ is an error.}
 
 \item{.grepl_args}{A list of arguments to pass to \code{\link[=grepl]{grepl()}}. Useful options
 include \code{fixed}, \code{perl} and \code{ignore.case}.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.

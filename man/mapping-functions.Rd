@@ -68,6 +68,14 @@ ht <- map_text_color(ht, by_values(
       ))
 ht
 
+# Leaving NA values alone:
+map_text_color(ht, by_values(
+      "OK" = "blue", NA, ignore_na = TRUE))
+
+# Resetting values:
+map_text_color(ht, by_values(
+      "OK" = "blue", NA, ignore_na = FALSE))
+
 ht <- hux(rnorm(5), rnorm(5), rnorm(5))
 map_background_color(ht, by_ranges(
         c(-1, 1),

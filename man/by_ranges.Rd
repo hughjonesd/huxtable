@@ -4,7 +4,8 @@
 \alias{by_ranges}
 \title{Map numeric ranges to cell properties}
 \usage{
-by_ranges(breaks, values, right = FALSE, extend = TRUE)
+by_ranges(breaks, values, right = FALSE, extend = TRUE,
+  ignore_na = TRUE)
 }
 \arguments{
 \item{breaks}{A vector of numbers in increasing order.}
@@ -12,11 +13,15 @@ by_ranges(breaks, values, right = FALSE, extend = TRUE)
 \item{values}{A vector of property values. \code{length(values)} should be one greater than
 \code{length(breaks)} if \code{extend = TRUE}, or one less if \code{extend = FALSE}.}
 
-\item{right}{Intervals are closed on the right. I.e. if values are exactly equal to a \code{break},
-put them in the lower group.}
+\item{right}{If \code{TRUE}, intervals are closed on the right, i.e. if values are exactly equal to a
+\code{break}, they go in the lower group. Otherwise, intervals are closed on the left, so equal
+values go in the higher group. \code{FALSE} by default.}
 
-\item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers outside the range.
-\code{TRUE} by default.}
+\item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers below and above the
+outermost breaks. \code{TRUE} by default.}
+
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+normally resets to the default.}
 }
 \value{
 A function for use in \code{map_***} functions.
@@ -25,7 +30,7 @@ A function for use in \code{map_***} functions.
 \code{by_ranges} sets property values for cells falling within different numeric ranges.
 }
 \details{
-Non-numeric cells are unchanged.
+Non-numeric cells return \code{NA}. The effects of this depend on \code{ignore_na}.
 }
 \examples{
 ht <- huxtable(c(1, 3, 5))
