@@ -7,7 +7,8 @@
 \usage{
 \method{print}{huxtable}(x, ...)
 
-\method{format}{huxtable}(x, ..., output)
+\method{format}{huxtable}(x, ..., output = c("latex", "html", "md",
+  "screen", "rtf"))
 }
 \arguments{
 \item{x}{A huxtable.}
