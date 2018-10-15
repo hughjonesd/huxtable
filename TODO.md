@@ -8,16 +8,10 @@ Priority changes
 ================
 
 
-* Mapping functions:
-  - docs should warn about as.matrix and conversion
-  - consistent policy on NA results
-  - deprecate byrow in favour of by_rows()
-  
 * Update website from website-4.3-changes branch
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
-
 
 * as_datatable for DT::renderDT()?
   - Useful if you want to add the slick features of DT to your work
@@ -51,8 +45,7 @@ Priority changes
 
 * Look at perl's Latex::Table and how they do it
   - autouses 'p{5cm}' column for cols with > 30 chars in a cell
-  - they have nice coloured themes which are the same bar the colour
-  
+
 Changes for 5.0
 ===============
 
