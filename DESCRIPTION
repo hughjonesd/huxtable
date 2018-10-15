@@ -23,6 +23,7 @@ Imports:
     broom,
     glue,
     memoise,
+    rlang,
     stats,
     stringr (>= 1.2.0),
     tibble,
