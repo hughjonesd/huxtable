@@ -44,6 +44,12 @@ NULL
 #' * To map numeric values to a colorspace, use [by_colorspace()].
 #' * For a more general solution, use [by_function()] or [by_cases()].
 #'
+#' @section Caveat:
+#'
+#' Most functions convert the huxtable to a matrix using [as.matrix()]. This can have
+#' unexpected results if you mix character and numeric data. See the example.
+#'
+#'
 #' @section Technical details:
 #'
 #' `fn` must be a function taking four arguments: the (entire) original huxtable `ht`, a numeric
@@ -104,6 +110,18 @@ NULL
 #'       )
 #' map_bold(ht, everywhere, "Pval",
 #'       by_ranges(0.05, c(TRUE, FALSE)))
+#'
+#' # Problems with as.matrix:
+#'
+#' ht <- hux(c(-1, 1, 2), letters[1:3])
+#' as.matrix(ht)          # look at the spaces...
+#' as.matrix(ht) > 0      # uh oh
+#' map_text_color(ht,
+#'       by_cases(. < 0 ~ "red", TRUE ~ "blue"))
+#'
+#' # To avoid this, only look at the truly numeric columns:
+#' map_text_color(ht, row = 1:3, col = 1,
+#'       by_cases(. < 0 ~ "red", TRUE ~ "blue"))
 #' @name mapping-functions
 #' @aliases mapping_functions
 NULL

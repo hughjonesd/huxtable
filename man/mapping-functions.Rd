@@ -37,6 +37,13 @@ The \code{fn} argument is a \emph{mapping function} which maps cell contents to 
 \item For a more general solution, use \code{\link[=by_function]{by_function()}} or \code{\link[=by_cases]{by_cases()}}.
 }
 }
+\section{Caveat}{
+
+
+Most functions convert the huxtable to a matrix using \code{\link[=as.matrix]{as.matrix()}}. This can have
+unexpected results if you mix character and numeric data. See the example.
+}
+
 \section{Technical details}{
 
 
@@ -91,4 +98,16 @@ ht <- hux(
       )
 map_bold(ht, everywhere, "Pval",
       by_ranges(0.05, c(TRUE, FALSE)))
+
+# Problems with as.matrix:
+
+ht <- hux(c(-1, 1, 2), letters[1:3])
+as.matrix(ht)          # look at the spaces...
+as.matrix(ht) > 0      # uh oh
+map_text_color(ht,
+      by_cases(. < 0 ~ "red", TRUE ~ "blue"))
+
+# To avoid this, only look at the truly numeric columns:
+map_text_color(ht, row = 1:3, col = 1,
+      by_cases(. < 0 ~ "red", TRUE ~ "blue"))
 }
