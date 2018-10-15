@@ -15,7 +15,7 @@
 
 \item{...}{Options passed to other methods.}
 
-\item{output}{One of \code{"html"}, \code{"latex"}, \code{"md"} or \code{"screen"}}
+\item{output}{Output format. One of \code{"html"}, \code{"latex"}, \code{"md"}, \code{"screen"} or \code{"rtf"}.}
 }
 \value{
 \code{print} prints the huxtable and returns \code{NULL} invisibly.

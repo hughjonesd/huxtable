@@ -200,7 +200,7 @@ print.huxtable <- function(x, ...) {
 
 
 #' @rdname print.huxtable
-#' @param output One of `"html"`, `"latex"`, `"md"` or `"screen"`
+#' @param output Output format. One of `"html"`, `"latex"`, `"md"`, `"screen"` or `"rtf"`.
 #'
 #' @return `format` returns a string representation from [to_latex()], [to_html()] etc.
 #' @export
@@ -209,9 +209,9 @@ print.huxtable <- function(x, ...) {
 #'
 #' format(jams, output = "screen")
 #' format(jams, output = "md")
-format.huxtable <- function(x, ..., output) {
-  assert_that(is.string(output))
-  assert_that(output %in% c("latex", "html", "md", "screen"))
+format.huxtable <- function(x, ..., output = c("latex", "html", "md", "screen", "rtf")) {
+  output <- match.arg(output)
+
   fn <- paste0("to_", output)
   do.call(fn, list(ht = x, ...))
 }
