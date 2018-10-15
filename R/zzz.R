@@ -85,8 +85,8 @@ NULL
 #' * I have another problem.
 #'
 #' If you have a bug - i.e. a problem with the software - or have a feature request, please report
-#' it to [https://github.com/hughjonesd/huxtable/issues]. Otherwise, ask a question on
-#' [StackOverflow](https://stackoverflow.com) or [https://community.rstudio.com]. That way, other
+#' it to <https://github.com/hughjonesd/huxtable/issues>. Otherwise, ask a question on
+#' [StackOverflow](https://stackoverflow.com) or <https://community.rstudio.com>. That way, other
 #' people will benefit from the answers you get.
 #'
 #' * Can I email you directly?

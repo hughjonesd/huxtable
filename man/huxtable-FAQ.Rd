@@ -39,8 +39,8 @@ Try adjusting \code{width(ht)}.
 }
 
 If you have a bug - i.e. a problem with the software - or have a feature request, please report
-it to \link{https://github.com/hughjonesd/huxtable/issues}. Otherwise, ask a question on
-\href{https://stackoverflow.com}{StackOverflow} or \link{https://community.rstudio.com}. That way, other
+it to \url{https://github.com/hughjonesd/huxtable/issues}. Otherwise, ask a question on
+\href{https://stackoverflow.com}{StackOverflow} or \url{https://community.rstudio.com}. That way, other
 people will benefit from the answers you get.
 \itemize{
 \item Can I email you directly?
