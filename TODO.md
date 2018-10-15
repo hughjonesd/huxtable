@@ -10,19 +10,12 @@ Priority changes
 
 * Update website from website-4.3-changes branch
 
-* Use more purrr and rlang features, as we depend on these packages anyway
-  - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
 
 * as_datatable for DT::renderDT()?
   - Useful if you want to add the slick features of DT to your work
   - has format* functions for number_format
   - formatStyle can deal with bold, text_color, background_color, font_size et al.
   - also styleInterval and styleEqual are fun to look at
-
-* cell spacing?
-  - this allows natural gaps between borders; see e.g. economist
-    forecaster tables.
-  - an alternative is to have small empty cells, but that's a hack
 
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
@@ -43,8 +36,6 @@ Priority changes
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back
 
-* Look at perl's Latex::Table and how they do it
-  - autouses 'p{5cm}' column for cols with > 30 chars in a cell
 
 Changes for 5.0
 ===============
@@ -138,6 +129,12 @@ Bugs
 Possibles
 =========
 
+* Look at perl's Latex::Table and how they do it
+  - autouses 'p{5cm}' column for cols with > 30 chars in a cell
+
+* Use more purrr and rlang features, as we depend on these packages anyway
+  - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
+
 
 * `col_to_headers` which would take a column, sort by unique values, and replace the column with a rowspan-merged header?
   - might relate to a `headers` flag, if we allow header rows to be in the middle of data
@@ -191,6 +188,13 @@ Possibles
 
 Put off or abandoned
 ====================
+
+* cell spacing?
+  - this allows natural gaps between borders; see e.g. economist
+    forecaster tables.
+  - an alternative is to have small empty cells, but that's a hack
+  - just too hard in TeX
+
 
 * table of descriptive statistics using `skimr`:
   - think if this is even a good idea and people shouldn't just DIY with
