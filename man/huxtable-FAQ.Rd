@@ -8,42 +8,43 @@
 A FAQ of common issues.
 }
 \details{
-LaTeX output isn't working.
 \itemize{
-\item Have you installed the LaTeX packages you need? LaTeX packages are different from R packages.
-Run \code{check_latex_dependencies()} to find out if you are missing any. Then install them
-using your system's LaTeX management application. Or you can try \code{install_latex_dependencies()}.
+\item LaTeX output isn't working.
 }
 
-Numbers in my cells look weird!
+Have you installed the LaTeX packages you need? LaTeX packages are different from R packages. Run
+\code{\link[=check_latex_dependencies]{check_latex_dependencies()}} to find out if you are missing any. Then install them using your
+system's LaTeX management application. Or you can try \code{\link[=install_latex_dependencies]{install_latex_dependencies()}}.
 \itemize{
-\item You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options like
-\link[base:options]{"scipen"} usually have no effect.
+\item Numbers in my cells look weird!
 }
 
-I ran \code{caption(ht) <- "Something"} and got an error message:\preformatted{Error in UseMethod("caption<-") :
+You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options like
+\code{\link[base:options]{scipen}} usually have no effect.
+\itemize{
+\item I ran \code{caption(ht) <- "Something"} and got an error message:
+}\preformatted{Error in UseMethod("caption<-") :
 no applicable method for 'caption<-' applied to an object of class "c('huxtable', 'data.frame')"
 }
+
+You may have loaded another package with a \code{caption} method, e.g. "xtable". Try loading huxtable
+after xtable.
 \itemize{
-\item You may have loaded another package with a \code{caption} method, e.g. "xtable". Try loading
-huxtable after xtable.
+\item My tables aren't centered correctly (LaTeX).
 }
 
-My tables aren't centered correctly (LaTeX).
+Try adjusting \code{width(ht)}.
 \itemize{
-\item Try adjusting \code{width(ht)}.
+\item I have another problem.
 }
 
-I have another problem.
+If you have a bug - i.e. a problem with the software - or have a feature request, please report
+it to \link{https://github.com/hughjonesd/huxtable/issues}. Otherwise, ask a question on
+\href{https://stackoverflow.com}{StackOverflow} or \link{https://community.rstudio.com}. That way, other
+people will benefit from the answers you get.
 \itemize{
-\item If you think it's a bug - i.e. a problem with the software - please report it to
-https://github.com/hughjonesd/huxtable/issues. Otherwise, ask a question on
-\href{https://stackoverflow.com}{StackOverflow} or https://community.rstudio.com. That
-way, other people will benefit from the answers you get.
+\item Can I email you directly?
 }
 
-Can I email you directly?
-\itemize{
-\item I'd rather you asked on a public website. If you then email me a link, I may be able to help.
-}
+I'd rather you asked on a public website. If you then email me a link, I may be able to help.
 }
