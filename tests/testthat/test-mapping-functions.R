@@ -1,5 +1,5 @@
 
-context("mapping functions")
+context("Mapping functions")
 
 
 test_that("by_values", {
@@ -16,46 +16,6 @@ test_that("by_values", {
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(1, 2, 3, 3), 2, 2))
 
   expect_error(by_values(a = 1, b = 2, 3, 4), "unnamed")
-})
-
-
-test_that("ignore_na argument works", {
-  m <- matrix(letters[1:4], 2, 2)
-  ct <- matrix(1:4, 2, 2)
-
-  f <- by_values(NA, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_values(NA, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
-
-  f <- by_ranges(1, 1:2, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_ranges(1, 1:2, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
-
-  f <- by_regex("e" = 1, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_regex("e" = 1, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
-
-  f <- by_cases(TRUE ~ NA, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_cases(TRUE ~ NA, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
-
-  always_na <- function (...) NA
-  f <- by_function(always_na, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_function(always_na, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
-
-  skip_if_not_installed("scales")
-  mode(ct) <- "character" # by_colorspace converts to character, just deal with it
-  f <- by_colorspace("red", "blue", ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_colorspace("red", "blue", ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
-
 })
 
 
@@ -168,4 +128,43 @@ test_that("by_cases", {
 
   f <- by_cases(. < 1.5 ~ "small", . == 2 ~ "two", . %in% 3:4 ~ "middle", ignore_na = FALSE)
   expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c("small", "two", "middle", "middle", NA, NA), 3, 2))
+})
+
+
+test_that("ignore_na argument works", {
+  m <- matrix(letters[1:4], 2, 2)
+  ct <- matrix(1:4, 2, 2)
+
+  f <- by_values(NA, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_values(NA, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
+
+  f <- by_ranges(1, 1:2, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_ranges(1, 1:2, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
+
+  f <- by_regex("e" = 1, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_regex("e" = 1, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
+
+  f <- by_cases(TRUE ~ NA, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_cases(TRUE ~ NA, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
+
+  always_na <- function (...) NA
+  f <- by_function(always_na, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_function(always_na, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
+
+  skip_if_not_installed("scales")
+  mode(ct) <- "character" # by_colorspace converts to character, just deal with it
+  f <- by_colorspace("red", "blue", ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_colorspace("red", "blue", ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
 })
