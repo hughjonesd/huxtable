@@ -38,12 +38,6 @@ test_that("ignore_na argument works", {
   f <- by_regex("e" = 1, ignore_na = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
 
-  mode(ct) <- "character" # by_colorspace converts to character, just deal with it
-  f <- by_colorspace("red", "blue", ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_colorspace("red", "blue", ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
-
   f <- by_cases(TRUE ~ NA, ignore_na = TRUE)
   expect_equivalent(f(m, 1:2, 1:2, ct), ct)
   f <- by_cases(TRUE ~ NA, ignore_na = FALSE)
@@ -54,6 +48,14 @@ test_that("ignore_na argument works", {
   expect_equivalent(f(m, 1:2, 1:2, ct), ct)
   f <- by_function(always_na, ignore_na = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
+
+  skip_if_not_installed("scales")
+  mode(ct) <- "character" # by_colorspace converts to character, just deal with it
+  f <- by_colorspace("red", "blue", ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_colorspace("red", "blue", ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
+
 })
 
 
@@ -71,6 +73,7 @@ test_that("by_rows/by_cols", {
   f <- by_cols(1:2, from = 2)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, 1, NA, 1), 2, 2, byrow = TRUE))
 })
+
 
 test_that("by_ranges", {
   m <- matrix(c(1, 3, 5, 7), 2, 2)
