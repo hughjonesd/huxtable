@@ -35,6 +35,25 @@ after xtable.
 
 Try adjusting \code{width(ht)}.
 \itemize{
+\item How can I change the font size, font etc. of captions?
+}
+
+There are no direct commands for this. You have to use raw HTML/TeX/other commands within the
+caption itself. For example to have a bold caption in HTML, you might do something like:\preformatted{set_caption(jams, "<b>Jam Prices</b>")
+
+}
+\itemize{
+\item How do I refer to tables in bookdown?
+}
+
+Here's an example:\preformatted{# In R code:
+caption(jams) <- "(#tab:jamtable) Some jams"
+
+# In markdown text:
+Jam prices are displayed in \\@ref(tab:jamtable).
+
+}
+\itemize{
 \item I have another problem.
 }
 
