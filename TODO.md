@@ -10,13 +10,6 @@ Priority changes
 
 * Update website from website-4.3-changes branch
 
-
-* as_datatable for DT::renderDT()?
-  - Useful if you want to add the slick features of DT to your work
-  - has format* functions for number_format
-  - formatStyle can deal with bold, text_color, background_color, font_size et al.
-  - also styleInterval and styleEqual are fun to look at
-
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
@@ -55,8 +48,6 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - continue to use hhline for horiz non-dashed lines;
   - use tabucline for horiz dashed lines; always merge when possible, and if not 
     (ie if color/width changes), warn that lines will "step" down the page
-
-    
 
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
 
@@ -129,12 +120,22 @@ Bugs
 Possibles
 =========
 
+* opendocument text/spreadsheet for libreoffice?
+  - At some point. Guess not a lot of demand.
+
+* as_datatable for DT::renderDT()?
+  - Useful if you want to add the slick features of DT to your work
+  - has format* functions for number_format
+  - formatStyle can deal with bold, text_color, background_color, font_size et al.
+  - also styleInterval and styleEqual are fun to look at
+  - is there a use case for going via huxtable and not directly to renderDT?
+    - familiarity? Easy to change over?
+    
 * Look at perl's Latex::Table and how they do it
   - autouses 'p{5cm}' column for cols with > 30 chars in a cell
 
 * Use more purrr and rlang features, as we depend on these packages anyway
   - Use `cli` for `to_screen`? Could maybe get ideas on code. It also has double borders. 
-
 
 * `col_to_headers` which would take a column, sort by unique values, and replace the column with a rowspan-merged header?
   - might relate to a `headers` flag, if we allow header rows to be in the middle of data
@@ -143,7 +144,6 @@ Possibles
 
 * Rotate whole table using "rotating" package (for PDF) and what for HTML (simple CSS rotation on table element, probably)?
 
-* Implement `dplyr::bind_rows` and `bind_cols`?
 
 * Better centring of LaTeX tables and handling of width. Maybe push \resizebox
 
@@ -157,9 +157,15 @@ Possibles
   - You can combine options between HTML float (left/right) and wrapfig float.
 
 * rescale numeric row_height and col_width when subsetting, as now under rbind/cbind?
+
 * Rename clean_contents and export it? 
   - Conceivably, people might want to override some individual
     cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
+
+* `contents(x) <-` and `set_contents/map_contents`? Useful in pipelines if you want to e.g.
+  both bold and upper case certain cells...
+  - not sure how `contents(x)[1, 1:3] <- blah` would be different from `x[1, 1:3] <- blah`.
+  
 
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
   bottom line is border?
@@ -213,3 +219,6 @@ Put off or abandoned
 
 * Could S4 classes work to cbind data frames? Probably not, or hella complex and requires
   reworking internals: https://stackoverflow.com/questions/47967264/dispatch-of-rbind-and-cbind-for-a-data-frame
+
+* Implement `dplyr::bind_rows` and `bind_cols`?
+  - they aren't methods.
