@@ -52,7 +52,7 @@ Set to \code{NA} to reset to the default, which is \code{"solid"}.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{byrow}{Logical: set values along rows. Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
+\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{left_border_style}, the \code{left_border_style} property.

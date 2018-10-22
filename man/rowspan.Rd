@@ -34,7 +34,7 @@ Set to \code{NA} to reset to the default, which is \code{1}.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{byrow}{Logical: set values along rows. Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
+\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{rowspan}, the \code{rowspan} property.

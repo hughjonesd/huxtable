@@ -41,7 +41,7 @@ set_outer_borders(ht, row, col, value)
 
 \item{value}{Value(s) to set. Set to \code{NA} to reset to the default.}
 
-\item{byrow}{Logical: set values along rows. Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
+\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
