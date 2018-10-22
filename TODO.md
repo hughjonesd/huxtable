@@ -60,6 +60,7 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - Of course that depends on the context, so maybe the function is like
     format(unit, context) where context might be 'HTML-width' or something
   - could still use characters ("5pt", "10%") in API, they would be internally converted
+  - presumably the `units` (and `errors`?) package would be relevant
 
 * Border API rework (5.0)
   - different set of commands
