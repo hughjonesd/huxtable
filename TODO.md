@@ -120,6 +120,17 @@ Bugs
 Possibles
 =========
 
+* Should table-wide or row/col-wide settings automatically apply to new cells?
+  - e.g.
+    `ht %>% set_bold(TRUE) %>% insert_row("Blah", "blah")`, should the new row have bold TRUE?
+  - this is a different way of thinking from copying stuff to new rows, and it might be more natural
+  - implementation means that you store table/row/col/cell-level properties separately, and then 
+    overlay them when you pull them out.
+  - having this AND copying could get messy fast.
+  - having it instead of copying would mean that only properties set with e.g. `everywhere` on a 
+    row would be copied to a new column. But what about new rows when the header row is different?
+    And with the `<-` syntax, you can't tell what the subset applied is, right?
+    
 * opendocument text/spreadsheet for libreoffice?
   - At some point. Guess not a lot of demand.
 
