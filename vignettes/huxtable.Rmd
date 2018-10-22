@@ -94,7 +94,7 @@ To create a huxtable, use the function `huxtable`, or `hux` for short. This work
 library(huxtable)
 ht <- hux(
         Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
-        Salary       = c(50000, 50000, 40000),
+        Salary       = c(50000L, 50000L, 40000L),
         add_colnames = TRUE
       )
 ```
@@ -129,8 +129,8 @@ ht
 ## Huxtable properties
 
 The default output is a plain table. Let's make it smarter. We'll make the table headings
-bold, draw a line under the header row, and add some horizontal space to the cells. We also need to
-change that default number formatting.
+bold, draw a line under the header row, add some horizontal space to the cells, and change
+the number formatting.
 
 To do this, we will set some **properties** on the table cells. You set properties by assigning
 to the property name, just as you assign `names(x) <- new_names` in base R. The following commands
