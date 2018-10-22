@@ -3,7 +3,7 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_vignette:
+  html_document:
     toc: yes
     toc_depth: 2
   pdf_document:
@@ -396,9 +396,7 @@ easier to sort the `cars_mpg` data by cylinder, before adding column names to th
 ## Number format
 
 You can change how huxtable formats numbers using `number_format`. Set `number_format` to a number
-of decimal places. This doesn't just affect 
-cells that are numbers: it works on any numbers within the cells. So, for example, if you have 
-a cell like "12.00001 (3.0003)", `number_format` will affect both the numbers
+of decimal places. This affects any numbers found within the cell text. 
 
 ```{r}
 htn <- hux(c(
@@ -563,22 +561,13 @@ bottom_border(car_ht)[21, 1] <- 0.4
 car_ht
 ```
 
-`merge_cells` works by setting the top left cell's `colspan` and `rowspan` properties. If you know HTML tables, then 
-these will be familiar to you. `colspan` sets how many columns the cell covers, and `rowspan` sets
-how many rows the cell covers. You can also set these directly:
-
-```{r, eval = FALSE}
-colspan(cars_mpg)[1, 1] <- 5
-```
-
-
 ## Quick themes
 
 Huxtable comes with some predefined themes for formatting. You've already
 seen `theme_plain`. Other options include `theme_basic` and (for fun) `theme_mondrian`:
 
 ```{r}
-theme_mondrian(car_ht)
+theme_mondrian(ht)
 ```
 
 The ["themes" vignette](themes.html) shows all the available themes.
@@ -588,69 +577,71 @@ The ["themes" vignette](themes.html) shows all the available themes.
 
 ## Row and column functions
 
-If you use the `set_*` style functions, huxtable has some convenience functions for selecting rows and columns.
-
-To select all rows, or all columns, use `everywhere` in the row or column specification. To select just even or odd-numbered rows or columns, use `evens` or `odds`. To select the last `n` rows or columns, use `final(n)`.
-To select every *n*th row, use `every(n)` and to do this starting from row *m* use `every(n, from = m)`.
-
-With these functions it is easy to add striped backgrounds to tables:
-
-```{r}
-car_ht                                                 %>% 
-      set_background_color(evens, -1, "salmon") %>% 
-      set_background_color(odds, -1, grey(.9)) %>% 
-      set_bold(1, everywhere, TRUE)
-```
-
+If you use the `set_*` style functions, huxtable has some convenience functions for selecting rows and columns. To select all rows, or all columns, use `everywhere` in the row or column specification. To select the last `n` rows or columns, use `final(n)`.
 
 You can also use `dplyr` functions like `starts_with()`, `contains()`, and `matches()` to specify columns by column 
 name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
-car_ht %>% set_background_color(everywhere, starts_with("C"), "orange")
+ht %>% set_background_color(everywhere, starts_with("S"), "orange")
 ```
 
-Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
-
-Lastly, remember that you can set a property for every cell by simply omitting the `row` and `col` arguments, like this:
-`set_background_color(ht, "orange")`.
+Lastly, remember that you can set a property for every cell by omitting the `row` and `col`
+arguments, like this: `set_background_color(ht, "orange")`.
 
 
 ## Conditional formatting
 
-You may want to apply conditional formatting to cells, based on their contents. 
+When you want to apply different formatting to different cells, you can use the `map_xxx` functions.
 
-For example, let's apply a text color to cars based on their horsepower:
+For example, we could create a striped table like this:
+
+```{r}
+ht %>% map_background_color(by_rows("grey90", "grey95"))
+```
+
+Or, we could apply a text color to our cars based on their ecological performance:
 
 ```{r}
 
-car_ht %>% map_text_color(everywhere, 4, 
-  by_ranges(c(120, 200), c('black', 'red', 'orange'))
-)
+car_ht %>% map_text_color(everywhere, 3, 
+        by_ranges(c(15, 25), c("red", "darkgreen", "green"))
+      )
 
 ```
 
-`by_ranges` is a *mapping function*. It divides its input into ranges and outputs colours based on that, a bit like
-the base R function `cut`.
+`by_rows` and `by_ranges` are *mapping functions*.
 
-You can also apply properties for cells that match a string, using the function `map_matches`:
+* `by_rows` applies different properties to
+different rows in sequence. 
+
+* `by_ranges` divides its input into ranges, and outputs colours based on
+that, like the base R function `cut`. 
+
+Above, we mapped all numbers below 15 to `"red"`,
+numbers between 15 and 25 to `"darkgreen"` and numbers above 25 to `"green"`.
+
+The syntax of all `map_xxx` functions is `map_xxx(ht, row, col, fn)`. `ht` is the huxtable,
+and `fn` is the mapping function starting with `by`. `row` and `col` are optional row and column
+specifiers, just the same as for `set_xxx`.
+
+You can also apply properties for cells that match a string, using the `by_regex` mapping function:
 
 ```{r}
-car_ht %>% map_bold(by_regex('Mazda' = TRUE))
+ht %>% map_bold(by_regex('Jones' = TRUE))
 ```
 
 There is a `map_xxx` function for each property `xxx`. See the help pages for other mapping functions.
 
 # Creating a regression table
 
-A common task for scientists is to create a table of regressions. The function `huxreg` does this for you. Here's a quick example:
+To create a table of regressions, use `huxreg`:
 
 ```{r}
-data(diamonds, package = 'ggplot2')
 
-lm1 <- lm(price ~ carat, diamonds)
-lm2 <- lm(price ~ depth, diamonds)
-lm3 <- lm(price ~ carat + depth, diamonds)
+lm1 <- lm(mpg ~ cyl, mtcars)
+lm2 <- lm(mpg ~ hp, mtcars)
+lm3 <- lm(mpg ~ cyl + hp, mtcars)
 
 huxreg(lm1, lm2, lm3)
 ```
@@ -672,13 +663,15 @@ options(huxtable.knit_print_df = TRUE)
 head(mtcars)
 ```
 
-If you don't want this, then you can turn it off like this:
+If you don't want this, you can turn it off by setting the `huxtable.knit_print_df` option:
 
 ```{r}
 options(huxtable.knit_print_df = FALSE)
 
 head(mtcars) # back to normal
+```
 
+```{r, include = FALSE}
 options(huxtable.knit_print_df = TRUE)
 ```
 
