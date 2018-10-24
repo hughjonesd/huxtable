@@ -20,11 +20,15 @@ knit_print.huxtable <- function (x, options, ...) {
   # guess... runs assert_package for knitr
   of <- getOption('huxtable.knitr_output_format', guess_knitr_output_format())
   call_name <- switch(of,
-        latex  = 'to_latex',
-        html   = 'to_html',
-        md     = 'to_md',
-        screen = 'to_screen',
-        rtf    = 'to_rtf',
+        latex  = "to_latex",
+        html   = "to_html",
+        docx   = {
+          warning("Falling back to markdown for Word document. Many features will not be supported.")
+          "to_md"
+        },
+        md     = "to_md",
+        screen = "to_screen",
+        rtf    = "to_rtf",
         { # default
         warning(glue::glue(
             'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
