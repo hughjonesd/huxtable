@@ -22,6 +22,10 @@ knit_print.huxtable <- function (x, options, ...) {
   call_name <- switch(of,
         latex  = "to_latex",
         html   = "to_html",
+        docx   = {
+          warning("Falling back to markdown for Word document. Many features will not be supported.")
+          "to_md"
+        },
         md     = "to_md",
         screen = "to_screen",
         rtf    = "to_rtf",
