@@ -82,7 +82,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-03}
+    \date{2018-10-26}
 
 \usepackage{array}
 \usepackage{caption}
@@ -97,7 +97,8 @@
 \begin{document}
 \maketitle
 
-This document briefly describes the design of huxtable, and compares it
+This document briefly describes the design of
+\href{https://hughjonesd.github.io/huxtable}{huxtable}, and compares it
 with other R packages for creating tables. A current version is on the
 web in
 \href{http://hughjonesd.github.io/huxtable/design-principles.html}{HTML}
@@ -105,7 +106,8 @@ or
 \href{http://hughjonesd.github.io/huxtable/design-principles.pdf}{PDF}
 formats.
 
-\subsection{Design principles}\label{design-principles}
+\hypertarget{design-principles}{%
+\subsection{Design principles}\label{design-principles}}
 
 I wrote this package because I wanted a simple way to create tables in
 my LaTeX documents. At the same time, I wanted to be able to output HTML
@@ -142,8 +144,9 @@ The package makes no attempt to output beautiful HTML or LaTeX source
 code. In fact, in the case of LaTeX, it's pretty ugly. The approach is
 ``do what it takes to get the job done''.
 
+\hypertarget{comparing-huxtable-with-other-packages}{%
 \subsection{Comparing Huxtable With Other
-Packages}\label{comparing-huxtable-with-other-packages}
+Packages}\label{comparing-huxtable-with-other-packages}}
 
 R has many different packages to create LaTeX and HTML tables. The
 table(s) below list those I know and the features they have. The table
@@ -704,7 +707,8 @@ is produced with huxtable, of course ;-)
 \hhline{>{\huxb{2}}->{\huxb{2}}->{\huxb{2}}->{\huxb{2}}->{\huxb{2}}->{\huxb{2}}->{\huxb{2}}->{\huxb{2}}-}
 \arrayrulecolor{black}
 \end{tabularx}}\par\end{raggedright}
-\end{table}\begin{table}[h]
+\end{table}
+\begin{table}[h]
 \begin{raggedright}\captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 2}
 \resizebox*{!}{0.95\textheight}{
@@ -1414,7 +1418,8 @@ are:
   present.
 \end{itemize}
 
-\subsection{Limitations}\label{limitations}
+\hypertarget{limitations}{%
+\subsection{Limitations}\label{limitations}}
 
 Some people love LaTeX. Other people think they have to use it to be
 ``scientific''. (Sadly, this is all too common in my field.) Personally,
