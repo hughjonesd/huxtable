@@ -142,7 +142,7 @@ first three rows, <code>col = "salary"</code> to specify the column named "salar
 <li><p>Use <code><a href='every.html'>every(n, from = m)</a></code> to get every nth row/column starting at row/column m.</p></li>
 <li><p>Use <code>dplyr</code> functions like <code>starts_with</code>, <code>contains</code> and <code>matches</code> to
 specify columns (but not rows). See <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>select_helpers</a></code> for a full list.</p></li>
-<li><p>Use <code><a href='where.html'>where(condition)</a></code>, and omit the <code>col</code> argument, to get cells where <code>condition</code> is <code>TRUE</code>.</p></li>
+<li><p>Use <code><a href='huxtable-deprecated.html'>where(condition)</a></code>, and omit the <code>col</code> argument, to get cells where <code>condition</code> is <code>TRUE</code>.</p></li>
 <li><p>Set <code>byrow = TRUE</code> to set properties by row rather than by column.</p></li>
 </ul>
     
@@ -191,7 +191,7 @@ return functions for this purpose.</p></li>
 #&gt;         5         1  
 #&gt; 
 #&gt; Column names: a, b</div><div class='input'>
-<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
+<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='huxtable-deprecated.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
 #&gt;         2         4  
 #&gt;         3         3  
 #&gt;         4         2  
