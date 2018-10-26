@@ -41,6 +41,12 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * Change `header_col` to default to `FALSE` in themes.
   
+* In general, when properties are unset, pick them dynamically for "good defaults", rather
+  than setting a predictable default.
+  - This is a better more general solution than `autoformat`, which could maybe be retired....
+  - Example: in PDF, guessing width based on number of characters seems wise, unless we 
+    move to tabu and that fixes the width/position problems
+    
 * Consider move to tabu package? Looks easy for dashed lines... (5.0)
   - check that tabu can handle multirow and multicol with background colors
   - also check https://tex.stackexchange.com/questions/48280/longtabu-and-floats-wrong-table-breaks-on-pages-with-floats
