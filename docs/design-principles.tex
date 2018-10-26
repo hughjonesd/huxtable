@@ -97,8 +97,7 @@
 \begin{document}
 \maketitle
 
-This document briefly describes the design of
-\href{https://hughjonesd.github.io/huxtable}{huxtable}, and compares it
+This document briefly describes the design of huxtable, and compares it
 with other R packages for creating tables. A current version is on the
 web in
 \href{http://hughjonesd.github.io/huxtable/design-principles.html}{HTML}
@@ -121,7 +120,7 @@ with properties that describe how to display the data, at cell, column,
 row or table level. Operations on the data frame work as normal, and
 they also affect the display properties. Then, the data can be output in
 an appropriate format. At the moment, those formats are LaTeX, HTML,
-Markdown, Word/Excel/Powerpoint, RTF and on-screen pretty printing. More
+Markdown, Word/Excel/Powerpoint, and on-screen pretty printing. More
 could be added.
 
 Another design choice was to have separate functions per feature. Many
@@ -152,7 +151,7 @@ R has many different packages to create LaTeX and HTML tables. The
 table(s) below list those I know and the features they have. The table
 is produced with huxtable, of course ;-)
 
-\begin{table}[h]
+ \begin{table}[h]
 \begin{raggedright}\captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 1}
 \resizebox*{!}{0.95\textheight}{
@@ -708,7 +707,9 @@ is produced with huxtable, of course ;-)
 \arrayrulecolor{black}
 \end{tabularx}}\par\end{raggedright}
 \end{table}
-\begin{table}[h]
+ 
+
+ \begin{table}[h]
 \begin{raggedright}\captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 2}
 \resizebox*{!}{0.95\textheight}{
@@ -1387,6 +1388,7 @@ is produced with huxtable, of course ;-)
 \arrayrulecolor{black}
 \end{tabularx}}\par\end{raggedright}
 \end{table}
+ 
 
 This comparison doesn't necessarily tell you the important stuff: how
 easy is the interface? Is the code currently maintained? I have not used
