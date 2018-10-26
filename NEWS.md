@@ -1,10 +1,10 @@
-# huxtable 4.3.0
+
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 
-# huxtable 4.2.0.9000
+# huxtable 4.2.1
  
 * Bugfix: `wrap=TRUE` caused squeezed text in RTF.
 
