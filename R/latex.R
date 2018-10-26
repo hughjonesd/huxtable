@@ -21,6 +21,12 @@ print_latex <- function (ht, ...) {
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
 #' @param ... Arguments to pass to methods.
 #'
+#' @details
+#' If we appear to be in a rmarkdown document with the markdown `"+raw_attribute"` extension set,
+#' `to_latex` will return LaTeX surrounded by a
+#' "raw attribute code block" (see https://pandoc.org/MANUAL.html#extension-raw_attribute).
+#' This helps protect against pandoc accidentally escaping the TeX code.
+#'
 #' @return `to_latex` returns a string. `print_latex` prints the string and returns `NULL`.
 #' @export
 #'
@@ -40,7 +46,7 @@ to_latex <- function (ht, ...) UseMethod("to_latex")
 to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   assert_that(is.flag(tabular_only))
   tabular <- build_tabular(ht)
-  if (tabular_only) return(tabular)
+  if (tabular_only) return(maybe_markdown_fence(tabular))
 
   resize_box <- if (is.na(height <- height(ht))) c("", "") else {
     if (is.numeric(height)) height <- sprintf("%.3g\\textheight", height)
@@ -77,7 +83,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           "\n\\end{table}\n"
         )
 
-  return(res)
+  return(maybe_markdown_fence(res))
 }
 
 
@@ -442,4 +448,24 @@ compute_width <- function (ht, start_col, end_col) {
   }
 
   cw
+}
+
+maybe_markdown_fence <- function (text) {
+  fence <- FALSE
+
+  if (requireNamespace("knitr", quietly = TRUE)) {
+    in_rmarkdown <- ! is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))
+    if (in_rmarkdown && requireNamespace("rmarkdown", quietly = TRUE)) {
+      of <- rmarkdown::default_output_format(knitr::current_input())
+      fence <- rmarkdown::pandoc_version() >= "2.0.0" &&
+            "+raw_attribute" %in% of$options$md_extensions
+    }
+  }
+
+  if (fence) {
+    text <- paste("\n\n```{=latex}\n", text, "\n```\n\n")
+  }
+
+  return(text)
+
 }

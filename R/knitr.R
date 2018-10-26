@@ -36,7 +36,9 @@ knit_print.huxtable <- function (x, options, ...) {
             '"latex", "html", "rtf", "md" or "screen".'))
           "to_screen"
         })
+
   res <- do.call(call_name, list(ht = x))
+
   if (of == "latex") {
     latex_deps <- report_latex_dependencies(quiet = TRUE)
     tenv <- tabular_environment(x)
