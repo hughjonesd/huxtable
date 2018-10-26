@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
       </span>
     </div>
 
@@ -153,6 +153,13 @@
 
     <p><code>to_latex</code> returns a string. <code>print_latex</code> prints the string and returns <code>NULL</code>.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If we appear to be in a rmarkdown document with the markdown <code>"+raw_attribute"</code> extension set,
+<code>to_latex</code> will return LaTeX surrounded by a
+"raw attribute code block" (see https://pandoc.org/MANUAL.html#extension-raw_attribute).
+This helps protect against pandoc accidentally escaping the TeX code.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other printing functions: <code><a href='to_html.html'>print_html</a></code>,
@@ -203,6 +210,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
