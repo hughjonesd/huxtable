@@ -3,12 +3,13 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document:
-    toc: yes
-    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
+    toc: yes
+    toc_depth: 2
+    md_extensions: +raw_attribute
+  html_document:
     toc: yes
     toc_depth: 2
 vignette: >
@@ -608,7 +609,7 @@ name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
 car_ht %>% set_background_color(everywhere, starts_with("C"), "orange")
-car_ht %>% set_italic(everywhere, matches("[aeiou]"), TRUE)
+car_ht %>% set_italic(everywhere, dplyr::matches("[aeiou]"), TRUE)
 ```
 
 Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
