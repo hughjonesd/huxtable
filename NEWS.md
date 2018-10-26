@@ -14,7 +14,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   adds fenced code blocks round latex tables (see 
   https://pandoc.org/MANUAL.html#extension-raw_attribute). You must add
   
-    md_extensions: +raw_attribue
+    md_extensions: +raw_attribute
 
   to your YAML header for this to work, and you will need a recent (> 2.0.0) version of Pandoc.
   
