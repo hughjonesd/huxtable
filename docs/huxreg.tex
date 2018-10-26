@@ -1467,13 +1467,52 @@ names, these will be used for row headings:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC
-## *     <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>   <dbl>  <dbl>
-## 1     0.851         0.851 1542.   153635.       0     3 -4.72e5 9.45e5
-## # ... with 3 more variables: BIC <dbl>, deviance <dbl>, df.residual <int>
-\end{verbatim}
+ \begin{table}[h]
+\begin{raggedright}
+    \providecommand{\huxb}[2][0,0,0]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+    \providecommand{\huxvb}[2][0,0,0]{\color[RGB]{#1}\vrule width #2pt}
+    \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+    \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+  \begin{tabularx}{1\textwidth}{p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth} p{0.0909090909090909\textwidth}}
+
+
+\hhline{>{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0.4}}r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{r.squared}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{adj.r.squared}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{sigma}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{statistic}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{p.value}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{df}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{logLik}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{AIC}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{BIC}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft \textbf{deviance}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0.4}}}{\huxtpad{4pt}\raggedleft \textbf{df.residual}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0.4}}p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.851\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.851\huxbpad{4pt}}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.54e+03\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.54e+05\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 0\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 3\huxbpad{4pt}} &
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -4.72e+05\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 9.45e+05\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 9.45e+05\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.0909090909090909\textwidth}!{\huxvb{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.0909090909090909\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.28e+11\huxbpad{4pt}}} &
+\multicolumn{1}{r!{\huxvb{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 53937\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}->{\huxb{0.4}}-}
+\arrayrulecolor{black}
+\end{tabularx}\par\end{raggedright}
+\end{table}
+ 
 
 \begin{Shaded}
 \begin{Highlighting}[]
