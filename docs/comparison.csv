@@ -37,4 +37,5 @@ Excel,Y,,,,,Y,,,,,,,,,,,
 Powerpoint,Y,,,,,,,,,,,,,,,Y,
 Word,Y,,,,,,,,,,,,,,,Y,(Y)
 DocBook,,,,Y,,,,,,,,,,,,,
+RTF,Y,,,,,,,,,,,,,,,,
 Notes,,,,,Via markdown,,,HTML via external translator,,,,,,Via Javascript,Via markdown,,
