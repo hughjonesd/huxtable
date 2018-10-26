@@ -5,7 +5,7 @@ date: "27/07/2018"
 output: 
   pdf_document:
     keep_tex: yes
-
+    md_extensions: +raw_attribute
 ---
 
 ```{r setup, echo = FALSE}
@@ -34,15 +34,20 @@ long <- 'A rather long row of text which goes on...'
 ```
 
 
-```{r}
+```{r, results="asis", eval=FALSE}
 # ht <- make()
-foo <- 1:6
-ht <- hux(a = foo, b = foo, d = foo, e = foo)
-# ht %>% set_all_borders(1) %>% set_top_border_style('dashed') %>% set_left_border_style('dashed')
-ht %>% 
-      set_all_borders(1) %>% 
-      set_all_padding(20) -> ht
 
-ht
+# it's not the caption.
+# it's not that to_latex is doing something bad: warning(htl) looks fine
+# it's not asis_output. You get the same problem with cat(to_latex(htl)) in results="asis" chunk
+# ht <- hux(1)
+# htl <- to_latex(ht)
+# # warning(htl)
+# cat(htl)
+```
 
+```{r, eval=TRUE}
+str(rmarkdown::metadata)
+hux(1) %>% set_caption("CAPTION")
+hux(1) %>% set_caption_pos("topleft")
 ```
