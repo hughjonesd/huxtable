@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
       </span>
     </div>
 
@@ -115,6 +115,48 @@
       
     </div>
 
+    <div id="huxtable-4-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#huxtable-4-2-1" class="anchor"></a>huxtable 4.2.1<small> 2018-10-26 </small>
+</h1>
+<ul>
+<li>Bugfix: <code>wrap=TRUE</code> caused squeezed text in RTF.</li>
+</ul>
+<div id="important" class="section level2">
+<h2 class="hasAnchor">
+<a href="#important" class="anchor"></a>Important</h2>
+<ul>
+<li>
+<p>TeX code was getting escaped by pandoc. To avoid this, if possible, huxtable now adds fenced code blocks round latex tables (see <a href="https://pandoc.org/MANUAL.html#extension-raw_attribute" class="uri">https://pandoc.org/MANUAL.html#extension-raw_attribute</a>). You must add</p>
+<p>md_extensions: +raw_attribute</p>
+<p>to your YAML header for this to work, and you will need a recent (&gt; 2.0.0) version of Pandoc.</p>
+</li>
+</ul>
+</div>
+</div>
+    <div id="huxtable-4-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#huxtable-4-2-0" class="anchor"></a>huxtable 4.2.0<small> 2018-10-03 </small>
+</h1>
+<ul>
+<li>More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.</li>
+<li>Simplify LaTeX output using our own LaTeX commands.</li>
+<li>RTF support: new <code>print_rtf</code>, <code>to_rtf</code> and <code>quick_rtf</code> functions.</li>
+<li>New <code>border_style</code> properties to set “solid”, “double”, “dotted” or “dashed” borders. (At present, LaTeX only allows “solid” or “double”.)</li>
+<li>New <code>merge_cells</code> function, an alternative interface to <code>colspan</code> and <code>rowspan</code>.</li>
+<li>New <code>quick_pptx</code> function to print data frames and huxtables into Powerpoint.</li>
+<li>New <code>install_latex_dependencies</code> and <code>check_latex_dependencies</code> utility functions.</li>
+<li>
+<code>add_rows</code> and <code>add_columns</code> now accept data frames as arguments.</li>
+<li>New <code>theme_mondrian</code> theme :-D</li>
+<li>Enhancement: <code>print_md</code> now handles <strong>bold</strong> and <em>italic</em> cells.</li>
+<li>Enhancement: <code>quick_pdf</code> has new <code>width</code> and <code>height</code> options to change paper size.</li>
+<li>Use CSS writing-mode where possible for text rotation. Note that this may break on non-LTR languages. If this affects you, please file an issue.</li>
+<li>Bugfix: LaTeX didn’t compile when height and caption were both set.</li>
+<li>Bugfix: <code>print_screen</code> and <code>print_md</code> would hang with a wide huxtable.</li>
+<li>Tweaks to documentation.</li>
+</ul>
+</div>
     <div id="huxtable-4-1-0" class="section level1">
 <h1 class="page-header">
 <a href="#huxtable-4-1-0" class="anchor"></a>huxtable 4.1.0<small> 2018-07-31 </small>
@@ -130,12 +172,18 @@
 <li>LaTeX: at points where borders cross, priority is given to the horizontal border color.</li>
 <li>Bugfix: property accessors had the wrong environment. Thanks to Iñaki Úcar.</li>
 <li>Bugfix: row heights and column widths weren’t being copied with cbind/rbind.</li>
-<li>Bugfixes for 0-row or 0-column huxtables:</li>
+<li>Bugfixes for 0-row or 0-column huxtables:
+<ul>
 <li>Output works, usually with a warning.</li>
 <li>cbind and rbind work.</li>
+</ul>
+</li>
 <li>Bugfix: HTML cols were printed with ‘width: NA’.</li>
-<li>Bugfix: width, col_width etc. can be reset to a number after setting them to a string.</li>
+<li>Bugfix: width, col_width etc. can be reset to a number after setting them to a string.
+<ul>
 <li>The (undocumented) ability to mix numeric and non-numeric values for padding and/border widths has been removed. If you want a number, set a number and not a string.</li>
+</ul>
+</li>
 <li>Bugfix: HTML tables with position “right” weren’t right-aligned.</li>
 <li>Nicer error messages when rbinding objects with different numbers of rows.</li>
 <li>Vignette improvements.</li>
@@ -179,9 +227,12 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>huxtable now provides <code>knit_print.data.frame</code> methods. This means that bare data frames will be pretty-printed via huxtable if the package is loaded.</li>
+<li>huxtable now provides <code>knit_print.data.frame</code> methods. This means that bare data frames will be pretty-printed via huxtable if the package is loaded.
+<ul>
 <li>Set <code>options("huxtable.knit_print_df")</code> to <code>FALSE</code> if you don’t want this.</li>
 <li>By default data frames are printed using the <code>theme_plain</code> theme. Set options(“huxtable.knit_print_df_theme”) to a different one-argument function if you want to use a different theme.</li>
+</ul>
+</li>
 <li>The new <code>autoformat</code> argument lets <code><a href="../reference/huxtable.html">huxtable()</a></code> and <code><a href="../reference/as_huxtable.html">as_huxtable()</a></code> automatically choose alignment and number format based on column type. Set <code>options("huxtable.autoformat")</code> to <code>FALSE</code> to turn off this feature by default.</li>
 <li>The default value of <code>number_format</code> has changed from “%5.3g” to “%.3g”, which no longer space-pads numbers.</li>
 <li>
@@ -196,9 +247,12 @@
 <li>LaTeX bugfix: background colors were printing an extra space.</li>
 <li>
 <code>huxreg</code> was never using built-in confidence intervals.</li>
-<li>Screen bugfixes:</li>
+<li>Screen bugfixes:
+<ul>
 <li>set max_width to screen width (thanks <a href='http://github.com/jacob'>@jacob</a>-long)</li>
 <li>misaligned decimal points</li>
+</ul>
+</li>
 <li>Various bugfixes for <code>number_format</code>, <code>huxreg</code>, <code>as_hux.table</code>, <code>as_flextable</code>.</li>
 </ul>
 </div>
@@ -258,7 +312,7 @@
 <a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
-<code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
+<code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
 <li>If <code>number_format</code> is NA, numbers are unchanged.</li>
 <li>Default value of <code>number_format</code> has changed from “%5.2f” to “%5.3g”, which plays nicer with integers but may surprise you by using scientific format for large numbers.</li>
 </ul>
@@ -317,7 +371,8 @@
 <li>
 <code>as_FlexTable</code> is deprecated and calls <code>as_flextable</code> with a warning. <code>header_rows</code> and <code>footer_rows</code> arguments are ignored. If you need this feature, tell me.</li>
 <li>HTML border sizes are now set in points, not pixels.</li>
-<li>In <code>huxreg</code>:</li>
+<li>In <code>huxreg</code>:
+<ul>
 <li>
 <code>ci_level</code> is <code>NULL</code> by default. Set it to a number to calculate confidence intervals.</li>
 <li>
@@ -325,6 +380,8 @@
 <li>Use <code>{stars}</code> not <code>%stars%</code> to display significance levels in the <code>note</code> argument.</li>
 <li>
 <code>borders</code> becomes a number specifying border width. Set to 0 for no borders.</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -410,6 +467,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#huxtable-4-2-1">4.2.1</a></li>
+        <li><a href="#huxtable-4-2-0">4.2.0</a></li>
         <li><a href="#huxtable-4-1-0">4.1.0</a></li>
         <li><a href="#huxtable-4-0-1">4.0.1</a></li>
         <li><a href="#huxtable-4-0-0">4.0.0</a></li>

@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Theme a huxtable — themes" />
+
+<meta property="og:description" content="These functions quickly set default styles for a huxtable." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,15 +111,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Theme a huxtable</h1>
+    
+    <div class="hidden name"><code>themes.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These functions quickly set default styles for a huxtable.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>theme_plain</span>(<span class='no'>ht</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"left"</span>)
 
@@ -111,9 +132,11 @@
 <span class='fu'>theme_striped</span>(<span class='no'>ht</span>, <span class='kw'>stripe</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>0.9</span>), <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>theme_article</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>theme_article</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>theme_mondrian</span>(<span class='no'>ht</span>, <span class='kw'>prop_colored</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>font</span> <span class='kw'>=</span> <span class='st'>"Arial"</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -122,7 +145,7 @@
     </tr>
     <tr>
       <th>position</th>
-      <td><p>'left', 'centre' or 'right'</p></td>
+      <td><p>'left', 'center' or 'right'</p></td>
     </tr>
     <tr>
       <th>header_row</th>
@@ -136,6 +159,14 @@
       <th>stripe</th>
       <td><p>Background colour for alternate rows</p></td>
     </tr>
+    <tr>
+      <th>prop_colored</th>
+      <td><p>Roughly what proportion of cells should have a primary-color background?</p></td>
+    </tr>
+    <tr>
+      <th>font</th>
+      <td><p>Font to use. For LaTeX, try <code>"cmss"</code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -144,11 +175,13 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>theme_plain</code> is a simple theme with a bold header, a grey striped background, and an outer border.
-    <code>theme_basic</code> just adds a border for header rows and/or columns.
-    <code>theme_striped</code> uses different backgrounds for alternate rows, and for headers.
-    <code>theme_article</code> is similar to the style of many scientific journals.
+    <p><code>theme_plain</code> is a simple theme with a bold header, a grey striped background, and an outer border.</p>
+<p><code>theme_basic</code> just adds a border for header rows and/or columns.</p>
+<p><code>theme_striped</code> uses different backgrounds for alternate rows, and for headers.</p>
+<p><code>theme_article</code> is similar to the style of many scientific journals.
 It sets horizontal lines above and below the table.</p>
+<p><code>theme_mondrian</code> mimics the style of a Mondrian painting, with black borders and randomized
+colors.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -182,11 +215,14 @@ It sets horizontal lines above and below the table.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -3,15 +3,15 @@ title: "Regression Tables with huxreg"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output: 
-  html_document: default
   pdf_document:
     md_extensions: +raw_attribute
     includes:
       in_header: placeins-header.tex
+  html_document: default
 vignette: >
   %\VignetteIndexEntry{Regression Tables with huxreg}  
-  %\VignetteEngine{knitr::rmarkdown}  
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}  
 ---
 
 ```{r setup, include=FALSE}

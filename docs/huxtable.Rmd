@@ -7,7 +7,6 @@ output:
     includes:
       in_header: placeins-header.tex
     toc: yes
-    keep_tex: yes
     toc_depth: 2
     md_extensions: +raw_attribute
   html_document:
@@ -777,14 +776,12 @@ do this you can use huxtable functions starting with `quick_`, shown below.
 
 ```{r, echo = FALSE}
 quick_commands <- hux(
-        Command = paste0("<code>", 
-          c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", "quick_rtf"), 
-          "</code>"),
+        Command = c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", "quick_rtf"), 
         Output = c("PDF document", "Word document", "HTML web page", "Excel spreadsheet", 
           "Powerpoint presentation", "RTF document"),
         add_colnames = TRUE
       )
-escape_contents(quick_commands) <- FALSE
+font(quick_commands)[, 1] <- if (is_latex) 'cmtt' else 'Courier'
 
 theme_plain(quick_commands)
 ```

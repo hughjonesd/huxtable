@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Convert a huxtable for Excel — as_Workbook" />
+
+<meta property="og:description" content="If the openxlsx package is installed, Huxtables can be converted to
+openxlsx::openxlsx() Worbook objects, for use in Excel documents." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">huxtable</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">huxtable</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -87,6 +104,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -94,16 +112,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert a huxtable for Excel</h1>
+    
+    <div class="hidden name"><code>as_Workbook.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>If the <code>openxlsx</code> package is installed, Huxtables can be converted to
 <code><a href='http://www.rdocumentation.org/packages/openxlsx/topics/openxlsx'>openxlsx::openxlsx()</a></code> Worbook objects, for use in Excel documents.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
 
@@ -111,7 +133,7 @@
 <span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 1"</span>,
   <span class='kw'>write_caption</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -151,7 +173,7 @@
 </ul>
     <p>Huxtable tries to guess appropriate widths and height for rows and columns; numeric <code><a href='width.html'>width()</a></code> and
 <code><a href='height.html'>height()</a></code> are treated as scaling factors.</p>
-<p>Contents are only stored as numbers if a whole column is numeric as defined by <code><a href='is_a_number.html'>is_a_number()</a></code>;
+<p>Contents are only stored as numbers if a whole column is numeric as defined by <code><a href='huxtable-deprecated.html'>is_a_number()</a></code>;
 otherwise they are stored as text.</p>
     
 
@@ -159,7 +181,11 @@ otherwise they are stored as text.</p>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
 <span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>ht</span>)</div><span class='co'># NOT RUN {</span>
 <span class='kw pkg'>openxlsx</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/openxlsx/topics/saveWorkbook'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"my-excel-file.xlsx"</span>)
-<span class='co'># }</span></pre>
+<span class='co'># }</span><div class='input'>
+<span class='co'># multiple sheets in a single workbook:</span>
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>openxlsx</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/openxlsx/topics/createWorkbook'>createWorkbook</a></span>()
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>'sheet1'</span>)
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>'Another'</span>, <span class='st'>'huxtable'</span>), <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>'sheet2'</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -182,11 +208,14 @@ otherwise they are stored as text.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

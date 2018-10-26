@@ -7,7 +7,6 @@ output:
     includes:
       in_header: placeins-header.tex
     toc: yes
-    keep_tex: yes
     toc_depth: 2
     md_extensions: +raw_attribute
   html_document:

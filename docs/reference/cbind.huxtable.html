@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
       </span>
     </div>
 
@@ -126,21 +126,23 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for huxtable</span>
-<span class='fu'>cbind</span>(<span class='no'>...</span>, <span class='kw'>deparse.level</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>cbind</span>(<span class='no'>...</span>, <span class='kw'>deparse.level</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for huxtable</span>
-<span class='fu'>rbind</span>(<span class='no'>...</span>, <span class='kw'>deparse.level</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>rbind</span>(<span class='no'>...</span>, <span class='kw'>deparse.level</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Vectors, matrices, data frames or huxtables.</p></td>
+      <td><p>Vectors, matrices, or huxtables.</p></td>
     </tr>
     <tr>
       <th>deparse.level</th>
-      <td><p>Passed to <code>cbind.data.frame()</code>.</p></td>
+      <td><p>Unused.</p></td>
     </tr>
     <tr>
       <th>copy_cell_props</th>
@@ -156,14 +158,17 @@
 
     <p>Table properties will be taken from the first argument which is a huxtable. So will
 row properties (for cbind) and column properties (for rbind).</p>
-<p>If some of the inputs are not huxtables, and <code>copy_cell_props</code> is a character vector of cell properties,
-then for rbind, the named cell properties and row heights will be copied to non-huxtables. For cbind,
-the named cell properties and column widths will be copied. Objects on the left or above get priority
-over those on the right or below.</p>
-<p>If <code>copy_cell_props</code> is <code>TRUE</code>, the default
-set of cell properties (everything but <code>colspan</code> and <code>rowspan</code>) will be copied.</p>
-<p>If <code>copy_cell_props</code> is <code>FALSE</code>, cells from non-huxtable objects will get the
-default properties.</p>
+<p>If some of the inputs are not huxtables, and <code>copy_cell_props</code> is a character vector of cell
+properties, then the named cell properties will be copied to non-huxtables. Objects on the left
+or above get priority over those on the right or below. These properties may also include
+<code>"row_height"</code> (for rbind) or <code>"col_width"</code> (for cbind). Numeric row heights and column widths
+will be rescaled to 1.</p>
+<p>If <code>copy_cell_props</code> is <code>TRUE</code>, the default set of cell properties (everything but <code>colspan</code> and
+<code>rowspan</code>, including row heights/column widths) will be copied.</p>
+<p>If <code>copy_cell_props</code> is <code>FALSE</code>, cells from non-huxtable objects will get the default properties.</p>
+<p>NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+call the data frame method instead of the huxtable-specific code. For a solution, see
+<code><a href='add_rows.html'>add_columns()</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
