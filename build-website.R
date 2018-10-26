@@ -2,7 +2,13 @@
 
 # script to rebuild website files
 
-
+# pkgdown works from your tree, not from installed versions. So:
+# checkout the version you want on the web;
+# update the website appropriately
+# run this script;
+# checkout master;
+# checkout -- docs/*
+#
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   message("Rendering ", f)
   rmarkdown::render(f, output_format = "html_document")
