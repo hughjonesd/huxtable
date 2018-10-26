@@ -1,25 +1,17 @@
----
-title: "Huxtable table demo"
-author: "David Hugh-Jones"
-date: "2/03/2017"
-output:
-  pdf_document:
-    includes:
-      in_header: placeins-header.tex
-    keep_tex: yes
-    md_extensions: +raw_attribute
-  html_document: default
----
+\documentclass{article}
 
-
-```{r setup, echo = FALSE}
-
+<<setup, results = 'asis'>>=
 library(huxtable)
 knitr::opts_chunk$set(echo = FALSE)
-```
+report_latex_dependencies(quiet = FALSE, as_string = FALSE)
+@
+\usepackage{placeins}
+
+\begin{document}
 
 
-```{r}
+
+<<>>=
 
 make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
   ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
@@ -34,11 +26,11 @@ make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more tex
 
 long <- 'A rather long row of text which goes on...'
 
-```
+@
 
-# Width and colwidth
+\section{Width and colwidth}
 
-```{r}
+<<>>=
 ht <- make()
 caption(ht) <- 'both unset'
 ht
@@ -56,13 +48,13 @@ width(ht) <- 0.2
 caption(ht) <- 'width 0.2, col\\_width .7, .3'
 ht
 
-```
+@
 
 \FloatBarrier
 
-# Position and width (and caption)
+\section{Position and width (and caption)}
 
-```{r}
+<<>>=
 ht <- make()
 caption(ht) <- 'both unset'
 ht
@@ -84,27 +76,27 @@ position(ht) <- 'right'
 caption(ht) <- 'width .8, right pos'
 ht
 
-```
+@
 
 
-# Caption_pos
+\section{Caption\_pos}
 
-```{r, results = 'asis'}
+<<, results = "asis">>=
 
 for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomcenter', 'bottomright', 'bottom')) {
-  ht <- make(nrow = 1) 
+  ht <- make(nrow = 1)
    caption(ht) <- paste0('caption\\_pos: ', pos)
    caption_pos(ht) <- pos
   print_latex(ht)
 }
 
-```
+@
 
 \FloatBarrier
 
-# Col_width and align
+\section{col\_width and align}
 
-```{r}
+<<>>=
 ht <- make(nrow = 3)
 ht <- set_align(ht, c('left', 'center', 'right'))
 caption(ht) <- 'Align by row: l/c/r, col\\_width unset'
@@ -112,11 +104,11 @@ ht
 
 col_width(ht) <- c(.2, .8)
 caption(ht) <- 'Align by row: l/c/r, col\\_width .2, .8'
-```
+@
 
-# Different kinds of floats
+\section{Different kinds of floats}
 
-```{r}
+<<>>=
 ht <- make()
 latex_float(ht) <- 't'
 caption(ht) <- 'latex\\_float t, top of page'
@@ -129,26 +121,26 @@ ht
 latex_float(ht) <- 'h'
 caption(ht) <- 'latex\\_float h, here'
 ht
-```
+@
 
 \FloatBarrier
 
-# Align and wrap
+\section{Align and wrap}
 
-```{r}
+<<>>=
 ht <- make(nrow = 4, text1 = long, text2 = long)
 ht[2:4,2] <- 'Shorter text'
 wrap(ht)[,1] <- TRUE
 ht <- set_align(ht, c('left', 'left', 'center', 'right'))
 caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left'
 ht
-```
+@
 
 \FloatBarrier
 
-# Valign, row height and wrap
+\section{Valign, row height and wrap}
 
-```{r}
+<<>>=
 ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text' , 'text'))
 ht <- set_valign(ht, c('top', 'top', 'middle', 'bottom'), byrow = TRUE)
 wrap(ht)[1,] <- TRUE
@@ -160,37 +152,37 @@ ht
 row_height(ht) <- rep('4\\baselineskip', 2)
 caption(ht) <- 'valign in columns 1-4: t/t/m/b; wrap TRUE at top (and bot left); row heights 4\\\\baselineskip'
 ht
-```
+@
 
 \FloatBarrier
 
-# Colwidth and wrap
+\section{Colwidth and wrap}
 
-```{r}
+<<>>=
 ht <- make(text1 = long, text2 = long)
 wrap(ht)[1,] <- TRUE
 col_width(ht) <- c(.8, .2)
 caption(ht) <- 'wrap TRUE at top, col\\_width .8, .2'
 ht
-```
+@
 
 \FloatBarrier
 
-# Width and wrap
+\section{Width and wrap}
 
-```{r}
+<<>>=
 ht <- make()
 width(ht) <- .2
 wrap(ht)[1,] <- TRUE
 caption(ht) <- 'wrap TRUE at top, width .2'
 ht
-```
+@
 
 \FloatBarrier
 
-# Padding and wrap
+\section{Padding and wrap}
 
-```{r}
+<<>>=
 ht <- make(nrow = 4, text1 = long, text2 = long)
 wrap(ht)[,1] <- TRUE
 left_padding(ht)[1,] <- 12
@@ -199,13 +191,13 @@ top_padding(ht)[3,] <- 12
 bottom_padding(ht)[4,] <- 12
 caption(ht) <- 'wrap TRUE on left; padding by row l/r/t/b'
 ht
-```
+@
 
 \FloatBarrier
 
-# Padding and colwidth
+\section{Padding and colwidth}
 
-```{r}
+<<>>=
 ht <- make(nrow = 4, text1 = long, text2 = long)
 col_width(ht) <- c(.2, .8)
 left_padding(ht)[1,] <- 12
@@ -218,13 +210,13 @@ ht
 wrap(ht) <- TRUE
 caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap TRUE'
 ht
-```
+@
 
 \FloatBarrier
 
-# Text and wrap
+\section{Text and wrap}
 
-```{r}
+<<>>=
 ht <- make(nrow = 6, text1 = long, text2 = long)
 wrap(ht)[,1] <- TRUE
 font(ht)[1,] <- 'lmss'
@@ -234,37 +226,37 @@ text_color(ht)[5,] <- 'yellow'
 font_size(ht)[6,] <- 14
 caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yellow/big'
 ht
-```
+@
 
 \FloatBarrier
 
-# Multirow and wrap
+\section{Multirow and wrap}
 
-```{r}
+<<>>=
 ht <- make(text1 = long)
 wrap(ht)[,1] <- TRUE
 rowspan(ht)[1,1] <- 2
 rowspan(ht)[1,2] <- 2
 caption(ht) <- 'multirow cells, wrap TRUE on left'
-```
+@
 
 \FloatBarrier
 
-# Multirow and multicol
+\section{Multirow and multicol}
 
-```{r}
+<<>>=
 ht <- make(text1 = long, nrow = 3)
 colspan(ht)[1,1] <- 2
 rowspan(ht)[2,1] <- 2
 caption(ht) <- 'multirow cells and multicol cells'
 ht
-```
+@
 
 \FloatBarrier
 
-# Border color left and right/top and bottom
+\section{Border color left and right/top and bottom}
 
-```{r}
+<<>>=
 ht <- make()
 left_border_color(ht)[,2] <- 'red'
 caption(ht) <- 'Left border of col 2: red'
@@ -274,32 +266,32 @@ ht <- make()
 top_border_color(ht)[2,] <- 'red'
 caption(ht) <- 'Top border of row 2: red'
 ht
-```
+@
 
 \FloatBarrier
 
-# Text and border color
+\section{Text and border color}
 
-```{r}
+<<>>=
 ht <- make()
 ht <- set_all_border_colors(ht, everywhere, 1, 'red')
 text_color(ht) <- 'blue'
 caption(ht) <- 'text color blue. Col 1 border color set to red'
 ht
-```
+@
 
 \FloatBarrier
 
-# Multirow, multicol and border color
+\section{Multirow, multicol and border color}
 
-```{r}
+<<>>=
 ht <- make(nrow = 2)
 ht <- set_all_border_colors(ht, 'blue')
 caption(ht) <- 'All borders blue'
 ht
-```
+@
 
-```{r}
+<<>>=
 ht <- make(nrow = 5)
 background_color(ht) <- 'white'
 colspan(ht)[1,1] <- 2
@@ -312,15 +304,15 @@ top_border_color(ht) <- 'blue'
 # bottom_border_color(ht) <- 'red'
 caption(ht) <- 'multirow, multicol and border color (left: yellow; right: green; top: blue; bottom unset)'
 ht
-```
+@
 
 
 \FloatBarrier
 
-# Borders on and off
+\section{Borders on and off}
 
 
-```{r}
+<<>>=
 ht <- make(nrow = 2)
 ht <- set_all_borders(ht, 1)
 top_border(ht)[1, ] <- 0
@@ -334,12 +326,12 @@ ht
 right_border(ht)[, 1] <- 0
 caption(ht) <- 'No left/right border of left col, no top border of top row'
 ht
-```
+@
 
 
-# Horizontal border width
+\section{Horizontal border width}
 
-```{r}
+<<>>=
 
 ht <- make(nrow = 2)
 ht <- set_all_borders(ht, .5)
@@ -352,7 +344,7 @@ top_border(ht)[2, ] <- 4 # should win out
 caption(ht) <- 'Bottom border of first row 4px'
 ht
 
-top_border(ht)[2, 2] <- 1 
+top_border(ht)[2, 2] <- 1
 caption(ht) <- 'Bottom border of first row first column 4pt; second column 1pt. Gives warning'
 ht
 
@@ -361,12 +353,12 @@ top_border(ht)[2, 2] <- 0
 caption(ht) <- 'Bottom border of first row first column 4pt; second column 0pt. Should work.'
 ht
 
-```
+@
 
 
-# Vertical border width
+\section{Vertical border width}
 
-```{r}
+<<>>=
 ht <- make(nrow = 2)
 left_border(ht)[2, 1] <- 6
 left_border(ht)[2, 2] <- 1
@@ -374,11 +366,11 @@ right_border(ht)[2, 1] <- 4
 right_border_color(ht)[2, 1] <- 'red'
 caption(ht) <- 'Left borders second col should be thicker. At present right\\_border has priority'
 ht
-```
+@
 
-# Border width and multirow/col
+\section{Border width and multirow/col}
 
-```{r}
+<<>>=
 ht <- make(nrow = 3)
 rowspan(ht)[1, 1] <- 2
 colspan(ht)[3, 1] <- 2
@@ -386,12 +378,12 @@ right_border(ht)[1, ] <- 4
 bottom_border(ht)[1, ] <- 4
 caption(ht) <- 'Bottom border of top cell should be thicker. In TeX this will continue across row.'
 ht
-```
+@
 
 
-# Border style
+\section{Border style}
 
-```{r}
+<<>>=
 ht <- make(nrow = 5, ncol = 5, more_text = c('more', 'more', 'more'))
 ht <- set_all_borders(ht, 3)
 left_border_style(ht)[, 1] <- 'double'
@@ -446,18 +438,20 @@ ht <- set_left_border(ht, 3:7)
 ht <- set_bottom_border(ht, 3:7, byrow = TRUE)
 caption(ht) <- 'Varying border widths'
 ht
-```
+@
 
 
-# Huxreg 
+\section{Huxreg }
 
-```{r}
+<<>>=
 huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
 
-```
+@
 
-# hux_logo
+\section{hux\_logo}
 
-```{r}
+<<>>=
 hux_logo(latex = TRUE)
-```
+@
+
+\end{document}
