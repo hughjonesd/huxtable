@@ -25,6 +25,12 @@ to_latex(ht, ...)
 \description{
 Create LaTeX representing a huxtable
 }
+\details{
+If we appear to be in a rmarkdown document with the markdown \code{"+raw_attribute"} extension set,
+\code{to_latex} will return LaTeX surrounded by a
+"raw attribute code block" (see https://pandoc.org/MANUAL.html#extension-raw_attribute).
+This helps protect against pandoc accidentally escaping the TeX code.
+}
 \examples{
 ht <- huxtable(a = 1:3, b = letters[1:3])
 print_latex(ht)
