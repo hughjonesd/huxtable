@@ -608,7 +608,7 @@ name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
 car_ht %>% set_background_color(everywhere, starts_with("C"), "orange")
-car_ht %>% set_italic(everywhere, matches("[aeiou]"), TRUE)
+car_ht %>% set_italic(everywhere, dplyr::matches("[aeiou]"), TRUE)
 ```
 
 Note that unlike in `dplyr`'s `select` function, you have to specify rows as well as columns.
