@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Huxtable - an R package to create styled tables in multiple output formats</title>
+<title>Huxtable - an R package for writing LaTeX and HTML tables</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -198,8 +198,7 @@ end.rcode-->
 
 
 
-<p>Huxtable is an R package to create styled tables in multiple output formats, with a friendly,
-modern interface.
+<p>Huxtable is an R package to create LaTeX and HTML tables, with a friendly, modern interface.
 Features include control over text styling,
 number format, background color, borders, padding
 and alignment. Cells can span multiple rows and/or columns.
@@ -315,19 +314,33 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>October 26, 2018: Huxtable 4.2.1 released</h4>
+
+<p>This patch release works around a bug with recent pandoc versions, which led to
+  huxtable's TeX commands being escaped in some rmarkdown documents.</p>
+
+<p>To apply the workaround, you will need to add:</p>
+<p><code>
+  md_extensions: +raw_attribute
+</code></p>
+to your YAML header.</p>
+
+<p>If you still have problems, please <a href="https://github.com/hughjonesd/huxtable/issues">report
+a bug</a>.</p>
+
+
 <h4>October 3, 2018: Huxtable 4.2.0 released</h4>
 
 <p>This minor point release adds a few features and bugfixes.</p>
 <ul>
-<li>LaTeX rendering should again be 2-3 times faster, <code>as_Workbook</code> should be faster too.
+<li>LaTeX rendering should again be 2-3 times faster, <code>as_Workbook</code> should be faster too.</li>
 <li>Simplify LaTeX output by creating and using our own LaTeX commands. Please report any bugs!</li>
 <li>RTF support: new <code>print_rtf</code>, <code>to_rtf</code> and <code>quick_rtf</code> functions</li>
 <li>New <code>border_style</code> properties to set "solid", "double", "dotted" or "dashed" borders.
-  (At present, LaTeX only allows "solid" or "double".)
-<li>New <code>quick_pptx</code> function to print data frames and huxtables into Powerpoint.</li>
+  (At present, LaTeX only allows "solid" or "double".)</li>
+<li>New <code>quick_pptx</code>function to print data frames and huxtables into Powerpoint.</li>
 <li>There's a new <code>theme_mondrian</code> theme :-D</li>
 </ul>
-
 
 <h4>August 1, 2018: Huxtable 4.1.0 released</h4>
 
