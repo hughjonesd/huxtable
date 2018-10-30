@@ -7,6 +7,13 @@ TODO
 Priority changes
 ================
 
+* Bookdown labels:
+  - code to automatically add "(#tab): " to captions (NB with or without)
+    backslash may depend on PDF - so perhaps this is another property
+    and is dynamically generated - or better still, automatically
+    detected if we're in bookdown.
+  - a function to autogenerate a reference: `bookdown_ref(ht)` would
+    generate e.g. "\@ref(tab:my-label)"?
 
 * Update website from website-4.3-changes branch
 
