@@ -1,0 +1,40 @@
+---
+title: "Tufte Handout"
+subtitle: "An implementation in R Markdown"
+author: "JJ Allaire and Yihui Xie"
+date: "`r Sys.Date()`"
+output:
+  bookdown::tufte_html2: default
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+library(dplyr)
+library(huxtable)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
+Output format is `r guess_knitr_output_format()`.
+
+```{r}
+debug(guess_knitr_output_format)
+guess_knitr_output_format()
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My labelled table") %>% 
+  set_label("foo1")
+
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My unlabelled table")
+```
