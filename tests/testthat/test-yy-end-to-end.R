@@ -108,15 +108,24 @@ test_that("Various Rmd files render without errors", {
   skip_on_cran()
   skip_if_not_installed("flextable") # skips on travis no-suggests where no vignettes
 
+  test_render_all <- function (path) {
+    test_render(path, "pdf_document")
+    test_render(path, "html_document")
+  }
+  rmd_paths <- c("table-tester-2.Rmd")
+  for (path in rmd_paths) {
+    test_render_all(path)
+  }
+  test_render("bookdown-test.Rmd", "bookdown::pdf_book")
+  test_render("bookdown-test.Rmd", "bookdown::html_book")
+
   rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd") # design-principles needs a CSV file, so we skip
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
   rmd_paths <- system.file("vignettes", rmd_filenames, package = "huxtable")
   if (! utils::file_test("-f", rmd_paths[1])) rmd_paths <-
          base::system.file("doc", rmd_filenames, package = "huxtable")
-  rmd_paths <- c(rmd_paths, "table-tester-2.Rmd")
   if (! utils::file_test("-f", rmd_paths[1])) skip("Couldn't find vignettes...")
-  for (f in rmd_paths) {
-    test_render(f, "pdf_document")
-    test_render(f, "html_document")
+  for (path in rmd_paths) {
+    test_render_all(path)
   }
 })
