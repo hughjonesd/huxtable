@@ -27,8 +27,7 @@ options(htmltools.dir.version = FALSE)
 Output format is `r guess_knitr_output_format()`.
 
 ```{r}
-debug(guess_knitr_output_format)
-guess_knitr_output_format()
+browser()
 
 hux(a = 1:5, b = 1:5) %>% 
   set_caption("My labelled table") %>% 

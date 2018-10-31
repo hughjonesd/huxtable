@@ -156,4 +156,14 @@ htmlPreserve <- function (x) {
   if (nzchar(x)) sprintf("<!--html_preserve-->%s<!--/html_preserve-->", x) else x
 }
 
+in_bookdown <- function () {
+  if (! is.null(book_opt <- getOption("huxtable.bookdown", NULL))) return(book_opt)
 
+  if (! requireNamespace("knitr")) return(FALSE)
+  if (! requireNamespace("rmarkdown")) return(FALSE)
+  input_path <- knitr::current_input(dir = TRUE)
+  if (is.null(input_path)) return(FALSE)
+  rmd_of <- rmarkdown::default_output_format(input_path)$name
+
+  return(grepl("bookdown", rmd_of))
+}
