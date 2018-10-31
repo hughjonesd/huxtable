@@ -53,7 +53,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     c(sprintf("\\resizebox*{!}{%s}{", height), "}")
   }
 
-  cap <- if (is.na(cap <- caption(ht))) "" else {
+  cap <- if (is.na(cap <- make_caption(ht, "latex"))) "" else {
     hpos <- get_caption_hpos(ht)
     cap_setup <- switch(hpos,
       left   = "raggedright",

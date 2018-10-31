@@ -876,8 +876,12 @@ make_getter_setters("tabular_environment", "table", check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val "tab:mytable"
 #' @details
-#' LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
-#' in \href{http://bookdown.org}{bookdown}.
+#' LaTeX table labels typically start with `"tab:"`.
+#'
+#' If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
+#' the caption will automatically be prefixed with `(#label)`. You can then
+#' refer to the table using `@ref(label)`. `label` needs to start with `"tab:"`; if it doesn't,
+#' the `"tab"` prefix will be added automatically.
 NULL
 make_getter_setters("label", "table", check_fun = is.character)
 

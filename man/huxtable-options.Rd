@@ -15,6 +15,9 @@ objects are printed by knitr. Set to "html", "latex", "md" or "screen". If \code
 huxtable guesses the format using \code{\link[=guess_knitr_output_format]{guess_knitr_output_format()}}.
 \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
 will be printed in color on screen.
+\item \code{options('huxtable.bookdown')}. Set to \code{TRUE} within a bookdown document to automatically
+print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
+document.
 \item \code{options('huxtable.knit_print_df')}. If \code{TRUE} (the default), data frames in knitr will be
 pretty-printed using huxtable.
 \item \code{options('huxtable.knit_print_df_theme')}. A function applied to data frames

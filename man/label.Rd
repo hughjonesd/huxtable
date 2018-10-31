@@ -24,8 +24,12 @@ For \code{set_label}, the modified huxtable.
 Functions to get or set the table-level \emph{table label} property of a huxtable.
 }
 \details{
-LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
-in \href{http://bookdown.org}{bookdown}.
+LaTeX table labels typically start with \code{"tab:"}.
+
+If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
+the caption will automatically be prefixed with \code{(#label)}. You can then
+refer to the table using \code{@ref(label)}. \code{label} needs to start with \code{"tab:"}; if it doesn't,
+the \code{"tab"} prefix will be added automatically.
 }
 \examples{
 
