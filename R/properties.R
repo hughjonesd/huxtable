@@ -270,7 +270,7 @@ make_getter_setters("col_width", "col")
 #' If character, `value` must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
 #' treated as proportions of the text height (`\\textheight`).
 #' @template getset-example
-#' @templateVar attr_val c(.2, .1, .1)
+#' @templateVar attr_val c(.2, .1, .1, .1)
 NULL
 make_getter_setters("row_height", "row")
 

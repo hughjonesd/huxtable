@@ -114,6 +114,7 @@ test_that("Various Rmd files render without errors", {
   if (! utils::file_test("-f", rmd_paths[1])) rmd_paths <-
          base::system.file("doc", rmd_filenames, package = "huxtable")
   rmd_paths <- c(rmd_paths, "table-tester-2.Rmd")
+  if (! utils::file_test("-f", rmd_paths[1])) skip("Couldn't find vignettes...")
   for (f in rmd_paths) {
     test_render(f, "pdf_document")
     test_render(f, "html_document")
