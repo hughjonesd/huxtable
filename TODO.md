@@ -7,13 +7,9 @@ TODO
 Priority changes
 ================
 
-* Bookdown labels:
-  - code to automatically add "(#tab): " to captions (NB with or without)
-    backslash may depend on PDF - so perhaps this is another property
-    and is dynamically generated - or better still, automatically
-    detected if we're in bookdown.
-  - a function to autogenerate a reference: `bookdown_ref(ht)` would
-    generate e.g. "\@ref(tab:my-label)"?
+* Fix rmarkdown to include +raw_attribute (and maybe with a function)
+
+* Start using knitr::is_latex_output() etc. to detect output types
 
 * Update website from website-4.3-changes branch
 
@@ -86,6 +82,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * Text class also? (5.0)
   - and `set_text(ht, text(10, 'black', 'italic', 'cmss'))`
+  - one could also have e.g. escaped("$\lambda$") which would autoset
+    escape_contents
   
 * Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind? (5.0)
 
