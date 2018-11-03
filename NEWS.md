@@ -16,6 +16,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New "themes" vignette.
 * Correct bookdown labels are now automatically created.
 * New `tidy_override` function to override p values etc. in `huxreg`.
+* New `set_contents` function to change huxtable contents within dplyr pipes.
 * Bugfix: `wrap = TRUE` caused squeezed text in RTF.
 * Enhancement: left- and right-aligned captions are now set above the table in LaTeX,
     using the "threeparttable" package.
