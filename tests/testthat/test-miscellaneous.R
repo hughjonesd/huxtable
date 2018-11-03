@@ -102,3 +102,13 @@ test_that("check_latex_dependencies runs correctly", {
       expect_message(check_latex_dependencies(quiet = FALSE), regexp = "All LaTeX packages found")
     })
 })
+
+
+test_that("is_a_number", {
+  expect_false(is_a_number("foo"))
+  expect_true(is_a_number(1.5))
+  expect_true(is_a_number("1.5"))
+  ht <- hux(a = 1:2, add_colnames = TRUE)
+  expect_equivalent(is_a_number(ht), matrix(c(FALSE, TRUE, TRUE), 3, 1))
+})
+
