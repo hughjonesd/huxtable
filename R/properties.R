@@ -192,6 +192,7 @@ make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "
       rc$col <- get_rc_spec(ht, col, 2)
 
       current <- .(as.name(attr_name))(ht)[rc$row, rc$col, drop = FALSE]
+      if (is_huxtable(current)) current <- as.matrix(current)
       .(as.name(attr_name))(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
 
       ht
