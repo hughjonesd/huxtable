@@ -748,6 +748,41 @@ make_getter_setters("number_format", "cell")
 }
 
 
+#' Set cell contents
+#'
+#' `set_contents()` is a convenience function to change the cell contents of a huxtable within
+#' a dplyr chain. `set_contents(ht, x, y, foo)` just calls `ht[x, y] <- foo` and returns `ht`.
+#'
+#' @template cell-property-usage
+#' @templateVar attr_name contents
+#'
+#' @param ht A huxtable.
+#' @param value Cell contents.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param fn A mapping function. See [mapping-functions] for details.
+#' @param byrow Deprecated. Use [by_cols()] instead.
+#'
+#' @evalNamespace make_exports("contents", with_map = TRUE)
+#' @evalNamespace make_namespace_S3_entries("contents")
+#' @aliases contents contents<- map_contents
+#' @name set_contents
+#' @examples
+#'
+#' set_contents(jams, 2, 1, "Blackcurrant")
+#' map_contents(jams, by_regex(".*berry" = "Snodberry"))
+NULL
+make_getter_setters("contents", "cell")
+
+#' @evalNamespace "S3method(contents, huxtable)"
+contents.huxtable <- function (ht) ht
+
+
+#' @evalNamespace "S3method(\"contents<-\", huxtable)"
+`contents<-.huxtable` <- function (ht, value) {
+  value # by the time we get here, the replacement has already happened and we're done
+}
+
 #' @aliases pad_decimal<- set_pad_decimal map_pad_decimal
 #' @rdname huxtable-deprecated
 #' @name pad_decimal

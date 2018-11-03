@@ -185,11 +185,6 @@ Possibles
   - Conceivably, people might want to override some individual
     cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
 
-* `contents(x) <-` and `set_contents/map_contents`? Useful in pipelines if you want to e.g.
-  both bold and upper case certain cells...
-  - not sure how `contents(x)[1, 1:3] <- blah` would be different from `x[1, 1:3] <- blah`.
-  
-
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
   bottom line is border?
   - not sure we can change colours halfway through though
