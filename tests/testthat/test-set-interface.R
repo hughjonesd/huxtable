@@ -220,6 +220,29 @@ test_that("set_outer_borders() works with non-standard/empty position arguments"
 })
 
 
+test_that("set_contents works", {
+  ht <- hux(1:3, 1:3)
+
+  expect_equivalent(set_contents(ht, 1:6), hux(1:3, 4:6))
+  expect_equivalent(set_contents(ht, 1:6, byrow = TRUE), hux(c(1, 3, 5), c(2, 4, 6)))
+  expect_equivalent(set_contents(ht, 1, 1, 0), hux(c(0, 2:3), 1:3))
+  expect_equivalent(set_contents(ht, 1, 1, 0), hux(c(0, 2:3), 1:3))
+  expect_equivalent(set_contents(ht, 2:3, 2, 3:2), hux(1:3, c(1, 3, 2)))
+
+  ht <- hux(a = 1:3, b = 1:3)
+  expect_equivalent(set_contents(ht, 1, "a", 0), set_contents(ht, 1, 1, 0))
+  # dplyr::matches not testthat::matches
+  expect_equivalent(set_contents(ht, 1, dplyr::matches("b"), 0), set_contents(ht, 1, 2, 0))
+
+  align(ht) <- "right"
+  test_props_same <- function(ht2) expect_equivalent(align(ht2), align(ht))
+  test_props_same(set_contents(ht, 1:6))
+  test_props_same(set_contents(ht, 1:6, byrow = TRUE))
+  test_props_same(set_contents(ht, 1, 1, 0))
+  test_props_same(set_contents(ht, 1, 1, 0))
+  test_props_same(set_contents(ht, 2:3, 2, 3:2))
+})
+
 test_that("merge_cells", {
   ht <- hux(a = 1:3, b = 1:3)
   expect_silent(ht2 <- merge_cells(ht, 1, 1:2))
