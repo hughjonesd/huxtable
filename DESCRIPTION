@@ -30,6 +30,7 @@ Imports:
     tidyselect,
     utils
 Suggests:
+    bookdown,
     broom.mixed,
     covr,
     crayon,

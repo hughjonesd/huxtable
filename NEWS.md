@@ -9,6 +9,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.2.1.9000
 
+* More work on TeX. Tables *should* now compile when raw_attributes is not set.
 * New `map_xxx` functions to set properties variably by cell values.
 * Functions for mapping properties variably: `by_rows`, `by_values`, `by_ranges`,
   `by_quantiles` etc.
