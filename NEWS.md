@@ -13,12 +13,11 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New `map_xxx` functions to set properties variably by cell values.
 * Functions for mapping properties variably: `by_rows`, `by_values`, `by_ranges`,
   `by_quantiles` etc.
+* Correct bookdown labels are now automatically created.
 * New grey, blue, green and orange themes.
 * New "themes" vignette.
-* Correct bookdown labels are now automatically created.
 * New `tidy_override` function to override p values etc. in `huxreg`.
 * New `set_contents` function to change huxtable contents within dplyr pipes.
-* Bugfix: `wrap = TRUE` caused squeezed text in RTF.
 * Enhancement: left- and right-aligned captions are now set above the table in LaTeX,
     using the "threeparttable" package.
 * Enhancement: in `huxtable()` and friends, `add_rownames = "Colname"` now 
@@ -30,7 +29,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 * The 3 argument form of `set_xxx` functions is deprecated, as is the `where` function.
   Use `map_xxx` instead.
-* Argument `byrow` is soft-deprecated. Use `by_cols` instead.
+* Argument `byrow` is soft-deprecated. Use `by_cols()` instead.
 
 
 # huxtable 4.2.1
