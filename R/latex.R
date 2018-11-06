@@ -79,16 +79,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   res <- paste0(resize_box[1], tabular, resize_box[2])
 
   res <- if (grepl("top", caption_pos(ht))) paste0(cap, lab, res) else paste0(res, cap, lab)
-  res <- paste0(
-          commands,
-          sprintf("\n\\begin{table}[%s]\n",latex_float(ht)),
-          pos_text[1],
-          "\n\\begin{threeparttable}\n",
-          res,
-          "\\end{threeparttable}\n",
-          pos_text[2],
-          "\n\\end{table}\n"
-        )
+  res <- paste0(commands, begin_table, pos_text[1], res, pos_text[2], '\\end{table}\n')
 
   return(maybe_markdown_fence(res))
 }
