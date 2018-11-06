@@ -23,6 +23,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Enhancement: in `huxtable()` and friends, `add_rownames = "Colname"` now 
   sets the name for the new column.
 * Improvements to the vignettes and help files.
+* Bugfix: to_md could hang with bold/italic cells.
 
 
 ## Deprecated
