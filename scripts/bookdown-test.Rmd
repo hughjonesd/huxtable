@@ -3,13 +3,11 @@ title: "Bookdown test"
 date: "`r Sys.Date()`"
 output:
   bookdown::pdf_book: 
-    md_extensions: +raw_attribute
   bookdown::html_book: default
   bookdown::tufte_html2: default
   tufte::tufte_book:
     citation_package: natbib
     latex_engine: xelatex
-    md_extensions: +raw_attribute
 link-citations: yes
 ---
 
