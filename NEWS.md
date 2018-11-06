@@ -3,6 +3,10 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 4.2.2
+
+* More work on TeX. Tables *should* now compile when raw_attributes is not set.
+* Bugfix: to_md could hang with bold/italic cells.
 
 # huxtable 4.2.1
  

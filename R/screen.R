@@ -247,6 +247,8 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   max_word_widths <- sapply(lapply(strsplit(dc$contents, "(\t|\n|\r|\v )"), ncharw), function (x)  max(c(0, x)))
   for (r in seq_len(nrow(dc))) {
     width <- if (wrap(ht)[ dc$display_row[r], dc$display_col[r] ]) max_word_widths[r] else content_widths[r]
+    if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 4
+    if (markdown && italic(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 2
     cols <- seq(dc$display_col[r], dc$end_col[r])
     # allows for width of interior borders if a cell spans multiple columns
     if (sum(widths[cols]) + inner_border_h * (dc$colspan[r] - 1) < width) {
