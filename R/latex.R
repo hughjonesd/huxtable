@@ -443,8 +443,7 @@ maybe_markdown_fence <- function (text) {
     in_rmarkdown <- ! is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))
     if (in_rmarkdown && requireNamespace("rmarkdown", quietly = TRUE)) {
       of <- rmarkdown::default_output_format(knitr::current_input())
-      fence <- rmarkdown::pandoc_version() >= "2.0.0" &&
-            "+raw_attribute" %in% of$options$md_extensions
+      fence <- rmarkdown::pandoc_version() >= "2.0.0"
     }
   }
 
