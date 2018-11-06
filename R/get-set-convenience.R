@@ -197,6 +197,7 @@ set_cell_properties <- function (ht, row, col, ...) {
     huxtable_cell_attrs), collapse = ", "))
   call <- match.call(expand.dots = FALSE)
   call[["..."]] <- NULL
+  call[["ht"]] <- quote(ht)
   for (prop_name in names(props)) {
     call[[1]] <- as.symbol(paste0("set_", prop_name))
     call$value <- props[[prop_name]]

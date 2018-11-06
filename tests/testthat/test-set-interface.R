@@ -2,15 +2,16 @@
 context("Row and column functions, set_* interface")
 
 
-test_that("set_cell_properties", {
-  ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
-  ht2 <- set_cell_properties(ht, 1, 1, font = "times", align = "right")
+test_that("Can use set_cell_properties", {
+  htxx <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
+  ht2 <- set_cell_properties(htxx, 1, 1, font = "times", font_size = 24)
   expect_equivalent(font(ht2)[1, 1], "times")
-  expect_equivalent(align(ht2)[1, 1], "right")
+  expect_equivalent(font_size(ht2)[1, 1], 24)
   r <- 2
   c <- 1
-  ht3 <- set_cell_properties(ht, r, c, bold = TRUE)
+  ht3 <- set_cell_properties(htxx, r, c, bold = TRUE, font = "times")
   expect_equivalent(bold(ht3)[2, 1], TRUE)
+  expect_equivalent(font(ht3)[2, 1], "times")
 
 })
 
