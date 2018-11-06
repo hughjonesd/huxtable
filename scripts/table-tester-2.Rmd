@@ -7,7 +7,6 @@ output:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
-    md_extensions: +raw_attribute
   html_document: default
 ---
 
@@ -218,6 +217,7 @@ ht
 wrap(ht) <- TRUE
 caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap TRUE'
 ht
+
 ```
 
 \FloatBarrier
@@ -234,6 +234,7 @@ text_color(ht)[5,] <- 'yellow'
 font_size(ht)[6,] <- 14
 caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yellow/big'
 ht
+
 ```
 
 \FloatBarrier
@@ -246,6 +247,7 @@ wrap(ht)[,1] <- TRUE
 rowspan(ht)[1,1] <- 2
 rowspan(ht)[1,2] <- 2
 caption(ht) <- 'multirow cells, wrap TRUE on left'
+
 ```
 
 \FloatBarrier
@@ -258,6 +260,7 @@ colspan(ht)[1,1] <- 2
 rowspan(ht)[2,1] <- 2
 caption(ht) <- 'multirow cells and multicol cells'
 ht
+
 ```
 
 \FloatBarrier
@@ -312,6 +315,7 @@ top_border_color(ht) <- 'blue'
 # bottom_border_color(ht) <- 'red'
 caption(ht) <- 'multirow, multicol and border color (left: yellow; right: green; top: blue; bottom unset)'
 ht
+
 ```
 
 
