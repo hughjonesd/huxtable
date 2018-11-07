@@ -18,8 +18,9 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * New "themes" vignette.
 * New `tidy_override` function to override p values etc. in `huxreg`.
 * New `set_contents` function to change huxtable contents within dplyr pipes.
-* Enhancement: left- and right-aligned captions are now set above the table in LaTeX,
-    using the "threeparttable" package.
+* Enhancement: left- and right-aligned captions are now set above the table in LaTeX, using the
+  "threeparttable" package. You will need to install this using e.g. `install_latex_dependencies()` 
+  or `tlmgr` if it is not already on your system.
 * Enhancement: in `huxtable()` and friends, `add_rownames = "Colname"` now 
   sets the name for the new column.
 * Improvements to the vignettes and help files.

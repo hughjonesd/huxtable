@@ -22,10 +22,10 @@ print_latex <- function (ht, ...) {
 #' @param ... Arguments to pass to methods.
 #'
 #' @details
-#' If we appear to be in a rmarkdown document with the markdown `"+raw_attribute"` extension set,
-#' `to_latex` will return LaTeX surrounded by a
-#' "raw attribute code block" (see https://pandoc.org/MANUAL.html#extension-raw_attribute).
-#' This helps protect against pandoc accidentally escaping the TeX code.
+#' If we appear to be in a rmarkdown document with the Pandoc markdown `+raw_attribute` extension
+#' available, `to_latex` will return LaTeX surrounded by a "raw attribute code block" (see
+#' https://pandoc.org/MANUAL.html#extension-raw_attribute). This helps protect against pandoc
+#' accidentally escaping the TeX code.
 #'
 #' @return `to_latex` returns a string. `print_latex` prints the string and returns `NULL`.
 #' @export
