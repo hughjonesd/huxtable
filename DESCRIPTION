@@ -31,7 +31,6 @@ Imports:
     utils
 Suggests:
     bookdown,
-    broom.mixed,
     covr,
     crayon,
     devtools,
