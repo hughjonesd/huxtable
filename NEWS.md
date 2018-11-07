@@ -1,13 +1,9 @@
 
-
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major version
 increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable 5.0.0 branch
 
-* In `insert_row/col`, new `fill=xxx` option for filling cells at end of row/col.
-
-# huxtable 4.2.1.9000
+# huxtable 4.3.0
 
 * More work on TeX. Tables *should* now compile when raw_attributes is not set.
 * New `map_xxx` functions to set properties variably by cell values.
