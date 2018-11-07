@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -176,8 +176,10 @@ yourself. See <code><a href='http://www.rdocumentation.org/packages/officer/topi
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
 <span class='no'>ft</span> <span class='kw'>&lt;-</span> <span class='fu'>as_flextable</span>(<span class='no'>ht</span>)</div><span class='co'># NOT RUN {</span>
   <span class='no'>my_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>officer</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/officer/topics/read_docx'>read_docx</a></span>()
-  <span class='no'>my_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>flextable</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/flextable/topics/body_add_flextable'>body_add_flextable</a></span>(<span class='no'>my_doc</span>, <span class='no'>ft</span>)
-  <span class='fu'>print</span>(<span class='no'>my_doc</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='st'>"path/to/my_doc.docx"</span>)
+  <span class='no'>my_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>flextable</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/flextable/topics/body_add_flextable'>body_add_flextable</a></span>(
+        <span class='no'>my_doc</span>, <span class='no'>ft</span>)
+  <span class='fu'>print</span>(<span class='no'>my_doc</span>, <span class='kw'>target</span> <span class='kw'>=</span>
+        <span class='st'>"path/to/my_doc.docx"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

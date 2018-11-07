@@ -42,6 +42,9 @@ objects are printed by knitr. Set to &quot;html&quot;, &quot;latex&quot;, &quot;
 huxtable guesses the format using guess_knitr_output_format().
 options('huxtable.color_screen'). If TRUE and package crayon is available, huxtables
 will be printed in color on screen.
+options('huxtable.bookdown'). Set to TRUE within a bookdown document to automatically
+print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
+document.
 options('huxtable.knit_print_df'). If TRUE (the default), data frames in knitr will be
 pretty-printed using huxtable.
 options('huxtable.knit_print_df_theme'). A function applied to data frames
@@ -83,7 +86,7 @@ something like list(..., Date = &quot;center&quot;, ...).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -153,6 +156,9 @@ objects are printed by knitr. Set to "html", "latex", "md" or "screen". If <code
 huxtable guesses the format using <code><a href='guess_knitr_output_format.html'>guess_knitr_output_format()</a></code>.</p></li>
 <li><p><code>options('huxtable.color_screen')</code>. If <code>TRUE</code> and package <code>crayon</code> is available, huxtables
 will be printed in color on screen.</p></li>
+<li><p><code>options('huxtable.bookdown')</code>. Set to <code>TRUE</code> within a bookdown document to automatically
+print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
+document.</p></li>
 <li><p><code>options('huxtable.knit_print_df')</code>. If <code>TRUE</code> (the default), data frames in knitr will be
 pretty-printed using huxtable.</p></li>
 <li><p><code>options('huxtable.knit_print_df_theme')</code>. A function applied to data frames

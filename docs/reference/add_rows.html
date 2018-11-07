@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -166,30 +166,33 @@ the same but with columns. <code>after = 0</code> and <code>after = nrow(x)</cod
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>Jam</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'Blackberry'</span>, <span class='st'>'Strawberry'</span>), <span class='kw'>Price</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1.90</span>, <span class='fl'>1.80</span>), <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>'Gooseberry'</span>, <span class='fl'>2.10</span>)
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(
+        <span class='kw'>Jam</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Raspberry"</span>, <span class='st'>"Plum"</span>),
+        <span class='kw'>Price</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1.90</span>, <span class='fl'>1.80</span>),
+        <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+      )
+
+<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>"Gooseberry"</span>, <span class='fl'>2.10</span>)
 <span class='fu'>add_rows</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>)</div><div class='output co'>#&gt;   Jam            Price  
-#&gt;   Blackberry       1.9  
-#&gt;   Strawberry       1.8  
+#&gt;   Raspberry        1.9  
+#&gt;   Plum             1.8  
 #&gt;   Gooseberry       2.1  
 #&gt; 
 #&gt; Column names: Jam, Price</div><div class='input'><span class='fu'>add_rows</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt;   Jam            Price  
 #&gt;   Gooseberry       2.1  
-#&gt;   Blackberry       1.9  
-#&gt;   Strawberry       1.8  
+#&gt;   Raspberry        1.9  
+#&gt;   Plum             1.8  
 #&gt; 
-#&gt; Column names: Jam, Price</div><div class='input'><span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='st'>'Sugar'</span>, <span class='st'>'50%'</span>, <span class='st'>'60%'</span>, <span class='st'>'Weight (g)'</span>, <span class='fl'>300</span>, <span class='fl'>250</span>), <span class='fl'>3</span>, <span class='fl'>2</span>)
-<span class='fu'>add_columns</span>(<span class='no'>ht</span>, <span class='no'>mx</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>'Jam'</span>)</div><div class='output co'>#&gt;   Jam          Sugar   Weight (g)   Price  
-#&gt;   Blackberry   50%     300            1.9  
-#&gt;   Strawberry   60%     250            1.8  
+#&gt; Column names: Jam, Price</div><div class='input'>
+<span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(
+      <span class='fu'>c</span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>,
+      <span class='st'>"Weight (g)"</span>, <span class='fl'>300</span>, <span class='fl'>250</span>),
+      <span class='fl'>3</span>, <span class='fl'>2</span>)
+<span class='fu'>add_columns</span>(<span class='no'>ht</span>, <span class='no'>mx</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"Jam"</span>)</div><div class='output co'>#&gt;   Jam         Sugar   Weight (g)   Price  
+#&gt;   Raspberry   50%     300            1.9  
+#&gt;   Plum        60%     250            1.8  
 #&gt; 
-#&gt; Column names: Jam, V1, V2, Price</div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>d</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>])
-<span class='fu'>add_columns</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"a"</span>)</div><div class='output co'>#&gt;       1   a           1  
-#&gt;       2   b           2  
-#&gt;       3   c           3  
-#&gt; 
-#&gt; Column names: a, d, b</div></pre>
+#&gt; Column names: Jam, V1, V2, Price</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

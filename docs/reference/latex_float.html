@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -146,20 +146,19 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>latex_float</code>, the <code>latex_float</code> property.
-For <code>set_latex_float</code>, the <code>ht</code> object.</p>
+For <code>set_latex_float</code>, the modified huxtable.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Quick reference: 'h' here, 'h!' definitely here, 't' top of page, 'b' bottom of page, 'p' page of
-floats. See LaTeX documentation for more details. If you use 'H' (definitely here), you must require the
+    <p>Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
+floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
 TeX <code>float</code> package.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>latex_float</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'h'</span>
-<span class='fu'>latex_float</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "h"</div><div class='input'>
+<span class='fu'>latex_float</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"h"</span>
+<span class='fu'>latex_float</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; [1] "h"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

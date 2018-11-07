@@ -65,7 +65,7 @@ option, detailed below." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -125,10 +125,10 @@ option, detailed below." />
 
     <div class="ref-description">
     
-    <p>Huxtable can be used with dplyr verbs <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/select.html'>dplyr::rename()</a></code>,
-<code><a href='http://dplyr.tidyverse.org/reference/slice.html'>dplyr::slice()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/arrange.html'>dplyr::arrange()</a></code>, <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code> and
-<code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::transmute()</a></code>. These will return huxtables. Other verbs like <code><a href='http://dplyr.tidyverse.org/reference/summarise.html'>dplyr::summarize()</a></code> will
-simply return data frames as normal; <code><a href='http://dplyr.tidyverse.org/reference/pull.html'>dplyr::pull()</a></code> will return a vector. <code>mutate</code> has an extra
+    <p>Huxtable can be used with dplyr verbs <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>dplyr::select()</a></code>, <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>dplyr::rename()</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/dplyr/topics/slice'>dplyr::slice()</a></code>, <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/arrange'>dplyr::arrange()</a></code>, <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>dplyr::mutate()</a></code> and
+<code><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>dplyr::transmute()</a></code>. These will return huxtables. Other verbs like <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/summarise'>dplyr::summarize()</a></code> will
+simply return data frames as normal; <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/pull'>dplyr::pull()</a></code> will return a vector. <code>mutate</code> has an extra
 option, detailed below.</p>
     
     </div>
@@ -144,7 +144,7 @@ option, detailed below.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to <code><a href='http://dplyr.tidyverse.org/reference/mutate.html'>dplyr::mutate()</a></code>.</p></td>
+      <td><p>Arguments passed to <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>dplyr::mutate()</a></code>.</p></td>
     </tr>
     <tr>
       <th>copy_cell_props</th>
@@ -163,7 +163,7 @@ standard defaults. Row and table properties, and properties of cells in existing
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>), ] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>ht</span>, <span class='no'>b</span>:<span class='no'>c</span>)
+<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>ht</span>, <span class='no'>b</span>:<span class='no'>c</span>)
 <span class='no'>ht2</span></div><div class='output co'>#&gt;         1         1  
 #&gt;         2         2  
 #&gt;         3         3  
@@ -175,7 +175,7 @@ standard defaults. Row and table properties, and properties of cells in existing
 #&gt; 2 FALSE FALSE
 #&gt; 3  TRUE  TRUE
 #&gt; 4 FALSE FALSE
-#&gt; 5 FALSE FALSE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)
+#&gt; 5 FALSE FALSE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)
 <span class='no'>ht3</span></div><div class='output co'>#&gt;     1     1     1     1     2  
 #&gt;     2     2     2     2     4  
 #&gt;     3     3     3     3     6  
@@ -187,7 +187,8 @@ standard defaults. Row and table properties, and properties of cells in existing
 #&gt; 2 TRUE FALSE FALSE FALSE FALSE
 #&gt; 3 TRUE  TRUE  TRUE  TRUE  TRUE
 #&gt; 4 TRUE FALSE FALSE FALSE FALSE
-#&gt; 5 TRUE FALSE FALSE FALSE FALSE</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+#&gt; 5 TRUE FALSE FALSE FALSE FALSE</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/mutate'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>,
+      <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht4</span>)</div><div class='output co'>#&gt;      a     b     c     d     x copy_cell_props
 #&gt; 1 TRUE  TRUE  TRUE  TRUE FALSE           FALSE
 #&gt; 2 TRUE FALSE FALSE FALSE FALSE           FALSE

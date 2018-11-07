@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -127,7 +127,8 @@
 
     <pre class="usage"><span class='fu'>wrap</span>(<span class='no'>ht</span>)
 <span class='fu'>wrap</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>map_wrap</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,58 +139,66 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A logical vector or matrix. If <code>TRUE</code>, long cell contents will be wrapped into multiple lines. Set to <code>NA</code> for the default. Set to <code>NA</code> to reset to the default, which is
-<code>FALSE</code>.</p></td>
+      <td><p>A logical vector or matrix. If <code>TRUE</code>, long cell contents will be wrapped into multiple lines.</p>
+<p>Set to <code>NA</code> to reset to the default, which is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>row</th>
-      <td><p>A row specifier. See <code><a href='rowspecs.html'>rowspecs</a></code> for details.</p></td>
+      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
     </tr>
     <tr>
       <th>col</th>
       <td><p>An optional column specifier.</p></td>
     </tr>
     <tr>
+      <th>fn</th>
+      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
+    </tr>
+    <tr>
       <th>byrow</th>
-      <td><p>If <code>TRUE</code>, fill in values by row rather than by column.</p></td>
+      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>wrap</code>, the <code>wrap</code> property.
-For <code>set_wrap</code>, the <code>ht</code> object.</p>
+For <code>set_wrap</code> and <code>map_wrap</code>, the modified huxtable.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='st'>'Some long text'</span>, <span class='fl'>2</span>))
-<span class='fu'>wrap</span>(<span class='no'>ht</span>)[<span class='fl'>1</span>,] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='fu'><a href='to_html.html'>print_html</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; &lt;table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; "&gt;
-#&gt; &lt;col&gt;&lt;tr&gt;
-#&gt; &lt;td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"&gt;Some long text&lt;/td&gt;
-#&gt; &lt;/tr&gt;
-#&gt; &lt;tr&gt;
-#&gt; &lt;td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;"&gt;Some long text&lt;/td&gt;
-#&gt; &lt;/tr&gt;
-#&gt; &lt;/table&gt;</div><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>wrap</span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;      a    b
-#&gt; 1 TRUE TRUE
-#&gt; 2 TRUE TRUE
-#&gt; 3 TRUE TRUE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>wrap</span>(<span class='no'>ht3</span>)</div><div class='output co'>#&gt;       a     b
-#&gt; 1  TRUE FALSE
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='fu'>paste</span>(
+      <span class='fu'>rep</span>(<span class='st'>"Some long text."</span>, <span class='fl'>20</span>),
+      <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>" "</span>))
+<span class='fu'><a href='width.html'>width</a></span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='fl'>0.2</span>
+<span class='fu'>wrap</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span></div><span class='co'># NOT RUN {</span>
+  <span class='fu'><a href='quick-output.html'>quick_html</a></span>(<span class='no'>ht</span>)
+<span class='co'># }</span><div class='input'>
+
+<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>jams</span>,
+      <span class='fl'>TRUE</span>)
+<span class='fu'>wrap</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1 TRUE  TRUE
+#&gt; 2 TRUE  TRUE
+#&gt; 3 TRUE  TRUE
+#&gt; 4 TRUE  TRUE</div><div class='input'>
+<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
+<span class='fu'>wrap</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;    Type price
+#&gt; 1 FALSE FALSE
 #&gt; 2  TRUE FALSE
-#&gt; 3 FALSE FALSE</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>wrap</span>(<span class='no'>ht4</span>)</div><div class='output co'>#&gt;       a     b
-#&gt; 1  TRUE FALSE
-#&gt; 2  TRUE FALSE
-#&gt; 3 FALSE FALSE</div><div class='input'><span class='no'>ht5</span> <span class='kw'>&lt;-</span> <span class='fu'>set_wrap</span>(<span class='no'>ht</span>, <span class='fu'><a href='huxtable-deprecated.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)
-<span class='fu'>wrap</span>(<span class='no'>ht5</span>)</div><div class='output co'>#&gt;       a     b
-#&gt; 1  TRUE FALSE
+#&gt; 3  TRUE FALSE
+#&gt; 4 FALSE FALSE</div><div class='input'>
+<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_wrap</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
+        <span class='fl'>TRUE</span>,
+        <span class='fl'>FALSE</span>)
+      )
+<span class='fu'>wrap</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;    Type price
+#&gt; 1  TRUE  TRUE
 #&gt; 2 FALSE FALSE
-#&gt; 3 FALSE  TRUE</div></pre>
+#&gt; 3  TRUE  TRUE
+#&gt; 4 FALSE FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

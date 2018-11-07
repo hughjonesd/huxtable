@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Caption — caption • huxtable</title>
+<title>Frequently Asked Questions — huxtable-FAQ • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Caption — caption" />
+<meta property="og:title" content="Frequently Asked Questions — huxtable-FAQ" />
 
-<meta property="og:description" content="Functions to get or set the table-level caption property of a huxtable." />
+<meta property="og:description" content="A FAQ of common issues." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,77 +114,71 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Caption</h1>
+    <h1>Frequently Asked Questions</h1>
     
-    <div class="hidden name"><code>caption.Rd</code></div>
+    <div class="hidden name"><code>huxtable-FAQ.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the table-level <em>caption</em> property of a huxtable.</p>
+    <p>A FAQ of common issues.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>caption</span>(<span class='no'>ht</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_caption</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>A length-one character vector. Set to <code>NA</code> to reset to the default, which is
-<code>NA</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>For <code>caption</code>, the <code>caption</code> property.
-For <code>set_caption</code>, the modified huxtable.</p>
-    
+        
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Captions are not escaped. See the example for a workaround.</p>
+    <ul>
+<li><p>LaTeX output isn't working.</p></li>
+</ul>
+    <p>Have you installed the LaTeX packages you need? LaTeX packages are different from R packages. Run
+<code><a href='report_latex_dependencies.html'>check_latex_dependencies()</a></code> to find out if you are missing any. Then install them using your
+system's LaTeX management application. Or you can try <code><a href='report_latex_dependencies.html'>install_latex_dependencies()</a></code>.</p><ul>
+<li><p>Numbers in my cells look weird!</p></li>
+</ul>
+    <p>You can change numeric formatting using <code><a href='number_format.html'>number_format()</a></code>. Base R options like
+<code><a href='http://www.rdocumentation.org/packages/base/topics/options'>scipen</a></code> usually have no effect.</p><ul>
+<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p></li>
+</ul><pre>Error in UseMethod("caption&lt;-") :
+no applicable method for 'caption&lt;-' applied to an object of class "c('huxtable', 'data.frame')"
+</pre>
+    <p>You may have loaded another package with a <code>caption</code> method, e.g. "xtable". Try loading huxtable
+after xtable.</p><ul>
+<li><p>My tables aren't centered correctly (LaTeX).</p></li>
+</ul>
+    <p>Try adjusting <code><a href='width.html'>width(ht)</a></code>.</p><ul>
+<li><p>How can I change the font size, font etc. of captions?</p></li>
+</ul>
+    <p>There are no direct commands for this. You have to use raw HTML/TeX/other commands within the
+caption itself. For example to have a bold caption in HTML, you might do something like:</p><pre>set_caption(jams, "&lt;b&gt;Jam Prices&lt;/b&gt;")
+    </pre>
+<ul>
+<li><p>How do I refer to tables in bookdown?</p></li>
+</ul>
+    <p>Here's an example:</p><pre># In R code:
+caption(jams) &lt;- "(#tab:jamtable) Some jams"
+    # In markdown text:
+Jam prices are displayed in \@ref(tab:jamtable).
+    </pre>
+<ul>
+<li><p>I have another problem.</p></li>
+</ul>
+    <p>If you have a bug - i.e. a problem with the software - or have a feature request, please report
+it to <a href='https://github.com/hughjonesd/huxtable/issues'>https://github.com/hughjonesd/huxtable/issues</a>. Otherwise, ask a question on
+<a href='https://stackoverflow.com'>StackOverflow</a> or <a href='https://community.rstudio.com'>https://community.rstudio.com</a>. That way, other
+people will benefit from the answers you get.</p><ul>
+<li><p>Can I email you directly?</p></li>
+</ul>
+    <p>I'd rather you asked on a public website. If you then email me a link, I may be able to help.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='caption_pos.html'>caption_pos()</a></code></p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>caption</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"An example table"</span>
-<span class='fu'>caption</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; [1] "An example table"</div><div class='input'><span class='no'>jams</span></div><div class='output co'>#&gt;     An example table    
-#&gt;   Type           Price  
-#&gt;   Strawberry      1.90  
-#&gt;   Raspberry       2.10  
-#&gt;   Plum            1.80  
-#&gt; 
-#&gt; Column names: Type, price</div><div class='input'>
-<span class='co'># escape caption characters:</span>
-<span class='fu'>caption</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='sanitize.html'>sanitize</a></span>(
-      <span class='st'>"Make $$$ with jam"</span>,
-      <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"latex"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -127,7 +127,8 @@
 
     <pre class="usage"><span class='fu'>font_size</span>(<span class='no'>ht</span>)
 <span class='fu'>font_size</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>map_font_size</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,27 +139,31 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A numeric vector. This sets the font size in points. Set to <code>NA</code> to reset to the default, which is
-<code>NA</code>.</p></td>
+      <td><p>A numeric vector. This sets the font size in points.</p>
+<p>Set to <code>NA</code> to reset to the default, which is <code>NA</code>.</p></td>
     </tr>
     <tr>
       <th>row</th>
-      <td><p>A row specifier. See <code><a href='rowspecs.html'>rowspecs</a></code> for details.</p></td>
+      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
     </tr>
     <tr>
       <th>col</th>
       <td><p>An optional column specifier.</p></td>
     </tr>
     <tr>
+      <th>fn</th>
+      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
+    </tr>
+    <tr>
       <th>byrow</th>
-      <td><p>If <code>TRUE</code>, fill in values by row rather than by column.</p></td>
+      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>font_size</code>, the <code>font_size</code> property.
-For <code>set_font_size</code>, the <code>ht</code> object.</p>
+For <code>set_font_size</code> and <code>map_font_size</code>, the modified huxtable.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -170,31 +175,37 @@ For <code>set_font_size</code>, the <code>ht</code> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='fl'>14</span>
-<span class='fu'>font_size</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;    a  b
-#&gt; 1 14 14
-#&gt; 2 14 14
-#&gt; 3 14 14</div><div class='input'>
+<span class='fu'>font_size</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>14</span>
+<span class='fu'>font_size</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
 
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;    a  b
-#&gt; 1 14 14
-#&gt; 2 14 14
-#&gt; 3 14 14</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht3</span>)</div><div class='output co'>#&gt;    a  b
-#&gt; 1 14 NA
-#&gt; 2 14 NA
-#&gt; 3 NA NA</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='fl'>14</span>, <span class='fl'>12</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht4</span>)</div><div class='output co'>#&gt;    a  b
-#&gt; 1 14 12
-#&gt; 2 14 12
-#&gt; 3 NA NA</div><div class='input'><span class='no'>ht5</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='fu'><a href='huxtable-deprecated.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht5</span>)</div><div class='output co'>#&gt;    a  b
-#&gt; 1 14 NA
-#&gt; 2 NA NA
-#&gt; 3 NA 14</div></pre>
+<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
+      <span class='fl'>14</span>)
+<span class='fu'>font_size</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
+<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>14</span>)
+<span class='fu'>font_size</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
+<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_font_size</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
+        <span class='fl'>14</span>,
+        <span class='fl'>12</span>)
+      )
+<span class='fu'>font_size</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   12    12
+#&gt; 3   14    14
+#&gt; 4   12    12</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

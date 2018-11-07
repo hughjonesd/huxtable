@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -146,19 +146,21 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>label</code>, the <code>label</code> property.
-For <code>set_label</code>, the <code>ht</code> object.</p>
+For <code>set_label</code>, the modified huxtable.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
-in <a href='http://bookdown.org'>bookdown</a>.</p>
+    <p>LaTeX table labels typically start with <code>"tab:"</code>.</p>
+<p>If you use <a href='http://bookdown.org'>bookdown</a>, and set a label on your table,
+the caption will automatically be prefixed with <code>(#label)</code>. You can then
+refer to the table using <code>@ref(label)</code>. <code>label</code> needs to start with <code>"tab:"</code>; if it doesn't,
+the <code>"tab"</code> prefix will be added automatically.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>label</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='st'>'tab:mytable'</span>
-<span class='fu'>label</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; [1] "tab:mytable"</div><div class='input'>
+<span class='fu'>label</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"tab:mytable"</span>
+<span class='fu'>label</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; [1] "tab:mytable"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

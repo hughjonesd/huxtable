@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -146,11 +146,11 @@
     </tr>
     <tr>
       <th>error_style</th>
-      <td><p>Deprecated. One or more of 'stderr', 'ci' (confidence interval), 'statistic' or 'pvalue'.</p></td>
+      <td><p>Deprecated. One or more of "stderr", "ci" (confidence interval), "statistic" or "pvalue".</p></td>
     </tr>
     <tr>
       <th>error_pos</th>
-      <td><p>Display uncertainty 'below', to the 'right' of, or in the 'same' cell as estimates.</p></td>
+      <td><p>Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.</p></td>
     </tr>
     <tr>
       <th>number_format</th>
@@ -197,11 +197,14 @@ significance stars. Set to <code>NULL</code> for no footnote.</p></td>
     </tr>
     <tr>
       <th>statistics</th>
-      <td><p>Summary statistics to display. Set to <code>NULL</code> to show all available statistics.</p></td>
+      <td><p>A vector of summary statistics to display. Set to <code>NULL</code> to show all available
+statistics. To change display names, name the <code>statistics</code> vector:
+<code>c("Displayed title" = "statistic_name", ...)</code></p></td>
     </tr>
     <tr>
       <th>coefs</th>
-      <td><p>Display only these coefficients. Overrules <code>omit_coefs</code>.</p></td>
+      <td><p>A vector of coefficients to display. Overrules <code>omit_coefs</code>. To change display names,
+name the <code>coef</code> vector: <code>c("Displayed title" = "coefficient_name", ...)</code></p></td>
     </tr>
     <tr>
       <th>omit_coefs</th>
@@ -215,48 +218,57 @@ significance stars. Set to <code>NULL</code> for no footnote.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Models must have a <code><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>broom::tidy()</a></code> method defined, which should return 'term', 'estimate', 'std.error',
-'statistic' and 'p.value'. If the <code>tidy</code> method does not have a <code>conf.int</code> option, <code>huxreg</code> will
+    <p>Models must have a <code><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>broom::tidy()</a></code> method defined, which should return "term", "estimate", "std.error",
+"statistic" and "p.value". If the <code>tidy</code> method does not have a <code>conf.int</code> option, <code>huxreg</code> will
 calculate confidence intervals itself, using a normal approximation.</p>
-<p>If <code>...</code> has names or contains a single named list, the names will be used for column headings. Otherwise column
-headings will be automatically created. If the <code>coef</code> and/or <code>statistics</code> vectors have names, these will be
-used for row headings. If different values of <code>coef</code> have the same name, the corresponding rows will be merged
-in the output.</p>
-<p>Each element of <code>statistics</code> should be a column name from <code><a href='http://www.rdocumentation.org/packages/broom/topics/glance'>broom::glance()</a></code>. You can also
-use 'nobs' for the number of observations. If <code>statistics</code> is <code>NULL</code> then all columns from <code>glance</code>
-will be used. To use no columns, set <code>statistics = character(0)</code>.</p>
+<p>If <code>...</code> has names or contains a single named list, the names will be used for column headings.
+Otherwise column headings will be automatically created.</p>
+<p>If the <code>coef</code> and/or <code>statistics</code> vectors have names, these will be used for row headings. If
+different values of <code>coef</code> have the same name, the corresponding rows will be merged in the
+output.</p>
+<p><code>statistics</code> should be column names from <code><a href='http://www.rdocumentation.org/packages/broom/topics/glance'>broom::glance()</a></code>. You can also use <code>"nobs"</code> for the
+number of observations. If <code>statistics</code> is <code>NULL</code> then all columns from <code>glance</code> will be used. To
+use no columns, set <code>statistics = character(0)</code>.</p>
 <p><code>error_format</code> is a string to be interpreted by <code><a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue::glue()</a></code>. Terms in parentheses will be
 replaced by computed values. You can use any columns returned
 by <code>tidy</code>: typical columns include <code>statistic</code>, <code>p.value</code>, <code>std.error</code>, as well as <code>conf.low</code>
 and <code>conf.high</code> if you have set <code>ci_level</code>. For example, to show confidence intervals, you
-could do <code>error_format = "{conf.low} to {conf.high}"</code></p>
+could write <code>error_format = "{conf.low} to {conf.high}"</code>.</p>
+    
+    <h2 class="hasAnchor" id="fixing-p-values-manually"><a class="anchor" href="#fixing-p-values-manually"></a>Fixing p values manually</h2>
+
+    
+    <p>If you wish to use e.g. robust standard errors, you can pass results from e.g.
+<code><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>lmtest::coeftest()</a></code> into <code>huxreg</code>, since these objects have <code>tidy</code> methods.
+Alternatively, to manually insert your own statistics, see <code><a href='tidy_override.html'>tidy_override()</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set.seed</span>(<span class='fl'>27101975</span>)
-<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>), <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>))
-<span class='no'>dfr</span>$<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>dfr</span>$<span class='no'>a</span> + <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
-<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>y</span> ~ <span class='no'>a</span>, <span class='no'>dfr</span>)
-<span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>y</span> ~ <span class='no'>a</span> + <span class='no'>b</span>, <span class='no'>dfr</span>)
-<span class='no'>glm1</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='fu'>I</span>(<span class='no'>y</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) ~ <span class='no'>a</span>, <span class='no'>dfr</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
-<span class='fu'>huxreg</span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>glm1</span>)</div><div class='output co'>#&gt; ───────────────────────────────────────────────────────────
-#&gt;                     (1)            (2)            (3)      
-#&gt;               ─────────────────────────────────────────────
-#&gt;   (Intercept)      0.109          0.116        -0.172      
-#&gt;                   (0.098)        (0.098)       (0.231)     
-#&gt;   a                1.011 ***      1.012 ***     1.449 ***  
-#&gt;                   (0.109)        (0.109)       (0.338)     
-#&gt;   b                              -0.112                    
-#&gt;                                  (0.103)                   
-#&gt;               ─────────────────────────────────────────────
-#&gt;   N              100            100           100          
-#&gt;   R2               0.468          0.474                    
-#&gt;   logLik        -138.740       -138.135       -55.501      
-#&gt;   AIC            283.481        284.270       115.001      
-#&gt; ───────────────────────────────────────────────────────────
-#&gt;   *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.                  
+    <pre class="examples"><div class='input'>
+<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
+<span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span> + <span class='no'>hp</span>, <span class='no'>mtcars</span>)
+<span class='no'>glm1</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='fu'>I</span>(<span class='no'>mpg</span> <span class='kw'>&gt;</span> <span class='fl'>20</span>) ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>,
+      <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
+
+<span class='fu'>huxreg</span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>glm1</span>)</div><div class='output co'>#&gt; ─────────────────────────────────────────────────────────
+#&gt;                     (1)           (2)           (3)      
+#&gt;               ───────────────────────────────────────────
+#&gt;   (Intercept)    37.885 ***    36.908 ***       64.400   
+#&gt;                  (2.074)       (2.191)      (17449.775)  
+#&gt;   cyl            -2.876 ***    -2.265 ***      -10.781   
+#&gt;                  (0.322)       (0.576)       (2908.296)  
+#&gt;   hp                           -0.019                    
+#&gt;                                (0.015)                   
+#&gt;               ───────────────────────────────────────────
+#&gt;   N              32            32               32       
+#&gt;   R2              0.726         0.741                    
+#&gt;   logLik        -81.653       -80.781           -4.780   
+#&gt;   AIC           169.306       169.562           13.561   
+#&gt; ─────────────────────────────────────────────────────────
+#&gt;   *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.                
 #&gt; 
-#&gt; Column names: names, model1, model2, model3</div></pre>
+#&gt; Column names: names, model1, model2, model3</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -266,6 +278,8 @@ could do <code>error_format = "{conf.low} to {conf.high}"</code></p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#fixing-p-values-manually">Fixing p values manually</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

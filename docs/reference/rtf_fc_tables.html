@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -160,7 +160,8 @@ huxtables print out the correct colour references.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'># Printing multiple huxtables</span>
+<span class='co'># Printing multiple huxtables:</span>
+
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Blue with red border"</span>)
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>ht</span>, <span class='fl'>1</span>)
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span>(<span class='no'>ht</span>, <span class='st'>"red"</span>)
@@ -168,6 +169,7 @@ huxtables print out the correct colour references.</p>
 
 <span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Dark green text"</span>)
 <span class='fu'><a href='text_color.html'>text_color</a></span>(<span class='no'>ht2</span>) <span class='kw'>&lt;-</span> <span class='st'>"darkgreen"</span>
+
 <span class='no'>fc_tbls</span> <span class='kw'>&lt;-</span> <span class='fu'>rtf_fc_tables</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>)
 
 <span class='co'># In the document header:</span>

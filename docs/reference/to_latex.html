@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -155,10 +155,10 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If we appear to be in a rmarkdown document with the markdown <code>"+raw_attribute"</code> extension set,
-<code>to_latex</code> will return LaTeX surrounded by a
-"raw attribute code block" (see https://pandoc.org/MANUAL.html#extension-raw_attribute).
-This helps protect against pandoc accidentally escaping the TeX code.</p>
+    <p>If we appear to be in a rmarkdown document with the Pandoc markdown <code>+raw_attribute</code> extension
+available, <code>to_latex</code> will return LaTeX surrounded by a "raw attribute code block" (see
+https://pandoc.org/MANUAL.html#extension-raw_attribute). This helps protect against pandoc
+accidentally escaping the TeX code.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -168,40 +168,48 @@ This helps protect against pandoc accidentally escaping the TeX code.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>])
-<span class='fu'>print_latex</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; \begin{table}[h]
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(
+        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+        <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+      )
+<span class='fu'>print_latex</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; 
+#&gt;   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+#&gt;   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+#&gt;   \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+#&gt;   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+#&gt; 
+#&gt; \begin{table}[h]
 #&gt; \centering
-#&gt;     \providecommand{\huxb}[2][0,0,0]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
-#&gt;     \providecommand{\huxvb}[2][0,0,0]{\color[RGB]{#1}\vrule width #2pt}
-#&gt;     \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
-#&gt;     \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
-#&gt;   \begin{tabularx}{0.5\textwidth}{p{0.25\textwidth} p{0.25\textwidth}}
+#&gt; \begin{threeparttable}
+#&gt; \begin{tabularx}{0.5\textwidth}{p{0.25\textwidth} p{0.25\textwidth}}
 #&gt; 
 #&gt; 
 #&gt; \hhline{}
 #&gt; \arrayrulecolor{black}
 #&gt; 
-#&gt; \multicolumn{1}{!{\huxvb{0}}r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft 1\huxbpad{4pt}} &amp;
-#&gt; \multicolumn{1}{l!{\huxvb{0}}}{\huxtpad{4pt}\raggedright a\huxbpad{4pt}} \tabularnewline[-0.5pt]
+#&gt; \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1\huxbpad{4pt}} &amp;
+#&gt; \multicolumn{1}{l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright a\huxbpad{4pt}} \tabularnewline[-0.5pt]
 #&gt; 
 #&gt; 
 #&gt; \hhline{}
 #&gt; \arrayrulecolor{black}
 #&gt; 
-#&gt; \multicolumn{1}{!{\huxvb{0}}r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft 2\huxbpad{4pt}} &amp;
-#&gt; \multicolumn{1}{l!{\huxvb{0}}}{\huxtpad{4pt}\raggedright b\huxbpad{4pt}} \tabularnewline[-0.5pt]
+#&gt; \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2\huxbpad{4pt}} &amp;
+#&gt; \multicolumn{1}{l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright b\huxbpad{4pt}} \tabularnewline[-0.5pt]
 #&gt; 
 #&gt; 
 #&gt; \hhline{}
 #&gt; \arrayrulecolor{black}
 #&gt; 
-#&gt; \multicolumn{1}{!{\huxvb{0}}r!{\huxvb{0}}}{\huxtpad{4pt}\raggedleft 3\huxbpad{4pt}} &amp;
-#&gt; \multicolumn{1}{l!{\huxvb{0}}}{\huxtpad{4pt}\raggedright c\huxbpad{4pt}} \tabularnewline[-0.5pt]
+#&gt; \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 3\huxbpad{4pt}} &amp;
+#&gt; \multicolumn{1}{l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright c\huxbpad{4pt}} \tabularnewline[-0.5pt]
 #&gt; 
 #&gt; 
 #&gt; \hhline{}
 #&gt; \arrayrulecolor{black}
-#&gt; \end{tabularx}
+#&gt; \end{tabularx}\end{threeparttable}
+#&gt; 
+#&gt; 
 #&gt; \end{table}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

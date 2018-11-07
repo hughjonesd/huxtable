@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -178,11 +178,15 @@ row properties will be copied into the replaced rows of <code>x</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>])
-<span class='no'>ht</span>[<span class='fl'>1</span>:<span class='fl'>2</span>,]</div><div class='output co'>#&gt;         1   a        
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(
+        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+        <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+      )
+
+<span class='no'>ht</span>[<span class='fl'>1</span>:<span class='fl'>2</span>, ]</div><div class='output co'>#&gt;         1   a        
 #&gt;         2   b        
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='no'>ht</span>[,<span class='fl'>1</span>]</div><div class='output co'>#&gt;                1  
+#&gt; Column names: a, b</div><div class='input'><span class='no'>ht</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;                1  
 #&gt;                2  
 #&gt;                3  
 #&gt; 
@@ -194,10 +198,7 @@ row properties will be copied into the replaced rows of <code>x</code>.</p>
 #&gt;        10        12  
 #&gt;        11        13  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;       a     b
-#&gt; 1 FALSE FALSE
-#&gt; 2  TRUE  TRUE
-#&gt; 3  TRUE  TRUE</div><div class='input'>
+#&gt; Column names: a, b</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

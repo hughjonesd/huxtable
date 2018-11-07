@@ -62,7 +62,7 @@ as one-liners for data reporting." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -166,12 +166,12 @@ as one-liners for data reporting.</p>
     </tr>
     <tr>
       <th>width</th>
-      <td><p>String passed to the LaTeX <code>geometry</code> package's <code>paperwidth</code> option. Use <code>NULL</code> for
+      <td><p>String passed to the LaTeX <code>geometry</code> package"s <code>paperwidth</code> option. Use <code>NULL</code> for
 the default width.</p></td>
     </tr>
     <tr>
       <th>height</th>
-      <td><p>String passed to <code>geometry</code>'s <code>paperheight</code> option. Use <code>NULL</code> for the default
+      <td><p>String passed to <code>geometry</code>"s <code>paperheight</code> option. Use <code>NULL</code> for the default
 height.</p></td>
     </tr>
     </table>
@@ -190,13 +190,14 @@ if this already exists, you will be asked to confirm manually before proceeding.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)
-<span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-<span class='fu'>quick_pdf</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
-<span class='fu'>quick_html</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
-<span class='fu'>quick_docx</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
-<span class='fu'>quick_xlsx</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
-<span class='fu'>quick_pptx</span>(<span class='no'>m</span>, <span class='no'>dfr</span>)
+  <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)
+
+  <span class='fu'>quick_pdf</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
+  <span class='fu'>quick_html</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
+  <span class='fu'>quick_docx</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
+  <span class='fu'>quick_xlsx</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
+  <span class='fu'>quick_pptx</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
+  <span class='fu'>quick_rtf</span>(<span class='no'>m</span>, <span class='no'>jams</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

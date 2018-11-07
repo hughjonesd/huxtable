@@ -314,6 +314,30 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>November 7, 2018: Huxtable 4.3.0 released</h4>
+
+<p>This release contains several improvements:</p>
+
+<ul>
+<li>New <code>map_xxx</code> functions to map values to properties.</li>
+<li>New grey, blue, green and orange themes, and a new "themes" vignette.</li>
+<li>Shorter, clearer vignettes and examples.</li>
+<li>More work ensuring that TeX compiles OK.</li>
+</ul>
+
+<p>Here's an example of using <code>map_</code> functions to stripe a table, then pick out extreme
+values:</o>
+
+<!--begin.rcode echo = TRUE, results = 'asis'
+
+data <- matrix(rnorm(25), 5, 5)
+as_hux(data) %>%
+      set_outer_borders(0.4) %>%
+      map_background_color(by_rows("grey95", "white")) %>%
+      map_text_color(by_quantiles(c(0.1, 0.9), c("red", "black", "green3")))
+
+end.rcode-->
+
 <h4>October 26, 2018: Huxtable 4.2.1 released</h4>
 
 <p>This patch release works around a bug with recent pandoc versions, which led to

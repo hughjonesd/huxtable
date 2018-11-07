@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -154,8 +154,6 @@ rows and columns are used.</p></td>
     <p><code>merge_cells(ht, c(min_row, max_row), c(min_col, max_col))</code> is equivalent to</p><pre>  colspan(ht)[min_row, min_col] &lt;- max_col - min_col + 1
   rowspan(ht)[min_row, min_col] &lt;- max_row - min_row + 1
 </pre>
-    <p>There is no way to merge cells that do not form a rectangle, so e.g.
-<code>merge_cells(ht, where(ht &gt; 0))</code> will usually have unexpected results.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

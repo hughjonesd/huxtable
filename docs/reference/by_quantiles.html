@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Text rotation — rotation • huxtable</title>
+<title>Map numeric quantiles to cell properties — by_quantiles • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Text rotation — rotation" />
+<meta property="og:title" content="Map numeric quantiles to cell properties — by_quantiles" />
 
-<meta property="og:description" content="Functions to get or set the text rotation property of huxtable cells." />
+<meta property="og:description" content="These functions split cell values by quantiles. Non-numeric cells are ignored." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,96 +114,95 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Text rotation</h1>
+    <h1>Map numeric quantiles to cell properties</h1>
     
-    <div class="hidden name"><code>rotation.Rd</code></div>
+    <div class="hidden name"><code>by_quantiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the <em>text rotation</em> property of huxtable cells.</p>
+    <p>These functions split cell values by quantiles. Non-numeric cells are ignored.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rotation</span>(<span class='no'>ht</span>)
-<span class='fu'>rotation</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_rotation</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>map_rotation</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+    <pre class="usage"><span class='fu'>by_quantiles</span>(<span class='no'>quantiles</span>, <span class='no'>values</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>by_equal_groups</span>(<span class='no'>n</span>, <span class='no'>values</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
+      <th>quantiles</th>
+      <td><p>Vector of quantiles.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.</p>
-<p>Set to <code>NA</code> to reset to the default, which is <code>0</code>.</p></td>
+      <th>values</th>
+      <td><p>Vector of values. <code>length(values)</code> should be one greater than <code>length(quantiles)</code>,
+or one less if <code>extend = FALSE</code>.</p></td>
     </tr>
     <tr>
-      <th>row</th>
-      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
+      <th>right</th>
+      <td><p>If <code>TRUE</code>, intervals are closed on the right, i.e. if values are exactly equal to a
+<code>break</code>, they go in the lower group. Otherwise, intervals are closed on the left, so equal
+values go in the higher group. <code>FALSE</code> by default.</p></td>
     </tr>
     <tr>
-      <th>col</th>
-      <td><p>An optional column specifier.</p></td>
+      <th>extend</th>
+      <td><p>Extend <code>breaks</code> to <code>c(-Inf, breaks, Inf)</code>, i.e. include numbers below and above the
+outermost breaks. <code>TRUE</code> by default.</p></td>
     </tr>
     <tr>
-      <th>fn</th>
-      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
+      <th>ignore_na</th>
+      <td><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged. Otherwise, <code>NA</code>
+normally resets to the default.</p></td>
     </tr>
     <tr>
-      <th>byrow</th>
-      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
+      <th>n</th>
+      <td><p>Number of equal-sized groups. <code>length(values)</code> should equal <code>n</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>rotation</code>, the <code>rotation</code> property.
-For <code>set_rotation</code> and <code>map_rotation</code>, the modified huxtable.</p>
+    <p>A function for use in <code>map_***</code> functions.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You will probably need to set <code><a href='col_width.html'>col_width()</a></code> and <code><a href='row_height.html'>row_height()</a></code> explicitly
-to achieve a nice result, in both HTML and LaTeX.</p>
+    <p><code>by_equal_groups(n, values)</code> splits the data into <code>n</code> equal-sized groups (i.e. it is a shortcut
+for <code>by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)</code>).</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='mapping-functions.html'>mapping-functions</a></p>
+<p>Other mapping functions: <code><a href='by_cases.html'>by_cases</a></code>,
+  <code><a href='by_colorspace.html'>by_colorspace</a></code>, <code><a href='by_function.html'>by_function</a></code>,
+  <code><a href='by_ranges.html'>by_ranges</a></code>, <code><a href='by_regex.html'>by_regex</a></code>,
+  <code><a href='by_rows.html'>by_rows</a></code>, <code><a href='by_values.html'>by_values</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>rotation</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>90</span>
-<span class='fu'>rotation</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='fu'>rnorm</span>(<span class='fl'>5</span>), <span class='fu'>rnorm</span>(<span class='fl'>5</span>))
 
-<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
-      <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
-<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
-<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_rotation</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
-        <span class='fl'>90</span>,
-        <span class='fl'>270</span>)
-      )
-<span class='fu'>rotation</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2  270   270
-#&gt; 3   90    90
-#&gt; 4  270   270</div></pre>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_quantiles</span>(
+        <span class='fu'>c</span>(<span class='fl'>0.2</span>, <span class='fl'>0.8</span>),
+        <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"white"</span>, <span class='st'>"green"</span>)
+      ))</div><div class='output co'>#&gt;   -0.702      0.437  
+#&gt;    0.973      0.413  
+#&gt;   -0.0768     0.976  
+#&gt;    0.893      1.15   
+#&gt;   -0.778      1.22   </div><div class='input'>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_equal_groups</span>(
+        <span class='fl'>3</span>,
+        <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>)
+      ))</div><div class='output co'>#&gt;   -0.702      0.437  
+#&gt;    0.973      0.413  
+#&gt;   -0.0768     0.976  
+#&gt;    0.893      1.15   
+#&gt;   -0.778      1.22   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -213,6 +212,8 @@ to achieve a nice result, in both HTML and LaTeX.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

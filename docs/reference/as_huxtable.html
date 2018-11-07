@@ -63,7 +63,7 @@ is_hux[table] tests if an object is a huxtable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -160,7 +160,8 @@ Conversion methods exist for data frames, tables, ftables, matrices and (most) v
     </tr>
     <tr>
       <th>add_rownames</th>
-      <td><p>If <code>TRUE</code>, add a first column of row names, named 'rownames', to the huxtable.</p></td>
+      <td><p>If <code>TRUE</code> or a character string, add a first column of row names
+to the huxtable. The string gives the name for the new column (or <code>"rownames"</code> for <code>TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>autoformat</th>
@@ -174,7 +175,11 @@ Conversion methods exist for data frames, tables, ftables, matrices and (most) v
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
+        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
+        <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>],
+        <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+      )
 <span class='fu'>as_huxtable</span>(<span class='no'>dfr</span>)</div><div class='output co'>#&gt;         1   a        
 #&gt;         2   b        
 #&gt;         3   c        
@@ -188,12 +193,29 @@ Conversion methods exist for data frames, tables, ftables, matrices and (most) v
 #&gt;   d       h       l      
 #&gt; 
 #&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'>library</span>(<span class='no'>stats</span>)
-<span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(<span class='kw'>Wool</span> <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>wool</span>, <span class='kw'>Tension</span> <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>tension</span>)
+<span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(
+        <span class='kw'>Wool</span>    <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>wool</span>,
+        <span class='kw'>Tension</span> <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>tension</span>
+      )
 <span class='fu'>as_huxtable</span>(<span class='no'>tbl</span>) <span class='co'># adds row and column names by default</span></div><div class='output co'>#&gt;             L      M   H     
 #&gt;      A      9      9   9     
 #&gt;      B      9      9   9     
 #&gt; 
-#&gt; Column names: rownames, L, M, H</div></pre>
+#&gt; Column names: rownames, L, M, H</div><div class='input'>
+<span class='co'># adding rownames:</span>
+<span class='fu'>as_hux</span>(<span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>3</span>,], <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+      <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='st'>"Car"</span>)</div><div class='output co'>#&gt;        Car    mpg   cyl   disp    hp   drat     wt  
+#&gt;      Mazda   21       6    160   110   3.9    2.62  
+#&gt;        RX4                                          
+#&gt;      Mazda   21       6    160   110   3.9    2.88  
+#&gt;    RX4 Wag                                          
+#&gt;     Datsun   22.8     4    108    93   3.85   2.32  
+#&gt;        710                                          
+#&gt; 
+#&gt; Column names: Car, mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
+#&gt; 
+#&gt; 7/12 columns shown.</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Text rotation — rotation • huxtable</title>
+<title>Map cell contents to cell properties using a function or scale — by_function • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Text rotation — rotation" />
+<meta property="og:title" content="Map cell contents to cell properties using a function or scale — by_function" />
 
-<meta property="og:description" content="Functions to get or set the text rotation property of huxtable cells." />
+<meta property="og:description" content="This creates a simple wrapper around a function for use in map_xxx.
+Useful functions include scales and palettes from the scales package." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,96 +115,74 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Text rotation</h1>
+    <h1>Map cell contents to cell properties using a function or scale</h1>
     
-    <div class="hidden name"><code>rotation.Rd</code></div>
+    <div class="hidden name"><code>by_function.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the <em>text rotation</em> property of huxtable cells.</p>
+    <p>This creates a simple wrapper around a function for use in <code>map_xxx</code>.
+Useful functions include scales and palettes from the <code>scales</code> package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rotation</span>(<span class='no'>ht</span>)
-<span class='fu'>rotation</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_rotation</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>map_rotation</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+    <pre class="usage"><span class='fu'>by_function</span>(<span class='no'>inner_fn</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
+      <th>inner_fn</th>
+      <td><p>A one-argument function which maps cell values to property values.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.</p>
-<p>Set to <code>NA</code> to reset to the default, which is <code>0</code>.</p></td>
-    </tr>
-    <tr>
-      <th>row</th>
-      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
-    </tr>
-    <tr>
-      <th>col</th>
-      <td><p>An optional column specifier.</p></td>
-    </tr>
-    <tr>
-      <th>fn</th>
-      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
-    </tr>
-    <tr>
-      <th>byrow</th>
-      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
+      <th>ignore_na</th>
+      <td><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged. Otherwise, <code>NA</code>
+normally resets to the default.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>rotation</code>, the <code>rotation</code> property.
-For <code>set_rotation</code> and <code>map_rotation</code>, the modified huxtable.</p>
+    <p>A function for use in <code>map_***</code> functions.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You will probably need to set <code><a href='col_width.html'>col_width()</a></code> and <code><a href='row_height.html'>row_height()</a></code> explicitly
-to achieve a nice result, in both HTML and LaTeX.</p>
+    <p>The argument of <code>inner_fn</code> will be <code>as.matrix(ht[row, col])</code>. Be aware how matrix conversion
+affects the <code>mode</code> of cell data.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='mapping-functions.html'>mapping-functions</a></p>
+<p>Other mapping functions: <code><a href='by_cases.html'>by_cases</a></code>,
+  <code><a href='by_colorspace.html'>by_colorspace</a></code>, <code><a href='by_quantiles.html'>by_quantiles</a></code>,
+  <code><a href='by_ranges.html'>by_ranges</a></code>, <code><a href='by_regex.html'>by_regex</a></code>,
+  <code><a href='by_rows.html'>by_rows</a></code>, <code><a href='by_values.html'>by_values</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>rotation</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>90</span>
-<span class='fu'>rotation</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'>matrix</span>(<span class='fu'>runif</span>(<span class='fl'>20</span>), <span class='fl'>5</span>, <span class='fl'>4</span>))
 
-<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
-      <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
-<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2   90    90
-#&gt; 3   90    90
-#&gt; 4   90    90</div><div class='input'>
-<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_rotation</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
-        <span class='fl'>90</span>,
-        <span class='fl'>270</span>)
-      )
-<span class='fu'>rotation</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   90    90
-#&gt; 2  270   270
-#&gt; 3   90    90
-#&gt; 4  270   270</div></pre>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_function</span>(<span class='no'>grey</span>))</div><div class='output co'>#&gt;   0.0201   0.528   0.92     0.997  
+#&gt;   0.377    0.601   0.401    0.149  
+#&gt;   0.56     0.261   0.213    0.519  
+#&gt;   0.857    0.29    0.672    0.846  
+#&gt;   0.385    0.48    0.0586   0.718  
+#&gt; 
+#&gt; Column names: V1, V2, V3, V4</div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"scales"</span>)) {
+  <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>ht</span>, <span class='fu'>by_function</span>(
+          <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/scales/topics/seq_gradient_pal'>seq_gradient_pal</a></span>()
+        ))
+}</div><div class='output co'>#&gt;   0.0201   0.528   0.92     0.997  
+#&gt;   0.377    0.601   0.401    0.149  
+#&gt;   0.56     0.261   0.213    0.519  
+#&gt;   0.857    0.29    0.672    0.846  
+#&gt;   0.385    0.48    0.0586   0.718  
+#&gt; 
+#&gt; Column names: V1, V2, V3, V4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -213,6 +192,8 @@ to achieve a nice result, in both HTML and LaTeX.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

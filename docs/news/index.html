@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -115,6 +115,33 @@
       
     </div>
 
+    <div id="huxtable-4-3-0" class="section level1">
+<h1 class="page-header">
+<a href="#huxtable-4-3-0" class="anchor"></a>huxtable 4.3.0<small> 2018-11-07 </small>
+</h1>
+<ul>
+<li>More work on TeX. Tables <em>should</em> now compile when raw_attributes is not set.</li>
+<li>New <code>map_xxx</code> functions to set properties variably by cell values.</li>
+<li>Functions for mapping properties variably: <code>by_rows</code>, <code>by_values</code>, <code>by_ranges</code>, <code>by_quantiles</code> etc.</li>
+<li>Correct bookdown labels are now automatically created.</li>
+<li>New grey, blue, green and orange themes.</li>
+<li>New “themes” vignette.</li>
+<li>New <code>tidy_override</code> function to override p values etc. in <code>huxreg</code>.</li>
+<li>New <code>set_contents</code> function to change huxtable contents within dplyr pipes.</li>
+<li>Enhancement: left- and right-aligned captions are now set above the table in LaTeX, using the “threeparttable” package. You will need to install this using e.g. <code><a href="../reference/report_latex_dependencies.html">install_latex_dependencies()</a></code> or <code>tlmgr</code> if it is not already on your system.</li>
+<li>Enhancement: in <code><a href="../reference/huxtable.html">huxtable()</a></code> and friends, <code>add_rownames = "Colname"</code> now sets the name for the new column.</li>
+<li>Improvements to the vignettes and help files.</li>
+<li>Bugfix: to_md could hang with bold/italic cells.</li>
+</ul>
+<div id="deprecated" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecated" class="anchor"></a>Deprecated</h2>
+<ul>
+<li>The 3 argument form of <code>set_xxx</code> functions is deprecated, as is the <code>where</code> function. Use <code>map_xxx</code> instead.</li>
+<li>Argument <code>byrow</code> is soft-deprecated. Use <code><a href="../reference/by_rows.html">by_cols()</a></code> instead.</li>
+</ul>
+</div>
+</div>
     <div id="huxtable-4-2-1" class="section level1">
 <h1 class="page-header">
 <a href="#huxtable-4-2-1" class="anchor"></a>huxtable 4.2.1<small> 2018-10-26 </small>
@@ -467,6 +494,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#huxtable-4-3-0">4.3.0</a></li>
         <li><a href="#huxtable-4-2-1">4.2.1</a></li>
         <li><a href="#huxtable-4-2-0">4.2.0</a></li>
         <li><a href="#huxtable-4-1-0">4.1.0</a></li>

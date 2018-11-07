@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -151,7 +151,8 @@ For <code>tribble_hux</code>, data values as in <code><a href='http://www.rdocum
     </tr>
     <tr>
       <th>add_rownames</th>
-      <td><p>If <code>TRUE</code>, add a first column of row names, named 'rownames', to the huxtable.</p></td>
+      <td><p>If <code>TRUE</code> or a character string, add a first column of row names
+to the huxtable. The string gives the name for the new column (or <code>"rownames"</code> for <code>TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>autoformat</th>
@@ -196,8 +197,17 @@ apply to column headers.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>huxtable</span>(<span class='kw'>column1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>column2</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>])
-<span class='fu'>tribble_hux</span>(
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>huxtable</span>(
+        <span class='kw'>column1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
+        <span class='kw'>column2</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]
+      )
+<span class='no'>ht</span></div><div class='output co'>#&gt;         1   a        
+#&gt;         2   b        
+#&gt;         3   c        
+#&gt;         4   d        
+#&gt;         5   e        
+#&gt; 
+#&gt; Column names: column1, column2</div><div class='input'><span class='fu'>tribble_hux</span>(
   ~ <span class='no'>Name</span>,             ~ <span class='no'>Salary</span>,
     <span class='st'>"John Smith"</span>,       <span class='fl'>50000</span>,
     <span class='st'>"Jane Doe"</span>,         <span class='fl'>50000</span>,

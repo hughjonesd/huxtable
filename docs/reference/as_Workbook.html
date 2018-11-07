@@ -62,7 +62,7 @@ openxlsx::openxlsx() Worbook objects, for use in Excel documents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -178,14 +178,18 @@ otherwise they are stored as text.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>ht</span>)</div><span class='co'># NOT RUN {</span>
-<span class='kw pkg'>openxlsx</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/openxlsx/topics/saveWorkbook'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"my-excel-file.xlsx"</span>)
+    <pre class="examples"><div class='input'><span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>jams</span>)</div><span class='co'># NOT RUN {</span>
+  <span class='kw pkg'>openxlsx</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/openxlsx/topics/saveWorkbook'>saveWorkbook</a></span>(<span class='no'>wb</span>,
+        <span class='st'>"my-excel-file.xlsx"</span>)
 <span class='co'># }</span><div class='input'>
 <span class='co'># multiple sheets in a single workbook:</span>
 <span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>openxlsx</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/openxlsx/topics/createWorkbook'>createWorkbook</a></span>()
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>'sheet1'</span>)
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>'Another'</span>, <span class='st'>'huxtable'</span>), <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>'sheet2'</span>)</div></pre>
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(<span class='no'>jams</span>,
+      <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"sheet1"</span>)
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>as_Workbook</span>(
+      <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>"Another"</span>, <span class='st'>"huxtable"</span>),
+      <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='no'>wb</span>,
+      <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"sheet2"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

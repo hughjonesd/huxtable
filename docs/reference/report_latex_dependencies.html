@@ -66,7 +66,7 @@ or tlmgr install directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -174,11 +174,12 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
 #&gt; \usepackage{hhline}
 #&gt; \usepackage{calc}
 #&gt; \usepackage{tabularx}
+#&gt; \usepackage{threeparttable}
 #&gt; % These are LaTeX packages. You can install them using your LaTex management software,
 #&gt; % or by running `huxtable::install_latex_dependencies()` from within R.
 #&gt; % Other packages may be required if you use non-standard tabulars (e.g. tabulary).</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>check_latex_dependencies</span>()
+  <span class='fu'>check_latex_dependencies</span>()
 <span class='co'># }</span><div class='input'>
 </div><span class='co'># NOT RUN {</span>
   <span class='fu'>install_latex_dependencies</span>()

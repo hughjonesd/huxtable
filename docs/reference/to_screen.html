@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -187,25 +187,18 @@ italicized) by default; this will work in recent daily builds of RStudio as of O
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>)
-<span class='fu'><a href='left_border.html'>right_border</a></span>(<span class='no'>ht</span>)[,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='left_border.html'>left_border</a></span>(<span class='no'>ht</span>)[,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>0</span>
-<span class='fu'><a href='align.html'>align</a></span>(<span class='no'>ht</span>)[<span class='fl'>1</span>,] <span class='kw'>&lt;-</span> <span class='st'>'left'</span>
-<span class='fu'>print_screen</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt; ┌───────────────────┐
-#&gt; │ a         b       │
-#&gt; ├───────────────────┤
-#&gt; │       1         1 │
-#&gt; ├───────────────────┤
-#&gt; │       2         2 │
-#&gt; ├───────────────────┤
-#&gt; │       3         3 │
-#&gt; ├───────────────────┤
-#&gt; │       4         4 │
-#&gt; ├───────────────────┤
-#&gt; │       5         5 │
-#&gt; └───────────────────┘
+    <pre class="examples"><div class='input'><span class='fu'><a href='left_border.html'>bottom_border</a></span>(<span class='no'>jams</span>)[<span class='fl'>1</span>, <span class='fl'>1</span>:<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>jams</span>)[<span class='fl'>1</span>, <span class='fl'>1</span>:<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_regex.html'>by_regex</a></span>(<span class='st'>"berry"</span> <span class='kw'>=</span> <span class='st'>"red"</span>))
+
+<span class='fu'>print_screen</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type           Price  
+#&gt; ────────────────────────
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div></pre>
+#&gt; Column names: Type, price</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

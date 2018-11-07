@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated functions — pad_decimal • huxtable</title>
+<title>Deprecated functions — hux_hex • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Deprecated functions — pad_decimal" />
+<meta property="og:title" content="Deprecated functions — hux_hex" />
 
 <meta property="og:description" content="These functions are deprecated and will be removed in future versions of huxtable." />
 <meta name="twitter:card" content="summary" />
@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -125,11 +125,16 @@
     
     </div>
 
+    <pre class="usage"><span class='fu'>hux_hex</span>()
+
+<span class='fu'>hex_hux</span>()</pre>
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>To replace <code>pad_decimal</code> use <code><a href='align.html'>align()</a></code>, e.g. <code>align(ht) &lt;- "."</code>.</p>
 <p>To replace <code>is_a_number</code> use e.g. <code>! is.na(as.numeric(x))</code></p>
+<p>To replace the 3 argument form of <code>set_xxx</code> functions, use
+<code><a href='mapping-functions.html'>map_xxx</a></code>.</p>
     
 
   </div>

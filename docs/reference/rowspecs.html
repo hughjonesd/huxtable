@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -142,7 +142,6 @@ first three rows, <code>col = "salary"</code> to specify the column named "salar
 <li><p>Use <code><a href='every.html'>every(n, from = m)</a></code> to get every nth row/column starting at row/column m.</p></li>
 <li><p>Use <code>dplyr</code> functions like <code>starts_with</code>, <code>contains</code> and <code>matches</code> to
 specify columns (but not rows). See <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>select_helpers</a></code> for a full list.</p></li>
-<li><p>Use <code><a href='huxtable-deprecated.html'>where(condition)</a></code>, and omit the <code>col</code> argument, to get cells where <code>condition</code> is <code>TRUE</code>.</p></li>
 <li><p>Set <code>byrow = TRUE</code> to set properties by row rather than by column.</p></li>
 </ul>
     
@@ -153,10 +152,6 @@ specify columns (but not rows). See <code><a href='http://www.rdocumentation.org
 function.</p><ul>
 <li><p>If there are two arguments (excluding <code>byrow</code>) then the second argument is taken as the
 value and is set for all rows and columns.</p></li>
-<li><p>If there are three arguments, then the third argument is taken as the value, and
-<code>row</code> must be a matrix with two columns. Each row of this matrix
-gives the row, column indices of a single cell. This uses R's little known feature of
-subsetting with matrices - see <code><a href='http://www.rdocumentation.org/packages/base/topics/Extract'>base::Extract()</a></code>.</p></li>
 <li><p>If there are four arguments:</p><ul>
 <li><p>If <code>row</code> or <code>col</code> is numeric, character or logical, it is evaluated just as in standard
 subsetting. <code>col</code> will be evaluated in a special context provided by <code><a href='http://www.rdocumentation.org/packages/tidyselect/topics/poke_vars'>tidyselect::with_vars()</a></code>
@@ -170,47 +165,31 @@ return functions for this purpose.</p></li>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>1</span>)
-
-<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
+    <pre class="examples"><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>jams</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>odds</span>, <span class='no'>evens</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>jams</span>, <span class='no'>evens</span>, <span class='no'>everywhere</span>,
+      <span class='st'>"grey95"</span>)</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='no'>everywhere</span>, <span class='kw pkg'>tidyselect</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>matches</a></span>(<span class='st'>'[aeiou]'</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>jams</span>, <span class='no'>everywhere</span>,
+      <span class='kw pkg'>tidyselect</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyselect/topics/select_helpers'>matches</a></span>(<span class='st'>"yp"</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'>
-<span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='huxtable-deprecated.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
+#&gt; Column names: Type, price</div><div class='input'>
+<span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>jams</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>,
+      <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"violetred"</span>, <span class='st'>"purple"</span>))</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'>
-<span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>))</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
-#&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>ht</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         1         5  
-#&gt;         2         4  
-#&gt;         3         3  
-#&gt;         4         2  
-#&gt;         5         1  
-#&gt; 
-#&gt; Column names: a, b</div></pre>
+#&gt; Column names: Type, price</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -142,14 +142,14 @@
     </tr>
     <tr>
       <th>col</th>
-      <td><p>A col specifier. See <code><a href='rowspecs.html'>rowspecs</a></code> for details.</p></td>
+      <td><p>A col specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>col_width</code>, the <code>col_width</code> property.
-For <code>set_col_width</code>, the <code>ht</code> object.</p>
+For <code>set_col_width</code>, the modified huxtable.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -164,10 +164,9 @@ The workaround is to adjust the width, so that your cells no longer overrun.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>col_width</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span>  <span class='fu'>c</span>(<span class='fl'>.2</span>, <span class='fl'>.8</span>)
-<span class='fu'>col_width</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   a   b 
-#&gt; 0.2 0.8 </div><div class='input'>
+<span class='fu'>col_width</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fu'>c</span>(<span class='fl'>.2</span>, <span class='fl'>.8</span>)
+<span class='fu'>col_width</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;  Type price 
+#&gt;   0.2   0.8 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

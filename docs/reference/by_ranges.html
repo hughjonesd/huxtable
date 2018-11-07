@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Caption — caption • huxtable</title>
+<title>Map numeric ranges to cell properties — by_ranges • huxtable</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Caption — caption" />
+<meta property="og:title" content="Map numeric ranges to cell properties — by_ranges" />
 
-<meta property="og:description" content="Functions to get or set the table-level caption property of a huxtable." />
+<meta property="og:description" content="by_ranges sets property values for cells falling within different numeric ranges." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,63 +114,99 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Caption</h1>
+    <h1>Map numeric ranges to cell properties</h1>
     
-    <div class="hidden name"><code>caption.Rd</code></div>
+    <div class="hidden name"><code>by_ranges.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions to get or set the table-level <em>caption</em> property of a huxtable.</p>
+    <p><code>by_ranges</code> sets property values for cells falling within different numeric ranges.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>caption</span>(<span class='no'>ht</span>)
-<span class='fu'>caption</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_caption</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
+    <pre class="usage"><span class='fu'>by_ranges</span>(<span class='no'>breaks</span>, <span class='no'>values</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
+      <th>breaks</th>
+      <td><p>A vector of numbers in increasing order.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A length-one character vector. Set to <code>NA</code> to reset to the default, which is
-<code>NA</code>.</p></td>
+      <th>values</th>
+      <td><p>A vector of property values. <code>length(values)</code> should be one greater than
+<code>length(breaks)</code> if <code>extend = TRUE</code>, or one less if <code>extend = FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>right</th>
+      <td><p>If <code>TRUE</code>, intervals are closed on the right, i.e. if values are exactly equal to a
+<code>break</code>, they go in the lower group. Otherwise, intervals are closed on the left, so equal
+values go in the higher group. <code>FALSE</code> by default.</p></td>
+    </tr>
+    <tr>
+      <th>extend</th>
+      <td><p>Extend <code>breaks</code> to <code>c(-Inf, breaks, Inf)</code>, i.e. include numbers below and above the
+outermost breaks. <code>TRUE</code> by default.</p></td>
+    </tr>
+    <tr>
+      <th>ignore_na</th>
+      <td><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged. Otherwise, <code>NA</code>
+normally resets to the default.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>caption</code>, the <code>caption</code> property.
-For <code>set_caption</code>, the modified huxtable.</p>
+    <p>A function for use in <code>map_***</code> functions.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Captions are not escaped. See the example for a workaround.</p>
+    <p>Non-numeric cells return <code>NA</code>. The effects of this depend on <code>ignore_na</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='caption_pos.html'>caption_pos()</a></code></p></div>
+    <div class='dont-index'><p><a href='mapping-functions.html'>mapping-functions</a></p>
+<p>Other mapping functions: <code><a href='by_cases.html'>by_cases</a></code>,
+  <code><a href='by_colorspace.html'>by_colorspace</a></code>, <code><a href='by_function.html'>by_function</a></code>,
+  <code><a href='by_quantiles.html'>by_quantiles</a></code>, <code><a href='by_regex.html'>by_regex</a></code>,
+  <code><a href='by_rows.html'>by_rows</a></code>, <code><a href='by_values.html'>by_values</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>caption</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"An example table"</span>
-<span class='fu'>caption</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; [1] "An example table"</div><div class='input'><span class='no'>jams</span></div><div class='output co'>#&gt;     An example table    
-#&gt;   Type           Price  
-#&gt;   Strawberry      1.90  
-#&gt;   Raspberry       2.10  
-#&gt;   Plum            1.80  
-#&gt; 
-#&gt; Column names: Type, price</div><div class='input'>
-<span class='co'># escape caption characters:</span>
-<span class='fu'>caption</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='sanitize.html'>sanitize</a></span>(
-      <span class='st'>"Make $$$ with jam"</span>,
-      <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"latex"</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_ranges</span>(
+        <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>4</span>),
+        <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"blue"</span>)
+      ))</div><div class='output co'>#&gt;                1  
+#&gt;                3  
+#&gt;                5  </div><div class='input'>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_ranges</span>(
+        <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>4</span>),
+        <span class='st'>"pink"</span>,
+        <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+      ))</div><div class='output co'>#&gt;                1  
+#&gt;                3  
+#&gt;                5  </div><div class='input'>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_ranges</span>(
+        <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>5</span>),
+        <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>),
+        <span class='kw'>right</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+      ))</div><div class='output co'>#&gt;                1  
+#&gt;                3  
+#&gt;                5  </div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_ranges</span>(
+        <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>5</span>),
+        <span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>),
+        <span class='kw'>right</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+      ))</div><div class='output co'>#&gt;                1  
+#&gt;                3  
+#&gt;                5  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

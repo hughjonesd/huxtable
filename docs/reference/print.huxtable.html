@@ -63,7 +63,7 @@ useful to change this. You can do so by setting options(&quot;huxtable.print&quo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -133,7 +133,8 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for huxtable</span>
-<span class='fu'>format</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>output</span>)</pre>
+<span class='fu'>format</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"latex"</span>, <span class='st'>"html"</span>, <span class='st'>"md"</span>,
+  <span class='st'>"screen"</span>, <span class='st'>"rtf"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,7 +149,7 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
     </tr>
     <tr>
       <th>output</th>
-      <td><p>One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code> or <code>"screen"</code></p></td>
+      <td><p>Output format. One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code>, <code>"screen"</code> or <code>"rtf"</code>.</p></td>
     </tr>
     </table>
     
@@ -165,12 +166,10 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># to print LaTeX output:</span>
-<span class='fu'>options</span>(<span class='kw'>huxtable.print</span> <span class='kw'>=</span> <span class='no'>print_latex</span>)
-<span class='co'># to print huxtables like data frames:</span>
-<span class='fu'>options</span>(<span class='kw'>huxtable.print</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>...</span>) <span class='fu'>print</span>(<span class='fu'>as.data.frame</span>(<span class='no'>x</span>)))
-<span class='co'># }</span><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>)
-<span class='fu'>format</span>(<span class='no'>ht</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>'screen'</span>)</div><div class='output co'>#&gt; [1] "        1         4  \n        2         5  \n        3         6  \n\nColumn names: a, b\n"</div><div class='input'><span class='fu'>format</span>(<span class='no'>ht</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>'md'</span>)</div><div class='output co'>#&gt; [1] "-----------------------\n          1          4 \n----------- -----------\n          2          5 \n                       \n          3          6 \n-----------------------\n\n"</div></pre>
+  <span class='co'># to print LaTeX output:</span>
+  <span class='fu'>options</span>(<span class='kw'>huxtable.print</span> <span class='kw'>=</span> <span class='no'>print_latex</span>)
+<span class='co'># }</span><div class='input'>
+<span class='fu'>format</span>(<span class='no'>jams</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"screen"</span>)</div><div class='output co'>#&gt; [1] "  Type           Price  \n  Strawberry      1.90  \n  Raspberry       2.10  \n  Plum            1.80  \n\nColumn names: Type, price\n"</div><div class='input'><span class='fu'>format</span>(<span class='no'>jams</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"md"</span>)</div><div class='output co'>#&gt; [1] "-----------------------\n Type            Price \n----------- -----------\n Strawberry       1.90 \n                       \n Raspberry        2.10 \n                       \n Plum             1.80 \n-----------------------\n\n"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

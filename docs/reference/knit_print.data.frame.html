@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -164,13 +164,20 @@ To turn this behaviour off, set <code>options(huxtable.knit_print_df = FALSE)</c
 <span class='co'># in your knitr document</span>
 <span class='no'>mytheme</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span> (<span class='no'>ht</span>) {
   <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>ht</span>, <span class='fl'>0.4</span>)
-  <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span>(<span class='no'>ht</span>, <span class='st'>"darkgreen"</span>)
-  <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>ht</span>, <span class='no'>evens</span>, <span class='no'>odds</span>, <span class='st'>"salmon"</span>)
+  <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span>(<span class='no'>ht</span>,
+        <span class='st'>"darkgreen"</span>)
+  <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>ht</span>,
+        <span class='no'>evens</span>, <span class='no'>odds</span>, <span class='st'>"salmon"</span>)
   <span class='no'>ht</span>
 }
 
-<span class='fu'>options</span>(<span class='kw'>huxtable.knit_print_df_theme</span> <span class='kw'>=</span> <span class='no'>mytheme</span>)
-<span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>) <span class='co'># groovy!</span>
+<span class='fu'>options</span>(<span class='kw'>huxtable.knit_print_df_theme</span>
+      <span class='kw'>=</span> <span class='no'>mytheme</span>)
+<span class='co'># groovy!</span>
+<span class='fu'>data.frame</span>(
+        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
+        <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>
+      )
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

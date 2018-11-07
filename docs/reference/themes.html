@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -132,6 +132,14 @@
 <span class='fu'>theme_striped</span>(<span class='no'>ht</span>, <span class='kw'>stripe</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>0.9</span>), <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
+<span class='fu'>theme_grey</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>theme_blue</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>theme_orange</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>theme_green</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='fu'>theme_article</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>theme_mondrian</span>(<span class='no'>ht</span>, <span class='kw'>prop_colored</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>font</span> <span class='kw'>=</span> <span class='st'>"Arial"</span>)</pre>
@@ -145,7 +153,7 @@
     </tr>
     <tr>
       <th>position</th>
-      <td><p>'left', 'center' or 'right'</p></td>
+      <td><p>"left", "center" or "right"</p></td>
     </tr>
     <tr>
       <th>header_row</th>
@@ -180,19 +188,104 @@
 <p><code>theme_striped</code> uses different backgrounds for alternate rows, and for headers.</p>
 <p><code>theme_article</code> is similar to the style of many scientific journals.
 It sets horizontal lines above and below the table.</p>
+<p><code>theme_grey</code>, <code>theme_blue</code>, <code>theme_orange</code> and <code>theme_green</code> use white borders and subtle
+horizontal stripes.</p>
 <p><code>theme_mondrian</code> mimics the style of a Mondrian painting, with black borders and randomized
 colors.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-<span class='fu'>theme_striped</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;         1         1  
-#&gt;         2         2  
-#&gt;         3         3  
-#&gt;         4         4  
-#&gt;         5         5  
+    <pre class="examples"><div class='input'>
+<span class='fu'>theme_striped</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: a, b</div></pre>
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_plain</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌──────────────────────┐
+#&gt; │ Type           Price │
+#&gt; ├──────────────────────┤
+#&gt; │ Strawberry      1.90 │
+#&gt; │ Raspberry       2.10 │
+#&gt; │ Plum            1.80 │
+#&gt; └──────────────────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_basic</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type       │   Price  
+#&gt; ─────────────┼──────────
+#&gt;   Strawberry │    1.90  
+#&gt;   Raspberry  │    2.10  
+#&gt;   Plum       │    1.80  
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_article</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ────────────────────────
+#&gt;   Type           Price  
+#&gt; ────────────────────────
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
+#&gt;   Plum            1.80  
+#&gt; ────────────────────────
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_mondrian</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌────────────┬─────────┐
+#&gt; │ Type       │   Price │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Strawberry │    1.90 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Raspberry  │    2.10 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Plum       │    1.80 │
+#&gt; └────────────┴─────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_grey</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌────────────┬─────────┐
+#&gt; │ Type       │   Price │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Strawberry │    1.90 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Raspberry  │    2.10 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Plum       │    1.80 │
+#&gt; └────────────┴─────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_blue</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌────────────┬─────────┐
+#&gt; │ Type       │   Price │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Strawberry │    1.90 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Raspberry  │    2.10 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Plum       │    1.80 │
+#&gt; └────────────┴─────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_orange</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌────────────┬─────────┐
+#&gt; │ Type       │   Price │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Strawberry │    1.90 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Raspberry  │    2.10 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Plum       │    1.80 │
+#&gt; └────────────┴─────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_green</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌────────────┬─────────┐
+#&gt; │ Type       │   Price │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Strawberry │    1.90 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Raspberry  │    2.10 │
+#&gt; ├────────────┼─────────┤
+#&gt; │ Plum       │    1.80 │
+#&gt; └────────────┴─────────┘
+#&gt; 
+#&gt; Column names: Type, price</div><span class='co'># NOT RUN {</span>
+  <span class='fu'><a href='quick-output.html'>quick_pdf</a></span>(
+          <span class='fu'>theme_striped</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_plain</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_basic</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_article</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_mondrian</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_grey</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_blue</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_orange</span>(<span class='no'>jams</span>),
+          <span class='fu'>theme_green</span>(<span class='no'>jams</span>)
+        )
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

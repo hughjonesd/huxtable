@@ -24,6 +24,7 @@ reference:
     contents:
       - huxtable-package
       - huxtable-options
+      - huxtable-FAQ
   - title: "Creating and manipulating huxtables"
     desc: >
       Functions to create, subset and work with huxtables
@@ -36,6 +37,8 @@ reference:
       - huxtable
       - as_huxtable
       - insert_column
+      - merge_cells
+      - set_contents
       - add_rows
       - mutate
       - t.huxtable
@@ -94,6 +97,11 @@ reference:
     - get_default_properties
     - set_cell_properties
     - set_default_properties
+  - title: "Mapping functions"
+    desc: Set cell properties depending on cell contents
+    contents:
+    - starts_with("by_")
+    - mapping-functions
   - title: "Output"
     desc: >
       Functions to outut huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen
@@ -106,6 +114,7 @@ reference:
       - knit_print.huxtable
       - knit_print.data.frame
       - report_latex_dependencies
+      - rtf_fc_tables
       - starts_with("to_")
       - starts_with("quick")
   - title: "Themes"
@@ -126,6 +135,8 @@ reference:
     desc: Other functions
     contents:
       - hux_logo
+      - jams
       - huxreg
+      - tidy_override
       - is_a_number
       - sanitize

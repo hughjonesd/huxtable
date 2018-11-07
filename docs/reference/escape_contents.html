@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">4.3.0</span>
       </span>
     </div>
 
@@ -127,7 +127,8 @@
 
     <pre class="usage"><span class='fu'>escape_contents</span>(<span class='no'>ht</span>)
 <span class='fu'>escape_contents</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>map_escape_contents</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,51 +139,67 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A logical vector or matrix. If <code>TRUE</code>, cell contents will be HTML or LaTeX escaped. Set to <code>NA</code> to reset to the default, which is
-<code>TRUE</code>.</p></td>
+      <td><p>A logical vector or matrix. If <code>TRUE</code>, cell contents will be HTML or LaTeX escaped.</p>
+<p>Set to <code>NA</code> to reset to the default, which is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>row</th>
-      <td><p>A row specifier. See <code><a href='rowspecs.html'>rowspecs</a></code> for details.</p></td>
+      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
     </tr>
     <tr>
       <th>col</th>
       <td><p>An optional column specifier.</p></td>
     </tr>
     <tr>
+      <th>fn</th>
+      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
+    </tr>
+    <tr>
       <th>byrow</th>
-      <td><p>If <code>TRUE</code>, fill in values by row rather than by column.</p></td>
+      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>escape_contents</code>, the <code>escape_contents</code> property.
-For <code>set_escape_contents</code>, the <code>ht</code> object.</p>
+For <code>set_escape_contents</code> and <code>map_escape_contents</code>, the modified huxtable.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>Exponent</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw'>Example</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>'$x^'</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='st'>'$'</span>))
-<span class='fu'>escape_contents</span>(<span class='no'>ht</span>)[,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(
+        <span class='kw'>Exponent</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>,
+        <span class='kw'>Example</span>  <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"$x^"</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='st'>"$"</span>),
+        <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+      )
+<span class='fu'>escape_contents</span>(<span class='no'>ht</span>)[,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span></div><span class='co'># NOT RUN {</span>
+  <span class='fu'><a href='quick-output.html'>quick_pdf</a></span>(<span class='no'>ht</span>)
+<span class='co'># }</span><div class='input'>
 
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>1</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;      a    b
-#&gt; 1 TRUE TRUE
-#&gt; 2 TRUE TRUE
-#&gt; 3 TRUE TRUE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>ht3</span>)</div><div class='output co'>#&gt;      a    b
-#&gt; 1 TRUE TRUE
-#&gt; 2 TRUE TRUE
-#&gt; 3 TRUE TRUE</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>), <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>ht4</span>)</div><div class='output co'>#&gt;      a     b
-#&gt; 1 TRUE FALSE
-#&gt; 2 TRUE FALSE
-#&gt; 3 TRUE  TRUE</div><div class='input'><span class='no'>ht5</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>ht</span>, <span class='fu'><a href='huxtable-deprecated.html'>where</a></span>(<span class='no'>ht</span> <span class='kw'>==</span> <span class='fl'>1</span>), <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>ht5</span>)</div><div class='output co'>#&gt;      a    b
-#&gt; 1 TRUE TRUE
-#&gt; 2 TRUE TRUE
-#&gt; 3 TRUE TRUE</div></pre>
+<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>jams</span>,
+      <span class='fl'>TRUE</span>)
+<span class='fu'>escape_contents</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1 TRUE  TRUE
+#&gt; 2 TRUE  TRUE
+#&gt; 3 TRUE  TRUE
+#&gt; 4 TRUE  TRUE</div><div class='input'>
+<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
+<span class='fu'>escape_contents</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1 TRUE  TRUE
+#&gt; 2 TRUE  TRUE
+#&gt; 3 TRUE  TRUE
+#&gt; 4 TRUE  TRUE</div><div class='input'>
+<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_escape_contents</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
+        <span class='fl'>TRUE</span>,
+        <span class='fl'>FALSE</span>)
+      )
+<span class='fu'>escape_contents</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;    Type price
+#&gt; 1  TRUE  TRUE
+#&gt; 2 FALSE FALSE
+#&gt; 3  TRUE  TRUE
+#&gt; 4 FALSE FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
