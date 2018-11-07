@@ -13,6 +13,8 @@ navbar:
         href: design-principles.html
       - text: Regression Tables with huxreg
         href: huxreg.html
+      - text: Huxtable Themes
+        href: themes.html
     - text: "Reference"
       href: reference/
     - text: "News"
