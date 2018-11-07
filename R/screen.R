@@ -216,7 +216,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption("width") / 4
 
   result <- paste(apply(charmat, 1, paste0, collapse = ""), collapse = "\n")
   result <- paste0(result, "\n\n")
-  if (! is.na(cap <- caption(ht))) result <- paste0(result, "Table: ", cap, "\n")
+  if (! is.na(cap <- make_caption(ht, "md"))) result <- paste0(result, "Table: ", cap, "\n")
 
   result
 }
@@ -247,6 +247,8 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   max_word_widths <- sapply(lapply(strsplit(dc$contents, "(\t|\n|\r|\v )"), ncharw), function (x)  max(c(0, x)))
   for (r in seq_len(nrow(dc))) {
     width <- if (wrap(ht)[ dc$display_row[r], dc$display_col[r] ]) max_word_widths[r] else content_widths[r]
+    if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 4
+    if (markdown && italic(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 2
     cols <- seq(dc$display_col[r], dc$end_col[r])
     # allows for width of interior borders if a cell spans multiple columns
     if (sum(widths[cols]) + inner_border_h * (dc$colspan[r] - 1) < width) {

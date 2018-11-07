@@ -7,6 +7,9 @@ TODO
 Priority changes
 ================
 
+* Fix rmarkdown to include +raw_attribute (and maybe with a function)
+
+* Start using knitr::is_latex_output() etc. to detect output types
 
 * Update website from website-4.3-changes branch
 
@@ -82,6 +85,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * Text class also? (5.0)
   - and `set_text(ht, text(10, 'black', 'italic', 'cmss'))`
+  - one could also have e.g. escaped("$\lambda$") which would autoset
+    escape_contents
   
 * Could hux$foo <- 1:5 (when foo is a new column) copy properties like cbind? (5.0)
 
@@ -185,11 +190,6 @@ Possibles
 * Rename clean_contents and export it? 
   - Conceivably, people might want to override some individual
     cell contents with raw HTML/TeX/plain text. This still wouldn't affect properties.
-
-* `contents(x) <-` and `set_contents/map_contents`? Useful in pipelines if you want to e.g.
-  both bold and upper case certain cells...
-  - not sure how `contents(x)[1, 1:3] <- blah` would be different from `x[1, 1:3] <- blah`.
-  
 
 * use \hhline double-line feature to handle multiple border widths? i.e. top line is background,
   bottom line is border?

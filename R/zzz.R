@@ -34,6 +34,9 @@ NULL
 #'   huxtable guesses the format using [guess_knitr_output_format()].
 #' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
 #'    will be printed in color on screen.
+#' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to automatically
+#'   print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
+#'   document.
 #' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
 #'   pretty-printed using huxtable.
 #' * `options('huxtable.knit_print_df_theme')`. A function applied to data frames
@@ -148,6 +151,7 @@ NULL
   set_default_option('huxtable.knit_print_df', TRUE)
   set_default_option('huxtable.knit_print_df_theme', theme_plain)
   set_default_option('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
+  set_default_option('huxtable.bookdown', NULL)
   set_default_option('huxtable.autoformat', TRUE)
   set_default_option('huxtable.autoformat_number_format', list(
           integer = 0,

@@ -1,0 +1,41 @@
+---
+title: "Bookdown test"
+output:
+  bookdown::pdf_book: 
+    md_extensions: +raw_attribute
+  bookdown::html_book: default
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(huxtable)
+# invalidate cache when the tufte version changes
+if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) stop("guessed output is ", x)
+
+if (! huxtable:::in_bookdown()) stop("huxtable:::in_bookdown() returned false")
+```
+
+My table is \@ref(tab:foo1). The other table
+is \@ref(tab:foo2). The third is \@ref(tab:foo3).
+
+```{r}
+
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My labelled table") %>% 
+  set_label("tab:foo1")
+
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My labelled table, prefix should be autoadded!") %>% 
+  set_label("foo2")
+
+hux(a = "A table with no caption, but a label") %>% 
+  set_label("tab:foo3")
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My unlabelled table")
+
+hux(a = "A table with no caption or label")
+
+```

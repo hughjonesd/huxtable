@@ -21,6 +21,7 @@ knit_print.huxtable <- function (x, options, ...) {
   of <- getOption("huxtable.knitr_output_format", guess_knitr_output_format())
   call_name <- switch(of,
         latex  = "to_latex",
+        html4  = ,
         html   = "to_html",
         docx   = {
           warning("Falling back to markdown for Word document. Many features will not be supported.")
@@ -140,6 +141,7 @@ guess_knitr_output_format <- function() {
   if (of == "tufte_handout") of <- "latex"
   if (of == "tufte_html") of <- "html"
   of <- sub("_.*", "", of)
+  if (of == "html4") of <- "html" # bookdown
   if (of %in% c("ioslides", "revealjs", "slidy")) of <- "html"
   if (of %in% c("beamer", "pdf")) of <- "latex"
 
@@ -153,5 +155,3 @@ htmlPreserve <- function (x) {
 
   if (nzchar(x)) sprintf("<!--html_preserve-->%s<!--/html_preserve-->", x) else x
 }
-
-

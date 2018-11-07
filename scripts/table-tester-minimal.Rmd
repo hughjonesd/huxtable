@@ -5,14 +5,16 @@ date: "27/07/2018"
 output: 
   pdf_document:
     keep_tex: yes
-    md_extensions: +raw_attribute
+keep_intermediates: yes
 ---
 
 ```{r setup, echo = FALSE}
-
+options("huxtable.knitr_output_format" = "latex")
 library(huxtable)
 library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
+
+
 ```
 
 
@@ -46,8 +48,12 @@ long <- 'A rather long row of text which goes on...'
 # cat(htl)
 ```
 
-```{r, eval=TRUE}
-str(rmarkdown::metadata)
-hux(1) %>% set_caption("CAPTION")
-hux(1) %>% set_caption_pos("topleft")
+```{r}
+# str(rmarkdown::metadata)
+knitr::asis_output("this", meta = report_latex_dependencies(quiet = TRUE))
+h <- hux(1) %>% set_caption("a caption") %>% set_width(0.2)
+h
+h
+# hux(1) %>% set_caption_pos("topleft")
 ```
+

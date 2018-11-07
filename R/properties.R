@@ -192,6 +192,7 @@ make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "
       rc$col <- get_rc_spec(ht, col, 2)
 
       current <- .(as.name(attr_name))(ht)[rc$row, rc$col, drop = FALSE]
+      if (is_huxtable(current)) current <- as.matrix(current)
       .(as.name(attr_name))(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
 
       ht
@@ -270,7 +271,7 @@ make_getter_setters("col_width", "col")
 #' If character, `value` must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
 #' treated as proportions of the text height (`\\textheight`).
 #' @template getset-example
-#' @templateVar attr_val c(.2, .1, .1)
+#' @templateVar attr_val c(.2, .1, .1, .1)
 NULL
 make_getter_setters("row_height", "row")
 
@@ -748,6 +749,41 @@ make_getter_setters("number_format", "cell")
 }
 
 
+#' Set cell contents
+#'
+#' `set_contents()` is a convenience function to change the cell contents of a huxtable within
+#' a dplyr chain. `set_contents(ht, x, y, foo)` just calls `ht[x, y] <- foo` and returns `ht`.
+#'
+#' @template cell-property-usage
+#' @templateVar attr_name contents
+#'
+#' @param ht A huxtable.
+#' @param value Cell contents.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param fn A mapping function. See [mapping-functions] for details.
+#' @param byrow Deprecated. Use [by_cols()] instead.
+#'
+#' @evalNamespace make_exports("contents", with_map = TRUE)
+#' @evalNamespace make_namespace_S3_entries("contents")
+#' @aliases contents contents<- map_contents
+#' @name set_contents
+#' @examples
+#'
+#' set_contents(jams, 2, 1, "Blackcurrant")
+#' map_contents(jams, by_regex(".*berry" = "Snodberry"))
+NULL
+make_getter_setters("contents", "cell")
+
+#' @evalNamespace "S3method(contents, huxtable)"
+contents.huxtable <- function (ht) ht
+
+
+#' @evalNamespace "S3method(\"contents<-\", huxtable)"
+`contents<-.huxtable` <- function (ht, value) {
+  value # by the time we get here, the replacement has already happened and we're done
+}
+
 #' @aliases pad_decimal<- set_pad_decimal map_pad_decimal
 #' @rdname huxtable-deprecated
 #' @name pad_decimal
@@ -876,8 +912,12 @@ make_getter_setters("tabular_environment", "table", check_fun = is.character)
 #' @template getset-example
 #' @templateVar attr_val "tab:mytable"
 #' @details
-#' LaTeX table labels typically start with "tab:", and they must do so if you want table numbering
-#' in \href{http://bookdown.org}{bookdown}.
+#' LaTeX table labels typically start with `"tab:"`.
+#'
+#' If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
+#' the caption will automatically be prefixed with `(#label)`. You can then
+#' refer to the table using `@ref(label)`. `label` needs to start with `"tab:"`; if it doesn't,
+#' the `"tab"` prefix will be added automatically.
 NULL
 make_getter_setters("label", "table", check_fun = is.character)
 

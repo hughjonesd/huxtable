@@ -30,7 +30,7 @@ treated as proportions of the text height (\code{\\textheight}).
 }
 \examples{
 
-row_height(jams) <-  c(.2, .1, .1)
+row_height(jams) <-  c(.2, .1, .1, .1)
 row_height(jams)
 
 }

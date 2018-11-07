@@ -58,7 +58,7 @@ to_html.huxtable <- function(ht, ...) {
   table_start <- sprintf(
         '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s"%s>\n',
         width, mstring, heightstring, idstring)
-  if (! is.na(cap <- caption(ht))) {
+  if (! is.na(cap <- make_caption(ht, "html"))) {
     vpos <- if (grepl("top", caption_pos(ht))) "top" else "bottom"
     hpos <- get_caption_hpos(ht)
     cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos,

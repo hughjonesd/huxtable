@@ -1,0 +1,49 @@
+---
+title: "Bookdown test"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_book: 
+  bookdown::html_book: default
+  bookdown::tufte_html2: default
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+library(dplyr)
+library(huxtable)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) stop("guessed output is ", x)
+```
+
+Output format is `r guess_knitr_output_format()`. My table is \@ref(tab:foo1). The other table
+is \@ref(tab:foo2). The third is \@ref(tab:foo3).
+
+```{r}
+
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My labelled table") %>% 
+  set_label("tab:foo1")
+
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My unlabelled table")
+
+hux(a = 1:5, b = 1:5) %>% 
+  set_caption("My labelled table, prefix should be autoadded!") %>% 
+  set_label("foo2")
+
+hux(a = "A table with no caption, but a label") %>% 
+  set_label("tab:foo3")
+
+x <- hux(a = "A table with no caption or label")
+x
+
+huxtable:::make_caption(x)
+```
