@@ -4,7 +4,6 @@ author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
   pdf_document: 
-    md_extensions: +raw_attribute
   html_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  

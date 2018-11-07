@@ -4,7 +4,6 @@ author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output: 
   pdf_document:
-    md_extensions: +raw_attribute
     includes:
       in_header: placeins-header.tex
   html_document: default

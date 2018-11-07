@@ -1,8 +1,7 @@
 ---
 title: "Bookdown test"
 output:
-  bookdown::pdf_book: 
-    md_extensions: +raw_attribute
+  bookdown::pdf_book: default
   bookdown::html_book: default
 ---
 

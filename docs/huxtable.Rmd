@@ -8,7 +8,6 @@ output:
       in_header: placeins-header.tex
     toc: yes
     toc_depth: 2
-    md_extensions: +raw_attribute
   html_document:
     toc: yes
     toc_depth: 2
