@@ -67,6 +67,9 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
     format(unit, context) where context might be 'HTML-width' or something
   - could still use characters ("5pt", "10%") in API, they would be internally converted
   - presumably the `units` (and `errors`?) package would be relevant
+  - the easiest thing is probably to have widths as always character
+    if you have multiple units. And autoconvert numbers to 
+    percentages when they are input.
 
 * Border API rework (5.0)
   - different set of commands
@@ -86,6 +89,9 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   affect the merged cell (e.g. borders will work for the relevant area, assuming they are not
   between two merged cells)
   - This fits with the "merge_cells" idea
+  - But be aware you could have accidents e.g. if a border is
+    set below a row, and one merged cell then picks it up
+    (as now!)
 
 * After e.g. June, set huxtable.add_colnames to TRUE by default (5.0).
 
