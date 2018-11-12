@@ -346,7 +346,7 @@ broom::glance
 #' cbind(huxreg(fixed_lm1), huxreg(lm1))
 tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
   assert_that(is.flag(extend), is.list(glance))
-  tidy_cols <- list(...)
+  tidy_cols <- data.frame(..., stringsAsFactors = FALSE)
   structure(list(
           model = x,
           tidy_cols = tidy_cols,
@@ -361,11 +361,12 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
 tidy.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
-  tidied <- broom::tidy(x$model, ...)
+  tidied <- try(broom::tidy(x$model, ...), silent = TRUE)
+  if (inherits(tidied, "try-error")) tidied <- data.frame()[seq_along(x$tidy_cols[[1]]), ]
   for (cn in names(x$tidy_cols)) {
     if (! x$extend && ! cn %in% names(tidied)) stop(glue::glue(
           "Column \"{cn}\" not found in results of `tidy()`"))
-    tidied[[cn]] <- x$tidy[[cn]]
+    tidied[[cn]] <- x$tidy_cols[[cn]]
   }
 
   return(tidied)
@@ -376,13 +377,13 @@ tidy.tidy_override <- function (x, ...) {
 glance.tidy_override <- function (x, ...) {
   assert_package("tidy.tidy_override", "broom")
 
-  sumstats <- broom::glance(x$model, ...)
+  sumstats <- try(broom::glance(x$model, ...), silent = TRUE)
+  if (inherits(sumstats, "try-error")) sumstats <- data.frame()[1, ] # 1 row no cols
   for (elem in names(x$glance_elems)) {
     if (! x$extend && ! elem %in% names(sumstats)) stop(glue::glue(
           "Element \"{elem}\" not found in results of `glance()`"))
     sumstats[[elem]] <- x$glance_elems[[elem]]
   }
-
   return(sumstats)
 }
 

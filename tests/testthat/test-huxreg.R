@@ -216,4 +216,30 @@ test_that("tidy_override", {
   lm1_newcol <- tidy_override(lm1, foo = 1:2, glance = list(bar = 1), extend = TRUE)
   expect_equivalent(broom::tidy(lm1_newcol)$foo, 1:2)
   expect_equivalent(broom::glance(lm1_newcol)$bar, 1)
+
+  expect_error(tidy_override(lm1, foo = 1:2, bar = 1:3),
+        info = "Unequal length tidy_override columns should throw an error")
+})
+
+
+test_that("glance.tidy_override works if underlying object has no glance() method", {
+  skip_if_not_installed("broom")
+  skip_if_not_installed("lmtest")
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
+  ct1 <- lmtest::coeftest(lm1)
+  fixed_ct1 <- tidy_override(ct1, glance = list(foo = 1.3), extend = TRUE)
+  expect_equivalent(broom::glance(fixed_ct1)$foo, 1.3)
+})
+
+
+test_that("tidy.tidy_override works if underlying object has no tidy() method", {
+  skip_if_not_installed("broom")
+  tidy_monster <- tidy_override(
+          list(),
+          term = c("a", "monster"),
+          estimate = c(1, 2),
+          extend = TRUE
+        )
+  expect_equivalent(broom::tidy(tidy_monster)$term, c("a", "monster"))
+
 })

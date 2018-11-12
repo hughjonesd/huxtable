@@ -4,6 +4,8 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 
 # huxtable 4.3.0.9000
 
+* Bugfix: `tidy.tidy_override()` and `glance.tidy_override()` should work even if underlying object
+  has no `tidy()` or `glance()` method.
 
 # huxtable 4.3.0
 
