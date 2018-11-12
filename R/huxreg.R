@@ -389,4 +389,7 @@ glance.tidy_override <- function (x, ...) {
 
 #' @export
 #' @rdname tidy_override
-nobs.tidy_override <- function (object, ...) nobs(object$model)
+nobs.tidy_override <- function (object, ...) {
+  if ("nobs" %in% names(object$glance_elems)) return(object$glance_elems[["nobs"]])
+  nobs(object$model)
+}
