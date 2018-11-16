@@ -3,7 +3,7 @@ title: "Huxtable Themes"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document:
+  html_document: default
   pdf_document:
     includes:
       in_header: placeins-header.tex
