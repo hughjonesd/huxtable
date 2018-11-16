@@ -124,13 +124,15 @@ test_that("Various Rmd files render without errors", {
   test_render("bookdown-test.Rmd", "bookdown::pdf_book")
   test_render("bookdown-test.Rmd", "bookdown::html_book", output_dir = ".") # workaround a bug
 
-  rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd") # design-principles needs a CSV file, so we skip
+  # design-principles needs a CSV file, so we skip:
+  rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd", "themes.Rmd")
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
   rmd_paths <- system.file("vignettes", rmd_filenames, package = "huxtable")
   if (! utils::file_test("-f", rmd_paths[1])) rmd_paths <-
          base::system.file("doc", rmd_filenames, package = "huxtable")
   if (! utils::file_test("-f", rmd_paths[1])) skip("Couldn't find vignettes...")
   for (path in rmd_paths) {
-    test_render_all(path)
+    file.copy(path, ".", overwrite = TRUE) # copy here so we can get the placeins-header.tex
+    test_render_all(basename(path))
   }
 })
