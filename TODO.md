@@ -7,11 +7,9 @@ TODO
 Priority changes
 ================
 
-* Fix rmarkdown to include +raw_attribute (and maybe with a function)
+* Add `set_outer_border_colors` etc.
 
 * Start using knitr::is_latex_output() etc. to detect output types
-
-* Update website from website-4.3-changes branch
 
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
