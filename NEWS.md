@@ -7,6 +7,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: `tidy.tidy_override()` and `glance.tidy_override()` should work even if underlying object
   has no `tidy()` or `glance()` method.
 * Bugfix: huxtables had option clash when `echo = TRUE` in Rmd pdf_document format.
+* Enhancement: when `stars` is `NULL` in `huxreg`, don't print a note by default.
 
 # huxtable 4.3.0
 
