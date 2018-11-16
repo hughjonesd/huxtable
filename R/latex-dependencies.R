@@ -10,7 +10,7 @@ huxtable_latex_dependencies <- list(
   list(name = "caption"),
   list(name = "graphicx"),
   list(name = "siunitx"),
-  list(name = "xcolor", options = "table"),
+  list(name = "colortbl"),
   list(name = "multirow"),
   list(name = "hhline"),
   list(name = "calc"),
