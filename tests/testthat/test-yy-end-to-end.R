@@ -30,13 +30,14 @@ validate_markdown <- function(md_string, output_format = "html_document") {
 }
 
 
-test_render <- function(path, format) {
+test_render <- function(path, format, output_dir = "temp-artefacts") {
   output <- ""
+  force(output_dir)
   on.exit(if (file.exists(output)) try(file.remove(output), silent = TRUE))
   expect_error(output <- rmarkdown::render(path,
           output_format     = format,
           quiet             = TRUE,
-          output_dir        = "temp-artefacts",
+          output_dir        = output_dir,
           intermediates_dir = "temp-artefacts"
         ),
     regexp = NA,
@@ -121,7 +122,7 @@ test_that("Various Rmd files render without errors", {
     test_render_all(path)
   }
   test_render("bookdown-test.Rmd", "bookdown::pdf_book")
-  test_render("bookdown-test.Rmd", "bookdown::html_book")
+  test_render("bookdown-test.Rmd", "bookdown::html_book", output_dir = ".") # workaround a bug
 
   rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd") # design-principles needs a CSV file, so we skip
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
