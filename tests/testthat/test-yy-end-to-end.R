@@ -104,6 +104,11 @@ test_that("Row heights do not screw up LaTeX multicol", {
 })
 
 
+test_that("echo = TRUE does not cause option clash", {
+  test_render("echo-true-latex-test.Rmd", NULL)
+})
+
+
 test_that("Various Rmd files render without errors", {
   skip_on_cran()
   skip_if_not_installed("flextable") # skips on travis no-suggests where no vignettes
