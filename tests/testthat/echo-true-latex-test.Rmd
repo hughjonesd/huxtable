@@ -8,8 +8,11 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(huxtable)
+library(dplyr)
 ```
 
 ```{r}
-hux(a=1:5)
+hux(a = 1:5, b = 1:5) %>% 
+  set_background_color(1:2, 1, "red") %>% 
+  set_text_color(2:3, 1:2, "green")
 ```
