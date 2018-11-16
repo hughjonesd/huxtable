@@ -36,7 +36,6 @@ test_render <- function(path, format) {
   expect_error(output <- rmarkdown::render(path,
           output_format     = format,
           quiet             = TRUE,
-          run_pandoc        = FALSE,
           output_dir        = "temp-artefacts",
           intermediates_dir = "temp-artefacts"
         ),
