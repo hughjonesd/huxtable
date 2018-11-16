@@ -34,8 +34,10 @@ variations <- expand.grid(
   valign            = c("top", "middle", "bottom"),
   wrap              = c(TRUE, FALSE),
   stringsAsFactors  = FALSE,
-  KEEP.OUT.ATTRS   = FALSE
+  KEEP.OUT.ATTRS    = FALSE
 )
+
+variations$left_border[variations$left_border_style == "double"] <- 3
 
 hx_raw <- hux(
   int  = 1:3,
