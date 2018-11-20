@@ -90,8 +90,8 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
   .data <- as.data.frame(.data)
 
   result <- switch(.Generic,
-          "mutate"    = mutate(.data, ...),
-          "transmute" = transmute(.data, ...),
+          "mutate"    = dplyr::mutate(.data, ...),
+          "transmute" = dplyr::transmute(.data, ...),
           stop("Unrecognized function ", .Generic)
         )
   result <- as_hux(result, autoformat = FALSE)
