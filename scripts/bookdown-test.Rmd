@@ -16,7 +16,7 @@ library(tufte)
 library(dplyr)
 library(huxtable)
 # invalidate cache when the tufte version changes
-knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'), echo = FALSE)
 options(htmltools.dir.version = FALSE)
 if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) stop("guessed output is ", x)
 ```
