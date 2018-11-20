@@ -43,6 +43,7 @@ test_that("mutate, mutate_ and transmute work", {
 
   ht3 <- dplyr::mutate(ht, x = a + b, copy_cell_props = FALSE)
   expect_equivalent(bold(ht3)[, 3], c(FALSE, FALSE, FALSE))
+  expect_identical(names(ht3), c("a", "b", "x"))
 
   ht4 <- dplyr::transmute(ht, x = a + b, a = a + b)
   expect_equivalent(ht4$x, c(2, 4, 6))

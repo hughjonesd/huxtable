@@ -8,6 +8,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
   has no `tidy()` or `glance()` method.
 * Bugfix: huxtables had option clash when `echo = TRUE` in Rmd pdf_document format.
 * Bugfix: `caption()` and `height()` weren't playing nicely.
+* Bugfix: `mutate(..., copy_cell_props = FALSE)` was adding a column named `copy_cell_props`.
 * Enhancement: when `stars` is `NULL` in `huxreg`, don't print a note by default.
 
 # huxtable 4.3.0

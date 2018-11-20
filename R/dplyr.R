@@ -89,7 +89,11 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
   ht <- .data
   .data <- as.data.frame(.data)
 
-  result <- NextMethod()
+  result <- switch(.Generic,
+          "mutate"    = mutate(.data, ...),
+          "transmute" = transmute(.data, ...),
+          stop("Unrecognized function ", .Generic)
+        )
   result <- as_hux(result, autoformat = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
@@ -110,6 +114,7 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
 
 transmute_.huxtable <- mutate_.huxtable
 
+transmute.huxtable <- mutate.huxtable
 
 arrange_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
@@ -122,9 +127,6 @@ arrange_.huxtable <- function (.data, ..., .dots) {
 
 arrange.huxtable <- function(.data, ...) {}
 body(arrange.huxtable) <- body(arrange_.huxtable)
-
-
-transmute.huxtable <- mutate.huxtable
 
 
 slice_.huxtable <- function (.data, ..., .dots) {
