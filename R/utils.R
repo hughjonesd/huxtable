@@ -22,20 +22,6 @@ blank_where <- function (text, cond) {
 }
 
 
-recall_ltrb <- function(ht, template) {
-  call <- sys.call(sys.parent(1))
-  call_names <- parse(text = paste0("huxtable::",
-        sprintf(template, c("left", "top", "right", "bottom"))))
-  for (cn in call_names) {
-    call[[1]] <- cn
-    call[[2]] <- quote(ht)
-    ht <- eval(call, list(ht = ht), parent.frame(2L)) # = sys.frame(sys.parent(1)) i.e. caller of orig
-  }
-
-  ht
-}
-
-
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
 register_s3_method <- function (pkg, generic, class = "huxtable") {
   assert_that(is.string(pkg), is.string(generic))

@@ -151,23 +151,47 @@ test_that("set_all_* functions work when huxtable is not attached", {
 })
 
 
-test_that("set_outer_borders", {
+test_that("set_outer_*", {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
-  check_borders <- function (ht) {
-    expect_equivalent(top_border(ht), matrix(c(0, 0, 0, 0, 1, 0, 0, 1, 0)), 3, 3)
-    expect_equivalent(bottom_border(ht), matrix(c(0, 0, 0, 0, 0, 1, 0, 0, 1)), 3, 3)
-    expect_equivalent(left_border(ht), matrix(c(0, 0, 0, 0, 1, 1, 0, 0, 0)), 3, 3)
-    expect_equivalent(right_border(ht), matrix(c(0, 0, 0, 0, 0, 0, 0, 1, 1)), 3, 3)
+  check_borders <- function (ht, suffix, un, set) {
+    funcs <- paste0(c("top", "bottom", "left", "right"), sprintf("_border%s", suffix))
+    funcs <- mget(funcs, inherits = TRUE)
+    expect_equivalent(funcs[[1]](ht), matrix(c(un, un, un, un, set, un, un, set, un), 3, 3))
+    expect_equivalent(funcs[[2]](ht), matrix(c(un, un, un, un, un, set, un, un, set), 3, 3))
+    expect_equivalent(funcs[[3]](ht), matrix(c(un, un, un, un, set, set, un, un, un), 3, 3))
+    expect_equivalent(funcs[[4]](ht), matrix(c(un, un, un, un, un, un, un, set, set), 3, 3))
   }
+
   ht2 <- set_outer_borders(ht, 2:3, 2:3, 1)
-  check_borders(ht2)
+  check_borders(ht2, "", 0, 1)
   ht3 <- set_outer_borders(ht, c(F, T, T), c(F, T, T), 1)
-  check_borders(ht3)
+  check_borders(ht3, "", 0, 1)
   ht4 <- set_outer_borders(ht, 2:3, c("b", "c"), 1)
-  check_borders(ht4)
-  ht5 <- set_outer_borders(ht, 2:3, tidyselect::matches("b|c"), 1) # testthat has a `matches` function
-  check_borders(ht5)
+  check_borders(ht4, "", 0, 1)
+  # NB: testthat has a `matches` function
+  ht5 <- set_outer_borders(ht, 2:3, tidyselect::matches("b|c"), 1)
+  check_borders(ht5, "", 0, 1)
+
+  ht2 <- set_outer_border_colors(ht, 2:3, 2:3, "red")
+  check_borders(ht2, "_color", NA, "red")
+  ht3 <- set_outer_border_colors(ht, c(F, T, T), c(F, T, T), "red")
+  check_borders(ht3, "_color", NA, "red")
+  ht4 <- set_outer_border_colors(ht, 2:3, c("b", "c"), "red")
+  check_borders(ht4, "_color", NA, "red")
+  # NB: testthat has a `matches` function
+  ht5 <- set_outer_border_colors(ht, 2:3, tidyselect::matches("b|c"), "red")
+  check_borders(ht5, "_color", NA, "red")
+
+  ht2 <- set_outer_border_styles(ht, 2:3, 2:3, "double")
+  check_borders(ht2, "_style", "solid", "double")
+  ht3 <- set_outer_border_styles(ht, c(F, T, T), c(F, T, T), "double")
+  check_borders(ht3, "_style", "solid", "double")
+  ht4 <- set_outer_border_styles(ht, 2:3, c("b", "c"), "double")
+  check_borders(ht4, "_style", "solid", "double")
+  # NB: testthat has a `matches` function
+  ht5 <- set_outer_border_styles(ht, 2:3, tidyselect::matches("b|c"), "double")
+  check_borders(ht5, "_style", "solid", "double")
 })
 
 
