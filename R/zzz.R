@@ -96,14 +96,11 @@ NULL
 #'
 #' * How do I refer to tables in bookdown?
 #'
-#' Here's an example:
-#'
+#' As of version 4.3.0, this is handled automatically for you. Just
+#' set the label using [label()], then in markdown text do e.g.:
+#' 
 #' ```
-#' # In R code:
-#' caption(jams) <- "(#tab:jamtable) Some jams"
-#'
-#' # In markdown text:
-#' Jam prices are displayed in \\@ref(tab:jamtable).
+#' \\@ref(tab:my-table-label).
 #'
 #' ```
 #'

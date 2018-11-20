@@ -46,11 +46,8 @@ caption itself. For example to have a bold caption in HTML, you might do somethi
 \item How do I refer to tables in bookdown?
 }
 
-Here's an example:\preformatted{# In R code:
-caption(jams) <- "(#tab:jamtable) Some jams"
-
-# In markdown text:
-Jam prices are displayed in \\@ref(tab:jamtable).
+As of version 4.3.0, this is handled automatically for you. Just
+set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\@ref(tab:my-table-label).
 
 }
 \itemize{
