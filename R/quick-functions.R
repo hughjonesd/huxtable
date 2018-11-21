@@ -83,7 +83,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   if (requireNamespace("tinytex", quietly = TRUE)) {
     tinytex::latexmk(latex_file, pdf_file = file)
     output_file <- file
-  } else
+  } else {
     tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
     output_file <- sub("\\.tex$", ".pdf", basename(latex_file))
   }
