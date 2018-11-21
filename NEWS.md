@@ -11,6 +11,7 @@ increments reflect backwards-incompatible API changes, not necessarily big chang
 * Bugfix: `caption()` and `height()` weren't playing nicely.
 * Bugfix: `mutate(..., copy_cell_props = FALSE)` was adding a column named `copy_cell_props`.
 * Enhancement: when `stars` is `NULL` in `huxreg`, don't print a note by default.
+* Enhancement: use `tinytex` when available, allowing autoinstallation of latex packages.
 
 # huxtable 4.3.0
 
