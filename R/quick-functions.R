@@ -80,16 +80,22 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     finally = {sink()}
   )
 
-  tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
-  pdf_file <- sub("\\.tex$", ".pdf", basename(latex_file))
-  if (! file.exists(pdf_file)) stop("Could not find texi2pdf output file '", pdf_file, "'")
+  if (requireNamespace("tinytex", quietly = TRUE)) {
+    tinytex::latexmk(latex_file, pdf_file = file)
+    output_file <- file
+  } else
+    tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
+    output_file <- sub("\\.tex$", ".pdf", basename(latex_file))
+  }
+  if (! file.exists(output_file)) stop("Could not find pdf output file '", pdf_file, "'")
   if (! file.remove(latex_file)) warning("Could not remove intermediate TeX file '", latex_file, "'")
-  # we overwrite existing files. If no explicit `file` argument was specified, confirm() has
-  # already checked if this is OK, or has failed in non-interactive sessions:
-  if (file.copy(pdf_file, file, overwrite = TRUE)) {
-    file.remove(pdf_file)
-  } else {
-    stop("Could not copy pdf file to ", file, ". The pdf file remains at '", pdf_file, "'")
+
+  if (output_file != file) {
+    if (file.copy(output_file, file, overwrite = TRUE)) {
+      file.remove(output_file)
+    } else {
+      stop("Could not copy pdf file to ", file, ". The pdf file remains at '", pdf_file, "'")
+    }
   }
 
   if (open) auto_open(file)
