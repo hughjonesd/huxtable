@@ -59,6 +59,14 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     c(sprintf("\\resizebox*{!}{%s}{", height), "}")
   }
 
+  table_env <- switch(position(ht),
+          "wrapleft"  = c("\\begin{wraptable}{l}{%s}", "\\end{wraptable}"),
+          "wrapright" = c("\\begin{wraptable}{r}{%s}", "\\end{wraptable}"),
+          c(sprintf("\\begin{table}[%s]", latex_float(ht)), "\\end{table}")
+        )
+  table_env[1] <- sprintf(table_env[1], latex_table_width(ht)) # no-op except for wraptable
+  table_env <- paste0("\n", table_env, "\n")
+
   cap <- if (is.na(cap <- make_caption(ht, "latex"))) "" else {
     hpos <- get_caption_hpos(ht)
     cap_setup <- switch(hpos,
@@ -72,15 +80,17 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   if (nzchar(lab) && ! nzchar(cap)) warning("No caption set: LaTeX table labels may not work as expected.")
 
   pos_text <- switch(position(ht),
+    wrapleft = ,
     left   = c("\\begin{raggedright}", "\\par\\end{raggedright}\n"),
     center = c("\\centering",   "\n"),
+    wrapright = ,
     right  = c("\\begin{raggedleft}",  "\\par\\end{raggedleft}\n")
   )
 
   res <- if (grepl("top", caption_pos(ht))) paste0(cap, lab, tabular) else paste0(tabular, cap, lab)
   res <- paste0(
           commands,
-          sprintf("\n\\begin{table}[%s]\n",latex_float(ht)),
+          table_env[1],
           pos_text[1],
           resize_box[1],
           "\n\\begin{threeparttable}\n",
@@ -88,7 +98,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           "\\end{threeparttable}\n",
           resize_box[2],
           pos_text[2],
-          "\n\\end{table}\n"
+          table_env[2]
         )
 
   return(maybe_markdown_fence(res))
@@ -399,8 +409,7 @@ build_tabular <- function(ht) {
   tenv <- tabular_environment(ht)
   tenv_tex <- paste0(c("\\begin{", "\\end{"), tenv, "}")
   width_spec <- if (tenv %in% c("tabularx", "tabular*", "tabulary")) {
-    tw <- width(ht)
-    if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
+    tw <- latex_table_width(ht)
     paste0("{", tw, "}")
   } else {
     ""
@@ -414,6 +423,13 @@ build_tabular <- function(ht) {
 
   res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
   return(res)
+}
+
+
+latex_table_width <- function (ht) {
+  tw <- width(ht)
+  if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
+  return(tw)
 }
 
 

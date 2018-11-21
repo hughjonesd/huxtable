@@ -13,7 +13,7 @@ set_position(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector which may be "left", "center" or "right". Set to \code{NA} to reset to the default, which is
+\item{value}{A length-one character vector which may be "left", "center", "right", "wrapleft" or "wrapright". Set to \code{NA} to reset to the default, which is
 \code{"center"}.}
 }
 \value{
@@ -24,6 +24,9 @@ For \code{set_position}, the modified huxtable.
 Functions to get or set the table-level \emph{table position} property of a huxtable.
 }
 \details{
+\code{"wrapleft"} and \code{"wrapright"} position the table to the left or right, and allow text to
+wrap around the table.
+
 If your tables are too far to the right under LaTeX, try setting their \code{\link[=width]{width()}}
 explicitly.
 }

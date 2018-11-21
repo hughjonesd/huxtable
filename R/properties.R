@@ -816,14 +816,18 @@ make_getter_setters("font", "cell", check_fun = is.character)
 #' @templateVar attr_name position
 #' @templateVar attr_desc Table position
 #' @templateVar value_param_desc
-#' A length-one character vector which may be "left", "center" or "right".
+#' A length-one character vector which may be "left", "center", "right", "wrapleft" or "wrapright".
 #' @details
+#' `"wrapleft"` and `"wrapright"` position the table to the left or right, and allow text to
+#' wrap around the table.
+#'
 #' If your tables are too far to the right under LaTeX, try setting their [width()]
 #' explicitly.
 #' @template getset-example
 #' @templateVar attr_val "right"
 NULL
-make_getter_setters("position", "table", check_values = c("left", "center", "centre", "right"),
+make_getter_setters("position", "table", check_values = c("left", "center", "centre", "right",
+      "wrapleft", "wrapright"),
       extra_code = value[value == "centre"] <- "center")
 
 #' @template getset-table

@@ -299,9 +299,18 @@ display_cells <- function (ht, all = TRUE, new_rowspan = rowspan(ht), new_colspa
 
 get_caption_hpos <- function (ht) {
   hpos <- sub(".*(left|center|right)", "\\1", caption_pos(ht))
-  if (! hpos %in% c("left", "center", "right")) hpos <- position(ht)
+  if (! hpos %in% c("left", "center", "right")) hpos <- position_no_wrap(ht)
 
   hpos
+}
+
+
+position_no_wrap <- function (ht) {
+  switch(position(ht),
+          "wrapleft"  = "left",
+          "wrapright" = "right",
+          position(ht)
+        )
 }
 
 

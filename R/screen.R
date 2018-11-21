@@ -135,7 +135,8 @@ to_screen.huxtable <- function (
   }
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c("left", "center", "right")
-    hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else position(ht)
+    hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else
+          position_no_wrap(ht)
     if (ncharw(cap) > max_width) cap <- strwrap(cap, max_width)
     cap <- paste0(str_pad(cap, hpos, ncol(charmat)), collapse = "\n")
     result <- if (grepl("top", caption_pos(ht))) paste0(cap, "\n", result) else paste0(result, "\n", cap)

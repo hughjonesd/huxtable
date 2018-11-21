@@ -185,7 +185,8 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   cellx_rows <- apply(cellx, 1, paste0, collapse = "\n")
   cell_content_rows <- apply(cells, 1, paste0, collapse = "\n")
 
-  row_align_map <- c("left" = "\\trql ", "center" = "\\trqc ", "right" = "\\trqr ")
+  row_align_map <- c("left" = "\\trql ", "center" = "\\trqc ", "right" = "\\trqr ",
+        "wrapleft" = "\\trql ", "wrapright" = "\\trqr ")
   row_align <- row_align_map[position(ht)]
 
   rh <- row_height(ht)
