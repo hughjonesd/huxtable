@@ -380,7 +380,7 @@ by_equal_groups <- function (n, values, ignore_na = TRUE) {
 #' @export
 #'
 #' @examples
-#' ht <- hux("The cat sat", "on the", "mat")
+#' ht <- hux(c("The cat sat", "on the", "mat"))
 #'
 #' map_bold(ht, by_regex("at" = TRUE))
 #' map_bold(ht, by_regex("a.*a" = TRUE))

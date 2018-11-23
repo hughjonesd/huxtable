@@ -24,7 +24,7 @@ A function for use in \code{map_***} functions.
 Map cells matching a string or regex to cell properties
 }
 \examples{
-ht <- hux("The cat sat", "on the", "mat")
+ht <- hux(c("The cat sat", "on the", "mat"))
 
 map_bold(ht, by_regex("at" = TRUE))
 map_bold(ht, by_regex("a.*a" = TRUE))
