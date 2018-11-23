@@ -259,20 +259,14 @@ end.rcode-->
 <div class="example" id="ex-condformat">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-library(psych)
-data(attitude)
-att_corr <- corr.test(as.matrix(attitude))
-
-as_hux(att_corr$r)                                                             %>%
-      set_background_color(where(att_corr$p < 0.05), 'yellow')                 %>%
-      set_background_color(where(att_corr$p < 0.01), 'red')                    %>%
-      set_text_color(where(att_corr$p < 0.01), 'white')                        %>%
-      set_background_color(where(row(att_corr$p) == col(att_corr$p)), 'white') %>%
-      huxtable::add_rownames(colname = '')                                     %>%
-      huxtable::add_colnames()                                                 %>%
-      set_all_borders(2)                                                       %>%
-      set_all_border_colors('black')                                           %>%
-      set_number_format(2)
+mtcars[1:5]                                                                           %>%
+      as_huxtable(add_colnames = TRUE, add_rownames = "Model")                        %>%
+      set_bold(1, everywhere, TRUE)                                                   %>%
+      set_all_borders(1)                                                              %>%
+      map_text_color(everywhere, "mpg",      by_colorspace("navy", "red", "yellow"))  %>%
+      map_background_color(everywhere, "hp", by_quantiles(0.8, c("white", "yellow"))) %>%
+      map_italic(everywhere, "Model",        by_regex("Merc.*" = TRUE))               %>%
+      head(12)
 
 end.rcode-->
 </div>
