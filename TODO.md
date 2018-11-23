@@ -7,7 +7,7 @@ TODO
 Priority changes
 ================
 
-* Add `set_outer_border_colors` etc.
+* Use XML pandoc blocks to print to powerpoint, word etc. 
 
 * Start using knitr::is_latex_output() etc. to detect output types
 
