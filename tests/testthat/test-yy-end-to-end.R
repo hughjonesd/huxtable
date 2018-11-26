@@ -138,11 +138,13 @@ test_that("Various Rmd files render without errors", {
 
 
 test_that("Bookdown files", {
+  skip_if_not_installed("dplyr")
   test_render("bookdown-test.Rmd", "bookdown::pdf_book")
   test_render("bookdown-test.Rmd", "bookdown::html_book", output_dir = ".") # workaround a bug
 })
 
 
 test_that("Word files", {
+  skip_if_not_installed("flextable")
   test_render("word-test.Rmd", "word_document")
 })
