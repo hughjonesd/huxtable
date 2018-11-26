@@ -132,6 +132,7 @@ test_that("Various Rmd files render without errors", {
   for (path in rmd_paths) {
     file.copy(path, ".", overwrite = TRUE) # copy here so we can get the placeins-header.tex
     test_render_all(basename(path))
+    file.remove(basename(path))
   }
 })
 
