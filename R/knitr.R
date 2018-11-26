@@ -21,12 +21,9 @@ knit_print.huxtable <- function (x, options, ...) {
   of <- getOption("huxtable.knitr_output_format", guess_knitr_output_format())
   call_name <- switch(of,
         latex  = "to_latex",
-        html4  = ,
         html   = "to_html",
-        docx   = {
-          warning("Falling back to markdown for Word document. Many features will not be supported.")
-          "to_md"
-        },
+        pptx   = ,
+        docx   = "as_flextable",
         md     = "to_md",
         screen = "to_screen",
         rtf    = "to_rtf",
@@ -34,26 +31,28 @@ knit_print.huxtable <- function (x, options, ...) {
         warning(glue::glue(
             'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
             'Set options("huxtable.knitr_output_format") manually to ',
-            '"latex", "html", "rtf", "md" or "screen".'))
+            '"latex", "html", "rtf", "docx", "pptx", "md" or "screen".'))
           "to_screen"
         })
 
-  res <- do.call(call_name, list(ht = x))
+  res <- do.call(call_name, list(x))
 
-  if (of == "latex") {
-    latex_deps <- report_latex_dependencies(quiet = TRUE)
-    tenv <- tabular_environment(x)
-    if (tenv %in% c("tabulary", "longtable")) latex_deps <- c(latex_deps,
-          list(rmarkdown::latex_dependency(tenv)))
-    return(knitr::asis_output(res, meta = latex_deps))
-  } else if (of == "html") {
-    res <- knitr::asis_output(htmlPreserve(res))
-    return(res)
-  } else if (of == "rtf") {
-    return(knitr::raw_output(res))
-  } else {
-    return(knitr::asis_output(res))
-  }
+  res <- switch(of,
+            latex = {
+              latex_deps <- report_latex_dependencies(quiet = TRUE)
+              tenv <- tabular_environment(x)
+              if (tenv %in% c("tabulary", "longtable")) latex_deps <- c(latex_deps,
+                list(rmarkdown::latex_dependency(tenv)))
+              knitr::asis_output(res, meta = latex_deps)
+            },
+            html = knitr::asis_output(htmlPreserve(res)),
+            rtf  = knitr::raw_output(res),
+            pptx = ,
+            docx = knitr::knit_print(res),
+            knitr::asis_output(res)
+          )
+
+  return(res)
 }
 
 # see zzz.R

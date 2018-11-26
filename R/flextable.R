@@ -22,9 +22,9 @@ as_FlexTable <- function(x, ...) {
 #' @return an object of class flextable.
 #'
 #' @details
-#'
-#' Note: you can't use flextable Word output within rmarkdown. Instead you have to write the Word file
-#' yourself. See [officer::read_docx()].
+#' With recent versions of "flextable" and Pandoc, huxtables can be automatically outputted
+#' from rmarkdown `word_document` and/or `powerpoint_presentation` documents. (Powerpoint
+#' presentations require pandoc version >= 2.4.0.)
 #'
 #' `as_FlexTable` is deprecated and calls `as_flextable` with a warning.
 #'

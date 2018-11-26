@@ -7,25 +7,21 @@ TODO
 Priority changes
 ================
 
-* Use XML pandoc blocks to print to powerpoint, word etc. 
-
-* Start using knitr::is_latex_output() etc. to detect output types
+* Start using knitr::is_latex_output() etc. to detect output types (?)
 
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
 
 * Prepare for broom 0.7.0 and generics:
-  - Create a new branch using git rebase --no-ff off the modelgenerics branch. (You need the
-    "reverted" merges.)
-  - Merge this branch into master.
-  - Strategy is: only Import: generics; suggest all other broom packages; in huxreg,
-    requireNamespace for all those packages, without warning if they aren't installed (expect maybe
+  - See tidy-generics branch
+  - Strategy is: only Import: generics; suggest other broom packages; in huxreg,
+    requireNamespace for all those packages, without warning if they aren't installed (except maybe
     broom itself?); then just call generics::tidy. This should automatically delegate to
-    packages that have registered a tidy method.
+    packages that have registered a tidy method. 
+  - Note that this requires broom > 0.5.0. At 0.5.0 you get problems
   - broom.mixed packages may have effects = "fixed" argument, but you could let the user do that
     with tidy_args
-  - Add broom.mixed dependency when it comes out.
 
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back

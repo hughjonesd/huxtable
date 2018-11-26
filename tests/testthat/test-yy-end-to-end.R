@@ -121,8 +121,6 @@ test_that("Various Rmd files render without errors", {
   for (path in rmd_paths) {
     test_render_all(path)
   }
-  test_render("bookdown-test.Rmd", "bookdown::pdf_book")
-  test_render("bookdown-test.Rmd", "bookdown::html_book", output_dir = ".") # workaround a bug
 
   # design-principles needs a CSV file, so we skip:
   rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd", "themes.Rmd")
@@ -135,4 +133,15 @@ test_that("Various Rmd files render without errors", {
     file.copy(path, ".", overwrite = TRUE) # copy here so we can get the placeins-header.tex
     test_render_all(basename(path))
   }
+})
+
+
+test_that("Bookdown files", {
+  test_render("bookdown-test.Rmd", "bookdown::pdf_book")
+  test_render("bookdown-test.Rmd", "bookdown::html_book", output_dir = ".") # workaround a bug
+})
+
+
+test_that("Word files", {
+  test_render("word-test.Rmd", "word_document")
 })

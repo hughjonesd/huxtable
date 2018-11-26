@@ -1,0 +1,14 @@
+---
+title: "Untitled"
+author: "David Hugh-Jones"
+date: "26/11/2018"
+output: word_document
+---
+
+```{r setup}
+library(huxtable)
+guess_knitr_output_format()
+hux(rnorm(5))
+```
+
+Hello.

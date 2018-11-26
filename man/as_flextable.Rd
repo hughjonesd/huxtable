@@ -27,8 +27,9 @@ an object of class flextable.
 Huxtables can be converted to \code{\link[flextable:flextable]{flextable::flextable()}} objects, for use in Word and Powerpoint documents.
 }
 \details{
-Note: you can't use flextable Word output within rmarkdown. Instead you have to write the Word file
-yourself. See \code{\link[officer:read_docx]{officer::read_docx()}}.
+With recent versions of "flextable" and Pandoc, huxtables can be automatically outputted
+from rmarkdown \code{word_document} and/or \code{powerpoint_presentation} documents. (Powerpoint
+presentations require pandoc version >= 2.4.0.)
 
 \code{as_FlexTable} is deprecated and calls \code{as_flextable} with a warning.
 
