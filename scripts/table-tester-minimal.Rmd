@@ -36,24 +36,10 @@ long <- 'A rather long row of text which goes on...'
 ```
 
 
-```{r, results="asis", eval=FALSE}
-# ht <- make()
-
-# it's not the caption.
-# it's not that to_latex is doing something bad: warning(htl) looks fine
-# it's not asis_output. You get the same problem with cat(to_latex(htl)) in results="asis" chunk
-# ht <- hux(1)
-# htl <- to_latex(ht)
-# # warning(htl)
-# cat(htl)
-```
-
 ```{r}
-# str(rmarkdown::metadata)
-knitr::asis_output("this", meta = report_latex_dependencies(quiet = TRUE))
-h <- hux(1) %>% set_caption("a caption") %>% set_width(0.2)
-h
-h
-# hux(1) %>% set_caption_pos("topleft")
+hux("Some text") %>% 
+      set_caption("a caption") %>% 
+      set_width(0.2)
+
 ```
 
