@@ -94,7 +94,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     if (file.copy(output_file, file, overwrite = TRUE)) {
       file.remove(output_file)
     } else {
-      stop("Could not copy pdf file to ", file, ". The pdf file remains at '", pdf_file, "'")
+      stop("Could not copy pdf file to ", file, ". The pdf file remains at '", output_file, "'")
     }
   }
 
