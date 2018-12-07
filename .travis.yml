@@ -3,6 +3,8 @@
 language: R
 sudo: false
 cache: packages
+before_install:
+  - tlmgr install threeparttable wrapfig
 r:
   - oldrel
   - release
@@ -11,11 +13,11 @@ env:
   - CACHE_VERSION=standard
 matrix:
   include:
-# check it can build without pandoc
+  # check it can build without pandoc
   - pandoc: false
     r: release
     name: no-pandoc-release
-# check it can build with latest github of important packages
+  # check it can build with latest github of important packages
   - r_github_packages:
     - tidyverse/dplyr
     - tidymodels/broom
@@ -31,7 +33,7 @@ matrix:
     name: github-packages-devel
     env:
       - CACHE_VERSION=github_packages
-# run tests without Suggested packages
+  # run tests without Suggested packages
   - install:
     - R -e 'install.packages(c("devtools", "testthat"))'
     - R -e 'devtools::install_deps(deps = c("Imports", "Depends", "LinkingTo"))'
