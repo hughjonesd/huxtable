@@ -227,10 +227,6 @@ test_that("set_contents works", {
   expect_equivalent(set_contents(ht, 2:3, 2, 3:2), hux(1:3, c(1, 3, 2)))
 
   ht <- hux(a = 1:3, b = 1:3)
-  expect_equivalent(set_contents(ht, 1, "a", 0), set_contents(ht, 1, 1, 0))
-  # dplyr::matches not testthat::matches
-  expect_equivalent(set_contents(ht, 1, dplyr::matches("b"), 0), set_contents(ht, 1, 2, 0))
-
   align(ht) <- "right"
   test_props_same <- function(ht2) expect_equivalent(align(ht2), align(ht))
   test_props_same(set_contents(ht, 1:6))
@@ -238,6 +234,11 @@ test_that("set_contents works", {
   test_props_same(set_contents(ht, 1, 1, 0))
   test_props_same(set_contents(ht, 1, 1, 0))
   test_props_same(set_contents(ht, 2:3, 2, 3:2))
+
+  expect_equivalent(set_contents(ht, 1, "a", 0), set_contents(ht, 1, 1, 0))
+  # dplyr::matches not testthat::matches
+  skip_if_not_installed("dplyr")
+  expect_equivalent(set_contents(ht, 1, dplyr::matches("b"), 0), set_contents(ht, 1, 2, 0))
 })
 
 test_that("merge_cells", {

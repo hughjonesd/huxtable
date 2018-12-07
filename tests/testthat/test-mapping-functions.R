@@ -150,15 +150,16 @@ test_that("ignore_na argument works", {
   f <- by_regex("e" = 1, ignore_na = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
 
-  f <- by_cases(TRUE ~ NA, ignore_na = TRUE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
-  f <- by_cases(TRUE ~ NA, ignore_na = FALSE)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
-
   always_na <- function (...) NA
   f <- by_function(always_na, ignore_na = TRUE)
   expect_equivalent(f(m, 1:2, 1:2, ct), ct)
   f <- by_function(always_na, ignore_na = FALSE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
+
+  skip_if_not_installed("dplyr")
+  f <- by_cases(TRUE ~ NA, ignore_na = TRUE)
+  expect_equivalent(f(m, 1:2, 1:2, ct), ct)
+  f <- by_cases(TRUE ~ NA, ignore_na = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA_character_, 2, 2))
 
   skip_if_not_installed("scales")
