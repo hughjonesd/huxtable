@@ -19,38 +19,6 @@
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-family: Arial;">
-
-<span style="color: rgb(255, 255, 255);"></span>
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-family: Arial;">
-
-h
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-family: Arial;">
-
-<span style="color: rgb(255, 255, 255);"></span>
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-family: Arial;">
-
-<span style="color: rgb(255, 255, 255);">u</span>
-
-</td>
-
-</tr>
-
-<tr>
-
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
@@ -59,7 +27,7 @@ h
 
 </td>
 
-<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
 
@@ -78,6 +46,34 @@ h
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: bold; font-family: Arial;">
+
+<span style="color: rgb(255, 255, 255);">h</span>
+
+</td>
+
+<td rowspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+u
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+</tr>
+
+<tr>
 
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
@@ -85,11 +81,27 @@ x
 
 </td>
 
-<td rowspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-family: Arial;">
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-family: Arial;">
 
 <span style="color: rgb(255, 255, 255);">t</span>
 
@@ -99,35 +111,15 @@ x
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-family: Arial;">
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-family: Arial;">
 
-<span style="color: rgb(255, 255, 255);"></span>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+<span style="color: rgb(255, 255, 255);">a</span>
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+<td rowspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
-
-</td>
-
-<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
-
-</td>
-
-</tr>
-
-<tr>
 
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-family: Arial;">
 
@@ -141,9 +133,17 @@ x
 
 </td>
 
+</tr>
+
+<tr>
+
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
-a
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-family: Arial;">
+
+<span style="color: rgb(255, 255, 255);"></span>
 
 </td>
 
@@ -151,7 +151,9 @@ a
 
 </td>
 
-<td rowspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-family: Arial;">
+
+<span style="color: rgb(255, 255, 255);"></span>
 
 </td>
 
@@ -165,6 +167,20 @@ b
 
 <tr>
 
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-family: Arial;">
+
+<span style="color: rgb(255, 255, 255);"></span>
+
+</td>
+
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
+
+</td>
+
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 l
@@ -173,19 +189,7 @@ l
 
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
-
 e
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-family: Arial;">
 
 </td>
 
@@ -217,8 +221,8 @@ formats, with a friendly, modern interface. Features include:
   - Table manipulation via standard R subsetting, or using `dplyr`.
   - Automatic formatting for knitr/rmarkdown documents.
   - `huxreg()` function for quick creation of regression tables.
-  - Output to HTML, LaTeX, RTF, and Microsoft Word, Excel, Powerpoint
-    and RTF, using the `officer` and `openxlsx` packages.
+  - Output to HTML, LaTeX, RTF, and Microsoft Word/Excel/Powerpoint,
+    using the `officer` and `openxlsx` packages.
   - Quick one-liners to print data frames into a new PDF, HTML page, RTF
     or Microsoft document.
   - Formatted table display in the R console, including borders, colour,
