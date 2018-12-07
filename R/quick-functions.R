@@ -87,7 +87,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
     output_file <- sub("\\.tex$", ".pdf", basename(latex_file))
   }
-  if (! file.exists(output_file)) stop("Could not find pdf output file '", pdf_file, "'")
+  if (! file.exists(output_file)) stop("Could not find pdf output file '", output_file, "'")
   if (! file.remove(latex_file)) warning("Could not remove intermediate TeX file '", latex_file, "'")
 
   if (output_file != file) {
