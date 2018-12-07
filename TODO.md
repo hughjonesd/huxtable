@@ -13,16 +13,6 @@ Priority changes
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
 
-* Prepare for broom 0.7.0 and generics:
-  - See tidy-generics branch
-  - Strategy is: only Import: generics; suggest other broom packages; in huxreg,
-    requireNamespace for all those packages, without warning if they aren't installed (except maybe
-    broom itself?); then just call generics::tidy. This should automatically delegate to
-    packages that have registered a tidy method. 
-  - Note that this requires broom > 0.5.0. At 0.5.0 you get problems
-  - broom.mixed packages may have effects = "fixed" argument, but you could let the user do that
-    with tidy_args
-
 * `huxtablereg` function in `texreg` package
   - Waiting for texreg guys to get back
 
