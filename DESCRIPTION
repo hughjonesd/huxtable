@@ -20,7 +20,7 @@ URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
-    broom,
+    generics,
     glue,
     memoise,
     rlang,
@@ -31,6 +31,8 @@ Imports:
     utils
 Suggests:
     bookdown,
+    broom (>= 0.5.1),
+    broom.mixed,
     covr,
     crayon,
     devtools,

@@ -3,6 +3,17 @@
 #' @importFrom stats nobs
 NULL
 
+
+#' @importFrom generics tidy
+#' @export
+generics::tidy
+
+
+#' @importFrom generics glance
+#' @export
+generics::glance
+
+
 #' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models. Names will be used as column headings.
@@ -30,9 +41,10 @@ NULL
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details
-#' Models must have a [broom::tidy()] method defined, which should return "term", "estimate", "std.error",
-#' "statistic" and "p.value". If the `tidy` method does not have a `conf.int` option, `huxreg` will
-#' calculate confidence intervals itself, using a normal approximation.
+#' Models must have a [generics::tidy()] method defined, which should return "term", "estimate",
+#' "std.error", "statistic" and "p.value". The `"broom"` package provides methods for many model
+#' objects. If the `tidy` method does not have a `conf.int` option,
+#' `huxreg` will calculate confidence intervals itself, using a normal approximation.
 #'
 #' If `...` has names or contains a single named list, the names will be used for column headings.
 #' Otherwise column headings will be automatically created.
@@ -41,7 +53,7 @@ NULL
 #' different values of `coef` have the same name, the corresponding rows will be merged in the
 #' output.
 #'
-#' `statistics` should be column names from [broom::glance()]. You can also use `"nobs"` for the
+#' `statistics` should be column names from [generics::glance()]. You can also use `"nobs"` for the
 #' number of observations. If `statistics` is `NULL` then all columns from `glance` will be used. To
 #' use no columns, set `statistics = character(0)`.
 #'
@@ -61,6 +73,9 @@ NULL
 #' @export
 #'
 #' @examples
+#' if (! requireNamespace("broom")) {
+#'   stop("Please install 'broom' to run this example.")
+#' }
 #'
 #' lm1 <- lm(mpg ~ cyl, mtcars)
 #' lm2 <- lm(mpg ~ cyl + hp, mtcars)
@@ -88,8 +103,13 @@ huxreg <- function (
         coefs           = NULL,
         omit_coefs      = NULL
       ) {
+  requireNamespace("broom", quietly = TRUE)
+  requireNamespace("broom.mixed", quietly = TRUE)
+  if (utils::packageVersion("broom") < package_version("0.5.1")) {
+    warning("`huxreg` requires `broom` version 0.5.1 or greater.")
+  }
+
   # prepare parameters
-  assert_package("huxreg", "broom")
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
@@ -111,7 +131,7 @@ huxreg <- function (
       args$conf.int <- TRUE
       args$conf.level <- ci_level
     }
-    do.call(broom::tidy, args)
+    do.call(tidy, args)
   }
   tidy_with_ci <- function (n) {
     if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
@@ -202,7 +222,7 @@ huxreg <- function (
 
   # create list of summary statistics
   all_sumstats <- lapply(models, function(m) {
-    bg <- try(broom::glance(m), silent = TRUE)
+    bg <- try(glance(m), silent = TRUE)
     bg <- if (inherits(bg, "try-error")) {
       warning("No `glance` method for model of class ", class(m)[1])
       NULL
@@ -306,20 +326,13 @@ has_builtin_ci <- function (x) {
   all(c("conf.int", "conf.level") %in% argnames)
 }
 
-#' @importFrom broom tidy
-#' @export
-broom::tidy
-
-#' @importFrom broom glance
-#' @export
-broom::glance
 
 #' Override a model's `tidy` output
 #'
 #' Use `tidy_override` to provide your own p values, confidence intervals
 #' etc. for a model.
 #'
-#' @param x A model with methods defined for [broom::tidy()] and/or [broom::glance()].
+#' @param x A model with methods defined for [generics::tidy()] and/or [generics::glance()].
 #' @param ... In `tidy_override`, columns of statistics to replace `tidy` output. In
 #'   `tidy` and `glance` methods, arguments passed on to the underlying model.
 #' @param glance A list of summary statistics for `glance`.
@@ -359,9 +372,7 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
 #' @export
 #' @rdname tidy_override
 tidy.tidy_override <- function (x, ...) {
-  assert_package("tidy.tidy_override", "broom")
-
-  tidied <- try(broom::tidy(x$model, ...), silent = TRUE)
+  tidied <- try(tidy(x$model, ...), silent = TRUE)
   if (inherits(tidied, "try-error")) tidied <- data.frame()[seq_along(x$tidy_cols[[1]]), ]
   for (cn in names(x$tidy_cols)) {
     if (! x$extend && ! cn %in% names(tidied)) stop(glue::glue(
@@ -375,15 +386,15 @@ tidy.tidy_override <- function (x, ...) {
 #' @export
 #' @rdname tidy_override
 glance.tidy_override <- function (x, ...) {
-  assert_package("tidy.tidy_override", "broom")
-
-  sumstats <- try(broom::glance(x$model, ...), silent = TRUE)
+  sumstats <- try(glance(x$model, ...), silent = TRUE)
   if (inherits(sumstats, "try-error")) sumstats <- data.frame()[1, ] # 1 row no cols
+
   for (elem in names(x$glance_elems)) {
     if (! x$extend && ! elem %in% names(sumstats)) stop(glue::glue(
           "Element \"{elem}\" not found in results of `glance()`"))
     sumstats[[elem]] <- x$glance_elems[[elem]]
   }
+
   return(sumstats)
 }
 

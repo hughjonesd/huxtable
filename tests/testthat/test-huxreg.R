@@ -190,7 +190,7 @@ test_that("huxreg column names are legitimate", {
 })
 
 
-test_that("can pass broom::tidy arguments to huxreg", {
+test_that("can pass generics::tidy arguments to huxreg", {
   lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
   glm1 <- glm(I(Sepal.Width > 3) ~ Sepal.Length, data = iris, family = binomial)
   expect_silent(huxreg(glm1, tidy_args = list(exponentiate = TRUE), statistics = "nobs"))
@@ -201,6 +201,7 @@ test_that("can pass broom::tidy arguments to huxreg", {
 
 test_that("tidy_override", {
   skip_if_not_installed("broom")
+  library(broom)
 
   lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
 
