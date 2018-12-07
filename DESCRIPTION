@@ -31,7 +31,7 @@ Imports:
     utils
 Suggests:
     bookdown,
-    broom,
+    broom (>= 0.5.1),
     broom.mixed,
     covr,
     crayon,

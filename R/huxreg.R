@@ -105,6 +105,9 @@ huxreg <- function (
       ) {
   requireNamespace("broom", quietly = TRUE)
   requireNamespace("broom.mixed", quietly = TRUE)
+  if (utils::packageVersion("broom") < package_version("0.5.1")) {
+    warning("`huxreg` requires `broom` version 0.5.1 or greater.")
+  }
 
   # prepare parameters
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
