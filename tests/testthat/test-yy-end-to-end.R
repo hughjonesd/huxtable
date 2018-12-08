@@ -147,5 +147,6 @@ test_that("Bookdown files", {
 
 test_that("Word files", {
   skip_if_not_installed("flextable")
+  skip_if_not(rmarkdown::pandoc_available("2.0.0"))
   test_render("word-test.Rmd", "word_document")
 })
