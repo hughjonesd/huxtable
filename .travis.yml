@@ -4,7 +4,7 @@ language: R
 sudo: false
 cache: packages
 before_install:
-  - tlmgr install threeparttable wrapfig
+  - tlmgr install index threeparttable wrapfig
 r:
   - oldrel
   - release
