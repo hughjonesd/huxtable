@@ -1,5 +1,8 @@
 ^packrat/
 ^revdep/
+^\.github/
+^docs/
+^scripts/
 ^\.Rprofile$
 ^\.lintr$
 ^.*\.Rproj$
@@ -9,8 +12,6 @@
 ^\.travis\.yml$
 ^tests/testthat/example-rds$
 logo\.xcf
-^docs$
-^scripts
 ^build-cran.R$
 ^_pkgdown.yml$
 ^build-website.R$
