@@ -5,11 +5,14 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 # huxtable 4.3.0.9000
 
 * Huxtables can now be printed directly in Word documents and Powerpoint presentations,
-  thanks to the "flextable" package and recent versions of Pandoc. (Powerpoint printing
+  thanks to the `flextable` package and recent versions of Pandoc. (Powerpoint printing
   requires Pandoc >= 2.4.0.)
 * New "wrapleft" and "wrapright" options to `position()` allow text wrapping around tables.
 * New `set_outer_border_colors()` and `set_outer_border_styles()` functions, like
   `set_outer_borders()`.
+* Huxtable no longer requires the `broom` package, instead using the `generics` package. If you use
+  `huxreg()`, you will still need e.g. `broom` or `broom.mixed` to provide `tidy()` and `glance()`
+  methods for specific models.
 * Bugfix: `tidy.tidy_override()` and `glance.tidy_override()` should work even if underlying object
   has no `tidy()` or `glance()` method.
 * Bugfix: huxtables had option clash when `echo = TRUE` in Rmd pdf_document format.
