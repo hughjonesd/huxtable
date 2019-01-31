@@ -46,7 +46,8 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
     (ie if color/width changes), warn that lines will "step" down the page
 
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
-
+  - though the problem is having to keep to `options(screen)`, not the fact that it is an argument.
+  
 * Fix problem of different classes in padding, col_widths etc. (5.0)
   - Bring back is_a_number
   - Make everything a list-matrix
