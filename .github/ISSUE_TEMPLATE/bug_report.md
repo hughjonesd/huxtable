@@ -1,6 +1,10 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report to help us improve. **Not a bug or feature request? Please
+  use e.g. Stackoverflow.**
+title: ''
+labels: ''
+assignees: ''
 
 ---
 

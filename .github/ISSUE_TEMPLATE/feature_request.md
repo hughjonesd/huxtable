@@ -1,6 +1,10 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest an idea for this project. **Not a bug or feature request? Please use
+  e.g. Stackoverflow.**
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
