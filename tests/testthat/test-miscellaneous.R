@@ -94,8 +94,7 @@ test_that("check_latex_dependencies runs correctly", {
     expect_message(check_latex_dependencies(quiet = FALSE), regexp = "not found")
   })
 
-  ld <- report_latex_dependencies(quiet = TRUE)
-  ld <- vapply(ld, `[[`, character(1), "name")
+  ld <- tlmgr_packages()
   with_mock(
     `tinytex::tl_pkgs` = function (...) return(ld), {
       expect_true(check_latex_dependencies(quiet = TRUE))

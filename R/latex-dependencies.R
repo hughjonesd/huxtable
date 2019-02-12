@@ -81,9 +81,7 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 check_latex_dependencies <- function (quiet = FALSE) {
   assert_that(is.flag(quiet))
 
-  ld <- report_latex_dependencies(quiet = TRUE)
-  ld <- vapply(ld, `[[`, character(1), "name")
-  ld <- setdiff(ld, c("graphicx", "calc", "array"))
+  ld <- tlmgr_packages()
   if (requireNamespace("tinytex", quietly = TRUE)) {
     pkgs <- tinytex::tl_pkgs()
   } else {
@@ -119,9 +117,7 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #'   install_latex_dependencies()
 #' }
 install_latex_dependencies <- function () {
-  ld <- report_latex_dependencies(quiet = TRUE)
-  ld <- vapply(ld, `[[`, character(1), "name")
-  ld <- setdiff(ld, c("graphicx", "calc", "array"))
+  ld <- tlmgr_packages()
   message("Trying to install packages: ", paste(ld, collapse = ", "))
   message("If this fails, try running the following on the command line ",
     "(you may need admin permissions):")
@@ -133,4 +129,14 @@ install_latex_dependencies <- function () {
     message(paste("tlmgr", "install", ld))
     system2("tlmgr", c("install", ld)) == 0
   }
+}
+
+
+tlmgr_packages <- function () {
+  ld <- report_latex_dependencies(quiet = TRUE)
+  ld <- vapply(ld, `[[`, character(1), "name")
+  ld <- setdiff(ld, c("graphicx", "calc", "array", "hhline", "tabularx"))
+  ld <- c(ld, "tools")
+
+  return(ld)
 }

@@ -18,8 +18,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Bugfix: huxtables had option clash when `echo = TRUE` in Rmd pdf_document format.
 * Bugfix: `caption()` and `height()` weren't playing nicely.
 * Bugfix: `mutate(..., copy_cell_props = FALSE)` was adding a column named `copy_cell_props`.
+* Bugfix: `check_latex_dependencies` and `install_latex_dependencies` gave misleading errors.
 * Enhancement: when `stars` is `NULL` in `huxreg`, don't print a note by default.
 * Enhancement: use `tinytex` when available, allowing autoinstallation of latex packages.
+
 
 # huxtable 4.3.0
 
