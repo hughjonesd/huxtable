@@ -28,7 +28,6 @@ Imports:
     stringr (>= 1.2.0),
     tibble,
     tidyselect,
-    tools,
     utils
 Suggests:
     bookdown,
