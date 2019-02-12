@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 before_install:
   - tlmgr install index threeparttable wrapfig
-  - sudo apt-get install -y libmagick++-dev
+  - sudo apt-get install -y libmagick++-dev texinfo
 r:
   - oldrel
   - release
