@@ -544,17 +544,6 @@ car_ht <- rbind(c("List of cars", "", "", "", ""), car_ht)
 car_ht <- merge_cells(car_ht, 1, 1:5)
 align(car_ht)[1, 1] <- "center"
 
-# a little more formatting:
-
-# car_ht <- set_all_padding(car_ht, 2)
-# car_ht <- set_all_borders(car_ht, 1)
-# valign(car_ht)[1,] <- "top"
-# col_width(car_ht) <- c(.4 , .3 , .1, .1, .1)
-# number_format(car_ht)[, 4:5] <- 0
-# bold(car_ht)[1:2, ] <- TRUE
-# bold(car_ht)[, 1] <- TRUE
-# if (is_latex) font_size(car_ht) <- 10
-
 car_ht <- theme_plain(car_ht)
 right_border(car_ht)[1, 1] <- 0.4
 bottom_border(car_ht)[21, 1] <- 0.4
