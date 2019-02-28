@@ -33,8 +33,11 @@ for (f in list.files('vignettes')) {
 # Run R CMD check ----------------------------------------------------------------------------------
 
 # this automatically builds the package
-chk <- devtools::check(env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
-      document = FALSE, check_version = TRUE)
+chk <- devtools::check(
+        env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
+        document = FALSE,
+        remote   = TRUE
+      )
 if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
   cat('\n\nR CMD CHECK errors:\n')
   cat(chk$errors)
