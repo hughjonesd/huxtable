@@ -82,18 +82,19 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-07}
+    \date{2019-03-04}
 
 \usepackage{array}
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
-\usepackage[table]{xcolor}
+\usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{hhline}
 \usepackage{calc}
 \usepackage{tabularx}
 \usepackage{threeparttable}
+\usepackage{wrapfig}
 
 \begin{document}
 \maketitle
@@ -160,11 +161,11 @@ is produced with huxtable, of course ;-)
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[h]
-\begin{raggedright}
+\begin{raggedright}\resizebox*{!}{0.95\textheight}{
 \begin{threeparttable}
 \captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 1}
-\resizebox*{!}{0.95\textheight}{\begin{tabularx}{0.5\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
+\begin{tabularx}{0.5\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
 
 
 \hhline{}
@@ -710,8 +711,8 @@ is produced with huxtable, of course ;-)
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
-\end{tabularx}}\end{threeparttable}
-\par\end{raggedright}
+\end{tabularx}\end{threeparttable}
+}\par\end{raggedright}
 
 \end{table}
  
@@ -723,11 +724,11 @@ is produced with huxtable, of course ;-)
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[h]
-\begin{raggedright}
+\begin{raggedright}\resizebox*{!}{0.95\textheight}{
 \begin{threeparttable}
 \captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 2}
-\resizebox*{!}{0.95\textheight}{\begin{tabularx}{0.5\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
+\begin{tabularx}{0.5\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
 
 
 \hhline{}
@@ -1396,8 +1397,8 @@ is produced with huxtable, of course ;-)
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
-\end{tabularx}}\end{threeparttable}
-\par\end{raggedright}
+\end{tabularx}\end{threeparttable}
+}\par\end{raggedright}
 
 \end{table}
  

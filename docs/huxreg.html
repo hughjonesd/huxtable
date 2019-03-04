@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2018-11-07" />
+<meta name="date" content="2019-03-04" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -309,7 +309,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2018-11-07</em></h4>
+<h4 class="date"><em>2019-03-04</em></h4>
 
 </div>
 
@@ -319,14 +319,14 @@ $(document).ready(function () {
 <p>From version 0.2, huxtable includes the function <code>huxreg</code> to build a table of regressions.</p>
 <p><code>huxreg</code> can be called with a list of models. These models can be of any class which has a <code>tidy</code> method defined in the <a href="https://cran.r-project.org/?package=broom">broom</a> package. The method should return a list of regression coefficients with names <code>term</code>, <code>estimate</code>, <code>std.error</code> and <code>p.value</code>. That covers most standard regression packages.</p>
 <p>Let’s start by running some regressions to predict a diamond’s price.</p>
-<pre class="r"><code>data(diamonds, package = &#39;ggplot2&#39;)
+<pre class="r"><code>data(diamonds, package = 'ggplot2')
 
 lm1 &lt;- lm(price ~ carat + depth, diamonds)
 lm2 &lt;- lm(price ~ depth + factor(color, ordered = FALSE), diamonds)
 lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
 <p>Now, we call <code>huxreg</code> to display the regression output side by side.</p>
 <pre class="r"><code>huxreg(lm1, lm2, lm3)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -472,11 +472,11 @@ lm3 &lt;- lm(log(price) ~ carat + depth, diamonds)</code></pre>
 
 <p>The basic output includes estimates, standard errors and summary statistics.</p>
 <p>Some of those variable names are hard to read. We can change them by specifying a named list of variables in the <code>coefs</code> argument, like this:</p>
-<pre class="r"><code>color_names &lt;- paste0(&#39;factor(color, ordered = FALSE)&#39;, LETTERS[5:10])
-names(color_names) &lt;- paste(&#39;Color:&#39;, LETTERS[5:10])
+<pre class="r"><code>color_names &lt;- paste0('factor(color, ordered = FALSE)', LETTERS[5:10])
+names(color_names) &lt;- paste('Color:', LETTERS[5:10])
 
-huxreg(lm1, lm2, lm3, coefs = c(&#39;Carat&#39; = &#39;carat&#39;, &#39;Depth&#39; = &#39;depth&#39;, color_names))</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+huxreg(lm1, lm2, lm3, coefs = c('Carat' = 'carat', 'Depth' = 'depth', color_names))</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -610,9 +610,9 @@ huxreg(lm1, lm2, lm3, coefs = c(&#39;Carat&#39; = &#39;carat&#39;, &#39;Depth&#3
 
 <p>Alternatively, since the output from <code>huxreg</code> is just a huxtable, we could just edit its contents directly before we print it:</p>
 <pre class="r"><code>diamond_regs &lt;- huxreg(lm1, lm2, lm3)
-diamond_regs[seq(8, 18, 2), 1] &lt;- paste(&#39;Color:&#39;, LETTERS[5:10])
+diamond_regs[seq(8, 18, 2), 1] &lt;- paste('Color:', LETTERS[5:10])
 diamond_regs</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -764,8 +764,8 @@ diamond_regs                                                         %&gt;%
       set_font_size(final(), 1, 9)                                   %&gt;% 
       set_bold(final(), 1, FALSE)                                    %&gt;%
       set_top_border(final(), 1, 1)                                  %&gt;%
-      set_caption(&#39;Linear regressions of diamond prices&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+      set_caption('Linear regressions of diamond prices')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <caption style="caption-side: top; text-align: center;">Linear regressions of diamond prices</caption><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242); font-weight: bold;">(1)</td>
@@ -909,9 +909,9 @@ diamond_regs                                                         %&gt;%
 </tr>
 </table>
 
-<p>By default, standard errors are shown below coefficient estimates. To display them in a column to the right, use <code>error_pos = &#39;right&#39;</code>:</p>
-<pre class="r"><code>huxreg(lm1, lm3, error_pos = &#39;right&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<p>By default, standard errors are shown below coefficient estimates. To display them in a column to the right, use <code>error_pos = 'right'</code>:</p>
+<pre class="r"><code>huxreg(lm1, lm3, error_pos = 'right')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -972,9 +972,9 @@ diamond_regs                                                         %&gt;%
 </table>
 
 <p>This will give column headings a column span of 2.</p>
-<p>To display standard errors in the same cell as estimates, use <code>error_pos = &#39;same&#39;</code>:</p>
-<pre class="r"><code>huxreg(lm1, lm3, error_pos = &#39;same&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<p>To display standard errors in the same cell as estimates, use <code>error_pos = 'same'</code>:</p>
+<pre class="r"><code>huxreg(lm1, lm3, error_pos = 'same')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1021,8 +1021,8 @@ diamond_regs                                                         %&gt;%
 </table>
 
 <p>You can change the default column headings by giving names to your models:</p>
-<pre class="r"><code>huxreg(&#39;Price&#39; = lm1, &#39;Log price&#39; = lm3)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg('Price' = lm1, 'Log price' = lm3)</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">Price</td>
@@ -1085,7 +1085,7 @@ diamond_regs                                                         %&gt;%
 
 <p>To display a particular row of summary statistics, use the <code>statistics</code> parameter. This should be a character vector. Valid values are anything returned from your models by <code>broom::glance</code>. Another valid value is <code>&quot;nobs&quot;</code>, which returns the number of observations from the regression. If the <code>statistics</code> vector has names, these will be used for row headings:</p>
 <pre class="r"><code>broom::glance(lm1)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%; margin-right: auto;  ">
 <col><col><col><col><col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">r.squared</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">adj.r.squared</td>
@@ -1114,9 +1114,9 @@ diamond_regs                                                         %&gt;%
 </tr>
 </table>
 
-<pre class="r"><code>huxreg(lm1, lm3, statistics = c(&#39;# observations&#39; = &#39;nobs&#39;, &#39;R squared&#39; = &#39;r.squared&#39;, &#39;F statistic&#39; = &#39;statistic&#39;,
-  &#39;P value&#39; = &#39;p.value&#39;))</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
+  'P value' = 'p.value'))</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1179,7 +1179,7 @@ diamond_regs                                                         %&gt;%
 
 <p>By default, <code>huxreg</code> displays significance stars. You can alter the symbols used and significance levels with the <code>stars</code> parameter, or set <code>stars = NULL</code> to turn off significance stars completely.</p>
 <pre class="r"><code>huxreg(lm1, lm3, stars = c(`*` = 0.1, `**` = 0.05, `***` = 0.01)) # a little boastful?</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1241,7 +1241,7 @@ diamond_regs                                                         %&gt;%
 </table>
 
 <pre class="r"><code>huxreg(lm1, lm3, stars = NULL) </code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1297,14 +1297,11 @@ diamond_regs                                                         %&gt;%
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt; padding: 4pt 4pt 4pt 4pt;">944984.882&nbsp;</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt; padding: 4pt 4pt 4pt 4pt;">53243.298&nbsp;</td>
 </tr>
-<tr>
-<td colspan="3" style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">.</td>
-</tr>
 </table>
 
 <p>You aren’t limited to displaying standard errors of the estimates. If you prefer, you can display t statistics or p values, using the <code>error_format</code> option. Any column from <code>tidy</code> can be used by putting it in curly brackets:</p>
-<pre class="r"><code>huxreg(lm1, lm3, error_format = &#39;({statistic})&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg(lm1, lm3, error_format = '({statistic})')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1365,8 +1362,8 @@ diamond_regs                                                         %&gt;%
 </tr>
 </table>
 
-<pre class="r"><code>huxreg(lm1, lm3, error_format = &#39;({p.value})&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg(lm1, lm3, error_format = '({p.value})')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1428,8 +1425,8 @@ diamond_regs                                                         %&gt;%
 </table>
 
 <p>Or you can display confidence intervals. Use <code>ci_level</code> to set the confidence level for the interval, then use <code>{conf.low}</code> and <code>{conf.high}</code> in <code>error_format</code>:</p>
-<pre class="r"><code>huxreg(lm1, lm3, ci_level = .99, error_format = &#39;{conf.low} to {conf.high}&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg(lm1, lm3, ci_level = .99, error_format = '{conf.low} to {conf.high}')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1491,8 +1488,8 @@ diamond_regs                                                         %&gt;%
 </table>
 
 <p>To change the footnote, use <code>note</code>. If <code>note</code> contains the string <code>&quot;{stars}&quot;</code> it will be replaced by a description of the significance stars used. If you don’t want a footnote, just set <code>note = NULL</code>.</p>
-<pre class="r"><code>huxreg(lm1, lm3, note = &#39;Linear regressions on diamond price. {stars}.&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<pre class="r"><code>huxreg(lm1, lm3, note = 'Linear regressions on diamond price. {stars}.')</code></pre>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1555,7 +1552,7 @@ diamond_regs                                                         %&gt;%
 
 <p>To change number formatting, set the <code>number_format</code> parameter. This works the same as the <code>number_format</code> property for a huxtable - if it is numeric, numbers will be rounded to that many decimal places; if it is character, it will be taken as a format to the base R <code>sprintf</code> function. <code>huxreg</code> tries to be smart and to format summary statistics like <code>nobs</code> as integers.</p>
 <pre class="r"><code>huxreg(lm1, lm3, number_format = 2)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1618,7 +1615,7 @@ diamond_regs                                                         %&gt;%
 
 <p>Lastly, if you want to bold all significant coefficients, set the parameter <code>bold_signif</code> to a maximum significance level:</p>
 <pre class="r"><code>huxreg(lm1, lm3, bold_signif = 0.05)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">(1)</td>
@@ -1687,15 +1684,15 @@ diamond_regs                                                         %&gt;%
 <pre class="r"><code>library(lmtest)</code></pre>
 <pre><code>## Loading required package: zoo</code></pre>
 <pre><code>## 
-## Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## Attaching package: 'zoo'</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     as.Date, as.Date.numeric</code></pre>
 <pre class="r"><code>library(sandwich)
 lm_robust &lt;- coeftest(lm1, vcov = vcovHC)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): No `glance` method for model of class coeftest</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">Normal SEs</td>
@@ -1759,7 +1756,7 @@ huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code><
 <p>If that is not possible, you can compute statistics yourself and add them to your model using the <code>tidy_override</code> function:</p>
 <pre class="r"><code>lm_fixed &lt;- tidy_override(lm1, p.value = c(0.5, 0.2, 0.06))
 huxreg(&quot;Normal p values&quot; = lm1, &quot;Supplied p values&quot; = lm_fixed)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto; ">
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;"></td>
 <td style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">Normal p values</td>
