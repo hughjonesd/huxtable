@@ -20,3 +20,4 @@ scripts/*.tex
 scripts/*.html
 scripts/*.docx
 scripts/*.xlsx
+delete-appveyor-cache.sh
