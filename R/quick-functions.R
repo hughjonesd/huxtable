@@ -5,7 +5,7 @@
 NULL
 
 
-#' Quickly print objects to a PDF, HTML, Microsoft Office or RTF document.
+#' Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document.
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -28,6 +28,7 @@ NULL
 #'   m <- matrix(1:4, 2, 2)
 #'
 #'   quick_pdf(m, jams)
+#'   quick_latex(m, jams)
 #'   quick_html(m, jams)
 #'   quick_docx(m, jams)
 #'   quick_xlsx(m, jams)
@@ -36,6 +37,22 @@ NULL
 #' }
 #' @name quick-output
 NULL
+
+
+#' @rdname quick-output
+#' @export
+quick_latex <- function (..., file = confirm("huxtable-output.tex"), borders = 0.4,
+  open = interactive()) {
+  assert_that(is.number(borders), is.flag(open))
+  force(file)
+
+  hts <- huxtableize(list(...), borders)
+  do_write_latex_file(hts, file, width = NULL, height = NULL)
+
+  if (open) auto_open(file)
+
+  invisible(NULL)
+}
 
 
 #' @rdname quick-output
@@ -56,29 +73,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   # latex_file <- normalizePath(tempfile(fileext = ".tex"), mustWork = TRUE)
   clean_tmp_dir <- normalizePath(tempdir(), mustWork = TRUE)
   latex_file <- tempfile(tmpdir = clean_tmp_dir, fileext = ".tex")
-  sink(latex_file)
-  tryCatch({
-    cat("\\documentclass{article}\n")
-    report_latex_dependencies()
-    if (! is.null(width) || ! is.null(height)) {
-      dim_string <- character(2)
-      dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
-      dim_string[2] <- if (is.null(height)) "" else sprintf("paperheight=%s", height)
-      dim_string = paste(dim_string, collapse = ",")
-      cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
-    }
-    cat("\\pagenumbering{gobble}\n")
-    cat("\n\\begin{document}")
-    lapply(hts, function (ht) {
-      cat("\n\n")
-      print_latex(ht)
-      cat("\n\n")
-    })
-    cat("\n\\end{document}")
-  },
-    error = identity,
-    finally = {sink()}
-  )
+  do_write_latex_file(hts, latex_file, width, height)
 
   if (requireNamespace("tinytex", quietly = TRUE)) {
     tinytex::latexmk(latex_file, pdf_file = file)
@@ -152,6 +147,7 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   invisible(NULL)
 }
 
+
 #' @rdname quick-output
 #' @export
 quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0.4,
@@ -173,6 +169,7 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
   invisible(NULL)
 }
 
+
 #' @rdname quick-output
 #' @export
 quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
@@ -193,6 +190,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
   if (open) auto_open(file)
   invisible(NULL)
 }
+
 
 #' @rdname quick-output
 #' @export
@@ -233,6 +231,33 @@ huxtableize <- function (obj_list, borders) {
 }
 
 
+do_write_latex_file <- function(hts, file, width, height) {
+  sink(file)
+  tryCatch({
+    cat("\\documentclass{article}\n")
+    report_latex_dependencies()
+    if (! is.null(width) || ! is.null(height)) {
+      dim_string <- character(2)
+      dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
+      dim_string[2] <- if (is.null(height)) "" else sprintf("paperheight=%s", height)
+      dim_string = paste(dim_string, collapse = ",")
+      cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
+    }
+    cat("\\pagenumbering{gobble}\n")
+    cat("\n\\begin{document}")
+    lapply(hts, function (ht) {
+      cat("\n\n")
+      print_latex(ht)
+      cat("\n\n")
+    })
+    cat("\n\\end{document}")
+  },
+    error = identity,
+    finally = {sink()}
+  )
+}
+
+
 confirm <- function (file) {
   if (! interactive()) stop("Please specify a `file` argument for non-interactive use of quick_xxx functions.")
   if (file.exists(file)) {
@@ -241,6 +266,7 @@ confirm <- function (file) {
   }
   file
 }
+
 
 auto_open <- function (path) {
   sysname <- Sys.info()["sysname"]

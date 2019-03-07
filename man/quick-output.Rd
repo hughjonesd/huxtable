@@ -2,14 +2,18 @@
 % Please edit documentation in R/quick-functions.R
 \name{quick-output}
 \alias{quick-output}
+\alias{quick_latex}
 \alias{quick_pdf}
 \alias{quick_html}
 \alias{quick_docx}
 \alias{quick_pptx}
 \alias{quick_xlsx}
 \alias{quick_rtf}
-\title{Quickly print objects to a PDF, HTML, Microsoft Office or RTF document.}
+\title{Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document.}
 \usage{
+quick_latex(..., file = confirm("huxtable-output.tex"), borders = 0.4,
+  open = interactive())
+
 quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
   open = interactive(), width = NULL, height = NULL)
 
@@ -62,6 +66,7 @@ if this already exists, you will be asked to confirm manually before proceeding.
   m <- matrix(1:4, 2, 2)
 
   quick_pdf(m, jams)
+  quick_latex(m, jams)
   quick_html(m, jams)
   quick_docx(m, jams)
   quick_xlsx(m, jams)
