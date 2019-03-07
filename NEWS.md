@@ -3,6 +3,10 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable 4.4.0.9000
+
+* Add `quick_latex()` function.
+
 # huxtable 4.4.0
 
 * Huxtables can now be printed directly in Word documents and Powerpoint presentations,
