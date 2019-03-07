@@ -29,6 +29,24 @@ test_that("Quick output functions create files", {
   tf <- tempfile(fileext = ".rtf")
   expect_silent(quick_rtf(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = ".tex")
+  expect_silent(quick_latex(m, dfr, ht, file = tf, open = FALSE))
+  expect_true(file.exists(tf))
+})
+
+
+test_that("quick_tex can be compiled", {
+
+  ht <- hux(a = 1:2, b = 1:2)
+  m <- matrix(1:4, 2, 2)
+  dfr <- data.frame(a = 1:5, b = 1:5)
+  tf <- tempfile(fileext = ".tex")
+  expect_silent(quick_latex(m, dfr, ht, file = tf, open = FALSE))
+  try(tools::texi2pdf(tf, clean = TRUE))
+  output_file <- sub("\\.tex$", ".pdf", basename(tf))
+  expect_true(file.exists(output_file))
+  try(file.remove(output_file), silent = TRUE)
 })
 
 
