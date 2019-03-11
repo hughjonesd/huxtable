@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2019-03-04" />
+<meta name="date" content="2019-03-11" />
 
 <title>Huxtable Themes</title>
 
@@ -283,6 +283,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -290,14 +293,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -309,7 +372,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Huxtable Themes</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2019-03-04</em></h4>
+<h4 class="date"><em>2019-03-11</em></h4>
 
 </div>
 
@@ -318,241 +381,401 @@ $(document).ready(function () {
 jams &lt;- cbind(jams, c(&quot;Sugar&quot;, &quot;60%&quot;, &quot;60%&quot;, &quot;60%&quot;))
 jams</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_plain(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: 0%; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.90</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.80</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_basic(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 1pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 1pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 1pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 1pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_striped(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Type</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Price</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Strawberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Raspberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 0); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Plum</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_article(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt;">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_grey(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(230, 230, 230);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(204, 204, 204); font-weight: bold;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_blue(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Type</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Price</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Strawberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Raspberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(169, 204, 227);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(84, 153, 199); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Plum</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(212, 230, 241);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_orange(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Strawberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(245, 203, 167);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(208, 211, 212); font-weight: bold;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(250, 229, 211);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_green(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
+<col><col><col><col><col><col><col><tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Type</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Price</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Sugar</span></td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Strawberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">1.90</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Raspberry</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">2.10</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(200, 230, 201);">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(76, 175, 80); font-weight: bold;"><span style="color: rgb(255, 255, 255);">Plum</span></td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt; border-top-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); padding: 4pt 4pt 4pt 4pt; background-color: rgb(165, 214, 167);">60.00%</td>
 </tr>
 </table>
 
 <pre class="r"><code>theme_mondrian(jams)</code></pre>
 <table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
-<col><col><col><tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-family: Arial;">Type</td>
+<col><col><col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Type</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Price</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Sugar</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Sugar</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Sugar</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Strawberry</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-family: Arial;">1.90</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">1.90</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Raspberry</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">2.10</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
 </tr>
 <tr>
 <td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">Plum</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">1.80</td>
 <td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 0, 0); font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; font-family: Arial;">60.00%</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-family: Arial;">60.00%</td>
 </tr>
 </table>
 

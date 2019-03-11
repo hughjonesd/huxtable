@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2019-03-04" />
+<meta name="date" content="2019-03-11" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -283,6 +283,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -290,14 +293,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -309,7 +372,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2019-03-04</em></h4>
+<h4 class="date"><em>2019-03-11</em></h4>
 
 </div>
 
@@ -1681,14 +1744,8 @@ diamond_regs                                                         %&gt;%
 <h2>Altering data</h2>
 <p>Sometimes, you want to report different statistics for a model. For example, you might want to use robust standard errors.</p>
 <p>One way to do this is to pass a <code>tidy</code>-able test object into <code>huxreg</code>. The function <code>coeftest</code> in the “lmtest” package has <code>tidy</code> methods defined:</p>
-<pre class="r"><code>library(lmtest)</code></pre>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: 'zoo'</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre class="r"><code>library(sandwich)
+<pre class="r"><code>library(lmtest)
+library(sandwich)
 lm_robust &lt;- coeftest(lm1, vcov = vcovHC)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): No `glance` method for model of class coeftest</code></pre>
