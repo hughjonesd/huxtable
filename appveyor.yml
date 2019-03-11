@@ -32,7 +32,6 @@ environment:
   - R_VERSION: devel
   - R_VERSION: release
   - R_VERSION: stable
-  - R_VERSION: patched
 
 matrix:
   fast_finish: true
