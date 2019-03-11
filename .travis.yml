@@ -4,7 +4,7 @@ language: R
 sudo: false
 cache: packages
 before_install:
-  - tlmgr install index threeparttable wrapfig
+  - tlmgr install index threeparttable wrapfig geometry
   - sudo apt-get install -y libmagick++-dev
 r:
   - oldrel
