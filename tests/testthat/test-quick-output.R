@@ -36,7 +36,7 @@ test_that("Quick output functions create files", {
 })
 
 
-test_that("quick_tex can be compiled", {
+test_that("quick_latex can be compiled", {
 
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)

@@ -13,9 +13,6 @@ Priority changes
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
 
-* `huxtablereg` function in `texreg` package
-  - Waiting for texreg guys to get back
-
 
 Changes for 5.0
 ===============
