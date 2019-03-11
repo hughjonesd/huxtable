@@ -37,6 +37,7 @@ test_that("Quick output functions create files", {
 
 
 test_that("quick_latex can be compiled", {
+  skip_on_appveyor() # no pdflatex
 
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
@@ -52,6 +53,7 @@ test_that("quick_latex can be compiled", {
 
 test_that("quick_pdf works", {
   skip_on_appveyor()
+
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
   dfr <- data.frame(a = 1:5, b = 1:5)
