@@ -6,6 +6,7 @@ tests/testthat/*.docx
 tests/testthat/*.pptx
 tests/testthat/*.aux
 tests/testthat/temp-artefacts/**
+delete-appveyor-cache.sh
 .Rhistory
 .RData
 .Ruserdata
@@ -20,4 +21,3 @@ scripts/*.tex
 scripts/*.html
 scripts/*.docx
 scripts/*.xlsx
-delete-appveyor-cache.sh
