@@ -98,7 +98,8 @@ test_that("Works for zero-dimension huxtables", {
 test_that("Data written in appropriate format", {
   hx <- huxtable(a = 1:2 + 0.5, b = -1:-2 + 0.5, d = letters[1:2], add_colnames = TRUE)
   wb <- as_Workbook(hx)
-  expect_silent(openxlsx::saveWorkbook(wb, file = "test-xlsx.xlsx", overwrite = TRUE))
+  expect_error(openxlsx::saveWorkbook(wb, file = "test-xlsx.xlsx", overwrite = TRUE),
+        regexp = NA) # openxlsx may emit messages
   dfr <- openxlsx::read.xlsx("test-xlsx.xlsx")
   expect_equivalent(class(dfr[[1]]), "numeric")
   expect_equivalent(class(dfr[[2]]), "numeric")

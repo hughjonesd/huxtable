@@ -243,7 +243,7 @@ do_write_latex_file <- function(hts, file, width, height) {
       dim_string = paste(dim_string, collapse = ",")
       cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
     }
-    cat("\\pagenumbering{gobble}\n")
+    cat("\n\\pagenumbering{gobble}\n")
     cat("\n\\begin{document}")
     lapply(hts, function (ht) {
       cat("\n\n")

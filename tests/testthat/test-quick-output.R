@@ -1,6 +1,12 @@
 
 context("quick_xxx functions")
 
+skip_without_latex_deps <- function () {
+  skip_if_not(
+          requireNamespace("tinytex", quietly = TRUE) ||
+          check_latex_dependencies(quiet = TRUE)
+        )
+}
 
 test_that("Quick output functions create files", {
   skip_if_not_installed("openxlsx")
@@ -38,6 +44,7 @@ test_that("Quick output functions create files", {
 
 test_that("quick_latex can be compiled", {
   skip_on_appveyor() # no pdflatex
+  skip_without_latex_deps()
 
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
@@ -53,6 +60,7 @@ test_that("quick_latex can be compiled", {
 
 test_that("quick_pdf works", {
   skip_on_appveyor()
+  skip_without_latex_deps()
 
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
@@ -65,6 +73,8 @@ test_that("quick_pdf works", {
 
 test_that("quick_pdf works with height and width options", {
   skip_on_appveyor()
+  skip_without_latex_deps()
+
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
   dfr <- data.frame(a = 1:5, b = 1:5)
