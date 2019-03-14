@@ -28,7 +28,7 @@ test_that("huxreg copes with different models", {
   lm1 <- lm(y ~ a, dfr)
   lm2 <- lm(y ~ a + b, dfr)
   glm1 <- glm(I(y > 0) ~ a, dfr, family = binomial)
-  expect_silent(hr <- huxreg(lm1, lm2, glm1))
+  expect_error(hr <- huxreg(lm1, lm2, glm1), regexp = NA)
 })
 
 
