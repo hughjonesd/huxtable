@@ -2,6 +2,7 @@
 context("quick_xxx functions")
 
 skip_without_latex_deps <- function () {
+  skip_on_cran() # CRAN doesn't play nicely with tinytex, it uses full texlive
   skip_if_not(
           requireNamespace("tinytex", quietly = TRUE) ||
           check_latex_dependencies(quiet = TRUE)
