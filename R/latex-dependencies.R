@@ -59,9 +59,9 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   if (as_string) {
     return(paste0(report, collapse = ""))
   } else {
-    assert_package("report_latex_dependencies", "rmarkdown")
     huxtable_latex_dependencies <- lapply(huxtable_latex_dependencies, function (x) {
-      rmarkdown::latex_dependency(x$name, options = x$options)
+      class(x) <- "latex_dependency"
+      x
     })
     return(invisible(huxtable_latex_dependencies))
   }
