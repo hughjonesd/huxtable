@@ -54,6 +54,7 @@ Suggests:
     scales,
     testthat,
     tinytex
+Enhances: texreg (>= 1.36.24)
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
