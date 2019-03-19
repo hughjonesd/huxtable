@@ -77,6 +77,7 @@ test_that("Can knit .Rhtml files to HTML", {
 
 
 test_that("guess_knitr_output_format() gets it right", {
+  skip_on_cran()
   out <- character(0)
   on.exit(sapply(out, function (x) if (file.exists(x)) try(file.remove(x), silent = TRUE)))
   expect_silent(out[1] <- knitr::knit("guess-output-format-test.Rhtml", quiet = TRUE))
@@ -105,6 +106,7 @@ test_that("Row heights do not screw up LaTeX multicol", {
 
 
 test_that("echo = TRUE does not cause option clash", {
+  skip_on_cran()
   test_render("echo-true-latex-test.Rmd", NULL)
 })
 
@@ -138,6 +140,7 @@ test_that("Various Rmd files render without errors", {
 
 
 test_that("Bookdown files", {
+  skip_on_cran()
   skip_if_not_installed("dplyr")
   skip_if_not_installed("bookdown")
   test_render("bookdown-test.Rmd", "bookdown::pdf_book")
