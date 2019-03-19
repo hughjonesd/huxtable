@@ -7,7 +7,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 * Add `quick_latex()` function.
 * The `texreg` package now includes a `huxtablereg` function, analogous
-  to `huxreg`, which outputs a huxtable from a list of regressions.
+  to `huxreg`, which outputs a huxtable from a list of regressions. This will
+  be available from the next version of `texreg`.
 
 # huxtable 4.4.0
 
