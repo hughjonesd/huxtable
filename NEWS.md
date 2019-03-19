@@ -1,3 +1,5 @@
+# huxtable 4.5.0
+
 
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
