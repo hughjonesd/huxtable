@@ -1,11 +1,8 @@
-# huxtable 4.5.0
-
-
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable 4.4.0.9000
+# huxtable 4.5.0
 
 * Add `quick_latex()` function.
 * The `texreg` package now includes a `huxtablereg` function, analogous
