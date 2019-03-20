@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2019-03-11" />
+<meta name="date" content="2019-03-20" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -372,7 +372,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author"><em>David Hugh-Jones</em></h4>
-<h4 class="date"><em>2019-03-11</em></h4>
+<h4 class="date"><em>2019-03-20</em></h4>
 
 </div>
 
@@ -1744,8 +1744,14 @@ diamond_regs                                                         %&gt;%
 <h2>Altering data</h2>
 <p>Sometimes, you want to report different statistics for a model. For example, you might want to use robust standard errors.</p>
 <p>One way to do this is to pass a <code>tidy</code>-able test object into <code>huxreg</code>. The function <code>coeftest</code> in the “lmtest” package has <code>tidy</code> methods defined:</p>
-<pre class="r"><code>library(lmtest)
-library(sandwich)
+<pre class="r"><code>library(lmtest)</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: 'zoo'</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre class="r"><code>library(sandwich)
 lm_robust &lt;- coeftest(lm1, vcov = vcovHC)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): No `glance` method for model of class coeftest</code></pre>
