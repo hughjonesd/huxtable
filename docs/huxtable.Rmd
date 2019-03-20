@@ -253,8 +253,9 @@ There are also some useful convenience functions:
 * `set_all_border_colors` sets left, right, top and bottom border colors;
 * `set_all_border_styles` sets left, right, top and bottom border styles;
 * `set_all_padding` sets left, right, top and bottom padding (the amount of space between the content
-   and the border);
-* `set_outer_borders` sets an outer border around a rectangle of cells.
+  and the border);
+* `set_outer_borders`, `set_outer_border_colors` and `set_outer_border_styles` set an outer border
+  around a rectangle of cells.
 
 ## Getting properties
 
@@ -389,7 +390,7 @@ theme_plain(car_ht)
 ```
 
 In general it is a good idea to prepare your data first, before styling it. For example, it was
-easier to sort the `cars_mpg` data by cylinder, before adding column names to the data frame itself.
+easier to sort the `cars_mpg` data by cylinder, before adding a row of column names.
 
 # More formatting 
 
@@ -469,10 +470,11 @@ theme_plain(code_ht)
 
 ## Width and cell wrapping
 
-You can set table widths using the `width` property, and column widths using the `col_width` property. If you use
-numbers for these, they will be interpreted as proportions of the table width (or for `width`, a proportion of the
-width of the surrounding text). If you use character vectors, they must be valid CSS or LaTeX widths. The only
-unit both systems have in common is `pt` for points. 
+You can set table widths using the `width` property, and column widths using the `col_width`
+property. If you use numbers for these, they will be interpreted as proportions of the table width
+(or for `width`, a proportion of the width of the surrounding text). If you use character vectors,
+they must be valid CSS or LaTeX widths. The only unit both systems have in common is `pt` for
+points.
 
 ```{r}
 width(ht) <- 0.4
@@ -483,8 +485,8 @@ ht
 
 It is best to set table width explicitly, then set column widths as proportions.
 
-By default, if a cell contains long contents, it will be stretched. Use the `wrap` property to allow cell contents
-to wrap over multiple lines:
+By default, if a cell contains long contents, it will be stretched. Use the `wrap` property to allow
+cell contents to wrap over multiple lines:
 
 ```{r}
 ht_wrapped <- ht
@@ -496,9 +498,9 @@ ht_wrapped
 
 ## Adding row and column names
 
-Just like data frames, huxtables can have row and column names. Often, we want to add these to the final table.
-You can do this using either the `add_colnames`/`add_rownames` arguments to `as_huxtable`, or the
-`add_colnames()`/`add_rownames()` functions. 
+Just like data frames, huxtables can have row and column names. Often, we want to add these to the
+final table. You can do this using either the `add_colnames`/`add_rownames` arguments to
+`as_huxtable`, or the `add_colnames()`/`add_rownames()` functions.
 
 ```{r}
 as_hux(mtcars[1:4, 1:4])                           %>% 
@@ -667,25 +669,23 @@ options(huxtable.knit_print_df = TRUE)
 ## Using huxtables in knitr and rmarkdown
 
 If you use knitr and rmarkdown in RStudio, huxtable objects should automatically display in the
-appropriate format (HTML, LaTeX or RTF). 
+appropriate format (HTML, LaTeX, or RTF). 
 
 Huxtable needs some LaTeX packages for LaTeX output. The function `report_latex_dependencies()` will
 print out a set of `usepackage{...}` statements. If you use Sweave or knitr without
 rmarkdown, you can use this function in your LaTeX preamble, to load the packages you need. 
 
-Rmarkdown exports to Word via Markdown. You can use huxtable to do this, but since Markdown tables
-are rather basic, a lot of formatting will be lost. If you want to create Word or Powerpoint
-documents directly, install the [flextable package](https://cran.r-project.org/package=flextable)
-from CRAN. You can then convert your huxtable objects to `flextable` objects and include them in
-Word or Powerpoint documents.  Similarly, to print tables in an
-Excel spreadsheet, install the [openxlsx package](https://cran.r-project.org/package=openxlsx) 
-See `?as_flextable` and `?as_Workbook` for more details.
+If you want to create Word or Powerpoint documents, install the 
+[flextable package](https://cran.r-project.org/package=flextable) from CRAN. Huxtables can then be
+automatically printed in Word documents. Or you can convert them to `flextable` objects and include
+them in Word or Powerpoint documents.  Similarly, to print tables in an Excel spreadsheet, install
+the [openxlsx package](https://cran.r-project.org/package=openxlsx) See `?as_flextable` and
+`?as_Workbook` for more details.
 
-
-You can print a huxtable on screen by typing its name at the command
-line. Borders, column and row spans and cell alignment are shown. If the
-[crayon](https://cran.r-project.org/package=crayon) package is installed, and your terminal or R IDE
-supports it, border, text and background colours are also displayed.
+You can print a huxtable on screen by typing its name at the command line. Borders, column and row
+spans and cell alignment are shown. If the [crayon](https://cran.r-project.org/package=crayon)
+package is installed, and your terminal or R IDE supports it, border, text and background colours
+are also displayed.
 
 ```{r, results = 'markup'}
 print_screen(ht)
@@ -702,9 +702,10 @@ do this you can use huxtable functions starting with `quick_`:
 
 ```{r, echo = FALSE}
 quick_commands <- hux(
-        Command = c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", "quick_rtf"), 
+        Command = c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", 
+          "quick_rtf", "quick_latex"), 
         Output = c("PDF document", "Word document", "HTML web page", "Excel spreadsheet", 
-          "Powerpoint presentation", "RTF document"),
+          "Powerpoint presentation", "RTF document", "LaTeX document"),
         add_colnames = TRUE
       )
 font(quick_commands)[, 1] <- if (is_latex) 'cmtt' else 'Courier'
@@ -715,8 +716,7 @@ theme_plain(quick_commands)
 These are called with one or more huxtable objects (or objects which can be turned into a huxtable,
 such as data frames). A new document of the appropriate type will be created and opened. By default
 the file will be in the current directory, under a name like e.g. `huxtable-output.pdf`. If the file
-already exists, you'll be asked to confirm the overwrite. For non-interactive use, you must specify
-a filename yourself explicitly. This keeps you from accidentally trashing your files.
+already exists, you'll be asked to confirm the overwrite. 
 
 ```{r, eval = FALSE}
 quick_pdf(mtcars) 

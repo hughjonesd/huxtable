@@ -25,6 +25,6 @@
 \contentsline {section}{Creating a regression table}{17}{section*.86}
 \contentsline {section}{Output to different formats}{17}{section*.89}
 \contentsline {subsection}{Automatic pretty-printing of data frames}{17}{section*.90}
-\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{18}{section*.93}
-\contentsline {subsection}{Quick output commands}{19}{section*.94}
-\contentsline {section}{End matter}{19}{section*.97}
+\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{18}{section*.91}
+\contentsline {subsection}{Quick output commands}{18}{section*.92}
+\contentsline {section}{End matter}{19}{section*.95}
