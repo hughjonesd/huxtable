@@ -2,8 +2,11 @@
 
 # script to rebuild website files
 
-# pkgdown works from your tree, not from installed versions. So:
+# pkgdown works from your tree, not from installed versions.
+# But rmarkdown::render works with installed versions.
+# So:
 # checkout the version that you want on the web
+# Install the package and restart
 # create a branch if there isn't one (git checkout -b website-x.y.z)
 # update index.Rhtml appropriately
 # run this script;
