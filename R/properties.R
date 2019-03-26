@@ -801,7 +801,12 @@ make_getter_setters("pad_decimal", "cell", extra_code = {
 #' @templateVar attr_name font
 #' @templateVar attr_desc Font
 #' @templateVar value_param_desc
-#' A character vector of font names. NB that LaTeX and HTML use different font names.
+#' A character vector of font names.
+#' @details
+#' LaTeX and HTML use different font names. If you want to use the same font
+#' names across document formats, set `options("huxtable.latex_use_fontspec")`
+#' to `TRUE`. See [huxtable-options].
+#'
 #' @template getset-example
 #' @templateVar attr_val "times"
 #' @template getset-rowspec-example

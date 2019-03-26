@@ -44,6 +44,10 @@ NULL
 #'    huxtable. Defaults to [theme_plain()].
 #' * `options('huxtable.autoformat')` sets the default value for `autoformat` in [huxtable()] and
 #'   [as_huxtable()]. It defaults to `TRUE`.
+#' * `options('huxtable.latex_use_fontspec')`. If `TRUE`, use the "fontspec" package, which allows
+#'    you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
+#'    engine, which can be set using an .rmd header option. Note that [quick_pdf()]
+#'    may use pdflatex. It defaults to `FALSE`.
 #' * `options('huxtable.autoformat_number_format')` and `options('huxtable.autoformat_align')` are
 #'   lists. The list names are base R classes. [huxtable()] with `autoformat = TRUE` will set
 #'   `number_format()` and `align()` for data columns according to the corresponding list values.
@@ -98,7 +102,7 @@ NULL
 #'
 #' As of version 4.3.0, this is handled automatically for you. Just
 #' set the label using [label()], then in markdown text do e.g.:
-#' 
+#'
 #' ```
 #' \\@ref(tab:my-table-label).
 #'
@@ -150,6 +154,7 @@ NULL
   set_default_option('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
   set_default_option('huxtable.bookdown', NULL)
   set_default_option('huxtable.autoformat', TRUE)
+  set_default_option('huxtable.latex_use_fontspec', FALSE)
   set_default_option('huxtable.autoformat_number_format', list(
           integer = 0,
           numeric = "%.3g",

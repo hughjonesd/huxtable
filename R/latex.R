@@ -241,7 +241,12 @@ build_tabular <- function(ht) {
 
   font_bldc <- font(ht)[bl_dc]
   has_font_bldc <- ! is.na(font_bldc)
-  inner_cell_bldc[has_font_bldc] <- sprintf("{\\fontfamily{%s}\\selectfont %s}",
+  font_template <- if (getOption("huxtable.latex_use_fontspec", FALSE)) {
+    "{\\fontspec{%s} %s}"
+  } else {
+    "{\\fontfamily{%s}\\selectfont %s}"
+  }
+  inner_cell_bldc[has_font_bldc] <- sprintf(font_template,
         font_bldc[has_font_bldc],
         inner_cell_bldc[has_font_bldc])
 

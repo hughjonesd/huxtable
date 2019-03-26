@@ -25,6 +25,10 @@ before printing in knitr. The function should take one argument (a data frame) a
 huxtable. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
 \item \code{options('huxtable.autoformat')} sets the default value for \code{autoformat} in \code{\link[=huxtable]{huxtable()}} and
 \code{\link[=as_huxtable]{as_huxtable()}}. It defaults to \code{TRUE}.
+\item \code{options('huxtable.latex_use_fontspec')}. If \code{TRUE}, use the "fontspec" package, which allows
+you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
+engine, which can be set using an .rmd header option. Note that \code{\link[=quick_pdf]{quick_pdf()}}
+may use pdflatex. It defaults to \code{FALSE}.
 \item \code{options('huxtable.autoformat_number_format')} and \code{options('huxtable.autoformat_align')} are
 lists. The list names are base R classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set
 \code{number_format()} and \code{align()} for data columns according to the corresponding list values.

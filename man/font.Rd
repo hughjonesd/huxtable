@@ -15,7 +15,7 @@ map_font(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector of font names. NB that LaTeX and HTML use different font names.
+\item{value}{A character vector of font names.
 
 Set to \code{NA} to reset to the default, which is \code{NA}.}
 
@@ -33,6 +33,11 @@ For \code{set_font} and \code{map_font}, the modified huxtable.
 }
 \description{
 Functions to get or set the \emph{font} property of huxtable cells.
+}
+\details{
+LaTeX and HTML use different font names. If you want to use the same font
+names across document formats, set \code{options("huxtable.latex_use_fontspec")}
+to \code{TRUE}. See \link{huxtable-options}.
 }
 \examples{
 

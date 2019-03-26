@@ -76,7 +76,8 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
   do_write_latex_file(hts, latex_file, width, height)
 
   if (requireNamespace("tinytex", quietly = TRUE)) {
-    tinytex::latexmk(latex_file, pdf_file = file)
+    engine <- if (getOption("huxtable.latex_use_fontspec", FALSE)) "xelatex" else "pdflatex"
+    tinytex::latexmk(latex_file, pdf_file = file, engine = engine)
     output_file <- file
   } else {
     tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory

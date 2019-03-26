@@ -5,6 +5,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable 4.5.0.9000
 
+* Set `options('huxtable.latex_use_fontspec')` to `TRUE` to use portable font 
+  names in TeX documents, with the LaTeX "fontspec" package.
 * Bugfix: attributes were being copied wrongly in subset assignment of huxtables.
 
 # huxtable 4.5.0
