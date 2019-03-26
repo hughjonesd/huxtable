@@ -73,6 +73,12 @@ test_that("Subset assignment of hux into hux preserves attributes", {
   font(ht6) <- c("times", "arial", "times")
   expect_silent(ht[] <- ht6) # assignment with repetition
   expect_equivalent(font(ht)[1, ], c("times", "arial", "times"))
+
+  ht7 <- hux(1:2, 1:2, 1:2)
+  bold(ht7)[1, ] <- TRUE
+  expect_silent(ht[1:2, ] <- ht7) # assignment of a non-square matrix
+  expect_equivalent(bold(ht)[1, ], rep(TRUE, 3))
+  expect_equivalent(bold(ht)[2, ], rep(FALSE, 3))
 })
 
 

@@ -245,7 +245,12 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
     if (! missing(j)) j <- if (is.character(j)) which(colnames(res) %in% j) else if (is.logical(j)) which(j) else j
     for (a in huxtable_cell_attrs) {
       val <- attr(value, a)
-      val <- matrix(val, nrow(res[i, j, drop = FALSE]), ncol(res[i, j, drop = FALSE]), byrow = TRUE)
+      val <- matrix(val,
+              nrow(res[i, j, drop = FALSE]),
+              ncol(res[i, j, drop = FALSE]),
+              byrow = (nrow(val) == 1)
+            )
+
       attr(res, a)[i, j] <- val
     }
     if (missing(i) || identical(i, seq_len(nrow(res)))) {
