@@ -1,8 +1,11 @@
-# huxtable 4.5.0.9000
-
 
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
+
+
+# huxtable 4.5.0.9000
+
+* Bugfix: attributes were being copied wrongly in subset assignment of huxtables.
 
 # huxtable 4.5.0
 
