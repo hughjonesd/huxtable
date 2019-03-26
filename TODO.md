@@ -42,6 +42,14 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
   - use tabucline for horiz dashed lines; always merge when possible, and if not 
     (ie if color/width changes), warn that lines will "step" down the page
 
+* Consider option to use tikz?
+  - See the "matrix" package in the tikz manual, p 698
+  - Allows newlines in cells
+  - Borders may not be easy
+  - Need to understand whole tikz package :-)
+  - Implement as a different function? Or if an option is set?
+  - Requires "pgf" tex library 
+
 * Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
   - though the problem is having to keep to `options(screen)`, not the fact that it is an argument.
   
