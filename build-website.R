@@ -26,6 +26,6 @@ knitr::knit("index.Rhtml", "index.html")
 setwd('..')
 
 pkgdown::build_reference_index()
-pkgdown::build_reference()
+pkgdown::build_reference(lazy = FALSE)
 pkgdown::build_news()
 message("Now commit and push to github. Don't forget to reinstall the dev version!")
