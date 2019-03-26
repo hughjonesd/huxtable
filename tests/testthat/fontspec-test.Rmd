@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+output:
+   pdf_document:
+     latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+options(huxtable.latex_use_fontspec = TRUE)
+```
+
+```{r}
+ht <- hux("Some text")
+font(ht) <- "Arial"
+ht
+```

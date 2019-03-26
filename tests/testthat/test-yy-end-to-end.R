@@ -148,6 +148,14 @@ test_that("Bookdown files", {
 })
 
 
+test_that("Works with fontspec", {
+  skip_on_cran()
+  oo <- options("huxtable.latex_use_fontspec")
+  on.exit(options(oo))
+  test_render("fontspec-test.Rmd", "pdf_document")
+})
+
+
 test_that("Word files", {
   skip_if_not_installed("flextable")
   skip_if_not(rmarkdown::pandoc_available("2.0.0"))

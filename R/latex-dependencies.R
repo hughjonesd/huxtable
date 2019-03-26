@@ -16,8 +16,7 @@ huxtable_latex_dependencies <- list(
   list(name = "calc"),
   list(name = "tabularx"),
   list(name = "threeparttable"),
-  list(name = "wrapfig"),
-  list(name = "fontspec")
+  list(name = "wrapfig")
 )
 
 
