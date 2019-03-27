@@ -150,6 +150,7 @@ test_that("Bookdown files", {
 
 test_that("Works with fontspec", {
   skip_on_cran()
+  skip_on_os("linux") # no Arial
   oo <- options("huxtable.latex_use_fontspec")
   on.exit(options(oo))
   test_render("fontspec-test.Rmd", "pdf_document")
