@@ -123,8 +123,9 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
   mondrian <- set_all_padding(mondrian, 0)
   mondrian <- set_all_border_colors(mondrian, "black")
   bg_cells <- sample(36, 8)
-  background_color(mondrian)[bg_cells] <- sample(c("red", "blue", "yellow"), 8, replace = TRUE)
-  text_color(mondrian)[bg_cells] <- "white"
+  bg_colors <- sample(c("red", "blue", "yellow"), 8, replace = TRUE)
+  background_color(mondrian)[bg_cells] <- bg_colors
+  text_color(mondrian)[bg_cells] <- ifelse(bg_colors == "yellow", "black", "white")
   bold(mondrian)[h_square] <- TRUE
 
   colspan_ok <- setdiff(1:30, letter_squares - 6)
