@@ -55,6 +55,6 @@ jams[, 2] <- prices
 jams
 
 data(jams)
-jams$price <- prices
+jams$price <- c("Price", 1.70, 2.00, 2.20)
 jams
 }

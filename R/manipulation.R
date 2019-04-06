@@ -218,7 +218,7 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' jams
 #'
 #' data(jams)
-#' jams$price <- prices
+#' jams$price <- c("Price", 1.70, 2.00, 2.20)
 #' jams
 `[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
