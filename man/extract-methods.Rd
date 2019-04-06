@@ -41,21 +41,20 @@ copied into \code{x}. In addition, if \code{value} fills up an entire column, th
 will be copied into the replaced columns of \code{x}, and if it fills up an entire row, then
 row properties will be copied into the replaced rows of \code{x}.
 
-Replacement functions \code{$<-} and \code{[[<-} change the data without affecting any properties.
+Replacement functions \code{$<-} and \code{[[<-} replace existing data without affecting any properties.
 }
 \examples{
-ht <- huxtable(
-        a = 1:3,
-        b = letters[1:3]
-      )
+jams[1:3, ]
+class(jams[1:3, ])
+jams[, 1]
+jams$Type
+prices <- huxtable(c("Price", 1.70, 2.00, 2.20))
+number_format(prices) <- 2
+bold(prices) <- TRUE
+jams[, 2] <- prices
+jams
 
-ht[1:2, ]
-ht[, 1]
-ht$a
-ht <- huxtable(a = 1:3, b = 1:3)
-ht2 <- huxtable(10:11, 12:13)
-bold(ht2) <- TRUE
-ht[2:3,] <- ht2
-ht
-
+data(jams)
+jams$price <- prices
+jams
 }

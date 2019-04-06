@@ -170,16 +170,12 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' will be copied into the replaced columns of `x`, and if it fills up an entire row, then
 #' row properties will be copied into the replaced rows of `x`.
 #'
-#' Replacement functions `$<-` and `[[<-` change the data without affecting any properties.
+#' Replacement functions `$<-` and `[[<-` replace existing data without affecting any properties.
 #' @examples
-#' ht <- huxtable(
-#'         a = 1:3,
-#'         b = letters[1:3]
-#'       )
-#'
-#' ht[1:2, ]
-#' ht[, 1]
-#' ht$a
+#' jams[1:3, ]
+#' class(jams[1:3, ])
+#' jams[, 1]
+#' jams$Type
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   ss <- as.data.frame(x)[i, j, drop = drop]
   if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
@@ -215,12 +211,15 @@ insert_row <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
 #' @export
 #'
 #' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' ht2 <- huxtable(10:11, 12:13)
-#' bold(ht2) <- TRUE
-#' ht[2:3,] <- ht2
-#' ht
+#' prices <- huxtable(c("Price", 1.70, 2.00, 2.20))
+#' number_format(prices) <- 2
+#' bold(prices) <- TRUE
+#' jams[, 2] <- prices
+#' jams
 #'
+#' data(jams)
+#' jams$price <- prices
+#' jams
 `[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
 
