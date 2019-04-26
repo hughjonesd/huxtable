@@ -21,7 +21,7 @@ generics::glance
 #'
 #' @export
 error_transform_default  <- function(x){
-    x %>% stringr::str_replace_all("[(]NA( -- NA)?[)]", "")
+    stringr::str_replace_all(x, "[(]NA( -- NA)?[)]", "")
 }
 
 #' Create a huxtable to display model output
