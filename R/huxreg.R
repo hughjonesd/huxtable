@@ -294,8 +294,9 @@ huxreg <- function (
     result <- set_wrap(result, final(), 1, TRUE)
     result <- set_align(result, final(), 1, "left")
   }
-
-  return(result)
+  ## Filter empty rows
+  w  <- which(sapply(seq_along(result$names),function(i){!all(as.character(result[i,])=="")}))
+  return(result[w,])
 }
 
 
