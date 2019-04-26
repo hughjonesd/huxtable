@@ -126,11 +126,10 @@ huxreg <- function (
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
   assert_that(is.string(pad_decimal))
-  mod_names  <- as.character(substitute(...))
+  ## mod_names  <- as.character(substitute(...))
   models <- list(...)
-  tmp  <- match.call()[-1];
   if (inherits(models[[1]], "list")) models <- models[[1]]
-  mod_col_headings <- names_or(models, paste0("(", mod_names, ")"))
+  mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
   error_pos <- match.arg(error_pos)
   if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
   if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) tidy_args <- rep(list(tidy_args), length(models))
