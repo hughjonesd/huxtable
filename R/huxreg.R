@@ -13,6 +13,16 @@ generics::tidy
 #' @export
 generics::glance
 
+#' Default transformation to drop NA items in huxreg
+#'
+#' @param x Items to transform
+#'
+#' @return Taken out NA from default huxreg tables
+#'
+#' @export
+error_transform_default  <- function(x){
+    x %>% stringr::str_replace_all("[(]NA( -- NA)?[)]", "")
+}
 
 #' Create a huxtable to display model output
 #'
@@ -103,7 +113,7 @@ huxreg <- function (
         statistics      = c("N" = "nobs", "R2" = "r.squared", "logLik", "AIC"),
         coefs           = NULL,
         omit_coefs      = NULL,
-        error_transform = function(x){stringr::str_replace_all(x, "[(]NA[)]","")}
+        error_transform = error_transform_default
       ) {
   requireNamespace("broom", quietly = TRUE)
   requireNamespace("broom.mixed", quietly = TRUE)

@@ -10,7 +10,7 @@ as_FlexTable(x, ...)
 
 as_flextable(x, ...)
 
-\method{as_flextable}{huxtable}(x, colnames_to_header = FALSE, ...)
+as_flextable.huxtable(x, colnames_to_header = FALSE, ...)
 }
 \arguments{
 \item{x}{A huxtable.}
