@@ -53,7 +53,7 @@ as_FlexTable <- function(x, ...) {
 #' @aliases as_flextable.huxtable
 #' @export
 #'
-as_flextable <- function(x, ...) UseMethod("as_flextable")
+as_flextable <- function(x, ...) flextable::as_flextable(x, ...)
 
 
 #' @rdname as_flextable
