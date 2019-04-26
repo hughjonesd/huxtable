@@ -11,7 +11,8 @@ huxreg(..., error_format = "({std.error})", error_style = c("stderr",
   0.01, `*` = 0.05), bold_signif = NULL, borders = 0.4,
   outer_borders = 0.8, note = if (is.null(stars)) NULL else "{stars}.",
   statistics = c(N = "nobs", R2 = "r.squared", "logLik", "AIC"),
-  coefs = NULL, omit_coefs = NULL)
+  coefs = NULL, omit_coefs = NULL, error_transform = function(x) {   
+   stringr::str_replace_all(x, "[(]NA[)]", "") })
 }
 \arguments{
 \item{...}{Models, or a single list of models. Names will be used as column headings.}
@@ -53,6 +54,8 @@ statistics. To change display names, name the \code{statistics} vector:
 name the \code{coef} vector: \code{c("Displayed title" = "coefficient_name", ...)}}
 
 \item{omit_coefs}{Omit these coefficients.}
+
+\item{error_transform}{Optionally, a function to post-process the error_format; Current default is to remove (NA), but can be customized to whatever you wish.}
 }
 \value{
 A huxtable object.

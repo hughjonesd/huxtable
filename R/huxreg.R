@@ -39,6 +39,7 @@ generics::glance
 #' @param coefs A vector of coefficients to display. Overrules `omit_coefs`. To change display names,
 #'   name the `coef` vector: `c("Displayed title" = "coefficient_name", ...)`
 #' @param omit_coefs Omit these coefficients.
+#' @param error_transform Optionally, a function to post-process the error_format; Current default is to remove (NA), but can be customized to whatever you wish.
 #'
 #' @details
 #' Models must have a [generics::tidy()] method defined, which should return "term", "estimate",
@@ -101,7 +102,8 @@ huxreg <- function (
         note            = if (is.null(stars)) NULL else "{stars}.",
         statistics      = c("N" = "nobs", "R2" = "r.squared", "logLik", "AIC"),
         coefs           = NULL,
-        omit_coefs      = NULL
+        omit_coefs      = NULL,
+        error_transform = function(x){stringr::str_replace_all(x, "[(]NA[)]","")}
       ) {
   requireNamespace("broom", quietly = TRUE)
   requireNamespace("broom.mixed", quietly = TRUE)
@@ -193,6 +195,7 @@ huxreg <- function (
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- glue::glue_data(.x = x, error_format)
     x$error_cell[is.na(x$estimate)] <- ""
+    if (is(error_transform, "function")) x$error_cell <- sapply(x$error_cell, error_transform)
     x$estimate[is.na(x$estimate)] <- ""
     x
   })
