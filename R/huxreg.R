@@ -1,4 +1,3 @@
-## -*- c-indent-level: 2; c-basic-offset: 2;
 #' @import assertthat
 #' @importFrom stats nobs
 NULL
