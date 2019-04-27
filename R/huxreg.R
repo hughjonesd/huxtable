@@ -102,8 +102,7 @@ huxreg <- function (
         statistics      = c("N" = "nobs", "R2" = "r.squared", "logLik", "AIC"),
         coefs           = NULL,
         omit_coefs      = NULL,
-        na_omit         = c("all", "any", "none"),
-        error_transform = error_transform_default
+        na_omit         = c("all", "any", "none")
       ) {
   requireNamespace("broom", quietly = TRUE)
   requireNamespace("broom.mixed", quietly = TRUE)
