@@ -1,4 +1,4 @@
-
+## -*- c-indent-level: 2; c-basic-offset: 2;
 #' @import assertthat
 #' @importFrom stats nobs
 NULL
@@ -12,17 +12,6 @@ generics::tidy
 #' @importFrom generics glance
 #' @export
 generics::glance
-
-#' Default transformation to drop NA items in huxreg
-#'
-#' @param x Items to transform
-#'
-#' @return Taken out NA from default huxreg tables
-#'
-#' @export
-error_transform_default  <- function(x){
-    stringr::str_replace_all(x, "[(]NA( -- NA)?[)]", "")
-}
 
 #' Create a huxtable to display model output
 #'
@@ -49,7 +38,7 @@ error_transform_default  <- function(x){
 #' @param coefs A vector of coefficients to display. Overrules `omit_coefs`. To change display names,
 #'   name the `coef` vector: `c("Displayed title" = "coefficient_name", ...)`
 #' @param omit_coefs Omit these coefficients.
-#' @param error_transform Optionally, a function to post-process the error_format; Current default is to remove (NA), but can be customized to whatever you wish.
+#' @param na_omit Style of na_omit to use for the `error_format`;  If `na_omit = "all"`, then all items in the `error_format` have to be `NA` to replace the row with an empty string.  If `na_omit = "any"`, then any of the items in the `error_format` with a `NA` will be replaced with an empty string.
 #'
 #' @details
 #' Models must have a [generics::tidy()] method defined, which should return "term", "estimate",
@@ -113,6 +102,7 @@ huxreg <- function (
         statistics      = c("N" = "nobs", "R2" = "r.squared", "logLik", "AIC"),
         coefs           = NULL,
         omit_coefs      = NULL,
+        na_omit         = c("all", "any", "none"),
         error_transform = error_transform_default
       ) {
   requireNamespace("broom", quietly = TRUE)
@@ -203,10 +193,34 @@ huxreg <- function (
     error_format <- paste(lbra, formats[error_style], rbra, sep = "", collapse = " ")
     warning(glue::glue("`error_style` is deprecated, please use `error_format = \"{error_format}\"` instead."))
   }
+  err_cols <- sapply(unlist(stringr::str_extract_all(error_format, "[{][^}]*[}]")),
+                     function(x){
+                       substr(x, 2, nchar(x) - 1)
+                     });
+  bad_err_cols <- setdiff(err_cols, names(tidied[[1]]));
+  if (length(bad_err_cols) > 0){
+    warning("Unrecognized format columns: ",
+            paste(bad_err_cols, collapse = ", "),
+            "\nThese will be replaced with an empty string.",
+            "\nTry changing `error_format` in the call to `huxreg()`");
+  }
+  na_omit  <- match.arg(na_omit)
   tidied <- lapply(tidied, function (x) {
+    ## used for to avoid sapply scoping issues.
+    for (col in bad_err_cols){
+      x[[col]] <- ""
+    }
     x$error_cell <- glue::glue_data(.x = x, error_format)
+    if (any(na_omit == c("all", "any"))){
+      x$error_cell[sapply(seq_along(x$error_cell),
+                          function(y){
+                            ( (na_omit =="all" && all(is.na(x[y, err_cols]) |
+                                                        x[y, err_cols] == "")) ||
+                                (na_omit =="any" && any(is.na(x[y, err_cols]) |
+                                                          x[y, err_cols == ""])));
+                          })]  <- "";
+    }
     x$error_cell[is.na(x$estimate)] <- ""
-    if (is(error_transform, "function")) x$error_cell <- sapply(x$error_cell, error_transform)
     x$estimate[is.na(x$estimate)] <- ""
     x
   })
