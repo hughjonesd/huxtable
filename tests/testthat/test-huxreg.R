@@ -248,5 +248,5 @@ test_that("tidy.tidy_override works if underlying object has no tidy() method", 
 
 test_that("test huxreg will produce warnings for invalid error_formats",{
     lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
-    expect_warning(hr <- huxreg(lm1), regexp = NA)
+    expect_warning(hr <- huxreg(lm1, error_format="({std.error}){nonstandard.error}"))
 })
