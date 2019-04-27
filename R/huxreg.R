@@ -114,7 +114,6 @@ huxreg <- function (
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
   assert_that(is.string(pad_decimal))
-  ## mod_names  <- as.character(substitute(...))
   models <- list(...)
   if (inherits(models[[1]], "list")) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
