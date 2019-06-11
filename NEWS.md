@@ -9,6 +9,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   names in TeX documents, with the LaTeX "fontspec" package.
 * Bugfix: attributes were being copied wrongly in subset assignment of huxtables.
 * Bugfix: text colors in `hux_logo()`.
+* Bugfix: rbind of huxtable and matrix wasn't setting `row_height` correctly.
 
 # huxtable 4.5.0
 
