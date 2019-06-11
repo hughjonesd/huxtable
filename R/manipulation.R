@@ -71,12 +71,20 @@ add_row_cols <- function (x, y, after, dimno, ...) {
   }
   assert_that(is.number(after), after >= 0, after <= end_idx)
 
+  first_idxes <- seq_len(after)
   second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
   # for some reason `fn <- if (dimno==1) rbind else cbind` causes trouble...
+
+  has_dims <- function (x) if (is.vector(x)) length(x) > 0 else
+        (nrow(x) > 0 && ncol(x) > 0)
   if (dimno == 1) {
-    rbind(x[seq_len(after), ], y, x[second_idxes, ], ...)
+    objs <- list(x[first_idxes, ], y, x[second_idxes, ])
+    objs <- Filter(has_dims, objs)
+    do.call(rbind, c(objs, ...))
   } else {
-    cbind(x[, seq_len(after)], y, x[, second_idxes], ...)
+    objs <- list(x[, first_idxes], y, x[, second_idxes])
+    objs <- Filter(has_dims, objs)
+    do.call(cbind, c(objs, ...))
   }
 }
 
@@ -417,10 +425,10 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
           matrix(attr(ht, a)[nrow(ht), ], nrow(x), ncol(x), byrow = TRUE)
       }
       if ("row_height" %in% copy_cell_props && type == "rbind") {
-        attr(x, "row_height") <- attr(ht, "row_height")[nrow(ht)]
+        attr(x, "row_height")[seq(1, nrow(x))] <- attr(ht, "row_height")[nrow(ht)]
       }
       if ("col_width" %in% copy_cell_props && type == "cbind") {
-        attr(x, "col_width") <- attr(ht, "col_width")[ncol(ht)]
+        attr(x, "col_width")[seq(1, ncol(x))] <- attr(ht, "col_width")[ncol(ht)]
       }
     }
     if (! ht_real_hux && x_real_hux && nrow(ht) > 0 && ncol(ht) > 0) {
@@ -429,10 +437,10 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
           matrix(attr(x, a)[1, ], nrow(ht), ncol(ht), byrow = TRUE)
       }
       if ("row_height" %in% copy_cell_props && type == "rbind") {
-        attr(ht, "row_height") <- attr(x, "row_height")[1]
+        attr(ht, "row_height")[seq(1, nrow(ht))] <- attr(x, "row_height")[1]
       }
       if ("col_width" %in% copy_cell_props && type == "cbind") {
-        attr(ht, "col_width") <- attr(x, "col_width")[1]
+        attr(ht, "col_width")[seq(1, ncol(ht))] <- attr(x, "col_width")[1]
       }
     }
   }

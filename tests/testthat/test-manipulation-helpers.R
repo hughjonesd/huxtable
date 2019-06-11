@@ -102,3 +102,10 @@ test_that("add_columns and add_rows work with data frames", {
   expect_equivalent(ncol(res), 4)
   expect_equivalent(bold(res)[1, 3], TRUE)
 })
+
+
+test_that("add_rows and add_columns don't break with matrices", {
+  ht <- as_hux(matrix(1, 1, 1))
+  prob <- rbind(ht, rbind(1,1))
+  expect_equivalent(length(row_height(prob)), 3)
+})
