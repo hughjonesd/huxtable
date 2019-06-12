@@ -10,9 +10,9 @@
 # create a branch if there isn't one (git checkout -b website-x.y.z)
 # update index.Rhtml appropriately
 # run this script;
-# commit any changes;
+# commit any changes and push to github;
 # checkout master;
-# merge in the new branch;
+# merge in the new branch (git merge website-x.y.z)
 # push to github
 
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
