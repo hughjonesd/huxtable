@@ -3,7 +3,7 @@ Note that huxtable attempts to follow semantic versioning (https://semver.org). 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
 
-# huxtable 4.5.0.9000
+# huxtable 4.6.0
 
 * Set `options('huxtable.latex_use_fontspec')` to `TRUE` to use portable font 
   names in TeX documents, with the LaTeX "fontspec" package.
