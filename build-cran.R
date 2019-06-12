@@ -4,7 +4,6 @@ library(devtools)
 library(git2r)
 library(glue)
 
-setwd('~/huxtable')
 
 # Check version number is up to date----------------------------------------------------------------
 
