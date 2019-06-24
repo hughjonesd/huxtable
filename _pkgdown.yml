@@ -16,7 +16,7 @@ navbar:
       - text: Huxtable Themes
         href: themes.html
     - text: "Reference"
-      href: reference/
+      href: reference/index.html
     - text: "News"
       href: news/index.html
 
