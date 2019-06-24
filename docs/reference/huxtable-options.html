@@ -52,6 +52,10 @@ before printing in knitr. The function should take one argument (a data frame) a
 huxtable. Defaults to theme_plain().
 options('huxtable.autoformat') sets the default value for autoformat in huxtable() and
 as_huxtable(). It defaults to TRUE.
+options('huxtable.latex_use_fontspec'). If TRUE, use the &quot;fontspec&quot; package, which allows
+you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
+engine, which can be set using an .rmd header option. Note that quick_pdf()
+may use pdflatex. It defaults to FALSE.
 options('huxtable.autoformat_number_format') and options('huxtable.autoformat_align') are
 lists. The list names are base R classes. huxtable() with autoformat = TRUE will set
 number_format() and align() for data columns according to the corresponding list values.
@@ -88,7 +92,7 @@ something like list(..., Date = &quot;center&quot;, ...).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
       </span>
     </div>
 
@@ -123,7 +127,7 @@ something like list(..., Date = &quot;center&quot;, ...).
   </ul>
 </li>
 <li>
-  <a href="../reference/">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -171,6 +175,10 @@ before printing in knitr. The function should take one argument (a data frame) a
 huxtable. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat')</a></code> sets the default value for <code>autoformat</code> in <code><a href='huxtable.html'>huxtable()</a></code> and
 <code><a href='as_huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
+<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.latex_use_fontspec')</a></code>. If <code>TRUE</code>, use the "fontspec" package, which allows
+you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
+engine, which can be set using an .rmd header option. Note that <code><a href='quick-output.html'>quick_pdf()</a></code>
+may use pdflatex. It defaults to <code>FALSE</code>.</p></li>
 <li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat_number_format')</a></code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat_align')</a></code> are
 lists. The list names are base R classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set
 <code><a href='number_format.html'>number_format()</a></code> and <code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values.

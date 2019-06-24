@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -144,7 +144,7 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>A character vector of font names. NB that LaTeX and HTML use different font names.</p>
+      <td><p>A character vector of font names.</p>
 <p>Set to <code>NA</code> to reset to the default, which is <code>NA</code>.</p></td>
     </tr>
     <tr>
@@ -170,6 +170,12 @@
     <p>For <code>font</code>, the <code>font</code> property.
 For <code>set_font</code> and <code>map_font</code>, the modified huxtable.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>LaTeX and HTML use different font names. If you want to use the same font
+names across document formats, set <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("huxtable.latex_use_fontspec")</a></code>
+to <code>TRUE</code>. See <a href='huxtable-options.html'>huxtable-options</a>.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other formatting functions: <code><a href='background_color.html'>background_color</a></code>,
@@ -181,36 +187,36 @@ For <code>set_font</code> and <code>map_font</code>, the modified huxtable.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>font</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"times"</span>
-<span class='fu'>font</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type    price   V1      V1      V1      V1     
-#&gt; 1 "times" "times" "times" "times" "times" "times"
-#&gt; 2 "times" "times" "times" "times" "times" "times"
-#&gt; 3 "times" "times" "times" "times" "times" "times"
-#&gt; 4 "times" "times" "times" "times" "times" "times"</div><div class='input'>
+<span class='fu'>font</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type    price  
+#&gt; 1 "times" "times"
+#&gt; 2 "times" "times"
+#&gt; 3 "times" "times"
+#&gt; 4 "times" "times"</div><div class='input'>
 
 <span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font</span>(<span class='no'>jams</span>,
       <span class='st'>"times"</span>)
-<span class='fu'>font</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type    price   V1      V1      V1      V1     
-#&gt; 1 "times" "times" "times" "times" "times" "times"
-#&gt; 2 "times" "times" "times" "times" "times" "times"
-#&gt; 3 "times" "times" "times" "times" "times" "times"
-#&gt; 4 "times" "times" "times" "times" "times" "times"</div><div class='input'>
+<span class='fu'>font</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type    price  
+#&gt; 1 "times" "times"
+#&gt; 2 "times" "times"
+#&gt; 3 "times" "times"
+#&gt; 4 "times" "times"</div><div class='input'>
 <span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='st'>"times"</span>)
-<span class='fu'>font</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type    price   V1      V1      V1      V1     
-#&gt; 1 "times" "times" "times" "times" "times" "times"
-#&gt; 2 "times" "times" "times" "times" "times" "times"
-#&gt; 3 "times" "times" "times" "times" "times" "times"
-#&gt; 4 "times" "times" "times" "times" "times" "times"</div><div class='input'>
+<span class='fu'>font</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type    price  
+#&gt; 1 "times" "times"
+#&gt; 2 "times" "times"
+#&gt; 3 "times" "times"
+#&gt; 4 "times" "times"</div><div class='input'>
 <span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_font</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
         <span class='st'>"times"</span>,
         <span class='st'>"arial"</span>)
       )
-<span class='fu'>font</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type    price   V1      V1      V1      V1     
-#&gt; 1 "times" "times" "times" "times" "times" "times"
-#&gt; 2 "arial" "arial" "arial" "arial" "arial" "arial"
-#&gt; 3 "times" "times" "times" "times" "times" "times"
-#&gt; 4 "arial" "arial" "arial" "arial" "arial" "arial"</div></pre>
+<span class='fu'>font</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type    price  
+#&gt; 1 "times" "times"
+#&gt; 2 "arial" "arial"
+#&gt; 3 "times" "times"
+#&gt; 4 "arial" "arial"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -218,6 +224,8 @@ For <code>set_font</code> and <code>map_font</code>, the modified huxtable.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

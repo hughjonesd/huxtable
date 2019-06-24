@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -179,32 +179,37 @@ return the underlying data.</p>
 copied into <code>x</code>. In addition, if <code>value</code> fills up an entire column, then column properties
 will be copied into the replaced columns of <code>x</code>, and if it fills up an entire row, then
 row properties will be copied into the replaced rows of <code>x</code>.</p>
-<p>Replacement functions <code>$&lt;-</code> and <code>[[&lt;-</code> change the data without affecting any properties.</p>
+<p>Replacement functions <code>$&lt;-</code> and <code>[[&lt;-</code> replace existing data without affecting any properties.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(
-        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-        <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
-      )
-
-<span class='no'>ht</span>[<span class='fl'>1</span>:<span class='fl'>2</span>, ]</div><div class='output co'>#&gt;         1   a        
-#&gt;         2   b        
+    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;   Type           Price  
+#&gt;   Strawberry      1.90  
+#&gt;   Raspberry       2.10  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='no'>ht</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;                1  
-#&gt;                2  
-#&gt;                3  
+#&gt; Column names: Type, price</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;   Type            
+#&gt;   Strawberry      
+#&gt;   Raspberry       
+#&gt;   Plum            
 #&gt; 
-#&gt; Column names: a</div><div class='input'><span class='no'>ht</span>$<span class='no'>a</span></div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='fl'>10</span>:<span class='fl'>11</span>, <span class='fl'>12</span>:<span class='fl'>13</span>)
-<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht2</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>ht</span>[<span class='fl'>2</span>:<span class='fl'>3</span>,] <span class='kw'>&lt;-</span> <span class='no'>ht2</span>
-<span class='no'>ht</span></div><div class='output co'>#&gt;         1         1  
-#&gt;   <span style='font-weight: bold;'>     10</span><span>   </span><span style='font-weight: bold;'>     12</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>     11</span><span>   </span><span style='font-weight: bold;'>     13</span><span>  
+#&gt; Column names: Type</div><div class='input'><span class='no'>jams</span>$<span class='no'>Type</span></div><div class='output co'>#&gt; [1] "Type"       "Strawberry" "Raspberry"  "Plum"      </div><div class='input'><span class='no'>prices</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>))
+<span class='fu'><a href='number_format.html'>number_format</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>2</span>
+<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='no'>jams</span>[, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='no'>prices</span>
+<span class='no'>jams</span></div><div class='output co'>#&gt;   Type         <span style='font-weight: bold;'>Price  </span><span>  
+#&gt;   Strawberry   </span><span style='font-weight: bold;'>1.70   </span><span>  
+#&gt;   Raspberry    </span><span style='font-weight: bold;'>2.00   </span><span>  
+#&gt;   Plum         </span><span style='font-weight: bold;'>2.20   </span><span>  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'>
-</div></span></pre>
+#&gt; Column names: Type, price</div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>jams</span>)
+<span class='no'>jams</span>$<span class='no'>price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>)
+<span class='no'>jams</span></div><div class='output co'>#&gt;   Type         </span><span style='font-weight: bold;'>Price  </span><span>  
+#&gt;   Strawberry   </span><span style='font-weight: bold;'>1.70   </span><span>  
+#&gt;   Raspberry    </span><span style='font-weight: bold;'>2.00   </span><span>  
+#&gt;   Plum         </span><span style='font-weight: bold;'>2.20   </span><span>  
+#&gt; 
+#&gt; Column names: Type, price</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

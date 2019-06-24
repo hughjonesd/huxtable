@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   </ul>
 </li>
 <li>
-  <a href="../reference/">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -181,36 +181,36 @@ For <code>set_font_size</code> and <code>map_font_size</code>, the modified huxt
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>font_size</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>14</span>
-<span class='fu'>font_size</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   14    14 14 14 14 14
-#&gt; 2   14    14 14 14 14 14
-#&gt; 3   14    14 14 14 14 14
-#&gt; 4   14    14 14 14 14 14</div><div class='input'>
+<span class='fu'>font_size</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
 
 <span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
       <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   14    14 14 14 14 14
-#&gt; 2   14    14 14 14 14 14
-#&gt; 3   14    14 14 14 14 14
-#&gt; 4   14    14 14 14 14 14</div><div class='input'>
+<span class='fu'>font_size</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
 <span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   14    14 14 14 14 14
-#&gt; 2   14    14 14 14 14 14
-#&gt; 3   14    14 14 14 14 14
-#&gt; 4   14    14 14 14 14 14</div><div class='input'>
+<span class='fu'>font_size</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   14    14
+#&gt; 3   14    14
+#&gt; 4   14    14</div><div class='input'>
 <span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_font_size</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
         <span class='fl'>14</span>,
         <span class='fl'>12</span>)
       )
-<span class='fu'>font_size</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   14    14 14 14 14 14
-#&gt; 2   12    12 12 12 12 12
-#&gt; 3   14    14 14 14 14 14
-#&gt; 4   12    12 12 12 12 12</div></pre>
+<span class='fu'>font_size</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   14    14
+#&gt; 2   12    12
+#&gt; 3   14    14
+#&gt; 4   12    12</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
