@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
       </span>
     </div>
 
@@ -179,36 +179,36 @@ to achieve a nice result, in both HTML and LaTeX.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>rotation</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>90</span>
-<span class='fu'>rotation</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   90    90 90 90 90 90
-#&gt; 2   90    90 90 90 90 90
-#&gt; 3   90    90 90 90 90 90
-#&gt; 4   90    90 90 90 90 90</div><div class='input'>
+<span class='fu'>rotation</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   90    90
+#&gt; 2   90    90
+#&gt; 3   90    90
+#&gt; 4   90    90</div><div class='input'>
 
 <span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
       <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   90    90 90 90 90 90
-#&gt; 2   90    90 90 90 90 90
-#&gt; 3   90    90 90 90 90 90
-#&gt; 4   90    90 90 90 90 90</div><div class='input'>
+<span class='fu'>rotation</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   90    90
+#&gt; 2   90    90
+#&gt; 3   90    90
+#&gt; 4   90    90</div><div class='input'>
 <span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_rotation</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>90</span>)
-<span class='fu'>rotation</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price V1 V1 V1 V1
-#&gt; 1   90    90 90 90 90 90
-#&gt; 2   90    90 90 90 90 90
-#&gt; 3   90    90 90 90 90 90
-#&gt; 4   90    90 90 90 90 90</div><div class='input'>
+<span class='fu'>rotation</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   90    90
+#&gt; 2   90    90
+#&gt; 3   90    90
+#&gt; 4   90    90</div><div class='input'>
 <span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_rotation</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
         <span class='fl'>90</span>,
         <span class='fl'>270</span>)
       )
-<span class='fu'>rotation</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price  V1  V1  V1  V1
-#&gt; 1   90    90  90  90  90  90
-#&gt; 2  270   270 270 270 270 270
-#&gt; 3   90    90  90  90  90  90
-#&gt; 4  270   270 270 270 270 270</div></pre>
+<span class='fu'>rotation</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
+#&gt; 1   90    90
+#&gt; 2  270   270
+#&gt; 3   90    90
+#&gt; 4  270   270</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
