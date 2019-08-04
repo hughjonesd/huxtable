@@ -183,3 +183,10 @@ test_that("HTML gives warnings for double borders not wide enough", {
   top_border(ht) <- 3
   expect_silent(to_html(ht))
 })
+
+
+test_that("Chinese characters are not repeated", {
+  ht <- hux("中文")
+  expect_silent(s <- to_screen(ht))
+  expect_match(s, "^\\s*中文\\s*$", all = FALSE, perl = TRUE)
+})

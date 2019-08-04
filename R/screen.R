@@ -301,7 +301,10 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   }
 
   dc$text_height <- sapply(dc$strings, length)
-  dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x)))
+  # we use nchar(type = "c") because otherwise, when characters have
+  # screen width > 1, "cols"
+  # in the loop below will be too long, leading to the text being repeated:
+  dc$text_width <- sapply(dc$strings, function (x) max(nchar(x, type = "c")))
 
   # row heights as widths: start at 0 and increase it if it"s too little, sharing equally among relevant cols
   dc <- dc[order(dc$rowspan), ]
@@ -380,6 +383,7 @@ str_pad <- function (strings, align, strlen) {
     stop  <- ncharw(stencils)
   }
   substr(stencils, start, stop) <- strings
+  stencils <- strtrim(stencils, strlen)
 
   stencils
 }
