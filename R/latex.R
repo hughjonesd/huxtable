@@ -373,13 +373,17 @@ build_tabular <- function(ht) {
   # lborders and rborders are already in 'correct' positions, as calculated by collapsed_borders
   # we need to have only the rborders that correspond to a display area's right hand border;
   # these should go in the left hand cell position with the other stuff!
-
+  # We work out the correct rborders by row:
+  for (r in seq_len(nrow(ht))) {
+    row_idx <- row(ht) == r
+    rborders[left_idx & row_idx] <- rborders[right_idx & row_idx]
+  }
   # all left hand cells have borders
   multicol[left_idx] <- sprintf("\\multicolumn{%d}{%s%s%s}{",
           colspan_lhdc,
           lborders[left_idx],
           colspec_lhdc,
-          rborders[right_idx]
+          rborders[left_idx]
         )
 
   ## MULTIROW ---------------------

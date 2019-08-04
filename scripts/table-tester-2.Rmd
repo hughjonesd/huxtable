@@ -265,6 +265,29 @@ ht
 
 \FloatBarrier
 
+# Multirow/multicol and borders
+
+```{r}
+ht <- make(nrow = 3, ncol = 3)
+ht <- set_all_borders(ht, 0)
+ht <- set_all_borders(ht, 1, 1, 1)
+rowspan(ht)[1, 1] <- 2
+caption(ht) <- "Col 1 rows 1-2 merged, row 1 col 1 has all borders"
+ht
+
+rowspan(ht)[1, 1] <- 1
+colspan(ht)[1, 1] <- 2
+caption(ht) <- "Row 1 cols 1-2 merged, row 1 col 1 has all borders"
+ht
+
+rowspan(ht)[1, 1] <- 2
+colspan(ht)[1, 1] <- 2
+caption(ht) <- "Rows 1-2 cols 1-2 merged, row 1 col 1 has all borders"
+ht
+
+
+```
+
 # Border color left and right/top and bottom
 
 ```{r}
