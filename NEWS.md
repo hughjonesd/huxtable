@@ -4,6 +4,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable 4.6.0.9000
 
+* Bugfix: right borders in wrong place when cells were merged.
 
 # huxtable 4.6.0
 
