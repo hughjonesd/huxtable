@@ -285,6 +285,14 @@ colspan(ht)[1, 1] <- 2
 caption(ht) <- "Rows 1-2 cols 1-2 merged, row 1 col 1 has all borders"
 ht
 
+rowspan(ht)[1, 1] <- 1
+colspan(ht)[1, 1] <- 1
+rowspan(ht)[2, 2] <- 2
+colspan(ht)[2, 2] <- 2
+ht <- set_all_borders(ht, 0)
+ht <- set_all_borders(ht, 2, 2, 1)
+caption(ht) <- "Rows 2-3 cols 2-3 merged, row 2 col 2 has all borders"
+ht
 
 ```
 
