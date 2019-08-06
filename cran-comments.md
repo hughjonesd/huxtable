@@ -11,3 +11,5 @@ This fixes two bugs, one major.
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
+
+Reverse dependencies were also checked (jtools, interactions, envirem).
