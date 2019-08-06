@@ -23,3 +23,4 @@ logo\.xcf
 ^run-covr\.R$
 ^appveyor\.yml$
 ^delete-appveyor-cache\.sh$
+^CRAN-RELEASE$
