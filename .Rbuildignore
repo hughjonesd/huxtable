@@ -1,3 +1,4 @@
+^cran-comments\.md$
 ^packrat/
 ^revdep/
 ^\.github/
