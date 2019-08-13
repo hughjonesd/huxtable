@@ -187,30 +187,30 @@ For <code>set_bold</code> and <code>map_bold</code>, the modified huxtable.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>bold</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>TRUE</span>
-<span class='fu'>bold</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1 TRUE  TRUE
-#&gt; 2 TRUE  TRUE
-#&gt; 3 TRUE  TRUE
-#&gt; 4 TRUE  TRUE</div><div class='input'>
+<span class='fu'>bold</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price   V1   V1
+#&gt; 1 TRUE  TRUE TRUE TRUE
+#&gt; 2 TRUE  TRUE TRUE TRUE
+#&gt; 3 TRUE  TRUE TRUE TRUE
+#&gt; 4 TRUE  TRUE TRUE TRUE</div><div class='input'>
 
-<span class='fu'>set_bold</span>(<span class='no'>jams</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'>   1.90</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'>   2.10</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'>   1.80</span><span>  
+<span class='fu'>set_bold</span>(<span class='no'>jams</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'> 1.90</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'> 2.10</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'> 1.80</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>set_bold</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'>   1.90</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'>   2.10</span><span>  
-#&gt;   </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'>   1.80</span><span>  
+#&gt; Column names: Type, price, V1, V1</div><div class='input'><span class='fu'>set_bold</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'> 1.90</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'> 2.10</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
+#&gt;   </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'> 1.80</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>map_bold</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;   </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;   Strawberry      1.90  
-#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'>   2.10</span><span>  
-#&gt;   Plum            1.80  
+#&gt; Column names: Type, price, V1, V1</div><div class='input'><span class='fu'>map_bold</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;   </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
+#&gt;   Strawberry    1.90   60.00%   60.00%  
+#&gt;   </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'> 2.10</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>   </span><span style='font-weight: bold;'>60.00%</span><span>  
+#&gt;   Plum          1.80   60.00%   60.00%  
 #&gt; 
-#&gt; Column names: Type, price</div></span></pre>
+#&gt; Column names: Type, price, V1, V1</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
