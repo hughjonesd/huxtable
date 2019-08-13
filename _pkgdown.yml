@@ -78,10 +78,8 @@ reference:
       - starts_with("right_")
       - starts_with("bottom_")
       - starts_with("top_")
-      - set_all_borders
-      - set_all_border_colors
-      - set_all_padding
-      - set_outer_borders
+      - starts_with("set_all")
+      - starts_with("set_outer")
   - title: "Cell properties"
     desc: Other cell-level properties
     contents:
@@ -106,7 +104,7 @@ reference:
     - mapping-functions
   - title: "Output"
     desc: >
-      Functions to outut huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen
+      Functions to output huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen
     contents:
       - as_FlexTable
       - as_Workbook

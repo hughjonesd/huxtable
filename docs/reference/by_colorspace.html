@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
       </span>
     </div>
 
@@ -175,8 +175,7 @@ normally resets to the default.</p></td>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (! <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"scales"</span>)) {
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/stop'>stop</a></span>(<span class='st'>"Please install the \"scales\" package to run this example"</span>)
-}
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>25</span>), <span class='fl'>5</span>, <span class='fl'>5</span>))
+}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: scales</span></div><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>25</span>), <span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
       <span class='fu'>by_colorspace</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"blue"</span>))</div><div class='output co'>#&gt;   <span style='background-color: #BBBB00;'> 0.648 </span><span>   </span><span style='background-color: #BBBB00;'>-0.171  </span><span>   </span><span style='background-color: #BBBB00;'> 0.724 </span><span>   </span><span style='background-color: #BBBB00;'> 0.77 </span><span>   </span><span style='background-color: #BB0000;'>-0.872 </span><span>  
 #&gt;   </span><span style='background-color: #BBBB00;'> 0.0758</span><span>   </span><span style='background-color: #BB00BB;'> 1.63   </span><span>   </span><span style='background-color: #0000BB;'> 2.35  </span><span>   </span><span style='background-color: #BBBB00;'> 0.563</span><span>   </span><span style='background-color: #BBBB00;'> 0.107 </span><span>  
