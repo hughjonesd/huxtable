@@ -224,7 +224,9 @@ huxreg <- function (
   all_sumstats <- lapply(models, function(m) {
     bg <- try(glance(m), silent = TRUE)
     bg <- if (inherits(bg, "try-error")) {
-      warning("No `glance` method for model of class ", class(m)[1])
+      warning(sprintf("Error calling `glance` on object of class %s:",
+            class(m)[1]))
+      warning(bg)
       NULL
     } else t(bg)
     nobs <- tryCatch(nobs(m, use.fallback = TRUE), error = function (e) NA)

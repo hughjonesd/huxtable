@@ -2,6 +2,10 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
+# huxtable (development version)
+
+* Better error messages in huxreg
+
 # huxtable 4.6.1
 
 * Bugfix: right borders in wrong place when cells were merged.
