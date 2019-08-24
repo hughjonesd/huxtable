@@ -141,7 +141,11 @@ huxreg <- function (
   tidied <- lapply(seq_along(models), if (is.null(ci_level)) my_tidy else tidy_with_ci)
 
   # select coefficients
-  my_coefs <- unique(unlist(lapply(tidied, function (x) x$term)))
+  my_coefs <- unique(unlist(lapply(tidied, function (x) {
+    if (! "term" %in% names(x)) stop("No 'terms' column in result returned from `tidy()`")
+    x$term
+  })))
+
   if (! missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
   if (! missing(coefs)) {
     if (! all(coefs %in% my_coefs)) stop("Unrecognized coefficient names: ",
