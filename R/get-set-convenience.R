@@ -320,7 +320,7 @@ merge_cells <- function (ht, row, col) {
 }
 
 
-#' Merge repeated rows into a single cell
+#' Merge repeated rows into multirow cells
 #'
 #' @param ht A huxtable.
 #' @param row A row specification.
@@ -330,9 +330,10 @@ merge_cells <- function (ht, row, col) {
 #' @export
 #'
 #' @details
-#' Repeated rows in each column are merged into a single cell.
+#' Repeated rows in each column are merged into cells with
+#' `rowspan > 1`.
 #'
-#' Behaviour is undefined if `row`s are not contiguous.
+#' If `row` contains gaps, results may be unexpected (and a warning is given).
 #'
 #' @seealso merge_cells
 #'
@@ -350,6 +351,9 @@ merge_repeated_rows <- function (ht, row, col) {
   if (is.logical(row)) row <- which(row)
   if (is.logical(col)) col <- which(col)
 
+  if (length(row) > 1L && ! all(row == seq(min(row), max(row)))) {
+    warning("Non-contiguous rows: ", paste(row, collapse = ", "))
+  }
   for (cc in col) {
     contents <- ht[row, ][[cc]] # gets a vector
     new <- which(c(TRUE, contents[seq_len(length(contents) - 1)] != contents[-1]))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get-set-convenience.R
 \name{merge_repeated_rows}
 \alias{merge_repeated_rows}
-\title{Merge repeated rows into a single cell}
+\title{Merge repeated rows into multirow cells}
 \usage{
 merge_repeated_rows(ht, row, col)
 }
@@ -17,12 +17,13 @@ merge_repeated_rows(ht, row, col)
 The modified huxtable.
 }
 \description{
-Merge repeated rows into a single cell
+Merge repeated rows into multirow cells
 }
 \details{
-Repeated rows in each column are merged into a single cell.
+Repeated rows in each column are merged into cells with
+\code{rowspan > 1}.
 
-Behaviour is undefined if \code{row}s are not contiguous.
+If \code{row} contains gaps, results may be unexpected (and a warning is given).
 }
 \examples{
 ht <- as_hux(jams[c(1, 2, 2, 3, 3, 4), ])
