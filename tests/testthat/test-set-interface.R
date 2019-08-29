@@ -287,5 +287,14 @@ test_that("merge_repeated_rows", {
 
   expect_warning(merge_repeated_rows(ht, ht$c %in% c(1, 3), "a"))
   expect_warning(merge_repeated_rows(ht, c(1, 3), "a"))
+
+  ht9 <- ht
+  ht9$b <- as.factor(ht9$b)
+  ht9 <- merge_repeated_rows(ht9)
+  expect_equivalent(rowspan(ht9), matrix(c(1, 2, 1, 2, 1, 1, 1, 1, 1), 3, 3))
+
+  ht_long <- hux(a = c(1, 2, 2, 1, 1))
+  ht_long<- merge_repeated_rows(ht_long)
+  expect_equivalent(rowspan(ht_long), matrix(c(1, 2, 1, 2, 1), 5, 1))
 })
 
