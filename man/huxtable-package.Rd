@@ -14,7 +14,8 @@ To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\l
 For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 read the vignette with \code{vignette('huxtable')}.
 
-See \link{huxtable-FAQ} for frequently asked questions.
+See \link{huxtable-FAQ} for frequently asked questions, including ways to get
+help.
 
 To report a bug, or suggest an enhancement, visit
 \href{https://github.com/hughjonesd/huxtable/issues}{github}.

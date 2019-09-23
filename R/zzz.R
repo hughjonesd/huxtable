@@ -12,7 +12,8 @@
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 #' read the vignette with `vignette('huxtable')`.
 #'
-#' See [huxtable-FAQ] for frequently asked questions.
+#' See [huxtable-FAQ] for frequently asked questions, including ways to get
+#' help.
 #'
 #' To report a bug, or suggest an enhancement, visit
 #' \href{https://github.com/hughjonesd/huxtable/issues}{github}.
@@ -59,7 +60,7 @@ NULL
 
 
 
-#' Frequently Asked Questions
+#' Frequently Asked Questions, including how to get help
 #'
 #' A FAQ of common issues.
 #'
