@@ -2,12 +2,45 @@
 # package documentation and onLoad function --------------------------------------------------------
 
 
-#' Huxtable: simply create LaTeX and HTML tables
+#' Quick introduction to huxtable
 #'
 #' Huxtable is a package for creating HTML and LaTeX tables. It provides similar
 #' functionality to xtable, with a simpler interface.
 #'
-#' To create a huxtable object, use [huxtable()] or [as_huxtable()].
+#' @section Quick start:
+#'
+#' To create a huxtable object, use [huxtable()] or [as_huxtable()]:
+#'
+#' ```
+#'  library(huxtable)
+#'  employees <- huxtable(
+#'          Names    = c("Hadley", "Yihui", "Dirk"),
+#'          Salaries = c(1e5, 1e5, 1e5),
+#'          add_colnames = TRUE
+#'        )
+#'  car_hux <- as_hux(mtcars, add_colnames = TRUE)
+#'
+#' ```
+#'
+#' You can then set properties which affect how the huxtable is displayed:
+#'
+#' ```
+#'  # make the first row bold:
+#'  bold(employees)[1, ] <- TRUE
+#'
+#'  # change the font size everywhere:
+#'  font_size(employees) <- 10
+#' ```
+#'
+#' Or you can use a tidyverse style with the pipe operator:
+#'
+#' ```
+#' library(magrittr)
+#' employees <- employees %>%
+#'       set_font_size(10) %>%
+#'       set_bold(1, everywhere, TRUE)
+#'
+#' ```
 #'
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 #' read the vignette with `vignette('huxtable')`.
@@ -18,10 +51,9 @@
 #' To report a bug, or suggest an enhancement, visit
 #' \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 #'
-#' @seealso [huxtable-options]
 #' @name huxtable-package
 #' @aliases huxtable_package
-NULL
+"_PACKAGE"
 
 
 #' Package options
@@ -55,6 +87,7 @@ NULL
 #'   For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
 #'   something like `list(..., Date = "center", ...)`.
 #' @name huxtable-options
+#' @docType package
 #' @aliases huxtable_options
 NULL
 
@@ -121,6 +154,7 @@ NULL
 #' I'd rather you asked on a public website. If you then email me a link, I may be able to help.
 #'
 #' @name huxtable-FAQ
+#' @docType package
 #' @aliases huxtable_FAQ
 NULL
 
