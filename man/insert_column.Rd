@@ -30,12 +30,10 @@ In \code{insert_column} only, you can use a column name for \code{after}.
 }
 \examples{
 ht <- hux(a = 1:5, b = 1:5, c = 1:5)
-insert_row(ht, 2.5, 2.5, 2.5,
-      after = 2)
+insert_row(jams, c("Gooseberry", 2.15), after = 1)
 
-insert_column(ht, 5:1)
-insert_column(ht, 5:1, after = 3)
-insert_column(ht, 5:1, after = "b")
+insert_column(jams, c("Sugar", "50\%", "60\%", "40\%"), after = "Price")
+insert_column(jams, "Sugar", fill = "50\%", after = "Price")
 }
 \seealso{
 \code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.

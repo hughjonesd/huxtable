@@ -26,21 +26,16 @@ NULL
 #' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
 #'
 #' @examples
-#' ht <- hux(
-#'         Jam = c("Raspberry", "Plum"),
-#'         Price = c(1.90, 1.80),
-#'         add_colnames = TRUE
-#'       )
 #'
-#' ht2 <- hux("Gooseberry", 2.10)
-#' add_rows(ht, ht2)
-#' add_rows(ht, ht2, after = 1)
+#' ht <- hux("Gooseberry", 2.15)
+#' add_rows(jams, ht)
+#' add_rows(jams, ht, after = 1)
 #'
 #' mx <- matrix(
-#'       c("Sugar", "50%", "60%",
-#'       "Weight (g)", 300, 250),
-#'       3, 2)
-#' add_columns(ht, mx, after = "Jam")
+#'       c("Sugar", "50%", "60%", "40%",
+#'       "Weight (g)", 300, 250, 300),
+#'       4, 2)
+#' add_columns(jams, mx)
 add_rows <- function (x, y, after = nrow(x), ...) {
   add_row_cols(x, y, after, dimno = 1, ...)
 }
@@ -67,7 +62,9 @@ add_row_cols <- function (x, y, after, dimno, ...) {
   end_idx <- dims[dimno]
   assert_that(is.numeric(dims))
   if (is.character(after)) {
-    after <- match(after, dimnames(x)[[dimno]])
+    after_n <- match(after, dimnames(x)[[dimno]])
+    if (is.na(after_n)) stop("Could not find column name \"", after, "\" in huxtable")
+    after <- after_n
   }
   assert_that(is.number(after), after >= 0, after <= end_idx)
 
@@ -105,12 +102,10 @@ add_row_cols <- function (x, y, after, dimno, ...) {
 #'
 #' @examples
 #' ht <- hux(a = 1:5, b = 1:5, c = 1:5)
-#' insert_row(ht, 2.5, 2.5, 2.5,
-#'       after = 2)
+#' insert_row(jams, c("Gooseberry", 2.15), after = 1)
 #'
-#' insert_column(ht, 5:1)
-#' insert_column(ht, 5:1, after = 3)
-#' insert_column(ht, 5:1, after = "b")
+#' insert_column(jams, c("Sugar", "50%", "60%", "40%"), after = "Price")
+#' insert_column(jams, "Sugar", fill = "50%", after = "Price")
 insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
   # is.count would complain about 0
   assert_that(is.scalar(after), is.number(after) || is.string(after))
