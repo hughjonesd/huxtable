@@ -105,7 +105,6 @@ add_row_cols <- function (x, y, after, dimno, ...) {
 #' insert_row(jams, c("Gooseberry", 2.15), after = 1)
 #'
 #' insert_column(jams, c("Sugar", "50%", "60%", "40%"), after = "Price")
-#' insert_column(jams, "Sugar", fill = "50%", after = "Price")
 insert_column <- function (ht, ..., after = 0, copy_cell_props = TRUE) {
   # is.count would complain about 0
   assert_that(is.scalar(after), is.number(after) || is.string(after))

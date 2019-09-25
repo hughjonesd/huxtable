@@ -4,7 +4,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
-* Better error messages in huxreg.
+* Better error messages.
 * New `merge_repeated_rows()` function: merge repeated rows into a single
   cell.
 

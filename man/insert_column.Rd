@@ -33,7 +33,6 @@ ht <- hux(a = 1:5, b = 1:5, c = 1:5)
 insert_row(jams, c("Gooseberry", 2.15), after = 1)
 
 insert_column(jams, c("Sugar", "50\%", "60\%", "40\%"), after = "Price")
-insert_column(jams, "Sugar", fill = "50\%", after = "Price")
 }
 \seealso{
 \code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.
