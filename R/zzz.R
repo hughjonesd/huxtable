@@ -172,7 +172,7 @@ NULL
 #'
 #' A huxtable of jams.
 #'
-#' @format A data frame with 4 rows and 2 columns ("Type" and "Price").
+#' @format A huxtable with 4 rows and 2 columns ("Type" and "Price").
 "jams"
 
 .onLoad <- function(libname, pkgname) {
