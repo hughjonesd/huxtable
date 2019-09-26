@@ -36,6 +36,9 @@ test_that("insert_column and insert_row work", {
   expect_equivalent(nrow(ht), 3)
   expect_equivalent(ht[, 2], huxtable(b = c(1, 9, 2)))
 
+  ht <- insert_row(ht_orig, 1, fill = 0, after = 1)
+  expect_equivalent(ht[2, ], huxtable(1, 0))
+
   ht <- insert_column(ht_orig, 8, 9)
   expect_equivalent(ncol(ht), 3)
   expect_equivalent(ht[2, 1], 9)
@@ -43,6 +46,9 @@ test_that("insert_column and insert_row work", {
   ht <- insert_column(ht_orig, 8, 9, after = 1)
   expect_equivalent(ncol(ht), 3)
   expect_equivalent(ht[1, ], huxtable(a = 1, 8, b = 1))
+
+  ht <- insert_column(ht_orig, 3, fill = 0)
+  expect_equivalent(ht[, 1], huxtable(c(3, 0)))
 
   bold(ht_orig) <- TRUE
   ht <- insert_column(ht_orig, 8, 9, after = 1)
