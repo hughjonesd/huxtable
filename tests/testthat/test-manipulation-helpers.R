@@ -50,6 +50,12 @@ test_that("insert_column and insert_row work", {
   ht <- insert_column(ht_orig, 3, fill = 0)
   expect_equivalent(ht[, 1], huxtable(c(3, 0)))
 
+  ht <- insert_column(ht_orig, 3, fill = 0, rowspan = 2)
+  expect_equivalent(rowspan(ht)[, 1], c(2, 1))
+
+  ht <- insert_row(ht_orig, 3, after = 1, fill = 0, colspan = 2)
+  expect_equivalent(colspan(ht)[2, ], c(2, 1))
+
   bold(ht_orig) <- TRUE
   ht <- insert_column(ht_orig, 8, 9, after = 1)
   expect_true(bold(ht)[1, 2])

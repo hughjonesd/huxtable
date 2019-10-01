@@ -7,9 +7,11 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Better error messages.
 * New `merge_repeated_rows()` function: merge repeated rows into a single
   cell.
-* New `fill` argument for `insert_row()/insert_column()`: 
-  `insert_row(ht, "blah", "", "", "", "", ...)` can be written
-  `insert_row(ht, "blah", fill = "")`.
+* New `fill` and `colspan/rowspan` arguments for `insert_row()/insert_column()`: 
+  - `insert_row(ht, "blah", "", "", "", "", ...)` can be written
+    `insert_row(ht, "blah", fill = "")`.
+  - `colspan/rowspan` set `colspan/rowspan` of the first cell in the inserted
+    row/column.
 
 # huxtable 4.6.1
 
