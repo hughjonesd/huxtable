@@ -40,6 +40,7 @@ reference:
       - as_huxtable
       - insert_column
       - merge_cells
+      - merge_repeated_rows
       - set_contents
       - add_rows
       - mutate
@@ -140,3 +141,8 @@ reference:
       - tidy_override
       - is_a_number
       - sanitize
+
+tutorials:
+- name: 00-reporting-data
+  title: Reporting data with huxtable
+  url: https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html

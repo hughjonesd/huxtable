@@ -1,0 +1,179 @@
+---
+title: "Reporting data with huxtable 4.3.0"
+output: rmdformats::material
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Dealing with masses of data
+
+Sometimes there is a lot of data to present. For example, you might have a big
+table of regressions, or sales figures from several business units. You want to show 
+the data, while highlighting certain key elements.
+
+As an example, we'll use the `mtcars` dataset of 32 1970s automobiles.
+
+```{r}
+head(mtcars)
+```
+
+
+I will use the [huxtable
+library](https://hughjonesd.github.io/huxtable) to create a formatted table, and the
+dplyr pipe command to simplify transforming data.
+
+```{r, message = FALSE}
+library(dplyr)
+library(huxtable)
+
+car_hux <- as_huxtable(mtcars, add_colnames = TRUE, add_rownames = "Model")
+
+car_hux <- set_font_size(car_hux, 9)
+
+car_hux
+```
+
+
+This dataset contains many numbers and columns. It's easy to get lost. 
+To start, let's give alternate rows a different background. That will help readers to
+navigate through the data.
+
+Huxtable 4.3.0 introduces `map_` commands. These let you map different data cells to
+different display properties. Let's use `map_background_color` to set the background
+colour.
+
+```{r}
+
+top <- function(data, n = 8) data %>% 
+      head(n) %>% 
+      insert_row(rep("...", ncol(.)), after = n)
+
+car_hux %>% 
+      top() %>% 
+      map_background_color(by_rows("grey90", "grey98"))
+```
+
+Huxtable's built-in `theme_grey` will do that for us, and also set a few other
+sensible cosmetic defaults. We'll use that as a basis from now on.
+
+```{r}
+car_hux <- theme_grey(car_hux, header_col = FALSE)
+car_hux %>% top()
+```
+
+
+# Mapping data with `map_` commands
+
+`map_` commands take a huxtable, an optional row and column specifier, and a "mapping function" which states how to map table data to output. Mapping functions start with
+`by_`. For example, `by_rows` just says: apply this output to rows in sequence.
+
+Let's use another mapping function to highlight the cars with the best and worst fuel efficiency.
+
+```{r}
+
+car_hux %>% map_text_color(everywhere, "mpg", 
+      by_quantiles(c(0.2, 0.8), c("red", "black", "green3")))
+```
+
+
+`by_quantiles` takes a vector of quantiles, and a vector of colours. Here, we've coloured
+the bottom 20% of data red, and the top 20% green. Notice that we used one more
+colour name than quantile.
+
+This example also showed how we can select rows or columns to map, using
+the row and column specifier arguments to a `map_` command. The row specifier
+was `everywhere`, which is just huxtable shorthand for `1:nrow(car_hux)`. The
+column specifier was the column name.
+
+# Map numbers in a range with `by_colorspace`
+
+To map a continuous range of numbers, use `by_colorspace`. This takes
+a vector of colours, then maps the data continuously between them. Here,
+we'll highlight the "qsec" column, which reports the car's time to reach a quarter of a
+mile. Lower is better (if you're an adrenalin junkie), so let's make low numbers
+pop out with a yellow background:
+
+```{r}
+
+car_hux %>% map_background_color(everywhere, "qsec",
+      by_colorspace("yellow", "red"))
+
+```
+
+# Highlight text with `by_regex`
+
+`map_text_color` is another `map_` command. There is one of these commands for every
+huxtable cell property. Another one is `map_bold`. Let's use this to pick out
+the Mercedes models.
+
+For character data, we can use `by_regex` to match certain cells: 
+
+```{r}
+
+car_hux %>% 
+      map_bold(by_regex("Merc" = TRUE)) %>% 
+      top(15)
+```
+
+The syntax of `by_regex` is `"match1" = value2, "match2" = value2, ...`. Each "match"
+is a regular expression. You can read more about them in `?regexpr`. Here, we just
+used a simple regular expression, which matched every cell containing the string 
+`"Merc"`. 
+
+# Highlight a column with `set_background_color` and `set_outer_borders`
+
+Sometimes you might want to highlight an entire column of data, for example as 
+you flip through a report. Here's one way to do this:
+
+```{r}
+
+car_hux %>% 
+      set_background_color(everywhere, "hp", "yellow") %>% 
+      top()
+```
+
+While `map_` commands map different cells to different values, `set_` commands
+set all the cells in a range to the same value. Here again, we've used a 
+row specifier `everywhere` to select all rows, and picked out the horsepower
+column "hp" by name.
+
+We can do the same trick to highlight rows. Here, we'll highlight the "Hornet" cars:
+
+```{r}
+car_hux %>% 
+      set_background_color(grepl("Hornet", .$Model), everywhere, "yellow") %>% 
+      top()
+```
+
+Another way to pick out a column is to set a border around it. We can do this
+using the `set_outer_borders` function.
+
+```{r}
+
+car_hux %>% 
+      set_all_borders(everywhere, "disp", 0) %>% 
+      set_outer_borders(everywhere, "disp", 2) %>% 
+      set_all_border_colors(everywhere, "disp", "darkred") %>%  
+      top()
+```
+
+`set_outer_borders` sets borders around a square of cells. One wrinkle is that there
+is not (yet) a `set_outer_border_colors` function. Instead, we had to set borders to
+0 in the `"disp"` column, then set all border colours to dark red.
+
+# More ways to map
+
+To recap, here are some ways to highlight data using huxtable:
+
+* Use `by_rows` to set properties on alternating rows.
+* Use `by_quantiles` to highlight top and bottom numbers.
+* `by_regex` picks out cells matching certain text.
+* `set_background_color` and `set_outer_borders` can highlight whole rows and columns.
+
+There are several other ways to map data. For example, `by_cols` sets cell properties by columns. `by_cases` and `by_function` are more general solutions to pick
+out cells using more complex criteria. 
+
+Huxtable 4.3.0 is available on [CRAN](https://cran.r-project.org/package=huxtable). Happy mapping!
+  

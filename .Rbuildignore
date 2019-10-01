@@ -24,3 +24,4 @@ logo\.xcf
 ^appveyor\.yml$
 ^delete-appveyor-cache\.sh$
 ^CRAN-RELEASE$
+tutorials
