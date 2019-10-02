@@ -8,7 +8,7 @@ library(glue)
 # Check version number is up to date----------------------------------------------------------------
 
 v <- devtools::as.package('.')$version
-if (grepl(v, "9000")) stop('Still using development version. Use usethis::bump_version()')
+if (grepl(v, "9000")) stop('Still using development version. Use usethis::use_version()')
 
 
 # Check git is up to date --------------------------------------------------------------------------
