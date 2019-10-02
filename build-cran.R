@@ -3,6 +3,8 @@
 library(devtools)
 library(git2r)
 library(glue)
+library(rhub)
+library(rstudioapi)
 
 
 # Check version number is up to date----------------------------------------------------------------
@@ -22,7 +24,7 @@ if (length(gdiff) > 0) stop('Working tree differs from last commit, please make 
 # Check vignette files are same in vignettes and docs ----------------------------------------------
 
 
-for (f in list.files('vignettes')) {
+for (f in list.files('vignettes', pattern = "(Rmd|cvs)$")) {
   out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
   if (length(out) > 0) stop(glue('vignettes and docs file {f} differs, please fix!'))
 }
@@ -71,3 +73,16 @@ system2('git', c('push', '--tags'))
 # Build package
 
 devtools::build()
+
+# run checks
+
+rhc <- rhub::check_for_cran(show_status = FALSE)
+devtools::check_win_devel()
+devtools::check_win_release()
+rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_results")
+
+# update CRAN-comments.md
+
+# now release!
+
+devtools::release()
