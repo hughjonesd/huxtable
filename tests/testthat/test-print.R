@@ -190,5 +190,5 @@ test_that("Chinese characters are not repeated", {
   skip_on_os("windows")
   ht <- hux("\u4e2d\u6587")
   expect_silent(s <- to_screen(ht))
-  expect_match(s, "^\\s*\u4e2d\u6587\\s*$", all = FALSE, perl = TRUE)
+  expect_match(s, "\\n\\s*\u4e2d\u6587\\s*\\n", all = FALSE, perl = TRUE)
 })
