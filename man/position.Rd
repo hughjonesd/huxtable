@@ -32,7 +32,9 @@ explicitly.
 }
 \examples{
 
+orig <- position(jams)
 position(jams) <-  "right"
 position(jams)
 
+position(jams) <- orig
 }

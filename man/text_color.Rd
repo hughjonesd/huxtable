@@ -39,9 +39,11 @@ Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"}
 }
 \examples{
 
+orig <- text_color(jams)
 text_color(jams) <-  "blue"
 text_color(jams)
 
+text_color(jams) <- orig
 
 set_text_color(jams, "blue")
 set_text_color(jams,

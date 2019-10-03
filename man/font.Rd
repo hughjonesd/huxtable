@@ -41,9 +41,11 @@ to \code{TRUE}. See \link{huxtable-options}.
 }
 \examples{
 
+orig <- font(jams)
 font(jams) <-  "times"
 font(jams)
 
+font(jams) <- orig
 
 jams2 <- set_font(jams,
       "times")

@@ -30,9 +30,11 @@ treated as proportions of the text height (\code{\\textheight}).
 }
 \examples{
 
+orig <- row_height(jams)
 row_height(jams) <-  c(.2, .1, .1, .1)
 row_height(jams)
 
+row_height(jams) <- orig
 }
 \seealso{
 Other row/column heights: \code{\link{col_width}}

@@ -28,9 +28,11 @@ Captions are not escaped. See the example for a workaround.
 }
 \examples{
 
+orig <- caption(jams)
 caption(jams) <-  "An example table"
 caption(jams)
 jams
+caption(jams) <- orig
 
 # escape caption characters:
 caption(jams) <- sanitize(

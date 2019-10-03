@@ -31,9 +31,11 @@ The workaround is to adjust the width, so that your cells no longer overrun.
 }
 \examples{
 
+orig <- col_width(jams)
 col_width(jams) <-  c(.2, .8)
 col_width(jams)
 
+col_width(jams) <- orig
 }
 \seealso{
 Other row/column heights: \code{\link{row_height}}

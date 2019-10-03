@@ -25,9 +25,11 @@ Functions to get or set the table-level \emph{table height} property of a huxtab
 }
 \examples{
 
+orig <- height(jams)
 height(jams) <-  0.4
 height(jams)
 
+height(jams) <- orig
 }
 \seealso{
 Other table measurements: \code{\link{width}}

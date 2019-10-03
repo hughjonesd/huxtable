@@ -76,9 +76,11 @@ release.
 
 \examples{
 
+orig <- left_border(jams)
 left_border(jams) <-  1
 left_border(jams)
 jams
+left_border(jams) <- orig
 
 set_left_border(jams, 1)
 set_left_border(jams,

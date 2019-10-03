@@ -36,10 +36,12 @@ Functions to get or set the \emph{na string} property of huxtable cells.
 }
 \examples{
 
+orig <- na_string(jams)
 na_string(jams) <-  "--"
 na_string(jams)
 jams[2,2] <- NA 
 jams
+na_string(jams) <- orig
 
 jams2 <- set_na_string(jams,
       "--")

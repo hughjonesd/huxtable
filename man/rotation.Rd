@@ -40,9 +40,11 @@ to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{
 
+orig <- rotation(jams)
 rotation(jams) <-  90
 rotation(jams)
 
+rotation(jams) <- orig
 
 jams2 <- set_rotation(jams,
       90)

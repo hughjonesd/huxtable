@@ -36,9 +36,11 @@ Functions to get or set the \emph{font size} property of huxtable cells.
 }
 \examples{
 
+orig <- font_size(jams)
 font_size(jams) <-  14
 font_size(jams)
 
+font_size(jams) <- orig
 
 jams2 <- set_font_size(jams,
       14)

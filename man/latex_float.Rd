@@ -30,7 +30,9 @@ TeX \code{float} package.
 }
 \examples{
 
+orig <- latex_float(jams)
 latex_float(jams) <-  "h"
 latex_float(jams)
 
+latex_float(jams) <- orig
 }

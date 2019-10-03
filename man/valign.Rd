@@ -40,9 +40,11 @@ may help.
 }
 \examples{
 
+orig <- valign(jams)
 valign(jams) <-  "bottom"
 valign(jams)
 
+valign(jams) <- orig
 
 jams2 <- set_valign(jams,
       "bottom")

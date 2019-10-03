@@ -33,7 +33,9 @@ the \code{"tab"} prefix will be added automatically.
 }
 \examples{
 
+orig <- label(jams)
 label(jams) <-  "tab:mytable"
 label(jams)
 
+label(jams) <- orig
 }

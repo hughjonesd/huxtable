@@ -25,9 +25,11 @@ Functions to get or set the table-level \emph{table width} property of a huxtabl
 }
 \examples{
 
+orig <- width(jams)
 width(jams) <-  0.8
 width(jams)
 
+width(jams) <- orig
 }
 \seealso{
 Other table measurements: \code{\link{height}}

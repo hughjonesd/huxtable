@@ -47,9 +47,11 @@ Functions to get or set the \emph{cell text style} property of huxtable cells.
 }
 \examples{
 
+orig <- bold(jams)
 bold(jams) <-  TRUE
 bold(jams)
 
+bold(jams) <- orig
 
 set_bold(jams, TRUE)
 set_bold(jams,

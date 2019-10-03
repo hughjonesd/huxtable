@@ -40,9 +40,11 @@ a decimal point), then the cell is aligned on this character.
 }
 \examples{
 
+orig <- align(jams)
 align(jams) <-  "right"
 align(jams)
 
+align(jams) <- orig
 
 set_align(jams, "right")
 set_align(jams,
