@@ -8,11 +8,13 @@
 
 <title>Theme a huxtable — themes • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,11 @@
 
 
 
-<meta property="og:title" content="Theme a huxtable — themes" />
 
+<meta property="og:title" content="Theme a huxtable — themes" />
 <meta property="og:description" content="These functions quickly set default styles for a huxtable." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -104,7 +107,6 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -125,9 +127,7 @@
     </div>
 
     <div class="ref-description">
-    
     <p>These functions quickly set default styles for a huxtable.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>theme_plain</span>(<span class='no'>ht</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"left"</span>)
@@ -148,7 +148,7 @@
 <span class='fu'>theme_article</span>(<span class='no'>ht</span>, <span class='kw'>header_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>header_col</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>theme_mondrian</span>(<span class='no'>ht</span>, <span class='kw'>prop_colored</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>font</span> <span class='kw'>=</span> <span class='st'>"Arial"</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -181,11 +181,10 @@
       <td><p>Font to use. For LaTeX, try <code>"cmss"</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The huxtable object, appropriately styled.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>theme_plain</code> is a simple theme with a bold header, a grey striped background, and an outer border.</p>
@@ -197,7 +196,6 @@ It sets horizontal lines above and below the table.</p>
 horizontal stripes.</p>
 <p><code>theme_mondrian</code> mimics the style of a Mondrian painting, with black borders and randomized
 colors.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -206,7 +204,7 @@ colors.</p>
 #&gt; </span><span style='color: #BBBBBB;'> </span><span> </span><span style='color: #BBBBBB;background-color: #000000;font-weight: bold;'>Raspberry </span><span> </span><span style='color: #BBBBBB;'> </span><span> </span><span style='background-color: #BBBBBB;'>   2.10</span><span>  
 #&gt; </span><span style='color: #BBBBBB;'> </span><span> </span><span style='color: #BBBBBB;background-color: #000000;font-weight: bold;'>Plum      </span><span> </span><span style='color: #BBBBBB;'> </span><span> </span><span style='background-color: #DADADA;'>   1.80</span><span>  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_plain</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌──────────────────────┐
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_plain</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ┌──────────────────────┐
 #&gt; │ </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span> │
 #&gt; ├──────────────────────┤
 #&gt; │ </span><span style='background-color: #E4E4E4;'>Strawberry</span><span>   </span><span style='background-color: #E4E4E4;'>   1.90</span><span> │
@@ -214,13 +212,13 @@ colors.</p>
 #&gt; │ </span><span style='background-color: #E4E4E4;'>Plum      </span><span>   </span><span style='background-color: #E4E4E4;'>   1.80</span><span> │
 #&gt; └──────────────────────┘
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_basic</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type       │   Price  
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_basic</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type       │   Price  
 #&gt; ─────────────┼──────────
 #&gt;   Strawberry │    1.90  
 #&gt;   Raspberry  │    2.10  
 #&gt;   Plum       │    1.80  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_article</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ────────────────────────
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_article</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; ────────────────────────
 #&gt;   </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
 #&gt; ────────────────────────
 #&gt;   </span><span style='font-weight: bold;'>Strawberry</span><span>      1.90  
@@ -228,17 +226,17 @@ colors.</p>
 #&gt;   </span><span style='font-weight: bold;'>Plum      </span><span>      1.80  
 #&gt; ────────────────────────
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_mondrian</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #000000;'>┌────────────┬─────────┐</span><span>
-#&gt; </span><span style='color: #000000;'>│</span><span> Type       </span><span style='color: #000000;'>│</span><span> </span><span style='background-color: #0000BB;'>  Price</span><span> </span><span style='color: #000000;'>│</span><span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_mondrian</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #000000;'>┌────────────┬─────────┐</span><span>
+#&gt; </span><span style='color: #000000;'>│</span><span> Type       </span><span style='color: #000000;'>│</span><span>   Price </span><span style='color: #000000;'>│</span><span>
 #&gt; </span><span style='color: #000000;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #000000;'>│</span><span> Strawberry </span><span style='color: #000000;'>│</span><span>    1.90 </span><span style='color: #000000;'>│</span><span>
 #&gt; </span><span style='color: #000000;'>├────────────┼─────────┤</span><span>
-#&gt; </span><span style='color: #000000;'>│</span><span> Raspberry  </span><span style='color: #000000;'>│</span><span>    2.10 </span><span style='color: #000000;'>│</span><span>
+#&gt; </span><span style='color: #000000;'>│</span><span> </span><span style='background-color: #BBBB00;'>Raspberry </span><span> </span><span style='color: #000000;'>│</span><span>    2.10 </span><span style='color: #000000;'>│</span><span>
 #&gt; </span><span style='color: #000000;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #000000;'>│</span><span> Plum       </span><span style='color: #000000;'>│</span><span>    1.80 </span><span style='color: #000000;'>│</span><span>
 #&gt; </span><span style='color: #000000;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_grey</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_grey</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Type      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>  Price</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Strawberry</span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #E4E4E4;'>   1.90</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
@@ -248,7 +246,7 @@ colors.</p>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Plum      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #E4E4E4;'>   1.80</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_blue</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_blue</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FAFD7;font-weight: bold;'>Type      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FAFD7;font-weight: bold;'>  Price</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FAFD7;font-weight: bold;'>Strawberry</span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #D7FFFF;'>   1.90</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
@@ -258,7 +256,7 @@ colors.</p>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FAFD7;font-weight: bold;'>Plum      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #D7FFFF;'>   1.80</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_orange</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_orange</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Type      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>  Price</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Strawberry</span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #FFFFD7;'>   1.90</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
@@ -268,7 +266,7 @@ colors.</p>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #C6C6C6;font-weight: bold;'>Plum      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #FFFFD7;'>   1.80</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>theme_green</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>theme_green</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;'>┌────────────┬─────────┐</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FD75F;font-weight: bold;'>Type      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FD75F;font-weight: bold;'>  Price</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>├────────────┼─────────┤</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FD75F;font-weight: bold;'>Strawberry</span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #AFFFAF;'>   1.90</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
@@ -278,7 +276,7 @@ colors.</p>
 #&gt; </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='color: #BBBBBB;background-color: #5FD75F;font-weight: bold;'>Plum      </span><span> </span><span style='color: #BBBBBB;'>│</span><span> </span><span style='background-color: #AFFFAF;'>   1.80</span><span> </span><span style='color: #BBBBBB;'>│</span><span>
 #&gt; </span><span style='color: #BBBBBB;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, price</div></span><span class='co'># NOT RUN {</span>
+#&gt; Column names: Type, Price</div></span><span class='co'># NOT RUN {</span>
   <span class='fu'><a href='quick-output.html'>quick_pdf</a></span>(
           <span class='fu'>theme_striped</span>(<span class='no'>jams</span>),
           <span class='fu'>theme_plain</span>(<span class='no'>jams</span>),
@@ -296,11 +294,8 @@ colors.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Font size — font_size • huxtable</title>
+<title>Merge repeated rows into multirow cells — merge_repeated_rows • huxtable</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,8 @@
 
 
 
-<meta property="og:title" content="Font size — font_size" />
-<meta property="og:description" content="Functions to get or set the font size property of huxtable cells." />
+<meta property="og:title" content="Merge repeated rows into multirow cells — merge_repeated_rows" />
+<meta property="og:description" content="Merge repeated rows into multirow cells" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,19 +121,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Font size</h1>
+    <h1>Merge repeated rows into multirow cells</h1>
     
-    <div class="hidden name"><code>font_size.Rd</code></div>
+    <div class="hidden name"><code>merge_repeated_rows.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Functions to get or set the <em>font size</em> property of huxtable cells.</p>
+    <p>Merge repeated rows into multirow cells</p>
     </div>
 
-    <pre class="usage"><span class='fu'>font_size</span>(<span class='no'>ht</span>)
-<span class='fu'>font_size</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_font_size</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'>map_font_size</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+    <pre class="usage"><span class='fu'>merge_repeated_rows</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,78 +140,60 @@
       <td><p>A huxtable.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>A numeric vector. This sets the font size in points.</p>
-<p>Set to <code>NA</code> to reset to the default, which is <code>NA</code>.</p></td>
-    </tr>
-    <tr>
       <th>row</th>
-      <td><p>A row specifier. See <a href='rowspecs.html'>rowspecs</a> for details.</p></td>
+      <td><p>A row specification.</p></td>
     </tr>
     <tr>
       <th>col</th>
-      <td><p>An optional column specifier.</p></td>
-    </tr>
-    <tr>
-      <th>fn</th>
-      <td><p>A mapping function. See <a href='mapping-functions.html'>mapping-functions</a> for details.</p></td>
-    </tr>
-    <tr>
-      <th>byrow</th>
-      <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
+      <td><p>A column specification.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>font_size</code>, the <code>font_size</code> property.
-For <code>set_font_size</code> and <code>map_font_size</code>, the modified huxtable.</p>
+    <p>The modified huxtable.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Repeated rows in each column are merged into cells with
+<code>rowspan &gt; 1</code>.</p>
+<p>If <code>row</code> contains gaps, results may be unexpected (and a warning is given).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other formatting functions: <code><a href='background_color.html'>background_color</a></code>,
-  <code><a href='bold.html'>bold</a></code>, <code><a href='font.html'>font</a></code>,
-  <code><a href='na_string.html'>na_string</a></code>, <code><a href='number_format.html'>number_format</a></code>,
-  <code><a href='text_color.html'>text_color</a></code></p></div>
+    <div class='dont-index'><p>merge_cells</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>font_size</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>14</span>
-<span class='fu'>font_size</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   14    14
-#&gt; 2   14    14
-#&gt; 3   14    14
-#&gt; 4   14    14</div><div class='input'>
-
-<span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
-      <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   14    14
-#&gt; 2   14    14
-#&gt; 3   14    14
-#&gt; 4   14    14</div><div class='input'>
-<span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_font_size</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>14</span>)
-<span class='fu'>font_size</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   14    14
-#&gt; 2   14    14
-#&gt; 3   14    14
-#&gt; 4   14    14</div><div class='input'>
-<span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_font_size</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
-        <span class='fl'>14</span>,
-        <span class='fl'>12</span>)
-      )
-<span class='fu'>font_size</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;   Type price
-#&gt; 1   14    14
-#&gt; 2   12    12
-#&gt; 3   14    14
-#&gt; 4   12    12</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='no'>jams</span>[<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>), ])
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='add_rows.html'>add_columns</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"30%"</span>, <span class='st'>"40%"</span>, <span class='st'>"30%"</span>, <span class='st'>"40%"</span>, <span class='st'>"30%"</span>),
+      <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='no'>ht</span></div><div class='output co'>#&gt;   Type         Sugar   Price  
+#&gt;   Strawberry   30%      1.90  
+#&gt;   Strawberry   40%      1.90  
+#&gt;   Raspberry    30%      2.10  
+#&gt;   Raspberry    40%      2.10  
+#&gt;   Plum         30%      1.80  
+#&gt; 
+#&gt; Column names: Type, V1, Price</div><div class='input'><span class='fu'>merge_repeated_rows</span>(<span class='no'>ht</span>)</div><div class='output co'>#&gt;   Type         Sugar   Price  
+#&gt;   Strawberry   30%      1.90  
+#&gt;                40%            
+#&gt;   Raspberry    30%      2.10  
+#&gt;                40%            
+#&gt;   Plum         30%      1.80  
+#&gt; 
+#&gt; Column names: Type, V1, Price</div><div class='input'><span class='fu'>merge_repeated_rows</span>(<span class='no'>ht</span>, <span class='no'>everywhere</span>, <span class='st'>"Type"</span>)</div><div class='output co'>#&gt;   Type         Sugar   Price  
+#&gt;   Strawberry   30%      1.90  
+#&gt;                40%      1.90  
+#&gt;   Raspberry    30%      2.10  
+#&gt;                40%      2.10  
+#&gt;   Plum         30%      1.80  
+#&gt; 
+#&gt; Column names: Type, V1, Price</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

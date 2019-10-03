@@ -308,6 +308,24 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>October 3, 2019: Huxtable 4.7.0 released</h4>
+
+<p>This release improves error messages and adds some new functionality:</p>
+
+<ul>
+<li><code>merge_repeated_rows()</code> merges repeated rows in a huxtable
+to create a single cell. This is useful for dealing with e.g. grouped
+data frames.</li>
+<li><code>insert_row()</code> and <code>insert_column()</code> gain two
+new arguments, <code>fill</code> and <code>colspan/rowspan</code>. These
+can be used to quickly create a header cell:</li>
+</ul>
+
+<!-- begin.rcode eval = FALSE
+insert_row(ht, "Header Text", fill = "", colspan = nrow(ht))
+end.rcode -->
+
+
 <h4>August 6, 2019: Huxtable 4.6.1 released</h4>
 
 <p>This release fixes two bugs, including one where cell borders around

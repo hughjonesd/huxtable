@@ -8,11 +8,13 @@
 
 <title>Insert one matrix into another. — add_rows • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,11 @@
 
 
 
-<meta property="og:title" content="Insert one matrix into another. — add_rows" />
 
+<meta property="og:title" content="Insert one matrix into another. — add_rows" />
 <meta property="og:description" content="These functions combine two matrix-like objects and return the result." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -104,7 +107,6 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -125,15 +127,13 @@
     </div>
 
     <div class="ref-description">
-    
     <p>These functions combine two matrix-like objects and return the result.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>add_rows</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)
 
 <span class='fu'>add_columns</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -155,61 +155,40 @@ By default, inserts <code>y</code> after the end of <code>x</code>.</p></td>
       <td><p>Arguments passed to <code><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>rbind()</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind()</a></code></p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>add_rows</code>, the result of <code>rbind(x[1:after,], y, x[-(1:after),]</code>. For <code>add_columns</code>
 the same but with columns. <code>after = 0</code> and <code>after = nrow(x)</code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol(x)</a></code> are handled correctly.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For <code>huxtable</code> objects, arguments in <code>...</code> can include <code>copy_cell_props</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='insert_column.html'>insert_row()</a></code> and <code><a href='insert_column.html'>insert_column()</a></code>, which insert multiple values into a single row.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(
-        <span class='kw'>Jam</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Raspberry"</span>, <span class='st'>"Plum"</span>),
-        <span class='kw'>Price</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1.90</span>, <span class='fl'>1.80</span>),
-        <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-      )
-
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>"Gooseberry"</span>, <span class='fl'>2.10</span>)
-<span class='fu'>add_rows</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>)</div><div class='output co'>#&gt;   Jam            Price  
-#&gt;   Raspberry        1.9  
-#&gt;   Plum             1.8  
-#&gt;   Gooseberry       2.1  
-#&gt; 
-#&gt; Column names: Jam, Price</div><div class='input'><span class='fu'>add_rows</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt;   Jam            Price  
-#&gt;   Gooseberry       2.1  
-#&gt;   Raspberry        1.9  
-#&gt;   Plum             1.8  
-#&gt; 
-#&gt; Column names: Jam, Price</div><div class='input'>
+    <pre class="examples"><div class='input'>
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>"Gooseberry"</span>, <span class='fl'>2.15</span>)
+<span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>)</div><div class='output co'>#&gt; <span class='error'>Error in bind_df(ht, x): Can't rbind objects as they have different numbers of columns</span></div><div class='input'><span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in bind_df(ht, x): Can't rbind objects as they have different numbers of columns</span></div><div class='input'>
 <span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(
-      <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>,
-      <span class='st'>"Weight (g)"</span>, <span class='fl'>300</span>, <span class='fl'>250</span>),
-      <span class='fl'>3</span>, <span class='fl'>2</span>)
-<span class='fu'>add_columns</span>(<span class='no'>ht</span>, <span class='no'>mx</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"Jam"</span>)</div><div class='output co'>#&gt;   Jam         Sugar   Weight (g)   Price  
-#&gt;   Raspberry   50%     300            1.9  
-#&gt;   Plum        60%     250            1.8  
+      <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span>,
+      <span class='st'>"Weight (g)"</span>, <span class='fl'>300</span>, <span class='fl'>250</span>, <span class='fl'>300</span>),
+      <span class='fl'>4</span>, <span class='fl'>2</span>)
+<span class='fu'>add_columns</span>(<span class='no'>jams</span>, <span class='no'>mx</span>)</div><div class='output co'>#&gt;   Type         Price    Sugar    Sugar    Sugar   Weight (g)  
+#&gt;   Strawberry    1.90   60.00%   60.00%   50.00%       300.00  
+#&gt;   Raspberry     2.10   60.00%   60.00%   60.00%       250.00  
+#&gt;   Plum          1.80   60.00%   60.00%   40.00%       300.00  
 #&gt; 
-#&gt; Column names: Jam, V1, V2, Price</div></pre>
+#&gt; Column names: Type, Price, V1, V1.1, V1, V2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -8,11 +8,13 @@
 
 <title>Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document. — quick-output • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,11 +32,12 @@
 
 
 
-<meta property="og:title" content="Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document. — quick-output" />
 
+<meta property="og:title" content="Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document. — quick-output" />
 <meta property="og:description" content="These functions use huxtable to print objects to an output document. They are useful
 as one-liners for data reporting." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -64,7 +67,7 @@ as one-liners for data reporting." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -105,7 +108,6 @@ as one-liners for data reporting." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -126,10 +128,8 @@ as one-liners for data reporting." />
     </div>
 
     <div class="ref-description">
-    
     <p>These functions use huxtable to print objects to an output document. They are useful
 as one-liners for data reporting.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>quick_latex</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>confirm</span>(<span class='st'>"huxtable-output.tex"</span>), <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
@@ -152,7 +152,7 @@ as one-liners for data reporting.</p>
 
 <span class='fu'>quick_rtf</span>(<span class='no'>...</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>confirm</span>(<span class='st'>"huxtable-output.rtf"</span>), <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>())</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -183,18 +183,16 @@ the default width.</p></td>
 height.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Invisible <code>NULL</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Objects in <code>...</code> will be converted to huxtables, with borders added.</p>
 <p>If &#8216;file&#8217; is not specified, the command will fail in non-interactive sessions. In
 interactive sessions, the default file path is "huxtable-output.xxx" in the working directory;
 if this already exists, you will be asked to confirm manually before proceeding.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -213,11 +211,8 @@ if this already exists, you will be asked to confirm manually before proceeding.
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

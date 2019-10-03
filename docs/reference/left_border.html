@@ -8,11 +8,13 @@
 
 <title>Borders — left_border • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,11 @@
 
 
 
-<meta property="og:title" content="Borders — left_border" />
 
+<meta property="og:title" content="Borders — left_border" />
 <meta property="og:description" content="Functions to get or set the borders property of huxtable cells." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -104,7 +107,6 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -125,9 +127,7 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Functions to get or set the <em>borders</em> property of huxtable cells.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>left_border</span>(<span class='no'>ht</span>)
@@ -149,7 +149,7 @@
 <span class='fu'>bottom_border</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
 <span class='fu'>set_bottom_border</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='fu'>map_bottom_border</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -179,29 +179,25 @@
       <td><p>Deprecated. Use <code><a href='by_rows.html'>by_cols()</a></code> instead.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>For <code>left_border</code>, the <code>left_border</code> property.
 For <code>set_left_border</code> and <code>map_left_border</code>, the modified huxtable.</p>
 <p>Similarly for the other functions.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
 can only be present (if <code>value &gt; 0</code>) or absent.</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     
     <p>huxtable currently sets borders on specific cells. This can lead to surprising behaviour when
 cells span multiple rows or columns: see the example. This behaviour may be improved in a future
 release.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='set-multiple.html'>set_all_borders()</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -215,25 +211,25 @@ release.</p>
 #&gt; │ Raspberry  │    2.10  
 #&gt; │ Plum       │    1.80  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'>
+#&gt; Column names: Type, Price</div><div class='input'>
 <span class='fu'>set_left_border</span>(<span class='no'>jams</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; │ Type       │   Price  
 #&gt; │ Strawberry │    1.90  
 #&gt; │ Raspberry  │    2.10  
 #&gt; │ Plum       │    1.80  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>set_left_border</span>(<span class='no'>jams</span>,
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>set_left_border</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; │ Type       │   Price  
 #&gt; │ Strawberry │    1.90  
 #&gt; │ Raspberry  │    2.10  
 #&gt; │ Plum       │    1.80  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='fu'>map_left_border</span>(<span class='no'>jams</span>,
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>map_left_border</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>))</div><div class='output co'>#&gt; │ Type       │   Price  
 #&gt;   Strawberry      1.90  
 #&gt; │ Raspberry  │    2.10  
 #&gt;   Plum            1.80  
 #&gt; 
-#&gt; Column names: Type, price</div><div class='input'><span class='co'># When cells span multiple rows:</span>
+#&gt; Column names: Type, Price</div><div class='input'><span class='co'># When cells span multiple rows:</span>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>tribble_hux</a></span>(
   ~<span class='no'>Col1</span>,                   ~<span class='no'>Col2</span>,
   <span class='st'>"Cell 1,1 spans 2 rows"</span>, <span class='st'>"Cell 1,2"</span>,
@@ -267,15 +263,10 @@ release.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

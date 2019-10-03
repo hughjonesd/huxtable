@@ -5,7 +5,10 @@
 # pkgdown works from your tree, not from installed versions.
 # But rmarkdown::render works with installed versions.
 # So:
-# check pkgdown:::pkg_timeline("huxtable") includes the new version
+# check this includes the new version:
+
+pkgdown:::pkg_timeline("huxtable")
+
 #   (otherwise, it'll be marked as 'unreleased' in the news page)
 # checkout the version that you want on the web
 # Install the package and restart

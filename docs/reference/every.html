@@ -8,11 +8,13 @@
 
 <title>Return every n row or column numbers — every • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Return every n row or column numbers — every" />
 
+<meta property="og:title" content="Return every n row or column numbers — every" />
 <meta property="og:description" content="This is a convenience function to use in row or column specifications.
 In this context,
 every(n, from) will return from, from + n, ..., up to the number of rows
@@ -39,6 +41,7 @@ or columns of the huxtable. evens and odds return even and odd
 numbers, i.e. they are equivalent to every(2, 2) and every(2, 1) respectively.
 everywhere returns all rows or columns, equivalently to every(1)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -68,7 +71,7 @@ everywhere returns all rows or columns, equivalently to every(1)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -109,7 +112,6 @@ everywhere returns all rows or columns, equivalently to every(1)." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -130,14 +132,12 @@ everywhere returns all rows or columns, equivalently to every(1)." />
     </div>
 
     <div class="ref-description">
-    
     <p>This is a convenience function to use in row or column specifications.
 In this context,
 <code>every(n, from)</code> will return <code>from, from + n, ...,</code> up to the number of rows
 or columns of the huxtable. <code>evens</code> and <code>odds</code> return even and odd
 numbers, i.e. they are equivalent to <code>every(2, 2)</code> and <code>every(2, 1)</code> respectively.
 <code>everywhere</code> returns all rows or columns, equivalently to <code>every(1)</code>.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>every</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='no'>n</span>)
@@ -147,7 +147,7 @@ numbers, i.e. they are equivalent to <code>every(2, 2)</code> and <code>every(2,
 <span class='fu'>evens</span>(<span class='no'>ht</span>, <span class='no'>dimension</span>)
 
 <span class='fu'>odds</span>(<span class='no'>ht</span>, <span class='no'>dimension</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -168,12 +168,11 @@ numbers, i.e. they are equivalent to <code>every(2, 2)</code> and <code>every(2,
       <td><p>Number of the dimension to use.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Technically, <code>every</code> returns a 2-argument function which can be called like
 <code>f(ht, dimension)</code>. See <a href='rowspecs.html'>rowspecs</a> for details.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)
@@ -210,9 +209,7 @@ numbers, i.e. they are equivalent to <code>every(2, 2)</code> and <code>every(2,
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

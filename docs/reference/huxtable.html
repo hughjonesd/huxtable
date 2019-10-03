@@ -8,11 +8,13 @@
 
 <title>Create a huxtable — huxtable • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,11 @@
 
 
 
-<meta property="og:title" content="Create a huxtable — huxtable" />
 
+<meta property="og:title" content="Create a huxtable — huxtable" />
 <meta property="og:description" content="huxtable, or hux, creates a huxtable object." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -104,7 +107,6 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -125,9 +127,7 @@
     </div>
 
     <div class="ref-description">
-    
     <p><code>huxtable</code>, or <code>hux</code>, creates a huxtable object.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>huxtable</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>FALSE</span>),
@@ -141,7 +141,7 @@
 <span class='fu'>tribble_hux</span>(<span class='no'>...</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"huxtable.add_colnames"</span>,
   <span class='fl'>FALSE</span>), <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>))</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -164,11 +164,10 @@ to the huxtable. The string gives the name for the new column (or <code>"rowname
       <td><p>If <code>TRUE</code>, automatically format columns by type. See below.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>huxtable</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If you use <code>add_colnames</code> or <code>add_rownames</code>, be aware that these will shift your rows and columns
@@ -177,7 +176,6 @@ along by one: your old row/column 1 will now be row/column 2, etc.</p>
 the default globally by setting <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("huxtable.add_colnames")</a></code> to <code>TRUE</code> or <code>FALSE</code>.</p>
 <p><code>tribble_hux</code> is a simple wrapper around <code><a href='https://tibble.tidyverse.org/reference/tribble.html'>tibble::tribble()</a></code> which lets you create data
 in a readable format.</p>
-    
     <h2 class="hasAnchor" id="automatic-formatting"><a class="anchor" href="#automatic-formatting"></a>Automatic formatting</h2>
 
     
@@ -195,11 +193,9 @@ set automatically, as follows:</p><ul>
 <p>Automatic alignment also applies to column headers if <code>add_colnames</code> is <code>TRUE</code>; headers of
 columns aligned on a decimal point will be right-aligned. Automatic number formatting does not
 apply to column headers.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='huxtable-options.html'>huxtable-options</a></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'>huxtable</span>(
@@ -229,15 +225,10 @@ apply to column headers.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#automatic-formatting">Automatic formatting</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

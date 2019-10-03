@@ -8,11 +8,13 @@
 
 <title>Tools for LaTeX dependencies — report_latex_dependencies • huxtable</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Tools for LaTeX dependencies — report_latex_dependencies" />
 
+<meta property="og:title" content="Tools for LaTeX dependencies — report_latex_dependencies" />
 <meta property="og:description" content="report_latex_dependencies prints out and/or returns a list of LaTeX dependencies for adding
 to a LaTeX preamble.
 check_latex_dependencies checks whether the required LaTeX packages are installed.
@@ -39,6 +41,7 @@ install_latex_dependencies is a utility function to install the LaTeX packages
 that huxtable requires. It calls tinytex::tlmgr_install() if possible,
 or tlmgr install directly." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -68,7 +71,7 @@ or tlmgr install directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -109,7 +112,6 @@ or tlmgr install directly." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -130,14 +132,12 @@ or tlmgr install directly." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>report_latex_dependencies</code> prints out and/or returns a list of LaTeX dependencies for adding
 to a LaTeX preamble.</p>
 <p><code>check_latex_dependencies</code> checks whether the required LaTeX packages are installed.</p>
 <p><code>install_latex_dependencies</code> is a utility function to install the LaTeX packages
 that huxtable requires. It calls <code><a href='https://www.rdocumentation.org/packages/tinytex/topics/tlmgr'>tinytex::tlmgr_install()</a></code> if possible,
 or <code>tlmgr install</code> directly.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>report_latex_dependencies</span>(<span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>as_string</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
@@ -145,7 +145,7 @@ or <code>tlmgr install</code> directly.</p>
 <span class='fu'>check_latex_dependencies</span>(<span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>install_latex_dependencies</span>()</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -159,7 +159,7 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
       <td><p>Logical: return dependencies as a string.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>If <code>as_string</code> is <code>TRUE</code>, <code>report_latex_dependencies</code> returns a string of
@@ -167,7 +167,6 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
 <code><a href='https://www.rdocumentation.org/packages/rmarkdown/topics/latex_dependency'>rmarkdown::latex_dependency</a></code> objects, invisibly.</p>
 <p><code>check_latex_dependencies()</code> returns <code>TRUE</code> or <code>FALSE</code>.</p>
 <p><code>install_latex_dependencies</code> returns <code>TRUE</code> if <code>tlmgr</code> returns 0.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>report_latex_dependencies</span>()</div><div class='output co'>#&gt; \usepackage{array}
@@ -195,9 +194,7 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
