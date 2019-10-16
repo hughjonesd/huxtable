@@ -265,7 +265,7 @@ as_huxtable.etable  <- function(x, ...) {
   ht <- as_huxtable.default(x)
 
   # Split row_lables of merged cells
-  rown <- do.call("rbind", strsplit(ht$row_labels, "\\|"))
+  rown <- do.call("rbind", strsplit(ht[[1]], "\\|"))
 
   # Delete old row_labels
   ht[,1] <- NULL 
