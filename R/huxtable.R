@@ -256,6 +256,62 @@ as_huxtable.complex   <- as_huxtable.numeric
 
 #' @export
 #' @rdname as_huxtable
+# FIXME: Merge cells hierarchically
+# FIXME: Merge "Total Cases"
+# TODO: More testing
+as_huxtable.etable  <- function(x, ...) {
+
+  # start with default huxtable
+  ht <- as_huxtable.default(x)
+
+  # Split row_lables of merged cells
+  rown <- do.call("rbind", strsplit(ht$row_labels, "\\|"))
+
+  # Delete old row_labels
+  ht[,1] <- NULL 
+
+  # Atttach splitted row_labels
+  ht <- cbind(rown, ht)
+
+  # Iterate over columns
+  for(j in seq_len(ncol(rown))) {
+    # Add new labels and merge cells
+    rownlab <- unique(rown[,j])
+    for(r in rownlab) {
+      mergel <- which(rown[, j] == r)
+      # If alternating labels exist, do nothing
+      if(isTRUE(all.equal(min(mergel):max(mergel), mergel))) {
+        ht <- merge_cells(ht, mergel, j)
+      }
+    }
+  }
+
+  # Split column labels of merged cells
+  coln <- t(do.call("rbind", strsplit(names(ht), "\\|")))
+
+  # Remove default data.frame names (V1, V2, ...)
+  coln[coln %in% paste0("V", seq_len(ncol(ht)))] <- ""
+
+  # Attach splitted column names
+  ht <- rbind(coln, ht)
+  # Iterate over rows
+  for(j in seq_len(nrow(coln))) {
+    # Add new labels and merge cells
+    colnlab <- unique(coln[j, ])
+    for(r in colnlab) {
+      mergel <- which(coln[j, ] == r)
+      # If alternating labels exist, do nothing
+      if(isTRUE(all.equal(min(mergel):max(mergel), mergel))) {
+        ht <- merge_cells(ht, j, mergel)
+      }
+    }
+  }
+
+  return(ht)
+}
+
+#' @export
+#' @rdname as_huxtable
 is_huxtable <- function (x) inherits(x, "huxtable")
 
 
