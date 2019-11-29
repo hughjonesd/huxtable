@@ -4,7 +4,8 @@
 \alias{by_colorspace}
 \title{Map numeric cell contents smoothly to colors}
 \usage{
-by_colorspace(..., range = NULL, na_color = NA, ignore_na = TRUE)
+by_colorspace(..., range = NULL, na_color = NA, ignore_na = TRUE,
+  colwise = FALSE)
 }
 \arguments{
 \item{...}{Colors}
@@ -15,6 +16,8 @@ by_colorspace(..., range = NULL, na_color = NA, ignore_na = TRUE)
 
 \item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
 normally resets to the default.}
+
+\item{colwise}{Logical. Calculate breaks separately within each column?}
 }
 \value{
 A function for use in \code{map_***} functions.
@@ -33,7 +36,9 @@ if (! requireNamespace("scales")) {
 ht <- as_hux(matrix(rnorm(25), 5, 5))
 map_background_color(ht,
       by_colorspace("red", "yellow", "blue"))
-
+map_background_color(ht,
+      by_colorspace("red", "yellow", "blue",
+        colwise = TRUE))
 }
 \seealso{
 \link{mapping-functions}

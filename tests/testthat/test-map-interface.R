@@ -38,6 +38,19 @@ test_that("Standard map_xxx", {
 
   test_map(by_equal_groups(3, c("left", "centre", "right")), "lllcrl", 1:3, 2)
   test_map(by_quantiles(0.75, c("centre", "right")), "lllcrc", 1:3, 2)
+
+  ht_2col <- hux(1:3, 4:6)
+  expect_equivalent(
+          align(map_align(ht_2col,
+            by_equal_groups(3, c("left", "center", "right"), colwise = TRUE))),
+          matrix(rep(c("left", "center", "right"), 2), 3, 2)
+        )
+  expect_equivalent(
+    align(map_align(ht_2col,
+      by_quantiles(c(.1, .9), c("left", "center", "right"), colwise = TRUE))),
+    matrix(rep(c("left", "center", "right"), 2), 3, 2)
+  )
+
   test_map(by_ranges(c(1.85, 2.05), c("left", "centre", "right")), "lllcrl", 1:3, 2)
 
   skip_if_not_installed("dplyr")

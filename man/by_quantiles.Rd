@@ -6,9 +6,9 @@
 \title{Map numeric quantiles to cell properties}
 \usage{
 by_quantiles(quantiles, values, right = FALSE, extend = TRUE,
-  ignore_na = TRUE)
+  ignore_na = TRUE, colwise = FALSE)
 
-by_equal_groups(n, values, ignore_na = TRUE)
+by_equal_groups(n, values, ignore_na = TRUE, colwise = FALSE)
 }
 \arguments{
 \item{quantiles}{Vector of quantiles.}
@@ -25,6 +25,8 @@ outermost breaks. \code{TRUE} by default.}
 
 \item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
 normally resets to the default.}
+
+\item{colwise}{Logical. Calculate breaks separately within each column?}
 
 \item{n}{Number of equal-sized groups. \code{length(values)} should equal \code{n}.}
 }
@@ -44,7 +46,14 @@ ht <- hux(rnorm(5), rnorm(5))
 map_background_color(ht,
       by_quantiles(
         c(0.2, 0.8),
-        c("red", "white", "green")
+        c("red", "yellow", "green")
+      ))
+
+map_background_color(ht,
+      by_quantiles(
+        c(0.2, 0.8),
+        c("red", "yellow", "green"),
+        colwise = TRUE
       ))
 
 map_background_color(ht,

@@ -5,6 +5,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
+* The [expss](https://github.com/gdemin/expss) package now supports export to
+  huxtables.
+* `by_quantiles()`, `by_equal_groups()` and `by_colorspace()` have gained a `colwise`
+  argument, which calculates quantiles or colors separately for each column.
 
 # huxtable 4.7.0
 

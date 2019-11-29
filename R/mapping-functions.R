@@ -137,6 +137,7 @@ NULL
 #'   outermost breaks. `TRUE` by default.
 #' @param ignore_na If `TRUE`, `NA` values in the result will be left unchanged. Otherwise, `NA`
 #'   normally resets to the default.
+#' @param colwise Logical. Calculate breaks separately within each column?
 #' @name mapping-params
 NULL
 
@@ -205,7 +206,7 @@ by_values <- function (..., ignore_na = TRUE) {
 #'       by_cols("green", "grey"))
 by_rows <- function (..., from = 1, ignore_na = TRUE) {
   vals <- c(...)
-  assert_that(is.count(from))
+  assert_that(is.count(from), is.flag(ignore_na))
 
   row_fn <- function (ht, rows, cols, current) {
     res <- current
@@ -223,6 +224,7 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
 #' @rdname by_rows
 by_cols <- function (..., from = 1, ignore_na = TRUE) {
   vals <- c(...)
+  assert_that(is.count(from), is.flag(ignore_na))
 
   col_fn <- function (ht, rows, cols, current) {
     res <- current
@@ -287,7 +289,6 @@ by_ranges <- function (breaks, values, right = FALSE, extend = TRUE, ignore_na =
   if (extend) breaks <- c(-Inf, breaks, Inf)
   assert_that(length(values) == length(breaks) - 1, msg = "`values` is wrong length")
 
-
   ranges_fn <- function(ht, rows, cols, current) {
     res <- current
     mx <- as.matrix(ht)[rows, cols]
@@ -329,7 +330,14 @@ by_ranges <- function (breaks, values, right = FALSE, extend = TRUE, ignore_na =
 #' map_background_color(ht,
 #'       by_quantiles(
 #'         c(0.2, 0.8),
-#'         c("red", "white", "green")
+#'         c("red", "yellow", "green")
+#'       ))
+#'
+#' map_background_color(ht,
+#'       by_quantiles(
+#'         c(0.2, 0.8),
+#'         c("red", "yellow", "green"),
+#'         colwise = TRUE
 #'       ))
 #'
 #' map_background_color(ht,
@@ -337,17 +345,34 @@ by_ranges <- function (breaks, values, right = FALSE, extend = TRUE, ignore_na =
 #'         3,
 #'         c("red", "yellow", "green")
 #'       ))
-by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignore_na = TRUE) {
+by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignore_na = TRUE,
+        colwise = FALSE) {
   assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0))
   assert_that(all(quantiles == sort(quantiles)))
-  assert_that(is.flag(ignore_na), is.flag(right), is.flag(extend))
+  assert_that(is.flag(ignore_na), is.flag(right), is.flag(extend), is.flag(colwise))
 
   qr_fn <- function (ht, rows, cols, current) {
-    vals <- as.matrix(ht)[rows, cols]
-    vals <- suppressWarnings(as.numeric(vals))
-    q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
-    rf <- by_ranges(q_breaks, values, right = right, extend = extend, ignore_na = ignore_na)
-    rf(ht, rows, cols, current)
+    res <- current
+    by_quantiles_internal <- function (vals) {
+      vals <- suppressWarnings(as.numeric(vals))
+      q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
+      if (extend) q_breaks <- c(-Inf, q_breaks, Inf)
+      which_val <- suppressWarnings(findInterval(vals, q_breaks, left.open = right))
+      which_val[is.na(which_val)] <- 0
+      which_val[which_val == length(q_breaks)] <- 0
+      which_val
+    }
+
+    vals <- as.matrix(ht)[rows, cols, drop = FALSE]
+    which_val <- if (colwise) {
+                   c(apply(vals, 2, by_quantiles_internal))
+                 } else {
+                   by_quantiles_internal(vals)
+                 }
+    res[which_val > 0] <- values[which_val[which_val > 0]]
+    res[which_val == 0] <- NA
+    res <- maybe_ignore_na(res, current, ignore_na)
+    res
   }
 
   qr_fn
@@ -358,10 +383,10 @@ by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignor
 #'
 #' @rdname by_quantiles
 #' @export
-by_equal_groups <- function (n, values, ignore_na = TRUE) {
-  assert_that(is.flag(ignore_na))
+by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
+  assert_that(is.flag(ignore_na), is.flag(colwise))
 
-  by_quantiles(seq(1/n, 1 - 1/n, 1/n), values, ignore_na = ignore_na)
+  by_quantiles(seq(1/n, 1 - 1/n, 1/n), values, ignore_na = ignore_na, colwise = colwise)
 }
 
 
@@ -445,16 +470,23 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 #' ht <- as_hux(matrix(rnorm(25), 5, 5))
 #' map_background_color(ht,
 #'       by_colorspace("red", "yellow", "blue"))
-#'
-by_colorspace <- function (..., range = NULL, na_color = NA, ignore_na = TRUE) {
+#' map_background_color(ht,
+#'       by_colorspace("red", "yellow", "blue",
+#'         colwise = TRUE))
+by_colorspace <- function (..., range = NULL, na_color = NA, ignore_na = TRUE,
+        colwise = FALSE) {
   assert_package("by_colorspace", "scales")
   palette <- c(...)
-  assert_that(is.flag(ignore_na))
+  assert_that(is.flag(ignore_na), is.flag(colwise))
 
   cn_fn <- scales::col_numeric(palette, domain = range, na.color = na_color)
   # suppressWarnings stops complaints from conversion; as.numeric stops failures from `rescale`
-  wrapped_col_numeric <- function (x) cn_fn(suppressWarnings(as.numeric(x)))
-
+  wrapped_cn_fn <- function (x) cn_fn(suppressWarnings(as.numeric(x)))
+  wrapped_col_numeric <- if (colwise) {
+                           function (x) apply(x, 2, wrapped_cn_fn)
+                         } else {
+                           wrapped_cn_fn
+                         }
   by_function(wrapped_col_numeric, ignore_na = ignore_na)
 }
 
