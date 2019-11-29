@@ -63,6 +63,11 @@ test_that("Standard map_xxx", {
   expect_silent(ht2 <- map_text_color(ht, by_colorspace("red", "yellow", na_color = "green")))
   expect_equivalent(text_color(ht2)[, 1], rep("green", 3))
   expect_silent(col2rgb(text_color(ht2)))
+
+  expect_equivalent(
+    text_color(map_text_color(ht_2col, by_colorspace("red", "white", "blue", colwise = TRUE))),
+    matrix(rep(c("#FF0000", "#FFFFFF", "#0000FF"), 2), 3, 2)
+  )
 })
 
 
