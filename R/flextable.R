@@ -119,7 +119,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   }
 
   # set caption
-  if(!is.null(caption(x))) {
+  if(!is.null(caption(x)) & !is.na(caption(x))) {
   ft <- flextable::set_caption(ft, caption(x))
   }
 
