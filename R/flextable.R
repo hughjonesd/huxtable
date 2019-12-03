@@ -118,5 +118,10 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
   }
 
+  # set caption
+  if(!is.null(caption(x))) {
+  ft <- flextable::set_caption(ft, caption(x))
+  }
+
   ft
 }
