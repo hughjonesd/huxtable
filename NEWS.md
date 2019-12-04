@@ -9,6 +9,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   huxtables.
 * `by_quantiles()`, `by_equal_groups()` and `by_colorspace()` have gained a `colwise`
   argument, which calculates quantiles or colors separately for each column.
+* Add caption support for `as_flextable()` (thanks @sjewo).
+
 
 # huxtable 4.7.0
 

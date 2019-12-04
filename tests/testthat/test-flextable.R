@@ -70,6 +70,13 @@ test_that("rotation works", {
 })
 
 
+test_that("caption works", {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  caption(hx) <- "a caption"
+  expect_silent(as_flextable(hx))
+})
+
+
 test_that("as_FlexTable gives warning", {
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_warning(ft <- as_FlexTable(hx), "deprecated")
