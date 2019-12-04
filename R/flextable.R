@@ -118,5 +118,14 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
   }
 
+  # set caption
+  if(!is.null(caption(x)) & !is.na(caption(x))) {
+    if(packageVersion("flextable") >= "0.5.5"){
+      ft <- flextable::set_caption(ft, caption(x))
+    } else {
+      message('Use of table captions requires package "flextable" => 0.5.5.\nType:\n install.packages("flextable")')
+    }
+  }
+
   ft
 }
