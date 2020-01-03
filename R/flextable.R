@@ -119,11 +119,11 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   }
 
   # set caption
-  if(!is.null(caption(x)) & !is.na(caption(x))) {
-    if(packageVersion("flextable") >= "0.5.5"){
+  if (!is.null(caption(x)) & !is.na(caption(x))) {
+    if (utils::packageVersion("flextable") >= "0.5.5"){
       ft <- flextable::set_caption(ft, caption(x))
     } else {
-      message('Use of table captions requires package "flextable" => 0.5.5.\nType:\n install.packages("flextable")')
+      message("Use of table captions requires package \"flextable\" => 0.5.5. Type:\n install.packages(\"flextable\")")
     }
   }
 
