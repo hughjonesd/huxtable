@@ -3,7 +3,7 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable (development version)
+# huxtable 4.7.1
 
 * The [expss](https://github.com/gdemin/expss) package now supports export to
   huxtables.
