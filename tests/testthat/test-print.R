@@ -188,6 +188,7 @@ test_that("HTML gives warnings for double borders not wide enough", {
 test_that("Chinese characters are not repeated", {
   skip_on_appveyor()
   skip_on_os("windows")
+  skip_on_cran()
   ht <- hux("\u4e2d\u6587")
   expect_silent(s <- to_screen(ht))
   expect_match(s, "^[[:space:]]*\u4e2d\u6587[[:space:]]*(\\n.*)?$", all = FALSE)
