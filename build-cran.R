@@ -77,8 +77,14 @@ devtools::build()
 # run checks
 
 rhc <- rhub::check_for_cran(show_status = FALSE)
+
+# asks manual questions
 devtools::check_win_devel()
+
+# asks manual questions
 devtools::check_win_release()
+
+# may not work; if so just run the script in the main window.
 rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_results")
 
 # update CRAN-comments.md
@@ -86,3 +92,7 @@ rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_res
 # now release!
 
 devtools::release()
+
+# afterwards:
+
+revdepcheck::revdep_reset()
