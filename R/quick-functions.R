@@ -139,8 +139,8 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   my_doc <- officer::read_docx()
   for (ht in hts) {
     ft <- as_flextable(ht)
-    if(!is.null(ft$caption$value)) {
-      if(packageVersion("flextable") >= "0.5.5"){
+    if (!is.null(ft$caption$value)) {
+      if (utils::packageVersion("flextable") >= "0.5.5") {
         my_doc <- officer::body_add_par(my_doc, ft$caption$value, style = "table title")
       }
     }
