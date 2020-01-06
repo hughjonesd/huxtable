@@ -59,9 +59,12 @@ jams4 <- map_na_string(jams,
 na_string(jams4)
 }
 \seealso{
-Other formatting functions: \code{\link{background_color}},
-  \code{\link{bold}}, \code{\link{font_size}},
-  \code{\link{font}}, \code{\link{number_format}},
-  \code{\link{text_color}}
+Other formatting functions: 
+\code{\link{background_color}()},
+\code{\link{bold}()},
+\code{\link{font_size}()},
+\code{\link{font}()},
+\code{\link{number_format}()},
+\code{\link{text_color}()}
 }
 \concept{formatting functions}

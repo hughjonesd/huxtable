@@ -13,7 +13,7 @@ set_height(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\code{\\textheight}) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} to reset to the default, which is
+\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\verb{\\\\textheight}) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 }
 \value{
@@ -32,6 +32,7 @@ height(jams)
 height(jams) <- orig
 }
 \seealso{
-Other table measurements: \code{\link{width}}
+Other table measurements: 
+\code{\link{width}()}
 }
 \concept{table measurements}

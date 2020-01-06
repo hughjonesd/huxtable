@@ -26,7 +26,7 @@ Functions to get or set the \emph{row heights} property of huxtable rows.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
-treated as proportions of the text height (\code{\\textheight}).
+treated as proportions of the text height (\verb{\\\\textheight}).
 }
 \examples{
 
@@ -37,6 +37,7 @@ row_height(jams)
 row_height(jams) <- orig
 }
 \seealso{
-Other row/column heights: \code{\link{col_width}}
+Other row/column heights: 
+\code{\link{col_width}()}
 }
 \concept{row/column heights}

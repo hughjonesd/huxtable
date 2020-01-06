@@ -32,6 +32,7 @@ width(jams)
 width(jams) <- orig
 }
 \seealso{
-Other table measurements: \code{\link{height}}
+Other table measurements: 
+\code{\link{height}()}
 }
 \concept{table measurements}

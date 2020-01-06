@@ -36,12 +36,12 @@ Subset a huxtable
 \code{[} always returns a huxtable, while \code{$} and \code{[[}
 return the underlying data.
 
-For the replacement function \code{[<-}, if \code{value} is a huxtable, then its cell properties will be
+For the replacement function \verb{[<-}, if \code{value} is a huxtable, then its cell properties will be
 copied into \code{x}. In addition, if \code{value} fills up an entire column, then column properties
 will be copied into the replaced columns of \code{x}, and if it fills up an entire row, then
 row properties will be copied into the replaced rows of \code{x}.
 
-Replacement functions \code{$<-} and \code{[[<-} replace existing data without affecting any properties.
+Replacement functions \verb{$<-} and \verb{[[<-} replace existing data without affecting any properties.
 }
 \examples{
 jams[1:3, ]

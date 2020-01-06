@@ -4,7 +4,6 @@
 \name{huxtable-options}
 \alias{huxtable-options}
 \alias{huxtable_options}
-\alias{huxtable-options-package}
 \title{Package options}
 \description{
 \itemize{

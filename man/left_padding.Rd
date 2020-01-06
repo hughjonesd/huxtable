@@ -24,6 +24,11 @@ left_padding(ht) <- value
 set_left_padding(ht, row, col, value, byrow = FALSE)
 map_left_padding(ht, row, col, fn)
 
+left_padding(ht)
+left_padding(ht) <- value
+set_left_padding(ht, row, col, value, byrow = FALSE)
+map_left_padding(ht, row, col, fn)
+
 right_padding(ht)
 right_padding(ht) <- value
 set_right_padding(ht, row, col, value, byrow = FALSE)

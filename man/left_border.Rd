@@ -24,6 +24,11 @@ left_border(ht) <- value
 set_left_border(ht, row, col, value, byrow = FALSE)
 map_left_border(ht, row, col, fn)
 
+left_border(ht)
+left_border(ht) <- value
+set_left_border(ht, row, col, value, byrow = FALSE)
+map_left_border(ht, row, col, fn)
+
 right_border(ht)
 right_border(ht) <- value
 set_right_border(ht, row, col, value, byrow = FALSE)

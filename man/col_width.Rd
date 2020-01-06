@@ -38,6 +38,7 @@ col_width(jams)
 col_width(jams) <- orig
 }
 \seealso{
-Other row/column heights: \code{\link{row_height}}
+Other row/column heights: 
+\code{\link{row_height}()}
 }
 \concept{row/column heights}

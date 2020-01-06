@@ -24,6 +24,16 @@ left_border_style(ht) <- value
 set_left_border_style(ht, row, col, value, byrow = FALSE)
 map_left_border_style(ht, row, col, fn)
 
+left_border_style(ht)
+left_border_style(ht) <- value
+set_left_border_style(ht, row, col, value, byrow = FALSE)
+map_left_border_style(ht, row, col, fn)
+
+left_border_style(ht)
+left_border_style(ht) <- value
+set_left_border_style(ht, row, col, value, byrow = FALSE)
+map_left_border_style(ht, row, col, fn)
+
 right_border_style(ht)
 right_border_style(ht) <- value
 set_right_border_style(ht, row, col, value, byrow = FALSE)

@@ -5,8 +5,14 @@
 \alias{by_equal_groups}
 \title{Map numeric quantiles to cell properties}
 \usage{
-by_quantiles(quantiles, values, right = FALSE, extend = TRUE,
-  ignore_na = TRUE, colwise = FALSE)
+by_quantiles(
+  quantiles,
+  values,
+  right = FALSE,
+  extend = TRUE,
+  ignore_na = TRUE,
+  colwise = FALSE
+)
 
 by_equal_groups(n, values, ignore_na = TRUE, colwise = FALSE)
 }
@@ -31,7 +37,7 @@ normally resets to the default.}
 \item{n}{Number of equal-sized groups. \code{length(values)} should equal \code{n}.}
 }
 \value{
-A function for use in \code{map_***} functions.
+A function for use in \verb{map_***} functions.
 }
 \description{
 These functions split cell values by quantiles. Non-numeric cells are ignored.
@@ -65,9 +71,13 @@ map_background_color(ht,
 \seealso{
 \link{mapping-functions}
 
-Other mapping functions: \code{\link{by_cases}},
-  \code{\link{by_colorspace}}, \code{\link{by_function}},
-  \code{\link{by_ranges}}, \code{\link{by_regex}},
-  \code{\link{by_rows}}, \code{\link{by_values}}
+Other mapping functions: 
+\code{\link{by_cases}()},
+\code{\link{by_colorspace}()},
+\code{\link{by_function}()},
+\code{\link{by_ranges}()},
+\code{\link{by_regex}()},
+\code{\link{by_rows}()},
+\code{\link{by_values}()}
 }
 \concept{mapping functions}

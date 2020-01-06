@@ -10,8 +10,7 @@ print_md(ht, ...)
 
 to_md(ht, ...)
 
-\method{to_md}{huxtable}(ht, header = TRUE,
-  min_width = getOption("width")/4, max_width = 80, ...)
+\method{to_md}{huxtable}(ht, header = TRUE, min_width = getOption("width")/4, max_width = 80, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -39,8 +38,10 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 print_md(jams)
 }
 \seealso{
-Other printing functions: \code{\link{print_html}},
-  \code{\link{print_latex}}, \code{\link{print_rtf}},
-  \code{\link{print_screen}}
+Other printing functions: 
+\code{\link{print_html}()},
+\code{\link{print_latex}()},
+\code{\link{print_rtf}()},
+\code{\link{print_screen}()}
 }
 \concept{printing functions}

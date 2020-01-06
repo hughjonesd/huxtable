@@ -34,8 +34,10 @@ ht <- hux(a = 1:3, b = letters[1:3])
 to_html(ht)
 }
 \seealso{
-Other printing functions: \code{\link{print_latex}},
-  \code{\link{print_md}}, \code{\link{print_rtf}},
-  \code{\link{print_screen}}
+Other printing functions: 
+\code{\link{print_latex}()},
+\code{\link{print_md}()},
+\code{\link{print_rtf}()},
+\code{\link{print_screen}()}
 }
 \concept{printing functions}

@@ -13,7 +13,7 @@ by_function(inner_fn, ignore_na = TRUE)
 normally resets to the default.}
 }
 \value{
-A function for use in \code{map_***} functions.
+A function for use in \verb{map_***} functions.
 }
 \description{
 This creates a simple wrapper around a function for use in \code{map_xxx}.
@@ -38,9 +38,13 @@ if (requireNamespace("scales")) {
 \seealso{
 \link{mapping-functions}
 
-Other mapping functions: \code{\link{by_cases}},
-  \code{\link{by_colorspace}}, \code{\link{by_quantiles}},
-  \code{\link{by_ranges}}, \code{\link{by_regex}},
-  \code{\link{by_rows}}, \code{\link{by_values}}
+Other mapping functions: 
+\code{\link{by_cases}()},
+\code{\link{by_colorspace}()},
+\code{\link{by_quantiles}()},
+\code{\link{by_ranges}()},
+\code{\link{by_regex}()},
+\code{\link{by_rows}()},
+\code{\link{by_values}()}
 }
 \concept{mapping functions}

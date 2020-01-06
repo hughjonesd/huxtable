@@ -4,7 +4,6 @@
 \name{huxtable-FAQ}
 \alias{huxtable-FAQ}
 \alias{huxtable_FAQ}
-\alias{huxtable-FAQ-package}
 \title{Frequently Asked Questions, including how to get help}
 \description{
 A FAQ of common issues.
@@ -49,7 +48,7 @@ caption itself. For example to have a bold caption in HTML, you might do somethi
 }
 
 As of version 4.3.0, this is handled automatically for you. Just
-set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\@ref(tab:my-table-label).
+set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\\\@ref(tab:my-table-label).
 
 }
 \itemize{

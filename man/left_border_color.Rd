@@ -24,6 +24,11 @@ left_border_color(ht) <- value
 set_left_border_color(ht, row, col, value, byrow = FALSE)
 map_left_border_color(ht, row, col, fn)
 
+left_border_color(ht)
+left_border_color(ht) <- value
+set_left_border_color(ht, row, col, value, byrow = FALSE)
+map_left_border_color(ht, row, col, fn)
+
 right_border_color(ht)
 right_border_color(ht) <- value
 set_right_border_color(ht, row, col, value, byrow = FALSE)

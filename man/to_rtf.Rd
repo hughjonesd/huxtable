@@ -54,8 +54,10 @@ and colors won"t work in this context.
 print_rtf(jams)
 }
 \seealso{
-Other printing functions: \code{\link{print_html}},
-  \code{\link{print_latex}}, \code{\link{print_md}},
-  \code{\link{print_screen}}
+Other printing functions: 
+\code{\link{print_html}()},
+\code{\link{print_latex}()},
+\code{\link{print_md}()},
+\code{\link{print_screen}()}
 }
 \concept{printing functions}

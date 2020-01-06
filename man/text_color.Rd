@@ -52,9 +52,12 @@ map_text_color(jams,
       by_rows("blue", "red"))
 }
 \seealso{
-Other formatting functions: \code{\link{background_color}},
-  \code{\link{bold}}, \code{\link{font_size}},
-  \code{\link{font}}, \code{\link{na_string}},
-  \code{\link{number_format}}
+Other formatting functions: 
+\code{\link{background_color}()},
+\code{\link{bold}()},
+\code{\link{font_size}()},
+\code{\link{font}()},
+\code{\link{na_string}()},
+\code{\link{number_format}()}
 }
 \concept{formatting functions}

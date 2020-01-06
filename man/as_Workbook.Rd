@@ -7,8 +7,7 @@
 \usage{
 as_Workbook(ht, ...)
 
-\method{as_Workbook}{huxtable}(ht, Workbook = NULL, sheet = "Sheet 1",
-  write_caption = TRUE, ...)
+\method{as_Workbook}{huxtable}(ht, Workbook = NULL, sheet = "Sheet 1", write_caption = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

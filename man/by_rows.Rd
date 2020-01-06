@@ -18,7 +18,7 @@ by_cols(..., from = 1, ignore_na = TRUE)
 normally resets to the default.}
 }
 \value{
-A function for use in \code{map_***} functions.
+A function for use in \verb{map_***} functions.
 }
 \description{
 \code{by_rows} and \code{by_cols} set properties in horizontal or vertical "stripes".
@@ -33,9 +33,13 @@ map_background_color(ht,
 \seealso{
 \link{mapping-functions}
 
-Other mapping functions: \code{\link{by_cases}},
-  \code{\link{by_colorspace}}, \code{\link{by_function}},
-  \code{\link{by_quantiles}}, \code{\link{by_ranges}},
-  \code{\link{by_regex}}, \code{\link{by_values}}
+Other mapping functions: 
+\code{\link{by_cases}()},
+\code{\link{by_colorspace}()},
+\code{\link{by_function}()},
+\code{\link{by_quantiles}()},
+\code{\link{by_ranges}()},
+\code{\link{by_regex}()},
+\code{\link{by_values}()}
 }
 \concept{mapping functions}
