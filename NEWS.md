@@ -1,7 +1,10 @@
 
-
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
+
+# huxtable (development version)
+
+* Updated to roxygen 7
 
 # huxtable 4.7.1
 
