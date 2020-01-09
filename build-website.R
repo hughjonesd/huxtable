@@ -11,7 +11,7 @@ pkgdown:::pkg_timeline("huxtable")
 
 #   (otherwise, it'll be marked as 'unreleased' in the news page)
 # checkout the version that you want on the web
-# Install the package and restart
+# ** Install the package and restart **
 # create a branch if there isn't one (git checkout -b website-x.y.z)
 # update index.Rhtml appropriately
 # run this script;

@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -176,12 +176,14 @@ may help.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='no'>orig</span> <span class='kw'>&lt;-</span> <span class='fu'>valign</span>(<span class='no'>jams</span>)
 <span class='fu'>valign</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"bottom"</span>
 <span class='fu'>valign</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type     price   
 #&gt; 1 "bottom" "bottom"
 #&gt; 2 "bottom" "bottom"
 #&gt; 3 "bottom" "bottom"
 #&gt; 4 "bottom" "bottom"</div><div class='input'>
+<span class='fu'>valign</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span> <span class='no'>orig</span>
 
 <span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_valign</span>(<span class='no'>jams</span>,
       <span class='st'>"bottom"</span>)
@@ -192,11 +194,11 @@ may help.</p>
 #&gt; 4 "bottom" "bottom"</div><div class='input'>
 <span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_valign</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='st'>"bottom"</span>)
-<span class='fu'>valign</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type     price   
-#&gt; 1 "bottom" "bottom"
-#&gt; 2 "bottom" "bottom"
-#&gt; 3 "bottom" "bottom"
-#&gt; 4 "bottom" "bottom"</div><div class='input'>
+<span class='fu'>valign</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type     price
+#&gt; 1 "top"    "top"
+#&gt; 2 "bottom" "top"
+#&gt; 3 "bottom" "top"
+#&gt; 4 "top"    "top"</div><div class='input'>
 <span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_valign</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
         <span class='st'>"bottom"</span>,

@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -181,11 +181,11 @@ row properties will be copied into the replaced rows of <code>x</code>.</p>
 <p>Replacement functions <code>$&lt;-</code> and <code>[[&lt;-</code> replace existing data without affecting any properties.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;   Type         Price    Sugar    Sugar  
-#&gt;   Strawberry    1.90   60.00%   60.00%  
-#&gt;   Raspberry     2.10   60.00%   60.00%  
+    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;   Type         Price    Sugar    Sugar    Sugar    Sugar  
+#&gt;   Strawberry    1.90   60.00%   60.00%   60.00%   60.00%  
+#&gt;   Raspberry     2.10   60.00%   60.00%   60.00%   60.00%  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;   Type            
+#&gt; Column names: Type, Price, V1, V1, V1, V1</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/class'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;   Type            
 #&gt;   Strawberry      
 #&gt;   Raspberry       
 #&gt;   Plum            
@@ -194,20 +194,22 @@ row properties will be copied into the replaced rows of <code>x</code>.</p>
 <span class='fu'><a href='number_format.html'>number_format</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>2</span>
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='no'>jams</span>[, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='no'>prices</span>
-<span class='no'>jams</span></div><div class='output co'>#&gt;   Type         <span style='font-weight: bold;'>Price</span><span>    Sugar    Sugar  
-#&gt;   Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%   60.00%  
-#&gt;   Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%   60.00%  
-#&gt;   Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%   60.00%  
+<span class='no'>jams</span></div><div class='output co'>#&gt;   Type         <span style='font-weight: bold;'>Price</span><span>    Sugar    Sugar    Sugar    Sugar  
+#&gt;   Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%   60.00%   60.00%   60.00%  
+#&gt;   Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%   60.00%   60.00%   60.00%  
+#&gt;   Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%   60.00%   60.00%   60.00%  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1</div><div class='input'>
+#&gt; Column names: Type, Price, V1, V1, V1, V1</div><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>jams</span>)
 <span class='no'>jams</span>$<span class='no'>price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>)
-<span class='no'>jams</span></div><div class='output co'>#&gt;   Type         </span><span style='font-weight: bold;'>Price</span><span>    Sugar    Sugar   Price  
-#&gt;   Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%   60.00%   1.7    
-#&gt;   Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%   60.00%   2      
-#&gt;   Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%   60.00%   2.2    
+<span class='no'>jams</span></div><div class='output co'>#&gt;   Type       </span><span style='font-weight: bold;'>Price</span><span>    Sugar    Sugar    Sugar    Sugar   Price  
+#&gt;   Strawber   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%   60.00%   60.00%   60.00%   1.7    
+#&gt;   ry                                                            
+#&gt;   Raspberr   </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%   60.00%   60.00%   60.00%   2      
+#&gt;   y                                                             
+#&gt;   Plum       </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%   60.00%   60.00%   60.00%   2.2    
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1, price</div></span></pre>
+#&gt; Column names: Type, Price, V1, V1, V1, V1, price</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -182,28 +182,28 @@ For <code>set_escape_contents</code> and <code>map_escape_contents</code>, the m
 
 <span class='no'>jams2</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>jams</span>,
       <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price   V1   V1
-#&gt; 1 TRUE  TRUE TRUE TRUE
-#&gt; 2 TRUE  TRUE TRUE TRUE
-#&gt; 3 TRUE  TRUE TRUE TRUE
-#&gt; 4 TRUE  TRUE TRUE TRUE</div><div class='input'>
+<span class='fu'>escape_contents</span>(<span class='no'>jams2</span>)</div><div class='output co'>#&gt;   Type price   V1   V1   V1   V1
+#&gt; 1 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 2 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 3 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 4 TRUE  TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>jams3</span> <span class='kw'>&lt;-</span> <span class='fu'>set_escape_contents</span>(<span class='no'>jams</span>,
       <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>escape_contents</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price   V1   V1
-#&gt; 1 TRUE  TRUE TRUE TRUE
-#&gt; 2 TRUE  TRUE TRUE TRUE
-#&gt; 3 TRUE  TRUE TRUE TRUE
-#&gt; 4 TRUE  TRUE TRUE TRUE</div><div class='input'>
+<span class='fu'>escape_contents</span>(<span class='no'>jams3</span>)</div><div class='output co'>#&gt;   Type price   V1   V1   V1   V1
+#&gt; 1 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 2 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 3 TRUE  TRUE TRUE TRUE TRUE TRUE
+#&gt; 4 TRUE  TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>jams4</span> <span class='kw'>&lt;-</span> <span class='fu'>map_escape_contents</span>(<span class='no'>jams</span>,
       <span class='fu'><a href='by_rows.html'>by_rows</a></span>(
         <span class='fl'>TRUE</span>,
         <span class='fl'>FALSE</span>)
       )
-<span class='fu'>escape_contents</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;    Type price    V1    V1
-#&gt; 1  TRUE  TRUE  TRUE  TRUE
-#&gt; 2 FALSE FALSE FALSE FALSE
-#&gt; 3  TRUE  TRUE  TRUE  TRUE
-#&gt; 4 FALSE FALSE FALSE FALSE</div></pre>
+<span class='fu'>escape_contents</span>(<span class='no'>jams4</span>)</div><div class='output co'>#&gt;    Type price    V1    V1    V1    V1
+#&gt; 1  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+#&gt; 2 FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; 3  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+#&gt; 4 FALSE FALSE FALSE FALSE FALSE FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

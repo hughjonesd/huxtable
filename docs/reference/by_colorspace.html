@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -130,7 +130,8 @@
     <p>Map numeric cell contents smoothly to colors</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_colorspace</span>(<span class='no'>...</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na_color</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>by_colorspace</span>(<span class='no'>...</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na_color</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>colwise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +152,10 @@
       <th>ignore_na</th>
       <td><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged. Otherwise, <code>NA</code>
 normally resets to the default.</p></td>
+    </tr>
+    <tr>
+      <th>colwise</th>
+      <td><p>Logical. Calculate breaks separately within each column?</p></td>
     </tr>
     </table>
 
@@ -175,14 +180,21 @@ normally resets to the default.</p></td>
 }
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>25</span>), <span class='fl'>5</span>, <span class='fl'>5</span>))
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='fu'>by_colorspace</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"blue"</span>))</div><div class='output co'>#&gt;   <span style='background-color: #FFFF00;'> 0.648 </span><span>   </span><span style='background-color: #FFAF00;'>-0.171  </span><span>   </span><span style='background-color: #FFFF00;'> 0.724 </span><span>   </span><span style='background-color: #FFFF00;'> 0.77 </span><span>   </span><span style='background-color: #FF0000;'>-0.872 </span><span>  
-#&gt;   </span><span style='background-color: #FFD700;'> 0.0758</span><span>   </span><span style='background-color: #D787D7;'> 1.63   </span><span>   </span><span style='background-color: #0000FF;'> 2.35  </span><span>   </span><span style='background-color: #FFFF00;'> 0.563</span><span>   </span><span style='background-color: #FFD700;'> 0.107 </span><span>  
-#&gt;   </span><span style='background-color: #FFFF00;'> 0.492 </span><span>   </span><span style='background-color: #FF5F00;'>-0.783  </span><span>   </span><span style='background-color: #FFAF00;'>-0.281 </span><span>   </span><span style='background-color: #FF8700;'>-0.374</span><span>   </span><span style='background-color: #FF8700;'>-0.587 </span><span>  
-#&gt;   </span><span style='background-color: #FF5F00;'>-0.754 </span><span>   </span><span style='background-color: #FFAF00;'>-0.00289</span><span>   </span><span style='background-color: #FF8700;'>-0.481 </span><span>   </span><span style='background-color: #FF8700;'>-0.601</span><span>   </span><span style='background-color: #FFAF00;'>-0.328 </span><span>  
-#&gt;   </span><span style='background-color: #FFD700;'> 0.349 </span><span>   </span><span style='background-color: #FFFF00;'> 0.413  </span><span>   </span><span style='background-color: #FFD700;'> 0.0792</span><span>   </span><span style='background-color: #FF8700;'>-0.424</span><span>   </span><span style='background-color: #FFAF00;'>-0.0854</span><span>  
+      <span class='fu'>by_colorspace</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"blue"</span>))</div><div class='output co'>#&gt;   <span style='background-color: #BBBB00;'> 0.648 </span><span>   </span><span style='background-color: #BBBB00;'>-0.171  </span><span>   </span><span style='background-color: #BBBB00;'> 0.724 </span><span>   </span><span style='background-color: #BBBB00;'> 0.77 </span><span>   </span><span style='background-color: #BB0000;'>-0.872 </span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.0758</span><span>   </span><span style='background-color: #BB00BB;'> 1.63   </span><span>   </span><span style='background-color: #0000BB;'> 2.35  </span><span>   </span><span style='background-color: #BBBB00;'> 0.563</span><span>   </span><span style='background-color: #BBBB00;'> 0.107 </span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.492 </span><span>   </span><span style='background-color: #BB0000;'>-0.783  </span><span>   </span><span style='background-color: #BBBB00;'>-0.281 </span><span>   </span><span style='background-color: #BB0000;'>-0.374</span><span>   </span><span style='background-color: #BB0000;'>-0.587 </span><span>  
+#&gt;   </span><span style='background-color: #BB0000;'>-0.754 </span><span>   </span><span style='background-color: #BBBB00;'>-0.00289</span><span>   </span><span style='background-color: #BB0000;'>-0.481 </span><span>   </span><span style='background-color: #BB0000;'>-0.601</span><span>   </span><span style='background-color: #BBBB00;'>-0.328 </span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.349 </span><span>   </span><span style='background-color: #BBBB00;'> 0.413  </span><span>   </span><span style='background-color: #BBBB00;'> 0.0792</span><span>   </span><span style='background-color: #BB0000;'>-0.424</span><span>   </span><span style='background-color: #BBBB00;'>-0.0854</span><span>  
 #&gt; 
-#&gt; Column names: V1, V2, V3, V4, V5</div><div class='input'>
-</div></span></pre>
+#&gt; Column names: V1, V2, V3, V4, V5</div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_colorspace</span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"blue"</span>,
+        <span class='kw'>colwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;   </span><span style='background-color: #0000BB;'> 0.648 </span><span>   </span><span style='background-color: #BBBB00;'>-0.171  </span><span>   </span><span style='background-color: #BBBB00;'> 0.724 </span><span>   </span><span style='background-color: #0000BB;'> 0.77 </span><span>   </span><span style='background-color: #BB0000;'>-0.872 </span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.0758</span><span>   </span><span style='background-color: #0000BB;'> 1.63   </span><span>   </span><span style='background-color: #0000BB;'> 2.35  </span><span>   </span><span style='background-color: #BB00BB;'> 0.563</span><span>   </span><span style='background-color: #0000BB;'> 0.107 </span><span>  
+#&gt;   </span><span style='background-color: #BB00BB;'> 0.492 </span><span>   </span><span style='background-color: #BB0000;'>-0.783  </span><span>   </span><span style='background-color: #BB0000;'>-0.281 </span><span>   </span><span style='background-color: #BB0000;'>-0.374</span><span>   </span><span style='background-color: #BBBB00;'>-0.587 </span><span>  
+#&gt;   </span><span style='background-color: #BB0000;'>-0.754 </span><span>   </span><span style='background-color: #BBBB00;'>-0.00289</span><span>   </span><span style='background-color: #BB0000;'>-0.481 </span><span>   </span><span style='background-color: #BB0000;'>-0.601</span><span>   </span><span style='background-color: #BBBB00;'>-0.328 </span><span>  
+#&gt;   </span><span style='background-color: #BB00BB;'> 0.349 </span><span>   </span><span style='background-color: #BBBB00;'> 0.413  </span><span>   </span><span style='background-color: #BBBB00;'> 0.0792</span><span>   </span><span style='background-color: #BB0000;'>-0.424</span><span>   </span><span style='background-color: #BB00BB;'>-0.0854</span><span>  
+#&gt; 
+#&gt; Column names: V1, V2, V3, V4, V5</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

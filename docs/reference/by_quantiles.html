@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -131,9 +131,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>by_quantiles</span>(<span class='no'>quantiles</span>, <span class='no'>values</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>colwise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>by_equal_groups</span>(<span class='no'>n</span>, <span class='no'>values</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>by_equal_groups</span>(<span class='no'>n</span>, <span class='no'>values</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>colwise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +164,10 @@ outermost breaks. <code>TRUE</code> by default.</p></td>
 normally resets to the default.</p></td>
     </tr>
     <tr>
+      <th>colwise</th>
+      <td><p>Logical. Calculate breaks separately within each column?</p></td>
+    </tr>
+    <tr>
       <th>n</th>
       <td><p>Number of equal-sized groups. <code><a href='https://www.rdocumentation.org/packages/base/topics/length'>length(values)</a></code> should equal <code>n</code>.</p></td>
     </tr>
@@ -190,11 +194,21 @@ for <code>by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)</code>).</p>
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
       <span class='fu'>by_quantiles</span>(
         <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>, <span class='fl'>0.8</span>),
-        <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"white"</span>, <span class='st'>"green"</span>)
-      ))</div><div class='output co'>#&gt;   <span style='background-color: #BB0000;'>-0.702 </span><span>   </span><span style='background-color: #BBBBBB;'>  0.437</span><span>  
-#&gt;   </span><span style='background-color: #BBBBBB;'> 0.973 </span><span>   </span><span style='background-color: #BBBBBB;'>  0.413</span><span>  
-#&gt;   </span><span style='background-color: #BBBBBB;'>-0.0768</span><span>   </span><span style='background-color: #BBBBBB;'>  0.976</span><span>  
-#&gt;   </span><span style='background-color: #BBBBBB;'> 0.893 </span><span>   </span><span style='background-color: #00BB00;'>  1.15 </span><span>  
+        <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>)
+      ))</div><div class='output co'>#&gt;   <span style='background-color: #BB0000;'>-0.702 </span><span>   </span><span style='background-color: #BBBB00;'>  0.437</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.973 </span><span>   </span><span style='background-color: #BBBB00;'>  0.413</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'>-0.0768</span><span>   </span><span style='background-color: #BBBB00;'>  0.976</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.893 </span><span>   </span><span style='background-color: #00BB00;'>  1.15 </span><span>  
+#&gt;   </span><span style='background-color: #BB0000;'>-0.778 </span><span>   </span><span style='background-color: #00BB00;'>  1.22 </span><span>  </div><div class='input'>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+      <span class='fu'>by_quantiles</span>(
+        <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>, <span class='fl'>0.8</span>),
+        <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>),
+        <span class='kw'>colwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+      ))</div><div class='output co'>#&gt;   </span><span style='background-color: #BBBB00;'>-0.702 </span><span>   </span><span style='background-color: #BBBB00;'>  0.437</span><span>  
+#&gt;   </span><span style='background-color: #00BB00;'> 0.973 </span><span>   </span><span style='background-color: #BB0000;'>  0.413</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'>-0.0768</span><span>   </span><span style='background-color: #BBBB00;'>  0.976</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'> 0.893 </span><span>   </span><span style='background-color: #BBBB00;'>  1.15 </span><span>  
 #&gt;   </span><span style='background-color: #BB0000;'>-0.778 </span><span>   </span><span style='background-color: #00BB00;'>  1.22 </span><span>  </div><div class='input'>
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
       <span class='fu'>by_equal_groups</span>(
