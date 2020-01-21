@@ -20,17 +20,7 @@ body(filter.huxtable) <- body(filter_.huxtable)
 mutate_.huxtable <- function (.data, ..., .dots) {
   ht <- .data
   .data <- as.data.frame(.data)
-  copy_cell_props <- TRUE
-  if (! is.null(.dots$copy_cell_props)) {
-    copy_cell_props <- if (utils::packageVersion("dplyr") > "0.5.0") {
-      .dots$copy_cell_props
-    } else {
-    if (! requireNamespace("lazyeval", quietly = TRUE)) stop(
-         "Using huxtable with dplyr 0.5.0 or less requires the lazyeval package. ",
-         "Either type `install.packages(\"lazyeval\")` or update dplyr to a more recent version.")
-      lazyeval::lazy_eval(.dots$copy_cell_props)
-    }
-  }
+  copy_cell_props <- if (! is.null(.dots$copy_cell_props)) .dots$copy_cell_props else TRUE
   .dots <- .dots[setdiff(names(.dots), "copy_cell_props")]
   result <- NextMethod()
   result <- as_hux(result, autoformat = FALSE)
