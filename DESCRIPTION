@@ -37,7 +37,7 @@ Suggests:
     crayon,
     devtools,
     dplyr,
-    flextable,
+    flextable (>= 0.5.5),
     ggplot2,
     httr,
     knitr,
