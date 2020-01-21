@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
       </span>
     </div>
 
@@ -178,31 +178,33 @@ For <code>set_background_color</code> and <code>map_background_color</code>, the
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='no'>orig</span> <span class='kw'>&lt;-</span> <span class='fu'>background_color</span>(<span class='no'>jams</span>)
 <span class='fu'>background_color</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>)
-<span class='fu'>background_color</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type      price     V1        V1       
-#&gt; 1 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
-#&gt; 2 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
-#&gt; 3 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
-#&gt; 4 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"</div><div class='input'>
+<span class='fu'>background_color</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;   Type      price     V1        V1        V1        V1       
+#&gt; 1 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
+#&gt; 2 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
+#&gt; 3 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"
+#&gt; 4 "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2" "#F2F2F2"</div><div class='input'>
+<span class='fu'>background_color</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span> <span class='no'>orig</span>
 
-<span class='fu'>set_background_color</span>(<span class='no'>jams</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>))</div><div class='output co'>#&gt;   <span style='background-color: #E4E4E4;'>Type      </span><span>   </span><span style='background-color: #E4E4E4;'>Price</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Strawberry</span><span>   </span><span style='background-color: #E4E4E4;'> 1.90</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Raspberry </span><span>   </span><span style='background-color: #E4E4E4;'> 2.10</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Plum      </span><span>   </span><span style='background-color: #E4E4E4;'> 1.80</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
+<span class='fu'>set_background_color</span>(<span class='no'>jams</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>))</div><div class='output co'>#&gt;   <span style='background-color: #BBBBBB;'>Type      </span><span>   </span><span style='background-color: #BBBBBB;'>Price</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'> 1.90</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Raspberry </span><span>   </span><span style='background-color: #BBBBBB;'> 2.10</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'> 1.80</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1</div><div class='input'><span class='fu'>set_background_color</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>))</div><div class='output co'>#&gt;   </span><span style='background-color: #E4E4E4;'>Type      </span><span>   </span><span style='background-color: #E4E4E4;'>Price</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Strawberry</span><span>   </span><span style='background-color: #E4E4E4;'> 1.90</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Raspberry </span><span>   </span><span style='background-color: #E4E4E4;'> 2.10</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Plum      </span><span>   </span><span style='background-color: #E4E4E4;'> 1.80</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
+#&gt; Column names: Type, Price, V1, V1, V1, V1</div><div class='input'><span class='fu'>set_background_color</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>))</div><div class='output co'>#&gt;   Type         Price    Sugar    Sugar    Sugar    Sugar  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Strawberry</span><span>    1.90   60.00%   60.00%   60.00%   60.00%  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Raspberry </span><span>    2.10   60.00%   60.00%   60.00%   60.00%  
+#&gt;   Plum          1.80   60.00%   60.00%   60.00%   60.00%  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1</div><div class='input'><span class='fu'>map_background_color</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>), <span class='st'>"yellow"</span>))</div><div class='output co'>#&gt;   </span><span style='background-color: #E4E4E4;'>Type      </span><span>   </span><span style='background-color: #E4E4E4;'>Price</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>   </span><span style='background-color: #E4E4E4;'> Sugar</span><span>  
-#&gt;   </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBB00;'> 1.90</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #E4E4E4;'>Raspberry </span><span>   </span><span style='background-color: #E4E4E4;'> 2.10</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>   </span><span style='background-color: #E4E4E4;'>60.00%</span><span>  
-#&gt;   </span><span style='background-color: #BBBB00;'>Plum      </span><span>   </span><span style='background-color: #BBBB00;'> 1.80</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
+#&gt; Column names: Type, Price, V1, V1, V1, V1</div><div class='input'><span class='fu'>map_background_color</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/gray'>grey</a></span>(<span class='fl'>.95</span>), <span class='st'>"yellow"</span>))</div><div class='output co'>#&gt;   </span><span style='background-color: #BBBBBB;'>Type      </span><span>   </span><span style='background-color: #BBBBBB;'>Price</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBB00;'> 1.90</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
+#&gt;   </span><span style='background-color: #BBBBBB;'>Raspberry </span><span>   </span><span style='background-color: #BBBBBB;'> 2.10</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
+#&gt;   </span><span style='background-color: #BBBB00;'>Plum      </span><span>   </span><span style='background-color: #BBBB00;'> 1.80</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1</div></span></pre>
+#&gt; Column names: Type, Price, V1, V1, V1, V1</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
