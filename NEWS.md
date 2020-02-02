@@ -6,6 +6,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Updated to roxygen 7.
+* Minor improvements to `quick_pptx()` (thanks @davidgohel).
 
 
 # huxtable 4.7.1

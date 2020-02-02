@@ -167,7 +167,7 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
   for (ht in hts) {
     ft <- as_flextable(ht)
     my_pptx <- officer::add_slide(my_pptx, layout = "Title and Content", master = "Office Theme")
-    my_pptx <- officer::ph_with(my_pptx, ft, location = officer::ph_location_left())
+    my_pptx <- officer::ph_with(my_pptx, ft, location = officer::ph_location_type("body"))
   }
   print(my_pptx, target = file)
 
