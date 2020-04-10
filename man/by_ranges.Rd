@@ -4,8 +4,7 @@
 \alias{by_ranges}
 \title{Map numeric ranges to cell properties}
 \usage{
-by_ranges(breaks, values, right = FALSE, extend = TRUE,
-  ignore_na = TRUE)
+by_ranges(breaks, values, right = FALSE, extend = TRUE, ignore_na = TRUE)
 }
 \arguments{
 \item{breaks}{A vector of numbers in increasing order.}
@@ -24,7 +23,7 @@ outermost breaks. \code{TRUE} by default.}
 normally resets to the default.}
 }
 \value{
-A function for use in \code{map_***} functions.
+A function for use in \verb{map_***} functions.
 }
 \description{
 \code{by_ranges} sets property values for cells falling within different numeric ranges.
@@ -63,9 +62,13 @@ map_background_color(ht,
 \seealso{
 \link{mapping-functions}
 
-Other mapping functions: \code{\link{by_cases}},
-  \code{\link{by_colorspace}}, \code{\link{by_function}},
-  \code{\link{by_quantiles}}, \code{\link{by_regex}},
-  \code{\link{by_rows}}, \code{\link{by_values}}
+Other mapping functions: 
+\code{\link{by_cases}()},
+\code{\link{by_colorspace}()},
+\code{\link{by_function}()},
+\code{\link{by_quantiles}()},
+\code{\link{by_regex}()},
+\code{\link{by_rows}()},
+\code{\link{by_values}()}
 }
 \concept{mapping functions}

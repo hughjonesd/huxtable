@@ -70,9 +70,8 @@ cat('\nTagging current version as: ', newtag, '\n')
 tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
 system2('git', c('push', '--tags'))
 
-# Build package
 
-devtools::build()
+# Manual section: run this line by line ------------------------------------------------------------
 
 # run checks
 

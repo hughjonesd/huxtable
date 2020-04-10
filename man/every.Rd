@@ -27,7 +27,7 @@ odds(ht, dimension)
 \description{
 This is a convenience function to use in row or column specifications.
 In this context,
-\code{every(n, from)} will return \code{from, from + n, ...,} up to the number of rows
+\code{every(n, from)} will return \verb{from, from + n, ...,} up to the number of rows
 or columns of the huxtable. \code{evens} and \code{odds} return even and odd
 numbers, i.e. they are equivalent to \code{every(2, 2)} and \code{every(2, 1)} respectively.
 \code{everywhere} returns all rows or columns, equivalently to \code{every(1)}.

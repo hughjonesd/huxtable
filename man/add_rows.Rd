@@ -20,7 +20,7 @@ By default, inserts \code{y} after the end of \code{x}.}
 \item{...}{Arguments passed to \code{\link[=rbind]{rbind()}} or \code{\link[=cbind]{cbind()}}}
 }
 \value{
-For \code{add_rows}, the result of \code{rbind(x[1:after,], y, x[-(1:after),]}. For \code{add_columns}
+For \code{add_rows}, the result of \verb{rbind(x[1:after,], y, x[-(1:after),]}. For \code{add_columns}
 the same but with columns. \code{after = 0} and \code{after = nrow(x)} or \code{ncol(x)} are handled correctly.
 }
 \description{

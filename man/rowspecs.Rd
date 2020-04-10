@@ -4,12 +4,12 @@
 \alias{rowspecs}
 \title{Different ways to select rows and columns}
 \description{
-This help page describes how to use the \code{row} and \code{col} arguments in \code{set_*} functions.
+This help page describes how to use the \code{row} and \code{col} arguments in \verb{set_*} functions.
 }
 \section{The basics}{
 
 
-The \code{set_*} functions for cell properties all have arguments like this:
+The \verb{set_*} functions for cell properties all have arguments like this:
 \code{set_property(ht, row, col, value, byrow = FALSE)}.
 
 You can treat \code{row} and \code{col} arguments like arguments for
@@ -32,7 +32,7 @@ specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for
 \section{The gory details}{
 
 
-How the row and col arguments are parsed depends on the number of arguments passed to the \code{set_*}
+How the row and col arguments are parsed depends on the number of arguments passed to the \verb{set_*}
 function.
 \itemize{
 \item If there are two arguments (excluding \code{byrow}) then the second argument is taken as the

@@ -27,8 +27,8 @@ Functions to get or set the table-level \emph{table label} property of a huxtabl
 LaTeX table labels typically start with \code{"tab:"}.
 
 If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
-the caption will automatically be prefixed with \code{(#label)}. You can then
-refer to the table using \code{@ref(label)}. \code{label} needs to start with \code{"tab:"}; if it doesn't,
+the caption will automatically be prefixed with \verb{(#label)}. You can then
+refer to the table using \verb{@ref(label)}. \code{label} needs to start with \code{"tab:"}; if it doesn't,
 the \code{"tab"} prefix will be added automatically.
 }
 \examples{

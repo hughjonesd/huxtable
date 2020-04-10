@@ -10,11 +10,15 @@ print_screen(ht, ...)
 
 to_screen(ht, ...)
 
-\method{to_screen}{huxtable}(ht,
+\method{to_screen}{huxtable}(
+  ht,
   min_width = ceiling(getOption("width")/6),
-  max_width = getOption("width", Inf), compact = TRUE,
-  colnames = TRUE, color = getOption("huxtable.color_screen", default =
-  TRUE), ...)
+  max_width = getOption("width", Inf),
+  compact = TRUE,
+  colnames = TRUE,
+  color = getOption("huxtable.color_screen", default = TRUE),
+  ...
+)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -51,8 +55,10 @@ jams <- map_text_color(jams,
 print_screen(jams)
 }
 \seealso{
-Other printing functions: \code{\link{print_html}},
-  \code{\link{print_latex}}, \code{\link{print_md}},
-  \code{\link{print_rtf}}
+Other printing functions: 
+\code{\link{print_html}()},
+\code{\link{print_latex}()},
+\code{\link{print_md}()},
+\code{\link{print_rtf}()}
 }
 \concept{printing functions}

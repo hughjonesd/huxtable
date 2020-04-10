@@ -16,6 +16,11 @@ bold(ht) <- value
 set_bold(ht, row, col, value, byrow = FALSE)
 map_bold(ht, row, col, fn)
 
+bold(ht)
+bold(ht) <- value
+set_bold(ht, row, col, value, byrow = FALSE)
+map_bold(ht, row, col, fn)
+
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value, byrow = FALSE)
@@ -60,9 +65,12 @@ map_bold(jams,
       by_rows(TRUE, FALSE))
 }
 \seealso{
-Other formatting functions: \code{\link{background_color}},
-  \code{\link{font_size}}, \code{\link{font}},
-  \code{\link{na_string}}, \code{\link{number_format}},
-  \code{\link{text_color}}
+Other formatting functions: 
+\code{\link{background_color}()},
+\code{\link{font_size}()},
+\code{\link{font}()},
+\code{\link{na_string}()},
+\code{\link{number_format}()},
+\code{\link{text_color}()}
 }
 \concept{formatting functions}

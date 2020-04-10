@@ -20,7 +20,7 @@ For \code{check_latex_dependencies}, suppress messages.}
 }
 \value{
 If \code{as_string} is \code{TRUE}, \code{report_latex_dependencies} returns a string of
-\code{"\\\\usepackage\\{...\\}"} statements; otherwise it returns a list of
+\code{"\\\\\\\\usepackage\\\\{...\\\\}"} statements; otherwise it returns a list of
 \code{rmarkdown::latex_dependency} objects, invisibly.
 
 \code{check_latex_dependencies()} returns \code{TRUE} or \code{FALSE}.
@@ -35,7 +35,7 @@ to a LaTeX preamble.
 
 \code{install_latex_dependencies} is a utility function to install the LaTeX packages
 that huxtable requires. It calls \code{\link[tinytex:tlmgr_install]{tinytex::tlmgr_install()}} if possible,
-or \code{tlmgr install} directly.
+or \verb{tlmgr install} directly.
 }
 \examples{
 report_latex_dependencies()

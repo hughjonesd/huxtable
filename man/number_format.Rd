@@ -52,14 +52,14 @@ Note that if your cells are of type numeric, a number format of \code{NA} doesn'
 back what you typed in, since R's default conversion may apply scientific notation and
 rounding.
 
-The default value is "\%.3g", which rounds numbers if they have more than 3 significant
+The default value is "\\%.3g", which rounds numbers if they have more than 3 significant
 digits, and which may use scientific notation for large numbers.
 
 To set number_format to a function, enclose the function in \code{list}. The function should
 take one argument and return a string.
 
 Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
-numbers in their entirety. The default value was "\%5.2f".
+numbers in their entirety. The default value was "\\%5.2f".
 }
 \examples{
 ht <- huxtable(
@@ -67,7 +67,7 @@ ht <- huxtable(
           "Default",
           "NA",
           "2",
-          "\\"\%5.2f\\"",
+          "\"\%5.2f\"",
           "Pretty",
           "Sign"
         ),
@@ -114,9 +114,12 @@ map_number_format(jams,
       by_rows(2, 3))
 }
 \seealso{
-Other formatting functions: \code{\link{background_color}},
-  \code{\link{bold}}, \code{\link{font_size}},
-  \code{\link{font}}, \code{\link{na_string}},
-  \code{\link{text_color}}
+Other formatting functions: 
+\code{\link{background_color}()},
+\code{\link{bold}()},
+\code{\link{font_size}()},
+\code{\link{font}()},
+\code{\link{na_string}()},
+\code{\link{text_color}()}
 }
 \concept{formatting functions}

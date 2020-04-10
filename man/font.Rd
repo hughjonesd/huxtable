@@ -11,6 +11,11 @@ font(ht)
 font(ht) <- value
 set_font(ht, row, col, value, byrow = FALSE)
 map_font(ht, row, col, fn)
+
+font(ht)
+font(ht) <- value
+set_font(ht, row, col, value, byrow = FALSE)
+map_font(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -63,9 +68,12 @@ jams4 <- map_font(jams,
 font(jams4)
 }
 \seealso{
-Other formatting functions: \code{\link{background_color}},
-  \code{\link{bold}}, \code{\link{font_size}},
-  \code{\link{na_string}}, \code{\link{number_format}},
-  \code{\link{text_color}}
+Other formatting functions: 
+\code{\link{background_color}()},
+\code{\link{bold}()},
+\code{\link{font_size}()},
+\code{\link{na_string}()},
+\code{\link{number_format}()},
+\code{\link{text_color}()}
 }
 \concept{formatting functions}

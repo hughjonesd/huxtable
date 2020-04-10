@@ -5,11 +5,23 @@
 \alias{insert_row}
 \title{Insert a row or column}
 \usage{
-insert_column(ht, ..., after = 0, fill = NULL, rowspan = 1,
-  copy_cell_props = TRUE)
+insert_column(
+  ht,
+  ...,
+  after = 0,
+  fill = NULL,
+  rowspan = 1,
+  copy_cell_props = TRUE
+)
 
-insert_row(ht, ..., after = 0, fill = NULL, colspan = 1,
-  copy_cell_props = TRUE)
+insert_row(
+  ht,
+  ...,
+  after = 0,
+  fill = NULL,
+  colspan = 1,
+  copy_cell_props = TRUE
+)
 }
 \arguments{
 \item{ht}{A huxtable.}

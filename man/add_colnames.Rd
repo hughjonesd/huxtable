@@ -13,8 +13,7 @@ add_colnames(ht, ...)
 
 add_rownames(ht, ...)
 
-\method{add_rownames}{huxtable}(ht, colname = "rownames",
-  preserve_rownames = TRUE, ...)
+\method{add_rownames}{huxtable}(ht, colname = "rownames", preserve_rownames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

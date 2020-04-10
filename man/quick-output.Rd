@@ -11,26 +11,56 @@
 \alias{quick_rtf}
 \title{Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document.}
 \usage{
-quick_latex(..., file = confirm("huxtable-output.tex"), borders = 0.4,
-  open = interactive())
+quick_latex(
+  ...,
+  file = confirm("huxtable-output.tex"),
+  borders = 0.4,
+  open = interactive()
+)
 
-quick_pdf(..., file = confirm("huxtable-output.pdf"), borders = 0.4,
-  open = interactive(), width = NULL, height = NULL)
+quick_pdf(
+  ...,
+  file = confirm("huxtable-output.pdf"),
+  borders = 0.4,
+  open = interactive(),
+  width = NULL,
+  height = NULL
+)
 
-quick_html(..., file = confirm("huxtable-output.html"), borders = 0.4,
-  open = interactive())
+quick_html(
+  ...,
+  file = confirm("huxtable-output.html"),
+  borders = 0.4,
+  open = interactive()
+)
 
-quick_docx(..., file = confirm("huxtable-output.docx"), borders = 0.4,
-  open = interactive())
+quick_docx(
+  ...,
+  file = confirm("huxtable-output.docx"),
+  borders = 0.4,
+  open = interactive()
+)
 
-quick_pptx(..., file = confirm("huxtable-output.pptx"), borders = 0.4,
-  open = interactive())
+quick_pptx(
+  ...,
+  file = confirm("huxtable-output.pptx"),
+  borders = 0.4,
+  open = interactive()
+)
 
-quick_xlsx(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
-  open = interactive())
+quick_xlsx(
+  ...,
+  file = confirm("huxtable-output.xlsx"),
+  borders = 0.4,
+  open = interactive()
+)
 
-quick_rtf(..., file = confirm("huxtable-output.rtf"), borders = 0.4,
-  open = interactive())
+quick_rtf(
+  ...,
+  file = confirm("huxtable-output.rtf"),
+  borders = 0.4,
+  open = interactive()
+)
 }
 \arguments{
 \item{...}{One or more huxtables or R objects with an \code{as_huxtable} method.}

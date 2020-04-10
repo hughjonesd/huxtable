@@ -49,9 +49,12 @@ map_background_color(jams,
       by_rows(grey(.95), "yellow"))
 }
 \seealso{
-Other formatting functions: \code{\link{bold}},
-  \code{\link{font_size}}, \code{\link{font}},
-  \code{\link{na_string}}, \code{\link{number_format}},
-  \code{\link{text_color}}
+Other formatting functions: 
+\code{\link{bold}()},
+\code{\link{font_size}()},
+\code{\link{font}()},
+\code{\link{na_string}()},
+\code{\link{number_format}()},
+\code{\link{text_color}()}
 }
 \concept{formatting functions}

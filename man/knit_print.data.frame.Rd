@@ -48,6 +48,7 @@ data.frame(
 \seealso{
 \link{huxtable-options}
 
-Other knit_print: \code{\link{knit_print.huxtable}}
+Other knit_print: 
+\code{\link{knit_print.huxtable}()}
 }
 \concept{knit_print}

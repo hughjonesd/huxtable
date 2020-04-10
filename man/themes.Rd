@@ -17,8 +17,12 @@ theme_plain(ht, position = "left")
 
 theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
-theme_striped(ht, stripe = grDevices::grey(0.9), header_row = TRUE,
-  header_col = TRUE)
+theme_striped(
+  ht,
+  stripe = grDevices::grey(0.9),
+  header_row = TRUE,
+  header_col = TRUE
+)
 
 theme_grey(ht, header_row = TRUE, header_col = TRUE)
 
