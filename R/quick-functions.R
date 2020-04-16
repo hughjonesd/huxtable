@@ -80,7 +80,14 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     tinytex::latexmk(latex_file, pdf_file = file, engine = engine)
     output_file <- file
   } else {
-    tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
+    if (getOption("huxtable.latex_use_fontspec", FALSE)) {
+      old_LATEX = Sys.getenv("LATEX")
+      Sys.setenv(LATEX = "xelatex")
+      tools::texi2dvi(latex_file, clean = TRUE) # outputs to current working directory
+      Sys.setenv(LATEX = old_LATEX)
+    } else {
+      tools::texi2pdf(latex_file, clean = TRUE) # outputs to current working directory
+    }
     output_file <- sub("\\.tex$", ".pdf", basename(latex_file))
   }
   if (! file.exists(output_file)) stop("Could not find pdf output file '", output_file, "'")
