@@ -4,6 +4,16 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
+* New: by default, huxtable sets labels from the current knitr chunk label, if there
+  is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
+
+Some iris species are shown in \@ref(tab:mytable):
+
+```{r mytable}
+hux(head(iris))
+```
+
+  Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Updated to roxygen 7.
 * Minor improvements to `quick_pptx()` (thanks @davidgohel).

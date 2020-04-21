@@ -64,7 +64,7 @@ to_html.huxtable <- function(ht, ...) {
           ""
         )
 
-  id_string <- blank_where(sprintf(" id=\"%s\"", label(ht)), is.na(label(ht)))
+  id_string <- blank_where(sprintf(" id=\"%s\"", make_label(ht)), is.na(make_label(ht)))
 
   table_start <- sprintf(
         '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s %s"%s>\n',

@@ -305,6 +305,18 @@ get_caption_hpos <- function (ht) {
 }
 
 
+make_label <- function (ht) {
+  lab <- label(ht)
+  if (is.na(lab) && getOption("huxtable.autolabel", TRUE) &&
+        requireNamespace("knitr", quietly = TRUE)) {
+    chunk_label <- knitr::opts_current$get("label")
+    if (! is.null(chunk_label)) lab <- paste0("tab:", chunk_label)
+  }
+
+  lab
+}
+
+
 position_no_wrap <- function (ht) {
   switch(position(ht),
           "wrapleft"  = "left",

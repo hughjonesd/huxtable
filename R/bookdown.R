@@ -18,7 +18,7 @@ make_caption <- function(ht, format = c("html", "latex", "md")) {
   format <- match.arg(format)
 
   raw_cap <- caption(ht)
-  label <- label(ht)
+  label <- make_label(ht)
 
   if (is.na(label) || label == "") {
     return(raw_cap)

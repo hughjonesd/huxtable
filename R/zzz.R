@@ -65,6 +65,8 @@
 #' * `options('huxtable.knitr_output_format')` overrides the default output format when huxtable
 #'   objects are printed by knitr. Set to "html", "latex", "md" or "screen". If `NULL` (the default),
 #'   huxtable guesses the format using [guess_knitr_output_format()].
+#'   `options('huxtable.autolabel')`. If `TRUE`, (the default) automatically sets
+#'    `label()` from the knitr chunk label, if there is one.
 #' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
 #'    will be printed in color on screen.
 #' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to automatically
@@ -186,6 +188,7 @@ NULL
   set_default_option('huxtable.print', print_screen)
   set_default_option('huxtable.knit_print_df', TRUE)
   set_default_option('huxtable.knit_print_df_theme', theme_plain)
+  set_default_option('huxtable.autolabel', TRUE)
   set_default_option('huxtable.color_screen', requireNamespace('crayon', quietly = TRUE))
   set_default_option('huxtable.bookdown', NULL)
   set_default_option('huxtable.autoformat', TRUE)

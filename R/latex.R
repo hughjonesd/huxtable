@@ -76,7 +76,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     )
     sprintf("\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n", cap_setup, cap)
   }
-  lab <- if (is.na(lab <- label(ht))) "" else sprintf("\\label{%s}\n", lab)
+  lab <- if (is.na(lab <- make_label(ht))) "" else sprintf("\\label{%s}\n", lab)
   if (nzchar(lab) && ! nzchar(cap)) warning("No caption set: LaTeX table labels may not work as expected.")
 
   pos_text <- switch(position(ht),
