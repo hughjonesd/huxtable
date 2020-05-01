@@ -1,0 +1,45 @@
+---
+title: "Table numbering"
+output: 
+  bookdown::html_document2:
+    toc: true
+  bookdown::word_document2:
+    toc: true
+    keep_md: true
+---
+
+```{r,  echo=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, echo = FALSE)
+mt <- head(mtcars)
+```
+
+### Goals
+
+* Tables should be autonumbered. 
+* Table references should be possible.
+  - Optional goal: table references from knitr chunks should be possible
+  
+* Table captions should not contain visible ugliness.
+
+### flextable
+
+```{r mtflex}
+f <- flextable::flextable(head(mtcars))
+f <- flextable::set_caption(f, "Flextable caption")
+f
+```
+
+### huxtable
+
+```{r mthux}
+library(huxtable)
+options('huxtable.bookdown'=TRUE) # Should be automatic, just to be sure
+h <- huxtable(mt, add_colnames = TRUE)
+caption(h) <- "Huxtable caption"
+label(h) <- "tab:mthux"
+h
+
+```
+
+

@@ -6,6 +6,8 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+library(magrittr)
+library(huxtable)
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
@@ -15,15 +17,24 @@ urweia dsjkl ewauof dsnkfea uieorw lorem upsdf usf ueriawo fsd urweia dsjkl
 ewauof dsnkfea uieorw lorem upsdf usf ueriawo fsd urweia dsjkl ewauof dsnkfea
 uieorw lorem upsdf usf ueriawo fsd urweia dsjkl ewauof dsnkfea uieorw
 
+
 ```{r}
-iris_lm <- lm(Sepal.Width ~ ., data = iris)
 
-ht <- huxtable::huxreg(iris_lm, iris_lm, iris_lm, iris_lm)
+ht <- huxtable::huxtable(a = "L L L L L L L left L L L L L L L", 
+                         b = "R R R R R R R rght R R R R R R")
 
-huxtable::position(ht) <- "left"
+huxtable::position(ht) <- "center"
 
-huxtable::width(ht) <- 1 # This can be varied
-ht <- huxtable::set_all_padding(ht, 0)
+huxtable::width(ht) <- 0.5 # This can be varied
+ht <- huxtable::set_all_borders(ht, 0.4)
 
+huxtable::wrap(ht) <- TRUE
 ht
+```
+
+
+\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}
+
+```{r}
+ht %>% set_all_padding(8)
 ```

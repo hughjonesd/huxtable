@@ -1,0 +1,128 @@
+---
+title: "Example of cross-references and captions"
+output: 
+  bookdown::html_document2
+---
+
+# The first chapter {#firstchap}
+
+This is the first chapter with id `{#sec:firstchap}`
+
+## A subchapter {#sec:subchapter}
+
+* Anchors have curly braces. 
+* This is a subchapter with id `{#sec:subchapter}`.
+* You can also link to [arbitrary text]{#atext}. Anchor looks like this: `[arbitrary text]{#atext}`. The hash is required.
+
+## Another one
+
+This chapter only exists to demonstrate implicit anchors. You should prefer the above explicit ones.
+
+```{r, echo = FALSE, warning=FALSE}
+library(knitr)
+library(pander)
+library(DT)
+library(kableExtra)
+library(ggplot2)
+mcaption = function(tag, caption){
+  # Do not use underscores in tag!
+  stopifnot(length(grep("_", tag)) == 0)
+  cat("<caption>(#tab:", tag, ")", caption, "</caption>", sep="")
+}
+```
+
+### `kable` Table
+
+Too bad, caption is always at the top
+
+```{r iris}
+# Chunk iris, not tab:iris!. Gives Table 1.1
+kable(head(iris), caption = "Iris with kable")
+kable(head(iris), caption = "Iris with kable")
+```
+
+### `kableExtra` Table 
+
+`kableExtra` also plays well with numbering and captions.
+
+```{r irisextra}
+kable(head(iris), caption = "Iris with kableExtra") %>% 
+   kable_styling()
+```
+
+### `pander` Table
+```{r panderiris, results='asis', echo = FALSE}
+# Must use echo = FALSE (or globally). 
+mcaption("pandertable", "This is a pander caption")
+pander(head(iris))
+```
+
+### `DT` Table
+```{r datatableiris, results='asis', echo=FALSE}
+mcaption("dtiris", "This is a DT")
+DT::datatable(head(iris), caption = "Iris with pander")
+```
+
+### `flextable`
+
+Currently requires a version from github (https://github.com/davidgohel/flextable/pull/205). This was tested with `flextable` version `r packageVersion("flextable")`.
+
+```{r}
+use_flex = TRUE # set to FALSE to test huxtable
+```
+
+
+```{r flexiris, echo=FALSE, eval = use_flex}
+suppressPackageStartupMessages(library(flextable))
+ft =  flextable( head( iris ) )
+ft = flextable::set_caption(ft, "Iris with flextable")
+ft
+```
+
+### `huxtable`
+
+`huxtable` extends `flextable`, but cannot be used together with `flextable` because of a naming conflict. When used alone, it does not show autonumbering. This was tested with `huxtable` version `r packageVersion("huxtable")`.
+
+```{r huxiris, echo=FALSE}
+suppressPackageStartupMessages(library(huxtable))
+hx =  hux( head( iris ) ) 
+hx = add_colnames(hx)
+hx = huxtable::set_caption(hx, "Iris with huxtable")
+hx = huxtable::set_label(hx, "tab:huxiris")
+hx
+```
+
+### A figure 
+```{r irisf, fig.height=2.4, fig.width= 2.5, fig.cap="Figures work nicely", echo = FALSE}
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width) ) + geom_point()
+```
+
+\begin{equation}
+\bar{X} = \frac{\sum_{i=1}^n X_i}{n} (\#eq:mean)
+\end{equation}
+
+## References to tables, figures and equations
+
+Currently, referencing tables and autonumbering only works for `kable`, not for pander or DT, promised for `flextable` and its descendant `huxtable`. 
+
+* Explicit reference to chapter: Check also Chapter \@ref(firstchap)...
+* Explicit reference to chapter with optional category: Check also Chapter \@ref(sec:subchapter).
+* Implicit reference: As Chapter \@ref(another-one) shows... can only be used when there is no explicit anchor.
+* Table: `kable` table \@ref(tab:iris) is best seen here. The `tab:` is implicit, the chunk must not have the `tab:` prefix.
+* Reference to a `kableExtra`table:  As the extra Table \@ref(tab:irisextra) shows ....
+* Reference to `flextable`: Please look at flextable \@ref(tab:flexiris).
+* Fig. \@ref(fig:irisf) shows that everything works nicely with figures. Great work by Yihui.
+* Equation: Also see Equation \@ref(eq:mean).
+
+## Links to tables and figures
+
+* [An internal link](#atext) to arbitrary text. `[An internal link](#atext)`. The hash is required.
+* [An internal link](#sec:subchapter) to a subchapter.
+* [Link to figure](#fig:irisf), a link to a figure `[Link to figure](#fig:irisf)`, the hash is required.
+* [Link to flextable](#tab:flexiris)
+* [Link to huxtable](#tab:huxiris); does not work currently.
+
+For `pander`  a link to the chunk label fails `\@ref(panderiris)`, but you can use the `mcaption` tag using the function defined in this document. Do not forget to put `results='asis'` into the chunk header.
+
+* You should check Table \@ref(tab:pandertable).... Don't use underscores in tag!
+* [Link to table](#tab:pandertable). Must use hash here, because it is part of the `mcaption` function.
