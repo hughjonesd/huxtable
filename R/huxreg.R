@@ -104,7 +104,7 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   requireNamespace("broom", quietly = TRUE)
-  requireNamespace("broom.mixed", quietly = TRUE)
+  suppressPackageStartupMessages(requireNamespace("broom.mixed", quietly = TRUE))
   if (utils::packageVersion("broom") < package_version("0.5.1")) {
     warning("`huxreg` requires `broom` version 0.5.1 or greater.")
   }
