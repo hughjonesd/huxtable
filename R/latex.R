@@ -94,6 +94,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           pos_text[1],
           resize_box[1],
           "\n\\begin{threeparttable}\n",
+          "\\setlength{\\tabcolsep}{0pt}\n",
           res,
           "\\end{threeparttable}\n",
           resize_box[2],
