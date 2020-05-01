@@ -106,7 +106,7 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
 hux_logo <- function(latex = FALSE, html = FALSE) {
   assert_that(is.flag(latex))
 
-  blank <- if (html) "&nbsp;" else ""
+  blank <- if (html) "&nbsp;" else if (latex) "~" else ""
   squares <- rep(blank, 36)
   letter_squares <- sort(sample(36, 8))
   squares[letter_squares] <- strsplit("huxtable", "")[[1]]
@@ -154,6 +154,9 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
     height(mondrian) <- "120pt"
     col_width(mondrian)  <- "20pt"
     row_height(mondrian) <- "20pt"
+  }
+  if (latex) {
+    wrap(mondrian) <- TRUE
   }
 
   mondrian
