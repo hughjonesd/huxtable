@@ -219,7 +219,7 @@ build_tabular <- function(ht) {
   ## CELL CONTENTS -------------
   ## inner_cell is empty except for the *bottom* left of a 'display area' (including 1x1)
   ## this avoids a problem with later cells overpainting borders etc.
-  ## - inner_cell has padding, alignment, wrap and row_height TeX added
+  ## inner_cell has padding, alignment, wrap and row_height TeX added
   ## inner_cell data comes from the 'display cell' at the top left of the display area
 
   inner_cell_bldc <- clean_contents(ht, type = "latex")[bl_dc]
@@ -268,15 +268,18 @@ build_tabular <- function(ht) {
   has_pad_bldc <- lapply(pad_bldc, Negate(is.na))
   pad_bldc <- lapply(pad_bldc, function (x) if (is.numeric(x)) sprintf("%.4gpt", x) else x)
   tpad_tex_bldc <- rep("", length(pad_bldc$top))
-  # tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\rule{0pt}{\\baselineskip+%s}",
-  #       pad_bldc$top[has_pad_bldc$top])
   tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\huxtpad{%s}", pad_bldc$top[has_pad_bldc$top])
   bpad_tex_bldc <- rep("", length(pad_bldc$bottom))
   bpad_vals_bldc <- pad_bldc$bottom[has_pad_bldc$bottom]
   bpad_tex_bldc[has_pad_bldc$bottom] <- sprintf("\\huxbpad{%s}", bpad_vals_bldc)
   align_tex_key <- c("left" = "\\raggedright ", "right" = "\\raggedleft ", "center" = "\\centering ")
   align_tex_bldc <- align_tex_key[align_bldc]
-  inner_cell_bldc <- paste0(tpad_tex_bldc, align_tex_bldc, inner_cell_bldc, bpad_tex_bldc)
+  lpad_tex_bldc  <- ifelse(has_pad_bldc$left & ! wrap_bldc,
+        sprintf("\\hspace{%s}", pad_bldc$left), "")
+  rpad_tex_bldc  <- ifelse(has_pad_bldc$right & ! wrap_bldc,
+        sprintf("\\hspace{%s}", pad_bldc$right), "")
+  inner_cell_bldc <- paste0(tpad_tex_bldc, align_tex_bldc, lpad_tex_bldc, inner_cell_bldc,
+        rpad_tex_bldc, bpad_tex_bldc)
 
   if (any(wrap_bldc)) {
     # reverse of what you think. "b" aligns the *bottom* of the text with the baseline
@@ -285,9 +288,11 @@ build_tabular <- function(ht) {
     valign_bldc <- valign_tex_key[valign_bldc]
     # XXX should be a way to speed up by only doing dc_idx cells. but we run again at some point...
     width_spec_bldc <- width_spec[bl_dc]
+    left_pad_bldc <- ifelse(has_pad_bldc$left, sprintf("\\hspace{%s}", pad_bldc$left), "")
     hpad_loss_left_bldc  <- ifelse(has_pad_bldc$left,  paste0("-", pad_bldc$left),  "")
     hpad_loss_right_bldc <- ifelse(has_pad_bldc$right, paste0("-", pad_bldc$right), "")
-    inner_cell_bldc[wrap_bldc] <- sprintf("\\parbox[%s]{%s%s%s}{%s}",
+    inner_cell_bldc[wrap_bldc] <- sprintf("%s\\parbox[%s]{%s%s%s}{%s}",
+            left_pad_bldc[wrap_bldc],
             valign_bldc[wrap_bldc],
             width_spec_bldc[wrap_bldc],
             hpad_loss_left_bldc[wrap_bldc],
@@ -357,12 +362,10 @@ build_tabular <- function(ht) {
   bord <- cb$vert
   bcol <- cbc$vert
   has_bord <- ! is.na(bord)
-  has_bcol <- ! is.na(bcol) # if *defined* as black, then we print it. Otherwise not.
   bs_double <- cbs$vert == "double"
   bcol <- format_color(bcol, default = "black")
   bord_tex <- rep("", length(bord))
 
-  # bord_tex[has_bord] <- sprintf("!{%s\\vrule width %.4gpt}", bcol_tex[has_bord], bord[has_bord])
   bord_tex[has_bord] <- sprintf("!{\\huxvb{%s}{%.4g}}", bcol[has_bord], bord[has_bord])
   bord_tex[bs_double] <- paste0(bord_tex[bs_double], bord_tex[bs_double])
   dim(bord_tex) <- dim(cb$vert)
