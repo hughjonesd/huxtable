@@ -143,10 +143,13 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
     rep(1/ncol(ht), ncol(ht))
   }
 
+  if (is.na(table_width)) table_width <- 0.5
   if (! is.numeric(table_width)) {
     warning("to_rtf can only handle numeric table width")
-    table_width <- get_default_properties("width")[[1]]
+    table_width <- 0.5
   }
+
+
   text_width_twips <- 6 * 72 * 20 # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips
   col_width <- col_width * text_width_twips * table_width
   # \cellx specifies the position of the RH cell edge:

@@ -77,7 +77,6 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     sprintf("\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n", cap_setup, cap)
   }
   lab <- if (is.na(lab <- make_label(ht))) "" else sprintf("\\label{%s}\n", lab)
-  if (nzchar(lab) && ! nzchar(cap)) warning("No caption set: LaTeX table labels may not work as expected.")
 
   pos_text <- switch(position(ht),
     wrapleft = ,
@@ -263,7 +262,7 @@ build_tabular <- function(ht) {
   pad_bldc$bottom <- bottom_padding(ht)[bl_dc]
   align_bldc      <- real_align[bl_dc]
   valign_bldc     <- valign(ht)[bl_dc]
-  wrap_bldc       <- wrap(ht)[bl_dc]
+  wrap_bldc       <- wrap(ht)[bl_dc] & ! is.na(width(ht)) # tables without width turn wrapping off
 
   has_pad_bldc <- lapply(pad_bldc, Negate(is.na))
   pad_bldc <- lapply(pad_bldc, function (x) if (is.numeric(x)) sprintf("%.4gpt", x) else x)
@@ -275,9 +274,9 @@ build_tabular <- function(ht) {
   align_tex_key <- c("left" = "\\raggedright ", "right" = "\\raggedleft ", "center" = "\\centering ")
   align_tex_bldc <- align_tex_key[align_bldc]
   lpad_tex_bldc  <- ifelse(has_pad_bldc$left & ! wrap_bldc,
-        sprintf("\\hspace{%s}", pad_bldc$left), "")
+        sprintf("\\hspace{%s} ", pad_bldc$left), "")
   rpad_tex_bldc  <- ifelse(has_pad_bldc$right & ! wrap_bldc,
-        sprintf("\\hspace{%s}", pad_bldc$right), "")
+        sprintf(" \\hspace{%s}", pad_bldc$right), "")
   inner_cell_bldc <- paste0(tpad_tex_bldc, align_tex_bldc, lpad_tex_bldc, inner_cell_bldc,
         rpad_tex_bldc, bpad_tex_bldc)
 
@@ -341,7 +340,7 @@ build_tabular <- function(ht) {
   ## left borders are blank, except for the first row; we collapse borders into right border position
 
   colspan_lhdc    <- colspan(ht)[lh_dc]
-  wrap_lhdc       <- wrap(ht)[lh_dc]
+  wrap_lhdc       <- wrap(ht)[lh_dc] & ! is.na(width(ht))
   valign_lhdc     <- valign(ht)[lh_dc]
   real_align_lhdc <- real_align[lh_dc]
   colspec_tex_key <- c("left" = "l", "center" = "c", "right" = "r")
@@ -420,6 +419,7 @@ build_tabular <- function(ht) {
   table_body <- paste(hhlines[1], table_body, sep = "\n")
 
   tenv <- tabular_environment(ht)
+  if (is.na(tenv)) tenv <- if (is.na(width(ht))) "tabular" else "tabularx"
   tenv_tex <- paste0(c("\\begin{", "\\end{"), tenv, "}")
   width_spec <- if (tenv %in% c("tabularx", "tabular*", "tabulary")) {
     tw <- latex_table_width(ht)
@@ -428,9 +428,13 @@ build_tabular <- function(ht) {
     ""
   }
 
-  colspec_top <- sapply(seq_len(ncol(ht)), function (mycol) {
+  colspec_top <- if (is.na(width(ht))) {
+    rep("l", ncol(ht))
+  } else {
+    sapply(seq_len(ncol(ht)), function (mycol) {
           sprintf("p{%s}", compute_width(ht, mycol, mycol))
         })
+  }
   colspec_top <- paste0(colspec_top, collapse = " ")
   colspec_top <- sprintf("{%s}\n", colspec_top)
 
@@ -447,7 +451,7 @@ latex_table_width <- function (ht) {
 
 
 compute_width <- function (ht, start_col, end_col) {
-  table_width <- width(ht) # always defined, default is 0.5 (of \\textwidth)
+  table_width <- width(ht)
   if (is.numeric(table_width)) {
     table_unit  <- default_table_width_unit
     table_width <- as.numeric(table_width)

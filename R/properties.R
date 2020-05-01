@@ -33,7 +33,7 @@ huxtable_env$huxtable_default_attrs <- list(
         colspan             = 1,
         align               = "left",
         valign              = "top",
-        width               = 0.5,
+        width               = NA,
         height              = NA,
         col_width           = NA,
         row_height          = NA,
@@ -51,15 +51,15 @@ huxtable_env$huxtable_default_attrs <- list(
         right_border_style  = "solid",
         top_border_style    = "solid",
         bottom_border_style = "solid",
-        left_padding        = 4,
-        right_padding       = 4,
-        top_padding         = 4,
-        bottom_padding      = 4,
+        left_padding        = 6,
+        right_padding       = 6,
+        top_padding         = 6,
+        bottom_padding      = 6,
         wrap                = FALSE,
         caption             = NA,
         caption_pos         = "top",
         position            = "center",
-        tabular_environment = "tabularx",
+        tabular_environment = NA,
         label               = NA,
         latex_float         = "h",
         escape_contents     = TRUE,
@@ -570,8 +570,7 @@ make_getter_setters("wrap", "cell", check_fun = is.logical)
 #' @examples
 #' ht <- huxtable(
 #'         Exponent = 2:4,
-#'         Example  = paste0("$x^", 2:4, "$"),
-#'         add_colnames = TRUE
+#'         Example  = paste0("$x^", 2:4, "$")
 #'       )
 #' escape_contents(ht)[,2] <- FALSE
 #' \dontrun{
@@ -703,8 +702,7 @@ make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {va
 #'         b = rep(1000.005, 6),
 #'         c = rep(0.0001, 6),
 #'         d = rep(-1, 6),
-#'         e = rep("3.2 (s.e. 1.4)", 6),
-#'         add_colnames = TRUE
+#'         e = rep("3.2 (s.e. 1.4)", 6)
 #'       )
 #'
 #' number_format(ht)[3, -1] <- NA

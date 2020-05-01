@@ -41,8 +41,8 @@ NULL
 #' If you use `add_colnames` or `add_rownames`, be aware that these will shift your rows and columns
 #' along by one: your old row/column 1 will now be row/column 2, etc.
 #'
-#' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
-#' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
+#' `add_colnames` defaults to `TRUE`. You can set the default globally by
+#' setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
 #'
 #' @seealso [huxtable-options]
 #'
@@ -54,7 +54,7 @@ NULL
 #' ht
 huxtable <- function (
         ...,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
@@ -90,7 +90,7 @@ hux <- huxtable
 #'     add_colnames = TRUE
 #' )
 tribble_hux <- function (...,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
@@ -144,7 +144,7 @@ as_hux <- as_huxtable
 #' @rdname as_huxtable
 as_huxtable.default <- function (
         x,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE),
         ...

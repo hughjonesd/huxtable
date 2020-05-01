@@ -18,7 +18,7 @@
 #'          Salaries = c(1e5, 1e5, 1e5),
 #'          add_colnames = TRUE
 #'        )
-#'  car_hux <- as_hux(mtcars, add_colnames = TRUE)
+#'  car_hux <- as_hux(mtcars)
 #'
 #' ```
 #'
@@ -59,8 +59,7 @@
 #' Package options
 #'
 #' * `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
-#'   [huxtable()] and [as_huxtable()]. If it is unset, `add_colnames` defaults to
-#'   `FALSE`; in a future release, the default will become `TRUE`.
+#'   [huxtable()] and [as_huxtable()]. As of version 5.0.0, this defaults to `TRUE`.
 #' * `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].
 #' * `options('huxtable.knitr_output_format')` overrides the default output format when huxtable
 #'   objects are printed by knitr. Set to "html", "latex", "md" or "screen". If `NULL` (the default),
@@ -185,6 +184,7 @@ NULL
     options(ol)
   }
 
+  set_default_option('huxtable.add_colnames', TRUE)
   set_default_option('huxtable.print', print_screen)
   set_default_option('huxtable.knit_print_df', TRUE)
   set_default_option('huxtable.knit_print_df_theme', theme_plain)

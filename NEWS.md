@@ -6,9 +6,20 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 ## Breaking changes
 
-* Changes to LaTeX output. **This may change the look of your tables.** In particular,
-  LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
+* As previously signalled, `add_colnames` has now become `TRUE` by default in 
+  `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
+  to go back to the old behaviour.
+* Default padding has been increased to 6 points.
+
+This version changes how LaTeX is output. 
+**This may change the look of your tables.** 
+* LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
   padding should now take effect even when `wrap` is `FALSE`.
+* By default, `width()` is now unset.
+* The default LaTeX table environment is now "tabular" unless `width` is set. 
+  If `width` is set, it is "tabularx".
+* `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
+
 
 ## Other changes
 

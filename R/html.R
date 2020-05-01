@@ -42,7 +42,10 @@ to_html.huxtable <- function(ht, ...) {
 
   ## TABLE START ----------
   width <- width(ht)
-  if (is.numeric(width)) width <- paste0(width * 100, "%")
+  width_string <- if (is.na(width)) "" else {
+    if (is.numeric(width)) width <- paste0(width * 100, "%")
+    paste0("width: ", width)
+  }
 
   margin_string <- switch(position(ht),
           "wrapleft"  = "margin-left: 0%; margin-right: 2em;",
@@ -67,8 +70,8 @@ to_html.huxtable <- function(ht, ...) {
   id_string <- blank_where(sprintf(" id=\"%s\"", make_label(ht)), is.na(make_label(ht)))
 
   table_start <- sprintf(
-        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: %s; %s %s %s"%s>\n',
-        width, margin_string, height_string, float_string, id_string)
+        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n',
+        width_string, margin_string, height_string, float_string, id_string)
 
   if (! is.na(cap <- make_caption(ht, "html"))) {
     vpos <- if (grepl("top", caption_pos(ht))) "top" else "bottom"
