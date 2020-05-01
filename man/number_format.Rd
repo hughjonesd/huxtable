@@ -75,8 +75,7 @@ ht <- huxtable(
         b = rep(1000.005, 6),
         c = rep(0.0001, 6),
         d = rep(-1, 6),
-        e = rep("3.2 (s.e. 1.4)", 6),
-        add_colnames = TRUE
+        e = rep("3.2 (s.e. 1.4)", 6)
       )
 
 number_format(ht)[3, -1] <- NA

@@ -28,6 +28,7 @@ make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more tex
   ht <- set_all_borders(ht, 1)
   ht <- set_background_color(ht, odds, everywhere, 'orange')
   ht <- set_background_color(ht, evens, everywhere, 'green')
+  ht <- set_tabular_environment(ht, "tabular")
   ht
 }
 

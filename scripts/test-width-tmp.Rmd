@@ -20,21 +20,20 @@ uieorw lorem upsdf usf ueriawo fsd urweia dsjkl ewauof dsnkfea uieorw
 
 ```{r}
 
-ht <- huxtable::huxtable(a = "L L L L L L L left L L L L L L L", 
+ht <- huxtable(a = "L L L L L L L left L L L L L L L", 
                          b = "R R R R R R R rght R R R R R R")
 
-huxtable::position(ht) <- "center"
+position(ht) <- "center"
 
-huxtable::width(ht) <- 0.5 # This can be varied
-ht <- huxtable::set_all_borders(ht, 0.4)
+ht <- set_all_borders(ht, 0.4)
+caption(ht) <- "A caption"
+wrap(ht) <- FALSE
 
-huxtable::wrap(ht) <- TRUE
 ht
+set_all_padding(ht, 8) %>% set_caption("padding 8")
+set_all_padding(ht, 2) %>% set_caption("padding 2")
 ```
 
 
 \color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}\color{red}\rule{0.1\linewidth}{0.5pt}\color{blue}\rule{0.1\linewidth}{0.5pt}
 
-```{r}
-ht %>% set_all_padding(8)
-```

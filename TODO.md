@@ -12,7 +12,7 @@ Priority changes
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
-
+    
 
 Changes for 5.0
 ===============
