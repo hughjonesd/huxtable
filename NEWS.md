@@ -4,6 +4,14 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
+## Breaking changes
+
+* Changes to LaTeX output. **This may change the look of your tables.** In particular,
+  LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
+  padding should now take effect even when `wrap` is `FALSE`.
+
+## Other changes
+
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
 
