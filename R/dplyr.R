@@ -84,7 +84,7 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
           "transmute" = dplyr::transmute(.data, ...),
           stop("Unrecognized function ", .Generic)
         )
-  result <- as_hux(result, autoformat = FALSE)
+  result <- as_hux(result, autoformat = FALSE, add_colnames = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 
