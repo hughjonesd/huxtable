@@ -7,10 +7,10 @@ NULL
 #'
 #' This is a convenience function to use in row or column specifications.
 #' In this context,
-#' `every(n, from)` will return `from, from + n, ...,` up to the number of rows
+#' `stripe(n, from)` will return `from, from + n, ...,` up to the number of rows
 #' or columns of the huxtable. `evens` and `odds` return even and odd
-#' numbers, i.e. they are equivalent to `every(2, 2)` and `every(2, 1)` respectively.
-#' `everywhere` returns all rows or columns, equivalently to `every(1)`.
+#' numbers, i.e. they are equivalent to `stripe(2, 2)` and `stripe(2, 1)` respectively.
+#' `everywhere` returns all rows or columns, equivalently to `stripe(1)`.
 #'
 #' @param n A number (at least 1)
 #' @param from A number (at least 1)
@@ -18,10 +18,15 @@ NULL
 #' @param dimension Number of the dimension to use.
 #'
 #' @details
-#' Technically, `every` returns a 2-argument function which can be called like
+#' Technically, `stripe` returns a 2-argument function which can be called like
 #' `f(ht, dimension)`. See [rowspecs] for details.
 #'
+#' Until huxtable 5.0.0, `stripe` was called `every`. It was renamed to
+#' avoid a clash with `purrr::every`.
+#'
 #' @export
+#'
+#' @aliases every
 #'
 #' @examples
 #' ht <- huxtable(a = 1:10, b = 1:10)
@@ -29,10 +34,10 @@ NULL
 #'       evens, everywhere,
 #'       "grey95")
 #' set_background_color(ht,
-#'       every(3), everywhere,
+#'       stripe(3), everywhere,
 #'       "grey95")
 #'
-every <- function(n = 1, from = n) {
+stripe <- function(n = 1, from = n) {
   assert_that(is.count(n), is.count(from))
 
   return(
@@ -44,17 +49,17 @@ every <- function(n = 1, from = n) {
   )
 }
 
-#' @rdname every
+#' @rdname stripe
 #' @export
-everywhere <- every(1, 1)
+everywhere <- stripe(1, 1)
 
-#' @rdname every
+#' @rdname stripe
 #' @export
-evens <- every(2, 2)
+evens <- stripe(2, 2)
 
-#' @rdname every
+#' @rdname stripe
 #' @export
-odds  <- every(2, 1)
+odds  <- stripe(2, 1)
 
 #' Return the last n rows or columns
 #'
@@ -102,7 +107,7 @@ final <- function(n = 1) {
 #' * Use `everywhere` to refer to all rows or all columns.
 #' * Use `final(n)` to refer to the last n rows or columns.
 #' * Use `evens` to get only even rows/columns and `odds` for only odd ones.
-#' * Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
+#' * Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 #' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
 #'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
 #' * Set `byrow = TRUE` to set properties by row rather than by column.
@@ -120,7 +125,7 @@ final <- function(n = 1) {
 #'         to allow the use of dplyr functions.
 #'     * If `row` or `col` is a function,it is called with two arguments: the huxtable,
 #'        and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
-#'        of column indices. [evens()], [odds()], [every()] and [final()]
+#'        of column indices. [evens()], [odds()], [stripe()] and [final()]
 #'        return functions for this purpose.
 #'
 #' @name rowspecs
