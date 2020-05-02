@@ -14,11 +14,10 @@ in_bookdown <- function () {
   return(grepl("bookdown", rmd_of))
 }
 
-make_caption <- function(ht, format = c("html", "latex", "md")) {
+make_caption <- function(ht, label, format = c("html", "latex", "md")) {
   format <- match.arg(format)
 
   raw_cap <- caption(ht)
-  label <- make_label(ht)
 
   if (is.na(label) || label == "") {
     return(raw_cap)

@@ -36,7 +36,8 @@ long <- 'A rather long row of text which goes on...'
 ```
 
 
-```{r}
-hux("$a \\times b$") 
+```{r foo}
+hux(1:3)
+hux(4:6)
 ```
 

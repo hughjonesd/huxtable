@@ -67,13 +67,14 @@ to_html.huxtable <- function(ht, ...) {
           ""
         )
 
-  id_string <- blank_where(sprintf(" id=\"%s\"", make_label(ht)), is.na(make_label(ht)))
+  lab <- make_label(ht)
+  id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
   table_start <- sprintf(
         '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n',
         width_string, margin_string, height_string, float_string, id_string)
 
-  if (! is.na(cap <- make_caption(ht, "html"))) {
+  if (! is.na(cap <- make_caption(ht, lab, "html"))) {
     vpos <- if (grepl("top", caption_pos(ht))) "top" else "bottom"
     hpos <- get_caption_hpos(ht)
     cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos,

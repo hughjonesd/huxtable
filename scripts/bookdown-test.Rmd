@@ -45,5 +45,5 @@ hux(a = "A table with no caption, but a label") %>%
 x <- hux(a = "A table with no caption or label")
 x
 
-huxtable:::make_caption(x)
+huxtable:::make_caption(x, huxtable::make_label(x))
 ```

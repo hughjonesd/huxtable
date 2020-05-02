@@ -305,12 +305,23 @@ get_caption_hpos <- function (ht) {
 }
 
 
+# this relies on the fact that knitr documents are knit in their own process.
+huxtable_env$SEEN_LABELS <- list()
+
+
 make_label <- function (ht) {
   lab <- label(ht)
-  if (is.na(lab) && getOption("huxtable.autolabel", TRUE) &&
-        requireNamespace("knitr", quietly = TRUE)) {
-    chunk_label <- knitr::opts_current$get("label")
-    if (! is.null(chunk_label)) lab <- paste0("tab:", chunk_label)
+  if (is.na(lab) &&
+          getOption("huxtable.autolabel", TRUE) &&
+          requireNamespace("knitr", quietly = TRUE) &&
+          ! is.null(chunk_label <- knitr::opts_current$get("label"))
+        ) {
+    chunk_idx <- ""
+    if (! is.null(count <- huxtable_env$SEEN_LABELS[[chunk_label]])) {
+      chunk_idx <- paste0("-", count)
+    }
+    if (! is.null(chunk_label)) lab <- paste0("tab:", chunk_label, chunk_idx)
+    huxtable_env$SEEN_LABELS[[chunk_label]] <- if (is.null(count)) 1 else count + 1
   }
 
   lab

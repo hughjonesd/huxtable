@@ -217,7 +217,9 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption("width") / 4
 
   result <- paste(apply(charmat, 1, paste0, collapse = ""), collapse = "\n")
   result <- paste0(result, "\n\n")
-  if (! is.na(cap <- make_caption(ht, "md"))) result <- paste0(result, "Table: ", cap, "\n")
+  if (! is.na(cap <- make_caption(ht, make_label(ht), "md"))) {
+    result <- paste0(result, "Table: ", cap, "\n")
+  }
 
   result
 }

@@ -67,7 +67,8 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   table_env[1] <- sprintf(table_env[1], latex_table_width(ht)) # no-op except for wraptable
   table_env <- paste0("\n", table_env, "\n")
 
-  cap <- if (is.na(cap <- make_caption(ht, "latex"))) "" else {
+  lab <- make_label(ht)
+  cap <- if (is.na(cap <- make_caption(ht, lab, "latex"))) "" else {
     hpos <- get_caption_hpos(ht)
     cap_setup <- switch(hpos,
       left   = "raggedright",
@@ -76,7 +77,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     )
     sprintf("\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n", cap_setup, cap)
   }
-  lab <- if (is.na(lab <- make_label(ht))) "" else sprintf("\\label{%s}\n", lab)
+  lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
 
   pos_text <- switch(position(ht),
     wrapleft = ,
