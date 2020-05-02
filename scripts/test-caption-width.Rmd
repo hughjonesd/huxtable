@@ -1,0 +1,62 @@
+---
+title: "Caption test"
+output:
+  bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(huxtable)
+knitr::opts_chunk$set(echo = FALSE)
+options(
+  huxtable.bookdown = TRUE,
+  huxtable.add_colnames = TRUE
+)
+long_caption <- 'This is a long caption. This is a long caption. This is a long caption. This is a long caption. This is a long caption. This is a long caption. This is a long caption. This is a long caption. This is a long caption.'
+```
+
+# Left aligned layout
+
+This is the layout I personally would like to use. But I feel like `huxtable`'s caption looks crammed:
+
+```{r huxtable-left}
+head(mtcars[, 1:2], 10) %>% 
+  tibble::rownames_to_column() %>% 
+  as_huxtable() %>%
+  theme_article() %>% 
+  huxtable::set_position("left") %>% 
+  set_caption(long_caption)
+```
+
+I would prefer it to span the whole width like this one by `kable` (but without having the table also span the whole width):
+
+```{r kable}
+knitr::kable(
+  head(mtcars[, 1:2], 10),
+  caption = long_caption
+)
+```
+
+More like in this figure:
+
+```{r fig-left, fig.cap = long_caption, echo=FALSE}
+plot(runif(10))
+```
+
+# Centered layout
+
+When using a centered layout I feel the same. This seems too crammed:
+
+```{r huxtable-center}
+head(mtcars[, 1:2], 10) %>% 
+  tibble::rownames_to_column() %>% 
+  as_huxtable() %>%
+  theme_article() %>% 
+  set_caption(long_caption)
+```
+
+This looks better:
+
+```{r fig-center, fig.align = "center", fig.cap = long_caption, echo=FALSE}
+plot(runif(10))
+```

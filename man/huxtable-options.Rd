@@ -8,12 +8,13 @@
 \description{
 \itemize{
 \item \code{options('huxtable.add_colnames')} sets the default value for \code{add_colnames} in
-\code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. If it is unset, \code{add_colnames} defaults to
-\code{FALSE}; in a future release, the default will become \code{TRUE}.
+\code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. As of version 5.0.0, this defaults to \code{TRUE}.
 \item \code{options('huxtable.print')} sets the print method for huxtable objects. See \code{\link[=print.huxtable]{print.huxtable()}}.
 \item \code{options('huxtable.knitr_output_format')} overrides the default output format when huxtable
 objects are printed by knitr. Set to "html", "latex", "md" or "screen". If \code{NULL} (the default),
 huxtable guesses the format using \code{\link[=guess_knitr_output_format]{guess_knitr_output_format()}}.
+\code{options('huxtable.autolabel')}. If \code{TRUE}, (the default) automatically sets
+\code{label()} from the knitr chunk label, if there is one.
 \item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is available, huxtables
 will be printed in color on screen.
 \item \code{options('huxtable.bookdown')}. Set to \code{TRUE} within a bookdown document to automatically

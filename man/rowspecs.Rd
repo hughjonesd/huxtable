@@ -22,7 +22,7 @@ There are also a few extra tricks you can use:
 \item Use \code{everywhere} to refer to all rows or all columns.
 \item Use \code{final(n)} to refer to the last n rows or columns.
 \item Use \code{evens} to get only even rows/columns and \code{odds} for only odd ones.
-\item Use \code{\link[=every]{every(n, from = m)}} to get every nth row/column starting at row/column m.
+\item Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
 specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
 \item Set \code{byrow = TRUE} to set properties by row rather than by column.
@@ -44,7 +44,7 @@ subsetting. \code{col} will be evaluated in a special context provided by \code{
 to allow the use of dplyr functions.
 \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,
 and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector
-of column indices. \code{\link[=evens]{evens()}}, \code{\link[=odds]{odds()}}, \code{\link[=every]{every()}} and \code{\link[=final]{final()}}
+of column indices. \code{\link[=evens]{evens()}}, \code{\link[=odds]{odds()}}, \code{\link[=stripe]{stripe()}} and \code{\link[=final]{final()}}
 return functions for this purpose.
 }
 }

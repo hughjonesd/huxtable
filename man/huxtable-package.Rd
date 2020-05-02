@@ -19,7 +19,7 @@ To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\l
          Salaries = c(1e5, 1e5, 1e5),
          add_colnames = TRUE
        )
- car_hux <- as_hux(mtcars, add_colnames = TRUE)
+ car_hux <- as_hux(mtcars)
 
 }
 

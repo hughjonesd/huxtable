@@ -104,7 +104,7 @@ huxreg <- function (
         omit_coefs      = NULL
       ) {
   requireNamespace("broom", quietly = TRUE)
-  requireNamespace("broom.mixed", quietly = TRUE)
+  suppressPackageStartupMessages(requireNamespace("broom.mixed", quietly = TRUE))
   if (utils::packageVersion("broom") < package_version("0.5.1")) {
     warning("`huxreg` requires `broom` version 0.5.1 or greater.")
   }
@@ -211,7 +211,7 @@ huxreg <- function (
   cols <- Reduce(cbind, cols)
 
   # make the data frame a huxtable
-  coef_hux <- hux(cols)
+  coef_hux <- huxtable(cols, add_colnames = FALSE)
   number_format(coef_hux) <- number_format
   if (! is.null(bold_signif)) {
     bold_cols <- lapply(tidied, function (mod) mod$p.value <= bold_signif)
@@ -257,12 +257,12 @@ huxreg <- function (
   ss_classes <- Reduce(cbind, ss_classes)
 
   # create huxtable of summary statistics
-  sumstats <- hux(sumstats)
+  sumstats <- huxtable(sumstats, add_colnames = FALSE)
   number_format(sumstats) <- number_format
   number_format(sumstats)[ss_classes == "integer"] <- 0
 
   if (error_pos == "right") {
-    sumstats2 <- as_hux(matrix("", nrow(sumstats), ncol(sumstats) * 2))
+    sumstats2 <- as_hux(matrix("", nrow(sumstats), ncol(sumstats) * 2), add_colnames = FALSE)
     for (i in seq_len(ncol(sumstats))) {
       sumstats2[, i * 2 - 1] <- sumstats[, i]
     }

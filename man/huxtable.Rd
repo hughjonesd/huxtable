@@ -8,21 +8,21 @@
 \usage{
 huxtable(
   ...,
-  add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_colnames = getOption("huxtable.add_colnames", TRUE),
   add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE)
 )
 
 hux(
   ...,
-  add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_colnames = getOption("huxtable.add_colnames", TRUE),
   add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE)
 )
 
 tribble_hux(
   ...,
-  add_colnames = getOption("huxtable.add_colnames", FALSE),
+  add_colnames = getOption("huxtable.add_colnames", TRUE),
   add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE)
 )
@@ -48,8 +48,8 @@ An object of class \code{huxtable}.
 If you use \code{add_colnames} or \code{add_rownames}, be aware that these will shift your rows and columns
 along by one: your old row/column 1 will now be row/column 2, etc.
 
-\code{add_colnames} currently defaults to \code{FALSE}, but this will change in future. You can set
-the default globally by setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
+\code{add_colnames} defaults to \code{TRUE}. You can set the default globally by
+setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
 
 \code{tribble_hux} is a simple wrapper around \code{\link[tibble:tribble]{tibble::tribble()}} which lets you create data
 in a readable format.

@@ -51,11 +51,11 @@ add_columns <- function (x, y, after = ncol(x), ...) {
 add_row_cols <- function (x, y, after, dimno, ...) {
   just_a_data_frame <- function (obj) inherits(obj, "data.frame", which = TRUE) == 1
   if (is_hux(x) && just_a_data_frame(y)) {
-    y <- as_hux(y)
+    y <- as_hux(y, add_colnames = FALSE)
     attr(y, "from_real_hux") <- FALSE
   }
   if (is_hux(y) && just_a_data_frame(x)) {
-    x <- as_hux(x)
+    x <- as_hux(x, add_colnames = FALSE)
     attr(x, "from_real_hux") <- FALSE
   }
   dims <- dim(x)
@@ -398,7 +398,7 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #'       )
 #' bold(ht1)[1, ] <- TRUE
 #' bold(ht2) <- TRUE
-#' vec <- LETTERS[1:3]
+#' vec <- LETTERS[1:4]
 #'
 #' cbind(ht1, vec, ht2)
 #' cbind(ht1, vec, ht2,

@@ -49,7 +49,7 @@ map_bottom_padding(ht, row, col, fn)
 
 \item{value}{A vector or matrix. Characters must be valid CSS or LaTeX lengths. Numbers will be interpreted as lengths in points.
 
-Set to \code{NA} to reset to the default, which is \code{4}.}
+Set to \code{NA} to reset to the default, which is \code{6}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

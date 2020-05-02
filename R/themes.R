@@ -92,13 +92,13 @@ theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, 
   if (header_row) {
     background_color(ht)[1, ] <- "black"
     text_color(ht)[1, ]       <- "white"
-    ht <- set_all_border_colors(ht, 1, every(), "white")
+    ht <- set_all_border_colors(ht, 1, everywhere, "white")
     bold(ht)[1, ]             <- TRUE
   }
   if (header_col) {
     background_color(ht)[, 1] <- "black"
     text_color(ht)[, 1]       <- "white"
-    ht <- set_all_border_colors(ht, every(), 1, "white")
+    ht <- set_all_border_colors(ht, everywhere, 1, "white")
     bold(ht)[, 1]             <- TRUE
   }
 

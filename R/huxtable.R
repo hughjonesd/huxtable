@@ -41,8 +41,8 @@ NULL
 #' If you use `add_colnames` or `add_rownames`, be aware that these will shift your rows and columns
 #' along by one: your old row/column 1 will now be row/column 2, etc.
 #'
-#' `add_colnames` currently defaults to `FALSE`, but this will change in future. You can set
-#' the default globally by setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
+#' `add_colnames` defaults to `TRUE`. You can set the default globally by
+#' setting `options("huxtable.add_colnames")` to `TRUE` or `FALSE`.
 #'
 #' @seealso [huxtable-options]
 #'
@@ -54,7 +54,7 @@ NULL
 #' ht
 huxtable <- function (
         ...,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
@@ -90,7 +90,7 @@ hux <- huxtable
 #'     add_colnames = TRUE
 #' )
 tribble_hux <- function (...,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
@@ -111,6 +111,12 @@ tribble_hux <- function (...,
 #'
 #' @return An object of class "huxtable".
 #'
+#' @details
+#' For `table` objects, `add_colnames` and `add_rownames` are `TRUE` by default. For
+#' `matrix` objects, they are `FALSE`. Other classes use
+#' `options("huxtable.add_colnames")`, which is `TRUE` by default; `add_rownames`
+#' is `FALSE`.
+#'
 #' @export
 #' @examples
 #' dfr <- data.frame(
@@ -120,7 +126,7 @@ tribble_hux <- function (...,
 #'       )
 #' as_huxtable(dfr)
 #' mx <- matrix(letters[1:12], 4, 3)
-#' as_huxtable(mx)
+#' as_huxtable(mx, add_colnames = FALSE)
 #' library(stats)
 #' tbl <- table(
 #'         Wool    = warpbreaks$wool,
@@ -144,7 +150,7 @@ as_hux <- as_huxtable
 #' @rdname as_huxtable
 as_huxtable.default <- function (
         x,
-        add_colnames = getOption("huxtable.add_colnames", FALSE),
+        add_colnames = getOption("huxtable.add_colnames", TRUE),
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE),
         ...
@@ -214,6 +220,12 @@ as_huxtable.default <- function (
 
 #' @export
 as_huxtable.huxtable <- function (x, ...) x
+
+
+#' @export
+as_huxtable.matrix <- function(x, add_colnames = FALSE, ...) {
+  as_huxtable.default(x, add_colnames = add_colnames, ...)
+}
 
 
 #' @export

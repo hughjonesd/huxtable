@@ -260,7 +260,7 @@ end.rcode-->
 <!--begin.rcode echo = TRUE, results = 'asis'
 
 mtcars[1:5]                                                                           %>%
-      as_huxtable(add_colnames = TRUE, add_rownames = "Model")                        %>%
+      as_huxtable(add_rownames = "Model")                                             %>%
       set_bold(1, everywhere, TRUE)                                                   %>%
       set_all_borders(1)                                                              %>%
       map_text_color(everywhere, "mpg",      by_colorspace("navy", "red", "yellow"))  %>%

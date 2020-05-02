@@ -40,6 +40,10 @@ huxtable_latex_dependencies <- list(
 report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   assert_that(is.flag(quiet), is.flag(as_string))
 
+  if (getOption("huxtable.latex_use_fontspec", FALSE)) {
+    huxtable_latex_dependencies <- c(huxtable_latex_dependencies,
+      list(list(name = "fontspec")))
+  }
   report <- sapply(huxtable_latex_dependencies, function(ld) {
     package_str <- "\\usepackage"
     if (! is.null(ld$options)) {

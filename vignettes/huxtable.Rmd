@@ -3,12 +3,12 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document:
-    toc: yes
-    toc_depth: 2
   pdf_document:
     includes:
       in_header: placeins-header.tex
+    toc: yes
+    toc_depth: 2
+  html_document:
     toc: yes
     toc_depth: 2
 vignette: >
@@ -23,7 +23,10 @@ vignette: >
 library(knitr)
 library(dplyr)
 library(huxtable)
-options(huxtable.knit_print_df = FALSE)
+options(
+        huxtable.knit_print_df = FALSE, 
+        huxtable.add_colnames = TRUE    # works when run by testthat
+      )
 
 is_latex <- guess_knitr_output_format() == 'latex'
 # is_latex <- TRUE
@@ -37,10 +40,12 @@ if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 
 ```
 
+\newpage 
 
 ```{r, echo = FALSE}
 huxtable::hux_logo(latex = is_latex, html = ! is_latex)
 ```
+
 
 # Introduction
 
@@ -94,8 +99,7 @@ To create a huxtable, use the function `huxtable`, or `hux` for short. This work
 library(huxtable)
 ht <- hux(
         Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
-        Salary       = c(50000L, 50000L, 40000L),
-        add_colnames = TRUE
+        Salary       = c(50000L, 50000L, 40000L)
       )
 ```
 
@@ -108,7 +112,7 @@ car_ht <- as_hux(mtcars)
 ```
 
 If you look at a huxtable in R, it will print out a simple representation of the data. Notice that we've added the
-column names to the data frame itself, using the `add_colnames` argument to `hux`. We're going to print them out, so they need to be part of the actual table. **NB:** This means that the data will start on row 2 of the huxtable, and the
+column names to the data frame itself. We're going to print them out, so they need to be part of the actual table. **NB:** This means that the data will start on row 2 of the huxtable, and the
 column names will be row 1.
 
 ```{r, results = 'markup'}
@@ -129,16 +133,19 @@ ht
 ## Huxtable properties
 
 The default output is a plain table. Let's make it smarter. We'll make the table headings
-bold, draw a line under the header row, add some horizontal space to the cells, and change
+bold, draw a line under the header row, add some space to the cells, and change
 the number formatting.
 
 To do this, we will set some **properties** on the table cells. You set properties by assigning
 to the property name, just as you assign `names(x) <- new_names` in base R. The following commands
-assign the value 10 to the `right_padding` and `left_padding` properties, for all cells in `ht`:
+set the `right_padding`, `left_padding`, `top_padding` and `bottom_padding` properties, 
+for all cells in `ht`:
 
 ```{r}
-right_padding(ht) <- 10
-left_padding(ht)  <- 10
+right_padding(ht)  <- 10
+left_padding(ht)   <- 10
+top_padding(ht)    <- 10
+bottom_padding(ht) <- 10
 ```
 
 We can set the `number_format` property to change how numbers are displayed:
@@ -152,7 +159,7 @@ first row of the table **bold** and give it a bottom border, we do:
 
 ```{r}
 bold(ht)[1, ]          <- TRUE
-bottom_border(ht)[1, ] <- 1
+bottom_border(ht)[1, ] <- 0.4
 ```
 
 After these changes, our table looks smarter:
@@ -197,7 +204,6 @@ props <- lapply(props, function(x) c(x, rep('', maxl - length(x))))
 ss_font <- if (guess_knitr_output_format() == 'latex') 'cmtt' else 'courier'
 
 prop_hux <- hux(as.data.frame(props))                     %>% 
-      add_colnames                                        %>% 
       {foo <- .; foo[1,] <- gsub('_', ' ', foo[1,]); foo} %>% 
       set_font(-1, everywhere, ss_font)                   %>% 
       set_font_size( 10)                                  %>% 
@@ -229,8 +235,7 @@ for example `set_bold` for the `bold` property.
 library(dplyr)
 hux(
         Employee     = c('John Smith', 'Jane Doe', 'David Hugh-Jones'), 
-        Salary       = c(50000, 50000, 40000),
-        add_colnames = TRUE
+        Salary       = c(50000, 50000, 40000)
       )                               %>%
       set_right_padding(10)           %>%
       set_left_padding(10)            %>% 
@@ -317,11 +322,10 @@ a table. You can do this with rbind, but it is not very convenient:
 
 to_insert <- hux(
         Role  = c("Admin", "CEO", "Dogsbody"),
-        Hired = as.Date(c("2015-01-01", "2008-06-05", "2012-07-31")),
-        add_colnames = TRUE
+        Hired = as.Date(c("2015-01-01", "2008-06-05", "2012-07-31"))
       ) %>% 
       set_bold(1, 1:2, TRUE) %>% 
-      set_bottom_border(1, 1:2, TRUE)
+      set_bottom_border(1, 1:2, 0.4)
 
 cbind(ht[, 1], to_insert, ht[, 2:ncol(ht)])
 ```
@@ -352,7 +356,7 @@ table properties will be carried over into subsets.
 
 ```{r}
 
-car_ht <- as_hux(mtcars)                
+car_ht <- as_hux(mtcars, add_colnames = FALSE)                
 car_ht <- huxtable::add_rownames(car_ht, "Car")
 # Select columns by name:
 car_ht <- car_ht[, c("Car", "mpg", "cyl", "am")] 
@@ -374,7 +378,7 @@ You can also use `dplyr` functions to edit a huxtable:
 
 ```{r}
 
-car_ht <- as_hux(mtcars)
+car_ht <- as_hux(mtcars, add_colnames = FALSE)
 car_ht <- huxtable::add_rownames(car_ht, colname = "Car")
 
 car_ht <- car_ht                                          %>%
@@ -443,9 +447,9 @@ my_data <- data.frame(
         Performance = c(8.9, 9.2, 7.8)  
       )
 
-as_hux(my_data, add_colnames = TRUE) # with automatic formatting
+as_hux(my_data) # with automatic formatting
 
-as_hux(my_data, add_colnames = TRUE, autoformat = FALSE) # no automatic formatting
+as_hux(my_data, autoformat = FALSE) # no automatic formatting
 ```
 
 ## Escaping HTML or LaTeX
@@ -453,7 +457,7 @@ as_hux(my_data, add_colnames = TRUE, autoformat = FALSE) # no automatic formatti
 By default, HTML or LaTeX code will be escaped:
 
 ```{r}
-code_ht <- if (is_latex) hux(c("Some maths", "$a^b$")) else 
+code_ht <- if (is_latex) hux(c("Some maths", "$a \\times b$")) else 
       hux(c("Copyright symbol", "&copy;"))
 
 theme_plain(code_ht)
@@ -498,9 +502,11 @@ ht_wrapped
 
 ## Adding row and column names
 
-Just like data frames, huxtables can have row and column names. Often, we want to add these to the
-final table. You can do this using either the `add_colnames`/`add_rownames` arguments to
-`as_huxtable`, or the `add_colnames()`/`add_rownames()` functions.
+Just like data frames, huxtables can have row and column names. Often, we want
+to add these to the final table. By default, huxtable adds column names but not
+row names. You can change this behaviour using either the
+`add_colnames`/`add_rownames` arguments to `as_huxtable`, or the
+`add_colnames()`/`add_rownames()` functions.
 
 ```{r}
 as_hux(mtcars[1:4, 1:4])                           %>% 
@@ -511,21 +517,22 @@ as_hux(mtcars[1:4, 1:4])                           %>%
 
 ## Merging cells
 
-Sometimes you want a single cell to spread over more than one row or column: for example, if you
-want a heading that covers several different rows.
+Sometimes you want a single cell to spread over more than one row or column: for
+example, if you want a heading that covers several different rows.
 
-You can do this by calling `merge_cells(ht, rows, cols)`. `rows` and `cols` should be a contiguous
-sequence of numbers. The rectangle of cells `ht[rows, cols]` will be merged. 
+You can do this by calling `merge_cells(ht, rows, cols)`. `rows` and `cols`
+should be a contiguous sequence of numbers. The rectangle of cells 
+`ht[rows, cols]` will be merged.
 
-When cells in a rectangle are merged, all cells apart from the top left one are hidden, along with
-any properties they have. So if you want to set cell properties, you have to target the top left 
-cell.
+When cells in a rectangle are merged, all cells apart from the top left one are
+hidden, along with any properties they have. So if you want to set cell
+properties, you have to target the top left cell.
 
 Here, we'll add some row and column headings to the `mtcars` dataset:
 
 ```{r}
 
-car_ht <- as_hux(mtcars)
+car_ht <- as_hux(mtcars, add_colnames = FALSE)
 car_ht <- huxtable::add_rownames(car_ht, colname = "Car")
 car_ht <- car_ht %>% arrange(cyl) %>% select(1:4)
 car_ht <- huxtable::add_colnames(car_ht)
@@ -705,8 +712,7 @@ quick_commands <- hux(
         Command = c("quick_pdf", "quick_docx", "quick_html", "quick_xlsx", "quick_pptx", 
           "quick_rtf", "quick_latex"), 
         Output = c("PDF document", "Word document", "HTML web page", "Excel spreadsheet", 
-          "Powerpoint presentation", "RTF document", "LaTeX document"),
-        add_colnames = TRUE
+          "Powerpoint presentation", "RTF document", "LaTeX document")
       )
 font(quick_commands)[, 1] <- if (is_latex) 'cmtt' else 'Courier'
 

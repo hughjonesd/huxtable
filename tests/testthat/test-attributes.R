@@ -1,29 +1,5 @@
 
-context("Attributes")
-
-
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
-
-
-for (attr in huxtable_cell_attrs) {
-  if (attr == "pad_decimal") next
-  test_that(paste("Cell property attr", attr, "examples unchanged"), {
-    test_ex_same(attr)
-  })
-}
-
-for (attr in c(huxtable_col_attrs, huxtable_row_attrs)) {
-  test_that(paste("Row/col property", attr, "examples unchanged"), {
-    test_ex_same(attr)
-  })
-}
-
-
-for (attr in huxtable_table_attrs) {
-    test_that(paste("Table property", attr, "examples unchanged"), {
-    test_ex_same(attr)
-  })
-}
 
 
 test_that("Can refer to properties by colnames", {

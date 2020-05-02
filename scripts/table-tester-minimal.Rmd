@@ -37,9 +37,6 @@ long <- 'A rather long row of text which goes on...'
 
 
 ```{r}
-hux("Some text") %>% 
-      set_caption("a caption") %>% 
-      set_width(0.2)
-
+hux("$a \\times b$") 
 ```
 

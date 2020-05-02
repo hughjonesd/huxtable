@@ -4,6 +4,26 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
+## Breaking changes
+
+* As previously signalled, `add_colnames` has now become `TRUE` by default in 
+  `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
+  to go back to the old behaviour.
+* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
+  `everywhere`, `evens` and `odds` are still the same.
+* Default padding has been increased to 6 points.
+* By default, `width()` is now unset.
+* By default, `wrap()` is now `TRUE`.
+* There are changes to how LaTeX is output. 
+  - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
+    padding should now take effect even when `wrap` is `FALSE`.
+  - The default LaTeX table environment is now "tabular" unless `width` is set. 
+    If `width` is set, it is "tabularx".
+  - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
+
+
+## Other changes
+
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
 

@@ -21,13 +21,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r}
 
 make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
-  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
+  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow), add_colnames = FALSE)
   for (i in seq_len(ncol -2)) {
     ht <- cbind(ht, rep(more_text[i], nrow))
   }
   ht <- set_all_borders(ht, 1)
   ht <- set_background_color(ht, odds, everywhere, 'orange')
   ht <- set_background_color(ht, evens, everywhere, 'green')
+  ht <- set_tabular_environment(ht, "tabular")
   ht
 }
 
@@ -494,5 +495,5 @@ huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
 # hux_logo
 
 ```{r}
-hux_logo(latex = TRUE)
+hux_logo(latex = knitr::is_latex_output(), html = knitr::is_html_output())
 ```

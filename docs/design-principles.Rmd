@@ -3,12 +3,12 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
-  %\VignetteEngine{knitr::rmarkdown}  
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}  
 ---
 
 
@@ -41,7 +41,7 @@ valid huxtable, changes one thing, and returns a valid huxtable.
 The output formats are very different, and decisions have to be made as to what any package will
 support. My background is more in HTML. This is reflected in some of the huxtable properties, like
 per-cell borders and padding. The package tries to keep output reasonably similar between LaTeX and
-HTML, but there are inevitably some differences and limitations (see below). For Markdown and
+HTML, but there are inevitably some differences and limitations. For Markdown and
 on-screen output, obviously, only a few basic properties are supported.
 
 The package makes no attempt to output beautiful HTML or LaTeX source code. In fact, in the case of
@@ -49,8 +49,34 @@ LaTeX, it's pretty ugly. The approach is "do what it takes to get the job done".
 
 ## Comparing Huxtable With Other Packages
 
-R has many different packages to create LaTeX and HTML tables. The table(s) below list those I know
-and the features they have. The table is produced with huxtable, of course ;-)
+When I first wrote this vignette there were many competing packages to create
+LaTeX and HTML tables. There still are, but in my opinion, the field of sensible modern choices
+has narrowed down to three:
+
+* huxtable;
+* [flextable](https://davidgohel.github.io/flextable/index.html);
+* [gt](https://gt.rstudio.com/)
+
+Here's what I think of these:
+
+* `huxtable` has the widest range of outputs, including HTML, LaTeX, RTF, markdown
+  and Word (via flextable). It is very customizable. Its model
+  is drawn from HTML, which can be tricky when outputting LaTeX. It aims
+  to give you fine-grained control over formatting, at cell level wherever possible.
+* David Gohel's `flextable` package started off as a way of producing Word and
+  Powerpoint tables. It can also output markdown tables for use in rmarkdown
+  documents. Recently it gained the ability to create PDFs using the 
+  [pagedown](https://github.com/rstudio/pagedown) package. Rather than 
+  outputting LaTeX, this uses paged HTML. In my view this is a fabulous idea, 
+  since LaTeX is a 1980s leftover that needs to die. But, if you need LaTeX, 
+  then it won't help. On the other hand, `huxtable` uses `flextable` to produce 
+  Word output, so if you only need Word, you might as well go to the source.
+* RStudio's `gt` package is powerful and has a big name behind it. As yet it
+  only produces HTML, but PDFs are on the agenda. It aims for more convenience
+  than control, with included functions for many standard formatting options.
+
+The original table of competing packages is below for historical reference, but 
+it has not been updated.
 
 ```{r, echo = FALSE}
 
@@ -59,7 +85,7 @@ is_latex <- guess_knitr_output_format() == 'latex'
 
 comp <- read.csv('comparison.csv', stringsAsFactors = FALSE, header = FALSE)
 
-ch <- as_hux(comp)
+ch <- as_hux(comp, add_colnames = FALSE)
 bold(ch)[1,] <- TRUE
 bottom_border(ch)[1,] <- 1
 subsections <- ch[[1]] %in% c('HTML output', 'LaTeX output', 'Other features', 'Other formats', 'Notes')
@@ -94,6 +120,8 @@ if (is_latex) {
   font_size(ch)[c(last - 1, last), 1] <- 8
   ch1 <- ch[, 1:8]
   ch2 <- ch[, c(1, 9:ncol(ch))]
+  width(ch1) <- 1
+  width(ch2) <- 1
   caption(ch1) <- 'Comparison table, part 1'
   caption(ch2) <- 'Comparison table, part 2'
 } else {
@@ -107,42 +135,3 @@ if (is_latex) ch1
 if (is_latex) ch2
 
 ```
-
-
-
-This comparison doesn't necessarily tell you the important stuff: how easy is the interface? Is the code
-currently maintained? I have not used all these packages, but my personal (and subjective) recommendations are:
-
-* `texreg` is very good for producing regression tables. It can cope with a huge variety of inputs.
-  Hopefully, with the advent of [broom](https://CRAN.R-project.org/package=broom), 
-  it will get easier for many packages to do this.
-* `ztable` seems to support a lot of functionality, though I haven't used it.
-* `xtable` is old, but reliable and widely available.
-* `tables` has an interesting interface for producing summary statistics. It looks complex but powerful.
-* `pixiedust` is quite close to `huxtable`. It has many features and is well-written. The interface is slightly
-  different: you use `sprinkle()` to add features to a tidy data frame.
-* Lastly, `formattable` is a new kid on the block. It has well-written code and some interesting ideas. It's HTML-only at present.
-
-## Limitations
-
-Some people love LaTeX. Other people think they have to use it to be "scientific". (Sadly,
-this is all too common in my field.) Personally, I can tolerate it at a distance. It's certainly not
-easy to produce LaTeX code combining a wide variety of table features. Current limitations of huxtable include:
-
-* You can't change horizontal border widths within a single line.
-* Table width may be unpredictable and your text may spill over. Adjust on a trial and error basis.
-* If table position is problematic, check that your table is wide enough, and set `width()` if necessary.
-* Vertical alignment is unlikely to work as you might expect.
-
-Some of these may be fixed... at some point!
-
-There are also limitations in HTML:
-
-* Rotation is likely to mess up your cells. This won't be fixed until there is a *simple* way to do cell
-  rotation in CSS. (There are plenty of complicated ways.)
-
-Lastly, as mentioned above, HTML and LaTeX output is likely to differ. For example, in LaTeX, height is
-set by putting the table inside a \\resizebox object. That can obviously mess up other sizes like table width.
-Your Mileage May Vary.
-
-Feel free to report bugs at [github](https://github.com/hughjonesd/huxtable/issues), or to email me  (davidhughjones@gmail.com) with brickbats and bouquets.

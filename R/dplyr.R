@@ -63,7 +63,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' @rdname dplyr-verbs
 #' @aliases mutate dplyr-verbs
 #' @examples
-#' ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5)
+#' ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5, add_colnames = FALSE)
 #' bold(ht)[c(1, 3), ] <- TRUE
 #' bold(ht)[, 1] <- TRUE
 #' ht2 <- dplyr::select(ht, b:c)
@@ -84,7 +84,7 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
           "transmute" = dplyr::transmute(.data, ...),
           stop("Unrecognized function ", .Generic)
         )
-  result <- as_hux(result, autoformat = FALSE)
+  result <- as_hux(result, autoformat = FALSE, add_colnames = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 
