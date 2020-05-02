@@ -398,7 +398,7 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #'       )
 #' bold(ht1)[1, ] <- TRUE
 #' bold(ht2) <- TRUE
-#' vec <- LETTERS[1:3]
+#' vec <- LETTERS[1:4]
 #'
 #' cbind(ht1, vec, ht2)
 #' cbind(ht1, vec, ht2,
