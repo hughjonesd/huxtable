@@ -69,8 +69,8 @@ Similarly for the other functions.
 Functions to get or set the \emph{borders} property of huxtable cells.
 }
 \details{
-Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
-can only be present (if \code{value > 0}) or absent.
+Currently in LaTeX, all non-zero border widths on a given line must be the
+same, and vertical border widths can only be present (if \code{value > 0}) or absent.
 }
 \section{Note}{
 

@@ -32,6 +32,11 @@ wrap(ht) <- FALSE
 ht
 set_all_padding(ht, 8) %>% set_caption("padding 8")
 set_all_padding(ht, 2) %>% set_caption("padding 2")
+
+h2 <- huxreg(tmp <- lm(Sepal.Width ~ ., iris), tmp, tmp, tmp)
+# width(h2) <- 0.5
+position(h2) <- "right"
+h2
 ```
 
 
