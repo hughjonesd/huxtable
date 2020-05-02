@@ -6,7 +6,7 @@
 #'
 #' `theme_plain` is a simple theme with a bold header, a grey striped background, and an outer border.
 #'
-#' `theme_basic` just adds a border for header rows and/or columns.
+#' `theme_basic` just sets header rows/columns to bold and adds a border beneath them.
 #'
 #' `theme_striped` uses different backgrounds for alternate rows, and for headers.
 #'
@@ -59,8 +59,8 @@ NULL
 theme_plain <- function(ht, position = "left"){
   ht <- set_outer_borders(ht, 0.4)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
-  ht <- set_bold(ht, 1, everywhere, TRUE)
-  ht <- set_bottom_border(ht, 1, everywhere, 0.4)
+  ht <- set_bold(ht, header_row(ht), everywhere, TRUE)
+  ht <- set_bottom_border(ht, max(which(header_row(ht))), everywhere, 0.4)
   ht <- set_position(ht, position)
 
   ht
@@ -69,12 +69,18 @@ theme_plain <- function(ht, position = "left"){
 
 #' @export
 #' @rdname themes
-theme_basic <- function (ht, header_row = TRUE, header_col = TRUE) {
+theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
   ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
-  if (header_row) bottom_border(ht)[1, ] <- 1
-  if (header_col) right_border(ht)[, 1] <- 1
+  if (header_row) {
+    bottom_border(ht)[max(which(header_row(ht))), ] <- 0.4
+    bold(ht)[header_row(ht), ] <- TRUE
+  }
+  if (header_col) {
+    right_border(ht)[, max(which(header_col(ht)))] <- 0.4
+    bold(ht)[, header_col(ht)] <- TRUE
+  }
 
   ht
 }
@@ -90,16 +96,16 @@ theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, 
   background_color(ht)[seq(1, nrow(ht), 2), ] <- "white"
   if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2), ] <- stripe
   if (header_row) {
-    background_color(ht)[1, ] <- "black"
-    text_color(ht)[1, ]       <- "white"
-    ht <- set_all_border_colors(ht, 1, everywhere, "white")
-    bold(ht)[1, ]             <- TRUE
+    background_color(ht)[header_row(ht), ] <- "black"
+    text_color(ht)[header_row(ht), ]       <- "white"
+    ht <- set_all_border_colors(ht, header_row(ht), everywhere, "white")
+    bold(ht)[header_row(ht), ]             <- TRUE
   }
   if (header_col) {
-    background_color(ht)[, 1] <- "black"
-    text_color(ht)[, 1]       <- "white"
-    ht <- set_all_border_colors(ht, everywhere, 1, "white")
-    bold(ht)[, 1]             <- TRUE
+    background_color(ht)[, header_col(ht)] <- "black"
+    text_color(ht)[, header_col(ht)]       <- "white"
+    ht <- set_all_border_colors(ht, everywhere, header_col(ht), "white")
+    bold(ht)[, header_col(ht)]             <- TRUE
   }
 
   ht
@@ -118,14 +124,14 @@ theme_maker <- function (
     ht <- set_all_border_colors(ht, border_color)
     ht <- map_background_color(ht, by_rows(col1, col2))
     if (header_row) {
-      bold(ht)[1, ]             <- TRUE
-      background_color(ht)[1, ] <- header_color
-      text_color(ht)[1, ]       <- header_text
+      bold(ht)[header_row(ht), ]             <- TRUE
+      background_color(ht)[header_row(ht), ] <- header_color
+      text_color(ht)[header_row(ht), ]       <- header_text
     }
     if (header_col) {
-      bold(ht)[, 1]             <- TRUE
-      background_color(ht)[, 1] <- header_color
-      text_color(ht)[, 1]       <- header_text
+      bold(ht)[, header_col(ht)]             <- TRUE
+      background_color(ht)[, header_col(ht)] <- header_color
+      text_color(ht)[, header_col(ht)]       <- header_text
     }
 
     ht

@@ -11,8 +11,8 @@ huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_co
   "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
   "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
   "font", "pad_decimal")
-huxtable_col_attrs <- c("col_width")
-huxtable_row_attrs <- c("row_height")
+huxtable_col_attrs <- c("col_width", "header_col")
+huxtable_row_attrs <- c("row_height", "header_row")
 huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
   "tabular_environment", "label", "latex_float")
 
@@ -36,7 +36,9 @@ huxtable_env$huxtable_default_attrs <- list(
         width               = NA,
         height              = NA,
         col_width           = NA,
+        header_col          = FALSE,
         row_height          = NA,
+        header_row          = FALSE,
         background_color    = NA,
         text_color          = NA,
         left_border         = 0,
@@ -261,6 +263,27 @@ NULL
 make_getter_setters("col_width", "col")
 
 
+#' @name header-details
+#' @details
+#' By default header rows and columns are not shown differently from other rows, but
+#' you can change this with e.g. `set_bold(ht, header_row(ht), everywhere, TRUE)`.
+#' Various themes also set properties on headers.
+NULL
+
+
+#' @template getset-rowcol
+#' @templateVar attr_name header_col
+#' @templateVar rowcol col
+#' @templateVar attr_desc header column
+#' @templateVar value_param_desc A logical vector.
+#' @inherit header-details details
+#' @family header cells
+#' @template getset-example
+#' @templateVar attr_val c(TRUE, FALSE)
+NULL
+make_getter_setters("header_col", "col", check_fun = is.logical)
+
+
 #' @template getset-rowcol
 #' @templateVar attr_name row_height
 #' @templateVar rowcol row
@@ -274,6 +297,19 @@ make_getter_setters("col_width", "col")
 #' @templateVar attr_val c(.2, .1, .1, .1)
 NULL
 make_getter_setters("row_height", "row")
+
+
+#' @template getset-rowcol
+#' @templateVar attr_name header_row
+#' @templateVar rowcol row
+#' @templateVar attr_desc header row
+#' @templateVar value_param_desc A logical vector.
+#' @inherit header-details details
+#' @family header cells
+#' @template getset-example
+#' @templateVar attr_val c(TRUE, FALSE, FALSE, FALSE)
+NULL
+make_getter_setters("header_row", "row", check_fun = is.logical)
 
 
 #' @template getset-cell
@@ -358,8 +394,8 @@ make_getter_setters("text_color", "cell")
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths in points. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
 #' @details
-#' Currently in LaTeX, all non-zero border widths on a given line must be the same, and vertical border widths
-#' can only be present (if `value > 0`) or absent.
+#' Currently in LaTeX, all non-zero border widths on a given line must be the
+#' same, and vertical border widths can only be present (if `value > 0`) or absent.
 #'
 #' @seealso [set_all_borders()]
 #' @template getset-example

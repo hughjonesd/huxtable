@@ -15,7 +15,7 @@
 \usage{
 theme_plain(ht, position = "left")
 
-theme_basic(ht, header_row = TRUE, header_col = TRUE)
+theme_basic(ht, header_row = TRUE, header_col = FALSE)
 
 theme_striped(
   ht,
@@ -60,7 +60,7 @@ These functions quickly set default styles for a huxtable.
 \details{
 \code{theme_plain} is a simple theme with a bold header, a grey striped background, and an outer border.
 
-\code{theme_basic} just adds a border for header rows and/or columns.
+\code{theme_basic} just sets header rows/columns to bold and adds a border beneath them.
 
 \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 
