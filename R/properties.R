@@ -55,7 +55,7 @@ huxtable_env$huxtable_default_attrs <- list(
         right_padding       = 6,
         top_padding         = 6,
         bottom_padding      = 6,
-        wrap                = FALSE,
+        wrap                = TRUE,
         caption             = NA,
         caption_pos         = "top",
         position            = "center",
