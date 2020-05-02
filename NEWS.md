@@ -10,6 +10,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
 * Default padding has been increased to 6 points.
+* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
+  `everywhere` is still the same.
 
 This version changes how LaTeX is output. 
 **This may change the look of your tables.** 
