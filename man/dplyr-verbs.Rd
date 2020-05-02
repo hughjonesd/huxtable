@@ -28,7 +28,7 @@ and column properties will be copied from existing columns to their left, if the
 standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
 }
 \examples{
-ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5)
+ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5, add_colnames = FALSE)
 bold(ht)[c(1, 3), ] <- TRUE
 bold(ht)[, 1] <- TRUE
 ht2 <- dplyr::select(ht, b:c)
