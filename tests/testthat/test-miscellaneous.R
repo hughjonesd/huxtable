@@ -1,5 +1,4 @@
 
-context("Miscellaneous")
 
 test_that(".onLoad works and sets options", {
   old_opts <- options()
@@ -19,8 +18,6 @@ test_that(".onLoad works and sets options", {
     expect_false( is.null(options(opt)[[1]]), info = paste("Option:", opt))
   }
   options(old_opts)
-
-
 })
 
 

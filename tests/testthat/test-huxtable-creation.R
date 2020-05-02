@@ -2,11 +2,6 @@
 context("huxtable creation")
 
 
-test_that("Object creation examples unchanged", {
-  test_ex_same("huxtable")
-})
-
-
 test_that("create huxtable using hux[table]()", {
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3))
   expect_silent(ht2 <- hux(a = 1:3, b = 1:3))

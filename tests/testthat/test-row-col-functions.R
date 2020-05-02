@@ -2,11 +2,6 @@
 context("Row and column functions")
 
 
-test_that("Row/column function examples unchanged", {
-  test_ex_same("every")
-  test_ex_same("final")
-})
-
 test_that("final", {
   dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
   expect_equivalent(final(2)(dfr, 1), 4:5)

@@ -1,12 +1,5 @@
 
-
-context("huxreg")
 skip_if_not_installed("broom")
-
-
-test_that("huxreg examples unchanged", {
-  test_ex_same("huxreg")
-})
 
 
 test_that("has_builtin_ci works", {

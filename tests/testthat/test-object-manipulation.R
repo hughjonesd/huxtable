@@ -1,14 +1,4 @@
 
-context("Object manipulation")
-
-
-test_that("Object subsetting and replacement examples unchanged", {
-  test_ex_same("extract-methods")
-  test_ex_same("add_colnames")
-  test_ex_same("cbind.huxtable")
-  test_ex_same("t.huxtable")
-})
-
 
 test_that("Subsetting preserves rownames", {
   ht <- huxtable(a = 1:3, b = 1:3)
