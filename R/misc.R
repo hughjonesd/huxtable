@@ -114,7 +114,7 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
   letter_squares <- which(mx != blank) # back in vertical space
   h_square <- which(mx == "h")
 
-  mondrian <- as_hux(mx)
+  mondrian <- as_hux(mx, add_colnames = FALSE)
   escape_contents(mondrian) <- FALSE
   align(mondrian) <- "centre"
   font(mondrian) <- "Arial"

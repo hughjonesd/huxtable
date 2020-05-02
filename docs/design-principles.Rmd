@@ -3,12 +3,12 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
-  %\VignetteEngine{knitr::rmarkdown}  
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}  
 ---
 
 
@@ -59,7 +59,7 @@ is_latex <- guess_knitr_output_format() == 'latex'
 
 comp <- read.csv('comparison.csv', stringsAsFactors = FALSE, header = FALSE)
 
-ch <- as_hux(comp)
+ch <- as_hux(comp, add_colnames = FALSE)
 bold(ch)[1,] <- TRUE
 bottom_border(ch)[1,] <- 1
 subsections <- ch[[1]] %in% c('HTML output', 'LaTeX output', 'Other features', 'Other formats', 'Notes')
@@ -94,6 +94,8 @@ if (is_latex) {
   font_size(ch)[c(last - 1, last), 1] <- 8
   ch1 <- ch[, 1:8]
   ch2 <- ch[, c(1, 9:ncol(ch))]
+  width(ch1) <- 1
+  width(ch2) <- 1
   caption(ch1) <- 'Comparison table, part 1'
   caption(ch2) <- 'Comparison table, part 2'
 } else {

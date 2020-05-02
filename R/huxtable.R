@@ -111,6 +111,12 @@ tribble_hux <- function (...,
 #'
 #' @return An object of class "huxtable".
 #'
+#' @details
+#' For `table` objects, `add_colnames` and `add_rownames` are `TRUE` by default. For
+#' `matrix` objects, they are `FALSE`. Other classes use
+#' `options("huxtable.add_colnames")`, which is `TRUE` by default; `add_rownames`
+#' is `FALSE`.
+#'
 #' @export
 #' @examples
 #' dfr <- data.frame(
@@ -120,7 +126,7 @@ tribble_hux <- function (...,
 #'       )
 #' as_huxtable(dfr)
 #' mx <- matrix(letters[1:12], 4, 3)
-#' as_huxtable(mx)
+#' as_huxtable(mx, add_colnames = FALSE)
 #' library(stats)
 #' tbl <- table(
 #'         Wool    = warpbreaks$wool,
@@ -214,6 +220,12 @@ as_huxtable.default <- function (
 
 #' @export
 as_huxtable.huxtable <- function (x, ...) x
+
+
+#' @export
+as_huxtable.matrix <- function(x, add_colnames = FALSE, ...) {
+  as_huxtable.default(x, add_colnames = add_colnames, ...)
+}
 
 
 #' @export

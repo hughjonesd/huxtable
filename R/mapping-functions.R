@@ -61,8 +61,9 @@ NULL
 #' of a correlation matrix with low p values:
 #'
 #' ```
-#'   data(attitudes)
-#'   att_corr <- psych::corr.test(attitudes)
+#'   requireNamespace("psych")
+#'   data(attitude)
+#'   att_corr <- psych::corr.test(attitude)
 #'   # att_corr has components r (correlations) and p (p values)
 #'
 #'   corr_hux <- as_hux(att_corr$r)

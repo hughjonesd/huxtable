@@ -51,8 +51,9 @@ unexpected results if you mix character and numeric data. See the example.
 vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current} property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for \code{ht[rows, cols]}, as a matrix.
 
 Here's an example. Suppose we want to highlight cells
-of a correlation matrix with low p values:\preformatted{  data(attitudes)
-  att_corr <- psych::corr.test(attitudes)
+of a correlation matrix with low p values:\preformatted{  requireNamespace("psych")
+  data(attitude)
+  att_corr <- psych::corr.test(attitude)
   # att_corr has components r (correlations) and p (p values)
 
   corr_hux <- as_hux(att_corr$r)
