@@ -40,6 +40,8 @@ hux(head(iris))
 ```
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
+* New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
+  package will have an `as_huxtable()` method. 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Updated to roxygen 7.
 * Minor improvements to `quick_pptx()` (thanks @davidgohel).
