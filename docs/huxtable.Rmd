@@ -23,7 +23,10 @@ vignette: >
 library(knitr)
 library(dplyr)
 library(huxtable)
-options(huxtable.knit_print_df = FALSE)
+options(
+        huxtable.knit_print_df = FALSE, 
+        huxtable.add_colnames = TRUE    # works when run by testthat
+      )
 
 is_latex <- guess_knitr_output_format() == 'latex'
 # is_latex <- TRUE
