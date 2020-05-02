@@ -20,10 +20,16 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - The default LaTeX table environment is now "tabular" unless `width` is set. 
     If `width` is set, it is "tabularx".
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
-
+* `theme_basic()` has been changed to bold headers, and to have no header column by default.
 
 ## Other changes
 
+* Huxtable now has the concept of header row and columns. 
+  - To set rows to be headers,
+    use `header_row(ht)[row_numbers] <- TRUE` or `set_header_row(ht, row_numbers, TRUE)`.
+    For columns, use `header_col` or `set_header_col`.
+  - To change header rows, do e.g. `set_bold(ht, header_row(ht), everywhere, TRUE)`.
+  - Many themes now set properties on headers.
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
 
