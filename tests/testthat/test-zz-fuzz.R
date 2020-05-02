@@ -4,7 +4,7 @@ context("Fuzzy tests")
 
 expect_outputs_unchanged <- function (hx, idx) {
   info <- paste0("Index i = ", idx)
-  file <- file.path(test_path(), "example-rds", paste0("various-outputs-", idx))
+  file <- file.path(test_path(), "output-rds", paste0("various-outputs-", idx))
   # setting the width avoids problems that command line and RStudio tests have different
   # options(width)
   expect_known_value(to_screen(hx, min_width = 20, max_width = 80),
