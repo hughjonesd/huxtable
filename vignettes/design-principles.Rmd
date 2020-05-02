@@ -41,7 +41,7 @@ valid huxtable, changes one thing, and returns a valid huxtable.
 The output formats are very different, and decisions have to be made as to what any package will
 support. My background is more in HTML. This is reflected in some of the huxtable properties, like
 per-cell borders and padding. The package tries to keep output reasonably similar between LaTeX and
-HTML, but there are inevitably some differences and limitations (see below). For Markdown and
+HTML, but there are inevitably some differences and limitations. For Markdown and
 on-screen output, obviously, only a few basic properties are supported.
 
 The package makes no attempt to output beautiful HTML or LaTeX source code. In fact, in the case of
@@ -59,9 +59,10 @@ has narrowed down to three:
 
 Here's what I think of these:
 
-* `huxtable` has the widest range of outputs, and is very customizable. Its model
-  is very much drawn from HTML, which can be tricky when outputting LaTeX. It aims
-  to provide fine-grained control over formatting, at cell level wherever possible.
+* `huxtable` has the widest range of outputs, including HTML, LaTeX, RTF, markdown
+  and Word (via flextable). It is very customizable. Its model
+  is drawn from HTML, which can be tricky when outputting LaTeX. It aims
+  to give you fine-grained control over formatting, at cell level wherever possible.
 * David Gohel's `flextable` package started off as a way of producing Word and
   Powerpoint tables. It can also output markdown tables for use in rmarkdown
   documents. Recently it gained the ability to create PDFs using the 
