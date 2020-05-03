@@ -354,7 +354,7 @@ has_builtin_ci <- function (x) {
 #'   tidied <- broom::tidy(mnl)
 #'   mnl4 <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
 #'   mnl5 <- tidy_replace(mnl, tidied[tidied$y.level == 5, ])
-#'   huxreg(mnl4, mnl5)
+#'   huxreg(mnl4, mnl5, statistics = "nobs")
 #' }
 #'
 tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
