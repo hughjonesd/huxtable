@@ -9,6 +9,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
+* The deprecated 3-argument form of `set_*` functions has been removed. Instead,
+  use `map_*`.
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
   `everywhere`, `evens` and `odds` are still the same.
 * Default padding has been increased to 6 points.
@@ -20,7 +22,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - The default LaTeX table environment is now "tabular" unless `width` is set. 
     If `width` is set, it is "tabularx".
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
-* `theme_basic()` has been changed to bold headers, and to have no header column by default.
+* `theme_basic()` now has bold headers, and no header column 
+  by default.
 
 ## Other changes
 

@@ -75,8 +75,14 @@ huxtable_env$huxtable_default_attrs <- list(
         font                = NA
       )
 
-make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "table"), check_fun = NULL,
-  check_values = NULL, extra_code = NULL) {
+make_getter_setters <- function(
+        attr_name,
+        attr_type = c("cell", "row", "col", "table"),
+        default = NULL,
+        check_fun = NULL,
+        check_values = NULL,
+        extra_code = NULL
+      ) {
   attr_type <- match.arg(attr_type)
   funs <- list()
 
@@ -123,28 +129,20 @@ make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "
             assert_that(is_huxtable(ht))
             nargs <- nargs()
             if (! missing(byrow)) nargs <- nargs - 1
-            if (nargs == 3) {
-              if (missing(value)) value <- col
-              if (! is.matrix(row)) stop("No columns specified, but `row` argument did not evaluate to a matrix")
-              if (byrow) stop("`byrow = TRUE` makes no sense if `row` is a matrix")
-              # .Deprecated(msg = c("The 3 argument form of `set_xxx` functions is deprecated.\n",
-              #       "Use `map_xxx` instead.\n"), package = "huxtable")
-              .(attr_symbol)(ht)[row] <- value
-            } else {
-              if (nargs == 2) {
-                if (missing(value)) value <- row
-                row <- seq_len(nrow(ht))
-                col <- seq_len(ncol(ht))
-              }
-              rc <- list()
-              rc$row <- get_rc_spec(ht, row, 1)
-              rc$col <- get_rc_spec(ht, col, 2)
-              if (byrow) {
-                nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
-                value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
-              }
-              .(attr_symbol)(ht)[rc$row, rc$col] <- value
+
+            if (nargs == 2) {
+              if (missing(value)) value <- row
+              row <- seq_len(nrow(ht))
+              col <- seq_len(ncol(ht))
             }
+            rc <- list()
+            rc$row <- get_rc_spec(ht, row, 1)
+            rc$col <- get_rc_spec(ht, col, 2)
+            if (byrow) {
+              nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
+              value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
+            }
+            .(attr_symbol)(ht)[rc$row, rc$col] <- value
 
             ht
           }
@@ -178,6 +176,10 @@ make_getter_setters <- function(attr_name, attr_type = c("cell", "row", "col", "
           }
         ))
   ) # end switch
+
+  if (! missing(default)) {
+    formals(funs[[alt_setter]])$value = default
+  }
 
   funs[[mapping_fun]] <- eval(bquote(
     function (ht, row, col, fn) {
@@ -649,7 +651,7 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @family formatting functions
 #' @template cell-property-usage
 NULL
-make_getter_setters("bold", "cell", check_fun = is.logical)
+make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
 
 
 #' @name italic
@@ -659,7 +661,7 @@ make_getter_setters("bold", "cell", check_fun = is.logical)
 #' @return
 #' Similarly for \code{italic} and friends.
 NULL
-make_getter_setters("italic", "cell", check_fun = is.logical)
+make_getter_setters("italic", "cell", default = TRUE, check_fun = is.logical)
 
 
 #' @template getset-cell

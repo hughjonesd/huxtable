@@ -17,7 +17,7 @@ map_wrap(ht, row, col, fn)
 
 \item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
 
-Set to \code{NA} to reset to the default, which is \code{FALSE}.}
+Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
