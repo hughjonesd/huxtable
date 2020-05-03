@@ -53,13 +53,13 @@ na_string(ht) <- '--'
 ht[1,1] <- NA
 doc %<>% show_add(ht, 'NA string --')
 
-ht$a <- c('top', 'middle', 'bottom', 'top')
-valign(ht)[,1] <- ht$a
+ht$a <- c('valign', 'top', 'middle', 'bottom', 'top')
+valign(ht)[-1,1] <- ht$a[-1]
 font_size(ht)[, 2] <- 16
 doc %<>% show_add(ht, 'Vertical alignment')
 
 ht <- ht_orig
-ht <- set_all_borders(ht, , , 1)
+ht <- set_all_borders(ht, 1)
 doc %<>% show_add(ht, 'Width: nothing specified')
 
 width(ht) <- .75
@@ -67,6 +67,16 @@ col_width(ht) <- c(.7, .3)
 doc %<>% show_add(ht, 'Width: .7/.3, total .75')
 col_width(ht) <- c(.2, .8)
 doc %<>% show_add(ht, 'Width: .2/.8, total .75')
+
+
+ht <- ht_orig
+ht <- set_all_borders(ht, 1)
+height(ht) <- 1
+doc %<>% show_add(ht, 'height: 1')
+row_height(ht) <- c(.4, rep(.2, 3))
+doc %<>% show_add(ht, 'height: 1; row_height .4, .2, .2, .2')
+width(ht) <- NA
+doc %<>% show_add(ht, 'height: unspecified; row_height .4, .2, .2, .2')
 
 ht <- ht_orig
 background_color(ht)[1,] <- 'yellow'
@@ -79,19 +89,6 @@ ht <- ht_orig
 text_color(ht)[, 1] <- 'blue'
 text_color(ht)[, 2] <- 'red'
 doc %<>% show_add(ht, 'Text color')
-
-# ht <- hux(Head1 = LETTERS[1:3], Head2 = letters[1:3], Head3 = 1:3, add_colnames = TRUE)
-# ft <- as_flextable(ht, header_rows = 1)
-# doc %<>% show_add(ft, 'Single header row')
-# colspan(ht)[1, 1] <- 3
-# ft <- as_flextable(ht, header_rows = 1)
-# doc %<>% show_add(ft, 'Single header row with colspan')
-# ft <- as_flextable(ht, header_rows = 2)
-# doc %<>% show_add(ft, 'Two header rows with colspan')
-# ht[4, 1] <- 'A footnote'
-# colspan(ht)[4, 1] <- 3
-# ft <- as_flextable(ht, header_rows = 1, footer_rows = 1)
-# doc %<>% show_add(ft, 'Header and footer with colspan')
 
 ht <- ht_orig
 ht <- set_all_borders(ht, 1)

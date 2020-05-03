@@ -36,8 +36,10 @@ presentations require pandoc version >= 2.4.0.)
 Properties are supported, with the following exceptions:
 \itemize{
 \item Rotation of 0, 90 or 270 is supported.
-\item Non-numeric column widths and row heights are not supported.
-\item Table height, wrap, captions and table position are not supported.
+\item Non-numeric widths and heights are not supported. Table heights are treated
+as a proportion of 9 inches; table widths are treated as a proportion of 6
+inches. So e.g. \code{height(ht) <- 0.5} will give a height of 4.5 inches.
+\item Table wrap and table position are not supported.
 \item Border style "double" is not supported and becomes "solid".
 }
 }
