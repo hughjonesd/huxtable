@@ -107,6 +107,8 @@ test_that("set_* default arguments", {
   expect_equivalent(bold(ht1), matrix(TRUE, 1, 1))
   expect_silent(ht2 <- set_bold(ht, 1, 1))
   expect_equivalent(bold(ht1), matrix(TRUE, 1, 1))
+  expect_silent(ht3 <- set_italic(ht))
+  expect_equivalent(italic(ht3), matrix(TRUE, 1, 1))
 })
 
 

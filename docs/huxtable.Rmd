@@ -207,7 +207,7 @@ prop_hux <- hux(as.data.frame(props))                     %>%
       {foo <- .; foo[1,] <- gsub('_', ' ', foo[1,]); foo} %>% 
       set_font(-1, everywhere, ss_font)                   %>% 
       set_font_size( 10)                                  %>% 
-      set_bold(1, everywhere, TRUE)                       %>% 
+      set_bold(1, everywhere)                             %>% 
       set_width(0.9)                                      %>% 
       set_background_color(-1, evens, grey(.9))           %>% 
       set_outer_borders(1)                                %>% 
