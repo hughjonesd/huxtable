@@ -1,6 +1,4 @@
 
-context("Row and column functions")
-
 
 test_that("final", {
   dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
@@ -20,17 +18,4 @@ test_that("stripe(), evens and odds", {
   expect_equivalent(odds(dfr, 2), c(1, 3))
   expect_equivalent(everywhere(dfr, 1), 1:7)
   expect_equivalent(everywhere(dfr, 2), 1:4)
-})
-
-
-test_that("where", {
-  dfr <- data.frame(a = 1:3, b = letters[1:3], d = 3:1, stringsAsFactors = FALSE)
-  expect_equivalent(where(dfr == 3), matrix(c(3, 1, 1, 3), 2, 2))
-})
-
-
-test_that("where() works with set_*", {
-  ht <- hux(a = c(1, 0), b = c(0, 1))
-  ht <- set_font(ht, where(ht > 0), "times")
-  expect_equivalent(font(ht), matrix(c("times", NA, NA, "times"), 2, 2))
 })
