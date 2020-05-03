@@ -1,6 +1,4 @@
 
-context("Row and column functions, set_* interface")
-
 
 test_that("Can use set_cell_properties", {
   htxx <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
@@ -32,6 +30,7 @@ test_that("set_* works with variables as arguments", {
   ht3 <- set_bold(ht_orig, 1:2, 1:2, boldness)
   expect_equivalent(bold(ht3), matrix(TRUE, 2, 2))
 })
+
 
 test_that("set_* works with cell functions", {
   ht <- hux(a = 1:4, b = 1:4)
@@ -74,17 +73,6 @@ test_that("set_* works with byrow", {
 })
 
 
-test_that("set_*: 3 argument form", {
-  ht <- hux(a = c(1, 0), b = c(0, 1))
-  ht2 <- set_font(ht, where(ht > 0), value = "times")
-  expect_equivalent(font(ht2), matrix(c("times", NA, NA, "times"), 2, 2))
-  ht3 <- set_font(ht, where(ht > 0), "times")
-  expect_equivalent(font(ht3), matrix(c("times", NA, NA, "times"), 2, 2))
-  expect_error(set_font(ht, 1:3, "times")) # no cols!
-  expect_error(set_font(ht, where(ht > 0), "times", byrow = TRUE)) # hard to interpret
-})
-
-
 test_that("set_*: 2 argument form", {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht, "times")
@@ -113,12 +101,19 @@ test_that("set_* works with row and col 'empty'", {
 })
 
 
+test_that("set_* default arguments", {
+  ht <- hux(a = 1)
+  expect_silent(ht1 <- set_bold(ht))
+  expect_equivalent(bold(ht1), matrix(TRUE, 1, 1))
+  expect_silent(ht2 <- set_bold(ht, 1, 1))
+  expect_equivalent(bold(ht1), matrix(TRUE, 1, 1))
+})
+
+
 test_that("set_all_*", {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_all_borders(ht, 1)
   expect_equivalent(top_border(ht2), matrix(1, 2, 2))
-  ht3 <- set_all_borders(ht, where(ht > 0), 1)
-  expect_equivalent(top_border(ht3), matrix(c(1, 0, 0, 1), 2, 2))
   ht4 <- set_all_borders(ht, 1, 2, 1)
   expect_equivalent(top_border(ht4), matrix(c(0, 0, 1, 0), 2, 2))
   rownum <- 1
