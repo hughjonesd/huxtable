@@ -141,16 +141,6 @@ final <- function(n = 1) {
 #'       c("red", "violetred", "purple"))
 NULL
 
-#' @name where
-#' @rdname huxtable-deprecated
-#' @export
-NULL
-# documenting the NULL object stops roxygen trying to print a usage section
-# which causes R CMD check to throw a wobbly
-where <- function(expr) {
-  which(expr, arr.ind = TRUE)
-}
-
 
 #' @name is_a_number
 #' @rdname huxtable-deprecated

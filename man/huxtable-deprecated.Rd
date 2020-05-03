@@ -8,7 +8,6 @@
 \alias{pad_decimal<-}
 \alias{set_pad_decimal}
 \alias{map_pad_decimal}
-\alias{where}
 \alias{is_a_number}
 \alias{huxtable-deprecated}
 \title{Deprecated functions}

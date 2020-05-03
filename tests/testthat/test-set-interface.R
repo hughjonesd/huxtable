@@ -203,14 +203,13 @@ test_that("set_outer_borders() works with non-standard/empty position arguments"
     expect_equivalent(left_border(h), matrix(c(1, 1, 0, 0), 2, 2))
     expect_equivalent(right_border(h), matrix(c(0, 0, 1, 1), 2, 2))
   }
-  ht4 <- set_outer_borders(ht, where(ht > 1.5), 1)
-  ht5 <- set_outer_borders(ht, evens, everywhere, 1)
-  for (h in list(ht4, ht5)) {
-    expect_equivalent(top_border(h), matrix(c(0, 1, 0, 1), 2, 2))
-    expect_equivalent(bottom_border(h), matrix(c(0, 1, 0, 1), 2, 2))
-    expect_equivalent(left_border(h), matrix(c(0, 1, 0, 0), 2, 2))
-    expect_equivalent(right_border(h), matrix(c(0, 0, 0, 1), 2, 2))
-  }
+
+  ht4 <- set_outer_borders(ht, evens, everywhere, 1)
+  expect_equivalent(top_border(ht4), matrix(c(0, 1, 0, 1), 2, 2))
+  expect_equivalent(bottom_border(ht4), matrix(c(0, 1, 0, 1), 2, 2))
+  expect_equivalent(left_border(ht4), matrix(c(0, 1, 0, 0), 2, 2))
+  expect_equivalent(right_border(ht4), matrix(c(0, 0, 0, 1), 2, 2))
+
 })
 
 
