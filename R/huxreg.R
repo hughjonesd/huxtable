@@ -276,6 +276,8 @@ huxreg <- function (
   if (error_pos == "right") mod_col_headings <- interleave(mod_col_headings, "")
   mod_col_headings <- c("", mod_col_headings)
   result <- rbind(mod_col_headings, coef_hux, sumstats, copy_cell_props = FALSE)
+  result <- set_header_row(result, 1, everywhere, TRUE)
+  result <- set_header_col(result, everywhere, 1, TRUE)
   result <- set_bottom_border(result, final(), everywhere, outer_borders)
   result <- set_top_border(result, 1, everywhere, outer_borders)
   result <- set_bottom_border(result, c(1, nrow(coef_hux) + 1), -1, borders)
