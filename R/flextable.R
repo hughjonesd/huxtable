@@ -31,8 +31,10 @@ as_FlexTable <- function(x, ...) {
 #' Properties are supported, with the following exceptions:
 
 #' * Rotation of 0, 90 or 270 is supported.
-#' * Non-numeric column widths and row heights are not supported.
-#' * Table height, wrap, captions and table position are not supported.
+#' * Non-numeric widths and heights are not supported. Table heights are treated
+#'   as a proportion of 9 inches; table widths are treated as a proportion of 6
+#'   inches. So e.g. `height(ht) <- 0.5` will give a height of 4.5 inches.
+#' * Table wrap and table position are not supported.
 #' * Border style "double" is not supported and becomes "solid".
 #
 #'
@@ -60,15 +62,13 @@ as_flextable <- function(x, ...) UseMethod("as_flextable")
 #' @export
 as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   assert_package("as_flextable","flextable")
+  flextable_version <- utils::packageVersion("flextable")
 
   cc <- clean_contents(x, type = "word")
   cc <- as.data.frame(cc, stringsAsFactors = FALSE)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
   if (! colnames_to_header) ft <- flextable::delete_part(ft, "header")
-
-  if (is.numeric(rh <- row_height(x))) ft <- flextable::height(ft, height = rh)
-  if (is.numeric(cw <- col_width(x)))  ft <- flextable::width(ft, width = cw)
 
   rots <- list("0" = "lrtb", "90" = "btlr", "270" = "tbrl")
   dcells <- display_cells(x, all = FALSE)
@@ -118,9 +118,39 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     ft <- flextable::rotate(ft, i = drow, j = dcol, rotation = rots[[rot]], align = valign)
   }
 
+  tw <- width(x)
+  cw <- col_width(x)
+  # if we only have col_width, set width to 0.5
+  # if we only have width, use it and use equal col widths
+  # if we have neither, use autofit
+  # if we have both, multiply col_widths by width
+  if (! is.numeric(tw) && is.numeric(cw) && ! any(is.na(cw))) tw <- 0.5
+  if (! is.numeric(cw) || any(is.na(cw))) cw <- rep(1/ncol(x), ncol(x))
+  if (is.numeric(tw) && ! is.na(tw)) {
+    tw <- tw * 6 # flextable sizes are in inches
+    cw <- cw * tw
+    ft <- flextable::width(ft, width = cw)
+  } else {
+    ft <- flextable::autofit(ft)
+  }
+
+  th <- height(x)
+  rh <- row_height(x)
+  # if we have row heights, set height to 0.5
+  # if we only have height, set row_heights to equal
+  # otherwise, do nothing - don't call autofit again unless you overwrite
+  if (! is.numeric(th) && is.numeric(rh) && ! any(is.na(rh))) th <- 0.5
+  if (! is.numeric(rh) || any(is.na(rh))) rh <- rep(1/nrow(x), nrow(x))
+  if (is.numeric(th) && ! is.na(th)) {
+    rh <- rh * 9 # inches again, so this is roughly A4 with 2 1" margins
+    rh <- rh * th
+    ft <- flextable::height(ft, height = rh)
+    if (flextable_version >= "0.5.7") ft <- flextable::hrule(ft, rule = "atleast")
+  }
+
   # set caption
   if (!is.null(caption(x)) & !is.na(caption(x))) {
-    if (utils::packageVersion("flextable") >= "0.5.5"){
+    if (flextable_version >= "0.5.5"){
       ft <- flextable::set_caption(ft, caption(x))
     } else {
       message("Use of table captions requires \"flextable\" package version >= 0.5.5. Type:\n",
