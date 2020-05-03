@@ -267,8 +267,10 @@ make_getter_setters("col_width", "col")
 
 #' @name header-details
 #' @details
+#' Arbitrary rows and columns can be headers - they do not have to be at the top
+#' or left of the table.
 #' By default header rows and columns are not shown differently from other rows, but
-#' you can change this with e.g. `set_bold(ht, header_row(ht), everywhere, TRUE)`.
+#' you can change this with e.g. `set_bold(ht, header_row(ht), everywhere)`.
 #' Various themes also set properties on headers.
 NULL
 

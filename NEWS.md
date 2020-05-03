@@ -31,7 +31,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - To set rows to be headers,
     use `header_row(ht)[row_numbers] <- TRUE` or `set_header_row(ht, row_numbers, TRUE)`.
     For columns, use `header_col` or `set_header_col`.
-  - To change header rows, do e.g. `set_bold(ht, header_row(ht), everywhere, TRUE)`.
+  - To change header rows, do e.g. `set_bold(ht, header_row(ht), everywhere)`.
   - Many themes now set properties on headers.
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.

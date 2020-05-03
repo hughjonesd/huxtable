@@ -25,8 +25,10 @@ For \code{set_header_row}, the modified huxtable.
 Functions to get or set the \emph{header row} property of huxtable rows.
 }
 \details{
+Arbitrary rows and columns can be headers - they do not have to be at the top
+or left of the table.
 By default header rows and columns are not shown differently from other rows, but
-you can change this with e.g. \code{set_bold(ht, header_row(ht), everywhere, TRUE)}.
+you can change this with e.g. \code{set_bold(ht, header_row(ht), everywhere)}.
 Various themes also set properties on headers.
 }
 \examples{
