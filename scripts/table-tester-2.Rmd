@@ -472,8 +472,8 @@ top_border(ht2)[3, 3]    <- 0
 bottom_border(ht2)[1, 4] <- 0
 top_border(ht2)[2, 4]    <- 0
 
-ht2 <- set_left_border(ht2, where(row(ht2) == col(ht2)), 0)
-ht2 <- set_right_border(ht2, where(row(ht2) == col(ht2) + 1), 0)
+ht2 <- map_left_border(ht2, by_cases(row(.) == col(.) ~ 0, TRUE ~ 1))
+ht2 <- map_right_border(ht2, by_cases(row(.) == col(.) + 1 ~ 0, TRUE ~ 1))
 
 caption(ht2) <- 'Varying borders within rows/cols'
 ht2
