@@ -11,6 +11,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   to go back to the old behaviour.
 * The deprecated 3-argument form of `set_*` functions has been removed. Instead,
   use `map_*`.
+* Deprecated `error_style` and `pad_decimal` arguments have been removed from
+  `huxreg`.
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
   `everywhere`, `evens` and `odds` are still the same.
 * Default padding has been increased to 6 points.

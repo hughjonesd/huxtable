@@ -11,9 +11,9 @@ huxreg(
   error_pos = c("below", "same", "right"),
   number_format = "\%.3f",
   align = ".",
-  pad_decimal = ".",
   ci_level = NULL,
   tidy_args = NULL,
+  subset = NULL,
   stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05),
   bold_signif = NULL,
   borders = 0.4,
@@ -29,15 +29,11 @@ huxreg(
 
 \item{error_format}{How to display uncertainty in estimates. See below.}
 
-\item{error_style}{Deprecated. One or more of "stderr", "ci" (confidence interval), "statistic" or "pvalue".}
-
 \item{error_pos}{Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.}
 
 \item{number_format}{Format for numbering. See \code{\link[=number_format]{number_format()}} for details.}
 
 \item{align}{Alignment for table cells. Set to a single character to align on this character.}
-
-\item{pad_decimal}{Deprecated in favour of \code{align}.}
 
 \item{ci_level}{Confidence level for intervals. Set to \code{NULL} to not calculate confidence intervals.}
 

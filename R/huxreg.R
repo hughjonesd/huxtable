@@ -18,11 +18,9 @@ generics::glance
 #'
 #' @param ... Models, or a single list of models. Names will be used as column headings.
 #' @param error_format How to display uncertainty in estimates. See below.
-#' @param error_style Deprecated. One or more of "stderr", "ci" (confidence interval), "statistic" or "pvalue".
 #' @param error_pos Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.
 #' @param number_format Format for numbering. See [number_format()] for details.
 #' @param align Alignment for table cells. Set to a single character to align on this character.
-#' @param pad_decimal Deprecated in favour of `align`.
 #' @param ci_level Confidence level for intervals. Set to `NULL` to not calculate confidence intervals.
 #' @param tidy_args List of arguments to pass to [broom::tidy()]. You can also pass a list of lists;
 #'   if so, the nth element will be used for the nth column.
@@ -91,9 +89,9 @@ huxreg <- function (
         error_pos       = c("below", "same", "right"),
         number_format   = "%.3f",
         align           = ".",
-        pad_decimal     = ".",
         ci_level        = NULL,
         tidy_args       = NULL,
+        subset          = NULL,
         stars           = c("***" = 0.001, "**" = 0.01, "*" = 0.05),
         bold_signif     = NULL,
         borders         = 0.4,
@@ -113,7 +111,6 @@ huxreg <- function (
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
-  assert_that(is.string(pad_decimal))
   models <- list(...)
   if (inherits(models[[1]], "list")) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
@@ -184,16 +181,6 @@ huxreg <- function (
   }
 
   # create error cells
-  if (! missing(error_style)) {
-    formats <- list(stderr = "{std.error}", ci = "{conf.low} -- {conf.high}", statistic = "{statistic}",
-          pvalue = "{p.value}")
-    lbra <- rep("[", length(error_style))
-    rbra <- rep("]", length(error_style))
-    lbra[1] <- "("
-    rbra[1] <- ")"
-    error_format <- paste(lbra, formats[error_style], rbra, sep = "", collapse = " ")
-    warning(glue::glue("`error_style` is deprecated, please use `error_format = \"{error_format}\"` instead."))
-  }
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- glue::glue_data(.x = x, error_format)
     x$error_cell[is.na(x$estimate)] <- ""
@@ -283,8 +270,6 @@ huxreg <- function (
   if (error_pos == "right") result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- "center"
   align(result)[-1, -1] <- align
-  # automatically gives deprecation warning
-  if (! missing(pad_decimal)) pad_decimal(result)[-1, -1] <- pad_decimal
   number_format(result)[, 1]  <- NA
   number_format(result)[1, ]  <- NA
 
@@ -333,25 +318,27 @@ has_builtin_ci <- function (x) {
 }
 
 
-#' Override a model's `tidy` output
+#' Change a model's `tidy` output
 #'
-#' Use `tidy_override` to provide your own p values, confidence intervals
-#' etc. for a model.
+#' Use `tidy_override` and `tidy_replace` to provide your own p values,
+#' confidence intervals etc. for a model.
 #'
 #' @param x A model with methods defined for [generics::tidy()] and/or [generics::glance()].
 #' @param ... In `tidy_override`, columns of statistics to replace `tidy` output. In
 #'   `tidy` and `glance` methods, arguments passed on to the underlying model.
 #' @param glance A list of summary statistics for `glance`.
-#' @param extend Logical: allow adding new statistics?
+#' @param extend Logical: allow adding new columns to `tidy(x)`?
 #' @param object A `tidy_override` object.
 #'
-#' @return An object of class "tidy_override". When `tidy` and `glance` are called
-#' on this, it will return results from the underlying model, replacing some
-#' columns with your own data.
+#' @details
+#' `tidy_override` allows you to replace some columns of `tidy(x)` with your own data.
+#'
+#' @return An object that can be passed in to `huxreg`.
+#'
 #' @export
 #'
 #' @examples
-#' if (! requireNamespace("broom")) {
+#' if (! requireNamespace("broom", quietly = TRUE)) {
 #'   stop("Please install 'broom' to run this example.")
 #' }
 #'
@@ -359,10 +346,17 @@ has_builtin_ci <- function (x) {
 #' fixed_lm1 <- tidy_override(lm1,
 #'       p.value = c(.04, .12),
 #'       glance = list(r.squared = 0.99))
+
+#' huxreg(lm1, fixed_lm1)
 #'
-#' broom::tidy(fixed_lm1)
+#' if (requireNamespace("nnet", quietly = TRUE)) {
+#'   mnl <- nnet::multinom(gear ~ mpg, mtcars)
+#'   tidied <- broom::tidy(mnl)
+#'   mnl4 <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
+#'   mnl5 <- tidy_replace(mnl, tidied[tidied$y.level == 5, ])
+#'   huxreg(mnl4, mnl5)
+#' }
 #'
-#' cbind(huxreg(fixed_lm1), huxreg(lm1))
 tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
   assert_that(is.flag(extend), is.list(glance))
   tidy_cols <- data.frame(..., stringsAsFactors = FALSE)
@@ -376,8 +370,26 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
 }
 
 #' @export
+#' @param tidied Data frame to replace the result of `tidy(x)`.
+#' @rdname tidy_override
+#' @details
+#' `tidy_replace` allows you to replace the result of `tidy(x)` entirely.
+tidy_replace <- function (x, tidied, glance = list()) {
+  structure(list(
+          model = x,
+          tidy_data = tidied,
+          glance_elems = glance(),
+          extend = FALSE
+        ),
+        class = "tidy_override")
+}
+
+
+#' @export
 #' @rdname tidy_override
 tidy.tidy_override <- function (x, ...) {
+  if (! is.null(x$tidy_data)) return(x$tidy_data)
+
   tidied <- try(tidy(x$model, ...), silent = TRUE)
   if (inherits(tidied, "try-error")) tidied <- data.frame()[seq_along(x$tidy_cols[[1]]), ]
   for (cn in names(x$tidy_cols)) {
@@ -388,6 +400,7 @@ tidy.tidy_override <- function (x, ...) {
 
   return(tidied)
 }
+
 
 #' @export
 #' @rdname tidy_override
@@ -410,3 +423,5 @@ nobs.tidy_override <- function (object, ...) {
   if ("nobs" %in% names(object$glance_elems)) return(object$glance_elems[["nobs"]])
   nobs(object$model)
 }
+
+

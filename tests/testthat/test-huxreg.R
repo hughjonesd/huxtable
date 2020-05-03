@@ -57,14 +57,6 @@ test_that("huxreg confidence intervals work when tidy c.i.s not available", {
 })
 
 
-test_that("huxreg error_style usage", {
-  lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
-  expect_warning(hr <- huxreg(lm1, error_style = "stderr"), "`error_style` is deprecated")
-  hr2 <- huxreg(lm1, error_format = "({std.error})")
-  expect_identical(hr, hr2)
-})
-
-
 test_that("huxreg works with single coefficient", {
   set.seed(27101975)
   dfr <- data.frame(a = rnorm(100), b = rnorm(100))
@@ -194,7 +186,6 @@ test_that("can pass generics::tidy arguments to huxreg", {
 
 test_that("tidy_override", {
   skip_if_not_installed("broom")
-  library(broom)
 
   lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
 
@@ -213,6 +204,20 @@ test_that("tidy_override", {
 
   expect_error(tidy_override(lm1, foo = 1:2, bar = 1:3),
         info = "Unequal length tidy_override columns should throw an error")
+})
+
+
+test_that("tidy_replace", {
+  skip_if_not_installed("broom")
+  skip_if_not_installed("nnet")
+
+  mnl <- nnet::multinom(gear ~ mpg, mtcars)
+  tidied <- broom::tidy(mnl)
+  mnl4 <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
+
+  expect_equivalent(nrow(broom::tidy(mnl4)), 2)
+  expect_identical(broom::glance(mnl4), broom::glance(mnl))
+  expect_silent(huxreg(mnl4, statistics = "nobs"))
 })
 
 
