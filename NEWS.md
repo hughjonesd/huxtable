@@ -46,6 +46,8 @@ hux(head(iris))
 ```
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
+* New functions `merge_across()` and `merge_down()` to create multicolumn
+  or multirow cells.
 * New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
   package will have an `as_huxtable()` method. 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).

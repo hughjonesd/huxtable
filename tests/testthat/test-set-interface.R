@@ -257,6 +257,16 @@ test_that("merge_cells", {
 })
 
 
+test_that("merge_across/down", {
+  ht <- hux(1:2, 1:2)
+  expect_silent(ht2 <- merge_across(ht, 1:2, 1:2))
+  expect_equivalent(colspan(ht2), matrix(c(2, 2, 1, 1), 2, 2))
+
+  expect_silent(ht2 <- merge_down(ht, 1:2, 1:2))
+  expect_equivalent(rowspan(ht2), matrix(c(2, 1, 2, 1), 2, 2))
+})
+
+
 test_that("merge_repeated_rows", {
   ht <- hux(a = c(1, 2, 2), b = c("x", "x", "y"), c = 1:3)
 
