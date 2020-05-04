@@ -27,6 +27,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - The default LaTeX table environment is now "tabular" unless `width` is set. 
     If `width` is set, it is "tabularx".
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
+  - the `\centerbox` macro from the "adjustbox" package is used to centre
+    tables. This should improve centring when tables are too wide.
 * `theme_basic()` now has bold headers, and no header column 
   by default.
 * `theme_plain()` defaults to `position = "centre"`.

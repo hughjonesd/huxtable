@@ -82,7 +82,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   pos_text <- switch(position(ht),
     wrapleft = ,
     left   = c("\\begin{raggedright}", "\\par\\end{raggedright}\n"),
-    center = c("\\centering",   "\n"),
+    center = c("\\begin{centerbox}",   "\\par\\end{centerbox}\n"),
     wrapright = ,
     right  = c("\\begin{raggedleft}",  "\\par\\end{raggedleft}\n")
   )

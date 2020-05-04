@@ -41,6 +41,9 @@ is \code{FALSE}.
 \code{width} is set. If \code{width} is set, it is “tabularx”.
 \item \code{wrap} only matters if \code{width} is set. Otherwise, cell wrapping
 is off.
+\item the \verb{\centerbox} macro from the “adjustbox” package is used to
+centre tables. This should improve centring when tables are too
+wide.
 }
 \item \code{theme_basic()} now has bold headers, and no header column by
 default.
