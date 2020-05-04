@@ -900,13 +900,20 @@ make_getter_setters("tabular_environment", "table", check_fun = is.character)
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML.
 #' @template getset-example
 #' @templateVar attr_val "tab:mytable"
+#' @seealso huxtable-options
 #' @details
 #' LaTeX table labels typically start with `"tab:"`.
+#'
+#' Within knitr, labels will default to the chunk label. Multiple huxtables
+#' within a single chunk will be numbered sequentially, like
+#' `chunk, chunk-1, chunk-2, ...`. To turn off this behaviour, set
+#' `options(huxtable.autolabel = FALSE)`.
 #'
 #' If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
 #' the caption will automatically be prefixed with `(#label)`. You can then
 #' refer to the table using `@ref(label)`. `label` needs to start with `"tab:"`; if it doesn't,
-#' the `"tab"` prefix will be added automatically.
+#' the `"tab"` prefix will be added automatically. To turn off this behaviour,
+#' set `options(huxtable.bookdown = FALSE)`.
 NULL
 make_getter_setters("label", "table", check_fun = is.character)
 

@@ -26,10 +26,16 @@ Functions to get or set the table-level \emph{table label} property of a huxtabl
 \details{
 LaTeX table labels typically start with \code{"tab:"}.
 
+Within knitr, labels will default to the chunk label. Multiple huxtables
+within a single chunk will be numbered sequentially, like
+\verb{chunk, chunk-1, chunk-2, ...}. To turn off this behaviour, set
+\code{options(huxtable.autolabel = FALSE)}.
+
 If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
 the caption will automatically be prefixed with \verb{(#label)}. You can then
 refer to the table using \verb{@ref(label)}. \code{label} needs to start with \code{"tab:"}; if it doesn't,
-the \code{"tab"} prefix will be added automatically.
+the \code{"tab"} prefix will be added automatically. To turn off this behaviour,
+set \code{options(huxtable.bookdown = FALSE)}.
 }
 \examples{
 
@@ -38,4 +44,7 @@ label(jams) <-  "tab:mytable"
 label(jams)
 
 label(jams) <- orig
+}
+\seealso{
+huxtable-options
 }
