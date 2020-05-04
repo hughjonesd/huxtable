@@ -81,7 +81,10 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
 
   nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)
-  is_a_number_mx <- apply(contents, 2, function (col) ! is.na(as.numeric(col)))
+  is_a_number_mx <- suppressWarnings(apply(contents, 2, function (col) {
+    ! is.na(as.numeric(col))
+  }))
+  dim(is_a_number_mx) <- dim(contents) # apply might return a vector :-/
   # for each column we go down it. If everything remaining is one type, we insert it. Otherwise
   # we insert the cell.
   for (j in seq_len(ncol(contents))) {
