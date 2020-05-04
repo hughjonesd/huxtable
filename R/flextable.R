@@ -15,8 +15,6 @@
 #' from rmarkdown `word_document` and/or `powerpoint_presentation` documents. (Powerpoint
 #' presentations require pandoc version >= 2.4.0.)
 #'
-#' `as_FlexTable` is deprecated and calls `as_flextable` with a warning.
-#'
 #' Properties are supported, with the following exceptions:
 #' * Rotation of 0, 90 or 270 is supported.
 #' * Non-numeric widths and heights are not supported. Table heights are treated

@@ -85,13 +85,11 @@ generics::glance
 huxreg <- function (
         ...,
         error_format    = "({std.error})",
-        error_style     = c("stderr", "ci", "statistic", "pvalue"),
         error_pos       = c("below", "same", "right"),
         number_format   = "%.3f",
         align           = ".",
         ci_level        = NULL,
         tidy_args       = NULL,
-        subset          = NULL,
         stars           = c("***" = 0.001, "**" = 0.01, "*" = 0.05),
         bold_signif     = NULL,
         borders         = 0.4,

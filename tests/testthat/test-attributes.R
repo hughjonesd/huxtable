@@ -128,11 +128,10 @@ test_that("Decimal padding works", {
 })
 
 
-test_that("Can pad with align; pad_decimal gives warning", {
+test_that("Can pad with align", {
   ht <- hux(a = c("1.5", "2.5"))
   ht2 <- ht
   expect_silent(align(ht) <- ".")
-  expect_warning(pad_decimal(ht2) <- ".", "deprecated")
   expect_identical(huxtable:::clean_contents(ht), huxtable:::clean_contents(ht2))
 })
 

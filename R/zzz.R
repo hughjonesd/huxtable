@@ -160,15 +160,6 @@ NULL
 NULL
 
 
-#' Deprecated functions
-#'
-#' These functions are deprecated and will be removed in future versions of huxtable.
-#'
-#' To replace the 3 argument form of `set_xxx` functions, use
-#' \code{\link[=mapping-functions]{map_xxx}}.
-#' @name huxtable-deprecated
-NULL
-
 #' Prices of 3 jams
 #'
 #' A huxtable of jams.

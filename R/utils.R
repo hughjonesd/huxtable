@@ -69,8 +69,7 @@ clean_contents <- function(
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
     # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
-    # later we can just use align for this:
-    pad_chars <- pad_decimal(ht)[, col]
+    pad_chars <- rep(NA, length(col))
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
     contents[, col] <- decimal_pad(contents[, col], pad_chars, type)

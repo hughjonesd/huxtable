@@ -28,8 +28,6 @@ With recent versions of "flextable" and Pandoc, huxtables can be automatically o
 from rmarkdown \code{word_document} and/or \code{powerpoint_presentation} documents. (Powerpoint
 presentations require pandoc version >= 2.4.0.)
 
-\code{as_FlexTable} is deprecated and calls \code{as_flextable} with a warning.
-
 Properties are supported, with the following exceptions:
 \itemize{
 \item Rotation of 0, 90 or 270 is supported.

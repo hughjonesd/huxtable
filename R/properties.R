@@ -10,7 +10,7 @@ huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_co
   "top_border_style", "left_border_style", "right_border_style", "bottom_border_style",
   "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
   "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
-  "font", "pad_decimal")
+  "font")
 huxtable_col_attrs <- c("col_width")
 huxtable_row_attrs <- c("row_height")
 huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
@@ -69,7 +69,6 @@ huxtable_env$huxtable_default_attrs <- list(
         font_size           = NA,
         rotation            = 0,
         number_format       = list("%.3g"),
-        pad_decimal         = NA,
         font                = NA
       )
 
@@ -776,18 +775,6 @@ contents.huxtable <- function (ht) ht
 `contents<-.huxtable` <- function (ht, value) {
   value # by the time we get here, the replacement has already happened and we're done
 }
-
-#' @aliases pad_decimal<- set_pad_decimal map_pad_decimal
-#' @rdname huxtable-deprecated
-#' @name pad_decimal
-#' @details
-#' To replace `pad_decimal` use [align()], e.g. `align(ht) <- "."`.
-NULL
-make_getter_setters("pad_decimal", "cell", extra_code = {
-  stopifnot(all(nchar(na.omit(value)) == 1))
-  .Deprecated(msg = "`pad_decimal` is deprecated.\nUse e.g. `align(x) <- \".\"`` instead.",
-        package = "huxtable")
-})
 
 
 #' @template getset-cell
