@@ -113,7 +113,6 @@ huxreg <- function (
   if (inherits(models[[1]], "list")) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
   error_pos <- match.arg(error_pos)
-  if (! missing(error_style)) error_style <- sapply(error_style, match.arg, choices = eval(formals(huxreg)$error_style))
   if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) tidy_args <- rep(list(tidy_args), length(models))
 
   # create list of tidy data frames, possibly with confidence intervals
