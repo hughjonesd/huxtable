@@ -207,7 +207,7 @@ prop_hux <- hux(as.data.frame(props))                     %>%
       {foo <- .; foo[1,] <- gsub('_', ' ', foo[1,]); foo} %>% 
       set_font(-1, everywhere, ss_font)                   %>% 
       set_font_size( 10)                                  %>% 
-      set_bold(1, everywhere, TRUE)                       %>% 
+      set_bold(1, everywhere)                             %>% 
       set_width(0.9)                                      %>% 
       set_background_color(-1, evens, grey(.9))           %>% 
       set_outer_borders(1)                                %>% 
@@ -239,7 +239,7 @@ hux(
       )                               %>%
       set_right_padding(10)           %>%
       set_left_padding(10)            %>% 
-      set_bold(1, 1:2, TRUE)          %>% 
+      set_bold(1, 1:2)                %>% 
       set_bottom_border(1, 1:2, 1)    %>%
       set_align(1:4, 2, 'right')      %>%
       set_number_format(2)            %>% 
@@ -261,15 +261,6 @@ There are also some useful convenience functions:
   and the border);
 * `set_outer_borders`, `set_outer_border_colors` and `set_outer_border_styles` set an outer border
   around a rectangle of cells.
-
-## Getting properties
-
-To get the current properties of a huxtable, just use the properties function without the left arrow:
-
-```{r, results = 'markup'}
-italic(ht)
-position(ht)
-```
 
 
 # Editing content
@@ -489,16 +480,6 @@ ht
 
 It is best to set table width explicitly, then set column widths as proportions.
 
-By default, if a cell contains long contents, it will be stretched. Use the `wrap` property to allow
-cell contents to wrap over multiple lines:
-
-```{r}
-ht_wrapped <- ht
-ht_wrapped[5, 1] <- "David Arthur Shrimpton Hugh-Jones"
-wrap(ht_wrapped) <- TRUE
-ht_wrapped
-```
-
 
 ## Adding row and column names
 
@@ -559,6 +540,9 @@ bottom_border(car_ht)[21, 1] <- 0.4
 car_ht
 ```
 
+To merge each row of cells in a selection horizontally, use `merge_across()`. 
+To merge each column vertically, use `merge_down()`.
+
 ## Quick themes
 
 Huxtable comes with some predefined themes for formatting. You've already
@@ -575,13 +559,16 @@ The ["themes" vignette](themes.html) shows all the available themes.
 
 ## Row and column functions
 
-If you use the `set_*` style functions, huxtable has some convenience functions for selecting rows and columns. To select all rows, or all columns, use `everywhere` in the row or column specification. To select the last `n` rows or columns, use `final(n)`.
+If you use the `set_*` style functions, huxtable has some convenience functions for selecting rows and columns. To select all rows, or all columns, use `everywhere` in the row or column specification. To select the last `n` rows or columns, use `final(n)`. To select horizontal or vertical stripes, use `stripe()` or the shortcuts `evens` and
+`odds`.
 
 You can also use `dplyr` functions like `starts_with()`, `contains()`, and `matches()` to specify columns by column 
 name. For a full list of these functions, see `?select_helpers`.
 
 ```{r}
-ht %>% set_background_color(everywhere, starts_with("S"), "orange")
+ht %>% 
+      set_background_color(everywhere, starts_with("S"), "orange") %>% 
+      set_background_color(evens, starts_with("S"), "palegreen")
 ```
 
 Lastly, remember that you can set a property for every cell by omitting the `row` and `col`
