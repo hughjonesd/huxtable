@@ -95,7 +95,7 @@ knit_print.data.frame <- function(x, options, ...) {
   if (! isTRUE(getOption("huxtable.knit_print_df", TRUE))) {
     NextMethod() # probably calls knit_print.default
   } else {
-    ht <- smart_hux_from_df(x)
+    ht <- as_huxtable(x)
     df_theme <- getOption("huxtable.knit_print_df_theme", theme_plain)
     assert_that(is.function(df_theme))
     ht <- df_theme(ht)

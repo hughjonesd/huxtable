@@ -343,16 +343,3 @@ real_align <- function(ht) {
 
   al
 }
-
-
-smart_hux_from_df <- function(dfr) {
-  col_nchars <- sapply(dfr, function (col) max(nchar(as.character(col), type = "width")))
-
-  ht <- as_hux(dfr, add_colnames = TRUE, autoformat = TRUE)
-
-  wrap(ht)[-1, col_nchars > 15] <- TRUE
-  width <- sum(col_nchars) / 90
-  width(ht) <- min(1, max(0.2, width))
-
-  ht
-}
