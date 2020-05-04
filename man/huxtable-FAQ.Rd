@@ -3,7 +3,6 @@
 \docType{package}
 \name{huxtable-FAQ}
 \alias{huxtable-FAQ}
-\alias{huxtable_FAQ}
 \title{Frequently Asked Questions, including how to get help}
 \description{
 A FAQ of common issues.

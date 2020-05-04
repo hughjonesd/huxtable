@@ -2,9 +2,8 @@
 % Please edit documentation in R/zzz.R
 \docType{package}
 \name{huxtable-package}
+\alias{huxtable}
 \alias{huxtable-package}
-\alias{_PACKAGE}
-\alias{huxtable_package}
 \title{Quick introduction to huxtable}
 \description{
 Huxtable is a package for creating HTML and LaTeX tables. It provides similar

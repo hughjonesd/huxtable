@@ -9,18 +9,18 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
-* The deprecated 3-argument form of `set_*` functions has been removed. Instead,
-  use `map_*`. 
-* The `where()` function has been removed.
-* The deprecated `byrow` argument to `set_*` functions has been removed. Instead,
-  use `map_*` and `by_cols()`.
-* Deprecated `error_style` and `pad_decimal` arguments have been removed from
-  `huxreg`.
-* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
-  `everywhere`, `evens` and `odds` are still the same.
+* Various deprecated items have been removed:
+  - The 3-argument form of `set_*`. Instead, use `map_*`. 
+  - The `byrow` argument to `set_*`. Instead, use `map_*` and `by_cols()`.
+  - `error_style` and `pad_decimal` arguments in `huxreg`. Use `error_format` and
+    `align(hx) <- "."`.
+  - The `where()`, `is_a_number()` and `pad_decimal()` functions. Use `map_*`
+    functions, `! is.na(as.numeric(x))`, and `align(ht) <- "."`.
 * Default padding has been increased to 6 points.
 * By default, `width()` is now unset.
 * By default, `wrap()` is now `TRUE`.
+* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
+  `everywhere`, `evens` and `odds` are still the same.
 * There are changes to how LaTeX is output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
     padding should now take effect even when `wrap` is `FALSE`.
@@ -42,13 +42,17 @@ hux(head(iris)) %>% set_bold(1, everywhere)
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
 
+
+````
 Some iris species are shown in \@ref(tab:mytable):
 
-```{r mytable}
+```{r mytable}`r ''`
 hux(head(iris))
 ```
+````
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
+  
 * New functions `merge_across()` and `merge_down()` to create multicolumn
   or multirow cells.
 * New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 

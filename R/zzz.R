@@ -52,7 +52,6 @@
 #' \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 #'
 #' @name huxtable-package
-#' @aliases huxtable_package
 "_PACKAGE"
 
 
@@ -89,7 +88,6 @@
 #'   something like `list(..., Date = "center", ...)`.
 #' @name huxtable-options
 #' @docType package
-#' @aliases huxtable_options
 NULL
 
 
@@ -156,7 +154,15 @@ NULL
 #'
 #' @name huxtable-FAQ
 #' @docType package
-#' @aliases huxtable_FAQ
+NULL
+
+
+
+#' Changes to new versions of huxtable
+#'
+#' @name huxtable-news
+#' @docType package
+#' @includeRmd NEWS.md
 NULL
 
 

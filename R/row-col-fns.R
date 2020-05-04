@@ -141,21 +141,6 @@ final <- function(n = 1) {
 NULL
 
 
-#' @name is_a_number
-#' @rdname huxtable-deprecated
-#' @details To replace `is_a_number` use e.g. `! is.na(as.numeric(x))`
-#' @export
-NULL
-is_a_number <- function(x) {
-  if (is.data.frame(x)) {
-    if (nrow(x) == 0) return(matrix(FALSE, 0, ncol(x)))
-    res <- sapply(x, is_a_number)
-    dim(res) <- dim(x)
-    return(res)
-  } else return(! is.na(suppressWarnings(as.numeric(x))))
-}
-
-
 get_rc_spec <- function (ht, obj, dimno) {
   dim_length <- dim(ht)[dimno]
   if (missing(obj)) return(seq_len(dim_length))
