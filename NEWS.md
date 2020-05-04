@@ -29,6 +29,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
 * `theme_basic()` now has bold headers, and no header column 
   by default.
+* `theme_plain()` defaults to `position = "centre"`.
 
 ## Other changes
 

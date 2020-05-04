@@ -13,7 +13,7 @@
 \alias{theme_mondrian}
 \title{Theme a huxtable}
 \usage{
-theme_plain(ht, position = "left")
+theme_plain(ht, position = "center")
 
 theme_basic(ht, header_row = TRUE, header_col = TRUE)
 
