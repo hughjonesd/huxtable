@@ -44,6 +44,7 @@ is off.
 }
 \item \code{theme_basic()} now has bold headers, and no header column by
 default.
+\item \code{theme_plain()} defaults to \code{position = "centre"}.
 }
 }
 
