@@ -2,7 +2,12 @@
 title: "Huxtable table demo"
 author: "David Hugh-Jones"
 date: "2/03/2017"
-output: pdf_document
+output:
+  pdf_document:
+    includes:
+      in_header: placeins-header.tex
+    keep_tex: yes
+  html_document: default
 ---
 
 

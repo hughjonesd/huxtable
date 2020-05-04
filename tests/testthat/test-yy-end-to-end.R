@@ -8,23 +8,24 @@ skip_without_pandoc()
 require_temp_artefacts_dir()
 
 
-validate_markdown <- function(md_string, output_format = "html_document") {
-  force(output_format)
+validate_markdown <- function(md_string) {
   on.exit({
     if (exists("tf")) try(file.remove(tf), silent = TRUE)
     if (exists("outfile")) try(file.remove(outfile), silent = TRUE)
   })
 
-  tf <- tempfile(pattern = "markdown-example", fileext = ".md", tmpdir = "temp-artefacts")
+  tf <- tempfile(pattern = "markdown-example", fileext = ".md",
+        tmpdir = "temp-artefacts")
   cat(md_string, file = tf)
   expect_silent(
     outfile <- rmarkdown::render(tf,
-            output_format = output_format,
-            output_file = NULL,
-            output_dir = "temp-artefacts",
+            output_format     = rmarkdown::html_document(
+              pandoc_args = c("--metadata", "title=\"Avoid warnings\"")),
+            output_file       = NULL,
+            output_dir        = "temp-artefacts",
             intermediates_dir = "temp-artefacts",
-            clean = TRUE,
-            quiet = TRUE
+            clean             = TRUE,
+            quiet             = TRUE
           )
   ) # no error
 }
