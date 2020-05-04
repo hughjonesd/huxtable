@@ -61,7 +61,7 @@ huxtable_env$huxtable_default_attrs <- list(
         position            = "center",
         tabular_environment = NA,
         label               = NA,
-        latex_float         = "h",
+        latex_float         = "ht",
         escape_contents     = TRUE,
         na_string           = "",
         bold                = FALSE,
@@ -924,9 +924,10 @@ make_getter_setters("label", "table", check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector, used by LaTeX for positioning the float.
 #' @template getset-example
-#' @templateVar attr_val "h"
-#' @details Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
-#' floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
-#' TeX `float` package.
+#' @templateVar attr_val "b"
+#' @details
+#' Quick reference: "h" here, "h!" definitely here, "t" top of page, "ht" here
+#' or at top, "b" bottom of page, "p" page of floats. See LaTeX documentation
+#' for more details.
 NULL
 make_getter_setters("latex_float", "table", check_fun = is.character)

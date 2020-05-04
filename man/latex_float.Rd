@@ -14,7 +14,7 @@ set_latex_float(ht, value)
 \item{ht}{A huxtable.}
 
 \item{value}{A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} to reset to the default, which is
-\code{"h"}.}
+\code{"ht"}.}
 }
 \value{
 For \code{latex_float}, the \code{latex_float} property.
@@ -24,14 +24,14 @@ For \code{set_latex_float}, the modified huxtable.
 Functions to get or set the table-level \emph{float position for latex} property of a huxtable.
 }
 \details{
-Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
-floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
-TeX \code{float} package.
+Quick reference: "h" here, "h!" definitely here, "t" top of page, "ht" here
+or at top, "b" bottom of page, "p" page of floats. See LaTeX documentation
+for more details.
 }
 \examples{
 
 orig <- latex_float(jams)
-latex_float(jams) <-  "h"
+latex_float(jams) <-  "b"
 latex_float(jams)
 
 latex_float(jams) <- orig
