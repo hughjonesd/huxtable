@@ -9,7 +9,7 @@
 \usage{
 number_format(ht)
 number_format(ht) <- value
-set_number_format(ht, row, col, value, byrow = FALSE)
+set_number_format(ht, row, col, value)
 map_number_format(ht, row, col, fn)
 }
 \arguments{
@@ -24,8 +24,6 @@ Note that setting to \code{NA} does not reset to the default.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{number_format}, the \code{number_format} property.

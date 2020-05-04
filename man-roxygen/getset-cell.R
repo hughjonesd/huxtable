@@ -25,7 +25,7 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @usage
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
-#' set_<%= attr_name %>(ht, row, col, value, byrow = FALSE)
+#' set_<%= attr_name %>(ht, row, col, value)
 #' map_<%= attr_name %>(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
@@ -38,7 +38,6 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
-#' @param byrow Deprecated. Use [by_cols()] instead.
 #'
 #' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
 #' For `set_<%= attr_name %>` and `map_<%= attr_name %>`, the modified huxtable.

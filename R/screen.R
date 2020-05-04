@@ -195,7 +195,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption("width") / 4
   align <- real_align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
     warning("Can't vary column alignment in markdown; using first row")
-  ht <- set_align(ht, align[1, ], byrow = TRUE)
+  ht <- map_align(ht, by_cols(align[1,]))
 
   charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1,
         outer_border_v = 1, min_width = min_width, max_width = max_width, markdown = TRUE)

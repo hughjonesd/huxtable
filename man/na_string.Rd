@@ -9,7 +9,7 @@
 \usage{
 na_string(ht)
 na_string(ht) <- value
-set_na_string(ht, row, col, value, byrow = FALSE)
+set_na_string(ht, row, col, value)
 map_na_string(ht, row, col, fn)
 }
 \arguments{
@@ -24,8 +24,6 @@ Set to \code{NA} to reset to the default, which is \code{""}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{na_string}, the \code{na_string} property.

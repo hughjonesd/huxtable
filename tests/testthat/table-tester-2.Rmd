@@ -139,7 +139,7 @@ ht
 
 ```{r}
 ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text' , 'text'))
-ht <- set_valign(ht, c('top', 'top', 'middle', 'bottom'), byrow = TRUE)
+ht <- map_valign(ht, by_cols('top', 'top', 'middle', 'bottom'))
 wrap(ht)[1,] <- TRUE
 wrap(ht)[,1] <- TRUE
 width(ht) <- .6

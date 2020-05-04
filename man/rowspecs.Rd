@@ -10,7 +10,7 @@ This help page describes how to use the \code{row} and \code{col} arguments in \
 
 
 The \verb{set_*} functions for cell properties all have arguments like this:
-\code{set_property(ht, row, col, value, byrow = FALSE)}.
+\code{set_property(ht, row, col, value)}.
 
 You can treat \code{row} and \code{col} arguments like arguments for
 \link[=[.data.frame]{data frame subsetting}. For example, you can use \code{row = 1:3} to get the
@@ -25,7 +25,6 @@ There are also a few extra tricks you can use:
 \item Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
 specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
-\item Set \code{byrow = TRUE} to set properties by row rather than by column.
 }
 }
 
@@ -35,7 +34,7 @@ specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for
 How the row and col arguments are parsed depends on the number of arguments passed to the \verb{set_*}
 function.
 \itemize{
-\item If there are two arguments (excluding \code{byrow}) then the second argument is taken as the
+\item If there are two arguments then the second argument is taken as the
 value and is set for all rows and columns.
 \item If there are four arguments:
 \itemize{

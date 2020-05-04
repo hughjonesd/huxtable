@@ -94,7 +94,7 @@ final <- function(n = 1) {
 #' @section The basics:
 #'
 #' The `set_*` functions for cell properties all have arguments like this:
-#' `set_property(ht, row, col, value, byrow = FALSE)`.
+#' `set_property(ht, row, col, value)`.
 #'
 #' You can treat `row` and `col` arguments like arguments for
 #' \link[=[.data.frame]{data frame subsetting}. For example, you can use `row = 1:3` to get the
@@ -110,14 +110,13 @@ final <- function(n = 1) {
 #' * Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 #' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
 #'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
-#' * Set `byrow = TRUE` to set properties by row rather than by column.
 #'
 #' @section The gory details:
 #'
 #' How the row and col arguments are parsed depends on the number of arguments passed to the `set_*`
 #' function.
 #'
-#' * If there are two arguments (excluding `byrow`) then the second argument is taken as the
+#' * If there are two arguments then the second argument is taken as the
 #'     value and is set for all rows and columns.
 #' * If there are four arguments:
 #'     * If `row` or `col` is numeric, character or logical, it is evaluated just as in standard

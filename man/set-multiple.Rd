@@ -13,19 +13,19 @@
 \alias{map_all_padding}
 \title{Set left, right, top and bottom properties}
 \usage{
-set_all_borders(ht, row, col, value, byrow = FALSE)
+set_all_borders(ht, row, col, value)
 
 map_all_borders(ht, row, col, fn)
 
-set_all_border_colors(ht, row, col, value, byrow = FALSE)
+set_all_border_colors(ht, row, col, value)
 
 map_all_border_colors(ht, row, col, fn)
 
-set_all_border_styles(ht, row, col, value, byrow = FALSE)
+set_all_border_styles(ht, row, col, value)
 
 map_all_border_styles(ht, row, col, fn)
 
-set_all_padding(ht, row, col, value, byrow = FALSE)
+set_all_padding(ht, row, col, value)
 
 map_all_padding(ht, row, col, fn)
 }
@@ -37,8 +37,6 @@ map_all_padding(ht, row, col, fn)
 \item{col}{An optional column specifier.}
 
 \item{value}{Value(s) to set. Set to \code{NA} to reset to the default.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }

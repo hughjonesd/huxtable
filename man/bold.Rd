@@ -13,17 +13,17 @@
 \usage{
 bold(ht)
 bold(ht) <- value
-set_bold(ht, row, col, value, byrow = FALSE)
+set_bold(ht, row, col, value)
 map_bold(ht, row, col, fn)
 
 bold(ht)
 bold(ht) <- value
-set_bold(ht, row, col, value, byrow = FALSE)
+set_bold(ht, row, col, value)
 map_bold(ht, row, col, fn)
 
 italic(ht)
 italic(ht) <- value
-set_italic(ht, row, col, value, byrow = FALSE)
+set_italic(ht, row, col, value)
 map_italic(ht, row, col, fn)
 }
 \arguments{
@@ -38,8 +38,6 @@ Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{bold}, the \code{bold} property.

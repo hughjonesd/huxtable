@@ -75,7 +75,7 @@ NULL
 #' @examples
 #' ht <- huxtable(a = 1:3, b = 1:3)
 #' set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
+set_all_borders <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border")
 }
 
@@ -90,7 +90,7 @@ map_all_borders <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_border_colors(ht, "red")
-set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
+set_all_border_colors <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_color")
 }
 
@@ -105,7 +105,7 @@ map_all_border_colors <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_border_styles(ht, "double")
-set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
+set_all_border_styles <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_style")
 }
 
@@ -120,7 +120,7 @@ map_all_border_styles <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
-set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
+set_all_padding <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_padding")
 }
 

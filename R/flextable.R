@@ -1,15 +1,4 @@
 
-
-
-#' @rdname as_flextable
-#'
-#' @export
-as_FlexTable <- function(x, ...) {
-  .Deprecated(new = "as_flextable", package = "huxtable")
-  as_flextable(x, ...)
-}
-
-
 #' Convert a huxtable for Word/Powerpoint
 #'
 #' Huxtables can be converted to [flextable::flextable()] objects, for use in Word and Powerpoint documents.
@@ -29,7 +18,6 @@ as_FlexTable <- function(x, ...) {
 #' `as_FlexTable` is deprecated and calls `as_flextable` with a warning.
 #'
 #' Properties are supported, with the following exceptions:
-
 #' * Rotation of 0, 90 or 270 is supported.
 #' * Non-numeric widths and heights are not supported. Table heights are treated
 #'   as a proportion of 9 inches; table widths are treated as a proportion of 6

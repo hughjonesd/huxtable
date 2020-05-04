@@ -10,7 +10,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
 * The deprecated 3-argument form of `set_*` functions has been removed. Instead,
-  use `map_*`. `where()` has been removed.
+  use `map_*`. 
+* The `where()` function has been removed.
+* The deprecated `byrow` argument to `set_*` functions has been removed. Instead,
+  use `map_*` and `by_cols()`.
 * Deprecated `error_style` and `pad_decimal` arguments have been removed from
   `huxreg`.
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.

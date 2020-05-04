@@ -21,27 +21,27 @@
 \usage{
 left_border(ht)
 left_border(ht) <- value
-set_left_border(ht, row, col, value, byrow = FALSE)
+set_left_border(ht, row, col, value)
 map_left_border(ht, row, col, fn)
 
 left_border(ht)
 left_border(ht) <- value
-set_left_border(ht, row, col, value, byrow = FALSE)
+set_left_border(ht, row, col, value)
 map_left_border(ht, row, col, fn)
 
 right_border(ht)
 right_border(ht) <- value
-set_right_border(ht, row, col, value, byrow = FALSE)
+set_right_border(ht, row, col, value)
 map_right_border(ht, row, col, fn)
 
 top_border(ht)
 top_border(ht) <- value
-set_top_border(ht, row, col, value, byrow = FALSE)
+set_top_border(ht, row, col, value)
 map_top_border(ht, row, col, fn)
 
 bottom_border(ht)
 bottom_border(ht) <- value
-set_bottom_border(ht, row, col, value, byrow = FALSE)
+set_bottom_border(ht, row, col, value)
 map_bottom_border(ht, row, col, fn)
 }
 \arguments{
@@ -56,8 +56,6 @@ Set to \code{NA} to reset to the default, which is \code{0}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{left_border}, the \code{left_border} property.

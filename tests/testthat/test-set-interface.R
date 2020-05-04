@@ -58,35 +58,17 @@ test_that("set_* works with row and column functions", {
 })
 
 
-test_that("set_* works with byrow", {
-  ht <- hux(a = 1:2, b = 1:2)
-  ht <- set_font(ht, 1:2, 1:2, c("times", "palatino"), byrow = TRUE)
-  expect_equivalent(font(ht), matrix(c("times", "times", "palatino", "palatino"), 2, 2))
-
-  ht <- hux(a = 1:2, b = 1:2, d = 1:2)
-  ht <- set_font(ht, 2, 1:2, c("times", "palatino"), byrow = TRUE)
-  expect_equivalent(font(ht), matrix(c(NA, "times", NA, "palatino", NA, NA), 2, 3))
-
-  ht <- hux(a = 1:2, b = 1:2)
-  ht <- set_font(ht, c("times", "palatino"), byrow = TRUE)
-  expect_equivalent(font(ht), matrix(c("times", "times", "palatino", "palatino"), 2, 2))
-})
-
-
 test_that("set_*: 2 argument form", {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_font(ht, "times")
   expect_equivalent(font(ht2), matrix("times", 2, 2))
   ht3 <- set_font(ht, value = "times")
   expect_equivalent(font(ht3), matrix("times", 2, 2))
-  ht4 <- set_font(ht, value = c("times", "arial"), byrow = TRUE)
-  expect_equivalent(font(ht4), matrix(c("times", "times", "arial", "arial"), 2, 2))
-  ht5 <- set_font(ht, c("times", "arial"), byrow = TRUE)
-  expect_equivalent(font(ht5), matrix(c("times", "times", "arial", "arial"), 2, 2))
-  ht6 <- set_col_width(ht, c(.6, .4))
-  expect_equivalent(col_width(ht6), c(.6, .4))
-  ht7 <- set_row_height(ht, c(.6, .4))
-  expect_equivalent(row_height(ht7), c(.6, .4))
+
+  ht4 <- set_col_width(ht, c(.6, .4))
+  expect_equivalent(col_width(ht4), c(.6, .4))
+  ht5 <- set_row_height(ht, c(.6, .4))
+  expect_equivalent(row_height(ht5), c(.6, .4))
 })
 
 
@@ -217,7 +199,6 @@ test_that("set_contents works", {
   ht <- hux(1:3, 1:3)
 
   expect_equivalent(set_contents(ht, 1:6), hux(1:3, 4:6))
-  expect_equivalent(set_contents(ht, 1:6, byrow = TRUE), hux(c(1, 3, 5), c(2, 4, 6)))
   expect_equivalent(set_contents(ht, 1, 1, 0), hux(c(0, 2:3), 1:3))
   expect_equivalent(set_contents(ht, 1, 1, 0), hux(c(0, 2:3), 1:3))
   expect_equivalent(set_contents(ht, 2:3, 2, 3:2), hux(1:3, c(1, 3, 2)))
@@ -226,7 +207,6 @@ test_that("set_contents works", {
   align(ht) <- "right"
   test_props_same <- function(ht2) expect_equivalent(align(ht2), align(ht))
   test_props_same(set_contents(ht, 1:6))
-  test_props_same(set_contents(ht, 1:6, byrow = TRUE))
   test_props_same(set_contents(ht, 1, 1, 0))
   test_props_same(set_contents(ht, 1, 1, 0))
   test_props_same(set_contents(ht, 2:3, 2, 3:2))

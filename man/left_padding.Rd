@@ -21,27 +21,27 @@
 \usage{
 left_padding(ht)
 left_padding(ht) <- value
-set_left_padding(ht, row, col, value, byrow = FALSE)
+set_left_padding(ht, row, col, value)
 map_left_padding(ht, row, col, fn)
 
 left_padding(ht)
 left_padding(ht) <- value
-set_left_padding(ht, row, col, value, byrow = FALSE)
+set_left_padding(ht, row, col, value)
 map_left_padding(ht, row, col, fn)
 
 right_padding(ht)
 right_padding(ht) <- value
-set_right_padding(ht, row, col, value, byrow = FALSE)
+set_right_padding(ht, row, col, value)
 map_right_padding(ht, row, col, fn)
 
 top_padding(ht)
 top_padding(ht) <- value
-set_top_padding(ht, row, col, value, byrow = FALSE)
+set_top_padding(ht, row, col, value)
 map_top_padding(ht, row, col, fn)
 
 bottom_padding(ht)
 bottom_padding(ht) <- value
-set_bottom_padding(ht, row, col, value, byrow = FALSE)
+set_bottom_padding(ht, row, col, value)
 map_bottom_padding(ht, row, col, fn)
 }
 \arguments{
@@ -56,8 +56,6 @@ Set to \code{NA} to reset to the default, which is \code{6}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{left_padding}, the \code{left_padding} property.

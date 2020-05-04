@@ -9,7 +9,7 @@
 \usage{
 contents(ht)
 contents(ht) <- value
-set_contents(ht, row, col, value, byrow = FALSE)
+set_contents(ht, row, col, value)
 map_contents(ht, row, col, fn)
 }
 \arguments{
@@ -22,8 +22,6 @@ map_contents(ht, row, col, fn)
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \description{
 \code{set_contents()} is a convenience function to change the cell contents of a huxtable within

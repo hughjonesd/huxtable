@@ -9,12 +9,12 @@
 \usage{
 font(ht)
 font(ht) <- value
-set_font(ht, row, col, value, byrow = FALSE)
+set_font(ht, row, col, value)
 map_font(ht, row, col, fn)
 
 font(ht)
 font(ht) <- value
-set_font(ht, row, col, value, byrow = FALSE)
+set_font(ht, row, col, value)
 map_font(ht, row, col, fn)
 }
 \arguments{
@@ -29,8 +29,6 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{font}, the \code{font} property.

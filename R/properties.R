@@ -123,23 +123,17 @@ make_getter_setters <- function(
 
   funs[[alt_setter]] <- switch(attr_type,
         cell = eval(bquote(
-          function(ht, row, col, value, byrow = FALSE) {
+          function(ht, row, col, value) {
             assert_that(is_huxtable(ht))
-            nargs <- nargs()
-            if (! missing(byrow)) nargs <- nargs - 1
-
-            if (nargs == 2) {
+            if (nargs() == 2) {
               if (missing(value)) value <- row
               row <- seq_len(nrow(ht))
               col <- seq_len(ncol(ht))
             }
+
             rc <- list()
             rc$row <- get_rc_spec(ht, row, 1)
             rc$col <- get_rc_spec(ht, col, 2)
-            if (byrow) {
-              nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
-              value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
-            }
             .(attr_symbol)(ht)[rc$row, rc$col] <- value
 
             ht
@@ -762,7 +756,6 @@ make_getter_setters("number_format", "cell")
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
-#' @param byrow Deprecated. Use [by_cols()] instead.
 #'
 #' @evalNamespace make_exports("contents", with_map = TRUE)
 #' @evalNamespace make_namespace_S3_entries("contents")
