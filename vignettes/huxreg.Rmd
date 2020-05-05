@@ -121,7 +121,11 @@ valid value is `"nobs"`, which returns the number of observations from the regre
 `statistics` vector has names, these will be used for row headings:
 
 ```{r}
-broom::glance(lm1)
+gl <- as_hux(broom::glance(lm1))
+rbind(gl[,1:3], gl[,4:6], gl[,7:9]) %>% set_bold(odds, everywhere)
+```
+
+```{r}
 huxreg(lm1, lm3, statistics = c('# observations' = 'nobs', 'R squared' = 'r.squared', 'F statistic' = 'statistic',
   'P value' = 'p.value'))
 ```

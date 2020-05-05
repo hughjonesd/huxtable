@@ -22,36 +22,46 @@ One Q: if these changes are that radical, should it be "huxtable2" or even some 
 
 * `caption_pos()` should just be top or bottom. What sort of pervert puts
   the table on the left but the caption on the right?
-
+* `caption_Width()`
+* subcaption option?
+* transparent colours in HTML, RTF, docx?
 * Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
-  borders and less intense headers
-
-* Change `header_col` to default to `FALSE` in themes.
-  
+  borders and less intense headers.
+* Merge in the headers-property branch
+  - Change `theme_basic()` to simply bold headers
+* Check any interesting stuff from v5.0-devel branch
 * In general, when properties are unset, pick them dynamically for "good defaults", rather
   than setting a predictable default.
   - This is a better more general solution than `autoformat`, which could maybe be retired....
-  - Example: in PDF, guessing width based on number of characters seems wise, unless we 
-    move to tabu and that fixes the width/position problems
-    
-* Consider move to tabu package? Looks easy for dashed lines... (5.0)
-  - check that tabu can handle multirow and multicol with background colors
-  - also check https://tex.stackexchange.com/questions/48280/longtabu-and-floats-wrong-table-breaks-on-pages-with-floats
-  - move to tabu for easier sizing, description of vertical lines and vertical padding;
-  - continue to use hhline for horiz non-dashed lines;
-  - use tabucline for horiz dashed lines; always merge when possible, and if not 
-    (ie if color/width changes), warn that lines will "step" down the page
+* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and
+  who uses it? 
+  - though the problem is having to keep to `options(screen)`, not
+    the fact that it is an argument.
 
-* Consider option to use tikz?
-  - See the "matrix" package in the tikz manual, p 698
-  - Allows newlines in cells
-  - Borders may not be easy
-  - Need to understand whole tikz package :-)
-  - Implement as a different function? Or if an option is set?
-  - Requires "pgf" tex library 
+* let to_screen show table position
 
-* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and who uses it?
-  - though the problem is having to keep to `options(screen)`, not the fact that it is an argument.
+
+
+Future thoughts
+===============
+
+* Future
+
+* Separate out table format representation and output from table creation.
+* Create a "textable" package which handles representation
+  - just basic as_textable methods for data frames etc.
+  - representation probably as a list with rows, columns, cells, each
+    with subcomponents - so content is just another subcomponent
+  - maybe R6
+* Output formats: 
+  - allow different engines for different output formats (and engines could
+    have options, e.g. use_cline vs use_hhline)
+  - e.g. tikz (see "matrix" package in tikz manual)
+  - maybe separate output formats into different packages?
+
+  
+
+
   
 * Fix problem of different classes in padding, col_widths etc. (5.0)
   - Bring back is_a_number

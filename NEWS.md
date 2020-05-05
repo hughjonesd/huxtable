@@ -58,13 +58,15 @@ hux(head(iris))
   
 * New functions `merge_across()` and `merge_down()` to create multicolumn
   or multirow cells.
-* New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
-  package will have an `as_huxtable()` method. 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Improvements to `as_flextable()`.
 * Improvements to `quick_pptx()` (thanks @davidgohel).
 * Bugfixes for `options(huxtable.use_fontspec = TRUE)`.
 
+## Other news
+
+New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
+package will have an `as_huxtable()` method. 
 
 # huxtable 4.7.1
 
