@@ -26,8 +26,8 @@ NULL
 #' Huxtable tries to guess appropriate widths and height for rows and columns; numeric [width()] and
 #' [height()] are treated as scaling factors.
 #'
-#' Contents are only stored as numbers if a whole column is numeric as defined by [is_a_number()];
-#' otherwise they are stored as text.
+#' Contents are only stored as numbers if a whole column is "numeric", i.e. can
+#' be converted by [as.numeric()]). Otherwise, they are stored as text.
 #'
 #' @return An object of class `Workbook`.
 #' @export
