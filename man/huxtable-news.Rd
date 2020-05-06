@@ -64,6 +64,8 @@ So you can write e.g.
 \item New: by default, huxtable sets labels from the current knitr chunk
 label, if there is one. This is consistent with \code{kable()}. In
 bookdown, you can then do e.g.
+\item The one-argument form of \code{[} now works for huxtables just as it does
+for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
 }\if{html}{\out{
 <!-- end list -->
 }}
@@ -79,15 +81,19 @@ behaviour.
 \itemize{
 \item New functions \code{merge_across()} and \code{merge_down()} to create
 multicolumn or multirow cells.
-\item New versions of the
-\href{https://cran.r-project.org/package=gtsummary}{gtsummary} package
-will have an \code{as_huxtable()} method.
 \item huxtable no longer supports dplyr versions less than 0.7.0 (released
 in mid-2017).
 \item Improvements to \code{as_flextable()}.
 \item Improvements to \code{quick_pptx()} (thanks @davidgohel).
 \item Bugfixes for \code{options(huxtable.use_fontspec = TRUE)}.
 }
+}
+
+\subsection{Other news}{
+
+New versions of the
+\href{https://cran.r-project.org/package=gtsummary}{gtsummary} package will
+have an \code{as_huxtable()} method.
 }
 }
 

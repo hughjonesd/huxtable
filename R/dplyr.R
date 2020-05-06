@@ -46,19 +46,22 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' Dplyr verbs for huxtable
 #'
 #' Huxtable can be used with dplyr verbs [dplyr::select()], [dplyr::rename()],
-#' [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()] and
-#' [dplyr::transmute()]. These will return huxtables. Other verbs like [dplyr::summarize()] will
-#' simply return data frames as normal; [dplyr::pull()] will return a vector. `mutate` has an extra
-#' option, detailed below.
+#' [dplyr::relocate()], [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()]
+#' and [dplyr::transmute()]. These will return huxtables. Other verbs like
+#' [dplyr::summarize()] will simply return data frames as normal;
+#' [dplyr::pull()] will return a vector. `mutate` has an extra option, detailed
+#' below.
 #'
 #' @param .data A huxtable.
 #' @param ... Arguments passed to [dplyr::mutate()].
-#' @param copy_cell_props Logical: copy cell and column properties from existing columns.
+#' @param copy_cell_props Logical: copy cell and column properties from existing
+#'   columns.
 #'
-#' @details
-#' If `mutate` creates new columns, and the argument `copy_cell_props` is missing or `TRUE`, then cell
-#' and column properties will be copied from existing columns to their left, if there are any. Otherwise, they will be the
-#' standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
+#' @details If `mutate` creates new columns, and the argument `copy_cell_props`
+#' is missing or `TRUE`, then cell and column properties will be copied from
+#' existing columns to their left, if there are any. Otherwise, they will be the
+#' standard defaults. Row and table properties, and properties of cells in
+#' existing columns, remain unchanged.
 #'
 #' @rdname dplyr-verbs
 #' @aliases mutate dplyr-verbs
@@ -130,25 +133,3 @@ slice_.huxtable <- function (.data, ..., .dots) {
 
 slice.huxtable <- function (.data, ...) {}
 body(slice.huxtable) <- body(slice_.huxtable)
-
-
-select_.huxtable <- function (.data, ..., .dots) {
-  ht <- .data
-  .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
-  colnames(.data) <- colnames(ht)
-  result <- NextMethod()
-  ht <- ht[, na.omit(match(result[1, ], colnames(ht)))]
-  colnames(ht) <- colnames(result)
-
-  ht
-}
-
-
-select.huxtable <- function(.data, ...) {}
-body(select.huxtable) <- body(select_.huxtable)
-
-
-rename_.huxtable <- select_.huxtable
-
-
-rename.huxtable <- select.huxtable

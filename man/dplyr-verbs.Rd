@@ -13,19 +13,23 @@ mutate.huxtable(.data, ..., copy_cell_props = TRUE)
 
 \item{...}{Arguments passed to \code{\link[dplyr:mutate]{dplyr::mutate()}}.}
 
-\item{copy_cell_props}{Logical: copy cell and column properties from existing columns.}
+\item{copy_cell_props}{Logical: copy cell and column properties from existing
+columns.}
 }
 \description{
 Huxtable can be used with dplyr verbs \code{\link[dplyr:select]{dplyr::select()}}, \code{\link[dplyr:rename]{dplyr::rename()}},
-\code{\link[dplyr:slice]{dplyr::slice()}}, \code{\link[dplyr:arrange]{dplyr::arrange()}}, \code{\link[dplyr:mutate]{dplyr::mutate()}} and
-\code{\link[dplyr:transmute]{dplyr::transmute()}}. These will return huxtables. Other verbs like \code{\link[dplyr:summarize]{dplyr::summarize()}} will
-simply return data frames as normal; \code{\link[dplyr:pull]{dplyr::pull()}} will return a vector. \code{mutate} has an extra
-option, detailed below.
+\code{\link[dplyr:relocate]{dplyr::relocate()}}, \code{\link[dplyr:slice]{dplyr::slice()}}, \code{\link[dplyr:arrange]{dplyr::arrange()}}, \code{\link[dplyr:mutate]{dplyr::mutate()}}
+and \code{\link[dplyr:transmute]{dplyr::transmute()}}. These will return huxtables. Other verbs like
+\code{\link[dplyr:summarize]{dplyr::summarize()}} will simply return data frames as normal;
+\code{\link[dplyr:pull]{dplyr::pull()}} will return a vector. \code{mutate} has an extra option, detailed
+below.
 }
 \details{
-If \code{mutate} creates new columns, and the argument \code{copy_cell_props} is missing or \code{TRUE}, then cell
-and column properties will be copied from existing columns to their left, if there are any. Otherwise, they will be the
-standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
+If \code{mutate} creates new columns, and the argument \code{copy_cell_props}
+is missing or \code{TRUE}, then cell and column properties will be copied from
+existing columns to their left, if there are any. Otherwise, they will be the
+standard defaults. Row and table properties, and properties of cells in
+existing columns, remain unchanged.
 }
 \examples{
 ht <- hux(a = 1:5, b = 1:5, c = 1:5, d = 1:5, add_colnames = FALSE)

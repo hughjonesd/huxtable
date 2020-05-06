@@ -7,6 +7,17 @@ test_that("Subsetting preserves rownames", {
 })
 
 
+test_that("One-argument [", {
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  expect_silent(ht1 <- ht[1])
+  expect_identical(ht1, ht[, 1])
+  expect_silent(ht12 <- ht[1:2])
+  expect_identical(ht12, ht[, 1:2])
+  expect_silent(ht_all <- ht[])
+  expect_identical(ht, ht_all)
+})
+
+
 test_that("Subsetting cuts rowspan and colspan", {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   rowspan(ht)[1, 1] <- 3
