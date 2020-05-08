@@ -133,3 +133,30 @@ slice_.huxtable <- function (.data, ..., .dots) {
 
 slice.huxtable <- function (.data, ...) {}
 body(slice.huxtable) <- body(slice_.huxtable)
+
+
+# The following functions will only be registered with dplyr if
+# packageVersion("dplyr") <= "0.8.5".
+# After that, we can just use the dplyr builtins. (Until they break
+# subclasses again....)
+
+select_.huxtable <- function (.data, ..., .dots) {
+  ht <- .data
+  .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
+  colnames(.data) <- colnames(ht)
+  result <- NextMethod()
+  ht <- ht[, na.omit(match(result[1, ], colnames(ht)))]
+  colnames(ht) <- colnames(result)
+
+  ht
+}
+
+
+select.huxtable <- function(.data, ...) {}
+body(select.huxtable) <- body(select_.huxtable)
+
+
+rename_.huxtable <- select_.huxtable
+
+
+rename.huxtable <- select.huxtable

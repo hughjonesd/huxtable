@@ -7,7 +7,6 @@ TODO
 Priority changes
 ================
 
-* Start using knitr::is_latex_output() etc. to detect output types (?)
 
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
@@ -17,8 +16,6 @@ Priority changes
 Changes for 5.0
 ===============
 
-One Q: if these changes are that radical, should it be "huxtable2" or even some other name
-(and work with others?)
 
 * `caption_pos()` should just be top or bottom. What sort of pervert puts
   the table on the left but the caption on the right?
