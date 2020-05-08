@@ -19,7 +19,13 @@ Changes for 5.0
 
 * `caption_pos()` should just be top or bottom. What sort of pervert puts
   the table on the left but the caption on the right?
-* `caption_Width()`
+* `caption_Width()`.
+* Ability to `restack()` a table sideways or lengthways, and to `split` a table.
+  - `restack_longer(ht, ncol, width)` where `ncol` is the number of columns
+    of the new result; or `width` is the maximum width?
+  - `restack_wider(ht, nrow, height)` similar
+  - `split_across` and `split_down` would do the split but not the restacking,
+    and would return a list of huxtables.
 * subcaption option?
 * transparent colours in HTML, RTF, docx?
 * Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
