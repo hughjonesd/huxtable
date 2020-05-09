@@ -79,7 +79,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
       center = "centering",
       right  = "raggedleft"
     )
-    if (is.numeric(cap_width)) cap_width <- sprintf("%s\\textwidth", cap_width)
+    if (! is.na(as.numeric(cap_width))) cap_width <- sprintf("%s\\textwidth", cap_width)
     cap_width_tex <- if (! is.na(cap_width))  sprintf(",width=%s", cap_width) else ""
     sprintf("\\captionsetup{justification=%s,singlelinecheck=off%s}\n\\caption{%s}\n",
           cap_setup, cap_width_tex, cap)
