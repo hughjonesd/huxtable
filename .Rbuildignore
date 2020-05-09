@@ -26,3 +26,4 @@ logo\.xcf
 ^delete-appveyor-cache\.sh$
 ^CRAN-RELEASE$
 tutorials
+^data-raw$
