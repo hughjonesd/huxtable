@@ -79,8 +79,12 @@ to_html.huxtable <- function(ht, ...) {
     hpos <- get_caption_hpos(ht)
 
     if (! is.na(cap_width <- caption_width(ht))) {
-      if (is.numeric(cap_width)) cap_width <- paste0(cap_width * 100, "%")
+      if (! is.na(as.numeric(cap_width))) {
+        cap_width <- paste0(as.numeric(cap_width) * 100, "%")
+      }
       cap_width <- sprintf("width: %s;", cap_width)
+    } else {
+      cap_width <- ""
     }
     cap <- sprintf('<caption style="caption-side: %s; text-align: %s;%s">%s</caption>',
           vpos, hpos, cap_width, cap)
