@@ -70,8 +70,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   table_env[1] <- sprintf(table_env[1], latex_table_width(ht))
   table_env <- paste0("\n", table_env, "\n")
 
-  lab <- make_label(ht)
-  cap <- make_latex_caption(ht, lab)
+  cap <- build_latex_caption(ht)
 
   pos_text <- switch(position(ht),
     wrapleft = ,
@@ -86,7 +85,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
   tpt <- c("\\begin{threeparttable}\n", "\n\\end{threeparttable}")
 
-  res <- if (is.na(cap_width)) {
+  res <- if (is.na(caption_width(ht))) {
     nest_strings(table_env, pos_text, tpt, cap, tabular)
   } else {
     nest_strings(table_env, cap, pos_text, tabular)
@@ -97,7 +96,8 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 }
 
 
-make_latex_caption <- function (ht, lab) {
+build_latex_caption <- function (ht, lab) {
+  lab <- make_label(ht)
   if (is.na(cap <- make_caption(ht, lab, "latex"))) {
     cap <- ""
   } else {
@@ -116,9 +116,9 @@ make_latex_caption <- function (ht, lab) {
       }
       cap_margin_width <- paste("\\textwidth - ", cap_width)
       cap_margins <- switch(hpos,
-        left = c(cap_margin_width, ""),
+        right = c(cap_margin_width, "0pt"),
         center = rep(paste0("(", cap_margin_width, ")/2"), 2),
-        right  = c("", cap_margin_width)
+        left  = c("0pt", cap_margin_width)
       )
       cap_margins <- sprintf("margin={%s,%s},", cap_margins[1], cap_margins[2])
     }
