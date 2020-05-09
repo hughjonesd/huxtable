@@ -71,22 +71,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   table_env <- paste0("\n", table_env, "\n")
 
   lab <- make_label(ht)
-  cap_width <- caption_width(ht)
-  cap <- if (is.na(cap <- make_caption(ht, lab, "latex"))) "" else {
-    hpos <- get_caption_hpos(ht)
-    cap_setup <- switch(hpos,
-      left   = "raggedright",
-      center = "centering",
-      right  = "raggedleft"
-    )
-    if (! is.na(suppressWarnings(as.numeric(cap_width)))) {
-      cap_width <- sprintf("%s\\textwidth", cap_width)
-    }
-    cap_width_tex <- if (! is.na(cap_width))  sprintf(",width=%s", cap_width) else ""
-    sprintf("\\captionsetup{justification=%s,singlelinecheck=off%s}\n\\caption{%s}\n",
-          cap_setup, cap_width_tex, cap)
-  }
-  lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
+  cap <- make_latex_caption(ht, lab)
 
   pos_text <- switch(position(ht),
     wrapleft = ,
@@ -96,7 +81,6 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     right  = c("\\begin{raggedleft}\n",  "\\par\\end{raggedleft}\n")
   )
 
-  cap <- paste(cap, lab)
   cap_top <- grepl("top", caption_pos(ht))
   cap <- if (cap_top) c(cap, "") else c("", cap)
 
@@ -113,7 +97,45 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 }
 
 
-build_tabular <- function(ht) {
+make_latex_caption <- function (ht, lab) {
+  if (is.na(cap <- make_caption(ht, lab, "latex"))) {
+    cap <- ""
+  } else {
+    hpos <- get_caption_hpos(ht)
+    cap_just <- switch(hpos,
+      left   = "raggedright",
+      center = "centering",
+      right  = "raggedleft"
+    )
+    cap_width <- caption_width(ht)
+    if (is.na(cap_width)) {
+      cap_margins <- ""
+    } else {
+      if (! is.na(suppressWarnings(as.numeric(cap_width)))) {
+        cap_width <- sprintf("%s\\textwidth", cap_width)
+      }
+      cap_margin_width <- paste("\\textwidth - ", cap_width)
+      cap_margins <- switch(hpos,
+        left = c(cap_margin_width, ""),
+        center = rep(paste0("(", cap_margin_width, ")/2"), 2),
+        right  = c("", cap_margin_width)
+      )
+      cap_margins <- sprintf("margin={%s,%s},", cap_margins[1], cap_margins[2])
+    }
+
+    cap <- sprintf(
+            "\\captionsetup{justification=%s,%ssinglelinecheck=off}\n\\caption{%s}\n",
+            cap_just, cap_margins, cap)
+  }
+
+  lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
+  cap <- paste(cap, lab)
+
+  return(cap)
+}
+
+
+build_tabular <- function (ht) {
   if (! check_positive_dims(ht)) return("")
 
   ## PREPARE EMPTY PARTS -------
