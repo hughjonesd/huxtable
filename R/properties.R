@@ -14,7 +14,7 @@ huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_co
 huxtable_col_attrs <- c("col_width")
 huxtable_row_attrs <- c("row_height")
 huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
-  "tabular_environment", "label", "latex_float")
+      "caption_width", "tabular_environment", "label", "latex_float")
 
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
@@ -58,6 +58,7 @@ huxtable_env$huxtable_default_attrs <- list(
         wrap                = TRUE,
         caption             = NA,
         caption_pos         = "top",
+        caption_width       = NA,
         position            = "center",
         tabular_environment = NA,
         label               = NA,
@@ -815,6 +816,7 @@ make_getter_setters("position", "table", check_values = c("left", "center", "cen
       "wrapleft", "wrapright"),
       extra_code = value[value == "centre"] <- "center")
 
+
 #' @template getset-table
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption position
@@ -823,7 +825,7 @@ make_getter_setters("position", "table", check_values = c("left", "center", "cen
 #' @details
 #' If `caption_pos` is "top" or "bottom", then the horizontal position ("left", "center" or "right")
 #' will be determined by the huxtable"s [position()].
-#' @seealso [caption()]
+#' @family caption properties
 #' @examples
 #' caption(jams) <- "Price list"
 #' jams
@@ -835,6 +837,18 @@ make_getter_setters("caption_pos", "table", check_values = c("top", "bottom", "t
         value[value == "topcentre"] <- "topcenter"
         value[value == "bottomcentre"] <- "bottomcenter"
       })
+
+
+
+#' @template getset-table
+#' @templateVar attr_name caption_width
+#' @templateVar attr_desc Caption width
+#' @templateVar value_param_desc
+#' A length-one numeric or character. Numerics are interpreted as percentages of text width. If `NA`, the caption will be set to the same width as the table.
+#'
+#' @family caption properties
+NULL
+make_getter_setters("caption_width", "table")
 
 
 #' @template getset-table
@@ -870,7 +884,7 @@ make_getter_setters("height", "table")
 #' @template getset-example
 #' @templateVar attr_val "An example table"
 #' @templateVar extra jams
-#' @seealso [caption_pos()]
+#' @family caption properties
 #' @examples
 #'
 #' # escape caption characters:

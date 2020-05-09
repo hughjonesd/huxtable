@@ -40,5 +40,8 @@ caption(jams) <- sanitize(
       type = "latex")
 }
 \seealso{
-\code{\link[=caption_pos]{caption_pos()}}
+Other caption properties: 
+\code{\link{caption_pos}()},
+\code{\link{caption_width}()}
 }
+\concept{caption properties}
