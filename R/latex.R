@@ -54,6 +54,8 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
   if (tabular_only) return(maybe_markdown_fence(paste0(commands, tabular)))
 
+  tabular <- paste0("\\setlength{\\tabcolsep}{0pt}\n", tabular)
+
   resize_box <- if (is.na(height <- height(ht))) c("", "") else {
     if (is.numeric(height)) height <- sprintf("%.3g\\textheight", height)
     c(sprintf("\\resizebox*{!}{%s}{", height), "}")
@@ -64,10 +66,12 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           "wrapright" = c("\\begin{wraptable}{r}{%s}", "\\end{wraptable}"),
           c(sprintf("\\begin{table}[%s]", latex_float(ht)), "\\end{table}")
         )
-  table_env[1] <- sprintf(table_env[1], latex_table_width(ht)) # no-op except for wraptable
+  # no-op except for wraptable:
+  table_env[1] <- sprintf(table_env[1], latex_table_width(ht))
   table_env <- paste0("\n", table_env, "\n")
 
   lab <- make_label(ht)
+  cap_width <- caption_width(ht)
   cap <- if (is.na(cap <- make_caption(ht, lab, "latex"))) "" else {
     hpos <- get_caption_hpos(ht)
     cap_setup <- switch(hpos,
@@ -75,32 +79,33 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
       center = "centering",
       right  = "raggedleft"
     )
-    sprintf("\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n", cap_setup, cap)
+    if (is.numeric(cap_width)) cap_width <- sprintf("%s\\textwidth", cap_width)
+    cap_width_tex <- if (! is.na(cap_width))  sprintf(",width=%s", cap_width) else ""
+    sprintf("\\captionsetup{justification=%s,singlelinecheck=off%s}\n\\caption{%s}\n",
+          cap_setup, cap_width_tex, cap)
   }
   lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
 
   pos_text <- switch(position(ht),
     wrapleft = ,
-    left   = c("\\begin{raggedright}", "\\par\\end{raggedright}\n"),
-    center = c("\\begin{centerbox}",   "\\par\\end{centerbox}\n"),
+    left   = c("\\begin{raggedright}\n", "\\par\\end{raggedright}\n"),
+    center = c("\\begin{centerbox}\n",   "\\par\\end{centerbox}\n"),
     wrapright = ,
-    right  = c("\\begin{raggedleft}",  "\\par\\end{raggedleft}\n")
+    right  = c("\\begin{raggedleft}\n",  "\\par\\end{raggedleft}\n")
   )
 
-  res <- if (grepl("top", caption_pos(ht))) paste0(cap, lab, tabular) else paste0(tabular, cap, lab)
-  res <- paste0(
-          commands,
-          table_env[1],
-          pos_text[1],
-          resize_box[1],
-          "\n\\begin{threeparttable}\n",
-          "\\setlength{\\tabcolsep}{0pt}\n",
-          res,
-          "\\end{threeparttable}\n",
-          resize_box[2],
-          pos_text[2],
-          table_env[2]
-        )
+  cap <- paste(cap, lab)
+  cap_top <- grepl("top", caption_pos(ht))
+  cap <- if (cap_top) c(cap, "") else c("", cap)
+
+  tpt <- c("\\begin{threeparttable}\n", "\n\\end{threeparttable}")
+
+  res <- if (is.na(cap_width)) {
+    nest_strings(table_env, pos_text, tpt, cap, tabular)
+  } else {
+    nest_strings(table_env, cap, pos_text, tabular)
+  }
+  res <- paste0(commands, res)
 
   return(maybe_markdown_fence(res))
 }

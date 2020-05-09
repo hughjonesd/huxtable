@@ -22,6 +22,15 @@ blank_where <- function (text, cond) {
 }
 
 
+nest_strings <- function(...) {
+  l <- list(...)
+  rev_l <- rev(l)
+  surround1 <- function(inner, outer) paste0(outer[1], inner, outer[2],
+    collapse = "")
+  Reduce(surround1, rev_l)
+}
+
+
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
 register_s3_method <- function (pkg, generic, class = "huxtable") {
   assert_that(is.string(pkg), is.string(generic))

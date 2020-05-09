@@ -1,5 +1,4 @@
 
-context("quick_xxx functions")
 
 skip_without_latex_deps <- function () {
   skip_on_cran() # CRAN doesn't play nicely with tinytex, it uses full texlive
@@ -8,6 +7,7 @@ skip_without_latex_deps <- function () {
           check_latex_dependencies(quiet = TRUE)
         )
 }
+
 
 test_that("Quick output functions create files", {
   skip_if_not_installed("openxlsx")
@@ -92,6 +92,7 @@ test_that("quick_pdf works with height and width options", {
   expect_silent(quick_pdf(m, dfr, ht, file = tf, height = "4in", width = "4in"))
   expect_true(file.exists(tf))
 })
+
 
 test_that("Quick output functions stop if called non-interactively with no `file` argument", {
   skip_if(interactive())
