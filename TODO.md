@@ -19,7 +19,6 @@ Changes for 5.0
 
 * `caption_pos()` should just be top or bottom. What sort of pervert puts
   the table on the left but the caption on the right?
-* `caption_Width()`.
 * Ability to `restack()` a table sideways or lengthways, and to `split` a table.
   - `restack_longer(ht, ncol, width)` where `ncol` is the number of columns
     of the new result; or `width` is the maximum width?

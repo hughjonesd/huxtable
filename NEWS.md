@@ -59,6 +59,9 @@ hux(head(iris))
   data frames. For example, `ht[2:3]` selects columns 2 and 3.
 * New functions `merge_across()` and `merge_down()` to create multicolumn
   or multirow cells.
+* A new table-level property, `caption_width()`, allows you to set the width of 
+  the caption. The default, `NA`, sets the width equal to the table width.
+* Screen output now displays table position and caption position.
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Improvements to `as_flextable()`.

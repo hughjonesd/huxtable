@@ -84,6 +84,10 @@ behaviour.
 for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
 \item New functions \code{merge_across()} and \code{merge_down()} to create
 multicolumn or multirow cells.
+\item A new table-level property, \code{caption_width()}, allows you to set the
+width of the caption. The default, \code{NA}, sets the width equal to the
+table width.
+\item Screen output now displays table position and caption position.
 \item huxtable supports \code{dplyr::relocate()}, new in dplyr 1.0.0.
 \item huxtable no longer supports dplyr versions less than 0.7.0 (released
 in mid-2017).
