@@ -6,4 +6,4 @@ jams <- hux(
   add_colnames = TRUE
   )
 number_format(jams)[,2] <- 2
-usethis::use_data(jams, overwrite = TRUE, compress = "gzip")
+usethis::use_data(jams, overwrite = TRUE, compress = FALSE)
