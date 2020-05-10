@@ -36,6 +36,7 @@ Properties are supported with the following exceptions:
 \item Decimal padding.
 \item Cell padding.
 \item Table position.
+\item Caption width.
 }
 
 Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link[=width]{width()}} and

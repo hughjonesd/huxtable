@@ -22,7 +22,8 @@
 #'   inches. So e.g. `height(ht) <- 0.5` will give a height of 4.5 inches.
 #' * Table wrap and table position are not supported.
 #' * Border style "double" is not supported and becomes "solid".
-#
+#' * Captions are supported with recent versions of flextable, but not
+#'   [caption_pos()] or [caption_width()].
 #'
 #' @section Challenge:
 #'

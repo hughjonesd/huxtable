@@ -36,6 +36,8 @@ as a proportion of 9 inches; table widths are treated as a proportion of 6
 inches. So e.g. \code{height(ht) <- 0.5} will give a height of 4.5 inches.
 \item Table wrap and table position are not supported.
 \item Border style "double" is not supported and becomes "solid".
+\item Captions are supported with recent versions of flextable, but not
+\code{\link[=caption_pos]{caption_pos()}} or \code{\link[=caption_width]{caption_width()}}.
 }
 }
 \section{Challenge}{

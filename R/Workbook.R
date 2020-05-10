@@ -22,6 +22,7 @@ NULL
 #' * Decimal padding.
 #' * Cell padding.
 #' * Table position.
+#' * Caption width.
 #'
 #' Huxtable tries to guess appropriate widths and height for rows and columns; numeric [width()] and
 #' [height()] are treated as scaling factors.
