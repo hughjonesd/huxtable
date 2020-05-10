@@ -36,5 +36,7 @@ make_caption <- function(ht, label, format = c("html", "latex", "md")) {
           sprintf("(#%s) %s", label, raw_cap)
         }
 
+  # quick hack for LaTeX!
+  attr(cap_with_label, "has_label") <- TRUE
   return(cap_with_label)
 }

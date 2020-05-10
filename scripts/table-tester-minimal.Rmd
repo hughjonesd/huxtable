@@ -39,41 +39,5 @@ long <- 'A rather long row of text which goes on...'
 
 ```{r}
 hux("just to get our dependencies") %>% 
-      set_caption("here is a longish caption... it is very long!") %>%
-      set_caption_pos("topleft") %>% 
-      set_position('left') %>% 
-      set_caption_width(0.5)
+      set_caption("here is a longish caption... it is very long!") 
 ```
-
-
-
-```{r foo, results='asis', echo = FALSE}
-ht <- hux(paste("cell", 1:3), paste("cell", 4:6)) %>% 
-      set_caption("here is a long long long long caption")
-
-poses <- c("topleft", "topright", "top", "bottomleft", "bottomright", "bottom")
-cw <- c(NA, 0.5, "3in")
-tposes <- c("left", "right", "centre")
-
-# poses <- "bottomright"
-# cw <- c(NA, NA)
-# tposes <- "centre"
-
-for (tpos in tposes) {
-  for (pos in poses) {
-    for (cap_width in cw) {
-      raw <- ht %>% 
-            set_caption(paste("pos", tpos, 
-              "caption\\_pos", pos, "caption\\_width", cap_width)
-            ) %>% 
-            set_caption_pos(pos) %>% 
-            set_caption_width(cap_width) %>% 
-            set_position(tpos) 
-      cat(knitr::knit_print(raw))
-      # foo <- try(quick_pdf(raw, file = "tmp.pdf"))
-      # if (inherits(foo, "try-error")) stop(foo, "tp", tpos, "cp", pos, "cw", cap_width)
-    }
-  }
-}
-```
-

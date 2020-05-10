@@ -98,9 +98,12 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
 
 build_latex_caption <- function (ht, lab) {
   lab <- make_label(ht)
+  cap_has_label <- FALSE
+
   if (is.na(cap <- make_caption(ht, lab, "latex"))) {
     cap <- ""
   } else {
+    cap_has_label <- ! is.null(attr(cap, "has_label"))
     hpos <- get_caption_hpos(ht)
     cap_just <- switch(hpos,
       left   = "raggedright",
@@ -128,7 +131,7 @@ build_latex_caption <- function (ht, lab) {
             cap_just, cap_margins, cap)
   }
 
-  lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
+  lab <- if (is.na(lab) || cap_has_label) "" else sprintf("\\label{%s}\n", lab)
   cap <- paste(cap, lab)
 
   return(cap)
