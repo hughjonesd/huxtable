@@ -169,6 +169,11 @@ recall_ltrb <- function(ht, template) {
 #'
 set_outer_borders <- function (ht, row, col, value = 0.4) {
   assert_that(is_huxtable(ht))
+  if (nargs() == 2) {
+    if (missing(value)) value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  }
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
   col <- rc$col
