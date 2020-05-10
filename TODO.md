@@ -17,8 +17,23 @@ Changes for 5.0
 ===============
 
 
+* Let width/height/colwidth/rowheight use units?
+  - CSS units to support, see https://developer.mozilla.org/en-US/docs/Web/CSS/length
+    - cap, ch, em, ex, ic, lh, rem, rlh (these are "font-relative")
+    - px (1/96 inch), cm, mm, Q (1/4 mm), pt (1/72 in), pc (12 pt)
+    - there are also viewport relative units, but they don't convert
+    - and percentages bien sur!
+  - LaTeX units to support, see
+  - Note that the "units" package doesn't have all CSS units;
+    maybe a new cssunits package is a good idea?
+  - Convert character widths to a standard unit (points? cm?)
+  - You can then use these in more places.
+  
 * `caption_pos()` should just be top or bottom. What sort of pervert puts
   the table on the left but the caption on the right?
+  - hmm, actually you might have a centred table on the page, but the
+    caption on the left of the table (assuming `caption_width` is `NA`).
+    
 * Ability to `restack()` a table sideways or lengthways, and to `split` a table.
   - `restack_longer(ht, ncol, width)` where `ncol` is the number of columns
     of the new result; or `width` is the maximum width?
@@ -39,9 +54,6 @@ Changes for 5.0
   who uses it? 
   - though the problem is having to keep to `options(screen)`, not
     the fact that it is an argument.
-
-* let to_screen show table position
-
 
 
 Future thoughts

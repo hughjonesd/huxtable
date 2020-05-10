@@ -66,6 +66,7 @@ NULL
 #'   huxtable guesses the format using [guess_knitr_output_format()].
 #'   `options('huxtable.autolabel')`. If `TRUE`, (the default) automatically sets
 #'    `label()` from the knitr chunk label, if there is one.
+#'
 #' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
 #'    will be printed in color on screen.
 #' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to automatically
