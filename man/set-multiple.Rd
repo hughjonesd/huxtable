@@ -13,7 +13,7 @@
 \alias{map_all_padding}
 \title{Set left, right, top and bottom properties}
 \usage{
-set_all_borders(ht, row, col, value)
+set_all_borders(ht, row, col, value = 0.4)
 
 map_all_borders(ht, row, col, fn)
 
@@ -48,9 +48,11 @@ These are convenience functions which set left, right, top and bottom properties
 simultaneously for the specified cells.
 }
 \examples{
-ht <- huxtable(a = 1:3, b = 1:3)
-set_all_borders(ht, 1:3, 1:2, 1)
+ht <- as_hux(jams)
+ht <- set_all_borders(ht)
+ht
 ht <- set_all_border_colors(ht, "red")
+ht
 ht <- set_all_border_styles(ht, "double")
 ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 }

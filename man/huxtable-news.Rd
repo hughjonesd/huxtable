@@ -61,7 +61,17 @@ So you can write e.g.
 }\if{html}{\out{
 <!-- end list -->
 }}
-\if{html}{\out{<div class="r">}}\preformatted{hux(head(iris)) \%>\% set_bold(1, everywhere)
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bold(1, everywhere)
+}\if{html}{\out{</div>}}
+\itemize{
+\item \code{set_left_border()}, \code{set_all_borders()} and friends all use a
+default value of 0.4. So to set a default border, write e.g.
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bottom_border(1, everywhere)
 }\if{html}{\out{</div>}}
 \itemize{
 \item New: by default, huxtable sets labels from the current knitr chunk

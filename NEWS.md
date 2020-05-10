@@ -39,7 +39,15 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   can write e.g.
   
 ```r
-hux(head(iris)) %>% set_bold(1, everywhere)
+as_hux(head(iris)) %>% 
+      set_bold(1, everywhere)
+```
+* `set_left_border()`, `set_all_borders()` and friends all use a default value
+  of 0.4. So to set a default border, write e.g.
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere)
 ```
 
 * New: by default, huxtable sets labels from the current knitr chunk label, if there

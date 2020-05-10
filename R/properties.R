@@ -367,7 +367,7 @@ make_getter_setters("text_color", "cell")
 #' @template cell-property-usage
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border")) make_getter_setters(val, "cell",
-      check_fun = is.numeric)
+      check_fun = is.numeric, default = 0.4)
 
 
 #' @name right_border

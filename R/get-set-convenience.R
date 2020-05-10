@@ -73,9 +73,10 @@ NULL
 #' @rdname set-multiple
 #' @export
 #' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value) {
+#' ht <- as_hux(jams)
+#' ht <- set_all_borders(ht)
+#' ht
+set_all_borders <- function(ht, row, col, value = 0.4) {
   recall_ltrb(ht, "set_%s_border")
 }
 
@@ -90,6 +91,7 @@ map_all_borders <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_border_colors(ht, "red")
+#' ht
 set_all_border_colors <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_color")
 }
@@ -158,14 +160,14 @@ recall_ltrb <- function(ht, template) {
 #' @export
 #' @examples
 #' ht2 <- huxtable(a = 1:3, b = 1:3)
-#' set_outer_borders(ht2, 1)
-#' set_outer_borders(ht2, 2:3, 1:2, 1)
+#' set_outer_borders(ht2)
+#' set_outer_borders(ht2, 2:3, 1:2)
 #'
 #' # Problems with colspan:
 #' rowspan(ht2)[2, 1] <- 2
-#' set_outer_borders(ht2, 1:2, 1:2, 1)
+#' set_outer_borders(ht2, 1:2, 1:2)
 #'
-set_outer_borders <- function (ht, row, col, value) {
+set_outer_borders <- function (ht, row, col, value = 0.4) {
   assert_that(is_huxtable(ht))
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
