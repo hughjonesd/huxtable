@@ -49,7 +49,7 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   commands <- "
   \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
   \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}
-  \\providecommand{\\huxtpad}[1]{\\rule{0pt}{\\baselineskip+#1}}
+  \\providecommand{\\huxtpad}[1]{\\rule{0pt}{#1}}
   \\providecommand{\\huxbpad}[1]{\\rule[-#1]{0pt}{#1}}\n"
 
   if (tabular_only) return(maybe_markdown_fence(paste0(commands, tabular)))
@@ -300,7 +300,9 @@ build_tabular <- function (ht) {
   has_pad_bldc <- lapply(pad_bldc, Negate(is.na))
   pad_bldc <- lapply(pad_bldc, function (x) if (is.numeric(x)) sprintf("%.4gpt", x) else x)
   tpad_tex_bldc <- rep("", length(pad_bldc$top))
-  tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\huxtpad{%s}", pad_bldc$top[has_pad_bldc$top])
+
+  tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\huxtpad{%s + 1em}",
+        pad_bldc$top[has_pad_bldc$top])
   bpad_tex_bldc <- rep("", length(pad_bldc$bottom))
   bpad_vals_bldc <- pad_bldc$bottom[has_pad_bldc$bottom]
   bpad_tex_bldc[has_pad_bldc$bottom] <- sprintf("\\huxbpad{%s}", bpad_vals_bldc)
