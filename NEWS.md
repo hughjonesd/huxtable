@@ -38,10 +38,13 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
 
-* `theme_basic()` now has bold headers, a border at the bottom, and no header 
-  column by default.
-  
-* `theme_plain()` defaults to `position = "centre"`.
+* Various themes have been tweaked:
+  - `theme_basic()` now has bold headers, a border at the bottom, and no
+    header column by default.
+  - `theme_plain()` defaults to `position = "centre"`.
+  - `theme_striped()` uses grey stripes, a white border, and subtler headers.
+  - `theme_article()` has thinner borders.
+
 
 ## Other changes
 

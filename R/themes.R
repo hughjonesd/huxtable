@@ -67,7 +67,6 @@ theme_plain <- function(ht, position = "center"){
   ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
   ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
   ht <- set_position(ht, position)
-  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -114,7 +113,7 @@ theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
   }
 
   ht <- set_bottom_border(ht, final(1), everywhere)
-  ht <- clean_outer_padding(ht)
+  ht <- clean_outer_padding(ht, 2)
 
   ht
 }
@@ -134,13 +133,16 @@ theme_striped <- function (ht, stripe = "grey90",
 
   if (header_row) {
     ht <- set_header_rows(ht, 1, TRUE)
-    ht <- style_header_rows(ht, bold = TRUE)
+    ht <- style_header_rows(ht,
+          bold = TRUE)
   }
   if (header_col) {
     ht <- set_header_cols(ht, 1, TRUE)
-    ht <- style_header_cols(ht, bold = TRUE)
+    ht <- style_header_cols(ht,
+            bold = TRUE,
+            background_color = stripe
+          )
   }
-  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -169,7 +171,7 @@ theme_maker <- function (
       background_color(ht)[, header_cols(ht)] <- header_color
       text_color(ht)[, header_cols(ht)]       <- header_text
     }
-    ht <- clean_outer_padding(ht)
+    ht <- clean_outer_padding(ht, 4)
 
     ht
   }
@@ -219,19 +221,19 @@ theme_green <- theme_maker(
 theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
-  ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
-  top_border(ht)[1, ] <- 1
-  bottom_border(ht)[nrow(ht), ] <- 1
+  ht <- set_all_borders(ht, 0)
+  top_border(ht)[1, ] <- 0.4
+  bottom_border(ht)[nrow(ht), ] <- 0.4
   if (header_row) {
     ht <- set_header_rows(ht, 1, TRUE)
-    bottom_border(ht)[header_rows(ht), ] <- 1
+    bottom_border(ht)[header_rows(ht), ] <- 0.4
     bold(ht)[header_rows(ht), ] <- TRUE
   }
   if (header_col) {
     ht <- set_header_cols(ht, 1, TRUE)
     bold(ht)[, header_cols(ht)] <- TRUE
   }
-  ht <- clean_outer_padding(ht)
+  ht <- clean_outer_padding(ht, 0)
 
   ht
 }
@@ -256,10 +258,11 @@ theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
 }
 
 
-clean_outer_padding <- function (ht) {
-  # latex works best with 0; but for HTML that's too tight
-  ht <- set_left_padding(ht, everywhere, 1, 2)
-  ht <- set_right_padding(ht, everywhere, final(1), 2)
+clean_outer_padding <- function (ht, pad) {
+  # a tight pad works best for blank themes with dark borders;
+  # for coloured backgrounds you don't want that
+  ht <- set_left_padding(ht, everywhere, 1, pad)
+  ht <- set_right_padding(ht, everywhere, final(1), pad)
 
   ht
 }
