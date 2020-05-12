@@ -22,9 +22,16 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @return `to_screen` returns a string. `print_screen` prints the string and returns `NULL`.
 #'
 #' @details
-#' `colspan`, `rowspan`, `align` and `caption` properties are shown. So are borders (but not border
-#' styles). If the `crayon` package is installed, output will be colorized (and contents bolded or
-#' italicized) by default; this will work in recent daily builds of RStudio as of October 2017.
+#' Screen display shows the following features:
+#'
+#' * Table and caption positioning
+#' * Merged cells
+#' * Cell alignment
+#' * Borders
+#' * Cell background and border color (if the "crayon" package is installed)
+#' * Text color, bold and italic (if the "crayon" package is installed)
+#'
+#' Cell padding, widths and heights are not shown, nor are border styles.
 #'
 #' @export
 #' @family printing functions
@@ -128,7 +135,9 @@ to_screen.huxtable <- function (
       if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
     }
 
-    result <- paste(apply(charmat, 1, paste0, collapse = ""), collapse = "\n")
+    result <- apply(charmat, 1, paste0, collapse = "")
+    result <- pad_position(result, position_no_wrap(ht), max_width)
+    result <- paste(result, collapse = "\n")
   } else {
     # 0-nrow or 0-ncol huxtable
     result <- glue::glue("<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>")
@@ -138,7 +147,14 @@ to_screen.huxtable <- function (
     hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) poss_pos[found] else
           position_no_wrap(ht)
     if (ncharw(cap) > max_width) cap <- strwrap(cap, max_width)
-    cap <- paste0(str_pad(cap, hpos, ncol(charmat)), collapse = "\n")
+    # first we pad to same size as charmat.
+    stringr_side <- switch(hpos, left = "right", right = "left", center = "both")
+    cap <- stringr::str_pad(cap, ncol(charmat) - 4, stringr_side)
+    # We do a little bit of "both" padding to compensate for borders
+    cap <- stringr::str_pad(cap, ncol(charmat), "both")
+    # then we pad out like charmat.
+    # Result: the caption stays within the boundaries of the table if possible.
+    cap <- paste0(pad_position(cap, position_no_wrap(ht), max_width), collapse = "\n")
     result <- if (grepl("top", caption_pos(ht))) paste0(cap, "\n", result) else paste0(result, "\n", cap)
   }
 
@@ -154,6 +170,8 @@ to_screen.huxtable <- function (
 
   result
 }
+
+
 
 
 #' @export
@@ -195,7 +213,7 @@ to_md.huxtable <- function(ht, header = TRUE, min_width = getOption("width") / 4
   align <- real_align(ht)
   if (any(apply(align, 2, function(x) length(unique(x)) > 1)))
     warning("Can't vary column alignment in markdown; using first row")
-  ht <- set_align(ht, align[1, ], byrow = TRUE)
+  ht <- map_align(ht, by_cols(align[1,]))
 
   charmat_data <- character_matrix(ht, inner_border_h = 1, outer_border_h = 1, inner_border_v = 1,
         outer_border_v = 1, min_width = min_width, max_width = max_width, markdown = TRUE)
@@ -298,7 +316,9 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     }))
     if (md_bold) strings[ncharw(strings) > 0] <- paste0("**", strings[ncharw(strings) > 0], "**")
     if (md_italic) strings[ncharw(strings) > 0] <- paste0("*", strings[ncharw(strings) > 0], "*")
-    strings <- str_pad(strings, real_align(ht)[ dcell$display_row, dcell$display_col ], width)
+    align <- real_align(ht)[ dcell$display_row, dcell$display_col ]
+    stringr_align <- switch(align, "left" = "right", "right" = "left", "centre" = "both")
+    strings <- stringr::str_pad(strings, width, stringr_align)
     dc$strings[[r]] <- strings
   }
 
@@ -351,6 +371,14 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
 }
 
 
+pad_position <- function (string, position, max_width) {
+  width <- min(max_width, getOption("width", 80))
+  assert_that(position %in% c("left", "center", "right"))
+  if (position == "left") return(string)
+  side <- if (position == "center") "both" else "left"
+  stringr::str_pad(string, width, side)
+}
+
 make_cell_style <- function (ht, row, col) {
   tc         <- text_color(ht)[row, col]
   bgc        <- background_color(ht)[row, col]
@@ -368,26 +396,6 @@ make_cell_style <- function (ht, row, col) {
   style <- style %||% identity
 
   style
-}
-
-
-str_pad <- function (strings, align, strlen) {
-  stencils <- rep(str_rep(" ", strlen), length(strings))
-
-  if (align == "left") {
-    start <- 1
-    stop <- ncharw(strings)
-  } else if (align == "center") {
-    start <- floor( (ncharw(stencils) - ncharw(strings)) / 2) + 1
-    stop  <- ncharw(stencils) - start + 1
-  } else {
-    start <- ncharw(stencils) - ncharw(strings) + 1
-    stop  <- ncharw(stencils)
-  }
-  substr(stencils, start, stop) <- strings
-  stencils <- strtrim(stencils, strlen)
-
-  stencils
 }
 
 

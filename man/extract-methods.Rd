@@ -22,7 +22,7 @@
 
 \item{j, name}{Columns to select.}
 
-\item{drop}{Not used.}
+\item{drop}{Only included for compatibility with \verb{[.data.frame}. Do not use.}
 
 \item{value}{A matrix, data frame, huxtable or similar object.}
 }

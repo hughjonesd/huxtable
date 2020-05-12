@@ -2,7 +2,12 @@
 title: "Huxtable table demo"
 author: "David Hugh-Jones"
 date: "2/03/2017"
-output: pdf_document
+output:
+  pdf_document:
+    includes:
+      in_header: placeins-header.tex
+    keep_tex: yes
+  html_document: default
 ---
 
 
@@ -16,13 +21,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r}
 
 make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
-  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow))
+  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow), add_colnames = FALSE)
   for (i in seq_len(ncol -2)) {
     ht <- cbind(ht, rep(more_text[i], nrow))
   }
   ht <- set_all_borders(ht, 1)
   ht <- set_background_color(ht, odds, everywhere, 'orange')
   ht <- set_background_color(ht, evens, everywhere, 'green')
+  ht <- set_tabular_environment(ht, "tabular")
   ht
 }
 
@@ -52,6 +58,7 @@ ht
 
 ```
 
+\FloatBarrier
 
 # Position and width (and caption)
 
@@ -83,15 +90,17 @@ ht
 # Caption_pos
 
 ```{r, results = 'asis'}
+
 for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomcenter', 'bottomright', 'bottom')) {
   ht <- make(nrow = 1) 
-  caption(ht) <- paste0('caption\\_pos: ', pos)
-  caption_pos(ht) <- pos
+   caption(ht) <- paste0('caption\\_pos: ', pos)
+   caption_pos(ht) <- pos
   print_latex(ht)
 }
 
 ```
 
+\FloatBarrier
 
 # Col_width and align
 
@@ -122,6 +131,7 @@ caption(ht) <- 'latex\\_float h, here'
 ht
 ```
 
+\FloatBarrier
 
 # Align and wrap
 
@@ -134,12 +144,13 @@ caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left'
 ht
 ```
 
+\FloatBarrier
 
 # Valign, row height and wrap
 
 ```{r}
 ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text' , 'text'))
-ht <- set_valign(ht, c('top', 'top', 'middle', 'bottom'), byrow = TRUE)
+ht <- map_valign(ht, by_cols('top', 'top', 'middle', 'bottom'))
 wrap(ht)[1,] <- TRUE
 wrap(ht)[,1] <- TRUE
 width(ht) <- .6
@@ -151,6 +162,7 @@ caption(ht) <- 'valign in columns 1-4: t/t/m/b; wrap TRUE at top (and bot left);
 ht
 ```
 
+\FloatBarrier
 
 # Colwidth and wrap
 
@@ -162,6 +174,7 @@ caption(ht) <- 'wrap TRUE at top, col\\_width .8, .2'
 ht
 ```
 
+\FloatBarrier
 
 # Width and wrap
 
@@ -173,6 +186,7 @@ caption(ht) <- 'wrap TRUE at top, width .2'
 ht
 ```
 
+\FloatBarrier
 
 # Padding and wrap
 
@@ -187,6 +201,7 @@ caption(ht) <- 'wrap TRUE on left; padding by row l/r/t/b'
 ht
 ```
 
+\FloatBarrier
 
 # Padding and colwidth
 
@@ -203,8 +218,10 @@ ht
 wrap(ht) <- TRUE
 caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap TRUE'
 ht
+
 ```
 
+\FloatBarrier
 
 # Text and wrap
 
@@ -218,8 +235,10 @@ text_color(ht)[5,] <- 'yellow'
 font_size(ht)[6,] <- 14
 caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yellow/big'
 ht
+
 ```
 
+\FloatBarrier
 
 # Multirow and wrap
 
@@ -229,8 +248,10 @@ wrap(ht)[,1] <- TRUE
 rowspan(ht)[1,1] <- 2
 rowspan(ht)[1,2] <- 2
 caption(ht) <- 'multirow cells, wrap TRUE on left'
+
 ```
 
+\FloatBarrier
 
 # Multirow and multicol
 
@@ -240,8 +261,41 @@ colspan(ht)[1,1] <- 2
 rowspan(ht)[2,1] <- 2
 caption(ht) <- 'multirow cells and multicol cells'
 ht
+
 ```
 
+\FloatBarrier
+
+# Multirow/multicol and borders
+
+```{r}
+ht <- make(nrow = 3, ncol = 3)
+ht <- set_all_borders(ht, 0)
+ht <- set_all_borders(ht, 1, 1, 1)
+rowspan(ht)[1, 1] <- 2
+caption(ht) <- "Col 1 rows 1-2 merged, row 1 col 1 has all borders"
+ht
+
+rowspan(ht)[1, 1] <- 1
+colspan(ht)[1, 1] <- 2
+caption(ht) <- "Row 1 cols 1-2 merged, row 1 col 1 has all borders"
+ht
+
+rowspan(ht)[1, 1] <- 2
+colspan(ht)[1, 1] <- 2
+caption(ht) <- "Rows 1-2 cols 1-2 merged, row 1 col 1 has all borders"
+ht
+
+rowspan(ht)[1, 1] <- 1
+colspan(ht)[1, 1] <- 1
+rowspan(ht)[2, 2] <- 2
+colspan(ht)[2, 2] <- 2
+ht <- set_all_borders(ht, 0)
+ht <- set_all_borders(ht, 2, 2, 1)
+caption(ht) <- "Rows 2-3 cols 2-3 merged, row 2 col 2 has all borders"
+ht
+
+```
 
 # Border color left and right/top and bottom
 
@@ -257,6 +311,7 @@ caption(ht) <- 'Top border of row 2: red'
 ht
 ```
 
+\FloatBarrier
 
 # Text and border color
 
@@ -268,6 +323,7 @@ caption(ht) <- 'text color blue. Col 1 border color set to red'
 ht
 ```
 
+\FloatBarrier
 
 # Multirow, multicol and border color
 
@@ -291,9 +347,11 @@ top_border_color(ht) <- 'blue'
 # bottom_border_color(ht) <- 'red'
 caption(ht) <- 'multirow, multicol and border color (left: yellow; right: green; top: blue; bottom unset)'
 ht
+
 ```
 
 
+\FloatBarrier
 
 # Borders on and off
 
@@ -371,14 +429,19 @@ ht
 
 ```{r}
 ht <- make(nrow = 5, ncol = 5, more_text = c('more', 'more', 'more'))
+ht <- set_all_borders(ht, 3)
 left_border_style(ht)[, 1] <- 'double'
+right_border_style(ht)[, 1] <- 'dotted'
 left_border_style(ht)[, 2] <- 'dotted'
+right_border_style(ht)[, 2] <- 'dashed'
 left_border_style(ht)[, 3] <- 'dashed'
 left_border(ht)[, 4] <- 0
 right_border(ht)[, 3] <- 0
 left_border_style(ht)[, 5] <- 'double'
 top_border_style(ht)[1, ] <- 'double'
+bottom_border_style(ht)[1, ] <- 'dotted'
 top_border_style(ht)[2, ] <- 'dotted'
+bottom_border_style(ht)[2, ] <- 'dashed'
 top_border_style(ht)[3, ] <- 'dashed'
 top_border(ht)[4, ] <- 0
 bottom_border(ht)[3, ] <- 0
@@ -402,18 +465,23 @@ ht
 left_border_color(ht) <- NA
 top_border_color(ht) <- NA
 
-bottom_border(ht)[2, 3] <- 0
-top_border(ht)[3, 3]    <- 0
-bottom_border(ht)[1, 4] <- 0
-top_border(ht)[2, 4]    <- 0
 
-ht <- set_left_border(ht, where(row(ht) == col(ht)), 0)
-ht <- set_right_border(ht, where(row(ht) == col(ht) + 1), 0)
+ht2 <- ht
+bottom_border(ht2)[2, 3] <- 0
+top_border(ht2)[3, 3]    <- 0
+bottom_border(ht2)[1, 4] <- 0
+top_border(ht2)[2, 4]    <- 0
 
+ht2 <- map_left_border(ht2, by_cases(row(.) == col(.) ~ 0, TRUE ~ 1))
+ht2 <- map_right_border(ht2, by_cases(row(.) == col(.) + 1 ~ 0, TRUE ~ 1))
 
-caption(ht) <- 'Varying borders'
+caption(ht2) <- 'Varying borders within rows/cols'
+ht2
+
+ht <- set_left_border(ht, 3:7)
+ht <- map_bottom_border(ht, by_cols(3:7))
+caption(ht) <- 'Varying border widths'
 ht
-
 ```
 
 
@@ -427,5 +495,5 @@ huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
 # hux_logo
 
 ```{r}
-hux_logo(latex = TRUE)
+hux_logo(latex = knitr::is_latex_output(), html = knitr::is_html_output())
 ```

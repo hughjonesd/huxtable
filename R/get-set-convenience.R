@@ -73,9 +73,10 @@ NULL
 #' @rdname set-multiple
 #' @export
 #' @examples
-#' ht <- huxtable(a = 1:3, b = 1:3)
-#' set_all_borders(ht, 1:3, 1:2, 1)
-set_all_borders <- function(ht, row, col, value, byrow = FALSE) {
+#' ht <- as_hux(jams)
+#' ht <- set_all_borders(ht)
+#' ht
+set_all_borders <- function(ht, row, col, value = 0.4) {
   recall_ltrb(ht, "set_%s_border")
 }
 
@@ -90,7 +91,8 @@ map_all_borders <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_border_colors(ht, "red")
-set_all_border_colors <- function(ht, row, col, value, byrow = FALSE) {
+#' ht
+set_all_border_colors <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_color")
 }
 
@@ -105,7 +107,7 @@ map_all_border_colors <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_border_styles(ht, "double")
-set_all_border_styles <- function(ht, row, col, value, byrow = FALSE) {
+set_all_border_styles <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_style")
 }
 
@@ -120,7 +122,7 @@ map_all_border_styles <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_all_padding(ht, 1:3, 1:2, "20px")
-set_all_padding <- function(ht, row, col, value, byrow = FALSE) {
+set_all_padding <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_padding")
 }
 
@@ -158,15 +160,20 @@ recall_ltrb <- function(ht, template) {
 #' @export
 #' @examples
 #' ht2 <- huxtable(a = 1:3, b = 1:3)
-#' set_outer_borders(ht2, 1)
-#' set_outer_borders(ht2, 2:3, 1:2, 1)
+#' set_outer_borders(ht2)
+#' set_outer_borders(ht2, 2:3, 1:2)
 #'
 #' # Problems with colspan:
 #' rowspan(ht2)[2, 1] <- 2
-#' set_outer_borders(ht2, 1:2, 1:2, 1)
+#' set_outer_borders(ht2, 1:2, 1:2)
 #'
-set_outer_borders <- function (ht, row, col, value) {
+set_outer_borders <- function (ht, row, col, value = 0.4) {
   assert_that(is_huxtable(ht))
+  if (nargs() == 2) {
+    if (missing(value)) value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  }
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
   col <- rc$col
@@ -222,13 +229,8 @@ outer_row_col_value <- function(ht, row, col, value) {
     value <- row
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
-  } else if (missing(value)) {
-    value <- col
-    if (!is.matrix(row)) stop("No columns specified, but `row` argument did not evaluate to a matrix")
-    # row is a 2-matrix of row, col vectors;
-    col <- seq(min(row[, 2]), max(row[, 2]))
-    row <- seq(min(row[, 1]), max(row[, 1]))
   }
+
   row <- get_rc_spec(ht, row, 1)
   col <- get_rc_spec(ht, col, 2)
   if (is.logical(row)) row <- which(row)
@@ -286,24 +288,18 @@ set_cell_properties <- function (ht, row, col, ...) {
 #' ```
 #' @return The `ht` object.
 #'
-#' @seealso merge_repeated_rows
+#' @family cell merging
 #'
 #' @export
 #' @examples
+#'
 #' ht <- hux(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1)
-#' merge_cells(ht, 1:2, 1:2)
+#' merge_cells(ht, 2:3, 1:2)
+#'
 merge_cells <- function (ht, row, col) {
   assert_that(is_huxtable(ht))
 
-  if (missing(col)) {
-    .Deprecated("Using merge_cells without a `col` argument is deprecated.", package = "huxtable")
-    if (! is.matrix(row)) stop(
-      "No columns specified, but `row` argument did not evaluate to a matrix")
-    # 2-matrix of row, col vectors
-    col <- seq(min(row[, 2]), max(row[, 2]))
-    row <- seq(min(row[, 1]), max(row[, 1]))
-  }
   row <- get_rc_spec(ht, row, 1)
   col <- get_rc_spec(ht, col, 2)
   if (is.logical(row)) row <- which(row)
@@ -315,6 +311,56 @@ merge_cells <- function (ht, row, col) {
   rs <- diff(range(row)) + 1
   colspan(ht)[mr, mc] <- cs
   rowspan(ht)[mr, mc] <- rs
+
+  ht
+}
+
+
+#' Merge cells across rows or down columns
+#'
+#' `merge_across` creates multicolumn cells within each row. `merge_down` creates
+#' multirow cells within each column.
+#'
+#' @inherit left_border params
+#'
+#' @return The `ht` object.
+#'
+#' @export
+#'
+#' @family cell merging
+#'
+#' @examples
+#'
+#' ht <- as_hux(matrix(1:12, 4, 3, byrow = TRUE))
+#' ht <- set_all_borders(ht, 1)
+#' merge_across(ht, 2:4, 2:3)
+#' merge_down(ht, 2:4, 2:3)
+#'
+merge_across <- function (ht, row, col) {
+  assert_that(is_huxtable(ht))
+
+  row <- get_rc_spec(ht, row, 1)
+  col <- get_rc_spec(ht, col, 2)
+  if (is.logical(row)) row <- which(row)
+  if (is.logical(col)) col <- which(col)
+
+  for (r in row) ht <- merge_cells(ht, r, col)
+
+  ht
+}
+
+
+#' @rdname merge_across
+#' @export
+merge_down <- function (ht, row, col) {
+  assert_that(is_huxtable(ht))
+
+  row <- get_rc_spec(ht, row, 1)
+  col <- get_rc_spec(ht, col, 2)
+  if (is.logical(row)) row <- which(row)
+  if (is.logical(col)) col <- which(col)
+
+  for (cl in col) ht <- merge_cells(ht, row, cl)
 
   ht
 }

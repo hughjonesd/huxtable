@@ -34,5 +34,8 @@ caption_pos(jams) <- "top"
 jams
 }
 \seealso{
-\code{\link[=caption]{caption()}}
+Other caption properties: 
+\code{\link{caption_width}()},
+\code{\link{caption}()}
 }
+\concept{caption properties}

@@ -36,13 +36,14 @@ Properties are supported with the following exceptions:
 \item Decimal padding.
 \item Cell padding.
 \item Table position.
+\item Caption width.
 }
 
 Huxtable tries to guess appropriate widths and height for rows and columns; numeric \code{\link[=width]{width()}} and
 \code{\link[=height]{height()}} are treated as scaling factors.
 
-Contents are only stored as numbers if a whole column is numeric as defined by \code{\link[=is_a_number]{is_a_number()}};
-otherwise they are stored as text.
+Contents are only stored as numbers if a whole column is "numeric", i.e. can
+be converted by \code{\link[=as.numeric]{as.numeric()}}). Otherwise, they are stored as text.
 }
 \examples{
 wb <- as_Workbook(jams)

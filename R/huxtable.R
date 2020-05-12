@@ -63,6 +63,7 @@ huxtable <- function (
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
   if (R.version$major >= 3 && R.version$minor >= 3) df_args$fix.empty.names <- FALSE
   ht <- do.call(data.frame, df_args)
+  if (is.null(names(list(...))) & ! is.data.frame(..1)) add_colnames <- FALSE
   ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames,
         autoformat = autoformat)
 

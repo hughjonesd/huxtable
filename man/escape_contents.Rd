@@ -9,7 +9,7 @@
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
-set_escape_contents(ht, row, col, value, byrow = FALSE)
+set_escape_contents(ht, row, col, value)
 map_escape_contents(ht, row, col, fn)
 }
 \arguments{
@@ -24,8 +24,6 @@ Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} property.

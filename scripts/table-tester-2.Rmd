@@ -150,7 +150,7 @@ ht
 
 ```{r}
 ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text' , 'text'))
-ht <- set_valign(ht, c('top', 'top', 'middle', 'bottom'), byrow = TRUE)
+ht <- map_valign(ht, by_cols('top', 'top', 'middle', 'bottom'))
 wrap(ht)[1,] <- TRUE
 wrap(ht)[,1] <- TRUE
 width(ht) <- .6
@@ -472,14 +472,14 @@ top_border(ht2)[3, 3]    <- 0
 bottom_border(ht2)[1, 4] <- 0
 top_border(ht2)[2, 4]    <- 0
 
-ht2 <- set_left_border(ht2, where(row(ht2) == col(ht2)), 0)
-ht2 <- set_right_border(ht2, where(row(ht2) == col(ht2) + 1), 0)
+ht2 <- map_left_border(ht2, by_cases(row(.) == col(.) ~ 0, TRUE ~ 1))
+ht2 <- map_right_border(ht2, by_cases(row(.) == col(.) + 1 ~ 0, TRUE ~ 1))
 
 caption(ht2) <- 'Varying borders within rows/cols'
 ht2
 
 ht <- set_left_border(ht, 3:7)
-ht <- set_bottom_border(ht, 3:7, byrow = TRUE)
+ht <- map_bottom_border(ht, by_cols(3:7))
 caption(ht) <- 'Varying border widths'
 ht
 ```

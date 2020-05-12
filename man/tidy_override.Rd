@@ -2,12 +2,15 @@
 % Please edit documentation in R/huxreg.R
 \name{tidy_override}
 \alias{tidy_override}
+\alias{tidy_replace}
 \alias{tidy.tidy_override}
 \alias{glance.tidy_override}
 \alias{nobs.tidy_override}
-\title{Override a model's \code{tidy} output}
+\title{Change a model's \code{tidy} output}
 \usage{
 tidy_override(x, ..., glance = list(), extend = FALSE)
+
+tidy_replace(x, tidied, glance = list())
 
 \method{tidy}{tidy_override}(x, ...)
 
@@ -23,21 +26,26 @@ tidy_override(x, ..., glance = list(), extend = FALSE)
 
 \item{glance}{A list of summary statistics for \code{glance}.}
 
-\item{extend}{Logical: allow adding new statistics?}
+\item{extend}{Logical: allow adding new columns to \code{tidy(x)}?}
+
+\item{tidied}{Data frame to replace the result of \code{tidy(x)}.}
 
 \item{object}{A \code{tidy_override} object.}
 }
 \value{
-An object of class "tidy_override". When \code{tidy} and \code{glance} are called
-on this, it will return results from the underlying model, replacing some
-columns with your own data.
+An object that can be passed in to \code{huxreg}.
 }
 \description{
-Use \code{tidy_override} to provide your own p values, confidence intervals
-etc. for a model.
+Use \code{tidy_override} and \code{tidy_replace} to provide your own p values,
+confidence intervals etc. for a model.
+}
+\details{
+\code{tidy_override} allows you to replace some columns of \code{tidy(x)} with your own data.
+
+\code{tidy_replace} allows you to replace the result of \code{tidy(x)} entirely.
 }
 \examples{
-if (! requireNamespace("broom")) {
+if (! requireNamespace("broom", quietly = TRUE)) {
   stop("Please install 'broom' to run this example.")
 }
 
@@ -45,8 +53,14 @@ lm1 <- lm(mpg ~ cyl, mtcars)
 fixed_lm1 <- tidy_override(lm1,
       p.value = c(.04, .12),
       glance = list(r.squared = 0.99))
+huxreg(lm1, fixed_lm1)
 
-broom::tidy(fixed_lm1)
+if (requireNamespace("nnet", quietly = TRUE)) {
+  mnl <- nnet::multinom(gear ~ mpg, mtcars)
+  tidied <- broom::tidy(mnl)
+  mnl4 <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
+  mnl5 <- tidy_replace(mnl, tidied[tidied$y.level == 5, ])
+  huxreg(mnl4, mnl5, statistics = "nobs")
+}
 
-cbind(huxreg(fixed_lm1), huxreg(lm1))
 }

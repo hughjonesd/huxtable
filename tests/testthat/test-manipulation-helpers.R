@@ -1,7 +1,4 @@
 
-context("object manipulation helpers")
-
-
 test_that("add_colnames() does not screw up dates and similar", {
   date_str <- rep("2015/05/05 12:00", 2)
   dfr <- data.frame(

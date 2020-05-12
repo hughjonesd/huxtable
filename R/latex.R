@@ -49,10 +49,12 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   commands <- "
   \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
   \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}
-  \\providecommand{\\huxtpad}[1]{\\rule{0pt}{\\baselineskip+#1}}
+  \\providecommand{\\huxtpad}[1]{\\rule{0pt}{#1}}
   \\providecommand{\\huxbpad}[1]{\\rule[-#1]{0pt}{#1}}\n"
 
   if (tabular_only) return(maybe_markdown_fence(paste0(commands, tabular)))
+
+  tabular <- paste0("\\setlength{\\tabcolsep}{0pt}\n", tabular)
 
   resize_box <- if (is.na(height <- height(ht))) c("", "") else {
     if (is.numeric(height)) height <- sprintf("%.3g\\textheight", height)
@@ -64,49 +66,79 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           "wrapright" = c("\\begin{wraptable}{r}{%s}", "\\end{wraptable}"),
           c(sprintf("\\begin{table}[%s]", latex_float(ht)), "\\end{table}")
         )
-  table_env[1] <- sprintf(table_env[1], latex_table_width(ht)) # no-op except for wraptable
+  # no-op except for wraptable:
+  table_env[1] <- sprintf(table_env[1], latex_table_width(ht))
   table_env <- paste0("\n", table_env, "\n")
 
-  lab <- make_label(ht)
-  cap <- if (is.na(cap <- make_caption(ht, lab, "latex"))) "" else {
-    hpos <- get_caption_hpos(ht)
-    cap_setup <- switch(hpos,
-      left   = "raggedright",
-      center = "centering",
-      right  = "raggedleft"
-    )
-    sprintf("\\captionsetup{justification=%s,singlelinecheck=off}\n\\caption{%s}\n", cap_setup, cap)
-  }
-  lab <- if (is.na(lab)) "" else sprintf("\\label{%s}\n", lab)
+  cap <- build_latex_caption(ht)
 
   pos_text <- switch(position(ht),
     wrapleft = ,
-    left   = c("\\begin{raggedright}", "\\par\\end{raggedright}\n"),
-    center = c("\\centering",   "\n"),
+    left   = c("\\begin{raggedright}\n", "\\par\\end{raggedright}\n"),
+    center = c("\\begin{centerbox}\n",   "\\par\\end{centerbox}\n"),
     wrapright = ,
-    right  = c("\\begin{raggedleft}",  "\\par\\end{raggedleft}\n")
+    right  = c("\\begin{raggedleft}\n",  "\\par\\end{raggedleft}\n")
   )
 
-  res <- if (grepl("top", caption_pos(ht))) paste0(cap, lab, tabular) else paste0(tabular, cap, lab)
-  res <- paste0(
-          commands,
-          table_env[1],
-          pos_text[1],
-          resize_box[1],
-          "\n\\begin{threeparttable}\n",
-          "\\setlength{\\tabcolsep}{0pt}\n",
-          res,
-          "\\end{threeparttable}\n",
-          resize_box[2],
-          pos_text[2],
-          table_env[2]
-        )
+  cap_top <- grepl("top", caption_pos(ht))
+  cap <- if (cap_top) c(cap, "") else c("", cap)
+
+  tpt <- c("\\begin{threeparttable}\n", "\n\\end{threeparttable}")
+
+  res <- if (is.na(caption_width(ht))) {
+    nest_strings(table_env, pos_text, tpt, cap, tabular)
+  } else {
+    nest_strings(table_env, cap, pos_text, tabular)
+  }
+  res <- paste0(commands, res)
 
   return(maybe_markdown_fence(res))
 }
 
 
-build_tabular <- function(ht) {
+build_latex_caption <- function (ht, lab) {
+  lab <- make_label(ht)
+  cap_has_label <- FALSE
+
+  if (is.na(cap <- make_caption(ht, lab, "latex"))) {
+    cap <- ""
+  } else {
+    cap_has_label <- ! is.null(attr(cap, "has_label"))
+    hpos <- get_caption_hpos(ht)
+    cap_just <- switch(hpos,
+      left   = "raggedright",
+      center = "centering",
+      right  = "raggedleft"
+    )
+    cap_width <- caption_width(ht)
+    if (is.na(cap_width)) {
+      cap_margins <- ""
+    } else {
+      if (! is.na(suppressWarnings(as.numeric(cap_width)))) {
+        cap_width <- sprintf("%s\\textwidth", cap_width)
+      }
+      cap_margin_width <- paste("\\textwidth - ", cap_width)
+      cap_margins <- switch(hpos,
+        right = c(cap_margin_width, "0pt"),
+        center = rep(paste0("(", cap_margin_width, ")/2"), 2),
+        left  = c("0pt", cap_margin_width)
+      )
+      cap_margins <- sprintf("margin={%s,%s},", cap_margins[1], cap_margins[2])
+    }
+
+    cap <- sprintf(
+            "\\captionsetup{justification=%s,%ssinglelinecheck=off}\n\\caption{%s}\n",
+            cap_just, cap_margins, cap)
+  }
+
+  lab <- if (is.na(lab) || cap_has_label) "" else sprintf("\\label{%s}\n", lab)
+  cap <- paste(cap, lab)
+
+  return(cap)
+}
+
+
+build_tabular <- function (ht) {
   if (! check_positive_dims(ht)) return("")
 
   ## PREPARE EMPTY PARTS -------
@@ -268,7 +300,9 @@ build_tabular <- function(ht) {
   has_pad_bldc <- lapply(pad_bldc, Negate(is.na))
   pad_bldc <- lapply(pad_bldc, function (x) if (is.numeric(x)) sprintf("%.4gpt", x) else x)
   tpad_tex_bldc <- rep("", length(pad_bldc$top))
-  tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\huxtpad{%s}", pad_bldc$top[has_pad_bldc$top])
+
+  tpad_tex_bldc[has_pad_bldc$top] <- sprintf("\\huxtpad{%s + 1em}",
+        pad_bldc$top[has_pad_bldc$top])
   bpad_tex_bldc <- rep("", length(pad_bldc$bottom))
   bpad_vals_bldc <- pad_bldc$bottom[has_pad_bldc$bottom]
   bpad_tex_bldc[has_pad_bldc$bottom] <- sprintf("\\huxbpad{%s}", bpad_vals_bldc)

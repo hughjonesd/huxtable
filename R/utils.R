@@ -22,6 +22,15 @@ blank_where <- function (text, cond) {
 }
 
 
+nest_strings <- function(...) {
+  l <- list(...)
+  rev_l <- rev(l)
+  surround1 <- function(inner, outer) paste0(outer[1], inner, outer[2],
+    collapse = "")
+  Reduce(surround1, rev_l)
+}
+
+
 # pinched from HMS. Registers the method or sets a hook to register it on load of other package
 register_s3_method <- function (pkg, generic, class = "huxtable") {
   assert_that(is.string(pkg), is.string(generic))
@@ -69,8 +78,7 @@ clean_contents <- function(
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
     # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
-    # later we can just use align for this:
-    pad_chars <- pad_decimal(ht)[, col]
+    pad_chars <- rep(NA, length(col))
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
     contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
@@ -343,17 +351,4 @@ real_align <- function(ht) {
   al[! al %in% c("left", "center", "right")] <- "right"
 
   al
-}
-
-
-smart_hux_from_df <- function(dfr) {
-  col_nchars <- sapply(dfr, function (col) max(nchar(as.character(col), type = "width")))
-
-  ht <- as_hux(dfr, add_colnames = TRUE, autoformat = TRUE)
-
-  wrap(ht)[-1, col_nchars > 15] <- TRUE
-  width <- sum(col_nchars) / 90
-  width(ht) <- min(1, max(0.2, width))
-
-  ht
 }

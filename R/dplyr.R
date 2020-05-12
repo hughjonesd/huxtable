@@ -46,19 +46,22 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #' Dplyr verbs for huxtable
 #'
 #' Huxtable can be used with dplyr verbs [dplyr::select()], [dplyr::rename()],
-#' [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()] and
-#' [dplyr::transmute()]. These will return huxtables. Other verbs like [dplyr::summarize()] will
-#' simply return data frames as normal; [dplyr::pull()] will return a vector. `mutate` has an extra
-#' option, detailed below.
+#' [dplyr::relocate()], [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()]
+#' and [dplyr::transmute()]. These will return huxtables. Other verbs like
+#' [dplyr::summarize()] will simply return data frames as normal;
+#' [dplyr::pull()] will return a vector. `mutate` has an extra option, detailed
+#' below.
 #'
 #' @param .data A huxtable.
 #' @param ... Arguments passed to [dplyr::mutate()].
-#' @param copy_cell_props Logical: copy cell and column properties from existing columns.
+#' @param copy_cell_props Logical: copy cell and column properties from existing
+#'   columns.
 #'
-#' @details
-#' If `mutate` creates new columns, and the argument `copy_cell_props` is missing or `TRUE`, then cell
-#' and column properties will be copied from existing columns to their left, if there are any. Otherwise, they will be the
-#' standard defaults. Row and table properties, and properties of cells in existing columns, remain unchanged.
+#' @details If `mutate` creates new columns, and the argument `copy_cell_props`
+#' is missing or `TRUE`, then cell and column properties will be copied from
+#' existing columns to their left, if there are any. Otherwise, they will be the
+#' standard defaults. Row and table properties, and properties of cells in
+#' existing columns, remain unchanged.
 #'
 #' @rdname dplyr-verbs
 #' @aliases mutate dplyr-verbs
@@ -131,6 +134,11 @@ slice_.huxtable <- function (.data, ..., .dots) {
 slice.huxtable <- function (.data, ...) {}
 body(slice.huxtable) <- body(slice_.huxtable)
 
+
+# The following functions will only be registered with dplyr if
+# packageVersion("dplyr") <= "0.8.5".
+# After that, we can just use the dplyr builtins. (Until they break
+# subclasses again....)
 
 select_.huxtable <- function (.data, ..., .dots) {
   ht <- .data

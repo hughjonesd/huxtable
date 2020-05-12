@@ -22,12 +22,13 @@ NULL
 #' * Decimal padding.
 #' * Cell padding.
 #' * Table position.
+#' * Caption width.
 #'
 #' Huxtable tries to guess appropriate widths and height for rows and columns; numeric [width()] and
 #' [height()] are treated as scaling factors.
 #'
-#' Contents are only stored as numbers if a whole column is numeric as defined by [is_a_number()];
-#' otherwise they are stored as text.
+#' Contents are only stored as numbers if a whole column is "numeric", i.e. can
+#' be converted by [as.numeric()]). Otherwise, they are stored as text.
 #'
 #' @return An object of class `Workbook`.
 #' @export
@@ -81,7 +82,10 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
 
   nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)
-  is_a_number_mx <- is_a_number(contents)
+  is_a_number_mx <- suppressWarnings(apply(contents, 2, function (col) {
+    ! is.na(as.numeric(col))
+  }))
+  dim(is_a_number_mx) <- dim(contents) # apply might return a vector :-/
   # for each column we go down it. If everything remaining is one type, we insert it. Otherwise
   # we insert the cell.
   for (j in seq_len(ncol(contents))) {

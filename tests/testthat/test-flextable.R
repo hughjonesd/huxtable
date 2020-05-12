@@ -77,13 +77,6 @@ test_that("caption works", {
 })
 
 
-test_that("as_FlexTable gives warning", {
-  hx <- huxtable(a = 1:3, b = 4:6)
-  expect_warning(ft <- as_FlexTable(hx), "deprecated")
-  expect_is(ft, "flextable")
-})
-
-
 test_that("0-row/0-column huxtables work", {
   h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
   h_ncol0 <- hux(a = 1:2)[, FALSE]

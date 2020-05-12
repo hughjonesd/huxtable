@@ -77,8 +77,17 @@ to_html.huxtable <- function(ht, ...) {
   if (! is.na(cap <- make_caption(ht, lab, "html"))) {
     vpos <- if (grepl("top", caption_pos(ht))) "top" else "bottom"
     hpos <- get_caption_hpos(ht)
-    cap <- sprintf('<caption style="caption-side: %s; text-align: %s;">%s</caption>', vpos, hpos,
-          cap)
+
+    if (! is.na(cap_width <- caption_width(ht))) {
+      if (! is.na(as.numeric(cap_width))) {
+        cap_width <- paste0(as.numeric(cap_width) * 100, "%")
+      }
+      cap_width <- sprintf("width: %s;", cap_width)
+    } else {
+      cap_width <- ""
+    }
+    cap <- sprintf('<caption style="caption-side: %s; text-align: %s;%s">%s</caption>',
+          vpos, hpos, cap_width, cap)
     table_start <- paste0(table_start, cap)
   }
 

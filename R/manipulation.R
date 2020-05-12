@@ -207,7 +207,7 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #' @param x A huxtable.
 #' @param i Rows to select.
 #' @param j,name Columns to select.
-#' @param drop Not used.
+#' @param drop Only included for compatibility with `[.data.frame`. Do not use.
 #'
 #' @return A huxtable.
 #' @export
@@ -228,9 +228,28 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #' jams[, 1]
 #' jams$Type
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  ss <- as.data.frame(x)[i, j, drop = drop]
-  if (! missing(i) && is.character(i)) i <- which(rownames(x) %in% i)
-  if (! missing(j) && is.character(j)) j <- which(colnames(x) %in% j)
+  n_idx <- nargs() - !missing(drop) - 1L
+  missing_i <- missing(i)
+  missing_j <- missing(j) # evaluate before swapping j and i
+  if (missing_i && missing_j) return(x)
+
+  if (! missing(drop) && drop) {
+    stop("Can't use `drop = TRUE` to subset a huxtable. Use `[[` instead.")
+  }
+  ss <- if (n_idx <= 1) {
+    # avoids a warning from `[.data.frame`
+    NextMethod("[", as.data.frame(x))
+  } else {
+    NextMethod("[", as.data.frame(x), drop = FALSE)
+  }
+
+  if (n_idx == 1L) {
+    j <- i
+    i <- seq_len(nrow(x))
+  }
+
+  if (! missing_i && is.character(i)) i <- which(rownames(x) %in% i)
+  if (! missing_j && is.character(j)) j <- which(colnames(x) %in% j)
   for (a in huxtable_cell_attrs) {
     attr(ss, a) <- attr(x, a)[i, j, drop = drop]
   }

@@ -9,7 +9,7 @@
 \usage{
 background_color(ht)
 background_color(ht) <- value
-set_background_color(ht, row, col, value, byrow = FALSE)
+set_background_color(ht, row, col, value)
 map_background_color(ht, row, col, fn)
 }
 \arguments{
@@ -24,8 +24,6 @@ Set to \code{NA} to reset to the default, which is \code{NA}.}
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{byrow}{Deprecated. Use \code{\link[=by_cols]{by_cols()}} instead.}
 }
 \value{
 For \code{background_color}, the \code{background_color} property.

@@ -10,11 +10,11 @@ huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_co
   "top_border_style", "left_border_style", "right_border_style", "bottom_border_style",
   "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
   "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
-  "font", "pad_decimal")
+  "font")
 huxtable_col_attrs <- c("col_width", "header_col")
 huxtable_row_attrs <- c("row_height", "header_row")
 huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
-  "tabular_environment", "label", "latex_float")
+      "caption_width", "tabular_environment", "label", "latex_float")
 
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
@@ -60,10 +60,11 @@ huxtable_env$huxtable_default_attrs <- list(
         wrap                = TRUE,
         caption             = NA,
         caption_pos         = "top",
+        caption_width       = NA,
         position            = "center",
         tabular_environment = NA,
         label               = NA,
-        latex_float         = "h",
+        latex_float         = "ht",
         escape_contents     = TRUE,
         na_string           = "",
         bold                = FALSE,
@@ -71,7 +72,6 @@ huxtable_env$huxtable_default_attrs <- list(
         font_size           = NA,
         rotation            = 0,
         number_format       = list("%.3g"),
-        pad_decimal         = NA,
         font                = NA
       )
 
@@ -125,23 +125,17 @@ make_getter_setters <- function(
 
   funs[[alt_setter]] <- switch(attr_type,
         cell = eval(bquote(
-          function(ht, row, col, value, byrow = FALSE) {
+          function(ht, row, col, value) {
             assert_that(is_huxtable(ht))
-            nargs <- nargs()
-            if (! missing(byrow)) nargs <- nargs - 1
-
-            if (nargs == 2) {
+            if (nargs() == 2) {
               if (missing(value)) value <- row
               row <- seq_len(nrow(ht))
               col <- seq_len(ncol(ht))
             }
+
             rc <- list()
             rc$row <- get_rc_spec(ht, row, 1)
             rc$col <- get_rc_spec(ht, col, 2)
-            if (byrow) {
-              nrc <- lapply(rc, function (x) if (is.logical(x)) sum(x) else length(x))
-              value <- matrix(value, nrc$row, nrc$col, byrow = TRUE)
-            }
             .(attr_symbol)(ht)[rc$row, rc$col] <- value
 
             ht
@@ -411,7 +405,7 @@ make_getter_setters("text_color", "cell")
 #' @template cell-property-usage
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border")) make_getter_setters(val, "cell",
-      check_fun = is.numeric)
+      check_fun = is.numeric, default = 0.4)
 
 
 #' @name right_border
@@ -800,7 +794,6 @@ make_getter_setters("number_format", "cell")
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
-#' @param byrow Deprecated. Use [by_cols()] instead.
 #'
 #' @evalNamespace make_exports("contents", with_map = TRUE)
 #' @evalNamespace make_namespace_S3_entries("contents")
@@ -821,18 +814,6 @@ contents.huxtable <- function (ht) ht
 `contents<-.huxtable` <- function (ht, value) {
   value # by the time we get here, the replacement has already happened and we're done
 }
-
-#' @aliases pad_decimal<- set_pad_decimal map_pad_decimal
-#' @rdname huxtable-deprecated
-#' @name pad_decimal
-#' @details
-#' To replace `pad_decimal` use [align()], e.g. `align(ht) <- "."`.
-NULL
-make_getter_setters("pad_decimal", "cell", extra_code = {
-  stopifnot(all(nchar(na.omit(value)) == 1))
-  .Deprecated(msg = "`pad_decimal` is deprecated.\nUse e.g. `align(x) <- \".\"`` instead.",
-        package = "huxtable")
-})
 
 
 #' @template getset-cell
@@ -873,6 +854,7 @@ make_getter_setters("position", "table", check_values = c("left", "center", "cen
       "wrapleft", "wrapright"),
       extra_code = value[value == "centre"] <- "center")
 
+
 #' @template getset-table
 #' @templateVar attr_name caption_pos
 #' @templateVar attr_desc Caption position
@@ -881,7 +863,7 @@ make_getter_setters("position", "table", check_values = c("left", "center", "cen
 #' @details
 #' If `caption_pos` is "top" or "bottom", then the horizontal position ("left", "center" or "right")
 #' will be determined by the huxtable"s [position()].
-#' @seealso [caption()]
+#' @family caption properties
 #' @examples
 #' caption(jams) <- "Price list"
 #' jams
@@ -893,6 +875,18 @@ make_getter_setters("caption_pos", "table", check_values = c("top", "bottom", "t
         value[value == "topcentre"] <- "topcenter"
         value[value == "bottomcentre"] <- "bottomcenter"
       })
+
+
+
+#' @template getset-table
+#' @templateVar attr_name caption_width
+#' @templateVar attr_desc Caption width
+#' @templateVar value_param_desc
+#' A length-one numeric or character. Numerics are interpreted as percentages of text width. If `NA`, the caption will be set to the same width as the table.
+#'
+#' @family caption properties
+NULL
+make_getter_setters("caption_width", "table")
 
 
 #' @template getset-table
@@ -928,7 +922,7 @@ make_getter_setters("height", "table")
 #' @template getset-example
 #' @templateVar attr_val "An example table"
 #' @templateVar extra jams
-#' @seealso [caption_pos()]
+#' @family caption properties
 #' @examples
 #'
 #' # escape caption characters:
@@ -958,13 +952,20 @@ make_getter_setters("tabular_environment", "table", check_fun = is.character)
 #' A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML.
 #' @template getset-example
 #' @templateVar attr_val "tab:mytable"
+#' @seealso huxtable-options
 #' @details
 #' LaTeX table labels typically start with `"tab:"`.
+#'
+#' Within knitr, labels will default to the chunk label. Multiple huxtables
+#' within a single chunk will be numbered sequentially, like
+#' `chunk, chunk-1, chunk-2, ...`. To turn off this behaviour, set
+#' `options(huxtable.autolabel = FALSE)`.
 #'
 #' If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
 #' the caption will automatically be prefixed with `(#label)`. You can then
 #' refer to the table using `@ref(label)`. `label` needs to start with `"tab:"`; if it doesn't,
-#' the `"tab"` prefix will be added automatically.
+#' the `"tab"` prefix will be added automatically. To turn off this behaviour,
+#' set `options(huxtable.bookdown = FALSE)`.
 NULL
 make_getter_setters("label", "table", check_fun = is.character)
 
@@ -975,9 +976,10 @@ make_getter_setters("label", "table", check_fun = is.character)
 #' @templateVar value_param_desc
 #' A length-one character vector, used by LaTeX for positioning the float.
 #' @template getset-example
-#' @templateVar attr_val "h"
-#' @details Quick reference: "h" here, "h!" definitely here, "t" top of page, "b" bottom of page, "p" page of
-#' floats. See LaTeX documentation for more details. If you use "H" (definitely here), you must require the
-#' TeX `float` package.
+#' @templateVar attr_val "b"
+#' @details
+#' Quick reference: "h" here, "h!" definitely here, "t" top of page, "ht" here
+#' or at top, "b" bottom of page, "p" page of floats. See LaTeX documentation
+#' for more details.
 NULL
 make_getter_setters("latex_float", "table", check_fun = is.character)

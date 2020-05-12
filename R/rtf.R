@@ -32,8 +32,8 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #'
 #' @section Limitations:
 #'
-#' * rmarkdown"s `rtf_document` can"t yet print out customized color tables, so custom fonts
-#'   and colors won"t work in this context.
+#' * rmarkdown"s `rtf_document` can"t yet print out customized color tables, so
+#'  custom fonts and colors won"t work in this context.
 #' * [col_width()] and [width()] can only be numeric or "pt".
 #' * [wrap()] has no effect: cell contents always wrap.
 #' * [rotation()] can only be 90 or 270, i.e. text going up or down.
@@ -216,8 +216,21 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   caption <- caption(ht)
   cap_align <- align_map[get_caption_hpos(ht)]
-  caption_par <- if (is.na(caption)) "" else sprintf("{\\pard %s {%s} \\par}", cap_align, caption)
-
+  cap_width <- caption_width(ht)
+  cap_width <- if (is.na(cap_width)) "" else {
+    if (! is.numeric(cap_width)) {
+      warning("to_rtf can only handle numeric caption width.")
+      ""
+    } else {
+      # for frames we need a different alignment
+      posx_map <- c("left" = "\\posxl", "center" = "\\posxc", "right" = "\\posxr")
+      cap_align <- posx_map[get_caption_hpos(ht)]
+      sprintf("\\absw%s \\nowrap", cap_width * 6 * 20 * 72)
+    }
+  }
+  caption_par <- if (is.na(caption)) "" else sprintf("{\\pard %s %s {%s} \\par}", cap_align, cap_width, caption)
+# \ri<twips> and \li<twips> are indents
+# or use a "frame", \absw<twips> and \nowrap to stop text wrapping around it
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = "\n")

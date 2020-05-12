@@ -163,20 +163,6 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 }
 
 
-#' @export
-#' @rdname huxtable-deprecated
-hux_hex <- function () {
-  .Deprecated("hex_hux")
-}
-
-
-#' @export
-#' @rdname huxtable-deprecated
-hex_hux <- function () {
-  .Deprecated("hux_hex")
-}
-
-
 #' Default print method for huxtables
 #'
 #' By default huxtables are printed using [print_screen()]. In certain cases, for example

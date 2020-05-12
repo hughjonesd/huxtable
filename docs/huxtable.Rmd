@@ -25,7 +25,8 @@ library(dplyr)
 library(huxtable)
 options(
         huxtable.knit_print_df = FALSE, 
-        huxtable.add_colnames = TRUE    # works when run by testthat
+        huxtable.add_colnames  = TRUE,   # works when run by testthat
+        huxtable.autolabel     = FALSE   
       )
 
 is_latex <- guess_knitr_output_format() == 'latex'

@@ -6,7 +6,7 @@
 \alias{set_outer_border_styles}
 \title{Set borders around a rectangle of cells}
 \usage{
-set_outer_borders(ht, row, col, value)
+set_outer_borders(ht, row, col, value = 0.4)
 
 set_outer_border_colors(ht, row, col, value)
 
@@ -31,11 +31,11 @@ of cells. Behaviour is undefined unless \code{row} and \code{col} specify contig
 }
 \examples{
 ht2 <- huxtable(a = 1:3, b = 1:3)
-set_outer_borders(ht2, 1)
-set_outer_borders(ht2, 2:3, 1:2, 1)
+set_outer_borders(ht2)
+set_outer_borders(ht2, 2:3, 1:2)
 
 # Problems with colspan:
 rowspan(ht2)[2, 1] <- 2
-set_outer_borders(ht2, 1:2, 1:2, 1)
+set_outer_borders(ht2, 1:2, 1:2)
 
 }

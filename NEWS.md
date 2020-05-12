@@ -9,23 +9,32 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
-* The deprecated 3-argument form of `set_*` functions has been removed. Instead,
-  use `map_*`.
-* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
-  `everywhere`, `evens` and `odds` are still the same.
+* Various deprecated items have been removed:
+  - The 3-argument form of `set_*`. Instead, use `map_*`. 
+  - The `byrow` argument to `set_*`. Instead, use `map_*` and `by_cols()`.
+  - `error_style` and `pad_decimal` arguments in `huxreg`. Use `error_format` and
+    `align(hx) <- "."`.
+  - The `where()`, `is_a_number()` and `pad_decimal()` functions. Use `map_*`
+    functions, `! is.na(as.numeric(x))`, and `align(ht) <- "."`.
 * Default padding has been increased to 6 points.
 * By default, `width()` is now unset.
 * By default, `wrap()` is now `TRUE`.
+* `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
+  `everywhere`, `evens` and `odds` are still the same.
 * There are changes to how LaTeX is output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
     padding should now take effect even when `wrap` is `FALSE`.
   - The default LaTeX table environment is now "tabular" unless `width` is set. 
     If `width` is set, it is "tabularx".
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
+  - the `\centerbox` macro from the "adjustbox" package is used to centre
+    tables. This should improve centring when tables are too wide.
 * `theme_basic()` now has bold headers, and no header column 
   by default.
+* `theme_plain()` defaults to `position = "centre"`.
 
 ## Other changes
+
 
 * Huxtable now has the concept of header row and columns. 
   - To set rows to be headers,
@@ -33,23 +42,52 @@ version increments reflect backwards-incompatible API changes, not necessarily b
     For columns, use `header_col` or `set_header_col`.
   - To change header rows, do e.g. `set_bold(ht, header_row(ht), everywhere)`.
   - Many themes now set properties on headers.
+
+* `set_bold()` and `set_italic()` now use a default value of `TRUE`. So you
+  can write e.g.
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bold(1, everywhere)
+```
+* `set_left_border()`, `set_all_borders()` and friends all use a default value
+  of 0.4. So to set a default border, write e.g.
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere)
+```
+
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
   is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
 
+````
 Some iris species are shown in \@ref(tab:mytable):
 
-```{r mytable}
+```{r mytable}`r ''`
 hux(head(iris))
 ```
+````
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
-* New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
-  package will have an `as_huxtable()` method. 
+  
+* The one-argument form of `[` now works for huxtables just as it does for 
+  data frames. For example, `ht[2:3]` selects columns 2 and 3.
+* New functions `merge_across()` and `merge_down()` to create multicolumn
+  or multirow cells.
+* A new table-level property, `caption_width()`, allows you to set the width of 
+  the caption. The default, `NA`, sets the width equal to the table width.
+* Screen output now displays table position and caption position.
+* huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 * Improvements to `as_flextable()`.
 * Improvements to `quick_pptx()` (thanks @davidgohel).
 * Bugfixes for `options(huxtable.use_fontspec = TRUE)`.
 
+## Other news
+
+New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
+package will have an `as_huxtable()` method. 
 
 # huxtable 4.7.1
 
