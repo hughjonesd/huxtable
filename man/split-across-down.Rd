@@ -6,18 +6,18 @@
 \alias{split_down}
 \title{Split a huxtable into multiple huxtables.}
 \usage{
-split_across(ht, after, size, repeat_headers = TRUE)
+split_across(ht, after, height, with_headers = TRUE)
 
-split_down(ht, after, size, repeat_headers = TRUE)
+split_down(ht, after, width, with_headers = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{after}{Rows/columns after which to split.}
 
-\item{size}{Maximum height/width for the result.}
+\item{height, width}{Maximum height/width for the result.}
 
-\item{repeat_headers}{Logical. Should header rows/columns be added to
+\item{with_headers}{Logical. Should header rows/columns be added to
 all of the new tables?}
 }
 \value{
@@ -28,9 +28,12 @@ These functions split a huxtable horizontally or vertically, and
 return the new sub-tables in a list.
 }
 \details{
-Only one of \code{after} and \code{size} must be given. If \code{size} is given,
-the huxtable will be split by \code{\link[=row_height]{row_height()}} or \code{\link[=col_width]{col_width()}},
-which must be numeric with no \code{NA} values.
+Only one of \code{after} and \code{width} or \code{height} must be given. If \code{width} or
+\code{height} is given, the huxtable will be split by \code{\link[=col_width]{col_width()}} or
+\code{\link[=row_height]{row_height()}}, which must be numeric with no \code{NA} values.
+
+If \code{with_headers} is \code{TRUE}, all previous headers will be added to each
+new table.
 }
 \examples{
 ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
@@ -43,4 +46,5 @@ split_down(ht, size = 0.3)
 
 # headers are repeated:
 split_across(jams, 3)
+
 }
