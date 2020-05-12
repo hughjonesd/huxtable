@@ -97,11 +97,12 @@ test_that("to_screen positioning", {
 
   position(ht) <- "right"
   to_s_res <- to_screen(ht, max_width = 80)
-  expect_match(to_s_res, "\\s{60,}foo", perl = TRUE)
+  expect_match(to_s_res, "\\s{60,}.*foo", perl = TRUE)
 
   ht <- set_bold(ht)
   to_s_res <- to_screen(ht, max_width = 80)
-  expect_match(to_s_res, "\\s{60,}foo", perl = TRUE)
+  # the stars are for the control characters making foo bold
+  expect_match(to_s_res, "\\s{60,}.*f.*o.*o", perl = TRUE)
 })
 
 

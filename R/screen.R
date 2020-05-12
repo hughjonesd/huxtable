@@ -71,7 +71,8 @@ to_screen.huxtable <- function (
     charmat <- charmat_data$charmat
     border_rows <- charmat_data$border_rows
     border_cols <- charmat_data$border_cols
-    last_ht_col    <- charmat_data$last_ht_col
+    last_ht_col <- charmat_data$last_ht_col
+    width_mat <- charmat_data$width_mat
     ht <- ht[, seq_len(last_ht_col)]
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
@@ -136,7 +137,20 @@ to_screen.huxtable <- function (
     }
 
     result <- apply(charmat, 1, paste0, collapse = "")
-    result <- pad_position(result, position_no_wrap(ht), max_width)
+    # we can't use conventional string padding because of colour strings
+    # instead this horrible hack uses the uncoloured widths, and adds 1 for
+    # any borders we find.
+    width_mat <- pmax(width_mat, 1)
+    width_mat[charmat == ""] <- 0
+    row_char_widths <- rowSums(width_mat)
+    pad_width <- min(max_width, getOption("width", 80))
+    pad_width <- pad_width - max(row_char_widths)
+    pad_width <- switch(position_no_wrap(ht),
+            "left"   = 0,
+            "right"  = pad_width,
+            "center" = floor(pad_width/2)
+          )
+    result <- paste0(strrep(" ", pad_width), result)
     result <- paste(result, collapse = "\n")
   } else {
     # 0-nrow or 0-ncol huxtable
@@ -350,6 +364,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   starting_rows <- cumsum(all_heights[seq_len(nrow(ht))]) + 1
   border_rows   <- c(starting_rows, sum(all_heights) + 1) - border_heights
   charmat <- matrix(" ", sum(all_heights), sum(all_widths))
+  width_mat <- matrix(0, sum(all_heights), sum(all_widths))
 
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
@@ -360,10 +375,12 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     rows <- seq(starting_rows[drow], starting_rows[drow] + dcell$text_height - 1)
     cols <- seq(starting_cols[dcol], starting_cols[dcol] + dcell$text_width - 1)
     charmat[rows, cols] <- matrix(style(string_letters), length(rows), length(cols), byrow = TRUE)
+    width_mat[rows, cols] <- matrix(ncharw(string_letters), length(rows), length(cols), byrow = TRUE)
   }
 
   list(
           charmat     = charmat,
+          width_mat   = width_mat,
           border_rows = border_rows,
           border_cols = border_cols,
           last_ht_col = ncol(ht)
@@ -378,6 +395,7 @@ pad_position <- function (string, position, max_width) {
   side <- if (position == "center") "both" else "left"
   stringr::str_pad(string, width, side)
 }
+
 
 make_cell_style <- function (ht, row, col) {
   tc         <- text_color(ht)[row, col]
