@@ -62,7 +62,7 @@ theme_plain <- function(ht, position = "center"){
   ht <- set_outer_borders(ht, 0.4)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
   ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
-  ht <- set_bottom_border(ht, max(which(header_rows(ht))), everywhere, 0.4)
+  ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
   ht <- set_position(ht, position)
   ht <- clean_outer_padding(ht)
 
@@ -78,12 +78,12 @@ theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
   ht <- set_all_borders(ht, 0)
   if (header_row) {
     ht <- set_header_rows(ht, 1, TRUE)
-    ht <- set_bottom_border(ht, max(which(header_rows(ht))), everywhere)
+    ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
     ht <- set_bold(ht, header_rows(ht), everywhere)
   }
   if (header_col) {
     ht <- set_header_cols(ht, 1, TRUE)
-    ht <- set_right_border(ht, everywhere, max(which(header_cols(ht))))
+    ht <- set_right_border(ht, everywhere, largest(header_cols(ht)))
     ht <- set_bold(ht, everywhere, header_cols(ht))
   }
 
@@ -238,4 +238,9 @@ clean_outer_padding <- function (ht) {
   ht <- set_right_padding(ht, everywhere, final(1), 0)
 
   ht
+}
+
+
+largest <- function(x) {
+  if (any(x)) max(which(x)) else integer(0)
 }
