@@ -21,27 +21,22 @@
 \usage{
 left_border_color(ht)
 left_border_color(ht) <- value
-set_left_border_color(ht, row, col, value)
-map_left_border_color(ht, row, col, fn)
-
-left_border_color(ht)
-left_border_color(ht) <- value
-set_left_border_color(ht, row, col, value)
+set_left_border_color(ht, row, col, value )
 map_left_border_color(ht, row, col, fn)
 
 right_border_color(ht)
 right_border_color(ht) <- value
-set_right_border_color(ht, row, col, value)
+set_right_border_color(ht, row, col, value )
 map_right_border_color(ht, row, col, fn)
 
 top_border_color(ht)
 top_border_color(ht) <- value
-set_top_border_color(ht, row, col, value)
+set_top_border_color(ht, row, col, value )
 map_top_border_color(ht, row, col, fn)
 
 bottom_border_color(ht)
 bottom_border_color(ht) <- value
-set_bottom_border_color(ht, row, col, value)
+set_bottom_border_color(ht, row, col, value )
 map_bottom_border_color(ht, row, col, fn)
 }
 \arguments{

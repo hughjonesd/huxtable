@@ -9,7 +9,7 @@
 \usage{
 text_color(ht)
 text_color(ht) <- value
-set_text_color(ht, row, col, value)
+set_text_color(ht, row, col, value )
 map_text_color(ht, row, col, fn)
 }
 \arguments{

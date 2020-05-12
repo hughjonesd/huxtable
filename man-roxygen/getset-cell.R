@@ -15,6 +15,10 @@ if (exists('morealiases')) {
 default_property <- huxtable::get_default_properties(attr_name)[[1]]
 if (is.list(default_property)) default_property <- default_property[[1]]
 if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"", default_property)
+
+# this is the function default
+default_str <- if (exists("default")) paste("=", default) else ""
+
 %>
 
 #' @title <%= attr_desc %>
@@ -25,7 +29,7 @@ if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"
 #' @usage
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
-#' set_<%= attr_name %>(ht, row, col, value)
+#' set_<%= attr_name %>(ht, row, col, value <%= default_str %>)
 #' map_<%= attr_name %>(ht, row, col, fn)
 #'
 #' @param ht A huxtable.

@@ -13,17 +13,12 @@
 \usage{
 bold(ht)
 bold(ht) <- value
-set_bold(ht, row, col, value)
-map_bold(ht, row, col, fn)
-
-bold(ht)
-bold(ht) <- value
-set_bold(ht, row, col, value)
+set_bold(ht, row, col, value = TRUE)
 map_bold(ht, row, col, fn)
 
 italic(ht)
 italic(ht) <- value
-set_italic(ht, row, col, value)
+set_italic(ht, row, col, value = TRUE)
 map_italic(ht, row, col, fn)
 }
 \arguments{

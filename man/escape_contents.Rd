@@ -9,7 +9,7 @@
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
-set_escape_contents(ht, row, col, value)
+set_escape_contents(ht, row, col, value )
 map_escape_contents(ht, row, col, fn)
 }
 \arguments{

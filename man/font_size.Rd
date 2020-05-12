@@ -9,7 +9,7 @@
 \usage{
 font_size(ht)
 font_size(ht) <- value
-set_font_size(ht, row, col, value)
+set_font_size(ht, row, col, value )
 map_font_size(ht, row, col, fn)
 }
 \arguments{

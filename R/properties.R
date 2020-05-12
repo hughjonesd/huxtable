@@ -391,6 +391,7 @@ make_getter_setters("text_color", "cell")
 #' @templateVar attr_desc Borders
 #' @templateVar value_param_desc A numeric vector or matrix giving border widths in points. Set to 0 for no border.
 #' @templateVar morealiases right_border top_border bottom_border
+#' @templateVar default 0.4
 #' @details
 #' Currently in LaTeX, all non-zero border widths on a given line must be the
 #' same, and vertical border widths can only be present (if `value > 0`) or absent.
@@ -402,7 +403,6 @@ make_getter_setters("text_color", "cell")
 #' @templateVar attr_val2 0
 #' @template getset-visible-rowspec-example
 #' @template border-warning
-#' @template cell-property-usage
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border")) make_getter_setters(val, "cell",
       check_fun = is.numeric, default = 0.4)
@@ -412,6 +412,7 @@ for (val in paste0(c("left", "right", "top", "bottom"), "_border")) make_getter_
 #' @rdname left_border
 #' @return Similarly for the other functions.
 #' @templateVar attr_name right_border
+#' @templateVar default 0.4
 #' @template cell-property-usage
 NULL
 
@@ -419,6 +420,7 @@ NULL
 #' @name top_border
 #' @rdname left_border
 #' @templateVar attr_name top_border
+#' @templateVar default 0.4
 #' @template cell-property-usage
 NULL
 
@@ -426,6 +428,7 @@ NULL
 #' @name bottom_border
 #' @rdname left_border
 #' @templateVar attr_name bottom_border
+#' @templateVar default 0.4
 #' @template cell-property-usage
 NULL
 
@@ -450,7 +453,6 @@ NULL
 #'       1:2, 1, "red")
 #'
 #' @template border-warning
-#' @template cell-property-usage
 #'
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_color")) make_getter_setters(val,
@@ -485,7 +487,6 @@ NULL
 #' @templateVar morealiases right_border_style top_border_style bottom_border_style
 #' @templateVar attr_val "solid"
 #' @template getset-cell
-#' @template cell-property-usage
 #' @details
 #' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
 #' top borders take priority over bottom borders.
@@ -506,7 +507,6 @@ NULL
 #'       "double")
 #'
 #' @template border-warning
-#' @template cell-property-usage
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_style")) make_getter_setters(val,
       "cell", check_values = c("solid", "double", "dashed", "dotted"))
@@ -545,7 +545,6 @@ NULL
 #' @templateVar attr_val 20
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 10
-#' @template cell-property-usage
 NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_padding")) make_getter_setters(val, "cell")
 
@@ -640,12 +639,12 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @templateVar value_param_desc
 #' A logical vector or matrix. `TRUE` for bold/italic.
 #' @templateVar morealiases italic
+#' @templateVar default TRUE
 #' @template getset-example
 #' @templateVar attr_val TRUE
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
-#' @template cell-property-usage
 NULL
 make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
 
@@ -653,6 +652,7 @@ make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
 #' @name italic
 #' @rdname bold
 #' @templateVar attr_name italic
+#' @templateVar default TRUE
 #' @template cell-property-usage
 #' @return
 #' Similarly for \code{italic} and friends.

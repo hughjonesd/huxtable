@@ -9,7 +9,7 @@
 \usage{
 rotation(ht)
 rotation(ht) <- value
-set_rotation(ht, row, col, value)
+set_rotation(ht, row, col, value )
 map_rotation(ht, row, col, fn)
 }
 \arguments{

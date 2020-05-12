@@ -13,12 +13,12 @@
 \usage{
 rowspan(ht)
 rowspan(ht) <- value
-set_rowspan(ht, row, col, value)
+set_rowspan(ht, row, col, value )
 map_rowspan(ht, row, col, fn)
 
 colspan(ht)
 colspan(ht) <- value
-set_colspan(ht, row, col, value)
+set_colspan(ht, row, col, value )
 map_colspan(ht, row, col, fn)
 }
 \arguments{

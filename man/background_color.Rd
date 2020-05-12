@@ -9,7 +9,7 @@
 \usage{
 background_color(ht)
 background_color(ht) <- value
-set_background_color(ht, row, col, value)
+set_background_color(ht, row, col, value )
 map_background_color(ht, row, col, fn)
 }
 \arguments{

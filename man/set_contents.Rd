@@ -9,7 +9,7 @@
 \usage{
 contents(ht)
 contents(ht) <- value
-set_contents(ht, row, col, value)
+set_contents(ht, row, col, value )
 map_contents(ht, row, col, fn)
 }
 \arguments{

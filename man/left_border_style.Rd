@@ -21,32 +21,22 @@
 \usage{
 left_border_style(ht)
 left_border_style(ht) <- value
-set_left_border_style(ht, row, col, value)
-map_left_border_style(ht, row, col, fn)
-
-left_border_style(ht)
-left_border_style(ht) <- value
-set_left_border_style(ht, row, col, value)
-map_left_border_style(ht, row, col, fn)
-
-left_border_style(ht)
-left_border_style(ht) <- value
-set_left_border_style(ht, row, col, value)
+set_left_border_style(ht, row, col, value )
 map_left_border_style(ht, row, col, fn)
 
 right_border_style(ht)
 right_border_style(ht) <- value
-set_right_border_style(ht, row, col, value)
+set_right_border_style(ht, row, col, value )
 map_right_border_style(ht, row, col, fn)
 
 top_border_style(ht)
 top_border_style(ht) <- value
-set_top_border_style(ht, row, col, value)
+set_top_border_style(ht, row, col, value )
 map_top_border_style(ht, row, col, fn)
 
 bottom_border_style(ht)
 bottom_border_style(ht) <- value
-set_bottom_border_style(ht, row, col, value)
+set_bottom_border_style(ht, row, col, value )
 map_bottom_border_style(ht, row, col, fn)
 }
 \arguments{

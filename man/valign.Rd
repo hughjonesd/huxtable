@@ -9,7 +9,7 @@
 \usage{
 valign(ht)
 valign(ht) <- value
-set_valign(ht, row, col, value)
+set_valign(ht, row, col, value )
 map_valign(ht, row, col, fn)
 }
 \arguments{

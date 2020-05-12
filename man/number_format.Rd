@@ -9,7 +9,7 @@
 \usage{
 number_format(ht)
 number_format(ht) <- value
-set_number_format(ht, row, col, value)
+set_number_format(ht, row, col, value )
 map_number_format(ht, row, col, fn)
 }
 \arguments{

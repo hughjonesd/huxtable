@@ -9,7 +9,7 @@
 \usage{
 na_string(ht)
 na_string(ht) <- value
-set_na_string(ht, row, col, value)
+set_na_string(ht, row, col, value )
 map_na_string(ht, row, col, fn)
 }
 \arguments{

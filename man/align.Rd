@@ -9,7 +9,7 @@
 \usage{
 align(ht)
 align(ht) <- value
-set_align(ht, row, col, value)
+set_align(ht, row, col, value )
 map_align(ht, row, col, fn)
 }
 \arguments{

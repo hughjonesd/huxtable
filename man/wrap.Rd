@@ -9,7 +9,7 @@
 \usage{
 wrap(ht)
 wrap(ht) <- value
-set_wrap(ht, row, col, value)
+set_wrap(ht, row, col, value )
 map_wrap(ht, row, col, fn)
 }
 \arguments{

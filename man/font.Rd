@@ -9,12 +9,12 @@
 \usage{
 font(ht)
 font(ht) <- value
-set_font(ht, row, col, value)
+set_font(ht, row, col, value )
 map_font(ht, row, col, fn)
 
 font(ht)
 font(ht) <- value
-set_font(ht, row, col, value)
+set_font(ht, row, col, value )
 map_font(ht, row, col, fn)
 }
 \arguments{
