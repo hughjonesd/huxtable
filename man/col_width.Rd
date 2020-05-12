@@ -4,7 +4,7 @@
 \alias{col_width}
 \alias{col_width<-}
 \alias{set_col_width}
-\title{Column widths}
+\title{Column width}
 \usage{
 col_width(ht)
 col_width(ht) <- value
@@ -22,7 +22,7 @@ For \code{col_width}, the \code{col_width} property.
 For \code{set_col_width}, the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{column widths} property of huxtable cols.
+Functions to get or set the \emph{column width} property of huxtable cols.
 }
 \details{
 In LaTeX, if you specify a column width, but set \code{wrap} to \code{FALSE} and have cells which
@@ -38,7 +38,7 @@ col_width(jams)
 col_width(jams) <- orig
 }
 \seealso{
-Other row/column heights: 
+Other row/column sizes: 
 \code{\link{row_height}()}
 }
-\concept{row/column heights}
+\concept{row/column sizes}

@@ -246,13 +246,13 @@ make_getter_setters("align", "cell", check_fun = check_align_value,
 #' @template getset-rowcol
 #' @templateVar attr_name col_width
 #' @templateVar rowcol col
-#' @templateVar attr_desc Column widths
+#' @templateVar attr_desc Column width
 #' @templateVar value_param_desc A vector. If numeric, they are treated as proportions of the table width. If character, they must be valid CSS or LaTeX lengths.
 #' @details
 #' In LaTeX, if you specify a column width, but set `wrap` to `FALSE` and have cells which
 #' overrun, then you may have problems with table position and with background colours in other cells.
 #' The workaround is to adjust the width, so that your cells no longer overrun.
-#' @family row/column heights
+#' @family row/column sizes
 #' @template getset-example
 #' @templateVar attr_val c(.2, .8)
 NULL
@@ -272,9 +272,9 @@ NULL
 #' @template getset-rowcol
 #' @templateVar attr_name row_height
 #' @templateVar rowcol row
-#' @templateVar attr_desc Row heights
+#' @templateVar attr_desc Row height
 #' @templateVar value_param_desc A vector.
-#' @family row/column heights
+#' @family row/column sizes
 #' @details
 #' If character, `value` must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
 #' treated as proportions of the text height (`\\textheight`).

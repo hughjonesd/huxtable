@@ -4,7 +4,7 @@
 \alias{row_height}
 \alias{row_height<-}
 \alias{set_row_height}
-\title{Row heights}
+\title{Row height}
 \usage{
 row_height(ht)
 row_height(ht) <- value
@@ -22,7 +22,7 @@ For \code{row_height}, the \code{row_height} property.
 For \code{set_row_height}, the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{row heights} property of huxtable rows.
+Functions to get or set the \emph{row height} property of huxtable rows.
 }
 \details{
 If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
@@ -37,7 +37,7 @@ row_height(jams)
 row_height(jams) <- orig
 }
 \seealso{
-Other row/column heights: 
+Other row/column sizes: 
 \code{\link{col_width}()}
 }
-\concept{row/column heights}
+\concept{row/column sizes}

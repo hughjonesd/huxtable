@@ -8,7 +8,9 @@ NULL
 
 #' Split a huxtable into multiple huxtables.
 #'
-#' These functions split a huxtable either acrossways or lengthways.
+#' These functions split a huxtable horizontally or vertically, and
+#' return the new sub-tables in a list.
+#'
 #' @param ht A huxtable.
 #' @param after Rows/columns after which to split.
 #' @param size Maximum height/width for the result.
@@ -16,9 +18,9 @@ NULL
 #' @return A list of huxtables.
 #'
 #' @details
-#' Only one of `after` and `size` should be used. If `size` is used,
-#' [row_height()] or [col_width()] must be numeric with no `NA` values.
-#' These will be used to determine where to split the huxtable.
+#' Only one of `after` and `size` must be given. If `size` is given,
+#' the huxtable will be split by [row_height()] or [col_width()],
+#' which must be numeric with no `NA` values.
 #'
 #' @examples
 #' ht <- as_hux(matrix(LETTERS[1:16], 4, 4))

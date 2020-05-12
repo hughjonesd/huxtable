@@ -21,12 +21,13 @@ split_down(ht, after, size)
 A list of huxtables.
 }
 \description{
-These functions split a huxtable either acrossways or lengthways.
+These functions split a huxtable horizontally or vertically, and
+return the new sub-tables in a list.
 }
 \details{
-Only one of \code{after} and \code{size} should be used. If \code{size} is used,
-\code{\link[=row_height]{row_height()}} or \code{\link[=col_width]{col_width()}} must be numeric with no \code{NA} values.
-These will be used to determine where to split the huxtable.
+Only one of \code{after} and \code{size} must be given. If \code{size} is given,
+the huxtable will be split by \code{\link[=row_height]{row_height()}} or \code{\link[=col_width]{col_width()}},
+which must be numeric with no \code{NA} values.
 }
 \examples{
 ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
