@@ -122,26 +122,23 @@ theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
 
 #' @export
 #' @rdname themes
-#' @param stripe Background colour for alternate rows
-theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, header_col = TRUE) {
+#' @param stripe  Background colour for odd rows
+#' @param stripe2 Background colour for even rows
+theme_striped <- function (ht, stripe = "grey90",
+      stripe2 = "grey95", header_row = TRUE, header_col = TRUE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
-  ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
-  background_color(ht)[seq(1, nrow(ht), 2), ] <- "white"
-  if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2), ] <- stripe
+  ht <- set_all_borders(ht)
+  ht <- set_all_border_colors(ht, "white")
+  ht <- map_background_color(ht, by_rows(stripe, stripe2))
+
   if (header_row) {
     ht <- set_header_rows(ht, 1, TRUE)
-    background_color(ht)[header_rows(ht), ] <- "black"
-    text_color(ht)[header_rows(ht), ]       <- "white"
-    ht <- set_all_border_colors(ht, header_rows(ht), everywhere, "white")
-    bold(ht)[header_rows(ht), ]             <- TRUE
+    ht <- style_header_rows(ht, bold = TRUE)
   }
   if (header_col) {
     ht <- set_header_cols(ht, 1, TRUE)
-    background_color(ht)[, header_cols(ht)] <- "black"
-    text_color(ht)[, header_cols(ht)]       <- "white"
-    ht <- set_all_border_colors(ht, everywhere, header_cols(ht), "white")
-    bold(ht)[, header_cols(ht)]             <- TRUE
+    ht <- style_header_cols(ht, bold = TRUE)
   }
   ht <- clean_outer_padding(ht)
 
@@ -260,8 +257,9 @@ theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
 
 
 clean_outer_padding <- function (ht) {
-  ht <- set_left_padding(ht, everywhere, 1, 0)
-  ht <- set_right_padding(ht, everywhere, final(1), 0)
+  # latex works best with 0; but for HTML that's too tight
+  ht <- set_left_padding(ht, everywhere, 1, 2)
+  ht <- set_right_padding(ht, everywhere, final(1), 2)
 
   ht
 }
