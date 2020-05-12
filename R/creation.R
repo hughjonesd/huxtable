@@ -1,6 +1,4 @@
 
-# basic huxtable creation --------------------------------------------------------------------------
-
 #' @import assertthat
 NULL
 

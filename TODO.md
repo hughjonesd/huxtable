@@ -42,22 +42,21 @@ Changes for 5.0
     and would return a list of huxtables.
 * subcaption option?
 * transparent colours in HTML, RTF, docx?
-* Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
-  borders and less intense headers.
 
-* Check any interesting stuff from v5.0-devel branch
-* In general, when properties are unset, pick them dynamically for "good defaults", rather
-  than setting a predictable default.
-  - This is a better more general solution than `autoformat`, which could maybe be retired....
-* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and
-  who uses it? 
-  - though the problem is having to keep to `options(screen)`, not
-    the fact that it is an argument.
 
 
 Future thoughts
 ===============
 
+* In general, when properties are unset, pick them dynamically for "good defaults", rather
+  than setting a predictable default.
+  - This is a better more general solution than `autoformat`, which could
+    maybe be retired....
+
+* Get rid of max_width in to_screen, to_md. It's a huge hassle for the code, and
+  who uses it? 
+  - though the problem is having to keep to `options(screen)`, not
+    the fact that it is an argument.
 
 * Drop shadows? :-)
   - looks like a Tikz job in TeX...

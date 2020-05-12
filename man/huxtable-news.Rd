@@ -74,6 +74,8 @@ headers.
 \item In themes, \code{header_row/col = TRUE} set the first row/col to a
 header, and style all header rows/cols.
 }
+\item \code{set_cell_properties()} has been renamed \code{style_cells()}. It is
+retained as a soft-deprecated alias.
 \item \code{set_bold()} and \code{set_italic()} now use a default value of \code{TRUE}.
 So you can write e.g.
 }\if{html}{\out{
@@ -110,8 +112,8 @@ behaviour.
 \itemize{
 \item The one-argument form of \code{[} now works for huxtables just as it does
 for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
-\item New functions \code{merge_across()} and \code{merge_down()} to merge cells
-across rows, or down columns, only.
+\item New functions \code{merge_across()} and \code{merge_down()} to merge an area
+of cells horizontally across rows, or vertically down columns.
 \item New functions
 \verb{set_lr_borders()/_border_colors()/_border_styles()/_padding()}
 to set left and right borders and padding simultaneously. New

@@ -59,6 +59,9 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - In themes, `header_row/col = TRUE` set the first row/col to a header,
     and style all header rows/cols.
 
+* `set_cell_properties()` has been renamed `style_cells()`. It is retained
+  as a soft-deprecated alias.
+
 * `set_bold()` and `set_italic()` now use a default value of `TRUE`. So you
   can write e.g.
   
@@ -90,8 +93,8 @@ hux(head(iris))
 * The one-argument form of `[` now works for huxtables just as it does for 
   data frames. For example, `ht[2:3]` selects columns 2 and 3.
   
-* New functions `merge_across()` and `merge_down()` to merge cells across rows,
-  or down columns, only.
+* New functions `merge_across()` and `merge_down()` to merge an area of cells
+  horizontally across rows, or vertically down columns.
 
 * New functions `set_lr_borders()/_border_colors()/_border_styles()/_padding()`  
   to set left and right borders and padding simultaneously.

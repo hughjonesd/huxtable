@@ -1,7 +1,4 @@
 
-
-# unexported utility functions ---------------------------------------------------------------------
-
 #' @import assertthat
 NULL
 
@@ -238,6 +235,11 @@ decimal_pad <- function(col, pad_chars, type) {
 
   orig_col[! na_pad] <- col
   orig_col
+}
+
+
+str_rep <- function(x, times) {
+  mapply(function (s, t) paste0(rep(s, t), collapse = ""), x, times)
 }
 
 
