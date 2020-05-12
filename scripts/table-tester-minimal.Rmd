@@ -38,6 +38,9 @@ long <- 'A rather long row of text which goes on...'
 ```
 
 ```{r}
-hux("just to get our dependencies") %>% 
-      set_caption("here is a longish caption... it is very long!") 
+as_hux(matrix(LETTERS[1:6], 2, 3)) %>% 
+      set_right_border(2) %>% 
+      set_right_border_color("white") %>% 
+      set_bottom_border(0.4)
+  
 ```

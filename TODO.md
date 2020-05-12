@@ -17,27 +17,32 @@ Changes for 5.0
 ===============
 
 
-* Let width/height/colwidth/rowheight use units?
-  - CSS units to support, see https://developer.mozilla.org/en-US/docs/Web/CSS/length
-    - cap, ch, em, ex, ic, lh, rem, rlh (these are "font-relative")
-    - px (1/96 inch), cm, mm, Q (1/4 mm), pt (1/72 in), pc (12 pt)
-    - there are also viewport relative units, but they don't convert
-    - and percentages bien sur!
-  - LaTeX units to support, see
-  - Note that the "units" package doesn't have all CSS units;
-    maybe a new cssunits package is a good idea?
-  - Convert character widths to a standard unit (points? cm?)
-  - You can then use these in more places.
+* Let width/height/colwidth/rowheight use cssunits?
+
+* New pastel theme?
   
-* `caption_pos()` should just be top or bottom. What sort of pervert puts
-  the table on the left but the caption on the right?
-  - hmm, actually you might have a centred table on the page, but the
-    caption on the left of the table (assuming `caption_width` is `NA`).
+* You can "trim" hhline borders by adding e.g.
+  `>{\huxb{255,255,255}{2}}|`
+  after each vertical border line - or =. It has to be the same width as
+  the vertical border, because it isn't centred otherwise.
+  So you could have it as a general property 
+  (roughly speaking, do
+  vertical borders have "priority"); then maybe a convenience function 
+  `trim_borders` which would set the relevant border width and set vertical
+  border priority.
+  - There's a similarly hackish approach in CSS using :after to create an imaginary
+  border.
+  - Does one need the same thing for vertical borders? (Actuallly this is pretty
+    much how it currently works in LaTeX.)
+  - In HTML (on FF), at the 4 "outer" corners different colours split diagonally; at
+    all other corners, horizontal borders have priority except on the top row. 
+    i.e. it's an unreliable mess!
+* `by_` function to use palettes/scales for colour?
     
 * Ability to `restack()` a table sideways or lengthways, and to `split` a table.
-  - `restack_longer(ht, ncol, width)` where `ncol` is the number of columns
+  - `restack_across(ht, ncol, width)` where `ncol` is the number of columns
     of the new result; or `width` is the maximum width?
-  - `restack_wider(ht, nrow, height)` similar
+  - `restack_down(ht, nrow, height)` similar
   - `split_across` and `split_down` would do the split but not the restacking,
     and would return a list of huxtables.
 * subcaption option?
@@ -59,8 +64,10 @@ Changes for 5.0
 Future thoughts
 ===============
 
-* Future
 
+* Drop shadows? :-)
+  - looks like a Tikz job in TeX...
+  
 * Separate out table format representation and output from table creation.
 * Create a "textable" package which handles representation
   - just basic as_textable methods for data frames etc.
