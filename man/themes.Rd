@@ -22,7 +22,8 @@ theme_basic(ht, header_row = TRUE, header_col = FALSE)
 
 theme_striped(
   ht,
-  stripe = grDevices::grey(0.9),
+  stripe = "grey90",
+  stripe2 = "grey95",
   header_row = TRUE,
   header_col = TRUE
 )
@@ -51,7 +52,9 @@ columns?}
 
 \item{border_color}{Border color to set. Default "white"}
 
-\item{stripe}{Background colour for alternate rows}
+\item{stripe}{Background colour for odd rows}
+
+\item{stripe2}{Background colour for even rows}
 
 \item{prop_colored}{Roughly what proportion of cells should have a primary-color background?}
 

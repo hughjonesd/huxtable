@@ -114,5 +114,5 @@ ht <- set_all_padding(ht, 1:3, 1:2, "20px")
 ht <- set_tb_padding(ht, 10)
 ht <- set_tb_borders(ht)
 set_tb_border_colors(ht, "red")
-set_tb_border_styles(ht, "red")
+set_tb_border_styles(ht, "double")
 }

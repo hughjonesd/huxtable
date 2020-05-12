@@ -275,7 +275,7 @@ map_lr_border_colors <- function (ht, row, col, fn) {
 #' @rdname set-multiple
 #' @export
 #' @examples
-#' set_tb_border_styles(ht, "red")
+#' set_tb_border_styles(ht, "double")
 set_tb_border_styles <- function (ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_style", sides = c("top", "bottom"))
 }

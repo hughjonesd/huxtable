@@ -50,9 +50,15 @@ wide.
 }
 \item huxtable no longer supports dplyr versions less than 0.7.0 (released
 mid-2017).
-\item \code{theme_basic()} now has bold headers, a border at the bottom, and no
-header column by default.
+\item Various themes have been tweaked:
+\itemize{
+\item \code{theme_basic()} now has bold headers, a border at the bottom,
+and no header column by default.
 \item \code{theme_plain()} defaults to \code{position = "centre"}.
+\item \code{theme_striped()} uses grey stripes, a white border, and subtler
+headers.
+\item \code{theme_article()} has thinner borders.
+}
 }
 }
 
