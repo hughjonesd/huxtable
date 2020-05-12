@@ -3,6 +3,7 @@
 \name{themes}
 \alias{themes}
 \alias{theme_plain}
+\alias{theme_bright}
 \alias{theme_basic}
 \alias{theme_striped}
 \alias{theme_grey}
@@ -14,6 +15,8 @@
 \title{Theme a huxtable}
 \usage{
 theme_plain(ht, position = "center")
+
+theme_bright(ht, header_row = TRUE, header_col = FALSE, border_color = "white")
 
 theme_basic(ht, header_row = TRUE, header_col = FALSE)
 
@@ -46,6 +49,8 @@ theme_mondrian(ht, prop_colored = 0.1, font = "Arial")
 \item{header_col}{Logical: set first column to header, and style header
 columns?}
 
+\item{border_color}{Border color to set. Default "white"}
+
 \item{stripe}{Background colour for alternate rows}
 
 \item{prop_colored}{Roughly what proportion of cells should have a primary-color background?}
@@ -68,6 +73,9 @@ as well as a bottom border.
 
 \code{theme_article} is similar to the style of many scientific journals.
 It sets horizontal lines above and below the table.
+
+\code{theme_bright} uses thick white borders and a colourful header. It
+works nicely with sans-serif fonts.
 
 \code{theme_grey}, \code{theme_blue}, \code{theme_orange} and \code{theme_green} use white borders and subtle
 horizontal stripes.

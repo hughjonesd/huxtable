@@ -14,6 +14,9 @@
 #' `theme_article` is similar to the style of many scientific journals.
 #'   It sets horizontal lines above and below the table.
 #'
+#'  `theme_bright` uses thick white borders and a colourful header. It
+#'  works nicely with sans-serif fonts.
+#'
 #'  `theme_grey`, `theme_blue`, `theme_orange` and `theme_green` use white borders and subtle
 #'    horizontal stripes.
 #'
@@ -65,6 +68,29 @@ theme_plain <- function(ht, position = "center"){
   ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
   ht <- set_position(ht, position)
   ht <- clean_outer_padding(ht)
+
+  ht
+}
+
+
+#' @export
+#' @rdname themes
+#' @param border_color Border color to set. Default "white"
+theme_bright <- function (ht, header_row = TRUE, header_col = FALSE,
+      border_color = "white") {
+  colors <- c("#7eabf2", "#e376e3", "#fcbb03", "#7aba59", "#fc0356")
+  ht <- set_all_borders(ht, 3)
+  ht <-  set_all_border_colors(ht, border_color)
+  if (header_row) {
+    ht <- set_header_rows(ht, 1, TRUE)
+    ht <-  map_background_color(ht, 1, everywhere, by_cols(colors))
+    ht <-  set_text_color(ht, 1, everywhere, "white")
+  }
+  if (header_col) {
+    ht <- set_header_cols(ht, 1, TRUE)
+    ht <-  map_background_color(ht, everywhere, 1, by_rows(colors))
+    ht <-  set_text_color(ht, everywhere, 1, "white")
+  }
 
   ht
 }
