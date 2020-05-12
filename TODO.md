@@ -16,15 +16,7 @@ Priority changes
 Changes for 5.0
 ===============
 
-* `set_vert_padding` and `set_horiz_padding`?
 
-* Merge in the headers-property branch
-  - Change `theme_basic()` to simply bold headers
-  
-* Let width/height/colwidth/rowheight use cssunits?
-
-* New pastel theme?
-  
 * You can "trim" hhline borders by adding e.g.
   `>{\huxb{255,255,255}{2}}|`
   after each vertical border line - or =. It has to be the same width as
@@ -39,10 +31,9 @@ Changes for 5.0
   - Does one need the same thing for vertical borders? (Actuallly this is pretty
     much how it currently works in LaTeX.)
   - In HTML (on FF), at the 4 "outer" corners different colours split diagonally; at
-    all other corners, horizontal borders have priority except on the top row. 
+    all other corners, horizontal borders have priority except on the top row.
     i.e. it's an unreliable mess!
-* `by_` function to use palettes/scales for colour?
-    
+
 * Ability to `restack()` a table sideways or lengthways, and to `split` a table.
   - `restack_across(ht, ncol, width)` where `ncol` is the number of columns
     of the new result; or `width` is the maximum width?
