@@ -97,16 +97,22 @@ test_that("map_all_*", {
   ht2 <- map_all_borders(ht, by_ranges(3, c(0, 1)))
   expect_equivalent(left_border(ht2), 1 * (as.matrix(ht2) >= 3))
   expect_equivalent(right_border(ht2), 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(top_border(ht2), 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(bottom_border(ht2), 1 * (as.matrix(ht2) >= 3))
 
   ht3 <- map_all_border_colors(ht, by_ranges(3, c("red", "black")))
   expected <- matrix(ifelse(as.matrix(ht) >= 3, "black", "red"), 5, 2)
   expect_equivalent(left_border_color(ht3), expected)
   expect_equivalent(right_border_color(ht3), expected)
+  expect_equivalent(top_border_color(ht3), expected)
+  expect_equivalent(bottom_border_color(ht3), expected)
 
   ht4 <- map_all_border_styles(ht, by_ranges(3, c("solid", "double")))
   expected <- matrix(ifelse(as.matrix(ht) >= 3, "double", "solid"), 5, 2)
   expect_equivalent(left_border_style(ht4), expected)
   expect_equivalent(right_border_style(ht4), expected)
+  expect_equivalent(top_border_style(ht4), expected)
+  expect_equivalent(bottom_border_style(ht4), expected)
 
   ht5 <- map_all_padding(ht, by_ranges(3, c(0, 10)))
   expect_equivalent(left_padding(ht5), 10 * (as.matrix(ht) >= 3))
@@ -116,5 +122,24 @@ test_that("map_all_*", {
   expected <- matrix(c(2, 2, 0, 0, 0, 4, 4, 0, 0, 0), 5, 2)
   expect_equivalent(left_border(ht6), expected)
   expect_equivalent(right_border(ht6), expected)
+})
+
+
+test_that("map_lr/tb_*", {
+  ht <- huxtable(1:5, 5:1, add_colnames = FALSE)
+  ht2 <- map_lr_border_styles(ht, by_ranges(3, c("solid", "double")))
+  expected <- matrix(ifelse(as.matrix(ht) >= 3, "double", "solid"), 5, 2)
+  expect_equivalent(left_border_style(ht2), expected)
+  expect_equivalent(right_border_style(ht2), expected)
+  expect_equivalent(top_border_style(ht2), matrix("solid", 5, 2))
+  expect_equivalent(bottom_border_style(ht2), matrix("solid", 5, 2))
+
+  ht3 <- map_tb_border_styles(ht, by_ranges(3, c("solid", "double")))
+  expected <- matrix(ifelse(as.matrix(ht) >= 3, "double", "solid"), 5, 2)
+  expect_equivalent(left_border_style(ht3), matrix("solid", 5, 2))
+  expect_equivalent(right_border_style(ht3), matrix("solid", 5, 2))
+  expect_equivalent(top_border_style(ht3), expected)
+  expect_equivalent(bottom_border_style(ht3), expected)
+
 })
 

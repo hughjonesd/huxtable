@@ -113,6 +113,40 @@ test_that("set_all_*", {
 })
 
 
+test_that("set_lr/tb_* functions", {
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
+  expect_equivalent(left_border(set_lr_borders(ht)),   matrix(0.4, 2, 2))
+  expect_equivalent(right_border(set_lr_borders(ht)),  matrix(0.4, 2, 2))
+  expect_equivalent(top_border(set_lr_borders(ht)),    matrix(0, 2, 2))
+  expect_equivalent(bottom_border(set_lr_borders(ht)), matrix(0, 2, 2))
+
+  expect_equivalent(left_border(set_tb_borders(ht)),   matrix(0, 2, 2))
+  expect_equivalent(right_border(set_tb_borders(ht)),  matrix(0, 2, 2))
+  expect_equivalent(top_border(set_tb_borders(ht)),    matrix(0.4, 2, 2))
+  expect_equivalent(bottom_border(set_tb_borders(ht)), matrix(0.4, 2, 2))
+
+  expect_equivalent(left_border_color(set_lr_border_colors(ht, "red")),   matrix("red", 2, 2))
+  expect_equivalent(right_border_color(set_lr_border_colors(ht, "red")),  matrix("red", 2, 2))
+  expect_equivalent(top_border_color(set_lr_border_colors(ht, "red")),    matrix(NA, 2, 2))
+  expect_equivalent(bottom_border_color(set_lr_border_colors(ht, "red")), matrix(NA, 2, 2))
+
+  expect_equivalent(left_border_color(set_tb_border_colors(ht, "red")),   matrix(NA, 2, 2))
+  expect_equivalent(right_border_color(set_tb_border_colors(ht, "red")),  matrix(NA, 2, 2))
+  expect_equivalent(top_border_color(set_tb_border_colors(ht, "red")),    matrix("red", 2, 2))
+  expect_equivalent(bottom_border_color(set_tb_border_colors(ht, "red")), matrix("red", 2, 2))
+
+  expect_equivalent(left_border_style(set_lr_border_styles(ht, "double")),   matrix("double", 2, 2))
+  expect_equivalent(right_border_style(set_lr_border_styles(ht, "double")),  matrix("double", 2, 2))
+  expect_equivalent(top_border_style(set_lr_border_styles(ht, "double")),    matrix("solid", 2, 2))
+  expect_equivalent(bottom_border_style(set_lr_border_styles(ht, "double")), matrix("solid", 2, 2))
+
+  expect_equivalent(left_border_style(set_tb_border_styles(ht, "double")),   matrix("solid", 2, 2))
+  expect_equivalent(right_border_style(set_tb_border_styles(ht, "double")),  matrix("solid", 2, 2))
+  expect_equivalent(top_border_style(set_tb_border_styles(ht, "double")),    matrix("double", 2, 2))
+  expect_equivalent(bottom_border_style(set_tb_border_styles(ht, "double")), matrix("double", 2, 2))
+})
+
+
 test_that("set_all_* functions work when huxtable is not attached", {
   # NB as written this test can only be run from the command line; detach call silently fails
   library(huxtable)

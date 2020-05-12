@@ -35,7 +35,9 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
   - the `\centerbox` macro from the "adjustbox" package is used to centre
     tables. This should improve centring when tables are too wide.
-    
+
+* huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
+
 * `theme_basic()` now has bold headers, a border at the bottom, and no header 
   column by default.
   
@@ -85,8 +87,13 @@ hux(head(iris))
 * The one-argument form of `[` now works for huxtables just as it does for 
   data frames. For example, `ht[2:3]` selects columns 2 and 3.
   
-* New functions `merge_across()` and `merge_down()` to create multicolumn
-  or multirow cells.
+* New functions `merge_across()` and `merge_down()` to merge cells across rows,
+  or down columns, only.
+
+* New functions `set_lr_borders()/_border_colors()/_border_styles()/_padding()`  
+  to set left and right borders and padding simultaneously.
+  New functions `set_tb_borders()` etc. to set top and bottom properties 
+  simultaneously. Analogous `map_` versions of all of these.
   
 * A new table-level property, `caption_width()`, allows you to set the width of 
   the caption. The default, `NA`, sets the width equal to the table width.
@@ -94,8 +101,6 @@ hux(head(iris))
 * Screen output now displays table position and caption position.
 
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
-
-* huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
 
 * Improvements to `as_flextable()`.
 

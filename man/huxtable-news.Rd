@@ -48,6 +48,8 @@ is off.
 centre tables. This should improve centring when tables are too
 wide.
 }
+\item huxtable no longer supports dplyr versions less than 0.7.0 (released
+mid-2017).
 \item \code{theme_basic()} now has bold headers, a border at the bottom, and no
 header column by default.
 \item \code{theme_plain()} defaults to \code{position = "centre"}.
@@ -102,15 +104,18 @@ behaviour.
 \itemize{
 \item The one-argument form of \code{[} now works for huxtables just as it does
 for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
-\item New functions \code{merge_across()} and \code{merge_down()} to create
-multicolumn or multirow cells.
+\item New functions \code{merge_across()} and \code{merge_down()} to merge cells
+across rows, or down columns, only.
+\item New functions
+\verb{set_lr_borders()/_border_colors()/_border_styles()/_padding()}
+to set left and right borders and padding simultaneously. New
+functions \code{set_tb_borders()} etc. to set top and bottom properties
+simultaneously. Analogous \code{map_} versions of all of these.
 \item A new table-level property, \code{caption_width()}, allows you to set the
 width of the caption. The default, \code{NA}, sets the width equal to the
 table width.
 \item Screen output now displays table position and caption position.
 \item huxtable supports \code{dplyr::relocate()}, new in dplyr 1.0.0.
-\item huxtable no longer supports dplyr versions less than 0.7.0 (released
-in mid-2017).
 \item Improvements to \code{as_flextable()}.
 \item Improvements to \code{quick_pptx()} (thanks @davidgohel).
 \item Bugfixes for \code{options(huxtable.use_fontspec = TRUE)}.
