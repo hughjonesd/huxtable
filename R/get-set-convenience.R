@@ -56,6 +56,48 @@ check_recognized_properties <- function (names) {
     "; to see all names, use get_default_properties()")
 }
 
+
+#' Set properties on headers
+#'
+#' These functions set arbitrary cell properties on cells in header rows
+#' and/or columns.
+#'
+#' @inherit left_border params return
+#' @inherit set_cell_properties params
+#'
+#' @export
+#'
+#' @examples
+#'
+#' style_headers(jams, text_color = "red")
+#' jams <- set_header_cols(jams, 1, TRUE)
+#' style_header_cols(jams,
+#'   text_color = c(NA, "red",
+#'     "darkred", "purple")
+#'   )
+#'
+style_headers <- function (ht, ...) {
+  ht <- style_header_rows(ht, ...)
+  ht <- style_header_cols(ht, ...)
+
+  ht
+}
+
+
+#' @export
+#' @rdname style_headers
+style_header_rows <- function (ht, ...) {
+  set_cell_properties(ht, header_rows(ht), everywhere, ...)
+}
+
+
+#' @export
+#' @rdname style_headers
+style_header_cols <- function (ht, ...) {
+  set_cell_properties(ht, everywhere, header_cols(ht),  ...)
+}
+
+
 #' Set left, right, top and bottom properties
 #'
 #' These are convenience functions which set left, right, top and bottom properties

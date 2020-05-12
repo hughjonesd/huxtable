@@ -9,6 +9,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
+  
 * Various deprecated items have been removed:
   - The 3-argument form of `set_*`. Instead, use `map_*`. 
   - The `byrow` argument to `set_*`. Instead, use `map_*` and `by_cols()`.
@@ -16,11 +17,16 @@ version increments reflect backwards-incompatible API changes, not necessarily b
     `align(hx) <- "."`.
   - The `where()`, `is_a_number()` and `pad_decimal()` functions. Use `map_*`
     functions, `! is.na(as.numeric(x))`, and `align(ht) <- "."`.
+    
 * Default padding has been increased to 6 points.
+
 * By default, `width()` is now unset.
+
 * By default, `wrap()` is now `TRUE`.
+
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
   `everywhere`, `evens` and `odds` are still the same.
+  
 * There are changes to how LaTeX is output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
     padding should now take effect even when `wrap` is `FALSE`.
@@ -29,19 +35,24 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
   - the `\centerbox` macro from the "adjustbox" package is used to centre
     tables. This should improve centring when tables are too wide.
-* `theme_basic()` now has bold headers, and no header column 
-  by default.
+    
+* `theme_basic()` now has bold headers, a border at the bottom, and no header 
+  column by default.
+  
 * `theme_plain()` defaults to `position = "centre"`.
 
 ## Other changes
 
 
 * Huxtable now has the concept of header row and columns. 
-  - To set rows to be headers,
-    use `header_row(ht)[row_numbers] <- TRUE` or `set_header_row(ht, row_numbers, TRUE)`.
-    For columns, use `header_col` or `set_header_col`.
-  - To change header rows, do e.g. `set_bold(ht, header_row(ht), everywhere)`.
-  - Many themes now set properties on headers.
+  - By default, data frame column names will be headers.
+  - To set other rows to be headers,
+    use `set_header_rows(ht, row_numbers, TRUE)`.
+    For columns, use `header_cols()` or `set_header_cols()`.
+  - New functions `style_headers()`, `style_header_cols()`, and 
+    `style_header_rows()` to set multiple properties on headers.
+  - In themes, `header_row/col = TRUE` set the first row/col to a header,
+    and style all header rows/cols.
 
 * `set_bold()` and `set_italic()` now use a default value of `TRUE`. So you
   can write e.g.
@@ -73,15 +84,23 @@ hux(head(iris))
   
 * The one-argument form of `[` now works for huxtables just as it does for 
   data frames. For example, `ht[2:3]` selects columns 2 and 3.
+  
 * New functions `merge_across()` and `merge_down()` to create multicolumn
   or multirow cells.
+  
 * A new table-level property, `caption_width()`, allows you to set the width of 
   the caption. The default, `NA`, sets the width equal to the table width.
+  
 * Screen output now displays table position and caption position.
+
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
+
 * huxtable no longer supports dplyr versions less than 0.7.0 (released in mid-2017).
+
 * Improvements to `as_flextable()`.
+
 * Improvements to `quick_pptx()` (thanks @davidgohel).
+
 * Bugfixes for `options(huxtable.use_fontspec = TRUE)`.
 
 ## Other news

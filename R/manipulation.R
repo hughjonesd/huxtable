@@ -698,7 +698,7 @@ add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
   ht <- rbind(cn, ht, copy_cell_props = FALSE)
   number_format(ht)[1, ] <- NA
   colnames(ht) <- cn
-  header_row(ht)[1] <- TRUE
+  header_rows(ht)[1] <- TRUE
   if (! is.null(rowname)) rownames(ht) <- c(rowname, rownames(ht)[1:(nrow(ht) - 1)])
 
   ht

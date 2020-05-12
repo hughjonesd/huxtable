@@ -11,8 +11,8 @@ huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_co
   "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
   "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
   "font")
-huxtable_col_attrs <- c("col_width", "header_col")
-huxtable_row_attrs <- c("row_height", "header_row")
+huxtable_col_attrs <- c("col_width", "header_cols")
+huxtable_row_attrs <- c("row_height", "header_rows")
 huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
       "caption_width", "tabular_environment", "label", "latex_float")
 
@@ -36,9 +36,9 @@ huxtable_env$huxtable_default_attrs <- list(
         width               = NA,
         height              = NA,
         col_width           = NA,
-        header_col          = FALSE,
         row_height          = NA,
-        header_row          = FALSE,
+        header_cols         = FALSE,
+        header_rows         = FALSE,
         background_color    = NA,
         text_color          = NA,
         left_border         = 0,
@@ -264,22 +264,9 @@ make_getter_setters("col_width", "col")
 #' Arbitrary rows and columns can be headers - they do not have to be at the top
 #' or left of the table.
 #' By default header rows and columns are not shown differently from other rows, but
-#' you can change this with e.g. `set_bold(ht, header_row(ht), everywhere)`.
+#' you can change this with [style_headers()].
 #' Various themes also set properties on headers.
 NULL
-
-
-#' @template getset-rowcol
-#' @templateVar attr_name header_col
-#' @templateVar rowcol col
-#' @templateVar attr_desc header column
-#' @templateVar value_param_desc A logical vector.
-#' @inherit header-details details
-#' @family header cells
-#' @template getset-example
-#' @templateVar attr_val c(TRUE, FALSE)
-NULL
-make_getter_setters("header_col", "col", check_fun = is.logical)
 
 
 #' @template getset-rowcol
@@ -298,7 +285,20 @@ make_getter_setters("row_height", "row")
 
 
 #' @template getset-rowcol
-#' @templateVar attr_name header_row
+#' @templateVar attr_name header_cols
+#' @templateVar rowcol col
+#' @templateVar attr_desc header column
+#' @templateVar value_param_desc A logical vector.
+#' @inherit header-details details
+#' @family header cells
+#' @template getset-example
+#' @templateVar attr_val c(TRUE, FALSE)
+NULL
+make_getter_setters("header_cols", "col", check_fun = is.logical)
+
+
+#' @template getset-rowcol
+#' @templateVar attr_name header_rows
 #' @templateVar rowcol row
 #' @templateVar attr_desc header row
 #' @templateVar value_param_desc A logical vector.
@@ -307,7 +307,7 @@ make_getter_setters("row_height", "row")
 #' @template getset-example
 #' @templateVar attr_val c(TRUE, FALSE, FALSE, FALSE)
 NULL
-make_getter_setters("header_row", "row", check_fun = is.logical)
+make_getter_setters("header_rows", "row", check_fun = is.logical)
 
 
 #' @template getset-cell

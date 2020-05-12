@@ -41,9 +41,10 @@ theme_mondrian(ht, prop_colored = 0.1, font = "Arial")
 
 \item{position}{"left", "center" or "right"}
 
-\item{header_row}{Logical: style first row differently?}
+\item{header_row}{Logical: set first row to header, and style header rows?}
 
-\item{header_col}{Logical: style first column differently?}
+\item{header_col}{Logical: set first column to header, and style header
+columns?}
 
 \item{stripe}{Background colour for alternate rows}
 
@@ -60,7 +61,8 @@ These functions quickly set default styles for a huxtable.
 \details{
 \code{theme_plain} is a simple theme with a bold header, a grey striped background, and an outer border.
 
-\code{theme_basic} just sets header rows/columns to bold and adds a border beneath them.
+\code{theme_basic} just sets header rows/columns to bold and adds a border beneath them
+as well as a bottom border.
 
 \code{theme_striped} uses different backgrounds for alternate rows, and for headers.
 

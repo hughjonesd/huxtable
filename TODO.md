@@ -16,7 +16,11 @@ Priority changes
 Changes for 5.0
 ===============
 
+* `set_vert_padding` and `set_horiz_padding`?
 
+* Merge in the headers-property branch
+  - Change `theme_basic()` to simply bold headers
+  
 * Let width/height/colwidth/rowheight use cssunits?
 
 * New pastel theme?
@@ -49,8 +53,7 @@ Changes for 5.0
 * transparent colours in HTML, RTF, docx?
 * Change `theme_striped()` to have two greys - E0 and F0 look OK - with white
   borders and less intense headers.
-* Merge in the headers-property branch
-  - Change `theme_basic()` to simply bold headers
+
 * Check any interesting stuff from v5.0-devel branch
 * In general, when properties are unset, pick them dynamically for "good defaults", rather
   than setting a predictable default.

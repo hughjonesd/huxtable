@@ -88,6 +88,23 @@ test_that("to_md prints bold and italic", {
   expect_true(all(bold[, 4] == "**"))
 })
 
+
+test_that("to_screen positioning", {
+  ht <- hux("foo")
+  position(ht) <- "centre"
+  to_s_res <- to_screen(ht, max_width = 80)
+  expect_match(to_s_res, "\\s{30,}foo", perl = TRUE)
+
+  position(ht) <- "right"
+  to_s_res <- to_screen(ht, max_width = 80)
+  expect_match(to_s_res, "\\s{60,}foo", perl = TRUE)
+
+  ht <- set_bold(ht)
+  to_s_res <- to_screen(ht, max_width = 80)
+  expect_match(to_s_res, "\\s{60,}foo", perl = TRUE)
+})
+
+
 test_that("hux_logo works", {
   # there"s randomization, so:
   for (i in 1:100) expect_silent(hux_logo())

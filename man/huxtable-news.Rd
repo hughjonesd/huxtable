@@ -48,14 +48,25 @@ is off.
 centre tables. This should improve centring when tables are too
 wide.
 }
-\item \code{theme_basic()} now has bold headers, and no header column by
-default.
+\item \code{theme_basic()} now has bold headers, a border at the bottom, and no
+header column by default.
 \item \code{theme_plain()} defaults to \code{position = "centre"}.
 }
 }
 
 \subsection{Other changes}{
 \itemize{
+\item Huxtable now has the concept of header row and columns.
+\itemize{
+\item By default, data frame column names will be headers.
+\item To set other rows to be headers, use
+\code{header_row(ht)[row_numbers] <- TRUE} or \code{set_header_row(ht, row_numbers, TRUE)}. For columns, use \code{header_col()} or
+\code{set_header_col()}.
+\item New functions \code{style_headers()}, \code{style_header_cols()}, and
+\code{style_header_rows()} to set multiple properties on headers.
+\item In themes, \code{header_row/col = TRUE} set the first row/col to a
+header, and style all header rows/cols.
+}
 \item \code{set_bold()} and \code{set_italic()} now use a default value of \code{TRUE}.
 So you can write e.g.
 }\if{html}{\out{

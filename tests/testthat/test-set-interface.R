@@ -280,7 +280,23 @@ test_that("merge_repeated_rows", {
   expect_equivalent(rowspan(ht9), matrix(c(1, 2, 1, 2, 1, 1, 1, 1, 1), 3, 3))
 
   ht_long <- hux(a = c(1, 2, 2, 1, 1))
-  ht_long<- merge_repeated_rows(ht_long)
+  ht_long <- merge_repeated_rows(ht_long)
   expect_equivalent(rowspan(ht_long), matrix(c(1, 2, 1, 2, 1), 5, 1))
+})
+
+
+test_that("style_headers et al.", {
+  ht <- hux(a = 1, add_colnames = TRUE)
+  ht <- style_headers(ht, bold = TRUE)
+  expect_equivalent(bold(ht), matrix(c(TRUE, FALSE), 2, 1))
+
+  ht <- hux(a = 1, add_colnames = TRUE)
+  ht <- style_header_rows(ht, bold = TRUE)
+  expect_equivalent(bold(ht), matrix(c(TRUE, FALSE), 2, 1))
+
+  ht <- hux("header", "content", add_colnames = FALSE)
+  ht <- set_header_cols(ht, 1, TRUE)
+  ht <- style_header_cols(ht, bold = TRUE)
+  expect_equivalent(bold(ht), matrix(c(TRUE, FALSE), 1, 2))
 })
 

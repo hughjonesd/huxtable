@@ -6,7 +6,8 @@
 #'
 #' `theme_plain` is a simple theme with a bold header, a grey striped background, and an outer border.
 #'
-#' `theme_basic` just sets header rows/columns to bold and adds a border beneath them.
+#' `theme_basic` just sets header rows/columns to bold and adds a border beneath them
+#'    as well as a bottom border.
 #'
 #' `theme_striped` uses different backgrounds for alternate rows, and for headers.
 #'
@@ -20,8 +21,9 @@
 #'   colors.
 #'
 #' @param ht A huxtable object.
-#' @param header_row Logical: style first row differently?
-#' @param header_col Logical: style first column differently?
+#' @param header_row Logical: set first row to header, and style header rows?
+#' @param header_col Logical: set first column to header, and style header
+#'   columns?
 #'
 #' @return The huxtable object, appropriately styled.
 #' @name themes
@@ -59,9 +61,10 @@ NULL
 theme_plain <- function(ht, position = "center"){
   ht <- set_outer_borders(ht, 0.4)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
-  ht <- set_bold(ht, header_row(ht), everywhere, TRUE)
-  ht <- set_bottom_border(ht, max(which(header_row(ht))), everywhere, 0.4)
+  ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
+  ht <- set_bottom_border(ht, max(which(header_rows(ht))), everywhere, 0.4)
   ht <- set_position(ht, position)
+  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -72,15 +75,20 @@ theme_plain <- function(ht, position = "center"){
 theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
-  ht <- set_all_borders(ht, 1:nrow(ht), 1:ncol(ht), 0)
+  ht <- set_all_borders(ht, 0)
   if (header_row) {
-    bottom_border(ht)[max(which(header_row(ht))), ] <- 0.4
-    bold(ht)[header_row(ht), ] <- TRUE
+    ht <- set_header_rows(ht, 1, TRUE)
+    ht <- set_bottom_border(ht, max(which(header_rows(ht))), everywhere)
+    ht <- set_bold(ht, header_rows(ht), everywhere)
   }
   if (header_col) {
-    right_border(ht)[, max(which(header_col(ht)))] <- 0.4
-    bold(ht)[, header_col(ht)] <- TRUE
+    ht <- set_header_cols(ht, 1, TRUE)
+    ht <- set_right_border(ht, everywhere, max(which(header_cols(ht))))
+    ht <- set_bold(ht, everywhere, header_cols(ht))
   }
+
+  ht <- set_bottom_border(ht, final(1), everywhere)
+  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -96,17 +104,20 @@ theme_striped <- function (ht, stripe = grDevices::grey(.9), header_row = TRUE, 
   background_color(ht)[seq(1, nrow(ht), 2), ] <- "white"
   if (nrow(ht) >= 2) background_color(ht)[seq(2, nrow(ht), 2), ] <- stripe
   if (header_row) {
-    background_color(ht)[header_row(ht), ] <- "black"
-    text_color(ht)[header_row(ht), ]       <- "white"
-    ht <- set_all_border_colors(ht, header_row(ht), everywhere, "white")
-    bold(ht)[header_row(ht), ]             <- TRUE
+    ht <- set_header_rows(ht, 1, TRUE)
+    background_color(ht)[header_rows(ht), ] <- "black"
+    text_color(ht)[header_rows(ht), ]       <- "white"
+    ht <- set_all_border_colors(ht, header_rows(ht), everywhere, "white")
+    bold(ht)[header_rows(ht), ]             <- TRUE
   }
   if (header_col) {
-    background_color(ht)[, header_col(ht)] <- "black"
-    text_color(ht)[, header_col(ht)]       <- "white"
-    ht <- set_all_border_colors(ht, everywhere, header_col(ht), "white")
-    bold(ht)[, header_col(ht)]             <- TRUE
+    ht <- set_header_cols(ht, 1, TRUE)
+    background_color(ht)[, header_cols(ht)] <- "black"
+    text_color(ht)[, header_cols(ht)]       <- "white"
+    ht <- set_all_border_colors(ht, everywhere, header_cols(ht), "white")
+    bold(ht)[, header_cols(ht)]             <- TRUE
   }
+  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -124,15 +135,18 @@ theme_maker <- function (
     ht <- set_all_border_colors(ht, border_color)
     ht <- map_background_color(ht, by_rows(col1, col2))
     if (header_row) {
-      bold(ht)[header_row(ht), ]             <- TRUE
-      background_color(ht)[header_row(ht), ] <- header_color
-      text_color(ht)[header_row(ht), ]       <- header_text
+      ht <- set_header_rows(ht, 1, TRUE)
+      bold(ht)[header_rows(ht), ]             <- TRUE
+      background_color(ht)[header_rows(ht), ] <- header_color
+      text_color(ht)[header_rows(ht), ]       <- header_text
     }
     if (header_col) {
-      bold(ht)[, header_col(ht)]             <- TRUE
-      background_color(ht)[, header_col(ht)] <- header_color
-      text_color(ht)[, header_col(ht)]       <- header_text
+      ht <- set_header_cols(ht, 1, TRUE)
+      bold(ht)[, header_cols(ht)]             <- TRUE
+      background_color(ht)[, header_cols(ht)] <- header_color
+      text_color(ht)[, header_cols(ht)]       <- header_text
     }
+    ht <- clean_outer_padding(ht)
 
     ht
   }
@@ -186,10 +200,15 @@ theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
   top_border(ht)[1, ] <- 1
   bottom_border(ht)[nrow(ht), ] <- 1
   if (header_row) {
-    bottom_border(ht)[1, ] <- 1
-    bold(ht)[1, ] <- TRUE
+    ht <- set_header_rows(ht, 1, TRUE)
+    bottom_border(ht)[header_rows(ht), ] <- 1
+    bold(ht)[header_rows(ht), ] <- TRUE
   }
-  if (header_col) bold(ht)[, 1] <- TRUE
+  if (header_col) {
+    ht <- set_header_cols(ht, 1, TRUE)
+    bold(ht)[, header_cols(ht)] <- TRUE
+  }
+  ht <- clean_outer_padding(ht)
 
   ht
 }
@@ -209,6 +228,14 @@ theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
   colors <- sample(c("red", "blue", "yellow"), length(colored), replace = TRUE)
   background_color(ht)[colored] <- colors
   font(ht) <- font
+
+  ht
+}
+
+
+clean_outer_padding <- function (ht) {
+  ht <- set_left_padding(ht, everywhere, 1, 0)
+  ht <- set_right_padding(ht, everywhere, final(1), 0)
 
   ht
 }
