@@ -6,9 +6,9 @@
 \alias{split_down}
 \title{Split a huxtable into multiple huxtables.}
 \usage{
-split_across(ht, after, size)
+split_across(ht, after, size, repeat_headers = TRUE)
 
-split_down(ht, after, size)
+split_down(ht, after, size, repeat_headers = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -16,6 +16,9 @@ split_down(ht, after, size)
 \item{after}{Rows/columns after which to split.}
 
 \item{size}{Maximum height/width for the result.}
+
+\item{repeat_headers}{Logical. Should header rows/columns be added to
+all of the new tables?}
 }
 \value{
 A list of huxtables.
@@ -37,4 +40,7 @@ split_down(ht, after = c(1, 3))
 
 col_width(ht) <- c(0.15, 0.1, 0.25, 0.3)
 split_down(ht, size = 0.3)
+
+# headers are repeated:
+split_across(jams, 3)
 }

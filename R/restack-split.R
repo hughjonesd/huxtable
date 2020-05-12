@@ -14,6 +14,8 @@ NULL
 #' @param ht A huxtable.
 #' @param after Rows/columns after which to split.
 #' @param size Maximum height/width for the result.
+#' @param repeat_headers Logical. Should header rows/columns be added to
+#'   all of the new tables?
 #'
 #' @return A list of huxtables.
 #'
@@ -30,31 +32,59 @@ NULL
 #'
 #' col_width(ht) <- c(0.15, 0.1, 0.25, 0.3)
 #' split_down(ht, size = 0.3)
+#'
+#' # headers are repeated:
+#' split_across(jams, 3)
 #' @name split-across-down
 NULL
 
 
 #' @export
 #' @rdname split-across-down
-split_across <- function (ht, after, size) {
+split_across <- function (ht, after, size, repeat_headers = TRUE) {
   check_split_args(ht, after, size, max_after = nrow(ht))
 
   if (! missing(size)) after <- calc_after_by_size(size, row_height(ht))
   row_list <- get_pos_list(after, nrow(ht))
 
-  lapply(row_list, function (rows) ht[rows,])
+  ht_list <- lapply(row_list, function (rows) ht[rows,])
+  if (repeat_headers && any(headers <- header_rows(ht))) {
+    # for each first row/col, copy ALL previous headers.
+    for (i in seq_along(after)) {
+      prev_headers <- headers[seq(1, after[i])]
+      if (any(prev_headers)) {
+        prev_headers <- which(prev_headers) # necessary!
+        ht_list[[i + 1]] <- rbind(ht[prev_headers, ], ht_list[[i + 1]])
+      }
+    }
+  }
+
+  return(ht_list)
 }
 
 
 #' @export
 #' @rdname split-across-down
-split_down <- function (ht, after, size) {
+split_down <- function (ht, after, size, repeat_headers = TRUE) {
   check_split_args(ht, after, size, max_after = ncol(ht))
 
   if (! missing(size)) after <- calc_after_by_size(size, col_width(ht))
   col_list <- get_pos_list(after, ncol(ht))
 
-  lapply(col_list, function (cols) ht[, cols])
+  ht_list <- lapply(col_list, function (cols) ht[, cols])
+
+  if (repeat_headers && any(headers <- header_cols(ht))) {
+    # for each first row/col, copy ALL previous headers.
+    for (i in seq_along(after)) {
+      prev_headers <- headers[seq(1, after[i])]
+      if (any(prev_headers)) {
+        prev_headers <- which(prev_headers) # necessary!
+        ht_list[[i + 1]] <- cbind(ht[, prev_headers], ht_list[[i + 1]])
+      }
+    }
+  }
+
+  return(ht_list)
 }
 
 
