@@ -1,2 +1,6 @@
 .aux$
 .toc$
+.log$
+.pdf$
+.tex$
+!placeins-header.tex
