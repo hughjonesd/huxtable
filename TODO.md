@@ -50,7 +50,6 @@ which gives "Price" as the heading, which you thought had been hidden!
     all other corners, horizontal borders have priority except on the top row.
     i.e. it's an unreliable mess!
 
-* subcaption option?
 * transparent colours in HTML, RTF, docx?
 
 
