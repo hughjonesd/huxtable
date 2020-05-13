@@ -50,7 +50,10 @@ split_across(ht, after = 2)
 split_down(ht, after = c(1, 3))
 
 col_width(ht) <- c(0.15, 0.1, 0.25, 0.3)
-split_down(ht, size = 0.3)
+split_down(ht, width = 0.3)
+
+# split by column name:
+split_down(jams, "Type")
 
 # headers are repeated:
 split_across(jams, 3)

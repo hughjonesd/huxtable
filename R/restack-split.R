@@ -130,7 +130,10 @@ check_remainder <- function (ht_list, divisor){
 #' split_down(ht, after = c(1, 3))
 #'
 #' col_width(ht) <- c(0.15, 0.1, 0.25, 0.3)
-#' split_down(ht, size = 0.3)
+#' split_down(ht, width = 0.3)
+#'
+#' # split by column name:
+#' split_down(jams, "Type")
 #'
 #' # headers are repeated:
 #' split_across(jams, 3)
@@ -147,11 +150,21 @@ split_across <- function (
         height,
         with_headers = TRUE
       ) {
-  after <- get_rc_spec(ht, after, 1)
-  if (is.logical(after)) after <- which(after)
-  check_split_args(ht, after, height, max_after = nrow(ht))
+  assert_that(is_hux(ht), is.flag(with_headers))
+  if (missing(after) + missing(height) != 1) {
+    stop("Exactly one of `after` and `height` must be specified")
+  }
 
-  if (! missing(height)) after <- calc_after_by_size(height, row_height(ht))
+  if (! missing(height)) {
+    assert_that(is.number(height), height > 0)
+    after <- calc_after_by_size(height, row_height(ht))
+  } else {
+    assert_that(noNA(after))
+    after <- get_rc_spec(ht, after, 1)
+    if (is.logical(after)) after <- which(after)
+  }
+  check_after(after, nrow(ht))
+
   row_list <- get_pos_list(after, nrow(ht))
 
   ht_list <- lapply(row_list, function (rows) ht[rows,])
@@ -179,12 +192,21 @@ split_down <- function (
         width,
         with_headers = TRUE
       ) {
-  after <- get_rc_spec(ht, after, 2)
-  if (is.character(after)) after <- colnames(ht) %in% after
-  if (is.logical(after)) after <- which(after)
-  check_split_args(ht, after, width, max_after = ncol(ht))
+  assert_that(is_hux(ht), is.flag(with_headers))
+  if (missing(after) + missing(width) != 1) {
+    stop("Exactly one of `after` and `width` must be specified")
+  }
 
-  if (! missing(width)) after <- calc_after_by_size(width, col_width(ht))
+  if (! missing(width)) {
+    assert_that(is.number(width), width > 0)
+    after <- calc_after_by_size(width, col_width(ht))
+  } else {
+    after <- get_rc_spec(ht, after, 2)
+    if (is.character(after)) after <- match(after, colnames(ht))
+    if (is.logical(after)) after <- which(after)
+  }
+  check_after(after, ncol(ht))
+
   col_list <- get_pos_list(after, ncol(ht))
 
   ht_list <- lapply(col_list, function (cols) ht[, cols])
@@ -205,17 +227,9 @@ split_down <- function (
 }
 
 
-check_split_args <- function (ht, after, size, max_after) {
-  assert_that(is_huxtable(ht))
-  if (missing(after) + missing(size) != 1) {
-    stop('Exactly one of "after" and "width"/"height" must be given')
-  }
-  if (! missing(after)) assert_that(
-        is.numeric(after), length(after) > 0, all(after <= max_after),
-        all(after >= 1), anyDuplicated(after) == 0)
-  if (! missing(size) && ! (is.number(size) && size > 0)) {
-    stop('"width"/"height" must be numeric with no NAs')
-  }
+check_after <- function (after, last_row_col) {
+  assert_that(noNA(after), length(after) > 0, all(after >= 0),
+    all(after <= last_row_col))
 }
 
 

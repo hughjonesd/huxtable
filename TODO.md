@@ -50,13 +50,6 @@ which gives "Price" as the heading, which you thought had been hidden!
     all other corners, horizontal borders have priority except on the top row.
     i.e. it's an unreliable mess!
 
-* Ability to `restack()` a table sideways or lengthways, and to `split` a table.
-  - `restack_across(ht, ncol, width)` where `ncol` is the number of columns
-    of the new result; or `width` is the maximum width?
-  - `restack_down(ht, nrow, height)` similar
-  - `split_across` and `split_down` would do the split but not the restacking,
-    and would return a list of huxtables.
-  - `split_across()` should accept tidyselect semantics
 * subcaption option?
 * transparent colours in HTML, RTF, docx?
 
