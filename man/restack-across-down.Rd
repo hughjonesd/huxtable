@@ -14,7 +14,7 @@ restack_down(ht, cols, with_headers = TRUE)
 \item{ht}{A huxtable}
 
 \item{rows, cols}{How many rows/columns the new result should have. Must divide
-the current number of rows/columns exactly.}
+the current number of rows/columns exactly once headers are added.}
 
 \item{with_headers}{Logical. Should header rows/columns be added to
 all of the new tables?}

@@ -13,7 +13,9 @@ split_down(ht, after, width, with_headers = TRUE)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{after}{Rows/columns after which to split.}
+\item{after}{Rows/columns after which to split. See \link{rowspecs} for details.
+Note that \link[tidyselect:eval_select]{tidyselect} semantics are allowed
+in \code{split_down()} but not \code{split_across()}.}
 
 \item{height, width}{Maximum height/width for the result.}
 

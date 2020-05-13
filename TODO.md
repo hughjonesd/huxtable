@@ -16,7 +16,9 @@ Priority changes
 Changes for 5.0
 ===============
 
-
+* Proper tidyselect for `set_xxx` - i.e. `set_bold(jams, everywhere, Price)`
+  should work?
+  - reimplement `final()`, `stripe` and `everywhere` like `last_col()`?
 * You can "trim" hhline borders by adding e.g.
   `>{\huxb{255,255,255}{2}}|`
   after each vertical border line - or =. It has to be the same width as
@@ -40,6 +42,7 @@ Changes for 5.0
   - `restack_down(ht, nrow, height)` similar
   - `split_across` and `split_down` would do the split but not the restacking,
     and would return a list of huxtables.
+  - `split_across()` should accept tidyselect semantics
 * subcaption option?
 * transparent colours in HTML, RTF, docx?
 

@@ -13,7 +13,7 @@ NULL
 #'
 #' @param ht A huxtable
 #' @param rows,cols How many rows/columns the new result should have. Must divide
-#'   the current number of rows/columns exactly.
+#'   the current number of rows/columns exactly once headers are added.
 #' @inherit split-across-down params
 #'
 #' @return A new huxtable.
@@ -64,7 +64,9 @@ restack_down <- function (ht, cols, with_headers = TRUE) {
 #' return the new sub-tables in a list.
 #'
 #' @param ht A huxtable.
-#' @param after Rows/columns after which to split.
+#' @param after Rows/columns after which to split. See [rowspecs] for details.
+#'   Note that [tidyselect][tidyselect::eval_select()] semantics are allowed
+#'   in `split_down()` but not `split_across()`.
 #' @param height,width Maximum height/width for the result.
 #' @param with_headers Logical. Should header rows/columns be added to
 #'   all of the new tables?
@@ -98,6 +100,7 @@ NULL
 #' @export
 #' @rdname split-across-down
 split_across <- function (ht, after, height, with_headers = TRUE) {
+  after <- get_rc_spec(ht, after, 1)
   check_split_args(ht, after, height, max_after = nrow(ht))
 
   if (! missing(height)) after <- calc_after_by_size(height, row_height(ht))
@@ -122,6 +125,8 @@ split_across <- function (ht, after, height, with_headers = TRUE) {
 #' @export
 #' @rdname split-across-down
 split_down <- function (ht, after, width, with_headers = TRUE) {
+  after <- get_rc_spec(ht, after, 2)
+  if (is.logical(after)) after <- which(after)
   check_split_args(ht, after, width, max_after = ncol(ht))
 
   if (! missing(width)) after <- calc_after_by_size(width, col_width(ht))
