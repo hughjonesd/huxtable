@@ -7,7 +7,7 @@
 #' @templateVar default 0.4
 #' @details
 #' Currently in LaTeX, all non-zero border widths on a given line must be the
-#' same, and vertical border widths can only be present (if `value > 0`) or absent.
+#' same.
 #'
 #' @seealso [set_all_borders()]
 #' @template getset-example
