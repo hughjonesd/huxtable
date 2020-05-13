@@ -110,8 +110,11 @@ hux(head(iris))
 Set \code{options(huxtable.autolabel = FALSE)} to return to the old
 behaviour.
 \itemize{
-\item The one-argument form of \code{[} now works for huxtables just as it does
-for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
+\item New functions \code{split_across()} and \code{split_down()} to split a
+huxtable into a list of sub-tables. Headers can be automatically
+included.
+\item \code{restack_across()} and \code{restack_down()} split a huxtable, then join
+it back up. This is useful for making a table fit on a page.
 \item New functions \code{merge_across()} and \code{merge_down()} to merge an area
 of cells horizontally across rows, or vertically down columns.
 \item New functions
@@ -123,6 +126,8 @@ simultaneously. Analogous \code{map_} versions of all of these.
 width of the caption. The default, \code{NA}, sets the width equal to the
 table width.
 \item Screen output now displays table position and caption position.
+\item The one-argument form of \code{[} now works for huxtables just as it does
+for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
 \item huxtable supports \code{dplyr::relocate()}, new in dplyr 1.0.0.
 \item Improvements to \code{as_flextable()}.
 \item Improvements to \code{quick_pptx()} (thanks @davidgohel).

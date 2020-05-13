@@ -89,10 +89,13 @@ hux(head(iris))
 ````
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
-  
-* The one-argument form of `[` now works for huxtables just as it does for 
-  data frames. For example, `ht[2:3]` selects columns 2 and 3.
-  
+
+* New functions `split_across()` and `split_down()` to split a huxtable into a
+  list of sub-tables. Headers can be automatically included.
+
+* `restack_across()` and `restack_down()` split a huxtable, then join it back
+  up. This is useful for making a table fit on a page.
+
 * New functions `merge_across()` and `merge_down()` to merge an area of cells
   horizontally across rows, or vertically down columns.
 
@@ -106,6 +109,9 @@ hux(head(iris))
   
 * Screen output now displays table position and caption position.
 
+* The one-argument form of `[` now works for huxtables just as it does for 
+  data frames. For example, `ht[2:3]` selects columns 2 and 3.
+  
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
 
 * Improvements to `as_flextable()`.

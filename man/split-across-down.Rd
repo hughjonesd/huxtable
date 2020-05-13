@@ -14,7 +14,7 @@ split_down(ht, after, width, with_headers = TRUE)
 \item{ht}{A huxtable.}
 
 \item{after}{Rows/columns after which to split. See \link{rowspecs} for details.
-Note that \link[tidyselect:eval_select]{tidyselect} semantics are allowed
+Note that \link[tidyselect:select_helpers]{tidyselect} semantics are allowed
 in \code{split_down()} but not \code{split_across()}.}
 
 \item{height, width}{Maximum height/width for the result.}
@@ -37,6 +37,12 @@ Only one of \code{after} and \code{width} or \code{height} must be given. If \co
 If \code{with_headers} is \code{TRUE}, all previous headers will be added to each
 new table.
 }
+\section{Note}{
+
+Splitting and restacking may interact surprisingly with
+\link[=left_border]{borders} and \link[=merge_cells]{merged cells}.
+}
+
 \examples{
 ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
 ht <- set_all_borders(ht)
@@ -49,4 +55,7 @@ split_down(ht, size = 0.3)
 # headers are repeated:
 split_across(jams, 3)
 
+}
+\seealso{
+\link{restack-across-down}
 }

@@ -2,6 +2,11 @@
 #' @import assertthat
 NULL
 
+#' @section Note:
+#' Splitting and restacking may interact surprisingly with
+#' [borders][left_border()] and [merged cells][merge_cells()].
+#' @name split-gotchas
+NULL
 
 
 #' Restack huxtables across/down the page.
@@ -12,51 +17,84 @@ NULL
 #'   top to bottom.
 #'
 #' @param ht A huxtable
-#' @param rows,cols How many rows/columns the new result should have. Must divide
-#'   the current number of rows/columns exactly once headers are added.
+#' @param rows,cols How many rows/columns the new result should have.
 #' @inherit split-across-down params
+#' @inheritSection split-gotchas Note
+#'
+#' @details
+#' If the huxtable could not be evenly split and restacked, a warning will be
+#' given and the remainder will be discarded.
 #'
 #' @return A new huxtable.
 #'
+#' @seealso [split-across-down]
+#'
 #' @examples
 #'
-#' ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
+#' ht <- as_hux(matrix(LETTERS[1:4], 2, 2))
 #' ht <- set_all_borders(ht)
-#' restack_across(ht, 2)
+#'
+#' ht
+#' restack_down(ht, 1)
+#' restack_across(ht, 1)
+#'
+#' # headers:
+#' restack_across(jams, 2)
+#' restack_across(jams, 2,
+#'       with_headers = FALSE)
+#'
 #' @name restack-across-down
 NULL
 
 
 #' @export
 #' @rdname restack-across-down
-restack_across <- function (ht, rows, with_headers = TRUE) {
+restack_across <- function (
+        ht,
+        rows,
+        with_headers = TRUE
+      ) {
   assert_that(is_huxtable(ht), is.count(rows))
-  if (with_headers) {
-    # think about this. Ideal is to use with_headers below. But
-    # then you need to calculate the places to split a bit differently
+
+  ht_list <- split_across(ht, after = rows, with_headers = with_headers)
+  new_ht <- ht_list[[1]]
+  while (length(ht_list) > 1 && nrow(ht_list[[2]]) >= rows) {
+    ht_list <- split_across(ht_list[[2]], after = rows, with_headers = with_headers)
+    new_ht <- cbind(new_ht, ht_list[[1]])
   }
-  assert_that(nrow(ht) %% rows == 0)
 
-  after <- seq(rows, nrow(ht) - rows, rows)
-  ht_list <- split_across(ht, after = after, with_headers = with_headers)
+  check_remainder(ht_list, rows)
 
-  do.call(cbind, ht_list)
+  new_ht
 }
 
 
 #' @export
 #' @rdname restack-across-down
-restack_down <- function (ht, cols, with_headers = TRUE) {
-  assert_that(is_huxtable(ht), is.count(cols), ncol(ht) %% cols == 0)
+restack_down <- function (
+        ht,
+        cols,
+        with_headers = TRUE
+      ) {
+  assert_that(is_huxtable(ht), is.count(cols))
 
-  after <- seq(cols, ncol(ht) - cols, cols)
-  ht_list <- split_down(ht, after = after, with_headers = FALSE)
-  do.call(rbind, ht_list)
+  ht_list <- split_down(ht, after = cols, with_headers = with_headers)
+  new_ht <- ht_list[[1]]
+  while (length(ht_list) > 1 && ncol(ht_list[[2]]) >= cols) {
+    ht_list <- split_down(ht_list[[2]], after = cols, with_headers = with_headers)
+    new_ht <- rbind(new_ht, ht_list[[1]])
+  }
+
+  check_remainder(ht_list, cols)
+
+  new_ht
 }
 
 
-# what to do about losing merged cells? (at the moment, the hidden
-# cells reappear)
+check_remainder <- function (ht_list, divisor){
+  if (length(ht_list) > 1) warning(divisor, " didn't split huxtable evenly")
+}
+
 
 #' Split a huxtable into multiple huxtables.
 #'
@@ -65,7 +103,7 @@ restack_down <- function (ht, cols, with_headers = TRUE) {
 #'
 #' @param ht A huxtable.
 #' @param after Rows/columns after which to split. See [rowspecs] for details.
-#'   Note that [tidyselect][tidyselect::eval_select()] semantics are allowed
+#'   Note that [tidyselect][tidyselect::select_helpers] semantics are allowed
 #'   in `split_down()` but not `split_across()`.
 #' @param height,width Maximum height/width for the result.
 #' @param with_headers Logical. Should header rows/columns be added to
@@ -80,6 +118,10 @@ restack_down <- function (ht, cols, with_headers = TRUE) {
 #'
 #' If `with_headers` is `TRUE`, all previous headers will be added to each
 #' new table.
+#'
+#' @inheritSection split-gotchas Note
+#'
+#' @seealso [restack-across-down]
 #'
 #' @examples
 #' ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
@@ -99,8 +141,14 @@ NULL
 
 #' @export
 #' @rdname split-across-down
-split_across <- function (ht, after, height, with_headers = TRUE) {
+split_across <- function (
+        ht,
+        after,
+        height,
+        with_headers = TRUE
+      ) {
   after <- get_rc_spec(ht, after, 1)
+  if (is.logical(after)) after <- which(after)
   check_split_args(ht, after, height, max_after = nrow(ht))
 
   if (! missing(height)) after <- calc_after_by_size(height, row_height(ht))
@@ -110,6 +158,7 @@ split_across <- function (ht, after, height, with_headers = TRUE) {
   if (with_headers && any(headers <- header_rows(ht))) {
     # for each first row/col, copy ALL previous headers.
     for (i in seq_along(after)) {
+      if (i == length(ht_list)) next
       prev_headers <- headers[seq(1, after[i])]
       if (any(prev_headers)) {
         prev_headers <- which(prev_headers) # necessary!
@@ -124,8 +173,14 @@ split_across <- function (ht, after, height, with_headers = TRUE) {
 
 #' @export
 #' @rdname split-across-down
-split_down <- function (ht, after, width, with_headers = TRUE) {
+split_down <- function (
+        ht,
+        after,
+        width,
+        with_headers = TRUE
+      ) {
   after <- get_rc_spec(ht, after, 2)
+  if (is.character(after)) after <- colnames(ht) %in% after
   if (is.logical(after)) after <- which(after)
   check_split_args(ht, after, width, max_after = ncol(ht))
 
@@ -137,6 +192,7 @@ split_down <- function (ht, after, width, with_headers = TRUE) {
   if (with_headers && any(headers <- header_cols(ht))) {
     # for each first row/col, copy ALL previous headers.
     for (i in seq_along(after)) {
+      if (i == length(ht_list)) next
       prev_headers <- headers[seq(1, after[i])]
       if (any(prev_headers)) {
         prev_headers <- which(prev_headers) # necessary!
@@ -155,7 +211,7 @@ check_split_args <- function (ht, after, size, max_after) {
     stop('Exactly one of "after" and "width"/"height" must be given')
   }
   if (! missing(after)) assert_that(
-        is.numeric(after), length(after) > 0, all(after < max_after),
+        is.numeric(after), length(after) > 0, all(after <= max_after),
         all(after >= 1), anyDuplicated(after) == 0)
   if (! missing(size) && ! (is.number(size) && size > 0)) {
     stop('"width"/"height" must be numeric with no NAs')

@@ -16,9 +16,23 @@ Priority changes
 Changes for 5.0
 ===============
 
+* Subsetting huxtables should respect rowspan. For example:
+
+```r
+j2 <- jams %>% merge_cells(1, 1:2) %>% set_all_borders()
+j2[2]
+```
+
+which gives "Price" as the heading, which you thought had been hidden!
+
+
 * Proper tidyselect for `set_xxx` - i.e. `set_bold(jams, everywhere, Price)`
   should work?
   - reimplement `final()`, `stripe` and `everywhere` like `last_col()`?
+  - work is in the tidyselect-rc-spec branch. One problem is that `eval_select`
+    doesn't work with logicals. Another, maybe deeper one is the conflict
+    between `set_bold(1:3, c(gear, mpg))` and `set_bold(1:3, some_vector)`
+    where this could be logical or numeric or character.
 * You can "trim" hhline borders by adding e.g.
   `>{\huxb{255,255,255}{2}}|`
   after each vertical border line - or =. It has to be the same width as

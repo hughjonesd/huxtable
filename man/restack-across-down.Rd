@@ -13,8 +13,7 @@ restack_down(ht, cols, with_headers = TRUE)
 \arguments{
 \item{ht}{A huxtable}
 
-\item{rows, cols}{How many rows/columns the new result should have. Must divide
-the current number of rows/columns exactly once headers are added.}
+\item{rows, cols}{How many rows/columns the new result should have.}
 
 \item{with_headers}{Logical. Should header rows/columns be added to
 all of the new tables?}
@@ -30,9 +29,31 @@ up side by side.
 top to bottom.
 }
 }
+\details{
+If the huxtable could not be evenly split and restacked, a warning will be
+given and the remainder will be discarded.
+}
+\section{Note}{
+
+Splitting and restacking may interact surprisingly with
+\link[=left_border]{borders} and \link[=merge_cells]{merged cells}.
+}
+
 \examples{
 
-ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
+ht <- as_hux(matrix(LETTERS[1:4], 2, 2))
 ht <- set_all_borders(ht)
-restack_across(ht, 2)
+
+ht
+restack_down(ht, 1)
+restack_across(ht, 1)
+
+# headers:
+restack_across(jams, 2)
+restack_across(jams, 2,
+      with_headers = FALSE)
+
+}
+\seealso{
+\link{split-across-down}
 }
