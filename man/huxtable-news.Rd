@@ -110,6 +110,15 @@ hux(head(iris))
 Set \code{options(huxtable.autolabel = FALSE)} to return to the old
 behaviour.
 \itemize{
+\item New functions \code{fmt_percent()}, \code{fmt_pretty()} \code{fmt_date()} and
+\code{fmt_datetime()} for passing into \code{number_format()}:
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{jams$Sugar <-c ("Sugar content", 0.4, 0.35, 0.45)
+set_number_format(jams, -1, "Sugar", fmt_percent(1))
+}\if{html}{\out{</div>}}
+\itemize{
 \item New functions \code{split_across()} and \code{split_down()} to split a
 huxtable into a list of sub-tables. Headers can be automatically
 included.

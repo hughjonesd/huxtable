@@ -90,6 +90,14 @@ hux(head(iris))
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
 
+* New functions `fmt_percent()`, `fmt_pretty()` `fmt_date()` and `fmt_datetime()`
+  for passing into `number_format()`:
+
+```r
+jams$Sugar <-c ("Sugar content", 0.4, 0.35, 0.45)
+set_number_format(jams, -1, "Sugar", fmt_percent(1))
+```
+
 * New functions `split_across()` and `split_down()` to split a huxtable into a
   list of sub-tables. Headers can be automatically included.
 
