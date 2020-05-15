@@ -26,6 +26,18 @@ to_html <- function (ht, ...) UseMethod("to_html")
 
 
 #' @export
+#' @rdname to_html
+to_html.default <- function(ht, ...) ht
+
+
+#' @export
+#' @rdname to_html
+to_html.md <- function(ht, ...) {
+  commonmark::markdown_html(ht)
+}
+
+
+#' @export
 #'
 #' @rdname to_html
 #'
