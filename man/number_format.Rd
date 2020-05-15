@@ -54,7 +54,8 @@ The default value is "\\%.3g", which rounds numbers if they have more than 3 sig
 digits, and which may use scientific notation for large numbers.
 
 To set number_format to a function, enclose the function in \code{list}. The function should
-take one argument and return a string.
+take one argument and return a string. \code{\link[=fmt_pretty]{fmt_pretty()}} and \code{\link[=fmt_percent]{fmt_percent()}}
+are useful shortcuts for common formatting functions.
 
 Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
 numbers in their entirety. The default value was "\\%5.2f".
@@ -80,11 +81,7 @@ number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
 number_format(ht)[5, -1] <- "\%5.2f"
 
-number_format(ht)[6, -1] <- list(
-        function(x)
-          prettyNum(x, big.mark = ",",
-                scientific = FALSE)
-      )
+number_format(ht)[6, -1] <- fmt_pretty()
 
 number_format(ht)[7, -1] <- list(
         function(x) if (x > 0) "+" else "-"
@@ -100,8 +97,6 @@ ht_bands <- huxtable("10000 Maniacs", autoformat = FALSE)
 ht_bands
 # fixed:
 set_number_format(ht_bands, NA)
-# alternatively:
-huxtable("10000 Maniacs", autoformat = TRUE)
 
 
 set_number_format(jams, 2)

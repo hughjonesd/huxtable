@@ -207,7 +207,8 @@ make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {va
 #' digits, and which may use scientific notation for large numbers.
 #'
 #' To set number_format to a function, enclose the function in `list`. The function should
-#' take one argument and return a string.
+#' take one argument and return a string. [fmt_pretty()] and [fmt_percent()]
+#' are useful shortcuts for common formatting functions.
 #'
 #' Versions of huxtable before 2.0.0 applied `number_format` only to cells that looked like
 #' numbers in their entirety. The default value was "\%5.2f".
@@ -235,11 +236,7 @@ make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {va
 #' number_format(ht)[4, -1] <- 2
 #' number_format(ht)[5, -1] <- "%5.2f"
 #'
-#' number_format(ht)[6, -1] <- list(
-#'         function(x)
-#'           prettyNum(x, big.mark = ",",
-#'                 scientific = FALSE)
-#'       )
+#' number_format(ht)[6, -1] <- fmt_pretty()
 #'
 #' number_format(ht)[7, -1] <- list(
 #'         function(x) if (x > 0) "+" else "-"
@@ -255,8 +252,6 @@ make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {va
 #' ht_bands
 #' # fixed:
 #' set_number_format(ht_bands, NA)
-#' # alternatively:
-#' huxtable("10000 Maniacs", autoformat = TRUE)
 #'
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val 2

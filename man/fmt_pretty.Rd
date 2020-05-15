@@ -4,10 +4,10 @@
 \alias{fmt_pretty}
 \title{Use \code{prettyNum()} to format numbers}
 \usage{
-fmt_pretty(..., scientific = FALSE)
+fmt_pretty(big.mark = ",", ..., scientific = FALSE)
 }
 \arguments{
-\item{scientific, ...}{Passed to \code{\link[=prettyNum]{prettyNum()}}.}
+\item{big.mark, scientific, ...}{Passed to \code{\link[=prettyNum]{prettyNum()}}.}
 }
 \value{
 An object you can pass into \code{\link[=number_format]{number_format()}}.
@@ -20,7 +20,7 @@ Use \code{prettyNum()} to format numbers
 jams$Sales <- c("Sales", 35000,
       55500, 20000)
 set_number_format(jams, -1, "Sales",
-      fmt_pretty(big.mark = ","))
+      fmt_pretty())
 
 }
 \seealso{

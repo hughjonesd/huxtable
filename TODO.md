@@ -13,8 +13,8 @@ Priority changes
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
     
 
-Changes for 5.0
-===============
+Post 5.0 changes
+================
 
 * Subsetting huxtables should respect rowspan. For example:
 

@@ -30,7 +30,7 @@ fmt_percent <- function (digits = 1) {
 
 #' Use `prettyNum()` to format numbers
 #'
-#' @param scientific,... Passed to [prettyNum()].
+#' @param big.mark,scientific,... Passed to [prettyNum()].
 #'
 #' @inherit fmt-numbers return
 #'
@@ -43,10 +43,10 @@ fmt_percent <- function (digits = 1) {
 #' jams$Sales <- c("Sales", 35000,
 #'       55500, 20000)
 #' set_number_format(jams, -1, "Sales",
-#'       fmt_pretty(big.mark = ","))
+#'       fmt_pretty())
 #'
-fmt_pretty <- function (..., scientific = FALSE) {
+fmt_pretty <- function (big.mark = ",", ..., scientific = FALSE) {
   list(function (x) {
-    prettyNum(x, ..., scientific = scientific)
+    prettyNum(x, big.mark = big.mark, scientific = scientific, ...)
   })
 }
