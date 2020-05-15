@@ -27,13 +27,13 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
   `everywhere`, `evens` and `odds` are still the same.
   
-* There are changes to how LaTeX is output. 
+* There are changes to LaTeX output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
     padding should now take effect even when `wrap` is `FALSE`.
   - The default LaTeX table environment is now "tabular" unless `width` is set. 
     If `width` is set, it is "tabularx".
   - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
-  - the `\centerbox` macro from the "adjustbox" package is used to centre
+  - the `\centerbox` macro from the LaTeX "adjustbox" package is used to centre
     tables. This should improve centring when tables are too wide.
 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
@@ -90,8 +90,8 @@ hux(head(iris))
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
 
-* New functions `fmt_percent()`, `fmt_pretty()` `fmt_date()` and `fmt_datetime()`
-  for passing into `number_format()`:
+* New functions `fmt_percent()` and `fmt_pretty()` for passing into
+  `number_format()`:
 
 ```r
 jams$Sugar <-c ("Sugar content", 0.4, 0.35, 0.45)

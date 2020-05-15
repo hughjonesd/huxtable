@@ -4,10 +4,10 @@
 \alias{fmt_pretty}
 \title{Use \code{prettyNum()} to format numbers}
 \usage{
-fmt_pretty(...)
+fmt_pretty(..., scientific = FALSE)
 }
 \arguments{
-\item{...}{Passed to \code{\link[=prettyNum]{prettyNum()}}.}
+\item{scientific, ...}{Passed to \code{\link[=prettyNum]{prettyNum()}}.}
 }
 \value{
 An object you can pass into \code{\link[=number_format]{number_format()}}.
@@ -25,8 +25,6 @@ set_number_format(jams, -1, "Sales",
 }
 \seealso{
 Other format functions: 
-\code{\link{fmt_datetime}()},
-\code{\link{fmt_date}()},
 \code{\link{fmt_percent}()}
 }
 \concept{format functions}

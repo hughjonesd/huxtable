@@ -25,8 +25,6 @@ set_number_format(jams, -1, "Sugar",
 }
 \seealso{
 Other format functions: 
-\code{\link{fmt_datetime}()},
-\code{\link{fmt_date}()},
 \code{\link{fmt_pretty}()}
 }
 \concept{format functions}

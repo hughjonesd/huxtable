@@ -35,7 +35,7 @@ Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and \code{align(ht) <
 \item \code{every()} has been renamed to \code{stripe()}, to avoid a clash with
 \code{purrr::every()}. \code{everywhere}, \code{evens} and \code{odds} are still the
 same.
-\item There are changes to how LaTeX is output.
+\item There are changes to LaTeX output.
 \itemize{
 \item LaTeX \verb{\tabcolsep} is now set to 0 within huxtable tables, while
 left and right padding should now take effect even when \code{wrap}
@@ -44,9 +44,9 @@ is \code{FALSE}.
 \code{width} is set. If \code{width} is set, it is “tabularx”.
 \item \code{wrap} only matters if \code{width} is set. Otherwise, cell wrapping
 is off.
-\item the \verb{\centerbox} macro from the “adjustbox” package is used to
-centre tables. This should improve centring when tables are too
-wide.
+\item the \verb{\centerbox} macro from the LaTeX “adjustbox” package is
+used to centre tables. This should improve centring when tables
+are too wide.
 }
 \item huxtable no longer supports dplyr versions less than 0.7.0 (released
 mid-2017).
@@ -110,8 +110,8 @@ hux(head(iris))
 Set \code{options(huxtable.autolabel = FALSE)} to return to the old
 behaviour.
 \itemize{
-\item New functions \code{fmt_percent()}, \code{fmt_pretty()} \code{fmt_date()} and
-\code{fmt_datetime()} for passing into \code{number_format()}:
+\item New functions \code{fmt_percent()} and \code{fmt_pretty()} for passing into
+\code{number_format()}:
 }\if{html}{\out{
 <!-- end list -->
 }}
