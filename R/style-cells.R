@@ -69,8 +69,10 @@ style_cells <- function (ht, row, col, ...) {
   ht
 }
 
+
 #' @export
 #' @rdname style-functions
 #' @details
 #' `set_cell_properties` is a deprecated alias for `style_cells`. Don't use it.
 set_cell_properties <- style_cells
+

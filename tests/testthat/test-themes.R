@@ -7,6 +7,7 @@ test_that("Themes work", {
   expect_error(theme_basic(ht), regexp = NA)
   expect_error(theme_article(ht), regexp = NA)
   expect_error(theme_striped(ht), regexp = NA)
+  expect_silent(theme_bright(ht))
   expect_error(theme_plain(ht), regexp = NA)
   expect_error(theme_mondrian(ht), regexp = NA)
   expect_silent(theme_grey(ht))
@@ -21,6 +22,7 @@ test_that("Themes work with options", {
   expect_error(theme_basic(ht, header_row = FALSE, header_col = FALSE), regexp = NA)
   expect_error(theme_striped(ht, stripe = "purple", header_row = FALSE, header_col = FALSE),
         regexp = NA)
+  expect_silent(theme_bright(ht, header_row = FALSE, header_col = TRUE))
   expect_error(theme_article(ht, header_row = FALSE, header_col = FALSE), regexp = NA)
   expect_error(theme_mondrian(ht, prop_colored = 0.5), regexp = NA)
   expect_error(theme_mondrian(ht, prop_colored = 0), regexp = NA)

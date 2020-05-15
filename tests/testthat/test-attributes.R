@@ -230,3 +230,13 @@ test_that("align, position and caption_pos change \"centre\" to \"center\"", {
   caption_pos(ht) <- "bottomcentre"
   expect_equivalent(caption_pos(ht), "bottomcenter")
 })
+
+
+test_that("rowspan and colspan error when overlapping", {
+  ht <- hux(1:4, 1:4)
+  rowspan(ht)[1, 2] <- 3
+  expect_error(rowspan(ht)[2, 2] <- 2)
+  expect_error(rowspan(ht)[3, 2] <- 2)
+  expect_error(colspan(ht)[1, 1] <- 2)
+  expect_error(colspan(ht)[1, 2] <- 2)
+})

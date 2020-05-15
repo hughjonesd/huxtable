@@ -25,6 +25,24 @@ j2[2]
 
 which gives "Price" as the heading, which you thought had been hidden!
 
+* Use commonmark to allow markdown in cells and captions. It has no dependencies
+  and is 131 Kb.
+  - Have something like `output.class.format()` using S3 double dispatch?
+    Or, maybe simpler, just `output(x, format)`... where `output` is an S3
+    generic.
+
+* Fixing borders.
+  - The inputs are the `left_border()<-` function and friends.
+  - The functions could be redesigned to write to two arrays of borders.
+  - Also attributes that are stored in cells and rewritten on copy/subset!
+  - The attribute copying/subsetting would have to work differently.
+    - This happens in `[.huxtable`, `[<-.huxtable`, and `delete_props`
+      and `merge_props`, called by the other methods; and in `set_attr_dimnames`.
+  - span changes would no longer affect borders, since they wouldn't disturb
+    the array of cells.
+  - `top_border(ht)[x + 1,]` and `bottom_border(ht)[x,]` would overwrite each
+    other; similarly left and right borders.
+  
 
 * Proper tidyselect for `set_xxx` - i.e. `set_bold(jams, everywhere, Price)`
   should work?
