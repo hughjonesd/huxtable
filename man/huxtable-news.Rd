@@ -67,6 +67,30 @@ headers.
 
 \subsection{Other changes}{
 \itemize{
+\item Huxtable borders have been reworked, fixing some longstanding bugs
+and adding new features.
+\itemize{
+\item Setting e.g. \code{top_border(ht)[2, ]} now overwrites
+\code{bottom_border(ht)[1, ]}, as you would expect.
+\item \code{set_left_border()}, \code{set_all_borders()} and friends all use a
+default value of 0.4. So to set a default border, write e.g.
+}
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bottom_border(1, everywhere)
+}\if{html}{\out{</div>}}
+\itemize{
+\item Or, you can use the new \code{bdr()} class to encapsulate border
+thickness, style and colour:
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
+}\if{html}{\out{</div>}}
+\itemize{
 \item Huxtable now has the concept of header row and columns.
 \itemize{
 \item By default, data frame column names will be headers.
@@ -86,15 +110,6 @@ So you can write e.g.
 }}
 \if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
       set_bold(1, everywhere)
-}\if{html}{\out{</div>}}
-\itemize{
-\item \code{set_left_border()}, \code{set_all_borders()} and friends all use a
-default value of 0.4. So to set a default border, write e.g.
-}\if{html}{\out{
-<!-- end list -->
-}}
-\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
-      set_bottom_border(1, everywhere)
 }\if{html}{\out{</div>}}
 \itemize{
 \item New: by default, huxtable sets labels from the current knitr chunk

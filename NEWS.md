@@ -52,6 +52,25 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 ## Other changes
 
+* Huxtable borders have been reworked, fixing some longstanding bugs and
+  adding new features. 
+  - Setting e.g. `top_border(ht)[2, ]` now overwrites `bottom_border(ht)[1, ]`,
+    as you would expect.
+  - `set_left_border()`, `set_all_borders()` and friends all use a default value
+    of 0.4. So to set a default border, write e.g.
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere)
+```
+
+  - Or, you can use the new `bdr()` class to encapsulate border thickness, style
+  and colour:
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
+```
 
 * Huxtable now has the concept of header row and columns. 
   - By default, data frame column names will be headers.
@@ -72,13 +91,6 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 ```r
 as_hux(head(iris)) %>% 
       set_bold(1, everywhere)
-```
-* `set_left_border()`, `set_all_borders()` and friends all use a default value
-  of 0.4. So to set a default border, write e.g.
-  
-```r
-as_hux(head(iris)) %>% 
-      set_bottom_border(1, everywhere)
 ```
 
 * New: by default, huxtable sets labels from the current knitr chunk label, if there
