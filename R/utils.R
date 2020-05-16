@@ -93,69 +93,28 @@ format_color <- function (r_color, default = "white") {
 
 # returns two rows(+1),cols(+1) arrays of border widths
 collapsed_borders <- function (ht) {
-  result <- do_collapse(ht, get_all_borders, default = 0)
-  result$vert <- pmax(result$left, result$right)
-  result$horiz <- pmax(result$top, result$bottom)
-
-  result[c("vert", "horiz")]
+  list(
+    vert  = attr(ht, "lr_borders")$thickness,
+    horiz = attr(ht, "tb_borders")$thickness
+  )
 }
 
 
-# returns two rows(+1),cols(+1) arrays of border colors. right and top borders have priority.
-# A border of 0 can still have a color.
+# returns two rows(+1),cols(+1) arrays of border colors.
 collapsed_border_colors <- function (ht) {
-  result <- do_collapse(ht, get_all_border_colors, default = NA)
-  result$vert <- result$right
-  result$vert[is.na(result$right)] <- result$left[is.na(result$right)]
-  result$horiz <- result$bottom
-  result$horiz[is.na(result$bottom)] <- result$top[is.na(result$bottom)]
-
-  result[c("vert", "horiz")]
+  list(
+    vert  = attr(ht, "lr_borders")$color,
+    horiz = attr(ht, "tb_borders")$color
+  )
 }
 
 
-# returns two rows(+1),cols(+1) arrays of border styles. Non-"solid" styles have priority;
-# if two styles are non-"solid" then right and top has priority
-# A border of 0 can still have a style.
+# returns two rows(+1),cols(+1) arrays of border styles.
 collapsed_border_styles <- function (ht) {
-  result <- do_collapse(ht, get_all_border_styles, default = "solid")
-  result$vert <- result$right
-  result$vert[result$right == "solid"] <- result$left[result$right == "solid"]
-  result$horiz <- result$bottom
-  result$horiz[result$bottom == "solid"] <- result$top[result$bottom == "solid"]
-
-  result[c("vert", "horiz")]
-}
-
-
-do_collapse <- function(ht, prop_fun, default) {
-  res <- list()
-  res$top <- res$left <- res$right <- res$bottom <- matrix(default, nrow(ht), ncol(ht))
-  dc <- display_cells(ht, all = TRUE)
-  # provides large speedup:
-  dc <- as.matrix(dc[, c("row", "col", "display_row", "display_col", "end_row", "end_col")])
-  dc_idx <- dc[, c("display_row", "display_col"), drop = FALSE]
-  dc_map <- matrix(seq_len(nrow(ht) * ncol(ht)), nrow(ht), ncol(ht))
-  dc_map <- dc_map[dc_idx]
-
-  at <- list()
-  at$left   <- dc[, "col"] == dc[, "display_col"]
-  at$right  <- dc[, "col"] == dc[, "end_col"]
-  at$top    <- dc[, "row"] == dc[, "display_row"]
-  at$bottom <- dc[, "row"] == dc[, "end_row"]
-
-  properties <- prop_fun(ht)
-  for (side in names(at)) {
-    at_side <- at[[side]]
-    res[[side]][at_side] <- properties[[side]][dc_map][at_side]
-  }
-
-  res$left <- cbind(res$left, default)
-  res$right <- cbind(default, res$right)
-  res$top <- rbind(res$top, default)
-  res$bottom <- rbind(default, res$bottom)
-
-  return(res)
+  list(
+    vert  = attr(ht, "lr_borders")$style,
+    horiz = attr(ht, "tb_borders")$style
+  )
 }
 
 

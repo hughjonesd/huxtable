@@ -29,7 +29,7 @@ NULL
 #' jams[, 1]
 #' jams$Type
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  n_idx <- nargs() - !missing(drop) - 1L
+  n_idx <- nargs() - ! missing(drop) - 1L
   missing_i <- missing(i)
   missing_j <- missing(j) # evaluate before swapping j and i
   if (missing_i && missing_j) return(x)
@@ -39,10 +39,13 @@ NULL
   }
   ss <- if (n_idx <= 1) {
     # avoids a warning from `[.data.frame`
-    NextMethod("[", as.data.frame(x))
+    # NextMethod("[", as.data.frame(x))
+    as.data.frame(x)[i, j]
   } else {
-    NextMethod("[", as.data.frame(x), drop = FALSE)
+    as.data.frame(x)[i, j, drop = FALSE]
+    # NextMethod("[", as.data.frame(x), drop = FALSE)
   }
+  ss <- new_huxtable(ss)
 
   if (n_idx == 1L) {
     j <- i
@@ -64,7 +67,9 @@ NULL
     attr(ss, a) <- attr(x, a)
   }
 
-  class(ss) <- class(x)
+  if (missing_i) i <- seq_len(nrow(x))
+  if (missing_j) j <- seq_len(ncol(x))
+  ss <- prune_borders(ss, x, rows = i, cols = j)
 
   # we don't use `colspan<-` because this immediately triggers a `check_span_shadows`
   # which will error if the `rowspan` is not yet correct
@@ -93,12 +98,13 @@ NULL
 #' jams
 `[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
+  class(res) <- class(x)
 
   if (ncol(res) < ncol(x)) {
     assert_that(is.null(value))
     # could be ht[,'foo'] <- NULL or ht['foo'] <- NULL so this is safest:
     idx <- which(! colnames(x) %in% colnames(res))
-    res <- delete_props(res, idx, type = "cols")
+    res <- delete_props(res, x, idx)
   }
   if (ncol(res) > ncol(x)) {
     # Assumption: extra columns are on the right. Note that we may ALSO have more rows
@@ -133,6 +139,7 @@ NULL
 
   res <- set_attr_dimnames(res)
   class(res) <- class(x)
+
   return(res)
 }
 
@@ -141,18 +148,19 @@ NULL
 #' @export
 `$<-.huxtable` <- function (x, name, value) {
   res <- as.data.frame(NextMethod())
+  class(res) <- class(x)
 
   if (ncol(res) < ncol(x)) {
     stopifnot(is.null(value))
     idx <- if (is.character(name)) match(name, colnames(x)) else name
-    res <- delete_props(res, idx, type = "cols")
+    res <- delete_props(res, x, idx)
   }
   if (ncol(res) > ncol(x)) {
     res <- merge_props(res, x, res[, seq(ncol(x) + 1, ncol(res))], type = "cbind")
   }
 
   res <- set_attr_dimnames(res)
-  class(res) <- class(x)
+
   res
 }
 
@@ -161,13 +169,14 @@ NULL
 #' @export
 `[[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
+  class(res) <- class(x)
   # [[<- can be called with one or two indexes. The 2 index form doesn't extend columns, but does extend rows.
   # It can't delete either rows or columns though.
   # The one-index form only extends columns. It can also delete columns.
   if (ncol(res) < ncol(x)) {
     stopifnot(is.null(value))
     idx <- if (is.character(i)) match(i, colnames(x)) else i
-    res <- delete_props(res, idx, type = "cols")
+    res <- delete_props(res, x, idx)
   }
   if (ncol(res) > ncol(x)) {
     # Assumption: extra columns are on the right
@@ -178,6 +187,7 @@ NULL
   }
 
   res <- set_attr_dimnames(res)
-  class(res) <- class(x)
+
   res
 }
+

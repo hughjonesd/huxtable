@@ -98,10 +98,6 @@ test_that("rbind and cbind work and copy properties", {
   expect_equivalent(row_height(ht_rbind), c("1in", "2in", NA))
   expect_equivalent(italic(ht_rbind)[3, ], c(FALSE, FALSE))
 
-  ht_rbind <- rbind(ht, c(3, 3), copy_cell_props = "bold")
-  expect_equivalent(italic(ht_rbind)[3, ], c(FALSE, FALSE))
-  expect_equivalent(bold(ht_rbind)[3, ], c(TRUE, TRUE))
-
   expect_silent(ht_cbind <- cbind(ht, 1:2, copy_cell_props = TRUE))
   expect_equivalent(col_width(ht_cbind), c("2cm", "1cm", "1cm"))
   expect_equivalent(italic(ht_cbind), matrix(TRUE, 2, 3))
@@ -109,10 +105,6 @@ test_that("rbind and cbind work and copy properties", {
   ht_cbind <- cbind(ht, 1:2, copy_cell_props = FALSE)
   expect_equivalent(col_width(ht_cbind), c("2cm", "1cm", NA))
   expect_equivalent(italic(ht_cbind)[, 3], c(FALSE, FALSE))
-
-  ht_cbind <- cbind(ht, 1:2, copy_cell_props = "bold")
-  expect_equivalent(italic(ht_cbind)[, 3], c(FALSE, FALSE))
-  expect_equivalent(bold(ht_cbind)[, 3], c(TRUE, TRUE))
 })
 
 

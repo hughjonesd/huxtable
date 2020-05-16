@@ -32,7 +32,8 @@ set_cell_properties(ht, row, col, ...)
 For \code{left_border}, the \code{left_border} property.
 For \code{set_left_border} and \code{map_left_border}, the modified huxtable.
 
-Similarly for the other functions.
+For \code{left_border}, the \code{left_border} property.
+For \code{set_left_border} and \code{map_left_border}, the modified huxtable.
 }
 \description{
 These functions set arbitrary cell properties on cells in header rows

@@ -35,6 +35,9 @@ Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and \code{align(ht) <
 \item \code{every()} has been renamed to \code{stripe()}, to avoid a clash with
 \code{purrr::every()}. \code{everywhere}, \code{evens} and \code{odds} are still the
 same.
+\item The little-used ability to set \code{copy_cell_props} to a character
+vector in \code{rbind.huxtable} and \code{cbind.huxtable} has been removed.
+You can still set it to \code{FALSE}.
 \item There are changes to LaTeX output.
 \itemize{
 \item LaTeX \verb{\tabcolsep} is now set to 0 within huxtable tables, while

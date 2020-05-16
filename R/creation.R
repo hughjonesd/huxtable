@@ -157,28 +157,7 @@ as_huxtable.default <- function (
   assert_that(is.flag(add_colnames), is.flag(add_rownames) || is.character(add_rownames),
         is.flag(autoformat))
 
-  x <- as.data.frame(x, stringsAsFactors = FALSE)
-
-  for (a in setdiff(huxtable_cell_attrs, "number_format")) {
-    attr(x, a) <- matrix(NA, nrow(x), ncol(x))
-  }
-  attr(x, "number_format") <- matrix(list(NA), nrow(x), ncol(x))
-  for (a in huxtable_col_attrs) {
-    attr(x, a) <- rep(NA, ncol(x))
-  }
-  for (a in huxtable_row_attrs) {
-    attr(x, a) <- rep(NA, nrow(x))
-  }
-  for (a in huxtable_table_attrs) {
-    attr(x, a) <- NA
-  }
-
-
-  for (a in names(huxtable_env$huxtable_default_attrs)) {
-    attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]]  # [[ indexing matters here
-  }
-
-  class(x) <- c("huxtable", class(x))
+  x <- new_huxtable(x)
 
   col_classes <- sapply(x, function (col) class(col)[1])
   if (autoformat) {

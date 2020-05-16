@@ -1,10 +1,12 @@
 
 
-huxtable_border_attrs <- c(
+# order of these matters
+huxtable_border_props <- c(
   "top_border", "left_border", "right_border", "bottom_border",
   "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
   "top_border_style", "left_border_style", "right_border_style", "bottom_border_style"
 )
+
 
 #' @template getset-cell
 #' @templateVar attr_name left_border
@@ -64,6 +66,7 @@ xxx_border_huxtable <- function(lr_tb, i, j, border_prop) {
   }
 }
 
+
 #' @export
 left_border.huxtable <- xxx_border_huxtable("lr_borders",
       i = quote(seq_len(nrow(ht))), j = quote(-last_col))
@@ -80,7 +83,7 @@ top_border.huxtable <- xxx_border_huxtable("tb_borders",
 
 
 #' @export
-bottom_border.huxtable <- xxx_border_huxtable("lr_borders",
+bottom_border.huxtable <- xxx_border_huxtable("tb_borders",
       i = quote(-1), j = quote(seq_len(ncol(ht))))
 
 
@@ -119,6 +122,7 @@ bottom_border.huxtable <- xxx_border_huxtable("lr_borders",
 
 xxx_border_arrow_yyy_hux <- function(lr_tb, i, j, border_prop) {
   function(ht, value) {
+    force(value)
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
@@ -155,6 +159,47 @@ xxx_border_arrow_yyy_hux <- function(lr_tb, i, j, border_prop) {
 #' @method `bottom_border<-.huxtable` default
 `bottom_border<-.huxtable.default` <- xxx_border_arrow_yyy_hux("tb_borders",
       quote(- 1), quote(seq_len(ncol(ht))), "thickness")
+
+
+
+#' @export
+`left_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style")
+
+
+#' @export
+`right_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-1), "style")
+
+
+#' @export
+`top_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style")
+
+
+#' @export
+`bottom_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-1), j = quote(seq_len(ncol(ht))), "style")
+
+#' @export
+`left_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color")
+
+
+#' @export
+`right_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-1), "color")
+
+
+#' @export
+`top_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color")
+
+
+#' @export
+`bottom_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-1), j = quote(seq_len(ncol(ht))), "color")
+
 
 
 xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
@@ -200,7 +245,7 @@ xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
 
 xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
   function (ht) {
-    mlist <- attr(ht, "lr_borders")
+    mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
     mlist[[border_prop]][eval(i), eval(j)]
@@ -225,7 +270,7 @@ top_border_style.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 
 #' @export
-bottom_border_style.huxtable <- xxx_border_yyy_huxtable("lr_borders",
+bottom_border_style.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   i = quote(-1), j = quote(seq_len(ncol(ht))), "style")
 
 #' @export
@@ -244,7 +289,7 @@ top_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 
 #' @export
-bottom_border_color.huxtable <- xxx_border_yyy_huxtable("lr_borders",
+bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   i = quote(-1), j = quote(seq_len(ncol(ht))), "color")
 
 
