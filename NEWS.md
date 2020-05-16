@@ -27,6 +27,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * `every()` has been renamed to `stripe()`, to avoid a clash with `purrr::every()`.
   `everywhere`, `evens` and `odds` are still the same.
   
+* The little-used ability to set `copy_cell_props` to a character vector in
+  `rbind.huxtable` and `cbind.huxtable` has been removed. You can still set it
+  to `FALSE`.
+  
 * There are changes to LaTeX output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
     padding should now take effect even when `wrap` is `FALSE`.

@@ -13,6 +13,18 @@ Priority changes
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
     
 
+* Fixing border properties.
+  - left_border, left_border_style et al. (but not left_padding et al.)
+    should set one of two lists of 3 matrices.
+  - these are stored as attributes lr_borders and tb_borders
+  - left_ and right_ borders are nrow x (ncol+1)
+  - top and bottom borders are (nrow +1) x ncol
+  - the 3 matrices reference border thickness, style and colour
+  - left_border<- et al. should accept a "bdr" object (a list with all 3) and
+    set them appropriately.
+  - all other objects run as they always did (for now!)
+  - copying and merging attributes
+
 Post 5.0 changes
 ================
 

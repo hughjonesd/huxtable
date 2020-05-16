@@ -59,7 +59,7 @@ xxx_border_huxtable <- function(lr_tb, i, j, border_prop) {
 
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
-    m <- mlist$thickness[eval(i), eval(j)]
+    m <- mlist$thickness[eval(i), eval(j), drop = FALSE]
     class(m) <- c("borderMatrix", class(m))
 
     m
@@ -248,7 +248,7 @@ xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
-    mlist[[border_prop]][eval(i), eval(j)]
+    mlist[[border_prop]][eval(i), eval(j), drop = FALSE]
   }
 }
 
