@@ -9,6 +9,7 @@
 "jams"
 
 .onLoad <- function(libname, pkgname) {
+  check_adjustbox(quiet = FALSE)
 
   set_default_option <- function (opt, value) {
     ol <- list(getOption(opt, value))
