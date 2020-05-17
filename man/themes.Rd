@@ -16,7 +16,12 @@
 \usage{
 theme_plain(ht, position = "center")
 
-theme_bright(ht, header_row = TRUE, header_col = FALSE, border_color = "white")
+theme_bright(
+  ht,
+  header_row = TRUE,
+  header_col = FALSE,
+  colors = c("#7eabf2", "#e376e3", "#fcbb03", "#7aba59", "#fc0356")
+)
 
 theme_basic(ht, header_row = TRUE, header_col = FALSE)
 
@@ -50,7 +55,7 @@ theme_mondrian(ht, prop_colored = 0.1, font = "Arial")
 \item{header_col}{Logical: set first column to header, and style header
 columns?}
 
-\item{border_color}{Border color to set. Default "white"}
+\item{colors}{Colors for header rows. Can also be a palette function.}
 
 \item{stripe}{Background colour for odd rows}
 
