@@ -111,9 +111,10 @@ check_latex_dependencies <- function (quiet = FALSE) {
 
 #' Tools for LaTeX dependencies
 #'
-#' `install_latex_dependencies` is a utility function to install the LaTeX packages
-#' that huxtable requires. It calls [tinytex::tlmgr_install()] if possible,
-#' or `tlmgr install` directly.
+#' `install_latex_dependencies` is a utility function to install and/or update
+#' the LaTeX packages that huxtable requires. It calls
+#' [tinytex::tlmgr_install()] if possible, or `tlmgr install` directly.
+#'
 #' @return `install_latex_dependencies` returns `TRUE` if `tlmgr` returns 0.
 #' @export
 #' @rdname report_latex_dependencies
@@ -168,7 +169,7 @@ tlmgr_packages <- function () {
 check_adjustbox <- function (quiet = TRUE) {
   args <- c("info", "--data", "'cat-version'", "--only-installed", "adjustbox")
   adjustbox_rev <- if (requireNamespace("tinytex", quietly = TRUE)) {
-    tinytex::tlmgr(args, stdout = TRUE)
+    tinytex::tlmgr(args, stdout = TRUE, .quiet = TRUE)
   } else {
     system2("tlmgr", args, stdout = TRUE)
   }
@@ -176,7 +177,7 @@ check_adjustbox <- function (quiet = TRUE) {
   ok <- as.package_version(adjustbox_rev) >= "1.2"
   if (! ok && ! quiet) {
     warning("TeX package 'adjustbox' is out of date.\n",
-      "Update it with your package manager or via install_latex_dependencies().")
+      "Update it with your package manager or via `install_latex_dependencies()`.")
   }
 
   return(ok)

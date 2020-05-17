@@ -33,9 +33,9 @@ to a LaTeX preamble.
 
 \code{check_latex_dependencies} checks whether the required LaTeX packages are installed.
 
-\code{install_latex_dependencies} is a utility function to install the LaTeX packages
-that huxtable requires. It calls \code{\link[tinytex:tlmgr_install]{tinytex::tlmgr_install()}} if possible,
-or \verb{tlmgr install} directly.
+\code{install_latex_dependencies} is a utility function to install and/or update
+the LaTeX packages that huxtable requires. It calls
+\code{\link[tinytex:tlmgr_install]{tinytex::tlmgr_install()}} if possible, or \verb{tlmgr install} directly.
 }
 \examples{
 report_latex_dependencies()
