@@ -1,33 +1,69 @@
 
-
-# order of these matters
-huxtable_border_props <- c(
-  "top_border", "left_border", "right_border", "bottom_border",
-  "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
-  "top_border_style", "left_border_style", "right_border_style", "bottom_border_style"
-)
-
-
-#' @template getset-cell
-#' @templateVar attr_name left_border
-#' @templateVar attr_desc Borders
-#' @templateVar value_param_desc A numeric vector or matrix giving border widths in points. Set to 0 for no border.
-#' @templateVar morealiases right_border top_border bottom_border
-#' @templateVar default 0.4
+#' Set borders
+#'
+#' These functions set borders between cells.
+#'
+#' @param ht A huxtable.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param value A numeric thickness or a [bdr()] object.
+#' @param fn A mapping function. See [mapping-functions] for details.
+#'
 #' @details
+#' Borders are always "collapsed": `right_border(ht)[, 1]` is
+#' the same as `left_border(ht)[, 2]`, and setting one sets the other.
+#'
+#' Setting `left_border(ht) <- number` sets the border thickness.
+#' You can set multiple properties at once by using [bdr()].
+#'
 #' Currently in LaTeX, all non-zero border widths on a given line must be the
 #' same.
 #'
-#' @seealso [set_all_borders()]
-#' @template getset-example
-#' @templateVar attr_val 1
-#' @templateVar extra jams
-#' @templateVar attr_val2 0
-#' @template getset-visible-rowspec-example
-#' @template border-warning
+#' @section Limitations:
+#'
+#' * In HTML, you will need to set a width of at least 3 to get a double border.
+#' * Only "solid" and "double" styles are currently implemented in LaTeX, and
+#'   all non-zero horizontal border widths on a given line must be the same.
+#'
+#'
+#' @seealso [set-multiple]
+#'
+#' @examples
+#'
+#' bottom_border(jams)[1, ] <- 0.4
+#' jams
+#'
+#' bottom_border(jams)[1, ] <- bdr(0.4, "solid", "blue")
+#' jams
+#'
+#' set_bottom_border(jams, bdr(0.4, "solid", "green"))
+#'
+#' @name borders
 NULL
+
+
+#' @name left_border
+#' @rdname borders
+NULL
+
+
+#' @name right_border
+#' @rdname borders
+NULL
+
+
+#' @name top_border
+#' @rdname borders
+NULL
+
+
+#' @name bottom_border
+#' @rdname borders
+NULL
+
+
 for (val in paste0(c("left", "right", "top", "bottom"), "_border")) {
-  make_getter_setters(val, "cell", check_fun = is.numeric, default = 0.4,
+  make_getter_setters(val, "cell", check_fun = is_borderish, default = 0.4,
         only_set_map = TRUE)
 }
 
@@ -61,6 +97,7 @@ xxx_border_huxtable <- function(lr_tb, i, j, border_prop) {
     last_row <- nrow(ht) + 1
     m <- mlist$thickness[eval(i), eval(j), drop = FALSE]
     class(m) <- c("borderMatrix", class(m))
+    dimnames(m) <- dimnames(ht)
 
     m
   }
@@ -74,7 +111,7 @@ left_border.huxtable <- xxx_border_huxtable("lr_borders",
 
 #' @export
 right_border.huxtable <- xxx_border_huxtable("lr_borders",
-      i = quote(seq_len(nrow(ht))), j = quote(-1))
+      i = quote(seq_len(nrow(ht))), j = -1)
 
 
 #' @export
@@ -84,7 +121,7 @@ top_border.huxtable <- xxx_border_huxtable("tb_borders",
 
 #' @export
 bottom_border.huxtable <- xxx_border_huxtable("tb_borders",
-      i = quote(-1), j = quote(seq_len(ncol(ht))))
+      i = -1, j = quote(seq_len(ncol(ht))))
 
 
 #' @export
@@ -137,68 +174,68 @@ xxx_border_arrow_yyy_hux <- function(lr_tb, i, j, border_prop) {
 #' @export
 #' @method `left_border<-.huxtable` default
 `left_border<-.huxtable.default` <- xxx_border_arrow_yyy_hux("lr_borders",
-      quote(seq_len(nrow(ht))), quote(- last_col), "thickness")
+      quote(seq_len(nrow(ht))), quote(-last_col), "thickness")
 
 
 
 #' @export
 #' @method `right_border<-.huxtable` default
 `right_border<-.huxtable.default` <- xxx_border_arrow_yyy_hux("lr_borders",
-  quote(seq_len(nrow(ht))), quote(- 1), "thickness")
+      quote(seq_len(nrow(ht))), - 1, "thickness")
 
 
 
 #' @export
 #' @method `top_border<-.huxtable` default
 `top_border<-.huxtable.default` <- xxx_border_arrow_yyy_hux("tb_borders",
-      quote(- last_row), quote(seq_len(ncol(ht))), "thickness")
+      quote(-last_row), quote(seq_len(ncol(ht))), "thickness")
 
 
 
 #' @export
 #' @method `bottom_border<-.huxtable` default
 `bottom_border<-.huxtable.default` <- xxx_border_arrow_yyy_hux("tb_borders",
-      quote(- 1), quote(seq_len(ncol(ht))), "thickness")
+      i = -1, j = quote(seq_len(ncol(ht))), "thickness")
 
 
 
 #' @export
 `left_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style")
+      i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style")
 
 
 #' @export
 `right_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-1), "style")
+      i = quote(seq_len(nrow(ht))), j = -1, "style")
 
 
 #' @export
 `top_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style")
+      i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style")
 
 
 #' @export
 `bottom_border_style<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-1), j = quote(seq_len(ncol(ht))), "style")
+      i = -1, j = quote(seq_len(ncol(ht))), "style")
 
 #' @export
 `left_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color")
+      i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color")
 
 
 #' @export
 `right_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-1), "color")
+      i = quote(seq_len(nrow(ht))), j = -1, "color")
 
 
 #' @export
 `top_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color")
+      i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color")
 
 
 #' @export
 `bottom_border_color<-.huxtable` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-1), j = quote(seq_len(ncol(ht))), "color")
+      i = -1, j = quote(seq_len(ncol(ht))), "color")
 
 
 
@@ -227,7 +264,7 @@ xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
 #' @export
 #' @method `right_border<-.huxtable` bdr
 `right_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("lr_borders",
-      i = quote(seq_len(nrow(ht))), j = quote(-1))
+      i = quote(seq_len(nrow(ht))), j = -1)
 
 
 #' @export
@@ -239,7 +276,7 @@ xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
 #' @export
 #' @method `bottom_border<-.huxtable` bdr
 `bottom_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("tb_borders",
-      i = quote(-1), j = quote(seq_len(ncol(ht))))
+      i = -1, j = quote(seq_len(ncol(ht))))
 
 
 
@@ -261,7 +298,7 @@ left_border_style.huxtable <- xxx_border_yyy_huxtable("lr_borders",
 
 #' @export
 right_border_style.huxtable <- xxx_border_yyy_huxtable("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-1), "style")
+  i = quote(seq_len(nrow(ht))), j = -1, "style")
 
 
 #' @export
@@ -271,7 +308,7 @@ top_border_style.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 #' @export
 bottom_border_style.huxtable <- xxx_border_yyy_huxtable("tb_borders",
-  i = quote(-1), j = quote(seq_len(ncol(ht))), "style")
+  i = -1, j = quote(seq_len(ncol(ht))), "style")
 
 #' @export
 left_border_color.huxtable <- xxx_border_yyy_huxtable("lr_borders",
@@ -280,7 +317,7 @@ left_border_color.huxtable <- xxx_border_yyy_huxtable("lr_borders",
 
 #' @export
 right_border_color.huxtable <- xxx_border_yyy_huxtable("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-1), "color")
+  i = quote(seq_len(nrow(ht))), j = -1, "color")
 
 
 #' @export
@@ -290,7 +327,7 @@ top_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 #' @export
 bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
-  i = quote(-1), j = quote(seq_len(ncol(ht))), "color")
+  i = -1, j = quote(seq_len(ncol(ht))), "color")
 
 
 #' @export
@@ -316,9 +353,9 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 `[<-.borderMatrix.bdr` <- function (x, i, j, ..., value) {
   thickness <- x[] # subsetting unclasses
   thickness[i, j, ...] <- value$thickness
-  style <- matrix("", nrow(x), ncol(x))
+  style <- matrix(huxtable_env$huxtable_default_attrs$border_style, nrow(x), ncol(x))
   style[i, j, ...] <- value$style
-  color <- matrix("", nrow(x), ncol(x))
+  color <- matrix(huxtable_env$huxtable_default_attrs$border_color, nrow(x), ncol(x))
   color[i, j, ...] <- value$color
 
   new_bdr(
@@ -338,60 +375,30 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 }
 
 
-
-#' @template getset-cell
-#' @templateVar attr_name left_border_color
-#' @templateVar attr_desc Border colors
-#' @templateVar value_param_desc A vector or matrix of colors.
-#' @templateVar morealiases right_border_color top_border_color bottom_border_color
-#' @templateVar attr_val "red"
-#' @details
-#' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
-#' top borders take priority over bottom borders.
-#'
-#' @seealso [set_all_border_colors()]
-#' @templateVar attr_val2 "blue"
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 3:1)
-#' ht <- set_all_borders(ht, 1)
-#' set_left_border_color(ht, "red")
-#' set_left_border_color(ht,
-#'       1:2, 1, "red")
-#'
-#' @template border-warning
-#'
-NULL
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_color")) make_getter_setters(val,
   "cell", only_set_map = TRUE)
 
-#' @templateVar attr_name left_border_style
-#' @templateVar attr_desc Border styles
-#' @templateVar value_param_desc A character vector or matrix of styles, which may be "solid", "double", "dashed" or "dotted".
-#' @templateVar morealiases right_border_style top_border_style bottom_border_style
-#' @templateVar attr_val "solid"
-#' @template getset-cell
-#' @details
-#' Huxtable collapses borders and border colors. Right borders take priority over left borders, and
-#' top borders take priority over bottom borders.
-#'
-#' Border styles only apply if the border width is greater than 0.
-#'
-#' @section Quirks:
-#'
-#' * In HTML, you will need to set a width of at least 3 to get a double border.
-#' * Only "solid" and "double" styles are currently implemented in LaTeX.
-#'
-#' @templateVar attr_val2 "double"
-#' @examples
-#' ht <- huxtable(a = 1:3, b = 3:1)
-#' ht <- set_all_borders(ht, 1)
-#' set_left_border_style(ht, "double")
-#' set_left_border_style(ht, 1:2, 1,
-#'       "double")
-#'
-#' @template border-warning
-NULL
+
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_style")) make_getter_setters(val,
   "cell", check_values = c("solid", "double", "dashed", "dotted"), only_set_map = TRUE)
 
 
+# order of these matters
+border_props <- c(
+  "top_border", "left_border", "right_border", "bottom_border",
+  "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
+  "top_border_style", "left_border_style", "right_border_style", "bottom_border_style"
+)
+
+border_setters <- paste0(border_props, "<-")
+huxtable_border_df <- data.frame(
+  name = border_props,
+  side = gsub("^([a-z]+)_.*", "\\1", border_props),
+  border_attr = gsub("^.*_([a-z]+)$", "\\1", border_props),
+  getter = I(lapply(border_props, get, envir = getNamespace("huxtable"))),
+  setter = I(lapply(border_setters, get, envir = getNamespace("huxtable"))),
+  stringsAsFactors = FALSE
+)
+
+#' @evalNamespace make_exports(huxtable_border_df$name)
+NULL

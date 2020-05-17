@@ -17,7 +17,7 @@ map_text_color(ht, row, col, fn)
 
 \item{value}{A character vector or matrix of valid R colors.
 
-Set to \code{NA} to reset to the default, which is \code{NA}.}
+Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

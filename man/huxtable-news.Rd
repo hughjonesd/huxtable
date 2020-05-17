@@ -15,6 +15,60 @@ backwards-incompatible API changes, not necessarily big changes.
 \section{huxtable (development version)}{
 \subsection{Breaking changes}{
 \itemize{
+\item Huxtable borders have been reworked, fixing some longstanding bugs
+and adding new features.
+\itemize{
+\item Borders are now automatically collapsed. For example:
+}
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{jams \%>\% 
+    set_right_border(everywhere, 1, 1) \%>\% 
+    set_left_border(everywhere, 2, 0.4)
+}\if{html}{\out{</div>}}\preformatted{will set the border in between the columns of `jams` to `0.4`, overwriting
+the previous value. This is more in line with what you would expect,
+and should fix some longstanding bugs. For example, the following code
+now does what you probably want:
+
+jams \%>\% 
+    set_rowspan(2, 1, 3) \%>\% 
+    set_bottom_border(4, everywhere, 1)
+##                                            Type              Price  
+##                                            Strawberry         1.90  
+##                                                               2.10  
+##                                                               1.80  
+##                                          ───────────────────────────
+}
+
+instead of the old behaviour:\preformatted{jams \%>\% 
+    set_rowspan(2, 1, 3) \%>\% 
+    set_bottom_border(4, everywhere, 1)
+##                                            Type           Price  
+##                                            Strawberry      1.90  
+##                                                            2.10  
+##                                                            1.80  
+##                                                       ───────────
+}
+\itemize{
+\item \code{set_left_border()}, \code{set_all_borders()} and friends all use a
+default value of 0.4. So to set a default border, write e.g.
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bottom_border(1, everywhere)
+}\if{html}{\out{</div>}}
+\itemize{
+\item Or, you can use the new \code{bdr()} class to encapsulate border
+thickness, style and colour:
+}\if{html}{\out{
+<!-- end list -->
+}}
+\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
+      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
+}\if{html}{\out{</div>}}
+\itemize{
 \item As previously signalled, \code{add_colnames} has now become \code{TRUE} by
 default in \code{huxtable()} and \code{as_huxtable()}. Set
 \code{options(huxtable.add_colnames = FALSE)} to go back to the old
@@ -66,30 +120,6 @@ headers.
 }
 
 \subsection{Other changes}{
-\itemize{
-\item Huxtable borders have been reworked, fixing some longstanding bugs
-and adding new features.
-\itemize{
-\item Setting e.g. \code{top_border(ht)[2, ]} now overwrites
-\code{bottom_border(ht)[1, ]}, as you would expect.
-\item \code{set_left_border()}, \code{set_all_borders()} and friends all use a
-default value of 0.4. So to set a default border, write e.g.
-}
-}\if{html}{\out{
-<!-- end list -->
-}}
-\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
-      set_bottom_border(1, everywhere)
-}\if{html}{\out{</div>}}
-\itemize{
-\item Or, you can use the new \code{bdr()} class to encapsulate border
-thickness, style and colour:
-}\if{html}{\out{
-<!-- end list -->
-}}
-\if{html}{\out{<div class="r">}}\preformatted{as_hux(head(iris)) \%>\% 
-      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
-}\if{html}{\out{</div>}}
 \itemize{
 \item Huxtable now has the concept of header row and columns.
 \itemize{

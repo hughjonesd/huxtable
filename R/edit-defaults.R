@@ -8,6 +8,11 @@
 #' @return For `set_default_properties`, a list of the previous property values, invisibly.
 #' @details
 #' Note that `autoformat = TRUE` in [huxtable()] overrides some defaults.
+#'
+#' To set default border styles, use the pseudo-properties
+#' `border`/`border_style`/`border_color`. You cannot set defaults separately for
+#' different sides.
+#'
 #' @export
 #' @seealso Options for autoformat in [huxtable-options].
 #' @examples

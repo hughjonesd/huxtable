@@ -95,10 +95,11 @@ test_that("map_all_*", {
   ht <- huxtable(1:5, 5:1)
 
   ht2 <- map_all_borders(ht, by_ranges(3, c(0, 1)))
-  expect_equivalent(left_border(ht2), 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(right_border(ht2), 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(top_border(ht2), 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(bottom_border(ht2), 1 * (as.matrix(ht2) >= 3))
+  # the [] are to unclass the borderMatrix
+  expect_equivalent(left_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(right_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(top_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
+  expect_equivalent(bottom_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
 
   ht3 <- map_all_border_colors(ht, by_ranges(3, c("red", "black")))
   expected <- matrix(ifelse(as.matrix(ht) >= 3, "black", "red"), 5, 2)

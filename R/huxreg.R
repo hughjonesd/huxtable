@@ -277,7 +277,7 @@ huxreg <- function (
     stars <- if (is.null(stars)) "" else paste0(names(stars), " p < ", stars, collapse = "; ")
     note <- gsub("%stars%", stars, note)
     note <- glue::glue(note)
-    result <- add_footnote(result, note, border = 0) # borders handled above
+    result <- add_footnote(result, note, border = NULL)
     result <- set_wrap(result, final(), 1, TRUE)
     result <- set_align(result, final(), 1, "left")
   }

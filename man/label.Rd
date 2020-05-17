@@ -14,7 +14,7 @@ set_label(ht, value)
 \item{ht}{A huxtable.}
 
 \item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\code{"NA"}.}
 }
 \value{
 For \code{label}, the \code{label} property.

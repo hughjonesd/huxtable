@@ -168,14 +168,6 @@ test_that("collapsed_borders works", {
   expect_type(cb, "list")
   expect_equivalent(cb$vert, matrix(c(0, 3, 0, 0, 0, 0), 2, 3, byrow = TRUE))
   expect_equivalent(cb$horiz, matrix(c(0, 0, 3, 0, 0, 0), 3, 2, byrow = TRUE))
-  colspan(ht)[1, 1] <- 2
-  cb <- huxtable:::collapsed_borders(ht)
-  expect_equivalent(cb$vert, matrix(c(0, 0, 3, 0, 0, 0), 2, 3, byrow = TRUE))
-  expect_equivalent(cb$horiz, matrix(c(0, 0, 3, 3, 0, 0), 3, 2, byrow = TRUE))
-  rowspan(ht)[1, 1] <- 2
-  cb <- huxtable:::collapsed_borders(ht)
-  expect_equivalent(cb$vert, matrix(c(0, 0, 3, 0, 0, 3), 2, 3, byrow = TRUE))
-  expect_equivalent(cb$horiz, matrix(c(0, 0, 0, 0, 3, 3), 3, 2, byrow = TRUE))
 })
 
 
@@ -192,14 +184,6 @@ test_that("collapsed_border_colors works", {
   cbc <- huxtable:::collapsed_border_colors(ht)
   expect_equivalent(cbc$vert, matrix(c(NA, "blue", NA, NA, NA, NA), 2, 3, byrow = TRUE))
   expect_equivalent(cbc$horiz, matrix(c(NA, NA, "purple", NA, NA, NA), 3, 2, byrow = TRUE))
-  colspan(ht)[1, 1] <- 2
-  cbc <- huxtable:::collapsed_border_colors(ht)
-  expect_equivalent(cbc$vert, matrix(c(NA, NA, "blue", NA, NA, NA), 2, 3, byrow = TRUE))
-  expect_equivalent(cbc$horiz, matrix(c(NA, NA, "purple", "purple", NA, NA), 3, 2, byrow = TRUE))
-  rowspan(ht)[1, 1] <- 2
-  cbc <- huxtable:::collapsed_border_colors(ht)
-  expect_equivalent(cbc$vert, matrix(c(NA, NA, "blue", NA, NA, "blue"), 2, 3, byrow = TRUE))
-  expect_equivalent(cbc$horiz, matrix(c(NA, NA, NA, NA, "purple", "purple"), 3, 2, byrow = TRUE))
 })
 
 

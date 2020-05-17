@@ -22,7 +22,6 @@ huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos
 #' @evalNamespace make_exports(huxtable_row_attrs)
 #' @evalNamespace make_exports(huxtable_table_attrs)
 #' @evalNamespace make_exports(huxtable_cell_attrs, with_map = TRUE)
-#' @evalNamespace make_exports(huxtable_border_props)
 NULL
 
 huxtable_env <- new.env()
@@ -31,46 +30,37 @@ huxtable_env$huxtable_default_attrs <- list(
         colspan             = 1,
         align               = "left",
         valign              = "top",
-        width               = NA,
-        height              = NA,
-        col_width           = NA,
-        row_height          = NA,
+        width               = NA_real_,
+        height              = NA_real_,
+        col_width           = NA_real_,
+        row_height          = NA_real_,
         header_cols         = FALSE,
         header_rows         = FALSE,
-        background_color    = NA,
-        text_color          = NA,
-        left_border         = 0,
-        right_border        = 0,
-        top_border          = 0,
-        bottom_border       = 0,
-        left_border_color   = NA,
-        right_border_color  = NA,
-        top_border_color    = NA,
-        bottom_border_color = NA,
-        left_border_style   = "solid",
-        right_border_style  = "solid",
-        top_border_style    = "solid",
-        bottom_border_style = "solid",
+        background_color    = NA_character_,
+        text_color          = NA_character_,
+        border              = 0,
+        border_color        = NA_character_,
+        border_style        = "solid",
         left_padding        = 6,
         right_padding       = 6,
         top_padding         = 6,
         bottom_padding      = 6,
         wrap                = TRUE,
-        caption             = NA,
+        caption             = NA_character_,
         caption_pos         = "top",
-        caption_width       = NA,
+        caption_width       = NA_real_,
         position            = "center",
-        tabular_environment = NA,
-        label               = NA,
+        tabular_environment = NA_character_,
+        label               = NA_character_,
         latex_float         = "ht",
         escape_contents     = TRUE,
         na_string           = "",
         bold                = FALSE,
         italic              = FALSE,
-        font_size           = NA,
+        font_size           = NA_real_,
         rotation            = 0,
         number_format       = list("%.3g"),
-        font                = NA
+        font                = NA_character_
       )
 
 make_getter_setters <- function(

@@ -6,6 +6,60 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 ## Breaking changes
 
+* Huxtable borders have been reworked, fixing some longstanding bugs and
+  adding new features. 
+  - Borders are now automatically collapsed. For example:
+
+```r
+jams %>% 
+    set_right_border(everywhere, 1, 1) %>% 
+    set_left_border(everywhere, 2, 0.4)
+```
+    will set the border in between the columns of `jams` to `0.4`, overwriting
+    the previous value. This is more in line with what you would expect,
+    and should fix some longstanding bugs. For example, the following code
+    now does what you probably want:
+
+```
+jams %>% 
+    set_rowspan(2, 1, 3) %>% 
+    set_bottom_border(4, everywhere, 1)
+##                                            Type              Price  
+##                                            Strawberry         1.90  
+##                                                               2.10  
+##                                                               1.80  
+##                                          ───────────────────────────
+```
+
+instead of the old behaviour:
+
+```
+jams %>% 
+    set_rowspan(2, 1, 3) %>% 
+    set_bottom_border(4, everywhere, 1)
+##                                            Type           Price  
+##                                            Strawberry      1.90  
+##                                                            2.10  
+##                                                            1.80  
+##                                                       ───────────
+```
+
+  - `set_left_border()`, `set_all_borders()` and friends all use a default value
+    of 0.4. So to set a default border, write e.g.
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere)
+```
+
+  - Or, you can use the new `bdr()` class to encapsulate border thickness, style
+  and colour:
+  
+```r
+as_hux(head(iris)) %>% 
+      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
+```
+
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
@@ -51,26 +105,6 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 
 ## Other changes
-
-* Huxtable borders have been reworked, fixing some longstanding bugs and
-  adding new features. 
-  - Setting e.g. `top_border(ht)[2, ]` now overwrites `bottom_border(ht)[1, ]`,
-    as you would expect.
-  - `set_left_border()`, `set_all_borders()` and friends all use a default value
-    of 0.4. So to set a default border, write e.g.
-  
-```r
-as_hux(head(iris)) %>% 
-      set_bottom_border(1, everywhere)
-```
-
-  - Or, you can use the new `bdr()` class to encapsulate border thickness, style
-  and colour:
-  
-```r
-as_hux(head(iris)) %>% 
-      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
-```
 
 * Huxtable now has the concept of header row and columns. 
   - By default, data frame column names will be headers.

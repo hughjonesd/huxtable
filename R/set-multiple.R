@@ -19,7 +19,6 @@ NULL
 #'
 #' @return The modified huxtable.
 #' @name set-multiple
-#' @aliases set_multiple
 NULL
 
 

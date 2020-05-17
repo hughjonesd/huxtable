@@ -24,17 +24,19 @@ new_huxtable <- function (x) {
     attr(x, a) <- NA
   }
   attr(x, "lr_borders") <- list(
-    thickness = matrix(0, nrow(x), ncol(x) + 1),
-    style     = matrix("solid", nrow(x), ncol(x) + 1),
-    color     = matrix(NA_character_, nrow(x), ncol(x) + 1)
+    thickness = matrix(huxtable_env$huxtable_default_attrs[["border"]], nrow(x), ncol(x) + 1),
+    style     = matrix(huxtable_env$huxtable_default_attrs[["border_style"]], nrow(x), ncol(x) + 1),
+    color     = matrix(huxtable_env$huxtable_default_attrs[["border_color"]], nrow(x), ncol(x) + 1)
   )
   attr(x, "tb_borders") <- list(
-    thickness = matrix(0, nrow(x) + 1, ncol(x)),
-    style     = matrix("solid", nrow(x) + 1, ncol(x)),
-    color     = matrix(NA_character_, nrow(x) + 1, ncol(x))
+    thickness = matrix(huxtable_env$huxtable_default_attrs[["border"]], nrow(x) + 1, ncol(x)),
+    style     = matrix(huxtable_env$huxtable_default_attrs[["border_style"]], nrow(x) + 1, ncol(x)),
+    color     = matrix(huxtable_env$huxtable_default_attrs[["border_color"]], nrow(x) + 1, ncol(x))
   )
 
-  for (a in names(huxtable_env$huxtable_default_attrs)) {
+  non_border_attrs <- grep("border",
+        names(huxtable_env$huxtable_default_attrs), value = TRUE, invert = TRUE)
+  for (a in non_border_attrs) {
     attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]]  # [[ indexing matters here
   }
 

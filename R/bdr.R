@@ -37,3 +37,11 @@ format.bdr <- function(x, ...) {
 
 #' @export
 print.bdr <- function (x, ...) cat(format(x))
+
+
+is_bdr <- function(x) inherits(x, "bdr")
+
+
+is_borderish <- function (x) {
+  (is.numeric(x) && all(x >= 0)) || is_bdr(x)
+}

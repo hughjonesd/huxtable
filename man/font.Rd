@@ -22,7 +22,7 @@ map_font(ht, row, col, fn)
 
 \item{value}{A character vector of font names.
 
-Set to \code{NA} to reset to the default, which is \code{NA}.}
+Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

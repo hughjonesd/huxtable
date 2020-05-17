@@ -290,10 +290,7 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
   ht <- as_hux(ht, autoformat = FALSE, add_colnames = FALSE)
   x  <- as_hux(x, autoformat = FALSE, add_colnames = FALSE)
   if (isTRUE(copy_cell_props)) {
-    ccp <- c(
-      setdiff(huxtable_cell_attrs, c("colspan", "rowspan")),
-      switch(type, rbind = "row_height", cbind = "col_width")
-    )
+    ccp <- setdiff(huxtable_cell_attrs, c("colspan", "rowspan"))
     if (! x_real_hux  && nrow(x) > 0 && ncol(x) > 0) {
       for (a in ccp) {
         attr(x, a)[] <- if (type == "cbind") attr(ht, a)[, ncol(ht)] else
@@ -301,24 +298,21 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
       }
       if (type == "rbind") {
         attr(x, "row_height")[seq_len(nrow(x))] <- attr(ht, "row_height")[nrow(ht)]
-      }
-      if (type == "cbind") {
+      } else {
         attr(x, "col_width")[seq_len(ncol(x))] <- attr(ht, "col_width")[ncol(ht)]
       }
       if (type == "cbind") {
-        for (bdr_prop in list(right_border, top_border, bottom_border,
-              right_border_style, top_border_style, bottom_border_style,
-              right_border_color, top_border_color, bottom_border_color)) {
-          bdr_prop(x) <- bdr_prop(ht)[, ncol(ht)]
+        border_props <- huxtable_border_df[huxtable_border_df$side != "left",]
+        copy_props <- function (getter, setter) {
+          x <<- setter(x, getter(ht)[, ncol(ht)])
+        }
+      } else {
+        border_props <- huxtable_border_df[huxtable_border_df$side != "top", ]
+        copy_props <- function (getter, setter) {
+          x <<- setter(x, getter(ht)[nrow(ht), ])
         }
       }
-      if (type == "rbind") {
-        for (bdr_prop in list(right_border, left_border, bottom_border,
-          right_border_style, left_border_style, bottom_border_style,
-          right_border_color, left_border_color, bottom_border_color)) {
-          bdr_prop(x) <- bdr_prop(ht)[nrow(ht), ]
-        }
-      }
+      mapply(FUN = copy_props, border_props$getter, border_props$setter)
     }
 
     if (! ht_real_hux && x_real_hux && nrow(ht) > 0 && ncol(ht) > 0) {
@@ -328,24 +322,21 @@ bind2_hux <- function (ht, x, type, copy_cell_props) {
       }
       if (type == "rbind") {
         attr(ht, "row_height")[seq_len(nrow(ht))] <- attr(x, "row_height")[1]
-      }
-      if (type == "cbind") {
+      } else {
         attr(ht, "col_width")[seq_len(ncol(ht))] <- attr(x, "col_width")[1]
       }
       if (type == "cbind") {
-        for (bdr_prop in list(right_border, top_border, bottom_border,
-          right_border_style, top_border_style, bottom_border_style,
-          right_border_color, top_border_color, bottom_border_color)) {
-          bdr_prop(ht) <- bdr_prop(x)[, 1]
+        border_props <- huxtable_border_df[huxtable_border_df$side != "right", ]
+        copy_props <- function (getter, setter) {
+          ht <<- setter(ht, getter(x)[, 1])
+        }
+      } else {
+        border_props <- huxtable_border_df[huxtable_border_df$side != "top", ]
+        copy_props <- function (getter, setter) {
+          ht <<- setter(ht, getter(x)[1, ])
         }
       }
-      if (type == "rbind") {
-        for (bdr_prop in list(right_border, left_border, bottom_border,
-          right_border_style, left_border_style, bottom_border_style,
-          right_border_color, left_border_color, bottom_border_color)) {
-          bdr_prop(ht) <- bdr_prop(x)[1, ]
-        }
-      }
+      mapply(FUN = copy_props, border_props$getter, border_props$setter)
     }
   }
 
@@ -386,11 +377,14 @@ delete_props <- function (res, old, idx) {
 prune_borders <- function (new, old, rows, cols) {
   # set bottom/right borders after top/left borders, so that they take priority.
 
-  for (bdr_prop in huxtable_border_props){
-    setter <- get(paste0(bdr_prop, "<-"))
-    getter <- get(bdr_prop)
-    new <- setter(new, getter(old)[rows, cols])
+  prune_props <- function (getter, setter) {
+    new <<- setter(new, getter(old)[rows, cols])
   }
+  mapply(
+    FUN = prune_props,
+    huxtable_border_df$getter,
+    huxtable_border_df$setter
+  )
 
   new
 }
@@ -445,11 +439,13 @@ merge_props <- function (res, first, second, type = c("cbind", "rbind"),
   }
 
   # borders are simply joined on; right and bottom take priority as usual.
-  for (bdr_prop in huxtable_border_props) {
-    setter <- get(paste0(bdr_prop, "<-"))
-    getter <- get(bdr_prop)
-    res <- setter(res, bind_cells(getter(first), getter(second)))
+  copy_props <- function (getter, setter) {
+    res <<- setter(res, bind_cells(getter(first), getter(second)))
   }
+  mapply(FUN = copy_props,
+          huxtable_border_df$getter,
+          huxtable_border_df$setter
+        )
 
   # numeric row/col heights are rescaled to add to 1
   for (rh_cw in c("row_height", "col_width")) {
