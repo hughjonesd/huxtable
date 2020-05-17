@@ -92,37 +92,51 @@ test_that("standard ways to mention columns work", {
 
 
 test_that("map_all_*", {
-  ht <- huxtable(1:5, 5:1)
+  # we include the NAs because we don't make guarantees about
+  # what happens when borders overlap!
+  m <- matrix(c(1, NA, 2, NA, NA, NA, 2, NA, 1), 3, 3)
+  ht <- as_huxtable(m)
+  m1 <- ! is.na(m) & m == 1
+  m2 <- ! is.na(m) & m == 2
 
-  ht2 <- map_all_borders(ht, by_ranges(3, c(0, 1)))
-  # the [] are to unclass the borderMatrix
-  expect_equivalent(left_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(right_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(top_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
-  expect_equivalent(bottom_border(ht2)[], 1 * (as.matrix(ht2) >= 3))
+  ht2 <- map_all_borders(ht, by_ranges(1.5, c(1, 2)))
+  expect_true(all(left_border(ht2)[m1] == 1))
+  expect_true(all(right_border(ht2)[m1] == 1))
+  expect_true(all(top_border(ht2)[m1] == 1))
+  expect_true(all(bottom_border(ht2)[m1] == 1))
+  expect_true(all(left_border(ht2)[m2] == 2))
+  expect_true(all(right_border(ht2)[m2] == 2))
+  expect_true(all(top_border(ht2)[m2] == 2))
+  expect_true(all(bottom_border(ht2)[m2] == 2))
 
-  ht3 <- map_all_border_colors(ht, by_ranges(3, c("red", "black")))
-  expected <- matrix(ifelse(as.matrix(ht) >= 3, "black", "red"), 5, 2)
-  expect_equivalent(left_border_color(ht3), expected)
-  expect_equivalent(right_border_color(ht3), expected)
-  expect_equivalent(top_border_color(ht3), expected)
-  expect_equivalent(bottom_border_color(ht3), expected)
+  ht3 <- map_all_border_colors(ht, by_ranges(1.5, c("red", "black")))
+  expect_true(all(left_border_color(ht3)[m1]   == "red"))
+  expect_true(all(right_border_color(ht3)[m1]  == "red"))
+  expect_true(all(top_border_color(ht3)[m1]    == "red"))
+  expect_true(all(bottom_border_color(ht3)[m1] == "red"))
+  expect_true(all(left_border_color(ht3)[m2]   == "black"))
+  expect_true(all(right_border_color(ht3)[m2]  == "black"))
+  expect_true(all(top_border_color(ht3)[m2]    == "black"))
+  expect_true(all(bottom_border_color(ht3)[m2] == "black"))
 
-  ht4 <- map_all_border_styles(ht, by_ranges(3, c("solid", "double")))
-  expected <- matrix(ifelse(as.matrix(ht) >= 3, "double", "solid"), 5, 2)
-  expect_equivalent(left_border_style(ht4), expected)
-  expect_equivalent(right_border_style(ht4), expected)
-  expect_equivalent(top_border_style(ht4), expected)
-  expect_equivalent(bottom_border_style(ht4), expected)
+
+  ht4 <- map_all_border_styles(ht, by_ranges(1.5, c("solid", "double")))
+  expect_true(all(left_border_style(ht4)[m1]   == "solid"))
+  expect_true(all(right_border_style(ht4)[m1]  == "solid"))
+  expect_true(all(top_border_style(ht4)[m1]    == "solid"))
+  expect_true(all(bottom_border_style(ht4)[m1] == "solid"))
+  expect_true(all(left_border_style(ht4)[m2]   == "double"))
+  expect_true(all(right_border_style(ht4)[m2]  == "double"))
+  expect_true(all(top_border_style(ht4)[m2]    == "double"))
+  expect_true(all(bottom_border_style(ht4)[m2] == "double"))
 
   ht5 <- map_all_padding(ht, by_ranges(3, c(0, 10)))
   expect_equivalent(left_padding(ht5), 10 * (as.matrix(ht) >= 3))
   expect_equivalent(right_padding(ht5), 10 * (as.matrix(ht) >= 3))
 
-  ht6 <- map_all_borders(ht, 1:2, 1:2, by_ranges(3, c(2, 4)))
-  expected <- matrix(c(2, 2, 0, 0, 0, 4, 4, 0, 0, 0), 5, 2)
-  expect_equivalent(left_border(ht6), expected)
-  expect_equivalent(right_border(ht6), expected)
+  ht6 <- map_all_borders(ht, 1:3, 1, by_ranges(1.5, c(1, 2)))
+  expect_equivalent(left_border(ht6)[1:3, 1], c(1, 0, 2))
+  expect_equivalent(left_border(ht6)[1:3, 2], c(0, 0, 0))
 })
 
 

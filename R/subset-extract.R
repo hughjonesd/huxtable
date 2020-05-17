@@ -29,31 +29,29 @@ NULL
 #' jams[, 1]
 #' jams$Type
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
-  n_idx <- nargs() - ! missing(drop) - 1L
-  missing_i <- missing(i)
-  missing_j <- missing(j) # evaluate before swapping j and i
-  if (missing_i && missing_j) return(x)
-
   if (! missing(drop) && drop) {
     stop("Can't use `drop = TRUE` to subset a huxtable. Use `[[` instead.")
   }
-  ss <- if (n_idx <= 1) {
-    # avoids a warning from `[.data.frame`
-    # NextMethod("[", as.data.frame(x))
-    as.data.frame(x)[i, j]
-  } else {
-    as.data.frame(x)[i, j, drop = FALSE]
-    # NextMethod("[", as.data.frame(x), drop = FALSE)
-  }
-  ss <- new_huxtable(ss)
+  # effectively nargs() is the "number of commas in the call, plus one".
+  # E.g. nargs() is 2 if a function is called like f(a=,b=).
+  # whereas a and b will still be "missing".
+  # So: [,x] -> missing_i, nargs() 2
+  n_idx <- nargs() - ! missing(drop) - 1L
+  missing_i <- missing(i)
+  missing_j <- missing(j) # evaluate before swapping j and i
 
-  if (n_idx == 1L) {
+  if (missing_i && missing_j) return(x)
+
+  if (n_idx == 1L) { # called like ht[x]
     j <- i
     i <- seq_len(nrow(x))
   }
+  if (! missing(j) && is.logical(j)) {
+    stopifnot(length(j) %in% c(1, ncol(x)))
+  }
+  ss <- as.data.frame(x)[i, j, drop = FALSE]
+  ss <- new_huxtable(ss)
 
-  if (! missing_i && is.character(i)) i <- which(rownames(x) %in% i)
-  if (! missing_j && is.character(j)) j <- which(colnames(x) %in% j)
   for (a in huxtable_cell_attrs) {
     attr(ss, a) <- attr(x, a)[i, j, drop = drop]
   }
@@ -67,8 +65,10 @@ NULL
     attr(ss, a) <- attr(x, a)
   }
 
-  if (missing_i) i <- seq_len(nrow(x))
-  if (missing_j) j <- seq_len(ncol(x))
+  # here, we use missing(i) and missing(j) to skip the ht[foo] case, where
+  # n_idx == 1 and i and j were swapped above.
+  if (missing(i)) i <- seq_len(nrow(x))
+  if (missing(j)) j <- seq_len(ncol(x))
   ss <- prune_borders(ss, x, rows = i, cols = j)
 
   # we don't use `colspan<-` because this immediately triggers a `check_span_shadows`
@@ -148,7 +148,7 @@ NULL
 #' @export
 `$<-.huxtable` <- function (x, name, value) {
   res <- as.data.frame(NextMethod())
-  class(res) <- class(x)
+  res <- new_huxtable(res)
 
   if (ncol(res) < ncol(x)) {
     stopifnot(is.null(value))

@@ -400,7 +400,7 @@ merge_props <- function (res, first, second, type = c("cbind", "rbind"),
   #  - col  properties copied from last col (cbind)
   #  - lr_borders extended
   if (! is_huxtable(second)) {
-    second <- as_hux(second, add_colnames = FALSE, autoformat = FALSE)
+    second <- new_huxtable(second)
     if (is.character(copy_cell_props)) {
       ccp <- intersect(copy_cell_props, huxtable_cell_attrs)
       for (a in ccp) {

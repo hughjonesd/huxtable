@@ -285,7 +285,11 @@ xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
-    mlist[[border_prop]][eval(i), eval(j), drop = FALSE]
+
+    mx <- mlist[[border_prop]][eval(i), eval(j), drop = FALSE]
+    dimnames(mx) <- dimnames(ht)
+
+    mx
   }
 }
 
@@ -365,6 +369,33 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   )
 }
 
+
+#' @export
+#' @method `[<-.borderMatrix` list
+`[<-.borderMatrix.list` <- function (x, i, j, ..., value) {
+  values_are_bdr <- sapply(value, is_bdr)
+  if (! all(values_are_bdr)) stop("Unrecognized object ", value,
+        " passed into border function.\nPass a number or a `bdr` object.")
+  thickness <- x[] # subsetting unclasses
+  new_dims <- dim(thickness[i, j, drop = FALSE])
+  new_thickness <- sapply(value, getElement, name = "thickness")
+  dim(new_thickness) <- new_dims
+  new_style <- sapply(value, getElement, name = "style")
+  dim(new_style) <- new_dims
+  new_color <- sapply(value, getElement, name = "color")
+  dim(new_color) <- new_dims
+
+  value <- new_bdr(
+          thickness = new_thickness,
+          style     = new_style,
+          color     = new_color
+        )
+  # NextMethod uses the class vector of the object supplied to the generic,
+  # so we just invoke this manually:
+  `[<-.borderMatrix`(x, i, j, ..., value = value)
+}
+
+
 #' @export
 #' @method `[<-.borderMatrix` default
 `[<-.borderMatrix.default` <- function (x, i, j, ..., value) {
@@ -400,5 +431,5 @@ huxtable_border_df <- data.frame(
   stringsAsFactors = FALSE
 )
 
-#' @evalNamespace make_exports(huxtable_border_df$name)
+#' @evalNamespace make_exports(huxtable_border_df$name, with_map = TRUE)
 NULL

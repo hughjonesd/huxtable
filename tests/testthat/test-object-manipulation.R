@@ -1,5 +1,6 @@
 
 
+
 test_that("Subsetting preserves rownames", {
   ht <- huxtable(a = 1:3, b = 1:3)
   rownames(ht) <- letters[1:3]
@@ -15,6 +16,14 @@ test_that("One-argument [", {
   expect_identical(ht12, ht[, 1:2])
   expect_silent(ht_all <- ht[])
   expect_identical(ht, ht_all)
+  expect_silent(hta <- ht["a"])
+  expect_identical(hta, ht[, 1])
+  expect_silent(ht_TFF <- ht[c(TRUE, FALSE, FALSE)])
+  expect_identical(ht_TFF, ht[, 1])
+
+  expect_error(ht["q"])
+  expect_error(ht[c(TRUE, FALSE)])
+  expect_error(ht[4])
 })
 
 
