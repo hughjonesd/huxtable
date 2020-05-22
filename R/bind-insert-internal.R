@@ -182,6 +182,7 @@ merge_props <- function (res, first, second, type = c("cbind", "rbind"),
     attr(res, a) <- attr(first, a)
   }
 
+  class(res) <- c("huxtable", class(res))
   # borders are simply joined on; right and bottom take priority as usual.
   copy_props <- function (getter, setter) {
     res <<- setter(res, bind_cells(getter(first), getter(second)))

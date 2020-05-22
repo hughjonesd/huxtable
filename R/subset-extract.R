@@ -98,7 +98,6 @@ NULL
 #' jams
 `[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
-  class(res) <- class(x)
 
   if (ncol(res) < ncol(x)) {
     assert_that(is.null(value))
@@ -148,7 +147,6 @@ NULL
 #' @export
 `$<-.huxtable` <- function (x, name, value) {
   res <- as.data.frame(NextMethod())
-  res <- new_huxtable(res)
 
   if (ncol(res) < ncol(x)) {
     stopifnot(is.null(value))
@@ -161,6 +159,7 @@ NULL
 
   res <- set_attr_dimnames(res)
 
+  class(res) <- class(x)
   res
 }
 
@@ -169,7 +168,7 @@ NULL
 #' @export
 `[[<-.huxtable` <- function (x, i, j, value) {
   res <- as.data.frame(NextMethod())
-  class(res) <- class(x)
+
   # [[<- can be called with one or two indexes. The 2 index form doesn't extend columns, but does extend rows.
   # It can't delete either rows or columns though.
   # The one-index form only extends columns. It can also delete columns.
@@ -188,6 +187,7 @@ NULL
 
   res <- set_attr_dimnames(res)
 
+  class(res) <- class(x)
   res
 }
 
