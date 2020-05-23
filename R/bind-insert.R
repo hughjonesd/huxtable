@@ -225,33 +225,33 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #'
 #'
 #' @examples
-#' ht1 <- hux(a = 1:3, b = 4:6)
-#' ht2 <- hux(
-#'         d = letters[1:3],
-#'         e = letters[4:6]
-#'       )
-#' bold(ht1)[1, ] <- TRUE
-#' bold(ht2) <- TRUE
-#' vec <- LETTERS[1:4]
 #'
-#' cbind(ht1, vec, ht2)
-#' cbind(ht1, vec, ht2,
-#'       copy_cell_props = FALSE)
+#' sugar <- c("Sugar", "40%", "35%", "50%")
+#' jams <- set_bold(jams, 1, everywhere)
+#' cbind(jams, sugar)
+#' cbind(jams, sugar,
+#'      copy_cell_props = FALSE)
+#'
+#' jams <- set_text_color(jams,
+#'      everywhere, 1, "red")
+#' rbind(jams, c("Damson", 2.30))
+#' rbind(jams, c("Damson", 2.30),
+#'      copy_cell_props = FALSE)
 #'
 #' @export
 cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
-  force(copy_cell_props)
   assert_that(is.flag(copy_cell_props))
-  bind_hux(..., type = "cbind", copy_cell_props = copy_cell_props)
+  f <- function (obj1, obj2) bind_cols_2(obj1, obj2, copy_cell_props = copy_cell_props)
+  Reduce(f, list(...))
 }
 
 
 #' @export
 #' @rdname cbind.huxtable
 rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
-  force(copy_cell_props)
   assert_that(is.flag(copy_cell_props))
-  bind_hux(..., type = "rbind", copy_cell_props = copy_cell_props)
+  f <- function (obj1, obj2) bind_rows_2(obj1, obj2, copy_cell_props = copy_cell_props)
+  Reduce(f, list(...))
 }
 
 

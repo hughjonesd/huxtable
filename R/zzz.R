@@ -1,12 +1,11 @@
 
-# data and onLoad
-
 #' Prices of 3 jams
 #'
 #' A huxtable of jams.
 #'
 #' @format A huxtable with 4 rows and 2 columns ("Type" and "Price").
 "jams"
+
 
 .onLoad <- function(libname, pkgname) {
   try(check_adjustbox(quiet = FALSE), silent = TRUE)
