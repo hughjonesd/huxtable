@@ -171,6 +171,7 @@ by_values <- function (..., ignore_na = TRUE) {
   default <- vals[names(vals) == ""]
   if (is.null(names(vals))) default <- vals
   if (length(default) > 1) stop("At most one element of `...` can be unnamed")
+  if (length(default) > 0) default <- default[[1]]
 
   values_fn <- function (ht, rows, cols, current) {
     res <- current

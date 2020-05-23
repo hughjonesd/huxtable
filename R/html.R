@@ -57,8 +57,8 @@ to_html.huxtable <- function(ht, ...) {
 
   height <- height(ht)
   height_string <- blank_where({
-    if (is.numeric(height)) height <- paste0(height * 100, "%")
-    sprintf("height: %s;", height)
+    h <- if (is.numeric(height)) paste0(height * 100, "%") else height
+    sprintf("height: %s;", h)
   }, is.na(height))
 
   float_string <- switch(position(ht),
@@ -95,7 +95,7 @@ to_html.huxtable <- function(ht, ...) {
   col_widths <- col_width(ht)
   # NAs become empty strings
   empty_cw <- is.na(col_widths)
-  if (is.numeric(col_widths)) col_widths <- paste0(col_widths * 100, "%")
+  if (is.numeric(col_widths)) col_widths <- sprintf("%s%%", col_widths * 100)
   cols_html <- sprintf(' style="width: %s"', col_widths)
   cols_html <- blank_where(cols_html, empty_cw)
   cols_html <- sprintf("<col%s>", cols_html)

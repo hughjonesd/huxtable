@@ -37,17 +37,17 @@ call the data frame method instead of the huxtable-specific code. For a solution
 \code{\link[=add_columns]{add_columns()}}.
 }
 \examples{
-ht1 <- hux(a = 1:3, b = 4:6)
-ht2 <- hux(
-        d = letters[1:3],
-        e = letters[4:6]
-      )
-bold(ht1)[1, ] <- TRUE
-bold(ht2) <- TRUE
-vec <- LETTERS[1:4]
 
-cbind(ht1, vec, ht2)
-cbind(ht1, vec, ht2,
-      copy_cell_props = FALSE)
+sugar <- c("Sugar", "40\%", "35\%", "50\%")
+jams <- set_bold(jams, 1, everywhere)
+cbind(jams, sugar)
+cbind(jams, sugar,
+     copy_cell_props = FALSE)
+
+jams <- set_text_color(jams,
+     everywhere, 1, "red")
+rbind(jams, c("Damson", 2.30))
+rbind(jams, c("Damson", 2.30),
+     copy_cell_props = FALSE)
 
 }

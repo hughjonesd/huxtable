@@ -6,6 +6,9 @@ NULL
 ncharw <- function (x) nchar(x, type = "width")
 
 
+is_vectorish <- function (x) is.null(dim(x)) && ! is.list(x)
+
+
 # pinched from rlang
 `%||%` <- function (x, y) {
   if (is.null(x)) y else x

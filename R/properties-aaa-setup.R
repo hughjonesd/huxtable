@@ -90,12 +90,12 @@ make_getter_setters <- function(
       function(ht) attr(ht, .(attr_name))
     ))
 
-    check_fun <- if (! missing(check_fun)) bquote(assert_that(.(check_fun)(value)))
+    check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
     check_dims <- switch(attr_type,
       table = quote(stopifnot(length(value) == 1))
     )
     check_values <- if (! missing(check_values)) bquote(
-      assert_that(all(na.omit(value) %in% .(check_values)))
+      stopifnot(all(na.omit(value) %in% .(check_values)))
     )
     extra_code <- if (! missing(extra_code)) substitute(extra_code)
     funs[[paste0(setter, ".huxtable")]] <- eval(bquote(

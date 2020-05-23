@@ -47,18 +47,9 @@ add_columns <- function (x, y, after = ncol(x), ...) {
 
 
 add_row_cols <- function (x, y, after, dimno, ...) {
-  just_a_data_frame <- function (obj) inherits(obj, "data.frame", which = TRUE) == 1
-  if (is_hux(x) && just_a_data_frame(y)) {
-    y <- as_hux(y, add_colnames = FALSE)
-    attr(y, "from_real_hux") <- FALSE
-  }
-  if (is_hux(y) && just_a_data_frame(x)) {
-    x <- as_hux(x, add_colnames = FALSE)
-    attr(x, "from_real_hux") <- FALSE
-  }
+
   dims <- dim(x)
   end_idx <- dims[dimno]
-  assert_that(is.numeric(dims))
   if (is.character(after)) {
     after_n <- match(after, dimnames(x)[[dimno]])
     if (is.na(after_n)) stop("Could not find column name \"", after, "\" in huxtable")
@@ -241,8 +232,12 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #' @export
 cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   assert_that(is.flag(copy_cell_props))
-  f <- function (obj1, obj2) bind_cols_2(obj1, obj2, copy_cell_props = copy_cell_props)
-  Reduce(f, list(...))
+  f <- function (obj1, obj2) bind_cols_2(obj1, obj2,
+        copy_cell_props = copy_cell_props)
+  res <- Reduce(f, list(...))
+  colnames(res) <- dot_or_dim_names(..., dimension = 2)
+
+  res
 }
 
 
@@ -250,8 +245,12 @@ cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 #' @rdname cbind.huxtable
 rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
   assert_that(is.flag(copy_cell_props))
-  f <- function (obj1, obj2) bind_rows_2(obj1, obj2, copy_cell_props = copy_cell_props)
-  Reduce(f, list(...))
+  f <- function (obj1, obj2) bind_rows_2(obj1, obj2,
+        copy_cell_props = copy_cell_props)
+  res <- Reduce(f, list(...))
+  rownames(res) <- dot_or_dim_names(..., dimension = 1)
+
+  res
 }
 
 

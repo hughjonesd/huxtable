@@ -168,7 +168,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     width_mult <- if (is.numeric(width(ht))) width(ht) else 0.5
     openxlsx::setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * width_mult * basic_width)
   }
-  if (is.numeric(rh <- row_height(ht))) {
+  if (is.numeric(rh <- row_height(ht)) && length(rh) > 0) {
     table_height <- height(ht)
     if (is.na(table_height) || ! is.numeric(table_height)) table_height <- 1
     basic_height <- 30 * nrow(ht)

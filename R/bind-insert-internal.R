@@ -17,24 +17,6 @@ delete_props <- function (res, old, idx) {
 }
 
 
-# this makes no assumptions about the dimensions of the objects; only
-# will use dimensions of tb_border object.
-prune_borders <- function (new, old, rows, cols) {
-  # set bottom/right borders after top/left borders, so that they take priority.
-
-  prune_props <- function (getter, setter) {
-    new <<- setter(new, getter(old)[rows, cols])
-  }
-  mapply(
-    FUN = prune_props,
-    huxtable_border_df$getter,
-    huxtable_border_df$setter
-  )
-
-  new
-}
-
-
 # * `bind2_rows(obj1, obj2)` and `bind2_cols(obj1, obj2)`
 # - if either obj is not a huxtable, then a new one is created.
 # Properties are copied down/across by default.
@@ -48,13 +30,16 @@ prune_borders <- function (new, old, rows, cols) {
 #'
 #' @param obj1 huxtable or object which can be represented as one
 #' @param obj2 huxtable or object which can be represented as one
-#' @param copy_cell_props Flag. Copy cell properties from last row of
+#' @param copy_cell_props Flag. Copy cell & row properties from last row of
 #'   `obj1` to `obj2`, if `obj2` is not a huxtable already?
 #'
 #' @return a new huxtable
 #' @noRd
 bind_rows_2 <- function (obj1, obj2, copy_cell_props) {
-  assert_that(is.flag(copy_cell_props))
+  assert_that(
+          is.flag(copy_cell_props),
+          is.null(ncol(obj1)) || is.null(ncol(obj2)) || ncol(obj1) == ncol(obj2)
+        )
 
   if (! is_huxtable(obj1)) obj1 <- new_huxtable_row(obj1)
   if (! is_huxtable(obj2)) {
@@ -79,11 +64,29 @@ bind_rows_2 <- function (obj1, obj2, copy_cell_props) {
 #' @return A huxtable
 #' @noRd
 new_huxtable_row <- function (obj) {
-  if (is.vector(obj) || is.factor(obj)) {
+  if (is_vectorish(obj)) {
     obj <- matrix(obj, nrow = 1, ncol = length(obj))
   }
   new_huxtable(obj)
 }
+
+
+dot_or_dim_names <- function (..., dimension) {
+  objs <- list(...)
+  nms <- names(objs)
+  if (is.null(nms)) nms <- rep("", length(objs))
+  dot_or_dim <- function (obj, name) {
+    size <- dim(obj)
+    dn <- dimnames(obj)
+    if (is.null(size) && is.null(dn)) return(name)
+    if (is.null(dn)) return(rep(name, size[[dimension]]))
+    return(dn[[dimension]])
+  }
+  res <- mapply(FUN = dot_or_dim, objs, nms)
+
+  make.unique(unlist(res))
+}
+
 
 
 #' cbind two huxtablish objects together
@@ -96,7 +99,10 @@ new_huxtable_row <- function (obj) {
 #' @return a new huxtable
 #' @noRd
 bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
-  assert_that(is.flag(copy_cell_props))
+  assert_that(
+          is.flag(copy_cell_props),
+          is.null(nrow(obj1)) || is.null(nrow(obj2)) || nrow(obj1) == nrow(obj2)
+        )
   if (! is_huxtable(obj1)) obj1 <- new_huxtable(obj1)
   if (! is_huxtable(obj2)) {
     obj2 <- new_huxtable(obj2)
@@ -112,7 +118,7 @@ bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
 }
 
 
-#' Copy cell properties from `ht1`'s last row into `ht2`
+#' Copy cell and row properties from `ht1`'s last row into `ht2`
 #'
 #' @param ht1 Top huxtable
 #' @param ht2 Bottom huxtable
@@ -122,10 +128,13 @@ bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
 copy_properties_down <- function (ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
-  for (a in copiable_cell_attrs()) {
+  for (a in c(copiable_cell_attrs())) {
     for (r in seq_len(nrow(ht2))) {
       attr(ht2, a)[r, ] <- attr(ht1, a)[nrow(ht1), ]
     }
+  }
+  for (a in huxtable_row_attrs) {
+      attr(ht2, a)[] <- attr(ht1, a)[nrow(ht1)]
   }
 
   copy_down <- function (getter, setter) {
@@ -138,7 +147,7 @@ copy_properties_down <- function (ht1, ht2) {
 }
 
 
-#' Copy cell properties from `ht1`'s last column into `ht2`
+#' Copy cell and column properties from `ht1`'s last column into `ht2`
 #'
 #' @param ht1 Left huxtable
 #' @param ht2 Right huxtable
@@ -148,10 +157,13 @@ copy_properties_down <- function (ht1, ht2) {
 copy_properties_across <- function (ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
-  for (a in copiable_cell_attrs()) {
-    for (r in seq_len(ncol(ht2))) {
-      attr(ht2, a)[, r] <- attr(ht1, a)[, ncol(ht1)]
+  for (a in c(copiable_cell_attrs())) {
+    for (col in seq_len(ncol(ht2))) {
+      attr(ht2, a)[, col] <- attr(ht1, a)[, ncol(ht1)]
     }
+  }
+  for (a in huxtable_col_attrs) {
+      attr(ht2, a)[] <- attr(ht1, a)[ncol(ht1)]
   }
 
   copy_across <- function (getter, setter) {
@@ -203,9 +215,7 @@ merge_properties_down <- function (new_ht, ht1, ht2) {
     huxtable_border_df$setter
   )
 
-  if (is.numeric(rh <- row_height(new_ht))) {
-    row_height(new_ht) <- rh/sum(rh)
-  }
+  new_ht <- renormalize_row_height(new_ht)
 
   new_ht
 }
@@ -243,9 +253,25 @@ merge_properties_across <- function (new_ht, ht1, ht2) {
     huxtable_border_df$setter
   )
 
-  if (is.numeric(cw <- col_width(new_ht))) {
-    col_width(new_ht) <- cw/sum(cw)
-  }
+  new_ht <- renormalize_col_width(new_ht)
 
   new_ht
+}
+
+
+renormalize_row_height <- function (ht) {
+  if (is.numeric(rh <- row_height(ht))) {
+    row_height(ht) <- rh/sum(rh)
+  }
+
+  ht
+}
+
+
+renormalize_col_width <- function (ht) {
+  if (is.numeric(cw <- col_width(ht))) {
+    col_width(ht) <- cw/sum(cw)
+  }
+
+  ht
 }
