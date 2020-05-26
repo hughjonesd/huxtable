@@ -5,8 +5,7 @@
 * All subsetting/replacement functions immediately get control of indices, and turn
   them into two sequences of numbers.
 * Subsetting functions:
-  - subset the data using data frame methods.
-  - delete rows and/or columns from the properties.
+  - call `delete_rows/cols` on the old huxtable
 * Replacement functions:
 
 ```r
@@ -14,7 +13,7 @@ ht$col <- NULL
 ht[[col]] <- NULL
 ht$colname <- vector_or_hux
 ht[[col]] <- vector_or_hux
-ht[[row, col]] <- scalar
+ht[[row, col]] <- scalar # just runs the data frame method
 ht[cols] <- dataframe_or_hux # or vector if cols is a scalar
 ht[rows, cols] <- dataframe_or_hux
 ht[num_matrix] <- dataframe_or_hux # do we want to allow this? tibble doesn't
@@ -53,17 +52,44 @@ ht[mix_new_and_old, mix_new_and_old] <- value
       is filling a whole row/column, it replaces row/column properties.
       - maybe also some way of dealing with row heights? `normalize` function
         to make everything add to 1?
-  - Call `bind2_rows(ht, extended_value)` for new rows
-  - Call `bind2_cols(ht, extended_value)` for new columns
+  - Call `bind_rows_2(ht, extended_value)` for new rows
+  - Call `bind_cols_2(ht, extended_value)` for new columns
   
-* `bind2_rows(obj1, obj2)` and `bind2_cols(obj1, obj2)`
+* `cbind.huxtable(...)` and `rbind.huxtable(...)`
+  - call `Reduce(bind_rows/cols_2, ...)`.
+
+
+* `bind_rows_2(obj1, obj2)` and `bind_cols_2(obj1, obj2)`
   - if either obj is not a huxtable, then a new one is created.
     Properties are copied down/across by default.
   - new_huxtable() is called with the data from `obj1` and `obj2`
   - the new object has properties set by merging the properties of the
     two old ones using `merge_properties_across/down(new_obj, obj1, obj2)`
+  - should we autoformat new columns (assuming we haven't merged properties
+    across?) Should this be an option? (Maybe not...)
 
 
 * `merge_properties_across(new_obj, obj1, obj2)` and `merge_properties_down(new_obj, obj1, obj2)`
   - assserts they have huxtables
   - do the merge, if possible using the function interface
+  - can these be inlined into `bind2_rows/cols`? but maybe clean to
+    have them separate just for code clarity
+
+* `delete_rows(obj, rows)` and `delete_cols(obj, cols)`
+  - asserts `obj` is a huxtable
+  - delete cell and row/col properties
+  - delete data using data frame methods
+  - we can call `as.data.frame` since `as.data.frame.data.frame` 
+    automatically unclasses (weird but true)
+  - merge borders as currently
+  - truncate spans
+  
+TODO:
+* screen showing borders through merged cells (boo)
+  - test, fix
+  - does this happen for other formats?
+* when we e.g. cbind 2 huxtables, right table's leftmost border will
+  vanish if left table has 0 rightmost border. Do we accept this? Or
+  do we take the maximum of the border widths? Presumably we accept styles?
+* do we want to autoformat new columns in `cbind` and `ht$new_col <- vec`?
+* add tests for subsetting

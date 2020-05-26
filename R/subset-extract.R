@@ -121,7 +121,7 @@ NULL
       new_value <- value[new_rows, , drop = FALSE]
     }
     rn <- rownames(x)
-    x <- bind_rows_2(x, new_value, copy_cell_props = TRUE)
+    x <- rbind(x, new_value, copy_cell_props = TRUE)
     if (is.character(i)) rownames(x) <- c(rn, i[new_rows])
     ix <- ix[! new_rows]
   }
@@ -134,7 +134,7 @@ NULL
       new_value <- value[, new_cols, drop = FALSE]
     }
     cn <- colnames(x)
-    x <- bind_cols_2(x, new_value, copy_cell_props = TRUE)
+    x <- cbind(x, new_value, copy_cell_props = TRUE)
     if (is.character(j)) colnames(x) <- c(cn, j[new_cols])
     jx <- jx[! new_cols]
   }
@@ -164,7 +164,7 @@ NULL
   if (is.null(value)) {
     return(delete_cols(x, idx))
   } else if (is.na(idx)) {
-    res <- bind_cols_2(x, value, copy_cell_props = TRUE)
+    res <- cbind(x, value, copy_cell_props = TRUE)
     colnames(res)[ncol(x) + 1] <- name
     return(res)
   } else {
@@ -198,7 +198,7 @@ NULL
     if (n_idx != 1) stop(
           "Can't add columns with `ht[[row, column]] <- new_col`. ",
           "Use `ht[[column]] <- new_col`.")
-    res <- bind_cols_2(x, value, copy_cell_props = TRUE)
+    res <- cbind(x, value, copy_cell_props = TRUE)
     if (is.character(i)) colnames(res) <- c(colnames(x), i)
     return(res)
   } else {

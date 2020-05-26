@@ -45,21 +45,3 @@ new_huxtable <- function (x) {
 
   x
 }
-
-
-
-
-set_attr_dimnames <- function(ht) {
-  for (a in huxtable_cell_attrs) {
-    dimnames(attr(ht, a)) <- dimnames(ht)
-  }
-  for (a in huxtable_col_attrs) {
-    names(attr(ht, a)) <- dimnames(ht)[[2]]
-  }
-  for (a in huxtable_row_attrs) {
-    names(attr(ht, a)) <- dimnames(ht)[[1]]
-  }
-
-  ht
-}
-

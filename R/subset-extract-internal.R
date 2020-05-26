@@ -55,6 +55,7 @@ subset_cols <- function (ht, idx) {
 
   res <- prune_borders(res, ht, cols = idx)
   res <- renormalize_col_width(res)
+  res <- set_attr_dimnames(res)
 
   res
 }
@@ -99,7 +100,8 @@ subset_rows <- function (ht, idx) {
   # }
 
   res <- prune_borders(res, ht, rows = idx)
-  res <- renormalize_col_width(res)
+  res <- renormalize_row_height(res)
+  res <- set_attr_dimnames(res)
 
   res
 }
@@ -151,6 +153,7 @@ replace_properties <- function (ht, i, j, value) {
     huxtable_border_df$setter
   )
 
+  ht <- set_attr_dimnames(ht)
   ht
 }
 

@@ -1,22 +1,5 @@
 
 
-
-delete_props <- function (res, old, idx) {
-  if (is.logical(idx)) idx <- which(idx)
-
-  for (a in huxtable_col_attrs) {
-    attr(res, a) <- attr(res, a)[ -idx]
-  }
-  for (a in huxtable_cell_attrs) {
-    attr(res, a) <- attr(res, a)[, -idx, drop = FALSE]
-  }
-  # missing values will work here
-  res <- prune_borders(res, old, rows = , cols = -idx)
-
-  res
-}
-
-
 # * `bind2_rows(obj1, obj2)` and `bind2_cols(obj1, obj2)`
 # - if either obj is not a huxtable, then a new one is created.
 # Properties are copied down/across by default.

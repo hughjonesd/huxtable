@@ -87,6 +87,40 @@ test_that("Subset assignment of hux into hux preserves attributes", {
 })
 
 
+test_that("huxtable manipulation preserves attribute dimnames", {
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  expect_equivalent(colnames(align(ht)), c("a", "b", "d"))
+  ht2 <- rbind(ht, 1:3)
+  expect_equivalent(colnames(align(ht2)), c("a", "b", "d"))
+  ht3 <- cbind(ht, e = 1:3)
+  expect_equivalent(colnames(align(ht3)), c("a", "b", "d", "e"))
+  ht4 <- ht
+  ht4$e <- 1:3
+  expect_equivalent(colnames(align(ht4)), c("a", "b", "d", "e"))
+  ht5 <- ht
+  ht5$a <- NULL
+  expect_equivalent(colnames(align(ht5)), c("b", "d"))
+})
+
+
+test_that("colnames<- and friends affect attribute dimnames", {
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  colnames(ht) <- c("e", "f", "g")
+  expect_equivalent(colnames(align(ht)), c("e", "f", "g"))
+
+  ht2 <- hux(a = 1:3, b = 1:3, d = 1:3)
+  names(ht2) <- c("e", "f", "g")
+  expect_equivalent(colnames(align(ht2)), c("e", "f", "g"))
+  rownames(ht2) <- letters[1:3]
+  expect_equivalent(rownames(align(ht2)), letters[1:3])
+
+  ht3 <- hux(a = 1:3, b = 1:3, d = 1:3)
+  dimnames(ht3) <- list(letters[1:3], letters[24:26])
+  expect_equivalent(colnames(align(ht3)), letters[24:26])
+  expect_equivalent(rownames(align(ht3)), letters[1:3])
+})
+
+
 test_that("rbind and cbind work and copy properties", {
   ht <- hux(1:2, 1:2)
   italic(ht) <- TRUE
