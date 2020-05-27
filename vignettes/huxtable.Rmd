@@ -2,13 +2,10 @@
 title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
-monofont: LucidaConsole
 output:
   pdf_document:
-    latex_engine: xelatex
     includes:
       in_header: placeins-header.tex
-    keep_tex: yes
     toc: yes
     toc_depth: 2
   html_document:
@@ -686,7 +683,7 @@ package is installed, and your terminal or R IDE supports it, border, text and b
 are also displayed.
 
 ```{r, results = 'markup'}
-print_screen(ht)
+print_screen(jams)
 ```
 
 
