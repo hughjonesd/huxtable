@@ -94,6 +94,26 @@ format_color <- function (r_color, default = "white") {
 }
 
 
+
+get_visible_borders <- function (ht) {
+  dc <- display_cells(ht)
+
+  # a vertical border is hidden, if it is shadowed by a cell to its left
+  vert_borders <- attr(ht, "lr_borders")$thickness
+  left_shadowed <- dc[dc$display_col < dc$col, ]
+  left_shadowed <- as.matrix(left_shadowed[c("row", "col")])
+  vert_borders[left_shadowed] <- 0
+
+  # a horizontal border is hidden, if it is shadowed by a cell above it
+  horiz_borders <- attr(ht, "tb_borders")$thickness
+  top_shadowed <- dc[dc$display_row < dc$row, ]
+  top_shadowed <- as.matrix(top_shadowed[c("row", "col")])
+  horiz_borders[top_shadowed] <- 0
+
+  res <- list(vert = vert_borders, horiz = horiz_borders)
+  return(res)
+}
+
 # returns two rows(+1),cols(+1) arrays of border widths
 collapsed_borders <- function (ht) {
   list(
@@ -219,12 +239,24 @@ check_positive_dims <- function (ht) {
 }
 
 
-# return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
-# cells, including those shadowed by others.
-# data frame is ordered by row then column, i.e. the same as 1-based indexing into a matrix
-# columns are row, col (of real cell);
-# shadowed if cell is covered by another, the "display cell"; if not, it is its own "display cell";
-# display_row, display_col, rowspan, colspan, end_row, end_col of the display cell.
+#' Return data frame mapping real positions to the cells displayed in them
+#'
+#' @param ht A huxtable
+#' @param all Show all cells, or only non-shadowed cells? Default TRUE
+#' @param new_rowspan Possible new rowspan matrix
+#' @param new_colspan Possible new colspan matrix
+#'
+#' @return
+#' A data frame with columns:
+#' * row, col: the real cell position
+#' * shadowed: TRUE if a cell gets its content from another cell with
+#'   colspan or rowspan > 1
+#' * display_row, display_col: the "display cell" which provides the content
+#' * rowspan, colspan: of the display cell
+#' * end_row, end_col: right/bottom position of end of the merged cell
+#' The data frame is ordered by row, then col.
+#'
+#' @noRd
 display_cells <- function (ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   rowspan <- new_rowspan
   colspan <- new_colspan

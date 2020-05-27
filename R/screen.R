@@ -76,7 +76,7 @@ to_screen.huxtable <- function (
     ht <- ht[, seq_len(last_ht_col)]
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
-    borders <- collapsed_borders(ht)
+    borders <- get_visible_borders(ht)
     border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
     # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
     index_rows <- lapply(seq_len(nrow(ht)), function (x) seq(border_rows[x], border_rows[x + 1] - 1))
@@ -133,7 +133,9 @@ to_screen.huxtable <- function (
             all(grepl(" ", x, fixed = TRUE) | grepl("\u2502", x, fixed = TRUE)))
       empty_borders <- intersect(border_rows, which(empty_borders))
       # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
-      if (length(empty_borders) > 0) charmat <- charmat[ - empty_borders, , drop = FALSE]
+      if (length(empty_borders) > 0) {
+        charmat <- charmat[ -empty_borders, , drop = FALSE]
+      }
     }
 
     result <- apply(charmat, 1, paste0, collapse = "")

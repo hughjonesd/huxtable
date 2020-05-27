@@ -158,19 +158,6 @@ test_that("Can get default properties", {
 })
 
 
-test_that("collapsed_borders works", {
-  ht <- hux(a = 1:2, b = 1:2)
-  left_border(ht)[1, 2] <- 2
-  right_border(ht)[1, 1] <- 3
-  top_border(ht)[2, 1] <- 2
-  bottom_border(ht)[1, 1] <- 3
-  cb <- huxtable:::collapsed_borders(ht)
-  expect_type(cb, "list")
-  expect_equivalent(cb$vert, matrix(c(0, 3, 0, 0, 0, 0), 2, 3, byrow = TRUE))
-  expect_equivalent(cb$horiz, matrix(c(0, 0, 3, 0, 0, 0), 3, 2, byrow = TRUE))
-})
-
-
 test_that("collapsed_border_colors works", {
   ht <- hux(a = 1:2, b = 1:2)
   left_border_color(ht)[1, 2] <- "pink"

@@ -85,9 +85,6 @@ ht[mix_new_and_old, mix_new_and_old] <- value
   - truncate spans
   
 TODO:
-* screen showing borders through merged cells (boo)
-  - test, fix
-  - does this happen for other formats?
 * when we e.g. cbind 2 huxtables, right table's leftmost border will
   vanish if left table has 0 rightmost border. Do we accept this? Or
   do we take the maximum of the border widths? Presumably we accept styles?

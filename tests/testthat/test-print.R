@@ -89,6 +89,24 @@ test_that("to_md prints bold and italic", {
 })
 
 
+test_that("to_screen borders respect spans", {
+  ht <- hux(a = 1:2, b = 3:4)
+  ht <- set_all_borders(ht)
+  ht2 <- ht
+
+  colspan(ht)[1, 1] <- 2
+  # a line with just: some spaces, │, 1, some spaces, │, some spaces
+  # NB that this character: │ is NOT the "or" character, so don't try to type it
+  expect_match(to_screen(ht),
+        "\\n\\s*│\\s*1\\s*│\\s*\\n",
+        perl = TRUE)
+
+  rowspan(ht2)[1, 1] <- 2
+  # a line after "3" with some spaces, a │ and some more spaces
+  expect_match(to_screen(ht2), "3.*?\\n\\s*│\\s*", perl = TRUE)
+})
+
+
 test_that("to_screen positioning", {
   ht <- hux("foo")
   position(ht) <- "centre"
@@ -141,6 +159,7 @@ test_that("output works with zero-dimension huxtables", {
   expect_warning(to_html(h_ncol0), "col")
   expect_warning(to_latex(h_ncol0), "col")
 })
+
 
 test_that("output works with 1x1 huxtables", {
   h_1x1 <- hux(a = 1, add_colnames = FALSE)

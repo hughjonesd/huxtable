@@ -113,8 +113,9 @@ to_html.huxtable <- function(ht, ...) {
   align   <- sprintf(" text-align: %s;", real_align(ht))
   wrap    <- sprintf(" white-space: %s;", ifelse(wrap(ht), "normal", "nowrap"))
 
-  # collapsed_borders() are in "real cell" position. But we just want to grab the original data
-  # and apply it?
+  # get_visible_borders() data is in "real cell" position.
+  # But we just want to grab the original data
+  # and apply it
   borders    <- get_all_borders(ht)
   border_styles    <- get_all_border_styles(ht)
   if (length(unlist(borders)) > 0 && any(unlist(borders) > 0 & unlist(borders) < 3 &

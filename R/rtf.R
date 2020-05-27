@@ -61,7 +61,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
     res
   }
 
-  cb  <- collapsed_borders(ht)
+  cb  <- get_visible_borders(ht)
   cbc <- collapsed_border_colors(ht)
   cbs <- collapsed_border_styles(ht)
   bgc <- background_color(ht)
