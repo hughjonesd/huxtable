@@ -4,9 +4,9 @@ author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
   pdf_document:
-    latex_engine: xelatex
     includes:
       in_header: placeins-header.tex
+    keep_tex: yes
     toc: yes
     toc_depth: 2
   html_document:
