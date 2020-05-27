@@ -2,6 +2,7 @@
 title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
+monofont: LucidaConsole
 output:
   pdf_document:
     latex_engine: xelatex
