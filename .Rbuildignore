@@ -11,7 +11,7 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
-^tests/testthat/example-rds$
+^tests/testthat/output-rds$
 logo\.xcf
 ^build-cran.R$
 ^_pkgdown.yml$

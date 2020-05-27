@@ -1,72 +1,4 @@
 
-#' Set borders
-#'
-#' These functions set borders between cells.
-#'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
-#' @param value A numeric thickness or a [bdr()] object.
-#' @param fn A mapping function. See [mapping-functions] for details.
-#'
-#' @details
-#' Borders are always "collapsed": `right_border(ht)[, 1]` is
-#' the same as `left_border(ht)[, 2]`, and setting one sets the other.
-#'
-#' Setting `left_border(ht) <- number` sets the border thickness.
-#' You can set multiple properties at once by using [bdr()].
-#'
-#' Currently in LaTeX, all non-zero border widths on a given line must be the
-#' same.
-#'
-#' @section Limitations:
-#'
-#' * In HTML, you will need to set a width of at least 3 to get a double border.
-#' * Only "solid" and "double" styles are currently implemented in LaTeX, and
-#'   all non-zero horizontal border widths on a given line must be the same.
-#'
-#'
-#' @seealso [set-multiple]
-#'
-#' @examples
-#'
-#' bottom_border(jams)[1, ] <- 0.4
-#' jams
-#'
-#' bottom_border(jams)[1, ] <- bdr(0.4, "solid", "blue")
-#' jams
-#'
-#' set_bottom_border(jams, bdr(0.4, "solid", "green"))
-#'
-#' @name borders
-NULL
-
-
-#' @name left_border
-#' @rdname borders
-NULL
-
-
-#' @name right_border
-#' @rdname borders
-NULL
-
-
-#' @name top_border
-#' @rdname borders
-NULL
-
-
-#' @name bottom_border
-#' @rdname borders
-NULL
-
-
-for (val in paste0(c("left", "right", "top", "bottom"), "_border")) {
-  make_getter_setters(val, "cell", check_fun = is_borderish, default = 0.4,
-        only_set_map = TRUE)
-}
-
 
 # when left_border(ht)[i, j] <- value is called,
 # first left_border(ht) is called and assigned to (say) lb
@@ -125,32 +57,36 @@ bottom_border.huxtable <- xxx_border_huxtable("tb_borders",
 
 
 #' @export
-#' @method `left_border<-` huxtable
+#' @method left_border<- huxtable
 #' @export `left_border<-.huxtable`
+#' @rdname borders
 `left_border<-.huxtable` <- function (ht, value) {
   UseMethod("left_border<-.huxtable", value)
 }
 
 
 #' @export
-#' @method `right_border<-` huxtable
+#' @method right_border<- huxtable
 #' @export `right_border<-.huxtable`
+#' @rdname borders
 `right_border<-.huxtable` <- function (ht, value) {
   UseMethod("right_border<-.huxtable", value)
 }
 
 
 #' @export
-#' @method `top_border<-` huxtable
+#' @method top_border<- huxtable
 #' @export `top_border<-.huxtable`
+#' @rdname borders
 `top_border<-.huxtable` <- function (ht, value) {
   UseMethod("top_border<-.huxtable", value)
 }
 
 
 #' @export
-#' @method `bottom_border<-` huxtable
+#' @method bottom_border<- huxtable
 #' @export `bottom_border<-.huxtable`
+#' @rdname borders
 `bottom_border<-.huxtable` <- function (ht, value) {
   UseMethod("bottom_border<-.huxtable", value)
 }
@@ -334,6 +270,19 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   i = -1, j = quote(seq_len(ncol(ht))), "color")
 
 
+#' Internal function
+#'
+#' This is used to manage border properties. Do not call it directly.
+#' @usage
+#' \method{[}{borderMatrix}(x, i, j, ...) <- value
+#'
+#' @param x A `borderMatrix` object.
+#' @param i,j Indices.
+#' @param ... Unused.
+#' @param value A [bdr()] object, number, or matrix of numbers.
+#'
+#' @return A [bdr()] object.
+#'
 #' @export
 #' @method `[<-` borderMatrix
 #' @export `[<-.borderMatrix`
@@ -351,6 +300,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   # left_border(ht) <- borders
   UseMethod("[<-.borderMatrix", value)
 }
+
 
 #' @export
 #' @method `[<-.borderMatrix` bdr
@@ -406,30 +356,3 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 }
 
 
-for (val in paste0(c("left", "right", "top", "bottom"), "_border_color")) make_getter_setters(val,
-  "cell", only_set_map = TRUE)
-
-
-for (val in paste0(c("left", "right", "top", "bottom"), "_border_style")) make_getter_setters(val,
-  "cell", check_values = c("solid", "double", "dashed", "dotted"), only_set_map = TRUE)
-
-
-# order of these matters
-border_props <- c(
-  "top_border", "left_border", "right_border", "bottom_border",
-  "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
-  "top_border_style", "left_border_style", "right_border_style", "bottom_border_style"
-)
-
-border_setters <- paste0(border_props, "<-")
-huxtable_border_df <- data.frame(
-  name = border_props,
-  side = gsub("^([a-z]+)_.*", "\\1", border_props),
-  border_attr = gsub("^.*_([a-z]+)$", "\\1", border_props),
-  getter = I(lapply(border_props, get, envir = getNamespace("huxtable"))),
-  setter = I(lapply(border_setters, get, envir = getNamespace("huxtable"))),
-  stringsAsFactors = FALSE
-)
-
-#' @evalNamespace make_exports(huxtable_border_df$name, with_map = TRUE)
-NULL
