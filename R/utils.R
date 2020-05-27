@@ -114,14 +114,6 @@ get_visible_borders <- function (ht) {
   return(res)
 }
 
-# returns two rows(+1),cols(+1) arrays of border widths
-collapsed_borders <- function (ht) {
-  list(
-    vert  = attr(ht, "lr_borders")$thickness,
-    horiz = attr(ht, "tb_borders")$thickness
-  )
-}
-
 
 # returns two rows(+1),cols(+1) arrays of border colors.
 collapsed_border_colors <- function (ht) {
