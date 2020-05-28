@@ -4,7 +4,7 @@
 \alias{[<-.borderMatrix}
 \title{Internal function}
 \usage{
-\method{[}{borderMatrix}(x, i, j, ...) <- value
+\method{[}{borderMatrix}(x, ...) <- value
 }
 \arguments{
 \item{x}{A \code{borderMatrix} object.}

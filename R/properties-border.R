@@ -274,7 +274,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #'
 #' This is used to manage border properties. Do not call it directly.
 #' @usage
-#' \method{[}{borderMatrix}(x, i, j, ...) <- value
+#' \method{[}{borderMatrix}(x, ...) <- value
 #'
 #' @param x A `borderMatrix` object.
 #' @param ... Indices.
