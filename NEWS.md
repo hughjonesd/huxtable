@@ -57,7 +57,7 @@ as_hux(head(iris)) %>%
   
 ```r
 as_hux(head(iris)) %>% 
-      set_bottom_border(1, everywhere, bdr(1, "solid", "darkreen"))
+      set_bottom_border(1, everywhere, bdr(1, "solid", "darkgreen"))
 ```
 
 * As previously signalled, `add_colnames` has now become `TRUE` by default in 
