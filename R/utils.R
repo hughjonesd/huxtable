@@ -264,7 +264,7 @@ display_cells <- function (ht, all = TRUE, new_rowspan = rowspan(ht), new_colspa
     da_rows <- seq(rr, end_r)
     da_cols <- seq(cc, end_c)
     if (any(touched[da_rows, da_cols])) stop(glue::glue("Overlapping multirow/multicolumn cells in",
-          " [{da_rows}, {da_cols}] of huxtable"))
+          " [{da_rows}, {da_cols}] of huxtable\n"))
     display_row[da_rows, da_cols] <- rr
     display_col[da_rows, da_cols] <- cc
     rowspan[da_rows, da_cols] <- rowspan[idx]

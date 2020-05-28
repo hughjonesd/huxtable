@@ -1,4 +1,6 @@
 
+
+
 test_that("merge_cells", {
   ht <- hux(a = 1:3, b = 1:3)
   expect_silent(ht2 <- merge_cells(ht, 1, 1:2))
