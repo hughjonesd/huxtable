@@ -207,13 +207,15 @@ by_values <- function (..., ignore_na = TRUE) {
 #' map_background_color(ht,
 #'       by_cols("green", "grey"))
 by_rows <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- c(...)
+  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   row_fn <- function (ht, rows, cols, current) {
     res <- current
     assert_that(from <= nrow(res))
-    res[seq(from, nrow(res)), ] <- rep(vals, length.out = nrow(res) - from + 1)
+    lout <- nrow(res) - from + 1
+    vals <- matrix(rep(vals, length.out = lout), nrow = lout, ncol = ncol(res))
+    res[seq(from, nrow(res)), ] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
     res
   }
@@ -225,7 +227,7 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
 #' @export
 #' @rdname by_rows
 by_cols <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- c(...)
+  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   col_fn <- function (ht, rows, cols, current) {

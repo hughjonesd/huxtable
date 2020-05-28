@@ -182,7 +182,11 @@ make_getter_setters <- function(
       rc$row <- get_rc_spec(ht, row, 1)
       rc$col <- get_rc_spec(ht, col, 2)
 
-      current <- .(as.name(attr_name))(ht)[rc$row, rc$col, drop = FALSE]
+      current <- .(as.name(attr_name))(ht)
+      # this ensures a borderMatrix is passed into the by_ function
+      cl_current <- class(current)
+      current <- current[rc$row, rc$col, drop = FALSE]
+      class(current) <- cl_current
       if (is_huxtable(current)) current <- as.matrix(current)
       .(as.name(attr_name))(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
 
