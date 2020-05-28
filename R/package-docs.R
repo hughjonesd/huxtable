@@ -156,11 +156,3 @@ NULL
 NULL
 
 
-#' Changes to new versions of huxtable
-#'
-#' Contents of the NEWS.md file.
-#'
-#' @name huxtable-news
-#' @docType package
-#' @includeRmd NEWS.md
-NULL
