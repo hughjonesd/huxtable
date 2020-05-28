@@ -141,6 +141,32 @@ test_that("map_left_border", {
 })
 
 
+test_that("map_all_borders", {
+  ht <- hux(1:2, 2:1)
+  ht2 <- map_all_borders(ht, by_ranges(1.5, c(0, 1)))
+  # these can be guaranteed whatever the order
+  expect_equivalent(left_border(ht2)[2, 1], 1)
+  expect_equivalent(bottom_border(ht2)[2, 1], 1)
+  expect_equivalent(right_border(ht2)[2, 2], 0)
+  expect_equivalent(left_border(ht2)[1, 1], 0)
+
+  ht3 <- map_all_borders(ht, by_ranges(1.5, list(bdr(0), bdr(1))))
+  expect_equivalent(left_border(ht3)[2, 1], 1)
+  expect_equivalent(bottom_border(ht3)[2, 1], 1)
+  expect_equivalent(right_border(ht3)[2, 2], 0)
+  expect_equivalent(left_border(ht3)[1, 1], 0)
+
+
+  ht4 <- map_all_borders(ht, 1, 1:2, by_ranges(1.5, list(bdr(0), bdr(1))))
+  expect_equivalent(left_border(ht4)[2, 1], 0)
+  expect_equivalent(bottom_border(ht4)[2, 1], 0)
+  expect_equivalent(right_border(ht4)[2, 2], 0)
+  expect_equivalent(left_border(ht4)[1, 1], 0)
+  expect_equivalent(right_border(ht4)[1, 2], 1)
+  expect_equivalent(top_border(ht4)[1, 2], 1)
+})
+
+
 test_that("set-multiple with bdr", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   b <- bdr(2, "dotted", "green")
