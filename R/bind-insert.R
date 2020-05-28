@@ -66,11 +66,11 @@ add_row_cols <- function (x, y, after, dimno, ...) {
   if (dimno == 1) {
     objs <- list(x[first_idxes, ], y, x[second_idxes, ])
     objs <- Filter(has_dims, objs)
-    do.call(rbind, c(objs, ...))
+    do.call(rbind.huxtable, c(objs, ...))
   } else {
     objs <- list(x[, first_idxes], y, x[, second_idxes])
     objs <- Filter(has_dims, objs)
-    do.call(cbind, c(objs, ...))
+    do.call(cbind.huxtable, c(objs, ...))
   }
 }
 
