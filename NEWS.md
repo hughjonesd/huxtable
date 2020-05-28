@@ -143,6 +143,9 @@ hux(head(iris))
 
   Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
 
+* The one-argument form of `[` now works for huxtables just as it does for 
+  data frames. For example, `ht[2:3]` selects columns 2 and 3.
+  
 * New functions `fmt_percent()` and `fmt_pretty()` for passing into
   `number_format()`:
 
@@ -168,10 +171,10 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 * A new table-level property, `caption_width()`, allows you to set the width of 
   the caption. The default, `NA`, sets the width equal to the table width.
   
-* Screen output now displays table position and caption position.
+* For `huxreg()`, a new function `tidy_replace()` allows you to replace the 
+  output of `tidy(x)` entirely.
 
-* The one-argument form of `[` now works for huxtables just as it does for 
-  data frames. For example, `ht[2:3]` selects columns 2 and 3.
+* Screen output now displays table position and caption position.
   
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
 
