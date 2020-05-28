@@ -92,11 +92,35 @@ clean_contents <- function(
 
 render_markdown <- function (text, type) {
   switch(type,
-      "html"     = markdown_html(text),
-      "latex"    = markdown_latex(text),
+      "html"     = commonmark::markdown_html(text),
+      "latex"    = commonmark::markdown_latex(text),
       "markdown" = text,
-      markdown_text(text)
+      "screen"   = markdown_screen(text),
+      commonmark::markdown_text(text)
   )
+}
+
+
+
+markdown_screen <- function (text) {
+  if (! requireNamespace("crayon", quietly = TRUE)) return(text)
+
+  my_italic <- function (x) {
+    x <- sub("^\\*", "", x)
+    x <- sub("\\*$", "", x)
+    crayon::italic(x)
+  }
+  my_bold <- function (x) {
+    x <- sub("^\\*\\*", "", x)
+    x <- sub("\\*\\*$", "", x)
+    crayon::bold(x)
+  }
+
+  res <- text
+  res <- stringr::str_replace_all(res, "\\*\\*(.*?)\\*\\*", my_bold)
+  res <- stringr::str_replace_all(res, "\\*(.*?)\\*", my_italic)
+
+  res
 }
 
 

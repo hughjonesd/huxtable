@@ -32,6 +32,10 @@ For \code{set_escape_contents} and \code{map_escape_contents}, the modified huxt
 \description{
 Functions to get or set the \emph{escape cell contents} property of huxtable cells.
 }
+\details{
+If \code{\link[=markdown]{markdown()}} is \code{TRUE} for a cell, the \code{escape_contents} property
+will be ignored.
+}
 \examples{
 ht <- huxtable(
         Exponent = 2:4,

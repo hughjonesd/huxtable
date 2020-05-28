@@ -28,7 +28,8 @@ Imports:
     stringr (>= 1.2.0),
     tibble,
     tidyselect,
-    utils
+    utils,
+    commonmark
 Suggests:
     bookdown,
     broom (>= 0.5.1),

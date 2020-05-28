@@ -115,10 +115,9 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 
 #' @template getset-cell
 #' @templateVar attr_name markdown
-#' @templateVar attr_desc Render cell contents as markdown.
+#' @templateVar attr_desc markdown
 #' @templateVar value_param_desc
-#' A logical vector or matrix. If `TRUE`, cell contents will be interpreted
-#' as [markdown](https://commonmark.org/help/).
+#' A logical vector or matrix. If `TRUE`, cell contents will be rendered as [markdown](https://commonmark.org/help/).
 #' @template getset-rowspec-example
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
