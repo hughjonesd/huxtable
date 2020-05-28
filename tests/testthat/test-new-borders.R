@@ -117,10 +117,10 @@ test_that("map_left_border", {
   ht3 <- map_left_border(ht, by_ranges(1.5, list(bdr(0), bdr(1))))
   expect_equivalent(left_border(ht3)[], matrix(c(0, 1, 1, 0), 2, 2))
 
-  ht4 <- map_left_border(ht, by_rows(list(bdr(0), bdr(1))))
+  ht4 <- map_left_border(ht, by_rows(bdr(0), bdr(1)))
   expect_equivalent(left_border(ht4)[], matrix(c(0, 1, 0, 1), 2, 2))
 
-  ht5 <- map_left_border(ht, by_cols(list(bdr(0), bdr(1))))
+  ht5 <- map_left_border(ht, by_cols(bdr(0), bdr(1)))
   expect_equivalent(left_border(ht5)[], matrix(c(0, 0, 1, 1), 2, 2))
 
   # ht8 <- map_left_border(ht, by_cases(. == 2 ~ bdr(1), TRUE ~ bdr(0)))
@@ -132,7 +132,6 @@ test_that("map_left_border", {
   ht10 <- map_left_border(ht, by_equal_groups(2, list(bdr(0), bdr(1))))
   expect_equivalent(left_border(ht10)[], matrix(c(0, 1, 1, 0), 2, 2))
 
-  skip("Not yet working...!")
   ht_char <- hux(letters[1:2], letters[2:1])
   ht6 <- map_left_border(ht_char, by_values("a" = bdr(0), "b" = bdr(1)))
   expect_equivalent(left_border(ht6)[], matrix(c(0, 1, 1, 0), 2, 2))

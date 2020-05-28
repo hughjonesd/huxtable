@@ -1,7 +1,7 @@
 
 
 # when left_border(ht)[i, j] <- value is called,
-# first left_border(ht) is called and assigned to (say) lb
+# first left_border(ht) is called and assigned to (say) lb.
 # `[<-`(lb, i, j, value) is then called. The result is (say) lb_new,
 # which needs to represent the whole object.
 # Finally, `left_border<-`(ht, value = lb_new) is called. The result
@@ -286,7 +286,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #' @export
 #' @method `[<-` borderMatrix
 #' @export `[<-.borderMatrix`
-`[<-.borderMatrix` <- function (x, i, j, ..., value) {
+`[<-.borderMatrix` <- function (x, ..., value) {
   # x is the result of left_border() - a matrix of thicknesses,
   # nr x nc.
   # value is whatever the user is passing in like `left_border(ht) <- value`
@@ -304,13 +304,13 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 #' @export
 #' @method `[<-.borderMatrix` bdr
-`[<-.borderMatrix.bdr` <- function (x, i, j, ..., value) {
+`[<-.borderMatrix.bdr` <- function (x, ..., value) {
   thickness <- x[] # subsetting unclasses
-  thickness[i, j, ...] <- value$thickness
+  thickness[...] <- value$thickness
   style <- matrix(huxtable_env$huxtable_default_attrs$border_style, nrow(x), ncol(x))
-  style[i, j, ...] <- value$style
+  style[...] <- value$style
   color <- matrix(huxtable_env$huxtable_default_attrs$border_color, nrow(x), ncol(x))
-  color[i, j, ...] <- value$color
+  color[...] <- value$color
 
   new_bdr(
     thickness = thickness,
@@ -322,12 +322,12 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 #' @export
 #' @method `[<-.borderMatrix` list
-`[<-.borderMatrix.list` <- function (x, i, j, ..., value) {
+`[<-.borderMatrix.list` <- function (x, ..., value) {
   values_are_bdr <- sapply(value, is_bdr)
   if (! all(values_are_bdr)) stop("Unrecognized object ", value,
         " passed into border function.\nPass a number or a `bdr` object.")
   thickness <- x[] # subsetting unclasses
-  new_dims <- dim(thickness[i, j, drop = FALSE])
+  new_dims <- dim(thickness[..., drop = FALSE])
   new_thickness <- sapply(value, getElement, name = "thickness")
   dim(new_thickness) <- new_dims
   new_style <- sapply(value, getElement, name = "style")
@@ -342,15 +342,15 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
         )
   # NextMethod uses the class vector of the object supplied to the generic,
   # so we just invoke this manually:
-  `[<-.borderMatrix`(x, i, j, ..., value = value)
+  `[<-.borderMatrix`(x, ..., value = value)
 }
 
 
 #' @export
 #' @method `[<-.borderMatrix` default
-`[<-.borderMatrix.default` <- function (x, i, j, ..., value) {
+`[<-.borderMatrix.default` <- function (x, ..., value) {
   thickness <- x[] # subsetting unclasses
-  thickness[i, j, ...] <- value
+  thickness[...] <- value
 
   thickness
 }

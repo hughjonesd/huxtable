@@ -165,7 +165,7 @@ NULL
 #'       by_values(a = "red", c = "yellow", "green"))
 by_values <- function (..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
-  vals <- list(...)
+  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
   named_vals <- vals[names(vals) != ""]
   targets <- names(named_vals)
   default <- vals[names(vals) == ""]
@@ -175,10 +175,18 @@ by_values <- function (..., ignore_na = TRUE) {
 
   values_fn <- function (ht, rows, cols, current) {
     res <- current
-    if (length(default) > 0) res[] <- default
-    for (tg in targets) {
-      res[ ht[rows, cols] == tg ] <- named_vals[[tg]]
+    # the awkward formulation below allows us to assign to res
+    # just once, which is necessary if res is a borderMatrix.
+    indices <- lapply(targets, function (tg) which(ht[rows, cols] == tg))
+    rhs <- rep(named_vals, times = lengths(indices))
+    if (length(default) > 0) {
+      unmatched <- setdiff(seq_len(nrow(ht) * ncol(ht)), unlist(indices))
+      if (length(unmatched) > 0) {
+        indices <- c(indices, list(unmatched))
+        rhs <- c(rhs, rep(default, length(unmatched)))
+      }
     }
+    res[unlist(indices)] <- rhs
     res <- maybe_ignore_na(res, current, ignore_na)
     res
   }
