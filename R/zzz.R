@@ -20,7 +20,8 @@
   set_default_option("huxtable.knit_print_df", TRUE)
   set_default_option("huxtable.knit_print_df_theme", theme_plain)
   set_default_option("huxtable.autolabel", TRUE)
-  set_default_option("huxtable.color_screen", requireNamespace("crayon", quietly = TRUE))
+  set_default_option("huxtable.color_screen",
+        requireNamespace("crayon", quietly = TRUE))
   set_default_option("huxtable.bookdown", NULL)
   set_default_option("huxtable.autoformat", TRUE)
   set_default_option("huxtable.latex_use_fontspec", FALSE)

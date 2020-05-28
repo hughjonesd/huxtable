@@ -6,6 +6,21 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 ## Breaking changes
 
+* There are changes to LaTeX output. 
+  - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
+    padding should now take effect even when `wrap` is `FALSE`.
+  - The default LaTeX table environment is now "tabular" unless `width` is set. 
+    If `width` is set, it is "tabularx".
+  - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
+  - the `\centerbox` macro from the LaTeX "adjustbox" package is used to centre
+    tables. This should improve centring when tables are too wide.
+  You may need to update the LaTeX "adjustbox" package to a recent
+  version. `check_latex_dependencies()` can inform you about this.
+
+* As previously signalled, `add_colnames` has now become `TRUE` by default in 
+  `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
+  to go back to the old behaviour.
+  
 * Huxtable borders have been reworked, fixing some longstanding bugs and
   adding new features. 
   - Borders are now automatically collapsed. For example:
@@ -16,19 +31,18 @@ jams %>%
     set_left_border(everywhere, 2, 0.4)
 ```
     will set the border in between the columns of `jams` to `0.4`, overwriting
-    the previous value. This is more in line with what you would expect,
-    and should fix some longstanding bugs. For example, the following code
-    now does what you probably want:
+    the previous value. This is more in line with what you would expect. 
+    For example, the following code now does what you probably want:
 
 ```
 jams %>% 
     set_rowspan(2, 1, 3) %>% 
     set_bottom_border(4, everywhere, 1)
-##                                            Type              Price  
-##                                            Strawberry         1.90  
-##                                                               2.10  
-##                                                               1.80  
-##                                          ───────────────────────────
+##                 Type              Price  
+##                 Strawberry         1.90  
+##                                    2.10  
+##                                    1.80  
+##               ───────────────────────────
 ```
 
 instead of the old behaviour:
@@ -37,11 +51,11 @@ instead of the old behaviour:
 jams %>% 
     set_rowspan(2, 1, 3) %>% 
     set_bottom_border(4, everywhere, 1)
-##                                            Type           Price  
-##                                            Strawberry      1.90  
-##                                                            2.10  
-##                                                            1.80  
-##                                                       ───────────
+##                 Type           Price  
+##                 Strawberry      1.90  
+##                                 2.10  
+##                                 1.80  
+##                            ───────────
 ```
 
   - `set_left_border()`, `set_all_borders()` and friends all use a default value
@@ -56,13 +70,9 @@ as_hux(head(iris)) %>%
   and colour:
   
 ```r
-as_hux(head(iris)) %>% 
+as_hux(jams) %>% 
       set_bottom_border(1, everywhere, bdr(1, "solid", "darkgreen"))
 ```
-
-* As previously signalled, `add_colnames` has now become `TRUE` by default in 
-  `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
-  to go back to the old behaviour.
   
 * Various deprecated items have been removed:
   - The 3-argument form of `set_*`. Instead, use `map_*`. 
@@ -87,15 +97,6 @@ as_hux(head(iris)) %>%
 
 * `add_rows()` and `add_columns()` now always call `rbind.huxtable()` 
   or `cbind.huxtable()` and return a huxtable.
-  
-* There are changes to LaTeX output. 
-  - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right
-    padding should now take effect even when `wrap` is `FALSE`.
-  - The default LaTeX table environment is now "tabular" unless `width` is set. 
-    If `width` is set, it is "tabularx".
-  - `wrap` only matters if `width` is set. Otherwise, cell wrapping is off.
-  - the `\centerbox` macro from the LaTeX "adjustbox" package is used to centre
-    tables. This should improve centring when tables are too wide.
 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
 
@@ -130,8 +131,9 @@ as_hux(head(iris)) %>%
       set_bold(1, everywhere)
 ```
 
-* New: by default, huxtable sets labels from the current knitr chunk label, if there
-  is one. This is consistent with `kable()`. In bookdown, you can then do e.g.
+* New: by default, huxtable sets labels from the current knitr chunk label, if 
+  there is one. This is consistent with `kable()`. In bookdown, you can then do 
+  e.g.
 
 ````
 Some iris species are shown in \@ref(tab:mytable):

@@ -1,5 +1,5 @@
 
-test_that("bdr", {
+test_that("bdr objects", {
   expect_silent(b <- bdr(1, "solid", "red"))
   expect_s3_class(b, "bdr")
   expect_true(is_bdr(b))
@@ -12,6 +12,14 @@ test_that("bdr", {
   expect_equivalent(b$style, "solid")
   expect_equivalent(b$color, NA_character_)
 })
+
+
+test_that("bdr object printing", {
+  expect_silent(b <- bdr(2, "solid", "red"))
+  expect_match(format(b), "2.*solid.*red")
+  expect_output(print(b), "2.*solid.*red")
+})
+
 
 
 test_that("left_border", {
@@ -115,8 +123,6 @@ test_that("map_left_border", {
   ht5 <- map_left_border(ht, by_cols(list(bdr(0), bdr(1))))
   expect_equivalent(left_border(ht5)[], matrix(c(0, 0, 1, 1), 2, 2))
 
-
-
   # ht8 <- map_left_border(ht, by_cases(. == 2 ~ bdr(1), TRUE ~ bdr(0)))
   # expect_equivalent(left_border(ht8)[], matrix(c(0, 1, 1, 0), 2, 2))
 
@@ -133,6 +139,59 @@ test_that("map_left_border", {
 
   ht7 <- map_left_border(ht, by_function(function (x) bdr(1)))
   expect_equivalent(left_border(ht7)[], matrix(1, 2, 2))
+})
+
+
+test_that("set-multiple with bdr", {
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
+  b <- bdr(2, "dotted", "green")
+
+  expect_silent(ht2 <- set_all_borders(ht, b))
+  expect_equivalent(left_border_color(ht2), matrix("green", 2, 2))
+  expect_equivalent(left_border_style(ht2), matrix("dotted", 2, 2))
+  expect_equivalent(left_border(ht2)[], matrix(2, 2, 2))
+  expect_equivalent(right_border_color(ht2), matrix("green", 2, 2))
+  expect_equivalent(right_border_style(ht2), matrix("dotted", 2, 2))
+  expect_equivalent(right_border(ht2)[], matrix(2, 2, 2))
+  expect_equivalent(top_border_color(ht2), matrix("green", 2, 2))
+  expect_equivalent(top_border_style(ht2), matrix("dotted", 2, 2))
+  expect_equivalent(top_border(ht2)[], matrix(2, 2, 2))
+  expect_equivalent(bottom_border_color(ht2), matrix("green", 2, 2))
+  expect_equivalent(bottom_border_style(ht2), matrix("dotted", 2, 2))
+  expect_equivalent(bottom_border(ht2)[], matrix(2, 2, 2))
+
+  expect_silent(ht3 <- set_all_borders(ht, 1, 1, b))
+  # sets right border of (1,1) = left border of (1,2)
+  expect_equivalent(left_border_color(ht3),
+        matrix(c("green", NA, "green", NA), 2, 2))
+
+  expect_silent(ht4 <- set_tb_borders(ht, b))
+  expect_equivalent(left_border_color(ht4), matrix(NA_character_, 2, 2))
+  expect_equivalent(top_border_color(ht4), matrix("green", 2, 2))
+  expect_equivalent(left_border_style(ht4), matrix("solid", 2, 2))
+  expect_equivalent(top_border_style(ht4), matrix("dotted", 2, 2))
+
+  expect_silent(ht5 <- set_tb_borders(ht, 1, 1, b))
+  expect_equivalent(left_border_color(ht5), matrix(NA_character_, 2, 2))
+  expect_equivalent(top_border_color(ht5),
+        matrix(c("green", "green", NA_character_, NA_character_), 2, 2))
+  expect_equivalent(left_border_style(ht5), matrix("solid", 2, 2))
+  expect_equivalent(top_border_style(ht5),
+        matrix(c("dotted", "dotted", "solid", "solid"), 2, 2))
+
+  expect_silent(ht6 <- set_lr_borders(ht, b))
+  expect_equivalent(left_border_color(ht6), matrix("green", 2, 2))
+  expect_equivalent(top_border_color(ht6), matrix(NA_character_, 2, 2))
+  expect_equivalent(left_border_style(ht6), matrix("dotted", 2, 2))
+  expect_equivalent(top_border_style(ht6), matrix("solid", 2, 2))
+
+  expect_silent(ht7 <- set_lr_borders(ht, 1, 1, b))
+  expect_equivalent(left_border_color(ht7),
+        matrix(c("green", NA_character_, "green", NA_character_), 2, 2))
+  expect_equivalent(top_border_color(ht7), matrix(NA_character_, 2, 2))
+  expect_equivalent(left_border_style(ht7),
+        matrix(c("dotted", "solid", "dotted", "solid"), 2, 2))
+  expect_equivalent(top_border_style(ht7), matrix("solid", 2, 2))
 })
 
 
