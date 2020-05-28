@@ -84,6 +84,9 @@ as_hux(head(iris)) %>%
 * The little-used ability to set `copy_cell_props` to a character vector in
   `rbind.huxtable` and `cbind.huxtable` has been removed. You can still set it
   to `FALSE`.
+
+* `add_rows()` and `add_columns()` now always call `rbind.huxtable()` 
+  or `cbind.huxtable()` and return a huxtable.
   
 * There are changes to LaTeX output. 
   - LaTeX `\tabcolsep` is now set to 0 within huxtable tables, while left and right

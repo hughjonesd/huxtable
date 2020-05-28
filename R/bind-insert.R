@@ -4,24 +4,26 @@
 NULL
 
 
-#' Insert one matrix into another.
+#' Insert one huxtable into another.
 #'
-#' These functions combine two matrix-like objects and return the result.
+#' These functions combine two huxtables or similar objects and
+#' return the result.
 #'
-#' @param x A matrix-like object, e.g. a huxtable
-#' @param y Matrix or vector to be inserted into `x`
-#' @param after Row or column after which `y` is inserted. Can be 0. Can be a row or column name.
-#'   By default, inserts `y` after the end of `x`.
-#' @param ... Arguments passed to [rbind()] or [cbind()]
+#' @param x,y Huxtables or objects that can be converted by as_hux
+#' @param after Row or column after which `y` is inserted. Can be 0.
+#'   Can be a row or column name. The default adds `y` to the
+#'   end of `x`.
+#' @param copy_cell_props Logical. Passed to [rbind.huxtable()] or
+#'   [cbind.huxtable()].
 #'
-#' @return For `add_rows`, the result of `rbind(x[1:after,], y, x[-(1:after),]`. For `add_columns`
-#'   the same but with columns. `after = 0` and `after = nrow(x)` or `ncol(x)` are handled correctly.
+#' @return A huxtable.
 #' @export
 #'
 #' @details
-#' For `huxtable` objects, arguments in `...` can include `copy_cell_props`.
+#' Arguments in `...` can include `copy_cell_props`.
 #'
-#' @seealso [insert_row()] and [insert_column()], which insert multiple values into a single row.
+#' @seealso [insert_row()] and [insert_column()], which insert
+#' multiple values into a single row.
 #'
 #' @examples
 #'
@@ -34,43 +36,49 @@ NULL
 #'       "Weight (g)", 300, 250, 300),
 #'       4, 2)
 #' add_columns(jams, mx)
-add_rows <- function (x, y, after = nrow(x), ...) {
-  add_row_cols(x, y, after, dimno = 1, ...)
+add_rows <- function (x, y, after = nrow(x), copy_cell_props = TRUE) {
+  add_row_cols(x, y, after, dimno = 1,
+        copy_cell_props = copy_cell_props)
 }
 
 
 #' @export
 #' @rdname add_rows
-add_columns <- function (x, y, after = ncol(x), ...) {
-  add_row_cols(x, y, after, dimno = 2, ...)
+add_columns <- function (x, y, after = ncol(x),
+      copy_cell_props = TRUE) {
+  add_row_cols(x, y, after, dimno = 2,
+        copy_cell_props = copy_cell_props)
 }
 
 
-add_row_cols <- function (x, y, after, dimno, ...) {
+add_row_cols <- function (x, y, after, dimno, copy_cell_props) {
 
   dims <- dim(x)
   end_idx <- dims[dimno]
   if (is.character(after)) {
     after_n <- match(after, dimnames(x)[[dimno]])
-    if (is.na(after_n)) stop("Could not find column name \"", after, "\" in huxtable")
+    if (is.na(after_n)) stop("Could not find row/column name \"",
+          after, "\" in huxtable")
     after <- after_n
   }
   assert_that(is.number(after), after >= 0, after <= end_idx)
 
   first_idxes <- seq_len(after)
-  second_idxes <- if (after < end_idx) seq(after + 1, end_idx) else integer(0)
-  # for some reason `fn <- if (dimno==1) rbind else cbind` causes trouble...
+  # adding numeric(0) to after gives numeric(0):
+  second_idxes <- after + seq_len(max(end_idx - after, 0))
 
   has_dims <- function (x) if (is.vector(x)) length(x) > 0 else
         (nrow(x) > 0 && ncol(x) > 0)
   if (dimno == 1) {
     objs <- list(x[first_idxes, ], y, x[second_idxes, ])
     objs <- Filter(has_dims, objs)
-    do.call(rbind.huxtable, c(objs, ...))
+    do.call(rbind.huxtable, c(objs,
+          copy_cell_props = copy_cell_props))
   } else {
     objs <- list(x[, first_idxes], y, x[, second_idxes])
     objs <- Filter(has_dims, objs)
-    do.call(cbind.huxtable, c(objs, ...))
+    do.call(cbind.huxtable, c(objs,
+          copy_cell_props = copy_cell_props))
   }
 }
 

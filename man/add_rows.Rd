@@ -3,31 +3,31 @@
 \name{add_rows}
 \alias{add_rows}
 \alias{add_columns}
-\title{Insert one matrix into another.}
+\title{Insert one huxtable into another.}
 \usage{
-add_rows(x, y, after = nrow(x), ...)
+add_rows(x, y, after = nrow(x), copy_cell_props = TRUE)
 
-add_columns(x, y, after = ncol(x), ...)
+add_columns(x, y, after = ncol(x), copy_cell_props = TRUE)
 }
 \arguments{
-\item{x}{A matrix-like object, e.g. a huxtable}
+\item{x, y}{Huxtables or objects that can be converted by as_hux}
 
-\item{y}{Matrix or vector to be inserted into \code{x}}
+\item{after}{Row or column after which \code{y} is inserted. Can be 0.
+Can be a row or column name. The default adds \code{y} to the
+end of \code{x}.}
 
-\item{after}{Row or column after which \code{y} is inserted. Can be 0. Can be a row or column name.
-By default, inserts \code{y} after the end of \code{x}.}
-
-\item{...}{Arguments passed to \code{\link[=rbind]{rbind()}} or \code{\link[=cbind]{cbind()}}}
+\item{copy_cell_props}{Logical. Passed to \code{\link[=rbind.huxtable]{rbind.huxtable()}} or
+\code{\link[=cbind.huxtable]{cbind.huxtable()}}.}
 }
 \value{
-For \code{add_rows}, the result of \verb{rbind(x[1:after,], y, x[-(1:after),]}. For \code{add_columns}
-the same but with columns. \code{after = 0} and \code{after = nrow(x)} or \code{ncol(x)} are handled correctly.
+A huxtable.
 }
 \description{
-These functions combine two matrix-like objects and return the result.
+These functions combine two huxtables or similar objects and
+return the result.
 }
 \details{
-For \code{huxtable} objects, arguments in \code{...} can include \code{copy_cell_props}.
+Arguments in \code{...} can include \code{copy_cell_props}.
 }
 \examples{
 
@@ -42,5 +42,6 @@ mx <- matrix(
 add_columns(jams, mx)
 }
 \seealso{
-\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert multiple values into a single row.
+\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert
+multiple values into a single row.
 }
