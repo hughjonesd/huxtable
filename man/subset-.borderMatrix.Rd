@@ -9,11 +9,9 @@
 \arguments{
 \item{x}{A \code{borderMatrix} object.}
 
-\item{...}{Unused.}
+\item{...}{Indices.}
 
-\item{value}{A \code{\link[=bdr]{bdr()}} object, number, or matrix of numbers.}
-
-\item{i, j}{Indices.}
+\item{value}{A \code{\link[=bdr]{bdr()}} object, number, matrix, or list.}
 }
 \value{
 A \code{\link[=bdr]{bdr()}} object.

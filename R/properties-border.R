@@ -277,9 +277,8 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #' \method{[}{borderMatrix}(x, i, j, ...) <- value
 #'
 #' @param x A `borderMatrix` object.
-#' @param i,j Indices.
-#' @param ... Unused.
-#' @param value A [bdr()] object, number, or matrix of numbers.
+#' @param ... Indices.
+#' @param value A [bdr()] object, number, matrix, or list.
 #'
 #' @return A [bdr()] object.
 #'
