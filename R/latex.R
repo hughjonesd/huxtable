@@ -150,7 +150,7 @@ build_tabular <- function (ht) {
   # Could speed this up by doing it only for display cells.
   start_end_cols <- as.matrix(display_cells[, c("display_col", "end_col")])
   width_spec <- apply(start_end_cols, 1, function (x) compute_width(ht, x[1], x[2]))
-  cb <- collapsed_borders(ht)
+  cb <- get_visible_borders(ht)
   cbc <- collapsed_border_colors(ht)
   cbs <- collapsed_border_styles(ht)
 

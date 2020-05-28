@@ -54,13 +54,15 @@ set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.
 \item I have another problem.
 }
 
-If you have a bug - i.e. a problem with the software - or have a feature request, please report
-it to \url{https://github.com/hughjonesd/huxtable/issues}. Otherwise, ask a question on
-\href{https://stackoverflow.com}{StackOverflow} or \url{https://community.rstudio.com}. That way, other
-people will benefit from the answers you get.
+If you have a bug - i.e. a problem with the software - or have a feature
+request, please report it to \url{https://github.com/hughjonesd/huxtable/issues}.
+Otherwise, ask a question on \href{https://stackoverflow.com}{StackOverflow} or
+\url{https://community.rstudio.com}. That way, other people will benefit from
+the answers you get.
 \itemize{
 \item Can I email you directly?
 }
 
-I'd rather you asked on a public website. If you then email me a link, I may be able to help.
+I'd rather you asked on a public website. If you then email me a link, I
+may be able to help.
 }

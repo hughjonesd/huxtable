@@ -165,12 +165,13 @@ NULL
 #'       by_values(a = "red", c = "yellow", "green"))
 by_values <- function (..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
-  vals <- c(...)
+  vals <- list(...)
   named_vals <- vals[names(vals) != ""]
   targets <- names(named_vals)
   default <- vals[names(vals) == ""]
   if (is.null(names(vals))) default <- vals
   if (length(default) > 1) stop("At most one element of `...` can be unnamed")
+  if (length(default) > 0) default <- default[[1]]
 
   values_fn <- function (ht, rows, cols, current) {
     res <- current

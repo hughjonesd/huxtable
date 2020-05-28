@@ -1,5 +1,6 @@
 
 
+
 test_that("Subsetting preserves rownames", {
   ht <- huxtable(a = 1:3, b = 1:3)
   rownames(ht) <- letters[1:3]
@@ -15,6 +16,14 @@ test_that("One-argument [", {
   expect_identical(ht12, ht[, 1:2])
   expect_silent(ht_all <- ht[])
   expect_identical(ht, ht_all)
+  expect_silent(hta <- ht["a"])
+  expect_identical(hta, ht[, 1])
+  expect_silent(ht_TFF <- ht[c(TRUE, FALSE, FALSE)])
+  expect_identical(ht_TFF, ht[, 1])
+
+  expect_error(ht["q"])
+  expect_warning(ht[c(TRUE, FALSE)])
+  expect_error(ht[4])
 })
 
 
@@ -70,16 +79,45 @@ test_that("Subset assignment of hux into hux preserves attributes", {
   expect_silent(ht[] <- ht5)
   expect_equivalent(font(ht), matrix("times", 3, 3))
 
-  ht6 <- hux(1, 2, 3)
-  font(ht6) <- c("times", "arial", "times")
-  expect_silent(ht[] <- ht6) # assignment with repetition
-  expect_equivalent(font(ht)[1, ], c("times", "arial", "times"))
-
   ht7 <- hux(1:2, 1:2, 1:2)
   bold(ht7)[1, ] <- TRUE
   expect_silent(ht[1:2, ] <- ht7) # assignment of a non-square matrix
   expect_equivalent(bold(ht)[1, ], rep(TRUE, 3))
   expect_equivalent(bold(ht)[2, ], rep(FALSE, 3))
+})
+
+
+test_that("huxtable manipulation preserves attribute dimnames", {
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  expect_equivalent(colnames(align(ht)), c("a", "b", "d"))
+  ht2 <- rbind(ht, 1:3)
+  expect_equivalent(colnames(align(ht2)), c("a", "b", "d"))
+  ht3 <- cbind(ht, e = 1:3)
+  expect_equivalent(colnames(align(ht3)), c("a", "b", "d", "e"))
+  ht4 <- ht
+  ht4$e <- 1:3
+  expect_equivalent(colnames(align(ht4)), c("a", "b", "d", "e"))
+  ht5 <- ht
+  ht5$a <- NULL
+  expect_equivalent(colnames(align(ht5)), c("b", "d"))
+})
+
+
+test_that("colnames<- and friends affect attribute dimnames", {
+  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
+  colnames(ht) <- c("e", "f", "g")
+  expect_equivalent(colnames(align(ht)), c("e", "f", "g"))
+
+  ht2 <- hux(a = 1:3, b = 1:3, d = 1:3)
+  names(ht2) <- c("e", "f", "g")
+  expect_equivalent(colnames(align(ht2)), c("e", "f", "g"))
+  rownames(ht2) <- letters[1:3]
+  expect_equivalent(rownames(align(ht2)), letters[1:3])
+
+  ht3 <- hux(a = 1:3, b = 1:3, d = 1:3)
+  dimnames(ht3) <- list(letters[1:3], letters[24:26])
+  expect_equivalent(colnames(align(ht3)), letters[24:26])
+  expect_equivalent(rownames(align(ht3)), letters[1:3])
 })
 
 
@@ -98,10 +136,6 @@ test_that("rbind and cbind work and copy properties", {
   expect_equivalent(row_height(ht_rbind), c("1in", "2in", NA))
   expect_equivalent(italic(ht_rbind)[3, ], c(FALSE, FALSE))
 
-  ht_rbind <- rbind(ht, c(3, 3), copy_cell_props = "bold")
-  expect_equivalent(italic(ht_rbind)[3, ], c(FALSE, FALSE))
-  expect_equivalent(bold(ht_rbind)[3, ], c(TRUE, TRUE))
-
   expect_silent(ht_cbind <- cbind(ht, 1:2, copy_cell_props = TRUE))
   expect_equivalent(col_width(ht_cbind), c("2cm", "1cm", "1cm"))
   expect_equivalent(italic(ht_cbind), matrix(TRUE, 2, 3))
@@ -109,10 +143,6 @@ test_that("rbind and cbind work and copy properties", {
   ht_cbind <- cbind(ht, 1:2, copy_cell_props = FALSE)
   expect_equivalent(col_width(ht_cbind), c("2cm", "1cm", NA))
   expect_equivalent(italic(ht_cbind)[, 3], c(FALSE, FALSE))
-
-  ht_cbind <- cbind(ht, 1:2, copy_cell_props = "bold")
-  expect_equivalent(italic(ht_cbind)[, 3], c(FALSE, FALSE))
-  expect_equivalent(bold(ht_cbind)[, 3], c(TRUE, TRUE))
 })
 
 
@@ -167,83 +197,73 @@ test_that("Huxtables can be transposed", {
 test_that("Can add a column to a huxtable using standard replacement methods", {
   ht <- hux(a = 1:2, b = 1:2)
   expect_silent(ht$c <- 1:2)
-  expect_equivalent(font(ht), matrix(NA, 2, 3))
+  expect_equivalent(font(ht), matrix(NA_character_, 2, 3))
   expect_equivalent(colnames(ht), c("a", "b", "c"))
-  expect_equivalent(col_width(ht), rep(NA, 3))
+  expect_equivalent(col_width(ht), rep(NA_real_, 3))
 
   ht2 <- hux(a = 1:2, b = 1:2)
   expect_silent(ht2[, "c"] <- 1:2)
-  expect_equivalent(font(ht2), matrix(NA, 2, 3))
+  expect_equivalent(font(ht2), matrix(NA_character_, 2, 3))
   expect_equivalent(colnames(ht2), c("a", "b", "c"))
-  expect_equivalent(col_width(ht2), rep(NA, 3))
+  expect_equivalent(col_width(ht2), rep(NA_real_, 3))
 
   ht3 <- hux(a = 1:2, b = 1:2)
   expect_silent(ht3[["c"]] <- 1:2)
-  expect_equivalent(font(ht3), matrix(NA, 2, 3))
+  expect_equivalent(font(ht3), matrix(NA_character_, 2, 3))
   expect_equivalent(colnames(ht3), c("a", "b", "c"))
-  expect_equivalent(col_width(ht3), rep(NA, 3))
+  expect_equivalent(col_width(ht3), rep(NA_real_, 3))
 })
 
 
 test_that("Can delete columns from a huxtable by setting it to `NULL`", {
   ht <- hux(a = 1:2, b = 1:2)
   expect_silent(ht$a <- NULL)
-  expect_equivalent(font(ht), matrix(NA, 2, 1))
-  expect_equivalent(col_width(ht), NA)
+  expect_equivalent(font(ht), matrix(NA_character_, 2, 1))
+  expect_equivalent(col_width(ht), NA_real_)
 
   ht2 <- hux(a = 1:2, b = 1:2)
   expect_silent(ht2[["a"]] <- NULL)
-  expect_equivalent(font(ht2), matrix(NA, 2, 1))
-  expect_equivalent(col_width(ht2), NA)
+  expect_equivalent(font(ht2), matrix(NA_character_, 2, 1))
+  expect_equivalent(col_width(ht2), NA_real_)
 
   ht3 <- hux(a = 1:2, b = 1:2)
   expect_silent(ht3["a"] <- NULL)
-  expect_equivalent(font(ht3), matrix(NA, 2, 1))
-  expect_equivalent(col_width(ht3), NA)
+  expect_equivalent(font(ht3), matrix(NA_character_, 2, 1))
+  expect_equivalent(col_width(ht3), NA_real_)
 
   # this kind of subsetting doesn't seem to work in earlier Rs
   if (getRversion() >= "3.3.3") {
     ht4 <- hux(a = 1:2, b = 1:2, c = 1:2)
     expect_silent(ht4[ c("a", "b")] <- NULL)
-    expect_equivalent(font(ht4), matrix(NA, 2, 1))
-    expect_equivalent(col_width(ht4), NA)
+    expect_equivalent(font(ht4), matrix(NA_character_, 2, 1))
+    expect_equivalent(col_width(ht4), NA_real_)
 
     ht5 <- hux(a = 1:2, b = 1:2, c = 1:2)
     expect_silent(ht5[, c("a", "b")] <- NULL)
-    expect_equivalent(font(ht5), matrix(NA, 2, 1))
-    expect_equivalent(col_width(ht5), NA)
+    expect_equivalent(font(ht5), matrix(NA_character_, 2, 1))
+    expect_equivalent(col_width(ht5), NA_real_)
   }
 
 })
 
 
-test_that("Can add row(s) to a huxtable by standard replacement methods", {
+test_that("Add row(s) by standard replacement methods", {
   ht <- hux(a = 1:2, b = 1:2)
   expect_silent(ht[3, ] <- c(3, 3))
-  expect_equivalent(font(ht), matrix(NA, 3, 2))
-  expect_equivalent(row_height(ht), rep(NA, 3))
+  expect_equivalent(font(ht), matrix(NA_character_, 3, 2))
+  expect_equivalent(row_height(ht), rep(NA_real_, 3))
 
-  expect_silent(ht[4, 1] <- 4)
-  expect_equivalent(as.data.frame(ht[4, ]), data.frame(4, NA_real_))
-  expect_equivalent(dim(font(ht)), c(4, 2))
+  expect_error(ht[4, 1] <- 4)
+  expect_error(ht[5:6, ] <- 5:6)
 
-  expect_silent(ht[5:6, ] <- 5:6)
-  expect_equivalent(as.data.frame(ht[5:6, ]), data.frame(5:6, 5:6))
-  expect_equivalent(dim(font(ht)), c(6, 2))
-
+  # can't add new columns with wrong dimension
   ht2 <- hux(a = 1:2, b = 1:2)
-  expect_silent(ht2[, 3:4] <- 1:2)
-  expect_equivalent(as.data.frame(ht2[, 3:4]), data.frame(1:2, 1:2))
-  expect_equivalent(dim(font(ht2)), c(2, 4))
+  expect_error(ht2[, 3:4] <- 1:2)
+  expect_error(ht2[, 2:3] <- 3:4)
 
-  expect_silent(ht2[, 4:5] <- 3:4) # overlapping existing
-  expect_equivalent(as.data.frame(ht2[, 4:5]), data.frame(3:4, 3:4))
-  expect_equivalent(dim(font(ht2)), c(2, 5))
-
+  # can't add new rows and columns simultaneously
   ht3 <- hux(a = 1:2, b = 1:2)
-  expect_silent(ht3[3:4, 3] <- 1) # new rows and columns simultaneously
-  expect_equivalent(as.data.frame(ht3[3:4, ]), data.frame(rep(NA_real_, 2), rep(NA_real_, 2), rep(1, 2)))
-  expect_equivalent(dim(font(ht3)), c(4, 3))
+  expect_error(ht3[3:4, 3] <- 1)
 })
 
 

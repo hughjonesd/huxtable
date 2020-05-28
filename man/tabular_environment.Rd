@@ -14,7 +14,7 @@ set_tabular_environment(ht, value)
 \item{ht}{A huxtable.}
 
 \item{value}{A length-one character vector. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\code{"NA"}.}
 }
 \value{
 For \code{tabular_environment}, the \code{tabular_environment} property.

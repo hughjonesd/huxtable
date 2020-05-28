@@ -24,9 +24,16 @@ Defaults are used for new huxtables, and also when a property is set to \code{NA
 }
 \details{
 Note that \code{autoformat = TRUE} in \code{\link[=huxtable]{huxtable()}} overrides some defaults.
+
+To set default border styles, use the pseudo-properties
+\code{border}/\code{border_style}/\code{border_color}. You cannot set defaults separately for
+different sides.
 }
 \examples{
-old <- set_default_properties(left_border = 1)
+old <- set_default_properties(
+        text_color = "red",
+        border     = 0.4
+      )
 hux(a = 1:2, b = 1:2)
 set_default_properties(old)
 get_default_properties("bold")

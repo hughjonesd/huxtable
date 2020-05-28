@@ -6,6 +6,9 @@ NULL
 ncharw <- function (x) nchar(x, type = "width")
 
 
+is_vectorish <- function (x) is.null(dim(x)) && ! is.list(x)
+
+
 # pinched from rlang
 `%||%` <- function (x, y) {
   if (is.null(x)) y else x
@@ -91,71 +94,42 @@ format_color <- function (r_color, default = "white") {
 }
 
 
-# returns two rows(+1),cols(+1) arrays of border widths
-collapsed_borders <- function (ht) {
-  result <- do_collapse(ht, get_all_borders, default = 0)
-  result$vert <- pmax(result$left, result$right)
-  result$horiz <- pmax(result$top, result$bottom)
 
-  result[c("vert", "horiz")]
-}
+get_visible_borders <- function (ht) {
+  dc <- display_cells(ht)
 
+  # a vertical border is hidden, if it is shadowed by a cell to its left
+  vert_borders <- attr(ht, "lr_borders")$thickness
+  left_shadowed <- dc[dc$display_col < dc$col, ]
+  left_shadowed <- as.matrix(left_shadowed[c("row", "col")])
+  vert_borders[left_shadowed] <- 0
 
-# returns two rows(+1),cols(+1) arrays of border colors. right and top borders have priority.
-# A border of 0 can still have a color.
-collapsed_border_colors <- function (ht) {
-  result <- do_collapse(ht, get_all_border_colors, default = NA)
-  result$vert <- result$right
-  result$vert[is.na(result$right)] <- result$left[is.na(result$right)]
-  result$horiz <- result$bottom
-  result$horiz[is.na(result$bottom)] <- result$top[is.na(result$bottom)]
+  # a horizontal border is hidden, if it is shadowed by a cell above it
+  horiz_borders <- attr(ht, "tb_borders")$thickness
+  top_shadowed <- dc[dc$display_row < dc$row, ]
+  top_shadowed <- as.matrix(top_shadowed[c("row", "col")])
+  horiz_borders[top_shadowed] <- 0
 
-  result[c("vert", "horiz")]
-}
-
-
-# returns two rows(+1),cols(+1) arrays of border styles. Non-"solid" styles have priority;
-# if two styles are non-"solid" then right and top has priority
-# A border of 0 can still have a style.
-collapsed_border_styles <- function (ht) {
-  result <- do_collapse(ht, get_all_border_styles, default = "solid")
-  result$vert <- result$right
-  result$vert[result$right == "solid"] <- result$left[result$right == "solid"]
-  result$horiz <- result$bottom
-  result$horiz[result$bottom == "solid"] <- result$top[result$bottom == "solid"]
-
-  result[c("vert", "horiz")]
-}
-
-
-do_collapse <- function(ht, prop_fun, default) {
-  res <- list()
-  res$top <- res$left <- res$right <- res$bottom <- matrix(default, nrow(ht), ncol(ht))
-  dc <- display_cells(ht, all = TRUE)
-  # provides large speedup:
-  dc <- as.matrix(dc[, c("row", "col", "display_row", "display_col", "end_row", "end_col")])
-  dc_idx <- dc[, c("display_row", "display_col"), drop = FALSE]
-  dc_map <- matrix(seq_len(nrow(ht) * ncol(ht)), nrow(ht), ncol(ht))
-  dc_map <- dc_map[dc_idx]
-
-  at <- list()
-  at$left   <- dc[, "col"] == dc[, "display_col"]
-  at$right  <- dc[, "col"] == dc[, "end_col"]
-  at$top    <- dc[, "row"] == dc[, "display_row"]
-  at$bottom <- dc[, "row"] == dc[, "end_row"]
-
-  properties <- prop_fun(ht)
-  for (side in names(at)) {
-    at_side <- at[[side]]
-    res[[side]][at_side] <- properties[[side]][dc_map][at_side]
-  }
-
-  res$left <- cbind(res$left, default)
-  res$right <- cbind(default, res$right)
-  res$top <- rbind(res$top, default)
-  res$bottom <- rbind(default, res$bottom)
-
+  res <- list(vert = vert_borders, horiz = horiz_borders)
   return(res)
+}
+
+
+# returns two rows(+1),cols(+1) arrays of border colors.
+collapsed_border_colors <- function (ht) {
+  list(
+    vert  = attr(ht, "lr_borders")$color,
+    horiz = attr(ht, "tb_borders")$color
+  )
+}
+
+
+# returns two rows(+1),cols(+1) arrays of border styles.
+collapsed_border_styles <- function (ht) {
+  list(
+    vert  = attr(ht, "lr_borders")$style,
+    horiz = attr(ht, "tb_borders")$style
+  )
 }
 
 
@@ -257,12 +231,24 @@ check_positive_dims <- function (ht) {
 }
 
 
-# return data frame mapping real cell positions to cells displayed. `all = TRUE` returns all
-# cells, including those shadowed by others.
-# data frame is ordered by row then column, i.e. the same as 1-based indexing into a matrix
-# columns are row, col (of real cell);
-# shadowed if cell is covered by another, the "display cell"; if not, it is its own "display cell";
-# display_row, display_col, rowspan, colspan, end_row, end_col of the display cell.
+#' Return data frame mapping real positions to the cells displayed in them
+#'
+#' @param ht A huxtable
+#' @param all Show all cells, or only non-shadowed cells? Default TRUE
+#' @param new_rowspan Possible new rowspan matrix
+#' @param new_colspan Possible new colspan matrix
+#'
+#' @return
+#' A data frame with columns:
+#' * row, col: the real cell position
+#' * shadowed: TRUE if a cell gets its content from another cell with
+#'   colspan or rowspan > 1
+#' * display_row, display_col: the "display cell" which provides the content
+#' * rowspan, colspan: of the display cell
+#' * end_row, end_col: right/bottom position of end of the merged cell
+#' The data frame is ordered by row, then col.
+#'
+#' @noRd
 display_cells <- function (ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan = colspan(ht)) {
   rowspan <- new_rowspan
   colspan <- new_colspan

@@ -27,22 +27,28 @@
 \item{value}{A matrix, data frame, huxtable or similar object.}
 }
 \value{
-A huxtable.
+\code{[} returns a huxtable. \code{$} and \code{[[} return data from the
+underlying data frame.
 }
 \description{
 Subset a huxtable
 }
-\details{
-\code{[} always returns a huxtable, while \code{$} and \code{[[}
-return the underlying data.
-
-For the replacement function \verb{[<-}, if \code{value} is a huxtable, then its cell properties will be
-copied into \code{x}. In addition, if \code{value} fills up an entire column, then column properties
-will be copied into the replaced columns of \code{x}, and if it fills up an entire row, then
-row properties will be copied into the replaced rows of \code{x}.
-
-Replacement functions \verb{$<-} and \verb{[[<-} replace existing data without affecting any properties.
+\section{Replacing existing rows and columns}{
+For the replacement function \verb{[<-}, if \code{value} is a huxtable, then its
+properties will be copied into \code{x}. Replacement functions \verb{$<-} and \verb{[[<-}
+replace existing data without affecting any properties.
 }
+
+\section{Adding new rows and columns}{
+If new columns or rows are created, then properties will be copied
+from the last column or row of \code{x}, or from \code{value} if \code{value} is a huxtable.
+
+These methods are stricter than their data frame equivalents in some places.
+You can't add new rows or column at a numeric location without specifying all
+intervening rows/columns. New values must have the appropriate dimensions
+(vectors will be interpreted appropriately).
+}
+
 \examples{
 jams[1:3, ]
 class(jams[1:3, ])

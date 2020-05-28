@@ -11,7 +11,8 @@ NULL
 #' all table columns and has an optional border above.
 #' @param ht A huxtable.
 #' @param text Text for the footnote.
-#' @param border Width of the footnote's top border. Set to 0 for no border.
+#' @param border Width of the footnote's top border. Set to 0 for no border, or
+#'   `NULL` to leave the border unchanged.
 #' @param ... Other properties, passed to [set_cell_properties()] for the footnote cell.
 #'
 #' @return The modified huxtable
@@ -30,7 +31,7 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
   ht <- set_left_border(ht, nr, 1, 0)
   ht <- set_right_border(ht, nr, 1, 0)
   ht <- set_bottom_border(ht, nr, 1, 0)
-  ht <- set_top_border(ht, nr, 1, border)
+  if (! is.null(border)) ht <- set_top_border(ht, nr, everywhere, border)
   wrap(ht)[nr, 1] <- TRUE
   if (! missing(...)) ht <- set_cell_properties(ht, nr, 1, ...)
 

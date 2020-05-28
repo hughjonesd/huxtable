@@ -1,6 +1,13 @@
 
 context("Fuzzy tests")
 
+# how to debug
+# look for a 6 figure number in test output
+# source add_props() in this file
+# run hx_set <- add_props(hx_raw, variations[six_figure_no,])
+# compare outputs to something like
+# cat("tests/testthat/output-rds/various-outputs-six_figure_no-...")
+# or run quick_xxx functions on it
 
 expect_outputs_unchanged <- function (hx, idx) {
   info <- paste0("Index i = ", idx)
@@ -44,14 +51,25 @@ hx_raw <- hux(
   real = 1:3 + 0.005,
   char = letters[1:3],
   date = as.Date(1:3, origin = "1970-01-01"),
-  fact = factor(letters[4:6])
+  fact = factor(letters[4:6]),
+  add_colnames = TRUE
 )
 
 
 add_props <- function(hx, row) {
   props <- as.list(row)
   props$ht <- hx
-  hx_set <- do.call("set_cell_properties", props)
+  props_no_border <- props[! grepl("border", names(props))]
+  hx_set <- do.call("set_cell_properties", props_no_border)
+  if ("left_border" %in% names(props)) {
+    hx_set <- set_left_border(hx_set, props$left_border)
+  }
+  if ("left_border_style" %in% names(props)) {
+    hx_set <- set_left_border_style(hx_set, props$left_border_style)
+  }
+  if ("left_border_color" %in% names(props)) {
+    hx_set <- set_left_border_color(hx_set, props$left_border_color)
+  }
 
   return(hx_set)
 }

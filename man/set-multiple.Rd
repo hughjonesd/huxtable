@@ -2,7 +2,6 @@
 % Please edit documentation in R/set-multiple.R
 \name{set-multiple}
 \alias{set-multiple}
-\alias{set_multiple}
 \alias{set_all_borders}
 \alias{map_all_borders}
 \alias{set_all_border_colors}

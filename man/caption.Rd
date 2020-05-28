@@ -14,7 +14,7 @@ set_caption(ht, value)
 \item{ht}{A huxtable.}
 
 \item{value}{A length-one character vector. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\code{"NA"}.}
 }
 \value{
 For \code{caption}, the \code{caption} property.

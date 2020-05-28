@@ -142,25 +142,19 @@ NULL
 #'
 #' * I have another problem.
 #'
-#' If you have a bug - i.e. a problem with the software - or have a feature request, please report
-#' it to <https://github.com/hughjonesd/huxtable/issues>. Otherwise, ask a question on
-#' [StackOverflow](https://stackoverflow.com) or <https://community.rstudio.com>. That way, other
-#' people will benefit from the answers you get.
+#' If you have a bug - i.e. a problem with the software - or have a feature
+#' request, please report it to <https://github.com/hughjonesd/huxtable/issues>.
+#' Otherwise, ask a question on [StackOverflow](https://stackoverflow.com) or
+#' <https://community.rstudio.com>. That way, other people will benefit from
+#' the answers you get.
 #'
 #' * Can I email you directly?
 #'
-#' I'd rather you asked on a public website. If you then email me a link, I may be able to help.
+#' I'd rather you asked on a public website. If you then email me a link, I
+#' may be able to help.
 #'
 #' @name huxtable-FAQ
 #' @docType package
 NULL
 
 
-#' Changes to new versions of huxtable
-#'
-#' Contents of the NEWS.md file.
-#'
-#' @name huxtable-news
-#' @docType package
-#' @includeRmd NEWS.md
-NULL

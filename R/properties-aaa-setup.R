@@ -5,9 +5,6 @@ NULL
 
 
 huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_color", "text_color",
-  "top_border", "left_border", "right_border", "bottom_border",
-  "top_border_color", "left_border_color", "right_border_color", "bottom_border_color",
-  "top_border_style", "left_border_style", "right_border_style", "bottom_border_style",
   "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
   "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
   "font")
@@ -33,64 +30,54 @@ huxtable_env$huxtable_default_attrs <- list(
         colspan             = 1,
         align               = "left",
         valign              = "top",
-        width               = NA,
-        height              = NA,
-        col_width           = NA,
-        row_height          = NA,
+        width               = NA_real_,
+        height              = NA_real_,
+        col_width           = NA_real_,
+        row_height          = NA_real_,
         header_cols         = FALSE,
         header_rows         = FALSE,
-        background_color    = NA,
-        text_color          = NA,
-        left_border         = 0,
-        right_border        = 0,
-        top_border          = 0,
-        bottom_border       = 0,
-        left_border_color   = NA,
-        right_border_color  = NA,
-        top_border_color    = NA,
-        bottom_border_color = NA,
-        left_border_style   = "solid",
-        right_border_style  = "solid",
-        top_border_style    = "solid",
-        bottom_border_style = "solid",
+        background_color    = NA_character_,
+        text_color          = NA_character_,
+        border              = 0,
+        border_color        = NA_character_,
+        border_style        = "solid",
         left_padding        = 6,
         right_padding       = 6,
         top_padding         = 6,
         bottom_padding      = 6,
         wrap                = TRUE,
-        caption             = NA,
+        caption             = NA_character_,
         caption_pos         = "top",
-        caption_width       = NA,
+        caption_width       = NA_real_,
         position            = "center",
-        tabular_environment = NA,
-        label               = NA,
+        tabular_environment = NA_character_,
+        label               = NA_character_,
         latex_float         = "ht",
         escape_contents     = TRUE,
         na_string           = "",
         bold                = FALSE,
         italic              = FALSE,
-        font_size           = NA,
+        font_size           = NA_real_,
         rotation            = 0,
         number_format       = list("%.3g"),
-        font                = NA
+        font                = NA_character_
       )
 
 make_getter_setters <- function(
         attr_name,
-        attr_type = c("cell", "row", "col", "table"),
-        default = NULL,
-        check_fun = NULL,
+        attr_type    = c("cell", "row", "col", "table"),
+        default      = NULL,
+        check_fun    = NULL,
         check_values = NULL,
-        extra_code = NULL
+        extra_code   = NULL,
+        only_set_map = FALSE
       ) {
   attr_type <- match.arg(attr_type)
   funs <- list()
 
+
   funs[[attr_name]] <- eval(bquote(
     function(ht) UseMethod(.(attr_name))
-  ))
-  funs[[paste0(attr_name, ".huxtable")]] <- eval(bquote(
-    function(ht) attr(ht, .(attr_name))
   ))
 
   setter <- paste0(attr_name, "<-")
@@ -98,26 +85,32 @@ make_getter_setters <- function(
     function(ht, value) UseMethod(.(setter))
   ))
 
-  check_fun <- if (! missing(check_fun)) bquote(assert_that(.(check_fun)(value)))
-  check_dims <- switch(attr_type,
-    table = quote(stopifnot(length(value) == 1))
-  )
-  check_values <- if (! missing(check_values)) bquote(
-    assert_that(all(na.omit(value) %in% .(check_values)))
-  )
-  extra_code <- if (! missing(extra_code)) substitute(extra_code)
-  funs[[paste0(setter, ".huxtable")]] <- eval(bquote(
-    function(ht, value) {
-      if (! all(is.na(value))) .(check_fun)
-      .(check_dims)
-      .(check_values)
-      .(extra_code)
-      value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[.(attr_name)]]
-      attr(ht, .(attr_name))[] <- value
-      mode(attr(ht, .(attr_name))) <- mode(value)
-      ht
-    }
-  ))
+  if (! only_set_map) {
+    funs[[paste0(attr_name, ".huxtable")]] <- eval(bquote(
+      function(ht) attr(ht, .(attr_name))
+    ))
+
+    check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
+    check_dims <- switch(attr_type,
+      table = quote(stopifnot(length(value) == 1))
+    )
+    check_values <- if (! missing(check_values)) bquote(
+      stopifnot(all(na.omit(value) %in% .(check_values)))
+    )
+    extra_code <- if (! missing(extra_code)) substitute(extra_code)
+    funs[[paste0(setter, ".huxtable")]] <- eval(bquote(
+      function(ht, value) {
+        if (! all(is.na(value))) .(check_fun)
+        .(check_dims)
+        .(check_values)
+        .(extra_code)
+        value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[.(attr_name)]]
+        attr(ht, .(attr_name))[] <- value
+        mode(attr(ht, .(attr_name))) <- mode(value)
+        ht
+      }
+    ))
+  }
 
   alt_setter  <- sprintf("set_%s", attr_name)
   mapping_fun <- sprintf("map_%s", attr_name)

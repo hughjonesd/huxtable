@@ -8,10 +8,18 @@
 #' @return For `set_default_properties`, a list of the previous property values, invisibly.
 #' @details
 #' Note that `autoformat = TRUE` in [huxtable()] overrides some defaults.
+#'
+#' To set default border styles, use the pseudo-properties
+#' `border`/`border_style`/`border_color`. You cannot set defaults separately for
+#' different sides.
+#'
 #' @export
 #' @seealso Options for autoformat in [huxtable-options].
 #' @examples
-#' old <- set_default_properties(left_border = 1)
+#' old <- set_default_properties(
+#'         text_color = "red",
+#'         border     = 0.4
+#'       )
 #' hux(a = 1:2, b = 1:2)
 #' set_default_properties(old)
 set_default_properties <- function(...) {

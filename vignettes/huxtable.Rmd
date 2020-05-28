@@ -25,7 +25,8 @@ library(dplyr)
 library(huxtable)
 options(
         huxtable.knit_print_df = FALSE, 
-        huxtable.add_colnames = TRUE    # works when run by testthat
+        huxtable.add_colnames  = TRUE,    # works when run by testthat
+        huxtable.use_fontspec  = TRUE
       )
 
 is_latex <- guess_knitr_output_format() == 'latex'
@@ -682,7 +683,7 @@ package is installed, and your terminal or R IDE supports it, border, text and b
 are also displayed.
 
 ```{r, results = 'markup'}
-print_screen(ht)
+print_screen(jams)
 ```
 
 

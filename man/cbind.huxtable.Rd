@@ -26,14 +26,9 @@ Combine rows or columns
 Table properties will be taken from the first argument which is a huxtable. So will
 row properties (for cbind) and column properties (for rbind).
 
-If some of the inputs are not huxtables, and \code{copy_cell_props} is a character vector of cell
-properties, then the named cell properties will be copied to non-huxtables. Objects on the left
-or above get priority over those on the right or below. These properties may also include
-\code{"row_height"} (for rbind) or \code{"col_width"} (for cbind). Numeric row heights and column widths
-will be rescaled to 1.
-
-If \code{copy_cell_props} is \code{TRUE}, the default set of cell properties (everything but \code{colspan} and
-\code{rowspan}, including row heights/column widths) will be copied.
+If some of the inputs are not huxtables, and \code{copy_cell_props} is\code{TRUE},
+then cell properties will be copied to non-huxtables. Objects on the left
+or above get priority over those on the right or below.
 
 If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the default properties.
 
@@ -42,17 +37,17 @@ call the data frame method instead of the huxtable-specific code. For a solution
 \code{\link[=add_columns]{add_columns()}}.
 }
 \examples{
-ht1 <- hux(a = 1:3, b = 4:6)
-ht2 <- hux(
-        d = letters[1:3],
-        e = letters[4:6]
-      )
-bold(ht1)[1, ] <- TRUE
-bold(ht2) <- TRUE
-vec <- LETTERS[1:4]
 
-cbind(ht1, vec, ht2)
-cbind(ht1, vec, ht2,
-      copy_cell_props = FALSE)
+sugar <- c("Sugar", "40\%", "35\%", "50\%")
+jams <- set_bold(jams, 1, everywhere)
+cbind(jams, sugar)
+cbind(jams, sugar,
+     copy_cell_props = FALSE)
+
+jams <- set_text_color(jams,
+     everywhere, 1, "red")
+rbind(jams, c("Damson", 2.30))
+rbind(jams, c("Damson", 2.30),
+     copy_cell_props = FALSE)
 
 }
