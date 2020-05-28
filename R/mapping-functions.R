@@ -431,7 +431,7 @@ by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
 by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   assert_that(is.flag(ignore_na), is.list(.grepl_args))
 
-  vals <- c(...)
+  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
   named_vals <- vals[names(vals) != ""]
   patterns <- names(named_vals)
   default <- vals[names(vals) == ""]
@@ -440,19 +440,30 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 
   matching_fn <- function (ht, rows, cols, current) {
     res <- current
-    if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
     ht_submatrix <- as.matrix(ht)[rows, cols]
     my_args$x <- ht_submatrix
-    any_matched <- rep(FALSE, length(ht_submatrix))
+
+    match_list <- list()
     for (pt in patterns) {
       my_args$pattern <- pt
-      matches <- do.call(grepl, my_args)
-      any_matched <- any_matched | matches
-      res[matches] <- named_vals[[pt]]
+      match_list[[pt]] <- do.call(grep, my_args)
     }
+    rhs <- rep(named_vals, times = lengths(match_list))
+
+    if (length(default > 0)) {
+      unmatched <- seq_len(nrow(ht_submatrix) * ncol(ht_submatrix))
+      unmatched <- setdiff(unmatched, unlist(match_list))
+      if (length(unmatched) > 0) {
+        match_list <- c(match_list, unmatched)
+        rhs <- c(rhs, rep(default, length(unmatched)))
+      }
+    }
+    res[unlist(match_list)] <- rhs
+
     res[! any_matched] <- NA
     res <- maybe_ignore_na(res, current, ignore_na)
+
     res
   }
 

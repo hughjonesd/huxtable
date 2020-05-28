@@ -4,14 +4,41 @@
 NULL
 
 
-huxtable_cell_attrs <- c("align", "valign", "rowspan", "colspan", "background_color", "text_color",
-  "top_padding", "left_padding", "right_padding", "bottom_padding", "wrap",
-  "escape_contents", "na_string", "bold", "italic", "font_size", "rotation", "number_format",
-  "font")
+huxtable_cell_attrs <- c(
+        "align",
+        "valign",
+        "rowspan",
+        "colspan",
+        "background_color",
+        "text_color",
+        "top_padding",
+        "left_padding",
+        "right_padding",
+        "bottom_padding",
+        "wrap",
+        "markdown",
+        "escape_contents",
+        "na_string",
+        "bold",
+        "italic",
+        "font_size",
+        "rotation",
+        "number_format",
+        "font"
+      )
 huxtable_col_attrs <- c("col_width", "header_cols")
 huxtable_row_attrs <- c("row_height", "header_rows")
-huxtable_table_attrs <- c("width", "height", "position", "caption", "caption_pos",
-      "caption_width", "tabular_environment", "label", "latex_float")
+huxtable_table_attrs <- c(
+        "width",
+        "height",
+        "position",
+        "caption",
+        "caption_pos",
+        "caption_width",
+        "tabular_environment",
+        "label",
+        "latex_float"
+      )
 
 
 #' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
@@ -53,6 +80,7 @@ huxtable_env$huxtable_default_attrs <- list(
         tabular_environment = NA_character_,
         label               = NA_character_,
         latex_float         = "ht",
+        markdown            = FALSE,
         escape_contents     = TRUE,
         na_string           = "",
         bold                = FALSE,

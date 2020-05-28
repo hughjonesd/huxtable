@@ -92,6 +92,10 @@ make_getter_setters("wrap", "cell", check_fun = is.logical)
 #' @templateVar attr_desc Escape cell contents
 #' @templateVar value_param_desc
 #' A logical vector or matrix. If `TRUE`, cell contents will be HTML or LaTeX escaped.
+#' @details
+#' If [markdown()] is `TRUE` for a cell, the `escape_contents` property
+#' will be ignored.
+#'
 #' @examples
 #' ht <- huxtable(
 #'         Exponent = 2:4,
@@ -107,6 +111,21 @@ make_getter_setters("wrap", "cell", check_fun = is.logical)
 #' @templateVar attr_val2 FALSE
 NULL
 make_getter_setters("escape_contents", "cell", check_fun = is.logical)
+
+
+#' @template getset-cell
+#' @templateVar attr_name markdown
+#' @templateVar attr_desc Render cell contents as markdown.
+#' @templateVar value_param_desc
+#' A logical vector or matrix. If `TRUE`, cell contents will be interpreted
+#' as [markdown](https://commonmark.org/help/).
+#' @template getset-rowspec-example
+#' @templateVar attr_val TRUE
+#' @templateVar attr_val2 FALSE
+#' @templateVar default TRUE
+NULL
+make_getter_setters("markdown", "cell", check_fun = is.logical, default = TRUE)
+
 
 
 #' @template getset-cell

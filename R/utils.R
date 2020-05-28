@@ -73,8 +73,10 @@ clean_contents <- function(
   contents[is.na(contents)] <- na_string(ht)
 
   for (col in seq_len(ncol(contents))) {
+    md_rows <- markdown(ht)[, col]
+    contents[md_rows, col] <- render_markdown(contents[md_rows, col], type)
     if (type %in% c("latex", "html", "rtf")) {
-      to_esc <- escape_contents(ht)[, col]
+      to_esc <- escape_contents(ht)[, col] & ! md_rows
       contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
     }
     # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
@@ -85,6 +87,16 @@ clean_contents <- function(
   }
 
   contents
+}
+
+
+render_markdown <- function (text, type) {
+  switch(type,
+      "html"     = markdown_html(text),
+      "latex"    = markdown_latex(text),
+      "markdown" = text,
+      markdown_text(text)
+  )
 }
 
 
