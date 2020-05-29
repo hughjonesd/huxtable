@@ -441,7 +441,7 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   matching_fn <- function (ht, rows, cols, current) {
     res <- current
     my_args <- .grepl_args
-    ht_submatrix <- as.matrix(ht)[rows, cols]
+    ht_submatrix <- as.matrix(ht)[rows, cols, drop = FALSE]
     my_args$x <- ht_submatrix
 
     match_list <- list()
