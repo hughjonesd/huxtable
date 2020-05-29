@@ -27,11 +27,15 @@ xxx_border_huxtable <- function(lr_tb, i, j, border_prop) {
 
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
-    m <- mlist$thickness[eval(i), eval(j), drop = FALSE]
-    class(m) <- c("borderMatrix", class(m))
-    dimnames(m) <- dimnames(ht)
+    thickness <- mlist$thickness[eval(i), eval(j), drop = FALSE]
+    style <- mlist$style[eval(i), eval(j), drop = FALSE]
+    color <- mlist$color[eval(i), eval(j), drop = FALSE]
 
-    m
+    new_brdr(
+      thickness = thickness,
+      style     = style,
+      color     = color
+    )
   }
 }
 
@@ -196,7 +200,6 @@ xxx_border_arrow_yyy_hux_brdr <- function (lr_tb, i, j) {
         i = quote(seq_len(nrow(ht))), j = quote(-last_col))
 
 
-
 #' @export
 #' @method `right_border<-.huxtable` brdr
 `right_border<-.huxtable.brdr` <- xxx_border_arrow_yyy_hux_brdr("lr_borders",
@@ -215,7 +218,6 @@ xxx_border_arrow_yyy_hux_brdr <- function (lr_tb, i, j) {
       i = -1, j = quote(seq_len(ncol(ht))))
 
 
-
 xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
   function (ht) {
     mlist <- attr(ht, lr_tb)
@@ -228,7 +230,6 @@ xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
     mx
   }
 }
-
 
 
 #' @export
@@ -268,90 +269,3 @@ top_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #' @export
 bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   i = -1, j = quote(seq_len(ncol(ht))), "color")
-
-
-#' Internal function
-#'
-#' This is used to manage border properties. Do not call it directly.
-#' @usage
-#' \method{[}{borderMatrix}(x, ...) <- value
-#'
-#' @param x A `borderMatrix` object.
-#' @param ... Indices.
-#' @param value A [brdr()] object, number, matrix, or list.
-#'
-#' @return A [brdr()] object.
-#'
-#' @export
-#' @method `[<-` borderMatrix
-#' @export `[<-.borderMatrix`
-`[<-.borderMatrix` <- function (x, ..., value) {
-  # x is the result of left_border() - a matrix of thicknesses,
-  # nr x nc.
-  # value is whatever the user is passing in like `left_border(ht) <- value`
-  # The result of this call will be passed to `left_border<-`.
-  # So it could be a `brdr()` object or a normal matrix.
-  #
-  # but this may also be called in the course of normal huxtable manipulation,
-  # e.g. if a user does
-  # borders <- left_border(ht) # gets a borderMatrix!
-  # borders[1,1] <- 0
-  # left_border(ht) <- borders
-  UseMethod("[<-.borderMatrix", value)
-}
-
-
-#' @export
-#' @method `[<-.borderMatrix` brdr
-`[<-.borderMatrix.brdr` <- function (x, ..., value) {
-  thickness <- x[] # subsetting unclasses
-  thickness[...] <- value$thickness
-  style <- matrix(huxtable_env$huxtable_default_attrs$border_style, nrow(x), ncol(x))
-  style[...] <- value$style
-  color <- matrix(huxtable_env$huxtable_default_attrs$border_color, nrow(x), ncol(x))
-  color[...] <- value$color
-
-  new_brdr(
-    thickness = thickness,
-    style     = style,
-    color     = color
-  )
-}
-
-
-#' @export
-#' @method `[<-.borderMatrix` list
-`[<-.borderMatrix.list` <- function (x, ..., value) {
-  values_are_brdr <- sapply(value, is_brdr)
-  if (! all(values_are_brdr)) stop("Unrecognized object ", value,
-        " passed into border function.\nPass a number or a `brdr` object.")
-  thickness <- x[] # subsetting unclasses
-  new_dims <- dim(thickness[..., drop = FALSE])
-  new_thickness <- sapply(value, getElement, name = "thickness")
-  dim(new_thickness) <- new_dims
-  new_style <- sapply(value, getElement, name = "style")
-  dim(new_style) <- new_dims
-  new_color <- sapply(value, getElement, name = "color")
-  dim(new_color) <- new_dims
-
-  value <- new_brdr(
-          thickness = new_thickness,
-          style     = new_style,
-          color     = new_color
-        )
-  # NextMethod uses the class vector of the object supplied to the generic,
-  # so we just invoke this manually:
-  `[<-.borderMatrix`(x, ..., value = value)
-}
-
-
-#' @export
-#' @method `[<-.borderMatrix` default
-`[<-.borderMatrix.default` <- function (x, ..., value) {
-  thickness <- x[] # subsetting unclasses
-  thickness[...] <- value
-
-  thickness
-}
-
-

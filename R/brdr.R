@@ -37,15 +37,35 @@ format.brdr <- function(x, ...) {
 
 #' @export
 `[.brdr` <- function (x, ...) {
-  # new_brdr(
-  #   thickness = x$thickness[...],
-  #   style     = x$style[...],
-  #   color     = x$color[...]
-  # )
-  x$thickness[...]
+  new_brdr(
+    thickness = x$thickness[...],
+    style     = x$style[...],
+    color     = x$color[...]
+  )
 }
 
 
+
+#' Replace a subset of a brdr object
+#'
+#' You probably don't need to call this directly. If you want
+#' to access border thicknesses, do e.g.
+#'
+#' ```r
+#' l_borders <- brdr_thickness(left_border(ht))
+#' ```
+#'
+#' which will give you a matrix of numbers.
+#'
+#' @usage
+#' \method{[}{bdr}(x, ...) <- value
+#'
+#' @param x A `brdr` object.
+#' @param ... Indices.
+#' @param value A [brdr()] object, number or matrix.
+#'
+#' @return A [brdr()] object.
+#'
 #' @export
 #' @method `[<-` brdr
 #' @export `[<-.brdr`
@@ -71,6 +91,24 @@ format.brdr <- function(x, ...) {
   x$thickness[...] <- value
 
   x
+}
+
+
+#' Get thickness of a [brdr()] object.
+#'
+#' @param x A [brdr()] object.
+#'
+#' @return A number or numeric matrix.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' brdr_thickness(left_border(jams))
+#' brdr_thickness(brdr(1, "solid", "red"))
+#'
+brdr_thickness <- function (x) {
+  x$thickness
 }
 
 
