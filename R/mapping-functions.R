@@ -451,17 +451,16 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
     }
     rhs <- rep(named_vals, times = lengths(match_list))
 
-    if (length(default > 0)) {
-      unmatched <- seq_len(nrow(ht_submatrix) * ncol(ht_submatrix))
-      unmatched <- setdiff(unmatched, unlist(match_list))
-      if (length(unmatched) > 0) {
-        match_list <- c(match_list, unmatched)
-        rhs <- c(rhs, rep(default, length(unmatched)))
-      }
+    unmatched <- seq_len(nrow(ht_submatrix) * ncol(ht_submatrix))
+    unmatched <- setdiff(unmatched, unlist(match_list))
+
+    if (length(unmatched) > 0) {
+      match_list <- c(match_list, unmatched)
+      default <- if (length(default) > 0) default else NA
+      rhs <- c(rhs, rep(default, length(unmatched)))
     }
     res[unlist(match_list)] <- rhs
 
-    res[! any_matched] <- NA
     res <- maybe_ignore_na(res, current, ignore_na)
 
     res
