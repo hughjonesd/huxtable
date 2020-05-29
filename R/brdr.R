@@ -21,31 +21,6 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 }
 
 
-new_brdr <- function (thickness, style, color) {
-  structure(
-    list(thickness = thickness, style = style, color = color),
-    class = "brdr"
-  )
-}
-
-
-#' @export
-format.brdr <- function(x, ...) {
-  glue::glue("Border: thickness {x$thickness}, style {x$style}, color {x$color}")
-}
-
-
-#' @export
-`[.brdr` <- function (x, ...) {
-  new_brdr(
-    thickness = x$thickness[...],
-    style     = x$style[...],
-    color     = x$color[...]
-  )
-}
-
-
-
 #' Replace a subset of a brdr object
 #'
 #' You probably don't need to call this directly. If you want
@@ -74,26 +49,6 @@ format.brdr <- function(x, ...) {
 }
 
 
-#' @export
-#' @method `[<-.brdr` brdr
-`[<-.brdr.brdr` <- function(x, ..., value) {
-  x$thickness[...] <- value$thickness
-  x$style[...]     <- value$style
-  x$color[...]     <- value$color
-
-  x
-}
-
-
-#' @export
-#' @method `[<-.brdr` default
-`[<-.brdr.default` <- function(x, ..., value) {
-  x$thickness[...] <- value
-
-  x
-}
-
-
 #' Get thickness of a [brdr()] object.
 #'
 #' @param x A [brdr()] object.
@@ -112,6 +67,20 @@ brdr_thickness <- function (x) {
 }
 
 
+new_brdr <- function (thickness, style, color) {
+  structure(
+    list(thickness = thickness, style = style, color = color),
+    class = "brdr"
+  )
+}
+
+
+#' @export
+format.brdr <- function(x, ...) {
+  glue::glue("Border: thickness {x$thickness}, style {x$style}, color {x$color}")
+}
+
+
 #' @export
 print.brdr <- function (x, ...) cat(format(x))
 
@@ -121,4 +90,108 @@ is_brdr <- function(x) inherits(x, "brdr")
 
 is_borderish <- function (x) {
   (is.numeric(x) && all(x >= 0)) || is_brdr(x)
+}
+
+
+#' @export
+#' @method `[<-.brdr` brdr
+`[<-.brdr.brdr` <- function(x, ..., value) {
+  x$thickness[...] <- value$thickness
+  x$style[...]     <- value$style
+  x$color[...]     <- value$color
+
+  x
+}
+
+
+#' @export
+#' @method `[<-.brdr` list
+`[<-.brdr.list` <- function (x, ..., value) {
+  # we assume each element is a brdr object of length 1 and then apply them to
+  # each element in turn.`...` is probably a logical vector with no
+  # indices, so we can't just concatenate the values.
+  assert_that(all(sapply(value, is_brdr)))
+  thickness <- vapply(value, function (y) y$thickness, FUN.VALUE = numeric(1))
+  style <- vapply(value, function (y) y$style, FUN.VALUE = character(1))
+  color <- vapply(value, function (y) y$color, FUN.VALUE = character(1))
+
+  x$thickness[...] <- thickness
+  x$style[...]     <- style
+  x$color[...]     <- color
+
+  x
+}
+
+
+#' @export
+#' @method `[<-.brdr` default
+`[<-.brdr.default` <- function(x, ..., value) {
+  x$thickness[...] <- value
+
+  x
+}
+
+
+#' @export
+`[.brdr` <- function (x, ...) {
+  thickness <- x$thickness[...]
+  style     <- x$style[...]
+  color     <- x$color[...]
+  new_brdr(
+    thickness = thickness,
+    style     = style,
+    color     = color
+  )
+}
+
+
+#' @export
+t.brdr <- function (x) {
+  new_brdr(
+    thickness = t(x$thickness),
+    style     = t(x$style),
+    color     = t(x$color)
+  )
+}
+
+
+#' @export
+dim.brdr <- function (x) {
+  dim(x$thickness)
+}
+
+
+#' @export
+`dimnames<-.brdr` <- function (x, value) {
+  dimnames(x$thickness) <- value
+  dimnames(x$style) <- value
+  dimnames(x$color) <- value
+
+  x
+}
+
+
+#' @export
+rbind.brdr <- function (b1, b2) {
+  new_brdr(
+    thickness = rbind(b1$thickness, b2$thickness),
+    style     = rbind(b1$style, b2$style),
+    color     = rbind(b1$color, b2$color)
+  )
+}
+
+
+#' @export
+cbind.brdr <- function (b1, b2) {
+  new_brdr(
+    thickness = cbind(b1$thickness, b2$thickness),
+    style     = cbind(b1$style, b2$style),
+    color     = cbind(b1$color, b2$color)
+  )
+}
+
+
+#' @export
+is.na.brdr <- function (x) {
+  is.na(x$thickness)
 }

@@ -19,7 +19,8 @@ by_colorspace(
 
 \item{na_color}{Color to return for \code{NA} values. Can be \code{NA} itself.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 
 \item{colwise}{Logical. Calculate breaks separately within each column?}

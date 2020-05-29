@@ -7,10 +7,9 @@
 # Finally, `left_border<-`(ht, value = lb_new) is called. The result
 # is assigned to ht!
 #
-# Plan: `left_border` returns an appropriate matrix of thicknesses as now,
-# but with a borderMatrix subclass.
-# `[<-.borderMatrix` returns an object of class brdr (a list of 3 matrices)
-# `left_border<-` copes with both brdr objects, and  matrices of
+# Plan: `left_border` returns a brdr() object.
+# `[<-.brder` returns another brdr.
+# `left_border<-` copes with both brdr objects, and matrices of
 # thickness, since it is also sometimes called directly.
 #
 # left_border_style(ht)[1, 3]
@@ -31,11 +30,14 @@ xxx_border_huxtable <- function(lr_tb, i, j, border_prop) {
     style <- mlist$style[eval(i), eval(j), drop = FALSE]
     color <- mlist$color[eval(i), eval(j), drop = FALSE]
 
-    new_brdr(
+    res <- new_brdr(
       thickness = thickness,
       style     = style,
       color     = color
     )
+    dimnames(res) <- dimnames(ht)
+
+    res
   }
 }
 
@@ -98,8 +100,16 @@ bottom_border.huxtable <- xxx_border_huxtable("tb_borders",
 
 
 xxx_border_arrow_yyy_hux <- function(lr_tb, i, j, border_prop) {
+  prop_name_default <- switch(border_prop,
+          "thickness" = "border",
+          "color"     = "border_color",
+          "style"     = "border_style"
+        )
+
   function(ht, value) {
     force(value)
+    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop_name_default]]
+
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
@@ -184,6 +194,14 @@ xxx_border_arrow_yyy_hux_brdr <- function (lr_tb, i, j) {
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
     last_row <- nrow(ht) + 1
+
+    value$thickness[is.na(value$thickness)] <-
+          huxtable_env$huxtable_default_attrs[["border"]]
+    value$color[is.na(value$color)] <-
+          huxtable_env$huxtable_default_attrs[["border_color"]]
+    value$style[is.na(value$style)] <-
+          huxtable_env$huxtable_default_attrs[["border_style"]]
+
     mlist$thickness[eval(i), eval(j)] <- value$thickness
     mlist$color[eval(i), eval(j)]     <- value$color
     mlist$style[eval(i), eval(j)]     <- value$style

@@ -9,7 +9,8 @@ by_cases(..., ignore_na = TRUE)
 \arguments{
 \item{...}{A list of two-sided formulas interpreted by \code{case_when}.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 }
 \value{

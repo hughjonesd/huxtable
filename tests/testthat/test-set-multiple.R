@@ -3,17 +3,17 @@
 test_that("set_all_*", {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_all_borders(ht, 1)
-  expect_equivalent(unclass(top_border(ht2)), matrix(1, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht2)), matrix(1, 2, 2))
 
   ht4 <- set_all_borders(ht, 1, 2, 1)
-  expect_equivalent(top_border(ht4)[1, 2],    1)
-  expect_equivalent(left_border(ht4)[1, 2],   1)
-  expect_equivalent(bottom_border(ht4)[1, 2], 1)
-  expect_equivalent(right_border(ht4)[1, 2],  1)
-  expect_equivalent(top_border(ht4)[2, 1],    0)
-  expect_equivalent(left_border(ht4)[2, 1],   0)
-  expect_equivalent(bottom_border(ht4)[2, 1], 0)
-  expect_equivalent(right_border(ht4)[2, 1],  0)
+  expect_equivalent(brdr_thickness(top_border(ht4))[1, 2],    1)
+  expect_equivalent(brdr_thickness(left_border(ht4))[1, 2],   1)
+  expect_equivalent(brdr_thickness(bottom_border(ht4))[1, 2], 1)
+  expect_equivalent(brdr_thickness(right_border(ht4))[1, 2],  1)
+  expect_equivalent(brdr_thickness(top_border(ht4))[2, 1],    0)
+  expect_equivalent(brdr_thickness(left_border(ht4))[2, 1],   0)
+  expect_equivalent(brdr_thickness(bottom_border(ht4))[2, 1], 0)
+  expect_equivalent(brdr_thickness(right_border(ht4))[2, 1],  0)
 
   rownum <- 1
   colnum <- 2
@@ -25,24 +25,24 @@ test_that("set_all_*", {
 
   border_size <- 2
   ht6 <- set_all_borders(ht, border_size)
-  expect_equivalent(unclass(top_border(ht6)), matrix(border_size, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht6)), matrix(border_size, 2, 2))
 
   ht7 <- set_all_borders(ht, 1:2, tidyselect::matches("a|b"), 1)
-  expect_equivalent(unclass(top_border(ht7)), matrix(1, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht7)), matrix(1, 2, 2))
 })
 
 
 test_that("set_lr/tb_* functions", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
-  expect_equivalent(unclass(left_border(set_lr_borders(ht))),   matrix(0.4, 2, 2))
-  expect_equivalent(unclass(right_border(set_lr_borders(ht))),  matrix(0.4, 2, 2))
-  expect_equivalent(unclass(top_border(set_lr_borders(ht))),    matrix(0, 2, 2))
-  expect_equivalent(unclass(bottom_border(set_lr_borders(ht))), matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(left_border(set_lr_borders(ht))),   matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(right_border(set_lr_borders(ht))),  matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(set_lr_borders(ht))),    matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(bottom_border(set_lr_borders(ht))), matrix(0, 2, 2))
 
-  expect_equivalent(unclass(left_border(set_tb_borders(ht))),   matrix(0, 2, 2))
-  expect_equivalent(unclass(right_border(set_tb_borders(ht))),  matrix(0, 2, 2))
-  expect_equivalent(unclass(top_border(set_tb_borders(ht))),    matrix(0.4, 2, 2))
-  expect_equivalent(unclass(bottom_border(set_tb_borders(ht))), matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(left_border(set_tb_borders(ht))),   matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(right_border(set_tb_borders(ht))),  matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(set_tb_borders(ht))),    matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(bottom_border(set_tb_borders(ht))), matrix(0.4, 2, 2))
 
   expect_equivalent(left_border_color(set_lr_border_colors(ht, "red")),   matrix("red", 2, 2))
   expect_equivalent(right_border_color(set_lr_border_colors(ht, "red")),  matrix("red", 2, 2))
@@ -89,7 +89,7 @@ test_that("set_all_* functions work when huxtable is not attached", {
   expect_silent(ht4 <- huxtable::set_all_padding(ht, 1))
   expect_silent(ht5 <- huxtable::set_all_border_styles(ht, "double"))
   library(huxtable) # we reattach before these tests, or we have problems with unavailable methods
-  expect_equivalent(unclass(top_border(ht2)), matrix(1, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht2)), matrix(1, 2, 2))
   expect_equivalent(top_border_color(ht3), matrix("red", 2, 2))
   expect_equivalent(top_padding(ht4), matrix(1, 2, 2))
   expect_equivalent(top_border_style(ht5), matrix("double", 2, 2))
@@ -100,15 +100,16 @@ test_that("set_outer_*", {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
   check_borders <- function (ht, suffix, un, set) {
+    wrapper <- if (suffix == "") brdr_thickness else identity
     funcs <- paste0(c("top", "bottom", "left", "right"), sprintf("_border%s", suffix))
     funcs <- mget(funcs, inherits = TRUE)
-    expect_equivalent(unclass(funcs[[1]](ht)),
+    expect_equivalent(wrapper(funcs[[1]](ht)),
           matrix(c(un, un, un, un, set, un, un, set, un), 3, 3))
-    expect_equivalent(unclass(funcs[[2]](ht)),
+    expect_equivalent(wrapper(funcs[[2]](ht)),
           matrix(c(un, un, un, set, un, set, set, un, set), 3, 3))
-    expect_equivalent(unclass(funcs[[3]](ht)),
+    expect_equivalent(wrapper(funcs[[3]](ht)),
           matrix(c(un, un, un, un, set, set, un, un, un), 3, 3))
-    expect_equivalent(unclass(funcs[[4]](ht)),
+    expect_equivalent(wrapper(funcs[[4]](ht)),
           matrix(c(un, set, set, un, un, un, un, set, set), 3, 3))
   }
 
@@ -150,15 +151,15 @@ test_that("set_outer_borders() works with non-standard/empty position arguments"
   ht2 <- set_outer_borders(ht, 1)
   ht3 <- set_outer_borders(ht, everywhere, everywhere, 1)
   for (h in list(ht2, ht3)) {
-    expect_equivalent(unclass(top_border(h)), matrix(c(1, 0, 1, 0), 2, 2))
-    expect_equivalent(unclass(bottom_border(h)), matrix(c(0, 1, 0, 1), 2, 2))
-    expect_equivalent(unclass(left_border(h)), matrix(c(1, 1, 0, 0), 2, 2))
-    expect_equivalent(unclass(right_border(h)), matrix(c(0, 0, 1, 1), 2, 2))
+    expect_equivalent(brdr_thickness(top_border(h)), matrix(c(1, 0, 1, 0), 2, 2))
+    expect_equivalent(brdr_thickness(bottom_border(h)), matrix(c(0, 1, 0, 1), 2, 2))
+    expect_equivalent(brdr_thickness(left_border(h)), matrix(c(1, 1, 0, 0), 2, 2))
+    expect_equivalent(brdr_thickness(right_border(h)), matrix(c(0, 0, 1, 1), 2, 2))
   }
 
   ht4 <- set_outer_borders(ht, evens, everywhere, 1)
-  expect_equivalent(unclass(top_border(ht4)), matrix(c(0, 1, 0, 1), 2, 2))
-  expect_equivalent(unclass(bottom_border(ht4)), matrix(c(1, 1, 1, 1), 2, 2))
-  expect_equivalent(unclass(left_border(ht4)), matrix(c(0, 1, 0, 0), 2, 2))
-  expect_equivalent(unclass(right_border(ht4)), matrix(c(0, 0, 0, 1), 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht4)), matrix(c(0, 1, 0, 1), 2, 2))
+  expect_equivalent(brdr_thickness(bottom_border(ht4)), matrix(c(1, 1, 1, 1), 2, 2))
+  expect_equivalent(brdr_thickness(left_border(ht4)), matrix(c(0, 1, 0, 0), 2, 2))
+  expect_equivalent(brdr_thickness(right_border(ht4)), matrix(c(0, 0, 0, 1), 2, 2))
 })

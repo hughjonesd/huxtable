@@ -11,7 +11,8 @@ by_values(..., ignore_na = TRUE)
 \code{name} will have the property set to \code{value}. If there is a single unnamed argument,
 this is the default value for unmatched cells. More than one unnamed argument is an error.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 }
 \value{

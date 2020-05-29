@@ -19,7 +19,8 @@ values go in the higher group. \code{FALSE} by default.}
 \item{extend}{Extend \code{breaks} to \code{c(-Inf, breaks, Inf)}, i.e. include numbers below and above the
 outermost breaks. \code{TRUE} by default.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 }
 \value{
