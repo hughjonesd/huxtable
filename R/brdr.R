@@ -33,7 +33,7 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 #' which will give you a matrix of numbers.
 #'
 #' @usage
-#' \method{[}{bdr}(x, ...) <- value
+#' \method{[}{brdr}(x, ...) <- value
 #'
 #' @param x A `brdr` object.
 #' @param ... Indices.
@@ -172,7 +172,9 @@ dim.brdr <- function (x) {
 
 
 #' @export
-rbind.brdr <- function (b1, b2) {
+rbind.brdr <- function (...) {
+  b1 <- ..1
+  b2 <- ..2
   new_brdr(
     thickness = rbind(b1$thickness, b2$thickness),
     style     = rbind(b1$style, b2$style),
@@ -182,7 +184,9 @@ rbind.brdr <- function (b1, b2) {
 
 
 #' @export
-cbind.brdr <- function (b1, b2) {
+cbind.brdr <- function (...) {
+  b1 <- ..1
+  b2 <- ..2
   new_brdr(
     thickness = cbind(b1$thickness, b2$thickness),
     style     = cbind(b1$style, b2$style),

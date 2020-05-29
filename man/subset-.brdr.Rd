@@ -4,7 +4,7 @@
 \alias{[<-.brdr}
 \title{Replace a subset of a brdr object}
 \usage{
-\method{[}{bdr}(x, ...) <- value
+\method{[}{brdr}(x, ...) <- value
 }
 \arguments{
 \item{x}{A \code{brdr} object.}
