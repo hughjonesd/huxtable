@@ -11,10 +11,10 @@
 
 \item{...}{Indices.}
 
-\item{value}{A \code{\link[=bdr]{bdr()}} object, number, matrix, or list.}
+\item{value}{A \code{\link[=brdr]{brdr()}} object, number, matrix, or list.}
 }
 \value{
-A \code{\link[=bdr]{bdr()}} object.
+A \code{\link[=brdr]{brdr()}} object.
 }
 \description{
 This is used to manage border properties. Do not call it directly.

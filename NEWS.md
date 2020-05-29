@@ -66,7 +66,7 @@ as_hux(head(iris)) %>%
       set_bottom_border(1, everywhere)
 ```
 
-  - Or, you can use the new `bdr()` class to encapsulate border thickness, style
+* A new `brdr()` class encapsulates border thickness, style
   and colour:
   
 ```r

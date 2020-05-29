@@ -56,7 +56,7 @@ NULL
 #' @param ht A huxtable.
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
-#' @param value A numeric thickness or a [bdr()] object.
+#' @param value A numeric thickness or a [brdr()] object.
 #' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @details
@@ -64,7 +64,7 @@ NULL
 #' the same as `left_border(ht)[, 2]`, and setting one sets the other.
 #'
 #' Setting `left_border(ht) <- number` sets the border thickness.
-#' You can set multiple properties at once by using [bdr()].
+#' You can set multiple properties at once by using [brdr()].
 #'
 #' Currently in LaTeX, all non-zero border widths on a given line must be the
 #' same.
@@ -85,10 +85,10 @@ NULL
 #' bottom_border(jams)[1, ] <- 0.4
 #' jams
 #'
-#' bottom_border(jams)[1, ] <- bdr(0.4, "solid", "blue")
+#' bottom_border(jams)[1, ] <- brdr(0.4, "solid", "blue")
 #' jams
 #'
-#' set_bottom_border(jams, bdr(0.4, "solid", "green"))
+#' set_bottom_border(jams, brdr(0.4, "solid", "green"))
 #'
 #' @name borders
 NULL
@@ -166,7 +166,7 @@ NULL
 #'
 #' * Transparent borders with the alpha channel set are not guaranteed to work.
 #'
-#' @seealso [set-multiple], [bdr()]
+#' @seealso [set-multiple], [brdr()]
 #'
 #' @family border properties
 #'
@@ -252,7 +252,7 @@ NULL
 #' * In HTML, you will need to set a width of at least 3 to get a double border.
 #' * Only "solid" and "double" styles are currently implemented in LaTeX.
 #'
-#' @seealso [set-multiple], [bdr()]
+#' @seealso [set-multiple], [brdr()]
 #'
 #' @family border properties
 #'

@@ -9,8 +9,8 @@
 #
 # Plan: `left_border` returns an appropriate matrix of thicknesses as now,
 # but with a borderMatrix subclass.
-# `[<-.borderMatrix` returns an object of class bdr (a list of 3 matrices)
-# `left_border<-` copes with both bdr objects, and  matrices of
+# `[<-.borderMatrix` returns an object of class brdr (a list of 3 matrices)
+# `left_border<-` copes with both brdr objects, and  matrices of
 # thickness, since it is also sometimes called directly.
 #
 # left_border_style(ht)[1, 3]
@@ -175,7 +175,7 @@ xxx_border_arrow_yyy_hux <- function(lr_tb, i, j, border_prop) {
 
 
 
-xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
+xxx_border_arrow_yyy_hux_brdr <- function (lr_tb, i, j) {
   function (ht, value) {
     mlist <- attr(ht, lr_tb)
     last_col <- ncol(ht) + 1
@@ -191,27 +191,27 @@ xxx_border_arrow_yyy_hux_bdr <- function (lr_tb, i, j) {
 
 
 #' @export
-#' @method `left_border<-.huxtable` bdr
-`left_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("lr_borders",
+#' @method `left_border<-.huxtable` brdr
+`left_border<-.huxtable.brdr` <- xxx_border_arrow_yyy_hux_brdr("lr_borders",
         i = quote(seq_len(nrow(ht))), j = quote(-last_col))
 
 
 
 #' @export
-#' @method `right_border<-.huxtable` bdr
-`right_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("lr_borders",
+#' @method `right_border<-.huxtable` brdr
+`right_border<-.huxtable.brdr` <- xxx_border_arrow_yyy_hux_brdr("lr_borders",
       i = quote(seq_len(nrow(ht))), j = -1)
 
 
 #' @export
-#' @method `top_border<-.huxtable` bdr
-`top_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("tb_borders",
+#' @method `top_border<-.huxtable` brdr
+`top_border<-.huxtable.brdr` <- xxx_border_arrow_yyy_hux_brdr("tb_borders",
       i = quote(-last_row), j = quote(seq_len(ncol(ht))))
 
 
 #' @export
-#' @method `bottom_border<-.huxtable` bdr
-`bottom_border<-.huxtable.bdr` <- xxx_border_arrow_yyy_hux_bdr("tb_borders",
+#' @method `bottom_border<-.huxtable` brdr
+`bottom_border<-.huxtable.brdr` <- xxx_border_arrow_yyy_hux_brdr("tb_borders",
       i = -1, j = quote(seq_len(ncol(ht))))
 
 
@@ -278,9 +278,9 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #'
 #' @param x A `borderMatrix` object.
 #' @param ... Indices.
-#' @param value A [bdr()] object, number, matrix, or list.
+#' @param value A [brdr()] object, number, matrix, or list.
 #'
-#' @return A [bdr()] object.
+#' @return A [brdr()] object.
 #'
 #' @export
 #' @method `[<-` borderMatrix
@@ -290,7 +290,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   # nr x nc.
   # value is whatever the user is passing in like `left_border(ht) <- value`
   # The result of this call will be passed to `left_border<-`.
-  # So it could be a `bdr()` object or a normal matrix.
+  # So it could be a `brdr()` object or a normal matrix.
   #
   # but this may also be called in the course of normal huxtable manipulation,
   # e.g. if a user does
@@ -302,8 +302,8 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 
 
 #' @export
-#' @method `[<-.borderMatrix` bdr
-`[<-.borderMatrix.bdr` <- function (x, ..., value) {
+#' @method `[<-.borderMatrix` brdr
+`[<-.borderMatrix.brdr` <- function (x, ..., value) {
   thickness <- x[] # subsetting unclasses
   thickness[...] <- value$thickness
   style <- matrix(huxtable_env$huxtable_default_attrs$border_style, nrow(x), ncol(x))
@@ -311,7 +311,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   color <- matrix(huxtable_env$huxtable_default_attrs$border_color, nrow(x), ncol(x))
   color[...] <- value$color
 
-  new_bdr(
+  new_brdr(
     thickness = thickness,
     style     = style,
     color     = color
@@ -322,9 +322,9 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
 #' @export
 #' @method `[<-.borderMatrix` list
 `[<-.borderMatrix.list` <- function (x, ..., value) {
-  values_are_bdr <- sapply(value, is_bdr)
-  if (! all(values_are_bdr)) stop("Unrecognized object ", value,
-        " passed into border function.\nPass a number or a `bdr` object.")
+  values_are_brdr <- sapply(value, is_brdr)
+  if (! all(values_are_brdr)) stop("Unrecognized object ", value,
+        " passed into border function.\nPass a number or a `brdr` object.")
   thickness <- x[] # subsetting unclasses
   new_dims <- dim(thickness[..., drop = FALSE])
   new_thickness <- sapply(value, getElement, name = "thickness")
@@ -334,7 +334,7 @@ bottom_border_color.huxtable <- xxx_border_yyy_huxtable("tb_borders",
   new_color <- sapply(value, getElement, name = "color")
   dim(new_color) <- new_dims
 
-  value <- new_bdr(
+  value <- new_brdr(
           thickness = new_thickness,
           style     = new_style,
           color     = new_color

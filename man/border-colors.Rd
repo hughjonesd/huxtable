@@ -79,7 +79,7 @@ set_bottom_border_color(jams, "blue")
 
 }
 \seealso{
-\link{set-multiple}, \code{\link[=bdr]{bdr()}}
+\link{set-multiple}, \code{\link[=brdr]{brdr()}}
 
 Other border properties: 
 \code{\link{border-styles}},

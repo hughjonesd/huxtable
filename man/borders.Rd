@@ -60,7 +60,7 @@ map_bottom_border(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric thickness or a \code{\link[=bdr]{bdr()}} object.}
+\item{value}{A numeric thickness or a \code{\link[=brdr]{brdr()}} object.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
@@ -76,7 +76,7 @@ Borders are always "collapsed": \code{right_border(ht)[, 1]} is
 the same as \code{left_border(ht)[, 2]}, and setting one sets the other.
 
 Setting \code{left_border(ht) <- number} sets the border thickness.
-You can set multiple properties at once by using \code{\link[=bdr]{bdr()}}.
+You can set multiple properties at once by using \code{\link[=brdr]{brdr()}}.
 
 Currently in LaTeX, all non-zero border widths on a given line must be the
 same.
@@ -95,10 +95,10 @@ all non-zero horizontal border widths on a given line must be the same.
 bottom_border(jams)[1, ] <- 0.4
 jams
 
-bottom_border(jams)[1, ] <- bdr(0.4, "solid", "blue")
+bottom_border(jams)[1, ] <- brdr(0.4, "solid", "blue")
 jams
 
-set_bottom_border(jams, bdr(0.4, "solid", "green"))
+set_bottom_border(jams, brdr(0.4, "solid", "green"))
 
 }
 \seealso{

@@ -80,7 +80,7 @@ set_bottom_border_style(jams, "double")
 
 }
 \seealso{
-\link{set-multiple}, \code{\link[=bdr]{bdr()}}
+\link{set-multiple}, \code{\link[=brdr]{brdr()}}
 
 Other border properties: 
 \code{\link{border-colors}},
