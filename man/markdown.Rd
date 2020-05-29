@@ -32,6 +32,10 @@ For \code{set_markdown} and \code{map_markdown}, the modified huxtable.
 \description{
 Functions to get or set the \emph{markdown} property of huxtable cells.
 }
+\details{
+Markdown is currently implemented for HTML and LaTeX only. There is
+basic support for on-screen display.
+}
 \examples{
 
 jams2 <- set_markdown(jams,
@@ -48,4 +52,7 @@ jams4 <- map_markdown(jams,
         FALSE)
       )
 markdown(jams4)
+}
+\seealso{
+\code{\link[=set_markdown_contents]{set_markdown_contents()}}, a shortcut function.
 }

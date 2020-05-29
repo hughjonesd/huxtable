@@ -122,6 +122,10 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' @templateVar attr_val TRUE
 #' @templateVar attr_val2 FALSE
 #' @templateVar default TRUE
+#' @details
+#' Markdown is currently implemented for HTML and LaTeX only. There is
+#' basic support for on-screen display.
+#' @seealso [set_markdown_contents()], a shortcut function.
 NULL
 make_getter_setters("markdown", "cell", check_fun = is.logical, default = TRUE)
 
