@@ -136,7 +136,8 @@ test_that("map_left_border", {
         matrix(c(0, 1, 1, 0), 2, 2))
 
   ht10 <- map_left_border(ht, by_equal_groups(2, list(brdr(0), brdr(1))))
-  expect_equivalent(left_border(ht10)[], matrix(c(0, 1, 1, 0), 2, 2))
+  expect_equivalent(brdr_thickness(left_border(ht10)),
+        matrix(c(0, 1, 1, 0), 2, 2))
 
   ht_char <- hux(letters[1:2], letters[2:1])
   ht6 <- map_left_border(ht_char, by_values("a" = brdr(0), "b" = brdr(1)))

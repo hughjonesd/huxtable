@@ -1,5 +1,4 @@
 
-# miscellaneous public tools------------------------------------------------------------------------
 
 #' @import assertthat
 NULL

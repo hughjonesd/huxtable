@@ -166,7 +166,7 @@ NULL
 #'       by_values(a = "red", c = "yellow", "green"))
 by_values <- function (..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   named_vals <- vals[names(vals) != ""]
   targets <- names(named_vals)
   default <- vals[names(vals) == ""]
@@ -209,7 +209,7 @@ by_values <- function (..., ignore_na = TRUE) {
 #' map_background_color(ht,
 #'       by_cols("green", "grey"))
 by_rows <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   row_fn <- function (ht, rows, cols, current) {
@@ -229,7 +229,7 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
 #' @export
 #' @rdname by_rows
 by_cols <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   col_fn <- function (ht, rows, cols, current) {
@@ -425,7 +425,7 @@ by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
 by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   assert_that(is.flag(ignore_na), is.list(.grepl_args))
 
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   named_vals <- vals[names(vals) != ""]
   patterns <- names(named_vals)
   default <- vals[names(vals) == ""]
@@ -435,7 +435,8 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
     res <- current
     if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
-    ht_submatrix <- as.matrix(ht)[rows, cols]
+    # drop = FALSE not strictly necessary but let's be clean
+    ht_submatrix <- as.matrix(ht)[rows, cols, drop = FALSE]
     my_args$x <- ht_submatrix
     any_matched <- rep(FALSE, length(ht_submatrix))
     for (pt in patterns) {
@@ -593,4 +594,13 @@ maybe_ignore_na <- function(res, old, ignore_na) {
   if (isTRUE(ignore_na)) res[is.na(res)] <- old[is.na(res)]
 
   return(res)
+}
+
+
+list_or_c <- function (...) {
+  if (all(sapply(list(...), is.atomic))) {
+    c(...)
+  } else {
+    list(...)
+  }
 }
