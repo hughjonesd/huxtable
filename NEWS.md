@@ -110,6 +110,13 @@ as_hux(jams) %>%
 
 ## Other changes
 
+* You can now use [markdown](https://commonmark.org/help) within table cells. 
+  - Use `set_markdown(ht, rows, cols)` to turn this on.
+  - Or use the convenience function `set_markdown_contents()` to set cell 
+    contents that will be interpreted as markdown. 
+  - Markdown works for HTML and LaTeX. There's basic support for on-screen
+    display.
+
 * Huxtable now has the concept of header row and columns. 
   - By default, data frame column names will be headers.
   - To set other rows to be headers,
