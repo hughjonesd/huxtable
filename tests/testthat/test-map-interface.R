@@ -100,14 +100,14 @@ test_that("map_all_*", {
   m2 <- ! is.na(m) & m == 2
 
   ht2 <- map_all_borders(ht, by_ranges(1.5, c(1, 2)))
-  expect_true(all(left_border(ht2)[m1] == 1))
-  expect_true(all(right_border(ht2)[m1] == 1))
-  expect_true(all(top_border(ht2)[m1] == 1))
-  expect_true(all(bottom_border(ht2)[m1] == 1))
-  expect_true(all(left_border(ht2)[m2] == 2))
-  expect_true(all(right_border(ht2)[m2] == 2))
-  expect_true(all(top_border(ht2)[m2] == 2))
-  expect_true(all(bottom_border(ht2)[m2] == 2))
+  expect_true(all(brdr_thickness(left_border(ht2))[m1] == 1))
+  expect_true(all(brdr_thickness(right_border(ht2))[m1] == 1))
+  expect_true(all(brdr_thickness(top_border(ht2))[m1] == 1))
+  expect_true(all(brdr_thickness(bottom_border(ht2))[m1] == 1))
+  expect_true(all(brdr_thickness(left_border(ht2))[m2] == 2))
+  expect_true(all(brdr_thickness(right_border(ht2))[m2] == 2))
+  expect_true(all(brdr_thickness(top_border(ht2))[m2] == 2))
+  expect_true(all(brdr_thickness(bottom_border(ht2))[m2] == 2))
 
   ht3 <- map_all_border_colors(ht, by_ranges(1.5, c("red", "black")))
   expect_true(all(left_border_color(ht3)[m1]   == "red"))
@@ -131,10 +131,10 @@ test_that("map_all_*", {
   expect_true(all(bottom_border_style(ht4)[m2] == "double"))
 
   ht5 <- map_all_borders(ht, 1:3, 1, by_ranges(1.5, c(1, 2)))
-  expect_equivalent(left_border(ht5)[1:3, 1],    c(1, 0, 2))
-  expect_equivalent(top_border(ht5)[c(1, 3), 1],    c(1, 2))
-  expect_equivalent(right_border(ht5)[1:3, 1],   c(1, 0, 2))
-  expect_equivalent(bottom_border(ht5)[c(1, 3), 1], c(1, 2))
+  expect_equivalent(brdr_thickness(left_border(ht5))[1:3, 1],    c(1, 0, 2))
+  expect_equivalent(brdr_thickness(top_border(ht5))[c(1, 3), 1],    c(1, 2))
+  expect_equivalent(brdr_thickness(right_border(ht5))[1:3, 1],   c(1, 0, 2))
+  expect_equivalent(brdr_thickness(bottom_border(ht5))[c(1, 3), 1], c(1, 2))
 
   ht <- as_huxtable(matrix(1:10, 5, 2))
   ht6 <- map_all_padding(ht, by_ranges(3, c(0, 10)))

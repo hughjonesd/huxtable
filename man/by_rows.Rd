@@ -14,7 +14,8 @@ by_cols(..., from = 1, ignore_na = TRUE)
 
 \item{from}{Numeric. Row or column to start at.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 }
 \value{

@@ -3,7 +3,13 @@
 NULL
 
 
-ncharw <- function (x) nchar(x, type = "width")
+ncharw <- function (x, type = "width") {
+  if (requireNamespace("crayon", quietly = TRUE)) {
+    crayon::col_nchar(x, type = type)
+  } else {
+    nchar(x, type = type)
+  }
+}
 
 
 is_vectorish <- function (x) is.null(dim(x)) && ! is.list(x)

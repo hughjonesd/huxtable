@@ -76,7 +76,7 @@ test_that("set_* works with magrittr pipe", {
   expect_silent(ht2 <- ht_orig %>% set_font("times"))
   expect_silent(ht3 <- ht_orig %>% set_all_borders(1))
   expect_equivalent(font(ht2), matrix("times", 2, 2))
-  expect_equivalent(top_border(ht3)[], matrix(1, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(ht3)), matrix(1, 2, 2))
 })
 
 

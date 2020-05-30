@@ -14,7 +14,8 @@ is an error.}
 \item{.grepl_args}{A list of arguments to pass to \code{\link[=grepl]{grepl()}}. Useful options
 include \code{fixed}, \code{perl} and \code{ignore.case}.}
 
-\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged. Otherwise, \code{NA}
+\item{ignore_na}{If \code{TRUE}, \code{NA} values in the result will be left unchanged
+from their previous values. Otherwise, \code{NA}
 normally resets to the default.}
 }
 \value{

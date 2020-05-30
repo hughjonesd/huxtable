@@ -1,6 +1,4 @@
 
-context("Printing to various formats")
-
 
 test_that("to_screen gives warning with colour if crayon not installed", {
   ht <- hux(a = 1:2)
@@ -143,6 +141,21 @@ test_that("to_screen does not cut off multicols", {
   ht[2, 1] <- "some very long long text"
   colspan(ht)[2, 1] <- 2
   expect_match(to_screen(ht), "some very long long text", fixed = TRUE)
+})
+
+
+test_that("to_screen alignment not messed up by markdown", {
+  skip_if_not_installed("crayon")
+
+  jams_md <- jams
+  jams_md <- set_markdown_contents(jams_md, 1, 2, "**Price**")
+  jams_output <- to_screen(jams)
+  jams_md_output <- to_screen(jams_md)
+  jams_output <- crayon::strip_style(jams_output)
+  jams_md_output <- crayon::strip_style(jams_md_output)
+  spaces <- stringr::str_match(jams_output, "Type(.*?)Price")[1, 2]
+  spaces_md <- stringr::str_match(jams_md_output, "Type(.*?)Price")[1, 2]
+  expect_identical(spaces, spaces_md)
 })
 
 

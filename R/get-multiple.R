@@ -1,10 +1,10 @@
 
-get_all_borders <- function (ht, row, col, drop = TRUE) {
+get_all_borders <- function (ht, ..., drop = TRUE) {
   list(
-    left   = left_border(ht)[row, col, drop = drop],
-    right  = right_border(ht)[row, col, drop = drop],
-    top    = top_border(ht)[row, col, drop = drop],
-    bottom = bottom_border(ht)[row, col, drop = drop]
+    left   = brdr_thickness(left_border(ht)[..., drop = drop]),
+    right  = brdr_thickness(right_border(ht)[..., drop = drop]),
+    top    = brdr_thickness(top_border(ht)[..., drop = drop]),
+    bottom = brdr_thickness(bottom_border(ht)[..., drop = drop])
   )
 }
 

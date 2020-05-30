@@ -136,7 +136,8 @@ NULL
 #'   values go in the higher group. `FALSE` by default.
 #' @param extend Extend `breaks` to `c(-Inf, breaks, Inf)`, i.e. include numbers below and above the
 #'   outermost breaks. `TRUE` by default.
-#' @param ignore_na If `TRUE`, `NA` values in the result will be left unchanged. Otherwise, `NA`
+#' @param ignore_na If `TRUE`, `NA` values in the result will be left unchanged
+#'   from their previous values. Otherwise, `NA`
 #'   normally resets to the default.
 #' @param colwise Logical. Calculate breaks separately within each column?
 #' @name mapping-params
@@ -165,7 +166,7 @@ NULL
 #'       by_values(a = "red", c = "yellow", "green"))
 by_values <- function (..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   named_vals <- vals[names(vals) != ""]
   targets <- names(named_vals)
   default <- vals[names(vals) == ""]
@@ -175,18 +176,11 @@ by_values <- function (..., ignore_na = TRUE) {
 
   values_fn <- function (ht, rows, cols, current) {
     res <- current
-    # the awkward formulation below allows us to assign to res
-    # just once, which is necessary if res is a borderMatrix.
-    indices <- lapply(targets, function (tg) which(ht[rows, cols] == tg))
-    rhs <- rep(named_vals, times = lengths(indices))
-    if (length(default) > 0) {
-      unmatched <- setdiff(seq_len(nrow(ht) * ncol(ht)), unlist(indices))
-      if (length(unmatched) > 0) {
-        indices <- c(indices, list(unmatched))
-        rhs <- c(rhs, rep(default, length(unmatched)))
-      }
+    if (length(default) > 0) res[] <- default
+    for (tg in targets) {
+      res[ ht[rows, cols] == tg ] <- named_vals[[tg]]
     }
-    res[unlist(indices)] <- rhs
+
     res <- maybe_ignore_na(res, current, ignore_na)
     res
   }
@@ -215,7 +209,7 @@ by_values <- function (..., ignore_na = TRUE) {
 #' map_background_color(ht,
 #'       by_cols("green", "grey"))
 by_rows <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   row_fn <- function (ht, rows, cols, current) {
@@ -235,7 +229,7 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
 #' @export
 #' @rdname by_rows
 by_cols <- function (..., from = 1, ignore_na = TRUE) {
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
   col_fn <- function (ht, rows, cols, current) {
@@ -431,38 +425,28 @@ by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
 by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   assert_that(is.flag(ignore_na), is.list(.grepl_args))
 
-  vals <- if (all(sapply(list(...), is.atomic))) c(...) else list(...)
+  vals <- list_or_c(...)
   named_vals <- vals[names(vals) != ""]
   patterns <- names(named_vals)
   default <- vals[names(vals) == ""]
   if (is.null(names(vals))) default <- vals
   if (length(default) > 1) stop("At most one element of `...` can be unnamed")
-
   matching_fn <- function (ht, rows, cols, current) {
     res <- current
+    if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
+    # drop = FALSE not strictly necessary but let's be clean
     ht_submatrix <- as.matrix(ht)[rows, cols, drop = FALSE]
     my_args$x <- ht_submatrix
-
-    match_list <- list()
+    any_matched <- rep(FALSE, length(ht_submatrix))
     for (pt in patterns) {
       my_args$pattern <- pt
-      match_list[[pt]] <- do.call(grep, my_args)
+      matches <- do.call(grepl, my_args)
+      any_matched <- any_matched | matches
+      res[matches] <- named_vals[[pt]]
     }
-    rhs <- rep(named_vals, times = lengths(match_list))
-
-    unmatched <- seq_len(nrow(ht_submatrix) * ncol(ht_submatrix))
-    unmatched <- setdiff(unmatched, unlist(match_list))
-
-    if (length(unmatched) > 0) {
-      match_list <- c(match_list, unmatched)
-      default <- if (length(default) > 0) default else NA
-      rhs <- c(rhs, rep(default, length(unmatched)))
-    }
-    res[unlist(match_list)] <- rhs
-
+    res[! any_matched] <- NA
     res <- maybe_ignore_na(res, current, ignore_na)
-
     res
   }
 
@@ -610,4 +594,13 @@ maybe_ignore_na <- function(res, old, ignore_na) {
   if (isTRUE(ignore_na)) res[is.na(res)] <- old[is.na(res)]
 
   return(res)
+}
+
+
+list_or_c <- function (...) {
+  if (all(sapply(list(...), is.atomic))) {
+    c(...)
+  } else {
+    list(...)
+  }
 }

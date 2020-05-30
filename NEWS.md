@@ -67,12 +67,15 @@ as_hux(head(iris)) %>%
 ```
 
 * A new `brdr()` class encapsulates border thickness, style
-  and colour:
+  and colour. You can set all properties at once by writing, e.g.:
   
 ```r
 as_hux(jams) %>% 
-      set_bottom_border(1, everywhere, bdr(1, "solid", "darkgreen"))
+      set_bottom_border(1, everywhere, bdr(1, "dotted", "darkgreen"))
 ```
+  
+  `left_border(ht)` and friends return a `brdr` object. To access the border
+  thickness, write `brdr_thickness(left_border(ht))`.
   
 * Various deprecated items have been removed:
   - The 3-argument form of `set_*`. Instead, use `map_*`. 
