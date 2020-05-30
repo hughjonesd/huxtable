@@ -106,3 +106,15 @@ test_that("set_contents works", {
   skip_if_not_installed("dplyr")
   expect_equivalent(set_contents(ht, 1, dplyr::matches("b"), 0), set_contents(ht, 1, 2, 0))
 })
+
+
+test_that("set_markdown_contents", {
+  ht <- hux(1:2, 1:2)
+  expect_silent(ht2 <- set_markdown_contents(ht, "**foo**"))
+  expect_equivalent(markdown(ht2), matrix(TRUE, 2, 2))
+  expect_equivalent(as.matrix(ht2), matrix("**foo**", 2, 2))
+
+  expect_silent(ht2 <- set_markdown_contents(ht, 1, 2, "**foo**"))
+  expect_equivalent(markdown(ht2), matrix(c(FALSE, FALSE, TRUE, FALSE), 2, 2))
+  expect_equivalent(ht2[[1, 2]], "**foo**")
+})

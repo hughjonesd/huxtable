@@ -23,8 +23,8 @@ test_that(".onLoad works and sets options", {
 
 test_dplyr_methods <- function () {
   huxtable:::.onLoad(system.file(package = "huxtable"), "huxtable")
-  expected_methods <- c("arrange", "arrange_", "filter", "filter_", "mutate", "mutate_", "rename",
-    "rename_", "select", "select_", "slice", "slice_", "transmute", "transmute_")
+  expected_methods <- c("arrange", "arrange_", "filter", "filter_", "mutate",
+        "mutate_",  "slice", "slice_", "transmute", "transmute_")
   dplyr_methods <- getNamespaceInfo("dplyr", "S3methods")  # will load dplyr
   dplyr_methods <- as.data.frame(dplyr_methods[, 1:2])
   names(dplyr_methods) <- c("generic", "class")
@@ -68,7 +68,7 @@ test_that(".onLoad gets S3 methods registered if namespace loaded", {
 })
 
 
-test_that("install/report_latex_dependencies run", {
+test_that("install/report_latex_dependencies", {
   skip_if_not_installed("tinytex")
 
   expect_silent(packages <- report_latex_dependencies(quiet = TRUE))
@@ -79,6 +79,21 @@ test_that("install/report_latex_dependencies run", {
     expect_error(x <- install_latex_dependencies(), regexp = NA)
   )
   expect_true(x)
+
+  expect_silent(package_str <- report_latex_dependencies(quiet = TRUE,
+        as_string = TRUE))
+  expect_match(package_str, "\\\\usepackage\\{array\\}")
+})
+
+
+test_that("report_latex_dependencies checks adjustbox", {
+  with_mock(
+    "tinytex::tlmgr" = function (...) "1.0",
+    {
+      expect_warning(check_adjustbox(quiet = FALSE), "adjustbox")
+      expect_equivalent(check_adjustbox(), FALSE)
+    }
+  )
 })
 
 
