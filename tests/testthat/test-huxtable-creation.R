@@ -32,6 +32,14 @@ test_that("add_rownames", {
 })
 
 
+test_that("add_colnames with as_huxtable.matrix", {
+  mat <- matrix(1:4, 2, 2, dimnames = list(letters[1:2], LETTERS[1:2]))
+  ht <- as_hux(mat, add_colnames = TRUE, add_rownames = TRUE)
+  expect_equivalent(ht[1, 2:3], colnames(mat))
+  expect_equivalent(ht$rownames[2:3], rownames(mat))
+})
+
+
 test_that("create huxtable using tribble_hux()", {
   for (addc in c(TRUE, FALSE)) {
     expect_silent(ht <- tribble_hux(
