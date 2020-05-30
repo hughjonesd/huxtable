@@ -103,6 +103,9 @@ as_hux(jams) %>%
 
 * huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
 
+* `set_cell_properties()` has been renamed `style_cells()`. It is retained
+  as a soft-deprecated alias.
+  
 * Various themes have been tweaked:
   - `theme_basic()` now has bold headers, a border at the bottom, and no
     header column by default.
@@ -129,9 +132,6 @@ as_hux(jams) %>%
     `style_header_rows()` to set multiple properties on headers.
   - In themes, `header_row/col = TRUE` set the first row/col to a header,
     and style all header rows/cols.
-
-* `set_cell_properties()` has been renamed `style_cells()`. It is retained
-  as a soft-deprecated alias.
 
 * `set_bold()` and `set_italic()` now use a default value of `TRUE`. So you
   can write e.g.
@@ -180,6 +180,9 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
   New functions `set_tb_borders()` etc. to set top and bottom properties 
   simultaneously. Analogous `map_` versions of all of these.
   
+* New function `set_outer_padding()` sets padding around a range of cells,
+  similarly to `set_outer_borders()`.
+
 * A new table-level property, `caption_width()`, allows you to set the width of 
   the caption. The default, `NA`, sets the width equal to the table width.
   

@@ -163,3 +163,30 @@ test_that("set_outer_borders() works with non-standard/empty position arguments"
   expect_equivalent(brdr_thickness(left_border(ht4)), matrix(c(0, 1, 0, 0), 2, 2))
   expect_equivalent(brdr_thickness(right_border(ht4)), matrix(c(0, 0, 0, 1), 2, 2))
 })
+
+
+test_that("set_outer_padding", {
+  ht <- hux(1:2, 1:2)
+  ht2 <- set_outer_padding(ht, 10)
+  expect_equivalent(left_padding(ht2),   matrix(c(10, 10, 6, 6), 2, 2))
+  expect_equivalent(top_padding(ht2),    matrix(c(10, 6, 10, 6), 2, 2))
+  expect_equivalent(bottom_padding(ht2), matrix(c(6, 10, 6, 10), 2, 2))
+  expect_equivalent(right_padding(ht2),  matrix(c(6, 6, 10, 10), 2, 2))
+
+  ht3 <- set_outer_padding(ht, 2, 2, 10)
+  expect_equivalent(left_padding(ht3),   matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(top_padding(ht3),    matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(bottom_padding(ht3), matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(right_padding(ht3),   matrix(c(6, 6, 6, 10), 2, 2))
+})
+
+test_that("set_markdown_contents", {
+  ht <- hux(1:2, 1:2)
+  expect_silent(ht2 <- set_markdown_contents(ht, "**foo**"))
+  expect_equivalent(markdown(ht2), matrix(TRUE, 2, 2))
+  expect_equivalent(as.matrix(ht2), matrix("**foo**", 2, 2))
+
+  expect_silent(ht2 <- set_markdown_contents(ht, 1, 2, "**foo**"))
+  expect_equivalent(markdown(ht2), matrix(c(FALSE, FALSE, TRUE, FALSE), 2, 2))
+  expect_equivalent(ht2[[1, 2]], "**foo**")
+})

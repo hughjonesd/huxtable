@@ -4,6 +4,7 @@
 \alias{set_outer_borders}
 \alias{set_outer_border_colors}
 \alias{set_outer_border_styles}
+\alias{set_outer_padding}
 \title{Set borders around a rectangle of cells}
 \usage{
 set_outer_borders(ht, row, col, value = 0.4)
@@ -11,6 +12,8 @@ set_outer_borders(ht, row, col, value = 0.4)
 set_outer_border_colors(ht, row, col, value)
 
 set_outer_border_styles(ht, row, col, value)
+
+set_outer_padding(ht, row, col, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -25,9 +28,11 @@ set_outer_border_styles(ht, row, col, value)
 Set borders around a rectangle of cells
 }
 \details{
-\code{set_outer_borders} sets borders round the top, bottom, left and right of a group
-of cells. Behaviour is undefined unless \code{row} and \code{col} specify contiguous sequences.
-\code{set_outer_border_colors} and \code{set_outer_border_styles} set border colors and styles.
+\code{set_outer_borders} sets borders round the top, bottom, left and
+right of a group of cells. Behaviour is undefined unless \code{row} and \code{col}
+specify contiguous sequences. \code{set_outer_border_colors} and
+\code{set_outer_border_styles} set border colors and styles. \code{set_outer_padding}
+sets padding, i.e. top padding on the top row of cells, etc.
 }
 \examples{
 ht2 <- huxtable(a = 1:3, b = 1:3)

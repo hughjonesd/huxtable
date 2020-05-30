@@ -4,9 +4,11 @@
 #' @inherit left_border params
 #' @param value Border width in points, border color, or border style (see [left_border_style()]).
 #' @details
-#' `set_outer_borders` sets borders round the top, bottom, left and right of a group
-#' of cells. Behaviour is undefined unless `row` and `col` specify contiguous sequences.
-#' `set_outer_border_colors` and `set_outer_border_styles` set border colors and styles.
+#' `set_outer_borders` sets borders round the top, bottom, left and
+#' right of a group of cells. Behaviour is undefined unless `row` and `col`
+#' specify contiguous sequences. `set_outer_border_colors` and
+#' `set_outer_border_styles` set border colors and styles. `set_outer_padding`
+#' sets padding, i.e. top padding on the top row of cells, etc.
 #'
 #' @export
 #' @examples
@@ -70,6 +72,24 @@ set_outer_border_styles <- function (ht, row, col, value) {
   right_border_style(ht)[row, max(col)]   <- value
   top_border_style(ht)[min(row), col]     <- value
   bottom_border_style(ht)[max(row), col]  <- value
+
+  ht
+}
+
+
+#' @rdname set_outer_borders
+#' @export
+set_outer_padding <- function (ht, row, col, value) {
+  assert_that(is_huxtable(ht))
+  rc <- outer_row_col_value(ht, row, col, value)
+  row <- rc$row
+  col <- rc$col
+  value <- rc$value
+
+  left_padding(ht)[row, min(col)]    <- value
+  right_padding(ht)[row, max(col)]   <- value
+  top_padding(ht)[min(row), col]     <- value
+  bottom_padding(ht)[max(row), col]  <- value
 
   ht
 }
