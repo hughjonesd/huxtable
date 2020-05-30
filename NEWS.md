@@ -196,6 +196,8 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 
 * Bugfixes for `options(huxtable.use_fontspec = TRUE)`.
 
+* Bugfix: `add_rownames = "string"` now works as promised.
+
 ## Other news
 
 New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 

@@ -12,6 +12,26 @@ test_that("create huxtable using hux[table]()", {
 })
 
 
+test_that("add_colnames", {
+  expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_colnames = TRUE))
+  expect_equal(nrow(ht), 4)
+  expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_colnames = FALSE))
+  expect_equal(nrow(ht), 3)
+})
+
+
+test_that("add_rownames", {
+  expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = TRUE))
+  expect_equal(ncol(ht), 3)
+  expect_equivalent(colnames(ht), c("rownames", "a", "b"))
+  expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = FALSE))
+  expect_equal(ncol(ht), 2)
+  expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = "foo"))
+  expect_equal(ncol(ht), 3)
+  expect_equivalent(colnames(ht), c("foo", "a", "b"))
+})
+
+
 test_that("create huxtable using tribble_hux()", {
   for (addc in c(TRUE, FALSE)) {
     expect_silent(ht <- tribble_hux(

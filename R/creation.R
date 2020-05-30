@@ -56,7 +56,12 @@ huxtable <- function (
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
-  assert_that(is.flag(add_colnames), is.flag(add_rownames), is.flag(autoformat))
+
+  assert_that(
+          is.flag(add_colnames),
+          is.flag(add_rownames) | is.string(add_rownames),
+          is.flag(autoformat)
+        )
 
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
   if (R.version$major >= 3 && R.version$minor >= 3) df_args$fix.empty.names <- FALSE
@@ -154,8 +159,11 @@ as_huxtable.default <- function (
         autoformat   = getOption("huxtable.autoformat", TRUE),
         ...
       ) {
-  assert_that(is.flag(add_colnames), is.flag(add_rownames) || is.character(add_rownames),
-        is.flag(autoformat))
+  assert_that(
+          is.flag(add_colnames),
+          is.flag(add_rownames) || is.character(add_rownames),
+          is.flag(autoformat)
+        )
 
   x <- new_huxtable(x)
 
