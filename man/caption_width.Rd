@@ -13,7 +13,7 @@ set_caption_width(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one numeric or character. Numerics are interpreted as percentages of text width. If \code{NA}, the caption will be set to the same width as the table. Set to \code{NA} to reset to the default, which is
+\item{value}{A length-one numeric or character. Numerics are interpreted as proportions of text width in LaTeX, or of table width in HTML. If \code{NA}, the caption will be set to the same width as the table. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 }
 \value{

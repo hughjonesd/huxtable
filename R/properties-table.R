@@ -45,7 +45,7 @@ make_getter_setters("caption_pos", "table", check_values = c("top", "bottom", "t
 #' @templateVar attr_name caption_width
 #' @templateVar attr_desc Caption width
 #' @templateVar value_param_desc
-#' A length-one numeric or character. Numerics are interpreted as percentages of text width. If `NA`, the caption will be set to the same width as the table.
+#' A length-one numeric or character. Numerics are interpreted as proportions of text width in LaTeX, or of table width in HTML. If `NA`, the caption will be set to the same width as the table.
 #'
 #' @family caption properties
 NULL

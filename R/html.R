@@ -31,8 +31,9 @@ to_html <- function (ht, ...) UseMethod("to_html")
 #'
 #' @return `print_notebook` prints HTML output suitable for use in an
 #' RStudio interactive notebook.
-print_notebook <- function(ht, ...) print(rmarkdown::html_notebook_output_html(to_html(ht)))
-
+print_notebook <- function(ht, ...) {
+  print(rmarkdown::html_notebook_output_html(to_html(ht)))
+}
 
 
 #' @export
@@ -116,26 +117,36 @@ to_html.huxtable <- function(ht, ...) {
   # get_visible_borders() data is in "real cell" position.
   # But we just want to grab the original data
   # and apply it
-  borders    <- get_all_borders(ht)
-  border_styles    <- get_all_border_styles(ht)
+  borders    <- get_visible_borders(ht)
+  border_styles <- collapsed_border_styles(ht)
   if (length(unlist(borders)) > 0 && any(unlist(borders) > 0 & unlist(borders) < 3 &
         unlist(border_styles) == "double"))
         warning("border_style set to \"double\" but border less than 3 points")
 
-  border_width <- sprintf(" border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;",
-        border_styles$top, border_styles$right, border_styles$bottom, border_styles$left,
-        borders$top, borders$right, borders$bottom, borders$left)
-  no_borders <- borders$top == 0 & borders$right == 0 & borders$bottom == 0 & borders$left == 0
+  bt <- borders$horiz[-nrow(border_styles$horiz),]
+  br <- borders$vert[, -1]
+  bb <- borders$horiz[-1,]
+  bl <- borders$vert[, -ncol(border_styles$vert)]
+  border_width <- sprintf(
+        " border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;",
+        border_styles$horiz[-nrow(border_styles$horiz),],
+        border_styles$vert[, -1],
+        border_styles$horiz[-1,],
+        border_styles$vert[, -ncol(border_styles$vert)],
+        bt, br, bb, bl
+      )
+  no_borders <- bt == 0 & br == 0 & bb == 0 & bl == 0
   border_width <- blank_where(border_width, no_borders)
 
   format_bc <- function (pos, col) {
     x <- sprintf(" border-%s-color: rgb(%s);", pos, format_color(col))
     blank_where(x, is.na(col))
   }
-  top_bc    <- top_border_color(ht)
-  bottom_bc <- bottom_border_color(ht)
-  left_bc   <- left_border_color(ht)
-  right_bc  <- right_border_color(ht)
+  border_colors <- collapsed_border_colors(ht)
+  top_bc    <- border_colors$horiz[-nrow(border_colors$horiz), ]
+  bottom_bc <- border_colors$horiz[-1, ]
+  left_bc   <- border_colors$vert[, -ncol(border_colors$vert)]
+  right_bc  <- border_colors$vert[, -1]
   border_color <- paste0(
           format_bc("top", top_bc),
           format_bc("right", right_bc),

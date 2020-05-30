@@ -3,11 +3,13 @@ title: "Huxtable table demo"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
-  html_document: default
   pdf_document:
+    toc: yes
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  html_document: 
+    toc: yes
 ---
 
 
@@ -15,6 +17,7 @@ output:
 
 library(huxtable)
 knitr::opts_chunk$set(echo = FALSE)
+options(huxtable.print = if (guess_knitr_output_format() == "latex") print_latex else print_html)
 ```
 
 
@@ -87,7 +90,7 @@ ht
 ```
 
 
-# Caption_pos
+# Caption_pos and caption_width
 
 ```{r, results = 'asis'}
 
@@ -95,8 +98,15 @@ for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomce
   ht <- make(nrow = 1) 
    caption(ht) <- paste0('caption\\_pos: ', pos)
    caption_pos(ht) <- pos
-  print_latex(ht)
+  print(ht)
+  
+  caption_width(ht) <- .5
+  caption(ht) <- paste(caption(ht), "caption\\_width: .5")
+  print(ht)
 }
+
+ht <- make(nrow = 1)
+
 
 ```
 
@@ -140,7 +150,8 @@ ht <- make(nrow = 4, text1 = long, text2 = long)
 ht[2:4,2] <- 'Shorter text'
 wrap(ht)[,1] <- TRUE
 ht <- set_align(ht, c('left', 'left', 'center', 'right'))
-caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left'
+caption(ht) <- 'Align by row: l/l/c/r, wrap TRUE on left, width .3'
+width(ht) <- 0.3
 ht
 ```
 
@@ -153,7 +164,7 @@ ht <- make(nrow = 2, ncol = 4, text1 = long, text2 = 'text', more_text = c('text
 ht <- map_valign(ht, by_cols('top', 'top', 'middle', 'bottom'))
 wrap(ht)[1,] <- TRUE
 wrap(ht)[,1] <- TRUE
-width(ht) <- .6
+width(ht) <- .4
 caption(ht) <- 'valign in columns 1-4: t/t/m/b; wrap TRUE at top (and bot left)'
 ht
 
@@ -193,11 +204,12 @@ ht
 ```{r}
 ht <- make(nrow = 4, text1 = long, text2 = long)
 wrap(ht)[,1] <- TRUE
-left_padding(ht)[1,] <- 12
-right_padding(ht)[2,] <- 12
-top_padding(ht)[3,] <- 12
-bottom_padding(ht)[4,] <- 12
-caption(ht) <- 'wrap TRUE on left; padding by row l/r/t/b'
+left_padding(ht)[1,] <- 18
+right_padding(ht)[2,] <- 18
+top_padding(ht)[3,] <- 18
+bottom_padding(ht)[4,] <- 18
+caption(ht) <- 'wrap TRUE on left; padding 18 by row l/r/t/b'
+width(ht) <- .25
 ht
 ```
 
@@ -208,15 +220,15 @@ ht
 ```{r}
 ht <- make(nrow = 4, text1 = long, text2 = long)
 col_width(ht) <- c(.2, .8)
-left_padding(ht)[1,] <- 12
-right_padding(ht)[2,] <- 12
-top_padding(ht)[3,] <- 12
-bottom_padding(ht)[4,] <- 12
-caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap FALSE'
+left_padding(ht)[1,] <- 18
+right_padding(ht)[2,] <- 18
+top_padding(ht)[3,] <- 18
+bottom_padding(ht)[4,] <- 18
+caption(ht) <- 'col\\_width .2, .8 padding 18 by row l/r/t/b, wrap FALSE'
 ht
 
 wrap(ht) <- TRUE
-caption(ht) <- 'col\\_width .2, .8 padding by row l/r/t/b, wrap TRUE'
+caption(ht) <- 'col\\_width .2, .8 padding 18 by row l/r/t/b, wrap TRUE'
 ht
 
 ```
@@ -265,6 +277,37 @@ ht
 ```
 
 \FloatBarrier
+
+
+# Borders through merged cells
+
+
+```{r}
+ht <- make()
+ht <- set_all_borders(ht, 0)
+rowspan(ht)[1, 1] <- 2
+bottom_border(ht)[1, 1] <- 1
+caption(ht) <- "border at bottom of row 1 col 1"
+ht
+
+bottom_border(ht)[1, ] <- 1
+caption(ht) <- "border at bottom of all of row 1"
+ht
+```
+
+```{r}
+ht <- make()
+ht <- set_all_borders(ht, 0)
+colspan(ht)[1, 1] <- 2
+right_border(ht)[1, 1] <- 1
+caption(ht) <- "border at right of row 1 col 1"
+ht
+
+right_border(ht)[, 1] <- 1
+caption(ht) <- "border at right of all of column 1"
+ht
+```
+
 
 # Multirow/multicol and borders
 
