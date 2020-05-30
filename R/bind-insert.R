@@ -128,6 +128,7 @@ insert_column <- function (ht, ..., after = 0, fill = NULL, rowspan = 1,
   res <- if (! is.null(ht2)) cbind(res, ht2) else res
 
   rowspan(res)[1, after + 1] <- rowspan
+  rownames(res) <- rownames(ht)
 
   res
 }
@@ -162,6 +163,7 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
   res <- if (! is.null(ht2)) rbind(res, ht2) else res
 
   colspan(res)[after + 1, 1] <- colspan
+  colnames(res) <- colnames(ht)
 
   res
 }
