@@ -48,8 +48,5 @@ matrix:
       - _R_CHECK_FORCE_SUGGESTS_=FALSE
       - _R_CHECK_RD_XREFS_=FALSE
 after_success:
-  - >
-    test $TRAVIS_BRANCH = "master" &&
-    test $TRAVIS_R_VERSION_STRING = "release"
-    && Rscript run-covr.R
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript run-covr.R
 
