@@ -15,15 +15,15 @@ map_markdown(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be rendered as \href{https://commonmark.org/help/}{markdown}.
-
-Set to \code{NA} to reset to the default, which is \code{FALSE}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be rendered as \href{https://commonmark.org/help/}{markdown}.
+
+Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 }
 \value{
 For \code{markdown}, the \code{markdown} property.

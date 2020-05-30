@@ -9,10 +9,9 @@ merge_cells(ht, row, col)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier. See \code{\link{rowspecs}} for details. Only the minimum and maximum
-rows and columns are used.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
-\item{col}{A column specifier.}
+\item{col}{An optional column specifier.}
 }
 \value{
 The \code{ht} object.
@@ -34,6 +33,7 @@ merge_cells(ht, 2:3, 1:2)
 }
 \seealso{
 Other cell merging: 
-\code{\link{merge_across}()}
+\code{\link{merge_across}()},
+\code{\link{merge_repeated_rows}()}
 }
 \concept{cell merging}

@@ -15,15 +15,15 @@ map_escape_contents(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
-
-Set to \code{NA} to reset to the default, which is \code{TRUE}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
+
+Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 }
 \value{
 For \code{escape_contents}, the \code{escape_contents} property.

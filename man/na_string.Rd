@@ -15,15 +15,15 @@ map_na_string(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character string. This will be used to replace NA values in the display.
-
-Set to \code{NA} to reset to the default, which is \code{""}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A character string. This will be used to replace NA values in the display.
+
+Set to \code{NA} to reset to the default, which is \code{""}.}
 }
 \value{
 For \code{na_string}, the \code{na_string} property.

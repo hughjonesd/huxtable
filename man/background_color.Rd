@@ -15,15 +15,15 @@ map_background_color(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix of valid R color names.
-
-Set to \code{NA} to reset to the default, which is \code{"NA"}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A character vector or matrix of valid R color names.
+
+Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 }
 \value{
 For \code{background_color}, the \code{background_color} property.

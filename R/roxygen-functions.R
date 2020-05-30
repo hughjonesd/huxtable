@@ -27,10 +27,9 @@ make_border_aliases <- function (suffix) {
     c("map", "set"),
     lrtb,
     FUN = paste,
-    "border",
+    suffix,
     sep = "_"
   )
-  fns <- paste0(fns, suffix)
-  fns <- c(fns, paste0(lrtb, "_border", suffix, "<-"))
+  fns <- c(fns, paste0(lrtb, "_", suffix, "<-"))
   paste("@aliases", paste(fns, collapse = " "))
 }

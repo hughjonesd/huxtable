@@ -33,6 +33,7 @@ merge_down(ht, 2:4, 2:3)
 }
 \seealso{
 Other cell merging: 
-\code{\link{merge_cells}()}
+\code{\link{merge_cells}()},
+\code{\link{merge_repeated_rows}()}
 }
 \concept{cell merging}

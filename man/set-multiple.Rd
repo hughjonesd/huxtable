@@ -115,3 +115,6 @@ ht <- set_tb_borders(ht)
 set_tb_border_colors(ht, "red")
 set_tb_border_styles(ht, "double")
 }
+\seealso{
+\link{borders}, \link{border-colors}, \link{border-styles}, \link{padding}.
+}

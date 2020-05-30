@@ -20,15 +20,15 @@ map_font(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector of font names.
-
-Set to \code{NA} to reset to the default, which is \code{"NA"}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A character vector of font names.
+
+Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 }
 \value{
 For \code{font}, the \code{font} property.

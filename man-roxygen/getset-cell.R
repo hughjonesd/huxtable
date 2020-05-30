@@ -33,19 +33,18 @@ default_str <- if (exists("default")) paste("=", default) else ""
 #' map_<%= attr_name %>(ht, row, col, fn)
 #'
 #' @param ht A huxtable.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param fn A mapping function. See [mapping-functions] for details.
 #' @param value <%= value_param_desc %>
 #'   <% if (! exists('NA_does_not_reset')) {%>
 #'   Set to `NA` to reset to the default, which is `<%= default_property %>`.
 #'   <% } else { %>
 #'   Note that setting to `NA` does not reset to the default.
 #'   <% } %>
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
-#' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
 #' For `set_<%= attr_name %>` and `map_<%= attr_name %>`, the modified huxtable.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> map_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>
-

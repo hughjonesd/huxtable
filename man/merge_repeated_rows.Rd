@@ -9,12 +9,12 @@ merge_repeated_rows(ht, row, col)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specification.}
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 
-\item{col}{A column specification.}
+\item{col}{An optional column specifier.}
 }
 \value{
-The modified huxtable.
+The \code{ht} object.
 }
 \description{
 Merge repeated rows into multirow cells
@@ -34,5 +34,8 @@ merge_repeated_rows(ht)
 merge_repeated_rows(ht, everywhere, "Type")
 }
 \seealso{
-merge_cells
+Other cell merging: 
+\code{\link{merge_across}()},
+\code{\link{merge_cells}()}
 }
+\concept{cell merging}

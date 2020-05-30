@@ -2,9 +2,8 @@
 #' Merge a range of cells
 #'
 #' @param ht A huxtable.
-#' @param row A row specifier. See \code{\link{rowspecs}} for details. Only the minimum and maximum
-#' rows and columns are used.
-#' @param col A column specifier.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
 #'
 #' @details
 #' `merge_cells(ht, c(min_row, max_row), c(min_col, max_col))` is equivalent to
@@ -47,9 +46,7 @@ merge_cells <- function (ht, row, col) {
 #' `merge_across` creates multicolumn cells within each row. `merge_down` creates
 #' multirow cells within each column.
 #'
-#' @inherit left_border params
-#'
-#' @return The `ht` object.
+#' @inherit merge_cells params return
 #'
 #' @export
 #'
@@ -94,11 +91,8 @@ merge_down <- function (ht, row, col) {
 
 #' Merge repeated rows into multirow cells
 #'
-#' @param ht A huxtable.
-#' @param row A row specification.
-#' @param col A column specification.
+#' @inherit merge_cells params return
 #'
-#' @return The modified huxtable.
 #' @export
 #'
 #' @details
@@ -107,7 +101,7 @@ merge_down <- function (ht, row, col) {
 #'
 #' If `row` contains gaps, results may be unexpected (and a warning is given).
 #'
-#' @seealso merge_cells
+#' @family cell merging
 #'
 #' @examples
 #' ht <- as_hux(jams[c(1, 2, 2, 3, 3, 4), ])

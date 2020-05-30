@@ -51,6 +51,7 @@ huxtable_table_attrs <- c(
 #' @evalNamespace make_exports(huxtable_cell_attrs, with_map = TRUE)
 NULL
 
+
 huxtable_env <- new.env()
 huxtable_env$huxtable_default_attrs <- list(
         rowspan             = 1,

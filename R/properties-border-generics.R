@@ -51,13 +51,10 @@ NULL
 #'
 #' These functions set borders between cells.
 #'
-#' @eval make_border_aliases("")
+#' @eval make_border_aliases("border")
 #'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
+#' @template property-params
 #' @param value A numeric thickness or a [brdr()] object.
-#' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @details
 #' Borders are always "collapsed": `right_border(ht)[, 1]` is
@@ -150,13 +147,10 @@ NULL
 #'
 #' These functions set border colors.
 #'
-#' @eval make_border_aliases("_color")
+#' @eval make_border_aliases("border_color")
 #'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
+#' @template property-params
 #' @param value A valid R color, e.g. `"red"`, `"#FF0000"`.
-#' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_color(ht)[, 1]` is
@@ -235,13 +229,10 @@ NULL
 #'
 #' These functions set border styles.
 #'
-#' @eval make_border_aliases("_style")
+#' @eval make_border_aliases("border_style")
 #'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
+#' @template property-params
 #' @param value One of `"solid"`, `"double"`, `"dashed"` or `"dotted"`.
-#' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_style(ht)[, 1]` is

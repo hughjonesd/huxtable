@@ -15,15 +15,15 @@ map_wrap(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
-
-Set to \code{NA} to reset to the default, which is \code{TRUE}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
+
+Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 }
 \value{
 For \code{wrap}, the \code{wrap} property.

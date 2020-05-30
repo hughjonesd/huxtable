@@ -51,9 +51,9 @@ map_bottom_border_style(ht, row, col, fn)
 
 \item{col}{An optional column specifier.}
 
-\item{value}{One of \code{"solid"}, \code{"double"}, \code{"dashed"} or \code{"dotted"}.}
-
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{One of \code{"solid"}, \code{"double"}, \code{"dashed"} or \code{"dotted"}.}
 }
 \description{
 These functions set border styles.

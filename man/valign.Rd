@@ -15,15 +15,15 @@ map_valign(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix which may be "top", "middle", "bottom" or \code{NA}.
-
-Set to \code{NA} to reset to the default, which is \code{"top"}.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A character vector or matrix which may be "top", "middle", "bottom" or \code{NA}.
+
+Set to \code{NA} to reset to the default, which is \code{"top"}.}
 }
 \value{
 For \code{valign}, the \code{valign} property.

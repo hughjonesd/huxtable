@@ -14,10 +14,12 @@ NULL
 #' * `set_lr_*` functions set left and right properties.
 #'
 #'
-#' @inherit left_border params
+#' @template property-params
 #' @param value Value(s) to set. Set to `NA` to reset to the default.
 #'
 #' @return The modified huxtable.
+#'
+#' @seealso [borders], [border-colors], [border-styles], [padding].
 #' @name set-multiple
 NULL
 

@@ -51,9 +51,9 @@ map_bottom_border_color(ht, row, col, fn)
 
 \item{col}{An optional column specifier.}
 
-\item{value}{A valid R color, e.g. \code{"red"}, \code{"#FF0000"}.}
-
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
+
+\item{value}{A valid R color, e.g. \code{"red"}, \code{"#FF0000"}.}
 }
 \description{
 These functions set border colors.

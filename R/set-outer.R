@@ -1,8 +1,12 @@
 
-#' Set borders around a rectangle of cells
+#' Set borders and padding around a rectangle of cells
 #'
-#' @inherit left_border params
-#' @param value Border width in points, border color, or border style (see [left_border_style()]).
+#' @param ht A huxtable.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param value Border width, color, style or a [brdr()] object. See [borders].
+#'   For padding, padding width in points.
+#'
 #' @details
 #' `set_outer_borders` sets borders round the top, bottom, left and
 #' right of a group of cells. Behaviour is undefined unless `row` and `col`
@@ -10,16 +14,17 @@
 #' `set_outer_border_styles` set border colors and styles. `set_outer_padding`
 #' sets padding, i.e. top padding on the top row of cells, etc.
 #'
-#' @export
 #' @examples
 #' ht2 <- huxtable(a = 1:3, b = 1:3)
 #' set_outer_borders(ht2)
 #' set_outer_borders(ht2, 2:3, 1:2)
 #'
-#' # Problems with colspan:
-#' rowspan(ht2)[2, 1] <- 2
-#' set_outer_borders(ht2, 1:2, 1:2)
-#'
+#' @name set-outer
+NULL
+
+
+#' @rdname set-outer
+#' @export
 set_outer_borders <- function (ht, row, col, value = 0.4) {
   assert_that(is_huxtable(ht))
   if (nargs() == 2) {
@@ -41,7 +46,7 @@ set_outer_borders <- function (ht, row, col, value = 0.4) {
 }
 
 
-#' @rdname set_outer_borders
+#' @rdname set-outer
 #' @export
 set_outer_border_colors <- function (ht, row, col, value) {
   assert_that(is_huxtable(ht))
@@ -59,7 +64,7 @@ set_outer_border_colors <- function (ht, row, col, value) {
 }
 
 
-#' @rdname set_outer_borders
+#' @rdname set-outer
 #' @export
 set_outer_border_styles <- function (ht, row, col, value) {
   assert_that(is_huxtable(ht))
@@ -77,7 +82,7 @@ set_outer_border_styles <- function (ht, row, col, value) {
 }
 
 
-#' @rdname set_outer_borders
+#' @rdname set-outer
 #' @export
 set_outer_padding <- function (ht, row, col, value) {
   assert_that(is_huxtable(ht))

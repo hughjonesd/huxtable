@@ -298,11 +298,8 @@ make_getter_setters("number_format", "cell")
 #' @template cell-property-usage
 #' @templateVar attr_name contents
 #'
-#' @param ht A huxtable.
+#' @template property-params
 #' @param value Cell contents.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
-#' @param fn A mapping function. See [mapping-functions] for details.
 #'
 #' @evalNamespace make_exports("contents", with_map = TRUE)
 #' @evalNamespace make_namespace_S3_entries("contents")
