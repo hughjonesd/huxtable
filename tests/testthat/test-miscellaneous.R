@@ -87,6 +87,8 @@ test_that("install/report_latex_dependencies", {
 
 
 test_that("report_latex_dependencies checks adjustbox", {
+  skip_if_not_installed("tinytex")
+
   with_mock(
     "tinytex::tlmgr" = function (...) "1.0",
     {
