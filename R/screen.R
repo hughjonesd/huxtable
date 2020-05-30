@@ -188,10 +188,19 @@ to_screen.huxtable <- function (
 }
 
 
-# function to calculate text column widths, wrap huxtable text accordingly, and return a matrix of characters, without
-# borders
-character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h, outer_border_v,
-      min_width, max_width = Inf, color = FALSE, markdown) {
+# calculate text column widths, wrap huxtable text accordingly, and return a
+# matrix of characters, without borders
+character_matrix <- function (
+          ht,
+          inner_border_h,
+          inner_border_v,
+          outer_border_h,
+          outer_border_v,
+          min_width,
+          max_width = Inf,
+          color = FALSE,
+          markdown) {
+
   if (ncol(ht) == 0) stop("Couldn't display any columns in less than max_width characters.")
 
   dc <- display_cells(ht, all = FALSE)
@@ -210,11 +219,24 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   content_widths <- ncharw(dc$contents)
   # return 0 for empty cells. We don't use "\\s"; non-breaking spaces, returned by decimal_pad, are excluded
   # this is risky because we might screw up some locales...
-  max_word_widths <- sapply(lapply(strsplit(dc$contents, "(\t|\n|\r|\v )"), ncharw), function (x)  max(c(0, x)))
+  max_word_widths <- sapply(lapply(strsplit(dc$contents, "(\t|\n|\r|\v )"), ncharw),
+    function (x)  max(c(0, x))
+  )
+
+  ###########################################
+  # calculate widths to make room for content
   for (r in seq_len(nrow(dc))) {
-    width <- if (wrap(ht)[ dc$display_row[r], dc$display_col[r] ]) max_word_widths[r] else content_widths[r]
-    if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 4
-    if (markdown && italic(ht)[dc$display_row[r], dc$display_col[r]]) width <- width + 2
+    width <- if (wrap(ht)[ dc$display_row[r], dc$display_col[r] ]) {
+      max_word_widths[r]
+    } else {
+      content_widths[r]
+    }
+    if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) {
+      width <- width + 4
+    }
+    if (markdown && italic(ht)[dc$display_row[r], dc$display_col[r]]) {
+      width <- width + 2
+    }
     cols <- seq(dc$display_col[r], dc$end_col[r])
     # allows for width of interior borders if a cell spans multiple columns
     if (sum(widths[cols]) + inner_border_h * (dc$colspan[r] - 1) < width) {
@@ -222,6 +244,8 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     }
   }
 
+  #############################################################################
+  # shrink widths to make content fit into max_width, taking account of borders
   max_widths <- floor(cw * (max_width - 2 * outer_border_h - (ncol(ht) - 1) * inner_border_h))
   if (any(max_widths < 8)) {
     # out of space, try with fewer columns
@@ -232,6 +256,8 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   }
   widths <- pmin(widths, max_widths)
 
+  ######################################
+  # cut up strings to fit inside widths:
   dc$strings <- vector(nrow(dc), mode = "list")
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
@@ -263,7 +289,7 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
     if (md_italic) strings[ncharw(strings) > 0] <- paste0("*", strings[ncharw(strings) > 0], "*")
     align <- real_align(ht)[ dcell$display_row, dcell$display_col ]
     stringr_align <- switch(align, "left" = "right", "right" = "left", "centre" = "both")
-    strings <- stringr::str_pad(strings, width, stringr_align)
+    strings <- col_aware_strpad(strings, width, stringr_align)
     dc$strings[[r]] <- strings
   }
 
@@ -271,9 +297,11 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   # we use nchar(type = "c") because otherwise, when characters have
   # screen width > 1, "cols"
   # in the loop below will be too long, leading to the text being repeated:
-  dc$text_width <- sapply(dc$strings, function (x) max(nchar(x, type = "c")))
+  dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x, type = "c")))
 
-  # row heights as widths: start at 0 and increase it if it"s too little, sharing equally among relevant cols
+  #######################################################################
+  # calculate row heights: start at 0 and increase it if it"s too little,
+  # sharing equally among relevant columns
   dc <- dc[order(dc$rowspan), ]
   heights <- rep(1, nrow(ht))
   for (r in seq_len(nrow(dc))) {
@@ -287,19 +315,22 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
   border_widths <- c(outer_border_h, rep(inner_border_h, ncol(ht) - 1), outer_border_h)
   # width of outer border, then cells + following border:
   all_widths    <- border_widths + c(0, widths)
+  # indices into charmat:
   starting_cols <- cumsum(all_widths[seq_len(ncol(ht))]) + 1
   border_cols   <- c(starting_cols, sum(all_widths) + 1) - border_widths
 
   border_heights <- c(outer_border_v, rep(inner_border_v, nrow(ht) - 1), outer_border_v)
   all_heights    <- border_heights + c(0, heights)
-  starting_rows <- cumsum(all_heights[seq_len(nrow(ht))]) + 1
-  border_rows   <- c(starting_rows, sum(all_heights) + 1) - border_heights
+  # indices into charmat:
+  starting_rows  <- cumsum(all_heights[seq_len(nrow(ht))]) + 1
+  border_rows    <- c(starting_rows, sum(all_heights) + 1) - border_heights
+
   charmat <- matrix(" ", sum(all_heights), sum(all_widths))
   width_mat <- matrix(0, sum(all_heights), sum(all_widths))
 
   for (r in seq_len(nrow(dc))) {
     dcell <- dc[r, ]
-    string_letters <- unlist(strsplit(dcell$strings[[1]], ""))
+    string_letters <- unlist(col_aware_strsplit(dcell$strings[[1]], ""))
     drow <- dcell$display_row
     dcol <- dcell$display_col
     style <- if (color) make_cell_style(ht, drow, dcol) else identity
@@ -316,6 +347,28 @@ character_matrix <- function (ht, inner_border_h, inner_border_v, outer_border_h
           border_cols = border_cols,
           last_ht_col = ncol(ht)
         )
+}
+
+
+col_aware_strsplit <- function (...) {
+  if (requireNamespace("crayon", quietly = TRUE)) {
+    crayon::col_strsplit(...)
+  } else {
+    strsplit(...)
+  }
+}
+
+
+col_aware_strpad <- function (string, width, side) {
+  if (requireNamespace("crayon", quietly = TRUE)) {
+    clean <- crayon::strip_style(string)
+    padded <- stringr::str_pad(clean, width, side)
+    # returns a matrix. First column is whole match. Next columns are captures:
+    pads   <- stringr::str_match(padded, "^( *).*?( *)$")
+    paste0(pads[, 2], string, pads[, 3])
+  } else {
+    stringr::str_pad(string, width, side)
+  }
 }
 
 
