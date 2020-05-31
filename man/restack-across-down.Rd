@@ -6,17 +6,28 @@
 \alias{restack_down}
 \title{Restack huxtables across/down the page.}
 \usage{
-restack_across(ht, rows, with_headers = TRUE)
+restack_across(
+  ht,
+  rows,
+  headers = TRUE,
+  on_remainder = c("warn", "stop", "fill")
+)
 
-restack_down(ht, cols, with_headers = TRUE)
+restack_down(
+  ht,
+  cols,
+  headers = TRUE,
+  on_remainder = c("warn", "stop", "fill")
+)
 }
 \arguments{
 \item{ht}{A huxtable}
 
 \item{rows, cols}{How many rows/columns the new result should have.}
 
-\item{with_headers}{Logical. Should header rows/columns be added to
-all of the new tables?}
+\item{headers}{Logical. Take account of header rows/columns?}
+
+\item{on_remainder}{String. "warn", "stop" or "fill". See below.}
 }
 \value{
 A new huxtable.
@@ -30,28 +41,35 @@ top to bottom.
 }
 }
 \details{
-If the huxtable could not be evenly split and restacked, a warning will be
-given and the remainder will be discarded.
-}
-\section{Note}{
+If \code{headers} is \code{TRUE}, header rows/columns will be repeated across/down
+the restacked huxtable as necessary.
 
-Splitting and restacking may interact surprisingly with
-\link[=left_border]{borders} and \link[=merge_cells]{merged cells}.
+\code{on_remainder} determines what happens if the huxtable could not be evenly
+divided for restacking:
+\itemize{
+\item \code{"stop"}: stop with an error.
+\item \code{"fill"}: fill the remainder with empty cells.
+\item \code{"warn"} (the default): issue a warning, then fill the remainder with empty
+cells.
 }
-
+}
 \examples{
 
 ht <- as_hux(matrix(LETTERS[1:4], 2, 2))
 ht <- set_all_borders(ht)
-
 ht
+
 restack_down(ht, 1)
 restack_across(ht, 1)
 
 # headers:
 restack_across(jams, 2)
 restack_across(jams, 2,
-      with_headers = FALSE)
+      headers = FALSE)
+
+# on_remainder:
+restack_across(jams, 3,
+      on_remainder = "fill")
 
 }
 \seealso{

@@ -6,9 +6,9 @@
 \alias{split_down}
 \title{Split a huxtable into multiple huxtables.}
 \usage{
-split_across(ht, after, height, with_headers = TRUE)
+split_across(ht, after, height, headers = TRUE)
 
-split_down(ht, after, width, with_headers = TRUE)
+split_down(ht, after, width, headers = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -19,8 +19,7 @@ in \code{split_down()} but not \code{split_across()}.}
 
 \item{height, width}{Maximum height/width for the result.}
 
-\item{with_headers}{Logical. Should header rows/columns be added to
-all of the new tables?}
+\item{headers}{Logical. Take account of header rows/columns?}
 }
 \value{
 A list of huxtables.
@@ -34,15 +33,9 @@ Only one of \code{after} and \code{width} or \code{height} must be given. If \co
 \code{height} is given, the huxtable will be split by \code{\link[=col_width]{col_width()}} or
 \code{\link[=row_height]{row_height()}}, which must be numeric with no \code{NA} values.
 
-If \code{with_headers} is \code{TRUE}, all previous headers will be added to each
+If \code{headers} is \code{TRUE}, all previous headers will be added to each
 new table.
 }
-\section{Note}{
-
-Splitting and restacking may interact surprisingly with
-\link[=left_border]{borders} and \link[=merge_cells]{merged cells}.
-}
-
 \examples{
 ht <- as_hux(matrix(LETTERS[1:16], 4, 4))
 ht <- set_all_borders(ht)

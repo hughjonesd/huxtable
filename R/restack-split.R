@@ -2,12 +2,6 @@
 #' @import assertthat
 NULL
 
-#' @section Note:
-#' Splitting and restacking may interact surprisingly with
-#' [borders][left_border()] and [merged cells][merge_cells()].
-#' @name split-gotchas
-NULL
-
 
 #' Restack huxtables across/down the page.
 #'
@@ -18,12 +12,20 @@ NULL
 #'
 #' @param ht A huxtable
 #' @param rows,cols How many rows/columns the new result should have.
+#' @param on_remainder String. "warn", "stop" or "fill". See below.
 #' @inherit split-across-down params
-#' @inheritSection split-gotchas Note
 #'
 #' @details
-#' If the huxtable could not be evenly split and restacked, a warning will be
-#' given and the remainder will be discarded.
+#' If `headers` is `TRUE`, header rows/columns will be repeated across/down
+#' the restacked huxtable as necessary.
+#'
+#' `on_remainder` determines what happens if the huxtable could not be evenly
+#' divided for restacking:
+#'
+#' * `"stop"`: stop with an error.
+#' * `"fill"`: fill the remainder with empty cells.
+#' * `"warn"` (the default): issue a warning, then fill the remainder with empty
+#'   cells.
 #'
 #' @return A new huxtable.
 #'
@@ -33,15 +35,19 @@ NULL
 #'
 #' ht <- as_hux(matrix(LETTERS[1:4], 2, 2))
 #' ht <- set_all_borders(ht)
-#'
 #' ht
+#'
 #' restack_down(ht, 1)
 #' restack_across(ht, 1)
 #'
 #' # headers:
 #' restack_across(jams, 2)
 #' restack_across(jams, 2,
-#'       with_headers = FALSE)
+#'       headers = FALSE)
+#'
+#' # on_remainder:
+#' restack_across(jams, 3,
+#'       on_remainder = "fill")
 #'
 #' @name restack-across-down
 NULL
@@ -52,18 +58,31 @@ NULL
 restack_across <- function (
         ht,
         rows,
-        with_headers = TRUE
+        headers = TRUE,
+        on_remainder = c("warn", "stop", "fill")
       ) {
-  assert_that(is_huxtable(ht), is.count(rows))
+  assert_that(is_huxtable(ht), is.count(rows), is.flag(headers))
+  on_remainder <- match.arg(on_remainder)
+  on_remainder <- switch(on_remainder,
+          "warn" = warning,
+          "stop" = stop,
+          identity # i.e. do nothing
+        )
 
-  ht_list <- split_across(ht, after = rows, with_headers = with_headers)
+  ht_list <- split_across(ht, after = rows, headers = headers)
   new_ht <- ht_list[[1]]
   while (length(ht_list) > 1 && nrow(ht_list[[2]]) >= rows) {
-    ht_list <- split_across(ht_list[[2]], after = rows, with_headers = with_headers)
+    ht_list <- split_across(ht_list[[2]], after = rows, headers = headers)
     new_ht <- cbind(new_ht, ht_list[[1]])
   }
 
-  check_remainder(ht_list, rows)
+  if (length(ht_list) > 1) {
+    on_remainder(sprintf("Table was not split equally into %s rows", rows))
+    remainder <- ht_list[[2]]
+    remainder <- rbind(remainder,
+      matrix("", nrow(new_ht) - nrow(remainder), ncol(remainder)))
+    new_ht <- cbind(new_ht, remainder)
+  }
 
   new_ht
 }
@@ -74,25 +93,33 @@ restack_across <- function (
 restack_down <- function (
         ht,
         cols,
-        with_headers = TRUE
+        headers = TRUE,
+        on_remainder = c("warn", "stop", "fill")
       ) {
-  assert_that(is_huxtable(ht), is.count(cols))
+  assert_that(is_huxtable(ht), is.count(cols), is.flag(headers))
+  on_remainder <- match.arg(on_remainder)
+  on_remainder <- switch(on_remainder,
+          "warn" = warning,
+          "stop" = stop,
+          identity # i.e. do nothing
+        )
 
-  ht_list <- split_down(ht, after = cols, with_headers = with_headers)
+  ht_list <- split_down(ht, after = cols, headers = headers)
   new_ht <- ht_list[[1]]
   while (length(ht_list) > 1 && ncol(ht_list[[2]]) >= cols) {
-    ht_list <- split_down(ht_list[[2]], after = cols, with_headers = with_headers)
+    ht_list <- split_down(ht_list[[2]], after = cols, headers = headers)
     new_ht <- rbind(new_ht, ht_list[[1]])
   }
 
-  check_remainder(ht_list, cols)
+  if (length(ht_list) > 1) {
+    on_remainder(sprintf("Table was not split equally into %s cols", cols))
+    remainder <- ht_list[[2]]
+    remainder <- cbind(remainder,
+          matrix("", nrow(remainder), ncol(new_ht) - ncol(remainder)))
+    new_ht <- rbind(new_ht, remainder)
+  }
 
   new_ht
-}
-
-
-check_remainder <- function (ht_list, divisor){
-  if (length(ht_list) > 1) warning(divisor, " didn't split huxtable evenly")
 }
 
 
@@ -106,8 +133,7 @@ check_remainder <- function (ht_list, divisor){
 #'   Note that [tidyselect][tidyselect::select_helpers] semantics are allowed
 #'   in `split_down()` but not `split_across()`.
 #' @param height,width Maximum height/width for the result.
-#' @param with_headers Logical. Should header rows/columns be added to
-#'   all of the new tables?
+#' @param headers Logical. Take account of header rows/columns?
 #'
 #' @return A list of huxtables.
 #'
@@ -116,10 +142,8 @@ check_remainder <- function (ht_list, divisor){
 #' `height` is given, the huxtable will be split by [col_width()] or
 #' [row_height()], which must be numeric with no `NA` values.
 #'
-#' If `with_headers` is `TRUE`, all previous headers will be added to each
+#' If `headers` is `TRUE`, all previous headers will be added to each
 #' new table.
-#'
-#' @inheritSection split-gotchas Note
 #'
 #' @seealso [restack-across-down]
 #'
@@ -148,9 +172,9 @@ split_across <- function (
         ht,
         after,
         height,
-        with_headers = TRUE
+        headers = TRUE
       ) {
-  assert_that(is_hux(ht), is.flag(with_headers))
+  assert_that(is_hux(ht), is.flag(headers))
   if (missing(after) + missing(height) != 1) {
     stop("Exactly one of `after` and `height` must be specified")
   }
@@ -168,7 +192,7 @@ split_across <- function (
   row_list <- get_pos_list(after, nrow(ht))
 
   ht_list <- lapply(row_list, function (rows) ht[rows,])
-  if (with_headers && any(headers <- header_rows(ht))) {
+  if (headers && any(headers <- header_rows(ht))) {
     # for each first row/col, copy ALL previous headers.
     for (i in seq_along(after)) {
       if (i == length(ht_list)) next
@@ -190,9 +214,9 @@ split_down <- function (
         ht,
         after,
         width,
-        with_headers = TRUE
+        headers = TRUE
       ) {
-  assert_that(is_hux(ht), is.flag(with_headers))
+  assert_that(is_hux(ht), is.flag(headers))
   if (missing(after) + missing(width) != 1) {
     stop("Exactly one of `after` and `width` must be specified")
   }
@@ -211,7 +235,7 @@ split_down <- function (
 
   ht_list <- lapply(col_list, function (cols) ht[, cols])
 
-  if (with_headers && any(headers <- header_cols(ht))) {
+  if (headers && any(headers <- header_cols(ht))) {
     # for each first row/col, copy ALL previous headers.
     for (i in seq_along(after)) {
       if (i == length(ht_list)) next
@@ -245,6 +269,7 @@ calc_after_by_size <- function (size, lengths) {
     biggest_poss + calc_after_by_size(size, lengths[-seq(1L, biggest_poss)])
   )
 }
+
 
 get_pos_list <- function (after, endpoint) {
   after <- sort(after)
