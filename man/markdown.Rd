@@ -34,7 +34,8 @@ Functions to get or set the \emph{markdown} property of huxtable cells.
 }
 \details{
 Markdown is currently implemented for HTML and LaTeX only. There is
-basic support for on-screen display.
+basic support for on-screen display. The only extension used is
+"strikethrough": write \verb{~text~} to strike through text.
 }
 \examples{
 

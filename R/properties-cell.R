@@ -124,7 +124,9 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' @templateVar default TRUE
 #' @details
 #' Markdown is currently implemented for HTML and LaTeX only. There is
-#' basic support for on-screen display.
+#' basic support for on-screen display. The only extension used is
+#' "strikethrough": write `~text~` to strike through text.
+#'
 #' @seealso [set_markdown_contents()], a shortcut function.
 NULL
 make_getter_setters("markdown", "cell", check_fun = is.logical, default = TRUE)

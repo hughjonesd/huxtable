@@ -7,7 +7,7 @@ render_markdown <- function (text, type) {
     "latex"    = commonmark::markdown_latex(text, extensions = "strikethrough"),
     "markdown" = text,
     "screen"   = markdown_screen(text),
-    commonmark::markdown_text(text)
+    commonmark::markdown_text(text, extensions = "strikethrough")
   )
 }
 
@@ -25,12 +25,17 @@ markdown_screen <- function (text) {
     x <- sub("^__(.*)__$", "\\1", x)
     crayon::bold(x)
   }
+  my_strikethrough <-  function (x) {
+    x <- sub("^~(.*)~$", "\\1", x)
+    crayon::strikethrough(x)
+  }
 
   res <- text
   res <- stringr::str_replace_all(res, "\\*\\*(.*?)\\*\\*", my_bold)
   res <- stringr::str_replace_all(res, "__(.*?)__", my_bold)
   res <- stringr::str_replace_all(res, "\\*(.*?)\\*", my_italic)
   res <- stringr::str_replace_all(res, "_(.*?)_", my_italic)
+  res <- stringr::str_replace_all(res, "~(.*?)~", my_strikethrough)
 
   res
 }
