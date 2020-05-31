@@ -117,7 +117,7 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
   mondrian <- as_hux(mx, add_colnames = FALSE)
   escape_contents(mondrian) <- FALSE
   align(mondrian) <- "centre"
-  font(mondrian) <- "Arial"
+  font(mondrian) <- "DejaVu Sans"
   if (latex && ! getOption("huxtable.latex_use_fontspec", FALSE)) {
     font(mondrian) <- "cmss"
   }
