@@ -74,6 +74,10 @@ test_that("basic restack", {
 
   expect_warning(restack_across(square, 3))
   expect_warning(restack_down(square, 3))
+  expect_silent(restack_across(square, 3, on_remainder = "fill"))
+  expect_silent(restack_down(square, 3, on_remainder = "fill"))
+  expect_error(restack_across(square, 3, on_remainder = "stop"))
+  expect_error(restack_down(square, 3, on_remainder = "stop"))
 })
 
 
@@ -86,7 +90,7 @@ test_that("restack headers", {
         )
   expect_equivalent(header_rows(wide_jams), c(TRUE, FALSE, FALSE))
 
-  expect_silent(jw2 <- restack_across(jams, 2, with_header = FALSE))
+  expect_silent(jw2 <- restack_across(jams, 2, headers = FALSE))
   expect_equivalent(
           as.character(jw2[1, 1:3]),
           c("Type", "Price", "Raspberry")

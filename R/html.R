@@ -207,10 +207,10 @@ compute_border_css <- function (ht) {
   dc <- display_cells(ht)
   dc <- as.matrix(dc[, c("row", "col", "end_row", "end_col")])
   # we don't use display_row because shadowed cells will be blanked anyway.
-  top_matrix    <- dc[, c("row", "col")]
+  top_matrix    <- dc[, c("row", "col"), drop = FALSE]
   left_matrix   <- top_matrix
-  bottom_matrix <- dc[, c("end_row", "col")]
-  right_matrix  <- dc[, c("row", "end_col")]
+  bottom_matrix <- dc[, c("end_row", "col"), drop = FALSE]
+  right_matrix  <- dc[, c("row", "end_col"), drop = FALSE]
 
   # We don't use get_visible_borders, because borders in the middle of a
   # span won't be used anyway.
