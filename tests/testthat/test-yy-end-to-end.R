@@ -125,8 +125,13 @@ test_that("Various Rmd files render without errors", {
     test_render_all(path)
   }
 
-  # design-principles needs a CSV file, so we skip:
-  rmd_filenames <- c("huxtable.Rmd", "huxreg.Rmd", "themes.Rmd")
+  # design-principles needs a CSV file, so we skip.
+  # we also skip huxtable.Rmd on travis (no fonts)
+  rmd_filenames <- if (Sys.getenv("TRAVIS") == "true") {
+    c("huxreg.Rmd", "themes.Rmd")
+  } else {
+    c("huxtable.Rmd", "huxreg.Rmd", "themes.Rmd")
+  }
   # this system.file may be devtools' patched version; these file paths are used in devtools::test:
   rmd_paths <- system.file("vignettes", rmd_filenames, package = "huxtable")
   if (! utils::file_test("-f", rmd_paths[1])) rmd_paths <-
