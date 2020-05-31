@@ -2,6 +2,8 @@
 
 test_that("install/report_latex_dependencies", {
   skip_if_not_installed("tinytex")
+  skip_on_appveyor()
+  skip_on_cran() # no tlmgr, and the code uses it not just in tlmgr_install
 
   expect_silent(packages <- report_latex_dependencies(quiet = TRUE))
   packages <- vapply(packages, `[[`, character(1), "name")
@@ -22,6 +24,8 @@ test_that("check_latex_dependencies checks adjustbox", {
   skip_if_not_installed("tinytex")
   # appveyor doesn't have tlmgr
   skip_on_appveyor()
+  # nor does win-builder
+  skip_on_cran()
 
   with_mock(
     "tinytex::tlmgr" = function (...) "1.0",
