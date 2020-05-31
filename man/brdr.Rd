@@ -7,7 +7,7 @@
 brdr(thickness = 0.4, style = "solid", color = NA_character_)
 }
 \arguments{
-\item{thickness}{Thickness of the border in points}
+\item{thickness}{Thickness of the border in points.}
 
 \item{style}{"solid" (the default), "double", "dashed" or "dotted".}
 
@@ -16,7 +16,7 @@ a hexadecimalstring like "#00FF00").}
 }
 \value{
 An object of class "brdr" which you can pass into huxtable
-border functions
+border functions.
 }
 \description{
 Create a border object

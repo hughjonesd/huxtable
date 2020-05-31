@@ -3,11 +3,14 @@
 
 render_markdown <- function (text, type) {
   switch(type,
-    "html"     = commonmark::markdown_html(text, extensions = "strikethrough"),
-    "latex"    = commonmark::markdown_latex(text, extensions = "strikethrough"),
+    "html"     = vapply(text, commonmark::markdown_html,
+                   FUN.VALUE = character(1), extensions = "strikethrough"),
+    "latex"    = vapply(text, commonmark::markdown_latex,
+                   FUN.VALUE = character(1), extensions = "strikethrough"),
     "markdown" = text,
     "screen"   = markdown_screen(text),
-    commonmark::markdown_text(text, extensions = "strikethrough")
+    vapply(text, commonmark::markdown_text, FUN.VALUE = character(1),
+          extensions = "strikethrough")
   )
 }
 

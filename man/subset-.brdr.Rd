@@ -17,11 +17,11 @@
 A \code{\link[=brdr]{brdr()}} object.
 }
 \description{
-You probably don't need to call this directly. If you want
-to access border thicknesses, do e.g.
+Replace a subset of a brdr object
 }
 \details{
-\if{html}{\out{<div class="r">}}\preformatted{l_borders <- brdr_thickness(left_border(ht))
+You probably don't need to call this directly. If you want
+to access border thicknesses, do e.g.\if{html}{\out{<div class="r">}}\preformatted{l_borders <- brdr_thickness(left_border(ht))
 }\if{html}{\out{</div>}}
 
 which will give you a matrix of numbers.

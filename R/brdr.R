@@ -1,13 +1,13 @@
 
 #' Create a border object
 #'
-#' @param thickness Thickness of the border in points
+#' @param thickness Thickness of the border in points.
 #' @param style "solid" (the default), "double", "dashed" or "dotted".
 #' @param color String representing a valid color (either a color name or
 #'   a hexadecimalstring like "#00FF00").
 #'
 #' @return An object of class "brdr" which you can pass into huxtable
-#'   border functions
+#'   border functions.
 #' @export
 #'
 #' @examples
@@ -23,21 +23,21 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 
 #' Replace a subset of a brdr object
 #'
-#' You probably don't need to call this directly. If you want
-#' to access border thicknesses, do e.g.
-#'
-#' ```r
-#' l_borders <- brdr_thickness(left_border(ht))
-#' ```
-#'
-#' which will give you a matrix of numbers.
-#'
 #' @usage
 #' \method{[}{brdr}(x, ...) <- value
 #'
 #' @param x A `brdr` object.
 #' @param ... Indices.
 #' @param value A [brdr()] object, number or matrix.
+#'
+#' @details
+#' You probably don't need to call this directly. If you want
+#' to access border thicknesses, do e.g.
+#'
+#' ```r
+#' l_borders <- brdr_thickness(left_border(ht))
+#' ```
+#' which will give you a matrix of numbers.
 #'
 #' @return A [brdr()] object.
 #'

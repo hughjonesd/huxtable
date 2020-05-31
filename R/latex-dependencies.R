@@ -8,6 +8,7 @@ huxtable_latex_dependencies <- list(
   list(name = "caption"),
   list(name = "graphicx"),
   list(name = "siunitx"),
+  list(name = "ulem"), # for strikeout in markdown
   list(name = "colortbl"),
   list(name = "multirow"),
   list(name = "hhline"),
