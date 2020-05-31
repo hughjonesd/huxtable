@@ -117,42 +117,7 @@ to_html.huxtable <- function(ht, ...) {
   # get_visible_borders() data is in "real cell" position.
   # But we just want to grab the original data
   # and apply it
-  borders    <- get_visible_borders(ht)
-  border_styles <- collapsed_border_styles(ht)
-  if (length(unlist(borders)) > 0 && any(unlist(borders) > 0 & unlist(borders) < 3 &
-        unlist(border_styles) == "double"))
-        warning("border_style set to \"double\" but border less than 3 points")
-
-  bt <- borders$horiz[-nrow(border_styles$horiz),]
-  br <- borders$vert[, -1]
-  bb <- borders$horiz[-1,]
-  bl <- borders$vert[, -ncol(border_styles$vert)]
-  border_width <- sprintf(
-        " border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;",
-        border_styles$horiz[-nrow(border_styles$horiz),],
-        border_styles$vert[, -1],
-        border_styles$horiz[-1,],
-        border_styles$vert[, -ncol(border_styles$vert)],
-        bt, br, bb, bl
-      )
-  no_borders <- bt == 0 & br == 0 & bb == 0 & bl == 0
-  border_width <- blank_where(border_width, no_borders)
-
-  format_bc <- function (pos, col) {
-    x <- sprintf(" border-%s-color: rgb(%s);", pos, format_color(col))
-    blank_where(x, is.na(col))
-  }
-  border_colors <- collapsed_border_colors(ht)
-  top_bc    <- border_colors$horiz[-nrow(border_colors$horiz), ]
-  bottom_bc <- border_colors$horiz[-1, ]
-  left_bc   <- border_colors$vert[, -ncol(border_colors$vert)]
-  right_bc  <- border_colors$vert[, -1]
-  border_color <- paste0(
-          format_bc("top", top_bc),
-          format_bc("right", right_bc),
-          format_bc("bottom", bottom_bc),
-          format_bc("left", left_bc)
-        )
+  border_css <- compute_border_css(ht)
 
   add_pts <- function (x) if (is.numeric(x)) sprintf("%.4gpt", x) else x
   padding <- sprintf(" padding: %s %s %s %s;",
@@ -175,7 +140,7 @@ to_html.huxtable <- function(ht, ...) {
   font_size <- sprintf(" font-size: %.4gpt;", font_size(ht))
   font_size <- blank_where(font_size, is.na(font_size(ht)))
 
-  style   <- paste0("style=\"", valign, align, wrap, border_width, border_color,
+  style   <- paste0("style=\"", valign, align, wrap, border_css,
         padding, bg_color, bold, italic, font, font_size, "\"")
   td <- sprintf("<td%s%s %s>", rowspan, colspan, style)
 
@@ -221,4 +186,74 @@ to_html.huxtable <- function(ht, ...) {
 
   res <- paste0(table_start, cols_html, cells_html, "</table>\n")
   return(res)
+}
+
+
+#' Create border css for each cell
+#'
+#' This returns a matrix of border CSS. Cells with spans > 1 get the
+#' borders from the correct position.
+#'
+#' @param ht A huxtable.
+#'
+#' @return A character array of border CSS, ending in a semicolon
+#' @noRd
+compute_border_css <- function (ht) {
+  top_row <- c(row(ht))
+  bottom_row <- top_row + c(rowspan(ht)) - 1
+  left_col <- c(col(ht))
+  right_col <- left_col + c(colspan(ht)) - 1
+
+  dc <- display_cells(ht)
+  dc <- as.matrix(dc[, c("row", "col", "end_row", "end_col")])
+  # we don't use display_row because shadowed cells will be blanked anyway.
+  top_matrix    <- dc[, c("row", "col")]
+  left_matrix   <- top_matrix
+  bottom_matrix <- dc[, c("end_row", "col")]
+  right_matrix  <- dc[, c("row", "end_col")]
+
+  # We don't use get_visible_borders, because borders in the middle of a
+  # span won't be used anyway.
+  tb <- brdr_thickness(top_border(ht))   [top_matrix]
+  rb <- brdr_thickness(right_border(ht)) [right_matrix]
+  bb <- brdr_thickness(bottom_border(ht))[bottom_matrix]
+  lb <- brdr_thickness(left_border(ht))  [left_matrix]
+
+  tbs <- top_border_style(ht)   [top_matrix]
+  rbs <- right_border_style(ht) [right_matrix]
+  bbs <- bottom_border_style(ht)[bottom_matrix]
+  lbs <- left_border_style(ht)  [left_matrix]
+
+  tbc <- top_border_color(ht)   [top_matrix]
+  rbc <- right_border_color(ht) [right_matrix]
+  bbc <- bottom_border_color(ht)[bottom_matrix]
+  lbc <- left_border_color(ht)  [left_matrix]
+
+  format_border_color_css <- function (col, pos) {
+    x <- sprintf(" border-%s-color: rgb(%s);", pos, format_color(col))
+    blank_where(x, is.na(col))
+  }
+  tbc <- format_border_color_css(tbc, "top")
+  rbc <- format_border_color_css(rbc, "right")
+  bbc <- format_border_color_css(bbc, "bottom")
+  lbc <- format_border_color_css(lbc, "left")
+
+  if (any(tbs == "double" & tb > 0 & tb < 3) ||
+      any(rbs == "double" & rb > 0 & rb < 3) ||
+      any(bbs == "double" & bb > 0 & bb < 3) ||
+      any(lbs == "double" & lb > 0 & lb < 3)
+  ) {
+    warning("border_style set to \"double\" but border less than 3 points")
+  }
+
+  border_css <- sprintf(
+    " border-style: %s %s %s %s; border-width: %.4gpt %.4gpt %.4gpt %.4gpt;",
+    tbs, rbs, bbs, lbs, tb, rb, bb, lb
+  )
+  border_css <- paste0(border_css, sprintf("%s %s %s %s", tbc, rbc, bbc, lbc))
+
+  no_borders <- tb == 0 & rb == 0 & bb == 0 & lb == 0
+  border_css <- blank_where(border_css, no_borders)
+
+  return(border_css)
 }
