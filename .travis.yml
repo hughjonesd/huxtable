@@ -11,6 +11,8 @@ r:
   - oldrel
   - release
   - devel
+r_build_args: --no-build-vignettes
+r_check_args: --no-build-vignettes
 env:
   - CACHE_VERSION=standard
 matrix:
