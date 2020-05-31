@@ -3,17 +3,17 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  html_document:
-    toc: yes
-    toc_depth: 2
   pdf_document:
     latex_engine: xelatex
     includes:
       in_header: placeins-header.tex
     toc: yes
     toc_depth: 2
-mainfont: Calibri
-monofont: LucidaConsole
+  html_document:
+    toc: yes
+    toc_depth: 2
+linkcolor: olive
+urlcolor: olive
 vignette: >
   %\VignetteIndexEntry{Introduction to Huxtable}   
   %\VignetteEncoding{UTF-8}
@@ -27,9 +27,9 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 options(
-        huxtable.knit_print_df = FALSE, 
-        huxtable.add_colnames  = TRUE,    # works when run by testthat
-        huxtable.use_fontspec  = TRUE
+        huxtable.knit_print_df       = FALSE, 
+        huxtable.add_colnames        = TRUE,  # needed when run by testthat
+        huxtable.latex_use_fontspec  = TRUE
       )
 
 is_latex <- guess_knitr_output_format() == "latex"
@@ -64,18 +64,22 @@ version is available on the web in [HTML](https://hughjonesd.github.io/huxtable/
 Huxtable is a package for creating *text tables*. It is powerful, but easy to use. Huxtable's
 features include:
 
-* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel, Microsoft Powerpoint, RTF and Markdown
+* Export to LaTeX, HTML, Microsoft Word, Microsoft Excel, Microsoft Powerpoint, 
+  RTF and Markdown
 * Easy integration with knitr and rmarkdown documents
 * Formatted on-screen display
 * Multirow and multicolumn cells
-* Fine-grained control over cell background, spacing, alignment, size and borders
-* Control over text font, style, size, colour, alignment, number format and rotation
-* Table manipulation using standard R subsetting, or dplyr functions like `filter` and `select`
+* Fine-grained control over cell background, spacing, alignment, size and 
+  borders
+* Control over text font, style, size, colour, alignment, number format and 
+  rotation
+* Table manipulation using standard R subsetting, or dplyr functions like 
+  `filter` and `select`
 * Easy conditional formatting based on table contents
 * Quick table themes
 * Automatic creation of regression output tables with the `huxreg` function
 
-We will cover all of these features below.
+We will cover many of these features below.
 
 ## Installation
 
@@ -158,7 +162,7 @@ jams %>%
       set_number_format(2) %>% 
       set_bold(1, everywhere) %>% 
       set_bottom_border(1, everywhere) %>% 
-      set_width(0.3) %>% 
+      set_width(0.4) %>% 
       set_caption("Pots of jam for sale")
   
 ```
@@ -226,7 +230,7 @@ bottom_padding(jams)[nrow(jams), 1:ncol(jams)] <- 0
 number_format(jams) <- 2
 bold(jams)[1, 1:ncol(jams)] <- TRUE
 bottom_border(jams)[1, 1:ncol(jams)] <- 0.4
-width(jams) <- 0.35
+width(jams) <- 0.4
 caption(jams) <- "Pots of jam for sale"
 
 ```
@@ -307,7 +311,6 @@ props[["Table"]]  <- sort(c("width", "height", "position", "caption",
 
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep("", maxl - length(x))))
-
 
 prop_hux <- hux(as.data.frame(props, check.names = FALSE)) %>% 
       set_font_size(10)                                    %>% 
@@ -393,7 +396,7 @@ There are also some huxtable-specific selectors.
   ```
 
 
-# Editing content
+# Editing huxtables
 
 
 ## Formatting cell text
@@ -642,6 +645,7 @@ iris_hux <- iris_hux %>%
   merge_cells(1, 2:3) %>% 
   merge_cells(1, 4:5) %>% 
   set_align(1, everywhere, "center") %>% 
+  set_tb_padding(1, everywhere, 0) %>% 
   set_bold(1, everywhere)
   
 iris_hux
@@ -657,19 +661,9 @@ Let's take this piece by piece.
   now become a single cell. If you know HTML, this is equivalent to setting
   the `colspan` of column 2 to 2.
 * `merge_cells(1, 4:5)` does the same for row 1, columns 4 and 5.
-* Lastly, `set_align()` centres all the cells in the first row.
-
-We might also want to reduce duplication in the "Species" column. We can
-use `merge_repeated_rows()` to do this.
-
-```{r}
-iris_hux <- iris_hux %>% 
-      merge_repeated_rows(everywhere, "Species")
-
-iris_hux
-```
-
-`merge_repeated_rows()` merges duplicated rows into a single multirow cell.
+* Lastly, `set_align()` centres all the cells in the first row and 
+  `set_tb_padding()` fixes up the vertical padding, to keep these cells
+  close to the row below.
 
 This looks better, but it is rather long. (And we only used a few of the
 150 rows in the `iris` data!) One solution is to reorganize your table layout.
@@ -687,10 +681,10 @@ iris_hux_wide
 ```
 
 
-The `restack_across()` function reorganizes our table to fit into fewer rows 
-(and more columns). There's a similar `restack_down()` function which fits a 
-table into more rows and fewer columns. To understand these, a bit of color will 
-help:
+This is too wide, but we'll deal with that in a second. The `restack_across()`
+function reorganizes our table to fit into fewer rows (and more columns).
+There's a similar `restack_down()` function which fits a table into more rows
+and fewer columns. To understand these, a bit of color will help:
 
 
 ```{r}
@@ -714,6 +708,7 @@ lego_hux %>%
 ```
 
 
+
 ## Table position and column width
 
 Our new `iris` huxtable is now shorter, but it's too wide. We can control
@@ -727,7 +722,7 @@ iris_hux_wide %>%
       set_width(0.8) %>% 
       set_font_size(8) %>% 
       set_lr_padding(2) %>% 
-      set_col_width(everywhere, rep(c(0.4, 0.2, 0.2, 0.2, 0.2), 3)/3) %>% 
+      set_col_width(rep(c(0.4, 0.2, 0.2, 0.2, 0.2), 3)/3) %>% 
       set_position("left")
 ```
 
@@ -755,7 +750,6 @@ will display them differently. You can also style headers yourself using the
 ```{r}
 iris_hux %>% 
       set_header_rows(1:2, TRUE) %>% 
-      merge_repeated_rows(everywhere, 1) %>% 
       set_header_cols(1, TRUE) %>% 
       style_headers(bold = TRUE, text_color = "grey20")
 ```
@@ -766,6 +760,21 @@ a header column. `style_headers()` applies to both rows and columns. Alternative
 use `style_header_rows()` and `style_header_columns()` to treat header rows
 and columns differently. Their arguments are a list of properties and property
 values.
+
+
+## Splitting tables
+
+If we haven't got room to restack, an alternative approach is to split our
+original table into separate tables. We can do this with `split_across()` and
+`split_down()`. These functions take a single huxtable and return a list of
+huxtables. Like the `restack` functions, they take account of headers by default.
+
+```{r}
+list_of_iris <- split_across(iris_hux, c(7, 12))
+list_of_iris[[1]]
+list_of_iris[[2]]
+list_of_iris[[3]]
+```
 
 
 # Themes
@@ -799,7 +808,7 @@ the lowest and highest values of each column:
 
 iris_hux %>% 
       map_text_color(-(1:2), -1, 
-        by_colorspace("red", "grey50", "navy", colwise = TRUE)
+        by_colorspace("darkred", "grey50", "darkgreen", colwise = TRUE)
       )
 
 ```
@@ -816,13 +825,15 @@ The syntax of all `map_xxx` functions is `map_property(ht, row, col, fn)`, where
 and `fn` is the mapping function starting with `by`. `row` and `col` are optional row and column
 specifiers, just the same as for `set_xxx`.
 
-You can also apply properties for cells that match a string, using the `by_regex` 
- function:
+Here's one more example. To set properties for cells that match a string, use
+the `by_regex`  function.
 
 ```{r}
 jams %>% map_text_color(by_regex("berry" = "red4", "navy"))
 ```
 
+There is more information about mapping functions in
+[this article](https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html).
 
 # Output to different formats
 
