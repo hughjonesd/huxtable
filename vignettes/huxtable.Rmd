@@ -3,14 +3,17 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
+  html_document:
+    toc: yes
+    toc_depth: 2
   pdf_document:
+    latex_engine: xelatex
     includes:
       in_header: placeins-header.tex
     toc: yes
     toc_depth: 2
-  html_document:
-    toc: yes
-    toc_depth: 2
+mainfont: Calibri
+monofont: LucidaConsole
 vignette: >
   %\VignetteIndexEntry{Introduction to Huxtable}   
   %\VignetteEncoding{UTF-8}
@@ -83,7 +86,7 @@ install.packages("huxtable")
 ```
 
 
-## Getting started
+# Getting started
 
 A huxtable is an R object representing a table of text. You already know that R
 can represent a table of data in a data frame. For example, if `mydata` is a
@@ -134,13 +137,15 @@ jams
 ```
 
 
-# Changing the look and feel
-
 ## Huxtable properties
 
-The default output is a plain table. Let's make it smarter. We'll make the table headings
-bold, draw a line under the header row, add some space to the cells, and change
-the number formatting.
+The default output is a plain table. Let's make it smarter. We'll:
+
+* make the table headings bold;
+* draw a border under the first row;
+* tweak the table width and spacing;
+* change the number formatting;
+* and add a caption.
 
 
 ```{r}
@@ -153,6 +158,7 @@ jams %>%
       set_number_format(2) %>% 
       set_bold(1, everywhere) %>% 
       set_bottom_border(1, everywhere) %>% 
+      set_width(0.3) %>% 
       set_caption("Pots of jam for sale")
   
 ```
@@ -193,8 +199,10 @@ Let's go through them line by line.
   Again it's set for cells in row 1 and all columns. The `bottom_border` property
   is the width of the border in points. Here, we've set it to its default value
   of 0.4.
-* So far, all these properties have been *cell properties*. The next line,
-  `set_caption(...)`, sets a *table-level* property: the table caption.
+* So far, all these properties have been *cell properties*. The next line sets
+  a *table property* which applies to the whole table: the width.
+* The last line, `set_caption(...)`, sets another *table property*: the 
+  table caption.
 
 Incidentally, I've used a dplyr style to set these properties, chaining calls
 together in a pipe. But you don't need to do that. You can also set properties
@@ -218,6 +226,7 @@ bottom_padding(jams)[nrow(jams), 1:ncol(jams)] <- 0
 number_format(jams) <- 2
 bold(jams)[1, 1:ncol(jams)] <- TRUE
 bottom_border(jams)[1, 1:ncol(jams)] <- 0.4
+width(jams) <- 0.35
 caption(jams) <- "Pots of jam for sale"
 
 ```
@@ -225,9 +234,21 @@ caption(jams) <- "Pots of jam for sale"
 
 This way of setting properties is the same as using functions like 
 `names(x) <- c("Name 1", "Name 2", ...)` in base R. You can write
-`names(x)[1] <- "Name"` to change the first name of a vector. Similarly,
-in huxtable, you can write `bold(jams)[1, 1:ncol(jams)] <- TRUE` to set the
-bold property on the first row of cells.
+
+
+```{r, eval = FALSE}
+names(x)[1] <- "Name"
+```
+
+
+to change the first name of a vector. Similarly,
+in huxtable, you can write 
+
+```{r, eval = FALSE}
+bold(jams)[1, 1:ncol(jams)] <- TRUE
+```
+
+to set the bold property on the first row of cells.
 
 Here, the assignment style is a little more verbose than the dplyr style, and
 you don't get convenient shortcuts like `everywhere`. But you can use whichever
@@ -267,32 +288,37 @@ and column properties. The table below shows a complete list of properties.
 ```{r props, echo = FALSE}
 sides <- c("left_", "right_", "top_", "bottom_")
 props <- list()
-props[["Cell Text"]] <- sort(c("font", "text_color", "wrap", "bold", "italic", "font", "font_size", "na_string", "escape_contents", "markdown", "number_format", "rotation"))
+props[["Cell Text"]] <- sort(c("text_color", "wrap", "bold", "italic", "font",
+      "font_size", "na_string", "escape_contents", "markdown", "number_format",
+      "rotation"))
 
-props[["Cell"]] <- sort(c("align", "valign", "rowspan", "colspan", "background_color", 
-      paste0(sides, "border"), paste0(sides, "border_color"), paste0(sides, "border_style"), 
-      paste0(sides, "padding")))
+props[["Cell"]] <- sort(c(
+        "align", "valign", "rowspan", "colspan", "background_color", 
+        paste0(sides, "border"), 
+        paste0(sides, "border_color"), 
+        paste0(sides, "border_style"), 
+        paste0(sides, "padding")
+      ))
+
 props[["Row"]]    <- c("row_height", "header_rows")
 props[["Column"]] <- c("col_width", "header_cols")
-props[["Table"]]  <- sort(c("width", "height", "position", "caption", "caption_pos",
-  "caption_width", "tabular_environment", "label", "latex_float"))
+props[["Table"]]  <- sort(c("width", "height", "position", "caption", 
+  "caption_pos", "caption_width", "tabular_environment", "label", "latex_float"))
 
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep("", maxl - length(x))))
 
-ss_font <- if (guess_knitr_output_format() == "latex") "cmtt" else "courier"
 
 prop_hux <- hux(as.data.frame(props, check.names = FALSE)) %>% 
-      set_font(-1, everywhere, ss_font)                    %>% 
       set_font_size(10)                                    %>% 
+      set_font("LucidaConsole")                            %>% 
       set_header_rows(1, TRUE)                             %>% 
       set_width(0.9)                                       %>% 
-      set_top_padding(2)                                   %>% 
-      set_bottom_padding(4)                                %>% 
+      set_tb_padding(2)                                    %>% 
       set_caption("Huxtable properties")                   %>% 
       set_label("tab:props")                               %>% 
       set_col_width(c(.2, .25, .15, .15, .25))             %>% 
-      theme_bright()
+      theme_bright()                                      
 
 prop_hux
 ```
@@ -302,27 +328,27 @@ prop_hux
 When you call `set_property(ht, rows, cols, value)`, you can specify `rows`
 and `cols` in several different ways. 
 
-* Use numbers.
+* You can use numbers:
 
-```{r, eval = FALSE}
-# Set the italic property on row 1, column 1:
-jams %>% set_italic(1, 1) 
-```
+  ```{r, eval = FALSE}
+  # Set the italic property on row 1, column 1:
+  jams %>% set_italic(1, 1) 
+  ```
 
-* Use logical indices.
+* Or use logical indices:
 
-```{r, eval = FALSE}
-# Set the italic property on column 1 of every row matching "berry":
-is_berry <- grepl("berry", jams$Type)
-jams %>% set_italic(is_berry, 1) 
-```
+  ```{r, eval = FALSE}
+  # Set the italic property on column 1 of every row matching "berry":
+  is_berry <- grepl("berry", jams$Type)
+  jams %>% set_italic(is_berry, 1) 
+  ```
 
-* Use characters for column names:
+* Or use characters for column names:
 
-```{r, eval = FALSE}
-# Set the italic property on row 1 of the column named "Type":
-jams %>% set_italic(1, "Type")
-```
+  ```{r, eval = FALSE}
+  # Set the italic property on row 1 of the column named "Type":
+  jams %>% set_italic(1, "Type")
+  ```
 
 These methods should all be familiar from base R. They are just the same as
 you can use for subsetting a data frame. In fact, you can use the same methods
@@ -334,37 +360,37 @@ italic(jams)[1, "Type"] <- TRUE
 jams <- jams %>% set_italic(1, "Type")
 ```
 
-In `set_` functions, there are some extra shortcuts:
+In `set_` functions, there are some extra methods:
 
 * You can use [tidyselect](https://r4ds.had.co.nz/transform.html#select) 
 functions like `matches()` or `starts_with()` to select columns:
 
-```{r, eval = FALSE}
-# Set the italic property on row 1 of every column whose name starts with "T":
-jams %>% 
-      set_italic(1, starts_with("T"))
-```
+  ```{r, eval = FALSE}
+  # Set the italic property on row 1 of every column whose name starts with "T":
+  jams %>% 
+        set_italic(1, starts_with("T"))
+  ```
 
-There are also some huxtable-specific shortcuts.
+There are also some huxtable-specific selectors.
 
 * `everywhere` sets a property on all rows, or all columns.
 
-```{r, eval = FALSE}
-# Set the italic property on row 1 of all columns:
-jams %>% set_italic(1, everywhere)
-
-# Set the italic property on all rows of column 1:
-jams %>% set_italic(everywhere, 1)
-```
+  ```{r, eval = FALSE}
+  # Set the italic property on row 1 of all columns:
+  jams %>% set_italic(1, everywhere)
+  
+  # Set the italic property on all rows of column 1:
+  jams %>% set_italic(everywhere, 1)
+  ```
 
 * `final(n)` sets a property on the last `n` rows or columns.
 
-```{r, eval = FALSE}
-
-jams %>% set_italic(final(2), everywhere)
-# same as:
-jams %>% set_italic(3:4, 1:2)
-```
+  ```{r, eval = FALSE}
+  
+  jams %>% set_italic(final(2), everywhere)
+  # same as:
+  jams %>% set_italic(3:4, 1:2)
+  ```
 
 
 # Editing content
@@ -379,53 +405,62 @@ Here are some useful ways to change how cells are displayed.
 * The `text_color` property changes the color of text.
 
 
-```{r}
-jams %>% 
-      set_text_color(2:3, 1, "purple")
-```
+  ```{r}
+  jams %>% 
+        set_text_color(2:3, 1, "purple")
+  ```
 
 
-You can use any valid R color name, or an HTML hex color like `#FF0000`.
+  You can use any valid R color name, or an HTML hex color like `#FF0000`.
 
 * The `background_color` property changes background color. 
 
-Here's one way to apply a subtle horizontal stripe to a table:
+  Here's one way to apply a subtle horizontal stripe to a table:
 
 
-```{r}
-jams %>% 
-      set_background_color(evens, everywhere, "grey95")
-```
+  ```{r}
+  jams %>% 
+        set_background_color(evens, everywhere, "grey95")
+  ```
 
 
-This uses another huxtable-specific shortcut: `evens` specifies even-numbered
-rows or columns. (And `odds` specifies odd-numbered rows or columns.)
+  This uses another huxtable-specific shortcut: `evens` specifies even-numbered
+  rows or columns. (And `odds` specifies odd-numbered rows or columns.)
 
 * If you want to format selected text within cells, you can use 
   [markdown](https://commonmark.org/help) by setting the `markdown` property.
 
-The `set_markdown_contents()` sets the markdown property and the cell contents
-together:
+  The `set_markdown_contents()` sets the markdown property and the cell contents
+  together:
 
 
-```{r}
-jams %>% 
-      set_markdown_contents(1, 1, "*Type* of jam") %>% 
-      set_markdown_contents(1, 2, "*Price* of jam")
-```
+  ```{r}
+  jams %>% 
+        set_markdown_contents(1, 1, "*Type* of jam") %>% 
+        set_markdown_contents(1, 2, "*Price* of jam") %>% 
+        set_markdown_contents(3, 2, "~2.10~ **Sale!** 1.50")
+  ```
 
 
 ## Borders
 
-Each huxtable cell has 12 border properties: 
+Each huxtable cell has 4 borders, on the left, top, right and bottom. These
+borders are "collapsed", in CSS parlance: row 1's bottom border is row 2's
+top border, and setting one automatically sets the other. Each border
+has a thickness, a style ("solid", "double", "dotted" or "dashed") and a colour.
 
-* `left_border`, `right_border`, `top_border`, `bottom_border` specify the
-  border width; 
-* `left_border_style`, `right_border_style` and so on specify the border
-  style, which can be `"solid"`, `"double"`, `"dotted"`, or `"dashed"`;
-* `left_border_color` and so on specify the border color.
 
-You can set these individually:
+To set all these properties together, you can use a `brdr()` object:
+
+
+```{r}
+jams %>% 
+      set_right_border(everywhere, 1, brdr(3, "double", "grey"))
+```
+
+
+Or, you can set each component individually:
+
 
 ```{r}
 jams %>% 
@@ -435,18 +470,10 @@ jams %>%
 ```
 
 
-That can be a hassle, so there are some shortcuts. To set width, style and
-colour together, use a `brdr()` object:
 
+To set all the borders around a cell, use `set_all_borders()`. Here's a 
+corporate look for our jams:
 
-```{r}
-jams %>% 
-      set_right_border(everywhere, 1, brdr(3, "double", "grey"))
-```
-
-
-To set all the borders of a cell, use `set_all_borders()`. Here's a corporate 
-look for our jams:
 
 ```{r}
 jams %>% 
@@ -461,6 +488,10 @@ Other shortcuts include:
 * `set_tb_borders()` to set top and bottom borders;
 * `set_lr_borders()` to set left and right borders;
 * `set_outer_borders()` to set borders around a group of cells.
+
+Not all output formats handle all kinds of borders equally well. In particular,
+LaTeX currently only handles "solid" and "double" borders -- not "dotted" or
+"dashed".
 
 
 ## Changing and adding content
@@ -578,7 +609,7 @@ jams_data %>%
 ```
 
 
-## Changing the layout
+# Changing the layout
 
 When we have larger tables, we may need to control the layout more carefully.
 Here's selected rows of the `iris` dataset:
@@ -632,8 +663,10 @@ We might also want to reduce duplication in the "Species" column. We can
 use `merge_repeated_rows()` to do this.
 
 ```{r}
-iris_hux %>% 
+iris_hux <- iris_hux %>% 
       merge_repeated_rows(everywhere, "Species")
+
+iris_hux
 ```
 
 `merge_repeated_rows()` merges duplicated rows into a single multirow cell.
@@ -647,7 +680,8 @@ but it can make a table easier to read.
 ```{r}
 iris_hux_wide <- iris_hux %>% 
       set_header_rows(1:2, TRUE) %>% 
-      restack_across(rows = 7)
+      restack_across(rows = 7) %>% 
+      set_bottom_border(final(1), everywhere)
 
 iris_hux_wide
 ```
@@ -680,17 +714,21 @@ lego_hux %>%
 ```
 
 
-# Table and column width
+## Table position and column width
 
 Our new `iris` huxtable is now shorter, but it's too wide. We can control
-this with the table-level `width` property, and the *column* property `col_width`.
+this with the table-level `width` property. We can also set the
+width of individual columns with the *column* property `col_width`. And
+we might want to have this table left-aligned on the page, using the `position`
+property.
 
 ```{r}
 iris_hux_wide %>% 
       set_width(0.8) %>% 
       set_font_size(8) %>% 
       set_lr_padding(2) %>% 
-      set_col_width(everywhere, rep(c(0.4, 0.2, 0.2, 0.2, 0.2), 3)/3)
+      set_col_width(everywhere, rep(c(0.4, 0.2, 0.2, 0.2, 0.2), 3)/3) %>% 
+      set_position("left")
 ```
 
 
@@ -730,7 +768,7 @@ and columns differently. Their arguments are a list of properties and property
 values.
 
 
-## Quick themes
+# Themes
 
 Huxtable comes with some predefined themes for formatting. The table of
 huxtable properties above used `theme_bright()`.
@@ -744,7 +782,7 @@ The ["themes" vignette](themes.html) shows all the available themes. Themes
 simply apply a set of styles to the huxtable.
 
 
-## Conditional formatting
+# Conditional formatting
 
 When you want to apply different formatting to different cells, you can use the `map_xxx` functions.
 
@@ -897,7 +935,7 @@ huxreg(lm1, lm2, lm3)
 For more information see the ["huxreg" vignette](huxreg.html).
 
 
-## Getting more information
+# Getting more information
 
 Huxtable has a complete set of help files. These are installed with the
 package, or [readable online](https://hughjonesd.github.io/huxtable/reference).
