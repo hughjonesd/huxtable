@@ -29,7 +29,6 @@ environment:
     PKGTYPE: win.binary
 
   matrix:
-  - R_VERSION: devel
   - R_VERSION: release
   - R_VERSION: stable
 
