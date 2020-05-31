@@ -426,9 +426,17 @@ build_tabular <- function (ht) {
 
   ## MULTIROW ---------------------
   rowspan_blm <- rowspan(ht)[dc_map][blm_idx]
+  valign_blm  <- valign(ht)[dc_map][blm_idx]
+  valign_multirow_key <- c(
+          "top"    = "t",
+          "middle" = "c",
+          "bottom" = "b"
+        )
+  valign_blm <- valign_multirow_key[valign_blm]
   vert_adj_blm <- sprintf("%dex", 0) # start printing on the top row
   # * is "standard width", could be more specific?
-  multirow_blm_tex <- sprintf("\\multirow{-%s}{*}[%s]{", rowspan_blm, vert_adj_blm)
+  multirow_blm_tex <- sprintf("\\multirow[%s]{-%s}{*}[%s]{", valign_blm,
+        rowspan_blm, vert_adj_blm)
   multirow[blm_idx] <- multirow_blm_tex
 
   ## FINAL ASSEMBLY----------------

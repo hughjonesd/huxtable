@@ -118,7 +118,9 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
   escape_contents(mondrian) <- FALSE
   align(mondrian) <- "centre"
   font(mondrian) <- "Arial"
-  if (latex) font(mondrian) <- "cmss"
+  if (latex && ! getOption("huxtable.latex_use_fontspec", FALSE)) {
+    font(mondrian) <- "cmss"
+  }
   mondrian <- set_all_borders(mondrian, if (html) 2 else 1.2)
   mondrian <- set_all_padding(mondrian, 0)
   mondrian <- set_all_border_colors(mondrian, "black")

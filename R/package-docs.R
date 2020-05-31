@@ -55,6 +55,8 @@ NULL
 
 #' Package options
 #'
+#' Huxtable has several options.
+#'
 #' * `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
 #'   [huxtable()] and [as_huxtable()]. As of version 5.0.0, this defaults to `TRUE`.
 #' * `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].

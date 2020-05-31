@@ -250,6 +250,7 @@ theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
   assert_that(is.number(prop_colored), prop_colored >= 0, prop_colored <= 1)
 
   ht <- set_all_borders(ht, 2)
+  ht <- set_all_padding(ht, 3)
   ht <- set_all_border_colors(ht, "black")
   ncells <- nrow(ht) * ncol(ht)
   colored <- sample.int(ncells, size = ceiling(ncells * prop_colored), replace = FALSE)
