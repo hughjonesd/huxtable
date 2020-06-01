@@ -33,7 +33,7 @@ Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 Colors can be in any format understood by R:
 \itemize{
 \item A color name like \code{"darkred"}
-\item A HTML string like \verb{"#FF0000}
+\item A HTML string like \code{"#FF0000"}
 \item The result of a function like \code{rgb(1, 0, 0)} or \code{grey(0.5)}
 }
 }
@@ -42,11 +42,11 @@ Colors can be in any format understood by R:
 text_color(jams) <-  "blue"
 text_color(jams)
 
-set_text_color(jams, "blue")
+set_text_color(jams, "red")
 set_text_color(jams,
-      2:3, 1, "blue")
+      2:3, 1, "red")
 map_text_color(jams,
-      by_rows("blue", "red"))
+      by_rows("red", "blue"))
 }
 \seealso{
 Other formatting functions: 

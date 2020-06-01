@@ -49,17 +49,17 @@ font(jams) <-  "times"
 font(jams)
 
 jams2 <- set_font(jams,
-      "times")
+      "arial")
 font(jams2)
 
 jams3 <- set_font(jams,
-      2:3, 1, "times")
+      2:3, 1, "arial")
 font(jams3)
 
 jams4 <- map_font(jams,
       by_rows(
-        "times",
-        "arial")
+        "arial",
+        "times")
       )
 font(jams4)
 }

@@ -46,11 +46,11 @@ Make cell text bold or italic
 bold(jams) <-  TRUE
 bold(jams)
 
-set_bold(jams, TRUE)
+set_bold(jams, FALSE)
 set_bold(jams,
-      2:3, 1, TRUE)
+      2:3, 1, FALSE)
 map_bold(jams,
-      by_rows(TRUE, FALSE))
+      by_rows(FALSE, TRUE))
 }
 \seealso{
 Other formatting functions: 

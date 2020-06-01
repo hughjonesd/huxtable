@@ -41,14 +41,16 @@ work better if you use a fixed-width font.
 }
 \examples{
 
-number_hux <- as_hux(matrix(c(1, 1.5, 1.03, 10, 10.01), 5, 4))
+numbers <- c(1, 1.5, 1.03, 10, 10.01)
+number_hux <- as_hux(matrix(numbers, 5, 4))
 number_format(number_hux) <- "\%.4g"
+
 number_hux <- map_align(number_hux,
       by_cols("left", "center", "right", "."))
 
-
+alignments <- c("left", "centre", "right", "decimal (.)")
 number_hux <- rbind(
-        c("left", "centre", "right", "decimal (.)"),
+        alignments,
         number_hux
       )
 number_hux

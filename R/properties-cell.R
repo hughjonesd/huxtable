@@ -12,7 +12,7 @@
 #' Defining row heights with [row_height()] may help.
 #'
 #' @template getset-example
-#' @templateVar attr_val "bottom"
+#' @templateVar attr_val "top"
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "bottom"
 NULL
@@ -45,14 +45,16 @@ check_align_value <- function (x) {
 #'
 #' @examples
 #'
-#' number_hux <- as_hux(matrix(c(1, 1.5, 1.03, 10, 10.01), 5, 4))
+#' numbers <- c(1, 1.5, 1.03, 10, 10.01)
+#' number_hux <- as_hux(matrix(numbers, 5, 4))
 #' number_format(number_hux) <- "%.4g"
+#'
 #' number_hux <- map_align(number_hux,
 #'       by_cols("left", "center", "right", "."))
 #'
-#'
+#' alignments <- c("left", "centre", "right", "decimal (.)")
 #' number_hux <- rbind(
-#'         c("left", "centre", "right", "decimal (.)"),
+#'         alignments,
 #'         number_hux
 #'       )
 #' number_hux
@@ -72,9 +74,8 @@ make_getter_setters("align", "cell",
 #' colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
 #' and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 #'
-#' @template getset-cell
-#' @templateVar attr_name rowspan
-#' @templateVar value_param_desc An integer vector or matrix.
+#' @template property-params
+#' @param value An integer vector or matrix.
 #'
 #' @seealso [merge_cells()], [merge_across()] and [merge_down()] for
 #' a higher-level interface.
@@ -87,6 +88,15 @@ make_getter_setters("align", "cell",
 #' set_rowspan(letter_hux, 1, 1, 2)
 #' set_colspan(letter_hux, 1, 1, 2)
 #'
+#' @name spans
+NULL
+
+
+#' @name rowspan
+#' @rdname spans
+#' @template cell-property-usage
+#' @templateVar attr_name rowspan
+#' @aliases rowspan<- set_rowspan map_rowspan
 NULL
 make_getter_setters("rowspan", "cell",
         check_fun = is.numeric,
@@ -102,7 +112,7 @@ make_getter_setters("rowspan", "cell",
 
 
 #' @name colspan
-#' @rdname rowspan
+#' @rdname spans
 #' @template cell-property-usage
 #' @templateVar attr_name colspan
 #' @aliases colspan<- set_colspan map_colspan
@@ -124,13 +134,13 @@ make_getter_setters("colspan", "cell",
 #' Colors can be in any format understood by R:
 #'
 #' * A color name like `"darkred"`
-#' * A HTML string like `"#FF0000`
+#' * A HTML string like `"#FF0000"`
 #' * The result of a function like `rgb(1, 0, 0)` or `grey(0.5)`
 #' @name description-colors
 NULL
 
 
-#' Set the background color of table cells
+#' Set cell background color
 #'
 #' @inherit description-colors description
 #'
@@ -144,7 +154,7 @@ NULL
 #' @family formatting functions
 #'
 #' @template getset-example
-#' @templateVar attr_val grey(.95)
+#' @templateVar attr_val grey(0.7)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "yellow"
 NULL
@@ -179,11 +189,14 @@ make_getter_setters("text_color", "cell")
 #'
 #' @examples
 #'
-#' ht <- huxtable(paste(
-#'       rep("Some long text.", 10),
-#'       collapse = " "))
+#' long_text <- paste(
+#'         rep("Some long text.", 10),
+#'         collapse = " "
+#'      )
+#' ht <- huxtable(Long = long_text)
 #' width(ht) <- 0.2
 #' wrap(ht) <- TRUE
+#'
 #' \dontrun{
 #'   quick_html(ht)
 #' }

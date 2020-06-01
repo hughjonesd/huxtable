@@ -2,8 +2,8 @@
 
 #' @examples
 #'
-#' set_<%= attr_name %>(jams, <%= attr_val %>)
+#' set_<%= attr_name %>(jams, <%= attr_val2 %>)
 #' set_<%= attr_name %>(jams,
-#'       2:3, 1, <%= attr_val %>)
+#'       2:3, 1, <%= attr_val2 %>)
 #' map_<%= attr_name %>(jams,
-#'       by_rows(<%= attr_val %>, <%= attr_val2 %>))
+#'       by_rows(<%= attr_val2 %>, <%= attr_val %>))

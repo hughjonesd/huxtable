@@ -38,7 +38,7 @@ Defining row heights with \code{\link[=row_height]{row_height()}} may help.
 }
 \examples{
 
-valign(jams) <-  "bottom"
+valign(jams) <-  "top"
 valign(jams)
 
 jams2 <- set_valign(jams,
@@ -52,7 +52,7 @@ valign(jams3)
 jams4 <- map_valign(jams,
       by_rows(
         "bottom",
-        "bottom")
+        "top")
       )
 valign(jams4)
 }

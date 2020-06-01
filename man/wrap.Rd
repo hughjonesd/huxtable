@@ -34,11 +34,14 @@ Text wrapping only really makes sense when the table \code{\link[=width]{width()
 }
 \examples{
 
-ht <- huxtable(paste(
-      rep("Some long text.", 10),
-      collapse = " "))
+long_text <- paste(
+        rep("Some long text.", 10),
+        collapse = " "
+     )
+ht <- huxtable(Long = long_text)
 width(ht) <- 0.2
 wrap(ht) <- TRUE
+
 \dontrun{
   quick_html(ht)
 }

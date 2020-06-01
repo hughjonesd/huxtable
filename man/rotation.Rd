@@ -48,17 +48,17 @@ rotation(jams) <-  90
 rotation(jams)
 
 jams2 <- set_rotation(jams,
-      90)
+      270)
 rotation(jams2)
 
 jams3 <- set_rotation(jams,
-      2:3, 1, 90)
+      2:3, 1, 270)
 rotation(jams3)
 
 jams4 <- map_rotation(jams,
       by_rows(
-        90,
-        270)
+        270,
+        90)
       )
 rotation(jams4)
 }

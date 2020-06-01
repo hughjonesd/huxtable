@@ -5,7 +5,7 @@
 \alias{background_color<-}
 \alias{set_background_color}
 \alias{map_background_color}
-\title{Set the background color of table cells}
+\title{Set cell background color}
 \usage{
 background_color(ht)
 background_color(ht) <- value
@@ -33,7 +33,7 @@ Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 Colors can be in any format understood by R:
 \itemize{
 \item A color name like \code{"darkred"}
-\item A HTML string like \verb{"#FF0000}
+\item A HTML string like \code{"#FF0000"}
 \item The result of a function like \code{rgb(1, 0, 0)} or \code{grey(0.5)}
 }
 }
@@ -42,14 +42,14 @@ Transparent colors are not guaranteed to work at present.
 }
 \examples{
 
-background_color(jams) <-  grey(.95)
+background_color(jams) <-  grey(0.7)
 background_color(jams)
 
-set_background_color(jams, grey(.95))
+set_background_color(jams, "yellow")
 set_background_color(jams,
-      2:3, 1, grey(.95))
+      2:3, 1, "yellow")
 map_background_color(jams,
-      by_rows(grey(.95), "yellow"))
+      by_rows("yellow", grey(0.7)))
 }
 \seealso{
 Other formatting functions: 
