@@ -55,8 +55,14 @@ style_header_cols <- function (ht, ...) {
 #' @rdname style-functions
 style_cells <- function (ht, row, col, ...) {
   props <- list(...)
-  if (! all(names(props) %in% huxtable_cell_attrs)) stop("Unrecognized properties: ", paste(setdiff(names(props),
-    huxtable_cell_attrs), collapse = ", "))
+  ok_names <- c(huxtable_cell_attrs, huxtable_border_df$name)
+  if (! all(names(props) %in% ok_names)) {
+    stop(
+            "Unrecognized properties: ",
+            paste(setdiff(names(props), ok_names), collapse = ", ")
+          )
+  }
+
   call <- match.call(expand.dots = FALSE)
   call[["..."]] <- NULL
   call[["ht"]] <- quote(ht)

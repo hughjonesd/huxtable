@@ -19,6 +19,19 @@ test_that("style_cells fails with bad arguments", {
 })
 
 
+test_that("style_cells works with border properties", {
+  ht <- huxtable(1:2, 1:2)
+  expect_silent(ht <- style_cells(ht, bottom_border = 0.4))
+  expect_equivalent(brdr_thickness(bottom_border(ht)), matrix(0.4, 2, 2))
+
+  expect_silent(ht <- style_cells(ht, bottom_border = brdr(0.6)))
+  expect_equivalent(brdr_thickness(bottom_border(ht)), matrix(0.6, 2, 2))
+
+  expect_silent(ht <- style_cells(ht, top_border_color = "red"))
+  expect_equivalent(top_border_color(ht), matrix("red", 2, 2))
+})
+
+
 test_that("style_headers et al.", {
   ht <- hux(a = 1, add_colnames = TRUE)
   ht <- style_headers(ht, bold = TRUE)
