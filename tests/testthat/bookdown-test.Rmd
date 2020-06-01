@@ -8,9 +8,10 @@ output:
 ```{r setup, include=FALSE}
 library(dplyr)
 library(huxtable)
-# invalidate cache when the tufte version changes
-if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) stop("guessed output is ", x)
 
+if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) {
+  stop("guessed output is ", x)
+}
 if (! huxtable:::in_bookdown()) stop("huxtable:::in_bookdown() returned false")
 ```
 

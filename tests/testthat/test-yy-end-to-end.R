@@ -8,6 +8,16 @@ skip_without_pandoc()
 require_temp_artefacts_dir()
 
 
+setup({
+  oo <- options("huxtable.autolabel" = FALSE)
+})
+
+
+teardown({
+  options(oo)
+})
+
+
 validate_markdown <- function(md_string) {
   on.exit({
     if (exists("tf")) try(file.remove(tf), silent = TRUE)
@@ -34,7 +44,11 @@ validate_markdown <- function(md_string) {
 test_render <- function(path, format, output_dir = "temp-artefacts") {
   output <- ""
   force(output_dir)
-  on.exit(if (file.exists(output)) try(file.remove(output), silent = TRUE))
+  oo <- options(huxtable.latex_use_fontspec = FALSE)
+  on.exit({
+    options(oo)
+    if (file.exists(output)) try(file.remove(output), silent = TRUE)
+  })
   expect_error(output <- rmarkdown::render(path,
           output_format     = format,
           quiet             = TRUE,
