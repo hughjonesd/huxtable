@@ -1,17 +1,25 @@
 
+#' Set the vertical alignment of cell content
+#'
+#' Allowed values are "top", "middle", "bottom" or `NA`.
+#'
 #' @template getset-cell
 #' @templateVar attr_name valign
-#' @templateVar attr_desc Vertical alignment
-#' @templateVar value_param_desc A character vector or matrix which may be "top", "middle", "bottom" or `NA`.
+#' @templateVar value_param_desc A character vector or matrix.
+#'
+#' @details
+#' Vertical alignment may not work for short text in LaTeX.
+#' Defining row heights with [row_height()] may help.
+#'
 #' @template getset-example
 #' @templateVar attr_val "bottom"
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "bottom"
-#' @details
-#' Vertical alignment may not work for short text in LaTeX. Defining row heights with [row_height()]
-#' may help.
 NULL
-make_getter_setters("valign", "cell", check_fun = is.character, check_values = c("top", "middle", "bottom"))
+make_getter_setters("valign", "cell",
+        check_fun = is.character,
+        check_values = c("top", "middle", "bottom")
+      )
 
 
 check_align_value <- function (x) {
@@ -20,58 +28,159 @@ check_align_value <- function (x) {
 }
 
 
+#' Set the horizontal alignment of cell content
+#'
+#' Values may be "left", "center", "right", `NA` or a single character. If
+#' `value` is a single character (e.g. a decimal point), then the cell is
+#' aligned on this character.
+#'
 #' @template getset-cell
 #' @templateVar attr_name align
-#' @templateVar attr_desc Alignment
-#' @templateVar value_param_desc A character vector or matrix which may be "left", "center", "right" , `NA` or a single character.
-#' @template getset-example
-#' @templateVar attr_val "right"
-#' @template getset-visible-rowspec-example
-#' @templateVar attr_val2 "left"
-#' @details This sets the horizontal alignment of the cell. If `value` is a single character (e.g.
-#' a decimal point), then the cell is aligned on this character.
+#' @templateVar value_param_desc A character vector or matrix.
+#'
+#' @details
+#' Neither HTML nor LaTeX currently possess reliable ways of aligning cells
+#' on a decimal point. Huxtable does this by padding with spaces. This may
+#' work better if you use a fixed-width font.
+#'
+#' @examples
+#'
+#' number_hux <- as_hux(matrix(c(1, 1.5, 1.03, 10, 10.01), 5, 4))
+#' number_format(number_hux) <- "%.4g"
+#' number_hux <- map_align(number_hux,
+#'       by_cols("left", "center", "right", "."))
+#'
+#'
+#' number_hux <- rbind(
+#'         c("left", "centre", "right", "decimal (.)"),
+#'         number_hux
+#'       )
+#' number_hux
+#'
 NULL
-make_getter_setters("align", "cell", check_fun = check_align_value,
-  extra_code = value[value == "centre"] <- "center")
+make_getter_setters("align", "cell",
+        check_fun  = check_align_value,
+        extra_code = {
+          value[value == "centre"] <- "center"
+        }
+      )
 
 
+#' Extend cells over multiple rows and/or columns
+#'
+#' A cell with rowspan of 2 covers the cell directly below it. A cell with
+#' colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
+#' and colspan of 2 covers a 2 x 2 square, hiding three other cells.
+#'
+#' @template getset-cell
+#' @templateVar attr_name rowspan
+#' @templateVar value_param_desc An integer vector or matrix.
+#'
+#' @seealso [merge_cells()], [merge_across()] and [merge_down()] for
+#' a higher-level interface.
+#'
+#' @examples
+#'
+#' letter_hux <- as_hux(matrix(LETTERS[1:9], 3, 3))
+#' letter_hux <- set_all_borders(letter_hux)
+#' letter_hux
+#' set_rowspan(letter_hux, 1, 1, 2)
+#' set_colspan(letter_hux, 1, 1, 2)
+#'
+NULL
+make_getter_setters("rowspan", "cell",
+        check_fun = is.numeric,
+        extra_code = {
+          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          if (any(too_long)) {
+            stop("rowspan would extend beyond bottom of table")
+          }
+          # throws an error if cells are cut
+          display_cells(ht, new_rowspan = value)
+        }
+      )
+
+
+#' @name colspan
+#' @rdname rowspan
+#' @template cell-property-usage
+#' @templateVar attr_name colspan
+#' @aliases colspan<- set_colspan map_colspan
+NULL
+make_getter_setters("colspan", "cell",
+        check_fun = is.numeric,
+        extra_code = {
+          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          if (any(too_long)) {
+            stop("colspan would extend beyond right edge of table")
+          }
+          # throws an error if cells are cut
+          display_cells(ht, new_colspan = value)
+        }
+      )
+
+
+#' @description
+#' Colors can be in any format understood by R:
+#'
+#' * A color name like `"darkred"`
+#' * A HTML string like `"#FF0000`
+#' * The result of a function like `rgb(1, 0, 0)` or `grey(0.5)`
+#' @name description-colors
+NULL
+
+
+#' Set the background color of table cells
+#'
+#' @inherit description-colors description
+#'
 #' @template getset-cell
 #' @templateVar attr_name background_color
-#' @templateVar attr_desc Background color
-#' @templateVar value_param_desc A character vector or matrix of valid R color names.
+#' @templateVar value_param_desc A character vector or matrix.
+#'
+#' @details
+#' Transparent colors are not guaranteed to work at present.
+#'
+#' @family formatting functions
+#'
 #' @template getset-example
 #' @templateVar attr_val grey(.95)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "yellow"
-#' @family formatting functions
 NULL
 make_getter_setters("background_color", "cell")
 
 
+#' Set the color of text in cells
+#'
+#' @inherit description-colors description
+#'
 #' @template getset-cell
 #' @templateVar attr_name text_color
-#' @templateVar attr_desc Text color
-#' @templateVar value_param_desc A character vector or matrix of valid R colors.
-#' @details
-#' Colors can be in any format understood by R, e.g. `"red"`, `"#FF0000"` or `rgb(1, 0, 0)`.
+#' @templateVar value_param_desc A character vector or matrix.
+#'
+#' @family formatting functions
+#'
 #' @template getset-example
 #' @templateVar attr_val "blue"
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "red"
-#' @family formatting functions
 NULL
 make_getter_setters("text_color", "cell")
 
 
+#' Wrap cell content over multiple lines
+#'
+#' Text wrapping only really makes sense when the table [width()] has been set.
+#'
 #' @template getset-cell
 #' @templateVar attr_name wrap
-#' @templateVar attr_desc Text wrapping
-#' @templateVar value_param_desc
-#' A logical vector or matrix. If `TRUE`, long cell contents will be wrapped into multiple lines.
-#' Set to `NA` for the default.
+#' @templateVar value_param_desc A logical vector or matrix.
+#'
 #' @examples
+#'
 #' ht <- huxtable(paste(
-#'       rep("Some long text.", 20),
+#'       rep("Some long text.", 10),
 #'       collapse = " "))
 #' width(ht) <- 0.2
 #' wrap(ht) <- TRUE
@@ -79,83 +188,98 @@ make_getter_setters("text_color", "cell")
 #'   quick_html(ht)
 #' }
 #'
-#' @template getset-rowspec-example
-#' @templateVar attr_val TRUE
-#' @templateVar attr_val2 FALSE
-#'
 NULL
 make_getter_setters("wrap", "cell", check_fun = is.logical)
 
 
+#' Escape or unescape text in cells
+#'
+#' Setting `escape_contents` to `FALSE` allows you to include raw HTML or
+#' TeX code in your cells.
+#'
 #' @template getset-cell
 #' @templateVar attr_name escape_contents
-#' @templateVar attr_desc Escape cell contents
-#' @templateVar value_param_desc
-#' A logical vector or matrix. If `TRUE`, cell contents will be HTML or LaTeX escaped.
+#' @templateVar value_param_desc A logical vector or matrix.
+#'
 #' @details
 #' If [markdown()] is `TRUE` for a cell, the `escape_contents` property
 #' will be ignored.
 #'
+#' @seealso [sanitize()] for escaping text manually.
+#'
 #' @examples
+#'
 #' ht <- huxtable(
-#'         Exponent = 2:4,
-#'         Example  = paste0("$x^", 2:4, "$")
+#'         Text   = "x squared",
+#'         Maths  = "$x^2$"
 #'       )
-#' escape_contents(ht)[,2] <- FALSE
+#' ht <- set_escape_contents(ht, FALSE)
 #' \dontrun{
 #'   quick_pdf(ht)
 #' }
 #'
-#' @template getset-rowspec-example
-#' @templateVar attr_val TRUE
-#' @templateVar attr_val2 FALSE
 NULL
 make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 
 
+#' Format cell content as markdown
+#'
+#' Cells where the markdown property is `TRUE` will be rendered as
+#' [markdown](https://commonmark.org/help/).
+#'
 #' @template getset-cell
 #' @templateVar attr_name markdown
-#' @templateVar attr_desc markdown
-#' @templateVar value_param_desc
-#' A logical vector or matrix. If `TRUE`, cell contents will be rendered as [markdown](https://commonmark.org/help/).
-#' @template getset-rowspec-example
-#' @templateVar attr_val TRUE
-#' @templateVar attr_val2 FALSE
+#' @templateVar value_param_desc A logical vector or matrix.
 #' @templateVar default TRUE
+#'
 #' @details
 #' Markdown is currently implemented for HTML and LaTeX only. There is
 #' basic support for on-screen display. The only extension used is
 #' "strikethrough": write `~text~` to strike through text.
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
+#'
+#' @examples
+#'
+#' jams[3, 2] <- "~2.10~ **Sale!** 1.50"
+#' set_markdown(jams, 3, 2)
+#'
 NULL
-make_getter_setters("markdown", "cell", check_fun = is.logical, default = TRUE)
+make_getter_setters("markdown", "cell",
+        check_fun = is.logical,
+        default   = TRUE
+      )
 
 
 
+#' Change how NA values are printed
+#'
+#' NA values in the huxtable are printed as the value of `na_string`.
+#'
 #' @template getset-cell
 #' @templateVar attr_name na_string
-#' @templateVar attr_desc NA string
-#' @templateVar value_param_desc
-#' A character string. This will be used to replace NA values in the display.
-#' @template getset-example
-#' @templateVar attr_val "--"
-#' @noMd
-#' @templateVar extra jams[2,2] <- NA ## jams
-#' @template getset-rowspec-example
-#' @templateVar attr_val2 ""
+#' @templateVar value_param_desc A character vector or matrix.
+#'
 #' @family formatting functions
+#'
+#' @examples
+#'
+#' jams[3, 2] <- NA
+#' jams
+#' set_na_string(jams, "---")
+#'
 NULL
 make_getter_setters("na_string", "cell", check_fun = is.character)
 
 
+#' Make cell text bold or italic
+#'
 #' @template getset-cell
 #' @templateVar attr_name bold
-#' @templateVar attr_desc Cell text style
-#' @templateVar value_param_desc
-#' A logical vector or matrix. `TRUE` for bold/italic.
+#' @templateVar value_param_desc A logical vector or matrix.
 #' @templateVar morealiases italic
 #' @templateVar default TRUE
+#'
 #' @template getset-example
 #' @templateVar attr_val TRUE
 #' @template getset-visible-rowspec-example
@@ -170,17 +294,19 @@ make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
 #' @templateVar attr_name italic
 #' @templateVar default TRUE
 #' @template cell-property-usage
-#' @return
-#' Similarly for \code{italic} and friends.
 NULL
 make_getter_setters("italic", "cell", default = TRUE, check_fun = is.logical)
 
 
+#' Make text larger or smaller
+#'
+#' Font size is in points.
+#'
 #' @template getset-cell
 #' @templateVar attr_name font_size
 #' @templateVar attr_desc Font size
-#' @templateVar value_param_desc
-#' A numeric vector. This sets the font size in points.
+#' @templateVar value_param_desc A numeric vector.
+#'
 #' @template getset-example
 #' @templateVar attr_val 14
 #' @template getset-rowspec-example
@@ -190,52 +316,63 @@ NULL
 make_getter_setters("font_size", "cell", check_fun = is.numeric)
 
 
+#' Rotate text within cells
+#'
+#' Numbers represent degrees to rotate text anti-clockwise:
+#'
+#' * 0 is the default;
+#' * 90 is going upwards, for left-to-right languages;
+#' * 270 is going downwards.
+#'
 #' @template getset-cell
 #' @templateVar attr_name rotation
-#' @templateVar attr_desc Text rotation
-#' @templateVar value_param_desc
-#' A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
+#' @templateVar value_param_desc A numeric vector or matrix.
+#'
+#' @details
+#' You will probably need to set [col_width()] and [row_height()] explicitly
+#' to achieve a nice result, in both HTML and LaTeX.
+#'
 #' @template getset-example
 #' @templateVar attr_val 90
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 270
-#' @details
-#' You will probably need to set [col_width()] and [row_height()] explicitly
-#' to achieve a nice result, in both HTML and LaTeX.
 NULL
-make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {value <- value %% 360})
+make_getter_setters("rotation", "cell",
+        check_fun = is.numeric,
+        extra_code = {value <- value %% 360}
+      )
 
 
+#' Set how numbers are formatted in cells
+#'
+#' If `number_format` is:
+#' * numeric, numbers will be rounded to that many decimal places;
+#' * character, it will be used as an argument to [sprintf()];
+#' * a function, the function will be applied to the numbers;
+#' * `NA`, then numbers will not be formatted (except by conversion with
+#'   `as.character`).
+#'
 #' @template getset-cell
 #' @templateVar attr_name number_format
-#' @templateVar attr_desc Number format
-#' @templateVar value_param_desc A character or integer vector, or a list containing a function, or \code{NA}.
+#' @templateVar value_param_desc A character or integer vector,
+#'   a list containing a function, or \code{NA}.
 #' @templateVar NA_does_not_reset TRUE
+#'
 #' @details
-#' Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
-#' followed by
-#' numerals, followed by an optional decimal point and further numerals). The exception is exponents in
+#' Number formatting is applied to any parts of cells that look like numbers.
+#' The exception is exponents in
 #' scientific notation; huxtable attempts to detect and ignore these.
 #'
-#' If `value` is
-#' * numeric, numbers will be rounded to that many decimal places;
-#' * character, it will be taken as an argument to [sprintf()];
-#' * a function, the function will be applied to the numbers;
-#' * `NA`, then numbers will not be formatted (except maybe by conversion with `as.character`).
+#' The default value is "\%.3g", which rounds numbers if they have more than 3
+#' significant digits, and which may use scientific notation for large numbers.
 #'
-#' Note that if your cells are of type numeric, a number format of `NA` doesn't guarantee you get
-#' back what you typed in, since R's default conversion may apply scientific notation and
-#' rounding.
-#'
-#' The default value is "\%.3g", which rounds numbers if they have more than 3 significant
-#' digits, and which may use scientific notation for large numbers.
+#' Note that if your cells are of type numeric, a number format of `NA` doesn't
+#' guarantee you get back what you typed in, since R's default conversion may
+#' apply scientific notation and rounding.
 #'
 #' To set number_format to a function, enclose the function in `list`. The function should
 #' take one argument and return a string. [fmt_pretty()] and [fmt_percent()]
 #' are useful shortcuts for common formatting functions.
-#'
-#' Versions of huxtable before 2.0.0 applied `number_format` only to cells that looked like
-#' numbers in their entirety. The default value was "\%5.2f".
 #'
 #' @family formatting functions
 #'
@@ -277,16 +414,16 @@ make_getter_setters("rotation", "cell", check_fun = is.numeric, extra_code = {va
 #' # fixed:
 #' set_number_format(ht_bands, NA)
 #'
-#' @template getset-visible-rowspec-example
-#' @templateVar attr_val 2
-#' @templateVar attr_val2 3
 NULL
 make_getter_setters("number_format", "cell")
 
 
 # override the default
 `number_format<-.huxtable` <- function(ht, value) {
-  stopifnot(all(sapply(value, function (x) is.numeric(x) || is.character(x) || is.function(x) || is.na(x) )))
+  value_ok <- function (x) {
+    is.numeric(x) || is.character(x) || is.function(x) || is.na(x)
+  }
+  stopifnot(all(sapply(value, value_ok)))
   attr(ht, "number_format")[] <- value
   ht
 }
@@ -320,25 +457,32 @@ contents.huxtable <- function (ht) ht
 
 #' @evalNamespace "S3method(\"contents<-\", huxtable)"
 `contents<-.huxtable` <- function (ht, value) {
-  value # by the time we get here, the replacement has already happened and we're done
+  value # by the time we get here, the replacement has already happened
 }
 
 
+#' Set the font for cell text
+#'
 #' @template getset-cell
 #' @templateVar attr_name font
-#' @templateVar attr_desc Font
-#' @templateVar value_param_desc
-#' A character vector of font names.
+#' @templateVar value_param_desc A character vector or matrix.
+#'
 #' @details
-#' LaTeX and HTML use different font names. If you want to use the same font
-#' names across document formats, set `options("huxtable.latex_use_fontspec")`
-#' to `TRUE`. See [huxtable-options].
+#' To find out what fonts are on your system, `systemfonts::match_font()`
+#' is useful.
+#'
+#' For HTML, you can use comma-separated lists of font names like
+#' `"Times New Roman, Times, Serif"`. This is not portable, though.
+#'
+#' LaTeX and HTML use different font names. To use the same font
+#' names across document formats, see `options("huxtable.latex_use_fontspec")`
+#' in [huxtable-options].
+#'
+#' @family formatting functions
 #'
 #' @template getset-example
 #' @templateVar attr_val "times"
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "arial"
-#' @family formatting functions
-#' @template cell-property-usage
 NULL
 make_getter_setters("font", "cell", check_fun = is.character)

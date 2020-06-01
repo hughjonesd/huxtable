@@ -57,36 +57,52 @@ NULL
 #'
 #' Huxtable has several options.
 #'
-#' * `options('huxtable.add_colnames')` sets the default value for `add_colnames` in
-#'   [huxtable()] and [as_huxtable()]. As of version 5.0.0, this defaults to `TRUE`.
-#' * `options('huxtable.print')` sets the print method for huxtable objects. See [print.huxtable()].
-#' * `options('huxtable.knitr_output_format')` overrides the default output format when huxtable
-#'   objects are printed by knitr. Set to "html", "latex", "md" or "screen". If `NULL` (the default),
-#'   huxtable guesses the format using [guess_knitr_output_format()].
-#'   `options('huxtable.autolabel')`. If `TRUE`, (the default) automatically sets
-#'    `label()` from the knitr chunk label, if there is one.
+#' * `options('huxtable.add_colnames')` sets the default value for
+#' `add_colnames` in [huxtable()] and [as_huxtable()]. As of version 5.0.0, this
+#' defaults to `TRUE`.
 #'
-#' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is available, huxtables
-#'    will be printed in color on screen.
-#' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to automatically
-#'   print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
-#'   document.
-#' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames in knitr will be
-#'   pretty-printed using huxtable.
+#' * `options('huxtable.print')` sets the print method for
+#' huxtable objects. See [print.huxtable()].
+#'
+#' * `options('huxtable.knitr_output_format')` overrides the default output format
+#' when huxtable objects are printed by knitr. Set to "html", "latex", "md" or
+#' "screen". If `NULL` (the default), huxtable guesses the format using
+#' [guess_knitr_output_format()].
+#'
+#' * `options('huxtable.autolabel')`. If `TRUE`, (the default) automatically
+#'   sets `label()` from the knitr chunk label, if there is one.
+#'
+#' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is
+#' available, huxtables will be printed in color on screen.
+#'
+#' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to
+#' automatically print bookdown-style labels. If unset, huxtable will try to
+#' guess if we are in a bookdown document.
+#'
+#' * `options('huxtable.knit_print_df')`. If `TRUE` (the default), data frames
+#' in knitr will be pretty-printed using huxtable.
+#'
 #' * `options('huxtable.knit_print_df_theme')`. A function applied to data frames
-#'    before printing in knitr. The function should take one argument (a data frame) and return a
-#'    huxtable. Defaults to [theme_plain()].
-#' * `options('huxtable.autoformat')` sets the default value for `autoformat` in [huxtable()] and
-#'   [as_huxtable()]. It defaults to `TRUE`.
-#' * `options('huxtable.latex_use_fontspec')`. If `TRUE`, use the "fontspec" package, which allows
-#'    you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
-#'    engine, which can be set using an .rmd header option. Note that [quick_pdf()]
-#'    may use pdflatex. It defaults to `FALSE`.
-#' * `options('huxtable.autoformat_number_format')` and `options('huxtable.autoformat_align')` are
-#'   lists. The list names are base R classes. [huxtable()] with `autoformat = TRUE` will set
-#'   `number_format()` and `align()` for data columns according to the corresponding list values.
-#'   For example, to center-align `Date` objects you could set `"huxtable.autoformat_align"` to
-#'   something like `list(..., Date = "center", ...)`.
+#'   before printing in knitr. The function should take one argument (a data
+#' frame) and return a huxtable. Defaults to [theme_plain()].
+#'
+#' * `options('huxtable.autoformat')` sets the default value for `autoformat` in
+#' [huxtable()] and [as_huxtable()]. It defaults to `TRUE`.
+#'
+#' * `options('huxtable.latex_use_fontspec')`. If `TRUE`, use the "fontspec"
+#' package, which allows you to use the same font names in TeX and HTML. This
+#' requires the the xetex or xelatex engine, which can be set using an .rmd
+#' header option. Note that [quick_pdf()] may use pdflatex. The default is
+#' `FALSE`.
+#'
+#' * `options('huxtable.autoformat_number_format')` and
+#'   `options('huxtable.autoformat_align')` are lists. The list names are base R
+#'   classes. [huxtable()] with `autoformat = TRUE` will set `number_format()` and
+#'   `align()` for data columns according to the corresponding list values. For
+#'   example, to center-align `Date` objects you could set
+#'   `"huxtable.autoformat_align"` to something like
+#'   `list(..., Date = "center", ...)`.
+#'
 #' @name huxtable-options
 #' @docType package
 NULL

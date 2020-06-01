@@ -4,7 +4,7 @@
 \alias{caption_pos}
 \alias{caption_pos<-}
 \alias{set_caption_pos}
-\title{Caption position}
+\title{Position the table's caption}
 \usage{
 caption_pos(ht)
 caption_pos(ht) <- value
@@ -13,25 +13,26 @@ set_caption_pos(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector, one of "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter", "bottomright". Set to \code{NA} to reset to the default, which is
+\item{value}{String: "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter" or "bottomright". Set to \code{NA} to reset to the default, which is
 \code{"top"}.}
 }
 \value{
-For \code{caption_pos}, the \code{caption_pos} property.
-For \code{set_caption_pos}, the modified huxtable.
+\code{caption_pos()} returns the \code{caption_pos} property.
+\code{set_caption_pos()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{caption position} property of a huxtable.
-}
-\details{
-If \code{caption_pos} is "top" or "bottom", then the horizontal position ("left", "center" or "right")
-will be determined by the huxtable"s \code{\link[=position]{position()}}.
+If \code{caption_pos} is "top" or "bottom", then the horizontal position ("left",
+"center" or "right") will be determined by the huxtable"s \code{\link[=position]{position()}}.
 }
 \examples{
-caption(jams) <- "Price list"
+
+caption_pos(jams) <-  "topleft"
+caption_pos(jams)
+
+caption(jams) <- "Jam for sale"
 jams
-caption_pos(jams) <- "top"
-jams
+set_caption_pos(jams, "bottom")
+
 }
 \seealso{
 Other caption properties: 

@@ -5,7 +5,7 @@
 \alias{rotation<-}
 \alias{set_rotation}
 \alias{map_rotation}
-\title{Text rotation}
+\title{Rotate text within cells}
 \usage{
 rotation(ht)
 rotation(ht) <- value
@@ -21,28 +21,31 @@ map_rotation(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A numeric vector. Anti-clockwise from the x axis, so 0 is left to right, 90 is going up, etc.
+\item{value}{A numeric vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{0}.}
 }
 \value{
-For \code{rotation}, the \code{rotation} property.
-For \code{set_rotation} and \code{map_rotation}, the modified huxtable.
+\code{rotation()} returns the \code{rotation} property.
+\code{set_rotation()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{text rotation} property of huxtable cells.
+Numbers represent degrees to rotate text anti-clockwise:
 }
 \details{
+\itemize{
+\item 0 is the default;
+\item 90 is going upwards, for left-to-right languages;
+\item 270 is going downwards.
+}
+
 You will probably need to set \code{\link[=col_width]{col_width()}} and \code{\link[=row_height]{row_height()}} explicitly
 to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{
 
-orig <- rotation(jams)
 rotation(jams) <-  90
 rotation(jams)
-
-rotation(jams) <- orig
 
 jams2 <- set_rotation(jams,
       90)

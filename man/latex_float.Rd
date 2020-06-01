@@ -4,7 +4,7 @@
 \alias{latex_float}
 \alias{latex_float<-}
 \alias{set_latex_float}
-\title{Float position for LaTeX}
+\title{Set the position of the table float in LaTeX}
 \usage{
 latex_float(ht)
 latex_float(ht) <- value
@@ -13,26 +13,29 @@ set_latex_float(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector, used by LaTeX for positioning the float. Set to \code{NA} to reset to the default, which is
+\item{value}{A string. Set to \code{NA} to reset to the default, which is
 \code{"ht"}.}
 }
 \value{
-For \code{latex_float}, the \code{latex_float} property.
-For \code{set_latex_float}, the modified huxtable.
+\code{latex_float()} returns the \code{latex_float} property.
+\code{set_latex_float()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{float position for latex} property of a huxtable.
+Possible values include:
+\itemize{
+\item "h": here
+\item "h!" definitely here
+\item "t" top of page
+\item "ht" here or at top of page
+\item "b" bottom of page
+\item "p" page of floats
+}
 }
 \details{
-Quick reference: "h" here, "h!" definitely here, "t" top of page, "ht" here
-or at top, "b" bottom of page, "p" page of floats. See LaTeX documentation
-for more details.
+See LaTeX documentation for more details.
 }
 \examples{
 
-orig <- latex_float(jams)
 latex_float(jams) <-  "b"
 latex_float(jams)
-
-latex_float(jams) <- orig
 }

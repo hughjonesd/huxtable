@@ -4,7 +4,7 @@
 \alias{label}
 \alias{label<-}
 \alias{set_label}
-\title{Table label}
+\title{Set a table label for external referencing}
 \usage{
 label(ht)
 label(ht) <- value
@@ -13,37 +13,34 @@ set_label(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector to be used as a table label in LaTeX, or as an ID for the table in HTML. Set to \code{NA} to reset to the default, which is
+\item{value}{A string. Set to \code{NA} to reset to the default, which is
 \code{"NA"}.}
 }
 \value{
-For \code{label}, the \code{label} property.
-For \code{set_label}, the modified huxtable.
+\code{label()} returns the \code{label} property.
+\code{set_label()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{table label} property of a huxtable.
+The label is used as the table's label in LaTeX, and as the "id" property
+of the table element in HTML.
 }
 \details{
 LaTeX table labels typically start with \code{"tab:"}.
 
-Within knitr, labels will default to the chunk label. Multiple huxtables
-within a single chunk will be numbered sequentially, like
-\verb{chunk, chunk-1, chunk-2, ...}. To turn off this behaviour, set
-\code{options(huxtable.autolabel = FALSE)}.
+Within knitr, huxtable labels will default to the same as the knitr chunk label.
+To turn off this behaviour, set \code{options(huxtable.autolabel = FALSE)}.
 
-If you use \href{http://bookdown.org}{bookdown}, and set a label on your table,
-the caption will automatically be prefixed with \verb{(#label)}. You can then
-refer to the table using \verb{@ref(label)}. \code{label} needs to start with \code{"tab:"}; if it doesn't,
-the \code{"tab"} prefix will be added automatically. To turn off this behaviour,
-set \code{options(huxtable.bookdown = FALSE)}.
+If you use \href{http://bookdown.org}{bookdown}, and set a label on your
+table, the table \code{\link[=caption]{caption()}} will automatically be prefixed with \verb{(#label)}.
+You can then refer to the table using \verb{@ref(label)}. \code{label} needs to start
+with \code{"tab:"}; if it doesn't, the \code{"tab:"} prefix will be added
+automatically. To turn off this behaviour, set
+\code{options(huxtable.bookdown = FALSE)}.
 }
 \examples{
 
-orig <- label(jams)
 label(jams) <-  "tab:mytable"
 label(jams)
-
-label(jams) <- orig
 }
 \seealso{
 huxtable-options

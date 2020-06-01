@@ -5,7 +5,7 @@
 \alias{font_size<-}
 \alias{set_font_size}
 \alias{map_font_size}
-\title{Font size}
+\title{Make text larger or smaller}
 \usage{
 font_size(ht)
 font_size(ht) <- value
@@ -21,24 +21,21 @@ map_font_size(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A numeric vector. This sets the font size in points.
+\item{value}{A numeric vector.
 
 Set to \code{NA} to reset to the default, which is \code{NA}.}
 }
 \value{
-For \code{font_size}, the \code{font_size} property.
-For \code{set_font_size} and \code{map_font_size}, the modified huxtable.
+\code{font_size()} returns the \code{font_size} property.
+\code{set_font_size()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{font size} property of huxtable cells.
+Font size is in points.
 }
 \examples{
 
-orig <- font_size(jams)
 font_size(jams) <-  14
 font_size(jams)
-
-font_size(jams) <- orig
 
 jams2 <- set_font_size(jams,
       14)

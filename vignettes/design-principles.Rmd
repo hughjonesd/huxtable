@@ -3,8 +3,8 @@ title: "Design Principles, Comparisons and Limitations"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 vignette: >
   %\VignetteIndexEntry{Design Principles, Comparisons and Limitations}  
   %\VignetteEncoding{UTF-8}

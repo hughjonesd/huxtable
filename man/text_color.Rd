@@ -5,7 +5,7 @@
 \alias{text_color<-}
 \alias{set_text_color}
 \alias{map_text_color}
-\title{Text color}
+\title{Set the color of text in cells}
 \usage{
 text_color(ht)
 text_color(ht) <- value
@@ -21,27 +21,26 @@ map_text_color(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character vector or matrix of valid R colors.
+\item{value}{A character vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 }
 \value{
-For \code{text_color}, the \code{text_color} property.
-For \code{set_text_color} and \code{map_text_color}, the modified huxtable.
+\code{text_color()} returns the \code{text_color} property.
+\code{set_text_color()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{text color} property of huxtable cells.
+Colors can be in any format understood by R:
+\itemize{
+\item A color name like \code{"darkred"}
+\item A HTML string like \verb{"#FF0000}
+\item The result of a function like \code{rgb(1, 0, 0)} or \code{grey(0.5)}
 }
-\details{
-Colors can be in any format understood by R, e.g. \code{"red"}, \code{"#FF0000"} or \code{rgb(1, 0, 0)}.
 }
 \examples{
 
-orig <- text_color(jams)
 text_color(jams) <-  "blue"
 text_color(jams)
-
-text_color(jams) <- orig
 
 set_text_color(jams, "blue")
 set_text_color(jams,

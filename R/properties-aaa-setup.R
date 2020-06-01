@@ -92,6 +92,7 @@ huxtable_env$huxtable_default_attrs <- list(
         font                = NA_character_
       )
 
+
 make_getter_setters <- function(
         attr_name,
         attr_type    = c("cell", "row", "col", "table"),
@@ -226,7 +227,8 @@ make_getter_setters <- function(
     assign(x, funs[[x]], envir = hux_ns)
   })
 
-  NULL
+  return(NULL)
 }
+
 
 

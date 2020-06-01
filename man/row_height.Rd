@@ -4,7 +4,7 @@
 \alias{row_height}
 \alias{row_height<-}
 \alias{set_row_height}
-\title{Row height}
+\title{Set the height of table rows}
 \usage{
 row_height(ht)
 row_height(ht) <- value
@@ -13,31 +13,29 @@ set_row_height(ht, row, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A vector.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
+
+\item{value}{Numeric or character vector.. Set to \code{NA} to reset to the default,
+which is \code{NA}.}
 }
 \value{
-For \code{row_height}, the \code{row_height} property.
-For \code{set_row_height}, the modified huxtable.
+\code{row_height()} returns the \code{row_height} property.
+\code{set_row_height()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{row height} property of huxtable rows.
-}
-\details{
-If character, \code{value} must contain valid CSS or LaTeX lengths. If numeric, in HTML, values are scaled to 1 and treated as proportions of the table height. In LaTeX, they are
-treated as proportions of the text height (\verb{\\\\textheight}).
+Numeric heights are scaled to 1 and treated as proportions of the table height
+in HTML, or of the text height (\verb{\\\\textheight}) in LaTeX. Character
+row heights must be valid CSS or LaTeX dimensions.
 }
 \examples{
 
-orig <- row_height(jams)
-row_height(jams) <-  c(.2, .1, .1, .1)
+row_height(jams) <-  c(.4, .2, .2, .2)
 row_height(jams)
-
-row_height(jams) <- orig
 }
 \seealso{
-Other row/column sizes: 
-\code{\link{col_width}()}
+Other table measurements: 
+\code{\link{col_width}()},
+\code{\link{height}()},
+\code{\link{width}()}
 }
-\concept{row/column sizes}
+\concept{table measurements}

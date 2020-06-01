@@ -5,7 +5,7 @@
 \alias{escape_contents<-}
 \alias{set_escape_contents}
 \alias{map_escape_contents}
-\title{Escape cell contents}
+\title{Escape or unescape text in cells}
 \usage{
 escape_contents(ht)
 escape_contents(ht) <- value
@@ -21,44 +21,34 @@ map_escape_contents(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be HTML or LaTeX escaped.
+\item{value}{A logical vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 }
 \value{
-For \code{escape_contents}, the \code{escape_contents} property.
-For \code{set_escape_contents} and \code{map_escape_contents}, the modified huxtable.
+\code{escape_contents()} returns the \code{escape_contents} property.
+\code{set_escape_contents()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{escape cell contents} property of huxtable cells.
+Setting \code{escape_contents} to \code{FALSE} allows you to include raw HTML or
+TeX code in your cells.
 }
 \details{
 If \code{\link[=markdown]{markdown()}} is \code{TRUE} for a cell, the \code{escape_contents} property
 will be ignored.
 }
 \examples{
+
 ht <- huxtable(
-        Exponent = 2:4,
-        Example  = paste0("$x^", 2:4, "$")
+        Text   = "x squared",
+        Maths  = "$x^2$"
       )
-escape_contents(ht)[,2] <- FALSE
+ht <- set_escape_contents(ht, FALSE)
 \dontrun{
   quick_pdf(ht)
 }
 
-
-jams2 <- set_escape_contents(jams,
-      TRUE)
-escape_contents(jams2)
-
-jams3 <- set_escape_contents(jams,
-      2:3, 1, TRUE)
-escape_contents(jams3)
-
-jams4 <- map_escape_contents(jams,
-      by_rows(
-        TRUE,
-        FALSE)
-      )
-escape_contents(jams4)
+}
+\seealso{
+\code{\link[=sanitize]{sanitize()}} for escaping text manually.
 }

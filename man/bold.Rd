@@ -9,7 +9,7 @@
 \alias{italic<-}
 \alias{set_italic}
 \alias{map_italic}
-\title{Cell text style}
+\title{Make cell text bold or italic}
 \usage{
 bold(ht)
 bold(ht) <- value
@@ -30,26 +30,21 @@ map_italic(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A logical vector or matrix. \code{TRUE} for bold/italic.
+\item{value}{A logical vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 }
 \value{
-For \code{bold}, the \code{bold} property.
-For \code{set_bold} and \code{map_bold}, the modified huxtable.
-
-Similarly for \code{italic} and friends.
+\code{bold()} returns the \code{bold} property.
+\code{set_bold()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{cell text style} property of huxtable cells.
+Make cell text bold or italic
 }
 \examples{
 
-orig <- bold(jams)
 bold(jams) <-  TRUE
 bold(jams)
-
-bold(jams) <- orig
 
 set_bold(jams, TRUE)
 set_bold(jams,

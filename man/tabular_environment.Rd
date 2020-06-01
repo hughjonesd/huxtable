@@ -4,7 +4,7 @@
 \alias{tabular_environment}
 \alias{tabular_environment<-}
 \alias{set_tabular_environment}
-\title{Tabular environment}
+\title{Set the table's tabular environment in LaTeX}
 \usage{
 tabular_environment(ht)
 tabular_environment(ht) <- value
@@ -13,24 +13,22 @@ set_tabular_environment(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one character vector. Set to \code{NA} to reset to the default, which is
+\item{value}{A string. Set to \code{NA} to reset to the default, which is
 \code{"NA"}.}
 }
 \value{
-For \code{tabular_environment}, the \code{tabular_environment} property.
-For \code{set_tabular_environment}, the modified huxtable.
+\code{tabular_environment()} returns the \code{tabular_environment} property.
+\code{set_tabular_environment()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{tabular environment} property of a huxtable.
+By default this is either \code{"tabular"} or \code{"tabularx"}.
 }
 \details{
-No features are guaranteed to work if you set this to a non-default value. Use at your own risk!
+No features are guaranteed to work if you set this to a non-default
+value. Use at your own risk!
 }
 \examples{
 
-orig <- tabular_environment(jams)
 tabular_environment(jams) <-  "longtable"
 tabular_environment(jams)
-
-tabular_environment(jams) <- orig
 }

@@ -40,14 +40,14 @@ style_headers <- function (ht, ...) {
 #' @export
 #' @rdname style-functions
 style_header_rows <- function (ht, ...) {
-  set_cell_properties(ht, header_rows(ht), everywhere, ...)
+  style_cells(ht, header_rows(ht), everywhere, ...)
 }
 
 
 #' @export
 #' @rdname style-functions
 style_header_cols <- function (ht, ...) {
-  set_cell_properties(ht, everywhere, header_cols(ht),  ...)
+  style_cells(ht, everywhere, header_cols(ht),  ...)
 }
 
 

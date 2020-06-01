@@ -5,7 +5,7 @@
 \alias{number_format<-}
 \alias{set_number_format}
 \alias{map_number_format}
-\title{Number format}
+\title{Set how numbers are formatted in cells}
 \usage{
 number_format(ht)
 number_format(ht) <- value
@@ -21,44 +21,39 @@ map_number_format(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character or integer vector, or a list containing a function, or \code{NA}.
+\item{value}{A character or integer vector,
 
 Note that setting to \code{NA} does not reset to the default.}
 }
 \value{
-For \code{number_format}, the \code{number_format} property.
-For \code{set_number_format} and \code{map_number_format}, the modified huxtable.
+\code{number_format()} returns the \code{number_format} property.
+\code{set_number_format()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{number format} property of huxtable cells.
-}
-\details{
-Number formatting is applied to any parts of cells that look like numbers (defined as an optional minus sign,
-followed by
-numerals, followed by an optional decimal point and further numerals). The exception is exponents in
-scientific notation; huxtable attempts to detect and ignore these.
-
-If \code{value} is
+If \code{number_format} is:
 \itemize{
 \item numeric, numbers will be rounded to that many decimal places;
-\item character, it will be taken as an argument to \code{\link[=sprintf]{sprintf()}};
+\item character, it will be used as an argument to \code{\link[=sprintf]{sprintf()}};
 \item a function, the function will be applied to the numbers;
-\item \code{NA}, then numbers will not be formatted (except maybe by conversion with \code{as.character}).
+\item \code{NA}, then numbers will not be formatted (except by conversion with
+\code{as.character}).
 }
+}
+\details{
+Number formatting is applied to any parts of cells that look like numbers.
+The exception is exponents in
+scientific notation; huxtable attempts to detect and ignore these.
 
-Note that if your cells are of type numeric, a number format of \code{NA} doesn't guarantee you get
-back what you typed in, since R's default conversion may apply scientific notation and
-rounding.
+The default value is "\\%.3g", which rounds numbers if they have more than 3
+significant digits, and which may use scientific notation for large numbers.
 
-The default value is "\\%.3g", which rounds numbers if they have more than 3 significant
-digits, and which may use scientific notation for large numbers.
+Note that if your cells are of type numeric, a number format of \code{NA} doesn't
+guarantee you get back what you typed in, since R's default conversion may
+apply scientific notation and rounding.
 
 To set number_format to a function, enclose the function in \code{list}. The function should
 take one argument and return a string. \code{\link[=fmt_pretty]{fmt_pretty()}} and \code{\link[=fmt_percent]{fmt_percent()}}
 are useful shortcuts for common formatting functions.
-
-Versions of huxtable before 2.0.0 applied \code{number_format} only to cells that looked like
-numbers in their entirety. The default value was "\\%5.2f".
 }
 \examples{
 ht <- huxtable(
@@ -98,12 +93,6 @@ ht_bands
 # fixed:
 set_number_format(ht_bands, NA)
 
-
-set_number_format(jams, 2)
-set_number_format(jams,
-      2:3, 1, 2)
-map_number_format(jams,
-      by_rows(2, 3))
 }
 \seealso{
 Other formatting functions: 

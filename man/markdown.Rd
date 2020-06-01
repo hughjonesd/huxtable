@@ -5,7 +5,7 @@
 \alias{markdown<-}
 \alias{set_markdown}
 \alias{map_markdown}
-\title{markdown}
+\title{Format cell content as markdown}
 \usage{
 markdown(ht)
 markdown(ht) <- value
@@ -21,16 +21,17 @@ map_markdown(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, cell contents will be rendered as \href{https://commonmark.org/help/}{markdown}.
+\item{value}{A logical vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 }
 \value{
-For \code{markdown}, the \code{markdown} property.
-For \code{set_markdown} and \code{map_markdown}, the modified huxtable.
+\code{markdown()} returns the \code{markdown} property.
+\code{set_markdown()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{markdown} property of huxtable cells.
+Cells where the markdown property is \code{TRUE} will be rendered as
+\href{https://commonmark.org/help/}{markdown}.
 }
 \details{
 Markdown is currently implemented for HTML and LaTeX only. There is
@@ -39,20 +40,9 @@ basic support for on-screen display. The only extension used is
 }
 \examples{
 
-jams2 <- set_markdown(jams,
-      TRUE)
-markdown(jams2)
+jams[3, 2] <- "~2.10~ **Sale!** 1.50"
+set_markdown(jams, 3, 2)
 
-jams3 <- set_markdown(jams,
-      2:3, 1, TRUE)
-markdown(jams3)
-
-jams4 <- map_markdown(jams,
-      by_rows(
-        TRUE,
-        FALSE)
-      )
-markdown(jams4)
 }
 \seealso{
 \code{\link[=set_markdown_contents]{set_markdown_contents()}}, a shortcut function.

@@ -4,7 +4,7 @@
 \alias{caption_width}
 \alias{caption_width<-}
 \alias{set_caption_width}
-\title{Caption width}
+\title{Set the width of the table caption}
 \usage{
 caption_width(ht)
 caption_width(ht) <- value
@@ -13,15 +13,22 @@ set_caption_width(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one numeric or character. Numerics are interpreted as proportions of text width in LaTeX, or of table width in HTML. If \code{NA}, the caption will be set to the same width as the table. Set to \code{NA} to reset to the default, which is
+\item{value}{Number or string. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 }
 \value{
-For \code{caption_width}, the \code{caption_width} property.
-For \code{set_caption_width}, the modified huxtable.
+\code{caption_width()} returns the \code{caption_width} property.
+\code{set_caption_width()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{caption width} property of a huxtable.
+A numeric widths is interpreted as a proportion of text width in LaTeX, or of
+table width in HTML. |A character width must be a valid LaTeX or CSS dimension.
+The default, \code{NA}, makes the caption the same width as the table.
+}
+\examples{
+
+caption_width(jams) <-  0.5
+caption_width(jams)
 }
 \seealso{
 Other caption properties: 

@@ -5,13 +5,8 @@
 \alias{font<-}
 \alias{set_font}
 \alias{map_font}
-\title{Font}
+\title{Set the font for cell text}
 \usage{
-font(ht)
-font(ht) <- value
-set_font(ht, row, col, value )
-map_font(ht, row, col, fn)
-
 font(ht)
 font(ht) <- value
 set_font(ht, row, col, value )
@@ -26,29 +21,32 @@ map_font(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character vector of font names.
+\item{value}{A character vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 }
 \value{
-For \code{font}, the \code{font} property.
-For \code{set_font} and \code{map_font}, the modified huxtable.
+\code{font()} returns the \code{font} property.
+\code{set_font()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{font} property of huxtable cells.
+Set the font for cell text
 }
 \details{
-LaTeX and HTML use different font names. If you want to use the same font
-names across document formats, set \code{options("huxtable.latex_use_fontspec")}
-to \code{TRUE}. See \link{huxtable-options}.
+To find out what fonts are on your system, \code{systemfonts::match_font()}
+is useful.
+
+For HTML, you can use comma-separated lists of font names like
+\code{"Times New Roman, Times, Serif"}. This is not portable, though.
+
+LaTeX and HTML use different font names. To use the same font
+names across document formats, see \code{options("huxtable.latex_use_fontspec")}
+in \link{huxtable-options}.
 }
 \examples{
 
-orig <- font(jams)
 font(jams) <-  "times"
 font(jams)
-
-font(jams) <- orig
 
 jams2 <- set_font(jams,
       "times")

@@ -5,7 +5,7 @@
 \alias{wrap<-}
 \alias{set_wrap}
 \alias{map_wrap}
-\title{Text wrapping}
+\title{Wrap cell content over multiple lines}
 \usage{
 wrap(ht)
 wrap(ht) <- value
@@ -21,20 +21,21 @@ map_wrap(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A logical vector or matrix. If \code{TRUE}, long cell contents will be wrapped into multiple lines.
+\item{value}{A logical vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 }
 \value{
-For \code{wrap}, the \code{wrap} property.
-For \code{set_wrap} and \code{map_wrap}, the modified huxtable.
+\code{wrap()} returns the \code{wrap} property.
+\code{set_wrap()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{text wrapping} property of huxtable cells.
+Text wrapping only really makes sense when the table \code{\link[=width]{width()}} has been set.
 }
 \examples{
+
 ht <- huxtable(paste(
-      rep("Some long text.", 20),
+      rep("Some long text.", 10),
       collapse = " "))
 width(ht) <- 0.2
 wrap(ht) <- TRUE
@@ -42,19 +43,4 @@ wrap(ht) <- TRUE
   quick_html(ht)
 }
 
-
-jams2 <- set_wrap(jams,
-      TRUE)
-wrap(jams2)
-
-jams3 <- set_wrap(jams,
-      2:3, 1, TRUE)
-wrap(jams3)
-
-jams4 <- map_wrap(jams,
-      by_rows(
-        TRUE,
-        FALSE)
-      )
-wrap(jams4)
 }

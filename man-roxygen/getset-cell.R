@@ -1,6 +1,4 @@
 
-# Documentation template for cell attributes
-
 <%
 more_alias_str <- ''
 if (exists('morealiases')) {
@@ -13,19 +11,18 @@ if (exists('morealiases')) {
 }
 
 default_property <- huxtable::get_default_properties(attr_name)[[1]]
-if (is.list(default_property)) default_property <- default_property[[1]]
-if (typeof(default_property) == "character") default_property <- sprintf("\"%s\"", default_property)
+if (is.list(default_property)) {
+  default_property <- default_property[[1]]
+}
+if (typeof(default_property) == "character") {
+  default_property <- sprintf("\"%s\"", default_property)
+}
 
 # this is the function default
 default_str <- if (exists("default")) paste("=", default) else ""
 
 %>
 
-#' @title <%= attr_desc %>
-#'
-#' @description
-#' Functions to get or set the *<%= tolower(attr_desc) %>* property of huxtable cells.
-#'
 #' @usage
 #' <%= attr_name %>(ht)
 #' <%= attr_name %>(ht) <- value
@@ -43,8 +40,8 @@ default_str <- if (exists("default")) paste("=", default) else ""
 #'   Note that setting to `NA` does not reset to the default.
 #'   <% } %>
 #'
-#' @return For `<%= attr_name %>`, the `<%= attr_name %>` property.
-#' For `set_<%= attr_name %>` and `map_<%= attr_name %>`, the modified huxtable.
+#' @return `<%= attr_name %>()` returns the `<%= attr_name %>` property.
+#' `set_<%= attr_name %>()` returns the modified huxtable.
 #'
 #' @aliases <%= attr_name %><- set_<%= attr_name %> map_<%= attr_name %> <%= more_alias_str %>
 #' @name <%= attr_name %>

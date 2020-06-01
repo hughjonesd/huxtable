@@ -5,7 +5,7 @@
 \alias{background_color<-}
 \alias{set_background_color}
 \alias{map_background_color}
-\title{Background color}
+\title{Set the background color of table cells}
 \usage{
 background_color(ht)
 background_color(ht) <- value
@@ -21,24 +21,29 @@ map_background_color(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character vector or matrix of valid R color names.
+\item{value}{A character vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{"NA"}.}
 }
 \value{
-For \code{background_color}, the \code{background_color} property.
-For \code{set_background_color} and \code{map_background_color}, the modified huxtable.
+\code{background_color()} returns the \code{background_color} property.
+\code{set_background_color()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{background color} property of huxtable cells.
+Colors can be in any format understood by R:
+\itemize{
+\item A color name like \code{"darkred"}
+\item A HTML string like \verb{"#FF0000}
+\item The result of a function like \code{rgb(1, 0, 0)} or \code{grey(0.5)}
+}
+}
+\details{
+Transparent colors are not guaranteed to work at present.
 }
 \examples{
 
-orig <- background_color(jams)
 background_color(jams) <-  grey(.95)
 background_color(jams)
-
-background_color(jams) <- orig
 
 set_background_color(jams, grey(.95))
 set_background_color(jams,

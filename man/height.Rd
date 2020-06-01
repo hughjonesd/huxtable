@@ -4,7 +4,7 @@
 \alias{height}
 \alias{height<-}
 \alias{set_height}
-\title{Table height}
+\title{Set the table height}
 \usage{
 height(ht)
 height(ht) <- value
@@ -13,26 +13,26 @@ set_height(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, it is treated as a proportion of the containing block height for HTML, or of text height (\verb{\\\\textheight}) for LaTeX. If character, it must be a valid CSS or LaTeX width. Set to \code{NA} to reset to the default, which is
+\item{value}{A number or string. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 }
 \value{
-For \code{height}, the \code{height} property.
-For \code{set_height}, the modified huxtable.
+\code{height()} returns the \code{height} property.
+\code{set_height()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{table height} property of a huxtable.
+\verb{height()`` sets the height of the entire table, while [row_height()] sets the height of individual rows. A numeric height is treated as a proportion of the containing block (HTML) or }\\textheight` (LaTeX). A character height
+must be a valid CSS or LaTeX dimension.
 }
 \examples{
 
-orig <- height(jams)
 height(jams) <-  0.4
 height(jams)
-
-height(jams) <- orig
 }
 \seealso{
 Other table measurements: 
+\code{\link{col_width}()},
+\code{\link{row_height}()},
 \code{\link{width}()}
 }
 \concept{table measurements}

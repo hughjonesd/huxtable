@@ -15,6 +15,9 @@ ncharw <- function (x, type = "width") {
 is_vectorish <- function (x) is.null(dim(x)) && ! is.list(x)
 
 
+is_numeric_or_character <- function (x) is.numeric(x) || is.character(x)
+
+
 # pinched from rlang
 `%||%` <- function (x, y) {
   if (is.null(x)) y else x
@@ -309,10 +312,6 @@ get_caption_hpos <- function (ht) {
 }
 
 
-# this relies on the fact that knitr documents are knit in their own process.
-huxtable_env$SEEN_LABELS <- list()
-
-
 make_label <- function (ht) {
   lab <- label(ht)
   if (is.na(lab) &&
@@ -320,12 +319,8 @@ make_label <- function (ht) {
           requireNamespace("knitr", quietly = TRUE) &&
           ! is.null(chunk_label <- knitr::opts_current$get("label"))
         ) {
-    chunk_idx <- ""
-    if (! is.null(count <- huxtable_env$SEEN_LABELS[[chunk_label]])) {
-      chunk_idx <- paste0("-", count)
-    }
-    if (! is.null(chunk_label)) lab <- paste0("tab:", chunk_label, chunk_idx)
-    huxtable_env$SEEN_LABELS[[chunk_label]] <- if (is.null(count)) 1 else count + 1
+
+    if (! is.null(chunk_label)) lab <- paste0("tab:", chunk_label)
   }
 
   lab

@@ -6,7 +6,7 @@
 \alias{dplyr-verbs}
 \title{Dplyr verbs for huxtable}
 \usage{
-mutate.huxtable(.data, ..., copy_cell_props = TRUE)
+\method{mutate}{huxtable}(.data, ..., copy_cell_props = TRUE)
 }
 \arguments{
 \item{.data}{A huxtable.}

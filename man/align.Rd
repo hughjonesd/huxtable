@@ -5,7 +5,7 @@
 \alias{align<-}
 \alias{set_align}
 \alias{map_align}
-\title{Alignment}
+\title{Set the horizontal alignment of cell content}
 \usage{
 align(ht)
 align(ht) <- value
@@ -21,32 +21,36 @@ map_align(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character vector or matrix which may be "left", "center", "right" , \code{NA} or a single character.
+\item{value}{A character vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{"left"}.}
 }
 \value{
-For \code{align}, the \code{align} property.
-For \code{set_align} and \code{map_align}, the modified huxtable.
+\code{align()} returns the \code{align} property.
+\code{set_align()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{alignment} property of huxtable cells.
+Values may be "left", "center", "right", \code{NA} or a single character. If
+\code{value} is a single character (e.g. a decimal point), then the cell is
+aligned on this character.
 }
 \details{
-This sets the horizontal alignment of the cell. If \code{value} is a single character (e.g.
-a decimal point), then the cell is aligned on this character.
+Neither HTML nor LaTeX currently possess reliable ways of aligning cells
+on a decimal point. Huxtable does this by padding with spaces. This may
+work better if you use a fixed-width font.
 }
 \examples{
 
-orig <- align(jams)
-align(jams) <-  "right"
-align(jams)
+number_hux <- as_hux(matrix(c(1, 1.5, 1.03, 10, 10.01), 5, 4))
+number_format(number_hux) <- "\%.4g"
+number_hux <- map_align(number_hux,
+      by_cols("left", "center", "right", "."))
 
-align(jams) <- orig
 
-set_align(jams, "right")
-set_align(jams,
-      2:3, 1, "right")
-map_align(jams,
-      by_rows("right", "left"))
+number_hux <- rbind(
+        c("left", "centre", "right", "decimal (.)"),
+        number_hux
+      )
+number_hux
+
 }

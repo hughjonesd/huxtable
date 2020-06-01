@@ -5,7 +5,7 @@
 \alias{na_string<-}
 \alias{set_na_string}
 \alias{map_na_string}
-\title{NA string}
+\title{Change how NA values are printed}
 \usage{
 na_string(ht)
 na_string(ht) <- value
@@ -21,40 +21,23 @@ map_na_string(ht, row, col, fn)
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 
-\item{value}{A character string. This will be used to replace NA values in the display.
+\item{value}{A character vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{""}.}
 }
 \value{
-For \code{na_string}, the \code{na_string} property.
-For \code{set_na_string} and \code{map_na_string}, the modified huxtable.
+\code{na_string()} returns the \code{na_string} property.
+\code{set_na_string()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the \emph{na string} property of huxtable cells.
+NA values in the huxtable are printed as the value of \code{na_string}.
 }
 \examples{
 
-orig <- na_string(jams)
-na_string(jams) <-  "--"
-na_string(jams)
-jams[2,2] <- NA 
+jams[3, 2] <- NA
 jams
-na_string(jams) <- orig
+set_na_string(jams, "---")
 
-jams2 <- set_na_string(jams,
-      "--")
-na_string(jams2)
-
-jams3 <- set_na_string(jams,
-      2:3, 1, "--")
-na_string(jams3)
-
-jams4 <- map_na_string(jams,
-      by_rows(
-        "--",
-        "")
-      )
-na_string(jams4)
 }
 \seealso{
 Other formatting functions: 

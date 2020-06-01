@@ -4,7 +4,7 @@
 \alias{width}
 \alias{width<-}
 \alias{set_width}
-\title{Table width}
+\title{Set the table width}
 \usage{
 width(ht)
 width(ht) <- value
@@ -13,26 +13,28 @@ set_width(ht, value)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A length-one vector. If numeric, \code{value} is treated as a proportion of the surrounding block width (HTML) or text width (LaTeX). If character, it must be a valid CSS or LaTeX width. Set to \code{NA} to reset to the default, which is
+\item{value}{A number or string. Set to \code{NA} to reset to the default, which is
 \code{NA}.}
 }
 \value{
-For \code{width}, the \code{width} property.
-For \code{set_width}, the modified huxtable.
+\code{width()} returns the \code{width} property.
+\code{set_width()} returns the modified huxtable.
 }
 \description{
-Functions to get or set the table-level \emph{table width} property of a huxtable.
+\code{width()} sets the width of the entire table, while \code{\link[=col_width]{col_width()}} sets the
+width of individual columns. A numeric width is treated as a proportion of
+f the surrounding block width (HTML) or text width (LaTeX). A character width
+must be a valid CSS or LaTeX dimension.
 }
 \examples{
 
-orig <- width(jams)
 width(jams) <-  0.8
 width(jams)
-
-width(jams) <- orig
 }
 \seealso{
 Other table measurements: 
-\code{\link{height}()}
+\code{\link{col_width}()},
+\code{\link{height}()},
+\code{\link{row_height}()}
 }
 \concept{table measurements}
