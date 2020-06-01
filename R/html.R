@@ -72,7 +72,7 @@ to_html.huxtable <- function(ht, ...) {
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
   table_start <- sprintf(
-        '<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n',
+        '<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n',
         width_string, margin_string, height_string, float_string, id_string)
 
   if (! is.na(cap <- make_caption(ht, lab, "html"))) {
