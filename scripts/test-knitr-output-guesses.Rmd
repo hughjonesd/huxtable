@@ -1,0 +1,15 @@
+---
+title: "Using hrbrthemes in PDFs"
+output: hrbrthemes::ipsum_pdf
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
+HTML? `r knitr::is_html_output() `
+
+latex? `r knitr::is_latex_output()`

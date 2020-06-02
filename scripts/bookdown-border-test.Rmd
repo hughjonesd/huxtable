@@ -1,0 +1,19 @@
+---
+title: "test tables in non-standard formats"
+author: "David Hugh-Jones"
+date: "01/06/2020"
+output: tufte::tufte_handout
+---
+
+```{r setup, include=FALSE}
+library(huxtable)
+library(dplyr)
+```
+
+
+```{r}
+jams %>% set_caption("No borders")
+jams %>% set_all_borders(1) %>% set_caption("Borders 1")
+jams %>% set_all_borders(brdr(3, "double", "red")) %>% set_caption("Double red borders")
+```
+
