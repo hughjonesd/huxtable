@@ -5,6 +5,7 @@
 \alias{theme_plain}
 \alias{theme_bright}
 \alias{theme_basic}
+\alias{theme_compact}
 \alias{theme_striped}
 \alias{theme_grey}
 \alias{theme_blue}
@@ -24,6 +25,8 @@ theme_bright(
 )
 
 theme_basic(ht, header_rows = TRUE, header_cols = FALSE)
+
+theme_compact(ht, header_rows = TRUE, header_cols = FALSE)
 
 theme_striped(
   ht,
@@ -77,6 +80,7 @@ These functions quickly set default styles for a huxtable.
 background, and an outer border.
 \item \code{theme_basic} sets header rows/columns to bold, and adds a border beneath
 them.
+\item \code{theme_compact} is like \code{theme_basic} but with minimal padding.
 \item \code{theme_striped} uses different backgrounds for alternate rows, and for
 headers.
 \item \code{theme_article} is similar to the style of many scientific journals.
@@ -93,6 +97,7 @@ borders and randomized colors.
 
 theme_plain(jams)
 theme_basic(jams)
+theme_compact(jams)
 theme_striped(jams)
 theme_article(jams)
 theme_bright(jams)
@@ -103,15 +108,17 @@ theme_green(jams)
 theme_mondrian(jams)
 \dontrun{
   quick_pdf(
-          theme_striped(jams),
           theme_plain(jams),
           theme_basic(jams),
+          theme_compact(jams)
+          theme_striped(jams),
           theme_article(jams),
-          theme_mondrian(jams),
+          theme_bright(jams),
           theme_grey(jams),
           theme_blue(jams),
           theme_orange(jams),
-          theme_green(jams)
+          theme_green(jams),
+          theme_mondrian(jams)
         )
 }
 }

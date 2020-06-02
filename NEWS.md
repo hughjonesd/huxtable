@@ -107,8 +107,7 @@ as_hux(jams) %>%
   as a soft-deprecated alias.
   
 * Various themes have been tweaked:
-  - `theme_basic()` now has bold headers, a border at the bottom, and no
-    header column by default.
+  - `theme_basic()` now has bold headers and no header column by default.
   - `theme_plain()` defaults to `position = "centre"`.
   - `theme_striped()` uses grey stripes, a white border, and subtler headers.
   - `theme_article()` has thinner borders.
@@ -186,6 +185,8 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 * A new table-level property, `caption_width()`, allows you to set the width of 
   the caption. The default, `NA`, sets the width equal to the table width.
   
+* There are two new themes: `theme_compact()` and `theme_bright()`.  
+
 * For `huxreg()`, a new function `tidy_replace()` allows you to replace the 
   output of `tidy(x)` entirely.
 

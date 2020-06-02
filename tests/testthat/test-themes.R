@@ -24,6 +24,7 @@ test_that("Themes work with options", {
         regexp = NA)
   expect_silent(theme_bright(ht, header_rows = FALSE, header_cols = TRUE))
   expect_error(theme_article(ht, header_rows = FALSE, header_cols = FALSE), regexp = NA)
+  expect_silent(theme_compact(ht, header_rows = TRUE))
   expect_error(theme_mondrian(ht, prop_colored = 0.5), regexp = NA)
   expect_error(theme_mondrian(ht, prop_colored = 0), regexp = NA)
   expect_silent(theme_grey(ht, header_rows = FALSE, header_cols = TRUE))

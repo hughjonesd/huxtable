@@ -1,4 +1,31 @@
 
+theme_maker <- function (
+        col1,
+        col2,
+        border_color = "white",
+        header_color = col1,
+        header_text = NA
+      ) {
+  function (ht, header_rows = TRUE, header_cols = TRUE) {
+    ht <- set_all_borders(ht, 1)
+    ht <- set_all_border_colors(ht, border_color)
+    ht <- map_background_color(ht, by_rows(col1, col2))
+    if (header_rows) {
+      bold(ht)[header_rows(ht), ]             <- TRUE
+      background_color(ht)[header_rows(ht), ] <- header_color
+      text_color(ht)[header_rows(ht), ]       <- header_text
+    }
+    if (header_cols) {
+      bold(ht)[, header_cols(ht)]             <- TRUE
+      background_color(ht)[, header_cols(ht)] <- header_color
+      text_color(ht)[, header_cols(ht)]       <- header_text
+    }
+    ht <- clean_outer_padding(ht, 4)
+
+    ht
+  }
+}
+
 
 #' Theme a huxtable
 #'
@@ -9,6 +36,8 @@
 #'
 #' * `theme_basic` sets header rows/columns to bold, and adds a border beneath
 #'   them.
+#'
+#' * `theme_compact` is like `theme_basic` but with minimal padding.
 #'
 #' * `theme_striped` uses different backgrounds for alternate rows, and for
 #'   headers.
@@ -36,6 +65,7 @@
 #'
 #' theme_plain(jams)
 #' theme_basic(jams)
+#' theme_compact(jams)
 #' theme_striped(jams)
 #' theme_article(jams)
 #' theme_bright(jams)
@@ -46,15 +76,17 @@
 #' theme_mondrian(jams)
 #' \dontrun{
 #'   quick_pdf(
-#'           theme_striped(jams),
 #'           theme_plain(jams),
 #'           theme_basic(jams),
+#'           theme_compact(jams)
+#'           theme_striped(jams),
 #'           theme_article(jams),
-#'           theme_mondrian(jams),
+#'           theme_bright(jams),
 #'           theme_grey(jams),
 #'           theme_blue(jams),
 #'           theme_orange(jams),
-#'           theme_green(jams)
+#'           theme_green(jams),
+#'           theme_mondrian(jams)
 #'         )
 #' }
 NULL
@@ -126,6 +158,8 @@ theme_basic <- function (ht, header_rows = TRUE, header_cols = FALSE) {
 }
 
 
+#' @export
+#' @rdname themes
 theme_compact <- function (ht, header_rows = TRUE, header_cols = FALSE) {
   assert_that(is.flag(header_rows), is.flag(header_cols))
 
@@ -167,34 +201,6 @@ theme_striped <- function (ht, stripe = "grey90",
   }
 
   ht
-}
-
-
-theme_maker <- function (
-        col1,
-        col2,
-        border_color = "white",
-        header_color = col1,
-        header_text = NA
-      ) {
-  function (ht, header_rows = TRUE, header_cols = TRUE) {
-    ht <- set_all_borders(ht, 1)
-    ht <- set_all_border_colors(ht, border_color)
-    ht <- map_background_color(ht, by_rows(col1, col2))
-    if (header_rows) {
-      bold(ht)[header_rows(ht), ]             <- TRUE
-      background_color(ht)[header_rows(ht), ] <- header_color
-      text_color(ht)[header_rows(ht), ]       <- header_text
-    }
-    if (header_cols) {
-      bold(ht)[, header_cols(ht)]             <- TRUE
-      background_color(ht)[, header_cols(ht)] <- header_color
-      text_color(ht)[, header_cols(ht)]       <- header_text
-    }
-    ht <- clean_outer_padding(ht, 4)
-
-    ht
-  }
 }
 
 
