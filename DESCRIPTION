@@ -54,6 +54,20 @@ Suggests:
     testthat,
     tibble,
     tinytex
+SystemRequirements: LaTeX packages: 
+    array, 
+    caption,
+    graphicx, 
+    siunitx, 
+    ulem, 
+    colortbl, 
+    multirow, 
+    hhline, calc, 
+    tabularx, 
+    threeparttable, 
+    wrapfig, 
+    adjustbox, 
+    fontspec
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
