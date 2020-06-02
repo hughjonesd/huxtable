@@ -191,6 +191,9 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
   output of `tidy(x)` entirely.
 
 * Screen output now displays table position and caption position.
+
+* huxtable now only sets `options(huxtable.knit_print_df = TRUE)` if it is 
+  attached, not if it is loaded.
   
 * huxtable supports `dplyr::relocate()`, new in dplyr 1.0.0.
 

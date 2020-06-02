@@ -25,8 +25,11 @@ available, huxtables will be printed in color on screen.
 \item \code{options('huxtable.bookdown')}. Set to \code{TRUE} within a bookdown document to
 automatically print bookdown-style labels. If unset, huxtable will try to
 guess if we are in a bookdown document.
-\item \code{options('huxtable.knit_print_df')}. If \code{TRUE} (the default), data frames
-in knitr will be pretty-printed using huxtable.
+\item \code{options('huxtable.knit_print_df')}. If \code{TRUE}, data frames
+in knitr will be pretty-printed using huxtable. This option defaults to
+\code{TRUE} only if huxtable is attached to the search path using
+\code{\link[=library]{library()}}; not if huxtable is merely loaded (e.g. imported by another
+package).
 \item \code{options('huxtable.knit_print_df_theme')}. A function applied to data frames
 before printing in knitr. The function should take one argument (a data
 frame) and return a huxtable. Defaults to \code{\link[=theme_plain]{theme_plain()}}.

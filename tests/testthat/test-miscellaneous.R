@@ -6,7 +6,6 @@ test_that(".onLoad works and sets options", {
           # huxtable.add_colnames  = NULL, # want not to set this to anything on package load
           huxtable.print         = NULL,
           huxtable.color_screen  = NULL,
-          huxtable.knit_print_df = NULL,
           huxtable.knit_print_df_theme = NULL,
           huxtable.autoformat = NULL,
           huxtable.autoformat_number_format = NULL,

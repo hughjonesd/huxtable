@@ -92,7 +92,7 @@ knit_print.huxtable <- function (x, options, ...) {
 #'       )
 #' }
 knit_print.data.frame <- function(x, options, ...) {
-  if (! isTRUE(getOption("huxtable.knit_print_df", TRUE))) {
+  if (! isTRUE(getOption("huxtable.knit_print_df", FALSE))) {
     NextMethod() # probably calls knit_print.default
   } else {
     ht <- as_huxtable(x)

@@ -8,16 +8,8 @@
 
 
 .onLoad <- function(libname, pkgname) {
-
-  set_default_option <- function (opt, value) {
-    ol <- list(getOption(opt, value))
-    names(ol) <- opt
-    options(ol)
-  }
-
   set_default_option("huxtable.add_colnames", TRUE)
   set_default_option("huxtable.print", print_screen)
-  set_default_option("huxtable.knit_print_df", TRUE)
   set_default_option("huxtable.knit_print_df_theme", theme_plain)
   set_default_option("huxtable.autolabel", TRUE)
   set_default_option("huxtable.color_screen",
@@ -57,8 +49,20 @@
       register_s3_method("dplyr", "select_")
     }
   }
+}
+
+
+.onAttach <- function (libname, pkgname) {
+  set_default_option("huxtable.knit_print_df", TRUE)
   if (requireNamespace("knitr", quietly = TRUE)) {
     register_s3_method("knitr", "knit_print")
     register_s3_method("knitr", "knit_print", class = "data.frame")
   }
+}
+
+
+set_default_option <- function (opt, value) {
+  ol <- list(getOption(opt, value))
+  names(ol) <- opt
+  options(ol)
 }
