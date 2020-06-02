@@ -759,7 +759,7 @@ iris_hux %>%
 
 Here we have set the first two rows as headers, and the first column as a
 a header column. `style_headers()` applies to both rows and columns. Alternatively,
-use `style_header_rows()` and `style_header_columns()` to treat header rows
+use `style_header_rows()` and `style_header_cols()` to treat header rows
 and columns differently. Their arguments are a list of properties and property
 values.
 

@@ -14,45 +14,45 @@
 \alias{theme_mondrian}
 \title{Theme a huxtable}
 \usage{
-theme_plain(ht, header_row = TRUE, position = "center")
+theme_plain(ht, header_rows = TRUE, position = "center")
 
 theme_bright(
   ht,
-  header_row = TRUE,
-  header_col = FALSE,
+  header_rows = TRUE,
+  header_cols = FALSE,
   colors = c("#7eabf2", "#e376e3", "#fcbb03", "#7aba59", "#fc0356")
 )
 
-theme_basic(ht, header_row = TRUE, header_col = FALSE)
+theme_basic(ht, header_rows = TRUE, header_cols = FALSE)
 
 theme_striped(
   ht,
   stripe = "grey90",
   stripe2 = "grey95",
-  header_row = TRUE,
-  header_col = TRUE
+  header_rows = TRUE,
+  header_cols = TRUE
 )
 
-theme_grey(ht, header_row = TRUE, header_col = TRUE)
+theme_grey(ht, header_rows = TRUE, header_cols = TRUE)
 
-theme_blue(ht, header_row = TRUE, header_col = TRUE)
+theme_blue(ht, header_rows = TRUE, header_cols = TRUE)
 
-theme_orange(ht, header_row = TRUE, header_col = TRUE)
+theme_orange(ht, header_rows = TRUE, header_cols = TRUE)
 
-theme_green(ht, header_row = TRUE, header_col = TRUE)
+theme_green(ht, header_rows = TRUE, header_cols = TRUE)
 
-theme_article(ht, header_row = TRUE, header_col = TRUE)
+theme_article(ht, header_rows = TRUE, header_cols = TRUE)
 
 theme_mondrian(ht, prop_colored = 0.1, font = NULL)
 }
 \arguments{
 \item{ht}{A huxtable object.}
 
-\item{header_row}{Logical: style header rows?}
+\item{header_rows}{Logical: style header rows?}
 
 \item{position}{"left", "center" or "right"}
 
-\item{header_col}{Logical: style header columns?}
+\item{header_cols}{Logical: style header columns?}
 
 \item{colors}{Colors for header rows. Can also be a palette function.}
 

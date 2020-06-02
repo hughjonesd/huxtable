@@ -59,7 +59,7 @@ Huxtable's built-in `theme_grey` will do that for us, and also set a few other
 sensible cosmetic defaults. We'll use that as a basis from now on.
 
 ```{r}
-car_hux <- theme_grey(car_hux, header_col = FALSE)
+car_hux <- theme_grey(car_hux, header_cols = FALSE)
 car_hux %>% top()
 ```
 

@@ -26,8 +26,8 @@
 #'    borders and randomized colors.
 #'
 #' @param ht A huxtable object.
-#' @param header_row Logical: style header rows?
-#' @param header_col Logical: style header columns?
+#' @param header_rows Logical: style header rows?
+#' @param header_cols Logical: style header columns?
 #'
 #' @return The huxtable object, appropriately styled.
 #' @name themes
@@ -63,10 +63,10 @@ NULL
 #' @export
 #' @rdname themes
 #' @param position "left", "center" or "right"
-theme_plain <- function(ht, header_row = TRUE, position = "center"){
+theme_plain <- function(ht, header_rows = TRUE, position = "center"){
   ht <- set_outer_borders(ht)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
-  if (header_row) {
+  if (header_rows) {
     ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
     ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
   }
@@ -80,19 +80,22 @@ theme_plain <- function(ht, header_row = TRUE, position = "center"){
 #' @rdname themes
 #' @param colors Colors for header rows. Can also be a palette function.
 theme_bright <- function (ht,
-        header_row = TRUE,
-        header_col = FALSE,
+        header_rows = TRUE,
+        header_cols = FALSE,
         colors = c("#7eabf2", "#e376e3", "#fcbb03", "#7aba59", "#fc0356"))
       {
+  assert_that(is_hux(ht), is.flag(header_rows), is.flag(header_cols),
+      is.character(colors) || is.function(colors))
+
   if (is.function(colors)) colors <- colors(ncol(ht))
   ht <- set_all_borders(ht, 3)
   ht <-  set_all_border_colors(ht, "white")
-  if (header_row) {
+  if (header_rows) {
     ht <-  map_background_color(ht, header_rows(ht),
           everywhere, by_cols(colors))
     ht <-  set_text_color(ht, header_rows(ht), everywhere, "white")
   }
-  if (header_col) {
+  if (header_cols) {
     ht <-  map_background_color(ht, everywhere, header_cols(ht),
           by_rows(colors))
     ht <-  set_text_color(ht, everywhere, header_cols(ht), "white")
@@ -104,15 +107,15 @@ theme_bright <- function (ht,
 
 #' @export
 #' @rdname themes
-theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
-  assert_that(is.flag(header_row), is.flag(header_col))
+theme_basic <- function (ht, header_rows = TRUE, header_cols = FALSE) {
+  assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht, 0)
-  if (header_row) {
+  if (header_rows) {
     ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
     ht <- set_bold(ht, header_rows(ht), everywhere)
   }
-  if (header_col) {
+  if (header_cols) {
     ht <- set_right_border(ht, everywhere, largest(header_cols(ht)))
     ht <- set_bold(ht, everywhere, header_cols(ht))
   }
@@ -123,22 +126,40 @@ theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
 }
 
 
+theme_compact <- function (ht, header_rows = TRUE, header_cols = FALSE) {
+  assert_that(is.flag(header_rows), is.flag(header_cols))
+
+  ht <- set_all_borders(ht, 0)
+  if (header_rows) {
+    ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
+    ht <- style_header_rows(ht, bold = TRUE)
+  }
+  if (header_cols) {
+    ht <- style_header_cols(ht, bold = TRUE)
+  }
+  ht <- set_all_padding(ht, 1)
+  ht <- clean_outer_padding(ht, 0)
+
+  ht
+}
+
+
 #' @export
 #' @rdname themes
 #' @param stripe  Background colour for odd rows
 #' @param stripe2 Background colour for even rows
 theme_striped <- function (ht, stripe = "grey90",
-      stripe2 = "grey95", header_row = TRUE, header_col = TRUE) {
-  assert_that(is.flag(header_row), is.flag(header_col))
+      stripe2 = "grey95", header_rows = TRUE, header_cols = TRUE) {
+  assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht)
   ht <- set_all_border_colors(ht, "white")
   ht <- map_background_color(ht, by_rows(stripe, stripe2))
 
-  if (header_row) {
+  if (header_rows) {
     ht <- style_header_rows(ht, bold = TRUE)
   }
-  if (header_col) {
+  if (header_cols) {
     ht <- style_header_cols(ht,
             bold = TRUE,
             background_color = stripe
@@ -156,16 +177,16 @@ theme_maker <- function (
         header_color = col1,
         header_text = NA
       ) {
-  function (ht, header_row = TRUE, header_col = TRUE) {
+  function (ht, header_rows = TRUE, header_cols = TRUE) {
     ht <- set_all_borders(ht, 1)
     ht <- set_all_border_colors(ht, border_color)
     ht <- map_background_color(ht, by_rows(col1, col2))
-    if (header_row) {
+    if (header_rows) {
       bold(ht)[header_rows(ht), ]             <- TRUE
       background_color(ht)[header_rows(ht), ] <- header_color
       text_color(ht)[header_rows(ht), ]       <- header_text
     }
-    if (header_col) {
+    if (header_cols) {
       bold(ht)[, header_cols(ht)]             <- TRUE
       background_color(ht)[, header_cols(ht)] <- header_color
       text_color(ht)[, header_cols(ht)]       <- header_text
@@ -217,17 +238,17 @@ theme_green <- theme_maker(
 
 #' @export
 #' @rdname themes
-theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
-  assert_that(is.flag(header_row), is.flag(header_col))
+theme_article <- function (ht, header_rows = TRUE, header_cols = TRUE) {
+  assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht, 0)
   ht <- set_top_border(ht, 1, everywhere)
   ht <- set_bottom_border(ht, final(1), everywhere)
-  if (header_row) {
+  if (header_rows) {
     ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
     ht <- style_header_rows(ht, bold = TRUE)
   }
-  if (header_col) {
+  if (header_cols) {
     ht <- style_header_cols(ht, bold = TRUE)
   }
 
