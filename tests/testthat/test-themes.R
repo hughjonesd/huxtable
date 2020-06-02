@@ -18,7 +18,7 @@ test_that("Themes work", {
 
 
 test_that("Themes work with options", {
-  ht <- huxtable(a = 1:5, b = 1:5)
+  ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
   expect_error(theme_basic(ht, header_rows = FALSE, header_cols = FALSE), regexp = NA)
   expect_error(theme_striped(ht, stripe = "purple", header_rows = FALSE, header_cols = FALSE),
         regexp = NA)

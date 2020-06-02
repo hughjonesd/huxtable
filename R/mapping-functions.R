@@ -216,6 +216,8 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
     res <- current
     assert_that(from <= nrow(res))
     lout <- nrow(res) - from + 1
+    # prevents a warning:
+    if (ncol(res) == 0) lout <- 0
     vals <- matrix(rep(vals, length.out = lout), nrow = lout, ncol = ncol(res))
     res[seq(from, nrow(res)), ] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
@@ -236,7 +238,10 @@ by_cols <- function (..., from = 1, ignore_na = TRUE) {
     res <- current
     assert_that(from <= ncol(res))
     lout <- ncol(res) - from + 1
-    vals <- matrix(rep(vals, length.out = lout), ncol = lout, nrow = nrow(res), byrow = TRUE)
+    # prevents a warning
+    if (nrow(res) == 0) lout <- 0
+    vals <- matrix(rep(vals, length.out = lout), ncol = lout, nrow = nrow(res),
+            byrow = TRUE)
     res[, seq(from, ncol(res))] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
     res
