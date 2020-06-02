@@ -147,6 +147,8 @@ as_hux(matrix(c("Multirow cell", rep("Cell", 8)), 3, 3)) %>%
 Column names: V1, V2, V3
 ```
 
+It now does what you would expect:
+
 
 ```{r, eval = FALSE}
 
