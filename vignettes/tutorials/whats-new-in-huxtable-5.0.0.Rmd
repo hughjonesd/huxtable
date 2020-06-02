@@ -24,9 +24,9 @@ The [gt package](https://gt.rstudio.com) is out on [CRAN](https://cran.r-project
 presentation tables in R, you should definitely check it out -- it's written
 by the guys at RStudio and has the high quality you would expect.
 
-All the same, I reckon the [huxtable](https://hughjonesd.github.io/huxtable) package still has
-something to offer. In particular, if you want to output to PDF 
-(or Word, Powerpoint, Excel, RTF or Markdown), huxtable can do that.
+Meanwhile, the [huxtable](https://hughjonesd.github.io/huxtable) package still 
+might be useful. In particular, if you want to output to PDF 
+(or HTML, Word, Powerpoint, Excel, RTF or Markdown), huxtable can do that.
 
 Version 5.0.0 of huxtable is coming out shortly. This article describes
 some of its new features. Click the links on the left to learn more.
