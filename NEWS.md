@@ -204,8 +204,11 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 
 ## Other news
 
-New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
-package will have an `as_huxtable()` method. 
+* New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
+  package will have an `as_huxtable()` method. 
+
+* Package [texreg](https://cran.r-project.org/package=texreg) on CRAN includes a
+  `huxtablereg()` function for creating a table of regression outputs.
 
 # huxtable 4.7.1
 
