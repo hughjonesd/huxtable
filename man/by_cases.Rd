@@ -20,11 +20,14 @@ A function for use in \verb{map_***} functions.
 This function uses \code{\link[dplyr:case_when]{dplyr::case_when()}} to set cell properties.
 }
 \details{
-Within the formulas, the variable \code{.} will refer to the content of \code{ht[rows, cols]} (converted
-by \code{as.matrix}).
+Within the formulas, the variable \code{.} will refer to the content of
+\code{ht[rows, cols]}, after conversion by \code{\link[=as.matrix]{as.matrix()}}.
 
-\code{case_when} returns \code{NA} when no formula LHS is matched. To avoid this, set a default in the last
-formula: \code{TRUE ~ default}.
+\code{case_when} returns \code{NA} when no formula LHS is matched. To avoid this, set a
+default in the last formula: \code{TRUE ~ default}.
+
+\code{case_when} can't deal with \code{\link[=brdr]{brdr()}} objects, so you cannot use
+these in \code{by_cases()}.
 }
 \examples{
 if (! requireNamespace("dplyr")) {

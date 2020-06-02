@@ -87,6 +87,7 @@ We will cover many of these features below.
 
 You can install huxtable from within R:
 
+
 ```{r, eval = FALSE}
 install.packages("huxtable")
 ```
@@ -120,19 +121,23 @@ jams <- hux(
 
 You can convert a data frame to a huxtable with `as_hux`.
 
+
 ```{r}
 data(mtcars)
 car_ht <- as_hux(mtcars)
 ```
+
 
 If you look at a huxtable in R, it will print out a simple representation of the
 data. Notice that we've added the column names to the data. We're
 going to print them out, so they need to be part of the actual table. The data
 will start on row 2 of the huxtable, and the column names will be row 1.
 
+
 ```{r, results = "markup"}
 print_screen(jams)     # on the R command line, you can just type "jams"
 ```
+
 
 To print a huxtable as LaTeX or HTML, just call `print_latex` or `print_html`. 
 In knitr documents, like this one, you can simply evaluate the huxtable:
@@ -753,7 +758,7 @@ will display them differently. You can also style headers yourself using the
 iris_hux %>% 
       set_header_rows(1:2, TRUE) %>% 
       set_header_cols(1, TRUE) %>% 
-      style_headers(bold = TRUE, text_color = "grey20")
+      style_headers(bold = TRUE, text_color = "grey40")
 ```
 
 
@@ -795,7 +800,8 @@ simply apply a set of styles to the huxtable.
 
 # Conditional formatting
 
-When you want to apply different formatting to different cells, you can use the `map_xxx` functions.
+When you want to apply different formatting to different cells, you can use 
+*mapping functions*.
 
 For example, here's another way to create a striped table:
 

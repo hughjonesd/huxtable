@@ -551,11 +551,14 @@ by_function <- function (inner_fn, ignore_na = TRUE) {
 #' @inherit mapping-params params
 #'
 #' @details
-#' Within the formulas, the variable `.` will refer to the content of `ht[rows, cols]` (converted
-#' by `as.matrix`).
+#' Within the formulas, the variable `.` will refer to the content of
+#' `ht[rows, cols]`, after conversion by [as.matrix()].
 #'
-#' `case_when` returns `NA` when no formula LHS is matched. To avoid this, set a default in the last
-#' formula: `TRUE ~ default`.
+#' `case_when` returns `NA` when no formula LHS is matched. To avoid this, set a
+#' default in the last formula: `TRUE ~ default`.
+#'
+#' `case_when` can't deal with [brdr()] objects, so you cannot use
+#' these in `by_cases()`.
 #'
 #' @family mapping functions
 #' @seealso [mapping-functions]
