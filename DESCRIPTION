@@ -26,7 +26,6 @@ Imports:
     rlang,
     stats,
     stringr (>= 1.2.0),
-    tibble,
     tidyselect,
     utils,
     commonmark
@@ -53,6 +52,7 @@ Suggests:
     sandwich,
     scales,
     testthat,
+    tibble,
     tinytex
 VignetteBuilder: knitr
 Encoding: UTF-8

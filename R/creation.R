@@ -81,8 +81,9 @@ hux <- huxtable
 
 #' @export
 #' @details
-#' `tribble_hux` is a simple wrapper around [tibble::tribble()] which lets you create data
-#' in a readable format.
+#' `tribble_hux` is a simple wrapper around `tibble::tribble()` which lets you
+#'  create data in a readable format. It requires the "tibble" package to
+#'  be installed.
 #'
 #' @rdname huxtable
 #' @examples
@@ -98,6 +99,7 @@ tribble_hux <- function (...,
         add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
+  assert_package("tribble_hux", "tibble")
   as_hux(tibble::tribble(...), add_colnames = add_colnames, add_rownames = FALSE,
         autoformat = autoformat)
 }

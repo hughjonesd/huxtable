@@ -51,8 +51,9 @@ along by one: your old row/column 1 will now be row/column 2, etc.
 \code{add_colnames} defaults to \code{TRUE}. You can set the default globally by
 setting \code{options("huxtable.add_colnames")} to \code{TRUE} or \code{FALSE}.
 
-\code{tribble_hux} is a simple wrapper around \code{\link[tibble:tribble]{tibble::tribble()}} which lets you create data
-in a readable format.
+\code{tribble_hux} is a simple wrapper around \code{tibble::tribble()} which lets you
+create data in a readable format. It requires the "tibble" package to
+be installed.
 }
 \section{Automatic formatting}{
 
