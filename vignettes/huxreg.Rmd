@@ -4,9 +4,6 @@ author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output: 
   html_document: default
-  pdf_document:
-    includes:
-      in_header: placeins-header.tex
 vignette: >
   %\VignetteIndexEntry{Regression Tables with huxreg}  
   %\VignetteEngine{knitr::rmarkdown}  
@@ -140,9 +137,9 @@ from your models by `broom::glance`:
 
 ```{r}
 gl <- as_hux(broom::glance(lm1))
-gl[1:9] %>% 
-      restack_down(3) %>% 
-      rbind(cbind(gl[10:11], c("", ""))) %>% 
+
+gl %>% 
+      restack_down(cols = 3, on_remainder = "fill") %>% 
       set_bold(odds, everywhere)
 ```
 

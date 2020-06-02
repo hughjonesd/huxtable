@@ -2,6 +2,8 @@
 
 # script to rebuild website files
 
+library(rmarkdown)
+
 # pkgdown works from your tree, not from installed versions.
 # But rmarkdown::render works with installed versions.
 # So:
@@ -20,10 +22,30 @@ pkgdown:::pkg_timeline("huxtable")
 # merge in the new branch (git merge website-x.y.z)
 # push to github
 
+pdf_output_formats <- list(
+  "huxreg.Rmd"            = pdf_document(
+                              includes = includes(
+                                in_header = "placeins-header.tex"
+                              )
+                            ),
+  "themes.Rmd"            = pdf_document(),
+  "huxtable.Rmd"          = pdf_document(
+                              latex_engine = "xelatex",
+                              toc = TRUE,
+                              toc_depth = TRUE,
+                              number_sections = TRUE,
+                              includes = includes(
+                                in_header = "placeins-header.tex"
+                              )
+                            ),
+  "design-principles.Rmd" = pdf_document()
+)
+
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
+  filename <- basename(f)
   message("Rendering ", f)
   rmarkdown::render(f, output_format = "html_document")
-  rmarkdown::render(f, output_format = "pdf_document")
+  rmarkdown::render(f, output_format = pdf_output_format[[filename]])
 }
 
 setwd('docs')

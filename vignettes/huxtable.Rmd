@@ -6,12 +6,7 @@ output:
   html_document:
     toc: yes
     toc_depth: 2
-  pdf_document:
-    latex_engine: xelatex
-    includes:
-      in_header: placeins-header.tex
-    toc: yes
-    toc_depth: 2
+    number_sections: yes
 mainfont: Calibri
 monofont: LucidaConsole
 linkcolor: olive

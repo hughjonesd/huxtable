@@ -92,6 +92,5 @@ rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_res
 
 devtools::release()
 
-# afterwards:
-
+# after release:
 revdepcheck::revdep_reset()
