@@ -10,8 +10,8 @@
 #' @details
 #'
 #' * `style_headers` sets properties on all header cells.
-#' * `style_header_rows` sets properties on header row cells.
-#' * `style_header_cols` sets properties on header column cells.
+#' * `style_header_rows` sets properties on header rows.
+#' * `style_header_cols` sets properties on header columns.
 #' * `style_cells` sets properties on all selected cells.
 #'
 #' @examples

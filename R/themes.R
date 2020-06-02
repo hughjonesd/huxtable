@@ -4,44 +4,46 @@
 #'
 #' These functions quickly set default styles for a huxtable.
 #'
-#' `theme_plain` is a simple theme with a bold header, a grey striped background, and an outer border.
+#' * `theme_plain` is a simple theme with a bold header, a grey striped
+#'   background, and an outer border.
 #'
-#' `theme_basic` just sets header rows/columns to bold and adds a border beneath them
-#'    as well as a bottom border.
+#' * `theme_basic` sets header rows/columns to bold, and adds a border beneath
+#'   them.
 #'
-#' `theme_striped` uses different backgrounds for alternate rows, and for headers.
+#' * `theme_striped` uses different backgrounds for alternate rows, and for
+#'   headers.
 #'
-#' `theme_article` is similar to the style of many scientific journals.
-#'   It sets horizontal lines above and below the table.
+#' * `theme_article` is similar to the style of many scientific journals.
+#'    It sets horizontal lines above and below the table.
 #'
-#'  `theme_bright` uses thick white borders and a colourful header. It
-#'  works nicely with sans-serif fonts.
+#'  * `theme_bright` uses thick white borders and a colourful header. It
+#'     works nicely with sans-serif fonts.
 #'
-#'  `theme_grey`, `theme_blue`, `theme_orange` and `theme_green` use white borders and subtle
-#'    horizontal stripes.
+#'  * `theme_grey`, `theme_blue`, `theme_orange` and `theme_green` use white
+#'    borders and subtle horizontal stripes.
 #'
-#' `theme_mondrian` mimics the style of a Mondrian painting, with black borders and randomized
-#'   colors.
+#' * `theme_mondrian` mimics the style of a Mondrian painting, with thick black
+#'    borders and randomized colors.
 #'
 #' @param ht A huxtable object.
-#' @param header_row Logical: set first row to header, and style header rows?
-#' @param header_col Logical: set first column to header, and style header
-#'   columns?
+#' @param header_row Logical: style header rows?
+#' @param header_col Logical: style header columns?
 #'
 #' @return The huxtable object, appropriately styled.
 #' @name themes
 #'
 #' @examples
 #'
-#' theme_striped(jams)
 #' theme_plain(jams)
 #' theme_basic(jams)
+#' theme_striped(jams)
 #' theme_article(jams)
-#' theme_mondrian(jams)
+#' theme_bright(jams)
 #' theme_grey(jams)
 #' theme_blue(jams)
 #' theme_orange(jams)
 #' theme_green(jams)
+#' theme_mondrian(jams)
 #' \dontrun{
 #'   quick_pdf(
 #'           theme_striped(jams),
@@ -61,11 +63,13 @@ NULL
 #' @export
 #' @rdname themes
 #' @param position "left", "center" or "right"
-theme_plain <- function(ht, position = "center"){
-  ht <- set_outer_borders(ht, 0.4)
+theme_plain <- function(ht, header_row = TRUE, position = "center"){
+  ht <- set_outer_borders(ht)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
-  ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
-  ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
+  if (header_row) {
+    ht <- set_bold(ht, header_rows(ht), everywhere, TRUE)
+    ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere, 0.4)
+  }
   ht <- set_position(ht, position)
 
   ht
@@ -84,14 +88,14 @@ theme_bright <- function (ht,
   ht <- set_all_borders(ht, 3)
   ht <-  set_all_border_colors(ht, "white")
   if (header_row) {
-    ht <- set_header_rows(ht, 1, TRUE)
-    ht <-  map_background_color(ht, 1, everywhere, by_cols(colors))
-    ht <-  set_text_color(ht, 1, everywhere, "white")
+    ht <-  map_background_color(ht, header_rows(ht),
+          everywhere, by_cols(colors))
+    ht <-  set_text_color(ht, header_rows(ht), everywhere, "white")
   }
   if (header_col) {
-    ht <- set_header_cols(ht, 1, TRUE)
-    ht <-  map_background_color(ht, everywhere, 1, by_rows(colors))
-    ht <-  set_text_color(ht, everywhere, 1, "white")
+    ht <-  map_background_color(ht, everywhere, header_cols(ht),
+          by_rows(colors))
+    ht <-  set_text_color(ht, everywhere, header_cols(ht), "white")
   }
 
   ht
@@ -105,17 +109,14 @@ theme_basic <- function (ht, header_row = TRUE, header_col = FALSE) {
 
   ht <- set_all_borders(ht, 0)
   if (header_row) {
-    ht <- set_header_rows(ht, 1, TRUE)
     ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
     ht <- set_bold(ht, header_rows(ht), everywhere)
   }
   if (header_col) {
-    ht <- set_header_cols(ht, 1, TRUE)
     ht <- set_right_border(ht, everywhere, largest(header_cols(ht)))
     ht <- set_bold(ht, everywhere, header_cols(ht))
   }
 
-  ht <- set_bottom_border(ht, final(1), everywhere)
   ht <- clean_outer_padding(ht, 2)
 
   ht
@@ -135,12 +136,9 @@ theme_striped <- function (ht, stripe = "grey90",
   ht <- map_background_color(ht, by_rows(stripe, stripe2))
 
   if (header_row) {
-    ht <- set_header_rows(ht, 1, TRUE)
-    ht <- style_header_rows(ht,
-          bold = TRUE)
+    ht <- style_header_rows(ht, bold = TRUE)
   }
   if (header_col) {
-    ht <- set_header_cols(ht, 1, TRUE)
     ht <- style_header_cols(ht,
             bold = TRUE,
             background_color = stripe
@@ -163,13 +161,11 @@ theme_maker <- function (
     ht <- set_all_border_colors(ht, border_color)
     ht <- map_background_color(ht, by_rows(col1, col2))
     if (header_row) {
-      ht <- set_header_rows(ht, 1, TRUE)
       bold(ht)[header_rows(ht), ]             <- TRUE
       background_color(ht)[header_rows(ht), ] <- header_color
       text_color(ht)[header_rows(ht), ]       <- header_text
     }
     if (header_col) {
-      ht <- set_header_cols(ht, 1, TRUE)
       bold(ht)[, header_cols(ht)]             <- TRUE
       background_color(ht)[, header_cols(ht)] <- header_color
       text_color(ht)[, header_cols(ht)]       <- header_text
@@ -225,17 +221,16 @@ theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
   assert_that(is.flag(header_row), is.flag(header_col))
 
   ht <- set_all_borders(ht, 0)
-  top_border(ht)[1, ] <- 0.4
-  bottom_border(ht)[nrow(ht), ] <- 0.4
+  ht <- set_top_border(ht, 1, everywhere)
+  ht <- set_bottom_border(ht, final(1), everywhere)
   if (header_row) {
-    ht <- set_header_rows(ht, 1, TRUE)
-    bottom_border(ht)[header_rows(ht), ] <- 0.4
-    bold(ht)[header_rows(ht), ] <- TRUE
+    ht <- set_bottom_border(ht, largest(header_rows(ht)), everywhere)
+    ht <- style_header_rows(ht, bold = TRUE)
   }
   if (header_col) {
-    ht <- set_header_cols(ht, 1, TRUE)
-    bold(ht)[, header_cols(ht)] <- TRUE
+    ht <- style_header_cols(ht, bold = TRUE)
   }
+
   ht <- clean_outer_padding(ht, 0)
 
   ht
@@ -244,9 +239,10 @@ theme_article <- function (ht, header_row = TRUE, header_col = TRUE) {
 
 #' @export
 #' @rdname themes
-#' @param prop_colored Roughly what proportion of cells should have a primary-color background?
+#' @param prop_colored Roughly what proportion of cells should have
+#'   a primary-color background?
 #' @param font Font to use. For LaTeX, try `"cmss"`.
-theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
+theme_mondrian <- function (ht, prop_colored = 0.1, font = NULL) {
   assert_that(is.number(prop_colored), prop_colored >= 0, prop_colored <= 1)
 
   ht <- set_all_borders(ht, 2)
@@ -256,7 +252,7 @@ theme_mondrian <- function (ht, prop_colored = 0.1, font = "Arial") {
   colored <- sample.int(ncells, size = ceiling(ncells * prop_colored), replace = FALSE)
   colors <- sample(c("red", "blue", "yellow"), length(colored), replace = TRUE)
   background_color(ht)[colored] <- colors
-  font(ht) <- font
+  if (! is.null(font)) font(ht) <- font
 
   ht
 }
@@ -273,5 +269,6 @@ clean_outer_padding <- function (ht, pad) {
 
 
 largest <- function(x) {
-  if (any(x)) max(which(x)) else integer(0)
+  xs <- c(x[-1], FALSE)
+  which(x & ! xs)
 }

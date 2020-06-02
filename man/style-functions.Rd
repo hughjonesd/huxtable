@@ -35,8 +35,8 @@ and/or columns.
 \details{
 \itemize{
 \item \code{style_headers} sets properties on all header cells.
-\item \code{style_header_rows} sets properties on header row cells.
-\item \code{style_header_cols} sets properties on header column cells.
+\item \code{style_header_rows} sets properties on header rows.
+\item \code{style_header_cols} sets properties on header columns.
 \item \code{style_cells} sets properties on all selected cells.
 }
 
