@@ -21,15 +21,17 @@ navbar:
       href: news/index.html
 
 reference:
-  - title: "Package information"
-    desc: Basic information about the package
+  - title: "Overview"
+    desc: Get high-level documentation about the package
     contents:
       - huxtable-package
       - huxtable-options
       - huxtable-FAQ
+      - rowspecs
+      - mapping-functions
   - title: "Creating and manipulating huxtables"
     desc: >
-      Functions to create, subset and work with huxtables
+      Create, subset and join huxtables
     contents:
       - "[.huxtable"
       - add_colnames
@@ -38,15 +40,13 @@ reference:
       - cbind.huxtable
       - huxtable
       - as_huxtable
-      - insert_column
-      - merge_cells
-      - merge_repeated_rows
-      - set_contents
+      - starts_with("insert")
+      - starts_with("merge")
       - add_rows
       - mutate
       - t.huxtable
   - title: "Size and position"
-    desc: Size and position properties of huxtables
+    desc: Size and position properties
     contents:
       - col_width
       - height
@@ -54,84 +54,95 @@ reference:
       - row_height
       - width
   - title: "Table-level properties"
-    desc: Other table-level properties of huxtables
+    desc: Other table-level properties
     contents:
       - caption
       - caption_pos
+      - caption_width
       - label
       - latex_float
       - tabular_environment
   - title: "Text properties"
-    desc: Functions to change the properties of text in table cells
+    desc: Style text in table cells
     contents:
+      - background_color
       - bold
+      - escape_contents
+      - starts_with("fmt")
       - font
       - font_size
       - italic
+      - markdown
+      - set_markdown_contents
+      - set_contents
       - number_format
       - na_string
       - pad_decimal
       - text_color
   - title: "Borders and padding"
-    desc: Functions to alter borders, border colors and cell padding
+    desc: Set borders, border colors and cell padding
     contents:
-      - starts_with("left_")
-      - starts_with("right_")
-      - starts_with("bottom_")
-      - starts_with("top_")
+      - borders
+      - border-colors
+      - border-styles
+      - padding
       - starts_with("set_all")
+      - starts_with("set_lr")
+      - starts_with("set_tb")
       - starts_with("set_outer")
-  - title: "Cell properties"
-    desc: Other cell-level properties
+      - brdr
+      - brdr_thickness
+  - title: "Layout"
+    desc: Change the layout of cells and tables
     contents:
     - align
-    - background_color
     - colspan
-    - escape_contents
     - rotation
     - rowspan
     - valign
     - wrap
+    - starts_with("merge")
   - title: "Property manipulation"
-    desc: Generic ways to manipulate huxtable properties
+    desc: Change multiple properties with one command, and set defaults
     contents:
+    - starts_with("style")
     - get_default_properties
-    - set_cell_properties
     - set_default_properties
   - title: "Mapping functions"
     desc: Set cell properties depending on cell contents
     contents:
     - starts_with("by_")
-    - mapping-functions
-  - title: "Output"
+  - title: "Printing"
     desc: >
-      Functions to output huxtables to LaTeX, HTML, Word, Excel, markdown or on-screen
+      Print to LaTeX, HTML, Word, Excel, RTF, markdown or on-screen
     contents:
-      - as_FlexTable
+      - as_flextable
       - as_Workbook
       - guess_knitr_output_format
       - starts_with("print_")
       - print.huxtable
       - knit_print.huxtable
       - knit_print.data.frame
-      - report_latex_dependencies
       - rtf_fc_tables
       - starts_with("to_")
+  - title: "Quick output"
+    desc: Print huxtables or other data to a new file, using a one-liner
       - starts_with("quick")
   - title: "Themes"
-    desc: Quick ways to theme a huxtable
+    desc: Apply a coherent style to a huxtable
     contents:
       - starts_with("theme_")
   - title: "Row specs"
-    desc: Ways to specify rows and columns in `set_` functions
+    desc: Specify rows and columns in `set_` functions
     contents:
       - evens
-      - every
       - everywhere
       - final
       - odds
-      - rowspecs
-      - where
+      - stripe
+  - title: "LaTeX dependencies"
+    desc: Manage LaTeX packages for huxtable
+      - matches("latex_dependencies")
   - title: "Miscellaneous"
     desc: Other functions
     contents:
@@ -139,8 +150,10 @@ reference:
       - jams
       - huxreg
       - tidy_override
-      - is_a_number
+      - tidy_replace
       - sanitize
+      - hex_hux
+      - hux_hex
 
 tutorials:
 - name: 00-reporting-data

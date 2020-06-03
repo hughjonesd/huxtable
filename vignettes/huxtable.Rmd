@@ -6,7 +6,6 @@ output:
   html_document:
     toc: yes
     toc_depth: 2
-    number_sections: yes
 mainfont: Calibri
 monofont: LucidaConsole
 linkcolor: olive
@@ -314,9 +313,11 @@ props[["Table"]]  <- sort(c("width", "height", "position", "caption",
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep("", maxl - length(x))))
 
+mono_font <- if (is_latex) "LucidaConsole" else "monospace"
+
 prop_hux <- hux(as.data.frame(props, check.names = FALSE)) %>% 
       set_font_size(10)                                    %>% 
-      set_font("LucidaConsole")                            %>% 
+      set_font(-1, everywhere, mono_font)                  %>% 
       set_header_rows(1, TRUE)                             %>% 
       set_width(0.9)                                       %>% 
       set_tb_padding(2)                                    %>% 

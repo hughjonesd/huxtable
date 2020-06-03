@@ -33,7 +33,6 @@ pdf_output_formats <- list(
                               latex_engine = "xelatex",
                               toc = TRUE,
                               toc_depth = TRUE,
-                              number_sections = TRUE,
                               includes = includes(
                                 in_header = "placeins-header.tex"
                               )

@@ -32,6 +32,11 @@ Version 5.0.0 of huxtable is coming out shortly. This article describes
 some of its new features. Click the links on the left to learn more.
 
 
+```{r, echo = FALSE}
+huxtable::hux_logo(html = TRUE)
+```
+
+
 # Markdown in cells
 
 You can now use markdown to format text in cell contents.
@@ -91,7 +96,7 @@ iris_hux %>%
 
 This change needs a recent version of the "adjustbox" package from 
 [CTAN](https://ctan.org).
-`huxtable::report_latex_dependencies()` will check this for you, and
+`huxtable::check_latex_dependencies()` will check this for you, and
 `install_latex_dependencies()` will try to update you automatically.
 
 There are other improvements too. Padding now works better, and cell wrapping
