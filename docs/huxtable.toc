@@ -1,30 +1,23 @@
-\contentsline {section}{Introduction}{2}{section*.4}% 
-\contentsline {subsection}{About this document}{2}{section*.5}% 
-\contentsline {subsection}{Huxtable}{2}{section*.6}% 
-\contentsline {subsection}{Installation}{2}{section*.7}% 
-\contentsline {subsection}{Getting started}{3}{section*.8}% 
-\contentsline {section}{Changing the look and feel}{3}{section*.11}% 
-\contentsline {subsection}{Huxtable properties}{3}{section*.12}% 
-\contentsline {subsection}{Tidyverse syntax}{5}{section*.19}% 
-\contentsline {subsection}{Getting properties}{6}{section*.22}% 
-\contentsline {section}{Editing content}{6}{section*.23}% 
-\contentsline {subsection}{Changing and adding content}{6}{section*.24}% 
-\contentsline {subsection}{Editing content the base R way}{8}{section*.39}% 
-\contentsline {subsection}{Editing content the dplyr way}{9}{section*.42}% 
-\contentsline {section}{More formatting}{9}{section*.45}% 
-\contentsline {subsection}{Number format}{9}{section*.46}% 
-\contentsline {subsection}{Automatic formatting}{10}{section*.51}% 
-\contentsline {subsection}{Escaping HTML or LaTeX}{11}{section*.56}% 
-\contentsline {subsection}{Width and cell wrapping}{11}{section*.61}% 
-\contentsline {subsection}{Adding row and column names}{12}{section*.66}% 
-\contentsline {subsection}{Merging cells}{12}{section*.69}% 
-\contentsline {subsection}{Quick themes}{14}{section*.72}% 
-\contentsline {section}{Selecting rows, columns and cells}{15}{section*.75}% 
-\contentsline {subsection}{Row and column functions}{15}{section*.76}% 
-\contentsline {subsection}{Conditional formatting}{15}{section*.79}% 
-\contentsline {section}{Creating a regression table}{17}{section*.86}% 
-\contentsline {section}{Output to different formats}{17}{section*.89}% 
-\contentsline {subsection}{Automatic pretty-printing of data frames}{17}{section*.90}% 
-\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{18}{section*.91}% 
-\contentsline {subsection}{Quick output commands}{18}{section*.92}% 
-\contentsline {section}{End matter}{19}{section*.95}% 
+\contentsline {section}{Introduction}{2}{section*.4}%
+\contentsline {subsection}{About this document}{2}{section*.5}%
+\contentsline {subsection}{Huxtable}{2}{section*.6}%
+\contentsline {subsection}{Installation}{2}{section*.7}%
+\contentsline {section}{Getting started}{2}{section*.8}%
+\contentsline {subsection}{Huxtable properties}{3}{section*.11}%
+\contentsline {subsection}{Selecting rows and columns}{6}{section*.16}%
+\contentsline {section}{Editing huxtables}{7}{section*.17}%
+\contentsline {subsection}{Formatting cell text}{7}{section*.18}%
+\contentsline {subsection}{Borders}{8}{section*.25}%
+\contentsline {subsection}{Changing and adding content}{10}{section*.32}%
+\contentsline {section}{Changing the layout}{12}{section*.43}%
+\contentsline {subsection}{Table position and column width}{16}{section*.56}%
+\contentsline {subsection}{Headers}{16}{section*.59}%
+\contentsline {subsection}{Splitting tables}{17}{section*.62}%
+\contentsline {section}{Themes}{19}{section*.69}%
+\contentsline {section}{Conditional formatting}{19}{section*.72}%
+\contentsline {section}{Output to different formats}{20}{section*.79}%
+\contentsline {subsection}{Pretty-printing data frames}{20}{section*.80}%
+\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{21}{section*.83}%
+\contentsline {subsection}{Quick output commands}{22}{section*.84}%
+\contentsline {section}{Creating a regression table}{22}{section*.85}%
+\contentsline {section}{Getting more information}{23}{section*.88}%

@@ -148,55 +148,41 @@
 
     
 <ul>
-<li><p>LaTeX output isn't working.</p></li>
-</ul>
-
-<p>Have you installed the LaTeX packages you need? LaTeX packages are different from R packages. Run
-<code><a href='report_latex_dependencies.html'>check_latex_dependencies()</a></code> to find out if you are missing any. Then install them using your
-system's LaTeX management application. Or you can try <code><a href='report_latex_dependencies.html'>install_latex_dependencies()</a></code>.</p><ul>
-<li><p>Numbers in my cells look weird!</p></li>
-</ul>
-
-<p>You can change numeric formatting using <code><a href='number_format.html'>number_format()</a></code>. Base R options like
-<code><a href='https://rdrr.io/r/base/options.html'>scipen</a></code> usually have no effect.</p><ul>
-<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p></li>
-</ul><pre>Error in UseMethod("caption&amp;lt;-") :
-no applicable method for 'caption&amp;lt;-' applied to an object of class "c('huxtable', 'data.frame')"
+<li><p>LaTeX output isn't working.</p>
+<p>Have you installed the LaTeX packages you need? LaTeX packages are different
+from R packages. Run <code><a href='report_latex_dependencies.html'>check_latex_dependencies()</a></code> to find out if you are
+missing any. Then install them using your system's LaTeX management
+application. Or you can try <code><a href='report_latex_dependencies.html'>install_latex_dependencies()</a></code>.</p></li>
+<li><p>Numbers in my cells look weird!</p>
+<p>You can change numeric formatting using <code><a href='number_format.html'>number_format()</a></code>. Base R options
+like <code><a href='https://rdrr.io/r/base/options.html'>scipen</a></code> usually have no effect.</p></li>
+<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p><pre>Error in UseMethod("caption&amp;lt;-") :
+no applicable method for 'caption&amp;lt;-' applied to an object of class "c('huxtable',   'data.frame')"
 </pre>
 
-<p>You may have loaded another package with a <code>caption</code> method, e.g. "xtable". Try loading huxtable
-after xtable.</p><ul>
-<li><p>My tables aren't centered correctly (LaTeX).</p></li>
-</ul>
-
-<p>Try adjusting <code><a href='width.html'>width(ht)</a></code>.</p><ul>
-<li><p>How can I change the font size, font etc. of captions?</p></li>
-</ul>
-
-<p>There are no direct commands for this. You have to use raw HTML/TeX/other commands within the
-caption itself. For example to have a bold caption in HTML, you might do something like:</p><pre><span class='fu'><a href='caption.html'>set_caption</a></span>(<span class='no'>jams</span>, <span class='st'>"&amp;lt;b&amp;gt;Jam Prices&amp;lt;/b&amp;gt;"</span>)</pre>
-<ul>
-<li><p>How do I refer to tables in bookdown?</p></li>
-</ul>
-
+<p>You may have loaded another package with a <code>caption</code> method, e.g. "xtable".
+Try loading huxtable after xtable.</p></li>
+<li><p>How can I change the font size, font etc. of captions?</p>
+<p>There are no direct commands for this. You have to use raw HTML/TeX/other
+commands within the caption itself. For example to have a bold caption in
+HTML, you might do something like:</p><pre><span class='fu'><a href='caption.html'>set_caption</a></span>(<span class='no'>jams</span>, <span class='st'>"&amp;lt;b&amp;gt;Jam Prices&amp;lt;/b&amp;gt;"</span>)</pre></li>
+<li><p>How do I refer to tables in bookdown?</p>
 <p>As of version 4.3.0, this is handled automatically for you. Just
 set the label using <code><a href='label.html'>label()</a></code>, then in markdown text do e.g.:</p><pre>\\@ref(tab:my-table-label).
 
-</pre>
-<ul>
-<li><p>I have another problem.</p></li>
-</ul>
-
+</pre></li>
+<li><p>I have another problem.</p>
 <p>If you have a bug - i.e. a problem with the software - or have a feature
-request, please report it to <a href='https://github.com/hughjonesd/huxtable/issues'>https://github.com/hughjonesd/huxtable/issues</a>.
+request, please report it to
+<a href='https://github.com/hughjonesd/huxtable/issues'>https://github.com/hughjonesd/huxtable/issues</a>.
 Otherwise, ask a question on <a href='https://stackoverflow.com'>StackOverflow</a> or
 <a href='https://community.rstudio.com'>https://community.rstudio.com</a>. That way, other people will benefit from
-the answers you get.</p><ul>
-<li><p>Can I email you directly?</p></li>
+the answers you get.</p></li>
+<li><p>Can I email you directly?</p>
+<p>I'd rather you asked on a public website. If you then email me a link, I
+may be able to help.</p></li>
 </ul>
 
-<p>I'd rather you asked on a public website. If you then email me a link, I
-may be able to help.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
