@@ -6,7 +6,12 @@ theme_maker <- function (
         header_color = col1,
         header_text = NA
       ) {
-  function (ht, header_rows = TRUE, header_cols = TRUE) {
+
+  theme_fn <- function (
+          ht,
+          header_rows = TRUE,
+          header_cols = TRUE
+        ) {
     ht <- set_all_borders(ht, 1)
     ht <- set_all_border_colors(ht, border_color)
     ht <- map_background_color(ht, by_rows(col1, col2))
@@ -20,10 +25,12 @@ theme_maker <- function (
       background_color(ht)[, header_cols(ht)] <- header_color
       text_color(ht)[, header_cols(ht)]       <- header_text
     }
-    ht <- clean_outer_padding(ht, 4)
+    ht <- clean_outer_padding(ht, 6)
 
     ht
   }
+
+  return(theme_fn)
 }
 
 
@@ -96,7 +103,11 @@ NULL
 #' @export
 #' @rdname themes
 #' @param position "left", "center" or "right"
-theme_plain <- function(ht, header_rows = TRUE, position = "center"){
+theme_plain <- function(
+        ht,
+        header_rows = TRUE,
+        position = "center"
+      ){
   ht <- set_outer_borders(ht)
   ht <- set_background_color(ht, evens, everywhere, "#F2F2F2")
   if (header_rows) {
@@ -112,7 +123,8 @@ theme_plain <- function(ht, header_rows = TRUE, position = "center"){
 #' @export
 #' @rdname themes
 #' @param colors Colors for header rows. Can also be a palette function.
-theme_bright <- function (ht,
+theme_bright <- function (
+        ht,
         header_rows = TRUE,
         header_cols = FALSE,
         colors = c("#7eabf2", "#e376e3", "#fcbb03", "#7aba59", "#fc0356"))
@@ -140,7 +152,11 @@ theme_bright <- function (ht,
 
 #' @export
 #' @rdname themes
-theme_basic <- function (ht, header_rows = TRUE, header_cols = FALSE) {
+theme_basic <- function (
+        ht,
+        header_rows = TRUE,
+        header_cols = FALSE
+      ) {
   assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht, 0)
@@ -161,7 +177,11 @@ theme_basic <- function (ht, header_rows = TRUE, header_cols = FALSE) {
 
 #' @export
 #' @rdname themes
-theme_compact <- function (ht, header_rows = TRUE, header_cols = FALSE) {
+theme_compact <- function (
+        ht,
+        header_rows = TRUE,
+        header_cols = FALSE
+      ) {
   assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht, 0)
@@ -183,8 +203,13 @@ theme_compact <- function (ht, header_rows = TRUE, header_cols = FALSE) {
 #' @rdname themes
 #' @param stripe  Background colour for odd rows
 #' @param stripe2 Background colour for even rows
-theme_striped <- function (ht, stripe = "grey90",
-      stripe2 = "grey95", header_rows = TRUE, header_cols = TRUE) {
+theme_striped <- function (
+        ht,
+        stripe = "grey90",
+        stripe2 = "grey95",
+        header_rows = TRUE,
+        header_cols = TRUE
+      ) {
   assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht)
@@ -245,7 +270,11 @@ theme_green <- theme_maker(
 
 #' @export
 #' @rdname themes
-theme_article <- function (ht, header_rows = TRUE, header_cols = TRUE) {
+theme_article <- function (
+        ht,
+        header_rows = TRUE,
+        header_cols = TRUE
+      ) {
   assert_that(is.flag(header_rows), is.flag(header_cols))
 
   ht <- set_all_borders(ht, 0)
@@ -270,7 +299,11 @@ theme_article <- function (ht, header_rows = TRUE, header_cols = TRUE) {
 #' @param prop_colored Roughly what proportion of cells should have
 #'   a primary-color background?
 #' @param font Font to use. For LaTeX, try `"cmss"`.
-theme_mondrian <- function (ht, prop_colored = 0.1, font = NULL) {
+theme_mondrian <- function (
+        ht,
+        prop_colored = 0.1,
+        font = NULL
+      ) {
   assert_that(is.number(prop_colored), prop_colored >= 0, prop_colored <= 1)
 
   ht <- set_all_borders(ht, 2)
