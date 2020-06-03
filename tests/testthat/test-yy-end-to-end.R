@@ -15,6 +15,7 @@ setup({
 
 teardown({
   options(oo)
+  if (dir.exists("libs")) try(unlink("libs", recursive = TRUE))
 })
 
 
