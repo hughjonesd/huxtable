@@ -89,6 +89,7 @@ theme_maker <- function (
 #'           theme_mondrian(jams)
 #'         )
 #' }
+#'
 NULL
 
 

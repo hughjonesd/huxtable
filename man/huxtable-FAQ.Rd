@@ -10,59 +10,44 @@ A FAQ of common issues.
 \details{
 \itemize{
 \item LaTeX output isn't working.
-}
 
-Have you installed the LaTeX packages you need? LaTeX packages are different from R packages. Run
-\code{\link[=check_latex_dependencies]{check_latex_dependencies()}} to find out if you are missing any. Then install them using your
-system's LaTeX management application. Or you can try \code{\link[=install_latex_dependencies]{install_latex_dependencies()}}.
-\itemize{
+Have you installed the LaTeX packages you need? LaTeX packages are different
+from R packages. Run \code{\link[=check_latex_dependencies]{check_latex_dependencies()}} to find out if you are
+missing any. Then install them using your system's LaTeX management
+application. Or you can try \code{\link[=install_latex_dependencies]{install_latex_dependencies()}}.
 \item Numbers in my cells look weird!
+
+You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options
+like \code{\link[base:options]{scipen}} usually have no effect.
+\item I ran \code{caption(ht) <- "Something"} and got an error message:\preformatted{Error in UseMethod("caption<-") :
+no applicable method for 'caption<-' applied to an object of class "c('huxtable',   'data.frame')"
 }
 
-You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options like
-\code{\link[base:options]{scipen}} usually have no effect.
-\itemize{
-\item I ran \code{caption(ht) <- "Something"} and got an error message:
-}\preformatted{Error in UseMethod("caption<-") :
-no applicable method for 'caption<-' applied to an object of class "c('huxtable', 'data.frame')"
-}
-
-You may have loaded another package with a \code{caption} method, e.g. "xtable". Try loading huxtable
-after xtable.
-\itemize{
-\item My tables aren't centered correctly (LaTeX).
-}
-
-Try adjusting \code{width(ht)}.
-\itemize{
+You may have loaded another package with a \code{caption} method, e.g. "xtable".
+Try loading huxtable after xtable.
 \item How can I change the font size, font etc. of captions?
-}
 
-There are no direct commands for this. You have to use raw HTML/TeX/other commands within the
-caption itself. For example to have a bold caption in HTML, you might do something like:\preformatted{set_caption(jams, "<b>Jam Prices</b>")
-
+There are no direct commands for this. You have to use raw HTML/TeX/other
+commands within the caption itself. For example to have a bold caption in
+HTML, you might do something like:\preformatted{set_caption(jams, "<b>Jam Prices</b>")
 }
-\itemize{
 \item How do I refer to tables in bookdown?
-}
 
 As of version 4.3.0, this is handled automatically for you. Just
 set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\\\@ref(tab:my-table-label).
 
 }
-\itemize{
 \item I have another problem.
-}
 
 If you have a bug - i.e. a problem with the software - or have a feature
-request, please report it to \url{https://github.com/hughjonesd/huxtable/issues}.
+request, please report it to
+\url{https://github.com/hughjonesd/huxtable/issues}.
 Otherwise, ask a question on \href{https://stackoverflow.com}{StackOverflow} or
 \url{https://community.rstudio.com}. That way, other people will benefit from
 the answers you get.
-\itemize{
 \item Can I email you directly?
-}
 
 I'd rather you asked on a public website. If you then email me a link, I
 may be able to help.
+}
 }

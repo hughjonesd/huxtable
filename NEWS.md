@@ -4,6 +4,9 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # huxtable (development version)
 
+Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction,
+see https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html.
+
 ## Breaking changes
 
 * There are changes to LaTeX output. 
@@ -25,57 +28,57 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   adding new features. 
   - Borders are now automatically collapsed. For example:
 
-```r
-jams %>% 
-    set_right_border(everywhere, 1, 1) %>% 
-    set_left_border(everywhere, 2, 0.4)
-```
-    will set the border in between the columns of `jams` to `0.4`, overwriting
-    the previous value. This is more in line with what you would expect. 
-    For example, the following code now does what you probably want:
+    ```r
+    jams %>% 
+        set_right_border(everywhere, 1, 1) %>% 
+        set_left_border(everywhere, 2, 0.4)
+    ```
+will set the border in between the columns of `jams` to `0.4`, overwriting
+the previous value. This is more in line with what you would expect. 
+For example, the following code now does what you probably want:
 
-```
-jams %>% 
-    set_rowspan(2, 1, 3) %>% 
-    set_bottom_border(4, everywhere, 1)
-##                 Type              Price  
-##                 Strawberry         1.90  
-##                                    2.10  
-##                                    1.80  
-##               ───────────────────────────
-```
+    ```
+    jams %>% 
+        set_rowspan(2, 1, 3) %>% 
+        set_bottom_border(4, everywhere, 1)
+    ##                 Type              Price  
+    ##                 Strawberry         1.90  
+    ##                                    2.10  
+    ##                                    1.80  
+    ##               ───────────────────────────
+    ```
 
-instead of the old behaviour:
+    instead of the old behaviour:
 
-```
-jams %>% 
-    set_rowspan(2, 1, 3) %>% 
-    set_bottom_border(4, everywhere, 1)
-##                 Type           Price  
-##                 Strawberry      1.90  
-##                                 2.10  
-##                                 1.80  
-##                            ───────────
-```
+    ```
+    jams %>% 
+        set_rowspan(2, 1, 3) %>% 
+        set_bottom_border(4, everywhere, 1)
+    ##                 Type           Price  
+    ##                 Strawberry      1.90  
+    ##                                 2.10  
+    ##                                 1.80  
+    ##                            ───────────
+    ```
 
   - `set_left_border()`, `set_all_borders()` and friends all use a default value
     of 0.4. So to set a default border, write e.g.
   
-```r
-as_hux(head(iris)) %>% 
-      set_bottom_border(1, everywhere)
-```
+    ```r
+    as_hux(head(iris)) %>% 
+          set_bottom_border(1, everywhere)
+    ```
 
-* A new `brdr()` class encapsulates border thickness, style
-  and colour. You can set all properties at once by writing, e.g.:
+  - A new `brdr()` class encapsulates border thickness, style
+    and colour. You can set all properties at once by writing, e.g.:
   
-```r
-as_hux(jams) %>% 
-      set_bottom_border(1, everywhere, bdr(1, "dotted", "darkgreen"))
-```
+      ```r
+      as_hux(jams) %>% 
+            set_bottom_border(1, everywhere, brdr(1, "dotted", "darkgreen"))
+      ```
   
-  `left_border(ht)` and friends return a `brdr` object. To access the border
-  thickness, write `brdr_thickness(left_border(ht))`.
+    `left_border(ht)` and friends return a `brdr` object. To access the border
+    thickness, write `brdr_thickness(left_border(ht))`.
   
 * Various deprecated items have been removed:
   - The 3-argument form of `set_*`. Instead, use `map_*`. 
@@ -101,7 +104,7 @@ as_hux(jams) %>%
 * `add_rows()` and `add_columns()` now always call `rbind.huxtable()` 
   or `cbind.huxtable()` and return a huxtable.
 
-* huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
+* Huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).
 
 * `set_cell_properties()` has been renamed `style_cells()`. It is retained
   as a soft-deprecated alias.
@@ -135,24 +138,26 @@ as_hux(jams) %>%
 * `set_bold()` and `set_italic()` now use a default value of `TRUE`. So you
   can write e.g.
   
-```r
-as_hux(head(iris)) %>% 
-      set_bold(1, everywhere)
-```
+  ```r
+  as_hux(head(iris)) %>% 
+        set_bold(1, everywhere)
+  ```
 
-* New: by default, huxtable sets labels from the current knitr chunk label, if 
+* Console output in R now shows table position and caption position.
+
+* By default, huxtable now sets labels from the current knitr chunk label, if 
   there is one. This is consistent with `kable()`. In bookdown, you can then do 
   e.g.
 
-````
-Some iris species are shown in \@ref(tab:mytable):
+  ````
+  Some iris species are shown in \@ref(tab:mytable):
+  
+  ```{r mytable}
+  as_hux(iris)
+  ```
+  ````
 
-```{r mytable}`r ''`
-hux(head(iris))
-```
-````
-
-  Set `options(huxtable.autolabel = FALSE)` to return to the old behaviour.
+  Set `options(huxtable.autolabel = FALSE)` to turn off this behaviour.
 
 * The one-argument form of `[` now works for huxtables just as it does for 
   data frames. For example, `ht[2:3]` selects columns 2 and 3.
@@ -160,26 +165,26 @@ hux(head(iris))
 * New functions `fmt_percent()` and `fmt_pretty()` for passing into
   `number_format()`:
 
-```r
-jams$Sugar <-c ("Sugar content", 0.4, 0.35, 0.45)
-set_number_format(jams, -1, "Sugar", fmt_percent(1))
-```
+  ```r
+  jams$Sugar <-c ("Sugar content", 0.4, 0.35, 0.45)
+  set_number_format(jams, -1, "Sugar", fmt_percent(1))
+  ```
 
-* New functions `split_across()` and `split_down()` to split a huxtable into a
+* `split_across()` and `split_down()` split a huxtable into a
   list of sub-tables. Headers can be automatically included.
 
 * `restack_across()` and `restack_down()` split a huxtable, then join it back
   up. This is useful for making a table fit on a page.
 
-* New functions `merge_across()` and `merge_down()` to merge an area of cells
+* `merge_across()` and `merge_down()` merge an area of cells
   horizontally across rows, or vertically down columns.
 
 * New functions `set_lr_borders()/_border_colors()/_border_styles()/_padding()`  
-  to set left and right borders and padding simultaneously.
-  New functions `set_tb_borders()` etc. to set top and bottom properties 
-  simultaneously. Analogous `map_` versions of all of these.
+  set left and right borders and padding simultaneously.
+  New functions `set_tb_borders()` etc. set top and bottom properties 
+  simultaneously. There are `map_` equivalents of all of these.
   
-* New function `set_outer_padding()` sets padding around a range of cells,
+* `set_outer_padding()` sets padding around a range of cells,
   similarly to `set_outer_borders()`.
 
 * A new table-level property, `caption_width()`, allows you to set the width of 
@@ -189,8 +194,6 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 
 * For `huxreg()`, a new function `tidy_replace()` allows you to replace the 
   output of `tidy(x)` entirely.
-
-* Screen output now displays table position and caption position.
 
 * huxtable now only sets `options(huxtable.knit_print_df = TRUE)` if it is 
   attached, not if it is loaded.
