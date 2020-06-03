@@ -27,9 +27,11 @@ theme_plain(jams)
 theme_basic(jams)
 ```
 
+
 ```{r}
-theme_bright(jams)
+theme_compact(jams)
 ```
+
 
 ```{r}
 theme_striped(jams)
@@ -38,6 +40,11 @@ theme_striped(jams)
 
 ```{r}
 theme_article(jams)
+```
+
+
+```{r}
+theme_bright(jams)
 ```
 
 
@@ -56,7 +63,6 @@ theme_orange(jams)
 ```
 
 
-
 ```{r}
 theme_green(jams)
 ```
@@ -64,6 +70,7 @@ theme_green(jams)
 
 ```{r}
 theme_mondrian(jams)
+# mondrian colors are randomized
 ```
 
 

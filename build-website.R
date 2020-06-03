@@ -32,7 +32,7 @@ pdf_output_formats <- list(
   "huxtable.Rmd"          = pdf_document(
                               latex_engine = "xelatex",
                               toc = TRUE,
-                              toc_depth = TRUE,
+                              toc_depth = 2,
                               includes = includes(
                                 in_header = "placeins-header.tex"
                               )
@@ -44,7 +44,7 @@ for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   filename <- basename(f)
   message("Rendering ", f)
   rmarkdown::render(f, output_format = "html_document")
-  rmarkdown::render(f, output_format = pdf_output_format[[filename]])
+  rmarkdown::render(f, output_format = pdf_output_formats[[filename]])
 }
 
 setwd('docs')
