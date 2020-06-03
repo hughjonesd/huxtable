@@ -41,6 +41,8 @@ test_that("check_latex_dependencies runs correctly", {
   skip_if_not_installed("tinytex")
   # appveyor doesn't have tlmgr
   skip_on_appveyor()
+  # nor does win-builder
+  skip_on_cran()
 
   with_mock(
     `tinytex::tl_pkgs` = function (...) return(character(0)), {

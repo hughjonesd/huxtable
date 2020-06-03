@@ -55,19 +55,20 @@ Suggests:
     tibble,
     tinytex
 SystemRequirements: LaTeX packages: 
+    adjustbox, 
     array, 
+    calc, 
     caption,
-    graphicx, 
-    siunitx, 
-    ulem, 
     colortbl, 
+    fontspec,
+    graphicx, 
+    hhline, 
     multirow, 
-    hhline, calc, 
+    siunitx, 
     tabularx, 
     threeparttable, 
-    wrapfig, 
-    adjustbox, 
-    fontspec
+    ulem, 
+    wrapfig
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

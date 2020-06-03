@@ -24,7 +24,7 @@ to_md(ht, ...)
 \item{max_width}{Maximum width in on-screen characters of the result. Overrides \code{min_width}.}
 }
 \value{
-\code{to_md} returns a string. \code{print_md} prints the string and returns
+\code{to_md()} returns a string. \code{print_md()} prints the string and returns
 \code{NULL}.
 }
 \description{

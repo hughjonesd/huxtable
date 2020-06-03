@@ -16,7 +16,7 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #' @param max_width Maximum width in on-screen characters of the result. Overrides `min_width`.
 #' @param ...       Arguments passed to methods.
 #'
-#' @return `to_md` returns a string. `print_md` prints the string and returns
+#' @return `to_md()` returns a string. `print_md()` prints the string and returns
 #' `NULL`.
 #' @export
 #'
