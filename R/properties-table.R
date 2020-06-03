@@ -67,8 +67,9 @@ make_getter_setters("caption_pos", "table",
 #' Set the width of the table caption
 #'
 #' A numeric widths is interpreted as a proportion of text width in LaTeX, or of
-#' table width in HTML. |A character width must be a valid LaTeX or CSS dimension.
-#' The default, `NA`, makes the caption the same width as the table.
+#' width of the containing element in HTML. A character width must be a valid
+#' LaTeX or CSS dimension. The default, `NA`, makes the caption the same width
+#' as the table.
 #'
 #' @template getset-table
 #' @templateVar attr_name caption_width

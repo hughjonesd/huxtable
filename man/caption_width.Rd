@@ -22,8 +22,9 @@ set_caption_width(ht, value)
 }
 \description{
 A numeric widths is interpreted as a proportion of text width in LaTeX, or of
-table width in HTML. |A character width must be a valid LaTeX or CSS dimension.
-The default, \code{NA}, makes the caption the same width as the table.
+width of the containing element in HTML. A character width must be a valid
+LaTeX or CSS dimension. The default, \code{NA}, makes the caption the same width
+as the table.
 }
 \examples{
 

@@ -96,7 +96,6 @@ hux <- huxtable
 #' )
 tribble_hux <- function (...,
         add_colnames = getOption("huxtable.add_colnames", TRUE),
-        add_rownames = FALSE,
         autoformat   = getOption("huxtable.autoformat", TRUE)
       ) {
   assert_package("tribble_hux", "tibble")

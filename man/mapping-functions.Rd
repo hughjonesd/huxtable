@@ -4,35 +4,36 @@
 \alias{mapping-functions}
 \alias{mapping_functions}
 \title{How to set cell properties variably by cell contents}
-\value{
-The modified huxtable.
-}
 \description{
-This help page explains how to set properties differently for cells, depending on their contents.
-}
-\details{
+This help page explains how to set properties differently for cells,
+depending on their contents.
+
 For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{  map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
 }
 
 Or you can use red text for a particular value:\preformatted{  hxtbl \%>\% map_text_color(by_values("Warning" = "red"))
 }
 
-There is a \code{map_xxx} function for each huxtable cell property. The syntax is:\preformatted{  map_xxx(ht, row, col, fn)
+There is a \code{map_...} function for each huxtable cell property. The syntax is:\preformatted{  map_property(ht, row, col, fn)
 }
 
-where \code{xxx} is the property name.
+where \code{property} is the property name.
 
-\code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for details. To set properties
-for the whole table, you can omit \code{row} and \code{col}:\preformatted{  map_xxx(ht, fn)
+\code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for
+details. To set properties for the whole table, omit \code{row} and \code{col}:\preformatted{  map_property(ht, fn)
 }
 
-The \code{fn} argument is a \emph{mapping function} which maps cell contents to property values.
+The \code{fn} argument is a \emph{mapping function} which maps cell contents to
+property values.
 \itemize{
-\item To set property values in "stripes" by rows or by columns, use \code{\link[=by_rows]{by_rows()}} and \code{\link[=by_cols]{by_cols()}}.
+\item To set property values in "stripes" by rows or by columns, use \code{\link[=by_rows]{by_rows()}}
+and \code{\link[=by_cols]{by_cols()}}.
 \item To set property values for cells with specific contents, use \code{\link[=by_values]{by_values()}}.
 \item To set property values for cells within a numeric range, use \code{\link[=by_ranges]{by_ranges()}}.
-\item To set property values for cells by quantiles, use \code{\link[=by_quantiles]{by_quantiles()}} or \code{\link[=by_equal_groups]{by_equal_groups()}}.
-\item To set property values for cells that match a string or regular expression, use \code{\link[=by_regex]{by_regex()}}.
+\item To set property values for cells by quantiles, use \code{\link[=by_quantiles]{by_quantiles()}} or
+\code{\link[=by_equal_groups]{by_equal_groups()}}.
+\item To set property values for cells that match a string or regular expression,
+use \code{\link[=by_regex]{by_regex()}}.
 \item To map numeric values to a colorspace, use \code{\link[=by_colorspace]{by_colorspace()}}.
 \item For a more general solution, use \code{\link[=by_function]{by_function()}} or \code{\link[=by_cases]{by_cases()}}.
 }
@@ -40,35 +41,22 @@ The \code{fn} argument is a \emph{mapping function} which maps cell contents to 
 \section{Caveat}{
 
 
-Most functions convert the huxtable to a matrix using \code{\link[=as.matrix]{as.matrix()}}. This can have
-unexpected results if you mix character and numeric data. See the example.
+Most functions convert the huxtable to a matrix using \code{\link[=as.matrix]{as.matrix()}}. This can
+have unexpected results if you mix character and numeric data. See the
+example.
 }
 
 \section{Technical details}{
 
 
-\code{fn} must be a function taking four arguments: the (entire) original huxtable \code{ht}, a numeric
-vector of \code{rows}, a numeric vector of \code{cols}, and the \code{current} property values for \code{ht[rows, cols]}, as a matrix. It should return the new property values for \code{ht[rows, cols]}, as a matrix.
-
-Here's an example. Suppose we want to highlight cells
-of a correlation matrix with low p values:\preformatted{  requireNamespace("psych")
-  data(attitude)
-  att_corr <- psych::corr.test(attitude)
-  # att_corr has components r (correlations) and p (p values)
-
-  corr_hux <- as_hux(att_corr$r)
-  by_p_value <- function (ht, rows, cols, current) \{
-     result <- current
-     pvals <- att_corr$p[rows, cols]
-     result[pvals < 0.01] <- "red"
-     result[pvals < 0.05] <- "orange"
-     result
-  \}
-}
+\code{fn} takes four arguments: the entire original huxtable
+\code{ht}, a numeric vector of \code{rows}, a numeric vector of \code{cols}, and the
+\code{current} property values for \code{ht[rows, cols]}, as a matrix. It should return
+the new property values for \code{ht[rows, cols]}, as a matrix.
 }
 
 \examples{
-ht <- hux(c("OK", "Warning", "Error"))
+ht <- hux(Condition = c("OK", "Warning", "Error"))
 ht <- map_text_color(ht, by_values(
         OK      = "green",
         Warning = "orange",
@@ -84,7 +72,7 @@ map_text_color(ht, by_values(
 map_text_color(ht, by_values(
       "OK" = "blue", NA, ignore_na = FALSE))
 
-ht <- hux(rnorm(5), rnorm(5), rnorm(5))
+ht <- as_hux(matrix(rnorm(15), 5, 3))
 map_background_color(ht, by_ranges(
         c(-1, 1),
         c("blue", "yellow", "red")

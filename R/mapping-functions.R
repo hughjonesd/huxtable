@@ -6,7 +6,9 @@ NULL
 
 #' How to set cell properties variably by cell contents
 #'
-#' This help page explains how to set properties differently for cells, depending on their contents.
+#' @description
+#' This help page explains how to set properties differently for cells,
+#' depending on their contents.
 #'
 #' For example, in a table of p-values, you could bold cells where p < 0.05:
 #'
@@ -20,68 +22,51 @@ NULL
 #'   hxtbl %>% map_text_color(by_values("Warning" = "red"))
 #' ```
 #'
-#' There is a `map_xxx` function for each huxtable cell property. The syntax is:
+#' There is a `map_...` function for each huxtable cell property. The syntax is:
 #'
 #' ```
-#'   map_xxx(ht, row, col, fn)
+#'   map_property(ht, row, col, fn)
 #' ```
 #'
-#' where `xxx` is the property name.
+#' where `property` is the property name.
 #'
-#' `row` and `col` specify ranges of rows and columns. See [rowspecs] for details. To set properties
-#' for the whole table, you can omit `row` and `col`:
+#' `row` and `col` specify ranges of rows and columns. See [rowspecs] for
+#' details. To set properties for the whole table, omit `row` and `col`:
 #'
 #' ```
-#'   map_xxx(ht, fn)
+#'   map_property(ht, fn)
 #' ```
 #'
-#' The `fn` argument is a *mapping function* which maps cell contents to property values.
+#' The `fn` argument is a *mapping function* which maps cell contents to
+#' property values.
 #'
-#' * To set property values in "stripes" by rows or by columns, use [by_rows()] and [by_cols()].
+#' * To set property values in "stripes" by rows or by columns, use [by_rows()]
+#'   and [by_cols()].
 #' * To set property values for cells with specific contents, use [by_values()].
 #' * To set property values for cells within a numeric range, use [by_ranges()].
-#' * To set property values for cells by quantiles, use [by_quantiles()] or [by_equal_groups()].
-#' * To set property values for cells that match a string or regular expression, use [by_regex()].
+#' * To set property values for cells by quantiles, use [by_quantiles()] or
+#'   [by_equal_groups()].
+#' * To set property values for cells that match a string or regular expression,
+#'   use [by_regex()].
 #' * To map numeric values to a colorspace, use [by_colorspace()].
 #' * For a more general solution, use [by_function()] or [by_cases()].
 #'
 #' @section Caveat:
 #'
-#' Most functions convert the huxtable to a matrix using [as.matrix()]. This can have
-#' unexpected results if you mix character and numeric data. See the example.
+#' Most functions convert the huxtable to a matrix using [as.matrix()]. This can
+#' have unexpected results if you mix character and numeric data. See the
+#' example.
 #'
 #'
 #' @section Technical details:
 #'
-#' `fn` must be a function taking four arguments: the (entire) original huxtable `ht`, a numeric
-#' vector of `rows`, a numeric vector of `cols`, and the `current` property values for `ht[rows,
-#' cols]`, as a matrix. It should return the new property values for `ht[rows, cols]`, as a matrix.
-#'
-#' Here's an example. Suppose we want to highlight cells
-#' of a correlation matrix with low p values:
-#'
-#' ```
-#'   requireNamespace("psych")
-#'   data(attitude)
-#'   att_corr <- psych::corr.test(attitude)
-#'   # att_corr has components r (correlations) and p (p values)
-#'
-#'   corr_hux <- as_hux(att_corr$r)
-#'   by_p_value <- function (ht, rows, cols, current) {
-#'      result <- current
-#'      pvals <- att_corr$p[rows, cols]
-#'      result[pvals < 0.01] <- "red"
-#'      result[pvals < 0.05] <- "orange"
-#'      result
-#'   }
-#   map_background_color(corr_hux, by_p_value)
-#' ```
-#'
-#'
-#' @return The modified huxtable.
+#' `fn` takes four arguments: the entire original huxtable
+#' `ht`, a numeric vector of `rows`, a numeric vector of `cols`, and the
+#' `current` property values for `ht[rows, cols]`, as a matrix. It should return
+#' the new property values for `ht[rows, cols]`, as a matrix.
 #'
 #' @examples
-#' ht <- hux(c("OK", "Warning", "Error"))
+#' ht <- hux(Condition = c("OK", "Warning", "Error"))
 #' ht <- map_text_color(ht, by_values(
 #'         OK      = "green",
 #'         Warning = "orange",
@@ -97,7 +82,7 @@ NULL
 #' map_text_color(ht, by_values(
 #'       "OK" = "blue", NA, ignore_na = FALSE))
 #'
-#' ht <- hux(rnorm(5), rnorm(5), rnorm(5))
+#' ht <- as_hux(matrix(rnorm(15), 5, 3))
 #' map_background_color(ht, by_ranges(
 #'         c(-1, 1),
 #'         c("blue", "yellow", "red")
