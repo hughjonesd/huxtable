@@ -31,6 +31,11 @@
           POSIXlt = "right"
         ))
 
+  if (requireNamespace("knitr", quietly = TRUE)) {
+    register_s3_method("knitr", "knit_print")
+    register_s3_method("knitr", "knit_print", class = "data.frame")
+  }
+
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange")
     register_s3_method("dplyr", "arrange_")
@@ -54,10 +59,6 @@
 
 .onAttach <- function (libname, pkgname) {
   set_default_option("huxtable.knit_print_df", TRUE)
-  if (requireNamespace("knitr", quietly = TRUE)) {
-    register_s3_method("knitr", "knit_print")
-    register_s3_method("knitr", "knit_print", class = "data.frame")
-  }
 }
 
 
