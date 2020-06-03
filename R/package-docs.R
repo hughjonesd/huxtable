@@ -118,61 +118,59 @@ NULL
 #'
 #' * LaTeX output isn't working.
 #'
-#' Have you installed the LaTeX packages you need? LaTeX packages are different from R packages. Run
-#' [check_latex_dependencies()] to find out if you are missing any. Then install them using your
-#' system's LaTeX management application. Or you can try [install_latex_dependencies()].
+#'   Have you installed the LaTeX packages you need? LaTeX packages are different
+#'   from R packages. Run [check_latex_dependencies()] to find out if you are
+#'   missing any. Then install them using your system's LaTeX management
+#'   application. Or you can try [install_latex_dependencies()].
 #'
 #' * Numbers in my cells look weird!
 #'
-#' You can change numeric formatting using [number_format()]. Base R options like
-#' [`scipen`][base::options()] usually have no effect.
+#'   You can change numeric formatting using [number_format()]. Base R options
+#'   like [`scipen`][base::options()] usually have no effect.
 #'
 #' * I ran `caption(ht) <- "Something"` and got an error message:
 #'
-#' ```
-#' Error in UseMethod("caption<-") :
-#' no applicable method for 'caption<-' applied to an object of class "c('huxtable', 'data.frame')"
-#' ```
+#'   ```
+#'   Error in UseMethod("caption<-") :
+#'   no applicable method for 'caption<-' applied to an object of class "c('huxtable',   'data.frame')"
+#'   ```
 #'
-#' You may have loaded another package with a `caption` method, e.g. "xtable". Try loading huxtable
-#' after xtable.
-#'
-#' * My tables aren't centered correctly (LaTeX).
-#'
-#' Try adjusting `width(ht)`.
+#'   You may have loaded another package with a `caption` method, e.g. "xtable".
+#'   Try loading huxtable after xtable.
 #'
 #' * How can I change the font size, font etc. of captions?
 #'
-#' There are no direct commands for this. You have to use raw HTML/TeX/other commands within the
-#' caption itself. For example to have a bold caption in HTML, you might do something like:
+#'   There are no direct commands for this. You have to use raw HTML/TeX/other
+#'   commands within the caption itself. For example to have a bold caption in
+#'   HTML, you might do something like:
 #'
-#' ```
-#' set_caption(jams, "<b>Jam Prices</b>")
-#'
-#' ```
+#'   ```
+#'   set_caption(jams, "<b>Jam Prices</b>")
+#'   ```
 #'
 #' * How do I refer to tables in bookdown?
 #'
-#' As of version 4.3.0, this is handled automatically for you. Just
-#' set the label using [label()], then in markdown text do e.g.:
+#'   As of version 4.3.0, this is handled automatically for you. Just
+#'   set the label using [label()], then in markdown text do e.g.:
 #'
-#' ```
-#' \\@ref(tab:my-table-label).
+#'   ```
+#'   \\@ref(tab:my-table-label).
 #'
-#' ```
+#'   ```
 #'
 #' * I have another problem.
 #'
-#' If you have a bug - i.e. a problem with the software - or have a feature
-#' request, please report it to <https://github.com/hughjonesd/huxtable/issues>.
-#' Otherwise, ask a question on [StackOverflow](https://stackoverflow.com) or
-#' <https://community.rstudio.com>. That way, other people will benefit from
-#' the answers you get.
+#'   If you have a bug - i.e. a problem with the software - or have a feature
+#'   request, please report it to
+#'   <https://github.com/hughjonesd/huxtable/issues>.
+#'   Otherwise, ask a question on [StackOverflow](https://stackoverflow.com) or
+#'   <https://community.rstudio.com>. That way, other people will benefit from
+#'   the answers you get.
 #'
 #' * Can I email you directly?
 #'
-#' I'd rather you asked on a public website. If you then email me a link, I
-#' may be able to help.
+#'   I'd rather you asked on a public website. If you then email me a link, I
+#'   may be able to help.
 #'
 #' @name huxtable-FAQ
 #' @docType package
