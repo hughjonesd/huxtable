@@ -12,6 +12,7 @@ vignette: >
 
 ```{r}
 library(huxtable)
+data(jams)
 jams <- cbind(jams, c("Sugar", "60%", "60%", "60%"))
 jams
 ```
