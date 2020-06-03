@@ -6,25 +6,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert one matrix into another. — add_rows • huxtable</title>
+<title>Insert one huxtable into another. — add_rows • huxtable</title>
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Insert one matrix into another. — add_rows" />
-<meta property="og:description" content="These functions combine two matrix-like objects and return the result." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Insert one huxtable into another. — add_rows" />
+<meta property="og:description" content="These functions combine two huxtables or similar objects and
+return the result." />
 
 
 
@@ -50,9 +56,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -66,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
       </span>
     </div>
 
@@ -108,7 +115,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hughjonesd/huxtable/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,88 +128,91 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert one matrix into another.</h1>
-    
+    <h1>Insert one huxtable into another.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/R/bind-insert.R'><code>R/bind-insert.R</code></a></small>
     <div class="hidden name"><code>add_rows.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions combine two matrix-like objects and return the result.</p>
+    <p>These functions combine two huxtables or similar objects and
+return the result.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_rows</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>add_rows</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>x</span>), <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_columns</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)</pre>
+<span class='fu'>add_columns</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>), <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A matrix-like object, e.g. a huxtable</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>Matrix or vector to be inserted into <code>x</code></p></td>
+      <th>x, y</th>
+      <td><p>Huxtables or objects that can be converted by as_hux</p></td>
     </tr>
     <tr>
       <th>after</th>
-      <td><p>Row or column after which <code>y</code> is inserted. Can be 0. Can be a row or column name.
-By default, inserts <code>y</code> after the end of <code>x</code>.</p></td>
+      <td><p>Row or column after which <code>y</code> is inserted. Can be 0.
+Can be a row or column name. The default adds <code>y</code> to the
+end of <code>x</code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments passed to <code><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>rbind()</a></code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind()</a></code></p></td>
+      <th>copy_cell_props</th>
+      <td><p>Logical. Passed to <code><a href='cbind.huxtable.html'>rbind.huxtable()</a></code> or
+<code><a href='cbind.huxtable.html'>cbind.huxtable()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>add_rows</code>, the result of <code>rbind(x[1:after,], y, x[-(1:after),]</code>. For <code>add_columns</code>
-the same but with columns. <code>after = 0</code> and <code>after = nrow(x)</code> or <code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>ncol(x)</a></code> are handled correctly.</p>
+    <p>A huxtable.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For <code>huxtable</code> objects, arguments in <code>...</code> can include <code>copy_cell_props</code>.</p>
+    <p>Arguments in <code>...</code> can include <code>copy_cell_props</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='insert_column.html'>insert_row()</a></code> and <code><a href='insert_column.html'>insert_column()</a></code>, which insert multiple values into a single row.</p></div>
+    <div class='dont-index'><p><code><a href='insert_column.html'>insert_row()</a></code> and <code><a href='insert_column.html'>insert_column()</a></code>, which insert
+multiple values into a single row.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='st'>"Gooseberry"</span>, <span class='fl'>2.15</span>)
-<span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>)</div><div class='output co'>#&gt; <span class='error'>Error in bind_df(ht, x): Can't rbind objects as they have different numbers of columns</span></div><div class='input'><span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in bind_df(ht, x): Can't rbind objects as they have different numbers of columns</span></div><div class='input'>
-<span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(
-      <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span>,
+<span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>)</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               Strawberry      1.90  
+#&gt;                               Raspberry       2.10  
+#&gt;                               Plum            1.80  
+#&gt;                               Gooseberry      2.15  
+#&gt; 
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>add_rows</span>(<span class='no'>jams</span>, <span class='no'>ht</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               Gooseberry      2.15  
+#&gt;                               Strawberry      1.90  
+#&gt;                               Raspberry       2.10  
+#&gt;                               Plum            1.80  
+#&gt; 
+#&gt; Column names: Type, Price</div><div class='input'>
+<span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
+      <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span>,
       <span class='st'>"Weight (g)"</span>, <span class='fl'>300</span>, <span class='fl'>250</span>, <span class='fl'>300</span>),
       <span class='fl'>4</span>, <span class='fl'>2</span>)
-<span class='fu'>add_columns</span>(<span class='no'>jams</span>, <span class='no'>mx</span>)</div><div class='output co'>#&gt;   Type       Price    Sugar    Sugar    Sugar    Sugar    Sugar  
-#&gt;   Strawber    1.90   60.00%   60.00%   60.00%   60.00%   50.00%  
-#&gt;   ry                                                             
-#&gt;   Raspberr    2.10   60.00%   60.00%   60.00%   60.00%   60.00%  
-#&gt;   y                                                              
-#&gt;   Plum        1.80   60.00%   60.00%   60.00%   60.00%   40.00%  
+<span class='fu'>add_columns</span>(<span class='no'>jams</span>, <span class='no'>mx</span>)</div><div class='output co'>#&gt;                     Type         Price    Sugar   Weight (g)  
+#&gt;                     Strawberry    1.90   50.00%       300.00  
+#&gt;                     Raspberry     2.10   60.00%       250.00  
+#&gt;                     Plum          1.80   40.00%       300.00  
 #&gt; 
-#&gt; Column names: Type, Price, V1, V1.1, V1.2, V1.3, V1, V2
-#&gt; 
-#&gt; 7/8 columns shown.</div></pre>
+#&gt; Column names: Type, Price, , .1</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -205,13 +220,16 @@ the same but with columns. <code>after = 0</code> and <code>after = nrow(x)</cod
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

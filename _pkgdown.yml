@@ -31,7 +31,7 @@ reference:
       - mapping-functions
   - title: "Creating and manipulating huxtables"
     desc: >
-      Create, subset and join huxtables
+      Create, subset, split and join huxtables
     contents:
       - "[.huxtable"
       - add_colnames
@@ -42,6 +42,8 @@ reference:
       - as_huxtable
       - starts_with("insert")
       - starts_with("merge")
+      - starts_with("split")
+      - starts_with("restack")
       - add_rows
       - mutate
       - t.huxtable
@@ -77,8 +79,8 @@ reference:
       - set_contents
       - number_format
       - na_string
-      - pad_decimal
       - text_color
+      - starts_with("header")
   - title: "Borders and padding"
     desc: Set borders, border colors and cell padding
     contents:
@@ -90,8 +92,7 @@ reference:
       - starts_with("set_lr")
       - starts_with("set_tb")
       - starts_with("set_outer")
-      - brdr
-      - brdr_thickness
+      - matches("brdr")
   - title: "Layout"
     desc: Change the layout of cells and tables
     contents:
@@ -113,8 +114,7 @@ reference:
     contents:
     - starts_with("by_")
   - title: "Printing"
-    desc: >
-      Print to LaTeX, HTML, Word, Excel, RTF, markdown or on-screen
+    desc: Print to LaTeX, HTML, Word, Excel, RTF, markdown or on-screen
     contents:
       - as_flextable
       - as_Workbook
@@ -127,6 +127,7 @@ reference:
       - starts_with("to_")
   - title: "Quick output"
     desc: Print huxtables or other data to a new file, using a one-liner
+    contents:
       - starts_with("quick")
   - title: "Themes"
     desc: Apply a coherent style to a huxtable
@@ -142,6 +143,7 @@ reference:
       - stripe
   - title: "LaTeX dependencies"
     desc: Manage LaTeX packages for huxtable
+    contents:
       - matches("latex_dependencies")
   - title: "Miscellaneous"
     desc: Other functions
@@ -152,10 +154,11 @@ reference:
       - tidy_override
       - tidy_replace
       - sanitize
-      - hex_hux
-      - hux_hex
 
 tutorials:
-- name: 00-reporting-data
-  title: Reporting data with huxtable
-  url: https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html
+  - name: 00-reporting-data
+    title: Reporting data with huxtable
+    url: https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html
+  - name: 01-whats-new
+    title: What's new in huxtable 5.0.0
+    url: https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html

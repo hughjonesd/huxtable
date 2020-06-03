@@ -6,25 +6,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Override a model's <code>tidy</code> output — tidy_override • huxtable</title>
+<title>Change a model's <code>tidy</code> output — tidy_override • huxtable</title>
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Override a model's <code>tidy</code> output — tidy_override" />
-<meta property="og:description" content="Use tidy_override to provide your own p values, confidence intervals
-etc. for a model." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Change a model's <code>tidy</code> output — tidy_override" />
+<meta property="og:description" content="Use tidy_override and tidy_replace to provide your own p values,
+confidence intervals etc. for a model." />
 
 
 
@@ -51,9 +56,10 @@ etc. for a model." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -67,7 +73,7 @@ etc. for a model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
       </span>
     </div>
 
@@ -109,7 +115,12 @@ etc. for a model." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hughjonesd/huxtable/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -117,38 +128,41 @@ etc. for a model." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Override a model's <code>tidy</code> output</h1>
-    
+    <h1>Change a model's <code>tidy</code> output</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/R/huxreg.R'><code>R/huxreg.R</code></a></small>
     <div class="hidden name"><code>tidy_override.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Use <code>tidy_override</code> to provide your own p values, confidence intervals
-etc. for a model.</p>
+    <p>Use <code>tidy_override</code> and <code>tidy_replace</code> to provide your own p values,
+confidence intervals etc. for a model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_override</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(), <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>tidy_override</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>tidy_replace</span>(<span class='no'>x</span>, <span class='no'>tidied</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/glance'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/nobs'>nobs</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/nobs.html'>nobs</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A model with methods defined for <code><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>generics::tidy()</a></code> and/or <code><a href='https://www.rdocumentation.org/packages/generics/topics/glance'>generics::glance()</a></code>.</p></td>
+      <td><p>A model with methods defined for <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code> and/or <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>generics::glance()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -161,7 +175,11 @@ etc. for a model.</p>
     </tr>
     <tr>
       <th>extend</th>
-      <td><p>Logical: allow adding new statistics?</p></td>
+      <td><p>Logical: allow adding new columns to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code>?</p></td>
+    </tr>
+    <tr>
+      <th>tidied</th>
+      <td><p>Data frame to replace the result of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -171,53 +189,69 @@ etc. for a model.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class "tidy_override". When <code>tidy</code> and <code>glance</code> are called
-on this, it will return results from the underlying model, replacing some
-columns with your own data.</p>
+    <p>An object that can be passed in to <code>huxreg</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>tidy_override</code> allows you to replace some columns of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> with your own data.</p>
+<p><code>tidy_replace</code> allows you to replace the result of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> entirely.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"broom"</span>)) {
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/stop'>stop</a></span>(<span class='st'>"Please install 'broom' to run this example."</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"broom"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"Please install 'broom' to run this example."</span>)
 }
 
-<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
+<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
 <span class='no'>fixed_lm1</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_override</span>(<span class='no'>lm1</span>,
-      <span class='kw'>p.value</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.04</span>, <span class='fl'>.12</span>),
-      <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>r.squared</span> <span class='kw'>=</span> <span class='fl'>0.99</span>))
-
-<span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>tidy</a></span>(<span class='no'>fixed_lm1</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
-#&gt;   term        estimate std.error statistic p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)    37.9      2.07      18.3     0.04
-#&gt; </span><span style='color: #555555;'>2</span><span> cyl            -</span><span style='color: #BB0000;'>2.88</span><span>     0.322     -</span><span style='color: #BB0000;'>8.92</span><span>    0.12</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>fixed_lm1</span>), <span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>lm1</span>))</div><div class='output co'>#&gt; ─────────────────────────────────────────────────────────────────────────────
-#&gt;                            (1)                                   (1)         
-#&gt;                    ────────────────────                  ────────────────────
-#&gt;   (Intercept)                37.885 *   (Intercept)              37.885 ***  
-#&gt;                              (2.074)                             (2.074)     
-#&gt;   cyl                        -2.876     cyl                      -2.876 ***  
-#&gt;                              (0.322)                             (0.322)     
-#&gt;                    ────────────────────                  ────────────────────
-#&gt;   N                          32         N                        32          
-#&gt;   R2                          0.990     R2                        0.726      
-#&gt;   logLik                    -81.653     logLik                  -81.653      
-#&gt;   AIC                       169.306     AIC                     169.306      
-#&gt; ─────────────────────────────────────────────────────────────────────────────
-#&gt;   *** p &lt; 0.001; ** p &lt; 0.01; * p       *** p &lt; 0.001; ** p &lt; 0.01; * p      
-#&gt;   &lt; 0.05.                               &lt; 0.05.                              
+      <span class='kw'>p.value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>.04</span>, <span class='fl'>.12</span>),
+      <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>r.squared</span> <span class='kw'>=</span> <span class='fl'>0.99</span>))
+<span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>lm1</span>, <span class='no'>fixed_lm1</span>)</div><div class='output co'>#&gt;               ────────────────────────────────────────────────────
+#&gt;                                             (1)              (2)  
+#&gt;                                ───────────────────────────────────
+#&gt;                 (Intercept)          37.885 ***         37.885 *  
+#&gt;                                      (2.074)            (2.074)   
+#&gt;                 cyl                  -2.876 ***         -2.876    
+#&gt;                                      (0.322)            (0.322)   
+#&gt;                                ───────────────────────────────────
+#&gt;                 N                    32                 32        
+#&gt;                 R2                    0.726              0.990    
+#&gt;                 logLik              -81.653            -81.653    
+#&gt;                 AIC                 169.306            169.306    
+#&gt;               ────────────────────────────────────────────────────
+#&gt;                 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.           
 #&gt; 
-#&gt; Column names: names, model1, names, model1</div></span></pre>
+#&gt; Column names: names, model1, model2</div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"nnet"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='no'>mnl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>nnet</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span>(<span class='no'>gear</span> ~ <span class='no'>mpg</span>, <span class='no'>mtcars</span>)
+  <span class='no'>tidied</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></span>(<span class='no'>mnl</span>)
+  <span class='no'>mnl4</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>4</span>, ])
+  <span class='no'>mnl5</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>5</span>, ])
+  <span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>mnl4</span>, <span class='no'>mnl5</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>)
+}</div><div class='output co'>#&gt; # weights:  9 (4 variable)
+#&gt; initial  value 35.155593 
+#&gt; iter  10 value 23.131901
+#&gt; final  value 23.129234 
+#&gt; converged</div><div class='output co'>#&gt;               ────────────────────────────────────────────────────
+#&gt;                                             (1)              (2)  
+#&gt;                                ───────────────────────────────────
+#&gt;                 (Intercept)            0.000 **          0.000 *  
+#&gt;                                       (3.262)           (3.232)   
+#&gt;                 mpg                    1.608 **          1.430 *  
+#&gt;                                       (0.168)           (0.168)   
+#&gt;                                ───────────────────────────────────
+#&gt;                 nobs                                              
+#&gt;               ────────────────────────────────────────────────────
+#&gt;                 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.           
+#&gt; 
+#&gt; Column names: names, model1, model2</div><div class='input'>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -225,13 +259,16 @@ columns with your own data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

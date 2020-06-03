@@ -10,21 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,37 +40,7 @@
 
 
 <meta property="og:title" content="Package options — huxtable-options" />
-<meta property="og:description" content="
-options('huxtable.add_colnames') sets the default value for add_colnames in
-huxtable() and as_huxtable(). If it is unset, add_colnames defaults to
-FALSE; in a future release, the default will become TRUE.
-options('huxtable.print') sets the print method for huxtable objects. See print.huxtable().
-options('huxtable.knitr_output_format') overrides the default output format when huxtable
-objects are printed by knitr. Set to &quot;html&quot;, &quot;latex&quot;, &quot;md&quot; or &quot;screen&quot;. If NULL (the default),
-huxtable guesses the format using guess_knitr_output_format().
-options('huxtable.color_screen'). If TRUE and package crayon is available, huxtables
-will be printed in color on screen.
-options('huxtable.bookdown'). Set to TRUE within a bookdown document to automatically
-print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
-document.
-options('huxtable.knit_print_df'). If TRUE (the default), data frames in knitr will be
-pretty-printed using huxtable.
-options('huxtable.knit_print_df_theme'). A function applied to data frames
-before printing in knitr. The function should take one argument (a data frame) and return a
-huxtable. Defaults to theme_plain().
-options('huxtable.autoformat') sets the default value for autoformat in huxtable() and
-as_huxtable(). It defaults to TRUE.
-options('huxtable.latex_use_fontspec'). If TRUE, use the &quot;fontspec&quot; package, which allows
-you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
-engine, which can be set using an .rmd header option. Note that quick_pdf()
-may use pdflatex. It defaults to FALSE.
-options('huxtable.autoformat_number_format') and options('huxtable.autoformat_align') are
-lists. The list names are base R classes. huxtable() with autoformat = TRUE will set
-number_format() and align() for data columns according to the corresponding list values.
-For example, to center-align Date objects you could set &quot;huxtable.autoformat_align&quot; to
-something like list(..., Date = &quot;center&quot;, ...).
-" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:description" content="Huxtable has several options." />
 
 
 
@@ -79,9 +55,10 @@ something like list(..., Date = &quot;center&quot;, ...).
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -95,7 +72,7 @@ something like list(..., Date = &quot;center&quot;, ...).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
       </span>
     </div>
 
@@ -137,7 +114,12 @@ something like list(..., Date = &quot;center&quot;, ...).
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hughjonesd/huxtable/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -145,60 +127,76 @@ something like list(..., Date = &quot;center&quot;, ...).
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Package options</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/R/package-docs.R'><code>R/package-docs.R</code></a></small>
     <div class="hidden name"><code>huxtable-options.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <ul>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.add_colnames')</a></code> sets the default value for <code>add_colnames</code> in
-<code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='as_huxtable.html'>as_huxtable()</a></code>. If it is unset, <code>add_colnames</code> defaults to
-<code>FALSE</code>; in a future release, the default will become <code>TRUE</code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.print')</a></code> sets the print method for huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable()</a></code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.knitr_output_format')</a></code> overrides the default output format when huxtable
-objects are printed by knitr. Set to "html", "latex", "md" or "screen". If <code>NULL</code> (the default),
-huxtable guesses the format using <code><a href='guess_knitr_output_format.html'>guess_knitr_output_format()</a></code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.color_screen')</a></code>. If <code>TRUE</code> and package <code>crayon</code> is available, huxtables
-will be printed in color on screen.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.bookdown')</a></code>. Set to <code>TRUE</code> within a bookdown document to automatically
-print bookdown-style labels. If unset, huxtable will try to guess if we are in a bookdown
-document.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.knit_print_df')</a></code>. If <code>TRUE</code> (the default), data frames in knitr will be
-pretty-printed using huxtable.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.knit_print_df_theme')</a></code>. A function applied to data frames
-before printing in knitr. The function should take one argument (a data frame) and return a
-huxtable. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat')</a></code> sets the default value for <code>autoformat</code> in <code><a href='huxtable.html'>huxtable()</a></code> and
-<code><a href='as_huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.latex_use_fontspec')</a></code>. If <code>TRUE</code>, use the "fontspec" package, which allows
-you to use the same font names in TeX and HTML. This requires the the xetex or xelatex
-engine, which can be set using an .rmd header option. Note that <code><a href='quick-output.html'>quick_pdf()</a></code>
-may use pdflatex. It defaults to <code>FALSE</code>.</p></li>
-<li><p><code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat_number_format')</a></code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('huxtable.autoformat_align')</a></code> are
-lists. The list names are base R classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set
-<code><a href='number_format.html'>number_format()</a></code> and <code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values.
-For example, to center-align <code>Date</code> objects you could set <code>"huxtable.autoformat_align"</code> to
-something like <code><a href='https://www.rdocumentation.org/packages/base/topics/list'>list(..., Date = "center", ...)</a></code>.</p></li>
-</ul>
+    <p>Huxtable has several options.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.add_colnames')</a></code> sets the default value for
+<code>add_colnames</code> in <code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='as_huxtable.html'>as_huxtable()</a></code>. As of version 5.0.0, this
+defaults to <code>TRUE</code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.print')</a></code> sets the print method for
+huxtable objects. See <code><a href='print.huxtable.html'>print.huxtable()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.knitr_output_format')</a></code> overrides the default output format
+when huxtable objects are printed by knitr. Set to "html", "latex", "md" or
+"screen". If <code>NULL</code> (the default), huxtable guesses the format using
+<code><a href='guess_knitr_output_format.html'>guess_knitr_output_format()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autolabel')</a></code>. If <code>TRUE</code>, (the default) automatically
+sets <code><a href='label.html'>label()</a></code> from the knitr chunk label, if there is one.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.color_screen')</a></code>. If <code>TRUE</code> and package <code>crayon</code> is
+available, huxtables will be printed in color on screen.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.bookdown')</a></code>. Set to <code>TRUE</code> within a bookdown document to
+automatically print bookdown-style labels. If unset, huxtable will try to
+guess if we are in a bookdown document.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.knit_print_df')</a></code>. If <code>TRUE</code>, data frames
+in knitr will be pretty-printed using huxtable. This option defaults to
+<code>TRUE</code> only if huxtable is attached to the search path using
+<code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>; not if huxtable is merely loaded (e.g. imported by another
+package).</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.knit_print_df_theme')</a></code>. A function applied to data frames
+before printing in knitr. The function should take one argument (a data
+frame) and return a huxtable. Defaults to <code><a href='themes.html'>theme_plain()</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autoformat')</a></code> sets the default value for <code>autoformat</code> in
+<code><a href='huxtable.html'>huxtable()</a></code> and <code><a href='as_huxtable.html'>as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.latex_use_fontspec')</a></code>. If <code>TRUE</code>, use the "fontspec"
+package, which allows you to use the same font names in TeX and HTML. This
+requires the the xetex or xelatex engine, which can be set using an .rmd
+header option. Note that <code><a href='quick-output.html'>quick_pdf()</a></code> may use pdflatex. The default is
+<code>FALSE</code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autoformat_number_format')</a></code> and
+<code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autoformat_align')</a></code> are lists. The list names are base R
+classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set <code><a href='number_format.html'>number_format()</a></code> and
+<code><a href='align.html'>align()</a></code> for data columns according to the corresponding list values. For
+example, to center-align <code>Date</code> objects you could set
+<code>"huxtable.autoformat_align"</code> to something like
+<code><a href='https://rdrr.io/r/base/list.html'>list(..., Date = "center", ...)</a></code>.</p></li>
+</ul>
+
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -206,13 +204,16 @@ something like <code><a href='https://www.rdocumentation.org/packages/base/topic
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
