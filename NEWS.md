@@ -24,6 +24,9 @@ see https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html.
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
   
+* Newlines in cell contents are now respected (in LaTeX, so long as 
+  `wrap = TRUE`).
+  
 * Huxtable borders have been reworked, fixing some longstanding bugs and
   adding new features. 
   - Borders are now automatically collapsed. For example:

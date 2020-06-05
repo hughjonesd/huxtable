@@ -10,6 +10,7 @@ output:
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  word_document: default
 ---
 
 
@@ -249,6 +250,19 @@ caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yello
 ht
 
 ```
+
+# Newlines and wrap
+```{r}
+ht <- make(text1 = "first line\nsecond line", text2 = "first line\nsecond line")
+caption(ht) <- "wrap TRUE on left, width set"
+ht <- set_wrap(ht, everywhere, 1, TRUE)
+ht <- set_wrap(ht, everywhere, 2, FALSE)
+width(ht) <- .5
+ht
+```
+
+ht <- make()
+
 
 \FloatBarrier
 
