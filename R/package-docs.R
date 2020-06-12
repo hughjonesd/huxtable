@@ -177,3 +177,10 @@ NULL
 NULL
 
 
+
+#' Changes to the huxtable package, from NEWS.md
+#'
+#' @includeRmd NEWS.md
+#' @name huxtable-news
+#' @docType package
+NULL

@@ -48,7 +48,7 @@ For example, the following code now does what you probably want:
     ##                 Strawberry         1.90  
     ##                                    2.10  
     ##                                    1.80  
-    ##               ───────────────────────────
+    ##               ---------------------------
     ```
 
     instead of the old behaviour:
@@ -61,7 +61,7 @@ For example, the following code now does what you probably want:
     ##                 Strawberry      1.90  
     ##                                 2.10  
     ##                                 1.80  
-    ##                            ───────────
+    ##                            -----------
     ```
 
   - `set_left_border()`, `set_all_borders()` and friends all use a default value
