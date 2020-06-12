@@ -25,7 +25,7 @@ see https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html.
   to go back to the old behaviour.
   
 * Newlines in cell contents are now respected (in LaTeX, so long as 
-  `wrap = TRUE`).
+  `wrap = TRUE` and `width` has been set).
   
 * Huxtable borders have been reworked, fixing some longstanding bugs and
   adding new features. 
