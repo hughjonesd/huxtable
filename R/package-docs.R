@@ -178,7 +178,9 @@ NULL
 
 
 
-#' Changes to the huxtable package, from NEWS.md
+#' Changes to the huxtable package
+#'
+#' This help page simply gives the contents of NEWS.md.
 #'
 #' @includeRmd NEWS.md
 #' @name huxtable-news
