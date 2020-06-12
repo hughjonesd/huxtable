@@ -56,8 +56,10 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   assert_that(inherits(fc_tables, "rtfFCTables"))
   color_index <- function (color) {
     res <- match(color, fc_tables$colors)
-    if (any(is.na(res) & ! is.na(color))) warning("Color not found in color table.\n",
-          "(Did you change colors after calling `rtf_fc_tables`?)")
+    if (any(is.na(res) & ! is.na(color))) {
+      warning("Color not found in color table.\n",
+              "(Did you change colors after calling `rtf_fc_tables`?)")
+    }
     res
   }
 

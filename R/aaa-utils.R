@@ -95,6 +95,10 @@ clean_contents <- function(
     contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
   }
 
+  if (type == "rtf") {
+    contents <- utf8_to_rtf(contents)
+  }
+
   contents
 }
 
@@ -102,6 +106,22 @@ clean_contents <- function(
 format_color <- function (r_color, default = "white") {
   r_color[is.na(r_color)] <- default
   apply(grDevices::col2rgb(r_color), 2, paste0, collapse = ", ")
+}
+
+
+utf8_to_rtf <- function (mx) {
+  rtf_encode <- function (x) {
+    x <- utf8ToInt(x)
+    x[x > 32767] <- x[x > 32767] - 65535L
+    paste0("\\u", x, "?", collapse = "")
+  }
+
+  needs_conv <- vapply(c(mx), function (x) any(utf8ToInt(x) > 127L),
+                        logical(1))
+  mx[needs_conv] <- vapply(mx[needs_conv], rtf_encode,
+                            character(1))
+
+  mx
 }
 
 
