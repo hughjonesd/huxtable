@@ -42,16 +42,18 @@ clean_contents <- function(
 
 
 utf8_to_rtf <- function (mx) {
+  utf8_codes <- function (x) utf8ToInt(enc2utf8(x))
+
   rtf_encode <- function (x) {
-    code <- utf8ToInt(x)
+    code <- utf8_codes(x)
     x <- strsplit(x, split = "")[[1]]
     x[code > 127L & code <= 32767L]   <- code[code > 127L & code <= 32767L]
     x[code > 32767L] <- code[code > 32767L] - 65535L
-    x[code > 127L] <- paste0("\\u", x[code > 127L], "?", collapse = "")
+    x[code > 127L] <- paste0("\\u", x[code > 127L], "?")
     paste0(x, collapse = "")
   }
 
-  needs_conv <- vapply(c(mx), function (x) any(utf8ToInt(x) > 127L),
+  needs_conv <- vapply(c(mx), function (x) any(utf8_codes(x) > 127L),
                        logical(1))
   mx[needs_conv] <- vapply(mx[needs_conv], rtf_encode,
                            character(1))
