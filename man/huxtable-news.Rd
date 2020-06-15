@@ -347,6 +347,7 @@ it is attached, not if it is loaded.
 \item Improvements to \code{quick_pptx()} (thanks @davidgohel).
 \item Bugfixes for \code{options(huxtable.use_fontspec = TRUE)}.
 \item Bugfix: \code{add_rownames = "string"} now works as promised.
+\item Bugfix: non-ASCII characters are now supported in RTF.
 }
 }
 
