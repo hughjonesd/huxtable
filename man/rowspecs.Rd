@@ -24,7 +24,8 @@ There are also a few extra tricks you can use:
 \item Use \code{evens} to get only even rows/columns and \code{odds} for only odd ones.
 \item Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 \item Use \code{dplyr} functions like \code{starts_with}, \code{contains} and \code{matches} to
-specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
+specify columns (but not rows). See \link[tidyselect:language]{tidyselect::language}
+for a full list.
 }
 }
 
@@ -39,7 +40,8 @@ value and is set for all rows and columns.
 \item If there are four arguments:
 \itemize{
 \item If \code{row} or \code{col} is numeric, character or logical, it is evaluated just as in standard
-subsetting. \code{col} will be evaluated in a special context provided by \code{\link[tidyselect:with_vars]{tidyselect::with_vars()}}
+subsetting. \code{col} will be evaluated in a special context provided by
+\code{\link[tidyselect:poke_vars]{tidyselect::with_vars()}}
 to allow the use of dplyr functions.
 \item If \code{row} or \code{col} is a function,it is called with two arguments: the huxtable,
 and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector

@@ -19,8 +19,7 @@ win-builder showed a note about "RTF" as a possibly misspelled word in
 DESCRIPTION. I think RTF is a well-known acronym, and doubt that putting it
 in quote marks would aid readability.
 
-travis gives errors on latest r-devel about "non-file package anchored links"
-in (e.g.) `dplyr-verbs.Rd`. 
+
 
 
 
