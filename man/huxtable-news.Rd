@@ -3,7 +3,10 @@
 \docType{package}
 \name{huxtable-news}
 \alias{huxtable-news}
-\title{Changes to the huxtable package, from NEWS.md}
+\title{Changes to the huxtable package}
+\description{
+This help page simply gives the contents of NEWS.md.
+}
 \details{
 Note that huxtable attempts to follow semantic versioning
 (\url{https://semver.org}). Therefore, major version increments reflect

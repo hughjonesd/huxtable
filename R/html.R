@@ -132,7 +132,7 @@ to_html.huxtable <- function(ht, ...) {
   bg_color <- sprintf(" background-color: rgb(%s);", bg_color)
   bg_color <- blank_where(bg_color, is.na(background_color(ht)))
 
-  bold <- ifelse(bold(ht), " font-weight: bold;", "")
+  bold <- ifelse(bold(ht), " font-weight: bold;", " font-weight: normal;")
   italic <- ifelse(italic(ht), " font-style: italic;", "")
 
   font <- sprintf(" font-family: %s;", font(ht))
@@ -142,8 +142,11 @@ to_html.huxtable <- function(ht, ...) {
 
   style   <- paste0("style=\"", valign, align, wrap, border_css,
         padding, bg_color, bold, italic, font, font_size, "\"")
-  td <- sprintf("<td%s%s %s>", rowspan, colspan, style)
-
+  th_td <- matrix("td", nrow(ht), ncol(ht))
+  th_td[header_rows(ht), ] <- "th"
+  th_td[, header_cols(ht)] <- "th"
+  cell_start <- sprintf("<%s%s%s %s>", th_td, rowspan, colspan, style)
+  cell_end   <- sprintf("</%s>", th_td)
   contents <- clean_contents(ht, type = "html")
 
   rot <- rotation(ht)
@@ -166,8 +169,8 @@ to_html.huxtable <- function(ht, ...) {
   color_span_end <- rep("</span>", length(color))
   color_span_end <- blank_where(color_span_end, is.na(text_color(ht)))
 
-  cells_html <- paste0(td, rot_div, color_span, contents, color_span_end, rot_div_end,
-        rep("</td>\n", length(td)))
+  cells_html <- paste0(cell_start, rot_div, color_span, contents,
+                  color_span_end, rot_div_end, cell_end)
   cells_html <- blank_where(cells_html, display_cells$shadowed)
 
   # add in row tags
