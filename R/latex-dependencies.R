@@ -114,7 +114,8 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #'
 #' `install_latex_dependencies` is a utility function to install and/or update
 #' the LaTeX packages that huxtable requires. It calls
-#' [tinytex::tlmgr_install()] if possible, or `tlmgr install` directly.
+#' [`tinytex::tlmgr_install()`][tinytex::tlmgr] if possible, or `tlmgr install`
+#' directly.
 #'
 #' @return `install_latex_dependencies` returns `TRUE` if `tlmgr` returns 0.
 #' @export
