@@ -1,7 +1,7 @@
 Type: Package
 Package: huxtable
 Title: Easily Create and Style Tables for LaTeX, HTML and Other Formats
-Version: 5.0.0.0
+Version: 5.0.0
 Authors@R:
     person(given = "David",
            family = "Hugh-Jones",
