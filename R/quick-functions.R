@@ -115,8 +115,15 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
   force(file)
   hts <- huxtableize(list(...), borders)
 
+  loc <- Sys.getlocale("LC_COLLATE")
+  loc <- strsplit(loc, ".", fixed = TRUE)[[1]]
+  loc[1] <- gsub("_", "-", loc[1], fixed = TRUE)
   sink(file)
-  cat("<!DOCTYPE html><html><body>")
+  cat("<!DOCTYPE html>",
+         sprintf("<html lang=\"%s\">", loc[1]),
+         sprintf("<head><meta charset=\"%s\"><title>%s</title></head>",
+           loc[2], file),
+         "<body>\n", sep = "\n")
   tryCatch({
     lapply(hts, function (ht) {
       cat("<p>&nbsp;</p>")

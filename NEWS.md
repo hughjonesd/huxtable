@@ -211,6 +211,8 @@ For example, the following code now does what you probably want:
 
 * Bugfix: `add_rownames = "string"` now works as promised.
 
+* Bugfix: non-ASCII characters are now supported in RTF.
+
 ## Other news
 
 * New versions of the [gtsummary](https://cran.r-project.org/package=gtsummary) 
