@@ -59,8 +59,8 @@ modern choices has narrowed down to four:
 
 * huxtable;
 * [flextable](https://davidgohel.github.io/flextable/index.html);
-* [gt](https://gt.rstudio.com/)
-* [kableExtra](https://haozhu233.github.io/kableExtra/)
+* [gt](https://gt.rstudio.com/);
+* [kableExtra](https://haozhu233.github.io/kableExtra/).
 
 Here's what I think of these:
 

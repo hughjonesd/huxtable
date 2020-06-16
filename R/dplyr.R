@@ -47,8 +47,8 @@ mutate_.huxtable <- function (.data, ..., .dots) {
 #'
 #' Huxtable can be used with dplyr verbs [dplyr::select()], [dplyr::rename()],
 #' `dplyr::relocate()`, [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()]
-#' and [dplyr::transmute()]. These will return huxtables. Other verbs like
-#' [dplyr::summarize()] will simply return data frames as normal;
+#' and [`dplyr::transmute()`][dplyr::mutate]. These will return huxtables. Other verbs like
+#' [dplyr::summarise()] will simply return data frames as normal;
 #' [dplyr::pull()] will return a vector. `mutate` has an extra option, detailed
 #' below.
 #'

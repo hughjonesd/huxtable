@@ -735,6 +735,22 @@ LaTeX. It's best to specify `col_width` as a set of numbers. These are
 treated as proportions of the total table width.
 
 
+```{r, echo = FALSE}
+jams %>% 
+      set_position("wrapright") %>% 
+      set_width(0.35) %>% 
+      set_caption(NA) %>% 
+      set_font_size(8) %>% 
+      theme_compact()
+```
+If you have a small table, you may want your text to wrap around it. You can do
+this by specifying `"wrapleft"` or `"wrapright"` as the position. The table on the right uses `set_position("wrapright")`, `set_width(0.35)` and
+the "compact" theme, which minimizes cell padding to keep the table 
+small. Table wrapping works in both HTML
+and LaTeX. There's no option to have text wrapped around both sides of the table.
+That would just be painful for your readers. 
+
+
 ## Headers
 
 You'll notice that the restacked `iris` huxtable 
@@ -751,10 +767,12 @@ will display them differently. You can also style headers yourself using the
 `style_headers()` function:
 
 ```{r}
-iris_hux %>% 
+iris_hux <- iris_hux %>% 
       set_header_rows(1:2, TRUE) %>% 
       set_header_cols(1, TRUE) %>% 
       style_headers(bold = TRUE, text_color = "grey40")
+
+iris_hux
 ```
 
 
@@ -824,7 +842,7 @@ different rows in sequence.
 
 * `by_colorspace` takes cell numbers as input and maps them to colors.
 
-The syntax of all `map_xxx` functions is `map_property(ht, row, col, fn)`, where
+To use a mapping function, you write `map_property(ht, row, col, fn)`, where
 `property` is the cell property you want to map. `ht` is the huxtable,
 and `fn` is the mapping function starting with `by`. `row` and `col` are optional row and column
 specifiers, just the same as for `set_xxx`.

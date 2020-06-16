@@ -109,7 +109,8 @@ final <- function(n = 1) {
 #' * Use `evens` to get only even rows/columns and `odds` for only odd ones.
 #' * Use \code{\link[=stripe]{stripe(n, from = m)}} to get every nth row/column starting at row/column m.
 #' * Use `dplyr` functions like `starts_with`, `contains` and `matches` to
-#'    specify columns (but not rows). See \code{\link[tidyselect]{select_helpers}} for a full list.
+#'    specify columns (but not rows). See [tidyselect::language]
+#'    for a full list.
 #'
 #' @section The gory details:
 #'
@@ -120,7 +121,8 @@ final <- function(n = 1) {
 #'     value and is set for all rows and columns.
 #' * If there are four arguments:
 #'     * If `row` or `col` is numeric, character or logical, it is evaluated just as in standard
-#'         subsetting. `col` will be evaluated in a special context provided by [tidyselect::with_vars()]
+#'         subsetting. `col` will be evaluated in a special context provided by
+#'         [`tidyselect::with_vars()`][tidyselect::poke_vars]
 #'         to allow the use of dplyr functions.
 #'     * If `row` or `col` is a function,it is called with two arguments: the huxtable,
 #'        and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector

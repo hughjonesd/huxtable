@@ -24,6 +24,9 @@ see https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html.
   `huxtable()` and `as_huxtable()`. Set `options(huxtable.add_colnames = FALSE)` 
   to go back to the old behaviour.
   
+* Newlines in cell contents are now respected (in LaTeX, so long as 
+  `wrap = TRUE` and `width` has been set).
+  
 * Huxtable borders have been reworked, fixing some longstanding bugs and
   adding new features. 
   - Borders are now automatically collapsed. For example:
@@ -45,7 +48,7 @@ For example, the following code now does what you probably want:
     ##                 Strawberry         1.90  
     ##                                    2.10  
     ##                                    1.80  
-    ##               ───────────────────────────
+    ##               ---------------------------
     ```
 
     instead of the old behaviour:
@@ -58,7 +61,7 @@ For example, the following code now does what you probably want:
     ##                 Strawberry      1.90  
     ##                                 2.10  
     ##                                 1.80  
-    ##                            ───────────
+    ##                            -----------
     ```
 
   - `set_left_border()`, `set_all_borders()` and friends all use a default value
@@ -207,6 +210,8 @@ For example, the following code now does what you probably want:
 * Bugfixes for `options(huxtable.use_fontspec = TRUE)`.
 
 * Bugfix: `add_rownames = "string"` now works as promised.
+
+* Bugfix: non-ASCII characters are now supported in RTF.
 
 ## Other news
 

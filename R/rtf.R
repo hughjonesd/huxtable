@@ -56,8 +56,10 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   assert_that(inherits(fc_tables, "rtfFCTables"))
   color_index <- function (color) {
     res <- match(color, fc_tables$colors)
-    if (any(is.na(res) & ! is.na(color))) warning("Color not found in color table.\n",
-          "(Did you change colors after calling `rtf_fc_tables`?)")
+    if (any(is.na(res) & ! is.na(color))) {
+      warning("Color not found in color table.\n",
+              "(Did you change colors after calling `rtf_fc_tables`?)")
+    }
     res
   }
 
@@ -132,26 +134,28 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
         right_padding(ht)  * 20)
 
   table_width <- width(ht)
-  col_width <- col_width(ht)
-
-  col_width <- if (is.numeric(col_width)) {
-    col_width
-  } else if (all(grepl("pt", col_width))) {
-    as.numeric(sub("((\\d|\\.)+).*", "\\1", col_width)) * 20
-  } else {
-    if (! all(is.na(col_width))) warning("to_rtf can only handle numeric or \"pt\" col_width")
-    rep(1/ncol(ht), ncol(ht))
-  }
-
   if (is.na(table_width)) table_width <- 0.5
   if (! is.numeric(table_width)) {
     warning("to_rtf can only handle numeric table width")
     table_width <- 0.5
   }
 
+  col_width <- col_width(ht)
+  # if it's pt, make it numeric and use it as is (in twips)
+  if (all(grepl("pt", col_width, fixed = TRUE))) {
+    col_width <- as.numeric(sub("((\\d|\\.)+).*", "\\1", col_width)) * 20
+  } else {
+    if (! is.numeric(col_width)) {
+      warning("to_rtf can only handle numeric or \"pt\" col_width")
+    }
+    if (anyNA(col_width) || ! is.numeric(col_width)) {
+      col_width <- rep(1/ncol(ht), ncol(ht))
+    }
+    # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips:
+    text_width_twips <- 6 * 72 * 20
+    col_width <- col_width * text_width_twips * table_width
+  }
 
-  text_width_twips <- 6 * 72 * 20 # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips
-  col_width <- col_width * text_width_twips * table_width
   # \cellx specifies the position of the RH cell edge:
   right_edges <- ceiling(cumsum(col_width))
 

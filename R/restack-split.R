@@ -130,7 +130,7 @@ restack_down <- function (
 #'
 #' @param ht A huxtable.
 #' @param after Rows/columns after which to split. See [rowspecs] for details.
-#'   Note that [tidyselect][tidyselect::select_helpers] semantics are allowed
+#'   Note that [tidyselect][tidyselect::language] semantics are allowed
 #'   in `split_down()` but not `split_across()`.
 #' @param height,width Maximum height/width for the result.
 #' @param headers Logical. Take account of header rows/columns?

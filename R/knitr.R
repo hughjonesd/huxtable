@@ -92,6 +92,8 @@ knit_print.huxtable <- function (x, options, ...) {
 #'       )
 #' }
 knit_print.data.frame <- function(x, options, ...) {
+  # the FALSE default is so that this does not get called unless
+  # huxtable has been explicitly attached
   if (! isTRUE(getOption("huxtable.knit_print_df", FALSE))) {
     NextMethod() # probably calls knit_print.default
   } else {

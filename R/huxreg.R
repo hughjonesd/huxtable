@@ -16,26 +16,35 @@ generics::glance
 
 #' Create a huxtable to display model output
 #'
-#' @param ... Models, or a single list of models. Names will be used as column headings.
+#' @param ... Models, or a single list of models. Names will be used as column
+#'   headings.
 #' @param error_format How to display uncertainty in estimates. See below.
-#' @param error_pos Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.
+#' @param error_pos Display uncertainty "below", to the "right" of, or in the
+#'   "same" cell as estimates.
 #' @param number_format Format for numbering. See [number_format()] for details.
-#' @param align Alignment for table cells. Set to a single character to align on this character.
-#' @param ci_level Confidence level for intervals. Set to `NULL` to not calculate confidence intervals.
-#' @param tidy_args List of arguments to pass to [broom::tidy()]. You can also pass a list of lists;
-#'   if so, the nth element will be used for the nth column.
-#' @param stars Levels for p value stars. Names of `stars` are symbols to use. Set to `NULL` to not show stars.
-#' @param bold_signif Where p values are below this number, cells will be displayed in bold. Use `NULL` to turn off
-#'   this behaviour.
+#' @param align Alignment for table cells. Set to a single character to align on
+#'   this character.
+#' @param ci_level Confidence level for intervals. Set to `NULL` to not
+#'   calculate confidence intervals.
+#' @param tidy_args List of arguments to pass to [generics::tidy()].
+#'   You can also pass a list of lists; if so, the nth element will be used for
+#'   the nth column.
+#' @param stars Levels for p value stars. Names of `stars` are symbols to use.
+#'   Set to `NULL` to not show stars.
+#' @param bold_signif Where p values are below this number, cells will be
+#'   displayed in bold. Use `NULL` to turn off this behaviour.
 #' @param borders Thickness of inner horizontal borders. Set to 0 for no borders.
-#' @param outer_borders Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.
-#' @param note Footnote for bottom cell, which spans all columns. \code{{stars}} will be replaced by a note about
-#'   significance stars. Set to `NULL` for no footnote.
-#' @param statistics A vector of summary statistics to display. Set to `NULL` to show all available
-#'   statistics. To change display names, name the `statistics` vector:
-#'   `c("Displayed title" = "statistic_name", ...)`
-#' @param coefs A vector of coefficients to display. Overrules `omit_coefs`. To change display names,
-#'   name the `coef` vector: `c("Displayed title" = "coefficient_name", ...)`
+#' @param outer_borders Thickness of outer (top and bottom) horizontal borders.
+#'   Set to 0 for no borders.
+#' @param note Footnote for bottom cell, which spans all columns. \code{{stars}}
+#'   will be replaced by a note about significance stars. Set to `NULL` for no
+#'   footnote.
+#' @param statistics A vector of summary statistics to display. Set to `NULL` to
+#'   show all available statistics. To change display names, name the
+#'   `statistics` vector: `c("Displayed title" = "statistic_name", ...)`
+#' @param coefs A vector of coefficients to display. Overrules `omit_coefs`. To
+#'   change display names, name the `coef` vector: `c("Displayed title" =
+#'   "coefficient_name", ...)`
 #' @param omit_coefs Omit these coefficients.
 #'
 #' @details
@@ -78,9 +87,20 @@ generics::glance
 #' lm1 <- lm(mpg ~ cyl, mtcars)
 #' lm2 <- lm(mpg ~ cyl + hp, mtcars)
 #' glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
-#'       family = binomial)
+#'           family = binomial)
 #'
 #' huxreg(lm1, lm2, glm1)
+#'
+#' if (requireNamespace("sandwich") &&
+#'       requireNamespace("lmtest")) {
+#'
+#'   lm_robust <- lmtest::coeftest(lm1,
+#'         vcov = sandwich::vcovHC)
+#'   # coeftest() has no "glance" method:
+#'   huxreg(lm_robust,
+#'         statistics = character(0))
+#'
+#' }
 #'
 huxreg <- function (
         ...,

@@ -5,11 +5,14 @@ date: "2/03/2017"
 output:
   html_document: 
     toc: yes
+  word_document: 
+    toc: yes
   pdf_document:
     toc: yes
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  rtf_document: default
 ---
 
 
@@ -92,17 +95,17 @@ ht
 
 # Caption_pos and caption_width
 
-```{r, results = 'asis'}
+```{r}
 
 for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomcenter', 'bottomright', 'bottom')) {
   ht <- make(nrow = 1) 
-   caption(ht) <- paste0('caption\\_pos: ', pos)
-   caption_pos(ht) <- pos
-  print(ht)
+  caption(ht) <- paste0('caption\\_pos: ', pos)
+  caption_pos(ht) <- pos
+  cat(knitr::knit_print(ht))
   
   caption_width(ht) <- .5
   caption(ht) <- paste(caption(ht), "caption\\_width: .5")
-  print(ht)
+  cat(knitr::knit_print(ht))
 }
 
 ht <- make(nrow = 1)
@@ -249,6 +252,19 @@ caption(ht) <- 'wrap TRUE on left, font lmss at top, then bold/both/italic/yello
 ht
 
 ```
+
+# Newlines and wrap
+```{r}
+ht <- make(text1 = "first line\nsecond line", text2 = "first line\nsecond line")
+caption(ht) <- "wrap TRUE on left, width set"
+ht <- set_wrap(ht, everywhere, 1, TRUE)
+ht <- set_wrap(ht, everywhere, 2, FALSE)
+width(ht) <- .5
+ht
+```
+
+ht <- make()
+
 
 \FloatBarrier
 

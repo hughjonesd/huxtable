@@ -67,7 +67,9 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
           c(sprintf("\\begin{table}[%s]", latex_float(ht)), "\\end{table}")
         )
   # no-op except for wraptable:
-  table_env[1] <- sprintf(table_env[1], latex_table_width(ht))
+  wraptable_width <- latex_table_width(ht)
+  if (is.na(wraptable_width)) wraptable_width <- "0.25\\textwidth"
+  table_env[1] <- sprintf(table_env[1], wraptable_width)
   table_env <- paste0("\n", table_env, "\n")
 
   cap <- build_latex_caption(ht)
@@ -488,7 +490,10 @@ build_tabular <- function (ht) {
 
 latex_table_width <- function (ht) {
   tw <- width(ht)
-  if (is.numeric(tw)) tw <- paste0(tw, default_table_width_unit)
+  if (is.numeric(tw) && ! is.na(tw)) {
+    tw <- paste0(tw, default_table_width_unit)
+  }
+
   return(tw)
 }
 

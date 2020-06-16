@@ -23,7 +23,6 @@ hux(
 tribble_hux(
   ...,
   add_colnames = getOption("huxtable.add_colnames", TRUE),
-  add_rownames = FALSE,
   autoformat = getOption("huxtable.autoformat", TRUE)
 )
 }

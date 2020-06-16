@@ -62,6 +62,7 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
 
   if (type == "latex") {
     result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
+    result <- gsub("\n", " \\newline ", result, fixed = TRUE)
     result <- gsub("$", "\\$", result, fixed = TRUE)
     result <- gsub(">", "$>$", result, fixed = TRUE)
     result <- gsub("<", "$<$", result, fixed = TRUE)
@@ -75,16 +76,18 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
     result <- gsub("^", "\\verb|^|", result, fixed = TRUE)
     result <- gsub("~", "\\~{}", result, fixed = TRUE)
     result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
-      result, fixed = TRUE)
+                result, fixed = TRUE)
   }
   else if (type == "html"){
-    result <- gsub("&", "&amp;", result, fixed = TRUE)
-    result <- gsub(">", "&gt;", result, fixed = TRUE)
-    result <- gsub("<", "&lt;", result, fixed = TRUE)
-  } else {
-    result <- gsub("\\", "\\\\", result, fixed = TRUE)
-    result <- gsub("{", "\\{", result, fixed = TRUE)
-    result <- gsub("}", "\\}", result, fixed = TRUE)
+    result <- gsub("&",  "&amp;", result, fixed = TRUE)
+    result <- gsub(">",  "&gt;",  result, fixed = TRUE)
+    result <- gsub("<",  "&lt;",  result, fixed = TRUE)
+    result <- gsub("\n", "<br>",  result, fixed = TRUE)
+  } else if (type == "rtf") {
+    result <- gsub("\\", "\\\\",   result, fixed = TRUE)
+    result <- gsub("{",  "\\{",    result, fixed = TRUE)
+    result <- gsub("}",  "\\}",    result, fixed = TRUE)
+    result <- gsub("\n", "\\line ", result, fixed = TRUE)
   }
 
   return(result)

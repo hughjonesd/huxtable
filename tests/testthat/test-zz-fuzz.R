@@ -1,10 +1,12 @@
 
-context("Fuzzy tests")
 
 # how to debug
-# look for a 6 figure number in test output
-# source add_props() in this file
-# run hx_set <- add_props(hx_raw, variations[six_figure_no,])
+# look for a 6 figure number in test output.
+# Run:
+#   library(huxtable)
+# Source `add_props()`, the `variations` data frame and the `hux_raw` huxtable.
+# run:
+#   hx_set <- add_props(hx_raw, variations[six_figure_no,])
 # compare outputs to something like
 # cat("tests/testthat/output-rds/various-outputs-six_figure_no-...")
 # or run quick_xxx functions on it
