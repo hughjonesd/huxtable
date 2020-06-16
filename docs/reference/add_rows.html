@@ -62,7 +62,7 @@ return the result." />
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -101,9 +101,6 @@ return the result." />
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
-    </li>
-    <li>
-      <a href="../themes.html">Huxtable Themes</a>
     </li>
     <li>
       <a href="../tutorials/index.html">External articles</a>
@@ -190,12 +187,13 @@ multiple values into a single row.</p></div>
       <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span>,
       <span class='st'>"Weight (g)"</span>, <span class='fl'>300</span>, <span class='fl'>250</span>, <span class='fl'>300</span>),
       <span class='fl'>4</span>, <span class='fl'>2</span>)
-<span class='fu'>add_columns</span>(<span class='no'>jams</span>, <span class='no'>mx</span>)</div><div class='output co'>#&gt;                Type         Price    Sugar    Sugar   Weight (g)  
-#&gt;                Strawberry    1.90   60.00%   50.00%       300.00  
-#&gt;                Raspberry     2.10   60.00%   60.00%       250.00  
-#&gt;                Plum          1.80   60.00%   40.00%       300.00  
+<span class='fu'>add_columns</span>(<span class='no'>jams</span>, <span class='no'>mx</span>)</div><div class='output co'>#&gt;             Type         Price          Sugar    Sugar   Weight (g)  
+#&gt;                                       content                        
+#&gt;             Strawberry    1.90         40.00%   50.00%       300.00  
+#&gt;             Raspberry     2.10         35.00%   60.00%       250.00  
+#&gt;             Plum          1.80         50.00%   40.00%       300.00  
 #&gt; 
-#&gt; Column names: Type, Price, , .1, .2</div></pre>
+#&gt; Column names: Type, Price, Sugar, , .1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

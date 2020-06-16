@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set a table label for external referencing — label • huxtable</title>
+<title>Authors • huxtable</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,15 +33,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Set a table label for external referencing — label" />
-<meta property="og:description" content="The label is used as the table's label in LaTeX, and as the &quot;id&quot; property
-of the table element in HTML." />
+<meta property="og:title" content="Authors" />
 
 
 
@@ -60,9 +58,9 @@ of the table element in HTML." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-authors">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -72,7 +70,7 @@ of the table element in HTML." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">huxtable</a>
+        <a class="navbar-link" href="index.html">huxtable</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
@@ -80,7 +78,7 @@ of the table element in HTML." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fa fa-home"></span>
      
     Home
@@ -94,24 +92,24 @@ of the table element in HTML." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
+      <a href="huxtable.html">Introduction to Huxtable</a>
     </li>
     <li>
-      <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
+      <a href="design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
-      <a href="../huxreg.html">Regression Tables with huxreg</a>
+      <a href="huxreg.html">Regression Tables with huxreg</a>
     </li>
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="news/index.html">News</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -132,66 +130,22 @@ of the table element in HTML." />
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Set a table label for external referencing</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/R/properties-table.R'><code>R/properties-table.R</code></a></small>
-    <div class="hidden name"><code>label.Rd</code></div>
+      <h1>Authors</h1>
     </div>
 
-    <div class="ref-description">
-    <p>The label is used as the table's label in LaTeX, and as the "id" property
-of the table element in HTML.</p>
-    </div>
+    <ul class="list-unstyled">
+      <li>
+        <p><strong>David Hugh-Jones</strong>. Author, maintainer. 
+        </p>
+      </li>
+    </ul>
 
-    <pre class="usage"><span class='fu'>label</span>(<span class='no'>ht</span>)
-<span class='fu'>label</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_label</span>(<span class='no'>ht</span>, <span class='no'>value</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ht</th>
-      <td><p>A huxtable.</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>A string. Set to <code>NA</code> to reset to the default, which is
-<code>"NA"</code>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>label()</code> returns the <code>label</code> property.
-<code>set_label()</code> returns the modified huxtable.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>LaTeX table labels typically start with <code>"tab:"</code>.</p>
-<p>Within knitr, huxtable labels will default to the same as the knitr chunk label.
-To turn off this behaviour, set <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.autolabel = FALSE)</a></code>.</p>
-<p>If you use <a href='http://bookdown.org'>bookdown</a>, and set a label on your
-table, the table <code><a href='caption.html'>caption()</a></code> will automatically be prefixed with <code>(#label)</code>.
-You can then refer to the table using <code>@ref(label)</code>. <code>label</code> needs to start
-with <code>"tab:"</code>; if it doesn't, the <code>"tab:"</code> prefix will be added
-automatically. To turn off this behaviour, set
-<code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.bookdown = FALSE)</a></code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>huxtable-options</p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>label</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='st'>"tab:mytable"</span>
-<span class='fu'>label</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; [1] "tab:mytable"</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
-  </div>
+
 </div>
+
 
 
       <footer>

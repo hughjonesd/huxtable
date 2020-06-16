@@ -66,7 +66,7 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -105,9 +105,6 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
-    </li>
-    <li>
-      <a href="../themes.html">Huxtable Themes</a>
     </li>
     <li>
       <a href="../tutorials/index.html">External articles</a>
@@ -206,29 +203,29 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>background_color</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>grey</a></span>(<span class='fl'>0.7</span>)
-<span class='fu'>background_color</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;     Type      Price              
+<span class='fu'>background_color</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;     Type      Price     Sugar    
 #&gt; 1   "#B3B3B3" "#B3B3B3" "#B3B3B3"
 #&gt; 1.1 "#B3B3B3" "#B3B3B3" "#B3B3B3"
 #&gt; 2   "#B3B3B3" "#B3B3B3" "#B3B3B3"
 #&gt; 3   "#B3B3B3" "#B3B3B3" "#B3B3B3"</div><div class='input'>
-<span class='fu'>set_background_color</span>(<span class='no'>jams</span>, <span class='st'>"yellow"</span>)</div><div class='output co'>#&gt;                           <span style='background-color: #BBBB00;'>Type      </span><span>   </span><span style='background-color: #BBBB00;'>Price</span><span>   </span><span style='background-color: #BBBB00;'> Sugar</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBB00;'> 1.90</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBB00;'> 2.10</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Plum      </span><span>   </span><span style='background-color: #BBBB00;'> 1.80</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
+<span class='fu'>set_background_color</span>(<span class='no'>jams</span>, <span class='st'>"yellow"</span>)</div><div class='output co'>#&gt;                        <span style='background-color: #BBBB00;'>Type      </span><span>   </span><span style='background-color: #BBBB00;'>Price</span><span>   </span><span style='background-color: #BBBB00;'>Sugar content</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBB00;'> 1.90</span><span>   </span><span style='background-color: #BBBB00;'>       40.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBB00;'> 2.10</span><span>   </span><span style='background-color: #BBBB00;'>       35.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Plum      </span><span>   </span><span style='background-color: #BBBB00;'> 1.80</span><span>   </span><span style='background-color: #BBBB00;'>       50.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'><span class='fu'>set_background_color</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='st'>"yellow"</span>)</div><div class='output co'>#&gt;                           </span><span style='background-color: #BBBBBB;'>Type      </span><span>   </span><span style='background-color: #BBBBBB;'>Price</span><span>   </span><span style='background-color: #BBBBBB;'> Sugar</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'> 1.90</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBBBB;'> 2.10</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'> 1.80</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
+#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'>set_background_color</span>(<span class='no'>jams</span>,
+      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='st'>"yellow"</span>)</div><div class='output co'>#&gt;                        </span><span style='background-color: #BBBBBB;'>Type      </span><span>   </span><span style='background-color: #BBBBBB;'>Price</span><span>   </span><span style='background-color: #BBBBBB;'>Sugar content</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'> 1.90</span><span>   </span><span style='background-color: #BBBBBB;'>       40.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBBBB;'> 2.10</span><span>   </span><span style='background-color: #BBBBBB;'>       35.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'> 1.80</span><span>   </span><span style='background-color: #BBBBBB;'>       50.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'><span class='fu'>map_background_color</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='st'>"yellow"</span>, <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>grey</a></span>(<span class='fl'>0.7</span>)))</div><div class='output co'>#&gt;                           </span><span style='background-color: #BBBB00;'>Type      </span><span>   </span><span style='background-color: #BBBB00;'>Price</span><span>   </span><span style='background-color: #BBBB00;'> Sugar</span><span>  
-#&gt;                           </span><span style='background-color: #BBBBBB;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'> 1.90</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBB00;'> 2.10</span><span>   </span><span style='background-color: #BBBB00;'>60.00%</span><span>  
-#&gt;                           </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'> 1.80</span><span>   </span><span style='background-color: #BBBBBB;'>60.00%</span><span>  
+#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'>map_background_color</span>(<span class='no'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='st'>"yellow"</span>, <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>grey</a></span>(<span class='fl'>0.7</span>)))</div><div class='output co'>#&gt;                        </span><span style='background-color: #BBBB00;'>Type      </span><span>   </span><span style='background-color: #BBBB00;'>Price</span><span>   </span><span style='background-color: #BBBB00;'>Sugar content</span><span>  
+#&gt;                        </span><span style='background-color: #BBBBBB;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'> 1.90</span><span>   </span><span style='background-color: #BBBBBB;'>       40.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBB00;'>Raspberry </span><span>   </span><span style='background-color: #BBBB00;'> 2.10</span><span>   </span><span style='background-color: #BBBB00;'>       35.00%</span><span>  
+#&gt;                        </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'> 1.80</span><span>   </span><span style='background-color: #BBBBBB;'>       50.00%</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price,</div></span></pre>
+#&gt; Column names: Type, Price, Sugar</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

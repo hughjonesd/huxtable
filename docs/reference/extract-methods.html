@@ -61,7 +61,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -100,9 +100,6 @@
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
-    </li>
-    <li>
-      <a href="../themes.html">Huxtable Themes</a>
     </li>
     <li>
       <a href="../tutorials/index.html">External articles</a>
@@ -201,11 +198,11 @@ intervening rows/columns. New values must have the appropriate dimensions
 (vectors will be interpreted appropriately).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;                           Type         Price    Sugar  
-#&gt;                           Strawberry    1.90   60.00%  
-#&gt;                           Raspberry     2.10   60.00%  
+    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;                        Type         Price   Sugar content  
+#&gt;                        Strawberry    1.90          40.00%  
+#&gt;                        Raspberry     2.10          35.00%  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;                                  Type            
+#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;                                  Type            
 #&gt;                                  Strawberry      
 #&gt;                                  Raspberry       
 #&gt;                                  Plum            
@@ -214,20 +211,20 @@ intervening rows/columns. New values must have the appropriate dimensions
 <span class='fu'><a href='number_format.html'>number_format</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>2</span>
 <span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
 <span class='no'>jams</span>[, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='no'>prices</span>
-<span class='no'>jams</span></div><div class='output co'>#&gt;                           Type         <span style='font-weight: bold;'>Price</span><span>    Sugar  
-#&gt;                           Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%  
-#&gt;                           Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%  
-#&gt;                           Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%  
+<span class='no'>jams</span></div><div class='output co'>#&gt;                        Type         <span style='font-weight: bold;'>Price</span><span>   Sugar content  
+#&gt;                        Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>          40.00%  
+#&gt;                        Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>          35.00%  
+#&gt;                        Plum         </span><span style='font-weight: bold;'>2.20 </span><span>          50.00%  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'>
+#&gt; Column names: Type, Price, Sugar</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>jams</span>)
 <span class='no'>jams</span>$<span class='no'>price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>)
-<span class='no'>jams</span></div><div class='output co'>#&gt;                       Type         </span><span style='font-weight: bold;'>Price</span><span>    Sugar   Price  
-#&gt;                       Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   60.00%    1.70  
-#&gt;                       Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   60.00%    2.00  
-#&gt;                       Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   60.00%    2.20  
+<span class='no'>jams</span></div><div class='output co'>#&gt;                    Type         </span><span style='font-weight: bold;'>Price</span><span>   Sugar content   Price  
+#&gt;                    Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>          40.00%    1.70  
+#&gt;                    Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>          35.00%    2.00  
+#&gt;                    Plum         </span><span style='font-weight: bold;'>2.20 </span><span>          50.00%    2.20  
 #&gt; 
-#&gt; Column names: Type, Price, , price</div></span></pre>
+#&gt; Column names: Type, Price, Sugar, price</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

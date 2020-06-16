@@ -1,6 +1,5 @@
 navbar:
   title: "huxtable"
-  type: inverse
   left:
     - text: "Home"
       icon: fa-home
@@ -13,8 +12,6 @@ navbar:
         href: design-principles.html
       - text: Regression Tables with huxreg
         href: huxreg.html
-      - text: Huxtable Themes
-        href: themes.html
       - text: External articles
         href: tutorials/index.html
     - text: "Reference"
@@ -29,6 +26,7 @@ reference:
       - huxtable-package
       - huxtable-options
       - huxtable-FAQ
+      - huxtable-news
       - rowspecs
       - mapping-functions
   - title: "Creating and manipulating huxtables"
@@ -164,3 +162,6 @@ tutorials:
   - name: 01-whats-new
     title: What's new in huxtable 5.0.0
     url: https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html
+  - name: 02-themes
+    title: Huxtable themes
+    url: https://hughjonesd.github.io/huxtable/themes.html
