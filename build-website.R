@@ -49,6 +49,7 @@ for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
 
 setwd('docs')
 knitr::knit("index.Rhtml", "index.html")
+knitr::knit("themes.Rhtml", "themes.html")
 setwd('..')
 
 pkgdown::build_reference_index()
