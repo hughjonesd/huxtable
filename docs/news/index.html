@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -102,6 +102,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -136,9 +139,9 @@
       <small>Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="huxtable-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#huxtable-development-version" class="anchor"></a>huxtable (development version)<small> Unreleased </small>
+    <div id="huxtable-5-0-0" class="section level1">
+<h1 class="page-header" data-toc-text="5.0.0">
+<a href="#huxtable-5-0-0" class="anchor"></a>huxtable 5.0.0<small> 2020-06-15 </small>
 </h1>
 <p>Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction, see <a href="https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html" class="uri">https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p>
 <div id="breaking-changes" class="section level2">
@@ -155,6 +158,7 @@
 </ul>
 </li>
 <li><p>As previously signalled, <code>add_colnames</code> has now become <code>TRUE</code> by default in <code><a href="../reference/huxtable.html">huxtable()</a></code> and <code><a href="../reference/as_huxtable.html">as_huxtable()</a></code>. Set <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.add_colnames = FALSE)</a></code> to go back to the old behaviour.</p></li>
+<li><p>Newlines in cell contents are now respected (in LaTeX, so long as <code>wrap = TRUE</code> and <code>width</code> has been set).</p></li>
 <li>Huxtable borders have been reworked, fixing some longstanding bugs and adding new features.
 <ul>
 <li>
@@ -170,7 +174,7 @@
 ##                 Strawberry         1.90  
 ##                                    2.10  
 ##                                    1.80  
-##               ───────────────────────────</code></pre>
+##               ---------------------------</code></pre>
 <p>instead of the old behaviour:</p>
 <pre><code>jams %&gt;% 
     set_rowspan(2, 1, 3) %&gt;% 
@@ -179,7 +183,7 @@
 ##                 Strawberry      1.90  
 ##                                 2.10  
 ##                                 1.80  
-##                            ───────────</code></pre>
+##                            -----------</code></pre>
 </li>
 <li>
 <p><code><a href="../reference/borders.html">set_left_border()</a></code>, <code><a href="../reference/set-multiple.html">set_all_borders()</a></code> and friends all use a default value of 0.4. So to set a default border, write e.g.</p>
@@ -280,6 +284,7 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li><p>Improvements to <code><a href="../reference/quick-output.html">quick_pptx()</a></code> (thanks <a href='https://github.com/davidgohel'>@davidgohel</a>).</p></li>
 <li><p>Bugfixes for <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.use_fontspec = TRUE)</a></code>.</p></li>
 <li><p>Bugfix: <code>add_rownames = "string"</code> now works as promised.</p></li>
+<li><p>Bugfix: non-ASCII characters are now supported in RTF.</p></li>
 </ul>
 </div>
 <div id="other-news" class="section level2">

@@ -223,7 +223,7 @@ ht <- hux(
       )
 
 bold(ht)[1,]           <- TRUE
-bottom_border(ht)[1,]  <- 2
+bottom_border(ht)[1,]  <- 0.4
 align(ht)[,2]          <- 'right'
 right_padding(ht)      <- 10
 left_padding(ht)       <- 10
@@ -245,8 +245,8 @@ ht <- hux(
       )
 
 ht                                        %>%
-      set_bold(1, everywhere, TRUE)       %>%
-      set_bottom_border(1, everywhere, 2) %>%
+      set_bold(1, everywhere)             %>%
+      set_bottom_border(1, everywhere)    %>%
       set_align(everywhere, 2, 'right')   %>%
       set_right_padding(10)               %>%
       set_left_padding(10)                %>%
@@ -308,6 +308,22 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+
+<h4>June 16, 2020: Huxtable 5.0.0 released</h4>
+
+<p>This release contains <i>many</i> changes and improvements. It also breaks
+backwards compatibility.
+
+<ul>
+<li>Better LaTeX output.</li>
+<li>Support for markdown in cells.</li>
+<li>Easier borders.</li>
+<li>New ways to split and reshape huxtables.</li>
+<li>For full details, see the <a href="news/index.html">NEWS
+file</a>.</li>
+<li>For a friendly introduction, see
+<a href="/whats-new-in-huxtable-5.0.0.html">this article</a>.</li>
+</ul>
 
 <h4>January 9, 2020: Huxtable 4.7.1 released</h4>
 

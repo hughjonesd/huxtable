@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -184,34 +187,22 @@ call the data frame method instead of the huxtable-specific code. For a solution
     <pre class="examples"><div class='input'>
 <span class='no'>sugar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"40%"</span>, <span class='st'>"35%"</span>, <span class='st'>"50%"</span>)
 <span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>jams</span>, <span class='fl'>1</span>, <span class='no'>everywhere</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>jams</span>, <span class='no'>sugar</span>)</div><div class='output co'>#&gt;                           <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
-#&gt;                           Strawberry    1.90   40.00%  
-#&gt;                           Raspberry     2.10   35.00%  
-#&gt;                           Plum          1.80   50.00%  
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>jams</span>, <span class='no'>sugar</span>)</div><div class='output co'>#&gt;                       <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
+#&gt;                       Strawberry    1.90   60.00%   40.00%  
+#&gt;                       Raspberry     2.10   60.00%   35.00%  
+#&gt;                       Plum          1.80   60.00%   50.00%  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>jams</span>, <span class='no'>sugar</span>,
-     <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                            </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   Sugar  
-#&gt;                            Strawberry    1.90   40%    
-#&gt;                            Raspberry     2.10   35%    
-#&gt;                            Plum          1.80   50%    
+#&gt; Column names: Type, Price, , .1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>jams</span>, <span class='no'>sugar</span>,
+     <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                       </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>   Sugar  
+#&gt;                       Strawberry    1.90   60.00%   40%    
+#&gt;                       Raspberry     2.10   60.00%   35%    
+#&gt;                       Plum          1.80   60.00%   50%    
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'>
+#&gt; Column names: Type, Price, , .1</div><div class='input'>
 <span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>jams</span>,
      <span class='no'>everywhere</span>, <span class='fl'>1</span>, <span class='st'>"red"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Damson"</span>, <span class='fl'>2.30</span>))</div><div class='output co'>#&gt;                               </span><span style='color: #BB0000;font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;                               </span><span style='color: #BB0000;'>Strawberry</span><span>      1.90  
-#&gt;                               </span><span style='color: #BB0000;'>Raspberry </span><span>      2.10  
-#&gt;                               </span><span style='color: #BB0000;'>Plum      </span><span>      1.80  
-#&gt;                               </span><span style='color: #BB0000;'>Damson    </span><span>      2.30  
-#&gt; 
-#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Damson"</span>, <span class='fl'>2.30</span>),
-     <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                               </span><span style='color: #BB0000;font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;                               </span><span style='color: #BB0000;'>Strawberry</span><span>      1.90  
-#&gt;                               </span><span style='color: #BB0000;'>Raspberry </span><span>      2.10  
-#&gt;                               </span><span style='color: #BB0000;'>Plum      </span><span>      1.80  
-#&gt;                               Damson       2.3      
-#&gt; 
-#&gt; Column names: Type, Price</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Damson"</span>, <span class='fl'>2.30</span>))</div><div class='output co'>#&gt; <span class='error'>Error in attr(ht2, a)[r, ] &lt;- attr(ht1, a)[nrow(ht1), ]: number of items to replace is not a multiple of replacement length</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Damson"</span>, <span class='fl'>2.30</span>),
+     <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in names(x) &lt;- value: 'names' attribute [3] must be the same length as the vector [2]</span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

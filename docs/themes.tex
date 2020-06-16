@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,29 +9,32 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{hyperref}
-\hypersetup{unicode=true,
+\hypersetup{
             pdftitle={Huxtable Themes},
             pdfauthor={David Hugh-Jones},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -78,12 +84,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -98,38 +98,16 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Huxtable Themes}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{David Hugh-Jones}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2020-01-09}
-
-\usepackage{placeins}
-\usepackage{pmboxdraw}
 \usepackage{array}
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
+\usepackage{ulem}
 \usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{hhline}
@@ -137,6 +115,12 @@
 \usepackage{tabularx}
 \usepackage{threeparttable}
 \usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{fontspec}
+
+\title{Huxtable Themes}
+\author{David Hugh-Jones}
+\date{2020-06-16}
 
 \begin{document}
 \maketitle
@@ -144,6 +128,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(huxtable)}
+\KeywordTok{data}\NormalTok{(jams)}
 \NormalTok{jams <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(jams, }\KeywordTok{c}\NormalTok{(}\StringTok{"Sugar"}\NormalTok{, }\StringTok{"60%"}\NormalTok{, }\StringTok{"60%"}\NormalTok{, }\StringTok{"60%"}\NormalTok{))}
 \NormalTok{jams}
 \end{Highlighting}
@@ -152,63 +137,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-1}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright Type\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Price\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Type \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} Price \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} Sugar \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright Strawberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright Raspberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright Plum\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -222,63 +197,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\begin{raggedright}
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-2}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright \textbf{Type}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Price}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedright Strawberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright Raspberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedright Plum\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}l!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-\par\end{raggedright}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -292,63 +257,113 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-3}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}|}
+\hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{4pt}\raggedright Type\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Price\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft Sugar\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{2pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{2pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{4pt}\raggedright Strawberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{2pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{2pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}|}
+\hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{4pt}\raggedright Raspberry\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{2pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{2pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}|}
+\hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{4pt}\raggedright Plum\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{2pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{2pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}|}
+\hhline{}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
+\end{table}
+ 
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{theme_compact}\NormalTok{(jams)}
+\end{Highlighting}
+\end{Shaded}
+
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+ \label{tab:unnamed-chunk-4}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedright \hspace{0pt} \textbf{Type} \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} \textbf{Price} \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} \textbf{Sugar} \hspace{0pt}\huxbpad{1pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedright \hspace{0pt} Strawberry \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 1.90 \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 60.00\% \hspace{0pt}\huxbpad{1pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedright \hspace{0pt} Raspberry \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 2.10 \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 60.00\% \hspace{0pt}\huxbpad{1pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedright \hspace{0pt} Plum \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 1.80 \hspace{1pt}\huxbpad{1pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{1pt + 1em}\raggedleft \hspace{1pt} 60.00\% \hspace{0pt}\huxbpad{1pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -362,63 +377,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-5}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{0}}l!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Type}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Price}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}l!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{0}}l!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Strawberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}l!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{0}}l!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Raspberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 255}\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 255}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 255}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 255}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 255}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}l!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{0}}l!{\huxvb{255, 255, 255}{0}}}{\cellcolor[RGB]{0, 0, 0}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Plum}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}l!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -432,63 +437,113 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-6}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright \textbf{Type}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Price}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{0pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{0pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright \textbf{Strawberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{0pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{0pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright \textbf{Raspberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{0pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{0pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedright \textbf{Plum}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{0pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{0pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
+\end{table}
+ 
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{theme_bright}\NormalTok{(jams)}
+\end{Highlighting}
+\end{Shaded}
+
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+ \label{tab:unnamed-chunk-7}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
+
+
+\hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{3}}l!{\huxvb{255, 255, 255}{3}}}{\cellcolor[RGB]{126, 171, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textcolor[RGB]{255, 255, 255}{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\cellcolor[RGB]{227, 118, 227}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 255, 255}{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\cellcolor[RGB]{252, 187, 3}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 255, 255}{Sugar} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{3}}l!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{3}}l!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{3}}l!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{3}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -502,63 +557,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-8}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedright \textbf{Type}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedleft \textbf{Price}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedright \textbf{Strawberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedright \textbf{Raspberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{230, 230, 230}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{204, 204, 204}\huxtpad{4pt}\raggedright \textbf{Plum}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -572,63 +617,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-9}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Type}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Price}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Type}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Price}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Strawberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Raspberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{169, 204, 227}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{84, 153, 199}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Plum}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{212, 230, 241}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -642,63 +677,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-10}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedright \textbf{Type}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedleft \textbf{Price}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedleft \textbf{Sugar}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Type} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Price} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sugar} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedright \textbf{Strawberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedright \textbf{Raspberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{245, 203, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{208, 211, 212}\huxtpad{4pt}\raggedright \textbf{Plum}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{250, 229, 211}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -712,63 +737,53 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-11}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Type}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Price}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedleft \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Type}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Price}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{\textcolor[RGB]{255, 255, 255}{Sugar}} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Strawberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 1.90\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Strawberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.90 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Raspberry}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{4pt}\raggedleft 2.10\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Raspberry \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 2.10 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{200, 230, 201}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{76, 175, 80}\huxtpad{4pt}\raggedright \textbf{\textcolor[RGB]{255, 255, 255}{Plum}}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 1.80\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{4pt}\raggedleft 60.00\%\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{255, 255, 255}{1}}l!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Plum \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.80 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{255, 255, 255}{1}}}{\cellcolor[RGB]{165, 214, 167}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 60.00\% \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
+\hhline{>{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}->{\huxb{255, 255, 255}{1}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
  
@@ -782,65 +797,61 @@
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
   \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
   \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\begin{table}[h]
-\centering
+\begin{table}[ht]
+\begin{centerbox}
 \begin{threeparttable}
-\begin{tabularx}{0.5\textwidth}{p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth} p{0.0833333333333333\textwidth}}
+ \label{tab:unnamed-chunk-12}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
 
 
-\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
+\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{4pt}\raggedright {\fontfamily{Arial}\selectfont Type}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont Price}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont Sugar}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont Sugar}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{3pt + 1em}\raggedright \hspace{3pt} Type \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} Price \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} Sugar \hspace{3pt}\huxbpad{3pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
+\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedright {\fontfamily{Arial}\selectfont Strawberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 1.90}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedright \hspace{3pt} Strawberry \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 1.90 \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 60.00\% \hspace{3pt}\huxbpad{3pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
+\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedright {\fontfamily{Arial}\selectfont Raspberry}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 2.10}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedright \hspace{3pt} Raspberry \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 2.10 \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 60.00\% \hspace{3pt}\huxbpad{3pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
+\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedright {\fontfamily{Arial}\selectfont Plum}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 1.80}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{4pt}\raggedleft {\fontfamily{Arial}\selectfont 60.00\%}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{2}}l!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedright \hspace{3pt} Plum \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 1.80 \hspace{3pt}\huxbpad{3pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{2}}}{\huxtpad{3pt + 1em}\raggedleft \hspace{3pt} 60.00\% \hspace{3pt}\huxbpad{3pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
+\hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
-\end{tabularx}\end{threeparttable}
-
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
 
 \end{table}
+ 
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# mondrian colors are randomized}
+\end{Highlighting}
+\end{Shaded}
 
 \end{document}

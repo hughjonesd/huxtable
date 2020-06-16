@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -165,7 +168,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Models, or a single list of models. Names will be used as column headings.</p></td>
+      <td><p>Models, or a single list of models. Names will be used as column
+headings.</p></td>
     </tr>
     <tr>
       <th>error_format</th>
@@ -173,7 +177,8 @@
     </tr>
     <tr>
       <th>error_pos</th>
-      <td><p>Display uncertainty "below", to the "right" of, or in the "same" cell as estimates.</p></td>
+      <td><p>Display uncertainty "below", to the "right" of, or in the
+"same" cell as estimates.</p></td>
     </tr>
     <tr>
       <th>number_format</th>
@@ -181,25 +186,29 @@
     </tr>
     <tr>
       <th>align</th>
-      <td><p>Alignment for table cells. Set to a single character to align on this character.</p></td>
+      <td><p>Alignment for table cells. Set to a single character to align on
+this character.</p></td>
     </tr>
     <tr>
       <th>ci_level</th>
-      <td><p>Confidence level for intervals. Set to <code>NULL</code> to not calculate confidence intervals.</p></td>
+      <td><p>Confidence level for intervals. Set to <code>NULL</code> to not
+calculate confidence intervals.</p></td>
     </tr>
     <tr>
       <th>tidy_args</th>
-      <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/broom/man/reexports.html'>broom::tidy()</a></code>. You can also pass a list of lists;
-if so, the nth element will be used for the nth column.</p></td>
+      <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code>.
+You can also pass a list of lists; if so, the nth element will be used for
+the nth column.</p></td>
     </tr>
     <tr>
       <th>stars</th>
-      <td><p>Levels for p value stars. Names of <code>stars</code> are symbols to use. Set to <code>NULL</code> to not show stars.</p></td>
+      <td><p>Levels for p value stars. Names of <code>stars</code> are symbols to use.
+Set to <code>NULL</code> to not show stars.</p></td>
     </tr>
     <tr>
       <th>bold_signif</th>
-      <td><p>Where p values are below this number, cells will be displayed in bold. Use <code>NULL</code> to turn off
-this behaviour.</p></td>
+      <td><p>Where p values are below this number, cells will be
+displayed in bold. Use <code>NULL</code> to turn off this behaviour.</p></td>
     </tr>
     <tr>
       <th>borders</th>
@@ -207,23 +216,25 @@ this behaviour.</p></td>
     </tr>
     <tr>
       <th>outer_borders</th>
-      <td><p>Thickness of outer (top and bottom) horizontal borders. Set to 0 for no borders.</p></td>
+      <td><p>Thickness of outer (top and bottom) horizontal borders.
+Set to 0 for no borders.</p></td>
     </tr>
     <tr>
       <th>note</th>
-      <td><p>Footnote for bottom cell, which spans all columns. <code>{stars}</code> will be replaced by a note about
-significance stars. Set to <code>NULL</code> for no footnote.</p></td>
+      <td><p>Footnote for bottom cell, which spans all columns. <code>{stars}</code>
+will be replaced by a note about significance stars. Set to <code>NULL</code> for no
+footnote.</p></td>
     </tr>
     <tr>
       <th>statistics</th>
-      <td><p>A vector of summary statistics to display. Set to <code>NULL</code> to show all available
-statistics. To change display names, name the <code>statistics</code> vector:
-<code><a href='https://rdrr.io/r/base/c.html'>c("Displayed title" = "statistic_name", ...)</a></code></p></td>
+      <td><p>A vector of summary statistics to display. Set to <code>NULL</code> to
+show all available statistics. To change display names, name the
+<code>statistics</code> vector: <code><a href='https://rdrr.io/r/base/c.html'>c("Displayed title" = "statistic_name", ...)</a></code></p></td>
     </tr>
     <tr>
       <th>coefs</th>
-      <td><p>A vector of coefficients to display. Overrules <code>omit_coefs</code>. To change display names,
-name the <code>coef</code> vector: <code><a href='https://rdrr.io/r/base/c.html'>c("Displayed title" = "coefficient_name", ...)</a></code></p></td>
+      <td><p>A vector of coefficients to display. Overrules <code>omit_coefs</code>. To
+change display names, name the <code>coef</code> vector: <code><a href='https://rdrr.io/r/base/c.html'>c("Displayed title" = "coefficient_name", ...)</a></code></p></td>
     </tr>
     <tr>
       <th>omit_coefs</th>
@@ -265,11 +276,12 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"broom"</span>)) {
   <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"Please install 'broom' to run this example."</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: broom</span></div><div class='input'>
+}
+
 <span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
 <span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span> + <span class='no'>hp</span>, <span class='no'>mtcars</span>)
 <span class='no'>glm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>mpg</span> <span class='kw'>&gt;</span> <span class='fl'>20</span>) ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>,
-      <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
+          <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
 
 <span class='fu'>huxreg</span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>glm1</span>)</div><div class='output co'>#&gt;            ─────────────────────────────────────────────────────────
 #&gt;                                    (1)           (2)           (3)  
@@ -289,6 +301,26 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
 #&gt;              *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.                
 #&gt; 
 #&gt; Column names: names, model1, model2, model3</div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"sandwich"</span>) <span class='kw'>&amp;&amp;</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"lmtest"</span>)) {
+
+  <span class='no'>lm_robust</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>lmtest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='no'>lm1</span>,
+        <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>sandwich</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/sandwich/man/vcovHC.html'>vcovHC</a></span>)
+  <span class='co'># coeftest() has no "glance" method:</span>
+  <span class='fu'>huxreg</span>(<span class='no'>lm_robust</span>,
+        <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))
+
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: Error calling `glance` on object of class coeftest:</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Error : No glance method for objects of class coeftest</span></div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
+#&gt;                                                            (1)  
+#&gt;                                        ─────────────────────────
+#&gt;                  (Intercept)                        37.885 ***  
+#&gt;                                                     (2.742)     
+#&gt;                  cyl                                -2.876 ***  
+#&gt;                                                     (0.389)     
+#&gt;                ─────────────────────────────────────────────────
+#&gt;                  *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.        
+#&gt; 
+#&gt; Column names: names, model1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

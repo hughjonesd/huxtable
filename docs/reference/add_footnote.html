@@ -73,7 +73,7 @@ all table columns and has an optional border above." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -104,6 +104,9 @@ all table columns and has an optional border above." />
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -175,14 +178,15 @@ all table columns and has an optional border above.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'>add_footnote</span>(<span class='no'>jams</span>,
       <span class='st'>"* subject to availability"</span>)
-<span class='no'>jams</span></div><div class='output co'>#&gt;                          Type                    Price  
-#&gt;                          Strawberry               1.90  
-#&gt;                          Raspberry                2.10  
-#&gt;                          Plum                     1.80  
-#&gt;                        ─────────────────────────────────
-#&gt;                          * subject to availability      
+<span class='no'>jams</span></div><div class='output co'>#&gt;                           Type         Price    Sugar  
+#&gt;                           Strawberry    1.90   60.00%  
+#&gt;                           Raspberry     2.10   60.00%  
+#&gt;                           Plum          1.80   60.00%  
+#&gt;                         ───────────────────────────────
+#&gt;                           * subject to                 
+#&gt;                           availability                 
 #&gt; 
-#&gt; Column names: Type, Price</div></pre>
+#&gt; Column names: Type, Price,</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

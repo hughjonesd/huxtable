@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -210,28 +213,28 @@ the same as <code>left_border_color(ht)[, 2]</code>, and setting one sets the ot
     <pre class="examples"><div class='input'>
 <span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>jams</span>)
 <span class='fu'>bottom_border_color</span>(<span class='no'>jams</span>)[<span class='fl'>1</span>, ] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
-<span class='no'>jams</span></div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
-#&gt;                             │ Type       │   Price │
-#&gt;                             <span style='color: #BB0000;'>├────────────┼─────────┤</span><span>
-#&gt;                             │ Strawberry │    1.90 │
-#&gt;                             ├────────────┼─────────┤
-#&gt;                             │ Raspberry  │    2.10 │
-#&gt;                             ├────────────┼─────────┤
-#&gt;                             │ Plum       │    1.80 │
-#&gt;                             └────────────┴─────────┘
+<span class='no'>jams</span></div><div class='output co'>#&gt;                         ┌────────────┬───────┬────────┐
+#&gt;                         │ Type       │ Price │  Sugar │
+#&gt;                         <span style='color: #BB0000;'>├────────────┼───────┼────────┤</span><span>
+#&gt;                         │ Strawberry │  1.90 │ 60.00% │
+#&gt;                         ├────────────┼───────┼────────┤
+#&gt;                         │ Raspberry  │  2.10 │ 60.00% │
+#&gt;                         ├────────────┼───────┼────────┤
+#&gt;                         │ Plum       │  1.80 │ 60.00% │
+#&gt;                         └────────────┴───────┴────────┘
 #&gt; 
-#&gt; Column names: Type, Price</div><div class='input'>
-<span class='fu'>set_bottom_border_color</span>(<span class='no'>jams</span>, <span class='st'>"blue"</span>)</div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
-#&gt;                             │ Type       │   Price │
-#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
-#&gt;                             │ Strawberry │    1.90 │
-#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
-#&gt;                             │ Raspberry  │    2.10 │
-#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
-#&gt;                             │ Plum       │    1.80 │
-#&gt;                             </span><span style='color: #0000BB;'>└────────────┴─────────┘</span><span>
+#&gt; Column names: Type, Price,</div><div class='input'>
+<span class='fu'>set_bottom_border_color</span>(<span class='no'>jams</span>, <span class='st'>"blue"</span>)</div><div class='output co'>#&gt;                         ┌────────────┬───────┬────────┐
+#&gt;                         │ Type       │ Price │  Sugar │
+#&gt;                         </span><span style='color: #0000BB;'>├────────────┼───────┼────────┤</span><span>
+#&gt;                         │ Strawberry │  1.90 │ 60.00% │
+#&gt;                         </span><span style='color: #0000BB;'>├────────────┼───────┼────────┤</span><span>
+#&gt;                         │ Raspberry  │  2.10 │ 60.00% │
+#&gt;                         </span><span style='color: #0000BB;'>├────────────┼───────┼────────┤</span><span>
+#&gt;                         │ Plum       │  1.80 │ 60.00% │
+#&gt;                         </span><span style='color: #0000BB;'>└────────────┴───────┴────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, Price</div><div class='input'>
+#&gt; Column names: Type, Price,</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

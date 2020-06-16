@@ -4,7 +4,7 @@
 \alias{knit_print.huxtable}
 \title{Print a huxtable within knitr}
 \usage{
-\method{knit_print}{huxtable}(x, options, ...)
+knit_print.huxtable(x, options, ...)
 }
 \arguments{
 \item{x}{A huxtable.}

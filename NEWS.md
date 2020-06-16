@@ -2,7 +2,7 @@
 Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
 version increments reflect backwards-incompatible API changes, not necessarily big changes.
 
-# huxtable (development version)
+# huxtable 5.0.0
 
 Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction,
 see https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html.

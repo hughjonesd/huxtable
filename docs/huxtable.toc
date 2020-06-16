@@ -11,12 +11,12 @@
 \contentsline {subsection}{Changing and adding content}{10}{section*.32}%
 \contentsline {section}{Changing the layout}{12}{section*.43}%
 \contentsline {subsection}{Table position and column width}{16}{section*.56}%
-\contentsline {subsection}{Headers}{16}{section*.59}%
-\contentsline {subsection}{Splitting tables}{17}{section*.62}%
-\contentsline {section}{Themes}{19}{section*.69}%
-\contentsline {section}{Conditional formatting}{19}{section*.72}%
-\contentsline {section}{Output to different formats}{20}{section*.79}%
-\contentsline {subsection}{Pretty-printing data frames}{20}{section*.80}%
+\contentsline {subsection}{Headers}{17}{section*.61}%
+\contentsline {subsection}{Splitting tables}{17}{section*.64}%
+\contentsline {section}{Themes}{18}{section*.71}%
+\contentsline {section}{Conditional formatting}{19}{section*.74}%
+\contentsline {section}{Output to different formats}{20}{section*.81}%
+\contentsline {subsection}{Pretty-printing data frames}{20}{section*.82}%
 \contentsline {subsection}{Using huxtables in knitr and rmarkdown}{21}{section*.83}%
 \contentsline {subsection}{Quick output commands}{22}{section*.84}%
 \contentsline {section}{Creating a regression table}{22}{section*.85}%

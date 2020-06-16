@@ -79,7 +79,7 @@
 
 \title{Design Principles, Comparisons and Limitations}
 \author{David Hugh-Jones}
-\date{2020-06-03}
+\date{2020-06-16}
 
 \begin{document}
 \maketitle
@@ -146,9 +146,9 @@ field of sensible modern choices has narrowed down to four:
 \item
   \href{https://davidgohel.github.io/flextable/index.html}{flextable};
 \item
-  \href{https://gt.rstudio.com/}{gt}
+  \href{https://gt.rstudio.com/}{gt};
 \item
-  \href{https://haozhu233.github.io/kableExtra/}{kableExtra}
+  \href{https://haozhu233.github.io/kableExtra/}{kableExtra}.
 \end{itemize}
 
 Here's what I think of these:
@@ -197,7 +197,8 @@ reference, but it has not been updated.
 \begin{threeparttable}
 \captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 1}
- \setlength{\tabcolsep}{0pt}
+ \label{tab:unnamed-chunk-1}
+\setlength{\tabcolsep}{0pt}
 \begin{tabularx}{1\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
 
 
@@ -737,9 +738,7 @@ reference, but it has not been updated.
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{8}{!{\huxvb{0, 0, 0}{0}}p{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+14\tabcolsep}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+14\tabcolsep-0pt-0pt}{\huxtpad{0pt + 1em}\raggedright {\fontsize{8pt}{9.6pt}\selectfont A (Y) means that there is limited support for the feature. 
-                    For example, multirow cells may only be supported in headers, or only horizontal
-                    border lines may work.}\huxbpad{0pt}}\rule{0pt}{10pt}} \tabularnewline[-0.5pt]
+\multicolumn{8}{!{\huxvb{0, 0, 0}{0}}p{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+14\tabcolsep}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+14\tabcolsep-0pt-0pt}{\huxtpad{0pt + 1em}\raggedright {\fontsize{8pt}{9.6pt}\selectfont A (Y) means that there is limited support for the feature.  \newline                     For example, multirow cells may only be supported in headers, or only horizontal \newline                     border lines may work.}\huxbpad{0pt}}\rule{0pt}{10pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}-}
@@ -761,7 +760,8 @@ reference, but it has not been updated.
 \begin{threeparttable}
 \captionsetup{justification=raggedright,singlelinecheck=off}
 \caption{Comparison table, part 2}
- \setlength{\tabcolsep}{0pt}
+ \label{tab:unnamed-chunk-1}
+\setlength{\tabcolsep}{0pt}
 \begin{tabularx}{1\textwidth}{p{120pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt} p{36pt}}
 
 
@@ -1424,9 +1424,7 @@ reference, but it has not been updated.
 \hhline{}
 \arrayrulecolor{black}
 
-\multicolumn{11}{!{\huxvb{0, 0, 0}{0}}p{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+20\tabcolsep}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+20\tabcolsep-0pt-0pt}{\huxtpad{0pt + 1em}\raggedright {\fontsize{8pt}{9.6pt}\selectfont A (Y) means that there is limited support for the feature. 
-                    For example, multirow cells may only be supported in headers, or only horizontal
-                    border lines may work.}\huxbpad{0pt}}\rule{0pt}{10pt}} \tabularnewline[-0.5pt]
+\multicolumn{11}{!{\huxvb{0, 0, 0}{0}}p{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+20\tabcolsep}!{\huxvb{0, 0, 0}{0}}}{\hspace{0pt}\parbox[b]{120pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+36pt+20\tabcolsep-0pt-0pt}{\huxtpad{0pt + 1em}\raggedright {\fontsize{8pt}{9.6pt}\selectfont A (Y) means that there is limited support for the feature.  \newline                     For example, multirow cells may only be supported in headers, or only horizontal \newline                     border lines may work.}\huxbpad{0pt}}\rule{0pt}{10pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}->{\huxb{255, 255, 255}{2}}-}

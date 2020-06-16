@@ -40,7 +40,32 @@
 
 
 <meta property="og:title" content="How to set cell properties variably by cell contents — mapping-functions" />
-<meta property="og:description" content="This help page explains how to set properties differently for cells, depending on their contents." />
+<meta property="og:description" content="This help page explains how to set properties differently for cells,
+depending on their contents.
+For example, in a table of p-values, you could bold cells where p &amp;lt; 0.05:  map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
+
+Or you can use red text for a particular value:  hxtbl %&amp;amp;gt;% map_text_color(by_values(&quot;Warning&quot; = &quot;red&quot;))
+
+There is a map_... function for each huxtable cell property. The syntax is:  map_property(ht, row, col, fn)
+
+where property is the property name.
+row and col specify ranges of rows and columns. See rowspecs for
+details. To set properties for the whole table, omit row and col:  map_property(ht, fn)
+
+The fn argument is a mapping function which maps cell contents to
+property values.
+To set property values in &quot;stripes&quot; by rows or by columns, use by_rows()
+and by_cols().
+To set property values for cells with specific contents, use by_values().
+To set property values for cells within a numeric range, use by_ranges().
+To set property values for cells by quantiles, use by_quantiles() or
+by_equal_groups().
+To set property values for cells that match a string or regular expression,
+use by_regex().
+To map numeric values to a colorspace, use by_colorspace().
+For a more general solution, use by_function() or by_cases().
+
+" />
 
 
 
@@ -72,7 +97,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -103,6 +128,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -139,94 +167,84 @@
     </div>
 
     <div class="ref-description">
-    <p>This help page explains how to set properties differently for cells, depending on their contents.</p>
-    </div>
-
-
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The modified huxtable.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>For example, in a table of p-values, you could bold cells where p &lt; 0.05:</p><pre>  <span class='fu'><a href='bold.html'>map_bold</a></span>(<span class='no'>pval_hux</span>, <span class='fu'><a href='by_ranges.html'>by_ranges</a></span>(<span class='fl'>0.05</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)))</pre>
+    <p>This help page explains how to set properties differently for cells,
+depending on their contents.</p>
+<p>For example, in a table of p-values, you could bold cells where p &lt; 0.05:</p><pre>  <span class='fu'><a href='bold.html'>map_bold</a></span>(<span class='no'>pval_hux</span>, <span class='fu'><a href='by_ranges.html'>by_ranges</a></span>(<span class='fl'>0.05</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)))</pre>
 
 <p>Or you can use red text for a particular value:</p><pre>  <span class='no'>hxtbl</span> <span class='kw'>%&amp;gt;%</span> <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='fu'><a href='by_values.html'>by_values</a></span>(<span class='st'>"Warning"</span> <span class='kw'>=</span> <span class='st'>"red"</span>))</pre>
 
-<p>There is a <code>map_xxx</code> function for each huxtable cell property. The syntax is:</p><pre>  <span class='fu'>map_xxx</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+<p>There is a <code>map_...</code> function for each huxtable cell property. The syntax is:</p><pre>  <span class='fu'>map_property</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
 
-<p>where <code>xxx</code> is the property name.</p>
-<p><code>row</code> and <code>col</code> specify ranges of rows and columns. See <a href='rowspecs.html'>rowspecs</a> for details. To set properties
-for the whole table, you can omit <code>row</code> and <code>col</code>:</p><pre>  <span class='fu'>map_xxx</span>(<span class='no'>ht</span>, <span class='no'>fn</span>)</pre>
+<p>where <code>property</code> is the property name.</p>
+<p><code>row</code> and <code>col</code> specify ranges of rows and columns. See <a href='rowspecs.html'>rowspecs</a> for
+details. To set properties for the whole table, omit <code>row</code> and <code>col</code>:</p><pre>  <span class='fu'>map_property</span>(<span class='no'>ht</span>, <span class='no'>fn</span>)</pre>
 
-<p>The <code>fn</code> argument is a <em>mapping function</em> which maps cell contents to property values.</p><ul>
-<li><p>To set property values in "stripes" by rows or by columns, use <code><a href='by_rows.html'>by_rows()</a></code> and <code><a href='by_rows.html'>by_cols()</a></code>.</p></li>
+<p>The <code>fn</code> argument is a <em>mapping function</em> which maps cell contents to
+property values.</p><ul>
+<li><p>To set property values in "stripes" by rows or by columns, use <code><a href='by_rows.html'>by_rows()</a></code>
+and <code><a href='by_rows.html'>by_cols()</a></code>.</p></li>
 <li><p>To set property values for cells with specific contents, use <code><a href='by_values.html'>by_values()</a></code>.</p></li>
 <li><p>To set property values for cells within a numeric range, use <code><a href='by_ranges.html'>by_ranges()</a></code>.</p></li>
-<li><p>To set property values for cells by quantiles, use <code><a href='by_quantiles.html'>by_quantiles()</a></code> or <code><a href='by_quantiles.html'>by_equal_groups()</a></code>.</p></li>
-<li><p>To set property values for cells that match a string or regular expression, use <code><a href='by_regex.html'>by_regex()</a></code>.</p></li>
+<li><p>To set property values for cells by quantiles, use <code><a href='by_quantiles.html'>by_quantiles()</a></code> or
+<code><a href='by_quantiles.html'>by_equal_groups()</a></code>.</p></li>
+<li><p>To set property values for cells that match a string or regular expression,
+use <code><a href='by_regex.html'>by_regex()</a></code>.</p></li>
 <li><p>To map numeric values to a colorspace, use <code><a href='by_colorspace.html'>by_colorspace()</a></code>.</p></li>
 <li><p>For a more general solution, use <code><a href='by_function.html'>by_function()</a></code> or <code><a href='by_cases.html'>by_cases()</a></code>.</p></li>
 </ul>
+
+    </div>
+
+
 
     <h2 class="hasAnchor" id="caveat"><a class="anchor" href="#caveat"></a>Caveat</h2>
 
     
 
 
-<p>Most functions convert the huxtable to a matrix using <code><a href='https://rdrr.io/r/base/matrix.html'>as.matrix()</a></code>. This can have
-unexpected results if you mix character and numeric data. See the example.</p>
+<p>Most functions convert the huxtable to a matrix using <code><a href='https://rdrr.io/r/base/matrix.html'>as.matrix()</a></code>. This can
+have unexpected results if you mix character and numeric data. See the
+example.</p>
     <h2 class="hasAnchor" id="technical-details"><a class="anchor" href="#technical-details"></a>Technical details</h2>
 
     
 
 
-<p><code>fn</code> must be a function taking four arguments: the (entire) original huxtable <code>ht</code>, a numeric
-vector of <code>rows</code>, a numeric vector of <code>cols</code>, and the <code>current</code> property values for <code>ht[rows, cols]</code>, as a matrix. It should return the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
-<p>Here's an example. Suppose we want to highlight cells
-of a correlation matrix with low p values:</p><pre>  requireNamespace("psych")
-  data(attitude)
-  att_corr &amp;lt;- psych::corr.test(attitude)
-  # att_corr has components r (correlations) and p (p values)
-
-  corr_hux &amp;lt;- as_hux(att_corr$r)
-  by_p_value &amp;lt;- function (ht, rows, cols, current) {
-     result &amp;lt;- current
-     pvals &amp;lt;- att_corr$p[rows, cols]
-     result[pvals &amp;lt; 0.01] &amp;lt;- "red"
-     result[pvals &amp;lt; 0.05] &amp;lt;- "orange"
-     result
-  }
-</pre>
-
+<p><code>fn</code> takes four arguments: the entire original huxtable
+<code>ht</code>, a numeric vector of <code>rows</code>, a numeric vector of <code>cols</code>, and the
+<code>current</code> property values for <code>ht[rows, cols]</code>, as a matrix. It should return
+the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"OK"</span>, <span class='st'>"Warning"</span>, <span class='st'>"Error"</span>))
+    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>Condition</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"OK"</span>, <span class='st'>"Warning"</span>, <span class='st'>"Error"</span>))
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='by_values.html'>by_values</a></span>(
         <span class='kw'>OK</span>      <span class='kw'>=</span> <span class='st'>"green"</span>,
         <span class='kw'>Warning</span> <span class='kw'>=</span> <span class='st'>"orange"</span>,
         <span class='kw'>Error</span>   <span class='kw'>=</span> <span class='st'>"red"</span>
       ))
-<span class='no'>ht</span></div><div class='output co'>#&gt;                                  <span style='color: #00BB00;'>OK            </span><span>  
+<span class='no'>ht</span></div><div class='output co'>#&gt;                                  Condition       
+#&gt;                                  <span style='color: #00BB00;'>OK            </span><span>  
 #&gt;                                  </span><span style='color: #BBBB00;'>Warning       </span><span>  
 #&gt;                                  </span><span style='color: #BB0000;'>Error         </span><span>  
 #&gt; 
-#&gt; Column names: c("OK", "Warning", "Error")</div><div class='input'>
+#&gt; Column names: Condition</div><div class='input'>
 <span class='co'># Leaving NA values alone:</span>
 <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='by_values.html'>by_values</a></span>(
-      <span class='st'>"OK"</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;                                  </span><span style='color: #0000BB;'>OK            </span><span>  
+      <span class='st'>"OK"</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;                                  Condition       
+#&gt;                                  </span><span style='color: #0000BB;'>OK            </span><span>  
 #&gt;                                  </span><span style='color: #BBBB00;'>Warning       </span><span>  
 #&gt;                                  </span><span style='color: #BB0000;'>Error         </span><span>  
 #&gt; 
-#&gt; Column names: c("OK", "Warning", "Error")</div><div class='input'>
+#&gt; Column names: Condition</div><div class='input'>
 <span class='co'># Resetting values:</span>
 <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='by_values.html'>by_values</a></span>(
-      <span class='st'>"OK"</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;                                  </span><span style='color: #0000BB;'>OK            </span><span>  
+      <span class='st'>"OK"</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='fl'>NA</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;                                  Condition       
+#&gt;                                  </span><span style='color: #0000BB;'>OK            </span><span>  
 #&gt;                                  Warning         
 #&gt;                                  Error           
 #&gt; 
-#&gt; Column names: c("OK", "Warning", "Error")</div><div class='input'>
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>5</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>5</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>5</span>))
+#&gt; Column names: Condition</div><div class='input'>
+<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>15</span>), <span class='fl'>5</span>, <span class='fl'>3</span>))
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>, <span class='fu'><a href='by_ranges.html'>by_ranges</a></span>(
         <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>),
         <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"blue"</span>, <span class='st'>"yellow"</span>, <span class='st'>"red"</span>)
@@ -236,20 +254,14 @@ of a correlation matrix with low p values:</p><pre>  requireNamespace("psych")
 #&gt;                             </span><span style='background-color: #BBBB00;'>-0.691</span><span>   </span><span style='background-color: #BBBB00;'>-0.209</span><span>   </span><span style='background-color: #BB0000;'> 2.13 </span><span>  
 #&gt;                             </span><span style='background-color: #BBBB00;'>-0.559</span><span>   </span><span style='background-color: #0000BB;'>-1.4  </span><span>   </span><span style='background-color: #BBBB00;'> 0.425</span><span>  
 #&gt; 
-#&gt; Column names: c(-1.05673686699317, -0.795541429547809, -1.75627542817088,
-#&gt; -0.690537896821751, , c(-0.536663326497313, 0.227127132728239,
-#&gt; 0.97845492024324, -0.208882651351827, , c(0.258537287908512,
-#&gt; -0.441799452911353, 0.56859986121534, 2.12685045903409,</div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
+#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
       <span class='fu'><a href='by_quantiles.html'>by_equal_groups</a></span>(<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"green"</span>)))</div><div class='output co'>#&gt;                             </span><span style='background-color: #BB0000;'>-1.06 </span><span>   </span><span style='background-color: #BB0000;'>-0.537</span><span>   </span><span style='background-color: #00BB00;'> 0.259</span><span>  
 #&gt;                             </span><span style='background-color: #BB0000;'>-0.796</span><span>   </span><span style='background-color: #00BB00;'> 0.227</span><span>   </span><span style='background-color: #00BB00;'>-0.442</span><span>  
 #&gt;                             </span><span style='background-color: #BB0000;'>-1.76 </span><span>   </span><span style='background-color: #00BB00;'> 0.978</span><span>   </span><span style='background-color: #00BB00;'> 0.569</span><span>  
 #&gt;                             </span><span style='background-color: #BB0000;'>-0.691</span><span>   </span><span style='background-color: #00BB00;'>-0.209</span><span>   </span><span style='background-color: #00BB00;'> 2.13 </span><span>  
 #&gt;                             </span><span style='background-color: #BB0000;'>-0.559</span><span>   </span><span style='background-color: #BB0000;'>-1.4  </span><span>   </span><span style='background-color: #00BB00;'> 0.425</span><span>  
 #&gt; 
-#&gt; Column names: c(-1.05673686699317, -0.795541429547809, -1.75627542817088,
-#&gt; -0.690537896821751, , c(-0.536663326497313, 0.227127132728239,
-#&gt; 0.97845492024324, -0.208882651351827, , c(0.258537287908512,
-#&gt; -0.441799452911353, 0.56859986121534, 2.12685045903409,</div><div class='input'>
+#&gt; Column names: V1, V2, V3</div><div class='input'>
 <span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(
         <span class='kw'>Coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3.5</span>, <span class='fl'>2.4</span>, <span class='fl'>1.3</span>),
         <span class='kw'>Pval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.04</span>, <span class='fl'>0.01</span>, <span class='fl'>0.07</span>),

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@
     </li>
     <li>
       <a href="../themes.html">Huxtable Themes</a>
+    </li>
+    <li>
+      <a href="../tutorials/index.html">External articles</a>
     </li>
   </ul>
 </li>
@@ -161,7 +164,8 @@ first three rows, <code>col = "salary"</code> to specify the column named "salar
 <li><p>Use <code>evens</code> to get only even rows/columns and <code>odds</code> for only odd ones.</p></li>
 <li><p>Use <code><a href='stripe.html'>stripe(n, from = m)</a></code> to get every nth row/column starting at row/column m.</p></li>
 <li><p>Use <code>dplyr</code> functions like <code>starts_with</code>, <code>contains</code> and <code>matches</code> to
-specify columns (but not rows). See <code><a href='https://tidyselect.r-lib.org/reference/language.html'>select_helpers</a></code> for a full list.</p></li>
+specify columns (but not rows). See <a href='https://tidyselect.r-lib.org/reference/language.html'>tidyselect::language</a>
+for a full list.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="the-gory-details"><a class="anchor" href="#the-gory-details"></a>The gory details</h2>
@@ -175,7 +179,8 @@ function.</p><ul>
 value and is set for all rows and columns.</p></li>
 <li><p>If there are four arguments:</p><ul>
 <li><p>If <code>row</code> or <code>col</code> is numeric, character or logical, it is evaluated just as in standard
-subsetting. <code>col</code> will be evaluated in a special context provided by <code><a href='https://tidyselect.r-lib.org/reference/poke_vars.html'>tidyselect::with_vars()</a></code>
+subsetting. <code>col</code> will be evaluated in a special context provided by
+<code><a href='https://tidyselect.r-lib.org/reference/poke_vars.html'>tidyselect::with_vars()</a></code>
 to allow the use of dplyr functions.</p></li>
 <li><p>If <code>row</code> or <code>col</code> is a function,it is called with two arguments: the huxtable,
 and the dimension number being evaluated, i.e. 1 for rows, 2 for columns. It must return a vector

@@ -4,7 +4,7 @@
 \alias{knit_print.data.frame}
 \title{Print data frames in knitr using huxtable}
 \usage{
-\method{knit_print}{data.frame}(x, options, ...)
+knit_print.data.frame(x, options, ...)
 }
 \arguments{
 \item{x}{A huxtable.}
