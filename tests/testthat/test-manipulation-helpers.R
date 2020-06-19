@@ -69,6 +69,19 @@ test_that("insert_column works with column names", {
 })
 
 
+test_that("bug: insert_row/column doesn't overwrite caption", {
+  ht <- hux("1")
+  caption(ht) <- "Caption"
+  ht <- insert_column(ht, "2")
+  expect_equivalent(caption(ht), "Caption")
+
+  ht <- hux("1")
+  caption(ht) <- "Caption"
+  ht <- insert_row(ht, "2")
+  expect_equivalent(caption(ht), "Caption")
+})
+
+
 test_that("add_rows and add_columns work", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(res <- add_rows(ht, 3:4))

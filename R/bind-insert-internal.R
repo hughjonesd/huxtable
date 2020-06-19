@@ -142,6 +142,8 @@ bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
 copy_properties_down <- function (ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
+  if (nrow(ht1) == 0L) return(ht2)
+
   for (a in c(copiable_cell_attrs())) {
     for (r in seq_len(nrow(ht2))) {
       attr(ht2, a)[r, ] <- attr(ht1, a)[nrow(ht1), ]
@@ -171,6 +173,8 @@ copy_properties_down <- function (ht1, ht2) {
 copy_properties_across <- function (ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
+  if (ncol(ht1) == 0L) return(ht2)
+
   for (a in c(copiable_cell_attrs())) {
     for (col in seq_len(ncol(ht2))) {
       attr(ht2, a)[, col] <- attr(ht1, a)[, ncol(ht1)]
@@ -179,6 +183,7 @@ copy_properties_across <- function (ht1, ht2) {
   for (a in huxtable_col_attrs) {
       attr(ht2, a)[] <- attr(ht1, a)[ncol(ht1)]
   }
+
 
   copy_across <- function (getter, setter) {
     ht2 <<- setter(ht2, getter(ht1)[, ncol(ht1)])

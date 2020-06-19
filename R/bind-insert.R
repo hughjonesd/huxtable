@@ -112,14 +112,12 @@ insert_column <- function (ht, ..., after = 0, fill = NULL, rowspan = 1,
     after <- match(after, colnames(ht))
   }
 
-  ht1 <- NULL
+  ht1 <- ht[, seq_len(after)]
   ht2 <- NULL
-  if (after > 0) {
-    ht1 <- ht[, seq(1, after, 1)]
-  }
   if (after < ncol(ht)) {
     ht2 <- ht[, seq(after + 1, ncol(ht), 1)]
   }
+
   to_insert <- c(...)
   if (length(to_insert) < nrow(ht)) {
     to_insert <- c(to_insert, rep(fill, nrow(ht) - length(to_insert)))
@@ -147,14 +145,15 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
           is.count(colspan)
         )
 
-  ht1 <- NULL
+
+
+
+  ht1 <- ht[seq_len(after), ]
   ht2 <- NULL
-  if (after > 0) {
-    ht1 <- ht[seq(1, after, 1), ]
-  }
   if (after < nrow(ht)) {
     ht2 <- ht[seq(after + 1, nrow(ht), 1), ]
   }
+
   to_insert <- c(...)
   if (length(to_insert) < ncol(ht)) {
     to_insert <- c(to_insert, rep(fill, ncol(ht) - length(to_insert)))

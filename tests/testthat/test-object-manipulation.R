@@ -140,4 +140,12 @@ test_that("cbind and rbind work with 0-dimension objects", {
   expect_equivalent(dim(res), c(2, 2))
   expect_silent(res <- rbind(mx_nrow0, ht))
   expect_equivalent(dim(res), c(2, 2))
+
+  vec <- 1:2
+
+  expect_silent(res <- rbind(ht_nrow0, vec))
+  expect_equivalent(dim(res), c(1, 2))
+
+  expect_silent(res <- cbind(ht_ncol0, vec))
+  expect_equivalent(dim(res), c(2, 1))
 })

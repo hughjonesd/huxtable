@@ -12,7 +12,14 @@ Note that huxtable attempts to follow semantic versioning
 (\url{https://semver.org}). Therefore, major version increments reflect
 backwards-incompatible API changes, not necessarily big changes.
 }
-\section{huxtable (development version)}{
+\section{Development version}{
+\itemize{
+\item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
+properties.
+}
+}
+
+\section{huxtable 5.0.0}{
 Huxtable 5.0.0 brings numerous changes. For a more user-friendly
 introduction, see
 \url{https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html}.
