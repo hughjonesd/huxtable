@@ -149,6 +149,7 @@ huxreg <- function (
       args$conf.int <- TRUE
       args$conf.level <- ci_level
     }
+
     do.call(tidy, args)
   }
 
@@ -158,7 +159,8 @@ huxreg <- function (
     cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
   }
 
-  tidied <- lapply(seq_along(models), if (is.null(ci_level)) my_tidy else tidy_with_ci)
+  tidy_fn <- if (is.null(ci_level)) my_tidy else tidy_with_ci
+  tidied <- lapply(seq_along(models), tidy_fn)
 
   # select coefficients
   my_coefs <- unique(unlist(lapply(tidied, function (x) {
@@ -175,8 +177,12 @@ huxreg <- function (
   coef_names <- names_or(my_coefs, my_coefs)
 
   # select appropriate rows
-  tidied <- lapply(tidied, merge, x = data.frame(term = my_coefs, stringsAsFactors = FALSE), all.x = TRUE, by = "term",
-        sort = FALSE)
+  tidied <- lapply(tidied, merge,
+          x     = data.frame(term = my_coefs, stringsAsFactors = FALSE),
+          all.x = TRUE,
+          by    = "term",
+          sort  = FALSE
+        )
   tidied <- lapply(tidied, function (x) {
     x$term[! is.na(match(x$term, my_coefs))] <- coef_names[match(x$term, my_coefs)]
     x <- x[match(unique(coef_names), x$term), ]
