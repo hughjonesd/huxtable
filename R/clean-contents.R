@@ -48,7 +48,7 @@ utf8_to_rtf <- function (mx) {
     code <- utf8_codes(x)
     x <- strsplit(x, split = "")[[1]]
     x[code > 127L & code <= 32767L]   <- code[code > 127L & code <= 32767L]
-    x[code > 32767L] <- code[code > 32767L] - 65535L
+    x[code > 32767L] <- code[code > 32767L] - 65536L
     x[code > 127L] <- paste0("\\u", x[code > 127L], "?")
     paste0(x, collapse = "")
   }
