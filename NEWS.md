@@ -5,6 +5,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 # Development version
 
 * Bugfix: `insert_row/column(..., after = 0)` was unsetting table properties.
+* Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
+  Thanks @kaigu1990.
 
 # huxtable 5.0.0
 
