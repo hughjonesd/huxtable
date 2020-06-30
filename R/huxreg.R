@@ -129,11 +129,15 @@ huxreg <- function (
   if (! missing(bold_signif)) assert_that(is.number(bold_signif))
   if (! missing(ci_level)) assert_that(is.number(ci_level))
   assert_that(is.null(stars) || is.numeric(stars))
+
   models <- list(...)
   if (inherits(models[[1]], "list")) models <- models[[1]]
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
+
   error_pos <- match.arg(error_pos)
-  if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) tidy_args <- rep(list(tidy_args), length(models))
+  if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) {
+    tidy_args <- rep(list(tidy_args), length(models))
+  }
 
   # create list of tidy data frames, possibly with confidence intervals
   my_tidy <- function (n, ci_level = NULL) {
@@ -147,11 +151,13 @@ huxreg <- function (
     }
     do.call(tidy, args)
   }
+
   tidy_with_ci <- function (n) {
     if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
     tidied <- my_tidy(n) # should return "estimate" and "std.error"
     cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
   }
+
   tidied <- lapply(seq_along(models), if (is.null(ci_level)) my_tidy else tidy_with_ci)
 
   # select coefficients
@@ -177,27 +183,29 @@ huxreg <- function (
   })
   coef_names <- unique(coef_names)
 
-  # add stars to estimates
+  # add stars to estimates ----
   if (! is.null(stars)) {
     names(stars) <- paste0(" ", names(stars))
     stars <- sort(stars)
     cutpoints <- c(0, stars, 1)
     symbols   <- c(names(stars), "")
+
     tidied <- lapply(tidied, function (x) {
+      x$estimate_star <- x$estimate
       if (is.null(x$p.value)) {
         warning("tidy() does not return p values for models of class ", class(x)[1],
               "; significance stars not printed.")
         return (x)
       }
-      x$estimate[ !is.na(x$estimate) ] <- with (x[! is.na(x$estimate), ],
-              paste0(estimate,
-              symnum(as.numeric(p.value), cutpoints = cutpoints, symbols = symbols, na = ""))
+      x$estimate_star[! is.na(x$estimate)] <- with(x[! is.na(x$estimate), ],
+              paste0(estimate, symnum(as.numeric(p.value), cutpoints = cutpoints,
+                symbols = symbols, na = ""))
             )
       x
     })
   }
 
-  # create error cells
+  # create error cells ----
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- glue::glue_data(.x = x, error_format)
     x$error_cell[is.na(x$estimate)] <- ""
@@ -205,16 +213,16 @@ huxreg <- function (
     x
   })
 
-  # cbind tidy data into a single data frame
+  # cbind tidy data into a single data frame ----
   coef_col <- switch(error_pos,
     same  = paste,
     below = interleave,
     right = cbind
   )
-  cols <- lapply(tidied, function (mod) coef_col(mod$estimate, mod$error_cell))
+  cols <- lapply(tidied, function (mod) coef_col(mod$estimate_star, mod$error_cell))
   cols <- Reduce(cbind, cols)
 
-  # make the data frame a huxtable
+  # make the data frame a huxtable ----
   coef_hux <- huxtable(cols, add_colnames = FALSE)
   number_format(coef_hux) <- number_format
   if (! is.null(bold_signif)) {
@@ -228,7 +236,7 @@ huxreg <- function (
     bold(coef_hux) <- bold_cols
   }
 
-  # create list of summary statistics
+  # create list of summary statistics ----
   all_sumstats <- lapply(models, function(m) {
     bg <- try(glance(m), silent = TRUE)
     bg <- if (inherits(bg, "try-error")) {
@@ -245,7 +253,7 @@ huxreg <- function (
     x
   })
 
-  # select summary statistics and cbind into a single data frame
+  # select summary statistics and cbind into a single data frame ----
   stat_names <- unique(unlist(lapply(all_sumstats, function (x) x$stat)))
   if (! is.null(statistics)) {
     if (! all(statistics %in% stat_names)) warning("Unrecognized statistics: ",
@@ -260,7 +268,7 @@ huxreg <- function (
   sumstats <- Reduce(cbind, sumstats)
   ss_classes <- Reduce(cbind, ss_classes)
 
-  # create huxtable of summary statistics
+  # create huxtable of summary statistics ----
   sumstats <- huxtable(sumstats, add_colnames = FALSE)
   number_format(sumstats) <- number_format
   number_format(sumstats)[ss_classes == "integer"] <- 0
@@ -272,14 +280,21 @@ huxreg <- function (
     }
     sumstats <- sumstats2
   }
-  coef_hux <- cbind(if (error_pos == "below") interleave(coef_names, "") else coef_names, coef_hux,
-        copy_cell_props = FALSE)
-  sumstats <- cbind(names_or(stat_names, stat_names), sumstats, copy_cell_props = FALSE)
 
-  # create single huxtable from coefficients and summary statistics
+  coef_name_cells <- if (error_pos == "below") {
+    interleave(coef_names, "")
+  } else {
+    coef_names
+  }
+  coef_hux <- cbind(coef_name_cells, coef_hux, copy_cell_props = FALSE)
+  stat_names <- names_or(stat_names, stat_names)
+  sumstats <- cbind(stat_names, sumstats, copy_cell_props = FALSE)
+
+  # create single huxtable from coefficients and summary statistics ----
   if (error_pos == "right") mod_col_headings <- interleave(mod_col_headings, "")
   mod_col_headings <- c("", mod_col_headings)
   result <- rbind(mod_col_headings, coef_hux, sumstats, copy_cell_props = FALSE)
+
   result <- set_header_rows(result, 1, TRUE)
   result <- set_header_cols(result, 1, TRUE)
   result <- set_bottom_border(result, final(), everywhere, outer_borders)
@@ -292,7 +307,7 @@ huxreg <- function (
   number_format(result)[, 1]  <- NA
   number_format(result)[1, ]  <- NA
 
-  # add a table note
+  # add a table note ----
   if (! is.null(note)) {
     stars <- if (is.null(stars)) "" else paste0(names(stars), " p < ", stars, collapse = "; ")
     note <- gsub("%stars%", stars, note)
