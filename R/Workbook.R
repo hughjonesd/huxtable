@@ -163,11 +163,14 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
           rows = workbook_rows)
   }
 
-  if (is.numeric(cw <- col_width(ht))) {
-    basic_width <- 20 * ncol(ht)
-    width_mult <- if (is.numeric(width(ht))) width(ht) else 0.5
-    openxlsx::setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * width_mult * basic_width)
-  }
+  cw <- col_width(ht)
+  if (! is.numeric(cw) || anyNA(cw)) cw <- rep(1/ncol(ht), ncol(ht))
+  basic_width <- 20 * ncol(ht)
+  w <- width(ht)
+  if (! is.numeric(w) || is.na(w)) w <- 0.5
+  openxlsx::setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * w *
+        basic_width)
+
   if (is.numeric(rh <- row_height(ht)) && length(rh) > 0) {
     table_height <- height(ht)
     if (is.na(table_height) || ! is.numeric(table_height)) table_height <- 1
