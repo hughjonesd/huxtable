@@ -9,6 +9,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
   Thanks @kaigu1990.
 * Bugfix: columns were being collapsed in as_Workbook. 
 
+## Other news:
+
+* Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.
+
 # huxtable 5.0.0
 
 Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction,
