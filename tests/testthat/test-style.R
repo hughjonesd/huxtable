@@ -9,7 +9,15 @@ test_that("Can use style_cells", {
   ht3 <- set_cell_properties(htxx, r, c, bold = TRUE, font = "times")
   expect_equivalent(bold(ht3)[2, 1], TRUE)
   expect_equivalent(font(ht3)[2, 1], "times")
+})
 
+test_that("Bugfix: style_cells works when huxtable not attached", {
+  on.exit(library(huxtable))
+  detach("package:huxtable")
+  h <- huxtable::huxtable(1)
+  expect_silent(
+    huxtable::style_cells(h, bold = TRUE)
+  )
 })
 
 
