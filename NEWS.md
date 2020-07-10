@@ -8,6 +8,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
   Thanks @kaigu1990.
 * Bugfix: columns were being collapsed in as_Workbook. 
+* Bugfix: `style_cells` didn't work unless huxtable was on the search path.
 
 # huxtable 5.0.0
 
