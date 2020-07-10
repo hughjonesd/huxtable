@@ -7,6 +7,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Bugfix: `insert_row/column(..., after = 0)` was unsetting table properties.
 * Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
   Thanks @kaigu1990.
+* Bugfix: columns were being collapsed in as_Workbook. 
 
 # huxtable 5.0.0
 

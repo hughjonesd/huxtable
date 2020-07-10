@@ -190,6 +190,10 @@ huxreg <- function (
   coef_names <- unique(coef_names)
 
   # add stars to estimates ----
+  tidied <- lapply(tidied, function (x) {
+    x$estimate_star <- x$estimate
+    x
+  })
   if (! is.null(stars)) {
     names(stars) <- paste0(" ", names(stars))
     stars <- sort(stars)
@@ -197,7 +201,6 @@ huxreg <- function (
     symbols   <- c(names(stars), "")
 
     tidied <- lapply(tidied, function (x) {
-      x$estimate_star <- x$estimate
       if (is.null(x$p.value)) {
         warning("tidy() does not return p values for models of class ", class(x)[1],
               "; significance stars not printed.")
@@ -211,11 +214,12 @@ huxreg <- function (
     })
   }
 
-  # create error cells ----
+  # create error cells and blank NAs ----
   tidied <- lapply(tidied, function (x) {
     x$error_cell <- glue::glue_data(.x = x, error_format)
-    x$error_cell[is.na(x$estimate)] <- ""
-    x$estimate[is.na(x$estimate)] <- ""
+    x$error_cell[is.na(x$estimate)]    <- ""
+    x$estimate_star[is.na(x$estimate)] <- ""
+    x$estimate[is.na(x$estimate)]      <- ""
     x
   })
 
