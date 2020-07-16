@@ -10,6 +10,10 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Bugfix: columns were being collapsed in as_Workbook. 
 * Bugfix: `style_cells` didn't work unless huxtable was on the search path.
 
+## Other news:
+
+* Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.
+
 # huxtable 5.0.0
 
 Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction,
