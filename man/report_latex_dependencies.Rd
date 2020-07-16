@@ -4,7 +4,7 @@
 \alias{report_latex_dependencies}
 \alias{check_latex_dependencies}
 \alias{install_latex_dependencies}
-\title{Tools for LaTeX dependencies}
+\title{Manage LaTeX dependencies for huxtables}
 \usage{
 report_latex_dependencies(quiet = FALSE, as_string = FALSE)
 

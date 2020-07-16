@@ -4,7 +4,7 @@
 \alias{position}
 \alias{position<-}
 \alias{set_position}
-\title{Set the table's position with respect to surrounding content.}
+\title{Set the table's position with respect to surrounding content}
 \usage{
 position(ht)
 position(ht) <- value

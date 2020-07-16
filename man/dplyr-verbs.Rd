@@ -4,7 +4,7 @@
 \alias{mutate.huxtable}
 \alias{mutate}
 \alias{dplyr-verbs}
-\title{Dplyr verbs for huxtable}
+\title{Use dplyr verbs with huxtable objects}
 \usage{
 mutate.huxtable(.data, ..., copy_cell_props = TRUE)
 }

@@ -5,7 +5,7 @@
 NULL
 
 
-#' Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document.
+#' Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.

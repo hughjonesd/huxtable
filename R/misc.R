@@ -168,7 +168,7 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 }
 
 
-#' Default print method for huxtables
+#' Format and print huxtables using a default method
 #'
 #' By default huxtables are printed using [print_screen()]. In certain cases, for example
 #' in Sweave documents, it may be

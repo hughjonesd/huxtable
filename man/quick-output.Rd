@@ -9,7 +9,7 @@
 \alias{quick_pptx}
 \alias{quick_xlsx}
 \alias{quick_rtf}
-\title{Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document.}
+\title{Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document}
 \usage{
 quick_latex(
   ...,

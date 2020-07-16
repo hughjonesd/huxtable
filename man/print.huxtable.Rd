@@ -3,7 +3,7 @@
 \name{print.huxtable}
 \alias{print.huxtable}
 \alias{format.huxtable}
-\title{Default print method for huxtables}
+\title{Format and print huxtables using a default method}
 \usage{
 \method{print}{huxtable}(x, ...)
 

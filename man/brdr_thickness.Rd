@@ -2,7 +2,7 @@
 % Please edit documentation in R/brdr.R
 \name{brdr_thickness}
 \alias{brdr_thickness}
-\title{Get thickness of a \code{\link[=brdr]{brdr()}} object.}
+\title{Get thickness of a \code{\link[=brdr]{brdr()}} object}
 \usage{
 brdr_thickness(x)
 }
@@ -13,7 +13,7 @@ brdr_thickness(x)
 A number or numeric matrix.
 }
 \description{
-Get thickness of a \code{\link[=brdr]{brdr()}} object.
+Get thickness of a \code{\link[=brdr]{brdr()}} object
 }
 \examples{
 

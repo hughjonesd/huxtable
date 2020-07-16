@@ -4,7 +4,7 @@
 \alias{split-across-down}
 \alias{split_across}
 \alias{split_down}
-\title{Split a huxtable into multiple huxtables.}
+\title{Split a huxtable into multiple huxtables}
 \usage{
 split_across(ht, after, height, headers = TRUE)
 

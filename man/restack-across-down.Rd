@@ -4,7 +4,7 @@
 \alias{restack-across-down}
 \alias{restack_across}
 \alias{restack_down}
-\title{Restack huxtables across/down the page.}
+\title{Restack huxtables across/down the page}
 \usage{
 restack_across(
   ht,

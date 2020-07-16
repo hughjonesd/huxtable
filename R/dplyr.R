@@ -43,7 +43,7 @@ mutate_.huxtable <- function (.data, ..., .dots) {
   result
 }
 
-#' Dplyr verbs for huxtable
+#' Use dplyr verbs with huxtable objects
 #'
 #' Huxtable can be used with dplyr verbs [dplyr::select()], [dplyr::rename()],
 #' `dplyr::relocate()`, [dplyr::slice()], [dplyr::arrange()], [dplyr::mutate()]

@@ -49,7 +49,7 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 }
 
 
-#' Get thickness of a [brdr()] object.
+#' Get thickness of a [brdr()] object
 #'
 #' @param x A [brdr()] object.
 #'

@@ -1,5 +1,5 @@
 
-#' Set the table's position with respect to surrounding content.
+#' Set the table's position with respect to surrounding content
 #'
 #' Table position may be "left", "right" or "center". If you want text to
 #' wrap around the table, use "wrapleft" or "wrapright".

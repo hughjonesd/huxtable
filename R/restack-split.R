@@ -3,7 +3,7 @@
 NULL
 
 
-#' Restack huxtables across/down the page.
+#' Restack huxtables across/down the page
 #'
 #' * `restack_across()` splits a huxtable horizontally, then joins the parts
 #'   up side by side.
@@ -123,7 +123,7 @@ restack_down <- function (
 }
 
 
-#' Split a huxtable into multiple huxtables.
+#' Split a huxtable into multiple huxtables
 #'
 #' These functions split a huxtable horizontally or vertically, and
 #' return the new sub-tables in a list.
