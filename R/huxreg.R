@@ -325,6 +325,7 @@ huxreg <- function (
     result <- add_footnote(result, note, border = NULL)
     result <- set_wrap(result, final(), 1, TRUE)
     result <- set_align(result, final(), 1, "left")
+    result <- set_number_format(result, final(), 1, NA)
   }
 
   return(result)
