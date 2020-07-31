@@ -12,6 +12,7 @@ huxreg(
   align = ".",
   ci_level = NULL,
   tidy_args = NULL,
+  glance_args = NULL,
   stars = c(`***` = 0.001, `**` = 0.01, `*` = 0.05),
   bold_signif = NULL,
   borders = 0.4,
@@ -40,8 +41,12 @@ this character.}
 calculate confidence intervals.}
 
 \item{tidy_args}{List of arguments to pass to \code{\link[generics:tidy]{generics::tidy()}}.
-You can also pass a list of lists; if so, the nth element will be used for
-the nth column.}
+A list without names will be treated as a list of argument lists, one
+for each model.}
+
+\item{glance_args}{List of arguments to pass to \code{\link[generics:glance]{generics::glance()}}. A
+list without names will be treated as a list of argument lists, one for
+each model.}
 
 \item{stars}{Levels for p value stars. Names of \code{stars} are symbols to use.
 Set to \code{NULL} to not show stars.}

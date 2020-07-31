@@ -4,16 +4,23 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # Development version
 
+* New feature: `huxreg()` gains a `glance_args` argument to pass arguments to 
+    `glance()`.
 * Bugfix: `insert_row/column(..., after = 0)` was unsetting table properties.
 * Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
   Thanks @kaigu1990.
 * Bugfix: columns were being collapsed in as_Workbook. 
 * Bugfix: `style_cells` didn't work unless huxtable was on the search path.
 * Bugfix: number format was not set correctly in `huxreg()`'s `note`.
+* Bugfix: in `huxreg()`, `tidy_args` threw an error if the first argument to
+  `tidy()` was a named list.
+* Bugfix: `tidy_replace()` was broken.
+* Clearer error messages for `tidy_override()` when `extend = FALSE`.
 
 ## Other news:
 
 * Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.
+
 
 # huxtable 5.0.0
 
