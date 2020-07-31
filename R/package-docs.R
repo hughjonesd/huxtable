@@ -158,6 +158,11 @@ NULL
 #'
 #'   ```
 #'
+#' * I called `library(huxtable)` and now my `data.table` objects are getting
+#'   printed!
+#'
+#'   Set `options(huxtable.knit_print_df = FALSE)`.
+#'
 #' * I have another problem.
 #'
 #'   If you have a bug - i.e. a problem with the software - or have a feature

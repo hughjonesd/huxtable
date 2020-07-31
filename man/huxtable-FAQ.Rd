@@ -37,6 +37,10 @@ As of version 4.3.0, this is handled automatically for you. Just
 set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\\\@ref(tab:my-table-label).
 
 }
+\item I called \code{library(huxtable)} and now my \code{data.table} objects are getting
+printed!
+
+Set \code{options(huxtable.knit_print_df = FALSE)}.
 \item I have another problem.
 
 If you have a bug - i.e. a problem with the software - or have a feature

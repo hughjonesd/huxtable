@@ -15,7 +15,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 * Bugfix: in `huxreg()`, `tidy_args` threw an error if the first argument to
   `tidy()` was a named list.
 * Bugfix: `tidy_replace()` was broken.
-* Clearer error messages for `tidy_override()` when `extend = FALSE`.
+* Clearer error messages for `tidy_override()` when `extend = FALSE`. In future,
+  `extend` will probably default to `TRUE`.
 
 ## Other news:
 

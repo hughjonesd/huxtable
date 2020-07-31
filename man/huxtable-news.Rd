@@ -28,6 +28,7 @@ path.
 argument to \code{tidy()} was a named list.
 \item Bugfix: \code{tidy_replace()} was broken.
 \item Clearer error messages for \code{tidy_override()} when \code{extend = FALSE}.
+In future, \code{extend} will probably default to \code{TRUE}.
 }
 \subsection{Other news:}{
 \itemize{
