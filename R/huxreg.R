@@ -27,8 +27,8 @@ generics::glance
 #' @param ci_level Confidence level for intervals. Set to `NULL` to not
 #'   calculate confidence intervals.
 #' @param tidy_args List of arguments to pass to [generics::tidy()].
-#'   You can also pass a list of lists; if so, the nth element will be used for
-#'   the nth column.
+#'   A list without names will be treated as a list of lists of arguments, one
+#'   for each column.
 #' @param stars Levels for p value stars. Names of `stars` are symbols to use.
 #'   Set to `NULL` to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be
@@ -135,7 +135,8 @@ huxreg <- function (
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
 
   error_pos <- match.arg(error_pos)
-  if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) {
+
+  if (! is.null(tidy_args) && ! is.null(names(tidy_args))) {
     tidy_args <- rep(list(tidy_args), length(models))
   }
 
@@ -154,9 +155,12 @@ huxreg <- function (
   }
 
   tidy_with_ci <- function (n) {
-    if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
-    tidied <- my_tidy(n) # should return "estimate" and "std.error"
-    cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
+    if (has_builtin_ci(models[[n]])) {
+      my_tidy(n, ci_level = ci_level)
+    } else {
+      tidied <- my_tidy(n) # should return "estimate" and "std.error"
+      cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
+    }
   }
 
   tidy_fn <- if (is.null(ci_level)) my_tidy else tidy_with_ci

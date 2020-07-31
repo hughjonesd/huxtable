@@ -188,6 +188,13 @@ test_that("can pass generics::tidy arguments to huxreg", {
 })
 
 
+test_that("bugfix: tidy_args works when argument list contains a list", {
+  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+  lm2 <-  lm1
+  expect_silent(huxreg(lm1, lm2, tidy_args = list(ignored = list())))
+})
+
+
 test_that("tidy_override", {
   skip_if_not_installed("broom")
 
