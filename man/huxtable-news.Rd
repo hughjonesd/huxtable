@@ -22,6 +22,8 @@ arguments, to write a huxtable into an Excel worksheet starting at a
 particular row or column.
 \item New feature: \code{huxreg()} gains a \code{glance_args} argument to pass
 arguments to \code{glance()}.
+\item New feature: \code{options(huxtable.long_minus = TRUE)} will try to use
+long minus signs before numbers. The default is \code{FALSE}.
 \item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
 properties.
 \item Bugfix: unicode characters above 32767 were incorrectly represented

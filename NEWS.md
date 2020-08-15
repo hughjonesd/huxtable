@@ -12,6 +12,8 @@ version number is increased whenever there are backwards-incompatible API change
   write a huxtable into an Excel worksheet starting at a particular row or column.
 * New feature: `huxreg()` gains a `glance_args` argument to pass arguments to 
   `glance()`.
+* New feature: `options(huxtable.long_minus = TRUE)` will try to use long
+  minus signs before numbers. The default is `FALSE`.
 * Bugfix: `insert_row/column(..., after = 0)` was unsetting table properties.
 * Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
   Thanks @kaigu1990.

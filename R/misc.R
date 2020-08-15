@@ -64,6 +64,9 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
     result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
     result <- gsub("\n", " \\newline ", result, fixed = TRUE)
     result <- gsub("$", "\\$", result, fixed = TRUE)
+    if (getOption("huxtable.long_minus", FALSE)) {
+      result <- gsub("\\$-\\$", "$-$", result, fixed = TRUE)
+    }
     result <- gsub(">", "$>$", result, fixed = TRUE)
     result <- gsub("<", "$<$", result, fixed = TRUE)
     result <- gsub("|", "$|$", result, fixed = TRUE)
