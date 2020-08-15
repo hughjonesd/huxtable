@@ -28,7 +28,7 @@ as_Workbook(ht, ...)
 
 \item{write_caption}{If \code{TRUE}, print any caption in the row above or below the table.}
 
-\item{start_row, }{start_col Number. Write data starting at the given row and column.}
+\item{start_row, start_col}{Number. Write data starting at the given row and column.}
 }
 \value{
 An object of class \code{Workbook}.

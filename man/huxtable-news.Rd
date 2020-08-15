@@ -8,9 +8,9 @@
 This help page simply gives the contents of NEWS.md.
 }
 \details{
-Note that huxtable attempts to follow semantic versioning
-(\url{https://semver.org}). Therefore, major version increments reflect
-backwards-incompatible API changes, not necessarily big changes.
+Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
+Therefore, the major version number is increased whenever there are
+backwards-incompatible API changes.
 }
 \section{Development version}{
 \itemize{

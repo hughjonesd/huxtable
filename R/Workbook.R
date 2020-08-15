@@ -12,7 +12,7 @@ NULL
 #' @param Workbook An existing `Workbook` object. By default, a new workbook will be created.
 #' @param sheet Name for the worksheet where the huxtable will be created.
 #' @param write_caption If `TRUE`, print any caption in the row above or below the table.
-#' @param start_row, start_col Number. Write data starting at the given row and column.
+#' @param start_row,start_col Number. Write data starting at the given row and column.
 #' @param ... Not used.
 #'
 #' @details
