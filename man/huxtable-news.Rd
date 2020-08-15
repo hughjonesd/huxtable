@@ -17,6 +17,8 @@ backwards-incompatible API changes.
 \item \code{as_Workbook()} gains \code{start_row} and \code{start_col} arguments, to
 write a huxtable into an Excel worksheet starting at a particular
 row or column.
+\item New feature: \code{huxreg()} gains a \code{glance_args} argument to pass
+arguments to \code{glance()}.
 \item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
 properties.
 \item Bugfix: unicode characters above 32767 were incorrectly represented
@@ -25,6 +27,11 @@ in RTF. Thanks @kaigu1990.
 \item Bugfix: \code{style_cells} didn’t work unless huxtable was on the search
 path.
 \item Bugfix: number format was not set correctly in \code{huxreg()}’s \code{note}.
+\item Bugfix: in \code{huxreg()}, \code{tidy_args} threw an error if the first
+argument to \code{tidy()} was a named list.
+\item Bugfix: \code{tidy_replace()} was broken.
+\item Clearer error messages for \code{tidy_override()} when \code{extend = FALSE}.
+In future, \code{extend} will probably default to \code{TRUE}.
 }
 \subsection{Other news:}{
 \itemize{

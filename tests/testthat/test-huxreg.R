@@ -3,14 +3,10 @@ skip_if_not_installed("broom")
 
 
 test_that("has_builtin_ci works", {
-  skip_if_not_installed("nlme")
-
   lm1 <- lm(Sepal.Width ~ Sepal.Length, iris)
   expect_true(huxtable:::has_builtin_ci(lm1))
-  library(nlme)
-  data(Orthodont, package = "nlme")
-  fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~ 1, method = "ML")
-  expect_false(huxtable:::has_builtin_ci(fm1))
+  aov1 <- stats::aov(Sepal.Width ~ Sepal.Length, iris)
+  expect_false(huxtable:::has_builtin_ci(aov1))
 })
 
 
@@ -185,6 +181,21 @@ test_that("can pass generics::tidy arguments to huxreg", {
   expect_silent(huxreg(glm1, tidy_args = list(exponentiate = TRUE), statistics = "nobs"))
   expect_silent(huxreg(lm1, glm1, tidy_args = list(list(), list(exponentiate = TRUE)), statistics = "nobs"))
   expect_silent(huxreg(lm1, glm1, tidy_args = list(exponentiate = FALSE), statistics = "nobs"))
+})
+
+
+test_that("bugfix: tidy_args works when argument list contains a list", {
+  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+  lm2 <-  lm1
+  expect_silent(huxreg(lm1, lm2, tidy_args = list(ignored = list())))
+})
+
+
+test_that("can pass generics::glance arguments to huxreg", {
+  skip_if_not_installed("AER")
+  iv1 <- AER::ivreg(Sepal.Width ~ Sepal.Length | Petal.Length, data = iris)
+  expect_silent(hr <- huxreg(iv1, glance_args = list(diagnostics = TRUE),
+        statistics = "statistic.Sargan"))
 })
 
 

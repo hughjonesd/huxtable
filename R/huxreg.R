@@ -27,8 +27,11 @@ generics::glance
 #' @param ci_level Confidence level for intervals. Set to `NULL` to not
 #'   calculate confidence intervals.
 #' @param tidy_args List of arguments to pass to [generics::tidy()].
-#'   You can also pass a list of lists; if so, the nth element will be used for
-#'   the nth column.
+#'   A list without names will be treated as a list of argument lists, one
+#'   for each model.
+#' @param glance_args List of arguments to pass to [generics::glance()]. A
+#'   list without names will be treated as a list of argument lists, one for
+#'   each model.
 #' @param stars Levels for p value stars. Names of `stars` are symbols to use.
 #'   Set to `NULL` to not show stars.
 #' @param bold_signif Where p values are below this number, cells will be
@@ -110,6 +113,7 @@ huxreg <- function (
         align           = ".",
         ci_level        = NULL,
         tidy_args       = NULL,
+        glance_args     = NULL,
         stars           = c("***" = 0.001, "**" = 0.01, "*" = 0.05),
         bold_signif     = NULL,
         borders         = 0.4,
@@ -135,7 +139,8 @@ huxreg <- function (
   mod_col_headings <- names_or(models, paste0("(", seq_along(models), ")"))
 
   error_pos <- match.arg(error_pos)
-  if (! is.null(tidy_args) && ! is.list(tidy_args[[1]])) {
+
+  if (! is.null(tidy_args) && ! is.null(names(tidy_args))) {
     tidy_args <- rep(list(tidy_args), length(models))
   }
 
@@ -154,9 +159,12 @@ huxreg <- function (
   }
 
   tidy_with_ci <- function (n) {
-    if (has_builtin_ci(models[[n]])) return(my_tidy(n, ci_level = ci_level))
-    tidied <- my_tidy(n) # should return "estimate" and "std.error"
-    cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
+    if (has_builtin_ci(models[[n]])) {
+      my_tidy(n, ci_level = ci_level)
+    } else {
+      tidied <- my_tidy(n) # should return "estimate" and "std.error"
+      cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
+    }
   }
 
   tidy_fn <- if (is.null(ci_level)) my_tidy else tidy_with_ci
@@ -246,11 +254,24 @@ huxreg <- function (
     bold(coef_hux) <- bold_cols
   }
 
+
+
   # create list of summary statistics ----
-  all_sumstats <- lapply(models, function(m) {
-    bg <- try(glance(m), silent = TRUE)
+
+  if (! is.null(glance_args) && ! is.null(names(glance_args))) {
+    glance_args <- rep(list(glance_args), length(models))
+  }
+  if (is.null(glance_args)) {
+    glance_args <- rep(list(list()), length(models))
+  }
+
+  all_sumstats <- lapply(seq_along(models), function(s) {
+    m <- models[[s]]
+    ga <- glance_args[[s]]
+    ga$x <- m
+    bg <- try(do.call(generics::glance, ga), silent = TRUE)
     bg <- if (inherits(bg, "try-error")) {
-      warning(sprintf("Error calling `glance` on object of class %s:",
+      warning(sprintf("Error calling `glance` on model %s, of class `%s`:", s,
             class(m)[1]))
       warning(bg)
       NULL
@@ -408,7 +429,7 @@ tidy_override <- function (x, ..., glance = list(), extend = FALSE) {
   structure(list(
           model = x,
           tidy_cols = tidy_cols,
-          glance_elems = glance,
+          glance_elems = as.list(glance),
           extend = extend
         ),
         class = "tidy_override")
@@ -423,7 +444,7 @@ tidy_replace <- function (x, tidied, glance = list()) {
   structure(list(
           model = x,
           tidy_data = tidied,
-          glance_elems = glance(),
+          glance_elems = as.list(glance),
           extend = FALSE
         ),
         class = "tidy_override")
@@ -439,7 +460,8 @@ tidy.tidy_override <- function (x, ...) {
   if (inherits(tidied, "try-error")) tidied <- data.frame()[seq_along(x$tidy_cols[[1]]), ]
   for (cn in names(x$tidy_cols)) {
     if (! x$extend && ! cn %in% names(tidied)) stop(glue::glue(
-          "Column \"{cn}\" not found in results of `tidy()`"))
+          "Column \"{cn}\" not found in results of `tidy()` on original object.\n",
+          "Did you misspell a column name, or forget to add `extend = TRUE`?"))
     tidied[[cn]] <- x$tidy_cols[[cn]]
   }
 
@@ -455,7 +477,8 @@ glance.tidy_override <- function (x, ...) {
 
   for (elem in names(x$glance_elems)) {
     if (! x$extend && ! elem %in% names(sumstats)) stop(glue::glue(
-          "Element \"{elem}\" not found in results of `glance()`"))
+          "Element \"{elem}\" not found in results of `glance()` on original object.\n",
+          "Did you misspell a column name, or forget to add `extend = TRUE`?"))
     sumstats[[elem]] <- x$glance_elems[[elem]]
   }
 

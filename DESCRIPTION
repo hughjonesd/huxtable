@@ -30,6 +30,7 @@ Imports:
     utils,
     commonmark
 Suggests:
+    AER,
     bookdown,
     broom (>= 0.5.1),
     broom.mixed,

@@ -9,12 +9,21 @@ A FAQ of common issues.
 }
 \details{
 \itemize{
-\item LaTeX output isn't working.
+\item I get a LaTeX error when I try to compile my document!
 
 Have you installed the LaTeX packages you need? LaTeX packages are different
 from R packages. Run \code{\link[=check_latex_dependencies]{check_latex_dependencies()}} to find out if you are
 missing any. Then install them using your system's LaTeX management
 application. Or you can try \code{\link[=install_latex_dependencies]{install_latex_dependencies()}}.
+
+In some rmarkdown and LaTeX formats, you also need to add LaTeX dependencies
+manually. Run \code{\link[=report_latex_dependencies]{report_latex_dependencies()}} and add
+the output to your LaTeX preamble, or in Rmarkdown formats, add it to the
+rmarkdown header like this:\preformatted{header-includes:
+  - \\usepackage\{array\}
+  - \\usepackage\{caption\}
+  ... et cetera
+}
 \item Numbers in my cells look weird!
 
 You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options
@@ -37,6 +46,10 @@ As of version 4.3.0, this is handled automatically for you. Just
 set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\\\@ref(tab:my-table-label).
 
 }
+\item I called \code{library(huxtable)} and now my \code{data.table} objects are getting
+printed!
+
+Set \code{options(huxtable.knit_print_df = FALSE)}.
 \item I have another problem.
 
 If you have a bug - i.e. a problem with the software - or have a feature
