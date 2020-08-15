@@ -1,6 +1,7 @@
 
-Note that huxtable attempts to follow semantic versioning (https://semver.org). Therefore, major 
-version increments reflect backwards-incompatible API changes, not necessarily big changes.
+Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
+version number is increased whenever there are backwards-incompatible API changes.
+
 
 # Development version
 
@@ -16,6 +17,7 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 ## Other news:
 
 * Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.
+
 
 # huxtable 5.0.0
 
