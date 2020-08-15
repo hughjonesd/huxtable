@@ -215,6 +215,12 @@ test_that("HTML gives warnings for double borders not wide enough", {
 })
 
 
+test_that("Markdown in rtf", {
+  ht <- hux("Some *italic*, **bold**, ~strikethrough~, [a link](https://google.com)")
+  expect_silent(to_rtf(ht))
+})
+
+
 test_that("Chinese characters are not repeated", {
   skip_on_appveyor()
   skip_on_os("windows")

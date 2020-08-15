@@ -20,6 +20,7 @@ URL: https://hughjonesd.github.io/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
+    commonmark,
     generics,
     glue,
     memoise,
@@ -28,7 +29,7 @@ Imports:
     stringr (>= 1.2.0),
     tidyselect,
     utils,
-    commonmark
+    xml2
 Suggests:
     AER,
     bookdown,

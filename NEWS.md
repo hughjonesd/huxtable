@@ -5,8 +5,9 @@ version number is increased whenever there are backwards-incompatible API change
 
 # Development version
 
-* `as_flextable()` now exports markdown to Word, with the help of the optional
-  `ftExtra` package version 0.0.2 or higher. Thanks @atusy for adding this feature.
+* `as_flextable()` now exports markdown to Word, with the help of the optional 
+  `ftExtra` package version 0.0.2 or higher (thanks @atusy for adding this feature);
+  and to RTF.
 * `as_Workbook()` gains `start_row` and `start_col` arguments, to write a
   huxtable into an Excel worksheet starting at a particular row or column.
 * New feature: `huxreg()` gains a `glance_args` argument to pass arguments to 
