@@ -56,6 +56,16 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
   if (! colnames_to_header) ft <- flextable::delete_part(ft, "header")
+  if (any(markdown(x))) {
+    assert_package("as_flextable", "ftExtra")
+    md_cell_refs <- which(markdown(x), arr.ind = TRUE)
+    for (r in seq_len(nrow(md_cell_refs))) {
+      hr <- md_cell_refs[r, 1]
+      hc <- md_cell_refs[r, 2]
+      ft <- flextable::compose(ft, i = hr, j = hc,
+            value = flextable::as_paragraph(ftExtra::as_chunk_md(x[[hr, hc]])))
+    }
+  }
 
   rots <- list("0" = "lrtb", "90" = "btlr", "270" = "tbrl")
   dcells <- display_cells(x, all = FALSE)

@@ -14,6 +14,9 @@ backwards-incompatible API changes.
 }
 \section{Development version}{
 \itemize{
+\item \code{as_flextable()} now exports markdown to Word, with the help of the
+optional \code{ftExtra} package version 0.0.2 or higher. Thanks @atusy
+for adding this feature.
 \item \code{as_Workbook()} gains \code{start_row} and \code{start_col} arguments, to
 write a huxtable into an Excel worksheet starting at a particular
 row or column.

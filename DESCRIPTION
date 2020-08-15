@@ -39,6 +39,7 @@ Suggests:
     devtools,
     dplyr (>= 0.7.0),
     flextable (>= 0.5.5),
+    ftExtra (>= 0.0.2),
     ggplot2,
     httr,
     knitr,
