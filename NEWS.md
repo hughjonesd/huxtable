@@ -4,6 +4,8 @@ version increments reflect backwards-incompatible API changes, not necessarily b
 
 # Development version
 
+* `as_Workbook()` gains `start_row` and `start_col` arguments, to write a
+  huxtable into an Excel worksheet starting at a particular row or column.
 * Bugfix: `insert_row/column(..., after = 0)` was unsetting table properties.
 * Bugfix: unicode characters above 32767 were incorrectly represented in RTF.
   Thanks @kaigu1990.

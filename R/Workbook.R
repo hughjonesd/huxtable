@@ -12,6 +12,7 @@ NULL
 #' @param Workbook An existing `Workbook` object. By default, a new workbook will be created.
 #' @param sheet Name for the worksheet where the huxtable will be created.
 #' @param write_caption If `TRUE`, print any caption in the row above or below the table.
+#' @param start_row, start_col Number. Write data starting at the given row and column.
 #' @param ... Not used.
 #'
 #' @details
@@ -56,9 +57,17 @@ memo_env <- new.env()
 
 #' @export
 #' @rdname as_Workbook
-as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write_caption = TRUE, ...) {
+as_Workbook.huxtable <- function (
+        ht,
+        Workbook      = NULL,
+        sheet         = "Sheet 1",
+        write_caption = TRUE,
+        start_row     = 1,
+        start_col     = 1,
+        ...
+      ) {
   assert_package("as_Workbook", "openxlsx")
-  assert_that(is.string(sheet))
+  assert_that(is.string(sheet), is.count(start_row), is.count(start_col))
 
   if (! exists("memoised_createStyle", where = memo_env)) {
     memo_env$memoised_createStyle <- memoise::memoise(openxlsx::createStyle)
@@ -69,7 +78,7 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   cap <- caption(ht)
   cap_pos <- caption_pos(ht)
   top_cap <- write_caption && ! is.na(cap) && grepl("top", cap_pos)
-  cap_row <- if (top_cap) 1 else nrow(ht) + 1
+  cap_row <- if (top_cap) start_row else start_row + nrow(ht)
   if (write_caption && ! is.na(cap)) {
     openxlsx::writeData(wb, sheet, x = cap, startRow = cap_row)
     cap_style <- openxlsx::createStyle(halign = get_caption_hpos(ht))
@@ -90,18 +99,24 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   # we insert the cell.
   for (j in seq_len(ncol(contents))) {
     col_contents <- contents[[j]]
+    ws_col <- start_col - 1 + j
+
     for (i in seq_len(nr)) {
+      ws_row <- start_row - 1 + i
+      if (top_cap) ws_row <- ws_row + 1
+
       is_a_number_col <- is_a_number_mx[i:nr, j]
       if (all(is_a_number_col) || all(! is_a_number_col)) {
         insert <- col_contents[i:nr]
         if (all(is_a_number_col)) insert <- as.numeric(insert)
-        openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
+
+        openxlsx::writeData(wb, sheet, insert, startRow = ws_row, startCol = ws_col,
               colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none")
         break # to the next column
       } else {
         insert <- col_contents[i]
         if (is_a_number_col[1]) insert <- as.numeric(insert)
-        openxlsx::writeData(wb, sheet, insert, startRow = 1 * top_cap + i, startCol = j,
+        openxlsx::writeData(wb, sheet, insert, startRow = ws_row, startCol = ws_col,
             colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none")
       }
     }
@@ -113,9 +128,9 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
     drow <- dcell$display_row
     dcol <- dcell$display_col
 
-    workbook_rows <- seq(drow, dcell$end_row)
-    workbook_cols <- seq(dcol, dcell$end_col)
+    workbook_rows <- start_row - 1 + seq(drow, dcell$end_row)
     if (top_cap) workbook_rows <- workbook_rows + 1
+    workbook_cols <- start_col - 1 + seq(dcol, dcell$end_col)
 
     null_args <- list()
     null_args$tc <- text_color(ht)[drow, dcol]
@@ -168,14 +183,15 @@ as_Workbook.huxtable <- function (ht,  Workbook = NULL, sheet = "Sheet 1", write
   basic_width <- 20 * ncol(ht)
   w <- width(ht)
   if (! is.numeric(w) || is.na(w)) w <- 0.5
-  openxlsx::setColWidths(wb, sheet, cols = seq_len(ncol(ht)), widths = cw * w *
-        basic_width)
+  openxlsx::setColWidths(wb, sheet, cols = start_col - 1 + seq_len(ncol(ht)),
+        widths = cw * w * basic_width)
 
   if (is.numeric(rh <- row_height(ht)) && length(rh) > 0) {
     table_height <- height(ht)
     if (is.na(table_height) || ! is.numeric(table_height)) table_height <- 1
     basic_height <- 30 * nrow(ht)
-    openxlsx::setRowHeights(wb, sheet, rows = seq_len(nrow(ht)), heights = rh * basic_height * table_height)
+    openxlsx::setRowHeights(wb, sheet, rows = start_row - 1 + seq_len(nrow(ht)),
+          heights = rh * basic_height * table_height)
   }
 
   return(wb)

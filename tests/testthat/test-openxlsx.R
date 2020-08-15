@@ -76,6 +76,12 @@ test_that("Can add to an existing workbook", {
 })
 
 
+test_that("Can write with offset rows and columns", {
+  hx <- huxtable(a = 1:3, b = 4:6)
+  expect_silent(wb <- as_Workbook(hx, start_col = 3, start_row = 2))
+})
+
+
 test_that("Works for single-column huxtables with and without row names", {
   hx <- huxtable(1, 2, 3)
   wb <- openxlsx::createWorkbook()

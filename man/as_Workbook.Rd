@@ -7,7 +7,15 @@
 \usage{
 as_Workbook(ht, ...)
 
-\method{as_Workbook}{huxtable}(ht, Workbook = NULL, sheet = "Sheet 1", write_caption = TRUE, ...)
+\method{as_Workbook}{huxtable}(
+  ht,
+  Workbook = NULL,
+  sheet = "Sheet 1",
+  write_caption = TRUE,
+  start_row = 1,
+  start_col = 1,
+  ...
+)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -19,6 +27,8 @@ as_Workbook(ht, ...)
 \item{sheet}{Name for the worksheet where the huxtable will be created.}
 
 \item{write_caption}{If \code{TRUE}, print any caption in the row above or below the table.}
+
+\item{start_row, }{start_col Number. Write data starting at the given row and column.}
 }
 \value{
 An object of class \code{Workbook}.

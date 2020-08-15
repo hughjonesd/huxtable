@@ -14,6 +14,9 @@ backwards-incompatible API changes, not necessarily big changes.
 }
 \section{Development version}{
 \itemize{
+\item \code{as_Workbook()} gains \code{start_row} and \code{start_col} arguments, to
+write a huxtable into an Excel worksheet starting at a particular
+row or column.
 \item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
 properties.
 \item Bugfix: unicode characters above 32767 were incorrectly represented
