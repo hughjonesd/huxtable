@@ -24,6 +24,10 @@ rmarkdown header like this:\preformatted{header-includes:
   - \\usepackage\{caption\}
   ... et cetera
 }
+\item Huxtable isn't working in my Rmarkdown \code{beamer_presentation} slides.
+
+You may need to set the beamer "fragile" option, like this:\preformatted{# Slide title \{.fragile\}
+}
 \item Numbers in my cells look weird!
 
 You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options

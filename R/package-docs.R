@@ -135,6 +135,14 @@ NULL
 #'     ... et cetera
 #'   ```
 #'
+#' * Huxtable isn't working in my Rmarkdown `beamer_presentation` slides.
+#'
+#'   You may need to set the beamer "fragile" option, like this:
+#'
+#'   ```
+#'   # Slide title {.fragile}
+#'   ```
+#'
 #' * Numbers in my cells look weird!
 #'
 #'   You can change numeric formatting using [number_format()]. Base R options
