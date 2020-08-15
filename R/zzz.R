@@ -9,14 +9,16 @@
 
 .onLoad <- function(libname, pkgname) {
   set_default_option("huxtable.add_colnames", TRUE)
-  set_default_option("huxtable.print", print_screen)
-  set_default_option("huxtable.knit_print_df_theme", theme_plain)
+  set_default_option("huxtable.autoformat", TRUE)
   set_default_option("huxtable.autolabel", TRUE)
+  set_default_option("huxtable.bookdown", NULL)
   set_default_option("huxtable.color_screen",
         requireNamespace("crayon", quietly = TRUE))
-  set_default_option("huxtable.bookdown", NULL)
-  set_default_option("huxtable.autoformat", TRUE)
+  set_default_option("huxtable.knit_print_df_theme", theme_plain)
+  set_default_option("huxtable.print", print_screen)
   set_default_option("huxtable.latex_use_fontspec", FALSE)
+  set_default_option("huxtable.long_minus", FALSE)
+
   set_default_option("huxtable.autoformat_number_format", list(
           integer = 0,
           numeric = "%.3g",

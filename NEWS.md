@@ -182,7 +182,7 @@ For example, the following code now does what you probably want:
   ````
   Some iris species are shown in \@ref(tab:mytable):
   
-  ```{r mytable}
+  ```r
   as_hux(iris)
   ```
   ````

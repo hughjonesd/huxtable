@@ -98,6 +98,9 @@ NULL
 #'   header option. Note that [quick_pdf()] may use pdflatex. The default is
 #'   `FALSE`.
 #'
+#' * `options('huxtable.long_minus')`. If `TRUE`, prints long minus signs
+#'   for numbers. The default is `FALSE`.
+#'
 #' * `options('huxtable.autoformat_number_format')` and
 #'   `options('huxtable.autoformat_align')` are lists. The list names are base R
 #'   classes. [huxtable()] with `autoformat = TRUE` will set `number_format()` and
