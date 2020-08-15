@@ -101,6 +101,7 @@ format_numbers <- function (string, num_fmt, type) {
 
   long_minus <- switch(type,
           latex = "$-$",
+          excel = "-",
           "\u2212"
         )
 

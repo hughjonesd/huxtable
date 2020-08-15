@@ -139,15 +139,18 @@ as_Workbook.huxtable <- function (
     null_args$bgc <- background_color(ht)[drow, dcol]
     # can't assign NULL to list elements
     null_args <- lapply(null_args, function (x) if (is.na(x)) NULL else x)
+
     nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
-    format_zero <- format_numbers(0, nf)
+    format_zero <- format_numbers(0, nf, "excel")
     num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else
           if (is.numeric(contents[drow, dcol])) "NUMBER" else "GENERAL"
+
     borders <- get_all_borders(ht, drow, dcol) # list of numerics
     border_char <- names(borders)
     border_colors <- get_all_border_colors(ht, drow, dcol)
     border_colors <- unlist(border_colors[border_char])
     border_colors[is.na(border_colors)] <- getOption("openxlsx.borderColour", "black")
+
     border_styles <- get_all_border_styles(ht, drow, dcol)
     border_styles <- unlist(border_styles[border_char])
     border_styles[border_styles == "solid"] <- as.character(cut(
@@ -155,6 +158,7 @@ as_Workbook.huxtable <- function (
             c(-1, 0, 0.5, 1, 2, Inf),
             labels = c("none", "hair", "thin", "medium", "thick")
           ))
+
     va           <- valign(ht)[drow, dcol]
 
     style <- memo_env$memoised_createStyle(
