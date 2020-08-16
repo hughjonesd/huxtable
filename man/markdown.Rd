@@ -34,17 +34,18 @@ Cells where the markdown property is \code{TRUE} will be rendered as
 \href{https://commonmark.org/help/}{markdown}.
 }
 \details{
-Markdown is currently implemented for HTML, Word, RTF and LaTeX. There is
-basic support for on-screen display.
+Markdown is currently implemented for HTML, Word, Powerpoint, RTF and LaTeX.
+Word requires the \code{ftExtra} package. There is basic support for on-screen
+display.
 
-The following features are expected to work:
+The following features are intended to work:
 \itemize{
 \item bold and italic text
 \item strikethrough (write \verb{~text~} to strike through text)
 \item hyperlinks
 }
 
-Other features, such as lists, may not work in some formats. If
+Other features, such as lists, may not work in some formats.  If
 you try to use markdown tables, then seek psychiatric help.
 }
 \examples{

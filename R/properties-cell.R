@@ -246,16 +246,17 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' @templateVar default TRUE
 #'
 #' @details
-#' Markdown is currently implemented for HTML, Word, RTF and LaTeX. There is
-#' basic support for on-screen display.
+#' Markdown is currently implemented for HTML, Word, Powerpoint, RTF and LaTeX.
+#' Word requires the `ftExtra` package. There is basic support for on-screen
+#' display.
 #'
-#' The following features are expected to work:
+#' The following features are intended to work:
 #'
 #' * bold and italic text
 #' * strikethrough (write `~text~` to strike through text)
 #' * hyperlinks
 #'
-#' Other features, such as lists, may not work in some formats. If
+#' Other features, such as lists, may not work in some formats.  If
 #' you try to use markdown tables, then seek psychiatric help.
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
