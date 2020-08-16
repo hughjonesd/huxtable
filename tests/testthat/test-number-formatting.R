@@ -90,6 +90,29 @@ test_that("number_format works with various interesting cases", {
 })
 
 
+test_that("long_minus", {
+  oo <- options(huxtable.long_minus = TRUE)
+  on.exit(options(oo))
+
+  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "screen"),
+        "\u22121")
+  expect_equivalent(huxtable:::format_numbers("-1e8", "%.0e", type = "screen"),
+        "\u22121e+08")
+  expect_equivalent(huxtable:::format_numbers("-1e-8", "%.0e", type = "screen"),
+        "\u22121e\u221208")
+  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "latex"),
+        "$-$1")
+  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "excel"),
+        "-1")
+  expect_equivalent(huxtable:::format_numbers("-4 -5 -6", 0, type = "screen"),
+        "\u22124 \u22125 \u22126")
+
+  options(huxtable.long_minus = FALSE)
+  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "screen"),
+        "-1")
+})
+
+
 test_that("Decimal padding works", {
   expect_identical(
           huxtable:::decimal_pad(
