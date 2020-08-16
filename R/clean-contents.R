@@ -108,8 +108,9 @@ format_numbers <- function (string, num_fmt, type) {
   format_numeral <- function (str) {
     num <- as.numeric(str)
     result <- numeral_formatter(num_fmt)(num)
-    if (getOption("huxtable.long_minus", FALSE) && grepl("^-", result)) {
+    if (getOption("huxtable.long_minus", FALSE)) {
       result <- sub("^-", long_minus, result)
+      result <- sub("([eE])-", paste0("\\1", long_minus), result)
     }
     result
   }
