@@ -57,7 +57,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   ft <- flextable::flextable(cc)
   if (! colnames_to_header) ft <- flextable::delete_part(ft, "header")
   if (any(markdown(x))) {
-    assert_package("as_flextable", "ftExtra")
+    assert_package("as_flextable", "ftExtra", version = "0.0.2")
     md_cell_refs <- which(markdown(x), arr.ind = TRUE)
     for (r in seq_len(nrow(md_cell_refs))) {
       hr <- md_cell_refs[r, 1]
