@@ -246,9 +246,17 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' @templateVar default TRUE
 #'
 #' @details
-#' Markdown is currently implemented for HTML and LaTeX only. There is
-#' basic support for on-screen display. The only extension used is
-#' "strikethrough": write `~text~` to strike through text.
+#' Markdown is currently implemented for HTML, Word, RTF and LaTeX. There is
+#' basic support for on-screen display.
+#'
+#' The following features are expected to work:
+#'
+#' * bold and italic text
+#' * strikethrough (write `~text~` to strike through text)
+#' * hyperlinks
+#'
+#' Other features, such as lists, may not work in some formats. If
+#' you try to use markdown tables, then seek psychiatric help.
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
 #'
@@ -388,6 +396,8 @@ make_getter_setters("rotation", "cell",
 #' are useful shortcuts for common formatting functions.
 #'
 #' @family formatting functions
+#' @seealso `options("huxtable.long_minus")` in [huxtable-options] for pretty-printing
+#'   minus signs.
 #'
 #' @examples
 #' ht <- huxtable(
