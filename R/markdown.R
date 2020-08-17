@@ -99,6 +99,7 @@ process_xml.xml_node <- function (node, rtf) {
           "text"          = add(as.character(ch)),
           "softbreak"     = add("\n"),
           "link"          = {add(make_rtf_link(node)); rtf <- process_xml(ch, rtf); add("}}")},
+          "image"         = {add(make_rtf_picture(node)); rtf <- process_xml(ch, rtf)},
           # we're in a table line, so we never add \\par, even for <paragraph>
           {rtf <- process_xml(ch, rtf)}
         )
@@ -110,6 +111,13 @@ process_xml.xml_node <- function (node, rtf) {
 make_rtf_link <- function (node) {
   url <- xml2::xml_attr(node, "destination")
   paste0("{\\field{\\*\\fldinst HYPERLINK \"", url, "\"}{\\fldrslt \\ul ")
+}
+
+
+make_rtf_picture <- function (node) {
+  url <- xml2::xml_attr(node, "destination")
+  paste0("{\\field\\fldedit{\\*\\fldinst { INCLUDEPICTURE  \\\\d \"", url,
+         "\" \\* MERGEFORMATINET }}{\\fldrslt {  }}}")
 }
 
 
