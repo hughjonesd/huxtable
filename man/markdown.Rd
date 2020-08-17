@@ -41,12 +41,14 @@ display.
 The following features are intended to work:
 \itemize{
 \item bold and italic text
-\item strikethrough (write \verb{~text~} to strike through text)
+\item strikethrough (write \verb{~text~} to strike through text).
 \item hyperlinks
 }
 
-Other features, such as lists, may not work in some formats.  If
-you try to use markdown tables, then seek psychiatric help.
+Other features, such as lists and images, may not work in all formats. Note
+that Word export does not support strikethrough.
+
+If you try to use markdown tables, then seek psychiatric help.
 }
 \examples{
 

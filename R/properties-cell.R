@@ -253,11 +253,13 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' The following features are intended to work:
 #'
 #' * bold and italic text
-#' * strikethrough (write `~text~` to strike through text)
+#' * strikethrough (write `~text~` to strike through text).
 #' * hyperlinks
 #'
-#' Other features, such as lists, may not work in some formats.  If
-#' you try to use markdown tables, then seek psychiatric help.
+#' Other features, such as lists and images, may not work in all formats. Note
+#' that Word export does not support strikethrough.
+#'
+#' If you try to use markdown tables, then seek psychiatric help.
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
 #'
