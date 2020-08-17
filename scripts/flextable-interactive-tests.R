@@ -108,10 +108,10 @@ doc %<>% show_add(ft, 'Rotation: trying all rows')
 
 
 ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
-ht %<>% set_markdown_contents(1, 1, "*Italic*")
+ht %<>% set_markdown_contents(1, 1, "*Italic*, [a link](https://google.com)")
 ht %<>% set_markdown_contents(1, 2, "**Bold**, ***bold italic?***")
 ht %<>% set_markdown_contents(2, 1, "**Bold** and ~~strikethrough~~")
-ht %<>% set_markdown_contents(2, 2, "Words and^superscript^")
+ht %<>% set_markdown_contents(2, 2, "![Color screen](../docs/screen-color.png)")
 ft <- as_flextable(ht)
 doc %<>% show_add(ft, 'Markdown cell export')
 
