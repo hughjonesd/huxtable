@@ -57,7 +57,7 @@ test_that("to_md warns on unimplemented features", {
 test_that("to_md prints bold and italic", {
   short_strings <- c("bold", "both", "italic")
   long_strings <- strrep(toupper(short_strings), 40)
-  ht <- hux(a = short_strings, b = long_strings)
+  ht <- hux(a = short_strings, b = long_strings, add_colnames = FALSE)
   bold(ht)[1:2, 1:2] <- TRUE
   italic(ht)[2:3, 1:2] <- TRUE
   expect_silent(res <- to_md(ht))

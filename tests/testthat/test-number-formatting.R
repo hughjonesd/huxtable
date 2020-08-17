@@ -1,11 +1,11 @@
 
 setup({
-  oo <- options(huxtable.long_minus = FALSE)
+  oo_lm <<- options(huxtable.long_minus = FALSE)
 })
 
 
 teardown({
-  options(oo)
+  options(oo_lm)
 })
 
 
@@ -91,8 +91,8 @@ test_that("number_format works with various interesting cases", {
 
 
 test_that("long_minus", {
-  oo <- options(huxtable.long_minus = TRUE)
-  on.exit(options(oo))
+  oo_lm_local <- options(huxtable.long_minus = TRUE)
+  on.exit(options(oo_lm_local))
 
   expect_equivalent(huxtable:::format_numbers("-1", 0, type = "screen"),
         "\u22121")
