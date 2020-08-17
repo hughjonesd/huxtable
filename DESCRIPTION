@@ -40,7 +40,7 @@ Suggests:
     devtools,
     dplyr (>= 0.7.0),
     flextable (>= 0.5.5),
-    ftExtra (>= 0.0.2),
+    ftExtra (> 0.0.1),
     ggplot2,
     httr,
     knitr,
@@ -79,3 +79,4 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 2.10)
+Remotes: atusy/ftExtra
