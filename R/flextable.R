@@ -63,7 +63,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
       hr <- md_cell_refs[r, 1]
       hc <- md_cell_refs[r, 2]
       ft <- flextable::compose(ft, i = hr, j = hc,
-            value = flextable::as_paragraph(ftExtra::as_chunk_md(x[[hr, hc]])))
+            value = ftExtra::as_paragraph_md(x[[hr, hc]], .from = "commonmark"))
     }
   }
 

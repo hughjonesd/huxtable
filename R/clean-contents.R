@@ -12,7 +12,7 @@ clean_contents <- function(
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      cell <- format_numbers(cell, num_fmt)
+      cell <- format_numbers(cell, num_fmt, type)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
       contents[row, col] <- as.character(cell)
     }
@@ -93,13 +93,27 @@ numeral_formatter.numeric <- function (x) {
 
 
 # find each numeric substring, and replace it:
-format_numbers <- function (string, num_fmt) {
+format_numbers <- function (string, num_fmt, type) {
   if (is.na(string)) return(NA_character_)
 
   # ! is.function avoids a warning if num_fmt is a function:
   if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
-  format_numeral <- numeral_formatter(num_fmt)
+  long_minus <- switch(type,
+          latex = "$-$",
+          excel = "-",
+          "\u2212"
+        )
+
+  format_numeral <- function (str) {
+    num <- as.numeric(str)
+    result <- numeral_formatter(num_fmt)(num)
+    if (getOption("huxtable.long_minus", FALSE)) {
+      result <- sub("^-", long_minus, result)
+      result <- sub("([eE])-", paste0("\\1", long_minus), result)
+    }
+    result
+  }
   # Breakdown:
   # -?                    optional minus sign
   # [0-9]*                followed by any number of digits
@@ -108,7 +122,7 @@ format_numbers <- function (string, num_fmt) {
   # ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
   #                       along with (optionally) a sign preceding the digits
   #                       specifying the level of the exponent.
-  stringr::str_replace_all(string,  "-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?", function (x) format_numeral(as.numeric(x)))
+  stringr::str_replace_all(string,  "-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?", format_numeral)
 }
 
 

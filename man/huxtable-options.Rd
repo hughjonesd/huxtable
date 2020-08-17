@@ -40,6 +40,8 @@ package, which allows you to use the same font names in TeX and HTML. This
 requires the the xetex or xelatex engine, which can be set using an .rmd
 header option. Note that \code{\link[=quick_pdf]{quick_pdf()}} may use pdflatex. The default is
 \code{FALSE}.
+\item \code{options('huxtable.long_minus')}. If \code{TRUE}, prints long minus signs
+for numbers. The default is \code{FALSE}.
 \item \code{options('huxtable.autoformat_number_format')} and
 \code{options('huxtable.autoformat_align')} are lists. The list names are base R
 classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set \code{number_format()} and
