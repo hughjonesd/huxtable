@@ -146,66 +146,63 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
 )
 
 
-# text is a string
-markdown_rtf <- function (text) {
-  md_xml <- commonmark::markdown_xml(text, extensions = "strikethrough")
-  md_xml <- xml2::read_xml(md_xml)
-  md_xml <- xml2::xml_ns_strip(md_xml)
-  # result contains "paragraphs" which may contain:
-  #  text nodes;
-  # <strikethrough>, <strong>,  <emph>, containing text nodes and ending </strikethrough> etc.
-  # <softbreak /> for lines;
-  # also various list items etc. which we can maybe ignore...!
-  # paragraphs are anything separated by two newlines
-  #
-  # plan: find each paragraph, then recurse through nodes.
-  # * strikethrough: add "\\b" then recurse then "\\b0"
-  # * strikethrough or /strikethrough, print:
-  # * emph or /emph:
-  # * strong or /strong, print:
-  # * text, print the text
-  # Maybe do bullet points?
-  rtf_out <- ""
+MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
+  inherit = MarkdownTranslator,
 
-  for (para in xml2::xml_find_all(md_xml, "//paragraph")) {
-    rtf_out <- process_xml(para, rtf_out)
-  }
+  public = list(
 
-  return(rtf_out)
-}
+    list_type = "bullet",
 
+    paragraph = function (node) {
+      c("{", self$process_contents(node), "\\par}")
+    },
 
-process_xml_old <- function (node, rtf) {
-  force(rtf)
-  add <- function (...) rtf <<- paste0(rtf, ...)
-  ch <- xml2::xml_contents(node)
-  switch(xml2::xml_name(node),
-          "strong"        = {add("\\b "); rtf <- process_xml(ch, rtf); add("\\b0 ")},
-          "emph"          = {add("\\i "); rtf <- process_xml(ch, rtf); add("\\i0 ")},
-          "strikethrough" = {add("\\strike "); rtf <- process_xml(ch, rtf); add("\\strike0 ")},
-          "text"          = add(as.character(ch)),
-          "softbreak"     = add("\n"),
-          "link"          = {add(make_rtf_link(node)); rtf <- process_xml(ch, rtf); add("}}")},
-          "image"         = {add(make_rtf_picture(node)); rtf <- process_xml(ch, rtf)},
-          # we're in a table line, so we never add \\par, even for <paragraph>
-          {rtf <- process_xml(ch, rtf)}
-        )
+    strong = function (node) {
+      c("\\b ", self$process_contents(node), "\\b0 ")
+    },
 
-  rtf
-}
+    emph = function (node) {
+      c("\\i ", self$process_contents(node), "\\i0 ")
+    },
 
+    strikethrough = function (node) {
+      c("\\strike ", self$process_contents(node), "\\strike0 ")
+    },
 
-make_rtf_link <- function (node) {
-  url <- xml2::xml_attr(node, "destination")
-  paste0("{\\field{\\*\\fldinst HYPERLINK \"", url, "\"}{\\fldrslt \\ul ")
-}
+    softbreak = function (node) {
+      c(self$process_contents(node), "\n")
+    },
 
+    link = function (node) {
+      url <- xml2::xml_attr(node, "destination")
+      open_link <- c("{\\field{\\*\\fldinst HYPERLINK \"", url, "\"}{\\fldrslt \\ul ")
+      c(open_link, self$process_contents(node), "}}")
+    },
 
-make_rtf_picture <- function (node) {
-  url <- xml2::xml_attr(node, "destination")
-  paste0("{\\field\\fldedit{\\*\\fldinst { INCLUDEPICTURE  \\\\d \"", url,
-         "\" \\* MERGEFORMATINET }}{\\fldrslt {  }}}")
-}
+    image = function (node) {
+      url <- xml2::xml_attr(node, "destination")
+      open_image <- c("{\\field\\fldedit{\\*\\fldinst{ INCLUDEPICTURE \"",
+            url, "\" \\\\* MERGEFORMATINET \\\\d}}{\\fldrslt { }}}")
+      c(open_image, self$process_contents(node))
+    },
+
+    list = function (node) {
+      self$list_type <- xml2::xml_attr(node, "type")
+      self$process_contents(node)
+    },
+
+    item = function (node) {
+      open_item <- "{{\\li0\\pntext\\pn"
+      list_type_rtf <- if (self$list_type == "ordered") {
+        "\\pnlvlbody \\pndec \\pnstart1 \\pntxta{. }}{"
+      } else {
+        "\\pnlvlblt\\pntxtb{\\u8226? }}{"
+      }
+      close_item <-  "}}"
+      c(open_item, list_type_rtf, self$process_contents(node), close_item)
+    }
+  )
+)
 
 
 #' Set cell contents to markdown
