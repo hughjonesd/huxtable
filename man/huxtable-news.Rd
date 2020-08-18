@@ -14,16 +14,18 @@ backwards-incompatible API changes.
 }
 \section{Development version}{
 \itemize{
-\item \code{as_flextable()} now exports markdown in cells to Word (with the
-help of the optional \code{ftExtra} package version 0.0.2 or higher,
-thanks @atusy for adding this feature) and to RTF.
+\item \code{as_flextable()} now exports markdown in cells to RTF, and to Word
+with the help of the optional \code{ftExtra} package. Thanks @atusy for
+adding this feature.
+\item Improvements to markdown screen export.
 \item New feature: \code{as_Workbook()} gains \code{start_row} and \code{start_col}
 arguments, to write a huxtable into an Excel worksheet starting at a
 particular row or column.
 \item New feature: \code{huxreg()} gains a \code{glance_args} argument to pass
 arguments to \code{glance()}.
 \item New feature: \code{options(huxtable.long_minus = TRUE)} will try to use
-long minus signs before numbers. The default is \code{FALSE}.
+long minus signs before numbers. The default is \code{FALSE}. It will
+probably become \code{TRUE} in a future version.
 \item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
 properties.
 \item Bugfix: unicode characters above 32767 were incorrectly represented
