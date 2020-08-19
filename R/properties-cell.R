@@ -246,9 +246,11 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' @templateVar default TRUE
 #'
 #' @details
-#' Markdown is currently implemented for HTML, Word, Powerpoint, RTF and LaTeX.
-#' Word requires the `ftExtra` package. There is basic support for on-screen
-#' display.
+#' Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
+#' on-screen display. Word requires the `ftExtra` package.
+#'
+#' Most formats use [commonmark](https://www.commonmark.org), with the
+#' "strikethrough" extension enabled.
 #'
 #' The following features are intended to work:
 #'
@@ -256,8 +258,11 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' * strikethrough (write `~text~` to strike through text).
 #' * hyperlinks
 #'
-#' Other features, such as lists and images, may not work in all formats. Note
-#' that Word export does not support strikethrough.
+#' There are some quirks:
+#'
+#' * Strikethrough will probably not work in Word.
+#' * To make lists work in LaTeX, set [width()] and ensure [wrap()] is `TRUE`.
+#' * Inline images in RTF work using the INCLUDEPICTURE field type.
 #'
 #' If you try to use markdown tables, then seek psychiatric help.
 #'

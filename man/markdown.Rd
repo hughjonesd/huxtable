@@ -34,9 +34,11 @@ Cells where the markdown property is \code{TRUE} will be rendered as
 \href{https://commonmark.org/help/}{markdown}.
 }
 \details{
-Markdown is currently implemented for HTML, Word, Powerpoint, RTF and LaTeX.
-Word requires the \code{ftExtra} package. There is basic support for on-screen
-display.
+Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
+on-screen display. Word requires the \code{ftExtra} package.
+
+Most formats use \href{https://www.commonmark.org}{commonmark}, with the
+"strikethrough" extension enabled.
 
 The following features are intended to work:
 \itemize{
@@ -45,8 +47,12 @@ The following features are intended to work:
 \item hyperlinks
 }
 
-Other features, such as lists and images, may not work in all formats. Note
-that Word export does not support strikethrough.
+There are some quirks:
+\itemize{
+\item Strikethrough will probably not work in Word.
+\item To make lists work in LaTeX, set \code{\link[=width]{width()}} and ensure \code{\link[=wrap]{wrap()}} is \code{TRUE}.
+\item Inline images in RTF work using the INCLUDEPICTURE field type.
+}
 
 If you try to use markdown tables, then seek psychiatric help.
 }
