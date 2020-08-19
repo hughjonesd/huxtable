@@ -44,7 +44,7 @@ Number formatting is applied to any parts of cells that look like numbers.
 The exception is exponents in
 scientific notation; huxtable attempts to detect and ignore these.
 
-The default value is "\\%.3g", which rounds numbers if they have more than 3
+The default value is "\%.3g", which rounds numbers if they have more than 3
 significant digits, and which may use scientific notation for large numbers.
 
 Note that if your cells are of type numeric, a number format of \code{NA} doesn't
