@@ -274,9 +274,11 @@ character_matrix <- function (
     while (! identical(new <- gsub("( |\u00a0)$", "\u00a0", dcell$contents), dcell$contents)) {
       dcell$contents <- new
     }
-    # double newlines split paragraphs
+    # double newlines split paragraphs:
     dcell$contents <- gsub("\n", "\n\n", dcell$contents, fixed = TRUE)
     strings <- strwrap(dcell$contents, width = eff_width + 1) # for the + 1 see ?strwrap
+    # don't use blank line to separate paragraphs:
+    strings <- strings[strings != ""]
     # some strings may still be longer than width:
     strings <- unlist(lapply(strings, function (x) {
       while (any(ncharw(x) > eff_width)) {
