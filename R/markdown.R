@@ -85,6 +85,10 @@ MarkdownTranslator <- R6::R6Class("MarkdownTranslator",
 
     text = function (node) {
       xml2::xml_text(node)
+    },
+
+    code = function (node) {
+      xml2::xml_text(node)
     }
   )
 )
@@ -115,8 +119,16 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
         crayon::strikethrough(self$process_contents(node))
     },
 
+    code = function (node) {
+      crayon::silver(xml2::xml_text(node))
+    },
+
     softbreak = function (node) {
       c(self$process_contents(node), "\n")
+    },
+
+    thematic_break = function (node) {
+      rep("\u2500", 5)
     },
 
     link = function (node) {
@@ -125,6 +137,22 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
 
     image = function (node) {
       crayon::red(c("[", self$process_contents(node), "]"))
+    },
+
+    heading = function (node) {
+      crayon::bold(self$process_contents(node))
+    },
+
+    code_block = function (node) {
+      self$process_contents(node)
+    },
+
+    block_quote = function (node) {
+      result <- self$process_contents(node)
+      result <- paste(result, collapse = "")
+      result <- crayon::col_strsplit(result, "\n", fixed = TRUE)[[1]]
+      result <- paste0(">  ", result, "\n")
+      result
     },
 
     list = function (node) {

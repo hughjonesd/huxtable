@@ -9,12 +9,12 @@ require_temp_artefacts_dir()
 
 
 setup({
-  oo <- options("huxtable.autolabel" = FALSE)
+  oo_al <- options("huxtable.autolabel" = FALSE)
 })
 
 
 teardown({
-  options(oo)
+  options(oo_al)
   if (dir.exists("libs")) try(unlink("libs", recursive = TRUE))
 })
 
