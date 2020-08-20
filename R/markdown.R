@@ -101,6 +101,8 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
 
     list_type = "bullet",
 
+    list_delim = ".",
+
     list_digit = 1,
 
     paragraph = function (node) {
@@ -156,14 +158,25 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
     },
 
     list = function (node) {
+      old_list_type   <- self$list_type
+      old_list_delim  <- self$list_delim
+      old_list_digit  <- self$list_digit
+
       self$list_type <- xml2::xml_attr(node, "type")
-      if (self$list_type == "ordered") self$list_digit <- 1
+      if (self$list_type == "ordered") {
+        self$list_digit <- as.integer(xml2::xml_attr(node, "start"))
+        self$list_delim <- if (xml2::xml_attr(node, "delim") == "paren") ")" else "."
+      }
       self$process_contents(node)
+
+      self$list_type <- old_list_type
+      self$list_delim <- old_list_delim
+      self$list_digit <- old_list_digit
     },
 
     item = function (node) {
       if (self$list_type == "ordered") {
-        bullet <- paste0(self$list_digit, ". ")
+        bullet <- paste0(self$list_digit, self$list_delim, " ")
         self$list_digit <- self$list_digit + 1
       } else {
         bullet <- "* "
@@ -203,7 +216,8 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
 
     link = function (node) {
       url <- xml2::xml_attr(node, "destination")
-      open_link <- c("{\\field{\\*\\fldinst HYPERLINK \"", url, "\"}{\\fldrslt \\ul ")
+      open_link <- c("{\\field{\\*\\fldinst HYPERLINK \"", url,
+            "\"}{\\fldrslt \\ul ")
       c(open_link, self$process_contents(node), "}}")
     },
 
@@ -215,8 +229,10 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
     },
 
     list = function (node) {
+      old_list_type <- self$list_type
       self$list_type <- xml2::xml_attr(node, "type")
       self$process_contents(node)
+      self$list_type <- old_list_type
     },
 
     item = function (node) {
