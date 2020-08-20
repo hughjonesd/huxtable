@@ -39,14 +39,24 @@ translate_fun <- function (translator_class) {
 # the Visitor collects the text and puts it together
 # maybe use S3: dispatch on node types, with a default which does nothing?
 
+list_details = function (type, delim, digit) {
+  structure(list(type = type, delim = delim, digit = digit), class = "listDetails")
+}
 
 
 MarkdownTranslator <- R6::R6Class("MarkdownTranslator",
   public = list(
 
+    list_details = list_details(
+            type  = "bullet",
+            delim = ".",
+            digit = 1
+          ),
+
     methods = function () {
       names(as.list(self))
     },
+
 
     translate = function (text) {
       md_xml <- commonmark::markdown_xml(text, extensions = "strikethrough")
@@ -83,6 +93,24 @@ MarkdownTranslator <- R6::R6Class("MarkdownTranslator",
       self$process_contents(node)
     },
 
+    list = function (node) {
+      old_list_details <- self$list_details
+
+      type <- xml2::xml_attr(node, "type")
+      digit <- if (type == "bullet") NA else as.integer(xml2::xml_attr(node, "start"))
+      delim <- if (type == "bullet") NA else
+            if (xml2::xml_attr(node, "delim") == "paren") ")"
+            else "."
+      self$list_details <- list_details(
+        type = type,
+        digit = digit,
+        delim = delim
+      )
+      self$process_contents(node)
+
+      self$list_details <- old_list_details
+    },
+
     text = function (node) {
       xml2::xml_text(node)
     },
@@ -98,12 +126,6 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
   inherit = MarkdownTranslator,
 
   public = list(
-
-    list_type = "bullet",
-
-    list_delim = ".",
-
-    list_digit = 1,
 
     paragraph = function (node) {
       c(self$process_contents(node), "\n")
@@ -157,27 +179,10 @@ MarkdownScreenTranslator <- R6::R6Class("MarkdownScreenTranslator",
       result
     },
 
-    list = function (node) {
-      old_list_type   <- self$list_type
-      old_list_delim  <- self$list_delim
-      old_list_digit  <- self$list_digit
-
-      self$list_type <- xml2::xml_attr(node, "type")
-      if (self$list_type == "ordered") {
-        self$list_digit <- as.integer(xml2::xml_attr(node, "start"))
-        self$list_delim <- if (xml2::xml_attr(node, "delim") == "paren") ")" else "."
-      }
-      self$process_contents(node)
-
-      self$list_type <- old_list_type
-      self$list_delim <- old_list_delim
-      self$list_digit <- old_list_digit
-    },
-
     item = function (node) {
-      if (self$list_type == "ordered") {
-        bullet <- paste0(self$list_digit, self$list_delim, " ")
-        self$list_digit <- self$list_digit + 1
+      if (self$list_details$type == "ordered") {
+        bullet <- paste0(self$list_details$digit, self$list_details$delim, " ")
+        self$list_details$digit <- self$list_details$digit + 1
       } else {
         bullet <- "* "
       }
@@ -191,8 +196,6 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
   inherit = MarkdownTranslator,
 
   public = list(
-
-    list_type = "bullet",
 
     paragraph = function (node) {
       c("{", self$process_contents(node), "\\par}")
@@ -214,6 +217,19 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
       c(self$process_contents(node), "\n")
     },
 
+    thematic_break = function (node) {
+      # thanks to the O'Reilly RTF guide :-)
+      "{\\pard \\brdrb \\brdrs \\brdrw10 \\brsp20 \\par}{\\pard\\par}"
+    },
+
+    block_quote = function (node) {
+      c("{\\li360 \\ri360", self$process_contents(node), "\\par}")
+    },
+
+    heading = function (node) {
+      c("{\\fs28 ", self$process_contents(node), "\\par}")
+    },
+
     link = function (node) {
       url <- xml2::xml_attr(node, "destination")
       open_link <- c("{\\field{\\*\\fldinst HYPERLINK \"", url,
@@ -228,17 +244,11 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
       c(open_image, self$process_contents(node))
     },
 
-    list = function (node) {
-      old_list_type <- self$list_type
-      self$list_type <- xml2::xml_attr(node, "type")
-      self$process_contents(node)
-      self$list_type <- old_list_type
-    },
-
     item = function (node) {
       open_item <- "{{\\li0\\pntext\\pn"
-      list_type_rtf <- if (self$list_type == "ordered") {
-        "\\pnlvlbody \\pndec \\pnstart1 \\pntxta{. }}{"
+      list_type_rtf <- if (self$list_details$type == "ordered") {
+        sprintf("\\pnlvlbody \\pndec \\pnstart%s \\pntxta{%s }}{",
+              self$list_details$digit, self$list_details$delim)
       } else {
         "\\pnlvlblt\\pntxtb{\\u8226? }}{"
       }
