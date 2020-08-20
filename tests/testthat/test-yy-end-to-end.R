@@ -1,16 +1,11 @@
 
-context("End-to-end tests with standard converters")
-
-
 skip_if_not_installed("knitr")
 skip_if_not_installed("rmarkdown")
 skip_without_pandoc()
 require_temp_artefacts_dir()
 
 
-setup({
-  oo_al <- options("huxtable.autolabel" = FALSE)
-})
+oo_al <- options("huxtable.autolabel" = FALSE)
 
 
 teardown({

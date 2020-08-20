@@ -1,6 +1,4 @@
 
-context("map interface")
-
 
 test_that("Standard map_xxx", {
 

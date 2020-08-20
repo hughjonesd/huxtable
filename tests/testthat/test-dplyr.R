@@ -1,6 +1,5 @@
 
 
-context("dplyr functions")
 skip_if_not_installed("dplyr")
 
 test_that("select, rename and relocate", {

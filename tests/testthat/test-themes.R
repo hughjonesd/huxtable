@@ -1,7 +1,4 @@
 
-context("Themes")
-
-
 test_that("Themes work", {
   ht <- huxtable(a = 1:5, b = 1:5)
   expect_error(theme_basic(ht), regexp = NA)
