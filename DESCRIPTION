@@ -67,6 +67,7 @@ SystemRequirements: LaTeX packages:
     fontspec,
     graphicx, 
     hhline, 
+    hyperref,
     multirow, 
     siunitx, 
     tabularx, 

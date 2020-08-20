@@ -16,7 +16,8 @@ huxtable_latex_dependencies <- list(
   list(name = "tabularx"),
   list(name = "threeparttable"),
   list(name = "wrapfig"),
-  list(name = "adjustbox")
+  list(name = "adjustbox"),
+  list(name = "hyperref")
 )
 
 
