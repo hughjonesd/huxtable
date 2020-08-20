@@ -62,9 +62,9 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     for (r in seq_len(nrow(md_cell_refs))) {
       hr <- md_cell_refs[r, 1]
       hc <- md_cell_refs[r, 2]
-      contents <- gsub("~(.*?)~", "~~\\1~~", x[[hr, hc]])
+      cell <- gsub("~(.*?)~", "~~\\1~~", x[[hr, hc]])
       ft <- flextable::compose(ft, i = hr, j = hc,
-            value = ftExtra::as_paragraph_md(x[[hr, hc]], .from = "commonmark+strikeout"))
+            value = ftExtra::as_paragraph_md(cell, .from = "commonmark+strikeout"))
     }
   }
 
