@@ -58,8 +58,10 @@ NULL
   ix <- normalize_index(i, nrow(x), rownames(x))
   jx <- normalize_index(j, ncol(x), colnames(x))
 
-  if (any(is.na(ix))) stop("Bad row subscripts in ", i)
-  if (any(is.na(jx))) stop("Bad column subscripts in ", j)
+  if (any(is.na(ix))) stop("Bad row subscripts: ",
+        paste(i[is.na(ix)], collapse = ","))
+  if (any(is.na(jx))) stop("Bad column subscripts: ",
+        paste(j[is.na(jx)], collapse = ","))
   res <- subset_rows(x, ix)
   res <- subset_cols(res, jx)
 
