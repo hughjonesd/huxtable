@@ -279,6 +279,7 @@ character_matrix <- function (
     strings <- strwrap(dcell$contents, width = eff_width + 1) # for the + 1 see ?strwrap
     # don't use blank line to separate paragraphs:
     strings <- strings[strings != ""]
+    if (length(strings) == 0) strings <- ""
     # some strings may still be longer than width:
     strings <- unlist(lapply(strings, function (x) {
       while (any(ncharw(x) > eff_width)) {
