@@ -15,7 +15,7 @@ md_hux <- hux(x = c(
   "Text\n```\nfenced code\n```\ntext",
   "Text\n- Bullet 1\n- Bullet 2\n",
   "Text\n> Blockquote\n> Blockquote\n\nText"
-))
+), add_colnames = FALSE)
 
 md_hux <- cbind(md_hux, md_hux)
 markdown(md_hux)[, 2] <- TRUE
@@ -52,5 +52,5 @@ test_that("Compile to PDF", {
   skip_without_pandoc()
 
   md_hux_w <- set_width(md_hux, 0.5)
-  expect_silent(quick_pdf(md_hux_w[1:8,], file = "quick-markdown.pdf", open = FALSE))
+  expect_silent(quick_pdf(md_hux_w[1:7,], file = "quick-markdown.pdf", open = FALSE))
 })
