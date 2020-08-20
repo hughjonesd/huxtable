@@ -47,6 +47,10 @@ test_that("Output produced for Excel", {
 
 test_that("Compile to PDF", {
   on.exit(try(file.remove("quick-markdown.pdf"), silent = TRUE))
+  skip_if_not_installed("knitr")
+  skip_if_not_installed("rmarkdown")
+  skip_without_pandoc()
+
   md_hux_w <- set_width(md_hux, 0.5)
-  expect_silent(quick_pdf(md_hux_w, file = "quick-markdown.pdf", open = FALSE))
+  expect_silent(quick_pdf(md_hux_w[1:8,], file = "quick-markdown.pdf", open = FALSE))
 })
