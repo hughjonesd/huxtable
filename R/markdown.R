@@ -106,9 +106,12 @@ MarkdownTranslator <- R6::R6Class("MarkdownTranslator",
         digit = digit,
         delim = delim
       )
-      self$process_contents(node)
+
+      res <- self$process_contents(node)
 
       self$list_details <- old_list_details
+
+      res
     },
 
     text = function (node) {
@@ -220,6 +223,10 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
     thematic_break = function (node) {
       # thanks to the O'Reilly RTF guide :-)
       "{\\pard \\brdrb \\brdrs \\brdrw10 \\brsp20 \\par}{\\pard\\par}"
+    },
+
+    code_block = function (node) {
+      c("{", self$process_contents(node), "\\par}")
     },
 
     block_quote = function (node) {
