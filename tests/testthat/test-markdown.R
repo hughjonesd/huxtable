@@ -32,6 +32,9 @@ test_that("Output produced for basic types", {
 
 test_that("Output produced for Word", {
   skip_if_not_installed("ftExtra")
+  # ftExtra needs pandoc for markdown:
+  skip_without_pandoc()
+
   # currently only basic stuff works
   expect_silent(as_flextable(md_hux[1:7, ]))
   skip("Awaiting ftExtra improvements")
