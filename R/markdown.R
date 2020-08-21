@@ -1,4 +1,34 @@
 
+#' Set cell contents to markdown
+#'
+#' This convenience function calls [set_contents()] and [set_markdown()].
+#'
+#' @inherit set_contents params
+#' @param value Cell contents, as a markdown string.
+#'
+#' @return The modified huxtable.
+#'
+#' @export
+#'
+#' @seealso [markdown()].
+#'
+#' @examples
+#' set_markdown_contents(jams, 1, 1,
+#'       "**Type** of jam")
+set_markdown_contents <- function (ht, row, col, value) {
+  call <- match.call()
+  call[["ht"]] <- quote(ht)
+  call[[1]] <- as.symbol("set_contents")
+  ht <- eval(call, list(ht = ht), parent.frame())
+
+  call <- match.call()
+  call[["ht"]] <- quote(ht)
+  if (missing(value)) call[["row"]] <- TRUE else call[["value"]] <- TRUE
+  call[[1]] <- as.symbol("set_markdown")
+  ht <- eval(call, list(ht = ht), parent.frame())
+
+  ht
+}
 
 
 render_markdown <- function (text, type) {
@@ -264,35 +294,3 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
     }
   )
 )
-
-
-#' Set cell contents to markdown
-#'
-#' This convenience function calls [set_contents()] and [set_markdown()].
-#'
-#' @inherit set_contents params
-#' @param value Cell contents, as a markdown string.
-#'
-#' @return The modified huxtable.
-#'
-#' @export
-#'
-#' @seealso [markdown()].
-#'
-#' @examples
-#' set_markdown_contents(jams, 1, 1,
-#'       "**Type** of jam")
-set_markdown_contents <- function (ht, row, col, value) {
-  call <- match.call()
-  call[["ht"]] <- quote(ht)
-  call[[1]] <- as.symbol("set_contents")
-  ht <- eval(call, list(ht = ht), parent.frame())
-
-  call <- match.call()
-  call[["ht"]] <- quote(ht)
-  if (missing(value)) call[["row"]] <- TRUE else call[["value"]] <- TRUE
-  call[[1]] <- as.symbol("set_markdown")
-  ht <- eval(call, list(ht = ht), parent.frame())
-
-  ht
-}

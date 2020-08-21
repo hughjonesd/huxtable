@@ -255,11 +255,12 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' The following features are intended to work:
 #'
 #' * bold and italic text
-#' * strikethrough (write `~text~` to strike through text).
+#' * strikethrough (write `~~text~~` to strike through text).
 #' * hyperlinks
 #'
 #' There are some quirks:
 #'
+#' * Paragraph-level properties (e.g. lists) won't work in Word.
 #' * Strikethrough will probably not work in Word.
 #' * To make lists work in LaTeX, set [width()] and ensure [wrap()] is `TRUE`.
 #' * Inline images in RTF work using the INCLUDEPICTURE field type.

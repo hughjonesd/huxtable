@@ -43,12 +43,13 @@ Most formats use \href{https://www.commonmark.org}{commonmark}, with the
 The following features are intended to work:
 \itemize{
 \item bold and italic text
-\item strikethrough (write \verb{~text~} to strike through text).
+\item strikethrough (write \verb{~~text~~} to strike through text).
 \item hyperlinks
 }
 
 There are some quirks:
 \itemize{
+\item Paragraph-level properties (e.g. lists) won't work in Word.
 \item Strikethrough will probably not work in Word.
 \item To make lists work in LaTeX, set \code{\link[=width]{width()}} and ensure \code{\link[=wrap]{wrap()}} is \code{TRUE}.
 \item Inline images in RTF work using the INCLUDEPICTURE field type.
