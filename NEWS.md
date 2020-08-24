@@ -8,7 +8,8 @@ version number is increased whenever there are backwards-incompatible API change
 * `as_flextable()` now exports markdown in cells to RTF, and to Word with the 
   help of the optional `ftExtra` package. Thanks @atusy for adding this feature.
   
-* Improvements to markdown screen export.
+* Improvements to markdown screen export. This now uses the optional `fansi` 
+  package.
   
 * New feature: `as_Workbook()` gains `start_row` and `start_col` arguments, to 
   write a huxtable into an Excel worksheet starting at a particular row or column.

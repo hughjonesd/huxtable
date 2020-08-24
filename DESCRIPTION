@@ -40,6 +40,7 @@ Suggests:
     crayon,
     devtools,
     dplyr (>= 0.7.0),
+    fansi,
     flextable (>= 0.5.5),
     ftExtra (> 0.0.1),
     ggplot2,

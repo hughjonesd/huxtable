@@ -57,10 +57,14 @@ to_screen.huxtable <- function (
         ...
       ) {
   assert_that(is.number(min_width), is.number(max_width), is.flag(compact), is.flag(colnames), is.flag(color))
-  if (color && ! requireNamespace("crayon", quietly = TRUE)) {
-    warning("Cannot print huxtable in color as `crayon` package is not installed. Try `install.packages(\"crayon\")`.",
-          "To avoid seeing this message in future, set `options(huxtable.color_screen = FALSE)`.")
-    color <- FALSE
+  if (color) {
+    if (! requireNamespace("crayon", quietly = TRUE) || !
+          requireNamespace("fansi", quietly = TRUE)) {
+      warning("On-screen color requires the `crayon` and `fansi`packages. Run:\n",
+            "install.packages(c(\"crayon\", \"fansi\"))\n",
+            "or set `options(huxtable.color_screen = FALSE)`.")
+      color <- FALSE
+    }
   }
 
   all_colnames <- colnames(ht)
@@ -252,7 +256,7 @@ character_matrix <- function (
     # assumption here is that we need say 2 characters for anything sensible; and could have
     # bold+italic which adds *** before and after!
     return(character_matrix(ht[, -ncol(ht)], inner_border_h, inner_border_v, outer_border_h,
-          outer_border_v, min_width, max_width, color, markdown = markdown))
+          outer_border_v, min_width, max_width, color = color, markdown = markdown))
   }
   widths <- pmin(widths, max_widths)
 
@@ -276,7 +280,13 @@ character_matrix <- function (
     }
     # double newlines split paragraphs:
     dcell$contents <- gsub("\n", "\n\n", dcell$contents, fixed = TRUE)
-    strings <- strwrap(dcell$contents, width = eff_width + 1) # for the + 1 see ?strwrap
+    my_strwrap <- if (color) {
+      assert_package("character_matrix", "fansi")
+      fansi::strwrap_ctl
+    } else {
+      strwrap
+    }
+    strings <- my_strwrap(dcell$contents, width = eff_width + 1) # for the + 1 see ?strwrap
     # don't use blank line to separate paragraphs:
     strings <- strings[strings != ""]
     if (length(strings) == 0) strings <- ""
