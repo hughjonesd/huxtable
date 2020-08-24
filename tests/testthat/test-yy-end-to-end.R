@@ -162,6 +162,13 @@ test_that("Bookdown files", {
 })
 
 
+test_that("Word files", {
+  skip_if_not_installed("flextable")
+  skip_if_not(rmarkdown::pandoc_available("2.0.0"))
+  test_render("word-test.Rmd", "word_document")
+})
+
+
 test_that("Works with fontspec", {
   skip_on_cran()
   skip_on_os("linux") # no Arial
@@ -171,8 +178,30 @@ test_that("Works with fontspec", {
 })
 
 
-test_that("Word files", {
+test_that("huxtable.long_minus", {
+  oo <- options(huxtable.long_minus = TRUE)
+  on.exit(options(oo))
+
+  ht <- hux(c("1", "-1.5"), c("1e-3", "1e3"), c("1", "-1e-3"))
+  expect_silent(to_screen(ht))
+  expect_silent(to_md(ht))
+
+  expect_silent(quick_html(ht,
+        file = file.path("temp-artefacts", "long-minus-test.html"), open = FALSE))
+  expect_silent(quick_latex(ht,
+        file = file.path("temp-artefacts", "long-minus-test.tex"), open = FALSE))
+  expect_silent(quick_pdf(ht,
+        file = file.path("temp-artefacts", "long-minus-test.pdf"), open = FALSE))
+  expect_silent(quick_rtf(ht,
+        file = file.path("temp-artefacts", "long-minus-test.rtf"), open = FALSE))
+
+  skip_if_not_installed("openxlsx")
+  expect_silent(quick_xlsx(ht,
+        file = file.path("temp-artefacts", "long-minus-test.xlsx"), open = FALSE))
+
   skip_if_not_installed("flextable")
-  skip_if_not(rmarkdown::pandoc_available("2.0.0"))
-  test_render("word-test.Rmd", "word_document")
+  expect_silent(quick_docx(ht,
+        file = file.path("temp-artefacts", "long-minus-test.docx"), open = FALSE))
+  expect_silent(quick_pptx(ht,
+        file = file.path("temp-artefacts", "long-minus-test.pptx"), open = FALSE))
 })
