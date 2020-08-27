@@ -67,3 +67,18 @@ test_that("merge_repeated_rows", {
   ht_long <- merge_repeated_rows(ht_long)
   expect_equivalent(rowspan(ht_long), matrix(c(1, 2, 1, 2, 1), 5, 1))
 })
+
+
+test_that("Bug: merge_repeated_rows with NA", {
+  ht <- hux(c("a", NA_character_, "b", "c"))
+  ht <- merge_repeated_rows(ht)
+  expect_equivalent(c(rowspan(ht)), c(1, 1, 1, 1))
+
+  ht2 <- hux(c("a", NA_character_, NA_character_, "b"))
+  ht2 <- merge_repeated_rows(ht2)
+  expect_equivalent(c(rowspan(ht2)), c(1, 2, 1, 1))
+
+  ht3 <- hux(c(NA_character_, "b", "b"))
+  ht3 <- merge_repeated_rows(ht3)
+  expect_equivalent(c(rowspan(ht3)), c(1, 2, 1))
+})
