@@ -30,6 +30,8 @@ version number is increased whenever there are backwards-incompatible API change
 
 * Bugfix: `style_cells` didn't work unless huxtable was on the search path.
 
+* Bugfix: `merge_repeated_rows` merged `NA` rows incorrectly.
+
 * Bugfix: number format was not set correctly in `huxreg()`'s `note`.
 
 * Bugfix: in `huxreg()`, `tidy_args` threw an error if the first argument to

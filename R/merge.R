@@ -122,7 +122,12 @@ merge_repeated_rows <- function (ht, row, col) {
   }
   for (cc in col) {
     contents <- ht[row, ][[cc]] # gets a vector
-    new <- which(c(TRUE, contents[seq_len(length(contents) - 1)] != contents[-1]))
+    contents <- paste0("", contents) # materializes NAs
+    new <- c(TRUE, contents[-length(contents)] != contents[-1])
+    new <- which(new)
+    # spans gets the lengths between every new cell
+    # we add length(contents) + 1 to spans, not to new, so that row[new]
+    # can work in the next line:
     spans <- diff(c(new, length(contents) + 1))
     rowspan(ht)[row[new], cc] <- spans
   }
