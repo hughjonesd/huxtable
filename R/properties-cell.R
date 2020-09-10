@@ -249,7 +249,7 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
 #' on-screen display. Word requires the `ftExtra` package.
 #'
-#' Most formats use [commonmark](https://www.commonmark.org), with the
+#' Most formats use [commonmark](https://commonmark.org), with the
 #' "strikethrough" extension enabled.
 #'
 #' The following features are intended to work:

@@ -34,6 +34,7 @@ in RTF. Thanks @kaigu1990.
 \item Bugfix: columns were being collapsed in \code{as_Workbook()}.
 \item Bugfix: \code{style_cells} didn’t work unless huxtable was on the search
 path.
+\item Bugfix: \code{merge_repeated_rows} merged \code{NA} rows incorrectly.
 \item Bugfix: number format was not set correctly in \code{huxreg()}’s \code{note}.
 \item Bugfix: in \code{huxreg()}, \code{tidy_args} threw an error if the first
 argument to \code{tidy()} was a named list.

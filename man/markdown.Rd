@@ -37,7 +37,7 @@ Cells where the markdown property is \code{TRUE} will be rendered as
 Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
 on-screen display. Word requires the \code{ftExtra} package.
 
-Most formats use \href{https://www.commonmark.org}{commonmark}, with the
+Most formats use \href{https://commonmark.org}{commonmark}, with the
 "strikethrough" extension enabled.
 
 The following features are intended to work:
