@@ -22,3 +22,6 @@ Presumably due to platform rather than to huxtable.
 
 ## Reverse dependencies
 
+3 failed to check (expss, glmmTMB, nlmixr) due to errors with the current CRAN
+version; 8 others were all OK.
+
