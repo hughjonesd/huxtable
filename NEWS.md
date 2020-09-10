@@ -3,7 +3,7 @@ Huxtable attempts to follow semantic versioning (https://semver.org). Therefore,
 version number is increased whenever there are backwards-incompatible API changes.
 
 
-# Development version
+# huxtable 5.1.0
 
 * `as_flextable()` now exports markdown in cells to RTF, and to Word with the 
   help of the optional `ftExtra` package. Thanks @atusy for adding this feature.
