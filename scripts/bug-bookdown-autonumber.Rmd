@@ -1,0 +1,28 @@
+---
+title: "test hux"
+output:
+  bookdown::word_document2:
+    toc: no
+  bookdown::html_document2:
+    toc: no
+---
+
+
+See Table \@ref(testhuxtab)
+
+```{r testhuxtab}
+require(magrittr)
+require(huxtable)
+options(huxtable.bookdown = TRUE)
+
+autonum <- officer::run_autonum(seq_id = "tab", bkm = "testhuxtab")
+huxtable(
+         column1 = 1:5,
+         column2 = letters[1:5]
+         ) %>%
+  as_flextable() %>% 
+  flextable::set_caption("Try it from within flextable", autonum = autonum)
+# set_caption("This is table to test hux crossref in word") %>%
+# set_label("testhuxtab")
+
+```
