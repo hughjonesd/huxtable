@@ -12,7 +12,7 @@ Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.
 }
-\section{Development version}{
+\section{huxtable 5.1.0}{
 \itemize{
 \item \code{as_flextable()} now exports markdown in cells to RTF, and to Word
 with the help of the optional \code{ftExtra} package. Thanks @atusy for
@@ -158,8 +158,8 @@ headers.
 
 \subsection{Other changes}{
 \itemize{
-\item You can now use \href{https://commonmark.org/help}{markdown} within table
-cells.
+\item You can now use \href{https://commonmark.org/help/}{markdown} within
+table cells.
 \itemize{
 \item Use \code{set_markdown(ht, rows, cols)} to turn this on.
 \item Or use the convenience function \code{set_markdown_contents()} to set

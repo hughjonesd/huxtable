@@ -13,10 +13,11 @@ This is an update with some bugfixes and new features.
 
 ## R CMD check results
 
-1 note:
+2 notes:
   Missing or unexported object: ‘huxtable::.(fun)’
 This is a false positive due to the use of `bquote()`.
-
+  Unable to verify current time
+Presumably due to platform rather than to huxtable.
 
 
 ## Reverse dependencies

@@ -166,7 +166,7 @@ For example, the following code now does what you probably want:
 
 ## Other changes
 
-* You can now use [markdown](https://commonmark.org/help) within table cells. 
+* You can now use [markdown](https://commonmark.org/help/) within table cells. 
   - Use `set_markdown(ht, rows, cols)` to turn this on.
   - Or use the convenience function `set_markdown_contents()` to set cell 
     contents that will be interpreted as markdown. 

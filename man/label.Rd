@@ -30,7 +30,7 @@ LaTeX table labels typically start with \code{"tab:"}.
 Within knitr, huxtable labels will default to the same as the knitr chunk label.
 To turn off this behaviour, set \code{options(huxtable.autolabel = FALSE)}.
 
-If you use \href{http://bookdown.org}{bookdown}, and set a label on your
+If you use \href{https://bookdown.org}{bookdown}, and set a label on your
 table, the table \code{\link[=caption]{caption()}} will automatically be prefixed with \verb{(#label)}.
 You can then refer to the table using \verb{@ref(label)}. \code{label} needs to start
 with \code{"tab:"}; if it doesn't, the \code{"tab:"} prefix will be added

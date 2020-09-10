@@ -14,8 +14,8 @@ vignette: >
 This document briefly describes the design of [huxtable](https://hughjonesd.github.io/huxtable), 
 and compares it with other R packages for
 creating tables. A current version is on the web in
-[HTML](http://hughjonesd.github.io/huxtable/design-principles.html) or
-[PDF](http://hughjonesd.github.io/huxtable/design-principles.pdf) formats.
+[HTML](https://hughjonesd.github.io/huxtable/design-principles.html) or
+[PDF](https://hughjonesd.github.io/huxtable/design-principles.pdf) formats.
 
 ## Design principles
 

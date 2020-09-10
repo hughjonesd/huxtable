@@ -180,7 +180,7 @@ make_getter_setters("tabular_environment", "table", check_fun = is.string)
 #' Within knitr, huxtable labels will default to the same as the knitr chunk label.
 #' To turn off this behaviour, set `options(huxtable.autolabel = FALSE)`.
 #'
-#' If you use \href{http://bookdown.org}{bookdown}, and set a label on your
+#' If you use \href{https://bookdown.org}{bookdown}, and set a label on your
 #' table, the table [caption()] will automatically be prefixed with `(#label)`.
 #' You can then refer to the table using `@ref(label)`. `label` needs to start
 #' with `"tab:"`; if it doesn't, the `"tab:"` prefix will be added

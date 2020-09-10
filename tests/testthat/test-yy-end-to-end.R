@@ -190,8 +190,6 @@ test_that("huxtable.long_minus", {
         file = file.path("temp-artefacts", "long-minus-test.html"), open = FALSE))
   expect_silent(quick_latex(ht,
         file = file.path("temp-artefacts", "long-minus-test.tex"), open = FALSE))
-  expect_silent(quick_pdf(ht,
-        file = file.path("temp-artefacts", "long-minus-test.pdf"), open = FALSE))
   expect_silent(quick_rtf(ht,
         file = file.path("temp-artefacts", "long-minus-test.rtf"), open = FALSE))
 
@@ -204,4 +202,8 @@ test_that("huxtable.long_minus", {
         file = file.path("temp-artefacts", "long-minus-test.docx"), open = FALSE))
   expect_silent(quick_pptx(ht,
         file = file.path("temp-artefacts", "long-minus-test.pptx"), open = FALSE))
+
+  skip_on_cran()
+  expect_silent(quick_pdf(ht,
+        file = file.path("temp-artefacts", "long-minus-test.pdf"), open = FALSE))
 })
