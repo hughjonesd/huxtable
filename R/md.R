@@ -22,7 +22,7 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #'
 #' @details
 #' Only `align` and `caption` properties are used. The markdown format is
-#' `multiline_tables`, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
+#' `multiline_tables`, see the \href{https://pandoc.org/MANUAL.html#pandocs-markdown}{pandoc documentation}.
 #'
 #' @family printing functions
 #'

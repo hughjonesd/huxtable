@@ -1,7 +1,7 @@
 Type: Package
 Package: huxtable
 Title: Easily Create and Style Tables for LaTeX, HTML and Other Formats
-Version: 5.1.0
+Version: 5.1.0.9000
 Authors@R:
     person(given = "David",
            family = "Hugh-Jones",
@@ -16,7 +16,7 @@ Description: Creates styled tables for data presentation. Export to HTML, LaTeX,
   Includes  a 'huxreg' function for creation of regression tables, and 'quick_*' 
   one-liners to print data to a new document.
 License: MIT + file LICENSE
-URL: https://hughjonesd.github.io/huxtable
+URL: https://hughjonesd.github.io/huxtable/
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,

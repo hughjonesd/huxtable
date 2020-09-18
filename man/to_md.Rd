@@ -32,7 +32,7 @@ Create Markdown representing a huxtable
 }
 \details{
 Only \code{align} and \code{caption} properties are used. The markdown format is
-\code{multiline_tables}, see the \href{http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables}{rmarkdown documentation}.
+\code{multiline_tables}, see the \href{https://pandoc.org/MANUAL.html#pandocs-markdown}{pandoc documentation}.
 }
 \examples{
 print_md(jams)
