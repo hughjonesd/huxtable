@@ -126,11 +126,12 @@
 \usepackage{threeparttable}
 \usepackage{wrapfig}
 \usepackage{adjustbox}
+\usepackage{hyperref}
 \usepackage{fontspec}
 
 \title{Introduction to Huxtable}
 \author{David Hugh-Jones}
-\date{2020-06-16}
+\date{2020-09-18}
 
 \begin{document}
 \maketitle
@@ -159,44 +160,43 @@
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textbf{\textcolor[RGB]{255, 255, 255}{h}}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}-}
+\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{u}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} u} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} x} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{t}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} a} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} b} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} t} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
@@ -204,8 +204,8 @@
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{l}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} a} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
@@ -213,11 +213,12 @@
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{b}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} l} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} e} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} e} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
@@ -237,7 +238,7 @@
 \subsection{About this document}\label{about-this-document}}
 
 This is the introductory vignette for the R package `huxtable', version
-5.0.0. A current version is available on the web in
+5.1.0. A current version is available on the web in
 \href{https://hughjonesd.github.io/huxtable/huxtable.html}{HTML} or
 \href{https://hughjonesd.github.io/huxtable/huxtable.pdf}{PDF} format.
 
@@ -347,10 +348,10 @@ column names will be row 1.
 \end{Shaded}
 
 \begin{verbatim}
-##                                         Type             Price  
-##                                         Strawberry         1.9  
-##                                         Raspberry          2.1  
-##                                         Plum               1.8  
+##                                       Type             Price  
+##                                       Strawberry         1.9  
+##                                       Raspberry          2.1  
+##                                       Plum               1.8  
 ## 
 ## Column names: Type, Price
 \end{verbatim}
@@ -1176,7 +1177,7 @@ Here are some useful ways to change how cells are displayed.
 \NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
 \StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"*Type* of jam"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"*Price* of jam"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"~2.10~ **Sale!** 1.50"}\NormalTok{)}
+\StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"~~2.10~~ **Sale!** 1.50"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3544,7 +3545,7 @@ include \texttt{theme\_basic()} and the randomized
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{2}}p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedright \textbf{Type}\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Price}\huxbpad{3pt}}} &
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Price}\huxbpad{3pt}}} &
 \multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Sugar content}\huxbpad{3pt}}} \tabularnewline[-0.5pt]
 
 
@@ -3552,8 +3553,8 @@ include \texttt{theme\_basic()} and the randomized
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{2}}p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedright Strawberry\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 1.90\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 255, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 40.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 1.90\huxbpad{3pt}}} &
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 40.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
@@ -3569,7 +3570,7 @@ include \texttt{theme\_basic()} and the randomized
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{2}}p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedright Plum\huxbpad{3pt}}} &
 \multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 1.80\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 30.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 30.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
@@ -3967,15 +3968,97 @@ automatically format data frames for you:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa
-\end{verbatim}
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+ \label{tab:unnamed-chunk-51}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l l l}
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sepal.Length} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sepal.Width} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Petal.Length} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Petal.Width} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Species} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5.1 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.5 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.9 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3~~ \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.7 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.3 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.6 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.1 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.5 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5~~ \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.6 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5.4 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.9 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.7 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.4 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+ 
 
 \FloatBarrier
 
@@ -4037,12 +4120,12 @@ background colours are also displayed.
 \end{Shaded}
 
 \begin{verbatim}
-##                                          Pots of jam for sale                                          
-##                                   Type          Price   Sugar content  
-##                                 ───────────────────────────────────────
-##                                   Strawberry     1.90          40.00%  
-##                                   Raspberry      2.10          50.00%  
-##                                   Plum           1.80          30.00%  
+##                                       Pots of jam for sale                                        
+##                                Type          Price   Sugar content  
+##                              ───────────────────────────────────────
+##                                Strawberry     1.90          40.00%  
+##                                Raspberry      2.10          50.00%  
+##                                Plum           1.80          30.00%  
 ## 
 ## Column names: Type, Price, Sugar
 \end{verbatim}

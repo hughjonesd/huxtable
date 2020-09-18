@@ -79,7 +79,7 @@ as.character).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -196,7 +196,7 @@ as.character).
     <p>Number formatting is applied to any parts of cells that look like numbers.
 The exception is exponents in
 scientific notation; huxtable attempts to detect and ignore these.</p>
-<p>The default value is "\<!-- %.3g", which rounds numbers if they have more than 3 -->
+<p>The default value is "%.3g", which rounds numbers if they have more than 3
 significant digits, and which may use scientific notation for large numbers.</p>
 <p>Note that if your cells are of type numeric, a number format of <code>NA</code> doesn't
 guarantee you get back what you typed in, since R's default conversion may
@@ -206,7 +206,9 @@ take one argument and return a string. <code><a href='fmt_pretty.html'>fmt_prett
 are useful shortcuts for common formatting functions.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other formatting functions: 
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/options.html'>options("huxtable.long_minus")</a></code> in <a href='huxtable-options.html'>huxtable-options</a> for pretty-printing
+minus signs.</p>
+<p>Other formatting functions: 
 <code><a href='background_color.html'>background_color</a>()</code>,
 <code><a href='bold.html'>bold</a>()</code>,
 <code><a href='font_size.html'>font_size</a>()</code>,

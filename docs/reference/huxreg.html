@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -150,6 +150,7 @@
   <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"."</span>,
   <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tidy_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>glance_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>),
   <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
@@ -194,8 +195,14 @@ calculate confidence intervals.</p></td>
     <tr>
       <th>tidy_args</th>
       <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code>.
-You can also pass a list of lists; if so, the nth element will be used for
-the nth column.</p></td>
+A list without names will be treated as a list of argument lists, one
+for each model.</p></td>
+    </tr>
+    <tr>
+      <th>glance_args</th>
+      <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>generics::glance()</a></code>. A
+list without names will be treated as a list of argument lists, one for
+each model.</p></td>
     </tr>
     <tr>
       <th>stars</th>
@@ -307,7 +314,7 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
   <span class='fu'>huxreg</span>(<span class='no'>lm_robust</span>,
         <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))
 
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: Error calling `glance` on object of class coeftest:</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Error : No glance method for objects of class coeftest</span></div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
+}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: sandwich</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: lmtest</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Error calling `glance` on model 1, of class `coeftest`:</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Error : No glance method for objects of class coeftest</span></div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
 #&gt;                                                            (1)  
 #&gt;                                        ─────────────────────────
 #&gt;                  (Intercept)                        37.885 ***  

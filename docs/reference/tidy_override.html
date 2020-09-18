@@ -73,7 +73,7 @@ confidence intervals etc. for a model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -222,7 +222,7 @@ confidence intervals etc. for a model.</p>
 #&gt; Column names: names, model1, model2</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"nnet"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>mnl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>nnet</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span>(<span class='no'>gear</span> ~ <span class='no'>mpg</span>, <span class='no'>mtcars</span>)
-  <span class='no'>tidied</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></span>(<span class='no'>mnl</span>)
+  <span class='no'>tidied</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://broom.tidymodels.org/reference/reexports.html'>tidy</a></span>(<span class='no'>mnl</span>)
   <span class='no'>mnl4</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>4</span>, ])
   <span class='no'>mnl5</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>5</span>, ])
   <span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>mnl4</span>, <span class='no'>mnl5</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>)
@@ -233,9 +233,9 @@ confidence intervals etc. for a model.</p>
 #&gt; converged</div><div class='output co'>#&gt;               ────────────────────────────────────────────────────
 #&gt;                                             (1)              (2)  
 #&gt;                                ───────────────────────────────────
-#&gt;                 (Intercept)            0.000 **          0.000 *  
+#&gt;                 (Intercept)           -9.502 **         -7.691 *  
 #&gt;                                       (3.262)           (3.232)   
-#&gt;                 mpg                    1.608 **          1.430 *  
+#&gt;                 mpg                    0.475 **          0.358 *  
 #&gt;                                       (0.168)           (0.168)   
 #&gt;                                ───────────────────────────────────
 #&gt;                 nobs                                              

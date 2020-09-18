@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -136,6 +136,34 @@
       <small>Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="huxtable-5-1-0" class="section level1">
+<h1 class="page-header" data-toc-text="5.1.0">
+<a href="#huxtable-5-1-0" class="anchor"></a>huxtable 5.1.0<small> 2020-09-18 </small>
+</h1>
+<ul>
+<li><p><code><a href="../reference/as_flextable.html">as_flextable()</a></code> now exports markdown in cells to RTF, and to Word with the help of the optional <code>ftExtra</code> package. Thanks <a href='https://github.com/atusy'>@atusy</a> for adding this feature.</p></li>
+<li><p>Improvements to markdown screen export. This now uses the optional <code>fansi</code> package.</p></li>
+<li><p>New feature: <code><a href="../reference/as_Workbook.html">as_Workbook()</a></code> gains <code>start_row</code> and <code>start_col</code> arguments, to write a huxtable into an Excel worksheet starting at a particular row or column.</p></li>
+<li><p>New feature: <code><a href="../reference/huxreg.html">huxreg()</a></code> gains a <code>glance_args</code> argument to pass arguments to <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code>.</p></li>
+<li><p>New feature: <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.long_minus = TRUE)</a></code> will try to use long minus signs before numbers. The default is <code>FALSE</code>. It will probably become <code>TRUE</code> in a future version.</p></li>
+<li><p>Bugfix: <code>insert_row/column(..., after = 0)</code> was unsetting table properties.</p></li>
+<li><p>Bugfix: unicode characters above 32767 were incorrectly represented in RTF. Thanks <a href='https://github.com/kaigu1990'>@kaigu1990</a>.</p></li>
+<li><p>Bugfix: columns were being collapsed in <code><a href="../reference/as_Workbook.html">as_Workbook()</a></code>.</p></li>
+<li><p>Bugfix: <code>style_cells</code> didn’t work unless huxtable was on the search path.</p></li>
+<li><p>Bugfix: <code>merge_repeated_rows</code> merged <code>NA</code> rows incorrectly.</p></li>
+<li><p>Bugfix: number format was not set correctly in <code><a href="../reference/huxreg.html">huxreg()</a></code>’s <code>note</code>.</p></li>
+<li><p>Bugfix: in <code><a href="../reference/huxreg.html">huxreg()</a></code>, <code>tidy_args</code> threw an error if the first argument to <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> was a named list.</p></li>
+<li><p>Bugfix: <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> was broken.</p></li>
+<li><p>Clearer error messages for <code><a href="../reference/tidy_override.html">tidy_override()</a></code> when <code>extend = FALSE</code>. In future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
+</ul>
+<div id="other-news" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-news" class="anchor"></a>Other news:</h2>
+<ul>
+<li>Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.</li>
+</ul>
+</div>
+</div>
     <div id="huxtable-5-0-0" class="section level1">
 <h1 class="page-header" data-toc-text="5.0.0">
 <a href="#huxtable-5-0-0" class="anchor"></a>huxtable 5.0.0<small> 2020-06-15 </small>
@@ -230,7 +258,7 @@
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
-<li>You can now use <a href="https://commonmark.org/help">markdown</a> within table cells.
+<li>You can now use <a href="https://commonmark.org/help/">markdown</a> within table cells.
 <ul>
 <li>Use <code><a href="../reference/markdown.html">set_markdown(ht, rows, cols)</a></code> to turn this on.</li>
 <li>Or use the convenience function <code><a href="../reference/set_markdown_contents.html">set_markdown_contents()</a></code> to set cell contents that will be interpreted as markdown.</li>
@@ -255,7 +283,7 @@
 <p>By default, huxtable now sets labels from the current knitr chunk label, if there is one. This is consistent with <code>kable()</code>. In bookdown, you can then do e.g.</p>
 <pre><code>Some iris species are shown in \@ref(tab:mytable):
 
-```{r mytable}
+```r
 as_hux(iris)
 ```</code></pre>
 <p>Set <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.autolabel = FALSE)</a></code> to turn off this behaviour.</p>
@@ -276,7 +304,7 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li><p>There are two new themes: <code><a href="../reference/themes.html">theme_compact()</a></code> and <code><a href="../reference/themes.html">theme_bright()</a></code>.</p></li>
 <li><p>For <code><a href="../reference/huxreg.html">huxreg()</a></code>, a new function <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> allows you to replace the output of <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy(x)</a></code> entirely.</p></li>
 <li><p>huxtable now only sets <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.knit_print_df = TRUE)</a></code> if it is attached, not if it is loaded.</p></li>
-<li><p>huxtable supports <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
+<li><p>huxtable supports <code>dplyr::relocate()</code>, new in dplyr 1.0.0.</p></li>
 <li><p>Improvements to <code><a href="../reference/as_flextable.html">as_flextable()</a></code>.</p></li>
 <li><p>Improvements to <code><a href="../reference/quick-output.html">quick_pptx()</a></code> (thanks <a href='https://github.com/davidgohel'>@davidgohel</a>).</p></li>
 <li><p>Bugfixes for <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.use_fontspec = TRUE)</a></code>.</p></li>
@@ -284,9 +312,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li><p>Bugfix: non-ASCII characters are now supported in RTF.</p></li>
 </ul>
 </div>
-<div id="other-news" class="section level2">
+<div id="other-news-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-news" class="anchor"></a>Other news</h2>
+<a href="#other-news-1" class="anchor"></a>Other news</h2>
 <ul>
 <li><p>New versions of the <a href="https://cran.r-project.org/package=gtsummary">gtsummary</a> package will have an <code><a href="../reference/as_huxtable.html">as_huxtable()</a></code> method.</p></li>
 <li><p>Package <a href="https://cran.r-project.org/package=texreg">texreg</a> on CRAN includes a <code>huxtablereg()</code> function for creating a table of regression outputs.</p></li>

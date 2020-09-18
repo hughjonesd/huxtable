@@ -73,7 +73,7 @@ markdown." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -181,9 +181,24 @@ markdown." />
 <code>set_markdown()</code> returns the modified huxtable.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Markdown is currently implemented for HTML and LaTeX only. There is
-basic support for on-screen display. The only extension used is
-"strikethrough": write <code>~text~</code> to strike through text.</p>
+    <p>Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
+on-screen display. Word requires the <code>ftExtra</code> package.</p>
+<p>Most formats use <a href='https://commonmark.org'>commonmark</a>, with the
+"strikethrough" extension enabled.</p>
+<p>The following features are intended to work:</p><ul>
+<li><p>bold and italic text</p></li>
+<li><p>strikethrough (write <code>~~text~~</code> to strike through text).</p></li>
+<li><p>hyperlinks</p></li>
+</ul>
+
+<p>There are some quirks:</p><ul>
+<li><p>Paragraph-level properties (e.g. lists) won't work in Word.</p></li>
+<li><p>Strikethrough will probably not work in Word.</p></li>
+<li><p>To make lists work in LaTeX, set <code><a href='width.html'>width()</a></code> and ensure <code><a href='wrap.html'>wrap()</a></code> is <code>TRUE</code>.</p></li>
+<li><p>Inline images in RTF work using the INCLUDEPICTURE field type.</p></li>
+</ul>
+
+<p>If you try to use markdown tables, then seek psychiatric help.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='set_markdown_contents.html'>set_markdown_contents()</a></code>, a shortcut function.</p></div>
@@ -192,11 +207,9 @@ basic support for on-screen display. The only extension used is
     <pre class="examples"><div class='input'>
 <span class='no'>jams</span>[<span class='fl'>3</span>, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='st'>"~2.10~ **Sale!** 1.50"</span>
 <span class='fu'>set_markdown</span>(<span class='no'>jams</span>, <span class='fl'>3</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;                           Type                   Price  
-#&gt;                           Strawberry              1.90  
-#&gt;                           Raspberry               <span style='text-decoration: line-through;'>2.10</span><span>  
-#&gt;                                                  </span><span style='font-weight: bold;'>Sale!</span><span>  
-#&gt;                                                   1.50  
-#&gt;                           Plum                    1.80  
+#&gt;                           Strawberry             1.90   
+#&gt;                           Raspberry    <span style='text-decoration: line-through;'>2.10</span><span> </span><span style='font-weight: bold;'>Sale!</span><span> 1.50  
+#&gt;                           Plum                   1.80   
 #&gt; 
 #&gt; Column names: Type, Price</div><div class='input'>
 </div></span></pre>

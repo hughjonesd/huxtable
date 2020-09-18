@@ -73,7 +73,7 @@ openxlsx::openxlsx() Worbook objects, for use in Excel documents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
       </span>
     </div>
 
@@ -147,7 +147,15 @@ openxlsx::openxlsx() Worbook objects, for use in Excel documents." />
     <pre class="usage"><span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for huxtable</span>
-<span class='fu'>as_Workbook</span>(<span class='no'>ht</span>, <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 1"</span>, <span class='kw'>write_caption</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>as_Workbook</span>(
+  <span class='no'>ht</span>,
+  <span class='kw'>Workbook</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 1"</span>,
+  <span class='kw'>write_caption</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>start_row</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>start_col</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,6 +179,10 @@ openxlsx::openxlsx() Worbook objects, for use in Excel documents." />
     <tr>
       <th>write_caption</th>
       <td><p>If <code>TRUE</code>, print any caption in the row above or below the table.</p></td>
+    </tr>
+    <tr>
+      <th>start_row, start_col</th>
+      <td><p>Number. Write data starting at the given row and column.</p></td>
     </tr>
     </table>
 

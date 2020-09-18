@@ -240,16 +240,14 @@ end.rcode-->
 library(magrittr)
 ht <- hux(
         Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
-        Salary = c(50000, 50000, 40000),
-        add_colnames = TRUE
+        Salary = c(50000, 50000, 40000)
       )
 
 ht                                        %>%
       set_bold(1, everywhere)             %>%
       set_bottom_border(1, everywhere)    %>%
       set_align(everywhere, 2, 'right')   %>%
-      set_right_padding(10)               %>%
-      set_left_padding(10)                %>%
+      set_lr_padding(10)                  %>%
       set_width(0.35)                     %>%
       set_number_format(2)
 
@@ -308,6 +306,28 @@ with other R packages to create tables.</p>
 
 <h3>News</h3>
 
+<h4>September 18, 2020: RStudio table contest</h4>
+
+<p>RStudio is running a
+<a href="https://blog.rstudio.com/2020/09/15/announcing-the-2020-rstudio-table-contest/">competition</a>
+to produce nice tables from R. I will be
+judging some of the entries. Download huxtable 5.1.0 (just released) and produce
+something amazing!</p>
+
+<h4>September 18, 2020: Huxtable 5.1.0 released</h4>
+
+<p>This release contains several bugfixes, and some backwards-compatible
+new features:</p>
+
+<ul>
+<li><code>as_flextable()</code> now exports markdown in cells to RTF, and to Word with the
+  help of the optional "ftExtra" package.</li>
+<li><code>options(huxtable.long_minus = TRUE)</code> will try to use long
+  minus signs before negative numbers. The default is <code>FALSE</code>, for now.</li>
+<li><code>as_Workbook()</code> gains <code>start_row</code> and <code>start_col</code>
+  arguments, to write a huxtable into an Excel worksheet starting at a particular
+  row or column.</li>
+</ul>
 
 <h4>June 16, 2020: Huxtable 5.0.0 released</h4>
 
