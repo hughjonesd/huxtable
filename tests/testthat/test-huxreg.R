@@ -163,7 +163,7 @@ test_that("huxreg works when nobs not available", {
 
   m <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   ct <- lmtest::coeftest(m)
-  expect_warning(huxreg(ct, statistics = NULL), "No glance method")
+  expect_error(huxreg(ct, statistics = NULL), regexp = NA)
 })
 
 
