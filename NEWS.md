@@ -1,9 +1,10 @@
-# huxtable (development version)
-
 
 Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
 version number is increased whenever there are backwards-incompatible API changes.
 
+# huxtable 5.1.1
+
+* This version updates a minor test for compatibility with broom.
 
 # huxtable 5.1.0
 
