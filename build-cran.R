@@ -56,22 +56,7 @@ if (length(chk$notes)) {
 }
 
 
-# Tag new version ----------------------------------------------------------------------------------
-
-
-
-newtag <- paste0('v', v, '-rc')
-tags <- tags()
-tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
-tags <- as.numeric(gsub(newtag, '', tags))
-rc <- if (length(tags)) as.integer(max(tags) + 1) else 1L
-newtag <- paste0(newtag, rc)
-cat('\nTagging current version as: ', newtag, '\n')
-tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
-system2('git', c('push', '--tags'))
-
-
-# Manual section: run this line by line ------------------------------------------------------------
+# manual section --------
 
 # run checks
 
@@ -86,7 +71,21 @@ devtools::check_win_release()
 # may not work; if so just run the script in the main window.
 rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_results")
 
+
 # update CRAN-comments.md
+
+# Tag new version
+
+newtag <- paste0('v', v, '-rc')
+tags <- tags()
+tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
+tags <- as.numeric(gsub(newtag, '', tags))
+rc <- if (length(tags)) as.integer(max(tags) + 1) else 1L
+newtag <- paste0(newtag, rc)
+cat('\nTagging current version as: ', newtag, '\n')
+tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
+system2('git', c('push', '--tags'))
+
 
 # now release!
 
