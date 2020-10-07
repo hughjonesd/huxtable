@@ -1,5 +1,6 @@
 
-This is an update with some bugfixes and new features.
+This is an update with a trivial test fix for an updated version of broom,
+now on CRAN.
 
 
 ## Test environments
@@ -13,17 +14,11 @@ This is an update with some bugfixes and new features.
 
 ## R CMD check results
 
-3 notes on various platforms:
+Notes on various platforms:
 
 *  Missing or unexported object: ‘huxtable::.(fun)’
+
 This is a false positive, due to the use of `bquote()`.
-
-*  Unable to verify current time
-Presumably due to platform rather than to huxtable.
-
-*  Notes about URLs missing a final slash, e.g. 
-  "URL: https://commonmark.org/help (moved to https://commonmark.org/help/)"
-I think these are false positives, unless we are being very pernickety.
 
 
 ## Reverse dependencies
