@@ -27,6 +27,5 @@ This is a false positive, due to the use of `bquote()`.
 
 ## Reverse dependencies
 
-3 failed to check (expss, glmmTMB, nlmixr) due to errors with the current CRAN
-version. 8 others were all OK.
+10 reverse dependencies all checked OK.
 
