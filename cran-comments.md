@@ -2,6 +2,10 @@
 This is an update with a trivial test fix for an updated version of broom,
 now on CRAN.
 
+R CMD check generates a warning. As explained below, this is
+a false positive. (The same warning was seen for the previous version, and
+it was accepted by the CRAN team as a false positive.)
+
 
 ## Test environments
 
@@ -14,7 +18,7 @@ now on CRAN.
 
 ## R CMD check results
 
-Notes on various platforms:
+Warnings/notes on various platforms:
 
 *  Missing or unexported object: ‘huxtable::.(fun)’
 
