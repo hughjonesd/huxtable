@@ -17,7 +17,7 @@ mutate.huxtable(.data, ..., copy_cell_props = TRUE)
 columns.}
 }
 \description{
-Huxtable can be used with dplyr verbs \code{\link[dplyr:select]{dplyr::select()}}, \code{\link[dplyr:select]{dplyr::rename()}},
+Huxtable can be used with dplyr verbs \code{\link[dplyr:select]{dplyr::select()}}, \code{\link[dplyr:rename]{dplyr::rename()}},
 \code{dplyr::relocate()}, \code{\link[dplyr:slice]{dplyr::slice()}}, \code{\link[dplyr:arrange]{dplyr::arrange()}}, \code{\link[dplyr:mutate]{dplyr::mutate()}}
 and \code{\link[dplyr:mutate]{dplyr::transmute()}}. These will return huxtables. Other verbs like
 \code{\link[dplyr:summarise]{dplyr::summarise()}} will simply return data frames as normal;

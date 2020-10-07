@@ -977,5 +977,5 @@ If you run into trouble, consult `?"huxtable-FAQ"`. It will help you to file
 a useful bug report or seek help. 
 The [NEWS file](https://cran.r-project.org/package=huxtable/news/news.html) lists
 changes in recent versions. The 
-[huxtable website](https://hughjonesd.github.io/huxtable) has links to all this 
+[huxtable website](https://hughjonesd.github.io/huxtable/) has links to all this 
 information and more.

@@ -7,10 +7,15 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\details{
 Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.
+}
+\section{huxtable 5.1.1}{
+\itemize{
+\item This version updates a minor test for compatibility with broom.
+}
 }
 
 \section{huxtable 5.1.0}{
@@ -310,9 +315,9 @@ wrapping around tables.
 \item New \code{set_outer_border_colors()} and \code{set_outer_border_styles()}
 functions, like \code{set_outer_borders()}.
 \item Huxtable no longer requires the \code{broom} package, instead using the
-\code{generics} package. If you use \code{huxreg()}, you will still need e.g.
-\code{broom} or \code{broom.mixed} to provide \code{tidy()} and \code{glance()} methods
-for specific models.
+\code{generics} package. If you use \code{huxreg()}, you will still need
+e.g. \code{broom} or \code{broom.mixed} to provide \code{tidy()} and \code{glance()}
+methods for specific models.
 \item Bugfix: \code{tidy.tidy_override()} and \code{glance.tidy_override()} should
 work even if underlying object has no \code{tidy()} or \code{glance()} method.
 \item Bugfix: huxtables had option clash when \code{echo = TRUE} in Rmd
@@ -344,7 +349,7 @@ is not set.
 pipes.
 \item Enhancement: left- and right-aligned captions are now set above the
 table in LaTeX, using the “threeparttable” package. You will need to
-install this using e.g. \code{install_latex_dependencies()} or \code{tlmgr} if
+install this using e.g. \code{install_latex_dependencies()} or \code{tlmgr} if
 it is not already on your system.
 \item Enhancement: in \code{huxtable()} and friends, \code{add_rownames = "Colname"}
 now sets the name for the new column.
@@ -458,7 +463,7 @@ rows.
 \item Improved formatting in Excel output.
 \item New \code{format} method which returns the result of \code{to_html},
 \code{to_latex} etc. as appropriate.
-\item Bugfix: \code{to_html} printing e.g. “left-border: NA;” in cell CSS.
+\item Bugfix: \code{to_html} printing e.g. “left-border: NA;” in cell CSS.
 \item Bugfix: \verb{set_all_*} not working when huxtable is not attached.
 \item Bugfix: \code{as_Workbook} failing with non-numeric \code{width}.
 \item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel
@@ -576,7 +581,7 @@ column names.
 \subsection{Breaking changes}{
 \itemize{
 \item \code{number_format} now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
+This means you can include e.g. significance stars in a cell and
 still use \code{number_format} to format the content.
 \item If \code{number_format} is NA, numbers are unchanged.
 \item Default value of \code{number_format} has changed from “\%5.2f” to
