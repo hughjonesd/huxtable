@@ -69,7 +69,9 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
   # no-op except for wraptable:
   wraptable_width <- latex_table_width(ht)
   if (is.na(wraptable_width)) wraptable_width <- "0.25\\textwidth"
-  table_env[1] <- sprintf(table_env[1], wraptable_width)
+  if (position(ht) %in% c("wrapleft", "wrapright")) {
+    table_env[1] <- sprintf(table_env[1], wraptable_width)
+  }
   table_env <- paste0("\n", table_env, "\n")
 
   cap <- build_latex_caption(ht)
