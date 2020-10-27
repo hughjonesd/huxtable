@@ -27,3 +27,4 @@ logo\.xcf
 ^CRAN-RELEASE$
 tutorials
 ^data-raw$
+^\.github$
