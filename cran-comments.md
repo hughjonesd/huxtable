@@ -9,7 +9,6 @@ This follows from a failed update. Warnings have been fixed.
 * local OS X install (R 4.0.3)
 * travis-ci (oldrel, devel and release)
 * windows on appveyor (release and stable)
-* rhub for CRAN (Windows, devel)
 * win-builder (devel and release)
 
 
