@@ -41,6 +41,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
 
       - uses: r-lib/actions/setup-tinytex@v1
+      - run: tlmgr install adjustbox tabularx ulem wrapfig threeparttable
 
       - name: Query dependencies
         run: |
