@@ -4,7 +4,8 @@ version number is increased whenever there are backwards-incompatible API change
 
 # huxtable 5.1.1
 
-* This version updates a minor test for compatibility with broom.
+* Minor test update for compatibility with broom.
+* Fixes for R 4.1.0.
 
 # huxtable 5.1.0
 
