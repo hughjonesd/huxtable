@@ -1,15 +1,12 @@
 
 This is an update with a trivial test fix for an updated version of broom,
-now on CRAN.
+now on CRAN. It also fixes sprintf() warnings for R 4.1.0.
 
-R CMD check generates a warning. As explained below, this is
-a false positive. (The same warning was seen for the previous version, and
-it was accepted by the CRAN team as a false positive.)
-
+This follows from a failed update. Warnings have been fixed. 
 
 ## Test environments
 
-* local OS X install (R 4.0.2)
+* local OS X install (R 4.0.3)
 * travis-ci (oldrel, devel and release)
 * windows on appveyor (release and stable)
 * rhub for CRAN (Windows, devel)
@@ -18,14 +15,11 @@ it was accepted by the CRAN team as a false positive.)
 
 ## R CMD check results
 
-Warnings/notes on various platforms:
-
-*  Missing or unexported object: ‘huxtable::.(fun)’
-
-This is a false positive, due to the use of `bquote()`.
+No warnings on local, win-builder, travis or appveyor.
 
 
 ## Reverse dependencies
 
-10 reverse dependencies all checked OK.
+8 reverse dependencies checked OK; 3 failed to check due to errors in the 
+dependent packages.
 
