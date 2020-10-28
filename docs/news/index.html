@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
       </span>
     </div>
 
@@ -136,6 +136,15 @@
       <small>Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="huxtable-5-1-1" class="section level1">
+<h1 class="page-header" data-toc-text="5.1.1">
+<a href="#huxtable-5-1-1" class="anchor"></a>huxtable 5.1.1<small> 2020-10-27 </small>
+</h1>
+<ul>
+<li>Minor test update for compatibility with broom.</li>
+<li>Fixes for R 4.1.0.</li>
+</ul>
+</div>
     <div id="huxtable-5-1-0" class="section level1">
 <h1 class="page-header" data-toc-text="5.1.0">
 <a href="#huxtable-5-1-0" class="anchor"></a>huxtable 5.1.0<small> 2020-09-18 </small>
@@ -304,7 +313,7 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li><p>There are two new themes: <code><a href="../reference/themes.html">theme_compact()</a></code> and <code><a href="../reference/themes.html">theme_bright()</a></code>.</p></li>
 <li><p>For <code><a href="../reference/huxreg.html">huxreg()</a></code>, a new function <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> allows you to replace the output of <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy(x)</a></code> entirely.</p></li>
 <li><p>huxtable now only sets <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.knit_print_df = TRUE)</a></code> if it is attached, not if it is loaded.</p></li>
-<li><p>huxtable supports <code>dplyr::relocate()</code>, new in dplyr 1.0.0.</p></li>
+<li><p>huxtable supports <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
 <li><p>Improvements to <code><a href="../reference/as_flextable.html">as_flextable()</a></code>.</p></li>
 <li><p>Improvements to <code><a href="../reference/quick-output.html">quick_pptx()</a></code> (thanks <a href='https://github.com/davidgohel'>@davidgohel</a>).</p></li>
 <li><p>Bugfixes for <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.use_fontspec = TRUE)</a></code>.</p></li>

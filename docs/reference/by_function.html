@@ -73,7 +73,7 @@ Useful functions include scales and palettes from the scales package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
       </span>
     </div>
 
@@ -184,22 +184,22 @@ affects the <code>mode</code> of cell data.</p>
     <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>20</span>), <span class='fl'>5</span>, <span class='fl'>4</span>))
 
 <span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='fu'>by_function</span>(<span class='no'>grey</span>))</div><div class='output co'>#&gt;                         <span style='background-color: #000000;'>0.0201</span><span>   </span><span style='background-color: #BBBBBB;'>0.528</span><span>   </span><span style='background-color: #BBBBBB;'>0.92  </span><span>   </span><span style='background-color: #BBBBBB;'>0.997</span><span>  
-#&gt;                         </span><span style='background-color: #000000;'>0.377 </span><span>   </span><span style='background-color: #BBBBBB;'>0.601</span><span>   </span><span style='background-color: #000000;'>0.401 </span><span>   </span><span style='background-color: #000000;'>0.149</span><span>  
-#&gt;                         </span><span style='background-color: #BBBBBB;'>0.56  </span><span>   </span><span style='background-color: #000000;'>0.261</span><span>   </span><span style='background-color: #000000;'>0.213 </span><span>   </span><span style='background-color: #BBBBBB;'>0.519</span><span>  
-#&gt;                         </span><span style='background-color: #BBBBBB;'>0.857 </span><span>   </span><span style='background-color: #000000;'>0.29 </span><span>   </span><span style='background-color: #BBBBBB;'>0.672 </span><span>   </span><span style='background-color: #BBBBBB;'>0.846</span><span>  
-#&gt;                         </span><span style='background-color: #000000;'>0.385 </span><span>   </span><span style='background-color: #000000;'>0.48 </span><span>   </span><span style='background-color: #000000;'>0.0586</span><span>   </span><span style='background-color: #BBBBBB;'>0.718</span><span>  
+      <span class='fu'>by_function</span>(<span class='no'>grey</span>))</div><div class='output co'>#&gt;                         <span style='background-color: #080808;'>0.0201</span><span>   </span><span style='background-color: #808080;'>0.528</span><span>   </span><span style='background-color: #DADADA;'>0.92  </span><span>   </span><span style='background-color: #EEEEEE;'>0.997</span><span>  
+#&gt;                         </span><span style='background-color: #626262;'>0.377 </span><span>   </span><span style='background-color: #949494;'>0.601</span><span>   </span><span style='background-color: #626262;'>0.401 </span><span>   </span><span style='background-color: #262626;'>0.149</span><span>  
+#&gt;                         </span><span style='background-color: #8A8A8A;'>0.56  </span><span>   </span><span style='background-color: #444444;'>0.261</span><span>   </span><span style='background-color: #3A3A3A;'>0.213 </span><span>   </span><span style='background-color: #808080;'>0.519</span><span>  
+#&gt;                         </span><span style='background-color: #D0D0D0;'>0.857 </span><span>   </span><span style='background-color: #4E4E4E;'>0.29 </span><span>   </span><span style='background-color: #A8A8A8;'>0.672 </span><span>   </span><span style='background-color: #D0D0D0;'>0.846</span><span>  
+#&gt;                         </span><span style='background-color: #626262;'>0.385 </span><span>   </span><span style='background-color: #767676;'>0.48 </span><span>   </span><span style='background-color: #121212;'>0.0586</span><span>   </span><span style='background-color: #B2B2B2;'>0.718</span><span>  
 #&gt; 
 #&gt; Column names: V1, V2, V3, V4</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"scales"</span>)) {
   <span class='fu'><a href='text_color.html'>map_text_color</a></span>(<span class='no'>ht</span>, <span class='fu'>by_function</span>(
           <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/seq_gradient_pal.html'>seq_gradient_pal</a></span>()
         ))
-}</div><div class='output co'>#&gt;                         </span><span style='color: #0000BB;'>0.0201</span><span>   </span><span style='color: #555555;'>0.528</span><span>   </span><span style='color: #BB0000;'>0.92  </span><span>   </span><span style='color: #BB0000;'>0.997</span><span>  
-#&gt;                         </span><span style='color: #555555;'>0.377 </span><span>   </span><span style='color: #555555;'>0.601</span><span>   </span><span style='color: #555555;'>0.401 </span><span>   </span><span style='color: #555555;'>0.149</span><span>  
-#&gt;                         </span><span style='color: #555555;'>0.56  </span><span>   </span><span style='color: #555555;'>0.261</span><span>   </span><span style='color: #555555;'>0.213 </span><span>   </span><span style='color: #555555;'>0.519</span><span>  
-#&gt;                         </span><span style='color: #BB0000;'>0.857 </span><span>   </span><span style='color: #555555;'>0.29 </span><span>   </span><span style='color: #555555;'>0.672 </span><span>   </span><span style='color: #BB0000;'>0.846</span><span>  
-#&gt;                         </span><span style='color: #555555;'>0.385 </span><span>   </span><span style='color: #555555;'>0.48 </span><span>   </span><span style='color: #0000BB;'>0.0586</span><span>   </span><span style='color: #555555;'>0.718</span><span>  
+}</div><div class='output co'>#&gt;                         </span><span style='color: #5F87AF;'>0.0201</span><span>   </span><span style='color: #626262;'>0.528</span><span>   </span><span style='color: #AF5F5F;'>0.92  </span><span>   </span><span style='color: #AF5F5F;'>0.997</span><span>  
+#&gt;                         </span><span style='color: #626262;'>0.377 </span><span>   </span><span style='color: #626262;'>0.601</span><span>   </span><span style='color: #626262;'>0.401 </span><span>   </span><span style='color: #5F8787;'>0.149</span><span>  
+#&gt;                         </span><span style='color: #626262;'>0.56  </span><span>   </span><span style='color: #626262;'>0.261</span><span>   </span><span style='color: #5F8787;'>0.213 </span><span>   </span><span style='color: #626262;'>0.519</span><span>  
+#&gt;                         </span><span style='color: #AF5F5F;'>0.857 </span><span>   </span><span style='color: #626262;'>0.29 </span><span>   </span><span style='color: #626262;'>0.672 </span><span>   </span><span style='color: #AF5F5F;'>0.846</span><span>  
+#&gt;                         </span><span style='color: #626262;'>0.385 </span><span>   </span><span style='color: #626262;'>0.48 </span><span>   </span><span style='color: #5F87AF;'>0.0586</span><span>   </span><span style='color: #87875F;'>0.718</span><span>  
 #&gt; 
 #&gt; Column names: V1, V2, V3, V4</div></span></pre>
   </div>

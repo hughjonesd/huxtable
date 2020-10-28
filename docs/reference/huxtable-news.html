@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
       </span>
     </div>
 
@@ -149,6 +149,14 @@
     <p>Huxtable attempts to follow semantic versioning (<a href='https://semver.org'>https://semver.org</a>).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.</p>
+    <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 5.1.1</h2>
+
+    
+<ul>
+<li><p>Minor test update for compatibility with broom.</p></li>
+<li><p>Fixes for R 4.1.0.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 5.1.0</h2>
 
     
@@ -346,7 +354,7 @@ table width.</p></li>
 replace the output of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> entirely.</p></li>
 <li><p>huxtable now only sets <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.knit_print_df = TRUE)</a></code> if
 it is attached, not if it is loaded.</p></li>
-<li><p>huxtable supports <code>dplyr::relocate()</code>, new in dplyr 1.0.0.</p></li>
+<li><p>huxtable supports <code><a href='https://dplyr.tidyverse.org/reference/relocate.html'>dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
 <li><p>Improvements to <code><a href='as_flextable.html'>as_flextable()</a></code>.</p></li>
 <li><p>Improvements to <code><a href='quick-output.html'>quick_pptx()</a></code> (thanks @davidgohel).</p></li>
 <li><p>Bugfixes for <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.use_fontspec = TRUE)</a></code>.</p></li>
