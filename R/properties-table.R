@@ -171,7 +171,11 @@ make_getter_setters("tabular_environment", "table", check_fun = is.string)
 #'
 #' @details
 #' No features are guaranteed to work if you set this to a non-default
-#' value. Use at your own risk!
+#' value. Use at your own risk! In particular, you may need to set
+#' [latex_float()] to a non-default value.
+#'
+#' If [position()] is set to `"wrapleft"` or `"wrapright"`, this
+#' value is overridden.
 #'
 #' @template getset-example
 #' @templateVar attr_val "table*"

@@ -80,6 +80,7 @@ huxtable_env$huxtable_default_attrs <- list(
         caption_width       = NA_real_,
         position            = "center",
         tabular_environment = NA_character_,
+        table_environment   = "table",
         label               = NA_character_,
         latex_float         = "ht",
         markdown            = FALSE,

@@ -12,6 +12,13 @@ Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.
 }
+\section{huxtable (development version)}{
+\itemize{
+\item Add \code{table_environment} property so you can use e.g. \code{"table*"} in
+TeX.
+}
+}
+
 \section{huxtable 5.1.1}{
 \itemize{
 \item Minor test update for compatibility with broom.
