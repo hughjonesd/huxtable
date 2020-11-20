@@ -61,10 +61,14 @@ to_latex.huxtable <- function (ht, tabular_only = FALSE, ...){
     c(sprintf("\\resizebox*{!}{%s}{", height), "}")
   }
 
+  table_env <- table_environment(ht)
   table_env <- switch(position(ht),
           "wrapleft"  = c("\\begin{wraptable}{l}{%s}", "\\end{wraptable}"),
           "wrapright" = c("\\begin{wraptable}{r}{%s}", "\\end{wraptable}"),
-          c(sprintf("\\begin{table}[%s]", latex_float(ht)), "\\end{table}")
+          c(
+            sprintf("\\begin{%s}[%s]", table_env, latex_float(ht)),
+            sprintf("\\end{%s}", table_env)
+          )
         )
   # no-op except for wraptable:
   wraptable_width <- latex_table_width(ht)

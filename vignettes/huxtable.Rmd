@@ -308,7 +308,8 @@ props[["Cell"]] <- sort(c(
 props[["Row"]]    <- c("row_height", "header_rows")
 props[["Column"]] <- c("col_width", "header_cols")
 props[["Table"]]  <- sort(c("width", "height", "position", "caption", 
-  "caption_pos", "caption_width", "tabular_environment", "label", "latex_float"))
+  "caption_pos", "caption_width", "tabular_environment", "table_environment", 
+  "label", "latex_float"))
 
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep("", maxl - length(x))))

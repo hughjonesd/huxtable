@@ -162,6 +162,23 @@ NULL
 make_getter_setters("tabular_environment", "table", check_fun = is.string)
 
 
+#' Set the "table" environment in LaTeX
+#'
+#' By default this is `"table"`.
+#' @template getset-table
+#' @templateVar attr_name table_environment
+#' @templateVar value_param_desc A string.
+#'
+#' @details
+#' No features are guaranteed to work if you set this to a non-default
+#' value. Use at your own risk!
+#'
+#' @template getset-example
+#' @templateVar attr_val "table*"
+NULL
+make_getter_setters("table_environment", "table", check_fun = is.string)
+
+
 #' Set a table label for external referencing
 #'
 #' The label is used as the table's label in LaTeX, and as the "id" property

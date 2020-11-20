@@ -1,8 +1,10 @@
-# huxtable (development version)
 
 
 Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
 version number is increased whenever there are backwards-incompatible API changes.
+
+# huxtable (development version)
+* Add `table_environment` property so you can use e.g. `"table*"` in TeX.
 
 # huxtable 5.1.1
 

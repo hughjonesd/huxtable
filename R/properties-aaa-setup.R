@@ -36,6 +36,7 @@ huxtable_table_attrs <- c(
         "caption_pos",
         "caption_width",
         "tabular_environment",
+        "table_environment",
         "label",
         "latex_float"
       )
