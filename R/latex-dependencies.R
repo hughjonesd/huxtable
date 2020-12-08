@@ -170,7 +170,7 @@ tlmgr_packages <- function () {
 
 
 check_adjustbox <- function (quiet = TRUE) {
-  args <- c("info", "--data", "'cat-version'", "--only-installed", "adjustbox")
+  args <- c("info", "--data", "cat-version", "--only-installed", "adjustbox")
   adjustbox_rev <- if (requireNamespace("tinytex", quietly = TRUE)) {
     tinytex::tlmgr(args, stdout = TRUE, .quiet = TRUE)
   } else {

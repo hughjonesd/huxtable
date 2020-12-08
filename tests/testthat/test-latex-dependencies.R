@@ -26,6 +26,7 @@ test_that("check_latex_dependencies checks adjustbox", {
   skip_on_appveyor()
   # nor does win-builder
   skip_on_cran()
+  skip_on_ci()
 
   with_mock(
     "tinytex::tlmgr" = function (...) "1.0",

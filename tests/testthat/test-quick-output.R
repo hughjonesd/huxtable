@@ -45,6 +45,7 @@ test_that("Quick output functions create files", {
 
 test_that("quick_latex can be compiled", {
   skip_on_appveyor() # no pdflatex
+  skip_on_ci() # trouble on github
   skip_without_latex_deps()
 
   ht <- hux(a = 1:2, b = 1:2)

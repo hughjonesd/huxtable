@@ -41,6 +41,7 @@ test_that("add_colnames with as_huxtable.matrix", {
 
 
 test_that("create huxtable using tribble_hux()", {
+  skip_if_not_installed("tibble")
   for (addc in c(TRUE, FALSE)) {
     expect_silent(ht <- tribble_hux(
       ~a, ~b,

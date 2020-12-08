@@ -36,6 +36,7 @@ huxtable_table_attrs <- c(
         "caption_pos",
         "caption_width",
         "tabular_environment",
+        "table_environment",
         "label",
         "latex_float"
       )
@@ -79,6 +80,7 @@ huxtable_env$huxtable_default_attrs <- list(
         caption_width       = NA_real_,
         position            = "center",
         tabular_environment = NA_character_,
+        table_environment   = "table",
         label               = NA_character_,
         latex_float         = "ht",
         markdown            = FALSE,

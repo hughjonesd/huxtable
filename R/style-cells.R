@@ -67,8 +67,7 @@ style_cells <- function (ht, row, col, ...) {
   call[["..."]] <- NULL
   call[["ht"]] <- quote(ht)
   for (prop_name in names(props)) {
-    fun <- as.symbol(paste0("set_", prop_name))
-    colon_call <- bquote(`::`(huxtable, .(fun)))
+    colon_call <- call("::", "huxtable", paste0("set_", prop_name))
     call[[1]] <- colon_call
     call$value <- props[[prop_name]]
     ht <- eval(call, list(ht = ht), parent.frame())
