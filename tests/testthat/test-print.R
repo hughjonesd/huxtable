@@ -229,3 +229,10 @@ test_that("Chinese characters are not repeated", {
   expect_silent(s <- to_screen(ht))
   expect_match(s, "^[[:space:]]*\u4e2d\u6587[[:space:]]*(\\n.*)?$", all = FALSE)
 })
+
+
+test_that("Bugfix: print_screen with colnames = FALSE prints final newline", {
+  h <- hux(col = 1)
+  s <- to_screen(h, colnames = FALSE)
+  expect_match(s, "\\n$")
+})

@@ -158,9 +158,10 @@ to_screen.huxtable <- function (
           )
     result <- paste0(strrep(" ", pad_width), result)
     result <- paste(result, collapse = "\n")
+    result <- paste0(result, "\n")
   } else {
     # 0-nrow or 0-ncol huxtable
-    result <- glue::glue("<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>")
+    result <- glue::glue("<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>\n")
   }
   if (! is.na(cap <- caption(ht))) {
     poss_pos <- c("left", "center", "right")
@@ -175,7 +176,8 @@ to_screen.huxtable <- function (
     # then we pad out like charmat.
     # Result: the caption stays within the boundaries of the table if possible.
     cap <- paste0(pad_position(cap, position_no_wrap(ht), max_width), collapse = "\n")
-    result <- if (grepl("top", caption_pos(ht))) paste0(cap, "\n", result) else paste0(result, "\n", cap)
+    cap <- paste0(cap, "\n")
+    result <- if (grepl("top", caption_pos(ht))) paste0(cap, result) else paste0(result, cap)
   }
 
 
@@ -183,7 +185,7 @@ to_screen.huxtable <- function (
     colnames_text <- paste0("Column names: ", paste(all_colnames, collapse = ", "))
     colnames_text <- strwrap(colnames_text, max_width)
     colnames_text <- paste0(colnames_text, collapse = "\n")
-    result <- paste0(result, "\n\n", colnames_text, "\n")
+    result <- paste0(result, "\n", colnames_text, "\n")
   }
   if (last_ht_col < orig_ncol) result <- glue::glue(
         "{result}\n{last_ht_col}/{orig_ncol} columns shown.\n")

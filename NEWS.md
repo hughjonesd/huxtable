@@ -1,6 +1,11 @@
 
+
 Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
 version number is increased whenever there are backwards-incompatible API changes.
+
+# huxtable (development version)
+
+* Bugfix: `print_screen(h, colnames = FALSE)` didn't print a final newline.
 
 # huxtable 5.1.1
 
