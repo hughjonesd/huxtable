@@ -10,7 +10,6 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
-^\.travis\.yml$
 ^tests/testthat/output-rds$
 logo\.xcf
 ^build-cran.R$
