@@ -14,10 +14,11 @@ backwards-incompatible API changes.
 }
 \section{huxtable (development version)}{
 \itemize{
-\item Bugfix: \code{print_screen(h, colnames = FALSE)} didn’t print a final
-newline.
 \item Add \code{table_environment} property so you can use e.g. \code{"table*"} in
 TeX.
+\item Bugfix: \code{print_screen(h, colnames = FALSE)} didn’t print a final
+newline.
+\item Bugfix: italic from markdown was being printed as underlined in TeX.
 }
 }
 
