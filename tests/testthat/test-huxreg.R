@@ -22,6 +22,7 @@ test_that("huxreg copes with different models", {
 
 
 test_that("huxreg confidence intervals work", {
+  skip("nnet 0.7.4 has problems with tidy()")
   skip_if_not_installed("nnet")
 
   set.seed(27101975)
