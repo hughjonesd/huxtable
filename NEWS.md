@@ -9,6 +9,7 @@ version number is increased whenever there are backwards-incompatible API change
 * Add `table_environment` property so you can use e.g. `"table*"` in TeX.
 * Bugfix: `print_screen(h, colnames = FALSE)` didn't print a final newline.
 * Bugfix: italic from markdown was being printed as underlined in TeX.
+* Minor test update for compatibility with broom.
 
 # huxtable 5.1.1
 

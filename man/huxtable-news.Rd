@@ -19,6 +19,7 @@ TeX.
 \item Bugfix: \code{print_screen(h, colnames = FALSE)} didn’t print a final
 newline.
 \item Bugfix: italic from markdown was being printed as underlined in TeX.
+\item Minor test update for compatibility with broom.
 }
 }
 
@@ -144,7 +145,8 @@ the border thickness, write \code{brdr_thickness(left_border(ht))}.
 \item \code{error_style} and \code{pad_decimal} arguments in \code{huxreg}. Use
 \code{error_format} and \code{align(hx) <- "."}.
 \item The \code{where()}, \code{is_a_number()} and \code{pad_decimal()} functions.
-Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and \code{align(ht) <- "."}.
+Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and
+\code{align(ht) <- "."}.
 }
 \item Default padding has been increased to 6 points.
 \item By default, \code{width()} is now unset.
@@ -187,8 +189,9 @@ on-screen display.
 \item Huxtable now has the concept of header row and columns.
 \itemize{
 \item By default, data frame column names will be headers.
-\item To set other rows to be headers, use \code{set_header_rows(ht, row_numbers, TRUE)}. For columns, use \code{header_cols()} or
-\code{set_header_cols()}.
+\item To set other rows to be headers, use
+\code{set_header_rows(ht, row_numbers, TRUE)}. For columns, use
+\code{header_cols()} or \code{set_header_cols()}.
 \item New functions \code{style_headers()}, \code{style_header_cols()}, and
 \code{style_header_rows()} to set multiple properties on headers.
 \item In themes, \code{header_row/col = TRUE} set the first row/col to a
@@ -319,8 +322,8 @@ regressions. This will be available from the next version of
 \itemize{
 \item Huxtables can now be printed directly in Word documents and
 Powerpoint presentations, thanks to the \code{flextable} package and
-recent versions of Pandoc. (Powerpoint printing requires Pandoc >=
-2.4.0.)
+recent versions of Pandoc. (Powerpoint printing requires
+Pandoc >= 2.4.0.)
 \item New “wrapleft” and “wrapright” options to \code{position()} allow text
 wrapping around tables.
 \item New \code{set_outer_border_colors()} and \code{set_outer_border_styles()}
@@ -389,8 +392,8 @@ add
 
 md_extensions: +raw_attribute
 
-to your YAML header for this to work, and you will need a recent (>
-2.0.0) version of Pandoc.
+to your YAML header for this to work, and you will need a recent
+(> 2.0.0) version of Pandoc.
 }
 }
 }
@@ -479,8 +482,8 @@ rows.
 \item Bugfix: \code{as_Workbook} failing with non-numeric \code{width}.
 \item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel
 output.
-\item Bugfix: \code{as_flextable} borders not working in cells with colspan >
-1.
+\item Bugfix: \code{as_flextable} borders not working in cells with
+colspan > 1.
 \item Documentation bugfixes.
 \item Compatibility with broom 5.0.0 - thanks @alexpghayes
 }
