@@ -37,10 +37,9 @@ long <- 'A rather long row of text which goes on...'
 
 ```
 
+Hey, *this should be italics not underline*.
+
 ```{r}
-as_hux(matrix(LETTERS[1:6], 2, 3)) %>% 
-      set_right_border(2) %>% 
-      set_right_border_color("white") %>% 
-      set_bottom_border(0.4)
+hux("A huxtable")
   
 ```
