@@ -1,24 +1,25 @@
 
-This is an update with a trivial test fix for an updated version of broom,
-now on CRAN. It also fixes sprintf() warnings for R 4.1.0.
+This update adds a new feature, and fixes a test which failed due to a bug in
+broom and was presumably not caught by a reverse dependency check.
 
-This follows from a failed update. Warnings have been fixed. 
 
 ## Test environments
 
 * local OS X install (R 4.0.3)
-* travis-ci (oldrel, devel and release)
+* github (windows/linux, release/devel)
 * windows on appveyor (release and stable)
 * win-builder (devel and release)
 
 
 ## R CMD check results
 
-No warnings on local, win-builder, travis or appveyor.
+No warnings on local, win-builder, github or appveyor. Notes relate to 
+'misspelled word' RTF (false positive) and are otherwise about the package
+being archived, including one non-working URL which will work again when
+the package is in place on CRAN.
 
 
 ## Reverse dependencies
 
-8 reverse dependencies checked OK; 3 failed to check due to errors in the 
-dependent packages.
-
+Reverse dependencies couldn't be checked because the CRAN package was archived.
+It's unlikely that the changes introduce problems for dependencies.
