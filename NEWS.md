@@ -3,7 +3,7 @@
 Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
 version number is increased whenever there are backwards-incompatible API changes.
 
-# huxtable 5.1.2
+# huxtable 5.2.0
 
 * Add `table_environment` property so you can use e.g. `"table*"` in TeX.
 * Bugfix: `print_screen(h, colnames = FALSE)` didn't print a final newline.
