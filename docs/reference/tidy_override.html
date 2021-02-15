@@ -73,7 +73,7 @@ confidence intervals etc. for a model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
       </span>
     </div>
 
@@ -149,10 +149,10 @@ confidence intervals etc. for a model.</p>
 <span class='fu'>tidy_replace</span>(<span class='no'>x</span>, <span class='no'>tidied</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tidy_override</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/nobs.html'>nobs</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
@@ -162,7 +162,7 @@ confidence intervals etc. for a model.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A model with methods defined for <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code> and/or <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>generics::glance()</a></code>.</p></td>
+      <td><p>A model with methods defined for <code><a href='https://generics.r-lib.org/reference/tidy.html'>generics::tidy()</a></code> and/or <code><a href='https://generics.r-lib.org/reference/glance.html'>generics::glance()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -175,11 +175,11 @@ confidence intervals etc. for a model.</p>
     </tr>
     <tr>
       <th>extend</th>
-      <td><p>Logical: allow adding new columns to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code>?</p></td>
+      <td><p>Logical: allow adding new columns to <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code>?</p></td>
     </tr>
     <tr>
       <th>tidied</th>
-      <td><p>Data frame to replace the result of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code>.</p></td>
+      <td><p>Data frame to replace the result of <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -192,8 +192,8 @@ confidence intervals etc. for a model.</p>
     <p>An object that can be passed in to <code>huxreg</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>tidy_override</code> allows you to replace some columns of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> with your own data.</p>
-<p><code>tidy_replace</code> allows you to replace the result of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> entirely.</p>
+    <p><code>tidy_override</code> allows you to replace some columns of <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code> with your own data.</p>
+<p><code>tidy_replace</code> allows you to replace the result of <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code> entirely.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"broom"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {

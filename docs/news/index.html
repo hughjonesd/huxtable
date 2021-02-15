@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
       </span>
     </div>
 
@@ -136,24 +136,35 @@
       <small>Source: <a href='https://github.com/hughjonesd/huxtable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="huxtable-5-1-1" class="section level1">
+    <div id="huxtable-520" class="section level1">
+<h1 class="page-header" data-toc-text="5.2.0">
+<a href="#huxtable-520" class="anchor"></a>huxtable 5.2.0<small> 2021-02-14 </small>
+</h1>
+<ul>
+<li>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in TeX.</li>
+<li>Bugfix: <code><a href="../reference/to_screen.html">print_screen(h, colnames = FALSE)</a></code> didn’t print a final newline.</li>
+<li>Bugfix: italic from markdown was being printed as underlined in TeX.</li>
+<li>Minor test update for compatibility with broom.</li>
+</ul>
+</div>
+    <div id="huxtable-511" class="section level1">
 <h1 class="page-header" data-toc-text="5.1.1">
-<a href="#huxtable-5-1-1" class="anchor"></a>huxtable 5.1.1<small> 2020-10-27 </small>
+<a href="#huxtable-511" class="anchor"></a>huxtable 5.1.1<small> 2020-10-27 </small>
 </h1>
 <ul>
 <li>Minor test update for compatibility with broom.</li>
 <li>Fixes for R 4.1.0.</li>
 </ul>
 </div>
-    <div id="huxtable-5-1-0" class="section level1">
+    <div id="huxtable-510" class="section level1">
 <h1 class="page-header" data-toc-text="5.1.0">
-<a href="#huxtable-5-1-0" class="anchor"></a>huxtable 5.1.0<small> 2020-09-18 </small>
+<a href="#huxtable-510" class="anchor"></a>huxtable 5.1.0<small> 2020-09-18 </small>
 </h1>
 <ul>
 <li><p><code><a href="../reference/as_flextable.html">as_flextable()</a></code> now exports markdown in cells to RTF, and to Word with the help of the optional <code>ftExtra</code> package. Thanks <a href='https://github.com/atusy'>@atusy</a> for adding this feature.</p></li>
 <li><p>Improvements to markdown screen export. This now uses the optional <code>fansi</code> package.</p></li>
 <li><p>New feature: <code><a href="../reference/as_Workbook.html">as_Workbook()</a></code> gains <code>start_row</code> and <code>start_col</code> arguments, to write a huxtable into an Excel worksheet starting at a particular row or column.</p></li>
-<li><p>New feature: <code><a href="../reference/huxreg.html">huxreg()</a></code> gains a <code>glance_args</code> argument to pass arguments to <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code>.</p></li>
+<li><p>New feature: <code><a href="../reference/huxreg.html">huxreg()</a></code> gains a <code>glance_args</code> argument to pass arguments to <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code>.</p></li>
 <li><p>New feature: <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.long_minus = TRUE)</a></code> will try to use long minus signs before numbers. The default is <code>FALSE</code>. It will probably become <code>TRUE</code> in a future version.</p></li>
 <li><p>Bugfix: <code>insert_row/column(..., after = 0)</code> was unsetting table properties.</p></li>
 <li><p>Bugfix: unicode characters above 32767 were incorrectly represented in RTF. Thanks <a href='https://github.com/kaigu1990'>@kaigu1990</a>.</p></li>
@@ -161,7 +172,7 @@
 <li><p>Bugfix: <code>style_cells</code> didn’t work unless huxtable was on the search path.</p></li>
 <li><p>Bugfix: <code>merge_repeated_rows</code> merged <code>NA</code> rows incorrectly.</p></li>
 <li><p>Bugfix: number format was not set correctly in <code><a href="../reference/huxreg.html">huxreg()</a></code>’s <code>note</code>.</p></li>
-<li><p>Bugfix: in <code><a href="../reference/huxreg.html">huxreg()</a></code>, <code>tidy_args</code> threw an error if the first argument to <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> was a named list.</p></li>
+<li><p>Bugfix: in <code><a href="../reference/huxreg.html">huxreg()</a></code>, <code>tidy_args</code> threw an error if the first argument to <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> was a named list.</p></li>
 <li><p>Bugfix: <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> was broken.</p></li>
 <li><p>Clearer error messages for <code><a href="../reference/tidy_override.html">tidy_override()</a></code> when <code>extend = FALSE</code>. In future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
 </ul>
@@ -173,16 +184,17 @@
 </ul>
 </div>
 </div>
-    <div id="huxtable-5-0-0" class="section level1">
+    <div id="huxtable-500" class="section level1">
 <h1 class="page-header" data-toc-text="5.0.0">
-<a href="#huxtable-5-0-0" class="anchor"></a>huxtable 5.0.0<small> 2020-06-15 </small>
+<a href="#huxtable-500" class="anchor"></a>huxtable 5.0.0<small> 2020-06-15 </small>
 </h1>
 <p>Huxtable 5.0.0 brings numerous changes. For a more user-friendly introduction, see <a href="https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html" class="uri">https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>There are changes to LaTeX output.
+<li>
+<p>There are changes to LaTeX output.</p>
 <ul>
 <li>LaTeX <code>\tabcolsep</code> is now set to 0 within huxtable tables, while left and right padding should now take effect even when <code>wrap</code> is <code>FALSE</code>.</li>
 <li>The default LaTeX table environment is now “tabular” unless <code>width</code> is set. If <code>width</code> is set, it is “tabularx”.</li>
@@ -193,7 +205,8 @@
 </li>
 <li><p>As previously signalled, <code>add_colnames</code> has now become <code>TRUE</code> by default in <code><a href="../reference/huxtable.html">huxtable()</a></code> and <code><a href="../reference/as_huxtable.html">as_huxtable()</a></code>. Set <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.add_colnames = FALSE)</a></code> to go back to the old behaviour.</p></li>
 <li><p>Newlines in cell contents are now respected (in LaTeX, so long as <code>wrap = TRUE</code> and <code>width</code> has been set).</p></li>
-<li>Huxtable borders have been reworked, fixing some longstanding bugs and adding new features.
+<li>
+<p>Huxtable borders have been reworked, fixing some longstanding bugs and adding new features.</p>
 <ul>
 <li>
 <p>Borders are now automatically collapsed. For example:</p>
@@ -232,7 +245,8 @@
 </li>
 </ul>
 </li>
-<li>Various deprecated items have been removed:
+<li>
+<p>Various deprecated items have been removed:</p>
 <ul>
 <li>The 3-argument form of <code>set_*</code>. Instead, use <code>map_*</code>.</li>
 <li>The <code>byrow</code> argument to <code>set_*</code>. Instead, use <code>map_*</code> and <code><a href="../reference/by_rows.html">by_cols()</a></code>.</li>
@@ -249,7 +263,8 @@
 <li><p><code><a href="../reference/add_rows.html">add_rows()</a></code> and <code><a href="../reference/add_rows.html">add_columns()</a></code> now always call <code><a href="../reference/cbind.huxtable.html">rbind.huxtable()</a></code> or <code><a href="../reference/cbind.huxtable.html">cbind.huxtable()</a></code> and return a huxtable.</p></li>
 <li><p>Huxtable no longer supports dplyr versions less than 0.7.0 (released mid-2017).</p></li>
 <li><p><code><a href="../reference/style-functions.html">set_cell_properties()</a></code> has been renamed <code><a href="../reference/style-functions.html">style_cells()</a></code>. It is retained as a soft-deprecated alias.</p></li>
-<li>Various themes have been tweaked:
+<li>
+<p>Various themes have been tweaked:</p>
 <ul>
 <li>
 <code><a href="../reference/themes.html">theme_basic()</a></code> now has bold headers and no header column by default.</li>
@@ -267,14 +282,16 @@
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
-<li>You can now use <a href="https://commonmark.org/help/">markdown</a> within table cells.
+<li>
+<p>You can now use <a href="https://commonmark.org/help/">markdown</a> within table cells.</p>
 <ul>
 <li>Use <code><a href="../reference/markdown.html">set_markdown(ht, rows, cols)</a></code> to turn this on.</li>
 <li>Or use the convenience function <code><a href="../reference/set_markdown_contents.html">set_markdown_contents()</a></code> to set cell contents that will be interpreted as markdown.</li>
 <li>Markdown works for HTML and LaTeX. There’s basic support for on-screen display.</li>
 </ul>
 </li>
-<li>Huxtable now has the concept of header row and columns.
+<li>
+<p>Huxtable now has the concept of header row and columns.</p>
 <ul>
 <li>By default, data frame column names will be headers.</li>
 <li>To set other rows to be headers, use <code><a href="../reference/header_cols.html">set_header_rows(ht, row_numbers, TRUE)</a></code>. For columns, use <code><a href="../reference/header_cols.html">header_cols()</a></code> or <code><a href="../reference/header_cols.html">set_header_cols()</a></code>.</li>
@@ -311,7 +328,7 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li><p><code><a href="../reference/set-outer.html">set_outer_padding()</a></code> sets padding around a range of cells, similarly to <code><a href="../reference/set-outer.html">set_outer_borders()</a></code>.</p></li>
 <li><p>A new table-level property, <code><a href="../reference/caption_width.html">caption_width()</a></code>, allows you to set the width of the caption. The default, <code>NA</code>, sets the width equal to the table width.</p></li>
 <li><p>There are two new themes: <code><a href="../reference/themes.html">theme_compact()</a></code> and <code><a href="../reference/themes.html">theme_bright()</a></code>.</p></li>
-<li><p>For <code><a href="../reference/huxreg.html">huxreg()</a></code>, a new function <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> allows you to replace the output of <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy(x)</a></code> entirely.</p></li>
+<li><p>For <code><a href="../reference/huxreg.html">huxreg()</a></code>, a new function <code><a href="../reference/tidy_override.html">tidy_replace()</a></code> allows you to replace the output of <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy(x)</a></code> entirely.</p></li>
 <li><p>huxtable now only sets <code><a href="https://rdrr.io/r/base/options.html">options(huxtable.knit_print_df = TRUE)</a></code> if it is attached, not if it is loaded.</p></li>
 <li><p>huxtable supports <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
 <li><p>Improvements to <code><a href="../reference/as_flextable.html">as_flextable()</a></code>.</p></li>
@@ -330,9 +347,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-4-7-1" class="section level1">
+    <div id="huxtable-471" class="section level1">
 <h1 class="page-header" data-toc-text="4.7.1">
-<a href="#huxtable-4-7-1" class="anchor"></a>huxtable 4.7.1<small> 2020-01-08 </small>
+<a href="#huxtable-471" class="anchor"></a>huxtable 4.7.1<small> 2020-01-08 </small>
 </h1>
 <ul>
 <li>The <a href="https://github.com/gdemin/expss">expss</a> package now supports export to huxtables.</li>
@@ -341,9 +358,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Add caption support for <code><a href="../reference/as_flextable.html">as_flextable()</a></code> (thanks <a href='https://github.com/sjewo'>@sjewo</a>).</li>
 </ul>
 </div>
-    <div id="huxtable-4-7-0" class="section level1">
+    <div id="huxtable-470" class="section level1">
 <h1 class="page-header" data-toc-text="4.7.0">
-<a href="#huxtable-4-7-0" class="anchor"></a>huxtable 4.7.0<small> 2019-10-03 </small>
+<a href="#huxtable-470" class="anchor"></a>huxtable 4.7.0<small> 2019-10-03 </small>
 </h1>
 <ul>
 <li>Better error messages.</li>
@@ -358,18 +375,18 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </li>
 </ul>
 </div>
-    <div id="huxtable-4-6-1" class="section level1">
+    <div id="huxtable-461" class="section level1">
 <h1 class="page-header" data-toc-text="4.6.1">
-<a href="#huxtable-4-6-1" class="anchor"></a>huxtable 4.6.1<small> 2019-08-06 </small>
+<a href="#huxtable-461" class="anchor"></a>huxtable 4.6.1<small> 2019-08-06 </small>
 </h1>
 <ul>
 <li>Bugfix: right borders in wrong place when cells were merged.</li>
 <li>Bugfix: chinese characters were displaying wrongly in <code><a href="../reference/to_screen.html">to_screen()</a></code>.</li>
 </ul>
 </div>
-    <div id="huxtable-4-6-0" class="section level1">
+    <div id="huxtable-460" class="section level1">
 <h1 class="page-header" data-toc-text="4.6.0">
-<a href="#huxtable-4-6-0" class="anchor"></a>huxtable 4.6.0<small> 2019-06-24 </small>
+<a href="#huxtable-460" class="anchor"></a>huxtable 4.6.0<small> 2019-06-24 </small>
 </h1>
 <ul>
 <li>Set <code><a href="https://rdrr.io/r/base/options.html">options('huxtable.latex_use_fontspec')</a></code> to <code>TRUE</code> to use portable font names in TeX documents, with the LaTeX “fontspec” package.</li>
@@ -378,25 +395,25 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Bugfix: rbind of huxtable and matrix wasn’t setting <code>row_height</code> correctly.</li>
 </ul>
 </div>
-    <div id="huxtable-4-5-0" class="section level1">
+    <div id="huxtable-450" class="section level1">
 <h1 class="page-header" data-toc-text="4.5.0">
-<a href="#huxtable-4-5-0" class="anchor"></a>huxtable 4.5.0<small> 2019-03-19 </small>
+<a href="#huxtable-450" class="anchor"></a>huxtable 4.5.0<small> 2019-03-19 </small>
 </h1>
 <ul>
 <li>Add <code><a href="../reference/quick-output.html">quick_latex()</a></code> function.</li>
 <li>The <code>texreg</code> package now includes a <code>huxtablereg</code> function, analogous to <code>huxreg</code>, which outputs a huxtable from a list of regressions. This will be available from the next version of <code>texreg</code>.</li>
 </ul>
 </div>
-    <div id="huxtable-4-4-0" class="section level1">
+    <div id="huxtable-440" class="section level1">
 <h1 class="page-header" data-toc-text="4.4.0">
-<a href="#huxtable-4-4-0" class="anchor"></a>huxtable 4.4.0<small> 2019-03-03 </small>
+<a href="#huxtable-440" class="anchor"></a>huxtable 4.4.0<small> 2019-03-03 </small>
 </h1>
 <ul>
 <li>Huxtables can now be printed directly in Word documents and Powerpoint presentations, thanks to the <code>flextable</code> package and recent versions of Pandoc. (Powerpoint printing requires Pandoc &gt;= 2.4.0.)</li>
 <li>New “wrapleft” and “wrapright” options to <code><a href="../reference/position.html">position()</a></code> allow text wrapping around tables.</li>
 <li>New <code><a href="../reference/set-outer.html">set_outer_border_colors()</a></code> and <code><a href="../reference/set-outer.html">set_outer_border_styles()</a></code> functions, like <code><a href="../reference/set-outer.html">set_outer_borders()</a></code>.</li>
-<li>Huxtable no longer requires the <code>broom</code> package, instead using the <code>generics</code> package. If you use <code><a href="../reference/huxreg.html">huxreg()</a></code>, you will still need e.g. <code>broom</code> or <code>broom.mixed</code> to provide <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> and <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> methods for specific models.</li>
-<li>Bugfix: <code><a href="../reference/tidy_override.html">tidy.tidy_override()</a></code> and <code><a href="../reference/tidy_override.html">glance.tidy_override()</a></code> should work even if underlying object has no <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> or <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> method.</li>
+<li>Huxtable no longer requires the <code>broom</code> package, instead using the <code>generics</code> package. If you use <code><a href="../reference/huxreg.html">huxreg()</a></code>, you will still need e.g. <code>broom</code> or <code>broom.mixed</code> to provide <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code> methods for specific models.</li>
+<li>Bugfix: <code><a href="../reference/tidy_override.html">tidy.tidy_override()</a></code> and <code><a href="../reference/tidy_override.html">glance.tidy_override()</a></code> should work even if underlying object has no <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> or <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code> method.</li>
 <li>Bugfix: huxtables had option clash when <code>echo = TRUE</code> in Rmd pdf_document format.</li>
 <li>Bugfix: <code><a href="../reference/caption.html">caption()</a></code> and <code><a href="../reference/height.html">height()</a></code> weren’t playing nicely.</li>
 <li>Bugfix: <code><a href="../reference/dplyr-verbs.html">mutate(..., copy_cell_props = FALSE)</a></code> was adding a column named <code>copy_cell_props</code>.</li>
@@ -405,9 +422,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Enhancement: use <code>tinytex</code> when available, allowing autoinstallation of latex packages.</li>
 </ul>
 </div>
-    <div id="huxtable-4-3-0" class="section level1">
+    <div id="huxtable-430" class="section level1">
 <h1 class="page-header" data-toc-text="4.3.0">
-<a href="#huxtable-4-3-0" class="anchor"></a>huxtable 4.3.0<small> 2018-11-07 </small>
+<a href="#huxtable-430" class="anchor"></a>huxtable 4.3.0<small> 2018-11-07 </small>
 </h1>
 <ul>
 <li>More work on TeX. Tables <em>should</em> now compile when raw_attributes is not set.</li>
@@ -418,7 +435,7 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>New “themes” vignette.</li>
 <li>New <code>tidy_override</code> function to override p values etc. in <code>huxreg</code>.</li>
 <li>New <code>set_contents</code> function to change huxtable contents within dplyr pipes.</li>
-<li>Enhancement: left- and right-aligned captions are now set above the table in LaTeX, using the “threeparttable” package. You will need to install this using e.g. <code><a href="../reference/report_latex_dependencies.html">install_latex_dependencies()</a></code> or <code>tlmgr</code> if it is not already on your system.</li>
+<li>Enhancement: left- and right-aligned captions are now set above the table in LaTeX, using the “threeparttable” package. You will need to install this using e.g. <code><a href="../reference/report_latex_dependencies.html">install_latex_dependencies()</a></code> or <code>tlmgr</code> if it is not already on your system.</li>
 <li>Enhancement: in <code><a href="../reference/huxtable.html">huxtable()</a></code> and friends, <code>add_rownames = "Colname"</code> now sets the name for the new column.</li>
 <li>Improvements to the vignettes and help files.</li>
 <li>Bugfix: to_md could hang with bold/italic cells.</li>
@@ -432,9 +449,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-4-2-1" class="section level1">
+    <div id="huxtable-421" class="section level1">
 <h1 class="page-header" data-toc-text="4.2.1">
-<a href="#huxtable-4-2-1" class="anchor"></a>huxtable 4.2.1<small> 2018-10-26 </small>
+<a href="#huxtable-421" class="anchor"></a>huxtable 4.2.1<small> 2018-10-26 </small>
 </h1>
 <ul>
 <li>Bugfix: <code>wrap=TRUE</code> caused squeezed text in RTF.</li>
@@ -451,9 +468,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-4-2-0" class="section level1">
+    <div id="huxtable-420" class="section level1">
 <h1 class="page-header" data-toc-text="4.2.0">
-<a href="#huxtable-4-2-0" class="anchor"></a>huxtable 4.2.0<small> 2018-10-03 </small>
+<a href="#huxtable-420" class="anchor"></a>huxtable 4.2.0<small> 2018-10-03 </small>
 </h1>
 <ul>
 <li>More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.</li>
@@ -474,9 +491,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Tweaks to documentation.</li>
 </ul>
 </div>
-    <div id="huxtable-4-1-0" class="section level1">
+    <div id="huxtable-410" class="section level1">
 <h1 class="page-header" data-toc-text="4.1.0">
-<a href="#huxtable-4-1-0" class="anchor"></a>huxtable 4.1.0<small> 2018-07-31 </small>
+<a href="#huxtable-410" class="anchor"></a>huxtable 4.1.0<small> 2018-07-31 </small>
 </h1>
 <ul>
 <li>dplyr, knitr, rmarkdown and some other packages have moved to “Suggests:”, lowering the dependency load considerably. All the functionality is still present. huxtable gives an informative warning if a needed package is not installed.</li>
@@ -509,14 +526,14 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>… and a cool new randomized <code><a href="../reference/hux_logo.html">hux_logo()</a></code> ;-)</li>
 </ul>
 </div>
-    <div id="huxtable-4-0-1" class="section level1">
+    <div id="huxtable-401" class="section level1">
 <h1 class="page-header" data-toc-text="4.0.1">
-<a href="#huxtable-4-0-1" class="anchor"></a>huxtable 4.0.1<small> 2018-07-03 </small>
+<a href="#huxtable-401" class="anchor"></a>huxtable 4.0.1<small> 2018-07-03 </small>
 </h1>
 <ul>
 <li>Improved formatting in Excel output.</li>
 <li>New <code>format</code> method which returns the result of <code>to_html</code>, <code>to_latex</code> etc. as appropriate.</li>
-<li>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</li>
+<li>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</li>
 <li>Bugfix: <code>set_all_*</code> not working when huxtable is not attached.</li>
 <li>Bugfix: <code>as_Workbook</code> failing with non-numeric <code>width</code>.</li>
 <li>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel output.</li>
@@ -525,9 +542,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Compatibility with broom 5.0.0 - thanks <a href='https://github.com/alexpghayes'>@alexpghayes</a></li>
 </ul>
 </div>
-    <div id="huxtable-4-0-0" class="section level1">
+    <div id="huxtable-400" class="section level1">
 <h1 class="page-header" data-toc-text="4.0.0">
-<a href="#huxtable-4-0-0" class="anchor"></a>huxtable 4.0.0<small> 2018-06-02 </small>
+<a href="#huxtable-400" class="anchor"></a>huxtable 4.0.0<small> 2018-06-02 </small>
 </h1>
 <ul>
 <li>New <code>theme_plain</code> theme.</li>
@@ -574,9 +591,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-3-0-0" class="section level1">
+    <div id="huxtable-300" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.0">
-<a href="#huxtable-3-0-0" class="anchor"></a>huxtable 3.0.0<small> 2018-02-23 </small>
+<a href="#huxtable-300" class="anchor"></a>huxtable 3.0.0<small> 2018-02-23 </small>
 </h1>
 <ul>
 <li>Output to Excel workbooks using the <code>openxlsx</code> package.</li>
@@ -598,26 +615,26 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-2-0-2" class="section level1">
+    <div id="huxtable-202" class="section level1">
 <h1 class="page-header" data-toc-text="2.0.2">
-<a href="#huxtable-2-0-2" class="anchor"></a>huxtable 2.0.2<small> 2018-02-08 </small>
+<a href="#huxtable-202" class="anchor"></a>huxtable 2.0.2<small> 2018-02-08 </small>
 </h1>
 <ul>
 <li>Don’t apply <code>number_format</code> to exponents in scientific notation.</li>
 <li>Turn off some tests on CRAN, as they fail there but not elsewhere.</li>
 </ul>
 </div>
-    <div id="huxtable-2-0-1" class="section level1">
+    <div id="huxtable-201" class="section level1">
 <h1 class="page-header" data-toc-text="2.0.1">
-<a href="#huxtable-2-0-1" class="anchor"></a>huxtable 2.0.1<small> Unreleased </small>
+<a href="#huxtable-201" class="anchor"></a>huxtable 2.0.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>Fix <code>quick_pdf</code> error when moving output across filesystems.</li>
 </ul>
 </div>
-    <div id="huxtable-2-0-0" class="section level1">
+    <div id="huxtable-200" class="section level1">
 <h1 class="page-header" data-toc-text="2.0.0">
-<a href="#huxtable-2-0-0" class="anchor"></a>huxtable 2.0.0<small> 2018-01-02 </small>
+<a href="#huxtable-200" class="anchor"></a>huxtable 2.0.0<small> 2018-01-02 </small>
 </h1>
 <ul>
 <li>New <code>quick_html</code>, <code>quick_pdf</code> and <code>quick_docx</code> functions to print table-like objects to a new document.</li>
@@ -629,15 +646,15 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <a href="#breaking-changes-3" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>
-<code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
+<code>number_format</code> now applies to any number-like substrings in cells. This means you can include e.g. significance stars in a cell and still use <code>number_format</code> to format the content.</li>
 <li>If <code>number_format</code> is NA, numbers are unchanged.</li>
 <li>Default value of <code>number_format</code> has changed from “%5.2f” to “%5.3g”, which plays nicer with integers but may surprise you by using scientific format for large numbers.</li>
 </ul>
 </div>
 </div>
-    <div id="huxtable-1-2-0" class="section level1">
+    <div id="huxtable-120" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.0">
-<a href="#huxtable-1-2-0" class="anchor"></a>huxtable 1.2.0<small> 2017-12-17 </small>
+<a href="#huxtable-120" class="anchor"></a>huxtable 1.2.0<small> 2017-12-17 </small>
 </h1>
 <ul>
 <li>New <code>outer_borders</code> argument for <code>huxreg</code>. This changes default behaviour slightly.</li>
@@ -646,9 +663,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Bugfix: captions and colnames are wrapped in to_screen to respect max_width.</li>
 </ul>
 </div>
-    <div id="huxtable-1-1-0" class="section level1">
+    <div id="huxtable-110" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
-<a href="#huxtable-1-1-0" class="anchor"></a>huxtable 1.1.0<small> 2017-10-20 </small>
+<a href="#huxtable-110" class="anchor"></a>huxtable 1.1.0<small> 2017-10-20 </small>
 </h1>
 <ul>
 <li>No more ugly autocreated column names.</li>
@@ -661,9 +678,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Accept, but silently change, English spelling of ‘centre’ in <code>align</code>, <code>position</code> and <code>caption_pos</code>.</li>
 </ul>
 </div>
-    <div id="huxtable-1-0-0" class="section level1">
+    <div id="huxtable-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
-<a href="#huxtable-1-0-0" class="anchor"></a>huxtable 1.0.0<small> 2017-10-07 </small>
+<a href="#huxtable-100" class="anchor"></a>huxtable 1.0.0<small> 2017-10-07 </small>
 </h1>
 <ul>
 <li>LaTeX implements different thicknesses for vertical and horizontal borders (but only one horizontal thickness per row).</li>
@@ -702,9 +719,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-0-3-1" class="section level1">
+    <div id="huxtable-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
-<a href="#huxtable-0-3-1" class="anchor"></a>huxtable 0.3.1<small> 2017-09-12 </small>
+<a href="#huxtable-031" class="anchor"></a>huxtable 0.3.1<small> 2017-09-12 </small>
 </h1>
 <ul>
 <li>New convenience functions <code>insert_row</code> and <code>insert_column</code>.</li>
@@ -713,9 +730,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>(Semantic versioning fail: this should have been 0.4.0.)</li>
 </ul>
 </div>
-    <div id="huxtable-0-3-0" class="section level1">
+    <div id="huxtable-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#huxtable-0-3-0" class="anchor"></a>huxtable 0.3.0<small> 2017-05-18 </small>
+<a href="#huxtable-030" class="anchor"></a>huxtable 0.3.0<small> 2017-05-18 </small>
 </h1>
 <ul>
 <li>New borders argument for huxreg, gives borders in sensible places.</li>
@@ -724,26 +741,26 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 <li>Fix compatibility with dplyr 0.6.0.</li>
 </ul>
 </div>
-    <div id="huxtable-0-2-2" class="section level1">
+    <div id="huxtable-022" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.2">
-<a href="#huxtable-0-2-2" class="anchor"></a>huxtable 0.2.2<small> 2017-04-27 </small>
+<a href="#huxtable-022" class="anchor"></a>huxtable 0.2.2<small> 2017-04-27 </small>
 </h1>
 <ul>
 <li>Fix a bug that could lead to wrong significance stars in <code>huxreg</code>.</li>
 </ul>
 </div>
-    <div id="huxtable-0-2-1" class="section level1">
+    <div id="huxtable-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#huxtable-0-2-1" class="anchor"></a>huxtable 0.2.1<small> 2017-04-24 </small>
+<a href="#huxtable-021" class="anchor"></a>huxtable 0.2.1<small> 2017-04-24 </small>
 </h1>
 <ul>
 <li>Compatibility with dplyr 0.6.0.</li>
 <li>Use ~ for decimal padding in LaTeX.</li>
 </ul>
 </div>
-    <div id="huxtable-0-2-0" class="section level1">
+    <div id="huxtable-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#huxtable-0-2-0" class="anchor"></a>huxtable 0.2.0<small> 2017-04-21 </small>
+<a href="#huxtable-020" class="anchor"></a>huxtable 0.2.0<small> 2017-04-21 </small>
 </h1>
 <ul>
 <li>New <code>huxreg</code> function to convert a list of models to a huxtable.</li>
@@ -769,9 +786,9 @@ set left and right borders and padding simultaneously. New functions <code><a hr
 </ul>
 </div>
 </div>
-    <div id="huxtable-0-1-0" class="section level1">
+    <div id="huxtable-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#huxtable-0-1-0" class="anchor"></a>huxtable 0.1.0<small> 2017-03-09 </small>
+<a href="#huxtable-010" class="anchor"></a>huxtable 0.1.0<small> 2017-03-09 </small>
 </h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>

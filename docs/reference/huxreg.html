@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
       </span>
     </div>
 
@@ -194,13 +194,13 @@ calculate confidence intervals.</p></td>
     </tr>
     <tr>
       <th>tidy_args</th>
-      <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code>.
+      <td><p>List of arguments to pass to <code><a href='https://generics.r-lib.org/reference/tidy.html'>generics::tidy()</a></code>.
 A list without names will be treated as a list of argument lists, one
 for each model.</p></td>
     </tr>
     <tr>
       <th>glance_args</th>
-      <td><p>List of arguments to pass to <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>generics::glance()</a></code>. A
+      <td><p>List of arguments to pass to <code><a href='https://generics.r-lib.org/reference/glance.html'>generics::glance()</a></code>. A
 list without names will be treated as a list of argument lists, one for
 each model.</p></td>
     </tr>
@@ -251,7 +251,7 @@ change display names, name the <code>coef</code> vector: <code><a href='https://
     <p>A huxtable object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Models must have a <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>generics::tidy()</a></code> method defined, which should return "term", "estimate",
+    <p>Models must have a <code><a href='https://generics.r-lib.org/reference/tidy.html'>generics::tidy()</a></code> method defined, which should return "term", "estimate",
 "std.error", "statistic" and "p.value". The <code>"broom"</code> package provides methods for many model
 objects. If the <code>tidy</code> method does not have a <code>conf.int</code> option,
 <code>huxreg</code> will calculate confidence intervals itself, using a normal approximation.</p>
@@ -260,7 +260,7 @@ Otherwise column headings will be automatically created.</p>
 <p>If the <code>coef</code> and/or <code>statistics</code> vectors have names, these will be used for row headings. If
 different values of <code>coef</code> have the same name, the corresponding rows will be merged in the
 output.</p>
-<p><code>statistics</code> should be column names from <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>generics::glance()</a></code>. You can also use <code>"nobs"</code> for the
+<p><code>statistics</code> should be column names from <code><a href='https://generics.r-lib.org/reference/glance.html'>generics::glance()</a></code>. You can also use <code>"nobs"</code> for the
 number of observations. If <code>statistics</code> is <code>NULL</code> then all columns from <code>glance</code> will be used. To
 use no columns, set <code>statistics = character(0)</code>.</p>
 <p><code>error_format</code> is a string to be interpreted by <code><a href='https://glue.tidyverse.org/reference/glue.html'>glue::glue()</a></code>. Terms in parentheses will be

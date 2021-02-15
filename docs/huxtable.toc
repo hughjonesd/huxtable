@@ -17,7 +17,7 @@
 \contentsline {section}{Conditional formatting}{19}{section*.74}%
 \contentsline {section}{Output to different formats}{20}{section*.81}%
 \contentsline {subsection}{Pretty-printing data frames}{20}{section*.82}%
-\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{21}{section*.85}%
-\contentsline {subsection}{Quick output commands}{22}{section*.86}%
-\contentsline {section}{Creating a regression table}{22}{section*.87}%
-\contentsline {section}{Getting more information}{23}{section*.90}%
+\contentsline {subsection}{Using huxtables in knitr and rmarkdown}{21}{section*.83}%
+\contentsline {subsection}{Quick output commands}{22}{section*.84}%
+\contentsline {section}{Creating a regression table}{22}{section*.85}%
+\contentsline {section}{Getting more information}{23}{section*.88}%

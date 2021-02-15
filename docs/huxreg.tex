@@ -1,39 +1,47 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{article}
+\documentclass[
+]{article}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Regression Tables with huxreg},
-            pdfauthor={David Hugh-Jones},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Regression Tables with huxreg},
+  pdfauthor={David Hugh-Jones},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -75,7 +83,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -84,32 +92,21 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{pmboxdraw}
 \usepackage{array}
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 \usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{hhline}
@@ -119,10 +116,13 @@
 \usepackage{wrapfig}
 \usepackage{adjustbox}
 \usepackage{hyperref}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{Regression Tables with huxreg}
 \author{David Hugh-Jones}
-\date{2020-10-28}
+\date{2021-02-15}
 
 \begin{document}
 \maketitle
@@ -145,12 +145,12 @@ Let's start by running some regressions to predict a diamond's price.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(diamonds, }\DataTypeTok{package =} \StringTok{"ggplot2"}\NormalTok{)}
-\NormalTok{diamonds <-}\StringTok{ }\NormalTok{diamonds[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{,]}
+\FunctionTok{data}\NormalTok{(diamonds, }\AttributeTok{package =} \StringTok{"ggplot2"}\NormalTok{)}
+\NormalTok{diamonds }\OtherTok{\textless{}{-}}\NormalTok{ diamonds[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{,]}
 
-\NormalTok{lm1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{carat }\OperatorTok{+}\StringTok{ }\NormalTok{depth, diamonds)}
-\NormalTok{lm2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{depth }\OperatorTok{+}\StringTok{ }\KeywordTok{factor}\NormalTok{(color, }\DataTypeTok{ordered =} \OtherTok{FALSE}\NormalTok{), diamonds)}
-\NormalTok{lm3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{carat }\OperatorTok{+}\StringTok{ }\NormalTok{depth, diamonds)}
+\NormalTok{lm1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(price }\SpecialCharTok{\textasciitilde{}}\NormalTok{ carat }\SpecialCharTok{+}\NormalTok{ depth, diamonds)}
+\NormalTok{lm2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(price }\SpecialCharTok{\textasciitilde{}}\NormalTok{ depth }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(color, }\AttributeTok{ordered =} \ConstantTok{FALSE}\NormalTok{), diamonds)}
+\NormalTok{lm3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ carat }\SpecialCharTok{+}\NormalTok{ depth, diamonds)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -161,7 +161,7 @@ side.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -410,10 +410,10 @@ providing a named vector of variables in the \texttt{coefs} argument.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{color_names <-}\StringTok{ }\KeywordTok{grep}\NormalTok{(}\StringTok{"factor"}\NormalTok{, }\KeywordTok{names}\NormalTok{(}\KeywordTok{coef}\NormalTok{(lm2)), }\DataTypeTok{value =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{names}\NormalTok{(color_names) <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{".*)(.)"}\NormalTok{, }\StringTok{"Color: }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, color_names)}
+\NormalTok{color\_names }\OtherTok{\textless{}{-}} \FunctionTok{grep}\NormalTok{(}\StringTok{"factor"}\NormalTok{, }\FunctionTok{names}\NormalTok{(}\FunctionTok{coef}\NormalTok{(lm2)), }\AttributeTok{value =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(color\_names) }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{".*)(.)"}\NormalTok{, }\StringTok{"Color: }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, color\_names)}
 
-\KeywordTok{huxreg}\NormalTok{(lm1, lm2, lm3, }\DataTypeTok{coefs =} \KeywordTok{c}\NormalTok{(}\StringTok{"Carat"}\NormalTok{ =}\StringTok{ "carat"}\NormalTok{, }\StringTok{"Depth"}\NormalTok{ =}\StringTok{ "depth"}\NormalTok{, color_names))}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm2, lm3, }\AttributeTok{coefs =} \FunctionTok{c}\NormalTok{(}\StringTok{"Carat"} \OtherTok{=} \StringTok{"carat"}\NormalTok{, }\StringTok{"Depth"} \OtherTok{=} \StringTok{"depth"}\NormalTok{, color\_names))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -641,10 +641,10 @@ just edit its contents directly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{diamond_regs <-}\StringTok{ }\KeywordTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
-\NormalTok{diamond_regs[}\KeywordTok{seq}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"Color:"}\NormalTok{, LETTERS[}\DecValTok{5}\OperatorTok{:}\DecValTok{10}\NormalTok{])}
+\NormalTok{diamond\_regs }\OtherTok{\textless{}{-}} \FunctionTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
+\NormalTok{diamond\_regs[}\FunctionTok{seq}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"Color:"}\NormalTok{, LETTERS[}\DecValTok{5}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])}
 
-\CommentTok{# prints the same as above}
+\CommentTok{\# prints the same as above}
 \end{Highlighting}
 \end{Shaded}
 
@@ -657,14 +657,14 @@ are just standard huxtable commands.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{suppressPackageStartupMessages}\NormalTok{(}\KeywordTok{library}\NormalTok{(dplyr))}
+\FunctionTok{suppressPackageStartupMessages}\NormalTok{(}\FunctionTok{library}\NormalTok{(dplyr))}
 
-\NormalTok{diamond_regs }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{map_background_color}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{-1}\NormalTok{, }\KeywordTok{by_regex}\NormalTok{(}
-        \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{*"}\NormalTok{ =}\StringTok{ "yellow"}
-\NormalTok{      )) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_italic}\NormalTok{(}\KeywordTok{final}\NormalTok{(}\DecValTok{1}\NormalTok{), }\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Linear regressions of diamond prices"}\NormalTok{)}
+\NormalTok{diamond\_regs }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{map\_background\_color}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\FunctionTok{by\_regex}\NormalTok{(}
+        \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{*"} \OtherTok{=} \StringTok{"yellow"}
+\NormalTok{      )) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_italic}\NormalTok{(}\FunctionTok{final}\NormalTok{(}\DecValTok{1}\NormalTok{), }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_caption}\NormalTok{(}\StringTok{"Linear regressions of diamond prices"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -913,7 +913,7 @@ display them in a column to the right, use
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{error_pos =} \StringTok{"right"}\NormalTok{)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{error\_pos =} \StringTok{"right"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1032,7 +1032,7 @@ To display standard errors in the same cell as estimates, use
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{error_pos =} \StringTok{"same"}\NormalTok{)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{error\_pos =} \StringTok{"same"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1135,7 +1135,7 @@ arguments:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(}\StringTok{"Price"}\NormalTok{ =}\StringTok{ }\NormalTok{lm1, }\StringTok{"Log price"}\NormalTok{ =}\StringTok{ }\NormalTok{lm3)}
+\FunctionTok{huxreg}\NormalTok{(}\StringTok{"Price"} \OtherTok{=}\NormalTok{ lm1, }\StringTok{"Log price"} \OtherTok{=}\NormalTok{ lm3)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1263,11 +1263,11 @@ values are anything returned from your models by \texttt{broom::glance}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gl <-}\StringTok{ }\KeywordTok{as_hux}\NormalTok{(broom}\OperatorTok{::}\KeywordTok{glance}\NormalTok{(lm1))}
+\NormalTok{gl }\OtherTok{\textless{}{-}} \FunctionTok{as\_hux}\NormalTok{(broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(lm1))}
 
-\NormalTok{gl }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{restack_down}\NormalTok{(}\DataTypeTok{cols =} \DecValTok{3}\NormalTok{, }\DataTypeTok{on_remainder =} \StringTok{"fill"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_bold}\NormalTok{(odds, everywhere)}
+\NormalTok{gl }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{restack\_down}\NormalTok{(}\AttributeTok{cols =} \DecValTok{3}\NormalTok{, }\AttributeTok{on\_remainder =} \StringTok{"fill"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_bold}\NormalTok{(odds, everywhere)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1365,9 +1365,9 @@ has names, these will be used for row headings:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{statistics =} \KeywordTok{c}\NormalTok{(}\StringTok{"N. obs."}\NormalTok{ =}\StringTok{ "nobs"}\NormalTok{, }
-      \StringTok{"R squared"}\NormalTok{ =}\StringTok{ "r.squared"}\NormalTok{, }\StringTok{"F statistic"}\NormalTok{ =}\StringTok{ "statistic"}\NormalTok{,}
-      \StringTok{"P value"}\NormalTok{ =}\StringTok{ "p.value"}\NormalTok{))}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{statistics =} \FunctionTok{c}\NormalTok{(}\StringTok{"N. obs."} \OtherTok{=} \StringTok{"nobs"}\NormalTok{, }
+      \StringTok{"R squared"} \OtherTok{=} \StringTok{"r.squared"}\NormalTok{, }\StringTok{"F statistic"} \OtherTok{=} \StringTok{"statistic"}\NormalTok{,}
+      \StringTok{"P value"} \OtherTok{=} \StringTok{"p.value"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1496,7 +1496,7 @@ completely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{stars =} \KeywordTok{c}\NormalTok{(}\StringTok{`}\DataTypeTok{*}\StringTok{`}\NormalTok{ =}\StringTok{ }\FloatTok{0.1}\NormalTok{, }\StringTok{`}\DataTypeTok{**}\StringTok{`}\NormalTok{ =}\StringTok{ }\FloatTok{0.05}\NormalTok{, }\StringTok{`}\DataTypeTok{***}\StringTok{`}\NormalTok{ =}\StringTok{ }\FloatTok{0.01}\NormalTok{)) }\CommentTok{# a little boastful?}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{stars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{*}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.1}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{**}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.05}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{***}\StringTok{\textasciigrave{}} \OtherTok{=} \FloatTok{0.01}\NormalTok{)) }\CommentTok{\# a little boastful?}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1625,11 +1625,11 @@ by putting it in curly brackets:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Another useful column: p.value}
-\KeywordTok{huxreg}\NormalTok{(}
+\CommentTok{\# Another useful column: p.value}
+\FunctionTok{huxreg}\NormalTok{(}
 \NormalTok{        lm1, lm3, }
-        \DataTypeTok{error_format =} \StringTok{"[\{statistic\}]"}\NormalTok{, }
-        \DataTypeTok{note         =} \StringTok{"\{stars\}. T statistics in brackets."}
+        \AttributeTok{error\_format =} \StringTok{"[\{statistic\}]"}\NormalTok{, }
+        \AttributeTok{note         =} \StringTok{"\{stars\}. T statistics in brackets."}
 \NormalTok{      )}
 \end{Highlighting}
 \end{Shaded}
@@ -1764,7 +1764,7 @@ use \texttt{\{conf.low\}} and \texttt{\{conf.high\}} in
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{ci_level =} \FloatTok{.99}\NormalTok{, }\DataTypeTok{error_format =} \StringTok{"(\{conf.low\} -- \{conf.high\})"}\NormalTok{)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{ci\_level =}\NormalTok{ .}\DecValTok{99}\NormalTok{, }\AttributeTok{error\_format =} \StringTok{"(\{conf.low\} {-}{-} \{conf.high\})"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1895,7 +1895,7 @@ to format summary statistics like \texttt{nobs} as integers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{number_format =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{number\_format =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2022,7 +2022,7 @@ parameter \texttt{bold\_signif} to a maximum significance level:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{huxreg}\NormalTok{(lm1, lm3, }\DataTypeTok{bold_signif =} \FloatTok{0.05}\NormalTok{)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm3, }\AttributeTok{bold\_signif =} \FloatTok{0.05}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2156,10 +2156,10 @@ package has \texttt{tidy} methods defined:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(lmtest)}
-\KeywordTok{library}\NormalTok{(sandwich)}
-\NormalTok{lm_robust <-}\StringTok{ }\KeywordTok{coeftest}\NormalTok{(lm1, }\DataTypeTok{vcov =}\NormalTok{ vcovHC)}
-\KeywordTok{huxreg}\NormalTok{(}\StringTok{"Normal SEs"}\NormalTok{ =}\StringTok{ }\NormalTok{lm1, }\StringTok{"Robust SEs"}\NormalTok{ =}\StringTok{ }\NormalTok{lm_robust)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\NormalTok{lm\_robust }\OtherTok{\textless{}{-}} \FunctionTok{coeftest}\NormalTok{(lm1, }\AttributeTok{vcov =}\NormalTok{ vcovHC)}
+\FunctionTok{huxreg}\NormalTok{(}\StringTok{"Normal SEs"} \OtherTok{=}\NormalTok{ lm1, }\StringTok{"Robust SEs"} \OtherTok{=}\NormalTok{ lm\_robust)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2286,8 +2286,8 @@ them to your model using the \texttt{tidy\_override} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lm_fixed <-}\StringTok{ }\KeywordTok{tidy_override}\NormalTok{(lm1, }\DataTypeTok{p.value =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.06}\NormalTok{))}
-\KeywordTok{huxreg}\NormalTok{(}\StringTok{"Normal p values"}\NormalTok{ =}\StringTok{ }\NormalTok{lm1, }\StringTok{"Supplied p values"}\NormalTok{ =}\StringTok{ }\NormalTok{lm_fixed)}
+\NormalTok{lm\_fixed }\OtherTok{\textless{}{-}} \FunctionTok{tidy\_override}\NormalTok{(lm1, }\AttributeTok{p.value =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.06}\NormalTok{))}
+\FunctionTok{huxreg}\NormalTok{(}\StringTok{"Normal p values"} \OtherTok{=}\NormalTok{ lm1, }\StringTok{"Supplied p values"} \OtherTok{=}\NormalTok{ lm\_fixed)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2418,7 +2418,7 @@ different coefficients for a multinomial model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mnl <-}\StringTok{ }\NormalTok{nnet}\OperatorTok{::}\KeywordTok{multinom}\NormalTok{(gear }\OperatorTok{~}\StringTok{ }\NormalTok{mpg, mtcars)}
+\NormalTok{mnl }\OtherTok{\textless{}{-}}\NormalTok{ nnet}\SpecialCharTok{::}\FunctionTok{multinom}\NormalTok{(gear }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mpg, mtcars)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2432,11 +2432,11 @@ different coefficients for a multinomial model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tidied <-}\StringTok{ }\NormalTok{broom}\OperatorTok{::}\KeywordTok{tidy}\NormalTok{(mnl)}
-\NormalTok{models <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
-\NormalTok{models[[}\StringTok{"4 gears"}\NormalTok{]] <-}\StringTok{ }\KeywordTok{tidy_replace}\NormalTok{(mnl, tidied[tidied}\OperatorTok{$}\NormalTok{y.level }\OperatorTok{==}\StringTok{ }\DecValTok{4}\NormalTok{, ])}
-\NormalTok{models[[}\StringTok{"5 gears"}\NormalTok{]] <-}\StringTok{ }\KeywordTok{tidy_replace}\NormalTok{(mnl, tidied[tidied}\OperatorTok{$}\NormalTok{y.level }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{, ])}
-\KeywordTok{huxreg}\NormalTok{(models, }\DataTypeTok{statistics =} \StringTok{"AIC"}\NormalTok{)}
+\NormalTok{tidied }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{tidy}\NormalTok{(mnl)}
+\NormalTok{models }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{models[[}\StringTok{"4 gears"}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{tidy\_replace}\NormalTok{(mnl, tidied[tidied}\SpecialCharTok{$}\NormalTok{y.level }\SpecialCharTok{==} \DecValTok{4}\NormalTok{, ])}
+\NormalTok{models[[}\StringTok{"5 gears"}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{tidy\_replace}\NormalTok{(mnl, tidied[tidied}\SpecialCharTok{$}\NormalTok{y.level }\SpecialCharTok{==} \DecValTok{5}\NormalTok{, ])}
+\FunctionTok{huxreg}\NormalTok{(models, }\AttributeTok{statistics =} \StringTok{"AIC"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

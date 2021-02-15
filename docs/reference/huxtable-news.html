@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
       </span>
     </div>
 
@@ -149,6 +149,18 @@
     <p>Huxtable attempts to follow semantic versioning (<a href='https://semver.org'>https://semver.org</a>).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.</p>
+    <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 5.2.0</h2>
+
+    
+<ul>
+<li><p>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in
+TeX.</p></li>
+<li><p>Bugfix: <code><a href='to_screen.html'>print_screen(h, colnames = FALSE)</a></code> didn’t print a final
+newline.</p></li>
+<li><p>Bugfix: italic from markdown was being printed as underlined in TeX.</p></li>
+<li><p>Minor test update for compatibility with broom.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 5.1.1</h2>
 
     
@@ -170,7 +182,7 @@ adding this feature.</p></li>
 arguments, to write a huxtable into an Excel worksheet starting at a
 particular row or column.</p></li>
 <li><p>New feature: <code><a href='huxreg.html'>huxreg()</a></code> gains a <code>glance_args</code> argument to pass
-arguments to <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>.</p></li>
+arguments to <code><a href='https://generics.r-lib.org/reference/glance.html'>glance()</a></code>.</p></li>
 <li><p>New feature: <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.long_minus = TRUE)</a></code> will try to use
 long minus signs before numbers. The default is <code>FALSE</code>. It will
 probably become <code>TRUE</code> in a future version.</p></li>
@@ -184,7 +196,7 @@ path.</p></li>
 <li><p>Bugfix: <code>merge_repeated_rows</code> merged <code>NA</code> rows incorrectly.</p></li>
 <li><p>Bugfix: number format was not set correctly in <code><a href='huxreg.html'>huxreg()</a></code>’s <code>note</code>.</p></li>
 <li><p>Bugfix: in <code><a href='huxreg.html'>huxreg()</a></code>, <code>tidy_args</code> threw an error if the first
-argument to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code> was a named list.</p></li>
+argument to <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code> was a named list.</p></li>
 <li><p>Bugfix: <code><a href='tidy_override.html'>tidy_replace()</a></code> was broken.</p></li>
 <li><p>Clearer error messages for <code><a href='tidy_override.html'>tidy_override()</a></code> when <code>extend = FALSE</code>.
 In future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
@@ -265,7 +277,8 @@ the border thickness, write <code><a href='brdr_thickness.html'>brdr_thickness(l
 <li><p><code>error_style</code> and <code>pad_decimal</code> arguments in <code>huxreg</code>. Use
 <code>error_format</code> and <code>align(hx) &lt;- "."</code>.</p></li>
 <li><p>The <code>where()</code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions.
-Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and <code>align(ht) &lt;- "."</code>.</p></li>
+Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and
+<code>align(ht) &lt;- "."</code>.</p></li>
 </ul></li>
 <li><p>Default padding has been increased to 6 points.</p></li>
 <li><p>By default, <code><a href='width.html'>width()</a></code> is now unset.</p></li>
@@ -306,8 +319,9 @@ on-screen display.</p></li>
 </ul></li>
 <li><p>Huxtable now has the concept of header row and columns.</p><ul>
 <li><p>By default, data frame column names will be headers.</p></li>
-<li><p>To set other rows to be headers, use <code><a href='header_cols.html'>set_header_rows(ht, row_numbers, TRUE)</a></code>. For columns, use <code><a href='header_cols.html'>header_cols()</a></code> or
-<code><a href='header_cols.html'>set_header_cols()</a></code>.</p></li>
+<li><p>To set other rows to be headers, use
+<code><a href='header_cols.html'>set_header_rows(ht, row_numbers, TRUE)</a></code>. For columns, use
+<code><a href='header_cols.html'>header_cols()</a></code> or <code><a href='header_cols.html'>set_header_cols()</a></code>.</p></li>
 <li><p>New functions <code><a href='style-functions.html'>style_headers()</a></code>, <code><a href='style-functions.html'>style_header_cols()</a></code>, and
 <code><a href='style-functions.html'>style_header_rows()</a></code> to set multiple properties on headers.</p></li>
 <li><p>In themes, <code>header_row/col = TRUE</code> set the first row/col to a
@@ -351,7 +365,7 @@ width of the caption. The default, <code>NA</code>, sets the width equal to the
 table width.</p></li>
 <li><p>There are two new themes: <code><a href='themes.html'>theme_compact()</a></code> and <code><a href='themes.html'>theme_bright()</a></code>.</p></li>
 <li><p>For <code><a href='huxreg.html'>huxreg()</a></code>, a new function <code><a href='tidy_override.html'>tidy_replace()</a></code> allows you to
-replace the output of <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy(x)</a></code> entirely.</p></li>
+replace the output of <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code> entirely.</p></li>
 <li><p>huxtable now only sets <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.knit_print_df = TRUE)</a></code> if
 it is attached, not if it is loaded.</p></li>
 <li><p>huxtable supports <code><a href='https://dplyr.tidyverse.org/reference/relocate.html'>dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
@@ -442,18 +456,18 @@ regressions. This will be available from the next version of
 <ul>
 <li><p>Huxtables can now be printed directly in Word documents and
 Powerpoint presentations, thanks to the <code>flextable</code> package and
-recent versions of Pandoc. (Powerpoint printing requires Pandoc &gt;=
-2.4.0.)</p></li>
+recent versions of Pandoc. (Powerpoint printing requires
+Pandoc &gt;= 2.4.0.)</p></li>
 <li><p>New “wrapleft” and “wrapright” options to <code><a href='position.html'>position()</a></code> allow text
 wrapping around tables.</p></li>
 <li><p>New <code><a href='set-outer.html'>set_outer_border_colors()</a></code> and <code><a href='set-outer.html'>set_outer_border_styles()</a></code>
 functions, like <code><a href='set-outer.html'>set_outer_borders()</a></code>.</p></li>
 <li><p>Huxtable no longer requires the <code>broom</code> package, instead using the
-<code>generics</code> package. If you use <code><a href='huxreg.html'>huxreg()</a></code>, you will still need e.g.
-<code>broom</code> or <code>broom.mixed</code> to provide <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code> and <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code> methods
-for specific models.</p></li>
+<code>generics</code> package. If you use <code><a href='huxreg.html'>huxreg()</a></code>, you will still need
+e.g. <code>broom</code> or <code>broom.mixed</code> to provide <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code> and <code><a href='https://generics.r-lib.org/reference/glance.html'>glance()</a></code>
+methods for specific models.</p></li>
 <li><p>Bugfix: <code><a href='tidy_override.html'>tidy.tidy_override()</a></code> and <code><a href='tidy_override.html'>glance.tidy_override()</a></code> should
-work even if underlying object has no <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code> or <code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code> method.</p></li>
+work even if underlying object has no <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code> or <code><a href='https://generics.r-lib.org/reference/glance.html'>glance()</a></code> method.</p></li>
 <li><p>Bugfix: huxtables had option clash when <code>echo = TRUE</code> in Rmd
 pdf_document format.</p></li>
 <li><p>Bugfix: <code><a href='caption.html'>caption()</a></code> and <code><a href='height.html'>height()</a></code> weren’t playing nicely.</p></li>
@@ -484,7 +498,7 @@ is not set.</p></li>
 pipes.</p></li>
 <li><p>Enhancement: left- and right-aligned captions are now set above the
 table in LaTeX, using the “threeparttable” package. You will need to
-install this using e.g. <code><a href='report_latex_dependencies.html'>install_latex_dependencies()</a></code> or <code>tlmgr</code> if
+install this using e.g. <code><a href='report_latex_dependencies.html'>install_latex_dependencies()</a></code> or <code>tlmgr</code> if
 it is not already on your system.</p></li>
 <li><p>Enhancement: in <code><a href='huxtable.html'>huxtable()</a></code> and friends, <code>add_rownames = "Colname"</code>
 now sets the name for the new column.</p></li>
@@ -514,8 +528,8 @@ huxtable now adds fenced code blocks round latex tables (see
 <a href='https://pandoc.org/MANUAL.html#extension-raw_attribute'>https://pandoc.org/MANUAL.html#extension-raw_attribute</a>). You must
 add</p>
 <p>md_extensions: +raw_attribute</p>
-<p>to your YAML header for this to work, and you will need a recent (&gt;
-2.0.0) version of Pandoc.</p></li>
+<p>to your YAML header for this to work, and you will need a recent
+(&gt; 2.0.0) version of Pandoc.</p></li>
 </ul>
 
 
@@ -600,13 +614,13 @@ rows.</p></li>
 <li><p>Improved formatting in Excel output.</p></li>
 <li><p>New <code>format</code> method which returns the result of <code>to_html</code>,
 <code>to_latex</code> etc. as appropriate.</p></li>
-<li><p>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</p></li>
+<li><p>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</p></li>
 <li><p>Bugfix: <code>set_all_*</code> not working when huxtable is not attached.</p></li>
 <li><p>Bugfix: <code>as_Workbook</code> failing with non-numeric <code>width</code>.</p></li>
 <li><p>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel
 output.</p></li>
-<li><p>Bugfix: <code>as_flextable</code> borders not working in cells with colspan &gt;
-1.</p></li>
+<li><p>Bugfix: <code>as_flextable</code> borders not working in cells with
+colspan &gt; 1.</p></li>
 <li><p>Documentation bugfixes.</p></li>
 <li><p>Compatibility with broom 5.0.0 - thanks @alexpghayes</p></li>
 </ul>
@@ -725,7 +739,7 @@ column names.</p></li>
 
 <ul>
 <li><p><code>number_format</code> now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
+This means you can include e.g. significance stars in a cell and
 still use <code>number_format</code> to format the content.</p></li>
 <li><p>If <code>number_format</code> is NA, numbers are unchanged.</p></li>
 <li><p>Default value of <code>number_format</code> has changed from “%5.2f” to

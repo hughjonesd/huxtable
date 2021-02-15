@@ -1,47 +1,54 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
-\documentclass[]{article}
+\documentclass[
+]{article}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-    \setmainfont[]{Calibri}
-    \setmonofont[Mapping=tex-ansi]{LucidaConsole}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Calibri}
+  \setmonofont[]{LucidaConsole}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
 \usepackage{xcolor}
-\usepackage{hyperref}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Introduction to Huxtable},
-            pdfauthor={David Hugh-Jones},
-            colorlinks=true,
-            linkcolor=olive,
-            filecolor=Maroon,
-            citecolor=Blue,
-            urlcolor=olive,
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Introduction to Huxtable},
+  pdfauthor={David Hugh-Jones},
+  colorlinks=true,
+  linkcolor=olive,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=olive,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -83,7 +90,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -92,32 +99,21 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{pmboxdraw}
 \usepackage{array}
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 \usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{hhline}
@@ -128,10 +124,13 @@
 \usepackage{adjustbox}
 \usepackage{hyperref}
 \usepackage{fontspec}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{Introduction to Huxtable}
 \author{David Hugh-Jones}
-\date{2020-10-28}
+\date{2021-02-15}
 
 \begin{document}
 \maketitle
@@ -161,64 +160,64 @@
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} u} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} x} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} u} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} x} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} t} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} t} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} a} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} a} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} b} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{b}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} l} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{e}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{l}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} e} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontspec{DejaVu Sans} \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
@@ -238,7 +237,7 @@
 \subsection{About this document}\label{about-this-document}}
 
 This is the introductory vignette for the R package `huxtable', version
-5.1.1. A current version is available on the web in
+5.2.0. A current version is available on the web in
 \href{https://hughjonesd.github.io/huxtable/huxtable.html}{HTML} or
 \href{https://hughjonesd.github.io/huxtable/huxtable.pdf}{PDF} format.
 
@@ -286,7 +285,7 @@ You can install huxtable from within R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"huxtable"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"huxtable"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -313,11 +312,11 @@ jam, and its price:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(huxtable)}
+\FunctionTok{library}\NormalTok{(huxtable)}
  
-\NormalTok{jams <-}\StringTok{ }\KeywordTok{hux}\NormalTok{(}
-        \DataTypeTok{Type  =} \KeywordTok{c}\NormalTok{(}\StringTok{"Strawberry"}\NormalTok{, }\StringTok{"Raspberry"}\NormalTok{, }\StringTok{"Plum"}\NormalTok{),}
-        \DataTypeTok{Price =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.90}\NormalTok{, }\FloatTok{2.10}\NormalTok{, }\FloatTok{1.80}\NormalTok{)}
+\NormalTok{jams }\OtherTok{\textless{}{-}} \FunctionTok{hux}\NormalTok{(}
+        \AttributeTok{Type  =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strawberry"}\NormalTok{, }\StringTok{"Raspberry"}\NormalTok{, }\StringTok{"Plum"}\NormalTok{),}
+        \AttributeTok{Price =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.90}\NormalTok{, }\FloatTok{2.10}\NormalTok{, }\FloatTok{1.80}\NormalTok{)}
 \NormalTok{      )}
 \end{Highlighting}
 \end{Shaded}
@@ -328,8 +327,8 @@ You can convert a data frame to a huxtable with \texttt{as\_hux}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(mtcars)}
-\NormalTok{car_ht <-}\StringTok{ }\KeywordTok{as_hux}\NormalTok{(mtcars)}
+\FunctionTok{data}\NormalTok{(mtcars)}
+\NormalTok{car\_ht }\OtherTok{\textless{}{-}} \FunctionTok{as\_hux}\NormalTok{(mtcars)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -343,15 +342,15 @@ column names will be row 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{print_screen}\NormalTok{(jams)     }\CommentTok{# on the R command line, you can just type "jams"}
+\FunctionTok{print\_screen}\NormalTok{(jams)     }\CommentTok{\# on the R command line, you can just type "jams"}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                                 Type            Price  
-##                                 Strawberry        1.9  
-##                                 Raspberry         2.1  
-##                                 Plum              1.8  
+##                                      Type            Price  
+##                                      Strawberry        1.9  
+##                                      Raspberry         2.1  
+##                                      Plum              1.8  
 ## 
 ## Column names: Type, Price
 \end{verbatim}
@@ -441,16 +440,16 @@ The default output is a plain table. Let's make it smarter. We'll:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr) }
+\FunctionTok{library}\NormalTok{(dplyr) }
 
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_all_padding}\NormalTok{(}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_outer_padding}\NormalTok{(}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_number_format}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_bottom_border}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_width}\NormalTok{(}\FloatTok{0.4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Pots of jam for sale"}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_all\_padding}\NormalTok{(}\DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_outer\_padding}\NormalTok{(}\DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_number\_format}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_bottom\_border}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_width}\NormalTok{(}\FloatTok{0.4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_caption}\NormalTok{(}\StringTok{"Pots of jam for sale"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -516,9 +515,9 @@ functions evaluate to:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams <-}\StringTok{ }\KeywordTok{set_all_padding}\NormalTok{(jams, }\DecValTok{4}\NormalTok{)}
-\NormalTok{jams <-}\StringTok{ }\KeywordTok{set_outer_padding}\NormalTok{(jam, }\DecValTok{0}\NormalTok{)}
-\CommentTok{# etc.}
+\NormalTok{jams }\OtherTok{\textless{}{-}} \FunctionTok{set\_all\_padding}\NormalTok{(jams, }\DecValTok{4}\NormalTok{)}
+\NormalTok{jams }\OtherTok{\textless{}{-}} \FunctionTok{set\_outer\_padding}\NormalTok{(jam, }\DecValTok{0}\NormalTok{)}
+\CommentTok{\# etc.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -573,23 +572,23 @@ as the above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# set all padding:}
-\KeywordTok{left_padding}\NormalTok{(jams) <-}\StringTok{ }\DecValTok{4}
-\KeywordTok{right_padding}\NormalTok{(jams) <-}\StringTok{ }\DecValTok{4}
-\KeywordTok{top_padding}\NormalTok{(jams) <-}\StringTok{ }\DecValTok{4}
-\KeywordTok{bottom_padding}\NormalTok{(jams) <-}\StringTok{ }\DecValTok{4}
+\CommentTok{\# set all padding:}
+\FunctionTok{left\_padding}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \DecValTok{4}
+\FunctionTok{right\_padding}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \DecValTok{4}
+\FunctionTok{top\_padding}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \DecValTok{4}
+\FunctionTok{bottom\_padding}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \DecValTok{4}
 
-\CommentTok{# set outer padding:}
-\KeywordTok{left_padding}\NormalTok{(jams)[}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(jams), }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
-\KeywordTok{top_padding}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\DecValTok{0}
-\KeywordTok{right_padding}\NormalTok{(jams)[}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(jams), }\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\DecValTok{0}
-\KeywordTok{bottom_padding}\NormalTok{(jams)[}\KeywordTok{nrow}\NormalTok{(jams), }\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\DecValTok{0}
+\CommentTok{\# set outer padding:}
+\FunctionTok{left\_padding}\NormalTok{(jams)[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(jams), }\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\FunctionTok{top\_padding}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\FunctionTok{right\_padding}\NormalTok{(jams)[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(jams), }\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\FunctionTok{bottom\_padding}\NormalTok{(jams)[}\FunctionTok{nrow}\NormalTok{(jams), }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \DecValTok{0}
 
-\KeywordTok{number_format}\NormalTok{(jams) <-}\StringTok{ }\DecValTok{2}
-\KeywordTok{bold}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\OtherTok{TRUE}
-\KeywordTok{bottom_border}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\FloatTok{0.4}
-\KeywordTok{width}\NormalTok{(jams) <-}\StringTok{ }\FloatTok{0.4}
-\KeywordTok{caption}\NormalTok{(jams) <-}\StringTok{ "Pots of jam for sale"}
+\FunctionTok{number\_format}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \DecValTok{2}
+\FunctionTok{bold}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
+\FunctionTok{bottom\_border}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \FloatTok{0.4}
+\FunctionTok{width}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \FloatTok{0.4}
+\FunctionTok{caption}\NormalTok{(jams) }\OtherTok{\textless{}{-}} \StringTok{"Pots of jam for sale"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -601,7 +600,7 @@ R. You can write
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(x)[}\DecValTok{1}\NormalTok{] <-}\StringTok{ "Name"}
+\FunctionTok{names}\NormalTok{(x)[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Name"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -612,7 +611,7 @@ write
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{bold}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(jams)] <-}\StringTok{ }\OtherTok{TRUE}
+\FunctionTok{bold}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(jams)] }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
 \end{Highlighting}
 \end{Shaded}
 
@@ -628,7 +627,7 @@ To sum up, you set \emph{cell properties} on a huxtable like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ht <-}\StringTok{ }\KeywordTok{set_property}\NormalTok{(ht, rows, cols, value)}
+\NormalTok{ht }\OtherTok{\textless{}{-}} \FunctionTok{set\_property}\NormalTok{(ht, rows, cols, value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -638,7 +637,7 @@ or like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ht <-}\StringTok{ }\KeywordTok{set_property}\NormalTok{(ht, value)}
+\NormalTok{ht }\OtherTok{\textless{}{-}} \FunctionTok{set\_property}\NormalTok{(ht, value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -651,7 +650,7 @@ like
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ht <-}\StringTok{ }\KeywordTok{set_property}\NormalTok{(ht, value)}
+\NormalTok{ht }\OtherTok{\textless{}{-}} \FunctionTok{set\_property}\NormalTok{(ht, value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -766,7 +765,7 @@ of properties.
 \multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont left\_border}}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont tabular\_environment}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont table\_environment}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
@@ -776,7 +775,7 @@ of properties.
 \multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont left\_border\_color}}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont width}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont tabular\_environment}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
@@ -786,7 +785,7 @@ of properties.
 \multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont left\_border\_style}}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
 \multicolumn{1}{p{0.135\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.135\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} &
-\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont }}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.225\textwidth}!{\huxvb{255, 255, 255}{3}}}{\hspace{6pt}\parbox[b]{0.225\textwidth-6pt-6pt}{\huxtpad{2pt + 1em}\raggedright {\fontspec{LucidaConsole} {\fontsize{10pt}{12pt}\selectfont width}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}->{\huxb{255, 255, 255}{3}}-}
@@ -922,8 +921,8 @@ specify \texttt{rows} and \texttt{cols} in several different ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Set the italic property on row 1, column 1:}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{) }
+\CommentTok{\# Set the italic property on row 1, column 1:}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -933,9 +932,9 @@ specify \texttt{rows} and \texttt{cols} in several different ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Set the italic property on column 1 of every row matching "berry":}
-\NormalTok{is_berry <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\StringTok{"berry"}\NormalTok{, jams}\OperatorTok{$}\NormalTok{Type)}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(is_berry, }\DecValTok{1}\NormalTok{) }
+\CommentTok{\# Set the italic property on column 1 of every row matching "berry":}
+\NormalTok{is\_berry }\OtherTok{\textless{}{-}} \FunctionTok{grepl}\NormalTok{(}\StringTok{"berry"}\NormalTok{, jams}\SpecialCharTok{$}\NormalTok{Type)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(is\_berry, }\DecValTok{1}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -945,8 +944,8 @@ specify \texttt{rows} and \texttt{cols} in several different ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Set the italic property on row 1 of the column named "Type":}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{)}
+\CommentTok{\# Set the italic property on row 1 of the column named "Type":}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -959,9 +958,9 @@ same methods for assignment style:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{italic}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{] <-}\StringTok{ }\OtherTok{TRUE}
-\CommentTok{# the same as:}
-\NormalTok{jams <-}\StringTok{ }\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{)}
+\FunctionTok{italic}\NormalTok{(jams)[}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
+\CommentTok{\# the same as:}
+\NormalTok{jams }\OtherTok{\textless{}{-}}\NormalTok{ jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"Type"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -978,9 +977,9 @@ In \texttt{set\_} functions, there are some extra methods:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Set the italic property on row 1 of every column whose name starts with "T":}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{starts_with}\NormalTok{(}\StringTok{"T"}\NormalTok{))}
+\CommentTok{\# Set the italic property on row 1 of every column whose name starts with "T":}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"T"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -995,11 +994,11 @@ There are also some huxtable-specific selectors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Set the italic property on row 1 of all columns:}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere)}
+\CommentTok{\# Set the italic property on row 1 of all columns:}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere)}
 
-\CommentTok{# Set the italic property on all rows of column 1:}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Set the italic property on all rows of column 1:}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1010,9 +1009,9 @@ There are also some huxtable-specific selectors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\KeywordTok{final}\NormalTok{(}\DecValTok{2}\NormalTok{), everywhere)}
-\CommentTok{# same as:}
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_italic}\NormalTok{(}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\FunctionTok{final}\NormalTok{(}\DecValTok{2}\NormalTok{), everywhere)}
+\CommentTok{\# same as:}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_italic}\NormalTok{(}\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1036,11 +1035,10 @@ Here are some useful ways to change how cells are displayed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_text_color}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"purple"}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_text\_color}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"purple"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
 
     \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
     \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
@@ -1103,11 +1101,10 @@ Here are some useful ways to change how cells are displayed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(evens, everywhere, }\StringTok{"grey95"}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(evens, everywhere, }\StringTok{"grey95"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
 
     \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
     \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
@@ -1174,13 +1171,12 @@ Here are some useful ways to change how cells are displayed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"*Type* of jam"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"*Price* of jam"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_markdown_contents}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"~~2.10~~ **Sale!** 1.50"}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_markdown\_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"*Type* of jam"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_markdown\_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"*Price* of jam"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_markdown\_contents}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"\textasciitilde{}\textasciitilde{}2.10\textasciitilde{}\textasciitilde{} **Sale!** 1.50"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
 
     \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
     \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
@@ -1252,8 +1248,8 @@ object:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_right_border}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\KeywordTok{brdr}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{"double"}\NormalTok{, }\StringTok{"grey"}\NormalTok{))}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_right\_border}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\FunctionTok{brdr}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{"double"}\NormalTok{, }\StringTok{"grey"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1315,10 +1311,10 @@ Or, you can set each component individually:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_right_border}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_right_border_style}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\StringTok{"double"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_right_border_color}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\StringTok{"grey"}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_right\_border}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_right\_border\_style}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\StringTok{"double"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_right\_border\_color}\NormalTok{(everywhere, }\DecValTok{1}\NormalTok{, }\StringTok{"grey"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1381,11 +1377,11 @@ Here's a corporate look for our jams:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(evens, everywhere, }\StringTok{"grey80"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(odds, everywhere, }\StringTok{"grey90"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_all_borders}\NormalTok{(}\KeywordTok{brdr}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"white"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_outer_padding}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(evens, everywhere, }\StringTok{"grey80"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(odds, everywhere, }\StringTok{"grey90"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_all\_borders}\NormalTok{(}\FunctionTok{brdr}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"white"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_outer\_padding}\NormalTok{(}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1468,7 +1464,7 @@ to change the text in a particular cell:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{] <-}\StringTok{ "Snozberry"}
+\NormalTok{jams[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Snozberry"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1478,8 +1474,8 @@ You can change a whole column like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Summer sale!}
-\NormalTok{jams}\OperatorTok{$}\NormalTok{Price <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Price"}\NormalTok{, }\FloatTok{1.50}\NormalTok{, }\FloatTok{1.60}\NormalTok{, }\FloatTok{1.50}\NormalTok{)}
+\CommentTok{\# Summer sale!}
+\NormalTok{jams}\SpecialCharTok{$}\NormalTok{Price }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Price"}\NormalTok{, }\FloatTok{1.50}\NormalTok{, }\FloatTok{1.60}\NormalTok{, }\FloatTok{1.50}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1492,7 +1488,7 @@ Or you can add a new column the same way.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams}\OperatorTok{$}\NormalTok{Sugar <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sugar content"}\NormalTok{, }\StringTok{"40%"}\NormalTok{, }\StringTok{"50%"}\NormalTok{, }\StringTok{"30%"}\NormalTok{)}
+\NormalTok{jams}\SpecialCharTok{$}\NormalTok{Sugar }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Sugar content"}\NormalTok{, }\StringTok{"40\%"}\NormalTok{, }\StringTok{"50\%"}\NormalTok{, }\StringTok{"30\%"}\NormalTok{)}
 \NormalTok{jams}
 \end{Highlighting}
 \end{Shaded}
@@ -1564,7 +1560,7 @@ cell properties will be copied from the previous row:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{rbind}\NormalTok{(jams, }\KeywordTok{c}\NormalTok{(}\StringTok{"Gooseberry"}\NormalTok{, }\FloatTok{2.1}\NormalTok{, }\StringTok{"55%"}\NormalTok{))}
+\FunctionTok{rbind}\NormalTok{(jams, }\FunctionTok{c}\NormalTok{(}\StringTok{"Gooseberry"}\NormalTok{, }\FloatTok{2.1}\NormalTok{, }\StringTok{"55\%"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1639,9 +1635,9 @@ table. You can do this with rbind, but it is not very convenient:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{best_before <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Best before"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"Aug 2022"}\NormalTok{, }\StringTok{"Sept 2022"}\NormalTok{, }\StringTok{"June 2022"}\NormalTok{))}
+\NormalTok{best\_before }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Best before"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Aug 2022"}\NormalTok{, }\StringTok{"Sept 2022"}\NormalTok{, }\StringTok{"June 2022"}\NormalTok{))}
 
-\KeywordTok{cbind}\NormalTok{(jams[, }\DecValTok{1}\NormalTok{], best_before, jams[, }\DecValTok{-1}\NormalTok{])}
+\FunctionTok{cbind}\NormalTok{(jams[, }\DecValTok{1}\NormalTok{], best\_before, jams[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1712,9 +1708,9 @@ this.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{insert_column}\NormalTok{(best_before, }\DataTypeTok{after =} \StringTok{"Type"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_number_format}\NormalTok{(everywhere, }\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{) }\CommentTok{# correct the formatting for dates}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{insert\_column}\NormalTok{(best\_before, }\AttributeTok{after =} \StringTok{"Type"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_number\_format}\NormalTok{(everywhere, }\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{) }\CommentTok{\# correct the formatting for dates}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1789,11 +1785,11 @@ with huxtable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{mutate}\NormalTok{(}
-        \DataTypeTok{Type =} \KeywordTok{toupper}\NormalTok{(Type)}
-\NormalTok{      ) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{select}\NormalTok{(Type, Price)}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{Type =} \FunctionTok{toupper}\NormalTok{(Type)}
+\NormalTok{      ) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(Type, Price)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1858,15 +1854,15 @@ here's how you might create a \texttt{jams} table ordered by price:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams_data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
-        \DataTypeTok{Type =} \KeywordTok{c}\NormalTok{(}\StringTok{"Strawberry"}\NormalTok{, }\StringTok{"Raspberry"}\NormalTok{, }\StringTok{"Plum"}\NormalTok{),}
-        \DataTypeTok{Price =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.90}\NormalTok{, }\FloatTok{2.10}\NormalTok{, }\FloatTok{1.80}\NormalTok{)}
+\NormalTok{jams\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+        \AttributeTok{Type =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strawberry"}\NormalTok{, }\StringTok{"Raspberry"}\NormalTok{, }\StringTok{"Plum"}\NormalTok{),}
+        \AttributeTok{Price =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.90}\NormalTok{, }\FloatTok{2.10}\NormalTok{, }\FloatTok{1.80}\NormalTok{)}
 \NormalTok{      )}
 
-\NormalTok{jams_ordered <-}\StringTok{ }\NormalTok{jams_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{arrange}\NormalTok{(Price) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{as_hux}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\CommentTok{# et cetera...}
+\NormalTok{jams\_ordered }\OtherTok{\textless{}{-}}\NormalTok{ jams\_data }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{arrange}\NormalTok{(Price) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{as\_hux}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\CommentTok{\# et cetera...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1879,12 +1875,12 @@ later with the \texttt{add\_colnames()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Same result as above}
+\CommentTok{\# Same result as above}
 
-\NormalTok{jams_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{as_hux}\NormalTok{(}\DataTypeTok{add_colnames =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{arrange}\NormalTok{(Price) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{add_colnames}\NormalTok{()}
+\NormalTok{jams\_data }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{as\_hux}\NormalTok{(}\AttributeTok{add\_colnames =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{arrange}\NormalTok{(Price) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{add\_colnames}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1898,15 +1894,15 @@ carefully. Here's selected rows of the \texttt{iris} dataset:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux <-}\StringTok{ }\NormalTok{iris }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{select}\NormalTok{(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{as_hux}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{      }\KeywordTok{theme_basic}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_tb_padding}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{iris\_hux }\OtherTok{\textless{}{-}}\NormalTok{ iris }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{group\_by}\NormalTok{(Species) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{as\_hux}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{theme\_basic}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_tb\_padding}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 
-\NormalTok{iris_hux      }
+\NormalTok{iris\_hux      }
 \end{Highlighting}
 \end{Shaded}
 
@@ -2102,16 +2098,16 @@ shorten them.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux <-}\StringTok{ }\NormalTok{iris_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{set_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"Length"}\NormalTok{, }\StringTok{"Width"}\NormalTok{, }\StringTok{"Length"}\NormalTok{, }\StringTok{"Width"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{insert_row}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"Sepal"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"Petal"}\NormalTok{, }\StringTok{""}\NormalTok{, }\DataTypeTok{after =} \DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{merge_cells}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{merge_cells}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\OperatorTok{:}\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{set_align}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere, }\StringTok{"center"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{set_tb_padding}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere, }\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{set_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere)}
+\NormalTok{iris\_hux }\OtherTok{\textless{}{-}}\NormalTok{ iris\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_contents}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Length"}\NormalTok{, }\StringTok{"Width"}\NormalTok{, }\StringTok{"Length"}\NormalTok{, }\StringTok{"Width"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{insert\_row}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"Sepal"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"Petal"}\NormalTok{, }\StringTok{""}\NormalTok{, }\AttributeTok{after =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{merge\_cells}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{merge\_cells}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_align}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere, }\StringTok{"center"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_tb\_padding}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere, }\DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere)}
   
-\NormalTok{iris_hux}
+\NormalTok{iris\_hux}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2337,12 +2333,12 @@ data in two columns, but it can make a table easier to read.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux_wide <-}\StringTok{ }\NormalTok{iris_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_header_rows}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{restack_across}\NormalTok{(}\DataTypeTok{rows =} \DecValTok{7}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_bottom_border}\NormalTok{(}\KeywordTok{final}\NormalTok{(}\DecValTok{1}\NormalTok{), everywhere)}
+\NormalTok{iris\_hux\_wide }\OtherTok{\textless{}{-}}\NormalTok{ iris\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_header\_rows}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{restack\_across}\NormalTok{(}\AttributeTok{rows =} \DecValTok{7}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_bottom\_border}\NormalTok{(}\FunctionTok{final}\NormalTok{(}\DecValTok{1}\NormalTok{), everywhere)}
 
-\NormalTok{iris_hux_wide}
+\NormalTok{iris\_hux\_wide}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2512,15 +2508,15 @@ fewer columns. To understand these, a bit of color will help:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lego_hux <-}\StringTok{ }\KeywordTok{as_hux}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{16}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"red"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"yellow"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_background_color}\NormalTok{(}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"blue"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_text_color}\NormalTok{(}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"white"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_all_borders}\NormalTok{(}\KeywordTok{brdr}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"white"}\NormalTok{))}
+\NormalTok{lego\_hux }\OtherTok{\textless{}{-}} \FunctionTok{as\_hux}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"red"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"yellow"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(}\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_background\_color}\NormalTok{(}\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"blue"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_text\_color}\NormalTok{(}\DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\StringTok{"white"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_all\_borders}\NormalTok{(}\FunctionTok{brdr}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"white"}\NormalTok{))}
 
-\NormalTok{lego_hux }\OperatorTok{%>%}\StringTok{ }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Original table"}\NormalTok{)}
+\NormalTok{lego\_hux }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{set\_caption}\NormalTok{(}\StringTok{"Original table"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2586,9 +2582,9 @@ fewer columns. To understand these, a bit of color will help:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lego_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{restack_across}\NormalTok{(}\DataTypeTok{rows =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Restacked across"}\NormalTok{)}
+\NormalTok{lego\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{restack\_across}\NormalTok{(}\AttributeTok{rows =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_caption}\NormalTok{(}\StringTok{"Restacked across"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2644,9 +2640,9 @@ fewer columns. To understand these, a bit of color will help:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lego_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{restack_down}\NormalTok{(}\DataTypeTok{cols =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Restacked down"}\NormalTok{)}
+\NormalTok{lego\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{restack\_down}\NormalTok{(}\AttributeTok{cols =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_caption}\NormalTok{(}\StringTok{"Restacked down"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2744,12 +2740,12 @@ on the page, using the \texttt{position} property.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux_wide }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_width}\NormalTok{(}\FloatTok{0.8}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_font_size}\NormalTok{(}\DecValTok{8}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_lr_padding}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_col_width}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{), }\DecValTok{3}\NormalTok{)}\OperatorTok{/}\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_position}\NormalTok{(}\StringTok{"left"}\NormalTok{)}
+\NormalTok{iris\_hux\_wide }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_width}\NormalTok{(}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_font\_size}\NormalTok{(}\DecValTok{8}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_lr\_padding}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_col\_width}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{), }\DecValTok{3}\NormalTok{)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_position}\NormalTok{(}\StringTok{"left"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2991,7 +2987,7 @@ header rows appropriately. For this to happen, we set the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set_row_property}\NormalTok{(ht, row, value)}
+\FunctionTok{set\_row\_property}\NormalTok{(ht, row, value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3003,12 +2999,12 @@ yourself using the \texttt{style\_headers()} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux <-}\StringTok{ }\NormalTok{iris_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_header_rows}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{set_header_cols}\NormalTok{(}\DecValTok{1}\NormalTok{, }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{style_headers}\NormalTok{(}\DataTypeTok{bold =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"grey40"}\NormalTok{)}
+\NormalTok{iris\_hux }\OtherTok{\textless{}{-}}\NormalTok{ iris\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_header\_rows}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{set\_header\_cols}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{style\_headers}\NormalTok{(}\AttributeTok{bold =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{text\_color =} \StringTok{"grey40"}\NormalTok{)}
 
-\NormalTok{iris_hux}
+\NormalTok{iris\_hux}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3222,8 +3218,8 @@ take a single huxtable and return a list of huxtables. Like the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{list_of_iris <-}\StringTok{ }\KeywordTok{split_across}\NormalTok{(iris_hux, }\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{12}\NormalTok{))}
-\NormalTok{list_of_iris[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{list\_of\_iris }\OtherTok{\textless{}{-}} \FunctionTok{split\_across}\NormalTok{(iris\_hux, }\FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{12}\NormalTok{))}
+\NormalTok{list\_of\_iris[[}\DecValTok{1}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3319,7 +3315,7 @@ take a single huxtable and return a list of huxtables. Like the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{list_of_iris[[}\DecValTok{2}\NormalTok{]]}
+\NormalTok{list\_of\_iris[[}\DecValTok{2}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3415,7 +3411,7 @@ take a single huxtable and return a list of huxtables. Like the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{list_of_iris[[}\DecValTok{3}\NormalTok{]]}
+\NormalTok{list\_of\_iris[[}\DecValTok{3}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3521,7 +3517,7 @@ include \texttt{theme\_basic()} and the randomized
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{theme_mondrian}\NormalTok{(jams)}
+\FunctionTok{theme\_mondrian}\NormalTok{(jams)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3545,16 +3541,16 @@ include \texttt{theme\_basic()} and the randomized
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{2}}p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedright \textbf{Type}\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{0, 0, 255}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Price}\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 255, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Sugar content}\huxbpad{3pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Price}\huxbpad{3pt}}} &
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft \textbf{Sugar content}\huxbpad{3pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{2}}p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedright Strawberry\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 1.90\huxbpad{3pt}}} &
-\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 40.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 0, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 1.90\huxbpad{3pt}}} &
+\multicolumn{1}{p{0.133333333333333\textwidth}!{\huxvb{0, 0, 0}{2}}}{\cellcolor[RGB]{255, 255, 0}\hspace{3pt}\parbox[b]{0.133333333333333\textwidth-3pt-3pt}{\huxtpad{3pt + 1em}\raggedleft 40.00\%\huxbpad{3pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}->{\huxb{0, 0, 0}{2}}-}
@@ -3596,7 +3592,7 @@ For example, here's another way to create a striped table:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_background_color}\NormalTok{(}\KeywordTok{by_rows}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"grey95"}\NormalTok{))}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{map\_background\_color}\NormalTok{(}\FunctionTok{by\_rows}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"grey95"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3663,9 +3659,9 @@ the lowest and highest values of each column:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris_hux }\OperatorTok{%>%}\StringTok{ }
-\StringTok{      }\KeywordTok{map_text_color}\NormalTok{(}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{), }\DecValTok{-1}\NormalTok{, }
-        \KeywordTok{by_colorspace}\NormalTok{(}\StringTok{"darkred"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\DataTypeTok{colwise =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{iris\_hux }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{map\_text\_color}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{), }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }
+        \FunctionTok{by\_colorspace}\NormalTok{(}\StringTok{"darkred"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{colwise =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{      )}
 \end{Highlighting}
 \end{Shaded}
@@ -3885,7 +3881,7 @@ string, use the \texttt{by\_regex} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{jams }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_text_color}\NormalTok{(}\KeywordTok{by_regex}\NormalTok{(}\StringTok{"berry"}\NormalTok{ =}\StringTok{ "red4"}\NormalTok{, }\StringTok{"navy"}\NormalTok{))}
+\NormalTok{jams }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{map\_text\_color}\NormalTok{(}\FunctionTok{by\_regex}\NormalTok{(}\StringTok{"berry"} \OtherTok{=} \StringTok{"red4"}\NormalTok{, }\StringTok{"navy"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3964,101 +3960,19 @@ automatically format data frames for you:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(iris)}
+\FunctionTok{head}\NormalTok{(iris)}
 \end{Highlighting}
 \end{Shaded}
 
- 
-  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
-  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
-  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
-
-\begin{table}[ht]
-\begin{centerbox}
-\begin{threeparttable}
- \label{tab:unnamed-chunk-51}
-\setlength{\tabcolsep}{0pt}
-\begin{tabular}{l l l l l}
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sepal.Length} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Sepal.Width} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Petal.Length} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textbf{Petal.Width} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Species} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5.1 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.5 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.9 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3~~ \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.7 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.3 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 4.6 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.1 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.5 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5~~ \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.6 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 5.4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 3.9 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.7 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{l!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} setosa \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
-\arrayrulecolor{black}
-\end{tabular}
-\end{threeparttable}\par\end{centerbox}
-
-\end{table}
- 
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
 
 \FloatBarrier
 
@@ -4067,9 +3981,9 @@ If you don't want this, you can turn it off by setting the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{options}\NormalTok{(}\DataTypeTok{huxtable.knit_print_df =} \OtherTok{FALSE}\NormalTok{)}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{huxtable.knit\_print\_df =} \ConstantTok{FALSE}\NormalTok{)}
 
-\KeywordTok{head}\NormalTok{(iris) }\CommentTok{# back to normal}
+\FunctionTok{head}\NormalTok{(iris) }\CommentTok{\# back to normal}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4115,17 +4029,17 @@ background colours are also displayed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{print_screen}\NormalTok{(jams)}
+\FunctionTok{print\_screen}\NormalTok{(jams)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                                 Pots of jam for sale                                 
-##                          Type         Price   Sugar content  
-##                        ──────────────────────────────────────
-##                          Strawberry    1.90          40.00%  
-##                          Raspberry     2.10          50.00%  
-##                          Plum          1.80          30.00%  
+##                                      Pots of jam for sale                                      
+##                               Type          Price   Sugar content  
+##                             ───────────────────────────────────────
+##                               Strawberry     1.90          40.00%  
+##                               Raspberry      2.10          50.00%  
+##                               Plum           1.80          30.00%  
 ## 
 ## Column names: Type, Price, Sugar
 \end{verbatim}
@@ -4162,14 +4076,14 @@ you can use huxtable functions starting with \texttt{quick\_}:
 These are called with one or more huxtable objects (or objects which can
 be turned into a huxtable, such as data frames). A new document of the
 appropriate type will be created and opened. By default the file will be
-in the current directory, under a name like e.g.
-\texttt{huxtable-output.pdf}. If the file already exists, you'll be
+in the current directory, under a name like
+e.g.~\texttt{huxtable-output.pdf}. If the file already exists, you'll be
 asked for confirmation.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{quick_pdf}\NormalTok{(iris_hux) }
-\KeywordTok{quick_pdf}\NormalTok{(iris_hux, }\DataTypeTok{file =} \StringTok{"iris.pdf"}\NormalTok{)}
+\FunctionTok{quick\_pdf}\NormalTok{(iris\_hux) }
+\FunctionTok{quick\_pdf}\NormalTok{(iris\_hux, }\AttributeTok{file =} \StringTok{"iris.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4184,11 +4098,11 @@ A common reason to print a table is to report statistical results. The
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lm1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{cyl, mtcars)}
-\NormalTok{lm2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{hp, mtcars)}
-\NormalTok{lm3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{cyl }\OperatorTok{+}\StringTok{ }\NormalTok{hp, mtcars)}
+\NormalTok{lm1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl, mtcars)}
+\NormalTok{lm2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ hp, mtcars)}
+\NormalTok{lm3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl }\SpecialCharTok{+}\NormalTok{ hp, mtcars)}
 
-\KeywordTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
+\FunctionTok{huxreg}\NormalTok{(lm1, lm2, lm3)}
 \end{Highlighting}
 \end{Shaded}
 
