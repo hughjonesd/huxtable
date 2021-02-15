@@ -64,6 +64,7 @@ reference:
       - label
       - latex_float
       - tabular_environment
+      - table_environment
   - title: "Text properties"
     desc: Style text in table cells
     contents:
