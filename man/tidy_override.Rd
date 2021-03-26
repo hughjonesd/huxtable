@@ -26,7 +26,7 @@ tidy_replace(x, tidied, glance = list())
 
 \item{glance}{A list of summary statistics for \code{glance}.}
 
-\item{extend}{Logical: allow adding new columns to \code{tidy(x)}?}
+\item{extend}{Logical: allow adding new columns to \code{tidy(x)} and \code{glance(x)}?}
 
 \item{tidied}{Data frame to replace the result of \code{tidy(x)}.}
 

@@ -393,7 +393,7 @@ has_builtin_ci <- function (x) {
 #' @param ... In `tidy_override`, columns of statistics to replace `tidy` output. In
 #'   `tidy` and `glance` methods, arguments passed on to the underlying model.
 #' @param glance A list of summary statistics for `glance`.
-#' @param extend Logical: allow adding new columns to `tidy(x)`?
+#' @param extend Logical: allow adding new columns to `tidy(x)` and `glance(x)`?
 #' @param object A `tidy_override` object.
 #'
 #' @details
@@ -445,7 +445,7 @@ tidy_replace <- function (x, tidied, glance = list()) {
           model = x,
           tidy_data = tidied,
           glance_elems = as.list(glance),
-          extend = FALSE
+          extend = TRUE
         ),
         class = "tidy_override")
 }
