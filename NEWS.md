@@ -1,7 +1,10 @@
 
-
 Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
 version number is increased whenever there are backwards-incompatible API changes.
+
+# huxtable (development version)
+
+* Allow `tidy_override()` to extend columns of `tidy` and `glance`.
 
 # huxtable 5.2.0
 
