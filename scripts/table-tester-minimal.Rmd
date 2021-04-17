@@ -37,9 +37,8 @@ long <- 'A rather long row of text which goes on...'
 
 ```
 
-Hey, *this should be italics not underline*.
 
 ```{r}
-hux("A huxtable")
-  
+
+hux("a^b")
 ```

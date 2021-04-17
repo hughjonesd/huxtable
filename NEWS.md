@@ -5,6 +5,7 @@ version number is increased whenever there are backwards-incompatible API change
 # huxtable (development version)
 
 * Allow `tidy_override()` to extend columns of `tidy` and `glance`.
+* Bugfix: #196 `^` was giving errors in LaTeX.
 
 # huxtable 5.2.0
 

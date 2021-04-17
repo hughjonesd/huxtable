@@ -15,6 +15,7 @@ backwards-incompatible API changes.
 \section{huxtable (development version)}{
 \itemize{
 \item Allow \code{tidy_override()} to extend columns of \code{tidy} and \code{glance}.
+\item Bugfix: #196 \code{^} was giving errors in LaTeX.
 }
 }
 

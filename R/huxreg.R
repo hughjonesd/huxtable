@@ -485,6 +485,7 @@ glance.tidy_override <- function (x, ...) {
   return(sumstats)
 }
 
+
 #' @export
 #' @rdname tidy_override
 nobs.tidy_override <- function (object, ...) {

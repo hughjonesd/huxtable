@@ -76,7 +76,7 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
     result <- gsub("&", "\\&", result, fixed = TRUE)
     result <- gsub("_", "\\_", result, fixed = TRUE)
     result <- gsub("#", "\\#", result, fixed = TRUE)
-    result <- gsub("^", "\\verb|^|", result, fixed = TRUE)
+    result <- gsub("^", "\\textasciicircum ", result, fixed = TRUE)
     result <- gsub("~", "\\~{}", result, fixed = TRUE)
     result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
                 result, fixed = TRUE)
