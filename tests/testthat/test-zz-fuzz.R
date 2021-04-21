@@ -4,7 +4,7 @@
 # look for a 6 figure number in test output.
 # Run:
 #   library(huxtable)
-# Source `add_props()`, the `variations` data frame and the `hux_raw` huxtable.
+# Source `add_props()`, the `variations` data frame and the `hx_raw` huxtable.
 # run:
 #   hx_set <- add_props(hx_raw, variations[six_figure_no,])
 # compare outputs to something like
