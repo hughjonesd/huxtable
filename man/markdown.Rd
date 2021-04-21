@@ -5,7 +5,7 @@
 \alias{markdown<-}
 \alias{set_markdown}
 \alias{map_markdown}
-\title{Format cell content as markdown}
+\title{Interpret cell content as markdown}
 \usage{
 markdown(ht)
 markdown(ht) <- value
@@ -30,7 +30,7 @@ Set to \code{NA} to reset to the default, which is \code{FALSE}.}
 \code{set_markdown()} returns the modified huxtable.
 }
 \description{
-Cells where the markdown property is \code{TRUE} will be rendered as
+Cells where the markdown property is \code{TRUE} will be interpreted as
 \href{https://commonmark.org/help/}{markdown}.
 }
 \details{
@@ -55,8 +55,17 @@ There are some quirks:
 \item Inline images in RTF work using the INCLUDEPICTURE field type.
 }
 
-If you try to use markdown tables, then seek psychiatric help.
+If you try to use markdown tables within a table cell, then seek psychiatric
+help.
 }
+\section{Note}{
+
+Markdown content in cells is completely separate from printing the whole
+table as markdown using \code{\link[=print_md]{print_md()}}. When you set \code{markdown} to \code{TRUE},
+huxtable itself interprets the cell contents as markdown, and spits out HTML,
+TeX or whatever.
+}
+
 \examples{
 
 jams[3, 2] <- "~2.10~ **Sale!** 1.50"

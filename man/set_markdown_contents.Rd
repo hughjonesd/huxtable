@@ -2,7 +2,7 @@
 % Please edit documentation in R/markdown.R
 \name{set_markdown_contents}
 \alias{set_markdown_contents}
-\title{Set cell contents to markdown}
+\title{Set cell contents, interpreting them as markdown}
 \usage{
 set_markdown_contents(ht, row, col, value)
 }
@@ -21,6 +21,14 @@ The modified huxtable.
 \description{
 This convenience function calls \code{\link[=set_contents]{set_contents()}} and \code{\link[=set_markdown]{set_markdown()}}.
 }
+\section{Note}{
+
+Markdown content in cells is completely separate from printing the whole
+table as markdown using \code{\link[=print_md]{print_md()}}. When you set \code{markdown} to \code{TRUE},
+huxtable itself interprets the cell contents as markdown, and spits out HTML,
+TeX or whatever.
+}
+
 \examples{
 set_markdown_contents(jams, 1, 1,
       "**Type** of jam")

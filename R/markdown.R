@@ -1,10 +1,22 @@
 
-#' Set cell contents to markdown
+
+#' @section Note:
+#' Markdown content in cells is completely separate from printing the whole
+#' table as markdown using [print_md()]. When you set `markdown` to `TRUE`,
+#' huxtable itself interprets the cell contents as markdown, and spits out HTML,
+#' TeX or whatever.
+#' @name markdown-note
+NULL
+
+
+#' Set cell contents, interpreting them as markdown
 #'
 #' This convenience function calls [set_contents()] and [set_markdown()].
 #'
 #' @inherit set_contents params
 #' @param value Cell contents, as a markdown string.
+#'
+#' @inheritSection markdown-note Note
 #'
 #' @return The modified huxtable.
 #'

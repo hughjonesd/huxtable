@@ -235,9 +235,9 @@ NULL
 make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 
 
-#' Format cell content as markdown
+#' Interpret cell content as markdown
 #'
-#' Cells where the markdown property is `TRUE` will be rendered as
+#' Cells where the markdown property is `TRUE` will be interpreted as
 #' [markdown](https://commonmark.org/help/).
 #'
 #' @template getset-cell
@@ -265,7 +265,10 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' * To make lists work in LaTeX, set [width()] and ensure [wrap()] is `TRUE`.
 #' * Inline images in RTF work using the INCLUDEPICTURE field type.
 #'
-#' If you try to use markdown tables, then seek psychiatric help.
+#' If you try to use markdown tables within a table cell, then seek psychiatric
+#' help.
+#'
+#' @inheritSection markdown-note Note
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
 #'
