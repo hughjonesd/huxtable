@@ -147,7 +147,7 @@ decimal_pad <- function(col, pad_chars, type) {
   pad_n_spaces <- max(chars_after_.) - chars_after_.
   pad_char <- switch(type,
                      "html"   = "&nbsp;",
-                     "latex"  = "~",
+                     "latex"  = "\\hphantom{0}",
                      "screen" = "\u00a0", # screen non-breaking space
                      "rtf"    = "\\~",
                      " ")
