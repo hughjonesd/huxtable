@@ -40,5 +40,6 @@ long <- 'A rather long row of text which goes on...'
 
 ```{r}
 
-hux("a^b")
+lm_cars <- lm(mpg ~ hp + I(hp^2), data = mtcars)
+huxreg(lm_cars)  
 ```
