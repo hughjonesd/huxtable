@@ -3,15 +3,15 @@ title: "Huxtable table demo"
 author: "David Hugh-Jones"
 date: "2/03/2017"
 output:
-  html_document: 
-    toc: yes
-  word_document: 
-    toc: yes
   pdf_document:
     toc: yes
     includes:
       in_header: placeins-header.tex
     keep_tex: yes
+  word_document: 
+    toc: yes
+  html_document: 
+    toc: yes
   rtf_document: default
 ---
 
@@ -101,11 +101,11 @@ for (pos in c('topleft', 'topcenter', 'topright', 'top', 'bottomleft', 'bottomce
   ht <- make(nrow = 1) 
   caption(ht) <- paste0('caption\\_pos: ', pos)
   caption_pos(ht) <- pos
-  cat(knitr::knit_print(ht))
+  knitr::knit_print(ht)
   
   caption_width(ht) <- .5
   caption(ht) <- paste(caption(ht), "caption\\_width: .5")
-  cat(knitr::knit_print(ht))
+  knitr::knit_print(ht)
 }
 
 ht <- make(nrow = 1)

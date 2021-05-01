@@ -1,25 +1,22 @@
 
-This update adds a new feature, and fixes a test which failed due to a bug in
-broom and was presumably not caught by a reverse dependency check.
-
+A bugfix release.
 
 ## Test environments
 
 * local OS X install (R 4.0.3)
+* rhub (windows/linux, release/devel)
 * github (windows/linux, release/devel)
 * windows on appveyor (release and stable)
-* win-builder (devel and release)
+* win-builder devel
 
 
 ## R CMD check results
 
-No warnings on local, win-builder, github or appveyor. Notes relate to 
-'misspelled word' RTF (false positive) and are otherwise about the package
-being archived, including one non-working URL which will work again when
-the package is in place on CRAN.
+No errors, warnings or notes on rhub, github, appveyor, win-builder devel, 
+or locally. Two rhub platforms failed while preparing for the build.
 
 
 ## Reverse dependencies
 
-Reverse dependencies couldn't be checked because the CRAN package was archived.
-It's unlikely that the changes introduce problems for dependencies.
+Of 9 reverse dependencies, 7 were fine. Two failed to check due to R CMD check
+timing out (both with CRAN huxtable and this version).
