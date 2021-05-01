@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,9 +158,9 @@
     <p><code>by_rows</code> and <code>by_cols</code> set properties in horizontal or vertical "stripes".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_rows</span>(<span class='no'>...</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>by_rows</span><span class='op'>(</span><span class='va'>...</span>, from <span class='op'>=</span> <span class='fl'>1</span>, ignore_na <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>by_cols</span>(<span class='no'>...</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>by_cols</span><span class='op'>(</span><span class='va'>...</span>, from <span class='op'>=</span> <span class='fl'>1</span>, ignore_na <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,20 +197,22 @@ normally resets to the default.</p></td>
 <code><a href='by_values.html'>by_values</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>25</span>), <span class='fl'>5</span>, <span class='fl'>5</span>))
-<span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='fu'>by_rows</span>(<span class='st'>"green"</span>, <span class='st'>"grey"</span>))</div><div class='output co'>#&gt;                   <span style='background-color: #00BB00;'>0.00048</span><span>   </span><span style='background-color: #00BB00;'>-0.679</span><span>   </span><span style='background-color: #00BB00;'> 0.194</span><span>   </span><span style='background-color: #00BB00;'>-1.78 </span><span>   </span><span style='background-color: #00BB00;'>-0.432</span><span>  
-#&gt;                   </span><span style='background-color: #BBBBBB;'>0.755  </span><span>   </span><span style='background-color: #BBBBBB;'> 0.738</span><span>   </span><span style='background-color: #BBBBBB;'>-0.691</span><span>   </span><span style='background-color: #BBBBBB;'>-0.716</span><span>   </span><span style='background-color: #BBBBBB;'>-0.668</span><span>  
+    <pre class="examples"><div class='input'><span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>25</span><span class='op'>)</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='background_color.html'>map_background_color</a></span><span class='op'>(</span><span class='va'>ht</span>,
+      <span class='fu'>by_rows</span><span class='op'>(</span><span class='st'>"green"</span>, <span class='st'>"grey"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                   <span style='background-color: #00BB00;'>0.00048</span><span>   </span><span style='background-color: #00BB00;'>-0.679</span><span>   </span><span style='background-color: #00BB00;'> 0.194</span><span>   </span><span style='background-color: #00BB00;'>-1.78 </span><span>   </span><span style='background-color: #00BB00;'>-0.432</span><span>  
+#&gt;                   </span><span style='background-color: #B2B2B2;'>0.755  </span><span>   </span><span style='background-color: #B2B2B2;'> 0.738</span><span>   </span><span style='background-color: #B2B2B2;'>-0.691</span><span>   </span><span style='background-color: #B2B2B2;'>-0.716</span><span>   </span><span style='background-color: #B2B2B2;'>-0.668</span><span>  
 #&gt;                   </span><span style='background-color: #00BB00;'>0.342  </span><span>   </span><span style='background-color: #00BB00;'>-0.861</span><span>   </span><span style='background-color: #00BB00;'> 1.34 </span><span>   </span><span style='background-color: #00BB00;'> 0.911</span><span>   </span><span style='background-color: #00BB00;'> 1.39 </span><span>  
-#&gt;                   </span><span style='background-color: #BBBBBB;'>0.168  </span><span>   </span><span style='background-color: #BBBBBB;'> 0.421</span><span>   </span><span style='background-color: #BBBBBB;'> 2.74 </span><span>   </span><span style='background-color: #BBBBBB;'>-0.772</span><span>   </span><span style='background-color: #BBBBBB;'> 0.912</span><span>  
+#&gt;                   </span><span style='background-color: #B2B2B2;'>0.168  </span><span>   </span><span style='background-color: #B2B2B2;'> 0.421</span><span>   </span><span style='background-color: #B2B2B2;'> 2.74 </span><span>   </span><span style='background-color: #B2B2B2;'>-0.772</span><span>   </span><span style='background-color: #B2B2B2;'> 0.912</span><span>  
 #&gt;                   </span><span style='background-color: #00BB00;'>1.4    </span><span>   </span><span style='background-color: #00BB00;'> 1.45 </span><span>   </span><span style='background-color: #00BB00;'>-0.944</span><span>   </span><span style='background-color: #00BB00;'>-0.782</span><span>   </span><span style='background-color: #00BB00;'> 0.205</span><span>  
 #&gt; 
-#&gt; Column names: V1, V2, V3, V4, V5</div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='fu'>by_cols</span>(<span class='st'>"green"</span>, <span class='st'>"grey"</span>))</div><div class='output co'>#&gt;                   </span><span style='background-color: #00BB00;'>0.00048</span><span>   </span><span style='background-color: #BBBBBB;'>-0.679</span><span>   </span><span style='background-color: #00BB00;'> 0.194</span><span>   </span><span style='background-color: #BBBBBB;'>-1.78 </span><span>   </span><span style='background-color: #00BB00;'>-0.432</span><span>  
-#&gt;                   </span><span style='background-color: #00BB00;'>0.755  </span><span>   </span><span style='background-color: #BBBBBB;'> 0.738</span><span>   </span><span style='background-color: #00BB00;'>-0.691</span><span>   </span><span style='background-color: #BBBBBB;'>-0.716</span><span>   </span><span style='background-color: #00BB00;'>-0.668</span><span>  
-#&gt;                   </span><span style='background-color: #00BB00;'>0.342  </span><span>   </span><span style='background-color: #BBBBBB;'>-0.861</span><span>   </span><span style='background-color: #00BB00;'> 1.34 </span><span>   </span><span style='background-color: #BBBBBB;'> 0.911</span><span>   </span><span style='background-color: #00BB00;'> 1.39 </span><span>  
-#&gt;                   </span><span style='background-color: #00BB00;'>0.168  </span><span>   </span><span style='background-color: #BBBBBB;'> 0.421</span><span>   </span><span style='background-color: #00BB00;'> 2.74 </span><span>   </span><span style='background-color: #BBBBBB;'>-0.772</span><span>   </span><span style='background-color: #00BB00;'> 0.912</span><span>  
-#&gt;                   </span><span style='background-color: #00BB00;'>1.4    </span><span>   </span><span style='background-color: #BBBBBB;'> 1.45 </span><span>   </span><span style='background-color: #00BB00;'>-0.944</span><span>   </span><span style='background-color: #BBBBBB;'>-0.782</span><span>   </span><span style='background-color: #00BB00;'> 0.205</span><span>  
+#&gt; Column names: V1, V2, V3, V4, V5</div><div class='input'><span class='fu'><a href='background_color.html'>map_background_color</a></span><span class='op'>(</span><span class='va'>ht</span>,
+      <span class='fu'>by_cols</span><span class='op'>(</span><span class='st'>"green"</span>, <span class='st'>"grey"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                   </span><span style='background-color: #00BB00;'>0.00048</span><span>   </span><span style='background-color: #B2B2B2;'>-0.679</span><span>   </span><span style='background-color: #00BB00;'> 0.194</span><span>   </span><span style='background-color: #B2B2B2;'>-1.78 </span><span>   </span><span style='background-color: #00BB00;'>-0.432</span><span>  
+#&gt;                   </span><span style='background-color: #00BB00;'>0.755  </span><span>   </span><span style='background-color: #B2B2B2;'> 0.738</span><span>   </span><span style='background-color: #00BB00;'>-0.691</span><span>   </span><span style='background-color: #B2B2B2;'>-0.716</span><span>   </span><span style='background-color: #00BB00;'>-0.668</span><span>  
+#&gt;                   </span><span style='background-color: #00BB00;'>0.342  </span><span>   </span><span style='background-color: #B2B2B2;'>-0.861</span><span>   </span><span style='background-color: #00BB00;'> 1.34 </span><span>   </span><span style='background-color: #B2B2B2;'> 0.911</span><span>   </span><span style='background-color: #00BB00;'> 1.39 </span><span>  
+#&gt;                   </span><span style='background-color: #00BB00;'>0.168  </span><span>   </span><span style='background-color: #B2B2B2;'> 0.421</span><span>   </span><span style='background-color: #00BB00;'> 2.74 </span><span>   </span><span style='background-color: #B2B2B2;'>-0.772</span><span>   </span><span style='background-color: #00BB00;'> 0.912</span><span>  
+#&gt;                   </span><span style='background-color: #00BB00;'>1.4    </span><span>   </span><span style='background-color: #B2B2B2;'> 1.45 </span><span>   </span><span style='background-color: #00BB00;'>-0.944</span><span>   </span><span style='background-color: #B2B2B2;'>-0.782</span><span>   </span><span style='background-color: #00BB00;'> 0.205</span><span>  
 #&gt; 
 #&gt; Column names: V1, V2, V3, V4, V5</div></span></pre>
   </div>
@@ -212,7 +230,7 @@ normally resets to the default.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

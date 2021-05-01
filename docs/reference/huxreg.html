@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,24 +158,24 @@
     <p>Create a huxtable to display model output</p>
     </div>
 
-    <pre class="usage"><span class='fu'>huxreg</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>error_format</span> <span class='kw'>=</span> <span class='st'>"({std.error})"</span>,
-  <span class='kw'>error_pos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"below"</span>, <span class='st'>"same"</span>, <span class='st'>"right"</span>),
-  <span class='kw'>number_format</span> <span class='kw'>=</span> <span class='st'>"%.3f"</span>,
-  <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tidy_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>glance_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>`***`</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>`**`</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>`*`</span> <span class='kw'>=</span> <span class='fl'>0.05</span>),
-  <span class='kw'>bold_signif</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>borders</span> <span class='kw'>=</span> <span class='fl'>0.4</span>,
-  <span class='kw'>outer_borders</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>note</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>stars</span>)) <span class='kw'>NULL</span> <span class='kw'>else</span> <span class='st'>"{stars}."</span>,
-  <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>N</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>, <span class='kw'>R2</span> <span class='kw'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>, <span class='st'>"AIC"</span>),
-  <span class='kw'>coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>omit_coefs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>huxreg</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  error_format <span class='op'>=</span> <span class='st'>"({std.error})"</span>,
+  error_pos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"below"</span>, <span class='st'>"same"</span>, <span class='st'>"right"</span><span class='op'>)</span>,
+  number_format <span class='op'>=</span> <span class='st'>"%.3f"</span>,
+  align <span class='op'>=</span> <span class='st'>"."</span>,
+  ci_level <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tidy_args <span class='op'>=</span> <span class='cn'>NULL</span>,
+  glance_args <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>`***` <span class='op'>=</span> <span class='fl'>0.001</span>, `**` <span class='op'>=</span> <span class='fl'>0.01</span>, `*` <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span>,
+  bold_signif <span class='op'>=</span> <span class='cn'>NULL</span>,
+  borders <span class='op'>=</span> <span class='fl'>0.4</span>,
+  outer_borders <span class='op'>=</span> <span class='fl'>0.8</span>,
+  note <span class='op'>=</span> <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>stars</span><span class='op'>)</span><span class='op'>)</span> <span class='cn'>NULL</span> <span class='kw'>else</span> <span class='st'>"{stars}."</span>,
+  statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>N <span class='op'>=</span> <span class='st'>"nobs"</span>, R2 <span class='op'>=</span> <span class='st'>"r.squared"</span>, <span class='st'>"logLik"</span>, <span class='st'>"AIC"</span><span class='op'>)</span>,
+  coefs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  omit_coefs <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -278,16 +294,17 @@ could write <code>error_format = "{conf.low} to {conf.high}"</code>.</p>
 Alternatively, to manually insert your own statistics, see <code><a href='tidy_override.html'>tidy_override()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"broom"</span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"Please install 'broom' to run this example."</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"broom"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Please install 'broom' to run this example."</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
-<span class='no'>lm2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span> + <span class='no'>hp</span>, <span class='no'>mtcars</span>)
-<span class='no'>glm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>mpg</span> <span class='kw'>&gt;</span> <span class='fl'>20</span>) ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>,
-          <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
+<span class='va'>lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='va'>lm2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='va'>glm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>&gt;</span> <span class='fl'>20</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>cyl</span>, <span class='va'>mtcars</span>,
+          family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
 
-<span class='fu'>huxreg</span>(<span class='no'>lm1</span>, <span class='no'>lm2</span>, <span class='no'>glm1</span>)</div><div class='output co'>#&gt;            ─────────────────────────────────────────────────────────
+<span class='fu'>huxreg</span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>lm2</span>, <span class='va'>glm1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            ─────────────────────────────────────────────────────────
 #&gt;                                    (1)           (2)           (3)  
 #&gt;                          ───────────────────────────────────────────
 #&gt;              (Intercept)    37.885 ***    36.908 ***       64.400   
@@ -305,16 +322,17 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
 #&gt;              *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.                
 #&gt; 
 #&gt; Column names: names, model1, model2, model3</div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"sandwich"</span>) <span class='kw'>&amp;&amp;</span>
-      <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"lmtest"</span>)) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"sandwich"</span><span class='op'>)</span> <span class='op'>&amp;&amp;</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"lmtest"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-  <span class='no'>lm_robust</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>lmtest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='no'>lm1</span>,
-        <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>sandwich</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/sandwich/man/vcovHC.html'>vcovHC</a></span>)
+  <span class='va'>lm_robust</span> <span class='op'>&lt;-</span> <span class='fu'>lmtest</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span><span class='op'>(</span><span class='va'>lm1</span>,
+        vcov <span class='op'>=</span> <span class='fu'>sandwich</span><span class='fu'>::</span><span class='va'><a href='https://sandwich.R-Forge.R-project.org//reference/vcovHC.html'>vcovHC</a></span><span class='op'>)</span>
   <span class='co'># coeftest() has no "glance" method:</span>
-  <span class='fu'>huxreg</span>(<span class='no'>lm_robust</span>,
-        <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))
+  <span class='fu'>huxreg</span><span class='op'>(</span><span class='va'>lm_robust</span>,
+        statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 
-}</div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
+<span class='op'>}</span>
+</div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
 #&gt;                                                            (1)  
 #&gt;                                        ─────────────────────────
 #&gt;                  (Intercept)                        37.885 ***  
@@ -341,7 +359,7 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

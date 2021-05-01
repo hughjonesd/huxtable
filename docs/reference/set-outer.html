@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,13 +158,13 @@
     <p>Set borders and padding around a rectangle of cells</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_outer_borders</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)
+    <pre class="usage"><span class='fu'>set_outer_borders</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, value <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
 
-<span class='fu'>set_outer_border_colors</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>)
+<span class='fu'>set_outer_border_colors</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span><span class='op'>)</span>
 
-<span class='fu'>set_outer_border_styles</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>)
+<span class='fu'>set_outer_border_styles</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span><span class='op'>)</span>
 
-<span class='fu'>set_outer_padding</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span>)</pre>
+<span class='fu'>set_outer_padding</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,15 +197,17 @@ specify contiguous sequences. <code>set_outer_border_colors</code> and
 sets padding, i.e. top padding on the top row of cells, etc.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'>set_outer_borders</span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;                              ┌───────────────────┐
+    <pre class="examples"><div class='input'><span class='va'>ht2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'>set_outer_borders</span><span class='op'>(</span><span class='va'>ht2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                              ┌───────────────────┐
 #&gt;                              │       a         b │
 #&gt;                              │       1         1 │
 #&gt;                              │       2         2 │
 #&gt;                              │       3         3 │
 #&gt;                              └───────────────────┘
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_outer_borders</span>(<span class='no'>ht2</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>2</span>)</div><div class='output co'>#&gt;                                      a         b  
+#&gt; Column names: a, b</div><div class='input'><span class='fu'>set_outer_borders</span><span class='op'>(</span><span class='va'>ht2</span>, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                      a         b  
 #&gt;                              ┌───────────────────┐
 #&gt;                              │       1         1 │
 #&gt;                              │       2         2 │
@@ -213,7 +231,7 @@ sets padding, i.e. top padding on the top row of cells, etc.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

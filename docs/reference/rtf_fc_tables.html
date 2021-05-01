@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,7 +158,7 @@
     <p>Create RTF font and color tables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rtf_fc_tables</span>(<span class='no'>...</span>, <span class='kw'>extra_fonts</span> <span class='kw'>=</span> <span class='st'>"Times"</span>, <span class='kw'>extra_colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))</pre>
+    <pre class="usage"><span class='fu'>rtf_fc_tables</span><span class='op'>(</span><span class='va'>...</span>, extra_fonts <span class='op'>=</span> <span class='st'>"Times"</span>, extra_colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,25 +186,26 @@ names.</p>
 
     <p>RTF documents have a single table of fonts, and a table of colors, in the RTF header. To
 create font and color tables for multiple huxtables, use this command. You can <code>print</code> the
-returned object in the RTF header. Pass it to <code><a href='to_rtf.html'>print_rtf()</a></code> or <code><a href='to_rtf.html'>to_rtf()</a></code> to ensure that
+returned object in the RTF header. Pass it to <code><a href='print_rtf.html'>print_rtf()</a></code> or <code><a href='print_rtf.html'>to_rtf()</a></code> to ensure that
 huxtables print out the correct colour references.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Printing multiple huxtables:</span>
 
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Blue with red border"</span>)
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>ht</span>, <span class='fl'>1</span>)
-<span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span>(<span class='no'>ht</span>, <span class='st'>"red"</span>)
-<span class='fu'><a href='background_color.html'>background_color</a></span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='st'>"blue"</span>
+<span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span><span class='op'>(</span><span class='st'>"Blue with red border"</span><span class='op'>)</span>
+<span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span><span class='op'>(</span><span class='va'>ht</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_border_colors</a></span><span class='op'>(</span><span class='va'>ht</span>, <span class='st'>"red"</span><span class='op'>)</span>
+<span class='fu'><a href='background_color.html'>background_color</a></span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"blue"</span>
 
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='st'>"Dark green text"</span>)
-<span class='fu'><a href='text_color.html'>text_color</a></span>(<span class='no'>ht2</span>) <span class='kw'>&lt;-</span> <span class='st'>"darkgreen"</span>
+<span class='va'>ht2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span><span class='op'>(</span><span class='st'>"Dark green text"</span><span class='op'>)</span>
+<span class='fu'><a href='text_color.html'>text_color</a></span><span class='op'>(</span><span class='va'>ht2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"darkgreen"</span>
 
-<span class='no'>fc_tbls</span> <span class='kw'>&lt;-</span> <span class='fu'>rtf_fc_tables</span>(<span class='no'>ht</span>, <span class='no'>ht2</span>)
+<span class='va'>fc_tbls</span> <span class='op'>&lt;-</span> <span class='fu'>rtf_fc_tables</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>ht2</span><span class='op'>)</span>
 
 <span class='co'># In the document header:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; $fonts
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>fc_tbls</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $fonts
 #&gt; [1] "Times"
 #&gt; attr(,"na.action")
 #&gt; [1] 2
@@ -205,12 +222,14 @@ huxtables print out the correct colour references.</p>
 #&gt; attr(,"class")
 #&gt; [1] "rtfFCTables"</div><div class='input'>
 <span class='co'># In the document body:</span>
-<span class='fu'><a href='to_rtf.html'>print_rtf</a></span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='print_rtf.html'>print_rtf</a></span><span class='op'>(</span><span class='va'>ht</span>, fc_tables <span class='op'>=</span> <span class='va'>fc_tbls</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; {
 #&gt; \trowd
 #&gt; \trqc \clbrdrt\brdrs\brdrw20\brdrcf2\clbrdrl\brdrs\brdrw20\brdrcf2\clbrdrb\brdrs\brdrw20\brdrcf2\clbrdrr\brdrs\brdrw20\brdrcf2\clcbpat1\clvertalt\clpadfl3\clpadl120 \clpadft3\clpadt120 \clpadfb3\clpadb120 \clpadfr3\clpadr120 \cellx4320 \pard\intbl\ql{Blue with red border}\cell
 #&gt; \row
-#&gt; }</div><div class='input'><span class='fu'><a href='to_rtf.html'>print_rtf</a></span>(<span class='no'>ht2</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='no'>fc_tbls</span>)</div><div class='output co'>#&gt; 
+#&gt; }</div><div class='input'><span class='fu'><a href='print_rtf.html'>print_rtf</a></span><span class='op'>(</span><span class='va'>ht2</span>, fc_tables <span class='op'>=</span> <span class='va'>fc_tbls</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; {
 #&gt; \trowd
 #&gt; \trqc \clbrdrt\clbrdrl\clbrdrb\clbrdrr\clvertalt\clpadfl3\clpadl120 \clpadft3\clpadt120 \clpadfb3\clpadb120 \clpadfr3\clpadr120 \cellx4320 \pard\intbl\ql{\cf3 {Dark green text}}\cell
@@ -231,7 +250,7 @@ huxtables print out the correct colour references.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

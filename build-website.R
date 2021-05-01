@@ -56,4 +56,6 @@ pkgdown::build_reference_index()
 pkgdown::build_reference(lazy = FALSE)
 pkgdown::build_news()
 pkgdown::build_tutorials()
-message("Now commit and push to github. Don't forget to reinstall the dev version!")
+
+message("Now commit and push to github.")
+message("Don't forget to reinstall the dev version afterwards...")

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,15 +158,15 @@
     <p>Make cell text bold or italic</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bold</span>(<span class='no'>ht</span>)
-<span class='fu'>bold</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_bold</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>map_bold</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)
+    <pre class="usage"><span class='fu'>bold</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>bold</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_bold</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, value <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>map_bold</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span>
 
-<span class='fu'>italic</span>(<span class='no'>ht</span>)
-<span class='fu'>italic</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_italic</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>map_italic</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+<span class='fu'>italic</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>italic</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_italic</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, value <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>map_italic</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,30 +210,34 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>bold</span>(<span class='no'>jams</span>) <span class='kw'>&lt;-</span>  <span class='fl'>TRUE</span>
-<span class='fu'>bold</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt;     Type Price Sugar
-#&gt; 1   TRUE  TRUE  TRUE
-#&gt; 1.1 TRUE  TRUE  TRUE
-#&gt; 2   TRUE  TRUE  TRUE
-#&gt; 3   TRUE  TRUE  TRUE</div><div class='input'>
-<span class='fu'>set_bold</span>(<span class='no'>jams</span>, <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                        Type         Price   Sugar content  
-#&gt;                        Strawberry    1.90          40.00%  
-#&gt;                        Raspberry     2.10          35.00%  
-#&gt;                        Plum          1.80          50.00%  
+<span class='fu'>bold</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span> <span class='op'>&lt;-</span>  <span class='cn'>TRUE</span>
+<span class='fu'>bold</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     Type Price
+#&gt; 1   TRUE  TRUE
+#&gt; 1.1 TRUE  TRUE
+#&gt; 2   TRUE  TRUE
+#&gt; 3   TRUE  TRUE</div><div class='input'>
+<span class='fu'>set_bold</span><span class='op'>(</span><span class='va'>jams</span>, <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               Strawberry      1.90  
+#&gt;                               Raspberry       2.10  
+#&gt;                               Plum            1.80  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'>set_bold</span>(<span class='no'>jams</span>,
-      <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                        <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'>Sugar content</span><span>  
-#&gt;                        Strawberry   </span><span style='font-weight: bold;'> 1.90</span><span>   </span><span style='font-weight: bold;'>       40.00%</span><span>  
-#&gt;                        Raspberry    </span><span style='font-weight: bold;'> 2.10</span><span>   </span><span style='font-weight: bold;'>       35.00%</span><span>  
-#&gt;                        </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'> 1.80</span><span>   </span><span style='font-weight: bold;'>       50.00%</span><span>  
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>set_bold</span><span class='op'>(</span><span class='va'>jams</span>,
+      <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>1</span>, <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
+#&gt;                               Strawberry   </span><span style='font-weight: bold;'>   1.90</span><span>  
+#&gt;                               Raspberry    </span><span style='font-weight: bold;'>   2.10</span><span>  
+#&gt;                               </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'>   1.80</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'>map_bold</span>(<span class='no'>jams</span>,
-      <span class='fu'><a href='by_rows.html'>by_rows</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;                        Type         Price   Sugar content  
-#&gt;                        </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'> 1.90</span><span>   </span><span style='font-weight: bold;'>       40.00%</span><span>  
-#&gt;                        Raspberry     2.10          35.00%  
-#&gt;                        </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'> 1.80</span><span>   </span><span style='font-weight: bold;'>       50.00%</span><span>  
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'>map_bold</span><span class='op'>(</span><span class='va'>jams</span>,
+      <span class='fu'><a href='by_rows.html'>by_rows</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               </span><span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'>   1.90</span><span>  
+#&gt;                               Raspberry       2.10  
+#&gt;                               </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'>   1.80</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div></span></pre>
+#&gt; Column names: Type, Price</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +253,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

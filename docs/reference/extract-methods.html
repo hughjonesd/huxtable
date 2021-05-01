@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -181,7 +197,7 @@ $(x, name) &lt;- value
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>[</code> returns a huxtable. <code>$</code> and <code>[[</code> return data from the
+    <p><code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> returns a huxtable. <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> and <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code> return data from the
 underlying data frame.</p>
     <h2 class="hasAnchor" id="replacing-existing-rows-and-columns"><a class="anchor" href="#replacing-existing-rows-and-columns"></a>Replacing existing rows and columns</h2>
 
@@ -198,33 +214,39 @@ intervening rows/columns. New values must have the appropriate dimensions
 (vectors will be interpreted appropriately).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]</div><div class='output co'>#&gt;                        Type         Price   Sugar content  
-#&gt;                        Strawberry    1.90          40.00%  
-#&gt;                        Raspberry     2.10          35.00%  
+    <pre class="examples"><div class='input'><span class='va'>jams</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='op'>]</span>
+</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               Strawberry      1.90  
+#&gt;                               Raspberry       2.10  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>jams</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ])</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='no'>jams</span>[, <span class='fl'>1</span>]</div><div class='output co'>#&gt;                                  Type            
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "huxtable"   "data.frame"</div><div class='input'><span class='va'>jams</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span>
+</div><div class='output co'>#&gt;                                  Type            
 #&gt;                                  Strawberry      
 #&gt;                                  Raspberry       
 #&gt;                                  Plum            
 #&gt; 
-#&gt; Column names: Type</div><div class='input'><span class='no'>jams</span>$<span class='no'>Type</span></div><div class='output co'>#&gt; [1] "Type"       "Strawberry" "Raspberry"  "Plum"      </div><div class='input'><span class='no'>prices</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>))
-<span class='fu'><a href='number_format.html'>number_format</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>prices</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>jams</span>[, <span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='no'>prices</span>
-<span class='no'>jams</span></div><div class='output co'>#&gt;                        Type         <span style='font-weight: bold;'>Price</span><span>   Sugar content  
-#&gt;                        Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>          40.00%  
-#&gt;                        Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>          35.00%  
-#&gt;                        Plum         </span><span style='font-weight: bold;'>2.20 </span><span>          50.00%  
+#&gt; Column names: Type</div><div class='input'><span class='va'>jams</span><span class='op'>$</span><span class='va'>Type</span>
+</div><div class='output co'>#&gt; [1] "Type"       "Strawberry" "Raspberry"  "Plum"      </div><div class='input'><span class='va'>prices</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='number_format.html'>number_format</a></span><span class='op'>(</span><span class='va'>prices</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>2</span>
+<span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>prices</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>jams</span><span class='op'>[</span>, <span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>prices</span>
+<span class='va'>jams</span>
+</div><div class='output co'>#&gt;                               Type         <span style='font-weight: bold;'>Price  </span><span>  
+#&gt;                               Strawberry   </span><span style='font-weight: bold;'>1.70   </span><span>  
+#&gt;                               Raspberry    </span><span style='font-weight: bold;'>2.00   </span><span>  
+#&gt;                               Plum         </span><span style='font-weight: bold;'>2.20   </span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>jams</span>)
-<span class='no'>jams</span>$<span class='no'>price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span>)
-<span class='no'>jams</span></div><div class='output co'>#&gt;                    Type         </span><span style='font-weight: bold;'>Price</span><span>   Sugar content   Price  
-#&gt;                    Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>          40.00%    1.70  
-#&gt;                    Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>          35.00%    2.00  
-#&gt;                    Plum         </span><span style='font-weight: bold;'>2.20 </span><span>          50.00%    2.20  
+#&gt; Column names: Type, Price</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+<span class='va'>jams</span><span class='op'>$</span><span class='va'>price</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Price"</span>, <span class='fl'>1.70</span>, <span class='fl'>2.00</span>, <span class='fl'>2.20</span><span class='op'>)</span>
+<span class='va'>jams</span>
+</div><div class='output co'>#&gt;                            Type         </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'>Price</span><span>  
+#&gt;                            Strawberry   </span><span style='font-weight: bold;'>1.70 </span><span>   </span><span style='font-weight: bold;'>1.70 </span><span>  
+#&gt;                            Raspberry    </span><span style='font-weight: bold;'>2.00 </span><span>   </span><span style='font-weight: bold;'>2.00 </span><span>  
+#&gt;                            Plum         </span><span style='font-weight: bold;'>2.20 </span><span>   </span><span style='font-weight: bold;'>2.20 </span><span>  
 #&gt; 
-#&gt; Column names: Type, Price, Sugar, price</div></span></pre>
+#&gt; Column names: Type, Price, price</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +262,7 @@ intervening rows/columns. New values must have the appropriate dimensions
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

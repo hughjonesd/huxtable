@@ -74,7 +74,7 @@ is_hux[table] tests if an object is a huxtable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -82,10 +82,13 @@ is_hux[table] tests if an object is a huxtable." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -95,16 +98,28 @@ is_hux[table] tests if an object is a huxtable." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -114,14 +129,15 @@ is_hux[table] tests if an object is a huxtable." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -146,22 +162,22 @@ Conversion methods exist for data frames, tables, ftables, matrices and (most) v
 <code>is_hux[table]</code> tests if an object is a huxtable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_huxtable</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>as_huxtable</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>as_hux</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_hux</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>as_huxtable</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"huxtable.add_colnames"</span>, <span class='fl'>TRUE</span>),
-  <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>autoformat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"huxtable.autoformat"</span>, <span class='fl'>TRUE</span>),
-  <span class='no'>...</span>
-)
+<span class='fu'>as_huxtable</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  add_colnames <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"huxtable.add_colnames"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  add_rownames <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  autoformat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"huxtable.autoformat"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>is_huxtable</span>(<span class='no'>x</span>)
+<span class='fu'>is_huxtable</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>is_hux</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>is_hux</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,37 +216,41 @@ to the huxtable. The string gives the name for the new column (or <code>"rowname
 is <code>FALSE</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dfr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-        <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
-        <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>],
-        <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-      )
-<span class='fu'>as_huxtable</span>(<span class='no'>dfr</span>)</div><div class='output co'>#&gt;                                      a   b        
+    <pre class="examples"><div class='input'><span class='va'>dfr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+        a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+        b <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span>,
+        stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span>
+      <span class='op'>)</span>
+<span class='fu'>as_huxtable</span><span class='op'>(</span><span class='va'>dfr</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                      a   b        
 #&gt;                                      1   a        
 #&gt;                                      2   b        
 #&gt;                                      3   c        
 #&gt;                                      4   d        
 #&gt;                                      5   e        
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='no'>mx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>12</span>], <span class='fl'>4</span>, <span class='fl'>3</span>)
-<span class='fu'>as_huxtable</span>(<span class='no'>mx</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                              a       e       i      
+#&gt; Column names: a, b</div><div class='input'><span class='va'>mx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span><span class='op'>]</span>, <span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'>as_huxtable</span><span class='op'>(</span><span class='va'>mx</span>, add_colnames <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                              a       e       i      
 #&gt;                              b       f       j      
 #&gt;                              c       g       k      
 #&gt;                              d       h       l      
 #&gt; 
-#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>stats</span>)
-<span class='no'>tbl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(
-        <span class='kw'>Wool</span>    <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>wool</span>,
-        <span class='kw'>Tension</span> <span class='kw'>=</span> <span class='no'>warpbreaks</span>$<span class='no'>tension</span>
-      )
-<span class='fu'>as_huxtable</span>(<span class='no'>tbl</span>) <span class='co'># adds row and column names by default</span></div><div class='output co'>#&gt;                                      L      M   H     
+#&gt; Column names: V1, V2, V3</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>stats</span><span class='op'>)</span>
+<span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span>
+        Wool    <span class='op'>=</span> <span class='va'>warpbreaks</span><span class='op'>$</span><span class='va'>wool</span>,
+        Tension <span class='op'>=</span> <span class='va'>warpbreaks</span><span class='op'>$</span><span class='va'>tension</span>
+      <span class='op'>)</span>
+<span class='fu'>as_huxtable</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span> <span class='co'># adds row and column names by default</span>
+</div><div class='output co'>#&gt;                                      L      M   H     
 #&gt;                               A      9      9   9     
 #&gt;                               B      9      9   9     
 #&gt; 
 #&gt; Column names: rownames, L, M, H</div><div class='input'>
 <span class='co'># adding rownames:</span>
-<span class='fu'>as_hux</span>(<span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>3</span>,], <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-      <span class='kw'>add_rownames</span> <span class='kw'>=</span> <span class='st'>"Car"</span>)</div><div class='output co'>#&gt;                      Car    mpg   cyl   disp    hp   drat     wt  
+<span class='fu'>as_hux</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,<span class='op'>]</span>, add_colnames <span class='op'>=</span> <span class='cn'>TRUE</span>,
+      add_rownames <span class='op'>=</span> <span class='st'>"Car"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                      Car    mpg   cyl   disp    hp   drat     wt  
 #&gt;                    Mazda   21       6    160   110   3.9    2.62  
 #&gt;                      RX4                                          
 #&gt;                    Mazda   21       6    160   110   3.9    2.88  
@@ -257,7 +277,7 @@ is <code>FALSE</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

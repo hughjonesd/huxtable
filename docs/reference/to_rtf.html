@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,12 +158,12 @@
     <p>These functions print or return an RTF character string.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>print_rtf</span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span>(<span class='no'>ht</span>), <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>print_rtf</span><span class='op'>(</span><span class='va'>ht</span>, fc_tables <span class='op'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>to_rtf</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
+<span class='fu'>to_rtf</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for huxtable</span>
-<span class='fu'>to_rtf</span>(<span class='no'>ht</span>, <span class='kw'>fc_tables</span> <span class='kw'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span>(<span class='no'>ht</span>), <span class='no'>...</span>)</pre>
+<span class='fu'>to_rtf</span><span class='op'>(</span><span class='va'>ht</span>, fc_tables <span class='op'>=</span> <span class='fu'><a href='rtf_fc_tables.html'>rtf_fc_tables</a></span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,14 +213,15 @@ custom fonts and colors won"t work in this context.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other printing functions: 
-<code><a href='to_html.html'>print_html</a>()</code>,
-<code><a href='to_latex.html'>print_latex</a>()</code>,
-<code><a href='to_md.html'>print_md</a>()</code>,
-<code><a href='to_screen.html'>print_screen</a>()</code></p></div>
+<code><a href='print_html.html'>print_html</a>()</code>,
+<code><a href='print_latex.html'>print_latex</a>()</code>,
+<code><a href='print_md.html'>print_md</a>()</code>,
+<code><a href='print_screen.html'>print_screen</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>print_rtf</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; 
+<span class='fu'>print_rtf</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; {
 #&gt; \trowd
 #&gt; \trqc \clbrdrt\clbrdrl\clbrdrb\clbrdrr\clvertalt\clpadfl3\clpadl120 \clpadft3\clpadt120 \clpadfb3\clpadb120 \clpadfr3\clpadr120 \cellx2160 
@@ -251,7 +268,7 @@ custom fonts and colors won"t work in this context.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Change a model's <code>tidy</code> output — tidy_override • huxtable</title>
+<title>Change a model's tidy output — tidy_override • huxtable</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Change a model's <code>tidy</code> output — tidy_override" />
+<meta property="og:title" content="Change a model's tidy output — tidy_override" />
 <meta property="og:description" content="Use tidy_override and tidy_replace to provide your own p values,
 confidence intervals etc. for a model." />
 
@@ -73,7 +73,7 @@ confidence intervals etc. for a model." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -81,10 +81,13 @@ confidence intervals etc. for a model." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,16 +97,28 @@ confidence intervals etc. for a model." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -113,14 +128,15 @@ confidence intervals etc. for a model." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -144,18 +160,18 @@ confidence intervals etc. for a model." />
 confidence intervals etc. for a model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_override</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>extend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>tidy_override</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, glance <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>, extend <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>tidy_replace</span>(<span class='no'>x</span>, <span class='no'>tidied</span>, <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())
-
-<span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>tidy_replace</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>tidied</span>, glance <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for tidy_override</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/nobs.html'>nobs</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for tidy_override</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/nobs.html'>nobs</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,7 +191,7 @@ confidence intervals etc. for a model.</p>
     </tr>
     <tr>
       <th>extend</th>
-      <td><p>Logical: allow adding new columns to <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code>?</p></td>
+      <td><p>Logical: allow adding new columns to <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code> and <code><a href='https://generics.r-lib.org/reference/glance.html'>glance(x)</a></code>?</p></td>
     </tr>
     <tr>
       <th>tidied</th>
@@ -196,15 +212,16 @@ confidence intervals etc. for a model.</p>
 <p><code>tidy_replace</code> allows you to replace the result of <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(x)</a></code> entirely.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (! <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"broom"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"Please install 'broom' to run this example."</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"broom"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Please install 'broom' to run this example."</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='no'>mtcars</span>)
-<span class='no'>fixed_lm1</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_override</span>(<span class='no'>lm1</span>,
-      <span class='kw'>p.value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>.04</span>, <span class='fl'>.12</span>),
-      <span class='kw'>glance</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>r.squared</span> <span class='kw'>=</span> <span class='fl'>0.99</span>))
-<span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>lm1</span>, <span class='no'>fixed_lm1</span>)</div><div class='output co'>#&gt;               ────────────────────────────────────────────────────
+<span class='va'>lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='va'>fixed_lm1</span> <span class='op'>&lt;-</span> <span class='fu'>tidy_override</span><span class='op'>(</span><span class='va'>lm1</span>,
+      p.value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>.04</span>, <span class='fl'>.12</span><span class='op'>)</span>,
+      glance <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>r.squared <span class='op'>=</span> <span class='fl'>0.99</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='huxreg.html'>huxreg</a></span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>fixed_lm1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;               ────────────────────────────────────────────────────
 #&gt;                                             (1)              (2)  
 #&gt;                                ───────────────────────────────────
 #&gt;                 (Intercept)          37.885 ***         37.885 *  
@@ -220,13 +237,14 @@ confidence intervals etc. for a model.</p>
 #&gt;                 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.           
 #&gt; 
 #&gt; Column names: names, model1, model2</div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"nnet"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>mnl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>nnet</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span>(<span class='no'>gear</span> ~ <span class='no'>mpg</span>, <span class='no'>mtcars</span>)
-  <span class='no'>tidied</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://broom.tidymodels.org/reference/reexports.html'>tidy</a></span>(<span class='no'>mnl</span>)
-  <span class='no'>mnl4</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>4</span>, ])
-  <span class='no'>mnl5</span> <span class='kw'>&lt;-</span> <span class='fu'>tidy_replace</span>(<span class='no'>mnl</span>, <span class='no'>tidied</span>[<span class='no'>tidied</span>$<span class='no'>y.level</span> <span class='kw'>==</span> <span class='fl'>5</span>, ])
-  <span class='fu'><a href='huxreg.html'>huxreg</a></span>(<span class='no'>mnl4</span>, <span class='no'>mnl5</span>, <span class='kw'>statistics</span> <span class='kw'>=</span> <span class='st'>"nobs"</span>)
-}</div><div class='output co'>#&gt; # weights:  9 (4 variable)
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>mnl</span> <span class='op'>&lt;-</span> <span class='fu'>nnet</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>gear</span> <span class='op'>~</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+  <span class='va'>tidied</span> <span class='op'>&lt;-</span> <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mnl</span><span class='op'>)</span>
+  <span class='va'>mnl4</span> <span class='op'>&lt;-</span> <span class='fu'>tidy_replace</span><span class='op'>(</span><span class='va'>mnl</span>, <span class='va'>tidied</span><span class='op'>[</span><span class='va'>tidied</span><span class='op'>$</span><span class='va'>y.level</span> <span class='op'>==</span> <span class='fl'>4</span>, <span class='op'>]</span><span class='op'>)</span>
+  <span class='va'>mnl5</span> <span class='op'>&lt;-</span> <span class='fu'>tidy_replace</span><span class='op'>(</span><span class='va'>mnl</span>, <span class='va'>tidied</span><span class='op'>[</span><span class='va'>tidied</span><span class='op'>$</span><span class='va'>y.level</span> <span class='op'>==</span> <span class='fl'>5</span>, <span class='op'>]</span><span class='op'>)</span>
+  <span class='fu'><a href='huxreg.html'>huxreg</a></span><span class='op'>(</span><span class='va'>mnl4</span>, <span class='va'>mnl5</span>, statistics <span class='op'>=</span> <span class='st'>"nobs"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; # weights:  9 (4 variable)
 #&gt; initial  value 35.155593 
 #&gt; iter  10 value 23.131901
 #&gt; final  value 23.129234 
@@ -259,7 +277,7 @@ confidence intervals etc. for a model.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

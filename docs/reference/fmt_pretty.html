@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use <code>prettyNum()</code> to format numbers — fmt_pretty • huxtable</title>
+<title>Use prettyNum() to format numbers — fmt_pretty • huxtable</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Use <code>prettyNum()</code> to format numbers — fmt_pretty" />
+<meta property="og:title" content="Use prettyNum() to format numbers — fmt_pretty" />
 <meta property="og:description" content="Use prettyNum() to format numbers" />
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,7 +158,7 @@
     <p>Use <code><a href='https://rdrr.io/r/base/formatc.html'>prettyNum()</a></code> to format numbers</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fmt_pretty</span>(<span class='kw'>big.mark</span> <span class='kw'>=</span> <span class='st'>","</span>, <span class='no'>...</span>, <span class='kw'>scientific</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>fmt_pretty</span><span class='op'>(</span>big.mark <span class='op'>=</span> <span class='st'>","</span>, <span class='va'>...</span>, scientific <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,10 +179,11 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>jams</span>$<span class='no'>Sales</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sales"</span>, <span class='fl'>35000</span>,
-      <span class='fl'>55500</span>, <span class='fl'>20000</span>)
-<span class='fu'><a href='number_format.html'>set_number_format</a></span>(<span class='no'>jams</span>, -<span class='fl'>1</span>, <span class='st'>"Sales"</span>,
-      <span class='fu'>fmt_pretty</span>())</div><div class='output co'>#&gt;                           Type         Price    Sales  
+<span class='va'>jams</span><span class='op'>$</span><span class='va'>Sales</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sales"</span>, <span class='fl'>35000</span>,
+      <span class='fl'>55500</span>, <span class='fl'>20000</span><span class='op'>)</span>
+<span class='fu'><a href='number_format.html'>set_number_format</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='st'>"Sales"</span>,
+      <span class='fu'>fmt_pretty</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                           Type         Price    Sales  
 #&gt;                           Strawberry    1.90   35,000  
 #&gt;                           Raspberry     2.10   55,500  
 #&gt;                           Plum          1.80   20,000  
@@ -188,7 +205,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

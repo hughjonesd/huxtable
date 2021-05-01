@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
+</li>
+<li>
+  <a href="../huxtable.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -93,16 +96,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../huxtable.html">Introduction to Huxtable</a>
-    </li>
-    <li>
       <a href="../design-principles.html">Design Principles, Comparisons and Limitations</a>
     </li>
     <li>
       <a href="../huxreg.html">Regression Tables with huxreg</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../tutorials/index.html">External articles</a>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
     </li>
   </ul>
 </li>
@@ -112,14 +127,15 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -142,25 +158,25 @@
     <p>These functions set border colors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>left_border_color</span>(<span class='no'>ht</span>)
-<span class='fu'>left_border_color</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_left_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_left_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)
+    <pre class="usage"><span class='fu'>left_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>left_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_left_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_left_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span>
 
-<span class='fu'>right_border_color</span>(<span class='no'>ht</span>)
-<span class='fu'>right_border_color</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_right_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_right_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)
+<span class='fu'>right_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>right_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_right_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_right_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span>
 
-<span class='fu'>top_border_color</span>(<span class='no'>ht</span>)
-<span class='fu'>top_border_color</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_top_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_top_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)
+<span class='fu'>top_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>top_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_top_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_top_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span>
 
-<span class='fu'>bottom_border_color</span>(<span class='no'>ht</span>)
-<span class='fu'>bottom_border_color</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_bottom_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_bottom_border_color</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+<span class='fu'>bottom_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>bottom_border_color</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_bottom_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_bottom_border_color</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -208,30 +224,32 @@ the same as <code>left_border_color(ht)[, 2]</code>, and setting one sets the ot
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>jams</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>jams</span>)
-<span class='fu'>bottom_border_color</span>(<span class='no'>jams</span>)[<span class='fl'>1</span>, ] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
-<span class='no'>jams</span></div><div class='output co'>#&gt;                      ┌────────────┬───────┬───────────────┐
-#&gt;                      │ Type       │ Price │ Sugar content │
-#&gt;                      <span style='color: #BB0000;'>├────────────┼───────┼───────────────┤</span><span>
-#&gt;                      │ Strawberry │  1.90 │        40.00% │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Raspberry  │  2.10 │        35.00% │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Plum       │  1.80 │        50.00% │
-#&gt;                      └────────────┴───────┴───────────────┘
+<span class='va'>jams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+<span class='fu'>bottom_border_color</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span>, <span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"red"</span>
+<span class='va'>jams</span>
+</div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
+#&gt;                             │ Type       │   Price │
+#&gt;                             <span style='color: #BB0000;'>├────────────┼─────────┤</span><span>
+#&gt;                             │ Strawberry │    1.90 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Raspberry  │    2.10 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Plum       │    1.80 │
+#&gt;                             └────────────┴─────────┘
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'>
-<span class='fu'>set_bottom_border_color</span>(<span class='no'>jams</span>, <span class='st'>"blue"</span>)</div><div class='output co'>#&gt;                      ┌────────────┬───────┬───────────────┐
-#&gt;                      │ Type       │ Price │ Sugar content │
-#&gt;                      </span><span style='color: #0000BB;'>├────────────┼───────┼───────────────┤</span><span>
-#&gt;                      │ Strawberry │  1.90 │        40.00% │
-#&gt;                      </span><span style='color: #0000BB;'>├────────────┼───────┼───────────────┤</span><span>
-#&gt;                      │ Raspberry  │  2.10 │        35.00% │
-#&gt;                      </span><span style='color: #0000BB;'>├────────────┼───────┼───────────────┤</span><span>
-#&gt;                      │ Plum       │  1.80 │        50.00% │
-#&gt;                      </span><span style='color: #0000BB;'>└────────────┴───────┴───────────────┘</span><span>
+#&gt; Column names: Type, Price</div><div class='input'>
+<span class='fu'>set_bottom_border_color</span><span class='op'>(</span><span class='va'>jams</span>, <span class='st'>"blue"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
+#&gt;                             │ Type       │   Price │
+#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
+#&gt;                             │ Strawberry │    1.90 │
+#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
+#&gt;                             │ Raspberry  │    2.10 │
+#&gt;                             </span><span style='color: #0000BB;'>├────────────┼─────────┤</span><span>
+#&gt;                             │ Plum       │    1.80 │
+#&gt;                             </span><span style='color: #0000BB;'>└────────────┴─────────┘</span><span>
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'>
+#&gt; Column names: Type, Price</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -248,7 +266,7 @@ the same as <code>left_border_color(ht)[, 2]</code>, and setting one sets the ot
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
