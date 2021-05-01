@@ -186,6 +186,27 @@ NULL
 #'
 #'   Set `options(huxtable.knit_print_df = FALSE)`.
 #'
+#' * How can I set a property on an arbitrary group of cells?
+#'
+#'   If you can't use the [mapping-functions] interface, and you want to
+#'   set a property for multiple cells that aren't all in the same rows
+#'   and/or columns, you could use a little-known fact about R subsetting.
+#'   If you subset `ht[x]` where `x` is two-column numeric matrix, then
+#'   each row of `x` indexes a single `(row, column)` cell. So, for example,
+#'   here's how to set the background color of cells `(2,1)`, `(1, 3)` and
+#'   `(4, 2)` of a huxtable:
+#'
+#'   ```
+#'   indices <- matrix(c(2, 1, 1, 3, 4, 2), ncol = 2, byrow = TRUE)
+#'   background_color(jams)[indices] <- "orange"
+#'   ```
+#'
+#'   Another useful trick sets properties on the diagonal, using [diag()]:
+#'
+#'   ```
+#'   diag(background_color(jams)) <- "grey"
+#'   ```
+#'
 #' * I have another problem.
 #'
 #'   If you have a bug - i.e. a problem with the software - or have a feature

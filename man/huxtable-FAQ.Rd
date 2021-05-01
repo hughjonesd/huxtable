@@ -54,6 +54,20 @@ set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.
 printed!
 
 Set \code{options(huxtable.knit_print_df = FALSE)}.
+\item How can I set a property on an arbitrary group of cells?
+
+If you can't use the \link{mapping-functions} interface, and you want to
+set a property for multiple cells that aren't all in the same rows
+and/or columns, you could use a little-known fact about R subsetting.
+If you subset \code{ht[x]} where \code{x} is two-column numeric matrix, then
+each row of \code{x} indexes a single \verb{(row, column)} cell. So, for example,
+here's how to set the background color of cells \verb{(2,1)}, \verb{(1, 3)} and
+\verb{(4, 2)} of a huxtable:\preformatted{indices <- matrix(c(2, 1, 1, 3, 4, 2), ncol = 2, byrow = TRUE)
+background_color(jams)[indices] <- "orange"
+}
+
+Another useful trick sets properties on the diagonal, using \code{\link[=diag]{diag()}}:\preformatted{diag(background_color(jams)) <- "grey"
+}
 \item I have another problem.
 
 If you have a bug - i.e. a problem with the software - or have a feature

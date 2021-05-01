@@ -12,8 +12,10 @@ Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.3.0}{
 \itemize{
+\item Improve decimal alignment in LaTeX when \code{align(ht) == "."}. This may
+change the appearance of some documents.
 \item Allow \code{tidy_override()} to extend columns of \code{tidy} and \code{glance}.
 \item Bugfix: #196 \code{^} was giving errors in LaTeX.
 }
