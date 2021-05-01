@@ -112,14 +112,36 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../tutorials/00-reporting-data.html">Reporting data with huxtable</a>
+    </li>
+    <li>
+      <a href="../tutorials/01-whats-new.html">What's new in huxtable 5.0.0</a>
+    </li>
+    <li>
+      <a href="../tutorials/02-themes.html">Huxtable themes</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../articles/huxtable.html">Get started</a>
+</li>
+<li>
   <a href="https://github.com/hughjonesd/huxtable/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -212,30 +234,30 @@ the same as <code>left_border_style(ht)[, 2]</code>, and setting one sets the ot
 <span class='va'>jams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
 <span class='fu'>bottom_border_style</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span>, <span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"dotted"</span>
 <span class='va'>jams</span>
-</div><div class='output co'>#&gt;                      ┌────────────┬───────┬───────────────┐
-#&gt;                      │ <span style='color: #BB0000;'>Type      </span><span> │ Price │ </span><span style='background-color: #FFAF00;'>Sugar content</span><span> │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ </span><span style='background-color: #FFAF00;'>Strawberry</span><span> │ </span><span style='color: #BB0000;'> 1.90</span><span> │        40.00% │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Raspberry  │  2.10 │ </span><span style='color: #BB0000;'>       35.00%</span><span> │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Plum       │ </span><span style='background-color: #FFAF00;'> 1.80</span><span> │        50.00% │
-#&gt;                      └────────────┴───────┴───────────────┘
+</div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
+#&gt;                             │ Type       │   Price │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Strawberry │    1.90 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Raspberry  │    2.10 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Plum       │    1.80 │
+#&gt;                             └────────────┴─────────┘
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'>
+#&gt; Column names: Type, Price</div><div class='input'>
 <span class='fu'>set_bottom_border_style</span><span class='op'>(</span><span class='va'>jams</span>, <span class='st'>"double"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                      ┌────────────┬───────┬───────────────┐
-#&gt;                      │ </span><span style='color: #BB0000;'>Type      </span><span> │ Price │ </span><span style='background-color: #FFAF00;'>Sugar content</span><span> │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ </span><span style='background-color: #FFAF00;'>Strawberry</span><span> │ </span><span style='color: #BB0000;'> 1.90</span><span> │        40.00% │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Raspberry  │  2.10 │ </span><span style='color: #BB0000;'>       35.00%</span><span> │
-#&gt;                      ├────────────┼───────┼───────────────┤
-#&gt;                      │ Plum       │ </span><span style='background-color: #FFAF00;'> 1.80</span><span> │        50.00% │
-#&gt;                      └────────────┴───────┴───────────────┘
+</div><div class='output co'>#&gt;                             ┌────────────┬─────────┐
+#&gt;                             │ Type       │   Price │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Strawberry │    1.90 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Raspberry  │    2.10 │
+#&gt;                             ├────────────┼─────────┤
+#&gt;                             │ Plum       │    1.80 │
+#&gt;                             └────────────┴─────────┘
 #&gt; 
-#&gt; Column names: Type, Price, Sugar</div><div class='input'>
-</div></span></pre>
+#&gt; Column names: Type, Price</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

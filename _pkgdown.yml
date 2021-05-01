@@ -1,10 +1,14 @@
+
 navbar:
-  title: "huxtable"
-  left:
-    - text: "Home"
+  structure:
+    left: [home, articles, reference, news]
+  components:
+    home:
+      text: Home
       icon: fa-home
       href: index.html
-    - text: Articles
+    articles:
+      text: Articles
       menu:
       - text: Introduction to Huxtable
         href: huxtable.html
@@ -14,9 +18,11 @@ navbar:
         href: huxreg.html
       - text: External articles
         href: tutorials/index.html
-    - text: "Reference"
+    reference:
+      text: Reference
       href: reference/index.html
-    - text: "News"
+    news:
+      text: News
       href: news/index.html
 
 reference:
