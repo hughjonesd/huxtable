@@ -1,23 +1,22 @@
 
 navbar:
   structure:
-    left: [home, articles, reference, news]
+    left: [home, intro, articles, tutorials, reference, news]
   components:
     home:
       text: Home
       icon: fa-home
       href: index.html
+    intro:
+      text: Get started
+      href: huxtable.html
     articles:
       text: Articles
       menu:
-      - text: Introduction to Huxtable
-        href: huxtable.html
       - text: Design Principles, Comparisons and Limitations
         href: design-principles.html
       - text: Regression Tables with huxreg
         href: huxreg.html
-      - text: External articles
-        href: tutorials/index.html
     reference:
       text: Reference
       href: reference/index.html
