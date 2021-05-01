@@ -73,7 +73,7 @@ a single row or column." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ a single row or column." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -117,7 +117,7 @@ a single row or column." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,23 +144,23 @@ a single row or column." />
 a single row or column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>insert_column</span>(
-  <span class='no'>ht</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rowspan</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>insert_column</span><span class='op'>(</span>
+  <span class='va'>ht</span>,
+  <span class='va'>...</span>,
+  after <span class='op'>=</span> <span class='fl'>0</span>,
+  fill <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rowspan <span class='op'>=</span> <span class='fl'>1</span>,
+  copy_cell_props <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>insert_row</span>(
-  <span class='no'>ht</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>insert_row</span><span class='op'>(</span>
+  <span class='va'>ht</span>,
+  <span class='va'>...</span>,
+  after <span class='op'>=</span> <span class='fl'>0</span>,
+  fill <span class='op'>=</span> <span class='cn'>NULL</span>,
+  colspan <span class='op'>=</span> <span class='fl'>1</span>,
+  copy_cell_props <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,41 +206,45 @@ values for the hidden cells. Use <code>fill = ""</code> for this.</p>
     <div class='dont-index'><p><code><a href='add_rows.html'>add_rows()</a></code> and <code><a href='add_rows.html'>add_columns()</a></code>, which insert multiple rows/columns at once.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>insert_row</span>(<span class='no'>jams</span>,
-        <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Gooseberry"</span>, <span class='fl'>2.15</span>),
-        <span class='kw'>after</span> <span class='kw'>=</span> <span class='fl'>1</span>
-      )</div><div class='output co'>#&gt;                               Type           Price  
+    <pre class="examples"><div class='input'><span class='fu'>insert_row</span><span class='op'>(</span><span class='va'>jams</span>,
+        <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Gooseberry"</span>, <span class='fl'>2.15</span><span class='op'>)</span>,
+        after <span class='op'>=</span> <span class='fl'>1</span>
+      <span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
 #&gt;                               Gooseberry      2.15  
 #&gt;                               Strawberry      1.90  
 #&gt;                               Raspberry       2.10  
 #&gt;                               Plum            1.80  
 #&gt; 
 #&gt; Column names: Type, Price</div><div class='input'>
-<span class='fu'>insert_column</span>(<span class='no'>jams</span>,
-        <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span>),
-        <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"Price"</span>
-      )</div><div class='output co'>#&gt;                           Type         Price    Sugar  
+<span class='fu'>insert_column</span><span class='op'>(</span><span class='va'>jams</span>,
+        <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sugar"</span>, <span class='st'>"50%"</span>, <span class='st'>"60%"</span>, <span class='st'>"40%"</span><span class='op'>)</span>,
+        after <span class='op'>=</span> <span class='st'>"Price"</span>
+      <span class='op'>)</span>
+</div><div class='output co'>#&gt;                           Type         Price    Sugar  
 #&gt;                           Strawberry    1.90   50.00%  
 #&gt;                           Raspberry     2.10   60.00%  
 #&gt;                           Plum          1.80   40.00%  
 #&gt; 
 #&gt; Column names: Type, Price,</div><div class='input'>
-<span class='fu'>insert_column</span>(<span class='no'>jams</span>,
+<span class='fu'>insert_column</span><span class='op'>(</span><span class='va'>jams</span>,
         <span class='st'>"Sugar"</span>,
-        <span class='kw'>after</span> <span class='kw'>=</span> <span class='st'>"Price"</span>,
-        <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"50%"</span>
-      )</div><div class='output co'>#&gt;                           Type         Price    Sugar  
+        after <span class='op'>=</span> <span class='st'>"Price"</span>,
+        fill <span class='op'>=</span> <span class='st'>"50%"</span>
+      <span class='op'>)</span>
+</div><div class='output co'>#&gt;                           Type         Price    Sugar  
 #&gt;                           Strawberry    1.90   50.00%  
 #&gt;                           Raspberry     2.10   50.00%  
 #&gt;                           Plum          1.80   50.00%  
 #&gt; 
 #&gt; Column names: Type, Price,</div><div class='input'>
 <span class='co'># don't forget to use `fill`:</span>
-<span class='fu'>insert_row</span>(<span class='no'>jams</span>,
+<span class='fu'>insert_row</span><span class='op'>(</span><span class='va'>jams</span>,
         <span class='st'>"Jams and prices"</span>,
-        <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>""</span>,
-        <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>2</span>
-      )</div><div class='output co'>#&gt;                               Jams and prices       
+        fill <span class='op'>=</span> <span class='st'>""</span>,
+        colspan <span class='op'>=</span> <span class='fl'>2</span>
+      <span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Jams and prices       
 #&gt;                               Type           Price  
 #&gt;                               Strawberry      1.90  
 #&gt;                               Raspberry       2.10  
@@ -262,7 +266,7 @@ values for the hidden cells. Use <code>fill = ""</code> for this.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

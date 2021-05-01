@@ -77,7 +77,7 @@ below." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@ below." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -121,7 +121,7 @@ below." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -152,7 +152,7 @@ and <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>dplyr::tra
 below.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mutate.huxtable</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate.huxtable</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span>, copy_cell_props <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,36 +181,41 @@ standard defaults. Row and table properties, and properties of cells in
 existing columns, remain unchanged.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>add_colnames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), ] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht</span>)[, <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>ht2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>ht</span>, <span class='no'>b</span>:<span class='no'>c</span>)
-<span class='no'>ht2</span></div><div class='output co'>#&gt;                                <span style='font-weight: bold;'>      1</span><span>   </span><span style='font-weight: bold;'>      1</span><span>  
+    <pre class="examples"><div class='input'><span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>hux</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, c <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, d <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, add_colnames <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>ht2</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>b</span><span class='op'>:</span><span class='va'>c</span><span class='op'>)</span>
+<span class='va'>ht2</span>
+</div><div class='output co'>#&gt;                                <span style='font-weight: bold;'>      1</span><span>   </span><span style='font-weight: bold;'>      1</span><span>  
 #&gt;                                      2         2  
 #&gt;                                </span><span style='font-weight: bold;'>      3</span><span>   </span><span style='font-weight: bold;'>      3</span><span>  
 #&gt;                                      4         4  
 #&gt;                                      5         5  
 #&gt; 
-#&gt; Column names: b, c</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht2</span>)</div><div class='output co'>#&gt;       b     c
+#&gt; Column names: b, c</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>ht2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       b     c
 #&gt; 1  TRUE  TRUE
 #&gt; 2 FALSE FALSE
 #&gt; 3  TRUE  TRUE
 #&gt; 4 FALSE FALSE
-#&gt; 5 FALSE FALSE</div><div class='input'><span class='no'>ht3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)
-<span class='no'>ht3</span></div><div class='output co'>#&gt;                           </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  2</span><span>  
+#&gt; 5 FALSE FALSE</div><div class='input'><span class='va'>ht3</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>ht</span>, x <span class='op'>=</span> <span class='va'>a</span> <span class='op'>+</span> <span class='va'>b</span><span class='op'>)</span>
+<span class='va'>ht3</span>
+</div><div class='output co'>#&gt;                           </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  1</span><span>   </span><span style='font-weight: bold;'>  2</span><span>  
 #&gt;                           </span><span style='font-weight: bold;'>  2</span><span>     2     2     2     4  
 #&gt;                           </span><span style='font-weight: bold;'>  3</span><span>   </span><span style='font-weight: bold;'>  3</span><span>   </span><span style='font-weight: bold;'>  3</span><span>   </span><span style='font-weight: bold;'>  3</span><span>   </span><span style='font-weight: bold;'>  6</span><span>  
 #&gt;                           </span><span style='font-weight: bold;'>  4</span><span>     4     4     4     8  
 #&gt;                           </span><span style='font-weight: bold;'>  5</span><span>     5     5     5    10  
 #&gt; 
-#&gt; Column names: a, b, c, d, x</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht3</span>)</div><div class='output co'>#&gt;      a     b     c     d     x
+#&gt; Column names: a, b, c, d, x</div><div class='input'><span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>ht3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      a     b     c     d     x
 #&gt; 1 TRUE  TRUE  TRUE  TRUE  TRUE
 #&gt; 2 TRUE FALSE FALSE FALSE FALSE
 #&gt; 3 TRUE  TRUE  TRUE  TRUE  TRUE
 #&gt; 4 TRUE FALSE FALSE FALSE FALSE
-#&gt; 5 TRUE FALSE FALSE FALSE FALSE</div><div class='input'><span class='no'>ht4</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>ht</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>,
-      <span class='kw'>copy_cell_props</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='bold.html'>bold</a></span>(<span class='no'>ht4</span>)</div><div class='output co'>#&gt;      a     b     c     d     x
+#&gt; 5 TRUE FALSE FALSE FALSE FALSE</div><div class='input'><span class='va'>ht4</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>ht</span>, x <span class='op'>=</span> <span class='va'>a</span> <span class='op'>+</span> <span class='va'>b</span>,
+      copy_cell_props <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='bold.html'>bold</a></span><span class='op'>(</span><span class='va'>ht4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      a     b     c     d     x
 #&gt; 1 TRUE  TRUE  TRUE  TRUE FALSE
 #&gt; 2 TRUE FALSE FALSE FALSE FALSE
 #&gt; 3 TRUE  TRUE  TRUE  TRUE FALSE
@@ -231,7 +236,7 @@ existing columns, remain unchanged.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

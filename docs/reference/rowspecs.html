@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -188,29 +188,33 @@ return functions for this purpose.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>jams</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                               Type           Price  
+    <pre class="examples"><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
 #&gt;                               <span style='font-weight: bold;'>Strawberry</span><span>   </span><span style='font-weight: bold;'>   1.90</span><span>  
 #&gt;                               </span><span style='font-weight: bold;'>Raspberry </span><span>   </span><span style='font-weight: bold;'>   2.10</span><span>  
 #&gt;                               </span><span style='font-weight: bold;'>Plum      </span><span>   </span><span style='font-weight: bold;'>   1.80</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>jams</span>, <span class='no'>evens</span>, <span class='no'>everywhere</span>,
-      <span class='st'>"grey95"</span>)</div><div class='output co'>#&gt;                               Type           Price  
-#&gt;                               </span><span style='background-color: #BBBBBB;'>Strawberry</span><span>   </span><span style='background-color: #BBBBBB;'>   1.90</span><span>  
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='background_color.html'>set_background_color</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='va'>evens</span>, <span class='va'>everywhere</span>,
+      <span class='st'>"grey95"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
+#&gt;                               </span><span style='background-color: #E4E4E4;'>Strawberry</span><span>   </span><span style='background-color: #E4E4E4;'>   1.90</span><span>  
 #&gt;                               Raspberry       2.10  
-#&gt;                               </span><span style='background-color: #BBBBBB;'>Plum      </span><span>   </span><span style='background-color: #BBBBBB;'>   1.80</span><span>  
+#&gt;                               </span><span style='background-color: #E4E4E4;'>Plum      </span><span>   </span><span style='background-color: #E4E4E4;'>   1.80</span><span>  
 #&gt; 
-#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='no'>jams</span>, <span class='no'>everywhere</span>,
-      <span class='kw pkg'>tidyselect</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>matches</a></span>(<span class='st'>"yp"</span>), <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                               </span><span style='font-weight: bold;'>Type      </span><span>     Price  
+#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='bold.html'>set_bold</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='va'>everywhere</span>,
+      <span class='fu'>tidyselect</span><span class='fu'>::</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>matches</a></span><span class='op'>(</span><span class='st'>"yp"</span><span class='op'>)</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               </span><span style='font-weight: bold;'>Type      </span><span>     Price  
 #&gt;                               </span><span style='font-weight: bold;'>Strawberry</span><span>      1.90  
 #&gt;                               </span><span style='font-weight: bold;'>Raspberry </span><span>      2.10  
 #&gt;                               </span><span style='font-weight: bold;'>Plum      </span><span>      1.80  
 #&gt; 
 #&gt; Column names: Type, Price</div><div class='input'>
-<span class='fu'><a href='text_color.html'>set_text_color</a></span>(<span class='no'>jams</span>, <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='fl'>1</span>:<span class='fl'>2</span>,
-      <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"violetred"</span>, <span class='st'>"purple"</span>))</div><div class='output co'>#&gt;                               Type           Price  
+<span class='fu'><a href='text_color.html'>set_text_color</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+      <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"red"</span>, <span class='st'>"violetred"</span>, <span class='st'>"purple"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Type           Price  
 #&gt;                               </span><span style='color: #BB0000;'>Strawberry</span><span>   </span><span style='color: #BB0000;'>   1.90</span><span>  
-#&gt;                               </span><span style='color: #BB00BB;'>Raspberry </span><span>   </span><span style='color: #BB00BB;'>   2.10</span><span>  
-#&gt;                               </span><span style='color: #BB00BB;'>Plum      </span><span>   </span><span style='color: #BB00BB;'>   1.80</span><span>  
+#&gt;                               </span><span style='color: #D700AF;'>Raspberry </span><span>   </span><span style='color: #D700AF;'>   2.10</span><span>  
+#&gt;                               </span><span style='color: #AF00FF;'>Plum      </span><span>   </span><span style='color: #AF00FF;'>   1.80</span><span>  
 #&gt; 
 #&gt; Column names: Type, Price</div></span></pre>
   </div>
@@ -228,7 +232,7 @@ return functions for this purpose.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

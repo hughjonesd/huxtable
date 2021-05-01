@@ -74,7 +74,7 @@ and colspan of 2 covers a 2 x 2 square, hiding three other cells." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@ and colspan of 2 covers a 2 x 2 square, hiding three other cells." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -118,7 +118,7 @@ and colspan of 2 covers a 2 x 2 square, hiding three other cells." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -146,15 +146,15 @@ colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
 and colspan of 2 covers a 2 x 2 square, hiding three other cells.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rowspan</span>(<span class='no'>ht</span>)
-<span class='fu'>rowspan</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_rowspan</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_rowspan</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)
+    <pre class="usage"><span class='fu'>rowspan</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>rowspan</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_rowspan</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_rowspan</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span>
 
-<span class='fu'>colspan</span>(<span class='no'>ht</span>)
-<span class='fu'>colspan</span>(<span class='no'>ht</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
-<span class='fu'>set_colspan</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>value</span> )
-<span class='fu'>map_colspan</span>(<span class='no'>ht</span>, <span class='no'>row</span>, <span class='no'>col</span>, <span class='no'>fn</span>)</pre>
+<span class='fu'>colspan</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
+<span class='fu'>colspan</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>set_colspan</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>value</span> <span class='op'>)</span>
+<span class='fu'>map_colspan</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span>, <span class='va'>fn</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,9 +188,10 @@ a higher-level interface.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>letter_hux</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>9</span>], <span class='fl'>3</span>, <span class='fl'>3</span>))
-<span class='no'>letter_hux</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span>(<span class='no'>letter_hux</span>)
-<span class='no'>letter_hux</span></div><div class='output co'>#&gt;                            ┌───────┬───────┬───────┐
+<span class='va'>letter_hux</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as_huxtable.html'>as_hux</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>letter_hux</span> <span class='op'>&lt;-</span> <span class='fu'><a href='set-multiple.html'>set_all_borders</a></span><span class='op'>(</span><span class='va'>letter_hux</span><span class='op'>)</span>
+<span class='va'>letter_hux</span>
+</div><div class='output co'>#&gt;                            ┌───────┬───────┬───────┐
 #&gt;                            │ A     │ D     │ G     │
 #&gt;                            ├───────┼───────┼───────┤
 #&gt;                            │ B     │ E     │ H     │
@@ -198,7 +199,8 @@ a higher-level interface.</p></div>
 #&gt;                            │ C     │ F     │ I     │
 #&gt;                            └───────┴───────┴───────┘
 #&gt; 
-#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'>set_rowspan</span>(<span class='no'>letter_hux</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;                            ┌───────┬───────┬───────┐
+#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'>set_rowspan</span><span class='op'>(</span><span class='va'>letter_hux</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                            ┌───────┬───────┬───────┐
 #&gt;                            │ A     │ D     │ G     │
 #&gt;                            │       ├───────┼───────┤
 #&gt;                            │       │ E     │ H     │
@@ -206,7 +208,8 @@ a higher-level interface.</p></div>
 #&gt;                            │ C     │ F     │ I     │
 #&gt;                            └───────┴───────┴───────┘
 #&gt; 
-#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'>set_colspan</span>(<span class='no'>letter_hux</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;                            ┌───────────────┬───────┐
+#&gt; Column names: V1, V2, V3</div><div class='input'><span class='fu'>set_colspan</span><span class='op'>(</span><span class='va'>letter_hux</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                            ┌───────────────┬───────┐
 #&gt;                            │ A             │ G     │
 #&gt;                            ├───────┬───────┼───────┤
 #&gt;                            │ B     │ E     │ H     │
@@ -231,7 +234,7 @@ a higher-level interface.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -77,7 +77,7 @@ everywhere returns all rows or columns, equivalently to stripe(1)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@ everywhere returns all rows or columns, equivalently to stripe(1)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -121,7 +121,7 @@ everywhere returns all rows or columns, equivalently to stripe(1)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -152,13 +152,13 @@ numbers, i.e. they are equivalent to <code>stripe(2, 2)</code> and <code>stripe(
 <code>everywhere</code> returns all rows or columns, equivalently to <code>stripe(1)</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stripe</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='no'>n</span>)
+    <pre class="usage"><span class='fu'>stripe</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1</span>, from <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span>
 
-<span class='fu'>everywhere</span>(<span class='no'>ht</span>, <span class='no'>dimension</span>)
+<span class='fu'>everywhere</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>dimension</span><span class='op'>)</span>
 
-<span class='fu'>evens</span>(<span class='no'>ht</span>, <span class='no'>dimension</span>)
+<span class='fu'>evens</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>dimension</span><span class='op'>)</span>
 
-<span class='fu'>odds</span>(<span class='no'>ht</span>, <span class='no'>dimension</span>)</pre>
+<span class='fu'>odds</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>dimension</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,32 +189,34 @@ numbers, i.e. they are equivalent to <code>stripe(2, 2)</code> and <code>stripe(
 avoid a clash with <code><a href='https://purrr.tidyverse.org/reference/every.html'>purrr::every</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ht</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)
-<span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='no'>evens</span>, <span class='no'>everywhere</span>,
-      <span class='st'>"grey95"</span>)</div><div class='output co'>#&gt;                                      a         b  
-#&gt;                                <span style='background-color: #BBBBBB;'>      1</span><span>   </span><span style='background-color: #BBBBBB;'>      1</span><span>  
+    <pre class="examples"><div class='input'><span class='va'>ht</span> <span class='op'>&lt;-</span> <span class='fu'><a href='huxtable.html'>huxtable</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'><a href='background_color.html'>set_background_color</a></span><span class='op'>(</span><span class='va'>ht</span>,
+      <span class='va'>evens</span>, <span class='va'>everywhere</span>,
+      <span class='st'>"grey95"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                      a         b  
+#&gt;                                <span style='background-color: #E4E4E4;'>      1</span><span>   </span><span style='background-color: #E4E4E4;'>      1</span><span>  
 #&gt;                                      2         2  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      3</span><span>   </span><span style='background-color: #BBBBBB;'>      3</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      3</span><span>   </span><span style='background-color: #E4E4E4;'>      3</span><span>  
 #&gt;                                      4         4  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      5</span><span>   </span><span style='background-color: #BBBBBB;'>      5</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      5</span><span>   </span><span style='background-color: #E4E4E4;'>      5</span><span>  
 #&gt;                                      6         6  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      7</span><span>   </span><span style='background-color: #BBBBBB;'>      7</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      7</span><span>   </span><span style='background-color: #E4E4E4;'>      7</span><span>  
 #&gt;                                      8         8  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      9</span><span>   </span><span style='background-color: #BBBBBB;'>      9</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      9</span><span>   </span><span style='background-color: #E4E4E4;'>      9</span><span>  
 #&gt;                                     10        10  
 #&gt; 
-#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='background_color.html'>set_background_color</a></span>(<span class='no'>ht</span>,
-      <span class='fu'>stripe</span>(<span class='fl'>3</span>), <span class='no'>everywhere</span>,
-      <span class='st'>"grey95"</span>)</div><div class='output co'>#&gt;                                      a         b  
+#&gt; Column names: a, b</div><div class='input'><span class='fu'><a href='background_color.html'>set_background_color</a></span><span class='op'>(</span><span class='va'>ht</span>,
+      <span class='fu'>stripe</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>, <span class='va'>everywhere</span>,
+      <span class='st'>"grey95"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                      a         b  
 #&gt;                                      1         1  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      2</span><span>   </span><span style='background-color: #BBBBBB;'>      2</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      2</span><span>   </span><span style='background-color: #E4E4E4;'>      2</span><span>  
 #&gt;                                      3         3  
 #&gt;                                      4         4  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      5</span><span>   </span><span style='background-color: #BBBBBB;'>      5</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      5</span><span>   </span><span style='background-color: #E4E4E4;'>      5</span><span>  
 #&gt;                                      6         6  
 #&gt;                                      7         7  
-#&gt;                                </span><span style='background-color: #BBBBBB;'>      8</span><span>   </span><span style='background-color: #BBBBBB;'>      8</span><span>  
+#&gt;                                </span><span style='background-color: #E4E4E4;'>      8</span><span>   </span><span style='background-color: #E4E4E4;'>      8</span><span>  
 #&gt;                                      9         9  
 #&gt;                                     10        10  
 #&gt; 
@@ -235,7 +237,7 @@ avoid a clash with <code><a href='https://purrr.tidyverse.org/reference/every.ht
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

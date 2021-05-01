@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -149,13 +149,21 @@
     <p>Huxtable attempts to follow semantic versioning (<a href='https://semver.org'>https://semver.org</a>).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.</p>
+    <h2 class="hasAnchor" id="huxtable-development-version-"><a class="anchor" href="#huxtable-development-version-"></a>huxtable (development version)</h2>
+
+    
+<ul>
+<li><p>Allow <code><a href='tidy_override.html'>tidy_override()</a></code> to extend columns of <code>tidy</code> and <code>glance</code>.</p></li>
+<li><p>Bugfix: #196 <code><a href='https://rdrr.io/r/base/Arithmetic.html'>^</a></code> was giving errors in LaTeX.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 5.2.0</h2>
 
     
 <ul>
 <li><p>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in
 TeX.</p></li>
-<li><p>Bugfix: <code><a href='to_screen.html'>print_screen(h, colnames = FALSE)</a></code> didn’t print a final
+<li><p>Bugfix: <code><a href='print_screen.html'>print_screen(h, colnames = FALSE)</a></code> didn’t print a final
 newline.</p></li>
 <li><p>Bugfix: italic from markdown was being printed as underlined in TeX.</p></li>
 <li><p>Minor test update for compatibility with broom.</p></li>
@@ -201,7 +209,7 @@ argument to <code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy(
 <li><p>Clearer error messages for <code><a href='tidy_override.html'>tidy_override()</a></code> when <code>extend = FALSE</code>.
 In future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
 </ul>
-<h3>Other news:</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Other news:</h3>
 
 <ul>
 <li><p>Huxtable received its first Patreon sponsor! Thanks to Ross
@@ -213,7 +221,7 @@ Mattheis.</p></li>
 
     <p>Huxtable 5.0.0 brings numerous changes. For a more user-friendly
 introduction, see
-<a href='https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html'>https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p><h3>Breaking changes</h3>
+<a href='https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html'>https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p>There are changes to LaTeX output.</p><ul>
@@ -238,35 +246,40 @@ behaviour.</p></li>
 <code>wrap = TRUE</code> and <code>width</code> has been set).</p></li>
 <li><p>Huxtable borders have been reworked, fixing some longstanding bugs
 and adding new features.</p><ul>
-<li><p>Borders are now automatically collapsed. For example:<div class="r"></p><pre><span class='no'>jams</span> <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='borders.html'>set_right_border</a></span>(<span class='no'>everywhere</span>, <span class='fl'>1</span>, <span class='fl'>1</span>) <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='borders.html'>set_left_border</a></span>(<span class='no'>everywhere</span>, <span class='fl'>2</span>, <span class='fl'>0.4</span>)</pre><p></div></p>
+<li><p>Borders are now automatically collapsed. For example:<div class="r"></p><pre><span class='va'>jams</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='borders.html'>set_right_border</a></span><span class='op'>(</span><span class='va'>everywhere</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='borders.html'>set_left_border</a></span><span class='op'>(</span><span class='va'>everywhere</span>, <span class='fl'>2</span>, <span class='fl'>0.4</span><span class='op'>)</span>
+</pre><p></div></p>
 <p>will set the border in between the columns of <code>jams</code> to <code>0.4</code>,
 overwriting the previous value. This is more in line with what
 you would expect. For example, the following code now does what
-you probably want:</p><pre><span class='no'>jams</span> <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='spans.html'>set_rowspan</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>) <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='borders.html'>set_bottom_border</a></span>(<span class='fl'>4</span>, <span class='no'>everywhere</span>, <span class='fl'>1</span>)
+you probably want:</p><pre><span class='va'>jams</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='spans.html'>set_rowspan</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='borders.html'>set_bottom_border</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='va'>everywhere</span>, <span class='fl'>1</span><span class='op'>)</span>
 <span class='co'>##                 Type              Price  </span>
 <span class='co'>##                 Strawberry         1.90  </span>
 <span class='co'>##                                    2.10  </span>
 <span class='co'>##                                    1.80  </span>
-<span class='co'>##               ---------------------------</span></pre>
+<span class='co'>##               ---------------------------</span>
+</pre>
 
-<p>instead of the old behaviour:</p><pre><span class='no'>jams</span> <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='spans.html'>set_rowspan</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>) <span class='kw'>%&amp;gt;%</span>
-    <span class='fu'><a href='borders.html'>set_bottom_border</a></span>(<span class='fl'>4</span>, <span class='no'>everywhere</span>, <span class='fl'>1</span>)
+<p>instead of the old behaviour:</p><pre><span class='va'>jams</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='spans.html'>set_rowspan</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='borders.html'>set_bottom_border</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='va'>everywhere</span>, <span class='fl'>1</span><span class='op'>)</span>
 <span class='co'>##                 Type           Price  </span>
 <span class='co'>##                 Strawberry      1.90  </span>
 <span class='co'>##                                 2.10  </span>
 <span class='co'>##                                 1.80  </span>
-<span class='co'>##                            -----------</span></pre></li>
+<span class='co'>##                            -----------</span>
+</pre></li>
 <li><p><code><a href='borders.html'>set_left_border()</a></code>, <code><a href='set-multiple.html'>set_all_borders()</a></code> and friends all use a
-default value of 0.4. So to set a default border, write e.g.<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>)) <span class='kw'>%&amp;gt;%</span>
-      <span class='fu'><a href='borders.html'>set_bottom_border</a></span>(<span class='fl'>1</span>, <span class='no'>everywhere</span>)</pre><p></div></p></li>
+default value of 0.4. So to set a default border, write e.g.<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='borders.html'>set_bottom_border</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>everywhere</span><span class='op'>)</span>
+</pre><p></div></p></li>
 <li><p>A new <code><a href='brdr.html'>brdr()</a></code> class encapsulates border thickness, style and
-colour. You can set all properties at once by writing, e.g.:<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='no'>jams</span>) <span class='kw'>%&amp;gt;%</span>
-      <span class='fu'><a href='borders.html'>set_bottom_border</a></span>(<span class='fl'>1</span>, <span class='no'>everywhere</span>, <span class='fu'><a href='brdr.html'>brdr</a></span>(<span class='fl'>1</span>, <span class='st'>"dotted"</span>, <span class='st'>"darkgreen"</span>))</pre><p></div></p>
+colour. You can set all properties at once by writing, e.g.:<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='borders.html'>set_bottom_border</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>everywhere</span>, <span class='fu'><a href='brdr.html'>brdr</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='st'>"dotted"</span>, <span class='st'>"darkgreen"</span><span class='op'>)</span><span class='op'>)</span>
+</pre><p></div></p>
 <p><code><a href='borders.html'>left_border(ht)</a></code> and friends return a <code>brdr</code> object. To access
 the border thickness, write <code><a href='brdr_thickness.html'>brdr_thickness(left_border(ht))</a></code>.</p></li>
 </ul></li>
@@ -306,7 +319,7 @@ headers.</p></li>
 </ul>
 
 
-<h3>Other changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Other changes</h3>
 
 <ul>
 <li><p>You can now use <a href='https://commonmark.org/help/'>markdown</a> within
@@ -328,8 +341,9 @@ on-screen display.</p></li>
 header, and style all header rows/cols.</p></li>
 </ul></li>
 <li><p><code><a href='bold.html'>set_bold()</a></code> and <code><a href='bold.html'>set_italic()</a></code> now use a default value of <code>TRUE</code>.
-So you can write e.g.<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>)) <span class='kw'>%&amp;gt;%</span>
-      <span class='fu'><a href='bold.html'>set_bold</a></span>(<span class='fl'>1</span>, <span class='no'>everywhere</span>)</pre><p></div></p></li>
+So you can write e.g.<div class="r"></p><pre><span class='fu'><a href='as_huxtable.html'>as_hux</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='bold.html'>set_bold</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>everywhere</span><span class='op'>)</span>
+</pre><p></div></p></li>
 <li><p>Console output in R now shows table position and caption position.</p></li>
 <li><p>By default, huxtable now sets labels from the current knitr chunk
 label, if there is one. This is consistent with <code>kable()</code>. In
@@ -342,11 +356,12 @@ as_hux(iris)
 
 <p>Set <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.autolabel = FALSE)</a></code> to turn off this
 behaviour.</p></li>
-<li><p>The one-argument form of <code>[</code> now works for huxtables just as it does
+<li><p>The one-argument form of <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> now works for huxtables just as it does
 for data frames. For example, <code>ht[2:3]</code> selects columns 2 and 3.</p></li>
 <li><p>New functions <code><a href='fmt_percent.html'>fmt_percent()</a></code> and <code><a href='fmt_pretty.html'>fmt_pretty()</a></code> for passing into
-<code><a href='number_format.html'>number_format()</a></code>:<div class="r"></p><pre><span class='no'>jams</span>$<span class='no'>Sugar</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span> (<span class='st'>"Sugar content"</span>, <span class='fl'>0.4</span>, <span class='fl'>0.35</span>, <span class='fl'>0.45</span>)
-<span class='fu'><a href='number_format.html'>set_number_format</a></span>(<span class='no'>jams</span>, -<span class='fl'>1</span>, <span class='st'>"Sugar"</span>, <span class='fu'><a href='fmt_percent.html'>fmt_percent</a></span>(<span class='fl'>1</span>))</pre><p></div></p></li>
+<code><a href='number_format.html'>number_format()</a></code>:<div class="r"></p><pre><span class='va'>jams</span><span class='op'>$</span><span class='va'>Sugar</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span> <span class='op'>(</span><span class='st'>"Sugar content"</span>, <span class='fl'>0.4</span>, <span class='fl'>0.35</span>, <span class='fl'>0.45</span><span class='op'>)</span>
+<span class='fu'><a href='number_format.html'>set_number_format</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='st'>"Sugar"</span>, <span class='fu'><a href='fmt_percent.html'>fmt_percent</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</pre><p></div></p></li>
 <li><p><code><a href='split-across-down.html'>split_across()</a></code> and <code><a href='split-across-down.html'>split_down()</a></code> split a huxtable into a list of
 sub-tables. Headers can be automatically included.</p></li>
 <li><p><code><a href='restack-across-down.html'>restack_across()</a></code> and <code><a href='restack-across-down.html'>restack_down()</a></code> split a huxtable, then join
@@ -377,7 +392,7 @@ it is attached, not if it is loaded.</p></li>
 </ul>
 
 
-<h3>Other news</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Other news</h3>
 
 <ul>
 <li><p>New versions of the
@@ -422,7 +437,7 @@ inserted row/column.</p></li>
     
 <ul>
 <li><p>Bugfix: right borders in wrong place when cells were merged.</p></li>
-<li><p>Bugfix: chinese characters were displaying wrongly in <code><a href='to_screen.html'>to_screen()</a></code>.</p></li>
+<li><p>Bugfix: chinese characters were displaying wrongly in <code><a href='print_screen.html'>to_screen()</a></code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="huxtable-"><a class="anchor" href="#huxtable-"></a>huxtable 4.6.0</h2>
@@ -471,7 +486,7 @@ work even if underlying object has no <code><a href='https://generics.r-lib.org/
 <li><p>Bugfix: huxtables had option clash when <code>echo = TRUE</code> in Rmd
 pdf_document format.</p></li>
 <li><p>Bugfix: <code><a href='caption.html'>caption()</a></code> and <code><a href='height.html'>height()</a></code> weren’t playing nicely.</p></li>
-<li><p>Bugfix: <code><a href='dplyr-verbs.html'>mutate(..., copy_cell_props = FALSE)</a></code> was adding a column
+<li><p>Bugfix: <code><a href='mutate.huxtable.html'>mutate(..., copy_cell_props = FALSE)</a></code> was adding a column
 named <code>copy_cell_props</code>.</p></li>
 <li><p>Bugfix: <code>check_latex_dependencies</code> and <code>install_latex_dependencies</code>
 gave misleading errors.</p></li>
@@ -505,7 +520,7 @@ now sets the name for the new column.</p></li>
 <li><p>Improvements to the vignettes and help files.</p></li>
 <li><p>Bugfix: to_md could hang with bold/italic cells.</p></li>
 </ul>
-<h3>Deprecated</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Deprecated</h3>
 
 <ul>
 <li><p>The 3 argument form of <code>set_xxx</code> functions is deprecated, as is the
@@ -520,7 +535,7 @@ now sets the name for the new column.</p></li>
 <ul>
 <li><p>Bugfix: <code>wrap=TRUE</code> caused squeezed text in RTF.</p></li>
 </ul>
-<h3>Important</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Important</h3>
 
 <ul>
 <li><p>TeX code was getting escaped by pandoc. To avoid this, if possible,
@@ -641,7 +656,7 @@ interactively. Use <code>open = FALSE</code> to avoid.</p></li>
 <li><p><code>huxreg</code> continues with a warning if <code>statistics</code> are unavailable
 for some models.</p></li>
 </ul>
-<h3>Breaking changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p>huxtable now provides <code>knit_print.data.frame</code> methods. This means
@@ -667,7 +682,7 @@ another row/column”. To get the old behaviour, use
 </ul>
 
 
-<h3>Bugfixes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Bugfixes</h3>
 
 <ul>
 <li><p>Bugfix: Date and datetime columns were converted to numbers by
@@ -702,7 +717,7 @@ rules.</p></li>
 <li><p>New <code>tidy_args</code> argument to huxreg allows per-model customization of
 the call to <code>tidy</code>.</p></li>
 </ul>
-<h3>Breaking changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p><code>quick_xxx</code> functions without an explicit <code>file</code> argument throw an
@@ -735,7 +750,7 @@ table-like objects to a new document.</p></li>
 <li><p><code>to_screen</code> only shows colnames if there are any non-zero-length
 column names.</p></li>
 </ul>
-<h3>Breaking changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p><code>number_format</code> now applies to any number-like substrings in cells.
@@ -804,7 +819,7 @@ uncertainty estimates.</p></li>
 <li><p>Infrastructure improvements: slightly less ugly code in screen.R and
 LaTeX.R.</p></li>
 </ul>
-<h3>Breaking changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p>Removed options <code>collapse</code>, <code>borders</code>, <code>blank</code> and <code>colname_color</code>
@@ -883,7 +898,7 @@ cells.</p></li>
 <li><p>Numerous bugs have been fixed and replaced with new, more advanced
 bugs.</p></li>
 </ul>
-<h3>Breaking changes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Breaking changes</h3>
 
 <ul>
 <li><p><code>theme_minimal</code> has been renamed <code>theme_basic</code> to avoid a name clash
@@ -915,7 +930,7 @@ with <code>ggplot2</code>.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

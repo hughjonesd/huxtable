@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -162,13 +162,13 @@ rmarkdown header like this:</p><pre>header-includes:
   ... et cetera
 </pre></li>
 <li><p>Huxtable isn't working in my Rmarkdown <code>beamer_presentation</code> slides.</p>
-<p>You may need to set the beamer "fragile" option, like this:</p><pre># Slide title {.fragile}
+<p>You may need to set the beamer "fragile" option, like this:</p><pre><span class='co'># Slide title {.fragile}</span>
 </pre></li>
 <li><p>Numbers in my cells look weird!</p>
 <p>You can change numeric formatting using <code><a href='number_format.html'>number_format()</a></code>. Base R options
 like <code><a href='https://rdrr.io/r/base/options.html'>scipen</a></code> usually have no effect.</p></li>
-<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p><pre>Error in UseMethod("caption&amp;lt;-") :
-no applicable method for 'caption&amp;lt;-' applied to an object of class "c('huxtable',   'data.frame')"
+<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p><pre>Error in UseMethod("caption&lt;-") :
+no applicable method for 'caption&lt;-' applied to an object of class "c('huxtable',   'data.frame')"
 </pre>
 
 <p>You may have loaded another package with a <code>caption</code> method, e.g. "xtable".
@@ -176,13 +176,14 @@ Try loading huxtable after xtable.</p></li>
 <li><p>How can I change the font size, font etc. of captions?</p>
 <p>There are no direct commands for this. You have to use raw HTML/TeX/other
 commands within the caption itself. For example to have a bold caption in
-HTML, you might do something like:</p><pre><span class='fu'><a href='caption.html'>set_caption</a></span>(<span class='no'>jams</span>, <span class='st'>"&amp;lt;b&amp;gt;Jam Prices&amp;lt;/b&amp;gt;"</span>)</pre></li>
+HTML, you might do something like:</p><pre><span class='fu'><a href='caption.html'>set_caption</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='st'>"&lt;b&gt;Jam Prices&lt;/b&gt;"</span><span class='op'>)</span>
+</pre></li>
 <li><p>How do I refer to tables in bookdown?</p>
 <p>As of version 4.3.0, this is handled automatically for you. Just
 set the label using <code><a href='label.html'>label()</a></code>, then in markdown text do e.g.:</p><pre>\\@ref(tab:my-table-label).
 
 </pre></li>
-<li><p>I called <code><a href='https://rdrr.io/pkg/huxtable/man'>library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
+<li><p>I called <code><a href='https://hughjonesd.github.io/huxtable/'>library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
 printed!</p>
 <p>Set <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.knit_print_df = FALSE)</a></code>.</p></li>
 <li><p>I have another problem.</p>
@@ -213,7 +214,7 @@ may be able to help.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

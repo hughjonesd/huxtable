@@ -78,7 +78,7 @@ directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ directly." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -122,7 +122,7 @@ directly." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -154,11 +154,11 @@ the LaTeX packages that huxtable requires. It calls
 directly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report_latex_dependencies</span>(<span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>as_string</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>report_latex_dependencies</span><span class='op'>(</span>quiet <span class='op'>=</span> <span class='cn'>FALSE</span>, as_string <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>check_latex_dependencies</span>(<span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>check_latex_dependencies</span><span class='op'>(</span>quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>install_latex_dependencies</span>()</pre>
+<span class='fu'>install_latex_dependencies</span><span class='op'>(</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,12 +178,13 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
 
     <p>If <code>as_string</code> is <code>TRUE</code>, <code>report_latex_dependencies</code> returns a string of
 <code>"\\\\usepackage\\{...\\}"</code> statements; otherwise it returns a list of
-<code><a href='https://rdrr.io/pkg/rmarkdown/man/latex_dependency.html'>rmarkdown::latex_dependency</a></code> objects, invisibly.</p>
+<code><a href='https://pkgs.rstudio.com/rmarkdown/reference/latex_dependency.html'>rmarkdown::latex_dependency</a></code> objects, invisibly.</p>
 <p><code>check_latex_dependencies()</code> returns <code>TRUE</code> or <code>FALSE</code>.</p>
 <p><code>install_latex_dependencies</code> returns <code>TRUE</code> if <code>tlmgr</code> returns 0.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>report_latex_dependencies</span>()</div><div class='output co'>#&gt; \usepackage{array}
+    <pre class="examples"><div class='input'><span class='fu'>report_latex_dependencies</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; \usepackage{array}
 #&gt; \usepackage{caption}
 #&gt; \usepackage{graphicx}
 #&gt; \usepackage{siunitx}
@@ -201,13 +202,14 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
 #&gt; % These are LaTeX packages. You can install them using your LaTex management software,
 #&gt; % or by running `huxtable::install_latex_dependencies()` from within R.
 #&gt; % Other packages may be required if you use non-standard tabulars (e.g. tabulary).</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='fu'>check_latex_dependencies</span>()
-}
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>check_latex_dependencies</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='fu'>install_latex_dependencies</span>()
-}</div></pre>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>install_latex_dependencies</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -223,7 +225,7 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

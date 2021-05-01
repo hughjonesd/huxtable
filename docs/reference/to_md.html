@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hughjonesd/huxtable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,12 +142,12 @@
     <p>Create Markdown representing a huxtable</p>
     </div>
 
-    <pre class="usage"><span class='fu'>print_md</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>print_md</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>to_md</span>(<span class='no'>ht</span>, <span class='no'>...</span>)
+<span class='fu'>to_md</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for huxtable</span>
-<span class='fu'>to_md</span>(<span class='no'>ht</span>, <span class='kw'>header</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>min_width</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"width"</span>)/<span class='fl'>4</span>, <span class='kw'>max_width</span> <span class='kw'>=</span> <span class='fl'>80</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>to_md</span><span class='op'>(</span><span class='va'>ht</span>, header <span class='op'>=</span> <span class='cn'>TRUE</span>, min_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"width"</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>4</span>, max_width <span class='op'>=</span> <span class='fl'>80</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,13 +185,14 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other printing functions: 
-<code><a href='to_html.html'>print_html</a>()</code>,
-<code><a href='to_latex.html'>print_latex</a>()</code>,
-<code><a href='to_rtf.html'>print_rtf</a>()</code>,
-<code><a href='to_screen.html'>print_screen</a>()</code></p></div>
+<code><a href='print_html.html'>print_html</a>()</code>,
+<code><a href='print_latex.html'>print_latex</a>()</code>,
+<code><a href='print_rtf.html'>print_rtf</a>()</code>,
+<code><a href='print_screen.html'>print_screen</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>print_md</span>(<span class='no'>jams</span>)</div><div class='output co'>#&gt; -----------------------
+    <pre class="examples"><div class='input'><span class='fu'>print_md</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; -----------------------
 #&gt;  Type            Price 
 #&gt; ----------- -----------
 #&gt;  Strawberry       1.90 
@@ -216,7 +217,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
