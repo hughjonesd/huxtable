@@ -47,7 +47,7 @@ HTML, you might do something like:\preformatted{set_caption(jams, "<b>Jam Prices
 \item How do I refer to tables in bookdown?
 
 As of version 4.3.0, this is handled automatically for you. Just
-set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\\\@ref(tab:my-table-label).
+set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\@ref(tab:my-table-label).
 
 }
 \item I called \code{library(huxtable)} and now my \code{data.table} objects are getting

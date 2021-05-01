@@ -177,7 +177,7 @@ NULL
 #'   set the label using [label()], then in markdown text do e.g.:
 #'
 #'   ```
-#'   \\@ref(tab:my-table-label).
+#'   \@ref(tab:my-table-label).
 #'
 #'   ```
 #'
