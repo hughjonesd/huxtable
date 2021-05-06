@@ -101,6 +101,10 @@ NULL
 #' * `options('huxtable.long_minus')`. If `TRUE`, prints long minus signs
 #'   for numbers. The default is `FALSE`.
 #'
+#' * `options('huxtable.latex_siunitx_align')`. If `TRUE`, uses the `\tablenum`
+#'   macro from the "siunitx" package to align numbers when `align(ht)` is `"."`
+#'   or similar. See [align()] for details. The default is `FALSE`.
+#'
 #' * `options('huxtable.autoformat_number_format')` and
 #'   `options('huxtable.autoformat_align')` are lists. The list names are base R
 #'   classes. [huxtable()] with `autoformat = TRUE` will set `number_format()` and

@@ -42,6 +42,9 @@ header option. Note that \code{\link[=quick_pdf]{quick_pdf()}} may use pdflatex.
 \code{FALSE}.
 \item \code{options('huxtable.long_minus')}. If \code{TRUE}, prints long minus signs
 for numbers. The default is \code{FALSE}.
+\item \code{options('huxtable.latex_siunitx_align')}. If \code{TRUE}, uses the \verb{\\tablenum}
+macro from the "siunitx" package to align numbers when \code{align(ht)} is \code{"."}
+or similar. See \code{\link[=align]{align()}} for details. The default is \code{FALSE}.
 \item \code{options('huxtable.autoformat_number_format')} and
 \code{options('huxtable.autoformat_align')} are lists. The list names are base R
 classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set \code{number_format()} and

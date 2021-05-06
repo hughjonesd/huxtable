@@ -38,10 +38,19 @@ check_align_value <- function (x) {
 #' @templateVar attr_name align
 #' @templateVar value_param_desc A character vector or matrix.
 #'
-#' @details
-#' Neither HTML nor LaTeX currently possess reliable ways of aligning cells
-#' on a decimal point. Huxtable does this by padding with spaces. This may
-#' work better if you use a fixed-width font.
+#' @section Aligning on a decimal point:
+#'
+#' To align cells on the decimal point, set `align` to `"."` or any other single
+#' character (e.g. `","` in European languages).
+#'
+#' By default, huxtable aligns these cells by padding with spaces. The mechanics
+#' of this were improved for LaTeX in version 5.3.0, but are still not perfect.
+#' Using a fixed-width font may help.
+#'
+#' If `options("huxtable.latex_siunitx_align")` is set to `TRUE`, then in
+#' LaTeX output, numbers in these cells will be surrounded by `\\tablenum{}`.
+#' See the siunitx documentation for more details. Note that this may have
+#' other side-effects, for example `1e3` becomes `1 x 10^3`.
 #'
 #' @examples
 #'

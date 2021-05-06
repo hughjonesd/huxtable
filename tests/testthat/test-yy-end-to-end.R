@@ -207,3 +207,22 @@ test_that("huxtable.long_minus", {
   expect_silent(quick_pdf(ht,
         file = file.path("temp-artefacts", "long-minus-test.pdf"), open = FALSE))
 })
+
+
+
+test_that("huxtable.latex_siunitx_align", {
+  oo <- options(huxtable.latex_siunitx_align = TRUE)
+  on.exit(options(oo))
+
+  ht <- hux(c("1", "-1.5"), c("1.2e-3", "1.33e3"), c("1", "-1e-3"))
+  expect_silent(to_screen(ht))
+  expect_silent(to_md(ht))
+
+  skip_on_cran()
+  expect_silent(
+    quick_pdf(ht,
+            file = file.path("temp-artefacts", "latex-siunitx-test.pdf"),
+            open = FALSE
+          )
+  )
+})
