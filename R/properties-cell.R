@@ -409,7 +409,7 @@ make_getter_setters("rotation", "cell",
 #'
 #' @family formatting functions
 #' @seealso `options("huxtable.long_minus")` in [huxtable-options] for pretty-printing
-#'   minus signs.
+#'   minus signs. This option only applies to cells where  `number_format` is not `NA`.
 #'
 #' @examples
 #' ht <- huxtable(

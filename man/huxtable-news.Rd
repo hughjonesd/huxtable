@@ -12,6 +12,10 @@ Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
 Therefore, the major version number is increased whenever there are
 backwards-incompatible API changes.
 }
+\section{huxtable (development version)}{
+
+}
+
 \section{huxtable 5.3.0}{
 \itemize{
 \item Improve decimal alignment in LaTeX when \code{align(ht) == "."}. This may

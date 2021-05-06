@@ -96,7 +96,7 @@ set_number_format(ht_bands, NA)
 }
 \seealso{
 \code{options("huxtable.long_minus")} in \link{huxtable-options} for pretty-printing
-minus signs.
+minus signs. This option only applies to cells where  \code{number_format} is not \code{NA}.
 
 Other formatting functions: 
 \code{\link{background_color}()},

@@ -99,7 +99,8 @@ NULL
 #'   `FALSE`.
 #'
 #' * `options('huxtable.long_minus')`. If `TRUE`, prints long minus signs
-#'   for numbers. The default is `FALSE`.
+#'   for numbers. The default is `FALSE`. Note that [number_format()] must be
+#'   set to a non-`NA` value for the relevant table cells.
 #'
 #' * `options('huxtable.autoformat_number_format')` and
 #'   `options('huxtable.autoformat_align')` are lists. The list names are base R
