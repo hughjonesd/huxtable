@@ -87,7 +87,7 @@ as_Workbook.huxtable <- function (
     openxlsx::mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
   }
 
-  contents <- clean_contents(ht, type = "excel") # character matrix
+  contents <- clean_contents(ht, output_type = "excel") # character matrix
 
   nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)

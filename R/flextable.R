@@ -51,7 +51,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   assert_package("as_flextable","flextable")
   flextable_version <- utils::packageVersion("flextable")
 
-  cc <- clean_contents(x, type = "word")
+  cc <- clean_contents(x, output_type = "word")
   cc <- as.data.frame(cc, stringsAsFactors = FALSE)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)

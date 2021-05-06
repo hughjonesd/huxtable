@@ -147,7 +147,7 @@ to_html.huxtable <- function(ht, ...) {
   th_td[, header_cols(ht)] <- "th"
   cell_start <- sprintf("<%s%s%s %s>", th_td, rowspan, colspan, style)
   cell_end   <- sprintf("</%s>", th_td)
-  contents <- clean_contents(ht, type = "html")
+  contents <- clean_contents(ht, output_type = "html")
 
   rot <- rotation(ht)
   rot <- (rot %% 360) * -1 # HTML goes anticlockwise

@@ -2,17 +2,17 @@
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(
   ht,
-  type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
+  output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
   ...
 ) {
-  type <- match.arg(type)
+  output_type <- match.arg(output_type)
   contents <- as.matrix(as.data.frame(ht))
 
   for (col in seq_len(ncol(contents))) {
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      cell <- format_numbers(cell, num_fmt, type)
+      cell <- format_numbers(cell, num_fmt, output_type)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
       contents[row, col] <- as.character(cell)
     }
@@ -21,19 +21,19 @@ clean_contents <- function(
 
   for (col in seq_len(ncol(contents))) {
     md_rows <- markdown(ht)[, col]
-    contents[md_rows, col] <- render_markdown(contents[md_rows, col], type)
+    contents[md_rows, col] <- render_markdown(contents[md_rows, col], output_type)
     if (type %in% c("latex", "html", "rtf")) {
       to_esc <- escape_contents(ht)[, col] & ! md_rows
-      contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
+      contents[to_esc, col] <-  sanitize(contents[to_esc, col], output_type)
     }
     # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
     pad_chars <- rep(NA, length(col))
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
-    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
+    contents[, col] <- decimal_pad(contents[, col], pad_chars, output_type)
   }
 
-  if (type == "rtf") {
+  if (output_type == "rtf") {
     contents <- utf8_to_rtf(contents)
   }
 

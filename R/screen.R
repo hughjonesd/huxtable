@@ -211,7 +211,7 @@ character_matrix <- function (
 
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
-  contents <- clean_contents(ht, type = if (markdown) "markdown" else "screen")
+  contents <- clean_contents(ht, output_type = if (markdown) "markdown" else "screen")
   drow_mat <- as.matrix(dc[, c("display_row", "display_col")])
 
   dc$contents <- contents[drow_mat]
