@@ -17,6 +17,7 @@
   set_default_option("huxtable.knit_print_df_theme", theme_plain)
   set_default_option("huxtable.print", print_screen)
   set_default_option("huxtable.latex_use_fontspec", FALSE)
+  set_default_option("huxtable.latex_siunitx_align", FALSE)
   set_default_option("huxtable.long_minus", FALSE)
 
   set_default_option("huxtable.autoformat_number_format", list(

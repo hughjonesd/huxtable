@@ -2,38 +2,44 @@
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(
   ht,
-  type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
+  output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
   ...
 ) {
-  type <- match.arg(type)
+  output_type <- match.arg(output_type)
   contents <- as.matrix(as.data.frame(ht))
 
   for (col in seq_len(ncol(contents))) {
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      cell <- format_numbers(cell, num_fmt, type)
+      cell <- format_numbers(cell, num_fmt, output_type)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
       contents[row, col] <- as.character(cell)
     }
   }
   contents[is.na(contents)] <- na_string(ht)
 
+
   for (col in seq_len(ncol(contents))) {
+    # render markdown, sanitize output
     md_rows <- markdown(ht)[, col]
-    contents[md_rows, col] <- render_markdown(contents[md_rows, col], type)
-    if (type %in% c("latex", "html", "rtf")) {
+    contents[md_rows, col] <- render_markdown(contents[md_rows, col], output_type)
+    if (output_type %in% c("latex", "html", "rtf")) {
       to_esc <- escape_contents(ht)[, col] & ! md_rows
-      contents[to_esc, col] <-  sanitize(contents[to_esc, col], type)
+      contents[to_esc, col] <-  sanitize(contents[to_esc, col], output_type)
     }
-    # has to be after sanitization because we add &nbsp; for HTML (and non-space stuff for LaTeX):
+
+    # handle decimal alignment
+    # has to be after sanitization because we add &nbsp; for HTML
+    # and non-space stuff for LaTeX:
     pad_chars <- rep(NA, length(col))
+    # if align(ht) is a single character, e.g. "." or ",", we align on that:
     align_pad   <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
-    contents[, col] <- decimal_pad(contents[, col], pad_chars, type)
+    contents[, col] <- decimal_pad(contents[, col], pad_chars, output_type)
   }
 
-  if (type == "rtf") {
+  if (output_type == "rtf") {
     contents <- utf8_to_rtf(contents)
   }
 
@@ -92,14 +98,25 @@ numeral_formatter.numeric <- function (x) {
 }
 
 
+# Breakdown:
+# -?                    optional minus sign
+# [0-9]*                followed by any number of digits
+# \\.?                  optionally followed by a decimal
+# [0-9]+                which may also be followed by any number of digits
+# ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
+#                       along with (optionally) a sign preceding the digits
+#                       specifying the level of the exponent.
+NUMBER_REGEX <- "-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?"
+
+
 # find each numeric substring, and replace it:
-format_numbers <- function (string, num_fmt, type) {
+format_numbers <- function (string, num_fmt, output_type) {
   if (is.na(string)) return(NA_character_)
 
   # ! is.function avoids a warning if num_fmt is a function:
   if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
-  long_minus <- switch(type,
+  long_minus <- switch(output_type,
           latex = "$-$",
           excel = "-",
           "\u2212"
@@ -114,15 +131,8 @@ format_numbers <- function (string, num_fmt, type) {
     }
     result
   }
-  # Breakdown:
-  # -?                    optional minus sign
-  # [0-9]*                followed by any number of digits
-  # \\.?                  optionally followed by a decimal
-  # [0-9]+                which may also be followed by any number of digits
-  # ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
-  #                       along with (optionally) a sign preceding the digits
-  #                       specifying the level of the exponent.
-  stringr::str_replace_all(string,  "-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?", format_numeral)
+
+  stringr::str_replace_all(string, NUMBER_REGEX, format_numeral)
 }
 
 
@@ -134,10 +144,24 @@ decimal_pad <- function(col, pad_chars, type) {
   pad_chars <- pad_chars[! na_pad]
   if (length(col) == 0) return(orig_col)
 
+  col <- if (type == "latex" && getOption("huxtable.latex_siunitx_align",
+                  FALSE)) {
+           add_tablenum(col, pad_chars)
+         } else {
+           pad_spaces(col, pad_chars, type)
+         }
+
+  orig_col[! na_pad] <- col
+  orig_col
+}
+
+
+pad_spaces <- function (col, pad_chars, type) {
   find_pos  <- function(string, char) {
     regex <- gregexpr(char, string, fixed = TRUE)[[1]]
     regex[length(regex)]
   }
+
   pos <- mapply(find_pos, col, pad_chars)
   nchars <- nchar(col, type = "width")
   # take the biggest distance from the decimal point
@@ -153,8 +177,11 @@ decimal_pad <- function(col, pad_chars, type) {
                      " ")
   col <- paste0(col, str_rep(pad_char, pad_n_spaces))
 
-  orig_col[! na_pad] <- col
-  orig_col
+  col
 }
 
+
+add_tablenum <- function (col, pad_chars) {
+  stringr::str_replace_all(col, NUMBER_REGEX, format_numeral)
+}
 
