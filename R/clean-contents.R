@@ -13,7 +13,7 @@ clean_contents <- function(
     for (row in seq_len(nrow(contents))) {
       cell <- contents[row, col]
       num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      cell <- format_numbers(cell, num_fmt, output_type)
+      cell <- format_numbers(cell, num_fmt)
       if (is.na(cell)) cell <- na_string(ht)[row, col]
       contents[row, col] <- as.character(cell)
     }
@@ -42,7 +42,8 @@ clean_contents <- function(
   }
 
   # == lengthen minus signs ==
-  if (getOption("huxtable.long_minus", FALSE)) {
+  if (getOption("huxtable.long_minus", FALSE) &&
+            ! aligning_with_siunitx(output_type)) {
     long_minus <- switch(output_type,
                          latex = "$-$",
                          excel = "-",
@@ -130,7 +131,7 @@ NUMBER_REGEX <- "(-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?)"
 
 
 # find each numeric substring, and replace it:
-format_numbers <- function (string, num_fmt, output_type) {
+format_numbers <- function (string, num_fmt) {
   if (is.na(string)) return(NA_character_)
 
   # ! is.function avoids a warning if num_fmt is a function:
@@ -146,7 +147,7 @@ format_numbers <- function (string, num_fmt, output_type) {
 }
 
 
-handle_decimal_alignment <- function(col, pad_chars, type) {
+handle_decimal_alignment <- function(col, pad_chars, output_type) {
   # where pad_chars is NA we do not pad
   orig_col  <- col
   na_pad    <- is.na(pad_chars)
@@ -154,11 +155,10 @@ handle_decimal_alignment <- function(col, pad_chars, type) {
   pad_chars <- pad_chars[! na_pad]
   if (length(col) == 0) return(orig_col)
 
-  col <- if (type == "latex" && getOption("huxtable.latex_siunitx_align",
-                  FALSE)) {
+  col <- if (aligning_with_siunitx(output_type)) {
            add_tablenum(col, pad_chars)
          } else {
-           pad_spaces(col, pad_chars, type)
+           pad_spaces(col, pad_chars, output_type)
          }
 
   orig_col[! na_pad] <- col
@@ -166,7 +166,7 @@ handle_decimal_alignment <- function(col, pad_chars, type) {
 }
 
 
-pad_spaces <- function (col, pad_chars, type) {
+pad_spaces <- function (col, pad_chars, output_type) {
   find_pos  <- function(string, char) {
     regex <- gregexpr(char, string, fixed = TRUE)[[1]]
     regex[length(regex)]
@@ -179,7 +179,7 @@ pad_spaces <- function (col, pad_chars, type) {
   chars_after_. <- nchars - pos
 
   pad_n_spaces <- max(chars_after_.) - chars_after_.
-  pad_char <- switch(type,
+  pad_char <- switch(output_type,
                      "html"   = "&nbsp;",
                      "latex"  = "\\hphantom{0}",
                      "screen" = "\u00a0", # screen non-breaking space
@@ -192,6 +192,11 @@ pad_spaces <- function (col, pad_chars, type) {
 
 
 add_tablenum <- function (col, pad_chars) {
-  stringr::str_replace_all(col, NUMBER_REGEX, "\\tablenum{\\1}")
+  stringr::str_replace_all(col, NUMBER_REGEX, "\\\\tablenum{\\1}")
+}
+
+
+aligning_with_siunitx <- function (output_type) {
+  output_type == "latex" && getOption("huxtable.latex_siunitx_align", FALSE)
 }
 

@@ -48,43 +48,43 @@ test_that("number_format treats scientific notation equivalently to sprintf", {
 
 
 test_that("number_format works with various interesting cases", {
-  expect_equivalent(huxtable:::format_numbers("1.1234", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234", "%.3f"),
         "1.123")
-  expect_equivalent(huxtable:::format_numbers("1", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1", "%.3f"),
         "1.000")
-  expect_equivalent(huxtable:::format_numbers("1 2 3", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1 2 3", "%.3f"),
         "1.000 2.000 3.000")
-  expect_equivalent(huxtable:::format_numbers("1 -2 -3.1 -.4 .5", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1 -2 -3.1 -.4 .5", "%.3f"),
         "1.000 -2.000 -3.100 -0.400 0.500")
-  expect_equivalent(huxtable:::format_numbers("1.1234-1.1234", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234-1.1234", "%.3f"),
         "1.123-1.123")
-  expect_equivalent(huxtable:::format_numbers("1.1234e-2", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e-2", "%.3f"),
         "0.011")
-  expect_equivalent(huxtable:::format_numbers("1.1234e-12", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e-12", "%.3f"),
         "0.000")
-  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3f"),
         "1123400000000.000")
   # Make sure user can actually request scientific notation if desired
   # ("e" format) or get them as needed ("g" format)
-  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3g", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3g"),
         "1.12e+12")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3f"),
         "112340000.000 3.000")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3g", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3g"),
         "1.12e+08 3")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.1e", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.1e"),
         "1.1e+08 3.0e+00")
   # this is pretty brutal:
-  expect_equivalent(huxtable:::format_numbers("-1.1e3-1.2e3", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("-1.1e3-1.2e3", "%.3f"),
         "-1100.000-1200.000")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3-1.2e3", "%.3f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("-1.1e-3-1.2e3", "%.3f"),
         "-0.001-1200.000")
   # Signed zeroes
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1f", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1f"),
         "-0.0")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1g", type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1g"),
         "-0.001")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", 1, type = "screen"),
+  expect_equivalent(huxtable:::format_numbers("-1.1e-3", 1),
         "-0.0")
 
 })
@@ -94,22 +94,10 @@ test_that("long_minus", {
   oo_lm_local <- options(huxtable.long_minus = TRUE)
   on.exit(options(oo_lm_local))
 
-  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "screen"),
-        "\u22121")
-  expect_equivalent(huxtable:::format_numbers("-1e8", "%.0e", type = "screen"),
-        "\u22121e+08")
-  expect_equivalent(huxtable:::format_numbers("-1e-8", "%.0e", type = "screen"),
-        "\u22121e\u221208")
-  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "latex"),
-        "$-$1")
-  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "excel"),
-        "-1")
-  expect_equivalent(huxtable:::format_numbers("-4 -5 -6", 0, type = "screen"),
-        "\u22124 \u22125 \u22126")
+  ht <- huxtable("-3.1415")
+  expect_match(to_screen(ht), "\u22123.1415")
 
   options(huxtable.long_minus = FALSE)
-  expect_equivalent(huxtable:::format_numbers("-1", 0, type = "screen"),
-        "-1")
 })
 
 
@@ -118,7 +106,7 @@ test_that("Decimal padding works", {
           huxtable:::handle_decimal_alignment(
             c("do not pad.", "1.00532", "33", "33.6 *"),
             c(NA, rep(".", 3)),
-            type = "screen"
+            output_type = "screen"
           ),
           c("do not pad.", "1.00532", "33\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0", "33.6 *\u00a0\u00a0")
         )
