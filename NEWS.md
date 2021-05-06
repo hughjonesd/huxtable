@@ -1,10 +1,10 @@
-Huxtable attempts to follow semantic versioning (https://semver.org). Therefore, the major
-version number is increased whenever there are backwards-incompatible API changes.
 
 
 # huxtable (development version)
 
-
+* New option `huxtable.latex_siunitx_align` allows you to use the LaTeX
+  `siunitx` package to handle decimal point alignment. This is `FALSE` by
+  default.
 
 
 # huxtable 5.3.0

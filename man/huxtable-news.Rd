@@ -7,13 +7,12 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\details{
-Huxtable attempts to follow semantic versioning (\url{https://semver.org}).
-Therefore, the major version number is increased whenever there are
-backwards-incompatible API changes.
-}
 \section{huxtable (development version)}{
-
+\itemize{
+\item New option \code{huxtable.latex_siunitx_align} allows you to use the
+LaTeX \code{siunitx} package to handle decimal point alignment. This is
+\code{FALSE} by default.
+}
 }
 
 \section{huxtable 5.3.0}{

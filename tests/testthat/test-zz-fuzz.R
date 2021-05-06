@@ -8,7 +8,7 @@
 # run:
 #   hx_set <- add_props(hx_raw, variations[six_figure_no,])
 # compare outputs to something like
-# cat("tests/testthat/output-rds/various-outputs-six_figure_no-...")
+# cat(readRDS("tests/testthat/output-rds/various-outputs-six_figure_no-..."))
 # or run quick_xxx functions on it
 
 expect_outputs_unchanged <- function (hx, idx) {
