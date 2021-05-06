@@ -192,7 +192,12 @@ pad_spaces <- function (col, pad_chars, output_type) {
 
 
 add_tablenum <- function (col, pad_chars) {
-  stringr::str_replace_all(col, NUMBER_REGEX, "\\\\tablenum{\\1}")
+  tn_options <- rep("", length(pad_chars))
+  non_dot <- pad_chars != "."
+  tn_options[non_dot] <- sprintf("[output-decimal-marker = {%s}]", pad_chars[non_dot])
+
+  replacements <- paste0("\\\\tablenum", tn_options,"{\\1}")
+  stringr::str_replace_all(col, NUMBER_REGEX, replacements)
 }
 
 
