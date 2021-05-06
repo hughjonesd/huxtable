@@ -115,7 +115,7 @@ test_that("long_minus", {
 
 test_that("Decimal padding works", {
   expect_identical(
-          huxtable:::decimal_pad(
+          huxtable:::handle_decimal_alignment(
             c("do not pad.", "1.00532", "33", "33.6 *"),
             c(NA, rep(".", 3)),
             type = "screen"
