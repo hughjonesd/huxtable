@@ -56,11 +56,11 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
 #' @examples
 #' txt <- "Make $$$ with us"
 #' sanitize(txt, type = "latex")
-sanitize <- function (str, type = c("latex", "html", "rtf")) {
-  type <- match.arg(type)
+sanitize <- function (str, output_type = c("latex", "html", "rtf")) {
+  output_type <- match.arg(output_type)
   result <- str
 
-  if (type == "latex") {
+  if (output_type == "latex") {
     result <- gsub("\\\\", "SANITIZE.BACKSLASH", result)
     result <- gsub("\n", " \\newline ", result, fixed = TRUE)
     result <- gsub("$", "\\$", result, fixed = TRUE)
@@ -80,13 +80,12 @@ sanitize <- function (str, type = c("latex", "html", "rtf")) {
     result <- gsub("~", "\\~{}", result, fixed = TRUE)
     result <- gsub("SANITIZE.BACKSLASH", "$\\backslash$",
                 result, fixed = TRUE)
-  }
-  else if (type == "html"){
+  } else if (output_type == "html") {
     result <- gsub("&",  "&amp;", result, fixed = TRUE)
     result <- gsub(">",  "&gt;",  result, fixed = TRUE)
     result <- gsub("<",  "&lt;",  result, fixed = TRUE)
     result <- gsub("\n", "<br>",  result, fixed = TRUE)
-  } else if (type == "rtf") {
+  } else if (output_type == "rtf") {
     result <- gsub("\\", "\\\\",   result, fixed = TRUE)
     result <- gsub("{",  "\\{",    result, fixed = TRUE)
     result <- gsub("}",  "\\}",    result, fixed = TRUE)
