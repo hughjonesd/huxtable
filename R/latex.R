@@ -262,7 +262,7 @@ build_tabular <- function (ht) {
   ## inner_cell has padding, alignment, wrap and row_height TeX added
   ## inner_cell data comes from the 'display cell' at the top left of the display area
 
-  inner_cell_bldc <- clean_contents(ht, type = "latex")[bl_dc]
+  inner_cell_bldc <- clean_contents(ht, output_type = "latex")[bl_dc]
   fs_bldc <- font_size(ht)[bl_dc]
   line_space_bldc <- round(fs_bldc * 1.2, 2)
   has_fs_bldc <- ! is.na(fs_bldc)

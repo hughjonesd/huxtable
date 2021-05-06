@@ -168,7 +168,7 @@ to_rtf.huxtable <- function (ht, fc_tables = rtf_fc_tables(ht), ...) {
   dim(cellx) <- dim(ht)
 
   ## MAKE CELL CONTENTS ----
-  cc <- clean_contents(ht, type = "rtf")
+  cc <- clean_contents(ht, output_type = "rtf")
   cells <- paste0("{", cc, "}")
   cells[bold(ht)] <- paste0("\\b ", cells[bold(ht)], "\\b0")
   cells[italic(ht)] <- paste0("\\i ", cells[italic(ht)], "\\i0")
