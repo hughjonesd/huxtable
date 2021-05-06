@@ -99,7 +99,8 @@ NULL
 #'   `FALSE`.
 #'
 #' * `options('huxtable.long_minus')`. If `TRUE`, prints long minus signs
-#'   for numbers. The default is `FALSE`.
+#'   for numbers. The default is `FALSE`. In LaTeX output, this option is
+#'   overridden by `options('huxtable.latex_siunitx_align')`.
 #'
 #' * `options('huxtable.latex_siunitx_align')`. If `TRUE`, uses the `\tablenum`
 #'   macro from the "siunitx" package to align numbers when `align(ht)` is `"."`

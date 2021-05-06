@@ -949,6 +949,20 @@ quick_pdf(iris_hux)
 quick_pdf(iris_hux, file = "iris.pdf")
 ```
 
+## Useful output options
+
+See `?"huxtable-options"` for the full list of huxtable options. In particular:
+
+* `options("huxtable.knit_print_df")`: if `TRUE`, prints data frames using
+  huxtable.
+* `options("huxtable.latex_use_fontspec")`: if `TRUE`, uses the LaTeX
+  "fontspec" package which lets you use the same fonts in TeX and HTML. You
+  will need to use the xetex or xelatex engine for output.
+* `options("huxtable.long_minus")`. If `TRUE`, prints long minus signs for 
+  numbers, e.g. −3.5 rather than -3.5.
+* `options("huxtable.latex_siunitx_align")`. If `TRUE`, uses the \\tablenum 
+  macro from the "siunitx" package to align numbers by decimal point.
+
 
 # Creating a regression table
 

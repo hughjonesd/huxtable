@@ -41,7 +41,8 @@ requires the the xetex or xelatex engine, which can be set using an .rmd
 header option. Note that \code{\link[=quick_pdf]{quick_pdf()}} may use pdflatex. The default is
 \code{FALSE}.
 \item \code{options('huxtable.long_minus')}. If \code{TRUE}, prints long minus signs
-for numbers. The default is \code{FALSE}.
+for numbers. The default is \code{FALSE}. In LaTeX output, this option is
+overridden by \code{options('huxtable.latex_siunitx_align')}.
 \item \code{options('huxtable.latex_siunitx_align')}. If \code{TRUE}, uses the \verb{\\tablenum}
 macro from the "siunitx" package to align numbers when \code{align(ht)} is \code{"."}
 or similar. See \code{\link[=align]{align()}} for details. The default is \code{FALSE}.
