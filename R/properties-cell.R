@@ -52,21 +52,37 @@ check_align_value <- function (x) {
 #' See the siunitx documentation for more details. Note that this may have
 #' other side-effects, for example `1e3` becomes `1 x 10^3`.
 #'
+#' To use non-default decimal points, set both `align(ht)` and
+#' [number_format()]. See the example.
+#'
 #' @examples
 #'
 #' numbers <- c(1, 1.5, 1.03, 10, 10.01)
-#' number_hux <- as_hux(matrix(numbers, 5, 4))
+#' number_hux <- as_hux(matrix(numbers, 5, 5))
 #' number_format(number_hux) <- "%.4g"
+#' number_format(number_hux)[, 5] <- fmt_pretty(
+#'                                     decimal.mark = ",",
+#'                                     big.mark = ""
+#'                                   )
 #'
 #' number_hux <- map_align(number_hux,
-#'       by_cols("left", "center", "right", "."))
+#'       by_cols("left", "center", "right", ".", ","))
 #'
-#' alignments <- c("left", "centre", "right", "decimal (.)")
+#' alignments <- c(
+#'                  "left",
+#'                  "centre",
+#'                  "right",
+#'                  "decimal (.)",
+#'                  "decimal (,)"
+#'                )
 #' number_hux <- rbind(
 #'         alignments,
 #'         number_hux
 #'       )
+#'
+#' align(number_hux)
 #' number_hux
+#'
 #'
 NULL
 make_getter_setters("align", "cell",
