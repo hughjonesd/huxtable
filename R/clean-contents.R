@@ -64,10 +64,6 @@ utf8_to_rtf <- function (mx) {
 
 # Format numeral generics
 numeral_formatter <- function (x) {
-  # ! is.function() avoids a warning from is.na
-  if (! is.function(x) && is.na(x)) {
-    return(identity)
-  }
   UseMethod("numeral_formatter")
 }
 
@@ -101,9 +97,8 @@ format_numbers <- function (string, num_fmt, type) {
   if (is.na(string)) return(NA_character_)
 
   # ! is.function avoids a warning if num_fmt is a function:
-  # if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
+  if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
 
-  # note that we avoid escaping of $-$ in `sanitize` by special-casing it :-(
   long_minus <- switch(type,
           latex = "$-$",
           excel = "-",
