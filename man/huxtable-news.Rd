@@ -12,6 +12,7 @@ This help page simply gives the contents of NEWS.md.
 \item New option \code{huxtable.latex_siunitx_align} allows you to use the
 LaTeX \code{siunitx} package to handle decimal point alignment. This is
 \code{FALSE} by default.
+\item Bugfix: centre alignment was not working in \code{print_screen()}.
 }
 }
 

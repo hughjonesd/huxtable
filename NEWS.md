@@ -5,6 +5,7 @@
 * New option `huxtable.latex_siunitx_align` allows you to use the LaTeX
   `siunitx` package to handle decimal point alignment. This is `FALSE` by
   default.
+* Bugfix: centre alignment was not working in `print_screen()`.
 
 
 # huxtable 5.3.0

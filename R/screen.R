@@ -305,7 +305,8 @@ character_matrix <- function (
     if (md_bold) strings[ncharw(strings) > 0] <- paste0("**", strings[ncharw(strings) > 0], "**")
     if (md_italic) strings[ncharw(strings) > 0] <- paste0("*", strings[ncharw(strings) > 0], "*")
     align <- real_align(ht)[ dcell$display_row, dcell$display_col ]
-    stringr_align <- switch(align, "left" = "right", "right" = "left", "centre" = "both")
+    stringr_align <- switch(align, "left" = "right", "right" = "left",
+                                  "center" = "both")
     strings <- col_aware_strpad(strings, width, stringr_align)
     dc$strings[[r]] <- strings
   }
