@@ -20,7 +20,9 @@
 A huxtable.
 }
 \description{
-Combine rows or columns
+These methods are called when one argument to \code{cbind}/\code{rbind} is a
+huxtable. As well as combining cell contents, they copy table, row,
+column and/or cell properties into the returned result.
 }
 \details{
 Table properties will be taken from the first argument which is a huxtable. So will
@@ -32,7 +34,7 @@ or above get priority over those on the right or below.
 
 If \code{copy_cell_props} is \code{FALSE}, cells from non-huxtable objects will get the default properties.
 
-NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+You cannot bind huxtables with data frames, since the R method dispatch will always
 call the data frame method instead of the huxtable-specific code. For a solution, see
 \code{\link[=add_columns]{add_columns()}}.
 }

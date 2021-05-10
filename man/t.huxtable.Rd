@@ -10,10 +10,10 @@
 \item{x}{A huxtable.}
 }
 \value{
-The transposed object.
+The transposed huxtable.
 }
 \description{
-Transpose a huxtable
+\code{t()} switches a huxtable so rows become columns and columns become rows.
 }
 \details{
 Row and column spans of \code{x} will be swapped, as will column widths and row heights,

@@ -46,7 +46,6 @@ reference:
       - huxtable
       - as_huxtable
       - starts_with("insert")
-      - starts_with("merge")
       - starts_with("split")
       - starts_with("restack")
       - add_rows

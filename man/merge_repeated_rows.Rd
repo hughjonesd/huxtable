@@ -17,12 +17,12 @@ merge_repeated_rows(ht, row, col)
 The \code{ht} object.
 }
 \description{
-Merge repeated rows into multirow cells
+\code{merge_repeated_rows()} looks within each column for
+contiguous groups of identical cells. These are merged
+by setting \code{\link[=rowspan]{rowspan()}}. Doing this helps remove redundant
+information from the table.
 }
 \details{
-Repeated rows in each column are merged into cells with
-\code{rowspan > 1}.
-
 If \code{row} contains gaps, results may be unexpected (and a warning is given).
 }
 \examples{

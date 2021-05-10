@@ -19,7 +19,8 @@ normally resets to the default.}
 A function for use in \verb{map_***} functions.
 }
 \description{
-Map specific cell values to cell properties
+Use \code{by_values()} to set properties for cells with specific,
+pre-determined contents.
 }
 \examples{
 ht <- hux(letters[1:3])

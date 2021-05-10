@@ -1,6 +1,9 @@
 
 #' Merge a range of cells
 #'
+#' `merge_cells()` merges a rectangle of cells into a single displayed cell,
+#' by setting [colspan()] and [rowspan()].
+#'
 #' @param ht A huxtable.
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
@@ -43,8 +46,8 @@ merge_cells <- function (ht, row, col) {
 
 #' Merge cells across rows or down columns
 #'
-#' `merge_across` creates multicolumn cells within each row. `merge_down` creates
-#' multirow cells within each column.
+#' `merge_across()` creates multicolumn cells within each row. 
+#' `merge_down()` creates multirow cells within each column.
 #'
 #' @inherit merge_cells params return
 #'
@@ -91,14 +94,16 @@ merge_down <- function (ht, row, col) {
 
 #' Merge repeated rows into multirow cells
 #'
+#' `merge_repeated_rows()` looks within each column for
+#' contiguous groups of identical cells. These are merged
+#' by setting [rowspan()]. Doing this helps remove redundant
+#' information from the table.
+#' 
 #' @inherit merge_cells params return
 #'
 #' @export
 #'
 #' @details
-#' Repeated rows in each column are merged into cells with
-#' `rowspan > 1`.
-#'
 #' If `row` contains gaps, results may be unexpected (and a warning is given).
 #'
 #' @family cell merging

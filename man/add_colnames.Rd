@@ -41,7 +41,8 @@ move your rows down by one: what was row 1 will now be row 2, and the column nam
 \examples{
 ht <- huxtable(
         First  = rnorm(5),
-        Second = rnorm(5)
+        Second = rnorm(5),
+        add_rownames = FALSE
       )
 add_rownames(ht)
 add_colnames(ht)

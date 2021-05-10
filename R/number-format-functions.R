@@ -1,14 +1,18 @@
 
 
+#' @description 
+#' `fmt_` functions are designed to work with [number_format()].
+#'
 #' @return An object you can pass into [number_format()].
 #' @name fmt-numbers
 NULL
 
 #' Format numbers as percent
 #'
+#' 
 #' @param digits How many digits to print.
 #'
-#' @inherit fmt-numbers return
+#' @inherit fmt-numbers description return
 #'
 #' @export
 #'
@@ -16,7 +20,7 @@ NULL
 #'
 #' @examples
 #'
-#' jams$Sugar <-c ("Sugar content",
+#' jams$Sugar <- c("Sugar content",
 #'       0.4, 0.35, 0.45)
 #' set_number_format(jams, -1, "Sugar",
 #'       fmt_percent(1))

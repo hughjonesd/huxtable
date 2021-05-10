@@ -1,13 +1,16 @@
 
 #' Create a border object
 #'
+#' `brdr()` objects can be passed into [set_top_border()] and friends.
+#' They set multiple border properties simultaneously.
+#' 
 #' @param thickness Thickness of the border in points.
 #' @param style "solid" (the default), "double", "dashed" or "dotted".
 #' @param color String representing a valid color (either a color name or
 #'   a hexadecimalstring like "#00FF00").
 #'
-#' @return An object of class "brdr" which you can pass into huxtable
-#'   border functions.
+#' @return An object of class "brdr". 
+#'
 #' @export
 #'
 #' @examples
@@ -22,6 +25,8 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 
 
 #' Replace a subset of a brdr object
+#'
+#' @keywords internal
 #'
 #' @usage
 #' \method{[}{brdr}(x, ...) <- value

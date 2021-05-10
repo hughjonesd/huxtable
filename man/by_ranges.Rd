@@ -27,7 +27,7 @@ normally resets to the default.}
 A function for use in \verb{map_***} functions.
 }
 \description{
-\code{by_ranges} sets property values for cells falling within different numeric ranges.
+\code{by_ranges()} sets property values for cells falling within different numeric ranges.
 }
 \details{
 Non-numeric cells return \code{NA}. The effects of this depend on \code{ignore_na}.

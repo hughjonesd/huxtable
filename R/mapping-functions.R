@@ -131,6 +131,9 @@ NULL
 
 #' Map specific cell values to cell properties
 #'
+#' Use `by_values()` to set properties for cells with specific,
+#' pre-determined contents.
+#'
 #' @param ... Name-value pairs like `name = value`. Cells where contents are equal to
 #'   `name` will have the property set to `value`. If there is a single unnamed argument,
 #'   this is the default value for unmatched cells. More than one unnamed argument is an error.
@@ -238,7 +241,7 @@ by_cols <- function (..., from = 1, ignore_na = TRUE) {
 
 #' Map numeric ranges to cell properties
 #'
-#' `by_ranges` sets property values for cells falling within different numeric ranges.
+#' `by_ranges()` sets property values for cells falling within different numeric ranges.
 #'
 #' @param breaks A vector of numbers in increasing order.
 #' @inherit mapping-params params
@@ -388,6 +391,8 @@ by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
 
 #' Map cells matching a string or regex to cell properties
 #'
+#' `by_regex()` sets properties on cells which match a [regular expression][regex].
+#'
 #' @param ... A list of name-value pairs. The names are regular expressions. If there is a single
 #'   unnamed argument, this is the default value for unmatched cells. More than one unnamed argument
 #'   is an error.
@@ -446,6 +451,9 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 
 #' Map numeric cell contents smoothly to colors
 #'
+#' `by_colorspace()` can be used to set background, border or
+#' text colors, visually differentiating high or low values.
+#' 
 #' @param ... Colors
 #' @param range Numeric endpoints. If `NULL`, these are determined from the data.
 #' @param na_color Color to return for `NA` values. Can be `NA` itself.

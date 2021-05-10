@@ -4,7 +4,7 @@
 NULL
 
 
-#' Insert one huxtable into another.
+#' Insert one huxtable into another
 #'
 #' These functions combine two huxtables or similar objects and
 #' return the result.
@@ -62,7 +62,7 @@ add_columns <- function (x, y, after = ncol(x),
 #' @param fill String. If `...` contains fewer elements than there are columns/rows to
 #' fill, the remaining cells will be filled with this.
 #' @param rowspan,colspan Scalar integer. Sets the rowspan or colspan of the *first* cell only.
-#' this. The default `NULL` throws an error if there are too few elements.
+#' The default `NULL` throws an error if there are too few elements.
 #' @param copy_cell_props Copy cell properties from the previous row or column (if after > 0). See [cbind.huxtable()].
 #' @details
 #' In `insert_column` only, you can use a column name for `after`.
@@ -171,6 +171,10 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 
 #' Combine rows or columns
 #'
+#' These methods are called when one argument to `cbind`/`rbind` is a
+#' huxtable. As well as combining cell contents, they copy table, row,
+#' column and/or cell properties into the returned result.
+#'
 #' @param ... Vectors, matrices, or huxtables.
 #' @param deparse.level Unused.
 #' @param copy_cell_props Cell properties to copy from neighbours (see below).
@@ -187,7 +191,7 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #'
 #' If `copy_cell_props` is `FALSE`, cells from non-huxtable objects will get the default properties.
 #'
-#' NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+#' You cannot bind huxtables with data frames, since the R method dispatch will always
 #' call the data frame method instead of the huxtable-specific code. For a solution, see
 #' [add_columns()].
 #'
@@ -233,9 +237,11 @@ rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 
 #' Transpose a huxtable
 #'
+#' `t()` switches a huxtable so rows become columns and columns become rows.
+#'
 #' @param x A huxtable.
 #'
-#' @return The transposed object.
+#' @return The transposed huxtable.
 #'
 #' @details
 #' Row and column spans of `x` will be swapped, as will column widths and row heights,

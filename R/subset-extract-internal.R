@@ -158,6 +158,15 @@ replace_properties <- function (ht, i, j, value) {
 }
 
 
+#' Copy row and colspans over appropriately from the subsetted matrix
+#'
+#' @param new_ht New huxtable, row/colspans not yet set
+#' @param old_ht Subsetted huxtable
+#' @param rows,cols Which rows/cols are being subsetted
+#' @param cols
+#'
+#' @return The new huxtable with row and colspans set correctly.
+#' @noRd
 arrange_spans <- function (
         new_ht,
         old_ht,
@@ -166,6 +175,12 @@ arrange_spans <- function (
       ) {
   if (ncol(new_ht) == 0 || nrow(new_ht) == 0) return(new_ht)
 
+  # == create merge_sets ==
+  # a matrix representing spans in old_ht
+  # merged cells have the same value:
+  # e.g. 1 1
+  #      2 3
+  # would represent a cell with colspan 2 in the first row
   merge_sets <- seq_len(ncol(old_ht) * nrow(old_ht))
   dim(merge_sets) <- dim(old_ht)
 
@@ -176,17 +191,23 @@ arrange_spans <- function (
     cols_to_merge <- seq(j, j + cs[i, j] - 1)
     merge_sets[rows_to_merge, cols_to_merge] <- merge_sets[i, j]
   }
+
+  # == calculate the merge_sets for new_ht ==
   # since merge_sets were always contiguous rectangles, new merge sets
   # will also be rectangles - not necessarily contiguous though.
+  # TODO: bug is that if you repeat rows, they will have the same
+  # merge_set and colspan will erroneously be set on them
   new_merge_sets <- merge_sets[rows, cols, drop = FALSE]
-
-  # all 1s:
-  nrs <- rowspan(new_ht)
-  ncs <- colspan(new_ht)
 
   # we add 0s to ensure end_i/end_j is right when a span goes to the end of the row
   new_merge_sets <- rbind(new_merge_sets, 0)
   new_merge_sets <- cbind(new_merge_sets, 0)
+
+  # == create new row/colspan from new_merge_sets ==
+  # all 1s:
+  nrs <- rowspan(new_ht)
+  ncs <- colspan(new_ht)
+
   row_seq <- seq_len(nrow(new_ht) + 1)
   col_seq <- seq_len(ncol(new_ht) + 1)
   done <- matrix(FALSE, nrow(new_ht), ncol(new_ht))

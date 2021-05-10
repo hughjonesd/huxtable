@@ -29,7 +29,8 @@ normally resets to the default.}
 A function for use in \verb{map_***} functions.
 }
 \description{
-Map numeric cell contents smoothly to colors
+\code{by_colorspace()} can be used to set background, border or
+text colors, visually differentiating high or low values.
 }
 \details{
 \code{by_colorspace} requires the "scales" package.

@@ -17,7 +17,8 @@ merge_cells(ht, row, col)
 The \code{ht} object.
 }
 \description{
-Merge a range of cells
+\code{merge_cells()} merges a rectangle of cells into a single displayed cell,
+by setting \code{\link[=colspan]{colspan()}} and \code{\link[=rowspan]{rowspan()}}.
 }
 \details{
 \code{merge_cells(ht, c(min_row, max_row), c(min_col, max_col))} is equivalent to\preformatted{  colspan(ht)[min_row, min_col] <- max_col - min_col + 1

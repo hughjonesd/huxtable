@@ -34,7 +34,7 @@ insert_row(
 fill, the remaining cells will be filled with this.}
 
 \item{rowspan, colspan}{Scalar integer. Sets the rowspan or colspan of the \emph{first} cell only.
-this. The default \code{NULL} throws an error if there are too few elements.}
+The default \code{NULL} throws an error if there are too few elements.}
 
 \item{copy_cell_props}{Copy cell properties from the previous row or column (if after > 0). See \code{\link[=cbind.huxtable]{cbind.huxtable()}}.}
 }

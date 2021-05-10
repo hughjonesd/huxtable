@@ -20,8 +20,8 @@ merge_down(ht, row, col)
 The \code{ht} object.
 }
 \description{
-\code{merge_across} creates multicolumn cells within each row. \code{merge_down} creates
-multirow cells within each column.
+\code{merge_across()} creates multicolumn cells within each row.
+\code{merge_down()} creates multirow cells within each column.
 }
 \examples{
 

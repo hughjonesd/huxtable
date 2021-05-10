@@ -15,11 +15,11 @@ brdr(thickness = 0.4, style = "solid", color = NA_character_)
 a hexadecimalstring like "#00FF00").}
 }
 \value{
-An object of class "brdr" which you can pass into huxtable
-border functions.
+An object of class "brdr".
 }
 \description{
-Create a border object
+\code{brdr()} objects can be passed into \code{\link[=set_top_border]{set_top_border()}} and friends.
+They set multiple border properties simultaneously.
 }
 \examples{
 

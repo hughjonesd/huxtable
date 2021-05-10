@@ -26,3 +26,4 @@ to access border thicknesses, do e.g.\if{html}{\out{<div class="r">}}\preformatt
 
 which will give you a matrix of numbers.
 }
+\keyword{internal}

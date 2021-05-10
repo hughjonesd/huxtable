@@ -3,7 +3,7 @@
 \name{add_rows}
 \alias{add_rows}
 \alias{add_columns}
-\title{Insert one huxtable into another.}
+\title{Insert one huxtable into another}
 \usage{
 add_rows(x, y, after = nrow(x), copy_cell_props = TRUE)
 
