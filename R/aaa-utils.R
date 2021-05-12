@@ -5,10 +5,14 @@ NULL
 
 ncharw <- function (x, type = "width") {
   if (requireNamespace("crayon", quietly = TRUE)) {
-    crayon::col_nchar(x, type = type)
-  } else {
-    nchar(x, type = type)
+    x <- crayon::strip_style(x)
   }
+  # we use stringi throughout to keep the same concept of width
+  switch(type,
+         width = stringi::stri_width(x),
+         chars = stringi::stri_length(x),
+         stop("Unrecognized type in ncharw")
+  )
 }
 
 

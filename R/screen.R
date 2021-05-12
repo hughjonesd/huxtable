@@ -181,7 +181,7 @@ to_screen.huxtable <- function (
   }
 
 
-  if (colnames && any(nchar(all_colnames) > 0)) {
+  if (colnames && any(nzchar(all_colnames))) {
     colnames_text <- paste0("Column names: ", paste(all_colnames, collapse = ", "))
     colnames_text <- strwrap(colnames_text, max_width)
     colnames_text <- paste0(colnames_text, collapse = "\n")
@@ -312,10 +312,10 @@ character_matrix <- function (
   }
 
   dc$text_height <- sapply(dc$strings, length)
-  # we use nchar(type = "c") because otherwise, when characters have
+  # we use type = "chars" because otherwise, when characters have
   # screen width > 1, "cols"
   # in the loop below will be too long, leading to the text being repeated:
-  dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x, type = "c")))
+  dc$text_width <- sapply(dc$strings, function (x) max(ncharw(x, type = "chars")))
 
   #######################################################################
   # calculate row heights: start at 0 and increase it if it"s too little,
@@ -380,12 +380,12 @@ col_aware_strsplit <- function (...) {
 col_aware_strpad <- function (string, width, side) {
   if (requireNamespace("crayon", quietly = TRUE)) {
     clean <- crayon::strip_style(string)
-    padded <- stringr::str_pad(clean, width, side)
+    padded <- stringi::stri_pad(clean, width, side = side, use_length = TRUE)
     # returns a matrix. First column is whole match. Next columns are captures:
     pads   <- stringr::str_match(padded, "^( *).*?( *)$")
     paste0(pads[, 2], string, pads[, 3])
   } else {
-    stringr::str_pad(string, width, side)
+    stringi::stri_pad(string, width, side = side, use_length = TRUE)
   }
 }
 

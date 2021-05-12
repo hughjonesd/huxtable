@@ -448,7 +448,7 @@ build_tabular <- function (ht) {
   multirow[blm_idx] <- multirow_blm_tex
 
   ## FINAL ASSEMBLY----------------
-  closer <- function (x) ifelse(nchar(x) > 0, "}", "")
+  closer <- function (x) ifelse(nzchar(x), "}", "")
 
   contents <- paste0(
           multicol,
@@ -461,7 +461,7 @@ build_tabular <- function (ht) {
   dim(contents) <- dim(ht)
 
   content_rows <- apply(contents, 1, function (x) {
-    x <- x[nchar(x) > 0]
+    x <- x[nzchar(x)]
     row <- paste(x, collapse = " &\n")
     paste(row, "\\tabularnewline[-0.5pt]")
   })

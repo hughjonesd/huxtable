@@ -173,7 +173,7 @@ pad_spaces <- function (col, pad_chars, output_type) {
   }
 
   pos <- mapply(find_pos, col, pad_chars)
-  nchars <- nchar(col, type = "width")
+  nchars <- ncharw(col)
   # take the biggest distance from the decimal point
   pos[pos == -1L] <- nchars[pos == -1L] + 1
   chars_after_. <- nchars - pos

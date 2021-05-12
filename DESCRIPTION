@@ -27,6 +27,7 @@ Imports:
     R6,
     rlang,
     stats,
+    stringi,
     stringr (>= 1.2.0),
     tidyselect,
     utils,

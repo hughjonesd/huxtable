@@ -13,6 +13,8 @@ This help page simply gives the contents of NEWS.md.
 LaTeX \code{siunitx} package to handle decimal point alignment. This is
 \code{FALSE} by default.
 \item Bugfix: centre alignment was not working in \code{print_screen()}.
+\item Bugfix: failure in \code{to_md()} with recent versions of \code{stringi}
+package.
 }
 }
 

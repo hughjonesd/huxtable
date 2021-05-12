@@ -6,6 +6,7 @@
   `siunitx` package to handle decimal point alignment. This is `FALSE` by
   default.
 * Bugfix: centre alignment was not working in `print_screen()`.
+* Bugfix: failure in `to_md()` with recent versions of `stringi` package.
 
 
 # huxtable 5.3.0
