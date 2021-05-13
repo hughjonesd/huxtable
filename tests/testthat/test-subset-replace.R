@@ -19,6 +19,17 @@ test_that("One-argument [", {
 })
 
 
+test_that("Zero-argument [<-", {
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = TRUE)
+  expect_silent(ht[] <- matrix(1:6, 3, 2))
+  expect_identical(ht[[3, 2]], 6L)
+
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = TRUE)
+  expect_silent(ht[ , ] <- matrix(1:6, 3, 2))
+  expect_identical(ht[[3, 2]], 6L)
+})
+
+
 test_that("Subsetting preserves rownames", {
   ht <- huxtable(a = 1:3, b = 1:3)
   rownames(ht) <- letters[1:3]
