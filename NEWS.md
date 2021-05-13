@@ -7,6 +7,8 @@
   default.
 * Bugfix: centre alignment was not working in `print_screen()`.
 * Bugfix: failure in `to_md()` with recent versions of `stringi` package.
+* Bugfix: repeating a single row in a subset, like `ht[c(1, 1, 2, 3), ]`,
+  was setting `colspan = 2` on the repeated row.
 
 
 # huxtable 5.3.0

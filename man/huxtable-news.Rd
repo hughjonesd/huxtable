@@ -15,6 +15,9 @@ LaTeX \code{siunitx} package to handle decimal point alignment. This is
 \item Bugfix: centre alignment was not working in \code{print_screen()}.
 \item Bugfix: failure in \code{to_md()} with recent versions of \code{stringi}
 package.
+\item Bugfix: repeating a single row in a subset, like
+\code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated
+row.
 }
 }
 
