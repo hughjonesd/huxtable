@@ -18,6 +18,8 @@ package.
 \item Bugfix: repeating a single row in a subset, like
 \code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated
 row.
+\item Bugfix: zero-argument subset replacement like \code{ht[] <- ...} wasn’t
+working.
 }
 }
 
