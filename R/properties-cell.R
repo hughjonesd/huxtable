@@ -134,7 +134,6 @@ make_getter_setters("rowspan", "cell",
           dc <- display_cells(ht, new_rowspan = value)
           dcells <- as.matrix(dc[, c("display_row", "display_col")])
           contents <- as.data.frame(ht)[dcells]
-          dim(contents) <- dim(ht)
           ht[] <- contents
         }
       )
@@ -157,7 +156,6 @@ make_getter_setters("colspan", "cell",
           dc <- display_cells(ht, new_colspan = value)
           dcells <- as.matrix(dc[, c("display_row", "display_col")])
           contents <- as.data.frame(ht)[dcells]
-          dim(contents) <- dim(ht)
           ht[] <- contents
         }
       )
