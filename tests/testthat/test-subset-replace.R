@@ -26,24 +26,6 @@ test_that("Subsetting preserves rownames", {
 })
 
 
-
-test_that("Subsetting cuts rowspan and colspan", {
-  ht <- hux(a = 1:3, b = 1:3, d = 1:3)
-  rowspan(ht)[1, 1] <- 3
-  colspan(ht)[1, 2] <- 2
-  ss <- ht[1:2, 1:2]
-  expect_equivalent(rowspan(ss)[1, 1], 2)
-  expect_equivalent(colspan(ss)[1, 2], 1)
-})
-
-
-test_that("Subsetting works with multirow/multicolumn cells", {
-  ht <- hux(a = 1:3, b = 1:3)
-  rowspan(ht)[1, 1] <- 2
-  expect_silent(ht[c(1, 3), ])
-})
-
-
 test_that("Subset assignment of hux into hux preserves attributes", {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   ht2 <- hux(1:2, 3:4)
