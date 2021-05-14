@@ -44,15 +44,11 @@ if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
   cat(chk$errors)
   cat('\n\nR CMD CHECK warnings:\n')
   cat(chk$warnings)
-  stop('Not tagging built release.')
 }
 
 if (length(chk$notes)) {
   cat('R CMD CHECK notes:\n')
   cat(chk$notes)
-  cat('\nTag this version? y[n]')
-  yn <- if (interactive()) readline() else readLines(con="stdin", 1)
-  if (! yn %in% c('Y', 'y')) stop('OK, stopping.')
 }
 
 

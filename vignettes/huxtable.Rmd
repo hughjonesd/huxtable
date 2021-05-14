@@ -17,9 +17,9 @@ monofont: LucidaConsole
 linkcolor: olive
 urlcolor: olive
 vignette: >
-  \\VignetteIndexEntry{Introduction to Huxtable}    
-  \\VignetteEncoding{UTF-8}
-  \\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to huxtable}    
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 

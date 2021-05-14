@@ -1,8 +1,5 @@
+
 # huxtable 5.4.0
-
-
-
-# huxtable (development version)
 
 * New behaviour: setting `colspan()` or `rowspan()` overwrites the content of
   cells that have been shadowed. 
