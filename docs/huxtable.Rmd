@@ -3,12 +3,6 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
-    latex_engine: xelatex
-    includes:
-      in_header: "placeins-header.tex"
   html_document:
     toc: yes
     toc_depth: 2

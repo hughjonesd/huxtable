@@ -3,10 +3,6 @@ title: "Regression Tables with huxreg"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output: 
-  pdf_document:
-    latex_engine: xelatex
-    includes:
-      in_header: "placeins-header.tex"
   html_document: default
 vignette: >
   %\VignetteIndexEntry{Regression Tables with huxreg}  
