@@ -131,7 +131,10 @@ make_getter_setters("rowspan", "cell",
             stop("rowspan would extend beyond bottom of table")
           }
           # throws an error if cells are cut
-          display_cells(ht, new_rowspan = value)
+          dc <- display_cells(ht, new_rowspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
         }
       )
 
@@ -150,9 +153,21 @@ make_getter_setters("colspan", "cell",
             stop("colspan would extend beyond right edge of table")
           }
           # throws an error if cells are cut
-          display_cells(ht, new_colspan = value)
+          dc <- display_cells(ht, new_colspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
         }
       )
+
+
+overwrite_shadowed_cells <- function (ht, dc) {
+  dcells <- as.matrix(dc[, c("display_row", "display_col")])
+  contents <- as.data.frame(ht)[dcells]
+  ht[] <- contents
+
+  ht
+}
 
 
 #' @description

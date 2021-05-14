@@ -135,3 +135,14 @@ test_that("rowspan and colspan error when overlapping", {
   expect_error(colspan(ht)[1, 1] <- 2)
   expect_error(colspan(ht)[1, 2] <- 2)
 })
+
+
+test_that("rowspan and colspan overwrite shadowed cell contents when set", {
+  ht <- hux(1:2)
+  rowspan(ht)[1, 1] <- 2
+  expect_equal(ht[[2, 1]], 1)
+
+  ht <- hux(1, 2)
+  colspan(ht)[1, 1] <- 2
+  expect_equal(ht[[1, 2]], 1)
+})
