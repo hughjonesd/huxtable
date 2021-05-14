@@ -10,13 +10,14 @@ and introduces some small features.
 * rhub (windows/linux, release/devel)
 * github (windows/linux, release/devel)
 * windows on appveyor (release and stable)
-* win-builder devel
+* win-builder release/devel
 
 
 ## R CMD check results
 
-No errors, warnings or notes on rhub, github, appveyor, win-builder devel, 
-or locally. Two rhub platforms failed while preparing for the build.
+One note on rhub and github: "Unable to find GhostScript executable...". Two 
+failures-to-build on rhub. Everything else OK.
+
 
 ## revdepcheck results
 
