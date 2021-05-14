@@ -3,6 +3,10 @@ title: "Regression Tables with huxreg"
 author: "David Hugh-Jones"
 date: '`r Sys.Date()`'
 output: 
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: "placeins-header.tex"
   html_document: default
 vignette: >
   %\VignetteIndexEntry{Regression Tables with huxreg}  
@@ -23,6 +27,7 @@ knitr::knit_hooks$set(
 )
 
 if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
+options(huxtable.latex_siunitx_align = FALSE)
 ```
 
 
@@ -229,7 +234,7 @@ function `coeftest` in the "lmtest" package has `tidy` methods defined:
 ```{r}
 library(lmtest)
 library(sandwich)
-lm_robust <- coeftest(lm1, vcov = vcovHC)
+lm_robust <- coeftest(lm1, vcov = vcovHC, save = TRUE)
 huxreg("Normal SEs" = lm1, "Robust SEs" = lm_robust)
 ```
 

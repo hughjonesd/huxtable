@@ -1,8 +1,14 @@
 ---
 title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
-date: '`r Sys.Date()`'
+date: "`r Sys.Date()`"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+    latex_engine: xelatex
+    includes:
+      in_header: "placeins-header.tex"
   html_document:
     toc: yes
     toc_depth: 2
@@ -10,10 +16,8 @@ mainfont: Calibri
 monofont: LucidaConsole
 linkcolor: olive
 urlcolor: olive
-vignette: >
-  %\VignetteIndexEntry{Introduction to Huxtable}   
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}   
+vignette: "%\\VignetteIndexEntry{Introduction to Huxtable}    %\\VignetteEncoding{UTF-8}
+  %\\VignetteEngine{knitr::rmarkdown}   \n"
 ---
 
 
@@ -161,8 +165,8 @@ jams %>%
       set_all_padding(4) %>% 
       set_outer_padding(0) %>% 
       set_number_format(2) %>% 
-      set_bold(1, everywhere) %>% 
-      set_bottom_border(1, everywhere) %>% 
+      set_bold(row = 1, col = everywhere) %>% 
+      set_bottom_border(row = 1, col = everywhere) %>% 
       set_width(0.4) %>% 
       set_caption("Pots of jam for sale")
   
@@ -178,11 +182,9 @@ pipe. Really, these functions evaluate to:
 ```{r, eval = FALSE}
 jams <- set_all_padding(jams, 4)
 jams <- set_outer_padding(jam, 0)
-# etc.
 ```
 
-
-Let's go through them line by line.
+and so on. Let's go through them line by line.
 
 * `jams %>% set_all_padding(10)` sets four properties on every cell of the 
   huxtable: the `left_padding`, `right_padding`, `top_padding` and `bottom_padding`
@@ -196,11 +198,13 @@ Let's go through them line by line.
   It will work not just on numeric data, but on any numbers found in a cell.
   Setting the `number_format` property to 2 means that numbers will have
   2 decimal places.
-* `set_bold(jams, 1, everywhere)` sets the `bold` property. This time we don't set
+* `set_bold(jams, row = 1, col = everywhere)` sets the `bold` property. This 
+  time we don't set
   it for all cells -- only on cells in row **1** and in all columns, i.e.
   `everywhere`. `set_bold()` has a default value of `TRUE`, so the call is
-  just short for `set_bold(jams, 1, everywhere, TRUE)`.
-* `set_bottom_border(jams, 1, everywhere)` sets the `bottom_border` property.
+  just short for `set_bold(jams, row = 1, col = everywhere, TRUE)`.
+* `set_bottom_border(jams, row = 1, col = everywhere)` sets the `bottom_border`
+  property.
   Again it's set for cells in row 1 and all columns. The `bottom_border` property
   is the width of the border in points. Here, we've set it to its default value
   of 0.4.
@@ -209,9 +213,9 @@ Let's go through them line by line.
 * The last line, `set_caption(...)`, sets another *table property*: the 
   table caption.
 
-Incidentally, I've used a dplyr style to set these properties, chaining calls
-together in a pipe. But you don't need to do that. You can also set properties
-directly. Here's a set of calls that do exactly the same as the above:
+By the way, I've used tidyverse style to set these properties, chaining calls
+together in a pipe. You can also set properties directly. Here's a set of calls
+that do exactly the same as the above:
 
 
 ```{r}
@@ -263,7 +267,7 @@ To sum up, you set *cell properties* on a huxtable like this:
 
 
 ```{r, eval = FALSE}
-ht <- set_property(ht, rows, cols, value)
+ht <- set_property(ht, row = rows, col = cols, value)
 ```
 
 
@@ -332,8 +336,9 @@ prop_hux
 
 ## Selecting rows and columns
 
-When you call `set_property(ht, rows, cols, value)`, you can specify `rows`
-and `cols` in several different ways. 
+When you call `set_property(ht, row = rows, col = cols, value)`, you can specify
+`rows` and `cols` in several different ways. (We'll skip the argument names from
+now on.)
 
 * You can use numbers:
 
@@ -448,6 +453,29 @@ Here are some useful ways to change how cells are displayed.
         set_markdown_contents(3, 2, "~~2.10~~ **Sale!** 1.50")
   ```
 
+## Aligning text and numbers
+
+You can align cells to the left, right or center using the `align` property:
+
+  ```{r}
+  jams %>%
+        set_align(1, everywhere, "center")
+  ```
+
+You may want to align numbers so that the decimal points line up.
+To do this, set `align` to the character representing the decimal point
+in your locale -- typically `"."` or `","`.
+
+  ```{r}
+  numbers <- hux(Numbers = c(100, 3.14, 0.0002))
+  numbers %>%
+        set_align(-1, 1, ".") %>%
+        theme_basic()
+  ```
+
+This does not always give perfect results. For LaTeX output, one approach is to
+align these cells using the `siunitx` TeX package. You can do this by
+setting `options(huxtable.latex_siunitx_align = TRUE)`. 
 
 ## Borders
 
@@ -726,7 +754,7 @@ iris_hux_wide %>%
       set_width(0.8) %>% 
       set_font_size(8) %>% 
       set_lr_padding(2) %>% 
-      set_col_width(rep(c(0.4, 0.2, 0.2, 0.2, 0.2), 3)/3) %>% 
+      set_col_width(rep(c(0.4, 0.2, 0.2, 0.2, 0.2)/3, 3)) %>% 
       set_position("left")
 ```
 
@@ -793,9 +821,9 @@ huxtables. Like the `restack` functions, they take account of headers by default
 
 ```{r}
 list_of_iris <- split_across(iris_hux, c(7, 12))
-list_of_iris[[1]]
-list_of_iris[[2]]
-list_of_iris[[3]]
+list_of_iris[[1]] %>% set_caption("Setosa Irises")
+list_of_iris[[2]] %>% set_caption("Versicolor Irises")
+list_of_iris[[3]] %>% set_caption("Virginica Irises")
 ```
 
 
