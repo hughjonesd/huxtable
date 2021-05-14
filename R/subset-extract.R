@@ -92,8 +92,12 @@ NULL
   # for ht[1,] <- x, nargs() is still 4
 
   n_idx <- nargs() - 2L
+  i_was_missing <- FALSE
   if (n_idx == 1) {
-    if (missing(i)) i <- seq_len(ncol(x))
+    if (missing(i)) {
+      i <- seq_len(ncol(x))
+      i_was_missing <- TRUE
+    }
     j <- i
     i <- seq_len(nrow(x))
   }
@@ -149,6 +153,7 @@ NULL
   # class. As we have already dealt with new rows/cols, we still have a valid
   # huxtable - all attributes have the correct dimensions:
   res <- insert_contents(x, rows = ix, cols = jx, contents = value)
+
   if (is_hux(value)) {
     res <- replace_properties(res, ix, jx, value)
   }
