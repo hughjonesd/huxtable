@@ -2,6 +2,32 @@
 
 # huxtable (development version)
 
+* New behaviour: setting `colspan()` or `rowspan()` overwrites the content of
+  cells that have been shadowed. 
+  
+  ```r
+  
+  ht <- hux(c(1, 1), c(2, 2), c(3, 3))
+  ht <- set_all_borders(ht)
+  colspan(ht)[1, 1] <- 3
+  
+  # old behaviour                
+  ht[, c(2, 1, 3)]
+  ##   ┌──────────────────────────┐
+  ##   │                  2       │
+  ##   ├────────┬────────┬────────┤
+  ##   │      2 │      1 │      3 │
+  ##   └────────┴────────┴────────┘
+
+  # new behaviour
+  ht[, c(2, 1, 3)]
+  ##   ┌──────────────────────────┐
+  ##   │                  1       │
+  ##   ├────────┬────────┬────────┤
+  ##   │      2 │      1 │      3 │
+  ##   └────────┴────────┴────────┘
+  ```
+  
 * New option `huxtable.latex_siunitx_align` allows you to use the LaTeX
   `siunitx` package to handle decimal point alignment. This is `FALSE` by
   default.
