@@ -57,5 +57,5 @@ pkgdown::build_reference(lazy = FALSE)
 pkgdown::build_news()
 pkgdown::build_tutorials()
 
-message("Now commit and push to github.")
+message("Now commit, checkout master, merge:\ngit merge website-x.y.z\n and push to github.")
 message("Don't forget to reinstall the dev version afterwards...")
