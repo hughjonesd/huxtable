@@ -102,6 +102,8 @@ make_getter_setters("align", "cell",
 #' @template property-params
 #' @param value An integer vector or matrix.
 #'
+#' @inheritSection span-overwrites-shadows Cell content
+#'
 #' @seealso [merge_cells()], [merge_across()] and [merge_down()] for
 #' a higher-level interface.
 #'

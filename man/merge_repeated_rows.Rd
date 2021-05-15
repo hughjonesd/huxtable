@@ -25,6 +25,15 @@ information from the table.
 \details{
 If \code{row} contains gaps, results may be unexpected (and a warning is given).
 }
+\section{Cell content}{
+
+In merged cell ranges, only the top left cell's content is displayed.
+In addition, when you merge cells (either by setting \code{\link[=colspan]{colspan()}} or
+\code{\link[=rowspan]{rowspan()}}, or using \code{\link[=merge_cells]{merge_cells()}} and friends) the content of the top
+left cell is copied to other cells. This prevents unexpected changes to
+content if you reorder or subset rows and columns.
+}
+
 \examples{
 ht <- as_hux(jams[c(1, 2, 2, 3, 3, 4), ])
 ht <- add_columns(ht, c("Sugar", "30\%", "40\%", "30\%", "40\%", "30\%"),

@@ -397,7 +397,8 @@ has_builtin_ci <- function (x) {
 #' @param object A `tidy_override` object.
 #'
 #' @details
-#' `tidy_override` allows you to replace some columns of `tidy(x)` with your own data.
+#' `tidy_override` allows you to replace some columns of `tidy(x)` with your own
+#' data.
 #'
 #' @return An object that can be passed in to `huxreg`.
 #'

@@ -23,6 +23,15 @@ The \code{ht} object.
 \code{merge_across()} creates multicolumn cells within each row.
 \code{merge_down()} creates multirow cells within each column.
 }
+\section{Cell content}{
+
+In merged cell ranges, only the top left cell's content is displayed.
+In addition, when you merge cells (either by setting \code{\link[=colspan]{colspan()}} or
+\code{\link[=rowspan]{rowspan()}}, or using \code{\link[=merge_cells]{merge_cells()}} and friends) the content of the top
+left cell is copied to other cells. This prevents unexpected changes to
+content if you reorder or subset rows and columns.
+}
+
 \examples{
 
 ht <- as_hux(matrix(1:12, 4, 3, byrow = TRUE))

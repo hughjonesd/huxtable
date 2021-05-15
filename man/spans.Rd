@@ -38,6 +38,15 @@ A cell with rowspan of 2 covers the cell directly below it. A cell with
 colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
 and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 }
+\section{Cell content}{
+
+In merged cell ranges, only the top left cell's content is displayed.
+In addition, when you merge cells (either by setting \code{\link[=colspan]{colspan()}} or
+\code{\link[=rowspan]{rowspan()}}, or using \code{\link[=merge_cells]{merge_cells()}} and friends) the content of the top
+left cell is copied to other cells. This prevents unexpected changes to
+content if you reorder or subset rows and columns.
+}
+
 \examples{
 
 letter_hux <- as_hux(matrix(LETTERS[1:9], 3, 3))

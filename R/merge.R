@@ -1,4 +1,15 @@
 
+#' @section Cell content:
+#' In merged cell ranges, only the top left cell's content is displayed.
+#' In addition, when you merge cells (either by setting [colspan()] or
+#' [rowspan()], or using [merge_cells()] and friends) the content of the top
+#' left cell is copied to other cells. This prevents unexpected changes to
+#' content if you reorder or subset rows and columns.
+#'
+#'
+#' @name span-overwrites-shadows
+NULL
+
 #' Merge a range of cells
 #'
 #' `merge_cells()` merges a rectangle of cells into a single displayed cell,
@@ -14,6 +25,9 @@
 #'   colspan(ht)[min_row, min_col] <- max_col - min_col + 1
 #'   rowspan(ht)[min_row, min_col] <- max_row - min_row + 1
 #' ```
+#'
+#' @inheritSection span-overwrites-shadows Cell content
+#'
 #' @return The `ht` object.
 #'
 #' @family cell merging
@@ -46,10 +60,12 @@ merge_cells <- function (ht, row, col) {
 
 #' Merge cells across rows or down columns
 #'
-#' `merge_across()` creates multicolumn cells within each row. 
+#' `merge_across()` creates multicolumn cells within each row.
 #' `merge_down()` creates multirow cells within each column.
 #'
 #' @inherit merge_cells params return
+#'
+#' @inheritSection span-overwrites-shadows Cell content
 #'
 #' @export
 #'
@@ -98,13 +114,15 @@ merge_down <- function (ht, row, col) {
 #' contiguous groups of identical cells. These are merged
 #' by setting [rowspan()]. Doing this helps remove redundant
 #' information from the table.
-#' 
+#'
 #' @inherit merge_cells params return
 #'
 #' @export
 #'
 #' @details
 #' If `row` contains gaps, results may be unexpected (and a warning is given).
+#'
+#' @inheritSection span-overwrites-shadows Cell content
 #'
 #' @family cell merging
 #'

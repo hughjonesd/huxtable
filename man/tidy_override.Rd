@@ -40,7 +40,8 @@ Use \code{tidy_override} and \code{tidy_replace} to provide your own p values,
 confidence intervals etc. for a model.
 }
 \details{
-\code{tidy_override} allows you to replace some columns of \code{tidy(x)} with your own data.
+\code{tidy_override} allows you to replace some columns of \code{tidy(x)} with your own
+data.
 
 \code{tidy_replace} allows you to replace the result of \code{tidy(x)} entirely.
 }
