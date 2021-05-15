@@ -150,14 +150,17 @@ reference:
     desc: Manage LaTeX packages for huxtable
     contents:
       - matches("latex_dependencies")
+  - title: "Regression tables"
+    desc: Create a table of regressions
+    contents:
+      - huxreg
+      - tidy_override
+      - tidy_replace
   - title: "Miscellaneous"
     desc: Other functions
     contents:
       - hux_logo
       - jams
-      - huxreg
-      - tidy_override
-      - tidy_replace
       - sanitize
 
 tutorials:
