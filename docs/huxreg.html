@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2021-05-01" />
+<meta name="date" content="2021-05-15" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -167,7 +167,7 @@ pre code {
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author">David Hugh-Jones</h4>
-<h4 class="date">2021-05-01</h4>
+<h4 class="date">2021-05-15</h4>
 
 </div>
 
@@ -649,16 +649,9 @@ huxreg(
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     as.Date, as.Date.numeric</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lmtest&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:git2r&#39;:
-## 
-##     reset</code></pre>
 <pre class="r"><code>library(sandwich)
-lm_robust &lt;- coeftest(lm1, vcov = vcovHC)
+lm_robust &lt;- coeftest(lm1, vcov = vcovHC, save = TRUE)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
-<pre><code>## Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.
-## This message is displayed once per session.</code></pre>
 <table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-16">
 <col><col><col><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Normal SEs</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Robust SEs</th></tr>
@@ -677,7 +670,7 @@ huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code><
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.912&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.912&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.912&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-675.703&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-675.703&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
