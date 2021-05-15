@@ -333,6 +333,18 @@ The web page background is <a href="https://en.wikipedia.org/wiki/Piet_Mondrian"
 <h3>News</h3>
 
 
+<h4>May 15, 2021: Huxtable 5.4.0 released</h4>
+
+<p>This release fixes some bugs. It also contains one change that
+may affect behaviour: when you merge cells (e.g. with <code>merge_cells()</code>
+or by setting <code>colspan</code> or <code>rowspan</code>), cell contents
+are copied from the top left cell to all the other "shadowed" cells. This
+means that if you later subset or reorder the huxtable, the contents of
+the merged cells won't change unexpectedly. Lastly, there is a new
+option <code>"huxtable.latex_siunitx_align"</code>, which can be used to
+align numbers on the decimal point using the TeX
+<a href = "https://ctan.org/pkg/siunitx?lang=en">"siunitx"</a> package.</p>
+
 <h4>May 1, 2021: Huxtable 5.3.0 released</h4>
 
 <p>This release improves how cell alignment is handled in LaTeX when

@@ -73,7 +73,7 @@ Character widths must be valid CSS or LaTeX dimensions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -202,27 +202,28 @@ that your cells no longer overrun.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>col_width</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>.2</span>, <span class='fl'>.8</span><span class='op'>)</span>
-<span class='fu'>col_width</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  Type Price 
-#&gt;   0.2   0.8 </div><div class='input'><span class='va'>jams</span><span class='op'>$</span><span class='va'>Notes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Notes"</span>,
+</div><div class='output co'>#&gt; <span class='warning'>Warning: number of items to replace is not a multiple of replacement length</span></div><div class='input'><span class='fu'>col_width</span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  Type Price Sugar 
+#&gt;   0.2   0.8   0.2 </div><div class='input'><span class='va'>jams</span><span class='op'>$</span><span class='va'>Notes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Notes"</span>,
       <span class='st'>"This year's finest"</span>, <span class='st'>""</span>, <span class='st'>""</span><span class='op'>)</span>
 <span class='va'>jams</span>
-</div><div class='output co'>#&gt;                            Type                Price  
-#&gt;                            Strawberry           1.90  
-#&gt;                            Raspberry            2.10  
-#&gt;                            Plum                 1.80  
+</div><div class='output co'>#&gt;                   Type           Price       Sugar       Notes  
+#&gt;                                            content              
+#&gt;                   Strawberr       1.90      40.00%        This  
+#&gt;                   y                                     year's  
+#&gt;                                                         finest  
+#&gt;                   Raspberry       2.10      35.00%              
+#&gt;                   Plum            1.80      50.00%              
 #&gt; 
-#&gt; Column names: Type, Price, Notes
-#&gt; 
-#&gt; 2/3 columns shown.</div><div class='input'><span class='fu'>set_col_width</span><span class='op'>(</span><span class='va'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>.4</span>, <span class='fl'>.5</span>, <span class='fl'>.1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                              Type            Price  
+#&gt; Column names: Type, Price, Sugar, Notes</div><div class='input'><span class='fu'>set_col_width</span><span class='op'>(</span><span class='va'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>.4</span>, <span class='fl'>.5</span>, <span class='fl'>.1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: number of items to replace is not a multiple of replacement length</span></div><div class='output co'>#&gt;                              Type            Price  
 #&gt;                              Strawberry       1.90  
 #&gt;                              Raspberry        2.10  
 #&gt;                              Plum             1.80  
 #&gt; 
-#&gt; Column names: Type, Price, Notes
+#&gt; Column names: Type, Price, Sugar, Notes
 #&gt; 
-#&gt; 2/3 columns shown.</div></pre>
+#&gt; 2/4 columns shown.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

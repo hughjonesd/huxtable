@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Combine rows or columns — cbind.huxtable" />
-<meta property="og:description" content="Combine rows or columns" />
+<meta property="og:description" content="These methods are called when one argument to cbind/rbind is a
+huxtable. As well as combining cell contents, they copy table, row,
+column and/or cell properties into the returned result." />
 
 
 
@@ -72,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -155,7 +157,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Combine rows or columns</p>
+    <p>These methods are called when one argument to <code>cbind</code>/<code>rbind</code> is a
+huxtable. As well as combining cell contents, they copy table, row,
+column and/or cell properties into the returned result.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for huxtable</span>
@@ -192,7 +196,7 @@ row properties (for cbind) and column properties (for rbind).</p>
 then cell properties will be copied to non-huxtables. Objects on the left
 or above get priority over those on the right or below.</p>
 <p>If <code>copy_cell_props</code> is <code>FALSE</code>, cells from non-huxtable objects will get the default properties.</p>
-<p>NB: You cannot bind huxtables with data frames, since the R method dispatch will always
+<p>You cannot bind huxtables with data frames, since the R method dispatch will always
 call the data frame method instead of the huxtable-specific code. For a solution, see
 <code><a href='add_rows.html'>add_columns()</a></code>.</p>
 
@@ -201,37 +205,25 @@ call the data frame method instead of the huxtable-specific code. For a solution
 <span class='va'>sugar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sugar"</span>, <span class='st'>"40%"</span>, <span class='st'>"35%"</span>, <span class='st'>"50%"</span><span class='op'>)</span>
 <span class='va'>jams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bold.html'>set_bold</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fl'>1</span>, <span class='va'>everywhere</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='va'>sugar</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                           <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
-#&gt;                           Strawberry    1.90   40.00%  
-#&gt;                           Raspberry     2.10   35.00%  
-#&gt;                           Plum          1.80   50.00%  
+</div><div class='output co'>#&gt;                   <span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'>Sugar content</span><span>   </span><span style='font-weight: bold;'> Sugar</span><span>  
+#&gt;                   Strawberry    1.90          40.00%   40.00%  
+#&gt;                   Raspberry     2.10          35.00%   35.00%  
+#&gt;                   Plum          1.80          50.00%   50.00%  
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='va'>sugar</span>,
+#&gt; Column names: Type, Price, Sugar,</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='va'>sugar</span>,
      copy_cell_props <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                            </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   Sugar  
-#&gt;                            Strawberry    1.90   40%    
-#&gt;                            Raspberry     2.10   35%    
-#&gt;                            Plum          1.80   50%    
+</div><div class='output co'>#&gt;                    </span><span style='font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>Price</span><span>   </span><span style='font-weight: bold;'>Sugar content</span><span>   Sugar  
+#&gt;                    Strawberry    1.90          40.00%   40%    
+#&gt;                    Raspberry     2.10          35.00%   35%    
+#&gt;                    Plum          1.80          50.00%   50%    
 #&gt; 
-#&gt; Column names: Type, Price,</div><div class='input'>
+#&gt; Column names: Type, Price, Sugar,</div><div class='input'>
 <span class='va'>jams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='text_color.html'>set_text_color</a></span><span class='op'>(</span><span class='va'>jams</span>,
      <span class='va'>everywhere</span>, <span class='fl'>1</span>, <span class='st'>"red"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Damson"</span>, <span class='fl'>2.30</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                               </span><span style='color: #BB0000;font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;                               </span><span style='color: #BB0000;'>Strawberry</span><span>      1.90  
-#&gt;                               </span><span style='color: #BB0000;'>Raspberry </span><span>      2.10  
-#&gt;                               </span><span style='color: #BB0000;'>Plum      </span><span>      1.80  
-#&gt;                               </span><span style='color: #BB0000;'>Damson    </span><span>      2.30  
-#&gt; 
-#&gt; Column names: Type, Price</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Damson"</span>, <span class='fl'>2.30</span><span class='op'>)</span>,
+</div><div class='output co'>#&gt; <span class='error'>Error in attr(ht2, a)[r, ] &lt;- attr(ht1, a)[nrow(ht1), ]: number of items to replace is not a multiple of replacement length</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>jams</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Damson"</span>, <span class='fl'>2.30</span><span class='op'>)</span>,
      copy_cell_props <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                               </span><span style='color: #BB0000;font-weight: bold;'>Type      </span><span>   </span><span style='font-weight: bold;'>  Price</span><span>  
-#&gt;                               </span><span style='color: #BB0000;'>Strawberry</span><span>      1.90  
-#&gt;                               </span><span style='color: #BB0000;'>Raspberry </span><span>      2.10  
-#&gt;                               </span><span style='color: #BB0000;'>Plum      </span><span>      1.80  
-#&gt;                               Damson       2.3      
-#&gt; 
-#&gt; Column names: Type, Price</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in names(x) &lt;- value: 'names' attribute [3] must be the same length as the vector [2]</span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

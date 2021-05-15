@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -305,7 +305,7 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
 
 <span class='fu'>huxreg</span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>lm2</span>, <span class='va'>glm1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            ─────────────────────────────────────────────────────────
-#&gt;                                    (1)           (2)           (3)  
+#&gt;                                (1)           (2)           (3)      
 #&gt;                          ───────────────────────────────────────────
 #&gt;              (Intercept)    37.885 ***    36.908 ***       64.400   
 #&gt;                             (2.074)       (2.191)      (17449.775)  
@@ -332,8 +332,9 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
         statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='op'>}</span>
-</div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
-#&gt;                                                            (1)  
+</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: sandwich</span></div><div class='output co'>#&gt; <span class='message'>Loading required namespace: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.</span>
+#&gt; <span class='message'><span style='color: #555555;'>This message is displayed once per session.</span><span></span></div><div class='output co'>#&gt;                ─────────────────────────────────────────────────
+#&gt;                                                   (1)           
 #&gt;                                        ─────────────────────────
 #&gt;                  (Intercept)                        37.885 ***  
 #&gt;                                                     (2.742)     
@@ -343,7 +344,7 @@ Alternatively, to manually insert your own statistics, see <code><a href='tidy_o
 #&gt;                  *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.        
 #&gt; 
 #&gt; Column names: names, model1</div><div class='input'>
-</div></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

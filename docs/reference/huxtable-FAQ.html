@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -196,12 +196,25 @@ HTML, you might do something like:</p><pre><span class='fu'><a href='caption.htm
 </pre></li>
 <li><p>How do I refer to tables in bookdown?</p>
 <p>As of version 4.3.0, this is handled automatically for you. Just
-set the label using <code><a href='label.html'>label()</a></code>, then in markdown text do e.g.:</p><pre>\\@ref(tab:my-table-label).
+set the label using <code><a href='label.html'>label()</a></code>, then in markdown text do e.g.:</p><pre>\@ref(tab:my-table-label).
 
 </pre></li>
 <li><p>I called <code><a href='https://hughjonesd.github.io/huxtable/'>library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
 printed!</p>
 <p>Set <code><a href='https://rdrr.io/r/base/options.html'>options(huxtable.knit_print_df = FALSE)</a></code>.</p></li>
+<li><p>How can I set a property on an arbitrary group of cells?</p>
+<p>If you can't use the <a href='mapping-functions.html'>mapping-functions</a> interface, and you want to
+set a property for multiple cells that aren't all in the same rows
+and/or columns, you could use a little-known fact about R subsetting.
+If you subset <code>ht[x]</code> where <code>x</code> is two-column numeric matrix, then
+each row of <code>x</code> indexes a single <code>(row, column)</code> cell. So, for example,
+here's how to set the background color of cells <code>(2,1)</code>, <code>(1, 3)</code> and
+<code>(4, 2)</code> of a huxtable:</p><pre><span class='va'>indices</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>2</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='background_color.html'>background_color</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span><span class='op'>[</span><span class='va'>indices</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"orange"</span>
+</pre>
+
+<p>Another useful trick sets properties on the diagonal, using <code><a href='https://rdrr.io/r/base/diag.html'>diag()</a></code>:</p><pre><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fu'><a href='background_color.html'>background_color</a></span><span class='op'>(</span><span class='va'>jams</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"grey"</span>
+</pre></li>
 <li><p>I have another problem.</p>
 <p>If you have a bug - i.e. a problem with the software - or have a feature
 request, please report it to

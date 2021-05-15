@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Merge repeated rows into multirow cells — merge_repeated_rows" />
-<meta property="og:description" content="Merge repeated rows into multirow cells" />
+<meta property="og:description" content="merge_repeated_rows() looks within each column for
+contiguous groups of identical cells. These are merged
+by setting rowspan(). Doing this helps remove redundant
+information from the table." />
 
 
 
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -155,7 +158,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Merge repeated rows into multirow cells</p>
+    <p><code>merge_repeated_rows()</code> looks within each column for
+contiguous groups of identical cells. These are merged
+by setting <code><a href='spans.html'>rowspan()</a></code>. Doing this helps remove redundant
+information from the table.</p>
     </div>
 
     <pre class="usage"><span class='fu'>merge_repeated_rows</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>row</span>, <span class='va'>col</span><span class='op'>)</span></pre>
@@ -182,9 +188,7 @@
     <p>The <code>ht</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Repeated rows in each column are merged into cells with
-<code>rowspan &gt; 1</code>.</p>
-<p>If <code>row</code> contains gaps, results may be unexpected (and a warning is given).</p>
+    <p>If <code>row</code> contains gaps, results may be unexpected (and a warning is given).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other cell merging: 
@@ -198,9 +202,9 @@
 <span class='va'>ht</span>
 </div><div class='output co'>#&gt;                            Type         Sugar   Price  
 #&gt;                            Strawberry   30%      1.90  
-#&gt;                                         40%            
+#&gt;                            Strawberry   40%      1.90  
 #&gt;                            Raspberry    30%      2.10  
-#&gt;                                         40%            
+#&gt;                            Raspberry    40%      2.10  
 #&gt;                            Plum         30%      1.80  
 #&gt; 
 #&gt; Column names: Type, , Price</div><div class='input'><span class='fu'>merge_repeated_rows</span><span class='op'>(</span><span class='va'>ht</span><span class='op'>)</span>
@@ -214,9 +218,9 @@
 #&gt; Column names: Type, , Price</div><div class='input'><span class='fu'>merge_repeated_rows</span><span class='op'>(</span><span class='va'>ht</span>, <span class='va'>everywhere</span>, <span class='st'>"Type"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                            Type         Sugar   Price  
 #&gt;                            Strawberry   30%      1.90  
-#&gt;                                         40%            
+#&gt;                                         40%      1.90  
 #&gt;                            Raspberry    30%      2.10  
-#&gt;                                         40%            
+#&gt;                                         40%      2.10  
 #&gt;                            Plum         30%      1.80  
 #&gt; 
 #&gt; Column names: Type, , Price</div></pre>

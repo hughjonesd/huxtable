@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.4.0</span>
       </span>
     </div>
 
@@ -196,7 +196,11 @@ requires the the xetex or xelatex engine, which can be set using an .rmd
 header option. Note that <code><a href='quick-output.html'>quick_pdf()</a></code> may use pdflatex. The default is
 <code>FALSE</code>.</p></li>
 <li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.long_minus')</a></code>. If <code>TRUE</code>, prints long minus signs
-for numbers. The default is <code>FALSE</code>.</p></li>
+for numbers. The default is <code>FALSE</code>. In LaTeX output, this option is
+overridden by <code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.latex_siunitx_align')</a></code>.</p></li>
+<li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.latex_siunitx_align')</a></code>. If <code>TRUE</code>, uses the <code>\tablenum</code>
+macro from the "siunitx" package to align numbers when <code><a href='align.html'>align(ht)</a></code> is <code>"."</code>
+or similar. See <code><a href='align.html'>align()</a></code> for details. The default is <code>FALSE</code>.</p></li>
 <li><p><code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autoformat_number_format')</a></code> and
 <code><a href='https://rdrr.io/r/base/options.html'>options('huxtable.autoformat_align')</a></code> are lists. The list names are base R
 classes. <code><a href='huxtable.html'>huxtable()</a></code> with <code>autoformat = TRUE</code> will set <code><a href='number_format.html'>number_format()</a></code> and
