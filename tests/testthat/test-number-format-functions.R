@@ -6,6 +6,8 @@ test_that("fmt_percent", {
   expect_silent(number_format(ht)[2, ] <- fmt_percent(2))
   expect_match(to_screen(ht), "25.0%")
   expect_match(to_screen(ht), "75.00%")
+  expect_silent(number_format(ht)[2, ] <- fmt_percent(2, decimal.mark = ","))
+  expect_match(to_screen(ht), "75,00%")
 })
 
 

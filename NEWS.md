@@ -1,5 +1,7 @@
 # huxtable (development version)
 
+* Add `format` and `...` options to `fmt_percent()` to allow flexible
+  formatting via `formatC()`.
 
 # huxtable 5.4.0
 

@@ -4,10 +4,12 @@
 \alias{fmt_percent}
 \title{Format numbers as percent}
 \usage{
-fmt_percent(digits = 1)
+fmt_percent(digits = 1, format = "f", ...)
 }
 \arguments{
 \item{digits}{How many digits to print.}
+
+\item{format, ...}{Passed into \code{\link[=formatC]{formatC()}}.}
 }
 \value{
 An object you can pass into \code{\link[=number_format]{number_format()}}.

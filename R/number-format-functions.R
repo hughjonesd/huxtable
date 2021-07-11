@@ -1,6 +1,6 @@
 
 
-#' @description 
+#' @description
 #' `fmt_` functions are designed to work with [number_format()].
 #'
 #' @return An object you can pass into [number_format()].
@@ -9,8 +9,9 @@ NULL
 
 #' Format numbers as percent
 #'
-#' 
+#'
 #' @param digits How many digits to print.
+#' @param format,... Passed into [formatC()].
 #'
 #' @inherit fmt-numbers description return
 #'
@@ -25,9 +26,9 @@ NULL
 #' set_number_format(jams, -1, "Sugar",
 #'       fmt_percent(1))
 #'
-fmt_percent <- function (digits = 1) {
+fmt_percent <- function (digits = 1, format = "f", ...) {
   list(function (x) {
-    paste0(formatC(round(x * 100, digits), format = "f", digits = digits), "%")
+    paste0(formatC(round(x * 100, digits), format = format, ..., digits = digits), "%")
   })
 }
 

@@ -8,7 +8,10 @@
 This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
-
+\itemize{
+\item Add \code{format} and \code{...} options to \code{fmt_percent()} to allow flexible
+formatting via \code{formatC()}.
+}
 }
 
 \section{huxtable 5.4.0}{
