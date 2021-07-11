@@ -7,6 +7,10 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+
+}
+
 \section{huxtable 5.4.0}{
 \itemize{
 \item New behaviour: setting \code{colspan()} or \code{rowspan()} overwrites the

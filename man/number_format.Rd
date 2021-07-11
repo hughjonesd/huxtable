@@ -95,8 +95,8 @@ set_number_format(ht_bands, NA)
 
 }
 \seealso{
-\code{options("huxtable.long_minus")} in \link{huxtable-options} for pretty-printing
-minus signs.
+\code{\link[=fmt_pretty]{fmt_pretty()}} and \code{\link[=fmt_percent]{fmt_percent()}}.\code{options("huxtable.long_minus")}
+in \link{huxtable-options} for pretty-printing minus signs.
 
 Other formatting functions: 
 \code{\link{background_color}()},

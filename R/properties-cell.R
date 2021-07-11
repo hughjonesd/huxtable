@@ -450,8 +450,8 @@ make_getter_setters("rotation", "cell",
 #' are useful shortcuts for common formatting functions.
 #'
 #' @family formatting functions
-#' @seealso `options("huxtable.long_minus")` in [huxtable-options] for pretty-printing
-#'   minus signs.
+#' @seealso [fmt_pretty()] and [fmt_percent()].`options("huxtable.long_minus")`
+#' in [huxtable-options] for pretty-printing minus signs.
 #'
 #' @examples
 #' ht <- huxtable(

@@ -112,3 +112,19 @@ test_that("Decimal padding works", {
         )
   # the characters are non-breaking spaces
 })
+
+
+test_that("Number formatting with non-standard decimal point", {
+  skip("Just too hard to do at the moment.")
+
+  oo_od_local <- options(OutDec = ",")
+  on.exit(options(oo_od_local))
+
+  # We set a name to avoid matching "Column names: 1,51"
+  ht <- huxtable(a = 1.51)
+  number_format(ht) <- "%.2f"
+  expect_match(
+    to_screen(ht),
+    "1,51"
+  )
+})

@@ -54,7 +54,7 @@ clean_contents <- function(
       numeral <- sub("([eE])-", paste0("\\1", long_minus), numeral)
       numeral
     }
-    contents[] <- stringr::str_replace_all(contents, NUMBER_REGEX, lengthen_minus)
+    contents[] <- stringr::str_replace_all(contents, number_regex(), lengthen_minus)
   }
 
   if (output_type == "rtf") {
@@ -117,17 +117,19 @@ numeral_formatter.numeric <- function (x) {
 }
 
 
-# Breakdown:
+# Breakdown of
 # (                     begin capturing group
 # -?                    optional minus sign
 # [0-9]*                followed by any number of digits
-# \\.?                  optionally followed by a decimal
+# \\.?                  optionally followed by a decimal point
 # [0-9]+                which may also be followed by any number of digits
 # ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
 #                       along with (optionally) a sign preceding the digits
 #                       specifying the level of the exponent.
 # )                     end capturing group
-NUMBER_REGEX <- "(-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?)"
+number_regex <- function () {
+  paste0("(-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?)")
+}
 
 
 # find each numeric substring, and replace it:
@@ -143,7 +145,7 @@ format_numbers <- function (string, num_fmt) {
     result
   }
 
-  stringr::str_replace_all(string, NUMBER_REGEX, format_numeral)
+  stringr::str_replace_all(string, number_regex(), format_numeral)
 }
 
 
@@ -197,7 +199,7 @@ add_tablenum <- function (col, pad_chars) {
   tn_options[non_dot] <- sprintf("[output-decimal-marker = {%s}]", pad_chars[non_dot])
 
   replacements <- paste0("\\\\tablenum", tn_options,"{\\1}")
-  stringr::str_replace_all(col, NUMBER_REGEX, replacements)
+  stringr::str_replace_all(col, number_regex(), replacements)
 }
 
 
