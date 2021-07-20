@@ -11,6 +11,8 @@ This help page simply gives the contents of NEWS.md.
 \itemize{
 \item Add \code{format} and \code{...} options to \code{fmt_percent()} to allow flexible
 formatting via \code{formatC()}.
+\item \code{add_footnote()} gets an explicit \code{number_format} argument which is
+\code{NA} by default.
 }
 }
 

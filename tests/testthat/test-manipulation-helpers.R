@@ -131,3 +131,12 @@ test_that("add_rows and add_columns don't break with matrices", {
   prob <- rbind(ht, rbind(1,1))
   expect_equivalent(length(row_height(prob)), 3)
 })
+
+
+test_that("add_footnote sets number_format correctly", {
+  ht <- hux(1)
+  ht2 <- add_footnote(ht2, "a 1985 b")
+  expect_match(to_screen(ht2), "a 1985 b")
+  ht3 <- add_footnote(ht, "a 1 b", number_format = 2)
+  expect_match(to_screen(ht3), "a 1.00 b")
+})

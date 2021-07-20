@@ -12,6 +12,7 @@ NULL
 #' @param text Text for the footnote.
 #' @param border Width of the footnote's top border. Set to 0 for no border, or
 #'   `NULL` to leave the border unchanged.
+#' @param number_format Number format for the footnote cell.
 #' @param ... Other properties, passed to [set_cell_properties()] for the footnote cell.
 #'
 #' @return The modified huxtable
@@ -21,7 +22,7 @@ NULL
 #' jams <- add_footnote(jams,
 #'       "* subject to availability")
 #' jams
-add_footnote <- function(ht, text, border = 0.8, ...) {
+add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
   nr <- nrow(ht) + 1
   nc <- ncol(ht)
   ht <- rbind(ht, rep("", nc), copy_cell_props = FALSE)
@@ -33,6 +34,7 @@ add_footnote <- function(ht, text, border = 0.8, ...) {
   if (! is.null(border)) ht <- set_top_border(ht, nr, everywhere, border)
   wrap(ht)[nr, 1] <- TRUE
   if (! missing(...)) ht <- set_cell_properties(ht, nr, 1, ...)
+  ht <- set_number_format(ht, nr, 1, number_format)
 
   ht
 }

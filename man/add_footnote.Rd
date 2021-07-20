@@ -4,7 +4,7 @@
 \alias{add_footnote}
 \title{Add a row with a footnote}
 \usage{
-add_footnote(ht, text, border = 0.8, ...)
+add_footnote(ht, text, border = 0.8, number_format = NA, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -13,6 +13,8 @@ add_footnote(ht, text, border = 0.8, ...)
 
 \item{border}{Width of the footnote's top border. Set to 0 for no border, or
 \code{NULL} to leave the border unchanged.}
+
+\item{number_format}{Number format for the footnote cell.}
 
 \item{...}{Other properties, passed to \code{\link[=set_cell_properties]{set_cell_properties()}} for the footnote cell.}
 }

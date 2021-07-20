@@ -2,6 +2,9 @@
 
 * Add `format` and `...` options to `fmt_percent()` to allow flexible
   formatting via `formatC()`.
+* `add_footnote()` gets an explicit `number_format` argument which is `NA`
+  by default.
+  
 
 # huxtable 5.4.0
 
