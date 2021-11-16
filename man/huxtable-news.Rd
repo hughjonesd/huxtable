@@ -372,8 +372,8 @@ regressions. This will be available from the next version of
 \itemize{
 \item Huxtables can now be printed directly in Word documents and
 Powerpoint presentations, thanks to the \code{flextable} package and
-recent versions of Pandoc. (Powerpoint printing requires
-Pandoc >= 2.4.0.)
+recent versions of Pandoc. (Powerpoint printing requires Pandoc >=
+2.4.0.)
 \item New “wrapleft” and “wrapright” options to \code{position()} allow text
 wrapping around tables.
 \item New \code{set_outer_border_colors()} and \code{set_outer_border_styles()}
@@ -400,8 +400,8 @@ of latex packages.
 
 \section{huxtable 4.3.0}{
 \itemize{
-\item More work on TeX. Tables \emph{should} now compile when raw_attributes
-is not set.
+\item More work on TeX. Tables \emph{should} now compile when raw_attributes is
+not set.
 \item New \code{map_xxx} functions to set properties variably by cell values.
 \item Functions for mapping properties variably: \code{by_rows}, \code{by_values},
 \code{by_ranges}, \code{by_quantiles} etc.
@@ -442,8 +442,8 @@ add
 
 md_extensions: +raw_attribute
 
-to your YAML header for this to work, and you will need a recent
-(> 2.0.0) version of Pandoc.
+to your YAML header for this to work, and you will need a recent (>
+2.0.0) version of Pandoc.
 }
 }
 }
@@ -506,8 +506,8 @@ cbind/rbind.
 \item cbind and rbind work.
 }
 \item Bugfix: HTML cols were printed with ‘width: NA’.
-\item Bugfix: width, col_width etc. can be reset to a number after
-setting them to a string.
+\item Bugfix: width, col_width etc. can be reset to a number after setting
+them to a string.
 \itemize{
 \item The (undocumented) ability to mix numeric and non-numeric values
 for padding and/border widths has been removed. If you want a

@@ -6,6 +6,7 @@
   by default.
   
 
+
 # huxtable 5.4.0
 
 * New behaviour: setting `colspan()` or `rowspan()` overwrites the content of
