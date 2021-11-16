@@ -53,8 +53,7 @@ test_that("mutate, mutate_ and transmute work", {
 
   ht4 <- dplyr::transmute(ht, x = a + b, a = a + b)
   expect_equivalent(ht4$x, c(2, 4, 6))
-  expect_equivalent(bold(ht4)[, 1], c(FALSE, FALSE, FALSE))
-  expect_equivalent(bold(ht4)[, 2], c(TRUE, FALSE, FALSE))
+  expect_equivalent(bold(ht4)[, "a"], c(TRUE, FALSE, FALSE))
 
   expect_silent(ht5 <- dplyr::mutate(ht, a = NULL))
   expect_equivalent(dim(font(ht5)), c(3, 1))
