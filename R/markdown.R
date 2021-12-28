@@ -61,6 +61,9 @@ render_markdown <- function (text, type) {
                      FUN.VALUE = character(1)
                    )
                  },
+    # we return markdown unaltered for flextable b/c it will be handled
+    # by ftExtra
+    "word"     = text,
     vapply(text, commonmark::markdown_text, FUN.VALUE = character(1),
           extensions = "strikethrough")
   )

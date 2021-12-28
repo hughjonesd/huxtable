@@ -62,7 +62,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     for (r in seq_len(nrow(md_cell_refs))) {
       hr <- md_cell_refs[r, 1]
       hc <- md_cell_refs[r, 2]
-      cell <- x[[hr, hc]]
+      cell <- cc[[hr, hc]]
       ft <- flextable::compose(ft, i = hr, j = hc,
             value = ftExtra::as_paragraph_md(cell, .from = "commonmark+strikeout"))
     }
@@ -151,8 +151,9 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     if (flextable_version >= "0.5.5"){
       ft <- flextable::set_caption(ft, caption(x))
     } else {
-      message("Use of table captions requires \"flextable\" package version >= 0.5.5. Type:\n",
-            " install.packages(\"flextable\")")
+      message("Use of table captions requires \"flextable\" package version >= 0.5.5.",
+              "To upgrade, type:\n",
+              " install.packages(\"flextable\")")
     }
   }
 
