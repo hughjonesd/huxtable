@@ -3,6 +3,9 @@ title: "Introduction to Huxtable"
 author: "David Hugh-Jones"
 date: "`r Sys.Date()`"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
   html_document:
     toc: yes
     toc_depth: 2
@@ -10,10 +13,8 @@ mainfont: Calibri
 monofont: LucidaConsole
 linkcolor: olive
 urlcolor: olive
-vignette: >
-  %\VignetteIndexEntry{Introduction to huxtable}    
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
+vignette: |
+  %\VignetteIndexEntry{Introduction to huxtable}     %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
@@ -448,6 +449,19 @@ Here are some useful ways to change how cells are displayed.
         set_markdown_contents(1, 2, "*Price* of jam") %>% 
         set_markdown_contents(3, 2, "~~2.10~~ **Sale!** 1.50")
   ```
+* By default, huxtable will escape special characters in your cells. To display
+  special characters such as LaTeX maths, set the `escape_contents` property to
+  `FALSE`:
+  
+  ```{r}
+  new_row <- if (is_latex) c("Imaginary jam", "$e^{-i\\pi}$") else 
+               c("Copyright jam", "&copy;")
+  
+  jams %>%
+        insert_row(new_row, after = 4) %>%
+        set_escape_contents(5, 2, FALSE)
+ 
+  ```
 
 ## Aligning text and numbers
 
@@ -552,6 +566,7 @@ Or you can add a new column the same way.
 
 
 ```{r}
+options(error=recover)
 jams$Sugar <- c("Sugar content", "40%", "50%", "30%")
 jams
 ```
