@@ -156,7 +156,7 @@ to_screen.huxtable <- function (
             "right"  = pad_width,
             "center" = floor(pad_width/2)
           )
-    result <- paste0(strrep(" ", pad_width), result)
+    result <- paste0(strrep(" ", max(pad_width, 0)), result)
     result <- paste(result, collapse = "\n")
     result <- paste0(result, "\n")
   } else {
