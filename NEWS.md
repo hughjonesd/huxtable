@@ -4,6 +4,7 @@
   formatting via `formatC()`.
 * `add_footnote()` gets an explicit `number_format` argument which is `NA`
   by default.
+* Bugfix: infinite loop with wide characters in `to_screen()`.
   
 
 

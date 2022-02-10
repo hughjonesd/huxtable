@@ -13,6 +13,7 @@ This help page simply gives the contents of NEWS.md.
 formatting via \code{formatC()}.
 \item \code{add_footnote()} gets an explicit \code{number_format} argument which is
 \code{NA} by default.
+\item Bugfix: infinite loop with wide characters in \code{to_screen()}.
 }
 }
 
