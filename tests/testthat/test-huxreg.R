@@ -152,6 +152,7 @@ test_that("huxreg stars printed correctly", {
 
 test_that("huxreg works for models without tidy p values", {
   skip_if_not_installed("lme4")
+  skip_if_not_installed("broom.mixed")
 
   expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris),
         statistics = "nobs"), "p values")
