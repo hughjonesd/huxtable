@@ -240,7 +240,10 @@ test_that("Bugfix: print_screen with colnames = FALSE prints final newline", {
 
 test_that("Bugfix: wide characters lead to infinite loop in to_screen", {
   w <- options(width = 100)
-  on.exit(options(w))
+  on.exit({
+    setTimeLimit() # resets time limit
+    options(w)
+  })
   chars <- sapply(32:5000, intToUtf8)
   wide_chars <- chars[sapply(chars, stringi::stri_width) == 2]
   wide_strings <- rep(paste(wide_chars[101:120], collapse = ""), 5)
