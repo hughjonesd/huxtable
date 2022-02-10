@@ -33,6 +33,11 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
 
       - uses: r-lib/actions/setup-tinytex@v1
+
+      - run: tlmgr update --self
+        env:
+          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
+
       - run: tlmgr install adjustbox ulem wrapfig threeparttable
         env:
           CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
