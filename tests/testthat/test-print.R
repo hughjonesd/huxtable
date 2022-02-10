@@ -236,3 +236,16 @@ test_that("Bugfix: print_screen with colnames = FALSE prints final newline", {
   s <- to_screen(h, colnames = FALSE)
   expect_match(s, "\\n$")
 })
+
+
+test_that("Bugfix: wide characters lead to infinite loop in to_screen", {
+  w <- options(width = 100)
+  on.exit(options(w))
+  chars <- sapply(32:5000, intToUtf8)
+  wide_chars <- chars[sapply(chars, stringi::stri_width) == 2]
+  wide_strings <- rep(paste(wide_chars[101:120], collapse = ""), 5)
+  df <- as.data.frame(as.list(wide_strings), col.names = paste0("V", 1:5))
+  ht <- as_huxtable(df)
+  setTimeLimit(elapsed = 1, transient = TRUE)
+  expect_silent(to_screen(ht))
+})
