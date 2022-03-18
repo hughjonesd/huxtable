@@ -166,6 +166,11 @@ NULL
 #'   You may have loaded another package with a `caption` method, e.g. "xtable".
 #'   Try loading huxtable after xtable.
 #'
+#' * How can I get line breaks in my cells?
+#'
+#'   Just insert a line break `"\n"` in the cell contents. Then make sure that 
+#'   [width()] is set and [wrap()] is `TRUE` (it is by default).
+#'
 #' * How can I change the font size, font etc. of captions?
 #'
 #'   There are no direct commands for this. You have to use raw HTML/TeX/other

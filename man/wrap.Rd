@@ -30,7 +30,9 @@ Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 \code{set_wrap()} returns the modified huxtable.
 }
 \description{
-Text wrapping only really makes sense when the table \code{\link[=width]{width()}} has been set.
+Text wrapping only works when the table \code{\link[=width]{width()}} has been set. In
+particular, if you want to insert newlines in cells, then you should
+set both \code{\link[=width]{width()}} and \code{wrap} to \code{TRUE}.
 }
 \examples{
 

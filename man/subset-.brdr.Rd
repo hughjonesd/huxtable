@@ -21,7 +21,7 @@ Replace a subset of a brdr object
 }
 \details{
 You probably don't need to call this directly. If you want
-to access border thicknesses, do e.g.\if{html}{\out{<div class="r">}}\preformatted{l_borders <- brdr_thickness(left_border(ht))
+to access border thicknesses, do e.g.\if{html}{\out{<div class="sourceCode r">}}\preformatted{l_borders <- brdr_thickness(left_border(ht))
 }\if{html}{\out{</div>}}
 
 which will give you a matrix of numbers.

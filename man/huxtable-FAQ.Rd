@@ -38,6 +38,10 @@ no applicable method for 'caption<-' applied to an object of class "c('huxtable'
 
 You may have loaded another package with a \code{caption} method, e.g. "xtable".
 Try loading huxtable after xtable.
+\item How can I get line breaks in my cells?
+
+Just insert a line break \code{"\\n"} in the cell contents. Then make sure that
+\code{\link[=width]{width()}} is set and \code{\link[=wrap]{wrap()}} is \code{TRUE} (it is by default).
 \item How can I change the font size, font etc. of captions?
 
 There are no direct commands for this. You have to use raw HTML/TeX/other
