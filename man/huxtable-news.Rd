@@ -14,6 +14,8 @@ formatting via \code{formatC()}.
 \item \code{add_footnote()} gets an explicit \code{number_format} argument which is
 \code{NA} by default.
 \item Bugfix: infinite loop with wide characters in \code{to_screen()}.
+\item Bugfix: duplicate colnames when exporting
+\code{huxreg(..., error_pos = "right")} to flextable.
 }
 }
 
@@ -533,8 +535,8 @@ rows.
 \item Bugfix: \code{as_Workbook} failing with non-numeric \code{width}.
 \item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel
 output.
-\item Bugfix: \code{as_flextable} borders not working in cells with
-colspan > 1.
+\item Bugfix: \code{as_flextable} borders not working in cells with colspan >
+1.
 \item Documentation bugfixes.
 \item Compatibility with broom 5.0.0 - thanks @alexpghayes
 }

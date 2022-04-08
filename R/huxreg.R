@@ -331,7 +331,11 @@ huxreg <- function (
   result <- set_bottom_border(result, final(), everywhere, outer_borders)
   result <- set_top_border(result, 1, everywhere, outer_borders)
   result <- set_bottom_border(result, c(1, nrow(coef_hux) + 1), -1, borders)
-  colnames(result) <- c("names", names_or(models, paste0("model", seq_along(models))))
+
+  model_names <- names_or(models, paste0("model", seq_along(models)))
+  if (error_pos == "right") model_names <- interleave(model_names,
+                                                 paste0(model_names, ".error"))
+  colnames(result) <- c("names", model_names)
   if (error_pos == "right") result <- set_colspan(result, 1, evens, 2)
   align(result)[1, ]    <- "center"
   align(result)[-1, -1] <- align

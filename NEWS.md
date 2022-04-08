@@ -5,7 +5,8 @@
 * `add_footnote()` gets an explicit `number_format` argument which is `NA`
   by default.
 * Bugfix: infinite loop with wide characters in `to_screen()`.
-  
+* Bugfix: duplicate colnames when exporting `huxreg(..., error_pos = "right")`
+  to flextable.
 
 
 # huxtable 5.4.0
