@@ -225,7 +225,7 @@ make_getter_setters("text_color", "cell")
 #'
 #' Text wrapping only works when the table [width()] has been set. In
 #' particular, if you want to insert newlines in cells, then you should
-#' set both [width()] and `wrap` to `TRUE`.
+#' set a value for [width()] and set `wrap` to `TRUE`.
 #'
 #' @template getset-cell
 #' @templateVar attr_name wrap

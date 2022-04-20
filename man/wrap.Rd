@@ -32,7 +32,7 @@ Set to \code{NA} to reset to the default, which is \code{TRUE}.}
 \description{
 Text wrapping only works when the table \code{\link[=width]{width()}} has been set. In
 particular, if you want to insert newlines in cells, then you should
-set both \code{\link[=width]{width()}} and \code{wrap} to \code{TRUE}.
+set a value for \code{\link[=width]{width()}} and set \code{wrap} to \code{TRUE}.
 }
 \examples{
 
