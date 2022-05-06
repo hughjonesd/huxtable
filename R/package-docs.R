@@ -168,7 +168,7 @@ NULL
 #'
 #' * How can I get line breaks in my cells?
 #'
-#'   Just insert a line break `"\n"` in the cell contents. Then make sure that 
+#'   Just insert a line break `"\n"` in the cell contents. Then make sure that
 #'   [width()] is set and [wrap()] is `TRUE` (it is by default).
 #'
 #' * How can I change the font size, font etc. of captions?
@@ -219,8 +219,8 @@ NULL
 #'
 #' * I have another problem.
 #'
-#'   If you have a bug - i.e. a problem with the software - or have a feature
-#'   request, please report it to
+#'   If you have a bug - i.e. there is something wrong with the software -
+#'   or a feature request, please report it to
 #'   <https://github.com/hughjonesd/huxtable/issues>.
 #'   Otherwise, ask a question on [StackOverflow](https://stackoverflow.com) or
 #'   <https://community.rstudio.com>. That way, other people will benefit from

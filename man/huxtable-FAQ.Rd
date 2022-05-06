@@ -74,8 +74,8 @@ Another useful trick sets properties on the diagonal, using \code{\link[=diag]{d
 }
 \item I have another problem.
 
-If you have a bug - i.e. a problem with the software - or have a feature
-request, please report it to
+If you have a bug - i.e. there is something wrong with the software -
+or a feature request, please report it to
 \url{https://github.com/hughjonesd/huxtable/issues}.
 Otherwise, ask a question on \href{https://stackoverflow.com}{StackOverflow} or
 \url{https://community.rstudio.com}. That way, other people will benefit from

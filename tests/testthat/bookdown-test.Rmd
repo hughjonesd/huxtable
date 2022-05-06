@@ -13,7 +13,7 @@ if( ! ((x <- guess_knitr_output_format()) %in% c('html', 'latex'))) {
   stop("guessed output is ", x)
 }
 if (! huxtable:::use_bookdown_style_captions()) {
-  stop("huxtable:::use_bookdown_style_captions() returned false")
+  stop("huxtable:::use_bookdown_style_captions() returned FALSE")
 } 
 ```
 
