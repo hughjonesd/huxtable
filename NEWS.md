@@ -7,6 +7,7 @@
 * Bugfix: infinite loop with wide characters in `to_screen()`.
 * Bugfix: duplicate colnames when exporting `huxreg(..., error_pos = "right")`
   to flextable.
+* Bugfix: bookdown-style references weren't working in blogdown.
 
 
 # huxtable 5.4.0

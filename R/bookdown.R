@@ -2,7 +2,7 @@
 # Functions relating to bookdown
 
 
-in_bookdown <- function () {
+use_bookdown_style_captions <- function () {
   if (! is.null(book_opt <- getOption("huxtable.bookdown", NULL))) return(book_opt)
 
   if (! requireNamespace("knitr", quietly = TRUE)) return(FALSE)
@@ -11,8 +11,9 @@ in_bookdown <- function () {
   if (is.null(input_path)) return(FALSE)
   rmd_of <- rmarkdown::default_output_format(input_path)$name
 
-  return(grepl("bookdown", rmd_of))
+  return(grepl("bookdown|blogdown", rmd_of))
 }
+
 
 make_caption <- function(ht, label, format = c("html", "latex", "md")) {
   format <- match.arg(format)
@@ -22,7 +23,7 @@ make_caption <- function(ht, label, format = c("html", "latex", "md")) {
   if (is.na(label) || label == "") {
     return(raw_cap)
   }
-  if (! in_bookdown()) {
+  if (! use_bookdown_style_captions()) {
     return(raw_cap)
   }
 

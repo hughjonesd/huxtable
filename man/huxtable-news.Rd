@@ -16,6 +16,7 @@ formatting via \code{formatC()}.
 \item Bugfix: infinite loop with wide characters in \code{to_screen()}.
 \item Bugfix: duplicate colnames when exporting
 \code{huxreg(..., error_pos = "right")} to flextable.
+\item Bugfix: bookdown-style references weren’t working in blogdown.
 }
 }
 
