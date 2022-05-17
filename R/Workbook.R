@@ -143,7 +143,8 @@ as_Workbook.huxtable <- function (
     nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
     format_zero <- format_numbers(0, nf)
     num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else
-          if (is.numeric(contents[drow, dcol])) "NUMBER" else "GENERAL"
+               if (grepl("^0\\.0+%$", format_zero)) "PERCENT" else
+               if (is.numeric(contents[drow, dcol])) "NUMBER" else "GENERAL"
 
     borders <- get_all_borders(ht, drow, dcol) # list of numerics
     border_char <- names(borders)
