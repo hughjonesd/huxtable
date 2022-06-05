@@ -11,7 +11,9 @@ functionality to xtable, with a simpler interface.
 \section{Quick start}{
 
 
-To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\link[=as_huxtable]{as_huxtable()}}:\preformatted{ library(huxtable)
+To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\link[=as_huxtable]{as_huxtable()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ library(huxtable)
  employees <- huxtable(
          Names    = c("Hadley", "Yihui", "Dirk"),
          Salaries = c(1e5, 1e5, 1e5),
@@ -19,21 +21,25 @@ To create a huxtable object, use \code{\link[=huxtable]{huxtable()}} or \code{\l
        )
  car_hux <- as_hux(mtcars)
 
-}
+}\if{html}{\out{</div>}}
 
-You can then set properties which affect how the huxtable is displayed:\preformatted{ # make the first row bold:
+You can then set properties which affect how the huxtable is displayed:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ # make the first row bold:
  bold(employees)[1, ] <- TRUE
 
  # change the font size everywhere:
  font_size(employees) <- 10
-}
+}\if{html}{\out{</div>}}
 
-Or you can use a tidyverse style with the pipe operator:\preformatted{library(magrittr)
+Or you can use a tidyverse style with the pipe operator:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(magrittr)
 employees <- employees \%>\%
       set_font_size(10) \%>\%
       set_bold(1, everywhere, TRUE)
 
-}
+}\if{html}{\out{</div>}}
 
 For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
 read the vignette with \code{vignette('huxtable')}.

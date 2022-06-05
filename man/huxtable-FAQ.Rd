@@ -19,22 +19,28 @@ application. Or you can try \code{\link[=install_latex_dependencies]{install_lat
 In some rmarkdown and LaTeX formats, you also need to add LaTeX dependencies
 manually. Run \code{\link[=report_latex_dependencies]{report_latex_dependencies()}} and add
 the output to your LaTeX preamble, or in Rmarkdown formats, add it to the
-rmarkdown header like this:\preformatted{header-includes:
+rmarkdown header like this:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{header-includes:
   - \\usepackage\{array\}
   - \\usepackage\{caption\}
   ... et cetera
-}
+}\if{html}{\out{</div>}}
 \item Huxtable isn't working in my Rmarkdown \code{beamer_presentation} slides.
 
-You may need to set the beamer "fragile" option, like this:\preformatted{# Slide title \{.fragile\}
-}
+You may need to set the beamer "fragile" option, like this:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Slide title \{.fragile\}
+}\if{html}{\out{</div>}}
 \item Numbers in my cells look weird!
 
 You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options
 like \code{\link[base:options]{scipen}} usually have no effect.
-\item I ran \code{caption(ht) <- "Something"} and got an error message:\preformatted{Error in UseMethod("caption<-") :
+\item I ran \code{caption(ht) <- "Something"} and got an error message:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Error in UseMethod("caption<-") :
 no applicable method for 'caption<-' applied to an object of class "c('huxtable',   'data.frame')"
-}
+}\if{html}{\out{</div>}}
 
 You may have loaded another package with a \code{caption} method, e.g. "xtable".
 Try loading huxtable after xtable.
@@ -46,14 +52,18 @@ Just insert a line break \code{"\\n"} in the cell contents. Then make sure that
 
 There are no direct commands for this. You have to use raw HTML/TeX/other
 commands within the caption itself. For example to have a bold caption in
-HTML, you might do something like:\preformatted{set_caption(jams, "<b>Jam Prices</b>")
-}
+HTML, you might do something like:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{set_caption(jams, "<b>Jam Prices</b>")
+}\if{html}{\out{</div>}}
 \item How do I refer to tables in bookdown?
 
 As of version 4.3.0, this is handled automatically for you. Just
-set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:\preformatted{\\@ref(tab:my-table-label).
+set the label using \code{\link[=label]{label()}}, then in markdown text do e.g.:
 
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\@ref(tab:my-table-label).
+
+}\if{html}{\out{</div>}}
 \item I called \code{library(huxtable)} and now my \code{data.table} objects are getting
 printed!
 
@@ -66,12 +76,16 @@ and/or columns, you could use a little-known fact about R subsetting.
 If you subset \code{ht[x]} where \code{x} is two-column numeric matrix, then
 each row of \code{x} indexes a single \verb{(row, column)} cell. So, for example,
 here's how to set the background color of cells \verb{(2,1)}, \verb{(1, 3)} and
-\verb{(4, 2)} of a huxtable:\preformatted{indices <- matrix(c(2, 1, 1, 3, 4, 2), ncol = 2, byrow = TRUE)
-background_color(jams)[indices] <- "orange"
-}
+\verb{(4, 2)} of a huxtable:
 
-Another useful trick sets properties on the diagonal, using \code{\link[=diag]{diag()}}:\preformatted{diag(background_color(jams)) <- "grey"
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{indices <- matrix(c(2, 1, 1, 3, 4, 2), ncol = 2, byrow = TRUE)
+background_color(jams)[indices] <- "orange"
+}\if{html}{\out{</div>}}
+
+Another useful trick sets properties on the diagonal, using \code{\link[=diag]{diag()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{diag(background_color(jams)) <- "grey"
+}\if{html}{\out{</div>}}
 \item I have another problem.
 
 If you have a bug - i.e. there is something wrong with the software -

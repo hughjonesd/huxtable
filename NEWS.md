@@ -8,6 +8,7 @@
   - Quarto labels and captions will override huxtable-provided ones.
   - Quarto style references like `@table-label` only work with
     quarto labels.
+  - Please report any bugs!
 * Bugfix: infinite loop with wide characters in `to_screen()`.
 * Bugfix: duplicate colnames when exporting `huxreg(..., error_pos = "right")`
   to flextable.

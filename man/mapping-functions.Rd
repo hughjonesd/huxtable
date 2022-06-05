@@ -8,20 +8,28 @@
 This help page explains how to set properties differently for cells,
 depending on their contents.
 
-For example, in a table of p-values, you could bold cells where p < 0.05:\preformatted{  map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
-}
+For example, in a table of p-values, you could bold cells where p < 0.05:
 
-Or you can use red text for a particular value:\preformatted{  hxtbl \%>\% map_text_color(by_values("Warning" = "red"))
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  map_bold(pval_hux, by_ranges(0.05, c(TRUE, FALSE)))
+}\if{html}{\out{</div>}}
 
-There is a \code{map_...} function for each huxtable cell property. The syntax is:\preformatted{  map_property(ht, row, col, fn)
-}
+Or you can use red text for a particular value:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  hxtbl \%>\% map_text_color(by_values("Warning" = "red"))
+}\if{html}{\out{</div>}}
+
+There is a \code{map_...} function for each huxtable cell property. The syntax is:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  map_property(ht, row, col, fn)
+}\if{html}{\out{</div>}}
 
 where \code{property} is the property name.
 
 \code{row} and \code{col} specify ranges of rows and columns. See \link{rowspecs} for
-details. To set properties for the whole table, omit \code{row} and \code{col}:\preformatted{  map_property(ht, fn)
-}
+details. To set properties for the whole table, omit \code{row} and \code{col}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  map_property(ht, fn)
+}\if{html}{\out{</div>}}
 
 The \code{fn} argument is a \emph{mapping function} which maps cell contents to
 property values.

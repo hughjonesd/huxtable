@@ -18,6 +18,7 @@ formatting via \code{formatC()}.
 \item Quarto labels and captions will override huxtable-provided ones.
 \item Quarto style references like \verb{@table-label} only work with
 quarto labels.
+\item Please report any bugs!
 }
 \item Bugfix: infinite loop with wide characters in \code{to_screen()}.
 \item Bugfix: duplicate colnames when exporting
