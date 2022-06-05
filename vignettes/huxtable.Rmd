@@ -6,6 +6,7 @@ output:
   pdf_document:
     toc: yes
     toc_depth: '2'
+    latex_engine: xelatex
   html_document:
     toc: yes
     toc_depth: 2
@@ -17,6 +18,8 @@ vignette: >
   %\VignetteIndexEntry{Introduction to huxtable}     
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8} 
+header-includes:
+  - \usepackage{placeins}
 ---
 
 
