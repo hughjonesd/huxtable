@@ -54,6 +54,7 @@ Suggests:
     officer,
     openxlsx,
     psych,
+    quarto,
     rmarkdown,
     sandwich,
     scales,
