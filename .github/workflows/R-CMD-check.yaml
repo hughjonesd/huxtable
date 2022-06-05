@@ -41,6 +41,9 @@ jobs:
       - run: tlmgr install adjustbox ulem wrapfig threeparttable
         env:
           CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
+      - run: tlmgr install placeins
+        env:
+          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
 
       - name: Query dependencies
         run: |
