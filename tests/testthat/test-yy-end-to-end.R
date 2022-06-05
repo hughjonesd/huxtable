@@ -172,7 +172,7 @@ test_that("Word files", {
 test_that("quarto files", {
   skip_if_not_installed("quarto")
   qp <- quarto::quarto_path()
-  skip_if_not(file.exists(qp))
+  skip_if_not(is.character(qp))
 
   on.exit({
     for (f in c("quarto-test-out.pdf", "quarto-test-out.html"))
