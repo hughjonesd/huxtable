@@ -1,0 +1,53 @@
+---
+title: "Blogdown Article"
+author: "Joshua Born"
+date: '2022-05-02'
+output:
+  blogdown::html_page:
+    number_sections: true
+    toc: true
+    toc_depth: 5
+---
+
+```{r setup, include=FALSE}
+library(huxtable)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# Section with Huxtable Table
+
+```{r iris}
+head(iris) |> as_huxtable() |> set_caption('This is a table that should be numbered.')
+```
+
+Table \@ref(tab:iris) is cross-referenced.
+
+
+# Section with Huxtable Table and Manual Label
+
+```{r iris-label}
+head(iris) |> as_huxtable() |> set_caption('This is a table that should be numbered.') |> set_label('tab:foobar')
+```
+
+Table \@ref(tab:foobar) is cross-referenced.
+
+
+# Section with Kable Table
+
+```{r iris-kable}
+head(iris) |> knitr::kable(caption = 'This is a table that should be numbered.')
+```
+
+Table \@ref(tab:iris-kable) is cross-referenced.
+
+
+# Section with Figure
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, fig.cap = 'This is a figure that should be numbered.'}
+plot(pressure)
+```
+
+Figure \@ref(fig:pressure) is cross-referenced.

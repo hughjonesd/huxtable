@@ -1,0 +1,94 @@
+---
+title: "Quarto tester"
+format: html
+keep-md: true
+---
+
+
+```{r}
+#| echo: false
+library(huxtable)
+
+```
+
+
+
+```{r}
+getOption('huxtable.bookdown')
+knitr::pandoc_from()
+huxtable:::guess_knitr_output_format()
+huxtable:::in_bookdown()
+options(huxtable.bookdown = FALSE)
+options(huxtable.autolabel = FALSE)
+```
+
+# Caption via options
+
+```{r}
+#| tbl-cap: "Some jams"
+jams
+```
+
+# Caption and label via options
+
+Refer to @tbl-jams.
+
+```{r}
+#| label: tbl-jams
+#| tbl-cap: "Some jams"
+jams |> set_caption("Huxtable caption")
+```
+
+
+
+Non-tbl reference? Refer to @just-jams.
+
+```{r}
+#| label: just-jams
+#| tbl-cap: "Some jams"
+jams |> set_caption("Huxtable caption")
+```
+
+# Quarto-defined colwidths
+
+```{r}
+#| tbl-cap: "Motor cars, colwidths defined in text"
+#| tbl-colwidths: [50, 10, 30, 10, 10]
+
+mtcars <- cbind(rownames(mtcars), mtcars)
+as_hux(mtcars[1:5, 1:5]) |> 
+      map_background_color(by_cols(c("grey80", "white")))
+```
+
+# Markdown
+
+```{r}
+#| tbl-cap: "Jams with markdown"
+jams |> 
+      set_markdown_contents(1, 1, "*Italic*") |>
+      set_markdown_contents(1, 2, "**Bold**")
+```
+
+# Ordinary table for comparison
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
+| E    | F    | G    |
+| A    | G    | G    |
+
+: My Caption {#tbl-letters}
+
+See @tbl-letters.
+
+# Kable table
+
+Reference to @tbl-kable.
+
+```{r}
+#| tbl-cap: "Kable Cars"
+#| label: tbl-kable
+#| 
+library(knitr)
+knitr::kable(head(cars))
+```
