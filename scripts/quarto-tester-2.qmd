@@ -1,0 +1,54 @@
+---
+title: "Quarto tester"
+format: pdf
+keep-md: true
+---
+
+# Kable table
+
+Reference to @tbl-kable.
+
+```{r}
+#| tbl-cap: "Kable Cars"
+#| label: tbl-kable
+#| 
+library(knitr)
+knitr::kable(head(cars))
+```
+
+# Hux table
+
+Reference to @tbl-hux.
+
+```{r}
+#| tbl-cap: "Huxtable Jams"
+#| label: tbl-hux
+library(huxtable)
+jams
+
+```
+
+# Hux table, own label and caption
+
+Reference to @tbl-hux-internal.
+
+```{r}
+caption(jams) <- "Caption from within R"
+label(jams) <- "tbl-hux-internal"
+jams
+
+```
+
+
+# Hux table, what if we did both?
+
+R label: @tbl-hux-internal-2. Quarto label: @tbl-hux-quarto
+
+```{r}
+#| tbl-cap: "Caption from quarto"
+#| label: tbl-hux-quarto
+caption(jams) <- "Caption from within R"
+label(jams) <- "tbl-hux-internal-2"
+jams
+
+```
