@@ -52,3 +52,24 @@ label(jams) <- "tbl-hux-internal-2"
 jams
 
 ```
+
+
+
+# Hux table, complicated
+
+R label: @tbl-hux-complex
+
+```{r}
+#| tbl-cap: "Caption from quarto, complex table"
+#| label: tbl-hux-complex
+
+
+jams |> 
+  set_caption("Caption from R, complex table") |> 
+  set_background_color(2, 2, "red") |> 
+  set_bold(1, 2) |> 
+  set_colspan(3, 1, 2) |> 
+  set_bottom_border(1, everywhere) |> 
+  set_width(0.9)
+
+```
