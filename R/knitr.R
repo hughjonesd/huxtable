@@ -37,6 +37,7 @@ knit_print.huxtable <- function (x, options, ...) {
 
   res <- do.call(call_name, list(x))
 
+  in_quarto <- ! is.null(knitr::opts_knit$get("quarto.version"))
   res <- switch(of,
             latex = {
               latex_deps <- report_latex_dependencies(quiet = TRUE)
@@ -46,7 +47,9 @@ knit_print.huxtable <- function (x, options, ...) {
               }
               knitr::asis_output(res, meta = latex_deps)
             },
-            html = knitr::asis_output(htmlPreserve(res)),
+            html = knitr::asis_output(
+                     if (in_quarto) res else htmlPreserve(res)
+                   ),
             rtf  = knitr::raw_output(res),
             pptx = ,
             docx = knitr::knit_print(res),

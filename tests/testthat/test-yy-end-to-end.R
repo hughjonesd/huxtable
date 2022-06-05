@@ -169,6 +169,31 @@ test_that("Word files", {
 })
 
 
+test_that("quarto files", {
+  skip_if_not_installed("quarto")
+  qp <- quarto::quarto_path()
+  skip_if_not(file.exists(qp))
+
+  on.exit({
+    for (f in c("quarto-test-out.pdf", "quarto-test-out.html"))
+    if (file.exists(f)) try(file.remove(f), silent = TRUE)
+  })
+
+  expect_silent(
+    quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
+                            output_file = "quarto-test-out.pdf",
+                            debug = FALSE, quiet = TRUE)
+  )
+
+  expect_silent(
+    quarto::quarto_render("quarto-test.qmd", output_format = "html",
+                            output_file = "quarto-test-out.html",
+                            debug = FALSE, quiet = TRUE)
+  )
+
+})
+
+
 test_that("Works with fontspec", {
   skip_on_cran()
   skip_on_os("linux") # no Arial

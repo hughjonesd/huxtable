@@ -1,0 +1,14 @@
+---
+title: "Quarto tester"
+format: html
+---
+
+
+Reference to @tbl-hux.
+
+```{r}
+#| tbl-cap: "Huxtable Jams"
+#| label: tbl-hux
+library(huxtable)
+jams
+```
