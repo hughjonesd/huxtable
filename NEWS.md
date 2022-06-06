@@ -1,14 +1,15 @@
 # huxtable (development version)
 
-* Add `format` and `...` options to `fmt_percent()` to allow flexible
-  formatting via `formatC()`.
-* `add_footnote()` gets an explicit `number_format` argument which is `NA`
-  by default.
 * Huxtable should work with [Quarto](https://quarto.org) documents.
   - Quarto labels and captions will override huxtable-provided ones.
   - Quarto style references like `@table-label` only work with
     quarto labels.
   - Please report any bugs!
+* New convenience functions `stripe_rows()` and `stripe_columns()`.
+* Add `format` and `...` options to `fmt_percent()` to allow flexible
+  formatting via `formatC()`.
+* `add_footnote()` gets an explicit `number_format` argument which is `NA`
+  by default.
 * Bugfix: infinite loop with wide characters in `to_screen()`.
 * Bugfix: duplicate colnames when exporting `huxreg(..., error_pos = "right")`
   to flextable.

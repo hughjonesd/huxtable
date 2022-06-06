@@ -9,10 +9,6 @@ This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
 \itemize{
-\item Add \code{format} and \code{...} options to \code{fmt_percent()} to allow flexible
-formatting via \code{formatC()}.
-\item \code{add_footnote()} gets an explicit \code{number_format} argument which is
-\code{NA} by default.
 \item Huxtable should work with \href{https://quarto.org}{Quarto} documents.
 \itemize{
 \item Quarto labels and captions will override huxtable-provided ones.
@@ -20,6 +16,11 @@ formatting via \code{formatC()}.
 quarto labels.
 \item Please report any bugs!
 }
+\item New convenience functions \code{stripe_rows()} and \code{stripe_columns()}.
+\item Add \code{format} and \code{...} options to \code{fmt_percent()} to allow flexible
+formatting via \code{formatC()}.
+\item \code{add_footnote()} gets an explicit \code{number_format} argument which is
+\code{NA} by default.
 \item Bugfix: infinite loop with wide characters in \code{to_screen()}.
 \item Bugfix: duplicate colnames when exporting
 \code{huxreg(..., error_pos = "right")} to flextable.
