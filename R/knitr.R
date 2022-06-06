@@ -48,7 +48,7 @@ knit_print.huxtable <- function (x, options, ...) {
               knitr::asis_output(res, meta = latex_deps)
             },
             html = knitr::asis_output(
-                     if (in_quarto) res else htmlPreserve(res)
+                     htmltools::htmlPreserve(res)
                    ),
             rtf  = knitr::raw_output(res),
             pptx = ,
@@ -145,12 +145,4 @@ guess_knitr_output_format <- function() {
   if (of %in% c("beamer", "pdf")) of <- "latex"
 
   of
-}
-
-
-# copied from htmltools. Works in the context of knitr and rmarkdown
-htmlPreserve <- function (x) {
-  x <- paste(x, collapse = "\r\n")
-
-  if (nzchar(x)) sprintf("<!--html_preserve-->%s<!--/html_preserve-->", x) else x
 }
