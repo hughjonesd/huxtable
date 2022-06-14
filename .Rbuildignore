@@ -27,3 +27,5 @@ logo\.xcf
 tutorials
 ^data-raw$
 ^\.github$
+^doc$
+^Meta$

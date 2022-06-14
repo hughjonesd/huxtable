@@ -107,7 +107,9 @@ tribble_hux <- function (...,
 #' Convert objects to huxtables
 #'
 #' `as_huxtable` or `as_hux` converts an object to a huxtable.
-#' Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
+#' Conversion methods exist for data frames and tibbles, tables,
+#' ftables, matrices and (most) vectors.
+#'
 #' `is_hux[table]` tests if an object is a huxtable.
 #'
 #' @param x Object to convert.
@@ -121,6 +123,9 @@ tribble_hux <- function (...,
 #' `matrix` objects, they are `FALSE`. Other classes use
 #' `options("huxtable.add_colnames")`, which is `TRUE` by default; `add_rownames`
 #' is `FALSE`.
+#'
+#' For [dplyr::grouped_df()] objects, groups will be converted to header rows
+#' if `groups_to_header` is `TRUE`.
 #'
 #' @export
 #' @examples
@@ -143,6 +148,10 @@ tribble_hux <- function (...,
 #' as_hux(mtcars[1:3,], add_colnames = TRUE,
 #'       add_rownames = "Car")
 #'
+#' if (requireNamespace("dplyr")) {
+#'   iris_grp <- dplyr::group_by(iris[c(1:4, 51:54, 101:104), ], Species)
+#'   as_hux(iris_grp, groups_to_headers = TRUE)
+#' }
 as_huxtable <- function (x, ...) UseMethod("as_huxtable")
 
 
@@ -230,6 +239,24 @@ as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...)
 as_huxtable.ftable <- function(x, ...) {
   ht <- as_huxtable(format(x, quote = FALSE), ...)
   number_format(ht) <- 0
+  ht
+}
+
+
+#' @export
+#' @param groups_to_header Logical. Convert groups to header rows?
+as_huxtable.grouped_df <- function (x, groups_to_headers = FALSE) {
+  assert_that(is.flag(groups_to_headers))
+
+  ht <- NextMethod()
+  if (groups_to_headers) {
+    assert_package("as_huxtable.grouped_df", "dplyr")
+    group_vars <- dplyr::group_vars(x)
+    for (col in group_vars) {
+      ht <- column_to_header(ht, col, glue = paste0(col, ": {value}"))
+    }
+  }
+
   ht
 }
 

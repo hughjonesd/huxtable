@@ -1,6 +1,6 @@
 ---
 title: "Quarto tester"
-format: pdf
+format: html
 keep-md: true
 ---
 

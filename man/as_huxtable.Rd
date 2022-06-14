@@ -41,14 +41,19 @@ An object of class "huxtable".
 }
 \description{
 \code{as_huxtable} or \code{as_hux} converts an object to a huxtable.
-Conversion methods exist for data frames, tables, ftables, matrices and (most) vectors.
-\code{is_hux[table]} tests if an object is a huxtable.
+Conversion methods exist for data frames and tibbles, tables,
+ftables, matrices and (most) vectors.
 }
 \details{
+\code{is_hux[table]} tests if an object is a huxtable.
+
 For \code{table} objects, \code{add_colnames} and \code{add_rownames} are \code{TRUE} by default. For
 \code{matrix} objects, they are \code{FALSE}. Other classes use
 \code{options("huxtable.add_colnames")}, which is \code{TRUE} by default; \code{add_rownames}
 is \code{FALSE}.
+
+For \code{\link[dplyr:grouped_df]{dplyr::grouped_df()}} objects, groups will be converted to header rows
+if \code{groups_to_header} is \code{TRUE}.
 }
 \examples{
 dfr <- data.frame(
@@ -70,4 +75,8 @@ as_huxtable(tbl) # adds row and column names by default
 as_hux(mtcars[1:3,], add_colnames = TRUE,
       add_rownames = "Car")
 
+if (requireNamespace("dplyr")) {
+  iris_grp <- dplyr::group_by(iris[c(1:4, 51:54, 101:104), ], Species)
+  as_hux(iris_grp, groups_to_headers = TRUE)
+}
 }

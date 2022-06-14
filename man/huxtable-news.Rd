@@ -16,6 +16,9 @@ This help page simply gives the contents of NEWS.md.
 quarto labels.
 \item Please report any bugs!
 }
+\item New \code{column_to_header()} function converts a column to header rows.
+New \code{as_hux()} method for \code{grouped_df} objects optionally converts
+groups to header rows.
 \item New convenience functions \code{stripe_rows()} and \code{stripe_columns()}.
 \item Add \code{format} and \code{...} options to \code{fmt_percent()} to allow flexible
 formatting via \code{formatC()}.

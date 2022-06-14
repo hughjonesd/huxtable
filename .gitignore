@@ -21,3 +21,5 @@ scripts/*.tex
 scripts/*.html
 scripts/*.docx
 scripts/*.xlsx
+/doc/
+/Meta/

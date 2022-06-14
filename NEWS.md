@@ -2,9 +2,11 @@
 
 * Huxtable should work with [Quarto](https://quarto.org) documents.
   - Quarto labels and captions will override huxtable-provided ones.
-  - Quarto style references like `@table-label` only work with
-    quarto labels.
+  - Quarto style references like `@table-label` only work with quarto labels.
   - Please report any bugs!
+* New `column_to_header()` function converts a column to header rows.
+  New `as_hux()` method for `grouped_df` objects optionally converts groups
+  to header rows.
 * New convenience functions `stripe_rows()` and `stripe_columns()`.
 * Add `format` and `...` options to `fmt_percent()` to allow flexible
   formatting via `formatC()`.
