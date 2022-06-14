@@ -145,3 +145,14 @@ test_that("create huxtable from ftable", {
   expect_equal(nrow(ht), nrow(ft) + length(attr(ft, "col.vars")) + 1)
   expect_equal(ncol(ht), ncol(ft) + length(attr(ft, "row.vars")) + 1)
 })
+
+
+test_that("create huxtable from grouped_df", {
+  skip_if_not_installed("dplyr")
+
+  iris_grp <- dplyr::group_by(iris[c(1:3, 51:53, 101:103), ], Species)
+  expect_silent(iris_hux <- as_hux(iris_grp))
+
+  expect_silent(iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE))
+  expect_equivalent(contents(iris_hux2)[2, 1], "Species: setosa")
+})

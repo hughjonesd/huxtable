@@ -2,6 +2,7 @@
 #' Convert a column to header rows
 #'
 #' @inherit left_border params return
+#' @param col A column specifier for a single column.
 #' @param ... Properties to set on new rows
 #' @param glue Glue string. `"{value}"` will be replaced by the column value.
 #' @param start_col Integer. New header text will start at this column.

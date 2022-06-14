@@ -17,7 +17,7 @@ column_to_header(
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{col}{An optional column specifier.}
+\item{col}{A column specifier for a single column.}
 
 \item{...}{Properties to set on new rows}
 

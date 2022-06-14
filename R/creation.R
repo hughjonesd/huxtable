@@ -245,7 +245,7 @@ as_huxtable.ftable <- function(x, ...) {
 
 #' @export
 #' @param groups_to_header Logical. Convert groups to header rows?
-as_huxtable.grouped_df <- function (x, groups_to_headers = FALSE) {
+as_huxtable.grouped_df <- function (x, ..., groups_to_headers = FALSE) {
   assert_that(is.flag(groups_to_headers))
 
   ht <- NextMethod()
