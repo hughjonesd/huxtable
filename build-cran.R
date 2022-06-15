@@ -26,7 +26,7 @@ if (length(gdiff) > 0) stop('Working tree differs from last commit, please make 
 
 for (f in list.files('vignettes', pattern = "(Rmd|cvs)$")) {
   out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
-  if (length(out) > 0) stop(glue('vignettes and docs file {f} differs, please fix!'))
+  if (length(out) > 0) stop(glue('vignettes and docs file {f} differs, please fix and commit!'))
 }
 
 
