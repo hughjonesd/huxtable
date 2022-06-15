@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.5.0
 
 * Huxtable should work with [Quarto](https://quarto.org) documents.
   - Quarto labels and captions will override huxtable-provided ones.
