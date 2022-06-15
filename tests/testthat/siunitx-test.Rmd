@@ -1,0 +1,17 @@
+---
+title: "Untitled"
+output:
+   pdf_document:
+     latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+options(huxtable.latex_siunitx_align = TRUE)
+```
+
+```{r}
+ht <- hux(c("1", "-1.5"), c("1.2e-3", "1.33e3"), c("1", "-1e-3"))
+ht
+```

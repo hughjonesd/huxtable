@@ -249,10 +249,5 @@ test_that("huxtable.latex_siunitx_align", {
   expect_silent(to_md(ht))
 
   skip_on_cran()
-  expect_silent(
-    quick_pdf(ht,
-            file = file.path("temp-artefacts", "latex-siunitx-test.pdf"),
-            open = FALSE
-          )
-  )
+  test_render("siunitx-test.Rmd", "pdf_document")
 })

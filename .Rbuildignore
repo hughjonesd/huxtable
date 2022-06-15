@@ -11,6 +11,7 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^tests/testthat/output-rds$
+^tests/testthat/temp-artefacts$
 logo\.xcf
 ^build-cran.R$
 ^_pkgdown.yml$
