@@ -177,17 +177,22 @@ test_that("quarto files", {
   on.exit({
     for (f in c("quarto-test-out.pdf", "quarto-test-out.html"))
     if (file.exists(f)) try(file.remove(f), silent = TRUE)
+    if (file.exists("quarto-test_files")) {
+      try(unlink("quarto-test_files", recursive = TRUE), silent = TRUE)
+    }
   })
 
   expect_silent(
     quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
                             output_file = "quarto-test-out.pdf",
+                            execute_dir = "temp-artefacts",
                             debug = FALSE, quiet = TRUE)
   )
 
   expect_silent(
     quarto::quarto_render("quarto-test.qmd", output_format = "html",
                             output_file = "quarto-test-out.html",
+                            execute_dir = "temp-artefacts",
                             debug = FALSE, quiet = TRUE)
   )
 
