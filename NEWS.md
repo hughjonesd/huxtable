@@ -1,3 +1,5 @@
+# huxtable (development version)
+
 # huxtable 5.5.0
 
 * Huxtable should work with [Quarto](https://quarto.org) documents.

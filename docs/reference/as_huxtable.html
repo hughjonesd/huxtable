@@ -19,7 +19,7 @@ ftables, matrices and (most) vectors."><!-- mathjax --><script src="https://cdnj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0.9000</span>
       </span>
     </div>
 
@@ -109,6 +109,9 @@ ftables, matrices and (most) vectors.</p>
   <span class="va">...</span>
 <span class="op">)</span>
 
+<span class="co"># S3 method for grouped_df</span>
+<span class="fu">as_huxtable</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, groups_to_headers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
 <span class="fu">is_huxtable</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
 <span class="fu">is_hux</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
@@ -127,6 +130,8 @@ ftables, matrices and (most) vectors.</p>
 to the huxtable. The string gives the name for the new column (or <code>"rownames"</code> for <code>TRUE</code>).</p></dd>
 <dt>autoformat</dt>
 <dd><p>If <code>TRUE</code>, automatically format columns by type. See below.</p></dd>
+<dt>groups_to_header</dt>
+<dd><p>Logical. Convert groups to header rows?</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

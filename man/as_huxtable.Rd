@@ -4,6 +4,7 @@
 \alias{as_huxtable}
 \alias{as_hux}
 \alias{as_huxtable.default}
+\alias{as_huxtable.grouped_df}
 \alias{is_huxtable}
 \alias{is_hux}
 \title{Convert objects to huxtables}
@@ -20,6 +21,8 @@ as_hux(x, ...)
   ...
 )
 
+\method{as_huxtable}{grouped_df}(x, ..., groups_to_headers = FALSE)
+
 is_huxtable(x)
 
 is_hux(x)
@@ -35,6 +38,8 @@ is_hux(x)
 to the huxtable. The string gives the name for the new column (or \code{"rownames"} for \code{TRUE}).}
 
 \item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
+
+\item{groups_to_header}{Logical. Convert groups to header rows?}
 }
 \value{
 An object of class "huxtable".
