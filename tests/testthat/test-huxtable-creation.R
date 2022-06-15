@@ -153,6 +153,6 @@ test_that("create huxtable from grouped_df", {
   iris_grp <- dplyr::group_by(iris[c(1:3, 51:53, 101:103), ], Species)
   expect_silent(iris_hux <- as_hux(iris_grp))
 
-  expect_silent(iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE))
-  expect_equivalent(contents(iris_hux2)[2, 1], "Species: setosa")
+  iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE, add_colnames = TRUE)
+  expect_equivalent(contents(iris_hux2)[[2, 1]], "Species: setosa")
 })
