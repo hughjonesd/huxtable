@@ -115,8 +115,7 @@ formatting via <code><a href="https://rdrr.io/r/base/formatc.html" class="extern
 <li><p><code><a href="add_footnote.html">add_footnote()</a></code> gets an explicit <code>number_format</code> argument which is
 <code>NA</code> by default.</p></li>
 <li><p>Bugfix: infinite loop with wide characters in <code><a href="to_screen.html">to_screen()</a></code>.</p></li>
-<li><p>Bugfix: duplicate colnames when exporting
-<code>huxreg(..., error_pos = "right")</code> to flextable.</p></li>
+<li><p>Bugfix: duplicate colnames when exporting <code>huxreg(..., error_pos = "right")</code> to flextable.</p></li>
 <li><p>Bugfix: bookdown-style references weren’t working in blogdown.</p></li>
 </ul></div>
     <div id="huxtable-">
@@ -149,9 +148,7 @@ LaTeX <code>siunitx</code> package to handle decimal point alignment. This is
 <li><p>Bugfix: centre alignment was not working in <code><a href="to_screen.html">print_screen()</a></code>.</p></li>
 <li><p>Bugfix: failure in <code><a href="to_md.html">to_md()</a></code> with recent versions of <code>stringi</code>
 package.</p></li>
-<li><p>Bugfix: repeating a single row in a subset, like
-<code>ht[c(1, 1, 2, 3), ]</code>, was setting <code>colspan = 2</code> on the repeated
-row.</p></li>
+<li><p>Bugfix: repeating a single row in a subset, like <code>ht[c(1, 1, 2, 3), ]</code>, was setting <code>colspan = 2</code> on the repeated row.</p></li>
 <li><p>Bugfix: zero-argument subset replacement like <code>ht[] &lt;- ...</code> wasn’t
 working.</p></li>
 </ul></div>
@@ -166,7 +163,7 @@ change the appearance of some documents.</p></li>
     <div id="huxtable-">
     <h2>huxtable 5.2.0</h2>
     
-<ul><li><p>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in
+<ul><li><p>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in
 TeX.</p></li>
 <li><p>Bugfix: <code>print_screen(h, colnames = FALSE)</code> didn’t print a final
 newline.</p></li>
@@ -272,8 +269,7 @@ the border thickness, write <code>brdr_thickness(left_border(ht))</code>.</p></l
 <li><p><code>error_style</code> and <code>pad_decimal</code> arguments in <code>huxreg</code>. Use
 <code>error_format</code> and <code>align(hx) &lt;- "."</code>.</p></li>
 <li><p>The <code>where()</code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions.
-Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and
-<code>align(ht) &lt;- "."</code>.</p></li>
+Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and <code>align(ht) &lt;- "."</code>.</p></li>
 </ul></li>
 <li><p>Default padding has been increased to 6 points.</p></li>
 <li><p>By default, <code><a href="width.html">width()</a></code> is now unset.</p></li>
@@ -310,9 +306,8 @@ cell contents that will be interpreted as markdown.</p></li>
 on-screen display.</p></li>
 </ul></li>
 <li><p>Huxtable now has the concept of header row and columns.</p><ul><li><p>By default, data frame column names will be headers.</p></li>
-<li><p>To set other rows to be headers, use
-<code>set_header_rows(ht, row_numbers, TRUE)</code>. For columns, use
-<code><a href="header_cols.html">header_cols()</a></code> or <code><a href="header_cols.html">set_header_cols()</a></code>.</p></li>
+<li><p>To set other rows to be headers, use <code>set_header_rows(ht, row_numbers, TRUE)</code>. For columns, use <code><a href="header_cols.html">header_cols()</a></code> or
+<code><a href="header_cols.html">set_header_cols()</a></code>.</p></li>
 <li><p>New functions <code><a href="style-functions.html">style_headers()</a></code>, <code><a href="style-functions.html">style_header_cols()</a></code>, and
 <code><a href="style-functions.html">style_header_rows()</a></code> to set multiple properties on headers.</p></li>
 <li><p>In themes, <code>header_row/col = TRUE</code> set the first row/col to a
@@ -326,7 +321,7 @@ So you can write e.g.</p>
 <li><p>By default, huxtable now sets labels from the current knitr chunk
 label, if there is one. This is consistent with <code>kable()</code>. In
 bookdown, you can then do e.g.</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">as_hux</span>(iris)</a></code></pre><p></p></div>
 <p>Set <code>options(huxtable.autolabel = FALSE)</code> to turn off this
 behaviour.</p></li>
 <li><p>The one-argument form of <code>[</code> now works for huxtables just as it does
@@ -438,9 +433,9 @@ wrapping around tables.</p></li>
 <li><p>New <code><a href="set-outer.html">set_outer_border_colors()</a></code> and <code><a href="set-outer.html">set_outer_border_styles()</a></code>
 functions, like <code><a href="set-outer.html">set_outer_borders()</a></code>.</p></li>
 <li><p>Huxtable no longer requires the <code>broom</code> package, instead using the
-<code>generics</code> package. If you use <code><a href="huxreg.html">huxreg()</a></code>, you will still need
-e.g. <code>broom</code> or <code>broom.mixed</code> to provide <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code>
-methods for specific models.</p></li>
+<code>generics</code> package. If you use <code><a href="huxreg.html">huxreg()</a></code>, you will still need e.g.
+<code>broom</code> or <code>broom.mixed</code> to provide <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> methods
+for specific models.</p></li>
 <li><p>Bugfix: <code><a href="tidy_override.html">tidy.tidy_override()</a></code> and <code><a href="tidy_override.html">glance.tidy_override()</a></code> should
 work even if underlying object has no <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> or <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> method.</p></li>
 <li><p>Bugfix: huxtables had option clash when <code>echo = TRUE</code> in Rmd
@@ -458,8 +453,8 @@ of latex packages.</p></li>
     <div id="huxtable-">
     <h2>huxtable 4.3.0</h2>
     
-<ul><li><p>More work on TeX. Tables <em>should</em> now compile when raw_attributes is
-not set.</p></li>
+<ul><li><p>More work on TeX. Tables <em>should</em> now compile when raw_attributes
+is not set.</p></li>
 <li><p>New <code>map_xxx</code> functions to set properties variably by cell values.</p></li>
 <li><p>Functions for mapping properties variably: <code>by_rows</code>, <code>by_values</code>,
 <code>by_ranges</code>, <code>by_quantiles</code> etc.</p></li>
@@ -471,7 +466,7 @@ not set.</p></li>
 pipes.</p></li>
 <li><p>Enhancement: left- and right-aligned captions are now set above the
 table in LaTeX, using the “threeparttable” package. You will need to
-install this using e.g. <code><a href="report_latex_dependencies.html">install_latex_dependencies()</a></code> or <code>tlmgr</code> if
+install this using e.g. <code><a href="report_latex_dependencies.html">install_latex_dependencies()</a></code> or <code>tlmgr</code> if
 it is not already on your system.</p></li>
 <li><p>Enhancement: in <code><a href="huxtable.html">huxtable()</a></code> and friends, <code>add_rownames = "Colname"</code>
 now sets the name for the new column.</p></li>
@@ -559,8 +554,8 @@ cbind/rbind.</p></li>
 <li><p>cbind and rbind work.</p></li>
 </ul></li>
 <li><p>Bugfix: HTML cols were printed with ‘width: NA’.</p></li>
-<li><p>Bugfix: width, col_width etc. can be reset to a number after setting
-them to a string.</p><ul><li><p>The (undocumented) ability to mix numeric and non-numeric values
+<li><p>Bugfix: width, col_width etc. can be reset to a number after
+setting them to a string.</p><ul><li><p>The (undocumented) ability to mix numeric and non-numeric values
 for padding and/border widths has been removed. If you want a
 number, set a number and not a string.</p></li>
 </ul></li>
@@ -577,7 +572,7 @@ rows.</p></li>
 <ul><li><p>Improved formatting in Excel output.</p></li>
 <li><p>New <code>format</code> method which returns the result of <code>to_html</code>,
 <code>to_latex</code> etc. as appropriate.</p></li>
-<li><p>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</p></li>
+<li><p>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</p></li>
 <li><p>Bugfix: <code>set_all_*</code> not working when huxtable is not attached.</p></li>
 <li><p>Bugfix: <code>as_Workbook</code> failing with non-numeric <code>width</code>.</p></li>
 <li><p>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel
@@ -688,7 +683,7 @@ column names.</p></li>
 <h3 id="breaking-changes-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3"></a></h3>
 
 <ul><li><p><code>number_format</code> now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
+This means you can include e.g. significance stars in a cell and
 still use <code>number_format</code> to format the content.</p></li>
 <li><p>If <code>number_format</code> is NA, numbers are unchanged.</p></li>
 <li><p>Default value of <code>number_format</code> has changed from “%5.2f” to

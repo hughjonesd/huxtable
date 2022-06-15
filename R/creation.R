@@ -125,7 +125,7 @@ tribble_hux <- function (...,
 #' is `FALSE`.
 #'
 #' For [dplyr::grouped_df()] objects, groups will be converted to header rows
-#' if `groups_to_header` is `TRUE`.
+#' if `groups_to_headers` is `TRUE`.
 #'
 #' @export
 #' @examples
@@ -244,7 +244,7 @@ as_huxtable.ftable <- function(x, ...) {
 
 
 #' @export
-#' @param groups_to_header Logical. Convert groups to header rows?
+#' @param groups_to_headers Logical. Convert groups to header rows?
 #' @rdname as_huxtable
 as_huxtable.grouped_df <- function (x, ..., groups_to_headers = FALSE) {
   assert_that(is.flag(groups_to_headers))

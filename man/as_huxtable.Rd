@@ -39,7 +39,7 @@ to the huxtable. The string gives the name for the new column (or \code{"rowname
 
 \item{autoformat}{If \code{TRUE}, automatically format columns by type. See below.}
 
-\item{groups_to_header}{Logical. Convert groups to header rows?}
+\item{groups_to_headers}{Logical. Convert groups to header rows?}
 }
 \value{
 An object of class "huxtable".
@@ -58,7 +58,7 @@ For \code{table} objects, \code{add_colnames} and \code{add_rownames} are \code{
 is \code{FALSE}.
 
 For \code{\link[dplyr:grouped_df]{dplyr::grouped_df()}} objects, groups will be converted to header rows
-if \code{groups_to_header} is \code{TRUE}.
+if \code{groups_to_headers} is \code{TRUE}.
 }
 \examples{
 dfr <- data.frame(
