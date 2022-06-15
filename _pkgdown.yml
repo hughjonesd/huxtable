@@ -43,6 +43,7 @@ reference:
       - add_footnote
       - add_rownames
       - cbind.huxtable
+      - column_to_header
       - huxtable
       - as_huxtable
       - starts_with("insert")
@@ -84,6 +85,7 @@ reference:
       - set_contents
       - number_format
       - na_string
+      - starts_with("stripe")
       - text_color
       - starts_with("header")
   - title: "Borders and padding"

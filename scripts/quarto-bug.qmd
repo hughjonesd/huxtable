@@ -1,0 +1,32 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Without htmlPreserve
+
+Reference to @tbl-label.
+
+```{r}
+#| tbl-cap: "My caption without htmlPreserve"
+#| label: tbl-label
+
+knitr::asis_output("<table><tr><td>A table</td></tr></table>")
+
+```
+
+# With htmlPreserve
+
+Reference to @tbl-label-preserve.
+
+```{r}
+#| tbl-cap: "My caption with htmlPreserve"
+#| label: tbl-label-preserve
+
+cat(getOption("htmltools.preserve.raw"))
+library(huxtable)
+# works
+#knitr::asis_output(htmltools::htmlPreserve(to_html(huxtable::jams)))
+
+jams
+```

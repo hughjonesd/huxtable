@@ -7,19 +7,12 @@ library(rmarkdown)
 # pkgdown works from your tree, not from installed versions.
 # But rmarkdown::render works with installed versions.
 # So:
-# check this includes the new version:
-
-pkgdown:::pkg_timeline("huxtable")
-
-#   (otherwise, it'll be marked as 'unreleased' in the news page)
-# checkout the version that you want on the web
-# ** Install the package and restart **
-# create a branch if there isn't one (git checkout -b website-x.y.z)
+# install the version you want
+# optionally create a branch (website-x.y.z)
 # update index.Rhtml appropriately
-# run this script;
-# commit any changes and push to github;
-# checkout master;
-# merge in the new branch (git merge website-x.y.z)
+# run this script
+# commit any changes
+# optionally checkout master, merge in the new branch (git merge website-x.y.z)
 # push to github
 
 pdf_output_formats <- list(
@@ -57,5 +50,4 @@ pkgdown::build_reference(lazy = FALSE)
 pkgdown::build_news()
 pkgdown::build_tutorials()
 
-message("Now commit, checkout master, merge:\ngit merge website-x.y.z\n and push to github.")
-message("Don't forget to reinstall the dev version afterwards...")
+message("Now commit and push to github.")
