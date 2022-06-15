@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.5.0}{
 \itemize{
 \item Huxtable should work with \href{https://quarto.org}{Quarto} documents.
 \itemize{
