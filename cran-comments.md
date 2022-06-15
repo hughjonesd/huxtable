@@ -1,12 +1,9 @@
 
-This release addresses test failures due to a recent update to the 
-"stringi" package. "stringi" is being updated too, but this update
-should make the package more robust. It also fixes a few other bugs
-and introduces some small features.
+Release with some new features.
 
 ## Test environments
 
-* local OS X install (R 4.0.3)
+* local OS X install (R 4.2.0)
 * rhub (windows/linux, release/devel)
 * github (windows/linux, release/devel)
 * windows on appveyor (release and stable)
@@ -15,22 +12,29 @@ and introduces some small features.
 
 ## R CMD check results
 
-One note on rhub and github: "Unable to find GhostScript executable...". Two 
-failures-to-build on rhub. Everything else OK.
+A note about undeclared namespaces. This is a false positive: R6 and
+xml2 are indeed used.
 
+On rhub, a note about detritus in the temp directory.
+
+Github fails to build one vignette. Debugging is hard.
+
+On win-builder, OK.
+
+On Appveyor, OK.
 
 ## revdepcheck results
 
-We checked 12 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 15 reverse dependencies, comparing R CMD check results across CRAN 
+and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 4 packages
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* glmmTMB      (NA)
-* gtsummary    (NA)
-* interactions (NA)
-* nlmixr       (NA)
+* bmstdr  (NA)
+* glmmTMB (NA)
+* nlmixr  (NA)
