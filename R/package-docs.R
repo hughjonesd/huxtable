@@ -155,6 +155,20 @@ NULL
 #'
 #'   You can change numeric formatting using [number_format()]. Base R options
 #'   like [`scipen`][base::options()] usually have no effect.
+#
+#' * How can I use HTML, TeX etc. in my table?
+#'
+#'  Use [escape_contents()]:
+#'
+#'  ```r
+#'  jams |>
+#'       add_footnote("These jams are <i>tasty</i>!") |>
+#'       set_escape_contents(final(1), everywhere, FALSE) |>
+#'       quick_html()
+#'  ```
+#'
+#'  Alternatively you might consider using markdown in cells, with
+#'  [set_markdown_contents()].
 #'
 #' * I ran `caption(ht) <- "Something"` and got an error message:
 #'
