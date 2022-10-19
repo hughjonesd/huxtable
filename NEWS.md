@@ -1,5 +1,7 @@
 # huxtable (development version)
 
+* CSS borders are now set explicitly even if they are all set to 0.
+
 # huxtable 5.5.0
 
 * Huxtable should work with [Quarto](https://quarto.org) documents.

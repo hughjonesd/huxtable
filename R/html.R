@@ -255,8 +255,5 @@ compute_border_css <- function (ht) {
   )
   border_css <- paste0(border_css, sprintf("%s %s %s %s", tbc, rbc, bbc, lbc))
 
-  no_borders <- tb == 0 & rb == 0 & bb == 0 & lb == 0
-  border_css <- blank_where(border_css, no_borders)
-
   return(border_css)
 }

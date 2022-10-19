@@ -8,7 +8,9 @@
 This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
-
+\itemize{
+\item CSS borders are now set explicitly even if they are all set to 0.
+}
 }
 
 \section{huxtable 5.5.0}{
@@ -29,7 +31,8 @@ formatting via \code{formatC()}.
 \item \code{add_footnote()} gets an explicit \code{number_format} argument which is
 \code{NA} by default.
 \item Bugfix: infinite loop with wide characters in \code{to_screen()}.
-\item Bugfix: duplicate colnames when exporting \code{huxreg(..., error_pos = "right")} to flextable.
+\item Bugfix: duplicate colnames when exporting
+\code{huxreg(..., error_pos = "right")} to flextable.
 \item Bugfix: bookdown-style references weren’t working in blogdown.
 }
 }
@@ -66,7 +69,9 @@ LaTeX \code{siunitx} package to handle decimal point alignment. This is
 \item Bugfix: centre alignment was not working in \code{print_screen()}.
 \item Bugfix: failure in \code{to_md()} with recent versions of \code{stringi}
 package.
-\item Bugfix: repeating a single row in a subset, like \code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated row.
+\item Bugfix: repeating a single row in a subset, like
+\code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated
+row.
 \item Bugfix: zero-argument subset replacement like \code{ht[] <- ...} wasn’t
 working.
 }
@@ -83,7 +88,7 @@ change the appearance of some documents.
 
 \section{huxtable 5.2.0}{
 \itemize{
-\item Add \code{table_environment} property so you can use e.g. \code{"table*"} in
+\item Add \code{table_environment} property so you can use e.g. \code{"table*"} in
 TeX.
 \item Bugfix: \code{print_screen(h, colnames = FALSE)} didn’t print a final
 newline.
@@ -224,7 +229,8 @@ the border thickness, write \code{brdr_thickness(left_border(ht))}.
 \item \code{error_style} and \code{pad_decimal} arguments in \code{huxreg}. Use
 \code{error_format} and \code{align(hx) <- "."}.
 \item The \code{where()}, \code{is_a_number()} and \code{pad_decimal()} functions.
-Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and \code{align(ht) <- "."}.
+Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and
+\code{align(ht) <- "."}.
 }
 \item Default padding has been increased to 6 points.
 \item By default, \code{width()} is now unset.
@@ -267,8 +273,9 @@ on-screen display.
 \item Huxtable now has the concept of header row and columns.
 \itemize{
 \item By default, data frame column names will be headers.
-\item To set other rows to be headers, use \code{set_header_rows(ht, row_numbers, TRUE)}. For columns, use \code{header_cols()} or
-\code{set_header_cols()}.
+\item To set other rows to be headers, use
+\code{set_header_rows(ht, row_numbers, TRUE)}. For columns, use
+\code{header_cols()} or \code{set_header_cols()}.
 \item New functions \code{style_headers()}, \code{style_header_cols()}, and
 \code{style_header_rows()} to set multiple properties on headers.
 \item In themes, \code{header_row/col = TRUE} set the first row/col to a
@@ -412,9 +419,9 @@ wrapping around tables.
 \item New \code{set_outer_border_colors()} and \code{set_outer_border_styles()}
 functions, like \code{set_outer_borders()}.
 \item Huxtable no longer requires the \code{broom} package, instead using the
-\code{generics} package. If you use \code{huxreg()}, you will still need e.g.
-\code{broom} or \code{broom.mixed} to provide \code{tidy()} and \code{glance()} methods
-for specific models.
+\code{generics} package. If you use \code{huxreg()}, you will still need
+e.g. \code{broom} or \code{broom.mixed} to provide \code{tidy()} and \code{glance()}
+methods for specific models.
 \item Bugfix: \code{tidy.tidy_override()} and \code{glance.tidy_override()} should
 work even if underlying object has no \code{tidy()} or \code{glance()} method.
 \item Bugfix: huxtables had option clash when \code{echo = TRUE} in Rmd
@@ -433,8 +440,8 @@ of latex packages.
 
 \section{huxtable 4.3.0}{
 \itemize{
-\item More work on TeX. Tables \emph{should} now compile when raw_attributes
-is not set.
+\item More work on TeX. Tables \emph{should} now compile when raw_attributes is
+not set.
 \item New \code{map_xxx} functions to set properties variably by cell values.
 \item Functions for mapping properties variably: \code{by_rows}, \code{by_values},
 \code{by_ranges}, \code{by_quantiles} etc.
@@ -446,7 +453,7 @@ is not set.
 pipes.
 \item Enhancement: left- and right-aligned captions are now set above the
 table in LaTeX, using the “threeparttable” package. You will need to
-install this using e.g. \code{install_latex_dependencies()} or \code{tlmgr} if
+install this using e.g. \code{install_latex_dependencies()} or \code{tlmgr} if
 it is not already on your system.
 \item Enhancement: in \code{huxtable()} and friends, \code{add_rownames = "Colname"}
 now sets the name for the new column.
@@ -539,8 +546,8 @@ cbind/rbind.
 \item cbind and rbind work.
 }
 \item Bugfix: HTML cols were printed with ‘width: NA’.
-\item Bugfix: width, col_width etc. can be reset to a number after
-setting them to a string.
+\item Bugfix: width, col_width etc. can be reset to a number after setting
+them to a string.
 \itemize{
 \item The (undocumented) ability to mix numeric and non-numeric values
 for padding and/border widths has been removed. If you want a
@@ -560,7 +567,7 @@ rows.
 \item Improved formatting in Excel output.
 \item New \code{format} method which returns the result of \code{to_html},
 \code{to_latex} etc. as appropriate.
-\item Bugfix: \code{to_html} printing e.g. “left-border: NA;” in cell CSS.
+\item Bugfix: \code{to_html} printing e.g. “left-border: NA;” in cell CSS.
 \item Bugfix: \verb{set_all_*} not working when huxtable is not attached.
 \item Bugfix: \code{as_Workbook} failing with non-numeric \code{width}.
 \item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel
@@ -678,7 +685,7 @@ column names.
 \subsection{Breaking changes}{
 \itemize{
 \item \code{number_format} now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
+This means you can include e.g. significance stars in a cell and
 still use \code{number_format} to format the content.
 \item If \code{number_format} is NA, numbers are unchanged.
 \item Default value of \code{number_format} has changed from “\%5.2f” to
