@@ -10,8 +10,6 @@ output:
   html_document:
     toc: yes
     toc_depth: 2
-mainfont: Calibri
-monofont: LucidaConsole
 linkcolor: olive
 urlcolor: olive
 vignette: >
