@@ -34,13 +34,13 @@ options(
 
 is_latex <- guess_knitr_output_format() == "latex"
 # is_latex <- TRUE
-knitr::knit_hooks$set(
-  barrier = function(before, options, envir) {
-    if (! before && is_latex) knitr::asis_output("\\FloatBarrier")
-  }
-)
+# knitr::knit_hooks$set(
+#  barrier = function(before, options, envir) {
+#    if (! before && is_latex) knitr::asis_output("\\FloatBarrier")
+#  }
+#)
 
-if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
+#if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 
 ```
 
