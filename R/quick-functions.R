@@ -285,10 +285,11 @@ confirm <- function (file) {
 
 auto_open <- function (path) {
   sysname <- Sys.info()["sysname"]
+  safe_path <- shQuote (path)
   switch(sysname,
-    Darwin  = system2("open", path),
-    Windows = system2("start", path),
-    Linux   = system2("xdg-open", path),
+    Darwin  = system2("open", safe_path),
+    Windows = system2("start", safe_path),
+    Linux   = system2("xdg-open", safe_path),
     warning("Could not determine OS to open document automatically")
   )
 }
