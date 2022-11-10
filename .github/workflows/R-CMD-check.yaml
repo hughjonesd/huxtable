@@ -38,7 +38,7 @@ jobs:
         env:
           CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
 
-      - run: tlmgr install adjustbox ulem wrapfig threeparttable
+      - run: tlmgr install adjustbox ulem wrapfig threeparttable fontspec
         env:
           CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
       - run: tlmgr install placeins
