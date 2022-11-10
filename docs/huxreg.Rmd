@@ -16,13 +16,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(huxtable)
 
 is_latex <- guess_knitr_output_format() == "latex"
-knitr::knit_hooks$set(
-  barrier = function(before, options, envir) {
-    if (! before && is_latex) knitr::asis_output("\\FloatBarrier")
-  }
-)
-
-if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
+# knitr::knit_hooks$set(
+#   barrier = function(before, options, envir) {
+#     if (! before && is_latex) knitr::asis_output("\\FloatBarrier")
+#   }
+# )
+# 
+# if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 options(huxtable.latex_siunitx_align = FALSE)
 ```
 

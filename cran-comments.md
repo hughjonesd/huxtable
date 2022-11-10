@@ -1,5 +1,5 @@
 
-Release with some new features.
+Release with bugfixes.
 
 ## Test environments
 
@@ -25,16 +25,25 @@ On Appveyor, OK.
 
 ## revdepcheck results
 
-We checked 15 reverse dependencies, comparing R CMD check results across CRAN 
-and dev versions of this package.
+glmmTMB had problems. These seem more likely to be do with different versions of
+Matrix on my machine than with huxtable: errors are in functions which don't use huxtable.
 
- * We saw 0 new problems
- * We failed to check 3 packages
+Full report:
+
+We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 1 new problems
+ * We failed to check 1 packages
 
 Issues with CRAN packages are summarised below.
 
+### New problems
+(This reports the first line of each new failure)
+
+* glmmTMB
+  checking examples ... ERROR
+  checking running R code from vignettes ...
+
 ### Failed to check
 
-* bmstdr  (NA)
-* glmmTMB (NA)
-* nlmixr  (NA)
+* bmstdr (NA)
