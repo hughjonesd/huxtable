@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.5.1
 
 * CSS borders are now set explicitly even if they are all set to 0.
 * Bugfix: shell-quote files in `quick_*` functions. Thanks to @ceresek.
