@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.5.1}{
 \itemize{
 \item CSS borders are now set explicitly even if they are all set to 0.
 \item Bugfix: shell-quote files in \verb{quick_*} functions. Thanks to
