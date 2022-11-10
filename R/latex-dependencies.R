@@ -177,7 +177,7 @@ check_adjustbox <- function (quiet = TRUE) {
     system2("tlmgr", args, stdout = TRUE)
   }
 
-  ok <- as.package_version(adjustbox_rev) >= "1.2"
+  ok <- adjustbox_rev == "1.3a" || as.package_version(adjustbox_rev) >= "1.2"
   if (! ok && ! quiet) {
     warning("TeX package 'adjustbox' is out of date.\n",
       "Update it with your package manager or via `install_latex_dependencies()`.")

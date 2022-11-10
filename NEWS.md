@@ -2,6 +2,7 @@
 
 * CSS borders are now set explicitly even if they are all set to 0.
 * Bugfix: shell-quote files in `quick_*` functions. Thanks to @ceresek.
+* Bugfix: cope with adjustbox version "1.3a" among latex dependencies.
 
 # huxtable 5.5.0
 

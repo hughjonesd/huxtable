@@ -12,6 +12,7 @@ This help page simply gives the contents of NEWS.md.
 \item CSS borders are now set explicitly even if they are all set to 0.
 \item Bugfix: shell-quote files in \verb{quick_*} functions. Thanks to
 @ceresek.
+\item Bugfix: cope with adjustbox version “1.3a” among latex dependencies.
 }
 }
 
