@@ -1,0 +1,66 @@
+---
+title: "Untitled"
+format: docx
+---
+
+## Table for word document in quarto
+
+```{r}
+library(huxtable)
+library(officedown)
+```
+
+```{r}
+#| label: tbl-air1
+
+mytab1 <- hux(head(airquality))
+caption(mytab1)<- "My caption"
+mytab1
+```
+
+- Table caption appears
+- This reference @tbl-air1 doesn't work
+
+```{r}
+mytab2 <- hux(head(airquality))
+caption(mytab2) <- "Second table caption"
+label(mytab2) <- "tbl-air2"
+mytab2
+```
+
+- Table caption appears
+- This reference @tbl-air2 doesn't work
+
+```{r}
+#| label: tbl-air3
+#| tbl-cap: "Third table caption"
+
+mytab3 <- hux(head(airquality))
+mytab3
+```
+
+- Table caption doesn't appear
+- This reference @tbl-air3 doesn't work
+
+
+
+Testing flextable on its own: `r officer::run_reference(id = "tbl-flextable")`.
+
+```{r}
+#| label: tbl-flextable
+#| tbl-cap: Caption **strong**
+flextable::flextable(mtcars[1:4, 1:4])
+```
+
+
+```{r}
+#| label: tbl-air4
+#| tbl-cap: "Fourth table caption"
+
+mytab4 <- hux(head(airquality))
+label(mytab4) <- "tbl-air4"
+mytab4
+```
+
+- Table caption?
+- Using run_reference workaround, does reference work? `r officer::run_reference(id = "tbl-air4")` 

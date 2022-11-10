@@ -15,13 +15,11 @@ Release with bugfixes.
 A note about undeclared namespaces. This is a false positive: R6 and
 xml2 are indeed used.
 
-On rhub, a note about detritus in the temp directory.
-
 Github fails to build one vignette. Debugging is hard.
 
-On win-builder, OK.
+On win-builder, Appveyor and locally OK.
 
-On Appveyor, OK.
+rhub is OK on windows, but failed to complete check in 2 hours for linux.
 
 ## revdepcheck results
 
