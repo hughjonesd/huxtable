@@ -96,8 +96,11 @@ devtools::release()
 # Comment out !CRAN lines in huxtable vignette, and save
 # Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
 # $ touch inst/doc/*
+# Ensure there's a vignette index in build/vignettes.rds
+# NB NOT Meta/vignettes.rds!
 # Build a version for CRAN:
 # > pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
+# Check you have build/vignettes.rds in the tarfile
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)
 
