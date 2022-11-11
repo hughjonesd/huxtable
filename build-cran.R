@@ -98,7 +98,8 @@ devtools::release()
 # $ touch inst/doc/*
 # Build a version for CRAN:
 # > pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
-# Submit
+# Submit via web form. (You could also run through the devtools::release()
+# questions just to be safe!)
 
 # after release:
 revdepcheck::revdep_reset()

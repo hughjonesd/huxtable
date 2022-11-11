@@ -29,5 +29,4 @@ tutorials
 ^data-raw$
 ^\.github$
 ^doc$
-^Meta$
 ^CRAN-SUBMISSION$

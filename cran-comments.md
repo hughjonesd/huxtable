@@ -1,5 +1,5 @@
 
-Release with bugfixes. Resubmitting to fix a Debian-specific check failure.
+Release with bugfixes. Resubmitting again to fix a check failure.
 
 ## Test environments
 
@@ -15,11 +15,8 @@ Release with bugfixes. Resubmitting to fix a Debian-specific check failure.
 A note about undeclared namespaces. This is a false positive: R6 and
 xml2 are indeed used.
 
-Github fails to build one vignette. Debugging is hard.
+On Github, win-builder, Appveyor and locally: OK.
 
-On win-builder, Appveyor and locally OK.
-
-rhub is OK on windows, but failed to complete check in 2 hours for linux.
 
 ## revdepcheck results
 
