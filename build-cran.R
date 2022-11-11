@@ -95,7 +95,7 @@ devtools::release()
 # cp doc/* inst/doc
 # Comment out !CRAN lines in huxtable vignette
 # Build a version for CRAN:
-# devtools::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
+# pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Submit
 
 # after release:
