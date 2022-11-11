@@ -89,13 +89,15 @@ devtools::release()
 
 # Alternatively:
 # Uncomment !CRAN lines in huxtable vignette
-# devtools::build_vignettes()
+# > devtools::build_vignettes()
 # Copy built vignettes from doc/ to inst/doc:
-# mkdir -p inst/doc
-# cp doc/* inst/doc
-# Comment out !CRAN lines in huxtable vignette
+# $ mkdir -p inst/doc
+# $ cp doc/* inst/doc
+# Comment out !CRAN lines in huxtable vignette, and save
+# Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
+# $ touch inst/doc/*
 # Build a version for CRAN:
-# pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
+# > pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Submit
 
 # after release:
