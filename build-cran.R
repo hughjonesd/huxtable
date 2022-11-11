@@ -87,5 +87,16 @@ system2('git', c('push', '--tags'))
 
 devtools::release()
 
+# Alternatively:
+# Uncomment !CRAN lines in huxtable vignette
+# devtools::build_vignettes()
+# Copy built vignettes from doc/ to inst/doc:
+# mkdir -p inst/doc
+# cp doc/* inst/doc
+# Comment out !CRAN lines in huxtable vignette
+# Build a version for CRAN:
+# devtools::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
+# Submit
+
 # after release:
 revdepcheck::revdep_reset()
