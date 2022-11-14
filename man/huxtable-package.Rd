@@ -42,7 +42,7 @@ employees <- employees \%>\%
 }\if{html}{\out{</div>}}
 
 For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
-read the vignette with \code{vignette('huxtable')}.
+read the vignette with \code{vignette("huxtable")}.
 
 See \link{huxtable-FAQ} for frequently asked questions, including ways to get
 help.

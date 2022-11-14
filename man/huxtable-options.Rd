@@ -9,45 +9,45 @@ Huxtable has several options.
 }
 \details{
 \itemize{
-\item \code{options('huxtable.add_colnames')} sets the default value for
+\item \code{options("huxtable.add_colnames")} sets the default value for
 \code{add_colnames} in \code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. As of version 5.0.0, this
 defaults to \code{TRUE}.
-\item \code{options('huxtable.print')} sets the print method for
+\item \code{options("huxtable.print")} sets the print method for
 huxtable objects. See \code{\link[=print.huxtable]{print.huxtable()}}.
-\item \code{options('huxtable.knitr_output_format')} overrides the default output format
+\item \code{options("huxtable.knitr_output_format")} overrides the default output format
 when huxtable objects are printed by knitr. Set to "html", "latex", "md" or
 "screen". If \code{NULL} (the default), huxtable guesses the format using
 \code{\link[=guess_knitr_output_format]{guess_knitr_output_format()}}.
-\item \code{options('huxtable.autolabel')}. If \code{TRUE}, (the default) automatically
+\item \code{options("huxtable.autolabel")}. If \code{TRUE}, (the default) automatically
 sets \code{label()} from the knitr chunk label, if there is one.
-\item \code{options('huxtable.color_screen')}. If \code{TRUE} and package \code{crayon} is
+\item \code{options("huxtable.color_screen")}. If \code{TRUE} and package \code{crayon} is
 available, huxtables will be printed in color on screen.
-\item \code{options('huxtable.bookdown')}. Set to \code{TRUE} within a bookdown document to
+\item \code{options("huxtable.bookdown")}. Set to \code{TRUE} within a bookdown document to
 automatically print bookdown-style labels. If unset, huxtable will try to
 guess if we are in a bookdown document.
-\item \code{options('huxtable.knit_print_df')}. If \code{TRUE}, data frames
+\item \code{options("huxtable.knit_print_df")}. If \code{TRUE}, data frames
 in knitr will be pretty-printed using huxtable. This option defaults to
 \code{TRUE} only if huxtable is attached to the search path using
 \code{\link[=library]{library()}}; not if huxtable is merely loaded (e.g. imported by another
 package).
-\item \code{options('huxtable.knit_print_df_theme')}. A function applied to data frames
+\item \code{options("huxtable.knit_print_df_theme")}. A function applied to data frames
 before printing in knitr. The function should take one argument (a data
 frame) and return a huxtable. Defaults to \code{\link[=theme_plain]{theme_plain()}}.
-\item \code{options('huxtable.autoformat')} sets the default value for \code{autoformat} in
+\item \code{options("huxtable.autoformat")} sets the default value for \code{autoformat} in
 \code{\link[=huxtable]{huxtable()}} and \code{\link[=as_huxtable]{as_huxtable()}}. It defaults to \code{TRUE}.
-\item \code{options('huxtable.latex_use_fontspec')}. If \code{TRUE}, use the "fontspec"
+\item \code{options("huxtable.latex_use_fontspec")}. If \code{TRUE}, use the "fontspec"
 package, which allows you to use the same font names in TeX and HTML. This
 requires the the xetex or xelatex engine, which can be set using an .rmd
 header option. Note that \code{\link[=quick_pdf]{quick_pdf()}} may use pdflatex. The default is
 \code{FALSE}.
-\item \code{options('huxtable.long_minus')}. If \code{TRUE}, prints long minus signs
+\item \code{options("huxtable.long_minus")}. If \code{TRUE}, prints long minus signs
 for numbers. The default is \code{FALSE}. In LaTeX output, this option is
-overridden by \code{options('huxtable.latex_siunitx_align')}.
-\item \code{options('huxtable.latex_siunitx_align')}. If \code{TRUE}, uses the \verb{\\tablenum}
+overridden by \code{options("huxtable.latex_siunitx_align")}.
+\item \code{options("huxtable.latex_siunitx_align")}. If \code{TRUE}, uses the \verb{\\tablenum}
 macro from the "siunitx" package to align numbers when \code{align(ht)} is \code{"."}
 or similar. See \code{\link[=align]{align()}} for details. The default is \code{FALSE}.
-\item \code{options('huxtable.autoformat_number_format')} and
-\code{options('huxtable.autoformat_align')} are lists. The list names are base R
+\item \code{options("huxtable.autoformat_number_format")} and
+\code{options("huxtable.autoformat_align")} are lists. The list names are base R
 classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set \code{number_format()} and
 \code{align()} for data columns according to the corresponding list values. For
 example, to center-align \code{Date} objects you could set

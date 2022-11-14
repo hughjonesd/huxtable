@@ -37,7 +37,6 @@ You may need to set the beamer "fragile" option, like this:
 You can change numeric formatting using \code{\link[=number_format]{number_format()}}. Base R options
 like \code{\link[base:options]{scipen}} usually have no effect.
 \item How can I use HTML, TeX etc. in my table?
-}
 
 Use \code{\link[=escape_contents]{escape_contents()}}:
 
@@ -49,7 +48,6 @@ Use \code{\link[=escape_contents]{escape_contents()}}:
 
 Alternatively you might consider using markdown in cells, with
 \code{\link[=set_markdown_contents]{set_markdown_contents()}}.
-\itemize{
 \item I ran \code{caption(ht) <- "Something"} and got an error message:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Error in UseMethod("caption<-") :

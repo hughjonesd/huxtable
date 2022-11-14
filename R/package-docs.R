@@ -40,7 +40,7 @@
 #' ```
 #'
 #' For more information, see \href{https://hughjonesd.github.io/huxtable/}{the website} or
-#' read the vignette with `vignette('huxtable')`.
+#' read the vignette with `vignette("huxtable")`.
 #'
 #' See [huxtable-FAQ] for frequently asked questions, including ways to get
 #' help.
@@ -57,57 +57,57 @@ NULL
 #'
 #' Huxtable has several options.
 #'
-#' * `options('huxtable.add_colnames')` sets the default value for
+#' * `options("huxtable.add_colnames")` sets the default value for
 #'   `add_colnames` in [huxtable()] and [as_huxtable()]. As of version 5.0.0, this
 #'   defaults to `TRUE`.
 #'
-#' * `options('huxtable.print')` sets the print method for
+#' * `options("huxtable.print")` sets the print method for
 #'   huxtable objects. See [print.huxtable()].
 #'
-#' * `options('huxtable.knitr_output_format')` overrides the default output format
+#' * `options("huxtable.knitr_output_format")` overrides the default output format
 #'   when huxtable objects are printed by knitr. Set to "html", "latex", "md" or
 #'   "screen". If `NULL` (the default), huxtable guesses the format using
 #'   [guess_knitr_output_format()].
 #'
-#' * `options('huxtable.autolabel')`. If `TRUE`, (the default) automatically
+#' * `options("huxtable.autolabel")`. If `TRUE`, (the default) automatically
 #'   sets `label()` from the knitr chunk label, if there is one.
 #'
-#' * `options('huxtable.color_screen')`. If `TRUE` and package `crayon` is
+#' * `options("huxtable.color_screen")`. If `TRUE` and package `crayon` is
 #'   available, huxtables will be printed in color on screen.
 #'
-#' * `options('huxtable.bookdown')`. Set to `TRUE` within a bookdown document to
+#' * `options("huxtable.bookdown")`. Set to `TRUE` within a bookdown document to
 #'   automatically print bookdown-style labels. If unset, huxtable will try to
 #'   guess if we are in a bookdown document.
 #'
-#' * `options('huxtable.knit_print_df')`. If `TRUE`, data frames
+#' * `options("huxtable.knit_print_df")`. If `TRUE`, data frames
 #'   in knitr will be pretty-printed using huxtable. This option defaults to
 #'   `TRUE` only if huxtable is attached to the search path using
 #'   [library()]; not if huxtable is merely loaded (e.g. imported by another
 #'   package).
 #'
-#' * `options('huxtable.knit_print_df_theme')`. A function applied to data frames
+#' * `options("huxtable.knit_print_df_theme")`. A function applied to data frames
 #'   before printing in knitr. The function should take one argument (a data
 #'   frame) and return a huxtable. Defaults to [theme_plain()].
 #'
-#' * `options('huxtable.autoformat')` sets the default value for `autoformat` in
+#' * `options("huxtable.autoformat")` sets the default value for `autoformat` in
 #'   [huxtable()] and [as_huxtable()]. It defaults to `TRUE`.
 #'
-#' * `options('huxtable.latex_use_fontspec')`. If `TRUE`, use the "fontspec"
+#' * `options("huxtable.latex_use_fontspec")`. If `TRUE`, use the "fontspec"
 #'   package, which allows you to use the same font names in TeX and HTML. This
 #'   requires the the xetex or xelatex engine, which can be set using an .rmd
 #'   header option. Note that [quick_pdf()] may use pdflatex. The default is
 #'   `FALSE`.
 #'
-#' * `options('huxtable.long_minus')`. If `TRUE`, prints long minus signs
+#' * `options("huxtable.long_minus")`. If `TRUE`, prints long minus signs
 #'   for numbers. The default is `FALSE`. In LaTeX output, this option is
-#'   overridden by `options('huxtable.latex_siunitx_align')`.
+#'   overridden by `options("huxtable.latex_siunitx_align")`.
 #'
-#' * `options('huxtable.latex_siunitx_align')`. If `TRUE`, uses the `\tablenum`
+#' * `options("huxtable.latex_siunitx_align")`. If `TRUE`, uses the `\tablenum`
 #'   macro from the "siunitx" package to align numbers when `align(ht)` is `"."`
 #'   or similar. See [align()] for details. The default is `FALSE`.
 #'
-#' * `options('huxtable.autoformat_number_format')` and
-#'   `options('huxtable.autoformat_align')` are lists. The list names are base R
+#' * `options("huxtable.autoformat_number_format")` and
+#'   `options("huxtable.autoformat_align")` are lists. The list names are base R
 #'   classes. [huxtable()] with `autoformat = TRUE` will set `number_format()` and
 #'   `align()` for data columns according to the corresponding list values. For
 #'   example, to center-align `Date` objects you could set
@@ -158,17 +158,17 @@ NULL
 #
 #' * How can I use HTML, TeX etc. in my table?
 #'
-#'  Use [escape_contents()]:
+#'    Use [escape_contents()]:
 #'
-#'  ```r
-#'  jams |>
-#'       add_footnote("These jams are <i>tasty</i>!") |>
-#'       set_escape_contents(final(1), everywhere, FALSE) |>
-#'       quick_html()
-#'  ```
+#'    ```r
+#'    jams |>
+#'         add_footnote("These jams are <i>tasty</i>!") |>
+#'         set_escape_contents(final(1), everywhere, FALSE) |>
+#'         quick_html()
+#'    ```
 #'
-#'  Alternatively you might consider using markdown in cells, with
-#'  [set_markdown_contents()].
+#'    Alternatively you might consider using markdown in cells, with
+#'    [set_markdown_contents()].
 #'
 #' * I ran `caption(ht) <- "Something"` and got an error message:
 #'
