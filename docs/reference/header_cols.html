@@ -18,7 +18,7 @@ or left of the table."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,30 +94,39 @@ or left of the table.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">header_cols</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">header_cols</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_header_cols</span><span class="op">(</span><span class="va">ht</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">header_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">header_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_header_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">value</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">header_cols</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">header_cols</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_header_cols</span><span class="op">(</span><span class="va">ht</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">header_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">header_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_header_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">value</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>A col specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>Logical vector. Set to <code>NA</code> to reset to the default,
 which is <code>FALSE</code>.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>header_cols()</code> returns the <code>header_cols</code> property.
+    
+
+<p><code>header_cols()</code> returns the <code>header_cols</code> property.
 <code>set_header_cols()</code> returns the modified huxtable.</p>
     </div>
     <div id="details">
@@ -130,20 +139,20 @@ differently when <a href="restack-across-down.html">restacking</a>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">set_header_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">set_header_cols</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="style-functions.html">style_headers</a></span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">       bold       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">       text_color <span class="op">=</span> <span class="st">"purple"</span></span>
-<span class="r-in">     <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">set_header_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">set_header_cols</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style-functions.html">style_headers</a></span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>       bold       <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>       text_color <span class="op">=</span> <span class="st">"purple"</span></span></span>
+<span class="r-in"><span>     <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #AF00FF; font-weight: bold;">Type      </span>   <span style="color: #AF00FF; font-weight: bold;">  Price</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #AF00FF; font-weight: bold;">Strawberry</span>      1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #AF00FF; font-weight: bold;">Raspberry </span>      2.10  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #AF00FF; font-weight: bold;">Plum      </span>      1.80  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -158,7 +167,7 @@ differently when <a href="restack-across-down.html">restacking</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

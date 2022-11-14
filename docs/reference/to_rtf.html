@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,26 +92,33 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">print_rtf</span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="fu"><a href="rtf_fc_tables.html">rtf_fc_tables</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">to_rtf</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for huxtable</span>
-<span class="fu">to_rtf</span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="fu"><a href="rtf_fc_tables.html">rtf_fc_tables</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">print_rtf</span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="fu"><a href="rtf_fc_tables.html">rtf_fc_tables</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">to_rtf</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for huxtable</span></span>
+<span><span class="fu">to_rtf</span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="fu"><a href="rtf_fc_tables.html">rtf_fc_tables</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>fc_tables</dt>
 <dd><p>See <code><a href="rtf_fc_tables.html">rtf_fc_tables()</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to pass to methods.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>to_rtf</code> returns a string representing an RTF table. The <code>fc_tables</code> attribute of the
+    
+
+<p><code>to_rtf</code> returns a string representing an RTF table. The <code>fc_tables</code> attribute of the
 returned string will contain the <code>fc_tables</code> object that was passed in (or autocreated).
 <code>print_rtf</code> prints the string and returns <code>NULL</code>.</p>
     </div>
@@ -145,8 +152,8 @@ custom fonts and colors won"t work in this context.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">print_rtf</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">print_rtf</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \trowd</span>
@@ -193,7 +200,7 @@ custom fonts and colors won"t work in this context.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

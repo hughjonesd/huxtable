@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,44 +92,59 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_quantiles</span><span class="op">(</span>
-  <span class="va">quantiles</span>,
-  <span class="va">values</span>,
-  right <span class="op">=</span> <span class="cn">FALSE</span>,
-  extend <span class="op">=</span> <span class="cn">TRUE</span>,
-  ignore_na <span class="op">=</span> <span class="cn">TRUE</span>,
-  colwise <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">by_equal_groups</span><span class="op">(</span><span class="va">n</span>, <span class="va">values</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span>, colwise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_quantiles</span><span class="op">(</span></span>
+<span>  <span class="va">quantiles</span>,</span>
+<span>  <span class="va">values</span>,</span>
+<span>  right <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  extend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ignore_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  colwise <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by_equal_groups</span><span class="op">(</span><span class="va">n</span>, <span class="va">values</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span>, colwise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>quantiles</dt>
 <dd><p>Vector of quantiles.</p></dd>
+
+
 <dt>values</dt>
 <dd><p>Vector of values. <code>length(values)</code> should be one greater than <code>length(quantiles)</code>,
 or one less if <code>extend = FALSE</code>.</p></dd>
+
+
 <dt>right</dt>
 <dd><p>If <code>TRUE</code>, intervals are closed on the right, i.e. if values are exactly equal to a
 <code><a href="https://rdrr.io/r/base/Control.html" class="external-link">break</a></code>, they go in the lower group. Otherwise, intervals are closed on the left, so equal
 values go in the higher group. <code>FALSE</code> by default.</p></dd>
+
+
 <dt>extend</dt>
 <dd><p>Extend <code>breaks</code> to <code>c(-Inf, breaks, Inf)</code>, i.e. include numbers below and above the
 outermost breaks. <code>TRUE</code> by default.</p></dd>
+
+
 <dt>ignore_na</dt>
 <dd><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged
 from their previous values. Otherwise, <code>NA</code>
 normally resets to the default.</p></dd>
+
+
 <dt>colwise</dt>
 <dd><p>Logical. Calculate breaks separately within each column?</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Number of equal-sized groups. <code>length(values)</code> should equal <code>n</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function for use in <code>map_***</code> functions.</p>
+    
+
+<p>A function for use in <code>map_***</code> functions.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -151,53 +166,53 @@ for <code>by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)</code>).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_quantiles</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BB0000;"> -2.21 </span>   <span style="background-color: #BBBB00;"> 0.698   </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;"> -0.183</span>   <span style="background-color: #BBBB00;">-0.0115  </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;">  0.765</span>   <span style="background-color: #00BB00;"> 1.59    </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BB0000;"> -1.79 </span>   <span style="background-color: #BBBB00;">-0.000355</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #00BB00;">  1.11 </span>   <span style="background-color: #BBBB00;">-0.458   </span>  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_quantiles</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -0.412</span>   <span style="background-color: #BBBB00;"> -2.04 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BB0000;"> -2.23 </span>   <span style="background-color: #BBBB00;"> -0.349</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #00BB00;">  0.394</span>   <span style="background-color: #BB0000;"> -2.31 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.56 </span>   <span style="background-color: #00BB00;">  1.08 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.57 </span>   <span style="background-color: #BBBB00;"> -0.117</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-2.20943627927108, -0.183158158601004, 0.764610362621447,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.79477957813802, , c(0.698274452339709, -0.0115295922476895,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.59339880295194, -0.000354854823912664,</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_quantiles</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span>
-<span class="r-in">        colwise <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BB0000;"> -2.21 </span>   <span style="background-color: #BBBB00;"> 0.698   </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;"> -0.183</span>   <span style="background-color: #BBBB00;">-0.0115  </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;">  0.765</span>   <span style="background-color: #00BB00;"> 1.59    </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;"> -1.79 </span>   <span style="background-color: #BBBB00;">-0.000355</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #00BB00;">  1.11 </span>   <span style="background-color: #BB0000;">-0.458   </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-0.412466485122208, -2.23400490557444, 0.394005148980076,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.55863709693466, , c(-2.03622994361121, -0.348532374909471,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.31232546112226, 1.07737311463648,</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_quantiles</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        colwise <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -0.412</span>   <span style="background-color: #BBBB00;"> -2.04 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BB0000;"> -2.23 </span>   <span style="background-color: #BBBB00;"> -0.349</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #00BB00;">  0.394</span>   <span style="background-color: #BB0000;"> -2.31 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.56 </span>   <span style="background-color: #00BB00;">  1.08 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.57 </span>   <span style="background-color: #BBBB00;"> -0.117</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-2.20943627927108, -0.183158158601004, 0.764610362621447,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.79477957813802, , c(0.698274452339709, -0.0115295922476895,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.59339880295194, -0.000354854823912664,</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_equal_groups</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fl">3</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BB0000;"> -2.21 </span>   <span style="background-color: #00BB00;"> 0.698   </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BBBB00;"> -0.183</span>   <span style="background-color: #BBBB00;">-0.0115  </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #00BB00;">  0.765</span>   <span style="background-color: #00BB00;"> 1.59    </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #BB0000;"> -1.79 </span>   <span style="background-color: #BBBB00;">-0.000355</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #00BB00;">  1.11 </span>   <span style="background-color: #BB0000;">-0.458   </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-0.412466485122208, -2.23400490557444, 0.394005148980076,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.55863709693466, , c(-2.03622994361121, -0.348532374909471,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.31232546112226, 1.07737311463648,</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_equal_groups</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -0.412</span>   <span style="background-color: #BB0000;"> -2.04 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BB0000;"> -2.23 </span>   <span style="background-color: #00BB00;"> -0.349</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #00BB00;">  0.394</span>   <span style="background-color: #BB0000;"> -2.31 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.56 </span>   <span style="background-color: #00BB00;">  1.08 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #BBBB00;"> -1.57 </span>   <span style="background-color: #00BB00;"> -0.117</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-2.20943627927108, -0.183158158601004, 0.764610362621447,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.79477957813802, , c(0.698274452339709, -0.0115295922476895,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.59339880295194, -0.000354854823912664,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-0.412466485122208, -2.23400490557444, 0.394005148980076,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.55863709693466, , c(-2.03622994361121, -0.348532374909471,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.31232546112226, 1.07737311463648,</span>
 </code></pre></div>
     </div>
   </div>
@@ -212,7 +227,7 @@ for <code>by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)</code>).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ useful to change this. You can do so by setting options("huxtable.print").'><!--
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -96,26 +96,35 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for huxtable</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for huxtable</span>
-<span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latex"</span>, <span class="st">"html"</span>, <span class="st">"md"</span>, <span class="st">"screen"</span>, <span class="st">"rtf"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for huxtable</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for huxtable</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latex"</span>, <span class="st">"html"</span>, <span class="st">"md"</span>, <span class="st">"screen"</span>, <span class="st">"rtf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Options passed to other methods.</p></dd>
+
+
 <dt>output</dt>
 <dd><p>Output format. One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code>, <code>"screen"</code> or <code>"rtf"</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>print</code> prints the huxtable and returns <code>NULL</code> invisibly.
-<code>format</code> returns a string representation from <code><a href="to_latex.html">to_latex()</a></code>, <code><a href="to_html.html">to_html()</a></code> etc.</p>
+    
+
+<p><code>print</code> prints the huxtable and returns <code>NULL</code> invisibly.</p>
+
+
+<p><code>format</code> returns a string representation from <code><a href="to_latex.html">to_latex()</a></code>, <code><a href="to_html.html">to_html()</a></code> etc.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -125,14 +134,14 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="co"># to print LaTeX output:</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>huxtable.print <span class="op">=</span> <span class="va">print_latex</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"screen"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># to print LaTeX output:</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>huxtable.print <span class="op">=</span> <span class="va">print_latex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"screen"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "                              Type           Price  \n                              Strawberry      1.90  \n                              Raspberry       2.10  \n                              Plum            1.80  \n\nColumn names: Type, Price\n"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"md"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"md"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "-----------------------\n Type            Price \n----------- -----------\n Strawberry       1.90 \n                       \n Raspberry        2.10 \n                       \n Plum             1.80 \n-----------------------\n\n"</span>
 </code></pre></div>
     </div>
@@ -148,7 +157,7 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

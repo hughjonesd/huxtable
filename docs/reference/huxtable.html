@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,25 +92,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">huxtable</span><span class="op">(</span>
-  <span class="va">...</span>,
-  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  add_rownames <span class="op">=</span> <span class="cn">FALSE</span>,
-  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">hux</span><span class="op">(</span>
-  <span class="va">...</span>,
-  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  add_rownames <span class="op">=</span> <span class="cn">FALSE</span>,
-  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">tribble_hux</span><span class="op">(</span>
-  <span class="va">...</span>,
-  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">huxtable</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  add_rownames <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hux</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  add_rownames <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tribble_hux</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  add_colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.add_colnames"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  autoformat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"huxtable.autoformat"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -118,17 +118,26 @@
     <dl><dt>...</dt>
 <dd><p>For <code>huxtable</code>, named list of values as in <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code>.
 For <code>tribble_hux</code>, data values as in <code><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tibble::tribble()</a></code>.</p></dd>
+
+
 <dt>add_colnames</dt>
 <dd><p>If <code>TRUE</code>, add a first row of column names to the huxtable.</p></dd>
+
+
 <dt>add_rownames</dt>
 <dd><p>If <code>TRUE</code> or a character string, add a first column of row names
 to the huxtable. The string gives the name for the new column (or <code>"rownames"</code> for <code>TRUE</code>).</p></dd>
+
+
 <dt>autoformat</dt>
 <dd><p>If <code>TRUE</code>, automatically format columns by type. See below.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>huxtable</code>.</p>
+    
+
+<p>An object of class <code>huxtable</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -165,11 +174,11 @@ apply to column headers.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">huxtable</span><span class="op">(</span></span>
-<span class="r-in">        column1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
-<span class="r-in">        column2 <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">huxtable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        column1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span></span>
+<span class="r-in"><span>        column2 <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                column1   column2  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      1   a        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      2   b        </span>
@@ -178,13 +187,13 @@ apply to column headers.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      5   e        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: column1, column2</span>
-<span class="r-in"><span class="fu">tribble_hux</span><span class="op">(</span></span>
-<span class="r-in">  <span class="op">~</span> <span class="va">Name</span>,             <span class="op">~</span> <span class="va">Salary</span>,</span>
-<span class="r-in">    <span class="st">"John Smith"</span>,       <span class="fl">50000</span>,</span>
-<span class="r-in">    <span class="st">"Jane Doe"</span>,         <span class="fl">50000</span>,</span>
-<span class="r-in">    <span class="st">"David Hugh-Jones"</span>, <span class="fl">50000</span>,</span>
-<span class="r-in">    add_colnames <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">tribble_hux</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="op">~</span> <span class="va">Name</span>,             <span class="op">~</span> <span class="va">Salary</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"John Smith"</span>,       <span class="fl">50000</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Jane Doe"</span>,         <span class="fl">50000</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"David Hugh-Jones"</span>, <span class="fl">50000</span>,</span></span>
+<span class="r-in"><span>    add_colnames <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Name                Salary  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            John Smith           5e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Jane Doe             5e+04  </span>
@@ -205,7 +214,7 @@ apply to column headers.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

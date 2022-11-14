@@ -97,7 +97,8 @@ devtools::release()
 # Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
 # $ touch inst/doc/*
 # Ensure there's a vignette index in build/vignettes.rds
-# NB NOT Meta/vignettes.rds!
+# NB NOT Meta/vignettes.rds! devtools::build_vignettes() will put it there,
+# you can move it
 # Build a version for CRAN:
 # > pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile

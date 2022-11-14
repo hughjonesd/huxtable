@@ -18,7 +18,7 @@ functionality to xtable, with a simpler interface."><!-- mathjax --><script src=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -100,11 +100,26 @@ functionality to xtable, with a simpler interface.</p>
 
 
 <p>To create a huxtable object, use <code><a href="huxtable.html">huxtable()</a></code> or <code><a href="as_huxtable.html">as_huxtable()</a></code>:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"> <span class="kw">library</span>(huxtable)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"> employees &lt;-<span class="st"> </span><span class="kw">huxtable</span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">         <span class="dt">Names    =</span> <span class="kw">c</span>(<span class="st">"Hadley"</span>, <span class="st">"Yihui"</span>, <span class="st">"Dirk"</span>),</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">         <span class="dt">Salaries =</span> <span class="kw">c</span>(<span class="fl">1e5</span>, <span class="fl">1e5</span>, <span class="fl">1e5</span>),</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">         <span class="dt">add_colnames =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">       )</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"> car_hux &lt;-<span class="st"> </span><span class="kw">as_hux</span>(mtcars)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a></code></pre><p></p></div>
 <p>You can then set properties which affect how the huxtable is displayed:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"> <span class="co"># make the first row bold:</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"> <span class="kw">bold</span>(employees)[<span class="dv">1</span>, ] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"> <span class="co"># change the font size everywhere:</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"> <span class="kw">font_size</span>(employees) &lt;-<span class="st"> </span><span class="dv">10</span></a></code></pre><p></p></div>
 <p>Or you can use a tidyverse style with the pipe operator:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">employees &lt;-<span class="st"> </span>employees <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">      </span><span class="kw">set_font_size</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">      </span><span class="kw">set_bold</span>(<span class="dv">1</span>, everywhere, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a></code></pre><p></p></div>
 <p>For more information, see <a href="https://hughjonesd.github.io/huxtable/" class="external-link">the website</a> or
 read the vignette with <code><a href="../articles/huxtable.html">vignette('huxtable')</a></code>.</p>
 <p>See <a href="huxtable-FAQ.html">huxtable-FAQ</a> for frequently asked questions, including ways to get
@@ -125,7 +140,7 @@ help.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

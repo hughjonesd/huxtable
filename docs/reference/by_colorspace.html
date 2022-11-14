@@ -18,7 +18,7 @@ text colors, visually differentiating high or low values."><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,33 +94,44 @@ text colors, visually differentiating high or low values.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_colorspace</span><span class="op">(</span>
-  <span class="va">...</span>,
-  range <span class="op">=</span> <span class="cn">NULL</span>,
-  na_color <span class="op">=</span> <span class="cn">NA</span>,
-  ignore_na <span class="op">=</span> <span class="cn">TRUE</span>,
-  colwise <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_colorspace</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na_color <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  ignore_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  colwise <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>Colors</p></dd>
+
+
 <dt>range</dt>
 <dd><p>Numeric endpoints. If <code>NULL</code>, these are determined from the data.</p></dd>
+
+
 <dt>na_color</dt>
 <dd><p>Color to return for <code>NA</code> values. Can be <code>NA</code> itself.</p></dd>
+
+
 <dt>ignore_na</dt>
 <dd><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged
 from their previous values. Otherwise, <code>NA</code>
 normally resets to the default.</p></dd>
+
+
 <dt>colwise</dt>
 <dd><p>Logical. Calculate breaks separately within each column?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function for use in <code>map_***</code> functions.</p>
+    
+
+<p>A function for use in <code>map_***</code> functions.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -141,28 +152,28 @@ normally resets to the default.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"scales"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Please install the \"scales\" package to run this example"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_colorspace</span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFAFAF;"> 0.734 </span>   <span style="background-color: #D7AFD7;"> 0.899</span>   <span style="background-color: #FFFF5F;"> 0.338</span>   <span style="background-color: #0000FF;"> 1.48 </span>   <span style="background-color: #D787D7;"> 1.06 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF5F;"> 0.368 </span>   <span style="background-color: #FFD787;"> 0.515</span>   <span style="background-color: #FFAFAF;"> 0.764</span>   <span style="background-color: #FF0000;">-0.887</span>   <span style="background-color: #FFFF5F;"> 0.363</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF00;"> 0.0394</span>   <span style="background-color: #D7AFAF;"> 0.793</span>   <span style="background-color: #D787D7;"> 1.06 </span>   <span style="background-color: #FFAF00;">-0.515</span>   <span style="background-color: #FF0000;">-0.928</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFD787;"> 0.581 </span>   <span style="background-color: #FFAF00;">-0.45 </span>   <span style="background-color: #FF8700;">-0.64 </span>   <span style="background-color: #FFFF00;"> 0.218</span>   <span style="background-color: #FF8700;">-0.544</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFAF00;">-0.46  </span>   <span style="background-color: #FFD7AF;"> 0.698</span>   <span style="background-color: #FFD700;">-0.231</span>   <span style="background-color: #FFAF00;">-0.324</span>   <span style="background-color: #FFD700;">-0.109</span>  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"scales"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Please install the \"scales\" package to run this example"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_colorspace</span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFD700;">-0.849 </span>   <span style="background-color: #FFFF00;">-0.743</span>   <span style="background-color: #FFD7AF;">0.0626</span>   <span style="background-color: #8700FF;"> 1.11 </span>   <span style="background-color: #FFD7AF;"> 0.0693</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF87;">-0.177 </span>   <span style="background-color: #D787D7;"> 0.648</span>   <span style="background-color: #D787D7;">0.654 </span>   <span style="background-color: #D7AFAF;"> 0.353</span>   <span style="background-color: #FFD787;"> 0.0558</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FF8700;">-1.71  </span>   <span style="background-color: #FFFF87;">-0.186</span>   <span style="background-color: #875FFF;">1     </span>   <span style="background-color: #D7AFAF;"> 0.433</span>   <span style="background-color: #8700FF;"> 1.15  </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF00;">-0.758 </span>   <span style="background-color: #0000FF;"> 1.29 </span>   <span style="background-color: #FFD7AF;">0.159 </span>   <span style="background-color: #0000FF;"> 1.29 </span>   <span style="background-color: #FFD787;">-0.0272</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFD787;">-0.0194</span>   <span style="background-color: #FFD700;">-0.962</span>   <span style="background-color: #0000FF;">1.28  </span>   <span style="background-color: #FF0000;">-2.17 </span>   <span style="background-color: #FFAF00;">-1.43  </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5</span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_colorspace</span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span>,</span>
-<span class="r-in">        colwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #0000FF;"> 0.734 </span>   <span style="background-color: #0000FF;"> 0.899</span>   <span style="background-color: #FFFF87;"> 0.338</span>   <span style="background-color: #0000FF;"> 1.48 </span>   <span style="background-color: #0000FF;"> 1.06 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFAFAF;"> 0.368 </span>   <span style="background-color: #D7AFAF;"> 0.515</span>   <span style="background-color: #D787D7;"> 0.764</span>   <span style="background-color: #FF0000;">-0.887</span>   <span style="background-color: #FFD7AF;"> 0.363</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF00;"> 0.0394</span>   <span style="background-color: #875FFF;"> 0.793</span>   <span style="background-color: #0000FF;"> 1.06 </span>   <span style="background-color: #FF8700;">-0.515</span>   <span style="background-color: #FF0000;">-0.928</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #AF5FD7;"> 0.581 </span>   <span style="background-color: #FF0000;">-0.45 </span>   <span style="background-color: #FF0000;">-0.64 </span>   <span style="background-color: #FFFF00;"> 0.218</span>   <span style="background-color: #FFAF00;">-0.544</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FF0000;">-0.46  </span>   <span style="background-color: #AF87D7;"> 0.698</span>   <span style="background-color: #FFAF00;">-0.231</span>   <span style="background-color: #FFAF00;">-0.324</span>   <span style="background-color: #FFFF00;">-0.109</span>  </span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_colorspace</span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span>,</span></span>
+<span class="r-in"><span>        colwise <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF00;">-0.849 </span>   <span style="background-color: #FF8700;">-0.743</span>   <span style="background-color: #FF0000;">0.0626</span>   <span style="background-color: #8700FF;"> 1.11 </span>   <span style="background-color: #FFFF87;"> 0.0693</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #AF5FFF;">-0.177 </span>   <span style="background-color: #D7AFAF;"> 0.648</span>   <span style="background-color: #FFFF00;">0.654 </span>   <span style="background-color: #D7AFAF;"> 0.353</span>   <span style="background-color: #FFFF87;"> 0.0558</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FF0000;">-1.71  </span>   <span style="background-color: #FFD700;">-0.186</span>   <span style="background-color: #D787D7;">1     </span>   <span style="background-color: #D7AFD7;"> 0.433</span>   <span style="background-color: #0000FF;"> 1.15  </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #FFFF5F;">-0.758 </span>   <span style="background-color: #0000FF;"> 1.29 </span>   <span style="background-color: #FF5F00;">0.159 </span>   <span style="background-color: #0000FF;"> 1.29 </span>   <span style="background-color: #FFFF5F;">-0.0272</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #0000FF;">-0.0194</span>   <span style="background-color: #FF0000;">-0.962</span>   <span style="background-color: #0000FF;">1.28  </span>   <span style="background-color: #FF0000;">-2.17 </span>   <span style="background-color: #FF0000;">-1.43  </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5</span>
 </code></pre></div>
@@ -179,7 +190,7 @@ normally resets to the default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

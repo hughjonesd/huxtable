@@ -18,7 +18,7 @@ all table columns and has an optional border above."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,33 +94,44 @@ all table columns and has an optional border above.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_footnote</span><span class="op">(</span><span class="va">ht</span>, <span class="va">text</span>, border <span class="op">=</span> <span class="fl">0.8</span>, number_format <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_footnote</span><span class="op">(</span><span class="va">ht</span>, <span class="va">text</span>, border <span class="op">=</span> <span class="fl">0.8</span>, number_format <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>text</dt>
 <dd><p>Text for the footnote.</p></dd>
+
+
 <dt>border</dt>
 <dd><p>Width of the footnote's top border. Set to 0 for no border, or
 <code>NULL</code> to leave the border unchanged.</p></dd>
+
+
 <dt>number_format</dt>
 <dd><p>Number format for the footnote cell.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other properties, passed to <code><a href="style-functions.html">set_cell_properties()</a></code> for the footnote cell.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The modified huxtable</p>
+    
+
+<p>The modified huxtable</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">add_footnote</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="st">"* subject to availability"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">jams</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu">add_footnote</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"* subject to availability"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">jams</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        Type         Price   Sugar content  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        Strawberry    1.90          40.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        Raspberry     2.10          35.00%  </span>
@@ -143,7 +154,7 @@ all table columns and has an optional border above.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

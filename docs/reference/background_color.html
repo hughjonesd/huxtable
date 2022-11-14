@@ -22,7 +22,7 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -99,29 +99,40 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">background_color</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">background_color</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_background_color</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_background_color</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">background_color</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">background_color</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_background_color</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_background_color</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
+
 <dt>fn</dt>
 <dd><p>A mapping function. See <a href="mapping-functions.html">mapping-functions</a> for details.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>A character vector or matrix.</p>
 <p>Set to <code>NA</code> to reset to the default, which is <code>"NA"</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>background_color()</code> returns the <code>background_color</code> property.
+    
+
+<p><code>background_color()</code> returns the <code>background_color</code> property.
 <code>set_background_color()</code> returns the modified huxtable.</p>
     </div>
     <div id="details">
@@ -141,32 +152,32 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">background_color</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">background_color</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">background_color</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">background_color</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Type      Price     Sugar    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   "#B3B3B3" "#B3B3B3" "#B3B3B3"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1 "#B3B3B3" "#B3B3B3" "#B3B3B3"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   "#B3B3B3" "#B3B3B3" "#B3B3B3"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3   "#B3B3B3" "#B3B3B3" "#B3B3B3"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">set_background_color</span><span class="op">(</span><span class="va">jams</span>, <span class="st">"yellow"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">set_background_color</span><span class="op">(</span><span class="va">jams</span>, <span class="st">"yellow"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Type      </span>   <span style="background-color: #BBBB00;">Price</span>   <span style="background-color: #BBBB00;">Sugar content</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Strawberry</span>   <span style="background-color: #BBBB00;"> 1.90</span>   <span style="background-color: #BBBB00;">       40.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Raspberry </span>   <span style="background-color: #BBBB00;"> 2.10</span>   <span style="background-color: #BBBB00;">       35.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Plum      </span>   <span style="background-color: #BBBB00;"> 1.80</span>   <span style="background-color: #BBBB00;">       50.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sugar</span>
-<span class="r-in"><span class="fu">set_background_color</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="st">"yellow"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">set_background_color</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="st">"yellow"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #A8A8A8;">Type      </span>   <span style="background-color: #A8A8A8;">Price</span>   <span style="background-color: #A8A8A8;">Sugar content</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Strawberry</span>   <span style="background-color: #A8A8A8;"> 1.90</span>   <span style="background-color: #A8A8A8;">       40.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Raspberry </span>   <span style="background-color: #A8A8A8;"> 2.10</span>   <span style="background-color: #A8A8A8;">       35.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #A8A8A8;">Plum      </span>   <span style="background-color: #A8A8A8;"> 1.80</span>   <span style="background-color: #A8A8A8;">       50.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sugar</span>
-<span class="r-in"><span class="fu">map_background_color</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_rows.html">by_rows</a></span><span class="op">(</span><span class="st">"yellow"</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">map_background_color</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_rows.html">by_rows</a></span><span class="op">(</span><span class="st">"yellow"</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Type      </span>   <span style="background-color: #BBBB00;">Price</span>   <span style="background-color: #BBBB00;">Sugar content</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #A8A8A8;">Strawberry</span>   <span style="background-color: #A8A8A8;"> 1.90</span>   <span style="background-color: #A8A8A8;">       40.00%</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        <span style="background-color: #BBBB00;">Raspberry </span>   <span style="background-color: #BBBB00;"> 2.10</span>   <span style="background-color: #BBBB00;">       35.00%</span>  </span>
@@ -187,7 +198,7 @@ The result of a function like rgb(1, 0, 0) or grey(0.5)
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ confidence intervals etc. for a model."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,39 +94,52 @@ confidence intervals etc. for a model.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tidy_override</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, extend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">tidy_replace</span><span class="op">(</span><span class="va">x</span>, <span class="va">tidied</span>, glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># S3 method for tidy_override</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for tidy_override</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for tidy_override</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tidy_override</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, extend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tidy_replace</span><span class="op">(</span><span class="va">x</span>, <span class="va">tidied</span>, glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tidy_override</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tidy_override</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tidy_override</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A model with methods defined for <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">generics::tidy()</a></code> and/or <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">generics::glance()</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>In <code>tidy_override</code>, columns of statistics to replace <code>tidy</code> output. In
 <code>tidy</code> and <code>glance</code> methods, arguments passed on to the underlying model.</p></dd>
+
+
 <dt>glance</dt>
 <dd><p>A list of summary statistics for <code>glance</code>.</p></dd>
+
+
 <dt>extend</dt>
 <dd><p>Logical: allow adding new columns to <code>tidy(x)</code> and <code>glance(x)</code>?</p></dd>
+
+
 <dt>tidied</dt>
 <dd><p>Data frame to replace the result of <code>tidy(x)</code>.</p></dd>
+
+
 <dt>object</dt>
 <dd><p>A <code>tidy_override</code> object.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object that can be passed in to <code>huxreg</code>.</p>
+    
+
+<p>An object that can be passed in to <code>huxreg</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -137,15 +150,15 @@ data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"broom"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Please install 'broom' to run this example."</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">fixed_lm1</span> <span class="op">&lt;-</span> <span class="fu">tidy_override</span><span class="op">(</span><span class="va">lm1</span>,</span>
-<span class="r-in">      p.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.04</span>, <span class="fl">.12</span><span class="op">)</span>,</span>
-<span class="r-in">      glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>r.squared <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="huxreg.html">huxreg</a></span><span class="op">(</span><span class="va">lm1</span>, <span class="va">fixed_lm1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"broom"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Please install 'broom' to run this example."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fixed_lm1</span> <span class="op">&lt;-</span> <span class="fu">tidy_override</span><span class="op">(</span><span class="va">lm1</span>,</span></span>
+<span class="r-in"><span>      p.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.04</span>, <span class="fl">.12</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      glance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>r.squared <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="huxreg.html">huxreg</a></span><span class="op">(</span><span class="va">lm1</span>, <span class="va">fixed_lm1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               ────────────────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                       (1)              (2)        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                ───────────────────────────────────</span>
@@ -162,14 +175,14 @@ data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: names, model1, model2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">mnl</span> <span class="op">&lt;-</span> <span class="fu">nnet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">multinom</a></span><span class="op">(</span><span class="va">gear</span> <span class="op">~</span> <span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">tidied</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mnl</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">mnl4</span> <span class="op">&lt;-</span> <span class="fu">tidy_replace</span><span class="op">(</span><span class="va">mnl</span>, <span class="va">tidied</span><span class="op">[</span><span class="va">tidied</span><span class="op">$</span><span class="va">y.level</span> <span class="op">==</span> <span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">mnl5</span> <span class="op">&lt;-</span> <span class="fu">tidy_replace</span><span class="op">(</span><span class="va">mnl</span>, <span class="va">tidied</span><span class="op">[</span><span class="va">tidied</span><span class="op">$</span><span class="va">y.level</span> <span class="op">==</span> <span class="fl">5</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="huxreg.html">huxreg</a></span><span class="op">(</span><span class="va">mnl4</span>, <span class="va">mnl5</span>, statistics <span class="op">=</span> <span class="st">"nobs"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">mnl</span> <span class="op">&lt;-</span> <span class="fu">nnet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">multinom</a></span><span class="op">(</span><span class="va">gear</span> <span class="op">~</span> <span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">tidied</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mnl</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mnl4</span> <span class="op">&lt;-</span> <span class="fu">tidy_replace</span><span class="op">(</span><span class="va">mnl</span>, <span class="va">tidied</span><span class="op">[</span><span class="va">tidied</span><span class="op">$</span><span class="va">y.level</span> <span class="op">==</span> <span class="fl">4</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mnl5</span> <span class="op">&lt;-</span> <span class="fu">tidy_replace</span><span class="op">(</span><span class="va">mnl</span>, <span class="va">tidied</span><span class="op">[</span><span class="va">tidied</span><span class="op">$</span><span class="va">y.level</span> <span class="op">==</span> <span class="fl">5</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="huxreg.html">huxreg</a></span><span class="op">(</span><span class="va">mnl4</span>, <span class="va">mnl5</span>, statistics <span class="op">=</span> <span class="st">"nobs"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  9 (4 variable)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 35.155593 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 23.131901</span>
@@ -188,7 +201,7 @@ data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: names, model1, model2</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -203,7 +216,7 @@ data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

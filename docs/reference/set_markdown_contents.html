@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,23 +92,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_markdown_contents</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_markdown_contents</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>Cell contents, as a markdown string.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The modified huxtable.</p>
+    
+
+<p>The modified huxtable.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -126,8 +135,8 @@ TeX or whatever.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">set_markdown_contents</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="fl">1</span>,</span>
-<span class="r-in">      <span class="st">"**Type** of jam"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">set_markdown_contents</span><span class="op">(</span><span class="va">jams</span>, <span class="fl">1</span>, <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"**Type** of jam"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                              <span style="font-weight: bold;">Type</span> of jam     Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                              Strawberry       1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                              Raspberry        2.10  </span>
@@ -148,7 +157,7 @@ TeX or whatever.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

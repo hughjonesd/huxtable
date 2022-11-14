@@ -18,7 +18,7 @@ return the result."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,26 +94,33 @@ return the result.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_rows</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, after <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">add_columns</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, after <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_rows</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, after <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">add_columns</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, after <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x, y</dt>
 <dd><p>Huxtables or objects that can be converted by as_hux</p></dd>
+
+
 <dt>after</dt>
 <dd><p>Row or column after which <code>y</code> is inserted. Can be 0.
 Can be a row or column name. The default adds <code>y</code> to the
 end of <code>x</code>.</p></dd>
+
+
 <dt>copy_cell_props</dt>
 <dd><p>Logical. Passed to <code><a href="cbind.huxtable.html">rbind.huxtable()</a></code> or
 <code><a href="cbind.huxtable.html">cbind.huxtable()</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A huxtable.</p>
+    
+
+<p>A huxtable.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -127,18 +134,18 @@ multiple values into a single row.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="st">"Gooseberry"</span>, <span class="fl">2.15</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">add_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="va">ht</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="st">"Gooseberry"</span>, <span class="fl">2.15</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="va">ht</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> ncol(obj1) is not NULL or ncol(obj2) is not NULL or ncol(obj1) not equal to ncol(obj2)</span>
-<span class="r-in"><span class="fu">add_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="va">ht</span>, after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">add_rows</span><span class="op">(</span><span class="va">jams</span>, <span class="va">ht</span>, after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> ncol(obj1) is not NULL or ncol(obj2) is not NULL or ncol(obj1) not equal to ncol(obj2)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"50%"</span>, <span class="st">"60%"</span>, <span class="st">"40%"</span>,</span>
-<span class="r-in">      <span class="st">"Weight (g)"</span>, <span class="fl">300</span>, <span class="fl">250</span>, <span class="fl">300</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">add_columns</span><span class="op">(</span><span class="va">jams</span>, <span class="va">mx</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"50%"</span>, <span class="st">"60%"</span>, <span class="st">"40%"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"Weight (g)"</span>, <span class="fl">300</span>, <span class="fl">250</span>, <span class="fl">300</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_columns</span><span class="op">(</span><span class="va">jams</span>, <span class="va">mx</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Type         Price          Sugar    Sugar   Weight (g)  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                       content                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Strawberry    1.90         40.00%   50.00%       300.00  </span>
@@ -160,7 +167,7 @@ multiple values into a single row.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

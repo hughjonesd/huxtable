@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,17 +92,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fmt_pretty</span><span class="op">(</span>big.mark <span class="op">=</span> <span class="st">","</span>, <span class="va">...</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fmt_pretty</span><span class="op">(</span>big.mark <span class="op">=</span> <span class="st">","</span>, <span class="va">...</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>big.mark, scientific, ...</dt>
 <dd><p>Passed to <code><a href="https://rdrr.io/r/base/formatc.html" class="external-link">prettyNum()</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object you can pass into <code><a href="number_format.html">number_format()</a></code>.</p>
+    
+
+<p>An object you can pass into <code><a href="number_format.html">number_format()</a></code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -112,18 +115,18 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">jams</span><span class="op">$</span><span class="va">Sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sales"</span>, <span class="fl">35000</span>,</span>
-<span class="r-in">      <span class="fl">55500</span>, <span class="fl">20000</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="number_format.html">set_number_format</a></span><span class="op">(</span><span class="va">jams</span>, <span class="op">-</span><span class="fl">1</span>, <span class="st">"Sales"</span>,</span>
-<span class="r-in">      <span class="fu">fmt_pretty</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams</span><span class="op">$</span><span class="va">Sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sales"</span>, <span class="fl">35000</span>,</span></span>
+<span class="r-in"><span>      <span class="fl">55500</span>, <span class="fl">20000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="number_format.html">set_number_format</a></span><span class="op">(</span><span class="va">jams</span>, <span class="op">-</span><span class="fl">1</span>, <span class="st">"Sales"</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">fmt_pretty</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Type         Price    Sales  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Strawberry    1.90   35,000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Raspberry     2.10   55,500  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Plum          1.80   20,000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sales</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -138,7 +141,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

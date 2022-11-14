@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,65 +92,84 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">theme_plain</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"center"</span><span class="op">)</span>
-
-<span class="fu">theme_bright</span><span class="op">(</span>
-  <span class="va">ht</span>,
-  header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
-  header_cols <span class="op">=</span> <span class="cn">FALSE</span>,
-  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#7eabf2"</span>, <span class="st">"#e376e3"</span>, <span class="st">"#fcbb03"</span>, <span class="st">"#7aba59"</span>, <span class="st">"#fc0356"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">theme_basic</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">theme_compact</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">theme_striped</span><span class="op">(</span>
-  <span class="va">ht</span>,
-  stripe <span class="op">=</span> <span class="st">"grey90"</span>,
-  stripe2 <span class="op">=</span> <span class="st">"grey95"</span>,
-  header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
-  header_cols <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">theme_grey</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">theme_blue</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">theme_orange</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">theme_green</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">theme_article</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">theme_mondrian</span><span class="op">(</span><span class="va">ht</span>, prop_colored <span class="op">=</span> <span class="fl">0.1</span>, font <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_plain</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"center"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_bright</span><span class="op">(</span></span>
+<span>  <span class="va">ht</span>,</span>
+<span>  header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  header_cols <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#7eabf2"</span>, <span class="st">"#e376e3"</span>, <span class="st">"#fcbb03"</span>, <span class="st">"#7aba59"</span>, <span class="st">"#fc0356"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_basic</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_compact</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_striped</span><span class="op">(</span></span>
+<span>  <span class="va">ht</span>,</span>
+<span>  stripe <span class="op">=</span> <span class="st">"grey90"</span>,</span>
+<span>  stripe2 <span class="op">=</span> <span class="st">"grey95"</span>,</span>
+<span>  header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  header_cols <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_grey</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_blue</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_orange</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_green</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_article</span><span class="op">(</span><span class="va">ht</span>, header_rows <span class="op">=</span> <span class="cn">TRUE</span>, header_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_mondrian</span><span class="op">(</span><span class="va">ht</span>, prop_colored <span class="op">=</span> <span class="fl">0.1</span>, font <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable object.</p></dd>
+
+
 <dt>header_rows</dt>
 <dd><p>Logical: style header rows?</p></dd>
+
+
 <dt>position</dt>
 <dd><p>"left", "center" or "right"</p></dd>
+
+
 <dt>header_cols</dt>
 <dd><p>Logical: style header columns?</p></dd>
+
+
 <dt>colors</dt>
 <dd><p>Colors for header rows. Can also be a palette function.</p></dd>
+
+
 <dt>stripe</dt>
 <dd><p>Background colour for odd rows</p></dd>
+
+
 <dt>stripe2</dt>
 <dd><p>Background colour for even rows</p></dd>
+
+
 <dt>prop_colored</dt>
 <dd><p>Roughly what proportion of cells should have
 a primary-color background?</p></dd>
+
+
 <dt>font</dt>
 <dd><p>Font to use. For LaTeX, try <code>"cmss"</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The huxtable object, appropriately styled.</p>
+    
+
+<p>The huxtable object, appropriately styled.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -188,7 +207,7 @@ borders and randomized colors.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

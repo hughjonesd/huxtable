@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -132,32 +132,32 @@ return functions for this purpose.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="bold.html">set_bold</a></span><span class="op">(</span><span class="va">jams</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="bold.html">set_bold</a></span><span class="op">(</span><span class="va">jams</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Type           Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Strawberry</span>   <span style="font-weight: bold;">   1.90</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Raspberry </span>   <span style="font-weight: bold;">   2.10</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Plum      </span>   <span style="font-weight: bold;">   1.80</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"><span class="fu"><a href="background_color.html">set_background_color</a></span><span class="op">(</span><span class="va">jams</span>, <span class="va">evens</span>, <span class="va">everywhere</span>,</span>
-<span class="r-in">      <span class="st">"grey95"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">set_background_color</a></span><span class="op">(</span><span class="va">jams</span>, <span class="va">evens</span>, <span class="va">everywhere</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"grey95"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Type           Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #E4E4E4;">Strawberry</span>   <span style="background-color: #E4E4E4;">   1.90</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Raspberry       2.10  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="background-color: #E4E4E4;">Plum      </span>   <span style="background-color: #E4E4E4;">   1.80</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"><span class="fu"><a href="bold.html">set_bold</a></span><span class="op">(</span><span class="va">jams</span>, <span class="va">everywhere</span>,</span>
-<span class="r-in">      <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">matches</a></span><span class="op">(</span><span class="st">"yp"</span><span class="op">)</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="bold.html">set_bold</a></span><span class="op">(</span><span class="va">jams</span>, <span class="va">everywhere</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">matches</a></span><span class="op">(</span><span class="st">"yp"</span><span class="op">)</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Type      </span>     Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Strawberry</span>      1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Raspberry </span>      2.10  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="font-weight: bold;">Plum      </span>      1.80  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="text_color.html">set_text_color</a></span><span class="op">(</span><span class="va">jams</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"violetred"</span>, <span class="st">"purple"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">set_text_color</a></span><span class="op">(</span><span class="va">jams</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"violetred"</span>, <span class="st">"purple"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Type           Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #BB0000;">Strawberry</span>   <span style="color: #BB0000;">   1.90</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               <span style="color: #D700AF;">Raspberry </span>   <span style="color: #D700AF;">   2.10</span>  </span>
@@ -178,7 +178,7 @@ return functions for this purpose.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

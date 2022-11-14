@@ -18,7 +18,7 @@ a single row or column."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,45 +94,58 @@ a single row or column.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">insert_column</span><span class="op">(</span>
-  <span class="va">ht</span>,
-  <span class="va">...</span>,
-  after <span class="op">=</span> <span class="fl">0</span>,
-  fill <span class="op">=</span> <span class="cn">NULL</span>,
-  rowspan <span class="op">=</span> <span class="fl">1</span>,
-  copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">insert_row</span><span class="op">(</span>
-  <span class="va">ht</span>,
-  <span class="va">...</span>,
-  after <span class="op">=</span> <span class="fl">0</span>,
-  fill <span class="op">=</span> <span class="cn">NULL</span>,
-  colspan <span class="op">=</span> <span class="fl">1</span>,
-  copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">insert_column</span><span class="op">(</span></span>
+<span>  <span class="va">ht</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  after <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rowspan <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">insert_row</span><span class="op">(</span></span>
+<span>  <span class="va">ht</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  after <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  colspan <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  copy_cell_props <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Cell contents.</p></dd>
+
+
 <dt>after</dt>
 <dd><p>Insert the row/column after this position. 0 (the default) inserts as the first row/column.</p></dd>
+
+
 <dt>fill</dt>
 <dd><p>String. If <code>...</code> contains fewer elements than there are columns/rows to
 fill, the remaining cells will be filled with this.</p></dd>
+
+
 <dt>rowspan, colspan</dt>
 <dd><p>Scalar integer. Sets the rowspan or colspan of the <em>first</em> cell only.
 The default <code>NULL</code> throws an error if there are too few elements.</p></dd>
+
+
 <dt>copy_cell_props</dt>
 <dd><p>Copy cell properties from the previous row or column (if after &gt; 0). See <code><a href="cbind.huxtable.html">cbind.huxtable()</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The modified huxtable</p>
+    
+
+<p>The modified huxtable</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -147,10 +160,10 @@ values for the hidden cells. Use <code>fill = ""</code> for this.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">insert_row</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gooseberry"</span>, <span class="fl">2.15</span><span class="op">)</span>,</span>
-<span class="r-in">        after <span class="op">=</span> <span class="fl">1</span></span>
-<span class="r-in">      <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">insert_row</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gooseberry"</span>, <span class="fl">2.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        after <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Type           Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Gooseberry      2.15  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Strawberry      1.90  </span>
@@ -158,36 +171,36 @@ values for the hidden cells. Use <code>fill = ""</code> for this.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Plum            1.80  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">insert_column</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"50%"</span>, <span class="st">"60%"</span>, <span class="st">"40%"</span><span class="op">)</span>,</span>
-<span class="r-in">        after <span class="op">=</span> <span class="st">"Price"</span></span>
-<span class="r-in">      <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">insert_column</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"50%"</span>, <span class="st">"60%"</span>, <span class="st">"40%"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        after <span class="op">=</span> <span class="st">"Price"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Type         Price    Sugar  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Strawberry    1.90   50.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Raspberry     2.10   60.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Plum          1.80   40.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price,</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">insert_column</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">        <span class="st">"Sugar"</span>,</span>
-<span class="r-in">        after <span class="op">=</span> <span class="st">"Price"</span>,</span>
-<span class="r-in">        fill <span class="op">=</span> <span class="st">"50%"</span></span>
-<span class="r-in">      <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">insert_column</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"Sugar"</span>,</span></span>
+<span class="r-in"><span>        after <span class="op">=</span> <span class="st">"Price"</span>,</span></span>
+<span class="r-in"><span>        fill <span class="op">=</span> <span class="st">"50%"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Type         Price    Sugar  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Strawberry    1.90   50.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Raspberry     2.10   50.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           Plum          1.80   50.00%  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price,</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># don't forget to use `fill`:</span></span>
-<span class="r-in"><span class="fu">insert_row</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">        <span class="st">"Jams and prices"</span>,</span>
-<span class="r-in">        fill <span class="op">=</span> <span class="st">""</span>,</span>
-<span class="r-in">        colspan <span class="op">=</span> <span class="fl">2</span></span>
-<span class="r-in">      <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># don't forget to use `fill`:</span></span></span>
+<span class="r-in"><span><span class="fu">insert_row</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"Jams and prices"</span>,</span></span>
+<span class="r-in"><span>        fill <span class="op">=</span> <span class="st">""</span>,</span></span>
+<span class="r-in"><span>        colspan <span class="op">=</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Jams and prices       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Type           Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               Strawberry      1.90  </span>
@@ -209,7 +222,7 @@ values for the hidden cells. Use <code>fill = ""</code> for this.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

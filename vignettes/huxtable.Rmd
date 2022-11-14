@@ -27,20 +27,20 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 options(
-# !CRAN        huxtable.latex_use_fontspec  = TRUE,
+        huxtable.latex_use_fontspec  = TRUE, #!CRAN
         huxtable.knit_print_df       = FALSE, 
         huxtable.add_colnames        = TRUE  # needed when run by testthat
       )
 
 is_latex <- guess_knitr_output_format() == "latex"
-# !CRAN is_latex <- TRUE
-# !CRAN knitr::knit_hooks$set(
-# !CRAN   barrier = function(before, options, envir) {
-# !CRAN     if (! before && is_latex) knitr::asis_output("\\FloatBarrier")
-# !CRAN   }
-# !CRAN )
+# is_latex <- TRUE                                                 # !CRAN
+knitr::knit_hooks$set(                                             # !CRAN
+  barrier = function(before, options, envir) {                     # !CRAN
+    if (! before && is_latex) knitr::asis_output("\\FloatBarrier") # !CRAN
+  }                                                                # !CRAN
+)                                                                  # !CRAN
 
-# !CRAN if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
+if (is_latex) knitr::opts_chunk$set(barrier = TRUE)                # !CRAN 
 
 ```
 
@@ -318,7 +318,7 @@ props[["Table"]]  <- sort(c("width", "height", "position", "caption",
 maxl <- max(sapply(props, length))
 props <- lapply(props, function(x) c(x, rep("", maxl - length(x))))
 
-# !CRAN mono_font <- if (is_latex) "LucidaConsole" else "monospace"
+mono_font <- if (is_latex) "LucidaConsole" else "monospace" # !CRAN 
 
 prop_hux <- hux(as.data.frame(props, check.names = FALSE)) %>% 
       set_font_size(10)                                    %>% 

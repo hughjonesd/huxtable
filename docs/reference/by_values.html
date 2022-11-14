@@ -18,7 +18,7 @@ pre-determined contents."><!-- mathjax --><script src="https://cdnjs.cloudflare.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@ pre-determined contents.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_values</span><span class="op">(</span><span class="va">...</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_values</span><span class="op">(</span><span class="va">...</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,14 +103,19 @@ pre-determined contents.</p>
 <dd><p>Name-value pairs like <code>name = value</code>. Cells where contents are equal to
 <code>name</code> will have the property set to <code>value</code>. If there is a single unnamed argument,
 this is the default value for unmatched cells. More than one unnamed argument is an error.</p></dd>
+
+
 <dt>ignore_na</dt>
 <dd><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged
 from their previous values. Otherwise, <code>NA</code>
 normally resets to the default.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function for use in <code>map_***</code> functions.</p>
+    
+
+<p>A function for use in <code>map_***</code> functions.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -127,16 +132,16 @@ normally resets to the default.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_values</span><span class="op">(</span>a <span class="op">=</span> <span class="st">"red"</span>, c <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_values</span><span class="op">(</span>a <span class="op">=</span> <span class="st">"red"</span>, c <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BB0000;">a             </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  b               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">c             </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c("a", "b", "c")</span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_values</span><span class="op">(</span>a <span class="op">=</span> <span class="st">"red"</span>, c <span class="op">=</span> <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_values</span><span class="op">(</span>a <span class="op">=</span> <span class="st">"red"</span>, c <span class="op">=</span> <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BB0000;">a             </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #00BB00;">b             </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">c             </span>  </span>
@@ -156,7 +161,7 @@ normally resets to the default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

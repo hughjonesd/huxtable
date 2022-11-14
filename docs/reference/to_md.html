@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,30 +92,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">print_md</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">to_md</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for huxtable</span>
-<span class="fu">to_md</span><span class="op">(</span><span class="va">ht</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, min_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"width"</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>, max_width <span class="op">=</span> <span class="fl">80</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">print_md</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">to_md</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for huxtable</span></span>
+<span><span class="fu">to_md</span><span class="op">(</span><span class="va">ht</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, min_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"width"</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>, max_width <span class="op">=</span> <span class="fl">80</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to methods.</p></dd>
+
+
 <dt>header</dt>
 <dd><p>Logical. Print the first row as a header?</p></dd>
+
+
 <dt>min_width</dt>
 <dd><p>Minimum width in on-screen characters of the result.</p></dd>
+
+
 <dt>max_width</dt>
 <dd><p>Maximum width in on-screen characters of the result. Overrides <code>min_width</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>to_md()</code> returns a string. <code>print_md()</code> prints the string and returns
+    
+
+<p><code>to_md()</code> returns a string. <code>print_md()</code> prints the string and returns
 <code>NULL</code>.</p>
     </div>
     <div id="details">
@@ -134,7 +145,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">print_md</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">print_md</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Type            Price </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------- -----------</span>
@@ -159,7 +170,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

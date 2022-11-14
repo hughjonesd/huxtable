@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,21 +92,31 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rtf_fc_tables</span><span class="op">(</span><span class="va">...</span>, extra_fonts <span class="op">=</span> <span class="st">"Times"</span>, extra_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rtf_fc_tables</span><span class="op">(</span><span class="va">...</span>, extra_fonts <span class="op">=</span> <span class="st">"Times"</span>, extra_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>One or more objects of class <code>huxtable</code>.</p></dd>
+
+
 <dt>extra_fonts</dt>
 <dd><p>Extra fonts to include. These will be first in the fonts table.</p></dd>
+
+
 <dt>extra_colors</dt>
 <dd><p>Extra colors to include, as R color names.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>rtfFCTables</code>. This is a list containing two items: <code>"fonts"</code>is a character vector of unique font names; <code>"colors"</code> is a character vector of unique color
+    
+
+<p>An object of class <code>rtfFCTables</code>. This is a list containing two items: <code>"fonts"</code></p>
+
+
+<p>is a character vector of unique font names; <code>"colors"</code> is a character vector of unique color
 names.</p>
     </div>
     <div id="details">
@@ -119,21 +129,21 @@ huxtables print out the correct colour references.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Printing multiple huxtables:</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="st">"Blue with red border"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_borders</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_border_colors</a></span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">background_color</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"blue"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ht2</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="st">"Dark green text"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="text_color.html">text_color</a></span><span class="op">(</span><span class="va">ht2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"darkgreen"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">fc_tbls</span> <span class="op">&lt;-</span> <span class="fu">rtf_fc_tables</span><span class="op">(</span><span class="va">ht</span>, <span class="va">ht2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># In the document header:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">fc_tbls</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Printing multiple huxtables:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="st">"Blue with red border"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_borders</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_border_colors</a></span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">background_color</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"blue"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht2</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="st">"Dark green text"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">text_color</a></span><span class="op">(</span><span class="va">ht2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"darkgreen"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fc_tbls</span> <span class="op">&lt;-</span> <span class="fu">rtf_fc_tables</span><span class="op">(</span><span class="va">ht</span>, <span class="va">ht2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># In the document header:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">fc_tbls</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fonts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Times"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"na.action")</span>
@@ -150,16 +160,16 @@ huxtables print out the correct colour references.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rtfFCTables"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># In the document body:</span></span>
-<span class="r-in"><span class="fu"><a href="to_rtf.html">print_rtf</a></span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="va">fc_tbls</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># In the document body:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="to_rtf.html">print_rtf</a></span><span class="op">(</span><span class="va">ht</span>, fc_tables <span class="op">=</span> <span class="va">fc_tbls</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \trowd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \trqc \clbrdrt\brdrs\brdrw20\brdrcf2\clbrdrl\brdrs\brdrw20\brdrcf2\clbrdrb\brdrs\brdrw20\brdrcf2\clbrdrr\brdrs\brdrw20\brdrcf2\clcbpat1\clvertalt\clpadfl3\clpadl120 \clpadft3\clpadt120 \clpadfb3\clpadb120 \clpadfr3\clpadr120 \cellx4320 \pard\intbl\ql{Blue with red border}\cell</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \row</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-in"><span class="fu"><a href="to_rtf.html">print_rtf</a></span><span class="op">(</span><span class="va">ht2</span>, fc_tables <span class="op">=</span> <span class="va">fc_tbls</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="to_rtf.html">print_rtf</a></span><span class="op">(</span><span class="va">ht2</span>, fc_tables <span class="op">=</span> <span class="va">fc_tbls</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \trowd</span>
@@ -180,7 +190,7 @@ huxtables print out the correct colour references.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,29 +92,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rotation</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">rotation</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_rotation</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_rotation</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rotation</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">rotation</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_rotation</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_rotation</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
+
 <dt>fn</dt>
 <dd><p>A mapping function. See <a href="mapping-functions.html">mapping-functions</a> for details.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>A numeric vector or matrix.</p>
 <p>Set to <code>NA</code> to reset to the default, which is <code>0</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>rotation()</code> returns the <code>rotation</code> property.
+    
+
+<p><code>rotation()</code> returns the <code>rotation</code> property.
 <code>set_rotation()</code> returns the modified huxtable.</p>
     </div>
     <div id="details">
@@ -129,39 +140,39 @@ to achieve a nice result, in both HTML and LaTeX.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">rotation</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fl">90</span></span>
-<span class="r-in"><span class="fu">rotation</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">rotation</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fl">90</span></span></span>
+<span class="r-in"><span><span class="fu">rotation</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Type Price</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     90    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1   90    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     90    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     90    90</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">jams2</span> <span class="op">&lt;-</span> <span class="fu">set_rotation</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="fl">270</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">rotation</span><span class="op">(</span><span class="va">jams2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams2</span> <span class="op">&lt;-</span> <span class="fu">set_rotation</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="fl">270</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rotation</span><span class="op">(</span><span class="va">jams2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Type Price</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    270   270</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1  270   270</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    270   270</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    270   270</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">jams3</span> <span class="op">&lt;-</span> <span class="fu">set_rotation</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">270</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">rotation</span><span class="op">(</span><span class="va">jams3</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams3</span> <span class="op">&lt;-</span> <span class="fu">set_rotation</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">270</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rotation</span><span class="op">(</span><span class="va">jams3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Type Price</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     90    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1  270    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    270    90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     90    90</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">jams4</span> <span class="op">&lt;-</span> <span class="fu">map_rotation</span><span class="op">(</span><span class="va">jams</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_rows.html">by_rows</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fl">270</span>,</span>
-<span class="r-in">        <span class="fl">90</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in"><span class="fu">rotation</span><span class="op">(</span><span class="va">jams4</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams4</span> <span class="op">&lt;-</span> <span class="fu">map_rotation</span><span class="op">(</span><span class="va">jams</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_rows.html">by_rows</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fl">270</span>,</span></span>
+<span class="r-in"><span>        <span class="fl">90</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rotation</span><span class="op">(</span><span class="va">jams4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Type Price</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    270   270</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1   90    90</span>
@@ -181,7 +192,7 @@ to achieve a nice result, in both HTML and LaTeX.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

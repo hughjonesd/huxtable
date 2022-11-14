@@ -20,7 +20,7 @@ information from the table."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -98,21 +98,28 @@ information from the table.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The <code>ht</code> object.</p>
+    
+
+<p>The <code>ht</code> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -137,10 +144,10 @@ content if you reorder or subset rows and columns.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="add_rows.html">add_columns</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"30%"</span>, <span class="st">"40%"</span>, <span class="st">"30%"</span>, <span class="st">"40%"</span>, <span class="st">"30%"</span><span class="op">)</span>,</span>
-<span class="r-in">      after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="add_rows.html">add_columns</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sugar"</span>, <span class="st">"30%"</span>, <span class="st">"40%"</span>, <span class="st">"30%"</span>, <span class="st">"40%"</span>, <span class="st">"30%"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Type         Sugar   Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Strawberry   30%      1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Strawberry   40%      1.90  </span>
@@ -149,7 +156,7 @@ content if you reorder or subset rows and columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Plum         30%      1.80  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, , Price</span>
-<span class="r-in"><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Type         Sugar   Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Strawberry   30%      1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                         40%            </span>
@@ -158,7 +165,7 @@ content if you reorder or subset rows and columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Plum         30%      1.80  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, , Price</span>
-<span class="r-in"><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">everywhere</span>, <span class="st">"Type"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">merge_repeated_rows</span><span class="op">(</span><span class="va">ht</span>, <span class="va">everywhere</span>, <span class="st">"Type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Type         Sugar   Price  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Strawberry   30%      1.90  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                         40%      1.90  </span>
@@ -181,7 +188,7 @@ content if you reorder or subset rows and columns.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

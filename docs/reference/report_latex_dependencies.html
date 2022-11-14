@@ -23,7 +23,7 @@ directly."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -104,11 +104,11 @@ directly.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">report_latex_dependencies</span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">FALSE</span>, as_string <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">check_latex_dependencies</span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">install_latex_dependencies</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report_latex_dependencies</span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">FALSE</span>, as_string <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">check_latex_dependencies</span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">install_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -116,21 +116,30 @@ directly.</p>
     <dl><dt>quiet</dt>
 <dd><p>Logical. For <code>report_latex_dependencies</code>, suppress printing of dependencies.
 For <code>check_latex_dependencies</code>, suppress messages.</p></dd>
+
+
 <dt>as_string</dt>
 <dd><p>Logical: return dependencies as a string.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>If <code>as_string</code> is <code>TRUE</code>, <code>report_latex_dependencies</code> returns a string of
+    
+
+<p>If <code>as_string</code> is <code>TRUE</code>, <code>report_latex_dependencies</code> returns a string of
 <code>"\\\\usepackage\\{...\\}"</code> statements; otherwise it returns a list of
-<code><a href="https://pkgs.rstudio.com/rmarkdown/reference/latex_dependency.html" class="external-link">rmarkdown::latex_dependency</a></code> objects, invisibly.
-<code>check_latex_dependencies()</code> returns <code>TRUE</code> or <code>FALSE</code>.
-<code>install_latex_dependencies</code> returns <code>TRUE</code> if <code>tlmgr</code> returns 0.</p>
+<code><a href="https://pkgs.rstudio.com/rmarkdown/reference/latex_dependency.html" class="external-link">rmarkdown::latex_dependency</a></code> objects, invisibly.</p>
+
+
+<p><code>check_latex_dependencies()</code> returns <code>TRUE</code> or <code>FALSE</code>.</p>
+
+
+<p><code>install_latex_dependencies</code> returns <code>TRUE</code> if <code>tlmgr</code> returns 0.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">report_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">report_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \usepackage{array}</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \usepackage{caption}</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> \usepackage{graphicx}</span>
@@ -149,14 +158,14 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % These are LaTeX packages. You can install them using your LaTex management software,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % or by running `huxtable::install_latex_dependencies()` from within R.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> % Other packages may be required if you use non-standard tabulars (e.g. tabulary).</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">check_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">install_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">check_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">install_latex_dependencies</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -171,7 +180,7 @@ For <code>check_latex_dependencies</code>, suppress messages.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

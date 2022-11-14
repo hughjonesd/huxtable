@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,31 +92,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_ranges</span><span class="op">(</span><span class="va">breaks</span>, <span class="va">values</span>, right <span class="op">=</span> <span class="cn">FALSE</span>, extend <span class="op">=</span> <span class="cn">TRUE</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_ranges</span><span class="op">(</span><span class="va">breaks</span>, <span class="va">values</span>, right <span class="op">=</span> <span class="cn">FALSE</span>, extend <span class="op">=</span> <span class="cn">TRUE</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>breaks</dt>
 <dd><p>A vector of numbers in increasing order.</p></dd>
+
+
 <dt>values</dt>
 <dd><p>A vector of property values. <code>length(values)</code> should be one greater than
 <code>length(breaks)</code> if <code>extend = TRUE</code>, or one less if <code>extend = FALSE</code>.</p></dd>
+
+
 <dt>right</dt>
 <dd><p>If <code>TRUE</code>, intervals are closed on the right, i.e. if values are exactly equal to a
 <code><a href="https://rdrr.io/r/base/Control.html" class="external-link">break</a></code>, they go in the lower group. Otherwise, intervals are closed on the left, so equal
 values go in the higher group. <code>FALSE</code> by default.</p></dd>
+
+
 <dt>extend</dt>
 <dd><p>Extend <code>breaks</code> to <code>c(-Inf, breaks, Inf)</code>, i.e. include numbers below and above the
 outermost breaks. <code>TRUE</code> by default.</p></dd>
+
+
 <dt>ignore_na</dt>
 <dd><p>If <code>TRUE</code>, <code>NA</code> values in the result will be left unchanged
 from their previous values. Otherwise, <code>NA</code>
 normally resets to the default.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function for use in <code>map_***</code> functions.</p>
+    
+
+<p>A function for use in <code>map_***</code> functions.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -137,47 +148,47 @@ normally resets to the default.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_ranges</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_ranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BB0000;">             1</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">             3</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #0000BB;">             5</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(1, 3, 5)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_ranges</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="st">"pink"</span>,</span>
-<span class="r-in">        extend <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_ranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="st">"pink"</span>,</span></span>
+<span class="r-in"><span>        extend <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               1  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #FFD7D7;">             3</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               5  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(1, 3, 5)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_ranges</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span>
-<span class="r-in">        right <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_ranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        right <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BB0000;">             1</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">             3</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">             5</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(1, 3, 5)</span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu">by_ranges</span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span>
-<span class="r-in">        right <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">by_ranges</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        right <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">             1</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #BBBB00;">             3</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="background-color: #00BB00;">             5</span>  </span>
@@ -197,7 +208,7 @@ normally resets to the default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

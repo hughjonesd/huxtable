@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,39 +92,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">left_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">left_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_left_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_left_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">right_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">right_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_right_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_right_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">top_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">top_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_top_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_top_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>
-<span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">set_bottom_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span>
-<span class="fu">map_bottom_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">left_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">left_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_left_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_left_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">right_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">right_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_right_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_right_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">top_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">top_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_top_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_top_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span><span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">set_bottom_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span><span class="fu">map_bottom_border_style</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
+
 <dt>fn</dt>
 <dd><p>A mapping function. See <a href="mapping-functions.html">mapping-functions</a> for details.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>One of <code>"solid"</code>, <code>"double"</code>, <code>"dashed"</code> or <code>"dotted"</code>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -148,10 +157,10 @@ the same as <code>left_border_style(ht)[, 2]</code>, and setting one sets the ot
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_borders</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"dotted"</span></span>
-<span class="r-in"><span class="va">jams</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams</span> <span class="op">&lt;-</span> <span class="fu"><a href="set-multiple.html">set_all_borders</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">bottom_border_style</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"dotted"</span></span></span>
+<span class="r-in"><span><span class="va">jams</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      ┌────────────┬───────┬───────────────┐</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      │ Type       │ Price │ Sugar content │</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      ├────────────┼───────┼───────────────┤</span>
@@ -163,8 +172,8 @@ the same as <code>left_border_style(ht)[, 2]</code>, and setting one sets the ot
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      └────────────┴───────┴───────────────┘</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sugar</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">set_bottom_border_style</span><span class="op">(</span><span class="va">jams</span>, <span class="st">"double"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">set_bottom_border_style</span><span class="op">(</span><span class="va">jams</span>, <span class="st">"double"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      ┌────────────┬───────┬───────────────┐</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      │ Type       │ Price │ Sugar content │</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      ├────────────┼───────┼───────────────┤</span>
@@ -176,7 +185,7 @@ the same as <code>left_border_style(ht)[, 2]</code>, and setting one sets the ot
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      └────────────┴───────┴───────────────┘</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sugar</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -191,7 +200,7 @@ the same as <code>left_border_style(ht)[, 2]</code>, and setting one sets the ot
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

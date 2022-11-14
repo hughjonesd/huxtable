@@ -19,7 +19,7 @@ simultaneously for the specified cells."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -96,71 +96,82 @@ simultaneously for the specified cells.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_all_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, value <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
-
-<span class="fu">map_all_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_lr_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_lr_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_tb_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_tb_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_lr_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_lr_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_lr_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_lr_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span>
-
-<span class="fu">set_lr_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span>
-
-<span class="fu">map_lr_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_all_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, value <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_all_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_lr_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_lr_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_tb_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_tb_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_lr_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_lr_borders</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_lr_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_lr_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_lr_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">map_lr_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>row</dt>
 <dd><p>A row specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>An optional column specifier.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>Value(s) to set. Set to <code>NA</code> to reset to the default.</p></dd>
+
+
 <dt>fn</dt>
 <dd><p>A mapping function. See <a href="mapping-functions.html">mapping-functions</a> for details.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The modified huxtable.</p>
+    
+
+<p>The modified huxtable.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -176,9 +187,9 @@ simultaneously for the specified cells.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_borders</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_borders</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             ┌────────────┬─────────┐</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             │ Type       │   Price │</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             ├────────────┼─────────┤</span>
@@ -190,8 +201,8 @@ simultaneously for the specified cells.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             └────────────┴─────────┘</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">┌────────────┬─────────┐</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">│</span> Type       <span style="color: #BB0000;">│</span>   Price <span style="color: #BB0000;">│</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">├────────────┼─────────┤</span></span>
@@ -203,11 +214,11 @@ simultaneously for the specified cells.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">└────────────┴─────────┘</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"double"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"20px"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_tb_borders</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">set_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"double"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_all_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"20px"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_tb_padding</span><span class="op">(</span><span class="va">ht</span>, <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu">set_tb_borders</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">set_tb_border_colors</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">┌────────────┬─────────┐</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">│</span> Type       <span style="color: #BB0000;">│</span>   Price <span style="color: #BB0000;">│</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">├────────────┼─────────┤</span></span>
@@ -219,7 +230,7 @@ simultaneously for the specified cells.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">└────────────┴─────────┘</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price</span>
-<span class="r-in"><span class="fu">set_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"double"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">set_tb_border_styles</span><span class="op">(</span><span class="va">ht</span>, <span class="st">"double"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">┌────────────┬─────────┐</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">│</span> Type       <span style="color: #BB0000;">│</span>   Price <span style="color: #BB0000;">│</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="color: #BB0000;">├────────────┼─────────┤</span></span>
@@ -245,7 +256,7 @@ simultaneously for the specified cells.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

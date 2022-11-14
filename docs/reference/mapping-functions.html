@@ -46,7 +46,7 @@ For a more general solution, use by_function() or by_cases().
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -120,15 +120,15 @@ For a more general solution, use by_function() or by_cases().
     <p>This help page explains how to set properties differently for cells,
 depending on their contents.</p>
 <p>For example, in a table of p-values, you could bold cells where p &lt; 0.05:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="kw">map_bold</span>(pval_hux, <span class="kw">by_ranges</span>(<span class="fl">0.05</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)))</a></code></pre><p></p></div>
 <p>Or you can use red text for a particular value:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">  hxtbl <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_text_color</span>(<span class="kw">by_values</span>(<span class="st">"Warning"</span> =<span class="st"> "red"</span>))</a></code></pre><p></p></div>
 <p>There is a <code>map_...</code> function for each huxtable cell property. The syntax is:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="kw">map_property</span>(ht, row, col, fn)</a></code></pre><p></p></div>
 <p>where <code>property</code> is the property name.</p>
 <p><code>row</code> and <code>col</code> specify ranges of rows and columns. See <a href="rowspecs.html">rowspecs</a> for
 details. To set properties for the whole table, omit <code>row</code> and <code>col</code>:</p>
-<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="kw">map_property</span>(ht, fn)</a></code></pre><p></p></div>
 <p>The <code>fn</code> argument is a <em>mapping function</em> which maps cell contents to
 property values.</p><ul><li><p>To set property values in "stripes" by rows or by columns, use <code><a href="by_rows.html">by_rows()</a></code>
 and <code><a href="by_rows.html">by_cols()</a></code>.</p></li>
@@ -165,100 +165,100 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span>Condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OK"</span>, <span class="st">"Warning"</span>, <span class="st">"Error"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span>
-<span class="r-in">        OK      <span class="op">=</span> <span class="st">"green"</span>,</span>
-<span class="r-in">        Warning <span class="op">=</span> <span class="st">"orange"</span>,</span>
-<span class="r-in">        Error   <span class="op">=</span> <span class="st">"red"</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ht</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span>Condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"OK"</span>, <span class="st">"Warning"</span>, <span class="st">"Error"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        OK      <span class="op">=</span> <span class="st">"green"</span>,</span></span>
+<span class="r-in"><span>        Warning <span class="op">=</span> <span class="st">"orange"</span>,</span></span>
+<span class="r-in"><span>        Error   <span class="op">=</span> <span class="st">"red"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ht</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  Condition       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #00BB00;">OK            </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #FFAF00;">Warning       </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #BB0000;">Error         </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Condition</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Leaving NA values alone:</span></span>
-<span class="r-in"><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"OK"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="cn">NA</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Leaving NA values alone:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"OK"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="cn">NA</span>, ignore_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  Condition       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #0000BB;">OK            </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #FFAF00;">Warning       </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #BB0000;">Error         </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Condition</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Resetting values:</span></span>
-<span class="r-in"><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"OK"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="cn">NA</span>, ignore_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Resetting values:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_values.html">by_values</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"OK"</span> <span class="op">=</span> <span class="st">"blue"</span>, <span class="cn">NA</span>, ignore_na <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  Condition       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  <span style="color: #0000BB;">OK            </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  Warning         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  Error           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Condition</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_ranges.html">by_ranges</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.531</span>   <span style="background-color: #BB0000;"> 1.36 </span>   <span style="background-color: #BBBB00;"> 0.948</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #0000BB;">-1.05 </span>   <span style="background-color: #BBBB00;">-0.939</span>   <span style="background-color: #BBBB00;">-0.806</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.902</span>   <span style="background-color: #BBBB00;"> 0.302</span>   <span style="background-color: #BB0000;"> 1.61 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;"> 1.21 </span>   <span style="background-color: #BBBB00;"> 0.16 </span>   <span style="background-color: #BBBB00;">-0.158</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;"> 0.645</span>   <span style="background-color: #BBBB00;"> 0.562</span>   <span style="background-color: #BBBB00;"> 0.761</span>  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>, <span class="fu"><a href="by_ranges.html">by_ranges</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;"> 2.43 </span>   <span style="background-color: #BBBB00;">-0.386</span>   <span style="background-color: #BBBB00;">-0.682 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;">-0.207</span>   <span style="background-color: #BB0000;"> 2.06 </span>   <span style="background-color: #BBBB00;"> 0.233 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.591</span>   <span style="background-color: #BBBB00;"> 0.664</span>   <span style="background-color: #BB0000;"> 2.57  </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;">-0.337</span>   <span style="background-color: #BBBB00;">-0.285</span>   <span style="background-color: #BBBB00;">-0.0177</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;">-0.417</span>   <span style="background-color: #BBBB00;"> 0.31 </span>   <span style="background-color: #BBBB00;"> 0.732 </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
-<span class="r-in"><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_quantiles.html">by_equal_groups</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.531</span>   <span style="background-color: #00BB00;"> 1.36 </span>   <span style="background-color: #00BB00;"> 0.948</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-1.05 </span>   <span style="background-color: #BB0000;">-0.939</span>   <span style="background-color: #BB0000;">-0.806</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.902</span>   <span style="background-color: #00BB00;"> 0.302</span>   <span style="background-color: #00BB00;"> 1.61 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #00BB00;"> 1.21 </span>   <span style="background-color: #BB0000;"> 0.16 </span>   <span style="background-color: #BB0000;">-0.158</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #00BB00;"> 0.645</span>   <span style="background-color: #00BB00;"> 0.562</span>   <span style="background-color: #00BB00;"> 0.761</span>  </span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_quantiles.html">by_equal_groups</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 2.43 </span>   <span style="background-color: #BB0000;">-0.386</span>   <span style="background-color: #BB0000;">-0.682 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-0.207</span>   <span style="background-color: #00BB00;"> 2.06 </span>   <span style="background-color: #00BB00;"> 0.233 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.591</span>   <span style="background-color: #00BB00;"> 0.664</span>   <span style="background-color: #00BB00;"> 2.57  </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-0.337</span>   <span style="background-color: #BB0000;">-0.285</span>   <span style="background-color: #BB0000;">-0.0177</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-0.417</span>   <span style="background-color: #00BB00;"> 0.31 </span>   <span style="background-color: #00BB00;"> 0.732 </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span></span>
-<span class="r-in">        Coef <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.5</span>, <span class="fl">2.4</span>, <span class="fl">1.3</span><span class="op">)</span>,</span>
-<span class="r-in">        Pval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="fl">0.07</span><span class="op">)</span>,</span>
-<span class="r-in">        add_colnames <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="bold.html">map_bold</a></span><span class="op">(</span><span class="va">ht</span>, <span class="va">everywhere</span>, <span class="st">"Pval"</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_ranges.html">by_ranges</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        Coef <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.5</span>, <span class="fl">2.4</span>, <span class="fl">1.3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        Pval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="fl">0.07</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        add_colnames <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="bold.html">map_bold</a></span><span class="op">(</span><span class="va">ht</span>, <span class="va">everywhere</span>, <span class="st">"Pval"</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_ranges.html">by_ranges</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                   Coef      Pval  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                    3.5   <span style="font-weight: bold;">   0.04</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                    2.4   <span style="font-weight: bold;">   0.01</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                    1.3      0.07  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Coef, Pval</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Problems with as.matrix:</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>          <span class="co"># look at the spaces...</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Problems with as.matrix:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>          <span class="co"># look at the spaces...</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      c(-1, 1, 2) c("a", "b", "c")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "-1"        "a"             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] " 1"        "b"             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] " 2"        "c"             </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>      <span class="co"># uh oh</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>      <span class="co"># uh oh</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      c(-1, 1, 2) c("a", "b", "c")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]       FALSE             TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]       FALSE             TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]       FALSE             TRUE</span>
-<span class="r-in"><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_cases.html">by_cases</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_cases.html">by_cases</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">     -1</span>   <span style="color: #0000BB;">a      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">      1</span>   <span style="color: #0000BB;">b      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">      2</span>   <span style="color: #0000BB;">c      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-1, 1, 2), c("a", "b", "c")</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># To avoid this, only look at the truly numeric columns:</span></span>
-<span class="r-in"><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, col <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">      <span class="fu"><a href="by_cases.html">by_cases</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To avoid this, only look at the truly numeric columns:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, col <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="by_cases.html">by_cases</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">     -1</span>   a        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #0000BB;">      1</span>   b        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #0000BB;">      2</span>   c        </span>
@@ -278,7 +278,7 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

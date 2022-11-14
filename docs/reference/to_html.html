@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
       </span>
     </div>
 
@@ -92,27 +92,34 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">print_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">print_notebook</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for huxtable</span>
-<span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">print_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">print_notebook</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for huxtable</span></span>
+<span><span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ht</dt>
 <dd><p>A huxtable.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to pass to methods. Not currently used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>to_html</code> returns an HTML string. <code>print_html</code> prints the string and returns <code>NULL</code>.
-<code>print_notebook</code> prints HTML output suitable for use in an
+    
+
+<p><code>to_html</code> returns an HTML string. <code>print_html</code> prints the string and returns <code>NULL</code>.</p>
+
+
+<p><code>print_notebook</code> prints HTML output suitable for use in an
 RStudio interactive notebook.</p>
     </div>
     <div id="see-also">
@@ -126,9 +133,9 @@ RStudio interactive notebook.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "&lt;table class=\"huxtable\" style=\"border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  \"&gt;\n&lt;col&gt;&lt;col&gt;&lt;tr&gt;\n&lt;th style=\"vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;a&lt;/th&gt;&lt;th style=\"vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;b&lt;/th&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;1&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;a&lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;2&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;b&lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;3&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;c&lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">to_html</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "&lt;table class=\"huxtable\" style=\"border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  \"&gt;\n&lt;col&gt;&lt;col&gt;&lt;tr&gt;\n&lt;th style=\"vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;a&lt;/th&gt;&lt;th style=\"vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;b&lt;/th&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;1&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;a&lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;2&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;b&lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;\n&lt;td style=\"vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;3&lt;/td&gt;&lt;td style=\"vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;\"&gt;c&lt;/td&gt;&lt;/tr&gt;\n&lt;/table&gt;\n"</span>
 </code></pre></div>
     </div>
   </div>
@@ -143,7 +150,7 @@ RStudio interactive notebook.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
