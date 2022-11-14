@@ -239,16 +239,16 @@ end.rcode-->
 
 library(magrittr)
 ht <- hux(
-        Employee = c('John Smith', 'Jane Doe', 'David Hugh-Jones'),
+        Employee = c("John Smith", "Jane Doe", "David Hugh-Jones"),
         Salary = c(50000, 50000, 40000)
       )
 
-ht                                        %>%
-      set_bold(1, everywhere)             %>%
-      set_bottom_border(1, everywhere)    %>%
-      set_align(everywhere, 2, 'right')   %>%
-      set_lr_padding(10)                  %>%
-      set_width(0.35)                     %>%
+ht                                        |>
+      set_bold(1, everywhere)             |>
+      set_bottom_border(1, everywhere)    |>
+      set_align(everywhere, 2, "right")   |>
+      set_lr_padding(10)                  |>
+      set_width(0.35)                     |>
       set_number_format(2)
 
 end.rcode-->
@@ -257,13 +257,13 @@ end.rcode-->
 <div class="example" id="ex-condformat">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-mtcars[1:5]                                                                           %>%
-      as_huxtable(add_rownames = "Model")                                             %>%
-      set_bold(1, everywhere, TRUE)                                                   %>%
-      set_all_borders(1)                                                              %>%
-      map_text_color(everywhere, "mpg",      by_colorspace("navy", "red", "yellow"))  %>%
-      map_background_color(everywhere, "hp", by_quantiles(0.8, c("white", "yellow"))) %>%
-      map_italic(everywhere, "Model",        by_regex("Merc.*" = TRUE))               %>%
+mtcars[1:5]                                                                           |>
+      as_huxtable(add_rownames = "Model")                                             |>
+      set_bold(1, everywhere, TRUE)                                                   |>
+      set_all_borders(1)                                                              |>
+      map_text_color(everywhere, "mpg",      by_colorspace("navy", "red", "yellow"))  |>
+      map_background_color(everywhere, "hp", by_quantiles(0.8, c("white", "yellow"))) |>
+      map_italic(everywhere, "Model",        by_regex("Merc.*" = TRUE))               |>
       head(12)
 
 end.rcode-->
@@ -272,13 +272,13 @@ end.rcode-->
 <div class="example" id="ex-huxreg">
 <!--begin.rcode echo = TRUE, results = 'asis'
 
-data(diamonds, package = 'ggplot2')
+data(diamonds, package = "ggplot2")
 
 lm1 <- lm(log(price) ~ carat, diamonds)
 lm2 <- lm(log(price) ~ depth, diamonds)
 lm3 <- lm(log(price) ~ carat + depth, diamonds)
 
-huxreg(lm1, lm2, lm3)
+huxreg(lm1, lm2, lm3, statistics = c("N" = "nobs", "R2" = "r.squared"))
 end.rcode-->
 </div>
 
@@ -331,6 +331,10 @@ The web page background is <a href="https://en.wikipedia.org/wiki/Piet_Mondrian"
 <i>Composition A</i>.</p>
 
 <h3>News</h3>
+
+<h4>November 12, 2022: Huxtable 5.5.1 released</h4>
+
+<p>This is a bugfix release.</p>
 
 <h4>June 15, 2022: Huxtable 5.5.0 released</h4>
 
@@ -497,9 +501,9 @@ values:</o>
 <!--begin.rcode echo = TRUE, results = 'asis'
 
 data <- matrix(rnorm(25), 5, 5)
-as_hux(data) %>%
-      set_outer_borders(0.4) %>%
-      map_background_color(by_rows("grey95", "white")) %>%
+as_hux(data) |>
+      set_outer_borders(0.4) |>
+      map_background_color(by_rows("grey95", "white")) |>
       map_text_color(by_quantiles(c(0.1, 0.9), c("red", "black", "green3")))
 
 end.rcode-->
