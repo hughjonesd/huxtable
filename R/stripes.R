@@ -9,10 +9,13 @@
 #' @param stripe1 Color for rows/columns 1, 3, 5, ...
 #' @param stripe2 Color for rows/columns 2, 4, 6, ...
 #'
-#' @examples
+#' @doctest
 #'
+#' @snap
 #' stripe_rows(jams)
+#' @snap
 #' stripe_columns(jams)
+#' @snap
 #' stripe_rows(jams, "red", "blue")
 #'
 #' @name stripes

@@ -29,9 +29,11 @@
 #'
 #' Try to say `as_flextable.huxtable` ten times without pausing.
 #'
-#' @examples
+#' @doctest
 #' ht <- hux(a = 1:3, b = 1:3)
+#' @expect s3_class("flextable")
 #' ft <- as_flextable(ht)
+#' @pause
 #' \dontrun{
 #'   my_doc <- officer::read_docx()
 #'   my_doc <- flextable::body_add_flextable(

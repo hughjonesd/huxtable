@@ -21,6 +21,7 @@ This escapes a string for LaTeX, HTML or RTF.
 HTML and LaTeX code was copied over from \code{xtable::sanitize()}.
 }
 \examples{
+
 txt <- "Make $$$ with us"
 sanitize(txt, type = "latex")
 }

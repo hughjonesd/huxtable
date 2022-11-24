@@ -66,12 +66,10 @@ huxtable itself interprets the cell contents as markdown, and spits out HTML,
 TeX or whatever.
 }
 
-\examples{
-
-jams[3, 2] <- "~2.10~ **Sale!** 1.50"
-set_markdown(jams, 3, 2)
-
-}
 \seealso{
 \code{\link[=set_markdown_contents]{set_markdown_contents()}}, a shortcut function.
+}
+\examples{
+jams[3, 2] <- "~2.10~ **Sale!** 1.50"
+set_markdown(jams, 3, 2)
 }

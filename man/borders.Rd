@@ -90,17 +90,6 @@ all non-zero horizontal border widths on a given line must be the same.
 }
 }
 
-\examples{
-
-bottom_border(jams)[1, ] <- 0.4
-jams
-
-bottom_border(jams)[1, ] <- brdr(0.4, "solid", "blue")
-jams
-
-set_bottom_border(jams, brdr(0.4, "solid", "green"))
-
-}
 \seealso{
 \link{set-multiple}
 
@@ -109,3 +98,12 @@ Other border properties:
 \code{\link{border-styles}}
 }
 \concept{border properties}
+\examples{
+bottom_border(jams)[1, ] <- 0.4
+jams
+
+bottom_border(jams)[1, ] <- brdr(0.4, "solid", "blue")
+jams
+
+set_bottom_border(jams, brdr(0.4, "solid", "green"))
+}

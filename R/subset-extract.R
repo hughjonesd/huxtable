@@ -33,10 +33,13 @@ NULL
 #' intervening rows/columns. New values must have the appropriate dimensions
 #' (vectors will be interpreted appropriately).
 #'
-#' @examples
+#' @doctest
+#' @expect equal(nrow(.), 3)
 #' jams[1:3, ]
 #' class(jams[1:3, ])
+#' @expect s3_class("huxtable")
 #' jams[, 1]
+#' @expect type("character")
 #' jams$Type
 `[.huxtable` <- function (x, i, j, drop = FALSE) {
   if (! missing(drop) && drop) {
@@ -74,15 +77,17 @@ NULL
 #' @rdname extract-methods
 #' @export
 #'
-#' @examples
+#' @doctest
 #' prices <- huxtable(c("Price", 1.70, 2.00, 2.20))
 #' number_format(prices) <- 2
 #' bold(prices) <- TRUE
 #' jams[, 2] <- prices
+#' @snap
 #' jams
 #'
 #' data(jams)
-#' jams$price <- c("Price", 1.70, 2.00, 2.20)
+#' jams$Price <- c("Price", 1.70, 2.00, 2.20)
+#' @snap
 #' jams
 `[<-.huxtable` <- function (x, i, j, value) {
   # for ht[] <- x, nargs() is 3

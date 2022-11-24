@@ -69,15 +69,6 @@ the same as \code{left_border_color(ht)[, 2]}, and setting one sets the other.
 }
 }
 
-\examples{
-
-jams <- set_all_borders(jams)
-bottom_border_color(jams)[1, ] <- "red"
-jams
-
-set_bottom_border_color(jams, "blue")
-
-}
 \seealso{
 \link{set-multiple}, \code{\link[=brdr]{brdr()}}
 
@@ -86,3 +77,10 @@ Other border properties:
 \code{\link{borders}}
 }
 \concept{border properties}
+\examples{
+jams <- set_all_borders(jams)
+bottom_border_color(jams)[1, ] <- "red"
+jams
+
+set_bottom_border_color(jams, "blue")
+}

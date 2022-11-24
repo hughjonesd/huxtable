@@ -55,7 +55,7 @@ check_align_value <- function (x) {
 #' To use non-default decimal points, set both `align(ht)` and
 #' [number_format()]. See the example.
 #'
-#' @examples
+#' @doctest
 #'
 #' numbers <- c(1, 1.5, 1.03, 10, 10.01)
 #' number_hux <- as_hux(matrix(numbers, 5, 5))
@@ -81,6 +81,7 @@ check_align_value <- function (x) {
 #'       )
 #'
 #' align(number_hux)
+#' @snap
 #' number_hux
 #'
 #'
@@ -107,12 +108,14 @@ make_getter_setters("align", "cell",
 #' @seealso [merge_cells()], [merge_across()] and [merge_down()] for
 #' a higher-level interface.
 #'
-#' @examples
+#' @doctest
 #'
 #' letter_hux <- as_hux(matrix(LETTERS[1:9], 3, 3))
 #' letter_hux <- set_all_borders(letter_hux)
 #' letter_hux
+#' @snap
 #' set_rowspan(letter_hux, 1, 1, 2)
+#' @snap
 #' set_colspan(letter_hux, 1, 1, 2)
 #'
 #' @name spans
@@ -231,7 +234,7 @@ make_getter_setters("text_color", "cell")
 #' @templateVar attr_name wrap
 #' @templateVar value_param_desc A logical vector or matrix.
 #'
-#' @examples
+#' @doctest
 #'
 #' long_text <- paste(
 #'         rep("Some long text.", 10),
@@ -242,6 +245,7 @@ make_getter_setters("text_color", "cell")
 #' wrap(ht) <- TRUE
 #'
 #' \dontrun{
+#' @snap
 #'   quick_html(ht)
 #' }
 #'
@@ -316,9 +320,10 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #'
 #' @seealso [set_markdown_contents()], a shortcut function.
 #'
-#' @examples
+#' @doctest
 #'
 #' jams[3, 2] <- "~2.10~ **Sale!** 1.50"
+#' @snap
 #' set_markdown(jams, 3, 2)
 #'
 NULL
@@ -343,6 +348,7 @@ make_getter_setters("markdown", "cell",
 #'
 #' jams[3, 2] <- NA
 #' jams
+#'
 #' set_na_string(jams, "---")
 #'
 NULL
@@ -523,9 +529,11 @@ make_getter_setters("number_format", "cell")
 #' @evalNamespace make_namespace_S3_entries("contents")
 #' @aliases contents contents<- map_contents
 #' @name set_contents
-#' @examples
+#' @doctest
 #'
+#' @snap
 #' set_contents(jams, 2, 1, "Blackcurrant")
+#' @snap
 #' map_contents(jams, by_regex(".*berry" = "Snodberry"))
 NULL
 make_getter_setters("contents", "cell")

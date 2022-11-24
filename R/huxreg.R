@@ -82,7 +82,7 @@ generics::glance
 #' @return A huxtable object.
 #' @export
 #'
-#' @examples
+#' @doctest
 #' if (! requireNamespace("broom")) {
 #'   stop("Please install 'broom' to run this example.")
 #' }
@@ -92,16 +92,16 @@ generics::glance
 #' glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
 #'           family = binomial)
 #'
+#' @snap
 #' huxreg(lm1, lm2, glm1)
 #'
 #' if (requireNamespace("sandwich") &&
 #'       requireNamespace("lmtest")) {
 #'
 #'   lm_robust <- lmtest::coeftest(lm1,
-#'         vcov = sandwich::vcovHC)
-#'   # coeftest() has no "glance" method:
-#'   huxreg(lm_robust,
-#'         statistics = character(0))
+#'         vcov = sandwich::vcovHC, save = TRUE)
+#' @snap
+#'   huxreg(lm_robust)
 #'
 #' }
 #'

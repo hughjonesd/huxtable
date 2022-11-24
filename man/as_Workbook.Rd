@@ -57,7 +57,6 @@ be converted by \code{\link[=as.numeric]{as.numeric()}}). Otherwise, they are st
 }
 \examples{
 wb <- as_Workbook(jams)
-
 \dontrun{
   openxlsx::saveWorkbook(wb,
         "my-excel-file.xlsx")

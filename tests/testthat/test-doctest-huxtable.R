@@ -6,6 +6,6 @@ test_that("Example: huxtable", {
   # Source file: R/creation.R
   # Source line: 47
   ht <- huxtable(column1 = 1:5, column2 = letters[1:5])
-  expect_class(ht, "huxtable")
+  expect_s3_class(ht, "huxtable")
 })
 

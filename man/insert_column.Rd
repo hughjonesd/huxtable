@@ -51,17 +51,18 @@ In \code{insert_column} only, you can use a column name for \code{after}.
 Even if \code{colspan} or \code{rowspan} are greater than 1, you must still provide
 values for the hidden cells. Use \code{fill = ""} for this.
 }
+\seealso{
+\code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.
+}
 \examples{
 insert_row(jams,
         c("Gooseberry", 2.15),
         after = 1
       )
-
 insert_column(jams,
         c("Sugar", "50\%", "60\%", "40\%"),
         after = "Price"
       )
-
 insert_column(jams,
         "Sugar",
         after = "Price",
@@ -74,7 +75,4 @@ insert_row(jams,
         fill = "",
         colspan = 2
       )
-}
-\seealso{
-\code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.
 }

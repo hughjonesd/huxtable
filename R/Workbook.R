@@ -34,9 +34,10 @@ NULL
 #' @return An object of class `Workbook`.
 #' @export
 #'
-#' @examples
+#' @doctest
+#' @expect s4_class("Workbook")
 #' wb <- as_Workbook(jams)
-#'
+#' @pause
 #' \dontrun{
 #'   openxlsx::saveWorkbook(wb,
 #'         "my-excel-file.xlsx")

@@ -15,16 +15,14 @@ An object you can pass into \code{\link[=number_format]{number_format()}}.
 \description{
 Use \code{prettyNum()} to format numbers
 }
-\examples{
-
-jams$Sales <- c("Sales", 35000,
-      55500, 20000)
-set_number_format(jams, -1, "Sales",
-      fmt_pretty())
-
-}
 \seealso{
 Other format functions: 
 \code{\link{fmt_percent}()}
 }
 \concept{format functions}
+\examples{
+jams$Sales <- c("Sales", 35000,
+      55500, 20000)
+set_number_format(jams, -1, "Sales",
+      fmt_pretty())
+}

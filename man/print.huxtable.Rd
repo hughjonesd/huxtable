@@ -31,11 +31,12 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
   # to print LaTeX output:
   options(huxtable.print = print_latex)
 }
-
-format(jams, output = "screen")
-format(jams, output = "md")
 }
 \seealso{
 To change how huxtables are printed within \code{knitr}, see
 \code{options("huxtable.knitr_output_format")} in \link{huxtable-options}
+}
+\examples{
+format(jams, output = "screen")
+format(jams, output = "md")
 }

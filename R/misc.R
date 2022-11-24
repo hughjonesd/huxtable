@@ -56,6 +56,7 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 #' @export
 #'
 #' @examples
+#'
 #' txt <- "Make $$$ with us"
 #' sanitize(txt, type = "latex")
 sanitize <- function (str, type = c("latex", "html", "rtf")) {
@@ -202,9 +203,10 @@ print.huxtable <- function(x, ...) {
 #' @return `format` returns a string representation from [to_latex()], [to_html()] etc.
 #' @export
 #'
-#' @examples
-#'
+#' @doctest
+#' @expect snapshot(cat(.))
 #' format(jams, output = "screen")
+#' @expect snapshot(cat(.))
 #' format(jams, output = "md")
 format.huxtable <- function(x, ..., output = c("latex", "html", "md", "screen", "rtf")) {
   output <- match.arg(output)

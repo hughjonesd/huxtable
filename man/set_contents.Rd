@@ -28,7 +28,6 @@ map_contents(ht, row, col, fn)
 a dplyr chain. \code{set_contents(ht, x, y, foo)} just calls \code{ht[x, y] <- foo} and returns \code{ht}.
 }
 \examples{
-
 set_contents(jams, 2, 1, "Blackcurrant")
 map_contents(jams, by_regex(".*berry" = "Snodberry"))
 }

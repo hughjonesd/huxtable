@@ -29,8 +29,11 @@ return the result.
 \details{
 Arguments in \code{...} can include \code{copy_cell_props}.
 }
+\seealso{
+\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert
+multiple values into a single row.
+}
 \examples{
-
 ht <- hux("Gooseberry", 2.15)
 add_rows(jams, ht)
 add_rows(jams, ht, after = 1)
@@ -40,8 +43,4 @@ mx <- matrix(
       "Weight (g)", 300, 250, 300),
       4, 2)
 add_columns(jams, mx)
-}
-\seealso{
-\code{\link[=insert_row]{insert_row()}} and \code{\link[=insert_column]{insert_column()}}, which insert
-multiple values into a single row.
 }

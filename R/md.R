@@ -26,7 +26,8 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #'
 #' @family printing functions
 #'
-#' @examples
+#' @doctest
+#' @snap
 #' print_md(jams)
 to_md <- function(ht, ...) UseMethod("to_md")
 

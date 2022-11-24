@@ -40,5 +40,4 @@ sets padding, i.e. top padding on the top row of cells, etc.
 ht2 <- huxtable(a = 1:3, b = 1:3)
 set_outer_borders(ht2)
 set_outer_borders(ht2, 2:3, 1:2)
-
 }

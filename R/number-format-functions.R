@@ -19,10 +19,11 @@ NULL
 #'
 #' @family format functions
 #'
-#' @examples
+#' @doctest
 #'
 #' jams$Sugar <- c("Sugar content",
 #'       0.4, 0.35, 0.45)
+#' @snap
 #' set_number_format(jams, -1, "Sugar",
 #'       fmt_percent(1))
 #'
@@ -43,10 +44,11 @@ fmt_percent <- function (digits = 1, format = "f", ...) {
 #'
 #' @family format functions
 #'
-#' @examples
+#' @doctest
 #'
 #' jams$Sales <- c("Sales", 35000,
 #'       55500, 20000)
+#' @snap
 #' set_number_format(jams, -1, "Sales",
 #'       fmt_pretty())
 #'

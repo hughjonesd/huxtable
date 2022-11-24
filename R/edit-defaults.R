@@ -15,11 +15,13 @@
 #'
 #' @export
 #' @seealso Options for autoformat in [huxtable-options].
-#' @examples
+#' @doctest
+#'
 #' old <- set_default_properties(
 #'         text_color = "red",
 #'         border     = 0.4
 #'       )
+#' @snap
 #' hux(a = 1:2, b = 1:2)
 #' set_default_properties(old)
 set_default_properties <- function(...) {
@@ -41,7 +43,8 @@ set_default_properties <- function(...) {
 #' @return For `get_default_properties`, a list of the current defaults.
 #' @export
 #'
-#' @examples
+#' @doctest
+#' @expect false(.$bold)
 #' get_default_properties("bold")
 #' @rdname set_default_properties
 get_default_properties <- function (names = NULL) {

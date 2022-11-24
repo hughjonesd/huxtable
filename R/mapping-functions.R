@@ -453,7 +453,7 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 #'
 #' `by_colorspace()` can be used to set background, border or
 #' text colors, visually differentiating high or low values.
-#' 
+#'
 #' @param ... Colors
 #' @param range Numeric endpoints. If `NULL`, these are determined from the data.
 #' @param na_color Color to return for `NA` values. Can be `NA` itself.

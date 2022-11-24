@@ -14,9 +14,11 @@
 #' `set_outer_border_styles` set border colors and styles. `set_outer_padding`
 #' sets padding, i.e. top padding on the top row of cells, etc.
 #'
-#' @examples
+#' @doctest
 #' ht2 <- huxtable(a = 1:3, b = 1:3)
+#' @snap
 #' set_outer_borders(ht2)
+#' @snap
 #' set_outer_borders(ht2, 2:3, 1:2)
 #'
 #' @name set-outer

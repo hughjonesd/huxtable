@@ -47,16 +47,14 @@ left cell is copied to other cells. This prevents unexpected changes to
 content if you reorder or subset rows and columns.
 }
 
+\seealso{
+\code{\link[=merge_cells]{merge_cells()}}, \code{\link[=merge_across]{merge_across()}} and \code{\link[=merge_down]{merge_down()}} for
+a higher-level interface.
+}
 \examples{
-
 letter_hux <- as_hux(matrix(LETTERS[1:9], 3, 3))
 letter_hux <- set_all_borders(letter_hux)
 letter_hux
 set_rowspan(letter_hux, 1, 1, 2)
 set_colspan(letter_hux, 1, 1, 2)
-
-}
-\seealso{
-\code{\link[=merge_cells]{merge_cells()}}, \code{\link[=merge_across]{merge_across()}} and \code{\link[=merge_down]{merge_down()}} for
-a higher-level interface.
 }

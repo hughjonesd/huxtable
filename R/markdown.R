@@ -24,7 +24,8 @@ NULL
 #'
 #' @seealso [markdown()].
 #'
-#' @examples
+#' @doctest
+#' @snap
 #' set_markdown_contents(jams, 1, 1,
 #'       "**Type** of jam")
 set_markdown_contents <- function (ht, row, col, value) {

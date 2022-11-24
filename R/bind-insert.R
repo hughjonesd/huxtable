@@ -25,16 +25,19 @@ NULL
 #' @seealso [insert_row()] and [insert_column()], which insert
 #' multiple values into a single row.
 #'
-#' @examples
+#' @doctest
 #'
 #' ht <- hux("Gooseberry", 2.15)
+#' @snap
 #' add_rows(jams, ht)
+#' @snap
 #' add_rows(jams, ht, after = 1)
 #'
 #' mx <- matrix(
 #'       c("Sugar", "50%", "60%", "40%",
 #'       "Weight (g)", 300, 250, 300),
 #'       4, 2)
+#' @snap
 #' add_columns(jams, mx)
 add_rows <- function (x, y, after = nrow(x), copy_cell_props = TRUE) {
   add_row_cols(x, y, after, dimno = 1,
@@ -74,17 +77,20 @@ add_columns <- function (x, y, after = ncol(x),
 #' @seealso [add_rows()] and [add_columns()], which insert multiple rows/columns at once.
 #' @export
 #'
-#' @examples
+#' @doctest
+#' @snap
 #' insert_row(jams,
 #'         c("Gooseberry", 2.15),
 #'         after = 1
 #'       )
 #'
+#' @snap
 #' insert_column(jams,
 #'         c("Sugar", "50%", "60%", "40%"),
 #'         after = "Price"
 #'       )
 #'
+#' @snap
 #' insert_column(jams,
 #'         "Sugar",
 #'         after = "Price",
@@ -92,6 +98,7 @@ add_columns <- function (x, y, after = ncol(x),
 #'       )
 #'
 #' # don't forget to use `fill`:
+#' @snap
 #' insert_row(jams,
 #'         "Jams and prices",
 #'         fill = "",

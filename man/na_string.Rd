@@ -36,6 +36,7 @@ NA values in the huxtable are printed as the value of \code{na_string}.
 
 jams[3, 2] <- NA
 jams
+
 set_na_string(jams, "---")
 
 }

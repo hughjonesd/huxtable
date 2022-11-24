@@ -22,9 +22,7 @@ These convenience functions call \link{map_background_color} with \link{by_rows}
 or \link{by_cols}.
 }
 \examples{
-
 stripe_rows(jams)
 stripe_columns(jams)
 stripe_rows(jams, "red", "blue")
-
 }

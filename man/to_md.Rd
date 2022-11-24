@@ -34,9 +34,6 @@ Create Markdown representing a huxtable
 Only \code{align} and \code{caption} properties are used. The markdown format is
 \code{multiline_tables}, see the \href{https://pandoc.org/MANUAL.html#pandocs-markdown}{pandoc documentation}.
 }
-\examples{
-print_md(jams)
-}
 \seealso{
 Other printing functions: 
 \code{\link{print_html}()},
@@ -45,3 +42,6 @@ Other printing functions:
 \code{\link{print_screen}()}
 }
 \concept{printing functions}
+\examples{
+print_md(jams)
+}

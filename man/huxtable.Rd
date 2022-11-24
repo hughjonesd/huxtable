@@ -76,15 +76,6 @@ columns aligned on a decimal point will be right-aligned. Automatic number forma
 apply to column headers.
 }
 
-\examples{
-tribble_hux(
-  ~ Name,             ~ Salary,
-    "John Smith",       50000,
-    "Jane Doe",         50000,
-    "David Hugh-Jones", 50000,
-    add_colnames = TRUE
-)
-}
 \seealso{
 \link{huxtable-options}
 }
@@ -94,4 +85,11 @@ ht <- huxtable(
         column2 = letters[1:5]
       )
 ht
+tribble_hux(
+  ~ Name,             ~ Salary,
+    "John Smith",       50000,
+    "Jane Doe",         50000,
+    "David Hugh-Jones", 50000,
+    add_colnames = TRUE
+)
 }

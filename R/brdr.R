@@ -3,18 +3,18 @@
 #'
 #' `brdr()` objects can be passed into [set_top_border()] and friends.
 #' They set multiple border properties simultaneously.
-#' 
+#'
 #' @param thickness Thickness of the border in points.
 #' @param style "solid" (the default), "double", "dashed" or "dotted".
 #' @param color String representing a valid color (either a color name or
 #'   a hexadecimalstring like "#00FF00").
 #'
-#' @return An object of class "brdr". 
+#' @return An object of class "brdr".
 #'
 #' @export
 #'
-#' @examples
-#'
+#' @doctest
+#' @snap
 #' set_bottom_border(jams, brdr(1, "solid", "red"))
 #'
 brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {

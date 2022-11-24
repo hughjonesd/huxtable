@@ -29,6 +29,9 @@ To set default border styles, use the pseudo-properties
 \code{border}/\code{border_style}/\code{border_color}. You cannot set defaults separately for
 different sides.
 }
+\seealso{
+Options for autoformat in \link{huxtable-options}.
+}
 \examples{
 old <- set_default_properties(
         text_color = "red",
@@ -37,7 +40,4 @@ old <- set_default_properties(
 hux(a = 1:2, b = 1:2)
 set_default_properties(old)
 get_default_properties("bold")
-}
-\seealso{
-Options for autoformat in \link{huxtable-options}.
 }

@@ -54,14 +54,6 @@ Screen display shows the following features:
 
 Cell padding, widths and heights are not shown, nor are border styles.
 }
-\examples{
-bottom_border(jams)[1, 1:2] <- 1
-bold(jams)[1, 1:2] <- TRUE
-jams <- map_text_color(jams,
-      by_regex("berry" = "red"))
-
-print_screen(jams)
-}
 \seealso{
 Other printing functions: 
 \code{\link{print_html}()},
@@ -70,3 +62,10 @@ Other printing functions:
 \code{\link{print_rtf}()}
 }
 \concept{printing functions}
+\examples{
+bottom_border(jams)[1, 1:2] <- 1
+bold(jams)[1, 1:2] <- TRUE
+jams <- map_text_color(jams,
+      by_regex("berry" = "red"))
+print_screen(jams)
+}

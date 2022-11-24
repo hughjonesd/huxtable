@@ -22,7 +22,5 @@ An object of class "brdr".
 They set multiple border properties simultaneously.
 }
 \examples{
-
 set_bottom_border(jams, brdr(1, "solid", "red"))
-
 }

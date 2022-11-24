@@ -36,16 +36,14 @@ left cell is copied to other cells. This prevents unexpected changes to
 content if you reorder or subset rows and columns.
 }
 
-\examples{
-
-ht <- hux(a = 1:3, b = 1:3)
-ht <- set_all_borders(ht, 1)
-merge_cells(ht, 2:3, 1:2)
-
-}
 \seealso{
 Other cell merging: 
 \code{\link{merge_across}()},
 \code{\link{merge_repeated_rows}()}
 }
 \concept{cell merging}
+\examples{
+ht <- hux(a = 1:3, b = 1:3)
+ht <- set_all_borders(ht, 1)
+merge_cells(ht, 2:3, 1:2)
+}

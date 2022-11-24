@@ -77,9 +77,10 @@ NULL
 #'
 #' @family border properties
 #'
-#' @examples
+#' @doctest
 #'
 #' bottom_border(jams)[1, ] <- 0.4
+#' @snap
 #' jams
 #'
 #' bottom_border(jams)[1, ] <- brdr(0.4, "solid", "blue")
@@ -164,10 +165,11 @@ NULL
 #'
 #' @family border properties
 #'
-#' @examples
+#' @doctest
 #'
 #' jams <- set_all_borders(jams)
 #' bottom_border_color(jams)[1, ] <- "red"
+#' @snap
 #' jams
 #'
 #' set_bottom_border_color(jams, "blue")

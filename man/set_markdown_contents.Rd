@@ -29,10 +29,10 @@ huxtable itself interprets the cell contents as markdown, and spits out HTML,
 TeX or whatever.
 }
 
+\seealso{
+\code{\link[=markdown]{markdown()}}.
+}
 \examples{
 set_markdown_contents(jams, 1, 1,
       "**Type** of jam")
-}
-\seealso{
-\code{\link[=markdown]{markdown()}}.
 }

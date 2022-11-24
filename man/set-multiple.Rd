@@ -103,9 +103,6 @@ simultaneously for the specified cells.
 }
 }
 \examples{
-ht <- as_hux(jams)
-ht <- set_all_borders(ht)
-ht
 ht <- set_all_border_colors(ht, "red")
 ht
 ht <- set_all_border_styles(ht, "double")
@@ -117,4 +114,9 @@ set_tb_border_styles(ht, "double")
 }
 \seealso{
 \link{borders}, \link{border-colors}, \link{border-styles}, \link{padding}.
+}
+\examples{
+ht <- as_hux(jams)
+ht <- set_all_borders(ht)
+ht
 }

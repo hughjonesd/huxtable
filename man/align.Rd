@@ -54,7 +54,6 @@ To use non-default decimal points, set both \code{align(ht)} and
 }
 
 \examples{
-
 numbers <- c(1, 1.5, 1.03, 10, 10.01)
 number_hux <- as_hux(matrix(numbers, 5, 5))
 number_format(number_hux) <- "\%.4g"
@@ -80,6 +79,5 @@ number_hux <- rbind(
 
 align(number_hux)
 number_hux
-
 
 }

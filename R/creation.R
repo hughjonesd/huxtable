@@ -49,7 +49,7 @@ NULL
 #'         column1 = 1:5,
 #'         column2 = letters[1:5]
 #'       )
-#' @expect class("huxtable")
+#' @expect s3_class("huxtable")
 #' ht
 huxtable <- function (
         ...,
@@ -88,7 +88,7 @@ hux <- huxtable
 #'
 #' @rdname huxtable
 #' @doctest
-#' @expect class("huxtable")
+#' @expect s3_class("huxtable")
 #' tribble_hux(
 #'   ~ Name,             ~ Salary,
 #'     "John Smith",       50000,
@@ -130,23 +130,27 @@ tribble_hux <- function (...,
 #' if `groups_to_headers` is `TRUE`.
 #'
 #' @export
-#' @examples
+#' @doctest
 #' dfr <- data.frame(
 #'         a = 1:5,
 #'         b = letters[1:5],
 #'         stringsAsFactors = FALSE
 #'       )
+#' @snap
 #' as_huxtable(dfr)
 #' mx <- matrix(letters[1:12], 4, 3)
+#' @snap
 #' as_huxtable(mx, add_colnames = FALSE)
 #' library(stats)
 #' tbl <- table(
 #'         Wool    = warpbreaks$wool,
 #'         Tension = warpbreaks$tension
 #'       )
+#' @snap
 #' as_huxtable(tbl) # adds row and column names by default
 #'
 #' # adding rownames:
+#' @expect match(names(.), "Car", all = FALSE)
 #' as_hux(mtcars[1:3,], add_colnames = TRUE,
 #'       add_rownames = "Car")
 #'

@@ -35,12 +35,13 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #'
 #' @export
 #' @family printing functions
-#' @examples
+#' @doctest
 #' bottom_border(jams)[1, 1:2] <- 1
 #' bold(jams)[1, 1:2] <- TRUE
 #' jams <- map_text_color(jams,
 #'       by_regex("berry" = "red"))
 #'
+#' @snap
 #' print_screen(jams)
 to_screen  <- function (ht, ...) UseMethod("to_screen")
 

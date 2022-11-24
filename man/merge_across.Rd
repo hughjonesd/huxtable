@@ -32,17 +32,15 @@ left cell is copied to other cells. This prevents unexpected changes to
 content if you reorder or subset rows and columns.
 }
 
-\examples{
-
-ht <- as_hux(matrix(1:12, 4, 3, byrow = TRUE))
-ht <- set_all_borders(ht, 1)
-merge_across(ht, 2:4, 2:3)
-merge_down(ht, 2:4, 2:3)
-
-}
 \seealso{
 Other cell merging: 
 \code{\link{merge_cells}()},
 \code{\link{merge_repeated_rows}()}
 }
 \concept{cell merging}
+\examples{
+ht <- as_hux(matrix(1:12, 4, 3, byrow = TRUE))
+ht <- set_all_borders(ht, 1)
+merge_across(ht, 2:4, 2:3)
+merge_down(ht, 2:4, 2:3)
+}

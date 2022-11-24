@@ -26,9 +26,10 @@ NULL
 
 #' @rdname set-multiple
 #' @export
-#' @examples
+#' @doctest
 #' ht <- as_hux(jams)
 #' ht <- set_all_borders(ht)
+#' @snap
 #' ht
 set_all_borders <- function(ht, row, col, value = 0.4) {
   recall_ltrb(ht, "set_%s_border")

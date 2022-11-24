@@ -33,10 +33,11 @@ NULL
 #' @family cell merging
 #'
 #' @export
-#' @examples
+#' @doctest
 #'
 #' ht <- hux(a = 1:3, b = 1:3)
 #' ht <- set_all_borders(ht, 1)
+#' @snap
 #' merge_cells(ht, 2:3, 1:2)
 #'
 merge_cells <- function (ht, row, col) {
@@ -71,11 +72,13 @@ merge_cells <- function (ht, row, col) {
 #'
 #' @family cell merging
 #'
-#' @examples
+#' @doctest
 #'
 #' ht <- as_hux(matrix(1:12, 4, 3, byrow = TRUE))
 #' ht <- set_all_borders(ht, 1)
+#' @snap
 #' merge_across(ht, 2:4, 2:3)
+#' @snap
 #' merge_down(ht, 2:4, 2:3)
 #'
 merge_across <- function (ht, row, col) {

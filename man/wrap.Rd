@@ -35,7 +35,6 @@ particular, if you want to insert newlines in cells, then you should
 set a value for \code{\link[=width]{width()}} and set \code{wrap} to \code{TRUE}.
 }
 \examples{
-
 long_text <- paste(
         rep("Some long text.", 10),
         collapse = " "
@@ -47,5 +46,4 @@ wrap(ht) <- TRUE
 \dontrun{
   quick_html(ht)
 }
-
 }
