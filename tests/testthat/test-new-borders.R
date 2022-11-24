@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("brdr objects", {
   expect_silent(b <- brdr(1, "solid", "red"))
   expect_s3_class(b, "brdr")

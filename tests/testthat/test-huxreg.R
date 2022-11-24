@@ -1,4 +1,6 @@
 
+local_edition(2)
+
 skip_if_not_installed("broom")
 
 

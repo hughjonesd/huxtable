@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("Multirow/multicol cells cannot shadow other multirow/multicol cells", {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   colspan(ht)[1, 2] <- 2

@@ -1,11 +1,11 @@
 
-context("flextable conversion")
+
 skip_if_not_installed("flextable")
 
 test_that("Simple conversion works", {
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_error(ft <- as_flextable(hx), regexp = NA)
-  expect_is(ft, "flextable")
+  expect_s3_class(ft, "flextable")
 })
 
 

@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("by_values", {
   m <- matrix(letters[1:4], 2, 2)
   ct <- matrix(NA, 2, 2)

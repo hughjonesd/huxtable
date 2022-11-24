@@ -1,5 +1,7 @@
 
 
+local_edition(2)
+
 
 test_that("merge_cells", {
   ht <- hux(a = 1:3, b = 1:3)

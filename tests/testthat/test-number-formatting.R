@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 setup({
   oo_lm <<- options(huxtable.long_minus = FALSE)
 })

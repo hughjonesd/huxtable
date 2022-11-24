@@ -6,7 +6,7 @@ skip_if_not_installed("openxlsx")
 test_that("Simple conversion works", {
   hx <- huxtable(a = 1:3, b = 4:6)
   expect_silent(wb <- as_Workbook(hx))
-  expect_is(wb, "Workbook")
+  expect_s4_class(wb, "Workbook")
 })
 
 
@@ -105,15 +105,15 @@ test_that("Data written in appropriate format", {
   wb <- as_Workbook(hx)
   expect_error(openxlsx::saveWorkbook(wb, file = "test-xlsx.xlsx", overwrite = TRUE),
         regexp = NA) # openxlsx may emit messages
+  on.exit(
+    if (file.exists("test-xlsx.xlsx")) file.remove("test-xlsx.xlsx")
+  )
   dfr <- openxlsx::read.xlsx("test-xlsx.xlsx")
-  expect_equivalent(class(dfr[[1]]), "numeric")
-  expect_equivalent(class(dfr[[2]]), "numeric")
-  expect_equivalent(class(dfr[[3]]), "character")
+
+  expect_type(dfr[[1]], "double")
+  expect_type(dfr[[2]], "double")
+  expect_type(dfr[[3]], "character")
   expect_equal(dfr[[1]], 1:2 + 0.5)
   expect_equal(dfr[[2]], -1:-2 + 0.5)
   expect_equal(dfr[[3]], letters[1:2])
-})
-
-teardown({
-  if (file.exists("test-xlsx.xlsx")) file.remove("test-xlsx.xlsx")
 })

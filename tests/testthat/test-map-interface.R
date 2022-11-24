@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("Standard map_xxx", {
 
   ht <- huxtable(

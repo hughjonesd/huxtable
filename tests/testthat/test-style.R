@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("Can use style_cells", {
   htxx <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   ht2 <- style_cells(htxx, 1, 1, font = "times", font_size = 24)
