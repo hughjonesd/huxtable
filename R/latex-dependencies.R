@@ -35,7 +35,8 @@ huxtable_latex_dependencies <- list(
 #'   `rmarkdown::latex_dependency` objects, invisibly.
 #' @export
 #'
-#' @examples
+#' @doctest
+#' @expect snapshot()
 #' report_latex_dependencies()
 #'
 report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
@@ -79,8 +80,9 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 #' @rdname report_latex_dependencies
 #' @export
 #' @return `check_latex_dependencies()` returns `TRUE` or `FALSE`.
-#' @examples
+#' @doctest
 #' \dontrun{
+#' @expect snapshot()
 #'   check_latex_dependencies()
 #' }
 check_latex_dependencies <- function (quiet = FALSE) {
@@ -121,7 +123,7 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #' @return `install_latex_dependencies` returns `TRUE` if `tlmgr` returns 0.
 #' @export
 #' @rdname report_latex_dependencies
-#' @examples
+#' @doctest
 #'
 #' \dontrun{
 #'   install_latex_dependencies()
