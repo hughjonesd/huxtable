@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("stripe_rows", {
   jams <- stripe_rows(jams)
   expect_equivalent(background_color(jams)[1, 1], "white")

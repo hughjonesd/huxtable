@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 # how to debug
 # look for a 6 figure number in test output.
 # Run:

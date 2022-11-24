@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("One-argument [", {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   expect_silent(ht1 <- ht[1])

@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("set_all_*", {
   ht <- hux(a = c(1, 0), b = c(0, 1))
   ht2 <- set_all_borders(ht, 1)

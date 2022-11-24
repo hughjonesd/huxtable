@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("set_* works with variables as arguments", {
   ht_orig <- hux(a = 1:2, b = 1:2)
   rownum <- 2

@@ -1,4 +1,5 @@
 
+local_edition(2)
 
 test_that("install/report_latex_dependencies", {
   skip_if_not_installed("tinytex")

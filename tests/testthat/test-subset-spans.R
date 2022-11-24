@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("Subsetting cuts rowspan and colspan", {
   ht <- hux(a = 1:3, b = 1:3, d = 1:3)
   rowspan(ht)[1, 1] <- 3

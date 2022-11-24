@@ -1,4 +1,8 @@
 
+
+local_edition(2)
+
+
 test_that("split_across", {
   ht <- as_hux(col(matrix(NA, 4, 4)))
 

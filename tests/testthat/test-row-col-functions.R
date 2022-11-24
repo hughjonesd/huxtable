@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("final", {
   dfr <- data.frame(a = 1:5, b = 1:5, d = 1:5, e = 1:5)
   expect_equivalent(final(2)(dfr, 1), 4:5)

@@ -2,6 +2,8 @@
 ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
 
 
+local_edition(2)
+
 test_that("Can refer to properties by colnames", {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   number_format(ht)[1, 1] <- 3

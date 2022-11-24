@@ -1,5 +1,6 @@
 
-context("huxtable creation")
+
+local_edition(2)
 
 
 test_that("create huxtable using hux[table]()", {
@@ -28,7 +29,7 @@ test_that("add_rownames", {
   expect_equal(ncol(ht), 2)
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = "foo"))
   expect_equal(ncol(ht), 3)
-  expect_equivalent(colnames(ht), c("foo", "a", "b"))
+  expect_equal(colnames(ht), c("foo", "a", "b"))
 })
 
 

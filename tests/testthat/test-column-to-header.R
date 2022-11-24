@@ -1,4 +1,6 @@
 
+local_edition(2)
+
 test_that("column_to_header works", {
   expect_silent(column_to_header(jams, "Price"))
   expect_silent(column_to_header(jams, "Type"))

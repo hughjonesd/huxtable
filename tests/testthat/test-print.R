@@ -1,5 +1,8 @@
 
 
+local_edition(2)
+
+
 test_that("to_screen gives warning with colour if crayon not installed", {
   ht <- hux(a = 1:2)
   with_mock(requireNamespace = function (...) FALSE, {
