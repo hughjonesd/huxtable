@@ -40,7 +40,6 @@ directly.
 }
 \examples{
 report_latex_dependencies()
-
 \dontrun{
   check_latex_dependencies()
 }

@@ -29,10 +29,6 @@ RStudio interactive notebook.
 \description{
 These functions print or return an HTML table.
 }
-\examples{
-ht <- hux(a = 1:3, b = letters[1:3])
-to_html(ht)
-}
 \seealso{
 Other printing functions: 
 \code{\link{print_latex}()},
@@ -41,3 +37,7 @@ Other printing functions:
 \code{\link{print_screen}()}
 }
 \concept{printing functions}
+\examples{
+ht <- hux(a = 1:3, b = letters[1:3])
+to_html(ht)
+}

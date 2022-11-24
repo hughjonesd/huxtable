@@ -19,8 +19,9 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #'
 #' @family printing functions
 #'
-#' @examples
+#' @doctest
 #' ht <- hux(a = 1:3, b = letters[1:3])
+#' @snap
 #' to_html(ht)
 to_html <- function (ht, ...) UseMethod("to_html")
 

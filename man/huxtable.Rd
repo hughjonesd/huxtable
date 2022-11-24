@@ -77,11 +77,6 @@ apply to column headers.
 }
 
 \examples{
-ht <- huxtable(
-        column1 = 1:5,
-        column2 = letters[1:5]
-      )
-ht
 tribble_hux(
   ~ Name,             ~ Salary,
     "John Smith",       50000,
@@ -92,4 +87,11 @@ tribble_hux(
 }
 \seealso{
 \link{huxtable-options}
+}
+\examples{
+ht <- huxtable(
+        column1 = 1:5,
+        column2 = letters[1:5]
+      )
+ht
 }

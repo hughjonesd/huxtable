@@ -44,11 +44,12 @@ NULL
 #'
 #' @seealso [huxtable-options]
 #'
-#' @examples
+#' @doctest
 #' ht <- huxtable(
 #'         column1 = 1:5,
 #'         column2 = letters[1:5]
 #'       )
+#' @expect class("huxtable")
 #' ht
 huxtable <- function (
         ...,
@@ -86,7 +87,8 @@ hux <- huxtable
 #'  be installed.
 #'
 #' @rdname huxtable
-#' @examples
+#' @doctest
+#' @expect class("huxtable")
 #' tribble_hux(
 #'   ~ Name,             ~ Salary,
 #'     "John Smith",       50000,
