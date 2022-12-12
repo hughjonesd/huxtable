@@ -453,7 +453,7 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 #'
 #' `by_colorspace()` can be used to set background, border or
 #' text colors, visually differentiating high or low values.
-#' 
+#'
 #' @param ... Colors
 #' @param range Numeric endpoints. If `NULL`, these are determined from the data.
 #' @param na_color Color to return for `NA` values. Can be `NA` itself.
@@ -579,9 +579,13 @@ by_cases <- function (..., ignore_na = TRUE) {
   case_fn <- function (ht, rows, cols, current) {
     res <- current
     myenv <- new.env()
-    assign(".",  as.matrix(ht[rows, cols]), envir = myenv)
+    selection <- as.matrix(ht[rows, cols])
+    dim <- dim(selection)
+    selection <- as.vector(selection)
+    assign(".", selection, envir = myenv)
     cases <- lapply(cases, stats::as.formula, env = myenv)
     vals <- dplyr::case_when(!!! cases)
+    vals <- array(vals, dim = dim)
     res[] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
     res
