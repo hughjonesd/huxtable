@@ -21,7 +21,7 @@ This function uses \code{\link[dplyr:case_when]{dplyr::case_when()}} to set cell
 }
 \details{
 Within the formulas, the variable \code{.} will refer to the content of
-\code{ht[rows, cols]}, after conversion by \code{\link[=as.matrix]{as.matrix()}}.
+\code{ht[rows, cols]}, after conversion to a vector.
 
 \code{case_when} returns \code{NA} when no formula LHS is matched. To avoid this, set a
 default in the last formula: \code{TRUE ~ default}.

@@ -8,14 +8,16 @@
 This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
-
+\itemize{
+\item Update \code{by_cases()} to work with dplyr 1.1.0. Within \code{by_cases()}
+formulas, \code{.} is now vector rather than matrix. Thanks @DavisVaughan.
+}
 }
 
 \section{huxtable 5.5.1}{
 \itemize{
 \item CSS borders are now set explicitly even if they are all set to 0.
-\item Bugfix: shell-quote files in \verb{quick_*} functions. Thanks to
-@ceresek.
+\item Bugfix: shell-quote files in \verb{quick_*} functions. Thanks to @ceresek.
 \item Bugfix: cope with adjustbox version “1.3a” among latex dependencies.
 }
 }
@@ -25,8 +27,8 @@ This help page simply gives the contents of NEWS.md.
 \item Huxtable should work with \href{https://quarto.org}{Quarto} documents.
 \itemize{
 \item Quarto labels and captions will override huxtable-provided ones.
-\item Quarto style references like \verb{@table-label} only work with
-quarto labels.
+\item Quarto style references like \verb{@table-label} only work with quarto
+labels.
 \item Please report any bugs!
 }
 \item New \code{column_to_header()} function converts a column to header rows.
@@ -70,15 +72,14 @@ ht[, c(2, 1, 3)]
 ##   |      2 |      1 |      3 |
 ##   +--------+--------+--------+
 }\if{html}{\out{</div>}}
-\item New option \code{huxtable.latex_siunitx_align} allows you to use the
-LaTeX \code{siunitx} package to handle decimal point alignment. This is
-\code{FALSE} by default.
+\item New option \code{huxtable.latex_siunitx_align} allows you to use the LaTeX
+\code{siunitx} package to handle decimal point alignment. This is \code{FALSE}
+by default.
 \item Bugfix: centre alignment was not working in \code{print_screen()}.
 \item Bugfix: failure in \code{to_md()} with recent versions of \code{stringi}
 package.
 \item Bugfix: repeating a single row in a subset, like
-\code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated
-row.
+\code{ht[c(1, 1, 2, 3), ]}, was setting \code{colspan = 2} on the repeated row.
 \item Bugfix: zero-argument subset replacement like \code{ht[] <- ...} wasn’t
 working.
 }
@@ -128,8 +129,8 @@ long minus signs before numbers. The default is \code{FALSE}. It will
 probably become \code{TRUE} in a future version.
 \item Bugfix: \code{insert_row/column(..., after = 0)} was unsetting table
 properties.
-\item Bugfix: unicode characters above 32767 were incorrectly represented
-in RTF. Thanks @kaigu1990.
+\item Bugfix: unicode characters above 32767 were incorrectly represented in
+RTF. Thanks @kaigu1990.
 \item Bugfix: columns were being collapsed in \code{as_Workbook()}.
 \item Bugfix: \code{style_cells} didn’t work unless huxtable was on the search
 path.
@@ -138,13 +139,12 @@ path.
 \item Bugfix: in \code{huxreg()}, \code{tidy_args} threw an error if the first
 argument to \code{tidy()} was a named list.
 \item Bugfix: \code{tidy_replace()} was broken.
-\item Clearer error messages for \code{tidy_override()} when \code{extend = FALSE}.
-In future, \code{extend} will probably default to \code{TRUE}.
+\item Clearer error messages for \code{tidy_override()} when \code{extend = FALSE}. In
+future, \code{extend} will probably default to \code{TRUE}.
 }
 \subsection{Other news:}{
 \itemize{
-\item Huxtable received its first Patreon sponsor! Thanks to Ross
-Mattheis.
+\item Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.
 }
 }
 }
@@ -158,17 +158,17 @@ introduction, see
 \item There are changes to LaTeX output.
 \itemize{
 \item LaTeX \verb{\tabcolsep} is now set to 0 within huxtable tables, while
-left and right padding should now take effect even when \code{wrap}
-is \code{FALSE}.
-\item The default LaTeX table environment is now “tabular” unless
-\code{width} is set. If \code{width} is set, it is “tabularx”.
-\item \code{wrap} only matters if \code{width} is set. Otherwise, cell wrapping
-is off.
-\item the \verb{\centerbox} macro from the LaTeX “adjustbox” package is
-used to centre tables. This should improve centring when tables
-are too wide. You may need to update the LaTeX “adjustbox”
-package to a recent version. \code{check_latex_dependencies()} can
-inform you about this.
+left and right padding should now take effect even when \code{wrap} is
+\code{FALSE}.
+\item The default LaTeX table environment is now “tabular” unless \code{width}
+is set. If \code{width} is set, it is “tabularx”.
+\item \code{wrap} only matters if \code{width} is set. Otherwise, cell wrapping is
+off.
+\item the \verb{\centerbox} macro from the LaTeX “adjustbox” package is used to
+centre tables. This should improve centring when tables are too
+wide. You may need to update the LaTeX “adjustbox” package to a
+recent version. \code{check_latex_dependencies()} can inform you about
+this.
 }
 \item As previously signalled, \code{add_colnames} has now become \code{TRUE} by
 default in \code{huxtable()} and \code{as_huxtable()}. Set
@@ -176,8 +176,8 @@ default in \code{huxtable()} and \code{as_huxtable()}. Set
 behaviour.
 \item Newlines in cell contents are now respected (in LaTeX, so long as
 \code{wrap = TRUE} and \code{width} has been set).
-\item Huxtable borders have been reworked, fixing some longstanding bugs
-and adding new features.
+\item Huxtable borders have been reworked, fixing some longstanding bugs and
+adding new features.
 \itemize{
 \item Borders are now automatically collapsed. For example:
 
@@ -187,9 +187,9 @@ and adding new features.
 }\if{html}{\out{</div>}}
 
 will set the border in between the columns of \code{jams} to \code{0.4},
-overwriting the previous value. This is more in line with what
-you would expect. For example, the following code now does what
-you probably want:
+overwriting the previous value. This is more in line with what you
+would expect. For example, the following code now does what you
+probably want:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{jams \%>\% 
     set_rowspan(2, 1, 3) \%>\% 
@@ -225,8 +225,8 @@ colour. You can set all properties at once by writing, e.g.:
       set_bottom_border(1, everywhere, brdr(1, "dotted", "darkgreen"))
 }\if{html}{\out{</div>}}
 
-\code{left_border(ht)} and friends return a \code{brdr} object. To access
-the border thickness, write \code{brdr_thickness(left_border(ht))}.
+\code{left_border(ht)} and friends return a \code{brdr} object. To access the
+border thickness, write \code{brdr_thickness(left_border(ht))}.
 }
 \item Various deprecated items have been removed:
 \itemize{
@@ -235,21 +235,19 @@ the border thickness, write \code{brdr_thickness(left_border(ht))}.
 \code{by_cols()}.
 \item \code{error_style} and \code{pad_decimal} arguments in \code{huxreg}. Use
 \code{error_format} and \code{align(hx) <- "."}.
-\item The \code{where()}, \code{is_a_number()} and \code{pad_decimal()} functions.
-Use \verb{map_*} functions, \code{! is.na(as.numeric(x))}, and
-\code{align(ht) <- "."}.
+\item The \code{where()}, \code{is_a_number()} and \code{pad_decimal()} functions. Use
+\verb{map_*} functions, \code{! is.na(as.numeric(x))}, and \code{align(ht) <- "."}.
 }
 \item Default padding has been increased to 6 points.
 \item By default, \code{width()} is now unset.
 \item By default, \code{wrap()} is now \code{TRUE}.
 \item \code{every()} has been renamed to \code{stripe()}, to avoid a clash with
-\code{purrr::every()}. \code{everywhere}, \code{evens} and \code{odds} are still the
-same.
-\item The little-used ability to set \code{copy_cell_props} to a character
-vector in \code{rbind.huxtable} and \code{cbind.huxtable} has been removed.
-You can still set it to \code{FALSE}.
-\item \code{add_rows()} and \code{add_columns()} now always call \code{rbind.huxtable()}
-or \code{cbind.huxtable()} and return a huxtable.
+\code{purrr::every()}. \code{everywhere}, \code{evens} and \code{odds} are still the same.
+\item The little-used ability to set \code{copy_cell_props} to a character vector
+in \code{rbind.huxtable} and \code{cbind.huxtable} has been removed. You can
+still set it to \code{FALSE}.
+\item \code{add_rows()} and \code{add_columns()} now always call \code{rbind.huxtable()} or
+\code{cbind.huxtable()} and return a huxtable.
 \item Huxtable no longer supports dplyr versions less than 0.7.0 (released
 mid-2017).
 \item \code{set_cell_properties()} has been renamed \code{style_cells()}. It is
@@ -268,8 +266,8 @@ headers.
 
 \subsection{Other changes}{
 \itemize{
-\item You can now use \href{https://commonmark.org/help/}{markdown} within
-table cells.
+\item You can now use \href{https://commonmark.org/help/}{markdown} within table
+cells.
 \itemize{
 \item Use \code{set_markdown(ht, rows, cols)} to turn this on.
 \item Or use the convenience function \code{set_markdown_contents()} to set
@@ -288,8 +286,8 @@ on-screen display.
 \item In themes, \code{header_row/col = TRUE} set the first row/col to a
 header, and style all header rows/cols.
 }
-\item \code{set_bold()} and \code{set_italic()} now use a default value of \code{TRUE}.
-So you can write e.g.
+\item \code{set_bold()} and \code{set_italic()} now use a default value of \code{TRUE}. So
+you can write e.g.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{as_hux(head(iris)) \%>\% 
       set_bold(1, everywhere)
@@ -306,8 +304,7 @@ as_hux(iris)
 ```
 }\if{html}{\out{</div>}}
 
-Set \code{options(huxtable.autolabel = FALSE)} to turn off this
-behaviour.
+Set \code{options(huxtable.autolabel = FALSE)} to turn off this behaviour.
 \item The one-argument form of \code{[} now works for huxtables just as it does
 for data frames. For example, \code{ht[2:3]} selects columns 2 and 3.
 \item New functions \code{fmt_percent()} and \code{fmt_pretty()} for passing into
@@ -318,25 +315,25 @@ set_number_format(jams, -1, "Sugar", fmt_percent(1))
 }\if{html}{\out{</div>}}
 \item \code{split_across()} and \code{split_down()} split a huxtable into a list of
 sub-tables. Headers can be automatically included.
-\item \code{restack_across()} and \code{restack_down()} split a huxtable, then join
-it back up. This is useful for making a table fit on a page.
+\item \code{restack_across()} and \code{restack_down()} split a huxtable, then join it
+back up. This is useful for making a table fit on a page.
 \item \code{merge_across()} and \code{merge_down()} merge an area of cells
 horizontally across rows, or vertically down columns.
 \item New functions
 \verb{set_lr_borders()/_border_colors()/_border_styles()/_padding()}
 set left and right borders and padding simultaneously. New functions
-\code{set_tb_borders()} etc. set top and bottom properties
-simultaneously. There are \code{map_} equivalents of all of these.
-\item \code{set_outer_padding()} sets padding around a range of cells,
-similarly to \code{set_outer_borders()}.
+\code{set_tb_borders()} etc. set top and bottom properties simultaneously.
+There are \code{map_} equivalents of all of these.
+\item \code{set_outer_padding()} sets padding around a range of cells, similarly
+to \code{set_outer_borders()}.
 \item A new table-level property, \code{caption_width()}, allows you to set the
 width of the caption. The default, \code{NA}, sets the width equal to the
 table width.
 \item There are two new themes: \code{theme_compact()} and \code{theme_bright()}.
-\item For \code{huxreg()}, a new function \code{tidy_replace()} allows you to
-replace the output of \code{tidy(x)} entirely.
-\item huxtable now only sets \code{options(huxtable.knit_print_df = TRUE)} if
-it is attached, not if it is loaded.
+\item For \code{huxreg()}, a new function \code{tidy_replace()} allows you to replace
+the output of \code{tidy(x)} entirely.
+\item huxtable now only sets \code{options(huxtable.knit_print_df = TRUE)} if it
+is attached, not if it is loaded.
 \item huxtable supports \code{dplyr::relocate()}, new in dplyr 1.0.0.
 \item Improvements to \code{as_flextable()}.
 \item Improvements to \code{quick_pptx()} (thanks @davidgohel).
@@ -349,11 +346,11 @@ it is attached, not if it is loaded.
 \subsection{Other news}{
 \itemize{
 \item New versions of the
-\href{https://cran.r-project.org/package=gtsummary}{gtsummary} package
-will have an \code{as_huxtable()} method.
+\href{https://cran.r-project.org/package=gtsummary}{gtsummary} package will
+have an \code{as_huxtable()} method.
 \item Package \href{https://cran.r-project.org/package=texreg}{texreg} on CRAN
-includes a \code{huxtablereg()} function for creating a table of
-regression outputs.
+includes a \code{huxtablereg()} function for creating a table of regression
+outputs.
 }
 }
 }
@@ -394,9 +391,8 @@ inserted row/column.
 
 \section{huxtable 4.6.0}{
 \itemize{
-\item Set \code{options('huxtable.latex_use_fontspec')} to \code{TRUE} to use
-portable font names in TeX documents, with the LaTeX “fontspec”
-package.
+\item Set \code{options('huxtable.latex_use_fontspec')} to \code{TRUE} to use portable
+font names in TeX documents, with the LaTeX “fontspec” package.
 \item Bugfix: attributes were being copied wrongly in subset assignment of
 huxtables.
 \item Bugfix: text colors in \code{hux_logo()}.
@@ -408,19 +404,17 @@ correctly.
 \section{huxtable 4.5.0}{
 \itemize{
 \item Add \code{quick_latex()} function.
-\item The \code{texreg} package now includes a \code{huxtablereg} function,
-analogous to \code{huxreg}, which outputs a huxtable from a list of
-regressions. This will be available from the next version of
-\code{texreg}.
+\item The \code{texreg} package now includes a \code{huxtablereg} function, analogous
+to \code{huxreg}, which outputs a huxtable from a list of regressions. This
+will be available from the next version of \code{texreg}.
 }
 }
 
 \section{huxtable 4.4.0}{
 \itemize{
-\item Huxtables can now be printed directly in Word documents and
-Powerpoint presentations, thanks to the \code{flextable} package and
-recent versions of Pandoc. (Powerpoint printing requires Pandoc >=
-2.4.0.)
+\item Huxtables can now be printed directly in Word documents and Powerpoint
+presentations, thanks to the \code{flextable} package and recent versions
+of Pandoc. (Powerpoint printing requires Pandoc >= 2.4.0.)
 \item New “wrapleft” and “wrapright” options to \code{position()} allow text
 wrapping around tables.
 \item New \code{set_outer_border_colors()} and \code{set_outer_border_styles()}
@@ -438,8 +432,8 @@ pdf_document format.
 named \code{copy_cell_props}.
 \item Bugfix: \code{check_latex_dependencies} and \code{install_latex_dependencies}
 gave misleading errors.
-\item Enhancement: when \code{stars} is \code{NULL} in \code{huxreg}, don’t print a note
-by default.
+\item Enhancement: when \code{stars} is \code{NULL} in \code{huxreg}, don’t print a note by
+default.
 \item Enhancement: use \code{tinytex} when available, allowing autoinstallation
 of latex packages.
 }
@@ -501,10 +495,9 @@ to your YAML header for this to work, and you will need a recent (>
 \item Simplify LaTeX output using our own LaTeX commands.
 \item RTF support: new \code{print_rtf}, \code{to_rtf} and \code{quick_rtf} functions.
 \item New \code{border_style} properties to set “solid”, “double”, “dotted” or
-“dashed” borders. (At present, LaTeX only allows “solid” or
-“double”.)
-\item New \code{merge_cells} function, an alternative interface to \code{colspan}
-and \code{rowspan}.
+“dashed” borders. (At present, LaTeX only allows “solid” or “double”.)
+\item New \code{merge_cells} function, an alternative interface to \code{colspan} and
+\code{rowspan}.
 \item New \code{quick_pptx} function to print data frames and huxtables into
 Powerpoint.
 \item New \code{install_latex_dependencies} and \code{check_latex_dependencies}
@@ -514,12 +507,11 @@ utility functions.
 \item Enhancement: \code{print_md} now handles \strong{bold} and \emph{italic} cells.
 \item Enhancement: \code{quick_pdf} has new \code{width} and \code{height} options to
 change paper size.
-\item Use CSS writing-mode where possible for text rotation. Note that
-this may break on non-LTR languages. If this affects you, please
-file an issue.
+\item Use CSS writing-mode where possible for text rotation. Note that this
+may break on non-LTR languages. If this affects you, please file an
+issue.
 \item Bugfix: LaTeX didn’t compile when height and caption were both set.
-\item Bugfix: \code{print_screen} and \code{print_md} would hang with a wide
-huxtable.
+\item Bugfix: \code{print_screen} and \code{print_md} would hang with a wide huxtable.
 \item Tweaks to documentation.
 }
 }
@@ -528,23 +520,23 @@ huxtable.
 \itemize{
 \item dplyr, knitr, rmarkdown and some other packages have moved to
 “Suggests:”, lowering the dependency load considerably. All the
-functionality is still present. huxtable gives an informative
-warning if a needed package is not installed.
+functionality is still present. huxtable gives an informative warning
+if a needed package is not installed.
 \item Code rewrites for better performance and maintainability: HTML is up
 to 10x faster, LaTeX is up to 4x faster.
 \item Documentation improvements.
 \item New \code{tribble_hux} function wrapping \code{tibble::tribble()} for readable
 data input.
-\item New \code{add_rows} and \code{add_columns} functions to insert one or more
-rows into the middle of a huxtable.
+\item New \code{add_rows} and \code{add_columns} functions to insert one or more rows
+into the middle of a huxtable.
 \item New option “huxtable.knitr_output_format” to override the default
 output format in knitr documents.
-\item Numeric row heights and column widths are rescaled to 1 when
-huxtables are cbinded/rbinded.
+\item Numeric row heights and column widths are rescaled to 1 when huxtables
+are cbinded/rbinded.
 \item LaTeX: at points where borders cross, priority is given to the
 horizontal border color.
-\item Bugfix: property accessors had the wrong environment. Thanks to
-Iñaki Úcar.
+\item Bugfix: property accessors had the wrong environment. Thanks to Iñaki
+Úcar.
 \item Bugfix: row heights and column widths weren’t being copied with
 cbind/rbind.
 \item Bugfixes for 0-row or 0-column huxtables:
@@ -556,9 +548,9 @@ cbind/rbind.
 \item Bugfix: width, col_width etc. can be reset to a number after setting
 them to a string.
 \itemize{
-\item The (undocumented) ability to mix numeric and non-numeric values
-for padding and/border widths has been removed. If you want a
-number, set a number and not a string.
+\item The (undocumented) ability to mix numeric and non-numeric values for
+padding and/border widths has been removed. If you want a number,
+set a number and not a string.
 }
 \item Bugfix: HTML tables with position “right” weren’t right-aligned.
 \item Nicer error messages when rbinding objects with different numbers of
@@ -572,15 +564,13 @@ rows.
 \section{huxtable 4.0.1}{
 \itemize{
 \item Improved formatting in Excel output.
-\item New \code{format} method which returns the result of \code{to_html},
-\code{to_latex} etc. as appropriate.
+\item New \code{format} method which returns the result of \code{to_html}, \code{to_latex}
+etc. as appropriate.
 \item Bugfix: \code{to_html} printing e.g. “left-border: NA;” in cell CSS.
 \item Bugfix: \verb{set_all_*} not working when huxtable is not attached.
 \item Bugfix: \code{as_Workbook} failing with non-numeric \code{width}.
-\item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel
-output.
-\item Bugfix: \code{as_flextable} borders not working in cells with colspan >
-1.
+\item Bugfix: \code{hux_logo} was using multiple fonts, fails with Excel output.
+\item Bugfix: \code{as_flextable} borders not working in cells with colspan > 1.
 \item Documentation bugfixes.
 \item Compatibility with broom 5.0.0 - thanks @alexpghayes
 }
@@ -590,33 +580,31 @@ output.
 \itemize{
 \item New \code{theme_plain} theme.
 \item The default value for \code{add_colnames} is going to become \code{TRUE}. At
-present it remains \code{FALSE}. Set \code{options("huxtable.add_colnames")}
-to \code{TRUE} or \code{FALSE} to set the default and avoid warnings in
-future.
+present it remains \code{FALSE}. Set \code{options("huxtable.add_colnames")} to
+\code{TRUE} or \code{FALSE} to set the default and avoid warnings in future.
 \item \verb{quick_*} functions now automatically open documents if used
 interactively. Use \code{open = FALSE} to avoid.
 \item Tweak top and bottom margins for HTML tables.
 \item \code{pad_decimal} is deprecated in favour of \code{align(ht) <- "."}.
-\item \code{huxreg} continues with a warning if \code{statistics} are unavailable
-for some models.
+\item \code{huxreg} continues with a warning if \code{statistics} are unavailable for
+some models.
 }
 \subsection{Breaking changes}{
 \itemize{
-\item huxtable now provides \code{knit_print.data.frame} methods. This means
-that bare data frames will be pretty-printed via huxtable if the
-package is loaded.
+\item huxtable now provides \code{knit_print.data.frame} methods. This means that
+bare data frames will be pretty-printed via huxtable if the package is
+loaded.
 \itemize{
-\item Set \code{options("huxtable.knit_print_df")} to \code{FALSE} if you don’t
-want this.
-\item By default data frames are printed using the \code{theme_plain}
-theme. Set options(“huxtable.knit_print_df_theme”) to a
-different one-argument function if you want to use a different
-theme.
+\item Set \code{options("huxtable.knit_print_df")} to \code{FALSE} if you don’t want
+this.
+\item By default data frames are printed using the \code{theme_plain} theme.
+Set options(“huxtable.knit_print_df_theme”) to a different
+one-argument function if you want to use a different theme.
 }
 \item The new \code{autoformat} argument lets \code{huxtable()} and \code{as_huxtable()}
-automatically choose alignment and number format based on column
-type. Set \code{options("huxtable.autoformat")} to \code{FALSE} to turn off
-this feature by default.
+automatically choose alignment and number format based on column type.
+Set \code{options("huxtable.autoformat")} to \code{FALSE} to turn off this
+feature by default.
 \item The default value of \code{number_format} has changed from “\%5.3g” to
 “\%.3g”, which no longer space-pads numbers.
 \item \code{as_flextable} now does not print column names in the header. This
@@ -663,8 +651,8 @@ the call to \code{tidy}.
 \subsection{Breaking changes}{
 \itemize{
 \item \code{quick_xxx} functions without an explicit \code{file} argument throw an
-error if called non-interactively, and prompt before overwriting
-files if called interactively.
+error if called non-interactively, and prompt before overwriting files
+if called interactively.
 }
 }
 }
@@ -692,12 +680,12 @@ column names.
 \subsection{Breaking changes}{
 \itemize{
 \item \code{number_format} now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
-still use \code{number_format} to format the content.
+This means you can include e.g. significance stars in a cell and still
+use \code{number_format} to format the content.
 \item If \code{number_format} is NA, numbers are unchanged.
-\item Default value of \code{number_format} has changed from “\%5.2f” to
-“\%5.3g”, which plays nicer with integers but may surprise you by
-using scientific format for large numbers.
+\item Default value of \code{number_format} has changed from “\%5.2f” to “\%5.3g”,
+which plays nicer with integers but may surprise you by using
+scientific format for large numbers.
 }
 }
 }
@@ -706,8 +694,8 @@ using scientific format for large numbers.
 \itemize{
 \item New \code{outer_borders} argument for \code{huxreg}. This changes default
 behaviour slightly.
-\item New \code{border} argument for \code{add_footnote} to choose width of
-footnote’s top border.
+\item New \code{border} argument for \code{add_footnote} to choose width of footnote’s
+top border.
 \item Added guard assertions to many exported functions.
 \item Bugfix: captions and colnames are wrapped in to_screen to respect
 max_width.
@@ -719,14 +707,14 @@ max_width.
 \item No more ugly autocreated column names.
 \item Allow huxtable to have invalid or empty column names in general.
 \item LaTeX should now be \emph{much} faster on large tables.
-\item \code{set_outer_borders} now accepts the same row/column arguments as
-other \code{set_} functions.
+\item \code{set_outer_borders} now accepts the same row/column arguments as other
+\code{set_} functions.
 \item Better handling in LaTeX of horizontal borders which don’t cross the
 entire table. (But not varying positive border widths….)
 \item Bugfix: flextable didn’t like huxreg’s syntactically invalid column
 names.
-\item Accept, but silently change, English spelling of ‘centre’ in
-\code{align}, \code{position} and \code{caption_pos}.
+\item Accept, but silently change, English spelling of ‘centre’ in \code{align},
+\code{position} and \code{caption_pos}.
 }
 }
 
@@ -758,9 +746,9 @@ LaTeX.R.
 \itemize{
 \item Removed options \code{collapse}, \code{borders}, \code{blank} and \code{colname_color}
 from \code{to_screen}/\code{print_screen}.
-\item \code{as_FlexTable} is deprecated and calls \code{as_flextable} with a
-warning. \code{header_rows} and \code{footer_rows} arguments are ignored. If
-you need this feature, tell me.
+\item \code{as_FlexTable} is deprecated and calls \code{as_flextable} with a warning.
+\code{header_rows} and \code{footer_rows} arguments are ignored. If you need
+this feature, tell me.
 \item HTML border sizes are now set in points, not pixels.
 \item In \code{huxreg}:
 \itemize{
@@ -768,10 +756,10 @@ you need this feature, tell me.
 confidence intervals.
 \item \code{error_style} is deprecated with a warning in favour of
 \code{error_format}.
-\item Use \code{{stars}} not \verb{\%stars\%} to display significance levels in
-the \code{note} argument.
-\item \code{borders} becomes a number specifying border width. Set to 0 for
-no borders.
+\item Use \code{{stars}} not \verb{\%stars\%} to display significance levels in the
+\code{note} argument.
+\item \code{borders} becomes a number specifying border width. Set to 0 for no
+borders.
 }
 }
 }

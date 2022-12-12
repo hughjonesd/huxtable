@@ -545,7 +545,7 @@ by_function <- function (inner_fn, ignore_na = TRUE) {
 #'
 #' @details
 #' Within the formulas, the variable `.` will refer to the content of
-#' `ht[rows, cols]`, after conversion by [as.matrix()].
+#' `ht[rows, cols]`, after conversion to a vector.
 #'
 #' `case_when` returns `NA` when no formula LHS is matched. To avoid this, set a
 #' default in the last formula: `TRUE ~ default`.
