@@ -581,7 +581,7 @@ by_cases <- function (..., ignore_na = TRUE) {
     myenv <- new.env()
     selection <- as.matrix(ht[rows, cols])
     dim <- dim(selection)
-    selection <- as.vector(selection)
+    if (utils::packageVersion("dplyr") >= "1.1.0") selection <- as.vector(selection)
     assign(".", selection, envir = myenv)
     cases <- lapply(cases, stats::as.formula, env = myenv)
     vals <- dplyr::case_when(!!! cases)
