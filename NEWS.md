@@ -1,7 +1,8 @@
-# huxtable (development version)
+# huxtable 5.5.2
 
 * Update `by_cases()` to work with dplyr 1.1.0. Within `by_cases()` formulas,
-  `.` is now vector rather than matrix. Thanks @DavisVaughan.
+  `.` is now vector rather than matrix when dplyr version 1.1.0 is detected. 
+  Thanks @DavisVaughan.
 
 # huxtable 5.5.1
 

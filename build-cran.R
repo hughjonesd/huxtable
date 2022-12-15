@@ -10,7 +10,7 @@ library(rstudioapi)
 # Check version number is up to date----------------------------------------------------------------
 
 v <- devtools::as.package('.')$version
-if (grepl(v, "9000")) stop('Still using development version. Use usethis::use_version()')
+if (grepl("9000", v)) stop('Still using development version. Use usethis::use_version()')
 
 
 # Check git is up to date --------------------------------------------------------------------------
@@ -91,16 +91,16 @@ devtools::release()
 # Uncomment !CRAN lines in huxtable vignette
 # > devtools::build_vignettes()
 # Copy built vignettes from doc/ to inst/doc:
-# $ mkdir -p inst/doc
-# $ cp doc/* inst/doc
+system("mkdir -p inst/doc")
+system("cp doc/* inst/doc")
 # Comment out !CRAN lines in huxtable vignette, and save
 # Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
-# $ touch inst/doc/*
+system("touch inst/doc/*")
 # Ensure there's a vignette index in build/vignettes.rds
 # NB NOT Meta/vignettes.rds! devtools::build_vignettes() will put it there,
 # you can move it
 # Build a version for CRAN:
-# > pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
+pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)

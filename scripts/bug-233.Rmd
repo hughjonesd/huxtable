@@ -1,0 +1,50 @@
+---
+title: "Demonstration"
+output:
+  word_document:
+    bookdown::word_document2
+  html_document:
+    bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(huxtable)
+options(huxtable.bookdown = TRUE)
+```
+
+```{r table1, echo=FALSE}
+ht <- huxtable(head(cars))
+caption(ht) <- "First Table"
+ht <- theme_article(ht)
+ht
+```
+
+
+
+```{r table2, echo=FALSE}
+ht <- huxtable(tail(cars))
+caption(ht) <- "Second Table"
+ht <- theme_article(ht)
+ht
+```
+
+
+
+
+```{r table3, echo=FALSE}
+ht <- huxtable(cars[sample(1:nrow(cars),6),])
+caption(ht) <- "Third Table"
+ht <- theme_article(ht)
+ht
+```
+
+
+
+
+```{r table4, echo=FALSE}
+ht <- huxtable(cars[sample(1:nrow(cars),6),])
+caption(ht) <- "Fourth Table"
+ht <- theme_article(ht)
+ht
+```
