@@ -106,6 +106,6 @@ pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)
-
+system("tar -ztvf ../huxtable_*.tar.gz")
 # after release:
 revdepcheck::revdep_reset()

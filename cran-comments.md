@@ -1,13 +1,13 @@
 
-Release with bugfixes. Resubmitting again to fix a check failure.
+Release for compatibility with dplyr 1.1.0.
 
 ## Test environments
 
 * local OS X install (R 4.2.0)
-* rhub (windows/linux, release/devel)
 * github (windows/linux, release/devel)
 * windows on appveyor (release and stable)
 * win-builder release/devel
+* mac-builder release
 
 
 ## R CMD check results
@@ -25,20 +25,3 @@ Matrix on my machine than with huxtable: errors are in functions which don't use
 
 Full report:
 
-We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
-
- * We saw 1 new problems
- * We failed to check 1 packages
-
-Issues with CRAN packages are summarised below.
-
-### New problems
-(This reports the first line of each new failure)
-
-* glmmTMB
-  checking examples ... ERROR
-  checking running R code from vignettes ...
-
-### Failed to check
-
-* bmstdr (NA)
