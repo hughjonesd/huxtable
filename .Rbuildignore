@@ -30,3 +30,4 @@ tutorials
 ^\.github$
 ^doc$
 ^CRAN-SUBMISSION$
+^Meta$
