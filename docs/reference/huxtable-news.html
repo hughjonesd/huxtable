@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
       </span>
     </div>
 
@@ -93,19 +93,25 @@
 
 
     <div id="huxtable-">
+    <h2>huxtable 5.5.2</h2>
+    
+<ul><li><p>Update <code><a href="by_cases.html">by_cases()</a></code> to work with dplyr 1.1.0. Within <code><a href="by_cases.html">by_cases()</a></code>
+formulas, <code>.</code> is now vector rather than matrix when dplyr version
+1.1.0 is detected. Thanks @DavisVaughan.</p></li>
+</ul></div>
+    <div id="huxtable-">
     <h2>huxtable 5.5.1</h2>
     
 <ul><li><p>CSS borders are now set explicitly even if they are all set to 0.</p></li>
-<li><p>Bugfix: shell-quote files in <code>quick_*</code> functions. Thanks to
-@ceresek.</p></li>
+<li><p>Bugfix: shell-quote files in <code>quick_*</code> functions. Thanks to @ceresek.</p></li>
 <li><p>Bugfix: cope with adjustbox version “1.3a” among latex dependencies.</p></li>
 </ul></div>
     <div id="huxtable-">
     <h2>huxtable 5.5.0</h2>
     
 <ul><li><p>Huxtable should work with <a href="https://quarto.org" class="external-link">Quarto</a> documents.</p><ul><li><p>Quarto labels and captions will override huxtable-provided ones.</p></li>
-<li><p>Quarto style references like <code>@table-label</code> only work with
-quarto labels.</p></li>
+<li><p>Quarto style references like <code>@table-label</code> only work with quarto
+labels.</p></li>
 <li><p>Please report any bugs!</p></li>
 </ul></li>
 <li><p>New <code><a href="column_to_header.html">column_to_header()</a></code> function converts a column to header rows.
@@ -146,15 +152,14 @@ content of cells that have been shadowed.</p>
 <span><span class="co">##   +--------+--------+--------+</span></span>
 <span><span class="co">##   |      2 |      1 |      3 |</span></span>
 <span><span class="co">##   +--------+--------+--------+</span></span></code></pre><p></p></div></li>
-<li><p>New option <code>huxtable.latex_siunitx_align</code> allows you to use the
-LaTeX <code>siunitx</code> package to handle decimal point alignment. This is
-<code>FALSE</code> by default.</p></li>
+<li><p>New option <code>huxtable.latex_siunitx_align</code> allows you to use the LaTeX
+<code>siunitx</code> package to handle decimal point alignment. This is <code>FALSE</code>
+by default.</p></li>
 <li><p>Bugfix: centre alignment was not working in <code><a href="to_screen.html">print_screen()</a></code>.</p></li>
 <li><p>Bugfix: failure in <code><a href="to_md.html">to_md()</a></code> with recent versions of <code>stringi</code>
 package.</p></li>
 <li><p>Bugfix: repeating a single row in a subset, like
-<code>ht[c(1, 1, 2, 3), ]</code>, was setting <code>colspan = 2</code> on the repeated
-row.</p></li>
+<code>ht[c(1, 1, 2, 3), ]</code>, was setting <code>colspan = 2</code> on the repeated row.</p></li>
 <li><p>Bugfix: zero-argument subset replacement like <code>ht[] &lt;- ...</code> wasn’t
 working.</p></li>
 </ul></div>
@@ -200,8 +205,8 @@ long minus signs before numbers. The default is <code>FALSE</code>. It will
 probably become <code>TRUE</code> in a future version.</p></li>
 <li><p>Bugfix: <code>insert_row/column(..., after = 0)</code> was unsetting table
 properties.</p></li>
-<li><p>Bugfix: unicode characters above 32767 were incorrectly represented
-in RTF. Thanks @kaigu1990.</p></li>
+<li><p>Bugfix: unicode characters above 32767 were incorrectly represented in
+RTF. Thanks @kaigu1990.</p></li>
 <li><p>Bugfix: columns were being collapsed in <code><a href="as_Workbook.html">as_Workbook()</a></code>.</p></li>
 <li><p>Bugfix: <code>style_cells</code> didn’t work unless huxtable was on the search
 path.</p></li>
@@ -210,13 +215,12 @@ path.</p></li>
 <li><p>Bugfix: in <code><a href="huxreg.html">huxreg()</a></code>, <code>tidy_args</code> threw an error if the first
 argument to <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> was a named list.</p></li>
 <li><p>Bugfix: <code><a href="tidy_override.html">tidy_replace()</a></code> was broken.</p></li>
-<li><p>Clearer error messages for <code><a href="tidy_override.html">tidy_override()</a></code> when <code>extend = FALSE</code>.
-In future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
+<li><p>Clearer error messages for <code><a href="tidy_override.html">tidy_override()</a></code> when <code>extend = FALSE</code>. In
+future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
 </ul><div class="section">
 <h3 id="other-news-">Other news:<a class="anchor" aria-label="anchor" href="#other-news-"></a></h3>
 
-<ul><li><p>Huxtable received its first Patreon sponsor! Thanks to Ross
-Mattheis.</p></li>
+<ul><li><p>Huxtable received its first Patreon sponsor! Thanks to Ross Mattheis.</p></li>
 </ul></div>
 
     </div>
@@ -228,17 +232,17 @@ introduction, see
 <h3 id="breaking-changes">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes"></a></h3>
 
 <ul><li><p>There are changes to LaTeX output.</p><ul><li><p>LaTeX <code>\tabcolsep</code> is now set to 0 within huxtable tables, while
-left and right padding should now take effect even when <code>wrap</code>
-is <code>FALSE</code>.</p></li>
-<li><p>The default LaTeX table environment is now “tabular” unless
-<code>width</code> is set. If <code>width</code> is set, it is “tabularx”.</p></li>
-<li><p><code>wrap</code> only matters if <code>width</code> is set. Otherwise, cell wrapping
-is off.</p></li>
-<li><p>the <code>\centerbox</code> macro from the LaTeX “adjustbox” package is
-used to centre tables. This should improve centring when tables
-are too wide. You may need to update the LaTeX “adjustbox”
-package to a recent version. <code><a href="report_latex_dependencies.html">check_latex_dependencies()</a></code> can
-inform you about this.</p></li>
+left and right padding should now take effect even when <code>wrap</code> is
+<code>FALSE</code>.</p></li>
+<li><p>The default LaTeX table environment is now “tabular” unless <code>width</code>
+is set. If <code>width</code> is set, it is “tabularx”.</p></li>
+<li><p><code>wrap</code> only matters if <code>width</code> is set. Otherwise, cell wrapping is
+off.</p></li>
+<li><p>the <code>\centerbox</code> macro from the LaTeX “adjustbox” package is used to
+centre tables. This should improve centring when tables are too
+wide. You may need to update the LaTeX “adjustbox” package to a
+recent version. <code><a href="report_latex_dependencies.html">check_latex_dependencies()</a></code> can inform you about
+this.</p></li>
 </ul></li>
 <li><p>As previously signalled, <code>add_colnames</code> has now become <code>TRUE</code> by
 default in <code><a href="huxtable.html">huxtable()</a></code> and <code><a href="as_huxtable.html">as_huxtable()</a></code>. Set
@@ -246,32 +250,32 @@ default in <code><a href="huxtable.html">huxtable()</a></code> and <code><a href
 behaviour.</p></li>
 <li><p>Newlines in cell contents are now respected (in LaTeX, so long as
 <code>wrap = TRUE</code> and <code>width</code> has been set).</p></li>
-<li><p>Huxtable borders have been reworked, fixing some longstanding bugs
-and adding new features.</p><ul><li><p>Borders are now automatically collapsed. For example:</p>
+<li><p>Huxtable borders have been reworked, fixing some longstanding bugs and
+adding new features.</p><ul><li><p>Borders are now automatically collapsed. For example:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">jams</span> <span class="op">%&gt;%</span> </span>
 <span>    <span class="fu"><a href="../reference/borders.html">set_right_border</a></span><span class="op">(</span><span class="va">everywhere</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>    <span class="fu"><a href="../reference/borders.html">set_left_border</a></span><span class="op">(</span><span class="va">everywhere</span>, <span class="fl">2</span>, <span class="fl">0.4</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>will set the border in between the columns of <code>jams</code> to <code>0.4</code>,
-overwriting the previous value. This is more in line with what
-you would expect. For example, the following code now does what
-you probably want:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">jams <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">    </span><span class="kw">set_rowspan</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">    </span><span class="kw">set_bottom_border</span>(<span class="dv">4</span>, everywhere, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">##                 Type              Price  </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">##                 Strawberry         1.90  </span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">##                                    2.10  </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">##                                    1.80  </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">##               ---------------------------</span></a></code></pre><p></p></div>
+overwriting the previous value. This is more in line with what you
+would expect. For example, the following code now does what you
+probably want:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>jams <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_rowspan</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_bottom_border</span>(<span class="dv">4</span>, everywhere, <span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Type              Price  </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Strawberry         1.90  </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                                    2.10  </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                                    1.80  </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##               ---------------------------</span></span></code></pre><p></p></div>
 <p>instead of the old behaviour:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">jams <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">    </span><span class="kw">set_rowspan</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">    </span><span class="kw">set_bottom_border</span>(<span class="dv">4</span>, everywhere, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">##                 Type           Price  </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">##                 Strawberry      1.90  </span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">##                                 2.10  </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">##                                 1.80  </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">##                            -----------</span></a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>jams <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_rowspan</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_bottom_border</span>(<span class="dv">4</span>, everywhere, <span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Type           Price  </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Strawberry      1.90  </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                                 2.10  </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                                 1.80  </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##                            -----------</span></span></code></pre><p></p></div></li>
 <li><p><code><a href="borders.html">set_left_border()</a></code>, <code><a href="set-multiple.html">set_all_borders()</a></code> and friends all use a
 default value of 0.4. So to set a default border, write e.g.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -280,29 +284,27 @@ default value of 0.4. So to set a default border, write e.g.</p>
 colour. You can set all properties at once by writing, e.g.:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>      <span class="fu"><a href="../reference/borders.html">set_bottom_border</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">everywhere</span>, <span class="fu"><a href="../reference/brdr.html">brdr</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"dotted"</span>, <span class="st">"darkgreen"</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p><code>left_border(ht)</code> and friends return a <code>brdr</code> object. To access
-the border thickness, write <code>brdr_thickness(left_border(ht))</code>.</p></li>
+<p><code>left_border(ht)</code> and friends return a <code>brdr</code> object. To access the
+border thickness, write <code>brdr_thickness(left_border(ht))</code>.</p></li>
 </ul></li>
 <li><p>Various deprecated items have been removed:</p><ul><li><p>The 3-argument form of <code>set_*</code>. Instead, use <code>map_*</code>.</p></li>
 <li><p>The <code>byrow</code> argument to <code>set_*</code>. Instead, use <code>map_*</code> and
 <code><a href="by_rows.html">by_cols()</a></code>.</p></li>
 <li><p><code>error_style</code> and <code>pad_decimal</code> arguments in <code>huxreg</code>. Use
 <code>error_format</code> and <code>align(hx) &lt;- "."</code>.</p></li>
-<li><p>The <code>where()</code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions.
-Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and
-<code>align(ht) &lt;- "."</code>.</p></li>
+<li><p>The <code>where()</code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions. Use
+<code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and <code>align(ht) &lt;- "."</code>.</p></li>
 </ul></li>
 <li><p>Default padding has been increased to 6 points.</p></li>
 <li><p>By default, <code><a href="width.html">width()</a></code> is now unset.</p></li>
 <li><p>By default, <code><a href="wrap.html">wrap()</a></code> is now <code>TRUE</code>.</p></li>
 <li><p><code><a href="stripe.html">every()</a></code> has been renamed to <code><a href="stripe.html">stripe()</a></code>, to avoid a clash with
-<code><a href="https://purrr.tidyverse.org/reference/every.html" class="external-link">purrr::every()</a></code>. <code>everywhere</code>, <code>evens</code> and <code>odds</code> are still the
-same.</p></li>
-<li><p>The little-used ability to set <code>copy_cell_props</code> to a character
-vector in <code>rbind.huxtable</code> and <code>cbind.huxtable</code> has been removed.
-You can still set it to <code>FALSE</code>.</p></li>
-<li><p><code><a href="add_rows.html">add_rows()</a></code> and <code><a href="add_rows.html">add_columns()</a></code> now always call <code><a href="cbind.huxtable.html">rbind.huxtable()</a></code>
-or <code><a href="cbind.huxtable.html">cbind.huxtable()</a></code> and return a huxtable.</p></li>
+<code><a href="https://purrr.tidyverse.org/reference/every.html" class="external-link">purrr::every()</a></code>. <code>everywhere</code>, <code>evens</code> and <code>odds</code> are still the same.</p></li>
+<li><p>The little-used ability to set <code>copy_cell_props</code> to a character vector
+in <code>rbind.huxtable</code> and <code>cbind.huxtable</code> has been removed. You can
+still set it to <code>FALSE</code>.</p></li>
+<li><p><code><a href="add_rows.html">add_rows()</a></code> and <code><a href="add_rows.html">add_columns()</a></code> now always call <code><a href="cbind.huxtable.html">rbind.huxtable()</a></code> or
+<code><a href="cbind.huxtable.html">cbind.huxtable()</a></code> and return a huxtable.</p></li>
 <li><p>Huxtable no longer supports dplyr versions less than 0.7.0 (released
 mid-2017).</p></li>
 <li><p><code><a href="style-functions.html">set_cell_properties()</a></code> has been renamed <code><a href="style-functions.html">style_cells()</a></code>. It is
@@ -319,8 +321,8 @@ headers.</p></li>
 <div class="section">
 <h3 id="other-changes">Other changes<a class="anchor" aria-label="anchor" href="#other-changes"></a></h3>
 
-<ul><li><p>You can now use <a href="https://commonmark.org/help/" class="external-link">markdown</a> within
-table cells.</p><ul><li><p>Use <code>set_markdown(ht, rows, cols)</code> to turn this on.</p></li>
+<ul><li><p>You can now use <a href="https://commonmark.org/help/" class="external-link">markdown</a> within table
+cells.</p><ul><li><p>Use <code>set_markdown(ht, rows, cols)</code> to turn this on.</p></li>
 <li><p>Or use the convenience function <code><a href="set_markdown_contents.html">set_markdown_contents()</a></code> to set
 cell contents that will be interpreted as markdown.</p></li>
 <li><p>Markdown works for HTML and LaTeX. There’s basic support for
@@ -335,17 +337,20 @@ on-screen display.</p></li>
 <li><p>In themes, <code>header_row/col = TRUE</code> set the first row/col to a
 header, and style all header rows/cols.</p></li>
 </ul></li>
-<li><p><code><a href="bold.html">set_bold()</a></code> and <code><a href="bold.html">set_italic()</a></code> now use a default value of <code>TRUE</code>.
-So you can write e.g.</p>
+<li><p><code><a href="bold.html">set_bold()</a></code> and <code><a href="bold.html">set_italic()</a></code> now use a default value of <code>TRUE</code>. So
+you can write e.g.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>      <span class="fu"><a href="../reference/bold.html">set_bold</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">everywhere</span><span class="op">)</span></span></code></pre><p></p></div></li>
 <li><p>Console output in R now shows table position and caption position.</p></li>
 <li><p>By default, huxtable now sets labels from the current knitr chunk
 label, if there is one. This is consistent with <code>kable()</code>. In
 bookdown, you can then do e.g.</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">as_hux</span>(iris)</a></code></pre><p></p></div>
-<p>Set <code>options(huxtable.autolabel = FALSE)</code> to turn off this
-behaviour.</p></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Some iris species are shown <span class="cf">in</span> \<span class="sc">@</span><span class="fu">ref</span>(tab<span class="sc">:</span>mytable)<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">r</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">as_hux(iris)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre><p></p></div>
+<p>Set <code>options(huxtable.autolabel = FALSE)</code> to turn off this behaviour.</p></li>
 <li><p>The one-argument form of <code>[</code> now works for huxtables just as it does
 for data frames. For example, <code>ht[2:3]</code> selects columns 2 and 3.</p></li>
 <li><p>New functions <code><a href="fmt_percent.html">fmt_percent()</a></code> and <code><a href="fmt_pretty.html">fmt_pretty()</a></code> for passing into
@@ -354,25 +359,25 @@ for data frames. For example, <code>ht[2:3]</code> selects columns 2 and 3.</p><
 <span><span class="fu"><a href="../reference/number_format.html">set_number_format</a></span><span class="op">(</span><span class="va">jams</span>, <span class="op">-</span><span class="fl">1</span>, <span class="st">"Sugar"</span>, <span class="fu"><a href="../reference/fmt_percent.html">fmt_percent</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div></li>
 <li><p><code><a href="split-across-down.html">split_across()</a></code> and <code><a href="split-across-down.html">split_down()</a></code> split a huxtable into a list of
 sub-tables. Headers can be automatically included.</p></li>
-<li><p><code><a href="restack-across-down.html">restack_across()</a></code> and <code><a href="restack-across-down.html">restack_down()</a></code> split a huxtable, then join
-it back up. This is useful for making a table fit on a page.</p></li>
+<li><p><code><a href="restack-across-down.html">restack_across()</a></code> and <code><a href="restack-across-down.html">restack_down()</a></code> split a huxtable, then join it
+back up. This is useful for making a table fit on a page.</p></li>
 <li><p><code><a href="merge_across.html">merge_across()</a></code> and <code><a href="merge_across.html">merge_down()</a></code> merge an area of cells
 horizontally across rows, or vertically down columns.</p></li>
 <li><p>New functions
 <code>set_lr_borders()/_border_colors()/_border_styles()/_padding()</code>
 set left and right borders and padding simultaneously. New functions
-<code><a href="set-multiple.html">set_tb_borders()</a></code> etc. set top and bottom properties
-simultaneously. There are <code>map_</code> equivalents of all of these.</p></li>
-<li><p><code><a href="set-outer.html">set_outer_padding()</a></code> sets padding around a range of cells,
-similarly to <code><a href="set-outer.html">set_outer_borders()</a></code>.</p></li>
+<code><a href="set-multiple.html">set_tb_borders()</a></code> etc. set top and bottom properties simultaneously.
+There are <code>map_</code> equivalents of all of these.</p></li>
+<li><p><code><a href="set-outer.html">set_outer_padding()</a></code> sets padding around a range of cells, similarly
+to <code><a href="set-outer.html">set_outer_borders()</a></code>.</p></li>
 <li><p>A new table-level property, <code><a href="caption_width.html">caption_width()</a></code>, allows you to set the
 width of the caption. The default, <code>NA</code>, sets the width equal to the
 table width.</p></li>
 <li><p>There are two new themes: <code><a href="themes.html">theme_compact()</a></code> and <code><a href="themes.html">theme_bright()</a></code>.</p></li>
-<li><p>For <code><a href="huxreg.html">huxreg()</a></code>, a new function <code><a href="tidy_override.html">tidy_replace()</a></code> allows you to
-replace the output of <code>tidy(x)</code> entirely.</p></li>
-<li><p>huxtable now only sets <code>options(huxtable.knit_print_df = TRUE)</code> if
-it is attached, not if it is loaded.</p></li>
+<li><p>For <code><a href="huxreg.html">huxreg()</a></code>, a new function <code><a href="tidy_override.html">tidy_replace()</a></code> allows you to replace
+the output of <code>tidy(x)</code> entirely.</p></li>
+<li><p>huxtable now only sets <code>options(huxtable.knit_print_df = TRUE)</code> if it
+is attached, not if it is loaded.</p></li>
 <li><p>huxtable supports <code><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">dplyr::relocate()</a></code>, new in dplyr 1.0.0.</p></li>
 <li><p>Improvements to <code><a href="as_flextable.html">as_flextable()</a></code>.</p></li>
 <li><p>Improvements to <code><a href="quick-output.html">quick_pptx()</a></code> (thanks @davidgohel).</p></li>
@@ -385,11 +390,11 @@ it is attached, not if it is loaded.</p></li>
 <h3 id="other-news">Other news<a class="anchor" aria-label="anchor" href="#other-news"></a></h3>
 
 <ul><li><p>New versions of the
-<a href="https://cran.r-project.org/package=gtsummary" class="external-link">gtsummary</a> package
-will have an <code><a href="as_huxtable.html">as_huxtable()</a></code> method.</p></li>
+<a href="https://cran.r-project.org/package=gtsummary" class="external-link">gtsummary</a> package will
+have an <code><a href="as_huxtable.html">as_huxtable()</a></code> method.</p></li>
 <li><p>Package <a href="https://cran.r-project.org/package=texreg" class="external-link">texreg</a> on CRAN
-includes a <code>huxtablereg()</code> function for creating a table of
-regression outputs.</p></li>
+includes a <code>huxtablereg()</code> function for creating a table of regression
+outputs.</p></li>
 </ul></div>
 
     </div>
@@ -425,9 +430,8 @@ inserted row/column.</p></li>
     <div id="huxtable-">
     <h2>huxtable 4.6.0</h2>
     
-<ul><li><p>Set <code>options('huxtable.latex_use_fontspec')</code> to <code>TRUE</code> to use
-portable font names in TeX documents, with the LaTeX “fontspec”
-package.</p></li>
+<ul><li><p>Set <code>options('huxtable.latex_use_fontspec')</code> to <code>TRUE</code> to use portable
+font names in TeX documents, with the LaTeX “fontspec” package.</p></li>
 <li><p>Bugfix: attributes were being copied wrongly in subset assignment of
 huxtables.</p></li>
 <li><p>Bugfix: text colors in <code><a href="hux_logo.html">hux_logo()</a></code>.</p></li>
@@ -438,18 +442,16 @@ correctly.</p></li>
     <h2>huxtable 4.5.0</h2>
     
 <ul><li><p>Add <code><a href="quick-output.html">quick_latex()</a></code> function.</p></li>
-<li><p>The <code>texreg</code> package now includes a <code>huxtablereg</code> function,
-analogous to <code>huxreg</code>, which outputs a huxtable from a list of
-regressions. This will be available from the next version of
-<code>texreg</code>.</p></li>
+<li><p>The <code>texreg</code> package now includes a <code>huxtablereg</code> function, analogous
+to <code>huxreg</code>, which outputs a huxtable from a list of regressions. This
+will be available from the next version of <code>texreg</code>.</p></li>
 </ul></div>
     <div id="huxtable-">
     <h2>huxtable 4.4.0</h2>
     
-<ul><li><p>Huxtables can now be printed directly in Word documents and
-Powerpoint presentations, thanks to the <code>flextable</code> package and
-recent versions of Pandoc. (Powerpoint printing requires Pandoc &gt;=
-2.4.0.)</p></li>
+<ul><li><p>Huxtables can now be printed directly in Word documents and Powerpoint
+presentations, thanks to the <code>flextable</code> package and recent versions
+of Pandoc. (Powerpoint printing requires Pandoc &gt;= 2.4.0.)</p></li>
 <li><p>New “wrapleft” and “wrapright” options to <code><a href="position.html">position()</a></code> allow text
 wrapping around tables.</p></li>
 <li><p>New <code><a href="set-outer.html">set_outer_border_colors()</a></code> and <code><a href="set-outer.html">set_outer_border_styles()</a></code>
@@ -467,8 +469,8 @@ pdf_document format.</p></li>
 named <code>copy_cell_props</code>.</p></li>
 <li><p>Bugfix: <code>check_latex_dependencies</code> and <code>install_latex_dependencies</code>
 gave misleading errors.</p></li>
-<li><p>Enhancement: when <code>stars</code> is <code>NULL</code> in <code>huxreg</code>, don’t print a note
-by default.</p></li>
+<li><p>Enhancement: when <code>stars</code> is <code>NULL</code> in <code>huxreg</code>, don’t print a note by
+default.</p></li>
 <li><p>Enhancement: use <code>tinytex</code> when available, allowing autoinstallation
 of latex packages.</p></li>
 </ul></div>
@@ -527,10 +529,9 @@ add</p>
 <li><p>Simplify LaTeX output using our own LaTeX commands.</p></li>
 <li><p>RTF support: new <code>print_rtf</code>, <code>to_rtf</code> and <code>quick_rtf</code> functions.</p></li>
 <li><p>New <code>border_style</code> properties to set “solid”, “double”, “dotted” or
-“dashed” borders. (At present, LaTeX only allows “solid” or
-“double”.)</p></li>
-<li><p>New <code>merge_cells</code> function, an alternative interface to <code>colspan</code>
-and <code>rowspan</code>.</p></li>
+“dashed” borders. (At present, LaTeX only allows “solid” or “double”.)</p></li>
+<li><p>New <code>merge_cells</code> function, an alternative interface to <code>colspan</code> and
+<code>rowspan</code>.</p></li>
 <li><p>New <code>quick_pptx</code> function to print data frames and huxtables into
 Powerpoint.</p></li>
 <li><p>New <code>install_latex_dependencies</code> and <code>check_latex_dependencies</code>
@@ -540,12 +541,11 @@ utility functions.</p></li>
 <li><p>Enhancement: <code>print_md</code> now handles <strong>bold</strong> and <em>italic</em> cells.</p></li>
 <li><p>Enhancement: <code>quick_pdf</code> has new <code>width</code> and <code>height</code> options to
 change paper size.</p></li>
-<li><p>Use CSS writing-mode where possible for text rotation. Note that
-this may break on non-LTR languages. If this affects you, please
-file an issue.</p></li>
+<li><p>Use CSS writing-mode where possible for text rotation. Note that this
+may break on non-LTR languages. If this affects you, please file an
+issue.</p></li>
 <li><p>Bugfix: LaTeX didn’t compile when height and caption were both set.</p></li>
-<li><p>Bugfix: <code>print_screen</code> and <code>print_md</code> would hang with a wide
-huxtable.</p></li>
+<li><p>Bugfix: <code>print_screen</code> and <code>print_md</code> would hang with a wide huxtable.</p></li>
 <li><p>Tweaks to documentation.</p></li>
 </ul></div>
     <div id="huxtable-">
@@ -553,23 +553,23 @@ huxtable.</p></li>
     
 <ul><li><p>dplyr, knitr, rmarkdown and some other packages have moved to
 “Suggests:”, lowering the dependency load considerably. All the
-functionality is still present. huxtable gives an informative
-warning if a needed package is not installed.</p></li>
+functionality is still present. huxtable gives an informative warning
+if a needed package is not installed.</p></li>
 <li><p>Code rewrites for better performance and maintainability: HTML is up
 to 10x faster, LaTeX is up to 4x faster.</p></li>
 <li><p>Documentation improvements.</p></li>
 <li><p>New <code>tribble_hux</code> function wrapping <code><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tibble::tribble()</a></code> for readable
 data input.</p></li>
-<li><p>New <code>add_rows</code> and <code>add_columns</code> functions to insert one or more
-rows into the middle of a huxtable.</p></li>
+<li><p>New <code>add_rows</code> and <code>add_columns</code> functions to insert one or more rows
+into the middle of a huxtable.</p></li>
 <li><p>New option “huxtable.knitr_output_format” to override the default
 output format in knitr documents.</p></li>
-<li><p>Numeric row heights and column widths are rescaled to 1 when
-huxtables are cbinded/rbinded.</p></li>
+<li><p>Numeric row heights and column widths are rescaled to 1 when huxtables
+are cbinded/rbinded.</p></li>
 <li><p>LaTeX: at points where borders cross, priority is given to the
 horizontal border color.</p></li>
-<li><p>Bugfix: property accessors had the wrong environment. Thanks to
-Iñaki Úcar.</p></li>
+<li><p>Bugfix: property accessors had the wrong environment. Thanks to Iñaki
+Úcar.</p></li>
 <li><p>Bugfix: row heights and column widths weren’t being copied with
 cbind/rbind.</p></li>
 <li><p>Bugfixes for 0-row or 0-column huxtables:</p><ul><li><p>Output works, usually with a warning.</p></li>
@@ -577,9 +577,9 @@ cbind/rbind.</p></li>
 </ul></li>
 <li><p>Bugfix: HTML cols were printed with ‘width: NA’.</p></li>
 <li><p>Bugfix: width, col_width etc. can be reset to a number after setting
-them to a string.</p><ul><li><p>The (undocumented) ability to mix numeric and non-numeric values
-for padding and/border widths has been removed. If you want a
-number, set a number and not a string.</p></li>
+them to a string.</p><ul><li><p>The (undocumented) ability to mix numeric and non-numeric values for
+padding and/border widths has been removed. If you want a number,
+set a number and not a string.</p></li>
 </ul></li>
 <li><p>Bugfix: HTML tables with position “right” weren’t right-aligned.</p></li>
 <li><p>Nicer error messages when rbinding objects with different numbers of
@@ -592,15 +592,13 @@ rows.</p></li>
     <h2>huxtable 4.0.1</h2>
     
 <ul><li><p>Improved formatting in Excel output.</p></li>
-<li><p>New <code>format</code> method which returns the result of <code>to_html</code>,
-<code>to_latex</code> etc. as appropriate.</p></li>
+<li><p>New <code>format</code> method which returns the result of <code>to_html</code>, <code>to_latex</code>
+etc. as appropriate.</p></li>
 <li><p>Bugfix: <code>to_html</code> printing e.g. “left-border: NA;” in cell CSS.</p></li>
 <li><p>Bugfix: <code>set_all_*</code> not working when huxtable is not attached.</p></li>
 <li><p>Bugfix: <code>as_Workbook</code> failing with non-numeric <code>width</code>.</p></li>
-<li><p>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel
-output.</p></li>
-<li><p>Bugfix: <code>as_flextable</code> borders not working in cells with colspan &gt;
-1.</p></li>
+<li><p>Bugfix: <code>hux_logo</code> was using multiple fonts, fails with Excel output.</p></li>
+<li><p>Bugfix: <code>as_flextable</code> borders not working in cells with colspan &gt; 1.</p></li>
 <li><p>Documentation bugfixes.</p></li>
 <li><p>Compatibility with broom 5.0.0 - thanks @alexpghayes</p></li>
 </ul></div>
@@ -609,31 +607,29 @@ output.</p></li>
     
 <ul><li><p>New <code>theme_plain</code> theme.</p></li>
 <li><p>The default value for <code>add_colnames</code> is going to become <code>TRUE</code>. At
-present it remains <code>FALSE</code>. Set <code>options("huxtable.add_colnames")</code>
-to <code>TRUE</code> or <code>FALSE</code> to set the default and avoid warnings in
-future.</p></li>
+present it remains <code>FALSE</code>. Set <code>options("huxtable.add_colnames")</code> to
+<code>TRUE</code> or <code>FALSE</code> to set the default and avoid warnings in future.</p></li>
 <li><p><code>quick_*</code> functions now automatically open documents if used
 interactively. Use <code>open = FALSE</code> to avoid.</p></li>
 <li><p>Tweak top and bottom margins for HTML tables.</p></li>
 <li><p><code>pad_decimal</code> is deprecated in favour of <code>align(ht) &lt;- "."</code>.</p></li>
-<li><p><code>huxreg</code> continues with a warning if <code>statistics</code> are unavailable
-for some models.</p></li>
+<li><p><code>huxreg</code> continues with a warning if <code>statistics</code> are unavailable for
+some models.</p></li>
 </ul><div class="section">
 <h3 id="breaking-changes-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1"></a></h3>
 
-<ul><li><p>huxtable now provides <code>knit_print.data.frame</code> methods. This means
-that bare data frames will be pretty-printed via huxtable if the
-package is loaded.</p><ul><li><p>Set <code>options("huxtable.knit_print_df")</code> to <code>FALSE</code> if you don’t
-want this.</p></li>
-<li><p>By default data frames are printed using the <code>theme_plain</code>
-theme. Set options(“huxtable.knit_print_df_theme”) to a
-different one-argument function if you want to use a different
-theme.</p></li>
+<ul><li><p>huxtable now provides <code>knit_print.data.frame</code> methods. This means that
+bare data frames will be pretty-printed via huxtable if the package is
+loaded.</p><ul><li><p>Set <code>options("huxtable.knit_print_df")</code> to <code>FALSE</code> if you don’t want
+this.</p></li>
+<li><p>By default data frames are printed using the <code>theme_plain</code> theme.
+Set options(“huxtable.knit_print_df_theme”) to a different
+one-argument function if you want to use a different theme.</p></li>
 </ul></li>
 <li><p>The new <code>autoformat</code> argument lets <code><a href="huxtable.html">huxtable()</a></code> and <code><a href="as_huxtable.html">as_huxtable()</a></code>
-automatically choose alignment and number format based on column
-type. Set <code>options("huxtable.autoformat")</code> to <code>FALSE</code> to turn off
-this feature by default.</p></li>
+automatically choose alignment and number format based on column type.
+Set <code>options("huxtable.autoformat")</code> to <code>FALSE</code> to turn off this
+feature by default.</p></li>
 <li><p>The default value of <code>number_format</code> has changed from “%5.3g” to
 “%.3g”, which no longer space-pads numbers.</p></li>
 <li><p><code>as_flextable</code> now does not print column names in the header. This
@@ -678,8 +674,8 @@ the call to <code>tidy</code>.</p></li>
 <h3 id="breaking-changes-2">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2"></a></h3>
 
 <ul><li><p><code>quick_xxx</code> functions without an explicit <code>file</code> argument throw an
-error if called non-interactively, and prompt before overwriting
-files if called interactively.</p></li>
+error if called non-interactively, and prompt before overwriting files
+if called interactively.</p></li>
 </ul></div>
 
     </div>
@@ -705,12 +701,12 @@ column names.</p></li>
 <h3 id="breaking-changes-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3"></a></h3>
 
 <ul><li><p><code>number_format</code> now applies to any number-like substrings in cells.
-This means you can include e.g. significance stars in a cell and
-still use <code>number_format</code> to format the content.</p></li>
+This means you can include e.g. significance stars in a cell and still
+use <code>number_format</code> to format the content.</p></li>
 <li><p>If <code>number_format</code> is NA, numbers are unchanged.</p></li>
-<li><p>Default value of <code>number_format</code> has changed from “%5.2f” to
-“%5.3g”, which plays nicer with integers but may surprise you by
-using scientific format for large numbers.</p></li>
+<li><p>Default value of <code>number_format</code> has changed from “%5.2f” to “%5.3g”,
+which plays nicer with integers but may surprise you by using
+scientific format for large numbers.</p></li>
 </ul></div>
 
     </div>
@@ -719,8 +715,8 @@ using scientific format for large numbers.</p></li>
     
 <ul><li><p>New <code>outer_borders</code> argument for <code>huxreg</code>. This changes default
 behaviour slightly.</p></li>
-<li><p>New <code>border</code> argument for <code>add_footnote</code> to choose width of
-footnote’s top border.</p></li>
+<li><p>New <code>border</code> argument for <code>add_footnote</code> to choose width of footnote’s
+top border.</p></li>
 <li><p>Added guard assertions to many exported functions.</p></li>
 <li><p>Bugfix: captions and colnames are wrapped in to_screen to respect
 max_width.</p></li>
@@ -731,14 +727,14 @@ max_width.</p></li>
 <ul><li><p>No more ugly autocreated column names.</p></li>
 <li><p>Allow huxtable to have invalid or empty column names in general.</p></li>
 <li><p>LaTeX should now be <em>much</em> faster on large tables.</p></li>
-<li><p><code>set_outer_borders</code> now accepts the same row/column arguments as
-other <code>set_</code> functions.</p></li>
+<li><p><code>set_outer_borders</code> now accepts the same row/column arguments as other
+<code>set_</code> functions.</p></li>
 <li><p>Better handling in LaTeX of horizontal borders which don’t cross the
 entire table. (But not varying positive border widths….)</p></li>
 <li><p>Bugfix: flextable didn’t like huxreg’s syntactically invalid column
 names.</p></li>
-<li><p>Accept, but silently change, English spelling of ‘centre’ in
-<code>align</code>, <code>position</code> and <code>caption_pos</code>.</p></li>
+<li><p>Accept, but silently change, English spelling of ‘centre’ in <code>align</code>,
+<code>position</code> and <code>caption_pos</code>.</p></li>
 </ul></div>
     <div id="huxtable-">
     <h2>huxtable 1.0.0</h2>
@@ -769,18 +765,18 @@ LaTeX.R.</p></li>
 
 <ul><li><p>Removed options <code>collapse</code>, <code>borders</code>, <code>blank</code> and <code>colname_color</code>
 from <code>to_screen</code>/<code>print_screen</code>.</p></li>
-<li><p><code>as_FlexTable</code> is deprecated and calls <code>as_flextable</code> with a
-warning. <code>header_rows</code> and <code>footer_rows</code> arguments are ignored. If
-you need this feature, tell me.</p></li>
+<li><p><code>as_FlexTable</code> is deprecated and calls <code>as_flextable</code> with a warning.
+<code>header_rows</code> and <code>footer_rows</code> arguments are ignored. If you need
+this feature, tell me.</p></li>
 <li><p>HTML border sizes are now set in points, not pixels.</p></li>
 <li><p>In <code>huxreg</code>:</p><ul><li><p><code>ci_level</code> is <code>NULL</code> by default. Set it to a number to calculate
 confidence intervals.</p></li>
 <li><p><code>error_style</code> is deprecated with a warning in favour of
 <code>error_format</code>.</p></li>
-<li><p>Use <code>{stars}</code> not <code>%stars%</code> to display significance levels in
-the <code>note</code> argument.</p></li>
-<li><p><code>borders</code> becomes a number specifying border width. Set to 0 for
-no borders.</p></li>
+<li><p>Use <code>{stars}</code> not <code>%stars%</code> to display significance levels in the
+<code>note</code> argument.</p></li>
+<li><p><code>borders</code> becomes a number specifying border width. Set to 0 for no
+borders.</p></li>
 </ul></li>
 </ul></div>
 
@@ -859,7 +855,7 @@ with <code>ggplot2</code>.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

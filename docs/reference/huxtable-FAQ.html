@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
       </span>
     </div>
 
@@ -104,26 +104,27 @@ application. Or you can try <code><a href="report_latex_dependencies.html">insta
 manually. Run <code><a href="report_latex_dependencies.html">report_latex_dependencies()</a></code> and add
 the output to your LaTeX preamble, or in Rmarkdown formats, add it to the
 rmarkdown header like this:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">header<span class="op">-</span>includes<span class="op">:</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="op">-</span><span class="st"> </span>\usepackage{array}</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="op">-</span><span class="st"> </span>\usepackage{caption}</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  ... et cetera</a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>header<span class="sc">-</span>includes<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \usepackage{array}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> \usepackage{caption}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  ... et cetera</span></code></pre><p></p></div></li>
 <li><p>Huxtable isn't working in my Rmarkdown <code>beamer_presentation</code> slides.</p>
 <p>You may need to set the beamer "fragile" option, like this:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Slide title {.fragile}</span></a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slide title {.fragile}</span></span></code></pre><p></p></div></li>
 <li><p>Numbers in my cells look weird!</p>
 <p>You can change numeric formatting using <code><a href="number_format.html">number_format()</a></code>. Base R options
 like <code><a href="https://rdrr.io/r/base/options.html" class="external-link">scipen</a></code> usually have no effect.</p></li>
-<li><p>How can I use HTML, TeX etc. in my table?</p></li>
-</ul><p>Use <code><a href="escape_contents.html">escape_contents()</a></code>:</p>
+<li><p>How can I use HTML, TeX etc. in my table?</p>
+<p>Use <code><a href="escape_contents.html">escape_contents()</a></code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">jams</span> <span class="op">|&gt;</span></span>
 <span>     <span class="fu"><a href="../reference/add_footnote.html">add_footnote</a></span><span class="op">(</span><span class="st">"These jams are &lt;i&gt;tasty&lt;/i&gt;!"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>     <span class="fu"><a href="../reference/escape_contents.html">set_escape_contents</a></span><span class="op">(</span><span class="fu"><a href="../reference/final.html">final</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="va">everywhere</span>, <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>     <span class="fu"><a href="../reference/quick-output.html">quick_html</a></span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Alternatively you might consider using markdown in cells, with
-<code><a href="set_markdown_contents.html">set_markdown_contents()</a></code>.</p><ul><li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">Error <span class="cf">in</span> <span class="kw">UseMethod</span>(<span class="st">"caption&lt;-"</span>) <span class="op">:</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">no applicable method <span class="cf">for</span> <span class="st">'caption&lt;-'</span> applied to an object of class <span class="st">"c('huxtable',   'data.frame')"</span></a></code></pre><p></p></div>
+<code><a href="set_markdown_contents.html">set_markdown_contents()</a></code>.</p></li>
+<li><p>I ran <code>caption(ht) &lt;- "Something"</code> and got an error message:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">UseMethod</span>(<span class="st">"caption&lt;-"</span>) <span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>no applicable method <span class="cf">for</span> <span class="st">'caption&lt;-'</span> applied to an object of class <span class="st">"c('huxtable',   'data.frame')"</span></span></code></pre><p></p></div>
 <p>You may have loaded another package with a <code>caption</code> method, e.g. "xtable".
 Try loading huxtable after xtable.</p></li>
 <li><p>How can I get line breaks in my cells?</p>
@@ -133,12 +134,12 @@ Try loading huxtable after xtable.</p></li>
 <p>There are no direct commands for this. You have to use raw HTML/TeX/other
 commands within the caption itself. For example to have a bold caption in
 HTML, you might do something like:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">set_caption</span>(jams, <span class="st">"&lt;b&gt;Jam Prices&lt;/b&gt;"</span>)</a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_caption</span>(jams, <span class="st">"&lt;b&gt;Jam Prices&lt;/b&gt;"</span>)</span></code></pre><p></p></div></li>
 <li><p>How do I refer to tables in bookdown?</p>
 <p>As of version 4.3.0, this is handled automatically for you. Just
 set the label using <code><a href="label.html">label()</a></code>, then in markdown text do e.g.:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">\<span class="op">@</span><span class="kw">ref</span>(tab<span class="op">:</span>my<span class="op">-</span>table<span class="op">-</span>label).</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>\<span class="sc">@</span><span class="fu">ref</span>(tab<span class="sc">:</span>my<span class="sc">-</span>table<span class="sc">-</span>label).</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span></code></pre><p></p></div></li>
 <li><p>I called <code><a href="https://hughjonesd.github.io/huxtable/" class="external-link">library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
 printed!</p>
 <p>Set <code>options(huxtable.knit_print_df = FALSE)</code>.</p></li>
@@ -150,10 +151,10 @@ If you subset <code>ht[x]</code> where <code>x</code> is two-column numeric matr
 each row of <code>x</code> indexes a single <code>(row, column)</code> cell. So, for example,
 here's how to set the background color of cells <code>(2,1)</code>, <code>(1, 3)</code> and
 <code>(4, 2)</code> of a huxtable:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1">indices &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">background_color</span>(jams)[indices] &lt;-<span class="st"> "orange"</span></a></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">background_color</span>(jams)[indices] <span class="ot">&lt;-</span> <span class="st">"orange"</span></span></code></pre><p></p></div>
 <p>Another useful trick sets properties on the diagonal, using <code><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag()</a></code>:</p>
-<p></p><div class="sourceCode"><pre><code><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">diag</span>(<span class="kw">background_color</span>(jams)) &lt;-<span class="st"> "grey"</span></a></code></pre><p></p></div></li>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">background_color</span>(jams)) <span class="ot">&lt;-</span> <span class="st">"grey"</span></span></code></pre><p></p></div></li>
 <li><p>I have another problem.</p>
 <p>If you have a bug - i.e. there is something wrong with the software -
 or a feature request, please report it to
@@ -178,7 +179,7 @@ may be able to help.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

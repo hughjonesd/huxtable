@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
       </span>
     </div>
 
@@ -95,45 +95,45 @@
     <div id="details">
     <h2>Details</h2>
     
-<ul><li><p><code>options('huxtable.add_colnames')</code> sets the default value for
+<ul><li><p><code>options("huxtable.add_colnames")</code> sets the default value for
 <code>add_colnames</code> in <code><a href="huxtable.html">huxtable()</a></code> and <code><a href="as_huxtable.html">as_huxtable()</a></code>. As of version 5.0.0, this
 defaults to <code>TRUE</code>.</p></li>
-<li><p><code>options('huxtable.print')</code> sets the print method for
+<li><p><code>options("huxtable.print")</code> sets the print method for
 huxtable objects. See <code><a href="print.huxtable.html">print.huxtable()</a></code>.</p></li>
-<li><p><code>options('huxtable.knitr_output_format')</code> overrides the default output format
+<li><p><code>options("huxtable.knitr_output_format")</code> overrides the default output format
 when huxtable objects are printed by knitr. Set to "html", "latex", "md" or
 "screen". If <code>NULL</code> (the default), huxtable guesses the format using
 <code><a href="guess_knitr_output_format.html">guess_knitr_output_format()</a></code>.</p></li>
-<li><p><code>options('huxtable.autolabel')</code>. If <code>TRUE</code>, (the default) automatically
+<li><p><code>options("huxtable.autolabel")</code>. If <code>TRUE</code>, (the default) automatically
 sets <code><a href="label.html">label()</a></code> from the knitr chunk label, if there is one.</p></li>
-<li><p><code>options('huxtable.color_screen')</code>. If <code>TRUE</code> and package <code>crayon</code> is
+<li><p><code>options("huxtable.color_screen")</code>. If <code>TRUE</code> and package <code>crayon</code> is
 available, huxtables will be printed in color on screen.</p></li>
-<li><p><code>options('huxtable.bookdown')</code>. Set to <code>TRUE</code> within a bookdown document to
+<li><p><code>options("huxtable.bookdown")</code>. Set to <code>TRUE</code> within a bookdown document to
 automatically print bookdown-style labels. If unset, huxtable will try to
 guess if we are in a bookdown document.</p></li>
-<li><p><code>options('huxtable.knit_print_df')</code>. If <code>TRUE</code>, data frames
+<li><p><code>options("huxtable.knit_print_df")</code>. If <code>TRUE</code>, data frames
 in knitr will be pretty-printed using huxtable. This option defaults to
 <code>TRUE</code> only if huxtable is attached to the search path using
 <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>; not if huxtable is merely loaded (e.g. imported by another
 package).</p></li>
-<li><p><code>options('huxtable.knit_print_df_theme')</code>. A function applied to data frames
+<li><p><code>options("huxtable.knit_print_df_theme")</code>. A function applied to data frames
 before printing in knitr. The function should take one argument (a data
 frame) and return a huxtable. Defaults to <code><a href="themes.html">theme_plain()</a></code>.</p></li>
-<li><p><code>options('huxtable.autoformat')</code> sets the default value for <code>autoformat</code> in
+<li><p><code>options("huxtable.autoformat")</code> sets the default value for <code>autoformat</code> in
 <code><a href="huxtable.html">huxtable()</a></code> and <code><a href="as_huxtable.html">as_huxtable()</a></code>. It defaults to <code>TRUE</code>.</p></li>
-<li><p><code>options('huxtable.latex_use_fontspec')</code>. If <code>TRUE</code>, use the "fontspec"
+<li><p><code>options("huxtable.latex_use_fontspec")</code>. If <code>TRUE</code>, use the "fontspec"
 package, which allows you to use the same font names in TeX and HTML. This
 requires the the xetex or xelatex engine, which can be set using an .rmd
 header option. Note that <code><a href="quick-output.html">quick_pdf()</a></code> may use pdflatex. The default is
 <code>FALSE</code>.</p></li>
-<li><p><code>options('huxtable.long_minus')</code>. If <code>TRUE</code>, prints long minus signs
+<li><p><code>options("huxtable.long_minus")</code>. If <code>TRUE</code>, prints long minus signs
 for numbers. The default is <code>FALSE</code>. In LaTeX output, this option is
-overridden by <code>options('huxtable.latex_siunitx_align')</code>.</p></li>
-<li><p><code>options('huxtable.latex_siunitx_align')</code>. If <code>TRUE</code>, uses the <code>\tablenum</code>
+overridden by <code>options("huxtable.latex_siunitx_align")</code>.</p></li>
+<li><p><code>options("huxtable.latex_siunitx_align")</code>. If <code>TRUE</code>, uses the <code>\tablenum</code>
 macro from the "siunitx" package to align numbers when <code>align(ht)</code> is <code>"."</code>
 or similar. See <code><a href="align.html">align()</a></code> for details. The default is <code>FALSE</code>.</p></li>
-<li><p><code>options('huxtable.autoformat_number_format')</code> and
-<code>options('huxtable.autoformat_align')</code> are lists. The list names are base R
+<li><p><code>options("huxtable.autoformat_number_format")</code> and
+<code>options("huxtable.autoformat_align")</code> are lists. The list names are base R
 classes. <code><a href="huxtable.html">huxtable()</a></code> with <code>autoformat = TRUE</code> will set <code><a href="number_format.html">number_format()</a></code> and
 <code><a href="align.html">align()</a></code> for data columns according to the corresponding list values. For
 example, to center-align <code>Date</code> objects you could set
@@ -153,7 +153,7 @@ example, to center-align <code>Date</code> objects you could set
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

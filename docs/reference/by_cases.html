@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@ normally resets to the default.</p></dd>
     <div id="details">
     <h2>Details</h2>
     <p>Within the formulas, the variable <code>.</code> will refer to the content of
-<code>ht[rows, cols]</code>, after conversion by <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix()</a></code>.</p>
+<code>ht[rows, cols]</code>, after conversion to a vector.</p>
 <p><code>case_when</code> returns <code>NA</code> when no formula LHS is matched. To avoid this, set a
 default in the last formula: <code>TRUE ~ default</code>.</p>
 <p><code>case_when</code> can't deal with <code><a href="brdr.html">brdr()</a></code> objects, so you cannot use
@@ -148,14 +148,14 @@ these in <code>by_cases()</code>.</p>
 <span class="r-in"><span>        <span class="va">.</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">letters</span> <span class="op">~</span> <span class="st">"green"</span>,</span></span>
 <span class="r-in"><span>        <span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0.5</span> <span class="op">~</span> <span class="st">"pink"</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  0.572   <span style="background-color: #BB0000;">a      </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.268</span>   <span style="background-color: #00BB00;">b      </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.206</span>   <span style="background-color: #00BB00;">c      </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  0.621   <span style="background-color: #00BB00;">d      </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.202</span>   <span style="background-color: #00BB00;">e      </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  0.904   <span style="background-color: #BB0000;">a      </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  0.911   <span style="background-color: #00BB00;">b      </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.413</span>   <span style="background-color: #00BB00;">c      </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.077</span>   <span style="background-color: #00BB00;">d      </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="background-color: #FFD7D7;">  0.251</span>   <span style="background-color: #00BB00;">e      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(0.571968176169321, 0.26830367743969, 0.206309405621141,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.620504202554002, , c("a", "b", "c", "d", "e")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(0.904459341196343, 0.910669146338478, 0.412786897737533,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0770210367627442, , c("a", "b", "c", "d", "e")</span>
 </code></pre></div>
     </div>
   </div>
@@ -170,7 +170,7 @@ these in <code>by_cases()</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

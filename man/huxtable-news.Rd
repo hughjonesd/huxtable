@@ -7,10 +7,11 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.5.2}{
 \itemize{
 \item Update \code{by_cases()} to work with dplyr 1.1.0. Within \code{by_cases()}
-formulas, \code{.} is now vector rather than matrix. Thanks @DavisVaughan.
+formulas, \code{.} is now vector rather than matrix when dplyr version
+1.1.0 is detected. Thanks @DavisVaughan.
 }
 }
 

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
       </span>
     </div>
 
@@ -146,58 +146,58 @@ move your rows down by one: what was row 1 will now be row 2, and the column nam
 <span class="r-in"><span>        add_rownames <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">add_rownames</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1         First    Second  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1.1     -0.413    -0.0899  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            2        1.31      1.38    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            3       -0.527    -0.282   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            4       -0.0578   -1.02    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            5        0.18      1.11    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1         First   Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1.1      1.25     -1.29   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             2        0.0887   -0.533  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             3       -0.544     0.773  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             4        1.28      0.402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             5        0.385     0.503  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: rownames, First, Second</span>
 <span class="r-in"><span><span class="fu">add_colnames</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                First     Second   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  First    Second  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                -0.413    -0.0899  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 1.31      1.38    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                -0.527    -0.282   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                -0.0578   -1.02    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 0.18      1.11    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 1.25      -1.29   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 0.0887    -0.533  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                -0.544      0.773  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 1.28       0.402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 0.385      0.503  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: First, Second</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Out by 1:</span></span></span>
 <span class="r-in"><span><span class="fu">add_rownames</span><span class="op">(</span><span class="fu">add_colnames</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1       First     Second   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1.2       First    Second  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1.1     -0.413    -0.0899  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            2        1.31      1.38    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            3       -0.527    -0.282   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            4       -0.0578   -1.02    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            5        0.18      1.11    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1       First     Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1.2       First   Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1.1      1.25     -1.29   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             2        0.0887   -0.533  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             3       -0.544     0.773  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             4        1.28      0.402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             5        0.385     0.503  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: rownames, First, Second</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Better:</span></span></span>
 <span class="r-in"><span><span class="fu">add_colnames</span><span class="op">(</span><span class="fu">add_rownames</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           rownames   First     Second   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           1            First    Second  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           1.1        -0.413    -0.0899  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           2           1.31      1.38    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           3          -0.527    -0.282   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           4          -0.0578   -1.02    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           5           0.18      1.11    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           rownames   First     Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           1            First   Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           1.1         1.25     -1.29   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           2           0.0887   -0.533  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           3          -0.544     0.773  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           4           1.28      0.402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           5           0.385     0.503  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: rownames, First, Second</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Alternatively:</span></span></span>
 <span class="r-in"><span><span class="fu">add_colnames</span><span class="op">(</span><span class="fu">add_rownames</span><span class="op">(</span><span class="va">ht</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                    First     Second   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1         First    Second  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            1.1     -0.413    -0.0899  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            2        1.31      1.38    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            3       -0.527    -0.282   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            4       -0.0578   -1.02    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            5        0.18      1.11    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     First     Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1         First   Second  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             1.1      1.25     -1.29   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             2        0.0887   -0.533  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             3       -0.544     0.773  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             4        1.28      0.402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             5        0.385     0.503  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: , First, Second</span>
 <span class="r-in"><span></span></span>
@@ -215,7 +215,7 @@ move your rows down by one: what was row 1 will now be row 2, and the column nam
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
