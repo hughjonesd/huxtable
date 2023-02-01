@@ -47,6 +47,7 @@ Try to say \code{as_flextable.huxtable} ten times without pausing.
 }
 
 \examples{
+\dontshow{if (rlang::is_installed("flextable")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ht <- hux(a = 1:3, b = 1:3)
 ft <- as_flextable(ht)
 \dontrun{
@@ -56,4 +57,5 @@ ft <- as_flextable(ht)
   print(my_doc, target =
         "path/to/my_doc.docx")
 }
+\dontshow{\}) # examplesIf}
 }
