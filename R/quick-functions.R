@@ -152,7 +152,7 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
-  check_installed(c("officer", "flextable"), reason="officer and flextable packages needed to create docx files"), 
+  check_installed(c("officer", "flextable"), reason="officer and flextable packages needed to create docx files") 
 
   my_doc <- officer::read_docx()
   for (ht in hts) {
@@ -175,7 +175,7 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
   assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
-  check_installed(c("officer", "flextable"), reason="officer and flextable packages needed to create pptx files"), 
+  check_installed(c("officer", "flextable"), reason="officer and flextable packages needed to create pptx files")
 
 
   my_pptx <- officer::read_pptx()
@@ -200,7 +200,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
   force(file)
   hts <- huxtableize(list(...), borders)
   
-  check_installed(c("openxlsx"), reason="openxlsx package needed to create openxlsx files"), 
+  check_installed(c("openxlsx"), reason="openxlsx package needed to create openxlsx files") 
 
 
   wb <- openxlsx::createWorkbook()
