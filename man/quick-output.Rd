@@ -90,6 +90,9 @@ Objects in \code{...} will be converted to huxtables, with borders added.
 If \sQuote{file} is not specified, the command will fail in non-interactive sessions. In
 interactive sessions, the default file path is "huxtable-output.xxx" in the working directory;
 if this already exists, you will be asked to confirm manually before proceeding.
+
+To create docx and pptx files \code{flextable} and \code{officer} must be installed, while xlsx
+needs \code{openxlsx}.
 }
 \examples{
 \dontrun{

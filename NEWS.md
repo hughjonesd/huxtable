@@ -3,6 +3,7 @@
 * Update `by_cases()` to work with dplyr 1.1.0. Within `by_cases()` formulas,
   `.` is now vector rather than matrix when dplyr version 1.1.0 is detected. 
   Thanks @DavisVaughan.
+* Add package checks in `quick_*` functions. Thanks @reuning.
 
 # huxtable 5.5.1
 

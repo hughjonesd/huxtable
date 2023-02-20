@@ -12,6 +12,7 @@ This help page simply gives the contents of NEWS.md.
 \item Update \code{by_cases()} to work with dplyr 1.1.0. Within \code{by_cases()}
 formulas, \code{.} is now vector rather than matrix when dplyr version
 1.1.0 is detected. Thanks @DavisVaughan.
+\item Add package checks in \verb{quick_*} functions. Thanks @reuning.
 }
 }
 
