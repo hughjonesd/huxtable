@@ -23,6 +23,9 @@ NULL
 #' interactive sessions, the default file path is "huxtable-output.xxx" in the working directory;
 #' if this already exists, you will be asked to confirm manually before proceeding.
 #'
+#' To create docx and pptx files `flextable` and `officer` must be installed, while xlsx
+#' needs `openxlsx`.
+#'
 #' @examples
 #' \dontrun{
 #'   m <- matrix(1:4, 2, 2)
@@ -149,6 +152,8 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
   assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+  assert_package("quick_docx", "officer")
+  assert_package("quick_docx", "flextable")
 
   my_doc <- officer::read_docx()
   for (ht in hts) {
@@ -171,6 +176,9 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
   assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+  assert_package("quick_pptx", "officer")
+  assert_package("quick_pptx", "flextable") # needed for as_flextable() below
+
 
   my_pptx <- officer::read_pptx()
   for (ht in hts) {
@@ -193,6 +201,7 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
   assert_that(is.flag(open))
   force(file)
   hts <- huxtableize(list(...), borders)
+  assert_package("quick_xlsx", "openxlsx")
 
   wb <- openxlsx::createWorkbook()
   ix <- 0
