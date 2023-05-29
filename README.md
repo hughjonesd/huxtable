@@ -15,15 +15,19 @@
 
 <tr>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: bold; font-family: DejaVu Sans;">
 
-<span style="color: rgb(255, 255, 255);"></span>
+h
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-weight: bold; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
-<span style="color: rgb(0, 0, 0);">h</span>
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;">
+
+<span style="color: rgb(255, 255, 255);"></span>
 
 </td>
 
@@ -33,18 +37,6 @@ u
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
-
-</td>
-
-<td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
-
-</td>
-
-</tr>
-
-<tr>
-
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;">
 
 <span style="color: rgb(255, 255, 255);"></span>
@@ -55,9 +47,9 @@ u
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+</tr>
 
-</td>
+<tr>
 
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
@@ -65,7 +57,17 @@ x
 
 </td>
 
-<td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;">
+
+<span style="color: rgb(255, 255, 255);"></span>
+
+</td>
+
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 </td>
 
@@ -77,9 +79,7 @@ x
 
 <tr>
 
-<td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;">
-
-<span style="color: rgb(255, 255, 255);"></span>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 </td>
 
@@ -87,7 +87,31 @@ x
 
 </td>
 
-<td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 t
 
@@ -97,9 +121,15 @@ t
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
-<span style="color: rgb(0, 0, 0);"></span>
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 </td>
 
@@ -115,23 +145,9 @@ t
 
 </td>
 
-<td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 a
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;">
-
-<span style="color: rgb(255, 255, 255);"></span>
 
 </td>
 
@@ -141,19 +157,13 @@ b
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;">
-
-<span style="color: rgb(255, 255, 255);"></span>
+<td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;">
 
-l
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<span style="color: rgb(255, 255, 255);">l</span>
 
 </td>
 
@@ -169,23 +179,23 @@ l
 
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
 
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
-
-</td>
-
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
-
 e
 
 </td>
 
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;">
+
+<span style="color: rgb(0, 0, 0);"></span>
 
 </td>
 
 <td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; font-weight: normal; font-family: DejaVu Sans;">
+
+</td>
+
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;">
+
+<span style="color: rgb(255, 255, 255);"></span>
 
 </td>
 
@@ -199,6 +209,8 @@ e
 
 <!-- badges: start -->
 
+[![R-universe
+Badge](https://hughjonesd.r-universe.dev/badges/huxtable)](https://hughjonesd.r-universe.dev/huxtable)
 [![CRAN Status
 Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable)
 [![CRAN Downloads Per
@@ -228,6 +240,14 @@ formats, with a friendly, modern interface. Features include:
     and text styles.
 
 # Installing
+
+To install from
+[r-universe](https://r-universe.dev):
+
+``` r
+install.packages("huxtable", repos = c("https://hughjonesd.r-universe.dev", 
+                       "https://cloud.r-project.org"))
+```
 
 To install from CRAN:
 
