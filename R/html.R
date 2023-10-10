@@ -71,10 +71,16 @@ to_html.huxtable <- function(ht, ...) {
   lab <- make_label(ht)
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
+  quarto_attribute <- if (getOption("huxtable.quarto_process", FALSE)) {
+    ""
+  } else {
+    "data-quarto-disable-processing=\"true\" "
+  }
   table_start <- sprintf(paste0(
-        '<table class="huxtable" data-quarto-disable-processing="true" ',
+        '<table class="huxtable" %s',
         'style="border-collapse: collapse; border: 0px; ',
         'margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n'),
+        quarto_attribute,
         width_string, margin_string, height_string, float_string, id_string)
 
   if (! is.na(cap <- make_caption(ht, lab, "html"))) {

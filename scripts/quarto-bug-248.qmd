@@ -1,0 +1,26 @@
+---
+title: "Quarto disable processing"
+format: html
+---
+
+
+
+```{r}
+#| echo: false
+
+library(huxtable)
+
+
+ht <- as_hux(mtcars[1:3, 1:3]) |> 
+  set_bold(TRUE) |> 
+  set_all_borders(0.4) |> 
+  set_background_color("white")
+
+options(huxtable.quarto_process = TRUE)
+
+ht
+
+options(huxtable.quarto_process = FALSE)
+
+ht
+```
