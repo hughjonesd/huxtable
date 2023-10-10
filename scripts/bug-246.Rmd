@@ -1,0 +1,36 @@
+---
+title: "bug-246"
+output: word_document
+date: "2023-10-10"
+---
+
+
+# No merge
+
+```{r, echo = FALSE, warning = FALSE}
+
+library(huxtable)
+library(dplyr)
+
+
+data = rbind(mtcars |> tibble::rownames_to_column('Car'), 
+             mtcars |> tibble::rownames_to_column('Car')) |>
+  mutate(Car = factor(Car)) |>
+  arrange(Car) |>
+  head(10) |>
+  mutate(Car = as.character(Car)) |> 
+  select(Car, cyl)
+```
+
+# Merged
+
+```{r}
+ht <- as_hux(data, add_colnames = T)|>
+  slice(1:3) |> 
+  merge_cells(1:2, 1) |> 
+  set_bottom_border(2, everywhere, 0.4) |> 
+  huxtable::set_caption('Title') |>
+  set_caption_pos(value =  'topleft')
+
+ht
+```

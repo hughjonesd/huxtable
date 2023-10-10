@@ -43,7 +43,7 @@ Suggests:
     crayon,
     devtools,
     dplyr (>= 0.7.0),
-    flextable (>= 0.5.5),
+    flextable (>= 0.6.9),
     ftExtra (>= 0.0.2),
     ggplot2,
     httr,

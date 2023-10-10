@@ -10,6 +10,7 @@ This help page simply gives the contents of NEWS.md.
 \section{huxtable (development version)}{
 \itemize{
 \item Bugfix: disable quarto styling on HTML tables.
+\item Bugfix: borders weren’t working with merged cells in Word documents.
 }
 }
 

@@ -1,6 +1,7 @@
 # huxtable (development version)
 
 * Bugfix: disable quarto styling on HTML tables.
+* Bugfix: borders weren't working with merged cells in Word documents.
 
 # huxtable 5.5.2
 

@@ -100,7 +100,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
       officer::fp_border(color = bcols[[x]], width = bdrs[[x]], style = bst[[x]])
     )
     names(fp_borders) <- bnames
-    ft <- flextable::border(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
+    ft <- flextable::surround(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
             border.bottom = fp_borders$bottom,
             border.left   = fp_borders$left,
             border.right  = fp_borders$right,
