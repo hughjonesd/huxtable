@@ -1,10 +1,14 @@
+# huxtable (development version)
+
+* Bugfix: disable quarto styling on HTML tables.
+
 # huxtable 5.5.2
 
 * Update `by_cases()` to work with dplyr 1.1.0. Within `by_cases()` formulas,
   `.` is now vector rather than matrix when dplyr version 1.1.0 is detected. 
   Thanks @DavisVaughan.
 * Add package checks in `quick_*` functions. Thanks @reuning.
-* Bugfix: disable quarto styling on HTML tables.
+
 
 # huxtable 5.5.1
 
