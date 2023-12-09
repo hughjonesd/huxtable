@@ -1,6 +1,6 @@
 ---
 title: "Quarto tester"
-format: html
+format: docx
 keep-md: true
 ---
 
@@ -24,7 +24,7 @@ Reference to @tbl-hux.
 #| tbl-cap: "Huxtable Jams"
 #| label: tbl-hux
 library(huxtable)
-jams
+flextable::flextable(mtcars[1:2,1:2])
 
 ```
 
