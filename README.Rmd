@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 [![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable)
   [![R build status](https://github.com/hughjonesd/huxtable/workflows/R-CMD-check/badge.svg)](https://github.com/hughjonesd/huxtable/actions)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/huxtable?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/huxtable)
-[![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://codecov.io/github/hughjonesd/huxtable?branch=master)
+[![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://app.codecov.io/github/hughjonesd/huxtable?branch=master)
 <!-- badges: end -->
   
 Huxtable is an R package to create styled tables in multiple output formats, with a friendly, modern interface. Features include:
@@ -71,7 +71,4 @@ Check out [the website](https://hughjonesd.github.io/huxtable/), read the
 read the vignette in [HTML](https://hughjonesd.github.io/huxtable/huxtable.html) 
 or [PDF](https://hughjonesd.github.io/huxtable/huxtable.pdf).
 
-# Fund huxtable development
-
-If you find huxtable useful, [fund me on Patreon](https://www.patreon.com/bePatron?u=19572369).
 

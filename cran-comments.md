@@ -1,26 +1,24 @@
 
-Release for compatibility with dplyr 1.1.0.
+Bugfix release.
 
 ## Test environments
 
-* local OS X install (R 4.2.0)
-* github (windows/linux/mac, release/devel)
-* win-builder release/devel/oldrelease
+* local OS X install (R 4.3.2)
+* win-builder release/devel
 * mac-builder release
 
 
 ## R CMD check results
 
 A note about undeclared namespaces. This is a false positive: R6 and
-xml2 are indeed used. On oldrelease a note about RTF being misspelled,
+xml2 are indeed used. 
 
-Otherwise OK.
-
+win-builder release gave an error about a test failure involving quarto. I think
+this is probably a temporary or configuration problem on win-builder, since 
+the quarto tests work fine elsewhere, including on win-builder devel.
 
 ## revdepcheck results
 
-Two packages failed to check due to R CMD check timeouts. The other 14 packages 
-were fine.
+19 out of 19 packages were OK.
 
-Full report:
 
