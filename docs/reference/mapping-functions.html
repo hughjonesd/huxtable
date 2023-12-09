@@ -46,7 +46,7 @@ For a more general solution, use by_function() or by_cases().
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.3</span>
       </span>
     </div>
 
@@ -120,15 +120,15 @@ For a more general solution, use by_function() or by_cases().
     <p>This help page explains how to set properties differently for cells,
 depending on their contents.</p>
 <p>For example, in a table of p-values, you could bold cells where p &lt; 0.05:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_bold</span>(pval_hux, <span class="fu">by_ranges</span>(<span class="fl">0.05</span>, <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)))</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  <span class="fu">map_bold</span>(pval_hux, <span class="fu">by_ranges</span>(<span class="fl">0.05</span>, <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)))</span></code></pre><p></p></div>
 <p>Or you can use red text for a particular value:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  hxtbl <span class="sc">%&gt;%</span> <span class="fu">map_text_color</span>(<span class="fu">by_values</span>(<span class="st">"Warning"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  hxtbl <span class="sc">%&gt;%</span> <span class="fu">map_text_color</span>(<span class="fu">by_values</span>(<span class="st">"Warning"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span></code></pre><p></p></div>
 <p>There is a <code>map_...</code> function for each huxtable cell property. The syntax is:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_property</span>(ht, row, col, fn)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  <span class="fu">map_property</span>(ht, row, col, fn)</span></code></pre><p></p></div>
 <p>where <code>property</code> is the property name.</p>
 <p><code>row</code> and <code>col</code> specify ranges of rows and columns. See <a href="rowspecs.html">rowspecs</a> for
 details. To set properties for the whole table, omit <code>row</code> and <code>col</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_property</span>(ht, fn)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  <span class="fu">map_property</span>(ht, fn)</span></code></pre><p></p></div>
 <p>The <code>fn</code> argument is a <em>mapping function</em> which maps cell contents to
 property values.</p><ul><li><p>To set property values in "stripes" by rows or by columns, use <code><a href="by_rows.html">by_rows()</a></code>
 and <code><a href="by_rows.html">by_cols()</a></code>.</p></li>
@@ -204,20 +204,20 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 <span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.625</span>   <span style="background-color: #BBBB00;">-0.648</span>   <span style="background-color: #BBBB00;">-0.715</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.289</span>   <span style="background-color: #0000BB;">-2.63 </span>   <span style="background-color: #BBBB00;">-0.244</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;"> 1.16 </span>   <span style="background-color: #BBBB00;">-0.129</span>   <span style="background-color: #BB0000;"> 1.26 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.113</span>   <span style="background-color: #BBBB00;"> 0.221</span>   <span style="background-color: #BBBB00;"> 0.423</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;"> 1.88 </span>   <span style="background-color: #0000BB;">-1.02 </span>   <span style="background-color: #BBBB00;"> 0.611</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #0000BB;">-1.58 </span>   <span style="background-color: #0000BB;">-1.45   </span>   <span style="background-color: #BBBB00;">0.876</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.794</span>   <span style="background-color: #BB0000;"> 1.33   </span>   <span style="background-color: #BBBB00;">0.554</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.737</span>   <span style="background-color: #0000BB;">-1.89   </span>   <span style="background-color: #BB0000;">1.74 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.511</span>   <span style="background-color: #BBBB00;">-0.111  </span>   <span style="background-color: #BBBB00;">0.641</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;">-0.847</span>   <span style="background-color: #BBBB00;"> 0.00233</span>   <span style="background-color: #BBBB00;">0.43 </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
 <span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
 <span class="r-in"><span>      <span class="fu"><a href="by_quantiles.html">by_equal_groups</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.625</span>   <span style="background-color: #BB0000;">-0.648</span>   <span style="background-color: #BB0000;">-0.715</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.289</span>   <span style="background-color: #BB0000;">-2.63 </span>   <span style="background-color: #BB0000;">-0.244</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #00BB00;"> 1.16 </span>   <span style="background-color: #00BB00;">-0.129</span>   <span style="background-color: #00BB00;"> 1.26 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #00BB00;">-0.113</span>   <span style="background-color: #00BB00;"> 0.221</span>   <span style="background-color: #00BB00;"> 0.423</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #00BB00;"> 1.88 </span>   <span style="background-color: #BB0000;">-1.02 </span>   <span style="background-color: #00BB00;"> 0.611</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-1.58 </span>   <span style="background-color: #BB0000;">-1.45   </span>   <span style="background-color: #00BB00;">0.876</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.794</span>   <span style="background-color: #00BB00;"> 1.33   </span>   <span style="background-color: #00BB00;">0.554</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.737</span>   <span style="background-color: #BB0000;">-1.89   </span>   <span style="background-color: #00BB00;">1.74 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.511</span>   <span style="background-color: #BB0000;">-0.111  </span>   <span style="background-color: #00BB00;">0.641</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-0.847</span>   <span style="background-color: #BB0000;"> 0.00233</span>   <span style="background-color: #BB0000;">0.43 </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
 <span class="r-in"><span></span></span>
@@ -239,22 +239,20 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span>          <span class="co"># look at the spaces...</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      c(-1, 1, 2) c("a", "b", "c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "-1"        "a"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] " 1"        "b"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] " 2"        "c"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "-1" "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] " 1" "b"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] " 2" "c"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>      <span class="co"># uh oh</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      c(-1, 1, 2) c("a", "b", "c")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]       FALSE             TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]       FALSE             TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]       FALSE             TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] FALSE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] FALSE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] FALSE TRUE</span>
 <span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
 <span class="r-in"><span>      <span class="fu"><a href="by_cases.html">by_cases</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">     -1</span>   <span style="color: #0000BB;">a      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">      1</span>   <span style="color: #0000BB;">b      </span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">      2</span>   <span style="color: #0000BB;">c      </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-1, 1, 2), c("a", "b", "c")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To avoid this, only look at the truly numeric columns:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="text_color.html">map_text_color</a></span><span class="op">(</span><span class="va">ht</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, col <span class="op">=</span> <span class="fl">1</span>,</span></span>
@@ -262,8 +260,6 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #BB0000;">     -1</span>   a        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #0000BB;">      1</span>   b        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                <span style="color: #0000BB;">      2</span>   c        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: c(-1, 1, 2), c("a", "b", "c")</span>
 </code></pre></div>
     </div>
   </div>

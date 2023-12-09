@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.3</span>
       </span>
     </div>
 
@@ -131,7 +131,10 @@ for numbers. The default is <code>FALSE</code>. In LaTeX output, this option is
 overridden by <code>options("huxtable.latex_siunitx_align")</code>.</p></li>
 <li><p><code>options("huxtable.latex_siunitx_align")</code>. If <code>TRUE</code>, uses the <code>\tablenum</code>
 macro from the "siunitx" package to align numbers when <code>align(ht)</code> is <code>"."</code>
-or similar. See <code><a href="align.html">align()</a></code> for details. The default is <code>FALSE</code>.</p></li>
+or similar. See <code><a href="align.html">align()</a></code> for details. The default is <code>FALSE</code>.</p>
+<p><code>options("huxtable.quarto_process")</code>. If <code>TRUE</code>, enables quarto processing
+of HTML tables. This overrides some huxtable styles, but may allow quarto
+to do other things, e.g. process citations correctly. The default is <code>FALSE</code>.</p></li>
 <li><p><code>options("huxtable.autoformat_number_format")</code> and
 <code>options("huxtable.autoformat_align")</code> are lists. The list names are base R
 classes. <code><a href="huxtable.html">huxtable()</a></code> with <code>autoformat = TRUE</code> will set <code><a href="number_format.html">number_format()</a></code> and
