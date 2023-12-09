@@ -99,8 +99,8 @@ system("touch inst/doc/*")
 # Ensure there's a vignette index in build/vignettes.rds
 # NB NOT Meta/vignettes.rds! devtools::build_vignettes() will put it there,
 # you can move it
-system("mv meta/vignette.rds build")
-system("rmdir meta")
+system("mv Meta/vignette.rds build")
+system("rmdir Meta")
 # Build a version for CRAN:
 pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile

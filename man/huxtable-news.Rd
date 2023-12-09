@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.5.3}{
 \itemize{
 \item Bugfix: disable quarto styling on HTML tables. You can reenable quarto
 processing with \code{options(huxtable.quarto_process = TRUE)}.
