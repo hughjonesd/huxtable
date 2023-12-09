@@ -1,6 +1,7 @@
 # huxtable (development version)
 
-* Bugfix: disable quarto styling on HTML tables.
+* Bugfix: disable quarto styling on HTML tables. You can reenable quarto
+  processing with `options(huxtable.quarto_process = TRUE)`.
 * Bugfix: borders weren't working with merged cells in Word documents.
 
 # huxtable 5.5.2

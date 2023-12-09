@@ -68,8 +68,22 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     }
   }
 
+  # list of vert and horiz border thicknesses.
+  # vert is rows+1, cols; horiz is rows, cols+1
+  vbdrs  <- get_visible_borders(x)
+  # lists of colors and styles
+  vbcols <- collapsed_border_colors(x)
+  vbcols$vert[is.na(vbcols$vert)] <- "black"
+  vbcols$horiz[is.na(vbcols$horiz)] <- "black"
+
+  vbst <- collapsed_border_styles(x)
+  vbst$vert[vbst$vert == "double"] <- "solid"
+  vbst$horiz[vbst$horiz == "double"] <- "solid"
+
   rots <- list("0" = "lrtb", "90" = "btlr", "270" = "tbrl")
+
   dcells <- display_cells(x, all = FALSE)
+
   for (r in seq_len(nrow(dcells))) {
     dcell <- dcells[r, ]
     drow <- dcell$display_row
@@ -90,21 +104,28 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
             padding.right  = right_padding(x)[drow, dcol],
             padding.top    = top_padding(x)[drow, dcol]
           )
-    bnames <- c("top", "left", "bottom", "right")
-    bdrs  <- get_all_borders(x, drow, dcol)
-    bcols <- get_all_border_colors(x, drow, dcol)
-    bst   <- get_all_border_styles(x, drow, dcol)
-    bst[bst == "double"] <- "solid"
-    bcols[is.na(bcols)] <- "black"
-    fp_borders <- lapply(bnames, function (x)
-      officer::fp_border(color = bcols[[x]], width = bdrs[[x]], style = bst[[x]])
-    )
-    names(fp_borders) <- bnames
+    # For cell (i, j), top and left are i, j; right is i, j+1; bottom is i+1, j.
+    fpb <- list()
+    fpb$top    <- officer::fp_border(color = vbcols$horiz[drow, dcol],
+                                     width = vbdrs$horiz[drow, dcol],
+                                     style = vbst$horiz[drow, dcol])
+    fpb$bottom <- officer::fp_border(color = vbcols$horiz[dcell$end_row+1, dcol],
+                                     width = vbdrs$horiz[dcell$end_row+1, dcol],
+                                     style = vbst$horiz[dcell$end_row+1, dcol])
+
+    fpb$left   <- officer::fp_border(color = vbcols$vert[drow, dcol],
+                                     width = vbdrs$vert[drow, dcol],
+                                     style = vbst$vert[drow, dcol])
+    fpb$right  <- officer::fp_border(color = vbcols$vert[drow, dcell$end_col+1],
+                                     width = vbdrs$vert[drow, dcell$end_col+1],
+                                     style = vbst$vert[drow, dcell$end_col+1])
+
+
     ft <- flextable::surround(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
-            border.bottom = fp_borders$bottom,
-            border.left   = fp_borders$left,
-            border.right  = fp_borders$right,
-            border.top    = fp_borders$top
+            border.bottom = fpb$bottom,
+            border.left   = fpb$left,
+            border.right  = fpb$right,
+            border.top    = fpb$top
           )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]

@@ -79,6 +79,7 @@ format_color <- function (r_color, default = "white") {
 }
 
 
+# returns two rows(+1),cols(+1) arrays of border thicknesses.
 get_visible_borders <- function (ht) {
   dc <- display_cells(ht)
 
