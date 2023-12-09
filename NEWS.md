@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.5.3
 
 * Bugfix: disable quarto styling on HTML tables. You can reenable quarto
   processing with `options(huxtable.quarto_process = TRUE)`.
