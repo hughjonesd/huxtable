@@ -7,6 +7,13 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+\itemize{
+\item Bugfix: \code{by_cases()} wasn’t picking up variables from the caller
+environment.
+}
+}
+
 \section{huxtable 5.5.3}{
 \itemize{
 \item Bugfix: disable quarto styling on HTML tables. You can reenable quarto

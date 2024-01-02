@@ -1,3 +1,8 @@
+# huxtable (development version)
+
+* Bugfix: `by_cases()` wasn't picking up variables from the 
+  caller environment.
+
 # huxtable 5.5.3
 
 * Bugfix: disable quarto styling on HTML tables. You can reenable quarto
