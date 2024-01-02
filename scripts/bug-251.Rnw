@@ -1,0 +1,57 @@
+\documentclass[BCOR=2mm, DIV=6, twoside]{scrbook}
+
+\KOMAoptions{fontsize=12, draft=true, chapterprefix=false, open=right}
+
+\usepackage{fontspec}
+
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+
+
+% huxtable specific
+\usepackage{array}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[normalem]{ulem}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{hyperref}
+\begin{document}
+
+<<>>=
+
+library(huxtable)
+jams |>
+    insert_row(c("other", 12)) |>
+    merge_cells(1, 1:2)|>
+    set_background_color(row = 1, col=2, value = "cornsilk1") |>
+    set_background_color(row = 3, col=2, value = "cornsilk1") |>
+    set_top_border(value = brdr(1), row = 1)|>
+    set_top_border(value = brdr(.2), row = 2:3)|>
+    set_bottom_border(value = brdr(.2), row = 1:3)|>
+    set_bottom_border(value = brdr(1), row = final(1))
+
+
+@
+
+
+<<>>=
+
+jams |>
+    insert_row(c("other", 12)) |>
+    merge_cells(1, 1:2)|>
+    set_background_color(row = 1:3, col=2, value = "cornsilk1") |>
+    set_top_border(value = brdr(1), row = 1)|>
+    set_top_border(value = brdr(.2), row = 2:3)|>
+    set_bottom_border(value = brdr(.2), row = 1:3)|>
+    set_bottom_border(value = brdr(1), row = final(1))
+
+
+@
+\end{document}

@@ -575,10 +575,11 @@ by_cases <- function (..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
   # turn into character strings so they don't capture local information yet
   cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
+  by_cases_caller_env <- parent.frame()
 
   case_fn <- function (ht, rows, cols, current) {
     res <- current
-    myenv <- new.env()
+    myenv <- new.env(parent = by_cases_caller_env)
     selection <- as.matrix(ht[rows, cols])
     dim <- dim(selection)
     if (utils::packageVersion("dplyr") >= "1.1.0") selection <- as.vector(selection)

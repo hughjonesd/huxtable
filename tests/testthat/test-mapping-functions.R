@@ -132,6 +132,16 @@ test_that("by_cases", {
 })
 
 
+test_that("bug: by_cases not picking up its environment", {
+  skip_if_not_installed("dplyr")
+
+  x <- 2
+  f <- by_cases(. < x ~ 0, TRUE ~ 2)
+  m <- matrix(1, 1, 1)
+
+  expect_equivalent(f(m, 1, 1, m), matrix(0, 1, 1))
+})
+
 test_that("ignore_na argument works", {
   m <- matrix(letters[1:4], 2, 2)
   ct <- matrix(1:4, 2, 2)
