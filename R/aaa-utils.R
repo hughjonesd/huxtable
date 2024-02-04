@@ -221,7 +221,7 @@ make_label <- function (ht) {
   if (! is.null(chunk_label) &&
       are_we_in_quarto() &&
       requireNamespace("quarto", quietly = TRUE) &&
-      quarto::quarto_version() >= 1.4 &&
+      quarto::quarto_version() >= "1.4" &&
       getOption("huxtable.knitr_output_format", guess_knitr_output_format()) == "latex"
       ) {
     msg <- paste(

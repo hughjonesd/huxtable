@@ -182,7 +182,7 @@ test_that("quarto files", {
     }
   })
 
-  if (quarto::quarto_version() < 1.4) {
+  if (quarto::quarto_version() < "1.4") {
     expect_silent(
       quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
                               output_file = "quarto-test-out.pdf",

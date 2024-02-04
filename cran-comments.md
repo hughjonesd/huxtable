@@ -1,5 +1,6 @@
 
 Bugfix release to workaround a regression from quarto 1.4.
+Resubmission to fix a Debian-only numeric_version bug.
 
 ## Test environments
 
