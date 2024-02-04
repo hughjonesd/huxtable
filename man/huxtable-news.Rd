@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.5.4}{
 \itemize{
 \item Bugfix: quarto cross-referencing doesn’t work for PDF with quarto
 version 1.4. See \code{?huxtable-FAQ} for workarounds.

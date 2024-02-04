@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.5.4
 
 * Bugfix: quarto cross-referencing doesn't work for PDF with quarto version
   1.4. See `?huxtable-FAQ` for workarounds.
