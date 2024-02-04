@@ -206,8 +206,37 @@ NULL
 #'
 #'   ```
 #'   \@ref(tab:my-table-label).
-#'
 #'   ```
+#'
+#' * How do I refer to tables in quarto?
+#'
+#'   In quarto versions up to 1.3, or when compiling to HTML and
+#'   other formats, simply use quarto cell labels
+#'   like `label: tbl-foo` and refer to them via `@tbl-foo`.
+#'
+#'   In quarto versions 1.4 and above, when compiling to PDF,
+#'   quarto cross-referencing no longer works, and labels starting with
+#'   `tbl-` will cause an error. (This is a quarto
+#'   issue.) Instead, set labels within huxtable using [label()] or
+#'   [set_label()] and refer to them with TeX-only referencing using
+#'   `\ref{label}`. You must also set a caption, either via quarto or via
+#'   huxtable.
+#'
+#'   Here's an example:
+#'
+#'   ````
+#'   A reference to Table \ref{tab:jams}.
+#'
+#'   ```{r}
+#'   label(jams) <- "tab:jams"
+#'   caption(jams) <- "Some jams"
+#'   jams
+#'   ```
+#'   ````
+#'
+#'  If you really need cross-referencing for both PDF and other output
+#'  formats, either downgrade to quarto 1.3, use a different package,
+#'  or write code to emit appropriate references.
 #'
 #' * I called `library(huxtable)` and now my `data.table` objects are getting
 #'   printed!

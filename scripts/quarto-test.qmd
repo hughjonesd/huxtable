@@ -1,0 +1,28 @@
+---
+title: "Quarto tester"
+format: pdf
+---
+
+
+Reference to @tbl-jams
+
+```{r}
+#| tbl-cap: quarto cap
+#| label: tbl-jams
+library(huxtable)
+caption(jams) <- "huxtable caption"
+jams
+
+# 1.4.549
+# works with no label/caption at all
+# works with only quarto caption, only huxtable caption, or both:
+#   - quarto overrides huxtable
+# works with only quarto label "jams". 
+#   - But label cross-reference is not captured.
+# fails with only quarto label "tbl-jams", whether or not there is a xref
+# works with any huxtable label (jams/tbl-jams/tab:tbl-jams), 
+#   - but xref is still not captured.
+# works with quarto caption and label, so long as label is not tbl-
+```
+
+Post-reference to \ref{jams}.

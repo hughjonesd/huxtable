@@ -182,12 +182,29 @@ test_that("quarto files", {
     }
   })
 
-  expect_silent(
-    quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
-                            output_file = "quarto-test-out.pdf",
-                            execute_dir = "temp-artefacts",
-                            debug = FALSE, quiet = TRUE)
-  )
+  if (quarto::quarto_version() < 1.4) {
+    expect_silent(
+      quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
+                              output_file = "quarto-test-out.pdf",
+                              execute_dir = "temp-artefacts",
+                              debug = FALSE, quiet = TRUE)
+    )
+  } else {
+    # for some reason (probably due to use of processx::) I can't
+    # capture the specific huxtable error from make_label() here
+    expect_error(
+      quarto::quarto_render("quarto-test.qmd", output_format = "pdf",
+                              output_file = "quarto-test-out.pdf",
+                              execute_dir = "temp-artefacts",
+                              debug = FALSE, quiet = TRUE)
+    )
+    expect_silent(
+      quarto::quarto_render("quarto-test-tex-labels.qmd", output_format = "pdf",
+                              output_file = "quarto-test-tex-labels-out.pdf",
+                              execute_dir = "temp-artefacts",
+                              debug = FALSE, quiet = TRUE)
+    )
+  }
 
   expect_silent(
     quarto::quarto_render("quarto-test.qmd", output_format = "html",

@@ -1,0 +1,14 @@
+---
+title: "Quarto tester: TeX labels for quarto 1.4"
+---
+
+
+Reference to \ref{blah-hux}
+
+```{r}
+#| tbl-cap: "Huxtable Jams"
+library(huxtable)
+label(jams) <- "blah-hux"
+jams
+
+```

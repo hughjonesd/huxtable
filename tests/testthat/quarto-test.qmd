@@ -1,6 +1,5 @@
 ---
 title: "Quarto tester"
-format: html
 ---
 
 

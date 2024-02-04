@@ -209,14 +209,41 @@ get_caption_hpos <- function (ht) {
 
 make_label <- function (ht) {
   lab <- label(ht)
-  if (is.na(lab) && getOption("huxtable.autolabel", TRUE) &&
-        requireNamespace("knitr", quietly = TRUE) &&
-        ! is.null(chunk_label <- knitr::opts_current$get("label"))
-      ) {
+  chunk_label <- knitr::opts_current$get("label")
+
+  if (is.na(lab) &&
+      getOption("huxtable.autolabel", TRUE) &&
+      requireNamespace("knitr", quietly = TRUE) &&
+      ! is.null(chunk_label)) {
     lab <- paste0("tab:", chunk_label)
   }
 
+  if (! is.null(chunk_label) &&
+      are_we_in_quarto() &&
+      requireNamespace("quarto", quietly = TRUE) &&
+      quarto::quarto_version() >= 1.4 &&
+      getOption("huxtable.knitr_output_format", guess_knitr_output_format()) == "latex"
+      ) {
+    msg <- paste(
+      "quarto cell labels do not work with huxtable in TeX for quarto ",
+      "version 1.4 or above.",
+      "Use huxtable labels instead via `label()` or `set_label()`.",
+      "See `?huxtable-FAQ` for more details.",
+      sep = "\n")
+    if (grepl("^tbl-", chunk_label)) {
+      stop(msg)
+    } else {
+      warning(msg)
+    }
+  }
+
   lab
+}
+
+
+are_we_in_quarto <- function () {
+  requireNamespace("knitr", quietly = TRUE) &&
+  ! is.null(knitr::opts_knit$get("quarto.version"))
 }
 
 

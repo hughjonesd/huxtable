@@ -1,5 +1,7 @@
 # huxtable (development version)
 
+* Bugfix: quarto cross-referencing doesn't work for PDF with quarto version
+  1.4. See `?huxtable-FAQ` for workarounds.
 * Bugfix: `by_cases()` wasn't picking up variables from the 
   caller environment.
 
