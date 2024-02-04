@@ -1,5 +1,5 @@
 
-Bugfix release.
+Bugfix release to workaround a regression from quarto 1.4.
 
 ## Test environments
 
@@ -10,15 +10,10 @@ Bugfix release.
 
 ## R CMD check results
 
-A note about undeclared namespaces. This is a false positive: R6 and
-xml2 are indeed used. 
-
-win-builder release gave an error about a test failure involving quarto. I think
-this is probably a temporary or configuration problem on win-builder, since 
-the quarto tests work fine elsewhere, including on win-builder devel.
+OK on all platforms.
 
 ## revdepcheck results
 
-19 out of 19 packages were OK.
+21 out of 21 packages were OK.
 
 

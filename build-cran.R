@@ -39,24 +39,13 @@ chk <- devtools::check(
         document = FALSE,
         remote   = TRUE
       )
-if (length(chk$errors) > 0 || length(chk$warnings) > 0) {
-  cat('\n\nR CMD CHECK errors:\n')
-  cat(chk$errors)
-  cat('\n\nR CMD CHECK warnings:\n')
-  cat(chk$warnings)
-}
-
-if (length(chk$notes)) {
-  cat('R CMD CHECK notes:\n')
-  cat(chk$notes)
-}
 
 
 # manual section --------
 
 # run checks
 
-rhc <- rhub::check_for_cran(show_status = FALSE)
+devtools::check_mac_release()
 
 # asks manual questions
 devtools::check_win_devel()
@@ -93,7 +82,9 @@ system("mkdir -p inst/doc")
 devtools::build_vignettes()
 # Copy built vignettes from doc/ to inst/doc:
 system("cp doc/* inst/doc")
-# Comment out !CRAN lines in huxtable vignette, and save (in inst/doc and vignettes?)
+# Comment out !CRAN lines in huxtable vignette,
+# and save (in inst/doc and vignettes?)
+system("cp vignettes/huxtable.Rmd inst/doc")
 # Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
 system("touch inst/doc/*")
 # Ensure there's a vignette index in build/vignettes.rds
@@ -104,8 +95,9 @@ system("rmdir Meta")
 # Build a version for CRAN:
 pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile
+system("tar -ztvf ../huxtable_x.y.z.tar.gz | grep build")
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)
-system("tar -ztvf ../huxtable_*.tar.gz")
+
 # after release:
 revdepcheck::revdep_reset()
