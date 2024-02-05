@@ -1,6 +1,6 @@
 
 Bugfix release to workaround a regression from quarto 1.4.
-Resubmission to fix a Debian-only numeric_version bug.
+Resubmission to fix an uncaught reverse dependency regression.
 
 ## Test environments
 
@@ -11,7 +11,7 @@ Resubmission to fix a Debian-only numeric_version bug.
 
 ## R CMD check results
 
-OK on all platforms.
+This resubmission was rechecked and was OK on all platforms.
 
 ## revdepcheck results
 
