@@ -209,11 +209,12 @@ get_caption_hpos <- function (ht) {
 
 make_label <- function (ht) {
   lab <- label(ht)
-  chunk_label <- knitr::opts_current$get("label")
 
+  has_knitr <- requireNamespace("knitr", quietly = TRUE)
+  chunk_label <- if (has_knitr) knitr::opts_current$get("label") else NULL
   if (is.na(lab) &&
       getOption("huxtable.autolabel", TRUE) &&
-      requireNamespace("knitr", quietly = TRUE) &&
+      has_knitr &&
       ! is.null(chunk_label)) {
     lab <- paste0("tab:", chunk_label)
   }
