@@ -46,7 +46,7 @@ For a more general solution, use by_function() or by_cases().
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.5</span>
       </span>
     </div>
 
@@ -204,20 +204,20 @@ the new property values for <code>ht[rows, cols]</code>, as a matrix.</p>
 <span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #0000BB;">-1.58 </span>   <span style="background-color: #0000BB;">-1.45   </span>   <span style="background-color: #BBBB00;">0.876</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.794</span>   <span style="background-color: #BB0000;"> 1.33   </span>   <span style="background-color: #BBBB00;">0.554</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.737</span>   <span style="background-color: #0000BB;">-1.89   </span>   <span style="background-color: #BB0000;">1.74 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;"> 0.511</span>   <span style="background-color: #BBBB00;">-0.111  </span>   <span style="background-color: #BBBB00;">0.641</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BBBB00;">-0.847</span>   <span style="background-color: #BBBB00;"> 0.00233</span>   <span style="background-color: #BBBB00;">0.43 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #0000BB;">-1.06 </span>   <span style="background-color: #BBBB00;">-0.537</span>   <span style="background-color: #BBBB00;"> 0.259</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.796</span>   <span style="background-color: #BBBB00;"> 0.227</span>   <span style="background-color: #BBBB00;">-0.442</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #0000BB;">-1.76 </span>   <span style="background-color: #BBBB00;"> 0.978</span>   <span style="background-color: #BBBB00;"> 0.569</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.691</span>   <span style="background-color: #BBBB00;">-0.209</span>   <span style="background-color: #BB0000;"> 2.13 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BBBB00;">-0.559</span>   <span style="background-color: #0000BB;">-1.4  </span>   <span style="background-color: #BBBB00;"> 0.425</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
 <span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
 <span class="r-in"><span>      <span class="fu"><a href="by_quantiles.html">by_equal_groups</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-1.58 </span>   <span style="background-color: #BB0000;">-1.45   </span>   <span style="background-color: #00BB00;">0.876</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.794</span>   <span style="background-color: #00BB00;"> 1.33   </span>   <span style="background-color: #00BB00;">0.554</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.737</span>   <span style="background-color: #BB0000;">-1.89   </span>   <span style="background-color: #00BB00;">1.74 </span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #00BB00;"> 0.511</span>   <span style="background-color: #BB0000;">-0.111  </span>   <span style="background-color: #00BB00;">0.641</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="background-color: #BB0000;">-0.847</span>   <span style="background-color: #BB0000;"> 0.00233</span>   <span style="background-color: #BB0000;">0.43 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-1.06 </span>   <span style="background-color: #BB0000;">-0.537</span>   <span style="background-color: #00BB00;"> 0.259</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.796</span>   <span style="background-color: #00BB00;"> 0.227</span>   <span style="background-color: #00BB00;">-0.442</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-1.76 </span>   <span style="background-color: #00BB00;"> 0.978</span>   <span style="background-color: #00BB00;"> 0.569</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.691</span>   <span style="background-color: #00BB00;">-0.209</span>   <span style="background-color: #00BB00;"> 2.13 </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             <span style="background-color: #BB0000;">-0.559</span>   <span style="background-color: #BB0000;">-1.4  </span>   <span style="background-color: #00BB00;"> 0.425</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3</span>
 <span class="r-in"><span></span></span>

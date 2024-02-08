@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.5.5</span>
       </span>
     </div>
 
@@ -138,9 +138,29 @@ HTML, you might do something like:</p>
 <li><p>How do I refer to tables in bookdown?</p>
 <p>As of version 4.3.0, this is handled automatically for you. Just
 set the label using <code><a href="label.html">label()</a></code>, then in markdown text do e.g.:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>\<span class="sc">@</span><span class="fu">ref</span>(tab<span class="sc">:</span>my<span class="sc">-</span>table<span class="sc">-</span>label).</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div></li>
-<li><p>I called <code><a href="https://hughjonesd.github.io/huxtable/" class="external-link">library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>\<span class="sc">@</span><span class="fu">ref</span>(tab<span class="sc">:</span>my<span class="sc">-</span>table<span class="sc">-</span>label).</span></code></pre><p></p></div></li>
+<li><p>How do I refer to tables in quarto?</p>
+<p>In quarto versions up to 1.3, or when compiling to HTML and
+other formats, simply use quarto cell labels
+like <code>label: tbl-foo</code> and refer to them via <code>@tbl-foo</code>.</p>
+<p>In quarto versions 1.4 and above, when compiling to PDF,
+quarto cross-referencing no longer works, and labels starting with
+<code>tbl-</code> will cause an error. (This is a quarto
+issue.) Instead, set labels within huxtable using <code><a href="label.html">label()</a></code> or
+<code><a href="label.html">set_label()</a></code> and refer to them with TeX-only referencing using
+<code>\ref{label}</code>. You must also set a caption, either via quarto or via
+huxtable.</p>
+<p>Here's an example:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>A reference to Table \ref{tab<span class="sc">:</span>jams}.</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="at">label(jams) &lt;- "tab:jams"</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">caption(jams) &lt;- "Some jams"</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">jams</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="st">```</span></span></code></pre><p></p></div></li>
+</ul><p>If you really need cross-referencing for both PDF and other output
+formats, either downgrade to quarto 1.3, use a different package,
+or write code to emit appropriate references.</p><ul><li><p>I called <code><a href="https://hughjonesd.github.io/huxtable/" class="external-link">library(huxtable)</a></code> and now my <code>data.table</code> objects are getting
 printed!</p>
 <p>Set <code>options(huxtable.knit_print_df = FALSE)</code>.</p></li>
 <li><p>How can I set a property on an arbitrary group of cells?</p>
