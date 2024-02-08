@@ -77,13 +77,13 @@ system2('git', c('push', '--tags'))
 devtools::release()
 
 # Alternatively:
-# Uncomment !CRAN lines in huxtable vignette
+# Uncomment !CRAN lines in huxtable vignette and save
 system("mkdir -p inst/doc")
 devtools::build_vignettes()
 # Copy built vignettes from doc/ to inst/doc:
 system("cp doc/* inst/doc")
-# Comment out !CRAN lines in huxtable vignette,
-# and save (in inst/doc and vignettes?)
+# Comment out !CRAN lines in huxtable vignette and save
+# copy to inst/doc:
 system("cp vignettes/huxtable.Rmd inst/doc")
 # Do this to avoid R CMD check spotting newer files in vignettes than inst/doc:
 system("touch inst/doc/*")
@@ -95,7 +95,7 @@ system("rmdir Meta")
 # Build a version for CRAN:
 pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile
-system("tar -ztvf ../huxtable_x.y.z.tar.gz | grep build")
+system("tar -ztvf ../huxtable_5.5.4.tar.gz | grep build")
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)
 
