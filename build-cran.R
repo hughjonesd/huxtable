@@ -62,7 +62,7 @@ rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_res
 # Tag new version
 
 newtag <- paste0('v', v, '-rc')
-tags <- tags()
+tags <- git2r::tags()
 tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
 tags <- as.numeric(gsub(newtag, '', tags))
 rc <- if (length(tags)) as.integer(max(tags) + 1) else 1L
@@ -101,3 +101,14 @@ system("tar -ztvf ../huxtable_5.5.4.tar.gz | grep build")
 
 # after release:
 revdepcheck::revdep_reset()
+v <- devtools::as.package('.')$version
+newtag <- paste0('v', v, '-rc')
+tags <- git2r::tags()
+tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
+tags <- sort(tags)
+stopifnot(length(tags) > 0)
+tag <- tags[length(tags)]
+gh::gh("POST /repos/hughjonesd/huxtable/releases",
+       name = v,
+       tag_name = tag,
+       body = sprintf("Version %s on CRAN", v))
