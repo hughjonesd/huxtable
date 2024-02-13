@@ -1,3 +1,7 @@
+# huxtable (development version)
+
+* Bugfix: quarto cross-referencing was giving too many warnings.
+
 # huxtable 5.5.5
 
 * Bugfix: quarto cross-referencing doesn't work for PDF with quarto version
@@ -6,11 +10,13 @@
   caller environment.
 * huxtable 5.5.4 was never released due to failing a reverse dependency check.
 
+
 # huxtable 5.5.3
 
 * Bugfix: disable quarto styling on HTML tables. You can reenable quarto
   processing with `options(huxtable.quarto_process = TRUE)`.
 * Bugfix: borders weren't working with merged cells in Word documents.
+
 
 # huxtable 5.5.2
 
