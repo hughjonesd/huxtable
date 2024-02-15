@@ -212,7 +212,9 @@ make_label <- function (ht) {
 
   has_knitr <- requireNamespace("knitr", quietly = TRUE)
   chunk_label <- if (has_knitr) knitr::opts_current$get("label") else NULL
-  if (grepl("^unnamed-chunk", chunk_label)) chunk_label <- NULL
+  if (length(chunk_label) > 0 && grepl("^unnamed-chunk", chunk_label)) {
+    chunk_label <- NULL
+  }
 
   if (is.na(lab) &&
       getOption("huxtable.autolabel", TRUE) &&
