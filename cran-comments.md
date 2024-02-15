@@ -1,6 +1,5 @@
 
-Bugfix release to workaround a regression from quarto 1.4.
-Resubmission to fix an uncaught reverse dependency regression.
+Release for a serious bug.
 
 ## Test environments
 
@@ -11,7 +10,7 @@ Resubmission to fix an uncaught reverse dependency regression.
 
 ## R CMD check results
 
-This resubmission was rechecked and was OK on all platforms.
+OK on all platforms.
 
 ## revdepcheck results
 

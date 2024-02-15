@@ -43,8 +43,10 @@ chk <- devtools::check(
 
 # manual section --------
 
-# run checks
+# may not work; if so just run the script in the main window.
+rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_results")
 
+# run checks
 devtools::check_mac_release()
 
 # asks manual questions
@@ -53,8 +55,6 @@ devtools::check_win_devel()
 # asks manual questions
 devtools::check_win_release()
 
-# may not work; if so just run the script in the main window.
-rstudioapi::jobRunScript("check-reverse-dependencies.R", exportEnv = "revdep_results")
 
 
 # update CRAN-comments.md
