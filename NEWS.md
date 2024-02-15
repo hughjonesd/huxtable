@@ -1,6 +1,8 @@
-# huxtable (development version)
+
+# huxtable 5.5.6
 
 * Bugfix: quarto cross-referencing was giving too many warnings.
+
 
 # huxtable 5.5.5
 

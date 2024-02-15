@@ -7,6 +7,12 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable 5.5.6}{
+\itemize{
+\item Bugfix: quarto cross-referencing was giving too many warnings.
+}
+}
+
 \section{huxtable 5.5.5}{
 \itemize{
 \item Bugfix: quarto cross-referencing doesn’t work for PDF with quarto
