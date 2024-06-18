@@ -95,7 +95,7 @@ system("rmdir Meta")
 # Build a version for CRAN:
 pkgbuild::build(clean_doc = FALSE, manual = TRUE, vignettes = FALSE)
 # Check you have build/vignettes.rds in the tarfile
-system("tar -ztvf ../huxtable_5.5.4.tar.gz | grep build")
+system("tar -ztvf ../huxtable_x.y.z.tar.gz | grep build")
 # Submit via web form. (You could also run through the devtools::release()
 # questions just to be safe!)
 
