@@ -8,6 +8,7 @@ html-table-processing: none
 
 Quarto version: `r quarto::quarto_version()`.
 
+
 # Builtin huxtable labels/captions
 
 ```{r}
@@ -47,4 +48,32 @@ jams
 
 Quarto reference to @tbljams2.
 LaTeX reference to \ref{tbljams2}.
+
+
+# Huxtable label, quarto caption
+
+```{r}
+#| tbl-cap: Table of Jams 3
+
+data(jams) # clean version
+label(jams) <- "tbl-jams3"
+jams
+```
+
+Quarto reference to @tbl-jams3.
+LaTeX reference to \ref{tbl-jams3}.
+
+
+# Huxtable label, no caption
+
+```{r}
+
+data(jams) # clean version
+label(jams) <- "tbl-jams4"
+jams
+```
+
+Quarto reference to @tbl-jams4.
+LaTeX reference to \ref{tbl-jams4}.
+
 

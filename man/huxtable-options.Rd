@@ -59,3 +59,15 @@ example, to center-align \code{Date} objects you could set
 \code{list(..., Date = "center", ...)}.
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://hughjonesd.github.io/huxtable/}
+  \item Report bugs at \url{https://github.com/hughjonesd/huxtable/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
+
+}

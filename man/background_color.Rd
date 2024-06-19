@@ -54,8 +54,8 @@ map_background_color(jams,
 \seealso{
 Other formatting functions: 
 \code{\link{bold}()},
-\code{\link{font_size}()},
 \code{\link{font}()},
+\code{\link{font_size}()},
 \code{\link{na_string}()},
 \code{\link{number_format}()},
 \code{\link{text_color}()}

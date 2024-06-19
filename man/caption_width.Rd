@@ -33,7 +33,7 @@ caption_width(jams)
 }
 \seealso{
 Other caption properties: 
-\code{\link{caption_pos}()},
-\code{\link{caption}()}
+\code{\link{caption}()},
+\code{\link{caption_pos}()}
 }
 \concept{caption properties}

@@ -7,6 +7,10 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+
+}
+
 \section{huxtable 5.5.6}{
 \itemize{
 \item Bugfix: quarto cross-referencing was giving too many warnings.
@@ -858,3 +862,15 @@ with \code{ggplot2}.
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://hughjonesd.github.io/huxtable/}
+  \item Report bugs at \url{https://github.com/hughjonesd/huxtable/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
+
+}

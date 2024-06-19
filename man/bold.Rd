@@ -55,8 +55,8 @@ map_bold(jams,
 \seealso{
 Other formatting functions: 
 \code{\link{background_color}()},
-\code{\link{font_size}()},
 \code{\link{font}()},
+\code{\link{font_size}()},
 \code{\link{na_string}()},
 \code{\link{number_format}()},
 \code{\link{text_color}()}

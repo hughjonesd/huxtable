@@ -101,8 +101,8 @@ in \link{huxtable-options} for pretty-printing minus signs.
 Other formatting functions: 
 \code{\link{background_color}()},
 \code{\link{bold}()},
-\code{\link{font_size}()},
 \code{\link{font}()},
+\code{\link{font_size}()},
 \code{\link{na_string}()},
 \code{\link{text_color}()}
 }

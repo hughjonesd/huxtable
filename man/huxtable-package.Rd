@@ -51,3 +51,15 @@ To report a bug, or suggest an enhancement, visit
 \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://hughjonesd.github.io/huxtable/}
+  \item Report bugs at \url{https://github.com/hughjonesd/huxtable/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
+
+}
