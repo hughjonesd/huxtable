@@ -215,20 +215,18 @@ NULL
 #'   like `label: tbl-foo` and refer to them via `@tbl-foo`.
 #'
 #'   In quarto versions 1.4 and above, when compiling to PDF,
-#'   quarto cross-referencing no longer works, and labels starting with
-#'   `tbl-` will cause an error. (This is a quarto
-#'   issue.) Instead, set labels within huxtable using [label()] or
+#'   quarto cross-referencing no longer works.
+#'   Instead, set labels within huxtable using [label()] or
 #'   [set_label()] and refer to them with TeX-only referencing using
-#'   `\ref{label}`. You must also set a caption, either via quarto or via
-#'   huxtable.
+#'   `\ref{label}`. You must also set a caption.
 #'
 #'   Here's an example:
 #'
 #'   ````
-#'   A reference to Table \ref{tab:jams}.
+#'   A reference to Table \ref{tbl-jams}.
 #'
 #'   ```{r}
-#'   label(jams) <- "tab:jams"
+#'   label(jams) <- "tbl-jams"
 #'   caption(jams) <- "Some jams"
 #'   jams
 #'   ```

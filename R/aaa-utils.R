@@ -224,10 +224,9 @@ make_label <- function (ht) {
   }
 
   if (! is.null(chunk_label) &&
-      are_we_in_quarto() &&
-      requireNamespace("quarto", quietly = TRUE) &&
-      quarto::quarto_version() >= "1.4" &&
-      getOption("huxtable.knitr_output_format", guess_knitr_output_format()) == "latex"
+      using_quarto("1.4") &&
+      getOption("huxtable.knitr_output_format",
+                guess_knitr_output_format()) == "latex"
       ) {
     msg <- paste(
       "quarto cell labels do not work with huxtable in TeX for quarto ",
@@ -246,9 +245,15 @@ make_label <- function (ht) {
 }
 
 
-are_we_in_quarto <- function () {
-  requireNamespace("knitr", quietly = TRUE) &&
-  ! is.null(knitr::opts_knit$get("quarto.version"))
+using_quarto <- function (min_version = NULL) {
+  if (! requireNamespace("knitr", quietly = TRUE)) return(FALSE)
+  if (is.null(knitr::opts_knit$get("quarto.version"))) return(FALSE)
+  if (is.null(min_version)) return(TRUE)
+
+  # this is risky since they could have quarto without the R package
+  if (! requireNamespace("quarto")) return(FALSE)
+  qv <- quarto::quarto_version()
+  return(qv >= min_version)
 }
 
 

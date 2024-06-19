@@ -141,6 +141,12 @@ build_latex_caption <- function (ht, lab) {
 
   lab <- if (is.na(lab) || cap_has_label) "" else sprintf("\\label{%s}\n", lab)
   cap <- paste(cap, lab)
+  if (using_quarto(min_version = "1.4") &&
+    getOption("huxtable.knitr_output_format",
+              guess_knitr_output_format()) == "latex") {
+    cap <- sprintf("\\QuartoMarkdownBase64{%s}",
+                   base64enc::base64encode(charToRaw(cap)))
+  }
 
   return(cap)
 }

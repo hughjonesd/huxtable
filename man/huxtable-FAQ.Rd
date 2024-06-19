@@ -82,19 +82,17 @@ other formats, simply use quarto cell labels
 like \code{label: tbl-foo} and refer to them via \verb{@tbl-foo}.
 
 In quarto versions 1.4 and above, when compiling to PDF,
-quarto cross-referencing no longer works, and labels starting with
-\verb{tbl-} will cause an error. (This is a quarto
-issue.) Instead, set labels within huxtable using \code{\link[=label]{label()}} or
+quarto cross-referencing no longer works.
+Instead, set labels within huxtable using \code{\link[=label]{label()}} or
 \code{\link[=set_label]{set_label()}} and refer to them with TeX-only referencing using
-\verb{\\ref\{label\}}. You must also set a caption, either via quarto or via
-huxtable.
+\verb{\\ref\{label\}}. You must also set a caption.
 
 Here's an example:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A reference to Table \\ref\{tab:jams\}.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A reference to Table \\ref\{tbl-jams\}.
 
 ```\{r\}
-label(jams) <- "tab:jams"
+label(jams) <- "tbl-jams"
 caption(jams) <- "Some jams"
 jams
 ```
@@ -140,4 +138,16 @@ the answers you get.
 I'd rather you asked on a public website. If you then email me a link, I
 may be able to help.
 }
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://hughjonesd.github.io/huxtable/}
+  \item Report bugs at \url{https://github.com/hughjonesd/huxtable/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
+
 }

@@ -1,17 +1,24 @@
 ---
 title: "Quarto tester"
-format: pdf
+format: 
+  pdf:
+    keep-tex: true
+html-table-processing: none
 ---
 
+Quarto version: `r quarto::quarto_version()`.
 
-Reference to @tbl-jams
+# Builtin huxtable labels/captions
 
 ```{r}
-#| tbl-cap: quarto cap
-#| label: tbl-jams
 library(huxtable)
-caption(jams) <- "huxtable caption"
+caption(jams) <- "Table of jams"
+label(jams) <- "tbl-jams"
 jams
+
+# 1.5.45
+# You need to enclose caption and label in \QuartoMarkdownBase64{}.
+# Then you can use any label, although Quarto processing still won't work.
 
 # 1.4.549
 # works with no label/caption at all
@@ -25,4 +32,19 @@ jams
 # works with quarto caption and label, so long as label is not tbl-
 ```
 
-Post-reference to \ref{jams}.
+Quarto reference to @tbl-jams.
+LaTeX reference to \ref{tbl-jams}.
+
+# Quarto labels/captions
+
+```{r}
+#| label: tbljams2
+#| tbl-cap: Table of Jams 2
+
+data(jams) # clean version
+jams
+```
+
+Quarto reference to @tbljams2.
+LaTeX reference to \ref{tbljams2}.
+
