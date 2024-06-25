@@ -251,7 +251,7 @@ using_quarto <- function (min_version = NULL) {
   if (is.null(min_version)) return(TRUE)
 
   # this is risky since they could have quarto without the R package
-  if (requireNamespace("quarto")) {
+  if (requireNamespace("quarto", quietly = TRUE)) {
     qv <- quarto::quarto_version()
   } else {
     quarto_path <- Sys.which("quarto")
