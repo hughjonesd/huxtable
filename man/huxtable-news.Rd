@@ -8,7 +8,9 @@
 This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
-
+\itemize{
+\item Bugfix: fix quarto referencing in quarto 1.5
+}
 }
 
 \section{huxtable 5.5.6}{

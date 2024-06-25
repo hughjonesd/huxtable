@@ -1,5 +1,6 @@
 # huxtable (development version)
 
+* Bugfix: fix quarto referencing in quarto 1.5
 
 # huxtable 5.5.6
 

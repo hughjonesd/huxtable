@@ -49,8 +49,7 @@
 #' \href{https://github.com/hughjonesd/huxtable/issues}{github}.
 #'
 #' @name huxtable-package
-#' @docType package
-NULL
+"_PACKAGE"
 
 
 #' Package options
@@ -119,8 +118,7 @@ NULL
 #'   `list(..., Date = "center", ...)`.
 #'
 #' @name huxtable-options
-#' @docType package
-NULL
+"_PACKAGE"
 
 
 
@@ -277,8 +275,7 @@ NULL
 #'   may be able to help.
 #'
 #' @name huxtable-FAQ
-#' @docType package
-NULL
+"_PACKAGE"
 
 
 
@@ -288,5 +285,4 @@ NULL
 #'
 #' @includeRmd NEWS.md
 #' @name huxtable-news
-#' @docType package
-NULL
+"_PACKAGE"
