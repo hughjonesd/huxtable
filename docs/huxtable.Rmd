@@ -846,7 +846,7 @@ Other options include `theme_basic()` and the randomized `theme_mondrian()`:
 theme_mondrian(jams)
 ```
 
-The ["themes" vignette](themes.html) shows all the available themes. Themes
+The ["themes" vignette](themes-html.html) shows all the available themes. Themes
 simply apply a set of styles to the huxtable.
 
 
@@ -1017,7 +1017,7 @@ huxreg(lm1, lm2, lm3)
 ```
 
 
-For more information see the ["huxreg" vignette](huxreg.html).
+For more information see the ["huxreg" vignette](huxreg-html.html).
 
 
 # Getting more information
