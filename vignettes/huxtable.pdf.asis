@@ -1,0 +1,6 @@
+%\VignetteIndexEntry{Introduction to huxtable}
+%\VignetteEngine{R.rsp::asis}
+
+%% If the *.asis file has a UTF-8 symbol (e.g. in
+%% %\VignetteIndexEntry{}), we must tell R about it
+%\VignetteEncoding{UTF-8}

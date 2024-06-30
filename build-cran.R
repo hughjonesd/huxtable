@@ -21,13 +21,36 @@ if (length(gdiff) > 0) stop('Working tree differs from last commit, please make 
 
 
 
-# Check vignette files are same in vignettes and docs ----------------------------------------------
+# Build vignettes manually ----------------------------------------------
 
+pdf_output_formats <- list(
+  "huxreg.Rmd"            = pdf_document(
+                              includes = includes(
+                                in_header = "placeins-header.tex"
+                              )
+                            ),
+  "huxtable.Rmd"          = pdf_document(
+                              latex_engine = "xelatex",
+                              toc = TRUE,
+                              toc_depth = 2,
+                              includes = includes(
+                                in_header = "placeins-header.tex"
+                              )
+                            ),
+  "design-principles.Rmd" = pdf_document()
+)
 
-for (f in list.files('vignettes', pattern = "(Rmd|cvs)$")) {
-  out <- system2('diff', args = c('-q', file.path('vignettes', f), file.path('docs', f)), stdout = TRUE)
-  if (length(out) > 0) stop(glue('vignettes and docs file {f} differs, please fix and commit!'))
+for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
+  filename <- basename(f)
+  message("Rendering ", f)
+  rmarkdown::render(f, output_format = "html_document",
+                    output_dir = "vignettes")
+  rmarkdown::render(f, output_format = pdf_output_formats[[filename]],
+                    output_dir = "vignettes")
 }
+setwd("vignettes")
+knitr::knit("../docs/themes.Rhtml", "themes.html")
+setwd("..")
 
 
 
@@ -72,9 +95,13 @@ tag(repository('.'), newtag, message = paste('CRAN release candidate for', v))
 system2('git', c('push', '--tags'))
 
 
+
 # now release!
 
 devtools::release()
+
+
+
 
 # Alternatively:
 # Uncomment !CRAN lines in huxtable vignette and save
