@@ -15,31 +15,27 @@ library(rmarkdown)
 # optionally checkout master, merge in the new branch (git merge website-x.y.z)
 # push to github
 
+
 pdf_output_formats <- list(
-  "huxreg.Rmd"            = pdf_document(
-                              includes = includes(
-                                in_header = "placeins-header.tex"
-                              )
-                            ),
-  "themes.Rmd"            = pdf_document(),
+  "design-principles.Rmd" = pdf_document(latex_engine = "xelatex"),
+  "huxreg.Rmd"            = pdf_document(latex_engine = "xelatex"),
   "huxtable.Rmd"          = pdf_document(
                               latex_engine = "xelatex",
                               toc = TRUE,
-                              toc_depth = 2,
-                              includes = includes(
-                                in_header = "placeins-header.tex"
-                              )
-                            ),
-  "design-principles.Rmd" = pdf_document()
+                              toc_depth = 2
+                            )
 )
-
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   filename <- basename(f)
   message("Rendering ", f)
-  rmarkdown::render(f, output_format = "html_document")
-  rmarkdown::render(f, output_format = pdf_output_formats[[filename]])
+  filename_no_ext <- sub("\\.Rmd$", "", filename)
+  rmarkdown::render(f,
+                    output_format = "html_document",
+                    output_file   = paste0(filename_no_ext, "-html"))
+  rmarkdown::render(f,
+                    output_format = pdf_output_formats[[filename]],
+                    output_file   = paste0(filename_no_ext, "-pdf"))
 }
-
 setwd('docs')
 knitr::knit("index.Rhtml", "index.html")
 knitr::knit("themes.Rhtml", "themes.html")
