@@ -43,13 +43,18 @@ pdf_output_formats <- list(
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   filename <- basename(f)
   message("Rendering ", f)
-  rmarkdown::render(f, output_format = "html_document",
-                    output_dir = "vignettes")
-  rmarkdown::render(f, output_format = pdf_output_formats[[filename]],
-                    output_dir = "vignettes")
+  filename_no_ext <- sub("\\.Rmd$", "", f)
+  rmarkdown::render(f,
+                    output_format = "html_document",
+                    output_dir    = "vignettes",
+                    output_file   = paste0(filename_no_ext, "-html"))
+  rmarkdown::render(f,
+                    output_format = pdf_output_formats[[filename]],
+                    output_dir    = "vignettes",
+                    output_file   = paste0(filename_no_ext, "-pdf"))
 }
 setwd("vignettes")
-knitr::knit("../docs/themes.Rhtml", "themes.html")
+knitr::knit("../docs/themes.Rhtml", "themes-html.html")
 setwd("..")
 
 
