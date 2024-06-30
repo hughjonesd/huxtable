@@ -144,8 +144,7 @@ build_latex_caption <- function (ht, lab) {
   if (using_quarto(min_version = "1.4") &&
     getOption("huxtable.knitr_output_format",
               guess_knitr_output_format()) == "latex") {
-    cap <- sprintf("\\QuartoMarkdownBase64{%s}",
-                   base64enc::base64encode(charToRaw(cap)))
+    cap <- quarto_wrap_markdown_latex(cap)
   }
 
   return(cap)
@@ -550,7 +549,11 @@ maybe_markdown_fence <- function (text) {
   }
 
   if (fence) {
-    text <- paste("\n\n```{=latex}\n", text, "\n```\n\n")
+    text <- paste(
+      "\n\n```{=latex}\n",
+      text,
+      "\n```\n\n"
+    )
   }
 
   return(text)

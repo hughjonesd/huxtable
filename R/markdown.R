@@ -43,13 +43,45 @@ set_markdown_contents <- function (ht, row, col, value) {
 }
 
 
+render_markdown_html <- function (text) {
+  quarto_14 <- using_quarto("1.4")
+  defer_to_quarto <- getOption("huxtable.quarto_markdown", FALSE)
+  if (quarto_14 && defer_to_quarto) {
+    quarto_wrap_markdown_html(text)
+  } else {
+    commonmark::markdown_html(text, extensions = "strikethrough")
+  }
+}
+
+
+render_markdown_latex <- function (text) {
+  quarto_14 <- using_quarto("1.4")
+  defer_to_quarto <- getOption("huxtable.quarto_markdown", FALSE)
+  if (quarto_14 && defer_to_quarto) {
+    quarto_wrap_markdown_latex(text)
+  } else {
+    commonmark::markdown_latex(text, extensions = "strikethrough")
+  }
+}
+
+
+quarto_wrap_markdown_html <- function (text) {
+  encoded <- base64enc::base64encode(charToRaw(text))
+  sprintf("<span data-qmd-base64=\"%s\">", encoded)
+}
+
+
+quarto_wrap_markdown_latex <- function (text) {
+  encoded <- base64enc::base64encode(charToRaw(text))
+  sprintf("\\QuartoMarkdownBase64{%s}", encoded)
+}
+
+
 render_markdown <- function (text, type) {
   crayon_installed <- requireNamespace("crayon", quietly = TRUE)
   switch(type,
-    "html"     = vapply(text, commonmark::markdown_html,
-                   FUN.VALUE = character(1), extensions = "strikethrough"),
-    "latex"    = vapply(text, commonmark::markdown_latex,
-                   FUN.VALUE = character(1), extensions = "strikethrough"),
+    "html"     = vapply(text, render_markdown_html, FUN.VALUE = character(1)),
+    "latex"    = vapply(text, render_markdown_latex, FUN.VALUE = character(1)),
     "markdown" = text,
     "rtf"      = vapply(text,
                    translate_fun(MarkdownRTFTranslator),

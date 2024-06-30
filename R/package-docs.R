@@ -105,9 +105,13 @@
 #'   macro from the "siunitx" package to align numbers when `align(ht)` is `"."`
 #'   or similar. See [align()] for details. The default is `FALSE`.
 #'
-#'   `options("huxtable.quarto_process")`. If `TRUE`, enables quarto processing
+#' * `options("huxtable.quarto_process")`. If `TRUE`, enables quarto processing
 #'   of HTML tables. This overrides some huxtable styles, but may allow quarto
 #'   to do other things, e.g. process citations correctly. The default is `FALSE`.
+#'
+#' * `options("huxtable.quarto_markdown")`. If `TRUE`, defers handling of
+#'   [markdown()] cells to quarto in quarto documents. This may allow quarto
+#'   to e.g. process citations and footnotes. The default is `FALSE`.
 #'
 #' * `options("huxtable.autoformat_number_format")` and
 #'   `options("huxtable.autoformat_align")` are lists. The list names are base R

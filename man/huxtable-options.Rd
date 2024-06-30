@@ -46,10 +46,12 @@ overridden by \code{options("huxtable.latex_siunitx_align")}.
 \item \code{options("huxtable.latex_siunitx_align")}. If \code{TRUE}, uses the \verb{\\tablenum}
 macro from the "siunitx" package to align numbers when \code{align(ht)} is \code{"."}
 or similar. See \code{\link[=align]{align()}} for details. The default is \code{FALSE}.
-
-\code{options("huxtable.quarto_process")}. If \code{TRUE}, enables quarto processing
+\item \code{options("huxtable.quarto_process")}. If \code{TRUE}, enables quarto processing
 of HTML tables. This overrides some huxtable styles, but may allow quarto
 to do other things, e.g. process citations correctly. The default is \code{FALSE}.
+\item \code{options("huxtable.quarto_markdown")}. If \code{TRUE}, defers handling of
+\code{\link[=markdown]{markdown()}} cells to quarto in quarto documents. This may allow quarto
+to e.g. process citations and footnotes. The default is \code{FALSE}.
 \item \code{options("huxtable.autoformat_number_format")} and
 \code{options("huxtable.autoformat_align")} are lists. The list names are base R
 classes. \code{\link[=huxtable]{huxtable()}} with \code{autoformat = TRUE} will set \code{number_format()} and
