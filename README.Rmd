@@ -26,7 +26,6 @@ knitr::opts_chunk$set(
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/huxtable)](https://cran.r-project.org/package=huxtable)
 [![CRAN Downloads Per Month](http://cranlogs.r-pkg.org/badges/huxtable)](https://CRAN.R-project.org/package=huxtable)
   [![R build status](https://github.com/hughjonesd/huxtable/workflows/R-CMD-check/badge.svg)](https://github.com/hughjonesd/huxtable/actions)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/huxtable?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/huxtable)
 [![Coverage Status](https://img.shields.io/codecov/c/github/hughjonesd/huxtable/master.svg)](https://app.codecov.io/github/hughjonesd/huxtable?branch=master)
 <!-- badges: end -->
   
