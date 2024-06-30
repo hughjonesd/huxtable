@@ -110,7 +110,7 @@
 #'   to do other things, e.g. process citations correctly. The default is `FALSE`.
 #'
 #' * `options("huxtable.quarto_markdown")`. If `TRUE`, defers handling of
-#'   [markdown()] cells to quarto in quarto documents. This may allow quarto
+#'   [markdown()] cells to quarto in LaTeX documents. This may allow quarto
 #'   to e.g. process citations and footnotes. The default is `FALSE`.
 #'
 #' * `options("huxtable.autoformat_number_format")` and

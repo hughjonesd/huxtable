@@ -196,6 +196,7 @@ to_html.huxtable <- function(ht, ...) {
   cells_html <- paste0(cells_html, collapse = "")
 
   res <- paste0(table_start, cols_html, cells_html, "</table>\n")
+
   return(res)
 }
 

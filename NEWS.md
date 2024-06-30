@@ -1,6 +1,9 @@
 # huxtable (development version)
 
-* Bugfix: fix quarto referencing in quarto 1.5
+* The new `"huxtable.quarto_markdown"` option lets quarto process markdown 
+  created by `markdown()` cells in LaTeX documents. 
+* Bugfix: fix quarto referencing in quarto 1.5.
+
 
 # huxtable 5.5.6
 
