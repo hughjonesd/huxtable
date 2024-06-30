@@ -266,7 +266,7 @@
 #'   or a feature request, please report it to
 #'   <https://github.com/hughjonesd/huxtable/issues>.
 #'   Otherwise, ask a question on [StackOverflow](https://stackoverflow.com) or
-#'   <https://community.rstudio.com>. That way, other people will benefit from
+#'   <https://forum.posit.co>. That way, other people will benefit from
 #'   the answers you get.
 #'
 #' * Can I email you directly?
