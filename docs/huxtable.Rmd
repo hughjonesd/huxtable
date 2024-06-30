@@ -27,20 +27,18 @@ library(knitr)
 library(dplyr)
 library(huxtable)
 options(
-#        huxtable.latex_use_fontspec  = TRUE, #!CRAN
+        huxtable.latex_use_fontspec  = TRUE, #!CRAN
         huxtable.knit_print_df       = FALSE, 
         huxtable.add_colnames        = TRUE  # needed when run by testthat
       )
 
 is_latex <- guess_knitr_output_format() == "latex"
-# # is_latex <- TRUE                                                 # !CRAN
-# knitr::knit_hooks$set(                                             # !CRAN
-#   barrier = function(before, options, envir) {                     # !CRAN
-#     if (! before && is_latex) knitr::asis_output("\\FloatBarrier") # !CRAN
-#   }                                                                # !CRAN
-# )                                                                  # !CRAN
-# 
-# if (is_latex) knitr::opts_chunk$set(barrier = TRUE)                # !CRAN 
+knitr::knit_hooks$set(                                             
+  barrier = function(before, options, envir) {                     
+    if (! before && is_latex) knitr::asis_output("\\FloatBarrier") 
+  }                                                                
+)   
+if (is_latex) knitr::opts_chunk$set(barrier = TRUE)                 
 
 ```
 

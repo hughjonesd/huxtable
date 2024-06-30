@@ -24,26 +24,18 @@ if (length(gdiff) > 0) stop('Working tree differs from last commit, please make 
 # Build vignettes manually ----------------------------------------------
 
 pdf_output_formats <- list(
-  "huxreg.Rmd"            = pdf_document(
-                              includes = includes(
-                                in_header = "placeins-header.tex"
-                              )
-                            ),
+  "design-principles.Rmd" = pdf_document(latex_engine = "xelatex"),
+  "huxreg.Rmd"            = pdf_document(latex_engine = "xelatex"),
   "huxtable.Rmd"          = pdf_document(
                               latex_engine = "xelatex",
                               toc = TRUE,
-                              toc_depth = 2,
-                              includes = includes(
-                                in_header = "placeins-header.tex"
-                              )
-                            ),
-  "design-principles.Rmd" = pdf_document()
+                              toc_depth = 2
+                            )
 )
-
 for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
   filename <- basename(f)
   message("Rendering ", f)
-  filename_no_ext <- sub("\\.Rmd$", "", f)
+  filename_no_ext <- sub("\\.Rmd$", "", filename)
   rmarkdown::render(f,
                     output_format = "html_document",
                     output_dir    = "vignettes",
