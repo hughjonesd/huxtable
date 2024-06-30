@@ -1,0 +1,28 @@
+---
+title: "Untitled"
+html-table-processing: none
+format: 
+  pdf:
+    keep-tex: true
+    include-in-header:
+      - text: |
+          \usepackage{threeparttable}
+---
+
+```{r}
+#| results: asis
+#| echo: false
+#| html-table-processing: none
+library(fixest)
+
+mod <- feols(log(Euros) ~ dist_km | Year, 
+             data = trade)
+
+etable(
+  mod,
+  tex = TRUE,
+  label = "tbltest"
+)
+
+```
+\ref{tbltest}

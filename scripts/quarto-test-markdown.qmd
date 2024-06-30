@@ -1,0 +1,21 @@
+---
+title: "Quarto markdown tester"
+format: 
+  pdf:
+    keep-tex: true
+  html:
+    subtitle: "HTML version"
+html-table-processing: none
+---
+
+Quarto version: `r quarto::quarto_version()`.
+
+```{r}
+library(huxtable)
+oo <- options(huxtable.quarto_markdown = TRUE)
+
+jams |> 
+  set_markdown_contents(1, 1, "**Bold type** and a footnote^[Inline note.]")
+
+options(oo)
+```
