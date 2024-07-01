@@ -96,11 +96,11 @@ huxtable commands.
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
 
-diamond_regs %>% 
+diamond_regs |> 
       map_background_color(-1, -1, by_regex(
         "\\*" = "yellow"
-      )) %>% 
-      set_italic(final(1), 1) %>% 
+      )) |> 
+      set_italic(final(1), 1) |> 
       set_caption("Linear regressions of diamond prices")
 
 ```
@@ -141,8 +141,8 @@ from your models by `broom::glance`:
 ```{r}
 gl <- as_hux(broom::glance(lm1))
 
-gl %>% 
-      restack_down(cols = 3, on_remainder = "fill") %>% 
+gl |> 
+      restack_down(cols = 3, on_remainder = "fill") |> 
       set_bold(odds, everywhere)
 ```
 
