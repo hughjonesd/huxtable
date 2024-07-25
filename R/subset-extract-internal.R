@@ -163,7 +163,6 @@ replace_properties <- function (ht, i, j, value) {
 #' @param new_ht New huxtable, row/colspans not yet set
 #' @param old_ht Subsetted huxtable
 #' @param rows,cols Which rows/cols are being subsetted
-#' @param cols
 #'
 #' @return The new huxtable with row and colspans set correctly.
 #' @noRd
@@ -184,7 +183,7 @@ arrange_spans <- function (
 
   dc <- display_cells(old_ht)
   stride <- max(dim(old_ht))
-  merge_sets <- dc$display_row * stride + dc$display_col
+  merge_sets <- as.double(dc$display_row) * stride + dc$display_col
   dim(merge_sets) <- dim(old_ht)
 
   # == create within-span indices ==
@@ -201,7 +200,6 @@ arrange_spans <- function (
   # TODO: bug is that if you repeat rows, they will have the same
   # merge_set and colspan will erroneously be set on them
   merge_sets <- merge_sets[rows, cols, drop = FALSE]
-
 
   # == calculate row/col_number for new_ht ==
   row_number <- row_number[rows, cols, drop = FALSE]
