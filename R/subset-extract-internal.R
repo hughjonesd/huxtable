@@ -1,3 +1,6 @@
+
+
+
 #' Delete columns by numeric indices
 #'
 #' @param ht A huxtable
@@ -5,7 +8,7 @@
 #'
 #' @return The modified huxtable
 #' @noRd
-delete_cols <- function(ht, idx) {
+delete_cols <- function (ht, idx) {
   if (any(is.na(idx))) stop("Tried to delete a non-existent column")
   subset_idx <- seq_len(ncol(ht))[-idx]
 
@@ -21,10 +24,8 @@ delete_cols <- function(ht, idx) {
 #' @return The huxtable with columns removed/reordered
 #' @noRd
 subset_cols <- function(ht, idx) {
-  assert_that(
-    is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
-    all(idx <= ncol(ht))
-  )
+  assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
+        all(idx <= ncol(ht)))
 
   res <- as.data.frame(ht)[, idx, drop = FALSE]
   res <- new_huxtable(res)
@@ -69,10 +70,8 @@ subset_cols <- function(ht, idx) {
 #' @return The huxtable with rows removed/reordered
 #' @noRd
 subset_rows <- function(ht, idx) {
-  assert_that(
-    is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
-    all(idx <= nrow(ht))
-  )
+  assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
+        all(idx <= nrow(ht)))
 
   res <- as.data.frame(ht)[idx, , drop = FALSE]
   res <- new_huxtable(res)
@@ -108,13 +107,13 @@ subset_rows <- function(ht, idx) {
 }
 
 
-replace_properties <- function(ht, i, j, value) {
+replace_properties <- function (ht, i, j, value) {
   assert_that(
-    is_hux(ht), is_hux(value),
-    is.numeric(i), all(i >= 1L), all(i <= nrow(ht)),
-    is.numeric(j), all(j >= 1L), all(j <= ncol(ht)),
-    length(i) == nrow(value), length(j) == ncol(value)
-  )
+          is_hux(ht), is_hux(value),
+          is.numeric(i), all(i >= 1L), all(i <= nrow(ht)),
+          is.numeric(j), all(j >= 1L), all(j <= ncol(ht)),
+          length(i) == nrow(value), length(j) == ncol(value)
+        )
   for (a in huxtable_cell_attrs) {
     attr(ht, a)[i, j] <- attr(value, a)
   }
@@ -127,7 +126,7 @@ replace_properties <- function(ht, i, j, value) {
     # the old col_widths are redistributed accordingly
     new_cw <- col_width(ht)[j]
     if (is.numeric(old_cw) && is.numeric(new_cw)) {
-      col_width(ht)[j] <- new_cw / sum(new_cw) * sum(old_cw)
+      col_width(ht)[j] <- new_cw/sum(new_cw) * sum(old_cw)
     }
   }
   if (identical(j, seq_len(ncol(ht)))) {
@@ -137,7 +136,7 @@ replace_properties <- function(ht, i, j, value) {
     }
     new_rh <- row_height(ht)[j]
     if (is.numeric(old_rh) && is.numeric(new_rh)) {
-      row_height(ht)[j] <- new_rh / sum(new_rh) * sum(old_rh)
+      row_height(ht)[j] <- new_rh/sum(new_rh) * sum(old_rh)
     }
   }
 
@@ -145,7 +144,7 @@ replace_properties <- function(ht, i, j, value) {
   # top_border(ht)[1, 2] <- top_border(value)
   # becomes
   # ht <- `top_border<-`(ht, `[<-`(top_border(ht), 1, 2, top_border(value)))
-  replace_props <- function(getter, setter) {
+  replace_props <- function (getter, setter) {
     ht <<- setter(ht, `[<-`(getter(ht), i, j, value = getter(value)))
   }
   mapply(
