@@ -23,7 +23,7 @@ delete_cols <- function (ht, idx) {
 #'
 #' @return The huxtable with columns removed/reordered
 #' @noRd
-subset_cols <- function(ht, idx) {
+subset_cols <- function (ht, idx) {
   assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
         all(idx <= ncol(ht)))
 
@@ -69,7 +69,7 @@ subset_cols <- function(ht, idx) {
 #'
 #' @return The huxtable with rows removed/reordered
 #' @noRd
-subset_rows <- function(ht, idx) {
+subset_rows <- function (ht, idx) {
   assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
         all(idx <= nrow(ht)))
 
