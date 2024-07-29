@@ -1,6 +1,3 @@
-
-
-
 #' Delete columns by numeric indices
 #'
 #' @param ht A huxtable
@@ -8,7 +5,7 @@
 #'
 #' @return The modified huxtable
 #' @noRd
-delete_cols <- function (ht, idx) {
+delete_cols <- function(ht, idx) {
   if (any(is.na(idx))) stop("Tried to delete a non-existent column")
   subset_idx <- seq_len(ncol(ht))[-idx]
 
@@ -23,9 +20,11 @@ delete_cols <- function (ht, idx) {
 #'
 #' @return The huxtable with columns removed/reordered
 #' @noRd
-subset_cols <- function (ht, idx) {
-  assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
-        all(idx <= ncol(ht)))
+subset_cols <- function(ht, idx) {
+  assert_that(
+    is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
+    all(idx <= ncol(ht))
+  )
 
   res <- as.data.frame(ht)[, idx, drop = FALSE]
   res <- new_huxtable(res)
@@ -69,9 +68,11 @@ subset_cols <- function (ht, idx) {
 #'
 #' @return The huxtable with rows removed/reordered
 #' @noRd
-subset_rows <- function (ht, idx) {
-  assert_that(is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
-        all(idx <= nrow(ht)))
+subset_rows <- function(ht, idx) {
+  assert_that(
+    is_huxtable(ht), is.numeric(idx), all(idx >= 1L),
+    all(idx <= nrow(ht))
+  )
 
   res <- as.data.frame(ht)[idx, , drop = FALSE]
   res <- new_huxtable(res)
@@ -107,13 +108,13 @@ subset_rows <- function (ht, idx) {
 }
 
 
-replace_properties <- function (ht, i, j, value) {
+replace_properties <- function(ht, i, j, value) {
   assert_that(
-          is_hux(ht), is_hux(value),
-          is.numeric(i), all(i >= 1L), all(i <= nrow(ht)),
-          is.numeric(j), all(j >= 1L), all(j <= ncol(ht)),
-          length(i) == nrow(value), length(j) == ncol(value)
-        )
+    is_hux(ht), is_hux(value),
+    is.numeric(i), all(i >= 1L), all(i <= nrow(ht)),
+    is.numeric(j), all(j >= 1L), all(j <= ncol(ht)),
+    length(i) == nrow(value), length(j) == ncol(value)
+  )
   for (a in huxtable_cell_attrs) {
     attr(ht, a)[i, j] <- attr(value, a)
   }
@@ -126,7 +127,7 @@ replace_properties <- function (ht, i, j, value) {
     # the old col_widths are redistributed accordingly
     new_cw <- col_width(ht)[j]
     if (is.numeric(old_cw) && is.numeric(new_cw)) {
-      col_width(ht)[j] <- new_cw/sum(new_cw) * sum(old_cw)
+      col_width(ht)[j] <- new_cw / sum(new_cw) * sum(old_cw)
     }
   }
   if (identical(j, seq_len(ncol(ht)))) {
@@ -136,7 +137,7 @@ replace_properties <- function (ht, i, j, value) {
     }
     new_rh <- row_height(ht)[j]
     if (is.numeric(old_rh) && is.numeric(new_rh)) {
-      row_height(ht)[j] <- new_rh/sum(new_rh) * sum(old_rh)
+      row_height(ht)[j] <- new_rh / sum(new_rh) * sum(old_rh)
     }
   }
 
@@ -144,7 +145,7 @@ replace_properties <- function (ht, i, j, value) {
   # top_border(ht)[1, 2] <- top_border(value)
   # becomes
   # ht <- `top_border<-`(ht, `[<-`(top_border(ht), 1, 2, top_border(value)))
-  replace_props <- function (getter, setter) {
+  replace_props <- function(getter, setter) {
     ht <<- setter(ht, `[<-`(getter(ht), i, j, value = getter(value)))
   }
   mapply(
@@ -167,13 +168,13 @@ replace_properties <- function (ht, i, j, value) {
 #'
 #' @return The new huxtable with row and colspans set correctly.
 #' @noRd
-arrange_spans <- function (
-        new_ht,
-        old_ht,
-        rows = seq_len(nrow(old_ht)),
-        cols = seq_len(ncol(old_ht))
-      ) {
-  if (ncol(new_ht) == 0 || nrow(new_ht) == 0) return(new_ht)
+arrange_spans <- function(new_ht,
+                          old_ht,
+                          rows = seq_len(nrow(old_ht)),
+                          cols = seq_len(ncol(old_ht))) {
+  if (ncol(new_ht) == 0 || nrow(new_ht) == 0) {
+    return(new_ht)
+  }
 
   # == create merge_sets ==
   # a matrix representing spans in old_ht
@@ -181,16 +182,15 @@ arrange_spans <- function (
   # e.g. 1 1
   #      2 3
   # would represent a cell with colspan 2 in the first row
-
   dc <- display_cells(old_ht)
-  stride <- max(dim(old_ht))
-  merge_sets <- dc$display_row * stride + dc$display_col
-  dim(merge_sets) <- dim(old_ht)
+  merge_sets <- array(
+    data = c(dc$display_row, dc$display_col),
+    dim = c(nrow(old_ht), ncol(old_ht), 2)
+  )
 
   # == create within-span indices ==
   # the first row within a span has row_number 1, the second is 2 etc.
   # same for cols and col_number
-
   row_number <- dc$row - dc$display_row + 1L
   col_number <- dc$col - dc$display_col + 1L
   dim(row_number) <- dim(col_number) <- dim(old_ht)
@@ -200,16 +200,17 @@ arrange_spans <- function (
   # will also be rectangles - not necessarily contiguous though.
   # TODO: bug is that if you repeat rows, they will have the same
   # merge_set and colspan will erroneously be set on them
-  merge_sets <- merge_sets[rows, cols, drop = FALSE]
-
+  merge_sets <- merge_sets[rows, cols, , drop = FALSE]
 
   # == calculate row/col_number for new_ht ==
   row_number <- row_number[rows, cols, drop = FALSE]
   col_number <- col_number[rows, cols, drop = FALSE]
 
   # == add 0s to ensure end_row/col is ok when a span goes to the end of the row
-  merge_sets <- rbind(merge_sets, 0)
-  merge_sets <- cbind(merge_sets, 0)
+  new_merge_sets_dims <- c(dim(merge_sets)[1:2] + 1, dim(merge_sets)[3])
+  new_merge_sets <- array(0, dim = new_merge_sets_dims)
+  new_merge_sets[-new_merge_sets_dims[1], -new_merge_sets_dims[2], ] <- merge_sets
+  merge_sets <- new_merge_sets
   row_number <- rbind(row_number, 0)
   row_number <- cbind(row_number, 0)
   col_number <- rbind(col_number, 0)
@@ -224,12 +225,18 @@ arrange_spans <- function (
   col_seq <- seq_len(ncol(new_ht) + 1)
   done <- matrix(FALSE, nrow(new_ht), ncol(new_ht))
   for (i in seq_len(nrow(new_ht))) for (j in seq_len(ncol(new_ht))) {
-    ms <- merge_sets[i, j]
-    if (done[i, j]) next  # changed by prev cell
+    ms <- merge_sets[i, j, ]
+    if (done[i, j]) next # changed by prev cell
     # go down from i/j until you find a different merge set,
     # or you have seen ALL the row_numbers/col_numbers
-    end_row <- min(which(row_seq >= i & merge_sets[, j] != ms)) - 1
-    end_col <- min(which(col_seq >= j & merge_sets[i, ] != ms)) - 1
+    end_row <- min(which(
+      row_seq >= i &
+        apply(merge_sets[, j, ], MARGIN = 1, FUN = \(coords) any(coords != ms))
+    )) - 1
+    end_col <- min(which(
+      col_seq >= j &
+        apply(merge_sets[i, , ], MARGIN = 1, FUN = \(coords) any(coords != ms))
+    )) - 1
 
     rn <- row_number[seq(i, end_row), j]
     cn <- col_number[i, seq(j, end_col)]
