@@ -1,9 +1,9 @@
 
-Release for a serious bug.
+Update with bugfix.
 
 ## Test environments
 
-* local OS X install (R 4.3.2)
+* local OS X install (R 4.4.1)
 * win-builder release/devel
 * mac-builder release
 
@@ -14,6 +14,6 @@ OK on all platforms.
 
 ## revdepcheck results
 
-21 out of 21 packages were OK.
+22 out of 22 packages were OK.
 
 
