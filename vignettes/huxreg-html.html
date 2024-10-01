@@ -11,7 +11,7 @@
 
 <meta name="author" content="David Hugh-Jones" />
 
-<meta name="date" content="2024-06-30" />
+<meta name="date" content="2024-10-01" />
 
 <title>Regression Tables with huxreg</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">Regression Tables with huxreg</h1>
 <h4 class="author">David Hugh-Jones</h4>
-<h4 class="date">2024-06-30</h4>
+<h4 class="date">2024-10-01</h4>
 
 </div>
 
@@ -496,11 +496,11 @@ highlight the cell background of significant coefficients. All of these
 are just standard huxtable commands.</p>
 <pre class="r"><code>suppressPackageStartupMessages(library(dplyr))
 
-diamond_regs %&gt;% 
+diamond_regs |&gt; 
       map_background_color(-1, -1, by_regex(
         &quot;\\*&quot; = &quot;yellow&quot;
-      )) %&gt;% 
-      set_italic(final(1), 1) %&gt;% 
+      )) |&gt; 
+      set_italic(final(1), 1) |&gt; 
       set_caption(&quot;Linear regressions of diamond prices&quot;)</code></pre>
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <caption style="caption-side: top; text-align: center;">Linear regressions of diamond prices</caption><col><col><col><col><tr>
@@ -639,8 +639,8 @@ Valid values are anything returned from your models by
 <code>broom::glance</code>:</p>
 <pre class="r"><code>gl &lt;- as_hux(broom::glance(lm1))
 
-gl %&gt;% 
-      restack_down(cols = 3, on_remainder = &quot;fill&quot;) %&gt;% 
+gl |&gt; 
+      restack_down(cols = 3, on_remainder = &quot;fill&quot;) |&gt; 
       set_bold(odds, everywhere)</code></pre>
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <col><col><col><tr>
@@ -873,8 +873,19 @@ example, you might want to use robust standard errors.</p>
 <p>One way to do this is to pass a <code>tidy</code>-able test object
 into <code>huxreg</code>. The function <code>coeftest</code> in the
 “lmtest” package has <code>tidy</code> methods defined:</p>
-<pre class="r"><code>library(lmtest)
-library(sandwich)
+<pre class="r"><code>library(lmtest)</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lmtest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:git2r&#39;:
+## 
+##     reset</code></pre>
+<pre class="r"><code>library(sandwich)
 lm_robust &lt;- coeftest(lm1, vcov = vcovHC, save = TRUE)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
