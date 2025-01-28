@@ -135,7 +135,7 @@ install_latex_dependencies <- function () {
 
   tinytex_available <- requireNamespace("tinytex", quietly = TRUE)
   install_ok <- if (tinytex_available) {
-    tinytex::tlmgr_install(ld) == 0
+    tlmgr_install_wrapper(ld) == 0
   } else {
     warning("R package tinytex not found, trying to install packages directly with tlmgr")
     system2("tlmgr", c("install", ld)) == 0
@@ -184,4 +184,9 @@ check_adjustbox <- function (quiet = TRUE) {
   }
 
   return(ok)
+}
+
+
+tlmgr_install_wrapper <- function (...) {
+  tinytex::tlmgr_install(...)
 }

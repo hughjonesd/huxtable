@@ -9,9 +9,9 @@ test_that("install/report_latex_dependencies", {
   expect_silent(packages <- report_latex_dependencies(quiet = TRUE))
   packages <- vapply(packages, `[[`, character(1), "name")
   packages <- setdiff(packages, c("graphicx", "calc", "array"))
-  with_mock(
-    `tinytex::tlmgr_install` = function (...) return(0),
-    expect_error(x <- install_latex_dependencies(), regexp = NA)
+  with_mocked_bindings(
+    expect_error(x <- install_latex_dependencies(), regexp = NA),
+    tlmgr_install_wrapper = function (...) return(0)
   )
   expect_true(x)
 
@@ -29,13 +29,12 @@ test_that("check_latex_dependencies checks adjustbox", {
   skip_on_cran()
   skip_on_ci()
 
-  with_mock(
-    "tinytex::tlmgr" = function (...) "1.0",
-    {
-      expect_warning(check_adjustbox(quiet = FALSE), "adjustbox")
-      expect_equivalent(check_adjustbox(), FALSE)
-    }
+  local_mocked_bindings(
+    .package = "tinytex",
+    tlmgr = function (...) "1.0",
   )
+  expect_warning(check_adjustbox(quiet = FALSE), "adjustbox")
+  expect_equivalent(check_adjustbox(), FALSE)
 })
 
 
@@ -46,16 +45,19 @@ test_that("check_latex_dependencies runs correctly", {
   # nor does win-builder
   skip_on_cran()
 
-  with_mock(
-    `tinytex::tl_pkgs` = function (...) return(character(0)), {
-      expect_false(check_latex_dependencies(quiet = TRUE))
-      expect_message(check_latex_dependencies(quiet = FALSE), regexp = "not found")
-    })
-
   ld <- tlmgr_packages()
-  with_mock(
-    `tinytex::tl_pkgs` = function (...) return(ld), {
-      expect_true(check_latex_dependencies(quiet = TRUE))
-      expect_message(check_latex_dependencies(quiet = FALSE), regexp = "All LaTeX packages found")
-    })
+
+  local_mocked_bindings(
+    .package = "tinytex",
+    tl_pkgs = function (...) return(character(0))
+  )
+  expect_false(check_latex_dependencies(quiet = TRUE))
+  expect_message(check_latex_dependencies(quiet = FALSE), regexp = "not found")
+
+  local_mocked_bindings(
+    .package = "tinytex",
+    tl_pkgs = function (...) return(ld)
+  )
+  expect_true(check_latex_dependencies(quiet = TRUE))
+  expect_message(check_latex_dependencies(quiet = FALSE), regexp = "All LaTeX packages found")
 })

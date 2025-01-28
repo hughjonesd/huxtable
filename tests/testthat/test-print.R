@@ -5,9 +5,11 @@ local_edition(2)
 
 test_that("to_screen gives warning with colour if crayon not installed", {
   ht <- hux(a = 1:2)
-  with_mock(requireNamespace = function (...) FALSE, {
-    expect_warning(to_screen(ht, color = TRUE), "crayon")
-  })
+  with_mocked_bindings({
+      expect_warning(to_screen(ht, color = TRUE), "crayon")
+    },
+    requireNamespace = function (...) FALSE
+  )
 })
 
 
@@ -133,7 +135,8 @@ test_that("hux_logo works", {
 
 
 test_that("Multi-rowspan screen output is sane", {
-  ht <- hux(a = rep("aaaaaa", 10), b = rep("bbbbbb", 10))
+  ht <- hux(a = rep("aaaaaa", 10), b = rep("bbbbbb", 10),
+            add_colnames = TRUE)
   rowspan(ht)[1, 1] <- 10
   expect_equal_to_reference(to_screen(ht), "multirow.rds")
 })

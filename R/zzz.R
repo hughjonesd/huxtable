@@ -70,3 +70,6 @@ set_default_option <- function (opt, value) {
   names(ol) <- opt
   options(ol)
 }
+
+# This is for a mocked binding in test-print.R
+requireNamespace <- NULL
