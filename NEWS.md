@@ -2,7 +2,8 @@
 
 * Bugfix: add newline at end of report_latex_dependencies() output. 
   Thanks @ceresek.
-
+* Removed underscore dplyr verbs (`slice_`, `select_` etc.) These have long
+  been deprecated in dplyr itself.
   
 # huxtable 5.5.7
 

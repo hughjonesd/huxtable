@@ -4,7 +4,7 @@
 NULL
 
 
-filter_.huxtable <- function (.data, ..., .dots) {
+filter.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
   .data$filter.huxtable.rownames <- rownames(.data)
@@ -12,36 +12,6 @@ filter_.huxtable <- function (.data, ..., .dots) {
   ht[.data$filter.huxtable.rownames %in% result$filter.huxtable.rownames, ]
 }
 
-
-filter.huxtable <- function(.data, ...) {}
-body(filter.huxtable) <- body(filter_.huxtable)
-
-
-mutate_.huxtable <- function (.data, ..., .dots) {
-  ht <- .data
-  .data <- as.data.frame(.data)
-  copy_cell_props <- if (! is.null(.dots$copy_cell_props)) .dots$copy_cell_props else TRUE
-  .dots <- .dots[setdiff(names(.dots), "copy_cell_props")]
-  result <- NextMethod()
-  result <- as_hux(result, autoformat = FALSE)
-
-  for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
-
-  # unlike in extract-methods we can't assume new columns are on right: transmute can reorder them
-  # columns may even be reordered by e.g. a=NULL,...,a=new_value
-  # so: all columns with an old name get the old attributes. New columns get copied attributes maybe.
-  match_cols <- match(colnames(result), colnames(ht))
-  if (copy_cell_props) match_cols <- Reduce(function (x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
-  result_cols <- ! is.na(match_cols)
-  match_cols  <- na.omit(match_cols)
-
-  for (a in huxtable_cell_attrs) attr(result, a)[, result_cols] <- attr(ht, a)[, match_cols]
-  for (a in huxtable_col_attrs)  attr(result, a)[result_cols]  <- attr(ht, a)[match_cols]
-
-  result <- set_attr_dimnames(result)
-
-  result
-}
 
 #' Use dplyr verbs with huxtable objects
 #'
@@ -94,7 +64,7 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
   match_cols <- match(colnames(result), colnames(ht))
   if (copy_cell_props) match_cols <- Reduce(function (x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
   result_cols <- ! is.na(match_cols)
-  match_cols  <- na.omit(match_cols)
+  match_cols  <- match_cols[result_cols]
 
   for (a in huxtable_cell_attrs) attr(result, a)[, result_cols] <- attr(ht, a)[, match_cols]
   for (a in huxtable_col_attrs)  attr(result, a)[result_cols]  <- attr(ht, a)[match_cols]
@@ -105,11 +75,10 @@ mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
 }
 
 
-transmute_.huxtable <- mutate_.huxtable
-
 transmute.huxtable <- mutate.huxtable
 
-arrange_.huxtable <- function (.data, ..., .dots) {
+
+arrange.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
   .data$arrange.huxtable.rownames <- rownames(.data)
@@ -118,21 +87,14 @@ arrange_.huxtable <- function (.data, ..., .dots) {
 }
 
 
-arrange.huxtable <- function(.data, ...) {}
-body(arrange.huxtable) <- body(arrange_.huxtable)
-
-
-slice_.huxtable <- function (.data, ..., .dots) {
+slice.huxtable <- function (.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
   .data$slice.huxtable.rownames <- rownames(.data)
   result <- NextMethod()
   ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)), ]
+
 }
-
-
-slice.huxtable <- function (.data, ...) {}
-body(slice.huxtable) <- body(slice_.huxtable)
 
 
 # The following functions will only be registered with dplyr if
@@ -140,7 +102,8 @@ body(slice.huxtable) <- body(slice_.huxtable)
 # After that, we can just use the dplyr builtins. (Until they break
 # subclasses again....)
 
-select_.huxtable <- function (.data, ..., .dots) {
+
+select.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)
   colnames(.data) <- colnames(ht)
@@ -150,13 +113,6 @@ select_.huxtable <- function (.data, ..., .dots) {
 
   ht
 }
-
-
-select.huxtable <- function(.data, ...) {}
-body(select.huxtable) <- body(select_.huxtable)
-
-
-rename_.huxtable <- select_.huxtable
 
 
 rename.huxtable <- select.huxtable

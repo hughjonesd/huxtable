@@ -41,7 +41,7 @@ test_that("slice, filter, arrange and pull work", {
 })
 
 
-test_that("mutate, mutate_ and transmute work", {
+test_that("mutate and transmute work", {
   ht <- hux(a = 1:3, b = 1:3)
   bold(ht)[1, ] <- TRUE
 
@@ -59,15 +59,6 @@ test_that("mutate, mutate_ and transmute work", {
 
   expect_silent(ht5 <- dplyr::mutate(ht, a = NULL))
   expect_equivalent(dim(font(ht5)), c(3, 1))
-
-  ht6 <- dplyr::mutate_(ht, .dots = list(x = quote(a + b)))
-  expect_equivalent(ht6$x, c(2, 4, 6))
-  expect_equivalent(bold(ht6)[, 3], c(TRUE, FALSE, FALSE))
-
-  ht7 <- dplyr::mutate_(ht, .dots = list(x = quote(a + b), copy_cell_props = FALSE))
-  expect_equivalent(ht7$x, c(2, 4, 6))
-  expect_equivalent(bold(ht7)[, 3], c(FALSE, FALSE, FALSE))
-  expect_identical(names(ht7), c("a", "b", "x"))
 })
 
 
