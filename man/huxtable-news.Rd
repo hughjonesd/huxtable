@@ -8,11 +8,18 @@
 This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
+\subsection{Breaking changes}{
+\itemize{
+\item Removed underscore dplyr verbs (\code{slice_}, \code{select_} etc.) These have
+long been deprecated in dplyr itself.
+}
+}
+
+\subsection{Other changes}{
 \itemize{
 \item Bugfix: add newline at end of report_latex_dependencies() output.
 Thanks @ceresek.
-\item Removed underscore dplyr verbs (\code{slice_}, \code{select_} etc.) These have
-long been deprecated in dplyr itself.
+}
 }
 }
 
