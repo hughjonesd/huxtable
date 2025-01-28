@@ -9,7 +9,15 @@ This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
 \itemize{
+\item Bugfix: add newline at end of report_latex_dependencies() output.
+Thanks @ceresek.
+}
+}
+
+\section{huxtable 5.5.7}{
+\itemize{
 \item Bugfix: fix quarto referencing in quarto 1.5
+\item Bugfix: integer overflow on very large huxtables. Thanks @kpagacz.
 }
 }
 

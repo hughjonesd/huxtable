@@ -1,3 +1,9 @@
+# huxtable (development version)
+
+* Bugfix: add newline at end of report_latex_dependencies() output. 
+  Thanks @ceresek.
+
+  
 # huxtable 5.5.7
 
 * Bugfix: fix quarto referencing in quarto 1.5
