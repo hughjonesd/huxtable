@@ -107,6 +107,20 @@ subset_rows <- function (ht, idx) {
 }
 
 
+insert_contents <- function (ht, rows = seq_len(nrow(ht)),
+                               cols, contents) {
+  assert_that(is_hux(ht),
+          is.numeric(rows), all(rows >= 1L), all(rows <= nrow(ht)),
+          is.numeric(cols), all(cols >= 1L), all(cols <= ncol(ht))
+        )
+
+  # insert into the underlying data frame
+  ht <- `[<-.data.frame`(ht, rows, cols, value = contents)
+
+  return(ht)
+}
+
+
 replace_properties <- function (ht, i, j, value) {
   assert_that(
           is_hux(ht), is_hux(value),
