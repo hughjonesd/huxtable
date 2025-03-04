@@ -12,8 +12,12 @@ Update with bugfix and new feature.
 
 OK on all platforms.
 
+
 ## revdepcheck results
 
-22 out of 22 packages were OK.
+We checked 22 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
 
 
