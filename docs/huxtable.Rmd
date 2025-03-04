@@ -54,8 +54,7 @@ huxtable::hux_logo(latex = is_latex, html = ! is_latex)
 ## About this document
 
 This is the introductory vignette for the R package 'huxtable', version `r packageVersion("huxtable")`. A current
-version is available on the web in [HTML](https://hughjonesd.github.io/huxtable/huxtable-html.html) or 
-[PDF](https://hughjonesd.github.io/huxtable/huxtable-pdf.pdf) format.
+version is available [online](https://hughjonesd.github.io/huxtable/huxtable-html.html).
 
 ## Huxtable
 
