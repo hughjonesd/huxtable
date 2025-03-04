@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.6.0
 
 ## Breaking changes
 

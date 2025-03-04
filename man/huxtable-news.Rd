@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.6.0}{
 \subsection{Breaking changes}{
 \itemize{
 \item Removed underscore dplyr verbs (\code{slice_}, \code{select_} etc.) These have
