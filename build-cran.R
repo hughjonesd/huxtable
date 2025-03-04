@@ -81,6 +81,7 @@ devtools::check_win_release()
 
 # Tag new version
 
+v <- devtools::as.package('.')$version
 newtag <- paste0('v', v, '-rc')
 tags <- git2r::tags()
 tags <- grep(newtag, names(tags), fixed = TRUE, value = TRUE)
