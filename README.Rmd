@@ -67,7 +67,6 @@ remotes::install_github('hughjonesd/huxtable')
 
 Check out [the website](https://hughjonesd.github.io/huxtable/), read the
 [documentation](https://hughjonesd.github.io/huxtable/reference/index.html) or 
-read the vignette in [HTML](https://hughjonesd.github.io/huxtable/huxtable-html.html) 
-or [PDF](https://hughjonesd.github.io/huxtable/huxtable-pdf.pdf).
+read the [vignette](https://hughjonesd.github.io/huxtable/huxtable-html.html).
 
 
