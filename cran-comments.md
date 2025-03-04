@@ -1,9 +1,9 @@
 
-Update with bugfix.
+Update with bugfix and new feature.
 
 ## Test environments
 
-* local OS X install (R 4.4.1)
+* local OS X install (R 4.4.2)
 * win-builder release/devel
 * mac-builder release
 
