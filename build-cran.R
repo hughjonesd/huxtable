@@ -56,7 +56,6 @@ setwd("..")
 
 # this automatically builds the package
 chk <- devtools::check(
-        env_vars = c('RSTUDIO_PANDOC' = '/Applications/RStudio.app/Contents/MacOS/pandoc'),
         document = FALSE,
         remote   = TRUE
       )
