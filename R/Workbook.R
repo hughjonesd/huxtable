@@ -10,7 +10,8 @@ NULL
 #'
 #' @param ht A huxtable.
 #' @param Workbook An existing `Workbook` object. By default, a new workbook will be created.
-#' @param sheet Name for the worksheet where the huxtable will be created.
+#' @param sheet Name for the worksheet where the huxtable will be created. The
+#'   worksheet will be created if it doesn't exist already.
 #' @param write_caption If `TRUE`, print any caption in the row above or below the table.
 #' @param start_row,start_col Number. Write data starting at the given row and column.
 #' @param ... Not used.
@@ -73,7 +74,7 @@ as_Workbook.huxtable <- function (
     memo_env$memoised_createStyle <- memoise::memoise(openxlsx::createStyle)
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
-  openxlsx::addWorksheet(wb, sheet)
+  if (! sheet %in% names(wb)) openxlsx::addWorksheet(wb, sheet)
 
   cap <- caption(ht)
   cap_pos <- caption_pos(ht)

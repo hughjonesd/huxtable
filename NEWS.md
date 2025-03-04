@@ -9,6 +9,8 @@
 
 * Bugfix: add newline at end of report_latex_dependencies() output. 
   Thanks @ceresek.
+* You can now add multiple huxtables to the same Excel worksheet in
+  `as_Workbook()`. Suggestion by @oobd.
   
   
 # huxtable 5.5.7

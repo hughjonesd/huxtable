@@ -19,6 +19,8 @@ long been deprecated in dplyr itself.
 \itemize{
 \item Bugfix: add newline at end of report_latex_dependencies() output.
 Thanks @ceresek.
+\item You can now add multiple huxtables to the same Excel worksheet in
+\code{as_Workbook()}. Suggestion by @oobd.
 }
 }
 }

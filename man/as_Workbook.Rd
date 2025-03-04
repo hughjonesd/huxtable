@@ -24,7 +24,8 @@ as_Workbook(ht, ...)
 
 \item{Workbook}{An existing \code{Workbook} object. By default, a new workbook will be created.}
 
-\item{sheet}{Name for the worksheet where the huxtable will be created.}
+\item{sheet}{Name for the worksheet where the huxtable will be created. The
+worksheet will be created if it doesn't exist already.}
 
 \item{write_caption}{If \code{TRUE}, print any caption in the row above or below the table.}
 
