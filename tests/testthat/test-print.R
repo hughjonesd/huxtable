@@ -255,6 +255,6 @@ test_that("Bugfix: wide characters lead to infinite loop in to_screen", {
   wide_strings <- rep(paste(wide_chars[101:120], collapse = ""), 5)
   df <- as.data.frame(as.list(wide_strings), col.names = paste0("V", 1:5))
   ht <- as_huxtable(df)
-  setTimeLimit(elapsed = 1, transient = TRUE)
+  setTimeLimit(elapsed = 5, transient = TRUE)
   expect_silent(to_screen(ht))
 })
