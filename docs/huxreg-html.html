@@ -873,14 +873,8 @@ example, you might want to use robust standard errors.</p>
 <p>One way to do this is to pass a <code>tidy</code>-able test object
 into <code>huxreg</code>. The function <code>coeftest</code> in the
 “lmtest” package has <code>tidy</code> methods defined:</p>
-<pre class="r"><code>library(lmtest)</code></pre>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre class="r"><code>library(sandwich)
+<pre class="r"><code>library(lmtest)
+library(sandwich)
 lm_robust &lt;- coeftest(lm1, vcov = vcovHC, save = TRUE)
 huxreg(&quot;Normal SEs&quot; = lm1, &quot;Robust SEs&quot; = lm_robust)</code></pre>
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
