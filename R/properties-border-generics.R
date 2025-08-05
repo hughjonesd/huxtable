@@ -33,17 +33,7 @@ border_props <- c(
   "top_border_style", "left_border_style", "right_border_style", "bottom_border_style"
 )
 
-border_setters <- paste0(border_props, "<-")
-huxtable_border_df <- data.frame(
-  name = border_props,
-  side = gsub("^([a-z]+)_.*", "\\1", border_props),
-  border_attr = gsub("^.*_([a-z]+)$", "\\1", border_props),
-  getter = I(lapply(border_props, get, envir = getNamespace("huxtable"))),
-  setter = I(lapply(border_setters, get, envir = getNamespace("huxtable"))),
-  stringsAsFactors = FALSE
-)
-
-#' @evalNamespace make_exports(huxtable_border_df$name, with_map = TRUE)
+#' @evalNamespace make_exports(border_props, with_map = TRUE)
 NULL
 
 

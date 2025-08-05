@@ -497,8 +497,8 @@ NULL
 make_getter_setters("number_format", "cell")
 
 
-# override the default
-`number_format<-.huxtable` <- function(ht, value) {
+# override the default setter
+`number_format<-` <- function(ht, value) {
   value_ok <- function (x) {
     is.numeric(x) || is.character(x) || is.function(x) || is.na(x)
   }
@@ -520,22 +520,18 @@ make_getter_setters("number_format", "cell")
 #' @param value Cell contents.
 #'
 #' @evalNamespace make_exports("contents", with_map = TRUE)
-#' @evalNamespace make_namespace_S3_entries("contents")
 #' @aliases contents contents<- map_contents
 #' @name set_contents
 #' @examples
-#'
+#' 
 #' set_contents(jams, 2, 1, "Blackcurrant")
 #' map_contents(jams, by_regex(".*berry" = "Snodberry"))
 NULL
 make_getter_setters("contents", "cell")
 
-#' @evalNamespace "S3method(contents, huxtable)"
-contents.huxtable <- function (ht) ht
+contents <- function (ht) ht
 
-
-#' @evalNamespace "S3method(\"contents<-\", huxtable)"
-`contents<-.huxtable` <- function (ht, value) {
+`contents<-` <- function (ht, value) {
   value # by the time we get here, the replacement has already happened
 }
 
