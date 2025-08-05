@@ -102,21 +102,13 @@ make_getter_setters <- function(
       ) {
   attr_type <- match.arg(attr_type)
   funs <- list()
-
+  setter <- paste0(attr_name, "<-")
   if (only_set_map) {
-    funs[[attr_name]] <- eval(bquote(
-      function(ht, ...) UseMethod(.(attr_name))
-    ))
-    setter <- paste0(attr_name, "<-")
-    funs[[setter]] <- eval(bquote(
-      function(ht, value) UseMethod(.(setter))
-    ))
+    # attr_name and setter functions are defined elsewhere
   } else {
     funs[[attr_name]] <- eval(bquote(
       function(ht) attr(ht, .(attr_name))
     ))
-
-    setter <- paste0(attr_name, "<-")
     check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
     check_dims <- switch(attr_type,
       table = quote(stopifnot(length(value) == 1))

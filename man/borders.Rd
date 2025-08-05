@@ -23,10 +23,6 @@
 \alias{`right_border<-`}
 \alias{`top_border<-`}
 \alias{`bottom_border<-`}
-\alias{left_border<-.huxtable}
-\alias{right_border<-.huxtable}
-\alias{top_border<-.huxtable}
-\alias{bottom_border<-.huxtable}
 \title{Set borders}
 \usage{
 left_border(ht)
@@ -49,13 +45,13 @@ bottom_border(ht) <- value
 set_bottom_border(ht, row, col, value = 0.4)
 map_bottom_border(ht, row, col, fn)
 
-\method{left_border}{huxtable}(ht) <- value
+left_border(ht) <- value
 
-\method{right_border}{huxtable}(ht) <- value
+right_border(ht) <- value
 
-\method{top_border}{huxtable}(ht) <- value
+top_border(ht) <- value
 
-\method{bottom_border}{huxtable}(ht) <- value
+bottom_border(ht) <- value
 }
 \arguments{
 \item{ht}{A huxtable.}
