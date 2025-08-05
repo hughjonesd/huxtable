@@ -546,13 +546,6 @@ ht
 ```
 
 
-# Huxreg 
-
-```{r}
-huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
-
-```
-
 # hux_logo
 
 ```{r}

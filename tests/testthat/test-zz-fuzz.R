@@ -160,6 +160,10 @@ test_that("Some random HTML outputs are validated by W3C", {
       "<body>\n", to_html(hx_set), "\n</body></html>")
     response <- httr::POST("http://validator.w3.org/nu/?out=json", body = webpage,
           httr::content_type("text/html"))
+    if (httr::status_code(response) != 200) {
+      skip(sprintf("W3C validator returned %s",
+        httr::http_status(response)$message))
+    }
     response <- httr::content(response, "parsed")
     errors   <- Filter(function (x) x$type == "error", response$messages)
     warnings <- Filter(function (x) x$type == "warnings", response$messages)
