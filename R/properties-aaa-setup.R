@@ -42,10 +42,6 @@ huxtable_table_attrs <- c(
       )
 
 
-#' @evalNamespace make_namespace_S3_entries(huxtable_cell_attrs)
-#' @evalNamespace make_namespace_S3_entries(huxtable_col_attrs)
-#' @evalNamespace make_namespace_S3_entries(huxtable_row_attrs)
-#' @evalNamespace make_namespace_S3_entries(huxtable_table_attrs)
 #' @evalNamespace make_exports(huxtable_col_attrs)
 #' @evalNamespace make_exports(huxtable_row_attrs)
 #' @evalNamespace make_exports(huxtable_table_attrs)
@@ -107,21 +103,20 @@ make_getter_setters <- function(
   attr_type <- match.arg(attr_type)
   funs <- list()
 
-
-  funs[[attr_name]] <- eval(bquote(
-    function(ht) UseMethod(.(attr_name))
-  ))
-
-  setter <- paste0(attr_name, "<-")
-  funs[[setter]] <- eval(bquote(
-    function(ht, value) UseMethod(.(setter))
-  ))
-
-  if (! only_set_map) {
-    funs[[paste0(attr_name, ".huxtable")]] <- eval(bquote(
+  if (only_set_map) {
+    funs[[attr_name]] <- eval(bquote(
+      function(ht, ...) UseMethod(.(attr_name))
+    ))
+    setter <- paste0(attr_name, "<-")
+    funs[[setter]] <- eval(bquote(
+      function(ht, value) UseMethod(.(setter))
+    ))
+  } else {
+    funs[[attr_name]] <- eval(bquote(
       function(ht) attr(ht, .(attr_name))
     ))
 
+    setter <- paste0(attr_name, "<-")
     check_fun <- if (! missing(check_fun)) bquote(stopifnot(.(check_fun)(value)))
     check_dims <- switch(attr_type,
       table = quote(stopifnot(length(value) == 1))
@@ -130,7 +125,8 @@ make_getter_setters <- function(
       stopifnot(all(na.omit(value) %in% .(check_values)))
     )
     extra_code <- if (! missing(extra_code)) substitute(extra_code)
-    funs[[paste0(setter, ".huxtable")]] <- eval(bquote(
+
+    funs[[setter]] <- eval(bquote(
       function(ht, value) {
         if (! all(is.na(value))) .(check_fun)
         .(check_dims)
