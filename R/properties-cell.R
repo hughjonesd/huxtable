@@ -361,65 +361,52 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
-bold <- function (ht) {
-  attr(ht, "bold")
-}
+bold <- function (ht) .prop_get(ht, "bold")
 
 `bold<-` <- function (ht, value) {
-  if (! all(is.na(value))) stopifnot(is.logical(value))
-  value[is.na(value)] <- huxtable_env$huxtable_default_attrs$bold
-  attr(ht, "bold")[] <- value
-  mode(attr(ht, "bold")) <- mode(value)
-  ht
+  .prop_replace(ht, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
 set_bold <- function (ht, row, col, value = TRUE) {
-  assert_that(is_huxtable(ht))
-  if (nargs() == 2) {
-    if (missing(value)) value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  }
-
-  rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
-  attr(ht, "bold")[rc$row, rc$col] <- value
-
-  ht
+  .prop_set(ht, row, col, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
 map_bold <- function (ht, row, col, fn) {
-  assert_that(is_huxtable(ht))
-  if (nargs() == 2) {
-    if (missing(fn)) fn <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  }
-  rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
-
-  current <- attr(ht, "bold")[rc$row, rc$col, drop = FALSE]
-  if (is_huxtable(current)) current <- as.matrix(current)
-  attr(ht, "bold")[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
-
-  ht
+  .prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
 }
 
 
-#' @name italic
 #' @rdname bold
 #' @aliases italic italic<- set_italic map_italic
 #' @templateVar attr_name italic
 #' @templateVar default TRUE
-#' @template cell-property-usage
-NULL
-make_getter_setters("italic", "cell", default = TRUE, check_fun = is.logical)
+#' @usage italic(ht)
+#' italic(ht) <- value
+#' set_italic(ht, row, col, value = TRUE)
+#' map_italic(ht, row, col, fn)
+italic <- function (ht) .prop_get(ht, "italic")
+
+#' @rdname bold
+#' @usage NULL
+`italic<-` <- function (ht, value) {
+  .prop_replace(ht, value, "italic", check_fun = is.logical)
+}
+
+#' @rdname bold
+#' @usage NULL
+set_italic <- function (ht, row, col, value = TRUE) {
+  .prop_set(ht, row, col, value, "italic", check_fun = is.logical)
+}
+
+#' @rdname bold
+#' @usage NULL
+map_italic <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
+}
 
 
 #' Make text larger or smaller
