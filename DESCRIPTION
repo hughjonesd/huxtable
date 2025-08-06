@@ -51,6 +51,7 @@ Suggests:
     knitr,
     lme4,
     lmtest,
+    lintr,
     nlme,
     nnet,
     officer,
@@ -61,6 +62,7 @@ Suggests:
     rmarkdown,
     sandwich,
     scales,
+    styler,
     testthat,
     tibble,
     tinytex

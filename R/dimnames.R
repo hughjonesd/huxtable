@@ -1,4 +1,3 @@
-
 #' Add column or row names
 #'
 #' Add a first row of column names, or a first column of row names, to the huxtable.
@@ -18,10 +17,10 @@
 #'
 #' @examples
 #' ht <- huxtable(
-#'         First  = rnorm(5),
-#'         Second = rnorm(5),
-#'         add_rownames = FALSE
-#'       )
+#'   First = rnorm(5),
+#'   Second = rnorm(5),
+#'   add_rownames = FALSE
+#' )
 #' add_rownames(ht)
 #' add_colnames(ht)
 #'
@@ -35,15 +34,15 @@
 #' add_colnames(add_rownames(ht, ""))
 #'
 #' @export
-add_colnames <- function (ht, ...) UseMethod("add_colnames")
+add_colnames <- function(ht, ...) UseMethod("add_colnames")
 
 
 #' @export
 #' @rdname add_colnames
-add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
-  if (! missing(rowname)) assert_that(is.null(rowname) || is.string(rowname))
+add_colnames.huxtable <- function(ht, rowname = NULL, ...) {
+  if (!missing(rowname)) assert_that(is.null(rowname) || is.string(rowname))
 
-  dateish_cols <- which(sapply(ht, function (x) class(x)[1] %in% c("Date", "POSIXct", "POSIXlt")))
+  dateish_cols <- which(sapply(ht, function(x) class(x)[1] %in% c("Date", "POSIXct", "POSIXlt")))
   for (col in dateish_cols) ht[[col]] <- as.character(ht[[col]]) # avoids autoconversion by c(),
   # which uses as.numeric
 
@@ -54,7 +53,7 @@ add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
   number_format(ht)[1, ] <- NA
   colnames(ht) <- cn
   header_rows(ht)[1] <- TRUE
-  if (! is.null(rowname)) rownames(ht) <- c(rowname, rn)
+  if (!is.null(rowname)) rownames(ht) <- c(rowname, rn)
 
   ht
 }
@@ -62,25 +61,25 @@ add_colnames.huxtable <- function (ht, rowname = NULL, ...) {
 
 #' @export
 #' @rdname add_colnames
-add_rownames <- function (ht, ...) UseMethod("add_rownames")
+add_rownames <- function(ht, ...) UseMethod("add_rownames")
 
 
 #' @export
 #' @rdname add_colnames
-add_rownames.huxtable <- function (ht, colname = "rownames", preserve_rownames = TRUE, ...) {
+add_rownames.huxtable <- function(ht, colname = "rownames", preserve_rownames = TRUE, ...) {
   assert_that(is.string(colname))
   ht <- cbind(rownames(ht), ht, copy_cell_props = FALSE)
   number_format(ht)[, 1] <- NA
   header_cols(ht)[1] <- TRUE
   colnames(ht)[1] <- colname
-  if (! preserve_rownames) rownames(ht) <- NULL
+  if (!preserve_rownames) rownames(ht) <- NULL
 
   ht
 }
 
 
 #' @export
-`dimnames<-.huxtable` <- function (x, value) {
+`dimnames<-.huxtable` <- function(x, value) {
   x <- NextMethod()
   x <- set_attr_dimnames(x)
 
@@ -89,7 +88,7 @@ add_rownames.huxtable <- function (ht, colname = "rownames", preserve_rownames =
 
 
 #' @export
-`names<-.huxtable` <- function (x, value) {
+`names<-.huxtable` <- function(x, value) {
   x <- NextMethod()
   x <- set_attr_dimnames(x)
 
@@ -98,7 +97,7 @@ add_rownames.huxtable <- function (ht, colname = "rownames", preserve_rownames =
 
 
 #' @export
-`row.names<-.huxtable` <- function (x, value) {
+`row.names<-.huxtable` <- function(x, value) {
   x <- NextMethod()
   x <- set_attr_dimnames(x)
 

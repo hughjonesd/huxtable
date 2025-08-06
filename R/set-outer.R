@@ -1,4 +1,3 @@
-
 #' Set borders and padding around a rectangle of cells
 #'
 #' @param ht A huxtable.
@@ -25,7 +24,7 @@ NULL
 
 #' @rdname set-outer
 #' @export
-set_outer_borders <- function (ht, row, col, value = 0.4) {
+set_outer_borders <- function(ht, row, col, value = 0.4) {
   assert_that(is_huxtable(ht))
   if (nargs() == 2) {
     if (missing(value)) value <- row
@@ -37,10 +36,10 @@ set_outer_borders <- function (ht, row, col, value = 0.4) {
   col <- rc$col
   value <- rc$value
 
-  left_border(ht)[row, min(col)]    <- value
-  right_border(ht)[row, max(col)]   <- value
-  top_border(ht)[min(row), col]     <- value
-  bottom_border(ht)[max(row), col]  <- value
+  left_border(ht)[row, min(col)] <- value
+  right_border(ht)[row, max(col)] <- value
+  top_border(ht)[min(row), col] <- value
+  bottom_border(ht)[max(row), col] <- value
 
   ht
 }
@@ -48,17 +47,17 @@ set_outer_borders <- function (ht, row, col, value = 0.4) {
 
 #' @rdname set-outer
 #' @export
-set_outer_border_colors <- function (ht, row, col, value) {
+set_outer_border_colors <- function(ht, row, col, value) {
   assert_that(is_huxtable(ht))
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
   col <- rc$col
   value <- rc$value
 
-  left_border_color(ht)[row, min(col)]    <- value
-  right_border_color(ht)[row, max(col)]   <- value
-  top_border_color(ht)[min(row), col]     <- value
-  bottom_border_color(ht)[max(row), col]  <- value
+  left_border_color(ht)[row, min(col)] <- value
+  right_border_color(ht)[row, max(col)] <- value
+  top_border_color(ht)[min(row), col] <- value
+  bottom_border_color(ht)[max(row), col] <- value
 
   ht
 }
@@ -66,17 +65,17 @@ set_outer_border_colors <- function (ht, row, col, value) {
 
 #' @rdname set-outer
 #' @export
-set_outer_border_styles <- function (ht, row, col, value) {
+set_outer_border_styles <- function(ht, row, col, value) {
   assert_that(is_huxtable(ht))
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
   col <- rc$col
   value <- rc$value
 
-  left_border_style(ht)[row, min(col)]    <- value
-  right_border_style(ht)[row, max(col)]   <- value
-  top_border_style(ht)[min(row), col]     <- value
-  bottom_border_style(ht)[max(row), col]  <- value
+  left_border_style(ht)[row, min(col)] <- value
+  right_border_style(ht)[row, max(col)] <- value
+  top_border_style(ht)[min(row), col] <- value
+  bottom_border_style(ht)[max(row), col] <- value
 
   ht
 }
@@ -84,17 +83,17 @@ set_outer_border_styles <- function (ht, row, col, value) {
 
 #' @rdname set-outer
 #' @export
-set_outer_padding <- function (ht, row, col, value) {
+set_outer_padding <- function(ht, row, col, value) {
   assert_that(is_huxtable(ht))
   rc <- outer_row_col_value(ht, row, col, value)
   row <- rc$row
   col <- rc$col
   value <- rc$value
 
-  left_padding(ht)[row, min(col)]    <- value
-  right_padding(ht)[row, max(col)]   <- value
-  top_padding(ht)[min(row), col]     <- value
-  bottom_padding(ht)[max(row), col]  <- value
+  left_padding(ht)[row, min(col)] <- value
+  right_padding(ht)[row, max(col)] <- value
+  top_padding(ht)[min(row), col] <- value
+  bottom_padding(ht)[max(row), col] <- value
 
   ht
 }
@@ -114,4 +113,3 @@ outer_row_col_value <- function(ht, row, col, value) {
 
   return(list(row = row, col = col, value = value))
 }
-

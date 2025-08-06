@@ -1,12 +1,14 @@
-
-add_row_cols <- function (x, y, after, dimno, copy_cell_props) {
-
+add_row_cols <- function(x, y, after, dimno, copy_cell_props) {
   dims <- dim(x)
   end_idx <- dims[dimno]
   if (is.character(after)) {
     after_n <- match(after, dimnames(x)[[dimno]])
-    if (is.na(after_n)) stop("Could not find row/column name \"",
-      after, "\" in huxtable")
+    if (is.na(after_n)) {
+      stop(
+        "Could not find row/column name \"",
+        after, "\" in huxtable"
+      )
+    }
     after <- after_n
   }
   assert_that(is.number(after), after >= 0, after <= end_idx)
@@ -15,18 +17,25 @@ add_row_cols <- function (x, y, after, dimno, copy_cell_props) {
   # adding numeric(0) to after gives numeric(0):da
   second_idxes <- after + seq_len(max(end_idx - after, 0))
 
-  has_dims <- function (x) if (is.vector(x)) length(x) > 0 else
-    (nrow(x) > 0 && ncol(x) > 0)
+  has_dims <- function(x) {
+    if (is.vector(x)) {
+      length(x) > 0
+    } else {
+      (nrow(x) > 0 && ncol(x) > 0)
+    }
+  }
   if (dimno == 1) {
     objs <- list(x[first_idxes, ], y, x[second_idxes, ])
     objs <- Filter(has_dims, objs)
     do.call(rbind.huxtable, c(objs,
-      copy_cell_props = copy_cell_props))
+      copy_cell_props = copy_cell_props
+    ))
   } else {
     objs <- list(x[, first_idxes], y, x[, second_idxes])
     objs <- Filter(has_dims, objs)
     do.call(cbind.huxtable, c(objs,
-      copy_cell_props = copy_cell_props))
+      copy_cell_props = copy_cell_props
+    ))
   }
 }
 
@@ -49,14 +58,14 @@ add_row_cols <- function (x, y, after, dimno, copy_cell_props) {
 #'
 #' @return a new huxtable
 #' @noRd
-bind_rows_2 <- function (obj1, obj2, copy_cell_props) {
+bind_rows_2 <- function(obj1, obj2, copy_cell_props) {
   assert_that(
-          is.flag(copy_cell_props),
-          is.null(ncol(obj1)) || is.null(ncol(obj2)) || ncol(obj1) == ncol(obj2)
-        )
+    is.flag(copy_cell_props),
+    is.null(ncol(obj1)) || is.null(ncol(obj2)) || ncol(obj1) == ncol(obj2)
+  )
 
-  if (! is_huxtable(obj1)) obj1 <- new_huxtable_row(obj1)
-  if (! is_huxtable(obj2)) {
+  if (!is_huxtable(obj1)) obj1 <- new_huxtable_row(obj1)
+  if (!is_huxtable(obj2)) {
     obj2 <- new_huxtable_row(obj2)
     if (copy_cell_props) obj2 <- copy_properties_down(obj1, obj2)
   }
@@ -77,7 +86,7 @@ bind_rows_2 <- function (obj1, obj2, copy_cell_props) {
 #'
 #' @return A huxtable
 #' @noRd
-new_huxtable_row <- function (obj) {
+new_huxtable_row <- function(obj) {
   if (is_vectorish(obj)) {
     obj <- matrix(obj, nrow = 1, ncol = length(obj))
   }
@@ -85,15 +94,19 @@ new_huxtable_row <- function (obj) {
 }
 
 
-dot_or_dim_names <- function (..., dimension) {
+dot_or_dim_names <- function(..., dimension) {
   objs <- list(...)
   nms <- names(objs)
   if (is.null(nms)) nms <- rep("", length(objs))
-  dot_or_dim <- function (obj, name) {
+  dot_or_dim <- function(obj, name) {
     size <- dim(obj)
     dn <- dimnames(obj)
-    if (is.null(size) && is.null(dn)) return(name)
-    if (is.null(dn)) return(rep(name, size[[dimension]]))
+    if (is.null(size) && is.null(dn)) {
+      return(name)
+    }
+    if (is.null(dn)) {
+      return(rep(name, size[[dimension]]))
+    }
     return(dn[[dimension]])
   }
   res <- mapply(FUN = dot_or_dim, objs, nms)
@@ -112,19 +125,20 @@ dot_or_dim_names <- function (..., dimension) {
 #'
 #' @return a new huxtable
 #' @noRd
-bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
+bind_cols_2 <- function(obj1, obj2, copy_cell_props) {
   assert_that(
-          is.flag(copy_cell_props),
-          is.null(nrow(obj1)) || is.null(nrow(obj2)) || nrow(obj1) == nrow(obj2)
-        )
-  if (! is_huxtable(obj1)) obj1 <- new_huxtable(obj1)
-  if (! is_huxtable(obj2)) {
+    is.flag(copy_cell_props),
+    is.null(nrow(obj1)) || is.null(nrow(obj2)) || nrow(obj1) == nrow(obj2)
+  )
+  if (!is_huxtable(obj1)) obj1 <- new_huxtable(obj1)
+  if (!is_huxtable(obj2)) {
     obj2 <- new_huxtable(obj2)
     if (copy_cell_props) obj2 <- copy_properties_across(obj1, obj2)
   }
 
   new_ht <- cbind(as.data.frame(obj1), as.data.frame(obj2),
-        stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE
+  )
   new_ht <- new_huxtable(new_ht)
   new_ht <- merge_properties_across(new_ht, obj1, obj2)
 
@@ -139,10 +153,12 @@ bind_cols_2 <- function (obj1, obj2, copy_cell_props) {
 #'
 #' @return `ht2`, modified.
 #' @noRd
-copy_properties_down <- function (ht1, ht2) {
+copy_properties_down <- function(ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
-  if (nrow(ht1) == 0L) return(ht2)
+  if (nrow(ht1) == 0L) {
+    return(ht2)
+  }
 
   for (a in c(copiable_cell_attrs())) {
     for (r in seq_len(nrow(ht2))) {
@@ -150,14 +166,16 @@ copy_properties_down <- function (ht1, ht2) {
     }
   }
   for (a in huxtable_row_attrs) {
-      attr(ht2, a)[] <- attr(ht1, a)[nrow(ht1)]
+    attr(ht2, a)[] <- attr(ht1, a)[nrow(ht1)]
   }
 
-  copy_down <- function (getter, setter) {
-    ht2 <<- setter(ht2, getter(ht1)[nrow(ht1),])
+  copy_down <- function(getter, setter) {
+    ht2 <<- setter(ht2, getter(ht1)[nrow(ht1), ])
   }
-  mapply(FUN = copy_down, huxtable_border_df$getter,
-        huxtable_border_df$setter)
+  mapply(
+    FUN = copy_down, huxtable_border_df$getter,
+    huxtable_border_df$setter
+  )
 
   ht2
 }
@@ -170,10 +188,12 @@ copy_properties_down <- function (ht1, ht2) {
 #'
 #' @return `ht2`, modified.
 #' @noRd
-copy_properties_across <- function (ht1, ht2) {
+copy_properties_across <- function(ht1, ht2) {
   assert_that(is_huxtable(ht1), is_huxtable(ht2))
 
-  if (ncol(ht1) == 0L) return(ht2)
+  if (ncol(ht1) == 0L) {
+    return(ht2)
+  }
 
   for (a in c(copiable_cell_attrs())) {
     for (col in seq_len(ncol(ht2))) {
@@ -181,21 +201,23 @@ copy_properties_across <- function (ht1, ht2) {
     }
   }
   for (a in huxtable_col_attrs) {
-      attr(ht2, a)[] <- attr(ht1, a)[ncol(ht1)]
+    attr(ht2, a)[] <- attr(ht1, a)[ncol(ht1)]
   }
 
 
-  copy_across <- function (getter, setter) {
+  copy_across <- function(getter, setter) {
     ht2 <<- setter(ht2, getter(ht1)[, ncol(ht1)])
   }
-  mapply(FUN = copy_across, huxtable_border_df$getter,
-    huxtable_border_df$setter)
+  mapply(
+    FUN = copy_across, huxtable_border_df$getter,
+    huxtable_border_df$setter
+  )
 
   ht2
 }
 
 
-copiable_cell_attrs <- function () {
+copiable_cell_attrs <- function() {
   setdiff(huxtable_cell_attrs, c("colspan", "rowspan"))
 }
 
@@ -210,7 +232,7 @@ copiable_cell_attrs <- function () {
 #'
 #' @return `new_ht`, modified
 #' @noRd
-merge_properties_down <- function (new_ht, ht1, ht2) {
+merge_properties_down <- function(new_ht, ht1, ht2) {
   assert_that(is_hux(new_ht), is_hux(ht1), is_hux(ht2))
   for (a in huxtable_table_attrs) {
     attr(new_ht, a) <- attr(ht1, a)
@@ -226,10 +248,11 @@ merge_properties_down <- function (new_ht, ht1, ht2) {
   }
 
   # borders are simply joined on; right and bottom take priority as usual.
-  copy_borders_down <- function (getter, setter) {
+  copy_borders_down <- function(getter, setter) {
     new_ht <<- setter(new_ht, rbind(getter(ht1), getter(ht2)))
   }
-  mapply(FUN = copy_borders_down,
+  mapply(
+    FUN = copy_borders_down,
     huxtable_border_df$getter,
     huxtable_border_df$setter
   )
@@ -249,7 +272,7 @@ merge_properties_down <- function (new_ht, ht1, ht2) {
 #'
 #' @return `new_ht`, modified
 #' @noRd
-merge_properties_across <- function (new_ht, ht1, ht2) {
+merge_properties_across <- function(new_ht, ht1, ht2) {
   assert_that(is_hux(new_ht), is_hux(ht1), is_hux(ht2))
   for (a in huxtable_table_attrs) {
     attr(new_ht, a) <- attr(ht1, a)
@@ -264,10 +287,11 @@ merge_properties_across <- function (new_ht, ht1, ht2) {
     attr(new_ht, a) <- c(attr(ht1, a), attr(ht2, a))
   }
 
-  copy_borders_across <- function (getter, setter) {
+  copy_borders_across <- function(getter, setter) {
     new_ht <<- setter(new_ht, cbind(getter(ht1), getter(ht2)))
   }
-  mapply(FUN = copy_borders_across,
+  mapply(
+    FUN = copy_borders_across,
     huxtable_border_df$getter,
     huxtable_border_df$setter
   )
@@ -278,18 +302,18 @@ merge_properties_across <- function (new_ht, ht1, ht2) {
 }
 
 
-renormalize_row_height <- function (ht) {
+renormalize_row_height <- function(ht) {
   if (is.numeric(rh <- row_height(ht))) {
-    row_height(ht) <- rh/sum(rh)
+    row_height(ht) <- rh / sum(rh)
   }
 
   ht
 }
 
 
-renormalize_col_width <- function (ht) {
+renormalize_col_width <- function(ht) {
   if (is.numeric(cw <- col_width(ht))) {
-    col_width(ht) <- cw/sum(cw)
+    col_width(ht) <- cw / sum(cw)
   }
 
   ht

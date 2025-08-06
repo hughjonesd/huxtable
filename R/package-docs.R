@@ -1,4 +1,3 @@
-
 #' Quick introduction to huxtable
 #'
 #' Huxtable is a package for creating HTML and LaTeX tables. It provides similar

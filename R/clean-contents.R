@@ -1,10 +1,8 @@
-
 # return character matrix of formatted contents, suitably escaped
 clean_contents <- function(
-  ht,
-  output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
-  ...
-) {
+    ht,
+    output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
+    ...) {
   output_type <- match.arg(output_type)
   contents <- as.matrix(as.data.frame(ht))
 
@@ -27,8 +25,8 @@ clean_contents <- function(
     md_rows <- markdown(ht)[, col]
     contents[md_rows, col] <- render_markdown(contents[md_rows, col], output_type)
     if (output_type %in% c("latex", "html", "rtf")) {
-      to_esc <- escape_contents(ht)[, col] & ! md_rows
-      contents[to_esc, col] <-  sanitize(contents[to_esc, col], output_type)
+      to_esc <- escape_contents(ht)[, col] & !md_rows
+      contents[to_esc, col] <- sanitize(contents[to_esc, col], output_type)
     }
   }
 
@@ -36,20 +34,20 @@ clean_contents <- function(
   for (col in seq_len(ncol(contents))) {
     pad_chars <- rep(NA, length(col))
     # if align(ht) is a single character, e.g. "." or ",", we align on that:
-    align_pad   <- ncharw(align(ht)[, col]) == 1
+    align_pad <- ncharw(align(ht)[, col]) == 1
     pad_chars[align_pad] <- align(ht)[align_pad, col]
     contents[, col] <- handle_decimal_alignment(contents[, col], pad_chars, output_type)
   }
 
   # == lengthen minus signs ==
   if (getOption("huxtable.long_minus", FALSE) &&
-            ! aligning_with_siunitx(output_type)) {
+    !aligning_with_siunitx(output_type)) {
     long_minus <- switch(output_type,
-                         latex = "$-$",
-                         excel = "-",
-                         "\u2212"
+      latex = "$-$",
+      excel = "-",
+      "\u2212"
     )
-    lengthen_minus <- function (numeral) {
+    lengthen_minus <- function(numeral) {
       numeral <- sub("^-", long_minus, numeral)
       numeral <- sub("([eE])-", paste0("\\1", long_minus), numeral)
       numeral
@@ -65,54 +63,58 @@ clean_contents <- function(
 }
 
 
-utf8_to_rtf <- function (mx) {
-  utf8_codes <- function (x) utf8ToInt(enc2utf8(x))
+utf8_to_rtf <- function(mx) {
+  utf8_codes <- function(x) utf8ToInt(enc2utf8(x))
 
-  rtf_encode <- function (x) {
+  rtf_encode <- function(x) {
     code <- utf8_codes(x)
     x <- strsplit(x, split = "")[[1]]
-    x[code > 127L & code <= 32767L]   <- code[code > 127L & code <= 32767L]
+    x[code > 127L & code <= 32767L] <- code[code > 127L & code <= 32767L]
     x[code > 32767L] <- code[code > 32767L] - 65536L
     x[code > 127L] <- paste0("\\u", x[code > 127L], "?")
     paste0(x, collapse = "")
   }
 
-  needs_conv <- vapply(c(mx), function (x) any(utf8_codes(x) > 127L),
-                       logical(1))
-  mx[needs_conv] <- vapply(mx[needs_conv], rtf_encode,
-                           character(1))
+  needs_conv <- vapply(
+    c(mx), function(x) any(utf8_codes(x) > 127L),
+    logical(1)
+  )
+  mx[needs_conv] <- vapply(
+    mx[needs_conv], rtf_encode,
+    character(1)
+  )
 
   mx
 }
 
 
 # Format numeral generics
-numeral_formatter <- function (x) {
+numeral_formatter <- function(x) {
   UseMethod("numeral_formatter")
 }
 
 
 #' @export
-numeral_formatter.default <- function (x) {
+numeral_formatter.default <- function(x) {
   stop("Unrecognized number_format. Please use a number, string or function.")
 }
 
 
 # If we are a function then return output from the function
 #' @export
-numeral_formatter.function <- function (x) {
+numeral_formatter.function <- function(x) {
   return(x)
 }
 
 
 #' @export
-numeral_formatter.character <- function (x) {
+numeral_formatter.character <- function(x) {
   return(function(numeral) sprintf(x, numeral))
 }
 
 
 #' @export
-numeral_formatter.numeric <- function (x) {
+numeral_formatter.numeric <- function(x) {
   return(function(numeral) formatC(round(numeral, x), format = "f", digits = x))
 }
 
@@ -127,19 +129,23 @@ numeral_formatter.numeric <- function (x) {
 #                       along with (optionally) a sign preceding the digits
 #                       specifying the level of the exponent.
 # )                     end capturing group
-number_regex <- function () {
+number_regex <- function() {
   paste0("(-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?)")
 }
 
 
 # find each numeric substring, and replace it:
-format_numbers <- function (string, num_fmt) {
-  if (is.na(string)) return(NA_character_)
+format_numbers <- function(string, num_fmt) {
+  if (is.na(string)) {
+    return(NA_character_)
+  }
 
   # ! is.function avoids a warning if num_fmt is a function:
-  if (! is.function(num_fmt) && is.na(num_fmt)) return(string)
+  if (!is.function(num_fmt) && is.na(num_fmt)) {
+    return(string)
+  }
 
-  format_numeral <- function (str) {
+  format_numeral <- function(str) {
     num <- as.numeric(str)
     result <- numeral_formatter(num_fmt)(num)
     result
@@ -151,25 +157,27 @@ format_numbers <- function (string, num_fmt) {
 
 handle_decimal_alignment <- function(col, pad_chars, output_type) {
   # where pad_chars is NA we do not pad
-  orig_col  <- col
-  na_pad    <- is.na(pad_chars)
-  col       <- col[! na_pad]
-  pad_chars <- pad_chars[! na_pad]
-  if (length(col) == 0) return(orig_col)
+  orig_col <- col
+  na_pad <- is.na(pad_chars)
+  col <- col[!na_pad]
+  pad_chars <- pad_chars[!na_pad]
+  if (length(col) == 0) {
+    return(orig_col)
+  }
 
   col <- if (aligning_with_siunitx(output_type)) {
-           add_tablenum(col, pad_chars)
-         } else {
-           pad_spaces(col, pad_chars, output_type)
-         }
+    add_tablenum(col, pad_chars)
+  } else {
+    pad_spaces(col, pad_chars, output_type)
+  }
 
-  orig_col[! na_pad] <- col
+  orig_col[!na_pad] <- col
   orig_col
 }
 
 
-pad_spaces <- function (col, pad_chars, output_type) {
-  find_pos  <- function(string, char) {
+pad_spaces <- function(col, pad_chars, output_type) {
+  find_pos <- function(string, char) {
     regex <- gregexpr(char, string, fixed = TRUE)[[1]]
     regex[length(regex)]
   }
@@ -182,28 +190,28 @@ pad_spaces <- function (col, pad_chars, output_type) {
 
   pad_n_spaces <- max(chars_after_.) - chars_after_.
   pad_char <- switch(output_type,
-                     "html"   = "&nbsp;",
-                     "latex"  = "\\hphantom{0}",
-                     "screen" = "\u00a0", # screen non-breaking space
-                     "rtf"    = "\\~",
-                     " ")
+    "html"   = "&nbsp;",
+    "latex"  = "\\hphantom{0}",
+    "screen" = "\u00a0", # screen non-breaking space
+    "rtf"    = "\\~",
+    " "
+  )
   col <- paste0(col, str_rep(pad_char, pad_n_spaces))
 
   col
 }
 
 
-add_tablenum <- function (col, pad_chars) {
+add_tablenum <- function(col, pad_chars) {
   tn_options <- rep("", length(pad_chars))
   non_dot <- pad_chars != "."
   tn_options[non_dot] <- sprintf("[output-decimal-marker = {%s}]", pad_chars[non_dot])
 
-  replacements <- paste0("\\\\tablenum", tn_options,"{\\1}")
+  replacements <- paste0("\\\\tablenum", tn_options, "{\\1}")
   stringr::str_replace_all(col, number_regex(), replacements)
 }
 
 
-aligning_with_siunitx <- function (output_type) {
+aligning_with_siunitx <- function(output_type) {
   output_type == "latex" && getOption("huxtable.latex_siunitx_align", FALSE)
 }
-

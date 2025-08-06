@@ -1,52 +1,59 @@
-
-
 # helper functions -----------------------------------------------------------
 
 
-.border_prop_set <- function (ht, row, col, value, side, prop,
-        check_fun = NULL, check_values = NULL) {
+.border_prop_set <- function(ht, row, col, value, side, prop,
+                             check_fun = NULL, check_values = NULL) {
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
-  extra <- substitute({
-    FUN(ht)[rc$row, rc$col] <- value
-  }, list(FUN = as.name(paste0(side, "_", prop))))
+  extra <- substitute(
+    {
+      FUN(ht)[rc$row, rc$col] <- value
+    },
+    list(FUN = as.name(paste0(side, "_", prop)))
+  )
   if (prop == "border" && is_brdr(value)) {
     ht <- .prop_set(ht, row, col, value, prop,
-          extra = extra, reset_na = FALSE)
+      extra = extra, reset_na = FALSE
+    )
   } else {
     ht <- .prop_set(ht, row, col, value, prop,
-          check_fun = check_fun, check_values = check_values, extra = extra)
+      check_fun = check_fun, check_values = check_values, extra = extra
+    )
   }
   attr(ht, prop) <- NULL
   ht
 }
 
-.border_prop_map <- function (ht, row, col, fn, side, prop,
-        check_fun = NULL, check_values = NULL) {
+.border_prop_map <- function(ht, row, col, fn, side, prop,
+                             check_fun = NULL, check_values = NULL) {
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
-  extra <- substitute({
-    FUN(ht)[rc$row, rc$col] <- value
-  }, list(FUN = as.name(paste0(side, "_", prop))))
+  extra <- substitute(
+    {
+      FUN(ht)[rc$row, rc$col] <- value
+    },
+    list(FUN = as.name(paste0(side, "_", prop)))
+  )
   if (prop == "border") {
     ht <- .prop_map(ht, row, col, fn, prop,
-          check_fun = is_borderish, extra = extra, reset_na = FALSE)
+      check_fun = is_borderish, extra = extra, reset_na = FALSE
+    )
   } else {
     ht <- .prop_map(ht, row, col, fn, prop,
-          check_fun = check_fun, check_values = check_values, extra = extra)
+      check_fun = check_fun, check_values = check_values, extra = extra
+    )
   }
   attr(ht, prop) <- NULL
   ht
 }
 
-.border_set <- function (ht, row, col, value, side,
-        missing_row, missing_col, missing_value) {
+.border_set <- function(ht, row, col, value, side,
+                        missing_row, missing_col, missing_value) {
   if (missing_row && missing_col && missing_value) {
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
     value <- 0.4
   } else if (missing_col && missing_value) {
-
     value <- row
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
@@ -56,131 +63,156 @@
     if (missing_value) value <- 0.4
   }
   .border_prop_set(ht, row, col, value, side, "border",
-        check_fun = is_borderish)
+    check_fun = is_borderish
+  )
 }
 
 allowed_border_styles <- c("solid", "double", "dashed", "dotted")
 
 # thickness -----------------------------------------------------------------
 
-set_left_border <- function (ht, row, col, value = 0.4) {
-  .border_set(ht, row, col, value, "left",
-        missing(row), missing(col), missing(value))
+set_left_border <- function(ht, row, col, value = 0.4) {
+  .border_set(
+    ht, row, col, value, "left",
+    missing(row), missing(col), missing(value)
+  )
 }
 
-map_left_border <- function (ht, row, col, fn) {
+map_left_border <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "left", "border")
 }
 
-set_right_border <- function (ht, row, col, value = 0.4) {
-  .border_set(ht, row, col, value, "right",
-        missing(row), missing(col), missing(value))
+set_right_border <- function(ht, row, col, value = 0.4) {
+  .border_set(
+    ht, row, col, value, "right",
+    missing(row), missing(col), missing(value)
+  )
 }
 
-map_right_border <- function (ht, row, col, fn) {
+map_right_border <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "right", "border")
 }
 
-set_top_border <- function (ht, row, col, value = 0.4) {
-  .border_set(ht, row, col, value, "top",
-        missing(row), missing(col), missing(value))
+set_top_border <- function(ht, row, col, value = 0.4) {
+  .border_set(
+    ht, row, col, value, "top",
+    missing(row), missing(col), missing(value)
+  )
 }
 
-map_top_border <- function (ht, row, col, fn) {
+map_top_border <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "top", "border")
 }
 
-set_bottom_border <- function (ht, row, col, value = 0.4) {
-  .border_set(ht, row, col, value, "bottom",
-        missing(row), missing(col), missing(value))
+set_bottom_border <- function(ht, row, col, value = 0.4) {
+  .border_set(
+    ht, row, col, value, "bottom",
+    missing(row), missing(col), missing(value)
+  )
 }
 
-map_bottom_border <- function (ht, row, col, fn) {
+map_bottom_border <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "bottom", "border")
 }
 
 # color ---------------------------------------------------------------------
 
-set_left_border_color <- function (ht, row, col, value) {
+set_left_border_color <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "left", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-map_left_border_color <- function (ht, row, col, fn) {
+map_left_border_color <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "left", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-set_right_border_color <- function (ht, row, col, value) {
+set_right_border_color <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "right", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-map_right_border_color <- function (ht, row, col, fn) {
+map_right_border_color <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "right", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-set_top_border_color <- function (ht, row, col, value) {
+set_top_border_color <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "top", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-map_top_border_color <- function (ht, row, col, fn) {
+map_top_border_color <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "top", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-set_bottom_border_color <- function (ht, row, col, value) {
+set_bottom_border_color <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "bottom", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
-map_bottom_border_color <- function (ht, row, col, fn) {
+map_bottom_border_color <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "bottom", "border_color",
-        check_fun = is.character)
+    check_fun = is.character
+  )
 }
 
 # style ---------------------------------------------------------------------
 
-set_left_border_style <- function (ht, row, col, value) {
+set_left_border_style <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "left", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-map_left_border_style <- function (ht, row, col, fn) {
+map_left_border_style <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "left", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-set_right_border_style <- function (ht, row, col, value) {
+set_right_border_style <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "right", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-map_right_border_style <- function (ht, row, col, fn) {
+map_right_border_style <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "right", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-set_top_border_style <- function (ht, row, col, value) {
+set_top_border_style <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "top", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-map_top_border_style <- function (ht, row, col, fn) {
+map_top_border_style <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "top", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-set_bottom_border_style <- function (ht, row, col, value) {
+set_bottom_border_style <- function(ht, row, col, value) {
   .border_prop_set(ht, row, col, value, "bottom", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
-map_bottom_border_style <- function (ht, row, col, fn) {
+map_bottom_border_style <- function(ht, row, col, fn) {
   .border_prop_map(ht, row, col, fn, "bottom", "border_style",
-        check_fun = is.character, check_values = allowed_border_styles)
+    check_fun = is.character, check_values = allowed_border_styles
+  )
 }
 
 # order of these matters

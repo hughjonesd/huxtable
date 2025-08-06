@@ -1,4 +1,3 @@
-
 #' @import assertthat
 NULL
 
@@ -36,7 +35,7 @@ set_all_borders <- function(ht, row, col, value = 0.4) {
 
 #' @rdname set-multiple
 #' @export
-map_all_borders <- function (ht, row, col, fn) {
+map_all_borders <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border")
 }
 
@@ -52,7 +51,7 @@ set_all_border_colors <- function(ht, row, col, value) {
 
 #' @rdname set-multiple
 #' @export
-map_all_border_colors <- function (ht, row, col, fn) {
+map_all_border_colors <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_color")
 }
 
@@ -67,7 +66,7 @@ set_all_border_styles <- function(ht, row, col, value) {
 
 #' @rdname set-multiple
 #' @export
-map_all_border_styles <- function (ht, row, col, fn) {
+map_all_border_styles <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_style")
 }
 
@@ -83,7 +82,7 @@ set_all_padding <- function(ht, row, col, value) {
 
 #' @rdname set-multiple
 #' @export
-map_all_padding <- function (ht, row, col, fn) {
+map_all_padding <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_padding")
 }
 
@@ -92,28 +91,28 @@ map_all_padding <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_tb_padding(ht, 10)
-set_tb_padding <- function (ht, row, col, value) {
+set_tb_padding <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_padding", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_tb_padding <- function (ht, row, col, fn) {
+map_tb_padding <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_padding", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-set_lr_padding <- function (ht, row, col, value) {
+set_lr_padding <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_padding", sides = c("left", "right"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_lr_padding <- function (ht, row, col, fn) {
+map_lr_padding <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_padding", sides = c("left", "right"))
 }
 
@@ -122,28 +121,28 @@ map_lr_padding <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' ht <- set_tb_borders(ht)
-set_tb_borders <- function (ht, row, col, value) {
+set_tb_borders <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_tb_borders <- function (ht, row, col, fn) {
+map_tb_borders <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-set_lr_borders <- function (ht, row, col, value) {
+set_lr_borders <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border", sides = c("left", "right"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_lr_borders <- function (ht, row, col, fn) {
+map_lr_borders <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border", sides = c("left", "right"))
 }
 
@@ -152,28 +151,28 @@ map_lr_borders <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' set_tb_border_colors(ht, "red")
-set_tb_border_colors <- function (ht, row, col, value) {
+set_tb_border_colors <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_color", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_tb_border_colors <- function (ht, row, col, fn) {
+map_tb_border_colors <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_color", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-set_lr_border_colors <- function (ht, row, col, value) {
+set_lr_border_colors <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_color", sides = c("left", "right"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_lr_border_colors <- function (ht, row, col, fn) {
+map_lr_border_colors <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_color", sides = c("left", "right"))
 }
 
@@ -182,37 +181,39 @@ map_lr_border_colors <- function (ht, row, col, fn) {
 #' @export
 #' @examples
 #' set_tb_border_styles(ht, "double")
-set_tb_border_styles <- function (ht, row, col, value) {
+set_tb_border_styles <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_style", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_tb_border_styles <- function (ht, row, col, fn) {
+map_tb_border_styles <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_style", sides = c("top", "bottom"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-set_lr_border_styles <- function (ht, row, col, value) {
+set_lr_border_styles <- function(ht, row, col, value) {
   recall_ltrb(ht, "set_%s_border_style", sides = c("left", "right"))
 }
 
 
 #' @rdname set-multiple
 #' @export
-map_lr_border_styles <- function (ht, row, col, fn) {
+map_lr_border_styles <- function(ht, row, col, fn) {
   recall_ltrb(ht, "map_%s_border_style", sides = c("left", "right"))
 }
 
 
 recall_ltrb <- function(ht, template,
-      sides = c("left", "top", "right", "bottom")) {
+                        sides = c("left", "top", "right", "bottom")) {
   call <- sys.call(sys.parent(1L))
-  call_names <- parse(text = paste0("huxtable::",
-    sprintf(template, sides)))
+  call_names <- parse(text = paste0(
+    "huxtable::",
+    sprintf(template, sides)
+  ))
   for (cn in call_names) {
     call[[1]] <- cn
     call[[2]] <- quote(ht)
