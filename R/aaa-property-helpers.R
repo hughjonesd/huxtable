@@ -1,3 +1,89 @@
+#' @import assertthat
+#' @importFrom stats na.omit
+#' @evalNamespace make_exports(huxtable_col_attrs)
+#' @evalNamespace make_exports(huxtable_row_attrs)
+#' @evalNamespace make_exports(huxtable_table_attrs)
+#' @evalNamespace make_exports(huxtable_cell_attrs, with_map = TRUE)
+NULL
+
+huxtable_cell_attrs <- c(
+        "align",
+        "valign",
+        "rowspan",
+        "colspan",
+        "background_color",
+        "text_color",
+        "top_padding",
+        "left_padding",
+        "right_padding",
+        "bottom_padding",
+        "wrap",
+        "markdown",
+        "escape_contents",
+        "na_string",
+        "bold",
+        "italic",
+        "font_size",
+        "rotation",
+        "number_format",
+        "font"
+      )
+huxtable_col_attrs <- c("col_width", "header_cols")
+huxtable_row_attrs <- c("row_height", "header_rows")
+huxtable_table_attrs <- c(
+        "width",
+        "height",
+        "position",
+        "caption",
+        "caption_pos",
+        "caption_width",
+        "tabular_environment",
+        "table_environment",
+        "label",
+        "latex_float"
+      )
+
+huxtable_env <- new.env()
+huxtable_env$huxtable_default_attrs <- list(
+        rowspan             = 1,
+        colspan             = 1,
+        align               = "left",
+        valign              = "top",
+        width               = NA_real_,
+        height              = NA_real_,
+        col_width           = NA_real_,
+        row_height          = NA_real_,
+        header_cols         = FALSE,
+        header_rows         = FALSE,
+        background_color    = NA_character_,
+        text_color          = NA_character_,
+        border              = 0,
+        border_color        = NA_character_,
+        border_style        = "solid",
+        left_padding        = 6,
+        right_padding       = 6,
+        top_padding         = 6,
+        bottom_padding      = 6,
+        wrap                = TRUE,
+        caption             = NA_character_,
+        caption_pos         = "top",
+        caption_width       = NA_real_,
+        position            = "center",
+        tabular_environment = NA_character_,
+        table_environment   = "table",
+        label               = NA_character_,
+        latex_float         = "ht",
+        markdown            = FALSE,
+        escape_contents     = TRUE,
+        na_string           = "",
+        bold                = FALSE,
+        italic              = FALSE,
+        font_size           = NA_real_,
+        rotation            = 0,
+        number_format       = list("%.3g"),
+        font                = NA_character_
+      )
+
 #' Property helper functions
 #'
 #' Internal helpers for getting and setting huxtable properties.
@@ -156,6 +242,68 @@
 .prop_set_table <- function (ht, value, prop, check_fun = NULL,
         check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
+  value <- .validate_prop(value, prop, check_fun, check_values, reset_na)
+  if (! is.null(extra)) eval(extra)
+  attr(ht, prop) <- value
+  ht
+}
+
+#' Map a function over a row-based property
+#'
+#' @inheritParams .prop_set_row
+#' @param fn Mapping function. See [mapping-functions].
+#' @noRd
+.prop_map_row <- function (ht, row, fn, prop, check_fun = NULL,
+        check_values = NULL, extra = NULL, reset_na = TRUE) {
+  assert_that(is_huxtable(ht))
+  if (missing(fn)) {
+    fn <- row
+    row <- seq_len(nrow(ht))
+  }
+  rows <- get_rc_spec(ht, row, 1)
+  cols <- seq_len(ncol(ht))
+  current <- matrix(attr(ht, prop)[rows], nrow = length(rows),
+        ncol = length(cols))
+  value <- fn(ht, rows, cols, current)
+  value <- .validate_prop(value[, 1], prop, check_fun, check_values, reset_na)
+  if (! is.null(extra)) eval(extra)
+  attr(ht, prop)[rows] <- value
+  ht
+}
+
+#' Map a function over a column-based property
+#'
+#' @inheritParams .prop_set_col
+#' @param fn Mapping function. See [mapping-functions].
+#' @noRd
+.prop_map_col <- function (ht, col, fn, prop, check_fun = NULL,
+        check_values = NULL, extra = NULL, reset_na = TRUE) {
+  assert_that(is_huxtable(ht))
+  if (missing(fn)) {
+    fn <- col
+    col <- seq_len(ncol(ht))
+  }
+  cols <- get_rc_spec(ht, col, 2)
+  rows <- seq_len(nrow(ht))
+  current <- matrix(attr(ht, prop)[cols], nrow = length(rows),
+        ncol = length(cols), byrow = TRUE)
+  value <- fn(ht, rows, cols, current)
+  value <- .validate_prop(value[1, ], prop, check_fun, check_values, reset_na)
+  if (! is.null(extra)) eval(extra)
+  attr(ht, prop)[cols] <- value
+  ht
+}
+
+#' Map a function over a table-level property
+#'
+#' @inheritParams .prop_set_table
+#' @param fn Mapping function taking `(ht, value)`.
+#' @noRd
+.prop_map_table <- function (ht, fn, prop, check_fun = NULL,
+        check_values = NULL, extra = NULL, reset_na = TRUE) {
+  assert_that(is_huxtable(ht))
+  current <- attr(ht, prop)
+  value <- fn(ht, current)
   value <- .validate_prop(value, prop, check_fun, check_values, reset_na)
   if (! is.null(extra)) eval(extra)
   attr(ht, prop) <- value

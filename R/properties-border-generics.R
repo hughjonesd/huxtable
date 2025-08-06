@@ -1,28 +1,143 @@
 
 for (val in paste0(c("left", "right", "top", "bottom"), "_border")) {
-  make_getter_setters(val,
-    "cell",
-    check_fun = is_borderish,
-    default = 0.4,
-    only_set_map = TRUE
-  )
+  set_fun <- paste0("set_", val)
+  map_fun <- paste0("map_", val)
+  attr_fun <- as.name(val)
+  assign(set_fun, eval(bquote(
+    function (ht, row, col, value = 0.4) {
+      assert_that(is_huxtable(ht))
+      if (missing(row) && missing(col) && missing(value)) {
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else if (missing(col) && missing(value)) {
+        value <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      .(attr_fun)(ht)[rc$row, rc$col] <- value
+      ht
+    }
+  )))
+  assign(map_fun, eval(bquote(
+    function (ht, row, col, fn) {
+      assert_that(is_huxtable(ht))
+      if (missing(col) && missing(fn)) {
+        fn <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      current <- .(attr_fun)(ht)[rc$row, rc$col, drop = FALSE]
+      if (is_huxtable(current)) current <- as.matrix(current)
+      .(attr_fun)(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
+      ht
+    }
+  )))
 }
-
 
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_color")) {
-  make_getter_setters(val,
-    "cell",
-    only_set_map = TRUE
-  )
+  set_fun <- paste0("set_", val)
+  map_fun <- paste0("map_", val)
+  attr_fun <- as.name(val)
+  assign(set_fun, eval(bquote(
+    function (ht, row, col, value) {
+      assert_that(is_huxtable(ht))
+      if (missing(row) && missing(col) && missing(value)) {
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else if (missing(col) && missing(value)) {
+        value <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      .(attr_fun)(ht)[rc$row, rc$col] <- value
+      ht
+    }
+  )))
+  assign(map_fun, eval(bquote(
+    function (ht, row, col, fn) {
+      assert_that(is_huxtable(ht))
+      if (missing(col) && missing(fn)) {
+        fn <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      current <- .(attr_fun)(ht)[rc$row, rc$col, drop = FALSE]
+      if (is_huxtable(current)) current <- as.matrix(current)
+      .(attr_fun)(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
+      ht
+    }
+  )))
 }
 
-
 for (val in paste0(c("left", "right", "top", "bottom"), "_border_style")) {
-  make_getter_setters(val,
-    "cell",
-    check_values = c("solid", "double", "dashed", "dotted"),
-    only_set_map = TRUE
-  )
+  set_fun <- paste0("set_", val)
+  map_fun <- paste0("map_", val)
+  attr_fun <- as.name(val)
+  assign(set_fun, eval(bquote(
+    function (ht, row, col, value) {
+      assert_that(is_huxtable(ht))
+      if (missing(row) && missing(col) && missing(value)) {
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else if (missing(col) && missing(value)) {
+        value <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      .(attr_fun)(ht)[rc$row, rc$col] <- value
+      ht
+    }
+  )))
+  assign(map_fun, eval(bquote(
+    function (ht, row, col, fn) {
+      assert_that(is_huxtable(ht))
+      if (missing(col) && missing(fn)) {
+        fn <- row
+        row <- seq_len(nrow(ht))
+        col <- seq_len(ncol(ht))
+      } else {
+        if (missing(row)) row <- seq_len(nrow(ht))
+        if (missing(col)) col <- seq_len(ncol(ht))
+      }
+      rc <- list()
+      rc$row <- get_rc_spec(ht, row, 1)
+      rc$col <- get_rc_spec(ht, col, 2)
+      current <- .(attr_fun)(ht)[rc$row, rc$col, drop = FALSE]
+      if (is_huxtable(current)) current <- as.matrix(current)
+      .(attr_fun)(ht)[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
+      ht
+    }
+  )))
 }
 
 
