@@ -6,10 +6,7 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
-
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
     strategy:
       fail-fast: false
       matrix:
@@ -18,41 +15,12 @@ jobs:
           - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-24.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/noble/latest"}
           - {os: ubuntu-24.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/noble/latest"}
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: ./.github/actions/setup-r-dependencies
-        with:
-          r-version: ${{ matrix.config.r }}
-          extra-packages: rcmdcheck
-      - uses: r-lib/actions/setup-tinytex@v2
-      - run: tlmgr update --self
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-        shell: bash
-      - run: tlmgr install adjustbox ulem wrapfig threeparttable fontspec
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-        shell: bash
-      - run: tlmgr install placeins
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-        shell: bash
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+    uses: ./.github/workflows/setup-dependencies.yaml
+    with:
+      os: ${{ matrix.config.os }}
+      r-version: ${{ matrix.config.r }}
+      rspm: ${{ matrix.config.rspm }}
+      extra-packages: rcmdcheck
+      run-command: "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'), error_on = 'warning', check_dir = 'check')"
+      upload-check: true
+    secrets: inherit
