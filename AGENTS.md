@@ -16,4 +16,4 @@ If you want to build vignettes, you'll need the R.rsp package. Alternatively,
 don't build vignettes when you build the package, by passing the 
 `--no-build-vignettes` flag to `devtools::build()`.
 
-
+Style your code with scripts/style.R before preparing  a pull request.
