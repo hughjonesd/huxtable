@@ -7,6 +7,16 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+\subsection{Breaking changes}{
+\itemize{
+\item Functions are no longer generic, so you can’t subclass a huxtable
+object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
+\item Reworked internals, with the halp of OpenAI Codex.
+}
+}
+}
+
 \section{huxtable 5.6.0}{
 \subsection{Breaking changes}{
 \itemize{

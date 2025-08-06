@@ -1,5 +1,11 @@
 # huxtable (development version)
 
+## Breaking changes
+
+* Functions are no longer generic, so you can't subclass a huxtable object.
+  AFAIK nobody has ever done this; if I'm wrong, please tell me.
+* Reworked internals, with the halp of OpenAI Codex.
+
 # huxtable 5.6.0
 
 ## Breaking changes
