@@ -26,53 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-r@v2
+      - uses: ./.github/actions/setup-r-dependencies
         with:
           r-version: ${{ matrix.config.r }}
-
-      - uses: r-lib/actions/setup-pandoc@v2
-
+          extra-packages: rcmdcheck
       - uses: r-lib/actions/setup-tinytex@v2
-
-      - run: tlmgr update --self
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-
-      - run: tlmgr install adjustbox ulem wrapfig threeparttable fontspec
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-      - run: tlmgr install placeins
-        env:
-          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
-
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
-
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
+      - uses: ./.github/actions/setup-latex
 
       - name: Check
         env:
@@ -86,9 +45,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-      - name: Test coverage
-        run: |
-          remotes::install_cran("covr")
-          covr::codecov()
-        shell: Rscript {0}
