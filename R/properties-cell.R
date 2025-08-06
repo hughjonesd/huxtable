@@ -160,7 +160,7 @@ rowspan <- function (ht) .prop_get(ht, "rowspan")
   .prop_replace(ht, value, "rowspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
           if (any(too_long)) {
             stop("rowspan would extend beyond bottom of table")
           }
@@ -175,11 +175,14 @@ set_rowspan <- function (ht, row, col, value) {
   .prop_set(ht, row, col, value, "rowspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
+          too_long <- na.omit(rows + value - 1 > nrow(ht))
           if (any(too_long)) {
             stop("rowspan would extend beyond bottom of table")
           }
-          dc <- display_cells(ht, new_rowspan = value)
+          new_rs <- attr(ht, "rowspan")
+          new_rs[rc$row, rc$col] <- value
+          dc <- display_cells(ht, new_rowspan = new_rs)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
@@ -190,11 +193,14 @@ map_rowspan <- function (ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "rowspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
+          too_long <- na.omit(rows + value - 1 > nrow(ht))
           if (any(too_long)) {
             stop("rowspan would extend beyond bottom of table")
           }
-          dc <- display_cells(ht, new_rowspan = value)
+          new_rs <- attr(ht, "rowspan")
+          new_rs[rc$row, rc$col] <- value
+          dc <- display_cells(ht, new_rowspan = new_rs)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
@@ -214,7 +220,7 @@ colspan <- function (ht) .prop_get(ht, "colspan")
   .prop_replace(ht, value, "colspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
           if (any(too_long)) {
             stop("colspan would extend beyond right edge of table")
           }
@@ -229,11 +235,14 @@ set_colspan <- function (ht, row, col, value) {
   .prop_set(ht, row, col, value, "colspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
+          too_long <- na.omit(cols + value - 1 > ncol(ht))
           if (any(too_long)) {
             stop("colspan would extend beyond right edge of table")
           }
-          dc <- display_cells(ht, new_colspan = value)
+          new_cs <- attr(ht, "colspan")
+          new_cs[rc$row, rc$col] <- value
+          dc <- display_cells(ht, new_colspan = new_cs)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
@@ -244,11 +253,14 @@ map_colspan <- function (ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "colspan",
         check_fun = is.numeric,
         extra = quote({
-          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
+          too_long <- na.omit(cols + value - 1 > ncol(ht))
           if (any(too_long)) {
             stop("colspan would extend beyond right edge of table")
           }
-          dc <- display_cells(ht, new_colspan = value)
+          new_cs <- attr(ht, "colspan")
+          new_cs[rc$row, rc$col] <- value
+          dc <- display_cells(ht, new_colspan = new_cs)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
@@ -801,6 +813,7 @@ map_contents <- function (ht, row, col, fn) {
   rcrow <- get_rc_spec(ht, row, 1)
   rccol <- get_rc_spec(ht, col, 2)
   current <- ht[rcrow, rccol, drop = FALSE]
+  if (is_huxtable(current)) current <- as.matrix(current)
   ht[rcrow, rccol] <- fn(ht, rcrow, rccol, current)
   ht
 }
