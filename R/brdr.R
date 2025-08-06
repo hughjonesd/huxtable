@@ -1,15 +1,14 @@
-
 #' Create a border object
 #'
 #' `brdr()` objects can be passed into [set_top_border()] and friends.
 #' They set multiple border properties simultaneously.
-#' 
+#'
 #' @param thickness Thickness of the border in points.
 #' @param style "solid" (the default), "double", "dashed" or "dotted".
 #' @param color String representing a valid color (either a color name or
 #'   a hexadecimalstring like "#00FF00").
 #'
-#' @return An object of class "brdr". 
+#' @return An object of class "brdr".
 #'
 #' @export
 #'
@@ -17,9 +16,11 @@
 #'
 #' set_bottom_border(jams, brdr(1, "solid", "red"))
 #'
-brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
-  assert_that(is.number(thickness), thickness >= 0, is.string(style),
-    style %in% c("solid", "double", "dashed", "dotted"), is.string(color))
+brdr <- function(thickness = 0.4, style = "solid", color = NA_character_) {
+  assert_that(
+    is.number(thickness), thickness >= 0, is.string(style),
+    style %in% c("solid", "double", "dashed", "dotted"), is.string(color)
+  )
   new_brdr(thickness = thickness, style = style, color = color)
 }
 
@@ -49,7 +50,7 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 #' @export
 #' @method `[<-` brdr
 #' @export `[<-.brdr`
-`[<-.brdr` <- function (x, ..., value) {
+`[<-.brdr` <- function(x, ..., value) {
   UseMethod("[<-.brdr", value)
 }
 
@@ -67,12 +68,12 @@ brdr <- function (thickness = 0.4, style = "solid", color = NA_character_) {
 #' brdr_thickness(left_border(jams))
 #' brdr_thickness(brdr(1, "solid", "red"))
 #'
-brdr_thickness <- function (x) {
+brdr_thickness <- function(x) {
   x$thickness
 }
 
 
-new_brdr <- function (thickness, style, color) {
+new_brdr <- function(thickness, style, color) {
   structure(
     list(thickness = thickness, style = style, color = color),
     class = "brdr"
@@ -87,13 +88,13 @@ format.brdr <- function(x, ...) {
 
 
 #' @export
-print.brdr <- function (x, ...) cat(format(x))
+print.brdr <- function(x, ...) cat(format(x))
 
 
 is_brdr <- function(x) inherits(x, "brdr")
 
 
-is_borderish <- function (x) {
+is_borderish <- function(x) {
   (is.numeric(x) && all(x >= 0)) || is_brdr(x)
 }
 
@@ -102,8 +103,8 @@ is_borderish <- function (x) {
 #' @method `[<-.brdr` brdr
 `[<-.brdr.brdr` <- function(x, ..., value) {
   x$thickness[...] <- value$thickness
-  x$style[...]     <- value$style
-  x$color[...]     <- value$color
+  x$style[...] <- value$style
+  x$color[...] <- value$color
 
   x
 }
@@ -111,18 +112,18 @@ is_borderish <- function (x) {
 
 #' @export
 #' @method `[<-.brdr` list
-`[<-.brdr.list` <- function (x, ..., value) {
+`[<-.brdr.list` <- function(x, ..., value) {
   # we assume each element is a brdr object of length 1 and then apply them to
   # each element in turn.`...` is probably a logical vector with no
   # indices, so we can't just concatenate the values.
   assert_that(all(sapply(value, is_brdr)))
-  thickness <- vapply(value, function (y) y$thickness, FUN.VALUE = numeric(1))
-  style <- vapply(value, function (y) y$style, FUN.VALUE = character(1))
-  color <- vapply(value, function (y) y$color, FUN.VALUE = character(1))
+  thickness <- vapply(value, function(y) y$thickness, FUN.VALUE = numeric(1))
+  style <- vapply(value, function(y) y$style, FUN.VALUE = character(1))
+  color <- vapply(value, function(y) y$color, FUN.VALUE = character(1))
 
   x$thickness[...] <- thickness
-  x$style[...]     <- style
-  x$color[...]     <- color
+  x$style[...] <- style
+  x$color[...] <- color
 
   x
 }
@@ -138,10 +139,10 @@ is_borderish <- function (x) {
 
 
 #' @export
-`[.brdr` <- function (x, ...) {
+`[.brdr` <- function(x, ...) {
   thickness <- x$thickness[...]
-  style     <- x$style[...]
-  color     <- x$color[...]
+  style <- x$style[...]
+  color <- x$color[...]
   new_brdr(
     thickness = thickness,
     style     = style,
@@ -151,7 +152,7 @@ is_borderish <- function (x) {
 
 
 #' @export
-t.brdr <- function (x) {
+t.brdr <- function(x) {
   new_brdr(
     thickness = t(x$thickness),
     style     = t(x$style),
@@ -161,13 +162,13 @@ t.brdr <- function (x) {
 
 
 #' @export
-dim.brdr <- function (x) {
+dim.brdr <- function(x) {
   dim(x$thickness)
 }
 
 
 #' @export
-`dimnames<-.brdr` <- function (x, value) {
+`dimnames<-.brdr` <- function(x, value) {
   dimnames(x$thickness) <- value
   dimnames(x$style) <- value
   dimnames(x$color) <- value
@@ -177,7 +178,7 @@ dim.brdr <- function (x) {
 
 
 #' @export
-rbind.brdr <- function (...) {
+rbind.brdr <- function(...) {
   b1 <- ..1
   b2 <- ..2
   new_brdr(
@@ -189,7 +190,7 @@ rbind.brdr <- function (...) {
 
 
 #' @export
-cbind.brdr <- function (...) {
+cbind.brdr <- function(...) {
   b1 <- ..1
   b2 <- ..2
   new_brdr(
@@ -201,6 +202,6 @@ cbind.brdr <- function (...) {
 
 
 #' @export
-is.na.brdr <- function (x) {
+is.na.brdr <- function(x) {
   is.na(x$thickness)
 }

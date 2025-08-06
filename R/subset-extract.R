@@ -1,4 +1,3 @@
-
 #' @import assertthat
 NULL
 
@@ -38,15 +37,15 @@ NULL
 #' class(jams[1:3, ])
 #' jams[, 1]
 #' jams$Type
-`[.huxtable` <- function (x, i, j, drop = FALSE) {
-  if (! missing(drop) && drop) {
+`[.huxtable` <- function(x, i, j, drop = FALSE) {
+  if (!missing(drop) && drop) {
     stop("You can't use `drop = TRUE` to subset a huxtable. Use `[[` or convert explicitly.")
   }
   # effectively nargs() is the "number of commas in the call, plus one".
   # E.g. nargs() is 2 if a function is called like f(a=,b=).
   # whereas a and b will still be "missing".
   # So: [,x] -> missing_i, nargs() 2
-  n_idx <- nargs() - ! missing(drop) - 1L
+  n_idx <- nargs() - !missing(drop) - 1L
   if (n_idx == 1L) { # called like ht[x]
     if (missing(i)) {
       return(x)
@@ -58,10 +57,18 @@ NULL
   ix <- normalize_index(i, nrow(x), rownames(x))
   jx <- normalize_index(j, ncol(x), colnames(x))
 
-  if (any(is.na(ix))) stop("Bad row subscripts: ",
-        paste(i[is.na(ix)], collapse = ","))
-  if (any(is.na(jx))) stop("Bad column subscripts: ",
-        paste(j[is.na(jx)], collapse = ","))
+  if (any(is.na(ix))) {
+    stop(
+      "Bad row subscripts: ",
+      paste(i[is.na(ix)], collapse = ",")
+    )
+  }
+  if (any(is.na(jx))) {
+    stop(
+      "Bad column subscripts: ",
+      paste(j[is.na(jx)], collapse = ",")
+    )
+  }
   res <- subset_rows(x, ix)
   res <- subset_cols(res, jx)
 
@@ -84,7 +91,7 @@ NULL
 #' data(jams)
 #' jams$price <- c("Price", 1.70, 2.00, 2.20)
 #' jams
-`[<-.huxtable` <- function (x, i, j, value) {
+`[<-.huxtable` <- function(x, i, j, value) {
   # for ht[] <- x, nargs() is 3
   # for ht[1] <- x, nargs() is still 3
   # for ht[,1] <- x, nargs() is 4
@@ -106,7 +113,7 @@ NULL
   jx <- normalize_index(j, ncol(x), colnames(x))
 
   if (is.null(value)) {
-    if (! identical(ix, seq_len(nrow(x)))) stop("You can only set entire columns to NULL")
+    if (!identical(ix, seq_len(nrow(x)))) stop("You can only set entire columns to NULL")
     return(delete_cols(x, jx))
   }
 
@@ -129,7 +136,7 @@ NULL
     rn <- rownames(x)
     x <- rbind(x, new_value, copy_cell_props = TRUE)
     if (is.character(i)) rownames(x) <- c(rn, i[new_rows])
-    ix <- ix[! new_rows]
+    ix <- ix[!new_rows]
   }
 
   if (any(new_cols)) {
@@ -142,7 +149,7 @@ NULL
     cn <- colnames(x)
     x <- cbind(x, new_value, copy_cell_props = TRUE)
     if (is.character(j)) colnames(x) <- c(cn, j[new_cols])
-    jx <- jx[! new_cols]
+    jx <- jx[!new_cols]
   }
 
   # what to do about spans? One possibility: break `value` up into
@@ -170,7 +177,7 @@ NULL
 
 #' @rdname extract-methods
 #' @export
-`$<-.huxtable` <- function (x, name, value) {
+`$<-.huxtable` <- function(x, name, value) {
   assert_that(is.string(name))
   idx <- match(name, names(x))
 
@@ -188,7 +195,7 @@ NULL
 
 #' @rdname extract-methods
 #' @export
-`[[<-.huxtable` <- function (x, i, j, value) {
+`[[<-.huxtable` <- function(x, i, j, value) {
   n_idx <- nargs() - 2
   if (n_idx == 1) {
     assert_that(is.scalar(i))
@@ -201,16 +208,23 @@ NULL
   }
 
   if (is.null(value)) {
-    if (n_idx != 1) stop("Can't set `ht[[row, column]] <- NULL`. ",
-          "To delete a column set `ht[[column]] <- NULL`.")
+    if (n_idx != 1) {
+      stop(
+        "Can't set `ht[[row, column]] <- NULL`. ",
+        "To delete a column set `ht[[column]] <- NULL`."
+      )
+    }
     return(delete_cols(x, jx))
   }
 
   # data frames do weird things. We only add new columns via [[.
   if (is.na(jx)) {
-    if (n_idx != 1) stop(
-          "Can't add columns with `ht[[row, column]] <- new_col`. ",
-          "Use `ht[[column]] <- new_col`.")
+    if (n_idx != 1) {
+      stop(
+        "Can't add columns with `ht[[row, column]] <- new_col`. ",
+        "Use `ht[[column]] <- new_col`."
+      )
+    }
     res <- cbind(x, value, copy_cell_props = TRUE)
     if (is.character(i)) colnames(res) <- c(colnames(x), i)
     return(res)
@@ -218,4 +232,3 @@ NULL
     return(NextMethod())
   }
 }
-

@@ -1,5 +1,3 @@
-
-
 #' Set background color stripes
 #'
 #' These convenience functions call [map_background_color] with [by_rows]
@@ -21,13 +19,13 @@ NULL
 
 #' @rdname stripes
 #' @export
-stripe_rows <- function (ht, stripe1 = "white", stripe2 = "grey90") {
+stripe_rows <- function(ht, stripe1 = "white", stripe2 = "grey90") {
   map_background_color(ht = ht, by_rows(stripe1, stripe2))
 }
 
 
 #' @rdname stripes
 #' @export
-stripe_columns <- function (ht, stripe1 = "white", stripe2 = "grey90") {
+stripe_columns <- function(ht, stripe1 = "white", stripe2 = "grey90") {
   map_background_color(ht = ht, by_cols(stripe1, stripe2))
 }

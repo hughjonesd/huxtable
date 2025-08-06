@@ -1,4 +1,3 @@
-
 #' @import assertthat
 NULL
 
@@ -42,19 +41,21 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   assert_that(is.flag(quiet), is.flag(as_string))
 
   if (getOption("huxtable.latex_use_fontspec", FALSE)) {
-    huxtable_latex_dependencies <- c(huxtable_latex_dependencies,
-      list(list(name = "fontspec")))
+    huxtable_latex_dependencies <- c(
+      huxtable_latex_dependencies,
+      list(list(name = "fontspec"))
+    )
   }
   report <- sapply(huxtable_latex_dependencies, function(ld) {
     package_str <- "\\usepackage"
-    if (! is.null(ld$options)) {
+    if (!is.null(ld$options)) {
       options_str <- paste(ld$options, collapse = ",")
       package_str <- paste0(package_str, "[", options_str, "]")
     }
     package_str <- paste0(package_str, "{", ld$name, "}\n")
     package_str
   })
-  if (! quiet) {
+  if (!quiet) {
     cat(paste0(report, collapse = ""))
     cat("% These are LaTeX packages. You can install them using your LaTex management software,\n")
     cat("% or by running `huxtable::install_latex_dependencies()` from within R.\n")
@@ -64,7 +65,7 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
   if (as_string) {
     return(paste0(report, collapse = ""))
   } else {
-    huxtable_latex_dependencies <- lapply(huxtable_latex_dependencies, function (x) {
+    huxtable_latex_dependencies <- lapply(huxtable_latex_dependencies, function(x) {
       class(x) <- "latex_dependency"
       x
     })
@@ -81,9 +82,9 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
 #' @return `check_latex_dependencies()` returns `TRUE` or `FALSE`.
 #' @examples
 #' \dontrun{
-#'   check_latex_dependencies()
+#' check_latex_dependencies()
 #' }
-check_latex_dependencies <- function (quiet = FALSE) {
+check_latex_dependencies <- function(quiet = FALSE) {
   assert_that(is.flag(quiet))
 
   ld <- tlmgr_packages()
@@ -91,18 +92,23 @@ check_latex_dependencies <- function (quiet = FALSE) {
     pkgs <- tinytex::tl_pkgs()
   } else {
     warning("R package tinytex not found, trying to check packages directly with tlmgr")
-    pkgs <- system2("tlmgr", c("info",  "--list", "--only-installed", "--data", "name"),
-      stdout = TRUE)
+    pkgs <- system2("tlmgr", c("info", "--list", "--only-installed", "--data", "name"),
+      stdout = TRUE
+    )
     pkgs <- gsub("[.].*", "", pkgs)
   }
   pkgs_found <- if (all(ld %in% pkgs)) {
-    if (! quiet) message("All LaTeX packages found.")
+    if (!quiet) message("All LaTeX packages found.")
     TRUE
   } else {
     missing_pkgs <- setdiff(ld, pkgs)
-    if (! quiet) message("The following LaTeX packages were not found:\n",
-      paste(missing_pkgs, collapse = ", "), "\n",
-      "Install them using your latex package manager or via install_latex_dependencies().")
+    if (!quiet) {
+      message(
+        "The following LaTeX packages were not found:\n",
+        paste(missing_pkgs, collapse = ", "), "\n",
+        "Install them using your latex package manager or via install_latex_dependencies()."
+      )
+    }
     FALSE
   }
 
@@ -122,15 +128,16 @@ check_latex_dependencies <- function (quiet = FALSE) {
 #' @export
 #' @rdname report_latex_dependencies
 #' @examples
-#'
 #' \dontrun{
-#'   install_latex_dependencies()
+#' install_latex_dependencies()
 #' }
-install_latex_dependencies <- function () {
+install_latex_dependencies <- function() {
   ld <- tlmgr_packages()
   message("Trying to install packages: ", paste(ld, collapse = ", "))
-  message("If this fails, try running the following on the command line ",
-    "(you may need admin permissions):")
+  message(
+    "If this fails, try running the following on the command line ",
+    "(you may need admin permissions):"
+  )
   message("  tlmgr install ", paste(ld, collapse = " "), "\n")
 
   tinytex_available <- requireNamespace("tinytex", quietly = TRUE)
@@ -142,24 +149,25 @@ install_latex_dependencies <- function () {
   }
 
   adjustbox_ok <- check_adjustbox(quiet = TRUE)
-  if (! adjustbox_ok) {
+  if (!adjustbox_ok) {
     adjustbox_ok <- if (tinytex_available) {
       tinytex::tlmgr_update(all = FALSE, self = FALSE, more_args = "adjustbox") == 0
     } else {
       system2("tlmgr", c("update", "adjustbox")) == 0
     }
   }
-  if (! adjustbox_ok) {
+  if (!adjustbox_ok) {
     warning(
-        "adjustbox version is out of date and could not be updated automatically.\n",
-        "Try to install it with your TeX package manager.")
+      "adjustbox version is out of date and could not be updated automatically.\n",
+      "Try to install it with your TeX package manager."
+    )
   }
 
   return(install_ok && adjustbox_ok)
 }
 
 
-tlmgr_packages <- function () {
+tlmgr_packages <- function() {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), "name")
   ld <- setdiff(ld, c("graphicx", "calc", "array", "hhline", "tabularx"))
@@ -169,7 +177,7 @@ tlmgr_packages <- function () {
 }
 
 
-check_adjustbox <- function (quiet = TRUE) {
+check_adjustbox <- function(quiet = TRUE) {
   args <- c("info", "--data", "cat-version", "--only-installed", "adjustbox")
   adjustbox_rev <- if (requireNamespace("tinytex", quietly = TRUE)) {
     tinytex::tlmgr(args, stdout = TRUE, .quiet = TRUE)
@@ -178,15 +186,17 @@ check_adjustbox <- function (quiet = TRUE) {
   }
 
   ok <- grepl("1.3", adjustbox_rev, fixed = TRUE)
-  if (! ok && ! quiet) {
-    warning("TeX package 'adjustbox' is out of date.\n",
-      "Update it with your package manager or via `install_latex_dependencies()`.")
+  if (!ok && !quiet) {
+    warning(
+      "TeX package 'adjustbox' is out of date.\n",
+      "Update it with your package manager or via `install_latex_dependencies()`."
+    )
   }
 
   return(ok)
 }
 
 
-tlmgr_install_wrapper <- function (...) {
+tlmgr_install_wrapper <- function(...) {
   tinytex::tlmgr_install(...)
 }

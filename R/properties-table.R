@@ -1,4 +1,3 @@
-
 #' Set the table's position with respect to surrounding content
 #'
 #' Table position may be "left", "right" or "center". If you want text to
@@ -22,21 +21,30 @@
 #' set_position(jams, "center")
 #'
 NULL
-position <- function (ht) .prop_get(ht, "position")
-`position<-` <- function (ht, value) {
+position <- function(ht) .prop_get(ht, "position")
+`position<-` <- function(ht, value) {
   .prop_replace(ht, value, "position",
-        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-        extra = quote({ value[value == "centre"] <- "center" }))
+    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+    extra = quote({
+      value[value == "centre"] <- "center"
+    })
+  )
 }
-set_position <- function (ht, value) {
+set_position <- function(ht, value) {
   .prop_set_table(ht, value, "position",
-        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-        extra = quote({ value[value == "centre"] <- "center" }))
+    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+    extra = quote({
+      value[value == "centre"] <- "center"
+    })
+  )
 }
-map_position <- function (ht, fn) {
+map_position <- function(ht, fn) {
   .prop_map_table(ht, fn, "position",
-        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-        extra = quote({ value[value == "centre"] <- "center" }))
+    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+    extra = quote({
+      value[value == "centre"] <- "center"
+    })
+  )
 }
 
 
@@ -62,33 +70,42 @@ map_position <- function (ht, fn) {
 #' set_caption_pos(jams, "bottom")
 #'
 NULL
-caption_pos <- function (ht) .prop_get(ht, "caption_pos")
-`caption_pos<-` <- function (ht, value) {
+caption_pos <- function(ht) .prop_get(ht, "caption_pos")
+`caption_pos<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption_pos",
-        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
-          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
-        extra = quote({
-          value[value == "topcentre"] <- "topcenter"
-          value[value == "bottomcentre"] <- "bottomcenter"
-        }))
+    check_values = c(
+      "top", "bottom", "topleft", "topcenter", "topcentre",
+      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
+    ),
+    extra = quote({
+      value[value == "topcentre"] <- "topcenter"
+      value[value == "bottomcentre"] <- "bottomcenter"
+    })
+  )
 }
-set_caption_pos <- function (ht, value) {
+set_caption_pos <- function(ht, value) {
   .prop_set_table(ht, value, "caption_pos",
-        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
-          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
-        extra = quote({
-          value[value == "topcentre"] <- "topcenter"
-          value[value == "bottomcentre"] <- "bottomcenter"
-        }))
+    check_values = c(
+      "top", "bottom", "topleft", "topcenter", "topcentre",
+      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
+    ),
+    extra = quote({
+      value[value == "topcentre"] <- "topcenter"
+      value[value == "bottomcentre"] <- "bottomcenter"
+    })
+  )
 }
-map_caption_pos <- function (ht, fn) {
+map_caption_pos <- function(ht, fn) {
   .prop_map_table(ht, fn, "caption_pos",
-        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
-          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
-        extra = quote({
-          value[value == "topcentre"] <- "topcenter"
-          value[value == "bottomcentre"] <- "bottomcenter"
-        }))
+    check_values = c(
+      "top", "bottom", "topleft", "topcenter", "topcentre",
+      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
+    ),
+    extra = quote({
+      value[value == "topcentre"] <- "topcenter"
+      value[value == "bottomcentre"] <- "bottomcenter"
+    })
+  )
 }
 
 
@@ -109,14 +126,14 @@ map_caption_pos <- function (ht, fn) {
 #' @template getset-example
 #' @templateVar attr_val 0.5
 NULL
-caption_width <- function (ht) .prop_get(ht, "caption_width")
-`caption_width<-` <- function (ht, value) {
+caption_width <- function(ht) .prop_get(ht, "caption_width")
+`caption_width<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption_width", check_fun = is_numeric_or_character)
 }
-set_caption_width <- function (ht, value) {
+set_caption_width <- function(ht, value) {
   .prop_set_table(ht, value, "caption_width", check_fun = is_numeric_or_character)
 }
-map_caption_width <- function (ht, fn) {
+map_caption_width <- function(ht, fn) {
   .prop_map_table(ht, fn, "caption_width", check_fun = is_numeric_or_character)
 }
 
@@ -136,14 +153,14 @@ map_caption_width <- function (ht, fn) {
 #' @templateVar attr_val 0.8
 #' @family table measurements
 NULL
-width <- function (ht) .prop_get(ht, "width")
-`width<-` <- function (ht, value) {
+width <- function(ht) .prop_get(ht, "width")
+`width<-` <- function(ht, value) {
   .prop_replace(ht, value, "width", check_fun = is_numeric_or_character)
 }
-set_width <- function (ht, value) {
+set_width <- function(ht, value) {
   .prop_set_table(ht, value, "width", check_fun = is_numeric_or_character)
 }
-map_width <- function (ht, fn) {
+map_width <- function(ht, fn) {
   .prop_map_table(ht, fn, "width", check_fun = is_numeric_or_character)
 }
 
@@ -164,14 +181,14 @@ map_width <- function (ht, fn) {
 #' @template getset-example
 #' @templateVar attr_val 0.4
 NULL
-height <- function (ht) .prop_get(ht, "height")
-`height<-` <- function (ht, value) {
+height <- function(ht) .prop_get(ht, "height")
+`height<-` <- function(ht, value) {
   .prop_replace(ht, value, "height", check_fun = is_numeric_or_character)
 }
-set_height <- function (ht, value) {
+set_height <- function(ht, value) {
   .prop_set_table(ht, value, "height", check_fun = is_numeric_or_character)
 }
-map_height <- function (ht, fn) {
+map_height <- function(ht, fn) {
   .prop_map_table(ht, fn, "height", check_fun = is_numeric_or_character)
 }
 
@@ -193,18 +210,19 @@ map_height <- function (ht, fn) {
 #' set_caption(jams, "Pots of jam for sale")
 #' # escape caption characters:
 #' caption(jams) <- sanitize(
-#'       "Make $$$ with jam",
-#'       type = "latex")
+#'   "Make $$$ with jam",
+#'   type = "latex"
+#' )
 #'
 NULL
-caption <- function (ht) .prop_get(ht, "caption")
-`caption<-` <- function (ht, value) {
+caption <- function(ht) .prop_get(ht, "caption")
+`caption<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption", check_fun = is.string)
 }
-set_caption <- function (ht, value) {
+set_caption <- function(ht, value) {
   .prop_set_table(ht, value, "caption", check_fun = is.string)
 }
-map_caption <- function (ht, fn) {
+map_caption <- function(ht, fn) {
   .prop_map_table(ht, fn, "caption", check_fun = is.string)
 }
 
@@ -223,14 +241,14 @@ map_caption <- function (ht, fn) {
 #' @template getset-example
 #' @templateVar attr_val "longtable"
 NULL
-tabular_environment <- function (ht) .prop_get(ht, "tabular_environment")
-`tabular_environment<-` <- function (ht, value) {
+tabular_environment <- function(ht) .prop_get(ht, "tabular_environment")
+`tabular_environment<-` <- function(ht, value) {
   .prop_replace(ht, value, "tabular_environment", check_fun = is.string)
 }
-set_tabular_environment <- function (ht, value) {
+set_tabular_environment <- function(ht, value) {
   .prop_set_table(ht, value, "tabular_environment", check_fun = is.string)
 }
-map_tabular_environment <- function (ht, fn) {
+map_tabular_environment <- function(ht, fn) {
   .prop_map_table(ht, fn, "tabular_environment", check_fun = is.string)
 }
 
@@ -253,14 +271,14 @@ map_tabular_environment <- function (ht, fn) {
 #' @template getset-example
 #' @templateVar attr_val "table*"
 NULL
-table_environment <- function (ht) .prop_get(ht, "table_environment")
-`table_environment<-` <- function (ht, value) {
+table_environment <- function(ht) .prop_get(ht, "table_environment")
+`table_environment<-` <- function(ht, value) {
   .prop_replace(ht, value, "table_environment", check_fun = is.string)
 }
-set_table_environment <- function (ht, value) {
+set_table_environment <- function(ht, value) {
   .prop_set_table(ht, value, "table_environment", check_fun = is.string)
 }
-map_table_environment <- function (ht, fn) {
+map_table_environment <- function(ht, fn) {
   .prop_map_table(ht, fn, "table_environment", check_fun = is.string)
 }
 
@@ -291,14 +309,14 @@ map_table_environment <- function (ht, fn) {
 #' `options(huxtable.bookdown = FALSE)`.
 #'
 NULL
-label <- function (ht) .prop_get(ht, "label")
-`label<-` <- function (ht, value) {
+label <- function(ht) .prop_get(ht, "label")
+`label<-` <- function(ht, value) {
   .prop_replace(ht, value, "label", check_fun = is.string)
 }
-set_label <- function (ht, value) {
+set_label <- function(ht, value) {
   .prop_set_table(ht, value, "label", check_fun = is.string)
 }
-map_label <- function (ht, fn) {
+map_label <- function(ht, fn) {
   .prop_map_table(ht, fn, "label", check_fun = is.string)
 }
 
@@ -322,13 +340,13 @@ map_label <- function (ht, fn) {
 #' @template getset-example
 #' @templateVar attr_val "b"
 NULL
-latex_float <- function (ht) .prop_get(ht, "latex_float")
-`latex_float<-` <- function (ht, value) {
+latex_float <- function(ht) .prop_get(ht, "latex_float")
+`latex_float<-` <- function(ht, value) {
   .prop_replace(ht, value, "latex_float", check_fun = is.string)
 }
-set_latex_float <- function (ht, value) {
+set_latex_float <- function(ht, value) {
   .prop_set_table(ht, value, "latex_float", check_fun = is.string)
 }
-map_latex_float <- function (ht, fn) {
+map_latex_float <- function(ht, fn) {
   .prop_map_table(ht, fn, "latex_float", check_fun = is.string)
 }

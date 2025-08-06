@@ -1,4 +1,3 @@
-
 # functions for quick export to output formats------------------------------------------------------
 
 #' @import assertthat
@@ -28,15 +27,15 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#'   m <- matrix(1:4, 2, 2)
+#' m <- matrix(1:4, 2, 2)
 #'
-#'   quick_pdf(m, jams)
-#'   quick_latex(m, jams)
-#'   quick_html(m, jams)
-#'   quick_docx(m, jams)
-#'   quick_xlsx(m, jams)
-#'   quick_pptx(m, jams)
-#'   quick_rtf(m, jams)
+#' quick_pdf(m, jams)
+#' quick_latex(m, jams)
+#' quick_html(m, jams)
+#' quick_docx(m, jams)
+#' quick_xlsx(m, jams)
+#' quick_pptx(m, jams)
+#' quick_rtf(m, jams)
 #' }
 #' @name quick-output
 NULL
@@ -44,8 +43,9 @@ NULL
 
 #' @rdname quick-output
 #' @export
-quick_latex <- function (..., file = confirm("huxtable-output.tex"), borders = 0.4,
-  open = interactive()) {
+quick_latex <- function(
+    ..., file = confirm("huxtable-output.tex"), borders = 0.4,
+    open = interactive()) {
   assert_that(is.number(borders), is.flag(open))
   force(file)
 
@@ -64,8 +64,9 @@ quick_latex <- function (..., file = confirm("huxtable-output.tex"), borders = 0
 #' @param height String passed to `geometry`"s `paperheight` option. Use `NULL` for the default
 #'   height.
 #' @export
-quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4,
-  open = interactive(), width = NULL, height = NULL) {
+quick_pdf <- function(
+    ..., file = confirm("huxtable-output.pdf"), borders = 0.4,
+    open = interactive(), width = NULL, height = NULL) {
   assert_that(is.number(borders), is.string(width) || is.null(width), is.string(height) || is.null(height))
   assert_that(is.flag(open))
   force(file) # ensures confirm() is called before any other files are created.
@@ -84,7 +85,7 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     output_file <- file
   } else {
     if (getOption("huxtable.latex_use_fontspec", FALSE)) {
-      old_LATEX = Sys.getenv("LATEX")
+      old_LATEX <- Sys.getenv("LATEX")
       Sys.setenv(LATEX = "xelatex")
       tools::texi2dvi(latex_file, clean = TRUE) # outputs to current working directory
       Sys.setenv(LATEX = old_LATEX)
@@ -93,8 +94,8 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
     }
     output_file <- sub("\\.tex$", ".pdf", basename(latex_file))
   }
-  if (! file.exists(output_file)) stop("Could not find pdf output file '", output_file, "'")
-  if (! file.remove(latex_file)) warning("Could not remove intermediate TeX file '", latex_file, "'")
+  if (!file.exists(output_file)) stop("Could not find pdf output file '", output_file, "'")
+  if (!file.remove(latex_file)) warning("Could not remove intermediate TeX file '", latex_file, "'")
 
   if (output_file != file) {
     if (file.copy(output_file, file, overwrite = TRUE)) {
@@ -111,8 +112,9 @@ quick_pdf <- function (..., file = confirm("huxtable-output.pdf"), borders = 0.4
 
 #' @rdname quick-output
 #' @export
-quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0.4,
-  open = interactive()) {
+quick_html <- function(
+    ..., file = confirm("huxtable-output.html"), borders = 0.4,
+    open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -123,20 +125,27 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
   loc[1] <- gsub("_", "-", loc[1], fixed = TRUE)
   sink(file)
   cat("<!DOCTYPE html>",
-         sprintf("<html lang=\"%s\">", loc[1]),
-         sprintf("<head><meta charset=\"%s\"><title>%s</title></head>",
-           loc[2], file),
-         "<body>\n", sep = "\n")
-  tryCatch({
-    lapply(hts, function (ht) {
-      cat("<p>&nbsp;</p>")
-      print_html(ht)
-      cat("\n\n")
-    })
-    cat("</body></html>")
-  },
+    sprintf("<html lang=\"%s\">", loc[1]),
+    sprintf(
+      "<head><meta charset=\"%s\"><title>%s</title></head>",
+      loc[2], file
+    ),
+    "<body>\n",
+    sep = "\n"
+  )
+  tryCatch(
+    {
+      lapply(hts, function(ht) {
+        cat("<p>&nbsp;</p>")
+        print_html(ht)
+        cat("\n\n")
+      })
+      cat("</body></html>")
+    },
     error = identity,
-    finally = {sink()}
+    finally = {
+      sink()
+    }
   )
 
   if (open) auto_open(file)
@@ -146,8 +155,9 @@ quick_html <- function (..., file = confirm("huxtable-output.html"), borders = 0
 
 #' @rdname quick-output
 #' @export
-quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0.4,
-  open = interactive()) {
+quick_docx <- function(
+    ..., file = confirm("huxtable-output.docx"), borders = 0.4,
+    open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -170,8 +180,9 @@ quick_docx <- function (..., file = confirm("huxtable-output.docx"), borders = 0
 
 #' @rdname quick-output
 #' @export
-quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0.4,
-  open = interactive()) {
+quick_pptx <- function(
+    ..., file = confirm("huxtable-output.pptx"), borders = 0.4,
+    open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -195,8 +206,8 @@ quick_pptx <- function (..., file = confirm("huxtable-output.pptx"), borders = 0
 
 #' @rdname quick-output
 #' @export
-quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
-      open = interactive()) {
+quick_xlsx <- function(..., file = confirm("huxtable-output.xlsx"), borders = 0.4,
+                       open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -218,8 +229,8 @@ quick_xlsx <- function (..., file = confirm("huxtable-output.xlsx"), borders = 0
 
 #' @rdname quick-output
 #' @export
-quick_rtf <- function (..., file = confirm("huxtable-output.rtf"), borders = 0.4,
-      open = interactive()) {
+quick_rtf <- function(..., file = confirm("huxtable-output.rtf"), borders = 0.4,
+                      open = interactive()) {
   assert_that(is.number(borders))
   assert_that(is.flag(open))
   force(file)
@@ -228,15 +239,18 @@ quick_rtf <- function (..., file = confirm("huxtable-output.rtf"), borders = 0.4
   fc_tbls <- do.call(rtf_fc_tables, hts)
 
   sink(file)
-  tryCatch({
-    cat("{\\rtf1\\ansi\\deff0\n")
-    print(fc_tbls)
-    cat("\n\n\n")
-    lapply(hts, print_rtf)
-    cat("\n\n\n}")
-  },
+  tryCatch(
+    {
+      cat("{\\rtf1\\ansi\\deff0\n")
+      print(fc_tbls)
+      cat("\n\n\n")
+      lapply(hts, print_rtf)
+      cat("\n\n\n}")
+    },
     error = identity,
-    finally = {sink()}
+    finally = {
+      sink()
+    }
   )
 
   if (open) auto_open(file)
@@ -244,9 +258,9 @@ quick_rtf <- function (..., file = confirm("huxtable-output.rtf"), borders = 0.4
 }
 
 
-huxtableize <- function (obj_list, borders) {
-  lapply(obj_list, function (obj) {
-    if (! inherits(obj, "huxtable")) {
+huxtableize <- function(obj_list, borders) {
+  lapply(obj_list, function(obj) {
+    if (!inherits(obj, "huxtable")) {
       obj <- as_huxtable(obj)
       obj <- set_all_borders(obj, borders)
     }
@@ -257,44 +271,47 @@ huxtableize <- function (obj_list, borders) {
 
 do_write_latex_file <- function(hts, file, width, height) {
   sink(file)
-  tryCatch({
-    cat("\\documentclass{article}\n")
-    report_latex_dependencies()
-    if (! is.null(width) || ! is.null(height)) {
-      dim_string <- character(2)
-      dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
-      dim_string[2] <- if (is.null(height)) "" else sprintf("paperheight=%s", height)
-      dim_string = paste(dim_string, collapse = ",")
-      cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
-    }
-    cat("\n\\pagenumbering{gobble}\n")
-    cat("\n\\begin{document}")
-    lapply(hts, function (ht) {
-      cat("\n\n")
-      print_latex(ht)
-      cat("\n\n")
-    })
-    cat("\n\\end{document}")
-  },
+  tryCatch(
+    {
+      cat("\\documentclass{article}\n")
+      report_latex_dependencies()
+      if (!is.null(width) || !is.null(height)) {
+        dim_string <- character(2)
+        dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
+        dim_string[2] <- if (is.null(height)) "" else sprintf("paperheight=%s", height)
+        dim_string <- paste(dim_string, collapse = ",")
+        cat(sprintf("\\usepackage[%s]{geometry}\n", dim_string))
+      }
+      cat("\n\\pagenumbering{gobble}\n")
+      cat("\n\\begin{document}")
+      lapply(hts, function(ht) {
+        cat("\n\n")
+        print_latex(ht)
+        cat("\n\n")
+      })
+      cat("\n\\end{document}")
+    },
     error = identity,
-    finally = {sink()}
+    finally = {
+      sink()
+    }
   )
 }
 
 
-confirm <- function (file) {
-  if (! interactive()) stop("Please specify a `file` argument for non-interactive use of quick_xxx functions.")
+confirm <- function(file) {
+  if (!interactive()) stop("Please specify a `file` argument for non-interactive use of quick_xxx functions.")
   if (file.exists(file)) {
     answer <- readline(paste0("File '", file, "' already exists. Overwrite? [yN]"))
-    if (! answer %in% c("y", "Y")) stop("OK, stopping")
+    if (!answer %in% c("y", "Y")) stop("OK, stopping")
   }
   file
 }
 
 
-auto_open <- function (path) {
+auto_open <- function(path) {
   sysname <- Sys.info()["sysname"]
-  safe_path <- shQuote (path)
+  safe_path <- shQuote(path)
   switch(sysname,
     Darwin  = system2("open", safe_path),
     Windows = system2("start", safe_path),

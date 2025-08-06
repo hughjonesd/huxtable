@@ -1,4 +1,3 @@
-
 #' @import assertthat
 NULL
 
@@ -30,12 +29,16 @@ NULL
 #'
 #' @examples
 #' ht <- huxtable(a = 1:10, b = 1:10)
-#' set_background_color(ht,
-#'       evens, everywhere,
-#'       "grey95")
-#' set_background_color(ht,
-#'       stripe(3), everywhere,
-#'       "grey95")
+#' set_background_color(
+#'   ht,
+#'   evens, everywhere,
+#'   "grey95"
+#' )
+#' set_background_color(
+#'   ht,
+#'   stripe(3), everywhere,
+#'   "grey95"
+#' )
 #'
 stripe <- function(n = 1, from = n) {
   assert_that(is.count(n), is.count(from))
@@ -43,7 +46,9 @@ stripe <- function(n = 1, from = n) {
   return(
     function(ht, dimension) {
       ndim <- dim(ht)[dimension]
-      if (ndim < from) return(numeric(0))
+      if (ndim < from) {
+        return(numeric(0))
+      }
       seq(from, ndim, n)
     }
   )
@@ -59,7 +64,7 @@ evens <- stripe(2, 2)
 
 #' @rdname stripe
 #' @export
-odds  <- stripe(2, 1)
+odds <- stripe(2, 1)
 
 #' Return the last n rows or columns
 #'
@@ -81,7 +86,9 @@ final <- function(n = 1) {
   return(
     function(ht, dimension) {
       ndim <- dim(ht)[dimension]
-      if (ndim == 0) return(integer(0))
+      if (ndim == 0) {
+        return(integer(0))
+      }
       low <- max(1, ndim + 1 - n)
       sort(ndim:low)
     }
@@ -133,19 +140,27 @@ final <- function(n = 1) {
 #'
 #' @examples
 #' set_bold(jams, 2:4, 1:2, TRUE)
-#' set_background_color(jams, evens, everywhere,
-#'       "grey95")
-#' set_bold(jams, everywhere,
-#'       tidyselect::matches("yp"), TRUE)
+#' set_background_color(
+#'   jams, evens, everywhere,
+#'   "grey95"
+#' )
+#' set_bold(
+#'   jams, everywhere,
+#'   tidyselect::matches("yp"), TRUE
+#' )
 #'
-#' set_text_color(jams, 2:4, 1:2,
-#'       c("red", "violetred", "purple"))
+#' set_text_color(
+#'   jams, 2:4, 1:2,
+#'   c("red", "violetred", "purple")
+#' )
 NULL
 
 
-get_rc_spec <- function (ht, obj, dimno) {
+get_rc_spec <- function(ht, obj, dimno) {
   dim_length <- dim(ht)[dimno]
-  if (missing(obj)) return(seq_len(dim_length))
+  if (missing(obj)) {
+    return(seq_len(dim_length))
+  }
 
   # You can"t evaluate obj before running the tidyselect; otherwise functions like starts_with throw an error.
   result <- if (dimno == 2) {

@@ -1,4 +1,3 @@
-
 #' @import assertthat
 #' @importFrom rlang "!!!"
 NULL
@@ -68,47 +67,57 @@ NULL
 #' @examples
 #' ht <- hux(Condition = c("OK", "Warning", "Error"))
 #' ht <- map_text_color(ht, by_values(
-#'         OK      = "green",
-#'         Warning = "orange",
-#'         Error   = "red"
-#'       ))
+#'   OK      = "green",
+#'   Warning = "orange",
+#'   Error   = "red"
+#' ))
 #' ht
 #'
 #' # Leaving NA values alone:
 #' map_text_color(ht, by_values(
-#'       "OK" = "blue", NA, ignore_na = TRUE))
+#'   "OK" = "blue", NA, ignore_na = TRUE
+#' ))
 #'
 #' # Resetting values:
 #' map_text_color(ht, by_values(
-#'       "OK" = "blue", NA, ignore_na = FALSE))
+#'   "OK" = "blue", NA, ignore_na = FALSE
+#' ))
 #'
 #' ht <- as_hux(matrix(rnorm(15), 5, 3))
 #' map_background_color(ht, by_ranges(
-#'         c(-1, 1),
-#'         c("blue", "yellow", "red")
-#'       ))
-#' map_background_color(ht,
-#'       by_equal_groups(2, c("red", "green")))
+#'   c(-1, 1),
+#'   c("blue", "yellow", "red")
+#' ))
+#' map_background_color(
+#'   ht,
+#'   by_equal_groups(2, c("red", "green"))
+#' )
 #'
 #' ht <- hux(
-#'         Coef = c(3.5, 2.4, 1.3),
-#'         Pval = c(0.04, 0.01, 0.07),
-#'         add_colnames = TRUE
-#'       )
-#' map_bold(ht, everywhere, "Pval",
-#'       by_ranges(0.05, c(TRUE, FALSE)))
+#'   Coef = c(3.5, 2.4, 1.3),
+#'   Pval = c(0.04, 0.01, 0.07),
+#'   add_colnames = TRUE
+#' )
+#' map_bold(
+#'   ht, everywhere, "Pval",
+#'   by_ranges(0.05, c(TRUE, FALSE))
+#' )
 #'
 #' # Problems with as.matrix:
 #'
 #' ht <- hux(c(-1, 1, 2), letters[1:3])
-#' as.matrix(ht)          # look at the spaces...
-#' as.matrix(ht) > 0      # uh oh
-#' map_text_color(ht,
-#'       by_cases(. < 0 ~ "red", TRUE ~ "blue"))
+#' as.matrix(ht) # look at the spaces...
+#' as.matrix(ht) > 0 # uh oh
+#' map_text_color(
+#'   ht,
+#'   by_cases(. < 0 ~ "red", TRUE ~ "blue")
+#' )
 #'
 #' # To avoid this, only look at the truly numeric columns:
-#' map_text_color(ht, row = 1:3, col = 1,
-#'       by_cases(. < 0 ~ "red", TRUE ~ "blue"))
+#' map_text_color(ht,
+#'   row = 1:3, col = 1,
+#'   by_cases(. < 0 ~ "red", TRUE ~ "blue")
+#' )
 #' @name mapping-functions
 #' @aliases mapping_functions
 NULL
@@ -148,11 +157,15 @@ NULL
 #'
 #' @examples
 #' ht <- hux(letters[1:3])
-#' map_background_color(ht,
-#'       by_values(a = "red", c = "yellow"))
-#' map_background_color(ht,
-#'       by_values(a = "red", c = "yellow", "green"))
-by_values <- function (..., ignore_na = TRUE) {
+#' map_background_color(
+#'   ht,
+#'   by_values(a = "red", c = "yellow")
+#' )
+#' map_background_color(
+#'   ht,
+#'   by_values(a = "red", c = "yellow", "green")
+#' )
+by_values <- function(..., ignore_na = TRUE) {
   assert_that(is.flag(ignore_na))
   vals <- list_or_c(...)
   named_vals <- vals[names(vals) != ""]
@@ -162,11 +175,11 @@ by_values <- function (..., ignore_na = TRUE) {
   if (length(default) > 1) stop("At most one element of `...` can be unnamed")
   if (length(default) > 0) default <- default[[1]]
 
-  values_fn <- function (ht, rows, cols, current) {
+  values_fn <- function(ht, rows, cols, current) {
     res <- current
     if (length(default) > 0) res[] <- default
     for (tg in targets) {
-      res[ ht[rows, cols] == tg ] <- named_vals[[tg]]
+      res[ht[rows, cols] == tg] <- named_vals[[tg]]
     }
 
     res <- maybe_ignore_na(res, current, ignore_na)
@@ -192,15 +205,19 @@ by_values <- function (..., ignore_na = TRUE) {
 #'
 #' @examples
 #' ht <- as_hux(matrix(rnorm(25), 5, 5))
-#' map_background_color(ht,
-#'       by_rows("green", "grey"))
-#' map_background_color(ht,
-#'       by_cols("green", "grey"))
-by_rows <- function (..., from = 1, ignore_na = TRUE) {
+#' map_background_color(
+#'   ht,
+#'   by_rows("green", "grey")
+#' )
+#' map_background_color(
+#'   ht,
+#'   by_cols("green", "grey")
+#' )
+by_rows <- function(..., from = 1, ignore_na = TRUE) {
   vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
-  row_fn <- function (ht, rows, cols, current) {
+  row_fn <- function(ht, rows, cols, current) {
     res <- current
     assert_that(from <= nrow(res))
     lout <- nrow(res) - from + 1
@@ -218,18 +235,20 @@ by_rows <- function (..., from = 1, ignore_na = TRUE) {
 
 #' @export
 #' @rdname by_rows
-by_cols <- function (..., from = 1, ignore_na = TRUE) {
+by_cols <- function(..., from = 1, ignore_na = TRUE) {
   vals <- list_or_c(...)
   assert_that(is.count(from), is.flag(ignore_na))
 
-  col_fn <- function (ht, rows, cols, current) {
+  col_fn <- function(ht, rows, cols, current) {
     res <- current
     assert_that(from <= ncol(res))
     lout <- ncol(res) - from + 1
     # prevents a warning
     if (nrow(res) == 0) lout <- 0
-    vals <- matrix(rep(vals, length.out = lout), ncol = lout, nrow = nrow(res),
-            byrow = TRUE)
+    vals <- matrix(rep(vals, length.out = lout),
+      ncol = lout, nrow = nrow(res),
+      byrow = TRUE
+    )
     res[, seq(from, ncol(res))] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
     res
@@ -257,32 +276,40 @@ by_cols <- function (..., from = 1, ignore_na = TRUE) {
 #'
 #' @examples
 #' ht <- huxtable(c(1, 3, 5))
-#' map_background_color(ht,
-#'       by_ranges(
-#'         c(2, 4),
-#'         c("red", "yellow", "blue")
-#'       ))
+#' map_background_color(
+#'   ht,
+#'   by_ranges(
+#'     c(2, 4),
+#'     c("red", "yellow", "blue")
+#'   )
+#' )
 #'
-#' map_background_color(ht,
-#'       by_ranges(
-#'         c(2, 4),
-#'         "pink",
-#'         extend = FALSE
-#'       ))
+#' map_background_color(
+#'   ht,
+#'   by_ranges(
+#'     c(2, 4),
+#'     "pink",
+#'     extend = FALSE
+#'   )
+#' )
 #'
-#' map_background_color(ht,
-#'       by_ranges(
-#'         c(1, 5),
-#'         c("red", "yellow", "green"),
-#'         right = TRUE
-#'       ))
-#' map_background_color(ht,
-#'       by_ranges(
-#'         c(1, 5),
-#'         c("red", "yellow", "green"),
-#'         right = FALSE
-#'       ))
-by_ranges <- function (breaks, values, right = FALSE, extend = TRUE, ignore_na = TRUE) {
+#' map_background_color(
+#'   ht,
+#'   by_ranges(
+#'     c(1, 5),
+#'     c("red", "yellow", "green"),
+#'     right = TRUE
+#'   )
+#' )
+#' map_background_color(
+#'   ht,
+#'   by_ranges(
+#'     c(1, 5),
+#'     c("red", "yellow", "green"),
+#'     right = FALSE
+#'   )
+#' )
+by_ranges <- function(breaks, values, right = FALSE, extend = TRUE, ignore_na = TRUE) {
   assert_that(is.flag(ignore_na), is.flag(right), is.flag(extend), is.numeric(breaks))
   assert_that(all(breaks == sort(breaks)))
   if (extend) breaks <- c(-Inf, breaks, Inf)
@@ -326,33 +353,39 @@ by_ranges <- function (breaks, values, right = FALSE, extend = TRUE, ignore_na =
 #' @examples
 #' ht <- hux(rnorm(5), rnorm(5))
 #'
-#' map_background_color(ht,
-#'       by_quantiles(
-#'         c(0.2, 0.8),
-#'         c("red", "yellow", "green")
-#'       ))
+#' map_background_color(
+#'   ht,
+#'   by_quantiles(
+#'     c(0.2, 0.8),
+#'     c("red", "yellow", "green")
+#'   )
+#' )
 #'
-#' map_background_color(ht,
-#'       by_quantiles(
-#'         c(0.2, 0.8),
-#'         c("red", "yellow", "green"),
-#'         colwise = TRUE
-#'       ))
+#' map_background_color(
+#'   ht,
+#'   by_quantiles(
+#'     c(0.2, 0.8),
+#'     c("red", "yellow", "green"),
+#'     colwise = TRUE
+#'   )
+#' )
 #'
-#' map_background_color(ht,
-#'       by_equal_groups(
-#'         3,
-#'         c("red", "yellow", "green")
-#'       ))
-by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignore_na = TRUE,
-        colwise = FALSE) {
+#' map_background_color(
+#'   ht,
+#'   by_equal_groups(
+#'     3,
+#'     c("red", "yellow", "green")
+#'   )
+#' )
+by_quantiles <- function(quantiles, values, right = FALSE, extend = TRUE, ignore_na = TRUE,
+                         colwise = FALSE) {
   assert_that(is.numeric(quantiles), all(quantiles <= 1), all(quantiles >= 0))
   assert_that(all(quantiles == sort(quantiles)))
   assert_that(is.flag(ignore_na), is.flag(right), is.flag(extend), is.flag(colwise))
 
-  qr_fn <- function (ht, rows, cols, current) {
+  qr_fn <- function(ht, rows, cols, current) {
     res <- current
-    by_quantiles_internal <- function (vals) {
+    by_quantiles_internal <- function(vals) {
       vals <- suppressWarnings(as.numeric(vals))
       q_breaks <- stats::quantile(vals, quantiles, na.rm = TRUE, names = FALSE)
       if (extend) q_breaks <- c(-Inf, q_breaks, Inf)
@@ -364,10 +397,10 @@ by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignor
 
     vals <- as.matrix(ht)[rows, cols, drop = FALSE]
     which_val <- if (colwise) {
-                   c(apply(vals, 2, by_quantiles_internal))
-                 } else {
-                   by_quantiles_internal(vals)
-                 }
+      c(apply(vals, 2, by_quantiles_internal))
+    } else {
+      by_quantiles_internal(vals)
+    }
     res[which_val > 0] <- values[which_val[which_val > 0]]
     res[which_val == 0] <- NA
     res <- maybe_ignore_na(res, current, ignore_na)
@@ -382,10 +415,10 @@ by_quantiles <- function (quantiles, values, right = FALSE, extend = TRUE, ignor
 #'
 #' @rdname by_quantiles
 #' @export
-by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
+by_equal_groups <- function(n, values, ignore_na = TRUE, colwise = FALSE) {
   assert_that(is.flag(ignore_na), is.flag(colwise))
 
-  by_quantiles(seq(1/n, 1 - 1/n, 1/n), values, ignore_na = ignore_na, colwise = colwise)
+  by_quantiles(seq(1 / n, 1 - 1 / n, 1 / n), values, ignore_na = ignore_na, colwise = colwise)
 }
 
 
@@ -412,11 +445,11 @@ by_equal_groups <- function (n, values, ignore_na = TRUE, colwise = FALSE) {
 #' map_bold(ht, by_regex("a.*a" = TRUE))
 #'
 #' map_bold(ht, by_regex(
-#'         "the" = TRUE,
-#'         .grepl_args = list(
-#'           ignore.case = TRUE
-#'         )
-#'       ))
+#'   "the" = TRUE,
+#'   .grepl_args = list(
+#'     ignore.case = TRUE
+#'   )
+#' ))
 by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   assert_that(is.flag(ignore_na), is.list(.grepl_args))
 
@@ -426,7 +459,7 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
   default <- vals[names(vals) == ""]
   if (is.null(names(vals))) default <- vals
   if (length(default) > 1) stop("At most one element of `...` can be unnamed")
-  matching_fn <- function (ht, rows, cols, current) {
+  matching_fn <- function(ht, rows, cols, current) {
     res <- current
     if (length(default) > 0) res[] <- default
     my_args <- .grepl_args
@@ -440,7 +473,7 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
       any_matched <- any_matched | matches
       res[matches] <- named_vals[[pt]]
     }
-    res[! any_matched] <- NA
+    res[!any_matched] <- NA
     res <- maybe_ignore_na(res, current, ignore_na)
     res
   }
@@ -468,29 +501,34 @@ by_regex <- function(..., .grepl_args = list(), ignore_na = TRUE) {
 #'
 #' @examples
 #'
-#' if (! requireNamespace("scales")) {
+#' if (!requireNamespace("scales")) {
 #'   stop("Please install the \"scales\" package to run this example")
 #' }
 #' ht <- as_hux(matrix(rnorm(25), 5, 5))
-#' map_background_color(ht,
-#'       by_colorspace("red", "yellow", "blue"))
-#' map_background_color(ht,
-#'       by_colorspace("red", "yellow", "blue",
-#'         colwise = TRUE))
-by_colorspace <- function (..., range = NULL, na_color = NA, ignore_na = TRUE,
-        colwise = FALSE) {
+#' map_background_color(
+#'   ht,
+#'   by_colorspace("red", "yellow", "blue")
+#' )
+#' map_background_color(
+#'   ht,
+#'   by_colorspace("red", "yellow", "blue",
+#'     colwise = TRUE
+#'   )
+#' )
+by_colorspace <- function(..., range = NULL, na_color = NA, ignore_na = TRUE,
+                          colwise = FALSE) {
   assert_package("by_colorspace", "scales")
   palette <- c(...)
   assert_that(is.flag(ignore_na), is.flag(colwise))
 
   cn_fn <- scales::col_numeric(palette, domain = range, na.color = na_color)
   # suppressWarnings stops complaints from conversion; as.numeric stops failures from `rescale`
-  wrapped_cn_fn <- function (x) cn_fn(suppressWarnings(as.numeric(x)))
+  wrapped_cn_fn <- function(x) cn_fn(suppressWarnings(as.numeric(x)))
   wrapped_col_numeric <- if (colwise) {
-                           function (x) apply(x, 2, wrapped_cn_fn)
-                         } else {
-                           wrapped_cn_fn
-                         }
+    function(x) apply(x, 2, wrapped_cn_fn)
+  } else {
+    wrapped_cn_fn
+  }
   by_function(wrapped_col_numeric, ignore_na = ignore_na)
 }
 
@@ -514,18 +552,20 @@ by_colorspace <- function (..., range = NULL, na_color = NA, ignore_na = TRUE,
 #' @examples
 #' ht <- as_hux(matrix(runif(20), 5, 4))
 #'
-#' map_background_color(ht,
-#'       by_function(grey))
+#' map_background_color(
+#'   ht,
+#'   by_function(grey)
+#' )
 #'
 #' if (requireNamespace("scales")) {
 #'   map_text_color(ht, by_function(
-#'           scales::seq_gradient_pal()
-#'         ))
+#'     scales::seq_gradient_pal()
+#'   ))
 #' }
-by_function <- function (inner_fn, ignore_na = TRUE) {
+by_function <- function(inner_fn, ignore_na = TRUE) {
   assert_that(is.function(inner_fn), is.flag(ignore_na))
 
-  wrapper_fn <- function (ht, rows, cols, current) {
+  wrapper_fn <- function(ht, rows, cols, current) {
     res <- current
     res[] <- inner_fn(as.matrix(ht[rows, cols]))
     res <- maybe_ignore_na(res, current, ignore_na)
@@ -559,25 +599,25 @@ by_function <- function (inner_fn, ignore_na = TRUE) {
 #' @export
 #'
 #' @examples
-#' if (! requireNamespace("dplyr")) {
+#' if (!requireNamespace("dplyr")) {
 #'   stop("Please install the 'dplyr' package to run this example")
 #' }
 #'
 #' ht <- hux(runif(5), letters[1:5])
 #'
 #' map_background_color(ht, by_cases(
-#'         . == "a" ~ "red",
-#'         . %in% letters ~ "green",
-#'         . < 0.5 ~ "pink"
-#'       ))
-by_cases <- function (..., ignore_na = TRUE) {
+#'   . == "a" ~ "red",
+#'   . %in% letters ~ "green",
+#'   . < 0.5 ~ "pink"
+#' ))
+by_cases <- function(..., ignore_na = TRUE) {
   assert_package("by_cases", "dplyr")
   assert_that(is.flag(ignore_na))
   # turn into character strings so they don't capture local information yet
-  cases <- lapply(list(...), function (fml) Reduce(paste, deparse(fml)))
+  cases <- lapply(list(...), function(fml) Reduce(paste, deparse(fml)))
   by_cases_caller_env <- parent.frame()
 
-  case_fn <- function (ht, rows, cols, current) {
+  case_fn <- function(ht, rows, cols, current) {
     res <- current
     myenv <- new.env(parent = by_cases_caller_env)
     selection <- as.matrix(ht[rows, cols])
@@ -585,7 +625,7 @@ by_cases <- function (..., ignore_na = TRUE) {
     if (utils::packageVersion("dplyr") >= "1.1.0") selection <- as.vector(selection)
     assign(".", selection, envir = myenv)
     cases <- lapply(cases, stats::as.formula, env = myenv)
-    vals <- dplyr::case_when(!!! cases)
+    vals <- dplyr::case_when(!!!cases)
     vals <- array(vals, dim = dim)
     res[] <- vals
     res <- maybe_ignore_na(res, current, ignore_na)
@@ -603,7 +643,7 @@ maybe_ignore_na <- function(res, old, ignore_na) {
 }
 
 
-list_or_c <- function (...) {
+list_or_c <- function(...) {
   if (all(sapply(list(...), is.atomic))) {
     c(...)
   } else {

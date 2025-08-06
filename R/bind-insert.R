@@ -1,4 +1,3 @@
-
 #' @importFrom stats setNames
 #' @import assertthat
 NULL
@@ -32,22 +31,29 @@ NULL
 #' add_rows(jams, ht, after = 1)
 #'
 #' mx <- matrix(
-#'       c("Sugar", "50%", "60%", "40%",
-#'       "Weight (g)", 300, 250, 300),
-#'       4, 2)
+#'   c(
+#'     "Sugar", "50%", "60%", "40%",
+#'     "Weight (g)", 300, 250, 300
+#'   ),
+#'   4, 2
+#' )
 #' add_columns(jams, mx)
-add_rows <- function (x, y, after = nrow(x), copy_cell_props = TRUE) {
-  add_row_cols(x, y, after, dimno = 1,
-        copy_cell_props = copy_cell_props)
+add_rows <- function(x, y, after = nrow(x), copy_cell_props = TRUE) {
+  add_row_cols(x, y, after,
+    dimno = 1,
+    copy_cell_props = copy_cell_props
+  )
 }
 
 
 #' @export
 #' @rdname add_rows
-add_columns <- function (x, y, after = ncol(x),
-      copy_cell_props = TRUE) {
-  add_row_cols(x, y, after, dimno = 2,
-        copy_cell_props = copy_cell_props)
+add_columns <- function(x, y, after = ncol(x),
+                        copy_cell_props = TRUE) {
+  add_row_cols(x, y, after,
+    dimno = 2,
+    copy_cell_props = copy_cell_props
+  )
 }
 
 
@@ -76,36 +82,36 @@ add_columns <- function (x, y, after = ncol(x),
 #'
 #' @examples
 #' insert_row(jams,
-#'         c("Gooseberry", 2.15),
-#'         after = 1
-#'       )
+#'   c("Gooseberry", 2.15),
+#'   after = 1
+#' )
 #'
 #' insert_column(jams,
-#'         c("Sugar", "50%", "60%", "40%"),
-#'         after = "Price"
-#'       )
+#'   c("Sugar", "50%", "60%", "40%"),
+#'   after = "Price"
+#' )
 #'
 #' insert_column(jams,
-#'         "Sugar",
-#'         after = "Price",
-#'         fill = "50%"
-#'       )
+#'   "Sugar",
+#'   after = "Price",
+#'   fill = "50%"
+#' )
 #'
 #' # don't forget to use `fill`:
 #' insert_row(jams,
-#'         "Jams and prices",
-#'         fill = "",
-#'         colspan = 2
-#'       )
-insert_column <- function (ht, ..., after = 0, fill = NULL, rowspan = 1,
-      copy_cell_props = TRUE) {
+#'   "Jams and prices",
+#'   fill = "",
+#'   colspan = 2
+#' )
+insert_column <- function(ht, ..., after = 0, fill = NULL, rowspan = 1,
+                          copy_cell_props = TRUE) {
   # is.count would complain about 0
   assert_that(
-          is.scalar(after),
-          is.number(after) || is.string(after),
-          is.null(fill) || is.scalar(fill),
-          is.count(rowspan)
-        )
+    is.scalar(after),
+    is.number(after) || is.string(after),
+    is.null(fill) || is.scalar(fill),
+    is.count(rowspan)
+  )
   if (is.number(after)) assert_that(after >= 0, after <= ncol(ht))
   if (is.string(after)) {
     assert_that(has_name(ht, after))
@@ -122,8 +128,8 @@ insert_column <- function (ht, ..., after = 0, fill = NULL, rowspan = 1,
   if (length(to_insert) < nrow(ht)) {
     to_insert <- c(to_insert, rep(fill, nrow(ht) - length(to_insert)))
   }
-  res <- if (! is.null(ht1)) cbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
-  res <- if (! is.null(ht2)) cbind(res, ht2) else res
+  res <- if (!is.null(ht1)) cbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
+  res <- if (!is.null(ht2)) cbind(res, ht2) else res
 
   rowspan(res)[1, after + 1] <- rowspan
   rownames(res) <- rownames(ht)
@@ -135,15 +141,15 @@ insert_column <- function (ht, ..., after = 0, fill = NULL, rowspan = 1,
 #' @rdname insert_column
 #'
 #' @export
-insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_props = TRUE) {
+insert_row <- function(ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_props = TRUE) {
   assert_that(
-          is.scalar(after),
-          is.number(after),
-          after >= 0,
-          after <= nrow(ht),
-          is.null(fill) || is.scalar(fill),
-          is.count(colspan)
-        )
+    is.scalar(after),
+    is.number(after),
+    after >= 0,
+    after <= nrow(ht),
+    is.null(fill) || is.scalar(fill),
+    is.count(colspan)
+  )
 
 
 
@@ -158,8 +164,8 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
   if (length(to_insert) < ncol(ht)) {
     to_insert <- c(to_insert, rep(fill, ncol(ht) - length(to_insert)))
   }
-  res <- if (! is.null(ht1)) rbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
-  res <- if (! is.null(ht2)) rbind(res, ht2) else res
+  res <- if (!is.null(ht1)) rbind(ht1, to_insert, copy_cell_props = copy_cell_props) else to_insert
+  res <- if (!is.null(ht2)) rbind(res, ht2) else res
 
   colspan(res)[after + 1, 1] <- colspan
   colnames(res) <- colnames(ht)
@@ -202,19 +208,26 @@ insert_row <- function (ht, ..., after = 0, fill = NULL, colspan = 1, copy_cell_
 #' jams <- set_bold(jams, 1, everywhere)
 #' cbind(jams, sugar)
 #' cbind(jams, sugar,
-#'      copy_cell_props = FALSE)
+#'   copy_cell_props = FALSE
+#' )
 #'
-#' jams <- set_text_color(jams,
-#'      everywhere, 1, "red")
+#' jams <- set_text_color(
+#'   jams,
+#'   everywhere, 1, "red"
+#' )
 #' rbind(jams, c("Damson", 2.30))
 #' rbind(jams, c("Damson", 2.30),
-#'      copy_cell_props = FALSE)
+#'   copy_cell_props = FALSE
+#' )
 #'
 #' @export
-cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
+cbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
   assert_that(is.flag(copy_cell_props))
-  f <- function (obj1, obj2) bind_cols_2(obj1, obj2,
-        copy_cell_props = copy_cell_props)
+  f <- function(obj1, obj2) {
+    bind_cols_2(obj1, obj2,
+      copy_cell_props = copy_cell_props
+    )
+  }
   res <- Reduce(f, list(...))
   colnames(res) <- dot_or_dim_names(..., dimension = 2)
 
@@ -224,10 +237,13 @@ cbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 
 #' @export
 #' @rdname cbind.huxtable
-rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
+rbind.huxtable <- function(..., deparse.level = 1, copy_cell_props = TRUE) {
   assert_that(is.flag(copy_cell_props))
-  f <- function (obj1, obj2) bind_rows_2(obj1, obj2,
-        copy_cell_props = copy_cell_props)
+  f <- function(obj1, obj2) {
+    bind_rows_2(obj1, obj2,
+      copy_cell_props = copy_cell_props
+    )
+  }
   res <- Reduce(f, list(...))
   rownames(res) <- dot_or_dim_names(..., dimension = 1)
 
@@ -250,42 +266,42 @@ rbind.huxtable <- function (..., deparse.level = 1, copy_cell_props = TRUE) {
 #' preserved.
 #' @examples
 #' ht <- huxtable(
-#'         a = 1:3,
-#'         b = letters[1:3],
-#'         autoformat = FALSE
-#'       )
-#' bottom_border(ht)[3,] <- 1
+#'   a = 1:3,
+#'   b = letters[1:3],
+#'   autoformat = FALSE
+#' )
+#' bottom_border(ht)[3, ] <- 1
 #' ht
 #' t(ht)
 #'
 #' @export
-t.huxtable <- function (x) {
+t.huxtable <- function(x) {
   res <- as_hux(NextMethod(), add_colnames = FALSE, autoformat = FALSE)
   for (a in setdiff(huxtable_cell_attrs, c("colspan", "rowspan", "height", "width"))) {
     attr(res, a) <- t(attr(x, a))
   }
   attr(res, "colspan") <- t(attr(x, "rowspan"))
   attr(res, "rowspan") <- t(attr(x, "colspan"))
-  attr(res, "width")   <- attr(x, "height")
-  attr(res, "height")  <- attr(x, "width")
+  attr(res, "width") <- attr(x, "height")
+  attr(res, "height") <- attr(x, "width")
 
   bottom_border(res) <- t(right_border(x))
-  right_border(res)  <- t(bottom_border(x))
-  left_border(res)   <- t(top_border(x))
-  top_border(res)    <- t(left_border(x))
+  right_border(res) <- t(bottom_border(x))
+  left_border(res) <- t(top_border(x))
+  top_border(res) <- t(left_border(x))
   bottom_border_style(res) <- t(right_border_style(x))
-  right_border_style(res)  <- t(bottom_border_style(x))
-  left_border_style(res)   <- t(top_border_style(x))
-  top_border_style(res)    <- t(left_border_style(x))
+  right_border_style(res) <- t(bottom_border_style(x))
+  left_border_style(res) <- t(top_border_style(x))
+  top_border_style(res) <- t(left_border_style(x))
   bottom_border_color(res) <- t(right_border_color(x))
-  right_border_color(res)  <- t(bottom_border_color(x))
-  left_border_color(res)   <- t(top_border_color(x))
-  top_border_color(res)    <- t(left_border_color(x))
+  right_border_color(res) <- t(bottom_border_color(x))
+  left_border_color(res) <- t(top_border_color(x))
+  top_border_color(res) <- t(left_border_color(x))
 
   row_height(res) <- col_width(x)
-  col_width(res)  <- row_height(x)
-  rownames(res)   <- colnames(x)
-  colnames(res)   <- rownames(x)
+  col_width(res) <- row_height(x)
+  rownames(res) <- colnames(x)
+  colnames(res) <- rownames(x)
   for (a in huxtable_table_attrs) {
     attr(res, a) <- attr(x, a)
   }

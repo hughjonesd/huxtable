@@ -1,4 +1,3 @@
-
 # knitr-related functions --------------------------------------------------------------------------
 
 
@@ -16,44 +15,46 @@
 #'
 #' @family knit_print
 #' @seealso [huxtable-options]
-knit_print.huxtable <- function (x, options, ...) {
+knit_print.huxtable <- function(x, options, ...) {
   # guess... runs assert_package for knitr
   of <- getOption("huxtable.knitr_output_format", guess_knitr_output_format())
   call_name <- switch(of,
-        latex  = "to_latex",
-        html   = "to_html",
-        pptx   = ,
-        docx   = "as_flextable",
-        md     = "to_md",
-        screen = "to_screen",
-        rtf    = "to_rtf",
-        { # default
-        warning(glue::glue(
-            'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
-            'Set options("huxtable.knitr_output_format") manually to ',
-            '"latex", "html", "rtf", "docx", "pptx", "md" or "screen".'))
-          "to_screen"
-        })
+    latex = "to_latex",
+    html = "to_html",
+    pptx = ,
+    docx = "as_flextable",
+    md = "to_md",
+    screen = "to_screen",
+    rtf = "to_rtf",
+    { # default
+      warning(glue::glue(
+        'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
+        'Set options("huxtable.knitr_output_format") manually to ',
+        '"latex", "html", "rtf", "docx", "pptx", "md" or "screen".'
+      ))
+      "to_screen"
+    }
+  )
 
   res <- do.call(call_name, list(x))
 
   res <- switch(of,
-            latex = {
-              latex_deps <- report_latex_dependencies(quiet = TRUE)
-              tenv <- tabular_environment(x)
-              if (tenv %in% c("tabulary", "longtable")) {
-                latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
-              }
-              knitr::asis_output(res, meta = latex_deps)
-            },
-            html = knitr::asis_output(
-                     htmltools::htmlPreserve(res)
-                   ),
-            rtf  = knitr::raw_output(res),
-            pptx = ,
-            docx = knitr::knit_print(res),
-            knitr::asis_output(res)
-          )
+    latex = {
+      latex_deps <- report_latex_dependencies(quiet = TRUE)
+      tenv <- tabular_environment(x)
+      if (tenv %in% c("tabulary", "longtable")) {
+        latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
+      }
+      knitr::asis_output(res, meta = latex_deps)
+    },
+    html = knitr::asis_output(
+      htmltools::htmlPreserve(res)
+    ),
+    rtf = knitr::raw_output(res),
+    pptx = ,
+    docx = knitr::knit_print(res),
+    knitr::asis_output(res)
+  )
 
   return(res)
 }
@@ -76,27 +77,32 @@ knit_print.huxtable <- function (x, options, ...) {
 #' @examples
 #' \dontrun{
 #' # in your knitr document
-#' mytheme <- function (ht) {
+#' mytheme <- function(ht) {
 #'   ht <- set_all_borders(ht, 0.4)
-#'   ht <- set_all_border_colors(ht,
-#'         "darkgreen")
-#'   ht <- set_background_color(ht,
-#'         evens, odds, "salmon")
+#'   ht <- set_all_border_colors(
+#'     ht,
+#'     "darkgreen"
+#'   )
+#'   ht <- set_background_color(
+#'     ht,
+#'     evens, odds, "salmon"
+#'   )
 #'   ht
 #' }
 #'
-#' options(huxtable.knit_print_df_theme
-#'       = mytheme)
+#' options(
+#'   huxtable.knit_print_df_theme = mytheme
+#' )
 #' # groovy!
 #' data.frame(
-#'         a = 1:5,
-#'         b = 1:5
-#'       )
+#'   a = 1:5,
+#'   b = 1:5
+#' )
 #' }
 knit_print.data.frame <- function(x, options, ...) {
   # the FALSE default is so that this does not get called unless
   # huxtable has been explicitly attached
-  if (! isTRUE(getOption("huxtable.knit_print_df", FALSE))) {
+  if (!isTRUE(getOption("huxtable.knit_print_df", FALSE))) {
     NextMethod() # probably calls knit_print.default
   } else {
     ht <- as_huxtable(x)
@@ -131,7 +137,9 @@ guess_knitr_output_format <- function() {
     of <- knitr::opts_knit$get("rmarkdown.pandoc.to")
     if (is.null(of)) {
       knit_in <- knitr::current_input()
-      if (is.null(knit_in)) return("")
+      if (is.null(knit_in)) {
+        return("")
+      }
       of <- rmarkdown::default_output_format(knit_in)
       of <- of$name
     }
