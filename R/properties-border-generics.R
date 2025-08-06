@@ -39,7 +39,6 @@
   ht
 }
 
-
 .border_set <- function (ht, row, col, value, side,
         missing_row, missing_col, missing_value) {
   if (missing_row && missing_col && missing_value) {
@@ -47,6 +46,7 @@
     col <- seq_len(ncol(ht))
     value <- 0.4
   } else if (missing_col && missing_value) {
+
     value <- row
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
