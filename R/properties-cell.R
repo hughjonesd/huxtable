@@ -354,7 +354,6 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @template getset-cell
 #' @templateVar attr_name bold
 #' @templateVar value_param_desc A logical vector or matrix.
-#' @templateVar morealiases italic
 #' @templateVar default TRUE
 #'
 #' @template getset-example
@@ -415,6 +414,7 @@ map_bold <- function (ht, row, col, fn) {
 
 #' @name italic
 #' @rdname bold
+#' @aliases italic italic<- set_italic map_italic
 #' @templateVar attr_name italic
 #' @templateVar default TRUE
 #' @template cell-property-usage

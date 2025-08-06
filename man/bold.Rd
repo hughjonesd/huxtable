@@ -16,8 +16,6 @@ bold(ht) <- value
 set_bold(ht, row, col, value = TRUE)
 map_bold(ht, row, col, fn)
 
-bold(ht)
-
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value = TRUE)
