@@ -362,8 +362,55 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
-NULL
-make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
+bold <- function (ht) {
+  attr(ht, "bold")
+}
+
+`bold<-` <- function (ht, value) {
+  if (! all(is.na(value))) stopifnot(is.logical(value))
+  value[is.na(value)] <- huxtable_env$huxtable_default_attrs$bold
+  attr(ht, "bold")[] <- value
+  mode(attr(ht, "bold")) <- mode(value)
+  ht
+}
+
+#' @rdname bold
+#' @usage NULL
+set_bold <- function (ht, row, col, value = TRUE) {
+  assert_that(is_huxtable(ht))
+  if (nargs() == 2) {
+    if (missing(value)) value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  }
+
+  rc <- list()
+  rc$row <- get_rc_spec(ht, row, 1)
+  rc$col <- get_rc_spec(ht, col, 2)
+  attr(ht, "bold")[rc$row, rc$col] <- value
+
+  ht
+}
+
+#' @rdname bold
+#' @usage NULL
+map_bold <- function (ht, row, col, fn) {
+  assert_that(is_huxtable(ht))
+  if (nargs() == 2) {
+    if (missing(fn)) fn <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  }
+  rc <- list()
+  rc$row <- get_rc_spec(ht, row, 1)
+  rc$col <- get_rc_spec(ht, col, 2)
+
+  current <- attr(ht, "bold")[rc$row, rc$col, drop = FALSE]
+  if (is_huxtable(current)) current <- as.matrix(current)
+  attr(ht, "bold")[rc$row, rc$col] <- fn(ht, rc$row, rc$col, current)
+
+  ht
+}
 
 
 #' @name italic
