@@ -88,6 +88,7 @@ jobs:
           path: check
 
       - name: Test coverage
+        if: matrix.config.os == 'macOS-latest'
         run: |
           remotes::install_cran("covr")
           covr::codecov()
