@@ -1,7 +1,9 @@
 
 local_edition(2)
 
-skip_if_not_installed("broom")
+if (!requireNamespace("broom", quietly = TRUE)) {
+  testthat::skip("broom package is required for huxreg tests")
+}
 
 
 test_that("has_builtin_ci works", {

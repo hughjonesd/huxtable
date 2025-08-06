@@ -15,7 +15,6 @@ bold(ht)
 bold(ht) <- value
 set_bold(ht, row, col, value = TRUE)
 map_bold(ht, row, col, fn)
-
 italic(ht)
 italic(ht) <- value
 set_italic(ht, row, col, value = TRUE)
@@ -28,11 +27,11 @@ map_italic(ht, row, col, fn)
 
 \item{col}{An optional column specifier.}
 
-\item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
 \item{value}{A logical vector or matrix.
 
 Set to \code{NA} to reset to the default, which is \code{FALSE}.}
+
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \value{
 \code{bold()} returns the \code{bold} property.

@@ -22,13 +22,22 @@
 #' set_position(jams, "center")
 #'
 NULL
-make_getter_setters("position", "table",
-        check_values = c("left", "center", "centre", "right", "wrapleft",
-          "wrapright"),
-        extra_code = {
-          value[value == "centre"] <- "center"
-        }
-      )
+position <- function (ht) .prop_get(ht, "position")
+`position<-` <- function (ht, value) {
+  .prop_replace(ht, value, "position",
+        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+        extra = quote({ value[value == "centre"] <- "center" }))
+}
+set_position <- function (ht, value) {
+  .prop_set_table(ht, value, "position",
+        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+        extra = quote({ value[value == "centre"] <- "center" }))
+}
+map_position <- function (ht, fn) {
+  .prop_map_table(ht, fn, "position",
+        check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
+        extra = quote({ value[value == "centre"] <- "center" }))
+}
 
 
 #' Position the table's caption
@@ -53,14 +62,34 @@ make_getter_setters("position", "table",
 #' set_caption_pos(jams, "bottom")
 #'
 NULL
-make_getter_setters("caption_pos", "table",
-       check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
-         "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
-        extra_code = {
+caption_pos <- function (ht) .prop_get(ht, "caption_pos")
+`caption_pos<-` <- function (ht, value) {
+  .prop_replace(ht, value, "caption_pos",
+        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
+          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
+        extra = quote({
           value[value == "topcentre"] <- "topcenter"
           value[value == "bottomcentre"] <- "bottomcenter"
-        }
-      )
+        }))
+}
+set_caption_pos <- function (ht, value) {
+  .prop_set_table(ht, value, "caption_pos",
+        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
+          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
+        extra = quote({
+          value[value == "topcentre"] <- "topcenter"
+          value[value == "bottomcentre"] <- "bottomcenter"
+        }))
+}
+map_caption_pos <- function (ht, fn) {
+  .prop_map_table(ht, fn, "caption_pos",
+        check_values = c("top", "bottom", "topleft", "topcenter", "topcentre",
+          "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"),
+        extra = quote({
+          value[value == "topcentre"] <- "topcenter"
+          value[value == "bottomcentre"] <- "bottomcenter"
+        }))
+}
 
 
 
@@ -80,8 +109,16 @@ make_getter_setters("caption_pos", "table",
 #' @template getset-example
 #' @templateVar attr_val 0.5
 NULL
-make_getter_setters("caption_width", "table",
-      check_fun = is_numeric_or_character)
+caption_width <- function (ht) .prop_get(ht, "caption_width")
+`caption_width<-` <- function (ht, value) {
+  .prop_replace(ht, value, "caption_width", check_fun = is_numeric_or_character)
+}
+set_caption_width <- function (ht, value) {
+  .prop_set_table(ht, value, "caption_width", check_fun = is_numeric_or_character)
+}
+map_caption_width <- function (ht, fn) {
+  .prop_map_table(ht, fn, "caption_width", check_fun = is_numeric_or_character)
+}
 
 
 #' Set the table width
@@ -99,7 +136,16 @@ make_getter_setters("caption_width", "table",
 #' @templateVar attr_val 0.8
 #' @family table measurements
 NULL
-make_getter_setters("width", "table", check_fun = is_numeric_or_character)
+width <- function (ht) .prop_get(ht, "width")
+`width<-` <- function (ht, value) {
+  .prop_replace(ht, value, "width", check_fun = is_numeric_or_character)
+}
+set_width <- function (ht, value) {
+  .prop_set_table(ht, value, "width", check_fun = is_numeric_or_character)
+}
+map_width <- function (ht, fn) {
+  .prop_map_table(ht, fn, "width", check_fun = is_numeric_or_character)
+}
 
 
 #' Set the table height
@@ -118,7 +164,16 @@ make_getter_setters("width", "table", check_fun = is_numeric_or_character)
 #' @template getset-example
 #' @templateVar attr_val 0.4
 NULL
-make_getter_setters("height", "table", check_fun = is_numeric_or_character)
+height <- function (ht) .prop_get(ht, "height")
+`height<-` <- function (ht, value) {
+  .prop_replace(ht, value, "height", check_fun = is_numeric_or_character)
+}
+set_height <- function (ht, value) {
+  .prop_set_table(ht, value, "height", check_fun = is_numeric_or_character)
+}
+map_height <- function (ht, fn) {
+  .prop_map_table(ht, fn, "height", check_fun = is_numeric_or_character)
+}
 
 
 #' Set the table caption
@@ -142,7 +197,16 @@ make_getter_setters("height", "table", check_fun = is_numeric_or_character)
 #'       type = "latex")
 #'
 NULL
-make_getter_setters("caption", "table", check_fun = is.string)
+caption <- function (ht) .prop_get(ht, "caption")
+`caption<-` <- function (ht, value) {
+  .prop_replace(ht, value, "caption", check_fun = is.string)
+}
+set_caption <- function (ht, value) {
+  .prop_set_table(ht, value, "caption", check_fun = is.string)
+}
+map_caption <- function (ht, fn) {
+  .prop_map_table(ht, fn, "caption", check_fun = is.string)
+}
 
 
 #' Set the table's tabular environment in LaTeX
@@ -159,7 +223,16 @@ make_getter_setters("caption", "table", check_fun = is.string)
 #' @template getset-example
 #' @templateVar attr_val "longtable"
 NULL
-make_getter_setters("tabular_environment", "table", check_fun = is.string)
+tabular_environment <- function (ht) .prop_get(ht, "tabular_environment")
+`tabular_environment<-` <- function (ht, value) {
+  .prop_replace(ht, value, "tabular_environment", check_fun = is.string)
+}
+set_tabular_environment <- function (ht, value) {
+  .prop_set_table(ht, value, "tabular_environment", check_fun = is.string)
+}
+map_tabular_environment <- function (ht, fn) {
+  .prop_map_table(ht, fn, "tabular_environment", check_fun = is.string)
+}
 
 
 #' Set the "table" environment in LaTeX
@@ -180,7 +253,16 @@ make_getter_setters("tabular_environment", "table", check_fun = is.string)
 #' @template getset-example
 #' @templateVar attr_val "table*"
 NULL
-make_getter_setters("table_environment", "table", check_fun = is.string)
+table_environment <- function (ht) .prop_get(ht, "table_environment")
+`table_environment<-` <- function (ht, value) {
+  .prop_replace(ht, value, "table_environment", check_fun = is.string)
+}
+set_table_environment <- function (ht, value) {
+  .prop_set_table(ht, value, "table_environment", check_fun = is.string)
+}
+map_table_environment <- function (ht, fn) {
+  .prop_map_table(ht, fn, "table_environment", check_fun = is.string)
+}
 
 
 #' Set a table label for external referencing
@@ -209,7 +291,16 @@ make_getter_setters("table_environment", "table", check_fun = is.string)
 #' `options(huxtable.bookdown = FALSE)`.
 #'
 NULL
-make_getter_setters("label", "table", check_fun = is.string)
+label <- function (ht) .prop_get(ht, "label")
+`label<-` <- function (ht, value) {
+  .prop_replace(ht, value, "label", check_fun = is.string)
+}
+set_label <- function (ht, value) {
+  .prop_set_table(ht, value, "label", check_fun = is.string)
+}
+map_label <- function (ht, fn) {
+  .prop_map_table(ht, fn, "label", check_fun = is.string)
+}
 
 
 #' Set the position of the table float in LaTeX
@@ -231,4 +322,13 @@ make_getter_setters("label", "table", check_fun = is.string)
 #' @template getset-example
 #' @templateVar attr_val "b"
 NULL
-make_getter_setters("latex_float", "table", check_fun = is.string)
+latex_float <- function (ht) .prop_get(ht, "latex_float")
+`latex_float<-` <- function (ht, value) {
+  .prop_replace(ht, value, "latex_float", check_fun = is.string)
+}
+set_latex_float <- function (ht, value) {
+  .prop_set_table(ht, value, "latex_float", check_fun = is.string)
+}
+map_latex_float <- function (ht, fn) {
+  .prop_map_table(ht, fn, "latex_float", check_fun = is.string)
+}
