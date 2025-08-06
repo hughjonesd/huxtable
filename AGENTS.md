@@ -10,6 +10,10 @@ Don't change the API without asking first.
 Not all packages in Suggests: in the DESCRIPTION file are installed. You
 can install them if you need to. But, if tests break because a suggested
 package is not installed, then that is a bug and you should probably fix it by
-using `skip_if_not_installed()` - in a separate PR if possible.
+using `skip_if_not_installed()` - in a separate PR if possible. 
+
+If you want to build vignettes, you'll need the R.rsp package. Alternatively,
+don't build vignettes when you build the package, by passing the 
+`--no-build-vignettes` flag to `devtools::build()`.
 
 
