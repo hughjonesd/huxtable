@@ -48,6 +48,12 @@ jobs:
           r-version: ${{ inputs.r-version }}
       - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-tinytex@v2
+      - name: Install TinyTeX (Windows)
+        if: runner.os == 'Windows'
+        run: |
+         curl -L -o install-tinytex.bat https://yihui.org/tinytex/tools/install-windows.bat
+         cmd /c install-tinytex.bat
+         setx PATH "%PATH%;%APPDATA%\\TinyTeX\\bin\\windows"
       - run: tlmgr update --self
         env:
           CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
