@@ -20,7 +20,62 @@
 #'
 #' @name padding
 NULL
-for (val in paste0(c("left", "right", "top", "bottom"), "_padding")) make_getter_setters(val, "cell")
+
+left_padding <- function (ht) .prop_get(ht, "left_padding")
+
+`left_padding<-` <- function (ht, value) {
+  .prop_replace(ht, value, "left_padding")
+}
+
+set_left_padding <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "left_padding")
+}
+
+map_left_padding <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "left_padding")
+}
+
+right_padding <- function (ht) .prop_get(ht, "right_padding")
+
+`right_padding<-` <- function (ht, value) {
+  .prop_replace(ht, value, "right_padding")
+}
+
+set_right_padding <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "right_padding")
+}
+
+map_right_padding <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "right_padding")
+}
+
+top_padding <- function (ht) .prop_get(ht, "top_padding")
+
+`top_padding<-` <- function (ht, value) {
+  .prop_replace(ht, value, "top_padding")
+}
+
+set_top_padding <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "top_padding")
+}
+
+map_top_padding <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "top_padding")
+}
+
+bottom_padding <- function (ht) .prop_get(ht, "bottom_padding")
+
+`bottom_padding<-` <- function (ht, value) {
+  .prop_replace(ht, value, "bottom_padding")
+}
+
+set_bottom_padding <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "bottom_padding")
+}
+
+map_bottom_padding <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "bottom_padding")
+}
 
 
 #' @name left_padding

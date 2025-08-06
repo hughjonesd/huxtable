@@ -16,12 +16,28 @@
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "bottom"
 NULL
-make_getter_setters("valign", "cell",
+valign <- function (ht) .prop_get(ht, "valign")
+
+`valign<-` <- function (ht, value) {
+  .prop_replace(ht, value, "valign",
         check_fun = is.character,
-        check_values = c("top", "middle", "bottom")
-      )
+        check_values = c("top", "middle", "bottom"))
+}
+
+set_valign <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "valign",
+        check_fun = is.character,
+        check_values = c("top", "middle", "bottom"))
+}
+
+map_valign <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "valign",
+        check_fun = is.character,
+        check_values = c("top", "middle", "bottom"))
+}
 
 
+#' @noRd
 check_align_value <- function (x) {
   x <- na.omit(x)
   is.character(x) && all(x %in% c("left", "centre", "center", "right") | ncharw(x) == 1)
@@ -85,12 +101,25 @@ check_align_value <- function (x) {
 #'
 #'
 NULL
-make_getter_setters("align", "cell",
-        check_fun  = check_align_value,
-        extra_code = {
-          value[value == "centre"] <- "center"
-        }
-      )
+align <- function (ht) .prop_get(ht, "align")
+
+`align<-` <- function (ht, value) {
+  .prop_replace(ht, value, "align",
+        check_fun = check_align_value,
+        extra = quote(value[value == "centre"] <- "center"))
+}
+
+set_align <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "align",
+        check_fun = check_align_value,
+        extra = quote(value[value == "centre"] <- "center"))
+}
+
+map_align <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "align",
+        check_fun = check_align_value,
+        extra = quote(value[value == "centre"] <- "center"))
+}
 
 
 #' Extend cells over multiple rows and/or columns
@@ -125,20 +154,52 @@ NULL
 #' @templateVar attr_name rowspan
 #' @aliases rowspan<- set_rowspan map_rowspan
 NULL
-make_getter_setters("rowspan", "cell",
+rowspan <- function (ht) .prop_get(ht, "rowspan")
+
+`rowspan<-` <- function (ht, value) {
+  .prop_replace(ht, value, "rowspan",
         check_fun = is.numeric,
-        extra_code = {
+        extra = quote({
           too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
           if (any(too_long)) {
             stop("rowspan would extend beyond bottom of table")
           }
-          # throws an error if cells are cut
           dc <- display_cells(ht, new_rowspan = value)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
-        }
-      )
+        }))
+}
+
+set_rowspan <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "rowspan",
+        check_fun = is.numeric,
+        extra = quote({
+          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          if (any(too_long)) {
+            stop("rowspan would extend beyond bottom of table")
+          }
+          dc <- display_cells(ht, new_rowspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
+        }))
+}
+
+map_rowspan <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "rowspan",
+        check_fun = is.numeric,
+        extra = quote({
+          too_long <- na.omit(row(ht) + value - 1 > nrow(ht))
+          if (any(too_long)) {
+            stop("rowspan would extend beyond bottom of table")
+          }
+          dc <- display_cells(ht, new_rowspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
+        }))
+}
 
 
 #' @name colspan
@@ -147,22 +208,55 @@ make_getter_setters("rowspan", "cell",
 #' @templateVar attr_name colspan
 #' @aliases colspan<- set_colspan map_colspan
 NULL
-make_getter_setters("colspan", "cell",
+colspan <- function (ht) .prop_get(ht, "colspan")
+
+`colspan<-` <- function (ht, value) {
+  .prop_replace(ht, value, "colspan",
         check_fun = is.numeric,
-        extra_code = {
+        extra = quote({
           too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
           if (any(too_long)) {
             stop("colspan would extend beyond right edge of table")
           }
-          # throws an error if cells are cut
           dc <- display_cells(ht, new_colspan = value)
           if (any(value > 1)) {
             ht <- overwrite_shadowed_cells(ht, dc)
           }
-        }
-      )
+        }))
+}
+
+set_colspan <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "colspan",
+        check_fun = is.numeric,
+        extra = quote({
+          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          if (any(too_long)) {
+            stop("colspan would extend beyond right edge of table")
+          }
+          dc <- display_cells(ht, new_colspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
+        }))
+}
+
+map_colspan <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "colspan",
+        check_fun = is.numeric,
+        extra = quote({
+          too_long <- na.omit(col(ht) + value - 1 > ncol(ht))
+          if (any(too_long)) {
+            stop("colspan would extend beyond right edge of table")
+          }
+          dc <- display_cells(ht, new_colspan = value)
+          if (any(value > 1)) {
+            ht <- overwrite_shadowed_cells(ht, dc)
+          }
+        }))
+}
 
 
+#' @noRd
 overwrite_shadowed_cells <- function (ht, dc) {
   dcells <- as.matrix(dc[, c("display_row", "display_col")])
   contents <- as.data.frame(ht)[dcells]
@@ -200,7 +294,19 @@ NULL
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "yellow"
 NULL
-make_getter_setters("background_color", "cell")
+background_color <- function (ht) .prop_get(ht, "background_color")
+
+`background_color<-` <- function (ht, value) {
+  .prop_replace(ht, value, "background_color")
+}
+
+set_background_color <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "background_color")
+}
+
+map_background_color <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "background_color")
+}
 
 
 #' Set the color of text in cells
@@ -218,7 +324,19 @@ make_getter_setters("background_color", "cell")
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "red"
 NULL
-make_getter_setters("text_color", "cell")
+text_color <- function (ht) .prop_get(ht, "text_color")
+
+`text_color<-` <- function (ht, value) {
+  .prop_replace(ht, value, "text_color")
+}
+
+set_text_color <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "text_color")
+}
+
+map_text_color <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "text_color")
+}
 
 
 #' Wrap cell content over multiple lines
@@ -246,7 +364,19 @@ make_getter_setters("text_color", "cell")
 #' }
 #'
 NULL
-make_getter_setters("wrap", "cell", check_fun = is.logical)
+wrap <- function (ht) .prop_get(ht, "wrap")
+
+`wrap<-` <- function (ht, value) {
+  .prop_replace(ht, value, "wrap", check_fun = is.logical)
+}
+
+set_wrap <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
+}
+
+map_wrap <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
+}
 
 
 #' Escape or unescape text in cells
@@ -276,7 +406,19 @@ make_getter_setters("wrap", "cell", check_fun = is.logical)
 #' }
 #'
 NULL
-make_getter_setters("escape_contents", "cell", check_fun = is.logical)
+escape_contents <- function (ht) .prop_get(ht, "escape_contents")
+
+`escape_contents<-` <- function (ht, value) {
+  .prop_replace(ht, value, "escape_contents", check_fun = is.logical)
+}
+
+set_escape_contents <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
+}
+
+map_escape_contents <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
+}
 
 
 #' Interpret cell content as markdown
@@ -322,10 +464,19 @@ make_getter_setters("escape_contents", "cell", check_fun = is.logical)
 #' set_markdown(jams, 3, 2)
 #'
 NULL
-make_getter_setters("markdown", "cell",
-        check_fun = is.logical,
-        default   = TRUE
-      )
+markdown <- function (ht) .prop_get(ht, "markdown")
+
+`markdown<-` <- function (ht, value) {
+  .prop_replace(ht, value, "markdown", check_fun = is.logical)
+}
+
+set_markdown <- function (ht, row, col, value = TRUE) {
+  .prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
+}
+
+map_markdown <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
+}
 
 
 
@@ -346,7 +497,19 @@ make_getter_setters("markdown", "cell",
 #' set_na_string(jams, "---")
 #'
 NULL
-make_getter_setters("na_string", "cell", check_fun = is.character)
+na_string <- function (ht) .prop_get(ht, "na_string")
+
+`na_string<-` <- function (ht, value) {
+  .prop_replace(ht, value, "na_string", check_fun = is.character)
+}
+
+set_na_string <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "na_string", check_fun = is.character)
+}
+
+map_na_string <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
+}
 
 
 #' Make cell text bold or italic
@@ -354,7 +517,6 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @template getset-cell
 #' @templateVar attr_name bold
 #' @templateVar value_param_desc A logical vector or matrix.
-#' @templateVar morealiases italic
 #' @templateVar default TRUE
 #'
 #' @template getset-example
@@ -362,17 +524,52 @@ make_getter_setters("na_string", "cell", check_fun = is.character)
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
-NULL
-make_getter_setters("bold", "cell", default = TRUE, check_fun = is.logical)
+bold <- function (ht) .prop_get(ht, "bold")
 
+`bold<-` <- function (ht, value) {
+  .prop_replace(ht, value, "bold", check_fun = is.logical)
+}
 
-#' @name italic
 #' @rdname bold
+#' @usage NULL
+set_bold <- function (ht, row, col, value = TRUE) {
+  .prop_set(ht, row, col, value, "bold", check_fun = is.logical)
+}
+
+#' @rdname bold
+#' @usage NULL
+map_bold <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
+}
+
+
+#' @rdname bold
+#' @aliases italic italic<- set_italic map_italic
 #' @templateVar attr_name italic
 #' @templateVar default TRUE
-#' @template cell-property-usage
-NULL
-make_getter_setters("italic", "cell", default = TRUE, check_fun = is.logical)
+#' @usage italic(ht)
+#' italic(ht) <- value
+#' set_italic(ht, row, col, value = TRUE)
+#' map_italic(ht, row, col, fn)
+italic <- function (ht) .prop_get(ht, "italic")
+
+#' @rdname bold
+#' @usage NULL
+`italic<-` <- function (ht, value) {
+  .prop_replace(ht, value, "italic", check_fun = is.logical)
+}
+
+#' @rdname bold
+#' @usage NULL
+set_italic <- function (ht, row, col, value = TRUE) {
+  .prop_set(ht, row, col, value, "italic", check_fun = is.logical)
+}
+
+#' @rdname bold
+#' @usage NULL
+map_italic <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
+}
 
 
 #' Make text larger or smaller
@@ -390,7 +587,19 @@ make_getter_setters("italic", "cell", default = TRUE, check_fun = is.logical)
 #' @templateVar attr_val2 12
 #' @family formatting functions
 NULL
-make_getter_setters("font_size", "cell", check_fun = is.numeric)
+font_size <- function (ht) .prop_get(ht, "font_size")
+
+`font_size<-` <- function (ht, value) {
+  .prop_replace(ht, value, "font_size", check_fun = is.numeric)
+}
+
+set_font_size <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
+}
+
+map_font_size <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
+}
 
 
 #' Rotate text within cells
@@ -414,10 +623,25 @@ make_getter_setters("font_size", "cell", check_fun = is.numeric)
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 270
 NULL
-make_getter_setters("rotation", "cell",
+rotation <- function (ht) .prop_get(ht, "rotation")
+
+`rotation<-` <- function (ht, value) {
+  .prop_replace(ht, value, "rotation",
         check_fun = is.numeric,
-        extra_code = {value <- value %% 360}
-      )
+        extra = quote(value <- value %% 360))
+}
+
+set_rotation <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "rotation",
+        check_fun = is.numeric,
+        extra = quote(value <- value %% 360))
+}
+
+map_rotation <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "rotation",
+        check_fun = is.numeric,
+        extra = quote(value <- value %% 360))
+}
 
 
 #' Set how numbers are formatted in cells
@@ -494,17 +718,33 @@ make_getter_setters("rotation", "cell",
 #' set_number_format(ht_bands, NA)
 #'
 NULL
-make_getter_setters("number_format", "cell")
-
-
-# override the default setter
-`number_format<-` <- function(ht, value) {
-  value_ok <- function (x) {
-    is.numeric(x) || is.character(x) || is.function(x) || is.na(x)
+#' @noRd
+check_number_format <- function (x) {
+  value_ok <- function (y) {
+    is.numeric(y) || is.character(y) || is.function(y) || is.na(y)
   }
-  stopifnot(all(sapply(value, value_ok)))
-  attr(ht, "number_format")[] <- value
-  ht
+  all(vapply(x, value_ok, logical(1)))
+}
+
+number_format <- function (ht) .prop_get(ht, "number_format")
+
+`number_format<-` <- function (ht, value) {
+  .prop_replace(ht, value, "number_format",
+        check_fun = check_number_format,
+        reset_na = FALSE,
+        coerce_mode = FALSE)
+}
+
+set_number_format <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "number_format",
+        check_fun = check_number_format,
+        reset_na = FALSE)
+}
+
+map_number_format <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "number_format",
+        check_fun = check_number_format,
+        reset_na = FALSE)
 }
 
 
@@ -527,12 +767,41 @@ make_getter_setters("number_format", "cell")
 #' set_contents(jams, 2, 1, "Blackcurrant")
 #' map_contents(jams, by_regex(".*berry" = "Snodberry"))
 NULL
-make_getter_setters("contents", "cell")
-
 contents <- function (ht) ht
 
 `contents<-` <- function (ht, value) {
-  value # by the time we get here, the replacement has already happened
+  value
+}
+
+set_contents <- function (ht, row, col, value) {
+  if (missing(col) && missing(value)) {
+    value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  ht[rcrow, rccol] <- value
+  ht
+}
+
+map_contents <- function (ht, row, col, fn) {
+  if (missing(col) && missing(fn)) {
+    fn <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  current <- ht[rcrow, rccol, drop = FALSE]
+  ht[rcrow, rccol] <- fn(ht, rcrow, rccol, current)
+  ht
 }
 
 
@@ -560,4 +829,16 @@ contents <- function (ht) ht
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "arial"
 NULL
-make_getter_setters("font", "cell", check_fun = is.character)
+font <- function (ht) .prop_get(ht, "font")
+
+`font<-` <- function (ht, value) {
+  .prop_replace(ht, value, "font", check_fun = is.character)
+}
+
+set_font <- function (ht, row, col, value) {
+  .prop_set(ht, row, col, value, "font", check_fun = is.character)
+}
+
+map_font <- function (ht, row, col, fn) {
+  .prop_map(ht, row, col, fn, "font", check_fun = is.character)
+}
