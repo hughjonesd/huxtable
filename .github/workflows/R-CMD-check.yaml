@@ -31,7 +31,18 @@ jobs:
           r-version: ${{ matrix.config.r }}
           extra-packages: rcmdcheck
       - uses: r-lib/actions/setup-tinytex@v2
-      - uses: ./.github/actions/setup-latex
+      - run: tlmgr update --self
+        env:
+          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
+        shell: bash
+      - run: tlmgr install adjustbox ulem wrapfig threeparttable fontspec
+        env:
+          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
+        shell: bash
+      - run: tlmgr install placeins
+        env:
+          CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
+        shell: bash
 
       - name: Check
         env:
