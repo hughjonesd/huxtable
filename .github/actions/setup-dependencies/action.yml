@@ -19,7 +19,11 @@ runs:
       with:
         r-version: ${{ inputs.r-version }}
     - uses: r-lib/actions/setup-pandoc@v2
-    - uses: r-lib/actions/setup-tinytex@v2
+    - name: Install TinyTeX
+      run: |
+       install.packages('tinytex')
+       tinytex::install_tinytex()
+      shell: Rscript {0}
     - run: tlmgr update --self
       env:
         CTAN_REPO: https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet/
