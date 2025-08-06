@@ -45,6 +45,7 @@
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
   } else if (missing_col && missing_value) {
+
     value <- row
     row <- seq_len(nrow(ht))
     col <- seq_len(ncol(ht))
