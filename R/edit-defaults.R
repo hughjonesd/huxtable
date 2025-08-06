@@ -1,4 +1,3 @@
-
 #' Default huxtable properties
 #'
 #' Defaults are used for new huxtables, and also when a property is set to `NA`.
@@ -17,9 +16,9 @@
 #' @seealso Options for autoformat in [huxtable-options].
 #' @examples
 #' old <- set_default_properties(
-#'         text_color = "red",
-#'         border     = 0.4
-#'       )
+#'   text_color = "red",
+#'   border     = 0.4
+#' )
 #' hux(a = 1:2, b = 1:2)
 #' set_default_properties(old)
 set_default_properties <- function(...) {
@@ -44,7 +43,7 @@ set_default_properties <- function(...) {
 #' @examples
 #' get_default_properties("bold")
 #' @rdname set_default_properties
-get_default_properties <- function (names = NULL) {
+get_default_properties <- function(names = NULL) {
   names <- names %||% names(huxtable_env$huxtable_default_attrs)
   check_recognized_properties(names)
 
@@ -52,8 +51,11 @@ get_default_properties <- function (names = NULL) {
 }
 
 
-check_recognized_properties <- function (names) {
-  if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) stop(
-    "Unrecognized property name(s): ", paste(unrec, collapse = ", "),
-    "; to see all names, use get_default_properties()")
+check_recognized_properties <- function(names) {
+  if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) {
+    stop(
+      "Unrecognized property name(s): ", paste(unrec, collapse = ", "),
+      "; to see all names, use get_default_properties()"
+    )
+  }
 }

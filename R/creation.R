@@ -1,4 +1,3 @@
-
 #' @import assertthat
 NULL
 
@@ -46,29 +45,28 @@ NULL
 #'
 #' @examples
 #' ht <- huxtable(
-#'         column1 = 1:5,
-#'         column2 = letters[1:5]
-#'       )
+#'   column1 = 1:5,
+#'   column2 = letters[1:5]
+#' )
 #' ht
-huxtable <- function (
-        ...,
-        add_colnames = getOption("huxtable.add_colnames", TRUE),
-        add_rownames = FALSE,
-        autoformat   = getOption("huxtable.autoformat", TRUE)
-      ) {
-
+huxtable <- function(...,
+                     add_colnames = getOption("huxtable.add_colnames", TRUE),
+                     add_rownames = FALSE,
+                     autoformat = getOption("huxtable.autoformat", TRUE)) {
   assert_that(
-          is.flag(add_colnames),
-          is.flag(add_rownames) | is.string(add_rownames),
-          is.flag(autoformat)
-        )
+    is.flag(add_colnames),
+    is.flag(add_rownames) | is.string(add_rownames),
+    is.flag(autoformat)
+  )
 
   df_args <- list(..., stringsAsFactors = FALSE, check.names = FALSE)
   if (R.version$major >= 3 && R.version$minor >= 3) df_args$fix.empty.names <- FALSE
   ht <- do.call(data.frame, df_args)
-  if (is.null(names(list(...))) & ! is.data.frame(..1)) add_colnames <- FALSE
-  ht <- as_huxtable(ht, add_colnames = add_colnames, add_rownames = add_rownames,
-        autoformat = autoformat)
+  if (is.null(names(list(...))) & !is.data.frame(..1)) add_colnames <- FALSE
+  ht <- as_huxtable(ht,
+    add_colnames = add_colnames, add_rownames = add_rownames,
+    autoformat = autoformat
+  )
 
   ht
 }
@@ -88,19 +86,20 @@ hux <- huxtable
 #' @rdname huxtable
 #' @examples
 #' tribble_hux(
-#'   ~ Name,             ~ Salary,
-#'     "John Smith",       50000,
-#'     "Jane Doe",         50000,
-#'     "David Hugh-Jones", 50000,
-#'     add_colnames = TRUE
+#'   ~Name, ~Salary,
+#'   "John Smith", 50000,
+#'   "Jane Doe", 50000,
+#'   "David Hugh-Jones", 50000,
+#'   add_colnames = TRUE
 #' )
-tribble_hux <- function (...,
-        add_colnames = getOption("huxtable.add_colnames", TRUE),
-        autoformat   = getOption("huxtable.autoformat", TRUE)
-      ) {
+tribble_hux <- function(...,
+                        add_colnames = getOption("huxtable.add_colnames", TRUE),
+                        autoformat = getOption("huxtable.autoformat", TRUE)) {
   assert_package("tribble_hux", "tibble")
-  as_hux(tibble::tribble(...), add_colnames = add_colnames, add_rownames = FALSE,
-        autoformat = autoformat)
+  as_hux(tibble::tribble(...),
+    add_colnames = add_colnames, add_rownames = FALSE,
+    autoformat = autoformat
+  )
 }
 
 
@@ -130,29 +129,31 @@ tribble_hux <- function (...,
 #' @export
 #' @examples
 #' dfr <- data.frame(
-#'         a = 1:5,
-#'         b = letters[1:5],
-#'         stringsAsFactors = FALSE
-#'       )
+#'   a = 1:5,
+#'   b = letters[1:5],
+#'   stringsAsFactors = FALSE
+#' )
 #' as_huxtable(dfr)
 #' mx <- matrix(letters[1:12], 4, 3)
 #' as_huxtable(mx, add_colnames = FALSE)
 #' library(stats)
 #' tbl <- table(
-#'         Wool    = warpbreaks$wool,
-#'         Tension = warpbreaks$tension
-#'       )
+#'   Wool    = warpbreaks$wool,
+#'   Tension = warpbreaks$tension
+#' )
 #' as_huxtable(tbl) # adds row and column names by default
 #'
 #' # adding rownames:
-#' as_hux(mtcars[1:3,], add_colnames = TRUE,
-#'       add_rownames = "Car")
+#' as_hux(mtcars[1:3, ],
+#'   add_colnames = TRUE,
+#'   add_rownames = "Car"
+#' )
 #'
 #' if (requireNamespace("dplyr")) {
 #'   iris_grp <- dplyr::group_by(iris[c(1:4, 51:54, 101:104), ], Species)
 #'   as_hux(iris_grp, groups_to_headers = TRUE)
 #' }
-as_huxtable <- function (x, ...) UseMethod("as_huxtable")
+as_huxtable <- function(x, ...) UseMethod("as_huxtable")
 
 
 #' @export
@@ -162,22 +163,20 @@ as_hux <- as_huxtable
 
 #' @export
 #' @rdname as_huxtable
-as_huxtable.default <- function (
-        x,
-        add_colnames = getOption("huxtable.add_colnames", TRUE),
-        add_rownames = FALSE,
-        autoformat   = getOption("huxtable.autoformat", TRUE),
-        ...
-      ) {
+as_huxtable.default <- function(x,
+                                add_colnames = getOption("huxtable.add_colnames", TRUE),
+                                add_rownames = FALSE,
+                                autoformat = getOption("huxtable.autoformat", TRUE),
+                                ...) {
   assert_that(
-          is.flag(add_colnames),
-          is.flag(add_rownames) || is.character(add_rownames),
-          is.flag(autoformat)
-        )
+    is.flag(add_colnames),
+    is.flag(add_rownames) || is.character(add_rownames),
+    is.flag(autoformat)
+  )
 
   x <- new_huxtable(x)
 
-  col_classes <- sapply(x, function (col) class(col)[1])
+  col_classes <- sapply(x, function(col) class(col)[1])
   if (autoformat) {
     dfn <- getOption("huxtable.autoformat_number_format", list())
     for (cn in seq_len(ncol(x))) {
@@ -203,7 +202,7 @@ as_huxtable.default <- function (
       cls <- col_classes[cn]
       autoal <- dfa[[cls]] %||% NA
       align(x)[, cn] <- autoal
-      if (add_colnames && ! autoal %in% c("left", "right", "center", "centre", NA)) {
+      if (add_colnames && !autoal %in% c("left", "right", "center", "centre", NA)) {
         align(x)[1, cn] <- "right"
       }
     }
@@ -215,7 +214,7 @@ as_huxtable.default <- function (
 
 
 #' @export
-as_huxtable.huxtable <- function (x, ...) x
+as_huxtable.huxtable <- function(x, ...) x
 
 
 #' @export
@@ -225,7 +224,7 @@ as_huxtable.matrix <- function(x, add_colnames = FALSE, ...) {
 
 
 #' @export
-as_huxtable.table <- function (x, add_colnames = TRUE, add_rownames = TRUE, ...) {
+as_huxtable.table <- function(x, add_colnames = TRUE, add_rownames = TRUE, ...) {
   ht <- as_huxtable(unclass(x), add_colnames, add_rownames, ...)
   if (add_rownames) {
     ht[1, 1] <- ""
@@ -246,7 +245,7 @@ as_huxtable.ftable <- function(x, ...) {
 #' @export
 #' @param groups_to_headers Logical. Convert groups to header rows?
 #' @rdname as_huxtable
-as_huxtable.grouped_df <- function (x, ..., groups_to_headers = FALSE) {
+as_huxtable.grouped_df <- function(x, ..., groups_to_headers = FALSE) {
   assert_that(is.flag(groups_to_headers))
 
   ht <- NextMethod()
@@ -263,7 +262,7 @@ as_huxtable.grouped_df <- function (x, ..., groups_to_headers = FALSE) {
 
 
 #' @export
-as_huxtable.numeric <- function (x, ...) {
+as_huxtable.numeric <- function(x, ...) {
   # use default otherwise matrix has class e.g. c("matrix", "numeric") so we recurse
   as_huxtable.default(as.matrix(x), ...)
 }
@@ -274,16 +273,16 @@ as_huxtable.character <- as_huxtable.numeric
 
 
 #' @export
-as_huxtable.logical   <- as_huxtable.numeric
+as_huxtable.logical <- as_huxtable.numeric
 
 
 #' @export
-as_huxtable.complex   <- as_huxtable.numeric
+as_huxtable.complex <- as_huxtable.numeric
 
 
 #' @export
 #' @rdname as_huxtable
-is_huxtable <- function (x) inherits(x, "huxtable")
+is_huxtable <- function(x) inherits(x, "huxtable")
 
 
 #' @export

@@ -1,4 +1,3 @@
-
 #' Set multiple properties on headers
 #'
 #' These functions set arbitrary cell properties on cells in header rows
@@ -19,9 +18,11 @@
 #' style_headers(jams, text_color = "red")
 #' jams <- set_header_cols(jams, 1, TRUE)
 #' style_header_cols(jams,
-#'   text_color = c(NA, "red",
-#'     "darkred", "purple")
+#'   text_color = c(
+#'     NA, "red",
+#'     "darkred", "purple"
 #'   )
+#' )
 #'
 #' style_cells(jams, everywhere, 2, bold = TRUE)
 #' @name style-functions
@@ -29,7 +30,7 @@ NULL
 
 #' @export
 #' @rdname style-functions
-style_headers <- function (ht, ...) {
+style_headers <- function(ht, ...) {
   ht <- style_header_rows(ht, ...)
   ht <- style_header_cols(ht, ...)
 
@@ -39,28 +40,28 @@ style_headers <- function (ht, ...) {
 
 #' @export
 #' @rdname style-functions
-style_header_rows <- function (ht, ...) {
+style_header_rows <- function(ht, ...) {
   style_cells(ht, header_rows(ht), everywhere, ...)
 }
 
 
 #' @export
 #' @rdname style-functions
-style_header_cols <- function (ht, ...) {
-  style_cells(ht, everywhere, header_cols(ht),  ...)
+style_header_cols <- function(ht, ...) {
+  style_cells(ht, everywhere, header_cols(ht), ...)
 }
 
 
 #' @export
 #' @rdname style-functions
-style_cells <- function (ht, row, col, ...) {
+style_cells <- function(ht, row, col, ...) {
   props <- list(...)
   ok_names <- c(huxtable_cell_attrs, huxtable_border_df$name)
-  if (! all(names(props) %in% ok_names)) {
+  if (!all(names(props) %in% ok_names)) {
     stop(
-            "Unrecognized properties: ",
-            paste(setdiff(names(props), ok_names), collapse = ", ")
-          )
+      "Unrecognized properties: ",
+      paste(setdiff(names(props), ok_names), collapse = ", ")
+    )
   }
 
   call <- match.call(expand.dots = FALSE)
@@ -82,4 +83,3 @@ style_cells <- function (ht, row, col, ...) {
 #' @details
 #' `set_cell_properties` is a deprecated alias for `style_cells`. Don't use it.
 set_cell_properties <- style_cells
-

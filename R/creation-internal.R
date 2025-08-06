@@ -1,5 +1,3 @@
-
-
 #' Create a new huxtable. Internal.
 #'
 #' @param x Object that can be coerced by as.data.frame
@@ -7,7 +5,7 @@
 #' @return A valid huxtable
 #' @noRd
 #'
-new_huxtable <- function (x) {
+new_huxtable <- function(x) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
 
   for (a in setdiff(huxtable_cell_attrs, "number_format")) {
@@ -35,9 +33,11 @@ new_huxtable <- function (x) {
   )
 
   non_border_attrs <- grep("border",
-        names(huxtable_env$huxtable_default_attrs), value = TRUE, invert = TRUE)
+    names(huxtable_env$huxtable_default_attrs),
+    value = TRUE, invert = TRUE
+  )
   for (a in non_border_attrs) {
-    attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]]  # [[ indexing matters here
+    attr(x, a)[] <- huxtable_env$huxtable_default_attrs[[a]] # [[ indexing matters here
   }
 
   x <- set_attr_dimnames(x)

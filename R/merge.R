@@ -1,4 +1,3 @@
-
 #' @section Cell content:
 #' In merged cell ranges, only the top left cell's content is displayed.
 #' In addition, when you merge cells (either by setting [colspan()] or
@@ -39,7 +38,7 @@ NULL
 #' ht <- set_all_borders(ht, 1)
 #' merge_cells(ht, 2:3, 1:2)
 #'
-merge_cells <- function (ht, row, col) {
+merge_cells <- function(ht, row, col) {
   assert_that(is_huxtable(ht))
 
   row <- get_rc_spec(ht, row, 1)
@@ -78,7 +77,7 @@ merge_cells <- function (ht, row, col) {
 #' merge_across(ht, 2:4, 2:3)
 #' merge_down(ht, 2:4, 2:3)
 #'
-merge_across <- function (ht, row, col) {
+merge_across <- function(ht, row, col) {
   assert_that(is_huxtable(ht))
 
   row <- get_rc_spec(ht, row, 1)
@@ -94,7 +93,7 @@ merge_across <- function (ht, row, col) {
 
 #' @rdname merge_across
 #' @export
-merge_down <- function (ht, row, col) {
+merge_down <- function(ht, row, col) {
   assert_that(is_huxtable(ht))
 
   row <- get_rc_spec(ht, row, 1)
@@ -129,18 +128,19 @@ merge_down <- function (ht, row, col) {
 #' @examples
 #' ht <- as_hux(jams[c(1, 2, 2, 3, 3, 4), ])
 #' ht <- add_columns(ht, c("Sugar", "30%", "40%", "30%", "40%", "30%"),
-#'       after = 1)
+#'   after = 1
+#' )
 #' ht
 #' merge_repeated_rows(ht)
 #' merge_repeated_rows(ht, everywhere, "Type")
-merge_repeated_rows <- function (ht, row, col) {
+merge_repeated_rows <- function(ht, row, col) {
   assert_that(is_huxtable(ht))
   row <- get_rc_spec(ht, row, 1)
   col <- get_rc_spec(ht, col, 2)
   if (is.logical(row)) row <- which(row)
   if (is.logical(col)) col <- which(col)
 
-  if (length(row) > 1L && ! all(row == seq(min(row), max(row)))) {
+  if (length(row) > 1L && !all(row == seq(min(row), max(row)))) {
     warning("Non-contiguous rows: ", paste(row, collapse = ", "))
   }
   for (cc in col) {

@@ -1,5 +1,3 @@
-
-
 #' @importFrom stats na.omit
 NULL
 
@@ -45,29 +43,31 @@ filter.huxtable <- function(.data, ...) {
 #' ht3 <- dplyr::mutate(ht, x = a + b)
 #' ht3
 #' bold(ht3)
-#' ht4 <- dplyr::mutate(ht, x = a + b,
-#'       copy_cell_props = FALSE)
+#' ht4 <- dplyr::mutate(ht,
+#'   x = a + b,
+#'   copy_cell_props = FALSE
+#' )
 #' bold(ht4)
-mutate.huxtable <- function (.data, ..., copy_cell_props = TRUE) {
+mutate.huxtable <- function(.data, ..., copy_cell_props = TRUE) {
   ht <- .data
   .data <- as.data.frame(.data)
 
   result <- switch(.Generic,
-          "mutate"    = dplyr::mutate(.data, ...),
-          "transmute" = dplyr::transmute(.data, ...),
-          stop("Unrecognized function ", .Generic)
-        )
+    "mutate"    = dplyr::mutate(.data, ...),
+    "transmute" = dplyr::transmute(.data, ...),
+    stop("Unrecognized function ", .Generic)
+  )
   result <- as_hux(result, autoformat = FALSE, add_colnames = FALSE)
 
   for (a in c(huxtable_row_attrs, huxtable_table_attrs)) attr(result, a) <- attr(ht, a)
 
   match_cols <- match(colnames(result), colnames(ht))
-  if (copy_cell_props) match_cols <- Reduce(function (x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
-  result_cols <- ! is.na(match_cols)
-  match_cols  <- match_cols[result_cols]
+  if (copy_cell_props) match_cols <- Reduce(function(x, y) if (is.na(y)) x else y, match_cols, accumulate = TRUE)
+  result_cols <- !is.na(match_cols)
+  match_cols <- match_cols[result_cols]
 
   for (a in huxtable_cell_attrs) attr(result, a)[, result_cols] <- attr(ht, a)[, match_cols]
-  for (a in huxtable_col_attrs)  attr(result, a)[result_cols]  <- attr(ht, a)[match_cols]
+  for (a in huxtable_col_attrs) attr(result, a)[result_cols] <- attr(ht, a)[match_cols]
 
   result <- set_attr_dimnames(result)
 
@@ -87,13 +87,12 @@ arrange.huxtable <- function(.data, ...) {
 }
 
 
-slice.huxtable <- function (.data, ...) {
+slice.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
   .data$slice.huxtable.rownames <- rownames(.data)
   result <- NextMethod()
   ht[na.omit(match(result$slice.huxtable.rownames, .data$slice.huxtable.rownames)), ]
-
 }
 
 

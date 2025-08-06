@@ -1,4 +1,3 @@
-
 #' Convert a huxtable for Word/Powerpoint
 #'
 #' Huxtables can be converted to [flextable::flextable()] objects, for use in Word and Powerpoint documents.
@@ -33,11 +32,14 @@
 #' ht <- hux(a = 1:3, b = 1:3)
 #' ft <- as_flextable(ht)
 #' \dontrun{
-#'   my_doc <- officer::read_docx()
-#'   my_doc <- flextable::body_add_flextable(
-#'         my_doc, ft)
-#'   print(my_doc, target =
-#'         "path/to/my_doc.docx")
+#' my_doc <- officer::read_docx()
+#' my_doc <- flextable::body_add_flextable(
+#'   my_doc, ft
+#' )
+#' print(my_doc,
+#'   target =
+#'     "path/to/my_doc.docx"
+#' )
 #' }
 #' @aliases as_flextable.huxtable
 #' @export
@@ -48,14 +50,14 @@ as_flextable <- function(x, ...) UseMethod("as_flextable")
 #' @rdname as_flextable
 #' @export
 as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
-  assert_package("as_flextable","flextable")
+  assert_package("as_flextable", "flextable")
   flextable_version <- utils::packageVersion("flextable")
 
   cc <- clean_contents(x, output_type = "word")
   cc <- as.data.frame(cc, stringsAsFactors = FALSE)
   names(cc) <- make.names(names(cc)) # flextable does not like invalid names
   ft <- flextable::flextable(cc)
-  if (! colnames_to_header) ft <- flextable::delete_part(ft, "header")
+  if (!colnames_to_header) ft <- flextable::delete_part(ft, "header")
   if (any(markdown(x))) {
     assert_package("as_flextable", "ftExtra", version = "0.0.2")
     md_cell_refs <- which(markdown(x), arr.ind = TRUE)
@@ -63,14 +65,16 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
       hr <- md_cell_refs[r, 1]
       hc <- md_cell_refs[r, 2]
       cell <- cc[[hr, hc]]
-      ft <- flextable::compose(ft, i = hr, j = hc,
-            value = ftExtra::as_paragraph_md(cell, .from = "commonmark+strikeout"))
+      ft <- flextable::compose(ft,
+        i = hr, j = hc,
+        value = ftExtra::as_paragraph_md(cell, .from = "commonmark+strikeout")
+      )
     }
   }
 
   # list of vert and horiz border thicknesses.
   # vert is rows+1, cols; horiz is rows, cols+1
-  vbdrs  <- get_visible_borders(x)
+  vbdrs <- get_visible_borders(x)
   # lists of colors and styles
   vbcols <- collapsed_border_colors(x)
   vbcols$vert[is.na(vbcols$vert)] <- "black"
@@ -93,44 +97,54 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     }
     if (bold(x)[drow, dcol]) ft <- flextable::bold(ft, i = drow, j = dcol)
     if (italic(x)[drow, dcol]) ft <- flextable::italic(ft, i = drow, j = dcol)
-    if (! is.na(fs <- font_size(x)[drow, dcol])) ft <- flextable::fontsize(ft, i = drow, j = dcol, size = fs)
-    if (! is.na(tc <- text_color(x)[drow, dcol])) ft <- flextable::color(ft, i = drow, j = dcol, color = tc)
-    if (! is.na(bgc <- background_color(x)[drow, dcol])) ft <- flextable::bg(ft, i = drow, j = dcol, bg = bgc)
+    if (!is.na(fs <- font_size(x)[drow, dcol])) ft <- flextable::fontsize(ft, i = drow, j = dcol, size = fs)
+    if (!is.na(tc <- text_color(x)[drow, dcol])) ft <- flextable::color(ft, i = drow, j = dcol, color = tc)
+    if (!is.na(bgc <- background_color(x)[drow, dcol])) ft <- flextable::bg(ft, i = drow, j = dcol, bg = bgc)
     ft <- flextable::align(ft, i = drow, j = dcol, align = real_align(x)[drow, dcol])
 
-    ft <- flextable::padding(ft, i = drow, j = dcol,
-            padding.bottom = bottom_padding(x)[drow, dcol],
-            padding.left   = left_padding(x)[drow, dcol],
-            padding.right  = right_padding(x)[drow, dcol],
-            padding.top    = top_padding(x)[drow, dcol]
-          )
+    ft <- flextable::padding(ft,
+      i = drow, j = dcol,
+      padding.bottom = bottom_padding(x)[drow, dcol],
+      padding.left = left_padding(x)[drow, dcol],
+      padding.right = right_padding(x)[drow, dcol],
+      padding.top = top_padding(x)[drow, dcol]
+    )
     # For cell (i, j), top and left are i, j; right is i, j+1; bottom is i+1, j.
     fpb <- list()
-    fpb$top    <- officer::fp_border(color = vbcols$horiz[drow, dcol],
-                                     width = vbdrs$horiz[drow, dcol],
-                                     style = vbst$horiz[drow, dcol])
-    fpb$bottom <- officer::fp_border(color = vbcols$horiz[dcell$end_row+1, dcol],
-                                     width = vbdrs$horiz[dcell$end_row+1, dcol],
-                                     style = vbst$horiz[dcell$end_row+1, dcol])
+    fpb$top <- officer::fp_border(
+      color = vbcols$horiz[drow, dcol],
+      width = vbdrs$horiz[drow, dcol],
+      style = vbst$horiz[drow, dcol]
+    )
+    fpb$bottom <- officer::fp_border(
+      color = vbcols$horiz[dcell$end_row + 1, dcol],
+      width = vbdrs$horiz[dcell$end_row + 1, dcol],
+      style = vbst$horiz[dcell$end_row + 1, dcol]
+    )
 
-    fpb$left   <- officer::fp_border(color = vbcols$vert[drow, dcol],
-                                     width = vbdrs$vert[drow, dcol],
-                                     style = vbst$vert[drow, dcol])
-    fpb$right  <- officer::fp_border(color = vbcols$vert[drow, dcell$end_col+1],
-                                     width = vbdrs$vert[drow, dcell$end_col+1],
-                                     style = vbst$vert[drow, dcell$end_col+1])
+    fpb$left <- officer::fp_border(
+      color = vbcols$vert[drow, dcol],
+      width = vbdrs$vert[drow, dcol],
+      style = vbst$vert[drow, dcol]
+    )
+    fpb$right <- officer::fp_border(
+      color = vbcols$vert[drow, dcell$end_col + 1],
+      width = vbdrs$vert[drow, dcell$end_col + 1],
+      style = vbst$vert[drow, dcell$end_col + 1]
+    )
 
 
-    ft <- flextable::surround(ft, i = drow:dcell$end_row, j = dcol:dcell$end_col,
-            border.bottom = fpb$bottom,
-            border.left   = fpb$left,
-            border.right  = fpb$right,
-            border.top    = fpb$top
-          )
+    ft <- flextable::surround(ft,
+      i = drow:dcell$end_row, j = dcol:dcell$end_col,
+      border.bottom = fpb$bottom,
+      border.left = fpb$left,
+      border.right = fpb$right,
+      border.top = fpb$top
+    )
     rot <- as.character(rotation(x)[drow, dcol])
     valign <- valign(x)[drow, dcol]
     if (valign == "middle") valign <- "center"
-    if (! (rot %in% names(rots))) {
+    if (!(rot %in% names(rots))) {
       warning("flextable can only handle rotation of 0, 90 or 270")
       rot <- "0"
     }
@@ -143,9 +157,9 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   # if we only have width, use it and use equal col widths
   # if we have neither, use autofit
   # if we have both, multiply col_widths by width
-  if (! is.numeric(tw) && is.numeric(cw) && ! any(is.na(cw))) tw <- 0.5
-  if (! is.numeric(cw) || any(is.na(cw))) cw <- rep(1/ncol(x), ncol(x))
-  if (is.numeric(tw) && ! is.na(tw)) {
+  if (!is.numeric(tw) && is.numeric(cw) && !any(is.na(cw))) tw <- 0.5
+  if (!is.numeric(cw) || any(is.na(cw))) cw <- rep(1 / ncol(x), ncol(x))
+  if (is.numeric(tw) && !is.na(tw)) {
     tw <- tw * 6 # flextable sizes are in inches
     cw <- cw * tw
     ft <- flextable::width(ft, width = cw)
@@ -158,9 +172,9 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   # if we have row heights, set height to 0.5
   # if we only have height, set row_heights to equal
   # otherwise, do nothing - don't call autofit again unless you overwrite
-  if (! is.numeric(th) && is.numeric(rh) && ! any(is.na(rh))) th <- 0.5
-  if (! is.numeric(rh) || any(is.na(rh))) rh <- rep(1/nrow(x), nrow(x))
-  if (is.numeric(th) && ! is.na(th)) {
+  if (!is.numeric(th) && is.numeric(rh) && !any(is.na(rh))) th <- 0.5
+  if (!is.numeric(rh) || any(is.na(rh))) rh <- rep(1 / nrow(x), nrow(x))
+  if (is.numeric(th) && !is.na(th)) {
     rh <- rh * 9 # inches again, so this is roughly A4 with 2 1" margins
     rh <- rh * th
     ft <- flextable::height(ft, height = rh)
@@ -169,12 +183,14 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
 
   # set caption
   if (!is.null(caption(x)) & !is.na(caption(x))) {
-    if (flextable_version >= "0.5.5"){
+    if (flextable_version >= "0.5.5") {
       ft <- flextable::set_caption(ft, caption(x))
     } else {
-      message("Use of table captions requires \"flextable\" package version >= 0.5.5.",
-              "To upgrade, type:\n",
-              " install.packages(\"flextable\")")
+      message(
+        "Use of table captions requires \"flextable\" package version >= 0.5.5.",
+        "To upgrade, type:\n",
+        " install.packages(\"flextable\")"
+      )
     }
   }
 

@@ -1,4 +1,3 @@
-
 #' Set the vertical alignment of cell content
 #'
 #' Allowed values are "top", "middle", "bottom" or `NA`.
@@ -16,29 +15,32 @@
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "bottom"
 NULL
-valign <- function (ht) .prop_get(ht, "valign")
+valign <- function(ht) .prop_get(ht, "valign")
 
-`valign<-` <- function (ht, value) {
+`valign<-` <- function(ht, value) {
   .prop_replace(ht, value, "valign",
-        check_fun = is.character,
-        check_values = c("top", "middle", "bottom"))
+    check_fun = is.character,
+    check_values = c("top", "middle", "bottom")
+  )
 }
 
-set_valign <- function (ht, row, col, value) {
+set_valign <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "valign",
-        check_fun = is.character,
-        check_values = c("top", "middle", "bottom"))
+    check_fun = is.character,
+    check_values = c("top", "middle", "bottom")
+  )
 }
 
-map_valign <- function (ht, row, col, fn) {
+map_valign <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "valign",
-        check_fun = is.character,
-        check_values = c("top", "middle", "bottom"))
+    check_fun = is.character,
+    check_values = c("top", "middle", "bottom")
+  )
 }
 
 
 #' @noRd
-check_align_value <- function (x) {
+check_align_value <- function(x) {
   x <- na.omit(x)
   is.character(x) && all(x %in% c("left", "centre", "center", "right") | ncharw(x) == 1)
 }
@@ -77,48 +79,52 @@ check_align_value <- function (x) {
 #' number_hux <- as_hux(matrix(numbers, 5, 5))
 #' number_format(number_hux) <- "%.4g"
 #' number_format(number_hux)[, 5] <- fmt_pretty(
-#'                                     decimal.mark = ",",
-#'                                     big.mark = ""
-#'                                   )
+#'   decimal.mark = ",",
+#'   big.mark = ""
+#' )
 #'
-#' number_hux <- map_align(number_hux,
-#'       by_cols("left", "center", "right", ".", ","))
+#' number_hux <- map_align(
+#'   number_hux,
+#'   by_cols("left", "center", "right", ".", ",")
+#' )
 #'
 #' alignments <- c(
-#'                  "left",
-#'                  "centre",
-#'                  "right",
-#'                  "decimal (.)",
-#'                  "decimal (,)"
-#'                )
+#'   "left",
+#'   "centre",
+#'   "right",
+#'   "decimal (.)",
+#'   "decimal (,)"
+#' )
 #' number_hux <- rbind(
-#'         alignments,
-#'         number_hux
-#'       )
+#'   alignments,
+#'   number_hux
+#' )
 #'
 #' align(number_hux)
 #' number_hux
 #'
-#'
 NULL
-align <- function (ht) .prop_get(ht, "align")
+align <- function(ht) .prop_get(ht, "align")
 
-`align<-` <- function (ht, value) {
+`align<-` <- function(ht, value) {
   .prop_replace(ht, value, "align",
-        check_fun = check_align_value,
-        extra = quote(value[value == "centre"] <- "center"))
+    check_fun = check_align_value,
+    extra = quote(value[value == "centre"] <- "center")
+  )
 }
 
-set_align <- function (ht, row, col, value) {
+set_align <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "align",
-        check_fun = check_align_value,
-        extra = quote(value[value == "centre"] <- "center"))
+    check_fun = check_align_value,
+    extra = quote(value[value == "centre"] <- "center")
+  )
 }
 
-map_align <- function (ht, row, col, fn) {
+map_align <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "align",
-        check_fun = check_align_value,
-        extra = quote(value[value == "centre"] <- "center"))
+    check_fun = check_align_value,
+    extra = quote(value[value == "centre"] <- "center")
+  )
 }
 
 
@@ -154,57 +160,60 @@ NULL
 #' @templateVar attr_name rowspan
 #' @aliases rowspan<- set_rowspan map_rowspan
 NULL
-rowspan <- function (ht) .prop_get(ht, "rowspan")
+rowspan <- function(ht) .prop_get(ht, "rowspan")
 
-`rowspan<-` <- function (ht, value) {
+`rowspan<-` <- function(ht, value) {
   .prop_replace(ht, value, "rowspan",
-        check_fun = is.numeric,
-        extra = quote({
-          too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
-          if (any(too_long)) {
-            stop("rowspan would extend beyond bottom of table")
-          }
-          dc <- display_cells(ht, new_rowspan = value)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
+      if (any(too_long)) {
+        stop("rowspan would extend beyond bottom of table")
+      }
+      dc <- display_cells(ht, new_rowspan = value)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
-set_rowspan <- function (ht, row, col, value) {
+set_rowspan <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "rowspan",
-        check_fun = is.numeric,
-        extra = quote({
-          rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
-          too_long <- na.omit(rows + value - 1 > nrow(ht))
-          if (any(too_long)) {
-            stop("rowspan would extend beyond bottom of table")
-          }
-          new_rs <- attr(ht, "rowspan")
-          new_rs[rc$row, rc$col] <- value
-          dc <- display_cells(ht, new_rowspan = new_rs)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
+      too_long <- na.omit(rows + value - 1 > nrow(ht))
+      if (any(too_long)) {
+        stop("rowspan would extend beyond bottom of table")
+      }
+      new_rs <- attr(ht, "rowspan")
+      new_rs[rc$row, rc$col] <- value
+      dc <- display_cells(ht, new_rowspan = new_rs)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
-map_rowspan <- function (ht, row, col, fn) {
+map_rowspan <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "rowspan",
-        check_fun = is.numeric,
-        extra = quote({
-          rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
-          too_long <- na.omit(rows + value - 1 > nrow(ht))
-          if (any(too_long)) {
-            stop("rowspan would extend beyond bottom of table")
-          }
-          new_rs <- attr(ht, "rowspan")
-          new_rs[rc$row, rc$col] <- value
-          dc <- display_cells(ht, new_rowspan = new_rs)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
+      too_long <- na.omit(rows + value - 1 > nrow(ht))
+      if (any(too_long)) {
+        stop("rowspan would extend beyond bottom of table")
+      }
+      new_rs <- attr(ht, "rowspan")
+      new_rs[rc$row, rc$col] <- value
+      dc <- display_cells(ht, new_rowspan = new_rs)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
 
@@ -214,62 +223,65 @@ map_rowspan <- function (ht, row, col, fn) {
 #' @templateVar attr_name colspan
 #' @aliases colspan<- set_colspan map_colspan
 NULL
-colspan <- function (ht) .prop_get(ht, "colspan")
+colspan <- function(ht) .prop_get(ht, "colspan")
 
-`colspan<-` <- function (ht, value) {
+`colspan<-` <- function(ht, value) {
   .prop_replace(ht, value, "colspan",
-        check_fun = is.numeric,
-        extra = quote({
-          too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
-          if (any(too_long)) {
-            stop("colspan would extend beyond right edge of table")
-          }
-          dc <- display_cells(ht, new_colspan = value)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
+      if (any(too_long)) {
+        stop("colspan would extend beyond right edge of table")
+      }
+      dc <- display_cells(ht, new_colspan = value)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
-set_colspan <- function (ht, row, col, value) {
+set_colspan <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "colspan",
-        check_fun = is.numeric,
-        extra = quote({
-          cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
-          too_long <- na.omit(cols + value - 1 > ncol(ht))
-          if (any(too_long)) {
-            stop("colspan would extend beyond right edge of table")
-          }
-          new_cs <- attr(ht, "colspan")
-          new_cs[rc$row, rc$col] <- value
-          dc <- display_cells(ht, new_colspan = new_cs)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
+      too_long <- na.omit(cols + value - 1 > ncol(ht))
+      if (any(too_long)) {
+        stop("colspan would extend beyond right edge of table")
+      }
+      new_cs <- attr(ht, "colspan")
+      new_cs[rc$row, rc$col] <- value
+      dc <- display_cells(ht, new_colspan = new_cs)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
-map_colspan <- function (ht, row, col, fn) {
+map_colspan <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "colspan",
-        check_fun = is.numeric,
-        extra = quote({
-          cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
-          too_long <- na.omit(cols + value - 1 > ncol(ht))
-          if (any(too_long)) {
-            stop("colspan would extend beyond right edge of table")
-          }
-          new_cs <- attr(ht, "colspan")
-          new_cs[rc$row, rc$col] <- value
-          dc <- display_cells(ht, new_colspan = new_cs)
-          if (any(value > 1)) {
-            ht <- overwrite_shadowed_cells(ht, dc)
-          }
-        }))
+    check_fun = is.numeric,
+    extra = quote({
+      cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
+      too_long <- na.omit(cols + value - 1 > ncol(ht))
+      if (any(too_long)) {
+        stop("colspan would extend beyond right edge of table")
+      }
+      new_cs <- attr(ht, "colspan")
+      new_cs[rc$row, rc$col] <- value
+      dc <- display_cells(ht, new_colspan = new_cs)
+      if (any(value > 1)) {
+        ht <- overwrite_shadowed_cells(ht, dc)
+      }
+    })
+  )
 }
 
 
 #' @noRd
-overwrite_shadowed_cells <- function (ht, dc) {
+overwrite_shadowed_cells <- function(ht, dc) {
   dcells <- as.matrix(dc[, c("display_row", "display_col")])
   contents <- as.data.frame(ht)[dcells]
   ht[] <- contents
@@ -306,17 +318,17 @@ NULL
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "yellow"
 NULL
-background_color <- function (ht) .prop_get(ht, "background_color")
+background_color <- function(ht) .prop_get(ht, "background_color")
 
-`background_color<-` <- function (ht, value) {
+`background_color<-` <- function(ht, value) {
   .prop_replace(ht, value, "background_color")
 }
 
-set_background_color <- function (ht, row, col, value) {
+set_background_color <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "background_color")
 }
 
-map_background_color <- function (ht, row, col, fn) {
+map_background_color <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "background_color")
 }
 
@@ -336,17 +348,17 @@ map_background_color <- function (ht, row, col, fn) {
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 "red"
 NULL
-text_color <- function (ht) .prop_get(ht, "text_color")
+text_color <- function(ht) .prop_get(ht, "text_color")
 
-`text_color<-` <- function (ht, value) {
+`text_color<-` <- function(ht, value) {
   .prop_replace(ht, value, "text_color")
 }
 
-set_text_color <- function (ht, row, col, value) {
+set_text_color <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "text_color")
 }
 
-map_text_color <- function (ht, row, col, fn) {
+map_text_color <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "text_color")
 }
 
@@ -364,29 +376,29 @@ map_text_color <- function (ht, row, col, fn) {
 #' @examples
 #'
 #' long_text <- paste(
-#'         rep("Some long text.", 10),
-#'         collapse = " "
-#'      )
+#'   rep("Some long text.", 10),
+#'   collapse = " "
+#' )
 #' ht <- huxtable(Long = long_text)
 #' width(ht) <- 0.2
 #' wrap(ht) <- TRUE
 #'
 #' \dontrun{
-#'   quick_html(ht)
+#' quick_html(ht)
 #' }
 #'
 NULL
-wrap <- function (ht) .prop_get(ht, "wrap")
+wrap <- function(ht) .prop_get(ht, "wrap")
 
-`wrap<-` <- function (ht, value) {
+`wrap<-` <- function(ht, value) {
   .prop_replace(ht, value, "wrap", check_fun = is.logical)
 }
 
-set_wrap <- function (ht, row, col, value) {
+set_wrap <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
 }
 
-map_wrap <- function (ht, row, col, fn) {
+map_wrap <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
 }
 
@@ -409,26 +421,26 @@ map_wrap <- function (ht, row, col, fn) {
 #' @examples
 #'
 #' ht <- huxtable(
-#'         Text   = "x squared",
-#'         Maths  = "$x^2$"
-#'       )
+#'   Text   = "x squared",
+#'   Maths  = "$x^2$"
+#' )
 #' ht <- set_escape_contents(ht, FALSE)
 #' \dontrun{
-#'   quick_pdf(ht)
+#' quick_pdf(ht)
 #' }
 #'
 NULL
-escape_contents <- function (ht) .prop_get(ht, "escape_contents")
+escape_contents <- function(ht) .prop_get(ht, "escape_contents")
 
-`escape_contents<-` <- function (ht, value) {
+`escape_contents<-` <- function(ht, value) {
   .prop_replace(ht, value, "escape_contents", check_fun = is.logical)
 }
 
-set_escape_contents <- function (ht, row, col, value) {
+set_escape_contents <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
 }
 
-map_escape_contents <- function (ht, row, col, fn) {
+map_escape_contents <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
 }
 
@@ -476,17 +488,17 @@ map_escape_contents <- function (ht, row, col, fn) {
 #' set_markdown(jams, 3, 2)
 #'
 NULL
-markdown <- function (ht) .prop_get(ht, "markdown")
+markdown <- function(ht) .prop_get(ht, "markdown")
 
-`markdown<-` <- function (ht, value) {
+`markdown<-` <- function(ht, value) {
   .prop_replace(ht, value, "markdown", check_fun = is.logical)
 }
 
-set_markdown <- function (ht, row, col, value = TRUE) {
+set_markdown <- function(ht, row, col, value = TRUE) {
   .prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
 }
 
-map_markdown <- function (ht, row, col, fn) {
+map_markdown <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
 }
 
@@ -509,17 +521,17 @@ map_markdown <- function (ht, row, col, fn) {
 #' set_na_string(jams, "---")
 #'
 NULL
-na_string <- function (ht) .prop_get(ht, "na_string")
+na_string <- function(ht) .prop_get(ht, "na_string")
 
-`na_string<-` <- function (ht, value) {
+`na_string<-` <- function(ht, value) {
   .prop_replace(ht, value, "na_string", check_fun = is.character)
 }
 
-set_na_string <- function (ht, row, col, value) {
+set_na_string <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "na_string", check_fun = is.character)
 }
 
-map_na_string <- function (ht, row, col, fn) {
+map_na_string <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
 }
 
@@ -536,21 +548,21 @@ map_na_string <- function (ht, row, col, fn) {
 #' @template getset-visible-rowspec-example
 #' @templateVar attr_val2 FALSE
 #' @family formatting functions
-bold <- function (ht) .prop_get(ht, "bold")
+bold <- function(ht) .prop_get(ht, "bold")
 
-`bold<-` <- function (ht, value) {
+`bold<-` <- function(ht, value) {
   .prop_replace(ht, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
-set_bold <- function (ht, row, col, value = TRUE) {
+set_bold <- function(ht, row, col, value = TRUE) {
   .prop_set(ht, row, col, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
-map_bold <- function (ht, row, col, fn) {
+map_bold <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
 }
 
@@ -563,23 +575,23 @@ map_bold <- function (ht, row, col, fn) {
 #' italic(ht) <- value
 #' set_italic(ht, row, col, value = TRUE)
 #' map_italic(ht, row, col, fn)
-italic <- function (ht) .prop_get(ht, "italic")
+italic <- function(ht) .prop_get(ht, "italic")
 
 #' @rdname bold
 #' @usage NULL
-`italic<-` <- function (ht, value) {
+`italic<-` <- function(ht, value) {
   .prop_replace(ht, value, "italic", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
-set_italic <- function (ht, row, col, value = TRUE) {
+set_italic <- function(ht, row, col, value = TRUE) {
   .prop_set(ht, row, col, value, "italic", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @usage NULL
-map_italic <- function (ht, row, col, fn) {
+map_italic <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
 }
 
@@ -599,17 +611,17 @@ map_italic <- function (ht, row, col, fn) {
 #' @templateVar attr_val2 12
 #' @family formatting functions
 NULL
-font_size <- function (ht) .prop_get(ht, "font_size")
+font_size <- function(ht) .prop_get(ht, "font_size")
 
-`font_size<-` <- function (ht, value) {
+`font_size<-` <- function(ht, value) {
   .prop_replace(ht, value, "font_size", check_fun = is.numeric)
 }
 
-set_font_size <- function (ht, row, col, value) {
+set_font_size <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
 }
 
-map_font_size <- function (ht, row, col, fn) {
+map_font_size <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
 }
 
@@ -635,24 +647,27 @@ map_font_size <- function (ht, row, col, fn) {
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 270
 NULL
-rotation <- function (ht) .prop_get(ht, "rotation")
+rotation <- function(ht) .prop_get(ht, "rotation")
 
-`rotation<-` <- function (ht, value) {
+`rotation<-` <- function(ht, value) {
   .prop_replace(ht, value, "rotation",
-        check_fun = is.numeric,
-        extra = quote(value <- value %% 360))
+    check_fun = is.numeric,
+    extra = quote(value <- value %% 360)
+  )
 }
 
-set_rotation <- function (ht, row, col, value) {
+set_rotation <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "rotation",
-        check_fun = is.numeric,
-        extra = quote(value <- value %% 360))
+    check_fun = is.numeric,
+    extra = quote(value <- value %% 360)
+  )
 }
 
-map_rotation <- function (ht, row, col, fn) {
+map_rotation <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "rotation",
-        check_fun = is.numeric,
-        extra = quote(value <- value %% 360))
+    check_fun = is.numeric,
+    extra = quote(value <- value %% 360)
+  )
 }
 
 
@@ -693,20 +708,20 @@ map_rotation <- function (ht, row, col, fn) {
 #'
 #' @examples
 #' ht <- huxtable(
-#'         number_format = c(
-#'           "Default",
-#'           "NA",
-#'           "2",
-#'           "\"%5.2f\"",
-#'           "Pretty",
-#'           "Sign"
-#'         ),
-#'         a = rep(1000, 6),
-#'         b = rep(1000.005, 6),
-#'         c = rep(0.0001, 6),
-#'         d = rep(-1, 6),
-#'         e = rep("3.2 (s.e. 1.4)", 6)
-#'       )
+#'   number_format = c(
+#'     "Default",
+#'     "NA",
+#'     "2",
+#'     "\"%5.2f\"",
+#'     "Pretty",
+#'     "Sign"
+#'   ),
+#'   a = rep(1000, 6),
+#'   b = rep(1000.005, 6),
+#'   c = rep(0.0001, 6),
+#'   d = rep(-1, 6),
+#'   e = rep("3.2 (s.e. 1.4)", 6)
+#' )
 #'
 #' number_format(ht)[3, -1] <- NA
 #' number_format(ht)[4, -1] <- 2
@@ -715,8 +730,8 @@ map_rotation <- function (ht, row, col, fn) {
 #' number_format(ht)[6, -1] <- fmt_pretty()
 #'
 #' number_format(ht)[7, -1] <- list(
-#'         function(x) if (x > 0) "+" else "-"
-#'       )
+#'   function(x) if (x > 0) "+" else "-"
+#' )
 #'
 #' right_border(ht) <- 1
 #' bottom_border(ht)[1, ] <- 1
@@ -731,32 +746,35 @@ map_rotation <- function (ht, row, col, fn) {
 #'
 NULL
 #' @noRd
-check_number_format <- function (x) {
-  value_ok <- function (y) {
+check_number_format <- function(x) {
+  value_ok <- function(y) {
     is.numeric(y) || is.character(y) || is.function(y) || is.na(y)
   }
   all(vapply(x, value_ok, logical(1)))
 }
 
-number_format <- function (ht) .prop_get(ht, "number_format")
+number_format <- function(ht) .prop_get(ht, "number_format")
 
-`number_format<-` <- function (ht, value) {
+`number_format<-` <- function(ht, value) {
   .prop_replace(ht, value, "number_format",
-        check_fun = check_number_format,
-        reset_na = FALSE,
-        coerce_mode = FALSE)
+    check_fun = check_number_format,
+    reset_na = FALSE,
+    coerce_mode = FALSE
+  )
 }
 
-set_number_format <- function (ht, row, col, value) {
+set_number_format <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "number_format",
-        check_fun = check_number_format,
-        reset_na = FALSE)
+    check_fun = check_number_format,
+    reset_na = FALSE
+  )
 }
 
-map_number_format <- function (ht, row, col, fn) {
+map_number_format <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "number_format",
-        check_fun = check_number_format,
-        reset_na = FALSE)
+    check_fun = check_number_format,
+    reset_na = FALSE
+  )
 }
 
 
@@ -780,13 +798,13 @@ map_number_format <- function (ht, row, col, fn) {
 #' set_contents(jams, 2, 1, "Blackcurrant")
 #' map_contents(jams, by_regex(".*berry" = "Snodberry"))
 NULL
-contents <- function (ht) ht
+contents <- function(ht) ht
 
-`contents<-` <- function (ht, value) {
+`contents<-` <- function(ht, value) {
   value
 }
 
-set_contents <- function (ht, row, col, value) {
+set_contents <- function(ht, row, col, value) {
   if (missing(col) && missing(value)) {
     value <- row
     row <- seq_len(nrow(ht))
@@ -801,7 +819,7 @@ set_contents <- function (ht, row, col, value) {
   ht
 }
 
-map_contents <- function (ht, row, col, fn) {
+map_contents <- function(ht, row, col, fn) {
   if (missing(col) && missing(fn)) {
     fn <- row
     row <- seq_len(nrow(ht))
@@ -843,16 +861,16 @@ map_contents <- function (ht, row, col, fn) {
 #' @template getset-rowspec-example
 #' @templateVar attr_val2 "arial"
 NULL
-font <- function (ht) .prop_get(ht, "font")
+font <- function(ht) .prop_get(ht, "font")
 
-`font<-` <- function (ht, value) {
+`font<-` <- function(ht, value) {
   .prop_replace(ht, value, "font", check_fun = is.character)
 }
 
-set_font <- function (ht, row, col, value) {
+set_font <- function(ht, row, col, value) {
   .prop_set(ht, row, col, value, "font", check_fun = is.character)
 }
 
-map_font <- function (ht, row, col, fn) {
+map_font <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "font", check_fun = is.character)
 }
