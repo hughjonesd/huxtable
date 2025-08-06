@@ -39,23 +39,33 @@
   ht
 }
 
+.border_set <- function (ht, row, col, value, side,
+        missing_row, missing_col, missing_value) {
+  if (missing_row && missing_col && missing_value) {
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+    value <- 0.4
+  } else if (missing_col && missing_value) {
+
+    value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing_row) row <- seq_len(nrow(ht))
+    if (missing_col) col <- seq_len(ncol(ht))
+    if (missing_value) value <- 0.4
+  }
+  .border_prop_set(ht, row, col, value, side, "border",
+        check_fun = is_borderish)
+}
+
 allowed_border_styles <- c("solid", "double", "dashed", "dotted")
 
 # thickness -----------------------------------------------------------------
 
 set_left_border <- function (ht, row, col, value = 0.4) {
-  if (missing(row) && missing(col) && missing(value)) {
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
-  .border_prop_set(ht, row, col, value, "left", "border", check_fun = is_borderish)
+  .border_set(ht, row, col, value, "left",
+        missing(row), missing(col), missing(value))
 }
 
 map_left_border <- function (ht, row, col, fn) {
@@ -63,18 +73,8 @@ map_left_border <- function (ht, row, col, fn) {
 }
 
 set_right_border <- function (ht, row, col, value = 0.4) {
-  if (missing(row) && missing(col) && missing(value)) {
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
-  .border_prop_set(ht, row, col, value, "right", "border", check_fun = is_borderish)
+  .border_set(ht, row, col, value, "right",
+        missing(row), missing(col), missing(value))
 }
 
 map_right_border <- function (ht, row, col, fn) {
@@ -82,18 +82,8 @@ map_right_border <- function (ht, row, col, fn) {
 }
 
 set_top_border <- function (ht, row, col, value = 0.4) {
-  if (missing(row) && missing(col) && missing(value)) {
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
-  .border_prop_set(ht, row, col, value, "top", "border", check_fun = is_borderish)
+  .border_set(ht, row, col, value, "top",
+        missing(row), missing(col), missing(value))
 }
 
 map_top_border <- function (ht, row, col, fn) {
@@ -101,18 +91,8 @@ map_top_border <- function (ht, row, col, fn) {
 }
 
 set_bottom_border <- function (ht, row, col, value = 0.4) {
-  if (missing(row) && missing(col) && missing(value)) {
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
-  .border_prop_set(ht, row, col, value, "bottom", "border", check_fun = is_borderish)
+  .border_set(ht, row, col, value, "bottom",
+        missing(row), missing(col), missing(value))
 }
 
 map_bottom_border <- function (ht, row, col, fn) {
