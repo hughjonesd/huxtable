@@ -763,7 +763,8 @@ map_number_format <- function (ht, row, col, fn) {
 #' @aliases contents contents<- map_contents
 #' @name set_contents
 #' @examples
-#' 
+#'
+#' data(jams)
 #' set_contents(jams, 2, 1, "Blackcurrant")
 #' map_contents(jams, by_regex(".*berry" = "Snodberry"))
 NULL

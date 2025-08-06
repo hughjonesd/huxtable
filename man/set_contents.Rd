@@ -29,6 +29,7 @@ a dplyr chain. \code{set_contents(ht, x, y, foo)} just calls \code{ht[x, y] <- f
 }
 \examples{
 
+data(jams)
 set_contents(jams, 2, 1, "Blackcurrant")
 map_contents(jams, by_regex(".*berry" = "Snodberry"))
 }
