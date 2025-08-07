@@ -10,6 +10,7 @@
 
 * Added Typst export via `to_typst()` and `print_typst()`.
 * Typst export now respects vertical alignment via `valign()`.
+* Typst export now respects table `position()`, `caption_pos()`, and `caption_width()`.
 
 # huxtable 5.6.0
 
