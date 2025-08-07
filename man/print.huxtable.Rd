@@ -7,14 +7,14 @@
 \usage{
 \method{print}{huxtable}(x, ...)
 
-\method{format}{huxtable}(x, ..., output = c("latex", "html", "md", "screen", "rtf"))
+\method{format}{huxtable}(x, ..., output = c("latex", "html", "md", "screen", "rtf", "typst"))
 }
 \arguments{
 \item{x}{A huxtable.}
 
 \item{...}{Options passed to other methods.}
 
-\item{output}{Output format. One of \code{"html"}, \code{"latex"}, \code{"md"}, \code{"screen"} or \code{"rtf"}.}
+\item{output}{Output format. One of \code{"html"}, \code{"latex"}, \code{"md"}, \code{"screen"}, \code{"rtf"} or \code{"typst"}.}
 }
 \value{
 \code{print} prints the huxtable and returns \code{NULL} invisibly.
@@ -30,10 +30,13 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
 \dontrun{
   # to print LaTeX output:
   options(huxtable.print = print_latex)
+  # to print Typst output:
+  options(huxtable.print = print_typst)
 }
 
 format(jams, output = "screen")
 format(jams, output = "md")
+format(jams, output = "typst")
 }
 \seealso{
 To change how huxtables are printed within \code{knitr}, see

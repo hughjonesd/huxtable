@@ -194,7 +194,7 @@ test_that("output works with 1x1 huxtables", {
 
 test_that("format.huxtable works", {
   ht <- hux(a = 1:3, b = 1:3)
-  for (output in c("latex", "html", "md", "screen")) {
+  for (output in c("latex", "html", "md", "screen", "typst")) {
     direct_call <- paste0("to_", output)
     expect_identical(do.call(direct_call, list(ht)), format(ht, output = output))
   }
@@ -207,8 +207,12 @@ test_that("set_print_method() works", {
   expect_match(capture.output(print(ht)), "<table", fixed = TRUE, all = FALSE)
   options(huxtable.print = print_latex)
   expect_match(capture.output(print(ht)), "tabular", fixed = TRUE, all = FALSE)
+  options(huxtable.print = print_typst)
+  expect_match(capture.output(print(ht)), "#table", fixed = TRUE, all = FALSE)
   options(huxtable.print = "print_html")
   expect_match(capture.output(print(ht)), "<table", fixed = TRUE, all = FALSE)
+  options(huxtable.print = "print_typst")
+  expect_match(capture.output(print(ht)), "#table", fixed = TRUE, all = FALSE)
   options(oo)
 })
 

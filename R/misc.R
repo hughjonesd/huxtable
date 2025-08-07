@@ -190,6 +190,8 @@ hux_logo <- function(latex = FALSE, html = FALSE) {
 #' \dontrun{
 #' # to print LaTeX output:
 #' options(huxtable.print = print_latex)
+#' # to print Typst output:
+#' options(huxtable.print = print_typst)
 #' }
 print.huxtable <- function(x, ...) {
   meth <- getOption("huxtable.print", default = print_screen)
@@ -200,7 +202,7 @@ print.huxtable <- function(x, ...) {
 
 
 #' @rdname print.huxtable
-#' @param output Output format. One of `"html"`, `"latex"`, `"md"`, `"screen"` or `"rtf"`.
+#' @param output Output format. One of `"html"`, `"latex"`, `"md"`, `"screen"`, `"rtf"` or `"typst"`.
 #'
 #' @return `format` returns a string representation from [to_latex()], [to_html()] etc.
 #' @export
@@ -209,7 +211,8 @@ print.huxtable <- function(x, ...) {
 #'
 #' format(jams, output = "screen")
 #' format(jams, output = "md")
-format.huxtable <- function(x, ..., output = c("latex", "html", "md", "screen", "rtf")) {
+#' format(jams, output = "typst")
+format.huxtable <- function(x, ..., output = c("latex", "html", "md", "screen", "rtf", "typst")) {
   output <- match.arg(output)
 
   fn <- paste0("to_", output)
