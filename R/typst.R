@@ -35,6 +35,7 @@ to_typst <- function(ht, ...) {
   rs <- rowspan(ht)
   cs <- colspan(ht)
   align <- real_align(ht)
+  valign <- valign(ht)
 
   col_w <- col_width(ht)
   if (is.numeric(col_w)) {
@@ -53,7 +54,8 @@ to_typst <- function(ht, ...) {
     for (j in seq_len(ncol(ht))) {
       if (!shadow[i, j]) {
         cells[i, j] <- typst_cell(
-          ht, i, j, contents[i, j], rs[i, j], cs[i, j], align[i, j], row_h[i]
+          ht, i, j, contents[i, j], rs[i, j], cs[i, j], align[i, j],
+          valign[i, j], row_h[i]
         )
       }
     }
@@ -93,19 +95,25 @@ typst_table_options <- function(ht, col_w_str) {
 }
 
 #' @noRd
-typst_cell <- function(ht, i, j, contents, rs, cs, al, row_h) {
-  opts <- typst_cell_options(ht, i, j, rs, cs, al, row_h)
+typst_cell <- function(ht, i, j, contents, rs, cs, al, val, row_h) {
+  opts <- typst_cell_options(ht, i, j, rs, cs, al, val, row_h)
   text <- typst_cell_text(ht, i, j, contents)
   cell_opts <- if (length(opts) > 0) sprintf("(%s)", paste(opts, collapse = ", ")) else ""
   sprintf("cell%s[%s]", cell_opts, text)
 }
 
 #' @noRd
-typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
+typst_cell_options <- function(ht, i, j, rs, cs, hal, val, row_h) {
   opts <- c()
   if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
   if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
-  if (!is.na(al)) opts <- c(opts, sprintf("align: %s", al))
+  if (!is.na(val)) {
+    val_map <- c(top = "top", middle = "center", bottom = "bottom")
+    v <- val_map[val]
+    opts <- c(opts, sprintf("align: (%s, %s)", hal, v))
+  } else if (!is.na(hal)) {
+    opts <- c(opts, sprintf("align: %s", hal))
+  }
 
   if (!is.na(row_h)) {
     rh <- row_h
@@ -116,6 +124,22 @@ typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
   bg <- background_color(ht)[i, j]
   if (!is.na(bg)) {
     opts <- c(opts, sprintf("fill: rgb(%s)", format_color(bg)))
+  }
+
+  pads <- c(
+    top    = top_padding(ht)[i, j],
+    right  = right_padding(ht)[i, j],
+    bottom = bottom_padding(ht)[i, j],
+    left   = left_padding(ht)[i, j]
+  )
+  if (!all(is.na(pads))) {
+    if (length(unique(pads)) == 1) {
+      opts <- c(opts, sprintf("inset: %.4gpt", pads[[1]]))
+    } else {
+      pad_parts <- sprintf("%s: %.4gpt", names(pads), pads)
+      pad_parts <- pad_parts[!is.na(pads)]
+      opts <- c(opts, sprintf("inset: (%s)", paste(pad_parts, collapse = ", ")))
+    }
   }
 
   stroke <- typst_stroke(ht, i, j)
