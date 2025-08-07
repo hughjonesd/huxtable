@@ -9,3 +9,15 @@
   default <- huxtable_env$huxtable_default_attrs[[prop]]
   paste0("Set to `NA` to reset to the default, which is ", default, ".")
 }
+
+#' Shared parameter documentation for huxtable property helpers
+#'
+#' Use this with `@inheritParams` to document common property helper
+#' arguments.
+#'
+#' @param ht A huxtable.
+#' @param row A row specifier. See [rowspecs] for details.
+#' @param col An optional column specifier.
+#' @param fn A mapping function. See [mapping-functions] for details.
+#' @noRd
+.hux_prop_params <- function(ht, row, col, fn) {}
