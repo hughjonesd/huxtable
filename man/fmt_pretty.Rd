@@ -17,10 +17,14 @@ Use \code{prettyNum()} to format numbers
 }
 \examples{
 
-jams$Sales <- c("Sales", 35000,
-      55500, 20000)
-set_number_format(jams, -1, "Sales",
-      fmt_pretty())
+jams$Sales <- c(
+  "Sales", 35000,
+  55500, 20000
+)
+set_number_format(
+  jams, -1, "Sales",
+  fmt_pretty()
+)
 
 }
 \seealso{

@@ -39,6 +39,7 @@ Other printing functions:
 \code{\link{print_html}()},
 \code{\link{print_latex}()},
 \code{\link{print_rtf}()},
-\code{\link{print_screen}()}
+\code{\link{print_screen}()},
+\code{\link{print_typst}()}
 }
 \concept{printing functions}

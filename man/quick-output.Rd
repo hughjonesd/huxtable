@@ -96,14 +96,14 @@ needs \code{openxlsx}.
 }
 \examples{
 \dontrun{
-  m <- matrix(1:4, 2, 2)
+m <- matrix(1:4, 2, 2)
 
-  quick_pdf(m, jams)
-  quick_latex(m, jams)
-  quick_html(m, jams)
-  quick_docx(m, jams)
-  quick_xlsx(m, jams)
-  quick_pptx(m, jams)
-  quick_rtf(m, jams)
+quick_pdf(m, jams)
+quick_latex(m, jams)
+quick_html(m, jams)
+quick_docx(m, jams)
+quick_xlsx(m, jams)
+quick_pptx(m, jams)
+quick_rtf(m, jams)
 }
 }

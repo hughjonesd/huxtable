@@ -37,15 +37,20 @@ text colors, visually differentiating high or low values.
 }
 \examples{
 
-if (! requireNamespace("scales")) {
+if (!requireNamespace("scales")) {
   stop("Please install the \"scales\" package to run this example")
 }
 ht <- as_hux(matrix(rnorm(25), 5, 5))
-map_background_color(ht,
-      by_colorspace("red", "yellow", "blue"))
-map_background_color(ht,
-      by_colorspace("red", "yellow", "blue",
-        colwise = TRUE))
+map_background_color(
+  ht,
+  by_colorspace("red", "yellow", "blue")
+)
+map_background_color(
+  ht,
+  by_colorspace("red", "yellow", "blue",
+    colwise = TRUE
+  )
+)
 }
 \seealso{
 \link{mapping-functions}

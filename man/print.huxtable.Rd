@@ -28,10 +28,10 @@ useful to change this. You can do so by setting \code{options("huxtable.print")}
 }
 \examples{
 \dontrun{
-  # to print LaTeX output:
-  options(huxtable.print = print_latex)
-  # to print Typst output:
-  options(huxtable.print = print_typst)
+# to print LaTeX output:
+options(huxtable.print = print_latex)
+# to print Typst output:
+options(huxtable.print = print_typst)
 }
 
 format(jams, output = "screen")

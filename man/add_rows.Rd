@@ -36,9 +36,12 @@ add_rows(jams, ht)
 add_rows(jams, ht, after = 1)
 
 mx <- matrix(
-      c("Sugar", "50\%", "60\%", "40\%",
-      "Weight (g)", 300, 250, 300),
-      4, 2)
+  c(
+    "Sugar", "50\%", "60\%", "40\%",
+    "Weight (g)", 300, 250, 300
+  ),
+  4, 2
+)
 add_columns(jams, mx)
 }
 \seealso{

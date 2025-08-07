@@ -50,24 +50,30 @@ for \code{by_quantiles(seq(1/n, 1 - 1/n, 1/n), values)}).
 \examples{
 ht <- hux(rnorm(5), rnorm(5))
 
-map_background_color(ht,
-      by_quantiles(
-        c(0.2, 0.8),
-        c("red", "yellow", "green")
-      ))
+map_background_color(
+  ht,
+  by_quantiles(
+    c(0.2, 0.8),
+    c("red", "yellow", "green")
+  )
+)
 
-map_background_color(ht,
-      by_quantiles(
-        c(0.2, 0.8),
-        c("red", "yellow", "green"),
-        colwise = TRUE
-      ))
+map_background_color(
+  ht,
+  by_quantiles(
+    c(0.2, 0.8),
+    c("red", "yellow", "green"),
+    colwise = TRUE
+  )
+)
 
-map_background_color(ht,
-      by_equal_groups(
-        3,
-        c("red", "yellow", "green")
-      ))
+map_background_color(
+  ht,
+  by_equal_groups(
+    3,
+    c("red", "yellow", "green")
+  )
+)
 }
 \seealso{
 \link{mapping-functions}

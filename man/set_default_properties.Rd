@@ -31,9 +31,9 @@ different sides.
 }
 \examples{
 old <- set_default_properties(
-        text_color = "red",
-        border     = 0.4
-      )
+  text_color = "red",
+  border     = 0.4
+)
 hux(a = 1:2, b = 1:2)
 set_default_properties(old)
 get_default_properties("bold")
