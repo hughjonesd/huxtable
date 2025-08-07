@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -9,14 +7,14 @@ test_that("set_all_*", {
   expect_equivalent(brdr_thickness(top_border(ht2)), matrix(1, 2, 2))
 
   ht4 <- set_all_borders(ht, 1, 2, 1)
-  expect_equivalent(brdr_thickness(top_border(ht4))[1, 2],    1)
-  expect_equivalent(brdr_thickness(left_border(ht4))[1, 2],   1)
+  expect_equivalent(brdr_thickness(top_border(ht4))[1, 2], 1)
+  expect_equivalent(brdr_thickness(left_border(ht4))[1, 2], 1)
   expect_equivalent(brdr_thickness(bottom_border(ht4))[1, 2], 1)
-  expect_equivalent(brdr_thickness(right_border(ht4))[1, 2],  1)
-  expect_equivalent(brdr_thickness(top_border(ht4))[2, 1],    0)
-  expect_equivalent(brdr_thickness(left_border(ht4))[2, 1],   0)
+  expect_equivalent(brdr_thickness(right_border(ht4))[1, 2], 1)
+  expect_equivalent(brdr_thickness(top_border(ht4))[2, 1], 0)
+  expect_equivalent(brdr_thickness(left_border(ht4))[2, 1], 0)
   expect_equivalent(brdr_thickness(bottom_border(ht4))[2, 1], 0)
-  expect_equivalent(brdr_thickness(right_border(ht4))[2, 1],  0)
+  expect_equivalent(brdr_thickness(right_border(ht4))[2, 1], 0)
 
   rownum <- 1
   colnum <- 2
@@ -37,48 +35,74 @@ test_that("set_all_*", {
 
 test_that("set_lr/tb_* functions", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
-  expect_equivalent(brdr_thickness(left_border(set_lr_borders(ht))),   matrix(0.4, 2, 2))
-  expect_equivalent(brdr_thickness(right_border(set_lr_borders(ht))),  matrix(0.4, 2, 2))
-  expect_equivalent(brdr_thickness(top_border(set_lr_borders(ht))),    matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(left_border(set_lr_borders(ht))), matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(right_border(set_lr_borders(ht))), matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(set_lr_borders(ht))), matrix(0, 2, 2))
   expect_equivalent(brdr_thickness(bottom_border(set_lr_borders(ht))), matrix(0, 2, 2))
 
-  expect_equivalent(brdr_thickness(left_border(set_tb_borders(ht))),   matrix(0, 2, 2))
-  expect_equivalent(brdr_thickness(right_border(set_tb_borders(ht))),  matrix(0, 2, 2))
-  expect_equivalent(brdr_thickness(top_border(set_tb_borders(ht))),    matrix(0.4, 2, 2))
+  expect_equivalent(brdr_thickness(left_border(set_tb_borders(ht))), matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(right_border(set_tb_borders(ht))), matrix(0, 2, 2))
+  expect_equivalent(brdr_thickness(top_border(set_tb_borders(ht))), matrix(0.4, 2, 2))
   expect_equivalent(brdr_thickness(bottom_border(set_tb_borders(ht))), matrix(0.4, 2, 2))
 
-  expect_equivalent(left_border_color(set_lr_border_colors(ht, "red")),   matrix("red", 2, 2))
-  expect_equivalent(right_border_color(set_lr_border_colors(ht, "red")),  matrix("red", 2, 2))
-  expect_equivalent(top_border_color(set_lr_border_colors(ht, "red")),    matrix(NA_character_, 2, 2))
-  expect_equivalent(bottom_border_color(set_lr_border_colors(ht, "red")),
-        matrix(NA_character_, 2, 2))
+  expect_equivalent(left_border_color(set_lr_border_colors(ht, "red")), matrix("red", 2, 2))
+  expect_equivalent(right_border_color(set_lr_border_colors(ht, "red")), matrix("red", 2, 2))
+  expect_equivalent(top_border_color(set_lr_border_colors(ht, "red")), matrix(NA_character_, 2, 2))
+  expect_equivalent(
+    bottom_border_color(set_lr_border_colors(ht, "red")),
+    matrix(NA_character_, 2, 2)
+  )
 
-  expect_equivalent(left_border_color(set_tb_border_colors(ht, "red")),
-        matrix(NA_character_, 2, 2))
-  expect_equivalent(right_border_color(set_tb_border_colors(ht, "red")),
-        matrix(NA_character_, 2, 2))
-  expect_equivalent(top_border_color(set_tb_border_colors(ht, "red")),
-        matrix("red", 2, 2))
-  expect_equivalent(bottom_border_color(set_tb_border_colors(ht, "red")),
-        matrix("red", 2, 2))
+  expect_equivalent(
+    left_border_color(set_tb_border_colors(ht, "red")),
+    matrix(NA_character_, 2, 2)
+  )
+  expect_equivalent(
+    right_border_color(set_tb_border_colors(ht, "red")),
+    matrix(NA_character_, 2, 2)
+  )
+  expect_equivalent(
+    top_border_color(set_tb_border_colors(ht, "red")),
+    matrix("red", 2, 2)
+  )
+  expect_equivalent(
+    bottom_border_color(set_tb_border_colors(ht, "red")),
+    matrix("red", 2, 2)
+  )
 
-  expect_equivalent(left_border_style(set_lr_border_styles(ht, "double")),
-        matrix("double", 2, 2))
-  expect_equivalent(right_border_style(set_lr_border_styles(ht, "double")),
-        matrix("double", 2, 2))
-  expect_equivalent(top_border_style(set_lr_border_styles(ht, "double")),
-        matrix("solid", 2, 2))
-  expect_equivalent(bottom_border_style(set_lr_border_styles(ht, "double")),
-        matrix("solid", 2, 2))
+  expect_equivalent(
+    left_border_style(set_lr_border_styles(ht, "double")),
+    matrix("double", 2, 2)
+  )
+  expect_equivalent(
+    right_border_style(set_lr_border_styles(ht, "double")),
+    matrix("double", 2, 2)
+  )
+  expect_equivalent(
+    top_border_style(set_lr_border_styles(ht, "double")),
+    matrix("solid", 2, 2)
+  )
+  expect_equivalent(
+    bottom_border_style(set_lr_border_styles(ht, "double")),
+    matrix("solid", 2, 2)
+  )
 
-  expect_equivalent(left_border_style(set_tb_border_styles(ht, "double")),
-        matrix("solid", 2, 2))
-  expect_equivalent(right_border_style(set_tb_border_styles(ht, "double")),
-        matrix("solid", 2, 2))
-  expect_equivalent(top_border_style(set_tb_border_styles(ht, "double")),
-        matrix("double", 2, 2))
-  expect_equivalent(bottom_border_style(set_tb_border_styles(ht, "double")),
-        matrix("double", 2, 2))
+  expect_equivalent(
+    left_border_style(set_tb_border_styles(ht, "double")),
+    matrix("solid", 2, 2)
+  )
+  expect_equivalent(
+    right_border_style(set_tb_border_styles(ht, "double")),
+    matrix("solid", 2, 2)
+  )
+  expect_equivalent(
+    top_border_style(set_tb_border_styles(ht, "double")),
+    matrix("double", 2, 2)
+  )
+  expect_equivalent(
+    bottom_border_style(set_tb_border_styles(ht, "double")),
+    matrix("double", 2, 2)
+  )
 })
 
 
@@ -102,18 +126,26 @@ test_that("set_all_* functions work when huxtable is not attached", {
 test_that("set_outer_*", {
   ht <- hux(a = 1:3, b = 1:3, c = 1:3)
 
-  check_borders <- function (ht, suffix, un, set) {
+  check_borders <- function(ht, suffix, un, set) {
     wrapper <- if (suffix == "") brdr_thickness else identity
     funcs <- paste0(c("top", "bottom", "left", "right"), sprintf("_border%s", suffix))
     funcs <- mget(funcs, inherits = TRUE)
-    expect_equivalent(wrapper(funcs[[1]](ht)),
-          matrix(c(un, un, un, un, set, un, un, set, un), 3, 3))
-    expect_equivalent(wrapper(funcs[[2]](ht)),
-          matrix(c(un, un, un, set, un, set, set, un, set), 3, 3))
-    expect_equivalent(wrapper(funcs[[3]](ht)),
-          matrix(c(un, un, un, un, set, set, un, un, un), 3, 3))
-    expect_equivalent(wrapper(funcs[[4]](ht)),
-          matrix(c(un, set, set, un, un, un, un, set, set), 3, 3))
+    expect_equivalent(
+      wrapper(funcs[[1]](ht)),
+      matrix(c(un, un, un, un, set, un, un, set, un), 3, 3)
+    )
+    expect_equivalent(
+      wrapper(funcs[[2]](ht)),
+      matrix(c(un, un, un, set, un, set, set, un, set), 3, 3)
+    )
+    expect_equivalent(
+      wrapper(funcs[[3]](ht)),
+      matrix(c(un, un, un, un, set, set, un, un, un), 3, 3)
+    )
+    expect_equivalent(
+      wrapper(funcs[[4]](ht)),
+      matrix(c(un, set, set, un, un, un, un, set, set), 3, 3)
+    )
   }
 
   ht2 <- set_outer_borders(ht, 2:3, 2:3, 1)
@@ -171,16 +203,16 @@ test_that("set_outer_borders() works with non-standard/empty position arguments"
 test_that("set_outer_padding", {
   ht <- hux(1:2, 1:2)
   ht2 <- set_outer_padding(ht, 10)
-  expect_equivalent(left_padding(ht2),   matrix(c(10, 10, 6, 6), 2, 2))
-  expect_equivalent(top_padding(ht2),    matrix(c(10, 6, 10, 6), 2, 2))
+  expect_equivalent(left_padding(ht2), matrix(c(10, 10, 6, 6), 2, 2))
+  expect_equivalent(top_padding(ht2), matrix(c(10, 6, 10, 6), 2, 2))
   expect_equivalent(bottom_padding(ht2), matrix(c(6, 10, 6, 10), 2, 2))
-  expect_equivalent(right_padding(ht2),  matrix(c(6, 6, 10, 10), 2, 2))
+  expect_equivalent(right_padding(ht2), matrix(c(6, 6, 10, 10), 2, 2))
 
   ht3 <- set_outer_padding(ht, 2, 2, 10)
-  expect_equivalent(left_padding(ht3),   matrix(c(6, 6, 6, 10), 2, 2))
-  expect_equivalent(top_padding(ht3),    matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(left_padding(ht3), matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(top_padding(ht3), matrix(c(6, 6, 6, 10), 2, 2))
   expect_equivalent(bottom_padding(ht3), matrix(c(6, 6, 6, 10), 2, 2))
-  expect_equivalent(right_padding(ht3),   matrix(c(6, 6, 6, 10), 2, 2))
+  expect_equivalent(right_padding(ht3), matrix(c(6, 6, 6, 10), 2, 2))
 })
 
 test_that("set_markdown_contents", {

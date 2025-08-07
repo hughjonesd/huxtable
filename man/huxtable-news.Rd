@@ -21,6 +21,7 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item HTML tables now wrap header rows in \verb{<thead>} (using \verb{<th>}
 cells) and body rows in \verb{<tbody>} when header rows are at the top of the
 table.
+\item Added Typst export via \code{to_typst()} and \code{print_typst()}.
 }
 }
 }

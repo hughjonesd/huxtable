@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 skip_if_not_installed("dplyr")
@@ -15,9 +13,9 @@ test_that("select, rename and relocate", {
   expect_equivalent(bold(ht3), bold(ht))
 
   if (packageVersion("dplyr") > "0.8.5") {
-    ht4 <- dplyr::relocate(ht, b , a, .after = d)
+    ht4 <- dplyr::relocate(ht, b, a, .after = d)
     expect_identical(ht4, ht[c("c", "d", "b", "a")])
-    ht5 <- dplyr::relocate(ht, b , a, .before = d)
+    ht5 <- dplyr::relocate(ht, b, a, .before = d)
     expect_identical(ht5, ht[c("c", "b", "a", "d")])
   }
 })

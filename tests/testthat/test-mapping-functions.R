@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -46,10 +44,14 @@ test_that("by_ranges", {
   f <- by_ranges(breaks = c(2, 6), values = "middle", extend = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, "middle", "middle", NA), 2, 2))
 
-  expect_error(by_ranges(breaks = c(2, 6), values = c("middle", "extra"), extend = FALSE),
-        "length")
-  expect_error(by_ranges(breaks = c(2, 6), values = c("middle", "notenough"), extend = TRUE),
-        "length")
+  expect_error(
+    by_ranges(breaks = c(2, 6), values = c("middle", "extra"), extend = FALSE),
+    "length"
+  )
+  expect_error(
+    by_ranges(breaks = c(2, 6), values = c("middle", "notenough"), extend = TRUE),
+    "length"
+  )
 
   f <- by_ranges(breaks = 3, values = c("low", "high"), right = TRUE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c("low", "low", "high", "high"), 2, 2))
@@ -62,10 +64,10 @@ test_that("by_quantiles", {
   m <- matrix(1:4, 2, 2)
   ct <- matrix(NA, 2, 2)
 
-  f <- by_quantiles(1:3/4, c("1st", "2nd", "3rd", "4th"))
+  f <- by_quantiles(1:3 / 4, c("1st", "2nd", "3rd", "4th"))
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c("1st", "2nd", "3rd", "4th"), 2, 2))
 
-  f <- by_quantiles(1:3/4, c("2nd", "3rd"), extend = FALSE)
+  f <- by_quantiles(1:3 / 4, c("2nd", "3rd"), extend = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(c(NA, "2nd", "3rd", NA), 2, 2))
 
   expect_error(by_quantiles(c(.5, .25, .75), rep("foo", 4)))
@@ -109,11 +111,11 @@ test_that("by_colorspace", {
 
 
 test_that("by_function", {
-  m <- matrix(1:4/4, 2, 2)
+  m <- matrix(1:4 / 4, 2, 2)
   ct <- matrix(NA, 2, 2)
 
   f <- by_function(grey)
-  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(grey(1:4/4), 2, 2))
+  expect_equivalent(f(m, 1:2, 1:2, ct), matrix(grey(1:4 / 4), 2, 2))
 })
 
 
@@ -124,8 +126,10 @@ test_that("by_cases", {
   ct <- matrix("default", 3, 2)
 
   f <- by_cases(. < 1.5 ~ "small", . == 2 ~ "two", . %in% 3:4 ~ "middle")
-  expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c("small", "two", "middle", "middle", "default",
-        "default"), 3, 2))
+  expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c(
+    "small", "two", "middle", "middle", "default",
+    "default"
+  ), 3, 2))
 
   f <- by_cases(. < 1.5 ~ "small", . == 2 ~ "two", . %in% 3:4 ~ "middle", ignore_na = FALSE)
   expect_equivalent(f(m, 1:3, 1:2, ct), matrix(c("small", "two", "middle", "middle", NA, NA), 3, 2))
@@ -161,7 +165,7 @@ test_that("ignore_na argument works", {
   f <- by_regex("e" = 1, ignore_na = FALSE)
   expect_equivalent(f(m, 1:2, 1:2, ct), matrix(NA, 2, 2))
 
-  always_na <- function (...) NA
+  always_na <- function(...) NA
   f <- by_function(always_na, ignore_na = TRUE)
   expect_equivalent(f(m, 1:2, 1:2, ct), ct)
   f <- by_function(always_na, ignore_na = FALSE)

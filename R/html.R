@@ -37,7 +37,22 @@ print_notebook <- function(ht, ...) {
 to_html <- function(ht, ...) {
   check_positive_dims(ht)
 
-  ## TABLE START ----------
+  table_start <- build_table_style(ht)
+  cols_html <- build_colgroup(ht)
+  cell_html <- build_cell_html(ht)
+  row_html <- build_row_html(ht, cell_html)
+
+  res <- paste0(table_start, cols_html, row_html, "</table>\n")
+  return(res)
+}
+
+#' Build opening table tag and caption for HTML output
+#'
+#' @param ht A huxtable.
+#'
+#' @return A string containing the opening `<table>` tag and optional caption.
+#' @noRd
+build_table_style <- function(ht) {
   width <- width(ht)
   width_string <- if (is.na(width)) {
     ""
@@ -106,17 +121,32 @@ to_html <- function(ht, ...) {
     table_start <- paste0(table_start, cap)
   }
 
-  # COLUMN TAGS -----------
+  table_start
+}
+
+#' Build `<col>` tags for column widths
+#'
+#' @param ht A huxtable.
+#'
+#' @return A string of `<col>` tags.
+#' @noRd
+build_colgroup <- function(ht) {
   col_widths <- col_width(ht)
-  # NAs become empty strings
   empty_cw <- is.na(col_widths)
   if (is.numeric(col_widths)) col_widths <- sprintf("%s%%", col_widths * 100)
   cols_html <- sprintf(' style="width: %s"', col_widths)
   cols_html <- blank_where(cols_html, empty_cw)
   cols_html <- sprintf("<col%s>", cols_html)
-  cols_html <- paste0(cols_html, collapse = "")
+  paste0(cols_html, collapse = "")
+}
 
-  ## CELLS ----------------
+#' Build HTML for each table cell
+#'
+#' @param ht A huxtable.
+#'
+#' @return A character matrix containing HTML for each cell.
+#' @noRd
+build_cell_html <- function(ht) {
   display_cells <- display_cells(ht)
 
   rowspan <- rowspan(ht)
@@ -128,9 +158,6 @@ to_html <- function(ht, ...) {
   align <- sprintf(" text-align: %s;", real_align(ht))
   wrap <- sprintf(" white-space: %s;", ifelse(wrap(ht), "normal", "nowrap"))
 
-  # get_visible_borders() data is in "real cell" position.
-  # But we just want to grab the original data
-  # and apply it
   border_css <- compute_border_css(ht)
 
   add_pts <- function(x) if (is.numeric(x)) sprintf("%.4gpt", x) else x
@@ -143,7 +170,7 @@ to_html <- function(ht, ...) {
   )
 
   bg_color <- background_color(ht)
-  bg_color <- format_color(bg_color) # NA becomes white, as it happens
+  bg_color <- format_color(bg_color)
   bg_color <- sprintf(" background-color: rgb(%s);", bg_color)
   bg_color <- blank_where(bg_color, is.na(background_color(ht)))
 
@@ -192,9 +219,18 @@ to_html <- function(ht, ...) {
     color_span_end, rot_div_end, cell_end
   )
   cells_html <- blank_where(cells_html, display_cells$shadowed)
-
-  # add in row tags
   dim(cells_html) <- dim(ht)
+  cells_html
+}
+
+#' Wrap cell HTML in table rows
+#'
+#' @param ht A huxtable.
+#' @param cells_html A matrix of cell HTML as returned by `build_cell_html()`.
+#'
+#' @return A string containing the HTML for all rows.
+#' @noRd
+build_row_html <- function(ht, cells_html) {
   cells_html <- apply(cells_html, 1, paste0, collapse = "")
   row_heights <- row_height(ht)
   if (is.numeric(row_heights)) {
@@ -223,10 +259,9 @@ to_html <- function(ht, ...) {
     cells_html <- paste0(row_html, collapse = "")
   }
 
-  res <- paste0(table_start, cols_html, cells_html, "</table>\n")
-  return(res)
+  cells_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
+  paste0(cells_html, collapse = "")
 }
-
 
 #' Create border css for each cell
 #'

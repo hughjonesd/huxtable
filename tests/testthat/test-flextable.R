@@ -1,5 +1,3 @@
-
-
 skip_if_not_installed("flextable")
 
 test_that("Simple conversion works", {
@@ -23,10 +21,10 @@ test_that("Text properties work", {
 
 test_that("Borders work", {
   hx <- huxtable(a = 1:3, b = 4:6)
-  top_border(hx)[1, ]    <- 1
+  top_border(hx)[1, ] <- 1
   bottom_border(hx)[1, ] <- 2
-  left_border(hx)[, 1]   <- 1
-  right_border(hx)[, 2]  <- 1
+  left_border(hx)[, 1] <- 1
+  right_border(hx)[, 2] <- 1
   expect_error(as_flextable(hx), regexp = NA)
 })
 

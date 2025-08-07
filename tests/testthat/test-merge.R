@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -19,7 +17,6 @@ test_that("merge_cells", {
 
   expect_silent(ht5 <- merge_cells(ht, c(1, 3), 1))
   expect_equivalent(rowspan(ht5), matrix(c(3, 1, 1, 1, 1, 1), 3, 2))
-
 })
 
 

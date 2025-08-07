@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -42,8 +40,10 @@ test_that("number_format treats scientific notation equivalently to sprintf", {
   number_format(ht) <- 4
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1120.0000")
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[2, 1], "1120.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[3, 1],
-                    "11200000.0000")
+  expect_equivalent(
+    huxtable:::clean_contents(ht, "latex")[3, 1],
+    "11200000.0000"
+  )
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[4, 1], "0.0011")
   # the next is not scientific notation so both numbers should be affected
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[5, 1], "1.1200A3.0000")
@@ -52,45 +52,78 @@ test_that("number_format treats scientific notation equivalently to sprintf", {
 
 
 test_that("number_format works with various interesting cases", {
-  expect_equivalent(huxtable:::format_numbers("1.1234", "%.3f"),
-        "1.123")
-  expect_equivalent(huxtable:::format_numbers("1", "%.3f"),
-        "1.000")
-  expect_equivalent(huxtable:::format_numbers("1 2 3", "%.3f"),
-        "1.000 2.000 3.000")
-  expect_equivalent(huxtable:::format_numbers("1 -2 -3.1 -.4 .5", "%.3f"),
-        "1.000 -2.000 -3.100 -0.400 0.500")
-  expect_equivalent(huxtable:::format_numbers("1.1234-1.1234", "%.3f"),
-        "1.123-1.123")
-  expect_equivalent(huxtable:::format_numbers("1.1234e-2", "%.3f"),
-        "0.011")
-  expect_equivalent(huxtable:::format_numbers("1.1234e-12", "%.3f"),
-        "0.000")
-  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3f"),
-        "1123400000000.000")
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234", "%.3f"),
+    "1.123"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1", "%.3f"),
+    "1.000"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1 2 3", "%.3f"),
+    "1.000 2.000 3.000"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1 -2 -3.1 -.4 .5", "%.3f"),
+    "1.000 -2.000 -3.100 -0.400 0.500"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234-1.1234", "%.3f"),
+    "1.123-1.123"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e-2", "%.3f"),
+    "0.011"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e-12", "%.3f"),
+    "0.000"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e12", "%.3f"),
+    "1123400000000.000"
+  )
   # Make sure user can actually request scientific notation if desired
   # ("e" format) or get them as needed ("g" format)
-  expect_equivalent(huxtable:::format_numbers("1.1234e12", "%.3g"),
-        "1.12e+12")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3f"),
-        "112340000.000 3.000")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.3g"),
-        "1.12e+08 3")
-  expect_equivalent(huxtable:::format_numbers("1.1234e8 3", "%.1e"),
-        "1.1e+08 3.0e+00")
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e12", "%.3g"),
+    "1.12e+12"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e8 3", "%.3f"),
+    "112340000.000 3.000"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e8 3", "%.3g"),
+    "1.12e+08 3"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("1.1234e8 3", "%.1e"),
+    "1.1e+08 3.0e+00"
+  )
   # this is pretty brutal:
-  expect_equivalent(huxtable:::format_numbers("-1.1e3-1.2e3", "%.3f"),
-        "-1100.000-1200.000")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3-1.2e3", "%.3f"),
-        "-0.001-1200.000")
+  expect_equivalent(
+    huxtable:::format_numbers("-1.1e3-1.2e3", "%.3f"),
+    "-1100.000-1200.000"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("-1.1e-3-1.2e3", "%.3f"),
+    "-0.001-1200.000"
+  )
   # Signed zeroes
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1f"),
-        "-0.0")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", "%.1g"),
-        "-0.001")
-  expect_equivalent(huxtable:::format_numbers("-1.1e-3", 1),
-        "-0.0")
-
+  expect_equivalent(
+    huxtable:::format_numbers("-1.1e-3", "%.1f"),
+    "-0.0"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("-1.1e-3", "%.1g"),
+    "-0.001"
+  )
+  expect_equivalent(
+    huxtable:::format_numbers("-1.1e-3", 1),
+    "-0.0"
+  )
 })
 
 
@@ -107,13 +140,13 @@ test_that("long_minus", {
 
 test_that("Decimal padding works", {
   expect_identical(
-          huxtable:::handle_decimal_alignment(
-            c("do not pad.", "1.00532", "33", "33.6 *"),
-            c(NA, rep(".", 3)),
-            output_type = "screen"
-          ),
-          c("do not pad.", "1.00532", "33\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0", "33.6 *\u00a0\u00a0")
-        )
+    huxtable:::handle_decimal_alignment(
+      c("do not pad.", "1.00532", "33", "33.6 *"),
+      c(NA, rep(".", 3)),
+      output_type = "screen"
+    ),
+    c("do not pad.", "1.00532", "33\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0", "33.6 *\u00a0\u00a0")
+  )
   # the characters are non-breaking spaces
 })
 
