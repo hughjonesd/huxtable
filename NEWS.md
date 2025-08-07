@@ -9,6 +9,7 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* Typst export now respects vertical alignment via `valign()`.
 
 # huxtable 5.6.0
 
