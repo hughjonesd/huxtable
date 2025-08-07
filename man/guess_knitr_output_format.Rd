@@ -7,8 +7,8 @@
 guess_knitr_output_format()
 }
 \value{
-"html", "latex", or something else. If we are not in a knitr document, returns an empty
-string.
+"html", "latex", "typst", or something else. If we are not in a knitr document,
+returns an empty string.
 }
 \description{
 Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
