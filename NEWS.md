@@ -9,6 +9,7 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* `wrap(ht) <- FALSE` now prevents Typst cells from breaking across lines.
 
 # huxtable 5.6.0
 
