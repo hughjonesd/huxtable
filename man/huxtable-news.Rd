@@ -15,6 +15,14 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item Reworked internals, with the halp of OpenAI Codex.
 }
 }
+
+\subsection{Other changes}{
+\itemize{
+\item HTML tables now wrap header rows in \verb{<thead>} (using \verb{<th>}
+cells) and body rows in \verb{<tbody>} when header rows are at the top of the
+table.
+}
+}
 }
 
 \section{huxtable 5.6.0}{

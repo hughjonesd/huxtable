@@ -6,6 +6,11 @@
   AFAIK nobody has ever done this; if I'm wrong, please tell me.
 * Reworked internals, with the halp of OpenAI Codex.
 
+## Other changes
+
+* HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
+  body rows in `<tbody>` when header rows are at the top of the table.
+
 # huxtable 5.6.0
 
 ## Breaking changes
