@@ -6,38 +6,12 @@ clean_contents <- function(
   output_type <- match.arg(output_type)
   contents <- as.matrix(as.data.frame(ht))
 
-  # == format numbers according to number_format ==
-  for (col in seq_len(ncol(contents))) {
-    for (row in seq_len(nrow(contents))) {
-      cell <- contents[row, col]
-      num_fmt <- number_format(ht)[[row, col]] # a list element, double brackets
-      cell <- format_numbers(cell, num_fmt)
-      if (is.na(cell)) cell <- na_string(ht)[row, col]
-      contents[row, col] <- as.character(cell)
-    }
-  }
-
-  # == replace NAs ==
+  contents <- format_numbers_matrix(contents, ht)
   contents[is.na(contents)] <- na_string(ht)
 
-  # == render markdown, sanitize output ==
-  for (col in seq_len(ncol(contents))) {
-    md_rows <- markdown(ht)[, col]
-    contents[md_rows, col] <- render_markdown(contents[md_rows, col], output_type)
-    if (output_type %in% c("latex", "html", "rtf")) {
-      to_esc <- escape_contents(ht)[, col] & !md_rows
-      contents[to_esc, col] <- sanitize(contents[to_esc, col], output_type)
-    }
-  }
+  contents <- render_markdown_matrix(contents, ht, output_type)
 
-  # == handle decimal alignment ==
-  for (col in seq_len(ncol(contents))) {
-    pad_chars <- rep(NA, length(col))
-    # if align(ht) is a single character, e.g. "." or ",", we align on that:
-    align_pad <- ncharw(align(ht)[, col]) == 1
-    pad_chars[align_pad] <- align(ht)[align_pad, col]
-    contents[, col] <- handle_decimal_alignment(contents[, col], pad_chars, output_type)
-  }
+  contents <- align_decimals_matrix(contents, ht, output_type)
 
   # == lengthen minus signs ==
   if (getOption("huxtable.long_minus", FALSE) &&
@@ -60,6 +34,71 @@ clean_contents <- function(
   }
 
   contents
+}
+
+#' Format numbers in a character matrix using each cell's number_format
+#'
+#' @noRd
+format_numbers_matrix <- function(contents, ht) {
+  dims <- dimnames(contents)
+  nf <- number_format(ht)
+  na_str <- na_string(ht)
+
+  res <- vapply(seq_len(ncol(contents)), function(col) {
+    vapply(seq_len(nrow(contents)), function(row) {
+      cell <- contents[row, col]
+      cell <- format_numbers(cell, nf[[row, col]])
+      if (is.na(cell)) cell <- na_str[row, col]
+      as.character(cell)
+    }, character(1))
+  }, character(nrow(contents)))
+
+  res <- matrix(res, nrow = nrow(contents))
+  dimnames(res) <- dims
+  res
+}
+
+#' Render markdown and sanitize a character matrix
+#'
+#' @noRd
+render_markdown_matrix <- function(contents, ht, output_type) {
+  dims <- dimnames(contents)
+  md <- markdown(ht)
+  esc <- escape_contents(ht)
+
+  res <- vapply(seq_len(ncol(contents)), function(col) {
+    column <- contents[, col]
+    md_rows <- md[, col]
+    column[md_rows] <- render_markdown(column[md_rows], output_type)
+    if (output_type %in% c("latex", "html", "rtf")) {
+      to_esc <- esc[, col] & !md_rows
+      column[to_esc] <- sanitize(column[to_esc], output_type)
+    }
+    column
+  }, character(nrow(contents)))
+
+  res <- matrix(res, nrow = nrow(contents))
+  dimnames(res) <- dims
+  res
+}
+
+#' Align decimals in a character matrix
+#'
+#' @noRd
+align_decimals_matrix <- function(contents, ht, output_type) {
+  dims <- dimnames(contents)
+  al <- align(ht)
+
+  res <- vapply(seq_len(ncol(contents)), function(col) {
+    pad_chars <- rep(NA_character_, nrow(contents))
+    align_pad <- ncharw(al[, col]) == 1
+    pad_chars[align_pad] <- al[align_pad, col]
+    handle_decimal_alignment(contents[, col], pad_chars, output_type)
+  }, character(nrow(contents)))
+
+  res <- matrix(res, nrow = nrow(contents))
+  dimnames(res) <- dims
+  res
 }
 
 
