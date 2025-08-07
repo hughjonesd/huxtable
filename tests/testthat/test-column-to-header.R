@@ -1,4 +1,3 @@
-
 local_edition(2)
 
 test_that("column_to_header works", {
@@ -22,7 +21,7 @@ test_that("column_to_header arguments work", {
   expect_silent(jams5 <- column_to_header(jams, 1, ignore_headers = FALSE))
   expect_equivalent(contents(jams5)[1, 1], "Type")
 
-  iris_hux <- as_hux(iris, add_colnames = FALSE)[c(1:3, 51:53, 101:103),]
+  iris_hux <- as_hux(iris, add_colnames = FALSE)[c(1:3, 51:53, 101:103), ]
   expect_silent(iris_hux <- column_to_header(iris_hux, "Species", start_col = 3))
   expect_equivalent(contents(iris_hux)[1, 3], "setosa")
   expect_equivalent(colspan(iris_hux)[1, 3], 2)

@@ -1,14 +1,13 @@
-
-
 local_edition(2)
 
 
 test_that("to_screen gives warning with colour if crayon not installed", {
   ht <- hux(a = 1:2)
-  with_mocked_bindings({
+  with_mocked_bindings(
+    {
       expect_warning(to_screen(ht, color = TRUE), "crayon")
     },
-    requireNamespace = function (...) FALSE
+    requireNamespace = function(...) FALSE
   )
 })
 
@@ -39,8 +38,8 @@ test_that("to_md and to_screen keep to min_width", {
       output <- func(ht, min_width = mw)
       lines <- strsplit(output, "\n", fixed = TRUE)[[1]]
       lines <- lines[nchar(lines) > 0] # empty lines after table itself
-      lines <- lines[ ! grepl("Column names", lines)]
-      expect_true(all(nchar(lines, type = "width") >= mw ))
+      lines <- lines[!grepl("Column names", lines)]
+      expect_true(all(nchar(lines, type = "width") >= mw))
     }
   }
 })
@@ -101,8 +100,9 @@ test_that("to_screen borders respect spans", {
   # a line with just: some spaces, │, 1, some spaces, │, some spaces
   # NB that this character: │ is NOT the "or" character, so don't try to type it
   expect_match(to_screen(ht),
-        "\\n\\s*│\\s*1\\s*│\\s*\\n",
-        perl = TRUE)
+    "\\n\\s*│\\s*1\\s*│\\s*\\n",
+    perl = TRUE
+  )
 
   rowspan(ht2)[1, 1] <- 2
   # a line after "3" with some spaces, a │ and some more spaces
@@ -135,8 +135,10 @@ test_that("hux_logo works", {
 
 
 test_that("Multi-rowspan screen output is sane", {
-  ht <- hux(a = rep("aaaaaa", 10), b = rep("bbbbbb", 10),
-            add_colnames = TRUE)
+  ht <- hux(
+    a = rep("aaaaaa", 10), b = rep("bbbbbb", 10),
+    add_colnames = TRUE
+  )
   rowspan(ht)[1, 1] <- 10
   expect_equal_to_reference(to_screen(ht), "multirow.rds")
 })

@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -71,14 +69,14 @@ test_that("create huxtable from data frame", {
 
 test_that("autoformat", {
   dfr <- data.frame(
-          character = letters[1:3],
-          integer   = 1:3,
-          numeric   = c(1.5, 2.5, 3.5),
-          complex   = 1:3 + 1i,
-          Date      = as.Date(rep("2001/01/01", 3)),
-          POSIXct   = as.POSIXct(Sys.time()),
-          POSIXlt   = as.POSIXlt(Sys.time())
-        )
+    character = letters[1:3],
+    integer   = 1:3,
+    numeric   = c(1.5, 2.5, 3.5),
+    complex   = 1:3 + 1i,
+    Date      = as.Date(rep("2001/01/01", 3)),
+    POSIXct   = as.POSIXct(Sys.time()),
+    POSIXlt   = as.POSIXlt(Sys.time())
+  )
   ht <- as_hux(dfr, autoformat = TRUE, add_colnames = TRUE)
 
   for (x in c("character", "Date", "POSIXct", "POSIXlt")) {
@@ -124,7 +122,7 @@ test_that("create huxtable from table", {
   tbl <- table(mtcars$gear, mtcars$cyl)
   expect_silent(ht <- as_hux(tbl))
   expect_is(ht, "huxtable")
-  expect_equivalent(ht[[1]][ -1 ], rownames(tbl))
+  expect_equivalent(ht[[1]][-1], rownames(tbl))
   expect_equivalent(unlist(ht[1, -1]), colnames(tbl))
   expect_equivalent(ht[[1, 1]], "") # check no "rownames" in top left
 })

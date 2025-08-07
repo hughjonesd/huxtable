@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -12,8 +10,10 @@ test_that("add_colnames() does not screw up dates and similar", {
   )
   ht <- as_hux(dfr, add_colnames = TRUE)
   ht2 <- add_colnames(as_hux(dfr, add_colnames = FALSE))
-  for (h in list(ht, ht2)) for (col in colnames(dfr)) {
-    expect_match(to_screen(h[, col]), "2015-05-05")
+  for (h in list(ht, ht2)) {
+    for (col in colnames(dfr)) {
+      expect_match(to_screen(h[, col]), "2015-05-05")
+    }
   }
 })
 
@@ -132,7 +132,7 @@ test_that("add_columns and add_rows work with data frames", {
 
 test_that("add_rows and add_columns don't break with matrices", {
   ht <- as_hux(matrix(1, 1, 1))
-  prob <- rbind(ht, rbind(1,1))
+  prob <- rbind(ht, rbind(1, 1))
   expect_equivalent(length(row_height(prob)), 3)
 })
 

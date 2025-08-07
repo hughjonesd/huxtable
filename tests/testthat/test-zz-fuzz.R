@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -14,18 +12,21 @@ local_edition(2)
 # cat(readRDS("tests/testthat/output-rds/various-outputs-six_figure_no-..."))
 # or run quick_xxx functions on it
 
-expect_outputs_unchanged <- function (hx, idx) {
+expect_outputs_unchanged <- function(hx, idx) {
   info <- paste0("Index i = ", idx)
   file <- file.path(test_path(), "output-rds", paste0("various-outputs-", idx))
   # setting the width avoids problems that command line and RStudio tests have different
   # options(width)
   expect_known_value(to_screen(hx, min_width = 20, max_width = 80),
-        file = paste0(file, "-screen.rds"), info = info)
-  expect_known_value(to_md(hx, min_width = 20, max_width = 80), file = paste0(file, "-md.rds"),
-        info = info)
-  expect_known_value(to_html(hx),   file = paste0(file, "-html.rds"),   info = info)
-  expect_known_value(to_latex(hx),  file = paste0(file, "-latex.rds"),  info = info)
-  expect_known_value(to_rtf(hx),  file = paste0(file, "-rtf.rds"),  info = info)
+    file = paste0(file, "-screen.rds"), info = info
+  )
+  expect_known_value(to_md(hx, min_width = 20, max_width = 80),
+    file = paste0(file, "-md.rds"),
+    info = info
+  )
+  expect_known_value(to_html(hx), file = paste0(file, "-html.rds"), info = info)
+  expect_known_value(to_latex(hx), file = paste0(file, "-latex.rds"), info = info)
+  expect_known_value(to_rtf(hx), file = paste0(file, "-rtf.rds"), info = info)
 }
 
 
@@ -52,7 +53,7 @@ variations <- expand.grid(
 variations$left_border[variations$left_border_style == "double"] <- 3
 
 hx_raw <- hux(
-  int  = 1:3,
+  int = 1:3,
   real = 1:3 + 0.005,
   char = letters[1:3],
   date = as.Date(1:3, origin = "1970-01-01"),
@@ -64,7 +65,7 @@ hx_raw <- hux(
 add_props <- function(hx, row) {
   props <- as.list(row)
   props$ht <- hx
-  props_no_border <- props[! grepl("border", names(props))]
+  props_no_border <- props[!grepl("border", names(props))]
   hx_set <- do.call("set_cell_properties", props_no_border)
   if ("left_border" %in% names(props)) {
     hx_set <- set_left_border(hx_set, props$left_border)
@@ -130,8 +131,10 @@ test_that("Some random outputs compile", {
     hx_set <- add_props(hx_raw, variations[sr, ])
     docxo <- sprintf("docx-check-%d.docx", sr)
     outfiles[i] <- docxo
-    expect_error(quick_docx(hx_set, file = docxo, open = FALSE), regexp = NA,
-          info = list(index = sr))
+    expect_error(quick_docx(hx_set, file = docxo, open = FALSE),
+      regexp = NA,
+      info = list(index = sr)
+    )
     expect_true(file.exists(docxo), info = list(index = sr))
   }
 
@@ -140,8 +143,10 @@ test_that("Some random outputs compile", {
     hx_set <- add_props(hx_raw, variations[sr, ])
     pptxo <- sprintf("pptx-check-%d.pptx", sr)
     outfiles[i] <- pptxo
-    expect_error(quick_pptx(hx_set, file = pptxo, open = FALSE), regexp = NA,
-      info = list(index = sr))
+    expect_error(quick_pptx(hx_set, file = pptxo, open = FALSE),
+      regexp = NA,
+      info = list(index = sr)
+    )
     expect_true(file.exists(pptxo), info = list(index = sr))
   }
 })
@@ -155,18 +160,24 @@ test_that("Some random HTML outputs are validated by W3C", {
   # here we do randomize
   for (i in sample(nrow(variations), 10)) {
     hx_set <- add_props(hx_raw, variations[i, ])
-    webpage <- paste0("<!DOCTYPE html><html lang=\"en\">",
+    webpage <- paste0(
+      "<!DOCTYPE html><html lang=\"en\">",
       "<head><meta charset=\"utf-8\"><title>huxtable table validation</title></head>",
-      "<body>\n", to_html(hx_set), "\n</body></html>")
-    response <- httr::POST("http://validator.w3.org/nu/?out=json", body = webpage,
-          httr::content_type("text/html"))
+      "<body>\n", to_html(hx_set), "\n</body></html>"
+    )
+    response <- httr::POST("http://validator.w3.org/nu/?out=json",
+      body = webpage,
+      httr::content_type("text/html")
+    )
     if (httr::status_code(response) != 200) {
-      skip(sprintf("W3C validator returned %s",
-        httr::http_status(response)$message))
+      skip(sprintf(
+        "W3C validator returned %s",
+        httr::http_status(response)$message
+      ))
     }
     response <- httr::content(response, "parsed")
-    errors   <- Filter(function (x) x$type == "error", response$messages)
-    warnings <- Filter(function (x) x$type == "warnings", response$messages)
+    errors <- Filter(function(x) x$type == "error", response$messages)
+    warnings <- Filter(function(x) x$type == "warnings", response$messages)
     valid <- length(errors) == 0
     expect_true(valid, info = list(index = i, errors = errors, warnings = warnings))
   }

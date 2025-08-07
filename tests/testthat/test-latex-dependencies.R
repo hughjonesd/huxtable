@@ -1,4 +1,3 @@
-
 local_edition(2)
 
 test_that("install/report_latex_dependencies", {
@@ -11,12 +10,16 @@ test_that("install/report_latex_dependencies", {
   packages <- setdiff(packages, c("graphicx", "calc", "array"))
   with_mocked_bindings(
     expect_error(x <- install_latex_dependencies(), regexp = NA),
-    tlmgr_install_wrapper = function (...) return(0)
+    tlmgr_install_wrapper = function(...) {
+      return(0)
+    }
   )
   expect_true(x)
 
-  expect_silent(package_str <- report_latex_dependencies(quiet = TRUE,
-    as_string = TRUE))
+  expect_silent(package_str <- report_latex_dependencies(
+    quiet = TRUE,
+    as_string = TRUE
+  ))
   expect_match(package_str, "\\\\usepackage\\{array\\}")
 })
 
@@ -31,7 +34,7 @@ test_that("check_latex_dependencies checks adjustbox", {
 
   local_mocked_bindings(
     .package = "tinytex",
-    tlmgr = function (...) "1.0",
+    tlmgr = function(...) "1.0",
   )
   expect_warning(check_adjustbox(quiet = FALSE), "adjustbox")
   expect_equivalent(check_adjustbox(), FALSE)
@@ -49,14 +52,18 @@ test_that("check_latex_dependencies runs correctly", {
 
   local_mocked_bindings(
     .package = "tinytex",
-    tl_pkgs = function (...) return(character(0))
+    tl_pkgs = function(...) {
+      return(character(0))
+    }
   )
   expect_false(check_latex_dependencies(quiet = TRUE))
   expect_message(check_latex_dependencies(quiet = FALSE), regexp = "not found")
 
   local_mocked_bindings(
     .package = "tinytex",
-    tl_pkgs = function (...) return(ld)
+    tl_pkgs = function(...) {
+      return(ld)
+    }
   )
   expect_true(check_latex_dependencies(quiet = TRUE))
   expect_message(check_latex_dependencies(quiet = FALSE), regexp = "All LaTeX packages found")
