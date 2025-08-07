@@ -184,6 +184,8 @@ typst_cell_text <- function(ht, i, j, cell_text) {
   if (italic(ht)[i, j]) text_opts <- c(text_opts, "style: \"italic\"")
   if (!is.na(fs <- font_size(ht)[i, j])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
   if (!is.na(f <- font(ht)[i, j])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
+  if (!is.na(tc <- text_color(ht)[i, j])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
+
 
   if (length(text_opts) > 0) {
     text <- sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
