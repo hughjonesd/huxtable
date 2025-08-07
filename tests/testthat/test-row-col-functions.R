@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 

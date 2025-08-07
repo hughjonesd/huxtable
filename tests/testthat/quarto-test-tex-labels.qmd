@@ -10,5 +10,4 @@ Reference to \ref{blah-hux}
 library(huxtable)
 label(jams) <- "blah-hux"
 jams
-
 ```

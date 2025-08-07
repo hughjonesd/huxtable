@@ -1,4 +1,3 @@
-
 local_edition(2)
 
 if (!requireNamespace("broom", quietly = TRUE)) {
@@ -36,8 +35,10 @@ test_that("huxreg confidence intervals work", {
   glm1 <- glm(I(y > 0) ~ a, dfr, family = binomial)
   library(nnet)
   mn <- nnet::multinom(I(y > 0) ~ a, dfr, trace = FALSE)
-  expect_silent(huxreg(lm1, lm2, glm1, mn, error_format = "{conf.low}-{conf.high}",
-        statistics = c("r.squared"), ci_level = 0.95))
+  expect_silent(huxreg(lm1, lm2, glm1, mn,
+    error_format = "{conf.low}-{conf.high}",
+    statistics = c("r.squared"), ci_level = 0.95
+  ))
 })
 
 test_that("huxreg confidence intervals work when tidy c.i.s not available", {
@@ -47,13 +48,14 @@ test_that("huxreg confidence intervals work when tidy c.i.s not available", {
   set.seed(27101975)
   data(Orthodont, package = "nlme")
   # method ML avoids a warning in broom::glance
-  fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~ 1, method = "ML")
+  fm1 <- nlme::lme(distance ~ age + Sex, data = Orthodont, random = ~1, method = "ML")
   expect_error(
-          huxreg(fm1, tidy_args = list(effects = "fixed"), statistics = "nobs", ci_level = 0.95,
-                error_format = "({conf.low}-{conf.high})"),
-          regexp = NA
-        )
-
+    huxreg(fm1,
+      tidy_args = list(effects = "fixed"), statistics = "nobs", ci_level = 0.95,
+      error_format = "({conf.low}-{conf.high})"
+    ),
+    regexp = NA
+  )
 })
 
 
@@ -120,15 +122,23 @@ test_that("huxreg borders argument works", {
   lm1 <- lm(y ~ a, dfr)
   lm2 <- lm(y ~ b, dfr)
   hr <- huxreg(lm1, lm2, borders = .7, outer_borders = .8)
-  expect_equivalent(unname(brdr_thickness(bottom_border(hr))[, 2]),
-          c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0))
-  expect_equivalent(unname(brdr_thickness(top_border(hr))[1, ]),
-        matrix(0.8, 1, 3))
+  expect_equivalent(
+    unname(brdr_thickness(bottom_border(hr))[, 2]),
+    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0)
+  )
+  expect_equivalent(
+    unname(brdr_thickness(top_border(hr))[1, ]),
+    matrix(0.8, 1, 3)
+  )
   hr2 <- huxreg(lm1, lm2, borders = 0, outer_borders = 0)
-  expect_equivalent(unname(brdr_thickness(bottom_border(hr2)[])),
-        matrix(0, nrow(hr2), ncol(hr2)))
-  expect_equivalent(unname(brdr_thickness(top_border(hr2)[])),
-        matrix(0, nrow(hr2), ncol(hr2)))
+  expect_equivalent(
+    unname(brdr_thickness(bottom_border(hr2)[])),
+    matrix(0, nrow(hr2), ncol(hr2))
+  )
+  expect_equivalent(
+    unname(brdr_thickness(top_border(hr2)[])),
+    matrix(0, nrow(hr2), ncol(hr2))
+  )
 })
 
 
@@ -159,7 +169,8 @@ test_that("huxreg works for models without tidy p values", {
   skip_if_not_installed("broom.mixed")
 
   expect_warning(huxreg(lme4::lmer(Sepal.Width ~ Sepal.Length + (1 | Species), data = iris),
-        statistics = "nobs"), "p values")
+    statistics = "nobs"
+  ), "p values")
 })
 
 
@@ -181,7 +192,7 @@ test_that("huxreg column names are legitimate", {
 
 
 test_that("can pass generics::tidy arguments to huxreg", {
-  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   glm1 <- glm(I(Sepal.Width > 3) ~ Sepal.Length, data = iris, family = binomial)
   expect_silent(huxreg(glm1, tidy_args = list(exponentiate = TRUE), statistics = "nobs"))
   expect_silent(huxreg(lm1, glm1, tidy_args = list(list(), list(exponentiate = TRUE)), statistics = "nobs"))
@@ -190,8 +201,8 @@ test_that("can pass generics::tidy arguments to huxreg", {
 
 
 test_that("bugfix: tidy_args works when argument list contains a list", {
-  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
-  lm2 <-  lm1
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
+  lm2 <- lm1
   expect_silent(huxreg(lm1, lm2, tidy_args = list(ignored = list())))
 })
 
@@ -199,15 +210,17 @@ test_that("bugfix: tidy_args works when argument list contains a list", {
 test_that("can pass generics::glance arguments to huxreg", {
   skip_if_not_installed("AER")
   iv1 <- AER::ivreg(Sepal.Width ~ Sepal.Length | Petal.Length, data = iris)
-  expect_silent(hr <- huxreg(iv1, glance_args = list(diagnostics = TRUE),
-        statistics = "statistic.Sargan"))
+  expect_silent(hr <- huxreg(iv1,
+    glance_args = list(diagnostics = TRUE),
+    statistics = "statistic.Sargan"
+  ))
 })
 
 
 test_that("tidy_override", {
   skip_if_not_installed("broom")
 
-  lm1 <-  lm(Sepal.Width ~ Sepal.Length, data = iris)
+  lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
 
   fakes <- c(0.0001, 0.048)
   fixed_lm1 <- tidy_override(lm1, p.value = fakes, glance = list(r.squared = 0.95))
@@ -223,7 +236,8 @@ test_that("tidy_override", {
   expect_equivalent(broom::glance(lm1_newcol)$bar, 1)
 
   expect_error(tidy_override(lm1, foo = 1:2, bar = 1:3),
-        info = "Unequal length tidy_override columns should throw an error")
+    info = "Unequal length tidy_override columns should throw an error"
+  )
 })
 
 
@@ -254,11 +268,10 @@ test_that("glance.tidy_override works if underlying object has no glance() metho
 test_that("tidy.tidy_override works if underlying object has no tidy() method", {
   skip_if_not_installed("broom")
   tidy_monster <- tidy_override(
-          list(),
-          term = c("a", "monster"),
-          estimate = c(1, 2),
-          extend = TRUE
-        )
+    list(),
+    term = c("a", "monster"),
+    estimate = c(1, 2),
+    extend = TRUE
+  )
   expect_equivalent(broom::tidy(tidy_monster)$term, c("a", "monster"))
-
 })

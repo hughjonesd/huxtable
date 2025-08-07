@@ -1,3 +1,13 @@
+#' Insert rows or columns into a huxtable
+#'
+#' @param x A huxtable to modify
+#' @param y Rows or columns to insert, as a huxtable
+#' @param after Row/column number or name after which to insert
+#' @param dimno Dimension to bind: 1 for rows, 2 for columns
+#' @param copy_cell_props Copy cell properties from `x` to `y`?
+#'
+#' @return A huxtable with rows or columns inserted
+#' @noRd
 add_row_cols <- function(x, y, after, dimno, copy_cell_props) {
   dims <- dim(x)
   end_idx <- dims[dimno]

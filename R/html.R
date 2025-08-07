@@ -2,12 +2,13 @@
 #'
 #' @rdname to_html
 #'
-print_html <- function(ht, ...) cat(to_html(ht, ...))
+print_html <- function(ht, ...) cat(huxtable_html_css(), to_html(ht, ...))
 
 
 #' Create HTML representing a huxtable
 #'
-#' These functions print or return an HTML table.
+#' These functions print or return an HTML table. `print_html` also prepends a
+#' `<style>` block defining basic CSS classes.
 #'
 #' @param ht A huxtable.
 #' @param ... Arguments passed to methods. Not currently used.
@@ -28,22 +29,42 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #' @return `print_notebook` prints HTML output suitable for use in an
 #' RStudio interactive notebook.
 print_notebook <- function(ht, ...) {
-  print(rmarkdown::html_notebook_output_html(to_html(ht)))
+  html <- paste0(huxtable_html_css(), to_html(ht))
+  print(rmarkdown::html_notebook_output_html(html))
 }
 
+
+huxtable_html_css <- function() {
+  "<style>\n.huxtable {\n  border-collapse: collapse;\n  border: 0px;\n  margin-bottom: 2em;\n  margin-top: 2em;\n}\n.huxtable-cell {\n  vertical-align: top;\n  text-align: left;\n  white-space: normal;\n  border-style: solid;\n  border-width: 0pt;\n  padding: 6pt;\n  font-weight: normal;\n}\n.huxtable-header {\n  font-weight: bold;\n}\n</style>\n"
+}
 
 #' @export
 #' @rdname to_html
 to_html <- function(ht, ...) {
   check_positive_dims(ht)
 
-  ## TABLE START ----------
+  table_start <- build_table_style(ht)
+  cols_html <- build_colgroup(ht)
+  cell_html <- build_cell_html(ht)
+  row_html <- build_row_html(ht, cell_html)
+
+  res <- paste0(table_start, cols_html, row_html, "</table>\n")
+  return(res)
+}
+
+#' Build opening table tag and caption for HTML output
+#'
+#' @param ht A huxtable.
+#'
+#' @return A string containing the opening `<table>` tag and optional caption.
+#' @noRd
+build_table_style <- function(ht) {
   width <- width(ht)
   width_string <- if (is.na(width)) {
     ""
   } else {
     if (is.numeric(width)) width <- paste0(width * 100, "%")
-    paste0("width: ", width)
+    sprintf("width: %s;", width)
   }
 
   margin_string <- switch(position(ht),
@@ -77,14 +98,14 @@ to_html <- function(ht, ...) {
   } else {
     "data-quarto-disable-processing=\"true\" "
   }
+  style <- paste(width_string, margin_string, height_string, float_string)
+  style <- trimws(style)
+  style_attr <- if (nzchar(style)) sprintf(' style="%s"', style) else ""
   table_start <- sprintf(
-    paste0(
-      '<table class="huxtable" %s',
-      'style="border-collapse: collapse; border: 0px; ',
-      'margin-bottom: 2em; margin-top: 2em; %s; %s %s %s"%s>\n'
-    ),
+    '<table class="huxtable" %s%s%s>\n',
     quarto_attribute,
-    width_string, margin_string, height_string, float_string, id_string
+    style_attr,
+    id_string
   )
 
   if (!is.na(cap <- make_caption(ht, lab, "html"))) {
@@ -106,17 +127,32 @@ to_html <- function(ht, ...) {
     table_start <- paste0(table_start, cap)
   }
 
-  # COLUMN TAGS -----------
+  table_start
+}
+
+#' Build `<col>` tags for column widths
+#'
+#' @param ht A huxtable.
+#'
+#' @return A string of `<col>` tags.
+#' @noRd
+build_colgroup <- function(ht) {
   col_widths <- col_width(ht)
-  # NAs become empty strings
   empty_cw <- is.na(col_widths)
   if (is.numeric(col_widths)) col_widths <- sprintf("%s%%", col_widths * 100)
   cols_html <- sprintf(' style="width: %s"', col_widths)
   cols_html <- blank_where(cols_html, empty_cw)
   cols_html <- sprintf("<col%s>", cols_html)
-  cols_html <- paste0(cols_html, collapse = "")
+  paste0(cols_html, collapse = "")
+}
 
-  ## CELLS ----------------
+#' Build HTML for each table cell
+#'
+#' @param ht A huxtable.
+#'
+#' @return A character matrix containing HTML for each cell.
+#' @noRd
+build_cell_html <- function(ht) {
   display_cells <- display_cells(ht)
 
   rowspan <- rowspan(ht)
@@ -125,44 +161,62 @@ to_html <- function(ht, ...) {
   colspan <- blank_where(sprintf(' colspan="%s"', colspan), colspan == 1)
 
   valign <- sprintf("vertical-align: %s;", valign(ht))
-  align <- sprintf(" text-align: %s;", real_align(ht))
-  wrap <- sprintf(" white-space: %s;", ifelse(wrap(ht), "normal", "nowrap"))
+  valign <- blank_where(valign, valign(ht) == "top")
+  align <- sprintf("text-align: %s;", real_align(ht))
+  align <- blank_where(align, real_align(ht) == "left")
+  wrap <- ifelse(wrap(ht), "", "white-space: nowrap;")
 
-  # get_visible_borders() data is in "real cell" position.
-  # But we just want to grab the original data
-  # and apply it
   border_css <- compute_border_css(ht)
+  border_css <- sub("^ ", "", border_css)
+  border_css <- blank_where(
+    border_css,
+    border_css ==
+      "border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;"
+  )
 
   add_pts <- function(x) if (is.numeric(x)) sprintf("%.4gpt", x) else x
   padding <- sprintf(
-    " padding: %s %s %s %s;",
+    "padding: %s %s %s %s;",
     add_pts(top_padding(ht)),
     add_pts(right_padding(ht)),
     add_pts(bottom_padding(ht)),
     add_pts(left_padding(ht))
   )
+  padding <- blank_where(padding, padding == "padding: 6pt 6pt 6pt 6pt;")
 
   bg_color <- background_color(ht)
-  bg_color <- format_color(bg_color) # NA becomes white, as it happens
-  bg_color <- sprintf(" background-color: rgb(%s);", bg_color)
+  bg_color <- format_color(bg_color)
+  bg_color <- sprintf("background-color: rgb(%s);", bg_color)
   bg_color <- blank_where(bg_color, is.na(background_color(ht)))
 
-  bold <- ifelse(bold(ht), " font-weight: bold;", " font-weight: normal;")
-  italic <- ifelse(italic(ht), " font-style: italic;", "")
+  italic <- ifelse(italic(ht), "font-style: italic;", "")
 
-  font <- sprintf(" font-family: %s;", font(ht))
+  font <- sprintf("font-family: %s;", font(ht))
   font <- blank_where(font, is.na(font(ht)))
-  font_size <- sprintf(" font-size: %.4gpt;", font_size(ht))
+  font_size <- sprintf("font-size: %.4gpt;", font_size(ht))
   font_size <- blank_where(font_size, is.na(font_size(ht)))
 
-  style <- paste0(
-    "style=\"", valign, align, wrap, border_css,
-    padding, bg_color, bold, italic, font, font_size, "\""
+  is_header <- matrix(FALSE, nrow(ht), ncol(ht))
+  is_header[header_rows(ht), ] <- TRUE
+  is_header[, header_cols(ht)] <- TRUE
+  bold_inline <- ifelse(
+    bold(ht) != is_header,
+    ifelse(bold(ht), "font-weight: bold;", "font-weight: normal;"),
+    ""
   )
+
+  style <- trimws(paste(
+    valign, align, wrap, border_css,
+    padding, bg_color, bold_inline, italic, font, font_size
+  ))
+  style <- ifelse(style == "", "", paste0(' style="', style, '"'))
+
   th_td <- matrix("td", nrow(ht), ncol(ht))
   th_td[header_rows(ht), ] <- "th"
   th_td[, header_cols(ht)] <- "th"
-  cell_start <- sprintf("<%s%s%s %s>", th_td, rowspan, colspan, style)
+  cell_class <- matrix('class="huxtable-cell"', nrow(ht), ncol(ht))
+  cell_class[is_header] <- 'class="huxtable-cell huxtable-header"'
+  cell_start <- sprintf("<%s %s%s%s%s>", th_td, cell_class, rowspan, colspan, style)
   cell_end <- sprintf("</%s>", th_td)
   contents <- clean_contents(ht, output_type = "html")
 
@@ -192,9 +246,18 @@ to_html <- function(ht, ...) {
     color_span_end, rot_div_end, cell_end
   )
   cells_html <- blank_where(cells_html, display_cells$shadowed)
-
-  # add in row tags
   dim(cells_html) <- dim(ht)
+  cells_html
+}
+
+#' Wrap cell HTML in table rows
+#'
+#' @param ht A huxtable.
+#' @param cells_html A matrix of cell HTML as returned by `build_cell_html()`.
+#'
+#' @return A string containing the HTML for all rows.
+#' @noRd
+build_row_html <- function(ht, cells_html) {
   cells_html <- apply(cells_html, 1, paste0, collapse = "")
   row_heights <- row_height(ht)
   if (is.numeric(row_heights)) {
@@ -204,13 +267,28 @@ to_html <- function(ht, ...) {
   row_heights <- sprintf(' style="height: %s;"', row_heights)
   row_heights <- blank_where(row_heights, is.na(row_height(ht)))
   tr <- sprintf("<tr%s>\n", row_heights)
+  row_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
+
+  header_idx <- unname(which(header_rows(ht)))
+  body_idx <- setdiff(seq_len(nrow(ht)), header_idx)
+
+  if (!length(header_idx)) {
+    cells_html <- paste0("<tbody>\n", paste0(row_html, collapse = ""), "</tbody>\n")
+  } else if (identical(header_idx, seq_len(max(header_idx)))) {
+    cells_html <- c(
+      paste0("<thead>\n", paste0(row_html[header_idx], collapse = ""), "</thead>\n"),
+      if (length(body_idx)) {
+        paste0("<tbody>\n", paste0(row_html[body_idx], collapse = ""), "</tbody>\n")
+      }
+    )
+    cells_html <- paste0(cells_html, collapse = "")
+  } else {
+    cells_html <- paste0(row_html, collapse = "")
+  }
+
   cells_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
-  cells_html <- paste0(cells_html, collapse = "")
-
-  res <- paste0(table_start, cols_html, cells_html, "</table>\n")
-  return(res)
+  paste0(cells_html, collapse = "")
 }
-
 
 #' Create border css for each cell
 #'

@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -28,7 +26,7 @@ test_that("Copying a whole span creates two separate spans", {
   expect_equivalent(rowspan(ht2)[3, 1], 2)
 
   ht3 <- hux(a = 1:2, b = 1:2)
-  expect_silent(ht4 <- ht3[c(1,1), ])
+  expect_silent(ht4 <- ht3[c(1, 1), ])
   expect_equivalent(colspan(ht4)[1, 1], 1)
 })
 

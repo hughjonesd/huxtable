@@ -1,4 +1,3 @@
-
 test_that("Themes work", {
   ht <- huxtable(a = 1:5, b = 1:5)
   expect_error(theme_basic(ht), regexp = NA)
@@ -18,7 +17,8 @@ test_that("Themes work with options", {
   ht <- huxtable(a = 1:5, b = 1:5, add_colnames = TRUE)
   expect_error(theme_basic(ht, header_rows = FALSE, header_cols = FALSE), regexp = NA)
   expect_error(theme_striped(ht, stripe = "purple", header_rows = FALSE, header_cols = FALSE),
-        regexp = NA)
+    regexp = NA
+  )
   expect_silent(theme_bright(ht, header_rows = FALSE, header_cols = TRUE))
   expect_error(theme_article(ht, header_rows = FALSE, header_cols = FALSE), regexp = NA)
   expect_silent(theme_compact(ht, header_rows = TRUE))
