@@ -267,6 +267,25 @@ build_row_html <- function(ht, cells_html) {
   row_heights <- sprintf(' style="height: %s;"', row_heights)
   row_heights <- blank_where(row_heights, is.na(row_height(ht)))
   tr <- sprintf("<tr%s>\n", row_heights)
+  row_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
+
+  header_idx <- unname(which(header_rows(ht)))
+  body_idx <- setdiff(seq_len(nrow(ht)), header_idx)
+
+  if (!length(header_idx)) {
+    cells_html <- paste0("<tbody>\n", paste0(row_html, collapse = ""), "</tbody>\n")
+  } else if (identical(header_idx, seq_len(max(header_idx)))) {
+    cells_html <- c(
+      paste0("<thead>\n", paste0(row_html[header_idx], collapse = ""), "</thead>\n"),
+      if (length(body_idx)) {
+        paste0("<tbody>\n", paste0(row_html[body_idx], collapse = ""), "</tbody>\n")
+      }
+    )
+    cells_html <- paste0(cells_html, collapse = "")
+  } else {
+    cells_html <- paste0(row_html, collapse = "")
+  }
+
   cells_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
   paste0(cells_html, collapse = "")
 }
