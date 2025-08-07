@@ -73,3 +73,14 @@ test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), trimws(to_typst(ht), which = "right"), fixed = TRUE)
 })
+
+test_that("to_typst respects wrap", {
+  long <- strrep("a", 100)
+  ht <- hux(a = long, add_colnames = FALSE)
+  res_wrap <- to_typst(ht)
+  expect_false(grepl("box\\(breakable: false\\)", res_wrap))
+
+  wrap(ht) <- FALSE
+  res_nowrap <- to_typst(ht)
+  expect_match(res_nowrap, paste0("box\\(breakable: false\\)\\[", long, "\\]"))
+})
