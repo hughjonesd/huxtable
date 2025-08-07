@@ -76,7 +76,23 @@ as_Workbook.huxtable <- function(ht,
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   if (!sheet %in% names(wb)) openxlsx::addWorksheet(wb, sheet)
+  top_cap <- write_excel_caption(wb, ht, sheet, write_caption, start_row, start_col)
 
+  contents <- clean_contents(ht, output_type = "excel") # character matrix
+
+  write_excel_contents(wb, sheet, contents, start_row, start_col, top_cap)
+
+  apply_excel_styles(wb, sheet, ht, contents, start_row, start_col, top_cap)
+
+  set_excel_dimensions(wb, sheet, ht, start_row, start_col)
+
+  return(wb)
+}
+
+#' Write caption to an Excel worksheet
+#'
+#' @noRd
+write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_col) {
   cap <- caption(ht)
   cap_pos <- caption_pos(ht)
   top_cap <- write_caption && !is.na(cap) && grepl("top", cap_pos)
@@ -90,17 +106,19 @@ as_Workbook.huxtable <- function(ht,
     )
     openxlsx::mergeCells(wb, sheet, cols = seq_len(ncol(ht)), rows = cap_row)
   }
+  top_cap
+}
 
-  contents <- clean_contents(ht, output_type = "excel") # character matrix
-
+#' Write huxtable contents to an Excel worksheet
+#'
+#' @noRd
+write_excel_contents <- function(wb, sheet, contents, start_row, start_col, top_cap) {
   nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)
   is_a_number_mx <- suppressWarnings(apply(contents, 2, function(col) {
     !is.na(as.numeric(col))
   }))
   dim(is_a_number_mx) <- dim(contents) # apply might return a vector :-/
-  # for each column we go down it. If everything remaining is one type, we insert it. Otherwise
-  # we insert the cell.
   for (j in seq_len(ncol(contents))) {
     col_contents <- contents[[j]]
     ws_col <- start_col - 1 + j
@@ -118,7 +136,7 @@ as_Workbook.huxtable <- function(ht,
           startRow = ws_row, startCol = ws_col,
           colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none"
         )
-        break # to the next column
+        break
       } else {
         insert <- col_contents[i]
         if (is_a_number_col[1]) insert <- as.numeric(insert)
@@ -129,7 +147,12 @@ as_Workbook.huxtable <- function(ht,
       }
     }
   }
+}
 
+#' Apply styles to an Excel worksheet
+#'
+#' @noRd
+apply_excel_styles <- function(wb, sheet, ht, contents, start_row, start_col, top_cap) {
   dcells <- display_cells(ht, all = FALSE)
   for (r in seq_len(nrow(dcells))) {
     dcell <- dcells[r, ]
@@ -145,14 +168,13 @@ as_Workbook.huxtable <- function(ht,
     null_args$fs <- font_size(ht)[drow, dcol]
     null_args$ft <- font(ht)[drow, dcol]
     null_args$bgc <- background_color(ht)[drow, dcol]
-    # can't assign NULL to list elements
     null_args <- lapply(null_args, function(x) if (is.na(x)) NULL else x)
 
-    nf <- number_format(ht)[[drow, dcol]] # double brackets needed here
+    nf <- number_format(ht)[[drow, dcol]]
     format_zero <- format_numbers(0, nf)
     num_fmt <- if (grepl("^0\\.0+$", format_zero)) format_zero else if (is.numeric(contents[drow, dcol])) "NUMBER" else "GENERAL"
 
-    borders <- get_all_borders(ht, drow, dcol) # list of numerics
+    borders <- get_all_borders(ht, drow, dcol)
     border_char <- names(borders)
     border_colors <- get_all_border_colors(ht, drow, dcol)
     border_colors <- unlist(border_colors[border_char])
@@ -197,7 +219,12 @@ as_Workbook.huxtable <- function(ht,
       )
     }
   }
+}
 
+#' Set dimensions for an Excel worksheet
+#'
+#' @noRd
+set_excel_dimensions <- function(wb, sheet, ht, start_row, start_col) {
   cw <- col_width(ht)
   if (!is.numeric(cw) || anyNA(cw)) cw <- rep(1 / ncol(ht), ncol(ht))
   basic_width <- 20 * ncol(ht)
@@ -217,6 +244,4 @@ as_Workbook.huxtable <- function(ht,
       heights = rh * basic_height * table_height
     )
   }
-
-  return(wb)
 }
