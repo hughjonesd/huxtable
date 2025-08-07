@@ -118,6 +118,22 @@ typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
     opts <- c(opts, sprintf("fill: rgb(%s)", format_color(bg)))
   }
 
+  pads <- c(
+    top    = top_padding(ht)[i, j],
+    right  = right_padding(ht)[i, j],
+    bottom = bottom_padding(ht)[i, j],
+    left   = left_padding(ht)[i, j]
+  )
+  if (!all(is.na(pads))) {
+    if (length(unique(pads)) == 1) {
+      opts <- c(opts, sprintf("inset: %.4gpt", pads[[1]]))
+    } else {
+      pad_parts <- sprintf("%s: %.4gpt", names(pads), pads)
+      pad_parts <- pad_parts[!is.na(pads)]
+      opts <- c(opts, sprintf("inset: (%s)", paste(pad_parts, collapse = ", ")))
+    }
+  }
+
   stroke <- typst_stroke(ht, i, j)
   if (length(stroke)) opts <- c(opts, stroke)
 

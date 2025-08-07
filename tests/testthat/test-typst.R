@@ -7,8 +7,8 @@ test_that("to_typst basic table structure", {
     "#table(\n",
     "  columns: (auto, auto)\n",
     ")[\n",
-    "  cell(align: right)[1] cell(align: right)[3]\n",
-    "  cell(align: right)[2] cell(align: right)[4]\n",
+    "  cell(align: right, inset: 6pt)[1] cell(align: right, inset: 6pt)[3]\n",
+    "  cell(align: right, inset: 6pt)[2] cell(align: right, inset: 6pt)[4]\n",
     "]\n"
   )
   expect_identical(res, expected)
@@ -30,6 +30,11 @@ test_that("to_typst maps properties", {
   font_size(ht)[1, 1] <- 12
   font(ht)[1, 1] <- "Courier"
 
+  left_padding(ht)[1, 3] <- 1
+  right_padding(ht)[1, 3] <- 2
+  top_padding(ht)[1, 3] <- 3
+  bottom_padding(ht)[1, 3] <- 4
+
   res <- to_typst(ht)
 
   expect_match(res, "caption: \\[A cap\\]")
@@ -42,6 +47,7 @@ test_that("to_typst maps properties", {
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
   expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\"\\)\\[1\\]")
+  expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
 })
 
 test_that("print_typst outputs to stdout", {

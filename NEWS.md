@@ -9,6 +9,7 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* Typst output now respects cell padding through the `inset` argument.
 
 # huxtable 5.6.0
 
