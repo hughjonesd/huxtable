@@ -8,7 +8,8 @@
 
 ## Other changes
 
-* Padding helpers' documentation now mentions default values dynamically.
+* Padding helpers are documented on a single help page and mention default values
+  dynamically.
 
 # huxtable 5.6.0
 

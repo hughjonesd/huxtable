@@ -18,8 +18,8 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 
 \subsection{Other changes}{
 \itemize{
-\item Padding helpers’ documentation now mentions default values
-dynamically.
+\item Padding helpers are documented on a single help page and mention
+default values dynamically.
 }
 }
 }
