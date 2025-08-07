@@ -23,10 +23,3 @@ Cell contents are cleaned and formatted before rendering by `clean_contents()`, 
 ## Integration with R Markdown
 When a huxtable is printed in a knitr/Rmarkdown context, `knit_print.huxtable()` is invoked.  It detects the desired output format (`latex`, `html`, `rtf`, etc.) via `guess_knitr_output_format()` and dispatches to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.).  For LaTeX and HTML, the returned markup is passed to knitr as-is, possibly with additional dependencies for LaTeX packages【F:R/knitr.R†L18-L60】.
 
-## Potential improvements and subtasks
-* **Clarify property management** – consolidate property get/set utilities into a unified module and document the mapping between attributes and helper functions to reduce duplication and ease onboarding.
-* **Introduce a rendering abstraction** – create an intermediate representation of a huxtable (layout + styles) that can be serialized to HTML, LaTeX, or other formats, reducing duplication in `to_html()` and `to_latex()`.
-* **Reorganize source files** – group R files by module (creation, properties, output, utilities) or use subdirectories to make navigation easier.
-* **Centralize option handling** – encapsulate option defaults and runtime configuration into a dedicated configuration object or module instead of storing state directly in `huxtable_env`.
-* **Expand developer documentation** – extend this design document or create vignette(s) detailing internal workflows to assist contributors.
-
