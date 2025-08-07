@@ -9,7 +9,8 @@
 #'
 #' @details
 #' knitr calls [knitr::knit_print()] on objects when they are printed in a knitr (or RMarkdown) document.
-#' The method for `huxtable` objects guesses the appropriate output format and
+#' The method for `huxtable` objects guesses the appropriate output format
+#' (including Typst documents when using the `typst` package) and
 #' prints itself out appropriately. You can override the output format by setting
 #' `options("huxtable.knitr_output_format")`.
 #'
@@ -26,11 +27,12 @@ knit_print.huxtable <- function(x, options, ...) {
     md = "to_md",
     screen = "to_screen",
     rtf = "to_rtf",
+    typst = "to_typst",
     { # default
       warning(glue::glue(
         'Unrecognized output format "{of}". Using `to_screen` to print huxtables.\n',
         'Set options("huxtable.knitr_output_format") manually to ',
-        '"latex", "html", "rtf", "docx", "pptx", "md" or "screen".'
+        '"latex", "html", "rtf", "docx", "pptx", "md", "typst" or "screen".'
       ))
       "to_screen"
     }
@@ -53,6 +55,7 @@ knit_print.huxtable <- function(x, options, ...) {
     rtf = knitr::raw_output(res),
     pptx = ,
     docx = knitr::knit_print(res),
+    typst = knitr::asis_output(res),
     knitr::asis_output(res)
   )
 
@@ -119,8 +122,8 @@ knit_print.data.frame <- function(x, options, ...) {
 #'
 #' Convenience function which tries to guess the ultimate output from knitr and rmarkdown.
 #'
-#' @return "html", "latex", or something else. If we are not in a knitr document, returns an empty
-#'   string.
+#' @return "html", "latex", "typst", or something else. If we are not in a knitr document,
+#'   returns an empty string.
 #' @export
 #'
 #' @examples
@@ -147,6 +150,7 @@ guess_knitr_output_format <- function() {
   if (of == "tufte_handout") of <- "latex"
   if (of == "tufte_html") of <- "html"
   of <- sub("_.*", "", of)
+  if (grepl("typst", of, ignore.case = TRUE)) of <- "typst"
   if (of == "html4") of <- "html" # bookdown
   if (of %in% c("ioslides", "revealjs", "slidy")) of <- "html"
   if (of %in% c("beamer", "pdf")) of <- "latex"

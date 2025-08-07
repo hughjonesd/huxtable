@@ -594,8 +594,6 @@ set_italic <- function(ht, row, col, value = TRUE) {
 map_italic <- function(ht, row, col, fn) {
   .prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
 }
-
-
 #' Make text larger or smaller
 #'
 #' Font size is in points.

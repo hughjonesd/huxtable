@@ -18,7 +18,8 @@ Print a huxtable within knitr
 }
 \details{
 knitr calls \code{\link[knitr:knit_print]{knitr::knit_print()}} on objects when they are printed in a knitr (or RMarkdown) document.
-The method for \code{huxtable} objects guesses the appropriate output format and
+The method for \code{huxtable} objects guesses the appropriate output format
+(including Typst documents when using the \code{typst} package) and
 prints itself out appropriately. You can override the output format by setting
 \code{options("huxtable.knitr_output_format")}.
 }

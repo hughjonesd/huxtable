@@ -11,7 +11,12 @@ Don't change the API without asking first.
 
 If you write a new function, give it Roxygen documentation. If it's internal,
 use the `@noRd` tag, and keep it simple and developer-focused. Similarly, 
-if you edit an existing internal function, take the chance to document it.
+if you edit an existing internal function, take the chance to document it. 
+
+If you've written user-visible Roxygen, run `devtools::document()`. You can 
+ignore errors due to missing packages ("flextable", "lmtest") unless you're working
+on those particular parts of the system. If you are, then just install the
+missing packages.
 
 Not all packages in Suggests: in the DESCRIPTION file are installed. You
 can install them if you need to. But, if tests break because a suggested
@@ -24,6 +29,8 @@ don't build vignettes when you build the package, by passing the
 
 Style your code with scripts/style.R before preparing a pull request.
 
-If you make user-visible changes, add a note to NEWS.md. Follow the formatting
+If you make important user-visible changes, add an item to NEWS.md. Follow the formatting
 of the existing entries. Run `devtools::document()` afterwards, because the news
-is copied into the help file `?huxtable-news`.
+is copied into the help file `?huxtable-news`. Unimportant changes, like tweaks
+to documentation, or parts of a bigger update which is already mentioned in the 
+same release, don't need a NEWS.md item.
