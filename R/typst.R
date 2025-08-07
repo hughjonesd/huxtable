@@ -82,11 +82,32 @@ typst_table_options <- function(ht, col_w_str) {
     table_opts <- c(table_opts, sprintf("height: %s", h))
   }
 
+  pos <- position(ht)
+  if (!is.na(pos) && pos %in% c("left", "right")) {
+    align <- c(left = "left", right = "right")[pos]
+    table_opts <- c(table_opts, sprintf("align: %s", align))
+  }
+
   lab <- make_label(ht)
   cap_raw <- caption(ht)
   if (!is.na(cap_raw)) {
     cap <- make_caption(ht, lab, "latex")
-    table_opts <- c(table_opts, sprintf("caption: [%s]", cap))
+
+    fig_opts <- c(sprintf("caption: [%s]", cap))
+
+    cp <- caption_pos(ht)
+    if (!is.na(cp)) {
+      vpos <- if (grepl("top", cp)) "top" else "bottom"
+      fig_opts <- c(fig_opts, sprintf("position: %s", vpos))
+    }
+
+    cw <- caption_width(ht)
+    if (!is.na(cw)) {
+      if (is.numeric(cw)) cw <- sprintf("%.3f%%", cw * 100)
+      table_opts <- c(table_opts, sprintf("caption-width: %s", cw))
+    }
+
+    table_opts <- c(table_opts, sprintf("figure: (%s)", paste(fig_opts, collapse = ", ")))
   }
 
   table_opts
@@ -105,7 +126,11 @@ typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
   opts <- c()
   if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
   if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
-  if (!is.na(al)) opts <- c(opts, sprintf("align: %s", al))
+
+  va <- c(top = "top", middle = "center", bottom = "bottom")[valign(ht)[i, j]]
+  if (!is.na(al) || !is.na(va)) {
+    opts <- c(opts, sprintf("align: (%s, %s)", al, va))
+  }
 
   if (!is.na(row_h)) {
     rh <- row_h
@@ -175,10 +200,18 @@ typst_cell_text <- function(ht, i, j, cell_text) {
   if (italic(ht)[i, j]) text_opts <- c(text_opts, "style: \"italic\"")
   if (!is.na(fs <- font_size(ht)[i, j])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
   if (!is.na(f <- font(ht)[i, j])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
+  if (!is.na(tc <- text_color(ht)[i, j])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
+
 
   if (length(text_opts) > 0) {
-    sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
+    text <- sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
   } else {
-    cell_text
+    text <- cell_text
   }
+
+  if (!wrap(ht)[i, j]) {
+    text <- sprintf("#box(breakable: false)[%s]", text)
+  }
+
+  text
 }
