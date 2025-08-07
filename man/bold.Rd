@@ -12,47 +12,49 @@
 \title{Make cell text bold or italic}
 \usage{
 bold(ht)
+
 bold(ht) <- value
+
 set_bold(ht, row, col, value = TRUE)
+
 map_bold(ht, row, col, fn)
 
-bold(ht)
-
 italic(ht)
+
 italic(ht) <- value
+
 set_italic(ht, row, col, value = TRUE)
+
 map_italic(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
+\item{value}{A logical vector or matrix. Set to \code{NA} to reset to the default, which is FALSE.}
+
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
-\item{value}{A logical vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{FALSE}.}
-
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-}
-\value{
-\code{bold()} returns the \code{bold} property.
-\code{set_bold()} returns the modified huxtable.
 }
 \description{
 Make cell text bold or italic
 }
 \examples{
-
-bold(jams) <-  TRUE
+bold(jams) <- TRUE
 bold(jams)
 
 set_bold(jams, FALSE)
-set_bold(jams,
-      2:3, 1, FALSE)
-map_bold(jams,
-      by_rows(FALSE, TRUE))
+set_bold(
+  jams,
+  2:3, 1, FALSE
+)
+map_bold(
+  jams,
+  by_rows(FALSE, TRUE)
+)
+
 }
 \seealso{
 Other formatting functions: 

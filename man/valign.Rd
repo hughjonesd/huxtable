@@ -8,26 +8,23 @@
 \title{Set the vertical alignment of cell content}
 \usage{
 valign(ht)
+
 valign(ht) <- value
-set_valign(ht, row, col, value )
+
+set_valign(ht, row, col, value)
+
 map_valign(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is top.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{"top"}.}
-}
-\value{
-\code{valign()} returns the \code{valign} property.
-\code{set_valign()} returns the modified huxtable.
 }
 \description{
 Allowed values are "top", "middle", "bottom" or \code{NA}.
@@ -37,22 +34,19 @@ Vertical alignment may not work for short text in LaTeX.
 Defining row heights with \code{\link[=row_height]{row_height()}} may help.
 }
 \examples{
-
-valign(jams) <-  "top"
+valign(jams) <- "top"
 valign(jams)
 
-jams2 <- set_valign(jams,
-      "bottom")
+jams2 <- set_valign(jams, "bottom")
 valign(jams2)
 
-jams3 <- set_valign(jams,
-      2:3, 1, "bottom")
+jams3 <- set_valign(jams, 2:3, 1, "bottom")
 valign(jams3)
 
-jams4 <- map_valign(jams,
-      by_rows(
-        "bottom",
-        "top")
-      )
+jams4 <- map_valign(jams, by_rows(
+  "bottom",
+  "top"
+))
 valign(jams4)
+
 }

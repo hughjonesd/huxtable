@@ -8,32 +8,28 @@
 \title{Change how NA values are printed}
 \usage{
 na_string(ht)
+
 na_string(ht) <- value
-set_na_string(ht, row, col, value )
+
+set_na_string(ht, row, col, value)
+
 map_na_string(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is .}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{""}.}
-}
-\value{
-\code{na_string()} returns the \code{na_string} property.
-\code{set_na_string()} returns the modified huxtable.
 }
 \description{
 NA values in the huxtable are printed as the value of \code{na_string}.
 }
 \examples{
-
 jams[3, 2] <- NA
 jams
 set_na_string(jams, "---")

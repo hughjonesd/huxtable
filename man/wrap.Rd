@@ -8,26 +8,23 @@
 \title{Wrap cell content over multiple lines}
 \usage{
 wrap(ht)
+
 wrap(ht) <- value
-set_wrap(ht, row, col, value )
+
+set_wrap(ht, row, col, value)
+
 map_wrap(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A logical vector or matrix. Set to \code{NA} to reset to the default, which is TRUE.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A logical vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{TRUE}.}
-}
-\value{
-\code{wrap()} returns the \code{wrap} property.
-\code{set_wrap()} returns the modified huxtable.
 }
 \description{
 Text wrapping only works when the table \code{\link[=width]{width()}} has been set. In
@@ -35,7 +32,6 @@ particular, if you want to insert newlines in cells, then you should
 set a value for \code{\link[=width]{width()}} and set \code{wrap} to \code{TRUE}.
 }
 \examples{
-
 long_text <- paste(
   rep("Some long text.", 10),
   collapse = " "
