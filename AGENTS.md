@@ -24,6 +24,8 @@ don't build vignettes when you build the package, by passing the
 
 Style your code with scripts/style.R before preparing a pull request.
 
-If you make user-visible changes, add a note to NEWS.md. Follow the formatting
+If you make important user-visible changes, add an item to NEWS.md. Follow the formatting
 of the existing entries. Run `devtools::document()` afterwards, because the news
-is copied into the help file `?huxtable-news`.
+is copied into the help file `?huxtable-news`. Unimportant changes, like tweaks
+to documentation, or parts of a bigger update which is already mentioned in the 
+same release, don't need a NEWS.md item.
