@@ -1,5 +1,3 @@
-
-
 skip_if_not_installed("openxlsx")
 
 
@@ -24,10 +22,10 @@ test_that("Text properties work", {
 
 test_that("Borders work", {
   hx <- huxtable(a = 1:3, b = 4:6)
-  top_border(hx)[1, ]    <- 1
+  top_border(hx)[1, ] <- 1
   bottom_border(hx)[1, ] <- 2
-  left_border(hx)[, 1]   <- 1
-  right_border(hx)[, 2]  <- 1
+  left_border(hx)[, 1] <- 1
+  right_border(hx)[, 2] <- 1
   expect_silent(as_Workbook(hx))
 })
 
@@ -40,9 +38,9 @@ test_that("Widths and alignment work", {
   row_height(hx) <- c(.2, .6, .2)
   height(hx) <- .8
   expect_silent(as_Workbook(hx))
-  align(hx)[1, 1]  <- "right"
+  align(hx)[1, 1] <- "right"
   valign(hx)[1, 2] <- "middle"
-  align(hx)[2, 1]  <- "centre"
+  align(hx)[2, 1] <- "centre"
   expect_silent(as_Workbook(hx))
 })
 
@@ -112,7 +110,8 @@ test_that("Data written in appropriate format", {
   hx <- huxtable(a = 1:2 + 0.5, b = -1:-2 + 0.5, d = letters[1:2], add_colnames = TRUE)
   wb <- as_Workbook(hx)
   expect_error(openxlsx::saveWorkbook(wb, file = "test-xlsx.xlsx", overwrite = TRUE),
-        regexp = NA) # openxlsx may emit messages
+    regexp = NA
+  ) # openxlsx may emit messages
   on.exit(
     if (file.exists("test-xlsx.xlsx")) file.remove("test-xlsx.xlsx")
   )

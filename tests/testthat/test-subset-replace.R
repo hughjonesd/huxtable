@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -28,7 +26,7 @@ test_that("Zero-argument [<-", {
   expect_identical(ht[[3, 2]], 6L)
 
   ht <- hux(a = 1:2, b = 1:2, add_colnames = TRUE)
-  expect_silent(ht[ , ] <- matrix(1:6, 3, 2))
+  expect_silent(ht[, ] <- matrix(1:6, 3, 2))
   expect_identical(ht[[3, 2]], 6L)
 })
 
@@ -122,7 +120,7 @@ test_that("Can delete columns from a huxtable by setting it to `NULL`", {
   # this kind of subsetting doesn't seem to work in earlier Rs
   if (getRversion() >= "3.3.3") {
     ht4 <- hux(a = 1:2, b = 1:2, c = 1:2)
-    expect_silent(ht4[ c("a", "b")] <- NULL)
+    expect_silent(ht4[c("a", "b")] <- NULL)
     expect_equivalent(font(ht4), matrix(NA_character_, 2, 1))
     expect_equivalent(col_width(ht4), NA_real_)
 

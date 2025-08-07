@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -58,7 +56,3 @@ test_that("style_headers et al.", {
   ht <- style_header_cols(ht, bold = TRUE)
   expect_equivalent(bold(ht), matrix(c(TRUE, FALSE), 1, 2))
 })
-
-
-
-

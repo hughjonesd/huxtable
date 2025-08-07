@@ -1,5 +1,3 @@
-
-
 local_edition(2)
 
 
@@ -43,13 +41,13 @@ test_that("split_down tidyselect", {
 
 test_that("split width/height", {
   square <- as_hux(matrix(1:16, 4, 4))
-  col_width(square)  <- c(.2, .3, .3, .2)
+  col_width(square) <- c(.2, .3, .3, .2)
   row_height(square) <- c(.2, .3, .3, .2)
 
   expect_equivalent(
-          split_down(square, after = 2),
-          split_down(square, width = 0.5)
-        )
+    split_down(square, after = 2),
+    split_down(square, width = 0.5)
+  )
   expect_equivalent(
     split_across(square, after = 2),
     split_across(square, height = 0.5)
@@ -86,17 +84,17 @@ test_that("basic restack", {
 
 
 test_that("restack headers", {
-  jams_l <- jams[c(1,2,3,4,4), ]
+  jams_l <- jams[c(1, 2, 3, 4, 4), ]
   expect_silent(wide_jams <- restack_across(jams_l, 3))
   expect_equivalent(
-          as.character(wide_jams[1, ]),
-          rep(c("Type", "Price"), 2)
-        )
+    as.character(wide_jams[1, ]),
+    rep(c("Type", "Price"), 2)
+  )
   expect_equivalent(header_rows(wide_jams), c(TRUE, FALSE, FALSE))
 
   expect_silent(jw2 <- restack_across(jams, 2, headers = FALSE))
   expect_equivalent(
-          as.character(jw2[1, 1:3]),
-          c("Type", "Price", "Raspberry")
-        )
+    as.character(jw2[1, 1:3]),
+    c("Type", "Price", "Raspberry")
+  )
 })

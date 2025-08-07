@@ -1,11 +1,9 @@
-
-
 skip_if_not_installed("knitr")
 
 
 test_that("Can turn on and off printing of data frames", {
   # NB this all may fail if rmarkdown is loaded; rmarkdown defines knit_print.data.frame :-(
-  expect_huxish <- function (dfr, bool) {
+  expect_huxish <- function(dfr, bool) {
     oo <- options(huxtable.knitr_output_format = "screen")
     tmp <- capture.output(knitr::knit_print(dfr))
     expect_identical(any(grepl("Column names", tmp)), bool)
@@ -22,15 +20,16 @@ test_that("Can turn on and off printing of data frames", {
 })
 
 test_that("Can theme data frames", {
-  mytheme <- function (ht) {
+  mytheme <- function(ht) {
     number_format(ht) <- 5
     ht
   }
 
   oo <- options(
-        huxtable.knitr_output_format = "screen",
-        huxtable.knit_print_df = TRUE,
-        huxtable.knit_print_df_theme = mytheme)
+    huxtable.knitr_output_format = "screen",
+    huxtable.knit_print_df = TRUE,
+    huxtable.knit_print_df_theme = mytheme
+  )
   dfr <- data.frame(a = 1:2, b = 1:2)
   tmp <- knitr::knit_print(dfr)
   expect_true(any(grepl("\\.00000", tmp)))

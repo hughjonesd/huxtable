@@ -1,5 +1,3 @@
-
-
 md_hux <- hux(x = c(
   "Ordinary text",
   "*Italic*, **bold**",
@@ -56,5 +54,5 @@ test_that("Compile to PDF", {
   skip_on_cran()
 
   md_hux_w <- set_width(md_hux, 0.5)
-  expect_silent(quick_pdf(md_hux_w[1:7,], file = "quick-markdown.pdf", open = FALSE))
+  expect_silent(quick_pdf(md_hux_w[1:7, ], file = "quick-markdown.pdf", open = FALSE))
 })

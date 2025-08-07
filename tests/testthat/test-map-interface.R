@@ -1,28 +1,27 @@
-
-
 local_edition(2)
 
 
 test_that("Standard map_xxx", {
-
   ht <- huxtable(
-          Type  = c("Strawberry", "Raspberry", "Plum"),
-          Price = c(1.90, 2.10, 1.80),
-          add_colnames = FALSE
-        )
+    Type = c("Strawberry", "Raspberry", "Plum"),
+    Price = c(1.90, 2.10, 1.80),
+    add_colnames = FALSE
+  )
   align(ht) <- "left"
 
-  test_map <- function (map_fn, result, rows = 1:nrow(ht), cols = 1:ncol(ht)) {
+  test_map <- function(map_fn, result, rows = 1:nrow(ht), cols = 1:ncol(ht)) {
     result <- strsplit(result, "")[[1]]
     result <- c("l" = "left", "c" = "center", "r" = "right")[result]
     expect_equivalent(
-            align(map_align(ht, rows, cols, map_fn)),
-            matrix(result, nrow(ht), ncol(ht))
-          )
+      align(map_align(ht, rows, cols, map_fn)),
+      matrix(result, nrow(ht), ncol(ht))
+    )
   }
 
-  test_map(by_cols("centre", "right"),
-       "cccrrr")
+  test_map(
+    by_cols("centre", "right"),
+    "cccrrr"
+  )
   test_map(by_cols("centre", "right"), "cclrrl", 1:2, 1:2)
   test_map(by_cols("right"), "lllrrr", 1:3, 2)
 
@@ -32,7 +31,7 @@ test_that("Standard map_xxx", {
 
   test_map(by_values(Strawberry = "right", Plum = "right", "centre"), "rcrccc")
 
-  f <- function (x) ifelse(x == "Plum", "center", "right")
+  f <- function(x) ifelse(x == "Plum", "center", "right")
   test_map(by_function(f), "rrcrrr")
 
   test_map(by_regex(".*berry" = "right", "\\." = "centre"), "rrlccc")
@@ -42,13 +41,17 @@ test_that("Standard map_xxx", {
 
   ht_2col <- hux(1:3, 4:6)
   expect_equivalent(
-          align(map_align(ht_2col,
-            by_equal_groups(3, c("left", "center", "right"), colwise = TRUE))),
-          matrix(rep(c("left", "center", "right"), 2), 3, 2)
-        )
+    align(map_align(
+      ht_2col,
+      by_equal_groups(3, c("left", "center", "right"), colwise = TRUE)
+    )),
+    matrix(rep(c("left", "center", "right"), 2), 3, 2)
+  )
   expect_equivalent(
-    align(map_align(ht_2col,
-      by_quantiles(c(.1, .9), c("left", "center", "right"), colwise = TRUE))),
+    align(map_align(
+      ht_2col,
+      by_quantiles(c(.1, .9), c("left", "center", "right"), colwise = TRUE)
+    )),
     matrix(rep(c("left", "center", "right"), 2), 3, 2)
   )
 
@@ -56,8 +59,10 @@ test_that("Standard map_xxx", {
 
   skip_if_not_installed("dplyr")
 
-  test_map(by_cases(. == "Plum" ~ "centre", grepl("berry", .) ~ "right"),
-        "rrclll")
+  test_map(
+    by_cases(. == "Plum" ~ "centre", grepl("berry", .) ~ "right"),
+    "rrclll"
+  )
 
   skip_if_not_installed("scales")
 
@@ -97,8 +102,8 @@ test_that("map_all_*", {
   # what happens when borders overlap!
   m <- matrix(c(1, NA, 2, NA, NA, NA, 2, NA, 1), 3, 3)
   ht <- as_huxtable(m)
-  m1 <- ! is.na(m) & m == 1
-  m2 <- ! is.na(m) & m == 2
+  m1 <- !is.na(m) & m == 1
+  m2 <- !is.na(m) & m == 2
 
   ht2 <- map_all_borders(ht, by_ranges(1.5, c(1, 2)))
   expect_true(all(brdr_thickness(left_border(ht2))[m1] == 1))
@@ -111,30 +116,30 @@ test_that("map_all_*", {
   expect_true(all(brdr_thickness(bottom_border(ht2))[m2] == 2))
 
   ht3 <- map_all_border_colors(ht, by_ranges(1.5, c("red", "black")))
-  expect_true(all(left_border_color(ht3)[m1]   == "red"))
-  expect_true(all(right_border_color(ht3)[m1]  == "red"))
-  expect_true(all(top_border_color(ht3)[m1]    == "red"))
+  expect_true(all(left_border_color(ht3)[m1] == "red"))
+  expect_true(all(right_border_color(ht3)[m1] == "red"))
+  expect_true(all(top_border_color(ht3)[m1] == "red"))
   expect_true(all(bottom_border_color(ht3)[m1] == "red"))
-  expect_true(all(left_border_color(ht3)[m2]   == "black"))
-  expect_true(all(right_border_color(ht3)[m2]  == "black"))
-  expect_true(all(top_border_color(ht3)[m2]    == "black"))
+  expect_true(all(left_border_color(ht3)[m2] == "black"))
+  expect_true(all(right_border_color(ht3)[m2] == "black"))
+  expect_true(all(top_border_color(ht3)[m2] == "black"))
   expect_true(all(bottom_border_color(ht3)[m2] == "black"))
 
 
   ht4 <- map_all_border_styles(ht, by_ranges(1.5, c("solid", "double")))
-  expect_true(all(left_border_style(ht4)[m1]   == "solid"))
-  expect_true(all(right_border_style(ht4)[m1]  == "solid"))
-  expect_true(all(top_border_style(ht4)[m1]    == "solid"))
+  expect_true(all(left_border_style(ht4)[m1] == "solid"))
+  expect_true(all(right_border_style(ht4)[m1] == "solid"))
+  expect_true(all(top_border_style(ht4)[m1] == "solid"))
   expect_true(all(bottom_border_style(ht4)[m1] == "solid"))
-  expect_true(all(left_border_style(ht4)[m2]   == "double"))
-  expect_true(all(right_border_style(ht4)[m2]  == "double"))
-  expect_true(all(top_border_style(ht4)[m2]    == "double"))
+  expect_true(all(left_border_style(ht4)[m2] == "double"))
+  expect_true(all(right_border_style(ht4)[m2] == "double"))
+  expect_true(all(top_border_style(ht4)[m2] == "double"))
   expect_true(all(bottom_border_style(ht4)[m2] == "double"))
 
   ht5 <- map_all_borders(ht, 1:3, 1, by_ranges(1.5, c(1, 2)))
-  expect_equivalent(brdr_thickness(left_border(ht5))[1:3, 1],    c(1, 0, 2))
-  expect_equivalent(brdr_thickness(top_border(ht5))[c(1, 3), 1],    c(1, 2))
-  expect_equivalent(brdr_thickness(right_border(ht5))[1:3, 1],   c(1, 0, 2))
+  expect_equivalent(brdr_thickness(left_border(ht5))[1:3, 1], c(1, 0, 2))
+  expect_equivalent(brdr_thickness(top_border(ht5))[c(1, 3), 1], c(1, 2))
+  expect_equivalent(brdr_thickness(right_border(ht5))[1:3, 1], c(1, 0, 2))
   expect_equivalent(brdr_thickness(bottom_border(ht5))[c(1, 3), 1], c(1, 2))
 
   ht <- as_huxtable(matrix(1:10, 5, 2))
@@ -158,8 +163,6 @@ test_that("map_lr/tb_*", {
   expected <- matrix(ifelse(as.matrix(ht) >= 3, "double", "solid"), 3, 2)
   expect_equivalent(left_border_style(ht3), matrix("solid", 3, 2))
   expect_equivalent(right_border_style(ht3), matrix("solid", 3, 2))
-  expect_equivalent(top_border_style(ht3)[c(1, 3),], expected[c(1, 3),])
-  expect_equivalent(bottom_border_style(ht3)[c(1, 3),], expected[c(1, 3),])
-
+  expect_equivalent(top_border_style(ht3)[c(1, 3), ], expected[c(1, 3), ])
+  expect_equivalent(bottom_border_style(ht3)[c(1, 3), ], expected[c(1, 3), ])
 })
-
