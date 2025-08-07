@@ -3,21 +3,18 @@
 \name{print_rtf}
 \alias{print_rtf}
 \alias{to_rtf}
-\alias{to_rtf.huxtable}
 \title{Create RTF representing a huxtable}
 \usage{
 print_rtf(ht, fc_tables = rtf_fc_tables(ht), ...)
 
-to_rtf(ht, ...)
-
-\method{to_rtf}{huxtable}(ht, fc_tables = rtf_fc_tables(ht), ...)
+to_rtf(ht, fc_tables = rtf_fc_tables(ht), ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{fc_tables}{See \code{\link[=rtf_fc_tables]{rtf_fc_tables()}}.}
 
-\item{...}{Arguments to pass to methods.}
+\item{...}{Arguments passed to methods.}
 }
 \value{
 \code{to_rtf} returns a string representing an RTF table. The \code{fc_tables} attribute of the

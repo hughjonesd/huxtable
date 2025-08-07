@@ -2,25 +2,19 @@
 % Please edit documentation in R/dimnames.R
 \name{add_colnames}
 \alias{add_colnames}
-\alias{add_colnames.huxtable}
 \alias{add_rownames}
-\alias{add_rownames.huxtable}
 \title{Add column or row names}
 \usage{
-add_colnames(ht, ...)
+add_colnames(ht, rowname = NULL, ...)
 
-\method{add_colnames}{huxtable}(ht, rowname = NULL, ...)
-
-add_rownames(ht, ...)
-
-\method{add_rownames}{huxtable}(ht, colname = "rownames", preserve_rownames = TRUE, ...)
+add_rownames(ht, colname = "rownames", preserve_rownames = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{...}{Arguments passed to methods.}
-
 \item{rowname}{Optional row name for the new row of column names.}
+
+\item{...}{Arguments passed to methods.}
 
 \item{colname}{Column name for the new column of row names.}
 
@@ -40,10 +34,10 @@ move your rows down by one: what was row 1 will now be row 2, and the column nam
 }
 \examples{
 ht <- huxtable(
-        First  = rnorm(5),
-        Second = rnorm(5),
-        add_rownames = FALSE
-      )
+  First = rnorm(5),
+  Second = rnorm(5),
+  add_rownames = FALSE
+)
 add_rownames(ht)
 add_colnames(ht)
 

@@ -11,7 +11,7 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #'
 #' @param ht A huxtable.
 #' @param fc_tables See [rtf_fc_tables()].
-#' @param ... Arguments to pass to methods.
+#' @param ... Arguments passed to methods.
 #'
 #' @return `to_rtf` returns a string representing an RTF table. The `fc_tables` attribute of the
 #'   returned string will contain the `fc_tables` object that was passed in (or autocreated).
@@ -41,12 +41,7 @@ print_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 #' @examples
 #'
 #' print_rtf(jams)
-to_rtf <- function(ht, ...) UseMethod("to_rtf")
-
-
-#' @export
-#' @rdname to_rtf
-to_rtf.huxtable <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
+to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   # See http://www.biblioscape.com/rtf15_spec.htm, section "Table Definitions"
   # and http://www.pindari.com/rtf3.html
   # the O"Reilly guide is also very helpful

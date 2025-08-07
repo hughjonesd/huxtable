@@ -10,7 +10,7 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #' These functions print or return an HTML table.
 #'
 #' @param ht A huxtable.
-#' @param ... Arguments to pass to methods. Not currently used.
+#' @param ... Arguments passed to methods. Not currently used.
 #'
 #' @return `to_html` returns an HTML string. `print_html` prints the string and returns `NULL`.
 #' @export
@@ -20,8 +20,6 @@ print_html <- function(ht, ...) cat(to_html(ht, ...))
 #' @examples
 #' ht <- hux(a = 1:3, b = letters[1:3])
 #' to_html(ht)
-to_html <- function(ht, ...) UseMethod("to_html")
-
 
 #' @export
 #'
@@ -36,7 +34,7 @@ print_notebook <- function(ht, ...) {
 
 #' @export
 #' @rdname to_html
-to_html.huxtable <- function(ht, ...) {
+to_html <- function(ht, ...) {
   check_positive_dims(ht)
 
   ## TABLE START ----------

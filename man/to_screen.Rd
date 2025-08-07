@@ -3,14 +3,11 @@
 \name{print_screen}
 \alias{print_screen}
 \alias{to_screen}
-\alias{to_screen.huxtable}
 \title{Print a huxtable on screen}
 \usage{
 print_screen(ht, ...)
 
-to_screen(ht, ...)
-
-\method{to_screen}{huxtable}(
+to_screen(
   ht,
   min_width = ceiling(getOption("width")/6),
   max_width = getOption("width", Inf),
@@ -57,8 +54,10 @@ Cell padding, widths and heights are not shown, nor are border styles.
 \examples{
 bottom_border(jams)[1, 1:2] <- 1
 bold(jams)[1, 1:2] <- TRUE
-jams <- map_text_color(jams,
-      by_regex("berry" = "red"))
+jams <- map_text_color(
+  jams,
+  by_regex("berry" = "red")
+)
 
 print_screen(jams)
 }

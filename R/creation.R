@@ -153,7 +153,12 @@ tribble_hux <- function(...,
 #'   iris_grp <- dplyr::group_by(iris[c(1:4, 51:54, 101:104), ], Species)
 #'   as_hux(iris_grp, groups_to_headers = TRUE)
 #' }
-as_huxtable <- function(x, ...) UseMethod("as_huxtable")
+as_huxtable <- function(x, ...) {
+  if (inherits(x, "huxtable")) {
+    return(x)
+  }
+  UseMethod("as_huxtable")
+}
 
 
 #' @export
@@ -211,10 +216,6 @@ as_huxtable.default <- function(x,
   x <- set_attr_dimnames(x)
   x
 }
-
-
-#' @export
-as_huxtable.huxtable <- function(x, ...) x
 
 
 #' @export

@@ -34,12 +34,7 @@
 #' add_colnames(add_rownames(ht, ""))
 #'
 #' @export
-add_colnames <- function(ht, ...) UseMethod("add_colnames")
-
-
-#' @export
-#' @rdname add_colnames
-add_colnames.huxtable <- function(ht, rowname = NULL, ...) {
+add_colnames <- function(ht, rowname = NULL, ...) {
   if (!missing(rowname)) assert_that(is.null(rowname) || is.string(rowname))
 
   dateish_cols <- which(sapply(ht, function(x) class(x)[1] %in% c("Date", "POSIXct", "POSIXlt")))
@@ -61,12 +56,7 @@ add_colnames.huxtable <- function(ht, rowname = NULL, ...) {
 
 #' @export
 #' @rdname add_colnames
-add_rownames <- function(ht, ...) UseMethod("add_rownames")
-
-
-#' @export
-#' @rdname add_colnames
-add_rownames.huxtable <- function(ht, colname = "rownames", preserve_rownames = TRUE, ...) {
+add_rownames <- function(ht, colname = "rownames", preserve_rownames = TRUE, ...) {
   assert_that(is.string(colname))
   ht <- cbind(rownames(ht), ht, copy_cell_props = FALSE)
   number_format(ht)[, 1] <- NA

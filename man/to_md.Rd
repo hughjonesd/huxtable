@@ -3,14 +3,11 @@
 \name{print_md}
 \alias{print_md}
 \alias{to_md}
-\alias{to_md.huxtable}
 \title{Create Markdown representing a huxtable}
 \usage{
 print_md(ht, ...)
 
-to_md(ht, ...)
-
-\method{to_md}{huxtable}(ht, header = TRUE, min_width = getOption("width")/4, max_width = 80, ...)
+to_md(ht, header = TRUE, min_width = getOption("width")/4, max_width = 80, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}

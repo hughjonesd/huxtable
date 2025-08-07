@@ -27,12 +27,7 @@ print_md <- function(ht, ...) cat(to_md(ht, ...))
 #'
 #' @examples
 #' print_md(jams)
-to_md <- function(ht, ...) UseMethod("to_md")
-
-
-#' @export
-#' @rdname to_md
-to_md.huxtable <- function(ht, header = TRUE, min_width = getOption("width") / 4, max_width = 80, ...) {
+to_md <- function(ht, header = TRUE, min_width = getOption("width") / 4, max_width = 80, ...) {
   assert_that(is.flag(header), is.number(min_width), is.number(max_width))
   if (!check_positive_dims(ht)) {
     return("")

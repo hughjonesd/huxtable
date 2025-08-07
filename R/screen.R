@@ -42,18 +42,13 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' )
 #'
 #' print_screen(jams)
-to_screen <- function(ht, ...) UseMethod("to_screen")
-
-
-#' @export
-#' @rdname to_screen
-to_screen.huxtable <- function(ht,
-                               min_width = ceiling(getOption("width") / 6),
-                               max_width = getOption("width", Inf),
-                               compact = TRUE,
-                               colnames = TRUE,
-                               color = getOption("huxtable.color_screen", default = TRUE),
-                               ...) {
+to_screen <- function(ht,
+                      min_width = ceiling(getOption("width") / 6),
+                      max_width = getOption("width", Inf),
+                      compact = TRUE,
+                      colnames = TRUE,
+                      color = getOption("huxtable.color_screen", default = TRUE),
+                      ...) {
   assert_that(is.number(min_width), is.number(max_width), is.flag(compact), is.flag(colnames), is.flag(color))
   if (color) {
     if (!requireNamespace("crayon", quietly = TRUE)) {

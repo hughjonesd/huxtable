@@ -18,7 +18,7 @@ print_latex <- function(ht, ...) {
 #'
 #' @param ht A huxtable.
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
-#' @param ... Arguments to pass to methods.
+#' @param ... Arguments passed to methods.
 #'
 #' @details
 #' If we appear to be in a rmarkdown document with the Pandoc markdown `+raw_attribute` extension
@@ -37,12 +37,7 @@ print_latex <- function(ht, ...) {
 #'   b = letters[1:3]
 #' )
 #' print_latex(ht)
-to_latex <- function(ht, ...) UseMethod("to_latex")
-
-
-#' @export
-#' @rdname to_latex
-to_latex.huxtable <- function(ht, tabular_only = FALSE, ...) {
+to_latex <- function(ht, tabular_only = FALSE, ...) {
   assert_that(is.flag(tabular_only))
   tabular <- build_tabular(ht)
   commands <- "
