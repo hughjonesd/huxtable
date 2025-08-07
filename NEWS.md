@@ -9,6 +9,8 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* HTML output now uses CSS classes with a shared `<style>` block instead of
+  long inline styles.
 
 # huxtable 5.6.0
 
