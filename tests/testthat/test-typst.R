@@ -7,8 +7,8 @@ test_that("to_typst basic table structure", {
     "#table(\n",
     "  columns: (auto, auto)\n",
     ")[\n",
-    "  cell(align: right)[1] cell(align: right)[3]\n",
-    "  cell(align: right)[2] cell(align: right)[4]\n",
+    "  cell(align: (right, top))[1] cell(align: (right, top))[3]\n",
+    "  cell(align: (right, top))[2] cell(align: (right, top))[4]\n",
     "]\n"
   )
   expect_identical(res, expected)
@@ -55,10 +55,21 @@ test_that("to_typst maps properties", {
   expect_match(res, "height: 25\\.000%")
   expect_match(res, "colspan: 2")
   expect_match(res, "rowspan: 2")
-  expect_match(res, "align: right")
+  expect_match(res, "align: (right, top)", fixed = TRUE)
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
   expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\"\\)\\[1\\]")
+})
+
+test_that("to_typst handles vertical alignment", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  valign(ht)[1, 1] <- "middle"
+  valign(ht)[2, 2] <- "bottom"
+
+  res <- to_typst(ht)
+
+  expect_match(res, "cell(align: (right, center))[1]", fixed = TRUE)
+  expect_match(res, "cell(align: (right, bottom))[4]", fixed = TRUE)
 })
 
 test_that("print_typst outputs to stdout", {

@@ -136,7 +136,11 @@ typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
   opts <- c()
   if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
   if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
-  if (!is.na(al)) opts <- c(opts, sprintf("align: %s", al))
+
+  va <- c(top = "top", middle = "center", bottom = "bottom")[valign(ht)[i, j]]
+  if (!is.na(al) || !is.na(va)) {
+    opts <- c(opts, sprintf("align: (%s, %s)", al, va))
+  }
 
   if (!is.na(row_h)) {
     rh <- row_h
