@@ -161,8 +161,17 @@ typst_cell_text <- function(ht, i, j, cell_text) {
   if (!is.na(f <- font(ht)[i, j])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
 
   if (length(text_opts) > 0) {
-    sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
-  } else {
-    cell_text
+    cell_text <- sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
   }
+
+  rot <- rotation(ht)[i, j]
+  if (!is.na(rot)) {
+    rot <- rot %% 360
+    if (rot != 0) {
+      reflow <- if (rot %% 180 != 0) ", reflow: true" else ""
+      cell_text <- sprintf("#rotate(%.4gdeg%s)[%s]", rot, reflow, cell_text)
+    }
+  }
+
+  cell_text
 }

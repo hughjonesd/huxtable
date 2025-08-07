@@ -44,6 +44,20 @@ test_that("to_typst maps properties", {
   expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\"\\)\\[1\\]")
 })
 
+test_that("to_typst rotates 90 degrees", {
+  ht <- hux("a", add_colnames = FALSE)
+  rotation(ht)[1, 1] <- 90
+  res <- to_typst(ht)
+  expect_match(res, "#rotate\\(90deg, reflow: true\\)\\[a\\]")
+})
+
+test_that("to_typst rotates 270 degrees", {
+  ht <- hux("a", add_colnames = FALSE)
+  rotation(ht)[1, 1] <- 270
+  res <- to_typst(ht)
+  expect_match(res, "#rotate\\(270deg, reflow: true\\)\\[a\\]")
+})
+
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), trimws(to_typst(ht), which = "right"), fixed = TRUE)
