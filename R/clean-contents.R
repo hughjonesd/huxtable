@@ -40,6 +40,10 @@ clean_contents <- function(
 #'
 #' @noRd
 format_numbers_matrix <- function(contents, ht) {
+  if (any(dim(contents) == 0)) {
+    return(contents)
+  }
+
   dims <- dimnames(contents)
   nf <- number_format(ht)
   na_str <- na_string(ht)
@@ -62,6 +66,10 @@ format_numbers_matrix <- function(contents, ht) {
 #'
 #' @noRd
 render_markdown_matrix <- function(contents, ht, output_type) {
+  if (any(dim(contents) == 0)) {
+    return(contents)
+  }
+
   dims <- dimnames(contents)
   md <- markdown(ht)
   esc <- escape_contents(ht)
@@ -86,6 +94,10 @@ render_markdown_matrix <- function(contents, ht, output_type) {
 #'
 #' @noRd
 align_decimals_matrix <- function(contents, ht, output_type) {
+  if (any(dim(contents) == 0)) {
+    return(contents)
+  }
+
   dims <- dimnames(contents)
   al <- align(ht)
 
