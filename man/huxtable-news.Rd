@@ -22,6 +22,8 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 cells) and body rows in \verb{<tbody>} when header rows are at the top of the
 table.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}.
+\item HTML output now uses CSS classes with a shared \verb{<style>} block instead
+of long inline styles.
 
 }
 }
