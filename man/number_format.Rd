@@ -8,26 +8,24 @@
 \title{Set how numbers are formatted in cells}
 \usage{
 number_format(ht)
+
 number_format(ht) <- value
-set_number_format(ht, row, col, value )
+
+set_number_format(ht, row, col, value)
+
 map_number_format(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character or integer vector,
+a list containing a function, or \code{NA}. Note that setting to \code{NA} does not reset to the default.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character or integer vector,
-
-Note that setting to \code{NA} does not reset to the default.}
-}
-\value{
-\code{number_format()} returns the \code{number_format} property.
-\code{set_number_format()} returns the modified huxtable.
 }
 \description{
 If \code{number_format} is:
@@ -57,20 +55,20 @@ are useful shortcuts for common formatting functions.
 }
 \examples{
 ht <- huxtable(
-        number_format = c(
-          "Default",
-          "NA",
-          "2",
-          "\"\%5.2f\"",
-          "Pretty",
-          "Sign"
-        ),
-        a = rep(1000, 6),
-        b = rep(1000.005, 6),
-        c = rep(0.0001, 6),
-        d = rep(-1, 6),
-        e = rep("3.2 (s.e. 1.4)", 6)
-      )
+  number_format = c(
+    "Default",
+    "NA",
+    "2",
+    "\"\%5.2f\"",
+    "Pretty",
+    "Sign"
+  ),
+  a = rep(1000, 6),
+  b = rep(1000.005, 6),
+  c = rep(0.0001, 6),
+  d = rep(-1, 6),
+  e = rep("3.2 (s.e. 1.4)", 6)
+)
 
 number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
@@ -79,8 +77,8 @@ number_format(ht)[5, -1] <- "\%5.2f"
 number_format(ht)[6, -1] <- fmt_pretty()
 
 number_format(ht)[7, -1] <- list(
-        function(x) if (x > 0) "+" else "-"
-      )
+  function(x) if (x > 0) "+" else "-"
+)
 
 right_border(ht) <- 1
 bottom_border(ht)[1, ] <- 1

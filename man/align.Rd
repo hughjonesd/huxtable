@@ -8,26 +8,23 @@
 \title{Set the horizontal alignment of cell content}
 \usage{
 align(ht)
+
 align(ht) <- value
-set_align(ht, row, col, value )
+
+set_align(ht, row, col, value)
+
 map_align(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is left.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{"left"}.}
-}
-\value{
-\code{align()} returns the \code{align} property.
-\code{set_align()} returns the modified huxtable.
 }
 \description{
 Values may be "left", "center", "right", \code{NA} or a single character. If
@@ -59,27 +56,28 @@ numbers <- c(1, 1.5, 1.03, 10, 10.01)
 number_hux <- as_hux(matrix(numbers, 5, 5))
 number_format(number_hux) <- "\%.4g"
 number_format(number_hux)[, 5] <- fmt_pretty(
-                                    decimal.mark = ",",
-                                    big.mark = ""
-                                  )
+  decimal.mark = ",",
+  big.mark = ""
+)
 
-number_hux <- map_align(number_hux,
-      by_cols("left", "center", "right", ".", ","))
+number_hux <- map_align(
+  number_hux,
+  by_cols("left", "center", "right", ".", ",")
+)
 
 alignments <- c(
-                 "left",
-                 "centre",
-                 "right",
-                 "decimal (.)",
-                 "decimal (,)"
-               )
+  "left",
+  "centre",
+  "right",
+  "decimal (.)",
+  "decimal (,)"
+)
 number_hux <- rbind(
-        alignments,
-        number_hux
-      )
+  alignments,
+  number_hux
+)
 
 align(number_hux)
 number_hux
-
 
 }

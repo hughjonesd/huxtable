@@ -8,26 +8,23 @@
 \title{Rotate text within cells}
 \usage{
 rotation(ht)
+
 rotation(ht) <- value
-set_rotation(ht, row, col, value )
+
+set_rotation(ht, row, col, value)
+
 map_rotation(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A numeric vector or matrix. Set to \code{NA} to reset to the default, which is 0.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A numeric vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{0}.}
-}
-\value{
-\code{rotation()} returns the \code{rotation} property.
-\code{set_rotation()} returns the modified huxtable.
 }
 \description{
 Numbers represent degrees to rotate text anti-clockwise:
@@ -43,22 +40,28 @@ You will probably need to set \code{\link[=col_width]{col_width()}} and \code{\l
 to achieve a nice result, in both HTML and LaTeX.
 }
 \examples{
-
-rotation(jams) <-  90
+rotation(jams) <- 90
 rotation(jams)
 
-jams2 <- set_rotation(jams,
-      270)
+jams2 <- set_rotation(
+  jams,
+  270
+)
 rotation(jams2)
 
-jams3 <- set_rotation(jams,
-      2:3, 1, 270)
+jams3 <- set_rotation(
+  jams,
+  2:3, 1, 270
+)
 rotation(jams3)
 
-jams4 <- map_rotation(jams,
-      by_rows(
-        270,
-        90)
-      )
+jams4 <- map_rotation(
+  jams,
+  by_rows(
+    270,
+    90
+  )
+)
 rotation(jams4)
+
 }

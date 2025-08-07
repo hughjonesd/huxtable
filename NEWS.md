@@ -10,6 +10,8 @@
 
 * Padding helpers are documented on a single help page and mention default values
   dynamically.
+* Cell property helpers like alignment, colors, wrapping, etc. are documented with
+  plain Roxygen and default values update automatically.
 
 # huxtable 5.6.0
 
