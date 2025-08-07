@@ -1,13 +1,28 @@
 # Typst printing ------------------------------------------------------------------
 
 #' @export
-#' @noRd
+#'
+#' @rdname to_typst
 print_typst <- function(ht, ...) {
   cat(to_typst(ht, ...))
 }
 
+
+#' Create Typst markup representing a huxtable
+#'
+#' These functions print or return a Typst table.
+#'
+#' @param ht A huxtable.
+#' @param ... Arguments passed to methods. Not currently used.
+#'
+#' @return `to_typst` returns a Typst string. `print_typst` prints the string and returns `NULL`.
 #' @export
-#' @noRd
+#'
+#' @family printing functions
+#'
+#' @examples
+#' ht <- huxtable(a = 1:3, b = letters[1:3])
+#' to_typst(ht)
 to_typst <- function(ht, ...) {
   if (!check_positive_dims(ht)) {
     return("")
