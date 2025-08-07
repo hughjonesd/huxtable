@@ -9,6 +9,7 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* `to_typst()` now wraps header rows and columns in `table.header` so they repeat.
 
 # huxtable 5.6.0
 
