@@ -6,6 +6,10 @@
   AFAIK nobody has ever done this; if I'm wrong, please tell me.
 * Reworked internals, with the halp of OpenAI Codex.
 
+## Other changes
+
+* Padding helpers' documentation now mentions default values dynamically.
+
 # huxtable 5.6.0
 
 ## Breaking changes
