@@ -15,6 +15,12 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item Reworked internals, with the halp of OpenAI Codex.
 }
 }
+
+\subsection{Other changes}{
+\itemize{
+\item Added Typst export via \code{to_typst()} and \code{print_typst()}.
+}
+}
 }
 
 \section{huxtable 5.6.0}{

@@ -6,6 +6,10 @@
   AFAIK nobody has ever done this; if I'm wrong, please tell me.
 * Reworked internals, with the halp of OpenAI Codex.
 
+## Other changes
+
+* Added Typst export via `to_typst()` and `print_typst()`.
+
 # huxtable 5.6.0
 
 ## Breaking changes
@@ -19,7 +23,6 @@
   Thanks @ceresek.
 * You can now add multiple huxtables to the same Excel worksheet in
   `as_Workbook()`. Suggestion by @oobd.
-  
   
 # huxtable 5.5.7
 
