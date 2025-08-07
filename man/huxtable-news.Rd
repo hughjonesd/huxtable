@@ -15,6 +15,13 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item Reworked internals, with the halp of OpenAI Codex.
 }
 }
+
+\subsection{Other changes}{
+\itemize{
+\item Padding helpers are documented on a single help page and mention
+default values dynamically.
+}
+}
 }
 
 \section{huxtable 5.6.0}{
