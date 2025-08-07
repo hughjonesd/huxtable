@@ -2,23 +2,20 @@
 % Please edit documentation in R/html.R
 \name{print_html}
 \alias{print_html}
-\alias{to_html}
 \alias{print_notebook}
-\alias{to_html.huxtable}
+\alias{to_html}
 \title{Create HTML representing a huxtable}
 \usage{
 print_html(ht, ...)
 
-to_html(ht, ...)
-
 print_notebook(ht, ...)
 
-\method{to_html}{huxtable}(ht, ...)
+to_html(ht, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{...}{Arguments to pass to methods. Not currently used.}
+\item{...}{Arguments passed to methods. Not currently used.}
 }
 \value{
 \code{to_html} returns an HTML string. \code{print_html} prints the string and returns \code{NULL}.

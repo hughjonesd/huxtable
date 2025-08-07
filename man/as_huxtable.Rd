@@ -62,23 +62,25 @@ if \code{groups_to_headers} is \code{TRUE}.
 }
 \examples{
 dfr <- data.frame(
-        a = 1:5,
-        b = letters[1:5],
-        stringsAsFactors = FALSE
-      )
+  a = 1:5,
+  b = letters[1:5],
+  stringsAsFactors = FALSE
+)
 as_huxtable(dfr)
 mx <- matrix(letters[1:12], 4, 3)
 as_huxtable(mx, add_colnames = FALSE)
 library(stats)
 tbl <- table(
-        Wool    = warpbreaks$wool,
-        Tension = warpbreaks$tension
-      )
+  Wool    = warpbreaks$wool,
+  Tension = warpbreaks$tension
+)
 as_huxtable(tbl) # adds row and column names by default
 
 # adding rownames:
-as_hux(mtcars[1:3,], add_colnames = TRUE,
-      add_rownames = "Car")
+as_hux(mtcars[1:3, ],
+  add_colnames = TRUE,
+  add_rownames = "Car"
+)
 
 if (requireNamespace("dplyr")) {
   iris_grp <- dplyr::group_by(iris[c(1:4, 51:54, 101:104), ], Species)
