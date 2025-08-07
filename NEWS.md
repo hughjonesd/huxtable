@@ -9,6 +9,7 @@
 ## Other changes
 
 * Added Typst export via `to_typst()` and `print_typst()`.
+* Typst export now handles the `text_color` style.
 
 # huxtable 5.6.0
 

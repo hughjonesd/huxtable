@@ -29,6 +29,7 @@ test_that("to_typst maps properties", {
   italic(ht)[1, 1] <- TRUE
   font_size(ht)[1, 1] <- 12
   font(ht)[1, 1] <- "Courier"
+  text_color(ht)[1, 1] <- "blue"
 
   res <- to_typst(ht)
 
@@ -41,7 +42,7 @@ test_that("to_typst maps properties", {
   expect_match(res, "align: right")
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
-  expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\"\\)\\[1\\]")
+  expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb")
 })
 
 test_that("print_typst outputs to stdout", {

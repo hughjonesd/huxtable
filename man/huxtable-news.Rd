@@ -19,6 +19,7 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \subsection{Other changes}{
 \itemize{
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}.
+\item Typst export now handles the \code{text_color} style.
 }
 }
 }
