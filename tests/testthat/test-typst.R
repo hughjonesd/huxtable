@@ -31,7 +31,7 @@ test_that("to_typst maps properties", {
   font(ht)[1, 1] <- "Courier"
 
   res <- to_typst(ht)
-
+  expect_match(res, "figure: (", fixed = TRUE)
   expect_match(res, "caption: \\[A cap\\]")
   expect_match(res, "columns: \\(0.2fr, 0.3fr, 0.5fr\\)")
   expect_match(res, "width: 50\\.000%")
@@ -60,7 +60,24 @@ test_that("print_typst outputs to stdout", {
   expect_output(print_typst(ht), trimws(to_typst(ht), which = "right"), fixed = TRUE)
 })
 
-test_that("to_typst respects wrap", {
+test_that("to_typst handles caption position", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  caption(ht) <- "cap"
+  caption_pos(ht) <- "top"
+  expect_match(to_typst(ht), "position: top")
+  caption_pos(ht) <- "bottom"
+  expect_match(to_typst(ht), "position: bottom")
+})
+
+test_that("to_typst handles table alignment", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  position(ht) <- "left"
+  expect_match(to_typst(ht), "align: left")
+  position(ht) <- "right"
+  expect_match(to_typst(ht), "align: right")
+})
+
+  test_that("to_typst respects wrap", {
   long <- strrep("a", 100)
   ht <- hux(a = long, add_colnames = FALSE)
   res_wrap <- to_typst(ht)

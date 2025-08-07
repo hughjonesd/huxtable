@@ -82,11 +82,32 @@ typst_table_options <- function(ht, col_w_str) {
     table_opts <- c(table_opts, sprintf("height: %s", h))
   }
 
+  pos <- position(ht)
+  if (!is.na(pos) && pos %in% c("left", "right")) {
+    align <- c(left = "left", right = "right")[pos]
+    table_opts <- c(table_opts, sprintf("align: %s", align))
+  }
+
   lab <- make_label(ht)
   cap_raw <- caption(ht)
   if (!is.na(cap_raw)) {
     cap <- make_caption(ht, lab, "latex")
-    table_opts <- c(table_opts, sprintf("caption: [%s]", cap))
+
+    fig_opts <- c(sprintf("caption: [%s]", cap))
+
+    cp <- caption_pos(ht)
+    if (!is.na(cp)) {
+      vpos <- if (grepl("top", cp)) "top" else "bottom"
+      fig_opts <- c(fig_opts, sprintf("position: %s", vpos))
+    }
+
+    cw <- caption_width(ht)
+    if (!is.na(cw)) {
+      if (is.numeric(cw)) cw <- sprintf("%.3f%%", cw * 100)
+      table_opts <- c(table_opts, sprintf("caption-width: %s", cw))
+    }
+
+    table_opts <- c(table_opts, sprintf("figure: (%s)", paste(fig_opts, collapse = ", ")))
   }
 
   table_opts
