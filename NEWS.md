@@ -6,6 +6,10 @@
   AFAIK nobody has ever done this; if I'm wrong, please tell me.
 * Reworked internals, with the halp of OpenAI Codex.
 
+## Other changes
+
+* Translate padding to Typst inset in typst_cell_options.
+
 # huxtable 5.6.0
 
 ## Breaking changes

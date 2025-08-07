@@ -15,6 +15,12 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item Reworked internals, with the halp of OpenAI Codex.
 }
 }
+
+\subsection{Other changes}{
+\itemize{
+\item Translate padding to Typst inset in typst_cell_options.
+}
+}
 }
 
 \section{huxtable 5.6.0}{
