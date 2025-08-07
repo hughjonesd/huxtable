@@ -8,9 +8,10 @@
 
 ## Other changes
 
+* HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
+  body rows in `<tbody>` when header rows are at the top of the table.
 * Added Typst export via `to_typst()` and `print_typst()`.
-* Typst export now respects vertical alignment via `valign()`.
-* Typst export now respects table `position()`, `caption_pos()`, and `caption_width()`.
+
 
 # huxtable 5.6.0
 
@@ -25,7 +26,8 @@
   Thanks @ceresek.
 * You can now add multiple huxtables to the same Excel worksheet in
   `as_Workbook()`. Suggestion by @oobd.
-  
+
+
 # huxtable 5.5.7
 
 * Bugfix: fix quarto referencing in quarto 1.5

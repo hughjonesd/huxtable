@@ -186,8 +186,14 @@ typst_cell_text <- function(ht, i, j, cell_text) {
   if (!is.na(f <- font(ht)[i, j])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
 
   if (length(text_opts) > 0) {
-    sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
+    text <- sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
   } else {
-    cell_text
+    text <- cell_text
   }
+
+  if (!wrap(ht)[i, j]) {
+    text <- sprintf("#box(breakable: false)[%s]", text)
+  }
+
+  text
 }

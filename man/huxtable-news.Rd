@@ -18,10 +18,11 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 
 \subsection{Other changes}{
 \itemize{
+\item HTML tables now wrap header rows in \verb{<thead>} (using \verb{<th>}
+cells) and body rows in \verb{<tbody>} when header rows are at the top of the
+table.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}.
-\item Typst export now respects vertical alignment via \code{valign()}.
-\item Typst export now respects table \code{position()}, \code{caption_pos()}, and
-\code{caption_width()}.
+
 }
 }
 }
