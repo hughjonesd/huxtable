@@ -8,26 +8,23 @@
 \title{Escape or unescape text in cells}
 \usage{
 escape_contents(ht)
+
 escape_contents(ht) <- value
-set_escape_contents(ht, row, col, value )
+
+set_escape_contents(ht, row, col, value)
+
 map_escape_contents(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A logical vector or matrix. Set to \code{NA} to reset to the default, which is TRUE.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A logical vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{TRUE}.}
-}
-\value{
-\code{escape_contents()} returns the \code{escape_contents} property.
-\code{set_escape_contents()} returns the modified huxtable.
 }
 \description{
 Setting \code{escape_contents} to \code{FALSE} allows you to include raw HTML or
@@ -38,7 +35,6 @@ If \code{\link[=markdown]{markdown()}} is \code{TRUE} for a cell, the \code{esca
 will be ignored.
 }
 \examples{
-
 ht <- huxtable(
   Text   = "x squared",
   Maths  = "$x^2$"

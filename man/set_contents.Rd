@@ -8,27 +8,29 @@
 \title{Set cell contents}
 \usage{
 contents(ht)
+
 contents(ht) <- value
-set_contents(ht, row, col, value )
+
+set_contents(ht, row, col, value)
+
 map_contents(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{Cell contents.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{Cell contents.}
 }
 \description{
 \code{set_contents()} is a convenience function to change the cell contents of a huxtable within
 a dplyr chain. \code{set_contents(ht, x, y, foo)} just calls \code{ht[x, y] <- foo} and returns \code{ht}.
 }
 \examples{
-
 data(jams)
 set_contents(jams, 2, 1, "Blackcurrant")
 map_contents(jams, by_regex(".*berry" = "Snodberry"))

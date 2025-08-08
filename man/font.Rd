@@ -8,26 +8,23 @@
 \title{Set the font for cell text}
 \usage{
 font(ht)
+
 font(ht) <- value
-set_font(ht, row, col, value )
+
+set_font(ht, row, col, value)
+
 map_font(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is NA.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{"NA"}.}
-}
-\value{
-\code{font()} returns the \code{font} property.
-\code{set_font()} returns the modified huxtable.
 }
 \description{
 Set the font for cell text
@@ -44,24 +41,13 @@ names across document formats, see \code{options("huxtable.latex_use_fontspec")}
 in \link{huxtable-options}.
 }
 \examples{
-
-font(jams) <-  "times"
+font(jams) <- "times"
 font(jams)
 
-jams2 <- set_font(jams,
-      "arial")
-font(jams2)
+set_font(jams, "arial")
+set_font(jams, 2:3, 1, "arial")
+map_font(jams, by_rows("arial", "times"))
 
-jams3 <- set_font(jams,
-      2:3, 1, "arial")
-font(jams3)
-
-jams4 <- map_font(jams,
-      by_rows(
-        "arial",
-        "times")
-      )
-font(jams4)
 }
 \seealso{
 Other formatting functions: 
