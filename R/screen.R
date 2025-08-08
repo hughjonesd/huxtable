@@ -77,29 +77,10 @@ to_screen <- function(ht,
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
     borders <- get_visible_borders(ht)
-    border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
     # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
     index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
     index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
-    # borders$vert is row, col+1; $horiz is row+1, col
-    for (i in seq_len(nrow(ht) + 1)) {
-      for (j in seq_len(ncol(ht) + 1)) {
-        if (i <= nrow(ht)) {
-          ir <- index_rows[[i]]
-          # 1: has a line above:
-          border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L * (borders$vert[i, j] > 0)
-          # 2: has a line below:
-          border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L * (borders$vert[i, j] > 0)
-        }
-        if (j <= ncol(ht)) {
-          ic <- index_cols[[j]]
-          # 4: a line on right:
-          border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L * (borders$horiz[i, j] > 0)
-          # 8: a line on left:
-          border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L * (borders$horiz[i, j] > 0)
-        }
-      }
-    }
+    border_mat <- build_border_mat(ht, borders, border_rows, border_cols, index_rows, index_cols, dim(charmat))
 
     pipe_chars <- c(
       NA,
@@ -113,25 +94,16 @@ to_screen <- function(ht,
 
     if (color) {
       bcolors <- collapsed_border_colors(ht)
-      unique_cols <- unique(na.omit(unlist(bcolors)))
-      col_funs <- lapply(unique_cols, crayon::make_style)
-      names(col_funs) <- unique_cols
-      for (i in seq_len(nrow(ht) + 1)) {
-        for (j in seq_len(ncol(ht) + 1)) {
-          if (i <= nrow(ht)) {
-            # colour vertical borders:
-            ir <- index_rows[[i]]
-            color_fun <- col_funs[[bcolors$vert[i, j]]]
-            if (!is.na(bcolors$vert[i, j])) charmat[ir, border_cols[j]] <- color_fun(charmat[ir, border_cols[j]])
-          }
-          if (j <= ncol(ht)) {
-            # horizontal borders:
-            ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1) # rows extend a little bit to cover ends
-            color_fun <- col_funs[[bcolors$horiz[i, j]]]
-            if (!is.na(bcolors$horiz[i, j])) charmat[border_rows[i], ic] <- color_fun(charmat[border_rows[i], ic])
-          }
-        }
-      }
+      charmat <- colorize_borders(
+        charmat,
+        bcolors,
+        border_rows,
+        border_cols,
+        index_rows,
+        index_cols,
+        nrow(ht),
+        ncol(ht)
+      )
     }
 
     if (compact) {
@@ -206,6 +178,69 @@ to_screen <- function(ht,
   result
 }
 
+
+#' Build a border matrix for on-screen tables
+#'
+#' Computes an integer matrix encoding border positions using the visible
+#' borders and mappings from table rows and columns to character matrix
+#' positions.
+#'
+#' @noRd
+build_border_mat <- function(ht, borders, border_rows, border_cols,
+                             index_rows, index_cols, charmat_dim) {
+  border_mat <- matrix(1L, nrow = charmat_dim[1], ncol = charmat_dim[2])
+  for (i in seq_len(nrow(ht) + 1)) {
+    for (j in seq_len(ncol(ht) + 1)) {
+      if (i <= nrow(ht)) {
+        ir <- index_rows[[i]]
+        border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] +
+          1L * (borders$vert[i, j] > 0)
+        border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] +
+          2L * (borders$vert[i, j] > 0)
+      }
+      if (j <= ncol(ht)) {
+        ic <- index_cols[[j]]
+        border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] +
+          4L * (borders$horiz[i, j] > 0)
+        border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] +
+          8L * (borders$horiz[i, j] > 0)
+      }
+    }
+  }
+  border_mat
+}
+
+#' Colour table borders
+#'
+#' Apply colour styles to border characters in `charmat` based on collapsed
+#' border colours.
+#'
+#' @noRd
+colorize_borders <- function(charmat, bcolors, border_rows, border_cols,
+                             index_rows, index_cols, nrow_ht, ncol_ht) {
+  unique_cols <- unique(na.omit(unlist(bcolors)))
+  col_funs <- lapply(unique_cols, crayon::make_style)
+  names(col_funs) <- unique_cols
+  for (i in seq_len(nrow_ht + 1)) {
+    for (j in seq_len(ncol_ht + 1)) {
+      if (i <= nrow_ht) {
+        ir <- index_rows[[i]]
+        color_fun <- col_funs[[bcolors$vert[i, j]]]
+        if (!is.na(bcolors$vert[i, j])) {
+          charmat[ir, border_cols[j]] <- color_fun(charmat[ir, border_cols[j]])
+        }
+      }
+      if (j <= ncol_ht) {
+        ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1)
+        color_fun <- col_funs[[bcolors$horiz[i, j]]]
+        if (!is.na(bcolors$horiz[i, j])) {
+          charmat[border_rows[i], ic] <- color_fun(charmat[border_rows[i], ic])
+        }
+      }
+    }
+  }
+  charmat
+}
 
 # calculate text column widths, wrap huxtable text accordingly, and return a
 # matrix of characters, without borders
