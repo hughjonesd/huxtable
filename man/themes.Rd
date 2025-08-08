@@ -106,20 +106,5 @@ theme_blue(jams)
 theme_orange(jams)
 theme_green(jams)
 theme_mondrian(jams)
-\dontrun{
-  quick_pdf(
-          theme_plain(jams),
-          theme_basic(jams),
-          theme_compact(jams)
-          theme_striped(jams),
-          theme_article(jams),
-          theme_bright(jams),
-          theme_grey(jams),
-          theme_blue(jams),
-          theme_orange(jams),
-          theme_green(jams),
-          theme_mondrian(jams)
-        )
-}
 
 }

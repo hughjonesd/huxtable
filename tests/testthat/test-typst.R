@@ -7,8 +7,25 @@ test_that("to_typst basic table structure", {
     "#table(\n",
     "  columns: (auto, auto)\n",
     ")[\n",
-    "  cell(align: (right, top))[1] cell(align: (right, top))[3]\n",
-    "  cell(align: (right, top))[2] cell(align: (right, top))[4]\n",
+    "  cell(align: (right + top))[1] cell(align: (right + top))[3]\n",
+    "  cell(align: (right + top))[2] cell(align: (right + top))[4]\n",
+    "]\n"
+  )
+  expect_identical(res, expected)
+})
+
+test_that("header rows rendered separately", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  header_rows(ht) <- c(TRUE, FALSE)
+  res <- to_typst(ht)
+  expected <- paste0(
+    "#table(\n",
+    "  columns: (auto, auto)\n",
+    ")[\n",
+    "  table.header[\n",
+    "    cell(align: (right + top))[1] cell(align: (right + top))[3]\n",
+    "  ]\n",
+    "  cell(align: (right + top))[2] cell(align: (right + top))[4]\n",
     "]\n"
   )
   expect_identical(res, expected)
@@ -39,7 +56,7 @@ test_that("to_typst maps properties", {
   expect_match(res, "height: 25\\.000%")
   expect_match(res, "colspan: 2")
   expect_match(res, "rowspan: 2")
-  expect_match(res, "align: (right, top)", fixed = TRUE)
+  expect_match(res, "align: (right + top)", fixed = TRUE)
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
   expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb")
@@ -52,8 +69,8 @@ test_that("to_typst handles vertical alignment", {
 
   res <- to_typst(ht)
 
-  expect_match(res, "cell(align: (right, center))[1]", fixed = TRUE)
-  expect_match(res, "cell(align: (right, bottom))[4]", fixed = TRUE)
+  expect_match(res, "cell(align: (right + horizon))[1]", fixed = TRUE)
+  expect_match(res, "cell(align: (right + bottom))[4]", fixed = TRUE)
 })
 
 test_that("print_typst outputs to stdout", {
@@ -78,7 +95,7 @@ test_that("to_typst handles table alignment", {
   expect_match(to_typst(ht), "align: right")
 })
 
-  test_that("to_typst respects wrap", {
+test_that("to_typst respects wrap", {
   long <- strrep("a", 100)
   ht <- hux(a = long, add_colnames = FALSE)
   res_wrap <- to_typst(ht)

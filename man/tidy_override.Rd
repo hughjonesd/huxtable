@@ -46,14 +46,15 @@ data.
 \code{tidy_replace} allows you to replace the result of \code{tidy(x)} entirely.
 }
 \examples{
-if (! requireNamespace("broom", quietly = TRUE)) {
+if (!requireNamespace("broom", quietly = TRUE)) {
   stop("Please install 'broom' to run this example.")
 }
 
 lm1 <- lm(mpg ~ cyl, mtcars)
 fixed_lm1 <- tidy_override(lm1,
-      p.value = c(.04, .12),
-      glance = list(r.squared = 0.99))
+  p.value = c(.04, .12),
+  glance = list(r.squared = 0.99)
+)
 huxreg(lm1, fixed_lm1)
 
 if (requireNamespace("nnet", quietly = TRUE)) {

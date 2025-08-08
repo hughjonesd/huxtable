@@ -59,27 +59,28 @@ numbers <- c(1, 1.5, 1.03, 10, 10.01)
 number_hux <- as_hux(matrix(numbers, 5, 5))
 number_format(number_hux) <- "\%.4g"
 number_format(number_hux)[, 5] <- fmt_pretty(
-                                    decimal.mark = ",",
-                                    big.mark = ""
-                                  )
+  decimal.mark = ",",
+  big.mark = ""
+)
 
-number_hux <- map_align(number_hux,
-      by_cols("left", "center", "right", ".", ","))
+number_hux <- map_align(
+  number_hux,
+  by_cols("left", "center", "right", ".", ",")
+)
 
 alignments <- c(
-                 "left",
-                 "centre",
-                 "right",
-                 "decimal (.)",
-                 "decimal (,)"
-               )
+  "left",
+  "centre",
+  "right",
+  "decimal (.)",
+  "decimal (,)"
+)
 number_hux <- rbind(
-        alignments,
-        number_hux
-      )
+  alignments,
+  number_hux
+)
 
 align(number_hux)
 number_hux
-
 
 }

@@ -30,17 +30,17 @@ default in the last formula: \code{TRUE ~ default}.
 these in \code{by_cases()}.
 }
 \examples{
-if (! requireNamespace("dplyr")) {
+if (!requireNamespace("dplyr")) {
   stop("Please install the 'dplyr' package to run this example")
 }
 
 ht <- hux(runif(5), letters[1:5])
 
 map_background_color(ht, by_cases(
-        . == "a" ~ "red",
-        . \%in\% letters ~ "green",
-        . < 0.5 ~ "pink"
-      ))
+  . == "a" ~ "red",
+  . \%in\% letters ~ "green",
+  . < 0.5 ~ "pink"
+))
 }
 \seealso{
 \link{mapping-functions}

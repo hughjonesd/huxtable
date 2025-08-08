@@ -53,27 +53,27 @@ values for the hidden cells. Use \code{fill = ""} for this.
 }
 \examples{
 insert_row(jams,
-        c("Gooseberry", 2.15),
-        after = 1
-      )
+  c("Gooseberry", 2.15),
+  after = 1
+)
 
 insert_column(jams,
-        c("Sugar", "50\%", "60\%", "40\%"),
-        after = "Price"
-      )
+  c("Sugar", "50\%", "60\%", "40\%"),
+  after = "Price"
+)
 
 insert_column(jams,
-        "Sugar",
-        after = "Price",
-        fill = "50\%"
-      )
+  "Sugar",
+  after = "Price",
+  fill = "50\%"
+)
 
 # don't forget to use `fill`:
 insert_row(jams,
-        "Jams and prices",
-        fill = "",
-        colspan = 2
-      )
+  "Jams and prices",
+  fill = "",
+  colspan = 2
+)
 }
 \seealso{
 \code{\link[=add_rows]{add_rows()}} and \code{\link[=add_columns]{add_columns()}}, which insert multiple rows/columns at once.

@@ -24,10 +24,14 @@ pre-determined contents.
 }
 \examples{
 ht <- hux(letters[1:3])
-map_background_color(ht,
-      by_values(a = "red", c = "yellow"))
-map_background_color(ht,
-      by_values(a = "red", c = "yellow", "green"))
+map_background_color(
+  ht,
+  by_values(a = "red", c = "yellow")
+)
+map_background_color(
+  ht,
+  by_values(a = "red", c = "yellow", "green")
+)
 }
 \seealso{
 \link{mapping-functions}

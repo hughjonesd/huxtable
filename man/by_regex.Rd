@@ -31,11 +31,11 @@ map_bold(ht, by_regex("at" = TRUE))
 map_bold(ht, by_regex("a.*a" = TRUE))
 
 map_bold(ht, by_regex(
-        "the" = TRUE,
-        .grepl_args = list(
-          ignore.case = TRUE
-        )
-      ))
+  "the" = TRUE,
+  .grepl_args = list(
+    ignore.case = TRUE
+  )
+))
 }
 \seealso{
 \link{mapping-functions}
