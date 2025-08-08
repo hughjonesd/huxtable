@@ -29,15 +29,7 @@ to_typst <- function(ht, ...) {
   }
 
   contents <- clean_contents(ht, output_type = "latex")
-  dc <- display_cells(ht)
-  shadow <- matrix(dc$shadowed, nrow(ht), ncol(ht))
-
-  rs <- rowspan(ht)
-  cs <- colspan(ht)
-  align_h <- real_align(ht)
-  align_v <- valign(ht)
-  align_v[] <- c(top = "top", middle = "horizon", bottom = "bottom")[align_v]
-  align <- ifelse(is.na(align_v), align_h, paste0("(", align_h, " + ", align_v, ")"))
+  shadow <- matrix(display_cells(ht)$shadowed, nrow(ht), ncol(ht))
 
   col_w <- col_width(ht)
   if (is.numeric(col_w)) {
@@ -50,14 +42,15 @@ to_typst <- function(ht, ...) {
   table_start <- paste0("#table(\n  ", paste(table_opts, collapse = ",\n  "), "\n)[\n")
 
   cells <- matrix("", nrow(ht), ncol(ht))
-  row_h <- row_height(ht)
 
-  for (i in seq_len(nrow(ht))) {
-    for (j in seq_len(ncol(ht))) {
-      if (!shadow[i, j]) {
-        cells[i, j] <- typst_cell(
-          ht, i, j, contents[i, j], rs[i, j], cs[i, j], align[i, j],
-          valign[i, j], row_h[i]
+  for (row in seq_len(nrow(ht))) {
+    for (col in seq_len(ncol(ht))) {
+      if (!shadow[row, col]) {
+        cells[row, col] <- typst_cell(
+          ht = ht,
+          row = row,
+          col = col,
+          content = contents[row, col]
         )
       }
     }
@@ -149,44 +142,55 @@ typst_table_options <- function(ht, col_w_str) {
 }
 
 #' @noRd
-typst_cell <- function(ht, i, j, contents, rs, cs, al, val, row_h) {
-  opts <- typst_cell_options(ht, i, j, rs, cs, al, val, row_h)
-  text <- typst_cell_text(ht, i, j, contents)
-  cell_opts <- if (length(opts) > 0) sprintf("(%s)", paste(opts, collapse = ", ")) else ""
+typst_cell <- function(ht, row, col, content) {
+  opts <- typst_cell_options(ht = ht, row = row, col = col)
+  text <- typst_cell_text(ht, row, col, content)
+  cell_opts <- if (length(opts) > 0) {
+    sprintf("(%s)", paste(opts, collapse = ", "))
+  } else {
+    ""
+  }
   sprintf("cell%s[%s]", cell_opts, text)
 }
 
 #' @noRd
-typst_cell_options <- function(ht, i, j, rs, cs, hal, val, row_h) {
+typst_cell_options <- function(ht, row, col) {
   opts <- c()
-  if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
-  if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
-  if (!is.na(val)) {
-    val_map <- c(top = "top", middle = "center", bottom = "bottom")
-    v <- val_map[val]
-    opts <- c(opts, sprintf("align: (%s, %s)", hal, v))
-  } else if (!is.na(hal)) {
-    opts <- c(opts, sprintf("align: %s", hal))
+
+  rowspan <- rowspan(ht)[row, col]
+  colspan <- colspan(ht)[row, col]
+  if (rowspan > 1) opts <- c(opts, sprintf("rowspan: %d", rowspan))
+  if (colspan > 1) opts <- c(opts, sprintf("colspan: %d", colspan))
+
+  horizontal_align <- real_align(ht)[row, col]
+  vertical_align <- valign(ht)[row, col]
+  vertical_align <- c(top = "top", middle = "horizon", bottom = "bottom")[vertical_align]
+  if (!is.na(vertical_align)) {
+    opts <- c(opts, sprintf("align: (%s + %s)", horizontal_align, vertical_align))
+  } else if (!is.na(horizontal_align)) {
+    opts <- c(opts, sprintf("align: %s", horizontal_align))
   }
 
-  if (!is.na(row_h)) {
-    rh <- row_h
+  row_height <- row_height(ht)[row]
+  if (!is.na(row_height)) {
+    rh <- row_height
     if (is.numeric(rh)) rh <- sprintf("%.3f%%", rh * 100)
     opts <- c(opts, sprintf("height: %s", rh))
   }
 
-  bg <- background_color(ht)[i, j]
+  bg <- background_color(ht)[row, col]
   if (!is.na(bg)) {
     opts <- c(opts, sprintf("fill: rgb(%s)", format_color(bg)))
   }
 
   pads <- c(
-    top    = top_padding(ht)[i, j],
-    right  = right_padding(ht)[i, j],
-    bottom = bottom_padding(ht)[i, j],
-    left   = left_padding(ht)[i, j]
+    top    = top_padding(ht)[row, col],
+    right  = right_padding(ht)[row, col],
+    bottom = bottom_padding(ht)[row, col],
+    left   = left_padding(ht)[row, col]
   )
-  if (!all(is.na(pads))) {
+  default_pad <- 6
+  if (!all(is.na(pads)) && any(pads != default_pad)) {
     if (length(unique(pads)) == 1) {
       opts <- c(opts, sprintf("inset: %.4gpt", pads[[1]]))
     } else {
@@ -196,26 +200,26 @@ typst_cell_options <- function(ht, i, j, rs, cs, hal, val, row_h) {
     }
   }
 
-  stroke <- typst_stroke(ht, i, j)
+  stroke <- typst_stroke(ht, row, col)
   if (length(stroke)) opts <- c(opts, stroke)
 
   opts
 }
 
 #' @noRd
-typst_stroke <- function(ht, i, j) {
-  tb <- brdr_thickness(top_border(ht))[i, j]
-  rb <- brdr_thickness(right_border(ht))[i, j]
-  bb <- brdr_thickness(bottom_border(ht))[i, j]
-  lb <- brdr_thickness(left_border(ht))[i, j]
-  tbs <- top_border_style(ht)[i, j]
-  rbs <- right_border_style(ht)[i, j]
-  bbs <- bottom_border_style(ht)[i, j]
-  lbs <- left_border_style(ht)[i, j]
-  tbc <- format_color(top_border_color(ht)[i, j], default = "black")
-  rbc <- format_color(right_border_color(ht)[i, j], default = "black")
-  bbc <- format_color(bottom_border_color(ht)[i, j], default = "black")
-  lbc <- format_color(left_border_color(ht)[i, j], default = "black")
+typst_stroke <- function(ht, row, col) {
+  tb <- brdr_thickness(top_border(ht))[row, col]
+  rb <- brdr_thickness(right_border(ht))[row, col]
+  bb <- brdr_thickness(bottom_border(ht))[row, col]
+  lb <- brdr_thickness(left_border(ht))[row, col]
+  tbs <- top_border_style(ht)[row, col]
+  rbs <- right_border_style(ht)[row, col]
+  bbs <- bottom_border_style(ht)[row, col]
+  lbs <- left_border_style(ht)[row, col]
+  tbc <- format_color(top_border_color(ht)[row, col], default = "black")
+  rbc <- format_color(right_border_color(ht)[row, col], default = "black")
+  bbc <- format_color(bottom_border_color(ht)[row, col], default = "black")
+  lbc <- format_color(left_border_color(ht)[row, col], default = "black")
 
   stroke_parts <- c()
   if (tb > 0) stroke_parts <- c(stroke_parts, sprintf("top: %.4gpt + %s + rgb(%s)", tb, tbs, tbc))
@@ -231,13 +235,13 @@ typst_stroke <- function(ht, i, j) {
 }
 
 #' @noRd
-typst_cell_text <- function(ht, i, j, cell_text) {
+typst_cell_text <- function(ht, row, col, cell_text) {
   text_opts <- c()
-  if (bold(ht)[i, j]) text_opts <- c(text_opts, "weight: \"bold\"")
-  if (italic(ht)[i, j]) text_opts <- c(text_opts, "style: \"italic\"")
-  if (!is.na(fs <- font_size(ht)[i, j])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
-  if (!is.na(f <- font(ht)[i, j])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
-  if (!is.na(tc <- text_color(ht)[i, j])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
+  if (bold(ht)[row, col]) text_opts <- c(text_opts, "weight: \"bold\"")
+  if (italic(ht)[row, col]) text_opts <- c(text_opts, "style: \"italic\"")
+  if (!is.na(fs <- font_size(ht)[row, col])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
+  if (!is.na(f <- font(ht)[row, col])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
+  if (!is.na(tc <- text_color(ht)[row, col])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
 
 
   if (length(text_opts) > 0) {
@@ -246,7 +250,7 @@ typst_cell_text <- function(ht, i, j, cell_text) {
     text <- cell_text
   }
 
-  if (!wrap(ht)[i, j]) {
+  if (!wrap(ht)[row, col]) {
     text <- sprintf("#box(breakable: false)[%s]", text)
   }
 
