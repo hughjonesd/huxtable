@@ -4,6 +4,7 @@
 \alias{print_html}
 \alias{print_notebook}
 \alias{to_html}
+\alias{as_html}
 \title{Create HTML representing a huxtable}
 \usage{
 print_html(ht, ...)
@@ -11,6 +12,8 @@ print_html(ht, ...)
 print_notebook(ht, ...)
 
 to_html(ht, ...)
+
+as_html(ht, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
@@ -18,7 +21,8 @@ to_html(ht, ...)
 \item{...}{Arguments passed to methods. Not currently used.}
 }
 \value{
-\code{to_html} returns an HTML string. \code{print_html} prints the string and returns \code{NULL}.
+\code{to_html} returns an HTML string. \code{as_html} wraps \code{to_html} and returns an
+\code{htmltools::HTML} object. \code{print_html} prints the string and returns \code{NULL}.
 
 \code{print_notebook} prints HTML output suitable for use in an
 RStudio interactive notebook.
@@ -30,6 +34,7 @@ These functions print or return an HTML table. \code{print_html} also prepends a
 \examples{
 ht <- hux(a = 1:3, b = letters[1:3])
 to_html(ht)
+as_html(ht)
 }
 \seealso{
 Other printing functions: 

@@ -16,6 +16,7 @@
 * `knit_print()` now automatically outputs Typst when knitting Typst documents.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
+* Added `as_html()` for obtaining an `htmltools` tag and refactored `to_html()`.
 
 
 # huxtable 5.6.0

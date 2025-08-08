@@ -27,6 +27,8 @@ body rows in \verb{<tbody>} when header rows are at the top of the table.
 documents.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
+\item Added \code{as_html()} for obtaining an \code{htmltools} tag and refactored
+\code{to_html()}.
 }
 }
 }
