@@ -11,8 +11,8 @@
 * HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
   body rows in `<tbody>` when header rows are at the top of the table.
 * Added Typst export via `to_typst()` and `print_typst()`.
-* Typst output now respects cell padding through the `inset` argument.
-* Typst export supports vertical alignment via the `align` option.
+* HTML output now uses CSS classes with a shared `<style>` block instead of
+  long inline styles.
 
 
 # huxtable 5.6.0

@@ -161,9 +161,12 @@ typst_cell_options <- function(ht, i, j, rs, cs, hal, val, row_h) {
   opts <- c()
   if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
   if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
-
-  if (!is.na(al) || !is.na(va)) {
-    opts <- c(opts, sprintf("align: %s", al))
+  if (!is.na(val)) {
+    val_map <- c(top = "top", middle = "center", bottom = "bottom")
+    v <- val_map[val]
+    opts <- c(opts, sprintf("align: (%s, %s)", hal, v))
+  } else if (!is.na(hal)) {
+    opts <- c(opts, sprintf("align: %s", hal))
   }
 
   if (!is.na(row_h)) {
