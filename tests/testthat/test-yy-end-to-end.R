@@ -229,6 +229,39 @@ test_that("quarto files", {
 })
 
 
+quarto_typst_is_valid <- function(qmd, output_dir = "temp-artefacts") {
+  args <- c("render", qmd, "--to", "typst", "--output-dir", output_dir, "--debug")
+  res <- system2("quarto", args)
+  if (!identical(res, 0L)) {
+    return(FALSE)
+  }
+  typ_file <- file.path(dirname(qmd), sub("\\.qmd$", ".typ", basename(qmd)))
+  if (!file.exists(typ_file)) {
+    return(FALSE)
+  }
+  res2 <- system2(
+    "typst",
+    c("compile", typ_file, "/dev/null", "--format", "pdf", "--diagnostic-format", "short")
+  )
+  identical(res2, 0L)
+}
+
+test_that("quarto typst output is valid", {
+  if (Sys.which("quarto") == "") skip("quarto CLI not found")
+  if (Sys.which("typst") == "") skip("typst CLI not found")
+  require_temp_artefacts_dir()
+  on.exit(
+    {
+      for (f in c("quarto-typst.typ", file.path("temp-artefacts", "quarto-typst.pdf"))) {
+        if (file.exists(f)) try(file.remove(f), silent = TRUE)
+      }
+    },
+    add = TRUE
+  )
+  expect_true(quarto_typst_is_valid("quarto-typst.qmd", "temp-artefacts"))
+})
+
+
 test_that("Works with fontspec", {
   skip_on_cran()
   skip_on_os("linux") # no Arial
