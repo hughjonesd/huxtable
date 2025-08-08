@@ -26,15 +26,15 @@
 #' jams
 #' set_col_width(jams, c(.4, .5, .1))
 NULL
-col_width <- function(ht) .prop_get(ht, "col_width")
+col_width <- function(ht) prop_get(ht, "col_width")
 `col_width<-` <- function(ht, value) {
-  .prop_replace(ht, value, "col_width", check_fun = is_numeric_or_character)
+  prop_replace(ht, value, "col_width", check_fun = is_numeric_or_character)
 }
 set_col_width <- function(ht, col, value) {
-  .prop_set_col(ht, col, value, "col_width", check_fun = is_numeric_or_character)
+  prop_set_col(ht, col, value, "col_width", check_fun = is_numeric_or_character)
 }
 map_col_width <- function(ht, col, fn) {
-  .prop_map_col(ht, col, fn, "col_width", check_fun = is_numeric_or_character)
+  prop_map_col(ht, col, fn, "col_width", check_fun = is_numeric_or_character)
 }
 
 
@@ -54,15 +54,15 @@ map_col_width <- function(ht, col, fn) {
 #' @template getset-example
 #' @templateVar attr_val c(.4, .2, .2, .2)
 NULL
-row_height <- function(ht) .prop_get(ht, "row_height")
+row_height <- function(ht) prop_get(ht, "row_height")
 `row_height<-` <- function(ht, value) {
-  .prop_replace(ht, value, "row_height", check_fun = is_numeric_or_character)
+  prop_replace(ht, value, "row_height", check_fun = is_numeric_or_character)
 }
 set_row_height <- function(ht, row, value) {
-  .prop_set_row(ht, row, value, "row_height", check_fun = is_numeric_or_character)
+  prop_set_row(ht, row, value, "row_height", check_fun = is_numeric_or_character)
 }
 map_row_height <- function(ht, row, fn) {
-  .prop_map_row(ht, row, fn, "row_height", check_fun = is_numeric_or_character)
+  prop_map_row(ht, row, fn, "row_height", check_fun = is_numeric_or_character)
 }
 
 
@@ -92,15 +92,15 @@ map_row_height <- function(ht, row, fn) {
 #' )
 #'
 NULL
-header_cols <- function(ht) .prop_get(ht, "header_cols")
+header_cols <- function(ht) prop_get(ht, "header_cols")
 `header_cols<-` <- function(ht, value) {
-  .prop_replace(ht, value, "header_cols", check_fun = is.logical)
+  prop_replace(ht, value, "header_cols", check_fun = is.logical)
 }
 set_header_cols <- function(ht, col, value) {
-  .prop_set_col(ht, col, value, "header_cols", check_fun = is.logical)
+  prop_set_col(ht, col, value, "header_cols", check_fun = is.logical)
 }
 map_header_cols <- function(ht, col, fn) {
-  .prop_map_col(ht, col, fn, "header_cols", check_fun = is.logical)
+  prop_map_col(ht, col, fn, "header_cols", check_fun = is.logical)
 }
 
 
@@ -114,13 +114,13 @@ map_header_cols <- function(ht, col, fn) {
 #' @rdname header_cols
 #' @aliases header_rows header_rows<- set_header_rows
 NULL
-header_rows <- function(ht) .prop_get(ht, "header_rows")
+header_rows <- function(ht) prop_get(ht, "header_rows")
 `header_rows<-` <- function(ht, value) {
-  .prop_replace(ht, value, "header_rows", check_fun = is.logical)
+  prop_replace(ht, value, "header_rows", check_fun = is.logical)
 }
 set_header_rows <- function(ht, row, value) {
-  .prop_set_row(ht, row, value, "header_rows", check_fun = is.logical)
+  prop_set_row(ht, row, value, "header_rows", check_fun = is.logical)
 }
 map_header_rows <- function(ht, row, fn) {
-  .prop_map_row(ht, row, fn, "header_rows", check_fun = is.logical)
+  prop_map_row(ht, row, fn, "header_rows", check_fun = is.logical)
 }
