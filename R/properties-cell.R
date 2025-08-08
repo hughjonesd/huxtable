@@ -2,8 +2,8 @@
 #'
 #' Allowed values are "top", "middle", "bottom" or `NA`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("valign")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("valign")`
 #'
 #' @details
 #' Vertical alignment may not work for short text in LaTeX.
@@ -30,12 +30,12 @@ NULL
 
 #' @rdname valign
 #' @export
-valign <- function(ht) .prop_get(ht, "valign")
+valign <- function(ht) prop_get(ht, "valign")
 
 #' @rdname valign
 #' @export
 `valign<-` <- function(ht, value) {
-  .prop_replace(ht, value, "valign",
+  prop_replace(ht, value, "valign",
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -44,7 +44,7 @@ valign <- function(ht) .prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 set_valign <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "valign",
+  prop_set(ht, row, col, value, "valign",
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -53,7 +53,7 @@ set_valign <- function(ht, row, col, value) {
 #' @rdname valign
 #' @export
 map_valign <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "valign",
+  prop_map(ht, row, col, fn, "valign",
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -73,8 +73,8 @@ check_align_value <- function(x) {
 #' `value` is a single character (e.g. a decimal point), then the cell is
 #' aligned on this character.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("align")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("align")`
 #'
 #' @section Aligning on a decimal point:
 #'
@@ -128,12 +128,12 @@ NULL
 
 #' @rdname align
 #' @export
-align <- function(ht) .prop_get(ht, "align")
+align <- function(ht) prop_get(ht, "align")
 
 #' @rdname align
 #' @export
 `align<-` <- function(ht, value) {
-  .prop_replace(ht, value, "align",
+  prop_replace(ht, value, "align",
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -142,7 +142,7 @@ align <- function(ht) .prop_get(ht, "align")
 #' @rdname align
 #' @export
 set_align <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "align",
+  prop_set(ht, row, col, value, "align",
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -151,7 +151,7 @@ set_align <- function(ht, row, col, value) {
 #' @rdname align
 #' @export
 map_align <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "align",
+  prop_map(ht, row, col, fn, "align",
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -164,7 +164,7 @@ map_align <- function(ht, row, col, fn) {
 #' colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
 #' and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value An integer vector or matrix.
 #'
 #' @inheritSection span-overwrites-shadows Cell content
@@ -186,12 +186,12 @@ NULL
 
 #' @rdname spans
 #' @export
-rowspan <- function(ht) .prop_get(ht, "rowspan")
+rowspan <- function(ht) prop_get(ht, "rowspan")
 
 #' @rdname spans
 #' @export
 `rowspan<-` <- function(ht, value) {
-  .prop_replace(ht, value, "rowspan",
+  prop_replace(ht, value, "rowspan",
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
@@ -209,7 +209,7 @@ rowspan <- function(ht) .prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 set_rowspan <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "rowspan",
+  prop_set(ht, row, col, value, "rowspan",
     check_fun = is.numeric,
     extra = quote({
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
@@ -230,7 +230,7 @@ set_rowspan <- function(ht, row, col, value) {
 #' @rdname spans
 #' @export
 map_rowspan <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "rowspan",
+  prop_map(ht, row, col, fn, "rowspan",
     check_fun = is.numeric,
     extra = quote({
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
@@ -251,12 +251,12 @@ map_rowspan <- function(ht, row, col, fn) {
 
 #' @rdname spans
 #' @export
-colspan <- function(ht) .prop_get(ht, "colspan")
+colspan <- function(ht) prop_get(ht, "colspan")
 
 #' @rdname spans
 #' @export
 `colspan<-` <- function(ht, value) {
-  .prop_replace(ht, value, "colspan",
+  prop_replace(ht, value, "colspan",
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
@@ -274,7 +274,7 @@ colspan <- function(ht) .prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 set_colspan <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "colspan",
+  prop_set(ht, row, col, value, "colspan",
     check_fun = is.numeric,
     extra = quote({
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
@@ -295,7 +295,7 @@ set_colspan <- function(ht, row, col, value) {
 #' @rdname spans
 #' @export
 map_colspan <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "colspan",
+  prop_map(ht, row, col, fn, "colspan",
     check_fun = is.numeric,
     extra = quote({
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
@@ -338,8 +338,8 @@ NULL
 #'
 #' @inherit description-colors description
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("background_color")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("background_color")`
 #'
 #' @details
 #' Transparent colors are not guaranteed to work at present.
@@ -359,24 +359,24 @@ NULL
 
 #' @rdname background_color
 #' @export
-background_color <- function(ht) .prop_get(ht, "background_color")
+background_color <- function(ht) prop_get(ht, "background_color")
 
 #' @rdname background_color
 #' @export
 `background_color<-` <- function(ht, value) {
-  .prop_replace(ht, value, "background_color")
+  prop_replace(ht, value, "background_color")
 }
 
 #' @rdname background_color
 #' @export
 set_background_color <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "background_color")
+  prop_set(ht, row, col, value, "background_color")
 }
 
 #' @rdname background_color
 #' @export
 map_background_color <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "background_color")
+  prop_map(ht, row, col, fn, "background_color")
 }
 
 
@@ -384,8 +384,8 @@ map_background_color <- function(ht, row, col, fn) {
 #'
 #' @inherit description-colors description
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("text_color")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("text_color")`
 #'
 #' @family formatting functions
 #'
@@ -402,24 +402,24 @@ NULL
 
 #' @rdname text_color
 #' @export
-text_color <- function(ht) .prop_get(ht, "text_color")
+text_color <- function(ht) prop_get(ht, "text_color")
 
 #' @rdname text_color
 #' @export
 `text_color<-` <- function(ht, value) {
-  .prop_replace(ht, value, "text_color")
+  prop_replace(ht, value, "text_color")
 }
 
 #' @rdname text_color
 #' @export
 set_text_color <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "text_color")
+  prop_set(ht, row, col, value, "text_color")
 }
 
 #' @rdname text_color
 #' @export
 map_text_color <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "text_color")
+  prop_map(ht, row, col, fn, "text_color")
 }
 
 
@@ -429,8 +429,8 @@ map_text_color <- function(ht, row, col, fn) {
 #' particular, if you want to insert newlines in cells, then you should
 #' set a value for [width()] and set `wrap` to `TRUE`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("wrap")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("wrap")`
 #'
 #' @examples
 #' long_text <- paste(
@@ -450,24 +450,24 @@ NULL
 
 #' @rdname wrap
 #' @export
-wrap <- function(ht) .prop_get(ht, "wrap")
+wrap <- function(ht) prop_get(ht, "wrap")
 
 #' @rdname wrap
 #' @export
 `wrap<-` <- function(ht, value) {
-  .prop_replace(ht, value, "wrap", check_fun = is.logical)
+  prop_replace(ht, value, "wrap", check_fun = is.logical)
 }
 
 #' @rdname wrap
 #' @export
 set_wrap <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
+  prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
 }
 
 #' @rdname wrap
 #' @export
 map_wrap <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
 }
 
 
@@ -476,8 +476,8 @@ map_wrap <- function(ht, row, col, fn) {
 #' Setting `escape_contents` to `FALSE` allows you to include raw HTML or
 #' TeX code in your cells.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("escape_contents")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("escape_contents")`
 #'
 #' @details
 #' If [markdown()] is `TRUE` for a cell, the `escape_contents` property
@@ -500,24 +500,24 @@ NULL
 
 #' @rdname escape_contents
 #' @export
-escape_contents <- function(ht) .prop_get(ht, "escape_contents")
+escape_contents <- function(ht) prop_get(ht, "escape_contents")
 
 #' @rdname escape_contents
 #' @export
 `escape_contents<-` <- function(ht, value) {
-  .prop_replace(ht, value, "escape_contents", check_fun = is.logical)
+  prop_replace(ht, value, "escape_contents", check_fun = is.logical)
 }
 
 #' @rdname escape_contents
 #' @export
 set_escape_contents <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
+  prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
 }
 
 #' @rdname escape_contents
 #' @export
 map_escape_contents <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
 }
 
 
@@ -526,8 +526,8 @@ map_escape_contents <- function(ht, row, col, fn) {
 #' Cells where the markdown property is `TRUE` will be interpreted as
 #' [markdown](https://commonmark.org/help/).
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("markdown")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("markdown")`
 #'
 #' @details
 #' Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
@@ -565,24 +565,24 @@ NULL
 
 #' @rdname markdown
 #' @export
-markdown <- function(ht) .prop_get(ht, "markdown")
+markdown <- function(ht) prop_get(ht, "markdown")
 
 #' @rdname markdown
 #' @export
 `markdown<-` <- function(ht, value) {
-  .prop_replace(ht, value, "markdown", check_fun = is.logical)
+  prop_replace(ht, value, "markdown", check_fun = is.logical)
 }
 
 #' @rdname markdown
 #' @export
 set_markdown <- function(ht, row, col, value = TRUE) {
-  .prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
+  prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
 }
 
 #' @rdname markdown
 #' @export
 map_markdown <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
 }
 
 
@@ -591,8 +591,8 @@ map_markdown <- function(ht, row, col, fn) {
 #'
 #' NA values in the huxtable are printed as the value of `na_string`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("na_string")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("na_string")`
 #'
 #' @family formatting functions
 #'
@@ -606,31 +606,31 @@ NULL
 
 #' @rdname na_string
 #' @export
-na_string <- function(ht) .prop_get(ht, "na_string")
+na_string <- function(ht) prop_get(ht, "na_string")
 
 #' @rdname na_string
 #' @export
 `na_string<-` <- function(ht, value) {
-  .prop_replace(ht, value, "na_string", check_fun = is.character)
+  prop_replace(ht, value, "na_string", check_fun = is.character)
 }
 
 #' @rdname na_string
 #' @export
 set_na_string <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "na_string", check_fun = is.character)
+  prop_set(ht, row, col, value, "na_string", check_fun = is.character)
 }
 
 #' @rdname na_string
 #' @export
 map_na_string <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
+  prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
 }
 
 
 #' Make cell text bold or italic
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("bold")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("bold")`
 #'
 #' @family formatting functions
 #'
@@ -653,53 +653,53 @@ NULL
 
 #' @rdname bold
 #' @export
-bold <- function(ht) .prop_get(ht, "bold")
+bold <- function(ht) prop_get(ht, "bold")
 
 #' @rdname bold
 #' @export
 `bold<-` <- function(ht, value) {
-  .prop_replace(ht, value, "bold", check_fun = is.logical)
+  prop_replace(ht, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @export
 set_bold <- function(ht, row, col, value = TRUE) {
-  .prop_set(ht, row, col, value, "bold", check_fun = is.logical)
+  prop_set(ht, row, col, value, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @export
 map_bold <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @export
-italic <- function(ht) .prop_get(ht, "italic")
+italic <- function(ht) prop_get(ht, "italic")
 
 #' @rdname bold
 #' @export
 `italic<-` <- function(ht, value) {
-  .prop_replace(ht, value, "italic", check_fun = is.logical)
+  prop_replace(ht, value, "italic", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @export
 set_italic <- function(ht, row, col, value = TRUE) {
-  .prop_set(ht, row, col, value, "italic", check_fun = is.logical)
+  prop_set(ht, row, col, value, "italic", check_fun = is.logical)
 }
 
 #' @rdname bold
 #' @export
 map_italic <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
 }
 #' Make text larger or smaller
 #'
 #' Font size is in points.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric vector. `r .rd_default("font_size")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric vector. `r rd_default("font_size")`
 #'
 #' @family formatting functions
 #'
@@ -733,24 +733,24 @@ NULL
 
 #' @rdname font_size
 #' @export
-font_size <- function(ht) .prop_get(ht, "font_size")
+font_size <- function(ht) prop_get(ht, "font_size")
 
 #' @rdname font_size
 #' @export
 `font_size<-` <- function(ht, value) {
-  .prop_replace(ht, value, "font_size", check_fun = is.numeric)
+  prop_replace(ht, value, "font_size", check_fun = is.numeric)
 }
 
 #' @rdname font_size
 #' @export
 set_font_size <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
+  prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
 }
 
 #' @rdname font_size
 #' @export
 map_font_size <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
+  prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
 }
 
 
@@ -762,8 +762,8 @@ map_font_size <- function(ht, row, col, fn) {
 #' * 90 is going upwards, for left-to-right languages;
 #' * 270 is going downwards.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric vector or matrix. `r .rd_default("rotation")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric vector or matrix. `r rd_default("rotation")`
 #'
 #' @details
 #' You will probably need to set [col_width()] and [row_height()] explicitly
@@ -799,12 +799,12 @@ NULL
 
 #' @rdname rotation
 #' @export
-rotation <- function(ht) .prop_get(ht, "rotation")
+rotation <- function(ht) prop_get(ht, "rotation")
 
 #' @rdname rotation
 #' @export
 `rotation<-` <- function(ht, value) {
-  .prop_replace(ht, value, "rotation",
+  prop_replace(ht, value, "rotation",
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -813,7 +813,7 @@ rotation <- function(ht) .prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 set_rotation <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "rotation",
+  prop_set(ht, row, col, value, "rotation",
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -822,7 +822,7 @@ set_rotation <- function(ht, row, col, value) {
 #' @rdname rotation
 #' @export
 map_rotation <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "rotation",
+  prop_map(ht, row, col, fn, "rotation",
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -838,7 +838,7 @@ map_rotation <- function(ht, row, col, fn) {
 #' * `NA`, then numbers will not be formatted (except by conversion with
 #'   `as.character`).
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value A character or integer vector,
 #'   a list containing a function, or `NA`. Note that setting to `NA` does not reset to the default.
 #'
@@ -912,12 +912,12 @@ check_number_format <- function(x) {
 
 #' @rdname number_format
 #' @export
-number_format <- function(ht) .prop_get(ht, "number_format")
+number_format <- function(ht) prop_get(ht, "number_format")
 
 #' @rdname number_format
 #' @export
 `number_format<-` <- function(ht, value) {
-  .prop_replace(ht, value, "number_format",
+  prop_replace(ht, value, "number_format",
     check_fun = check_number_format,
     reset_na = FALSE,
     coerce_mode = FALSE
@@ -927,7 +927,7 @@ number_format <- function(ht) .prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 set_number_format <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "number_format",
+  prop_set(ht, row, col, value, "number_format",
     check_fun = check_number_format,
     reset_na = FALSE
   )
@@ -936,7 +936,7 @@ set_number_format <- function(ht, row, col, value) {
 #' @rdname number_format
 #' @export
 map_number_format <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "number_format",
+  prop_map(ht, row, col, fn, "number_format",
     check_fun = check_number_format,
     reset_na = FALSE
   )
@@ -948,7 +948,7 @@ map_number_format <- function(ht, row, col, fn) {
 #' `set_contents()` is a convenience function to change the cell contents of a huxtable within
 #' a dplyr chain. `set_contents(ht, x, y, foo)` just calls `ht[x, y] <- foo` and returns `ht`.
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value Cell contents.
 #'
 #' @name set_contents
@@ -1007,8 +1007,8 @@ map_contents <- function(ht, row, col, fn) {
 
 #' Set the font for cell text
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("font")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("font")`
 #'
 #' @details
 #' To find out what fonts are on your system, `systemfonts::match_font()`
@@ -1036,22 +1036,22 @@ NULL
 
 #' @rdname font
 #' @export
-font <- function(ht) .prop_get(ht, "font")
+font <- function(ht) prop_get(ht, "font")
 
 #' @rdname font
 #' @export
 `font<-` <- function(ht, value) {
-  .prop_replace(ht, value, "font", check_fun = is.character)
+  prop_replace(ht, value, "font", check_fun = is.character)
 }
 
 #' @rdname font
 #' @export
 set_font <- function(ht, row, col, value) {
-  .prop_set(ht, row, col, value, "font", check_fun = is.character)
+  prop_set(ht, row, col, value, "font", check_fun = is.character)
 }
 
 #' @rdname font
 #' @export
 map_font <- function(ht, row, col, fn) {
-  .prop_map(ht, row, col, fn, "font", check_fun = is.character)
+  prop_map(ht, row, col, fn, "font", check_fun = is.character)
 }

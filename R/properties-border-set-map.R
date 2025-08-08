@@ -1,7 +1,7 @@
 # helper functions -----------------------------------------------------------
 
 
-.border_prop_set <- function(ht, row, col, value, side, prop,
+border_prop_set <- function(ht, row, col, value, side, prop,
                              check_fun = NULL, check_values = NULL) {
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
@@ -12,11 +12,11 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border" && is_brdr(value)) {
-    ht <- .prop_set(ht, row, col, value, prop,
+    ht <- prop_set(ht, row, col, value, prop,
       extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- .prop_set(ht, row, col, value, prop,
+    ht <- prop_set(ht, row, col, value, prop,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }
@@ -24,7 +24,7 @@
   ht
 }
 
-.border_prop_map <- function(ht, row, col, fn, side, prop,
+border_prop_map <- function(ht, row, col, fn, side, prop,
                              check_fun = NULL, check_values = NULL) {
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
@@ -35,11 +35,11 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border") {
-    ht <- .prop_map(ht, row, col, fn, prop,
+    ht <- prop_map(ht, row, col, fn, prop,
       check_fun = is_borderish, extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- .prop_map(ht, row, col, fn, prop,
+    ht <- prop_map(ht, row, col, fn, prop,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }
@@ -47,7 +47,7 @@
   ht
 }
 
-.border_set <- function(ht, row, col, value, side,
+border_set <- function(ht, row, col, value, side,
                         missing_row, missing_col, missing_value) {
   if (missing_row && missing_col && missing_value) {
     row <- seq_len(nrow(ht))
@@ -62,7 +62,7 @@
     if (missing_col) col <- seq_len(ncol(ht))
     if (missing_value) value <- 0.4
   }
-  .border_prop_set(ht, row, col, value, side, "border",
+  border_prop_set(ht, row, col, value, side, "border",
     check_fun = is_borderish
   )
 }
@@ -75,8 +75,8 @@ allowed_border_styles <- c("solid", "double", "dashed", "dotted")
 #'
 #' These functions set borders between cells.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric thickness or a [brdr()] object. `r .rd_default("border")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric thickness or a [brdr()] object. `r rd_default("border")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border(ht)[, 1]` is the same as
@@ -111,7 +111,7 @@ NULL
 #' @export
 #' @order 3
 set_left_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "left",
     missing(row), missing(col), missing(value)
   )
@@ -121,14 +121,14 @@ set_left_border <- function(ht, row, col, value = 0.4) {
 #' @export
 #' @order 4
 map_left_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border")
+  border_prop_map(ht, row, col, fn, "left", "border")
 }
 
 #' @rdname borders
 #' @export
 #' @order 7
 set_right_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "right",
     missing(row), missing(col), missing(value)
   )
@@ -138,14 +138,14 @@ set_right_border <- function(ht, row, col, value = 0.4) {
 #' @export
 #' @order 8
 map_right_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border")
+  border_prop_map(ht, row, col, fn, "right", "border")
 }
 
 #' @rdname borders
 #' @export
 #' @order 11
 set_top_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "top",
     missing(row), missing(col), missing(value)
   )
@@ -155,14 +155,14 @@ set_top_border <- function(ht, row, col, value = 0.4) {
 #' @export
 #' @order 12
 map_top_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border")
+  border_prop_map(ht, row, col, fn, "top", "border")
 }
 
 #' @rdname borders
 #' @export
 #' @order 15
 set_bottom_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "bottom",
     missing(row), missing(col), missing(value)
   )
@@ -172,7 +172,7 @@ set_bottom_border <- function(ht, row, col, value = 0.4) {
 #' @export
 #' @order 16
 map_bottom_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border")
+  border_prop_map(ht, row, col, fn, "bottom", "border")
 }
 
 # color ---------------------------------------------------------------------
@@ -182,7 +182,7 @@ map_bottom_border <- function(ht, row, col, fn) {
 #' These functions set border colors.
 #'
 #' @inheritParams borders
-#' @param value A valid R color, e.g. `"red"`, `"#FF0000"`. `r .rd_default("border_color")`
+#' @param value A valid R color, e.g. `"red"`, `"#FF0000"`. `r rd_default("border_color")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_color(ht)[, 1]` is the same as
@@ -207,7 +207,7 @@ NULL
 #' @export
 #' @order 3
 set_left_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "left", "border_color",
+  border_prop_set(ht, row, col, value, "left", "border_color",
     check_fun = is.character
   )
 }
@@ -216,7 +216,7 @@ set_left_border_color <- function(ht, row, col, value) {
 #' @export
 #' @order 4
 map_left_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border_color",
+  border_prop_map(ht, row, col, fn, "left", "border_color",
     check_fun = is.character
   )
 }
@@ -225,7 +225,7 @@ map_left_border_color <- function(ht, row, col, fn) {
 #' @export
 #' @order 7
 set_right_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "right", "border_color",
+  border_prop_set(ht, row, col, value, "right", "border_color",
     check_fun = is.character
   )
 }
@@ -234,7 +234,7 @@ set_right_border_color <- function(ht, row, col, value) {
 #' @export
 #' @order 8
 map_right_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border_color",
+  border_prop_map(ht, row, col, fn, "right", "border_color",
     check_fun = is.character
   )
 }
@@ -243,7 +243,7 @@ map_right_border_color <- function(ht, row, col, fn) {
 #' @export
 #' @order 11
 set_top_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "top", "border_color",
+  border_prop_set(ht, row, col, value, "top", "border_color",
     check_fun = is.character
   )
 }
@@ -252,7 +252,7 @@ set_top_border_color <- function(ht, row, col, value) {
 #' @export
 #' @order 12
 map_top_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border_color",
+  border_prop_map(ht, row, col, fn, "top", "border_color",
     check_fun = is.character
   )
 }
@@ -261,7 +261,7 @@ map_top_border_color <- function(ht, row, col, fn) {
 #' @export
 #' @order 15
 set_bottom_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "bottom", "border_color",
+  border_prop_set(ht, row, col, value, "bottom", "border_color",
     check_fun = is.character
   )
 }
@@ -270,7 +270,7 @@ set_bottom_border_color <- function(ht, row, col, value) {
 #' @export
 #' @order 16
 map_bottom_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border_color",
+  border_prop_map(ht, row, col, fn, "bottom", "border_color",
     check_fun = is.character
   )
 }
@@ -282,7 +282,7 @@ map_bottom_border_color <- function(ht, row, col, fn) {
 #' These functions set border styles.
 #'
 #' @inheritParams borders
-#' @param value One of `"solid"`, `"double"`, `"dashed"` or `"dotted"`. `r .rd_default("border_style")`
+#' @param value One of `"solid"`, `"double"`, `"dashed"` or `"dotted"`. `r rd_default("border_style")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_style(ht)[, 1]` is the same as
@@ -308,7 +308,7 @@ NULL
 #' @export
 #' @order 3
 set_left_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "left", "border_style",
+  border_prop_set(ht, row, col, value, "left", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -317,7 +317,7 @@ set_left_border_style <- function(ht, row, col, value) {
 #' @export
 #' @order 4
 map_left_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border_style",
+  border_prop_map(ht, row, col, fn, "left", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -326,7 +326,7 @@ map_left_border_style <- function(ht, row, col, fn) {
 #' @export
 #' @order 7
 set_right_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "right", "border_style",
+  border_prop_set(ht, row, col, value, "right", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -335,7 +335,7 @@ set_right_border_style <- function(ht, row, col, value) {
 #' @export
 #' @order 8
 map_right_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border_style",
+  border_prop_map(ht, row, col, fn, "right", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -344,7 +344,7 @@ map_right_border_style <- function(ht, row, col, fn) {
 #' @export
 #' @order 11
 set_top_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "top", "border_style",
+  border_prop_set(ht, row, col, value, "top", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -353,7 +353,7 @@ set_top_border_style <- function(ht, row, col, value) {
 #' @export
 #' @order 12
 map_top_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border_style",
+  border_prop_map(ht, row, col, fn, "top", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -362,7 +362,7 @@ map_top_border_style <- function(ht, row, col, fn) {
 #' @export
 #' @order 15
 set_bottom_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "bottom", "border_style",
+  border_prop_set(ht, row, col, value, "bottom", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
@@ -371,7 +371,7 @@ set_bottom_border_style <- function(ht, row, col, value) {
 #' @export
 #' @order 16
 map_bottom_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border_style",
+  border_prop_map(ht, row, col, fn, "bottom", "border_style",
     check_fun = is.character, check_values = allowed_border_styles
   )
 }
