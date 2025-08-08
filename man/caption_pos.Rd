@@ -7,32 +7,29 @@
 \title{Position the table's caption}
 \usage{
 caption_pos(ht)
+
 caption_pos(ht) <- value
+
 set_caption_pos(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{String: "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter" or "bottomright". Set to \code{NA} to reset to the default, which is
-\code{"top"}.}
+\item{value}{String: "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter" or "bottomright". Set to \code{NA} to reset to the default, which is top.}
 }
 \value{
-\code{caption_pos()} returns the \code{caption_pos} property.
-\code{set_caption_pos()} returns the modified huxtable.
+\code{caption_pos()} returns the \code{caption_pos} property. \code{set_caption_pos()} returns the modified huxtable.
 }
 \description{
 If \code{caption_pos} is "top" or "bottom", then the horizontal position ("left",
-"center" or "right") will be determined by the huxtable"s \code{\link[=position]{position()}}.
+"center" or "right") will be determined by the huxtable's \code{\link[=position]{position()}}.
 }
 \examples{
-
-caption_pos(jams) <-  "topleft"
+caption_pos(jams) <- "topleft"
 caption_pos(jams)
-
 caption(jams) <- "Jam for sale"
 jams
 set_caption_pos(jams, "bottom")
-
 }
 \seealso{
 Other caption properties: 

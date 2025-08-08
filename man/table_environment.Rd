@@ -7,18 +7,18 @@
 \title{Set the "table" environment in LaTeX}
 \usage{
 table_environment(ht)
+
 table_environment(ht) <- value
+
 set_table_environment(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A string. Set to \code{NA} to reset to the default, which is
-\code{"table"}.}
+\item{value}{A string. Set to \code{NA} to reset to the default, which is table.}
 }
 \value{
-\code{table_environment()} returns the \code{table_environment} property.
-\code{set_table_environment()} returns the modified huxtable.
+\code{table_environment()} returns the \code{table_environment} property. \code{set_table_environment()} returns the modified huxtable.
 }
 \description{
 By default this is \code{"table"}.
@@ -32,7 +32,6 @@ If \code{\link[=position]{position()}} is set to \code{"wrapleft"} or \code{"wra
 value is overridden.
 }
 \examples{
-
-table_environment(jams) <-  "table*"
+table_environment(jams) <- "table*"
 table_environment(jams)
 }

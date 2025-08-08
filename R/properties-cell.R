@@ -2,8 +2,8 @@
 #'
 #' Allowed values are "top", "middle", "bottom" or `NA`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("valign")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("valign")`
 #'
 #' @details
 #' Vertical alignment may not work for short text in LaTeX.
@@ -73,8 +73,8 @@ check_align_value <- function(x) {
 #' `value` is a single character (e.g. a decimal point), then the cell is
 #' aligned on this character.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("align")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("align")`
 #'
 #' @section Aligning on a decimal point:
 #'
@@ -164,7 +164,7 @@ map_align <- function(ht, row, col, fn) {
 #' colspan of 2 covers the cell directly to its right. A cell with rowspan of 2
 #' and colspan of 2 covers a 2 x 2 square, hiding three other cells.
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value An integer vector or matrix.
 #'
 #' @inheritSection span-overwrites-shadows Cell content
@@ -338,8 +338,8 @@ NULL
 #'
 #' @inherit description-colors description
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("background_color")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("background_color")`
 #'
 #' @details
 #' Transparent colors are not guaranteed to work at present.
@@ -384,8 +384,8 @@ map_background_color <- function(ht, row, col, fn) {
 #'
 #' @inherit description-colors description
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("text_color")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("text_color")`
 #'
 #' @family formatting functions
 #'
@@ -429,8 +429,8 @@ map_text_color <- function(ht, row, col, fn) {
 #' particular, if you want to insert newlines in cells, then you should
 #' set a value for [width()] and set `wrap` to `TRUE`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("wrap")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("wrap")`
 #'
 #' @examples
 #' long_text <- paste(
@@ -476,8 +476,8 @@ map_wrap <- function(ht, row, col, fn) {
 #' Setting `escape_contents` to `FALSE` allows you to include raw HTML or
 #' TeX code in your cells.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("escape_contents")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("escape_contents")`
 #'
 #' @details
 #' If [markdown()] is `TRUE` for a cell, the `escape_contents` property
@@ -526,8 +526,8 @@ map_escape_contents <- function(ht, row, col, fn) {
 #' Cells where the markdown property is `TRUE` will be interpreted as
 #' [markdown](https://commonmark.org/help/).
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("markdown")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("markdown")`
 #'
 #' @details
 #' Markdown is currently implemented for HTML, Word, Powerpoint, RTF, LaTeX and
@@ -591,8 +591,8 @@ map_markdown <- function(ht, row, col, fn) {
 #'
 #' NA values in the huxtable are printed as the value of `na_string`.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("na_string")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("na_string")`
 #'
 #' @family formatting functions
 #'
@@ -629,8 +629,8 @@ map_na_string <- function(ht, row, col, fn) {
 
 #' Make cell text bold or italic
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A logical vector or matrix. `r .rd_default("bold")`
+#' @inheritParams hux_prop_params
+#' @param value A logical vector or matrix. `r rd_default("bold")`
 #'
 #' @family formatting functions
 #'
@@ -698,8 +698,8 @@ map_italic <- function(ht, row, col, fn) {
 #'
 #' Font size is in points.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric vector. `r .rd_default("font_size")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric vector. `r rd_default("font_size")`
 #'
 #' @family formatting functions
 #'
@@ -762,8 +762,8 @@ map_font_size <- function(ht, row, col, fn) {
 #' * 90 is going upwards, for left-to-right languages;
 #' * 270 is going downwards.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric vector or matrix. `r .rd_default("rotation")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric vector or matrix. `r rd_default("rotation")`
 #'
 #' @details
 #' You will probably need to set [col_width()] and [row_height()] explicitly
@@ -838,7 +838,7 @@ map_rotation <- function(ht, row, col, fn) {
 #' * `NA`, then numbers will not be formatted (except by conversion with
 #'   `as.character`).
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value A character or integer vector,
 #'   a list containing a function, or `NA`. Note that setting to `NA` does not reset to the default.
 #'
@@ -948,7 +948,7 @@ map_number_format <- function(ht, row, col, fn) {
 #' `set_contents()` is a convenience function to change the cell contents of a huxtable within
 #' a dplyr chain. `set_contents(ht, x, y, foo)` just calls `ht[x, y] <- foo` and returns `ht`.
 #'
-#' @inheritParams .hux_prop_params
+#' @inheritParams hux_prop_params
 #' @param value Cell contents.
 #'
 #' @name set_contents
@@ -1007,8 +1007,8 @@ map_contents <- function(ht, row, col, fn) {
 
 #' Set the font for cell text
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A character vector or matrix. `r .rd_default("font")`
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. `r rd_default("font")`
 #'
 #' @details
 #' To find out what fonts are on your system, `systemfonts::match_font()`

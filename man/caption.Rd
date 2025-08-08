@@ -7,18 +7,18 @@
 \title{Set the table caption}
 \usage{
 caption(ht)
+
 caption(ht) <- value
+
 set_caption(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A string. Set to \code{NA} to reset to the default, which is
-\code{"NA"}.}
+\item{value}{A string. Set to \code{NA} to reset to the default, which is NA.}
 }
 \value{
-\code{caption()} returns the \code{caption} property.
-\code{set_caption()} returns the modified huxtable.
+\code{caption()} returns the \code{caption} property. \code{set_caption()} returns the modified huxtable.
 }
 \description{
 By default, captions are displayed above the table. You can change this
@@ -28,14 +28,12 @@ with \code{\link[=caption_pos]{caption_pos()}}.
 Captions are not escaped. See the example for a workaround.
 }
 \examples{
-
 set_caption(jams, "Pots of jam for sale")
 # escape caption characters:
 caption(jams) <- sanitize(
   "Make $$$ with jam",
   type = "latex"
 )
-
 }
 \seealso{
 Other caption properties: 

@@ -7,20 +7,17 @@
 \title{Set the height of table rows}
 \usage{
 row_height(ht)
+
 row_height(ht) <- value
+
 set_row_height(ht, row, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{row}{A row specifier. See \link{rowspecs} for details.}
+\item{value}{Numeric or character vector. Set to \code{NA} to reset to the default, which is NA.}
 
-\item{value}{Numeric or character vector.. Set to \code{NA} to reset to the default,
-which is \code{NA}.}
-}
-\value{
-\code{row_height()} returns the \code{row_height} property.
-\code{set_row_height()} returns the modified huxtable.
+\item{row}{A row specifier. See \link{rowspecs} for details.}
 }
 \description{
 Numeric heights are scaled to 1 and treated as proportions of the table height
@@ -28,9 +25,9 @@ in HTML, or of the text height (\verb{\\\\textheight}) in LaTeX. Character
 row heights must be valid CSS or LaTeX dimensions.
 }
 \examples{
-
-row_height(jams) <-  c(.4, .2, .2, .2)
+row_height(jams) <- c(.4, .2, .2, .2)
 row_height(jams)
+
 }
 \seealso{
 Other table measurements: 

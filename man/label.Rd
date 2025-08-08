@@ -7,18 +7,18 @@
 \title{Set a table label for external referencing}
 \usage{
 label(ht)
+
 label(ht) <- value
+
 set_label(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A string. Set to \code{NA} to reset to the default, which is
-\code{"NA"}.}
+\item{value}{A string. Set to \code{NA} to reset to the default, which is NA.}
 }
 \value{
-\code{label()} returns the \code{label} property.
-\code{set_label()} returns the modified huxtable.
+\code{label()} returns the \code{label} property. \code{set_label()} returns the modified huxtable.
 }
 \description{
 The label is used as the table's label in LaTeX, and as the "id" property
@@ -38,8 +38,7 @@ automatically. To turn off this behaviour, set
 \code{options(huxtable.bookdown = FALSE)}.
 }
 \examples{
-
-label(jams) <-  "tab:mytable"
+label(jams) <- "tab:mytable"
 label(jams)
 }
 \seealso{

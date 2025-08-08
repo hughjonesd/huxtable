@@ -7,18 +7,18 @@
 \title{Set the table width}
 \usage{
 width(ht)
+
 width(ht) <- value
+
 set_width(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A number or string. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\item{value}{A number or string. Set to \code{NA} to reset to the default, which is NA.}
 }
 \value{
-\code{width()} returns the \code{width} property.
-\code{set_width()} returns the modified huxtable.
+\code{width()} returns the \code{width} property. \code{set_width()} returns the modified huxtable.
 }
 \description{
 \code{width()} sets the width of the entire table, while \code{\link[=col_width]{col_width()}} sets the
@@ -27,8 +27,7 @@ f the surrounding block width (HTML) or text width (LaTeX). A character width
 must be a valid CSS or LaTeX dimension.
 }
 \examples{
-
-width(jams) <-  0.8
+width(jams) <- 0.8
 width(jams)
 }
 \seealso{

@@ -3,8 +3,8 @@
 #' Functions to get or set the space around cell borders. Top, bottom, left and
 #' right padding all default to 6 points.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value Numeric: padding width/height in points. `r .rd_default("left_padding")`
+#' @inheritParams hux_prop_params
+#' @param value Numeric: padding width/height in points. `r rd_default("left_padding")`
 #' @seealso [set-multiple], [set-outer].
 #' @examples
 #' left_padding(jams) <- 2

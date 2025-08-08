@@ -75,8 +75,8 @@ allowed_border_styles <- c("solid", "double", "dashed", "dotted")
 #'
 #' These functions set borders between cells.
 #'
-#' @inheritParams .hux_prop_params
-#' @param value A numeric thickness or a [brdr()] object. `r .rd_default("border")`
+#' @inheritParams hux_prop_params
+#' @param value A numeric thickness or a [brdr()] object. `r rd_default("border")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border(ht)[, 1]` is the same as
@@ -182,7 +182,7 @@ map_bottom_border <- function(ht, row, col, fn) {
 #' These functions set border colors.
 #'
 #' @inheritParams borders
-#' @param value A valid R color, e.g. `"red"`, `"#FF0000"`. `r .rd_default("border_color")`
+#' @param value A valid R color, e.g. `"red"`, `"#FF0000"`. `r rd_default("border_color")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_color(ht)[, 1]` is the same as
@@ -282,7 +282,7 @@ map_bottom_border_color <- function(ht, row, col, fn) {
 #' These functions set border styles.
 #'
 #' @inheritParams borders
-#' @param value One of `"solid"`, `"double"`, `"dashed"` or `"dotted"`. `r .rd_default("border_style")`
+#' @param value One of `"solid"`, `"double"`, `"dashed"` or `"dotted"`. `r rd_default("border_style")`
 #'
 #' @details
 #' Borders are always "collapsed": `right_border_style(ht)[, 1]` is the same as

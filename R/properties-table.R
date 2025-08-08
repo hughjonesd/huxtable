@@ -3,25 +3,29 @@
 #' Table position may be "left", "right" or "center". If you want text to
 #' wrap around the table, use "wrapleft" or "wrapright".
 #'
-#' @template getset-table
-#' @templateVar attr_name position
-#' @templateVar attr_desc Table position
-#' @templateVar value_param_desc
-#' String. "left", "center", "right", "wrapleft" or "wrapright".
+#' @inheritParams hux_prop_params
+#' @param value String. "left", "center", "right", "wrapleft" or "wrapright". `r rd_default("position")`
 #' @details
 #' `"wrapleft"` and `"wrapright"` position the table to the left or right, and allow text to
 #' wrap around the table.
 #'
-#' @template getset-example
-#' @templateVar attr_val "right"
-#' @examples
+#' @return `position()` returns the `position` property. `set_position()` returns the modified huxtable.
 #'
+#' @examples
+#' position(jams) <- "right"
+#' position(jams)
 #' set_position(jams, "left")
 #' set_position(jams, "right")
 #' set_position(jams, "center")
-#'
+#' @name position
 NULL
+
+#' @rdname position
+#' @export
 position <- function(ht) .prop_get(ht, "position")
+
+#' @rdname position
+#' @export
 `position<-` <- function(ht, value) {
   .prop_replace(ht, value, "position",
     check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
@@ -30,16 +34,11 @@ position <- function(ht) .prop_get(ht, "position")
     })
   )
 }
+
+#' @rdname position
+#' @export
 set_position <- function(ht, value) {
   .prop_set_table(ht, value, "position",
-    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-    extra = quote({
-      value[value == "centre"] <- "center"
-    })
-  )
-}
-map_position <- function(ht, fn) {
-  .prop_map_table(ht, fn, "position",
     check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
     extra = quote({
       value[value == "centre"] <- "center"
@@ -51,26 +50,28 @@ map_position <- function(ht, fn) {
 #' Position the table's caption
 #'
 #' If `caption_pos` is "top" or "bottom", then the horizontal position ("left",
-#' "center" or "right") will be determined by the huxtable"s [position()].
+#' "center" or "right") will be determined by the huxtable's [position()].
 #'
-#' @template getset-table
-#' @templateVar attr_name caption_pos
-#' @templateVar attr_desc Caption position
-#' @templateVar value_param_desc
-#' String: "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter" or "bottomright".
-#'
-#' @template getset-example
-#' @templateVar attr_val "topleft"
-#'
+#' @inheritParams hux_prop_params
+#' @param value String: "top", "bottom", "topleft", "topcenter", "topright", "bottomleft", "bottomcenter" or "bottomright". `r rd_default("caption_pos")`
+#' @return `caption_pos()` returns the `caption_pos` property. `set_caption_pos()` returns the modified huxtable.
 #' @family caption properties
-#' @examples
 #'
+#' @examples
+#' caption_pos(jams) <- "topleft"
+#' caption_pos(jams)
 #' caption(jams) <- "Jam for sale"
 #' jams
 #' set_caption_pos(jams, "bottom")
-#'
+#' @name caption_pos
 NULL
+
+#' @rdname caption_pos
+#' @export
 caption_pos <- function(ht) .prop_get(ht, "caption_pos")
+
+#' @rdname caption_pos
+#' @export
 `caption_pos<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption_pos",
     check_values = c(
@@ -83,6 +84,9 @@ caption_pos <- function(ht) .prop_get(ht, "caption_pos")
     })
   )
 }
+
+#' @rdname caption_pos
+#' @export
 set_caption_pos <- function(ht, value) {
   .prop_set_table(ht, value, "caption_pos",
     check_values = c(
@@ -95,19 +99,6 @@ set_caption_pos <- function(ht, value) {
     })
   )
 }
-map_caption_pos <- function(ht, fn) {
-  .prop_map_table(ht, fn, "caption_pos",
-    check_values = c(
-      "top", "bottom", "topleft", "topcenter", "topcentre",
-      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
-    ),
-    extra = quote({
-      value[value == "topcentre"] <- "topcenter"
-      value[value == "bottomcentre"] <- "bottomcenter"
-    })
-  )
-}
-
 
 
 #' Set the width of the table caption
@@ -117,25 +108,33 @@ map_caption_pos <- function(ht, fn) {
 #' LaTeX or CSS dimension. The default, `NA`, makes the caption the same width
 #' as the table.
 #'
-#' @template getset-table
-#' @templateVar attr_name caption_width
-#' @templateVar value_param_desc Number or string.
-#'
+#' @inheritParams hux_prop_params
+#' @param value Number or string. `r rd_default("caption_width")`
+#' @return `caption_width()` returns the `caption_width` property. `set_caption_width()` returns the modified huxtable.
 #' @family caption properties
 #'
-#' @template getset-example
-#' @templateVar attr_val 0.5
+#' @examples
+#' caption_width(jams) <- 0.5
+#' caption_width(jams)
+#' @name caption_width
 NULL
+
+#' @rdname caption_width
+#' @export
 caption_width <- function(ht) .prop_get(ht, "caption_width")
+
+#' @rdname caption_width
+#' @export
 `caption_width<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption_width", check_fun = is_numeric_or_character)
 }
+
+#' @rdname caption_width
+#' @export
 set_caption_width <- function(ht, value) {
   .prop_set_table(ht, value, "caption_width", check_fun = is_numeric_or_character)
 }
-map_caption_width <- function(ht, fn) {
-  .prop_map_table(ht, fn, "caption_width", check_fun = is_numeric_or_character)
-}
+
 
 
 #' Set the table width
@@ -145,120 +144,155 @@ map_caption_width <- function(ht, fn) {
 #' f the surrounding block width (HTML) or text width (LaTeX). A character width
 #' must be a valid CSS or LaTeX dimension.
 #'
-#' @template getset-table
-#' @templateVar attr_name width
-#' @templateVar value_param_desc A number or string.
-#'
-#' @template getset-example
-#' @templateVar attr_val 0.8
+#' @inheritParams hux_prop_params
+#' @param value A number or string. `r rd_default("width")`
+#' @return `width()` returns the `width` property. `set_width()` returns the modified huxtable.
 #' @family table measurements
+#'
+#' @examples
+#' width(jams) <- 0.8
+#' width(jams)
+#' @name width
 NULL
+
+#' @rdname width
+#' @export
 width <- function(ht) .prop_get(ht, "width")
+
+#' @rdname width
+#' @export
 `width<-` <- function(ht, value) {
   .prop_replace(ht, value, "width", check_fun = is_numeric_or_character)
 }
+
+#' @rdname width
+#' @export
 set_width <- function(ht, value) {
   .prop_set_table(ht, value, "width", check_fun = is_numeric_or_character)
 }
-map_width <- function(ht, fn) {
-  .prop_map_table(ht, fn, "width", check_fun = is_numeric_or_character)
-}
+
 
 
 #' Set the table height
 #'
-#' `height()`` sets the height of the entire table, while [row_height()] sets the
+#' `height()` sets the height of the entire table, while [row_height()] sets the
 #' height of individual rows. A numeric height is treated as a proportion of
 #' the containing block (HTML) or `\\textheight` (LaTeX). A character height
 #' must be a valid CSS or LaTeX dimension.
 #'
-#' @template getset-table
-#' @templateVar attr_name height
-#' @templateVar value_param_desc A number or string.
-#'
+#' @inheritParams hux_prop_params
+#' @param value A number or string. `r rd_default("height")`
+#' @return `height()` returns the `height` property. `set_height()` returns the modified huxtable.
 #' @family table measurements
 #'
-#' @template getset-example
-#' @templateVar attr_val 0.4
+#' @examples
+#' height(jams) <- 0.4
+#' height(jams)
+#' @name height
 NULL
+
+#' @rdname height
+#' @export
 height <- function(ht) .prop_get(ht, "height")
+
+#' @rdname height
+#' @export
 `height<-` <- function(ht, value) {
   .prop_replace(ht, value, "height", check_fun = is_numeric_or_character)
 }
+
+#' @rdname height
+#' @export
 set_height <- function(ht, value) {
   .prop_set_table(ht, value, "height", check_fun = is_numeric_or_character)
 }
-map_height <- function(ht, fn) {
-  .prop_map_table(ht, fn, "height", check_fun = is_numeric_or_character)
-}
+
 
 
 #' Set the table caption
 #'
 #' By default, captions are displayed above the table. You can change this
 #' with [caption_pos()].
-#' @template getset-table
-#' @templateVar attr_name caption
-#' @templateVar value_param_desc A string.
+#'
+#' @inheritParams hux_prop_params
+#' @param value A string. `r rd_default("caption")`
+#' @return `caption()` returns the `caption` property. `set_caption()` returns the modified huxtable.
 #'
 #' @details
 #' Captions are not escaped. See the example for a workaround.
 #' @family caption properties
 #'
 #' @examples
-#'
 #' set_caption(jams, "Pots of jam for sale")
 #' # escape caption characters:
 #' caption(jams) <- sanitize(
 #'   "Make $$$ with jam",
 #'   type = "latex"
 #' )
-#'
+#' @name caption
 NULL
+
+#' @rdname caption
+#' @export
 caption <- function(ht) .prop_get(ht, "caption")
+
+#' @rdname caption
+#' @export
 `caption<-` <- function(ht, value) {
   .prop_replace(ht, value, "caption", check_fun = is.string)
 }
+
+#' @rdname caption
+#' @export
 set_caption <- function(ht, value) {
   .prop_set_table(ht, value, "caption", check_fun = is.string)
 }
-map_caption <- function(ht, fn) {
-  .prop_map_table(ht, fn, "caption", check_fun = is.string)
-}
+
 
 
 #' Set the table's tabular environment in LaTeX
 #'
 #' By default this is either `"tabular"` or `"tabularx"`.
-#' @template getset-table
-#' @templateVar attr_name tabular_environment
-#' @templateVar value_param_desc A string.
+#'
+#' @inheritParams hux_prop_params
+#' @param value A string. `r rd_default("tabular_environment")`
+#' @return `tabular_environment()` returns the `tabular_environment` property. `set_tabular_environment()` returns the modified huxtable.
 #'
 #' @details
 #' No features are guaranteed to work if you set this to a non-default
 #' value. Use at your own risk!
 #'
-#' @template getset-example
-#' @templateVar attr_val "longtable"
+#' @examples
+#' tabular_environment(jams) <- "longtable"
+#' tabular_environment(jams)
+#' @name tabular_environment
 NULL
+
+#' @rdname tabular_environment
+#' @export
 tabular_environment <- function(ht) .prop_get(ht, "tabular_environment")
+
+#' @rdname tabular_environment
+#' @export
 `tabular_environment<-` <- function(ht, value) {
   .prop_replace(ht, value, "tabular_environment", check_fun = is.string)
 }
+
+#' @rdname tabular_environment
+#' @export
 set_tabular_environment <- function(ht, value) {
   .prop_set_table(ht, value, "tabular_environment", check_fun = is.string)
 }
-map_tabular_environment <- function(ht, fn) {
-  .prop_map_table(ht, fn, "tabular_environment", check_fun = is.string)
-}
+
 
 
 #' Set the "table" environment in LaTeX
 #'
 #' By default this is `"table"`.
-#' @template getset-table
-#' @templateVar attr_name table_environment
-#' @templateVar value_param_desc A string.
+#'
+#' @inheritParams hux_prop_params
+#' @param value A string. `r rd_default("table_environment")`
+#' @return `table_environment()` returns the `table_environment` property. `set_table_environment()` returns the modified huxtable.
 #'
 #' @details
 #' No features are guaranteed to work if you set this to a non-default
@@ -268,19 +302,28 @@ map_tabular_environment <- function(ht, fn) {
 #' If [position()] is set to `"wrapleft"` or `"wrapright"`, this
 #' value is overridden.
 #'
-#' @template getset-example
-#' @templateVar attr_val "table*"
+#' @examples
+#' table_environment(jams) <- "table*"
+#' table_environment(jams)
+#' @name table_environment
 NULL
+
+#' @rdname table_environment
+#' @export
 table_environment <- function(ht) .prop_get(ht, "table_environment")
+
+#' @rdname table_environment
+#' @export
 `table_environment<-` <- function(ht, value) {
   .prop_replace(ht, value, "table_environment", check_fun = is.string)
 }
+
+#' @rdname table_environment
+#' @export
 set_table_environment <- function(ht, value) {
   .prop_set_table(ht, value, "table_environment", check_fun = is.string)
 }
-map_table_environment <- function(ht, fn) {
-  .prop_map_table(ht, fn, "table_environment", check_fun = is.string)
-}
+
 
 
 #' Set a table label for external referencing
@@ -288,12 +331,10 @@ map_table_environment <- function(ht, fn) {
 #' The label is used as the table's label in LaTeX, and as the "id" property
 #' of the table element in HTML.
 #'
-#' @template getset-table
-#' @templateVar attr_name label
-#' @templateVar value_param_desc A string.
+#' @inheritParams hux_prop_params
+#' @param value A string. `r rd_default("label")`
+#' @return `label()` returns the `label` property. `set_label()` returns the modified huxtable.
 #'
-#' @template getset-example
-#' @templateVar attr_val "tab:mytable"
 #' @seealso huxtable-options
 #' @details
 #' LaTeX table labels typically start with `"tab:"`.
@@ -308,17 +349,28 @@ map_table_environment <- function(ht, fn) {
 #' automatically. To turn off this behaviour, set
 #' `options(huxtable.bookdown = FALSE)`.
 #'
+#' @examples
+#' label(jams) <- "tab:mytable"
+#' label(jams)
+#' @name label
 NULL
+
+#' @rdname label
+#' @export
 label <- function(ht) .prop_get(ht, "label")
+
+#' @rdname label
+#' @export
 `label<-` <- function(ht, value) {
   .prop_replace(ht, value, "label", check_fun = is.string)
 }
+
+#' @rdname label
+#' @export
 set_label <- function(ht, value) {
   .prop_set_table(ht, value, "label", check_fun = is.string)
 }
-map_label <- function(ht, fn) {
-  .prop_map_table(ht, fn, "label", check_fun = is.string)
-}
+
 
 
 #' Set the position of the table float in LaTeX
@@ -333,20 +385,29 @@ map_label <- function(ht, fn) {
 #'
 #' See LaTeX documentation for more details.
 #'
-#' @template getset-table
-#' @templateVar attr_name latex_float
-#' @templateVar value_param_desc A string.
+#' @inheritParams hux_prop_params
+#' @param value A string. `r rd_default("latex_float")`
+#' @return `latex_float()` returns the `latex_float` property. `set_latex_float()` returns the modified huxtable.
 #'
-#' @template getset-example
-#' @templateVar attr_val "b"
+#' @examples
+#' latex_float(jams) <- "b"
+#' latex_float(jams)
+#' @name latex_float
 NULL
+
+#' @rdname latex_float
+#' @export
 latex_float <- function(ht) .prop_get(ht, "latex_float")
+
+#' @rdname latex_float
+#' @export
 `latex_float<-` <- function(ht, value) {
   .prop_replace(ht, value, "latex_float", check_fun = is.string)
 }
+
+#' @rdname latex_float
+#' @export
 set_latex_float <- function(ht, value) {
   .prop_set_table(ht, value, "latex_float", check_fun = is.string)
 }
-map_latex_float <- function(ht, fn) {
-  .prop_map_table(ht, fn, "latex_float", check_fun = is.string)
-}
+

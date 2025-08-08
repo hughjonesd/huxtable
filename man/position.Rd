@@ -7,18 +7,18 @@
 \title{Set the table's position with respect to surrounding content}
 \usage{
 position(ht)
+
 position(ht) <- value
+
 set_position(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{String. "left", "center", "right", "wrapleft" or "wrapright". Set to \code{NA} to reset to the default, which is
-\code{"center"}.}
+\item{value}{String. "left", "center", "right", "wrapleft" or "wrapright". Set to \code{NA} to reset to the default, which is center.}
 }
 \value{
-\code{position()} returns the \code{position} property.
-\code{set_position()} returns the modified huxtable.
+\code{position()} returns the \code{position} property. \code{set_position()} returns the modified huxtable.
 }
 \description{
 Table position may be "left", "right" or "center". If you want text to
@@ -29,12 +29,9 @@ wrap around the table, use "wrapleft" or "wrapright".
 wrap around the table.
 }
 \examples{
-
-position(jams) <-  "right"
+position(jams) <- "right"
 position(jams)
-
 set_position(jams, "left")
 set_position(jams, "right")
 set_position(jams, "center")
-
 }

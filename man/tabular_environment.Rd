@@ -7,18 +7,18 @@
 \title{Set the table's tabular environment in LaTeX}
 \usage{
 tabular_environment(ht)
+
 tabular_environment(ht) <- value
+
 set_tabular_environment(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A string. Set to \code{NA} to reset to the default, which is
-\code{"NA"}.}
+\item{value}{A string. Set to \code{NA} to reset to the default, which is NA.}
 }
 \value{
-\code{tabular_environment()} returns the \code{tabular_environment} property.
-\code{set_tabular_environment()} returns the modified huxtable.
+\code{tabular_environment()} returns the \code{tabular_environment} property. \code{set_tabular_environment()} returns the modified huxtable.
 }
 \description{
 By default this is either \code{"tabular"} or \code{"tabularx"}.
@@ -28,7 +28,6 @@ No features are guaranteed to work if you set this to a non-default
 value. Use at your own risk!
 }
 \examples{
-
-tabular_environment(jams) <-  "longtable"
+tabular_environment(jams) <- "longtable"
 tabular_environment(jams)
 }
