@@ -13,6 +13,189 @@ generics::tidy
 generics::glance
 
 
+#' Tidy models and optionally add confidence intervals
+#'
+#' @param models List of models
+#' @param ci_level Confidence interval level
+#' @param tidy_args List of arguments to pass to [generics::tidy()]
+#' @return List of tidied data frames
+#' @noRd
+tidy_models <- function(models, ci_level = NULL, tidy_args = NULL) {
+  if (!is.null(tidy_args) && !is.null(names(tidy_args))) {
+    tidy_args <- rep(list(tidy_args), length(models))
+  }
+
+  my_tidy <- function(n, ci_level = NULL) {
+    if (class(models[[n]])[[1]] == "tbl_df") {
+      return(models[[n]])
+    }
+    args <- if (!is.null(tidy_args)) tidy_args[[n]] else list()
+    args$x <- models[[n]]
+    if (!is.null(ci_level)) {
+      args$conf.int <- TRUE
+      args$conf.level <- ci_level
+    }
+
+    do.call(tidy, args)
+  }
+
+  tidy_with_ci <- function(n) {
+    if (has_builtin_ci(models[[n]])) {
+      my_tidy(n, ci_level = ci_level)
+    } else {
+      tidied <- my_tidy(n)
+      cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
+    }
+  }
+
+  tidy_fn <- if (is.null(ci_level)) my_tidy else tidy_with_ci
+  lapply(seq_along(models), tidy_fn)
+}
+
+
+#' Select and order coefficients
+#'
+#' @param tidied List of tidied model data frames
+#' @param coefs Coefficients to keep
+#' @param omit_coefs Coefficients to drop
+#' @return List with `tidied` and `coef_names`
+#' @noRd
+select_coefs <- function(tidied, coefs = NULL, omit_coefs = NULL) {
+  my_coefs <- unique(unlist(lapply(tidied, function(x) {
+    if (!"term" %in% names(x)) stop("No 'terms' column in result returned from `tidy()`")
+    x$term
+  })))
+
+  if (!is.null(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
+  if (!is.null(coefs)) {
+    if (!all(coefs %in% my_coefs)) {
+      stop(
+        "Unrecognized coefficient names: ",
+        paste(setdiff(coefs, my_coefs), collapse = ", ")
+      )
+    }
+    my_coefs <- coefs
+  }
+  coef_names <- names_or(my_coefs, my_coefs)
+
+  tidied <- lapply(tidied, merge,
+    x     = data.frame(term = my_coefs, stringsAsFactors = FALSE),
+    all.x = TRUE,
+    by    = "term",
+    sort  = FALSE
+  )
+  tidied <- lapply(tidied, function(x) {
+    x$term[!is.na(match(x$term, my_coefs))] <- coef_names[match(x$term, my_coefs)]
+    x <- x[match(unique(coef_names), x$term), ]
+  })
+  coef_names <- unique(coef_names)
+
+  list(tidied = tidied, coef_names = coef_names)
+}
+
+
+#' Add significance stars to estimates
+#'
+#' @param tidied List of tidied model data frames
+#' @param stars Named numeric vector of p value cutoffs or `NULL`
+#' @return Updated list of tidied data frames
+#' @noRd
+add_stars <- function(tidied, stars) {
+  tidied <- lapply(tidied, function(x) {
+    x$estimate_star <- x$estimate
+    x
+  })
+  if (!is.null(stars)) {
+    names(stars) <- paste0(" ", names(stars))
+    stars <- sort(stars)
+    cutpoints <- c(0, stars, 1)
+    symbols <- c(names(stars), "")
+
+    tidied <- lapply(tidied, function(x) {
+      if (is.null(x$p.value)) {
+        warning(
+          "tidy() does not return p values for models of class ", class(x)[1],
+          "; significance stars not printed."
+        )
+        return(x)
+      }
+      x$estimate_star[!is.na(x$estimate)] <- with(
+        x[!is.na(x$estimate), ],
+        paste0(estimate, symnum(as.numeric(p.value),
+          cutpoints = cutpoints,
+          symbols = symbols, na = ""
+        ))
+      )
+      x
+    })
+  }
+
+  tidied
+}
+
+
+#' Aggregate summary statistics from models
+#'
+#' @param models List of models
+#' @param glance_args List of arguments for [generics::glance()]
+#' @param statistics Character vector of statistics to extract
+#' @return List with `sumstats`, `stat_names`, and `ss_classes`
+#' @noRd
+aggregate_statistics <- function(models, glance_args = NULL, statistics = NULL) {
+  if (!is.null(glance_args) && !is.null(names(glance_args))) {
+    glance_args <- rep(list(glance_args), length(models))
+  }
+  if (is.null(glance_args)) {
+    glance_args <- rep(list(list()), length(models))
+  }
+
+  all_sumstats <- lapply(seq_along(models), function(s) {
+    m <- models[[s]]
+    ga <- glance_args[[s]]
+    ga$x <- m
+    bg <- try(do.call(generics::glance, ga), silent = TRUE)
+    bg <- if (inherits(bg, "try-error")) {
+      warning(sprintf(
+        "Error calling `glance` on model %s, of class `%s`:", s,
+        class(m)[1]
+      ))
+      warning(bg)
+      NULL
+    } else {
+      t(bg)
+    }
+    nobs <- tryCatch(nobs(m, use.fallback = TRUE), error = function(e) NA)
+    x <- as.data.frame(rbind(nobs = nobs, bg), stringsAsFactors = FALSE)
+    colnames(x) <- "value"
+    x$stat <- rownames(x)
+    x$class <- c(class(nobs), sapply(bg, class))
+    x
+  })
+
+  stat_names <- unique(unlist(lapply(all_sumstats, function(x) x$stat)))
+  if (!is.null(statistics)) {
+    if (!all(statistics %in% stat_names)) {
+      warning(
+        "Unrecognized statistics: ",
+        paste(setdiff(statistics, stat_names), collapse = ", "),
+        "\nTry setting `statistics` explicitly in the call to `huxreg()`"
+      )
+    }
+    stat_names <- statistics[statistics %in% stat_names]
+  }
+  sumstats <- lapply(all_sumstats, merge, x = data.frame(stat = stat_names), by = "stat", all.x = TRUE, sort = FALSE)
+  sumstats <- lapply(sumstats, function(x) x[match(stat_names, x$stat), ])
+  ss_classes <- lapply(sumstats, function(x) x$class)
+  sumstats <- lapply(sumstats, function(x) x$value)
+  sumstats <- Reduce(cbind, sumstats)
+  ss_classes <- Reduce(cbind, ss_classes)
+  if (is.null(dim(sumstats))) sumstats <- matrix(sumstats, ncol = length(models))
+  if (is.null(dim(ss_classes))) ss_classes <- matrix(ss_classes, ncol = length(models))
+
+  list(sumstats = sumstats, stat_names = stat_names, ss_classes = ss_classes)
+}
+
+
 #' Create a huxtable to display model output
 #'
 #' @param ... Models, or a single list of models. Names will be used as column
@@ -138,98 +321,11 @@ huxreg <- function(...,
 
   error_pos <- match.arg(error_pos)
 
-  if (!is.null(tidy_args) && !is.null(names(tidy_args))) {
-    tidy_args <- rep(list(tidy_args), length(models))
-  }
-
-  # create list of tidy data frames, possibly with confidence intervals
-  my_tidy <- function(n, ci_level = NULL) {
-    # pre-tidied models are returned as is
-    if (class(models[[n]])[[1]] == "tbl_df") {
-      return(models[[n]])
-    }
-    args <- if (!is.null(tidy_args)) tidy_args[[n]] else list()
-    args$x <- models[[n]]
-    if (!is.null(ci_level)) {
-      args$conf.int <- TRUE
-      args$conf.level <- ci_level
-    }
-
-    do.call(tidy, args)
-  }
-
-  tidy_with_ci <- function(n) {
-    if (has_builtin_ci(models[[n]])) {
-      my_tidy(n, ci_level = ci_level)
-    } else {
-      tidied <- my_tidy(n) # should return "estimate" and "std.error"
-      cbind(tidied, make_ci(tidied[, c("estimate", "std.error")], ci_level))
-    }
-  }
-
-  tidy_fn <- if (is.null(ci_level)) my_tidy else tidy_with_ci
-  tidied <- lapply(seq_along(models), tidy_fn)
-
-  # select coefficients
-  my_coefs <- unique(unlist(lapply(tidied, function(x) {
-    if (!"term" %in% names(x)) stop("No 'terms' column in result returned from `tidy()`")
-    x$term
-  })))
-
-  if (!missing(omit_coefs)) my_coefs <- setdiff(my_coefs, omit_coefs)
-  if (!missing(coefs)) {
-    if (!all(coefs %in% my_coefs)) {
-      stop(
-        "Unrecognized coefficient names: ",
-        paste(setdiff(coefs, my_coefs), collapse = ", ")
-      )
-    }
-    my_coefs <- coefs
-  }
-  coef_names <- names_or(my_coefs, my_coefs)
-
-  # select appropriate rows
-  tidied <- lapply(tidied, merge,
-    x     = data.frame(term = my_coefs, stringsAsFactors = FALSE),
-    all.x = TRUE,
-    by    = "term",
-    sort  = FALSE
-  )
-  tidied <- lapply(tidied, function(x) {
-    x$term[!is.na(match(x$term, my_coefs))] <- coef_names[match(x$term, my_coefs)]
-    x <- x[match(unique(coef_names), x$term), ]
-  })
-  coef_names <- unique(coef_names)
-
-  # add stars to estimates ----
-  tidied <- lapply(tidied, function(x) {
-    x$estimate_star <- x$estimate
-    x
-  })
-  if (!is.null(stars)) {
-    names(stars) <- paste0(" ", names(stars))
-    stars <- sort(stars)
-    cutpoints <- c(0, stars, 1)
-    symbols <- c(names(stars), "")
-
-    tidied <- lapply(tidied, function(x) {
-      if (is.null(x$p.value)) {
-        warning(
-          "tidy() does not return p values for models of class ", class(x)[1],
-          "; significance stars not printed."
-        )
-        return(x)
-      }
-      x$estimate_star[!is.na(x$estimate)] <- with(
-        x[!is.na(x$estimate), ],
-        paste0(estimate, symnum(as.numeric(p.value),
-          cutpoints = cutpoints,
-          symbols = symbols, na = ""
-        ))
-      )
-      x
-    })
-  }
+  tidied <- tidy_models(models, ci_level, tidy_args)
+  sel <- select_coefs(tidied, coefs, omit_coefs)
+  tidied <- sel$tidied
+  coef_names <- sel$coef_names
+  tidied <- add_stars(tidied, stars)
 
   # create error cells and blank NAs ----
   tidied <- lapply(tidied, function(x) {
@@ -266,55 +362,10 @@ huxreg <- function(...,
 
 
   # create list of summary statistics ----
-
-  if (!is.null(glance_args) && !is.null(names(glance_args))) {
-    glance_args <- rep(list(glance_args), length(models))
-  }
-  if (is.null(glance_args)) {
-    glance_args <- rep(list(list()), length(models))
-  }
-
-  all_sumstats <- lapply(seq_along(models), function(s) {
-    m <- models[[s]]
-    ga <- glance_args[[s]]
-    ga$x <- m
-    bg <- try(do.call(generics::glance, ga), silent = TRUE)
-    bg <- if (inherits(bg, "try-error")) {
-      warning(sprintf(
-        "Error calling `glance` on model %s, of class `%s`:", s,
-        class(m)[1]
-      ))
-      warning(bg)
-      NULL
-    } else {
-      t(bg)
-    }
-    nobs <- tryCatch(nobs(m, use.fallback = TRUE), error = function(e) NA)
-    x <- as.data.frame(rbind(nobs = nobs, bg), stringsAsFactors = FALSE)
-    colnames(x) <- "value" # some glance objects have a rowname
-    x$stat <- rownames(x)
-    x$class <- c(class(nobs), sapply(bg, class))
-    x
-  })
-
-  # select summary statistics and cbind into a single data frame ----
-  stat_names <- unique(unlist(lapply(all_sumstats, function(x) x$stat)))
-  if (!is.null(statistics)) {
-    if (!all(statistics %in% stat_names)) {
-      warning(
-        "Unrecognized statistics: ",
-        paste(setdiff(statistics, stat_names), collapse = ", "),
-        "\nTry setting `statistics` explicitly in the call to `huxreg()`"
-      )
-    }
-    stat_names <- statistics[statistics %in% stat_names] # intersect would remove names
-  }
-  sumstats <- lapply(all_sumstats, merge, x = data.frame(stat = stat_names), by = "stat", all.x = TRUE, sort = FALSE)
-  sumstats <- lapply(sumstats, function(x) x[match(stat_names, x$stat), ])
-  ss_classes <- lapply(sumstats, function(x) x$class)
-  sumstats <- lapply(sumstats, function(x) x$value)
-  sumstats <- Reduce(cbind, sumstats)
-  ss_classes <- Reduce(cbind, ss_classes)
+  stats <- aggregate_statistics(models, glance_args, statistics)
+  sumstats <- stats$sumstats
+  stat_names <- stats$stat_names
+  ss_classes <- stats$ss_classes
 
   # create huxtable of summary statistics ----
   sumstats <- huxtable(sumstats, add_colnames = FALSE)
