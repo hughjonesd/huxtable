@@ -85,28 +85,24 @@ xxx_border_arrow_yyy_hux_brdr <- function(lr_tb, i, j) {
 
 #' @rdname borders
 #' @export
-#' @order 1
 left_border <- xxx_border_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = quote(-last_col)
 )
 
 #' @rdname borders
 #' @export
-#' @order 5
 right_border <- xxx_border_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = -1
 )
 
 #' @rdname borders
 #' @export
-#' @order 9
 top_border <- xxx_border_huxtable("tb_borders",
   i = quote(-last_row), j = quote(seq_len(ncol(ht)))
 )
 
 #' @rdname borders
 #' @export
-#' @order 13
 bottom_border <- xxx_border_huxtable("tb_borders",
   i = -1, j = quote(seq_len(ncol(ht)))
 )
@@ -151,7 +147,6 @@ bottom_border_set_brdr <- xxx_border_arrow_yyy_hux_brdr(
 
 #' @export
 #' @rdname borders
-#' @order 2
 `left_border<-` <- function(ht, value) {
   if (is_brdr(value)) {
     left_border_set_brdr(ht, value)
@@ -162,7 +157,6 @@ bottom_border_set_brdr <- xxx_border_arrow_yyy_hux_brdr(
 
 #' @export
 #' @rdname borders
-#' @order 6
 `right_border<-` <- function(ht, value) {
   if (is_brdr(value)) {
     right_border_set_brdr(ht, value)
@@ -173,7 +167,6 @@ bottom_border_set_brdr <- xxx_border_arrow_yyy_hux_brdr(
 
 #' @export
 #' @rdname borders
-#' @order 10
 `top_border<-` <- function(ht, value) {
   if (is_brdr(value)) {
     top_border_set_brdr(ht, value)
@@ -184,7 +177,6 @@ bottom_border_set_brdr <- xxx_border_arrow_yyy_hux_brdr(
 
 #' @export
 #' @rdname borders
-#' @order 14
 `bottom_border<-` <- function(ht, value) {
   if (is_brdr(value)) {
     bottom_border_set_brdr(ht, value)
@@ -192,60 +184,6 @@ bottom_border_set_brdr <- xxx_border_arrow_yyy_hux_brdr(
     bottom_border_set_default(ht, value)
   }
 }
-
-## style setters ------------------------------------------------------------
-
-#' @rdname border-styles
-#' @export
-#' @order 2
-`left_border_style<-` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style"
-)
-#' @rdname border-styles
-#' @export
-#' @order 6
-`right_border_style<-` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = -1, "style"
-)
-#' @rdname border-styles
-#' @export
-#' @order 10
-`top_border_style<-` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style"
-)
-#' @rdname border-styles
-#' @export
-#' @order 14
-`bottom_border_style<-` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = -1, j = quote(seq_len(ncol(ht))), "style"
-)
-
-## color setters ------------------------------------------------------------
-
-#' @rdname border-colors
-#' @export
-#' @order 2
-`left_border_color<-` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color"
-)
-#' @rdname border-colors
-#' @export
-#' @order 6
-`right_border_color<-` <- xxx_border_arrow_yyy_hux("lr_borders",
-  i = quote(seq_len(nrow(ht))), j = -1, "color"
-)
-#' @rdname border-colors
-#' @export
-#' @order 10
-`top_border_color<-` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color"
-)
-#' @rdname border-colors
-#' @export
-#' @order 14
-`bottom_border_color<-` <- xxx_border_arrow_yyy_hux("tb_borders",
-  i = -1, j = quote(seq_len(ncol(ht))), "color"
-)
 
 xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
   function(ht) {
@@ -264,26 +202,45 @@ xxx_border_yyy_huxtable <- function(lr_tb, i, j, border_prop) {
 
 #' @rdname border-styles
 #' @export
-#' @order 1
 left_border_style <- xxx_border_yyy_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style"
 )
 #' @rdname border-styles
 #' @export
-#' @order 5
 right_border_style <- xxx_border_yyy_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = -1, "style"
 )
 #' @rdname border-styles
 #' @export
-#' @order 9
 top_border_style <- xxx_border_yyy_huxtable("tb_borders",
   i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style"
 )
 #' @rdname border-styles
 #' @export
-#' @order 13
 bottom_border_style <- xxx_border_yyy_huxtable("tb_borders",
+  i = -1, j = quote(seq_len(ncol(ht))), "style"
+)
+
+## style setters ------------------------------------------------------------
+
+#' @rdname border-styles
+#' @export
+`left_border_style<-` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "style"
+)
+#' @rdname border-styles
+#' @export
+`right_border_style<-` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = -1, "style"
+)
+#' @rdname border-styles
+#' @export
+`top_border_style<-` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "style"
+)
+#' @rdname border-styles
+#' @export
+`bottom_border_style<-` <- xxx_border_arrow_yyy_hux("tb_borders",
   i = -1, j = quote(seq_len(ncol(ht))), "style"
 )
 
@@ -291,26 +248,45 @@ bottom_border_style <- xxx_border_yyy_huxtable("tb_borders",
 
 #' @rdname border-colors
 #' @export
-#' @order 1
 left_border_color <- xxx_border_yyy_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color"
 )
 #' @rdname border-colors
 #' @export
-#' @order 5
 right_border_color <- xxx_border_yyy_huxtable("lr_borders",
   i = quote(seq_len(nrow(ht))), j = -1, "color"
 )
 #' @rdname border-colors
 #' @export
-#' @order 9
 top_border_color <- xxx_border_yyy_huxtable("tb_borders",
   i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color"
 )
 #' @rdname border-colors
 #' @export
-#' @order 13
 bottom_border_color <- xxx_border_yyy_huxtable("tb_borders",
+  i = -1, j = quote(seq_len(ncol(ht))), "color"
+)
+
+## color setters ------------------------------------------------------------
+
+#' @rdname border-colors
+#' @export
+`left_border_color<-` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = quote(-last_col), "color"
+)
+#' @rdname border-colors
+#' @export
+`right_border_color<-` <- xxx_border_arrow_yyy_hux("lr_borders",
+  i = quote(seq_len(nrow(ht))), j = -1, "color"
+)
+#' @rdname border-colors
+#' @export
+`top_border_color<-` <- xxx_border_arrow_yyy_hux("tb_borders",
+  i = quote(-last_row), j = quote(seq_len(ncol(ht))), "color"
+)
+#' @rdname border-colors
+#' @export
+`bottom_border_color<-` <- xxx_border_arrow_yyy_hux("tb_borders",
   i = -1, j = quote(seq_len(ncol(ht))), "color"
 )
 
