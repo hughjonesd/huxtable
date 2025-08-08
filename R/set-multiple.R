@@ -13,7 +13,7 @@ NULL
 #' * `set_lr_*` functions set left and right properties.
 #'
 #'
-#' @template property-params
+#' @inheritParams .hux_prop_params
 #' @param value Value(s) to set. Set to `NA` to reset to the default.
 #'
 #' @return The modified huxtable.

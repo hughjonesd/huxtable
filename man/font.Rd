@@ -16,7 +16,15 @@ set_font(ht, row, col, value)
 map_font(ht, row, col, fn)
 }
 \arguments{
+\item{ht}{A huxtable.}
+
 \item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is NA.}
+
+\item{row}{A row specifier. See \link{rowspecs} for details.}
+
+\item{col}{An optional column specifier.}
+
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 Set the font for cell text
