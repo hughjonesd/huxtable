@@ -69,7 +69,7 @@ test_that("to_typst handles vertical alignment", {
 
   res <- to_typst(ht)
 
-  expect_match(res, "cell(align: (right, center))[1]", fixed = TRUE)
+  expect_match(res, "cell(align: (right, horizon))[1]", fixed = TRUE)
   expect_match(res, "cell(align: (right, bottom))[4]", fixed = TRUE)
 })
 
