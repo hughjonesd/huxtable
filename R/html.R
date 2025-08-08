@@ -13,7 +13,8 @@ print_html <- function(ht, ...) cat(huxtable_html_css(), to_html(ht, ...))
 #' @param ht A huxtable.
 #' @param ... Arguments passed to methods. Not currently used.
 #'
-#' @return `to_html` returns an HTML string. `print_html` prints the string and returns `NULL`.
+#' @return `to_html` returns an HTML string. `as_html` wraps `to_html` and returns an
+#'   `htmltools::HTML` object. `print_html` prints the string and returns `NULL`.
 #' @export
 #'
 #' @family printing functions
@@ -21,6 +22,7 @@ print_html <- function(ht, ...) cat(huxtable_html_css(), to_html(ht, ...))
 #' @examples
 #' ht <- hux(a = 1:3, b = letters[1:3])
 #' to_html(ht)
+#' as_html(ht)
 
 #' @export
 #'
@@ -48,8 +50,13 @@ to_html <- function(ht, ...) {
   cell_html <- build_cell_html(ht)
   row_html <- build_row_html(ht, cell_html)
 
-  res <- paste0(table_start, cols_html, row_html, "</table>\n")
-  return(res)
+  paste0(table_start, cols_html, row_html, "</table>\n")
+}
+
+#' @export
+#' @rdname to_html
+as_html <- function(ht, ...) {
+  htmltools::HTML(to_html(ht, ...))
 }
 
 #' Build opening table tag and caption for HTML output

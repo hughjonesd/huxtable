@@ -34,7 +34,10 @@ to_typst <- function(ht, ...) {
 
   rs <- rowspan(ht)
   cs <- colspan(ht)
-  align <- real_align(ht)
+  align_h <- real_align(ht)
+  align_v <- valign(ht)
+  align_v[] <- c(top = "top", middle = "horizon", bottom = "bottom")[align_v]
+  align <- ifelse(is.na(align_v), align_h, paste0("(", align_h, " + ", align_v, ")"))
 
   col_w <- col_width(ht)
   if (is.numeric(col_w)) {
@@ -60,7 +63,38 @@ to_typst <- function(ht, ...) {
   }
 
   row_strings <- apply(cells, 1, function(x) paste(x[x != ""], collapse = " "))
-  result <- paste0(table_start, paste0("  ", row_strings, collapse = "\n"), "\n]\n")
+
+  hr <- header_rows(ht)
+  hc <- header_cols(ht)
+
+  header_block <- ""
+  if (any(hr)) {
+    header_rows_strings <- row_strings[hr]
+    header_block <- paste0(
+      "  table.header[\n",
+      paste0("    ", header_rows_strings, collapse = "\n"),
+      "\n  ]\n"
+    )
+    row_strings <- row_strings[!hr]
+  }
+
+  header_cols_block <- ""
+  if (any(hc)) {
+    col_strings <- apply(cells[, hc, drop = FALSE], 1, function(x) paste(x[x != ""], collapse = " "))
+    header_cols_block <- paste0(
+      "  table.header(columns: (", paste(hc, collapse = ", "), "))[\n",
+      paste0("    ", col_strings, collapse = "\n"),
+      "\n  ]\n"
+    )
+  }
+
+  result <- paste0(
+    table_start,
+    header_block,
+    header_cols_block,
+    paste0("  ", row_strings, collapse = "\n"),
+    "\n]\n"
+  )
   result
 }
 
@@ -84,7 +118,7 @@ typst_table_options <- function(ht, col_w_str) {
 
   pos <- position(ht)
   if (!is.na(pos) && pos %in% c("left", "right")) {
-    align <- c(left = "left", right = "right")[pos]
+    align <- pos
     table_opts <- c(table_opts, sprintf("align: %s", align))
   }
 
@@ -127,9 +161,8 @@ typst_cell_options <- function(ht, i, j, rs, cs, al, row_h) {
   if (rs > 1) opts <- c(opts, sprintf("rowspan: %d", rs))
   if (cs > 1) opts <- c(opts, sprintf("colspan: %d", cs))
 
-  va <- c(top = "top", middle = "center", bottom = "bottom")[valign(ht)[i, j]]
   if (!is.na(al) || !is.na(va)) {
-    opts <- c(opts, sprintf("align: (%s, %s)", al, va))
+    opts <- c(opts, sprintf("align: %s", al))
   }
 
   if (!is.na(row_h)) {

@@ -1,3 +1,6 @@
+
+Use short branch names. Start with "feature", "bugfix", "refactor" or "chore". 
+
 At the end of any task, if you've made changes, run the tests in tests/testthat 
 to make sure everything is still working. If there are errors due to your code, 
 fix them before completing. You don't have to run every test; in particular those
@@ -27,10 +30,7 @@ If you want to build vignettes, you'll need the R.rsp package. Alternatively,
 don't build vignettes when you build the package, by passing the 
 `--no-build-vignettes` flag to `devtools::build()`.
 
-Style your code with scripts/style.R before preparing a pull request.
-
 If you make important user-visible changes, add an item to NEWS.md. Follow the formatting
 of the existing entries. Run `devtools::document()` afterwards, because the news
-is copied into the help file `?huxtable-news`. Unimportant changes, like tweaks
-to documentation, or parts of a bigger update which is already mentioned in the 
-same release, don't need a NEWS.md item.
+is copied into the help file `?huxtable-news`. Do not update NEWS.md for unimportant changes, 
+like tweaks to documentation, or if the broad change is already mentioned.
