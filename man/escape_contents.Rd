@@ -40,12 +40,12 @@ will be ignored.
 \examples{
 
 ht <- huxtable(
-        Text   = "x squared",
-        Maths  = "$x^2$"
-      )
+  Text   = "x squared",
+  Maths  = "$x^2$"
+)
 ht <- set_escape_contents(ht, FALSE)
 \dontrun{
-  quick_pdf(ht)
+quick_pdf(ht)
 }
 
 }

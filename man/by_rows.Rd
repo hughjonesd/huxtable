@@ -26,10 +26,14 @@ A function for use in \verb{map_***} functions.
 }
 \examples{
 ht <- as_hux(matrix(rnorm(25), 5, 5))
-map_background_color(ht,
-      by_rows("green", "grey"))
-map_background_color(ht,
-      by_cols("green", "grey"))
+map_background_color(
+  ht,
+  by_rows("green", "grey")
+)
+map_background_color(
+  ht,
+  by_cols("green", "grey")
+)
 }
 \seealso{
 \link{mapping-functions}

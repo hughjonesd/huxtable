@@ -37,15 +37,15 @@ set a value for \code{\link[=width]{width()}} and set \code{wrap} to \code{TRUE}
 \examples{
 
 long_text <- paste(
-        rep("Some long text.", 10),
-        collapse = " "
-     )
+  rep("Some long text.", 10),
+  collapse = " "
+)
 ht <- huxtable(Long = long_text)
 width(ht) <- 0.2
 wrap(ht) <- TRUE
 
 \dontrun{
-  quick_html(ht)
+quick_html(ht)
 }
 
 }

@@ -65,11 +65,13 @@ restack_across(ht, 1)
 # headers:
 restack_across(jams, 2)
 restack_across(jams, 2,
-      headers = FALSE)
+  headers = FALSE
+)
 
 # on_remainder:
 restack_across(jams, 3,
-      on_remainder = "fill")
+  on_remainder = "fill"
+)
 
 }
 \seealso{

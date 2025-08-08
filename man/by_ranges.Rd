@@ -34,31 +34,39 @@ Non-numeric cells return \code{NA}. The effects of this depend on \code{ignore_n
 }
 \examples{
 ht <- huxtable(c(1, 3, 5))
-map_background_color(ht,
-      by_ranges(
-        c(2, 4),
-        c("red", "yellow", "blue")
-      ))
+map_background_color(
+  ht,
+  by_ranges(
+    c(2, 4),
+    c("red", "yellow", "blue")
+  )
+)
 
-map_background_color(ht,
-      by_ranges(
-        c(2, 4),
-        "pink",
-        extend = FALSE
-      ))
+map_background_color(
+  ht,
+  by_ranges(
+    c(2, 4),
+    "pink",
+    extend = FALSE
+  )
+)
 
-map_background_color(ht,
-      by_ranges(
-        c(1, 5),
-        c("red", "yellow", "green"),
-        right = TRUE
-      ))
-map_background_color(ht,
-      by_ranges(
-        c(1, 5),
-        c("red", "yellow", "green"),
-        right = FALSE
-      ))
+map_background_color(
+  ht,
+  by_ranges(
+    c(1, 5),
+    c("red", "yellow", "green"),
+    right = TRUE
+  )
+)
+map_background_color(
+  ht,
+  by_ranges(
+    c(1, 5),
+    c("red", "yellow", "green"),
+    right = FALSE
+  )
+)
 }
 \seealso{
 \link{mapping-functions}

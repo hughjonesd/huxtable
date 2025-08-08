@@ -110,26 +110,27 @@ Alternatively, to manually insert your own statistics, see \code{\link[=tidy_ove
 }
 
 \examples{
-if (! requireNamespace("broom")) {
+if (!requireNamespace("broom")) {
   stop("Please install 'broom' to run this example.")
 }
 
 lm1 <- lm(mpg ~ cyl, mtcars)
 lm2 <- lm(mpg ~ cyl + hp, mtcars)
 glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
-          family = binomial)
+  family = binomial
+)
 
 huxreg(lm1, lm2, glm1)
 
 if (requireNamespace("sandwich") &&
-      requireNamespace("lmtest")) {
-
+  requireNamespace("lmtest")) {
   lm_robust <- lmtest::coeftest(lm1,
-        vcov = sandwich::vcovHC)
+    vcov = sandwich::vcovHC
+  )
   # coeftest() has no "glance" method:
   huxreg(lm_robust,
-        statistics = character(0))
-
+    statistics = character(0)
+  )
 }
 
 }

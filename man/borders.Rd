@@ -3,47 +3,47 @@
 %   R/properties-border.R
 \name{borders}
 \alias{borders}
-\alias{map_left_border}
 \alias{set_left_border}
-\alias{map_right_border}
+\alias{map_left_border}
 \alias{set_right_border}
-\alias{map_top_border}
+\alias{map_right_border}
 \alias{set_top_border}
-\alias{map_bottom_border}
+\alias{map_top_border}
 \alias{set_bottom_border}
-\alias{left_border<-}
-\alias{right_border<-}
-\alias{top_border<-}
-\alias{bottom_border<-}
+\alias{map_bottom_border}
 \alias{left_border}
 \alias{right_border}
 \alias{top_border}
 \alias{bottom_border}
-\alias{`left_border<-`}
-\alias{`right_border<-`}
-\alias{`top_border<-`}
-\alias{`bottom_border<-`}
+\alias{left_border<-}
+\alias{right_border<-}
+\alias{top_border<-}
+\alias{bottom_border<-}
 \title{Set borders}
 \usage{
-left_border(ht)
-left_border(ht) <- value
 set_left_border(ht, row, col, value = 0.4)
+
 map_left_border(ht, row, col, fn)
 
-right_border(ht)
-right_border(ht) <- value
 set_right_border(ht, row, col, value = 0.4)
+
 map_right_border(ht, row, col, fn)
 
-top_border(ht)
-top_border(ht) <- value
 set_top_border(ht, row, col, value = 0.4)
+
 map_top_border(ht, row, col, fn)
 
-bottom_border(ht)
-bottom_border(ht) <- value
 set_bottom_border(ht, row, col, value = 0.4)
+
 map_bottom_border(ht, row, col, fn)
+
+left_border(ht)
+
+right_border(ht)
+
+top_border(ht)
+
+bottom_border(ht)
 
 left_border(ht) <- value
 
@@ -56,11 +56,11 @@ bottom_border(ht) <- value
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric thickness or a \code{\link[=brdr]{brdr()}} object.}
-
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
+
+\item{value}{A numeric thickness or a \code{\link[=brdr]{brdr()}} object. Set to \code{NA} to reset to the default, which is 0.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
@@ -68,11 +68,11 @@ bottom_border(ht) <- value
 These functions set borders between cells.
 }
 \details{
-Borders are always "collapsed": \code{right_border(ht)[, 1]} is
-the same as \code{left_border(ht)[, 2]}, and setting one sets the other.
+Borders are always "collapsed": \code{right_border(ht)[, 1]} is the same as
+\code{left_border(ht)[, 2]}, and setting one sets the other.
 
-Setting \code{left_border(ht) <- number} sets the border thickness.
-You can set multiple properties at once by using \code{\link[=brdr]{brdr()}}.
+Setting \code{left_border(ht) <- number} sets the border thickness. You can set
+multiple properties at once by using \code{\link[=brdr]{brdr()}}.
 
 Currently in LaTeX, all non-zero border widths on a given line must be the
 same.
@@ -87,7 +87,6 @@ all non-zero horizontal border widths on a given line must be the same.
 }
 
 \examples{
-
 bottom_border(jams)[1, ] <- 0.4
 jams
 

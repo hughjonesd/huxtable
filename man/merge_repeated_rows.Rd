@@ -37,7 +37,8 @@ content if you reorder or subset rows and columns.
 \examples{
 ht <- as_hux(jams[c(1, 2, 2, 3, 3, 4), ])
 ht <- add_columns(ht, c("Sugar", "30\%", "40\%", "30\%", "40\%", "30\%"),
-      after = 1)
+  after = 1
+)
 ht
 merge_repeated_rows(ht)
 merge_repeated_rows(ht, everywhere, "Type")

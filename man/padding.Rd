@@ -2,60 +2,72 @@
 % Please edit documentation in R/properties-padding.R
 \name{padding}
 \alias{padding}
-\alias{map_left_padding}
-\alias{set_left_padding}
-\alias{map_right_padding}
-\alias{set_right_padding}
-\alias{map_top_padding}
-\alias{set_top_padding}
-\alias{map_bottom_padding}
-\alias{set_bottom_padding}
-\alias{left_padding<-}
-\alias{right_padding<-}
-\alias{top_padding<-}
-\alias{bottom_padding<-}
 \alias{left_padding}
+\alias{left_padding<-}
+\alias{set_left_padding}
+\alias{map_left_padding}
 \alias{right_padding}
+\alias{right_padding<-}
+\alias{set_right_padding}
+\alias{map_right_padding}
 \alias{top_padding}
+\alias{top_padding<-}
+\alias{set_top_padding}
+\alias{map_top_padding}
 \alias{bottom_padding}
-\title{Set padding}
+\alias{bottom_padding<-}
+\alias{set_bottom_padding}
+\alias{map_bottom_padding}
+\title{Cell padding}
 \usage{
 left_padding(ht)
+
 left_padding(ht) <- value
-set_left_padding(ht, row, col, value )
+
+set_left_padding(ht, row, col, value)
+
 map_left_padding(ht, row, col, fn)
 
 right_padding(ht)
+
 right_padding(ht) <- value
-set_right_padding(ht, row, col, value )
+
+set_right_padding(ht, row, col, value)
+
 map_right_padding(ht, row, col, fn)
 
 top_padding(ht)
+
 top_padding(ht) <- value
-set_top_padding(ht, row, col, value )
+
+set_top_padding(ht, row, col, value)
+
 map_top_padding(ht, row, col, fn)
 
 bottom_padding(ht)
+
 bottom_padding(ht) <- value
-set_bottom_padding(ht, row, col, value )
+
+set_bottom_padding(ht, row, col, value)
+
 map_bottom_padding(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{Numeric: padding width/height in points. Set to \code{NA} to reset to the default, which is 6.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{Numeric: padding width/height in points.}
 }
 \description{
-These functions set the space around the edges of cells, within the borders.
+Functions to get or set the space around cell borders. Top, bottom, left and
+right padding all default to 6 points.
 }
 \examples{
-
 left_padding(jams) <- 2
 left_padding(jams)
 
