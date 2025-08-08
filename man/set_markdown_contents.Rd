@@ -30,8 +30,10 @@ TeX or whatever.
 }
 
 \examples{
-set_markdown_contents(jams, 1, 1,
-      "**Type** of jam")
+set_markdown_contents(
+  jams, 1, 1,
+  "**Type** of jam"
+)
 }
 \seealso{
 \code{\link[=markdown]{markdown()}}.

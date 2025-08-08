@@ -57,20 +57,20 @@ are useful shortcuts for common formatting functions.
 }
 \examples{
 ht <- huxtable(
-        number_format = c(
-          "Default",
-          "NA",
-          "2",
-          "\"\%5.2f\"",
-          "Pretty",
-          "Sign"
-        ),
-        a = rep(1000, 6),
-        b = rep(1000.005, 6),
-        c = rep(0.0001, 6),
-        d = rep(-1, 6),
-        e = rep("3.2 (s.e. 1.4)", 6)
-      )
+  number_format = c(
+    "Default",
+    "NA",
+    "2",
+    "\"\%5.2f\"",
+    "Pretty",
+    "Sign"
+  ),
+  a = rep(1000, 6),
+  b = rep(1000.005, 6),
+  c = rep(0.0001, 6),
+  d = rep(-1, 6),
+  e = rep("3.2 (s.e. 1.4)", 6)
+)
 
 number_format(ht)[3, -1] <- NA
 number_format(ht)[4, -1] <- 2
@@ -79,8 +79,8 @@ number_format(ht)[5, -1] <- "\%5.2f"
 number_format(ht)[6, -1] <- fmt_pretty()
 
 number_format(ht)[7, -1] <- list(
-        function(x) if (x > 0) "+" else "-"
-      )
+  function(x) if (x > 0) "+" else "-"
+)
 
 right_border(ht) <- 1
 bottom_border(ht)[1, ] <- 1

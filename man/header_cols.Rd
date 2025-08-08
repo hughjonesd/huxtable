@@ -46,8 +46,8 @@ differently when \link[=restack-across-down]{restacking}.
 jams <- set_header_rows(jams, 1, TRUE)
 jams <- set_header_cols(jams, 1, TRUE)
 style_headers(jams,
-       bold       = TRUE,
-       text_color = "purple"
-     )
+  bold       = TRUE,
+  text_color = "purple"
+)
 
 }

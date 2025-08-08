@@ -36,8 +36,10 @@ that your cells no longer overrun.
 
 col_width(jams) <-  c(.2, .8)
 col_width(jams)
-jams$Notes <- c("Notes",
-      "This year's finest", "", "")
+jams$Notes <- c(
+  "Notes",
+  "This year's finest", "", ""
+)
 jams
 set_col_width(jams, c(.4, .5, .1))
 }

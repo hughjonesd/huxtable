@@ -42,11 +42,15 @@ avoid a clash with \code{purrr::every}.
 }
 \examples{
 ht <- huxtable(a = 1:10, b = 1:10)
-set_background_color(ht,
-      evens, everywhere,
-      "grey95")
-set_background_color(ht,
-      stripe(3), everywhere,
-      "grey95")
+set_background_color(
+  ht,
+  evens, everywhere,
+  "grey95"
+)
+set_background_color(
+  ht,
+  stripe(3), everywhere,
+  "grey95"
+)
 
 }

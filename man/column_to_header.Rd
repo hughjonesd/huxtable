@@ -36,13 +36,14 @@ Convert a column to header rows
 column_to_header(jams, "Type")
 column_to_header(jams, "Type", text_color = "red")
 column_to_header(jams, "Price",
-                   number_format = 2,
-                   italic = TRUE,
-                   glue = "Price: {value}")
+  number_format = 2,
+  italic = TRUE,
+  glue = "Price: {value}"
+)
 
 iris_hux <- as_hux(iris[c(1:4, 51:54, 101:104), ])
 column_to_header(iris_hux, "Species",
-                   markdown = TRUE,
-                   glue = "Species: **{value}**"
-                 )
+  markdown = TRUE,
+  glue = "Species: **{value}**"
+)
 }

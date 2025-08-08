@@ -42,10 +42,9 @@ directly.
 report_latex_dependencies()
 
 \dontrun{
-  check_latex_dependencies()
+check_latex_dependencies()
 }
-
 \dontrun{
-  install_latex_dependencies()
+install_latex_dependencies()
 }
 }
