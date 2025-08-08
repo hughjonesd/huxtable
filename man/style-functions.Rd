@@ -47,9 +47,11 @@ and/or columns.
 style_headers(jams, text_color = "red")
 jams <- set_header_cols(jams, 1, TRUE)
 style_header_cols(jams,
-  text_color = c(NA, "red",
-    "darkred", "purple")
+  text_color = c(
+    NA, "red",
+    "darkred", "purple"
   )
+)
 
 style_cells(jams, everywhere, 2, bold = TRUE)
 }

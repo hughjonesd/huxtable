@@ -32,8 +32,9 @@ Captions are not escaped. See the example for a workaround.
 set_caption(jams, "Pots of jam for sale")
 # escape caption characters:
 caption(jams) <- sanitize(
-      "Make $$$ with jam",
-      type = "latex")
+  "Make $$$ with jam",
+  type = "latex"
+)
 
 }
 \seealso{

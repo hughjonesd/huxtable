@@ -19,10 +19,14 @@ An object you can pass into \code{\link[=number_format]{number_format()}}.
 }
 \examples{
 
-jams$Sugar <- c("Sugar content",
-      0.4, 0.35, 0.45)
-set_number_format(jams, -1, "Sugar",
-      fmt_percent(1))
+jams$Sugar <- c(
+  "Sugar content",
+  0.4, 0.35, 0.45
+)
+set_number_format(
+  jams, -1, "Sugar",
+  fmt_percent(1)
+)
 
 }
 \seealso{

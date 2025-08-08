@@ -44,12 +44,16 @@ sugar <- c("Sugar", "40\%", "35\%", "50\%")
 jams <- set_bold(jams, 1, everywhere)
 cbind(jams, sugar)
 cbind(jams, sugar,
-     copy_cell_props = FALSE)
+  copy_cell_props = FALSE
+)
 
-jams <- set_text_color(jams,
-     everywhere, 1, "red")
+jams <- set_text_color(
+  jams,
+  everywhere, 1, "red"
+)
 rbind(jams, c("Damson", 2.30))
 rbind(jams, c("Damson", 2.30),
-     copy_cell_props = FALSE)
+  copy_cell_props = FALSE
+)
 
 }

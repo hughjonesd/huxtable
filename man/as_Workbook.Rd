@@ -60,16 +60,20 @@ be converted by \code{\link[=as.numeric]{as.numeric()}}). Otherwise, they are st
 wb <- as_Workbook(jams)
 
 \dontrun{
-  openxlsx::saveWorkbook(wb,
-        "my-excel-file.xlsx")
+openxlsx::saveWorkbook(
+  wb,
+  "my-excel-file.xlsx"
+)
 }
 
 # multiple sheets in a single workbook:
 wb <- openxlsx::createWorkbook()
 wb <- as_Workbook(jams,
-      Workbook = wb, sheet = "sheet1")
+  Workbook = wb, sheet = "sheet1"
+)
 wb <- as_Workbook(
-      hux("Another", "huxtable"),
-      Workbook = wb,
-      sheet = "sheet2")
+  hux("Another", "huxtable"),
+  Workbook = wb,
+  sheet = "sheet2"
+)
 }
