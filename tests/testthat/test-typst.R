@@ -2,6 +2,7 @@ local_edition(2)
 
 test_that("to_typst basic table structure", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  valign(ht) <- NA
   res <- to_typst(ht)
   expected <- paste0(
     "#table(\n",
@@ -13,6 +14,7 @@ test_that("to_typst basic table structure", {
   )
   expect_identical(res, expected)
 })
+
 
 test_that("header rows rendered separately", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
@@ -31,8 +33,17 @@ test_that("header rows rendered separately", {
   expect_identical(res, expected)
 })
 
+test_that("to_typst handles vertical alignment", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  valign(ht) <- matrix(c("middle", "top", "top", "bottom"), 2, 2)
+  res <- to_typst(ht)
+  expect_match(res, "cell\\(align: \\(right \\+ horizon\\)\\)\\[1\\]")
+  expect_match(res, "cell\\(align: \\(right \\+ bottom\\)\\)\\[4\\]")
+})
+
 test_that("to_typst maps properties", {
   ht <- hux(a = 1:3, b = 4:6, c = 7:9, add_colnames = FALSE)
+  valign(ht) <- NA
   caption(ht) <- "A cap"
   col_width(ht) <- c(.2, .3, .5)
   width(ht) <- 0.5
@@ -48,6 +59,11 @@ test_that("to_typst maps properties", {
   font(ht)[1, 1] <- "Courier"
   text_color(ht)[1, 1] <- "blue"
 
+  left_padding(ht)[1, 3] <- 1
+  right_padding(ht)[1, 3] <- 2
+  top_padding(ht)[1, 3] <- 3
+  bottom_padding(ht)[1, 3] <- 4
+
   res <- to_typst(ht)
   expect_match(res, "figure: (", fixed = TRUE)
   expect_match(res, "caption: \\[A cap\\]")
@@ -59,7 +75,11 @@ test_that("to_typst maps properties", {
   expect_match(res, "align: (right + top)", fixed = TRUE)
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
-  expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb")
+  expect_match(
+    res,
+    "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb\\(0, 0, 255\\)\\)\\[1\\]"
+  )
+  expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
 })
 
 test_that("to_typst handles vertical alignment", {
