@@ -37,7 +37,7 @@ to_typst <- function(ht, ...) {
   align_h <- real_align(ht)
   align_v <- valign(ht)
   align_v[] <- c(top = "top", middle = "horizon", bottom = "bottom")[align_v]
-  align <- ifelse(is.na(align_v), align_h, paste0("(", align_h, ", ", align_v, ")"))
+  align <- ifelse(is.na(align_v), align_h, paste0("(", align_h, " + ", align_v, ")"))
 
   col_w <- col_width(ht)
   if (is.numeric(col_w)) {
