@@ -49,10 +49,6 @@ set_col_width <- function(ht, col, value) {
   prop_set_col(ht, col, value, "col_width", check_fun = is_numeric_or_character)
 }
 
-map_col_width <- function(ht, col, fn) {
-  prop_map_col(ht, col, fn, "col_width", check_fun = is_numeric_or_character)
-}
-
 
 #' Set the height of table rows
 #'
@@ -91,10 +87,6 @@ row_height <- function(ht) prop_get(ht, "row_height")
 #' @export
 set_row_height <- function(ht, row, value) {
   prop_set_row(ht, row, value, "row_height", check_fun = is_numeric_or_character)
-}
-
-map_row_height <- function(ht, row, fn) {
-  prop_map_row(ht, row, fn, "row_height", check_fun = is_numeric_or_character)
 }
 
 
@@ -141,10 +133,6 @@ set_header_cols <- function(ht, col, value) {
   prop_set_col(ht, col, value, "header_cols", check_fun = is.logical)
 }
 
-map_header_cols <- function(ht, col, fn) {
-  prop_map_col(ht, col, fn, "header_cols", check_fun = is.logical)
-}
-
 #' @rdname header_cols
 #' @inheritParams header_cols
 #' @param row A row specifier. See [rowspecs] for details.
@@ -166,8 +154,4 @@ header_rows <- function(ht) prop_get(ht, "header_rows")
 #' @export
 set_header_rows <- function(ht, row, value) {
   prop_set_row(ht, row, value, "header_rows", check_fun = is.logical)
-}
-
-map_header_rows <- function(ht, row, fn) {
-  prop_map_row(ht, row, fn, "header_rows", check_fun = is.logical)
 }

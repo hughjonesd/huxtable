@@ -38,14 +38,6 @@ set_position <- function(ht, value) {
     })
   )
 }
-map_position <- function(ht, fn) {
-  prop_map_table(ht, fn, "position",
-    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-    extra = quote({
-      value[value == "centre"] <- "center"
-    })
-  )
-}
 
 
 #' Position the table's caption
@@ -95,18 +87,6 @@ set_caption_pos <- function(ht, value) {
     })
   )
 }
-map_caption_pos <- function(ht, fn) {
-  prop_map_table(ht, fn, "caption_pos",
-    check_values = c(
-      "top", "bottom", "topleft", "topcenter", "topcentre",
-      "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
-    ),
-    extra = quote({
-      value[value == "topcentre"] <- "topcenter"
-      value[value == "bottomcentre"] <- "bottomcenter"
-    })
-  )
-}
 
 
 
@@ -133,9 +113,6 @@ caption_width <- function(ht) prop_get(ht, "caption_width")
 set_caption_width <- function(ht, value) {
   prop_set_table(ht, value, "caption_width", check_fun = is_numeric_or_character)
 }
-map_caption_width <- function(ht, fn) {
-  prop_map_table(ht, fn, "caption_width", check_fun = is_numeric_or_character)
-}
 
 
 #' Set the table width
@@ -159,9 +136,6 @@ width <- function(ht) prop_get(ht, "width")
 }
 set_width <- function(ht, value) {
   prop_set_table(ht, value, "width", check_fun = is_numeric_or_character)
-}
-map_width <- function(ht, fn) {
-  prop_map_table(ht, fn, "width", check_fun = is_numeric_or_character)
 }
 
 
@@ -187,9 +161,6 @@ height <- function(ht) prop_get(ht, "height")
 }
 set_height <- function(ht, value) {
   prop_set_table(ht, value, "height", check_fun = is_numeric_or_character)
-}
-map_height <- function(ht, fn) {
-  prop_map_table(ht, fn, "height", check_fun = is_numeric_or_character)
 }
 
 
@@ -222,9 +193,6 @@ caption <- function(ht) prop_get(ht, "caption")
 set_caption <- function(ht, value) {
   prop_set_table(ht, value, "caption", check_fun = is.string)
 }
-map_caption <- function(ht, fn) {
-  prop_map_table(ht, fn, "caption", check_fun = is.string)
-}
 
 
 #' Set the table's tabular environment in LaTeX
@@ -247,9 +215,6 @@ tabular_environment <- function(ht) prop_get(ht, "tabular_environment")
 }
 set_tabular_environment <- function(ht, value) {
   prop_set_table(ht, value, "tabular_environment", check_fun = is.string)
-}
-map_tabular_environment <- function(ht, fn) {
-  prop_map_table(ht, fn, "tabular_environment", check_fun = is.string)
 }
 
 
@@ -277,9 +242,6 @@ table_environment <- function(ht) prop_get(ht, "table_environment")
 }
 set_table_environment <- function(ht, value) {
   prop_set_table(ht, value, "table_environment", check_fun = is.string)
-}
-map_table_environment <- function(ht, fn) {
-  prop_map_table(ht, fn, "table_environment", check_fun = is.string)
 }
 
 
@@ -316,9 +278,6 @@ label <- function(ht) prop_get(ht, "label")
 set_label <- function(ht, value) {
   prop_set_table(ht, value, "label", check_fun = is.string)
 }
-map_label <- function(ht, fn) {
-  prop_map_table(ht, fn, "label", check_fun = is.string)
-}
 
 
 #' Set the position of the table float in LaTeX
@@ -346,7 +305,4 @@ latex_float <- function(ht) prop_get(ht, "latex_float")
 }
 set_latex_float <- function(ht, value) {
   prop_set_table(ht, value, "latex_float", check_fun = is.string)
-}
-map_latex_float <- function(ht, fn) {
-  prop_map_table(ht, fn, "latex_float", check_fun = is.string)
 }
