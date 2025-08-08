@@ -1,3 +1,6 @@
+
+Use short branch names. Start with "feature", "bugfix", "refactor" or "chore". 
+
 At the end of any task, if you've made changes, run the tests in tests/testthat 
 to make sure everything is still working. If there are errors due to your code, 
 fix them before completing. You don't have to run every test; in particular those
