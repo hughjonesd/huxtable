@@ -16,15 +16,7 @@ set_markdown(ht, row, col, value = TRUE)
 map_markdown(ht, row, col, fn)
 }
 \arguments{
-\item{ht}{A huxtable.}
-
 \item{value}{A logical vector or matrix. Set to \code{NA} to reset to the default, which is FALSE.}
-
-\item{row}{A row specifier. See \link{rowspecs} for details.}
-
-\item{col}{An optional column specifier.}
-
-\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 Cells where the markdown property is \code{TRUE} will be interpreted as

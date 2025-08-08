@@ -3,11 +3,8 @@
 #' Functions to get or set the space around cell borders. Top, bottom, left and
 #' right padding all default to 6 points.
 #'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
+#' @inheritParams .hux_prop_params
 #' @param value Numeric: padding width/height in points. `r .rd_default("left_padding")`
-#' @param fn A mapping function. See [mapping-functions] for details.
 #' @seealso [set-multiple], [set-outer].
 #' @examples
 #' left_padding(jams) <- 2

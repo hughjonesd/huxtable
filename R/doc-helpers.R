@@ -20,4 +20,6 @@
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
 #' @noRd
-.hux_prop_params <- function(ht, row, col, fn) {}
+#'
+#' @name .hux_prop_params
+NULL

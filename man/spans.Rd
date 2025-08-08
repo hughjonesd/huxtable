@@ -29,15 +29,7 @@ set_colspan(ht, row, col, value)
 map_colspan(ht, row, col, fn)
 }
 \arguments{
-\item{ht}{A huxtable.}
-
 \item{value}{An integer vector or matrix.}
-
-\item{row}{A row specifier. See \link{rowspecs} for details.}
-
-\item{col}{An optional column specifier.}
-
-\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 A cell with rowspan of 2 covers the cell directly below it. A cell with

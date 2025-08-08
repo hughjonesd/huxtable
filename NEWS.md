@@ -8,7 +8,7 @@
 
 ## Other changes
 
-* HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
+man* HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
   body rows in `<tbody>` when header rows are at the top of the table.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.

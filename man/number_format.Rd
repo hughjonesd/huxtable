@@ -16,16 +16,8 @@ set_number_format(ht, row, col, value)
 map_number_format(ht, row, col, fn)
 }
 \arguments{
-\item{ht}{A huxtable.}
-
 \item{value}{A character or integer vector,
 a list containing a function, or \code{NA}. Note that setting to \code{NA} does not reset to the default.}
-
-\item{row}{A row specifier. See \link{rowspecs} for details.}
-
-\item{col}{An optional column specifier.}
-
-\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 If \code{number_format} is:

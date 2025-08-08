@@ -7,12 +7,6 @@
 set_markdown_contents(ht, row, col, value)
 }
 \arguments{
-\item{ht}{A huxtable.}
-
-\item{row}{A row specifier. See \link{rowspecs} for details.}
-
-\item{col}{An optional column specifier.}
-
 \item{value}{Cell contents, as a markdown string.}
 }
 \value{

@@ -16,15 +16,7 @@ set_na_string(ht, row, col, value)
 map_na_string(ht, row, col, fn)
 }
 \arguments{
-\item{ht}{A huxtable.}
-
 \item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is .}
-
-\item{row}{A row specifier. See \link{rowspecs} for details.}
-
-\item{col}{An optional column specifier.}
-
-\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 NA values in the huxtable are printed as the value of \code{na_string}.
