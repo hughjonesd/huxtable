@@ -94,6 +94,12 @@ to_typst <- function(ht, ...) {
 
 # helpers -----------------------------------------------------------------------
 
+#' Build options for a Typst table
+#'
+#' @param ht A huxtable.
+#' @param col_w_str Character vector of column widths formatted for Typst.
+#'
+#' @return Character vector of table options to be passed to `#table`.
 #' @noRd
 typst_table_options <- function(ht, col_w_str) {
   table_opts <- c(paste0("columns: (", paste(col_w_str, collapse = ", "), ")"))
@@ -141,6 +147,14 @@ typst_table_options <- function(ht, col_w_str) {
   table_opts
 }
 
+#' Create a Typst table cell
+#'
+#' @param ht A huxtable.
+#' @param row Row index of the cell.
+#' @param col Column index of the cell.
+#' @param content Cell contents as a string.
+#'
+#' @return A single Typst cell string, e.g. `cell()[...]`.
 #' @noRd
 typst_cell <- function(ht, row, col, content) {
   opts <- typst_cell_options(ht = ht, row = row, col = col)
@@ -153,6 +167,13 @@ typst_cell <- function(ht, row, col, content) {
   sprintf("cell%s[%s]", cell_opts, text)
 }
 
+#' Derive Typst cell options
+#'
+#' @param ht A huxtable.
+#' @param row Row index.
+#' @param col Column index.
+#'
+#' @return Character vector of cell options (possibly empty).
 #' @noRd
 typst_cell_options <- function(ht, row, col) {
   opts <- c()
@@ -171,9 +192,8 @@ typst_cell_options <- function(ht, row, col) {
     opts <- c(opts, sprintf("align: %s", horizontal_align))
   }
 
-  row_height <- row_height(ht)[row]
-  if (!is.na(row_height)) {
-    rh <- row_height
+  rh <- row_height(ht)[row]
+  if (!is.na(rh)) {
     if (is.numeric(rh)) rh <- sprintf("%.3f%%", rh * 100)
     opts <- c(opts, sprintf("height: %s", rh))
   }
@@ -206,6 +226,13 @@ typst_cell_options <- function(ht, row, col) {
   opts
 }
 
+#' Construct a Typst stroke declaration
+#'
+#' @param ht A huxtable.
+#' @param row Row index.
+#' @param col Column index.
+#'
+#' @return A single `stroke` option or `NULL` if no borders are set.
 #' @noRd
 typst_stroke <- function(ht, row, col) {
   tb <- brdr_thickness(top_border(ht))[row, col]
@@ -234,6 +261,14 @@ typst_stroke <- function(ht, row, col) {
   }
 }
 
+#' Apply text styling for a Typst cell
+#'
+#' @param ht A huxtable.
+#' @param row Row index.
+#' @param col Column index.
+#' @param cell_text The cell's content string.
+#'
+#' @return A string containing Typst markup for the styled text.
 #' @noRd
 typst_cell_text <- function(ht, row, col, cell_text) {
   text_opts <- c()
@@ -242,7 +277,6 @@ typst_cell_text <- function(ht, row, col, cell_text) {
   if (!is.na(fs <- font_size(ht)[row, col])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
   if (!is.na(f <- font(ht)[row, col])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
   if (!is.na(tc <- text_color(ht)[row, col])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
-
 
   if (length(text_opts) > 0) {
     text <- sprintf("#text(%s)[%s]", paste(text_opts, collapse = ", "), cell_text)
