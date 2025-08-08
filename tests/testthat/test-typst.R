@@ -37,8 +37,8 @@ test_that("to_typst handles vertical alignment", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   valign(ht) <- matrix(c("middle", "top", "top", "bottom"), 2, 2)
   res <- to_typst(ht)
-  expect_match(res, "cell\\(align: \\(right, center\\), inset: 6pt\\)\\[1\\]")
-  expect_match(res, "cell\\(align: \\(right, bottom\\), inset: 6pt\\)\\[4\\]")
+  expect_match(res, "cell\\(align: \\(right \\+ horizon\\)\\)\\[1\\]")
+  expect_match(res, "cell\\(align: \\(right \\+ bottom\\)\\)\\[4\\]")
 })
 
 test_that("to_typst maps properties", {
@@ -75,7 +75,10 @@ test_that("to_typst maps properties", {
   expect_match(res, "align: (right + top)", fixed = TRUE)
   expect_match(res, "fill: rgb")
   expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
-  expect_match(res, "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\"\\)\\[1\\]")
+  expect_match(
+    res,
+    "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb\\(0, 0, 255\\)\\)\\[1\\]"
+  )
   expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
 })
 
