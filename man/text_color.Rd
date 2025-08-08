@@ -8,26 +8,23 @@
 \title{Set the color of text in cells}
 \usage{
 text_color(ht)
+
 text_color(ht) <- value
-set_text_color(ht, row, col, value )
+
+set_text_color(ht, row, col, value)
+
 map_text_color(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is NA.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{"NA"}.}
-}
-\value{
-\code{text_color()} returns the \code{text_color} property.
-\code{set_text_color()} returns the modified huxtable.
 }
 \description{
 Colors can be in any format understood by R:
@@ -38,15 +35,13 @@ Colors can be in any format understood by R:
 }
 }
 \examples{
-
-text_color(jams) <-  "blue"
+text_color(jams) <- "blue"
 text_color(jams)
 
 set_text_color(jams, "red")
-set_text_color(jams,
-      2:3, 1, "red")
-map_text_color(jams,
-      by_rows("red", "blue"))
+set_text_color(jams, 2:3, 1, "red")
+map_text_color(jams, by_rows("red", "blue"))
+
 }
 \seealso{
 Other formatting functions: 

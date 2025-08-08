@@ -8,26 +8,24 @@
 \title{Set how numbers are formatted in cells}
 \usage{
 number_format(ht)
+
 number_format(ht) <- value
-set_number_format(ht, row, col, value )
+
+set_number_format(ht, row, col, value)
+
 map_number_format(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character or integer vector,
+a list containing a function, or \code{NA}. Note that setting to \code{NA} does not reset to the default.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character or integer vector,
-
-Note that setting to \code{NA} does not reset to the default.}
-}
-\value{
-\code{number_format()} returns the \code{number_format} property.
-\code{set_number_format()} returns the modified huxtable.
 }
 \description{
 If \code{number_format} is:

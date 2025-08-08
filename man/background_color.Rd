@@ -8,26 +8,23 @@
 \title{Set cell background color}
 \usage{
 background_color(ht)
+
 background_color(ht) <- value
-set_background_color(ht, row, col, value )
+
+set_background_color(ht, row, col, value)
+
 map_background_color(ht, row, col, fn)
 }
 \arguments{
 \item{ht}{A huxtable.}
+
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is NA.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
 \item{col}{An optional column specifier.}
 
 \item{fn}{A mapping function. See \link{mapping-functions} for details.}
-
-\item{value}{A character vector or matrix.
-
-Set to \code{NA} to reset to the default, which is \code{"NA"}.}
-}
-\value{
-\code{background_color()} returns the \code{background_color} property.
-\code{set_background_color()} returns the modified huxtable.
 }
 \description{
 Colors can be in any format understood by R:
@@ -41,15 +38,13 @@ Colors can be in any format understood by R:
 Transparent colors are not guaranteed to work at present.
 }
 \examples{
-
-background_color(jams) <-  grey(0.7)
+background_color(jams) <- grey(0.7)
 background_color(jams)
 
 set_background_color(jams, "yellow")
-set_background_color(jams,
-      2:3, 1, "yellow")
-map_background_color(jams,
-      by_rows("yellow", grey(0.7)))
+set_background_color(jams, 2:3, 1, "yellow")
+map_background_color(jams, by_rows("yellow", grey(0.7)))
+
 }
 \seealso{
 Other formatting functions: 
