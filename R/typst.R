@@ -34,7 +34,9 @@ to_typst <- function(ht, ...) {
 
   rs <- rowspan(ht)
   cs <- colspan(ht)
-  align <- real_align(ht)
+  align_h <- real_align(ht)
+  align_v <- valign(ht)
+  align <- ifelse(is.na(align_v), align_h, paste0("(", align_h, ", ", align_v, ")"))
 
   col_w <- col_width(ht)
   if (is.numeric(col_w)) {
@@ -60,7 +62,38 @@ to_typst <- function(ht, ...) {
   }
 
   row_strings <- apply(cells, 1, function(x) paste(x[x != ""], collapse = " "))
-  result <- paste0(table_start, paste0("  ", row_strings, collapse = "\n"), "\n]\n")
+
+  hr <- header_rows(ht)
+  hc <- header_cols(ht)
+
+  header_block <- ""
+  if (any(hr)) {
+    header_rows_strings <- row_strings[hr]
+    header_block <- paste0(
+      "  table.header[\n",
+      paste0("    ", header_rows_strings, collapse = "\n"),
+      "\n  ]\n"
+    )
+    row_strings <- row_strings[!hr]
+  }
+
+  header_cols_block <- ""
+  if (any(hc)) {
+    col_strings <- apply(cells[, hc, drop = FALSE], 1, function(x) paste(x[x != ""], collapse = " "))
+    header_cols_block <- paste0(
+      "  table.header(columns: (", paste(hc, collapse = ", "), "))[\n",
+      paste0("    ", col_strings, collapse = "\n"),
+      "\n  ]\n"
+    )
+  }
+
+  result <- paste0(
+    table_start,
+    header_block,
+    header_cols_block,
+    paste0("  ", row_strings, collapse = "\n"),
+    "\n]\n"
+  )
   result
 }
 

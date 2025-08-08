@@ -14,6 +14,23 @@ test_that("to_typst basic table structure", {
   expect_identical(res, expected)
 })
 
+test_that("header rows rendered separately", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  header_rows(ht) <- c(TRUE, FALSE)
+  res <- to_typst(ht)
+  expected <- paste0(
+    "#table(\n",
+    "  columns: (auto, auto)\n",
+    ")[\n",
+    "  table.header[\n",
+    "    cell(align: (right, top))[1] cell(align: (right, top))[3]\n",
+    "  ]\n",
+    "  cell(align: (right, top))[2] cell(align: (right, top))[4]\n",
+    "]\n"
+  )
+  expect_identical(res, expected)
+})
+
 test_that("to_typst maps properties", {
   ht <- hux(a = 1:3, b = 4:6, c = 7:9, add_colnames = FALSE)
   caption(ht) <- "A cap"
