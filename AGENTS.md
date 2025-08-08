@@ -1,15 +1,6 @@
 
 Use short branch names. Start with "feature", "bugfix", "refactor" or "chore". 
 
-At the end of any task, if you've made changes, run the tests in tests/testthat 
-to make sure everything is still working. If there are errors due to your code, 
-fix them before completing. You don't have to run every test; in particular those
-in test-yy-end-to-end.R and test-zz-fuzz.R may take a long time so you may want 
-to skip those, or even just run a single test file if you're confident. (Github 
-will run a full suite of tests later.) But if you make big architectural changes,
-run all or almost all tests. You can filter out fuzz tests using:
-`devtools::test(filter = "^(?!.*fuzz)", perl = TRUE)`.
-
 Don't change the API without asking first.
 
 If you write a new function, give it Roxygen documentation. If it's internal,
@@ -20,6 +11,18 @@ If you've written user-visible Roxygen, run `devtools::document()`. You can
 ignore errors due to missing packages ("flextable", "lmtest") unless you're working
 on those particular parts of the system. If you are, then just install the
 missing packages.
+
+At the end of any task, if you've made changes, run the tests in tests/testthat 
+to make sure everything is still working. If there are errors due to your code, 
+fix them before completing. You don't have to run every test; in particular those
+in test-yy-end-to-end.R and test-zz-fuzz.R may take a long time so you may want 
+to skip those, or even just run a single test file if you're confident. (Github 
+will run a full suite of tests later.) But if you make big architectural changes,
+run all or almost all tests. You can filter out fuzz tests using:
+`devtools::test(filter = "^(?!.*fuzz)", perl = TRUE)`.
+
+You can install quarto, typst, or latex by running the ./install-*.sh files in your
+home directory. They are not installed automatically to save setup time.
 
 Not all packages in Suggests: in the DESCRIPTION file are installed. You
 can install them if you need to. But, if tests break because a suggested
