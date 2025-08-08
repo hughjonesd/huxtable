@@ -10,26 +10,26 @@
 \title{Mark rows or columns as headers}
 \usage{
 header_cols(ht)
+
 header_cols(ht) <- value
+
 set_header_cols(ht, col, value)
 
 header_rows(ht)
+
 header_rows(ht) <- value
+
 set_header_rows(ht, row, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{col}{A col specifier. See \link{rowspecs} for details.}
-
 \item{value}{Logical vector. Set to \code{NA} to reset to the default,
-which is \code{FALSE}.}
+which is FALSE.}
+
+\item{col}{A column specifier. See \link{rowspecs} for details.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
-}
-\value{
-\code{header_cols()} returns the \code{header_cols} property.
-\code{set_header_cols()} returns the modified huxtable.
 }
 \description{
 Arbitrary rows and columns can be headers: they do not have to be at the top
