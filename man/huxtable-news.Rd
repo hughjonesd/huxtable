@@ -22,6 +22,8 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 default values dynamically.
 \item Cell property helpers like alignment, colors, wrapping, etc. are
 documented with plain Roxygen and default values update automatically.
+\item Documentation for border and padding helpers now inherits parameters
+and orders usage consistently.
 }
 }
 }

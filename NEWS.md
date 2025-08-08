@@ -12,6 +12,7 @@
   dynamically.
 * Cell property helpers like alignment, colors, wrapping, etc. are documented with
   plain Roxygen and default values update automatically.
+* Documentation for border and padding helpers now inherits parameters and orders usage consistently.
 
 # huxtable 5.6.0
 
