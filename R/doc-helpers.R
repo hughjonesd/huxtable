@@ -19,7 +19,7 @@
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
-#' @noRd
+#' @keywords internal
 #'
 #' @name .hux_prop_params
 NULL

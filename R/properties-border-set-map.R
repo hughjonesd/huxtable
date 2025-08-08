@@ -75,11 +75,6 @@ allowed_border_styles <- c("solid", "double", "dashed", "dotted")
 #'
 #' These functions set borders between cells.
 #'
-#' @param ht A huxtable.
-#' @param row A row specifier. See [rowspecs] for details.
-#' @param col An optional column specifier.
-#' @param value A numeric thickness or a [brdr()] object. `r .rd_default("border")`
-#' @param fn A mapping function. See [mapping-functions] for details.
 #' @inheritParams .hux_prop_params
 #' @param value A numeric thickness or a [brdr()] object. `r .rd_default("border")`
 #'

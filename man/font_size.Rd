@@ -16,7 +16,15 @@ set_font_size(ht, row, col, value)
 map_font_size(ht, row, col, fn)
 }
 \arguments{
+\item{ht}{A huxtable.}
+
 \item{value}{A numeric vector. Set to \code{NA} to reset to the default, which is NA.}
+
+\item{row}{A row specifier. See \link{rowspecs} for details.}
+
+\item{col}{An optional column specifier.}
+
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 Font size is in points.

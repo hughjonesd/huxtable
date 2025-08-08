@@ -16,7 +16,15 @@ set_rotation(ht, row, col, value)
 map_rotation(ht, row, col, fn)
 }
 \arguments{
+\item{ht}{A huxtable.}
+
 \item{value}{A numeric vector or matrix. Set to \code{NA} to reset to the default, which is 0.}
+
+\item{row}{A row specifier. See \link{rowspecs} for details.}
+
+\item{col}{An optional column specifier.}
+
+\item{fn}{A mapping function. See \link{mapping-functions} for details.}
 }
 \description{
 Numbers represent degrees to rotate text anti-clockwise:
