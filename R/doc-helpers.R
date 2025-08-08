@@ -5,7 +5,7 @@
 #' @param prop Property name in `huxtable_env$huxtable_default_attrs`.
 #' @return A character string for inline Roxygen.
 #' @noRd
-.rd_default <- function(prop) {
+rd_default <- function(prop) {
   default <- huxtable_env$huxtable_default_attrs[[prop]]
   paste0("Set to `NA` to reset to the default, which is ", default, ".")
 }
@@ -21,5 +21,5 @@
 #' @param fn A mapping function. See [mapping-functions] for details.
 #' @keywords internal
 #'
-#' @name .hux_prop_params
+#' @name hux_prop_params
 NULL
