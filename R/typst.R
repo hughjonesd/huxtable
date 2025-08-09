@@ -39,7 +39,7 @@ to_typst <- function(ht, ...) {
   }
 
   table_opts <- typst_table_options(ht, col_w_str)
-  table_start <- paste0("#table(\n  ", paste(table_opts, collapse = ",\n  "), "\n)[\n")
+  table_start <- paste0("table(\n  ", paste(table_opts, collapse = ",\n  "), ",\n")
 
   cells <- matrix("", nrow(ht), ncol(ht))
 
@@ -56,7 +56,7 @@ to_typst <- function(ht, ...) {
     }
   }
 
-  row_strings <- apply(cells, 1, function(x) paste(x[x != ""], collapse = " "))
+  row_strings <- apply(cells, 1, function(x) paste(x[x != ""], collapse = ", "))
 
   hr <- header_rows(ht)
   hc <- header_cols(ht)
@@ -65,9 +65,9 @@ to_typst <- function(ht, ...) {
   if (any(hr)) {
     header_rows_strings <- row_strings[hr]
     header_block <- paste0(
-      "  table.header[\n",
+      "  table.header(\n",
       paste0("    ", header_rows_strings, collapse = "\n"),
-      "\n  ]\n"
+      "\n  ),\n"
     )
     row_strings <- row_strings[!hr]
   }
@@ -86,9 +86,16 @@ to_typst <- function(ht, ...) {
     table_start,
     header_block,
     header_cols_block,
-    paste0("  ", row_strings, collapse = "\n"),
-    "\n]\n"
+    paste0("  ", row_strings, collapse = ",\n"),
+    "\n)"
   )
+
+  result <- typst_figure(ht, result)
+
+  if (using_quarto()) {
+    result <- paste("\n\n```{=typst}\n", result, "\n```\n\n")
+  }
+
   result
 }
 
@@ -104,48 +111,44 @@ to_typst <- function(ht, ...) {
 typst_table_options <- function(ht, col_w_str) {
   table_opts <- c(paste0("columns: (", paste(col_w_str, collapse = ", "), ")"))
 
-  w <- width(ht)
-  if (!is.na(w)) {
-    if (is.numeric(w)) w <- sprintf("%.3f%%", w * 100)
-    table_opts <- c(table_opts, sprintf("width: %s", w))
-  }
-
-  h <- height(ht)
-  if (!is.na(h)) {
-    if (is.numeric(h)) h <- sprintf("%.3f%%", h * 100)
-    table_opts <- c(table_opts, sprintf("height: %s", h))
-  }
-
   pos <- position(ht)
   if (!is.na(pos) && pos %in% c("left", "right")) {
     align <- pos
     table_opts <- c(table_opts, sprintf("align: %s", align))
   }
 
-  lab <- make_label(ht)
-  cap_raw <- caption(ht)
-  if (!is.na(cap_raw)) {
-    cap <- make_caption(ht, lab, "latex")
-
-    fig_opts <- c(sprintf("caption: [%s]", cap))
-
-    cp <- caption_pos(ht)
-    if (!is.na(cp)) {
-      vpos <- if (grepl("top", cp)) "top" else "bottom"
-      fig_opts <- c(fig_opts, sprintf("position: %s", vpos))
-    }
-
-    cw <- caption_width(ht)
-    if (!is.na(cw)) {
-      if (is.numeric(cw)) cw <- sprintf("%.3f%%", cw * 100)
-      table_opts <- c(table_opts, sprintf("caption-width: %s", cw))
-    }
-
-    table_opts <- c(table_opts, sprintf("figure: (%s)", paste(fig_opts, collapse = ", ")))
-  }
-
   table_opts
 }
+
+
+#' Surround text by a typst figure
+#'
+#' @noRd
+typst_figure <- function(ht, text) {
+  cap <-  if (is.na(caption(ht))) {
+            "none"
+          } else {
+            lab <- make_label(ht)
+            cap <- caption(ht) # TODO what about labels?
+            paste0("[", cap, "]")
+          }
+
+  cap <- sprintf("caption: %s", cap)
+
+  # TODO: caption_pos, caption_width, position, numbering, label
+
+  fig <- paste0(
+    "#figure(\n",
+    text,
+    ",\n",
+    cap,
+    "\n",
+    ")"
+  )
+
+  return(fig)
+}
+
 
 #' Create a Typst table cell
 #'
@@ -164,7 +167,7 @@ typst_cell <- function(ht, row, col, content) {
   } else {
     ""
   }
-  sprintf("cell%s[%s]", cell_opts, text)
+  sprintf("table.cell%s[%s]", cell_opts, text)
 }
 
 #' Derive Typst cell options

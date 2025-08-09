@@ -22,7 +22,7 @@ use_bookdown_style_captions <- function() {
 }
 
 
-make_caption <- function(ht, label, format = c("html", "latex", "md")) {
+make_caption <- function(ht, label, format = c("html", "latex", "md", "typst")) {
   format <- match.arg(format)
 
   raw_cap <- caption(ht)

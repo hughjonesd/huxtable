@@ -1,0 +1,14 @@
+---
+title: "Quarto Typst Test"
+format: typst
+keep-typ: true
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(huxtable)
+jams
+```

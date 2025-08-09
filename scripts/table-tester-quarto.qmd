@@ -1,0 +1,43 @@
+---
+title: "Huxtable quarto demo"
+author: "David Hugh-Jones"
+date: "2/03/2017"
+format: typst
+keep-typ: true
+---
+
+
+```{r setup, echo = FALSE}
+
+library(huxtable)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+```{r}
+
+make <- function(nrow = 2, ncol = 2, text1 = 'Some text', text2 = 'Some more text', more_text = 'Some text') {
+  ht <- hux(a = rep(text1, nrow), b = rep(text2, nrow), add_colnames = FALSE)
+  for (i in seq_len(ncol -2)) {
+    ht <- cbind(ht, rep(more_text[i], nrow))
+  }
+  ht <- set_all_borders(ht, 1)
+  ht <- set_background_color(ht, odds, everywhere, 'orange')
+  ht <- set_background_color(ht, evens, everywhere, 'green')
+  ht <- set_tabular_environment(ht, "tabular")
+  ht
+}
+
+long <- 'A rather long row of text which goes on...'
+
+```
+
+# Width and colwidth
+
+```{r}
+ht <- make()
+caption(ht) <- 'both unset'
+ht
+
+
+```
