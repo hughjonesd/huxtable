@@ -204,6 +204,15 @@ test_that("output works with 1x1 huxtables", {
 })
 
 
+test_that("Bugfix: print_html doesn't duplicate rows", {
+  html <- to_html(hux(letters[1:2]))
+  tbody_count <- length(regmatches(html, gregexpr("<tbody>", html, fixed = TRUE))[[1]])
+  td_count <- length(regmatches(html, gregexpr("<td", html, fixed = TRUE))[[1]])
+  expect_identical(tbody_count, 1L)
+  expect_identical(td_count, 2L)
+})
+
+
 test_that("format.huxtable works", {
   ht <- hux(a = 1:3, b = 1:3)
   for (output in c("latex", "html", "md", "screen", "typst")) {

@@ -293,7 +293,6 @@ build_row_html <- function(ht, cells_html) {
     cells_html <- paste0(row_html, collapse = "")
   }
 
-  cells_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
   paste0(cells_html, collapse = "")
 }
 
