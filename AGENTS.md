@@ -3,6 +3,10 @@ Use short branch names. Start with "feature", "bugfix", "refactor" or "chore".
 
 Don't change the API without asking first.
 
+If you find a user-visible bug, then consider writing a test for it. Title the
+test "Bugfix: ..." and put it in the most relevant existing test file. Then 
+use it to confirm you've fixed the bug.
+
 If you write a new function, give it Roxygen documentation. If it's internal,
 use the `@noRd` tag, and keep it simple and developer-focused. Similarly, 
 if you edit an existing internal function, take the chance to document it. 
