@@ -20,16 +20,11 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @return `to_screen` returns a string. `print_screen` prints the string and returns `NULL`.
 #'
 #' @details
-#' Screen display shows the following features:
-#'
-#' * Table and caption positioning
-#' * Merged cells
-#' * Cell alignment
-#' * Borders
-#' * Cell background and border color (if the "crayon" package is installed)
-#' * Text color, bold and italic (if the "crayon" package is installed)
-#'
-#' Cell padding, widths and heights are not shown, nor are border styles.
+#' This implementation draws a simple text representation using
+#' Unicode box-drawing characters. It focuses on width handling and
+#' basic borders and does not attempt to reproduce every styling
+#' feature of other output formats. The `color` argument is accepted
+#' for compatibility but currently ignored.
 #'
 #' @export
 #' @family printing functions
@@ -42,7 +37,51 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' )
 #'
 #' print_screen(jams)
-to_screen <- NULL
+to_screen <- function(ht, min_width = 0, max_width = Inf, compact = FALSE,
+                      colnames = TRUE, color = TRUE) {
+  assert_that(is_huxtable(ht))
+  if (color && !requireNamespace("crayon", quietly = TRUE)) {
+    warning("crayon package is required for color output", call. = FALSE)
+  }
+
+  char_data <- character_matrix(ht, colnames = colnames)
+  mat <- char_data$strings
+  widths <- char_data$widths
+  ncols <- length(widths)
+
+  make_hline <- function() {
+    paste0("+", paste0(stringi::stri_dup("-", widths + 2), collapse = "+"), "+")
+  }
+
+  make_row <- function(row) {
+    cells <- vapply(seq_len(ncols), function(i) {
+      stringi::stri_pad(row[i], widths[i], side = "right", use_length = TRUE)
+    }, character(1))
+    paste0("| ", paste(cells, collapse = " | "), " |")
+  }
+
+  rows <- apply(mat, 1, make_row)
+  hline <- make_hline()
+
+  if (colnames && nrow(mat) > 0) {
+    body <- c(rows[1], hline, rows[-1])
+  } else {
+    body <- rows
+  }
+  out <- c(hline, body, hline)
+
+  # enforce max_width by truncating
+  if (is.finite(max_width)) {
+    out <- stringi::stri_sub(out, 1, max_width)
+  }
+
+  # ensure min_width
+  if (min_width > 0) {
+    out <- stringi::stri_pad(out, min_width, side = "right", use_length = TRUE)
+  }
+
+  paste(c(out, ""), collapse = "\n")
+}
 
 #' Apply borders and colours to a character matrix for screen output
 #'
@@ -120,24 +159,25 @@ apply_screen_borders <- function(ht, char_data, color) {
 
 # calculate text column widths, wrap huxtable text accordingly, and return a
 # matrix of characters, without borders
- #' Build a matrix of characters representing a huxtable
- #'
- #' This is an internal workhorse for screen and markdown output. It
- #' calculates column widths, wraps and aligns cell contents and returns
- #' matrices of characters and their screen widths together with border
- #' locations.
- #'
- #' @param ht A huxtable.
- #' @param inner_border_h,inner_border_v Widths of borders between cells.
- #' @param outer_border_h,outer_border_v Widths of the table's outer borders.
- #' @param min_width Minimum width of the rendered table.
- #' @param max_width Maximum width of the rendered table.
- #' @param color Logical. If `TRUE` then text is coloured using crayon.
- #' @param markdown Logical. If `TRUE` then strings are formatted for markdown output.
- #' @return A list with `charmat`, `width_mat`, `border_rows`, `border_cols`
- #'   and `last_ht_col`.
- #' @noRd
-character_matrix <- NULL
+#' Build a matrix of characters representing a huxtable
+#'
+#' This minimal internal helper extracts cell contents as strings and
+#' calculates simple column widths for use by [to_screen()].
+#'
+#' @param ht A huxtable.
+#' @param colnames Logical. Include column names as the first row?
+#' @return A list with `strings`, a character matrix, and `widths`, the
+#'   display width of each column.
+#' @noRd
+character_matrix <- function(ht, colnames = TRUE, ...) {
+  assert_that(is_huxtable(ht))
+  mat <- clean_contents(ht, output_type = "screen")
+  if (colnames) {
+    mat <- rbind(colnames(ht), mat)
+  }
+  widths <- apply(mat, 2, function(x) max(stringi::stri_width(x), na.rm = TRUE))
+  list(strings = mat, widths = widths)
+}
 
 
 col_aware_strsplit <- function(...) {
