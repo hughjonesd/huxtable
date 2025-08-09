@@ -10,14 +10,12 @@
 
 * HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
   body rows in `<tbody>` when header rows are at the top of the table.
-* Added Typst export via `to_typst()` and `print_typst()`.
+* Added Typst export via `to_typst()` and `print_typst()`. Quarto integration
+  is available as well as `quick_typst()` and `quick_typst_pdf()` functions.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
-* Added Typst export via `to_typst()` and `print_typst()`.
-* Added `quick_typst()` and `quick_typst_pdf()` for Typst output.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
-* Bugfix: `print_html()` duplicated table rows for simple huxtables.
 
 
 # huxtable 5.6.0

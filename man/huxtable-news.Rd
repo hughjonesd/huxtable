@@ -20,14 +20,13 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \itemize{
 \item HTML tables now wrap header rows in \verb{<thead>} (using \verb{<th>} cells) and
 body rows in \verb{<tbody>} when header rows are at the top of the table.
-\item Added Typst export via \code{to_typst()} and \code{print_typst()}.
+\item Added Typst export via \code{to_typst()} and \code{print_typst()}. Quarto
+integration is available as well as \code{quick_typst()} and
+\code{quick_typst_pdf()} functions.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
-\item Added Typst export via \code{to_typst()} and \code{print_typst()}.
-\item Added \code{quick_typst()} and \code{quick_typst_pdf()} for Typst output.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
 \item \code{to_screen()} now displays double, dashed and dotted border styles.
-\item Bugfix: \code{print_html()} duplicated table rows for simple huxtables.
 }
 }
 }
