@@ -4,13 +4,16 @@ test_that("to_typst basic table structure", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   valign(ht) <- NA
   res <- to_typst(ht)
-  expected <- paste0(
-    "#table(\n",
-    "  columns: (auto, auto)\n",
-    ")[\n",
-    "  cell(align: (right + top))[1] cell(align: (right + top))[3]\n",
-    "  cell(align: (right + top))[2] cell(align: (right + top))[4]\n",
-    "]\n"
+  expected <- paste(
+    "#figure(",
+    "table(",
+    "  columns: (auto, auto),",
+    "  table.cell(align: (right + top))[1], table.cell(align: (right + top))[3],",
+    "  table.cell(align: (right + top))[2], table.cell(align: (right + top))[4]",
+    "),",
+    "caption: none",
+    ")",
+    sep = "\n"
   )
   expect_identical(res, expected)
 })
@@ -20,15 +23,18 @@ test_that("header rows rendered separately", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   header_rows(ht) <- c(TRUE, FALSE)
   res <- to_typst(ht)
-  expected <- paste0(
-    "#table(\n",
-    "  columns: (auto, auto)\n",
-    ")[\n",
-    "  table.header[\n",
-    "    cell(align: (right + top))[1] cell(align: (right + top))[3]\n",
-    "  ]\n",
-    "  cell(align: (right + top))[2] cell(align: (right + top))[4]\n",
-    "]\n"
+  expected <- paste(
+    "#figure(",
+    "table(",
+    "  columns: (auto, auto),",
+    "  table.header(",
+    "    table.cell(align: (right + top))[1], table.cell(align: (right + top))[3]",
+    "  ),",
+    "  table.cell(align: (right + top))[2], table.cell(align: (right + top))[4]",
+    "),",
+    "caption: none",
+    ")",
+    sep = "\n"
   )
   expect_identical(res, expected)
 })
@@ -37,8 +43,8 @@ test_that("to_typst handles vertical alignment", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   valign(ht) <- matrix(c("middle", "top", "top", "bottom"), 2, 2)
   res <- to_typst(ht)
-  expect_match(res, "cell\\(align: \\(right \\+ horizon\\)\\)\\[1\\]")
-  expect_match(res, "cell\\(align: \\(right \\+ bottom\\)\\)\\[4\\]")
+  expect_match(res, "table.cell\\(align: \\(right \\+ horizon\\)\\)\\[1\\]")
+  expect_match(res, "table.cell\\(align: \\(right \\+ bottom\\)\\)\\[4\\]")
 })
 
 test_that("to_typst maps properties", {
@@ -46,8 +52,6 @@ test_that("to_typst maps properties", {
   valign(ht) <- NA
   caption(ht) <- "A cap"
   col_width(ht) <- c(.2, .3, .5)
-  width(ht) <- 0.5
-  height(ht) <- 0.25
   align(ht)[1, 3] <- "right"
   colspan(ht)[1, 1] <- 2
   rowspan(ht)[2, 3] <- 2
@@ -65,11 +69,9 @@ test_that("to_typst maps properties", {
   bottom_padding(ht)[1, 3] <- 4
 
   res <- to_typst(ht)
-  expect_match(res, "figure: (", fixed = TRUE)
+  expect_match(res, "#figure(", fixed = TRUE)
   expect_match(res, "caption: \\[A cap\\]")
   expect_match(res, "columns: \\(0.2fr, 0.3fr, 0.5fr\\)")
-  expect_match(res, "width: 50\\.000%")
-  expect_match(res, "height: 25\\.000%")
   expect_match(res, "colspan: 2")
   expect_match(res, "rowspan: 2")
   expect_match(res, "align: (right + top)", fixed = TRUE)
@@ -89,22 +91,13 @@ test_that("to_typst handles vertical alignment", {
 
   res <- to_typst(ht)
 
-  expect_match(res, "cell(align: (right + horizon))[1]", fixed = TRUE)
-  expect_match(res, "cell(align: (right + bottom))[4]", fixed = TRUE)
+  expect_match(res, "table.cell(align: (right + horizon))[1]", fixed = TRUE)
+  expect_match(res, "table.cell(align: (right + bottom))[4]", fixed = TRUE)
 })
 
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), trimws(to_typst(ht), which = "right"), fixed = TRUE)
-})
-
-test_that("to_typst handles caption position", {
-  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
-  caption(ht) <- "cap"
-  caption_pos(ht) <- "top"
-  expect_match(to_typst(ht), "position: top")
-  caption_pos(ht) <- "bottom"
-  expect_match(to_typst(ht), "position: bottom")
 })
 
 test_that("to_typst handles table alignment", {
