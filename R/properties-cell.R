@@ -51,7 +51,7 @@ set_valign <- function(ht, row, col, value) {
     is.character(value),
     all(na.omit(value) %in% c("top", "middle", "bottom"))
   )
-  prop_set(ht, args$row, args$col, value, "valign", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "valign", prepped = TRUE, env = args$env)
 }
 
 #' @rdname valign
@@ -67,7 +67,7 @@ map_valign <- function(ht, row, col, fn) {
     )
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "valign", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "valign", prepped = TRUE, env = args$env)
 }
 
 
@@ -156,7 +156,7 @@ set_align <- function(ht, row, col, value) {
   value <- args$value
   assert_not_all_na(value, check_align_value(value))
   value[value == "centre"] <- "center"
-  prop_set(ht, args$row, args$col, value, "align", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "align", prepped = TRUE, env = args$env)
 }
 
 #' @rdname align
@@ -170,7 +170,7 @@ map_align <- function(ht, row, col, fn) {
     value[value == "centre"] <- "center"
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "align", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "align", prepped = TRUE, env = args$env)
 }
 
 
@@ -489,7 +489,7 @@ set_wrap <- function(ht, row, col, value) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set(ht, args$row, args$col, value, "wrap", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "wrap", prepped = TRUE, env = args$env)
 }
 
 #' @rdname wrap
@@ -502,7 +502,7 @@ map_wrap <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.logical(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "wrap", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "wrap", prepped = TRUE, env = args$env)
 }
 
 
@@ -550,7 +550,7 @@ set_escape_contents <- function(ht, row, col, value) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set(ht, args$row, args$col, value, "escape_contents", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "escape_contents", prepped = TRUE, env = args$env)
 }
 
 #' @rdname escape_contents
@@ -563,7 +563,7 @@ map_escape_contents <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.logical(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "escape_contents", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "escape_contents", prepped = TRUE, env = args$env)
 }
 
 
@@ -626,7 +626,7 @@ set_markdown <- function(ht, row, col, value = TRUE) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set(ht, args$row, args$col, value, "markdown", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "markdown", prepped = TRUE, env = args$env)
 }
 
 #' @rdname markdown
@@ -639,7 +639,7 @@ map_markdown <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.logical(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "markdown", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "markdown", prepped = TRUE, env = args$env)
 }
 
 
@@ -678,7 +678,7 @@ set_na_string <- function(ht, row, col, value) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.character(value))
-  prop_set(ht, args$row, args$col, value, "na_string", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "na_string", prepped = TRUE, env = args$env)
 }
 
 #' @rdname na_string
@@ -691,7 +691,7 @@ map_na_string <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.character(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "na_string", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "na_string", prepped = TRUE, env = args$env)
 }
 
 
@@ -736,7 +736,7 @@ set_bold <- function(ht, row, col, value = TRUE) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set(ht, args$row, args$col, value, "bold", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "bold", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
@@ -749,7 +749,7 @@ map_bold <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.logical(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "bold", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "bold", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
@@ -769,7 +769,7 @@ set_italic <- function(ht, row, col, value = TRUE) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set(ht, args$row, args$col, value, "italic", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "italic", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
@@ -782,7 +782,7 @@ map_italic <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.logical(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "italic", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "italic", prepped = TRUE, env = args$env)
 }
 #' Make text larger or smaller
 #'
@@ -838,7 +838,7 @@ set_font_size <- function(ht, row, col, value) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.numeric(value))
-  prop_set(ht, args$row, args$col, value, "font_size", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "font_size", prepped = TRUE, env = args$env)
 }
 
 #' @rdname font_size
@@ -851,7 +851,7 @@ map_font_size <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.numeric(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "font_size", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "font_size", prepped = TRUE, env = args$env)
 }
 
 
@@ -917,7 +917,7 @@ set_rotation <- function(ht, row, col, value) {
   value <- args$value
   assert_not_all_na(value, is.numeric(value))
   value <- value %% 360
-  prop_set(ht, args$row, args$col, value, "rotation", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "rotation", prepped = TRUE, env = args$env)
 }
 
 #' @rdname rotation
@@ -931,7 +931,7 @@ map_rotation <- function(ht, row, col, fn) {
     value <- value %% 360
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "rotation", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "rotation", prepped = TRUE, env = args$env)
 }
 
 
@@ -1037,7 +1037,7 @@ set_number_format <- function(ht, row, col, value) {
   value <- args$value
   assert_not_all_na(value, check_number_format(value))
   prop_set(ht, args$row, args$col, value, "number_format",
-    reset_na = FALSE, prepped = TRUE
+    reset_na = FALSE, prepped = TRUE, env = args$env
   )
 }
 
@@ -1051,7 +1051,7 @@ map_number_format <- function(ht, row, col, fn) {
     assert_not_all_na(value, check_number_format(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "number_format", reset_na = FALSE, prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "number_format", reset_na = FALSE, prepped = TRUE, env = args$env)
 }
 
 
@@ -1163,7 +1163,7 @@ set_font <- function(ht, row, col, value) {
   args <- prep_set_args(ht, row, col, value)
   value <- args$value
   assert_not_all_na(value, is.character(value))
-  prop_set(ht, args$row, args$col, value, "font", prepped = TRUE)
+  prop_set(ht, args$row, args$col, value, "font", prepped = TRUE, env = args$env)
 }
 
 #' @rdname font
@@ -1176,5 +1176,5 @@ map_font <- function(ht, row, col, fn) {
     assert_not_all_na(value, is.character(value))
     value
   }
-  prop_map(ht, args$row, args$col, wrapped_fn, "font", prepped = TRUE)
+  prop_map(ht, args$row, args$col, wrapped_fn, "font", prepped = TRUE, env = args$env)
 }

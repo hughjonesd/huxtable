@@ -120,41 +120,65 @@ reset_prop_defaults <- function(value, prop, reset_na) {
 #'
 #' @noRd
 prep_map_args <- function(ht, row, col, fn) {
-  if (missing(col) && missing(fn)) {
-    fn <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
+  env <- parent.frame()
+  row_expr <- substitute(row)
+  col_expr <- substitute(col)
+  fn_expr  <- substitute(fn)
+  missing_row <- missing(row)
+  missing_col <- missing(col)
+  missing_fn  <- missing(fn)
+  if (missing_col && missing_fn) {
+    fn <- eval(row_expr, env)
+    row_expr <- quote(seq_len(nrow(ht)))
+    col_expr <- quote(seq_len(ncol(ht)))
   } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+    fn <- eval(fn_expr, env)
+    if (missing_row) row_expr <- quote(seq_len(nrow(ht)))
+    if (missing_col) col_expr <- quote(seq_len(ncol(ht)))
   }
-  list(row = row, col = col, fn = fn)
+  list(row = row_expr, col = col_expr, fn = fn, env = env)
 }
 
 #' Prepare row/col/value arguments for set_* wrappers
 #'
 #' @noRd
 prep_set_args <- function(ht, row, col, value) {
-  if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
+  env <- parent.frame()
+  row_expr <- substitute(row)
+  col_expr <- substitute(col)
+  val_expr <- substitute(value)
+  missing_row <- missing(row)
+  missing_col <- missing(col)
+  missing_val <- missing(value)
+  if (missing_col && missing_val) {
+    value <- eval(row_expr, env)
+    row_expr <- quote(seq_len(nrow(ht)))
+    col_expr <- quote(seq_len(ncol(ht)))
   } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+    value <- eval(val_expr, env)
+    if (missing_row) row_expr <- quote(seq_len(nrow(ht)))
+    if (missing_col) col_expr <- quote(seq_len(ncol(ht)))
   }
-  list(row = row, col = col, value = value)
+  list(row = row_expr, col = col_expr, value = value, env = env)
 }
 
 #' Prepare index/value arguments for row/column setters
 #'
 #' @noRd
 prep_index_args <- function(ht, idx, value, n) {
-  if (missing(value)) {
-    value <- idx
-    idx <- seq_len(n)
+  env <- parent.frame()
+  idx_expr <- substitute(idx)
+  val_expr <- substitute(value)
+  missing_idx <- missing(idx)
+  missing_val <- missing(value)
+  if (missing_val) {
+    value <- eval(idx_expr, env)
+    idx_expr <- quote(seq_len(n))
+  } else {
+    value <- eval(val_expr, env)
+    if (missing_idx) idx_expr <- quote(seq_len(n))
   }
-  list(idx = idx, value = value)
+  list(idx = idx_expr, value = value, env = env)
 }
 
 #' Replace an entire property matrix/vector
@@ -199,15 +223,15 @@ prop_replace <- function(ht, value, prop, reset_na = TRUE,
 #' @noRd
 prop_set <- function(ht, row, col, value, prop,
                       reset_na = TRUE, prepped = FALSE,
-                      coerce_mode = FALSE) {
+                      coerce_mode = FALSE, env = parent.frame()) {
   assert_that(is_huxtable(ht))
   if (!prepped) {
     args <- prep_set_args(ht, row, col, value)
-    row <- args$row; col <- args$col; value <- args$value
+    row <- args$row; col <- args$col; value <- args$value; env <- args$env
   }
   rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
+  rc$row <- get_rc_spec(ht, row, 1, env)
+  rc$col <- get_rc_spec(ht, col, 2, env)
   value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[rc$row, rc$col] <- value
   if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
@@ -222,15 +246,15 @@ prop_set <- function(ht, row, col, value, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_map <- function(ht, row, col, fn, prop,
-                      reset_na = TRUE, prepped = FALSE) {
+                      reset_na = TRUE, prepped = FALSE, env = parent.frame()) {
   assert_that(is_huxtable(ht))
   if (!prepped) {
     args <- prep_map_args(ht, row, col, fn)
-    row <- args$row; col <- args$col; fn <- args$fn
+    row <- args$row; col <- args$col; fn <- args$fn; env <- args$env
   }
   rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
+  rc$row <- get_rc_spec(ht, row, 1, env)
+  rc$col <- get_rc_spec(ht, col, 2, env)
   current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
   if (is_huxtable(current)) current <- as.matrix(current)
   value <- fn(ht, rc$row, rc$col, current)
@@ -246,13 +270,13 @@ prop_map <- function(ht, row, col, fn, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_set_row <- function(ht, row, value, prop,
-                          reset_na = TRUE, prepped = FALSE) {
+                          reset_na = TRUE, prepped = FALSE, env = parent.frame()) {
   assert_that(is_huxtable(ht))
   if (!prepped) {
     args <- prep_index_args(ht, row, value, nrow(ht))
-    row <- args$idx; value <- args$value
+    row <- args$idx; value <- args$value; env <- args$env
   }
-  row <- get_rc_spec(ht, row, 1)
+  row <- get_rc_spec(ht, row, 1, env)
   value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[row] <- value
   ht
@@ -265,13 +289,13 @@ prop_set_row <- function(ht, row, value, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_set_col <- function(ht, col, value, prop,
-                          reset_na = TRUE, prepped = FALSE) {
+                          reset_na = TRUE, prepped = FALSE, env = parent.frame()) {
   assert_that(is_huxtable(ht))
   if (!prepped) {
     args <- prep_index_args(ht, col, value, ncol(ht))
-    col <- args$idx; value <- args$value
+    col <- args$idx; value <- args$value; env <- args$env
   }
-  col <- get_rc_spec(ht, col, 2)
+  col <- get_rc_spec(ht, col, 2, env)
   value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[col] <- value
   ht

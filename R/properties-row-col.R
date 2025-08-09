@@ -50,7 +50,7 @@ set_col_width <- function(ht, col, value) {
   args <- prep_index_args(ht, col, value, ncol(ht))
   value <- args$value
   assert_not_all_na(value, is_numeric_or_character(value))
-  prop_set_col(ht, args$idx, value, "col_width", prepped = TRUE)
+  prop_set_col(ht, args$idx, value, "col_width", prepped = TRUE, env = args$env)
 }
 
 
@@ -94,7 +94,7 @@ set_row_height <- function(ht, row, value) {
   args <- prep_index_args(ht, row, value, nrow(ht))
   value <- args$value
   assert_not_all_na(value, is_numeric_or_character(value))
-  prop_set_row(ht, args$idx, value, "row_height", prepped = TRUE)
+  prop_set_row(ht, args$idx, value, "row_height", prepped = TRUE, env = args$env)
 }
 
 
@@ -142,7 +142,7 @@ set_header_cols <- function(ht, col, value) {
   args <- prep_index_args(ht, col, value, ncol(ht))
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set_col(ht, args$idx, value, "header_cols", prepped = TRUE)
+  prop_set_col(ht, args$idx, value, "header_cols", prepped = TRUE, env = args$env)
 }
 
 #' @rdname header_cols
@@ -169,5 +169,5 @@ set_header_rows <- function(ht, row, value) {
   args <- prep_index_args(ht, row, value, nrow(ht))
   value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set_row(ht, args$idx, value, "header_rows", prepped = TRUE)
+  prop_set_row(ht, args$idx, value, "header_rows", prepped = TRUE, env = args$env)
 }
