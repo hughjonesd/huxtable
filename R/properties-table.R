@@ -25,23 +25,21 @@ position <- function(ht) prop_get(ht, "position")
 #' @rdname position
 #' @export
 `position<-` <- function(ht, value) {
-  prop_replace(ht, value, "position",
-    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-    extra = quote({
-      value[value == "centre"] <- "center"
-    })
-  )
+  if (!all(is.na(value))) {
+    assert_that(all(na.omit(value) %in% c("left", "center", "centre", "right", "wrapleft", "wrapright")))
+  }
+  value[value == "centre"] <- "center"
+  prop_replace(ht, value, "position")
 }
 
 #' @rdname position
 #' @export
 set_position <- function(ht, value) {
-  prop_set_table(ht, value, "position",
-    check_values = c("left", "center", "centre", "right", "wrapleft", "wrapright"),
-    extra = quote({
-      value[value == "centre"] <- "center"
-    })
-  )
+  if (!all(is.na(value))) {
+    assert_that(all(na.omit(value) %in% c("left", "center", "centre", "right", "wrapleft", "wrapright")))
+  }
+  value[value == "centre"] <- "center"
+  prop_set_table(ht, value, "position")
 }
 
 
@@ -70,31 +68,29 @@ caption_pos <- function(ht) prop_get(ht, "caption_pos")
 #' @rdname caption_pos
 #' @export
 `caption_pos<-` <- function(ht, value) {
-  prop_replace(ht, value, "caption_pos",
-    check_values = c(
+  if (!all(is.na(value))) {
+    assert_that(all(na.omit(value) %in% c(
       "top", "bottom", "topleft", "topcenter", "topcentre",
       "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
-    ),
-    extra = quote({
-      value[value == "topcentre"] <- "topcenter"
-      value[value == "bottomcentre"] <- "bottomcenter"
-    })
-  )
+    )))
+  }
+  value[value == "topcentre"] <- "topcenter"
+  value[value == "bottomcentre"] <- "bottomcenter"
+  prop_replace(ht, value, "caption_pos")
 }
 
 #' @rdname caption_pos
 #' @export
 set_caption_pos <- function(ht, value) {
-  prop_set_table(ht, value, "caption_pos",
-    check_values = c(
+  if (!all(is.na(value))) {
+    assert_that(all(na.omit(value) %in% c(
       "top", "bottom", "topleft", "topcenter", "topcentre",
       "topright", "bottomleft", "bottomcenter", "bottomcentre", "bottomright"
-    ),
-    extra = quote({
-      value[value == "topcentre"] <- "topcenter"
-      value[value == "bottomcentre"] <- "bottomcenter"
-    })
-  )
+    )))
+  }
+  value[value == "topcentre"] <- "topcenter"
+  value[value == "bottomcentre"] <- "bottomcenter"
+  prop_set_table(ht, value, "caption_pos")
 }
 
 
@@ -124,13 +120,19 @@ caption_width <- function(ht) prop_get(ht, "caption_width")
 #' @rdname caption_width
 #' @export
 `caption_width<-` <- function(ht, value) {
-  prop_replace(ht, value, "caption_width", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_replace(ht, value, "caption_width")
 }
 
 #' @rdname caption_width
 #' @export
 set_caption_width <- function(ht, value) {
-  prop_set_table(ht, value, "caption_width", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_set_table(ht, value, "caption_width")
 }
 
 
@@ -158,13 +160,19 @@ width <- function(ht) prop_get(ht, "width")
 #' @rdname width
 #' @export
 `width<-` <- function(ht, value) {
-  prop_replace(ht, value, "width", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_replace(ht, value, "width")
 }
 
 #' @rdname width
 #' @export
 set_width <- function(ht, value) {
-  prop_set_table(ht, value, "width", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_set_table(ht, value, "width")
 }
 
 
@@ -193,13 +201,19 @@ height <- function(ht) prop_get(ht, "height")
 #' @rdname height
 #' @export
 `height<-` <- function(ht, value) {
-  prop_replace(ht, value, "height", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_replace(ht, value, "height")
 }
 
 #' @rdname height
 #' @export
 set_height <- function(ht, value) {
-  prop_set_table(ht, value, "height", check_fun = is_numeric_or_character)
+  if (!all(is.na(value))) {
+    assert_that(is_numeric_or_character(value))
+  }
+  prop_set_table(ht, value, "height")
 }
 
 
@@ -234,13 +248,19 @@ caption <- function(ht) prop_get(ht, "caption")
 #' @rdname caption
 #' @export
 `caption<-` <- function(ht, value) {
-  prop_replace(ht, value, "caption", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_replace(ht, value, "caption")
 }
 
 #' @rdname caption
 #' @export
 set_caption <- function(ht, value) {
-  prop_set_table(ht, value, "caption", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_set_table(ht, value, "caption")
 }
 
 
@@ -268,13 +288,19 @@ tabular_environment <- function(ht) prop_get(ht, "tabular_environment")
 #' @rdname tabular_environment
 #' @export
 `tabular_environment<-` <- function(ht, value) {
-  prop_replace(ht, value, "tabular_environment", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_replace(ht, value, "tabular_environment")
 }
 
 #' @rdname tabular_environment
 #' @export
 set_tabular_environment <- function(ht, value) {
-  prop_set_table(ht, value, "tabular_environment", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_set_table(ht, value, "tabular_environment")
 }
 
 
@@ -306,13 +332,19 @@ table_environment <- function(ht) prop_get(ht, "table_environment")
 #' @rdname table_environment
 #' @export
 `table_environment<-` <- function(ht, value) {
-  prop_replace(ht, value, "table_environment", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_replace(ht, value, "table_environment")
 }
 
 #' @rdname table_environment
 #' @export
 set_table_environment <- function(ht, value) {
-  prop_set_table(ht, value, "table_environment", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_set_table(ht, value, "table_environment")
 }
 
 
@@ -351,13 +383,19 @@ label <- function(ht) prop_get(ht, "label")
 #' @rdname label
 #' @export
 `label<-` <- function(ht, value) {
-  prop_replace(ht, value, "label", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_replace(ht, value, "label")
 }
 
 #' @rdname label
 #' @export
 set_label <- function(ht, value) {
-  prop_set_table(ht, value, "label", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_set_table(ht, value, "label")
 }
 
 
@@ -389,11 +427,17 @@ latex_float <- function(ht) prop_get(ht, "latex_float")
 #' @rdname latex_float
 #' @export
 `latex_float<-` <- function(ht, value) {
-  prop_replace(ht, value, "latex_float", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_replace(ht, value, "latex_float")
 }
 
 #' @rdname latex_float
 #' @export
 set_latex_float <- function(ht, value) {
-  prop_set_table(ht, value, "latex_float", check_fun = is.string)
+  if (!all(is.na(value))) {
+    assert_that(is.string(value))
+  }
+  prop_set_table(ht, value, "latex_float")
 }

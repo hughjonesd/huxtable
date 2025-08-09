@@ -35,27 +35,33 @@ valign <- function(ht) prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 `valign<-` <- function(ht, value) {
-  prop_replace(ht, value, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
-  )
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+    assert_that(all(na.omit(value) %in% c("top", "middle", "bottom")))
+  }
+  prop_replace(ht, value, "valign")
 }
 
 #' @rdname valign
 #' @export
 set_valign <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
-  )
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+    assert_that(all(na.omit(value) %in% c("top", "middle", "bottom")))
+  }
+  prop_set(ht, row, col, value, "valign")
 }
 
 #' @rdname valign
 #' @export
 map_valign <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.character(value))
+        assert_that(all(na.omit(value) %in% c("top", "middle", "bottom")))
+      }
+    })
   )
 }
 
@@ -133,27 +139,33 @@ align <- function(ht) prop_get(ht, "align")
 #' @rdname align
 #' @export
 `align<-` <- function(ht, value) {
-  prop_replace(ht, value, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
-  )
+  if (!all(is.na(value))) {
+    assert_that(check_align_value(value))
+  }
+  value[value == "centre"] <- "center"
+  prop_replace(ht, value, "align")
 }
 
 #' @rdname align
 #' @export
 set_align <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
-  )
+  if (!all(is.na(value))) {
+    assert_that(check_align_value(value))
+  }
+  value[value == "centre"] <- "center"
+  prop_set(ht, row, col, value, "align")
 }
 
 #' @rdname align
 #' @export
 map_align <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(check_align_value(value))
+      }
+      value[value == "centre"] <- "center"
+    })
   )
 }
 
@@ -191,8 +203,10 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 `rowspan<-` <- function(ht, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_replace(ht, value, "rowspan",
-    check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
       if (any(too_long)) {
@@ -209,8 +223,10 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 set_rowspan <- function(ht, row, col, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_set(ht, row, col, value, "rowspan",
-    check_fun = is.numeric,
     extra = quote({
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
       too_long <- na.omit(rows + value - 1 > nrow(ht))
@@ -231,8 +247,10 @@ set_rowspan <- function(ht, row, col, value) {
 #' @export
 map_rowspan <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "rowspan",
-    check_fun = is.numeric,
     extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.numeric(value))
+      }
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
       too_long <- na.omit(rows + value - 1 > nrow(ht))
       if (any(too_long)) {
@@ -256,8 +274,10 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 `colspan<-` <- function(ht, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_replace(ht, value, "colspan",
-    check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
       if (any(too_long)) {
@@ -274,8 +294,10 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 set_colspan <- function(ht, row, col, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_set(ht, row, col, value, "colspan",
-    check_fun = is.numeric,
     extra = quote({
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
       too_long <- na.omit(cols + value - 1 > ncol(ht))
@@ -296,8 +318,10 @@ set_colspan <- function(ht, row, col, value) {
 #' @export
 map_colspan <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "colspan",
-    check_fun = is.numeric,
     extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.numeric(value))
+      }
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
       too_long <- na.omit(cols + value - 1 > ncol(ht))
       if (any(too_long)) {
@@ -455,19 +479,31 @@ wrap <- function(ht) prop_get(ht, "wrap")
 #' @rdname wrap
 #' @export
 `wrap<-` <- function(ht, value) {
-  prop_replace(ht, value, "wrap", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_replace(ht, value, "wrap")
 }
 
 #' @rdname wrap
 #' @export
 set_wrap <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_set(ht, row, col, value, "wrap")
 }
 
 #' @rdname wrap
 #' @export
 map_wrap <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "wrap",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.logical(value))
+      }
+    })
+  )
 }
 
 
@@ -505,19 +541,31 @@ escape_contents <- function(ht) prop_get(ht, "escape_contents")
 #' @rdname escape_contents
 #' @export
 `escape_contents<-` <- function(ht, value) {
-  prop_replace(ht, value, "escape_contents", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_replace(ht, value, "escape_contents")
 }
 
 #' @rdname escape_contents
 #' @export
 set_escape_contents <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_set(ht, row, col, value, "escape_contents")
 }
 
 #' @rdname escape_contents
 #' @export
 map_escape_contents <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "escape_contents",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.logical(value))
+      }
+    })
+  )
 }
 
 
@@ -570,19 +618,31 @@ markdown <- function(ht) prop_get(ht, "markdown")
 #' @rdname markdown
 #' @export
 `markdown<-` <- function(ht, value) {
-  prop_replace(ht, value, "markdown", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_replace(ht, value, "markdown")
 }
 
 #' @rdname markdown
 #' @export
 set_markdown <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_set(ht, row, col, value, "markdown")
 }
 
 #' @rdname markdown
 #' @export
 map_markdown <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "markdown",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.logical(value))
+      }
+    })
+  )
 }
 
 
@@ -611,19 +671,31 @@ na_string <- function(ht) prop_get(ht, "na_string")
 #' @rdname na_string
 #' @export
 `na_string<-` <- function(ht, value) {
-  prop_replace(ht, value, "na_string", check_fun = is.character)
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+  }
+  prop_replace(ht, value, "na_string")
 }
 
 #' @rdname na_string
 #' @export
 set_na_string <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "na_string", check_fun = is.character)
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+  }
+  prop_set(ht, row, col, value, "na_string")
 }
 
 #' @rdname na_string
 #' @export
 map_na_string <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
+  prop_map(ht, row, col, fn, "na_string",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.character(value))
+      }
+    })
+  )
 }
 
 
@@ -658,19 +730,31 @@ bold <- function(ht) prop_get(ht, "bold")
 #' @rdname bold
 #' @export
 `bold<-` <- function(ht, value) {
-  prop_replace(ht, value, "bold", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_replace(ht, value, "bold")
 }
 
 #' @rdname bold
 #' @export
 set_bold <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "bold", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_set(ht, row, col, value, "bold")
 }
 
 #' @rdname bold
 #' @export
 map_bold <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "bold",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.logical(value))
+      }
+    })
+  )
 }
 
 #' @rdname bold
@@ -680,19 +764,31 @@ italic <- function(ht) prop_get(ht, "italic")
 #' @rdname bold
 #' @export
 `italic<-` <- function(ht, value) {
-  prop_replace(ht, value, "italic", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_replace(ht, value, "italic")
 }
 
 #' @rdname bold
 #' @export
 set_italic <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "italic", check_fun = is.logical)
+  if (!all(is.na(value))) {
+    assert_that(is.logical(value))
+  }
+  prop_set(ht, row, col, value, "italic")
 }
 
 #' @rdname bold
 #' @export
 map_italic <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
+  prop_map(ht, row, col, fn, "italic",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.logical(value))
+      }
+    })
+  )
 }
 #' Make text larger or smaller
 #'
@@ -738,19 +834,31 @@ font_size <- function(ht) prop_get(ht, "font_size")
 #' @rdname font_size
 #' @export
 `font_size<-` <- function(ht, value) {
-  prop_replace(ht, value, "font_size", check_fun = is.numeric)
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
+  prop_replace(ht, value, "font_size")
 }
 
 #' @rdname font_size
 #' @export
 set_font_size <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
+  prop_set(ht, row, col, value, "font_size")
 }
 
 #' @rdname font_size
 #' @export
 map_font_size <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
+  prop_map(ht, row, col, fn, "font_size",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.numeric(value))
+      }
+    })
+  )
 }
 
 
@@ -804,8 +912,10 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 `rotation<-` <- function(ht, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_replace(ht, value, "rotation",
-    check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
 }
@@ -813,8 +923,10 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 set_rotation <- function(ht, row, col, value) {
+  if (!all(is.na(value))) {
+    assert_that(is.numeric(value))
+  }
   prop_set(ht, row, col, value, "rotation",
-    check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
 }
@@ -823,8 +935,12 @@ set_rotation <- function(ht, row, col, value) {
 #' @export
 map_rotation <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "rotation",
-    check_fun = is.numeric,
-    extra = quote(value <- value %% 360)
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.numeric(value))
+      }
+      value <- value %% 360
+    })
   )
 }
 
@@ -917,8 +1033,10 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 `number_format<-` <- function(ht, value) {
+  if (!all(is.na(value))) {
+    assert_that(check_number_format(value))
+  }
   prop_replace(ht, value, "number_format",
-    check_fun = check_number_format,
     reset_na = FALSE,
     coerce_mode = FALSE
   )
@@ -927,8 +1045,10 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 set_number_format <- function(ht, row, col, value) {
+  if (!all(is.na(value))) {
+    assert_that(check_number_format(value))
+  }
   prop_set(ht, row, col, value, "number_format",
-    check_fun = check_number_format,
     reset_na = FALSE
   )
 }
@@ -937,7 +1057,11 @@ set_number_format <- function(ht, row, col, value) {
 #' @export
 map_number_format <- function(ht, row, col, fn) {
   prop_map(ht, row, col, fn, "number_format",
-    check_fun = check_number_format,
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(check_number_format(value))
+      }
+    }),
     reset_na = FALSE
   )
 }
@@ -1041,17 +1165,29 @@ font <- function(ht) prop_get(ht, "font")
 #' @rdname font
 #' @export
 `font<-` <- function(ht, value) {
-  prop_replace(ht, value, "font", check_fun = is.character)
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+  }
+  prop_replace(ht, value, "font")
 }
 
 #' @rdname font
 #' @export
 set_font <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "font", check_fun = is.character)
+  if (!all(is.na(value))) {
+    assert_that(is.character(value))
+  }
+  prop_set(ht, row, col, value, "font")
 }
 
 #' @rdname font
 #' @export
 map_font <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "font", check_fun = is.character)
+  prop_map(ht, row, col, fn, "font",
+    extra = quote({
+      if (!all(is.na(value))) {
+        assert_that(is.character(value))
+      }
+    })
+  )
 }
