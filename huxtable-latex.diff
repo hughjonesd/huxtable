@@ -1,0 +1,38 @@
+--- /tmp/huxtable-old.tex	2025-08-08 21:58:42.095541555 +0000
++++ /tmp/huxtable-new.tex	2025-08-08 21:58:43.799537939 +0000
+@@ -107,14 +107,14 @@
+ \endhead
+ \bottomrule\noalign{}
+ \endlastfoot
+-{~} & {~} & h & ~ & ~ & ~ \\
+-\multirow{2}{*}{{u}} & x & \multicolumn{2}{c}{%
+-~} & \multirow{2}{*}{{t}} & \multirow{2}{*}{{a}} \\
+-& ~ & ~ & {b} \\
+-~ & ~ & ~ & ~ & \multicolumn{2}{c@{}}{%
+-{~}} \\
+-~ & ~ & ~ & l & ~ & ~ \\
+-~ & ~ & {e} & ~ & ~ & ~ \\
++~ & ~ & ~ & h & \multicolumn{2}{c@{}}{%
++u} \\
++~ & {~} & x & ~ & ~ & t \\
++{~} & ~ & \multirow{2}{*}{~} & ~ & ~ & {~} \\
++~ & ~ & & {~} & \multirow{2}{*}{{~}} & ~ \\
++{a} & b & ~ & l & & ~ \\
++~ & \multicolumn{2}{c}{%
++~} & {~} & ~ & e \\
+ \end{longtable}
+ 
+ \hypertarget{introduction}{%
+@@ -124,8 +124,10 @@
+ \subsection{About this document}\label{about-this-document}}
+ 
+ This is the introductory vignette for the R package `huxtable', version
+-5.6.0. A current version is available
+-\href{https://hughjonesd.github.io/huxtable/huxtable-html.html}{online}.
++5.5.7. A current version is available on the web in
++\href{https://hughjonesd.github.io/huxtable/huxtable-html.html}{HTML} or
++\href{https://hughjonesd.github.io/huxtable/huxtable-pdf.pdf}{PDF}
++format.
+ 
+ \hypertarget{huxtable}{%
+ \subsection{Huxtable}\label{huxtable}}
