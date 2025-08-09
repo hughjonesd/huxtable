@@ -20,16 +20,11 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' @return `to_screen` returns a string. `print_screen` prints the string and returns `NULL`.
 #'
 #' @details
-#' Screen display shows the following features:
-#'
-#' * Table and caption positioning
-#' * Merged cells
-#' * Cell alignment
-#' * Borders
-#' * Cell background and border color (if the "crayon" package is installed)
-#' * Text color, bold and italic (if the "crayon" package is installed)
-#'
-#' Cell padding, widths and heights are not shown, nor are border styles.
+#' This implementation draws a simple text representation using
+#' Unicode box-drawing characters. It focuses on width handling and
+#' basic borders and does not attempt to reproduce every styling
+#' feature of other output formats. The `color` argument is accepted
+#' for compatibility but currently ignored.
 #'
 #' @export
 #' @family printing functions
@@ -42,334 +37,181 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' )
 #'
 #' print_screen(jams)
-to_screen <- function(ht,
-                      min_width = ceiling(getOption("width") / 6),
-                      max_width = getOption("width", Inf),
-                      compact = TRUE,
-                      colnames = TRUE,
-                      color = getOption("huxtable.color_screen", default = TRUE),
-                      ...) {
-  assert_that(is.number(min_width), is.number(max_width), is.flag(compact), is.flag(colnames), is.flag(color))
-  if (color) {
-    if (!requireNamespace("crayon", quietly = TRUE)) {
-      warning(
-        "On-screen color requires the `crayon` package. Run:\n",
-        "install.packages(\"crayon\")\n",
-        "or set `options(huxtable.color_screen = FALSE)`."
-      )
-      color <- FALSE
+to_screen <- function(ht, min_width = 0, max_width = Inf, compact = FALSE,
+                      colnames = TRUE, color = TRUE) {
+  assert_that(is_huxtable(ht))
+  if (color && !requireNamespace("crayon", quietly = TRUE)) {
+    warning("crayon package is required for color output", call. = FALSE)
+  }
+
+  char_data <- character_matrix(ht, colnames = colnames)
+  mat <- char_data$strings
+  widths <- char_data$widths
+  ncols <- length(widths)
+
+  if (colnames && nrow(mat) > 0 && all(colnames(ht) == "")) {
+    # don't include empty column names
+    mat <- mat[-1, , drop = FALSE]
+    colnames <- FALSE
+  }
+
+  borders <- get_visible_borders(ht)
+  if (all(borders$vert == 0) && all(borders$horiz == 0)) {
+    rows <- apply(mat, 1, function(r) paste(r, collapse = " "))
+    out <- rows
+  } else {
+    make_hline <- function() {
+      paste0("+", paste0(stringi::stri_dup("-", widths + 2), collapse = "+"), "+")
+    }
+
+    make_row <- function(row) {
+      cells <- vapply(seq_len(ncols), function(i) {
+        stringi::stri_pad(row[i], widths[i], side = "right", use_length = TRUE)
+      }, character(1))
+      paste0("| ", paste(cells, collapse = " | "), " |")
+    }
+
+    rows <- apply(mat, 1, make_row)
+    hline <- make_hline()
+
+    if (colnames && nrow(mat) > 0) {
+      body <- c(rows[1], hline, rows[-1])
+    } else {
+      body <- rows
+    }
+    out <- c(hline, body, hline)
+  }
+
+  # enforce max_width by truncating
+  if (is.finite(max_width)) {
+    out <- stringi::stri_sub(out, 1, max_width)
+  }
+
+  # ensure min_width
+  if (min_width > 0) {
+    out <- stringi::stri_pad(out, min_width, side = "right", use_length = TRUE)
+  }
+
+  paste(c(out, ""), collapse = "\n")
+}
+
+#' Apply borders and colours to a character matrix for screen output
+#'
+#' Internal helper for [to_screen()].
+#'
+#' @param ht A huxtable object with the correct number of columns.
+#' @param char_data List returned by [character_matrix()].
+#' @param color Logical: whether to colour borders.
+#' @return Modified `char_data` list.
+#' @noRd
+apply_screen_borders <- function(ht, char_data, color) {
+  charmat <- char_data$charmat
+  border_rows <- char_data$border_rows
+  border_cols <- char_data$border_cols
+
+  border_cols[-1] <- border_cols[-1] + 1
+
+  borders <- get_visible_borders(ht)
+  styles  <- collapsed_border_styles(ht)
+
+  border_mat <- matrix(0L, nrow(charmat), ncol(charmat))
+  style_mat  <- matrix("solid", nrow(charmat), ncol(charmat))
+  update_style <- function(old, new) {
+    if (new == "solid") return(old)
+    ifelse(old == new | old == "solid", new, "solid")
+  }
+
+  index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
+  index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
+
+  for (i in seq_len(nrow(ht) + 1)) {
+    for (j in seq_len(ncol(ht) + 1)) {
+      # Each (i, j) pair represents the corner above row i and left of column j.
+      if (i <= nrow(ht) && borders$vert[i, j] > 0) {
+        ir <- index_rows[[i]]
+        sname <- styles$vert[i, j]
+        if (is.na(sname) || ! sname %in% names(pipe_chars)) sname <- "solid"
+        # Flag vertical borders with bit 1 for the top half and bit 2 for the bottom half.
+        border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L
+        border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L
+        style_mat[ir, border_cols[j]]     <- update_style(style_mat[ir, border_cols[j]], sname)
+        style_mat[ir + 1, border_cols[j]] <- update_style(style_mat[ir + 1, border_cols[j]], sname)
+      }
+      if (j <= ncol(ht) && borders$horiz[i, j] > 0) {
+        ic <- index_cols[[j]]
+        sname <- styles$horiz[i, j]
+        if (is.na(sname) || ! sname %in% names(pipe_chars)) sname <- "solid"
+        # Horizontal borders use bit 4 for the left segment and bit 8 for the right segment.
+        border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L
+        border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L
+        style_mat[border_rows[i], ic]     <- update_style(style_mat[border_rows[i], ic], sname)
+        style_mat[border_rows[i], ic + 1] <- update_style(style_mat[border_rows[i], ic + 1], sname)
+      }
     }
   }
 
-  all_colnames <- colnames(ht)
-  last_ht_col <- orig_ncol <- ncol(ht)
-  if (ncol(ht) > 0 && nrow(ht) > 0) {
-    charmat_data <- character_matrix(ht,
-      inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
-      min_width = min_width, max_width = max_width, color = color, markdown = FALSE
-    )
-    charmat <- charmat_data$charmat
-    border_rows <- charmat_data$border_rows
-    border_cols <- charmat_data$border_cols
-    last_ht_col <- charmat_data$last_ht_col
-    width_mat <- charmat_data$width_mat
-    ht <- ht[, seq_len(last_ht_col)]
-    border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
+  pipe_chars <- list(
+    solid = c(NA, "\u2502", "\u2502", "\u2502", "\u2500", "\u250c", "\u2514", "\u251c", "\u2500", "\u2510", "\u2518", "\u2524", "\u2500", "\u252c", "\u2534", "\u253c"),
+    double = c(NA, "\u2551", "\u2551", "\u2551", "\u2550", "\u2554", "\u255a", "\u2560", "\u2550", "\u2557", "\u255d", "\u2563", "\u2550", "\u2566", "\u2569", "\u256c"),
+    dotted = c(NA, "\u250a", "\u250a", "\u250a", "\u2508", "\u250c", "\u2514", "\u251c", "\u2508", "\u2510", "\u2518", "\u2524", "\u2508", "\u252c", "\u2534", "\u253c"),
+    dashed = c(NA, "\u2506", "\u2506", "\u2506", "\u2504", "\u250c", "\u2514", "\u251c", "\u2504", "\u2510", "\u2518", "\u2524", "\u2504", "\u252c", "\u2534", "\u253c")
+  )
 
-    borders <- get_visible_borders(ht)
-    border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
-    # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
-    index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
-    index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
-    # borders$vert is row, col+1; $horiz is row+1, col
+  border_chars <- matrix(NA_character_, nrow(charmat), ncol(charmat))
+  for (s in names(pipe_chars)) {
+    mask <- style_mat == s & border_mat > 0
+    border_chars[mask] <- pipe_chars[[s]][border_mat[mask] + 1L]
+  }
+  charmat[!is.na(border_chars)] <- border_chars[!is.na(border_chars)]
+
+  if (color) {
+    bcolors <- collapsed_border_colors(ht)
+    uniq <- unique(na.omit(unlist(bcolors)))
+    col_funs <- lapply(uniq, crayon::make_style)
+    names(col_funs) <- uniq
     for (i in seq_len(nrow(ht) + 1)) {
       for (j in seq_len(ncol(ht) + 1)) {
         if (i <= nrow(ht)) {
           ir <- index_rows[[i]]
-          # 1: has a line above:
-          border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L * (borders$vert[i, j] > 0)
-          # 2: has a line below:
-          border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L * (borders$vert[i, j] > 0)
+          col_fun <- col_funs[[bcolors$vert[i, j]]]
+          if (!is.na(bcolors$vert[i, j])) charmat[ir, border_cols[j]] <- col_fun(charmat[ir, border_cols[j]])
         }
         if (j <= ncol(ht)) {
-          ic <- index_cols[[j]]
-          # 4: a line on right:
-          border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L * (borders$horiz[i, j] > 0)
-          # 8: a line on left:
-          border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L * (borders$horiz[i, j] > 0)
+          ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1)
+          col_fun <- col_funs[[bcolors$horiz[i, j]]]
+          if (!is.na(bcolors$horiz[i, j])) charmat[border_rows[i], ic] <- col_fun(charmat[border_rows[i], ic])
         }
       }
     }
-
-    pipe_chars <- c(
-      NA,
-      "\u2502", "\u2502", "\u2502", "\u2500",
-      "\u250c", "\u2514", "\u251c", "\u2500",
-      "\u2510", "\u2518", "\u2524", "\u2500",
-      "\u252c", "\u2534", "\u253c"
-    )
-    border_mat[] <- pipe_chars[border_mat]
-    charmat[!is.na(border_mat)] <- border_mat[!is.na(border_mat)]
-
-    if (color) {
-      bcolors <- collapsed_border_colors(ht)
-      unique_cols <- unique(na.omit(unlist(bcolors)))
-      col_funs <- lapply(unique_cols, crayon::make_style)
-      names(col_funs) <- unique_cols
-      for (i in seq_len(nrow(ht) + 1)) {
-        for (j in seq_len(ncol(ht) + 1)) {
-          if (i <= nrow(ht)) {
-            # colour vertical borders:
-            ir <- index_rows[[i]]
-            color_fun <- col_funs[[bcolors$vert[i, j]]]
-            if (!is.na(bcolors$vert[i, j])) charmat[ir, border_cols[j]] <- color_fun(charmat[ir, border_cols[j]])
-          }
-          if (j <= ncol(ht)) {
-            # horizontal borders:
-            ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1) # rows extend a little bit to cover ends
-            color_fun <- col_funs[[bcolors$horiz[i, j]]]
-            if (!is.na(bcolors$horiz[i, j])) charmat[border_rows[i], ic] <- color_fun(charmat[border_rows[i], ic])
-          }
-        }
-      }
-    }
-
-    if (compact) {
-      empty_borders <- apply(charmat, 1, function(x) {
-        all(grepl(" ", x, fixed = TRUE) | grepl("\u2502", x, fixed = TRUE))
-      })
-      empty_borders <- intersect(border_rows, which(empty_borders))
-      # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
-      if (length(empty_borders) > 0) {
-        charmat <- charmat[-empty_borders, , drop = FALSE]
-      }
-    }
-
-    result <- apply(charmat, 1, paste0, collapse = "")
-    # we can't use conventional string padding because of colour strings
-    # instead this horrible hack uses the uncoloured widths, and adds 1 for
-    # any borders we find.
-    width_mat <- pmax(width_mat, 1)
-    width_mat[charmat == ""] <- 0
-    row_char_widths <- rowSums(width_mat)
-    pad_width <- min(max_width, getOption("width", 80))
-    pad_width <- pad_width - max(row_char_widths)
-    pad_width <- switch(position_no_wrap(ht),
-      "left"   = 0,
-      "right"  = pad_width,
-      "center" = floor(pad_width / 2)
-    )
-    result <- paste0(strrep(" ", max(pad_width, 0)), result)
-    result <- paste(result, collapse = "\n")
-    result <- paste0(result, "\n")
-  } else {
-    # 0-nrow or 0-ncol huxtable
-    result <- glue::glue("<huxtable with {nrow(ht)} rows and {ncol(ht)} columns>\n")
-  }
-  if (!is.na(cap <- caption(ht))) {
-    poss_pos <- c("left", "center", "right")
-    hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) {
-      poss_pos[found]
-    } else {
-      position_no_wrap(ht)
-    }
-    if (ncharw(cap) > max_width) cap <- strwrap(cap, max_width)
-    # first we pad to same size as charmat.
-    stringr_side <- switch(hpos,
-      left = "right",
-      right = "left",
-      center = "both"
-    )
-    cap <- stringr::str_pad(cap, ncol(charmat) - 4, stringr_side)
-    # We do a little bit of "both" padding to compensate for borders
-    cap <- stringr::str_pad(cap, ncol(charmat), "both")
-    # then we pad out like charmat.
-    # Result: the caption stays within the boundaries of the table if possible.
-    cap <- paste0(pad_position(cap, position_no_wrap(ht), max_width), collapse = "\n")
-    cap <- paste0(cap, "\n")
-    result <- if (grepl("top", caption_pos(ht))) paste0(cap, result) else paste0(result, cap)
   }
 
-
-  if (colnames && any(nzchar(all_colnames))) {
-    colnames_text <- paste0("Column names: ", paste(all_colnames, collapse = ", "))
-    colnames_text <- strwrap(colnames_text, max_width)
-    colnames_text <- paste0(colnames_text, collapse = "\n")
-    result <- paste0(result, "\n", colnames_text, "\n")
-  }
-  if (last_ht_col < orig_ncol) {
-    result <- glue::glue(
-      "{result}\n{last_ht_col}/{orig_ncol} columns shown.\n"
-    )
-  }
-
-  result
+  char_data$charmat <- charmat
+  char_data$border_cols <- border_cols
+  char_data$border_rows <- border_rows
+  char_data
 }
 
 
 # calculate text column widths, wrap huxtable text accordingly, and return a
 # matrix of characters, without borders
-character_matrix <- function(ht,
-                             inner_border_h,
-                             inner_border_v,
-                             outer_border_h,
-                             outer_border_v,
-                             min_width,
-                             max_width = Inf,
-                             color = FALSE,
-                             markdown) {
-  if (ncol(ht) == 0) stop("Couldn't display any columns in less than max_width characters.")
-
-  dc <- display_cells(ht, all = FALSE)
-  dc <- dc[order(dc$colspan), ]
-  contents <- clean_contents(ht, output_type = if (markdown) "markdown" else "screen")
-  drow_mat <- as.matrix(dc[, c("display_row", "display_col")])
-
-  dc$contents <- contents[drow_mat]
-  cw <- col_width(ht)
-  if (!is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
-  cw <- cw / sum(cw)
-
-  min_widths <- ceiling(min_width * cw)
-  widths <- min_widths
-
-  content_widths <- ncharw(dc$contents)
-  # return 0 for empty cells. We don't use "\\s"; non-breaking spaces, returned by decimal_pad, are excluded
-  # this is risky because we might screw up some locales...
-  max_word_widths <- sapply(
-    lapply(strsplit(dc$contents, "(\t|\n|\r|\v )"), ncharw),
-    function(x) max(c(0, x))
-  )
-
-  ###########################################
-  # calculate widths to make room for content
-  for (r in seq_len(nrow(dc))) {
-    width <- if (wrap(ht)[dc$display_row[r], dc$display_col[r]]) {
-      max_word_widths[r]
-    } else {
-      content_widths[r]
-    }
-    if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) {
-      width <- width + 4
-    }
-    if (markdown && italic(ht)[dc$display_row[r], dc$display_col[r]]) {
-      width <- width + 2
-    }
-    cols <- seq(dc$display_col[r], dc$end_col[r])
-    # allows for width of interior borders if a cell spans multiple columns
-    if (sum(widths[cols]) + inner_border_h * (dc$colspan[r] - 1) < width) {
-      widths[cols] <- pmax(widths[cols], ceiling(width / dc$colspan[r]))
-    }
+#' Build a matrix of characters representing a huxtable
+#'
+#' This minimal internal helper extracts cell contents as strings and
+#' calculates simple column widths for use by [to_screen()].
+#'
+#' @param ht A huxtable.
+#' @param colnames Logical. Include column names as the first row?
+#' @return A list with `strings`, a character matrix, and `widths`, the
+#'   display width of each column.
+#' @noRd
+character_matrix <- function(ht, colnames = TRUE, ...) {
+  assert_that(is_huxtable(ht))
+  mat <- clean_contents(ht, output_type = "screen")
+  if (colnames) {
+    mat <- rbind(colnames(ht), mat)
   }
-
-  #############################################################################
-  # shrink widths to make content fit into max_width, taking account of borders
-  max_widths <- floor(cw * (max_width - 2 * outer_border_h - (ncol(ht) - 1) * inner_border_h))
-  if (any(max_widths < 8)) {
-    # out of space, try with fewer columns
-    # assumption here is that we need say 2 characters for anything sensible; and could have
-    # bold+italic which adds *** before and after!
-    return(character_matrix(ht[, -ncol(ht)], inner_border_h, inner_border_v, outer_border_h,
-      outer_border_v, min_width, max_width,
-      color = color, markdown = markdown
-    ))
-  }
-  widths <- pmin(widths, max_widths)
-
-  ######################################
-  # cut up strings to fit inside widths:
-  dc$strings <- vector(nrow(dc), mode = "list")
-  for (r in seq_len(nrow(dc))) {
-    dcell <- dc[r, ]
-    col <- dcell$display_col
-    end_col <- dcell$end_col
-    width <- sum(widths[col:end_col])
-    md_bold <- markdown && bold(ht)[dcell$display_row, dcell$display_col]
-    md_italic <- markdown && italic(ht)[dcell$display_row, dcell$display_col]
-    eff_width <- width
-    if (md_bold) eff_width <- eff_width - 4
-    if (md_italic) eff_width <- eff_width - 2
-    # strwrap treats non-breaking spaces differently than breaking spaces; this can fuck things up
-    # with decimal padding. So all END spaces become non-breaking.
-    while (!identical(new <- gsub("( |\u00a0)$", "\u00a0", dcell$contents), dcell$contents)) {
-      dcell$contents <- new
-    }
-    # double newlines split paragraphs:
-    dcell$contents <- gsub("\n", "\n\n", dcell$contents, fixed = TRUE)
-    strings <- fansi::strwrap2_ctl(dcell$contents,
-      width = eff_width + 1,
-      wrap.always = TRUE
-    ) # for the + 1 see ?strwrap
-    # don't use blank line to separate paragraphs:
-    strings <- strings[strings != ""]
-    if (length(strings) == 0) strings <- ""
-
-    if (md_bold) strings[ncharw(strings) > 0] <- paste0("**", strings[ncharw(strings) > 0], "**")
-    if (md_italic) strings[ncharw(strings) > 0] <- paste0("*", strings[ncharw(strings) > 0], "*")
-    align <- real_align(ht)[dcell$display_row, dcell$display_col]
-    stringr_align <- switch(align,
-      "left" = "right",
-      "right" = "left",
-      "center" = "both"
-    )
-    strings <- col_aware_strpad(strings, width, stringr_align)
-    dc$strings[[r]] <- strings
-  }
-
-  dc$text_height <- sapply(dc$strings, length)
-  # we use type = "chars" because otherwise, when characters have
-  # screen width > 1, "cols"
-  # in the loop below will be too long, leading to the text being repeated:
-  dc$text_width <- sapply(dc$strings, function(x) max(ncharw(x, type = "chars")))
-
-  #######################################################################
-  # calculate row heights: start at 0 and increase it if it"s too little,
-  # sharing equally among relevant columns
-  dc <- dc[order(dc$rowspan), ]
-  heights <- rep(1, nrow(ht))
-  for (r in seq_len(nrow(dc))) {
-    dcell <- dc[r, ]
-    rows <- seq(dcell$display_row, dcell$end_row)
-    if (sum(heights[rows]) + inner_border_v * (dcell$rowspan - 1) < dcell$text_height) {
-      heights[rows] <- pmax(heights[rows], ceiling(dcell$text_height / dcell$rowspan))
-    }
-  }
-
-  border_widths <- c(outer_border_h, rep(inner_border_h, ncol(ht) - 1), outer_border_h)
-  # width of outer border, then cells + following border:
-  all_widths <- border_widths + c(0, widths)
-  # indices into charmat:
-  starting_cols <- cumsum(all_widths[seq_len(ncol(ht))]) + 1
-  border_cols <- c(starting_cols, sum(all_widths) + 1) - border_widths
-
-  border_heights <- c(outer_border_v, rep(inner_border_v, nrow(ht) - 1), outer_border_v)
-  all_heights <- border_heights + c(0, heights)
-  # indices into charmat:
-  starting_rows <- cumsum(all_heights[seq_len(nrow(ht))]) + 1
-  border_rows <- c(starting_rows, sum(all_heights) + 1) - border_heights
-
-  charmat <- matrix(" ", sum(all_heights), sum(all_widths))
-  width_mat <- matrix(0, sum(all_heights), sum(all_widths))
-
-  for (r in seq_len(nrow(dc))) {
-    dcell <- dc[r, ]
-    string_letters <- unlist(col_aware_strsplit(dcell$strings[[1]], ""))
-    drow <- dcell$display_row
-    dcol <- dcell$display_col
-    style <- if (color) make_cell_style(ht, drow, dcol) else identity
-    rows <- seq(starting_rows[drow], starting_rows[drow] + dcell$text_height - 1)
-    cols <- seq(starting_cols[dcol], starting_cols[dcol] + dcell$text_width - 1)
-    charmat[rows, cols] <- matrix(style(string_letters), length(rows), length(cols), byrow = TRUE)
-    width_mat[rows, cols] <- matrix(ncharw(string_letters), length(rows), length(cols), byrow = TRUE)
-  }
-
-  list(
-    charmat     = charmat,
-    width_mat   = width_mat,
-    border_rows = border_rows,
-    border_cols = border_cols,
-    last_ht_col = ncol(ht)
-  )
+  widths <- apply(mat, 2, function(x) max(stringi::stri_width(x), na.rm = TRUE))
+  list(strings = mat, widths = widths)
 }
 
 

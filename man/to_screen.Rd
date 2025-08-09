@@ -9,12 +9,11 @@ print_screen(ht, ...)
 
 to_screen(
   ht,
-  min_width = ceiling(getOption("width")/6),
-  max_width = getOption("width", Inf),
-  compact = TRUE,
+  min_width = 0,
+  max_width = Inf,
+  compact = FALSE,
   colnames = TRUE,
-  color = getOption("huxtable.color_screen", default = TRUE),
-  ...
+  color = TRUE
 )
 }
 \arguments{
@@ -39,17 +38,11 @@ to_screen(
 Print a huxtable on screen
 }
 \details{
-Screen display shows the following features:
-\itemize{
-\item Table and caption positioning
-\item Merged cells
-\item Cell alignment
-\item Borders
-\item Cell background and border color (if the "crayon" package is installed)
-\item Text color, bold and italic (if the "crayon" package is installed)
-}
-
-Cell padding, widths and heights are not shown, nor are border styles.
+This implementation draws a simple text representation using
+Unicode box-drawing characters. It focuses on width handling and
+basic borders and does not attempt to reproduce every styling
+feature of other output formats. The \code{color} argument is accepted
+for compatibility but currently ignored.
 }
 \examples{
 bottom_border(jams)[1, 1:2] <- 1
