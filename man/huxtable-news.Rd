@@ -25,6 +25,7 @@ body rows in \verb{<tbody>} when header rows are at the top of the table.
 of long inline styles.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
+\item \code{to_screen()} now displays double, dashed and dotted border styles.
 }
 }
 }

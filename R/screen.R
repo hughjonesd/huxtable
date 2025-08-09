@@ -29,7 +29,7 @@ print_screen <- function(ht, ...) cat(to_screen(ht, ...))
 #' * Cell background and border color (if the "crayon" package is installed)
 #' * Text color, bold and italic (if the "crayon" package is installed)
 #'
-#' Cell padding, widths and heights are not shown, nor are border styles.
+#' Cell padding, widths and heights are not shown.
 #'
 #' @export
 #' @family printing functions
@@ -77,39 +77,90 @@ to_screen <- function(ht,
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
     borders <- get_visible_borders(ht)
+    bstyles <- collapsed_border_styles(ht)
     border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
+    vstyles <- matrix(NA_character_, nrow = nrow(charmat), ncol = ncol(charmat))
+    hstyles <- matrix(NA_character_, nrow = nrow(charmat), ncol = ncol(charmat))
     # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
     index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
     index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
     # borders$vert is row, col+1; $horiz is row+1, col
     for (i in seq_len(nrow(ht) + 1)) {
       for (j in seq_len(ncol(ht) + 1)) {
-        if (i <= nrow(ht)) {
+        if (i <= nrow(ht) && borders$vert[i, j] > 0) {
           ir <- index_rows[[i]]
           # 1: has a line above:
-          border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L * (borders$vert[i, j] > 0)
+          border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L
           # 2: has a line below:
-          border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L * (borders$vert[i, j] > 0)
+          border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L
+          vstyles[ir, border_cols[j]] <- bstyles$vert[i, j]
+          vstyles[ir + 1, border_cols[j]] <- bstyles$vert[i, j]
         }
-        if (j <= ncol(ht)) {
+        if (j <= ncol(ht) && borders$horiz[i, j] > 0) {
           ic <- index_cols[[j]]
           # 4: a line on right:
-          border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L * (borders$horiz[i, j] > 0)
+          border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L
           # 8: a line on left:
-          border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L * (borders$horiz[i, j] > 0)
+          border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L
+          hstyles[border_rows[i], ic] <- bstyles$horiz[i, j]
+          hstyles[border_rows[i], ic + 1] <- bstyles$horiz[i, j]
         }
       }
     }
 
-    pipe_chars <- c(
-      NA,
-      "\u2502", "\u2502", "\u2502", "\u2500",
-      "\u250c", "\u2514", "\u251c", "\u2500",
-      "\u2510", "\u2518", "\u2524", "\u2500",
-      "\u252c", "\u2534", "\u253c"
+    pipe_chars <- list(
+      solid = c(
+        NA,
+        "\u2502", "\u2502", "\u2502", "\u2500",
+        "\u250c", "\u2514", "\u251c", "\u2500",
+        "\u2510", "\u2518", "\u2524", "\u2500",
+        "\u252c", "\u2534", "\u253c"
+      ),
+      double = c(
+        NA,
+        "\u2551", "\u2551", "\u2551", "\u2550",
+        "\u2554", "\u255a", "\u2560", "\u2550",
+        "\u2557", "\u255d", "\u2563", "\u2550",
+        "\u2566", "\u2569", "\u256c"
+      ),
+      dashed = c(
+        NA,
+        "\u2506", "\u2506", "\u2506", "\u2504",
+        "\u250c", "\u2514", "\u251c", "\u2504",
+        "\u2510", "\u2518", "\u2524", "\u2504",
+        "\u252c", "\u2534", "\u253c"
+      ),
+      dotted = c(
+        NA,
+        "\u250a", "\u250a", "\u250a", "\u2508",
+        "\u250c", "\u2514", "\u251c", "\u2508",
+        "\u2510", "\u2518", "\u2524", "\u2508",
+        "\u252c", "\u2534", "\u253c"
+      )
     )
-    border_mat[] <- pipe_chars[border_mat]
-    charmat[!is.na(border_mat)] <- border_mat[!is.na(border_mat)]
+    pipe_mat <- matrix(NA_character_, nrow = nrow(border_mat), ncol = ncol(border_mat))
+    for (r in seq_len(nrow(border_mat))) {
+      for (c in seq_len(ncol(border_mat))) {
+        code <- border_mat[r, c]
+        if (code > 1) {
+          vstyle <- vstyles[r, c]
+          hstyle <- hstyles[r, c]
+          style <- if (!is.na(vstyle) && (is.na(hstyle) || vstyle == hstyle)) {
+            vstyle
+          } else if (!is.na(hstyle) && is.na(vstyle)) {
+            hstyle
+          } else if (!is.na(vstyle) && !is.na(hstyle) && vstyle == hstyle) {
+            vstyle
+          } else {
+            "solid"
+          }
+          pc <- pipe_chars[[style]][code]
+          if (is.na(pc)) pc <- pipe_chars$solid[code]
+          pipe_mat[r, c] <- pc
+        }
+      }
+    }
+    charmat[!is.na(pipe_mat)] <- pipe_mat[!is.na(pipe_mat)]
 
     if (color) {
       bcolors <- collapsed_border_colors(ht)
@@ -136,7 +187,7 @@ to_screen <- function(ht,
 
     if (compact) {
       empty_borders <- apply(charmat, 1, function(x) {
-        all(grepl(" ", x, fixed = TRUE) | grepl("\u2502", x, fixed = TRUE))
+        all(grepl(" ", x, fixed = TRUE) | grepl("[\u2502\u2551\u2506\u250a]", x))
       })
       empty_borders <- intersect(border_rows, which(empty_borders))
       # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing

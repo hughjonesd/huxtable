@@ -110,6 +110,18 @@ test_that("to_screen borders respect spans", {
 })
 
 
+test_that("to_screen shows border styles", {
+  h <- hux("a")
+  h <- set_all_borders(h)
+  h1 <- set_all_border_styles(h, "double")
+  expect_match(to_screen(h1), "╔", fixed = TRUE)
+  h2 <- set_all_border_styles(h, "dashed")
+  expect_match(to_screen(h2), "┄", fixed = TRUE)
+  h3 <- set_all_border_styles(h, "dotted")
+  expect_match(to_screen(h3), "┈", fixed = TRUE)
+})
+
+
 test_that("to_screen positioning", {
   ht <- hux("foo")
   position(ht) <- "centre"
