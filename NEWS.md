@@ -16,6 +16,7 @@
 * Added Typst export via `to_typst()` and `print_typst()`.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
+* Bugfix: `print_html()` duplicated table rows for simple huxtables.
 
 
 # huxtable 5.6.0
