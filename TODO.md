@@ -11,6 +11,8 @@ Priority changes
 * border styles:
   - TeX Bug: single horizontal borders "start" too late after double vertical border joins them
   - Bug: HTML borders aren't precollapsed, should they be? (Check status.)
+
+* Factor out shared code from `quick_*` functions into a helper to reduce duplication.
     
 
 * Fixing border properties.
