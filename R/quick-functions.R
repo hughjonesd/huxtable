@@ -141,10 +141,14 @@ quick_typst_pdf <- function(
   typst_file <- tempfile(fileext = ".typ")
   do_write_typst_file(hts, typst_file, width, height)
 
-  if (Sys.which("typst") == "") {
-    stop("Could not find typst CLI. Please install typst to create PDFs.")
+  if (Sys.which("typst") != "") {
+    res <- system2("typst", c("compile", typst_file, file))
+  } else if (Sys.which("quarto") != "") {
+    res <- system2("quarto", c("typst", "compile", typst_file, file))
+  } else {
+    stop("Could not find typst or quarto CLI. Please install typst or quarto to create PDFs.")
   }
-  res <- system2("typst", c("compile", typst_file, file))
+
   if (res != 0) {
     stop("Typst compilation failed")
   }
