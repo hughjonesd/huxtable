@@ -1,0 +1,15 @@
+--- /tmp/huxtable-old/vignettes/design-principles-html.html	2025-08-08 21:54:38.136043368 +0000
++++ vignettes/design-principles-html.html	2025-08-08 21:52:16.414744467 +0000
+@@ -359,8 +359,10 @@
+ 
+ 
+ <p>This document briefly describes the design of <a href="https://hughjonesd.github.io/huxtable/">huxtable</a>, and compares
+-it with other R packages for creating tables. A current version is
+-available <a href="https://hughjonesd.github.io/huxtable/design-principles-html.html">online</a>.</p>
++it with other R packages for creating tables. A current version is on
++the web in <a href="https://hughjonesd.github.io/huxtable/design-principles-html.html">HTML</a>
++or <a href="https://hughjonesd.github.io/huxtable/design-principles-pdf.pdf">PDF</a>
++formats.</p>
+ <div id="design-principles" class="section level2">
+ <h2>Design principles</h2>
+ <p>I wrote this package because I wanted a simple way to create tables

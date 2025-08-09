@@ -1,0 +1,18 @@
+--- /tmp/design-principles-old.tex	2025-08-08 21:58:36.587539401 +0000
++++ /tmp/design-principles-new.tex	2025-08-08 21:58:37.667540230 +0000
+@@ -11,9 +11,12 @@
+ 
+ This document briefly describes the design of
+ \href{https://hughjonesd.github.io/huxtable/}{huxtable}, and compares it
+-with other R packages for creating tables. A current version is
+-available
+-\href{https://hughjonesd.github.io/huxtable/design-principles-html.html}{online}.
++with other R packages for creating tables. A current version is on the
++web in
++\href{https://hughjonesd.github.io/huxtable/design-principles-html.html}{HTML}
++or
++\href{https://hughjonesd.github.io/huxtable/design-principles-pdf.pdf}{PDF}
++formats.
+ 
+ \hypertarget{design-principles}{%
+ \subsection{Design principles}\label{design-principles}}
