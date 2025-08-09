@@ -58,12 +58,25 @@ test_that("to_typst maps properties", {
   expect_match(res, "rowspan: 2")
   expect_match(res, "align: (right + top)", fixed = TRUE)
   expect_match(res, "fill: rgb")
-  expect_match(res, "stroke: \\(top: 1pt \\+ solid \\+ rgb")
+  expect_match(
+    res,
+    "stroke: \\(top: stroke\\(thickness: 1pt, paint: rgb\\(0, 0, 255\\)\\)\\)"
+  )
   expect_match(
     res,
     "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb\\(0, 0, 255\\)\\)\\[1\\]"
   )
   expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
+})
+
+test_that("Bugfix: solid border generates valid typst", {
+  ht <- hux(a = 1:2, b = 3:4)
+  ht <- set_top_border(ht, 1, 1)
+  res <- to_typst(ht)
+  expect_match(
+    res,
+    "stroke: \\(top: stroke\\(thickness: 0.4pt, paint: rgb\\(0, 0, 0\\)\\)\\)"
+  )
 })
 
 test_that("print_typst outputs to stdout", {
