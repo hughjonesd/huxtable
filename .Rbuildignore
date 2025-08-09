@@ -9,6 +9,7 @@
 ^.*\.Rproj$
 ^AGENTS\.md$
 ^design\.md$
+^agent-notes\.md$
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$

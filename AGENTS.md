@@ -1,4 +1,7 @@
 
+Read design.md to get an overview of huxtable's architecture. Read agent-notes.md
+to read the notes of previous llms.
+
 Use short branch names. Start with "feature", "bugfix", "refactor" or "chore". 
 
 Don't change the API without asking first.
@@ -9,7 +12,12 @@ use it to confirm you've fixed the bug.
 
 If you write a new function, give it Roxygen documentation. If it's internal,
 use the `@noRd` tag, and keep it simple and developer-focused. Similarly, 
-if you edit an existing internal function, take the chance to document it. 
+if you edit an existing internal function, take the chance to document it.
+
+If you understand more about the architecture of huxtable, update 
+`design.md`. For more general notes that might be useful to you or future llms
+working on the project, write in `agent-notes.md`. Don't forget to add any
+suggested changes to the PR.
 
 If you've written user-visible Roxygen, run `devtools::document()`. You can 
 ignore errors due to missing packages ("flextable", "lmtest") unless you're working
