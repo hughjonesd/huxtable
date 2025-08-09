@@ -64,18 +64,42 @@ to_screen <- function(ht,
   all_colnames <- colnames(ht)
   last_ht_col <- orig_ncol <- ncol(ht)
   if (ncol(ht) > 0 && nrow(ht) > 0) {
-    cm <- character_matrix(ht,
+    charmat_data <- character_matrix(ht,
       inner_border_h = 3, outer_border_h = 2, inner_border_v = 1, outer_border_v = 1,
       min_width = min_width, max_width = max_width, color = color, markdown = FALSE
     )
-    border_rows <- cm$border_rows
-    border_cols <- cm$border_cols
-    last_ht_col <- cm$last_ht_col
-    width_mat <- cm$width_mat
+    charmat <- charmat_data$charmat
+    border_rows <- charmat_data$border_rows
+    border_cols <- charmat_data$border_cols
+    last_ht_col <- charmat_data$last_ht_col
+    width_mat <- charmat_data$width_mat
     ht <- ht[, seq_len(last_ht_col)]
     border_cols[-1] <- border_cols[-1] + 1 # middle of 3 for interior, last of 2 for last outer
 
-    border_mat <- build_border_mat(ht, cm)
+    borders <- get_visible_borders(ht)
+    border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
+    # converts a row/col number to a sequence of charmat row/col numbers for the relevant *column/row*
+    index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
+    index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
+    # borders$vert is row, col+1; $horiz is row+1, col
+    for (i in seq_len(nrow(ht) + 1)) {
+      for (j in seq_len(ncol(ht) + 1)) {
+        if (i <= nrow(ht)) {
+          ir <- index_rows[[i]]
+          # 1: has a line above:
+          border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L * (borders$vert[i, j] > 0)
+          # 2: has a line below:
+          border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L * (borders$vert[i, j] > 0)
+        }
+        if (j <= ncol(ht)) {
+          ic <- index_cols[[j]]
+          # 4: a line on right:
+          border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L * (borders$horiz[i, j] > 0)
+          # 8: a line on left:
+          border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L * (borders$horiz[i, j] > 0)
+        }
+      }
+    }
 
     pipe_chars <- c(
       NA,
@@ -85,22 +109,47 @@ to_screen <- function(ht,
       "\u252c", "\u2534", "\u253c"
     )
     border_mat[] <- pipe_chars[border_mat]
-    cm$charmat[!is.na(border_mat)] <- border_mat[!is.na(border_mat)]
+    charmat[!is.na(border_mat)] <- border_mat[!is.na(border_mat)]
 
     if (color) {
-      cm$charmat <- colorize_borders(ht, cm)
+      bcolors <- collapsed_border_colors(ht)
+      unique_cols <- unique(na.omit(unlist(bcolors)))
+      col_funs <- lapply(unique_cols, crayon::make_style)
+      names(col_funs) <- unique_cols
+      for (i in seq_len(nrow(ht) + 1)) {
+        for (j in seq_len(ncol(ht) + 1)) {
+          if (i <= nrow(ht)) {
+            # colour vertical borders:
+            ir <- index_rows[[i]]
+            color_fun <- col_funs[[bcolors$vert[i, j]]]
+            if (!is.na(bcolors$vert[i, j])) charmat[ir, border_cols[j]] <- color_fun(charmat[ir, border_cols[j]])
+          }
+          if (j <= ncol(ht)) {
+            # horizontal borders:
+            ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1) # rows extend a little bit to cover ends
+            color_fun <- col_funs[[bcolors$horiz[i, j]]]
+            if (!is.na(bcolors$horiz[i, j])) charmat[border_rows[i], ic] <- color_fun(charmat[border_rows[i], ic])
+          }
+        }
+      }
     }
 
     if (compact) {
-      cm <- drop_empty_border_lines(cm)
+      empty_borders <- apply(charmat, 1, function(x) {
+        all(grepl(" ", x, fixed = TRUE) | grepl("\u2502", x, fixed = TRUE))
+      })
+      empty_borders <- intersect(border_rows, which(empty_borders))
+      # length statement necessary otherwise we end up doing charmat[ - integer(0), ] and getting nothing
+      if (length(empty_borders) > 0) {
+        charmat <- charmat[-empty_borders, , drop = FALSE]
+      }
     }
 
-    charmat <- cm$charmat
     result <- apply(charmat, 1, paste0, collapse = "")
     # we can't use conventional string padding because of colour strings
     # instead this horrible hack uses the uncoloured widths, and adds 1 for
     # any borders we find.
-    width_mat <- pmax(cm$width_mat, 1)
+    width_mat <- pmax(width_mat, 1)
     width_mat[charmat == ""] <- 0
     row_char_widths <- rowSums(width_mat)
     pad_width <- min(max_width, getOption("width", 80))
@@ -158,122 +207,8 @@ to_screen <- function(ht,
 }
 
 
-#' Build a border matrix for on-screen tables
-#'
-#' Computes an integer matrix encoding border positions using the visible
-#' borders and mappings from table rows and columns to character matrix
-#' positions.
-#'
-#' @param ht A huxtable.
-#' @param cm List returned by `character_matrix`.
-#' @noRd
-build_border_mat <- function(ht, cm) {
-  border_rows <- cm$border_rows
-  border_cols <- cm$border_cols
-  charmat <- cm$charmat
-  borders <- get_visible_borders(ht)
-  index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
-  index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
-  border_mat <- matrix(1L, nrow = nrow(charmat), ncol = ncol(charmat))
-  for (i in seq_len(nrow(ht) + 1)) {
-    for (j in seq_len(ncol(ht) + 1)) {
-      if (i <= nrow(ht)) {
-        ir <- index_rows[[i]]
-        border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] +
-          1L * (borders$vert[i, j] > 0)
-        border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] +
-          2L * (borders$vert[i, j] > 0)
-      }
-      if (j <= ncol(ht)) {
-        ic <- index_cols[[j]]
-        border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] +
-          4L * (borders$horiz[i, j] > 0)
-        border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] +
-          8L * (borders$horiz[i, j] > 0)
-      }
-    }
-  }
-  border_mat
-}
-
-#' Colour table borders
-#'
-#' Apply colour styles to border characters in `charmat` based on collapsed
-#' border colours.
-#'
-#' @param ht A huxtable.
-#' @param cm List returned by `character_matrix` containing updated `charmat`.
-#' @noRd
-colorize_borders <- function(ht, cm) {
-  border_rows <- cm$border_rows
-  border_cols <- cm$border_cols
-  charmat <- cm$charmat
-  bcolors <- collapsed_border_colors(ht)
-  index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
-  index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
-  unique_cols <- unique(na.omit(unlist(bcolors)))
-  col_funs <- lapply(unique_cols, crayon::make_style)
-  names(col_funs) <- unique_cols
-  for (i in seq_len(nrow(ht) + 1)) {
-    for (j in seq_len(ncol(ht) + 1)) {
-      if (i <= nrow(ht)) {
-        ir <- index_rows[[i]]
-        color_fun <- col_funs[[bcolors$vert[i, j]]]
-        if (!is.na(bcolors$vert[i, j])) {
-          charmat[ir, border_cols[j]] <- color_fun(charmat[ir, border_cols[j]])
-        }
-      }
-      if (j <= ncol(ht)) {
-        ic <- c(index_cols[[j]], max(index_cols[[j]]) + 1)
-        color_fun <- col_funs[[bcolors$horiz[i, j]]]
-        if (!is.na(bcolors$horiz[i, j])) {
-          charmat[border_rows[i], ic] <- color_fun(charmat[border_rows[i], ic])
-        }
-      }
-    }
-  }
-  charmat
-}
-
-#' Remove empty horizontal border rows
-#'
-#' Drop rows from the character matrix that contain no visible border
-#' characters, updating the corresponding width matrix.
-#'
-#' @param cm List returned by `character_matrix`.
-#' @return Modified list with updated `charmat` and `width_mat`.
-#' @noRd
-drop_empty_border_lines <- function(cm) {
-  charmat <- cm$charmat
-  empty_borders <- apply(charmat, 1, function(x) {
-    all(grepl(" ", x, fixed = TRUE) | grepl("\u2502", x, fixed = TRUE))
-  })
-  empty_borders <- intersect(cm$border_rows, which(empty_borders))
-  if (length(empty_borders) > 0) {
-    cm$charmat <- charmat[-empty_borders, , drop = FALSE]
-    cm$width_mat <- cm$width_mat[-empty_borders, , drop = FALSE]
-  }
-  cm
-}
-
-#' Build a character matrix for on-screen or markdown output
-#'
-#' Determines column and row sizes, wraps cell contents and returns a matrix of
-#' characters representing the table without borders. Used internally by
-#' `to_screen`.
-#'
-#' @param ht A huxtable.
-#' @param inner_border_h Width of inner horizontal borders.
-#' @param inner_border_v Height of inner vertical borders.
-#' @param outer_border_h Width of outer horizontal borders.
-#' @param outer_border_v Height of outer vertical borders.
-#' @param min_width Minimum allowed width in characters.
-#' @param max_width Maximum allowed width in characters.
-#' @param color Logical. Apply cell colouring styles.
-#' @param markdown Logical. Include markdown formatting markers.
-#' @return A list with the character matrix, width matrix, border positions and
-#'   number of displayed columns.
-#' @noRd
+# calculate text column widths, wrap huxtable text accordingly, and return a
+# matrix of characters, without borders
 character_matrix <- function(ht,
                              inner_border_h,
                              inner_border_v,
@@ -285,19 +220,16 @@ character_matrix <- function(ht,
                              markdown) {
   if (ncol(ht) == 0) stop("Couldn't display any columns in less than max_width characters.")
 
-  # Work with display cells so that merged cells are expanded appropriately
   dc <- display_cells(ht, all = FALSE)
   dc <- dc[order(dc$colspan), ]
   contents <- clean_contents(ht, output_type = if (markdown) "markdown" else "screen")
   drow_mat <- as.matrix(dc[, c("display_row", "display_col")])
 
-  # Attach the cell contents to the display cell data frame
   dc$contents <- contents[drow_mat]
   cw <- col_width(ht)
   if (!is.numeric(cw) || anyNA(cw)) cw <- rep(1, ncol(ht))
   cw <- cw / sum(cw)
 
-  # Start with minimum column widths based on overall table width
   min_widths <- ceiling(min_width * cw)
   widths <- min_widths
 
@@ -312,13 +244,11 @@ character_matrix <- function(ht,
   ###########################################
   # calculate widths to make room for content
   for (r in seq_len(nrow(dc))) {
-    # choose either longest word or full content depending on wrap()
     width <- if (wrap(ht)[dc$display_row[r], dc$display_col[r]]) {
       max_word_widths[r]
     } else {
       content_widths[r]
     }
-    # markdown markup adds characters
     if (markdown && bold(ht)[dc$display_row[r], dc$display_col[r]]) {
       width <- width + 4
     }
@@ -326,7 +256,7 @@ character_matrix <- function(ht,
       width <- width + 2
     }
     cols <- seq(dc$display_col[r], dc$end_col[r])
-    # allow for interior borders when a cell spans multiple columns
+    # allows for width of interior borders if a cell spans multiple columns
     if (sum(widths[cols]) + inner_border_h * (dc$colspan[r] - 1) < width) {
       widths[cols] <- pmax(widths[cols], ceiling(width / dc$colspan[r]))
     }
