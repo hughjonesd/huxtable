@@ -49,7 +49,7 @@ Screen display shows the following features:
 \item Text color, bold and italic (if the "crayon" package is installed)
 }
 
-Cell padding, widths and heights are not shown, nor are border styles.
+Cell padding, widths and heights are not shown.
 }
 \examples{
 bottom_border(jams)[1, 1:2] <- 1
