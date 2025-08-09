@@ -49,26 +49,38 @@ to_screen <- function(ht, min_width = 0, max_width = Inf, compact = FALSE,
   widths <- char_data$widths
   ncols <- length(widths)
 
-  make_hline <- function() {
-    paste0("+", paste0(stringi::stri_dup("-", widths + 2), collapse = "+"), "+")
+  if (colnames && nrow(mat) > 0 && all(colnames(ht) == "")) {
+    # don't include empty column names
+    mat <- mat[-1, , drop = FALSE]
+    colnames <- FALSE
   }
 
-  make_row <- function(row) {
-    cells <- vapply(seq_len(ncols), function(i) {
-      stringi::stri_pad(row[i], widths[i], side = "right", use_length = TRUE)
-    }, character(1))
-    paste0("| ", paste(cells, collapse = " | "), " |")
-  }
-
-  rows <- apply(mat, 1, make_row)
-  hline <- make_hline()
-
-  if (colnames && nrow(mat) > 0) {
-    body <- c(rows[1], hline, rows[-1])
+  borders <- get_visible_borders(ht)
+  if (all(borders$vert == 0) && all(borders$horiz == 0)) {
+    rows <- apply(mat, 1, function(r) paste(r, collapse = " "))
+    out <- rows
   } else {
-    body <- rows
+    make_hline <- function() {
+      paste0("+", paste0(stringi::stri_dup("-", widths + 2), collapse = "+"), "+")
+    }
+
+    make_row <- function(row) {
+      cells <- vapply(seq_len(ncols), function(i) {
+        stringi::stri_pad(row[i], widths[i], side = "right", use_length = TRUE)
+      }, character(1))
+      paste0("| ", paste(cells, collapse = " | "), " |")
+    }
+
+    rows <- apply(mat, 1, make_row)
+    hline <- make_hline()
+
+    if (colnames && nrow(mat) > 0) {
+      body <- c(rows[1], hline, rows[-1])
+    } else {
+      body <- rows
+    }
+    out <- c(hline, body, hline)
   }
-  out <- c(hline, body, hline)
 
   # enforce max_width by truncating
   if (is.finite(max_width)) {
@@ -100,33 +112,54 @@ apply_screen_borders <- function(ht, char_data, color) {
   border_cols[-1] <- border_cols[-1] + 1
 
   borders <- get_visible_borders(ht)
+  styles  <- collapsed_border_styles(ht)
+
   border_mat <- matrix(0L, nrow(charmat), ncol(charmat))
+  style_mat  <- matrix(1L, nrow(charmat), ncol(charmat))
+  style_lookup <- c(solid = 1L, double = 2L, dotted = 3L, dashed = 4L)
+  update_style <- function(old, new) {
+    if (old == new || old == 1L) new else if (new == 1L) old else 1L
+  }
+
   index_rows <- lapply(seq_len(nrow(ht)), function(x) seq(border_rows[x], border_rows[x + 1] - 1))
   index_cols <- lapply(seq_len(ncol(ht)), function(x) seq(border_cols[x], border_cols[x + 1] - 1))
 
   for (i in seq_len(nrow(ht) + 1)) {
     for (j in seq_len(ncol(ht) + 1)) {
+      # Each (i, j) pair represents the corner above row i and left of column j.
       if (i <= nrow(ht) && borders$vert[i, j] > 0) {
         ir <- index_rows[[i]]
+        sidx <- style_lookup[styles$vert[i, j]] %||% 1L
+        # Flag vertical borders with bit 1 for the top half and bit 2 for the bottom half.
         border_mat[ir, border_cols[j]] <- border_mat[ir, border_cols[j]] + 1L
         border_mat[ir + 1, border_cols[j]] <- border_mat[ir + 1, border_cols[j]] + 2L
+        style_mat[ir, border_cols[j]]     <- update_style(style_mat[ir, border_cols[j]], sidx)
+        style_mat[ir + 1, border_cols[j]] <- update_style(style_mat[ir + 1, border_cols[j]], sidx)
       }
       if (j <= ncol(ht) && borders$horiz[i, j] > 0) {
         ic <- index_cols[[j]]
+        sidx <- style_lookup[styles$horiz[i, j]] %||% 1L
+        # Horizontal borders use bit 4 for the left segment and bit 8 for the right segment.
         border_mat[border_rows[i], ic] <- border_mat[border_rows[i], ic] + 4L
         border_mat[border_rows[i], ic + 1] <- border_mat[border_rows[i], ic + 1] + 8L
+        style_mat[border_rows[i], ic]     <- update_style(style_mat[border_rows[i], ic], sidx)
+        style_mat[border_rows[i], ic + 1] <- update_style(style_mat[border_rows[i], ic + 1], sidx)
       }
     }
   }
 
-  pipe_chars <- c(
-    NA,
-    "\u2502", "\u2502", "\u2502", "\u2500",
-    "\u250c", "\u2514", "\u251c", "\u2500",
-    "\u2510", "\u2518", "\u2524", "\u2500",
-    "\u252c", "\u2534", "\u253c"
+  pipe_sets <- list(
+    c(NA, "\u2502", "\u2502", "\u2502", "\u2500", "\u250c", "\u2514", "\u251c", "\u2500", "\u2510", "\u2518", "\u2524", "\u2500", "\u252c", "\u2534", "\u253c"),
+    c(NA, "\u2551", "\u2551", "\u2551", "\u2550", "\u2554", "\u255a", "\u2560", "\u2550", "\u2557", "\u255d", "\u2563", "\u2550", "\u2566", "\u2569", "\u256c"),
+    c(NA, "\u250a", "\u250a", "\u250a", "\u2508", "\u250c", "\u2514", "\u251c", "\u2508", "\u2510", "\u2518", "\u2524", "\u2508", "\u252c", "\u2534", "\u253c"),
+    c(NA, "\u2506", "\u2506", "\u2506", "\u2504", "\u250c", "\u2514", "\u251c", "\u2504", "\u2510", "\u2518", "\u2524", "\u2504", "\u252c", "\u2534", "\u253c")
   )
-  border_chars <- pipe_chars[border_mat + 1L]
+
+  border_chars <- matrix(NA_character_, nrow(charmat), ncol(charmat))
+  for (s in seq_along(pipe_sets)) {
+    mask <- style_mat == s & border_mat > 0
+    border_chars[mask] <- pipe_sets[[s]][border_mat[mask] + 1L]
+  }
   charmat[!is.na(border_chars)] <- border_chars[!is.na(border_chars)]
 
   if (color) {
