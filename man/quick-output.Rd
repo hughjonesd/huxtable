@@ -4,12 +4,14 @@
 \alias{quick-output}
 \alias{quick_latex}
 \alias{quick_pdf}
+\alias{quick_typst}
+\alias{quick_typst_pdf}
 \alias{quick_html}
 \alias{quick_docx}
 \alias{quick_pptx}
 \alias{quick_xlsx}
 \alias{quick_rtf}
-\title{Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document}
+\title{Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document}
 \usage{
 quick_latex(
   ...,
@@ -19,6 +21,22 @@ quick_latex(
 )
 
 quick_pdf(
+  ...,
+  file = confirm("huxtable-output.pdf"),
+  borders = 0.4,
+  open = interactive(),
+  width = NULL,
+  height = NULL
+)
+
+quick_typst(
+  ...,
+  file = confirm("huxtable-output.typ"),
+  borders = 0.4,
+  open = interactive()
+)
+
+quick_typst_pdf(
   ...,
   file = confirm("huxtable-output.pdf"),
   borders = 0.4,
@@ -71,11 +89,11 @@ quick_rtf(
 
 \item{open}{Logical. Automatically open the resulting file?}
 
-\item{width}{String passed to the LaTeX \code{geometry} package"s \code{paperwidth} option. Use \code{NULL} for
-the default width.}
+\item{width}{String passed to the LaTeX \code{geometry} package's \code{paperwidth} option or Typst's \code{page}
+\code{width} option. Use \code{NULL} for the default width.}
 
-\item{height}{String passed to \code{geometry}"s \code{paperheight} option. Use \code{NULL} for the default
-height.}
+\item{height}{String passed to the LaTeX \code{geometry} package's \code{paperheight} option or Typst's
+\code{page} \code{height} option. Use \code{NULL} for the default height.}
 }
 \value{
 Invisible \code{NULL}.
@@ -92,7 +110,7 @@ interactive sessions, the default file path is "huxtable-output.xxx" in the work
 if this already exists, you will be asked to confirm manually before proceeding.
 
 To create docx and pptx files \code{flextable} and \code{officer} must be installed, while xlsx
-needs \code{openxlsx}.
+needs \code{openxlsx}. \code{quick_typst_pdf()} requires the \code{typst} command line tool.
 }
 \examples{
 \dontrun{
@@ -100,6 +118,8 @@ m <- matrix(1:4, 2, 2)
 
 quick_pdf(m, jams)
 quick_latex(m, jams)
+quick_typst(m, jams)
+quick_typst_pdf(m, jams)
 quick_html(m, jams)
 quick_docx(m, jams)
 quick_xlsx(m, jams)

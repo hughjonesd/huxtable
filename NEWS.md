@@ -14,6 +14,7 @@
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
 * Added Typst export via `to_typst()` and `print_typst()`.
+* Added `quick_typst()` and `quick_typst_pdf()` for Typst output.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
 * Bugfix: `print_html()` duplicated table rows for simple huxtables.

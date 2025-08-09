@@ -4,7 +4,7 @@
 NULL
 
 
-#' Quickly print objects to a PDF, TeX, HTML, Microsoft Office or RTF document
+#' Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -23,7 +23,7 @@ NULL
 #' if this already exists, you will be asked to confirm manually before proceeding.
 #'
 #' To create docx and pptx files `flextable` and `officer` must be installed, while xlsx
-#' needs `openxlsx`.
+#' needs `openxlsx`. `quick_typst_pdf()` requires the `typst` command line tool.
 #'
 #' @examples
 #' \dontrun{
@@ -31,6 +31,8 @@ NULL
 #'
 #' quick_pdf(m, jams)
 #' quick_latex(m, jams)
+#' quick_typst(m, jams)
+#' quick_typst_pdf(m, jams)
 #' quick_html(m, jams)
 #' quick_docx(m, jams)
 #' quick_xlsx(m, jams)
@@ -59,10 +61,10 @@ quick_latex <- function(
 
 
 #' @rdname quick-output
-#' @param width String passed to the LaTeX `geometry` package"s `paperwidth` option. Use `NULL` for
-#'   the default width.
-#' @param height String passed to `geometry`"s `paperheight` option. Use `NULL` for the default
-#'   height.
+#' @param width String passed to the LaTeX `geometry` package's `paperwidth` option or Typst's `page`
+#'   `width` option. Use `NULL` for the default width.
+#' @param height String passed to the LaTeX `geometry` package's `paperheight` option or Typst's
+#'   `page` `height` option. Use `NULL` for the default height.
 #' @export
 quick_pdf <- function(
     ..., file = confirm("huxtable-output.pdf"), borders = 0.4,
@@ -105,6 +107,50 @@ quick_pdf <- function(
     }
   }
 
+  if (open) auto_open(file)
+  invisible(NULL)
+}
+
+
+#' @rdname quick-output
+#' @export
+quick_typst <- function(
+    ..., file = confirm("huxtable-output.typ"), borders = 0.4,
+    open = interactive()) {
+  assert_that(is.number(borders), is.flag(open))
+  force(file)
+
+  hts <- huxtableize(list(...), borders)
+  do_write_typst_file(hts, file, width = NULL, height = NULL)
+
+  if (open) auto_open(file)
+  invisible(NULL)
+}
+
+
+#' @rdname quick-output
+#' @export
+quick_typst_pdf <- function(
+    ..., file = confirm("huxtable-output.pdf"), borders = 0.4,
+    open = interactive(), width = NULL, height = NULL) {
+  assert_that(is.number(borders), is.string(width) || is.null(width), is.string(height) || is.null(height))
+  assert_that(is.flag(open))
+  force(file)
+  hts <- huxtableize(list(...), borders)
+
+  typst_file <- tempfile(fileext = ".typ")
+  do_write_typst_file(hts, typst_file, width, height)
+
+  if (Sys.which("typst") == "") {
+    stop("Could not find typst CLI. Please install typst to create PDFs.")
+  }
+  res <- system2("typst", c("compile", typst_file, file))
+  if (res != 0) {
+    stop("Typst compilation failed")
+  }
+  if (!file.remove(typst_file)) warning("Could not remove intermediate Typst file '", typst_file, "'")
+
+  if (!file.exists(file)) stop("Could not find pdf output file '", file, "'")
   if (open) auto_open(file)
   invisible(NULL)
 }
@@ -290,6 +336,37 @@ do_write_latex_file <- function(hts, file, width, height) {
         cat("\n\n")
       })
       cat("\n\\end{document}")
+    },
+    error = identity,
+    finally = {
+      sink()
+    }
+  )
+}
+
+
+#' Write a Typst document containing huxtables
+#'
+#' @param hts List of huxtables.
+#' @param file Output file path.
+#' @param width Page width string or `NULL`.
+#' @param height Page height string or `NULL`.
+#'
+#' @noRd
+do_write_typst_file <- function(hts, file, width, height) {
+  sink(file)
+  tryCatch(
+    {
+      if (!is.null(width) || !is.null(height)) {
+        dim_parts <- c()
+        if (!is.null(width)) dim_parts <- c(dim_parts, sprintf("width: %s", width))
+        if (!is.null(height)) dim_parts <- c(dim_parts, sprintf("height: %s", height))
+        cat("#set page(", paste(dim_parts, collapse = ", "), ")\n\n", sep = "")
+      }
+      lapply(hts, function(ht) {
+        cat(to_typst(ht))
+        cat("\n\n")
+      })
     },
     error = identity,
     finally = {
