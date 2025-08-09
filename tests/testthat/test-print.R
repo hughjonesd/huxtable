@@ -208,11 +208,11 @@ test_that("set_print_method() works", {
   options(huxtable.print = print_latex)
   expect_match(capture.output(print(ht)), "tabular", fixed = TRUE, all = FALSE)
   options(huxtable.print = print_typst)
-  expect_match(capture.output(print(ht)), "#table", fixed = TRUE, all = FALSE)
+  expect_match(capture.output(print(ht)), "#figure", fixed = TRUE, all = FALSE)
   options(huxtable.print = "print_html")
   expect_match(capture.output(print(ht)), "<table", fixed = TRUE, all = FALSE)
   options(huxtable.print = "print_typst")
-  expect_match(capture.output(print(ht)), "#table", fixed = TRUE, all = FALSE)
+  expect_match(capture.output(print(ht)), "#figure", fixed = TRUE, all = FALSE)
   options(oo)
 })
 
