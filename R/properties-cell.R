@@ -35,28 +35,39 @@ valign <- function(ht) prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 `valign<-` <- function(ht, value) {
-  prop_replace(ht, value, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
+  assert_not_all_na(value,
+    is.character(value),
+    all(na.omit(value) %in% c("top", "middle", "bottom"))
   )
+  prop_replace(ht, value, "valign")
 }
 
 #' @rdname valign
 #' @export
 set_valign <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value,
+    is.character(value),
+    all(na.omit(value) %in% c("top", "middle", "bottom"))
   )
+  prop_set(ht, args$row, args$col, value, "valign", prepped = TRUE, env = args$env)
 }
 
 #' @rdname valign
 #' @export
 map_valign <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "valign",
-    check_fun = is.character,
-    check_values = c("top", "middle", "bottom")
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value,
+      is.character(value),
+      all(na.omit(value) %in% c("top", "middle", "bottom"))
+    )
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "valign", prepped = TRUE, env = args$env)
 }
 
 
@@ -133,28 +144,33 @@ align <- function(ht) prop_get(ht, "align")
 #' @rdname align
 #' @export
 `align<-` <- function(ht, value) {
-  prop_replace(ht, value, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
-  )
+  assert_not_all_na(value, check_align_value(value))
+  value[value == "centre"] <- "center"
+  prop_replace(ht, value, "align")
 }
 
 #' @rdname align
 #' @export
 set_align <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
-  )
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, check_align_value(value))
+  value[value == "centre"] <- "center"
+  prop_set(ht, args$row, args$col, value, "align", prepped = TRUE, env = args$env)
 }
 
 #' @rdname align
 #' @export
 map_align <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "align",
-    check_fun = check_align_value,
-    extra = quote(value[value == "centre"] <- "center")
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, check_align_value(value))
+    value[value == "centre"] <- "center"
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "align", prepped = TRUE, env = args$env)
 }
 
 
@@ -191,61 +207,65 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 `rowspan<-` <- function(ht, value) {
-  prop_replace(ht, value, "rowspan",
-    check_fun = is.numeric,
-    extra = quote({
-      too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
-      if (any(too_long)) {
-        stop("rowspan would extend beyond bottom of table")
-      }
-      dc <- display_cells(ht, new_rowspan = value)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  assert_not_all_na(value, is.numeric(value))
+  too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
+  if (any(too_long)) {
+    stop("rowspan would extend beyond bottom of table")
+  }
+  dc <- display_cells(ht, new_rowspan = value)
+  if (any(value > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  prop_replace(ht, value, "rowspan")
 }
 
 #' @rdname spans
 #' @export
 set_rowspan <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "rowspan",
-    check_fun = is.numeric,
-    extra = quote({
-      rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
-      too_long <- na.omit(rows + value - 1 > nrow(ht))
-      if (any(too_long)) {
-        stop("rowspan would extend beyond bottom of table")
-      }
-      new_rs <- attr(ht, "rowspan")
-      new_rs[rc$row, rc$col] <- value
-      dc <- display_cells(ht, new_rowspan = new_rs)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  args <- prep_set_args(ht, row, col, value)
+  row <- args$row; col <- args$col; value <- args$value
+  assert_not_all_na(value, is.numeric(value))
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  rows <- base::row(ht)[rcrow, rccol, drop = FALSE]
+  too_long <- na.omit(rows + value - 1 > nrow(ht))
+  if (any(too_long)) {
+    stop("rowspan would extend beyond bottom of table")
+  }
+  new_rs <- attr(ht, "rowspan")
+  new_rs[rcrow, rccol] <- value
+  dc <- display_cells(ht, new_rowspan = new_rs)
+  if (any(value > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  prop_set(ht, rcrow, rccol, value, "rowspan", prepped = TRUE)
 }
 
 #' @rdname spans
 #' @export
 map_rowspan <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "rowspan",
-    check_fun = is.numeric,
-    extra = quote({
-      rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
-      too_long <- na.omit(rows + value - 1 > nrow(ht))
-      if (any(too_long)) {
-        stop("rowspan would extend beyond bottom of table")
-      }
-      new_rs <- attr(ht, "rowspan")
-      new_rs[rc$row, rc$col] <- value
-      dc <- display_cells(ht, new_rowspan = new_rs)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  rcrow <- get_rc_spec(ht, args$row, 1)
+  rccol <- get_rc_spec(ht, args$col, 2)
+  wrapped_fn <- function(ht, r, c, current) {
+    value <- fn(ht, r, c, current)
+    assert_not_all_na(value, is.numeric(value))
+    rows <- base::row(ht)[r, c, drop = FALSE]
+    too_long <- na.omit(rows + value - 1 > nrow(ht))
+    if (any(too_long)) {
+      stop("rowspan would extend beyond bottom of table")
+    }
+    value
+  }
+  ht <- prop_map(ht, rcrow, rccol, wrapped_fn, "rowspan", prepped = TRUE)
+  new_rs <- attr(ht, "rowspan")
+  vals <- new_rs[rcrow, rccol]
+  dc <- display_cells(ht, new_rowspan = new_rs)
+  if (any(vals > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  ht
 }
 
 
@@ -256,61 +276,65 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 `colspan<-` <- function(ht, value) {
-  prop_replace(ht, value, "colspan",
-    check_fun = is.numeric,
-    extra = quote({
-      too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
-      if (any(too_long)) {
-        stop("colspan would extend beyond right edge of table")
-      }
-      dc <- display_cells(ht, new_colspan = value)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  assert_not_all_na(value, is.numeric(value))
+  too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
+  if (any(too_long)) {
+    stop("colspan would extend beyond right edge of table")
+  }
+  dc <- display_cells(ht, new_colspan = value)
+  if (any(value > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  prop_replace(ht, value, "colspan")
 }
 
 #' @rdname spans
 #' @export
 set_colspan <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "colspan",
-    check_fun = is.numeric,
-    extra = quote({
-      cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
-      too_long <- na.omit(cols + value - 1 > ncol(ht))
-      if (any(too_long)) {
-        stop("colspan would extend beyond right edge of table")
-      }
-      new_cs <- attr(ht, "colspan")
-      new_cs[rc$row, rc$col] <- value
-      dc <- display_cells(ht, new_colspan = new_cs)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  args <- prep_set_args(ht, row, col, value)
+  row <- args$row; col <- args$col; value <- args$value
+  assert_not_all_na(value, is.numeric(value))
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  cols <- base::col(ht)[rcrow, rccol, drop = FALSE]
+  too_long <- na.omit(cols + value - 1 > ncol(ht))
+  if (any(too_long)) {
+    stop("colspan would extend beyond right edge of table")
+  }
+  new_cs <- attr(ht, "colspan")
+  new_cs[rcrow, rccol] <- value
+  dc <- display_cells(ht, new_colspan = new_cs)
+  if (any(value > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  prop_set(ht, rcrow, rccol, value, "colspan", prepped = TRUE)
 }
 
 #' @rdname spans
 #' @export
 map_colspan <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "colspan",
-    check_fun = is.numeric,
-    extra = quote({
-      cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
-      too_long <- na.omit(cols + value - 1 > ncol(ht))
-      if (any(too_long)) {
-        stop("colspan would extend beyond right edge of table")
-      }
-      new_cs <- attr(ht, "colspan")
-      new_cs[rc$row, rc$col] <- value
-      dc <- display_cells(ht, new_colspan = new_cs)
-      if (any(value > 1)) {
-        ht <- overwrite_shadowed_cells(ht, dc)
-      }
-    })
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  rcrow <- get_rc_spec(ht, args$row, 1)
+  rccol <- get_rc_spec(ht, args$col, 2)
+  wrapped_fn <- function(ht, r, c, current) {
+    value <- fn(ht, r, c, current)
+    assert_not_all_na(value, is.numeric(value))
+    cols <- base::col(ht)[r, c, drop = FALSE]
+    too_long <- na.omit(cols + value - 1 > ncol(ht))
+    if (any(too_long)) {
+      stop("colspan would extend beyond right edge of table")
+    }
+    value
+  }
+  ht <- prop_map(ht, rcrow, rccol, wrapped_fn, "colspan", prepped = TRUE)
+  new_cs <- attr(ht, "colspan")
+  vals <- new_cs[rcrow, rccol]
+  dc <- display_cells(ht, new_colspan = new_cs)
+  if (any(vals > 1)) {
+    ht <- overwrite_shadowed_cells(ht, dc)
+  }
+  ht
 }
 
 
@@ -455,19 +479,30 @@ wrap <- function(ht) prop_get(ht, "wrap")
 #' @rdname wrap
 #' @export
 `wrap<-` <- function(ht, value) {
-  prop_replace(ht, value, "wrap", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "wrap")
 }
 
 #' @rdname wrap
 #' @export
 set_wrap <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "wrap", check_fun = is.logical)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set(ht, args$row, args$col, value, "wrap", prepped = TRUE, env = args$env)
 }
 
 #' @rdname wrap
 #' @export
 map_wrap <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "wrap", check_fun = is.logical)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.logical(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "wrap", prepped = TRUE, env = args$env)
 }
 
 
@@ -505,19 +540,30 @@ escape_contents <- function(ht) prop_get(ht, "escape_contents")
 #' @rdname escape_contents
 #' @export
 `escape_contents<-` <- function(ht, value) {
-  prop_replace(ht, value, "escape_contents", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "escape_contents")
 }
 
 #' @rdname escape_contents
 #' @export
 set_escape_contents <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "escape_contents", check_fun = is.logical)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set(ht, args$row, args$col, value, "escape_contents", prepped = TRUE, env = args$env)
 }
 
 #' @rdname escape_contents
 #' @export
 map_escape_contents <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "escape_contents", check_fun = is.logical)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.logical(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "escape_contents", prepped = TRUE, env = args$env)
 }
 
 
@@ -570,19 +616,30 @@ markdown <- function(ht) prop_get(ht, "markdown")
 #' @rdname markdown
 #' @export
 `markdown<-` <- function(ht, value) {
-  prop_replace(ht, value, "markdown", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "markdown")
 }
 
 #' @rdname markdown
 #' @export
 set_markdown <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "markdown", check_fun = is.logical)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set(ht, args$row, args$col, value, "markdown", prepped = TRUE, env = args$env)
 }
 
 #' @rdname markdown
 #' @export
 map_markdown <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "markdown", check_fun = is.logical)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.logical(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "markdown", prepped = TRUE, env = args$env)
 }
 
 
@@ -611,19 +668,30 @@ na_string <- function(ht) prop_get(ht, "na_string")
 #' @rdname na_string
 #' @export
 `na_string<-` <- function(ht, value) {
-  prop_replace(ht, value, "na_string", check_fun = is.character)
+  assert_not_all_na(value, is.character(value))
+  prop_replace(ht, value, "na_string")
 }
 
 #' @rdname na_string
 #' @export
 set_na_string <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "na_string", check_fun = is.character)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.character(value))
+  prop_set(ht, args$row, args$col, value, "na_string", prepped = TRUE, env = args$env)
 }
 
 #' @rdname na_string
 #' @export
 map_na_string <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "na_string", check_fun = is.character)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.character(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "na_string", prepped = TRUE, env = args$env)
 }
 
 
@@ -658,19 +726,30 @@ bold <- function(ht) prop_get(ht, "bold")
 #' @rdname bold
 #' @export
 `bold<-` <- function(ht, value) {
-  prop_replace(ht, value, "bold", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "bold")
 }
 
 #' @rdname bold
 #' @export
 set_bold <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "bold", check_fun = is.logical)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set(ht, args$row, args$col, value, "bold", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
 #' @export
 map_bold <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "bold", check_fun = is.logical)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.logical(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "bold", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
@@ -680,19 +759,30 @@ italic <- function(ht) prop_get(ht, "italic")
 #' @rdname bold
 #' @export
 `italic<-` <- function(ht, value) {
-  prop_replace(ht, value, "italic", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "italic")
 }
 
 #' @rdname bold
 #' @export
 set_italic <- function(ht, row, col, value = TRUE) {
-  prop_set(ht, row, col, value, "italic", check_fun = is.logical)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set(ht, args$row, args$col, value, "italic", prepped = TRUE, env = args$env)
 }
 
 #' @rdname bold
 #' @export
 map_italic <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "italic", check_fun = is.logical)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.logical(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "italic", prepped = TRUE, env = args$env)
 }
 #' Make text larger or smaller
 #'
@@ -738,19 +828,30 @@ font_size <- function(ht) prop_get(ht, "font_size")
 #' @rdname font_size
 #' @export
 `font_size<-` <- function(ht, value) {
-  prop_replace(ht, value, "font_size", check_fun = is.numeric)
+  assert_not_all_na(value, is.numeric(value))
+  prop_replace(ht, value, "font_size")
 }
 
 #' @rdname font_size
 #' @export
 set_font_size <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "font_size", check_fun = is.numeric)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.numeric(value))
+  prop_set(ht, args$row, args$col, value, "font_size", prepped = TRUE, env = args$env)
 }
 
 #' @rdname font_size
 #' @export
 map_font_size <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "font_size", check_fun = is.numeric)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.numeric(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "font_size", prepped = TRUE, env = args$env)
 }
 
 
@@ -804,28 +905,33 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 `rotation<-` <- function(ht, value) {
-  prop_replace(ht, value, "rotation",
-    check_fun = is.numeric,
-    extra = quote(value <- value %% 360)
-  )
+  assert_not_all_na(value, is.numeric(value))
+  value <- value %% 360
+  prop_replace(ht, value, "rotation")
 }
 
 #' @rdname rotation
 #' @export
 set_rotation <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "rotation",
-    check_fun = is.numeric,
-    extra = quote(value <- value %% 360)
-  )
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.numeric(value))
+  value <- value %% 360
+  prop_set(ht, args$row, args$col, value, "rotation", prepped = TRUE, env = args$env)
 }
 
 #' @rdname rotation
 #' @export
 map_rotation <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "rotation",
-    check_fun = is.numeric,
-    extra = quote(value <- value %% 360)
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.numeric(value))
+    value <- value %% 360
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "rotation", prepped = TRUE, env = args$env)
 }
 
 
@@ -917,8 +1023,8 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 `number_format<-` <- function(ht, value) {
+  assert_not_all_na(value, check_number_format(value))
   prop_replace(ht, value, "number_format",
-    check_fun = check_number_format,
     reset_na = FALSE,
     coerce_mode = FALSE
   )
@@ -927,19 +1033,25 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 set_number_format <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "number_format",
-    check_fun = check_number_format,
-    reset_na = FALSE
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, check_number_format(value))
+  prop_set(ht, args$row, args$col, value, "number_format",
+    reset_na = FALSE, prepped = TRUE, env = args$env
   )
 }
 
 #' @rdname number_format
 #' @export
 map_number_format <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "number_format",
-    check_fun = check_number_format,
-    reset_na = FALSE
-  )
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, check_number_format(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "number_format", reset_na = FALSE, prepped = TRUE, env = args$env)
 }
 
 
@@ -1041,17 +1153,28 @@ font <- function(ht) prop_get(ht, "font")
 #' @rdname font
 #' @export
 `font<-` <- function(ht, value) {
-  prop_replace(ht, value, "font", check_fun = is.character)
+  assert_not_all_na(value, is.character(value))
+  prop_replace(ht, value, "font")
 }
 
 #' @rdname font
 #' @export
 set_font <- function(ht, row, col, value) {
-  prop_set(ht, row, col, value, "font", check_fun = is.character)
+  args <- prep_set_args(ht, row, col, value)
+  value <- args$value
+  assert_not_all_na(value, is.character(value))
+  prop_set(ht, args$row, args$col, value, "font", prepped = TRUE, env = args$env)
 }
 
 #' @rdname font
 #' @export
 map_font <- function(ht, row, col, fn) {
-  prop_map(ht, row, col, fn, "font", check_fun = is.character)
+  args <- prep_map_args(ht, row, col, fn)
+  fn <- args$fn
+  wrapped_fn <- function(ht, row, col, current) {
+    value <- fn(ht, row, col, current)
+    assert_not_all_na(value, is.character(value))
+    value
+  }
+  prop_map(ht, args$row, args$col, wrapped_fn, "font", prepped = TRUE, env = args$env)
 }

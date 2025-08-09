@@ -40,13 +40,17 @@ col_width <- function(ht) prop_get(ht, "col_width")
 #' @rdname col_width
 #' @export
 `col_width<-` <- function(ht, value) {
-  prop_replace(ht, value, "col_width", check_fun = is_numeric_or_character)
+  assert_not_all_na(value, is_numeric_or_character(value))
+  prop_replace(ht, value, "col_width")
 }
 
 #' @rdname col_width
 #' @export
 set_col_width <- function(ht, col, value) {
-  prop_set_col(ht, col, value, "col_width", check_fun = is_numeric_or_character)
+  args <- prep_index_args(ht, col, value, ncol(ht))
+  value <- args$value
+  assert_not_all_na(value, is_numeric_or_character(value))
+  prop_set_col(ht, args$idx, value, "col_width", prepped = TRUE, env = args$env)
 }
 
 
@@ -80,13 +84,17 @@ row_height <- function(ht) prop_get(ht, "row_height")
 #' @rdname row_height
 #' @export
 `row_height<-` <- function(ht, value) {
-  prop_replace(ht, value, "row_height", check_fun = is_numeric_or_character)
+  assert_not_all_na(value, is_numeric_or_character(value))
+  prop_replace(ht, value, "row_height")
 }
 
 #' @rdname row_height
 #' @export
 set_row_height <- function(ht, row, value) {
-  prop_set_row(ht, row, value, "row_height", check_fun = is_numeric_or_character)
+  args <- prep_index_args(ht, row, value, nrow(ht))
+  value <- args$value
+  assert_not_all_na(value, is_numeric_or_character(value))
+  prop_set_row(ht, args$idx, value, "row_height", prepped = TRUE, env = args$env)
 }
 
 
@@ -124,13 +132,17 @@ header_cols <- function(ht) prop_get(ht, "header_cols")
 #' @rdname header_cols
 #' @export
 `header_cols<-` <- function(ht, value) {
-  prop_replace(ht, value, "header_cols", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "header_cols")
 }
 
 #' @rdname header_cols
 #' @export
 set_header_cols <- function(ht, col, value) {
-  prop_set_col(ht, col, value, "header_cols", check_fun = is.logical)
+  args <- prep_index_args(ht, col, value, ncol(ht))
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set_col(ht, args$idx, value, "header_cols", prepped = TRUE, env = args$env)
 }
 
 #' @rdname header_cols
@@ -147,11 +159,15 @@ header_rows <- function(ht) prop_get(ht, "header_rows")
 #' @rdname header_cols
 #' @export
 `header_rows<-` <- function(ht, value) {
-  prop_replace(ht, value, "header_rows", check_fun = is.logical)
+  assert_not_all_na(value, is.logical(value))
+  prop_replace(ht, value, "header_rows")
 }
 
 #' @rdname header_cols
 #' @export
 set_header_rows <- function(ht, row, value) {
-  prop_set_row(ht, row, value, "header_rows", check_fun = is.logical)
+  args <- prep_index_args(ht, row, value, nrow(ht))
+  value <- args$value
+  assert_not_all_na(value, is.logical(value))
+  prop_set_row(ht, args$idx, value, "header_rows", prepped = TRUE, env = args$env)
 }

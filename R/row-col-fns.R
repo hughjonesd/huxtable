@@ -156,17 +156,20 @@ final <- function(n = 1) {
 NULL
 
 
-get_rc_spec <- function(ht, obj, dimno) {
+get_rc_spec <- function(ht, obj, dimno, env = parent.frame()) {
   dim_length <- dim(ht)[dimno]
   if (missing(obj)) {
     return(seq_len(dim_length))
   }
 
-  # You can"t evaluate obj before running the tidyselect; otherwise functions like starts_with throw an error.
   result <- if (dimno == 2) {
-    tidyselect::with_vars(colnames(ht), if (is.function(obj)) obj(ht, dimno) else obj)
+    tidyselect::with_vars(colnames(ht), {
+      val <- if (is.language(obj) || is.symbol(obj) || is.expression(obj)) eval(obj, env) else obj
+      if (is.function(val)) val(ht, dimno) else val
+    })
   } else {
-    if (is.function(obj)) obj(ht, dimno) else obj
+    val <- if (is.language(obj) || is.symbol(obj) || is.expression(obj)) eval(obj, env) else obj
+    if (is.function(val)) val(ht, dimno) else val
   }
 
   result
