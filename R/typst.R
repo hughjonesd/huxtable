@@ -251,11 +251,25 @@ typst_stroke <- function(ht, row, col) {
   bbc <- format_color(bottom_border_color(ht)[row, col], default = "black")
   lbc <- format_color(left_border_color(ht)[row, col], default = "black")
 
+  stroke_side <- function(thickness, style, color) {
+    if (is.na(style) || style == "solid") {
+      sprintf("stroke(thickness: %.4gpt, paint: rgb(%s))", thickness, color)
+    } else {
+      dash_styles <- c(dashed = "dashed", dotted = "dotted")
+      dash <- dash_styles[style]
+      if (is.na(dash)) {
+        sprintf("stroke(thickness: %.4gpt, paint: rgb(%s))", thickness, color)
+      } else {
+        sprintf("stroke(thickness: %.4gpt, paint: rgb(%s), dash: \"%s\")", thickness, color, dash)
+      }
+    }
+  }
+
   stroke_parts <- c()
-  if (tb > 0) stroke_parts <- c(stroke_parts, sprintf("top: %.4gpt + %s + rgb(%s)", tb, tbs, tbc))
-  if (rb > 0) stroke_parts <- c(stroke_parts, sprintf("right: %.4gpt + %s + rgb(%s)", rb, rbs, rbc))
-  if (bb > 0) stroke_parts <- c(stroke_parts, sprintf("bottom: %.4gpt + %s + rgb(%s)", bb, bbs, bbc))
-  if (lb > 0) stroke_parts <- c(stroke_parts, sprintf("left: %.4gpt + %s + rgb(%s)", lb, lbs, lbc))
+  if (tb > 0) stroke_parts <- c(stroke_parts, sprintf("top: %s", stroke_side(tb, tbs, tbc)))
+  if (rb > 0) stroke_parts <- c(stroke_parts, sprintf("right: %s", stroke_side(rb, rbs, rbc)))
+  if (bb > 0) stroke_parts <- c(stroke_parts, sprintf("bottom: %s", stroke_side(bb, bbs, bbc)))
+  if (lb > 0) stroke_parts <- c(stroke_parts, sprintf("left: %s", stroke_side(lb, lbs, lbc)))
 
   if (length(stroke_parts) > 0) {
     sprintf("stroke: (%s)", paste(stroke_parts, collapse = ", "))
