@@ -7,18 +7,19 @@
 \title{Set the position of the table float in LaTeX}
 \usage{
 latex_float(ht)
+
 latex_float(ht) <- value
+
 set_latex_float(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A string. Set to \code{NA} to reset to the default, which is
-\code{"ht"}.}
+\item{value}{A string. Set to \code{NA} to reset to the default, which is \code{"ht"}.}
 }
 \value{
-\code{latex_float()} returns the \code{latex_float} property.
-\code{set_latex_float()} returns the modified huxtable.
+\code{property()} returns the property value(s).
+\code{set_property()} and \code{map_property()} return the modified huxtable.
 }
 \description{
 Possible values include:
@@ -35,7 +36,6 @@ Possible values include:
 See LaTeX documentation for more details.
 }
 \examples{
+set_latex_float(jams, "b")
 
-latex_float(jams) <-  "b"
-latex_float(jams)
 }

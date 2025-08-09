@@ -18,7 +18,7 @@ map_font(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is NA.}
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is \code{NA_character_}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

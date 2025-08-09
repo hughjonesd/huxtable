@@ -7,7 +7,8 @@
 #' @noRd
 rd_default <- function(prop) {
   default <- huxtable_env$huxtable_default_attrs[[prop]]
-  paste0("Set to `NA` to reset to the default, which is ", default, ".")
+  default <- deparse(default)
+  paste0("Set to `NA` to reset to the default, which is `", default, "`.")
 }
 
 # Shared documentation for huxtable property functions:
@@ -16,6 +17,9 @@ rd_default <- function(prop) {
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
 #' @param fn A mapping function. See [mapping-functions] for details.
-#'
+#' @return
+#'   `property()` returns the property value(s).
+#'   `set_property()` and `map_property()` return the modified huxtable.
+#' 
 #' @name hux_prop_params
 NULL
