@@ -26,7 +26,8 @@ run all or almost all tests. You can filter out fuzz tests using:
 `devtools::test(filter = "^(?!.*fuzz)", perl = TRUE)`.
 
 You can install quarto, typst, or latex by running the ./install-*.sh files in your
-home directory. They are not installed automatically to save setup time.
+home directory. They are not installed automatically to save setup time. Install
+them if you need to test the relevant features.
 
 Not all packages in Suggests: in the DESCRIPTION file are installed. You
 can install them if you need to. But, if tests break because a suggested
