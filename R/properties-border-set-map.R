@@ -1,7 +1,11 @@
 # helper functions -----------------------------------------------------------
 
-
-.border_prop_set <- function(ht, row, col, value, side, prop) {
+#' Set a border property on a subset
+#'
+#' Internal helper for border setters.
+#'
+#' @noRd
+border_prop_set <- function(ht, row, col, value, side, prop) {
   if (missing(col) && missing(value)) {
     value <- row
     row <- seq_len(nrow(ht))
@@ -29,7 +33,12 @@
   ht
 }
 
-.border_prop_map <- function(ht, row, col, fn, side, prop) {
+#' Map a function over a border property
+#'
+#' Internal helper for border mappers.
+#'
+#' @noRd
+border_prop_map <- function(ht, row, col, fn, side, prop) {
   if (missing(col) && missing(fn)) {
     fn <- row
     row <- seq_len(nrow(ht))
@@ -60,7 +69,12 @@
   ht
 }
 
-.border_set <- function(ht, row, col, value, side,
+#' Wrapper to handle default border arguments
+#'
+#' Internal helper for user-facing border setters.
+#'
+#' @noRd
+border_set <- function(ht, row, col, value, side,
                         missing_row, missing_col, missing_value) {
   if (missing_row && missing_col && missing_value) {
     row <- seq_len(nrow(ht))
@@ -75,7 +89,7 @@
     if (missing_col) col <- seq_len(ncol(ht))
     if (missing_value) value <- 0.4
   }
-  .border_prop_set(ht, row, col, value, side, "border")
+  border_prop_set(ht, row, col, value, side, "border")
 }
 
 allowed_border_styles <- c("solid", "double", "dashed", "dotted")
@@ -121,7 +135,7 @@ NULL
 #' @rdname borders
 #' @export
 set_left_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "left",
     missing(row), missing(col), missing(value)
   )
@@ -130,7 +144,7 @@ set_left_border <- function(ht, row, col, value = 0.4) {
 #' @rdname borders
 #' @export
 set_right_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "right",
     missing(row), missing(col), missing(value)
   )
@@ -139,7 +153,7 @@ set_right_border <- function(ht, row, col, value = 0.4) {
 #' @rdname borders
 #' @export
 set_top_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "top",
     missing(row), missing(col), missing(value)
   )
@@ -148,7 +162,7 @@ set_top_border <- function(ht, row, col, value = 0.4) {
 #' @rdname borders
 #' @export
 set_bottom_border <- function(ht, row, col, value = 0.4) {
-  .border_set(
+  border_set(
     ht, row, col, value, "bottom",
     missing(row), missing(col), missing(value)
   )
@@ -157,25 +171,25 @@ set_bottom_border <- function(ht, row, col, value = 0.4) {
 #' @rdname borders
 #' @export
 map_left_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border")
+  border_prop_map(ht, row, col, fn, "left", "border")
 }
 
 #' @rdname borders
 #' @export
 map_right_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border")
+  border_prop_map(ht, row, col, fn, "right", "border")
 }
 
 #' @rdname borders
 #' @export
 map_top_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border")
+  border_prop_map(ht, row, col, fn, "top", "border")
 }
 
 #' @rdname borders
 #' @export
 map_bottom_border <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border")
+  border_prop_map(ht, row, col, fn, "bottom", "border")
 }
 
 # color ---------------------------------------------------------------------
@@ -209,49 +223,49 @@ NULL
 #' @rdname border-colors
 #' @export
 set_left_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "left", "border_color")
+  border_prop_set(ht, row, col, value, "left", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 set_right_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "right", "border_color")
+  border_prop_set(ht, row, col, value, "right", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 set_top_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "top", "border_color")
+  border_prop_set(ht, row, col, value, "top", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 set_bottom_border_color <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "bottom", "border_color")
+  border_prop_set(ht, row, col, value, "bottom", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 map_left_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border_color")
+  border_prop_map(ht, row, col, fn, "left", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 map_right_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border_color")
+  border_prop_map(ht, row, col, fn, "right", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 map_top_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border_color")
+  border_prop_map(ht, row, col, fn, "top", "border_color")
 }
 
 #' @rdname border-colors
 #' @export
 map_bottom_border_color <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border_color")
+  border_prop_map(ht, row, col, fn, "bottom", "border_color")
 }
 
 # style ---------------------------------------------------------------------
@@ -286,47 +300,47 @@ NULL
 #' @rdname border-styles
 #' @export
 set_left_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "left", "border_style")
+  border_prop_set(ht, row, col, value, "left", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 set_right_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "right", "border_style")
+  border_prop_set(ht, row, col, value, "right", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 set_top_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "top", "border_style")
+  border_prop_set(ht, row, col, value, "top", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 set_bottom_border_style <- function(ht, row, col, value) {
-  .border_prop_set(ht, row, col, value, "bottom", "border_style")
+  border_prop_set(ht, row, col, value, "bottom", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 map_left_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "left", "border_style")
+  border_prop_map(ht, row, col, fn, "left", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 map_right_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "right", "border_style")
+  border_prop_map(ht, row, col, fn, "right", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 map_top_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "top", "border_style")
+  border_prop_map(ht, row, col, fn, "top", "border_style")
 }
 
 #' @rdname border-styles
 #' @export
 map_bottom_border_style <- function(ht, row, col, fn) {
-  .border_prop_map(ht, row, col, fn, "bottom", "border_style")
+  border_prop_map(ht, row, col, fn, "bottom", "border_style")
 }
