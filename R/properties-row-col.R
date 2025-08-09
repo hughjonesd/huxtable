@@ -47,14 +47,10 @@ col_width <- function(ht) prop_get(ht, "col_width")
 #' @rdname col_width
 #' @export
 set_col_width <- function(ht, col, value) {
-  if (missing(value)) {
-    value <- col
-    col <- seq_len(ncol(ht))
-  } else if (missing(col)) {
-    col <- seq_len(ncol(ht))
-  }
+  args <- prep_index_args(ht, col, value, ncol(ht))
+  value <- args$value
   assert_not_all_na(value, is_numeric_or_character(value))
-  prop_set_col(ht, col, value, "col_width")
+  prop_set_col(ht, args$idx, value, "col_width", prepped = TRUE)
 }
 
 
@@ -95,14 +91,10 @@ row_height <- function(ht) prop_get(ht, "row_height")
 #' @rdname row_height
 #' @export
 set_row_height <- function(ht, row, value) {
-  if (missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-  } else if (missing(row)) {
-    row <- seq_len(nrow(ht))
-  }
+  args <- prep_index_args(ht, row, value, nrow(ht))
+  value <- args$value
   assert_not_all_na(value, is_numeric_or_character(value))
-  prop_set_row(ht, row, value, "row_height")
+  prop_set_row(ht, args$idx, value, "row_height", prepped = TRUE)
 }
 
 
@@ -147,14 +139,10 @@ header_cols <- function(ht) prop_get(ht, "header_cols")
 #' @rdname header_cols
 #' @export
 set_header_cols <- function(ht, col, value) {
-  if (missing(value)) {
-    value <- col
-    col <- seq_len(ncol(ht))
-  } else if (missing(col)) {
-    col <- seq_len(ncol(ht))
-  }
+  args <- prep_index_args(ht, col, value, ncol(ht))
+  value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set_col(ht, col, value, "header_cols")
+  prop_set_col(ht, args$idx, value, "header_cols", prepped = TRUE)
 }
 
 #' @rdname header_cols
@@ -178,12 +166,8 @@ header_rows <- function(ht) prop_get(ht, "header_rows")
 #' @rdname header_cols
 #' @export
 set_header_rows <- function(ht, row, value) {
-  if (missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-  } else if (missing(row)) {
-    row <- seq_len(nrow(ht))
-  }
+  args <- prep_index_args(ht, row, value, nrow(ht))
+  value <- args$value
   assert_not_all_na(value, is.logical(value))
-  prop_set_row(ht, row, value, "header_rows")
+  prop_set_row(ht, args$idx, value, "header_rows", prepped = TRUE)
 }

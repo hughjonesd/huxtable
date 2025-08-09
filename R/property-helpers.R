@@ -103,6 +103,19 @@ assert_not_all_na <- function(value, ...) {
   invisible(TRUE)
 }
 
+#' Replace NA values with property defaults
+#'
+#' @param value Property values
+#' @param prop  Property name
+#' @param reset_na Replace `NA`s with the huxtable default?
+#' @noRd
+reset_prop_defaults <- function(value, prop, reset_na) {
+  if (reset_na) {
+    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
+  }
+  value
+}
+
 #' Prepare row/col/fn arguments for map_* wrappers
 #'
 #' @noRd
@@ -133,6 +146,17 @@ prep_set_args <- function(ht, row, col, value) {
   list(row = row, col = col, value = value)
 }
 
+#' Prepare index/value arguments for row/column setters
+#'
+#' @noRd
+prep_index_args <- function(ht, idx, value, n) {
+  if (missing(value)) {
+    value <- idx
+    idx <- seq_len(n)
+  }
+  list(idx = idx, value = value)
+}
+
 #' Replace an entire property matrix/vector
 #'
 #' @param ht           A huxtable.
@@ -144,11 +168,23 @@ prep_set_args <- function(ht, row, col, value) {
 #' @noRd
 prop_replace <- function(ht, value, prop, reset_na = TRUE,
                           coerce_mode = TRUE) {
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
+  if (prop %in% huxtable_cell_attrs) {
+    ht <- prop_set(ht, value = value, prop = prop, reset_na = reset_na,
+                   prepped = FALSE, coerce_mode = coerce_mode)
+  } else if (prop %in% huxtable_row_attrs) {
+    ht <- prop_set_row(ht, row = seq_len(nrow(ht)), value = value, prop = prop,
+                       reset_na = reset_na, prepped = TRUE)
+    if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
+  } else if (prop %in% huxtable_col_attrs) {
+    ht <- prop_set_col(ht, col = seq_len(ncol(ht)), value = value, prop = prop,
+                       reset_na = reset_na, prepped = TRUE)
+    if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
+  } else if (prop %in% huxtable_table_attrs) {
+    ht <- prop_set_table(ht, value = value, prop = prop, reset_na = reset_na)
+    if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
+  } else {
+    stop("Unknown property: ", prop)
   }
-  attr(ht, prop)[] <- value
-  if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
   ht
 }
 
@@ -162,23 +198,19 @@ prop_replace <- function(ht, value, prop, reset_na = TRUE,
 #'
 #' @noRd
 prop_set <- function(ht, row, col, value, prop,
-                      reset_na = TRUE) {
+                      reset_na = TRUE, prepped = FALSE,
+                      coerce_mode = FALSE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+  if (!prepped) {
+    args <- prep_set_args(ht, row, col, value)
+    row <- args$row; col <- args$col; value <- args$value
   }
   rc <- list()
   rc$row <- get_rc_spec(ht, row, 1)
   rc$col <- get_rc_spec(ht, col, 2)
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
-  }
+  value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[rc$row, rc$col] <- value
+  if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
   ht
 }
 
@@ -190,15 +222,11 @@ prop_set <- function(ht, row, col, value, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_map <- function(ht, row, col, fn, prop,
-                      reset_na = TRUE) {
+                      reset_na = TRUE, prepped = FALSE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(fn)) {
-    fn <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+  if (!prepped) {
+    args <- prep_map_args(ht, row, col, fn)
+    row <- args$row; col <- args$col; fn <- args$fn
   }
   rc <- list()
   rc$row <- get_rc_spec(ht, row, 1)
@@ -206,9 +234,7 @@ prop_map <- function(ht, row, col, fn, prop,
   current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
   if (is_huxtable(current)) current <- as.matrix(current)
   value <- fn(ht, rc$row, rc$col, current)
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
-  }
+  value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[rc$row, rc$col] <- value
   ht
 }
@@ -220,16 +246,14 @@ prop_map <- function(ht, row, col, fn, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_set_row <- function(ht, row, value, prop,
-                          reset_na = TRUE) {
+                          reset_na = TRUE, prepped = FALSE) {
   assert_that(is_huxtable(ht))
-  if (missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
+  if (!prepped) {
+    args <- prep_index_args(ht, row, value, nrow(ht))
+    row <- args$idx; value <- args$value
   }
   row <- get_rc_spec(ht, row, 1)
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
-  }
+  value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[row] <- value
   ht
 }
@@ -241,16 +265,14 @@ prop_set_row <- function(ht, row, value, prop,
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
 prop_set_col <- function(ht, col, value, prop,
-                          reset_na = TRUE) {
+                          reset_na = TRUE, prepped = FALSE) {
   assert_that(is_huxtable(ht))
-  if (missing(value)) {
-    value <- col
-    col <- seq_len(ncol(ht))
+  if (!prepped) {
+    args <- prep_index_args(ht, col, value, ncol(ht))
+    col <- args$idx; value <- args$value
   }
   col <- get_rc_spec(ht, col, 2)
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
-  }
+  value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop)[col] <- value
   ht
 }
@@ -264,9 +286,7 @@ prop_set_col <- function(ht, col, value, prop,
 prop_set_table <- function(ht, value, prop,
                             reset_na = TRUE) {
   assert_that(is_huxtable(ht))
-  if (reset_na) {
-    value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
-  }
+  value <- reset_prop_defaults(value, prop, reset_na)
   attr(ht, prop) <- value
   ht
 }
