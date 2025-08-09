@@ -7,27 +7,29 @@
 \title{Set the table height}
 \usage{
 height(ht)
+
 height(ht) <- value
+
 set_height(ht, value)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A number or string. Set to \code{NA} to reset to the default, which is
-\code{NA}.}
+\item{value}{A number or string. Set to \code{NA} to reset to the default, which is \code{NA_real_}.}
 }
 \value{
-\code{height()} returns the \code{height} property.
-\code{set_height()} returns the modified huxtable.
+\code{property()} returns the property value(s).
+\code{set_property()} and \code{map_property()} return the modified huxtable.
 }
 \description{
-\verb{height()`` sets the height of the entire table, while [row_height()] sets the height of individual rows. A numeric height is treated as a proportion of the containing block (HTML) or }\\textheight` (LaTeX). A character height
+\code{height()} sets the height of the entire table, while \code{\link[=row_height]{row_height()}} sets the
+height of individual rows. A numeric height is treated as a proportion of
+the containing block (HTML) or \verb{\\textheight} (LaTeX). A character height
 must be a valid CSS or LaTeX dimension.
 }
 \examples{
+set_height(jams, 0.4)
 
-height(jams) <-  0.4
-height(jams)
 }
 \seealso{
 Other table measurements: 

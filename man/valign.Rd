@@ -18,7 +18,7 @@ map_valign(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is top.}
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is \code{"top"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

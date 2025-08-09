@@ -55,7 +55,7 @@ map_bottom_padding(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{Numeric: padding width/height in points. Set to \code{NA} to reset to the default, which is 6.}
+\item{value}{Numeric: padding width/height in points. Set to \code{NA} to reset to the default, which is \code{6}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

@@ -56,7 +56,7 @@ map_bottom_border_color(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A valid R color, e.g. \code{"red"}, \code{"#FF0000"}. Set to \code{NA} to reset to the default, which is NA.}
+\item{value}{A valid R color, e.g. \code{"red"}, \code{"#FF0000"}. Set to \code{NA} to reset to the default, which is \code{NA_character_}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

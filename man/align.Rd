@@ -18,7 +18,7 @@ map_align(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is left.}
+\item{value}{A character vector or matrix. Set to \code{NA} to reset to the default, which is \code{"left"}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 

@@ -18,7 +18,7 @@ map_font_size(ht, row, col, fn)
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{value}{A numeric vector. Set to \code{NA} to reset to the default, which is NA.}
+\item{value}{A numeric vector. Set to \code{NA} to reset to the default, which is \code{NA_real_}.}
 
 \item{row}{A row specifier. See \link{rowspecs} for details.}
 
