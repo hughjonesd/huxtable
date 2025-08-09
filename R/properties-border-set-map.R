@@ -10,64 +10,53 @@
     if (missing(row)) row <- seq_len(nrow(ht))
     if (missing(col)) col <- seq_len(ncol(ht))
   }
-  getter <- get(paste0(side, "_", prop))
-  attr(ht, prop) <- getter(ht)
-  extra <- substitute(
-    {
-      FUN(ht)[rc$row, rc$col] <- value
-    },
-    list(FUN = as.name(paste0(side, "_", prop)))
-  )
-  if (prop == "border" && is_brdr(value)) {
-    ht <- prop_set(ht, row, col, value, prop,
-      extra = extra, reset_na = FALSE
-    )
-  } else {
-    if (!all(is.na(value))) {
-      if (prop == "border") {
-        assert_that(is_borderish(value))
-      } else if (prop %in% c("border_color", "border_style")) {
-        assert_that(is.character(value))
-        if (prop == "border_style") {
-          assert_that(all(na.omit(value) %in% allowed_border_styles))
-        }
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  if (!(prop == "border" && is_brdr(value))) {
+    if (prop == "border") {
+      assert_not_all_na(value, is_borderish(value))
+    } else if (prop %in% c("border_color", "border_style")) {
+      assert_not_all_na(value, is.character(value))
+      if (prop == "border_style") {
+        assert_not_all_na(value, all(na.omit(value) %in% allowed_border_styles))
       }
     }
-    ht <- prop_set(ht, row, col, value, prop, extra = extra)
   }
-  attr(ht, prop) <- NULL
+  fun_name <- paste0(side, "_", prop)
+  current <- do.call(fun_name, list(ht))
+  current[rcrow, rccol] <- value
+  ht <- do.call(paste0(fun_name, "<-"), list(ht, current))
   ht
 }
 
 .border_prop_map <- function(ht, row, col, fn, side, prop) {
-  getter <- get(paste0(side, "_", prop))
-  attr(ht, prop) <- getter(ht)
-  val_expr <- switch(prop,
-    border = quote({ if (!all(is.na(value))) assert_that(is_borderish(value)) }),
-    border_color = quote({ if (!all(is.na(value))) assert_that(is.character(value)) }),
-    border_style = quote({
-      if (!all(is.na(value))) {
-        assert_that(is.character(value))
-        assert_that(all(na.omit(value) %in% allowed_border_styles))
-      }
-    }),
-    quote({})
-  )
-  extra <- substitute(
-    {
-      VAL
-      FUN(ht)[rc$row, rc$col] <- value
-    },
-    list(FUN = as.name(paste0(side, "_", prop)), VAL = val_expr)
-  )
-  if (prop == "border") {
-    ht <- prop_map(ht, row, col, fn, prop,
-      extra = extra, reset_na = FALSE
-    )
+  if (missing(col) && missing(fn)) {
+    fn <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
   } else {
-    ht <- prop_map(ht, row, col, fn, prop, extra = extra)
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
   }
-  attr(ht, prop) <- NULL
+  rcrow <- get_rc_spec(ht, row, 1)
+  rccol <- get_rc_spec(ht, col, 2)
+  fun_name <- paste0(side, "_", prop)
+  current <- do.call(fun_name, list(ht))[rcrow, rccol, drop = FALSE]
+  if (is_huxtable(current)) current <- as.matrix(current)
+  value <- fn(ht, rcrow, rccol, current)
+  if (!(prop == "border" && is_brdr(value))) {
+    if (prop == "border") {
+      assert_not_all_na(value, is_borderish(value))
+    } else if (prop %in% c("border_color", "border_style")) {
+      assert_not_all_na(value, is.character(value))
+      if (prop == "border_style") {
+        assert_not_all_na(value, all(na.omit(value) %in% allowed_border_styles))
+      }
+    }
+  }
+  current_full <- do.call(fun_name, list(ht))
+  current_full[rcrow, rccol] <- value
+  ht <- do.call(paste0(fun_name, "<-"), list(ht, current_full))
   ht
 }
 

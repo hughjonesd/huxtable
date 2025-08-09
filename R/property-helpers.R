@@ -93,22 +93,60 @@ prop_get <- function(ht, prop) {
   attr(ht, prop)
 }
 
+#' Assert condition unless all values are NA
+#'
+#' @param value Values to check
+#' @param ... Conditions passed to [assertthat::assert_that]
+#' @noRd
+assert_not_all_na <- function(value, ...) {
+  if (!all(is.na(value))) assert_that(...)
+  invisible(TRUE)
+}
+
+#' Prepare row/col/fn arguments for map_* wrappers
+#'
+#' @noRd
+prep_map_args <- function(ht, row, col, fn) {
+  if (missing(col) && missing(fn)) {
+    fn <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
+  list(row = row, col = col, fn = fn)
+}
+
+#' Prepare row/col/value arguments for set_* wrappers
+#'
+#' @noRd
+prep_set_args <- function(ht, row, col, value) {
+  if (missing(col) && missing(value)) {
+    value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
+  list(row = row, col = col, value = value)
+}
+
 #' Replace an entire property matrix/vector
 #'
 #' @param ht           A huxtable.
 #' @param value        New property values.
 #' @param prop         Property name.
-#' @param extra        Extra code to run after validation.
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @param coerce_mode  If `TRUE`, coerce the stored matrix mode to match `value`.
 #'
 #' @noRd
-prop_replace <- function(ht, value, prop, extra = NULL, reset_na = TRUE,
+prop_replace <- function(ht, value, prop, reset_na = TRUE,
                           coerce_mode = TRUE) {
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop)[] <- value
   if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
   ht
@@ -120,11 +158,10 @@ prop_replace <- function(ht, value, prop, extra = NULL, reset_na = TRUE,
 #' @param row,col      Row/column specifiers.
 #' @param value        Property values.
 #' @param prop         Property name.
-#' @param extra        Extra code to run after validation.
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #'
 #' @noRd
-prop_set <- function(ht, row, col, value, prop, extra = NULL,
+prop_set <- function(ht, row, col, value, prop,
                       reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(col) && missing(value)) {
@@ -141,7 +178,6 @@ prop_set <- function(ht, row, col, value, prop, extra = NULL,
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
   ht
 }
@@ -153,7 +189,7 @@ prop_set <- function(ht, row, col, value, prop, extra = NULL,
 #'
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
-prop_map <- function(ht, row, col, fn, prop, extra = NULL,
+prop_map <- function(ht, row, col, fn, prop,
                       reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(col) && missing(fn)) {
@@ -173,7 +209,6 @@ prop_map <- function(ht, row, col, fn, prop, extra = NULL,
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
   ht
 }
@@ -184,7 +219,7 @@ prop_map <- function(ht, row, col, fn, prop, extra = NULL,
 #'
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
-prop_set_row <- function(ht, row, value, prop, extra = NULL,
+prop_set_row <- function(ht, row, value, prop,
                           reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
@@ -195,7 +230,6 @@ prop_set_row <- function(ht, row, value, prop, extra = NULL,
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop)[row] <- value
   ht
 }
@@ -206,7 +240,7 @@ prop_set_row <- function(ht, row, value, prop, extra = NULL,
 #'
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
-prop_set_col <- function(ht, col, value, prop, extra = NULL,
+prop_set_col <- function(ht, col, value, prop,
                           reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
@@ -217,7 +251,6 @@ prop_set_col <- function(ht, col, value, prop, extra = NULL,
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop)[col] <- value
   ht
 }
@@ -228,13 +261,12 @@ prop_set_col <- function(ht, col, value, prop, extra = NULL,
 #'
 #' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #' @noRd
-prop_set_table <- function(ht, value, prop, extra = NULL,
+prop_set_table <- function(ht, value, prop,
                             reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (reset_na) {
     value[is.na(value)] <- huxtable_env$huxtable_default_attrs[[prop]]
   }
-  if (!is.null(extra)) eval(extra)
   attr(ht, prop) <- value
   ht
 }

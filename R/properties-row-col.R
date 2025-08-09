@@ -40,18 +40,20 @@ col_width <- function(ht) prop_get(ht, "col_width")
 #' @rdname col_width
 #' @export
 `col_width<-` <- function(ht, value) {
-  if (!all(is.na(value))) {
-    assert_that(is_numeric_or_character(value))
-  }
+  assert_not_all_na(value, is_numeric_or_character(value))
   prop_replace(ht, value, "col_width")
 }
 
 #' @rdname col_width
 #' @export
 set_col_width <- function(ht, col, value) {
-  if (!all(is.na(value))) {
-    assert_that(is_numeric_or_character(value))
+  if (missing(value)) {
+    value <- col
+    col <- seq_len(ncol(ht))
+  } else if (missing(col)) {
+    col <- seq_len(ncol(ht))
   }
+  assert_not_all_na(value, is_numeric_or_character(value))
   prop_set_col(ht, col, value, "col_width")
 }
 
@@ -86,18 +88,20 @@ row_height <- function(ht) prop_get(ht, "row_height")
 #' @rdname row_height
 #' @export
 `row_height<-` <- function(ht, value) {
-  if (!all(is.na(value))) {
-    assert_that(is_numeric_or_character(value))
-  }
+  assert_not_all_na(value, is_numeric_or_character(value))
   prop_replace(ht, value, "row_height")
 }
 
 #' @rdname row_height
 #' @export
 set_row_height <- function(ht, row, value) {
-  if (!all(is.na(value))) {
-    assert_that(is_numeric_or_character(value))
+  if (missing(value)) {
+    value <- row
+    row <- seq_len(nrow(ht))
+  } else if (missing(row)) {
+    row <- seq_len(nrow(ht))
   }
+  assert_not_all_na(value, is_numeric_or_character(value))
   prop_set_row(ht, row, value, "row_height")
 }
 
@@ -136,18 +140,20 @@ header_cols <- function(ht) prop_get(ht, "header_cols")
 #' @rdname header_cols
 #' @export
 `header_cols<-` <- function(ht, value) {
-  if (!all(is.na(value))) {
-    assert_that(is.logical(value))
-  }
+  assert_not_all_na(value, is.logical(value))
   prop_replace(ht, value, "header_cols")
 }
 
 #' @rdname header_cols
 #' @export
 set_header_cols <- function(ht, col, value) {
-  if (!all(is.na(value))) {
-    assert_that(is.logical(value))
+  if (missing(value)) {
+    value <- col
+    col <- seq_len(ncol(ht))
+  } else if (missing(col)) {
+    col <- seq_len(ncol(ht))
   }
+  assert_not_all_na(value, is.logical(value))
   prop_set_col(ht, col, value, "header_cols")
 }
 
@@ -165,17 +171,19 @@ header_rows <- function(ht) prop_get(ht, "header_rows")
 #' @rdname header_cols
 #' @export
 `header_rows<-` <- function(ht, value) {
-  if (!all(is.na(value))) {
-    assert_that(is.logical(value))
-  }
+  assert_not_all_na(value, is.logical(value))
   prop_replace(ht, value, "header_rows")
 }
 
 #' @rdname header_cols
 #' @export
 set_header_rows <- function(ht, row, value) {
-  if (!all(is.na(value))) {
-    assert_that(is.logical(value))
+  if (missing(value)) {
+    value <- row
+    row <- seq_len(nrow(ht))
+  } else if (missing(row)) {
+    row <- seq_len(nrow(ht))
   }
+  assert_not_all_na(value, is.logical(value))
   prop_set_row(ht, row, value, "header_rows")
 }
