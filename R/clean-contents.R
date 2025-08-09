@@ -1,4 +1,13 @@
-# return character matrix of formatted contents, suitably escaped
+#' Prepare cell contents for output
+#'
+#' Converts a huxtable to a character matrix with numeric formatting,
+#' markdown rendering and other cleanups applied.
+#'
+#' @param ht A huxtable.
+#' @param output_type Output format, e.g. "latex" or "html".
+#' @param ... Unused.
+#' @return A character matrix of processed cell contents.
+#' @noRd
 clean_contents <- function(
     ht,
     output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf"),
@@ -114,6 +123,11 @@ align_decimals_matrix <- function(contents, ht, output_type) {
 }
 
 
+#' Convert UTF-8 strings to RTF escapes
+#'
+#' @param mx A character matrix.
+#' @return The matrix with non-ASCII characters replaced by RTF escapes.
+#' @noRd
 utf8_to_rtf <- function(mx) {
   utf8_codes <- function(x) utf8ToInt(enc2utf8(x))
 
@@ -139,7 +153,13 @@ utf8_to_rtf <- function(mx) {
 }
 
 
-# Format numeral generics
+#' Create a numeral formatting function
+#'
+#' Returns a function used to format numbers according to `x`.
+#'
+#' @param x A number, character string or function describing the format.
+#' @return A function that formats numeric input.
+#' @noRd
 numeral_formatter <- function(x) {
   UseMethod("numeral_formatter")
 }
@@ -173,19 +193,24 @@ numeral_formatter.numeric <- function(x) {
 # Breakdown of
 # (                     begin capturing group
 # -?                    optional minus sign
-# [0-9]*                followed by any number of digits
-# \\.?                  optionally followed by a decimal point
-# [0-9]+                which may also be followed by any number of digits
-# ([eE]-?[0-9]+)?       optionally including e or E as in scientific notation
-#                       along with (optionally) a sign preceding the digits
-#                       specifying the level of the exponent.
-# )                     end capturing group
+#' Regular expression for numeric substrings
+#'
+#' Matches numbers optionally containing a sign, decimal part or exponent.
+#'
+#' @return A regular expression string.
+#' @noRd
 number_regex <- function() {
   paste0("(-?[0-9]*\\.?[0-9]+([eE][+-]?[0-9]+)?)")
 }
 
 
 # find each numeric substring, and replace it:
+#' Format numeric substrings within text
+#'
+#' @param string A character string.
+#' @param num_fmt A formatting specification or function.
+#' @return The string with numeric portions formatted.
+#' @noRd
 format_numbers <- function(string, num_fmt) {
   if (is.na(string)) {
     return(NA_character_)
@@ -206,6 +231,13 @@ format_numbers <- function(string, num_fmt) {
 }
 
 
+#' Align decimal points in a vector of strings
+#'
+#' @param col Character vector of numbers.
+#' @param pad_chars Characters used to pad each element.
+#' @param output_type Output format string.
+#' @return A character vector with aligned decimals.
+#' @noRd
 handle_decimal_alignment <- function(col, pad_chars, output_type) {
   # where pad_chars is NA we do not pad
   orig_col <- col
@@ -227,6 +259,13 @@ handle_decimal_alignment <- function(col, pad_chars, output_type) {
 }
 
 
+#' Pad strings with spaces for alignment
+#'
+#' @param col Character vector.
+#' @param pad_chars Characters indicating where to align.
+#' @param output_type Output format string.
+#' @return A character vector with added padding.
+#' @noRd
 pad_spaces <- function(col, pad_chars, output_type) {
   find_pos <- function(string, char) {
     regex <- gregexpr(char, string, fixed = TRUE)[[1]]
@@ -253,6 +292,12 @@ pad_spaces <- function(col, pad_chars, output_type) {
 }
 
 
+#' Insert `\tablenum` commands for siunitx alignment
+#'
+#' @param col Character vector of numbers.
+#' @param pad_chars Decimal markers for each element.
+#' @return Modified character vector with `\tablenum` markers.
+#' @noRd
 add_tablenum <- function(col, pad_chars) {
   tn_options <- rep("", length(pad_chars))
   non_dot <- pad_chars != "."
@@ -263,6 +308,11 @@ add_tablenum <- function(col, pad_chars) {
 }
 
 
+#' Determine if alignment uses siunitx
+#'
+#' @param output_type Output format string.
+#' @return Logical scalar.
+#' @noRd
 aligning_with_siunitx <- function(output_type) {
   output_type == "latex" && getOption("huxtable.latex_siunitx_align", FALSE)
 }

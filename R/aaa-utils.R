@@ -1,12 +1,36 @@
+#' Is an object a vector (but not a list)?
+#'
+#' @param x Object to test.
+#' @return Logical scalar.
+#' @noRd
 is_vectorish <- function(x) is.null(dim(x)) && !is.list(x)
 
+#' Is an object numeric or character?
+#'
+#' @param x Object to test.
+#' @return Logical scalar.
+#' @noRd
 is_numeric_or_character <- function(x) is.numeric(x) || is.character(x)
 
 # pinched from rlang
+#' Return left-hand side unless `NULL`
+#'
+#' `%||%` returns `y` if `x` is `NULL`, otherwise `x`.
+#'
+#' @param x,y Objects to combine.
+#' @return `x` or `y`.
+#' @noRd
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
 }
 
+#' Nest a series of strings
+#'
+#' Wraps inner strings with outer strings sequentially.
+#'
+#' @param ... Pairs of strings giving opening and closing parts.
+#' @return A combined string.
+#' @noRd
 nest_strings <- function(...) {
   l <- list(...)
   rev_l <- rev(l)
@@ -19,12 +43,23 @@ nest_strings <- function(...) {
 }
 
 
+#' Format an R color for CSS output
+#'
+#' @param r_color Vector of R color names or hex codes.
+#' @param default Default color for `NA` values.
+#' @return Character vector of "r,g,b" values.
+#' @noRd
 format_color <- function(r_color, default = "white") {
   r_color[is.na(r_color)] <- default
   apply(grDevices::col2rgb(r_color), 2, paste0, collapse = ", ")
 }
 
 
+#' Check that a huxtable has positive dimensions
+#'
+#' @param ht A huxtable.
+#' @return Logical scalar; issues a warning if dimensions are zero.
+#' @noRd
 check_positive_dims <- function(ht) {
   if (nrow(ht) < 1) {
     warning("huxtable has zero rows")

@@ -2,6 +2,12 @@
 NULL
 
 
+#' Internal dplyr method for huxtables
+#'
+#' @param .data A huxtable.
+#' @param ... Passed to the corresponding dplyr verb.
+#' @return A huxtable.
+#' @noRd
 filter.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -78,6 +84,8 @@ mutate.huxtable <- function(.data, ..., copy_cell_props = TRUE) {
 transmute.huxtable <- mutate.huxtable
 
 
+#' @describeIn filter.huxtable Arrange rows in a huxtable
+#' @noRd
 arrange.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -87,6 +95,8 @@ arrange.huxtable <- function(.data, ...) {
 }
 
 
+#' @describeIn filter.huxtable Slice rows in a huxtable
+#' @noRd
 slice.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(.data)
@@ -102,6 +112,8 @@ slice.huxtable <- function(.data, ...) {
 # subclasses again....)
 
 
+#' @describeIn filter.huxtable Select columns from a huxtable
+#' @noRd
 select.huxtable <- function(.data, ...) {
   ht <- .data
   .data <- as.data.frame(t(colnames(.data)), stringsAsFactors = FALSE)

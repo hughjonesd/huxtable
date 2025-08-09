@@ -51,6 +51,10 @@ get_default_properties <- function(names = NULL) {
 }
 
 
+#' Check property names are recognized
+#'
+#' @param names Character vector of property names.
+#' @noRd
 check_recognized_properties <- function(names) {
   if (length(unrec <- setdiff(names, names(huxtable_env$huxtable_default_attrs))) > 0) {
     stop(
