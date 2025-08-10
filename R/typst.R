@@ -117,6 +117,8 @@ typst_table_options <- function(ht, col_w_str) {
     table_opts <- c(table_opts, sprintf("align: %s", align))
   }
 
+  table_opts <- c(table_opts, "stroke: none")
+
   table_opts
 }
 

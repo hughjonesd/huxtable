@@ -9,3 +9,7 @@
 your referring to.
 
 * Where possible, update an existing note before adding your own.
+
+## Notes
+
+* Typst export sets `stroke: none` on tables to avoid default borders. 86529fa
