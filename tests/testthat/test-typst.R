@@ -52,7 +52,11 @@ test_that("to_typst maps properties", {
 
   res <- to_typst(ht)
   expect_match(res, "#figure(", fixed = TRUE)
-  expect_match(res, "caption: \\[A cap\\]")
+  expect_match(
+    res,
+    "caption: figure.caption(position: top, align(center)[A cap])",
+    fixed = TRUE
+  )
   expect_match(res, "columns: \\(0.2fr, 0.3fr, 0.5fr\\)")
   expect_match(res, "colspan: 2")
   expect_match(res, "rowspan: 2")
@@ -98,7 +102,42 @@ test_that("Bugfix: caption escapes special characters", {
   ht <- hux(a = 1:2, b = 3:4)
   caption(ht) <- "#notfun"
   res <- to_typst(ht)
-  expect_match(res, "caption: \\[\\\\#notfun\\]")
+  expect_match(
+    res,
+    "caption: figure.caption(position: top, align(center)[\\#notfun])",
+    fixed = TRUE
+  )
+})
+
+test_that("caption position and width render in Typst", {
+  ht <- hux(a = 1:2, b = 3:4)
+  caption(ht) <- "A cap"
+  caption_pos(ht) <- "topleft"
+  caption_width(ht) <- 0.6
+  res <- to_typst(ht)
+  expect_match(
+    res,
+    "caption: figure.caption(position: top, align(left)[block(width: 60%)[A cap]])",
+    fixed = TRUE
+  )
+
+  caption_pos(ht) <- "bottomcenter"
+  caption_width(ht) <- NA
+  res <- to_typst(ht)
+  expect_match(
+    res,
+    "caption: figure.caption(position: bottom, align(center)[A cap])",
+    fixed = TRUE
+  )
+
+  caption_pos(ht) <- "topright"
+  caption_width(ht) <- "30pt"
+  res <- to_typst(ht)
+  expect_match(
+    res,
+    "caption: figure.caption(position: top, align(right)[block(width: 30pt)[A cap]])",
+    fixed = TRUE
+  )
 })
 
 test_that("to_typst outputs labels", {
