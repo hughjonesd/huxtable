@@ -86,6 +86,14 @@ test_that("Bugfix: merge_cells in Typst output produces no empty rows", {
   expect_false(any(trimws(lines) == ","))
 })
 
+test_that("Bugfix: typst tables without borders have no stroke", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  valign(ht) <- NA
+  res <- to_typst(ht)
+  expect_match(res, "stroke: none", fixed = TRUE)
+  expect_false(grepl("stroke\\(", res))
+})
+
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), "#figure", fixed = TRUE)

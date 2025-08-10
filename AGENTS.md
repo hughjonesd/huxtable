@@ -1,6 +1,12 @@
 
+# Instructions to llm agents
+
+## Documentation
+
 Read design.md to get an overview of huxtable's architecture. Read agent-notes.md
 to read the notes of previous llms.
+
+## Writing code, tests and docs
 
 Use short branch names. Start with "feature", "bugfix", "refactor" or "chore". 
 
@@ -24,6 +30,8 @@ ignore errors due to missing packages ("flextable", "lmtest") unless you're work
 on those particular parts of the system. If you are, then just install the
 missing packages.
 
+## Testing your work
+
 At the end of any task, if you've made changes, run the tests in tests/testthat 
 to make sure everything is still working. If there are errors due to your code, 
 fix them before completing. You don't have to run every test; in particular those
@@ -33,9 +41,15 @@ will run a full suite of tests later.) But if you make big architectural changes
 run all or almost all tests. You can filter out fuzz tests using:
 `devtools::test(filter = "^(?!.*fuzz)", perl = TRUE)`.
 
+## Installing extra components
+
 You can install quarto, typst, or latex by running the ./install-*.sh files in your
 home directory. They are not installed automatically to save setup time. Install
 them if you need to test the relevant features.
+
+typst documentation is available in easy-to-read format 
+on https://github.com/typst/typst/tree/main/docs. 
+It may be useful to clone the repository into /workspace.
 
 Not all packages in Suggests: in the DESCRIPTION file are installed. You
 can install them if you need to. But, if tests break because a suggested
@@ -49,6 +63,8 @@ via  `apt-get --no-install-recommends install r-cran-dplyr` before using
 If you want to build vignettes, you'll need the R.rsp package. Alternatively,
 don't build vignettes when you build the package, by passing the 
 `--no-build-vignettes` flag to `devtools::build()`.
+
+## Documenting your work
 
 If you make important user-visible changes, add an item to NEWS.md. Follow the formatting
 of the existing entries. Run `devtools::document()` afterwards, because the news
