@@ -96,9 +96,9 @@ test_that("to_typst respects wrap", {
   long <- strrep("a", 100)
   ht <- hux(a = long, add_colnames = FALSE)
   res_wrap <- to_typst(ht)
-  expect_false(grepl("box\\(breakable: false\\)", res_wrap))
+  expect_false(grepl("block\\(breakable: false\\)", res_wrap))
 
   wrap(ht) <- FALSE
   res_nowrap <- to_typst(ht)
-  expect_match(res_nowrap, paste0("box\\(breakable: false\\)\\[", long, "\\]"))
+  expect_match(res_nowrap, paste0("block\\(breakable: false\\)\\[", long, "\\]"))
 })
