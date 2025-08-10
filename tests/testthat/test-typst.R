@@ -79,6 +79,13 @@ test_that("Bugfix: solid border generates valid typst", {
   )
 })
 
+test_that("Bugfix: merge_cells in Typst output produces no empty rows", {
+  ht <- merge_cells(jams, 1:2, 1:2)
+  typ <- to_typst(ht)
+  lines <- strsplit(typ, "\n")[[1]]
+  expect_false(any(trimws(lines) == ","))
+})
+
 test_that("Bugfix: typst tables without borders have no stroke", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   valign(ht) <- NA

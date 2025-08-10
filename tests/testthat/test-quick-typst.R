@@ -22,3 +22,4 @@ test_that("quick_typst_pdf works", {
   expect_silent(quick_typst_pdf(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
 })
+
