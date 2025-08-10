@@ -16,6 +16,7 @@
   long inline styles.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
+* Bugfix: merged cells no longer produce empty rows in Typst export.
 
 
 # huxtable 5.6.0
