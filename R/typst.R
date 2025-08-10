@@ -324,7 +324,7 @@ typst_cell_text <- function(ht, row, col, cell_text) {
   }
 
   if (!wrap(ht)[row, col]) {
-    text <- sprintf("#box(breakable: false)[%s]", text)
+    text <- sprintf("#block(breakable: false)[%s]", text)
   }
 
   text
