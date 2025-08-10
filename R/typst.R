@@ -144,9 +144,10 @@ typst_table_options <- function(ht, col_w_str) {
 
 
 #' Surround text by a typst figure
-#' 
+#'
 #' @noRd
 typst_figure <- function(ht, text) {
+  lab <- make_label(ht)
   cap <-  if (is.na(caption(ht))) {
             "none"
           } else {
@@ -171,7 +172,6 @@ typst_figure <- function(ht, text) {
 
   cap <- sprintf("caption: %s", cap)
 
-  lab <- make_label(ht)
   lab <- if (is.na(lab)) "" else sprintf(" <%s>", lab)
 
   fig <- paste0(
