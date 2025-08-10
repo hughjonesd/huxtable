@@ -144,20 +144,23 @@ typst_table_options <- function(ht, col_w_str) {
 
 
 #' Surround text by a typst figure
-#'
+#' 
 #' @noRd
 typst_figure <- function(ht, text) {
-  cap <-  if (is.na(caption(ht))) {
-            "none"
-          } else {
-            lab <- make_label(ht)
-            cap <- typst_escape(caption(ht)) # TODO what about labels?
-            paste0("[", cap, "]")
-          }
+  lab <- make_label(ht)
+  cap <- make_caption(ht, lab, "typst")
+
+  if (is.na(cap)) {
+    cap <- "none"
+  } else {
+    cap <- typst_escape(cap)
+    cap <- paste0("[", cap, "]")
+  }
 
   cap <- sprintf("caption: %s", cap)
+  lab <- if (is.na(lab)) "" else paste0(" <", lab, ">")
 
-  # TODO: caption_pos, caption_width, position, numbering, label
+  # TODO: caption_pos, caption_width, position, numbering
 
   fig <- paste0(
     "#figure(\n",
@@ -165,7 +168,8 @@ typst_figure <- function(ht, text) {
     ",\n",
     cap,
     "\n",
-    ")"
+    ")",
+    lab
   )
 
   return(fig)

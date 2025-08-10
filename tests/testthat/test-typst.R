@@ -101,6 +101,13 @@ test_that("Bugfix: caption escapes special characters", {
   expect_match(res, "caption: \\[\\\\#notfun\\]")
 })
 
+test_that("to_typst outputs labels", {
+  ht <- hux(a = 1:2, b = 3:4)
+  label(ht) <- "tab:test"
+  res <- to_typst(ht)
+  expect_match(res, "\\) <tab:test>")
+})
+
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), "#figure", fixed = TRUE)
