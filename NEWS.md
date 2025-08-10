@@ -14,6 +14,8 @@
   is available as well as `quick_typst()` and `quick_typst_pdf()` functions.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
+* Typst export now respects `width(ht)` and infers equal column widths when
+  `col_width` is unspecified.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
 

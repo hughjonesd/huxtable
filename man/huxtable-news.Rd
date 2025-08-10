@@ -25,6 +25,8 @@ integration is available as well as \code{quick_typst()} and
 \code{quick_typst_pdf()} functions.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
+\item Typst export now respects \code{width(ht)} and infers equal column widths
+when \code{col_width} is unspecified.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
 \item \code{to_screen()} now displays double, dashed and dotted border styles.
 }

@@ -30,15 +30,7 @@ to_typst <- function(ht, ...) {
 
   contents <- clean_contents(ht, output_type = "latex")
   shadow <- matrix(display_cells(ht)$shadowed, nrow(ht), ncol(ht))
-
-  col_w <- col_width(ht)
-  if (is.numeric(col_w)) {
-    col_w_str <- ifelse(is.na(col_w), "auto", paste0(col_w, "fr"))
-  } else {
-    col_w_str <- ifelse(is.na(col_w), "auto", col_w)
-  }
-
-  table_opts <- typst_table_options(ht, col_w_str)
+  table_opts <- typst_table_options(ht)
   table_start <- paste0("table(\n  ", paste(table_opts, collapse = ",\n  "), ",\n")
 
   cells <- matrix("", nrow(ht), ncol(ht))
@@ -96,6 +88,15 @@ to_typst <- function(ht, ...) {
     paste0("  ", row_strings, collapse = ",\n"),
     "\n)"
   )
+
+  w <- width(ht)
+  if (!is.na(w)) {
+    if (is.numeric(w)) {
+      w <- paste0(w * 100, "%")
+    }
+    result <- sprintf("block(width: %s)[%s]", w, result)
+  }
+
   result <- typst_figure(ht, result)
 
   if (using_quarto()) {
@@ -124,11 +125,22 @@ typst_escape <- function(x) {
 #' Build options for a Typst table
 #'
 #' @param ht A huxtable.
-#' @param col_w_str Character vector of column widths formatted for Typst.
 #'
 #' @return Character vector of table options to be passed to `#table`.
 #' @noRd
-typst_table_options <- function(ht, col_w_str) {
+typst_table_options <- function(ht) {
+  col_w <- col_width(ht)
+  if (is.numeric(col_w)) {
+    col_w_str <- ifelse(is.na(col_w), "auto", paste0(col_w, "fr"))
+  } else {
+    col_w_str <- ifelse(is.na(col_w), "auto", col_w)
+  }
+
+  w <- width(ht)
+  if (!is.na(w) && all(is.na(col_w))) {
+    col_w_str <- rep("1fr", ncol(ht))
+  }
+
   table_opts <- c(paste0("columns: (", paste(col_w_str, collapse = ", "), ")"))
 
   pos <- position(ht)

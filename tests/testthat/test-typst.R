@@ -163,3 +163,20 @@ test_that("to_typst respects wrap", {
   res_nowrap <- to_typst(ht)
   expect_match(res_nowrap, paste0("block\\(breakable: false\\)\\[", long, "\\]"))
 })
+
+test_that("numeric width and col_width generate block and fractional columns", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  width(ht) <- 0.5
+  col_width(ht) <- c(0.3, 0.7)
+  res <- to_typst(ht)
+  expect_match(res, "block\\(width: 50%\\)")
+  expect_match(res, "columns: (0.3fr, 0.7fr)", fixed = TRUE)
+})
+
+test_that("fixed width with unspecified col_width defaults to equal columns", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  width(ht) <- "300pt"
+  res <- to_typst(ht)
+  expect_match(res, "block\\(width: 300pt\\)")
+  expect_match(res, "columns: (1fr, 1fr)", fixed = TRUE)
+})
