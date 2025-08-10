@@ -79,6 +79,14 @@ test_that("Bugfix: solid border generates valid typst", {
   )
 })
 
+test_that("Bugfix: typst tables without borders have no stroke", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  valign(ht) <- NA
+  res <- to_typst(ht)
+  expect_match(res, "stroke: none", fixed = TRUE)
+  expect_false(grepl("stroke\\(", res))
+})
+
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), "#figure", fixed = TRUE)
