@@ -94,6 +94,13 @@ test_that("Bugfix: typst tables without borders have no stroke", {
   expect_false(grepl("stroke\\(", res))
 })
 
+test_that("Bugfix: caption escapes special characters", {
+  ht <- hux(a = 1:2, b = 3:4)
+  caption(ht) <- "#notfun"
+  res <- to_typst(ht)
+  expect_match(res, "caption: \\[\\\\#notfun\\]")
+})
+
 test_that("print_typst outputs to stdout", {
   ht <- hux(a = 1)
   expect_output(print_typst(ht), "#figure", fixed = TRUE)
