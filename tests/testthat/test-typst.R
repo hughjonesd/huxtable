@@ -187,3 +187,12 @@ test_that("fixed width with unspecified col_width defaults to equal columns", {
   expect_match(res, "block\\(width: 300pt\\)")
   expect_match(res, "columns: (1fr, 1fr)", fixed = TRUE)
 })
+
+test_that("height and row_height render in Typst", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  height(ht) <- 0.4
+  row_height(ht) <- c(0.25, 0.75)
+  res <- to_typst(ht)
+  expect_match(res, "block\\(height: 40%\\)")
+  expect_match(res, "rows: (0.25fr, 0.75fr)", fixed = TRUE)
+})
