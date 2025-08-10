@@ -101,6 +101,20 @@ to_typst <- function(ht, ...) {
 
 # helpers -----------------------------------------------------------------------
 
+#' Escape special characters for Typst markup
+#'
+#' @param x A character string.
+#'
+#' @return Escaped string safe for Typst.
+#' @noRd
+typst_escape <- function(x) {
+  x <- gsub("\\\\", "\\\\\\\\", x)
+  x <- gsub("#", "\\#", x, fixed = TRUE)
+  x <- gsub("[", "\\[", x, fixed = TRUE)
+  x <- gsub("]", "\\]", x, fixed = TRUE)
+  x
+}
+
 #' Build options for a Typst table
 #'
 #' @param ht A huxtable.
@@ -131,7 +145,7 @@ typst_figure <- function(ht, text) {
             "none"
           } else {
             lab <- make_label(ht)
-            cap <- caption(ht) # TODO what about labels?
+            cap <- typst_escape(caption(ht)) # TODO what about labels?
             paste0("[", cap, "]")
           }
 
