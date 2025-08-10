@@ -64,22 +64,29 @@ to_typst <- function(ht, ...) {
   header_block <- ""
   if (any(hr)) {
     header_rows_strings <- row_strings[hr]
-    header_block <- paste0(
-      "  table.header(\n",
-      paste0("    ", header_rows_strings, collapse = "\n"),
-      "\n  ),\n"
-    )
+    header_rows_strings <- header_rows_strings[nzchar(header_rows_strings)]
+    if (length(header_rows_strings) > 0) {
+      header_block <- paste0(
+        "  table.header(\n",
+        paste0("    ", header_rows_strings, collapse = "\n"),
+        "\n  ),\n"
+      )
+    }
     row_strings <- row_strings[!hr]
   }
+  row_strings <- row_strings[nzchar(row_strings)]
 
   header_cols_block <- ""
   if (any(hc)) {
     col_strings <- apply(cells[, hc, drop = FALSE], 1, function(x) paste(x[x != ""], collapse = " "))
-    header_cols_block <- paste0(
-      "  table.header(columns: (", paste(hc, collapse = ", "), "))[\n",
-      paste0("    ", col_strings, collapse = "\n"),
-      "\n  ]\n"
-    )
+    col_strings <- col_strings[nzchar(col_strings)]
+    if (length(col_strings) > 0) {
+      header_cols_block <- paste0(
+        "  table.header(columns: (", paste(hc, collapse = ", "), "))[\n",
+        paste0("    ", col_strings, collapse = "\n"),
+        "\n  ]\n"
+      )
+    }
   }
 
   result <- paste0(
@@ -89,7 +96,6 @@ to_typst <- function(ht, ...) {
     paste0("  ", row_strings, collapse = ",\n"),
     "\n)"
   )
-
   result <- typst_figure(ht, result)
 
   if (using_quarto()) {
