@@ -12,6 +12,7 @@
   body rows in `<tbody>` when header rows are at the top of the table.
 * Added Typst export via `to_typst()` and `print_typst()`. Quarto integration
   is available as well as `quick_typst()` and `quick_typst_pdf()` functions.
+* Typst export now supports `label()` for cross-referencing.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
 * Typst export now respects `width(ht)` and infers equal column widths when

@@ -159,17 +159,15 @@ typst_table_options <- function(ht) {
 #'
 #' @noRd
 typst_figure <- function(ht, text) {
+  lab <- make_label(ht)
   cap <-  if (is.na(caption(ht))) {
             "none"
           } else {
-            lab <- make_label(ht)
-            cap_text <- typst_escape(make_caption(ht, lab, "typst"))
+            cap_body <- typst_escape(make_caption(ht, lab, "typst"))
 
             cap_pos <- caption_pos(ht)
             vpos <- if (grepl("top", cap_pos)) "top" else "bottom"
             hpos <- get_caption_hpos(ht)
-
-            cap_body <- cap_text
 
             cap_width <- caption_width(ht)
             if (!is.na(cap_width)) {
@@ -186,7 +184,7 @@ typst_figure <- function(ht, text) {
 
   cap <- sprintf("caption: %s", cap)
 
-  # TODO: position, numbering, label
+  lab <- if (is.na(lab)) "" else sprintf(" <%s>", lab)
 
   fig <- paste0(
     "#figure(\n",
@@ -194,7 +192,8 @@ typst_figure <- function(ht, text) {
     ",\n",
     cap,
     "\n",
-    ")"
+    ")",
+    lab
   )
 
   return(fig)
