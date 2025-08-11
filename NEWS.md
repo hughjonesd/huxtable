@@ -4,7 +4,7 @@
 
 * Functions are no longer generic, so you can't subclass a huxtable object.
   AFAIK nobody has ever done this; if I'm wrong, please tell me.
-* Reworked internals, with the halp of OpenAI Codex.
+* Reworked internals, with the help of OpenAI Codex.
 
 ## Other changes
 
@@ -12,15 +12,8 @@
   body rows in `<tbody>` when header rows are at the top of the table.
 * Added Typst export via `to_typst()` and `print_typst()`. Quarto integration
   is available as well as `quick_typst()` and `quick_typst_pdf()` functions.
-* Typst export now supports `label()` for cross-referencing.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
-* Typst export now respects `width(ht)` and infers equal column widths when
-  `col_width` is unspecified.
-* Typst export now respects `height()` and `row_height()`.
-* Typst markdown cells now handle formatting like bold, italics, strikethrough,
-  inline code, links, images, headings, and lists.
-* Bugfix: Typst markdown cells no longer output TeX commands.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
 

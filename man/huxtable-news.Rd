@@ -12,7 +12,7 @@ This help page simply gives the contents of NEWS.md.
 \itemize{
 \item Functions are no longer generic, so you can’t subclass a huxtable
 object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
-\item Reworked internals, with the halp of OpenAI Codex.
+\item Reworked internals, with the help of OpenAI Codex.
 }
 }
 
@@ -23,15 +23,8 @@ body rows in \verb{<tbody>} when header rows are at the top of the table.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}. Quarto
 integration is available as well as \code{quick_typst()} and
 \code{quick_typst_pdf()} functions.
-\item Typst export now supports \code{label()} for cross-referencing.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
-\item Typst export now respects \code{width(ht)} and infers equal column widths
-when \code{col_width} is unspecified.
-\item Typst export now respects \code{height()} and \code{row_height()}.
-\item Typst markdown cells now handle formatting like bold, italics,
-strikethrough, inline code, links, images, headings, and lists.
-\item Bugfix: Typst markdown cells no longer output TeX commands.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
 \item \code{to_screen()} now displays double, dashed and dotted border styles.
 }

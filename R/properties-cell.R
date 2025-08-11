@@ -548,6 +548,7 @@ map_escape_contents <- function(ht, row, col, fn) {
 #' * Strikethrough will probably not work in Word.
 #' * To make lists work in LaTeX, set [width()] and ensure [wrap()] is `TRUE`.
 #' * Inline images in RTF work using the INCLUDEPICTURE field type.
+#' * Only local images (not urls) work in typst.
 #'
 #' If you try to use markdown tables within a table cell, then seek psychiatric
 #' help.

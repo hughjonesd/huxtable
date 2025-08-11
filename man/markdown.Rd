@@ -50,6 +50,7 @@ There are some quirks:
 \item Strikethrough will probably not work in Word.
 \item To make lists work in LaTeX, set \code{\link[=width]{width()}} and ensure \code{\link[=wrap]{wrap()}} is \code{TRUE}.
 \item Inline images in RTF work using the INCLUDEPICTURE field type.
+\item Only local images (not urls) work in typst.
 }
 
 If you try to use markdown tables within a table cell, then seek psychiatric
