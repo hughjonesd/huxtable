@@ -29,6 +29,8 @@ of long inline styles.
 \item Typst export now respects \code{width(ht)} and infers equal column widths
 when \code{col_width} is unspecified.
 \item Typst export now respects \code{height()} and \code{row_height()}.
+\item Typst markdown cells now handle formatting like bold, italics,
+strikethrough, inline code, links, images, headings, and lists.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
 \item \code{to_screen()} now displays double, dashed and dotted border styles.
 }

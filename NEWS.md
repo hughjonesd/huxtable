@@ -18,6 +18,8 @@
 * Typst export now respects `width(ht)` and infers equal column widths when
   `col_width` is unspecified.
 * Typst export now respects `height()` and `row_height()`.
+* Typst markdown cells now handle formatting like bold, italics, strikethrough,
+  inline code, links, images, headings, and lists.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
 
