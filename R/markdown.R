@@ -332,7 +332,7 @@ MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
       c(bullet, self$process_contents(node), "\n")
     },
     block_quote = function(node) {
-      c("> ", self$process_contents(node), "\n")
+      c("#quote(block: true)[\n", self$process_contents(node), "\n]\n")
     },
     code_block = function(node) {
       info <- xml2::xml_attr(node, "info")
@@ -346,7 +346,7 @@ MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
       c(start, text, "\n```")
     },
     thematic_break = function(node) {
-      c("---", "\n")
+      c("#line(length: 100%)", "\n")
     }
   )
 )
