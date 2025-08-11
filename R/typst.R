@@ -28,7 +28,7 @@ to_typst <- function(ht, ...) {
     return("")
   }
 
-  contents <- clean_contents(ht, output_type = "latex")
+  contents <- clean_contents(ht, output_type = "typst")
   shadow <- matrix(display_cells(ht)$shadowed, nrow(ht), ncol(ht))
   table_opts <- typst_table_options(ht)
   table_start <- paste0("table(\n  ", paste(table_opts, collapse = ",\n  "), ",\n")

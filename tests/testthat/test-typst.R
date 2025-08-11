@@ -109,6 +109,14 @@ test_that("Bugfix: caption escapes special characters", {
   )
 })
 
+test_that("Bugfix: markdown in Typst renders Typst markup", {
+  ht <- hux("Some markdown with *italic* and **bold**.", add_colnames = FALSE)
+  ht <- set_markdown(ht, 1, 1)
+  res <- to_typst(ht)
+  expect_match(res, "\\*italic\\* and \\*\\*bold\\*\\*", perl = TRUE)
+  expect_false(grepl("\\\\emph|\\\\textbf", res))
+})
+
 test_that("caption position and width render in Typst", {
   ht <- hux(a = 1:2, b = 3:4)
   caption(ht) <- "A cap"
