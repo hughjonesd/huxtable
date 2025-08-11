@@ -45,3 +45,18 @@ test_that("typst markdown translator handles lists", {
     fixed = TRUE
   )
 })
+
+test_that("typst markdown translator handles code blocks", {
+  expect_equal(
+    unname(huxtable:::render_markdown("```\ncode\n```", "typst")),
+    "```\ncode\n```"
+  )
+})
+
+test_that("typst markdown translator handles horizontal rules", {
+  expect_match(
+    huxtable:::render_markdown("---", "typst"),
+    "#line(",
+    fixed = TRUE
+  )
+})
