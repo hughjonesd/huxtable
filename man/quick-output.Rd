@@ -111,6 +111,9 @@ if this already exists, you will be asked to confirm manually before proceeding.
 
 To create docx and pptx files \code{flextable} and \code{officer} must be installed, while xlsx
 needs \code{openxlsx}. \code{quick_typst_pdf()} requires the \code{typst} command line tool.
+
+\code{quick_typst_pdf()} with e.g. \code{file = "foo.pdf"} will overwrite and delete
+the file \code{foo.typ}.
 }
 \examples{
 \dontrun{

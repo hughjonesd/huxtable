@@ -130,6 +130,10 @@ quick_typst <- function(
 
 #' @rdname quick-output
 #' @export
+#' @details
+#'
+#' `quick_typst_pdf()` with e.g. `file = "foo.pdf"` will overwrite and delete
+#' the file `foo.typ`.
 quick_typst_pdf <- function(
     ..., file = confirm("huxtable-output.pdf"), borders = 0.4,
     open = interactive(), width = NULL, height = NULL) {
@@ -138,7 +142,7 @@ quick_typst_pdf <- function(
   force(file)
   hts <- huxtableize(list(...), borders)
 
-  typst_file <- tempfile(fileext = ".typ")
+  typst_file <- sub("\\.pdf$", ".typ", file)
   do_write_typst_file(hts, typst_file, width, height)
 
   if (Sys.which("typst") != "") {
@@ -367,6 +371,7 @@ do_write_typst_file <- function(hts, file, width, height) {
         if (!is.null(height)) dim_parts <- c(dim_parts, sprintf("height: %s", height))
         cat("#set page(", paste(dim_parts, collapse = ", "), ")\n\n", sep = "")
       }
+      cat("#show link: underline\n\n")
       lapply(hts, function(ht) {
         cat(to_typst(ht))
         cat("\n\n")

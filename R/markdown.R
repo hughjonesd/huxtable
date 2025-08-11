@@ -297,11 +297,14 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
 MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
   inherit = MarkdownTranslator,
   public = list(
+    paragraph = function(node) {
+      c(self$process_contents(node), "\n")
+    },
     strong = function(node) {
-      c("**", self$process_contents(node), "**")
+      c("*", self$process_contents(node), "*")
     },
     emph = function(node) {
-      c("*", self$process_contents(node), "*")
+      c("_", self$process_contents(node), "_")
     },
     strikethrough = function(node) {
       c("#strike[", self$process_contents(node), "]")
@@ -312,7 +315,7 @@ MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
     heading = function(node) {
       level <- as.integer(xml2::xml_attr(node, "level"))
       prefix <- paste(rep("=", level), collapse = "")
-      c(prefix, " ", self$process_contents(node))
+      c(prefix, " ", self$process_contents(node), "\n\n")
     },
     link = function(node) {
       url <- xml2::xml_attr(node, "destination")
@@ -329,7 +332,7 @@ MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
     },
     item = function(node) {
       bullet <- if (self$list_details$type == "ordered") "+ " else "- "
-      c(bullet, self$process_contents(node), "\n")
+      c(bullet, self$process_contents(node), "")
     }
   )
 )
