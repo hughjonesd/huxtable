@@ -60,7 +60,7 @@ to_typst <- function(ht, ...) {
     if (length(header_rows_strings) > 0) {
       header_block <- paste0(
         "  table.header(\n",
-        paste0("    ", header_rows_strings, collapse = "\n"),
+        paste0("    ", header_rows_strings, collapse = ",\n"),
         "\n  ),\n"
       )
     }
@@ -68,23 +68,9 @@ to_typst <- function(ht, ...) {
   }
   row_strings <- row_strings[nzchar(row_strings)]
 
-  header_cols_block <- ""
-  if (any(hc)) {
-    col_strings <- apply(cells[, hc, drop = FALSE], 1, function(x) paste(x[x != ""], collapse = " "))
-    col_strings <- col_strings[nzchar(col_strings)]
-    if (length(col_strings) > 0) {
-      header_cols_block <- paste0(
-        "  table.header(columns: (", paste(hc, collapse = ", "), "))[\n",
-        paste0("    ", col_strings, collapse = "\n"),
-        "\n  ]\n"
-      )
-    }
-  }
-
   result <- paste0(
     table_start,
     header_block,
-    header_cols_block,
     paste0("  ", row_strings, collapse = ",\n"),
     "\n)"
   )
