@@ -31,6 +31,8 @@ when \code{col_width} is unspecified.
 \item Typst export now respects \code{height()} and \code{row_height()}.
 \item Typst markdown cells now handle formatting like bold, italics,
 strikethrough, inline code, links, images, headings, and lists.
+\item Typst markdown cells now support block quotes, code blocks, and
+horizontal rules.
 \item Bugfix: Typst markdown cells no longer output TeX commands.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.
 \item \code{to_screen()} now displays double, dashed and dotted border styles.

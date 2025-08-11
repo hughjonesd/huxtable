@@ -117,6 +117,28 @@ test_that("Bugfix: markdown in Typst renders Typst markup", {
   expect_false(grepl("\\\\emph|\\\\textbf", res))
 })
 
+test_that("markdown block quotes render in Typst", {
+  ht <- hux("> quoted", add_colnames = FALSE)
+  ht <- set_markdown(ht, 1, 1)
+  res <- to_typst(ht)
+  expect_match(res, "> quoted\\n")
+})
+
+test_that("markdown code blocks render in Typst", {
+  cb <- "```\ncode\n```"
+  ht <- hux(cb, add_colnames = FALSE)
+  ht <- set_markdown(ht, 1, 1)
+  res <- to_typst(ht)
+  expect_true(grepl("```\ncode\n```", res, fixed = TRUE))
+})
+
+test_that("markdown horizontal rules render in Typst", {
+  ht <- hux("---", add_colnames = FALSE)
+  ht <- set_markdown(ht, 1, 1)
+  res <- to_typst(ht)
+  expect_match(res, "---\\n")
+})
+
 test_that("caption position and width render in Typst", {
   ht <- hux(a = 1:2, b = 3:4)
   caption(ht) <- "A cap"

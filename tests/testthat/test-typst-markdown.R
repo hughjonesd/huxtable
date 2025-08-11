@@ -39,3 +39,24 @@ test_that("typst markdown translator handles lists", {
     "+ one\n+ two\n"
   )
 })
+
+test_that("typst markdown translator handles block quotes", {
+  expect_equal(
+    unname(huxtable:::render_markdown("> quote", "typst")),
+    "> quote\n"
+  )
+})
+
+test_that("typst markdown translator handles code blocks", {
+  expect_equal(
+    unname(huxtable:::render_markdown("```\ncode\n```", "typst")),
+    "```\ncode\n```"
+  )
+})
+
+test_that("typst markdown translator handles horizontal rules", {
+  expect_equal(
+    unname(huxtable:::render_markdown("---", "typst")),
+    "---\n"
+  )
+})

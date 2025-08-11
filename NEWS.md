@@ -20,6 +20,7 @@
 * Typst export now respects `height()` and `row_height()`.
 * Typst markdown cells now handle formatting like bold, italics, strikethrough,
   inline code, links, images, headings, and lists.
+* Typst markdown cells now support block quotes, code blocks, and horizontal rules.
 * Bugfix: Typst markdown cells no longer output TeX commands.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
