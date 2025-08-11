@@ -90,11 +90,22 @@ to_typst <- function(ht, ...) {
   )
 
   w <- width(ht)
-  if (!is.na(w)) {
-    if (is.numeric(w)) {
-      w <- paste0(w * 100, "%")
+  h <- height(ht)
+  if (!is.na(w) || !is.na(h)) {
+    dims <- c()
+    if (!is.na(w)) {
+      if (is.numeric(w)) {
+        w <- paste0(w * 100, "%")
+      }
+      dims <- c(dims, sprintf("width: %s", w))
     }
-    result <- sprintf("block(width: %s)[%s]", w, result)
+    if (!is.na(h)) {
+      if (is.numeric(h)) {
+        h <- paste0(h * 100, "%")
+      }
+      dims <- c(dims, sprintf("height: %s", h))
+    }
+    result <- sprintf("block(%s)[%s]", paste(dims, collapse = ", "), result)
   }
 
   result <- typst_figure(ht, result)
@@ -142,6 +153,22 @@ typst_table_options <- function(ht) {
   }
 
   table_opts <- c(paste0("columns: (", paste(col_w_str, collapse = ", "), ")"))
+
+  row_h <- row_height(ht)
+  if (is.numeric(row_h)) {
+    row_h_str <- ifelse(is.na(row_h), "auto", paste0(row_h, "fr"))
+  } else {
+    row_h_str <- ifelse(is.na(row_h), "auto", row_h)
+  }
+
+  h <- height(ht)
+  if (!is.na(h) && all(is.na(row_h))) {
+    row_h_str <- rep("1fr", nrow(ht))
+  }
+
+  if (!all(is.na(row_h)) || !is.na(h)) {
+    table_opts <- c(table_opts, paste0("rows: (", paste(row_h_str, collapse = ", "), ")"))
+  }
 
   pos <- position(ht)
   if (!is.na(pos) && pos %in% c("left", "right")) {
@@ -243,12 +270,6 @@ typst_cell_options <- function(ht, row, col) {
     opts <- c(opts, sprintf("align: (%s + %s)", horizontal_align, vertical_align))
   } else if (!is.na(horizontal_align)) {
     opts <- c(opts, sprintf("align: %s", horizontal_align))
-  }
-
-  rh <- row_height(ht)[row]
-  if (!is.na(rh)) {
-    if (is.numeric(rh)) rh <- sprintf("%.3f%%", rh * 100)
-    opts <- c(opts, sprintf("height: %s", rh))
   }
 
   bg <- background_color(ht)[row, col]

@@ -17,6 +17,7 @@
   long inline styles.
 * Typst export now respects `width(ht)` and infers equal column widths when
   `col_width` is unspecified.
+* Typst export now respects `height()` and `row_height()`.
 * Added `as_html()` for obtaining table as `htmltools` tags.
 * `to_screen()` now displays double, dashed and dotted border styles.
 
