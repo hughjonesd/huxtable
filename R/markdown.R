@@ -57,6 +57,10 @@ render_markdown <- function(text, type) {
       translate_fun(MarkdownRTFTranslator),
       FUN.VALUE = character(1)
     ),
+    "typst" = vapply(text,
+      translate_fun(MarkdownTypstTranslator),
+      FUN.VALUE = character(1)
+    ),
     "screen" = if (!crayon_installed) {
       text
     } else {
@@ -285,6 +289,47 @@ MarkdownRTFTranslator <- R6::R6Class("MarkdownRTFTranslator",
       }
       close_item <- "}}"
       c(open_item, list_type_rtf, self$process_contents(node), close_item)
+    }
+  )
+)
+
+
+MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
+  inherit = MarkdownTranslator,
+  public = list(
+    strong = function(node) {
+      c("**", self$process_contents(node), "**")
+    },
+    emph = function(node) {
+      c("*", self$process_contents(node), "*")
+    },
+    strikethrough = function(node) {
+      c("#strike[", self$process_contents(node), "]")
+    },
+    code = function(node) {
+      c("`", xml2::xml_text(node), "`")
+    },
+    heading = function(node) {
+      level <- as.integer(xml2::xml_attr(node, "level"))
+      prefix <- paste(rep("=", level), collapse = "")
+      c(prefix, " ", self$process_contents(node))
+    },
+    link = function(node) {
+      url <- xml2::xml_attr(node, "destination")
+      c("#link(\"", url, "\")[", self$process_contents(node), "]")
+    },
+    image = function(node) {
+      url <- xml2::xml_attr(node, "destination")
+      alt <- paste(self$process_contents(node), collapse = "")
+      if (nzchar(alt)) {
+        c("#image(\"", url, "\", alt: \"", alt, "\")")
+      } else {
+        c("#image(\"", url, "\")")
+      }
+    },
+    item = function(node) {
+      bullet <- if (self$list_details$type == "ordered") "+ " else "- "
+      c(bullet, self$process_contents(node), "\n")
     }
   )
 )
