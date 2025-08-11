@@ -333,6 +333,23 @@ MarkdownTypstTranslator <- R6::R6Class("MarkdownTypstTranslator",
     item = function(node) {
       bullet <- if (self$list_details$type == "ordered") "+ " else "- "
       c(bullet, self$process_contents(node), "")
+    },
+    block_quote = function(node) {
+      c("#quote(block: true)[\n", self$process_contents(node), "\n]\n")
+    },
+    code_block = function(node) {
+      info <- xml2::xml_attr(node, "info")
+      start <- if (!is.na(info) && nzchar(info)) {
+        c("```", info, "\n")
+      } else {
+        c("```", "\n")
+      }
+      text <- xml2::xml_text(node)
+      text <- sub("\n$", "", text)
+      c(start, text, "\n```")
+    },
+    thematic_break = function(node) {
+      c("#line(length: 100%)", "\n")
     }
   )
 )
