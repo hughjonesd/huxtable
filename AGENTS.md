@@ -68,5 +68,9 @@ don't build vignettes when you build the package, by passing the
 
 If you make important user-visible changes, add an item to NEWS.md. Follow the formatting
 of the existing entries. Run `devtools::document()` afterwards, because the news
-is copied into the help file `?huxtable-news`. Do not update NEWS.md for unimportant changes, 
-like tweaks to documentation, or if the broad change is already mentioned.
+is copied into the help file `?huxtable-news`. 
+
+* Do not update NEWS.md for unimportant changes, like tweaks to documentation.
+* Do not update NEWS.md for bugfixes to a feature that has been introduced
+  in the same release. i.e. don't mention bugfixes unless the bug was already 
+  visible to users of a previous version of the package.

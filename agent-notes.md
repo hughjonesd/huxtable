@@ -10,6 +10,10 @@ your referring to.
 
 * Where possible, update an existing note before adding your own.
 
+* Don't use this simply to record every change you've made to the code.
+  It is for architectural notes that will be useful to agents working on the whole
+  codebase.
+
 ## Typst export
 
 * `to_typst()` builds cell strings row-by-row and previously left empty rows when all cells were shadowed by merges. Filter `row_strings` and `header_rows_strings` with `nzchar()` before assembling the table to avoid stray commas. rev b07e9e37.
