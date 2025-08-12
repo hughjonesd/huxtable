@@ -362,5 +362,10 @@ typst_cell_text <- function(ht, row, col, cell_text) {
     text <- sprintf("#block(breakable: false)[%s]", text)
   }
 
+  rot <- rotation(ht)[row, col]
+  if (!is.na(rot) && rot != 0) {
+    text <- sprintf("#rotate(%.4gdeg)[%s]", rot, text)
+  }
+
   text
 }

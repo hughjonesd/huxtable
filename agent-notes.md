@@ -17,3 +17,4 @@ your referring to.
 * Typst export outputs labels using `<label>` after the `#figure` block for cross-referencing. rev 088f1fe0
 * MarkdownTypstTranslator handles bold, italic, links, images, headings, strikethrough, inline code, and lists via `render_markdown("...", "typst")`. rev 45b775da
 * `to_typst()` now uses `clean_contents(..., output_type = "typst")` so markdown cells output Typst markup instead of TeX. rev d233e674
+* `typst_cell_text()` wraps rotated cells in `#rotate(angle)[...]` so Typst output now supports cell rotation. rev dda496d2
