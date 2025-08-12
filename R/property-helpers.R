@@ -104,7 +104,7 @@ prop_get <- function(ht, prop) {
 #' @return Normalised `value`.
 #' @noRd
 validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
-                           reset_na = TRUE) {
+                          reset_na = TRUE) {
   if (!all(is.na(value))) {
     if (!is.null(check_fun)) stopifnot(check_fun(value))
     if (!is.null(check_values)) {
@@ -130,7 +130,7 @@ validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
 #'
 #' @noRd
 prop_replace <- function(ht, value, prop, check_fun = NULL, check_values = NULL,
-                          extra = NULL, reset_na = TRUE, coerce_mode = TRUE) {
+                         extra = NULL, reset_na = TRUE, coerce_mode = TRUE) {
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[] <- value
@@ -151,7 +151,7 @@ prop_replace <- function(ht, value, prop, check_fun = NULL, check_values = NULL,
 #'
 #' @noRd
 prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
-                      check_values = NULL, extra = NULL, reset_na = TRUE) {
+                     check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(col) && missing(value)) {
     value <- row
@@ -177,7 +177,7 @@ prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
 #'
 #' @noRd
 prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
-                      check_values = NULL, extra = NULL, reset_na = TRUE) {
+                     check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(col) && missing(fn)) {
     fn <- row
@@ -204,7 +204,7 @@ prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
 #' @inheritParams prop_set
 #' @noRd
 prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
-                          check_values = NULL, extra = NULL, reset_na = TRUE) {
+                         check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
     value <- row
@@ -222,7 +222,7 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
 #' @inheritParams prop_set
 #' @noRd
 prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
-                          check_values = NULL, extra = NULL, reset_na = TRUE) {
+                         check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
     value <- col
@@ -240,11 +240,10 @@ prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
 #' @inheritParams prop_set
 #' @noRd
 prop_set_table <- function(ht, value, prop, check_fun = NULL,
-                            check_values = NULL, extra = NULL, reset_na = TRUE) {
+                           check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop) <- value
   ht
 }
-

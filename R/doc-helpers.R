@@ -20,6 +20,6 @@ rd_default <- function(prop) {
 #' @return
 #'   `property()` returns the property value(s).
 #'   `set_property()` and `map_property()` return the modified huxtable.
-#' 
+#'
 #' @name hux_prop_params
 NULL

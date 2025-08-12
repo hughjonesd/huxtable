@@ -322,24 +322,24 @@ rtf_fc_tables <- function(..., extra_fonts = "Times", extra_colors = character(0
 }
 
 
- #' Build an RTF font table fragment
- #'
- #' @param x An `rtfFCTables` object.
- #' @return A character string containing the RTF font table.
- #' @noRd
- font_table_string <- function(x) {
+#' Build an RTF font table fragment
+#'
+#' @param x An `rtfFCTables` object.
+#' @return A character string containing the RTF font table.
+#' @noRd
+font_table_string <- function(x) {
   font_tbl_body <- ""
   font_tbl_body <- paste0("  {\\f", seq(0, along = x$fonts), " ", x$fonts, ";}", collapse = "\n")
   paste("{\\fonttbl", font_tbl_body, "}", sep = "\n")
 }
 
 
- #' Build an RTF color table fragment
- #'
- #' @param x An `rtfFCTables` object.
- #' @return A character string containing the RTF color table.
- #' @noRd
- color_table_string <- function(x) {
+#' Build an RTF color table fragment
+#'
+#' @param x An `rtfFCTables` object.
+#' @return A character string containing the RTF color table.
+#' @noRd
+color_table_string <- function(x) {
   colors_str <- grDevices::col2rgb(x$colors)
   colors_str <- apply(colors_str, 2, function(clr) {
     sprintf("\\red%d\\green%d\\blue%d", clr[1], clr[2], clr[3])
@@ -351,24 +351,24 @@ rtf_fc_tables <- function(..., extra_fonts = "Times", extra_colors = character(0
 }
 
 
- #' Format `rtfFCTables`
- #'
- #' @param x An `rtfFCTables` object.
- #' @param ... Unused.
- #' @return A combined font and color table string.
- #' @noRd
- format.rtfFCTables <- function(x, ...) {
+#' Format `rtfFCTables`
+#'
+#' @param x An `rtfFCTables` object.
+#' @param ... Unused.
+#' @return A combined font and color table string.
+#' @noRd
+format.rtfFCTables <- function(x, ...) {
   paste(font_table_string(x), color_table_string(x), sep = "\n")
 }
 
 
- #' Print `rtfFCTables`
- #'
- #' @param x An `rtfFCTables` object.
- #' @param ... Arguments passed to [format()].
- #' @return The input is returned invisibly.
- #' @noRd
- print.rtfFCTables <- function(x, ...) {
-   cat(format(x, ...))
-   invisible(x)
- }
+#' Print `rtfFCTables`
+#'
+#' @param x An `rtfFCTables` object.
+#' @param ... Arguments passed to [format()].
+#' @return The input is returned invisibly.
+#' @noRd
+print.rtfFCTables <- function(x, ...) {
+  cat(format(x, ...))
+  invisible(x)
+}
