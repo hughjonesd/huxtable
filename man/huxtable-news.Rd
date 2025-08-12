@@ -23,6 +23,7 @@ body rows in \verb{<tbody>} when header rows are at the top of the table.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}. Quarto
 integration is available as well as \code{quick_typst()} and
 \code{quick_typst_pdf()} functions.
+\item Typst output now supports cell rotation.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.

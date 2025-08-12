@@ -218,3 +218,10 @@ test_that("height and row_height render in Typst", {
   expect_match(res, "block\\(height: 40%\\)")
   expect_match(res, "rows: (0.25fr, 0.75fr)", fixed = TRUE)
 })
+
+test_that("rotation renders in Typst", {
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
+  rotation(ht)[1, 1] <- 90
+  res <- to_typst(ht)
+  expect_match(res, "#rotate(90deg)[1]", fixed = TRUE)
+})
