@@ -1,7 +1,5 @@
-# use lintr::lint_package() to run this
-linters: with_defaults(
+linters: linters_with_defaults(
   line_length_linter(120),
-  single_quotes_linter = NULL,
-  indentation_linter(indent = 2L, no_tab = TRUE)
-)
+  indentation_linter(indent = 2L)
+  )
 exclusions: list("inst/doc/huxreg.R", "inst/doc/design-principles.R", "inst/doc/huxtable.R")
