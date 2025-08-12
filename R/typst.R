@@ -91,7 +91,7 @@ to_typst <- function(ht, ...) {
       }
       dims <- c(dims, sprintf("height: %s", h))
     }
-    result <- sprintf("block(%s)[%s]", paste(dims, collapse = ", "), result)
+    result <- sprintf("block(%s)[#%s]", paste(dims, collapse = ", "), result)
   }
 
   result <- typst_figure(ht, result)
@@ -349,7 +349,7 @@ typst_cell_text <- function(ht, row, col, cell_text) {
   if (bold(ht)[row, col]) text_opts <- c(text_opts, "weight: \"bold\"")
   if (italic(ht)[row, col]) text_opts <- c(text_opts, "style: \"italic\"")
   if (!is.na(fs <- font_size(ht)[row, col])) text_opts <- c(text_opts, sprintf("size: %.4gpt", fs))
-  if (!is.na(f <- font(ht)[row, col])) text_opts <- c(text_opts, sprintf("family: \"%s\"", f))
+  if (!is.na(f <- font(ht)[row, col])) text_opts <- c(text_opts, sprintf("font: \"%s\"", f))
   if (!is.na(tc <- text_color(ht)[row, col])) text_opts <- c(text_opts, sprintf("fill: rgb(%s)", format_color(tc)))
 
   if (length(text_opts) > 0) {
