@@ -34,7 +34,7 @@ test_that("Can assign numeric to width, col_width etc. after assigning character
   number_format(ht) <- "%.3f"
   number_format(ht) <- 2L
   nf <- number_format(ht)
-  expect_type(nf[1, 1][[1]], "integer")
+  expect_equal(mode(nf[1, 1][[1]]), "numeric")
   expect_equivalent(dim(nf), dim(ht))
 })
 

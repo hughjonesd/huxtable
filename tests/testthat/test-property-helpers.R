@@ -43,16 +43,16 @@ test_that("prop_set works", {
   ht <- huxtable(a = letters[1:3], b = letters[4:6])  # Use characters so default is "left"
   
   # Set specific cells
-  ht2 <- prop_set(ht, 1, 1, "center", "align")
+  ht2 <- prop_set(ht, "align", 1, 1, value = "center")
   expect_equal(align(ht2)[1, 1], "center")
   expect_equal(align(ht2)[2, 2], "left")  # unchanged
   
   # Set entire table using two-argument form
-  ht3 <- prop_set(ht, "center", prop = "align")
+  ht3 <- prop_set(ht, "align", value = "center")
   expect_true(all(align(ht3) == "center"))
   
   # With validation
-  expect_error(prop_set(ht, 1, 1, 123, "align", check_fun = is.character))
+  expect_error(prop_set(ht, "align", 1, 1, value = 123, check_fun = is.character))
 })
 
 test_that("prop_map works", {
@@ -63,12 +63,12 @@ test_that("prop_map works", {
     ifelse(current == "left", "right", "left")
   }
   
-  ht2 <- prop_map(ht, 1, 1, map_fn, "align")
+  ht2 <- prop_set(ht, "align", 1, 1, fn = map_fn)
   expect_equal(align(ht2)[1, 1], "right")
   expect_equal(align(ht2)[2, 2], "left")  # unchanged
   
   # Map entire table using two-argument form  
-  ht3 <- prop_map(ht, map_fn, prop = "align")
+  ht3 <- prop_set(ht, "align", fn = map_fn)
   expect_true(all(align(ht3) == "right"))
 })
 
