@@ -117,10 +117,45 @@ validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
   value
 }
 
-#' Replace an entire property matrix/vector
+#' Extract row/column arguments and handle missingness
+#'
+#' @param ht A huxtable.
+#' @param row Row specifier (can be missing).
+#' @param col Column specifier (can be missing).
+#' @param value_or_fn Value or function (used when row/col are missing).
+#'
+#' @return List with row, col, and value_or_fn components.
+#' @noRd
+parse_rc_args <- function(ht, row, col, value_or_fn) {
+  if (missing(row) && missing(col)) {
+    # Setting entire property: row and col both missing
+    list(
+      row = seq_len(nrow(ht)),
+      col = seq_len(ncol(ht)),
+      value_or_fn = value_or_fn
+    )
+  } else if (missing(col) && missing(value_or_fn)) {
+    # Two argument form: prop_set(ht, value)
+    list(
+      row = seq_len(nrow(ht)),
+      col = seq_len(ncol(ht)),
+      value_or_fn = row
+    )
+  } else {
+    # Standard form
+    list(
+      row = if (missing(row)) seq_len(nrow(ht)) else row,
+      col = if (missing(col)) seq_len(ncol(ht)) else col,
+      value_or_fn = value_or_fn
+    )
+  }
+}
+
+#' Set property values for a cell-based property
 #'
 #' @param ht           A huxtable.
-#' @param value        New property values.
+#' @param row,col      Row/column specifiers. If both missing, sets entire property.
+#' @param value        Property values.
 #' @param prop         Property name.
 #' @param check_fun    Optional validation function.
 #' @param check_values Optional vector of allowed values.
@@ -129,44 +164,24 @@ validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
 #' @param coerce_mode  If `TRUE`, coerce the stored matrix mode to match `value`.
 #'
 #' @noRd
-prop_replace <- function(ht, value, prop, check_fun = NULL, check_values = NULL,
-                         extra = NULL, reset_na = TRUE, coerce_mode = TRUE) {
-  value <- validate_prop(value, prop, check_fun, check_values, reset_na)
-  if (!is.null(extra)) eval(extra)
-  attr(ht, prop)[] <- value
-  if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
-  ht
-}
-
-#' Set property values for a cell-based property
-#'
-#' @param ht           A huxtable.
-#' @param row,col      Row/column specifiers.
-#' @param value        Property values.
-#' @param prop         Property name.
-#' @param check_fun    Optional validation function.
-#' @param check_values Optional vector of allowed values.
-#' @param extra        Extra code to run after validation.
-#' @param reset_na     Passed to [`validate_prop`].
-#'
-#' @noRd
 prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
-                     check_values = NULL, extra = NULL, reset_na = TRUE) {
+                     check_values = NULL, extra = NULL, reset_na = TRUE,
+                     coerce_mode = TRUE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
+  
+  # Parse arguments and handle missingness
+  parsed <- parse_rc_args(ht, row, col, value)
   rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
-  value <- validate_prop(value, prop, check_fun, check_values, reset_na)
+  rc$row <- get_rc_spec(ht, parsed$row, 1)
+  rc$col <- get_rc_spec(ht, parsed$col, 2)
+  value <- validate_prop(parsed$value_or_fn, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
+  
+  # Coerce mode if setting entire property
+  if (coerce_mode && identical(rc$row, seq_len(nrow(ht))) && identical(rc$col, seq_len(ncol(ht)))) {
+    mode(attr(ht, prop)) <- mode(value)
+  }
   ht
 }
 
@@ -179,20 +194,15 @@ prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
 prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
                      check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(fn)) {
-    fn <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
-  }
+  
+  # Parse arguments and handle missingness
+  parsed <- parse_rc_args(ht, row, col, fn)
   rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
+  rc$row <- get_rc_spec(ht, parsed$row, 1)
+  rc$col <- get_rc_spec(ht, parsed$col, 2)
   current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
   if (is_huxtable(current)) current <- as.matrix(current)
-  value <- fn(ht, rc$row, rc$col, current)
+  value <- parsed$value_or_fn(ht, rc$row, rc$col, current)
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value

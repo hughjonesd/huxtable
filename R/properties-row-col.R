@@ -40,7 +40,7 @@ col_width <- function(ht) prop_get(ht, "col_width")
 #' @rdname col_width
 #' @export
 `col_width<-` <- function(ht, value) {
-  prop_replace(ht, value, "col_width", check_fun = is_numeric_or_character)
+  prop_set_col(ht, value = value, prop = "col_width", check_fun = is_numeric_or_character)
 }
 
 #' @rdname col_width
@@ -80,7 +80,7 @@ row_height <- function(ht) prop_get(ht, "row_height")
 #' @rdname row_height
 #' @export
 `row_height<-` <- function(ht, value) {
-  prop_replace(ht, value, "row_height", check_fun = is_numeric_or_character)
+  prop_set_row(ht, value = value, prop = "row_height", check_fun = is_numeric_or_character)
 }
 
 #' @rdname row_height
@@ -124,7 +124,7 @@ header_cols <- function(ht) prop_get(ht, "header_cols")
 #' @rdname header_cols
 #' @export
 `header_cols<-` <- function(ht, value) {
-  prop_replace(ht, value, "header_cols", check_fun = is.logical)
+  prop_set_col(ht, value = value, prop = "header_cols", check_fun = is.logical)
 }
 
 #' @rdname header_cols
@@ -147,7 +147,7 @@ header_rows <- function(ht) prop_get(ht, "header_rows")
 #' @rdname header_cols
 #' @export
 `header_rows<-` <- function(ht, value) {
-  prop_replace(ht, value, "header_rows", check_fun = is.logical)
+  prop_set_row(ht, value = value, prop = "header_rows", check_fun = is.logical)
 }
 
 #' @rdname header_cols

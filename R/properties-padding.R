@@ -23,7 +23,7 @@ left_padding <- function(ht) prop_get(ht, "left_padding")
 #' @rdname padding
 #' @export
 `left_padding<-` <- function(ht, value) {
-  prop_replace(ht, value, "left_padding")
+  prop_set(ht, value = value, prop = "left_padding")
 }
 
 #' @rdname padding
@@ -45,7 +45,7 @@ right_padding <- function(ht) prop_get(ht, "right_padding")
 #' @rdname padding
 #' @export
 `right_padding<-` <- function(ht, value) {
-  prop_replace(ht, value, "right_padding")
+  prop_set(ht, value = value, prop = "right_padding")
 }
 
 #' @rdname padding
@@ -67,7 +67,7 @@ top_padding <- function(ht) prop_get(ht, "top_padding")
 #' @rdname padding
 #' @export
 `top_padding<-` <- function(ht, value) {
-  prop_replace(ht, value, "top_padding")
+  prop_set(ht, value = value, prop = "top_padding")
 }
 
 #' @rdname padding
@@ -89,7 +89,7 @@ bottom_padding <- function(ht) prop_get(ht, "bottom_padding")
 #' @rdname padding
 #' @export
 `bottom_padding<-` <- function(ht, value) {
-  prop_replace(ht, value, "bottom_padding")
+  prop_set(ht, value = value, prop = "bottom_padding")
 }
 
 #' @rdname padding

@@ -35,7 +35,7 @@ valign <- function(ht) prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 `valign<-` <- function(ht, value) {
-  prop_replace(ht, value, "valign",
+  prop_set(ht, value = value, prop = "valign",
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -133,7 +133,7 @@ align <- function(ht) prop_get(ht, "align")
 #' @rdname align
 #' @export
 `align<-` <- function(ht, value) {
-  prop_replace(ht, value, "align",
+  prop_set(ht, value = value, prop = "align",
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -191,7 +191,7 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 `rowspan<-` <- function(ht, value) {
-  prop_replace(ht, value, "rowspan",
+  prop_set(ht, value = value, prop = "rowspan",
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
@@ -256,7 +256,7 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 `colspan<-` <- function(ht, value) {
-  prop_replace(ht, value, "colspan",
+  prop_set(ht, value = value, prop = "colspan",
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
@@ -364,7 +364,7 @@ background_color <- function(ht) prop_get(ht, "background_color")
 #' @rdname background_color
 #' @export
 `background_color<-` <- function(ht, value) {
-  prop_replace(ht, value, "background_color")
+  prop_set(ht, value = value, prop = "background_color")
 }
 
 #' @rdname background_color
@@ -407,7 +407,7 @@ text_color <- function(ht) prop_get(ht, "text_color")
 #' @rdname text_color
 #' @export
 `text_color<-` <- function(ht, value) {
-  prop_replace(ht, value, "text_color")
+  prop_set(ht, value = value, prop = "text_color")
 }
 
 #' @rdname text_color
@@ -455,7 +455,7 @@ wrap <- function(ht) prop_get(ht, "wrap")
 #' @rdname wrap
 #' @export
 `wrap<-` <- function(ht, value) {
-  prop_replace(ht, value, "wrap", check_fun = is.logical)
+  prop_set(ht, value = value, prop = "wrap", check_fun = is.logical)
 }
 
 #' @rdname wrap
@@ -505,7 +505,7 @@ escape_contents <- function(ht) prop_get(ht, "escape_contents")
 #' @rdname escape_contents
 #' @export
 `escape_contents<-` <- function(ht, value) {
-  prop_replace(ht, value, "escape_contents", check_fun = is.logical)
+  prop_set(ht, value = value, prop = "escape_contents", check_fun = is.logical)
 }
 
 #' @rdname escape_contents
@@ -571,7 +571,7 @@ markdown <- function(ht) prop_get(ht, "markdown")
 #' @rdname markdown
 #' @export
 `markdown<-` <- function(ht, value) {
-  prop_replace(ht, value, "markdown", check_fun = is.logical)
+  prop_set(ht, value = value, prop = "markdown", check_fun = is.logical)
 }
 
 #' @rdname markdown
@@ -612,7 +612,7 @@ na_string <- function(ht) prop_get(ht, "na_string")
 #' @rdname na_string
 #' @export
 `na_string<-` <- function(ht, value) {
-  prop_replace(ht, value, "na_string", check_fun = is.character)
+  prop_set(ht, value = value, prop = "na_string", check_fun = is.character)
 }
 
 #' @rdname na_string
@@ -659,7 +659,7 @@ bold <- function(ht) prop_get(ht, "bold")
 #' @rdname bold
 #' @export
 `bold<-` <- function(ht, value) {
-  prop_replace(ht, value, "bold", check_fun = is.logical)
+  prop_set(ht, value = value, prop = "bold", check_fun = is.logical)
 }
 
 #' @rdname bold
@@ -681,7 +681,7 @@ italic <- function(ht) prop_get(ht, "italic")
 #' @rdname bold
 #' @export
 `italic<-` <- function(ht, value) {
-  prop_replace(ht, value, "italic", check_fun = is.logical)
+  prop_set(ht, value = value, prop = "italic", check_fun = is.logical)
 }
 
 #' @rdname bold
@@ -739,7 +739,7 @@ font_size <- function(ht) prop_get(ht, "font_size")
 #' @rdname font_size
 #' @export
 `font_size<-` <- function(ht, value) {
-  prop_replace(ht, value, "font_size", check_fun = is.numeric)
+  prop_set(ht, value = value, prop = "font_size", check_fun = is.numeric)
 }
 
 #' @rdname font_size
@@ -805,7 +805,7 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 `rotation<-` <- function(ht, value) {
-  prop_replace(ht, value, "rotation",
+  prop_set(ht, value = value, prop = "rotation",
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -918,7 +918,7 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 `number_format<-` <- function(ht, value) {
-  prop_replace(ht, value, "number_format",
+  prop_set(ht, value = value, prop = "number_format",
     check_fun = check_number_format,
     reset_na = FALSE,
     coerce_mode = FALSE
@@ -1042,7 +1042,7 @@ font <- function(ht) prop_get(ht, "font")
 #' @rdname font
 #' @export
 `font<-` <- function(ht, value) {
-  prop_replace(ht, value, "font", check_fun = is.character)
+  prop_set(ht, value = value, prop = "font", check_fun = is.character)
 }
 
 #' @rdname font
