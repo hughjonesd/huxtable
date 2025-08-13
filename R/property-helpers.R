@@ -214,7 +214,8 @@ prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
 #' @inheritParams prop_set
 #' @noRd
 prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
-                         check_values = NULL, extra = NULL, reset_na = TRUE) {
+                         check_values = NULL, extra = NULL, reset_na = TRUE,
+                         coerce_mode = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
     value <- row
@@ -224,6 +225,11 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[row] <- value
+  
+  # Coerce mode if setting entire property
+  if (coerce_mode && identical(row, seq_len(nrow(ht)))) {
+    mode(attr(ht, prop)) <- mode(value)
+  }
   ht
 }
 
@@ -232,7 +238,8 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
 #' @inheritParams prop_set
 #' @noRd
 prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
-                         check_values = NULL, extra = NULL, reset_na = TRUE) {
+                         check_values = NULL, extra = NULL, reset_na = TRUE,
+                         coerce_mode = TRUE) {
   assert_that(is_huxtable(ht))
   if (missing(value)) {
     value <- col
@@ -242,6 +249,11 @@ prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[col] <- value
+  
+  # Coerce mode if setting entire property
+  if (coerce_mode && identical(col, seq_len(ncol(ht)))) {
+    mode(attr(ht, prop)) <- mode(value)
+  }
   ht
 }
 
