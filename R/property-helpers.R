@@ -177,11 +177,13 @@ prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,
   attr(ht, prop)[rc$row, rc$col] <- value
   
   # Coerce mode when setting entire property with simple values
+  # But preserve list-matrix structure for properties that need it
   if (!is_mapping && 
       identical(rc$row, seq_len(nrow(ht))) && 
       identical(rc$col, seq_len(ncol(ht))) &&
       !is.list(value) && !inherits(value, "brdr") &&
-      !grepl("border", prop)) {
+      !grepl("border", prop) &&
+      !is.list(attr(ht, prop))) {
     mode(attr(ht, prop)) <- mode(value)
   }
   ht
@@ -206,8 +208,9 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
   attr(ht, prop)[row] <- value
   
   # Coerce mode if setting entire property and value is a simple vector
+  # But preserve list-matrix structure for properties that need it
   if (coerce_mode && identical(row, seq_len(nrow(ht)))) {
-    if (!is.list(value) && !inherits(value, "brdr")) {
+    if (!is.list(value) && !inherits(value, "brdr") && !is.list(attr(ht, prop))) {
       mode(attr(ht, prop)) <- mode(value)
     }
   }
@@ -232,8 +235,9 @@ prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
   attr(ht, prop)[col] <- value
   
   # Coerce mode if setting entire property and value is a simple vector
+  # But preserve list-matrix structure for properties that need it
   if (coerce_mode && identical(col, seq_len(ncol(ht)))) {
-    if (!is.list(value) && !inherits(value, "brdr")) {
+    if (!is.list(value) && !inherits(value, "brdr") && !is.list(attr(ht, prop))) {
       mode(attr(ht, prop)) <- mode(value)
     }
   }
