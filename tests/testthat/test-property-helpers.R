@@ -40,7 +40,7 @@ test_that("prop_set replaces entire property when row/col missing", {
 })
 
 test_that("prop_set works", {
-  ht <- huxtable(a = 1:3, b = 4:6)
+  ht <- huxtable(a = letters[1:3], b = letters[4:6])  # Use characters so default is "left"
   
   # Set specific cells
   ht2 <- prop_set(ht, 1, 1, "center", "align")
@@ -56,7 +56,7 @@ test_that("prop_set works", {
 })
 
 test_that("prop_map works", {
-  ht <- huxtable(a = 1:3, b = 4:6)
+  ht <- huxtable(a = letters[1:3], b = letters[4:6])  # Use characters so default is "left"
   
   # Simple mapping function
   map_fn <- function(ht, row, col, current) {
@@ -77,7 +77,7 @@ test_that("prop_set_row works", {
   
   # Set specific rows
   ht2 <- prop_set_row(ht, 1, 0.5, "row_height")
-  expect_equal(row_height(ht2)[1], 0.5)
+  expect_equal(as.numeric(row_height(ht2)[1]), 0.5)  # Convert to remove names
   expect_true(is.na(row_height(ht2)[2]))  # unchanged
   
   # Set all rows using single argument form
@@ -90,7 +90,7 @@ test_that("prop_set_col works", {
   
   # Set specific columns
   ht2 <- prop_set_col(ht, 1, 0.5, "col_width")
-  expect_equal(col_width(ht2)[1], 0.5)
+  expect_equal(as.numeric(col_width(ht2)[1]), 0.5)  # Convert to remove names
   expect_true(is.na(col_width(ht2)[2]))  # unchanged
   
   # Set all columns using single argument form
