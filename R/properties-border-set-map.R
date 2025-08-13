@@ -13,11 +13,12 @@
   )
   if (prop == "border" && is_brdr(value)) {
     ht <- prop_set(ht, row, col, value, prop,
-      extra = extra, reset_na = FALSE
+      extra = extra, reset_na = FALSE, coerce_mode = FALSE
     )
   } else {
     ht <- prop_set(ht, row, col, value, prop,
-      check_fun = check_fun, check_values = check_values, extra = extra
+      check_fun = check_fun, check_values = check_values, extra = extra,
+      coerce_mode = FALSE
     )
   }
   attr(ht, prop) <- NULL

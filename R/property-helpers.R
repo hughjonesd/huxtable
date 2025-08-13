@@ -178,8 +178,12 @@ prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
   
-  # Coerce mode if setting entire property
-  if (coerce_mode && identical(rc$row, seq_len(nrow(ht))) && identical(rc$col, seq_len(ncol(ht)))) {
+  # Coerce mode only when setting entire property with simple values
+  # This maintains compatibility with old prop_replace behavior
+  if (coerce_mode && 
+      identical(rc$row, seq_len(nrow(ht))) && 
+      identical(rc$col, seq_len(ncol(ht))) &&
+      !is.list(value) && !inherits(value, "brdr")) {
     mode(attr(ht, prop)) <- mode(value)
   }
   ht
@@ -226,9 +230,11 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[row] <- value
   
-  # Coerce mode if setting entire property
+  # Coerce mode if setting entire property and value is a simple vector
   if (coerce_mode && identical(row, seq_len(nrow(ht)))) {
-    mode(attr(ht, prop)) <- mode(value)
+    if (!is.list(value) && !inherits(value, "brdr")) {
+      mode(attr(ht, prop)) <- mode(value)
+    }
   }
   ht
 }
@@ -250,9 +256,11 @@ prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[col] <- value
   
-  # Coerce mode if setting entire property
+  # Coerce mode if setting entire property and value is a simple vector
   if (coerce_mode && identical(col, seq_len(ncol(ht)))) {
-    mode(attr(ht, prop)) <- mode(value)
+    if (!is.list(value) && !inherits(value, "brdr")) {
+      mode(attr(ht, prop)) <- mode(value)
+    }
   }
   ht
 }
