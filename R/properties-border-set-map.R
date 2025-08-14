@@ -3,6 +3,15 @@
 
 .border_prop_set <- function(ht, row, col, value, side, prop,
                              check_fun = NULL, check_values = NULL) {
+  # Handle two-argument form: set_*_border_*(ht, value)
+  if (missing(col) && missing(value)) {
+    value <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
   extra <- substitute(
@@ -12,11 +21,11 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border" && is_brdr(value)) {
-    ht <- prop_set(ht, row, col, value, prop,
+    ht <- prop_set(ht, prop, row, col, value = value,
       extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- prop_set(ht, row, col, value, prop,
+    ht <- prop_set(ht, prop, row, col, value = value,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }
@@ -26,6 +35,15 @@
 
 .border_prop_map <- function(ht, row, col, fn, side, prop,
                              check_fun = NULL, check_values = NULL) {
+  # Handle two-argument form: map_*_border_*(ht, fn)
+  if (missing(col) && missing(fn)) {
+    fn <- row
+    row <- seq_len(nrow(ht))
+    col <- seq_len(ncol(ht))
+  } else {
+    if (missing(row)) row <- seq_len(nrow(ht))
+    if (missing(col)) col <- seq_len(ncol(ht))
+  }
   getter <- get(paste0(side, "_", prop))
   attr(ht, prop) <- getter(ht)
   extra <- substitute(
@@ -35,11 +53,11 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border") {
-    ht <- prop_map(ht, row, col, fn, prop,
+    ht <- prop_set(ht, prop, row, col, fn = fn,
       check_fun = is_borderish, extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- prop_map(ht, row, col, fn, prop,
+    ht <- prop_set(ht, prop, row, col, fn = fn,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }

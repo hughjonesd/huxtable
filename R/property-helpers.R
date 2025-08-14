@@ -117,32 +117,13 @@ validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
   value
 }
 
-#' Replace an entire property matrix/vector
-#'
-#' @param ht           A huxtable.
-#' @param value        New property values.
-#' @param prop         Property name.
-#' @param check_fun    Optional validation function.
-#' @param check_values Optional vector of allowed values.
-#' @param extra        Extra code to run after validation.
-#' @param reset_na     Passed to [`validate_prop`].
-#' @param coerce_mode  If `TRUE`, coerce the stored matrix mode to match `value`.
-#'
-#' @noRd
-prop_replace <- function(ht, value, prop, check_fun = NULL, check_values = NULL,
-                         extra = NULL, reset_na = TRUE, coerce_mode = TRUE) {
-  value <- validate_prop(value, prop, check_fun, check_values, reset_na)
-  if (!is.null(extra)) eval(extra)
-  attr(ht, prop)[] <- value
-  if (coerce_mode) mode(attr(ht, prop)) <- mode(value)
-  ht
-}
 
-#' Set property values for a cell-based property
+#' Set property values or apply mapping function for a cell-based property
 #'
 #' @param ht           A huxtable.
-#' @param row,col      Row/column specifiers.
-#' @param value        Property values.
+#' @param row,col      Row/column specifiers. If both missing, sets entire property.
+#' @param value        Property values (for setting).
+#' @param fn           Mapping function (for mapping).
 #' @param prop         Property name.
 #' @param check_fun    Optional validation function.
 #' @param check_values Optional vector of allowed values.
@@ -150,52 +131,81 @@ prop_replace <- function(ht, value, prop, check_fun = NULL, check_values = NULL,
 #' @param reset_na     Passed to [`validate_prop`].
 #'
 #' @noRd
-prop_set <- function(ht, row, col, value, prop, check_fun = NULL,
-                     check_values = NULL, extra = NULL, reset_na = TRUE) {
+prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,
+                     check_fun = NULL, check_values = NULL, extra = NULL,
+                     reset_na = TRUE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+
+  # Handle two-argument form: set_*(ht, value) or map_*(ht, fn)
+  if (missing(col)) {
+    if (missing(value) && missing(fn)) {
+      if (is.function(row)) {
+        fn <- row
+      } else {
+        value <- row
+      }
+      row <- seq_len(nrow(ht))
+      col <- seq_len(ncol(ht))
+    } else {
+      # Standard missing col case
+      col <- seq_len(ncol(ht))
+    }
   }
+
+  # Handle missing arguments for standard form
+  if (missing(row)) row <- seq_len(nrow(ht))
+  if (missing(col)) col <- seq_len(ncol(ht))
+
   rc <- list()
   rc$row <- get_rc_spec(ht, row, 1)
   rc$col <- get_rc_spec(ht, col, 2)
+
+  # Compute value if we are mapping
+  if (!is.null(fn)) {
+    current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
+    if (is_huxtable(current)) current <- as.matrix(current)
+    value <- fn(ht, rc$row, rc$col, current)
+  }
+
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
+
+  # Coerce mode when setting entire property with simple values
+  # But preserve list-matrix structure for properties that need it
+  if (identical(rc$row, seq_len(nrow(ht))) &&
+      identical(rc$col, seq_len(ncol(ht))) &&
+      !is.list(attr(ht, prop))) {
+    mode(attr(ht, prop)) <- mode(value)
+  }
   ht
 }
 
-#' Map a function over a cell-based property
+
+#' Set values for a dimension-based property (internal helper)
 #'
-#' @param fn A mapping function. See [mapping-functions].
 #' @inheritParams prop_set
-#'
+#' @param dimension 1 for rows, 2 for columns
+#' @param dim_spec Row or column specification
 #' @noRd
-prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
-                     check_values = NULL, extra = NULL, reset_na = TRUE) {
+prop_set_dim <- function(ht, dim_spec, value, prop, dimension, check_fun = NULL,
+                         check_values = NULL, extra = NULL, reset_na = TRUE) {
   assert_that(is_huxtable(ht))
-  if (missing(col) && missing(fn)) {
-    fn <- row
-    row <- seq_len(nrow(ht))
-    col <- seq_len(ncol(ht))
-  } else {
-    if (missing(row)) row <- seq_len(nrow(ht))
-    if (missing(col)) col <- seq_len(ncol(ht))
+  if (missing(value)) {
+    value <- dim_spec
+    dim_spec <- if (dimension == 1) seq_len(nrow(ht)) else seq_len(ncol(ht))
   }
-  rc <- list()
-  rc$row <- get_rc_spec(ht, row, 1)
-  rc$col <- get_rc_spec(ht, col, 2)
-  current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
-  if (is_huxtable(current)) current <- as.matrix(current)
-  value <- fn(ht, rc$row, rc$col, current)
+  dim_spec <- get_rc_spec(ht, dim_spec, dimension)
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
-  attr(ht, prop)[rc$row, rc$col] <- value
+  
+  attr(ht, prop)[dim_spec] <- value
+  
+  # Coerce mode if setting entire property
+  size <- if (dimension == 1) nrow(ht) else ncol(ht)
+  if (identical(dim_spec, seq_len(size))) {
+    mode(attr(ht, prop)) <- mode(value)
+  }
   ht
 }
 
@@ -205,16 +215,8 @@ prop_map <- function(ht, row, col, fn, prop, check_fun = NULL,
 #' @noRd
 prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
                          check_values = NULL, extra = NULL, reset_na = TRUE) {
-  assert_that(is_huxtable(ht))
-  if (missing(value)) {
-    value <- row
-    row <- seq_len(nrow(ht))
-  }
-  row <- get_rc_spec(ht, row, 1)
-  value <- validate_prop(value, prop, check_fun, check_values, reset_na)
-  if (!is.null(extra)) eval(extra)
-  attr(ht, prop)[row] <- value
-  ht
+  prop_set_dim(ht, row, value, prop, dimension = 1, check_fun = check_fun,
+               check_values = check_values, extra = extra, reset_na = reset_na)
 }
 
 #' Set values for a column-based property
@@ -223,16 +225,8 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
 #' @noRd
 prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
                          check_values = NULL, extra = NULL, reset_na = TRUE) {
-  assert_that(is_huxtable(ht))
-  if (missing(value)) {
-    value <- col
-    col <- seq_len(ncol(ht))
-  }
-  col <- get_rc_spec(ht, col, 2)
-  value <- validate_prop(value, prop, check_fun, check_values, reset_na)
-  if (!is.null(extra)) eval(extra)
-  attr(ht, prop)[col] <- value
-  ht
+  prop_set_dim(ht, col, value, prop, dimension = 2, check_fun = check_fun,
+               check_values = check_values, extra = extra, reset_na = reset_na)
 }
 
 #' Set a table-level property
