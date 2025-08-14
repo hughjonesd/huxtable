@@ -68,7 +68,7 @@ test_that("to_typst maps properties", {
   )
   expect_match(
     res,
-    "text\\(weight: \"bold\", style: \"italic\", size: 12pt, family: \"Courier\", fill: rgb\\(0, 0, 255\\)\\)\\[1\\]"
+    "text\\(weight: \"bold\", style: \"italic\", size: 12pt, font: \"Courier\", fill: rgb\\(0, 0, 255\\)\\)\\[1\\]"
   )
   expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
 })
