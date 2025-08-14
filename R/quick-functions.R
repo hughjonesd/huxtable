@@ -4,7 +4,8 @@
 NULL
 
 
-#' Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document
+#' Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document,
+#' or PNG images
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -23,7 +24,8 @@ NULL
 #' if this already exists, you will be asked to confirm manually before proceeding.
 #'
 #' To create docx and pptx files `flextable` and `officer` must be installed, while xlsx
-#' needs `openxlsx`. `quick_typst_pdf()` requires the `typst` command line tool.
+#' needs `openxlsx`. `quick_typst_pdf()` and `quick_typst_png()` require the `typst`
+#' command line tool.
 #'
 #' @examples
 #' \dontrun{
@@ -33,6 +35,7 @@ NULL
 #' quick_latex(m, jams)
 #' quick_typst(m, jams)
 #' quick_typst_pdf(m, jams)
+#' quick_typst_png(m, jams)
 #' quick_html(m, jams)
 #' quick_docx(m, jams)
 #' quick_xlsx(m, jams)
@@ -160,6 +163,52 @@ quick_typst_pdf <- function(
 
   if (!file.exists(file)) stop("Could not find pdf output file '", file, "'")
   if (open) auto_open(file)
+  invisible(NULL)
+}
+
+
+#' @rdname quick-output
+#' @export
+#' @param ppi Pixels per inch for PNG output.
+#' @details
+#' `quick_typst_png()` creates one PNG per huxtable. Existing files with the same
+#' `file` prefix will be overwritten after confirmation in interactive sessions.
+quick_typst_png <- function(
+    ..., file = confirm_prefix("huxtable-output"), borders = 0.4,
+    open = interactive(), width = NULL, height = NULL, ppi = NULL) {
+  assert_that(
+    is.number(borders), is.flag(open),
+    is.string(width) || is.null(width),
+    is.string(height) || is.null(height),
+    is.number(ppi) || is.null(ppi)
+  )
+  force(file)
+  hts <- huxtableize(list(...), borders)
+
+  typst_file <- tempfile(fileext = ".typ")
+  do_write_typst_file(hts, typst_file, width, height, page_break = TRUE)
+
+  out_template <- paste0(file, "-{0p}.png")
+  args <- c("compile", typst_file, out_template, "--format", "png")
+  if (!is.null(ppi)) args <- c(args, "--ppi", as.character(ppi))
+
+  if (Sys.which("typst") != "") {
+    res <- system2("typst", args)
+  } else if (Sys.which("quarto") != "") {
+    res <- system2("quarto", c("typst", args))
+  } else {
+    stop("Could not find typst or quarto CLI. Please install typst or quarto to create PNGs.")
+  }
+
+  if (res != 0) {
+    stop("Typst compilation failed")
+  }
+  if (!file.remove(typst_file)) warning("Could not remove intermediate Typst file '", typst_file, "'")
+
+  if (open) {
+    files <- list.files(dirname(file), pattern = paste0("^", basename(file), ".*\\.png$"), full.names = TRUE)
+    if (length(files) > 0) auto_open(files[1])
+  }
   invisible(NULL)
 }
 
@@ -360,9 +409,10 @@ do_write_latex_file <- function(hts, file, width, height) {
 #' @param file Output file path.
 #' @param width Page width string or `NULL`.
 #' @param height Page height string or `NULL`.
+#' @param page_break Logical. Insert `#pagebreak()` between tables?
 #'
 #' @noRd
-do_write_typst_file <- function(hts, file, width, height) {
+do_write_typst_file <- function(hts, file, width, height, page_break = FALSE) {
   sink(file)
   tryCatch(
     {
@@ -373,9 +423,13 @@ do_write_typst_file <- function(hts, file, width, height) {
         cat("#set page(", paste(dim_parts, collapse = ", "), ")\n\n", sep = "")
       }
       cat("#show link: underline\n\n")
-      lapply(hts, function(ht) {
-        cat(to_typst(ht))
-        cat("\n\n")
+      lapply(seq_along(hts), function(i) {
+        cat(to_typst(hts[[i]]))
+        if (page_break && i < length(hts)) {
+          cat("\n\n#pagebreak()\n\n")
+        } else {
+          cat("\n\n")
+        }
       })
     },
     error = identity,
@@ -383,6 +437,21 @@ do_write_typst_file <- function(hts, file, width, height) {
       sink()
     }
   )
+}
+
+
+confirm_prefix <- function(file) {
+  if (!interactive()) stop("Please specify a `file` argument for non-interactive use of quick_typst_png().")
+  dir <- dirname(file)
+  if (!dir.exists(dir)) return(file)
+  prefix <- basename(file)
+  existing <- list.files(dir)
+  existing <- existing[startsWith(existing, prefix)]
+  if (length(existing) > 0) {
+    answer <- readline(paste0("Files starting with '", file, "' already exist. Overwrite? [yN]"))
+    if (!answer %in% c("y", "Y")) stop("OK, stopping")
+  }
+  file
 }
 
 

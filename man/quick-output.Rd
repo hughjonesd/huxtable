@@ -6,12 +6,14 @@
 \alias{quick_pdf}
 \alias{quick_typst}
 \alias{quick_typst_pdf}
+\alias{quick_typst_png}
 \alias{quick_html}
 \alias{quick_docx}
 \alias{quick_pptx}
 \alias{quick_xlsx}
 \alias{quick_rtf}
-\title{Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document}
+\title{Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document,
+or PNG images}
 \usage{
 quick_latex(
   ...,
@@ -43,6 +45,16 @@ quick_typst_pdf(
   open = interactive(),
   width = NULL,
   height = NULL
+)
+
+quick_typst_png(
+  ...,
+  file = confirm_prefix("huxtable-output"),
+  borders = 0.4,
+  open = interactive(),
+  width = NULL,
+  height = NULL,
+  ppi = NULL
 )
 
 quick_html(
@@ -94,6 +106,8 @@ quick_rtf(
 
 \item{height}{String passed to the LaTeX \code{geometry} package's \code{paperheight} option or Typst's
 \code{page} \code{height} option. Use \code{NULL} for the default height.}
+
+\item{ppi}{Pixels per inch for PNG output.}
 }
 \value{
 Invisible \code{NULL}.
@@ -110,10 +124,14 @@ interactive sessions, the default file path is "huxtable-output.xxx" in the work
 if this already exists, you will be asked to confirm manually before proceeding.
 
 To create docx and pptx files \code{flextable} and \code{officer} must be installed, while xlsx
-needs \code{openxlsx}. \code{quick_typst_pdf()} requires the \code{typst} command line tool.
+needs \code{openxlsx}. \code{quick_typst_pdf()} and \code{quick_typst_png()} require the \code{typst}
+command line tool.
 
 \code{quick_typst_pdf()} with e.g. \code{file = "foo.pdf"} will overwrite and delete
 the file \code{foo.typ}.
+
+\code{quick_typst_png()} creates one PNG per huxtable. Existing files with the same
+\code{file} prefix will be overwritten after confirmation in interactive sessions.
 }
 \examples{
 \dontrun{
@@ -123,6 +141,7 @@ quick_pdf(m, jams)
 quick_latex(m, jams)
 quick_typst(m, jams)
 quick_typst_pdf(m, jams)
+quick_typst_png(m, jams)
 quick_html(m, jams)
 quick_docx(m, jams)
 quick_xlsx(m, jams)

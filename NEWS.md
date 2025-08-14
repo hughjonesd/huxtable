@@ -11,7 +11,8 @@
 * HTML tables now wrap header rows in `<thead>` (using `<th>` cells) and
   body rows in `<tbody>` when header rows are at the top of the table.
 * Added Typst export via `to_typst()` and `print_typst()`. Quarto integration
-  is available as well as `quick_typst()` and `quick_typst_pdf()` functions.
+  is available as well as `quick_typst()`, `quick_typst_pdf()`, and
+  `quick_typst_png()` functions.
 * Typst output now supports cell rotation.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
