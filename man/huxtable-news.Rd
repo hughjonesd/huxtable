@@ -21,8 +21,8 @@ object. AFAIK nobody has ever done this; if I’m wrong, please tell me.
 \item HTML tables now wrap header rows in \verb{<thead>} (using \verb{<th>} cells) and
 body rows in \verb{<tbody>} when header rows are at the top of the table.
 \item Added Typst export via \code{to_typst()} and \code{print_typst()}. Quarto
-integration is available as well as \code{quick_typst()} and
-\code{quick_typst_pdf()} functions.
+integration is available as well as \code{quick_typst()},
+\code{quick_typst_pdf()}, and \code{quick_typst_png()} functions.
 \item Typst output now supports cell rotation.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
