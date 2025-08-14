@@ -2,7 +2,7 @@ local_edition(2)
 
 
 test_that("set_all_*", {
-  ht <- hux(a = c(1, 0), b = c(0, 1))
+  ht <- hux(a = c(1, 0), b = c(0, 1), add_colnames = FALSE)
   ht2 <- set_all_borders(ht, 1)
   expect_equivalent(brdr_thickness(top_border(ht2)), matrix(1, 2, 2))
 
@@ -110,7 +110,7 @@ test_that("set_all_* functions work when huxtable is not attached", {
   # NB as written this test can only be run from the command line; detach call silently fails
   library(huxtable)
   detach(package:huxtable)
-  ht <- huxtable::hux(a = c(1, 0), b = c(0, 1))
+  ht <- huxtable::hux(a = c(1, 0), b = c(0, 1), add_colnames = FALSE)
   expect_silent(ht2 <- huxtable::set_all_borders(ht, 1))
   expect_silent(ht3 <- huxtable::set_all_border_colors(ht, "red"))
   expect_silent(ht4 <- huxtable::set_all_padding(ht, 1))
@@ -124,7 +124,7 @@ test_that("set_all_* functions work when huxtable is not attached", {
 
 
 test_that("set_outer_*", {
-  ht <- hux(a = 1:3, b = 1:3, c = 1:3)
+  ht <- hux(a = 1:3, b = 1:3, c = 1:3, add_colnames = FALSE)
 
   check_borders <- function(ht, suffix, un, set) {
     wrapper <- if (suffix == "") brdr_thickness else identity
@@ -181,7 +181,7 @@ test_that("set_outer_*", {
 
 
 test_that("set_outer_borders() works with non-standard/empty position arguments", {
-  ht <- hux(a = 1:2, b = 1:2)
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
 
   ht2 <- set_outer_borders(ht, 1)
   ht3 <- set_outer_borders(ht, everywhere, everywhere, 1)

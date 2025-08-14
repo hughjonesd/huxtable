@@ -6,7 +6,7 @@ test_that("create huxtable using hux[table]()", {
   expect_silent(ht2 <- hux(a = 1:3, b = 1:3))
   expect_is(ht, "huxtable")
   expect_equal(ncol(ht), 2)
-  expect_equal(nrow(ht), 3)
+  expect_equal(nrow(ht), 4)  # Now includes header row
   expect_identical(ht, ht2)
 })
 
@@ -110,10 +110,10 @@ test_that("create huxtable from matrix", {
 
 test_that("create huxtable from vector", {
   v <- letters[1:5]
-  expect_silent(ht <- as_hux(v))
+  expect_silent(ht <- as_hux(v, add_colnames = FALSE))
   expect_equal(nrow(ht), length(v))
   nv <- 1:5
-  expect_silent(ht <- as_hux(nv))
+  expect_silent(ht <- as_hux(nv, add_colnames = FALSE))
   expect_equal(nrow(ht), length(nv))
 })
 

@@ -31,7 +31,7 @@ test_that("Borders work", {
 
 
 test_that("Widths and alignment work", {
-  hx <- huxtable(a = 1:3, b = 4:6)
+  hx <- huxtable(a = 1:3, b = 4:6, add_colnames = FALSE)
   col_width(hx) <- c(.7, .3)
   width(hx) <- .9
   expect_silent(as_Workbook(hx))

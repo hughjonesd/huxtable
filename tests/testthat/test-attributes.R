@@ -7,7 +7,7 @@ test_that("Can refer to properties by colnames", {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   number_format(ht)[1, 1] <- 3
   col_width(ht) <- c(.2, .6, .2)
-  row_height(ht) <- rep(.2, 5)
+  row_height(ht) <- rep(.2, 6)
   expect_equal(number_format(ht)[1, "a"], list(3))
   expect_equivalent(col_width(ht)["a"], .2)
 })
@@ -40,7 +40,7 @@ test_that("Can assign numeric to width, col_width etc. after assigning character
 
 
 test_that("na_string works", {
-  ht <- huxtable(a = c(1, 2, NA), b = c(NA, 1, 2))
+  ht <- hux(c(1, 2, NA), c(NA, 1, 2))
   na_string(ht) <- "foo"
   na_string(ht)[3, 1] <- "bar"
   expect_silent(cc <- huxtable:::clean_contents(ht))
@@ -51,7 +51,7 @@ test_that("na_string works", {
 
 
 test_that("Can pad with align", {
-  ht <- hux(a = c("1.5", "2.5"))
+  ht <- hux(c("1.5", "2.5"))
   ht2 <- ht
   expect_silent(align(ht) <- ".")
   expect_identical(huxtable:::clean_contents(ht), huxtable:::clean_contents(ht2))
@@ -59,7 +59,7 @@ test_that("Can pad with align", {
 
 
 test_that("Can set attributes to NA", {
-  ht <- huxtable(a = 1:3, b = 1:3)
+  ht <- hux(1:3, 4:6)
   # expect no error
   expect_error(caption(ht) <- NA, regexp = NA)
   expect_error(font(ht) <- NA, regexp = NA)
@@ -69,9 +69,9 @@ test_that("Can set attributes to NA", {
 
 test_that("set_default_properties", {
   old <- set_default_properties(bold = TRUE)
-  expect_equivalent(bold(hux(a = 1)), matrix(TRUE, 1, 1))
+  expect_equivalent(bold(hux(1)), matrix(TRUE, 1, 1))
   set_default_properties(old)
-  expect_equivalent(bold(hux(a = 1)), matrix(FALSE, 1, 1))
+  expect_equivalent(bold(hux(1)), matrix(FALSE, 1, 1))
 
   expect_error(set_default_properties(unknown = 1))
 })
@@ -84,7 +84,7 @@ test_that("get_default_properties", {
 
 
 test_that("collapsed_border_colors works", {
-  ht <- hux(a = 1:2, b = 1:2)
+  ht <- hux(1:2, 3:4)
   left_border_color(ht)[1, 2] <- "pink"
   top_border_color(ht)[2, 1] <- "green"
   cbc <- huxtable:::collapsed_border_colors(ht)
@@ -100,7 +100,7 @@ test_that("collapsed_border_colors works", {
 
 
 test_that("collapsed_border_styles works", {
-  ht <- hux(a = 1:2, b = 1:2)
+  ht <- hux(1:2, 3:4)
   left_border_style(ht)[1, 2] <- "dashed"
   top_border_style(ht)[2, 1] <- "double"
   cbs <- huxtable:::collapsed_border_styles(ht)
