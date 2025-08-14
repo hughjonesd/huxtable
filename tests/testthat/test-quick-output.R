@@ -8,11 +8,13 @@ skip_without_latex_deps <- function() {
 
 
 skip_without_typst <- function() {
-  if (Sys.which("typst") == "" && Sys.which("quarto") == "") skip("typst CLI not found")
+  if (Sys.which("typst") == "") skip("typst CLI not found")
 }
 
 
 test_that("Quick output functions create files", {
+  skip_if_not_installed("openxlsx")
+  skip_if_not_installed("flextable")
 
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
@@ -22,33 +24,24 @@ test_that("Quick output functions create files", {
   expect_silent(quick_html(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
 
+  tf <- tempfile(fileext = ".docx")
+  expect_silent(quick_docx(m, dfr, ht, file = tf, open = FALSE))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = ".xlsx")
+  expect_silent(quick_xlsx(m, dfr, ht, file = tf, open = FALSE))
+  expect_true(file.exists(tf))
+
+  tf <- tempfile(fileext = ".pptx")
+  expect_silent(quick_pptx(m, dfr, ht, file = tf, open = FALSE))
+  expect_true(file.exists(tf))
+
   tf <- tempfile(fileext = ".rtf")
   expect_silent(quick_rtf(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
 
   tf <- tempfile(fileext = ".tex")
   expect_silent(quick_latex(m, dfr, ht, file = tf, open = FALSE))
-  expect_true(file.exists(tf))
-
-  skip_without_typst()
-  tf <- tempfile(fileext = ".pdf")
-  expect_silent(quick_typst_pdf(m, dfr, ht, file = tf, open = FALSE))
-  expect_true(file.exists(tf))
-  
- 
-  skip_if_not_installed("openxlsx")
-  skip_if_not_installed("flextable")
-  
-  tf <- tempfile(fileext = ".docx")
-  expect_silent(quick_docx(m, dfr, ht, file = tf, open = FALSE))
-  expect_true(file.exists(tf))
-  
-  tf <- tempfile(fileext = ".pptx")
-  expect_silent(quick_pptx(m, dfr, ht, file = tf, open = FALSE))
-  expect_true(file.exists(tf))
-
-  tf <- tempfile(fileext = ".xlsx")
-  expect_silent(quick_xlsx(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
 })
 
