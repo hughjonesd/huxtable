@@ -45,7 +45,7 @@ test_that("merged cells work", {
 
 
 test_that("row heights and column widths work", {
-  hx <- huxtable(a = 1:3, b = 4:6)
+  hx <- huxtable(a = 1:3, b = 4:6, add_colnames = FALSE)
   row_height(hx) <- c(.5, .25, .25)
   col_width(hx) <- c(.6, .4)
   expect_silent(as_flextable(hx))

@@ -92,7 +92,7 @@ test_that("to_md prints bold and italic", {
 
 
 test_that("to_screen borders respect spans", {
-  ht <- hux(a = 1:2, b = 3:4)
+  ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)
   ht <- set_all_borders(ht)
   ht2 <- ht
 

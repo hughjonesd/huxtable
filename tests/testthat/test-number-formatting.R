@@ -12,7 +12,7 @@ teardown({
 
 
 test_that("Can combine numbers and characters in number_format", {
-  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111, 1.11111), autoformat = FALSE)
+  ht <- huxtable(a = c(1.11111, 1.11111, 1.11111, 1.11111), autoformat = FALSE, add_colnames = FALSE)
   number_format(ht)[1, ] <- "%3.3f"
   number_format(ht)[2, ] <- 1
   number_format(ht)[3, ] <- list(function(x) ifelse(x > 0, "+", "-"))
@@ -25,7 +25,7 @@ test_that("Can combine numbers and characters in number_format", {
 
 
 test_that("number_format works on cells with multiple numbers", {
-  ht <- huxtable(a = "1 2.3556, some text; -33 -44.8908")
+  ht <- huxtable(a = "1 2.3556, some text; -33 -44.8908", add_colnames = FALSE)
   number_format(ht)[1, 1] <- 1
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1.0 2.4, some text; -33.0 -44.9")
   number_format(ht)[1, 1] <- "%3.3f"
@@ -36,7 +36,7 @@ test_that("number_format works on cells with multiple numbers", {
 
 
 test_that("number_format treats scientific notation equivalently to sprintf", {
-  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e7", "1.12e-3", "1.12A3", "1.12e3 4.8 and 5.6"))
+  ht <- huxtable(c("1.12e3", "1.12E3", "1.12e7", "1.12e-3", "1.12A3", "1.12e3 4.8 and 5.6"), add_colnames = FALSE)
   number_format(ht) <- 4
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1120.0000")
   expect_equivalent(huxtable:::clean_contents(ht, "latex")[2, 1], "1120.0000")
