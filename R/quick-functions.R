@@ -5,7 +5,7 @@ NULL
 
 
 #' Quickly print objects to a PDF, TeX, Typst, HTML, Microsoft Office or RTF document,
-#' or PNG images
+#' or PNG or SVG images
 #'
 #' These functions use huxtable to print objects to an output document. They are useful
 #' as one-liners for data reporting.
@@ -24,7 +24,7 @@ NULL
 #' if this already exists, you will be asked to confirm manually before proceeding.
 #'
 #' To create docx and pptx files `flextable` and `officer` must be installed, while xlsx
-#' needs `openxlsx`. `quick_typst_pdf()` and `quick_typst_png()` require the `typst`
+#' needs `openxlsx`. `quick_typst_pdf()`, `quick_typst_png()`, and `quick_typst_svg()` require the `typst`
 #' command line tool.
 #'
 #' @examples
@@ -36,6 +36,7 @@ NULL
 #' quick_typst(m, jams)
 #' quick_typst_pdf(m, jams)
 #' quick_typst_png(m, jams)
+#' quick_typst_svg(m, jams)
 #' quick_html(m, jams)
 #' quick_docx(m, jams)
 #' quick_xlsx(m, jams)
@@ -171,8 +172,8 @@ quick_typst_pdf <- function(
 #' @export
 #' @param ppi Pixels per inch for PNG output.
 #' @details
-#' `quick_typst_png()` creates one PNG per huxtable. If there is more than
-#' one object in `...`, PNGs will have a numeric suffix like `"-1", "-2"` etc.
+#' `quick_typst_png()` and `quick_typst_svg()` create one image per huxtable. If there is more than
+#' one object in `...`, images will have a numeric suffix like `"-1", "-2"` etc.
 #' Existing files with the same `file` prefix will be overwritten after
 #' confirmation in interactive sessions.
 quick_typst_png <- function(
@@ -186,40 +187,23 @@ quick_typst_png <- function(
   )
   force(file)
   hts <- huxtableize(list(...), borders)
+  extra_args <- if (!is.null(ppi)) c("--ppi", as.character(ppi)) else character()
+  do_quick_typst_images(hts, file, open, width, height, "png", extra_args)
+}
 
-  typst_file <- tempfile(fileext = ".typ")
-  do_write_typst_file(hts, typst_file, width, height, page_break = TRUE)
-
-  out_template <- if (length(hts) == 1L) {
-    paste0(file, ".png")
-  } else {
-    paste0(file, "-{0p}.png")
-  }
-  args <- c("compile", typst_file, out_template, "--format", "png")
-  if (!is.null(ppi)) args <- c(args, "--ppi", as.character(ppi))
-
-  if (Sys.which("typst") != "") {
-    res <- system2("typst", args)
-  } else if (Sys.which("quarto") != "") {
-    res <- system2("quarto", c("typst", args))
-  } else {
-    stop("Could not find typst or quarto CLI. Please install typst or quarto to create PNGs.")
-  }
-
-  if (res != 0) {
-    stop("Typst compilation failed")
-  }
-  if (!file.remove(typst_file)) warning("Could not remove intermediate Typst file '", typst_file, "'")
-
-  if (open) {
-    files <- list.files(dirname(file), pattern = paste0("^", basename(file), ".*\\.png$"), full.names = TRUE)
-    max_to_open <- min(5, length(files))
-    if (length(files) > max_to_open) {
-      warning("Opening just the first ", max_to_open, " of ", length(files), " files")
-    }
-    lapply(files[seq_len(max_to_open)], auto_open)
-  }
-  invisible(NULL)
+#' @rdname quick-output
+#' @export
+quick_typst_svg <- function(
+    ..., file = confirm_prefix("huxtable-output"), borders = 0.4,
+    open = interactive(), width = NULL, height = NULL) {
+  assert_that(
+    is.number(borders), is.flag(open),
+    is.string(width) || is.null(width),
+    is.string(height) || is.null(height)
+  )
+  force(file)
+  hts <- huxtableize(list(...), borders)
+  do_quick_typst_images(hts, file, open, width, height, "svg")
 }
 
 
@@ -447,6 +431,52 @@ do_write_typst_file <- function(hts, file, width, height, page_break = FALSE) {
       sink()
     }
   )
+}
+
+#' Compile Typst code to image files
+#'
+#' @param hts List of huxtables.
+#' @param file Output file prefix.
+#' @param open Automatically open the resulting files?
+#' @param width Page width string or `NULL`.
+#' @param height Page height string or `NULL`.
+#' @param format Image format, e.g. "png" or "svg".
+#' @param extra_args Additional command line arguments for typst.
+#'
+#' @noRd
+do_quick_typst_images <- function(hts, file, open, width, height, format, extra_args = character()) {
+  typst_file <- tempfile(fileext = ".typ")
+  do_write_typst_file(hts, typst_file, width, height, page_break = TRUE)
+
+  out_template <- if (length(hts) == 1L) {
+    paste0(file, ".", format)
+  } else {
+    paste0(file, "-{0p}.", format)
+  }
+  args <- c("compile", typst_file, out_template, "--format", format, extra_args)
+
+  if (Sys.which("typst") != "") {
+    res <- system2("typst", args)
+  } else if (Sys.which("quarto") != "") {
+    res <- system2("quarto", c("typst", args))
+  } else {
+    stop("Could not find typst or quarto CLI. Please install typst or quarto to create ", toupper(format), "s.")
+  }
+
+  if (res != 0) {
+    stop("Typst compilation failed")
+  }
+  if (!file.remove(typst_file)) warning("Could not remove intermediate Typst file '", typst_file, "'")
+
+  if (open) {
+    files <- list.files(dirname(file), pattern = paste0("^", basename(file), ".*\\.", format, "$"), full.names = TRUE)
+    max_to_open <- min(5, length(files))
+    if (length(files) > max_to_open) {
+      warning("Opening just the first ", max_to_open, " of ", length(files), " files")
+    }
+    lapply(files[seq_len(max_to_open)], auto_open)
+  }
+  invisible(NULL)
 }
 
 
