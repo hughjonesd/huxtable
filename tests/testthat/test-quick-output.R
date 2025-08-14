@@ -137,6 +137,17 @@ test_that("quick_typst_png works", {
   expect_equal(length(files), 3)
 })
 
+test_that("quick_typst_svg works", {
+  skip_without_typst()
+  ht <- hux(a = 1:2, b = 1:2)
+  m <- matrix(1:4, 2, 2)
+  dfr <- data.frame(a = 1:5, b = 1:5)
+  tf <- tempfile()
+  expect_silent(quick_typst_svg(m, dfr, ht, file = tf, open = FALSE))
+  files <- list.files(dirname(tf), pattern = paste0("^", basename(tf), ".*\\.svg$"), full.names = TRUE)
+  expect_equal(length(files), 3)
+})
+
 
 test_that("Quick output functions stop if called non-interactively with no `file` argument", {
   skip_if(interactive())
