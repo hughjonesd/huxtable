@@ -135,17 +135,15 @@ prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,
                      check_fun = NULL, check_values = NULL, extra = NULL,
                      reset_na = TRUE) {
   assert_that(is_huxtable(ht))
-  
+
   # Handle two-argument form: set_*(ht, value) or map_*(ht, fn)
   if (missing(col)) {
-    if (missing(value) && missing(fn) && is.function(row)) {
-      # This is map_*(ht, fn) form - row is actually the function
-      fn <- row
-      row <- seq_len(nrow(ht))
-      col <- seq_len(ncol(ht))
-    } else if (missing(value) && missing(fn)) {
-      # This is set_*(ht, value) form - row is actually the value
-      value <- row
+    if (missing(value) && missing(fn)) {
+      if (is.function(row)) {
+        fn <- row
+      } else {
+        value <- row
+      }
       row <- seq_len(nrow(ht))
       col <- seq_len(ncol(ht))
     } else {
@@ -153,36 +151,30 @@ prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,
       col <- seq_len(ncol(ht))
     }
   }
-  
+
   # Handle missing arguments for standard form
   if (missing(row)) row <- seq_len(nrow(ht))
   if (missing(col)) col <- seq_len(ncol(ht))
-  
+
   rc <- list()
   rc$row <- get_rc_spec(ht, row, 1)
   rc$col <- get_rc_spec(ht, col, 2)
-  
-  # Compute value based on whether we're mapping or setting
+
+  # Compute value if we are mapping
   if (!is.null(fn)) {
     current <- attr(ht, prop)[rc$row, rc$col, drop = FALSE]
     if (is_huxtable(current)) current <- as.matrix(current)
     value <- fn(ht, rc$row, rc$col, current)
-    is_mapping <- TRUE
-  } else {
-    is_mapping <- FALSE
   }
-  
+
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[rc$row, rc$col] <- value
-  
+
   # Coerce mode when setting entire property with simple values
   # But preserve list-matrix structure for properties that need it
-  if (!is_mapping && 
-      identical(rc$row, seq_len(nrow(ht))) && 
+  if (identical(rc$row, seq_len(nrow(ht))) &&
       identical(rc$col, seq_len(ncol(ht))) &&
-      !is.list(value) && !inherits(value, "brdr") &&
-      !grepl("border", prop) &&
       !is.list(attr(ht, prop))) {
     mode(attr(ht, prop)) <- mode(value)
   }
@@ -206,13 +198,10 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[row] <- value
-  
+
   # Coerce mode if setting entire property and value is a simple vector
-  # But preserve list-matrix structure for properties that need it
   if (coerce_mode && identical(row, seq_len(nrow(ht)))) {
-    if (!is.list(value) && !inherits(value, "brdr") && !is.list(attr(ht, prop))) {
-      mode(attr(ht, prop)) <- mode(value)
-    }
+    mode(attr(ht, prop)) <- mode(value)
   }
   ht
 }
@@ -233,13 +222,10 @@ prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
   attr(ht, prop)[col] <- value
-  
+
   # Coerce mode if setting entire property and value is a simple vector
-  # But preserve list-matrix structure for properties that need it
   if (coerce_mode && identical(col, seq_len(ncol(ht)))) {
-    if (!is.list(value) && !inherits(value, "brdr") && !is.list(attr(ht, prop))) {
-      mode(attr(ht, prop)) <- mode(value)
-    }
+    mode(attr(ht, prop)) <- mode(value)
   }
   ht
 }
