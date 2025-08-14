@@ -124,24 +124,20 @@ test_that("huxreg borders argument works", {
   hr <- huxreg(lm1, lm2, borders = .7, outer_borders = .8)
   expect_equal(
     unname(brdr_thickness(bottom_border(hr))[, 2]),
-    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0),
-    ignore_attr = TRUE
+    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0)
   )
   expect_equal(
     unname(brdr_thickness(top_border(hr))[1, ]),
-    matrix(0.8, 1, 3),
-    ignore_attr = TRUE
+    matrix(0.8, 1, 3)
   )
   hr2 <- huxreg(lm1, lm2, borders = 0, outer_borders = 0)
   expect_equal(
     unname(brdr_thickness(bottom_border(hr2)[])),
-    matrix(0, nrow(hr2), ncol(hr2)),
-    ignore_attr = TRUE
+    matrix(0, nrow(hr2), ncol(hr2))
   )
   expect_equal(
     unname(brdr_thickness(top_border(hr2)[])),
-    matrix(0, nrow(hr2), ncol(hr2)),
-    ignore_attr = TRUE
+    matrix(0, nrow(hr2), ncol(hr2))
   )
 })
 
@@ -228,16 +224,16 @@ test_that("tidy_override", {
 
   fakes <- c(0.0001, 0.048)
   fixed_lm1 <- tidy_override(lm1, p.value = fakes, glance = list(r.squared = 0.95))
-  expect_equal(broom::tidy(fixed_lm1)$p.value, fakes, ignore_attr = TRUE)
-  expect_equal(broom::glance(fixed_lm1)$r.squared, 0.95, ignore_attr = TRUE)
+  expect_equal(broom::tidy(fixed_lm1)$p.value, fakes)
+  expect_equal(broom::glance(fixed_lm1)$r.squared, 0.95)
 
   lm1_newcol <- tidy_override(lm1, foo = 1:2, glance = list(bar = 1))
   expect_error(broom::tidy(lm1_newcol), "not found")
   expect_error(broom::glance(lm1_newcol), "not found")
 
   lm1_newcol <- tidy_override(lm1, foo = 1:2, glance = list(bar = 1), extend = TRUE)
-  expect_equal(broom::tidy(lm1_newcol)$foo, 1:2, ignore_attr = TRUE)
-  expect_equal(broom::glance(lm1_newcol)$bar, 1, ignore_attr = TRUE)
+  expect_equal(broom::tidy(lm1_newcol)$foo, 1:2)
+  expect_equal(broom::glance(lm1_newcol)$bar, 1)
 
   expect_error(tidy_override(lm1, foo = 1:2, bar = 1:3),
     info = "Unequal length tidy_override columns should throw an error"
@@ -265,7 +261,7 @@ test_that("glance.tidy_override works if underlying object has no glance() metho
   lm1 <- lm(Sepal.Width ~ Sepal.Length, data = iris)
   ct1 <- lmtest::coeftest(lm1)
   fixed_ct1 <- tidy_override(ct1, glance = list(foo = 1.3), extend = TRUE)
-  expect_equal(broom::glance(fixed_ct1)$foo, 1.3, ignore_attr = TRUE)
+  expect_equal(broom::glance(fixed_ct1)$foo, 1.3)
 })
 
 
@@ -277,5 +273,5 @@ test_that("tidy.tidy_override works if underlying object has no tidy() method", 
     estimate = c(1, 2),
     extend = TRUE
   )
-  expect_equal(broom::tidy(tidy_monster)$term, c("a", "monster"), ignore_attr = TRUE)
+  expect_equal(broom::tidy(tidy_monster)$term, c("a", "monster"))
 })

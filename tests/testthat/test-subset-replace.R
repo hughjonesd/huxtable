@@ -34,7 +34,7 @@ test_that("Zero-argument [<-", {
 test_that("Subsetting preserves rownames", {
   ht <- huxtable(a = 1:3, b = 1:3, add_colnames = FALSE)
   rownames(ht) <- letters[1:3]
-  expect_equal(rownames(ht[1:2, ]), letters[1:2], ignore_attr = TRUE)
+  expect_equal(rownames(ht[1:2, ]), letters[1:2])
 })
 
 
@@ -72,32 +72,32 @@ test_that("Add columns by standard replacement methods", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht$c <- 1:2)
   expect_equal(font(ht), matrix(NA_character_, 2, 3), ignore_attr = TRUE)
-  expect_equal(colnames(ht), c("a", "b", "c"), ignore_attr = TRUE)
+  expect_equal(colnames(ht), c("a", "b", "c"))
   expect_equal(col_width(ht), rep(NA_real_, 3), ignore_attr = TRUE)
 
   ht2 <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht2[, "c"] <- 1:2)
   expect_equal(font(ht2), matrix(NA_character_, 2, 3), ignore_attr = TRUE)
-  expect_equal(colnames(ht2), c("a", "b", "c"), ignore_attr = TRUE)
+  expect_equal(colnames(ht2), c("a", "b", "c"))
   expect_equal(col_width(ht2), rep(NA_real_, 3), ignore_attr = TRUE)
 
   ht3 <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht3[["c"]] <- 1:2)
   expect_equal(font(ht3), matrix(NA_character_, 2, 3), ignore_attr = TRUE)
-  expect_equal(colnames(ht3), c("a", "b", "c"), ignore_attr = TRUE)
+  expect_equal(colnames(ht3), c("a", "b", "c"))
   expect_equal(col_width(ht3), rep(NA_real_, 3), ignore_attr = TRUE)
 
   ht4 <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht4[3:4] <- matrix(1:4, 2, 2))
-  expect_equal(dim(ht4), c(2, 4), ignore_attr = TRUE)
+  expect_equal(dim(ht4), c(2, 4))
 
   ht5 <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht5[, 3:4] <- matrix(1:4, 2, 2))
-  expect_equal(dim(ht5), c(2, 4), ignore_attr = TRUE)
+  expect_equal(dim(ht5), c(2, 4))
 
   ht6 <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht6[3:4, ] <- matrix(1:4, 2, 2))
-  expect_equal(dim(ht6), c(4, 2), ignore_attr = TRUE)
+  expect_equal(dim(ht6), c(4, 2))
 })
 
 
@@ -155,9 +155,9 @@ test_that("Add row(s) by standard replacement methods", {
 test_that("[[<-", {
   ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)
   expect_silent(ht[[1, 1]] <- 0)
-  expect_equal(ht[[1, 1]], 0, ignore_attr = TRUE)
+  expect_equal(ht[[1, 1]], 0)
   expect_silent(ht[[2, "b"]] <- 0)
-  expect_equal(ht[[2, 2]], 0, ignore_attr = TRUE)
+  expect_equal(ht[[2, 2]], 0)
 })
 
 

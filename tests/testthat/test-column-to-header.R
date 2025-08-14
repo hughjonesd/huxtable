@@ -24,5 +24,5 @@ test_that("column_to_header arguments work", {
   iris_hux <- as_hux(iris, add_colnames = FALSE)[c(1:3, 51:53, 101:103), ]
   expect_silent(iris_hux <- column_to_header(iris_hux, "Species", start_col = 3))
   expect_equal(as.character(contents(iris_hux)[1, 3]), "setosa")
-  expect_equal(colspan(iris_hux)[1, 3], 2, ignore_attr = TRUE)
+  expect_equal(colspan(iris_hux)[1, 3], 2)
 })

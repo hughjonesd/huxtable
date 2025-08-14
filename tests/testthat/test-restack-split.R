@@ -90,15 +90,13 @@ test_that("restack headers", {
   expect_silent(wide_jams <- restack_across(jams_l, 3))
   expect_equal(
     as.character(wide_jams[1, ]),
-    rep(c("Type", "Price"), 2),
-    ignore_attr = TRUE
+    rep(c("Type", "Price"), 2)
   )
   expect_equal(header_rows(wide_jams), c(TRUE, FALSE, FALSE), ignore_attr = TRUE)
 
   expect_silent(jw2 <- restack_across(jams, 2, headers = FALSE))
   expect_equal(
     as.character(jw2[1, 1:3]),
-    c("Type", "Price", "Raspberry"),
-    ignore_attr = TRUE
+    c("Type", "Price", "Raspberry")
   )
 })

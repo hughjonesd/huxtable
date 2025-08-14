@@ -122,9 +122,9 @@ test_that("create huxtable from table", {
   tbl <- table(mtcars$gear, mtcars$cyl)
   expect_silent(ht <- as_hux(tbl))
   expect_s3_class(ht, "huxtable")
-  expect_equal(ht[[1]][-1], rownames(tbl), ignore_attr = TRUE)
+  expect_equal(ht[[1]][-1], rownames(tbl))
   expect_equal(as.character(unlist(ht[1, -1])), colnames(tbl))
-  expect_equal(ht[[1, 1]], "", ignore_attr = TRUE) # check no "rownames" in top left
+  expect_equal(ht[[1, 1]], "") # check no "rownames" in top left
 })
 
 
@@ -153,5 +153,5 @@ test_that("create huxtable from grouped_df", {
   expect_silent(iris_hux <- as_hux(iris_grp))
 
   iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE, add_colnames = TRUE)
-  expect_equal(contents(iris_hux2)[[2, 1]], "Species: setosa", ignore_attr = TRUE)
+  expect_equal(contents(iris_hux2)[[2, 1]], "Species: setosa")
 })

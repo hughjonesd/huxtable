@@ -4,13 +4,13 @@ local_edition(3)
 test_that("Can use style_cells", {
   htxx <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   ht2 <- style_cells(htxx, 1, 1, font = "times", font_size = 24)
-  expect_equal(font(ht2)[1, 1], "times", ignore_attr = TRUE)
-  expect_equal(font_size(ht2)[1, 1], 24, ignore_attr = TRUE)
+  expect_equal(font(ht2)[1, 1], "times")
+  expect_equal(font_size(ht2)[1, 1], 24)
   r <- 2
   c <- 1
   ht3 <- set_cell_properties(htxx, r, c, bold = TRUE, font = "times")
-  expect_equal(bold(ht3)[2, 1], TRUE, ignore_attr = TRUE)
-  expect_equal(font(ht3)[2, 1], "times", ignore_attr = TRUE)
+  expect_equal(bold(ht3)[2, 1], TRUE)
+  expect_equal(font(ht3)[2, 1], "times")
 })
 
 test_that("Bugfix: style_cells works when huxtable not attached", {

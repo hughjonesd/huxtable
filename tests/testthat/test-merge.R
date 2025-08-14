@@ -72,13 +72,13 @@ test_that("merge_repeated_rows", {
 test_that("Bug: merge_repeated_rows with NA", {
   ht <- hux(c("a", NA_character_, "b", "c"), add_colnames = FALSE)  # Keep clean for merge testing
   ht <- merge_repeated_rows(ht)
-  expect_equal(c(rowspan(ht)), c(1, 1, 1, 1), ignore_attr = TRUE)
+  expect_equal(c(rowspan(ht)), c(1, 1, 1, 1))
 
   ht2 <- hux(c("a", NA_character_, NA_character_, "b"), add_colnames = FALSE)  # Keep clean for merge testing
   ht2 <- merge_repeated_rows(ht2)
-  expect_equal(c(rowspan(ht2)), c(1, 2, 1, 1), ignore_attr = TRUE)
+  expect_equal(c(rowspan(ht2)), c(1, 2, 1, 1))
 
   ht3 <- hux(c(NA_character_, "b", "b"), add_colnames = FALSE)  # Keep clean for merge testing
   ht3 <- merge_repeated_rows(ht3)
-  expect_equal(c(rowspan(ht3)), c(1, 2, 1), ignore_attr = TRUE)
+  expect_equal(c(rowspan(ht3)), c(1, 2, 1))
 })
