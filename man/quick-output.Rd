@@ -130,8 +130,10 @@ command line tool.
 \code{quick_typst_pdf()} with e.g. \code{file = "foo.pdf"} will overwrite and delete
 the file \code{foo.typ}.
 
-\code{quick_typst_png()} creates one PNG per huxtable. Existing files with the same
-\code{file} prefix will be overwritten after confirmation in interactive sessions.
+\code{quick_typst_png()} creates one PNG per huxtable. If there is more than
+one object in \code{...}, PNGs will have a numeric suffix like \verb{"-1", "-2"} etc.
+Existing files with the same \code{file} prefix will be overwritten after
+confirmation in interactive sessions.
 }
 \examples{
 \dontrun{

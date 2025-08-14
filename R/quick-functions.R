@@ -171,8 +171,10 @@ quick_typst_pdf <- function(
 #' @export
 #' @param ppi Pixels per inch for PNG output.
 #' @details
-#' `quick_typst_png()` creates one PNG per huxtable. Existing files with the same
-#' `file` prefix will be overwritten after confirmation in interactive sessions.
+#' `quick_typst_png()` creates one PNG per huxtable. If there is more than
+#' one object in `...`, PNGs will have a numeric suffix like `"-1", "-2"` etc.
+#' Existing files with the same `file` prefix will be overwritten after
+#' confirmation in interactive sessions.
 quick_typst_png <- function(
     ..., file = confirm_prefix("huxtable-output"), borders = 0.4,
     open = interactive(), width = NULL, height = NULL, ppi = NULL) {
@@ -188,7 +190,11 @@ quick_typst_png <- function(
   typst_file <- tempfile(fileext = ".typ")
   do_write_typst_file(hts, typst_file, width, height, page_break = TRUE)
 
-  out_template <- paste0(file, "-{0p}.png")
+  out_template <- if (length(hts) == 1L) {
+    paste0(file, ".png")
+  } else {
+    paste0(file, "-{0p}.png")
+  }
   args <- c("compile", typst_file, out_template, "--format", "png")
   if (!is.null(ppi)) args <- c(args, "--ppi", as.character(ppi))
 
@@ -207,7 +213,11 @@ quick_typst_png <- function(
 
   if (open) {
     files <- list.files(dirname(file), pattern = paste0("^", basename(file), ".*\\.png$"), full.names = TRUE)
-    if (length(files) > 0) auto_open(files[1])
+    max_to_open <- min(5, length(files))
+    if (length(files) > max_to_open) {
+      warning("Opening just the first ", max_to_open, " of ", length(files), " files")
+    }
+    lapply(files[seq_len(max_to_open)], auto_open)
   }
   invisible(NULL)
 }
