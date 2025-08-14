@@ -188,7 +188,14 @@ quick_typst_png <- function(
   force(file)
   hts <- huxtableize(list(...), borders)
   extra_args <- if (!is.null(ppi)) c("--ppi", as.character(ppi)) else character()
-  do_quick_typst_images(hts, file, open, width, height, "png", extra_args)
+  do_quick_typst_images(hts,
+    file       = file,
+    open       = open,
+    width      = width,
+    height     = height,
+    format     = "png",
+    extra_args = extra_args
+  )
 }
 
 #' @rdname quick-output
@@ -203,7 +210,13 @@ quick_typst_svg <- function(
   )
   force(file)
   hts <- huxtableize(list(...), borders)
-  do_quick_typst_images(hts, file, open, width, height, "svg")
+  do_quick_typst_images(hts,
+    file   = file,
+    open   = open,
+    width  = width,
+    height = height,
+    format = "svg"
+  )
 }
 
 
