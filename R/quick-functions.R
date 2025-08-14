@@ -177,12 +177,13 @@ quick_html <- function(
   loc <- Sys.getlocale("LC_COLLATE")
   loc <- strsplit(loc, ".", fixed = TRUE)[[1]]
   loc[1] <- gsub("_", "-", loc[1], fixed = TRUE)
+  loc <- ifelse(is.na(loc), "", loc)
   sink(file)
   cat("<!DOCTYPE html>",
     sprintf("<html lang=\"%s\">", loc[1]),
     sprintf(
-      "<head><meta charset=\"%s\"><title>%s</title></head>",
-      loc[2], file
+      "<head><meta charset=\"%s\"><title>quick_html() output</title></head>",
+      loc[2]
     ),
     "<body>\n",
     sep = "\n"
