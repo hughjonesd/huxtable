@@ -253,7 +253,7 @@ test_that("tidy_replace", {
   tidied <- broom::tidy(mnl)
   mnl4 <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
 
-  expect_equal(nrow(broom::tidy(mnl4)), 2, ignore_attr = TRUE)
+  expect_equal(nrow(broom::tidy(mnl4)), 2)
   expect_identical(broom::glance(mnl4), broom::glance(mnl))
   expect_silent(huxreg(mnl4, statistics = "nobs"))
 })

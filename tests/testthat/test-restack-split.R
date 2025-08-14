@@ -72,9 +72,9 @@ test_that("split width/height", {
 test_that("basic restack", {
   square <- as_hux(matrix(1:16, 4, 4))
   expect_silent(wide <- restack_across(square, 2))
-  expect_equal(dim(wide), c(2, 8), ignore_attr = TRUE)
+  expect_equal(dim(wide), c(2, 8))
   expect_silent(long <- restack_down(square, 2))
-  expect_equal(dim(long), c(8, 2), ignore_attr = TRUE)
+  expect_equal(dim(long), c(8, 2))
 
   expect_warning(restack_across(square, 3))
   expect_warning(restack_down(square, 3))

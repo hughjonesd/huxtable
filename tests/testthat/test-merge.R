@@ -54,6 +54,7 @@ test_that("merge_repeated_rows", {
   ht8 <- merge_repeated_rows(ht, final(2), "a")
   expect_equal(rowspan(ht8), matrix(c(1, 2, 1, 1, 1, 1, 1, 1, 1), 3, 3), ignore_attr = TRUE)
 
+  # These should warn about non-contiguous rows (suppressing the warnings from testthat display)
   expect_warning(merge_repeated_rows(ht, ht$c %in% c(1, 3), "a"))
   expect_warning(merge_repeated_rows(ht, c(1, 3), "a"))
 

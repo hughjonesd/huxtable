@@ -1,4 +1,4 @@
-local_edition(3)
+local_edition(2)
 
 
 # how to debug

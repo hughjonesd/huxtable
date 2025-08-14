@@ -66,7 +66,7 @@ test_that("Can assign numeric to width, col_width etc. after assigning character
   number_format(ht) <- 2L
   nf <- number_format(ht)
   expect_equal(mode(nf[1, 1][[1]]), "numeric")
-  expect_equal(dim(nf), dim(ht), ignore_attr = TRUE)
+  expect_equal(dim(nf), dim(ht))
 })
 
 
@@ -85,11 +85,11 @@ test_that("align, position and caption_pos change \"centre\" to \"center\"", {
   expect_equal(align(ht), matrix("center", 1, 1), ignore_attr = TRUE)
 
   position(ht) <- "centre"
-  expect_equal(position(ht), "center", ignore_attr = TRUE)
+  expect_equal(position(ht), "center")
   caption_pos(ht) <- "topcentre"
-  expect_equal(caption_pos(ht), "topcenter", ignore_attr = TRUE)
+  expect_equal(caption_pos(ht), "topcenter")
   caption_pos(ht) <- "bottomcentre"
-  expect_equal(caption_pos(ht), "bottomcenter", ignore_attr = TRUE)
+  expect_equal(caption_pos(ht), "bottomcenter")
 })
 
 

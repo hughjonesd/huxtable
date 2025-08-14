@@ -4,7 +4,7 @@ local_edition(3)
 test_that("create huxtable using hux[table]()", {
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3))
   expect_silent(ht2 <- hux(a = 1:3, b = 1:3))
-  expect_is(ht, "huxtable")
+  expect_s3_class(ht, "huxtable")
   expect_equal(ncol(ht), 2)
   expect_equal(nrow(ht), 4)  # Now includes header row
   expect_identical(ht, ht2)
@@ -22,7 +22,7 @@ test_that("add_colnames", {
 test_that("add_rownames", {
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = TRUE))
   expect_equal(ncol(ht), 3)
-  expect_equal(colnames(ht), c("rownames", "a", "b"), ignore_attr = TRUE)
+  expect_equal(colnames(ht), c("rownames", "a", "b"))
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = FALSE))
   expect_equal(ncol(ht), 2)
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = "foo"))
@@ -49,10 +49,10 @@ test_that("create huxtable using tribble_hux()", {
       3, "c",
       add_colnames = addc
     ))
-    expect_is(ht, "huxtable")
+    expect_s3_class(ht, "huxtable")
     expect_equal(nrow(ht), 3 + addc)
     expect_equal(ncol(ht), 2)
-    expect_equal(colnames(ht), c("a", "b"), ignore_attr = TRUE)
+    expect_equal(colnames(ht), c("a", "b"))
   }
 })
 
@@ -61,7 +61,7 @@ test_that("create huxtable from data frame", {
   dfr <- data.frame(a = 1:3, b = 1:3)
   expect_silent(ht <- as_hux(dfr))
   expect_silent(ht2 <- as_huxtable(dfr))
-  expect_is(ht, "huxtable")
+  expect_s3_class(ht, "huxtable")
   expect_identical(ht, huxtable(a = 1:3, b = 1:3))
   expect_identical(ht, ht2)
 })
@@ -121,7 +121,7 @@ test_that("create huxtable from vector", {
 test_that("create huxtable from table", {
   tbl <- table(mtcars$gear, mtcars$cyl)
   expect_silent(ht <- as_hux(tbl))
-  expect_is(ht, "huxtable")
+  expect_s3_class(ht, "huxtable")
   expect_equal(ht[[1]][-1], rownames(tbl), ignore_attr = TRUE)
   expect_equal(as.character(unlist(ht[1, -1])), colnames(tbl))
   expect_equal(ht[[1, 1]], "", ignore_attr = TRUE) # check no "rownames" in top left
