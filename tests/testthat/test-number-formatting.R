@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 setup({
@@ -17,112 +17,130 @@ test_that("Can combine numbers and characters in number_format", {
   number_format(ht)[2, ] <- 1
   number_format(ht)[3, ] <- list(function(x) ifelse(x > 0, "+", "-"))
   number_format(ht)[4, ] <- NA
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1.111")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[2, 1], "1.1")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[3, 1], "+")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[4, 1], "1.11111")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[1, 1], "1.111", check.attributes = FALSE)
+  expect_equal(huxtable:::clean_contents(ht, "latex")[2, 1], "1.1", check.attributes = FALSE)
+  expect_equal(huxtable:::clean_contents(ht, "latex")[3, 1], "+", check.attributes = FALSE)
+  expect_equal(huxtable:::clean_contents(ht, "latex")[4, 1], "1.11111", check.attributes = FALSE)
 })
 
 
 test_that("number_format works on cells with multiple numbers", {
   ht <- huxtable(a = "1 2.3556, some text; -33 -44.8908", add_colnames = FALSE)
   number_format(ht)[1, 1] <- 1
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1.0 2.4, some text; -33.0 -44.9")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[1, 1], "1.0 2.4, some text; -33.0 -44.9", check.attributes = FALSE)
   number_format(ht)[1, 1] <- "%3.3f"
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1.000 2.356, some text; -33.000 -44.891")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[1, 1], "1.000 2.356, some text; -33.000 -44.891", check.attributes = FALSE)
   number_format(ht)[1, 1] <- list(function(x) ifelse(x > 0, "+", "-"))
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "+ +, some text; - -")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[1, 1], "+ +, some text; - -", check.attributes = FALSE)
 })
 
 
 test_that("number_format treats scientific notation equivalently to sprintf", {
   ht <- huxtable(c("1.12e3", "1.12E3", "1.12e7", "1.12e-3", "1.12A3", "1.12e3 4.8 and 5.6"), add_colnames = FALSE)
   number_format(ht) <- 4
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[1, 1], "1120.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[2, 1], "1120.0000")
-  expect_equivalent(
+  expect_equal(huxtable:::clean_contents(ht, "latex")[1, 1], "1120.0000", check.attributes = FALSE)
+  expect_equal(huxtable:::clean_contents(ht, "latex")[2, 1], "1120.0000", check.attributes = FALSE)
+  expect_equal(
     huxtable:::clean_contents(ht, "latex")[3, 1],
-    "11200000.0000"
+    "11200000.0000",
+    check.attributes = FALSE
   )
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[4, 1], "0.0011")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[4, 1], "0.0011", check.attributes = FALSE)
   # the next is not scientific notation so both numbers should be affected
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[5, 1], "1.1200A3.0000")
-  expect_equivalent(huxtable:::clean_contents(ht, "latex")[6, 1], "1120.0000 4.8000 and 5.6000")
+  expect_equal(huxtable:::clean_contents(ht, "latex")[5, 1], "1.1200A3.0000", check.attributes = FALSE)
+  expect_equal(huxtable:::clean_contents(ht, "latex")[6, 1], "1120.0000 4.8000 and 5.6000", check.attributes = FALSE)
 })
 
 
 test_that("number_format works with various interesting cases", {
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234", "%.3f"),
-    "1.123"
+    "1.123",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1", "%.3f"),
-    "1.000"
+    "1.000",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1 2 3", "%.3f"),
-    "1.000 2.000 3.000"
+    "1.000 2.000 3.000",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1 -2 -3.1 -.4 .5", "%.3f"),
-    "1.000 -2.000 -3.100 -0.400 0.500"
+    "1.000 -2.000 -3.100 -0.400 0.500",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234-1.1234", "%.3f"),
-    "1.123-1.123"
+    "1.123-1.123",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e-2", "%.3f"),
-    "0.011"
+    "0.011",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e-12", "%.3f"),
-    "0.000"
+    "0.000",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e12", "%.3f"),
-    "1123400000000.000"
+    "1123400000000.000",
+    check.attributes = FALSE
   )
   # Make sure user can actually request scientific notation if desired
   # ("e" format) or get them as needed ("g" format)
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e12", "%.3g"),
-    "1.12e+12"
+    "1.12e+12",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e8 3", "%.3f"),
-    "112340000.000 3.000"
+    "112340000.000 3.000",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e8 3", "%.3g"),
-    "1.12e+08 3"
+    "1.12e+08 3",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("1.1234e8 3", "%.1e"),
-    "1.1e+08 3.0e+00"
+    "1.1e+08 3.0e+00",
+    check.attributes = FALSE
   )
   # this is pretty brutal:
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("-1.1e3-1.2e3", "%.3f"),
-    "-1100.000-1200.000"
+    "-1100.000-1200.000",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("-1.1e-3-1.2e3", "%.3f"),
-    "-0.001-1200.000"
+    "-0.001-1200.000",
+    check.attributes = FALSE
   )
   # Signed zeroes
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("-1.1e-3", "%.1f"),
-    "-0.0"
+    "-0.0",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("-1.1e-3", "%.1g"),
-    "-0.001"
+    "-0.001",
+    check.attributes = FALSE
   )
-  expect_equivalent(
+  expect_equal(
     huxtable:::format_numbers("-1.1e-3", 1),
-    "-0.0"
+    "-0.0",
+    check.attributes = FALSE
   )
 })
 

@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 test_that("split_across", {
@@ -44,13 +44,15 @@ test_that("split width/height", {
   col_width(square) <- c(.2, .3, .3, .2)
   row_height(square) <- c(.2, .3, .3, .2)
 
-  expect_equivalent(
+  expect_equal(
     split_down(square, after = 2),
-    split_down(square, width = 0.5)
+    split_down(square, width = 0.5),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     split_across(square, after = 2),
-    split_across(square, height = 0.5)
+    split_across(square, height = 0.5),
+    ignore_attr = TRUE
   )
 
   expect_error(split_across(square, height = .25, after = 2))
@@ -70,9 +72,9 @@ test_that("split width/height", {
 test_that("basic restack", {
   square <- as_hux(matrix(1:16, 4, 4))
   expect_silent(wide <- restack_across(square, 2))
-  expect_equivalent(dim(wide), c(2, 8))
+  expect_equal(dim(wide), c(2, 8), ignore_attr = TRUE)
   expect_silent(long <- restack_down(square, 2))
-  expect_equivalent(dim(long), c(8, 2))
+  expect_equal(dim(long), c(8, 2), ignore_attr = TRUE)
 
   expect_warning(restack_across(square, 3))
   expect_warning(restack_down(square, 3))
@@ -86,15 +88,17 @@ test_that("basic restack", {
 test_that("restack headers", {
   jams_l <- jams[c(1, 2, 3, 4, 4), ]
   expect_silent(wide_jams <- restack_across(jams_l, 3))
-  expect_equivalent(
+  expect_equal(
     as.character(wide_jams[1, ]),
-    rep(c("Type", "Price"), 2)
+    rep(c("Type", "Price"), 2),
+    ignore_attr = TRUE
   )
-  expect_equivalent(header_rows(wide_jams), c(TRUE, FALSE, FALSE))
+  expect_equal(header_rows(wide_jams), c(TRUE, FALSE, FALSE), ignore_attr = TRUE)
 
   expect_silent(jw2 <- restack_across(jams, 2, headers = FALSE))
-  expect_equivalent(
+  expect_equal(
     as.character(jw2[1, 1:3]),
-    c("Type", "Price", "Raspberry")
+    c("Type", "Price", "Raspberry"),
+    ignore_attr = TRUE
   )
 })

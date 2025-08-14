@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 test_that("to_screen gives warning with colour if crayon not installed", {

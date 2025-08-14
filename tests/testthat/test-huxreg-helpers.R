@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 if (!requireNamespace("broom", quietly = TRUE)) {
   testthat::skip("broom package is required for huxreg helper tests")

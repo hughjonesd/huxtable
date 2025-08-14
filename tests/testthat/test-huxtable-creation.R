@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 test_that("create huxtable using hux[table]()", {
@@ -22,7 +22,7 @@ test_that("add_colnames", {
 test_that("add_rownames", {
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = TRUE))
   expect_equal(ncol(ht), 3)
-  expect_equivalent(colnames(ht), c("rownames", "a", "b"))
+  expect_equal(colnames(ht), c("rownames", "a", "b"), ignore_attr = TRUE)
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = FALSE))
   expect_equal(ncol(ht), 2)
   expect_silent(ht <- huxtable(a = 1:3, b = 1:3, add_rownames = "foo"))
@@ -34,8 +34,8 @@ test_that("add_rownames", {
 test_that("add_colnames with as_huxtable.matrix", {
   mat <- matrix(1:4, 2, 2, dimnames = list(letters[1:2], LETTERS[1:2]))
   ht <- as_hux(mat, add_colnames = TRUE, add_rownames = TRUE)
-  expect_equivalent(ht[1, 2:3], colnames(mat))
-  expect_equivalent(ht$rownames[2:3], rownames(mat))
+  expect_equal(as.character(ht[1, 2:3]), colnames(mat))
+  expect_equal(ht$rownames[2:3], rownames(mat), ignore_attr = TRUE)
 })
 
 
@@ -52,7 +52,7 @@ test_that("create huxtable using tribble_hux()", {
     expect_is(ht, "huxtable")
     expect_equal(nrow(ht), 3 + addc)
     expect_equal(ncol(ht), 2)
-    expect_equivalent(colnames(ht), c("a", "b"))
+    expect_equal(colnames(ht), c("a", "b"), ignore_attr = TRUE)
   }
 })
 
@@ -80,25 +80,25 @@ test_that("autoformat", {
   ht <- as_hux(dfr, autoformat = TRUE, add_colnames = TRUE)
 
   for (x in c("character", "Date", "POSIXct", "POSIXlt")) {
-    expect_equivalent(number_format(ht)[2, x], NA)
+    expect_equal(number_format(ht)[[2, x]], NA)
   }
   for (x in c("numeric", "complex")) {
-    expect_equivalent(number_format(ht)[2, x], "%.3g")
+    expect_equal(number_format(ht)[[2, x]], "%.3g")
   }
-  expect_equivalent(number_format(ht)[2, "integer"], 0)
+  expect_equal(number_format(ht)[[2, "integer"]], 0)
 
-  expect_equivalent(number_format(ht)[1, ], rep(NA, ncol(dfr)))
+  expect_equal(as.vector(unlist(number_format(ht)[1, ])), rep(NA, ncol(dfr)))
 
   for (x in c("integer", "Date", "POSIXct", "POSIXlt")) {
     # column heading alignment same:
-    expect_equivalent(align(ht)[1:2, x], rep("right", 2))
+    expect_equal(as.vector(align(ht)[1:2, x]), rep("right", 2))
   }
   for (x in c("numeric", "complex")) {
-    expect_equivalent(align(ht)[2, x], getOption("OutDec"))
+    expect_equal(align(ht)[2, x], getOption("OutDec"), ignore_attr = TRUE)
     # headings right aligned:
-    expect_equivalent(align(ht)[1, x], "right")
+    expect_equal(align(ht)[1, x], "right", ignore_attr = TRUE)
   }
-  expect_equivalent(align(ht)[1:2, "character"], rep("left", 2))
+  expect_equal(as.vector(align(ht)[1:2, "character"]), rep("left", 2))
 })
 
 
@@ -122,9 +122,9 @@ test_that("create huxtable from table", {
   tbl <- table(mtcars$gear, mtcars$cyl)
   expect_silent(ht <- as_hux(tbl))
   expect_is(ht, "huxtable")
-  expect_equivalent(ht[[1]][-1], rownames(tbl))
-  expect_equivalent(unlist(ht[1, -1]), colnames(tbl))
-  expect_equivalent(ht[[1, 1]], "") # check no "rownames" in top left
+  expect_equal(ht[[1]][-1], rownames(tbl), ignore_attr = TRUE)
+  expect_equal(as.character(unlist(ht[1, -1])), colnames(tbl))
+  expect_equal(ht[[1, 1]], "", ignore_attr = TRUE) # check no "rownames" in top left
 })
 
 
@@ -153,5 +153,5 @@ test_that("create huxtable from grouped_df", {
   expect_silent(iris_hux <- as_hux(iris_grp))
 
   iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE, add_colnames = TRUE)
-  expect_equivalent(contents(iris_hux2)[[2, 1]], "Species: setosa")
+  expect_equal(contents(iris_hux2)[[2, 1]], "Species: setosa", ignore_attr = TRUE)
 })

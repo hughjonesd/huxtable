@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 test_that("install/report_latex_dependencies", {
   skip_if_not_installed("tinytex")
@@ -37,7 +37,7 @@ test_that("check_latex_dependencies checks adjustbox", {
     tlmgr = function(...) "1.0",
   )
   expect_warning(check_adjustbox(quiet = FALSE), "adjustbox")
-  expect_equivalent(check_adjustbox(), FALSE)
+  expect_equal(check_adjustbox(), FALSE)
 })
 
 
