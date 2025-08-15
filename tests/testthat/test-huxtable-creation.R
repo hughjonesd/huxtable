@@ -94,9 +94,9 @@ test_that("autoformat", {
     expect_equal(as.vector(align(ht)[1:2, x]), rep("right", 2))
   }
   for (x in c("numeric", "complex")) {
-    expect_equal(align(ht)[2, x], getOption("OutDec"), ignore_attr = TRUE)
+    expect_equal(align(ht)[2, x], getOption("OutDec"))
     # headings right aligned:
-    expect_equal(align(ht)[1, x], "right", ignore_attr = TRUE)
+    expect_equal(align(ht)[1, x], "right")
   }
   expect_equal(as.vector(align(ht)[1:2, "character"]), rep("left", 2))
 })
