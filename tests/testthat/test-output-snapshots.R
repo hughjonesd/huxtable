@@ -203,11 +203,11 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
   for (nm in names(tables)) {
-    # Use tempdir() with fixed filename to avoid random filename changes
+    # Use fixed path to avoid any randomness in filenames
     if (file_ext == "" && grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
-      f <- file.path(tempdir(), nm)
+      f <- file.path("/tmp", nm)
     } else {
-      f <- file.path(tempdir(), paste0(nm, file_ext))
+      f <- file.path("/tmp", paste0(nm, file_ext))
     }
 
     # Generate output
