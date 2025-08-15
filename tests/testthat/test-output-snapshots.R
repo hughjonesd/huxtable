@@ -379,7 +379,8 @@ test_that("screen snapshots", {
     
     output <- capture.output({
       for (obj in args) {
-        cat(to_screen(obj, min_width = 20, max_width = 80))
+        # Force color output to capture ANSI codes
+        cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE))
         cat("\n\n")
       }
     })
