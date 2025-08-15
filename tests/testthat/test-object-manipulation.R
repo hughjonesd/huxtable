@@ -57,19 +57,19 @@ test_that("rbind and cbind work and copy properties", {
 
   expect_silent(ht_rbind <- rbind(ht, c(3, 3), copy_cell_props = TRUE))
   expect_equal(row_height(ht_rbind), c("1in", "2in", "2in"), ignore_attr = TRUE)
-  expect_equal(italic(ht_rbind), matrix(TRUE, 3, 2))
+  expect_equal(italic(ht_rbind), matrix(TRUE, 3, 2), ignore_attr = TRUE)
 
   ht_rbind <- rbind(ht, c(3, 3), copy_cell_props = FALSE)
   expect_equal(row_height(ht_rbind), c("1in", "2in", NA), ignore_attr = TRUE)
-  expect_equal(italic(ht_rbind)[3, ], c(FALSE, FALSE))
+  expect_equal(italic(ht_rbind)[3, ], c(FALSE, FALSE), ignore_attr = TRUE)
 
   expect_silent(ht_cbind <- cbind(ht, 1:2, copy_cell_props = TRUE))
   expect_equal(col_width(ht_cbind), c("2cm", "1cm", "1cm"), ignore_attr = TRUE)
-  expect_equal(italic(ht_cbind), matrix(TRUE, 2, 3))
+  expect_equal(italic(ht_cbind), matrix(TRUE, 2, 3), ignore_attr = TRUE)
 
   ht_cbind <- cbind(ht, 1:2, copy_cell_props = FALSE)
   expect_equal(col_width(ht_cbind), c("2cm", "1cm", NA), ignore_attr = TRUE)
-  expect_equal(italic(ht_cbind)[, 3], c(FALSE, FALSE))
+  expect_equal(italic(ht_cbind)[, 3], c(FALSE, FALSE), ignore_attr = TRUE)
 })
 
 
@@ -82,9 +82,9 @@ test_that("rbind and cbind make numeric row_height/col_width sum to 1", {
   col_width(ht2) <- c(.5, .5)
 
   ht_cbind <- cbind(ht, ht2)
-  expect_equal(col_width(ht_cbind), rep(.25, 4))
+  expect_equal(col_width(ht_cbind), rep(.25, 4), ignore_attr = TRUE)
   ht_rbind <- rbind(ht, ht2)
-  expect_equal(row_height(ht_rbind), rep(.25, 4))
+  expect_equal(row_height(ht_rbind), rep(.25, 4), ignore_attr = TRUE)
 })
 
 
@@ -108,7 +108,7 @@ test_that("Huxtables can be transposed", {
   expect_equal(colspan(trans)[1, 1], 2)
   expect_equal(rowspan(trans)[1, 3], 2)
   expect_equal(colspan(trans)[1, 3], 1)
-  expect_equal(font(trans), matrix(c(rep(NA, 2), "italic", rep(NA, 7)), 2, 5))  # 2x5 matrix now
+  expect_equal(font(trans), matrix(c(rep(NA, 2), "italic", rep(NA, 7)), 2, 5), ignore_attr = TRUE)  # 2x5 matrix now
   expect_equal(caption(trans), "A caption")
 })
 

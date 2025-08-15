@@ -124,20 +124,24 @@ test_that("huxreg borders argument works", {
   hr <- huxreg(lm1, lm2, borders = .7, outer_borders = .8)
   expect_equal(
     unname(brdr_thickness(bottom_border(hr))[, 2]),
-    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0)
+    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0),
+    ignore_attr = TRUE
   )
   expect_equal(
     unname(brdr_thickness(top_border(hr))[1, ]),
-    matrix(0.8, 1, 3)
+    matrix(0.8, 1, 3),
+    ignore_attr = TRUE
   )
   hr2 <- huxreg(lm1, lm2, borders = 0, outer_borders = 0)
   expect_equal(
     unname(brdr_thickness(bottom_border(hr2)[])),
-    matrix(0, nrow(hr2), ncol(hr2))
+    matrix(0, nrow(hr2), ncol(hr2)),
+    ignore_attr = TRUE
   )
   expect_equal(
     unname(brdr_thickness(top_border(hr2)[])),
-    matrix(0, nrow(hr2), ncol(hr2))
+    matrix(0, nrow(hr2), ncol(hr2)),
+    ignore_attr = TRUE
   )
 })
 
