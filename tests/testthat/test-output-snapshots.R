@@ -35,6 +35,9 @@ make_tables <- function() {
   col_width(text_alignment) <- c("3cm", "3cm", "3cm")
   # Set row heights to 2em
   row_height(text_alignment) <- rep("2em", 4)
+  # Set absolute width and height for the table
+  width(text_alignment) <- "12cm"
+  height(text_alignment) <- "8cm"
   # Apply alignments systematically
   for (row in 2:4) {
     for (col in 1:3) {
@@ -208,31 +211,34 @@ make_tables <- function() {
 
   # Content formatting: number_format, na_string, escape
   content_format <- hux(
-    "Property" = c("number_format=0", "number_format=%.2f", "na_string=missing", "escape_contents=FALSE"),
-    "Raw value" = c(1234.5678, 3.14159, NA, "<b>HTML</b>"),
-    "Formatted" = c(1234.5678, 3.14159, NA, "<b>HTML</b>"),
+    "Property" = c("number_format=0", "number_format=%.2f", "fmt_percent()", "na_string=missing", "escape_contents=FALSE"),
+    "Raw value" = c(1234.5678, 3.14159, 0.2345, NA, "<b>HTML</b>"),
+    "Formatted" = c(1234.5678, 3.14159, 0.2345, NA, "<b>HTML</b>"),
+    "Decimal align" = c(3, 3.15, -42.3, 123.456, 7),
     add_colnames = TRUE
   )
   content_format <- set_all_borders(content_format, value = 1)
   number_format(content_format)[2, 3] <- 0  # integer format
   number_format(content_format)[3, 3] <- "%.2f"  # 2 decimal places
-  na_string(content_format)[4, 3] <- "missing"
-  escape_contents(content_format)[5, 3] <- FALSE
-  caption(content_format) <- "Content formatting: number_format, na_string, escape_contents"
+  number_format(content_format)[4, 3] <- fmt_percent(digits = 1)
+  na_string(content_format)[5, 3] <- "missing"
+  escape_contents(content_format)[6, 3] <- FALSE
+  # Set decimal alignment for the fourth column
+  align(content_format)[, 4] <- "."
+  caption(content_format) <- "Content formatting: number_format, na_string, escape_contents, decimal align"
 
   # Cell spanning: colspan and rowspan
   spanning <- hux(
-    "Description" = c("normal cell", "colspan=2", "", "rowspan=2", "normal", "rowspan+colspan"),
-    "Test" = c("single cell", "spans 2 cols", "", "spans 2 rows", "normal", "spans both"),
-    "Column 3" = c("normal", "part of span", "", "normal", "normal", "part of span"),
-    "Column 4" = c("normal", "normal", "normal", "normal", "normal", "part of span"),
-    add_colnames = TRUE
+    c("normal cell", "normal", "rowspan=2", "INVISIBLE!", "normal"),
+    c("normal cell", "colspan=2", "normal", "spans both ways", "INVISIBLE!"),
+    c("normal", "INVISIBLE!", "normal", "INVISIBLE!", "normal"),
+    c("normal", "normal", "normal", "normal", "normal")
   )
   spanning <- set_all_borders(spanning, value = 1)
-  colspan(spanning)[3, 2] <- 2  # Row 3, span columns 2-3
-  rowspan(spanning)[4, 1] <- 2  # Row 4, span rows 4-5
-  colspan(spanning)[6, 2] <- 2  # Row 6, span columns 2-3
-  rowspan(spanning)[6, 2] <- 2  # Row 6, span rows 6-7 (if exists)
+  colspan(spanning)[2, 2] <- 2
+  rowspan(spanning)[3, 1] <- 2
+  colspan(spanning)[4, 2] <- 2
+  rowspan(spanning)[4, 2] <- 2
   caption(spanning) <- "Cell spanning: colspan=2, rowspan=2, combined colspan+rowspan"
 
   list(
