@@ -65,15 +65,16 @@ make_tables <- function() {
 
   # Dimensions: col_width and row_height
   dimensions <- hux(
-    "col_width=0.2" = c("Narrow 20%", "row_height=40"),
-    "col_width=0.3" = c("Medium 30%", "row_height=40"),
-    "col_width=0.5" = c("Wide 50%", "row_height=40"),
+    "col_width=0.2" = c("Narrow 20%", "normal height", "tall height"),
+    "col_width=0.3" = c("Medium 30%", "row_height=40", "row_height=60"),
+    "col_width=0.5" = c("Wide 50%", "row_height=40", "row_height=60"),
+    "Row Heights" = c("header", "40pt", "60pt"),
     add_colnames = TRUE
   )
   dimensions <- set_all_borders(dimensions)
-  col_width(dimensions) <- c(0.2, 0.3, 0.5)
-  row_height(dimensions) <- c(NA, 40)  # Only row 2 gets height=40
-  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5), row_height=40 for data row"
+  col_width(dimensions) <- c(0.2, 0.3, 0.5, 0.15)  # Add width for new column
+  row_height(dimensions) <- c(NA, 40, 60)  # Different heights for rows 2 and 3
+  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5, 0.15), row_height=(NA, 40, 60)"
 
   # Table caption properties - multiple tables in one document
   table_caption_tests <- list(
