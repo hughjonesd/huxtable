@@ -369,3 +369,33 @@ test_that("typst svg snapshots", {
   skip_without_typst()
   test_output_format(quick_typst_svg, "", ".svg")
 })
+
+test_that("screen snapshots", {
+  # Helper function to create screen output files
+  quick_screen <- function(..., file) {
+    output <- capture.output({
+      for (obj in list(...)) {
+        cat(to_screen(obj, min_width = 20, max_width = 80))
+        cat("\n\n")
+      }
+    })
+    writeLines(output, file)
+  }
+  
+  tables <- make_tables()
+  multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+
+  for (nm in names(tables)) {
+    f <- file.path(tempdir(), paste0(nm, ".txt"))
+    
+    # Generate screen output
+    if (nm %in% multi_table_names) {
+      do.call(quick_screen, c(tables[[nm]], file = f))
+    } else {
+      quick_screen(tables[[nm]], file = f)
+    }
+    
+    # Save as snapshot
+    expect_snapshot_file(f, paste0(nm, ".txt"))
+  }
+})

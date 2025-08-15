@@ -1,0 +1,23 @@
+     Text formatting: bold, italic, font, font_size, markdown, text_color,      
+                                background_color                                
+                 ┌────────────┬─────────────┬─────────────────┐
+                 │ Property   │ Normal      │ Styled          │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ bold       │ normal text │ bold=TRUE       │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ italic     │ normal text │ italic=TRUE     │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ font       │ serif text  │ Times New Roman │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ font_size  │ 12pt text   │ font_size=16    │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ markdown   │ plain text  │ markdown=TRUE   │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ text_color │ black text  │ red text        │
+                 ├────────────┼─────────────┼─────────────────┤
+                 │ background │ white bg    │ grey90 bg       │
+                 └────────────┴─────────────┴─────────────────┘
+
+Column names: Property, Normal, Styled
+
+
