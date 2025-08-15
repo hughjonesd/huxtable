@@ -373,14 +373,18 @@ test_that("typst svg snapshots", {
 test_that("screen snapshots", {
   # Helper function to create screen output files
   quick_screen <- function(..., file) {
+    args <- list(...)
+    # Remove 'file' and 'open' arguments that might be passed
+    args <- args[!names(args) %in% c("file", "open")]
+    
     output <- capture.output({
-      for (obj in list(...)) {
+      for (obj in args) {
         cat(to_screen(obj, min_width = 20, max_width = 80))
         cat("\n\n")
       }
     })
     writeLines(output, file)
   }
-  
+
   test_output_format(quick_screen, ".txt", ".txt")
 })
