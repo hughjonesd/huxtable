@@ -338,14 +338,14 @@ test_that("docx-as-rtf snapshots", {
         # Handle multiple tables
         for (i in seq_along(tables[[nm]])) {
           ft <- huxtable::as_flextable(tables[[nm]][[i]])
-          rtf_file <- file.path("/tmp", paste0(nm, "-", i, ".rtf"))
+          rtf_file <- file.path(tempdir(), paste0(nm, "-", i, ".rtf"))
           flextable::save_as_rtf(ft, path = rtf_file)
           expect_snapshot_file(rtf_file, paste0(nm, "-", i, "-docx.rtf"))
         }
       } else {
         # Single table
         ft <- huxtable::as_flextable(tables[[nm]])
-        rtf_file <- file.path("/tmp", paste0(nm, ".rtf"))
+        rtf_file <- file.path(tempdir(), paste0(nm, ".rtf"))
         flextable::save_as_rtf(ft, path = rtf_file)
         expect_snapshot_file(rtf_file, paste0(nm, "-docx.rtf"))
       }
