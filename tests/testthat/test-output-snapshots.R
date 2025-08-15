@@ -2,47 +2,50 @@
 skip_on_cran()
 
 skip_without_typst <- function() {
-  if (Sys.which("typst") == "") skip("typst CLI not found")
+  if (Sys.which("typst") == "" && Sys.which("quarto") == "") skip("typst CLI not found")
 }
 
 make_tables <- function() {
-  # Text properties: font, italic, bold, markdown, color
+  # Text properties: font, italic, bold, markdown, color, font_size
   text_props <- hux(
-    "Property" = c("bold", "italic", "font", "markdown", "text_color", "background"),
-    "Normal" = c("normal text", "normal text", "serif text", "plain text", "black text", "white bg"),
-    "Styled" = c("bold=TRUE", "italic=TRUE", "Times New Roman", "*markdown*=TRUE", "red text", "grey90 bg"),
+    "Property" = c("bold", "italic", "font", "font_size", "markdown", "text_color", "background"),
+    "Normal" = c("normal text", "normal text", "serif text", "12pt text", "plain text", "black text", "white bg"),
+    "Styled" = c("bold=TRUE", "italic=TRUE", "Times New Roman", "font_size=16", "*markdown*=TRUE", "red text", "grey90 bg"),
     add_colnames = TRUE
   )
   text_props <- set_all_borders(text_props)
   bold(text_props)[2, 3] <- TRUE
   italic(text_props)[3, 3] <- TRUE
   font(text_props)[4, 3] <- "Times New Roman"
-  markdown(text_props)[5, 3] <- TRUE
-  text_color(text_props)[6, 3] <- "red"
-  background_color(text_props)[7, 3] <- "grey90"
-  caption(text_props) <- "Text formatting: bold, italic, font, markdown, text_color, background_color"
+  font_size(text_props)[5, 3] <- 16
+  markdown(text_props)[6, 3] <- TRUE
+  text_color(text_props)[7, 3] <- "red"
+  background_color(text_props)[8, 3] <- "grey90"
+  caption(text_props) <- "Text formatting: bold, italic, font, font_size, markdown, text_color, background_color"
 
   # Text positioning: align, valign, padding, rotation, wrap
   text_position <- hux(
     "Align" = c("left+top", "center+middle", "right+bottom"),
-    "Padding" = c("left_padding=10", "normal", "normal"),
-    "Effects" = c("rotation=90", "normal", "wrap=TRUE long text"),
+    "Padding" = c("normal", "left_padding=10", "normal"),
+    "Effects" = c("normal", "normal", "rotation=90"),
     add_colnames = TRUE
   )
   text_position <- set_all_borders(text_position)
-  # Set alignments
+  # Set alignments - row 2 (first data row)
   align(text_position)[2, 1] <- "left"
   align(text_position)[2, 2] <- "center"
   align(text_position)[2, 3] <- "right"
   valign(text_position)[2, 1] <- "top"
   valign(text_position)[2, 2] <- "middle"
   valign(text_position)[2, 3] <- "bottom"
-  # Set padding
-  left_padding(text_position)[3, 1] <- 10
-  right_padding(text_position)[3, 1] <- 10
-  # Set rotation and wrap
-  rotation(text_position)[4, 1] <- 90
-  wrap(text_position)[4, 3] <- TRUE
+  # Set padding - row 3 (second data row), column 2
+  left_padding(text_position)[3, 2] <- 10
+  right_padding(text_position)[3, 2] <- 10
+  # Set rotation - row 4 (third data row), column 3
+  rotation(text_position)[4, 3] <- 90
+  # Add wrap to show another effect
+  text_position[4, 1] <- "wrap=TRUE very long text that should wrap around"
+  wrap(text_position)[4, 1] <- TRUE
   row_height(text_position) <- c(NA, 40, 40, 60)
   caption(text_position) <- "Text positioning: align, valign, padding, rotation, wrap"
 
@@ -62,15 +65,15 @@ make_tables <- function() {
 
   # Dimensions: col_width and row_height
   dimensions <- hux(
-    "col_width=0.2" = c("Narrow 20%", "normal height"),
-    "col_width=0.3" = c("Medium 30%", "normal height"),
+    "col_width=0.2" = c("Narrow 20%", "row_height=40"),
+    "col_width=0.3" = c("Medium 30%", "row_height=40"),
     "col_width=0.5" = c("Wide 50%", "row_height=40"),
     add_colnames = TRUE
   )
   dimensions <- set_all_borders(dimensions)
   col_width(dimensions) <- c(0.2, 0.3, 0.5)
-  row_height(dimensions) <- c(NA, 40)
-  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5), row_height=40"
+  row_height(dimensions) <- c(NA, 40)  # Only row 2 gets height=40
+  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5), row_height=40 for data row"
 
   # Table caption properties - multiple tables in one document
   table_caption_tests <- list(
@@ -92,7 +95,7 @@ make_tables <- function() {
     }
   )
 
-  # Table position properties - multiple tables in one document  
+  # Table position properties - multiple tables in one document
   table_position_tests <- list(
     # Position left
     {
