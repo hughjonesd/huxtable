@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 test_that("builders reproduce to_html output", {
   ht <- hux(a = 1:2, b = 3:4)

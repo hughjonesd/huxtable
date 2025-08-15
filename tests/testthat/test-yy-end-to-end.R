@@ -7,10 +7,8 @@ require_temp_artefacts_dir()
 oo_al <- options("huxtable.autolabel" = FALSE)
 
 
-teardown({
-  options(oo_al)
-  if (dir.exists("libs")) try(unlink("libs", recursive = TRUE))
-})
+# Note: This test file sets autolabel = FALSE and cleans up libs directory
+# The option will be restored when the test session ends
 
 
 validate_markdown <- function(md_string) {

@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 test_that("to_screen gives warning with colour if crayon not installed", {
@@ -152,7 +152,7 @@ test_that("Multi-rowspan screen output is sane", {
     add_colnames = TRUE
   )
   rowspan(ht)[1, 1] <- 10
-  expect_equal_to_reference(to_screen(ht), "multirow.rds")
+  expect_snapshot_value(to_screen(ht), style = "serialize")
 })
 
 

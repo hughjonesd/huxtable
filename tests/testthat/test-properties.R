@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 
 # =============================================================================
@@ -11,10 +11,10 @@ test_that("Basic property assignment works", {
   
   # Test basic assignment and retrieval
   align(ht) <- "left"
-  expect_equivalent(align(ht), matrix("left", 2, 2))
+  expect_equal(align(ht), matrix("left", 2, 2), ignore_attr = TRUE)
   
   bold(ht) <- TRUE
-  expect_equivalent(bold(ht), matrix(TRUE, 2, 2))
+  expect_equal(bold(ht), matrix(TRUE, 2, 2), ignore_attr = TRUE)
   
   # Test individual cell assignment
   align(ht)[1, 1] <- "right"
@@ -27,10 +27,10 @@ test_that("Basic property assignment works", {
   
   # Test row/column properties
   col_width(ht) <- c(0.3, 0.7)
-  expect_equivalent(col_width(ht), c(0.3, 0.7))
+  expect_equal(col_width(ht), c(0.3, 0.7), ignore_attr = TRUE)
   
   row_height(ht) <- c(0.5, 0.5)
-  expect_equivalent(row_height(ht), c(0.5, 0.5))
+  expect_equal(row_height(ht), c(0.5, 0.5), ignore_attr = TRUE)
 })
 
 
@@ -40,7 +40,7 @@ test_that("Can refer to properties by colnames", {
   col_width(ht) <- c(.2, .6, .2)
   row_height(ht) <- rep(.2, 6)
   expect_equal(number_format(ht)[1, "a"], list(3))
-  expect_equivalent(col_width(ht)["a"], .2)
+  expect_equal(col_width(ht)["a"], .2, ignore_attr = TRUE)
 })
 
 
@@ -66,7 +66,7 @@ test_that("Can assign numeric to width, col_width etc. after assigning character
   number_format(ht) <- 2L
   nf <- number_format(ht)
   expect_equal(mode(nf[1, 1][[1]]), "numeric")
-  expect_equivalent(dim(nf), dim(ht))
+  expect_equal(dim(nf), dim(ht))
 })
 
 
@@ -82,14 +82,14 @@ test_that("Can set properties to NA", {
 test_that("align, position and caption_pos change \"centre\" to \"center\"", {
   ht <- hux(1)
   align(ht) <- "centre"
-  expect_equivalent(align(ht), matrix("center", 1, 1))
+  expect_equal(align(ht), matrix("center", 1, 1), ignore_attr = TRUE)
 
   position(ht) <- "centre"
-  expect_equivalent(position(ht), "center")
+  expect_equal(position(ht), "center")
   caption_pos(ht) <- "topcentre"
-  expect_equivalent(caption_pos(ht), "topcenter")
+  expect_equal(caption_pos(ht), "topcenter")
   caption_pos(ht) <- "bottomcentre"
-  expect_equivalent(caption_pos(ht), "bottomcenter")
+  expect_equal(caption_pos(ht), "bottomcenter")
 })
 
 
@@ -150,16 +150,16 @@ test_that("Can pad with align", {
 
 test_that("set_default_properties", {
   old <- set_default_properties(bold = TRUE)
-  expect_equivalent(bold(hux(1)), matrix(TRUE, 1, 1))
+  expect_equal(bold(hux(1)), matrix(TRUE, 1, 1), ignore_attr = TRUE)
   set_default_properties(old)
-  expect_equivalent(bold(hux(1)), matrix(FALSE, 1, 1))
+  expect_equal(bold(hux(1)), matrix(FALSE, 1, 1), ignore_attr = TRUE)
 
   expect_error(set_default_properties(unknown = 1))
 })
 
 
 test_that("get_default_properties", {
-  expect_equivalent(get_default_properties("bold"), FALSE)
+  expect_equal(get_default_properties("bold"), list(bold = FALSE))
   expect_error(get_default_properties("unknown"))
 })
 
@@ -175,13 +175,13 @@ test_that("collapsed_border_colors works", {
   top_border_color(ht)[2, 1] <- "green"
   cbc <- huxtable:::collapsed_border_colors(ht)
   expect_type(cbc, "list")
-  expect_equivalent(cbc$vert, matrix(c(NA, "pink", NA, NA, NA, NA), 2, 3, byrow = TRUE))
-  expect_equivalent(cbc$horiz, matrix(c(NA, NA, "green", NA, NA, NA), 3, 2, byrow = TRUE))
+  expect_equal(cbc$vert, matrix(c(NA, "pink", NA, NA, NA, NA), 2, 3, byrow = TRUE), ignore_attr = TRUE)
+  expect_equal(cbc$horiz, matrix(c(NA, NA, "green", NA, NA, NA), 3, 2, byrow = TRUE), ignore_attr = TRUE)
   right_border_color(ht)[1, 1] <- "blue" # overrides
   bottom_border_color(ht)[1, 1] <- "purple"
   cbc <- huxtable:::collapsed_border_colors(ht)
-  expect_equivalent(cbc$vert, matrix(c(NA, "blue", NA, NA, NA, NA), 2, 3, byrow = TRUE))
-  expect_equivalent(cbc$horiz, matrix(c(NA, NA, "purple", NA, NA, NA), 3, 2, byrow = TRUE))
+  expect_equal(cbc$vert, matrix(c(NA, "blue", NA, NA, NA, NA), 2, 3, byrow = TRUE), ignore_attr = TRUE)
+  expect_equal(cbc$horiz, matrix(c(NA, NA, "purple", NA, NA, NA), 3, 2, byrow = TRUE), ignore_attr = TRUE)
 })
 
 
@@ -195,8 +195,8 @@ test_that("collapsed_border_styles works", {
   vert[1, 2] <- "dashed"
   horiz <- matrix("solid", 3, 2)
   horiz[2, 1] <- "double"
-  expect_equivalent(cbs$vert, vert)
-  expect_equivalent(cbs$horiz, horiz)
+  expect_equal(cbs$vert, vert, ignore_attr = TRUE)
+  expect_equal(cbs$horiz, horiz, ignore_attr = TRUE)
 })
 
 
