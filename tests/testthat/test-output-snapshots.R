@@ -23,32 +23,67 @@ make_tables <- function() {
   background_color(text_props)[8, 3] <- "grey90"
   caption(text_props) <- "Text formatting: bold, italic, font, font_size, markdown, text_color, background_color"
 
-  # Text positioning: align, valign, padding, rotation, wrap
-  text_position <- hux(
-    "Align" = c("left+top", "center+middle", "right+bottom"),
-    "Padding" = c("normal", "left_padding=10", "normal"),
-    "Effects" = c("normal", "normal", "rotation=90"),
+  # Text alignment: align and valign combinations
+  text_alignment <- hux(
+    "Left" = c("left+top", "left+middle", "left+bottom"),
+    "Center" = c("center+top", "center+middle", "center+bottom"),
+    "Right" = c("right+top", "right+middle", "right+bottom"),
     add_colnames = TRUE
   )
-  text_position <- set_all_borders(text_position, value = 1)
-  # Set alignments - row 2 (first data row)
-  align(text_position)[2, 1] <- "left"
-  align(text_position)[2, 2] <- "center"
-  align(text_position)[2, 3] <- "right"
-  valign(text_position)[2, 1] <- "top"
-  valign(text_position)[2, 2] <- "middle"
-  valign(text_position)[2, 3] <- "bottom"
-  # Set padding - row 3 (second data row), column 2
-  left_padding(text_position)[3, 2] <- 10
-  right_padding(text_position)[3, 2] <- 10
-  # Set rotation - row 4 (third data row), column 3
-  rotation(text_position)[4, 3] <- 90
-  # Add wrap to show another effect
-  text_position[4, 1] <- "wrap=TRUE very long text that should wrap around"
-  wrap(text_position)[4, 1] <- TRUE
-  row_height(text_position) <- c(NA, 40, 40, 60)
-  width(text_position) <- 0.7  # Set width so wrap works in LaTeX
-  caption(text_position) <- "Text positioning: align, valign, padding, rotation, wrap"
+  text_alignment <- set_all_borders(text_alignment, value = 1)
+  # Set column widths (absolute values)
+  col_width(text_alignment) <- c("3cm", "3cm", "3cm")
+  # Set row heights to 2em
+  row_height(text_alignment) <- rep("2em", 4)
+  # Apply alignments systematically
+  for (row in 2:4) {
+    for (col in 1:3) {
+      if (col == 1) align(text_alignment)[row, col] <- "left"
+      if (col == 2) align(text_alignment)[row, col] <- "center"
+      if (col == 3) align(text_alignment)[row, col] <- "right"
+
+      if (row == 2) valign(text_alignment)[row, col] <- "top"
+      if (row == 3) valign(text_alignment)[row, col] <- "middle"
+      if (row == 4) valign(text_alignment)[row, col] <- "bottom"
+    }
+  }
+  caption(text_alignment) <- "Text alignment: align=(left, center, right) × valign=(top, middle, bottom)"
+
+  # Text effects: wrap, rotation, padding
+  text_effects <- hux(
+    "Wrap test" = c("wrap=TRUE", "wrap=FALSE"),
+    "Rotation" = c("normal", "rotation=90"),
+    "Padding" = c("normal", "padding=10px"),
+    add_colnames = TRUE
+  )
+  text_effects <- set_all_borders(text_effects, value = 1)
+  # Set absolute column widths
+  col_width(text_effects) <- c(0.25, 0.25, 0.5)
+  width(text_effects) <- 0.6
+  row_height(text_effects) <- c(1/3, 1/3, 1/3)
+
+  # Add long text for wrap test - same text with different wrap settings
+  long_text <- "This is a very long text that should demonstrate text wrapping behavior when wrap is enabled versus disabled"
+  text_effects[2, 1] <- long_text
+  text_effects[3, 1] <- long_text
+  wrap(text_effects)[2, 1] <- TRUE
+  wrap(text_effects)[3, 1] <- FALSE
+
+  # Set rotation
+  rotation(text_effects)[3, 2] <- 90
+
+  # Add long text for padding test
+  padding_text <- "This text demonstrates padding effects with longer content to show the spacing difference"
+  text_effects[2, 3] <- padding_text
+  text_effects[3, 3] <- padding_text
+
+  # Set padding
+  left_padding(text_effects)[2, 3] <- 10
+  right_padding(text_effects)[2, 3] <- 10
+  top_padding(text_effects)[2, 3] <- 10
+  bottom_padding(text_effects)[2, 3] <- 10
+
+  caption(text_effects) <- "Text effects: wrap (TRUE vs FALSE), rotation=90, padding=10px"
 
   # Border properties: width, color, style
   borders_table <- hux(
@@ -62,21 +97,22 @@ make_tables <- function() {
   top_border_color(borders_table)[3, ] <- "red"
   top_border_style(borders_table)[4, ] <- "dashed"
   top_border_style(borders_table)[5, ] <- "double"
+  top_border(borders_table)[5, ] <- 3
   bottom_border(borders_table)[6, 3] <- 2
   caption(borders_table) <- "Border properties: top_border thickness=3, color=red, style=dashed/double"
 
   # Dimensions: col_width and row_height
   dimensions <- hux(
-    "col_width=0.2" = c("Narrow 20%", "normal height", "tall height"),
-    "col_width=0.3" = c("Medium 30%", "row_height=40", "row_height=60"),
-    "col_width=0.5" = c("Wide 50%", "row_height=40", "row_height=60"),
-    "Row Heights" = c("header", "40pt", "60pt"),
+    "col_width=0.2" = c("Narrow 20%", "text", "text", "text"),
+    "col_width=0.3" = c("Medium 30%", "text", "text", "text"),
+    "col_width=0.35" = c("Wide 35%", "text", "text", "text"),
+    "Row Heights" = c("0.15", "0.15", "015", "0.4"),
     add_colnames = TRUE
   )
   dimensions <- set_all_borders(dimensions, value = 1)
-  col_width(dimensions) <- c(0.2, 0.3, 0.5, 0.15)  # Add width for new column
-  row_height(dimensions) <- c(NA, 40, 60, 60)  # Different heights for rows 2 and 3
-  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5, 0.15), row_height=(NA, 40, 60)"
+  col_width(dimensions) <- c(0.2, 0.3, 0.35, 0.15)  # Total = 1.0
+  row_height(dimensions) <- c(0.15, 0.15, 0.15, 0.15, 0.4)  # Different heights for all rows including header
+  caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.35, 0.15)=1.0, row_height=(0.15, 0.15, 0.15, 0.15, 0.4)"
 
   # Table caption properties - multiple tables in one document
   table_caption_tests <- list(
@@ -184,15 +220,32 @@ make_tables <- function() {
   escape_contents(content_format)[5, 3] <- FALSE
   caption(content_format) <- "Content formatting: number_format, na_string, escape_contents"
 
+  # Cell spanning: colspan and rowspan
+  spanning <- hux(
+    "Description" = c("normal cell", "colspan=2", "", "rowspan=2", "normal", "rowspan+colspan"),
+    "Test" = c("single cell", "spans 2 cols", "", "spans 2 rows", "normal", "spans both"),
+    "Column 3" = c("normal", "part of span", "", "normal", "normal", "part of span"),
+    "Column 4" = c("normal", "normal", "normal", "normal", "normal", "part of span"),
+    add_colnames = TRUE
+  )
+  spanning <- set_all_borders(spanning, value = 1)
+  colspan(spanning)[3, 2] <- 2  # Row 3, span columns 2-3
+  rowspan(spanning)[4, 1] <- 2  # Row 4, span rows 4-5
+  colspan(spanning)[6, 2] <- 2  # Row 6, span columns 2-3
+  rowspan(spanning)[6, 2] <- 2  # Row 6, span rows 6-7 (if exists)
+  caption(spanning) <- "Cell spanning: colspan=2, rowspan=2, combined colspan+rowspan"
+
   list(
     text_properties = text_props,
-    text_positioning = text_position,
+    text_alignment = text_alignment,
+    text_effects = text_effects,
     borders = borders_table,
     dimensions = dimensions,
     table_caption_tests = table_caption_tests,
     table_position_tests = table_position_tests,
     table_width_tests = table_width_tests,
-    content_formatting = content_format
+    content_formatting = content_format,
+    cell_spanning = spanning
   )
 }
 
@@ -203,7 +256,7 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   if (grepl("typst", deparse(substitute(quick_func)))) {
     Sys.setenv(SOURCE_DATE_EPOCH = "1704110400")  # 2024-01-01 12:00:00 UTC
   }
-  
+
   tables <- make_tables()
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
@@ -268,11 +321,12 @@ test_that("rtf snapshots", {
 test_that("docx-as-rtf snapshots", {
   skip_if_not_installed("officer")
   skip_if_not_installed("flextable")
-  
+  if (Sys.which("pandoc") == "") skip("pandoc not found")
+
   # Test DOCX conversion pathway but output as RTF for determinism
   test_docx_as_rtf <- function(tables, file_prefix) {
     multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
-    
+
     for (nm in names(tables)) {
       if (nm %in% multi_table_names) {
         # Handle multiple tables
@@ -291,7 +345,7 @@ test_that("docx-as-rtf snapshots", {
       }
     }
   }
-  
+
   tables <- make_tables()
   test_docx_as_rtf(tables, "docx")
 })
