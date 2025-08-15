@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 test_that("to_typst basic table structure", {
   ht <- hux(a = 1:2, b = 3:4, add_colnames = FALSE)

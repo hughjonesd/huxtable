@@ -1,4 +1,4 @@
-local_edition(2)
+local_edition(3)
 
 test_that("typst markdown translator handles formatting", {
   expect_match(unname(huxtable:::render_markdown("**bold**", "typst")), "*bold*", fixed = TRUE)
