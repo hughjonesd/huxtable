@@ -247,8 +247,8 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   }
 }
 
-test_that("pdf snapshots", {
-  test_output_format(quick_pdf, ".pdf", ".pdf")
+test_that("latex snapshots", {
+  test_output_format(quick_latex, ".tex", ".tex")
 })
 
 test_that("typst pdf snapshots", {
