@@ -238,8 +238,8 @@ quick_html <- function(
   cat("<!DOCTYPE html>",
     sprintf("<html lang=\"%s\">", loc[1]),
     sprintf(
-      "<head><meta charset=\"%s\"><title>quick_html() output</title></head>",
-      loc[2]
+      "<head><meta charset=\"%s\"><title>%s</title></head>",
+      loc[2], basename(file)
     ),
     "<body>\n",
     sep = "\n"

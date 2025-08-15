@@ -38,7 +38,6 @@ make_tables <- function() {
   right_padding(text_position)[3, 1] <- 10
   rotation(text_position)[4, 1] <- 90
   wrap(text_position)[4, 3] <- TRUE
-  row_height(text_position) <- c(NA, 40, 40, 60)
   caption(text_position) <- "Testing text positioning: alignment, padding, rotation, and wrapping"
 
   # Border properties: width, color, style
@@ -112,11 +111,8 @@ make_tables <- function() {
 
 test_that("pdf snapshots", {
   tables <- make_tables()
-  test_dir <- file.path(test_path(), "output_files")
-  dir.create(test_dir, showWarnings = FALSE)
-  
   for (nm in names(tables)) {
-    f <- file.path(test_dir, paste0(nm, ".pdf"))
+    f <- tempfile(pattern = nm, fileext = ".pdf")
     quick_pdf(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".pdf"))
   }
@@ -126,11 +122,8 @@ test_that("pdf snapshots", {
 test_that("typst pdf snapshots", {
   skip_without_typst()
   tables <- make_tables()
-  test_dir <- file.path(test_path(), "output_files")
-  dir.create(test_dir, showWarnings = FALSE)
-  
   for (nm in names(tables)) {
-    f <- file.path(test_dir, paste0(nm, "-typst.pdf"))
+    f <- tempfile(pattern = nm, fileext = ".pdf")
     quick_typst_pdf(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, "-typst.pdf"))
   }
@@ -141,11 +134,8 @@ test_that("docx snapshots", {
   skip_if_not_installed("officer")
   skip_if_not_installed("flextable")
   tables <- make_tables()
-  test_dir <- file.path(test_path(), "output_files")
-  dir.create(test_dir, showWarnings = FALSE)
-  
   for (nm in names(tables)) {
-    f <- file.path(test_dir, paste0(nm, ".docx"))
+    f <- tempfile(pattern = nm, fileext = ".docx")
     quick_docx(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".docx"))
   }
@@ -154,11 +144,8 @@ test_that("docx snapshots", {
 
 test_that("html snapshots", {
   tables <- make_tables()
-  test_dir <- file.path(test_path(), "output_files")
-  dir.create(test_dir, showWarnings = FALSE)
-  
   for (nm in names(tables)) {
-    f <- file.path(test_dir, paste0(nm, ".html"))
+    f <- tempfile(pattern = nm, fileext = ".html")
     quick_html(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".html"))
   }
