@@ -51,17 +51,18 @@ make_tables <- function() {
 
   # Border properties: width, color, style
   borders_table <- hux(
-    "Description" = c("thickness=3", "color=red", "style=dashed", "mixed styles"),
-    "Top border" = c("top=3", "top=red", "top=dashed", "normal"),
-    "Bottom border" = c("normal", "normal", "normal", "bottom=2"),
+    "Description" = c("thickness=3", "color=red", "style=dashed", "style=double", "mixed styles"),
+    "Top border" = c("top=3", "top=red", "top=dashed", "top=double", "normal"),
+    "Bottom border" = c("normal", "normal", "normal", "normal", "bottom=2"),
     add_colnames = TRUE
   )
   borders_table <- set_all_borders(borders_table)
   top_border(borders_table)[2, ] <- 3
   top_border_color(borders_table)[3, ] <- "red"
   top_border_style(borders_table)[4, ] <- "dashed"
-  bottom_border(borders_table)[5, 3] <- 2
-  caption(borders_table) <- "Border properties: top_border thickness=3, color=red, style=dashed"
+  top_border_style(borders_table)[5, ] <- "double"
+  bottom_border(borders_table)[6, 3] <- 2
+  caption(borders_table) <- "Border properties: top_border thickness=3, color=red, style=dashed/double"
 
   # Dimensions: col_width and row_height
   dimensions <- hux(
