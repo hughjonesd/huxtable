@@ -198,13 +198,7 @@ make_tables <- function() {
 
 
 # Helper function to test output snapshots for different formats
-test_output_format <- function(quick_func, file_ext, snapshot_suffix = "", skip_conditions = NULL) {
-  if (!is.null(skip_conditions)) {
-    for (skip_func in skip_conditions) {
-      skip_func()
-    }
-  }
-
+test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   tables <- make_tables()
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
@@ -258,16 +252,14 @@ test_that("pdf snapshots", {
 })
 
 test_that("typst pdf snapshots", {
-  test_output_format(quick_typst_pdf, ".pdf", "-typst.pdf",
-                     skip_conditions = list(skip_without_typst))
+  skip_without_typst()
+  test_output_format(quick_typst_pdf, ".pdf", "-typst.pdf")
 })
 
 test_that("docx snapshots", {
-  test_output_format(quick_docx, ".docx", ".docx",
-                     skip_conditions = list(
-                       function() skip_if_not_installed("officer"),
-                       function() skip_if_not_installed("flextable")
-                     ))
+  skip_if_not_installed("officer")
+  skip_if_not_installed("flextable")
+  test_output_format(quick_docx, ".docx", ".docx")
 })
 
 test_that("html snapshots", {
@@ -275,11 +267,11 @@ test_that("html snapshots", {
 })
 
 test_that("typst png snapshots", {
-  test_output_format(quick_typst_png, "", ".png",
-                     skip_conditions = list(skip_without_typst))
+  skip_without_typst()
+  test_output_format(quick_typst_png, "", ".png")
 })
 
 test_that("typst svg snapshots", {
-  test_output_format(quick_typst_svg, "", ".svg",
-                     skip_conditions = list(skip_without_typst))
+  skip_without_typst()
+  test_output_format(quick_typst_svg, "", ".svg")
 })
