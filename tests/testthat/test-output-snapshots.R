@@ -377,14 +377,15 @@ test_that("screen snapshots", {
     # Remove 'file' and 'open' arguments that might be passed
     args <- args[!names(args) %in% c("file", "open")]
     
-    output <- capture.output({
-      for (obj in args) {
-        # Force color output to capture ANSI codes
-        cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE))
-        cat("\n\n")
-      }
-    })
-    writeLines(output, file)
+    # Write directly to file to preserve ANSI color codes
+    con <- file(file, open = "w")
+    on.exit(close(con))
+    
+    for (obj in args) {
+      # Force color output to capture ANSI codes
+      cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE), file = con)
+      cat("\n\n", file = con)
+    }
   }
 
   test_output_format(quick_screen, ".txt", ".txt")
