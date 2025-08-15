@@ -199,6 +199,11 @@ make_tables <- function() {
 
 # Helper function to test output snapshots for different formats
 test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
+  # Set fixed timestamp for deterministic Typst PDF output
+  if (grepl("typst", deparse(substitute(quick_func)))) {
+    Sys.setenv(SOURCE_DATE_EPOCH = "1704110400")  # 2024-01-01 12:00:00 UTC
+  }
+  
   tables <- make_tables()
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
