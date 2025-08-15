@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="C">
-<head><meta charset="NA"><title>/var/folders/jq/9l5600sj7j7g6p9p8rbqqphh0000gn/T//Rtmpb8dwf5/content_formattinga5a3350342d5.docx</title></head>
+<head><meta charset="NA"><title>content_formatting.html</title></head>
 <body>
 
 <p>&nbsp;</p><style>
@@ -24,19 +24,21 @@
 }
 </style>
  <table class="huxtable" data-quarto-disable-processing="true"  style="margin-left: auto; margin-right: auto;">
-<caption style="caption-side: top; text-align: center;">Testing content formatting: numbers, NA values, and HTML escaping</caption><col><col><col><thead>
+<caption style="caption-side: top; text-align: center;">Content formatting: number_format, na_string, escape_contents, decimal align</caption><col><col><col><col><thead>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">Type</th><th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">Raw</th><th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">Formatted</th></tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;      font-weight: normal;">Property</th><th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;      font-weight: normal;">Raw value</th><th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;      font-weight: normal;">Formatted</th><th class="huxtable-cell huxtable-header" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;      font-weight: normal;">Decimal align&nbsp;&nbsp;&nbsp;</th></tr>
 </thead>
 <tbody>
 <tr>
-<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">number</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1234.5678</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">1235</td></tr>
+<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">number_format=0</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">1234.5678</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">1235</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">3&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">decimal</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">3.14159</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">3.14</td></tr>
+<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">number_format=%.2f</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">3.14159</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">3.14</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">3.15</td></tr>
 <tr>
-<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">NA value</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;"></td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">missing</td></tr>
+<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">fmt_percent()</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">0.2345</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">23.4%</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">-42.3&nbsp;</td></tr>
 <tr>
-<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">escaped</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&lt;b&gt;HTML&lt;/b&gt;</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;"><b>HTML</b></td></tr>
+<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">na_string=missing</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;"></td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">missing</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">123&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">escape_contents=FALSE</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">&lt;b&gt;HTML&lt;/b&gt;</td><td class="huxtable-cell" style="border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;"><b>HTML</b></td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 1pt 1pt 1pt 1pt;">7&nbsp;&nbsp;&nbsp;</td></tr>
 </tbody>
 </table>
 
