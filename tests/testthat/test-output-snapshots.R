@@ -47,6 +47,7 @@ make_tables <- function() {
   text_position[4, 1] <- "wrap=TRUE very long text that should wrap around"
   wrap(text_position)[4, 1] <- TRUE
   row_height(text_position) <- c(NA, 40, 40, 60)
+  width(text_position) <- 0.7  # Set width so wrap works in LaTeX
   caption(text_position) <- "Text positioning: align, valign, padding, rotation, wrap"
 
   # Border properties: width, color, style
@@ -74,7 +75,7 @@ make_tables <- function() {
   )
   dimensions <- set_all_borders(dimensions)
   col_width(dimensions) <- c(0.2, 0.3, 0.5, 0.15)  # Add width for new column
-  row_height(dimensions) <- c(NA, 40, 60)  # Different heights for rows 2 and 3
+  row_height(dimensions) <- c(NA, 40, 60, 60)  # Different heights for rows 2 and 3
   caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5, 0.15), row_height=(NA, 40, 60)"
 
   # Table caption properties - multiple tables in one document
@@ -93,6 +94,22 @@ make_tables <- function() {
       ht <- set_all_borders(ht)
       caption(ht) <- "Table 2: caption_pos=\"bottom\""
       caption_pos(ht) <- "bottom"
+      ht
+    },
+    # Caption width 0.5
+    {
+      ht <- hux("caption_width=0.5", add_colnames = FALSE)
+      ht <- set_all_borders(ht)
+      caption(ht) <- "Table 3: caption_width=0.5 - This is a longer caption to demonstrate width constraint"
+      caption_width(ht) <- 0.5
+      ht
+    },
+    # Caption width 0.8
+    {
+      ht <- hux("caption_width=0.8", add_colnames = FALSE)
+      ht <- set_all_borders(ht)
+      caption(ht) <- "Table 4: caption_width=0.8 - This is a longer caption to demonstrate a wider width constraint"
+      caption_width(ht) <- 0.8
       ht
     }
   )
@@ -180,107 +197,89 @@ make_tables <- function() {
 }
 
 
-test_that("pdf snapshots", {
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".pdf")
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      # Pass the list of tables as separate arguments
-      do.call(quick_pdf, c(tables[[nm]], file = f, open = FALSE))
-    } else {
-      quick_pdf(tables[[nm]], file = f, open = FALSE)
+# Helper function to test output snapshots for different formats
+test_output_format <- function(quick_func, file_ext, snapshot_suffix = "", skip_conditions = NULL) {
+  if (!is.null(skip_conditions)) {
+    for (skip_func in skip_conditions) {
+      skip_func()
     }
-    expect_snapshot_file(f, paste0(nm, ".pdf"))
   }
-})
 
+  tables <- make_tables()
+  multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+
+  for (nm in names(tables)) {
+    # Handle different file extension patterns
+    if (file_ext == "" && grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
+      f <- tempfile(pattern = nm, fileext = "")
+    } else {
+      f <- tempfile(pattern = nm, fileext = file_ext)
+    }
+
+    # Generate output
+    if (nm %in% multi_table_names) {
+      do.call(quick_func, c(tables[[nm]], file = f, open = FALSE))
+    } else {
+      quick_func(tables[[nm]], file = f, open = FALSE)
+    }
+
+    # Handle file checking for different formats
+    if (grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
+      # For PNG/SVG, find files with suffixes
+      file_ext_actual <- ifelse(grepl("png", deparse(substitute(quick_func))), "png", "svg")
+      file_pattern <- paste0("^", basename(f), ".*\\.", file_ext_actual, "$")
+      output_files <- list.files(dirname(f), pattern = file_pattern, full.names = TRUE)
+      if (length(output_files) > 0) {
+        if (nm %in% multi_table_names && length(output_files) > 1) {
+          # For multi-table tests, save all files with numbered suffixes
+          for (i in seq_along(output_files)) {
+            expect_snapshot_file(output_files[i], paste0(nm, "-", i, snapshot_suffix))
+          }
+        } else {
+          # Single table test
+          expect_snapshot_file(output_files[1], paste0(nm, snapshot_suffix))
+        }
+      }
+    } else if (file_ext == "" && !grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
+      # Single file with added extension
+      output_file <- paste0(f, gsub("^\\.", "", snapshot_suffix))
+      if (file.exists(output_file)) {
+        expect_snapshot_file(output_file, paste0(nm, snapshot_suffix))
+      }
+    } else {
+      # Standard file output
+      expect_snapshot_file(f, paste0(nm, snapshot_suffix))
+    }
+  }
+}
+
+test_that("pdf snapshots", {
+  test_output_format(quick_pdf, ".pdf", ".pdf")
+})
 
 test_that("typst pdf snapshots", {
-  skip_without_typst()
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".pdf")
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      do.call(quick_typst_pdf, c(tables[[nm]], file = f, open = FALSE))
-    } else {
-      quick_typst_pdf(tables[[nm]], file = f, open = FALSE)
-    }
-    expect_snapshot_file(f, paste0(nm, "-typst.pdf"))
-  }
+  test_output_format(quick_typst_pdf, ".pdf", "-typst.pdf",
+                     skip_conditions = list(skip_without_typst))
 })
-
 
 test_that("docx snapshots", {
-  skip_if_not_installed("officer")
-  skip_if_not_installed("flextable")
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".docx")
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      do.call(quick_docx, c(tables[[nm]], file = f, open = FALSE))
-    } else {
-      quick_docx(tables[[nm]], file = f, open = FALSE)
-    }
-    expect_snapshot_file(f, paste0(nm, ".docx"))
-  }
+  test_output_format(quick_docx, ".docx", ".docx",
+                     skip_conditions = list(
+                       function() skip_if_not_installed("officer"),
+                       function() skip_if_not_installed("flextable")
+                     ))
 })
-
 
 test_that("html snapshots", {
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".html")
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      do.call(quick_html, c(tables[[nm]], file = f, open = FALSE))
-    } else {
-      quick_html(tables[[nm]], file = f, open = FALSE)
-    }
-    expect_snapshot_file(f, paste0(nm, ".html"))
-  }
+  test_output_format(quick_html, ".html", ".html")
 })
-
 
 test_that("typst png snapshots", {
-  skip_without_typst()
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = "")  # No extension for PNG prefix
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      do.call(quick_typst_png, c(tables[[nm]], file = f, open = FALSE))
-      # PNG creates files with -1, -2 etc. suffixes, find the first one
-      png_files <- list.files(dirname(f), pattern = paste0("^", basename(f), ".*\\.png$"), full.names = TRUE)
-      if (length(png_files) > 0) {
-        expect_snapshot_file(png_files[1], paste0(nm, ".png"))
-      }
-    } else {
-      quick_typst_png(tables[[nm]], file = f, open = FALSE)
-      png_file <- paste0(f, ".png")
-      if (file.exists(png_file)) {
-        expect_snapshot_file(png_file, paste0(nm, ".png"))
-      }
-    }
-  }
+  test_output_format(quick_typst_png, "", ".png",
+                     skip_conditions = list(skip_without_typst))
 })
 
-
 test_that("typst svg snapshots", {
-  skip_without_typst()
-  tables <- make_tables()
-  for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = "")  # No extension for SVG prefix
-    if (nm %in% c("table_caption_tests", "table_position_tests", "table_width_tests")) {
-      do.call(quick_typst_svg, c(tables[[nm]], file = f, open = FALSE))
-      # SVG creates files with -1, -2 etc. suffixes, find the first one
-      svg_files <- list.files(dirname(f), pattern = paste0("^", basename(f), ".*\\.svg$"), full.names = TRUE)
-      if (length(svg_files) > 0) {
-        expect_snapshot_file(svg_files[1], paste0(nm, ".svg"))
-      }
-    } else {
-      quick_typst_svg(tables[[nm]], file = f, open = FALSE)
-      svg_file <- paste0(f, ".svg")
-      if (file.exists(svg_file)) {
-        expect_snapshot_file(svg_file, paste0(nm, ".svg"))
-      }
-    }
-  }
+  test_output_format(quick_typst_svg, "", ".svg",
+                     skip_conditions = list(skip_without_typst))
 })
