@@ -13,7 +13,7 @@ make_tables <- function() {
     "Styled" = c("bold=TRUE", "italic=TRUE", "Times New Roman", "font_size=16", "*markdown*=TRUE", "red text", "grey90 bg"),
     add_colnames = TRUE
   )
-  text_props <- set_all_borders(text_props)
+  text_props <- set_all_borders(text_props, value = 1)
   bold(text_props)[2, 3] <- TRUE
   italic(text_props)[3, 3] <- TRUE
   font(text_props)[4, 3] <- "Times New Roman"
@@ -30,7 +30,7 @@ make_tables <- function() {
     "Effects" = c("normal", "normal", "rotation=90"),
     add_colnames = TRUE
   )
-  text_position <- set_all_borders(text_position)
+  text_position <- set_all_borders(text_position, value = 1)
   # Set alignments - row 2 (first data row)
   align(text_position)[2, 1] <- "left"
   align(text_position)[2, 2] <- "center"
@@ -57,7 +57,7 @@ make_tables <- function() {
     "Bottom border" = c("normal", "normal", "normal", "normal", "bottom=2"),
     add_colnames = TRUE
   )
-  borders_table <- set_all_borders(borders_table)
+  borders_table <- set_all_borders(borders_table, value = 1)
   top_border(borders_table)[2, ] <- 3
   top_border_color(borders_table)[3, ] <- "red"
   top_border_style(borders_table)[4, ] <- "dashed"
@@ -73,7 +73,7 @@ make_tables <- function() {
     "Row Heights" = c("header", "40pt", "60pt"),
     add_colnames = TRUE
   )
-  dimensions <- set_all_borders(dimensions)
+  dimensions <- set_all_borders(dimensions, value = 1)
   col_width(dimensions) <- c(0.2, 0.3, 0.5, 0.15)  # Add width for new column
   row_height(dimensions) <- c(NA, 40, 60, 60)  # Different heights for rows 2 and 3
   caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.5, 0.15), row_height=(NA, 40, 60)"
@@ -83,7 +83,7 @@ make_tables <- function() {
     # Caption at top (default)
     {
       ht <- hux("caption_pos=top", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       caption(ht) <- "Table 1: caption_pos=\"top\" (default)"
       caption_pos(ht) <- "top"
       ht
@@ -91,7 +91,7 @@ make_tables <- function() {
     # Caption at bottom
     {
       ht <- hux("caption_pos=bottom", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       caption(ht) <- "Table 2: caption_pos=\"bottom\""
       caption_pos(ht) <- "bottom"
       ht
@@ -99,7 +99,7 @@ make_tables <- function() {
     # Caption width 0.5
     {
       ht <- hux("caption_width=0.5", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       caption(ht) <- "Table 3: caption_width=0.5 - This is a longer caption to demonstrate width constraint"
       caption_width(ht) <- 0.5
       ht
@@ -107,7 +107,7 @@ make_tables <- function() {
     # Caption width 0.8
     {
       ht <- hux("caption_width=0.8", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       caption(ht) <- "Table 4: caption_width=0.8 - This is a longer caption to demonstrate a wider width constraint"
       caption_width(ht) <- 0.8
       ht
@@ -119,7 +119,7 @@ make_tables <- function() {
     # Position left
     {
       ht <- hux("position=left", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       position(ht) <- "left"
       caption(ht) <- "Table 1: position=\"left\""
       ht
@@ -127,7 +127,7 @@ make_tables <- function() {
     # Position center
     {
       ht <- hux("position=center", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       position(ht) <- "center"
       caption(ht) <- "Table 2: position=\"center\""
       ht
@@ -135,7 +135,7 @@ make_tables <- function() {
     # Position right
     {
       ht <- hux("position=right", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       position(ht) <- "right"
       caption(ht) <- "Table 3: position=\"right\""
       ht
@@ -147,7 +147,7 @@ make_tables <- function() {
     # Width 30%
     {
       ht <- hux("width=0.3", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       width(ht) <- 0.3
       caption(ht) <- "Table 1: width=0.3 (30%)"
       ht
@@ -155,7 +155,7 @@ make_tables <- function() {
     # Width 60%
     {
       ht <- hux("width=0.6", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       width(ht) <- 0.6
       caption(ht) <- "Table 2: width=0.6 (60%)"
       ht
@@ -163,7 +163,7 @@ make_tables <- function() {
     # Width 90%
     {
       ht <- hux("width=0.9", add_colnames = FALSE)
-      ht <- set_all_borders(ht)
+      ht <- set_all_borders(ht, value = 1)
       width(ht) <- 0.9
       caption(ht) <- "Table 3: width=0.9 (90%)"
       ht
@@ -177,7 +177,7 @@ make_tables <- function() {
     "Formatted" = c(1234.5678, 3.14159, NA, "<b>HTML</b>"),
     add_colnames = TRUE
   )
-  content_format <- set_all_borders(content_format)
+  content_format <- set_all_borders(content_format, value = 1)
   number_format(content_format)[2, 3] <- 0  # integer format
   number_format(content_format)[3, 3] <- "%.2f"  # 2 decimal places
   na_string(content_format)[4, 3] <- "missing"
