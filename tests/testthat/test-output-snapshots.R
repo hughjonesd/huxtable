@@ -29,7 +29,7 @@ make_tables <- function() {
     add_colnames = TRUE
   )
   align(text_position)[2, 1] <- "left"
-  align(text_position)[2, 2] <- "center" 
+  align(text_position)[2, 2] <- "center"
   align(text_position)[2, 3] <- "right"
   valign(text_position)[2, 1] <- "top"
   valign(text_position)[2, 2] <- "middle"
@@ -59,7 +59,7 @@ make_tables <- function() {
   # Dimensions: col_width and row_height
   dimensions <- hux(
     "Narrow" = c("20%", "content"),
-    "Medium" = c("30%", "content"),  
+    "Medium" = c("30%", "content"),
     "Wide" = c("50%", "content"),
     add_colnames = TRUE
   )
@@ -91,14 +91,14 @@ make_tables <- function() {
     add_colnames = TRUE
   )
   number_format(content_format)[2, 3] <- 0  # integer format
-  number_format(content_format)[3, 3] <- "%.2f"  # 2 decimal places  
+  number_format(content_format)[3, 3] <- "%.2f"  # 2 decimal places
   na_string(content_format)[4, 3] <- "missing"
   escape_contents(content_format)[5, 3] <- FALSE
   caption(content_format) <- "Testing content formatting: numbers, NA values, and HTML escaping"
 
   list(
     text_properties = text_props,
-    text_positioning = text_position, 
+    text_positioning = text_position,
     borders = borders_table,
     dimensions = dimensions,
     table_position_left = table_pos_left,
@@ -112,8 +112,11 @@ make_tables <- function() {
 
 test_that("pdf snapshots", {
   tables <- make_tables()
+  test_dir <- file.path(test_path(), "output_files")
+  dir.create(test_dir, showWarnings = FALSE)
+  
   for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".pdf")
+    f <- file.path(test_dir, paste0(nm, ".pdf"))
     quick_pdf(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".pdf"))
   }
@@ -123,8 +126,11 @@ test_that("pdf snapshots", {
 test_that("typst pdf snapshots", {
   skip_without_typst()
   tables <- make_tables()
+  test_dir <- file.path(test_path(), "output_files")
+  dir.create(test_dir, showWarnings = FALSE)
+  
   for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".pdf")
+    f <- file.path(test_dir, paste0(nm, "-typst.pdf"))
     quick_typst_pdf(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, "-typst.pdf"))
   }
@@ -135,8 +141,11 @@ test_that("docx snapshots", {
   skip_if_not_installed("officer")
   skip_if_not_installed("flextable")
   tables <- make_tables()
+  test_dir <- file.path(test_path(), "output_files")
+  dir.create(test_dir, showWarnings = FALSE)
+  
   for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".docx")
+    f <- file.path(test_dir, paste0(nm, ".docx"))
     quick_docx(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".docx"))
   }
@@ -145,8 +154,11 @@ test_that("docx snapshots", {
 
 test_that("html snapshots", {
   tables <- make_tables()
+  test_dir <- file.path(test_path(), "output_files")
+  dir.create(test_dir, showWarnings = FALSE)
+  
   for (nm in names(tables)) {
-    f <- tempfile(pattern = nm, fileext = ".docx")
+    f <- file.path(test_dir, paste0(nm, ".html"))
     quick_html(tables[[nm]], file = f, open = FALSE)
     expect_snapshot_file(f, paste0(nm, ".html"))
   }
