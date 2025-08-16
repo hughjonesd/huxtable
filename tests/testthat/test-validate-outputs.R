@@ -464,6 +464,5 @@ test_that("HTML snapshots pass W3C validation", {
     }
   }
 
-  # If we get here, all HTML files passed validation
-  expect_true(TRUE, "All HTML snapshots pass W3C validation")
+  succeed("All HTML snapshots pass W3C validation")
 })
