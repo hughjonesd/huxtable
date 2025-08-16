@@ -54,8 +54,8 @@ make_tables <- function() {
 
   # Text effects: wrap, rotation, padding
   text_effects <- hux(
-    "Wrap test" = c("wrap=TRUE", ""),
-    "Wrap test" = c("", "wrap=FALSE"),
+    "Wrap 1" = c("wrap=TRUE", ""),
+    "Wrap 2" = c("", "wrap=FALSE"),
     "Rotation" = c("normal", "rotation=90"),
     "Padding" = c("normal", "padding=10px"),
     add_colnames = TRUE
