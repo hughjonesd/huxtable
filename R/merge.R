@@ -1,3 +1,5 @@
+#' Section about colspan/rowspan
+#'
 #' @section Cell content:
 #' In merged cell ranges, only the top left cell's content is displayed.
 #' In addition, when you merge cells (either by setting [colspan()] or
@@ -7,6 +9,7 @@
 #'
 #'
 #' @name span-overwrites-shadows
+#' @keywords internal
 NULL
 
 #' Merge a range of cells

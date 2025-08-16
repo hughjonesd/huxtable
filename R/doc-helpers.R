@@ -11,8 +11,8 @@ rd_default <- function(prop) {
   paste0("Set to `NA` to reset to the default, which is `", default, "`.")
 }
 
-# Shared documentation for huxtable property functions:
-
+#' Shared documentation for huxtable property functions:
+#'
 #' @param ht A huxtable.
 #' @param row A row specifier. See [rowspecs] for details.
 #' @param col An optional column specifier.
@@ -22,4 +22,5 @@ rd_default <- function(prop) {
 #'   `set_property()` and `map_property()` return the modified huxtable.
 #'
 #' @name hux_prop_params
+#' @keywords internal
 NULL

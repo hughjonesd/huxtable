@@ -1,8 +1,11 @@
+#' Description for `fmt_` functions
+#'
 #' @description
 #' `fmt_` functions are designed to work with [number_format()].
 #'
 #' @return An object you can pass into [number_format()].
 #' @name fmt-numbers
+#' @keywords internal
 NULL
 
 #' Format numbers as percent

@@ -324,6 +324,8 @@ overwrite_shadowed_cells <- function(ht, dc) {
 }
 
 
+#' Description of color format
+#'
 #' @description
 #' Colors can be in any format understood by R:
 #'
@@ -331,6 +333,7 @@ overwrite_shadowed_cells <- function(ht, dc) {
 #' * A HTML string like `"#FF0000"`
 #' * The result of a function like `rgb(1, 0, 0)` or `grey(0.5)`
 #' @name description-colors
+#' @keywords internal
 NULL
 
 

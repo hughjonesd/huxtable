@@ -123,6 +123,8 @@ NULL
 NULL
 
 
+#' Mapping parameters
+#'
 #' @param values A vector of property values. `length(values)` should be one greater than
 #'   `length(breaks)` if `extend = TRUE`, or one less if `extend = FALSE`.
 #' @param right If `TRUE`, intervals are closed on the right, i.e. if values are exactly equal to a
@@ -135,6 +137,7 @@ NULL
 #'   normally resets to the default.
 #' @param colwise Logical. Calculate breaks separately within each column?
 #' @name mapping-params
+#' @keywords internal
 NULL
 
 
