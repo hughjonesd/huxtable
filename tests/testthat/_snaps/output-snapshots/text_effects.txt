@@ -1,0 +1,26 @@
+         Text effects: wrap (TRUE vs FALSE), rotation=90, padding=10px          
+  ┌──────────────────┬──────────────────┬─────────────┬──────────────────────┐
+  │ Wrap test        │ Wrap test        │ Rotation    │ Padding              │
+  ├──────────────────┼──────────────────┼─────────────┼──────────────────────┤
+  │ This is a very   │                  │ normal      │ This text            │
+  │ long text that   │                  │             │ demonstrates padding │
+  │ should           │                  │             │ effects with longer  │
+  │ demonstrate text │                  │             │ content to show the  │
+  │ wrapping         │                  │             │ spacing difference   │
+  │ behavior when    │                  │             │                      │
+  │ wrap is enabled  │                  │             │                      │
+  │ versus disabled  │                  │             │                      │
+  ├──────────────────┼──────────────────┼─────────────┼──────────────────────┤
+  │                  │ This is a very   │ rotation=90 │ This text            │
+  │                  │ long text that   │             │ demonstrates padding │
+  │                  │ should           │             │ effects with longer  │
+  │                  │ demonstrate text │             │ content to show the  │
+  │                  │ wrapping         │             │ spacing difference   │
+  │                  │ behavior when    │             │                      │
+  │                  │ wrap is enabled  │             │                      │
+  │                  │ versus disabled  │             │                      │
+  └──────────────────┴──────────────────┴─────────────┴──────────────────────┘
+
+Column names: Wrap test, Wrap test, Rotation, Padding
+
+

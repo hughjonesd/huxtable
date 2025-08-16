@@ -1,0 +1,14 @@
+   Text alignment: align=(left, center, right) × valign=(top, middle, bottom)   
+                 ┌─────────────┬───────────────┬──────────────┐
+                 │ Left        │ Center        │ Right        │
+                 ├─────────────┼───────────────┼──────────────┤
+                 │ left+top    │  center+top   │    right+top │
+                 ├─────────────┼───────────────┼──────────────┤
+                 │ left+middle │ center+middle │ right+middle │
+                 ├─────────────┼───────────────┼──────────────┤
+                 │ left+bottom │ center+bottom │ right+bottom │
+                 └─────────────┴───────────────┴──────────────┘
+
+Column names: Left, Center, Right
+
+
