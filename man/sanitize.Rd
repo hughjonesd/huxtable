@@ -4,18 +4,18 @@
 \alias{sanitize}
 \title{Escape text for various formats}
 \usage{
-sanitize(str, type = c("latex", "html", "rtf", "typst"))
+sanitize(str, type = c("latex", "html", "rtf"))
 }
 \arguments{
 \item{str}{A character object.}
 
-\item{type}{\code{"latex"}, \code{"html"}, \code{"rtf"} or \code{"typst"}}
+\item{type}{\code{"latex"}, \code{"html"} or \code{"rtf"}.}
 }
 \value{
 The sanitized character object.
 }
 \description{
-This escapes a string for LaTeX, HTML, RTF or Typst.
+This escapes a string for LaTeX, HTML or RTF.
 }
 \details{
 HTML and LaTeX code was copied over from \code{xtable::sanitize()}.
