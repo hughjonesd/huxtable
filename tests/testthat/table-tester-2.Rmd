@@ -139,8 +139,8 @@ latex_float(ht) <- 'b'
 caption(ht) <- 'latex\\_float b, bottom of page'
 ht
 
-latex_float(ht) <- 'h'
-caption(ht) <- 'latex\\_float h, here'
+latex_float(ht) <- 'ht'
+caption(ht) <- 'latex\\_float ht, here'
 ht
 ```
 
