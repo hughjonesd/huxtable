@@ -38,17 +38,13 @@ make_tables <- function() {
   width(text_alignment) <- 1
   height(text_alignment) <- 0.5
   # Apply alignments systematically
-  for (row in 2:4) {
-    for (col in 1:3) {
-      if (col == 1) align(text_alignment)[row, col] <- "left"
-      if (col == 2) align(text_alignment)[row, col] <- "center"
-      if (col == 3) align(text_alignment)[row, col] <- "right"
+  align(text_alignment)[2:4, 1] <- "left"
+  align(text_alignment)[2:4, 2] <- "center"
+  align(text_alignment)[2:4, 3] <- "right"
 
-      if (row == 2) valign(text_alignment)[row, col] <- "top"
-      if (row == 3) valign(text_alignment)[row, col] <- "middle"
-      if (row == 4) valign(text_alignment)[row, col] <- "bottom"
-    }
-  }
+  valign(text_alignment)[2, 1:3] <- "top"
+  valign(text_alignment)[3, 1:3] <- "middle"
+  valign(text_alignment)[4, 1:3] <- "bottom"
   caption(text_alignment) <- "Text alignment: align=(left, center, right) × valign=(top, middle, bottom)"
 
   # Text effects: wrap, rotation, padding
@@ -139,7 +135,7 @@ make_tables <- function() {
     {
       ht <- hux("caption_width=0.8", add_colnames = FALSE)
       ht <- set_all_borders(ht, value = 1)
-      caption(ht) <- "Table 4: caption_width=0.8 - This is a longer caption to demonstrate a wider width constraint"
+      caption(ht) <- "Table 4: caption_width=0.8 - This is a longer caption to demonstrate width constraint"
       caption_width(ht) <- 0.8
       ht
     }
@@ -249,57 +245,107 @@ make_tables <- function() {
 
 tables <- make_tables()
 
-# Helper function to test output snapshots for different formats
+#' Determine base file path for output files
+#'
+#' Generates the base path where output files should be created, handling
+#' special cases for Typst image outputs that don't use file extensions.
+#'
+#' @param table_name Name of the table being tested
+#' @param file_ext File extension (e.g., ".html", ".tex")
+#' @param is_typst_image Is this a typst image format?
+#' @return Character string with base file path
+#' @noRd
+determine_base_path <- function(table_name, file_ext, is_typst_image) {
+  if (file_ext == "" && is_typst_image) {
+    file.path(tempdir(), table_name)
+  } else {
+    file.path(tempdir(), paste0(table_name, file_ext))
+  }
+}
+
+#' Generate output files using quick functions
+#'
+#' Calls the appropriate quick function to generate output files, handling both
+#' single tables and multi-table lists uniformly using do.call.
+#'
+#' @param table_data Huxtable or list of huxtables to output
+#' @param quick_func Quick function to use (e.g., quick_html, quick_latex)
+#' @param base_path Base file path for output
+#' @param table_name Name of table being processed
+#' @noRd
+generate_output_files <- function(table_data, quick_func, base_path, table_name) {
+  multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+  # Wrap single huxtables in a list so we can always use do.call
+  if (!table_name %in% multi_table_names) {
+    table_data <- list(table_data)
+  }
+
+  do.call(quick_func, c(table_data, file = base_path, open = FALSE))
+}
+
+#' Discover actual output files created by quick functions
+#'
+#' Finds the files that were actually created, handling special cases like
+#' Typst image outputs that create multiple numbered files.
+#'
+#' @param base_path Base file path that was used for generation
+#' @param is_typst_image Flag indicating if this is a typst image function
+#' @param file_ext File extension that was used
+#' @param snapshot_suffix Suffix for snapshot files
+#' @return Character vector of actual output file paths
+#' @noRd
+discover_output_files <- function(base_path, is_typst_image, file_ext, snapshot_suffix) {
+  if (is_typst_image) {
+    # For PNG/SVG, find files with suffixes
+    # the last backslashes here escape the "." of the snapshot_suffix
+    file_pattern <- paste0("^", basename(base_path), "(-\\d+)?\\", snapshot_suffix, "$")
+    output_files <- list.files(path = dirname(base_path), pattern = file_pattern, full.names = TRUE)
+  } else {
+    output_files <- base_path
+  }
+  output_files <- Filter(file.exists, output_files)
+  return(output_files)
+}
+
+#' Test output snapshots for different formats
+#'
+#' Main function to test huxtable output generation across different formats.
+#' Generates output files, discovers actual files created, and creates snapshots.
+#'
+#' @param quick_func Quick function to test (e.g., quick_html, quick_latex)
+#' @param file_ext File extension for outputs (e.g., ".html", ".tex").
+#'   This is "" for image files because `quick_typst_svg/png` just takes a prefix
+#' @param snapshot_suffix Suffix to add to snapshot file names
+#' @noRd
 test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
-  # Set fixed timestamp for deterministic Typst PDF output
-  if (grepl("typst", deparse(substitute(quick_func)))) {
+
+  if (grepl("typst|docx", deparse(substitute(quick_func)))) {
+    # reproducibility
     Sys.setenv(SOURCE_DATE_EPOCH = "1704110400") # 2024-01-01 12:00:00 UTC
   }
 
-  multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+  # Determine if this is a typst image function
+  is_typst_image <- grepl("typst_(png|svg)", deparse(substitute(quick_func)))
 
-  for (nm in names(tables)) {
-    if (file_ext == "" && grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
-      f <- file.path(tempdir(), nm)
-    } else {
-      f <- file.path(tempdir(), paste0(nm, file_ext))
-    }
+  platform <- utils::sessionInfo()$platform
 
-    # Generate output
-    if (nm %in% multi_table_names) {
-      do.call(quick_func, c(tables[[nm]], file = f, open = FALSE))
-    } else {
-      quick_func(tables[[nm]], file = f, open = FALSE)
-    }
+  for (table_name in names(tables)) {
+    base_path <- determine_base_path(table_name = table_name, file_ext = file_ext,
+                                     is_typst_image = is_typst_image)
 
-    platform <- utils::sessionInfo()$platform
-    # Handle file checking for different formats
-    if (grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
-      # For PNG/SVG, find files with suffixes
-      file_ext_actual <- ifelse(grepl("png", deparse(substitute(quick_func))), "png", "svg")
-      file_pattern <- paste0("^", basename(f), ".*\\.", file_ext_actual, "$")
-      output_files <- list.files(dirname(f), pattern = file_pattern, full.names = TRUE)
-      if (length(output_files) > 0) {
-        if (nm %in% multi_table_names && length(output_files) > 1) {
-          # For multi-table tests, save all files with numbered suffixes
-          for (i in seq_along(output_files)) {
-            expect_snapshot_file(output_files[i], paste0(nm, "-", i, snapshot_suffix), variant = platform)
-          }
-        } else {
-          # Single table test
-          expect_snapshot_file(output_files[1], paste0(nm, snapshot_suffix), variant = platform)
-        }
-      }
-    } else if (file_ext == "" && !grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
-      # Single file with added extension
-      output_file <- paste0(f, gsub("^\\.", "", snapshot_suffix))
-      if (file.exists(output_file)) {
-        expect_snapshot_file(output_file, paste0(nm, snapshot_suffix), variant = platform)
-      }
-    } else {
-      # Standard file output
-      expect_snapshot_file(f, paste0(nm, snapshot_suffix), variant = platform)
-    }
+    generate_output_files(table_data = tables[[table_name]], quick_func = quick_func,
+                         base_path = base_path, table_name = table_name)
+
+    output_files <- discover_output_files(base_path = base_path, is_typst_image = is_typst_image,
+                                         file_ext = file_ext, snapshot_suffix = snapshot_suffix)
+
+    # Use lapply to create snapshots for all files
+    lapply(output_files, function(file) {
+      snapshot_file <- basename(file)
+      file_pattern <- paste0("\\", file_ext, "$") # "\\" escapes the leading dot
+      snapshot_file <- sub(file_pattern, snapshot_suffix, snapshot_file)
+      expect_snapshot_file(path = file, name = snapshot_file, variant = platform)
+    })
   }
 }
 
@@ -316,40 +362,90 @@ test_that("rtf snapshots", {
   test_output_format(quick_rtf, ".rtf", ".rtf")
 })
 
-test_that("docx-as-rtf snapshots", {
-  skip_if_not_installed("officer")
-  skip_if_not_installed("flextable")
-  if (Sys.which("pandoc") == "") skip("pandoc not found")
+test_that("docx snapshots", {
+  # No way to make reproducible, you just have to manually compare them
+  # if you want to
+  skip_on_ci()
+  skip("Can't make docx reproducible")
+  test_output_format(quick_docx, ".docx", ".docx")
+})
 
-  # Test DOCX conversion pathway but output as RTF for determinism
-  test_docx_as_rtf <- function(tables, file_prefix) {
-    multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+validate_html_file <- function(file_path) {
+  html_content <- paste(readLines(file_path, warn = FALSE), collapse = "\n")
 
-    for (nm in names(tables)) {
-      if (nm %in% multi_table_names) {
-        # Handle multiple tables
-        for (i in seq_along(tables[[nm]])) {
-          ft <- huxtable::as_flextable(tables[[nm]][[i]])
-          rtf_file <- file.path(tempdir(), paste0(nm, "-", i, ".rtf"))
-          flextable::save_as_rtf(ft, path = rtf_file)
-          expect_snapshot_file(rtf_file, paste0(nm, "-", i, "-docx.rtf"))
+  # Use filterpattern to exclude known false positives at the validator source
+  # The Nu validator incorrectly flags <style> in <body> as an error,
+  # but this is allowed per WHATWG HTML specification
+  filter_pattern <- ".*Element.*style.*not allowed.*"
+  validator_url <- paste0("https://validator.w3.org/nu/?out=json&filterpattern=",
+                         utils::URLencode(filter_pattern, reserved = TRUE))
+
+  response <- tryCatch({
+    httr::POST(
+      validator_url,
+      body = html_content,
+      httr::content_type("text/html; charset=utf-8")
+    )
+  }, error = function(e) {
+    skip(paste("Validation request failed for", basename(file_path), ":", conditionMessage(e)))
+  })
+
+  if (httr::status_code(response) != 200) {
+    skip(paste("Validator returned status", httr::status_code(response), "for", basename(file_path)))
+  }
+
+  result <- httr::content(response, as = "parsed", type = "application/json")
+  messages <- result$messages
+  messages <- data.frame(
+    type = vapply(messages, `[[`, "type", FUN.VALUE = character(1L)),
+    message = vapply(messages, `[[`, "message", FUN.VALUE = character(1L))
+  )
+
+  return(messages)
+}
+
+test_that("html snapshots", {
+  # Enhanced HTML quick function that includes W3C validation
+  quick_html_with_validation <- function(..., file, open = "ignored") {
+    # Generate HTML file using standard quick_html
+    quick_html(..., file = file, open = open)
+
+    # Validate the generated HTML file
+    skip_if_not_installed("httr")
+    skip_if_not_installed("jsonlite")
+
+    # Test validator accessibility
+    validator_accessible <- tryCatch({
+      response <- httr::HEAD("https://validator.w3.org/nu/")
+      httr::status_code(response) < 400
+    }, error = function(e) FALSE)
+
+    if (validator_accessible) {
+      messages <- validate_html_file(file)
+
+      if (nrow(messages) > 0) {
+        # Separate errors from warnings/info
+        errors <- messages[messages$type == "error", ]
+        warnings <- messages[messages$type %in% c("warning", "info"), ]
+
+        # Report warnings but don't fail
+        if (nrow(warnings) > 0) {
+          warning_msgs <- paste0("Line ", warnings$lastLine, ": ", warnings$message)
+          message("HTML validation warnings in ", basename(file), ": ",
+                  paste(warning_msgs, collapse = "; "))
         }
-      } else {
-        # Single table
-        ft <- huxtable::as_flextable(tables[[nm]])
-        rtf_file <- file.path(tempdir(), paste0(nm, ".rtf"))
-        flextable::save_as_rtf(ft, path = rtf_file)
-        expect_snapshot_file(rtf_file, paste0(nm, "-docx.rtf"))
+
+        # Fail on errors (false positives already filtered at source)
+        if (nrow(errors) > 0) {
+          error_msgs <- paste0("Line ", errors$lastLine, ": ", errors$message)
+          fail(paste("HTML validation errors in", basename(file), ":",
+                     paste(error_msgs, collapse = "; ")))
+        }
       }
     }
   }
 
-  tables <- make_tables()
-  test_docx_as_rtf(tables, "docx")
-})
-
-test_that("html snapshots", {
-  test_output_format(quick_html, ".html", ".html")
+  test_output_format(quick_html_with_validation, ".html", ".html")
 })
 
 test_that("typst png snapshots", {
@@ -380,88 +476,3 @@ test_that("screen snapshots", {
   test_output_format(quick_screen, ".txt", ".txt")
 })
 
-
-test_that("HTML snapshots pass W3C validation", {
-  skip_if_not_installed("httr")
-  skip_if_not_installed("jsonlite")
-
-  # Test validator accessibility
-  validator_accessible <- tryCatch({
-    response <- httr::HEAD("https://validator.w3.org/nu/")
-    httr::status_code(response) < 400
-  }, error = function(e) FALSE)
-
-  skip_if_not(validator_accessible, "Nu HTML Checker not accessible")
-
-  # Get all HTML snapshot files
-  html_files <- list.files(
-    path = file.path("_snaps", "validate-outputs"),
-    pattern = "\\.html$",
-    full.names = TRUE
-  )
-
-  skip_if(length(html_files) == 0, "No HTML snapshot files found")
-
-  # Helper function to validate HTML using Nu HTML Checker API
-  validate_html_file <- function(file_path) {
-    html_content <- paste(readLines(file_path, warn = FALSE), collapse = "\n")
-
-    # Use filterpattern to exclude known false positives at the validator source
-    # The Nu validator incorrectly flags <style> in <body> as an error,
-    # but this is allowed per WHATWG HTML specification
-    filter_pattern <- ".*Element.*style.*not allowed.*"
-    validator_url <- paste0("https://validator.w3.org/nu/?out=json&filterpattern=",
-                           utils::URLencode(filter_pattern, reserved = TRUE))
-
-    response <- tryCatch({
-      httr::POST(
-        validator_url,
-        body = html_content,
-        httr::content_type("text/html; charset=utf-8")
-      )
-    }, error = function(e) {
-      skip(paste("Validation request failed for", basename(file_path), ":", conditionMessage(e)))
-    })
-
-    if (httr::status_code(response) != 200) {
-      skip(paste("Validator returned status", httr::status_code(response), "for", basename(file_path)))
-    }
-
-    result <- httr::content(response, as = "parsed", type = "application/json")
-    messages <- result$messages
-    messages <- data.frame(
-      type = vapply(messages, `[[`, "type", FUN.VALUE = character(1L)),
-      message = vapply(messages, `[[`, "message", FUN.VALUE = character(1L))
-    )
-
-    return(messages)
-  }
-
-  # Validate each HTML file
-  for (file_path in html_files) {
-    file_name <- basename(file_path)
-    messages <- validate_html_file(file_path)
-
-    if (nrow(messages) > 0) {
-      # Separate errors from warnings/info
-      errors <- messages[messages$type == "error", ]
-      warnings <- messages[messages$type %in% c("warning", "info"), ]
-
-      # Report warnings but don't fail
-      if (nrow(warnings) > 0) {
-        warning_msgs <- paste0("Line ", warnings$lastLine, ": ", warnings$message)
-        message("HTML validation warnings in ", file_name, ": ",
-                paste(warning_msgs, collapse = "; "))
-      }
-
-      # Fail on errors (false positives already filtered at source)
-      if (nrow(errors) > 0) {
-        error_msgs <- paste0("Line ", errors$lastLine, ": ", errors$message)
-        fail(paste("HTML validation errors in", file_name, ":",
-                   paste(error_msgs, collapse = "; ")))
-      }
-    }
-  }
-
-  succeed("All HTML snapshots pass W3C validation")
-})
