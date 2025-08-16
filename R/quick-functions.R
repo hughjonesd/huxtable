@@ -233,6 +233,8 @@ quick_html <- function(
   loc <- Sys.getlocale("LC_COLLATE")
   loc <- strsplit(loc, ".", fixed = TRUE)[[1]]
   loc[1] <- gsub("_", "-", loc[1], fixed = TRUE)
+  # Ensure we have both language and charset components
+  if (length(loc) < 2) loc[2] <- "UTF-8"
   loc <- ifelse(is.na(loc), "", loc)
   sink(file)
   cat("<!DOCTYPE html>",
