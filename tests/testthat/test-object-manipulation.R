@@ -19,10 +19,10 @@ test_that("huxtable manipulation preserves attribute dimnames", {
   expect_equal(colnames(align(ht)), c("a", "b", "d"))
   ht2 <- rbind(ht, 1:3)
   expect_equal(colnames(align(ht2)), c("a", "b", "d"))
-  ht3 <- cbind(ht, e = 1:4)  # Need 4 values to match ht's row count
+  ht3 <- cbind(ht, e = 1:4) # Need 4 values to match ht's row count
   expect_equal(colnames(align(ht3)), c("a", "b", "d", "e"))
   ht4 <- ht
-  ht4$e <- 1:4  # Need 4 values to match ht's row count
+  ht4$e <- 1:4 # Need 4 values to match ht's row count
   expect_equal(colnames(align(ht4)), c("a", "b", "d", "e"))
   ht5 <- ht
   ht5$a <- NULL
@@ -38,11 +38,11 @@ test_that("colnames<- and friends affect attribute dimnames", {
   ht2 <- hux(a = 1:3, b = 1:3, d = 1:3)
   names(ht2) <- c("e", "f", "g")
   expect_equal(colnames(align(ht2)), c("e", "f", "g"))
-  rownames(ht2) <- letters[1:4]  # Need 4 row names for 4 rows
+  rownames(ht2) <- letters[1:4] # Need 4 row names for 4 rows
   expect_equal(rownames(align(ht2)), letters[1:4])
 
-  ht3 <- hux(a = 1:3, b = 1:3, d = 1:3)  # Now 4 rows (header + 3 data)
-  dimnames(ht3) <- list(letters[1:4], letters[24:26])  # Need 4 row names
+  ht3 <- hux(a = 1:3, b = 1:3, d = 1:3) # Now 4 rows (header + 3 data)
+  dimnames(ht3) <- list(letters[1:4], letters[24:26]) # Need 4 row names
   expect_equal(colnames(align(ht3)), letters[24:26])
   expect_equal(rownames(align(ht3)), letters[1:4])
 })
@@ -108,14 +108,14 @@ test_that("Huxtables can be transposed", {
   expect_equal(colspan(trans)[1, 1], 2)
   expect_equal(rowspan(trans)[1, 3], 2)
   expect_equal(colspan(trans)[1, 3], 1)
-  expect_equal(font(trans), matrix(c(rep(NA, 2), "italic", rep(NA, 7)), 2, 5), ignore_attr = TRUE)  # 2x5 matrix now
+  expect_equal(font(trans), matrix(c(rep(NA, 2), "italic", rep(NA, 7)), 2, 5), ignore_attr = TRUE) # 2x5 matrix now
   expect_equal(caption(trans), "A caption")
 })
 
 
 
 test_that("cbind and rbind work with 0-dimension objects", {
-  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)  # Keep clean for 0-dimension testing
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE) # Keep clean for 0-dimension testing
   expect_silent(ht_nrow0 <- ht[FALSE, ])
   expect_silent(ht_ncol0 <- ht[, FALSE])
 

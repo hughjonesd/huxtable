@@ -174,8 +174,8 @@ prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,
   # Coerce mode when setting entire property with simple values
   # But preserve list-matrix structure for properties that need it
   if (identical(rc$row, seq_len(nrow(ht))) &&
-      identical(rc$col, seq_len(ncol(ht))) &&
-      !is.list(attr(ht, prop))) {
+    identical(rc$col, seq_len(ncol(ht))) &&
+    !is.list(attr(ht, prop))) {
     mode(attr(ht, prop)) <- mode(value)
   }
   ht
@@ -198,9 +198,9 @@ prop_set_dim <- function(ht, dim_spec, value, prop, dimension, check_fun = NULL,
   dim_spec <- get_rc_spec(ht, dim_spec, dimension)
   value <- validate_prop(value, prop, check_fun, check_values, reset_na)
   if (!is.null(extra)) eval(extra)
-  
+
   attr(ht, prop)[dim_spec] <- value
-  
+
   # Coerce mode if setting entire property
   size <- if (dimension == 1) nrow(ht) else ncol(ht)
   if (identical(dim_spec, seq_len(size))) {
@@ -215,8 +215,10 @@ prop_set_dim <- function(ht, dim_spec, value, prop, dimension, check_fun = NULL,
 #' @noRd
 prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
                          check_values = NULL, extra = NULL, reset_na = TRUE) {
-  prop_set_dim(ht, row, value, prop, dimension = 1, check_fun = check_fun,
-               check_values = check_values, extra = extra, reset_na = reset_na)
+  prop_set_dim(ht, row, value, prop,
+    dimension = 1, check_fun = check_fun,
+    check_values = check_values, extra = extra, reset_na = reset_na
+  )
 }
 
 #' Set values for a column-based property
@@ -225,8 +227,10 @@ prop_set_row <- function(ht, row, value, prop, check_fun = NULL,
 #' @noRd
 prop_set_col <- function(ht, col, value, prop, check_fun = NULL,
                          check_values = NULL, extra = NULL, reset_na = TRUE) {
-  prop_set_dim(ht, col, value, prop, dimension = 2, check_fun = check_fun,
-               check_values = check_values, extra = extra, reset_na = reset_na)
+  prop_set_dim(ht, col, value, prop,
+    dimension = 2, check_fun = check_fun,
+    check_values = check_values, extra = extra, reset_na = reset_na
+  )
 }
 
 #' Set a table-level property

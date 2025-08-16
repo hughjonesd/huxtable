@@ -496,7 +496,9 @@ do_quick_typst_images <- function(hts, file, open, width, height, format, extra_
 confirm_prefix <- function(file) {
   if (!interactive()) stop("Please specify a `file` argument for non-interactive use of quick_typst_png().")
   dir <- dirname(file)
-  if (!dir.exists(dir)) return(file)
+  if (!dir.exists(dir)) {
+    return(file)
+  }
   prefix <- basename(file)
   existing <- list.files(dir)
   existing <- existing[startsWith(existing, prefix)]

@@ -6,7 +6,7 @@ test_that("create huxtable using hux[table]()", {
   expect_silent(ht2 <- hux(a = 1:3, b = 1:3))
   expect_s3_class(ht, "huxtable")
   expect_equal(ncol(ht), 2)
-  expect_equal(nrow(ht), 4)  # Now includes header row
+  expect_equal(nrow(ht), 4) # Now includes header row
   expect_identical(ht, ht2)
 })
 

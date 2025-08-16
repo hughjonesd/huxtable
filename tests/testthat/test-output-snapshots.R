@@ -1,4 +1,3 @@
-
 skip_on_cran()
 
 skip_without_typst <- function() {
@@ -106,8 +105,8 @@ make_tables <- function() {
     add_colnames = TRUE
   )
   dimensions <- set_all_borders(dimensions, value = 1)
-  col_width(dimensions) <- c(0.2, 0.3, 0.35, 0.15)  # Total = 1.0
-  row_height(dimensions) <- c(0.15, 0.15, 0.15, 0.15, 0.4)  # Different heights for all rows including header
+  col_width(dimensions) <- c(0.2, 0.3, 0.35, 0.15) # Total = 1.0
+  row_height(dimensions) <- c(0.15, 0.15, 0.15, 0.15, 0.4) # Different heights for all rows including header
   caption(dimensions) <- "Dimensions: col_width=(0.2, 0.3, 0.35, 0.15)=1.0, row_height=(0.15, 0.15, 0.15, 0.15, 0.4)"
 
   # Table caption properties - multiple tables in one document
@@ -211,8 +210,8 @@ make_tables <- function() {
     add_colnames = TRUE
   )
   content_format <- set_all_borders(content_format, value = 1)
-  number_format(content_format)[2, 3] <- 0  # integer format
-  number_format(content_format)[3, 3] <- "%.2f"  # 2 decimal places
+  number_format(content_format)[2, 3] <- 0 # integer format
+  number_format(content_format)[3, 3] <- "%.2f" # 2 decimal places
   number_format(content_format)[4, 3] <- fmt_percent(digits = 1)
   na_string(content_format)[5, 3] <- "missing"
   escape_contents(content_format)[6, 3] <- FALSE
@@ -254,7 +253,7 @@ tables <- make_tables()
 test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   # Set fixed timestamp for deterministic Typst PDF output
   if (grepl("typst", deparse(substitute(quick_func)))) {
-    Sys.setenv(SOURCE_DATE_EPOCH = "1704110400")  # 2024-01-01 12:00:00 UTC
+    Sys.setenv(SOURCE_DATE_EPOCH = "1704110400") # 2024-01-01 12:00:00 UTC
   }
 
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
@@ -372,7 +371,8 @@ test_that("screen snapshots", {
     if (file.exists(file)) file.remove(file)
     for (obj in args) {
       cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE),
-          file = file, append = TRUE)
+        file = file, append = TRUE
+      )
       cat("\n\n", file = file, append = TRUE)
     }
   }

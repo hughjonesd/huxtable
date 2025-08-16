@@ -13,7 +13,6 @@ skip_without_typst <- function() {
 
 
 test_that("Quick output functions create files", {
-
   ht <- hux(a = 1:2, b = 1:2)
   m <- matrix(1:4, 2, 2)
   dfr <- data.frame(a = 1:5, b = 1:5)
@@ -34,15 +33,15 @@ test_that("Quick output functions create files", {
   tf <- tempfile(fileext = ".pdf")
   expect_silent(quick_typst_pdf(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
-  
- 
+
+
   skip_if_not_installed("openxlsx")
   skip_if_not_installed("flextable")
-  
+
   tf <- tempfile(fileext = ".docx")
   expect_silent(quick_docx(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))
-  
+
   tf <- tempfile(fileext = ".pptx")
   expect_silent(quick_pptx(m, dfr, ht, file = tf, open = FALSE))
   expect_true(file.exists(tf))

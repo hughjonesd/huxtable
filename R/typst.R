@@ -173,27 +173,27 @@ typst_table_options <- function(ht) {
 #' @noRd
 typst_figure <- function(ht, text) {
   lab <- make_label(ht)
-  cap <-  if (is.na(caption(ht))) {
-            "none"
-          } else {
-            cap_body <- typst_escape(make_caption(ht, lab, "typst"))
+  cap <- if (is.na(caption(ht))) {
+    "none"
+  } else {
+    cap_body <- typst_escape(make_caption(ht, lab, "typst"))
 
-            cap_pos <- caption_pos(ht)
-            vpos <- if (grepl("top", cap_pos)) "top" else "bottom"
-            hpos <- get_caption_hpos(ht)
+    cap_pos <- caption_pos(ht)
+    vpos <- if (grepl("top", cap_pos)) "top" else "bottom"
+    hpos <- get_caption_hpos(ht)
 
-            cap_width <- caption_width(ht)
-            if (!is.na(cap_width)) {
-              if (is.numeric(cap_width)) {
-                cap_width <- paste0(cap_width * 100, "%")
-              }
-              cap_body <- sprintf("block(width: %s)[%s]", cap_width, cap_body)
-            }
+    cap_width <- caption_width(ht)
+    if (!is.na(cap_width)) {
+      if (is.numeric(cap_width)) {
+        cap_width <- paste0(cap_width * 100, "%")
+      }
+      cap_body <- sprintf("block(width: %s)[%s]", cap_width, cap_body)
+    }
 
-            cap_body <- sprintf("align(%s)[%s]", hpos, cap_body)
+    cap_body <- sprintf("align(%s)[%s]", hpos, cap_body)
 
-            sprintf("figure.caption(position: %s, %s)", vpos, cap_body)
-          }
+    sprintf("figure.caption(position: %s, %s)", vpos, cap_body)
+  }
 
   cap <- sprintf("caption: %s", cap)
 

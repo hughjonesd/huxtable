@@ -2,7 +2,7 @@ local_edition(3)
 
 
 test_that("set_* works with variables as arguments", {
-  ht_orig <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)  # Keep clean for interface testing
+  ht_orig <- hux(a = 1:2, b = 1:2, add_colnames = FALSE) # Keep clean for interface testing
   rownum <- 2
   colnum <- 1
   ht2 <- set_bold(ht_orig, rownum, colnum, TRUE)
@@ -14,7 +14,7 @@ test_that("set_* works with variables as arguments", {
 
 
 test_that("set_* works with logical arguments", {
-  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1:2, b = 1:2, add_colnames = FALSE) # Keep clean for interface testing
 
   ht2 <- set_bold(ht, 1:2, c(TRUE, FALSE))
   expect_equal(bold(ht2), matrix(c(TRUE, TRUE, FALSE, FALSE), 2, 2), ignore_attr = TRUE)
@@ -26,22 +26,22 @@ test_that("set_* works with logical arguments", {
 
 
 test_that("set_* works with cell functions", {
-  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE) # Keep clean for interface testing
   ht <- set_font(ht, evens, 1:2, "times")
   ht <- set_font(ht, odds, 1:2, "palatino")
   expect_equal(font(ht), matrix(c("palatino", "times"), 4, 2), ignore_attr = TRUE)
-  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE) # Keep clean for interface testing
   ht <- set_font(ht, stripe(1), evens, "times")
   ht <- set_font(ht, stripe(1), odds, "palatino")
   expect_equal(font(ht), matrix(c("palatino", "times"), 4, 2, byrow = TRUE), ignore_attr = TRUE)
-  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE) # Keep clean for interface testing
   ht <- set_font(ht, stripe(3, from = 1), stripe(1), "times")
   expect_equal(font(ht), matrix(c("times", NA, NA, "times"), 4, 2), ignore_attr = TRUE)
 })
 
 
 test_that("set_* works with row and column functions", {
-  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1:4, b = 1:4, add_colnames = FALSE) # Keep clean for interface testing
   ht <- set_col_width(ht, evens, "20pt")
   ht <- set_col_width(ht, odds, "40pt")
   ht <- set_row_height(ht, evens, "15pt")
@@ -52,7 +52,7 @@ test_that("set_* works with row and column functions", {
 
 
 test_that("set_*: 2 argument form", {
-  ht <- hux(a = c(1, 0), b = c(0, 1), add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = c(1, 0), b = c(0, 1), add_colnames = FALSE) # Keep clean for interface testing
   ht2 <- set_font(ht, "times")
   expect_equal(font(ht2), matrix("times", 2, 2), ignore_attr = TRUE)
   ht3 <- set_font(ht, value = "times")
@@ -77,7 +77,7 @@ test_that("set_* works with row and col 'empty'", {
 
 
 test_that("set_* default arguments", {
-  ht <- hux(a = 1, add_colnames = FALSE)  # Keep clean for interface testing
+  ht <- hux(a = 1, add_colnames = FALSE) # Keep clean for interface testing
   expect_silent(ht1 <- set_bold(ht))
   expect_equal(bold(ht1), matrix(TRUE, 1, 1), ignore_attr = TRUE)
   expect_silent(ht2 <- set_bold(ht, 1, 1))

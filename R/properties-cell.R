@@ -35,7 +35,8 @@ valign <- function(ht) prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 `valign<-` <- function(ht, value) {
-  prop_set(ht, "valign", value = value,
+  prop_set(ht, "valign",
+    value = value,
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -44,7 +45,8 @@ valign <- function(ht) prop_get(ht, "valign")
 #' @rdname valign
 #' @export
 set_valign <- function(ht, row, col, value) {
-  prop_set(ht, "valign", row, col, value = value,
+  prop_set(ht, "valign", row, col,
+    value = value,
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -53,7 +55,8 @@ set_valign <- function(ht, row, col, value) {
 #' @rdname valign
 #' @export
 map_valign <- function(ht, row, col, fn) {
-  prop_set(ht, "valign", row, col, fn = fn,
+  prop_set(ht, "valign", row, col,
+    fn = fn,
     check_fun = is.character,
     check_values = c("top", "middle", "bottom")
   )
@@ -133,7 +136,8 @@ align <- function(ht) prop_get(ht, "align")
 #' @rdname align
 #' @export
 `align<-` <- function(ht, value) {
-  prop_set(ht, "align", value = value,
+  prop_set(ht, "align",
+    value = value,
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -142,7 +146,8 @@ align <- function(ht) prop_get(ht, "align")
 #' @rdname align
 #' @export
 set_align <- function(ht, row, col, value) {
-  prop_set(ht, "align", row, col, value = value,
+  prop_set(ht, "align", row, col,
+    value = value,
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -151,7 +156,8 @@ set_align <- function(ht, row, col, value) {
 #' @rdname align
 #' @export
 map_align <- function(ht, row, col, fn) {
-  prop_set(ht, "align", row, col, fn = fn,
+  prop_set(ht, "align", row, col,
+    fn = fn,
     check_fun = check_align_value,
     extra = quote(value[value == "centre"] <- "center")
   )
@@ -191,7 +197,8 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 `rowspan<-` <- function(ht, value) {
-  prop_set(ht, "rowspan", value = value,
+  prop_set(ht, "rowspan",
+    value = value,
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::row(ht) + value - 1 > nrow(ht))
@@ -209,7 +216,8 @@ rowspan <- function(ht) prop_get(ht, "rowspan")
 #' @rdname spans
 #' @export
 set_rowspan <- function(ht, row, col, value) {
-  prop_set(ht, "rowspan", row, col, value = value,
+  prop_set(ht, "rowspan", row, col,
+    value = value,
     check_fun = is.numeric,
     extra = quote({
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
@@ -230,7 +238,8 @@ set_rowspan <- function(ht, row, col, value) {
 #' @rdname spans
 #' @export
 map_rowspan <- function(ht, row, col, fn) {
-  prop_set(ht, "rowspan", row, col, fn = fn,
+  prop_set(ht, "rowspan", row, col,
+    fn = fn,
     check_fun = is.numeric,
     extra = quote({
       rows <- base::row(ht)[rc$row, rc$col, drop = FALSE]
@@ -256,7 +265,8 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 `colspan<-` <- function(ht, value) {
-  prop_set(ht, "colspan", value = value,
+  prop_set(ht, "colspan",
+    value = value,
     check_fun = is.numeric,
     extra = quote({
       too_long <- na.omit(base::col(ht) + value - 1 > ncol(ht))
@@ -274,7 +284,8 @@ colspan <- function(ht) prop_get(ht, "colspan")
 #' @rdname spans
 #' @export
 set_colspan <- function(ht, row, col, value) {
-  prop_set(ht, "colspan", row, col, value = value,
+  prop_set(ht, "colspan", row, col,
+    value = value,
     check_fun = is.numeric,
     extra = quote({
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
@@ -295,7 +306,8 @@ set_colspan <- function(ht, row, col, value) {
 #' @rdname spans
 #' @export
 map_colspan <- function(ht, row, col, fn) {
-  prop_set(ht, "colspan", row, col, fn = fn,
+  prop_set(ht, "colspan", row, col,
+    fn = fn,
     check_fun = is.numeric,
     extra = quote({
       cols <- base::col(ht)[rc$row, rc$col, drop = FALSE]
@@ -808,7 +820,8 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 `rotation<-` <- function(ht, value) {
-  prop_set(ht, "rotation", value = value,
+  prop_set(ht, "rotation",
+    value = value,
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -817,7 +830,8 @@ rotation <- function(ht) prop_get(ht, "rotation")
 #' @rdname rotation
 #' @export
 set_rotation <- function(ht, row, col, value) {
-  prop_set(ht, "rotation", row, col, value = value,
+  prop_set(ht, "rotation", row, col,
+    value = value,
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -826,7 +840,8 @@ set_rotation <- function(ht, row, col, value) {
 #' @rdname rotation
 #' @export
 map_rotation <- function(ht, row, col, fn) {
-  prop_set(ht, "rotation", row, col, fn = fn,
+  prop_set(ht, "rotation", row, col,
+    fn = fn,
     check_fun = is.numeric,
     extra = quote(value <- value %% 360)
   )
@@ -921,7 +936,8 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 `number_format<-` <- function(ht, value) {
-  prop_set(ht, "number_format", value = value,
+  prop_set(ht, "number_format",
+    value = value,
     check_fun = check_number_format,
     reset_na = FALSE,
   )
@@ -930,7 +946,8 @@ number_format <- function(ht) prop_get(ht, "number_format")
 #' @rdname number_format
 #' @export
 set_number_format <- function(ht, row, col, value) {
-  prop_set(ht, "number_format", row, col, value = value,
+  prop_set(ht, "number_format", row, col,
+    value = value,
     check_fun = check_number_format,
     reset_na = FALSE
   )
@@ -939,7 +956,8 @@ set_number_format <- function(ht, row, col, value) {
 #' @rdname number_format
 #' @export
 map_number_format <- function(ht, row, col, fn) {
-  prop_set(ht, "number_format", row, col, fn = fn,
+  prop_set(ht, "number_format", row, col,
+    fn = fn,
     check_fun = check_number_format,
     reset_na = FALSE
   )

@@ -1,4 +1,3 @@
-
 #' Note about markdown vs. `print_md()`
 #'
 #' @section Note:

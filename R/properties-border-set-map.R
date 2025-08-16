@@ -21,11 +21,13 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border" && is_brdr(value)) {
-    ht <- prop_set(ht, prop, row, col, value = value,
+    ht <- prop_set(ht, prop, row, col,
+      value = value,
       extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- prop_set(ht, prop, row, col, value = value,
+    ht <- prop_set(ht, prop, row, col,
+      value = value,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }
@@ -53,11 +55,13 @@
     list(FUN = as.name(paste0(side, "_", prop)))
   )
   if (prop == "border") {
-    ht <- prop_set(ht, prop, row, col, fn = fn,
+    ht <- prop_set(ht, prop, row, col,
+      fn = fn,
       check_fun = is_borderish, extra = extra, reset_na = FALSE
     )
   } else {
-    ht <- prop_set(ht, prop, row, col, fn = fn,
+    ht <- prop_set(ht, prop, row, col,
+      fn = fn,
       check_fun = check_fun, check_values = check_values, extra = extra
     )
   }

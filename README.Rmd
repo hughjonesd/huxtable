@@ -5,7 +5,6 @@ output: github_document
 ```{r, echo = FALSE, results = 'asis'}
 suppressPackageStartupMessages(suppressWarnings(library(huxtable)))
 print_html(hux_logo())
-
 ```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -46,21 +45,23 @@ Huxtable is an R package to create styled tables in multiple output formats, wit
 To install from [r-universe](https://r-universe.dev):
 
 ```{r, eval = FALSE}
-install.packages("huxtable", repos = c("https://hughjonesd.r-universe.dev", 
-				       "https://cloud.r-project.org"))
+install.packages("huxtable", repos = c(
+  "https://hughjonesd.r-universe.dev",
+  "https://cloud.r-project.org"
+))
 ```
 
 To install from CRAN:
 
 ```{r, eval = FALSE}
-install.packages('huxtable')
+install.packages("huxtable")
 ```
 
 To install the latest version from github: 
 
 ```{r, eval = FALSE}
-install.packages('remotes')
-remotes::install_github('hughjonesd/huxtable')
+install.packages("remotes")
+remotes::install_github("hughjonesd/huxtable")
 ```
 
 # Learning more

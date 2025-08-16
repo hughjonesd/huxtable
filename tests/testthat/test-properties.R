@@ -8,27 +8,27 @@ local_edition(3)
 
 test_that("Basic property assignment works", {
   ht <- hux(1:2, 3:4)
-  
+
   # Test basic assignment and retrieval
   align(ht) <- "left"
   expect_equal(align(ht), matrix("left", 2, 2), ignore_attr = TRUE)
-  
+
   bold(ht) <- TRUE
   expect_equal(bold(ht), matrix(TRUE, 2, 2), ignore_attr = TRUE)
-  
+
   # Test individual cell assignment
   align(ht)[1, 1] <- "right"
   expect_equal(align(ht)[1, 1], "right")
-  expect_equal(align(ht)[1, 2], "left")  # unchanged
-  
+  expect_equal(align(ht)[1, 2], "left") # unchanged
+
   # Test table properties
   width(ht) <- 0.8
   expect_equal(width(ht), 0.8)
-  
+
   # Test row/column properties
   col_width(ht) <- c(0.3, 0.7)
   expect_equal(col_width(ht), c(0.3, 0.7), ignore_attr = TRUE)
-  
+
   row_height(ht) <- c(0.5, 0.5)
   expect_equal(row_height(ht), c(0.5, 0.5), ignore_attr = TRUE)
 })
@@ -94,7 +94,7 @@ test_that("align, position and caption_pos change \"centre\" to \"center\"", {
 
 
 # =============================================================================
-# SPAN PROPERTY TESTS  
+# SPAN PROPERTY TESTS
 # Tests for rowspan/colspan validation and behavior
 # =============================================================================
 
@@ -165,7 +165,7 @@ test_that("get_default_properties", {
 
 
 # =============================================================================
-# BORDER PROCESSING TESTS  
+# BORDER PROCESSING TESTS
 # Tests for internal border processing functions
 # =============================================================================
 
@@ -207,7 +207,7 @@ test_that("collapsed_border_styles works", {
 
 test_that("prop_get works", {
   ht <- huxtable(a = 1:3, b = 4:6)
-  
+
   expect_equal(prop_get(ht, "align"), align(ht))
   expect_equal(prop_get(ht, "bold"), bold(ht))
   expect_equal(prop_get(ht, "width"), width(ht))
@@ -217,15 +217,15 @@ test_that("prop_get works", {
 test_that("validate_prop works", {
   # Basic validation
   expect_equal(validate_prop(c("left", "right"), "align"), c("left", "right"))
-  
+
   # Check function validation
   expect_error(validate_prop(c(1, 2), "align", check_fun = is.character))
   expect_silent(validate_prop(c("left", "right"), "align", check_fun = is.character))
-  
+
   # Check values validation
   expect_error(validate_prop(c("invalid"), "align", check_values = c("left", "center", "right")))
   expect_silent(validate_prop(c("left"), "align", check_values = c("left", "center", "right")))
-  
+
   # NA reset
   expect_equal(validate_prop(c(NA, "left"), "align"), c("left", "left"))
   expect_equal(validate_prop(c(NA, "left"), "align", reset_na = FALSE), c(NA, "left"))
@@ -234,49 +234,49 @@ test_that("validate_prop works", {
 
 test_that("prop_set replaces entire property when row/col missing", {
   ht <- huxtable(a = 1:3, b = 4:6)
-  
+
   # Replace entire property (old prop_replace behavior)
   ht2 <- prop_set(ht, value = "center", prop = "align")
   expect_true(all(align(ht2) == "center"))
-  
+
   # With validation
   expect_error(prop_set(ht, value = 123, prop = "align", check_fun = is.character))
-  
+
   # With check_values
   expect_error(prop_set(ht, value = "invalid", prop = "align", check_values = c("left", "center", "right")))
 })
 
 
 test_that("prop_set works", {
-  ht <- huxtable(a = letters[1:3], b = letters[4:6])  # Use characters so default is "left"
-  
+  ht <- huxtable(a = letters[1:3], b = letters[4:6]) # Use characters so default is "left"
+
   # Set specific cells
   ht2 <- prop_set(ht, "align", 1, 1, value = "center")
   expect_equal(align(ht2)[1, 1], "center")
-  expect_equal(align(ht2)[2, 2], "left")  # unchanged
-  
+  expect_equal(align(ht2)[2, 2], "left") # unchanged
+
   # Set entire table using two-argument form
   ht3 <- prop_set(ht, "align", value = "center")
   expect_true(all(align(ht3) == "center"))
-  
+
   # With validation
   expect_error(prop_set(ht, "align", 1, 1, value = 123, check_fun = is.character))
 })
 
 
 test_that("prop_map works", {
-  ht <- huxtable(a = letters[1:3], b = letters[4:6])  # Use characters so default is "left"
-  
+  ht <- huxtable(a = letters[1:3], b = letters[4:6]) # Use characters so default is "left"
+
   # Simple mapping function
   map_fn <- function(ht, row, col, current) {
     ifelse(current == "left", "right", "left")
   }
-  
+
   ht2 <- prop_set(ht, "align", 1, 1, fn = map_fn)
   expect_equal(align(ht2)[1, 1], "right")
-  expect_equal(align(ht2)[2, 2], "left")  # unchanged
-  
-  # Map entire table using two-argument form  
+  expect_equal(align(ht2)[2, 2], "left") # unchanged
+
+  # Map entire table using two-argument form
   ht3 <- prop_set(ht, "align", fn = map_fn)
   expect_true(all(align(ht3) == "right"))
 })
@@ -284,12 +284,12 @@ test_that("prop_map works", {
 
 test_that("prop_set_row works", {
   ht <- huxtable(a = 1:3, b = 4:6, add_colnames = FALSE)
-  
+
   # Set specific rows
   ht2 <- prop_set_row(ht, 1, 0.5, "row_height")
-  expect_equal(as.numeric(row_height(ht2)[1]), 0.5)  # Convert to remove names
-  expect_true(is.na(row_height(ht2)[2]))  # unchanged
-  
+  expect_equal(as.numeric(row_height(ht2)[1]), 0.5) # Convert to remove names
+  expect_true(is.na(row_height(ht2)[2])) # unchanged
+
   # Set all rows using single argument form
   ht3 <- prop_set_row(ht, 0.3, prop = "row_height")
   expect_true(all(row_height(ht3) == 0.3))
@@ -298,12 +298,12 @@ test_that("prop_set_row works", {
 
 test_that("prop_set_col works", {
   ht <- huxtable(a = 1:3, b = 4:6, add_colnames = FALSE)
-  
+
   # Set specific columns
   ht2 <- prop_set_col(ht, 1, 0.5, "col_width")
-  expect_equal(as.numeric(col_width(ht2)[1]), 0.5)  # Convert to remove names
-  expect_true(is.na(col_width(ht2)[2]))  # unchanged
-  
+  expect_equal(as.numeric(col_width(ht2)[1]), 0.5) # Convert to remove names
+  expect_true(is.na(col_width(ht2)[2])) # unchanged
+
   # Set all columns using single argument form
   ht3 <- prop_set_col(ht, 0.4, prop = "col_width")
   expect_true(all(col_width(ht3) == 0.4))
@@ -312,11 +312,11 @@ test_that("prop_set_col works", {
 
 test_that("prop_set_table works", {
   ht <- huxtable(a = 1:3, b = 4:6)
-  
+
   # Set table property
   ht2 <- prop_set_table(ht, 0.8, "width")
   expect_equal(width(ht2), 0.8)
-  
+
   # With validation
   expect_error(prop_set_table(ht, "invalid", "width", check_fun = is.numeric))
 })
