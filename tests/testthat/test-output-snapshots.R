@@ -32,12 +32,12 @@ make_tables <- function() {
   )
   text_alignment <- set_all_borders(text_alignment, value = 1)
   # Set column widths (absolute values)
-  col_width(text_alignment) <- c("3cm", "3cm", "3cm")
+  col_width(text_alignment) <- rep(0.33, 3)
   # Set row heights to 2em
-  row_height(text_alignment) <- rep("2em", 4)
+  row_height(text_alignment) <- c(0.1, 0.3, 0.3, 0.3)
   # Set absolute width and height for the table
-  width(text_alignment) <- "12cm"
-  height(text_alignment) <- "8cm"
+  width(text_alignment) <- 1
+  height(text_alignment) <- 0.5
   # Apply alignments systematically
   for (row in 2:4) {
     for (col in 1:3) {
@@ -54,37 +54,30 @@ make_tables <- function() {
 
   # Text effects: wrap, rotation, padding
   text_effects <- hux(
-    "Wrap test" = c("wrap=TRUE", "wrap=FALSE"),
+    "Wrap test" = c("wrap=TRUE", ""),
+    "Wrap test" = c("", "wrap=FALSE"),
     "Rotation" = c("normal", "rotation=90"),
     "Padding" = c("normal", "padding=10px"),
     add_colnames = TRUE
   )
   text_effects <- set_all_borders(text_effects, value = 1)
-  # Set absolute column widths
-  col_width(text_effects) <- c(0.25, 0.25, 0.5)
-  width(text_effects) <- 0.6
-  row_height(text_effects) <- c(1/3, 1/3, 1/3)
+  col_width(text_effects) <- c(0.25, 0.25, 0.2, 0.3)
+  width(text_effects) <- 0.8
+  row_height(text_effects) <- c(0.2, 0.4, 0.4)
 
-  # Add long text for wrap test - same text with different wrap settings
   long_text <- "This is a very long text that should demonstrate text wrapping behavior when wrap is enabled versus disabled"
   text_effects[2, 1] <- long_text
-  text_effects[3, 1] <- long_text
+  text_effects[3, 2] <- long_text
   wrap(text_effects)[2, 1] <- TRUE
-  wrap(text_effects)[3, 1] <- FALSE
+  wrap(text_effects)[3, 2] <- FALSE
 
-  # Set rotation
-  rotation(text_effects)[3, 2] <- 90
+  rotation(text_effects)[3, 3] <- 90
 
-  # Add long text for padding test
   padding_text <- "This text demonstrates padding effects with longer content to show the spacing difference"
-  text_effects[2, 3] <- padding_text
-  text_effects[3, 3] <- padding_text
+  text_effects[2, 4] <- padding_text
+  text_effects[3, 4] <- padding_text
 
-  # Set padding
-  left_padding(text_effects)[2, 3] <- 10
-  right_padding(text_effects)[2, 3] <- 10
-  top_padding(text_effects)[2, 3] <- 10
-  bottom_padding(text_effects)[2, 3] <- 10
+  text_effects <- set_all_padding(text_effects, 2, 4, 10)
 
   caption(text_effects) <- "Text effects: wrap (TRUE vs FALSE), rotation=90, padding=10px"
 
@@ -212,8 +205,8 @@ make_tables <- function() {
   # Content formatting: number_format, na_string, escape
   content_format <- hux(
     "Property" = c("number_format=0", "number_format=%.2f", "fmt_percent()", "na_string=missing", "escape_contents=FALSE"),
-    "Raw value" = c(1234.5678, 3.14159, 0.2345, NA, "<b>HTML</b>"),
-    "Formatted" = c(1234.5678, 3.14159, 0.2345, NA, "<b>HTML</b>"),
+    "Raw value" = c(1234.5678, 3.14159, 0.2345, NA, "HTML &copy;"),
+    "Formatted" = c(1234.5678, 3.14159, 0.2345, NA, "HTML &copy;"),
     "Decimal align" = c(3, 3.15, -42.3, 123.456, 7),
     add_colnames = TRUE
   )
@@ -372,19 +365,15 @@ test_that("typst svg snapshots", {
 
 test_that("screen snapshots", {
   # Helper function to create screen output files
-  quick_screen <- function(..., file) {
+  quick_screen <- function(..., file, open = "ignored") {
+    local_reproducible_output(crayon = TRUE) # lets crayon work in to_screen
     args <- list(...)
-    # Remove 'file' and 'open' arguments that might be passed
-    args <- args[!names(args) %in% c("file", "open")]
-    
-    # Write directly to file to preserve ANSI color codes
-    con <- file(file, open = "w")
-    on.exit(close(con))
-    
+
+    if (file.exists(file)) file.remove(file)
     for (obj in args) {
-      # Force color output to capture ANSI codes
-      cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE), file = con)
-      cat("\n\n", file = con)
+      cat(to_screen(obj, min_width = 20, max_width = 80, color = TRUE),
+          file = file, append = TRUE)
+      cat("\n\n", file = file, append = TRUE)
     }
   }
 
