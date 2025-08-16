@@ -43,10 +43,10 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 
 #' Escape text for various formats
 #'
-#' This escapes a string for LaTeX, HTML or RTF.
+#' This escapes a string for LaTeX, HTML, Typst or RTF.
 #'
 #' @param str A character object.
-#' @param type `"latex"`, `"html"` or `"rtf"`.
+#' @param type `"latex"`, `"html"`, `"typst"` or `"rtf"`.
 #'
 #' @return The sanitized character object.
 #'
@@ -58,7 +58,7 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 #' @examples
 #' txt <- "Make $$$ with us"
 #' sanitize(txt, type = "latex")
-sanitize <- function(str, type = c("latex", "html", "rtf", "typst")) {
+sanitize <- function(str, type = c("latex", "html", "typst", "rtf")) {
   type <- match.arg(type)
   result <- str
 
