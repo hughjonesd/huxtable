@@ -973,6 +973,8 @@ do this you can use huxtable functions starting with `quick_`:
 * `quick_pptx()` creates a Powerpoint presentation.
 * `quick_rtf()` creates an RTF document.
 * `quick_latex()` creates a LaTeX file.
+* `quick_typst_pdf/png/svg()` create PDFs, PNG images and SVG images using the
+  [typst](https://typst.app) system.
 
 These are called with one or more huxtable objects (or objects which can be
 turned into a huxtable, such as data frames). A new document of the appropriate
