@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[normalem]{ulem}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{hyperref}
+% These are LaTeX packages. You can install them using your LaTex management software,
+% or by running `huxtable::install_latex_dependencies()` from within R.
+% Other packages may be required if you use non-standard tabulars (e.g. tabulary).
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+\captionsetup{justification=centering,singlelinecheck=off}
+\caption{Text formatting: bold, italic, font, font_size, markdown, text_color, background_color}
+ \setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Property \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Normal \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Styled \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} bold \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} normal text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{bold=TRUE} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} italic \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} normal text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textit{italic=TRUE} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} font \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} serif text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} {\fontfamily{Times New Roman}\selectfont Times New Roman} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} font\_size \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} 12pt text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} {\fontsize{16pt}{19.2pt}\selectfont font\_size=16} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} markdown \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} plain text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \emph{markdown}=TRUE
+ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} text\_color \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} black text \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textcolor[RGB]{255, 0, 0}{red text} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1}}l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} background \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} white bg \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{l!{\huxvb{0, 0, 0}{1}}}{\cellcolor[RGB]{229, 229, 229}\huxtpad{6pt + 1em}\raggedright \hspace{6pt} grey90 bg \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}->{\huxb{0, 0, 0}{1}}-}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+
+
+
+\end{document}

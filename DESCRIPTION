@@ -65,7 +65,8 @@ Suggests:
     styler,
     testthat,
     tibble,
-    tinytex
+    tinytex,
+    W3CMarkupValidator
 SystemRequirements: LaTeX packages: 
     adjustbox, 
     array, 

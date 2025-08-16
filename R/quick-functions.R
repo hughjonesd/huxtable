@@ -231,6 +231,8 @@ quick_html <- function(
   hts <- huxtableize(list(...), borders)
 
   loc <- Sys.getlocale("LC_COLLATE")
+  # Handle special case of "C" locale before splitting
+  if (loc == "C") loc <- "en.UTF-8"
   loc <- strsplit(loc, ".", fixed = TRUE)[[1]]
   loc[1] <- gsub("_", "-", loc[1], fixed = TRUE)
   # Ensure we have both language and charset components
