@@ -112,3 +112,5 @@ Use short branch names starting with: "feature", "bugfix", "refactor", or "chore
 
 ## Additional Tools
 - Typst documentation: https://github.com/typst/typst/tree/main/docs
+
+- You can set environment variable NOT_CRAN to avoid skip_on_cran(), I tink
