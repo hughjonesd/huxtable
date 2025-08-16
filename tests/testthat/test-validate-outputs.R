@@ -382,15 +382,13 @@ test_that("screen snapshots", {
 
 
 test_that("HTML snapshots pass W3C validation", {
-  skip_if_not_installed("curl")
+  skip_if_not_installed("httr")
   skip_if_not_installed("jsonlite")
 
   # Test validator accessibility
   validator_accessible <- tryCatch({
-    con <- url("https://validator.w3.org/nu/", "rb")
-    on.exit(try(close(con), silent = TRUE))
-    readBin(con, "raw", 100)
-    TRUE
+    response <- httr::HEAD("https://validator.w3.org/nu/")
+    httr::status_code(response) < 400
   }, error = function(e) FALSE)
 
   skip_if_not(validator_accessible, "Nu HTML Checker not accessible")
@@ -408,10 +406,6 @@ test_that("HTML snapshots pass W3C validation", {
   validate_html_file <- function(file_path) {
     html_content <- paste(readLines(file_path, warn = FALSE), collapse = "\n")
 
-    h <- curl::new_handle()
-    curl::handle_setheaders(h, "Content-Type" = "text/html; charset=utf-8")
-    curl::handle_setopt(h, postfields = html_content)
-
     # Use filterpattern to exclude known false positives at the validator source
     # The Nu validator incorrectly flags <style> in <body> as an error,
     # but this is allowed per WHATWG HTML specification
@@ -420,21 +414,26 @@ test_that("HTML snapshots pass W3C validation", {
                            utils::URLencode(filter_pattern, reserved = TRUE))
 
     response <- tryCatch({
-      curl::curl_fetch_memory(validator_url, h)
+      httr::POST(
+        validator_url,
+        body = html_content,
+        httr::content_type("text/html; charset=utf-8")
+      )
     }, error = function(e) {
       skip(paste("Validation request failed for", basename(file_path), ":", conditionMessage(e)))
     })
 
-    if (response$status_code != 200) {
-      skip(paste("Validator returned status", response$status_code, "for", basename(file_path)))
+    if (httr::status_code(response) != 200) {
+      skip(paste("Validator returned status", httr::status_code(response), "for", basename(file_path)))
     }
 
-    content <- rawToChar(response$content)
-    result <- jsonlite::fromJSON(content)
+    result <- httr::content(response, as = "parsed", type = "application/json")
     messages <- result$messages
+    messages <- data.frame(
+      type = vapply(messages, `[[`, "type", FUN.VALUE = character(1L)),
+      message = vapply(messages, `[[`, "message", FUN.VALUE = character(1L))
+    )
 
-    # If no messages are returned, we get an empty list, not a data frame.
-    if (length(messages) == 0L) messages <- data.frame()
     return(messages)
   }
 
