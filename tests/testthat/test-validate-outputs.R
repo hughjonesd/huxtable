@@ -259,7 +259,6 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
   for (nm in names(tables)) {
-    # Use fixed path to avoid any randomness in filenames
     if (file_ext == "" && grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
       f <- file.path(tempdir(), nm)
     } else {
@@ -273,6 +272,7 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
       quick_func(tables[[nm]], file = f, open = FALSE)
     }
 
+    platform <- utils::sessionInfo()$platform
     # Handle file checking for different formats
     if (grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
       # For PNG/SVG, find files with suffixes
@@ -283,22 +283,22 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
         if (nm %in% multi_table_names && length(output_files) > 1) {
           # For multi-table tests, save all files with numbered suffixes
           for (i in seq_along(output_files)) {
-            expect_snapshot_file(output_files[i], paste0(nm, "-", i, snapshot_suffix))
+            expect_snapshot_file(output_files[i], paste0(nm, "-", i, snapshot_suffix), variant = platform)
           }
         } else {
           # Single table test
-          expect_snapshot_file(output_files[1], paste0(nm, snapshot_suffix))
+          expect_snapshot_file(output_files[1], paste0(nm, snapshot_suffix), variant = platform)
         }
       }
     } else if (file_ext == "" && !grepl("typst_(png|svg)", deparse(substitute(quick_func)))) {
       # Single file with added extension
       output_file <- paste0(f, gsub("^\\.", "", snapshot_suffix))
       if (file.exists(output_file)) {
-        expect_snapshot_file(output_file, paste0(nm, snapshot_suffix))
+        expect_snapshot_file(output_file, paste0(nm, snapshot_suffix), variant = platform)
       }
     } else {
       # Standard file output
-      expect_snapshot_file(f, paste0(nm, snapshot_suffix))
+      expect_snapshot_file(f, paste0(nm, snapshot_suffix), variant = platform)
     }
   }
 }
