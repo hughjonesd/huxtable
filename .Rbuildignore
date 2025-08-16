@@ -10,6 +10,7 @@
 ^AGENTS\.md$
 ^design\.md$
 ^agent-notes\.md$
+^CLAUDE\.md$
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
