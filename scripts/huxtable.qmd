@@ -29,7 +29,7 @@ if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 \newpage 
 
 ```{r, echo = FALSE}
-huxtable::hux_logo(latex = is_latex, html = ! is_latex)
+huxtable::hux_logo()
 ```
 
 
