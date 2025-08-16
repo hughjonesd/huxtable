@@ -248,6 +248,7 @@ make_tables <- function() {
   )
 }
 
+tables <- make_tables()
 
 # Helper function to test output snapshots for different formats
 test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
@@ -256,7 +257,6 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
     Sys.setenv(SOURCE_DATE_EPOCH = "1704110400")  # 2024-01-01 12:00:00 UTC
   }
 
-  tables <- make_tables()
   multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
 
   for (nm in names(tables)) {
