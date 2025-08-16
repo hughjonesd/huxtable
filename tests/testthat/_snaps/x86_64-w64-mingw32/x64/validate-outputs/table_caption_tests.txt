@@ -17,8 +17,8 @@
                             └──────────────────────┘
 
 
-   Table 4: caption_width=0.8 - This is a longer caption to demonstrate width   
-                                   constraint                                   
+  Table 4: caption_width=0.8 - This is a longer caption to demonstrate a wider  
+                                width constraint                                
                             ┌──────────────────────┐
                             │ caption_width=0.8    │
                             └──────────────────────┘
