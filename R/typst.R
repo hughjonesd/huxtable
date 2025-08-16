@@ -105,19 +105,6 @@ to_typst <- function(ht, ...) {
 
 # helpers -----------------------------------------------------------------------
 
-#' Escape special characters for Typst markup
-#'
-#' @param x A character string.
-#'
-#' @return Escaped string safe for Typst.
-#' @noRd
-typst_escape <- function(x) {
-  x <- gsub("\\\\", "\\\\\\\\", x)
-  x <- gsub("#", "\\#", x, fixed = TRUE)
-  x <- gsub("[", "\\[", x, fixed = TRUE)
-  x <- gsub("]", "\\]", x, fixed = TRUE)
-  x
-}
 
 #' Build options for a Typst table
 #'
@@ -176,7 +163,7 @@ typst_figure <- function(ht, text) {
   cap <- if (is.na(caption(ht))) {
     "none"
   } else {
-    cap_body <- typst_escape(make_caption(ht, lab, "typst"))
+    cap_body <- sanitize(make_caption(ht, lab, "typst"), type = "typst")
 
     cap_pos <- caption_pos(ht)
     vpos <- if (grepl("top", cap_pos)) "top" else "bottom"
