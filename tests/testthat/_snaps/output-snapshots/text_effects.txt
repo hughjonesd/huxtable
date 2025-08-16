@@ -1,6 +1,6 @@
          Text effects: wrap (TRUE vs FALSE), rotation=90, padding=10px          
   ┌──────────────────┬──────────────────┬─────────────┬──────────────────────┐
-  │ Wrap test        │ Wrap test        │ Rotation    │ Padding              │
+  │ Wrap 1           │ Wrap 2           │ Rotation    │ Padding              │
   ├──────────────────┼──────────────────┼─────────────┼──────────────────────┤
   │ This is a very   │                  │ normal      │ This text            │
   │ long text that   │                  │             │ demonstrates padding │
@@ -21,6 +21,6 @@
   │                  │ versus disabled  │             │                      │
   └──────────────────┴──────────────────┴─────────────┴──────────────────────┘
 
-Column names: Wrap test, Wrap test, Rotation, Padding
+Column names: Wrap 1, Wrap 2, Rotation, Padding
 
 
