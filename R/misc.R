@@ -58,7 +58,7 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 #' @examples
 #' txt <- "Make $$$ with us"
 #' sanitize(txt, type = "latex")
-sanitize <- function(str, type = c("latex", "html", "rtf", "typst")) {
+sanitize <- function(str, type = c("latex", "html", "rtf")) {
   type <- match.arg(type)
   result <- str
 
@@ -91,14 +91,6 @@ sanitize <- function(str, type = c("latex", "html", "rtf", "typst")) {
     result <- gsub("{", "\\{", result, fixed = TRUE)
     result <- gsub("}", "\\}", result, fixed = TRUE)
     result <- gsub("\n", "\\line ", result, fixed = TRUE)
-  } else if (type == "typst") {
-    # There is a reason why this one has to come first!!!
-    result <- gsub("\\", "\\\\", result, fixed = TRUE)
-    to_escape <- c("#", "[", "]", "*", "$", "_", "`", "<", ">", "=", "@", "-", "+", "/")
-    for (char in to_escape) {
-      escaped <- paste0("\\", char)
-      result <- gsub(char, escaped, result, fixed = TRUE)
-    }
   }
 
   return(result)

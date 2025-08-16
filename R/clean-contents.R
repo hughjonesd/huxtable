@@ -89,7 +89,11 @@ render_markdown_matrix <- function(contents, ht, output_type) {
     column[md_rows] <- render_markdown(column[md_rows], output_type)
     if (output_type %in% c("latex", "html", "rtf", "typst")) {
       to_esc <- esc[, col] & !md_rows
-      column[to_esc] <- sanitize(column[to_esc], output_type)
+      column[to_esc] <- if (output_type == "typst") {
+        typst_escape(column[to_esc])
+      } else {
+        sanitize(column[to_esc], output_type)
+      }
     }
     column
   }, character(nrow(contents)))
