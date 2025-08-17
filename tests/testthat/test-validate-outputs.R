@@ -142,7 +142,7 @@ make_tables <- function() {
   )
 
   # Table position properties - multiple tables in one document
-  table_position_tests <- list(
+  table_pos_tests <- list(
     # Position left
     {
       ht <- hux("position=left", add_colnames = FALSE)
@@ -236,7 +236,7 @@ make_tables <- function() {
     borders = borders_table,
     dimensions = dimensions,
     table_caption_tests = table_caption_tests,
-    table_position_tests = table_position_tests,
+    table_pos_tests = table_pos_tests,
     table_width_tests = table_width_tests,
     content_formatting = content_format,
     cell_spanning = spanning
@@ -274,7 +274,7 @@ determine_base_path <- function(table_name, file_ext, is_typst_image) {
 #' @param table_name Name of table being processed
 #' @noRd
 generate_output_files <- function(table_data, quick_func, base_path, table_name) {
-  multi_table_names <- c("table_caption_tests", "table_position_tests", "table_width_tests")
+  multi_table_names <- c("table_caption_tests", "table_pos_tests", "table_width_tests")
   # Wrap single huxtables in a list so we can always use do.call
   if (!table_name %in% multi_table_names) {
     table_data <- list(table_data)
