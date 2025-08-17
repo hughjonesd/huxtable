@@ -1,0 +1,18 @@
+Table 1: position="left"
+┌──────────────────────┐
+│ position=left        │
+└──────────────────────┘
+
+
+                           Table 2: position="center"                           
+                            ┌──────────────────────┐
+                            │ position=center      │
+                            └──────────────────────┘
+
+
+                                                       Table 3: position="right"
+                                                        ┌──────────────────────┐
+                                                        │ position=right       │
+                                                        └──────────────────────┘
+
+
