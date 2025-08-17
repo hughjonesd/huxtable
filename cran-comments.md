@@ -1,10 +1,9 @@
 
-Update with bugfix and new feature. Resubmission to fix a broken README
-link. Sorry.
+Update with new features including typst output.
 
 ## Test environments
 
-* local OS X install (R 4.4.2)
+* local OS X install (R 4.5.0)
 * win-builder release/devel
 * mac-builder release
 
@@ -18,7 +17,11 @@ OK on all platforms.
 
 We checked 22 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
+ * We saw 1 new problems
  * We failed to check 0 packages
+ 
+ The new problem is in the brickster package, which supplies an incorrect argument
+ to huxtable::set_all_borders(). The new release catches this problem. I've
+ filed an issue with the owner.
 
 
