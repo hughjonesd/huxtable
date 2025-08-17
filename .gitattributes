@@ -2,3 +2,4 @@
 data/* binary
 src/* text=lf
 R/* text=lf
+tests/testthat/_snaps/x86_64-w64-mingw32/** -text
