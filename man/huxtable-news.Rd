@@ -7,7 +7,7 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 5.7.0}{
 \subsection{Breaking changes}{
 \itemize{
 \item Functions are no longer generic, so you can’t subclass a huxtable
@@ -24,7 +24,6 @@ body rows in \verb{<tbody>} when header rows are at the top of the table.
 integration is available as well as \code{quick_typst()},
 \code{quick_typst_pdf()}, \code{quick_typst_png()}, and \code{quick_typst_svg()}
 functions.
-\item Typst output now supports cell rotation.
 \item HTML output now uses CSS classes with a shared \verb{<style>} block instead
 of long inline styles.
 \item Added \code{as_html()} for obtaining table as \code{htmltools} tags.

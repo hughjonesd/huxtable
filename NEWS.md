@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 5.7.0
 
 ## Breaking changes
 
@@ -13,7 +13,6 @@
 * Added Typst export via `to_typst()` and `print_typst()`. Quarto integration
   is available as well as `quick_typst()`, `quick_typst_pdf()`, `quick_typst_png()`, and
   `quick_typst_svg()` functions.
-* Typst output now supports cell rotation.
 * HTML output now uses CSS classes with a shared `<style>` block instead of
   long inline styles.
 * Added `as_html()` for obtaining table as `htmltools` tags.
