@@ -1,6 +1,6 @@
 #!/usr/local/bin/Rscript
 
-library(rhub)
+
 library(devtools)
 library(git2r)
 library(glue)
