@@ -19,7 +19,7 @@ useful to change this. You can do so by setting options("huxtable.print").'><!--
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'huxtable'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latex"</span>, <span class="st">"html"</span>, <span class="st">"md"</span>, <span class="st">"screen"</span>, <span class="st">"rtf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latex"</span>, <span class="st">"html"</span>, <span class="st">"md"</span>, <span class="st">"screen"</span>, <span class="st">"rtf"</span>, <span class="st">"typst"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -116,7 +116,7 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 
 
 <dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
-<dd><p>Output format. One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code>, <code>"screen"</code> or <code>"rtf"</code>.</p></dd>
+<dd><p>Output format. One of <code>"html"</code>, <code>"latex"</code>, <code>"md"</code>, <code>"screen"</code>, <code>"rtf"</code> or <code>"typst"</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -133,14 +133,18 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="co"># to print LaTeX output:</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>huxtable.print <span class="op">=</span> <span class="va">print_latex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># to print LaTeX output:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>huxtable.print <span class="op">=</span> <span class="va">print_latex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># to print Typst output:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>huxtable.print <span class="op">=</span> <span class="va">print_typst</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"screen"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "                              Type           Price  \n                              Strawberry      1.90  \n                              Raspberry       2.10  \n                              Plum            1.80  \n\nColumn names: Type, Price\n"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"md"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "-----------------------\n Type            Price \n----------- -----------\n Strawberry       1.90 \n                       \n Raspberry        2.10 \n                       \n Plum             1.80 \n-----------------------\n\n"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">jams</span>, output <span class="op">=</span> <span class="st">"typst"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#figure(\ntable(\n  columns: (auto, auto),\n  stroke: none,\n  table.header(\n    table.cell(align: (left + top))[Type], table.cell(align: (right + top))[Price]\n  ),\n  table.cell(align: (left + top))[Strawberry], table.cell(align: (right + top))[1.90],\n  table.cell(align: (left + top))[Raspberry], table.cell(align: (right + top))[2.10],\n  table.cell(align: (left + top))[Plum], table.cell(align: (right + top))[1.80]\n),\ncaption: none\n)"</span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +159,7 @@ useful to change this. You can do so by setting <code>options("huxtable.print")<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -93,17 +93,44 @@
 
 
     <div id="huxtable-">
-    <h2>huxtable 5.6.0</h2>
+    <h2>huxtable 5.7.0</h2>
 
 <div class="section">
 <h3 id="breaking-changes">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes"></a></h3>
+
+<ul><li><p>Functions are no longer generic, so you can’t subclass a huxtable
+object. AFAIK nobody has ever done this; if I’m wrong, please tell me.</p></li>
+<li><p>Reworked internals, with the help of OpenAI Codex.</p></li>
+</ul></div>
+
+<div class="section">
+<h3 id="other-changes">Other changes<a class="anchor" aria-label="anchor" href="#other-changes"></a></h3>
+
+<ul><li><p>HTML tables now wrap header rows in <code>&lt;thead&gt;</code> (using <code>&lt;th&gt;</code> cells) and
+body rows in <code>&lt;tbody&gt;</code> when header rows are at the top of the table.</p></li>
+<li><p>Added Typst export via <code><a href="to_typst.html">to_typst()</a></code> and <code><a href="to_typst.html">print_typst()</a></code>. Quarto
+integration is available as well as <code><a href="quick-output.html">quick_typst()</a></code>,
+<code><a href="quick-output.html">quick_typst_pdf()</a></code>, <code><a href="quick-output.html">quick_typst_png()</a></code>, and <code><a href="quick-output.html">quick_typst_svg()</a></code>
+functions.</p></li>
+<li><p>HTML output now uses CSS classes with a shared <code>&lt;style&gt;</code> block instead
+of long inline styles.</p></li>
+<li><p>Added <code><a href="to_html.html">as_html()</a></code> for obtaining table as <code>htmltools</code> tags.</p></li>
+<li><p><code><a href="to_screen.html">to_screen()</a></code> now displays double, dashed and dotted border styles.</p></li>
+</ul></div>
+
+    </div>
+    <div id="huxtable-">
+    <h2>huxtable 5.6.0</h2>
+
+<div class="section">
+<h3 id="breaking-changes-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1"></a></h3>
 
 <ul><li><p>Removed underscore dplyr verbs (<code>slice_</code>, <code>select_</code> etc.) These have
 long been deprecated in dplyr itself.</p></li>
 </ul></div>
 
 <div class="section">
-<h3 id="other-changes">Other changes<a class="anchor" aria-label="anchor" href="#other-changes"></a></h3>
+<h3 id="other-changes-1">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-1"></a></h3>
 
 <ul><li><p>Bugfix: add newline at end of report_latex_dependencies() output.
 Thanks @ceresek.</p></li>
@@ -278,7 +305,7 @@ future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
     <p>Huxtable 5.0.0 brings numerous changes. For a more user-friendly
 introduction, see
 <a href="https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html" class="external-link">https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p><div class="section">
-<h3 id="breaking-changes-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1"></a></h3>
+<h3 id="breaking-changes-2">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2"></a></h3>
 
 <ul><li><p>There are changes to LaTeX output.</p><ul><li><p>LaTeX <code>\tabcolsep</code> is now set to 0 within huxtable tables, while
 left and right padding should now take effect even when <code>wrap</code> is
@@ -368,7 +395,7 @@ headers.</p></li>
 </ul></div>
 
 <div class="section">
-<h3 id="other-changes-1">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-1"></a></h3>
+<h3 id="other-changes-2">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-2"></a></h3>
 
 <ul><li><p>You can now use <a href="https://commonmark.org/help/" class="external-link">markdown</a> within table
 cells.</p><ul><li><p>Use <code>set_markdown(ht, rows, cols)</code> to turn this on.</p></li>
@@ -665,7 +692,7 @@ interactively. Use <code>open = FALSE</code> to avoid.</p></li>
 <li><p><code>huxreg</code> continues with a warning if <code>statistics</code> are unavailable for
 some models.</p></li>
 </ul><div class="section">
-<h3 id="breaking-changes-2">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2"></a></h3>
+<h3 id="breaking-changes-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3"></a></h3>
 
 <ul><li><p>huxtable now provides <code>knit_print.data.frame</code> methods. This means that
 bare data frames will be pretty-printed via huxtable if the package is
@@ -720,7 +747,7 @@ rules.</p></li>
 <li><p>New <code>tidy_args</code> argument to huxreg allows per-model customization of
 the call to <code>tidy</code>.</p></li>
 </ul><div class="section">
-<h3 id="breaking-changes-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3"></a></h3>
+<h3 id="breaking-changes-4">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-4"></a></h3>
 
 <ul><li><p><code>quick_xxx</code> functions without an explicit <code>file</code> argument throw an
 error if called non-interactively, and prompt before overwriting files
@@ -747,7 +774,7 @@ table-like objects to a new document.</p></li>
 <li><p><code>to_screen</code> only shows colnames if there are any non-zero-length
 column names.</p></li>
 </ul><div class="section">
-<h3 id="breaking-changes-4">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-4"></a></h3>
+<h3 id="breaking-changes-5">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-5"></a></h3>
 
 <ul><li><p><code>number_format</code> now applies to any number-like substrings in cells.
 This means you can include e.g. significance stars in a cell and still
@@ -810,7 +837,7 @@ uncertainty estimates.</p></li>
 <li><p>Infrastructure improvements: slightly less ugly code in screen.R and
 LaTeX.R.</p></li>
 </ul><div class="section">
-<h3 id="breaking-changes-5">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-5"></a></h3>
+<h3 id="breaking-changes-6">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-6"></a></h3>
 
 <ul><li><p>Removed options <code>collapse</code>, <code>borders</code>, <code>blank</code> and <code>colname_color</code>
 from <code>to_screen</code>/<code>print_screen</code>.</p></li>
@@ -878,7 +905,7 @@ cells.</p></li>
 <li><p>Numerous bugs have been fixed and replaced with new, more advanced
 bugs.</p></li>
 </ul><div class="section">
-<h3 id="breaking-changes-6">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-6"></a></h3>
+<h3 id="breaking-changes-7">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-7"></a></h3>
 
 <ul><li><p><code>theme_minimal</code> has been renamed <code>theme_basic</code> to avoid a name clash
 with <code>ggplot2</code>.</p></li>
@@ -914,7 +941,7 @@ with <code>ggplot2</code>.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

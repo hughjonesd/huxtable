@@ -18,7 +18,7 @@ Character widths must be valid CSS or LaTeX dimensions."><!-- mathjax --><script
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -95,7 +95,9 @@ Character widths must be valid CSS or LaTeX dimensions.</p>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">col_width</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">col_width</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span></span>
 <span><span class="fu">set_col_width</span><span class="op">(</span><span class="va">ht</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -107,13 +109,13 @@ Character widths must be valid CSS or LaTeX dimensions.</p>
 <dd><p>A huxtable.</p></dd>
 
 
-<dt id="arg-col">col<a class="anchor" aria-label="anchor" href="#arg-col"></a></dt>
-<dd><p>A col specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
-
-
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>Numeric or character vector.. Set to <code>NA</code> to reset to the default,
-which is <code>NA</code>.</p></dd>
+<dd><p>Numeric or character vector. Set to <code>NA</code> to reset to the default,
+which is NA.</p></dd>
+
+
+<dt id="arg-col">col<a class="anchor" aria-label="anchor" href="#arg-col"></a></dt>
+<dd><p>A column specifier. See <a href="rowspecs.html">rowspecs</a> for details.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -138,14 +140,16 @@ that your cells no longer overrun.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">col_width</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">.8</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">col_width</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">.8</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>number of items to replace is not a multiple of replacement length</span>
 <span class="r-in"><span><span class="fu">col_width</span><span class="op">(</span><span class="va">jams</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Type Price Sugar </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.2   0.8   0.2 </span>
-<span class="r-in"><span><span class="va">jams</span><span class="op">$</span><span class="va">Notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Notes"</span>,</span></span>
-<span class="r-in"><span>      <span class="st">"This year's finest"</span>, <span class="st">""</span>, <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">jams</span><span class="op">$</span><span class="va">Notes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Notes"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"This year's finest"</span>, <span class="st">""</span>, <span class="st">""</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">jams</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Type           Price       Sugar       Notes  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            content              </span>
@@ -166,6 +170,7 @@ that your cells no longer overrun.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Type, Price, Sugar, Notes</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2/4 columns shown.</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -180,7 +185,7 @@ that your cells no longer overrun.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

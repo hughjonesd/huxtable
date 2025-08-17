@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -159,9 +159,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: Price, Sugar</span>
 <span class="r-in"><span><span class="fu">column_to_header</span><span class="op">(</span><span class="va">jams</span>, <span class="st">"Price"</span>,</span></span>
-<span class="r-in"><span>                   number_format <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>                   italic <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>                   glue <span class="op">=</span> <span class="st">"Price: {value}"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  number_format <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  italic <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  glue <span class="op">=</span> <span class="st">"Price: {value}"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Type         Sugar content  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            <span style="font-style: italic;">Price: 1.90            </span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Strawberry          40.00%  </span>
@@ -174,9 +175,9 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">iris_hux</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">51</span><span class="op">:</span><span class="fl">54</span>, <span class="fl">101</span><span class="op">:</span><span class="fl">104</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">column_to_header</span><span class="op">(</span><span class="va">iris_hux</span>, <span class="st">"Species"</span>,</span></span>
-<span class="r-in"><span>                   markdown <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>                   glue <span class="op">=</span> <span class="st">"Species: **{value}**"</span></span></span>
-<span class="r-in"><span>                 <span class="op">)</span></span></span>
+<span class="r-in"><span>  markdown <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  glue <span class="op">=</span> <span class="st">"Species: **{value}**"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Sepal.Length   Sepal.Width   Petal.Length   Petal.Width  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             Species: <span style="font-weight: bold;">setosa</span>                                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      5.1           3.5            1.4           0.2  </span>
@@ -209,7 +210,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

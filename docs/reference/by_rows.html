@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -135,8 +135,10 @@ normally resets to the default.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">by_rows</span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">ht</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">by_rows</span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"grey"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">0.00048</span>   <span style="background-color: #00BB00;">-0.679</span>   <span style="background-color: #00BB00;"> 0.194</span>   <span style="background-color: #00BB00;">-1.78 </span>   <span style="background-color: #00BB00;">-0.432</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #B2B2B2;">0.755  </span>   <span style="background-color: #B2B2B2;"> 0.738</span>   <span style="background-color: #B2B2B2;">-0.691</span>   <span style="background-color: #B2B2B2;">-0.716</span>   <span style="background-color: #B2B2B2;">-0.668</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">0.342  </span>   <span style="background-color: #00BB00;">-0.861</span>   <span style="background-color: #00BB00;"> 1.34 </span>   <span style="background-color: #00BB00;"> 0.911</span>   <span style="background-color: #00BB00;"> 1.39 </span>  </span>
@@ -144,8 +146,10 @@ normally resets to the default.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">1.4    </span>   <span style="background-color: #00BB00;"> 1.45 </span>   <span style="background-color: #00BB00;">-0.944</span>   <span style="background-color: #00BB00;">-0.782</span>   <span style="background-color: #00BB00;"> 0.205</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5</span>
-<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span><span class="va">ht</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">by_cols</span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="background_color.html">map_background_color</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">ht</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">by_cols</span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"grey"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">0.00048</span>   <span style="background-color: #B2B2B2;">-0.679</span>   <span style="background-color: #00BB00;"> 0.194</span>   <span style="background-color: #B2B2B2;">-1.78 </span>   <span style="background-color: #00BB00;">-0.432</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">0.755  </span>   <span style="background-color: #B2B2B2;"> 0.738</span>   <span style="background-color: #00BB00;">-0.691</span>   <span style="background-color: #B2B2B2;">-0.716</span>   <span style="background-color: #00BB00;">-0.668</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="background-color: #00BB00;">0.342  </span>   <span style="background-color: #B2B2B2;">-0.861</span>   <span style="background-color: #00BB00;"> 1.34 </span>   <span style="background-color: #B2B2B2;"> 0.911</span>   <span style="background-color: #00BB00;"> 1.39 </span>  </span>
@@ -167,7 +171,7 @@ normally resets to the default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

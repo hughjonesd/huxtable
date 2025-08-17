@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -232,14 +232,15 @@ Alternatively, to manually insert your own statistics, see <code><a href="tidy_o
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Please install 'broom' to run this example."</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">lm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">glm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">~</span> <span class="va">cyl</span>, <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>          family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  family <span class="op">=</span> <span class="va">binomial</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">huxreg</span><span class="op">(</span><span class="va">lm1</span>, <span class="va">lm2</span>, <span class="va">glm1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            ─────────────────────────────────────────────────────────</span>
@@ -262,24 +263,29 @@ Alternatively, to manually insert your own statistics, see <code><a href="tidy_o
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: names, model1, model2, model3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"sandwich"</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"lmtest"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"lmtest"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">lm_robust</span> <span class="op">&lt;-</span> <span class="fu">lmtest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">lm1</span>,</span></span>
-<span class="r-in"><span>        vcov <span class="op">=</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/reference/vcovHC.html" class="external-link">vcovHC</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>    vcov <span class="op">=</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/reference/vcovHC.html" class="external-link">vcovHC</a></span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># coeftest() has no "glance" method:</span></span></span>
 <span class="r-in"><span>  <span class="fu">huxreg</span><span class="op">(</span><span class="va">lm_robust</span>,</span></span>
-<span class="r-in"><span>        statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span>    statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                ─────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   (1)           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                        ─────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  (Intercept)                        37.885 ***  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     (2.742)     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  cyl                                -2.876 ***  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     (0.389)     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                ─────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.        </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Original model not retained as part of coeftest object.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> For additional model summary information (r.squared, df, etc.), consider</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   passing `glance.coeftest()` an object where the underlying model has been</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   saved, i.e.  `lmtest::coeftest(..., save = TRUE)`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">This message is displayed once per session.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ───────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  (1)           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        ────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   (Intercept)                      37.885 ***  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    (2.742)     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl                              -2.876 ***  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    (0.389)     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ───────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Column names: names, model1</span>
 <span class="r-in"><span></span></span>
@@ -297,7 +303,7 @@ Alternatively, to manually insert your own statistics, see <code><a href="tidy_o
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ set a value for width() and set wrap to TRUE."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">huxtable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.7.0</span>
       </span>
     </div>
 
@@ -97,8 +97,11 @@ set a value for <code><a href="width.html">width()</a></code> and set <code>wrap
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wrap</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">wrap</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
-<span><span class="fu">set_wrap</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_wrap</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">value</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">map_wrap</span><span class="op">(</span><span class="va">ht</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -108,6 +111,10 @@ set a value for <code><a href="width.html">width()</a></code> and set <code>wrap
 
 <dl><dt id="arg-ht">ht<a class="anchor" aria-label="anchor" href="#arg-ht"></a></dt>
 <dd><p>A huxtable.</p></dd>
+
+
+<dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
+<dd><p>A logical vector or matrix. Set to <code>NA</code> to reset to the default, which is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-row">row<a class="anchor" aria-label="anchor" href="#arg-row"></a></dt>
@@ -121,31 +128,20 @@ set a value for <code><a href="width.html">width()</a></code> and set <code>wrap
 <dt id="arg-fn">fn<a class="anchor" aria-label="anchor" href="#arg-fn"></a></dt>
 <dd><p>A mapping function. See <a href="mapping-functions.html">mapping-functions</a> for details.</p></dd>
 
-
-<dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>A logical vector or matrix.</p>
-<p>Set to <code>NA</code> to reset to the default, which is <code>TRUE</code>.</p></dd>
-
 </dl></div>
-    <div id="value">
-    <h2>Value</h2>
-    <p><code>wrap()</code> returns the <code>wrap</code> property.
-<code>set_wrap()</code> returns the modified huxtable.</p>
-    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">long_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Some long text."</span>, <span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        collapse <span class="op">=</span> <span class="st">" "</span></span></span>
-<span class="r-in"><span>     <span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">long_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Some long text."</span>, <span class="fl">10</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  collapse <span class="op">=</span> <span class="st">" "</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="huxtable.html">huxtable</a></span><span class="op">(</span>Long <span class="op">=</span> <span class="va">long_text</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="width.html">width</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span></span>
 <span class="r-in"><span><span class="fu">wrap</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="quick-output.html">quick_html</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="quick-output.html">quick_html</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -162,7 +158,7 @@ set a value for <code><a href="width.html">width()</a></code> and set <code>wrap
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
