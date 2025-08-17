@@ -32,10 +32,15 @@ process_platform() {
     echo "Processing $platform platform..."
     
     gh run download $RUN_ID -p $artifact_pattern --dir "$TEMP_DIR/$platform"
-        
+
+    # need to only overwrite relevant files
+    local dir_fragment=""  
+    if [ "$platform" = "windows" ]; then dir_fragment="x86_64-w64-mingw32/x64"; fi
+    if [ "$platform" = "linux" ]; then dir_fragment="x86_64-pc-linux-gnu"; fi
+          
     # Find and process snapshot files
     if [ -d "$TEMP_DIR/$platform" ]; then
-        find "$TEMP_DIR/$platform" -path "*/tests/testthat/_snaps/*/validate-outputs/*" -name "*" -type f | while read -r new_file; do
+        find "$TEMP_DIR/$platform" -path "*/tests/testthat/_snaps/$dir_fragment/validate-outputs/*" -name "*" -type f | while read -r new_file; do
             # Extract the relative path after _snaps/
             rel_path=${new_file#*/_snaps/}
             target_file="tests/testthat/_snaps/$rel_path"
