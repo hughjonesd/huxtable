@@ -32,24 +32,10 @@ process_platform() {
     echo "Processing $platform platform..."
     
     gh run download $RUN_ID -p $artifact_pattern --dir "$TEMP_DIR/$platform"
-    # List artifacts for this run
-    # artifacts=$(gh run view $RUN_ID --json artifacts --jq '.artifacts[] | select(.name | test("'"$artifact_pattern"'")) | .name')
-    
-    #if [ -z "$artifacts" ]; then
-    #    echo "No artifacts found matching pattern: $artifact_pattern"
-    #    return 1
-    #fi
-    
-    #echo "Found artifacts: $artifacts"
-    
-    # Download each matching artifact
-    #for artifact in $artifacts; do
-    #    echo "Downloading artifact: $artifact"
-    #    gh run download $RUN_ID --name "$artifact" --dir "$TEMP_DIR/$platform"
         
     # Find and process snapshot files
     if [ -d "$TEMP_DIR/$platform" ]; then
-        find "$TEMP_DIR/$platform" -path "*/tests/testthat/_snaps/*/validate-outputs/*" -name "*.new.*" -type f | while read -r new_file; do
+        find "$TEMP_DIR/$platform" -path "*/tests/testthat/_snaps/*/validate-outputs/*" -name "*" -type f | while read -r new_file; do
             # Extract the relative path after _snaps/
             rel_path=${new_file#*/_snaps/}
             target_file="tests/testthat/_snaps/$rel_path"
