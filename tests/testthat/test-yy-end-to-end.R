@@ -239,12 +239,13 @@ quarto_typst_is_valid <- function(qmd, output_dir = "temp-artefacts") {
   }
   res2 <- system2(
     "quarto",
-    c("typst", "compile", typ_file, "/dev/null", "--format", "pdf", "--diagnostic-format", "short")
+    c("typst", "compile", typ_file, "/dev/null", "--format", "pdf")
   )
   identical(res2, 0L)
 }
 
 test_that("quarto typst output is valid", {
+  skip_on_cran()
   if (Sys.which("quarto") == "") skip("quarto CLI not found")
   require_temp_artefacts_dir()
   on.exit(
