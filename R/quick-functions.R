@@ -468,7 +468,7 @@ do_quick_typst_images <- function(hts, file, open, width, height, format, extra_
   out_template <- if (length(hts) == 1L) {
     paste0(file, ".", format)
   } else {
-    paste0(file, "-{0p}.", format)
+    paste0(file, "-{n}.", format) # {n} is backwards compatible
   }
   args <- c("compile", typst_file, out_template, "--format", format, extra_args)
 
