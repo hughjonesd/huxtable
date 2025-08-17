@@ -22,6 +22,7 @@ logo\.xcf
 ^_pkgdown.yml$
 ^build-website.R$
 ^post-cran-release.R$
+^download-github-snapshots.sh$
 ^check-reverse-dependencies.R$
 ^man-roxygen$
 ^TODO\.md$
