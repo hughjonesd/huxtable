@@ -36,7 +36,8 @@ body::after {
 .container.template-reference-index,
 .container.template-reference-topic,
 .container.template-news,
-.container.template-article {
+.container.template-article,
+.container.template-tutorial {
   background-color: white !important;
   padding: 20px !important;
   border: 2px solid black !important;
@@ -85,7 +86,8 @@ body::after {
 .container.template-reference-index .row,
 .container.template-reference-topic .row,
 .container.template-news .row,
-.container.template-article .row {
+.container.template-article .row,
+.container.template-tutorial .row {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -94,7 +96,9 @@ body::after {
 .template-reference-index .col-md-9,
 .template-reference-topic .col-md-9,
 .template-news .col-md-9,
-.template-article .col-md-9 {
+.template-article .col-md-9,
+.template-tutorial .col-md-9,
+.template-tutorial .col-md-12 {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -103,7 +107,8 @@ body::after {
 .template-reference-index main,
 .template-reference-topic main,
 .template-news main,
-.template-article main {
+.template-article main,
+.template-tutorial main {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -444,6 +449,21 @@ ul {
 table.huxtable {
   border: none !important;
   margin: 20px auto !important;
+}
+
+/* Tutorial and article specific styling */
+.template-tutorial iframe,
+.template-article iframe {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+}
+
+.template-tutorial .page-header,
+.template-article .page-header {
+  background-color: white !important;
+  padding: 20px !important;
+  border-bottom: 2px solid black !important;
+  margin-bottom: 20px !important;
 }
 
 /* Make copy button icon background transparent */

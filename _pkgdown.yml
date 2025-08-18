@@ -23,11 +23,6 @@ navbar:
       href: huxtable-html.html
     articles:
       text: Articles
-      menu:
-      - text: Design Principles, Comparisons and Limitations
-        href: design-principles-html.html
-      - text: Regression Tables with huxreg
-        href: huxreg-html.html
     reference:
       text: Reference
       href: reference/index.html
