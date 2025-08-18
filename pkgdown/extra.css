@@ -344,7 +344,7 @@ footer {
 
 /* Search box */
 .form-control {
-  border: 2px solid black !important;
+  border: none !important;
   border-radius: 0 !important;
 }
 
@@ -357,7 +357,9 @@ footer {
 }
 
 .dropdown-item {
-  border-bottom: 1px solid #ddd;
+  border: none !important;
+  color: #000000 !important;
+  font-weight: bold !important;
 }
 
 .dropdown-item:hover {
@@ -404,4 +406,64 @@ footer {
 .template-home h1:not(:first-child) {
   font-size: 2rem !important;
   color: #000000 !important;
+}
+
+/* Square bullet points */
+ul {
+  list-style-type: square !important;
+}
+
+/* Remove bullet points from navigation menu */
+.navbar-nav {
+  list-style: none !important;
+}
+
+.navbar-nav ul,
+.navbar-nav li,
+.dropdown-menu,
+.dropdown-menu ul,
+.dropdown-menu li {
+  list-style: none !important;
+}
+
+/* Remove borders from R output (table results) */
+.huxtable {
+  border: none !important;
+}
+
+.huxtable-cell {
+  border: 1px solid black !important;
+}
+
+.huxtable td,
+.huxtable th {
+  border: 1px solid black !important;
+}
+
+/* Remove outer border from output tables but keep cell borders */
+table.huxtable {
+  border: none !important;
+  margin: 20px auto !important;
+}
+
+/* Make copy button icon background transparent */
+.btn-copy-ex {
+  background-color: transparent !important;
+}
+
+.btn-copy-ex svg,
+.btn-copy-ex i,
+.btn-copy-ex::before,
+.btn-copy-ex::after {
+  background-color: transparent !important;
+}
+
+/* Copy button styling */
+.btn-copy-ex:hover {
+  background-color: #ff0000 !important;
+}
+
+.btn-copy-ex:hover svg,
+.btn-copy-ex:hover i {
+  color: white !important;
 }
