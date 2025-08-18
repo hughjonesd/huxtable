@@ -2,8 +2,12 @@
 output: html_document
 ---
 
-```{r, echo = FALSE, results = 'asis'}
+```{r setup, echo = FALSE}
 suppressPackageStartupMessages(suppressWarnings(library(huxtable)))
+knitr::opts_chunk$set(echo = TRUE, results = 'asis')
+```
+
+```{r logo, echo = FALSE, results = 'asis'}
 print_html(hux_logo())
 ```
 
@@ -31,7 +35,7 @@ These examples show both the R code and the rendered HTML output:
 
 ### Simple table
 
-```{r simple-table}
+```{r simple-table, results = 'asis'}
 ht <- hux(
         Employee = c("John Smith", "Jane Doe", "David Hugh-Jones"),
         Salary = c(50000, 50000, 40000),
@@ -46,37 +50,41 @@ left_padding(ht)       <- 10
 width(ht)              <- 0.35
 number_format(ht)      <- 2
 
-ht
+print_html(ht)
 ```
 
 ### Pipe interface
 
-```{r pipe-interface}
+```{r pipe-interface, results = 'asis'}
 library(magrittr)
 ht <- hux(
         Employee = c("John Smith", "Jane Doe", "David Hugh-Jones"),
         Salary = c(50000, 50000, 40000)
       )
 
-ht |>
+result <- ht |>
       set_bold(1, everywhere)             |>
       set_bottom_border(1, everywhere)    |>
       set_align(everywhere, 2, "right")   |>
       set_lr_padding(10)                  |>
       set_width(0.35)                     |>
       set_number_format(2)
+
+print_html(result)
 ```
 
 ### Conditional formatting
 
-```{r conditional-formatting}
-mtcars[1:5, 1:5] |>
+```{r conditional-formatting, results = 'asis'}
+result <- mtcars[1:5, 1:5] |>
       as_huxtable(add_rownames = "Model") |>
       set_bold(1, everywhere, TRUE) |>
       set_all_borders(1) |>
       map_text_color(everywhere, "mpg", by_colorspace("navy", "red", "yellow")) |>
       map_background_color(everywhere, "hp", by_quantiles(0.8, c("white", "yellow"))) |>
       map_italic(everywhere, "Model", by_regex("Merc.*" = TRUE))
+
+print_html(result)
 ```
 
 ### Table of regressions

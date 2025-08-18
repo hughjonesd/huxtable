@@ -9,6 +9,7 @@ template:
       <link rel="stylesheet" href="extra.css">
   assets: pkgdown
 
+
 navbar:
   structure:
     left: [home, intro, articles, tutorials, reference, news]
