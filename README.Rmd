@@ -33,7 +33,7 @@ Huxtable is an R package to create styled tables in multiple output formats, wit
 * Control over text styling, number format, background colour, borders, padding and alignment.
 * Table cells can span multiple rows and/or columns.
 * Table manipulation via common `dplyr` functions.
-* Automatic formatting for [rmarkdown](https://rmarkdown.rstudio.com) and
+* Automatic formatting for [rmarkdown](https://rmarkdown.rstudio.com/) and
   [quarto](https://www.quarto.org/) documents.
 * `huxreg()` function for quick creation of regression tables.
 * Output to HTML, LaTeX, RTF, and Microsoft Word/Excel/Powerpoint, using the `officer` 
