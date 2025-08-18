@@ -1,4 +1,14 @@
 
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#F0EEEE"
+    fg: "#000000"
+  includes:
+    in_header: |
+      <link rel="stylesheet" href="extra.css">
+  assets: pkgdown
+
 navbar:
   structure:
     left: [home, intro, articles, tutorials, reference, news]
