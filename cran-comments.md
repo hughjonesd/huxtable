@@ -1,5 +1,6 @@
 
-Update with new features including typst output.
+Update with new features including typst output. Resubmission to fix a "moved"
+URL.
 
 ## Test environments
 
