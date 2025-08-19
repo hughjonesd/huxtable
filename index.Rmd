@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: md_document
 ---
 
 ```{r setup, echo = FALSE}
@@ -9,7 +9,21 @@ options("huxtable.knitr_output_format" = "html")
 ```
 
 ```{r logo, echo = FALSE}
-hux_logo()
+logo <- hux_logo(html = TRUE)
+# Apply Mondrian theme styling to match site design
+
+logo <- set_all_borders(logo, 6) |> 
+  set_font("-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif") |> 
+  set_font_size(14) |> 
+  set_all_padding(4) |> 
+  set_bold(TRUE) |> 
+  set_width("240pt") |> 
+  set_height("240pt") |> 
+  set_col_width("30pt") |> 
+  set_row_height("30pt")
+
+
+logo
 ```
 
 <br>
@@ -130,7 +144,7 @@ install_github("hughjonesd/huxtable")
 
 ## Learning more
 
-To learn more, check out the [vignette](https://hughjonesd.github.io/huxtable/huxtable-html.html) or read the [design principles](https://hughjonesd.github.io/huxtable/design-principles-html.html) behind huxtable, including a comparison with other R packages to create tables.
+Check out the [vignette](articles/huxtable.html).
 
 ## The name
 

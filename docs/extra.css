@@ -36,7 +36,8 @@ body::after {
 .container.template-reference-index,
 .container.template-reference-topic,
 .container.template-news,
-.container.template-article {
+.container.template-article,
+.container.template-tutorial {
   background-color: white !important;
   padding: 20px !important;
   border: 2px solid black !important;
@@ -85,7 +86,8 @@ body::after {
 .container.template-reference-index .row,
 .container.template-reference-topic .row,
 .container.template-news .row,
-.container.template-article .row {
+.container.template-article .row,
+.container.template-tutorial .row {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -94,7 +96,9 @@ body::after {
 .template-reference-index .col-md-9,
 .template-reference-topic .col-md-9,
 .template-news .col-md-9,
-.template-article .col-md-9 {
+.template-article .col-md-9,
+.template-tutorial .col-md-9,
+.template-tutorial .col-md-12 {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -103,7 +107,8 @@ body::after {
 .template-reference-index main,
 .template-reference-topic main,
 .template-news main,
-.template-article main {
+.template-article main,
+.template-tutorial main {
   background-color: white !important;
   padding: 20px !important;
 }
@@ -426,6 +431,17 @@ ul {
   list-style: none !important;
 }
 
+/* Fix dropdown headers that show Mondrian background inappropriately */
+.navbar-nav .dropdown-header {
+  background: none !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  margin: 0 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+
 /* Remove borders from R output (table results) */
 .huxtable {
   border: none !important;
@@ -444,6 +460,21 @@ ul {
 table.huxtable {
   border: none !important;
   margin: 20px auto !important;
+}
+
+/* Tutorial and article specific styling */
+.template-tutorial iframe,
+.template-article iframe {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+}
+
+.template-tutorial .page-header,
+.template-article .page-header {
+  background-color: white !important;
+  padding: 20px !important;
+  border-bottom: 2px solid black !important;
+  margin-bottom: 20px !important;
 }
 
 /* Make copy button icon background transparent */
@@ -467,3 +498,20 @@ table.huxtable {
 .btn-copy-ex:hover i {
   color: white !important;
 }
+
+/* Logo container styling - compact size */
+table#tab\\:logo {
+  width: 150px !important;
+  height: 120px !important;
+  max-width: 100% !important;
+  margin: 20px auto !important;
+  display: table !important;
+  table-layout: fixed !important;
+}
+
+/* Ensure main content area has enough space for smaller logo */
+.template-home .col-md-9 {
+  min-width: 200px;
+  overflow: visible !important;
+}
+

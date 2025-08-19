@@ -431,6 +431,17 @@ ul {
   list-style: none !important;
 }
 
+/* Fix dropdown headers that show Mondrian background inappropriately */
+.navbar-nav .dropdown-header {
+  background: none !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  margin: 0 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+
 /* Remove borders from R output (table results) */
 .huxtable {
   border: none !important;
@@ -487,3 +498,20 @@ table.huxtable {
 .btn-copy-ex:hover i {
   color: white !important;
 }
+
+/* Logo container styling - compact size */
+table#tab\\:logo {
+  width: 150px !important;
+  height: 120px !important;
+  max-width: 100% !important;
+  margin: 20px auto !important;
+  display: table !important;
+  table-layout: fixed !important;
+}
+
+/* Ensure main content area has enough space for smaller logo */
+.template-home .col-md-9 {
+  min-width: 200px;
+  overflow: visible !important;
+}
+

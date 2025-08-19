@@ -1,5 +1,8 @@
 pandoc: 3.7.0.2
 pkgdown: 2.1.3
 pkgdown_sha: ~
-articles: {}
-last_built: 2025-08-18T19:09Z
+articles:
+  design-principles: design-principles.html
+  huxreg: huxreg.html
+  huxtable: huxtable.html
+last_built: 2025-08-18T19:50Z

@@ -1,119 +1,17 @@
-<style>
-.huxtable {
-  border-collapse: collapse;
-  border: 0px;
-  margin-bottom: 2em;
-  margin-top: 2em;
-}
-.huxtable-cell {
-  vertical-align: top;
-  text-align: left;
-  white-space: normal;
-  border-style: solid;
-  border-width: 0pt;
-  padding: 6pt;
-  font-weight: normal;
-}
-.huxtable-header {
-  font-weight: bold;
-}
-</style>
-<table class="huxtable" data-quarto-disable-processing="true"  style="margin-left: auto; margin-right: auto;" id="tab:logo">
-<col>
-<col>
-<col>
-<col>
-<col>
-<col>
-<tbody>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0);   font-family: DejaVu Sans;">
-<span style="color: rgb(0, 0, 0);"></span>
-</td>
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-</tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;  font-weight: bold;  font-family: DejaVu Sans;">
-h
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-u
-</td>
-<td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-x
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-</tr>
-<tr>
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-t
-</td>
-</tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-</tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-a
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-</tr>
-<tr>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-b
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-l
-</td>
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-e
-</td>
-</tr>
+<table class="huxtable" data-quarto-disable-processing="true"  style="width: 240pt; margin-left: auto; margin-right: auto; height: 240pt;" id="tab:logo">
+<col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><col style="width: 30pt"><tbody>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">h</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">u</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td></tr>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(255, 255, 255);">x</span></td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td></tr>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td></tr>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">t</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">a</td></tr>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">b</td><td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">l</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td></tr>
+<tr style="height: 30pt;">
+<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(0, 0, 255); font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">e</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td><td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 6pt 6pt 6pt 6pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt;  font-weight: bold;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14pt;">&nbsp;</td></tr>
 </tbody>
 </table>
 
@@ -140,8 +38,6 @@ can span multiple rows and/or columns. Tables can be manipulated with
 standard R subsetting or `dplyr` functions.
 
 ## Quick Examples
-
-These examples show both the R code and the rendered HTML output:
 
 ### Simple table
 
@@ -301,12 +197,7 @@ Development version from github:
 
 ## Learning more
 
-To learn more, check out the
-[vignette](https://hughjonesd.github.io/huxtable/huxtable-html.html) or
-read the [design
-principles](https://hughjonesd.github.io/huxtable/design-principles-html.html)
-behind huxtable, including a comparison with other R packages to create
-tables.
+Check out the [vignette](articles/huxtable.html).
 
 ## The name
 

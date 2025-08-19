@@ -20,9 +20,25 @@ navbar:
       href: index.html
     intro:
       text: Get started
-      href: huxtable-html.html
+      href: articles/huxtable.html
     articles:
       text: Articles
+      menu:
+      - text: Introduction to Huxtable
+        href: articles/huxtable.html
+      - text: Design Principles, Comparisons and Limitations
+        href: articles/design-principles.html
+      - text: Regression Tables with huxreg  
+        href: articles/huxreg.html
+    tutorials:
+      text: Tutorials
+      menu:
+      - text: Reporting data with huxtable
+        href: https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html
+      - text: What's new in huxtable 5.0.0
+        href: https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html
+      - text: Huxtable themes
+        href: https://hughjonesd.github.io/huxtable/themes.html
     reference:
       text: Reference
       href: reference/index.html
@@ -170,14 +186,3 @@ reference:
       - hux_logo
       - jams
       - sanitize
-
-tutorials:
-  - name: 00-reporting-data
-    title: Reporting data with huxtable
-    url: https://hughjonesd.github.io/reporting-data-with-huxtable-4.3.0.html
-  - name: 01-whats-new
-    title: What's new in huxtable 5.0.0
-    url: https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html
-  - name: 02-themes
-    title: Huxtable themes
-    url: https://hughjonesd.github.io/huxtable/themes.html
