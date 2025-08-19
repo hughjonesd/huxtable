@@ -389,13 +389,6 @@ footer {
   border-color: #ffcc00 !important;
 }
 
-/* Package logo styling */
-.template-home .logo {
-  border: 2px solid black;
-  padding: 10px;
-  background-color: white;
-  margin: 20px 0;
-}
 
 /* Homepage specific styling */
 .template-home h1:first-child {
@@ -499,19 +492,4 @@ table.huxtable {
   color: white !important;
 }
 
-/* Logo container styling - compact size */
-table#tab\\:logo {
-  width: 150px !important;
-  height: 120px !important;
-  max-width: 100% !important;
-  margin: 20px auto !important;
-  display: table !important;
-  table-layout: fixed !important;
-}
-
-/* Ensure main content area has enough space for smaller logo */
-.template-home .col-md-9 {
-  min-width: 200px;
-  overflow: visible !important;
-}
 
