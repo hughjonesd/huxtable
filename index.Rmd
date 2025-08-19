@@ -19,6 +19,16 @@ logo <- logo |>
   set_lr_padding(8) |> 
   set_width("fit-content") 
 
+# Add hole effect to the multicolumn cell in first row (rightmost spanning cell)
+logo[1, 5] <- '<div class="mondrian-hole" style="height: 2em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
+# Add hole effect to cell (2,1) 
+logo[2, 1] <- '<div class="mondrian-hole" style="height: 2em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
+logo <- logo |> 
+  set_escape_contents(1, 5, FALSE) |>
+  set_escape_contents(2, 1, FALSE) |>
+  set_all_padding(1, 5, 0) |>
+  set_all_padding(2, 1, 0)
+
 logo
 ```
 

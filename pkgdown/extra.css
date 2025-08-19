@@ -503,4 +503,64 @@ table[id="tab:logo"] td {
   margin: 10px 0 !important;
 }
 
+/* General-purpose Mondrian hole effect class */
+.mondrian-hole {
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("mondrian-composition-A.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  border: 2px solid black !important;
+  min-height: 1.5em !important;
+}
+
+/* Ensure mondrian-hole fills table cells properly */
+.huxtable-cell .mondrian-hole {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 1.5em !important;
+}
+
+/* Ensure parent span of mondrian-hole in table cells fills the cell */
+.huxtable-cell span:has(.mondrian-hole) {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Remove all spacing from table cells containing mondrian-hole */
+.huxtable-cell:has(.mondrian-hole) {
+  padding: 0 !important;
+  line-height: 1 !important;
+  vertical-align: top !important;
+  height: 2em !important;
+}
+
+.huxtable-cell:has(.mondrian-hole) span {
+  line-height: 1 !important;
+  display: block !important;
+  height: 100% !important;
+}
+
+/* Lighter version with more transparency */
+.mondrian-hole-light {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("mondrian-composition-A.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  border: 2px solid black !important;
+}
+
+/* Darker version with less transparency */
+.mondrian-hole-dark {
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("mondrian-composition-A.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  border: 2px solid black !important;
+}
+
 
