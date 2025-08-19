@@ -4,22 +4,11 @@
 body {
   background-color: #F0EEEE !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-}
-
-body::after {
-  content: '';
-  display: block;
-  background-attachment: fixed;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
   background-image: url("mondrian-composition-A.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Main content styling with Mondrian-inspired borders */
@@ -246,9 +235,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 15px;
   margin-top: 30px;
   position: relative;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("mondrian-composition-A.jpg");
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("mondrian-composition-A.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-weight: bold;
