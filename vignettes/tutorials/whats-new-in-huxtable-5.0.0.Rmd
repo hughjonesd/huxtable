@@ -33,7 +33,7 @@ some of its new features. Click the links on the left to learn more.
 
 
 ```{r, echo = FALSE}
-huxtable::hux_logo(html = TRUE)
+huxtable::hux_logo()
 ```
 
 

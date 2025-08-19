@@ -4,20 +4,24 @@
 \alias{hux_logo}
 \title{Huxtable logo}
 \usage{
-hux_logo(latex = FALSE, html = FALSE)
+hux_logo(compact = FALSE, latex = NULL)
 }
 \arguments{
-\item{latex}{Style for LaTeX.}
+\item{compact}{Logical. Create a compact 1-row huxtable (default is 2 rows)?}
 
-\item{html}{Style for HTML.}
+\item{latex}{Logical. Output for LaTeX?}
 }
 \value{
-The huxtable logo.
+A huxtable.
 }
 \description{
 Returns a randomized huxtable logo, inspired by Mondrian.
 }
 \examples{
+# Default logo
 print_screen(hux_logo())
+
+# Compact single-row version
+print_screen(hux_logo(compact = TRUE))
 
 }

@@ -1,0 +1,506 @@
+/* Mondrian-inspired theme for huxtable pkgdown site */
+
+/* Mondrian background */
+body {
+  background-color: #F0EEEE !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  background-image: url("mondrian-composition-A.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Main content styling with Mondrian-inspired borders */
+.container-fluid {
+  background-color: white !important;
+  border: 2px solid black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: none;
+}
+
+/* Ensure main content areas have white backgrounds for ALL template types */
+.container.template-home,
+.container.template-reference-index,
+.container.template-reference-topic,
+.container.template-news,
+.container.template-article,
+.container.template-tutorial {
+  background-color: white !important;
+  padding: 20px !important;
+  border: 2px solid black !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  border-radius: 0 !important;
+  position: relative;
+}
+
+/* Create Mondrian-inspired holes in the main content area using pseudo-elements */
+/*.container.template-home::before {
+  content: '';
+  position: absolute;
+  top: 80px;
+  right: 60px;
+  width: 140px;
+  height: 90px;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("mondrian-composition-A.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border: 2px solid black;
+  z-index: 2;
+  pointer-events: none;
+}*/
+
+/*.container.template-home::after {
+  content: '';
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  width: 100px;
+  height: 70px;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("mondrian-composition-A.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border: 2px solid black;
+  z-index: 2;
+  pointer-events: none;
+}*/
+
+.container.template-home .row,
+.container.template-reference-index .row,
+.container.template-reference-topic .row,
+.container.template-news .row,
+.container.template-article .row,
+.container.template-tutorial .row {
+  background-color: white !important;
+  padding: 20px !important;
+}
+
+.template-home .col-md-9,
+.template-reference-index .col-md-9,
+.template-reference-topic .col-md-9,
+.template-news .col-md-9,
+.template-article .col-md-9,
+.template-tutorial .col-md-9,
+.template-tutorial .col-md-12 {
+  background-color: white !important;
+  padding: 20px !important;
+}
+
+.template-home main,
+.template-reference-index main,
+.template-reference-topic main,
+.template-news main,
+.template-article main,
+.template-tutorial main {
+  background-color: white !important;
+  padding: 20px !important;
+}
+
+/* Also ensure sidebar has white background */
+.col-md-3 {
+  background-color: white !important;
+  padding: 20px;
+}
+
+/* Header styling */
+.navbar-nav .nav-link {
+  color: #000000 !important;
+  font-weight: bold;
+  padding: 8px 15px !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus {
+  background-color: #ff0000 !important;
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: white !important;
+  border-bottom: 2px solid black;
+  padding: 0 !important;
+}
+
+.navbar-brand {
+  color: #000000 !important;
+  font-weight: bold;
+  padding: 8px 15px !important;
+}
+
+/* Code blocks with subtle Mondrian-inspired off-white shading */
+pre {
+  background-color: #F8F6F4 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 15px 10px !important;
+  padding: 15px !important;
+}
+
+/* Individual code elements */
+code {
+  background-color: #F8F6F4 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 2px 4px !important;
+  border-bottom: none !important;
+}
+
+/* Source code blocks */
+.sourceCode {
+  background-color: #F8F6F4 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 15px 0 !important;
+  overflow: visible !important;
+}
+
+.sourceCode pre {
+  background-color: #F8F6F4 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 15px !important;
+}
+
+/* Remove any zebra striping or background lines in code */
+.sourceCode .sourceCode {
+  background-color: #F8F6F4 !important;
+}
+
+.sourceCode code {
+  background-color: #F8F6F4 !important;
+}
+
+/* Ensure all code-related backgrounds use subtle off-white and no borders */
+pre code,
+pre.sourceCode,
+div.sourceCode,
+div.sourceCode pre,
+div.sourceCode code,
+.sourceCode *,
+pre *,
+code * {
+  background-color: #F8F6F4 !important;
+  border: none !important;
+}
+
+/* Links with Mondrian colors */
+a {
+  color: #0066cc !important;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #ff0000 !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure all interactive elements have square corners and no shadows */
+*:hover,
+*:focus,
+*:active,
+.nav-link,
+.nav-item,
+.navbar-nav,
+.dropdown-toggle,
+.dropdown-menu,
+.dropdown-item {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Buttons and form elements */
+.btn:hover,
+.form-control:hover,
+.form-control:focus,
+input:hover,
+input:focus,
+button:hover,
+button:focus {
+  border-radius: 0 !important;
+}
+
+/* Section headers with Mondrian backgrounds */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  border: 2px solid black;
+  padding: 10px 15px;
+  margin-top: 30px;
+  position: relative;
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("mondrian-composition-A.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-weight: bold;
+}
+
+/* Disable Mondrian backgrounds for sidebar headings */
+.col-md-3 h1, .col-md-3 h2, .col-md-3 h3,
+.col-md-3 h4, .col-md-3 h5, .col-md-3 h6,
+aside h1, aside h2, aside h3,
+aside h4, aside h5, aside h6 {
+  background: white !important;
+  border-bottom: 2px solid black !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  padding-bottom: 5px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Card styling */
+.card {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+  background-color: white !important;
+}
+
+.card-header {
+  background-color: #f0f0f0 !important;
+  border-bottom: 2px solid black !important;
+  font-weight: bold;
+}
+
+/* Reference index styling */
+.ref-index th {
+  background-color: #f0f0f0;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.ref-index td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+/* Function reference styling */
+.template-reference-index .ref-arguments {
+  border: 2px solid black;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+/* Buttons */
+.btn {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+  font-weight: bold !important;
+}
+
+.btn-primary {
+  background-color: #ff0000 !important;
+  border-color: black !important;
+}
+
+.btn-primary:hover {
+  background-color: #0066cc !important;
+}
+
+/* Tables */
+table {
+  border: 2px solid black !important;
+}
+
+table th {
+  background-color: #f0f0f0;
+  border: 1px solid black !important;
+  font-weight: bold;
+}
+
+table td {
+  border: 1px solid black !important;
+}
+
+/* Footer */
+footer {
+  border-top: 2px solid black;
+  background-color: white !important;
+  margin-top: 40px;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #f9f9f9;
+  border: 2px solid black;
+  border-radius: 0;
+}
+
+/* Search box */
+.form-control {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+  background-color: white !important;
+  box-shadow: none !important;
+}
+
+.dropdown-item {
+  border: none !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+.dropdown-item:hover {
+  background-color: #ff0000 !important;
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+/* Alert boxes */
+.alert {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+}
+
+.alert-info {
+  background-color: #e6f3ff !important;
+  border-color: #0066cc !important;
+}
+
+.alert-warning {
+  background-color: #fff3cd !important;
+  border-color: #ffcc00 !important;
+}
+
+
+/* Homepage specific styling */
+.template-home h1:first-child {
+  text-align: center;
+  font-size: 3rem;
+  color: #ff0000;
+  border: none;
+  background: white !important;
+  margin-bottom: 30px;
+}
+
+/* Ensure Installation and Learning more sections have normal heading styling */
+.template-home h1:not(:first-child) {
+  font-size: 2rem !important;
+  color: #000000 !important;
+}
+
+/* Square bullet points */
+ul {
+  list-style-type: square !important;
+}
+
+/* Remove bullet points from navigation menu */
+.navbar-nav {
+  list-style: none !important;
+}
+
+.navbar-nav ul,
+.navbar-nav li,
+.dropdown-menu,
+.dropdown-menu ul,
+.dropdown-menu li {
+  list-style: none !important;
+}
+
+/* Fix dropdown headers that show Mondrian background inappropriately */
+.navbar-nav .dropdown-header {
+  background: none !important;
+  border: none !important;
+  padding: 8px 15px !important;
+  margin: 0 !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+
+/* Remove borders from R output (table results) */
+.huxtable {
+  border: none !important;
+}
+
+/*.huxtable-cell {
+  border: 1px solid black !important;
+}
+
+.huxtable td,
+.huxtable th {
+  border: 1px solid black !important;
+}*/
+
+/* Remove outer border from output tables but keep cell borders */
+table.huxtable {
+  border: none !important;
+  margin: 20px auto !important;
+}
+
+/* Tutorial and article specific styling */
+.template-tutorial iframe,
+.template-article iframe {
+  border: 2px solid black !important;
+  border-radius: 0 !important;
+}
+
+.template-tutorial .page-header,
+.template-article .page-header {
+  background-color: white !important;
+  padding: 20px !important;
+  border-bottom: 2px solid black !important;
+  margin-bottom: 20px !important;
+}
+
+/* Make copy button icon background transparent */
+.btn-copy-ex {
+  background-color: transparent !important;
+}
+
+.btn-copy-ex svg,
+.btn-copy-ex i,
+.btn-copy-ex::before,
+.btn-copy-ex::after {
+  background-color: transparent !important;
+}
+
+/* Copy button styling */
+.btn-copy-ex:hover {
+  background-color: #ff0000 !important;
+}
+
+.btn-copy-ex:hover svg,
+.btn-copy-ex:hover i {
+  color: white !important;
+}
+
+/* Logo table styling for home page and vignettes */
+/* Force specific border width for logo table */
+#tab\:logo .huxtable-cell,
+#tab\:logo td,
+table[id="tab:logo"] .huxtable-cell,
+table[id="tab:logo"] td {
+  border-width: 2pt !important;
+  border-style: solid !important;
+  border-color: black !important;
+}
+
+/* Remove Mondrian background from author and date in vignettes */
+.template-article .author,
+.template-article .date,
+.template-tutorial .author,
+.template-tutorial .date {
+  background: white !important;
+  border: none !important;
+  padding: 5px 0 !important;
+  margin: 10px 0 !important;
+}
+
+

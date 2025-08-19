@@ -549,5 +549,5 @@ ht
 # hux_logo
 
 ```{r}
-hux_logo(latex = knitr::is_latex_output(), html = knitr::is_html_output())
+hux_logo(latex = knitr::is_latex_output())
 ```

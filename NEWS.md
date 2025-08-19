@@ -1,3 +1,11 @@
+# huxtable (development version)
+
+## Other changes
+
+* Redesigned `hux_logo()` function to spell out "huxtable" with customizable
+  layout, fonts, and colors. Added `compact` and `latex` parameters for
+  different output formats.
+
 # huxtable 5.7.0
 
 ## Breaking changes
