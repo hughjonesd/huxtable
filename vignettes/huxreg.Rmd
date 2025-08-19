@@ -1,7 +1,5 @@
 ---
 title: "Regression Tables with huxreg"
-author: "David Hugh-Jones"
-date: '`r Sys.Date()`'
 output: 
   html_document: default
 vignette: >

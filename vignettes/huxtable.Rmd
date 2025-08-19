@@ -1,15 +1,13 @@
 ---
 title: "Introduction to Huxtable"
-author: "David Hugh-Jones"
-date: "`r Sys.Date()`"
 output:
+  html_document:
+    toc: yes
+    toc_depth: 2
   pdf_document:
     toc: yes
     toc_depth: '2'
     latex_engine: xelatex
-  html_document:
-    toc: yes
-    toc_depth: 2
 linkcolor: olive
 urlcolor: olive
 vignette: >
@@ -50,8 +48,11 @@ logo <- hux_logo()
 logo <- logo |> 
   set_position("centre") |>
   set_font_size(24) |> 
-  set_font_size(1, 3, 32) |> 
-  set_lr_padding(8)
+  set_font_size(1, 3, 32) 
+
+cmr <- font(logo) == "cmr"
+font(logo) <- "Arial"
+font(logo)[cmr] <- "Times"
 
 if (guess_knitr_output_format() == "html") {
   logo <- logo |> set_width("fit-content")
@@ -65,9 +66,7 @@ logo
 
 ## About this document
 
-This is the introductory vignette for the R package 'huxtable', version `r packageVersion("huxtable")`. A current
-version is available on the web in [HTML](https://hughjonesd.github.io/huxtable/huxtable-html.html) or 
-[PDF](https://hughjonesd.github.io/huxtable/huxtable-pdf.pdf) format.
+This is the introductory vignette for the R package 'huxtable', version `r packageVersion("huxtable")`.
 
 ## Huxtable
 

@@ -58,15 +58,13 @@ Suggests:
     openxlsx,
     psych,
     quarto,
-    R.rsp,
     rmarkdown,
     sandwich,
     scales,
     styler,
     testthat,
     tibble,
-    tinytex,
-    W3CMarkupValidator
+    tinytex
 SystemRequirements: LaTeX packages: 
     adjustbox, 
     array, 
@@ -83,7 +81,7 @@ SystemRequirements: LaTeX packages:
     threeparttable, 
     ulem, 
     wrapfig
-VignetteBuilder: R.rsp
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
