@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">huxtable</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,44 +53,49 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hux_logo</span><span class="op">(</span>latex <span class="op">=</span> <span class="cn">FALSE</span>, html <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hux_logo</span><span class="op">(</span>compact <span class="op">=</span> <span class="cn">FALSE</span>, latex <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-latex">latex<a class="anchor" aria-label="anchor" href="#arg-latex"></a></dt>
-<dd><p>Style for LaTeX.</p></dd>
+<dl><dt id="arg-compact">compact<a class="anchor" aria-label="anchor" href="#arg-compact"></a></dt>
+<dd><p>Logical. Create a compact 1-row huxtable (default is 2 rows)?</p></dd>
 
 
-<dt id="arg-html">html<a class="anchor" aria-label="anchor" href="#arg-html"></a></dt>
-<dd><p>Style for HTML.</p></dd>
+<dt id="arg-latex">latex<a class="anchor" aria-label="anchor" href="#arg-latex"></a></dt>
+<dd><p>Logical. Output for LaTeX?</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The huxtable logo.</p>
+    <p>A huxtable.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="to_screen.html">print_screen</a></span><span class="op">(</span><span class="fu">hux_logo</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">┌─────┬─────┬─────┬─────┬─────┬─────┐</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span> <span style="font-weight: bold;"> h </span> <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span> <span style="color: #BBBBBB; background-color: #BB0000;"> u </span> <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>  x  <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">├─────┼─────┼─────┼─────┼─────┼─────┤</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span>  t  <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>  a  <span style="color: #000000;">│</span>  b  <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">├─────┼─────┼─────┴─────┼─────┼─────┤</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBB00;">   </span> <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span> <span style="color: #BBBBBB; background-color: #0000BB;">      </span>    <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">├─────┼─────┼─────┬─────┼─────┼─────┤</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span> <span style="color: #BBBBBB; background-color: #0000BB;">   </span> <span style="color: #000000;">│</span> <span style="color: #BBBBBB; background-color: #BB0000;">   </span> <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">├─────┼─────┼─────┤     ├─────┼─────┤</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>  l  <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span> <span style="color: #BBBBBB; background-color: #BB0000;">   </span> <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│     ├─────┴─────┼─────┼─────┼─────┤</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;"> </span>     <span style="color: #000000;">│</span>  e  <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span>     <span style="color: #000000;">│</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #000000;">└─────┴───────────┴─────┴─────┴─────┘</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Default logo</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="to_screen.html">print_screen</a></span><span class="op">(</span><span class="fu">hux_logo</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">┌────┬────┬────┬────┬──────────────┐</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #0000BB;">h </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBB00;">u </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BB0000; font-weight: bold;">X </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BB0000; font-weight: bold;">  </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">      </span>  <span style="color: #000000;"> </span>    <span style="color: #000000;">│</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">├────┼────┤    ├────┼────┬────┬────┤</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">  </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB; font-weight: bold;">  </span> <span style="color: #000000;">│</span>    <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB; font-weight: bold;">t </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB; font-weight: bold;">a </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">b </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">l </span> <span style="color: #000000;">│</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">└────┴────┴────┴────┴────┴────┴────┘</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5, V6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5, V6, V7, V8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7/8 columns shown.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compact single-row version</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="to_screen.html">print_screen</a></span><span class="op">(</span><span class="fu">hux_logo</span><span class="op">(</span>compact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">┌────┬────┬────┬────┬────┬────┬────┐</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB; font-weight: bold;">h </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">u </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BB0000; font-weight: bold;">X </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #0000BB; font-weight: bold;">t </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">a </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">b </span> <span style="color: #000000;">│</span> <span style="color: #000000; background-color: #BBBBBB;">l </span> <span style="color: #000000;">│</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       <span style="color: #000000;">└────┴────┴────┴────┴────┴────┴────┘</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column names: V1, V2, V3, V4, V5, V6, V7, V8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7/8 columns shown.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

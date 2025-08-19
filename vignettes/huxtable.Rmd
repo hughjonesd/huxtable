@@ -44,8 +44,20 @@ if (is_latex) knitr::opts_chunk$set(barrier = TRUE)
 
 \newpage 
 
-```{r, echo = FALSE}
-huxtable::hux_logo(latex = is_latex, html = ! is_latex)
+```{r logo, echo = FALSE}
+logo <- hux_logo()  
+
+logo <- logo |> 
+  set_position("centre") |>
+  set_font_size(24) |> 
+  set_font_size(1, 3, 32) |> 
+  set_lr_padding(8)
+
+if (guess_knitr_output_format() == "html") {
+  logo <- logo |> set_width("fit-content")
+}
+
+logo
 ```
 
 

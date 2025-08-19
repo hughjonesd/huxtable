@@ -109,75 +109,76 @@ sanitize <- function(str, type = c("latex", "html", "typst", "rtf")) {
 #'
 #' Returns a randomized huxtable logo, inspired by Mondrian.
 #'
-#' @param latex Style for LaTeX.
-#' @param html  Style for HTML.
-#' @return The huxtable logo.
+#' @param compact Logical. Create a compact 1-row huxtable (default is 2 rows)?
+#' @param latex Logical. Output for LaTeX?
+#'
+#' @return A huxtable.
 #' @export
 #'
 #' @examples
+#' # Default logo
 #' print_screen(hux_logo())
 #'
-hux_logo <- function(latex = FALSE, html = FALSE) {
-  assert_that(is.flag(latex))
+#' # Compact single-row version
+#' print_screen(hux_logo(compact = TRUE))
+#'
+hux_logo <- function(compact = FALSE, latex = NULL) {
+  assert_that(is.flag(compact))
+  assert_that(is.null(latex) || is.flag(latex))
 
-  blank <- if (html) "&nbsp;" else if (latex) "~" else ""
-  squares <- rep(blank, 36)
-  letter_squares <- sort(sample(36, 8))
-  squares[letter_squares] <- strsplit("huxtable", "")[[1]]
-  mx <- matrix(squares, 6, 6, byrow = TRUE)
-  letter_squares <- which(mx != blank) # back in vertical space
-  h_square <- which(mx == "h")
-
-  mondrian <- as_hux(mx, add_colnames = FALSE)
-  escape_contents(mondrian) <- FALSE
-  align(mondrian) <- "centre"
-  font(mondrian) <- "DejaVu Sans"
-  if (latex && !getOption("huxtable.latex_use_fontspec", FALSE)) {
-    font(mondrian) <- "cmss"
-  }
-  mondrian <- set_all_borders(mondrian, if (html) 2 else 1.2)
-  mondrian <- set_all_padding(mondrian, 0)
-  mondrian <- set_all_border_colors(mondrian, "black")
-  bg_cells <- sample(36, 8)
-  bg_colors <- sample(c("red", "blue", "yellow"), 8, replace = TRUE)
-  background_color(mondrian)[bg_cells] <- bg_colors
-  text_color(mondrian)[bg_cells] <- ifelse(bg_colors == "yellow", "black", "white")
-  bold(mondrian)[h_square] <- TRUE
-
-  colspan_ok <- setdiff(1:30, letter_squares - 6)
-  colspan2 <- rep(-6, 2)
-  for (i in 1:2) {
-    colspan2[i] <- sample(colspan_ok, 1)
-    colspan_ok <- setdiff(colspan_ok, c(colspan2 - 6, colspan2 + 6))
+  # Auto-detect LaTeX if not specified
+  if (is.null(latex)) {
+    latex <- guess_knitr_output_format() == "latex"
   }
 
-  # -7 to avoid being top-left of any letter_squares (as we may get 2x2 cells)
-  # also avoid breaking colspans
-  rowspan_ok <- setdiff(1:36, c(
-    1:6 * 6, letter_squares - 1, letter_squares - 7, colspan2 - 1,
-    colspan2 + 5, colspan2 + 6, colspan2
-  ))
-  rowspan2 <- rep(-1, 3)
-  for (i in 1:3) {
-    rowspan2[i] <- sample(rowspan_ok, 1)
-    rowspan_ok <- setdiff(rowspan_ok, c(rowspan2 - 1, rowspan2 + 1))
+  # Create logo layout
+  hux_letters <- c("h", "u", "X", "t", "a", "b", "l", "e")
+  if (compact) {
+    logo <- as_hux(matrix(hux_letters, nrow = 1), add_colnames = FALSE)
+  } else {
+    logo <- as_hux(rbind(hux_letters, hux_letters), add_colnames = FALSE)
+    logo[1, 4:8] <- ""
+    logo[2, 1:2] <- ""
+    rowspan(logo)[1, 3] <- 2
+    colspan(logo)[1, 5] <- 3
   }
 
-  colspan(mondrian)[colspan2] <- 2
-  rowspan(mondrian)[rowspan2] <- 2
+  n_cells <- nrow(logo) * ncol(logo)
 
-  if (html) {
-    mondrian <- set_all_padding(mondrian, 2)
-    width(mondrian) <- "120pt"
-    height(mondrian) <- "120pt"
-    col_width(mondrian) <- "20pt"
-    row_height(mondrian) <- "20pt"
-  }
-  if (latex) {
-    wrap(mondrian) <- TRUE
-  }
+  # Set background colors
+  background_color(logo) <- "white"
+  n_color_cells <- if (compact) 2 else 3
+  selected_cells <- sample(n_cells, n_color_cells)
+  special_colors <- sample(c("white", "blue", "yellow", "red"),
+                          n_color_cells, replace = TRUE,
+                          prob = c(0.1, 0.4, 0.4, 0.1))
+  background_color(logo)[selected_cells] <- special_colors
+  background_color(logo)[1, 3] <- "red"  # X always red
 
-  mondrian
+  # Set fonts
+  serif_font <- if (latex) "cmr" else "Times"
+  sans_font <- if (latex) "cmss" else "Arial"
+  font_choices <- sample(c(serif_font, sans_font), n_cells, replace = TRUE)
+  font(logo) <- matrix(font_choices, nrow = nrow(logo))
+  font(logo)[1, 3] <- serif_font  # X always serif
+
+  # Set bold
+  bold_choices <- sample(c(FALSE, TRUE), n_cells, replace = TRUE, prob = c(0.8, 0.2))
+  bold(logo) <- matrix(bold_choices, nrow = nrow(logo))
+  bold(logo)[1, 3] <- TRUE  # X always bold
+
+  # Set other styling
+  text_color(logo) <- "black"
+  border_width <- if (compact) 0.4 else 1.2
+  logo <- set_all_borders(logo, border_width)
+  logo <- set_all_border_colors(logo, "black")
+  logo <- set_all_padding(logo, if (latex) 2 else 4)
+  align(logo) <- "centre"
+  valign(logo) <- "middle"
+  font_size(logo) <- 14
+  if (!compact) font_size(logo)[1, 3] <- 24  # X larger in non-compact
+
+  logo
 }
 
 

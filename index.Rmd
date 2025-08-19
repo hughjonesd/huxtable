@@ -1,5 +1,6 @@
 ---
 output: md_document
+
 ---
 
 ```{r setup, echo = FALSE}
@@ -9,19 +10,14 @@ options("huxtable.knitr_output_format" = "html")
 ```
 
 ```{r logo, echo = FALSE}
-logo <- hux_logo(html = TRUE)
-# Apply Mondrian theme styling to match site design
+logo <- hux_logo()  
 
-logo <- set_all_borders(logo, 6) |> 
-  set_font("-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif") |> 
-  set_font_size(14) |> 
-  set_all_padding(4) |> 
-  set_bold(TRUE) |> 
-  set_width("240pt") |> 
-  set_height("240pt") |> 
-  set_col_width("30pt") |> 
-  set_row_height("30pt")
-
+logo <- logo |> 
+  set_position("centre") |>
+  set_font_size(24) |> 
+  set_font_size(1, 3, 32) |> 
+  set_lr_padding(8) |> 
+  set_width("fit-content") 
 
 logo
 ```

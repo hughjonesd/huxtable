@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">huxtable</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,13 @@
       <small>Source: <a href="https://github.com/hughjonesd/huxtable/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="huxtable-development-version">huxtable (development version)<a class="anchor" aria-label="anchor" href="#huxtable-development-version"></a></h2>
+<div class="section level3">
+<h3 id="other-changes-development-version">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-development-version"></a></h3>
+<ul><li>Redesigned <code><a href="../reference/hux_logo.html">hux_logo()</a></code> function to spell out “huxtable” with customizable layout, fonts, and colors. Added <code>compact</code> and <code>latex</code> parameters for different output formats.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="5.7.0" id="huxtable-570">huxtable 5.7.0<a class="anchor" aria-label="anchor" href="#huxtable-570"></a></h2><p class="text-muted">CRAN release: 2025-08-18</p>
 <div class="section level3">
@@ -213,12 +220,12 @@
 <ul><li>
 <p>Borders are now automatically collapsed. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">jams</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu"><a href="../reference/borders.html">set_right_border</a></span><span class="op">(</span><span class="va">everywhere</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="va">jams</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="../reference/borders.html">set_right_border</a></span><span class="op">(</span><span class="va">everywhere</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="../reference/borders.html">set_left_border</a></span><span class="op">(</span><span class="va">everywhere</span>, <span class="fl">2</span>, <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <p>will set the border in between the columns of <code>jams</code> to <code>0.4</code>, overwriting the previous value. This is more in line with what you would expect. For example, the following code now does what you probably want:</p>
-<pre><code><span><span class="va">jams</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu"><a href="../reference/spans.html">set_rowspan</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<pre><code><span><span class="va">jams</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/spans.html">set_rowspan</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/borders.html">set_bottom_border</a></span><span class="op">(</span><span class="fl">4</span>, <span class="va">everywhere</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">##                 Type              Price</span></span>
 <span><span class="co">##                 Strawberry         1.90</span></span>
@@ -226,8 +233,8 @@
 <span><span class="co">##                                    1.80</span></span>
 <span><span class="co">##               ---------------------------</span></span></code></pre>
 <p>instead of the old behaviour:</p>
-<pre><code><span><span class="va">jams</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu"><a href="../reference/spans.html">set_rowspan</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<pre><code><span><span class="va">jams</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/spans.html">set_rowspan</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/borders.html">set_bottom_border</a></span><span class="op">(</span><span class="fl">4</span>, <span class="va">everywhere</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">##                 Type           Price</span></span>
 <span><span class="co">##                 Strawberry      1.90</span></span>
@@ -238,13 +245,13 @@
 <li>
 <p><code><a href="../reference/borders.html">set_left_border()</a></code>, <code><a href="../reference/set-multiple.html">set_all_borders()</a></code> and friends all use a default value of 0.4. So to set a default border, write e.g.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>      <span class="fu"><a href="../reference/borders.html">set_bottom_border</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">everywhere</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>A new <code><a href="../reference/brdr.html">brdr()</a></code> class encapsulates border thickness, style and colour. You can set all properties at once by writing, e.g.:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="va">jams</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>      <span class="fu"><a href="../reference/borders.html">set_bottom_border</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">everywhere</span>, <span class="fu"><a href="../reference/brdr.html">brdr</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"dotted"</span>, <span class="st">"darkgreen"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><code>left_border(ht)</code> and friends return a <code>brdr</code> object. To access the border thickness, write <code>brdr_thickness(left_border(ht))</code>.</p>
 </li>
@@ -255,7 +262,7 @@
 <li>The <code>byrow</code> argument to <code>set_*</code>. Instead, use <code>map_*</code> and <code><a href="../reference/by_rows.html">by_cols()</a></code>.</li>
 <li>
 <code>error_style</code> and <code>pad_decimal</code> arguments in <code>huxreg</code>. Use <code>error_format</code> and <code>align(hx) &lt;- "."</code>.</li>
-<li>The <code>where()</code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions. Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and <code>align(ht) &lt;- "."</code>.</li>
+<li>The <code><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where()</a></code>, <code>is_a_number()</code> and <code>pad_decimal()</code> functions. Use <code>map_*</code> functions, <code>! is.na(as.numeric(x))</code>, and <code>align(ht) &lt;- "."</code>.</li>
 </ul></li>
 <li><p>Default padding has been increased to 6 points.</p></li>
 <li><p>By default, <code><a href="../reference/width.html">width()</a></code> is now unset.</p></li>
@@ -295,7 +302,7 @@
 <li>
 <p><code><a href="../reference/bold.html">set_bold()</a></code> and <code><a href="../reference/bold.html">set_italic()</a></code> now use a default value of <code>TRUE</code>. So you can write e.g.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/as_huxtable.html">as_hux</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>      <span class="fu"><a href="../reference/bold.html">set_bold</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">everywhere</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p>Console output in R now shows table position and caption position.</p></li>

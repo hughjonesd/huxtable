@@ -440,14 +440,14 @@ ul {
   border: none !important;
 }
 
-.huxtable-cell {
+/*.huxtable-cell {
   border: 1px solid black !important;
 }
 
 .huxtable td,
 .huxtable th {
   border: 1px solid black !important;
-}
+}*/
 
 /* Remove outer border from output tables but keep cell borders */
 table.huxtable {
@@ -490,6 +490,28 @@ table.huxtable {
 .btn-copy-ex:hover svg,
 .btn-copy-ex:hover i {
   color: white !important;
+}
+
+/* Logo table styling for home page and vignettes */
+/* Force specific border width for logo table */
+#tab\:logo .huxtable-cell,
+#tab\:logo td,
+table[id="tab:logo"] .huxtable-cell,
+table[id="tab:logo"] td {
+  border-width: 2pt !important;
+  border-style: solid !important;
+  border-color: black !important;
+}
+
+/* Remove Mondrian background from author and date in vignettes */
+.template-article .author,
+.template-article .date,
+.template-tutorial .author,
+.template-tutorial .date {
+  background: white !important;
+  border: none !important;
+  padding: 5px 0 !important;
+  margin: 10px 0 !important;
 }
 
 
