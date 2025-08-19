@@ -165,7 +165,10 @@ hux_logo <- function(compact = FALSE, latex = NULL) {
   # Set bold
   bold_choices <- sample(c(FALSE, TRUE), n_cells, replace = TRUE, prob = c(0.8, 0.2))
   bold(logo) <- matrix(bold_choices, nrow = nrow(logo))
-  bold(logo)[1, 3] <- TRUE  # X always bold
+  bold(logo)[1, 3] <- FALSE  # X never bold
+
+  italic(logo) <- sample(c(FALSE, TRUE), n_cells, replace = TRUE, prob = c(0.8, 0.2))
+  italic(logo)[1, 3] <- FALSE # X never italic
 
   # Set other styling
   text_color(logo) <- "black"
