@@ -19,17 +19,10 @@
 ^tests/testthat/output-rds$
 ^tests/testthat/temp-artefacts$
 logo\.xcf
-^build-cran.R$
 ^_pkgdown.yml$
-^build-website.R$
-^post-cran-release.R$
-^download-github-snapshots.sh$
-^check-reverse-dependencies.R$
 ^man-roxygen$
 ^TODO\.md$
-^new-colspec-ideas\.md$
 ^codecov\.yml$
-^run-covr\.R$
 ^appveyor\.yml$
 ^delete-appveyor-cache\.sh$
 ^CRAN-RELEASE$
