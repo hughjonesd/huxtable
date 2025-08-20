@@ -4,6 +4,7 @@
 ^\.github/
 ^docs/
 ^scripts/
+^tools/
 ^.claude/
 ^\.Rprofile$
 ^\.lintr$
