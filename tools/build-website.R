@@ -1,49 +1,50 @@
-#!/usr/local/bin/Rscript
+#!/usr/bin/env Rscript
+
+# Ensure we're in the package root directory
+if (!file.exists("DESCRIPTION")) {
+  stop("This script must be run from the package root directory")
+}
 
 # script to rebuild website files
+rmarkdown::render("index.Rmd")
+pkgdown::build_site()
 
-library(rmarkdown)
+# Generate vignettes in docs/
 
-# pkgdown works from your tree, not from installed versions.
-# But rmarkdown::render works with installed versions.
-# So:
-# install the version you want
-# optionally create a branch (website-x.y.z)
-# update index.Rhtml appropriately
-# run this script
-# commit any changes
-# optionally checkout master, merge in the new branch (git merge website-x.y.z)
-# push to github
-
-
-pdf_output_formats <- list(
-  "design-principles.Rmd" = pdf_document(latex_engine = "xelatex"),
-  "huxreg.Rmd"            = pdf_document(latex_engine = "xelatex"),
-  "huxtable.Rmd"          = pdf_document(
-                              latex_engine = "xelatex",
-                              toc = TRUE,
-                              toc_depth = 2
-                            )
-)
-for (f in list.files("docs", pattern = "*.Rmd", full.names = TRUE)) {
-  filename <- basename(f)
-  message("Rendering ", f)
-  filename_no_ext <- sub("\\.Rmd$", "", filename)
-  rmarkdown::render(f,
-                    output_format = "html_document",
-                    output_file   = paste0(filename_no_ext, "-html"))
-  rmarkdown::render(f,
-                    output_format = pdf_output_formats[[filename]],
-                    output_file   = paste0(filename_no_ext, "-pdf"))
+# Check if source vignette exists
+vignette_source <- "vignettes/huxtable.Rmd"
+if (!file.exists(vignette_source)) {
+  stop("Source vignette not found: ", vignette_source)
 }
-setwd('docs')
-knitr::knit("index.Rhtml", "index.html")
-knitr::knit("themes.Rhtml", "themes-html.html")
-setwd('..')
 
-pkgdown::build_reference_index()
-pkgdown::build_reference(lazy = FALSE)
-pkgdown::build_news()
-pkgdown::build_tutorials()
+# Create docs directory if it doesn't exist
+if (!dir.exists("docs")) {
+  dir.create("docs", recursive = TRUE)
+}
 
-message("Now commit and push to github.")
+# Set working directory to vignettes for rendering
+old_wd <- getwd()
+on.exit(setwd(old_wd))
+
+cat("Rendering HTML version of huxtable vignette...\n")
+# Render HTML version
+html_file <- rmarkdown::render(
+  vignette_source,
+  output_format = "html_document",
+  output_file = file.path("..", "docs", "huxtable-html.html"),
+  quiet = TRUE
+)
+
+cat("Rendering PDF version of huxtable vignette...\n")
+# Render PDF version
+pdf_file <- rmarkdown::render(
+  vignette_source,
+  output_format = "pdf_document",
+  output_file = file.path("..", "docs", "huxtable-pdf.pdf"),
+  quiet = TRUE
+)
+
+cat("Vignettes generated successfully:\n")
+cat("  HTML:", normalizePath(file.path("docs", "huxtable-html.html")), "\n")
+cat("  PDF: ", normalizePath(file.path("docs", "huxtable-pdf.pdf")), "\n")
+cat("Now add docs/*, commit and push\n")
