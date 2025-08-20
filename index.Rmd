@@ -20,9 +20,9 @@ logo <- logo |>
   set_width("fit-content") 
 
 # Add hole effect to the multicolumn cell in first row (rightmost spanning cell)
-logo[1, 5] <- '<div class="mondrian-hole" style="height: 2em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
+logo[1, 5] <- '<div class="mondrian-hole-dark" style="height: 1.8em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
 # Add hole effect to cell (2,1) 
-logo[2, 1] <- '<div class="mondrian-hole" style="height: 2em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
+logo[2, 1] <- '<div class="mondrian-hole-dark" style="height: 1.8em; width: 100%; border: none !important; display: block; box-sizing: border-box;">&nbsp;</div>'
 logo <- logo |> 
   set_escape_contents(1, 5, FALSE) |>
   set_escape_contents(2, 1, FALSE) |>
