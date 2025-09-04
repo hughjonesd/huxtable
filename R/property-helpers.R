@@ -1,9 +1,5 @@
 #' @import assertthat
 #' @importFrom stats na.omit
-#' @evalNamespace make_exports(huxtable_col_attrs)
-#' @evalNamespace make_exports(huxtable_row_attrs)
-#' @evalNamespace make_exports(huxtable_table_attrs)
-#' @evalNamespace make_exports(huxtable_cell_attrs, with_map = TRUE)
 NULL
 
 huxtable_cell_attrs <- c(
