@@ -77,7 +77,7 @@ number_format(ht)[5, -1] <- "\%5.2f"
 number_format(ht)[6, -1] <- fmt_pretty()
 
 number_format(ht)[7, -1] <- list(
-  function(x) if (x > 0) "+" else "-"
+  function(x) ifelse((x > 0), "+", "-")
 )
 
 right_border(ht) <- 1
