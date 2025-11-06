@@ -1,10 +1,11 @@
-# huxtable (development version)
+# huxtable 5.8.0
 
 ## Other changes
 
 * Redesigned `hux_logo()` function to spell out "huxtable" with customizable
   layout, fonts, and colors. Added `compact` and `latex` parameters for
   different output formats.
+* Workaround for a bug in stringr 1.6.0.
 
 # huxtable 5.7.0
 
