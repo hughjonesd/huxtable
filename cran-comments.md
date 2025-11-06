@@ -1,11 +1,10 @@
 
-Update with new features including typst output. Resubmission to fix a "moved"
-URL.
+Update to workaround a stringr 1.6.0 bug. 
 
 ## Test environments
 
-* local OS X install (R 4.5.0)
-* win-builder release/devel
+* local OS X install (R 4.5.1)
+* win-builder devel
 * mac-builder release
 
 
@@ -16,13 +15,8 @@ OK on all platforms.
 
 ## revdepcheck results
 
-We checked 22 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 23 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 1 new problems
+ * We saw 0 new problems
  * We failed to check 0 packages
- 
- The new problem is in the brickster package, which supplies an incorrect argument
- to huxtable::set_all_borders(). The new release catches this problem. I've
- filed an issue with the owner.
-
 
