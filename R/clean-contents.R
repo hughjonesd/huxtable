@@ -227,7 +227,7 @@ format_numbers <- function(string, num_fmt) {
     result
   }
 
-  stringr::str_replace_all(string, number_regex(), format_numeral)
+  stringr::str_replace_all(unname(string), number_regex(), format_numeral)
 }
 
 
