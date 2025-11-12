@@ -7,6 +7,13 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+\itemize{
+\item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of
+a data frame.
+}
+}
+
 \section{huxtable 5.8.0}{
 \subsection{Other changes}{
 \itemize{

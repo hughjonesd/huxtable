@@ -1,5 +1,8 @@
 # huxtable (development version)
 
+* Bugfix: `add_rownames()` should no longer add a 1 in the header row of a
+  data frame.
+  
 # huxtable 5.8.0
 
 ## Other changes

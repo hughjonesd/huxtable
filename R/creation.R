@@ -199,7 +199,9 @@ as_huxtable.default <- function(x,
     rownames_colname <- "rownames"
   }
   if (add_rownames) x <- add_rownames(x, preserve_rownames = FALSE, colname = rownames_colname)
-  if (add_colnames) x <- add_colnames(x)
+  if (add_colnames) {
+    x <- add_colnames(x)
+  }
   # this bit comes after add_colnames so that column headers also get aligned:
   if (autoformat) {
     dfa <- getOption("huxtable.autoformat_align", list())

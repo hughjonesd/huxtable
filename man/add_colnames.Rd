@@ -5,7 +5,7 @@
 \alias{add_rownames}
 \title{Add column or row names}
 \usage{
-add_colnames(ht, rowname = NULL, ...)
+add_colnames(ht, rowname = "", ...)
 
 add_rownames(ht, colname = "rownames", preserve_rownames = TRUE, ...)
 }

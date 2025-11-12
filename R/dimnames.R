@@ -34,7 +34,7 @@
 #' add_colnames(add_rownames(ht, ""))
 #'
 #' @export
-add_colnames <- function(ht, rowname = NULL, ...) {
+add_colnames <- function(ht, rowname = "", ...) {
   if (!missing(rowname)) assert_that(is.null(rowname) || is.string(rowname))
 
   dateish_cols <- which(sapply(ht, function(x) class(x)[1] %in% c("Date", "POSIXct", "POSIXlt")))

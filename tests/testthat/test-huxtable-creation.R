@@ -155,3 +155,10 @@ test_that("create huxtable from grouped_df", {
   iris_hux2 <- as_hux(iris_grp, groups_to_headers = TRUE, add_colnames = TRUE)
   expect_equal(contents(iris_hux2)[[2, 1]], "Species: setosa")
 })
+
+
+test_that("Bug: add_colnames() sets first rowname to 1", {
+  tmp <- as_hux(mtcars[1:2,1:2])
+  tmp <- add_rownames(tmp)
+  expect_equal(tmp[[1, 1]], "")
+})
