@@ -1,3 +1,5 @@
+# huxtable (development version)
+
 # huxtable 5.8.0
 
 ## Other changes
