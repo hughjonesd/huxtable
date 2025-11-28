@@ -21,7 +21,7 @@ as.character).
 
     <a class="navbar-brand me-2" href="../index.html">huxtable</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.8.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,12 +124,12 @@ are useful shortcuts for common formatting functions.</p>
     <div class="dont-index"><p><code><a href="fmt_pretty.html">fmt_pretty()</a></code> and <code><a href="fmt_percent.html">fmt_percent()</a></code>.<code>options("huxtable.long_minus")</code>
 in <a href="huxtable-options.html">huxtable-options</a> for pretty-printing minus signs.</p>
 <p>Other formatting functions:
-<code><a href="background_color.html">background_color</a>()</code>,
-<code><a href="bold.html">bold</a>()</code>,
-<code><a href="font.html">font</a>()</code>,
-<code><a href="font_size.html">font_size</a>()</code>,
-<code><a href="na_string.html">na_string</a>()</code>,
-<code><a href="text_color.html">text_color</a>()</code></p></div>
+<code><a href="background_color.html">background_color()</a></code>,
+<code><a href="bold.html">bold()</a></code>,
+<code><a href="font.html">font()</a></code>,
+<code><a href="font_size.html">font_size()</a></code>,
+<code><a href="na_string.html">na_string()</a></code>,
+<code><a href="text_color.html">text_color()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -157,7 +157,7 @@ in <a href="huxtable-options.html">huxtable-options</a> for pretty-printing minu
 <span class="r-in"><span><span class="fu">number_format</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="fmt_pretty.html">fmt_pretty</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">number_format</span><span class="op">(</span><span class="va">ht</span><span class="op">)</span><span class="op">[</span><span class="fl">7</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="st">"+"</span> <span class="kw">else</span> <span class="st">"-"</span></span></span>
+<span class="r-in"><span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="st">"+"</span>, <span class="st">"-"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="borders.html">right_border</a></span><span class="op">(</span><span class="va">ht</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
@@ -200,7 +200,7 @@ in <a href="huxtable-options.html">huxtable-options</a> for pretty-printing minu
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

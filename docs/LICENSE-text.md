@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2017
+    COPYRIGHT HOLDER: David Hugh-Jones

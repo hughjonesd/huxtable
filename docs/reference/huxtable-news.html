@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">huxtable</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.7.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">5.8.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,17 +55,24 @@
     <div class="section level2">
     <h2 id="huxtable-development-version-">huxtable (development version)<a class="anchor" aria-label="anchor" href="#huxtable-development-version-"></a></h2>
 
+<ul><li><p>Bugfix: <code><a href="add_colnames.html">add_rownames()</a></code> should no longer add a 1 in the header row of
+a data frame.</p></li>
+</ul></div>
+    <div class="section level2">
+    <h2 id="huxtable-">huxtable 5.8.0<a class="anchor" aria-label="anchor" href="#huxtable-"></a></h2>
+
 <div class="section">
 <h3 id="other-changes">Other changes<a class="anchor" aria-label="anchor" href="#other-changes"></a></h3>
 
 <ul><li><p>Redesigned <code><a href="hux_logo.html">hux_logo()</a></code> function to spell out “huxtable” with
 customizable layout, fonts, and colors. Added <code>compact</code> and <code>latex</code>
 parameters for different output formats.</p></li>
+<li><p>Workaround for a bug in stringr 1.6.0.</p></li>
 </ul></div>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable-">huxtable 5.7.0<a class="anchor" aria-label="anchor" href="#huxtable-"></a></h2>
+    <h2 id="huxtable--1">huxtable 5.7.0<a class="anchor" aria-label="anchor" href="#huxtable--1"></a></h2>
 
 <div class="section">
 <h3 id="breaking-changes">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes"></a></h3>
@@ -92,7 +99,7 @@ of long inline styles.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--1">huxtable 5.6.0<a class="anchor" aria-label="anchor" href="#huxtable--1"></a></h2>
+    <h2 id="huxtable--2">huxtable 5.6.0<a class="anchor" aria-label="anchor" href="#huxtable--2"></a></h2>
 
 <div class="section">
 <h3 id="breaking-changes-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1"></a></h3>
@@ -112,18 +119,18 @@ Thanks @ceresek.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--2">huxtable 5.5.7<a class="anchor" aria-label="anchor" href="#huxtable--2"></a></h2>
+    <h2 id="huxtable--3">huxtable 5.5.7<a class="anchor" aria-label="anchor" href="#huxtable--3"></a></h2>
 
 <ul><li><p>Bugfix: fix quarto referencing in quarto 1.5</p></li>
 <li><p>Bugfix: integer overflow on very large huxtables. Thanks @kpagacz.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--3">huxtable 5.5.6<a class="anchor" aria-label="anchor" href="#huxtable--3"></a></h2>
+    <h2 id="huxtable--4">huxtable 5.5.6<a class="anchor" aria-label="anchor" href="#huxtable--4"></a></h2>
 
 <ul><li><p>Bugfix: quarto cross-referencing was giving too many warnings.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--4">huxtable 5.5.5<a class="anchor" aria-label="anchor" href="#huxtable--4"></a></h2>
+    <h2 id="huxtable--5">huxtable 5.5.5<a class="anchor" aria-label="anchor" href="#huxtable--5"></a></h2>
 
 <ul><li><p>Bugfix: quarto cross-referencing doesn’t work for PDF with quarto
 version 1.4. See <code>?huxtable-FAQ</code> for workarounds.</p></li>
@@ -133,14 +140,14 @@ environment.</p></li>
 check.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--5">huxtable 5.5.3<a class="anchor" aria-label="anchor" href="#huxtable--5"></a></h2>
+    <h2 id="huxtable--6">huxtable 5.5.3<a class="anchor" aria-label="anchor" href="#huxtable--6"></a></h2>
 
 <ul><li><p>Bugfix: disable quarto styling on HTML tables. You can reenable quarto
 processing with <code>options(huxtable.quarto_process = TRUE)</code>.</p></li>
 <li><p>Bugfix: borders weren’t working with merged cells in Word documents.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--6">huxtable 5.5.2<a class="anchor" aria-label="anchor" href="#huxtable--6"></a></h2>
+    <h2 id="huxtable--7">huxtable 5.5.2<a class="anchor" aria-label="anchor" href="#huxtable--7"></a></h2>
 
 <ul><li><p>Update <code><a href="by_cases.html">by_cases()</a></code> to work with dplyr 1.1.0. Within <code><a href="by_cases.html">by_cases()</a></code>
 formulas, <code>.</code> is now vector rather than matrix when dplyr version
@@ -148,14 +155,14 @@ formulas, <code>.</code> is now vector rather than matrix when dplyr version
 <li><p>Add package checks in <code>quick_*</code> functions. Thanks @reuning.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--7">huxtable 5.5.1<a class="anchor" aria-label="anchor" href="#huxtable--7"></a></h2>
+    <h2 id="huxtable--8">huxtable 5.5.1<a class="anchor" aria-label="anchor" href="#huxtable--8"></a></h2>
 
 <ul><li><p>CSS borders are now set explicitly even if they are all set to 0.</p></li>
 <li><p>Bugfix: shell-quote files in <code>quick_*</code> functions. Thanks to @ceresek.</p></li>
 <li><p>Bugfix: cope with adjustbox version “1.3a” among latex dependencies.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--8">huxtable 5.5.0<a class="anchor" aria-label="anchor" href="#huxtable--8"></a></h2>
+    <h2 id="huxtable--9">huxtable 5.5.0<a class="anchor" aria-label="anchor" href="#huxtable--9"></a></h2>
 
 <ul><li><p>Huxtable should work with <a href="https://quarto.org" class="external-link">Quarto</a> documents.</p><ul><li><p>Quarto labels and captions will override huxtable-provided ones.</p></li>
 <li><p>Quarto style references like <code>@table-label</code> only work with quarto
@@ -176,7 +183,7 @@ formatting via <code><a href="https://rdrr.io/r/base/formatc.html" class="extern
 <li><p>Bugfix: bookdown-style references weren’t working in blogdown.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--9">huxtable 5.4.0<a class="anchor" aria-label="anchor" href="#huxtable--9"></a></h2>
+    <h2 id="huxtable--10">huxtable 5.4.0<a class="anchor" aria-label="anchor" href="#huxtable--10"></a></h2>
 
 <ul><li><p>New behaviour: setting <code><a href="spans.html">colspan()</a></code> or <code><a href="spans.html">rowspan()</a></code> overwrites the
 content of cells that have been shadowed.</p>
@@ -212,7 +219,7 @@ package.</p></li>
 working.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--10">huxtable 5.3.0<a class="anchor" aria-label="anchor" href="#huxtable--10"></a></h2>
+    <h2 id="huxtable--11">huxtable 5.3.0<a class="anchor" aria-label="anchor" href="#huxtable--11"></a></h2>
 
 <ul><li><p>Improve decimal alignment in LaTeX when <code>align(ht) == "."</code>. This may
 change the appearance of some documents.</p></li>
@@ -220,7 +227,7 @@ change the appearance of some documents.</p></li>
 <li><p>Bugfix: #196 <code>^</code> was giving errors in LaTeX.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--11">huxtable 5.2.0<a class="anchor" aria-label="anchor" href="#huxtable--11"></a></h2>
+    <h2 id="huxtable--12">huxtable 5.2.0<a class="anchor" aria-label="anchor" href="#huxtable--12"></a></h2>
 
 <ul><li><p>Add <code>table_environment</code> property so you can use e.g. <code>"table*"</code> in
 TeX.</p></li>
@@ -230,13 +237,13 @@ newline.</p></li>
 <li><p>Minor test update for compatibility with broom.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--12">huxtable 5.1.1<a class="anchor" aria-label="anchor" href="#huxtable--12"></a></h2>
+    <h2 id="huxtable--13">huxtable 5.1.1<a class="anchor" aria-label="anchor" href="#huxtable--13"></a></h2>
 
 <ul><li><p>Minor test update for compatibility with broom.</p></li>
 <li><p>Fixes for R 4.1.0.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--13">huxtable 5.1.0<a class="anchor" aria-label="anchor" href="#huxtable--13"></a></h2>
+    <h2 id="huxtable--14">huxtable 5.1.0<a class="anchor" aria-label="anchor" href="#huxtable--14"></a></h2>
 
 <ul><li><p><code><a href="as_flextable.html">as_flextable()</a></code> now exports markdown in cells to RTF, and to Word
 with the help of the optional <code>ftExtra</code> package. Thanks @atusy for
@@ -273,7 +280,7 @@ future, <code>extend</code> will probably default to <code>TRUE</code>.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--14">huxtable 5.0.0<a class="anchor" aria-label="anchor" href="#huxtable--14"></a></h2>
+    <h2 id="huxtable--15">huxtable 5.0.0<a class="anchor" aria-label="anchor" href="#huxtable--15"></a></h2>
     <p>Huxtable 5.0.0 brings numerous changes. For a more user-friendly
 introduction, see
 <a href="https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html" class="external-link">https://hughjonesd.github.io/whats-new-in-huxtable-5.0.0.html</a>.</p><div class="section">
@@ -447,7 +454,7 @@ outputs.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--15">huxtable 4.7.1<a class="anchor" aria-label="anchor" href="#huxtable--15"></a></h2>
+    <h2 id="huxtable--16">huxtable 4.7.1<a class="anchor" aria-label="anchor" href="#huxtable--16"></a></h2>
 
 <ul><li><p>The <a href="https://github.com/gdemin/expss" class="external-link">expss</a> package now supports
 export to huxtables.</p></li>
@@ -457,7 +464,7 @@ separately for each column.</p></li>
 <li><p>Add caption support for <code><a href="as_flextable.html">as_flextable()</a></code> (thanks @sjewo).</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--16">huxtable 4.7.0<a class="anchor" aria-label="anchor" href="#huxtable--16"></a></h2>
+    <h2 id="huxtable--17">huxtable 4.7.0<a class="anchor" aria-label="anchor" href="#huxtable--17"></a></h2>
 
 <ul><li><p>Better error messages.</p></li>
 <li><p>New <code><a href="merge_repeated_rows.html">merge_repeated_rows()</a></code> function: merge repeated rows into a
@@ -470,13 +477,13 @@ inserted row/column.</p></li>
 </ul></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--17">huxtable 4.6.1<a class="anchor" aria-label="anchor" href="#huxtable--17"></a></h2>
+    <h2 id="huxtable--18">huxtable 4.6.1<a class="anchor" aria-label="anchor" href="#huxtable--18"></a></h2>
 
 <ul><li><p>Bugfix: right borders in wrong place when cells were merged.</p></li>
 <li><p>Bugfix: chinese characters were displaying wrongly in <code><a href="to_screen.html">to_screen()</a></code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--18">huxtable 4.6.0<a class="anchor" aria-label="anchor" href="#huxtable--18"></a></h2>
+    <h2 id="huxtable--19">huxtable 4.6.0<a class="anchor" aria-label="anchor" href="#huxtable--19"></a></h2>
 
 <ul><li><p>Set <code>options('huxtable.latex_use_fontspec')</code> to <code>TRUE</code> to use portable
 font names in TeX documents, with the LaTeX “fontspec” package.</p></li>
@@ -487,7 +494,7 @@ huxtables.</p></li>
 correctly.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--19">huxtable 4.5.0<a class="anchor" aria-label="anchor" href="#huxtable--19"></a></h2>
+    <h2 id="huxtable--20">huxtable 4.5.0<a class="anchor" aria-label="anchor" href="#huxtable--20"></a></h2>
 
 <ul><li><p>Add <code><a href="quick-output.html">quick_latex()</a></code> function.</p></li>
 <li><p>The <code>texreg</code> package now includes a <code>huxtablereg</code> function, analogous
@@ -495,7 +502,7 @@ to <code>huxreg</code>, which outputs a huxtable from a list of regressions. Thi
 will be available from the next version of <code>texreg</code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--20">huxtable 4.4.0<a class="anchor" aria-label="anchor" href="#huxtable--20"></a></h2>
+    <h2 id="huxtable--21">huxtable 4.4.0<a class="anchor" aria-label="anchor" href="#huxtable--21"></a></h2>
 
 <ul><li><p>Huxtables can now be printed directly in Word documents and Powerpoint
 presentations, thanks to the <code>flextable</code> package and recent versions
@@ -523,7 +530,7 @@ default.</p></li>
 of latex packages.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--21">huxtable 4.3.0<a class="anchor" aria-label="anchor" href="#huxtable--21"></a></h2>
+    <h2 id="huxtable--22">huxtable 4.3.0<a class="anchor" aria-label="anchor" href="#huxtable--22"></a></h2>
 
 <ul><li><p>More work on TeX. Tables <em>should</em> now compile when raw_attributes is
 not set.</p></li>
@@ -554,7 +561,7 @@ now sets the name for the new column.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--22">huxtable 4.2.1<a class="anchor" aria-label="anchor" href="#huxtable--22"></a></h2>
+    <h2 id="huxtable--23">huxtable 4.2.1<a class="anchor" aria-label="anchor" href="#huxtable--23"></a></h2>
 
 <ul><li><p>Bugfix: <code>wrap=TRUE</code> caused squeezed text in RTF.</p></li>
 </ul><div class="section">
@@ -571,7 +578,7 @@ add</p>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--23">huxtable 4.2.0<a class="anchor" aria-label="anchor" href="#huxtable--23"></a></h2>
+    <h2 id="huxtable--24">huxtable 4.2.0<a class="anchor" aria-label="anchor" href="#huxtable--24"></a></h2>
 
 <ul><li><p>More speedups: LaTeX 2-3x faster, as_Workbook 2-3x faster.</p></li>
 <li><p>Simplify LaTeX output using our own LaTeX commands.</p></li>
@@ -597,7 +604,7 @@ issue.</p></li>
 <li><p>Tweaks to documentation.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--24">huxtable 4.1.0<a class="anchor" aria-label="anchor" href="#huxtable--24"></a></h2>
+    <h2 id="huxtable--25">huxtable 4.1.0<a class="anchor" aria-label="anchor" href="#huxtable--25"></a></h2>
 
 <ul><li><p>dplyr, knitr, rmarkdown and some other packages have moved to
 “Suggests:”, lowering the dependency load considerably. All the
@@ -637,7 +644,7 @@ rows.</p></li>
 <li><p>… and a cool new randomized <code><a href="hux_logo.html">hux_logo()</a></code> ;-)</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--25">huxtable 4.0.1<a class="anchor" aria-label="anchor" href="#huxtable--25"></a></h2>
+    <h2 id="huxtable--26">huxtable 4.0.1<a class="anchor" aria-label="anchor" href="#huxtable--26"></a></h2>
 
 <ul><li><p>Improved formatting in Excel output.</p></li>
 <li><p>New <code>format</code> method which returns the result of <code>to_html</code>, <code>to_latex</code>
@@ -651,7 +658,7 @@ etc. as appropriate.</p></li>
 <li><p>Compatibility with broom 5.0.0 - thanks @alexpghayes</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--26">huxtable 4.0.0<a class="anchor" aria-label="anchor" href="#huxtable--26"></a></h2>
+    <h2 id="huxtable--27">huxtable 4.0.0<a class="anchor" aria-label="anchor" href="#huxtable--27"></a></h2>
 
 <ul><li><p>New <code>theme_plain</code> theme.</p></li>
 <li><p>The default value for <code>add_colnames</code> is going to become <code>TRUE</code>. At
@@ -702,7 +709,7 @@ another row/column”. To get the old behaviour, use
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--27">huxtable 3.0.0<a class="anchor" aria-label="anchor" href="#huxtable--27"></a></h2>
+    <h2 id="huxtable--28">huxtable 3.0.0<a class="anchor" aria-label="anchor" href="#huxtable--28"></a></h2>
 
 <ul><li><p>Output to Excel workbooks using the <code>openxlsx</code> package.</p></li>
 <li><p>New <code>quick_xlsx</code> function.</p></li>
@@ -728,18 +735,18 @@ if called interactively.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--28">huxtable 2.0.2<a class="anchor" aria-label="anchor" href="#huxtable--28"></a></h2>
+    <h2 id="huxtable--29">huxtable 2.0.2<a class="anchor" aria-label="anchor" href="#huxtable--29"></a></h2>
 
 <ul><li><p>Don’t apply <code>number_format</code> to exponents in scientific notation.</p></li>
 <li><p>Turn off some tests on CRAN, as they fail there but not elsewhere.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--29">huxtable 2.0.1<a class="anchor" aria-label="anchor" href="#huxtable--29"></a></h2>
+    <h2 id="huxtable--30">huxtable 2.0.1<a class="anchor" aria-label="anchor" href="#huxtable--30"></a></h2>
 
 <ul><li><p>Fix <code>quick_pdf</code> error when moving output across filesystems.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--30">huxtable 2.0.0<a class="anchor" aria-label="anchor" href="#huxtable--30"></a></h2>
+    <h2 id="huxtable--31">huxtable 2.0.0<a class="anchor" aria-label="anchor" href="#huxtable--31"></a></h2>
 
 <ul><li><p>New <code>quick_html</code>, <code>quick_pdf</code> and <code>quick_docx</code> functions to print
 table-like objects to a new document.</p></li>
@@ -759,7 +766,7 @@ scientific format for large numbers.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--31">huxtable 1.2.0<a class="anchor" aria-label="anchor" href="#huxtable--31"></a></h2>
+    <h2 id="huxtable--32">huxtable 1.2.0<a class="anchor" aria-label="anchor" href="#huxtable--32"></a></h2>
 
 <ul><li><p>New <code>outer_borders</code> argument for <code>huxreg</code>. This changes default
 behaviour slightly.</p></li>
@@ -770,7 +777,7 @@ top border.</p></li>
 max_width.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--32">huxtable 1.1.0<a class="anchor" aria-label="anchor" href="#huxtable--32"></a></h2>
+    <h2 id="huxtable--33">huxtable 1.1.0<a class="anchor" aria-label="anchor" href="#huxtable--33"></a></h2>
 
 <ul><li><p>No more ugly autocreated column names.</p></li>
 <li><p>Allow huxtable to have invalid or empty column names in general.</p></li>
@@ -785,7 +792,7 @@ names.</p></li>
 <code>position</code> and <code>caption_pos</code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--33">huxtable 1.0.0<a class="anchor" aria-label="anchor" href="#huxtable--33"></a></h2>
+    <h2 id="huxtable--34">huxtable 1.0.0<a class="anchor" aria-label="anchor" href="#huxtable--34"></a></h2>
 
 <ul><li><p>LaTeX implements different thicknesses for vertical and horizontal
 borders (but only one horizontal thickness per row).</p></li>
@@ -830,14 +837,14 @@ borders.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--34">huxtable 0.3.1<a class="anchor" aria-label="anchor" href="#huxtable--34"></a></h2>
+    <h2 id="huxtable--35">huxtable 0.3.1<a class="anchor" aria-label="anchor" href="#huxtable--35"></a></h2>
 
 <ul><li><p>New convenience functions <code>insert_row</code> and <code>insert_column</code>.</p></li>
 <li><p><code>latex_float</code> property allows you to change positioning in LaTeX.</p></li>
 <li><p>(Semantic versioning fail: this should have been 0.4.0.)</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--35">huxtable 0.3.0<a class="anchor" aria-label="anchor" href="#huxtable--35"></a></h2>
+    <h2 id="huxtable--36">huxtable 0.3.0<a class="anchor" aria-label="anchor" href="#huxtable--36"></a></h2>
 
 <ul><li><p>New borders argument for huxreg, gives borders in sensible places.</p></li>
 <li><p>Allow more flexible caption positioning with <code>caption_pos</code>.</p></li>
@@ -846,18 +853,18 @@ new huxtables.</p></li>
 <li><p>Fix compatibility with dplyr 0.6.0.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--36">huxtable 0.2.2<a class="anchor" aria-label="anchor" href="#huxtable--36"></a></h2>
+    <h2 id="huxtable--37">huxtable 0.2.2<a class="anchor" aria-label="anchor" href="#huxtable--37"></a></h2>
 
 <ul><li><p>Fix a bug that could lead to wrong significance stars in <code>huxreg</code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--37">huxtable 0.2.1<a class="anchor" aria-label="anchor" href="#huxtable--37"></a></h2>
+    <h2 id="huxtable--38">huxtable 0.2.1<a class="anchor" aria-label="anchor" href="#huxtable--38"></a></h2>
 
 <ul><li><p>Compatibility with dplyr 0.6.0.</p></li>
 <li><p>Use ~ for decimal padding in LaTeX.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="huxtable--38">huxtable 0.2.0<a class="anchor" aria-label="anchor" href="#huxtable--38"></a></h2>
+    <h2 id="huxtable--39">huxtable 0.2.0<a class="anchor" aria-label="anchor" href="#huxtable--39"></a></h2>
 
 <ul><li><p>New <code>huxreg</code> function to convert a list of models to a huxtable.</p></li>
 <li><p>New set_* interface allowing column ranges, expressions a la
@@ -885,7 +892,7 @@ with <code>ggplot2</code>.</p></li>
 
     </div>
     <div class="section level2">
-    <h2 id="huxtable--39">huxtable 0.1.0<a class="anchor" aria-label="anchor" href="#huxtable--39"></a></h2>
+    <h2 id="huxtable--40">huxtable 0.1.0<a class="anchor" aria-label="anchor" href="#huxtable--40"></a></h2>
 
 <ul><li><p>Added a <code>NEWS.md</code> file to track changes to the package.</p></li>
 <li><p>First CRAN release.</p></li>
@@ -910,7 +917,7 @@ with <code>ggplot2</code>.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
