@@ -51,7 +51,6 @@ Suggests:
     knitr,
     lme4,
     lmtest,
-    lintr,
     nlme,
     nnet,
     officer,
