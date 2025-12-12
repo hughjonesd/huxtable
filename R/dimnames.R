@@ -19,7 +19,8 @@
 #' ht <- huxtable(
 #'   First = rnorm(5),
 #'   Second = rnorm(5),
-#'   add_rownames = FALSE
+#'   add_rownames = FALSE,
+#'   add_colnames = FALSE
 #' )
 #' add_rownames(ht)
 #' add_colnames(ht)
