@@ -180,7 +180,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   ft <- font(ht)
   findex <- match(ft[!is.na(ft)], fc_tables$fonts) - 1
-  if (any(is.na(findex))) {
+  if (anyNA(findex)) {
     warning(
       "Font not found in font table.\n",
       "(Did you change a font after calling `rtf_fc_table`?)"
@@ -209,7 +209,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   rh <- row_height(ht)
   table_height <- height(ht)
   row_heights <- ""
-  if (any(!is.na(rh)) || !is.na(table_height)) {
+  if (!all(is.na(rh)) || !is.na(table_height)) {
     if (!is.numeric(rh) && !all(is.na(rh))) warning("to_rtf can only handle numeric row_height.")
     if (!is.numeric(table_height) && !is.na(table_height)) {
       warning(
@@ -218,7 +218,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
     }
     if (!is.numeric(table_height) || is.na(table_height)) table_height <- 0.33
     page_height <- 10 * 72 * 20 # 10 inches in twips
-    if (any(is.na(as.numeric(rh)))) rh <- rep(1 / nrow(ht), nrow(ht))
+    if (anyNA(as.numeric(rh))) rh <- rep(1 / nrow(ht), nrow(ht))
     rh <- ceiling(rh * page_height * table_height)
     row_heights <- sprintf("\\trrh%d ", rh)
   }

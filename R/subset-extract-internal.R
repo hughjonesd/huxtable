@@ -6,7 +6,7 @@
 #' @return The modified huxtable
 #' @noRd
 delete_cols <- function(ht, idx) {
-  if (any(is.na(idx))) stop("Tried to delete a non-existent column")
+  if (anyNA(idx)) stop("Tried to delete a non-existent column")
   subset_idx <- seq_len(ncol(ht))[-idx]
 
   subset_cols(ht, subset_idx)
@@ -325,7 +325,7 @@ normalize_index.logical <- function(idx, max_dim, dim_names) {
 
 #' @export
 normalize_index.character <- function(idx, max_dim, dim_names) {
-  if (any(is.na(idx))) stop("NA in subscript")
+  if (anyNA(idx)) stop("NA in subscript")
 
   match(idx, dim_names)
 }
@@ -333,7 +333,7 @@ normalize_index.character <- function(idx, max_dim, dim_names) {
 
 #' @export
 normalize_index.numeric <- function(idx, max_dim, dim_names) {
-  if (any(is.na(idx))) stop("NA in subscript")
+  if (anyNA(idx)) stop("NA in subscript")
   if (any(idx < 0)) {
     if (!all(idx <= 0)) stop("Can't mix positive and negative subscripts")
     if (any(-idx > max_dim)) stop("Negative subscript out of bounds")

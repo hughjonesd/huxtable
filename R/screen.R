@@ -522,7 +522,7 @@ format_cell_contents <- function(dc, widths, ht, markdown) {
   }
   
   # Calculate text dimensions
-  dc$text_height <- sapply(dc$strings, length)
+  dc$text_height <- lengths(dc$strings)
   dc$text_width <- sapply(dc$strings, function(x) max(ncharw(x, type = "chars")))
   
   dc

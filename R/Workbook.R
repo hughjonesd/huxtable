@@ -128,7 +128,7 @@ write_excel_contents <- function(wb, sheet, contents, start_row, start_col, top_
       if (top_cap) ws_row <- ws_row + 1
 
       is_a_number_col <- is_a_number_mx[i:nr, j]
-      if (all(is_a_number_col) || all(!is_a_number_col)) {
+      if (all(is_a_number_col) || !any(is_a_number_col)) {
         insert <- col_contents[i:nr]
         if (all(is_a_number_col)) insert <- as.numeric(insert)
 

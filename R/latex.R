@@ -175,7 +175,7 @@ build_tabular <- function(ht) {
 
   ## PREPARE INDICES -----------
   dc_pos_matrix <- as.matrix(display_cells[, c("display_row", "display_col")])
-  dc_map <- matrix(1:length(contents), nrow(ht), ncol(ht))
+  dc_map <- matrix(seq_along(contents), nrow(ht), ncol(ht))
   # dc_map gives the display cells corresponding to real cells, in as.vector(cell_contents) space
   dc_map <- c(dc_map[dc_pos_matrix])
   dc_idx <- !display_cells$shadowed

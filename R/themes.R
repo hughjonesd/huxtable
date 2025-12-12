@@ -208,9 +208,9 @@ theme_striped <- function(ht,
 #' @export
 #' @rdname themes
 theme_grey <- theme_maker(
-  col1         = grDevices::grey(.9),
-  col2         = grDevices::grey(.95),
-  header_color = grDevices::grey(.8)
+  col1         = grDevices::grey(0.9),
+  col2         = grDevices::grey(0.95),
+  header_color = grDevices::grey(0.8)
 )
 
 

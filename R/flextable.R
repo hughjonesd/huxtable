@@ -157,8 +157,8 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   # if we only have width, use it and use equal col widths
   # if we have neither, use autofit
   # if we have both, multiply col_widths by width
-  if (!is.numeric(tw) && is.numeric(cw) && !any(is.na(cw))) tw <- 0.5
-  if (!is.numeric(cw) || any(is.na(cw))) cw <- rep(1 / ncol(x), ncol(x))
+  if (!is.numeric(tw) && is.numeric(cw) && !anyNA(cw)) tw <- 0.5
+  if (!is.numeric(cw) || anyNA(cw)) cw <- rep(1 / ncol(x), ncol(x))
   if (is.numeric(tw) && !is.na(tw)) {
     tw <- tw * 6 # flextable sizes are in inches
     cw <- cw * tw
@@ -172,8 +172,8 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   # if we have row heights, set height to 0.5
   # if we only have height, set row_heights to equal
   # otherwise, do nothing - don't call autofit again unless you overwrite
-  if (!is.numeric(th) && is.numeric(rh) && !any(is.na(rh))) th <- 0.5
-  if (!is.numeric(rh) || any(is.na(rh))) rh <- rep(1 / nrow(x), nrow(x))
+  if (!is.numeric(th) && is.numeric(rh) && !anyNA(rh)) th <- 0.5
+  if (!is.numeric(rh) || anyNA(rh)) rh <- rep(1 / nrow(x), nrow(x))
   if (is.numeric(th) && !is.na(th)) {
     rh <- rh * 9 # inches again, so this is roughly A4 with 2 1" margins
     rh <- rh * th

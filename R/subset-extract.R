@@ -57,13 +57,13 @@ NULL
   ix <- normalize_index(i, nrow(x), rownames(x))
   jx <- normalize_index(j, ncol(x), colnames(x))
 
-  if (any(is.na(ix))) {
+  if (anyNA(ix)) {
     stop(
       "Bad row subscripts: ",
       paste(i[is.na(ix)], collapse = ",")
     )
   }
-  if (any(is.na(jx))) {
+  if (anyNA(jx)) {
     stop(
       "Bad column subscripts: ",
       paste(j[is.na(jx)], collapse = ",")
