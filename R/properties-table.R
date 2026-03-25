@@ -213,6 +213,10 @@ set_height <- function(ht, value) {
 #'
 #' @details
 #' Captions are not escaped. See the example for a workaround.
+#'
+#' Table captions set via the Quarto `tbl-cap` chunk option override captions set
+#' by this mechanism.
+#'
 #' @family caption properties
 #'
 #' @examples
