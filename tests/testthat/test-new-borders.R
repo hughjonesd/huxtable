@@ -157,9 +157,6 @@ test_that("map_left_border", {
     ignore_attr = TRUE
   )
 
-  # ht8 <- map_left_border(ht, by_cases(. == 2 ~ brdr(1), TRUE ~ brdr(0)))
-  # expect_equivalent(left_border(ht8)[], matrix(c(0, 1, 1, 0), 2, 2))
-
   ht9 <- map_left_border(ht, by_quantiles(0.5, list(brdr(0), brdr(1))))
   expect_equal(
     brdr_thickness(left_border(ht9)),
@@ -184,6 +181,20 @@ test_that("map_left_border", {
 
   ht7 <- map_left_border(ht, by_function(function(x) brdr(1)))
   expect_equal(brdr_thickness(left_border(ht7)), matrix(1, 2, 2), ignore_attr = TRUE)
+})
+
+
+test_that("map_left_border supports dplyr by_cases helper", {
+  skip_if_not_installed("dplyr")
+
+  ht <- hux(1:2, 2:1)
+  ht2 <- map_left_border(ht, by_cases(. == 2 ~ brdr(1), TRUE ~ brdr(0)))
+
+  expect_equal(
+    brdr_thickness(left_border(ht2)),
+    matrix(c(0, 1, 1, 0), 2, 2),
+    ignore_attr = TRUE
+  )
 })
 
 
