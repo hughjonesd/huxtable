@@ -327,7 +327,11 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
   # Determine if this is a typst image function
   is_typst_image <- grepl("typst_(png|svg)", deparse(substitute(quick_func)))
 
-  platform <- utils::sessionInfo()$platform
+  snapshot_variant <- if (file_ext %in% c(".html", ".rtf", ".tex", ".txt")) {
+    "text"
+  } else {
+    utils::sessionInfo()$platform
+  }
 
   for (table_name in names(tables)) {
     base_path <- determine_base_path(table_name = table_name, file_ext = file_ext,
@@ -344,7 +348,7 @@ test_output_format <- function(quick_func, file_ext, snapshot_suffix = "") {
       snapshot_file <- basename(file)
       file_pattern <- paste0("\\", file_ext, "$") # "\\" escapes the leading dot
       snapshot_file <- sub(file_pattern, snapshot_suffix, snapshot_file)
-      expect_snapshot_file(path = file, name = snapshot_file, variant = platform)
+      expect_snapshot_file(path = file, name = snapshot_file, variant = snapshot_variant)
     })
   }
 }
@@ -475,4 +479,3 @@ test_that("screen snapshots", {
 
   test_output_format(quick_screen, ".txt", ".txt")
 })
-
