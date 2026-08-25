@@ -113,39 +113,26 @@ write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_c
 #'
 #' @noRd
 write_excel_contents <- function(wb, sheet, contents, start_row, start_col, top_cap) {
-  nr <- nrow(contents)
   contents <- as.data.frame(contents, stringsAsFactors = FALSE)
-  is_a_number_mx <- suppressWarnings(apply(contents, 2, function(col) {
-    !is.na(as.numeric(col))
-  }))
-  dim(is_a_number_mx) <- dim(contents) # apply might return a vector :-/
-  for (j in seq_len(ncol(contents))) {
-    col_contents <- contents[[j]]
-    ws_col <- start_col - 1 + j
+  nr <- nrow(contents)
+  if (nr == 0 || ncol(contents) == 0) return(invisible(NULL))
 
-    for (i in seq_len(nr)) {
-      ws_row <- start_row - 1 + i
-      if (top_cap) ws_row <- ws_row + 1
+  is_numeric <- suppressWarnings(!is.na(as.numeric(as.matrix(contents))))
+  dim(is_numeric) <- dim(contents)
+  same_as_previous <- apply(is_numeric[-1, , drop = FALSE] ==
+    is_numeric[-nr, , drop = FALSE], 1, all)
+  starts <- c(1, which(!same_as_previous) + 1)
+  ends <- c(starts[-1] - 1, nr)
 
-      is_a_number_col <- is_a_number_mx[i:nr, j]
-      if (all(is_a_number_col) || !any(is_a_number_col)) {
-        insert <- col_contents[i:nr]
-        if (all(is_a_number_col)) insert <- as.numeric(insert)
-
-        openxlsx::writeData(wb, sheet, insert,
-          startRow = ws_row, startCol = ws_col,
-          colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none"
-        )
-        break
-      } else {
-        insert <- col_contents[i]
-        if (is_a_number_col[1]) insert <- as.numeric(insert)
-        openxlsx::writeData(wb, sheet, insert,
-          startRow = ws_row, startCol = ws_col,
-          colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none"
-        )
-      }
-    }
+  for (i in seq_along(starts)) {
+    rows <- starts[i]:ends[i]
+    insert <- contents[rows, , drop = FALSE]
+    numeric_cols <- is_numeric[starts[i], ]
+    insert[numeric_cols] <- lapply(insert[numeric_cols], as.numeric)
+    openxlsx::writeData(wb, sheet, insert,
+      startRow = start_row + top_cap + starts[i] - 1, startCol = start_col,
+      colNames = FALSE, rowNames = FALSE, borders = "none", borderStyle = "none"
+    )
   }
 }
 

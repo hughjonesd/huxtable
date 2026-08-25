@@ -124,3 +124,20 @@ test_that("Data written in appropriate format", {
   expect_equal(dfr[[2]], -1:-2 + 0.5)
   expect_equal(dfr[[3]], letters[1:2])
 })
+
+
+test_that("Bugfix: Excel contents are written in blocks", {
+  contents <- rbind(c("a", "b"), c("1", "4"), c("2", "5"), c("3", "6"))
+  calls <- list()
+  local_mocked_bindings(
+    writeData = function(...) calls <<- append(calls, list(list(...))),
+    .package = "openxlsx"
+  )
+
+  write_excel_contents(NULL, "sheet", contents, 2, 3, TRUE)
+
+  expect_length(calls, 2)
+  expect_equal(calls[[1]]$startRow, 3)
+  expect_equal(calls[[2]]$startRow, 4)
+  expect_true(all(vapply(calls[[2]]$x, is.numeric, logical(1))))
+})
