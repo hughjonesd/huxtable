@@ -57,12 +57,12 @@ map_bold(
 
 }
 \seealso{
-Other formatting functions: 
-\code{\link{background_color}()},
-\code{\link{font}()},
-\code{\link{font_size}()},
-\code{\link{na_string}()},
-\code{\link{number_format}()},
-\code{\link{text_color}()}
+Other formatting functions:
+\code{\link[=background_color]{background_color()}},
+\code{\link[=font]{font()}},
+\code{\link[=font_size]{font_size()}},
+\code{\link[=na_string]{na_string()}},
+\code{\link[=number_format]{number_format()}},
+\code{\link[=text_color]{text_color()}}
 }
 \concept{formatting functions}

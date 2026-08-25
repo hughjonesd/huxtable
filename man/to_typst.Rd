@@ -25,11 +25,11 @@ ht <- huxtable(a = 1:3, b = letters[1:3])
 to_typst(ht)
 }
 \seealso{
-Other printing functions: 
-\code{\link{print_html}()},
-\code{\link{print_latex}()},
-\code{\link{print_md}()},
-\code{\link{print_rtf}()},
-\code{\link{print_screen}()}
+Other printing functions:
+\code{\link[=print_html]{print_html()}},
+\code{\link[=print_latex]{print_latex()}},
+\code{\link[=print_md]{print_md()}},
+\code{\link[=print_rtf]{print_rtf()}},
+\code{\link[=print_screen]{print_screen()}}
 }
 \concept{printing functions}

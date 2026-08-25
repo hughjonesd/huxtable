@@ -90,8 +90,8 @@ set_bottom_border_style(jams, "double")
 \seealso{
 \link{set-multiple}, \code{\link[=brdr]{brdr()}}
 
-Other border properties: 
-\code{\link{left_border}()},
-\code{\link{left_border_color}()}
+Other border properties:
+\code{\link[=left_border]{left_border()}},
+\code{\link[=left_border_color]{left_border_color()}}
 }
 \concept{border properties}

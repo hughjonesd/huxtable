@@ -99,8 +99,8 @@ set_bottom_border(jams, brdr(0.4, "solid", "green"))
 \seealso{
 \link{set-multiple}
 
-Other border properties: 
-\code{\link{left_border_color}()},
-\code{\link{left_border_style}()}
+Other border properties:
+\code{\link[=left_border_color]{left_border_color()}},
+\code{\link[=left_border_style]{left_border_style()}}
 }
 \concept{border properties}

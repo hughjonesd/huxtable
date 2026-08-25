@@ -33,8 +33,8 @@ set_caption_pos(jams, "bottom")
 
 }
 \seealso{
-Other caption properties: 
-\code{\link{caption}()},
-\code{\link{caption_width}()}
+Other caption properties:
+\code{\link[=caption]{caption()}},
+\code{\link[=caption_width]{caption_width()}}
 }
 \concept{caption properties}

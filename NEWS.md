@@ -1,5 +1,7 @@
 # huxtable (development version)
 
+* This is the last update which will be pushed to CRAN. Future versions will be 
+  available on GitHub and/or via https://hughjonesd.r-universe.dev.
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a
   data frame.
 * `as_Workbook()` is now much faster when adding many tables to an Excel

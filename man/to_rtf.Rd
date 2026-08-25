@@ -51,11 +51,11 @@ custom fonts and colors won"t work in this context.
 print_rtf(jams)
 }
 \seealso{
-Other printing functions: 
-\code{\link{print_html}()},
-\code{\link{print_latex}()},
-\code{\link{print_md}()},
-\code{\link{print_screen}()},
-\code{\link{print_typst}()}
+Other printing functions:
+\code{\link[=print_html]{print_html()}},
+\code{\link[=print_latex]{print_latex()}},
+\code{\link[=print_md]{print_md()}},
+\code{\link[=print_screen]{print_screen()}},
+\code{\link[=print_typst]{print_typst()}}
 }
 \concept{printing functions}

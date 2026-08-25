@@ -47,9 +47,9 @@ set_col_width(jams, c(.4, .5, .1))
 
 }
 \seealso{
-Other table measurements: 
-\code{\link{height}()},
-\code{\link{row_height}()},
-\code{\link{width}()}
+Other table measurements:
+\code{\link[=height]{height()}},
+\code{\link[=row_height]{row_height()}},
+\code{\link[=width]{width()}}
 }
 \concept{table measurements}

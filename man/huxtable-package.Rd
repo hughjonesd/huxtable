@@ -62,4 +62,9 @@ Useful links:
 \author{
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
 
+Authors:
+\itemize{
+  \item David Hugh-Jones \email{davidhughjones@gmail.com}
+}
+
 }

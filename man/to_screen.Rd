@@ -62,11 +62,11 @@ jams <- map_text_color(
 print_screen(jams)
 }
 \seealso{
-Other printing functions: 
-\code{\link{print_html}()},
-\code{\link{print_latex}()},
-\code{\link{print_md}()},
-\code{\link{print_rtf}()},
-\code{\link{print_typst}()}
+Other printing functions:
+\code{\link[=print_html]{print_html()}},
+\code{\link[=print_latex]{print_latex()}},
+\code{\link[=print_md]{print_md()}},
+\code{\link[=print_rtf]{print_rtf()}},
+\code{\link[=print_typst]{print_typst()}}
 }
 \concept{printing functions}

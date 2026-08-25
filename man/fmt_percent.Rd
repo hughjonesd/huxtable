@@ -30,7 +30,7 @@ set_number_format(
 
 }
 \seealso{
-Other format functions: 
-\code{\link{fmt_pretty}()}
+Other format functions:
+\code{\link[=fmt_pretty]{fmt_pretty()}}
 }
 \concept{format functions}

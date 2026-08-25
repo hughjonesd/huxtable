@@ -9,6 +9,9 @@ This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
 \itemize{
+\item This is the last update which will be pushed to CRAN. Future versions
+will be available on GitHub and/or via
+\url{https://hughjonesd.r-universe.dev}.
 \item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of
 a data frame.
 \item \code{as_Workbook()} is now much faster when adding many tables to an Excel
@@ -938,5 +941,10 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
+
+Authors:
+\itemize{
+  \item David Hugh-Jones \email{davidhughjones@gmail.com}
+}
 
 }

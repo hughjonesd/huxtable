@@ -32,9 +32,9 @@ set_width(jams, 0.8)
 
 }
 \seealso{
-Other table measurements: 
-\code{\link{col_width}()},
-\code{\link{height}()},
-\code{\link{row_height}()}
+Other table measurements:
+\code{\link[=col_width]{col_width()}},
+\code{\link[=height]{height()}},
+\code{\link[=row_height]{row_height()}}
 }
 \concept{table measurements}

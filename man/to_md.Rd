@@ -35,11 +35,11 @@ Only \code{align} and \code{caption} properties are used. The markdown format is
 print_md(jams)
 }
 \seealso{
-Other printing functions: 
-\code{\link{print_html}()},
-\code{\link{print_latex}()},
-\code{\link{print_rtf}()},
-\code{\link{print_screen}()},
-\code{\link{print_typst}()}
+Other printing functions:
+\code{\link[=print_html]{print_html()}},
+\code{\link[=print_latex]{print_latex()}},
+\code{\link[=print_rtf]{print_rtf()}},
+\code{\link[=print_screen]{print_screen()}},
+\code{\link[=print_typst]{print_typst()}}
 }
 \concept{printing functions}

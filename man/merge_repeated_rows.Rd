@@ -44,8 +44,8 @@ merge_repeated_rows(ht)
 merge_repeated_rows(ht, everywhere, "Type")
 }
 \seealso{
-Other cell merging: 
-\code{\link{merge_across}()},
-\code{\link{merge_cells}()}
+Other cell merging:
+\code{\link[=merge_across]{merge_across()}},
+\code{\link[=merge_cells]{merge_cells()}}
 }
 \concept{cell merging}

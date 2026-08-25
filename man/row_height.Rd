@@ -37,9 +37,9 @@ row_height(jams)
 \seealso{
 \code{\link[=col_width]{col_width()}}, \code{\link[=height]{height()}}, \code{\link[=width]{width()}}
 
-Other table measurements: 
-\code{\link{col_width}()},
-\code{\link{height}()},
-\code{\link{width}()}
+Other table measurements:
+\code{\link[=col_width]{col_width()}},
+\code{\link[=height]{height()}},
+\code{\link[=width]{width()}}
 }
 \concept{table measurements}

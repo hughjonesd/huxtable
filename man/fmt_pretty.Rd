@@ -28,7 +28,7 @@ set_number_format(
 
 }
 \seealso{
-Other format functions: 
-\code{\link{fmt_percent}()}
+Other format functions:
+\code{\link[=fmt_percent]{fmt_percent()}}
 }
 \concept{format functions}

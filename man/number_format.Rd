@@ -96,12 +96,12 @@ set_number_format(ht_bands, NA)
 \code{\link[=fmt_pretty]{fmt_pretty()}} and \code{\link[=fmt_percent]{fmt_percent()}}.\code{options("huxtable.long_minus")}
 in \link{huxtable-options} for pretty-printing minus signs.
 
-Other formatting functions: 
-\code{\link{background_color}()},
-\code{\link{bold}()},
-\code{\link{font}()},
-\code{\link{font_size}()},
-\code{\link{na_string}()},
-\code{\link{text_color}()}
+Other formatting functions:
+\code{\link[=background_color]{background_color()}},
+\code{\link[=bold]{bold()}},
+\code{\link[=font]{font()}},
+\code{\link[=font_size]{font_size()}},
+\code{\link[=na_string]{na_string()}},
+\code{\link[=text_color]{text_color()}}
 }
 \concept{formatting functions}
