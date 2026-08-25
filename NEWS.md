@@ -2,6 +2,8 @@
 
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a
   data frame.
+* `as_Workbook()` is now much faster when adding many tables to an Excel
+  workbook. Thanks @lemonad for the report.
   
 # huxtable 5.8.0
 
@@ -785,6 +787,5 @@ For example, the following code now does what you probably want:
 
 * Added a `NEWS.md` file to track changes to the package.
 * First CRAN release.
-
 
 

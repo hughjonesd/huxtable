@@ -141,3 +141,19 @@ test_that("Bugfix: Excel contents are written in blocks", {
   expect_equal(calls[[2]]$startRow, 4)
   expect_true(all(vapply(calls[[2]]$x, is.numeric, logical(1))))
 })
+
+
+test_that("Bugfix: identical Excel styles are written together", {
+  hx <- huxtable(a = letters[1:3], b = letters[4:6], add_colnames = FALSE)
+  bold(hx)[1, 1] <- TRUE
+
+  wb <- as_Workbook(hx)
+
+  expect_length(wb$styleObjects, 2)
+  expect_equal(sum(lengths(lapply(wb$styleObjects, `[[`, "rows"))), nrow(hx) * ncol(hx))
+  bold_style <- vapply(wb$styleObjects, function(x) {
+    "BOLD" %in% x$style$fontDecoration
+  }, logical(1))
+  expect_equal(wb$styleObjects[[which(bold_style)]]$rows, 1)
+  expect_equal(wb$styleObjects[[which(bold_style)]]$cols, 1)
+})

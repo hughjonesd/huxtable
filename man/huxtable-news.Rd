@@ -11,6 +11,8 @@ This help page simply gives the contents of NEWS.md.
 \itemize{
 \item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of
 a data frame.
+\item \code{as_Workbook()} is now much faster when adding many tables to an Excel
+workbook. Thanks @lemonad for the report.
 }
 }
 
