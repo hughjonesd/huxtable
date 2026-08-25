@@ -45,6 +45,12 @@ using helper functions such as `build_table_style()`, `build_colgroup()`,
 then wrapping it in an appropriate floating environment with caption, 
 size adjustments, and commands for borders and padding【F:R/latex.R†L17-L102】.
 
+### Excel output
+`as_Workbook()` writes cell contents in blocks of rows with compatible column
+types. It groups cells with identical styles before calling `openxlsx::addStyle()`,
+so the workbook contains one style record per distinct style and table rather
+than one record per cell【F:R/Workbook.R†L64-L218】.
+
 ## Integration with R Markdown
 When a huxtable is printed in a knitr/Rmarkdown context, 
 `knit_print.huxtable()` is invoked.  It detects the desired output format 
@@ -52,4 +58,3 @@ When a huxtable is printed in a knitr/Rmarkdown context,
 to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.).  For 
 LaTeX and HTML, the returned markup is passed to knitr as-is, possibly with 
 additional dependencies for LaTeX packages【F:R/knitr.R†L18-L60】.
-
