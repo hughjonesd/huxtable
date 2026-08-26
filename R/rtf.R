@@ -156,7 +156,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   # \cellx specifies the position of the RH cell edge:
   right_edges <- ceiling(cumsum(col_width))
 
-  cellx_def <- sprintf("\\cellx%d ", right_edges)
+  cellx_def <- sprintf("\\cellx%d", right_edges)
 
   # cellx_def has to go along rows:
   cellx <- paste0(
@@ -222,7 +222,14 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
     rh <- ceiling(rh * page_height * table_height)
     row_heights <- sprintf("\\trrh%d ", rh)
   }
-  rows <- paste0("{\n\\trowd\n", row_align, row_heights, cellx_rows, cell_content_rows, "\n\\row\n}\n")
+  row_keep <- rep("\\trkeep ", nrow(ht))
+  if (!breakable(ht) && nrow(ht) > 1L) {
+    row_keep[-nrow(ht)] <- paste0(row_keep[-nrow(ht)], "\\trkeepfollow ")
+  }
+  rows <- paste0(
+    "{\n\\trowd\n", row_align, row_keep, row_heights,
+    cellx_rows, " ", cell_content_rows, "\n\\row\n}\n"
+  )
 
   ## CAPTION ----
 

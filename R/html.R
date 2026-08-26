@@ -97,6 +97,12 @@ build_table_style <- function(ht) {
     ""
   )
 
+  break_value <- if (breakable(ht)) "auto" else "avoid"
+  break_string <- sprintf(
+    "break-inside: %s; page-break-inside: %s;",
+    break_value, break_value
+  )
+
   lab <- make_label(ht)
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
@@ -105,7 +111,7 @@ build_table_style <- function(ht) {
   } else {
     "data-quarto-disable-processing=\"true\" "
   }
-  style <- paste(width_string, margin_string, height_string, float_string)
+  style <- paste(width_string, margin_string, height_string, float_string, break_string)
   style <- trimws(style)
   style_attr <- if (nzchar(style)) sprintf(' style="%s"', style) else ""
   table_start <- sprintf(
@@ -271,9 +277,13 @@ build_row_html <- function(ht, cells_html) {
     row_heights <- 100 * row_heights / sum(row_heights)
     row_heights <- sprintf("%.3g%%", row_heights) # %3g prints max 1 decimal place
   }
-  row_heights <- sprintf(' style="height: %s;"', row_heights)
+  row_heights <- sprintf("height: %s;", row_heights)
   row_heights <- blank_where(row_heights, is.na(row_height(ht)))
-  tr <- sprintf("<tr%s>\n", row_heights)
+  row_styles <- trimws(paste(
+    row_heights,
+    "break-inside: avoid; page-break-inside: avoid;"
+  ))
+  tr <- sprintf('<tr style="%s">\n', row_styles)
   row_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
 
   header_idx <- unname(which(header_rows(ht)))

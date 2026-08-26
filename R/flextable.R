@@ -194,5 +194,15 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     }
   }
 
+  ft <- flextable::set_table_properties(
+    ft,
+    opts_word = list(split = FALSE)
+  )
+  ft <- flextable::paginate(
+    ft,
+    init = !breakable(x),
+    hdr_ftr = TRUE
+  )
+
   ft
 }

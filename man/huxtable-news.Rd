@@ -16,6 +16,8 @@ will be available on GitHub and/or via
 a data frame.
 \item \code{as_Workbook()} is now much faster when adding many tables to an Excel
 workbook. Thanks @lemonad for the report.
+\item New table property \code{breakable()} allows tables to break between rows
+across pages in HTML, LaTeX, RTF, Typst and Word output.
 }
 }
 

@@ -13,6 +13,7 @@ huxtable_latex_dependencies <- list(
   list(name = "hhline"),
   list(name = "calc"),
   list(name = "tabularx"),
+  list(name = "longtable"),
   list(name = "threeparttable"),
   list(name = "wrapfig"),
   list(name = "adjustbox"),
@@ -170,7 +171,7 @@ install_latex_dependencies <- function() {
 tlmgr_packages <- function() {
   ld <- report_latex_dependencies(quiet = TRUE)
   ld <- vapply(ld, `[[`, character(1), "name")
-  ld <- setdiff(ld, c("graphicx", "calc", "array", "hhline", "tabularx"))
+  ld <- setdiff(ld, c("graphicx", "calc", "array", "hhline", "tabularx", "longtable"))
   ld <- c(ld, "tools")
 
   return(ld)

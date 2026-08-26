@@ -44,7 +44,7 @@ knit_print.huxtable <- function(x, options, ...) {
     latex = {
       latex_deps <- report_latex_dependencies(quiet = TRUE)
       tenv <- tabular_environment(x)
-      if (tenv %in% c("tabulary", "longtable")) {
+      if (tenv %in% "tabulary") {
         latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
       }
       knitr::asis_output(res, meta = latex_deps)
