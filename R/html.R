@@ -137,6 +137,12 @@ build_table_style <- function(ht) {
     break_value, break_value
   )
 
+  background_string <- if (is.na(table_background_color(ht))) {
+    ""
+  } else {
+    sprintf("background-color: rgb(%s);", format_color(table_background_color(ht)))
+  }
+
   caption_data <- resolve_caption(ht, "html")
   lab <- caption_data$label
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
@@ -146,7 +152,10 @@ build_table_style <- function(ht) {
   } else {
     "data-quarto-disable-processing=\"true\" "
   }
-  style <- paste(width_string, margin_string, height_string, float_string, break_string)
+  style <- paste(
+    width_string, margin_string, height_string, float_string, break_string,
+    background_string
+  )
   style <- trimws(style)
   style_attr <- if (nzchar(style)) sprintf(' style="%s"', style) else ""
   table_start <- sprintf(

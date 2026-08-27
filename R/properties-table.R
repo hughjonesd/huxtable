@@ -168,6 +168,55 @@ set_width <- function(ht, value) {
 }
 
 
+#' Set the table background color
+#'
+#' `table_background_color()` sets a background color for the whole table.
+#' Individual [background_color()] values override the table background.
+#'
+#' Colors can be specified as described in [background_color()]. The default,
+#' `NA`, leaves the table background unset.
+#'
+#' Output formats handle table backgrounds differently:
+#'
+#' * HTML applies the color to the `<table>` element.
+#' * LaTeX wraps non-breakable tables in a zero-padding `\colorbox`.
+#'   Breakable LaTeX tables ignore the property because a `longtable` cannot be
+#'   placed inside a `\colorbox`.
+#' * Typst uses the table's `fill` setting. Individual cell fills override it.
+#' * RTF, Excel, Word and PowerPoint output apply the table color to
+#'   cells which do not have an individual background color.
+#' * On-screen output applies the color to the whole table area, including
+#'   borders. Individual cell backgrounds still override it.
+#' * Markdown output ignores the property.
+#'
+#' @inherit hux_prop_params params return
+#' @param value A string or `NA`. `r rd_default("table_background_color")`
+#'
+#' @family formatting functions
+#'
+#' @examples
+#' set_table_background_color(jams, "grey95")
+#'
+#' @name table_background_color
+NULL
+
+#' @rdname table_background_color
+#' @export
+table_background_color <- function(ht) prop_get(ht, "table_background_color")
+
+#' @rdname table_background_color
+#' @export
+`table_background_color<-` <- function(ht, value) {
+  prop_set_table(ht, value, "table_background_color", check_fun = is.string)
+}
+
+#' @rdname table_background_color
+#' @export
+set_table_background_color <- function(ht, value) {
+  prop_set_table(ht, value, "table_background_color", check_fun = is.string)
+}
+
+
 #' Set the table height
 #'
 #' `height()` sets the height of the entire table, while [row_height()] sets the

@@ -50,6 +50,13 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
   }
 
   tabular <- build_tabular(ht, include_caption = !tabular_only)
+  if (!breakable(ht) && !is.na(table_background_color(ht))) {
+    bg <- format_color(table_background_color(ht))
+    tabular <- paste0(
+      "{\\setlength{\\fboxsep}{0pt}%\n",
+      "\\colorbox[RGB]{", bg, "}{", tabular, "}}"
+    )
+  }
   commands <- "
   \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
   \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}

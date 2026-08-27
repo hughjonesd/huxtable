@@ -20,6 +20,40 @@ test_that("Text properties work", {
 })
 
 
+test_that("Table background fills otherwise unfilled Excel cells", {
+  hx <- set_table_background_color(
+    huxtable(a = 1:2, b = 3:4, add_colnames = FALSE),
+    "red"
+  )
+  background_color(hx)[1, 1] <- "blue"
+  wb <- as_Workbook(hx)
+
+  xlsx <- tempfile(fileext = ".xlsx")
+  on.exit(unlink(xlsx))
+  openxlsx::saveWorkbook(wb, xlsx, overwrite = TRUE)
+
+  styles <- xml2::read_xml(unz(xlsx, "xl/styles.xml"))
+  styles_ns <- xml2::xml_ns(styles)
+  fills <- xml2::xml_find_all(styles, ".//d1:fills/d1:fill", styles_ns)
+  fill_colors <- vapply(fills, function(fill) {
+    fg_color <- xml2::xml_find_first(fill, ".//d1:fgColor", styles_ns)
+    xml2::xml_attr(fg_color, "rgb")
+  }, character(1))
+  cell_xfs <- xml2::xml_find_all(styles, ".//d1:cellXfs/d1:xf", styles_ns)
+  fill_ids <- as.integer(xml2::xml_attr(cell_xfs, "fillId")) + 1L
+
+  sheet <- xml2::read_xml(unz(xlsx, "xl/worksheets/sheet1.xml"))
+  sheet_ns <- xml2::xml_ns(sheet)
+  cells <- xml2::xml_find_all(sheet, ".//d1:sheetData/d1:row/d1:c", sheet_ns)
+  cell_refs <- xml2::xml_attr(cells, "r")
+  style_ids <- as.integer(xml2::xml_attr(cells, "s")) + 1L
+  cell_colors <- setNames(fill_colors[fill_ids[style_ids]], cell_refs)
+
+  expect_equal(cell_colors["A1"], c(A1 = "FF0000FF"))
+  expect_equal(unname(cell_colors[c("B1", "A2", "B2")]), rep("FFFF0000", 3))
+})
+
+
 test_that("Borders work", {
   hx <- huxtable(a = 1:3, b = 4:6)
   top_border(hx)[1, ] <- 1

@@ -27,6 +27,12 @@ or mapping over those attributes【F:R/property-helpers.R†L1-L118】.
 The `huxtable_env` environment stores default values for all properties, 
 enabling global default customization and consistent initialization.
 
+The table-level `table_background_color` property is a default beneath
+cell-level `background_color` values. HTML and Typst render it directly on the
+table, and non-breakable LaTeX tables use a zero-padding color box. Backends
+without a table backdrop resolve it into otherwise unfilled cells with
+`background_color_with_fallback()`.
+
 ## Rendering pipeline
 Cell contents are cleaned and formatted before rendering by 
 `clean_contents()`, which applies number formatting, markdown rendering, 

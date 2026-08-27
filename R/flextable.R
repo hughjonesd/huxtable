@@ -99,7 +99,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     if (italic(x)[drow, dcol]) ft <- flextable::italic(ft, i = drow, j = dcol)
     if (!is.na(fs <- font_size(x)[drow, dcol])) ft <- flextable::fontsize(ft, i = drow, j = dcol, size = fs)
     if (!is.na(tc <- text_color(x)[drow, dcol])) ft <- flextable::color(ft, i = drow, j = dcol, color = tc)
-    if (!is.na(bgc <- background_color(x)[drow, dcol])) ft <- flextable::bg(ft, i = drow, j = dcol, bg = bgc)
+    if (!is.na(bgc <- background_color_with_fallback(x)[drow, dcol])) ft <- flextable::bg(ft, i = drow, j = dcol, bg = bgc)
     ft <- flextable::align(ft, i = drow, j = dcol, align = real_align(x)[drow, dcol])
 
     ft <- flextable::padding(ft,

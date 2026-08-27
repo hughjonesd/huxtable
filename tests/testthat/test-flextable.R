@@ -36,6 +36,20 @@ test_that("background colour works", {
 })
 
 
+test_that("table background fills otherwise unfilled flextable cells", {
+  hx <- set_table_background_color(
+    huxtable(a = 1:2, b = 3:4, add_colnames = FALSE),
+    "red"
+  )
+  background_color(hx)[1, 1] <- "blue"
+  ft <- as_flextable(hx)
+  expect_equal(
+    unname(ft$body$styles$cells$background.color$data),
+    matrix(c("blue", "red", "red", "red"), 2, 2)
+  )
+})
+
+
 test_that("merged cells work", {
   hx <- huxtable(a = 1:3, b = 4:6)
   colspan(hx)[1, 1] <- 2
