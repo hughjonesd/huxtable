@@ -250,9 +250,10 @@ quick_html <- function(
   )
   tryCatch(
     {
+      cat(huxtable_html_css())
       lapply(hts, function(ht) {
         cat("<p>&nbsp;</p>")
-        print_html(ht)
+        print_html(ht, dependencies = FALSE)
         cat("\n\n")
       })
       cat("</body></html>")
@@ -401,7 +402,7 @@ do_write_latex_file <- function(hts, file, width, height) {
       cat("\n\\begin{document}")
       lapply(hts, function(ht) {
         cat("\n\n")
-        print_latex(ht)
+        print_latex(ht, dependencies = FALSE)
         cat("\n\n")
       })
       cat("\n\\end{document}")

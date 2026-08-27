@@ -5,14 +5,17 @@
 \alias{to_latex}
 \title{Create LaTeX representing a huxtable}
 \usage{
-print_latex(ht, ...)
+print_latex(ht, ..., dependencies = TRUE)
 
-to_latex(ht, tabular_only = FALSE, ...)
+to_latex(ht, tabular_only = FALSE, dependencies = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{...}{Arguments passed to methods.}
+
+\item{dependencies}{Logical. If \code{TRUE}, include the LaTeX command definitions
+used by huxtables.}
 
 \item{tabular_only}{Return only the LaTeX tabular, not the surrounding float.}
 }

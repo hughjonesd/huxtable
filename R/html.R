@@ -2,16 +2,20 @@
 #'
 #' @rdname to_html
 #'
-print_html <- function(ht, ...) cat(huxtable_html_css(), to_html(ht, ...))
+print_html <- function(ht, ..., dependencies = TRUE) {
+  cat(to_html(ht, ..., dependencies = dependencies))
+}
 
 
 #' Create HTML representing a huxtable
 #'
-#' These functions print or return an HTML table. `print_html` also prepends a
-#' `<style>` block defining basic CSS classes.
+#' These functions print or return an HTML table. By default, `to_html()` and
+#' `print_html()` prepend a `<style>` block defining basic CSS classes, while
+#' `as_html()` attaches the same styles as an HTML dependency.
 #'
 #' @param ht A huxtable.
 #' @param ... Arguments passed to methods. Not currently used.
+#' @param dependencies Logical. If `TRUE`, include huxtable's CSS styles.
 #'
 #' @return `to_html` returns an HTML string. `as_html` wraps `to_html` and returns an
 #'   `htmltools::HTML` object. `print_html` prints the string and returns `NULL`.
@@ -31,7 +35,7 @@ print_html <- function(ht, ...) cat(huxtable_html_css(), to_html(ht, ...))
 #' @return `print_notebook` prints HTML output suitable for use in an
 #' RStudio interactive notebook.
 print_notebook <- function(ht, ...) {
-  html <- paste0(huxtable_html_css(), to_html(ht))
+  html <- to_html(ht, ...)
   print(rmarkdown::html_notebook_output_html(html))
 }
 
@@ -47,36 +51,30 @@ print_notebook <- function(ht, ...) {
 #' @examples
 #' cat(huxtable_html_css())
 huxtable_html_css <- function() {
-  '<style>
-.huxtable {
-  border-collapse: collapse;
-  border: 0px;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  css_path <- system.file("huxtable", "huxtable.css", package = "huxtable", mustWork = TRUE)
+  css <- paste(readLines(css_path, warn = FALSE), collapse = "\n")
+  paste0("<style>\n", css, "\n</style>\n")
 }
-.huxtable-cell {
-  vertical-align: top;
-  text-align: left;
-  white-space: normal;
-  border-style: solid;
-  border-width: 0pt;
-  padding: 6pt;
-  font-weight: normal;
-}
-.huxtable-header {
-  font-weight: bold;
-}
-.huxtable tr {
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
-</style>
-'
+
+
+#' HTML dependency for huxtable styles
+#'
+#' @return An `htmltools::htmlDependency` object.
+#' @noRd
+huxtable_html_dependency <- function() {
+  htmltools::htmlDependency(
+    name = "huxtable",
+    version = as.character(utils::packageVersion("huxtable")),
+    src = "huxtable",
+    stylesheet = "huxtable.css",
+    package = "huxtable"
+  )
 }
 
 #' @export
 #' @rdname to_html
-to_html <- function(ht, ...) {
+to_html <- function(ht, dependencies = TRUE, ...) {
+  assert_that(is.flag(dependencies))
   check_positive_dims(ht)
 
   table_start <- build_table_style(ht)
@@ -84,13 +82,19 @@ to_html <- function(ht, ...) {
   cell_html <- build_cell_html(ht)
   row_html <- build_row_html(ht, cell_html)
 
-  paste0(table_start, cols_html, row_html, "</table>\n")
+  table_html <- paste0(table_start, cols_html, row_html, "</table>\n")
+  if (dependencies) paste0(huxtable_html_css(), table_html) else table_html
 }
 
 #' @export
 #' @rdname to_html
-as_html <- function(ht, ...) {
-  htmltools::HTML(to_html(ht, ...))
+as_html <- function(ht, ..., dependencies = TRUE) {
+  assert_that(is.flag(dependencies))
+  result <- htmltools::HTML(to_html(ht, ..., dependencies = FALSE))
+  if (dependencies) {
+    result <- htmltools::attachDependencies(result, huxtable_html_dependency())
+  }
+  result
 }
 
 #' Build opening table tag and caption for HTML output

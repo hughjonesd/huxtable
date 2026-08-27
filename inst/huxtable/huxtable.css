@@ -1,0 +1,22 @@
+.huxtable {
+  border-collapse: collapse;
+  border: 0px;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+.huxtable-cell {
+  vertical-align: top;
+  text-align: left;
+  white-space: normal;
+  border-style: solid;
+  border-width: 0pt;
+  padding: 6pt;
+  font-weight: normal;
+}
+.huxtable-header {
+  font-weight: bold;
+}
+.huxtable tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

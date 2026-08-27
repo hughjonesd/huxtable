@@ -38,7 +38,9 @@ knit_print.huxtable <- function(x, options, ...) {
     }
   )
 
-  res <- do.call(call_name, list(x))
+  call_args <- list(x)
+  if (of %in% c("html", "latex")) call_args$dependencies <- FALSE
+  res <- do.call(call_name, call_args)
 
   res <- switch(of,
     latex = {
@@ -50,7 +52,8 @@ knit_print.huxtable <- function(x, options, ...) {
       knitr::asis_output(res, meta = latex_deps)
     },
     html = knitr::asis_output(
-      htmltools::htmlPreserve(res)
+      htmltools::htmlPreserve(res),
+      meta = list(huxtable_html_dependency())
     ),
     rtf = knitr::raw_output(res),
     pptx = ,

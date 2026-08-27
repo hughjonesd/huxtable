@@ -1,5 +1,9 @@
 \documentclass{article}
 \usepackage{array}
+\providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+\providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+\providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+\providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
@@ -22,11 +26,6 @@
 
 \begin{document}
 
-
-  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
-  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
-  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
-  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
 \begin{table}[ht]
 \begin{centerbox}

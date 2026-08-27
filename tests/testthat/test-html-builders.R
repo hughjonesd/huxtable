@@ -3,7 +3,7 @@ local_edition(3)
 test_that("builders reproduce to_html output", {
   ht <- hux(a = 1:2, b = 3:4)
   expect_identical(
-    to_html(ht),
+    to_html(ht, dependencies = FALSE),
     paste0(
       huxtable:::build_table_style(ht),
       huxtable:::build_colgroup(ht),
@@ -12,6 +12,18 @@ test_that("builders reproduce to_html output", {
     )
   )
 })
+
+
+test_that("HTML dependencies can be included or omitted", {
+  ht <- hux(a = 1)
+  expect_match(to_html(ht), "<style>", fixed = TRUE)
+  expect_false(grepl("<style>", to_html(ht, dependencies = FALSE), fixed = TRUE))
+  expect_true(any(grepl("<style>", capture.output(print_html(ht)), fixed = TRUE)))
+  expect_false(any(grepl(
+    "<style>", capture.output(print_html(ht, dependencies = FALSE)), fixed = TRUE
+  )))
+})
+
 
 test_that("build_cell_html returns correct dimensions", {
   ht <- hux(a = 1:2, b = 3:4)

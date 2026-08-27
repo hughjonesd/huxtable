@@ -7,18 +7,20 @@
 \alias{as_html}
 \title{Create HTML representing a huxtable}
 \usage{
-print_html(ht, ...)
+print_html(ht, ..., dependencies = TRUE)
 
 print_notebook(ht, ...)
 
-to_html(ht, ...)
+to_html(ht, dependencies = TRUE, ...)
 
-as_html(ht, ...)
+as_html(ht, ..., dependencies = TRUE)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
 \item{...}{Arguments passed to methods. Not currently used.}
+
+\item{dependencies}{Logical. If \code{TRUE}, include huxtable's CSS styles.}
 }
 \value{
 \code{to_html} returns an HTML string. \code{as_html} wraps \code{to_html} and returns an
@@ -28,8 +30,9 @@ as_html(ht, ...)
 RStudio interactive notebook.
 }
 \description{
-These functions print or return an HTML table. \code{print_html} also prepends a
-\verb{<style>} block defining basic CSS classes.
+These functions print or return an HTML table. By default, \code{to_html()} and
+\code{print_html()} prepend a \verb{<style>} block defining basic CSS classes, while
+\code{as_html()} attaches the same styles as an HTML dependency.
 }
 \examples{
 ht <- hux(a = 1:3, b = letters[1:3])

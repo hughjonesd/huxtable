@@ -9,8 +9,8 @@ default_table_width_unit <- "\\textwidth"
 
 #' @export
 #' @rdname to_latex
-print_latex <- function(ht, ...) {
-  cat(to_latex(ht, ...))
+print_latex <- function(ht, ..., dependencies = TRUE) {
+  cat(to_latex(ht, ..., dependencies = dependencies))
 }
 
 
@@ -18,6 +18,8 @@ print_latex <- function(ht, ...) {
 #'
 #' @param ht A huxtable.
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
+#' @param dependencies Logical. If `TRUE`, include the LaTeX command definitions
+#'   used by huxtables.
 #' @param ... Arguments passed to methods.
 #'
 #' @details
@@ -37,8 +39,8 @@ print_latex <- function(ht, ...) {
 #'   b = letters[1:3]
 #' )
 #' print_latex(ht)
-to_latex <- function(ht, tabular_only = FALSE, ...) {
-  assert_that(is.flag(tabular_only))
+to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
+  assert_that(is.flag(tabular_only), is.flag(dependencies))
   if (breakable(ht)) {
     if (!is.na(height(ht))) {
       stop("Breakable LaTeX tables cannot have a fixed height.", call. = FALSE)
@@ -57,11 +59,11 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
       "\\colorbox[RGB]{", bg, "}{", tabular, "}}"
     )
   }
-  commands <- "
-  \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
-  \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}
-  \\providecommand{\\huxtpad}[1]{\\rule{0pt}{#1}}
-  \\providecommand{\\huxbpad}[1]{\\rule[-#1]{0pt}{#1}}\n"
+  commands <- if (dependencies) {
+    paste0("\n  ", paste(huxtable_latex_commands(), collapse = "\n  "), "\n")
+  } else {
+    ""
+  }
 
   if (tabular_only) {
     return(maybe_markdown_fence(paste0(commands, tabular)))
