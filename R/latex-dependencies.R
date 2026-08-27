@@ -2,6 +2,20 @@
 NULL
 
 
+#' LaTeX commands used by huxtables
+#'
+#' @return A character vector of LaTeX command definitions.
+#' @noRd
+huxtable_latex_commands <- function() {
+  c(
+    "\\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}",
+    "\\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}",
+    "\\providecommand{\\huxtpad}[1]{\\rule{0pt}{#1}}",
+    "\\providecommand{\\huxbpad}[1]{\\rule[-#1]{0pt}{#1}}"
+  )
+}
+
+
 huxtable_latex_dependencies <- list(
   list(name = "array"),
   list(name = "caption"),

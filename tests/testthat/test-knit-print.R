@@ -51,6 +51,33 @@ test_that("knitr_output_format overrides default output format in knit_print", {
 })
 
 
+test_that("HTML and LaTeX dependencies are registered with knitr", {
+  ht <- hux(a = 1)
+  old_options <- options(huxtable.knitr_output_format = "html")
+  on.exit(options(old_options))
+
+  html <- knitr::knit_print(ht)
+  expect_false(grepl("<style>", html, fixed = TRUE))
+  html_meta <- attr(html, "knit_meta")
+  expect_length(html_meta, 1)
+  expect_s3_class(html_meta[[1]], "html_dependency")
+  expect_equal(html_meta[[1]]$name, "huxtable")
+  expect_equal(html_meta[[1]]$stylesheet, "huxtable.css")
+  css_path <- system.file("huxtable", "huxtable.css", package = "huxtable")
+  expect_true(file.exists(css_path))
+  expect_true(any(grepl(".huxtable-cell", readLines(css_path), fixed = TRUE)))
+
+  options(huxtable.knitr_output_format = "latex")
+  latex <- knitr::knit_print(ht)
+  expect_false(grepl("\\providecommand", latex, fixed = TRUE))
+  array_dep <- attr(latex, "knit_meta")[[1]]
+  expect_equal(array_dep$name, "array")
+  expect_true(any(grepl(
+    "\\providecommand{\\huxb}", array_dep$extra_lines, fixed = TRUE
+  )))
+})
+
+
 test_that("knit_print warns if output format is weird", {
   oo <- options(huxtable.knitr_output_format = "weirdness")
   ht <- hux(a = 1)

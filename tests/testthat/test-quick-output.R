@@ -52,6 +52,26 @@ test_that("Quick output functions create files", {
 })
 
 
+test_that("Quick HTML and LaTeX output includes dependencies once", {
+  first <- hux(a = 1)
+  second <- hux(b = 2)
+
+  html_file <- tempfile(fileext = ".html")
+  quick_html(first, second, file = html_file, open = FALSE)
+  html <- paste(readLines(html_file, warn = FALSE), collapse = "\n")
+  html_matches <- gregexpr("border-collapse: collapse", html, fixed = TRUE)[[1]]
+  expect_length(html_matches[html_matches >= 0], 1)
+  expect_lt(regexpr("<style>", html, fixed = TRUE), regexpr("</head>", html, fixed = TRUE))
+  expect_lt(regexpr("</style>", html, fixed = TRUE), regexpr("<body>", html, fixed = TRUE))
+
+  latex_file <- tempfile(fileext = ".tex")
+  quick_latex(first, second, file = latex_file, open = FALSE)
+  latex <- paste(readLines(latex_file, warn = FALSE), collapse = "\n")
+  latex_matches <- gregexpr("\\providecommand{\\huxb}[2]", latex, fixed = TRUE)[[1]]
+  expect_length(latex_matches[latex_matches >= 0], 1)
+})
+
+
 test_that("quick_latex can be compiled", {
   skip_on_appveyor() # no pdflatex
   skip_on_ci() # trouble on github

@@ -242,17 +242,18 @@ quick_html <- function(
   cat("<!DOCTYPE html>",
     sprintf("<html lang=\"%s\">", loc[1]),
     sprintf(
-      "<head><meta charset=\"%s\"><title>%s</title></head>",
+      "<head><meta charset=\"%s\"><title>%s</title>",
       loc[2], basename(file)
     ),
-    "<body>\n",
     sep = "\n"
   )
+  cat(huxtable_html_css())
+  cat("</head>", "<body>\n", sep = "\n")
   tryCatch(
     {
       lapply(hts, function(ht) {
         cat("<p>&nbsp;</p>")
-        print_html(ht)
+        print_html(ht, dependencies = FALSE)
         cat("\n\n")
       })
       cat("</body></html>")
@@ -390,6 +391,7 @@ do_write_latex_file <- function(hts, file, width, height) {
     {
       cat("\\documentclass{article}\n")
       report_latex_dependencies()
+      cat(paste(huxtable_latex_commands(), collapse = "\n"), "\n", sep = "")
       if (!is.null(width) || !is.null(height)) {
         dim_string <- character(2)
         dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)
@@ -401,7 +403,7 @@ do_write_latex_file <- function(hts, file, width, height) {
       cat("\n\\begin{document}")
       lapply(hts, function(ht) {
         cat("\n\n")
-        print_latex(ht)
+        print_latex(ht, dependencies = FALSE)
         cat("\n\n")
       })
       cat("\n\\end{document}")

@@ -26,6 +26,11 @@ a data frame.
 workbook. Thanks @lemonad for the report.
 \item \code{huxtable_html_css()} is now exported, for including huxtable’s
 default CSS once in an HTML document.
+\item In knitr, R Markdown and Quarto documents, huxtable’s HTML styles and
+LaTeX command definitions are now registered as document dependencies
+and emitted once. Outside those documents, \code{to_html()},
+\code{print_html()}, \code{to_latex()} and \code{print_latex()} include them by
+default; use \code{dependencies = FALSE} to omit them.
 }
 }
 

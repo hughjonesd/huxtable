@@ -16,6 +16,11 @@
   workbook. Thanks @lemonad for the report.
 * `huxtable_html_css()` is now exported, for including huxtable's default CSS
   once in an HTML document.
+* In knitr, R Markdown and Quarto documents, huxtable's HTML styles and LaTeX
+  command definitions are now registered as document dependencies and emitted
+  once. Outside those documents, `to_html()`, `print_html()`, `to_latex()` and
+  `print_latex()` include them by default; use `dependencies = FALSE` to omit
+  them.
   
 # huxtable 5.8.0
 

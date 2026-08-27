@@ -68,12 +68,15 @@ so the workbook contains one style record per distinct style and table rather
 than one record per cell【F:R/Workbook.R†L64-L218】.
 
 ## Integration with R Markdown
-When a huxtable is printed in a knitr/Rmarkdown context, 
+When a huxtable is printed in a knitr/Rmarkdown context,
 `knit_print.huxtable()` is invoked.  It detects the desired output format 
 (`latex`, `html`, `rtf`, etc.) via `guess_knitr_output_format()` and dispatches 
-to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.).  For 
-LaTeX and HTML, the returned markup is passed to knitr as-is, possibly with 
-additional dependencies for LaTeX packages【F:R/knitr.R†L18-L60】.
+to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.). For
+LaTeX and HTML, it asks the renderer to omit inline dependencies and registers
+the CSS or LaTeX packages and command definitions as knitr metadata. Document
+engines can then emit these dependencies once even when there are several
+tables. Direct calls to the HTML and LaTeX renderers include their CSS or
+command definitions by default so their output remains standalone.
 
 Caption and label behavior shared by the renderers is implemented in
 `R/captions.R`. `resolve_caption()` returns caption text, the resolved label,

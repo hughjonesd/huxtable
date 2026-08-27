@@ -213,6 +213,13 @@ test_that("Bugfix: print_html doesn't duplicate rows", {
 })
 
 
+test_that("LaTeX dependencies can be included or omitted", {
+  ht <- hux(a = 1)
+  expect_match(to_latex(ht), "\\providecommand{\\huxb}", fixed = TRUE)
+  expect_no_match(to_latex(ht, dependencies = FALSE), "\\providecommand", fixed = TRUE)
+})
+
+
 test_that("format.huxtable works", {
   ht <- hux(a = 1:3, b = 1:3)
   for (output in c("latex", "html", "md", "screen", "typst")) {
