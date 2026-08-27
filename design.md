@@ -68,3 +68,9 @@ When a huxtable is printed in a knitr/Rmarkdown context,
 to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.).  For 
 LaTeX and HTML, the returned markup is passed to knitr as-is, possibly with 
 additional dependencies for LaTeX packages【F:R/knitr.R†L18-L60】.
+
+Caption and label behavior shared by the renderers is implemented in
+`R/captions.R`. Automatic labels are based on the knitr chunk label. Labels
+already emitted in the current chunk are stored in `knitr::opts_current`, so
+additional huxtables receive deterministic suffixes without state leaking into
+later chunks or later knitting runs.

@@ -368,8 +368,10 @@ set_table_environment <- function(ht, value) {
 #' @details
 #' LaTeX table labels typically start with `"tab:"`.
 #'
-#' Within knitr, huxtable labels will default to the same as the knitr chunk label.
-#' To turn off this behaviour, set `options(huxtable.autolabel = FALSE)`.
+#' Within knitr, huxtable labels default to the knitr chunk label. If a chunk
+#' prints more than one huxtable, later labels have `"-2"`, `"-3"` and so on
+#' appended to make them unique. To turn off this behaviour, set
+#' `options(huxtable.autolabel = FALSE)`.
 #'
 #' If you use \href{https://bookdown.org}{bookdown}, and set a label on your
 #' table, the table [caption()] will automatically be prefixed with `(#label)`.

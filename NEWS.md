@@ -8,6 +8,8 @@
   LaTeX package dependency.
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a
   data frame.
+* Bugfix: multiple huxtables printed in one knitr chunk now get unique
+  automatic labels. Fixes #363.
 * `as_Workbook()` is now much faster when adding many tables to an Excel
   workbook. Thanks @lemonad for the report.
 * `huxtable_html_css()` is now exported, for including huxtable's default CSS
