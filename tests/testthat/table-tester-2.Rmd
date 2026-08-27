@@ -551,3 +551,18 @@ ht
 ```{r}
 hux_logo(latex = knitr::is_latex_output())
 ```
+
+
+# Breakable table
+
+```{r}
+ht <- hux(
+  "Heading" = sprintf("Row %03d", 1:80),
+  "Value" = 1:80,
+  add_colnames = TRUE
+)
+ht <- set_all_borders(ht, 0.4)
+breakable(ht) <- TRUE
+caption(ht) <- "A breakable table"
+ht
+```

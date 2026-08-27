@@ -18,3 +18,19 @@ test_that("build_cell_html returns correct dimensions", {
   cells <- huxtable:::build_cell_html(ht)
   expect_equal(dim(cells), dim(ht))
 })
+
+
+test_that("HTML applies table and row break rules", {
+  ht <- hux(a = 1:2)
+  html <- to_html(ht)
+  expect_match(html, "break-inside: avoid; page-break-inside: avoid;", fixed = TRUE)
+
+  breakable(ht) <- TRUE
+  html <- to_html(ht)
+  expect_match(html, "break-inside: auto; page-break-inside: auto;", fixed = TRUE)
+  expect_match(
+    huxtable_html_css(),
+    ".huxtable tr {\n  break-inside: avoid;\n  page-break-inside: avoid;",
+    fixed = TRUE
+  )
+})

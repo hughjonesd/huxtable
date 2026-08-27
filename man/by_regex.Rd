@@ -22,7 +22,7 @@ normally resets to the default.}
 A function for use in \verb{map_***} functions.
 }
 \description{
-\code{by_regex()} sets properties on cells which match a \link[=regex]{regular expression}.
+\code{by_regex()} sets properties on cells which match a \link[base:regex]{regular expression}.
 }
 \examples{
 ht <- hux(c("The cat sat", "on the", "mat"))

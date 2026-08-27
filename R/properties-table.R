@@ -203,6 +203,42 @@ set_height <- function(ht, value) {
 }
 
 
+#' Allow a table to break across pages
+#'
+#' `breakable()` controls whether a table may break between rows across pages.
+#' Individual rows are kept together. It affects paged HTML, LaTeX, RTF, Typst,
+#' and Word output; other output formats ignore it.
+#'
+#' In LaTeX, breakable tables use the `longtable` environment and therefore
+#' require a one-column layout. They cannot have a fixed [height()] or use a
+#' wrapping [position()].
+#'
+#' @inherit hux_prop_params params return
+#' @param value Logical. `r rd_default("breakable")`
+#'
+#' @examples
+#' set_breakable(jams, TRUE)
+#'
+#' @name breakable
+NULL
+
+#' @rdname breakable
+#' @export
+breakable <- function(ht) prop_get(ht, "breakable")
+
+#' @rdname breakable
+#' @export
+`breakable<-` <- function(ht, value) {
+  prop_set_table(ht, value, "breakable", check_fun = is.flag)
+}
+
+#' @rdname breakable
+#' @export
+set_breakable <- function(ht, value) {
+  prop_set_table(ht, value, "breakable", check_fun = is.flag)
+}
+
+
 #' Set the table caption
 #'
 #' By default, captions are displayed above the table. You can change this

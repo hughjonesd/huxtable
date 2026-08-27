@@ -44,6 +44,16 @@ using helper functions such as `build_table_style()`, `build_colgroup()`,
 `to_latex()` generates LaTeX code by first constructing the `tabular` section, 
 then wrapping it in an appropriate floating environment with caption, 
 size adjustments, and commands for borders and padding【F:R/latex.R†L17-L102】.
+Tables with `breakable()` set use a separate `longtable` assembly path: they
+stay in the document flow, repeat leading header rows, and place captions
+inside the longtable rather than using the normal float and `threeparttable`
+wrappers.
+
+### Multipage output
+The table-level `breakable` property maps page breaking onto each paged
+backend. Typst makes its figure block breakable, HTML emits fragmentation CSS,
+RTF and Word control whether rows are kept together, and LaTeX uses
+`longtable`. Renderers keep individual rows intact by default.
 
 ### Excel output
 `as_Workbook()` writes cell contents in blocks of rows with compatible column

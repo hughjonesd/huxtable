@@ -39,7 +39,17 @@ print_latex <- function(ht, ...) {
 #' print_latex(ht)
 to_latex <- function(ht, tabular_only = FALSE, ...) {
   assert_that(is.flag(tabular_only))
-  tabular <- build_tabular(ht)
+  if (breakable(ht)) {
+    if (!is.na(height(ht))) {
+      stop("Breakable LaTeX tables cannot have a fixed height.", call. = FALSE)
+    }
+    if (position(ht) %in% c("wrapleft", "wrapright")) {
+      stop("Breakable LaTeX tables cannot use a wrapping position.", call. = FALSE)
+    }
+
+  }
+
+  tabular <- build_tabular(ht, include_caption = !tabular_only)
   commands <- "
   \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
   \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}
@@ -51,6 +61,10 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
   }
 
   tabular <- paste0("\\setlength{\\tabcolsep}{0pt}\n", tabular)
+
+  if (breakable(ht)) {
+    return(maybe_markdown_fence(paste0(commands, tabular)))
+  }
 
   resize_box <- if (is.na(height <- height(ht))) {
     c("", "")
@@ -102,7 +116,7 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
 }
 
 
-build_latex_caption <- function(ht, lab) {
+build_latex_caption <- function(ht, longtable = FALSE) {
   lab <- make_label(ht)
   cap_has_label <- FALSE
 
@@ -117,7 +131,7 @@ build_latex_caption <- function(ht, lab) {
       right  = "raggedleft"
     )
     cap_width <- caption_width(ht)
-    if (is.na(cap_width)) {
+    if (is.na(cap_width) || longtable) {
       cap_margins <- ""
     } else {
       if (!is.na(suppressWarnings(as.numeric(cap_width)))) {
@@ -155,7 +169,7 @@ build_latex_caption <- function(ht, lab) {
 }
 
 
-build_tabular <- function(ht) {
+build_tabular <- function(ht, include_caption = TRUE) {
   if (!check_positive_dims(ht)) {
     return("")
   }
@@ -500,10 +514,11 @@ build_tabular <- function(ht) {
     paste(row, "\\tabularnewline[-0.5pt]")
   })
 
-  table_body <- paste(content_rows, hhlines[-1], sep = "\n", collapse = "\n")
+  row_blocks <- paste(content_rows, hhlines[-1], sep = "\n")
+  table_body <- paste(row_blocks, collapse = "\n")
   table_body <- paste(hhlines[1], table_body, sep = "\n")
 
-  tenv <- tabular_environment(ht)
+  tenv <- if (breakable(ht)) "longtable" else tabular_environment(ht)
   if (is.na(tenv)) tenv <- if (is.na(width(ht))) "tabular" else "tabularx"
   tenv_tex <- paste0(c("\\begin{", "\\end{"), tenv, "}")
   width_spec <- if (tenv %in% c("tabularx", "tabular*", "tabulary")) {
@@ -523,7 +538,54 @@ build_tabular <- function(ht) {
   colspec_top <- paste0(colspec_top, collapse = " ")
   colspec_top <- sprintf("{%s}\n", colspec_top)
 
-  res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
+  if (breakable(ht)) {
+    pos <- c(left = "l", center = "c", right = "r")[[position(ht)]]
+    tenv_tex[1] <- sprintf("\\begin{longtable}[%s]", pos)
+
+    first_nonheader <- match(FALSE, header_rows(ht), nomatch = nrow(ht) + 1L)
+    header_count <- first_nonheader - 1L
+    if (header_count > 0L) {
+      header_body <- paste(c(hhlines[1], row_blocks[seq_len(header_count)]), collapse = "\n")
+      body_rows <- if (header_count < nrow(ht)) {
+        row_blocks[seq.int(header_count + 1L, nrow(ht))]
+      } else {
+        character()
+      }
+      table_body <- paste(
+        header_body,
+        "\\endfirsthead",
+        header_body,
+        "\\endhead",
+        paste(body_rows, collapse = "\n"),
+        sep = "\n"
+      )
+    }
+
+    cap <- if (include_caption) build_latex_caption(ht, longtable = TRUE) else ""
+    if (!nzchar(trimws(cap))) cap <- ""
+    if (!is.na(caption(ht)) && nzchar(cap)) {
+      cap <- paste0(cap, "\\tabularnewline\n")
+    }
+    if (nzchar(cap)) {
+      table_body <- if (grepl("top", caption_pos(ht))) {
+        paste(cap, table_body, sep = "\n")
+      } else {
+        paste(table_body, cap, sep = "\n")
+      }
+    }
+
+    cap_width <- caption_width(ht)
+    if (is.na(cap_width)) cap_width <- latex_table_width(ht)
+    if (is.na(cap_width)) cap_width <- "\\linewidth"
+    if (is.numeric(cap_width)) cap_width <- paste0(cap_width, "\\textwidth")
+
+    res <- paste0(
+      "{\n\\setlength{\\LTcapwidth}{", cap_width, "}\n",
+      tenv_tex[1], colspec_top, table_body, tenv_tex[2], "\n}"
+    )
+  } else {
+    res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
+  }
   return(res)
 }
 

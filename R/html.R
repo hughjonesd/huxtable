@@ -36,8 +36,42 @@ print_notebook <- function(ht, ...) {
 }
 
 
+#' Default CSS for HTML huxtables
+#'
+#' Returns the default CSS used by [print_html()]. This can be included once in
+#' an HTML document instead of printing it with every table.
+#'
+#' @return A character string containing a `<style>` element.
+#' @export
+#'
+#' @examples
+#' cat(huxtable_html_css())
 huxtable_html_css <- function() {
-  "<style>\n.huxtable {\n  border-collapse: collapse;\n  border: 0px;\n  margin-bottom: 2em;\n  margin-top: 2em;\n}\n.huxtable-cell {\n  vertical-align: top;\n  text-align: left;\n  white-space: normal;\n  border-style: solid;\n  border-width: 0pt;\n  padding: 6pt;\n  font-weight: normal;\n}\n.huxtable-header {\n  font-weight: bold;\n}\n</style>\n"
+  '<style>
+.huxtable {
+  border-collapse: collapse;
+  border: 0px;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+.huxtable-cell {
+  vertical-align: top;
+  text-align: left;
+  white-space: normal;
+  border-style: solid;
+  border-width: 0pt;
+  padding: 6pt;
+  font-weight: normal;
+}
+.huxtable-header {
+  font-weight: bold;
+}
+.huxtable tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+</style>
+'
 }
 
 #' @export
@@ -97,6 +131,12 @@ build_table_style <- function(ht) {
     ""
   )
 
+  break_value <- if (breakable(ht)) "auto" else "avoid"
+  break_string <- sprintf(
+    "break-inside: %s; page-break-inside: %s;",
+    break_value, break_value
+  )
+
   lab <- make_label(ht)
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
@@ -105,7 +145,7 @@ build_table_style <- function(ht) {
   } else {
     "data-quarto-disable-processing=\"true\" "
   }
-  style <- paste(width_string, margin_string, height_string, float_string)
+  style <- paste(width_string, margin_string, height_string, float_string, break_string)
   style <- trimws(style)
   style_attr <- if (nzchar(style)) sprintf(' style="%s"', style) else ""
   table_start <- sprintf(

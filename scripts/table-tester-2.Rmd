@@ -139,8 +139,8 @@ latex_float(ht) <- 'b'
 caption(ht) <- 'latex\\_float b, bottom of page'
 ht
 
-latex_float(ht) <- 'h'
-caption(ht) <- 'latex\\_float h, here'
+latex_float(ht) <- 'ht'
+caption(ht) <- 'latex\\_float ht, here'
 ht
 ```
 
@@ -546,15 +546,23 @@ ht
 ```
 
 
-# Huxreg 
-
-```{r}
-huxreg(lm(iris$Sepal.Length~iris$Sepal.Width))
-
-```
-
 # hux_logo
 
 ```{r}
 hux_logo(latex = knitr::is_latex_output())
+```
+
+
+# Breakable table
+
+```{r}
+ht <- hux(
+  "Heading" = sprintf("Row %03d", 1:80),
+  "Value" = 1:80,
+  add_colnames = TRUE
+)
+ht <- set_all_borders(ht, 0.4)
+breakable(ht) <- TRUE
+caption(ht) <- "A breakable table"
+ht
 ```
