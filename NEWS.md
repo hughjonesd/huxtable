@@ -8,6 +8,8 @@
   workbook. Thanks @lemonad for the report.
 * New table property `breakable()` allows tables to break between rows across
   pages in HTML, LaTeX, RTF, Typst and Word output.
+* `huxtable_html_css()` is now exported, for including huxtable's default CSS
+  once in an HTML document.
   
 # huxtable 5.8.0
 
@@ -791,4 +793,3 @@ For example, the following code now does what you probably want:
 
 * Added a `NEWS.md` file to track changes to the package.
 * First CRAN release.
-

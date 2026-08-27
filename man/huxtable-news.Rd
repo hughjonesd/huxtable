@@ -18,6 +18,8 @@ a data frame.
 workbook. Thanks @lemonad for the report.
 \item New table property \code{breakable()} allows tables to break between rows
 across pages in HTML, LaTeX, RTF, Typst and Word output.
+\item \code{huxtable_html_css()} is now exported, for including huxtable’s
+default CSS once in an HTML document.
 }
 }
 
