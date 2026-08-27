@@ -2,12 +2,14 @@
 
 * This is the last update which will be pushed to CRAN. Future versions will be 
   available on GitHub and/or via https://hughjonesd.r-universe.dev.
+* New table property `breakable()` allows tables to break between rows across
+  pages in HTML, LaTeX, RTF, Typst and Word output. Breakable tables
+  are implemented in LaTeX via the `longtable` package, meaning this is a new
+  LaTeX package dependency.
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a
   data frame.
 * `as_Workbook()` is now much faster when adding many tables to an Excel
   workbook. Thanks @lemonad for the report.
-* New table property `breakable()` allows tables to break between rows across
-  pages in HTML, LaTeX, RTF, Typst and Word output.
 * `huxtable_html_css()` is now exported, for including huxtable's default CSS
   once in an HTML document.
   
