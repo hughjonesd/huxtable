@@ -137,7 +137,8 @@ build_table_style <- function(ht) {
     break_value, break_value
   )
 
-  lab <- make_label(ht)
+  caption_data <- resolve_caption(ht, "html")
+  lab <- caption_data$label
   id_string <- if (is.na(lab)) "" else sprintf(" id=\"%s\"", lab)
 
   quarto_attribute <- if (getOption("huxtable.quarto_process", FALSE)) {
@@ -155,8 +156,8 @@ build_table_style <- function(ht) {
     id_string
   )
 
-  if (!is.na(cap <- make_caption(ht, lab, "html"))) {
-    vpos <- if (grepl("top", caption_pos(ht))) "top" else "bottom"
+  if (!is.na(cap <- caption_data$text)) {
+    vpos <- get_caption_vpos(ht)
     hpos <- get_caption_hpos(ht)
 
     if (!is.na(cap_width <- caption_width(ht))) {

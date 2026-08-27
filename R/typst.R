@@ -159,14 +159,14 @@ typst_table_options <- function(ht) {
 #'
 #' @noRd
 typst_figure <- function(ht, text) {
-  lab <- make_label(ht)
-  cap <- if (is.na(caption(ht))) {
+  caption_data <- resolve_caption(ht, "typst")
+  lab <- caption_data$label
+  cap <- if (is.na(caption_data$text)) {
     "none"
   } else {
-    cap_body <- sanitize(make_caption(ht, lab, "typst"), type = "typst")
+    cap_body <- sanitize(caption_data$text, type = "typst")
 
-    cap_pos <- caption_pos(ht)
-    vpos <- if (grepl("top", cap_pos)) "top" else "bottom"
+    vpos <- get_caption_vpos(ht)
     hpos <- get_caption_hpos(ht)
 
     cap_width <- caption_width(ht)

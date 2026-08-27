@@ -140,55 +140,6 @@ display_cells <- function(ht, all = TRUE, new_rowspan = rowspan(ht), new_colspan
 }
 
 
-get_caption_hpos <- function(ht) {
-  hpos <- sub(".*(left|center|right)", "\\1", caption_pos(ht))
-  if (!hpos %in% c("left", "center", "right")) hpos <- position_no_wrap(ht)
-
-  hpos
-}
-
-
-make_label <- function(ht) {
-  lab <- label(ht)
-
-  has_knitr <- requireNamespace("knitr", quietly = TRUE)
-  chunk_label <- if (has_knitr) knitr::opts_current$get("label") else NULL
-  if (length(chunk_label) > 0 && grepl("^unnamed-chunk", chunk_label)) {
-    chunk_label <- NULL
-  }
-
-  if (is.na(lab) &&
-    getOption("huxtable.autolabel", TRUE) &&
-    has_knitr &&
-    !is.null(chunk_label)) {
-    lab <- paste0("tab:", chunk_label)
-  }
-
-  if (!is.null(chunk_label) &&
-    using_quarto("1.4") &&
-    getOption(
-      "huxtable.knitr_output_format",
-      guess_knitr_output_format()
-    ) == "latex"
-  ) {
-    msg <- paste(
-      "quarto cell labels do not work with huxtable in TeX for quarto ",
-      "version 1.4 or above.",
-      "Use huxtable labels instead via `label()` or `set_label()`.",
-      "See `?huxtable-FAQ` for more details.",
-      sep = "\n"
-    )
-    if (grepl("^tbl-", chunk_label)) {
-      stop(msg)
-    } else {
-      warning(msg)
-    }
-  }
-
-  lab
-}
-
-
 using_quarto <- function(min_version = NULL) {
   if (!requireNamespace("knitr", quietly = TRUE)) {
     return(FALSE)

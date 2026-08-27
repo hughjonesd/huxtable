@@ -16,6 +16,8 @@ will be available on GitHub and/or via
 across pages in HTML, LaTeX, RTF, Typst and Word output. Breakable
 tables are implemented in LaTeX via the \code{longtable} package, meaning
 this is a new LaTeX package dependency.
+\item Multiple huxtables printed in one knitr chunk now get unique automatic
+labels like “chunk”, “chunk-2”, “chunk-3” etc.
 \item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of
 a data frame.
 \item \code{as_Workbook()} is now much faster when adding many tables to an Excel

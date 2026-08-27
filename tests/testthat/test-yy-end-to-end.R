@@ -197,7 +197,7 @@ test_that("quarto files", {
     )
   } else {
     # for some reason (probably due to use of processx::) I can't
-    # capture the specific huxtable error from make_label() here
+    # capture the specific huxtable error from resolve_caption() here
     expect_error(
       quarto::quarto_render("quarto-test.qmd",
         output_format = "pdf",

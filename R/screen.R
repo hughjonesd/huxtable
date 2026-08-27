@@ -338,12 +338,7 @@ add_caption_if_present <- function(result, ht, max_width, charmat_ncol) {
   if (is.na(cap)) return(result)
   
   # Determine horizontal position for caption
-  poss_pos <- c("left", "center", "right")
-  hpos <- if (any(found <- sapply(poss_pos, grepl, x = caption_pos(ht)))) {
-    poss_pos[found]
-  } else {
-    position_no_wrap(ht)
-  }
+  hpos <- get_caption_hpos(ht)
   
   # Wrap caption if too wide
   if (ncharw(cap) > max_width) cap <- strwrap(cap, max_width)
@@ -354,7 +349,7 @@ add_caption_if_present <- function(result, ht, max_width, charmat_ncol) {
   cap <- paste0(cap, "\n")
   
   # Position caption above or below table
-  if (grepl("top", caption_pos(ht))) {
+  if (get_caption_vpos(ht) == "top") {
     paste0(cap, result)
   } else {
     paste0(result, cap)
