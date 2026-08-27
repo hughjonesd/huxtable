@@ -21,7 +21,7 @@ test_that("install/report_latex_dependencies", {
     as_string = TRUE
   ))
   expect_match(package_str, "\\\\usepackage\\{array\\}")
-  expect_match(package_str, "\\\\providecommand\\{\\\\huxb\\}")
+  expect_no_match(package_str, "\\\\providecommand\\{\\\\huxb\\}")
 })
 
 

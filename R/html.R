@@ -2,7 +2,7 @@
 #'
 #' @rdname to_html
 #'
-print_html <- function(ht, ..., dependencies = TRUE) {
+print_html <- function(ht, dependencies = TRUE, ...) {
   cat(to_html(ht, ..., dependencies = dependencies))
 }
 
@@ -15,7 +15,8 @@ print_html <- function(ht, ..., dependencies = TRUE) {
 #'
 #' @param ht A huxtable.
 #' @param ... Arguments passed to methods. Not currently used.
-#' @param dependencies Logical. If `TRUE`, include huxtable's CSS styles.
+#' @param dependencies Logical. If `TRUE`, include the CSS styles or LaTeX
+#'   command definitions required by huxtables.
 #'
 #' @return `to_html` returns an HTML string. `as_html` wraps `to_html` and returns an
 #'   `htmltools::HTML` object. `print_html` prints the string and returns `NULL`.
@@ -34,8 +35,8 @@ print_html <- function(ht, ..., dependencies = TRUE) {
 #'
 #' @return `print_notebook` prints HTML output suitable for use in an
 #' RStudio interactive notebook.
-print_notebook <- function(ht, ...) {
-  html <- to_html(ht, ...)
+print_notebook <- function(ht, dependencies = TRUE, ...) {
+  html <- to_html(ht, dependencies = dependencies, ...)
   print(rmarkdown::html_notebook_output_html(html))
 }
 
@@ -88,7 +89,7 @@ to_html <- function(ht, dependencies = TRUE, ...) {
 
 #' @export
 #' @rdname to_html
-as_html <- function(ht, ..., dependencies = TRUE) {
+as_html <- function(ht, dependencies = TRUE, ...) {
   assert_that(is.flag(dependencies))
   result <- htmltools::HTML(to_html(ht, ..., dependencies = FALSE))
   if (dependencies) {

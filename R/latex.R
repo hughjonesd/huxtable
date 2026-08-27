@@ -9,18 +9,15 @@ default_table_width_unit <- "\\textwidth"
 
 #' @export
 #' @rdname to_latex
-print_latex <- function(ht, ..., dependencies = TRUE) {
+print_latex <- function(ht, dependencies = TRUE, ...) {
   cat(to_latex(ht, ..., dependencies = dependencies))
 }
 
 
 #' Create LaTeX representing a huxtable
 #'
-#' @param ht A huxtable.
+#' @inheritParams to_html
 #' @param tabular_only Return only the LaTeX tabular, not the surrounding float.
-#' @param dependencies Logical. If `TRUE`, include the LaTeX command definitions
-#'   used by huxtables.
-#' @param ... Arguments passed to methods.
 #'
 #' @details
 #' If we appear to be in a rmarkdown document with the Pandoc markdown `+raw_attribute` extension

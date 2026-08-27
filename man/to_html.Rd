@@ -7,20 +7,21 @@
 \alias{as_html}
 \title{Create HTML representing a huxtable}
 \usage{
-print_html(ht, ..., dependencies = TRUE)
+print_html(ht, dependencies = TRUE, ...)
 
-print_notebook(ht, ...)
+print_notebook(ht, dependencies = TRUE, ...)
 
 to_html(ht, dependencies = TRUE, ...)
 
-as_html(ht, ..., dependencies = TRUE)
+as_html(ht, dependencies = TRUE, ...)
 }
 \arguments{
 \item{ht}{A huxtable.}
 
-\item{...}{Arguments passed to methods. Not currently used.}
+\item{dependencies}{Logical. If \code{TRUE}, include the CSS styles or LaTeX
+command definitions required by huxtables.}
 
-\item{dependencies}{Logical. If \code{TRUE}, include huxtable's CSS styles.}
+\item{...}{Arguments passed to methods. Not currently used.}
 }
 \value{
 \code{to_html} returns an HTML string. \code{as_html} wraps \code{to_html} and returns an

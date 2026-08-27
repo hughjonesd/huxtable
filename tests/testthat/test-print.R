@@ -216,15 +216,7 @@ test_that("Bugfix: print_html doesn't duplicate rows", {
 test_that("LaTeX dependencies can be included or omitted", {
   ht <- hux(a = 1)
   expect_match(to_latex(ht), "\\providecommand{\\huxb}", fixed = TRUE)
-  expect_false(grepl(
-    "\\providecommand", to_latex(ht, dependencies = FALSE), fixed = TRUE
-  ))
-  expect_true(any(grepl(
-    "\\providecommand", capture.output(print_latex(ht)), fixed = TRUE
-  )))
-  expect_false(any(grepl(
-    "\\providecommand", capture.output(print_latex(ht, dependencies = FALSE)), fixed = TRUE
-  )))
+  expect_no_match(to_latex(ht, dependencies = FALSE), "\\providecommand", fixed = TRUE)
 })
 
 

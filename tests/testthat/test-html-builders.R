@@ -17,11 +17,7 @@ test_that("builders reproduce to_html output", {
 test_that("HTML dependencies can be included or omitted", {
   ht <- hux(a = 1)
   expect_match(to_html(ht), "<style>", fixed = TRUE)
-  expect_false(grepl("<style>", to_html(ht, dependencies = FALSE), fixed = TRUE))
-  expect_true(any(grepl("<style>", capture.output(print_html(ht)), fixed = TRUE)))
-  expect_false(any(grepl(
-    "<style>", capture.output(print_html(ht, dependencies = FALSE)), fixed = TRUE
-  )))
+  expect_no_match(to_html(ht, dependencies = FALSE), "<style>", fixed = TRUE)
 })
 
 

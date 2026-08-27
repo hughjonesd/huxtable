@@ -61,6 +61,8 @@ test_that("Quick HTML and LaTeX output includes dependencies once", {
   html <- paste(readLines(html_file, warn = FALSE), collapse = "\n")
   html_matches <- gregexpr("border-collapse: collapse", html, fixed = TRUE)[[1]]
   expect_length(html_matches[html_matches >= 0], 1)
+  expect_lt(regexpr("<style>", html, fixed = TRUE), regexpr("</head>", html, fixed = TRUE))
+  expect_lt(regexpr("</style>", html, fixed = TRUE), regexpr("<body>", html, fixed = TRUE))
 
   latex_file <- tempfile(fileext = ".tex")
   quick_latex(first, second, file = latex_file, open = FALSE)

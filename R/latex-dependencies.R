@@ -17,7 +17,7 @@ huxtable_latex_commands <- function() {
 
 
 huxtable_latex_dependencies <- list(
-  list(name = "array", extra_lines = huxtable_latex_commands()),
+  list(name = "array"),
   list(name = "caption"),
   list(name = "graphicx"),
   list(name = "siunitx"),
@@ -45,8 +45,8 @@ huxtable_latex_dependencies <- list(
 #' @param as_string Logical: return dependencies as a string.
 #'
 #' @return If `as_string` is `TRUE`, `report_latex_dependencies` returns a string of
-#'   `"\\\\usepackage\\{...\\}"` statements and huxtable's LaTeX command definitions;
-#'   otherwise it returns a list of `rmarkdown::latex_dependency` objects, invisibly.
+#'   `"\\\\usepackage\\{...\\}"` statements; otherwise it returns a list of
+#'   `rmarkdown::latex_dependency` objects, invisibly.
 #' @export
 #'
 #' @examples
@@ -68,9 +68,6 @@ report_latex_dependencies <- function(quiet = FALSE, as_string = FALSE) {
       package_str <- paste0(package_str, "[", options_str, "]")
     }
     package_str <- paste0(package_str, "{", ld$name, "}\n")
-    if (!is.null(ld$extra_lines)) {
-      package_str <- paste0(package_str, paste(ld$extra_lines, collapse = "\n"), "\n")
-    }
     package_str
   })
   if (!quiet) {

@@ -45,6 +45,8 @@ knit_print.huxtable <- function(x, options, ...) {
   res <- switch(of,
     latex = {
       latex_deps <- report_latex_dependencies(quiet = TRUE)
+      array_dep <- match("array", vapply(latex_deps, `[[`, "", "name"))
+      latex_deps[[array_dep]]$extra_lines <- huxtable_latex_commands()
       tenv <- tabular_environment(x)
       if (tenv %in% "tabulary") {
         latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))
