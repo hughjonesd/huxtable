@@ -152,6 +152,12 @@ add_borders_to_matrix <- function(ht, charmat_data, color) {
   # Apply border colors if enabled
   if (color) {
     charmat <- apply_border_colors(charmat, ht, border_rows, border_cols)
+
+    table_bg <- table_background_color(ht)
+    if (!is.na(table_bg)) {
+      table_style <- crayon::make_style(table_bg, bg = TRUE)
+      charmat[] <- table_style(charmat)
+    }
   }
   
   charmat
@@ -629,7 +635,7 @@ pad_position <- function(string, position, max_width) {
 
 make_cell_style <- function(ht, row, col) {
   tc <- text_color(ht)[row, col]
-  bgc <- effective_background_color(ht)[row, col]
+  bgc <- background_color(ht)[row, col]
   bold <- bold(ht)[row, col]
   italic <- italic(ht)[row, col]
 

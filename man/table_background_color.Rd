@@ -36,8 +36,10 @@ Output formats handle table backgrounds differently:
 Breakable LaTeX tables ignore the property because a \code{longtable} cannot be
 placed inside a \verb{\\colorbox}.
 \item Typst uses the table's \code{fill} setting. Individual cell fills override it.
-\item RTF, Excel, Word, PowerPoint and on-screen output apply the table color to
+\item RTF, Excel, Word and PowerPoint output apply the table color to
 cells which do not have an individual background color.
+\item On-screen output applies the color to the whole table area, including
+borders. Individual cell backgrounds still override it.
 \item Markdown output ignores the property.
 }
 }

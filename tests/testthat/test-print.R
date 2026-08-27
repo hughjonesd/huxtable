@@ -282,6 +282,7 @@ test_that("LaTeX uses a colorbox for the table background", {
   tex <- to_latex(ht)
   expect_match(tex, "\\setlength{\\fboxsep}{0pt}", fixed = TRUE)
   expect_match(tex, "\\colorbox[RGB]{255, 0, 0}{\\begin{tabular}", fixed = TRUE)
+  expect_false(grepl("\\cellcolor[RGB]{255, 0, 0}", tex, fixed = TRUE))
 
   breakable(ht) <- TRUE
   tex <- to_latex(ht)
@@ -378,11 +379,17 @@ test_that("RTF uses table background for otherwise unfilled cells", {
 })
 
 
-test_that("Screen output uses table background for otherwise unfilled cells", {
+test_that("Screen output colors the whole table background", {
   skip_if_not_installed("crayon")
   local_reproducible_output(crayon = TRUE)
-  ht <- set_table_background_color(hux(a = 1, add_colnames = FALSE), "red")
-  expect_match(to_screen(ht, color = TRUE), "\033[41m", fixed = TRUE)
+  ht <- set_table_background_color(
+    set_all_borders(hux(a = 1, add_colnames = FALSE)),
+    "red"
+  )
+  background_color(ht)[1, 1] <- "blue"
+  screen <- to_screen(ht, color = TRUE)
+  expect_match(screen, "\033[41m─", fixed = TRUE)
+  expect_match(screen, "\033[44m1", fixed = TRUE)
 })
 
 

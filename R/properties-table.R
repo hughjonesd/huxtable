@@ -183,8 +183,10 @@ set_width <- function(ht, value) {
 #'   Breakable LaTeX tables ignore the property because a `longtable` cannot be
 #'   placed inside a `\colorbox`.
 #' * Typst uses the table's `fill` setting. Individual cell fills override it.
-#' * RTF, Excel, Word, PowerPoint and on-screen output apply the table color to
+#' * RTF, Excel, Word and PowerPoint output apply the table color to
 #'   cells which do not have an individual background color.
+#' * On-screen output applies the color to the whole table area, including
+#'   borders. Individual cell backgrounds still override it.
 #' * Markdown output ignores the property.
 #'
 #' @inherit hux_prop_params params return

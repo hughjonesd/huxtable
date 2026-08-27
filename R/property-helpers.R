@@ -94,14 +94,15 @@ prop_get <- function(ht, prop) {
 }
 
 
-#' Resolve cell backgrounds against the table background
+#' Resolve cell backgrounds with a table background fallback
 #'
-#' Explicit cell backgrounds take precedence over the table background.
+#' For formats without a table-level background, use the table background for
+#' otherwise unfilled cells. Explicit cell backgrounds take precedence.
 #'
 #' @param ht A huxtable.
 #' @return A character matrix of background colors.
 #' @noRd
-effective_background_color <- function(ht) {
+background_color_with_fallback <- function(ht) {
   result <- background_color(ht)
   table_color <- table_background_color(ht)
   if (!is.na(table_color)) result[is.na(result)] <- table_color

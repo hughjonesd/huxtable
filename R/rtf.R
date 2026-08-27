@@ -61,7 +61,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   cb <- get_visible_borders(ht)
   cbc <- collapsed_border_colors(ht)
   cbs <- collapsed_border_styles(ht)
-  bgc <- effective_background_color(ht)
+  bgc <- background_color_with_fallback(ht)
   tc <- text_color(ht)
 
   ## MAKE CELLX DEFINITIONS ----

@@ -230,10 +230,10 @@ build_tabular <- function(ht, include_caption = TRUE) {
   hb_chars <- ifelse(cbs$horiz == "double", "=", "-")
 
   # background colors come from shadowing cells
-  bg_colors <- effective_background_color(ht)[dc_map]
+  bg_colors <- background_color(ht)[dc_map]
   dim(bg_colors) <- dim(ht)
   # add a top row for the first hhline
-  bg_colors <- rbind(rep(table_background_color(ht), ncol(horiz_b)), bg_colors)
+  bg_colors <- rbind(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from cells below?
   bg_colors <- format_color(bg_colors, default = "white")
   hhline_colors <- bg_colors
   hhline_colors[has_own_border] <- hb_colors[has_own_border]
