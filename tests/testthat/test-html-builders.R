@@ -28,6 +28,7 @@ test_that("HTML applies table and row break rules", {
   breakable(ht) <- TRUE
   html <- to_html(ht)
   expect_match(html, "break-inside: auto; page-break-inside: auto;", fixed = TRUE)
+  # we do this because print_html() prints some css via a private function
   printed <- paste(capture.output(print_html(ht)), collapse = "\n")
   expect_match(
     printed,

@@ -126,7 +126,7 @@ validate_prop <- function(value, prop, check_fun = NULL, check_values = NULL,
 #' @param check_fun    Optional validation function.
 #' @param check_values Optional vector of allowed values.
 #' @param extra        Extra code to run after validation.
-#' @param reset_na     Passed to [`validate_prop`].
+#' @param reset_na     Should `NA` values be replaced with the huxtable default?
 #'
 #' @noRd
 prop_set <- function(ht, prop, row, col, value = NULL, fn = NULL,

@@ -363,7 +363,7 @@ color_table_string <- function(x) {
 #' @param x An `rtfFCTables` object.
 #' @param ... Unused.
 #' @return A combined font and color table string.
-#' @noRd
+#' @export
 format.rtfFCTables <- function(x, ...) {
   paste(font_table_string(x), color_table_string(x), sep = "\n")
 }
@@ -374,7 +374,7 @@ format.rtfFCTables <- function(x, ...) {
 #' @param x An `rtfFCTables` object.
 #' @param ... Arguments passed to [format()].
 #' @return The input is returned invisibly.
-#' @noRd
+#' @export
 print.rtfFCTables <- function(x, ...) {
   cat(format(x, ...))
   invisible(x)

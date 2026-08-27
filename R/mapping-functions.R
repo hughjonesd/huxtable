@@ -427,7 +427,7 @@ by_equal_groups <- function(n, values, ignore_na = TRUE, colwise = FALSE) {
 
 #' Map cells matching a string or regex to cell properties
 #'
-#' `by_regex()` sets properties on cells which match a [regular expression][regex].
+#' `by_regex()` sets properties on cells which match a [regular expression][base::regex].
 #'
 #' @param ... A list of name-value pairs. The names are regular expressions. If there is a single
 #'   unnamed argument, this is the default value for unmatched cells. More than one unnamed argument

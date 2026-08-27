@@ -36,3 +36,4 @@ tutorials
 ^Meta$
 ^.pkgdownignore$
 ^pkgdown$
+^\.claude$
