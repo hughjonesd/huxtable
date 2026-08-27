@@ -78,6 +78,7 @@ RTF and Excel use the raw caption property and the shared horizontal and
 vertical position helpers.
 
 Automatic labels are based on the knitr chunk label. Labels already emitted in
-the current chunk are stored in `knitr::opts_current`, so additional huxtables
-receive deterministic suffixes without state leaking into later chunks or later
-knitting runs.
+the current chunk are stored in a package-internal cache keyed by the chunk
+label. The cache is scoped to knitr's current chunk-options object, so
+additional huxtables receive deterministic suffixes without mutating knitr
+state or leaking labels into later chunks and knitting runs.

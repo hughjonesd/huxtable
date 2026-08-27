@@ -3,12 +3,17 @@ skip_if_not_installed("knitr")
 
 test_that("Bugfix: multiple tables in a chunk get unique labels", {
   old_current <- knitr::opts_current$get()
-  on.exit(knitr::opts_current$restore(old_current))
+  on.exit({
+    knitr::opts_current$lock(FALSE)
+    knitr::opts_current$restore(old_current)
+  })
   knitr::opts_current$set(label = "run")
-  knitr::opts_current$delete("huxtable.used_labels")
+  knitr::opts_current$lock()
 
-  first <- to_latex(hux(a = 1))
-  second <- to_latex(hux(a = 2))
+  expect_no_warning({
+    first <- to_latex(hux(a = 1))
+    second <- to_latex(hux(a = 2))
+  })
 
   expect_match(first, "\\label{tab:run}", fixed = TRUE)
   expect_match(second, "\\label{tab:run-2}", fixed = TRUE)
@@ -19,7 +24,6 @@ test_that("Explicit labels are respected by automatic labels", {
   old_current <- knitr::opts_current$get()
   on.exit(knitr::opts_current$restore(old_current))
   knitr::opts_current$set(label = "run")
-  knitr::opts_current$delete("huxtable.used_labels")
 
   expect_equal(resolve_caption(set_label(hux(a = 1), "tab:run"), "html")$label, "tab:run")
   expect_equal(resolve_caption(hux(a = 2), "html")$label, "tab:run-2")
@@ -30,14 +34,13 @@ test_that("Automatic label state resets with knitr chunk state", {
   old_current <- knitr::opts_current$get()
   on.exit(knitr::opts_current$restore(old_current))
   knitr::opts_current$set(label = "run")
-  knitr::opts_current$delete("huxtable.used_labels")
 
   expect_equal(resolve_caption(hux(a = 1), "html")$label, "tab:run")
   expect_equal(resolve_caption(hux(a = 2), "html")$label, "tab:run-2")
 
   knitr::opts_current$restore(old_current)
-  knitr::opts_current$set(label = "next-run")
-  expect_equal(resolve_caption(hux(a = 3), "html")$label, "tab:next-run")
+  knitr::opts_current$set(label = "run")
+  expect_equal(resolve_caption(hux(a = 3), "html")$label, "tab:run")
 })
 
 
