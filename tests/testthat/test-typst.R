@@ -73,6 +73,19 @@ test_that("to_typst maps properties", {
   expect_match(res, "inset: \\(top: 3pt, right: 2pt, bottom: 4pt, left: 1pt\\)")
 })
 
+
+test_that("Typst uses table fill with cell overrides", {
+  ht <- set_table_background_color(
+    hux(a = 1:2, b = 3:4, add_colnames = FALSE),
+    "red"
+  )
+  background_color(ht)[1, 1] <- "blue"
+  res <- to_typst(ht)
+  expect_match(res, "fill: rgb(255, 0, 0)", fixed = TRUE)
+  expect_match(res, "fill: rgb(0, 0, 255)", fixed = TRUE)
+  expect_length(gregexpr("fill: rgb", res, fixed = TRUE)[[1]], 2L)
+})
+
 test_that("Bugfix: solid border generates valid typst", {
   ht <- hux(a = 1:2, b = 3:4)
   ht <- set_top_border(ht, 1, 1)

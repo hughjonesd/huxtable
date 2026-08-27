@@ -29,6 +29,7 @@ huxtable_row_attrs <- c("row_height", "header_rows")
 huxtable_table_attrs <- c(
   "width",
   "height",
+  "table_background_color",
   "position",
   "caption",
   "caption_pos",
@@ -50,6 +51,7 @@ huxtable_env$huxtable_default_attrs <- list(
   height              = NA_real_,
   col_width           = NA_real_,
   row_height          = NA_real_,
+  table_background_color = NA_character_,
   header_cols         = FALSE,
   header_rows         = FALSE,
   background_color    = NA_character_,
@@ -89,6 +91,21 @@ huxtable_env$huxtable_default_attrs <- list(
 #' @noRd
 prop_get <- function(ht, prop) {
   attr(ht, prop)
+}
+
+
+#' Resolve cell backgrounds against the table background
+#'
+#' Explicit cell backgrounds take precedence over the table background.
+#'
+#' @param ht A huxtable.
+#' @return A character matrix of background colors.
+#' @noRd
+effective_background_color <- function(ht) {
+  result <- background_color(ht)
+  table_color <- table_background_color(ht)
+  if (!is.na(table_color)) result[is.na(result)] <- table_color
+  result
 }
 
 #' Validate and normalise property values

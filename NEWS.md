@@ -6,6 +6,8 @@
   pages in HTML, LaTeX, RTF, Typst and Word output. Breakable tables
   are implemented in LaTeX via the `longtable` package, meaning this is a new
   LaTeX package dependency.
+* New table property `table_background_color()` sets the background color of
+  a table, while allowing individual cells to override it.
 * Multiple huxtables printed in one knitr chunk now get unique
   automatic labels like "chunk", "chunk-2", "chunk-3" etc.
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a

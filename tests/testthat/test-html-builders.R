@@ -34,3 +34,18 @@ test_that("HTML applies table and row break rules", {
     fixed = TRUE
   )
 })
+
+
+test_that("HTML applies a background to the table element", {
+  ht <- set_table_background_color(hux(a = 1), "red")
+  html <- to_html(ht)
+  expect_match(html, "background-color: rgb(255, 0, 0);", fixed = TRUE)
+  expect_false(any(grepl("background-color", huxtable:::build_cell_html(ht), fixed = TRUE)))
+
+  background_color(ht)[1, 1] <- "blue"
+  expect_match(
+    huxtable:::build_cell_html(ht)[1, 1],
+    "background-color: rgb(0, 0, 255);",
+    fixed = TRUE
+  )
+})

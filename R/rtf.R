@@ -61,7 +61,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   cb <- get_visible_borders(ht)
   cbc <- collapsed_border_colors(ht)
   cbs <- collapsed_border_styles(ht)
-  bgc <- background_color(ht)
+  bgc <- effective_background_color(ht)
   tc <- text_color(ht)
 
   ## MAKE CELLX DEFINITIONS ----
@@ -315,7 +315,10 @@ rtf_fc_tables <- function(..., extra_fonts = "Times", extra_colors = character(0
   fonts <- stats::na.omit(fonts)
 
   colors <- unlist(lapply(hts, function(ht) {
-    c(text_color(ht), background_color(ht), unlist(collapsed_border_colors(ht)))
+    c(
+      text_color(ht), background_color(ht), table_background_color(ht),
+      unlist(collapsed_border_colors(ht))
+    )
   }))
   colors <- unique(c(extra_colors, colors))
   colors <- stats::na.omit(colors)

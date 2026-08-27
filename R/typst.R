@@ -151,6 +151,9 @@ typst_table_options <- function(ht) {
 
   table_opts <- c(table_opts, "stroke: none")
 
+  bg <- table_background_color(ht)
+  if (!is.na(bg)) table_opts <- c(table_opts, sprintf("fill: rgb(%s)", format_color(bg)))
+
   table_opts
 }
 

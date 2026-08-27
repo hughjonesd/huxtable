@@ -20,6 +20,19 @@ test_that("Text properties work", {
 })
 
 
+test_that("Table background fills otherwise unfilled Excel cells", {
+  hx <- set_table_background_color(
+    huxtable(a = 1:2, b = 3:4, add_colnames = FALSE),
+    "red"
+  )
+  background_color(hx)[1, 1] <- "blue"
+  wb <- as_Workbook(hx)
+
+  fills <- vapply(wb$styleObjects, function(x) x$style$fill$fillFg[[1]], character(1))
+  expect_setequal(fills, c("FF0000FF", "FFFF0000"))
+})
+
+
 test_that("Borders work", {
   hx <- huxtable(a = 1:3, b = 4:6)
   top_border(hx)[1, ] <- 1

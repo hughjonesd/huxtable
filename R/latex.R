@@ -50,6 +50,13 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
   }
 
   tabular <- build_tabular(ht, include_caption = !tabular_only)
+  if (!breakable(ht) && !is.na(table_background_color(ht))) {
+    bg <- format_color(table_background_color(ht))
+    tabular <- paste0(
+      "{\\setlength{\\fboxsep}{0pt}%\n",
+      "\\colorbox[RGB]{", bg, "}{", tabular, "}}"
+    )
+  }
   commands <- "
   \\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}
   \\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}
@@ -223,10 +230,10 @@ build_tabular <- function(ht, include_caption = TRUE) {
   hb_chars <- ifelse(cbs$horiz == "double", "=", "-")
 
   # background colors come from shadowing cells
-  bg_colors <- background_color(ht)[dc_map]
+  bg_colors <- effective_background_color(ht)[dc_map]
   dim(bg_colors) <- dim(ht)
   # add a top row for the first hhline
-  bg_colors <- rbind(rep(NA, ncol(horiz_b)), bg_colors) # or, should color be taken from cells below?
+  bg_colors <- rbind(rep(table_background_color(ht), ncol(horiz_b)), bg_colors)
   bg_colors <- format_color(bg_colors, default = "white")
   hhline_colors <- bg_colors
   hhline_colors[has_own_border] <- hb_colors[has_own_border]

@@ -629,7 +629,7 @@ pad_position <- function(string, position, max_width) {
 
 make_cell_style <- function(ht, row, col) {
   tc <- text_color(ht)[row, col]
-  bgc <- background_color(ht)[row, col]
+  bgc <- effective_background_color(ht)[row, col]
   bold <- bold(ht)[row, col]
   italic <- italic(ht)[row, col]
 

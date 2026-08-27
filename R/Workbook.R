@@ -154,7 +154,7 @@ apply_excel_styles <- function(wb, sheet, ht, contents, start_row, start_col, to
     null_args$tc <- text_color(ht)[drow, dcol]
     null_args$fs <- font_size(ht)[drow, dcol]
     null_args$ft <- font(ht)[drow, dcol]
-    null_args$bgc <- background_color(ht)[drow, dcol]
+    null_args$bgc <- effective_background_color(ht)[drow, dcol]
     null_args <- lapply(null_args, function(x) if (is.na(x)) NULL else x)
 
     nf <- number_format(ht)[[drow, dcol]]

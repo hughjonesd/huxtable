@@ -277,6 +277,18 @@ test_that("breakable LaTeX tables use longtable", {
 })
 
 
+test_that("LaTeX uses a colorbox for the table background", {
+  ht <- set_table_background_color(hux(a = 1), "red")
+  tex <- to_latex(ht)
+  expect_match(tex, "\\setlength{\\fboxsep}{0pt}", fixed = TRUE)
+  expect_match(tex, "\\colorbox[RGB]{255, 0, 0}{\\begin{tabular}", fixed = TRUE)
+
+  breakable(ht) <- TRUE
+  tex <- to_latex(ht)
+  expect_false(grepl("\\colorbox", tex, fixed = TRUE))
+})
+
+
 test_that("breakable LaTeX tables repeat only leading header rows", {
   ht <- hux(matrix(1:8, 4, 2), add_colnames = FALSE)
   header_rows(ht) <- c(TRUE, TRUE, FALSE, TRUE)
@@ -353,6 +365,24 @@ test_that("RTF keeps rows intact and conditionally keeps them together", {
   rtf <- to_rtf(ht)
   expect_length(gregexpr("\\trkeep ", rtf, fixed = TRUE)[[1]], 2L)
   expect_false(grepl("\\trkeepfollow", rtf, fixed = TRUE))
+})
+
+
+test_that("RTF uses table background for otherwise unfilled cells", {
+  ht <- set_table_background_color(hux(a = 1:2, add_colnames = FALSE), "red")
+  background_color(ht)[1, 1] <- "blue"
+  rtf <- to_rtf(ht)
+  expect_match(rtf, "\\clcbpat1", fixed = TRUE)
+  expect_match(rtf, "\\clcbpat2", fixed = TRUE)
+  expect_equal(as.character(rtf_fc_tables(ht)$colors), c("blue", "red"))
+})
+
+
+test_that("Screen output uses table background for otherwise unfilled cells", {
+  skip_if_not_installed("crayon")
+  local_reproducible_output(crayon = TRUE)
+  ht <- set_table_background_color(hux(a = 1, add_colnames = FALSE), "red")
+  expect_match(to_screen(ht, color = TRUE), "\033[41m", fixed = TRUE)
 })
 
 

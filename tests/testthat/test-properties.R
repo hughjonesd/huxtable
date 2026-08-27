@@ -76,6 +76,20 @@ test_that("Can set properties to NA", {
   expect_error(caption(ht) <- NA, regexp = NA)
   expect_error(font(ht) <- NA, regexp = NA)
   expect_error(col_width(ht) <- NA, regexp = NA)
+  expect_error(table_background_color(ht) <- NA, regexp = NA)
+})
+
+
+test_that("Table background color is a nullable table property", {
+  ht <- hux(1:2)
+  expect_true(is.na(table_background_color(ht)))
+
+  ht <- set_table_background_color(ht, "red")
+  expect_equal(table_background_color(ht), "red")
+  expect_error(table_background_color(ht) <- c("red", "blue"))
+
+  table_background_color(ht) <- NA
+  expect_true(is.na(table_background_color(ht)))
 })
 
 
