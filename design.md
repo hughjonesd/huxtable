@@ -70,7 +70,14 @@ LaTeX and HTML, the returned markup is passed to knitr as-is, possibly with
 additional dependencies for LaTeX packages【F:R/knitr.R†L18-L60】.
 
 Caption and label behavior shared by the renderers is implemented in
-`R/captions.R`. Automatic labels are based on the knitr chunk label. Labels
-already emitted in the current chunk are stored in `knitr::opts_current`, so
-additional huxtables receive deterministic suffixes without state leaking into
-later chunks or later knitting runs.
+`R/captions.R`. `resolve_caption()` returns caption text, the resolved label,
+and whether bookdown syntax embedded that label in the caption. LaTeX, HTML,
+Markdown and Typst consume this result, while each renderer remains responsible
+for its own escaping, sizing and output markup. Simpler backends such as screen,
+RTF and Excel use the raw caption property and the shared horizontal and
+vertical position helpers.
+
+Automatic labels are based on the knitr chunk label. Labels already emitted in
+the current chunk are stored in `knitr::opts_current`, so additional huxtables
+receive deterministic suffixes without state leaking into later chunks or later
+knitting runs.

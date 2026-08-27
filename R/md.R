@@ -63,8 +63,9 @@ to_md <- function(ht, header = TRUE, min_width = getOption("width") / 4, max_wid
 
   result <- paste(apply(charmat, 1, paste0, collapse = ""), collapse = "\n")
   result <- paste0(result, "\n\n")
-  if (!is.na(cap <- make_caption(ht, make_label(ht), "md"))) {
-    result <- paste0(result, "Table: ", cap, "\n")
+  caption_data <- resolve_caption(ht, "md")
+  if (!is.na(caption_data$text)) {
+    result <- paste0(result, "Table: ", caption_data$text, "\n")
   }
 
   result

@@ -94,8 +94,7 @@ as_Workbook.huxtable <- function(ht,
 #' @noRd
 write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_col) {
   cap <- caption(ht)
-  cap_pos <- caption_pos(ht)
-  top_cap <- write_caption && !is.na(cap) && grepl("top", cap_pos)
+  top_cap <- write_caption && !is.na(cap) && get_caption_vpos(ht) == "top"
   cap_row <- if (top_cap) start_row else start_row + nrow(ht)
   if (write_caption && !is.na(cap)) {
     openxlsx::writeData(wb, sheet, x = cap, startRow = cap_row)

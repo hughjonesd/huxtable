@@ -100,7 +100,7 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
     right = c("\\begin{raggedleft}\n", "\\par\\end{raggedleft}\n")
   )
 
-  cap_top <- grepl("top", caption_pos(ht))
+  cap_top <- get_caption_vpos(ht) == "top"
   cap <- if (cap_top) c(cap, "") else c("", cap)
 
   tpt <- c("\\begin{threeparttable}\n", "\n\\end{threeparttable}")
@@ -117,13 +117,13 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
 
 
 build_latex_caption <- function(ht, longtable = FALSE) {
-  lab <- make_label(ht)
-  cap_has_label <- FALSE
+  caption_data <- resolve_caption(ht, "latex")
+  lab <- caption_data$label
+  cap <- caption_data$text
 
-  if (is.na(cap <- make_caption(ht, lab, "latex"))) {
+  if (is.na(cap)) {
     cap <- ""
   } else {
-    cap_has_label <- !is.null(attr(cap, "has_label"))
     hpos <- get_caption_hpos(ht)
     cap_just <- switch(hpos,
       left   = "raggedright",
@@ -152,7 +152,7 @@ build_latex_caption <- function(ht, longtable = FALSE) {
     )
   }
 
-  lab <- if (is.na(lab) || cap_has_label) "" else sprintf("\\label{%s}\n", lab)
+  lab <- if (is.na(lab) || caption_data$label_in_caption) "" else sprintf("\\label{%s}\n", lab)
   cap <- paste(cap, lab)
   if (using_quarto(min_version = "1.4") &&
     getOption(
@@ -567,7 +567,7 @@ build_tabular <- function(ht, include_caption = TRUE) {
       cap <- paste0(cap, "\\tabularnewline\n")
     }
     if (nzchar(cap)) {
-      table_body <- if (grepl("top", caption_pos(ht))) {
+      table_body <- if (get_caption_vpos(ht) == "top") {
         paste(cap, table_body, sep = "\n")
       } else {
         paste(table_body, cap, sep = "\n")

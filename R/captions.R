@@ -17,16 +17,54 @@ get_caption_hpos <- function(ht) {
 }
 
 
-#' Resolve a table label for output
-#'
-#' Explicit labels are returned unchanged. Within named knitr chunks, automatic
-#' labels are derived from the chunk label and made unique among labels already
-#' used by huxtable in the chunk.
+#' Return the vertical position of a caption
 #'
 #' @param ht A huxtable.
-#' @return A string or `NA`.
+#' @return Either `"top"` or `"bottom"`.
 #' @noRd
-make_label <- function(ht) {
+get_caption_vpos <- function(ht) {
+  if (grepl("top", caption_pos(ht))) "top" else "bottom"
+}
+
+
+#' Detect whether bookdown-style captions are needed
+#'
+#' @return A logical scalar.
+#' @noRd
+use_bookdown_style_captions <- function() {
+  if (!is.null(book_opt <- getOption("huxtable.bookdown", NULL))) {
+    return(book_opt)
+  }
+
+  if (!requireNamespace("knitr", quietly = TRUE)) {
+    return(FALSE)
+  }
+  if (!requireNamespace("rmarkdown", quietly = TRUE)) {
+    return(FALSE)
+  }
+  input_path <- knitr::current_input(dir = TRUE)
+  if (is.null(input_path)) {
+    return(FALSE)
+  }
+  rmd_of <- rmarkdown::default_output_format(input_path)$name
+
+  return(grepl("bookdown|blogdown", rmd_of))
+}
+
+
+#' Resolve caption text and its label for an output format
+#'
+#' Adds the label syntax expected by bookdown and blogdown, while reporting
+#' separately whether that syntax already contains the label. Renderers can
+#' then decide whether they also need a native label without relying on
+#' attributes attached to the caption string.
+#'
+#' @param ht A huxtable.
+#' @param format Output format.
+#' @return A list with `text`, `label` and `label_in_caption` elements.
+#' @noRd
+resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
+  format <- match.arg(format)
   lab <- label(ht)
 
   has_knitr <- requireNamespace("knitr", quietly = TRUE)
@@ -81,68 +119,20 @@ make_label <- function(ht) {
     )
   }
 
-  lab
-}
+  cap <- caption(ht)
+  label_in_caption <- FALSE
 
-
-#' Detect whether bookdown-style captions are needed
-#'
-#' @return A logical scalar.
-#' @noRd
-use_bookdown_style_captions <- function() {
-  if (!is.null(book_opt <- getOption("huxtable.bookdown", NULL))) {
-    return(book_opt)
+  if (!is.na(lab) && nzchar(lab) && use_bookdown_style_captions()) {
+    bookdown_label <- if (grepl("^tab:", lab)) lab else paste0("tab:", lab)
+    # Bookdown needs a caption, even an empty one, to carry the label.
+    if (is.na(cap)) cap <- ""
+    cap <- if (format == "latex") {
+      sprintf("(\\#%s) %s", bookdown_label, cap)
+    } else {
+      sprintf("(#%s) %s", bookdown_label, cap)
+    }
+    label_in_caption <- TRUE
   }
 
-  if (!requireNamespace("knitr", quietly = TRUE)) {
-    return(FALSE)
-  }
-  if (!requireNamespace("rmarkdown", quietly = TRUE)) {
-    return(FALSE)
-  }
-  input_path <- knitr::current_input(dir = TRUE)
-  if (is.null(input_path)) {
-    return(FALSE)
-  }
-  rmd_of <- rmarkdown::default_output_format(input_path)$name
-
-  return(grepl("bookdown|blogdown", rmd_of))
-}
-
-
-#' Build caption text for an output format
-#'
-#' Adds the label syntax expected by bookdown and blogdown. Other output modes
-#' receive the raw caption unchanged.
-#'
-#' @param ht A huxtable.
-#' @param label Resolved table label.
-#' @param format Output format.
-#' @return Caption text or `NA`.
-#' @noRd
-make_caption <- function(ht, label, format = c("html", "latex", "md", "typst")) {
-  format <- match.arg(format)
-
-  raw_cap <- caption(ht)
-
-  if (is.na(label) || label == "") {
-    return(raw_cap)
-  }
-  if (!use_bookdown_style_captions()) {
-    return(raw_cap)
-  }
-
-  if (!grepl("^tab:", label)) label <- paste0("tab:", label)
-
-  # even if there's no caption, we make one if we need it for the label:
-  if (is.na(raw_cap)) raw_cap <- ""
-  cap_with_label <- if (format == "latex") {
-    sprintf("(\\#%s) %s", label, raw_cap)
-  } else {
-    sprintf("(#%s) %s", label, raw_cap)
-  }
-
-  # LaTeX uses this to avoid adding a second label outside the caption.
-  if (format == "latex") attr(cap_with_label, "has_label") <- TRUE
-  return(cap_with_label)
+  list(text = cap, label = lab, label_in_caption = label_in_caption)
 }

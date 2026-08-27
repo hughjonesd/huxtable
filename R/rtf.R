@@ -255,7 +255,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = "\n")
-  result <- if (grepl("top", caption_pos(ht))) {
+  result <- if (get_caption_vpos(ht) == "top") {
     paste(caption_par, result, sep = "\n")
   } else {
     paste(
