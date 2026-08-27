@@ -41,6 +41,8 @@ huxtable_table_attrs <- c(
 )
 
 huxtable_env <- new.env()
+huxtable_env$autolabel_cache <- list()
+huxtable_env$autolabel_chunk <- list(label = NULL, options = NULL)
 huxtable_env$huxtable_default_attrs <- list(
   rowspan             = 1,
   colspan             = 1,

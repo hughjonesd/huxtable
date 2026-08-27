@@ -72,13 +72,23 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
   lab <- label(ht)
 
   has_knitr <- requireNamespace("knitr", quietly = TRUE)
-  chunk_label <- if (has_knitr) knitr::opts_current$get("label") else NULL
+  chunk_options <- if (has_knitr) knitr::opts_current$get() else NULL
+  chunk_label <- chunk_options$label
   if (length(chunk_label) > 0 && grepl("^unnamed-chunk", chunk_label)) {
     chunk_label <- NULL
   }
 
+  same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&
+    rlang::is_reference(chunk_options, huxtable_env$autolabel_chunk$options)
+  if (!same_chunk) {
+    huxtable_env$autolabel_cache <- list()
+    huxtable_env$autolabel_chunk <- list(
+      label = chunk_label,
+      options = chunk_options
+    )
+  }
   used_labels <- if (!is.null(chunk_label)) {
-    knitr::opts_current$get("huxtable.used_labels")
+    huxtable_env$autolabel_cache[[chunk_label]]
   } else {
     NULL
   }
@@ -118,9 +128,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
   }
 
   if (!is.null(chunk_label) && !is.na(lab) && nzchar(lab)) {
-    knitr::opts_current$set(
-      huxtable.used_labels = unique(c(used_labels, lab))
-    )
+    huxtable_env$autolabel_cache[[chunk_label]] <- unique(c(used_labels, lab))
   }
 
   cap <- caption(ht)
