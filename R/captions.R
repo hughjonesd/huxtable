@@ -61,7 +61,11 @@ use_bookdown_style_captions <- function() {
 #'
 #' @param ht A huxtable.
 #' @param format Output format.
-#' @return A list with `text`, `label` and `label_in_caption` elements.
+#' @return A list with three elements:
+#' * `text`: caption text, including bookdown label syntax when required, or
+#'   `NA` when there is no caption;
+#' * `label`: the explicit or automatically generated table label, or `NA`;
+#' * `label_in_caption`: whether `text` contains the label in bookdown syntax.
 #' @noRd
 resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
   format <- match.arg(format)
