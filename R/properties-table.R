@@ -224,10 +224,7 @@ NULL
 
 #' @rdname breakable
 #' @export
-breakable <- function(ht) {
-  value <- prop_get(ht, "breakable")
-  if (is.null(value)) huxtable_env$huxtable_default_attrs$breakable else value
-}
+breakable <- function(ht) prop_get(ht, "breakable")
 
 #' @rdname breakable
 #' @export

@@ -75,6 +75,21 @@ test_that("caption works", {
 })
 
 
+test_that("flextable maps breakable to Word pagination", {
+  skip_if_not_installed("flextable", minimum_version = "0.9.1")
+  ht <- hux(a = 1:2, b = 3:4)
+
+  ft <- as_flextable(ht)
+  expect_false(ft$properties$opts_word$split)
+  expect_true(all(ft$body$styles$pars$keep_with_next$data))
+
+  breakable(ht) <- TRUE
+  ft <- as_flextable(ht)
+  expect_false(ft$properties$opts_word$split)
+  expect_false(any(ft$body$styles$pars$keep_with_next$data))
+})
+
+
 test_that("0-row/0-column huxtables work", {
   h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
   h_ncol0 <- hux(a = 1:2)[, FALSE]

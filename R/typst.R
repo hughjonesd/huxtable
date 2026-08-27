@@ -197,12 +197,13 @@ typst_figure <- function(ht, text) {
   )
 
   if (breakable(ht)) {
-    fig <- paste0(
-      "#[\n",
-      "#show figure: set block(breakable: true)\n",
-      "#show table.cell: set table.cell(breakable: false)\n",
+    fig <- paste(
+      "#[",
+      "#show figure: set block(breakable: true)",
+      "#show table.cell: set table.cell(breakable: false)",
       fig,
-      "\n]"
+      "]",
+      sep = "\n"
     )
   }
 

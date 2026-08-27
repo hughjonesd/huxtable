@@ -34,6 +34,23 @@ test_that("Basic property assignment works", {
 })
 
 
+test_that("breakable is a logical table property", {
+  ht <- hux(a = 1:3, b = 4:6)
+  expect_false(breakable(ht))
+  expect_false(breakable(jams))
+
+  breakable(ht) <- TRUE
+  expect_true(breakable(ht))
+  expect_true(breakable(ht[1:2, 1, drop = FALSE]))
+  expect_true(breakable(unserialize(serialize(ht, NULL))))
+  expect_true(breakable(rbind(ht, c(7, 8))))
+  expect_true(breakable(cbind(ht, c = 7:10)))
+
+  expect_false(breakable(set_breakable(ht, FALSE)))
+  expect_error(breakable(ht) <- "yes")
+})
+
+
 test_that("Can refer to properties by colnames", {
   ht <- huxtable(a = 1:5, b = letters[1:5], d = 1:5)
   number_format(ht)[1, 1] <- 3

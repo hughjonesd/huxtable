@@ -47,22 +47,6 @@ to_latex <- function(ht, tabular_only = FALSE, ...) {
       stop("Breakable LaTeX tables cannot use a wrapping position.", call. = FALSE)
     }
 
-    ignored <- c()
-    if (!is.na(tabular_environment(ht))) {
-      ignored <- c(ignored, "tabular_environment")
-    }
-    if (table_environment(ht) != huxtable_env$huxtable_default_attrs$table_environment) {
-      ignored <- c(ignored, "table_environment")
-    }
-    if (latex_float(ht) != huxtable_env$huxtable_default_attrs$latex_float) {
-      ignored <- c(ignored, "latex_float")
-    }
-    if (length(ignored) > 0) {
-      warning(
-        "Breakable LaTeX tables ignore: ", paste(ignored, collapse = ", "),
-        call. = FALSE
-      )
-    }
   }
 
   tabular <- build_tabular(ht, include_caption = !tabular_only)

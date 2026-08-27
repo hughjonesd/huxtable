@@ -84,7 +84,8 @@ test_that("Bugfix: solid border generates valid typst", {
 })
 
 test_that("Bugfix: merge_cells in Typst output produces no empty rows", {
-  ht <- merge_cells(jams, 1:2, 1:2)
+  ht <- hux(a = 1:3, b = 4:6)
+  ht <- merge_cells(ht, 1:2, 1:2)
   typ <- to_typst(ht)
   lines <- strsplit(typ, "\n")[[1]]
   expect_false(any(trimws(lines) == ","))
@@ -224,4 +225,20 @@ test_that("rotation renders in Typst", {
   rotation(ht)[1, 1] <- 90
   res <- to_typst(ht)
   expect_match(res, "#rotate(90deg)[1]", fixed = TRUE)
+})
+
+
+test_that("Typst applies locally scoped break rules", {
+  ht <- hux(a = 1:2)
+  typst <- to_typst(ht)
+  expect_false(grepl("#show figure", typst, fixed = TRUE))
+
+  breakable(ht) <- TRUE
+  typst <- to_typst(ht)
+  expect_match(typst, "#show figure: set block(breakable: true)", fixed = TRUE)
+  expect_match(
+    typst,
+    "#show table.cell: set table.cell(breakable: false)",
+    fixed = TRUE
+  )
 })

@@ -37,7 +37,7 @@ print_notebook <- function(ht, ...) {
 
 
 huxtable_html_css <- function() {
-  "<style>\n.huxtable {\n  border-collapse: collapse;\n  border: 0px;\n  margin-bottom: 2em;\n  margin-top: 2em;\n}\n.huxtable-cell {\n  vertical-align: top;\n  text-align: left;\n  white-space: normal;\n  border-style: solid;\n  border-width: 0pt;\n  padding: 6pt;\n  font-weight: normal;\n}\n.huxtable-header {\n  font-weight: bold;\n}\n</style>\n"
+  "<style>\n.huxtable {\n  border-collapse: collapse;\n  border: 0px;\n  margin-bottom: 2em;\n  margin-top: 2em;\n}\n.huxtable-cell {\n  vertical-align: top;\n  text-align: left;\n  white-space: normal;\n  border-style: solid;\n  border-width: 0pt;\n  padding: 6pt;\n  font-weight: normal;\n}\n.huxtable-header {\n  font-weight: bold;\n}\n.huxtable tr {\n  break-inside: avoid;\n  page-break-inside: avoid;\n}\n</style>\n"
 }
 
 #' @export
@@ -277,13 +277,9 @@ build_row_html <- function(ht, cells_html) {
     row_heights <- 100 * row_heights / sum(row_heights)
     row_heights <- sprintf("%.3g%%", row_heights) # %3g prints max 1 decimal place
   }
-  row_heights <- sprintf("height: %s;", row_heights)
+  row_heights <- sprintf(' style="height: %s;"', row_heights)
   row_heights <- blank_where(row_heights, is.na(row_height(ht)))
-  row_styles <- trimws(paste(
-    row_heights,
-    "break-inside: avoid; page-break-inside: avoid;"
-  ))
-  tr <- sprintf('<tr style="%s">\n', row_styles)
+  tr <- sprintf("<tr%s>\n", row_heights)
   row_html <- paste0(tr, cells_html, rep("</tr>\n", length(tr)))
 
   header_idx <- unname(which(header_rows(ht)))

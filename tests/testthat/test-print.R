@@ -254,6 +254,108 @@ test_that("Markdown in rtf", {
 })
 
 
+test_that("breakable LaTeX tables use longtable", {
+  ht <- hux(a = 1:3, b = 4:6)
+  caption(ht) <- "A caption"
+  label(ht) <- "tab:breakable"
+  breakable(ht) <- TRUE
+
+  tex <- to_latex(ht)
+  expect_match(tex, "\\begin{longtable}[c]", fixed = TRUE)
+  expect_match(tex, "\\setlength{\\LTcapwidth}{\\linewidth}", fixed = TRUE)
+  expect_match(tex, "\\endfirsthead", fixed = TRUE)
+  expect_match(tex, "\\endhead", fixed = TRUE)
+  expect_match(tex, "\\caption{A caption}", fixed = TRUE)
+  expect_match(tex, "\\label{tab:breakable}", fixed = TRUE)
+  expect_false(grepl("\\begin{table}", tex, fixed = TRUE))
+  expect_false(grepl("threeparttable", tex, fixed = TRUE))
+  expect_false(grepl("centerbox", tex, fixed = TRUE))
+  expect_false(grepl("resizebox", tex, fixed = TRUE))
+
+  breakable(ht) <- FALSE
+  expect_match(to_latex(ht), "\\begin{table}[ht]", fixed = TRUE)
+})
+
+
+test_that("breakable LaTeX tables repeat only leading header rows", {
+  ht <- hux(matrix(1:8, 4, 2), add_colnames = FALSE)
+  header_rows(ht) <- c(TRUE, TRUE, FALSE, TRUE)
+  breakable(ht) <- TRUE
+  tex <- to_latex(ht)
+  first_head <- sub(".*?\\\\begin\\{longtable\\}.*?\\n", "", tex, perl = TRUE)
+  first_head <- sub("\\\\endfirsthead.*", "", first_head)
+
+  expect_match(first_head, "1", fixed = TRUE)
+  expect_match(first_head, "2", fixed = TRUE)
+  expect_false(grepl("3", first_head, fixed = TRUE))
+  expect_false(grepl("4", first_head, fixed = TRUE))
+})
+
+
+test_that("breakable LaTeX captions respect position and width", {
+  ht <- hux(a = 1:2)
+  caption(ht) <- "Bottom caption"
+  caption_pos(ht) <- "bottomright"
+  caption_width(ht) <- 0.4
+  width(ht) <- 0.6
+  position(ht) <- "right"
+  breakable(ht) <- TRUE
+
+  tex <- to_latex(ht)
+  expect_match(tex, "\\begin{longtable}[r]", fixed = TRUE)
+  expect_match(tex, "\\setlength{\\LTcapwidth}{0.4\\textwidth}", fixed = TRUE)
+  expect_match(tex, "justification=raggedleft", fixed = TRUE)
+  expect_lt(regexpr("1", tex, fixed = TRUE), regexpr("\\caption{Bottom caption}", tex, fixed = TRUE))
+
+  caption_width(ht) <- NA
+  expect_match(
+    to_latex(ht),
+    "\\setlength{\\LTcapwidth}{0.6\\textwidth}",
+    fixed = TRUE
+  )
+})
+
+
+test_that("breakable LaTeX tables handle incompatible properties", {
+  ht <- set_breakable(hux(a = 1:2), TRUE)
+
+  height(ht) <- 0.5
+  expect_error(to_latex(ht), "fixed height")
+  height(ht) <- NA
+
+  position(ht) <- "wrapleft"
+  expect_error(to_latex(ht), "wrapping position")
+  position(ht) <- "center"
+
+  tabular_environment(ht) <- "tabularx"
+  table_environment(ht) <- "table*"
+  latex_float(ht) <- "b"
+  expect_silent(tex <- to_latex(ht))
+  expect_match(tex, "\\begin{longtable}", fixed = TRUE)
+})
+
+
+test_that("tabular_only returns an uncaptioned longtable", {
+  ht <- set_breakable(set_caption(hux(a = 1:2), "Caption"), TRUE)
+  tex <- to_latex(ht, tabular_only = TRUE)
+  expect_match(tex, "\\begin{longtable}", fixed = TRUE)
+  expect_false(grepl("\\caption", tex, fixed = TRUE))
+})
+
+
+test_that("RTF keeps rows intact and conditionally keeps them together", {
+  ht <- hux(a = 1:2, add_colnames = FALSE)
+  rtf <- to_rtf(ht)
+  expect_length(gregexpr("\\trkeep ", rtf, fixed = TRUE)[[1]], 2L)
+  expect_length(gregexpr("\\trkeepfollow ", rtf, fixed = TRUE)[[1]], 1L)
+
+  breakable(ht) <- TRUE
+  rtf <- to_rtf(ht)
+  expect_length(gregexpr("\\trkeep ", rtf, fixed = TRUE)[[1]], 2L)
+  expect_false(grepl("\\trkeepfollow", rtf, fixed = TRUE))
+})
+
+
 test_that("Chinese characters are not repeated", {
   skip_on_appveyor()
   skip_on_os("windows")

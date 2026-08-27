@@ -260,6 +260,114 @@ test_that("quarto typst output is valid", {
 })
 
 
+test_that("breakable LaTeX tables compile across pages", {
+  skip_on_cran()
+  required_tools <- Sys.which(c("pdflatex", "pdfinfo", "pdftotext"))
+  skip_if(any(required_tools == ""), "TeX and Poppler command-line tools are required")
+
+  top <- hux(
+    c("Heading", sprintf("top row %03d", 1:120)),
+    c("Value", 1:120),
+    add_colnames = FALSE
+  )
+  header_rows(top)[1] <- TRUE
+  breakable(top) <- TRUE
+  caption(top) <- "Top caption"
+  label(top) <- "tab:breakable-top"
+
+  bottom <- hux(
+    c("Heading", sprintf("bottom row %03d", 1:120)),
+    c("Value", 1:120),
+    add_colnames = FALSE
+  )
+  header_rows(bottom)[1] <- TRUE
+  breakable(bottom) <- TRUE
+  caption(bottom) <- "Bottom caption"
+  caption_pos(bottom) <- "bottom"
+  label(bottom) <- "tab:breakable-bottom"
+
+  tex_dir <- tempfile("breakable-latex-")
+  dir.create(tex_dir)
+  old_wd <- setwd(tex_dir)
+  on.exit(setwd(old_wd), add = TRUE)
+  tex <- paste0(
+    "\\documentclass{article}\n",
+    report_latex_dependencies(quiet = TRUE, as_string = TRUE),
+    "\\begin{document}\n",
+    "References: \\ref{tab:breakable-top} and \\ref{tab:breakable-bottom}.\n",
+    to_latex(top), "\n", to_latex(bottom),
+    "\n\\end{document}\n"
+  )
+  writeLines(tex, "breakable.tex")
+
+  latex_args <- c("-interaction=nonstopmode", "-halt-on-error", "breakable.tex")
+  first_run <- system2(required_tools[["pdflatex"]], latex_args, stdout = TRUE, stderr = TRUE)
+  second_run <- system2(required_tools[["pdflatex"]], latex_args, stdout = TRUE, stderr = TRUE)
+  expect_null(attr(first_run, "status"), info = paste(first_run, collapse = "\n"))
+  expect_null(attr(second_run, "status"), info = paste(second_run, collapse = "\n"))
+  expect_false(any(grepl("Float too large", second_run, fixed = TRUE)))
+  expect_false(any(grepl("undefined references", second_run, ignore.case = TRUE)))
+
+  pdf_info <- system2(required_tools[["pdfinfo"]], "breakable.pdf", stdout = TRUE)
+  page_count <- as.integer(sub("Pages:[[:space:]]+", "", grep("^Pages:", pdf_info, value = TRUE)))
+  expect_gt(page_count, 1L)
+
+  expect_equal(
+    system2(required_tools[["pdftotext"]], c("-layout", "breakable.pdf", "breakable.txt")),
+    0L
+  )
+  pdf_text <- paste(readLines("breakable.txt", warn = FALSE), collapse = "\n")
+  pdf_pages <- strsplit(pdf_text, "\f", fixed = TRUE)[[1]]
+  nonempty_pages <- which(nzchar(trimws(pdf_pages)))
+  expect_equal(which(grepl("Top caption", pdf_pages, fixed = TRUE)), 1L)
+  expect_equal(which(grepl("Bottom caption", pdf_pages, fixed = TRUE)), max(nonempty_pages))
+  expect_lt(regexpr("Top caption", pdf_text, fixed = TRUE), regexpr("top row 001", pdf_text, fixed = TRUE))
+  expect_lt(regexpr("bottom row 120", pdf_text, fixed = TRUE), regexpr("Bottom caption", pdf_text, fixed = TRUE))
+  expect_gte(length(gregexpr("Heading", pdf_text, fixed = TRUE)[[1]]), page_count)
+  expect_false(grepl("??", pdf_text, fixed = TRUE))
+})
+
+
+test_that("breakable Typst tables compile across pages", {
+  skip_on_cran()
+  required_tools <- Sys.which(c("typst", "pdfinfo", "pdftotext"))
+  skip_if(any(required_tools == ""), "Typst and Poppler command-line tools are required")
+
+  ht <- hux(
+    c("Heading", sprintf("row %03d", 1:120)),
+    c("Value", 1:120),
+    add_colnames = FALSE
+  )
+  header_rows(ht)[1] <- TRUE
+  breakable(ht) <- TRUE
+  caption(ht) <- "Typst caption"
+  label(ht) <- "tab:breakable-typst"
+
+  typ_dir <- tempfile("breakable-typst-")
+  dir.create(typ_dir)
+  typ_file <- file.path(typ_dir, "breakable.typ")
+  pdf_file <- file.path(typ_dir, "breakable.pdf")
+  text_file <- file.path(typ_dir, "breakable.txt")
+  writeLines(c(to_typst(ht), "Reference: @tab:breakable-typst"), typ_file)
+
+  typst_run <- system2(
+    required_tools[["typst"]],
+    c("compile", typ_file, pdf_file),
+    stdout = TRUE,
+    stderr = TRUE
+  )
+  expect_null(attr(typst_run, "status"), info = paste(typst_run, collapse = "\n"))
+
+  pdf_info <- system2(required_tools[["pdfinfo"]], pdf_file, stdout = TRUE)
+  page_count <- as.integer(sub("Pages:[[:space:]]+", "", grep("^Pages:", pdf_info, value = TRUE)))
+  expect_gt(page_count, 1L)
+  expect_equal(system2(required_tools[["pdftotext"]], c("-layout", pdf_file, text_file)), 0L)
+  pdf_text <- paste(readLines(text_file, warn = FALSE), collapse = "\n")
+  expect_gte(length(gregexpr("Heading", pdf_text, fixed = TRUE)[[1]]), page_count)
+  expect_false(grepl("??", pdf_text, fixed = TRUE))
+})
+
+
 test_that("Works with fontspec", {
   skip_on_cran()
   skip_on_os("linux") # no Arial
