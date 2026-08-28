@@ -127,10 +127,7 @@ build_latex_caption <- function(ht, longtable = FALSE) {
   lab <- caption_data$label
   cap <- caption_data$text
 
-  if (is.na(cap) && is.na(lab) &&
-    (caption_data$quarto_caption || caption_data$quarto_label)) {
-    return("")
-  }
+  if (is.na(cap) && is.na(lab)) return("")
 
   if (is.na(cap)) {
     cap <- ""
