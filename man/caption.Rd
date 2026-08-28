@@ -28,8 +28,8 @@ with \code{\link[=caption_pos]{caption_pos()}}.
 \details{
 Captions are not escaped. See the example for a workaround.
 
-Table captions set via the Quarto \code{tbl-cap} chunk option override captions set
-by this mechanism.
+Table captions set via the Quarto \code{tbl-cap} or \code{tbl-subcap} chunk options
+override captions set by this mechanism. A warning is issued if both are set.
 }
 \examples{
 

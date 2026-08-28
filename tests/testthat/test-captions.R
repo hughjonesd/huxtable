@@ -61,6 +61,85 @@ test_that("Unnamed chunks and disabled autolabeling do not create labels", {
 })
 
 
+test_that("Bugfix: Quarto captions and labels override huxtable values", {
+  old_current <- knitr::opts_current$get()
+  old_knit <- knitr::opts_knit$get()
+  old_options <- options(huxtable.autolabel = TRUE, huxtable.bookdown = FALSE)
+  on.exit({
+    knitr::opts_current$restore(old_current)
+    knitr::opts_knit$restore(old_knit)
+    options(old_options)
+  })
+  knitr::opts_knit$set(quarto.version = "1.7.0")
+  knitr::opts_current$set(
+    label = "tbl-quarto",
+    `tbl-cap` = "Quarto caption"
+  )
+
+  ht <- set_label(set_caption(hux(a = 1), "Huxtable caption"), "tab:huxtable")
+  expect_warning(
+    caption_data <- resolve_caption(ht, "html"),
+    "caption and label"
+  )
+  expect_true(is.na(caption_data$text))
+  expect_true(is.na(caption_data$label))
+
+  expect_no_warning(caption_data <- resolve_caption(hux(a = 1), "html"))
+  expect_true(is.na(caption_data$text))
+  expect_true(is.na(caption_data$label))
+
+  latex <- to_latex(hux(a = 1))
+  expect_no_match(latex, "\\QuartoMarkdownBase64", fixed = TRUE)
+})
+
+
+test_that("Quarto caption and label ownership is resolved independently", {
+  old_current <- knitr::opts_current$get()
+  old_knit <- knitr::opts_knit$get()
+  old_options <- options(huxtable.autolabel = TRUE, huxtable.bookdown = FALSE)
+  on.exit({
+    knitr::opts_current$restore(old_current)
+    knitr::opts_knit$restore(old_knit)
+    options(old_options)
+  })
+  knitr::opts_knit$set(quarto.version = "1.7.0")
+
+  knitr::opts_current$set(
+    label = "unnamed-chunk-1",
+    `tbl-cap` = "Quarto caption"
+  )
+  expect_warning(
+    caption_data <- resolve_caption(
+      set_label(set_caption(hux(a = 1), "Huxtable caption"), "tab:huxtable"),
+      "html"
+    ),
+    "caption"
+  )
+  expect_true(is.na(caption_data$text))
+  expect_equal(caption_data$label, "tab:huxtable")
+
+  knitr::opts_current$restore(old_current)
+  knitr::opts_current$set(label = "tbl-quarto")
+  caption_data <- resolve_caption(set_caption(hux(a = 1), "Huxtable caption"), "html")
+  expect_equal(caption_data$text, "Huxtable caption")
+  expect_true(is.na(caption_data$label))
+
+  knitr::opts_current$restore(old_current)
+  knitr::opts_current$set(label = "analysis")
+  caption_data <- resolve_caption(set_label(hux(a = 1), "tab:huxtable"), "html")
+  expect_equal(caption_data$label, "tab:huxtable")
+
+  knitr::opts_current$restore(old_current)
+  knitr::opts_current$set(
+    label = "tbl-subtables",
+    `tbl-subcap` = c("First", "Second")
+  )
+  caption_data <- resolve_caption(hux(a = 1), "html")
+  expect_true(is.na(caption_data$text))
+  expect_true(is.na(caption_data$label))
+})
+
+
 test_that("Bookdown captions include labels in the expected syntax", {
   old_options <- options(huxtable.bookdown = TRUE)
   on.exit(options(old_options))

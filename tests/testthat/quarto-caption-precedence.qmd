@@ -1,0 +1,35 @@
+---
+title: "Quarto caption precedence"
+format:
+  html: default
+  pdf:
+    keep-tex: true
+  typst:
+    keep-typ: true
+  docx: default
+execute:
+  echo: false
+  warning: false
+---
+
+See @tbl-quarto and @tbl-long.
+
+```{r}
+#| label: tbl-quarto
+#| tbl-cap: "Caption from Quarto"
+
+library(huxtable)
+hux(a = "Ordinary", add_colnames = FALSE) |>
+  set_caption("Caption from Huxtable") |>
+  set_label("tbl-huxtable")
+```
+
+```{r}
+#| label: tbl-long
+#| tbl-cap: "Breakable caption from Quarto"
+
+hux(a = 1:2, add_colnames = FALSE) |>
+  set_caption("Breakable caption from Huxtable") |>
+  set_label("tbl-huxtable-long") |>
+  set_breakable(TRUE)
+```
