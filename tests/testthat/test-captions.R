@@ -89,7 +89,7 @@ test_that("Bugfix: Quarto captions and labels override huxtable values", {
   expect_true(is.na(caption_data$label))
 
   latex <- to_latex(hux(a = 1))
-  expect_false(grepl("\\QuartoMarkdownBase64", latex, fixed = TRUE))
+  expect_no_match(latex, "\\QuartoMarkdownBase64", fixed = TRUE)
 })
 
 

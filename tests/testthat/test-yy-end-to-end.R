@@ -261,8 +261,8 @@ test_that("Quarto captions and labels override huxtable output", {
   expect_match(html, "Caption from Quarto", fixed = TRUE)
   expect_match(html, 'id="tbl-quarto"', fixed = TRUE)
   expect_match(html, 'href="#tbl-quarto"', fixed = TRUE)
-  expect_false(grepl("Caption from Huxtable", html, fixed = TRUE))
-  expect_false(grepl("tbl-huxtable", html, fixed = TRUE))
+  expect_no_match(html, "Caption from Huxtable", fixed = TRUE)
+  expect_no_match(html, "tbl-huxtable", fixed = TRUE)
 
   expect_silent(
     test_quarto_render("quarto-caption-precedence.qmd",
@@ -278,8 +278,8 @@ test_that("Quarto captions and labels override huxtable output", {
   expect_match(tex, "\\begin{longtable}", fixed = TRUE)
   expect_match(tex, "Breakable caption from Quarto", fixed = TRUE)
   expect_match(tex, "\\label{tbl-long}", fixed = TRUE)
-  expect_false(grepl("caption from Huxtable", tex, ignore.case = TRUE))
-  expect_false(grepl("tbl-huxtable", tex, fixed = TRUE))
+  expect_no_match(tex, "caption from Huxtable", ignore.case = TRUE)
+  expect_no_match(tex, "tbl-huxtable", fixed = TRUE)
 
   expect_silent(
     test_quarto_render("quarto-caption-precedence.qmd",
@@ -293,8 +293,8 @@ test_that("Quarto captions and labels override huxtable output", {
   expect_match(typ, "Caption from Quarto", fixed = TRUE)
   expect_match(typ, "<tbl-quarto>", fixed = TRUE)
   expect_match(typ, "#ref(<tbl-quarto>", fixed = TRUE)
-  expect_false(grepl("Caption from Huxtable", typ, fixed = TRUE))
-  expect_false(grepl("tbl-huxtable", typ, fixed = TRUE))
+  expect_no_match(typ, "Caption from Huxtable", fixed = TRUE)
+  expect_no_match(typ, "tbl-huxtable", fixed = TRUE)
 
   skip_if_not_installed("flextable")
   expect_silent(
@@ -319,8 +319,8 @@ test_that("Quarto captions and labels override huxtable output", {
   )
   expect_match(word_xml, "Caption from Quarto", fixed = TRUE)
   expect_match(word_xml, "tbl-quarto", fixed = TRUE)
-  expect_false(grepl("Caption from Huxtable", word_xml, fixed = TRUE))
-  expect_false(grepl("tbl-huxtable", word_xml, fixed = TRUE))
+  expect_no_match(word_xml, "Caption from Huxtable", fixed = TRUE)
+  expect_no_match(word_xml, "tbl-huxtable", fixed = TRUE)
 })
 
 
