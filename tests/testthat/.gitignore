@@ -1,2 +1,3 @@
 /.quarto/
 /output_files/
+**/*.quarto_ipynb

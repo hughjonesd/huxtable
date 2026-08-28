@@ -21,6 +21,9 @@
   once. Outside those documents, `to_html()`, `print_html()`, `to_latex()` and
   `print_latex()` include them by default; use `dependencies = FALSE` to omit
   them.
+* Bugfix: Quarto table captions and labels now override captions and labels set
+  on a huxtable in HTML, PDF, Typst and Word output. Huxtable warns when both
+  mechanisms explicitly set the same property.
   
 # huxtable 5.8.0
 

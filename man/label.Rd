@@ -39,6 +39,9 @@ You can then refer to the table using \verb{@ref(label)}. \code{label} needs to 
 with \code{"tab:"}; if it doesn't, the \code{"tab:"} prefix will be added
 automatically. To turn off this behaviour, set
 \code{options(huxtable.bookdown = FALSE)}.
+
+Quarto table labels override labels set by this mechanism. A warning is
+issued if both are set.
 }
 \examples{
 set_label(jams, "tab:mytable")

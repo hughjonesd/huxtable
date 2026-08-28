@@ -172,13 +172,30 @@ test_that("Word files", {
 })
 
 
+test_quarto_render <- function(...) {
+  old_r_libs <- Sys.getenv("R_LIBS", unset = NA_character_)
+  on.exit({
+    if (is.na(old_r_libs)) {
+      Sys.unsetenv("R_LIBS")
+    } else {
+      Sys.setenv(R_LIBS = old_r_libs)
+    }
+  })
+  Sys.setenv(R_LIBS = paste(.libPaths(), collapse = .Platform$path.sep))
+  quarto::quarto_render(...)
+}
+
+
 test_that("quarto files", {
   skip_if_not_installed("quarto")
   qp <- quarto::quarto_path()
   skip_if_not(is.character(qp))
 
   on.exit({
-    for (f in c("quarto-test-out.pdf", "quarto-test-out.html")) {
+    for (f in c(
+      "quarto-test-out.pdf", "quarto-test-out.html",
+      "quarto-test-tex-labels-out.pdf"
+    )) {
       if (file.exists(f)) try(file.remove(f), silent = TRUE)
     }
     if (file.exists("quarto-test_files")) {
@@ -186,44 +203,124 @@ test_that("quarto files", {
     }
   })
 
-  if (quarto::quarto_version() < "1.4") {
-    expect_silent(
-      quarto::quarto_render("quarto-test.qmd",
-        output_format = "pdf",
-        output_file = "quarto-test-out.pdf",
-        execute_dir = "temp-artefacts",
-        debug = FALSE, quiet = TRUE
-      )
+  expect_silent(
+    test_quarto_render("quarto-test.qmd",
+      output_format = "pdf",
+      output_file = "quarto-test-out.pdf",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
     )
-  } else {
-    # for some reason (probably due to use of processx::) I can't
-    # capture the specific huxtable error from resolve_caption() here
-    expect_error(
-      quarto::quarto_render("quarto-test.qmd",
-        output_format = "pdf",
-        output_file = "quarto-test-out.pdf",
-        execute_dir = "temp-artefacts",
-        debug = FALSE, quiet = TRUE
-      )
+  )
+  expect_silent(
+    test_quarto_render("quarto-test-tex-labels.qmd",
+      output_format = "pdf",
+      output_file = "quarto-test-tex-labels-out.pdf",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
     )
-    expect_silent(
-      quarto::quarto_render("quarto-test-tex-labels.qmd",
-        output_format = "pdf",
-        output_file = "quarto-test-tex-labels-out.pdf",
-        execute_dir = "temp-artefacts",
-        debug = FALSE, quiet = TRUE
-      )
-    )
-  }
+  )
 
   expect_silent(
-    quarto::quarto_render("quarto-test.qmd",
+    test_quarto_render("quarto-test.qmd",
       output_format = "html",
       output_file = "quarto-test-out.html",
       execute_dir = "temp-artefacts",
       debug = FALSE, quiet = TRUE
     )
   )
+})
+
+
+test_that("Quarto captions and labels override huxtable output", {
+  skip_if_not_installed("quarto")
+  skip_if_not(is.character(quarto::quarto_path()))
+
+  outputs <- c(
+    "quarto-caption-precedence.html",
+    "quarto-caption-precedence.pdf",
+    "quarto-caption-precedence.tex",
+    "quarto-caption-precedence.typ",
+    "quarto-caption-precedence.docx"
+  )
+  on.exit({
+    for (f in outputs) if (file.exists(f)) try(file.remove(f), silent = TRUE)
+    if (file.exists("quarto-caption-precedence_files")) {
+      try(unlink("quarto-caption-precedence_files", recursive = TRUE), silent = TRUE)
+    }
+  })
+
+  expect_silent(
+    test_quarto_render("quarto-caption-precedence.qmd",
+      output_format = "html",
+      output_file = "quarto-caption-precedence.html",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
+    )
+  )
+  html <- paste(readLines("quarto-caption-precedence.html", warn = FALSE), collapse = "\n")
+  expect_match(html, "Caption from Quarto", fixed = TRUE)
+  expect_match(html, 'id="tbl-quarto"', fixed = TRUE)
+  expect_match(html, 'href="#tbl-quarto"', fixed = TRUE)
+  expect_false(grepl("Caption from Huxtable", html, fixed = TRUE))
+  expect_false(grepl("tbl-huxtable", html, fixed = TRUE))
+
+  expect_silent(
+    test_quarto_render("quarto-caption-precedence.qmd",
+      output_format = "pdf",
+      output_file = "quarto-caption-precedence.pdf",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
+    )
+  )
+  tex <- paste(readLines("quarto-caption-precedence.tex", warn = FALSE), collapse = "\n")
+  expect_match(tex, "Caption from Quarto", fixed = TRUE)
+  expect_match(tex, "\\label{tbl-quarto}", fixed = TRUE)
+  expect_match(tex, "\\begin{longtable}", fixed = TRUE)
+  expect_match(tex, "Breakable caption from Quarto", fixed = TRUE)
+  expect_match(tex, "\\label{tbl-long}", fixed = TRUE)
+  expect_false(grepl("caption from Huxtable", tex, ignore.case = TRUE))
+  expect_false(grepl("tbl-huxtable", tex, fixed = TRUE))
+
+  expect_silent(
+    test_quarto_render("quarto-caption-precedence.qmd",
+      output_format = "typst",
+      output_file = "quarto-caption-precedence.pdf",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
+    )
+  )
+  typ <- paste(readLines("quarto-caption-precedence.typ", warn = FALSE), collapse = "\n")
+  expect_match(typ, "Caption from Quarto", fixed = TRUE)
+  expect_match(typ, "<tbl-quarto>", fixed = TRUE)
+  expect_match(typ, "#ref(<tbl-quarto>", fixed = TRUE)
+  expect_false(grepl("Caption from Huxtable", typ, fixed = TRUE))
+  expect_false(grepl("tbl-huxtable", typ, fixed = TRUE))
+
+  skip_if_not_installed("flextable")
+  expect_silent(
+    test_quarto_render("quarto-caption-precedence.qmd",
+      output_format = "docx",
+      output_file = "quarto-caption-precedence.docx",
+      execute_dir = "temp-artefacts",
+      debug = FALSE, quiet = TRUE
+    )
+  )
+  docx_dir <- tempfile("quarto-docx-")
+  dir.create(docx_dir)
+  on.exit(unlink(docx_dir, recursive = TRUE), add = TRUE)
+  utils::unzip(
+    "quarto-caption-precedence.docx",
+    files = "word/document.xml",
+    exdir = docx_dir
+  )
+  word_xml <- paste(
+    readLines(file.path(docx_dir, "word/document.xml"), warn = FALSE),
+    collapse = "\n"
+  )
+  expect_match(word_xml, "Caption from Quarto", fixed = TRUE)
+  expect_match(word_xml, "tbl-quarto", fixed = TRUE)
+  expect_false(grepl("Caption from Huxtable", word_xml, fixed = TRUE))
+  expect_false(grepl("tbl-huxtable", word_xml, fixed = TRUE))
 })
 
 

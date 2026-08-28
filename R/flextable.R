@@ -182,9 +182,10 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   }
 
   # set caption
-  if (!is.null(caption(x)) & !is.na(caption(x))) {
+  caption_data <- resolve_caption(x, "docx")
+  if (!is.null(caption_data$text) && !is.na(caption_data$text)) {
     if (flextable_version >= "0.5.5") {
-      ft <- flextable::set_caption(ft, caption(x))
+      ft <- flextable::set_caption(ft, caption_data$text)
     } else {
       message(
         "Use of table captions requires \"flextable\" package version >= 0.5.5.",

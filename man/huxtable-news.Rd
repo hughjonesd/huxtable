@@ -31,6 +31,9 @@ LaTeX command definitions are now registered as document dependencies
 and emitted once. Outside those documents, \code{to_html()},
 \code{print_html()}, \code{to_latex()} and \code{print_latex()} include them by
 default; use \code{dependencies = FALSE} to omit them.
+\item Bugfix: Quarto table captions and labels now override captions and
+labels set on a huxtable in HTML, PDF, Typst and Word output. Huxtable
+warns when both mechanisms explicitly set the same property.
 }
 }
 

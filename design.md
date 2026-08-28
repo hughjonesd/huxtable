@@ -80,11 +80,13 @@ command definitions by default so their output remains standalone.
 
 Caption and label behavior shared by the renderers is implemented in
 `R/captions.R`. `resolve_caption()` returns caption text, the resolved label,
-and whether bookdown syntax embedded that label in the caption. LaTeX, HTML,
-Markdown and Typst consume this result, while each renderer remains responsible
-for its own escaping, sizing and output markup. Simpler backends such as screen,
-RTF and Excel use the raw caption property and the shared horizontal and
-vertical position helpers.
+whether bookdown syntax embedded that label in the caption, and whether Quarto
+owns either property. Quarto cell options take precedence independently over
+explicit huxtable captions and labels; conflicts produce a warning. LaTeX,
+HTML, Markdown, Typst and Word consume the resolved values, while each renderer
+remains responsible for its own escaping, sizing and output markup. Simpler
+backends such as screen, RTF and Excel use the raw caption property and the
+shared horizontal and vertical position helpers.
 
 Automatic labels are based on the knitr chunk label. Labels already emitted in
 the current chunk are stored in a package-internal cache keyed by the chunk

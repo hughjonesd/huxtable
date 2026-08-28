@@ -299,8 +299,8 @@ set_breakable <- function(ht, value) {
 #' @details
 #' Captions are not escaped. See the example for a workaround.
 #'
-#' Table captions set via the Quarto `tbl-cap` chunk option override captions set
-#' by this mechanism.
+#' Table captions set via the Quarto `tbl-cap` or `tbl-subcap` chunk options
+#' override captions set by this mechanism. A warning is issued if both are set.
 #'
 #' @family caption properties
 #'
@@ -428,6 +428,9 @@ set_table_environment <- function(ht, value) {
 #' with `"tab:"`; if it doesn't, the `"tab:"` prefix will be added
 #' automatically. To turn off this behaviour, set
 #' `options(huxtable.bookdown = FALSE)`.
+#'
+#' Quarto table labels override labels set by this mechanism. A warning is
+#' issued if both are set.
 #'
 #' @examples
 #' set_label(jams, "tab:mytable")

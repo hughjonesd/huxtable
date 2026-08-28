@@ -104,6 +104,26 @@ test_that("flextable maps breakable to Word pagination", {
 })
 
 
+test_that("Bugfix: Quarto captions override huxtable captions in Word", {
+  skip_if_not_installed("flextable")
+  skip_if_not_installed("knitr")
+  old_current <- knitr::opts_current$get()
+  old_knit <- knitr::opts_knit$get()
+  on.exit({
+    knitr::opts_current$restore(old_current)
+    knitr::opts_knit$restore(old_knit)
+  })
+  knitr::opts_knit$set(quarto.version = "1.7.0")
+  knitr::opts_current$set(label = "tbl-quarto", `tbl-cap` = "Quarto caption")
+
+  expect_warning(
+    ft <- as_flextable(set_caption(hux(a = 1), "Huxtable caption")),
+    "caption"
+  )
+  expect_null(ft$caption$value)
+})
+
+
 test_that("0-row/0-column huxtables work", {
   h_nrow0 <- hux(a = character(0), b = character(0), add_colnames = FALSE)
   h_ncol0 <- hux(a = 1:2)[, FALSE]

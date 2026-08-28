@@ -61,15 +61,20 @@ use_bookdown_style_captions <- function() {
 #'
 #' @param ht A huxtable.
 #' @param format Output format.
-#' @return A list with three elements:
+#' @return A list with five elements:
 #' * `text`: caption text, including bookdown label syntax when required, or
 #'   `NA` when there is no caption;
 #' * `label`: the explicit or automatically generated table label, or `NA`;
-#' * `label_in_caption`: whether `text` contains the label in bookdown syntax.
+#' * `label_in_caption`: whether `text` contains the label in bookdown syntax;
+#' * `quarto_caption`: whether Quarto owns the table caption;
+#' * `quarto_label`: whether Quarto owns the table label.
 #' @noRd
-resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
+resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx")) {
   format <- match.arg(format)
+  cap <- caption(ht)
   lab <- label(ht)
+  explicit_cap <- !is.na(cap) && nzchar(cap)
+  explicit_lab <- !is.na(lab) && nzchar(lab)
 
   has_knitr <- requireNamespace("knitr", quietly = TRUE)
   chunk_options <- if (has_knitr) knitr::opts_current$get() else NULL
@@ -77,6 +82,28 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
   if (length(chunk_label) > 0 && grepl("^unnamed-chunk", chunk_label)) {
     chunk_label <- NULL
   }
+
+  is_quarto <- using_quarto()
+  quarto_caption <- is_quarto &&
+    (!is.null(chunk_options[["tbl-cap"]]) || !is.null(chunk_options[["tbl-subcap"]]))
+  quarto_label <- is_quarto &&
+    !is.null(chunk_label) &&
+    nzchar(chunk_label) &&
+    (quarto_caption || grepl("^tbl-", chunk_label))
+
+  conflicts <- character()
+  if (quarto_caption && explicit_cap) conflicts <- c(conflicts, "caption")
+  if (quarto_label && explicit_lab) conflicts <- c(conflicts, "label")
+  if (length(conflicts) > 0) {
+    fields <- paste(conflicts, collapse = " and ")
+    warning(
+      "Quarto table options override the huxtable ", fields, ".",
+      call. = FALSE
+    )
+  }
+
+  if (quarto_caption) cap <- NA_character_
+  if (quarto_label) lab <- NA_character_
 
   same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&
     rlang::is_reference(chunk_options, huxtable_env$autolabel_chunk$options)
@@ -95,6 +122,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
   if (is.null(used_labels)) used_labels <- character()
 
   if (is.na(lab) &&
+    !quarto_label &&
     getOption("huxtable.autolabel", TRUE) &&
     !is.null(chunk_label)) {
     base_label <- paste0("tab:", chunk_label)
@@ -106,35 +134,15 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
     }
   }
 
-  if (!is.null(chunk_label) &&
-    using_quarto("1.4") &&
-    getOption(
-      "huxtable.knitr_output_format",
-      guess_knitr_output_format()
-    ) == "latex"
-  ) {
-    msg <- paste(
-      "quarto cell labels do not work with huxtable in TeX for quarto ",
-      "version 1.4 or above.",
-      "Use huxtable labels instead via `label()` or `set_label()`.",
-      "See `?huxtable-FAQ` for more details.",
-      sep = "\n"
-    )
-    if (grepl("^tbl-", chunk_label)) {
-      stop(msg)
-    } else {
-      warning(msg)
-    }
-  }
-
   if (!is.null(chunk_label) && !is.na(lab) && nzchar(lab)) {
     huxtable_env$autolabel_cache[[chunk_label]] <- unique(c(used_labels, lab))
   }
 
-  cap <- caption(ht)
   label_in_caption <- FALSE
 
-  if (!is.na(lab) && nzchar(lab) && use_bookdown_style_captions()) {
+  if (!is.na(lab) && nzchar(lab) &&
+    format != "docx" &&
+    use_bookdown_style_captions()) {
     bookdown_label <- if (grepl("^tab:", lab)) lab else paste0("tab:", lab)
     # Bookdown needs a caption, even an empty one, to carry the label.
     if (is.na(cap)) cap <- ""
@@ -146,5 +154,11 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst")) {
     label_in_caption <- TRUE
   }
 
-  list(text = cap, label = lab, label_in_caption = label_in_caption)
+  list(
+    text = cap,
+    label = lab,
+    label_in_caption = label_in_caption,
+    quarto_caption = quarto_caption,
+    quarto_label = quarto_label
+  )
 }
