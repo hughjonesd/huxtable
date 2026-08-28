@@ -61,13 +61,11 @@ use_bookdown_style_captions <- function() {
 #'
 #' @param ht A huxtable.
 #' @param format Output format.
-#' @return A list with five elements:
+#' @return A list with three elements:
 #' * `text`: caption text, including bookdown label syntax when required, or
 #'   `NA` when there is no caption;
 #' * `label`: the explicit or automatically generated table label, or `NA`;
-#' * `label_in_caption`: whether `text` contains the label in bookdown syntax;
-#' * `quarto_caption`: whether Quarto owns the table caption;
-#' * `quarto_label`: whether Quarto owns the table label.
+#' * `label_in_caption`: whether `text` contains the label in bookdown syntax.
 #' @noRd
 resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx")) {
   format <- match.arg(format)
@@ -154,11 +152,5 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
     label_in_caption <- TRUE
   }
 
-  list(
-    text = cap,
-    label = lab,
-    label_in_caption = label_in_caption,
-    quarto_caption = quarto_caption,
-    quarto_label = quarto_label
-  )
+  list(text = cap, label = lab, label_in_caption = label_in_caption)
 }

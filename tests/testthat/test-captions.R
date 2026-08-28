@@ -83,8 +83,6 @@ test_that("Bugfix: Quarto captions and labels override huxtable values", {
   )
   expect_true(is.na(caption_data$text))
   expect_true(is.na(caption_data$label))
-  expect_true(caption_data$quarto_caption)
-  expect_true(caption_data$quarto_label)
 
   expect_no_warning(caption_data <- resolve_caption(hux(a = 1), "html"))
   expect_true(is.na(caption_data$text))
@@ -119,22 +117,17 @@ test_that("Quarto caption and label ownership is resolved independently", {
   )
   expect_true(is.na(caption_data$text))
   expect_equal(caption_data$label, "tab:huxtable")
-  expect_true(caption_data$quarto_caption)
-  expect_false(caption_data$quarto_label)
 
   knitr::opts_current$restore(old_current)
   knitr::opts_current$set(label = "tbl-quarto")
   caption_data <- resolve_caption(set_caption(hux(a = 1), "Huxtable caption"), "html")
   expect_equal(caption_data$text, "Huxtable caption")
   expect_true(is.na(caption_data$label))
-  expect_false(caption_data$quarto_caption)
-  expect_true(caption_data$quarto_label)
 
   knitr::opts_current$restore(old_current)
   knitr::opts_current$set(label = "analysis")
   caption_data <- resolve_caption(set_label(hux(a = 1), "tab:huxtable"), "html")
   expect_equal(caption_data$label, "tab:huxtable")
-  expect_false(caption_data$quarto_label)
 
   knitr::opts_current$restore(old_current)
   knitr::opts_current$set(
@@ -142,8 +135,7 @@ test_that("Quarto caption and label ownership is resolved independently", {
     `tbl-subcap` = c("First", "Second")
   )
   caption_data <- resolve_caption(hux(a = 1), "html")
-  expect_true(caption_data$quarto_caption)
-  expect_true(caption_data$quarto_label)
+  expect_true(is.na(caption_data$text))
   expect_true(is.na(caption_data$label))
 })
 
