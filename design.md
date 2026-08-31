@@ -36,6 +36,10 @@ without a table backdrop resolve it into otherwise unfilled cells with
 The table-level `table_notes` property is a character vector stored separately
 from the cell matrix, so notes do not affect table dimensions. Each renderer
 places notes beneath the table using the format's closest available construct.
+The cell-level `cell_note` property stores referenced note text. At render time,
+`resolve_cell_notes()` assigns marks to distinct notes in visible-cell order,
+using the table-level `note_symbol` scheme. Renderers append these referenced
+notes after unreferenced table notes.
 
 ## Rendering pipeline
 Cell contents are cleaned and formatted before rendering by 

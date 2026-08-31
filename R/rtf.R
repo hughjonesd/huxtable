@@ -251,6 +251,16 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
   }
   caption_par <- if (is.na(caption)) "" else sprintf("{\\pard %s %s {%s} \\par}", cap_align, cap_width, caption)
   notes <- sanitize(table_notes(ht), "rtf")
+  cell_notes <- resolve_cell_notes(ht)
+  if (length(cell_notes$notes) > 0L) {
+    note_markers <- sanitize(cell_notes$markers, "rtf")
+    note_text <- sanitize(cell_notes$notes, "rtf")
+    notes <- c(
+      notes,
+      paste0("{\\super ", note_markers, "\\nosupersub} ", note_text)
+    )
+  }
+  notes <- c(utf8_to_rtf(matrix(notes, ncol = 1L)))
   notes_par <- paste0("{\\pard \\ql {", notes, "} \\par}", collapse = "\n")
   # \ri<twips> and \li<twips> are indents
   # or use a "frame", \absw<twips> and \nowrap to stop text wrapping around it

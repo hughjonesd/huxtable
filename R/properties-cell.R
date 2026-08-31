@@ -1076,3 +1076,56 @@ set_font <- function(ht, row, col, value) {
 map_font <- function(ht, row, col, fn) {
   prop_set(ht, "font", row, col, fn = fn, check_fun = is.character)
 }
+
+
+#' Set notes referenced from cells
+#'
+#' `cell_note` is a cell property containing plain-text notes. When a huxtable
+#' is rendered, cells with notes receive reference marks and the distinct notes
+#' are printed beneath any unreferenced [table_notes()]. Identical note text in
+#' multiple cells receives the same mark.
+#'
+#' @inheritParams hux_prop_params
+#' @param value A character vector or matrix. Use `NA` or `""` for no note.
+#' @return `cell_note()` returns a character matrix. The replacement function,
+#'   `set_cell_note()` and `map_cell_note()` return the modified huxtable.
+#'
+#' @details
+#' Reference marks are assigned when the huxtable is rendered, in row-major
+#' order over visible cells. Subsetting a huxtable therefore does not modify its
+#' notes. In merged ranges, only a note on the top-left visible cell is used.
+#'
+#' HTML, LaTeX, Typst and RTF use superscript marks. Word, Excel, Markdown and
+#' screen output use bracketed marks.
+#'
+#' Use [note_symbol()] to choose numeric, Roman, alphabetic or custom marks.
+#'
+#' @examples
+#' ht <- hux(a = 1:2, b = 3:4)
+#' ht <- set_cell_note(ht, 1:2, 1, "Measured value")
+#' cell_note(ht)
+#'
+#' @name cell_note
+NULL
+
+#' @rdname cell_note
+#' @export
+cell_note <- function(ht) prop_get(ht, "cell_note")
+
+#' @rdname cell_note
+#' @export
+`cell_note<-` <- function(ht, value) {
+  prop_set(ht, "cell_note", value = value, check_fun = is.character)
+}
+
+#' @rdname cell_note
+#' @export
+set_cell_note <- function(ht, row, col, value) {
+  prop_set(ht, "cell_note", row, col, value = value, check_fun = is.character)
+}
+
+#' @rdname cell_note
+#' @export
+map_cell_note <- function(ht, row, col, fn) {
+  prop_set(ht, "cell_note", row, col, fn = fn, check_fun = is.character)
+}

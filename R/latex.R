@@ -110,10 +110,21 @@ to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
   cap <- if (cap_top) c(cap, "") else c("", cap)
 
   notes <- sanitize(table_notes(ht), "latex")
-  notes_tex <- if (length(notes) > 0L) {
+  cell_notes <- resolve_cell_notes(ht)
+  note_items <- if (length(notes) > 0L) paste0("\\item[] ", notes) else character()
+  if (length(cell_notes$notes) > 0L) {
+    note_items <- c(
+      note_items,
+      paste0(
+        "\\item[", sanitize(cell_notes$markers, "latex"), "] ",
+        sanitize(cell_notes$notes, "latex")
+      )
+    )
+  }
+  notes_tex <- if (length(note_items) > 0L) {
     paste0(
       "\n\\begin{tablenotes}[flushleft]\n",
-      paste0("\\item[] ", notes, collapse = "\n"),
+      paste(note_items, collapse = "\n"),
       "\n\\end{tablenotes}"
     )
   } else {
@@ -126,7 +137,7 @@ to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
 
   res <- if (is.na(caption_width(ht))) {
     nest_strings(table_env, pos_text, tpt, cap, tabular)
-  } else if (length(notes) > 0L) {
+  } else if (length(note_items) > 0L) {
     nest_strings(table_env, cap, pos_text, tpt, tabular)
   } else {
     nest_strings(table_env, cap, pos_text, tabular)
@@ -316,7 +327,11 @@ build_tabular <- function(ht, include_caption = TRUE) {
   ## inner_cell has padding, alignment, wrap and row_height TeX added
   ## inner_cell data comes from the 'display cell' at the top left of the display area
 
-  inner_cell_bldc <- clean_contents(ht, output_type = "latex")[bl_dc]
+  inner_cell_bldc <- clean_contents(
+    ht,
+    output_type = "latex",
+    include_cell_notes = include_caption
+  )[bl_dc]
   fs_bldc <- font_size(ht)[bl_dc]
   line_space_bldc <- round(fs_bldc * 1.2, 2)
   has_fs_bldc <- !is.na(fs_bldc)
@@ -566,7 +581,22 @@ build_tabular <- function(ht, include_caption = TRUE) {
     pos <- c(left = "l", center = "c", right = "r")[[position(ht)]]
     tenv_tex[1] <- sprintf("\\begin{longtable}[%s]", pos)
     notes <- if (include_caption) sanitize(table_notes(ht), "latex") else character()
-    last_footer <- if (length(notes) > 0L) {
+    cell_notes <- if (include_caption) {
+      resolve_cell_notes(ht)
+    } else {
+      list(markers = character(), notes = character())
+    }
+    note_items <- if (length(notes) > 0L) paste0("\\item[] ", notes) else character()
+    if (length(cell_notes$notes) > 0L) {
+      note_items <- c(
+        note_items,
+        paste0(
+          "\\item[", sanitize(cell_notes$markers, "latex"), "] ",
+          sanitize(cell_notes$notes, "latex")
+        )
+      )
+    }
+    last_footer <- if (length(note_items) > 0L) {
       "\\insertTableNotes\n\\endlastfoot"
     } else {
       ""
@@ -616,12 +646,11 @@ build_tabular <- function(ht, include_caption = TRUE) {
       "{\n\\setlength{\\LTcapwidth}{", cap_width, "}\n",
       tenv_tex[1], colspec_top, table_body, tenv_tex[2], "\n}"
     )
-    if (length(notes) > 0L) {
-      note_items <- paste0("\\item[] ", notes, collapse = "\n")
+    if (length(note_items) > 0L) {
       res <- paste0(
         "\\begin{ThreePartTable}\n",
         "\\begin{TableNotes}[flushleft]\n",
-        note_items,
+        paste(note_items, collapse = "\n"),
         "\n\\end{TableNotes}\n",
         res,
         "\n\\end{ThreePartTable}"

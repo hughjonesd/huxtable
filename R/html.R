@@ -83,6 +83,18 @@ to_html <- function(ht, dependencies = TRUE, ...) {
   cell_html <- build_cell_html(ht)
   row_html <- build_row_html(ht, cell_html)
   notes <- sanitize(table_notes(ht), "html")
+  cell_notes <- resolve_cell_notes(ht)
+  if (length(cell_notes$notes) > 0L) {
+    note_markers <- sanitize(cell_notes$markers, "html")
+    note_text <- sanitize(cell_notes$notes, "html")
+    notes <- c(
+      notes,
+      paste0(
+        '<sup class="huxtable-note-ref">', note_markers, "</sup> ",
+        note_text
+      )
+    )
+  }
   notes_html <- ""
   if (length(notes) > 0L) {
     note_rows <- sprintf(
