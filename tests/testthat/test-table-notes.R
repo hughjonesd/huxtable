@@ -95,6 +95,11 @@ test_that("text outputs render table notes", {
   expect_match(html, "colspan=\"2\">Note: A &amp; B", fixed = TRUE)
   expect_match(html, "1<sup class=\"huxtable-note-ref\">+</sup>", fixed = TRUE)
   expect_match(html, "<sup class=\"huxtable-note-ref\">+</sup> Shared_note", fixed = TRUE)
+  css <- huxtable_html_css()
+  expect_match(css, ".huxtable-note {", fixed = TRUE)
+  expect_match(css, "padding-bottom: 2pt;", fixed = TRUE)
+  expect_match(css, "padding-top: 2pt;", fixed = TRUE)
+  expect_match(css, "text-align: left;", fixed = TRUE)
 
   latex <- to_latex(ht, dependencies = FALSE)
   expect_match(latex, "\\begin{tablenotes}[flushleft]", fixed = TRUE)
@@ -106,17 +111,30 @@ test_that("text outputs render table notes", {
   typst <- to_typst(ht)
   expect_match(typst, "table.footer(", fixed = TRUE)
   expect_match(typst, "repeat: false", fixed = TRUE)
-  expect_match(typst, "table.cell(colspan: 2)[Source: x\\_y]", fixed = TRUE)
+  expect_match(typst, "table.cell(colspan: 2, align: left)[Source: x\\_y]", fixed = TRUE)
   expect_match(typst, "1#super[\\+]", fixed = TRUE)
-  expect_match(typst, "table.cell(colspan: 2)[#super[\\+]", fixed = TRUE)
+  expect_match(typst, "table.cell(colspan: 2, align: left)[#super[\\+]", fixed = TRUE)
 
   expect_match(to_md(ht), "Note: A & B\n\nSource: x_y", fixed = TRUE)
   expect_match(to_md(ht), "1[+]", fixed = TRUE)
   expect_match(to_md(ht), "[+] Shared_note", fixed = TRUE)
-  expect_match(to_rtf(ht), "{\\pard \\ql {Note: A & B} \\par}", fixed = TRUE)
-  expect_match(to_rtf(ht), "1{\\super +\\nosupersub}", fixed = TRUE)
+  rtf <- to_rtf(ht)
+  expect_match(rtf, "{\\pard \\ql \\li2160\\ri2160 {Note: A & B} \\par}", fixed = TRUE)
+  expect_match(rtf, "1{\\super +\\nosupersub}", fixed = TRUE)
   expect_match(to_screen(ht, color = FALSE), "Source: x_y", fixed = TRUE)
   expect_match(to_screen(ht, color = FALSE), "[+] Shared_note", fixed = TRUE)
+
+  centered <- set_position(set_table_notes(hux(a = 1), "Left note"), "center")
+  expect_match(to_screen(centered, color = FALSE), "\nLeft note\n", fixed = TRUE)
+})
+
+
+test_that("RTF note paragraphs match the table edges", {
+  ht <- set_table_notes(hux(a = 1, add_colnames = FALSE), "Note")
+
+  expect_match(to_rtf(ht), "\\li2160\\ri2160 {Note}", fixed = TRUE)
+  expect_match(to_rtf(set_position(ht, "left")), "\\li0\\ri4320 {Note}", fixed = TRUE)
+  expect_match(to_rtf(set_position(ht, "right")), "\\li4320\\ri0 {Note}", fixed = TRUE)
 })
 
 
@@ -153,6 +171,7 @@ test_that("flextable uses its footer for table notes", {
 
   expect_equal(nrow(ft$footer$dataset), 3L)
   expect_equal(ft$footer$dataset[[1]], c("Note one", "Note two", "[1] Cell note"))
+  expect_true(all(ft$footer$styles$pars$text.align$data == "left"))
 })
 
 

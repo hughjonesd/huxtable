@@ -137,6 +137,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
     table_width <- 0.5
   }
 
+  text_width_twips <- 6 * 72 * 20
   col_width <- col_width(ht)
   # if it's pt, make it numeric and use it as is (in twips)
   if (all(grepl("pt", col_width, fixed = TRUE))) {
@@ -149,12 +150,12 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
       col_width <- rep(1 / ncol(ht), ncol(ht))
     }
     # assumed 6 inches wide, 1 inch = 72 pt, 1 pt = 20 twips:
-    text_width_twips <- 6 * 72 * 20
     col_width <- col_width * text_width_twips * table_width
   }
 
   # \cellx specifies the position of the RH cell edge:
   right_edges <- ceiling(cumsum(col_width))
+  table_width_twips <- tail(right_edges, 1L)
 
   cellx_def <- sprintf("\\cellx%d", right_edges)
 
@@ -261,9 +262,17 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
     )
   }
   notes <- c(utf8_to_rtf(matrix(notes, ncol = 1L)))
-  notes_par <- paste0("{\\pard \\ql {", notes, "} \\par}", collapse = "\n")
-  # \ri<twips> and \li<twips> are indents
-  # or use a "frame", \absw<twips> and \nowrap to stop text wrapping around it
+  spare_width <- max(text_width_twips - table_width_twips, 0)
+  note_indents <- switch(position_no_wrap(ht),
+    left = c(0, spare_width),
+    center = c(floor(spare_width / 2), ceiling(spare_width / 2)),
+    right = c(spare_width, 0)
+  )
+  notes_par <- paste0(
+    "{\\pard \\ql \\li", note_indents[[1]], "\\ri", note_indents[[2]],
+    " {", notes, "} \\par}",
+    collapse = "\n"
+  )
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = "\n")

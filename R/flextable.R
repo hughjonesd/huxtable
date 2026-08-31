@@ -193,6 +193,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
   )
   if (length(notes) > 0L) {
     ft <- flextable::add_footer_lines(ft, values = notes, top = FALSE)
+    ft <- flextable::align(ft, align = "left", part = "footer")
   }
 
   # set caption

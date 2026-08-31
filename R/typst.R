@@ -80,7 +80,7 @@ to_typst <- function(ht, ...) {
   footer_block <- ""
   if (length(notes) > 0L) {
     note_cells <- sprintf(
-      "    table.cell(colspan: %d)[%s]",
+      "    table.cell(colspan: %d, align: left)[%s]",
       ncol(ht), notes
     )
     footer_block <- paste0(
