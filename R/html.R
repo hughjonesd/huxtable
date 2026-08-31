@@ -82,8 +82,21 @@ to_html <- function(ht, dependencies = TRUE, ...) {
   cols_html <- build_colgroup(ht)
   cell_html <- build_cell_html(ht)
   row_html <- build_row_html(ht, cell_html)
+  notes <- clean_table_notes(ht, "html")
+  notes_html <- ""
+  if (length(notes) > 0L) {
+    note_rows <- sprintf(
+      '<tr><td class="huxtable-cell huxtable-note" colspan="%d">%s</td></tr>',
+      ncol(ht), notes
+    )
+    notes_html <- paste0(
+      "<tfoot class=\"huxtable-notes\">\n",
+      paste0(note_rows, collapse = "\n"),
+      "\n</tfoot>\n"
+    )
+  }
 
-  table_html <- paste0(table_start, cols_html, row_html, "</table>\n")
+  table_html <- paste0(table_start, cols_html, row_html, notes_html, "</table>\n")
   if (dependencies) paste0(huxtable_html_css(), table_html) else table_html
 }
 

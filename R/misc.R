@@ -2,10 +2,14 @@
 NULL
 
 
-#' Add a row with a footnote
+#' Add a row with a footnote (compatibility function)
 #'
 #' This adds a single row at the bottom. The first cell contains the footnote; it spans
 #' all table columns and has an optional border above.
+#'
+#' `add_footnote()` is retained for compatibility only and is soft-deprecated.
+#' For new code, use [add_table_note()], which stores notes separately from table
+#' cells and does not change the number of rows.
 #' @param ht A huxtable.
 #' @param text Text for the footnote.
 #' @param border Width of the footnote's top border. Set to 0 for no border, or
@@ -37,6 +41,21 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
   ht <- set_number_format(ht, nr, 1, number_format)
 
   ht
+}
+
+
+#' Prepare table notes for an output format
+#'
+#' @param ht A huxtable.
+#' @param output_type Output format understood by [sanitize()], or `"plain"`.
+#' @return A character vector.
+#' @noRd
+clean_table_notes <- function(ht, output_type = "plain") {
+  notes <- table_notes(ht)
+  if (output_type %in% c("html", "latex", "rtf", "typst")) {
+    notes <- sanitize(notes, type = output_type)
+  }
+  notes
 }
 
 

@@ -18,6 +18,10 @@ tables are implemented in LaTeX via the \code{longtable} package, meaning
 this is a new LaTeX package dependency.
 \item New table property \code{table_background_color()} sets the background
 color of a table, while allowing individual cells to override it.
+\item New table property \code{table_notes()} stores notes separately from table
+cells and prints them beneath the table in every output format.
+\code{add_footnote()} is retained for compatibility only and is
+soft-deprecated in favour of \code{add_table_note()}.
 \item Multiple huxtables printed in one knitr chunk now get unique automatic
 labels like “chunk”, “chunk-2”, “chunk-3” etc.
 \item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of

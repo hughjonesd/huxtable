@@ -2,7 +2,7 @@
 % Please edit documentation in R/misc.R
 \name{add_footnote}
 \alias{add_footnote}
-\title{Add a row with a footnote}
+\title{Add a row with a footnote (compatibility function)}
 \usage{
 add_footnote(ht, text, border = 0.8, number_format = NA, ...)
 }
@@ -24,6 +24,11 @@ The modified huxtable
 \description{
 This adds a single row at the bottom. The first cell contains the footnote; it spans
 all table columns and has an optional border above.
+}
+\details{
+\code{add_footnote()} is retained for compatibility only and is soft-deprecated.
+For new code, use \code{\link[=add_table_note]{add_table_note()}}, which stores notes separately from table
+cells and does not change the number of rows.
 }
 \examples{
 jams <- add_footnote(

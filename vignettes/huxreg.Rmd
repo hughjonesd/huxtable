@@ -183,9 +183,9 @@ huxreg(
 ```
 
 
-Here we also changed the footnote, using `note`. If `note` contains the string
+Here we also changed the table note, using `note`. If `note` contains the string
 `"{stars}"` it will be replaced by a description of the significance stars used.
-If you don't want a footnote, just set `note = NULL`.
+If you don't want a table note, just set `note = NULL`.
 
 Alternatively, you can display confidence intervals. Use `ci_level` to set the
 confidence level for the interval, then use `{conf.low}` and `{conf.high}` in
@@ -260,4 +260,3 @@ models[["4 gears"]] <- tidy_replace(mnl, tidied[tidied$y.level == 4, ])
 models[["5 gears"]] <- tidy_replace(mnl, tidied[tidied$y.level == 5, ])
 huxreg(models, statistics = "AIC")
 ```
-

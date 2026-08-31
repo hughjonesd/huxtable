@@ -221,9 +221,8 @@ aggregate_statistics <- function(models, glance_args = NULL, statistics = NULL) 
 #' @param borders Thickness of inner horizontal borders. Set to 0 for no borders.
 #' @param outer_borders Thickness of outer (top and bottom) horizontal borders.
 #'   Set to 0 for no borders.
-#' @param note Footnote for bottom cell, which spans all columns. \code{{stars}}
-#'   will be replaced by a note about significance stars. Set to `NULL` for no
-#'   footnote.
+#' @param note Table note printed beneath the table. \code{{stars}} will be
+#'   replaced by a note about significance stars. Set to `NULL` for no note.
 #' @param statistics A vector of summary statistics to display. Set to `NULL` to
 #'   show all available statistics. To change display names, name the
 #'   `statistics` vector: `c("Displayed title" = "statistic_name", ...)`
@@ -419,10 +418,7 @@ huxreg <- function(...,
     stars <- if (is.null(stars)) "" else paste0(names(stars), " p < ", stars, collapse = "; ")
     note <- gsub("%stars%", stars, note)
     note <- glue::glue(note)
-    result <- add_footnote(result, note, border = NULL)
-    result <- set_wrap(result, final(), 1, TRUE)
-    result <- set_align(result, final(), 1, "left")
-    result <- set_number_format(result, final(), 1, NA)
+    result <- add_table_note(result, as.character(note))
   }
 
   return(result)

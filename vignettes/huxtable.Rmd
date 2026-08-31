@@ -221,6 +221,8 @@ and so on. Let's go through them line by line.
   a *table property* which applies to the whole table: the width.
 * The last line, `set_caption(...)`, sets another *table property*: the 
   table caption.
+* Table notes are also table properties. Use `set_table_notes()` to replace
+  them or `add_table_note()` to append a note without adding a data row.
 
 By the way, I've used tidyverse style to set these properties, chaining calls
 together in a pipe. You can also set properties directly. Here's a set of calls
@@ -321,7 +323,7 @@ props[["Cell"]] <- sort(c(
 props[["Row"]]    <- c("row_height", "header_rows")
 props[["Column"]] <- c("col_width", "header_cols")
 props[["Table"]]  <- sort(c("width", "height", "position", "caption", 
-  "caption_pos", "caption_width", "breakable", "tabular_environment",
+  "caption_pos", "caption_width", "table_notes", "breakable", "tabular_environment",
   "table_environment", "label", "latex_float"))
 
 maxl <- max(sapply(props, length))

@@ -67,11 +67,27 @@ to_typst <- function(ht, ...) {
     row_strings <- row_strings[!hr]
   }
   row_strings <- row_strings[nzchar(row_strings)]
+  notes <- clean_table_notes(ht, "typst")
+  footer_block <- ""
+  if (length(notes) > 0L) {
+    note_cells <- sprintf(
+      "    table.cell(colspan: %d)[%s]",
+      ncol(ht), notes
+    )
+    footer_block <- paste0(
+      "  table.footer(\n",
+      "    repeat: false,\n",
+      paste0(note_cells, collapse = ",\n"),
+      "\n  ),\n"
+    )
+  }
 
   result <- paste0(
     table_start,
     header_block,
     paste0("  ", row_strings, collapse = ",\n"),
+    if (nzchar(footer_block)) ",\n" else "",
+    footer_block,
     "\n)"
   )
 

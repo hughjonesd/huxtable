@@ -16,6 +16,10 @@
 .huxtable-header {
   font-weight: bold;
 }
+.huxtable-note {
+  border: 0;
+  text-align: left;
+}
 .huxtable tr {
   break-inside: avoid;
   page-break-inside: avoid;

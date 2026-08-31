@@ -33,6 +33,13 @@ table, and non-breakable LaTeX tables use a zero-padding color box. Backends
 without a table backdrop resolve it into otherwise unfilled cells with
 `background_color_with_fallback()`.
 
+The table-level `table_notes` property is a character vector stored separately
+from the cell matrix, so notes do not affect table dimensions. Renderers map it
+to their closest structural equivalent: HTML `<tfoot>`, LaTeX `tablenotes`,
+Typst and flextable footers, adjacent paragraphs in RTF, Markdown and screen
+output, and merged worksheet cells in Excel. Breakable LaTeX tables use
+`threeparttablex` so notes appear after the final part of the longtable.
+
 ## Rendering pipeline
 Cell contents are cleaned and formatted before rendering by 
 `clean_contents()`, which applies number formatting, markdown rendering, 
