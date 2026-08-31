@@ -2,10 +2,14 @@
 NULL
 
 
-#' Add a row with a footnote
+#' Add a row with a footnote (compatibility function)
 #'
 #' This adds a single row at the bottom. The first cell contains the footnote; it spans
 #' all table columns and has an optional border above.
+#'
+#' `add_footnote()` is retained for compatibility only and is soft-deprecated.
+#' For new code, use [add_table_note()], which stores notes separately from table
+#' cells and does not change the number of rows.
 #' @param ht A huxtable.
 #' @param text Text for the footnote.
 #' @param border Width of the footnote's top border. Set to 0 for no border, or
@@ -38,7 +42,6 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 
   ht
 }
-
 
 
 #' Escape text for various formats

@@ -109,10 +109,25 @@ to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
   cap_top <- get_caption_vpos(ht) == "top"
   cap <- if (cap_top) c(cap, "") else c("", cap)
 
-  tpt <- c("\\begin{threeparttable}\n", "\n\\end{threeparttable}")
+  notes <- sanitize(table_notes(ht), "latex")
+  notes_tex <- if (length(notes) > 0L) {
+    paste0(
+      "\n\\begin{tablenotes}[flushleft]\n",
+      paste0("\\item[] ", notes, collapse = "\n"),
+      "\n\\end{tablenotes}"
+    )
+  } else {
+    ""
+  }
+  tpt <- c(
+    "\\begin{threeparttable}\n",
+    paste0(notes_tex, "\n\\end{threeparttable}")
+  )
 
   res <- if (is.na(caption_width(ht))) {
     nest_strings(table_env, pos_text, tpt, cap, tabular)
+  } else if (length(notes) > 0L) {
+    nest_strings(table_env, cap, pos_text, tpt, tabular)
   } else {
     nest_strings(table_env, cap, pos_text, tabular)
   }
@@ -550,6 +565,12 @@ build_tabular <- function(ht, include_caption = TRUE) {
   if (breakable(ht)) {
     pos <- c(left = "l", center = "c", right = "r")[[position(ht)]]
     tenv_tex[1] <- sprintf("\\begin{longtable}[%s]", pos)
+    notes <- if (include_caption) sanitize(table_notes(ht), "latex") else character()
+    last_footer <- if (length(notes) > 0L) {
+      "\\insertTableNotes\n\\endlastfoot"
+    } else {
+      ""
+    }
 
     first_nonheader <- match(FALSE, header_rows(ht), nomatch = nrow(ht) + 1L)
     header_count <- first_nonheader - 1L
@@ -565,9 +586,12 @@ build_tabular <- function(ht, include_caption = TRUE) {
         "\\endfirsthead",
         header_body,
         "\\endhead",
+        last_footer,
         paste(body_rows, collapse = "\n"),
         sep = "\n"
       )
+    } else if (nzchar(last_footer)) {
+      table_body <- paste(last_footer, table_body, sep = "\n")
     }
 
     cap <- if (include_caption) build_latex_caption(ht, longtable = TRUE) else ""
@@ -592,6 +616,17 @@ build_tabular <- function(ht, include_caption = TRUE) {
       "{\n\\setlength{\\LTcapwidth}{", cap_width, "}\n",
       tenv_tex[1], colspec_top, table_body, tenv_tex[2], "\n}"
     )
+    if (length(notes) > 0L) {
+      note_items <- paste0("\\item[] ", notes, collapse = "\n")
+      res <- paste0(
+        "\\begin{ThreePartTable}\n",
+        "\\begin{TableNotes}[flushleft]\n",
+        note_items,
+        "\n\\end{TableNotes}\n",
+        res,
+        "\n\\end{ThreePartTable}"
+      )
+    }
   } else {
     res <- paste0(tenv_tex[1], width_spec, colspec_top, table_body, tenv_tex[2])
   }

@@ -86,7 +86,9 @@ test_that("huxreg merges coefficients with same names", {
 test_that("huxreg bold_signif works", {
   lm1 <- lm(Petal.Length ~ Sepal.Length, iris)
   expect_silent(hr1 <- huxreg(lm1, bold_signif = 0.05))
-  expect_identical(unname(bold(hr1)), matrix(c(rep(FALSE, 11), rep(TRUE, 4), rep(FALSE, 5)), 10, 2))
+  expected_bold <- matrix(FALSE, 9, 2)
+  expected_bold[2:5, 2] <- TRUE
+  expect_identical(unname(bold(hr1)), expected_bold)
 })
 
 
@@ -124,7 +126,7 @@ test_that("huxreg borders argument works", {
   hr <- huxreg(lm1, lm2, borders = .7, outer_borders = .8)
   expect_equal(
     unname(brdr_thickness(bottom_border(hr))[, 2]),
-    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 9), .8, 0),
+    c(.7, rep(0, 5), .7, rep(0, nrow(hr) - 8), .8),
     ignore_attr = TRUE
   )
   expect_equal(

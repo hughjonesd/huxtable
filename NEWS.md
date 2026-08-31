@@ -8,6 +8,10 @@
   LaTeX package dependency.
 * New table property `table_background_color()` sets the background color of
   a table, while allowing individual cells to override it.
+* New table property `table_notes()` stores notes separately from table cells
+  and prints them beneath the table in every output format. `add_footnote()` is
+  retained for compatibility only and is soft-deprecated in favour of
+  `add_table_note()`.
 * Multiple huxtables printed in one knitr chunk now get unique
   automatic labels like "chunk", "chunk-2", "chunk-3" etc.
 * Bugfix: `add_rownames()` should no longer add a 1 in the header row of a

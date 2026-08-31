@@ -79,6 +79,7 @@ SystemRequirements: LaTeX packages:
     siunitx, 
     tabularx, 
     threeparttable, 
+    threeparttablex,
     ulem, 
     wrapfig
 VignetteBuilder: knitr

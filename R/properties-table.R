@@ -333,6 +333,84 @@ set_caption <- function(ht, value) {
 }
 
 
+#' Set notes beneath a table
+#'
+#' Table notes are stored separately from the table's cells. They do not change
+#' the number of rows in the huxtable. Each element of `value` is printed as a
+#' separate note beneath the table.
+#'
+#' Use `NA` or `NULL` to remove all table notes.
+#'
+#' @inherit hux_prop_params params
+#' @param value A character vector, or `NA`/`NULL` to remove all notes.
+#' @return `table_notes()` returns a character vector. The replacement function,
+#'   `set_table_notes()` and `add_table_note()` return the modified huxtable.
+#'
+#' @details
+#' Table notes are plain text. Huxtable escapes them as required for each output
+#' format.
+#'
+#' HTML, LaTeX, Typst and Word output use their native table-footer or table-note
+#' structures. RTF, Markdown and screen output print notes immediately after the
+#' table. Excel writes each note to a merged row below the table. Breakable LaTeX
+#' tables use the `threeparttablex` package.
+#'
+#' Table notes do not currently add reference marks to individual cells.
+#'
+#' [add_footnote()] is retained for compatibility only. It adds an ordinary,
+#' full-width row to the table and is soft-deprecated in favour of
+#' `add_table_note()`.
+#'
+#' @examples
+#' ht <- set_table_notes(jams, "Note: Prices exclude delivery.")
+#' ht <- add_table_note(ht, "Source: The jam growers' association.")
+#' table_notes(ht)
+#' table_notes(ht) <- NULL
+#'
+#' @name table_notes
+NULL
+
+#' @rdname table_notes
+#' @export
+table_notes <- function(ht) {
+  notes <- prop_get(ht, "table_notes") %||% character()
+  notes[!is.na(notes)]
+}
+
+#' @rdname table_notes
+#' @export
+`table_notes<-` <- function(ht, value) {
+  # Table properties use a scalar NA as their internal empty value. Normalize
+  # zero-length inputs because validate_prop() cannot replace them with a default.
+  if (is.null(value) || length(value) == 0L || all(is.na(value))) {
+    value <- NA_character_
+  }
+  prop_set_table(ht, value, "table_notes",
+    check_fun = function(x) is.character(x) && !anyNA(x)
+  )
+}
+
+#' @rdname table_notes
+#' @export
+set_table_notes <- function(ht, value) {
+  # See the replacement method above for why empty input is normalized here.
+  if (is.null(value) || length(value) == 0L || all(is.na(value))) {
+    value <- NA_character_
+  }
+  prop_set_table(ht, value, "table_notes",
+    check_fun = function(x) is.character(x) && !anyNA(x)
+  )
+}
+
+#' @rdname table_notes
+#' @export
+add_table_note <- function(ht, value) {
+  stopifnot(is.character(value), !anyNA(value))
+  table_notes(ht) <- c(table_notes(ht), value)
+  ht
+}
+
+
 #' Set the table's tabular environment in LaTeX
 #'
 #' By default this is either `"tabular"` or `"tabularx"`.

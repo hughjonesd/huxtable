@@ -181,6 +181,11 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     if (flextable_version >= "0.5.7") ft <- flextable::hrule(ft, rule = "atleast")
   }
 
+  notes <- table_notes(x)
+  if (length(notes) > 0L) {
+    ft <- flextable::add_footer_lines(ft, values = notes, top = FALSE)
+  }
+
   # set caption
   caption_data <- resolve_caption(x, "docx")
   if (!is.null(caption_data$text) && !is.na(caption_data$text)) {

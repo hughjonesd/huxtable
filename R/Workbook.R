@@ -76,13 +76,36 @@ as_Workbook.huxtable <- function(ht,
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   if (!sheet %in% names(wb)) openxlsx::addWorksheet(wb, sheet)
-  top_cap <- write_excel_caption(wb, ht, sheet, write_caption, start_row, start_col)
+  notes <- table_notes(ht)
+  top_cap <- write_excel_caption(
+    wb, ht, sheet, write_caption, start_row, start_col,
+    notes_offset = length(notes)
+  )
 
   contents <- clean_contents(ht, output_type = "excel") # character matrix
 
   write_excel_contents(wb, sheet, contents, start_row, start_col, top_cap)
 
   apply_excel_styles(wb, sheet, ht, contents, start_row, start_col, top_cap)
+
+  if (length(notes) > 0L) {
+    note_rows <- start_row + as.integer(top_cap) + nrow(ht) + seq_along(notes) - 1L
+    note_cols <- start_col - 1L + seq_len(ncol(ht))
+    note_style <- openxlsx::createStyle(halign = "left", wrapText = TRUE)
+    for (i in seq_along(notes)) {
+      openxlsx::writeData(
+        wb, sheet, notes[[i]],
+        startRow = note_rows[[i]], startCol = start_col
+      )
+      if (ncol(ht) > 1L) {
+        openxlsx::mergeCells(wb, sheet, cols = note_cols, rows = note_rows[[i]])
+      }
+    }
+    openxlsx::addStyle(
+      wb, sheet, style = note_style, rows = note_rows, cols = note_cols,
+      gridExpand = TRUE
+    )
+  }
 
   set_excel_dimensions(wb, sheet, ht, start_row, start_col)
 
@@ -92,10 +115,11 @@ as_Workbook.huxtable <- function(ht,
 #' Write caption to an Excel worksheet
 #'
 #' @noRd
-write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_col) {
+write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_col,
+                                notes_offset = 0L) {
   cap <- caption(ht)
   top_cap <- write_caption && !is.na(cap) && get_caption_vpos(ht) == "top"
-  cap_row <- if (top_cap) start_row else start_row + nrow(ht)
+  cap_row <- if (top_cap) start_row else start_row + nrow(ht) + notes_offset
   if (write_caption && !is.na(cap)) {
     openxlsx::writeData(wb, sheet, x = cap, startRow = cap_row)
     cap_style <- openxlsx::createStyle(halign = get_caption_hpos(ht))

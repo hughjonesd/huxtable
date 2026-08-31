@@ -250,11 +250,14 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
     }
   }
   caption_par <- if (is.na(caption)) "" else sprintf("{\\pard %s %s {%s} \\par}", cap_align, cap_width, caption)
+  notes <- sanitize(table_notes(ht), "rtf")
+  notes_par <- paste0("{\\pard \\ql {", notes, "} \\par}", collapse = "\n")
   # \ri<twips> and \li<twips> are indents
   # or use a "frame", \absw<twips> and \nowrap to stop text wrapping around it
 
   ## PASTE EVERYTHING TOGETHER ----
   result <- paste(rows, collapse = "\n")
+  if (length(notes) > 0L) result <- paste(result, notes_par, sep = "\n")
   result <- if (get_caption_vpos(ht) == "top") {
     paste(caption_par, result, sep = "\n")
   } else {

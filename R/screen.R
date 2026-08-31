@@ -60,9 +60,18 @@ to_screen <- function(ht,
   
   # Generate the core table display
   table_result <- generate_table_display(ht, config$min_width, config$max_width, config$color, compact)
-  
+
+  result <- table_result$content
+  notes <- table_notes(ht)
+  if (length(notes) > 0L) {
+    note_width <- max(1, min(config$max_width, table_result$char_matrix_ncol))
+    note_lines <- unlist(lapply(notes, strwrap, width = note_width))
+    note_lines <- pad_position(note_lines, position_no_wrap(ht), config$max_width)
+    result <- paste0(result, paste0(note_lines, collapse = "\n"), "\n")
+  }
+
   # Add caption if present
-  result <- add_caption_if_present(table_result$content, ht, config$max_width, table_result$char_matrix_ncol)
+  result <- add_caption_if_present(result, ht, config$max_width, table_result$char_matrix_ncol)
   
   # Add column names if requested
   result <- add_column_names_if_requested(result, ht, config$colnames, config$max_width, table_result$last_col, ncol(ht))

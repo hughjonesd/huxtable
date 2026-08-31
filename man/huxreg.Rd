@@ -59,9 +59,8 @@ displayed in bold. Use \code{NULL} to turn off this behaviour.}
 \item{outer_borders}{Thickness of outer (top and bottom) horizontal borders.
 Set to 0 for no borders.}
 
-\item{note}{Footnote for bottom cell, which spans all columns. \code{{stars}}
-will be replaced by a note about significance stars. Set to \code{NULL} for no
-footnote.}
+\item{note}{Table note printed beneath the table. \code{{stars}} will be
+replaced by a note about significance stars. Set to \code{NULL} for no note.}
 
 \item{statistics}{A vector of summary statistics to display. Set to \code{NULL} to
 show all available statistics. To change display names, name the
