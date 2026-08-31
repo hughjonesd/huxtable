@@ -34,11 +34,8 @@ without a table backdrop resolve it into otherwise unfilled cells with
 `background_color_with_fallback()`.
 
 The table-level `table_notes` property is a character vector stored separately
-from the cell matrix, so notes do not affect table dimensions. Renderers map it
-to their closest structural equivalent: HTML `<tfoot>`, LaTeX `tablenotes`,
-Typst and flextable footers, adjacent paragraphs in RTF, Markdown and screen
-output, and merged worksheet cells in Excel. Breakable LaTeX tables use
-`threeparttablex` so notes appear after the final part of the longtable.
+from the cell matrix, so notes do not affect table dimensions. Each renderer
+places notes beneath the table using the format's closest available construct.
 
 ## Rendering pipeline
 Cell contents are cleaned and formatted before rendering by 

@@ -82,7 +82,7 @@ to_html <- function(ht, dependencies = TRUE, ...) {
   cols_html <- build_colgroup(ht)
   cell_html <- build_cell_html(ht)
   row_html <- build_row_html(ht, cell_html)
-  notes <- clean_table_notes(ht, "html")
+  notes <- sanitize(table_notes(ht), "html")
   notes_html <- ""
   if (length(notes) > 0L) {
     note_rows <- sprintf(

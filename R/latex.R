@@ -109,7 +109,7 @@ to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
   cap_top <- get_caption_vpos(ht) == "top"
   cap <- if (cap_top) c(cap, "") else c("", cap)
 
-  notes <- clean_table_notes(ht, "latex")
+  notes <- sanitize(table_notes(ht), "latex")
   notes_tex <- if (length(notes) > 0L) {
     paste0(
       "\n\\begin{tablenotes}[flushleft]\n",
@@ -565,7 +565,7 @@ build_tabular <- function(ht, include_caption = TRUE) {
   if (breakable(ht)) {
     pos <- c(left = "l", center = "c", right = "r")[[position(ht)]]
     tenv_tex[1] <- sprintf("\\begin{longtable}[%s]", pos)
-    notes <- if (include_caption) clean_table_notes(ht, "latex") else character()
+    notes <- if (include_caption) sanitize(table_notes(ht), "latex") else character()
     last_footer <- if (length(notes) > 0L) {
       "\\insertTableNotes\n\\endlastfoot"
     } else {

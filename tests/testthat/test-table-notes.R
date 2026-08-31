@@ -18,7 +18,7 @@ test_that("table notes are separate table metadata", {
 test_that("table note values are validated", {
   ht <- hux(a = 1)
   expect_error(set_table_notes(ht, 1))
-  expect_error(set_table_notes(ht, c("Note", NA)), "cannot contain")
+  expect_error(set_table_notes(ht, c("Note", NA)))
   expect_error(add_table_note(ht, NA_character_))
 })
 

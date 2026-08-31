@@ -62,7 +62,7 @@ to_screen <- function(ht,
   table_result <- generate_table_display(ht, config$min_width, config$max_width, config$color, compact)
 
   result <- table_result$content
-  notes <- clean_table_notes(ht)
+  notes <- table_notes(ht)
   if (length(notes) > 0L) {
     note_width <- max(1, min(config$max_width, table_result$char_matrix_ncol))
     note_lines <- unlist(lapply(notes, strwrap, width = note_width))

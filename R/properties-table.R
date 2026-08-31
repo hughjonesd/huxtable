@@ -380,21 +380,26 @@ table_notes <- function(ht) {
 #' @rdname table_notes
 #' @export
 `table_notes<-` <- function(ht, value) {
+  # Table properties use a scalar NA as their internal empty value. Normalize
+  # zero-length inputs because validate_prop() cannot replace them with a default.
   if (is.null(value) || length(value) == 0L || all(is.na(value))) {
     value <- NA_character_
-  } else if (anyNA(value)) {
-    stop("Table notes cannot contain `NA` values.", call. = FALSE)
   }
-  prop_set_table(ht, value, "table_notes", check_fun = is.character,
-    reset_na = FALSE
+  prop_set_table(ht, value, "table_notes",
+    check_fun = function(x) is.character(x) && !anyNA(x)
   )
 }
 
 #' @rdname table_notes
 #' @export
 set_table_notes <- function(ht, value) {
-  table_notes(ht) <- value
-  ht
+  # See the replacement method above for why empty input is normalized here.
+  if (is.null(value) || length(value) == 0L || all(is.na(value))) {
+    value <- NA_character_
+  }
+  prop_set_table(ht, value, "table_notes",
+    check_fun = function(x) is.character(x) && !anyNA(x)
+  )
 }
 
 #' @rdname table_notes

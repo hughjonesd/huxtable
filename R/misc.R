@@ -44,22 +44,6 @@ add_footnote <- function(ht, text, border = 0.8, number_format = NA, ...) {
 }
 
 
-#' Prepare table notes for an output format
-#'
-#' @param ht A huxtable.
-#' @param output_type Output format understood by [sanitize()], or `"plain"`.
-#' @return A character vector.
-#' @noRd
-clean_table_notes <- function(ht, output_type = "plain") {
-  notes <- table_notes(ht)
-  if (output_type %in% c("html", "latex", "rtf", "typst")) {
-    notes <- sanitize(notes, type = output_type)
-  }
-  notes
-}
-
-
-
 #' Escape text for various formats
 #'
 #' This escapes a string for LaTeX, HTML, Typst or RTF.

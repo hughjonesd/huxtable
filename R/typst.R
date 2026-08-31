@@ -67,7 +67,7 @@ to_typst <- function(ht, ...) {
     row_strings <- row_strings[!hr]
   }
   row_strings <- row_strings[nzchar(row_strings)]
-  notes <- clean_table_notes(ht, "typst")
+  notes <- sanitize(table_notes(ht), "typst")
   footer_block <- ""
   if (length(notes) > 0L) {
     note_cells <- sprintf(

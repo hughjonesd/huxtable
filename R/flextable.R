@@ -181,7 +181,7 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     if (flextable_version >= "0.5.7") ft <- flextable::hrule(ft, rule = "atleast")
   }
 
-  notes <- clean_table_notes(x)
+  notes <- table_notes(x)
   if (length(notes) > 0L) {
     ft <- flextable::add_footer_lines(ft, values = notes, top = FALSE)
   }

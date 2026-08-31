@@ -76,10 +76,10 @@ as_Workbook.huxtable <- function(ht,
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   if (!sheet %in% names(wb)) openxlsx::addWorksheet(wb, sheet)
-  notes <- clean_table_notes(ht)
+  notes <- table_notes(ht)
   top_cap <- write_excel_caption(
     wb, ht, sheet, write_caption, start_row, start_col,
-    bottom_offset = length(notes)
+    notes_offset = length(notes)
   )
 
   contents <- clean_contents(ht, output_type = "excel") # character matrix
@@ -116,10 +116,10 @@ as_Workbook.huxtable <- function(ht,
 #'
 #' @noRd
 write_excel_caption <- function(wb, ht, sheet, write_caption, start_row, start_col,
-                                bottom_offset = 0L) {
+                                notes_offset = 0L) {
   cap <- caption(ht)
   top_cap <- write_caption && !is.na(cap) && get_caption_vpos(ht) == "top"
-  cap_row <- if (top_cap) start_row else start_row + nrow(ht) + bottom_offset
+  cap_row <- if (top_cap) start_row else start_row + nrow(ht) + notes_offset
   if (write_caption && !is.na(cap)) {
     openxlsx::writeData(wb, sheet, x = cap, startRow = cap_row)
     cap_style <- openxlsx::createStyle(halign = get_caption_hpos(ht))
