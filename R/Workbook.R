@@ -76,7 +76,16 @@ as_Workbook.huxtable <- function(ht,
   }
   wb <- if (missing(Workbook) || is.null(Workbook)) openxlsx::createWorkbook() else Workbook
   if (!sheet %in% names(wb)) openxlsx::addWorksheet(wb, sheet)
-  notes <- table_notes(ht)
+  cell_notes <- resolve_cell_notes(ht)
+  referenced_notes <- if (length(cell_notes$notes) > 0L) {
+    paste0("[", cell_notes$markers, "] ", cell_notes$notes)
+  } else {
+    character()
+  }
+  notes <- c(
+    table_notes(ht),
+    referenced_notes
+  )
   top_cap <- write_excel_caption(
     wb, ht, sheet, write_caption, start_row, start_col,
     notes_offset = length(notes)

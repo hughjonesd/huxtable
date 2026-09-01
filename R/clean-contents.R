@@ -5,12 +5,14 @@
 #'
 #' @param ht A huxtable.
 #' @param output_type Output format, e.g. "latex" or "html".
+#' @param include_cell_notes Whether to add cell note reference marks.
 #' @param ... Unused.
 #' @return A character matrix of processed cell contents.
 #' @noRd
 clean_contents <- function(
     ht,
     output_type = c("latex", "html", "screen", "markdown", "word", "excel", "rtf", "typst"),
+    include_cell_notes = TRUE,
     ...) {
   output_type <- match.arg(output_type)
   contents <- as.matrix(as.data.frame(ht))
@@ -36,6 +38,25 @@ clean_contents <- function(
       numeral
     }
     contents[] <- stringr::str_replace_all(contents, number_regex(), lengthen_minus)
+  }
+
+  if (include_cell_notes) {
+    cell_markers <- resolve_cell_notes(ht)$cell_markers
+    has_marker <- !is.na(cell_markers)
+    if (any(has_marker)) {
+      markers <- cell_markers[has_marker]
+      if (output_type %in% c("latex", "html", "rtf", "typst")) {
+        markers <- sanitize(markers, output_type)
+      }
+      marker_text <- switch(output_type,
+        html = paste0('<sup class="huxtable-note-ref">', markers, "</sup>"),
+        latex = paste0("\\tnote{", markers, "}"),
+        typst = paste0("#super[", markers, "]"),
+        rtf = paste0("{\\super ", markers, "\\nosupersub}"),
+        paste0("[", markers, "]")
+      )
+      contents[has_marker] <- paste0(contents[has_marker], marker_text)
+    }
   }
 
   if (output_type == "rtf") {

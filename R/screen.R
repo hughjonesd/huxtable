@@ -62,11 +62,19 @@ to_screen <- function(ht,
   table_result <- generate_table_display(ht, config$min_width, config$max_width, config$color, compact)
 
   result <- table_result$content
-  notes <- table_notes(ht)
+  cell_notes <- resolve_cell_notes(ht)
+  referenced_notes <- if (length(cell_notes$notes) > 0L) {
+    paste0("[", cell_notes$markers, "] ", cell_notes$notes)
+  } else {
+    character()
+  }
+  notes <- c(
+    table_notes(ht),
+    referenced_notes
+  )
   if (length(notes) > 0L) {
     note_width <- max(1, min(config$max_width, table_result$char_matrix_ncol))
     note_lines <- unlist(lapply(notes, strwrap, width = note_width))
-    note_lines <- pad_position(note_lines, position_no_wrap(ht), config$max_width)
     result <- paste0(result, paste0(note_lines, collapse = "\n"), "\n")
   }
 

@@ -181,9 +181,19 @@ as_flextable.huxtable <- function(x, colnames_to_header = FALSE, ...) {
     if (flextable_version >= "0.5.7") ft <- flextable::hrule(ft, rule = "atleast")
   }
 
-  notes <- table_notes(x)
+  cell_notes <- resolve_cell_notes(x)
+  referenced_notes <- if (length(cell_notes$notes) > 0L) {
+    paste0("[", cell_notes$markers, "] ", cell_notes$notes)
+  } else {
+    character()
+  }
+  notes <- c(
+    table_notes(x),
+    referenced_notes
+  )
   if (length(notes) > 0L) {
     ft <- flextable::add_footer_lines(ft, values = notes, top = FALSE)
+    ft <- flextable::align(ft, align = "left", part = "footer")
   }
 
   # set caption

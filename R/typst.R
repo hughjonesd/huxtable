@@ -68,10 +68,19 @@ to_typst <- function(ht, ...) {
   }
   row_strings <- row_strings[nzchar(row_strings)]
   notes <- sanitize(table_notes(ht), "typst")
+  cell_notes <- resolve_cell_notes(ht)
+  if (length(cell_notes$notes) > 0L) {
+    note_markers <- sanitize(cell_notes$markers, "typst")
+    note_text <- sanitize(cell_notes$notes, "typst")
+    notes <- c(
+      notes,
+      paste0("#super[", note_markers, "] #h(0.2em) ", note_text)
+    )
+  }
   footer_block <- ""
   if (length(notes) > 0L) {
     note_cells <- sprintf(
-      "    table.cell(colspan: %d)[%s]",
+      "    table.cell(colspan: %d, align: left)[%s]",
       ncol(ht), notes
     )
     footer_block <- paste0(

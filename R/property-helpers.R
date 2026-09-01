@@ -22,7 +22,8 @@ huxtable_cell_attrs <- c(
   "font_size",
   "rotation",
   "number_format",
-  "font"
+  "font",
+  "cell_note"
 )
 huxtable_col_attrs <- c("col_width", "header_cols")
 huxtable_row_attrs <- c("row_height", "header_rows")
@@ -33,6 +34,7 @@ huxtable_table_attrs <- c(
   "position",
   "caption",
   "table_notes",
+  "note_symbol",
   "caption_pos",
   "caption_width",
   "breakable",
@@ -69,6 +71,7 @@ huxtable_env$huxtable_default_attrs <- list(
   wrap                = TRUE,
   caption             = NA_character_,
   table_notes         = NA_character_,
+  note_symbol         = "numeric",
   caption_pos         = "top",
   caption_width       = NA_real_,
   breakable           = FALSE,
@@ -85,7 +88,8 @@ huxtable_env$huxtable_default_attrs <- list(
   font_size           = NA_real_,
   rotation            = 0,
   number_format       = list("%.3g"),
-  font                = NA_character_
+  font                = NA_character_,
+  cell_note           = NA_character_
 )
 
 #' Property helper functions

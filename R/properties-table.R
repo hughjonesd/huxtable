@@ -355,7 +355,8 @@ set_caption <- function(ht, value) {
 #' table. Excel writes each note to a merged row below the table. Breakable LaTeX
 #' tables use the `threeparttablex` package.
 #'
-#' Table notes do not currently add reference marks to individual cells.
+#' Use [cell_note()] to add notes referenced from individual cells. Referenced
+#' cell notes are printed after unreferenced table notes.
 #'
 #' [add_footnote()] is retained for compatibility only. It adds an ordinary,
 #' full-width row to the table and is soft-deprecated in favour of
@@ -408,6 +409,57 @@ add_table_note <- function(ht, value) {
   stopifnot(is.character(value), !anyNA(value))
   table_notes(ht) <- c(table_notes(ht), value)
   ht
+}
+
+
+#' Set the symbols used for cell note references
+#'
+#' `note_symbol` is a table property controlling marks for [cell_note()]. The
+#' marks themselves are assigned when a huxtable is rendered rather than stored
+#' in its cells, so subsetting does not modify cell-note metadata.
+#'
+#' @inherit hux_prop_params params
+#' @param value One of `"numeric"`, `"roman"` or `"alphabetic"`, or a
+#'   non-empty string whose individual characters form a custom symbol
+#'   sequence. `r rd_default("note_symbol")`
+#' @return `note_symbol()` returns a character string. The replacement function
+#'   and `set_note_symbol()` return the modified huxtable.
+#'
+#' @details
+#' Numeric symbols are `1`, `2`, ...; Roman symbols are `i`, `ii`, ...; and
+#' alphabetic symbols are `a`, `b`, ..., `z`, `aa`, .... Custom strings are
+#' treated like a custom alphabet. For example, `"+*"` produces `+`, `*`,
+#' `++`, `+*`, `*+`, ....
+#'
+#' Custom Unicode symbols require support from the output format's font and
+#' rendering engine.
+#'
+#' @examples
+#' ht <- set_cell_note(jams, 1, 1, "Price estimated")
+#' ht <- set_note_symbol(ht, "+*")
+#' note_symbol(ht)
+#'
+#' @name note_symbol
+NULL
+
+#' @rdname note_symbol
+#' @export
+note_symbol <- function(ht) prop_get(ht, "note_symbol")
+
+#' @rdname note_symbol
+#' @export
+`note_symbol<-` <- function(ht, value) {
+  prop_set_table(ht, value, "note_symbol",
+    check_fun = function(x) is.string(x) && nzchar(x)
+  )
+}
+
+#' @rdname note_symbol
+#' @export
+set_note_symbol <- function(ht, value) {
+  prop_set_table(ht, value, "note_symbol",
+    check_fun = function(x) is.string(x) && nzchar(x)
+  )
 }
 
 

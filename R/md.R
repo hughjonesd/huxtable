@@ -67,7 +67,16 @@ to_md <- function(ht, header = TRUE, min_width = getOption("width") / 4, max_wid
   if (!is.na(caption_data$text)) {
     result <- paste0(result, "Table: ", caption_data$text, "\n")
   }
-  notes <- table_notes(ht)
+  cell_notes <- resolve_cell_notes(ht)
+  referenced_notes <- if (length(cell_notes$notes) > 0L) {
+    paste0("[", cell_notes$markers, "] ", cell_notes$notes)
+  } else {
+    character()
+  }
+  notes <- c(
+    table_notes(ht),
+    referenced_notes
+  )
   if (length(notes) > 0L) {
     result <- paste0(
       result,

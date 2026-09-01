@@ -40,7 +40,8 @@ structures. RTF, Markdown and screen output print notes immediately after the
 table. Excel writes each note to a merged row below the table. Breakable LaTeX
 tables use the \code{threeparttablex} package.
 
-Table notes do not currently add reference marks to individual cells.
+Use \code{\link[=cell_note]{cell_note()}} to add notes referenced from individual cells. Referenced
+cell notes are printed after unreferenced table notes.
 
 \code{\link[=add_footnote]{add_footnote()}} is retained for compatibility only. It adds an ordinary,
 full-width row to the table and is soft-deprecated in favour of
