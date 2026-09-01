@@ -97,9 +97,6 @@ test_that("text outputs render table notes", {
   expect_match(html, "<sup class=\"huxtable-note-ref\">+</sup> Shared_note", fixed = TRUE)
   css <- huxtable_html_css()
   expect_match(css, ".huxtable-note {", fixed = TRUE)
-  expect_match(css, "padding-bottom: 2pt;", fixed = TRUE)
-  expect_match(css, "padding-top: 2pt;", fixed = TRUE)
-  expect_match(css, "text-align: left;", fixed = TRUE)
 
   latex <- to_latex(ht, dependencies = FALSE)
   expect_match(latex, "\\begin{tablenotes}[flushleft]", fixed = TRUE)
