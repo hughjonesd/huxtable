@@ -49,8 +49,9 @@ add_colnames <- function(ht, rowname = "", ...) {
   number_format(ht)[1, ] <- NA
   colnames(ht) <- cn
   header_rows(ht)[1] <- TRUE
-  if (!is.null(rowname)) rownames(ht) <- c(rowname, rn)
-
+  if (! is.null(rowname)) {
+    if (! rowname %in% rn) rownames(ht) <- c(rowname, rn)
+  }
   ht
 }
 
