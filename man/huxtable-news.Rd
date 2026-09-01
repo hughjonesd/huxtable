@@ -9,37 +9,33 @@ This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable (development version)}{
 \itemize{
-\item This is the last update which will be pushed to CRAN. Future versions
-will be available on GitHub and/or via
-\url{https://hughjonesd.r-universe.dev}.
+\item This is the last update which will be released on CRAN. Future
+versions will be available on GitHub or via
+\url{https://hughjonesd.r-universe.dev}. Future CRAN versions will be
+maintenance-only.
 \item New table property \code{breakable()} allows tables to break between rows
-across pages in HTML, LaTeX, RTF, Typst and Word output. Breakable
-tables are implemented in LaTeX via the \code{longtable} package, meaning
-this is a new LaTeX package dependency.
+across pages. Breakable tables are implemented in LaTeX via the
+\code{longtable} package, meaning this is a new LaTeX package dependency.
+\item Table notes. Use \code{add_table_note()} for notes beneath the table, and
+\code{set_cell_note()} for notes associated with a particular cell. The old
+\code{add_footnote()} mechanism, which simply added a table row, is
+soft-deprecated. \code{threeparttablex} is a new LaTeX dependency for this.
 \item New table property \code{table_background_color()} sets the background
-color of a table, while allowing individual cells to override it.
-\item New table property \code{table_notes()} stores notes separately from table
-cells and prints them beneath the table in every output format.
-\code{add_footnote()} is retained for compatibility only and is
-soft-deprecated in favour of \code{add_table_note()}. The new \code{cell_note()}
-cell property adds referenced notes; \code{note_symbol()} controls their
-numeric, Roman, alphabetic or custom marks.
+color of a table.
 \item Multiple huxtables printed in one knitr chunk now get unique automatic
 labels like “chunk”, “chunk-2”, “chunk-3” etc.
+\item The new \code{huxtable_html_css()} returns default CSS for HTML tables.
+\item In knitr/Rmarkdown/Quarto, HTML styles and LaTeX commands are now
+printed just once, instead of for every table. Outside those
+documents, \code{to_html()}, \code{print_html()}, \code{to_latex()} and
+\code{print_latex()} include these dependencies by default; use
+\code{dependencies = FALSE} to leave them out.
+\item Quarto table captions and labels now override captions and labels set
+directly on a huxtable.
 \item Bugfix: \code{add_rownames()} should no longer add a 1 in the header row of
 a data frame.
 \item \code{as_Workbook()} is now much faster when adding many tables to an Excel
 workbook. Thanks @lemonad for the report.
-\item \code{huxtable_html_css()} is now exported, for including huxtable’s
-default CSS once in an HTML document.
-\item In knitr, R Markdown and Quarto documents, huxtable’s HTML styles and
-LaTeX command definitions are now registered as document dependencies
-and emitted once. Outside those documents, \code{to_html()},
-\code{print_html()}, \code{to_latex()} and \code{print_latex()} include them by
-default; use \code{dependencies = FALSE} to omit them.
-\item Bugfix: Quarto table captions and labels now override captions and
-labels set on a huxtable in HTML, PDF, Typst and Word output. Huxtable
-warns when both mechanisms explicitly set the same property.
 }
 }
 

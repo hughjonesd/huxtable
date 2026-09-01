@@ -155,7 +155,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   # \cellx specifies the position of the RH cell edge:
   right_edges <- ceiling(cumsum(col_width))
-  table_width_twips <- tail(right_edges, 1L)
+  table_width_twips <- right_edges[length(right_edges)]
 
   cellx_def <- sprintf("\\cellx%d", right_edges)
 
