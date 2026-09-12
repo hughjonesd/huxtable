@@ -1,5 +1,5 @@
 
-Major update.
+Major update. This should also fix an existing bug revealed by R-devel.
 
 ## Test environments
 

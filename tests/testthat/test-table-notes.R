@@ -208,6 +208,8 @@ test_that("add_footnote keeps its compatibility behaviour", {
 
 
 test_that("huxreg uses explicit table notes", {
+  skip_if_not_installed("broom")
+
   model <- lm(Sepal.Width ~ Sepal.Length, iris)
   ht <- huxreg(model)
 

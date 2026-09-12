@@ -120,14 +120,16 @@ generate_table_display <- function(ht, min_width, max_width, color, compact) {
   charmat_with_borders <- add_borders_to_matrix(ht, charmat_data, color)
   
   # Remove empty border rows if compact mode
-  final_charmat <- apply_compact_formatting(charmat_with_borders, compact, charmat_data$border_rows)
+  compact_matrices <- apply_compact_formatting(
+    charmat_with_borders, charmat_data$width_mat, compact, charmat_data$border_rows
+  )
   
   # Convert matrix to positioned string
-  result <- format_matrix_to_string(final_charmat, ht, max_width, charmat_data$width_mat)
+  result <- format_matrix_to_string(compact_matrices$charmat, ht, max_width, compact_matrices$width_mat)
   
   list(
     content = result,
-    char_matrix_ncol = ncol(final_charmat),
+    char_matrix_ncol = ncol(compact_matrices$charmat),
     last_col = charmat_data$last_ht_col
   )
 }
@@ -318,19 +320,20 @@ apply_border_colors <- function(charmat, ht, border_rows, border_cols) {
 
 
 # Remove empty horizontal border rows in compact mode
-apply_compact_formatting <- function(charmat, compact, border_rows) {
-  if (!compact) return(charmat)
-  
-  empty_borders <- apply(charmat, 1, function(x) {
-    all(grepl(" ", x, fixed = TRUE) | grepl("[\u2502\u2551\u2506\u250a]", x))
-  })
-  empty_borders <- intersect(border_rows, which(empty_borders))
-  
-  if (length(empty_borders) > 0) {
-    charmat <- charmat[-empty_borders, , drop = FALSE]
+apply_compact_formatting <- function(charmat, width_mat, compact, border_rows) {
+  if (compact) {
+    empty_borders <- apply(charmat, 1, function(x) {
+      all(grepl(" ", x, fixed = TRUE) | grepl("[\u2502\u2551\u2506\u250a]", x))
+    })
+    empty_borders <- intersect(border_rows, which(empty_borders))
+
+    if (length(empty_borders) > 0) {
+      charmat <- charmat[-empty_borders, , drop = FALSE]
+      width_mat <- width_mat[-empty_borders, , drop = FALSE]
+    }
   }
-  
-  charmat
+
+  list(charmat = charmat, width_mat = width_mat)
 }
 
 
