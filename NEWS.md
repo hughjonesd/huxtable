@@ -1,4 +1,4 @@
-# huxtable (development version)
+# huxtable 6.0.0
 
 * This is the last update which will be released on CRAN. Future updates will 
   be available on GitHub or via https://hughjonesd.r-universe.dev. The CRAN
