@@ -1,8 +1,8 @@
 # huxtable (development version)
 
-* This is the last update which will be released on CRAN. Future versions will 
-  be available on GitHub or via https://hughjonesd.r-universe.dev. Future CRAN
-  versions will be maintenance-only.
+* This is the last update which will be released on CRAN. Future updates will 
+  be available on GitHub or via https://hughjonesd.r-universe.dev. The CRAN
+  version will still receive bugfixes in response to check failures.
 * New table property `breakable()` allows tables to break between rows across
   pages. Breakable tables are implemented in LaTeX via the `longtable` package, 
   meaning this is a new LaTeX package dependency.
