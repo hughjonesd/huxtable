@@ -1,5 +1,6 @@
 
-Major update. This should also fix an existing bug revealed by R-devel.
+Major update. This should also fix an existing bug revealed by R-devel. 
+Resubmitting to fix a bug exposed by a reverse dependency failure.
 
 ## Test environments
 
@@ -16,8 +17,8 @@ OK on all platforms.
 
 ## revdepcheck results
 
-We checked 24 reverse dependencies. 2 packages failed. One failure has been
-fixed locally. pharmaRTF has two test failures; I informed the package maintainers
-on their github one week ago and suggested a fix.
+24 reverse dependencies checked. pharmaRTF remains broken, its maintainers
+were notified two weeks ago. glmmTMB should now be fixed.
+
 
 
