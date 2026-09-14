@@ -1,3 +1,10 @@
+# huxtable 6.0.1
+
+* Bugfix: huxtables printed in knitr documents now include their HTML styles or
+  LaTeX command definitions when there is no R Markdown dependency processor.
+  The new `latex_commands()` returns the required LaTeX definitions
+  for adding to a document preamble manually.
+
 # huxtable 6.0.0
 
 * This is the last update which will be released on CRAN. Future updates will 
@@ -14,7 +21,7 @@
   a table.
 * Multiple huxtables printed in one knitr chunk now get unique
   automatic labels like "chunk", "chunk-2", "chunk-3" etc.
-* The new `huxtable_html_css()` returns default CSS for HTML tables.
+* The new `html_css()` returns default CSS for HTML tables.
 * In knitr/Rmarkdown/Quarto, HTML styles and LaTeX commands are now printed 
   just once, instead of for every table. Outside those documents, `to_html()`, 
   `print_html()`, `to_latex()` and `print_latex()` include these dependencies by 

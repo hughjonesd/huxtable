@@ -247,7 +247,7 @@ quick_html <- function(
     ),
     sep = "\n"
   )
-  cat(huxtable_html_css())
+  cat(html_css())
   cat("</head>", "<body>\n", sep = "\n")
   tryCatch(
     {
@@ -391,7 +391,7 @@ do_write_latex_file <- function(hts, file, width, height) {
     {
       cat("\\documentclass{article}\n")
       report_latex_dependencies()
-      cat(paste(huxtable_latex_commands(), collapse = "\n"), "\n", sep = "")
+      cat(paste(latex_commands(), collapse = "\n"), "\n", sep = "")
       if (!is.null(width) || !is.null(height)) {
         dim_string <- character(2)
         dim_string[1] <- if (is.null(width)) "" else sprintf("paperwidth=%s", width)

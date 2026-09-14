@@ -25,6 +25,16 @@ test_that("install/report_latex_dependencies", {
 })
 
 
+test_that("latex_commands returns required command definitions", {
+  commands <- latex_commands()
+
+  expect_true(any(grepl("\\providecommand{\\huxb}", commands, fixed = TRUE)))
+  expect_true(any(grepl("\\providecommand{\\huxvb}", commands, fixed = TRUE)))
+  expect_true(any(grepl("\\providecommand{\\huxtpad}", commands, fixed = TRUE)))
+  expect_true(any(grepl("\\providecommand{\\huxbpad}", commands, fixed = TRUE)))
+})
+
+
 test_that("check_latex_dependencies checks adjustbox", {
   skip_if_not_installed("tinytex")
   # appveyor doesn't have tlmgr

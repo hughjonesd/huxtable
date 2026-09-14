@@ -50,8 +50,8 @@ print_notebook <- function(ht, dependencies = TRUE, ...) {
 #' @export
 #'
 #' @examples
-#' cat(huxtable_html_css())
-huxtable_html_css <- function() {
+#' cat(html_css())
+html_css <- function() {
   css_path <- system.file("huxtable", "huxtable.css", package = "huxtable", mustWork = TRUE)
   css <- paste(readLines(css_path, warn = FALSE), collapse = "\n")
   paste0("<style>\n", css, "\n</style>\n")
@@ -109,7 +109,7 @@ to_html <- function(ht, dependencies = TRUE, ...) {
   }
 
   table_html <- paste0(table_start, cols_html, row_html, notes_html, "</table>\n")
-  if (dependencies) paste0(huxtable_html_css(), table_html) else table_html
+  if (dependencies) paste0(html_css(), table_html) else table_html
 }
 
 #' @export

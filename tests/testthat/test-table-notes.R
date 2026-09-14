@@ -95,7 +95,7 @@ test_that("text outputs render table notes", {
   expect_match(html, "colspan=\"2\">Note: A &amp; B", fixed = TRUE)
   expect_match(html, "1<sup class=\"huxtable-note-ref\">+</sup>", fixed = TRUE)
   expect_match(html, "<sup class=\"huxtable-note-ref\">+</sup> Shared_note", fixed = TRUE)
-  css <- huxtable_html_css()
+  css <- html_css()
   expect_match(css, ".huxtable-note {", fixed = TRUE)
 
   latex <- to_latex(ht, dependencies = FALSE)

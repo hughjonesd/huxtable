@@ -7,12 +7,21 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
-\section{huxtable (development version)}{
+\section{huxtable 6.0.1}{
 \itemize{
-\item This is the last update which will be released on CRAN. Future
-versions will be available on GitHub or via
-\url{https://hughjonesd.r-universe.dev}. Future CRAN versions will be
-maintenance-only.
+\item Bugfix: huxtables printed in knitr documents now include their HTML
+styles or LaTeX command definitions when there is no R Markdown
+dependency processor. The new \code{latex_commands()} returns the required
+LaTeX definitions for adding to a document preamble manually.
+}
+}
+
+\section{huxtable 6.0.0}{
+\itemize{
+\item This is the last update which will be released on CRAN. Future updates
+will be available on GitHub or via
+\url{https://hughjonesd.r-universe.dev}. The CRAN version will still
+receive bugfixes in response to check failures.
 \item New table property \code{breakable()} allows tables to break between rows
 across pages. Breakable tables are implemented in LaTeX via the
 \code{longtable} package, meaning this is a new LaTeX package dependency.
@@ -24,7 +33,7 @@ soft-deprecated. \code{threeparttablex} is a new LaTeX dependency for this.
 color of a table.
 \item Multiple huxtables printed in one knitr chunk now get unique automatic
 labels like “chunk”, “chunk-2”, “chunk-3” etc.
-\item The new \code{huxtable_html_css()} returns default CSS for HTML tables.
+\item The new \code{html_css()} returns default CSS for HTML tables.
 \item In knitr/Rmarkdown/Quarto, HTML styles and LaTeX commands are now
 printed just once, instead of for every table. Outside those
 documents, \code{to_html()}, \code{print_html()}, \code{to_latex()} and

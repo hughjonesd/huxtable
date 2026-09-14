@@ -18,8 +18,9 @@ application. Or you can try \code{\link[=install_latex_dependencies]{install_lat
 
 In some rmarkdown and LaTeX formats, you also need to add LaTeX dependencies
 manually. Run \code{\link[=report_latex_dependencies]{report_latex_dependencies()}} and add
-the output to your LaTeX preamble, or in Rmarkdown formats, add it to the
-rmarkdown header like this:
+the output to your LaTeX preamble. Also add the command definitions printed
+by \code{cat(latex_commands(), sep = "\\\\n")}. In Rmarkdown formats, add
+the package dependencies to the rmarkdown header like this:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{header-includes:
   - \\usepackage\{array\}

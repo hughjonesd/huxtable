@@ -37,7 +37,7 @@ test_that("HTML applies table and row break rules", {
   html <- to_html(ht)
   expect_match(html, "break-inside: auto; page-break-inside: auto;", fixed = TRUE)
   expect_match(
-    huxtable_html_css(),
+    html_css(),
     ".huxtable tr {\n  break-inside: avoid;\n  page-break-inside: avoid;",
     fixed = TRUE
   )

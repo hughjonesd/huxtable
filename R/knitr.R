@@ -39,14 +39,17 @@ knit_print.huxtable <- function(x, options, ...) {
   )
 
   call_args <- list(x)
-  if (of %in% c("html", "latex")) call_args$dependencies <- FALSE
+  in_rmarkdown <- !is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))
+  if (of %in% c("html", "latex") && in_rmarkdown) {
+    call_args$dependencies <- FALSE
+  }
   res <- do.call(call_name, call_args)
 
   res <- switch(of,
     latex = {
       latex_deps <- report_latex_dependencies(quiet = TRUE)
       array_dep <- match("array", vapply(latex_deps, `[[`, "", "name"))
-      latex_deps[[array_dep]]$extra_lines <- huxtable_latex_commands()
+      latex_deps[[array_dep]]$extra_lines <- latex_commands()
       tenv <- tabular_environment(x)
       if (tenv %in% "tabulary") {
         latex_deps <- c(latex_deps, list(rmarkdown::latex_dependency(tenv)))

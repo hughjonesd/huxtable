@@ -57,7 +57,7 @@ to_latex <- function(ht, tabular_only = FALSE, dependencies = TRUE, ...) {
     )
   }
   commands <- if (dependencies) {
-    paste0("\n  ", paste(huxtable_latex_commands(), collapse = "\n  "), "\n")
+    paste0("\n  ", paste(latex_commands(), collapse = "\n  "), "\n")
   } else {
     ""
   }

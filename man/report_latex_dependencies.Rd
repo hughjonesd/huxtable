@@ -48,3 +48,6 @@ check_latex_dependencies()
 install_latex_dependencies()
 }
 }
+\seealso{
+\code{\link[=latex_commands]{latex_commands()}}
+}

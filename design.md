@@ -80,11 +80,13 @@ When a huxtable is printed in a knitr/Rmarkdown context,
 `knit_print.huxtable()` is invoked.  It detects the desired output format 
 (`latex`, `html`, `rtf`, etc.) via `guess_knitr_output_format()` and dispatches 
 to the corresponding renderer (`to_latex`, `to_html`, `to_md`, etc.). For
-LaTeX and HTML, it asks the renderer to omit inline dependencies and registers
-the CSS or LaTeX packages and command definitions as knitr metadata. Document
-engines can then emit these dependencies once even when there are several
-tables. Direct calls to the HTML and LaTeX renderers include their CSS or
-command definitions by default so their output remains standalone.
+LaTeX and HTML in R Markdown or Quarto, it asks the renderer to omit inline
+dependencies and registers the CSS or LaTeX packages and command definitions
+as knitr metadata. Document engines can then emit these dependencies once even
+when there are several tables. Plain knitr formats such as `.Rnw` and `.Rhtml`
+have no later dependency processor, so their styles or command definitions stay
+inline. Direct calls to the HTML and LaTeX renderers also include them by
+default so their output remains standalone.
 
 Caption and label behavior shared by the renderers is implemented in
 `R/captions.R`. `resolve_caption()` returns caption text, the resolved label,

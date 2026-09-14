@@ -4,9 +4,17 @@ NULL
 
 #' LaTeX commands used by huxtables
 #'
+#' Returns the LaTeX command definitions used by huxtables. You can add these
+#' to the preamble of a LaTeX document alongside the output from
+#' [report_latex_dependencies()].
+#'
 #' @return A character vector of LaTeX command definitions.
-#' @noRd
-huxtable_latex_commands <- function() {
+#' @export
+#' @seealso [report_latex_dependencies()]
+#'
+#' @examples
+#' cat(latex_commands(), sep = "\n")
+latex_commands <- function() {
   c(
     "\\providecommand{\\huxb}[2]{\\arrayrulecolor[RGB]{#1}\\global\\arrayrulewidth=#2pt}",
     "\\providecommand{\\huxvb}[2]{\\color[RGB]{#1}\\vrule width #2pt}",
@@ -49,6 +57,7 @@ huxtable_latex_dependencies <- list(
 #'   `"\\\\usepackage\\{...\\}"` statements; otherwise it returns a list of
 #'   `rmarkdown::latex_dependency` objects, invisibly.
 #' @export
+#' @seealso [latex_commands()]
 #'
 #' @examples
 #' report_latex_dependencies()

@@ -54,7 +54,12 @@ test_that("knitr_output_format overrides default output format in knit_print", {
 test_that("HTML and LaTeX dependencies are registered with knitr", {
   ht <- hux(a = 1)
   old_options <- options(huxtable.knitr_output_format = "html")
-  on.exit(options(old_options))
+  old_knitr_options <- knitr::opts_knit$get()
+  on.exit({
+    options(old_options)
+    knitr::opts_knit$restore(old_knitr_options)
+  })
+  knitr::opts_knit$set(rmarkdown.pandoc.to = "html")
 
   html <- knitr::knit_print(ht)
   expect_false(grepl("<style>", html, fixed = TRUE))
@@ -68,6 +73,7 @@ test_that("HTML and LaTeX dependencies are registered with knitr", {
   expect_true(any(grepl(".huxtable-cell", readLines(css_path), fixed = TRUE)))
 
   options(huxtable.knitr_output_format = "latex")
+  knitr::opts_knit$set(rmarkdown.pandoc.to = "latex")
   latex <- knitr::knit_print(ht)
   expect_false(grepl("\\providecommand", latex, fixed = TRUE))
   array_dep <- attr(latex, "knit_meta")[[1]]
@@ -75,6 +81,29 @@ test_that("HTML and LaTeX dependencies are registered with knitr", {
   expect_true(any(grepl(
     "\\providecommand{\\huxb}", array_dep$extra_lines, fixed = TRUE
   )))
+})
+
+
+test_that("Bugfix: plain knitr output includes inline dependencies", {
+  old_options <- options(huxtable.knitr_output_format = "latex")
+  old_knitr_options <- knitr::opts_knit$get()
+  on.exit({
+    options(old_options)
+    knitr::opts_knit$restore(old_knitr_options)
+  })
+  knitr::opts_knit$delete("rmarkdown.pandoc.to")
+
+  latex <- knitr::knit(text = c(
+    "<<echo=FALSE>>=",
+    "hux(a = 1)",
+    "@"
+  ), quiet = TRUE)
+
+  expect_match(latex, "\\providecommand{\\huxb}", fixed = TRUE)
+
+  options(huxtable.knitr_output_format = "html")
+  html <- knitr::knit_print(hux(a = 1))
+  expect_match(html, "<style>", fixed = TRUE)
 })
 
 
