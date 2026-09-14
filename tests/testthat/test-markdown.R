@@ -34,7 +34,9 @@ test_that("Output produced for Word", {
   skip_without_pandoc()
 
   # currently only basic stuff works
-  expect_silent(as_flextable(md_hux[1:7, ]))
+  word_hux <- md_hux[1:7, ]
+  if (!requireNamespace("magick", quietly = TRUE)) word_hux <- word_hux[-7, ]
+  expect_silent(as_flextable(word_hux))
   skip("Awaiting ftExtra improvements")
   expect_silent(as_flextable(md_hux[8:14, ]))
 })
