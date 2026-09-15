@@ -76,6 +76,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
 
   has_knitr <- requireNamespace("knitr", quietly = TRUE)
   chunk_options <- if (has_knitr) knitr::opts_current$get() else NULL
+  knitr_caption <- chunk_options[["tab.cap"]]
   chunk_label <- chunk_options$label
   if (length(chunk_label) > 0 && grepl("^unnamed-chunk", chunk_label)) {
     chunk_label <- NULL
@@ -100,7 +101,20 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
     )
   }
 
-  if (quarto_caption) cap <- NA_character_
+  if (quarto_caption) {
+    cap <- NA_character_
+  } else if (!is.null(knitr_caption)) {
+    if (length(knitr_caption) != 1L) {
+      stop("Chunk option `tab.cap` must have length 1.", call. = FALSE)
+    }
+    if (explicit_cap) {
+      warning(
+        "knitr chunk option `tab.cap` overrides the huxtable caption.",
+        call. = FALSE
+      )
+    }
+    cap <- as.character(knitr_caption)
+  }
   if (quarto_label) lab <- NA_character_
 
   same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&
