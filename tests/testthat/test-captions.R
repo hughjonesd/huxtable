@@ -61,6 +61,34 @@ test_that("Unnamed chunks and disabled autolabeling do not create labels", {
 })
 
 
+test_that("knitr tab.cap overrides huxtable captions", {
+  old_current <- knitr::opts_current$get()
+  old_options <- options(huxtable.bookdown = FALSE)
+  on.exit({
+    knitr::opts_current$restore(old_current)
+    options(old_options)
+  })
+
+  knitr::opts_current$set(`tab.cap` = "Chunk caption")
+
+  expect_equal(resolve_caption(hux(a = 1), "html")$text, "Chunk caption")
+  expect_warning(
+    caption_data <- resolve_caption(
+      set_caption(hux(a = 1), "Huxtable caption"),
+      "html"
+    ),
+    "tab.cap.*override"
+  )
+  expect_equal(caption_data$text, "Chunk caption")
+
+  knitr::opts_current$set(`tab.cap` = NA)
+  expect_true(is.na(resolve_caption(hux(a = 1), "html")$text))
+
+  knitr::opts_current$set(`tab.cap` = c("First", "Second"))
+  expect_error(resolve_caption(hux(a = 1), "html"), "must have length 1")
+})
+
+
 test_that("Bugfix: Quarto captions and labels override huxtable values", {
   old_current <- knitr::opts_current$get()
   old_knit <- knitr::opts_knit$get()

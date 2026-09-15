@@ -82,25 +82,35 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
   }
 
   is_quarto <- using_quarto()
-  quarto_caption <- is_quarto &&
-    (!is.null(chunk_options[["tbl-cap"]]) || !is.null(chunk_options[["tbl-subcap"]]))
+  chunk_caption <- if (is_quarto) {
+    chunk_options[["tbl-cap"]] %||% chunk_options[["tbl-subcap"]]
+  } else {
+    chunk_options[["tab.cap"]]
+  }
+  has_chunk_caption <- !is.null(chunk_caption)
   quarto_label <- is_quarto &&
     !is.null(chunk_label) &&
     nzchar(chunk_label) &&
-    (quarto_caption || grepl("^tbl-", chunk_label))
+    (has_chunk_caption || grepl("^tbl-", chunk_label))
 
   conflicts <- character()
-  if (quarto_caption && explicit_cap) conflicts <- c(conflicts, "caption")
+  if (has_chunk_caption && explicit_cap) conflicts <- c(conflicts, "caption")
   if (quarto_label && explicit_lab) conflicts <- c(conflicts, "label")
   if (length(conflicts) > 0) {
     fields <- paste(conflicts, collapse = " and ")
     warning(
-      "Quarto table options override the huxtable ", fields, ".",
+      "Quarto table options and/or knitr `tab.cap` override the huxtable ",
+      fields, ".",
       call. = FALSE
     )
   }
 
-  if (quarto_caption) cap <- NA_character_
+  if (has_chunk_caption) {
+    if (!is_quarto && length(chunk_caption) != 1L) {
+      stop("Chunk option `tab.cap` must have length 1.", call. = FALSE)
+    }
+    cap <- if (is_quarto) NA_character_ else as.character(chunk_caption)
+  }
   if (quarto_label) lab <- NA_character_
 
   same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&

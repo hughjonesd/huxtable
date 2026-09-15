@@ -7,6 +7,13 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+\itemize{
+\item The knitr chunk option \code{tab.cap} now sets huxtable captions,
+overriding a caption set with \code{caption()}.
+}
+}
+
 \section{huxtable 6.0.1}{
 \itemize{
 \item Bugfix: huxtables printed in knitr documents now include their HTML

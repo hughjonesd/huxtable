@@ -1,5 +1,8 @@
 # huxtable (development version)
 
+* The knitr chunk option `tab.cap` now sets huxtable captions, overriding a
+  caption set with `caption()`.
+
 # huxtable 6.0.1
 
 * Bugfix: huxtables printed in knitr documents now include their HTML styles or

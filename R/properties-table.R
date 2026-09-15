@@ -299,8 +299,9 @@ set_breakable <- function(ht, value) {
 #' @details
 #' Captions are not escaped. See the example for a workaround.
 #'
-#' Table captions set via the Quarto `tbl-cap` or `tbl-subcap` chunk options
-#' override captions set by this mechanism. A warning is issued if both are set.
+#' Table captions set via the knitr `tab.cap` or Quarto `tbl-cap` and
+#' `tbl-subcap` chunk options override captions set by this mechanism. A warning
+#' is issued if both are set.
 #'
 #' @family caption properties
 #'
