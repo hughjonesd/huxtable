@@ -101,9 +101,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
     )
   }
 
-  if (quarto_caption) {
-    cap <- NA_character_
-  } else if (!is.null(knitr_caption)) {
+  if (!quarto_caption && !is.null(knitr_caption)) {
     if (length(knitr_caption) != 1L) {
       stop("Chunk option `tab.cap` must have length 1.", call. = FALSE)
     }
@@ -115,6 +113,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
     }
     cap <- as.character(knitr_caption)
   }
+  if (quarto_caption) cap <- NA_character_
   if (quarto_label) lab <- NA_character_
 
   same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&
