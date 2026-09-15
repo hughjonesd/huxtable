@@ -1,3 +1,5 @@
+# huxtable (development version)
+
 # huxtable 6.0.1
 
 * Bugfix: huxtables printed in knitr documents now include their HTML styles or
