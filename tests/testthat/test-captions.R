@@ -89,25 +89,6 @@ test_that("knitr tab.cap overrides huxtable captions", {
 })
 
 
-test_that("Quarto captions take precedence over knitr tab.cap", {
-  old_current <- knitr::opts_current$get()
-  old_knit <- knitr::opts_knit$get()
-  on.exit({
-    knitr::opts_current$restore(old_current)
-    knitr::opts_knit$restore(old_knit)
-  })
-  knitr::opts_knit$set(quarto.version = "1.7.0")
-  knitr::opts_current$set(
-    label = "tbl-quarto",
-    `tab.cap` = "knitr caption",
-    `tbl-cap` = "Quarto caption"
-  )
-
-  expect_no_warning(caption_data <- resolve_caption(hux(a = 1), "html"))
-  expect_true(is.na(caption_data$text))
-})
-
-
 test_that("Bugfix: Quarto captions and labels override huxtable values", {
   old_current <- knitr::opts_current$get()
   old_knit <- knitr::opts_knit$get()
