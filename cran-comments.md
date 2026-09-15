@@ -1,6 +1,7 @@
 
 Major update. This should also fix an existing bug revealed by R-devel. 
-Resubmitting to fix a bug exposed by a reverse dependency failure.
+Resubmitting with a bumped patch version to fix a bug exposed by a 
+reverse dependency failure.
 
 ## Test environments
 
