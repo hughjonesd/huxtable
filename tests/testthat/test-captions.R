@@ -77,7 +77,7 @@ test_that("knitr tab.cap overrides huxtable captions", {
       set_caption(hux(a = 1), "Huxtable caption"),
       "html"
     ),
-    "tab.cap.*overrides"
+    "tab.cap.*override"
   )
   expect_equal(caption_data$text, "Chunk caption")
 

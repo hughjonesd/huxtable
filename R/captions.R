@@ -98,13 +98,9 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
   if (quarto_label && explicit_lab) conflicts <- c(conflicts, "label")
   if (length(conflicts) > 0) {
     fields <- paste(conflicts, collapse = " and ")
-    override_message <- if (is_quarto) {
-      "Quarto table options override"
-    } else {
-      "knitr chunk option `tab.cap` overrides"
-    }
     warning(
-      override_message, " the huxtable ", fields, ".",
+      "Quarto table options and/or knitr `tab.cap` override the huxtable ",
+      fields, ".",
       call. = FALSE
     )
   }
