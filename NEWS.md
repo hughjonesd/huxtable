@@ -1,5 +1,9 @@
 # huxtable (development version)
 
+* RTF captions now use the shared R Markdown caption-resolution logic. In
+  Quarto, `tbl-cap` overrides `caption()` and is rendered by huxtable because
+  Quarto does not support table float targets in RTF.
+
 # huxtable 6.0.1
 
 * Bugfix: huxtables printed in knitr documents now include their HTML styles or

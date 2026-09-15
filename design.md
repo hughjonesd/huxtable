@@ -93,10 +93,13 @@ Caption and label behavior shared by the renderers is implemented in
 and whether bookdown syntax embedded that label in the caption. It internally
 detects whether Quarto owns either property. Quarto cell options take precedence
 independently over explicit huxtable captions and labels; conflicts produce a
-warning. LaTeX, HTML, Markdown, Typst and Word consume the resolved values,
+warning. LaTeX, HTML, Markdown, Typst, Word and RTF consume the resolved values,
 while each renderer remains responsible for its own escaping, sizing and output
-markup. Simpler backends such as screen, RTF and Excel use the raw caption
-property and the shared horizontal and vertical position helpers.
+markup. Simpler backends such as screen and Excel use the raw caption property
+and the shared horizontal and vertical position helpers. For RTF, huxtable
+renders Quarto caption text because Quarto's RTF writer does not support table
+float targets. RTF does not emit bookdown label syntax because its output is
+preserved as raw RTF rather than being parsed by Pandoc.
 
 Automatic labels are based on the knitr chunk label. Labels already emitted in
 the current chunk are stored in a package-internal cache keyed by the chunk

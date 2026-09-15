@@ -234,7 +234,7 @@ to_rtf <- function(ht, fc_tables = rtf_fc_tables(ht), ...) {
 
   ## CAPTION ----
 
-  caption <- caption(ht)
+  caption <- resolve_caption(ht, "rtf")$text
   cap_align <- align_map[get_caption_hpos(ht)]
   cap_width <- caption_width(ht)
   cap_width <- if (is.na(cap_width)) {

@@ -7,6 +7,14 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+\itemize{
+\item RTF captions now use the shared R Markdown caption-resolution logic.
+In Quarto, \code{tbl-cap} overrides \code{caption()} and is rendered by huxtable
+because Quarto does not support table float targets in RTF.
+}
+}
+
 \section{huxtable 6.0.1}{
 \itemize{
 \item Bugfix: huxtables printed in knitr documents now include their HTML

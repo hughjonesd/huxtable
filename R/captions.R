@@ -67,7 +67,7 @@ use_bookdown_style_captions <- function() {
 #' * `label`: the explicit or automatically generated table label, or `NA`;
 #' * `label_in_caption`: whether `text` contains the label in bookdown syntax.
 #' @noRd
-resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx")) {
+resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx", "rtf")) {
   format <- match.arg(format)
   cap <- caption(ht)
   lab <- label(ht)
@@ -100,7 +100,13 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
     )
   }
 
-  if (quarto_caption) cap <- NA_character_
+  if (quarto_caption) {
+    cap <- if (format == "rtf" && !is.null(chunk_options[["tbl-cap"]])) {
+      as.character(chunk_options[["tbl-cap"]])
+    } else {
+      NA_character_
+    }
+  }
   if (quarto_label) lab <- NA_character_
 
   same_chunk <- identical(chunk_label, huxtable_env$autolabel_chunk$label) &&
@@ -139,7 +145,7 @@ resolve_caption <- function(ht, format = c("html", "latex", "md", "typst", "docx
   label_in_caption <- FALSE
 
   if (!is.na(lab) && nzchar(lab) &&
-    format != "docx" &&
+    !format %in% c("docx", "rtf") &&
     use_bookdown_style_captions()) {
     bookdown_label <- if (grepl("^tab:", lab)) lab else paste0("tab:", lab)
     # Bookdown needs a caption, even an empty one, to carry the label.

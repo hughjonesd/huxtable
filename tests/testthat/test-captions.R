@@ -93,6 +93,28 @@ test_that("Bugfix: Quarto captions and labels override huxtable values", {
 })
 
 
+test_that("Bugfix: Quarto captions override huxtable captions in RTF", {
+  old_current <- knitr::opts_current$get()
+  old_knit <- knitr::opts_knit$get()
+  on.exit({
+    knitr::opts_current$restore(old_current)
+    knitr::opts_knit$restore(old_knit)
+  })
+  knitr::opts_knit$set(quarto.version = "1.7.0")
+  knitr::opts_current$set(
+    label = "tbl-quarto",
+    `tbl-cap` = "Quarto caption"
+  )
+
+  expect_warning(
+    rtf <- to_rtf(set_caption(hux(a = 1), "Huxtable caption")),
+    "caption"
+  )
+  expect_match(rtf, "Quarto caption", fixed = TRUE)
+  expect_no_match(rtf, "Huxtable caption", fixed = TRUE)
+})
+
+
 test_that("Quarto caption and label ownership is resolved independently", {
   old_current <- knitr::opts_current$get()
   old_knit <- knitr::opts_knit$get()
@@ -164,6 +186,11 @@ test_that("Bookdown captions include labels in the expected syntax", {
   plain_caption <- resolve_caption(ht, "html")
   expect_equal(plain_caption$text, "A caption")
   expect_false(plain_caption$label_in_caption)
+
+  options(huxtable.bookdown = TRUE)
+  rtf_caption <- resolve_caption(ht, "rtf")
+  expect_equal(rtf_caption$text, "A caption")
+  expect_false(rtf_caption$label_in_caption)
 })
 
 
