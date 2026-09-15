@@ -16,7 +16,7 @@ Description: Creates styled tables for data presentation. Export to HTML, LaTeX,
   Includes  a 'huxreg' function to create regression tables, and 'quick_*' 
   one-liners to print tables to a new document.
 License: MIT + file LICENSE
-URL: https://hughjonesd.github.io/huxtable/
+URL: https://hughjonesd.github.io/huxtable/, https://github.com/hughjonesd/huxtable
 BugReports: https://github.com/hughjonesd/huxtable/issues
 Imports:
     assertthat,
