@@ -9,6 +9,8 @@ This help page simply gives the contents of NEWS.md.
 }
 \section{huxtable 6.0.2}{
 \itemize{
+\item Bugfix: re-encoded a malformed PNG test fixture which failed on CRAN’s
+M1mac additional check under an updated image-processing dependency.
 \item The knitr chunk option \code{tab.cap} now sets huxtable captions,
 overriding a caption set with \code{caption()}.
 }

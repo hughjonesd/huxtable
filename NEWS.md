@@ -1,5 +1,7 @@
 # huxtable 6.0.2
 
+* Bugfix: re-encoded a malformed PNG test fixture which failed on CRAN's
+  M1mac additional check under an updated image-processing dependency.
 * The knitr chunk option `tab.cap` now sets huxtable captions, overriding a
   caption set with `caption()`.
 
