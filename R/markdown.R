@@ -102,6 +102,9 @@ list_details <- function(type, delim, digit) {
 }
 
 
+#' @importFrom R6 R6Class
+#' @importFrom xml2 read_xml xml_attr xml_contents xml_name xml_ns_strip xml_text
+#' @noRd
 MarkdownTranslator <- R6::R6Class("MarkdownTranslator",
   public = list(
     list_details = list_details(

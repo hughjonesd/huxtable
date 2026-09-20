@@ -37,7 +37,7 @@
   data frame.
 * `as_Workbook()` is now much faster when adding many tables to an Excel
   workbook. Thanks @lemonad for the report.
-  
+
 # huxtable 5.8.0
 
 ## Other changes

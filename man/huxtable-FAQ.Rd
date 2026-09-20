@@ -133,6 +133,7 @@ may be able to help.
 Useful links:
 \itemize{
   \item \url{https://hughjonesd.github.io/huxtable/}
+  \item \url{https://github.com/hughjonesd/huxtable}
   \item Report bugs at \url{https://github.com/hughjonesd/huxtable/issues}
 }
 

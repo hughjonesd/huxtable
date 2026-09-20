@@ -375,9 +375,22 @@ export(valign)
 export(width)
 export(wrap)
 import(assertthat)
-importFrom(generics,glance)
-importFrom(generics,tidy)
+importFrom(R6,R6Class)
+importFrom(generics,
+  glance,
+  tidy
+)
 importFrom(rlang,"!!!")
-importFrom(stats,na.omit)
-importFrom(stats,nobs)
-importFrom(stats,setNames)
+importFrom(stats,
+  na.omit,
+  nobs,
+  setNames
+)
+importFrom(xml2,
+  read_xml,
+  xml_attr,
+  xml_contents,
+  xml_name,
+  xml_ns_strip,
+  xml_text
+)

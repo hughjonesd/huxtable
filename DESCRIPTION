@@ -89,4 +89,4 @@ Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 2.10)
 Config/testthat/edition: 3
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

@@ -18,9 +18,23 @@
 .huxtable-header {
   font-weight: bold;
 }
+.huxtable-note {
+  border: 0;
+  padding-bottom: 2pt;
+  padding-top: 2pt;
+  text-align: left;
+}
+.huxtable tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
 </style>
 
-<table class="huxtable" data-quarto-disable-processing="true"  style="margin-left: auto; margin-right: auto;">
+<table class="huxtable" data-quarto-disable-processing="true"  style="margin-left: auto; margin-right: auto;   break-inside: avoid; page-break-inside: avoid;">
+
+<col>
+
+<col>
 
 <col>
 
@@ -38,163 +52,73 @@
 
 <tr>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
+<span style="color: rgb(0, 0, 0);">h</span>
 </td>
 
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
+<span style="color: rgb(0, 0, 0);">u</span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;  font-weight: bold;  font-family: DejaVu Sans;">
+<td class="huxtable-cell" rowspan="2" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 0, 0);   font-family: Times; font-size: 24pt;">
 
-h
+<span style="color: rgb(0, 0, 0);">X</span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-u
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-</tr>
-
-<tr>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-x
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-t
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
-
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-
-</tr>
-
-<tr>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0);   font-family: DejaVu Sans;">
-
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-a
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-b
-</td>
-
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-l
-</td>
-
-</tr>
-
-<tr>
-
-<td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 255, 0);   font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
 <span style="color: rgb(0, 0, 0);"></span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(255, 0, 0);   font-family: DejaVu Sans;">
+<td class="huxtable-cell" colspan="3" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
-<span style="color: rgb(255, 255, 255);"></span>
+<span style="color: rgb(0, 0, 0);"></span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);  font-style: italic; font-family: Arial; font-size: 14pt;">
 
-<span style="color: rgb(255, 255, 255);"></span>
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
+<span style="color: rgb(0, 0, 0);"></span>
 </td>
 
 </tr>
 
 <tr>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 0, 0);   font-family: Arial; font-size: 14pt;">
 
-<span style="color: rgb(255, 255, 255);"></span>
+<span style="color: rgb(0, 0, 0);"></span>
 </td>
 
-<td class="huxtable-cell" colspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);  font-style: italic; font-family: Times; font-size: 14pt;">
 
+<span style="color: rgb(0, 0, 0);"></span>
 </td>
 
-<td class="huxtable-cell" rowspan="2" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Times; font-size: 14pt;">
 
+<span style="color: rgb(0, 0, 0);">t</span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt; background-color: rgb(0, 0, 255);   font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
-<span style="color: rgb(255, 255, 255);"></span>
+<span style="color: rgb(0, 0, 0);">a</span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 0);   font-family: Arial; font-size: 14pt;">
 
+<span style="color: rgb(0, 0, 0);">b</span>
 </td>
 
-</tr>
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);   font-family: Arial; font-size: 14pt;">
 
-<tr>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
+<span style="color: rgb(0, 0, 0);">l</span>
 </td>
 
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
+<td class="huxtable-cell" style="vertical-align: middle; text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 4pt 4pt 4pt 4pt; background-color: rgb(255, 255, 255);  font-style: italic; font-family: Times; font-size: 14pt;">
 
-e
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
-</td>
-
-<td class="huxtable-cell" style="text-align: center;  border-style: solid solid solid solid; border-width: 1.2pt 1.2pt 1.2pt 1.2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 0pt 0pt 0pt 0pt;    font-family: DejaVu Sans;">
-
+<span style="color: rgb(0, 0, 0);">e</span>
 </td>
 
 </tr>
