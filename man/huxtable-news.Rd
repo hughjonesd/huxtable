@@ -7,6 +7,10 @@
 \description{
 This help page simply gives the contents of NEWS.md.
 }
+\section{huxtable (development version)}{
+
+}
+
 \section{huxtable 6.0.2}{
 \itemize{
 \item Bugfix: re-encoded a malformed PNG test fixture which failed on CRAN’s

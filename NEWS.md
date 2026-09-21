@@ -1,3 +1,5 @@
+# huxtable (development version)
+
 # huxtable 6.0.2
 
 * Bugfix: re-encoded a malformed PNG test fixture which failed on CRAN's
